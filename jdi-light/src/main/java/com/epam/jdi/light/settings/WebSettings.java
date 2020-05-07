@@ -68,6 +68,17 @@ public class WebSettings {
     private static WebSettings webSettings;
     private final JDISettings jdiSettings = getJDISettings();
 
+    public ILogger logger;
+    public VisualCheckAction VISUAL_ACTION_STRATEGY;
+    public VisualCheckPage VISUAL_PAGE_STRATEGY;
+    public boolean STRICT_SEARCH;
+
+    public String TEST_GROUP = "";
+    // TODO multi properties example
+    public Safe<String> TEST_NAME;
+
+    public boolean initialized;
+
     private WebSettings() {
         logger = instance("JDI");
         VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
@@ -84,8 +95,6 @@ public class WebSettings {
         return webSettings;
     }
 
-    public ILogger logger;
-
     public String getDomain() {
         if (getJDISettings().DRIVER.domain != null)
             return getJDISettings().DRIVER.domain;
@@ -97,18 +106,10 @@ public class WebSettings {
         getJDISettings().DRIVER.domain = domain;
     }
 
-    public VisualCheckAction VISUAL_ACTION_STRATEGY;
-    public VisualCheckPage VISUAL_PAGE_STRATEGY;
-    public boolean STRICT_SEARCH;
-
     public boolean hasDomain() {
         init();
         return jdiSettings.DRIVER.domain != null && jdiSettings.DRIVER.domain.contains("://");
     }
-
-    public String TEST_GROUP = "";
-    // TODO multi properties example
-    public Safe<String> TEST_NAME;
 
     public String useDriver(JFunc<WebDriver> driver) {
         return getWebDriverFactory().useDriver(driver);
@@ -149,7 +150,6 @@ public class WebSettings {
             }
         });
     };
-    public boolean initialized;
 
     public synchronized void init() {
         if (initialized) return;
@@ -216,11 +216,6 @@ public class WebSettings {
                 t -> t.toString().equals(type));
         return clickType != null
                 ? clickType : CENTER;
-    }
-
-    private boolean getBoolean(String param) {
-        String lowerParams = param.toLowerCase();
-        return !lowerParams.equals("off") && !lowerParams.equals("false");
     }
 
     private TextTypes getTextType(String type) {
@@ -292,24 +287,32 @@ public class WebSettings {
 
     private void setSearchStrategy(String p) {
         p = p.toLowerCase();
-        if (p.equals("soft"))
+        if (p.equals("soft")) {
             p = "any, multiple";
-        if (p.equals("strict"))
+        }
+        if (p.equals("strict")) {
             p = "visible, single";
+        }
         if (p.split(",").length == 2) {
             List<String> params = asList(p.split(","));
-            if (params.contains("visible") || params.contains("displayed"))
+            if (params.contains("visible") || params.contains("displayed")) {
                 onlyVisible();
-            if (params.contains("any") || params.contains("all"))
+            }
+            if (params.contains("any") || params.contains("all")) {
                 noValidation();
-            if (params.contains("enabled"))
+            }
+            if (params.contains("enabled")) {
                 visibleEnabled();
-            if (params.contains("inview"))
+            }
+            if (params.contains("inview")) {
                 inView();
-            if (params.contains("single"))
+            }
+            if (params.contains("single")) {
                 STRICT_SEARCH = true;
-            if (params.contains("multiple"))
+            }
+            if (params.contains("multiple")) {
                 STRICT_SEARCH = false;
+            }
         }
     }
 
@@ -355,8 +358,9 @@ public class WebSettings {
     }
 
     private List<com.epam.jdi.light.logger.Strategy> getLoggerStrategy(String strategy) {
-        if (isBlank(strategy))
+        if (isBlank(strategy)) {
             return new ArrayList<>();
+        }
         List<com.epam.jdi.light.logger.Strategy> strategies = new ArrayList<>();
         try {
             String[] split = strategy.split(";");

@@ -48,13 +48,20 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     private static final JDISettings jdiSettings = getJDISettings();
     public static JFunc1<String, String> STRING_SIMPLIFY =
             s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+    private final Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
+
+    public ElementArea clickAreaType = jdiSettings.ELEMENT.clickType;
+    public TextTypes textType = jdiSettings.ELEMENT.getTextType;
+    public SetTextTypes setTextType = jdiSettings.ELEMENT.setTextType;
 
     public JDIBase base() {
         return this;
     }
+
     public JDIBase() {
         searchRules.add(jdiSettings.ELEMENT.searchRule);
     }
+
     public JDIBase(JDIBase base) {
         setCore(base);
     }
@@ -525,12 +532,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public void actionsWithElement(JFunc1<Actions, Actions> action) {
         action.execute(actions.get().moveToElement(get())).build().perform();
     }
-
-    private final Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
-
-    public ElementArea clickAreaType = jdiSettings.ELEMENT.clickType;
-    public TextTypes textType = jdiSettings.ELEMENT.getTextType;
-    public SetTextTypes setTextType = jdiSettings.ELEMENT.setTextType;
 
     public void offCache() {
         webElement.useCache(false);

@@ -28,6 +28,12 @@ public class JDILogger implements ILogger {
     private static final MapArray<String, JDILogger> loggers = new MapArray<>();
     private static final Marker jdiMarker = MarkerManager.getMarker("JDI");
 
+    private final Safe<Integer> logOffDeepness = new Safe<>(0);
+
+    private final String name;
+    private final Logger logger;
+    private final List<Long> multiThread = new ArrayList<>();
+
     public static JDILogger instance(String name) {
         if (!loggers.has(name))
             loggers.add(name, new JDILogger(name));
@@ -57,8 +63,6 @@ public class JDILogger implements ILogger {
         setRootLevel(getLog4j2Level(level));
         setLevel(name, getLog4j2Level(level));
     }
-
-    private final Safe<Integer> logOffDeepness = new Safe<>(0);
 
     public void logOff() {
         logLevel.set(OFF);
@@ -99,10 +103,6 @@ public class JDILogger implements ILogger {
         logLevel.set(tempLevel);
         return result;
     }
-
-    private final String name;
-    private final Logger logger;
-    private final List<Long> multiThread = new ArrayList<>();
 
     private String getRecord(String record, Object... args) {
         long currentThreadId = currentThread().getId();

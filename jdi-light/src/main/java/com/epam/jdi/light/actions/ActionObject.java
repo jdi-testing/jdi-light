@@ -18,6 +18,16 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class ActionObject {
     private final JDISettings jdiSettings = getJDISettings();
+    private ProceedingJoinPoint jp;
+    private final CacheValue<Object> obj = new CacheValue<>(
+            () -> jp.getThis() != null ? jp.getThis() : new Object());
+    private final String className;
+    public String stepUId = "";
+    private int elementTimeout;
+    private final CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
+    private final CacheValue<JFunc1<Object, Object>> overrideAction = new CacheValue<>(this::getOverride);
+    private static final Safe<List<String>> isOverride = new Safe<>(ArrayList::new);
+
     public ActionObject(ProceedingJoinPoint joinPoint, String className) {
         this.jp = joinPoint;
         this.className = className;
@@ -34,14 +44,9 @@ public class ActionObject {
         return jp;
     }
 
-    private ProceedingJoinPoint jp;
-
     public String className() {
         return className;
     }
-
-    private final String className;
-    public String stepUId = "";
 
     public boolean topLevel() {
         return aroundCount(className()) == 1;
@@ -50,9 +55,6 @@ public class ActionObject {
     public Object object() {
         return obj.get();
     }
-
-    private final CacheValue<Object> obj = new CacheValue<>(
-            () -> jp.getThis() != null ? jp.getThis() : new Object());
 
     public IBaseElement element() {
         return element.get();
@@ -75,8 +77,6 @@ public class ActionObject {
 
     public int timeout() { return timeout.get(); }
 
-    private int elementTimeout;
-    private final CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
     private int getTimeout() {
         JDIAction ja = jp != null
                 ? getJdiAction(jp)
@@ -100,8 +100,6 @@ public class ActionObject {
         return overrideAction.get();
     }
 
-    private final CacheValue<JFunc1<Object, Object>> overrideAction = new CacheValue<>(this::getOverride);
-
     private JFunc1<Object, Object> getOverride() {
         String name = jp.getSignature().getName();
         if (isOverride.get().contains(name)) {
@@ -112,8 +110,6 @@ public class ActionObject {
             isOverride.get().add(name);
         return override;
     }
-
-    private static final Safe<List<String>> isOverride = new Safe<>(ArrayList::new);
 
     public void clear() {
         resetElementTimeout();

@@ -21,11 +21,11 @@ import static org.hamcrest.Matchers.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class FileAssert extends BaseAssert<IBaseElement> {
+    private final File file;
+
     public static FileAssert assertThatFile(String fileName) {
         return new FileAssert(fileName);
     }
-
-    private final File file;
 
     public FileAssert(String fileName) {
         super(fileName);
@@ -86,8 +86,9 @@ public class FileAssert extends BaseAssert<IBaseElement> {
     }
     public static void cleanupDownloads() {
         File dir = new File(getJDISettings().DRIVER.downloadsFolder);
-        for(File file : requireNonNull(dir.listFiles()))
+        for (File file : requireNonNull(dir.listFiles())) {
             file.delete();
+        }
         getWebSettings().logger.info("Remove all downloads successfully");
     }
 }

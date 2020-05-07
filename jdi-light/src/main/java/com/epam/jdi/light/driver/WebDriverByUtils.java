@@ -35,6 +35,12 @@ import static org.openqa.selenium.support.ui.Quotes.escape;
  */
 public final class WebDriverByUtils {
     private static final WebDriver webDriver = getWebDriverFactory().getDriver();
+    private static final MapArray<String, String> byReplace = new MapArray<>(new Object[][]{
+            {"cssSelector", "css"},
+            {"tagName", "tag"},
+            {"className", "class"}
+    });
+
     public static Function<String, By> getByFunc(By by) {
         return first(getMapByTypes(), key -> by.toString().contains(key));
     }
@@ -42,6 +48,7 @@ public final class WebDriverByUtils {
     private static String getBadLocatorMsg(String byLocator, Object... args) {
         return "Bad locator template '" + byLocator + "'. Args: " + print(select(args, Object::toString), ", ", "'%s'") + ".";
     }
+
     public static By fillByTemplate(By by, Object... args) {
         String byLocator = getByLocator(by);
         if (!byLocator.contains("%"))
@@ -75,12 +82,6 @@ public final class WebDriverByUtils {
         return byAsString.substring(index);
     }
 
-    private static final MapArray<String, String> byReplace = new MapArray<>(new Object[][]{
-            {"cssSelector", "css"},
-            {"tagName", "tag"},
-            {"className", "class"}
-    });
-
     public static String getByName(By by) {
         Matcher m = Pattern.compile("By\\.(?<locator>[a-zA-Z]+):.*").matcher(by.toString());
         if (m.find()) {
@@ -99,6 +100,7 @@ public final class WebDriverByUtils {
     public static String shortBy(By by) {
         return shortBy(by, () -> "No locator");
     }
+
     public static String shortBy(By by, IBaseElement el) {
         return shortBy(by, () -> getWebSettings().printSmartLocators(el));
     }
@@ -109,11 +111,13 @@ public final class WebDriverByUtils {
                 : format("%s='%s'", getByName(by), getByLocator(by))).replaceAll("%s", "{{VALUE}}");
     }
     public static By getByFromString(String stringLocator) {
-        if (stringLocator == null || stringLocator.equals(""))
+        if (stringLocator == null || stringLocator.equals("")) {
             throw new RuntimeException("Can't get By locator from string empty or null string");
+        }
         String[] split = stringLocator.split("(^=)*=.*");
-        if (split.length == 1)
+        if (split.length == 1) {
             return defineLocator(split[0]);
+        }
         switch (split[0]) {
             case "css": return By.cssSelector(split[1]);
             case "xpath": return By.xpath(split[1]);
@@ -159,14 +163,15 @@ public final class WebDriverByUtils {
                 return webDriver.findElements((By) step);
             } else {
                 return els == null
-                    ? ctx.findElements((By) step)
-                    : selectMany(els, e -> e.findElements((By) step));
+                        ? ctx.findElements((By) step)
+                        : selectMany(els, e -> e.findElements((By) step));
             }
-        }
-        else if (isClass(step.getClass(), Integer.class) && els != null)
+        } else if (isClass(step.getClass(), Integer.class) && els != null) {
             return singletonList(els.get((Integer) step - 1));
+        }
         throw exception("Unknown locator part '%s'. Can't get element. Please correct locator");
     }
+
     public static List<Object> searchBy(By by) {
         try {
             if (!getByName(by).equals("css"))
@@ -177,6 +182,7 @@ public final class WebDriverByUtils {
             return valueOrDefault(replaceChildren(result), one(by));
         } catch (Exception ex) { throw new RuntimeException("Search By failed"); }
     }
+
     public static By defineLocator(String locator) {
         String by = locator.contains("*root*")
             ? locator.replaceAll("\\*root\\*", "")
@@ -205,8 +211,9 @@ public final class WebDriverByUtils {
                 result.add(getUpXpath(m.group("up")));
                 loc = locs.length == 2 ? locs[1] : "";
             }
-            if (isNotEmpty(loc))
+            if (isNotEmpty(loc)) {
                 result.add(By.cssSelector(loc));
+            }
         }
         return valueOrDefault(result, singletonList(By.cssSelector(locator)));
     }
@@ -218,10 +225,13 @@ public final class WebDriverByUtils {
 
     private static List<By> replaceText(List<By> bys) {
         List<By> result = new ArrayList<>();
-        for (By by : bys)
-            if (getByName(by).equals("css"))
+        for (By by : bys) {
+            if (getByName(by).equals("css")) {
                 result.addAll(replaceText(getByLocator(by)));
-            else result.add(by);
+            } else {
+                result.add(by);
+            }
+        }
         return result;
     }
 
@@ -231,24 +241,28 @@ public final class WebDriverByUtils {
         Matcher m = Pattern.compile("\\[(?<modifier>\\*?)'(?<text>[^']+)']").matcher(loc);
         while (m.find() && isNotEmpty(loc)) {
             String[] locs = loc.split("\\[\\*?'"+m.group("text")+"']");
-            if (locs.length > 0)
+            if (locs.length > 0) {
                 result.add(By.cssSelector(locs[0]));
+            }
             result.add(m.group("modifier").equals("")
                 ? By.xpath(".//*[text()='" + m.group("text") + "']")
                 : By.xpath(".//*[contains(text(),'" + m.group("text") + "')]"));
             loc = locs.length == 2 ?  locs[1] : "";
         }
-        if (isNotEmpty(loc))
+        if (isNotEmpty(loc)) {
             result.add(By.cssSelector(loc));
+        }
         return result;
     }
 
     private static List<Object> replaceChildren(List<By> bys) {
         List<Object> result = new ArrayList<>();
         for (By by : bys)
-            if (getByName(by).equals("css"))
+            if (getByName(by).equals("css")) {
                 result.addAll(replaceChildren(getByLocator(by)));
-            else result.add(by);
+            } else {
+                result.add(by);
+            }
         return result;
     }
 
@@ -258,13 +272,15 @@ public final class WebDriverByUtils {
         Matcher m = Pattern.compile("\\[(?<num>\\d+)]").matcher(loc);
         while (m.find() && isNotEmpty(loc)) {
             String[] locs = loc.split("\\["+m.group("num")+"]");
-            if (locs.length > 0)
+            if (locs.length > 0) {
                 result.add(By.cssSelector(locs[0]));
+            }
             result.add(Integer.parseInt(m.group("num")));
             loc = locs.length == 2 ?  locs[1] : "";
         }
-        if (isNotEmpty(loc))
+        if (isNotEmpty(loc)) {
             result.add(By.cssSelector(loc));
+        }
         return result;
     }
     public static String asTextLocator(String text) {

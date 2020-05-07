@@ -30,6 +30,15 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 public class WebDriverFactory {
     private static WebDriverFactory driverFactory;
+    private final MapArray<String, JFunc<WebDriver>> DRIVERS;
+    private final boolean SINGLE_THREAD;
+    private MapArray<String, WebDriver> RUN_DRIVERS;
+    private final Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS;
+
+    private long INIT_THREAD_ID;
+    private boolean SWITCH_THREAD;
+    private WebDriver INIT_DRIVER;
+
 
     private WebDriverFactory() {
         RUN_DRIVERS = new MapArray<>();
@@ -58,15 +67,6 @@ public class WebDriverFactory {
     public void setInitThreadId(long Id) {
         INIT_THREAD_ID = Id;
     }
-
-    private final MapArray<String, JFunc<WebDriver>> DRIVERS;
-    private final boolean SINGLE_THREAD;
-    private MapArray<String, WebDriver> RUN_DRIVERS;
-    private final Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS;
-
-    private long INIT_THREAD_ID;
-    private boolean SWITCH_THREAD;
-    private WebDriver INIT_DRIVER;
 
     public boolean noRunDrivers() {
         return !getRunDrivers().any();

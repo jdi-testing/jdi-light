@@ -19,6 +19,23 @@ import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
 public class DriverSettings {
+    public String name;
+    public String version;
+    public OsTypes os;
+    public Platform platform;
+    public GetDriverTypes getType;
+    public String path;
+    public PageLoadStrategy pageLoadStrategy;
+    public ScreenSize screenSize;
+    public String domain;
+    public String remoteUrl;
+    public String downloadsFolder;
+
+    public JFunc1<WebDriver, WebDriver> setup = DriverData::driverSettings;
+    public MapArray<String, DriverInfo> types;
+    public JFunc1<String, WebDriver> getFunc = getWebDriverFactory()::getDriverByName;
+    public CapabilitiesSettings capabilities;
+
     public DriverSettings() {
         name = CHROME.name;
         version = LATEST.value;
@@ -38,21 +55,4 @@ public class DriverSettings {
         );
         capabilities = new CapabilitiesSettings();
     }
-
-    public String name;
-    public String version;
-    public OsTypes os;
-    public Platform platform;
-    public GetDriverTypes getType;
-    public String path;
-    public PageLoadStrategy pageLoadStrategy;
-    public ScreenSize screenSize;
-    public String domain;
-    public String remoteUrl;
-    public String downloadsFolder;
-
-    public JFunc1<WebDriver, WebDriver> setup = DriverData::driverSettings;
-    public MapArray<String, DriverInfo> types;
-    public JFunc1<String, WebDriver> getFunc = getWebDriverFactory()::getDriverByName;
-    public CapabilitiesSettings capabilities;
 }

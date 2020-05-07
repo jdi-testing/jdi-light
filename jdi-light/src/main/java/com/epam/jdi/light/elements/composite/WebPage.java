@@ -66,12 +66,16 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = NONE;
 
+    private static final Safe<String> currentPage = new Safe<>("Undefined Page");
+
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this).setup(Form.class, e -> e.setName(getName() + " Form").setParent(this));
     }
 
-    private static final Safe<String> currentPage = new Safe<>("Undefined Page");
-    public static String getCurrentPage() { return currentPage.get(); }
+    public static String getCurrentPage() {
+        return currentPage.get();
+    }
+
     public static void setCurrentPage(WebPage page) {
         currentPage.set(page.getName());
     }

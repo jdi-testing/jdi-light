@@ -12,14 +12,13 @@ import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ScreenSettings {
+    public String path;
+    public String fileSuffix;
 
     public ScreenSettings() {
         path = mergePath(getCommonSettings().logsPath, "screens");
         fileSuffix = "jpg";
     }
-
-    public String path;
-    public String fileSuffix;
 
     public JFunc1<String, String> getScreenName = screenName -> {
         String fileName = mergePath(getPath(), screenName + nowTime("yyyy-MM-dd-HH-mm-ss"));

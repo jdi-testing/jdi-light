@@ -16,12 +16,22 @@ public class HomePage {
     private final String url = "https://jdi-testing.github.io/jdi-light/index.html";
     private final WebDriverFactory driverFactory = getWebDriverFactory();
 
+    @FindBy(css = ".sidebar-menu [ui=label]")
+    List<WebElement> navigation;
+    @FindBy(css = ".profile-photo")
+    WebElement profilePhoto;
+    @FindBy(css = ".profile-photo [ui=label]")
+    WebElement userName;
+
+    // TODO fix performance
+    @UI("//*[@ui='label']//*[contains(text(),'%s')]")
+    public static WebList leftNavigation;
+    //@UI("[ui=label][*'%s']") public static WebList leftNavigation;
+
+
     public void open() {
         driverFactory.getDriver().navigate().to(url);
     }
-
-    @FindBy(css = ".sidebar-menu [ui=label]")
-    List<WebElement> navigation;
 
     public void navigateTo(int num) {
         try {
@@ -40,10 +50,4 @@ public class HomePage {
             }
         }
     }
-    @FindBy(css = ".profile-photo") WebElement profilePhoto;
-    @FindBy(css = ".profile-photo [ui=label]") WebElement userName;
-
-    // TODO fix performance
-    @UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList leftNavigation;
-    //@UI("[ui=label][*'%s']") public static WebList leftNavigation;
 }

@@ -7,6 +7,14 @@ import static com.epam.jdi.tools.PathUtils.path;
 public class CommonSettings {
     private static CommonSettings commonSettings;
 
+    public Strategies strategy;
+    public String testPropertiesPath;
+    public String logsPath;
+    public String killBrowser;
+    public String applicationName;
+    public String projectPath;
+    public String testPath;
+
     private CommonSettings() {
         strategy = JDI;
         testPropertiesPath = "test.properties";
@@ -22,12 +30,4 @@ public class CommonSettings {
         }
         return commonSettings;
     }
-
-    public Strategies strategy;
-    public String testPropertiesPath;
-    public String logsPath;
-    public String killBrowser;
-    public String applicationName;
-    public String projectPath;
-    public String testPath;
 }
