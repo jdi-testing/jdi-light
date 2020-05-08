@@ -24,15 +24,6 @@ public class TestsInit {
     public static void setUp() {
         killAllSeleniumDrivers();
         initSite(StaticSite.class);
-        // todo delete
-        System.out.println("!!! TMP FOR DEBUG capabilities.chrome: " + DRIVER.capabilities.chrome.get("arguments"));
-        try {
-            System.out.println("!!! TMP FOR DEBUG chrome.properties: " +
-                    FileUtils.readFileToString(new File("src\\test\\resources\\chrome.properties"), "UTF-8"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // todo end
         openUrl(DRIVER.domain);
         logger.toLog("Run Tests");
     }
