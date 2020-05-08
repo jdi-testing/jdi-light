@@ -14,8 +14,8 @@ import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import io.github.com.StaticSite;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 @CucumberOptions(
         features = "classpath:features"

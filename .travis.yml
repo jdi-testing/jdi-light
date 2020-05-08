@@ -74,13 +74,13 @@ jobs:
         - cat ./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES #tmp
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
 
-    - stage: test
-      name: Run tests - html
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - cat ./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES #tmp
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
+    #    - stage: test
+    #      name: Run tests - html
+    #      script:
+    #        - mvn -ntp install -DskipTests
+    #        - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    #        - cat ./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES #tmp
+    #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 
     - stage: test
       name: Run tests - examples
