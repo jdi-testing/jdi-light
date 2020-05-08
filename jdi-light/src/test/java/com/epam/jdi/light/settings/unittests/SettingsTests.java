@@ -9,7 +9,10 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.settings.CommonSettings.getCommonSettings;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
 import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 public class SettingsTests {
     private WebSettings webSettings;
@@ -74,7 +77,6 @@ public class SettingsTests {
         assertNotNull(jdiSettings.LOGS.htmlCodeStrategy);
         assertNotNull(jdiSettings.LOGS.requestsStrategy);
         assertNotNull(jdiSettings.LOGS.logLevel);
-        assertNotNull(jdiSettings.LOGS.writeToAllure);
         assertNotNull(jdiSettings.ELEMENT.smartName);
         assertNotNull(jdiSettings.ELEMENT.smartTemplate);
         assertNotNull(jdiSettings.ELEMENT.useSmartSearch);
