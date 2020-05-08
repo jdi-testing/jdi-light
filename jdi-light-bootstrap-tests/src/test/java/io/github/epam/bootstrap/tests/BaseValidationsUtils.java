@@ -1,20 +1,25 @@
 package io.github.epam.bootstrap.tests;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.pairs.Pair.*;
-import static java.lang.System.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static com.epam.jdi.tools.pairs.Pair.$;
+import static java.lang.System.currentTimeMillis;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThan;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class BaseValidationsUtils {
+
+    private static final ILogger logger = getWebSettings().logger;
 
     public static void baseValidation(ICoreElement el) {
         // EXCLUDED el.hover();

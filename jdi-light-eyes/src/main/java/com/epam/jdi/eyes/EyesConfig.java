@@ -26,7 +26,7 @@ public class EyesConfig extends DataClass<EyesConfig> {
 
     public EyesConfig() {
         appName = "JDI Application";
-        webDriver = (JFunc<WebDriver>) getWebDriverFactory().getDriver();
+        webDriver = getWebDriverFactory()::getDriver;
         try {
             apiKey = System.getenv("APPLITOOLS_API_KEY");
         } catch (Throwable ignore) { }

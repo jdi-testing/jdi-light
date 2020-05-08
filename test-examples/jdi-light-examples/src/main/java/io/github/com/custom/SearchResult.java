@@ -5,8 +5,8 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static java.lang.String.*;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static java.lang.String.format;
 
 public class SearchResult extends Section {
 @Title  @Css("h3") public UIElement name;
@@ -14,8 +14,8 @@ public class SearchResult extends Section {
         @Css("a") public UIElement link;
 
     public String print() {
-        return logger.logOff(
-            () -> format("SearchResult{NAME=%s; DESCRIPTION=%s; LINK=%s}",
-                name.getText(), description.getText(), link.getAttribute("href")));
+        return getWebSettings().logger.logOff(
+                () -> format("SearchResult{NAME=%s; DESCRIPTION=%s; LINK=%s}",
+                        name.getText(), description.getText(), link.getAttribute("href")));
     }
 }

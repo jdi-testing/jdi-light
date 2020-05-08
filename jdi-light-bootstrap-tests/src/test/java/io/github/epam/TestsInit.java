@@ -4,16 +4,16 @@ import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static com.epam.jdi.light.driver.WebDriverUtils.*;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.elements.composite.WebPage.openSite;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 
 @SuppressWarnings("PMD.ClassNamingConventions")
 public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
     static void setUp() {
         openSite(StaticSite.class);
-        logger.toLog("Run Tests");
+        getWebSettings().logger.toLog("Run Tests");
     }
 
     @AfterSuite(alwaysRun = true)

@@ -10,13 +10,14 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-import static com.epam.jdi.light.driver.WebDriverUtils.*;
-import static com.epam.jdi.light.elements.init.InitActions.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.entities.Users.*;
-import static io.github.com.pages.Header.*;
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.entities.Users.DEFAULT_USER;
+import static io.github.com.pages.Header.loginForm;
+import static io.github.com.pages.Header.userIcon;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -30,7 +31,7 @@ public class TestRunner extends AbstractTestNGCucumberTests {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initElements(StaticSite.class);
         homePage.open();
-        logger.toLog("Run Tests");
+        getWebSettings().logger.toLog("Run Tests");
         userIcon.click();
         loginForm.loginAs(DEFAULT_USER);
     }
