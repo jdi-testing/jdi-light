@@ -44,12 +44,12 @@ jobs:
       script:
         - mvn install -DskipTests
 
-#    - stage: test
-#      name: Run tests - no po
-#      script:
-#        - mvn -ntp install -DskipTests
-#        - echo arguments=$CHROME_ARGS > "./$NOPO_TESTS_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$NOPO_TESTS
+    - stage: test
+      name: Run tests - no po
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$NOPO_TESTS_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$NOPO_TESTS
 
 #    - stage: test
 #      name: Run tests - bdd
@@ -62,14 +62,14 @@ jobs:
     #  - stage: test
     #    name: Run tests - bootstrap
     #    script:
-    #    - mvn install -DskipTests
+    #    - mvn -ntp install -DskipTests
     #    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
     #    - mvn verify $WITH_PARAMS -pl $BOOTSTRAP_TESTS
 
     - stage: test
       name: Run tests - angular
       script:
-        - mvn install -DskipTests
+        - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - cat ./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES #tmp
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
