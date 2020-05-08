@@ -89,12 +89,12 @@ jobs:
         - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
 
-    #    - stage: test
-    #      name: Run tests - performance
-    #      script:
-    #        - mvn -ntp install -DskipTests
-    #        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-    #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+    - stage: test
+      name: Run tests - performance
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
 
     - stage: reports
       name: Deploy allure reports to netlify
