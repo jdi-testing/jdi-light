@@ -44,7 +44,7 @@ function extractArchive() {
     file="$1"
     #echo "Starting extraction Archive ${file}"
     cat ${file}
-    tar -xzf ${file}
+    tar -zxvf ${file}
     #extractionResult=$(tar -xzf ${file})
 }
 
