@@ -28,7 +28,6 @@ public class HomePage {
     public static WebList leftNavigation;
     //@UI("[ui=label][*'%s']") public static WebList leftNavigation;
 
-
     public void open() {
         driverFactory.getDriver().navigate().to(url);
     }

@@ -1,7 +1,13 @@
 package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.SetTextTypes;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.common.Timeout;
+import com.epam.jdi.light.common.UseSmartSearch;
+import com.epam.jdi.light.common.VisualCheckAction;
+import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
@@ -79,6 +85,26 @@ public class WebSettings {
 
     public boolean initialized;
 
+    public JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
+        if (getJDISettings().ELEMENT.useSmartSearch == FALSE ||
+                getJDISettings().ELEMENT.useSmartSearch == ONLY_UI && el.base().locator == null ||
+                getJDISettings().ELEMENT.useSmartSearch == UI_AND_ELEMENTS && el.base().locator == null && isInterface(el.getClass(), PageObject.class))
+            return null;
+        String locatorName = getJDISettings().ELEMENT.smartName.value.execute(el.getName());
+        return el.base().timer().getResult(() -> {
+            String locator = format(getJDISettings().ELEMENT.smartTemplate, locatorName);
+            UIElement ui = (getJDISettings().ELEMENT.smartTemplate.equals("#%s")
+                    ? $(locator)
+                    : $(locator, el.base().parent))
+                    .setup(e -> e.setName(el.getName()).noWait());
+            try {
+                return ui.getWebElement();
+            } catch (Exception ignore) {
+                throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), getWebSettings().printSmartLocators(el));
+            }
+        });
+    };
+
     private WebSettings() {
         logger = instance("JDI");
         VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
@@ -130,26 +156,6 @@ public class WebSettings {
             return format("Can't define smart locator(%s, %s)", getJDISettings().ELEMENT.smartTemplate, getJDISettings().ELEMENT.smartName.key);
         }
     }
-
-    public JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
-        if (getJDISettings().ELEMENT.useSmartSearch == FALSE ||
-                getJDISettings().ELEMENT.useSmartSearch == ONLY_UI && el.base().locator == null ||
-                getJDISettings().ELEMENT.useSmartSearch == UI_AND_ELEMENTS && el.base().locator == null && isInterface(el.getClass(), PageObject.class))
-            return null;
-        String locatorName = getJDISettings().ELEMENT.smartName.value.execute(el.getName());
-        return el.base().timer().getResult(() -> {
-            String locator = format(getJDISettings().ELEMENT.smartTemplate, locatorName);
-            UIElement ui = (getJDISettings().ELEMENT.smartTemplate.equals("#%s")
-                    ? $(locator)
-                    : $(locator, el.base().parent))
-                    .setup(e -> e.setName(el.getName()).noWait());
-            try {
-                return ui.getWebElement();
-            } catch (Exception ignore) {
-                throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), getWebSettings().printSmartLocators(el));
-            }
-        });
-    };
 
     public synchronized void init() {
         if (initialized) return;
@@ -282,15 +288,16 @@ public class WebSettings {
             return;
         try {
             setCapabilities.execute(properties);
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+        }
     }
 
-    private void setSearchStrategy(String p) {
-        p = p.toLowerCase();
-        if (p.equals("soft")) {
+    private void setSearchStrategy(String param) {
+        String p = param.toLowerCase();
+        if ("soft".equals(p)) {
             p = "any, multiple";
         }
-        if (p.equals("strict")) {
+        if ("strict".equals(p)) {
             p = "visible, single";
         }
         if (p.split(",").length == 2) {
