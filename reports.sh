@@ -41,9 +41,11 @@ function archive() {
 }
 
 function extractArchive() {
-    echo "Starting extractArchive()"
     file="$1"
+    #echo "Starting extraction Archive ${file}"
+    cat ${file}
     tar -xzf ${file}
+    #extractionResult=$(tar -xzf ${file})
 }
 
 function aboutTransfer() {
