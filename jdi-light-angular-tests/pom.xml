@@ -13,7 +13,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-angular</artifactId>
-            <version>1.2.3</version>
+            <version>1.2.7</version>
         </dependency>
         <!--Allure config in parent-->
         <dependency>
@@ -41,7 +41,7 @@
         <aspectj.version>1.9.1</aspectj.version>
     </properties>
 
-    <version>1.2.3</version>
+    <version>1.2.7</version>
 
     <build>
         <plugins>
