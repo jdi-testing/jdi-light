@@ -1,7 +1,10 @@
 package com.epam.jdi.light.settings.unittests;
 
-import com.epam.jdi.light.settings.*;
-import org.testng.annotations.*;
+import com.epam.jdi.light.settings.CommonSettings;
+import com.epam.jdi.light.settings.JDISettings;
+import com.epam.jdi.light.settings.WebSettings;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.CommonSettings.getCommonSettings;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
