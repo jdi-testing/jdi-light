@@ -41,6 +41,7 @@ function archive() {
 }
 
 function extractArchive() {
+    echo "Starting extractArchive()"
     file="$1"
     tar -xzf ${file}
 }
