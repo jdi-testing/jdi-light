@@ -8,17 +8,19 @@
 ####################             VARS
 BRANCH_ERROR_MESSAGE="IF YOU DON'T SEE THE PULL REQUEST BUILD, THEN BRANCH CANNOT BE MERGED, YOU SHOULD FIX IT FIRST"
 URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
+FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
 
 ####################             UTILS
 function collectRelevantComments(){
+    set -o xtrace
     matchPattern="$1"
-    fileName="comments"
     since="$(date -u --date="5 hours ago" +"%Y-%m-%dT%H:%M:%SZ")" #on mac os x use '-v -5H' instead of '--date="5 hours ago"'
     url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments?since=${since}"
     curl -H "Authorization: token ${GIT_COMMENT_USER}" \
          -X GET  "${url}"\
-         > ${fileName}
-    jq ".[].body" ${fileName} | grep "${matchPattern}"| awk '{print $3}' | sed "s/\"//g" #return list
+         > ${FILENAME_WITH_COMMENTS_FROM_GITHUB}
+    jq ".[].body" ${FILENAME_WITH_COMMENTS_FROM_GITHUB} | grep "${matchPattern}"| awk '{print $3}' | sed "s/\"//g" #return list
+    set +o xtrace
 }
 
 function sendComment() {
@@ -35,14 +37,14 @@ function sendComment() {
 
 function archive() {
     directory="$1"
-    archiveName=$(echo ${directory}| awk -F"/" '{print $1}').tar.gz
-    tar -czf ${archiveName} ${directory} > /dev/null
-    echo ${archiveName} #return
+    archiveName="$(echo ${directory}| awk -F"/" '{print $1}')".tar.gz
+    tar -czf "${archiveName}" "${directory}" > /dev/null
+    echo "${archiveName}" #return
 }
 
 function extractArchive() {
     file="$1"
-    tar -zxvf ${file}
+    tar -zxvf "${file}"
 }
 
 function aboutTransfer() {
@@ -74,10 +76,10 @@ function grubAllureResults() {
         for result in $(find jdi*/target/allure-results -maxdepth 1 -type d)
         do
             echo RESULT: ${result}
-            archiveFile=$(archive ${result})
-            echo ARCHIVE: ${archiveFile}
+            archiveFile="$(archive ${result})"
+            echo ARCHIVE: "${archiveFile}"
             ls -lah *.tar.gz
-            uploadedTo=$(uploadFile "${archiveFile}")
+            uploadedTo="$(uploadFile "${archiveFile}")"
             echo UPLOAD TO KEY: ${uploadedTo}
             sendComment "$(aboutTransfer "${uploadedTo}")"
         done
@@ -89,10 +91,10 @@ function uploadFile() {
     # TODO : make an if depending of boolean variable to switch between transfer or between https://www.file.io/#one
 
     #url=$(curl --upload-file "${file}" https://transfer.sh/${file})
-    response=$(curl -F "file=@${file}" https://file.io/)
-    url=$(echo ${response} |jq -j '.link')
+    response="$(curl -F "file=@${file}" https://file.io/)"
+    url="$(echo ${response} |jq -j '.link')"
     urlKey="$(echo "${url}"| awk -F/ '{print $4}')"
-    echo ${urlKey} #return
+    echo "${urlKey}" #return
 }
 
 ######################         PART 2: Deploy allure results as allure reports to netlify
@@ -102,13 +104,14 @@ function deployAllureResults() {
     extractAllureResults
     generateAllureReports
     echo "LOG1"
-    url=$(deployToNetlify "allure-report")
+    url="$(deployToNetlify "allure-report")"
     echo "LOG2"
     sendComment "$(aboutNetlify ${url})"
 }
 
 function downloadAllureResults() {
     urlExistence=false
+    echo "TRAVIS_BUILD_NUMBER: ${TRAVIS_BUILD_NUMBER}"
     for urlKey in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}")
     do
         urlExistence=true
@@ -116,10 +119,12 @@ function downloadAllureResults() {
         # TODO: $4 for file.io, #5 for transfer.sh, add an IF
         #fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $5}')"
         fileName="${urlKey}.tar.gz"
-        tmpResult=$(curl https://file.io/${urlKey} --output ${fileName})
+        tmpResult="$(curl https://file.io/${urlKey} --output ${fileName})"
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
         echo "Failed inside downloadAllureResults()"
+        echo "Comments recieved from github:"
+        cat "${FILENAME_WITH_COMMENTS_FROM_GITHUB}"
         exitWithError
     fi
 }
@@ -127,7 +132,7 @@ function downloadAllureResults() {
 function extractAllureResults() {
     for archiveFile in $(ls -1 *.tar.gz)
     do
-        extractArchive ${archiveFile}
+        extractArchive "${archiveFile}"
     done
 }
 
@@ -155,9 +160,9 @@ function generateAllureReports() {
 
 function deployToNetlify() {
     directory="$1"
-    result=$(netlify deploy --dir ${directory} --json);
-    deployUrl=$(echo ${result}r |jq '.deploy_url' |sed 's/"//g');
-    echo ${deployUrl}
+    result="$(netlify deploy --dir ${directory} --json)"
+    deployUrl="$(echo ${result}r |jq '.deploy_url' |sed 's/"//g')"
+    echo "${deployUrl}"
 }
 
 function exitWithError() {

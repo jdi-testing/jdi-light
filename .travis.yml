@@ -51,12 +51,12 @@ jobs:
         - echo arguments=$CHROME_ARGS > "./$NOPO_TESTS_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$NOPO_TESTS
 
-#    - stage: test
-#      name: Run tests - bdd
-#      script:
-#        - mvn -ntp install -DskipTests
-#        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+    - stage: test
+      name: Run tests - bdd
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
     #TODO: bootstrap tests exceeded the maximum time limit for jobs (>50min)
     #  - stage: test
@@ -71,7 +71,6 @@ jobs:
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - cat ./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES #tmp
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
 
     - stage: test
@@ -79,22 +78,21 @@ jobs:
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - cat ./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES #tmp
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 
-#    - stage: test
-#      name: Run tests - examples
-#      script:
-#        - mvn -ntp install -DskipTests
-#        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
-#
-#    - stage: test
-#      name: Run tests - performance
-#      script:
-#        - mvn -ntp install -DskipTests
-#        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+    - stage: test
+      name: Run tests - examples
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+
+    - stage: test
+      name: Run tests - performance
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
 
     - stage: reports
       name: Deploy allure reports to netlify
