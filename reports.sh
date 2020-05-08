@@ -88,9 +88,9 @@ function grubAllureResults() {
 function uploadFile() {
     file="$1"
     # TODO : make an if depending of boolean variable to switch between transfer or between https://www.file.io/#one
-    #url=$(curl --upload-file "${file}" https://transfer.sh/${file})
-    response=$(curl -F "file=@${file}" https://file.io/?expires=1w)
-    echo "Response: ${response}"
+
+    url=$(curl --upload-file "${file}" https://transfer.sh/${file})
+    ##response=$(curl -F "file=@${file}" https://file.io/?expires=1w)
     url=$(echo ${response} |jq -j '.link')
     echo ${url} #return
 }
@@ -114,7 +114,8 @@ function downloadAllureResults() {
     do
         urlExistence=true
         echo "Found: ${url}"
-        fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $4}')" # TODO: $4 for file.io, #5 for transfer.sh, add an IF
+        ##fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $4}')" # TODO: $4 for file.io, #5 for transfer.sh, add an IF
+        fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $5}')"
         echo "fileName in downloadAllureResults(): ${fileName}" #tmp
         tmpResult=$(curl ${url} --output ${fileName})
         echo "Loading result: ${tmpResult}"
