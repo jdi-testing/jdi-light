@@ -24,6 +24,9 @@ public class TestsInit {
     public static void setUp() {
         killAllSeleniumDrivers();
         initSite(StaticSite.class);
+        // todo delete
+        System.out.println("!!! TMP FOR DEBUG capabilities.chrome: " + DRIVER.capabilities.chrome.get("arguments"));
+        // todo end
         openUrl(DRIVER.domain);
         logger.toLog("Run Tests");
     }
