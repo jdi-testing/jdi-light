@@ -79,7 +79,7 @@ function grubAllureResults() {
             echo ARCHIVE: ${archiveFile}
             ls -lah *.tar.gz
             uploadedTo=$(uploadFile "${archiveFile}")
-            echo UPLOAD TO: ${uploadedTo}
+            echo UPLOAD TO KEY: ${uploadedTo}
             sendComment "$(aboutTransfer "${uploadedTo}")"
         done
     fi
@@ -89,10 +89,11 @@ function uploadFile() {
     file="$1"
     # TODO : make an if depending of boolean variable to switch between transfer or between https://www.file.io/#one
 
-    url=$(curl --upload-file "${file}" https://transfer.sh/${file})
-    ##response=$(curl -F "file=@${file}" https://file.io/?expires=1w)
+    #url=$(curl --upload-file "${file}" https://transfer.sh/${file})
+    response=$(curl -F "file=@${file}" https://file.io/)
     url=$(echo ${response} |jq -j '.link')
-    echo ${url} #return
+    urlKey="$(echo "${url}"| awk -F/ '{print $4}')"
+    echo ${urlKey} #return
 }
 
 ######################         PART 2: Deploy allure results as allure reports to netlify
@@ -110,14 +111,15 @@ function deployAllureResults() {
 function downloadAllureResults() {
     echo "Starting downloadAllureResults()"
     urlExistence=false
-    for url in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}")
+    for urlKey in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}")
     do
         urlExistence=true
-        echo "Found: ${url}"
+        echo "Found: ${urlKey}"
         ##fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $4}')" # TODO: $4 for file.io, #5 for transfer.sh, add an IF
-        fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $5}')"
+        #fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $5}')"
+        fileName="${urlKey}.tar.gz"
         echo "fileName in downloadAllureResults(): ${fileName}" #tmp
-        tmpResult=$(curl ${url} --output ${fileName})
+        tmpResult=$(curl https://file.io/${urlKey} --output ${fileName})
         echo "Loading result: ${tmpResult}"
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
