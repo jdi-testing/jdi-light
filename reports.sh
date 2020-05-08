@@ -11,6 +11,7 @@ URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
 
 ####################             UTILS
 function collectRelevantComments(){
+    set -o xtrace
     matchPattern="$1"
     fileName="comments"
     since="$(date -u --date="5 hours ago" +"%Y-%m-%dT%H:%M:%SZ")" #on mac os x use '-v -5H' instead of '--date="5 hours ago"'
@@ -19,6 +20,7 @@ function collectRelevantComments(){
          -X GET  "${url}"\
          > ${fileName}
     jq ".[].body" ${fileName} | grep "${matchPattern}"| awk '{print $3}' | sed "s/\"//g" #return list
+    set +o xtrace
 }
 
 function sendComment() {
@@ -109,6 +111,7 @@ function deployAllureResults() {
 
 function downloadAllureResults() {
     urlExistence=false
+    echo "TRAVIS_BUILD_NUMBER: ${TRAVIS_BUILD_NUMBER}"
     for urlKey in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}")
     do
         urlExistence=true
