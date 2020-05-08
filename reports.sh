@@ -42,11 +42,7 @@ function archive() {
 
 function extractArchive() {
     file="$1"
-    #echo "Starting extraction Archive ${file}"
-    #cat ${file}
-    tar -tvf ${file}
     tar -zxvf ${file}
-    #extractionResult=$(tar -xzf ${file})
 }
 
 function aboutTransfer() {
@@ -112,18 +108,15 @@ function deployAllureResults() {
 }
 
 function downloadAllureResults() {
-    echo "Starting downloadAllureResults()"
     urlExistence=false
     for urlKey in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}")
     do
         urlExistence=true
         echo "Found: ${urlKey}"
-        ##fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $4}')" # TODO: $4 for file.io, #5 for transfer.sh, add an IF
+        # TODO: $4 for file.io, #5 for transfer.sh, add an IF
         #fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $5}')"
         fileName="${urlKey}.tar.gz"
-        echo "fileName in downloadAllureResults(): ${fileName}" #tmp
         tmpResult=$(curl https://file.io/${urlKey} --output ${fileName})
-        echo "Loading result: ${tmpResult}"
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
         echo "Failed inside downloadAllureResults()"
@@ -139,7 +132,6 @@ function extractAllureResults() {
 }
 
 function generateAllureReports() {
-    echo "Starting generateAllureReports()"
     reportDirList="";
     allureDirExistence=false
     for report in $(ls -d1 jdi-light*/target/)

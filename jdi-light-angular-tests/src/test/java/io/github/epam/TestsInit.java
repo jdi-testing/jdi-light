@@ -9,18 +9,30 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import com.epam.jdi.light.settings.WebSettings;
 import io.github.com.StaticSite;
 import io.github.epam.testng.TestNGListener;
+import org.apache.commons.io.FileUtils;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
+
+import java.io.File;
+import java.io.IOException;
 
 @Listeners(TestNGListener.class)
 public class TestsInit {
 
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        WebSettings.init();
         killAllSeleniumDrivers();
         initSite(StaticSite.class);
+        // todo delete
+        System.out.println("!!! TMP FOR DEBUG capabilities.chrome: " + DRIVER.capabilities.chrome.get("arguments"));
+        try {
+            System.out.println("!!! TMP FOR DEBUG chrome.properties: " +
+                    FileUtils.readFileToString(new File("src\\test\\resources\\chrome.properties"), "UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // todo end
         openUrl(DRIVER.domain);
         logger.toLog("Run Tests");
     }
