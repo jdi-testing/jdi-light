@@ -43,7 +43,7 @@ function archive() {
 function extractArchive() {
     file="$1"
     #echo "Starting extraction Archive ${file}"
-    cat ${file}
+    #cat ${file}
     tar -tvf ${file}
     tar -zxvf ${file}
     #extractionResult=$(tar -xzf ${file})
@@ -142,7 +142,7 @@ function generateAllureReports() {
     echo "Starting generateAllureReports()"
     reportDirList="";
     allureDirExistence=false
-    for report in $(ls -d1 jdi-light*/)
+    for report in $(ls -d1 jdi-light*/target/)
     do
         allureDirExistence=true
         allureDir="${report}allure-results"
