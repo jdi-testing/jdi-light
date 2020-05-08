@@ -89,7 +89,8 @@ function uploadFile() {
     file="$1"
     # TODO : make an if depending of boolean variable to switch between transfer or between https://www.file.io/#one
     #url=$(curl --upload-file "${file}" https://transfer.sh/${file})
-    response=$(curl -F "file=@${file}" https://file.io)
+    response=$(curl -F "file=@${file}" https://file.io/?expires=1w)
+    echo "Response: ${response}"
     url=$(echo ${response} |jq -j '.link')
     echo ${url} #return
 }
