@@ -9,6 +9,7 @@
 BRANCH_ERROR_MESSAGE="IF YOU DON'T SEE THE PULL REQUEST BUILD, THEN BRANCH CANNOT BE MERGED, YOU SHOULD FIX IT FIRST"
 URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
 FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
+FASTER_FILE_SHARING="true"
 
 ####################             UTILS
 function collectRelevantComments(){
@@ -88,12 +89,13 @@ function grubAllureResults() {
 
 function uploadFile() {
     file="$1"
-    # TODO : make an if depending of boolean variable to switch between transfer or between https://www.file.io/#one
-
-    #url=$(curl --upload-file "${file}" https://transfer.sh/${file})
-    response="$(curl -F "file=@${file}" https://file.io/)"
-    url="$(echo ${response} |jq -j '.link')"
-    urlKey="$(echo "${url}"| awk -F/ '{print $4}')"
+    if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
+        urlKey=$(curl --upload-file "${file}" https://transfer.sh/${file})
+    else
+        response="$(curl -F "file=@${file}" https://file.io/)"
+        url="$(echo ${response} |jq -j '.link')"
+        urlKey="$(echo "${urlFull}"| awk -F/ '{print $4}')"
+    fi
     echo "${urlKey}" #return
 }
 
@@ -116,10 +118,13 @@ function downloadAllureResults() {
     do
         urlExistence=true
         echo "Found: ${urlKey}"
-        # TODO: $4 for file.io, #5 for transfer.sh, add an IF
-        #fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $5}')"
-        fileName="${urlKey}.tar.gz"
-        tmpResult="$(curl https://file.io/${urlKey} --output ${fileName})"
+        if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
+            fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $5}')"
+            tmpResult=$(curl ${url} --output ${fileName})
+        else
+            fileName="${urlKey}.tar.gz"
+            tmpResult="$(curl https://file.io/${urlKey} --output ${fileName})"
+        fi
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
         echo "Failed inside downloadAllureResults()"
