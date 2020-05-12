@@ -11,14 +11,26 @@ URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
 FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
 
 ####################             UTILS
-function collectRelevantComments(){
-    matchPattern="$1"
-    since="$(date -u --date="5 hours ago" +"%Y-%m-%dT%H:%M:%SZ")" #on mac os x use '-v -5H' instead of '--date="5 hours ago"'
+function getCommentsLastPageIndex(){
     url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments?since=${since}"
-    curl -H "Authorization: token ${GIT_COMMENT_USER}" \
-         -X GET  "${url}"\
-         > ${FILENAME_WITH_COMMENTS_FROM_GITHUB}
-    jq ".[].body" ${FILENAME_WITH_COMMENTS_FROM_GITHUB} | grep "${matchPattern}"| awk '{print $3}' | sed "s/\"//g" #return list
+    curl -I -H "Authorization: token ${GIT_COMMENT_USER}"\
+         -X GET  "${url}" | grep Link: | awk '{print $4}' | egrep -o 'page=[0-9]{1,10}' | awk -F"=" '{print $2}'
+}
+
+function collectRelevantComments(){
+    set -o xtrace
+    lastPageIndex=$(getCommentsLastPageIndex)
+    matchPattern="$1"
+    fileName="comments"
+    for (( pageIndex=1; pageIndex<=${lastPageIndex}; pageIndex++ ))
+    do
+      url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments?page=${pageIndex}"
+    	curl -H "Authorization: token ${GIT_COMMENT_USER}"\
+    	     -X GET  "${url}"\
+    	     >> ${fileName}
+    done
+    jq ".[].body" ${fileName} | grep "${matchPattern}"| awk '{print $3}' | sed "s/\"//g" | sort | uniq #return list
+    set +o xtrace
 }
 
 function sendComment() {
