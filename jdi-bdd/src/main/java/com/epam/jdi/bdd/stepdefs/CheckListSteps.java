@@ -9,7 +9,7 @@ import java.util.List;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static org.junit.Assert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

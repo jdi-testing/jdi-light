@@ -4,7 +4,8 @@ import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.ElementArea;
 import io.github.com.pages.UIElementContactFormPage;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,6 +13,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static io.github.com.pages.UIElementContactFormPage.*;
 import static io.github.epam.EpamGithubSite.*;
@@ -72,17 +74,20 @@ public class UIElementTests extends TestsInit {
         assertTrue(smartLocator.isHidden());
     }
 
+    private WebElement getSeleniumElement() {
+        return getDriver().findElement(By.xpath("//*[.='Submit']"));
+    }
     @Test
     public void getLocation(){
-        assertEquals(submit.getLocation(), new Point(1042, 477));
+        assertEquals(submit.getLocation(), getSeleniumElement().getLocation());
     }
     @Test
     public void getSize(){
-        assertEquals(submit.getSize(), new Dimension(82, 34));
+        assertEquals(submit.getSize(), getSeleniumElement().getSize());
     }
     @Test
     public void getRect(){
-        assertEquals(submit.getRect(), new Rectangle(1042, 477, 34, 82));
+        assertEquals(submit.getRect(), getSeleniumElement().getRect());
     }
     @Test
     public void jsExecute(){
@@ -276,7 +281,7 @@ public class UIElementTests extends TestsInit {
     }
     @Test
     public void sId(){
-        assertEquals(sId.getLocator().toString(), "By.cssSelector: #sid");
+        assertEquals(sId.getLocator().toString(), "By.cssSelector: #s-id");
     }
     @Test
     public void sText(){
@@ -292,7 +297,7 @@ public class UIElementTests extends TestsInit {
     }
     @Test
     public void sClass(){
-        assertEquals(sClass.getLocator().toString(), "By.cssSelector: .sclass");
+        assertEquals(sClass.getLocator().toString(), "By.cssSelector: .s-class");
     }
     @Test
     public void findBy(){

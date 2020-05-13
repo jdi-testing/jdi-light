@@ -127,13 +127,14 @@ public interface IWebList<T extends ICoreElement> extends IList<T> {
         getByType(get(values[length-1]), IClickable.class).click();
     }
 
+    default String separator() { return ">"; }
     /**
      * Select the items by the values, hover and click on them
      * @param value
      */
     @JDIAction("Select ({0}) for '{name}'")
     default void hoverAndClick(String value) {
-        String[] split = value.split(">");
+        String[] split = value.split(separator());
         if (split.length == 1)
             select(split[0]);
         else hoverAndClick(split);

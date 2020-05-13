@@ -10,5 +10,4 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface Css {
     String value();
-
 }

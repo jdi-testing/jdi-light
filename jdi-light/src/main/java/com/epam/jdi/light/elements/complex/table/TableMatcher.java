@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.support.ui.Quotes;
 
@@ -35,7 +36,7 @@ public class TableMatcher {
         return this;
     }
     private String name;
-    TableMatcher(String locator, Column column, String name) {
+    TableMatcher(@MarkupLocator String locator, Column column, String name) {
         this.locator = locator;
         this.column = column;
         this.name = name;

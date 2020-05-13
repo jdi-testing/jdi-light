@@ -13,7 +13,7 @@ import static org.mytests.uiobjects.example.site.SiteJdi.*;
 import static org.mytests.uiobjects.example.site.pages.UsersPage.*;
 import static org.testng.Assert.*;
 
-public class DataTableInteractTests extends TestsInit {
+public class DataTableInteractTests implements TestsInit {
 
     @BeforeMethod
     public void before() {

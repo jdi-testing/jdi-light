@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-tests</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.10</version>
     <name>Tests: JDI BDD</name>
 
     <properties>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-bdd</artifactId>
-            <version>1.0.6</version>
+            <version>1.0.10</version>
         </dependency>
 
         <dependency>
@@ -31,6 +31,19 @@
             <artifactId>allure-cucumber-jvm</artifactId>
             <version>${allure.cucumber.jvm}</version>
         </dependency>
+
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
