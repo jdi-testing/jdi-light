@@ -1,12 +1,16 @@
 package com.epam.jdi.light.driver.get;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;
+import static com.epam.jdi.light.driver.get.DriverVersion.PENULT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
+import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
+import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
+import static io.github.bonigarcia.wdm.WebDriverManager.iedriver;
+import static io.github.bonigarcia.wdm.WebDriverManager.operadriver;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.get.DriverInfo.*;
-import static com.epam.jdi.light.driver.get.DriverVersion.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static io.github.bonigarcia.wdm.WebDriverManager.*;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
  * Created by Roman_Iovlev on 11/28/2017.
@@ -45,12 +49,12 @@ class DownloadDriverManager {
             }
             driverName += " " + platform;
             if (hasVersion(version)) {
-                wdm = wdm.version(version);
+                wdm = wdm.browserVersion(version);
                 driverName += " " + version;
             }
             if (version.equalsIgnoreCase(PENULT.value)) {
                 wdm.setup();
-                wdm.version(getBelowVersion());
+                wdm.browserVersion(getBelowVersion());
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
