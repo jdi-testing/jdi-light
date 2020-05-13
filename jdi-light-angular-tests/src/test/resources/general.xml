@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="WINDOWS-1251"?>
+        <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JDI-Light Angular Tests" parallel="methods" thread-count="1">
+    <test name="Tests">
+        <packages>
+            <package name="io.github.epam.angular.tests.*"/>
+        </packages>
+    </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.TestNGListener" />
+    </listeners>
+</suite>
