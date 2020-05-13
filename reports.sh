@@ -21,7 +21,7 @@ function collectRelevantComments(){
     set -o xtrace
     lastPageIndex=$(getCommentsLastPageIndex)
     matchPattern="$1"
-    fileName="comments"
+    fileName="${FILENAME_WITH_COMMENTS_FROM_GITHUB}"
     for (( pageIndex=1; pageIndex<=${lastPageIndex}; pageIndex++ ))
     do
       url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments?page=${pageIndex}"
