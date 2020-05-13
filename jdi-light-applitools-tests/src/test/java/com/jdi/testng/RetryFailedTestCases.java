@@ -24,4 +24,3 @@ public class RetryFailedTestCases implements IRetryAnalyzer {
     }
 
 }
-
