@@ -15,13 +15,16 @@ import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 public class TestNGListener implements IInvokedMethodListener {
+
     private Safe<Long> start = new Safe<>(0L);
+
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
         if (m.isTestMethod()) {
             Method testMethod = m.getTestMethod().getConstructorOrMethod().getMethod();
             if (testMethod.isAnnotationPresent(Test.class)) {
-                TEST_NAME.set(tr.getTestClass().getRealClass().getSimpleName()+"."+testMethod.getName());
+                TEST_NAME.set(
+                    tr.getTestClass().getRealClass().getSimpleName() + "." + testMethod.getName());
                 start.set(currentTimeMillis());
                 logger.step("== Test '%s' START ==", TEST_NAME.get());
             }
@@ -33,7 +36,8 @@ public class TestNGListener implements IInvokedMethodListener {
         if (method.isTestMethod()) {
             String result = getTestResult(r);
             logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
-                    new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
+                new SimpleDateFormat("mm:ss.SS")
+                    .format(new Date(currentTimeMillis() - start.get())));
             if ("FAILED".equals(result)) {
                 takeScreen();
                 logger.step("ERROR: " + r.getThrowable().getMessage());
