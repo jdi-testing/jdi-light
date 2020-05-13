@@ -22,4 +22,7 @@ public class UsersPage extends WebPage {
 	@JTable(root = "#user-table", rowHeader = "User")
 	public static DataTable<MarvelUser, MarvelUserInfo> usersSetup;
 
+	@UI("#empty-table")
+	public static DataTable<?, MarvelUserSimple> emptyTable;
+
 }

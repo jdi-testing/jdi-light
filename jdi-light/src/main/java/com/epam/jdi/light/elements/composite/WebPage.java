@@ -21,10 +21,10 @@ import java.util.function.Supplier;
 import static com.epam.jdi.light.common.CheckTypes.NONE;
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.VisualCheckPage.*;
 import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
@@ -85,7 +85,9 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public static void openSite(Class<?> site) {
         initSite(site);
-        openSite();
+        WebPage page = new WebPage(getDomain());
+        page.setName(site.getSimpleName());
+        page.open();
     }
     /**
      * Get Web page URL
@@ -144,7 +146,7 @@ public class WebPage extends DriverBase implements PageObject {
      * Opens url specified for page
      * @param url
      */
-    @JDIAction("Open '{name}'(url={0})")
+    @JDIAction(value = "Open '{name}'(url={0})", timeout = 0)
     private void open(String url) {
         init();
         CacheValue.reset();

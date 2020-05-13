@@ -2,14 +2,12 @@ package com.epam.jdi.bdd.stepdefs;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.hamcrest.Matchers;
-import org.testng.Assert;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.tools.JsonUtils.*;
 import static org.hamcrest.MatcherAssert.*;
-import static org.testng.Assert.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -59,31 +57,31 @@ public class WebPageSteps {
     @Then("^the bottom of the page is reached$")
     public void bottomOfPageReached() {
         boolean execResult = isBottomOfThePage();
-        Assert.assertTrue(execResult);
+        assertThat(execResult, is(true));
     }
 
     @Then("^the top of the page is reached$")
     public void topOfPageReached() {
         boolean execResult = isTopOfThePage();
-        Assert.assertTrue(execResult);
+        assertThat(execResult, is(true));
     }
 
     @Then("^the page scrolled by \"(\\d+)\" px down$")
     public void pageScrolledDown(int y) {
         int execResult = getInt(jsExecute("return window.scrollY;"));
-        assertThat(execResult, Matchers.greaterThan(SCROLLY + y-2));
-        assertThat(execResult, Matchers.lessThan(SCROLLY + y+1));
+        assertThat(execResult, greaterThan(SCROLLY + y-2));
+        assertThat(execResult, lessThan(SCROLLY + y+1));
     }
 
     @Then("^the page scrolled by \"(\\d+)\" px right$")
     public void pageScrolledRight(int x) {
         int execResult = getInt(jsExecute("return Math.ceil(window.scrollX);"));
-        assertThat(execResult, Matchers.greaterThan(SCROLLX + x-2));
-        assertThat(execResult, Matchers.lessThan(SCROLLX + x+1));
+        assertThat(execResult, greaterThan(SCROLLX + x-2));
+        assertThat(execResult, lessThan(SCROLLX + x+1));
     }
 
     @Then("^the page is zoomed \"(\\d+)\" times$")
     public void pageIsZoomed(double x) {
-        assertEquals(zoomLevel(), x);
+        assertThat(zoomLevel(), is(x));
     }
 }

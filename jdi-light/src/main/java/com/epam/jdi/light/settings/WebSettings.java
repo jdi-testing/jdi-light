@@ -47,7 +47,6 @@ import static java.lang.Integer.*;
 import static java.lang.String.*;
 import static java.util.Arrays.*;
 import static org.apache.commons.lang3.StringUtils.*;
-import static org.openqa.selenium.PageLoadStrategy.NONE;
 import static org.openqa.selenium.PageLoadStrategy.*;
 
 /**
@@ -92,10 +91,18 @@ public class WebSettings {
         }
     }
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
-        if (ELEMENT.useSmartSearch == FALSE ||
-            ELEMENT.useSmartSearch == ONLY_UI && el.base().locator == null ||
-            ELEMENT.useSmartSearch == UI_AND_ELEMENTS && el.base().locator == null && isInterface(el.getClass(), PageObject.class))
-            return null;
+        switch (ELEMENT.useSmartSearch) {
+            case FALSE:
+                return null;
+            case ONLY_UI:
+                if (el.base().locator.isNull())
+                    return null;
+                break;
+            case UI_AND_ELEMENTS:
+                if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
+                    return null;
+                break;
+        }
         String locatorName = ELEMENT.smartName.value.execute(el.getName());
         return el.base().timer().getResult(() -> {
             String locator = format(ELEMENT.smartTemplate, locatorName);
@@ -125,7 +132,9 @@ public class WebSettings {
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
             fillAction(p -> SCREEN.path = p, "screens.folder");
+            fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
             addStrategy(FAIL, LOGS.screenStrategy);
+            fillAction(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
             fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
             fillAction(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
             fillAction(p -> LOGS.requestsStrategy = getLoggerStrategy(p), "requests.strategy");
@@ -138,7 +147,6 @@ public class WebSettings {
             fillAction(p -> ELEMENT.clickType = getClickType(p), "click.type");
             fillAction(p -> ELEMENT.getTextType = getTextType(p), "text.type");
             fillAction(p -> ELEMENT.setTextType = getSetTextType(p), "set.text.type");
-
             // RemoteWebDriver properties
             fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
             fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
@@ -263,7 +271,7 @@ public class WebSettings {
     private static PageLoadStrategy getPageLoadStrategy(String strategy) {
         switch (strategy.toLowerCase()) {
             case "normal": return NORMAL;
-            case "none": return NONE;
+            case "none": return PageLoadStrategy.NONE;
             case "eager": return EAGER;
         }
         return NORMAL;
@@ -297,6 +305,16 @@ public class WebSettings {
         }
         return properties;
     }
+    private static LogInfoDetails getInfoDetailsLevel(String option) {
+        switch (option.toLowerCase()) {
+            case "none": return LogInfoDetails.NONE;
+            case "name": return LogInfoDetails.NAME;
+            case "locator": return LogInfoDetails.LOCATOR;
+            case "context": return LogInfoDetails.CONTEXT;
+            case "element": return LogInfoDetails.ELEMENT;
+            default: return LogInfoDetails.ELEMENT;
+        }
+    }
     private static List<com.epam.jdi.light.logger.Strategy> getLoggerStrategy(String strategy) {
         if (isBlank(strategy))
             return new ArrayList<>();
@@ -311,6 +329,7 @@ public class WebSettings {
         String strategy = prop.trim().toLowerCase();
         switch (strategy) {
             case "jdi": return JDI;
+            case "jdi-stable": return JDI_STABLE;
             case "selenium": return SELENIUM;
             default: return JDI;
         }

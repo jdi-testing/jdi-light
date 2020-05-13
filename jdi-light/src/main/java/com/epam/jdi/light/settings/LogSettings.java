@@ -19,4 +19,5 @@ public class LogSettings {
     public List<Strategy> requestsStrategy = new ArrayList<>();
     public JFunc1<LogEntry, Boolean> filterHttpRequests =
         l -> l.getMessage().contains("\"status\":\"4") || l.getMessage().contains("\"status\":\"5");
+    public LogInfoDetails logInfoDetails = null;
 }

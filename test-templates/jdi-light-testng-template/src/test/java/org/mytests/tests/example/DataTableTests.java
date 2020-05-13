@@ -21,7 +21,7 @@ import static org.mytests.uiobjects.example.site.SiteJdi.*;
 import static org.mytests.uiobjects.example.site.pages.UsersPage.*;
 import static org.testng.Assert.*;
 
-public class DataTableTests extends TestsInit {
+public class DataTableTests implements TestsInit {
     private boolean firstTime = true;
     @BeforeMethod
     public void before() {
