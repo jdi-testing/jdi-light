@@ -14,8 +14,14 @@ FASTER_FILE_SHARING="true"
 ####################             UTILS
 function getCommentsLastPageIndex(){
     url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
-    curl -I -H "Authorization: token ${GIT_COMMENT_USER}"\
-         -X GET  "${url}" | grep Link: | awk '{print $4}' | egrep -o 'page=[0-9]{1,10}' | awk -F"=" '{print $2}'
+    index="$(curl -I -H "Authorization: token ${GIT_COMMENT_USER}"\
+         -X GET  "${url}" | grep Link: | awk '{print $4}' | egrep -o 'page=[0-9]{1,10}' | awk -F"=" '{print $2}')"
+    reInteger='[0-9]+'
+	  if ! [[ $index =~ $reInteger ]] ;
+	  then
+	    index=1
+	  fi
+    echo ${index}
 }
 
 function collectRelevantComments(){
