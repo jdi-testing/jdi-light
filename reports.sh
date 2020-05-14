@@ -131,7 +131,7 @@ function downloadAllureResults() {
             curl "${urlKey}" --output "${fileName}"
         else
             fileName="${urlKey}.tar.gz"
-            curl https://file.io/${urlKey} --output "${fileName}"
+            curl https://file.io/"${urlKey}" --output "${fileName}"
         fi
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
