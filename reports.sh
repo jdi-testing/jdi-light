@@ -18,7 +18,6 @@ function getCommentsLastPageIndex(){
 }
 
 function collectRelevantComments(){
-    set -o xtrace
     lastPageIndex=$(getCommentsLastPageIndex)
     matchPattern="$1"
     fileName="${FILENAME_WITH_COMMENTS_FROM_GITHUB}"
@@ -30,7 +29,6 @@ function collectRelevantComments(){
     	     >> ${fileName}
     done
     jq ".[].body" ${fileName} | grep "${matchPattern}"| awk '{print $3}' | sed "s/\"//g" | sort | uniq #return list
-    set +o xtrace
 }
 
 function sendComment() {
