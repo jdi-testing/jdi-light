@@ -9,7 +9,7 @@
 BRANCH_ERROR_MESSAGE="IF YOU DON'T SEE THE PULL REQUEST BUILD, THEN BRANCH CANNOT BE MERGED, YOU SHOULD FIX IT FIRST"
 URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
 FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
-FASTER_FILE_SHARING="true"
+FASTER_FILE_SHARING="false"
 
 ####################             UTILS
 function collectRelevantComments(){
@@ -88,7 +88,7 @@ function grubAllureResults() {
 function uploadFile() {
     file="$1"
     if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
-        urlKey="$(curl --upload-file ${file} https://transfer.sh/${file})"
+        urlKey="$(curl --upload-file "${file}" https://transfer.sh/${file})"
     else
         response="$(curl -F "file=@${file}" https://file.io/)"
         url="$(echo ${response} |jq -j '.link')"
