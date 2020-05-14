@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+import elements.common.Spinner;
 
 public class AngularPage extends WebPage {
     @Css("radio-overview-example .mat-radio-group")
@@ -15,4 +16,7 @@ public class AngularPage extends WebPage {
 
     @UI("#mat-radio-3")
     public static Button secondBasicRadioButton;
+
+    @Css(".mat-spinner")
+    public static Spinner basicProgressSpinner;
 }
