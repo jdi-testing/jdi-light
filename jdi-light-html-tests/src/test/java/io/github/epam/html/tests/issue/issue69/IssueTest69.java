@@ -1,7 +1,7 @@
 package io.github.epam.html.tests.issue.issue69;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.ui.html.PageFactory;
+import com.epam.jdi.light.elements.init.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
