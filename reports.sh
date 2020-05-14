@@ -45,7 +45,7 @@ function sendComment() {
 
 function archive() {
     directory="$1"
-    archiveName="$(echo ${directory}| awk -F"/" '{print $1}')".tar.gz
+    archiveName="$(echo "${directory}"| awk -F"/" '{print $1}')".tar.gz
     tar -czf "${archiveName}" "${directory}" > /dev/null
     echo "${archiveName}" #return
 }
@@ -84,11 +84,11 @@ function grubAllureResults() {
         for result in $(find jdi*/target/allure-results -maxdepth 1 -type d)
         do
             echo RESULT: ${result}
-            archiveFile="$(archive ${result})"
+            archiveFile="$(archive "${result}")"
             echo ARCHIVE: "${archiveFile}"
             ls -lah *.tar.gz
             uploadedTo="$(uploadFile "${archiveFile}")"
-            echo UPLOAD TO KEY: ${uploadedTo}
+            echo UPLOAD TO KEY: "${uploadedTo}"
             sendComment "$(aboutTransfer "${uploadedTo}")"
         done
     fi
@@ -100,7 +100,7 @@ function uploadFile() {
 
     #url=$(curl --upload-file "${file}" https://transfer.sh/${file})
     response="$(curl -F "file=@${file}" https://file.io/)"
-    url="$(echo ${response} |jq -j '.link')"
+    url="$(echo "${response}" |jq -j '.link')"
     urlKey="$(echo "${url}"| awk -F/ '{print $4}')"
     echo "${urlKey}" #return
 }
@@ -127,7 +127,7 @@ function downloadAllureResults() {
         # TODO: $4 for file.io, #5 for transfer.sh, add an IF
         #fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $5}')"
         fileName="${urlKey}.tar.gz"
-        tmpResult="$(curl https://file.io/${urlKey} --output ${fileName})"
+        curl https://file.io/${urlKey} --output "${fileName}"
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
         echo "Failed inside downloadAllureResults()"
@@ -168,8 +168,8 @@ function generateAllureReports() {
 
 function deployToNetlify() {
     directory="$1"
-    result="$(netlify deploy --dir ${directory} --json)"
-    deployUrl="$(echo ${result}r |jq '.deploy_url' |sed 's/"//g')"
+    result="$(netlify deploy --dir "${directory}" --json)"
+    deployUrl="$(echo "${result}"r |jq '.deploy_url' |sed 's/"//g')"
     echo "${deployUrl}"
 }
 
