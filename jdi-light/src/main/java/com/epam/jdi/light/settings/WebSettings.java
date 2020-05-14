@@ -1,53 +1,41 @@
 package com.epam.jdi.light.settings;
 
-import com.epam.jdi.light.asserts.core.SoftAssert;
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.VisualCheckAction;
+import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
-import com.epam.jdi.light.logger.*;
-import com.epam.jdi.tools.*;
-import com.epam.jdi.tools.func.*;
-import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.*;
+import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.tools.PropReader;
+import com.epam.jdi.tools.PropertyReader;
+import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.func.JAction;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
-import static com.epam.jdi.light.common.ElementArea.*;
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.NameToLocator.*;
-import static com.epam.jdi.light.common.PageChecks.*;
-import static com.epam.jdi.light.common.SearchStrategies.*;
-import static com.epam.jdi.light.common.SetTextTypes.*;
-import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.common.UseSmartSearch.FALSE;
-import static com.epam.jdi.light.common.UseSmartSearch.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.RemoteDriver.*;
-import static com.epam.jdi.light.driver.sauce.SauceSettings.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.light.logger.JDILogger.*;
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.logger.Strategy.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.Strategies.*;
-import static com.epam.jdi.tools.EnumUtils.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PathUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static com.epam.jdi.tools.PropertyReader.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static java.lang.Boolean.*;
-import static java.lang.Integer.*;
-import static java.lang.String.*;
-import static java.util.Arrays.*;
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.openqa.selenium.PageLoadStrategy.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.logger.JDILogger.instance;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PropertyReader.fillAction;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -118,57 +106,18 @@ public class WebSettings {
             }
         });
     };
-    private static void fillAction(JAction1<String> action, String name) {
-        String prop = null;
-        try {
-            prop = getProperty(name);
-        } catch (Exception ignore) {}
-        if (prop == null) {
-            prop = "null";
-        }
-        logger.debug("fillAction(%s=%s)", name, prop);
-        PropertyReader.fillAction(action, name);
-    }
     public static boolean initialized = false;
     public static synchronized void init() {
         if (initialized) return;
         logger.debug("init()");
         try {
             getProperties(COMMON.testPropertiesPath);
-            fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
-            COMMON.strategy.action.execute();
-            if (DRIVER.name.equals(DEFAULT_DRIVER))
-                fillAction(p -> DRIVER.name = p, "driver");
-            fillAction(p -> DRIVER.version = p, "driver.version");
-            fillAction(p -> DRIVER.path = p, "drivers.folder");
-            fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
-            fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
-            fillAction(WebSettings::setDomain, "domain");
-            fillAction(p -> SCREEN.path = p, "screens.folder");
-            fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
-            fillAction(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
-            fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
-            fillAction(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
-            fillAction(p -> LOGS.requestsStrategy = getLoggerStrategy(p), "requests.strategy");
-            fillAction(p -> COMMON.killBrowser = p, "browser.kill");
-            fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
-            fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
-            fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
-            fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
-            fillAction(SoftAssert::setAssertType, "assert.type");
-            fillAction(p -> ELEMENT.clickType = getClickType(p), "click.type");
-            fillAction(p -> ELEMENT.getTextType = getTextType(p), "text.type");
-            fillAction(p -> ELEMENT.setTextType = getSetTextType(p), "set.text.type");
-            // RemoteWebDriver properties
-            fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
-            fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
-            fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
-            logger.setLogLevel(LOGS.logLevel);
-            fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
-            fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locator");
-            fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
-            fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
-            fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
+            TestProperties.getTestsProperties().forEach((k,v)->
+                                {String name = k;
+                                JAction1<String> action1 = v.getKey();
+                                JAction action = v.getValue();
+                                fillAction(action1,name);
+                                action.execute();});
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
@@ -192,64 +141,9 @@ public class WebSettings {
         }
     }
 
-    private static ElementArea getClickType(String type) {
-        ElementArea clickType = first(getAllEnumValues(ElementArea.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
-        return clickType != null
-                ? clickType : CENTER;
-    }
     private static boolean getBoolean(String param) {
         String lowerParams = param.toLowerCase();
         return !lowerParams.equals("off") && !lowerParams.equals("false");
-    }
-    private static TextTypes getTextType(String type) {
-        TextTypes textType = first(getAllEnumValues(TextTypes.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
-        return textType != null
-                ? textType : SMART_TEXT;
-    }
-    private static SetTextTypes getSetTextType(String type) {
-        SetTextTypes setTextType = first(getAllEnumValues(SetTextTypes.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
-        return setTextType != null
-                ? setTextType : CLEAR_SEND_KEYS;
-    }
-    private static String getRemoteUrl(String prop) {
-        String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
-        switch (value) {
-            case "sauce":
-            case "saucelabs":
-                DRIVER.capabilities.common = sauceCapabilities();
-                return sauceLabs();
-            case "browserstack": return browserstack();
-            default: return seleniumLocalhost();
-        }
-    }
-    private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
-        if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
-            throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
-                "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
-        }
-        return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
-    }
-    private static UseSmartSearch getSmartSearchUse(String prop) {
-        String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
-        switch (value) {
-            case "false":
-            case "off":
-                return FALSE;
-            case "onlyui":
-                return ONLY_UI;
-            case "uiandelements":
-                return UI_AND_ELEMENTS;
-            case "always":
-                return ALWAYS;
-            default:
-                return UI_AND_ELEMENTS;
-        }
     }
 
     public static void loadCapabilities(String property, String defaultPath, JAction1<Properties> setCapabilities) {
@@ -265,38 +159,6 @@ public class WebSettings {
         try {
             setCapabilities.execute(properties);
         } catch (Exception ignore) { }
-    }
-
-    private static void setSearchStrategy(String p) {
-        p = p.toLowerCase();
-        if (p.equals("soft"))
-            p = "any, multiple";
-        if (p.equals("strict"))
-            p = "visible, single";
-        if (p.split(",").length == 2) {
-            List<String> params = asList(p.split(","));
-            if (params.contains("visible") || params.contains("displayed"))
-                onlyVisible();
-            if (params.contains("any") || params.contains("all"))
-                noValidation();
-            if (params.contains("enabled"))
-                visibleEnabled();
-            if (params.contains("inview"))
-                inView();
-            if (params.contains("single"))
-                STRICT_SEARCH = true;
-            if (params.contains("multiple"))
-                STRICT_SEARCH = false;
-        }
-    }
-
-    private static PageLoadStrategy getPageLoadStrategy(String strategy) {
-        switch (strategy.toLowerCase()) {
-            case "normal": return NORMAL;
-            case "none": return PageLoadStrategy.NONE;
-            case "eager": return EAGER;
-        }
-        return NORMAL;
     }
 
     private static Properties getProperties(String path) {
@@ -326,34 +188,5 @@ public class WebSettings {
             throw exception("Couldn't load properties for CI Server" + path);
         }
         return properties;
-    }
-    private static LogInfoDetails getInfoDetailsLevel(String option) {
-        switch (option.toLowerCase()) {
-            case "none": return LogInfoDetails.NONE;
-            case "name": return LogInfoDetails.NAME;
-            case "locator": return LogInfoDetails.LOCATOR;
-            case "context": return LogInfoDetails.CONTEXT;
-            case "element": return LogInfoDetails.ELEMENT;
-            default: return LogInfoDetails.ELEMENT;
-        }
-    }
-    private static List<com.epam.jdi.light.logger.Strategy> getLoggerStrategy(String strategy) {
-        if (isBlank(strategy) || strategy.trim().equalsIgnoreCase("off"))
-            return new ArrayList<>();
-        List<com.epam.jdi.light.logger.Strategy> strategies = new ArrayList<>();
-        try {
-            String[] split = strategy.split(";");
-            strategies = map(split, s -> parseStrategy(s.trim()));
-        } catch (Exception ignore) { }
-        return strategies;
-    }
-    private static Strategies getStrategy(String prop) {
-        String strategy = prop.trim().toLowerCase().replaceAll("[^a-z]", "");
-        switch (strategy) {
-            case "jdi": return JDI;
-            case "jdismart": return JDI_SMART;
-            case "selenium": return SELENIUM;
-            default: return JDI;
-        }
     }
 }
