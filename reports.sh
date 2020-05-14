@@ -21,7 +21,7 @@ function collectRelevantComments(){
     lastPageIndex=$(getCommentsLastPageIndex)
     matchPattern="$1"
     fileName="${FILENAME_WITH_COMMENTS_FROM_GITHUB}"
-    for (( pageIndex=1; pageIndex<=${lastPageIndex}; pageIndex++ ))
+    for (( pageIndex=1; pageIndex<=lastPageIndex; pageIndex++ ))
     do
       url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments?page=${pageIndex}"
     	curl -H "Authorization: token ${GIT_COMMENT_USER}"\
