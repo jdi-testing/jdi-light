@@ -66,12 +66,13 @@ jobs:
     #    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
     #    - mvn verify $WITH_PARAMS -pl $BOOTSTRAP_TESTS
 
-    - stage: test
-      name: Run tests - angular
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+    # TODO: uncomment after angular module is added
+    #    - stage: test
+    #      name: Run tests -
+    #      script:
+    #        - mvn -ntp install -DskipTests
+    #        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
 
     - stage: test
       name: Run tests - html
