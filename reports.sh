@@ -88,7 +88,7 @@ function grubAllureResults() {
 function uploadFile() {
     file="$1"
     if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
-        urlKey="$(curl --upload-file "${file}" https://transfer.sh/${file})"
+        urlKey="$(curl --upload-file "${file}" https://transfer.sh/"${file}")"
     else
         response="$(curl -F "file=@${file}" https://file.io/)"
         url="$(echo ${response} |jq -j '.link')"
@@ -118,7 +118,7 @@ function downloadAllureResults() {
         echo "Found: ${urlKey}"
         if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
             fileName="$(echo "${urlKey}"| awk -F/ '{print $5}')"
-            tmpResult="$(curl ${urlKey} --output ${fileName})"
+            tmpResult="$(curl "${urlKey}" --output "${fileName}")"
         else
             fileName="${urlKey}.tar.gz"
             tmpResult="$(curl https://file.io/${urlKey} --output ${fileName})"
