@@ -22,12 +22,12 @@
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
-            <artifactId>cucumber-java</artifactId>
+            <artifactId>cucumber-testng</artifactId>
             <version>RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
             <version>RELEASE</version>
         </dependency>
         <dependency>

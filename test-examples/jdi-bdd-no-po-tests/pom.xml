@@ -30,7 +30,6 @@
             <artifactId>allure-cucumber-jvm</artifactId>
             <version>RELEASE</version>
         </dependency>
-
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-testng</artifactId>

@@ -13,7 +13,6 @@ FASTER_FILE_SHARING="true"
 
 ####################             UTILS
 function collectRelevantComments(){
-    set -o xtrace
     matchPattern="$1"
     since="$(date -u --date="5 hours ago" +"%Y-%m-%dT%H:%M:%SZ")" #on mac os x use '-v -5H' instead of '--date="5 hours ago"'
     url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments?since=${since}"
@@ -21,7 +20,6 @@ function collectRelevantComments(){
          -X GET  "${url}"\
          > ${FILENAME_WITH_COMMENTS_FROM_GITHUB}
     jq ".[].body" ${FILENAME_WITH_COMMENTS_FROM_GITHUB} | grep "${matchPattern}"| awk '{print $3}' | sed "s/\"//g" #return list
-    set +o xtrace
 }
 
 function sendComment() {
