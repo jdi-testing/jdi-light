@@ -12,7 +12,7 @@ FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
 
 ####################             UTILS
 function getCommentsLastPageIndex(){
-    url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments?since=${since}"
+    url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
     curl -I -H "Authorization: token ${GIT_COMMENT_USER}"\
          -X GET  "${url}" | grep Link: | awk '{print $4}' | egrep -o 'page=[0-9]{1,10}' | awk -F"=" '{print $2}'
 }
