@@ -5,10 +5,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.basicProgressSpinner;
+import static io.github.com.pages.AngularPage.basicIcon;
+import static io.github.com.pages.AngularPage.svgIcon;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
-public class SpinnerTests extends TestsInit {
+public class IconsTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -17,8 +18,14 @@ public class SpinnerTests extends TestsInit {
     }
 
     @Test
-    public void checkBasicSpinnerIsDisplayed() {
-        basicProgressSpinner.show();
-        basicProgressSpinner.isDisplayed();
+    public void checkBasicIconIsDisplayed() {
+        basicIcon.show();
+        basicIcon.isDisplayed();
+    }
+
+    @Test
+    public void checkSVGIconIsDisplayed() {
+        svgIcon.show();
+        svgIcon.isDisplayed();
     }
 }
