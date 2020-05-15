@@ -55,7 +55,7 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
-import javafx.util.Pair;
+import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.PageLoadStrategy;
 
 import java.util.ArrayList;
