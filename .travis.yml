@@ -59,7 +59,6 @@ jobs:
         - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
-    #TODO: bootstrap tests exceeded the maximum time limit for jobs (>50min)
     - stage: test
       name: Run tests - bootstrap
       script:
