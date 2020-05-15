@@ -114,8 +114,8 @@ public class WebSettings {
             getProperties(COMMON.testPropertiesPath);
             TestProperties.getTestsProperties().forEach((k,v)->
                                 {String name = k;
-                                JAction1<String> action1 = v.getKey();
-                                JAction action = v.getValue();
+                                JAction1<String> action1 = v.key;
+                                JAction action = v.value;
                                 fillAction(action1,name);
                                 action.execute();});
 
