@@ -14,8 +14,14 @@ FASTER_FILE_SHARING="true"
 ####################             UTILS
 function getCommentsLastPageIndex(){
     url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
-    curl -I -H "Authorization: token ${GIT_COMMENT_USER}"\
-         -X GET  "${url}" | grep Link: | awk '{print $4}' | egrep -o 'page=[0-9]{1,10}' | awk -F"=" '{print $2}'
+    index="$(curl -I -H "Authorization: token ${GIT_COMMENT_USER}"\
+         -X GET  "${url}" | grep Link: | awk '{print $4}' | egrep -o 'page=[0-9]{1,10}' | awk -F"=" '{print $2}')"
+    reInteger='[0-9]+'
+	  if ! [[ $index =~ $reInteger ]] ;
+	  then
+	    index=1
+	  fi
+    echo ${index}
 }
 
 function collectRelevantComments(){
@@ -46,7 +52,7 @@ function sendComment() {
 
 function archive() {
     directory="$1"
-    archiveName="$(echo ${directory}| awk -F"/" '{print $1}')".tar.gz
+    archiveName="$(echo "${directory}"| awk -F"/" '{print $1}')".tar.gz
     tar -czf "${archiveName}" "${directory}" > /dev/null
     echo "${archiveName}" #return
 }
@@ -85,11 +91,11 @@ function grubAllureResults() {
         for result in $(find jdi*/target/allure-results -maxdepth 1 -type d)
         do
             echo RESULT: ${result}
-            archiveFile="$(archive ${result})"
+            archiveFile="$(archive "${result}")"
             echo ARCHIVE: "${archiveFile}"
             ls -lah *.tar.gz
             uploadedTo="$(uploadFile "${archiveFile}")"
-            echo UPLOAD TO KEY: ${uploadedTo}
+            echo UPLOAD TO KEY: "${uploadedTo}"
             sendComment "$(aboutTransfer "${uploadedTo}")"
         done
     fi
@@ -101,7 +107,7 @@ function uploadFile() {
         urlKey="$(curl --upload-file "${file}" https://transfer.sh/"${file}")"
     else
         response="$(curl -F "file=@${file}" https://file.io/)"
-        url="$(echo ${response} |jq -j '.link')"
+        url="$(echo "${response}" |jq -j '.link')"
         urlKey="$(echo "${url}"| awk -F/ '{print $4}')"
     fi
     echo "${urlKey}" #return
@@ -128,10 +134,10 @@ function downloadAllureResults() {
         echo "Found: ${urlKey}"
         if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
             fileName="$(echo "${urlKey}"| awk -F/ '{print $5}')"
-            tmpResult="$(curl "${urlKey}" --output "${fileName}")"
+            curl "${urlKey}" --output "${fileName}"
         else
             fileName="${urlKey}.tar.gz"
-            tmpResult="$(curl https://file.io/${urlKey} --output ${fileName})"
+            curl https://file.io/"${urlKey}" --output "${fileName}"
         fi
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
@@ -173,8 +179,8 @@ function generateAllureReports() {
 
 function deployToNetlify() {
     directory="$1"
-    result="$(netlify deploy --dir ${directory} --json)"
-    deployUrl="$(echo ${result}r |jq '.deploy_url' |sed 's/"//g')"
+    result="$(netlify deploy --dir "${directory}" --json)"
+    deployUrl="$(echo "${result}"r |jq '.deploy_url' |sed 's/"//g')"
     echo "${deployUrl}"
 }
 
