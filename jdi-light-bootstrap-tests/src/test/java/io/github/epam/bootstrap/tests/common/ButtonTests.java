@@ -1,21 +1,23 @@
 package io.github.epam.bootstrap.tests.common;
 
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static io.github.com.StaticSite.bsPage;
+import static io.github.com.pages.BootstrapPage.disabledButton;
+import static io.github.com.pages.BootstrapPage.doubleButton;
+import static io.github.com.pages.BootstrapPage.redButton;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
+import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
+
 import com.epam.jdi.light.elements.common.Keyboard;
-import com.epam.jdi.light.elements.common.Mouse;
-import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.elements.common.Alerts.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.BootstrapPage.*;
-import static io.github.epam.bootstrap.tests.BaseValidationsUtils.*;
-import static io.github.epam.states.States.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 12.09.2019
@@ -30,8 +32,6 @@ public class ButtonTests implements TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         redButton.show();
-        Mouse.mouseClick(redButton);
-        Timer.sleep(10000);
     }
 
     @Test
