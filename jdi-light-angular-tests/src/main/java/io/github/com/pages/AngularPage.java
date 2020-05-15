@@ -25,6 +25,6 @@ public class AngularPage extends WebPage {
     @XPath("//mat-icon[contains(@aria-label,'home icon')]")
     public static Icon basicIcon;
 
-    @XPath("//mat-icon[contains(@aria-label, 'SVG icon')]")
+    @XPath("//mat-icon[contains(@aria-label,'SVG icon')]")
     public static Icon svgIcon;
 }
