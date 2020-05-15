@@ -14,8 +14,8 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
-import com.epam.jdi.light.elements.common.Keyboard;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -71,7 +71,7 @@ public class ButtonTests implements TestsInit {
     public void rightClickTest() {
         redButton.rightClick();
         validateAlert("Right Click");
-        Keyboard.keyPress("Escape");
+        redButton.core().sendKeys(Keys.ESCAPE);
     }
 
     @Test
