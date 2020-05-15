@@ -1,15 +1,15 @@
 package com.epam.jdi.light.mobile.elements.pageobjects.annotations;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 
 public class WebAnnotationsUtil {
 
     public static By mobileFindByToBy(MobileFindBy locator) {
         if (locator == null) return null;
-        if (((AndroidDriver) WebDriverFactory.getDriver()).getCapabilities().getBrowserName().matches("Chrome|Firefox|Opera")) {
+        if (((AppiumDriver) WebDriverFactory.getDriver()).getCapabilities().getBrowserName().matches("Chrome|Firefox|Opera")) {
             //  web locators
             if (!"".equals(locator.id()))
                 return MobileBy.cssSelector("#" + locator.id());
