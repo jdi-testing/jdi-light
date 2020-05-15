@@ -44,13 +44,12 @@ jobs:
       script:
         - mvn install -DskipTests
 
-    # TODO: #1994
-    #    - stage: test
-    #      name: Run tests - bdd
-    #      script:
-    #        - mvn -ntp install -DskipTests
-    #        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-    #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+    - stage: test
+      name: Run tests - bdd
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
     #TODO: bootstrap tests exceeded the maximum time limit for jobs (>50min)
     #  - stage: test
