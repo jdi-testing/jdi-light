@@ -17,7 +17,7 @@ env:
     - NOPO_TESTS="jdi-bdd-no-po-tests"
     - NOPO_TESTS_PROPERTY="test-examples/jdi-bdd-no-po-tests"
     - BDD_TESTS="jdi-bdd-tests"
-    - BOOTSTRAP_TESTS="jdi-bootstrap-tests"
+    - BOOTSTRAP_TESTS="jdi-light-bootstrap-tests"
     - HTML_TESTS="jdi-light-html-tests"
     - ANGULAR_TESTS="jdi-light-angular-tests"
     - EXAMPLES="jdi-light-examples"
