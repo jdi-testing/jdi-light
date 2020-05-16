@@ -4,7 +4,7 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
-## 1.2.8 (release 05.05.2020)
+## 1.2.9 (release 05.05.2020)
 * Improve bdd steps implementation
 * While test fail Log current page url (if possible) and arguments values in fallen chain
 
