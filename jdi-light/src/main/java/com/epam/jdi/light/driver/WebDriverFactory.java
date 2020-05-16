@@ -160,7 +160,7 @@ public class WebDriverFactory {
     public static void reopenDriver(String driverName) {
         MapArray<String, WebDriver> rDriver = getRunDrivers();
         if (rDriver.has(driverName)) {
-            rDriver.get(driverName).close();
+            closeDriver(rDriver.get(driverName));
             rDriver.removeByKey(driverName);
             setRunDrivers(rDriver);
         }
@@ -176,11 +176,17 @@ public class WebDriverFactory {
     }
 
     public static void close() {
-        for (Pair<String, WebDriver> pair : getRunDrivers())
-            try {
-                pair.value.quit();
-            } catch (Exception ignore) { }
+        for (Pair<String, WebDriver> pair : getRunDrivers()) {
+            closeDriver(pair.value);
+        }
         getRunDrivers().clear();
+    }
+
+    private static void closeDriver(WebDriver driver) {
+        try {
+            driver.close();
+            driver.quit();
+        } catch (Exception ignore) { }
     }
 
     public static void quit() {

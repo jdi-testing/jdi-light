@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static org.jsoup.internal.StringUtil.isBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class MultiSelect extends UIListBase<UISelectAssert<?,?>> implements HasLabel {
     @UI(".caret") UIElement expander;
