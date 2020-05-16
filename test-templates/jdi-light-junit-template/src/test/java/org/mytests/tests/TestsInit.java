@@ -4,9 +4,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.mytests.uiobjects.example.site.SiteJdi;
 
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static org.mytests.uiobjects.example.site.SiteJdi.*;
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 
 public class TestsInit {
     private static boolean initialized = false;
@@ -15,12 +16,12 @@ public class TestsInit {
         if (initialized) return;
         initSite(SiteJdi.class);
         homePage.open();
-        logger.info("Run Tests");
+        getWebSettings().logger.info("Run Tests");
         initialized = true;
     }
 
     @AfterAll
     public static void teardown() {
-        /*killAllSeleniumDrivers();*/
+        killAllSeleniumDrivers();
     }
 }
