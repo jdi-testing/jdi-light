@@ -5,7 +5,7 @@ Feature: Table
     Given I open "Users Page"
     Then the "Users Table" has "4" columns
     And the "Users Table" has "6" rows
-    And the "Users Table" header is:
+    And the "Users Table" has header:
       | Number      |
       | Type        |
       | User        |
@@ -14,13 +14,13 @@ Feature: Table
   Scenario: Preview test
     Given I open "Users Page"
     Then the "Users Table" table preview is:
-      | NumberTypeUserDescription                                     |
-      | 1AdminUserManagerRomanWolverineVip                            |
-      | 2AdminUserManagerSergeyIvanSpiderManVip                       |
-      | 3AdminUserManagerVladzimirPunisherVip                         |
-      | 4AdminUserManagerHelenBennettCaptainAmericasomedescriptionVip |
-      | 5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip      |
-      | 6AdminUserManagerGiovanniRovelliHulksomedescriptionVip        |
+      | Number | Type               | User             | Description                          |
+      | 1      | Admin User Manager | Roman            | Wolverine Vip                        |
+      | 2      | Admin User Manager | Sergey Ivan      | Spider Man Vip                        |
+      | 3      | Admin User Manager | Vladzimir        | Punisher Vip                         |
+      | 4      | Admin User Manager | Helen Bennett    | Captain America some description Vip |
+      | 5      | Admin User Manager | Yoshi Tannamuri  | Cyclope some description Vip         |
+      | 6      | Admin User Manager | Giovanni Rovelli | Hulk some description Vip            |
 
   Scenario: Common matchers test
     Given I open "Users Page"

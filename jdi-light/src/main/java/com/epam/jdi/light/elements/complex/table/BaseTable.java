@@ -666,9 +666,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return cell(getColIndexByName(colName), rowName);
     }
     public static JFunc1<String, String> TRIM_VALUE =
-            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "\\\\n");
+            el -> el.trim().replaceAll("\n", "\\\\n").replaceAll(" +", " ");
     public static JFunc1<String, String> TRIM_PREVIEW =
-            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "");
+            el -> el.trim().replaceAll("\n", " ").replaceAll(" +", " ");
 
     /**
      * Get table preview

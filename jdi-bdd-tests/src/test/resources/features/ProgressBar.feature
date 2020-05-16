@@ -24,7 +24,3 @@ Scenario: label test
   Given I open "Html5 Page" page
   Then the "Progress" label text equals to "File progress"
   And the "Progress" label text contains "progress"
-
-Scenario: base validation test
-  Given I open "Html5 Page" page
-  Then the "Progress" is basically valid

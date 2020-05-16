@@ -1,12 +1,6 @@
 package com.epam.jdi.bdd;
 
-import static com.epam.jdi.bdd.BDDUtils.core;
-import static com.epam.jdi.bdd.BDDUtils.input;
-import static com.epam.jdi.bdd.BDDUtils.isAssert;
-import static com.epam.jdi.bdd.BDDUtils.label;
-import static com.epam.jdi.bdd.BDDUtils.selectedAssert;
-import static com.epam.jdi.bdd.BDDUtils.textAssert;
-import static com.epam.jdi.bdd.BDDUtils.uiAssert;
+import static com.epam.jdi.bdd.BDDUtils.*;
 import static com.epam.jdi.light.common.ElementArea.JS;
 import static com.epam.jdi.light.driver.WebDriverByUtils.byText;
 import static com.epam.jdi.light.elements.composite.WebPage.getTitle;
@@ -16,10 +10,8 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.light.settings.WebSettings.getDomain;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.matchesPattern;
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.complex.ISelector;
@@ -304,12 +296,12 @@ public class JDISteps {
 
     @Then("^the current page url is \"(.*?)\"$")
     public void urlIs(String expectedUrl) {
-        assertEquals(expectedUrl, getUrl());
+        assertThat(expectedUrl, is(getUrl()));
     }
 
     @Then("^the current page title is \"([^\"]*)\"$")
     public void titleIs(String expectedUrl) {
-        assertEquals(expectedUrl, getTitle());
+        assertThat(expectedUrl, is(getTitle()));
     }
     //#endregion
 

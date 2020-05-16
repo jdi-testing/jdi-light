@@ -22,11 +22,6 @@
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
-            <artifactId>cucumber-testng</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>RELEASE</version>
         </dependency>

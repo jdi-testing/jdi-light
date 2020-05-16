@@ -15,7 +15,6 @@
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.1</aspectj.version>
         <allure.maven>2.10.0</allure.maven>
-        <allure.cucumber.jvm>2.12.1</allure.cucumber.jvm>
     </properties>
 
     <dependencies>
@@ -26,13 +25,13 @@
             <version>1.0.10</version>
         </dependency>
         <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber-jvm</artifactId>
-            <version>${allure.cucumber.jvm}</version>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-testng</artifactId>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber-jvm</artifactId>
             <version>RELEASE</version>
         </dependency>
     </dependencies>

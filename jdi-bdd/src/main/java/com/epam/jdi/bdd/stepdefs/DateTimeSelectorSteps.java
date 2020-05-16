@@ -1,11 +1,12 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static org.testng.Assert.assertEquals;
-
 import com.epam.jdi.light.ui.html.elements.common.DateTimeSelector;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -18,12 +19,12 @@ public class DateTimeSelectorSteps {
 
     @Then("^the \"([^\"]*)\" min equals to \"([^\"]*)\"$")
     public void attributeMinEquals(String name, String date) {
-        assertEquals(dateTimeSelector(name).min(), date);
+        dateTimeSelector(name).is().min(date);
     }
 
     @Then("^the \"([^\"]*)\" max equals to \"([^\"]*)\"$")
     public void attributeMaxEquals(String name, String date) {
-        assertEquals(dateTimeSelector(name).max(), date);
+        dateTimeSelector(name).is().max(date);
     }
 
     @When("^(?:I |)set date \"([^\"]*)\" in the \"([^\"]*)\"$")

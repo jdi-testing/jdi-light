@@ -7,6 +7,7 @@ import cucumber.api.java.en.When;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 
@@ -26,7 +27,7 @@ public class RadioSteps {
 
     //#region Then
     @Then("^the \"([^\"]*)\" consists of next values:$")
-    public void theConsistOfNextValues(String name, String[] values) {
+    public void theConsistOfNextValues(String name, List<String> values) {
         radioButtons(name).has().values(values);
     }
 

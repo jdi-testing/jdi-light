@@ -37,7 +37,3 @@ Feature: Link
   Scenario: Link activity validation test
     Given I open "Html5 Page"
     Then the "Github Link" is enabled
-
-  Scenario: Basic link validation test
-    Given I open "Html5 Page"
-    Then the "Github Link" is basically valid
