@@ -1,6 +1,6 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
+import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -9,9 +9,10 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.TextTypes.VALUE;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.tools.LinqUtils.ifSelect;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -19,13 +20,14 @@ import static com.epam.jdi.tools.LinqUtils.*;
  */
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
-public class DataListOptions extends UIListBase<UISelectAssert<?,?>> implements IsCombobox {
+public class DataListOptions extends UIListBase<DropdownAssert> implements IsCombobox {
     @Override
     public WebList list() {
-        return $$("#"+ uiElement.attr("list")+" option")
-            .setup(e->e.noValidation().setName(getName() + "list"))
-            .setUIElementName(VALUE);
+        return $$("#" + uiElement.attr("list") + " option")
+                .setup(e -> e.noValidation().setName(getName() + "list"))
+                .setUIElementName(VALUE);
     }
+
     @Override
     public String getText() {
         return uiElement.attr("value");
@@ -69,20 +71,34 @@ public class DataListOptions extends UIListBase<UISelectAssert<?,?>> implements 
     }
 
     /**
-    *
      * Gets all disabled options
+     *
      * @return List<String>
      **/
-    @JDIAction("Get all '{name}' disabled options") @Override
+    @JDIAction("Get all '{name}' disabled options")
+    @Override
     public List<String> listDisabled() {
         return ifSelect(list(), UIElement::isDisabled, UIElement::getText);
     }
 
-    @JDIAction("Check that '{name}' is enabled") @Override
+    @JDIAction("Check that '{name}' is enabled")
+    @Override
     public boolean isEnabled() {
         return !core().hasAttribute("disabled");
     }
-    @JDIAction("Check that '{name}' is displayed") @Override
-    public boolean isDisplayed() { return core().isDisplayed(); }
 
+    @JDIAction("Check that '{name}' is displayed")
+    @Override
+    public boolean isDisplayed() {
+        return core().isDisplayed();
+    }
+
+    public boolean isExpanded() {
+        throw exception("isExpanded can not be used with this element");
+    }
+
+    @Override
+    public DropdownAssert is() {
+        return new DropdownAssert().set(this);
+    }
 }

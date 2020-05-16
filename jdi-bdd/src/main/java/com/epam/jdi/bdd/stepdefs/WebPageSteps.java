@@ -3,14 +3,23 @@ package com.epam.jdi.bdd.stepdefs;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.hamcrest.Matchers;
-import org.testng.Assert;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.composite.WebPage.isBottomOfThePage;
+import static com.epam.jdi.light.elements.composite.WebPage.isTopOfThePage;
+import static com.epam.jdi.light.elements.composite.WebPage.scrollDown;
+import static com.epam.jdi.light.elements.composite.WebPage.scrollLeft;
+import static com.epam.jdi.light.elements.composite.WebPage.scrollRight;
+import static com.epam.jdi.light.elements.composite.WebPage.scrollToBottom;
+import static com.epam.jdi.light.elements.composite.WebPage.scrollToTop;
+import static com.epam.jdi.light.elements.composite.WebPage.scrollUp;
+import static com.epam.jdi.light.elements.composite.WebPage.zoom;
+import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
 import static com.epam.jdi.tools.JsonUtils.getInt;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThan;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -61,31 +70,31 @@ public class WebPageSteps {
     @Then("^the bottom of the page is reached$")
     public void bottomOfPageReached() {
         boolean execResult = isBottomOfThePage();
-        Assert.assertTrue(execResult);
+        assertThat(execResult, is(true));
     }
 
     @Then("^the top of the page is reached$")
     public void topOfPageReached() {
         boolean execResult = isTopOfThePage();
-        Assert.assertTrue(execResult);
+        assertThat(execResult, is(true));
     }
 
     @Then("^the page scrolled by \"(\\d+)\" px down$")
     public void pageScrolledDown(int y) {
         int execResult = getInt(driverFactory.jsExecute("return window.scrollY;"));
-        assertThat(execResult, Matchers.greaterThan(SCROLLY + y-2));
-        assertThat(execResult, Matchers.lessThan(SCROLLY + y+1));
+        assertThat(execResult, greaterThan(SCROLLY + y - 2));
+        assertThat(execResult, lessThan(SCROLLY + y + 1));
     }
 
     @Then("^the page scrolled by \"(\\d+)\" px right$")
     public void pageScrolledRight(int x) {
         int execResult = getInt(driverFactory.jsExecute("return Math.ceil(window.scrollX);"));
-        assertThat(execResult, Matchers.greaterThan(SCROLLX + x-2));
-        assertThat(execResult, Matchers.lessThan(SCROLLX + x+1));
+        assertThat(execResult, greaterThan(SCROLLX + x - 2));
+        assertThat(execResult, lessThan(SCROLLX + x + 1));
     }
 
     @Then("^the page is zoomed \"(\\d+)\" times$")
     public void pageIsZoomed(double x) {
-        assertEquals(zoomLevel(), x);
+        assertThat(zoomLevel(), is(x));
     }
 }

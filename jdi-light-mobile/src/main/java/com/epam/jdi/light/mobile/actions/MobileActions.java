@@ -2,9 +2,16 @@ package com.epam.jdi.light.mobile.actions;
 
 import com.epam.jdi.light.actions.ActionObject;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 
-import static com.epam.jdi.light.actions.ActionHelper.*;
+import static com.epam.jdi.light.actions.ActionHelper.ACTION_FAILED;
+import static com.epam.jdi.light.actions.ActionHelper.AFTER_JDI_ACTION;
+import static com.epam.jdi.light.actions.ActionHelper.BEFORE_JDI_ACTION;
+import static com.epam.jdi.light.actions.ActionHelper.defaultAction;
+import static com.epam.jdi.light.actions.ActionHelper.failedMethods;
+import static com.epam.jdi.light.actions.ActionHelper.stableAction;
 
 /**
  * Created by Roman Iovlev on 20.03.2019
@@ -16,18 +23,15 @@ public class MobileActions {
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { }
 
-    private final String className = "com.epam.jdi.light.mobile.actions.MobileActions";
     @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) throws Throwable {
-        if (notThisAround(className))
-            return jp.proceed();
-        ActionObject jInfo = new ActionObject(jp, className);
+    public Object jdiAround(ProceedingJoinPoint jp) {
+        ActionObject jInfo = new ActionObject(jp);
         try {
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
-                ? stableAction(jInfo)
-                : defaultAction(jInfo);
+                    ? stableAction(jInfo)
+                    : defaultAction(jInfo);
             return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
             throw ACTION_FAILED.execute(jInfo, ex);

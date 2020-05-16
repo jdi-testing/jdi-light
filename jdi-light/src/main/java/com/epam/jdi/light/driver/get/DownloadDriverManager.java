@@ -3,12 +3,14 @@ package com.epam.jdi.light.driver.get;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;
 import static com.epam.jdi.light.driver.get.DriverVersion.PENULT;
-import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
-import static io.github.bonigarcia.wdm.WebDriverManager.*;
+import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
+import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
+import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
+import static io.github.bonigarcia.wdm.WebDriverManager.iedriver;
+import static io.github.bonigarcia.wdm.WebDriverManager.operadriver;
 
 /**
  * Created by Roman_Iovlev on 11/28/2017.
@@ -25,36 +27,39 @@ class DownloadDriverManager {
             String driverName = driverType.toString();
             switch (driverType) {
                 case CHROME:
-                    wdm = chromedriver(); break;
+                    wdm = chromedriver();
+                    break;
                 case FIREFOX:
-                    wdm = firefoxdriver(); break;
+                    wdm = firefoxdriver();
+                    break;
                 case IE:
-                    wdm = iedriver(); break;
+                    wdm = iedriver();
+                    break;
                 case EDGE:
-                    wdm = edgedriver(); break;
+                    wdm = edgedriver();
+                    break;
                 case OPERA:
-                    wdm = operadriver(); break;
+                    wdm = operadriver();
+                    break;
                 default:
                     throw exception("%s driver not supported for download");
             }
-            if (getOs() == WIN) {
-                switch (platform) {
-                    case X32:
-                        wdm = wdm.arch32();
-                        break;
-                    case X64:
-                        wdm = wdm.arch64();
-                        break;
-                }
-                driverName += " " + platform;
+            switch (platform) {
+                case X32:
+                    wdm = wdm.arch32();
+                    break;
+                case X64:
+                    wdm = wdm.arch64();
+                    break;
             }
+            driverName += " " + platform;
             if (hasVersion(version)) {
-                wdm = wdm.version(version);
+                wdm = wdm.browserVersion(version);
                 driverName += " " + version;
             }
             if (version.equalsIgnoreCase(PENULT.value)) {
                 wdm.setup();
-                wdm.version(getBelowVersion());
+                wdm.browserVersion(getBelowVersion());
             }
             wdm.setup();
             getWebSettings().logger.info("Download driver: '" + driverName + "' successfully");

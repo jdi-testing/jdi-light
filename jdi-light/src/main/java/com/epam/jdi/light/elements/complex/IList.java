@@ -8,10 +8,13 @@ import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MultiMap;
 import com.epam.jdi.tools.pairs.Pair;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

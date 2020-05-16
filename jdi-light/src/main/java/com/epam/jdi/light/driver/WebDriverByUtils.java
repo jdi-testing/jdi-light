@@ -21,7 +21,10 @@ import java.util.regex.Pattern;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
 import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.LinqUtils.selectMany;
+import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
@@ -77,6 +80,7 @@ public final class WebDriverByUtils {
     }
 
     public static String getByLocator(By by) {
+        if (by == null) return null;
         String byAsString = by.toString();
         int index = byAsString.indexOf(": ") + 2;
         return byAsString.substring(index);

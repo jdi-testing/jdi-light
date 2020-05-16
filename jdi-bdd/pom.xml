@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.10</version>
     <name>JDI BDD</name>
 
     <properties>
@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.7</version>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
@@ -27,17 +27,7 @@
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
             <version>RELEASE</version>
         </dependency>
         <dependency>

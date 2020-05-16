@@ -122,19 +122,24 @@ public interface IWebList<T extends ICoreElement> extends IList<T> {
         if (values.length < 2)
             throw exception("Hover and click method should have at list 2 parameters");
         int length = values.length;
-        for (int i=0; i < length-1;i++) {
+        for (int i = 0; i < length - 1; i++) {
             get(values[i]).hover();
         }
-        getByType(get(values[length-1]), IClickable.class).click();
+        getByType(get(values[length - 1]), IClickable.class).click();
+    }
+
+    default String separator() {
+        return ">";
     }
 
     /**
      * Select the items by the values, hover and click on them
+     *
      * @param value
      */
     @JDIAction("Select ({0}) for '{name}'")
     default void hoverAndClick(String value) {
-        String[] split = value.split(">");
+        String[] split = value.split(separator());
         if (split.length == 1)
             select(split[0]);
         else hoverAndClick(split);

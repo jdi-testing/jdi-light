@@ -12,11 +12,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.UIUtils.*;
-import static com.epam.jdi.tools.EnumUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.asEntity;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -86,9 +86,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
                 initClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
                 dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>) types[1];
         } catch (Exception ignore) {
-            //throw exception(ex, "Can't instantiate List<%s, %s> field '%s'", initClass == null
-            //                ? "?" : initClass.getSimpleName(), dataType == null ? "?" : dataType.getSimpleName(),
-            //        field.getName());
+
         }
     }
 }

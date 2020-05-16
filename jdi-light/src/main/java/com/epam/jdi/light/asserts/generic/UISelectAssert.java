@@ -15,7 +15,10 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -91,6 +94,7 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
 
     /**
      * Check that the list size is given size
+     *
      * @param size to compare
      * @return DataListAssert
      */
@@ -98,19 +102,23 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
     public A size(int size) {
         return size(equalTo(size));
     }
-    @JDIAction("Assert that '{name}' size {0}")
+
+    @JDIAction("Assert that '{name}' is empty")
     public A empty() {
         return size(0);
     }
-    @JDIAction("Assert that '{name}' size {0}")
+
+    @JDIAction("Assert that '{name}' is not empty")
     public A notEmpty() {
         return size(greaterThan(0));
     }
+
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {
         jdiAssert(element.isDisplayed() ? "displayed" : "hidden", Matchers.is("displayed"));
         return (A) this;
     }
+
     @JDIAction("Assert that '{name}' is disappeared")
     public A disappear() {
         jdiAssert(element.isHidden() ? "hidden" : "displayed", Matchers.is("hidden"));

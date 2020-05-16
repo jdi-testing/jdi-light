@@ -6,7 +6,12 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.fillByMsgTemplate;
+import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
+import static com.epam.jdi.light.driver.WebDriverByUtils.getByFunc;
+import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
 import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -37,8 +42,14 @@ public class JDILocator {
     private JDIBase element;
     private Object[] args = new Object[]{};
 
-    public By getLocator() { return byLocator; }
-    public List<By> getFrames() { return frames; }
+    public By getLocator() {
+        return byLocator;
+    }
+
+    public List<By> getFrames() {
+        return frames;
+    }
+
     public By getLocator(Object... args) {
         this.args = args;
         if (args.length == 0) return byLocator;
@@ -46,9 +57,11 @@ public class JDILocator {
                 ? fillByTemplate(byLocator, args)
                 : fillByMsgTemplate(byLocator, args);
     }
-    public boolean isEmpty() {
+
+    public boolean isNull() {
         return byLocator == null;
     }
+
     public boolean hasFrame() {
         return frames != null && frames.size() > 0;
     }

@@ -1,6 +1,9 @@
 package com.epam.jdi.light.elements.pageobjects.annotations.locators;
 
-import java.lang.annotation.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -9,9 +12,13 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDropdown {
-    String root() default "";
-    String value() default "";
-    String list() default "";
-    String expand() default "";
-    boolean autoclose() default false;
+    @MarkupLocator String root() default "";
+
+    @MarkupLocator String value() default "";
+
+    @MarkupLocator String list() default "";
+
+    @MarkupLocator String expand() default "";
+
+    boolean autoClose() default false;
 }

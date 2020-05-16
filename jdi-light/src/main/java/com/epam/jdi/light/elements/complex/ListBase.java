@@ -25,6 +25,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.initT;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getByType;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
 import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 import static com.epam.jdi.tools.ReflectionUtils.getValueField;
@@ -280,7 +281,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         if (titleFieldName == null)
             titleFieldName = GET_TITLE_FIELD_NAME.execute(initClass.getFields());
         return titleFieldName == null
-                ? el.getText()
+                ? getJDISettings().ELEMENT.listLabel.execute(el)
                 : getElementTitle(el, titleFieldName);
     }
     protected String getElementTitle(UIElement el, String titleField) {

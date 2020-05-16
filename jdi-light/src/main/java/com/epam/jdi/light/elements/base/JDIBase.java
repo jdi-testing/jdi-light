@@ -1,17 +1,26 @@
 package com.epam.jdi.light.elements.base;
 
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.JDILocator;
+import com.epam.jdi.light.common.SetTextTypes;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.settings.JDISettings;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.*;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JAction2;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -22,11 +31,24 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.SearchStrategies.*;
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.elements.base.OutputTemplates.*;
+import static com.epam.jdi.light.common.OutputTemplates.PRINT_ELEMENT_DEBUG;
+import static com.epam.jdi.light.common.OutputTemplates.PRINT_ELEMENT_INFO;
+import static com.epam.jdi.light.common.OutputTemplates.PRINT_ELEMENT_STEP;
+import static com.epam.jdi.light.common.OutputTemplates.PRINT_ERROR_STEP;
+import static com.epam.jdi.light.common.SearchStrategies.ANY_ELEMENT;
+import static com.epam.jdi.light.common.SearchStrategies.ELEMENT_IN_VIEW;
+import static com.epam.jdi.light.common.SearchStrategies.ENABLED_ELEMENT;
+import static com.epam.jdi.light.common.SearchStrategies.VISIBLE_ELEMENT;
+import static com.epam.jdi.light.common.TextTypes.LABEL;
+import static com.epam.jdi.light.driver.WebDriverByUtils.correctXPaths;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
+import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.logger.LogLevels.ERROR;
+import static com.epam.jdi.light.logger.LogLevels.INFO;
+import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
 import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -36,7 +58,9 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.Default;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -63,6 +87,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
 
     public JDIBase(JDIBase base) {
+        this();
         setCore(base);
     }
     public JDIBase setCore(JDIBase base) {
@@ -86,7 +111,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public JDILocator locator = new JDILocator(this);
     @Override
     public DriverBase setParent(Object parent) {
-        //this.locator.isRoot = false;
         return super.setParent(parent);
     }
     public CacheValue<WebElement> webElement = new CacheValue<>();
@@ -134,15 +158,17 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         webElement.setForce(el);
         return this;
     }
+
     public JDIBase setWebElements(List<WebElement> els) {
         webElements.setForce(els);
         return this;
     }
 
-    public JDIBase setLocator(String locator) {
+    public JDIBase setLocator(@MarkupLocator String locator) {
         return setLocator(defineLocator(locator));
     }
-    public JDIBase setLocator(By locator) {
+
+    public JDIBase setLocator(@MarkupLocator By locator) {
         if (locator != null) {
             if (name.isEmpty())
                 name = shortBy(locator, this);
@@ -150,6 +176,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         }
         return this;
     }
+
     public JDIBase setFrames(List<By> frames) {
         if (name.isEmpty() && frames.size() > 0)
             name = shortBy(frames.get(0));
@@ -199,7 +226,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         WebElement element = get(new Object[]{});
         VALIDATE_FOUND_ELEMENT.execute(this, element);
         return element;
-
     }
     public static JAction2<JDIBase, WebElement> VALIDATE_FOUND_ELEMENT = JDIBase::validateFoundElement;
     private static void validateFoundElement(JDIBase base, WebElement element) {
@@ -239,7 +265,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         WebElement element = purify(webElement.get());
         try {
             element.getTagName();
-            if (locator.isEmpty())
+            if (locator.isNull())
                 return element;
             return purify(getUIElementByLocator(element));
         } catch (Exception ignore) {
@@ -271,8 +297,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         List<WebElement> result = elements;
         for (JFunc1<WebElement, Boolean> rule : searchRules().values())
             result = filter(result, rule::execute);
-        if (result.size() == 0)
-            throw exception(ELEMENTS_FILTERED_MESSAGE, elements.size(), toString(), getTimeout());
+        if (result.size() == 0 && textType == LABEL)
+            return elements;
         return result;
     }
     public WebElement getSmart() {
@@ -298,9 +324,11 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             try {
                 beforeSearch(elements.get(0)).getTagName();
                 return elements;
-            } catch (Exception ignore) { webElements.clear(); }
+            } catch (Exception ignore) {
+                webElements.clear();
+            }
         }
-        if (locator.isEmpty())
+        if (locator.isNull())
             return singletonList(beforeSearch(getSmart()));
         SearchContext searchContext = getContext(parent, locator);
         List<WebElement> result = uiSearch(searchContext, correctLocator(getLocator(args)));
@@ -331,9 +359,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 els -> els.size() >= minAmount);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
-        result = filterElements(result);
-        return result;
+        return filterElements(result);
     }
+
     protected List<WebElement> tryGetList() {
         List<WebElement> elements = getAll();
         if (elements == null)
@@ -390,47 +418,55 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     private JDIBase getBase(Object element) {
         if (isClass(element.getClass(), JDIBase.class))
-            return  (JDIBase) element;
-        else { if (isInterface(element.getClass(), IBaseElement.class))
-            return  ((IBaseElement) element).base(); }
+            return (JDIBase) element;
+        else {
+            if (isInterface(element.getClass(), IBaseElement.class))
+                return ((IBaseElement) element).base();
+        }
         return null;
     }
     private SearchContext getSearchContext(Object parent) {
-        JDIBase bElement = getBase(parent);
-        if (bElement == null)
+        JDIBase base = getBase(parent);
+        if (base == null)
             return getDefaultContext();
-        if (bElement.webElement.hasValue())
-            return bElement.webElement.get();
-        if (bElement.locator.isRoot() && bElement.locator.isEmpty())
+        if (base.webElement.hasValue())
+            return base.webElement.get();
+        if (base.locator.isRoot() && base.locator.isNull())
             return getDefaultContext();
-        List<By> frames = bElement.getFrames();
+        List<By> frames = base.getFrames();
         if (frames != null)
             return getFrameContext(frames);
-        By locator = bElement.getLocator();
-        return locator == null || isBlank(getByLocator(locator))
-                ? getSmartSearchContext(bElement)
-                : getContextByLocator(bElement, locator);
+        By byLocator = base.getLocator();
+        IBaseElement asBaseElement = (IBaseElement) parent;
+        return byLocator == null || isBlank(getByLocator(byLocator))
+                ? getSmartSearchContext(asBaseElement)
+                : getContextByLocator(base, byLocator);
     }
-    private SearchContext getContextByLocator(JDIBase bElement, By locator) {
-        List<WebElement> els = uiSearch(getContext(bElement.parent, bElement.locator), correctLocator(locator));
+
+    private SearchContext getContextByLocator(JDIBase base, By locator) {
+        List<WebElement> els = uiSearch(getContext(base.parent, base.locator), correctLocator(locator));
         return getElement(els);
     }
 
-    private SearchContext getSmartSearchContext(JDIBase bElement) {
+    private SearchContext getSmartSearchContext(IBaseElement bElement) {
         try {
-            WebElement result = getWebSettings().SMART_SEARCH.execute(bElement.waitSec(getTimeout()));
+            WebElement result = getWebSettings().SMART_SEARCH.execute(bElement);
             if (result != null)
                 return result;
-        } catch (Exception ignore) { }
-        return getContext(bElement.parent, bElement.locator);
+        } catch (Exception ignore) {
+        }
+        return getContext(bElement.base().parent, bElement.base().locator);
     }
+
     private boolean isRoot(Object parent) {
         return parent == null || isClass(parent.getClass(), WebPage.class)
-            || !isInterface(parent.getClass(), JDIElement.class);
+                || !isInterface(parent.getClass(), JDIElement.class);
     }
+
     public boolean hasLocator() {
-        return !locator.isEmpty();
+        return !locator.isNull();
     }
+
     private SearchContext getContext(Object parent, JDILocator locator) {
         List<By> frames = getFrames();
         if (frames != null)

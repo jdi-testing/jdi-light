@@ -4,12 +4,21 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.HtmlElementsPage.*;
-import static io.github.epam.html.tests.elements.BaseValidations.*;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static io.github.com.StaticSite.html5Page;
+import static io.github.com.pages.HtmlElementsPage.defaultRange;
+import static io.github.com.pages.HtmlElementsPage.disabledRange;
+import static io.github.com.pages.HtmlElementsPage.fractionalRange;
+import static io.github.com.pages.HtmlElementsPage.minMaxRange;
+import static io.github.com.pages.HtmlElementsPage.volume;
+import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
@@ -32,40 +41,40 @@ public class RangeTests implements TestsInit {
 
     @Test
     public void getValueTest() {
-        assertEquals(disabledRange.value(), 50);
+        assertEquals(disabledRange.value(), 50.0);
     }
     @Test
     public void minTest() {
-        assertEquals(volume.min(), 10);
-        assertEquals(defaultRange.min(), 0);
-        assertEquals(minMaxRange.min(), 1);
-        assertEquals(fractionalRange.min(), 2);
+        assertEquals(volume.min(), 10.0);
+        assertEquals(defaultRange.min(), 0.0);
+        assertEquals(minMaxRange.min(), 1.0);
+        assertEquals(fractionalRange.min(), 2.0);
     }
     @Test
     public void maxTest() {
-        assertEquals(volume.max(), 100);
-        assertEquals(defaultRange.max(), 100);
-        assertEquals(minMaxRange.max(), 10);
-        assertEquals(fractionalRange.max(), 7);
+        assertEquals(volume.max(), 100.0);
+        assertEquals(defaultRange.max(), 100.0);
+        assertEquals(minMaxRange.max(), 10.0);
+        assertEquals(fractionalRange.max(), 7.0);
     }
     @Test
     public void stepTest() {
-        assertEquals(volume.step(), 5);
-        assertEquals(defaultRange.step(), 1);
-        assertEquals(minMaxRange.step(), 2);
+        assertEquals(volume.step(), 5.0);
+        assertEquals(defaultRange.step(), 1.0);
+        assertEquals(minMaxRange.step(), 2.0);
         assertEquals(fractionalRange.step(), 0.5);
     }
 
     @Test
     public void setupValueTest() {
         volume.setupValue(10);
-        assertEquals(volume.value(), 10);
+        assertEquals(volume.value(), 10.0);
 
         defaultRange.setupValue(65);
-        assertEquals(defaultRange.value(), 65);
+        assertEquals(defaultRange.value(), 65.0);
 
         minMaxRange.setupValue(3);
-        assertEquals(minMaxRange.value(), 3);
+        assertEquals(minMaxRange.value(), 3.0);
 
         fractionalRange.setupValue(3.5);
         assertEquals(fractionalRange.value(), 3.5);

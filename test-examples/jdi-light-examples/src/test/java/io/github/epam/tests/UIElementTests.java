@@ -4,7 +4,8 @@ import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.ElementArea;
 import io.github.com.pages.UIElementContactFormPage;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,11 +13,39 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static io.github.com.pages.UIElementContactFormPage.*;
-import static io.github.epam.EpamGithubSite.*;
-import static io.github.epam.tests.epam.steps.Preconditions.*;
-import static org.testng.Assert.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static io.github.com.pages.UIElementContactFormPage.description;
+import static io.github.com.pages.UIElementContactFormPage.descriptionSetTextAs;
+import static io.github.com.pages.UIElementContactFormPage.descriptionWaitTimeout;
+import static io.github.com.pages.UIElementContactFormPage.findBy;
+import static io.github.com.pages.UIElementContactFormPage.findByNull;
+import static io.github.com.pages.UIElementContactFormPage.forCalculateOne;
+import static io.github.com.pages.UIElementContactFormPage.forCalculateThree;
+import static io.github.com.pages.UIElementContactFormPage.getTitle;
+import static io.github.com.pages.UIElementContactFormPage.result;
+import static io.github.com.pages.UIElementContactFormPage.sClass;
+import static io.github.com.pages.UIElementContactFormPage.sId;
+import static io.github.com.pages.UIElementContactFormPage.sText;
+import static io.github.com.pages.UIElementContactFormPage.smart;
+import static io.github.com.pages.UIElementContactFormPage.smartId;
+import static io.github.com.pages.UIElementContactFormPage.smartLocator;
+import static io.github.com.pages.UIElementContactFormPage.submit;
+import static io.github.com.pages.UIElementContactFormPage.submitClickArea;
+import static io.github.com.pages.UIElementContactFormPage.submitGetShowInView;
+import static io.github.com.pages.UIElementContactFormPage.submitNotDisplayed;
+import static io.github.com.pages.UIElementContactFormPage.submitNotDisplayedNoWait;
+import static io.github.com.pages.UIElementContactFormPage.submitPage;
+import static io.github.com.pages.UIElementContactFormPage.sum;
+import static io.github.com.pages.UIElementContactFormPage.sumGet;
+import static io.github.com.pages.UIElementContactFormPage.sumGetTextAs;
+import static io.github.com.pages.UIElementContactFormPage.uiNull;
+import static io.github.com.pages.UIElementContactFormPage.visualCheck;
+import static io.github.epam.EpamGithubSite.contactFormPage;
+import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class UIElementTests extends TestsInit {
 
@@ -63,46 +92,58 @@ public class UIElementTests extends TestsInit {
     public void isDisplayed(){
         assertTrue(submit.isDisplayed());
     }
+
     @Test
-    public void isHidden(){
+    public void isHidden() {
         assertTrue(submitNotDisplayed.isHidden());
-    }
-    @Test
-    public void cantFindBySmartLocator(){
-        assertTrue(smartLocator.isHidden());
     }
 
     @Test
-    public void getLocation(){
-        assertEquals(submit.getLocation(), new Point(1042, 477));
+    public void cantFindBySmartLocator() {
+        assertTrue(smartLocator.isHidden());
     }
-    @Test
-    public void getSize(){
-        assertEquals(submit.getSize(), new Dimension(82, 34));
+
+    private WebElement getSeleniumElement() {
+        return getWebDriverFactory().getDriver().findElement(By.xpath("//*[.='Submit']"));
     }
+
     @Test
-    public void getRect(){
-        assertEquals(submit.getRect(), new Rectangle(1042, 477, 34, 82));
+    public void getLocation() {
+        assertEquals(submit.getLocation(), getSeleniumElement().getLocation());
     }
+
     @Test
-    public void jsExecute(){
+    public void getSize() {
+        assertEquals(submit.getSize(), getSeleniumElement().getSize());
+    }
+
+    @Test
+    public void getRect() {
+        assertEquals(submit.getRect(), getSeleniumElement().getRect());
+    }
+
+    @Test
+    public void jsExecute() {
         submit.jsExecute("click()");
         assertEquals(sum.getText(), "Summary: 3");
     }
+
     @Test
-    public void input(){
+    public void input() {
         description.input("Hello world!");
         assertEquals(description.getText(), "Hello world!");
         description.clear();
     }
+
     @Test
-    public void setTextGetText(){
+    public void setTextGetText() {
         description.setText("Hello world!");
         assertEquals(description.getText(), "Hello world!");
         description.clear();
     }
+
     @Test
-    public void clickPoint(){
+    public void clickPoint() {
         submit.click(10, 10);
         assertEquals(sum.getText(), "Summary: 3");
     }
@@ -272,11 +313,11 @@ public class UIElementTests extends TestsInit {
     }
     @Test
     public void pageName(){
-        assertEquals(submitPage.getPage().getTitle(), metalAndColorsPage.getTitle());
+        assertEquals(submitPage.getPage().getTitle(), getTitle());
     }
     @Test
     public void sId(){
-        assertEquals(sId.getLocator().toString(), "By.cssSelector: #sid");
+        assertEquals(sId.getLocator().toString(), "By.cssSelector: #s-id");
     }
     @Test
     public void sText(){
@@ -292,7 +333,7 @@ public class UIElementTests extends TestsInit {
     }
     @Test
     public void sClass(){
-        assertEquals(sClass.getLocator().toString(), "By.cssSelector: .sclass");
+        assertEquals(sClass.getLocator().toString(), "By.cssSelector: .s-class");
     }
     @Test
     public void findBy(){

@@ -10,7 +10,11 @@ import static com.epam.jdi.light.common.FormFilters.ALL;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
 import static io.github.com.StaticSite.contactFormPage;
-import static io.github.com.entities.Users.*;
+import static io.github.com.entities.Users.ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT;
+import static io.github.com.entities.Users.DEFAULT_CONTACT;
+import static io.github.com.entities.Users.LOWER_CASE_NAME_CONTACT;
+import static io.github.com.entities.Users.ONLY_NAME_FILLED_DEFAULT_CONTACT;
+import static io.github.com.entities.Users.UPPER_CASE_NAME_CONTACT;
 import static io.github.com.pages.ContactFormPage.main;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -29,6 +33,7 @@ public class FormContactsTests implements TestsInit {
 
     @Test
     public void fillContactFormTest() {
+        main.contactForm.description.getText();
         main.contactForm.fill(DEFAULT_CONTACT);
         main.contactForm.check(DEFAULT_CONTACT);
     }

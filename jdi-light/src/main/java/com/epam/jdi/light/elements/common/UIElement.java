@@ -8,16 +8,27 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.base.HasCheck;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matchers;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -29,9 +40,15 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.common.ElementArea.*;
+import static com.epam.jdi.light.common.ElementArea.BOTTOM_LEFT;
+import static com.epam.jdi.light.common.ElementArea.BOTTOM_RIGHT;
+import static com.epam.jdi.light.common.ElementArea.CENTER;
+import static com.epam.jdi.light.common.ElementArea.TOP_LEFT;
+import static com.epam.jdi.light.common.ElementArea.TOP_RIGHT;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.common.TextTypes.INNER;
+import static com.epam.jdi.light.common.TextTypes.TEXT;
+import static com.epam.jdi.light.common.TextTypes.VALUE;
 import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
 import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -60,14 +77,27 @@ public class UIElement extends JDIBase
         implements WebElement, SetValue, HasAssert<IsAssert>,
         HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck, CanBeSelected {
     private final WebSettings webSettings = getWebSettings();
+
     //region Constructors
-    public UIElement() { }
-    public UIElement(WebElement el) { setWebElement(el); }
-    public UIElement(List<WebElement> els) { setWebElements(els); }
-    public UIElement(By locator) { setLocator(locator); }
+    public UIElement() {
+    }
+
+    public UIElement(WebElement el) {
+        setWebElement(el);
+    }
+
+    public UIElement(List<WebElement> els) {
+        setWebElements(els);
+    }
+
+    public UIElement(@MarkupLocator By locator) {
+        setLocator(locator);
+    }
+
     public UIElement(JDIBase base) {
         super(base);
     }
+
     public UIElement(JDIBase base, String locator, String name, Object parent) {
         super(base);
         setLocator(locator);
@@ -236,11 +266,18 @@ public class UIElement extends JDIBase
     }
 
     @JDIAction(level = DEBUG)
-    public WebElement findElement(By locator) { return $(locator, this).getWebElement(); }
-    @JDIAction(level = DEBUG)
-    public List<WebElement> findElements(By locator) { return $(locator, this).getWebElements(); }
+    public WebElement findElement(@MarkupLocator By locator) {
+        return $(locator, this).getWebElement();
+    }
 
-    /** Get screen screen shot */
+    @JDIAction(level = DEBUG)
+    public List<WebElement> findElements(@MarkupLocator By locator) {
+        return $(locator, this).getWebElements();
+    }
+
+    /**
+     * Get screen screen shot
+     */
     @JDIAction(level = DEBUG)
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
         return getWebElement().getScreenshotAs(outputType);
@@ -248,6 +285,7 @@ public class UIElement extends JDIBase
     //endregion
 
     //region Extended functions
+
     /**
      * Execute Java Script call
      * @param jsCode
@@ -692,39 +730,70 @@ public class UIElement extends JDIBase
             label.waitSec(0);
             try {
                 text = label.getText();
-            } catch (Throwable ignore) { }
+            } catch (Throwable ignore) {
+            }
         }
         return isNotBlank(text) ? text : ui.text(VALUE);
     };
-    public UIElement find(String by) {
+
+    public UIElement find(@MarkupLocator String by) {
         return $(by, this);
     }
-    public UIElement findFirst(String by) {
+
+    public UIElement findFirst(@MarkupLocator String by) {
         UIElement element = $(by, this);
         element.strictSearch(false);
         return element;
     }
-    public UIElement find(By by) {
+
+    public UIElement find(@MarkupLocator By by) {
         return $(by, this);
     }
-    public WebList finds(String by) {
+
+    public WebList finds(@MarkupLocator String by) {
         return $$(by, this);
     }
-    public WebList finds(By by) {
+
+    public WebList finds(@MarkupLocator By by) {
         return $$(by, this);
     }
-    public UIElement firstChild() { return find("*"); }
-    public WebList children() { return finds("*"); }
+
+    public UIElement firstChild() {
+        return find("*");
+    }
+
+    public WebList children() {
+        return finds("*");
+    }
     //endregion
 
     //region Aliases
-    /** getAllAttributes alias */
-    public MapArray<String, String> attrs() { return getAllAttributes(); }
-    /** getAttribute alias */
-    public String attr(String value) { return getAttribute(value); }
-    /** getText alias */ @Override
-    public String text() { return text(textType); }
-    /** getCssValue alias */
+
+    /**
+     * getAllAttributes alias
+     */
+    public MapArray<String, String> attrs() {
+        return getAllAttributes();
+    }
+
+    /**
+     * getAttribute alias
+     */
+    public String attr(String value) {
+        return getAttribute(value);
+    }
+
+    /**
+     * getText alias
+     */
+    @Override
+    public String text() {
+        return text(textType);
+    }
+
+    /**
+     * getCssValue alias
+     */
     public String css(String prop) {
         return getCssValue(prop);
     }
@@ -734,6 +803,7 @@ public class UIElement extends JDIBase
     public void setValue(String value) {
         input(value);
     }
+
     public String getValue() {
         return getText();
     }

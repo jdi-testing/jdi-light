@@ -5,14 +5,17 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.Header.*;
-import static io.github.com.pages.SearchPage.*;
-import static io.github.epam.tests.recommended.steps.Preconditions.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.pages.Header.search;
+import static io.github.com.pages.SearchPage.jsearchTitle;
+import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.not;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.
@@ -35,15 +38,15 @@ public class WaitJListTests extends StaticTestsInit {
     }
     @Test
     public void emptyTest() {
-        TIMEOUTS.element.setUp(2);
+        getJDISettings().TIMEOUTS.element.setUp(2);
         try {
             jsearchTitle.is().empty();
             Assert.fail("List should not be empty");
         } catch (Throwable ignored) { }
         finally {
-            TIMEOUTS.element.drop();
+            getJDISettings().TIMEOUTS.element.drop();
         }
-        logger.info("Done");
+        getWebSettings().logger.info("Done");
     }
     @Test
     public void sizeTest() {

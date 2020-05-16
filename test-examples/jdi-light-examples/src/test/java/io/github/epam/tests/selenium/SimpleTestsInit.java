@@ -4,16 +4,16 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import selenium.site.SiteJdi;
 
-import static com.epam.jdi.light.driver.WebDriverUtils.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 
 public interface SimpleTestsInit {
 
     @BeforeSuite(alwaysRun = true)
     static void setUp() {
         initElements(SiteJdi.class);
-        logger.info("Run Tests");
+        getWebSettings().logger.info("Run Tests");
     }
 
 

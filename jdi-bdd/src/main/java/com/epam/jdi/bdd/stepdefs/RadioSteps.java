@@ -6,10 +6,9 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
-import static org.testng.Assert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -27,8 +26,8 @@ public class RadioSteps {
 
     //#region Then
     @Then("^the \"([^\"]*)\" consists of next values:$")
-    public void theConsistOfNextValues(String name, List<String> values) {
-        assertEquals(radioButtons(name).values(), values);
+    public void theConsistOfNextValues(String name, String[] values) {
+        radioButtons(name).has().values(values);
     }
 
     @Then("^the \"([^\"]*)\" contains \"([^\"]*)\" radio button$")

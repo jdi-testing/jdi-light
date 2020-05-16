@@ -2,22 +2,31 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>jdi-2</artifactId>
-        <groupId>com.epam.jdi</groupId>
-        <version>1.1.16</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jdi-light-angular</artifactId>
-
+    <name>JDI Angular</name>
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light</artifactId>
+            <version>1.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.7</version>
         </dependency>
     </dependencies>
+    <groupId>com.epam.jdi</groupId>
+
+    <properties>
+        <aspectj.version>1.9.1</aspectj.version>
+        <aspectj.maven>1.11</aspectj.maven>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <version>1.2.7</version>
 
     <build>
         <plugins>
@@ -31,9 +40,12 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+                <!--                <groupId>org.codehaus.mojo</groupId>-->
+                <!--                <artifactId>aspectj-maven-plugin</artifactId>-->
+                <!--                <version>${aspectj.maven}</version>-->
+                <groupId>com.nickwongdev</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>${aspectj.maven}</version>
+                <version>1.12.6</version>
                 <configuration>
                     <showWeaveInfo>true</showWeaveInfo>
                     <source>${java.version}</source>
@@ -77,6 +89,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

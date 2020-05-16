@@ -12,13 +12,16 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.tools.EnumUtils.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static java.util.Arrays.*;
-import static org.jsoup.helper.StringUtil.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.tools.EnumUtils.getEnumValues;
+import static com.epam.jdi.tools.LinqUtils.ifSelect;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.toList;
+import static java.util.Arrays.asList;
+import static org.jsoup.internal.StringUtil.isBlank;
 
 public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
         implements ICoreElement, HasLabel {

@@ -24,19 +24,26 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static com.epam.jdi.light.common.CheckTypes.*;
+import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
+import static com.epam.jdi.light.common.CheckTypes.EQUALS;
+import static com.epam.jdi.light.common.CheckTypes.MATCH;
+import static com.epam.jdi.light.common.CheckTypes.NONE;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.OutputTemplates.PRINT_PAGE_DEBUG;
+import static com.epam.jdi.light.common.OutputTemplates.PRINT_PAGE_INFO;
+import static com.epam.jdi.light.common.OutputTemplates.PRINT_PAGE_STEP;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
 import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
-import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.checkNewWindowIsOpened;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
-import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.logger.LogLevels.INFO;
+import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
 import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 import static com.epam.jdi.tools.JsonUtils.getDouble;
@@ -44,7 +51,11 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.Default;
+import static com.epam.jdi.tools.switcher.SwitchActions.Else;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
+import static com.epam.jdi.tools.switcher.SwitchActions.Value;
 import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -59,6 +70,7 @@ public class WebPage extends DriverBase implements PageObject {
     private static final WebDriver webDriver = driverFactory.getDriver();
     private static final JDISettings jdiSettings = getJDISettings();
     private static final WebSettings webSettings = getWebSettings();
+
     public String url = "";
     public String title = "";
 
@@ -66,11 +78,14 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = NONE;
 
-    private static final Safe<String> currentPage = new Safe<>("Undefined Page");
+    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
 
     public <T> Form<T> asForm() {
-        return new Form<>().setPageObject(this).setup(Form.class, e -> e.setName(getName() + " Form").setParent(this));
+        return new Form<>().setPageObject(this)
+                .setup(Form.class, e -> e.setName(getName() + " Form").setParent(this));
     }
+
+    private static final Safe<String> currentPage = new Safe<>("Undefined Page");
 
     public static String getCurrentPage() {
         return currentPage.get();
@@ -102,7 +117,9 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public static void openSite(Class<?> site) {
         initSite(site);
-        openSite();
+        WebPage page = new WebPage(webSettings.getDomain());
+        page.setName(site.getSimpleName());
+        page.open();
     }
     /**
      * Get Web page URL
@@ -163,7 +180,7 @@ public class WebPage extends DriverBase implements PageObject {
      * Opens url specified for page
      * @param url
      */
-    @JDIAction("Open '{name}'(url={0})")
+    @JDIAction(value = "Open '{name}'(url={0})", timeout = 0)
     private void open(String url) {
         webSettings.init();
         CacheValue.reset();
@@ -474,14 +491,18 @@ public class WebPage extends DriverBase implements PageObject {
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
+
     public static void beforeNewPage(WebPage page) {
         if (webSettings.VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
             visualWindowCheck();
         webSettings.logger.toLog("Page '" + page.getName() + "' opened");
         jdiSettings.TIMEOUTS.element.set(jdiSettings.TIMEOUTS.page.get());
     }
+
     public static void beforeThisPage(WebPage page) {
-        if (jdiSettings.PAGE.checkPageOpen != PageChecks.NONE)
+        if (jdiSettings.PAGE.checkPageOpen != PageChecks.NONE) {
             page.checkOpened();
+        }
     }
 }
+

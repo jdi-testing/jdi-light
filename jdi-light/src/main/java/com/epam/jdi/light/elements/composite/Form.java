@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.FormFilters.*;
+import static com.epam.jdi.light.common.FormFilters.ALL;
+import static com.epam.jdi.light.common.FormFilters.MANDATORY;
+import static com.epam.jdi.light.common.FormFilters.OPTIONAL;
 import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
@@ -27,7 +29,10 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.getFields;
+import static com.epam.jdi.tools.ReflectionUtils.getFieldsInterfaceOf;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
@@ -57,14 +62,25 @@ public class Form<T> extends Section {
     }
 
     private FormFilters filter = ALL;
+
     public FormFilters getFilter() {
         return filter;
     }
+
     public void setFilterAll() {
         filter = ALL;
     }
+
     public void setFilter(FormFilters filter) {
         this.filter = filter;
+    }
+
+    private String elementLocator(UIElement element) {
+        try {
+            return element.locator.toString();
+        } catch (Exception ex) {
+            return "Failed get locator";
+        }
     }
 
     /**
@@ -75,24 +91,29 @@ public class Form<T> extends Section {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
-                UIElement element = new UIElement().setup(e->e
-                    .setName(pair.key)
-                    .setParent(this));
-                fillAction(null, element, pageObject, pair.value);
+                UIElement element = new UIElement();
+                try {
+                    element = new UIElement().setup(e -> e
+                            .setName(pair.key)
+                            .setParent(this));
+                    fillAction(null, element, pageObject, pair.value);
+                } catch (Exception ex) {
+                    throw exception(ex, "Failed to fill element '%s' (locator: %s) with value '%s'", pair.key, elementLocator(element), pair.value);
+                }
             }
             return;
         }
-        Field setField = null;
-        for (Pair<String, String> pair : map)
+        for (Pair<String, String> pair : map) {
+            Field setField = null;
             try {
                 setField = first(allFields, f -> namesEqual(pair.key, getElementName(f)));
                 if (setField == null)
                     continue;
                 fillAction(setField, getValueField(setField, pageObject), pageObject, pair.value);
             } catch (Exception ex) {
-                throw exception(ex, "Can't fill element '%s'",
-                    setField != null ? setField.getName() : "UNKNOWN FIELD");
+                throw exception(ex, "Can't fill element '%s' with value '%s'", pair.key, pair.value);
             }
+        }
         setFilterAll();
     }
     private Object pageObject = this;
@@ -393,7 +414,7 @@ public class Form<T> extends Section {
         try {
             if (core().isDisplayed())
                 return true;
-            if (base().locator.isEmpty()) {
+            if (base().locator.isNull()) {
                 List<Field> fields = getFieldsInterfaceOf(pageObject, HasValue.class);
                 if (fields.isEmpty())
                     return false;

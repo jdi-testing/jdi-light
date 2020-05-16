@@ -5,21 +5,26 @@ package org.mytests.tests.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import org.testng.*;
+import com.epam.jdi.light.settings.WebSettings;
+import org.testng.IInvokedMethod;
+import org.testng.IInvokedMethodListener;
+import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 
 public class TestNGListener implements IInvokedMethodListener {
+    private final WebSettings webSettings = getWebSettings();
+
     @Override
     public void beforeInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
         if (iInvokedMethod.isTestMethod()) {
             Method testMethod = iInvokedMethod.getTestMethod().getConstructorOrMethod().getMethod();
             if (testMethod.isAnnotationPresent(Test.class)) {
-                TEST_NAME.set(iTestResult.getInstanceName()+"."+testMethod.getName());
-                logger.step("== Test '%s' START ==", TEST_NAME.get());
+                webSettings.TEST_NAME.set(iTestResult.getInstanceName() + "." + testMethod.getName());
+                webSettings.logger.step("== Test '%s' START ==", webSettings.TEST_NAME.get());
             }
         }
     }
@@ -27,8 +32,8 @@ public class TestNGListener implements IInvokedMethodListener {
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult result) {
         if (method.isTestMethod()) {
-            logger.step("=== Test '%s' %s ===", TEST_NAME.get(), getTestResult(result));
-            logger.step("");
+            webSettings.logger.step("=== Test '%s' %s ===", webSettings.TEST_NAME.get(), getTestResult(result));
+            webSettings.logger.step("");
         }
     }
 

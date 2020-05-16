@@ -35,21 +35,33 @@ import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
 import static com.epam.jdi.light.common.PageChecks.parse;
-import static com.epam.jdi.light.common.SearchStrategies.*;
+import static com.epam.jdi.light.common.SearchStrategies.inView;
+import static com.epam.jdi.light.common.SearchStrategies.noValidation;
+import static com.epam.jdi.light.common.SearchStrategies.onlyVisible;
+import static com.epam.jdi.light.common.SearchStrategies.visibleEnabled;
 import static com.epam.jdi.light.common.SetTextTypes.SET_TEXT;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
-import static com.epam.jdi.light.common.UseSmartSearch.*;
+import static com.epam.jdi.light.common.UseSmartSearch.ALWAYS;
+import static com.epam.jdi.light.common.UseSmartSearch.FALSE;
+import static com.epam.jdi.light.common.UseSmartSearch.ONLY_UI;
+import static com.epam.jdi.light.common.UseSmartSearch.UI_AND_ELEMENTS;
 import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
 import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
-import static com.epam.jdi.light.driver.get.RemoteDriver.*;
+import static com.epam.jdi.light.driver.get.RemoteDriver.browserstack;
+import static com.epam.jdi.light.driver.get.RemoteDriver.sauceLabs;
+import static com.epam.jdi.light.driver.get.RemoteDriver.seleniumLocalhost;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
-import static com.epam.jdi.light.logger.Strategy.*;
+import static com.epam.jdi.light.logger.Strategy.FAIL;
+import static com.epam.jdi.light.logger.Strategy.addStrategy;
+import static com.epam.jdi.light.logger.Strategy.parseStrategy;
 import static com.epam.jdi.light.settings.CommonSettings.getCommonSettings;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
-import static com.epam.jdi.light.settings.Strategies.*;
+import static com.epam.jdi.light.settings.Strategies.JDI;
+import static com.epam.jdi.light.settings.Strategies.JDI_STABLE;
+import static com.epam.jdi.light.settings.Strategies.SELENIUM;
 import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -64,7 +76,8 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.openqa.selenium.PageLoadStrategy.*;
+import static org.openqa.selenium.PageLoadStrategy.EAGER;
+import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -72,7 +85,7 @@ import static org.openqa.selenium.PageLoadStrategy.*;
  */
 public class WebSettings {
     private static WebSettings webSettings;
-    private final JDISettings jdiSettings = getJDISettings();
+    private static final JDISettings jdiSettings = getJDISettings();
 
     public ILogger logger;
     public VisualCheckAction VISUAL_ACTION_STRATEGY;
@@ -85,22 +98,33 @@ public class WebSettings {
 
     public boolean initialized;
 
-    public JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
-        if (getJDISettings().ELEMENT.useSmartSearch == FALSE ||
-                getJDISettings().ELEMENT.useSmartSearch == ONLY_UI && el.base().locator == null ||
-                getJDISettings().ELEMENT.useSmartSearch == UI_AND_ELEMENTS && el.base().locator == null && isInterface(el.getClass(), PageObject.class))
-            return null;
-        String locatorName = getJDISettings().ELEMENT.smartName.value.execute(el.getName());
+    public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
+        switch (jdiSettings.ELEMENT.useSmartSearch) {
+            case FALSE:
+                return null;
+            case ONLY_UI:
+                if (el.base().locator.isNull())
+                    return null;
+                break;
+            case UI_AND_ELEMENTS:
+                if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
+                    return null;
+                break;
+        }
+        String locatorName = jdiSettings.ELEMENT.smartName.value.execute(el.getName());
         return el.base().timer().getResult(() -> {
-            String locator = format(getJDISettings().ELEMENT.smartTemplate, locatorName);
-            UIElement ui = (getJDISettings().ELEMENT.smartTemplate.equals("#%s")
+            String locator = format(jdiSettings.ELEMENT.smartTemplate, locatorName);
+            UIElement ui = (jdiSettings.ELEMENT.smartTemplate.equals("#%s")
                     ? $(locator)
                     : $(locator, el.base().parent))
                     .setup(e -> e.setName(el.getName()).noWait());
             try {
                 return ui.getWebElement();
             } catch (Exception ignore) {
-                throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), getWebSettings().printSmartLocators(el));
+                throw exception("Element '%s' has no locator and Smart Search failed (%s). " +
+                                "Please add locator to element or be sure that element can be found using Smart Search",
+                        el.getName(),
+                        getWebSettings().printSmartLocators(el));
             }
         });
     };
@@ -157,29 +181,33 @@ public class WebSettings {
         }
     }
 
+
     public synchronized void init() {
         if (initialized) return;
         try {
             getProperties(getCommonSettings().testPropertiesPath);
             fillAction(p -> getCommonSettings().strategy = getStrategy(p), "strategy");
             getCommonSettings().strategy.action.execute();
-            fillAction(p -> getJDISettings().TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
-            fillAction(p -> getJDISettings().TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
+            fillAction(p -> jdiSettings.TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
+            fillAction(p -> jdiSettings.TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(getWebSettings()::setDomain, "domain");
-            if (getJDISettings().DRIVER.name.equals(DEFAULT_DRIVER))
-                fillAction(p -> getJDISettings().DRIVER.name = p, "driver");
-            fillAction(p -> getJDISettings().DRIVER.version = p, "driver.version");
-            fillAction(p -> getJDISettings().DRIVER.path = p, "drivers.folder");
-            fillAction(p -> getJDISettings().SCREEN.path = p, "screens.folder");
-            addStrategy(FAIL, getJDISettings().LOGS.screenStrategy);
-            fillAction(p -> getJDISettings().LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
-            fillAction(p -> getJDISettings().LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
-            fillAction(p -> getJDISettings().LOGS.requestsStrategy = getLoggerStrategy(p), "requests.strategy");
+            if (jdiSettings.DRIVER.name.equals(DEFAULT_DRIVER)) {
+                fillAction(p -> jdiSettings.DRIVER.name = p, "driver");
+            }
+            fillAction(p -> jdiSettings.DRIVER.version = p, "driver.version");
+            fillAction(p -> jdiSettings.DRIVER.path = p, "drivers.folder");
+            fillAction(p -> jdiSettings.SCREEN.path = p, "screens.folder");
+            fillAction(p -> jdiSettings.ELEMENT.startIndex = parseInt(p), "list.start.index");
+            addStrategy(FAIL, jdiSettings.LOGS.screenStrategy);
+            fillAction(p -> jdiSettings.LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
+            fillAction(p -> jdiSettings.LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
+            fillAction(p -> jdiSettings.LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
+            fillAction(p -> jdiSettings.LOGS.requestsStrategy = getLoggerStrategy(p), "requests.strategy");
             fillAction(p -> getCommonSettings().killBrowser = p, "browser.kill");
             fillAction(getWebSettings()::setSearchStrategy, "element.search.strategy");
-            fillAction(p -> getJDISettings().DRIVER.screenSize.read(p), "browser.size");
-            fillAction(p -> getJDISettings().DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
-            fillAction(p -> getJDISettings().PAGE.checkPageOpen = parse(p), "page.check.after.open");
+            fillAction(p -> jdiSettings.DRIVER.screenSize.read(p), "browser.size");
+            fillAction(p -> jdiSettings.DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
+            fillAction(p -> jdiSettings.PAGE.checkPageOpen = parse(p), "page.check.after.open");
             fillAction(SoftAssert::setAssertType, "assert.type");
             fillAction(p -> getJDISettings().ELEMENT.clickType = getClickType(p), "click.type");
             fillAction(p -> getJDISettings().ELEMENT.getTextType = getTextType(p), "text.type");
@@ -328,7 +356,7 @@ public class WebSettings {
             case "normal":
                 return NORMAL;
             case "none":
-                return NONE;
+                return PageLoadStrategy.NONE;
             case "eager":
                 return EAGER;
         }
@@ -364,7 +392,24 @@ public class WebSettings {
         return properties;
     }
 
-    private List<com.epam.jdi.light.logger.Strategy> getLoggerStrategy(String strategy) {
+    private static LogInfoDetails getInfoDetailsLevel(String option) {
+        switch (option.toLowerCase()) {
+            case "none":
+                return LogInfoDetails.NONE;
+            case "name":
+                return LogInfoDetails.NAME;
+            case "locator":
+                return LogInfoDetails.LOCATOR;
+            case "context":
+                return LogInfoDetails.CONTEXT;
+            case "element":
+                return LogInfoDetails.ELEMENT;
+            default:
+                return LogInfoDetails.ELEMENT;
+        }
+    }
+
+    private static List<com.epam.jdi.light.logger.Strategy> getLoggerStrategy(String strategy) {
         if (isBlank(strategy)) {
             return new ArrayList<>();
         }

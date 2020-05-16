@@ -18,13 +18,20 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.DriverVersion.LATEST;
+import static com.epam.jdi.light.driver.get.OsTypes.WIN;
+import static com.epam.jdi.light.driver.get.Platform.X32;
+import static com.epam.jdi.light.driver.get.Platform.X64;
 import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
 import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 import static java.lang.Integer.parseInt;
+import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -54,15 +61,27 @@ public class DriverInfo extends DataClass<DriverInfo> {
     private Capabilities getCapabilities() {
         return capabilities.execute(initCapabilities);
     }
+
     private WebDriver setupRemote() {
         try {
             return getRemoteDriver != null
-                ? getRemoteDriver.execute(getCapabilities())
-                : new RemoteWebDriver(new URL(getRemoteURL()), getCapabilities());
+                    ? getRemoteDriver.execute(getCapabilities())
+                    : new RemoteWebDriver(new URL(getRemoteURL()), getCapabilities());
         } catch (Throwable ex) {
-            throw exception(ex, "Failed to setup remote "+ downloadType.name+" driver");
+            throw exception(ex, "Failed to setup remote " + downloadType.name + " driver");
         }
     }
+
+    private Platform getDriverPlatform() {
+        if (jdiSettings.DRIVER.platform != null)
+            return jdiSettings.DRIVER.platform;
+        if (getOs() == WIN || getProperty("os.arch").contains("32"))
+            return X32;
+        if (getProperty("os.arch").contains("64"))
+            return X64;
+        throw exception("Unknown driver platform: %s. Only X32 or X64 allowed. Please specify exact platform in JDISettings.DRIVER.platform", getProperty("os.arch"));
+    }
+
     private WebDriver setupLocal() {
         try {
             String driverPath = isBlank(jdiSettings.DRIVER.path)
@@ -77,7 +96,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                     webSettings.logger.info("Failed to download driver (%s %s) of latest version:" +
                             "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, jdiSettings.DRIVER.version);
                     try {
-                        downloadDriver(downloadType, jdiSettings.DRIVER.platform, getBelowVersion());
+                        downloadDriver(downloadType, getDriverPlatform(), getBelowVersion());
                         return getDriver.execute(getCapabilities());
                     } catch (Throwable ex2) {
                         throw exception(ex2, "Failed to download driver");
@@ -91,7 +110,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     public static String getBelowVersion() {
         String currentMajor = wdm.getDownloadedVersion().split("\\.")[0];
-        List<String> allVersions = wdm.getVersions();
+        List<String> allVersions = wdm.getDriverVersions();
         for (int i = allVersions.size()-1; i>=0; i--) {
             if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
                 return allVersions.get(i);

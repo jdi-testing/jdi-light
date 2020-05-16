@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.7</version>
         </dependency>
 
         <!--Allure-->
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.0.0</version>
+            <version>6.14.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -105,14 +105,4 @@
         </resources>
     </build>
 
-    <!-- Allure reporting config in parent
-    <reporting>
-        <excludeDefaults>true</excludeDefaults>
-        <plugins>
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-            </plugin>
-        </plugins>
-    </reporting-->
 </project>

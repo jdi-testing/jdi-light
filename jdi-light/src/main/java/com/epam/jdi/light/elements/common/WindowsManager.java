@@ -42,12 +42,15 @@ public class WindowsManager {
         }
         return false;
     }
+
+    @JDIAction("Check that new window is opened")
     public static void checkNewWindowIsOpened() {
         boolean isNewWindow = newWindowIsOpened();
         if (!isNewWindow)
             throw exception("New window is not opened");
         switchToNewWindow();
     }
+
     public static void setWindowName(String value) {
         windowHandlesMap.update(value, webDriver.getWindowHandle());
     }

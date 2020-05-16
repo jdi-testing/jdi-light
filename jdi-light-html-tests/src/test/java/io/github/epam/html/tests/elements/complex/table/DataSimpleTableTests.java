@@ -9,17 +9,19 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.complex.table.Column.*;
+import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.UsersPage.*;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static io.github.epam.test.data.MarvelHeroes.*;
-import static java.util.Arrays.*;
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static io.github.com.StaticSite.usersPage;
+import static io.github.com.pages.UsersPage.emptyTable;
+import static io.github.com.pages.UsersPage.usersData;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN_SIMPLE;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.testng.Assert.assertEquals;
 
 public class DataSimpleTableTests implements TestsInit {
     private boolean firstTime = true;
@@ -79,6 +81,7 @@ public class DataSimpleTableTests implements TestsInit {
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void commonMatchersTest() {
         usersData.is().displayed();
@@ -86,15 +89,23 @@ public class DataSimpleTableTests implements TestsInit {
         usersData.assertThat().size(greaterThan(3));
         usersData.is().notEmpty().size(lessThanOrEqualTo(6));
     }
+
+    @Test
+    public void isEmptyTest() {
+        emptyTable.is().empty();
+    }
+
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
         usersData.has().row(d -> d.user.contains("Ivan"));
     }
+
     @Test
     public void rowDataMatcherTest() {
         usersData.has().row(SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void rowTableMatcherSingleTest() {
         usersData.has().rowThat(Single.hasValue("Sergey Ivan"), inColumn("User"));

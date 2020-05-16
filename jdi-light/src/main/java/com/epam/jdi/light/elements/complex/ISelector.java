@@ -2,13 +2,18 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasUIList;
+import com.epam.jdi.light.elements.interfaces.base.INamed;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 
 import java.util.List;
 
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.LinqUtils.map;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -31,38 +36,84 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     default <TEnum extends Enum<?>> void select(TEnum... values) {
         list().select(values);
     }
+
     @JDIAction("Select '{0}' in '{name}'")
     default void select(int... values) {
         list().select(values);
     }
+
     @JDIAction("Get selected value")
-    default String selected() { return list().selected(); }
+    default String selected() {
+        return list().selected();
+    }
+
     @JDIAction("Is '{0}' selected")
-    default boolean selected(String option) { return list().selected(option); }
+    default boolean selected(String option) {
+        return list().selected(option);
+    }
+
     @JDIAction("Is '{0}' selected")
-    default boolean selected(int index) { return list().selected(index); }
+    default boolean selected(int index) {
+        return list().selected(index);
+    }
+
     @JDIAction(level = DEBUG)
-    default List<String> values() { return list().values(); }
+    default List<String> values() {
+        return list().values();
+    }
+
     @JDIAction(level = DEBUG)
     default List<String> values(TextTypes type) {
         return list().values(type);
     }
+
     @JDIAction(level = DEBUG)
-    default List<String> listEnabled() { return list().listEnabled(); }
+    default List<String> listEnabled() {
+        return list().listEnabled();
+    }
+
     @JDIAction(level = DEBUG)
-    default List<String> listDisabled() { return list().listDisabled(); }
+    default List<String> listDisabled() {
+        return list().listDisabled();
+    }
+
     @Override
     default String getText() {
         return selected();
     }
-    default String getValue() { return selected(); }
-    default void setValue(String value) { select(value); }
+
+    default String getValue() {
+        return selected();
+    }
+
+    default void setValue(String value) {
+        select(value);
+    }
+
     @JDIAction("Check that '{name}' is displayed")
-    default boolean isDisplayed() { return list().isDisplayed(); }
+    default boolean isDisplayed() {
+        return list().isDisplayed();
+    }
+
     @JDIAction("Check that '{name}' is hidden")
-    default boolean isHidden() { return !isDisplayed();}
-    default int size() { return list().size(); }
-    default boolean isEmpty() { return size() == 0; }
-    default boolean isNotEmpty() { return size() > 0; }
+    default boolean isHidden() {
+        return !isDisplayed();
+    }
+
+    default int size() {
+        return list().size();
+    }
+
+    default boolean isEmpty() {
+        return size() == 0;
+    }
+
+    default boolean isNotEmpty() {
+        return size() > 0;
+    }
+
+    default List<Label> labels() {
+        return map(list(), UIElement::label);
+    }
 
 }
