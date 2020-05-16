@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.ui.html.asserts.DateTimeAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.ui.html.HtmlUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

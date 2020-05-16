@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UIMSelectAssert;
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
