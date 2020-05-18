@@ -155,10 +155,8 @@ public class WebSettings {
     };
     public static boolean initialized = false;
     public static synchronized void init() {
-        logger.toLog("TMP Inside init()"); // todo TMP
         if (initialized) return;
         try {
-            logger.toLog("TMP initialized = false, starting initialization"); // todo TMP
             getProperties(COMMON.testPropertiesPath);
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();
@@ -196,10 +194,8 @@ public class WebSettings {
             fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
             fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
 
-            logger.toLog("TMP after all fillAction()...."); // todo TMP
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
-            logger.toLog("TMP loaded chrome capabilities ...."); // todo TMP
             loadCapabilities("ff.capabilities.path","ff.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
             loadCapabilities("ie.capabilities.path","ie.properties",
@@ -216,7 +212,6 @@ public class WebSettings {
             INIT_THREAD_ID = Thread.currentThread().getId();
             initialized = true;
         } catch (Throwable ex) {
-            ex.printStackTrace(); // todo TMP
             throw exception(ex, "Failed to init test.properties");
         }
     }

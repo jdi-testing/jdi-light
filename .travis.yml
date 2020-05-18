@@ -1,6 +1,4 @@
 language: java
-#jdk:
-#  - openjdk8
 before_install:
   - sudo apt-get -y install jq
   - java -Xmx32m -version
@@ -30,7 +28,6 @@ env:
     - CHROME_ARGS="--headless"
     - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
     - PATH="$JAVA_HOME/bin:$PATH"
-    #- PATH=/usr/lib/jvm/java-8-openjdk-amd64/bin/:$PATH
 
 stages:
   - prepare
