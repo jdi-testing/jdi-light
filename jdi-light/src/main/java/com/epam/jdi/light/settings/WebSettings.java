@@ -119,10 +119,8 @@ public class WebSettings {
     };
     public static boolean initialized = false;
     public static synchronized void init() {
-        logger.toLog("TMP Inside init()"); // todo TMP
         if (initialized) return;
         try {
-            logger.toLog("TMP initialized = false, starting initialization"); // todo TMP
             getProperties(COMMON.testPropertiesPath);
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();
