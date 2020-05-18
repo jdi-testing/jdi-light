@@ -1,4 +1,4 @@
-package cucmberTests;
+package cucumberTests;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
@@ -19,7 +19,7 @@ import org.testng.annotations.BeforeClass;
 
 @CucumberOptions(
         features = "classpath:features"
-        , glue = {"com.epam.jdi.bdd", "cucmberTests"}
+        , glue = {"com.epam.jdi.bdd", "cucumberTests"}
         //, tags = {"@webpage"}
 )
 public class TestRunner extends AbstractTestNGCucumberTests {

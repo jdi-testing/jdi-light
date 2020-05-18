@@ -1,4 +1,4 @@
-package cucmberTests.stepdefs;
+package cucumberTests.stepdefs;
 
 import static com.epam.jdi.bdd.BDDUtils.core;
 import static com.epam.jdi.bdd.stepdefs.CheckListSteps.multiSelect;
