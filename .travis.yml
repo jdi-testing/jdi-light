@@ -1,13 +1,15 @@
-language: java
-jdk:
-  - openjdk8
+language: minimal
 before_install:
   - sudo apt-get -y install jq
+  - java -Xmx32m -version
 before_script:
   - ls -lah
   - google-chrome-stable --version
 addons:
   chrome: stable
+  apt:
+    packages:
+      - openjdk-8-jdk
 
 env:
   global:
@@ -24,6 +26,8 @@ env:
     - PERFORMANCE="jdi-performance"
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
     - CHROME_ARGS="--headless"
+    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+    - PATH="$JAVA_HOME/bin:$PATH"
 
 stages:
   - prepare
