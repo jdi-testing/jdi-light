@@ -19,10 +19,15 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light</artifactId>
+            <version>1.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
             <version>1.2.7</version>
         </dependency>
-     </dependencies>
+    </dependencies>
 
     <build>
         <plugins>
