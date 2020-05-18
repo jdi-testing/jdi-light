@@ -3,7 +3,7 @@
 <suite name="JDI-Light BDD Tests" parallel="methods" thread-count="1">
     <test name="BDD Tests">
         <classes>
-            <class name="cucmberTests.TestRunner"/>
+            <class name="cucumberTests.TestRunner"/>
         </classes>
     </test>
 </suite>
