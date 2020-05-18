@@ -28,9 +28,9 @@ env:
     - PERFORMANCE="jdi-performance"
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
     - CHROME_ARGS="--headless"
-    #- JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
-    #- PATH="$JAVA_HOME/bin:$PATH"
-    - PATH=/usr/lib/jvm/java-8-openjdk-amd64/bin/:$PATH
+    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+    - PATH="$JAVA_HOME/bin:$PATH"
+    #- PATH=/usr/lib/jvm/java-8-openjdk-amd64/bin/:$PATH
 
 stages:
   - prepare
