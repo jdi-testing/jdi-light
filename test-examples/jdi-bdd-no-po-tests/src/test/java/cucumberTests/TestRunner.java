@@ -1,12 +1,12 @@
-package cucmberTests;
+package cucumberTests;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.form;
-import static cucmberTests.test.data.TestData.ROMAN;
+import static cucumberTests.test.data.TestData.ROMAN;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import cucmberTests.test.data.User;
+import cucumberTests.test.data.User;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.AfterClass;
@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeClass;
 
 @CucumberOptions(
     features = "classpath:features"
-    , glue = {"com.epam.jdi.bdd", "cucmberTests"}
+    , glue = {"com.epam.jdi.bdd", "cucumberTests"}
     , tags = {"@form"}
 )
 public class TestRunner extends AbstractTestNGCucumberTests {

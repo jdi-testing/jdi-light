@@ -1,13 +1,15 @@
 language: java
-jdk:
-  - openjdk8
 before_install:
   - sudo apt-get -y install jq
+  - java -Xmx32m -version
 before_script:
   - ls -lah
   - google-chrome-stable --version
 addons:
   chrome: stable
+  apt:
+    packages:
+      - openjdk-8-jdk
 
 env:
   global:
@@ -25,6 +27,8 @@ env:
     - PERFORMANCE="jdi-performance"
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
     - CHROME_ARGS="--headless"
+    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+    - PATH="$JAVA_HOME/bin:$PATH"
 
 stages:
   - prepare
@@ -45,13 +49,12 @@ jobs:
       script:
         - mvn install -DskipTests
 
-    # TODO: #1994
-    #    - stage: test
-    #      name: Run tests - bdd
-    #      script:
-    #        - mvn -ntp install -DskipTests
-    #        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-    #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+    - stage: test
+      name: Run tests - bdd
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
     - stage: test
       name: Run tests - bootstrap
