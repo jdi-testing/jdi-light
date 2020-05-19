@@ -159,19 +159,7 @@ public class TestProperties {
   }
 
   private static void setSearchStrategy(String p) {
-    List<String> params;
-    switch (p.toLowerCase()){
-      case "soft":
-        params = asList("any","multiple");
-        break;
-      case "strict":
-        params = asList("visible","single");
-        break;
-      default:
-        params = asList(p.split(","));
-        break;
-    }
-
+    List<String> params = getSearchStrategyParams(p);
     if (params.size() == 2) {
       if (params.contains("visible") || params.contains("displayed")) {
         onlyVisible();
@@ -191,6 +179,17 @@ public class TestProperties {
       if (params.contains("multiple")) {
         STRICT_SEARCH = false;
       }
+    }
+  }
+
+  private static List<String> getSearchStrategyParams(String p){
+    switch (p.toLowerCase()){
+      case "soft":
+       return asList("any","multiple");
+      case "strict":
+       return asList("visible","single");
+      default:
+       return  asList(p.split(","));
     }
   }
 
