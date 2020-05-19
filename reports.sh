@@ -158,7 +158,7 @@ function extractAllureResults() {
 function generateAllureReports() {
     reportDirList="";
     allureDirExistence=false
-    for report in $(ls -d1 jdi-light*/target/)
+    for report in $(ls -d1 jdi*/target/)
     do
         allureDirExistence=true
         allureDir="${report}allure-results"
