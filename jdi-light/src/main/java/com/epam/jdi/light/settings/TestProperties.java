@@ -160,10 +160,10 @@ public class TestProperties {
 
   private static void setSearchStrategy(String p) {
     p = p.toLowerCase();
-    if (p.equals("soft")) {
+    if ("soft".equals(p)) {
       p = "any, multiple";
     }
-    if (p.equals("strict")) {
+    if ("strict".equals(p)) {
       p = "visible, single";
     }
     if (p.split(",").length == 2) {
