@@ -110,12 +110,14 @@ public class WebSettings {
         if (initialized) return;
         try {
             getProperties(COMMON.testPropertiesPath);
-            TestProperties.getTestsProperties().forEach((k,v)->
-                                {String name = k;
-                                JAction1<String> action1 = v.key;
-                                JAction action = v.value;
-                                fillAction(action1,name);
-                                action.execute();});
+			TestProperties.getTestsProperties().forEach((k, v) ->
+			{
+				String propertyName = k;
+				JAction1<String> setPropertyAction = v.key;
+				JAction additionalPropertyAction = v.value;
+				fillAction(setPropertyAction, propertyName);
+				additionalPropertyAction.execute();
+			});
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
