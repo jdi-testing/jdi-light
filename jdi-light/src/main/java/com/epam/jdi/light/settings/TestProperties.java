@@ -160,14 +160,20 @@ public class TestProperties {
 
   private static void setSearchStrategy(String p) {
     p = p.toLowerCase();
-    if ("soft".equals(p)) {
-      p = "any, multiple";
+    List<String> params;
+    switch (p){
+      case "soft":
+        params = asList("any","multiple");
+        break;
+      case "strict":
+        params = asList("visible","single");
+        break;
+      default:
+        params = asList(p.split(","));
+        break;
     }
-    if ("strict".equals(p)) {
-      p = "visible, single";
-    }
-    if (p.split(",").length == 2) {
-      List<String> params = asList(p.split(","));
+
+    if (params.size() == 2) {
       if (params.contains("visible") || params.contains("displayed")) {
         onlyVisible();
       }
