@@ -66,7 +66,8 @@ import java.util.Map;
 public class TestProperties {
 
   private static Map<String, Pair<JAction1<String>, JAction>> testsProperties = new HashMap<>();
-  private static final JAction doNothing = ()->{};
+  private static final JAction _doNothing = () -> {
+  };
   public static boolean STRICT_SEARCH = true;
 
   private TestProperties() {
@@ -77,70 +78,59 @@ public class TestProperties {
   }
 
   static {
-    testsProperties.put("strategy",
-        new Pair<>(p -> COMMON.strategy = getStrategy(p),
+    testsProperties.put("strategy", combo(p -> COMMON.strategy = getStrategy(p),
             COMMON.strategy.action));
-    testsProperties.put("timeout.wait.element",
-        new Pair<>(p -> TIMEOUTS.element = new Timeout(parseInt(p)), doNothing));
-    testsProperties.put("timeout.wait.page",
-        new Pair<>(p -> TIMEOUTS.page = new Timeout(parseInt(p)), doNothing));
-    testsProperties.put("domain",
-        new Pair<>(WebSettings::setDomain, doNothing));
-    if (DRIVER.name.equals(DEFAULT_DRIVER))
-    {
+    testsProperties
+            .put("timeout.wait.element", single(p -> TIMEOUTS.element = new Timeout(parseInt(p))));
+    testsProperties.put("timeout.wait.page", single(p -> TIMEOUTS.page = new Timeout(parseInt(p))));
+    testsProperties.put("domain", single(WebSettings::setDomain));
+    if (DRIVER.name.equals(DEFAULT_DRIVER)) {
       testsProperties.put("driver",
-          new Pair<>(p -> DRIVER.name = p, doNothing));}
-    testsProperties.put("driver.version",
-        new Pair<>(p -> DRIVER.version = p, doNothing));
-    testsProperties.put("drivers.folder",
-        new Pair<>(p -> DRIVER.path = p, doNothing));
+              single(p -> DRIVER.name = p));
+    }
+    testsProperties.put("driver.version", single(p -> DRIVER.version = p));
+    testsProperties.put("drivers.folder", single(p -> DRIVER.path = p));
     testsProperties.put("screens.folder",
-        new Pair<>(p -> SCREEN.path = p, () -> addStrategy(FAIL, LOGS.screenStrategy)));
-    testsProperties.put("list.start.index",
-        new Pair<>(p -> ELEMENT.startIndex = parseInt(p),doNothing));
-    testsProperties.put("log.info.details",
-        new Pair<>(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p),doNothing));
-    testsProperties.put("screenshot.strategy",
-        new Pair<>(p -> LOGS.screenStrategy = getLoggerStrategy(p), doNothing));
-    testsProperties.put("html.code.strategy",
-        new Pair<>(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p),doNothing));
-    testsProperties.put("requests.strategy",
-        new Pair<>(p -> LOGS.requestsStrategy = getLoggerStrategy(p),doNothing));
-    testsProperties.put("browser.kill",
-        new Pair<>(p -> COMMON.killBrowser = p,doNothing));
-    testsProperties.put("element.search.strategy",
-        new Pair<>(TestProperties::setSearchStrategy,doNothing));
-    testsProperties.put("browser.size",
-        new Pair<>(DRIVER.screenSize::read,doNothing));
-    testsProperties.put("page.load.strategy",
-        new Pair<>(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p),doNothing));
-    testsProperties.put("page.check.after.open",
-        new Pair<>(p -> PAGE.checkPageOpen = parse(p),doNothing));
-    testsProperties.put("assert.type",
-        new Pair<>(SoftAssert::setAssertType,doNothing));
-    testsProperties.put("click.type",
-        new Pair<>(p -> ELEMENT.clickType = getClickType(p),doNothing));
-    testsProperties.put("text.type",
-        new Pair<>(p -> ELEMENT.getTextType = getTextType(p),doNothing));
-    testsProperties.put("set.text.type",
-        new Pair<>(p -> ELEMENT.setTextType = getSetTextType(p),doNothing));
-//     RemoteWebDriver properties
-    testsProperties.put("remote.type",
-        new Pair<>(p -> DRIVER.remoteUrl = getRemoteUrl(p),doNothing));
-    testsProperties.put("driver.remote.url",
-        new Pair<>(p -> DRIVER.remoteUrl = p,doNothing));
+            combo(p -> SCREEN.path = p, () -> addStrategy(FAIL, LOGS.screenStrategy)));
+    testsProperties.put("list.start.index", single(p -> ELEMENT.startIndex = parseInt(p)));
+    testsProperties
+            .put("log.info.details", single(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p)));
+    testsProperties
+            .put("screenshot.strategy", single(p -> LOGS.screenStrategy = getLoggerStrategy(p)));
+    testsProperties
+            .put("html.code.strategy", single(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p)));
+    testsProperties
+            .put("requests.strategy", single(p -> LOGS.requestsStrategy = getLoggerStrategy(p)));
+    testsProperties.put("browser.kill", single(p -> COMMON.killBrowser = p));
+    testsProperties.put("element.search.strategy", single(TestProperties::setSearchStrategy));
+    testsProperties.put("browser.size", single(DRIVER.screenSize::read));
+    testsProperties
+            .put("page.load.strategy", single(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p)));
+    testsProperties.put("page.check.after.open", single(p -> PAGE.checkPageOpen = parse(p)));
+    testsProperties.put("assert.type", single(SoftAssert::setAssertType));
+    testsProperties.put("click.type", single(p -> ELEMENT.clickType = getClickType(p)));
+    testsProperties.put("text.type", single(p -> ELEMENT.getTextType = getTextType(p)));
+    testsProperties.put("set.text.type", single(p -> ELEMENT.setTextType = getSetTextType(p)));
+///     RemoteWebDriver properties
+    testsProperties.put("remote.type", single(p -> DRIVER.remoteUrl = getRemoteUrl(p)));
+    testsProperties.put("driver.remote.url", single(p -> DRIVER.remoteUrl = p));
     testsProperties.put("log.level",
-        new Pair<>(p -> LOGS.logLevel = parseLogLevel(p), () -> logger.setLogLevel(LOGS.logLevel)));
-    testsProperties.put("allure.steps",
-        new Pair<>(p -> LOGS.writeToAllure = parseBoolean(p),doNothing));
-    testsProperties.put("smart.locators",
-        new Pair<>(p -> ELEMENT.smartTemplate = p.split(";")[0],doNothing));
-    testsProperties.put("smart.locators.toName",
-        new Pair<>(p -> ELEMENT.smartName = getSmartSearchFunc(p),doNothing));
-    testsProperties.put("smart.search",
-        new Pair<>(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p),doNothing));
-    testsProperties.put("headless",
-        new Pair<>(p -> DRIVER.capabilities.common.put("headless", p),doNothing));
+            combo(p -> LOGS.logLevel = parseLogLevel(p), () -> logger.setLogLevel(LOGS.logLevel)));
+    testsProperties.put("allure.steps", single(p -> LOGS.writeToAllure = parseBoolean(p)));
+    testsProperties.put("smart.locators", single(p -> ELEMENT.smartTemplate = p.split(";")[0]));
+    testsProperties
+            .put("smart.locators.toName", single(p -> ELEMENT.smartName = getSmartSearchFunc(p)));
+    testsProperties.put("smart.search", single(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p)));
+    testsProperties.put("headless", single(p -> DRIVER.capabilities.common.put("headless", p)));
+  }
+
+  public static Pair<JAction1<String>, JAction> combo(JAction1<String> setPropertyAction,
+                                                      JAction additionalPropertyAction) {
+    return new Pair<>(setPropertyAction, additionalPropertyAction);
+  }
+
+  public static Pair<JAction1<String>, JAction> single(JAction1<String> setPropertyAction) {
+    return combo(setPropertyAction, _doNothing);
   }
 
   private static Strategies getStrategy(String prop) {
@@ -156,46 +146,58 @@ public class TestProperties {
   }
 
   private static List<Strategy> getLoggerStrategy(String strategy) {
-    if (isBlank(strategy))
+    if (isBlank(strategy)) {
       return new ArrayList<>();
-    List<com.epam.jdi.light.logger.Strategy> strategies = new ArrayList<>();
+    }
+    List<Strategy> strategies = new ArrayList<>();
     try {
       String[] split = strategy.split(";");
       strategies = LinqUtils.map(split, s -> parseStrategy(s.trim()));
-    } catch (Exception ignore) { }
+    } catch (Exception ignore) {
+    }
     return strategies;
   }
 
   private static void setSearchStrategy(String p) {
     p = p.toLowerCase();
-    if (p.equals("soft"))
+    if (p.equals("soft")) {
       p = "any, multiple";
-    if (p.equals("strict"))
+    }
+    if (p.equals("strict")) {
       p = "visible, single";
+    }
     if (p.split(",").length == 2) {
       List<String> params = asList(p.split(","));
-      if (params.contains("visible") || params.contains("displayed"))
+      if (params.contains("visible") || params.contains("displayed")) {
         onlyVisible();
-      if (params.contains("any") || params.contains("all"))
+      }
+      if (params.contains("any") || params.contains("all")) {
         noValidation();
-      if (params.contains("enabled"))
+      }
+      if (params.contains("enabled")) {
         visibleEnabled();
-      if (params.contains("inview"))
+      }
+      if (params.contains("inview")) {
         inView();
-      if (params.contains("single"))
+      }
+      if (params.contains("single")) {
         STRICT_SEARCH = true;
-      if (params.contains("multiple"))
+      }
+      if (params.contains("multiple")) {
         STRICT_SEARCH = false;
+      }
     }
   }
 
   private static PageLoadStrategy getPageLoadStrategy(String strategy) {
     switch (strategy.toLowerCase()) {
-      case "normal": return NORMAL;
-      case "none": return NONE;
-      case "eager": return EAGER;
+      case "none":
+        return NONE;
+      case "eager":
+        return EAGER;
+      default:
+        return NORMAL;
     }
-    return NORMAL;
   }
 
   private static ElementArea getClickType(String type) {
@@ -225,38 +227,54 @@ public class TestProperties {
       case "saucelabs":
         DRIVER.capabilities.common = sauceCapabilities();
         return sauceLabs();
-      case "browserstack": return browserstack();
-      default: return seleniumLocalhost();
+      case "browserstack":
+        return browserstack();
+      default:
+        return seleniumLocalhost();
     }
   }
 
-  private static com.epam.jdi.tools.pairs.Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
+  private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(
+          String name) {
     if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
-      throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locators.toName' in test.properties." +
-          "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
+      throw exception(
+              "Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locators.toName' in test.properties."
+                      +
+                      "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
     }
-    return com.epam.jdi.tools.pairs.Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
+    return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
   }
 
   private static UseSmartSearch getSmartSearchUse(String prop) {
     String propLower = prop.toLowerCase().trim().replaceAll(" ", "");
     switch (propLower) {
-      case "false": return FALSE;
-      case "onlyui": return ONLY_UI;
-      case "uiandelements": return UI_AND_ELEMENTS;
-      case "always": return ALWAYS;
-      default: return UI_AND_ELEMENTS;
+      case "false":
+        return FALSE;
+      case "onlyui":
+        return ONLY_UI;
+      case "uiandelements":
+        return UI_AND_ELEMENTS;
+      case "always":
+        return ALWAYS;
+      default:
+        return UI_AND_ELEMENTS;
     }
   }
 
   private static LogInfoDetails getInfoDetailsLevel(String option) {
     switch (option.toLowerCase()) {
-      case "none": return LogInfoDetails.NONE;
-      case "name": return LogInfoDetails.NAME;
-      case "locator": return LogInfoDetails.LOCATOR;
-      case "context": return LogInfoDetails.CONTEXT;
-      case "element": return LogInfoDetails.ELEMENT;
-      default: return LogInfoDetails.ELEMENT;
+      case "none":
+        return LogInfoDetails.NONE;
+      case "name":
+        return LogInfoDetails.NAME;
+      case "locator":
+        return LogInfoDetails.LOCATOR;
+      case "context":
+        return LogInfoDetails.CONTEXT;
+      case "element":
+        return LogInfoDetails.ELEMENT;
+      default:
+        return LogInfoDetails.ELEMENT;
     }
   }
 
