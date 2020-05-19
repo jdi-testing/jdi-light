@@ -159,9 +159,8 @@ public class TestProperties {
   }
 
   private static void setSearchStrategy(String p) {
-    p = p.toLowerCase();
     List<String> params;
-    switch (p){
+    switch (p.toLowerCase()){
       case "soft":
         params = asList("any","multiple");
         break;
