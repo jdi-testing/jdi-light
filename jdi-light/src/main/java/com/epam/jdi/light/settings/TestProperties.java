@@ -65,6 +65,7 @@ import java.util.Map;
 
 public class TestProperties {
 
+  private static TestProperties instance;
   private static Map<String, Pair<JAction1<String>, JAction>> testsProperties = new HashMap<>();
   private static final JAction _doNothing = () -> {
   };
@@ -73,11 +74,19 @@ public class TestProperties {
   private TestProperties() {
   }
 
-  public static Map<String, Pair<JAction1<String>, JAction>> getTestsProperties() {
+  public static TestProperties getInstance() {
+    if (instance == null) {
+      instance = new TestProperties();
+      createTestProperties();
+    }
+    return instance;
+  }
+
+  public Map<String, Pair<JAction1<String>, JAction>> getTestsProperties() {
     return testsProperties;
   }
 
-  static {
+  private static void createTestProperties() {
     testsProperties.put("strategy", combo(p -> COMMON.strategy = getStrategy(p),
             COMMON.strategy.action));
     testsProperties

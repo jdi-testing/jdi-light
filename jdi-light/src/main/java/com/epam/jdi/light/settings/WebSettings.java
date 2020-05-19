@@ -110,7 +110,7 @@ public class WebSettings {
         if (initialized) return;
         try {
             getProperties(COMMON.testPropertiesPath);
-			TestProperties.getTestsProperties().forEach((k, v) ->
+			TestProperties.getInstance().getTestsProperties().forEach((k, v) ->
 			{
 				String propertyName = k;
 				JAction1<String> setPropertyAction = v.key;
