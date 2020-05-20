@@ -77,7 +77,7 @@ public class TestProperties {
   public static TestProperties getInstance() {
     if (instance == null) {
       instance = new TestProperties();
-      createTestProperties();
+      testsProperties = createTestProperties();
     }
     return instance;
   }
@@ -86,7 +86,7 @@ public class TestProperties {
     return testsProperties;
   }
 
-  private static void createTestProperties() {
+  private static Map<String, Pair<JAction1<String>, JAction>> createTestProperties() {
     testsProperties.put("strategy", combo(p -> COMMON.strategy = getStrategy(p),
             COMMON.strategy.action));
     testsProperties
@@ -131,6 +131,7 @@ public class TestProperties {
             .put("smart.locators.toName", single(p -> ELEMENT.smartName = getSmartSearchFunc(p)));
     testsProperties.put("smart.search", single(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p)));
     testsProperties.put("headless", single(p -> DRIVER.capabilities.common.put("headless", p)));
+    return testsProperties;
   }
 
   public static Pair<JAction1<String>, JAction> combo(JAction1<String> setPropertyAction,
