@@ -45,12 +45,12 @@ class DownloadDriverManager {
             }
             driverName += " " + platform;
             if (hasVersion(version)) {
-                wdm = wdm.version(version);
+                wdm = wdm.browserVersion(version);
                 driverName += " " + version;
             }
             if (version.equalsIgnoreCase(PENULT.value)) {
                 wdm.setup();
-                wdm.version(getBelowVersion());
+                wdm.browserVersion(getBelowVersion());
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");

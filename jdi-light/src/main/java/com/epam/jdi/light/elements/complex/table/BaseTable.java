@@ -139,7 +139,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int getCount() {
         if (columns.get().any())
             return columns.get().get(0).value.size();
-        return $$(fillByTemplate(columnLocator, 1), this).getListFast().size();
+        int rowsCount = $$(fillByTemplate(columnLocator, getRowIndex()), this).getListFast().size();
+        return headerSameAsFirstRow() ? rowsCount - 1 : rowsCount;
     }
 
     /**
@@ -186,8 +187,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return webColumn(columnIndex).get(getRowIndexByName(rowName)).finds(fromCellToRow);
     }
     public WebList webRow(String rowName) {
-        int index = getRowHeaderIndex() == -1 ? 1 : getRowHeaderIndex();
-        return webRow(index, rowName);
+        return webRow(getRowIndex(), rowName);
+    }
+    private int getRowIndex() {
+        int headerIndex = getRowHeaderIndex();
+        return headerIndex == -1 ? 1 : headerIndex;
     }
     public WebList webRow(Enum rowName) {
         return webRow(getEnumValue(rowName));
@@ -313,13 +317,21 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected Boolean headerIsRow = null;
     protected int getRowIndex(int rowNum) {
         if (headerIsRow == null) {
-            List<String> firstRow = new ArrayList<>();
-            //TODO optimize with threads get 1st and 2nd row
-            try { firstRow = getRowByIndex(1).noWait(WebList::values, WebList.class); }
-            catch (Exception ignore) { }
-            headerIsRow = firstRow.isEmpty() || any(header(), firstRow::contains);
+            headerIsRow = headerIsRow();
         }
         return headerIsRow ? rowNum + 1 : rowNum;
+    }
+    private boolean headerIsRow() {
+        List<String> firstRow = new ArrayList<>();
+        try { firstRow = getRowByIndex(1).noWait(WebList::values, WebList.class); }
+        catch (Exception ignore) { }
+        return firstRow.isEmpty() || any(header(), firstRow::contains);
+    }
+    private boolean headerSameAsFirstRow() {
+        List<String> firstRow = new ArrayList<>();
+        try { firstRow = getRowByIndex(1).noWait(WebList::values, WebList.class); }
+        catch (Exception ignore) { }
+        return !firstRow.isEmpty() && any(header(), firstRow::contains);
     }
     public WebList filter() {
         return $$(filterLocator).setup(b-> {
@@ -666,9 +678,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return cell(getColIndexByName(colName), rowName);
     }
     public static JFunc1<String, String> TRIM_VALUE =
-            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "\\\\n");
+            el -> el.trim().replaceAll("\n", "\\\\n").replaceAll(" +", " ");
     public static JFunc1<String, String> TRIM_PREVIEW =
-            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "");
+            el -> el.trim().replaceAll("\n", " ").replaceAll(" +", " ");
 
     /**
      * Get table preview

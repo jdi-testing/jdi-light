@@ -21,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.*;
 
 import static com.epam.jdi.light.common.Exceptions.*;
@@ -51,6 +52,7 @@ import static java.lang.Character.*;
 import static java.lang.String.format;
 import static java.lang.System.*;
 import static java.lang.Thread.*;
+import static java.util.Arrays.*;
 import static java.util.Collections.reverse;
 import static org.apache.commons.lang3.StringUtils.*;
 
@@ -257,7 +259,11 @@ public class ActionHelper {
         if (jInfo.topLevel()) {
             logFailure(jInfo);
             reverse(failedMethods);
-            logger.error("Failed actions chain: " + print(failedMethods, " > "));
+            List<String> chainActions = new ArrayList<>(failedMethods);
+            try {
+                logger.error("Url: " + WebPage.getUrl());
+            } catch (Exception ignore) { }
+            logger.error("Failed actions chain: " + print(chainActions, " > "));
         }
         return exception(ex, getExceptionAround(ex, jInfo));
     }
@@ -437,9 +443,14 @@ public class ActionHelper {
     //endregion
     public static void addFailedMethod(ProceedingJoinPoint jp) {
         String[] s = jp.toString().split("\\.");
-        String result = s[s.length-2]+"."+s[s.length-1].replaceAll("\\)\\)", ")");
+        String result = format("%s.%s%s", s[s.length-2], s[s.length-1].replaceAll("\\)\\)", ""),
+                printArgs(getArgs(jp)));
         if (!failedMethods.contains(result))
             failedMethods.add(result);
+    }
+    private static String printArgs(Object[] args) {
+        return args.length == 0 ? ")"
+                : format(":'%s')", print(asList(args), Object::toString));
     }
     public static String getExceptionAround(Throwable ex, ActionObject jInfo) {
         String result = safeException(ex);

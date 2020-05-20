@@ -1,13 +1,10 @@
 package cucmberTests.stepdefs;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.FileInput;
-import cucumber.api.java.en.*;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 
-import static com.epam.jdi.bdd.BDDUtils.*;
 import static com.epam.jdi.bdd.stepdefs.CheckListSteps.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -16,27 +13,10 @@ import static io.github.com.StaticSite.*;
 import static io.github.com.entities.Users.*;
 import static io.github.com.pages.Header.*;
 import static java.util.Arrays.*;
-import static org.testng.Assert.*;
+import static org.junit.Assert.*;
 
 public class UserStepdefs {
 
-    @Then("^the \"([^\"]*)\" is basically valid$")
-    public void baseValidation(String name) {
-        UIElement el = core(name);
-        assertTrue(el.isEnabled());
-        assertTrue(el.isDisplayed());
-        assertFalse(el.isDisabled());
-        assertFalse(el.isHidden());
-        Point location = el.getLocation();
-        assertTrue(location.x > 0 && location.y > 0, "Location: " + location);
-        Dimension size = el.getSize();
-        assertTrue(size.height > 0 && size.width > 0, "Size: " + location);
-        el.setAttribute("test-jdi", "test-value");
-        assertEquals(el.getAttribute("test-jdi"), "test-value");
-        el.highlight("blue");
-        el.highlight();
-        el.show();
-    }
     @Given("^I should be logged in$")
     public void iShouldBeLogin() {
         String url = WebPage.getUrl();

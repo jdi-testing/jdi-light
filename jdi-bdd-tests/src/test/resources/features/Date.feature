@@ -36,7 +36,3 @@ Feature: DateTimeSelector, INPUT TYPE DATE
     Then the "Birth Date" text equals to "1985-06-18"
     When I set date "2018-11-13" in the "Birth Date"
     Then the "Birth Date" text equals to "2018-11-13"
-
-  Scenario: Base validation test
-    Given I open "Html5 Page"
-    Then the "Birth Date" is basically valid

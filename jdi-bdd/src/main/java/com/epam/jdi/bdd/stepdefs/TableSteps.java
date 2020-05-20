@@ -13,9 +13,10 @@ import static com.epam.jdi.light.elements.complex.table.Column.*;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
 import static java.lang.Integer.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -37,8 +38,8 @@ public class TableSteps {
 
     //#region Then
     @Then("^the \"([^\"]*)\" (?:table |)has \"([^\"]*)\" columns$")
-    public void assertColumnsCount(String name, int columns) {
-        assertEquals(table(name).size(), columns);
+    public void assertColumnsCount(String name, int size) {
+        table(name).assertThat().columns(hasSize(size));
     }
 
     @Then("^the \"([^\"]*)\" (?:table |)has \"([^\"]*)\" rows$")
@@ -56,16 +57,15 @@ public class TableSteps {
         table(name).has().size(lessThanOrEqualTo(count));
     }
 
-    @Then("^the \"([^\"]*)\" (?:table |)header is:$")
+    @Then("^the \"([^\"]*)\" (?:table |)has header:$")
     public void assertHasItems(String name, List<String> values) {
-        assertTrue(table(name).header().containsAll(values));
+        table(name).has().columns(values);
     }
 
     @Then("^the \"([^\"]*)\" (?:table |)preview is:$")
-    public void assertEqualsValues(String name, List<String> values) {
-        String tableValues = String.join(", ", table(name).preview().replaceAll(" ", ""));
-        String expectedValue = String.join(", ", values).replaceAll(", ", "");
-        assertEquals(tableValues, expectedValue);
+    public void assertEqualsValues(String name, List<List<String>> values) {
+        String preview = print(map(values, v -> print(map(v, String::trim), " ")), " ");
+        table(name).has().preview(preview);
     }
 
     @Then("^the \"([^\"]*)\" (?:table |)is not empty$")
