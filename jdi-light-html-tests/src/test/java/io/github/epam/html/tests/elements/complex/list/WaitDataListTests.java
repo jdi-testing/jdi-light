@@ -51,7 +51,13 @@ public class WaitDataListTests implements TestsInit {
     @Test
     public void sizeTest() {
         assertEquals(searchS.size(), 6);
-        searchS.is().size(equalTo(8));
+        TIMEOUTS.element.setUp(10);
+        try {
+            searchS.is().size(equalTo(8));
+        } catch (Throwable ignored) {
+        } finally {
+            TIMEOUTS.element.drop();
+        }
     }
 
     @Test

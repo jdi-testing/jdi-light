@@ -51,7 +51,13 @@ public class WaitJListTests implements TestsInit {
     @Test
     public void sizeTest() {
         assertEquals(jsearchTitle.size(), 6);
-        jsearchTitle.is().size(equalTo(8));
+        TIMEOUTS.element.setUp(10);
+        try {
+            jsearchTitle.is().size(equalTo(8));
+        } catch (Throwable ignored) {
+        } finally {
+            TIMEOUTS.element.drop();
+        }
     }
     @Test
     public void sizeNotEmptyTest() {
