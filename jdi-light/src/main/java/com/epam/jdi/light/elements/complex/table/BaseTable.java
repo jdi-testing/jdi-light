@@ -403,7 +403,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (!cells.isGotAll()) {
             try {
                 List<WebElement> listOfCells =
-                    $$(allCellsLocator, core().parent)
+                    $$(allCellsLocator, this)
                     .core().noValidation().getAllElements();
                 cells.set(new MapArray<>());
                 int k = 0;
@@ -411,8 +411,12 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
                 for (int i = 1; i <= size(); i++)
                     cells.get().update(i+"", new MapArray<>());
                 while (k < listOfCells.size()) {
-                    for (int i = 1; i <= size(); i++)
-                        cells.get().get(i+"").update(j+"", new UIElement(listOfCells.get(k++)));
+                    for (int i = 1; i <= size(); i++) {
+                        if (k >= listOfCells.size()) {
+                            break;
+                        }
+                        cells.get().get(i + "").update(j + "", new UIElement(listOfCells.get(k++)));
+                    }
                     j++;
                 }
                 cells.gotAll();
