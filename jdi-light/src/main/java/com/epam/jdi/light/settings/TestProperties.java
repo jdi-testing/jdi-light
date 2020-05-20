@@ -65,73 +65,67 @@ import java.util.Map;
 
 public class TestProperties {
 
-  private static TestProperties instance;
-  private static Map<String, Pair<JAction1<String>, JAction>> testsProperties = new HashMap<>();
-  private static final JAction _doNothing = () -> {
-  };
+  private static Map<String, Pair<JAction1<String>, JAction>> testsProperties = null;
+  private static final JAction _doNothing = () -> {};
   public static boolean STRICT_SEARCH = true;
 
   private TestProperties() {
   }
 
-  public static TestProperties getInstance() {
-    if (instance == null) {
-      instance = new TestProperties();
+  public static Map<String, Pair<JAction1<String>, JAction>> getTestsProperties() {
+    if (testsProperties == null) {
       testsProperties = createTestProperties();
     }
-    return instance;
-  }
-
-  public Map<String, Pair<JAction1<String>, JAction>> getTestsProperties() {
     return testsProperties;
   }
 
   private static Map<String, Pair<JAction1<String>, JAction>> createTestProperties() {
-    testsProperties.put("strategy", combo(p -> COMMON.strategy = getStrategy(p),
+    Map<String, Pair<JAction1<String>, JAction>> properties = new HashMap<>();
+    properties.put("strategy", combo(p -> COMMON.strategy = getStrategy(p),
             COMMON.strategy.action));
-    testsProperties
+    properties
             .put("timeout.wait.element", single(p -> TIMEOUTS.element = new Timeout(parseInt(p))));
-    testsProperties.put("timeout.wait.page", single(p -> TIMEOUTS.page = new Timeout(parseInt(p))));
-    testsProperties.put("domain", single(WebSettings::setDomain));
+    properties.put("timeout.wait.page", single(p -> TIMEOUTS.page = new Timeout(parseInt(p))));
+    properties.put("domain", single(WebSettings::setDomain));
     if (DRIVER.name.equals(DEFAULT_DRIVER)) {
-      testsProperties.put("driver",
+      properties.put("driver",
               single(p -> DRIVER.name = p));
     }
-    testsProperties.put("driver.version", single(p -> DRIVER.version = p));
-    testsProperties.put("drivers.folder", single(p -> DRIVER.path = p));
-    testsProperties.put("screens.folder",
+    properties.put("driver.version", single(p -> DRIVER.version = p));
+    properties.put("drivers.folder", single(p -> DRIVER.path = p));
+    properties.put("screens.folder",
             combo(p -> SCREEN.path = p, () -> addStrategy(FAIL, LOGS.screenStrategy)));
-    testsProperties.put("list.start.index", single(p -> ELEMENT.startIndex = parseInt(p)));
-    testsProperties
+    properties.put("list.start.index", single(p -> ELEMENT.startIndex = parseInt(p)));
+    properties
             .put("log.info.details", single(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p)));
-    testsProperties
+    properties
             .put("screenshot.strategy", single(p -> LOGS.screenStrategy = getLoggerStrategy(p)));
-    testsProperties
+    properties
             .put("html.code.strategy", single(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p)));
-    testsProperties
+    properties
             .put("requests.strategy", single(p -> LOGS.requestsStrategy = getLoggerStrategy(p)));
-    testsProperties.put("browser.kill", single(p -> COMMON.killBrowser = p));
-    testsProperties.put("element.search.strategy", single(TestProperties::setSearchStrategy));
-    testsProperties.put("browser.size", single(DRIVER.screenSize::read));
-    testsProperties
+    properties.put("browser.kill", single(p -> COMMON.killBrowser = p));
+    properties.put("element.search.strategy", single(TestProperties::setSearchStrategy));
+    properties.put("browser.size", single(DRIVER.screenSize::read));
+    properties
             .put("page.load.strategy", single(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p)));
-    testsProperties.put("page.check.after.open", single(p -> PAGE.checkPageOpen = parse(p)));
-    testsProperties.put("assert.type", single(SoftAssert::setAssertType));
-    testsProperties.put("click.type", single(p -> ELEMENT.clickType = getClickType(p)));
-    testsProperties.put("text.type", single(p -> ELEMENT.getTextType = getTextType(p)));
-    testsProperties.put("set.text.type", single(p -> ELEMENT.setTextType = getSetTextType(p)));
+    properties.put("page.check.after.open", single(p -> PAGE.checkPageOpen = parse(p)));
+    properties.put("assert.type", single(SoftAssert::setAssertType));
+    properties.put("click.type", single(p -> ELEMENT.clickType = getClickType(p)));
+    properties.put("text.type", single(p -> ELEMENT.getTextType = getTextType(p)));
+    properties.put("set.text.type", single(p -> ELEMENT.setTextType = getSetTextType(p)));
 ///     RemoteWebDriver properties
-    testsProperties.put("remote.type", single(p -> DRIVER.remoteUrl = getRemoteUrl(p)));
-    testsProperties.put("driver.remote.url", single(p -> DRIVER.remoteUrl = p));
-    testsProperties.put("log.level",
+    properties.put("remote.type", single(p -> DRIVER.remoteUrl = getRemoteUrl(p)));
+    properties.put("driver.remote.url", single(p -> DRIVER.remoteUrl = p));
+    properties.put("log.level",
             combo(p -> LOGS.logLevel = parseLogLevel(p), () -> logger.setLogLevel(LOGS.logLevel)));
-    testsProperties.put("allure.steps", single(p -> LOGS.writeToAllure = parseBoolean(p)));
-    testsProperties.put("smart.locators", single(p -> ELEMENT.smartTemplate = p.split(";")[0]));
-    testsProperties
+    properties.put("allure.steps", single(p -> LOGS.writeToAllure = parseBoolean(p)));
+    properties.put("smart.locators", single(p -> ELEMENT.smartTemplate = p.split(";")[0]));
+    properties
             .put("smart.locators.toName", single(p -> ELEMENT.smartName = getSmartSearchFunc(p)));
-    testsProperties.put("smart.search", single(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p)));
-    testsProperties.put("headless", single(p -> DRIVER.capabilities.common.put("headless", p)));
-    return testsProperties;
+    properties.put("smart.search", single(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p)));
+    properties.put("headless", single(p -> DRIVER.capabilities.common.put("headless", p)));
+    return properties;
   }
 
   public static Pair<JAction1<String>, JAction> combo(JAction1<String> setPropertyAction,
