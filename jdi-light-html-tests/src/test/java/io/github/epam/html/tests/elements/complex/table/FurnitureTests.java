@@ -1,25 +1,13 @@
 package io.github.epam.html.tests.elements.complex.table;
 
-import com.epam.jdi.light.elements.complex.table.Single;
-import io.github.com.entities.MarvelUserInfo;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static com.epam.jdi.light.elements.complex.table.Column.*;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
-import static com.epam.jdi.tools.StringUtils.*;
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.SimpleTablePage.*;
-import static io.github.com.pages.UsersPage.*;
 import static io.github.epam.html.tests.site.steps.States.*;
-import static io.github.epam.test.data.MarvelHeroes.*;
 import static java.util.Arrays.*;
-import static org.apache.logging.log4j.util.Strings.*;
-import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
 public class FurnitureTests implements TestsInit {

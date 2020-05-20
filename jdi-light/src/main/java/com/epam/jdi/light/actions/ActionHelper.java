@@ -21,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.*;
 
 import static com.epam.jdi.light.common.Exceptions.*;

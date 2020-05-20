@@ -1,6 +1,5 @@
 package com.epam.jdi.light.actions;
 
-import com.epam.jdi.light.common.Exceptions;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 

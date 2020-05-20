@@ -1,7 +1,6 @@
 package com.epam.jdi.light.driver;
 
 import com.epam.jdi.light.driver.get.DriverTypes;
-import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
