@@ -47,11 +47,11 @@ import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.map.MapArray.*;
 import static com.epam.jdi.tools.pairs.Pair.*;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static edu.emory.mathcs.backport.java.util.Arrays.*;
 import static java.lang.Character.*;
 import static java.lang.String.format;
 import static java.lang.System.*;
 import static java.lang.Thread.*;
+import static java.util.Arrays.*;
 import static java.util.Collections.reverse;
 import static org.apache.commons.lang3.StringUtils.*;
 
