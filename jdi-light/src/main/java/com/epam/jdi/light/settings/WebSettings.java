@@ -24,6 +24,13 @@ import java.io.IOException;
 import java.util.Properties;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.COMMON_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.EDGE_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.IE_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.FF_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.OPERA_CAPABILITIES_PATH;
+import static com.epam.jdi.light.common.Property.SAFARI_CAPABILITIES_PATH;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
@@ -119,19 +126,19 @@ public class WebSettings {
                 actionAfterPropertyLoading.execute();
 			});
 
-            loadCapabilities("chrome.capabilities.path", "chrome.properties",
+            loadCapabilities(CHROME_CAPABILITIES_PATH.getName(), "chrome.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
-            loadCapabilities("ff.capabilities.path","ff.properties",
+            loadCapabilities(FF_CAPABILITIES_PATH.getName(),"ff.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
-            loadCapabilities("ie.capabilities.path","ie.properties",
+            loadCapabilities(IE_CAPABILITIES_PATH.getName(),"ie.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
-            loadCapabilities("edge.capabilities.path","edge.properties",
+            loadCapabilities(EDGE_CAPABILITIES_PATH.getName(),"edge.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
-            loadCapabilities("opera.capabilities.path","opera.properties",
+            loadCapabilities(OPERA_CAPABILITIES_PATH.getName(),"opera.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
-            loadCapabilities("safari.capabilities.path","safari.properties",
+            loadCapabilities(SAFARI_CAPABILITIES_PATH.getName(),"safari.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
-            loadCapabilities("common.capabilities.path","common.properties",
+            loadCapabilities(COMMON_CAPABILITIES_PATH.getName(),"common.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
 
             INIT_THREAD_ID = Thread.currentThread().getId();
