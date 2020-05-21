@@ -1,7 +1,5 @@
 package com.epam.jdi.light.elements.pageobjects.annotations.locators;
 
-import org.openqa.selenium.By;
-
 import java.lang.annotation.*;
 
 /**
