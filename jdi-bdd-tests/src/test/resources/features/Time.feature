@@ -37,10 +37,6 @@ Feature: DateTimeSelector, INPUT TYPE TIME
     Then I set date "05:00" in the "Booking Time"
     Then the "Booking Time" text equals to "05:00"
 
-  Scenario: Base validation test
-    Given I open "Html5 Page"
-    Then  the "Booking Time" is basically valid
-
 
 
 

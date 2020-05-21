@@ -62,6 +62,7 @@ public class WebSettings {
         return "No Domain Found. Use test.properties or JDISettings.DRIVER.domain";
     }
     public static void setDomain(String domain) {
+        logger.debug("DRIVER.domain = " + domain);
         DRIVER.domain = domain;
     }
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
@@ -117,9 +118,21 @@ public class WebSettings {
             }
         });
     };
+    private static void fillAction(JAction1<String> action, String name) {
+        String prop = null;
+        try {
+            prop = getProperty(name);
+        } catch (Exception ignore) {}
+        if (prop == null) {
+            prop = "null";
+        }
+        logger.debug("fillAction(%s=%s)", name, prop);
+        PropertyReader.fillAction(action, name);
+    }
     public static boolean initialized = false;
     public static synchronized void init() {
         if (initialized) return;
+        logger.debug("init()");
         try {
             getProperties(COMMON.testPropertiesPath);
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");

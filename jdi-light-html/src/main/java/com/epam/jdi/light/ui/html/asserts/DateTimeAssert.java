@@ -8,7 +8,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.light.ui.html.HtmlUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -57,20 +56,20 @@ public class DateTimeAssert extends UIAssert<DateTimeAssert, DateTimeSelector>
     public DateTimeAssert time(String time) { return time(Matchers.is(time)); }
 
     @JDIAction("Assert that '{name}' min {0}")
-    public DateTimeAssert min(Matcher<Float> min) {
-        jdiAssert(getFloat("min", element.core()), min);
+    public DateTimeAssert min(Matcher<String> min) {
+        jdiAssert(element.min(), min);
         return this;
     }
-    public DateTimeAssert min(float min) {
+    public DateTimeAssert min(String min) {
         return min(Matchers.is(min));
     }
 
     @JDIAction("Assert that '{name}' max {0}")
-    public DateTimeAssert max(Matcher<Float> max) {
-        jdiAssert(getFloat("max", element.core()), max);
+    public DateTimeAssert max(Matcher<String> max) {
+        jdiAssert(element.max(), max);
         return this;
     }
-    public DateTimeAssert max(float max) {
+    public DateTimeAssert max(String max) {
         return max(Matchers.is(max));
     }
 }

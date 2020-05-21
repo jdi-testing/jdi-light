@@ -9,7 +9,6 @@ import java.util.List;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -92,12 +91,12 @@ public class CheckListSteps {
 
     @Then("in the \"([^\"]*)\" checklist checked elements are:$")
     public static void isCheckBoxesChecked(String name, List<String> values) {
-        assertEquals(checklist(name).checked(), values);
+        checklist(name).is().checked(values);
     }
 
     @Then("the \"([^\"]*)\" checklist value is \"([^\"]*)\"$")
     public static void checkListTextIs(String name, String text) {
-        assertEquals(checklist(name).getValue(), text);
+        checklist(name).has().text(text);
     }
 
     @When("^(?:I |)Select fields from \"([^\"]*)\":$")

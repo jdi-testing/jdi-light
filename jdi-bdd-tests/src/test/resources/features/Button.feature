@@ -23,7 +23,3 @@ Feature: Button
     And the "Red Button" attribute "type" equals to "button"
     And the "Blue Button" text contains "BLUE BUTTON"
     And the "Disabled Button" is disabled
-
-  Scenario: Basic validation
-    Given I open "Html5 Page" page
-    Then the "Red Button" is basically valid

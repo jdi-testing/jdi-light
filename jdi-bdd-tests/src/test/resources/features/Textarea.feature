@@ -86,7 +86,3 @@ Feature: Textarea
   Scenario: Maximal lenght test
     Given I open "Html5 Page"
     Then the "Text Area" maximal length equals "200"
-
-  Scenario: Basic validation test
-    Given I open "Html5 Page"
-    Then the "Text Area" is basically valid

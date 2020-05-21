@@ -18,7 +18,7 @@ import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.util.Arrays.*;
-import static org.jsoup.helper.StringUtil.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
         implements ICoreElement, HasLabel {

@@ -96,15 +96,13 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert> implements IsD
     @JDIAction("Get selected value")
     @Override
     public String selected() {
-        expand();
-        return list().selected();
+        return value().getText();
     }
 
     @JDIAction("Is '{0}' selected")
     @Override
     public boolean selected(String value) {
-        expand();
-        return list().selected(value);
+        return selected().equals(value);
     }
 
     @Override

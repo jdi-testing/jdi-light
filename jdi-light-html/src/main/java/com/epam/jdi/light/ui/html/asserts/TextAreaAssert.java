@@ -7,7 +7,10 @@ import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.util.List;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -47,4 +50,17 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
     }
     public TextAreaAssert maxlength(int maxlength) { return maxlength(Matchers.is(maxlength)); }
 
+    @JDIAction("Assert that '{name}' has expected lines")
+    public TextAreaAssert lines(Matcher<? super List<String>> condition) {
+        jdiAssert(element.getLines(), condition);
+        return this;
+    }
+    @JDIAction("Assert that '{name}' has expected lines")
+    public TextAreaAssert lines(String... lines) {
+        return lines(containsInAnyOrder(lines));
+    }
+    @JDIAction("Assert that '{name}' has expected lines")
+    public TextAreaAssert lines(List<String> lines) {
+        return lines(containsInAnyOrder(lines.toArray()));
+    }
 }
