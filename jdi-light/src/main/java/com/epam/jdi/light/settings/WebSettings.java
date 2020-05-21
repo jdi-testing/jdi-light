@@ -116,9 +116,9 @@ public class WebSettings {
 			{
 				String propertyName = k;
 				JAction1<String> setPropertyAction = v.key;
-				JAction additionalPropertyAction = v.value;
+				JAction actionAfterPropertyLoading = v.value;
 				fillAction(setPropertyAction, propertyName);
-				additionalPropertyAction.execute();
+                actionAfterPropertyLoading.execute();
 			});
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
