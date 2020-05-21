@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
  * Created by Roman_Iovlev on 3/2/2018.
  */
 public class WaitJListTests implements TestsInit {
+
     @BeforeMethod
     public void before() {
         homePage.shouldBeOpened();
@@ -32,22 +33,25 @@ public class WaitJListTests implements TestsInit {
     public void notEmptyTest() {
         jsearchTitle.is().notEmpty();
     }
+
     @Test
     public void notEmpty2Test() {
         jsearchTitle.assertThat(not(empty()));
     }
+
     @Test
     public void emptyTest() {
         TIMEOUTS.element.setUp(2);
         try {
             jsearchTitle.is().empty();
             Assert.fail("List should not be empty");
-        } catch (Throwable ignored) { }
-        finally {
+        } catch (Throwable ignored) {
+        } finally {
             TIMEOUTS.element.drop();
         }
         logger.info("Done");
     }
+
     @Test
     public void sizeTest() {
         assertEquals(jsearchTitle.size(), 6);
@@ -59,6 +63,7 @@ public class WaitJListTests implements TestsInit {
             TIMEOUTS.element.drop();
         }
     }
+
     @Test
     public void sizeNotEmptyTest() {
         TIMEOUTS.element.setUp(10);

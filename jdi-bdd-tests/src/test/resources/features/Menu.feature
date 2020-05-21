@@ -26,7 +26,8 @@ Feature: Menu
 #    Then the "HTML 5" in "Left Menu" menu is selected
 #
   Scenario: Check selected item after page load
-    Then the "Elements packs" in "Left Menu" menu is selected
+    When I select "Metals & Colors" in "Left Menu" menu
+    Then the "Metals & Colors" in "Left Menu" menu is selected
 
 #  Scenario: Check selected sub-item after page load
 #    Then the "HTML 5" in "Left Menu" menu is selected
