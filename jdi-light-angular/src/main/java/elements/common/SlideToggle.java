@@ -11,7 +11,7 @@ public class SlideToggle extends Checkbox {
 
     @Override
     public boolean isEnabled() {
-        if (hasClass("mat-disabled")){
+        if (hasClass("mat-disabled")) {
             return false;
         }
         return super.isEnabled();

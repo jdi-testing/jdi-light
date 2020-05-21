@@ -14,8 +14,6 @@ import static io.github.com.pages.sections.SlideToggleSection.primaryRadioButton
 import static io.github.com.pages.sections.SlideToggleSection.resultSlideToggle;
 import static io.github.com.pages.sections.SlideToggleSection.warningRadioButton;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
 public class SlideToggleTests extends TestsInit {
 
@@ -35,39 +33,39 @@ public class SlideToggleTests extends TestsInit {
     }
 
     @Test
+    public void basicToggleCheckedTest() {
+        basicSlideToggle.check();
+        basicSlideToggle.is().selected();
+        basicSlideToggle.uncheck();
+        basicSlideToggle.is().deselected();
+    }
+
+    @Test
     public void resultToggleColorTest() {
         disableCheckbox.uncheck();
         resultSlideToggle.check();
         primaryRadioButton.click();
-        assertTrue(resultSlideToggle.hasClass("mat-primary"));
+        resultSlideToggle.is().hasClass("mat-primary");
         accentRadioButton.click();
-        assertTrue(resultSlideToggle.hasClass("mat-accent"));
+        resultSlideToggle.is().hasClass("mat-accent");
         warningRadioButton.click();
-        assertTrue(resultSlideToggle.hasClass("mat-warn"));
-    }
-
-    @Test
-    public void basicToggleCheckedTest() {
-        basicSlideToggle.check();
-        assertTrue(basicSlideToggle.isSelected());
-        basicSlideToggle.uncheck();
-        assertFalse(basicSlideToggle.isSelected());
+        resultSlideToggle.is().hasClass("mat-warn");
     }
 
     @Test
     public void resultToggleCheckedTest() {
         resultSlideToggle.uncheck();
         checkedCheckbox.check();
-        assertTrue(resultSlideToggle.isSelected());
+        resultSlideToggle.is().selected();
         checkedCheckbox.uncheck();
-        assertFalse(resultSlideToggle.isSelected());
+        resultSlideToggle.is().deselected();
     }
 
     @Test
     public void resultToggleDisableTest() {
         disableCheckbox.check();
-        assertTrue(resultSlideToggle.isDisabled());
+        resultSlideToggle.is().disabled();
         disableCheckbox.uncheck();
-        assertTrue(resultSlideToggle.isEnabled());
+        resultSlideToggle.is().enabled();
     }
 }
