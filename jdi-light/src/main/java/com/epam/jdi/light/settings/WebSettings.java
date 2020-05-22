@@ -1,5 +1,18 @@
 package com.epam.jdi.light.settings;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.logger.JDILogger.instance;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.driver.WebDriverFactory;
@@ -15,27 +28,12 @@ import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.logger.JDILogger.instance;
-import static com.epam.jdi.light.settings.JDISettings.COMMON;
-import static com.epam.jdi.light.settings.JDISettings.DRIVER;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.PropertyReader.fillAction;
-import static com.epam.jdi.tools.PropertyReader.getProperty;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -115,7 +113,7 @@ public class WebSettings {
             prop = "null";
         }
         logger.debug("fillAction(%s=%s)", name, prop);
-        PropertyReader.fillAction(action, name);
+        fillAction(action, name);
     }
     public static boolean initialized = false;
     public static synchronized void init() {
