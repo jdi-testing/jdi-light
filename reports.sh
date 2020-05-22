@@ -85,7 +85,7 @@ function checkBranchIsOk() {
 #########################               PART 1: send allure results into web to collect it later
 function grubAllureResults() {
     echo "Stage was: ${TRAVIS_BUILD_STAGE_NAME}"
-    checkBranchIsOk #there is an exit inside
+#    checkBranchIsOk #there is an exit inside
 
     if [[ "x${TRAVIS_BUILD_STAGE_NAME}" == "xtest" ]] ; then #don't remove x, it's useful
         for result in $(find jdi*/target/allure-results -maxdepth 1 -type d)
@@ -115,7 +115,7 @@ function uploadFile() {
 
 ######################         PART 2: Deploy allure results as allure reports to netlify
 function deployAllureResults() {
-    checkBranchIsOk #there is an exit inside
+#    checkBranchIsOk #there is an exit inside
     downloadAllureResults
     extractAllureResults
     generateAllureReports
