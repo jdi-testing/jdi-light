@@ -6,8 +6,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+import elements.common.BasicSpinner;
 import elements.common.Icon;
-import elements.common.Spinner;
 
 public class AngularPage extends WebPage {
     @Css("radio-overview-example .mat-radio-group")
@@ -20,7 +20,7 @@ public class AngularPage extends WebPage {
     public static Button secondBasicRadioButton;
 
     @Css(".mat-spinner")
-    public static Spinner basicProgressSpinner;
+    public static BasicSpinner basicProgressSpinner;
 
     @XPath("//mat-icon[contains(@aria-label,'home icon')]")
     public static Icon basicIcon;
