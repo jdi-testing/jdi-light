@@ -79,13 +79,12 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkTitleType = NONE;
 
     public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
+    private static final Safe<String> currentPage = new Safe<>("Undefined Page");
 
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this)
                 .setup(Form.class, e -> e.setName(getName() + " Form").setParent(this));
     }
-
-    private static final Safe<String> currentPage = new Safe<>("Undefined Page");
 
     public static String getCurrentPage() {
         return currentPage.get();
@@ -98,31 +97,42 @@ public class WebPage extends DriverBase implements PageObject {
     public WebPage() {
         initElements(this);
     }
+
     public WebPage(String url) {
         setUrl(url, url, CONTAINS);
     }
-    public WebPage(String url, String title) { this(url); this.title = title; }
+
+    public WebPage(String url, String title) {
+        this(url);
+        this.title = title;
+    }
+
     public static void openUrl(String url, String pageName) {
         WebPage page = new WebPage(url);
         page.setName(isNotBlank(pageName) ? pageName : "");
         page.open();
     }
+
     public static void openUrl(String url) {
         webSettings.init();
         new WebPage(url).open();
     }
+
     public static void openSite() {
         webSettings.init();
         new WebPage(webSettings.getDomain()).open();
     }
+
     public static void openSite(Class<?> site) {
         initSite(site);
         WebPage page = new WebPage(webSettings.getDomain());
         page.setName(site.getSimpleName());
         page.open();
     }
+
     /**
      * Get Web page URL
+     *
      * @return String
      */
     @JDIAction(level = DEBUG)
@@ -132,6 +142,7 @@ public class WebPage extends DriverBase implements PageObject {
 
     /**
      * Get Web page title
+     *
      * @return String
      */
     @JDIAction(level = DEBUG)
@@ -142,6 +153,7 @@ public class WebPage extends DriverBase implements PageObject {
     void setUrl(String uri) {
         setUrl(uri, "", CONTAINS);
     }
+
     void setUrl(String uri, String template, CheckTypes validate) {
         url = uri;
         checkUrl = template;
@@ -158,6 +170,7 @@ public class WebPage extends DriverBase implements PageObject {
             if (isBlank(uri)) url = webSettings.getDomain();
         }
     }
+
     public void updatePageData(Url urlAnnotation, Title titleAnnotation) {
         if (urlAnnotation != null)
             setUrl(urlAnnotation.value(), urlAnnotation.template(), urlAnnotation.validate());
@@ -178,6 +191,7 @@ public class WebPage extends DriverBase implements PageObject {
 
     /**
      * Opens url specified for page
+     *
      * @param url
      */
     @JDIAction(value = "Open '{name}'(url={0})", timeout = 0)
@@ -188,9 +202,11 @@ public class WebPage extends DriverBase implements PageObject {
         getWindows();
         setCurrentPage(this);
     }
+
     public void open(Object... params) {
         open(getUrlWithParams(params));
     }
+
     private String getUrlWithParams(Object... params) {
         if (params == null || params.length == 0)
             return url;
@@ -198,14 +214,16 @@ public class WebPage extends DriverBase implements PageObject {
             return String.format(url, params);
         }
         return url.contains("{0}")
-            ? MessageFormat.format(url, params)
-            : url + "?" + print(map(params, Object::toString), "&");
+                ? MessageFormat.format(url, params)
+                : url + "?" + print(map(params, Object::toString), "&");
     }
+
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}') in new window")
     public void checkOpenedInNewWindow() {
         checkNewWindowIsOpened();
         checkOpened();
     }
+
     /**
      * Check that page opened
      */
@@ -214,18 +232,18 @@ public class WebPage extends DriverBase implements PageObject {
         if (driverFactory.noRunDrivers())
             throw exception("Page '%s' is not opened: Driver is not run", toString());
         String result = Switch(checkUrlType).get(
-            Value(NONE, ""),
-            Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
-            Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
-            Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
+                Value(NONE, ""),
+                Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
+                Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
+                Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getCurrentUrl(), checkUrl));
         result = Switch(checkTitleType).get(
-            Value(NONE, ""),
-            Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
-            Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
-            Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
+                Value(NONE, ""),
+                Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
+                Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
+                Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
@@ -233,14 +251,17 @@ public class WebPage extends DriverBase implements PageObject {
         if (webSettings.VISUAL_PAGE_STRATEGY == CHECK_PAGE)
             visualWindowCheck();
     }
+
     /**
      * Check that page opened
      */
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
-    public static void visualWindowCheck() { }
+    public static void visualWindowCheck() {
+    }
 
     /**
      * Check the page is opened
+     *
      * @return boolean
      */
     @JDIAction(level = DEBUG)
@@ -270,12 +291,14 @@ public class WebPage extends DriverBase implements PageObject {
     public void shouldBeOpened() {
         openedPage(url);
     }
+
     public void shouldBeOpened(Object... params) {
         openedPage(getUrlWithParams(params));
     }
 
     /**
      * Check the page is opened
+     *
      * @param url
      */
     @JDIAction("'{name}'(url={0}) should be opened")
@@ -284,6 +307,7 @@ public class WebPage extends DriverBase implements PageObject {
         open(url);
         checkOpened();
     }
+
     /**
      * Reload current page
      */
@@ -291,7 +315,10 @@ public class WebPage extends DriverBase implements PageObject {
     public static void refresh() {
         webDriver.navigate().refresh();
     }
-    public static void reload() { refresh(); }
+
+    public static void reload() {
+        refresh();
+    }
 
     /**
      * Go back to previous page
@@ -311,6 +338,7 @@ public class WebPage extends DriverBase implements PageObject {
 
     /**
      * Scale the page by the specific factor
+     *
      * @param factor
      */
     @JDIAction(level = DEBUG)
@@ -321,18 +349,21 @@ public class WebPage extends DriverBase implements PageObject {
 
     /**
      * Get page html
+     *
      * @return String
      */
     @JDIAction
     public static String getHtml() {
         return webDriver.getPageSource();
     }
+
     public static List<LogEntry> getHttpRequests() {
         return webDriver.manage().logs().get("performance").getAll();
     }
 
     /**
      * Scroll screen on specific values
+     *
      * @param x
      * @param y
      */
@@ -340,9 +371,11 @@ public class WebPage extends DriverBase implements PageObject {
     private static void scroll(int x, int y) {
         driverFactory.jsExecute("window.scrollBy(" + x + "," + y + ")");
     }
+
     public static boolean isBottomOfThePage() {
         return driverFactory.jsExecute("return ((window.innerHeight + window.scrollY) >= document.body.scrollHeight);");
     }
+
     public static boolean isTopOfThePage() {
         return driverFactory.jsExecute("return window.scrollX == window.scrollY;");
     }
@@ -362,65 +395,76 @@ public class WebPage extends DriverBase implements PageObject {
     public static void scrollToBottom() {
         driverFactory.jsExecute("window.scrollTo(0,document.body.scrollHeight)");
     }
+
     /**
      * Scroll screen down on specific values
+     *
      * @param value
      */
     @JDIAction("Scroll screen down on '{0}'")
     public static void scrollDown(int value) {
-        scroll(0,value);
+        scroll(0, value);
     }
 
     /**
      * Scroll screen up on specific values
+     *
      * @param value
      */
     @JDIAction("Scroll screen up on '{0}'")
-    public static void  scrollUp(int value) {
-        scroll(0,-value);
+    public static void scrollUp(int value) {
+        scroll(0, -value);
     }
 
     /**
      * Scroll screen to the right on specific values
+     *
      * @param value
      */
     @JDIAction("Scroll screen to the right on '{0}'")
-    public static void  scrollRight(int value) {
-        scroll(value,0);
+    public static void scrollRight(int value) {
+        scroll(value, 0);
     }
 
     /**
      * Scroll screen to the left on specific values
+     *
      * @param value
      */
     @JDIAction("Scroll screen to the left on '{0}'")
     public static void scrollLeft(int value) {
-        scroll(-value,0);
+        scroll(-value, 0);
     }
 
     @JDIAction(level = DEBUG)
     public static double zoomLevel() {
         return getDouble(driverFactory.jsExecute("return window.devicePixelRatio;"));
     }
+
     @JDIAction(level = DEBUG)
     public static long xOffset() {
         return driverFactory.jsExecute("return window.pageXOffset;");
     }
+
     @JDIAction(level = DEBUG)
     public static long yOffset() {
         return driverFactory.jsExecute("return window.pageYOffset;");
     }
+
     @JDIAction(level = DEBUG)
     public static String windowScreenshot() {
         try {
             File screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
             //show();
-            String path = mergePath(getPath(), getCurrentPage()+".png");
+            String path = mergePath(getPath(), getCurrentPage() + ".png");
             File imageFile = new File(path);
             copyFile(screenshot, imageFile);
             return path;
-        } catch (Exception ex) { throw exception(ex, "Can't take screenshot"); }
+        } catch (Exception ex) {
+            throw exception(ex, "Can't take screenshot");
+        }
     }
+
     @JDIAction(level = DEBUG)
     public static String windowScreenshot(int x, int y, int w, int h, String name) {
         File screenshot;
@@ -431,13 +475,17 @@ public class WebPage extends DriverBase implements PageObject {
             //show();
             path = mergePath(getPath(), name);
             imageFile = new File(path);
-        } catch (Exception ex) { throw exception(ex, "Can't take windowScreenshot"); }
+        } catch (Exception ex) {
+            throw exception(ex, "Can't take windowScreenshot");
+        }
         try {
             BufferedImage fullImg = ImageIO.read(screenshot);
             BufferedImage crop = fullImg.getSubimage(x, y, w, h);
             ImageIO.write(crop, "png", screenshot);
             copyFile(screenshot, imageFile);
-        } catch (Exception ex) { throw exception(ex, "Can't crop windowScreenshot"); }
+        } catch (Exception ex) {
+            throw exception(ex, "Can't crop windowScreenshot");
+        }
         return path;
     }
 

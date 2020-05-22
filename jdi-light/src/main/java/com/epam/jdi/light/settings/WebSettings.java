@@ -103,18 +103,20 @@ public class WebSettings {
             case FALSE:
                 return null;
             case ONLY_UI:
-                if (el.base().locator.isNull())
+                if (el.base().locator.isNull()) {
                     return null;
+                }
                 break;
             case UI_AND_ELEMENTS:
-                if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
+                if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class)) {
                     return null;
+                }
                 break;
         }
         String locatorName = jdiSettings.ELEMENT.smartName.value.execute(el.getName());
         return el.base().timer().getResult(() -> {
             String locator = format(jdiSettings.ELEMENT.smartTemplate, locatorName);
-            UIElement ui = (jdiSettings.ELEMENT.smartTemplate.equals("#%s")
+            UIElement ui = (("#%s").equals(jdiSettings.ELEMENT.smartTemplate)
                     ? $(locator)
                     : $(locator, el.base().parent))
                     .setup(e -> e.setName(el.getName()).noWait());
@@ -122,7 +124,7 @@ public class WebSettings {
                 return ui.getWebElement();
             } catch (Exception ignore) {
                 throw exception("Element '%s' has no locator and Smart Search failed (%s). " +
-                                "Please add locator to element or be sure that element can be found using Smart Search",
+                                "Please add locator to the element or make sure that the element can be found using Smart Search",
                         el.getName(),
                         getWebSettings().printSmartLocators(el));
             }

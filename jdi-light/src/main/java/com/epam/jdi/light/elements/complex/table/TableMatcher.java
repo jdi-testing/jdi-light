@@ -15,15 +15,19 @@ import static java.lang.String.format;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class TableMatcher {
+    private final String name;
+
     public static JFunc2<BaseTable, TableMatcher[], WebList> TABLE_MATCHER = (table, matchers) -> {
         String locator = format("./%s/ancestor::*/td", print(map(matchers, m ->
-                m.getLocator(table)),"/ancestor::*"));
+                m.getLocator(table)), "/ancestor::*"));
         return $$(locator, table);
     };
+
     public static TableMatcher hasValue(String value, Column column) {
-        return new TableMatcher("/td[%s][normalize-space(.) = "+ Quotes.escape(value)+"]",
-                column, "has '"+value +"'");
+        return new TableMatcher("/td[%s][normalize-space(.) = " + Quotes.escape(value) + "]",
+                column, "has '" + value + "'");
     }
+
     public static TableMatcher containsValue(String value, Column column) {
         return new TableMatcher("/td[%s][contains(normalize-space(.)," + Quotes.escape(value) + ")]",
                 column, "contains '" + value + "'");
@@ -36,8 +40,6 @@ public class TableMatcher {
         this.column = column;
         return this;
     }
-
-    private final String name;
 
     TableMatcher(@MarkupLocator String locator, Column column, String name) {
         this.locator = locator;
