@@ -1,4 +1,4 @@
-package cucmberTests;
+package cucumberTests;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
@@ -19,7 +19,7 @@ import static io.github.com.pages.Header.userIcon;
 
 @CucumberOptions(
         features = "classpath:features"
-        , glue = {"com.epam.jdi.bdd", "cucmberTests"}
+        , glue = {"com.epam.jdi.bdd", "cucumberTests"}
         //, tags = {"@webpage"}
 )
 public class TestRunner extends AbstractTestNGCucumberTests {

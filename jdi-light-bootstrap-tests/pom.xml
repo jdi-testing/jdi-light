@@ -9,15 +9,6 @@
     <name>Tests: JDI Bootstrap</name>
     <groupId>com.epam.jdi</groupId>
 
-    <properties>
-        <driver>chrome</driver>
-        <!--driver>firefox</driver-->
-        <allure.maven>2.10.0</allure.maven>
-        <allure.testng>2.13.2</allure.testng>
-        <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.1</aspectj.version>
-    </properties>
-
     <dependencies>
         <!--JDI-->
         <dependency>
@@ -42,10 +33,19 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>RELEASE</version>
+            <version>7.0.0</version>
             <!--version>6.14.3</version-->
         </dependency>
     </dependencies>
+
+    <properties>
+        <driver>chrome</driver>
+        <!--driver>firefox</driver-->
+        <allure.maven>2.10.0</allure.maven>
+        <allure.testng>2.13.1</allure.testng>
+        <jetty.version>9.4.12.RC2</jetty.version>
+        <aspectj.version>1.9.1</aspectj.version>
+    </properties>
 
     <build>
         <plugins>

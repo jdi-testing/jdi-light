@@ -1,10 +1,8 @@
 package com.epam.jdi.light.settings;
 
-import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.SetTextTypes;
 import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.common.Timeout;
 import com.epam.jdi.light.common.UseSmartSearch;
 import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.common.VisualCheckPage;
@@ -16,6 +14,7 @@ import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.PropReader;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -34,7 +33,6 @@ import java.util.Properties;
 import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
-import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.SearchStrategies.inView;
 import static com.epam.jdi.light.common.SearchStrategies.noValidation;
 import static com.epam.jdi.light.common.SearchStrategies.onlyVisible;
@@ -46,16 +44,12 @@ import static com.epam.jdi.light.common.UseSmartSearch.FALSE;
 import static com.epam.jdi.light.common.UseSmartSearch.ONLY_UI;
 import static com.epam.jdi.light.common.UseSmartSearch.UI_AND_ELEMENTS;
 import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
-import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
 import static com.epam.jdi.light.driver.get.RemoteDriver.browserstack;
 import static com.epam.jdi.light.driver.get.RemoteDriver.sauceLabs;
 import static com.epam.jdi.light.driver.get.RemoteDriver.seleniumLocalhost;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
-import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
-import static com.epam.jdi.light.logger.Strategy.FAIL;
-import static com.epam.jdi.light.logger.Strategy.addStrategy;
 import static com.epam.jdi.light.logger.Strategy.parseStrategy;
 import static com.epam.jdi.light.settings.CommonSettings.getCommonSettings;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
@@ -70,8 +64,6 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static java.lang.Boolean.parseBoolean;
-import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -188,42 +180,14 @@ public class WebSettings {
         if (initialized) return;
         try {
             getProperties(getCommonSettings().testPropertiesPath);
-            fillAction(p -> getCommonSettings().strategy = getStrategy(p), "strategy");
-            getCommonSettings().strategy.action.execute();
-            fillAction(p -> jdiSettings.TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
-            fillAction(p -> jdiSettings.TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
-            fillAction(getWebSettings()::setDomain, "domain");
-            if (jdiSettings.DRIVER.name.equals(DEFAULT_DRIVER)) {
-                fillAction(p -> jdiSettings.DRIVER.name = p, "driver");
-            }
-            fillAction(p -> jdiSettings.DRIVER.version = p, "driver.version");
-            fillAction(p -> jdiSettings.DRIVER.path = p, "drivers.folder");
-            fillAction(p -> jdiSettings.SCREEN.path = p, "screens.folder");
-            fillAction(p -> jdiSettings.ELEMENT.startIndex = parseInt(p), "list.start.index");
-            addStrategy(FAIL, jdiSettings.LOGS.screenStrategy);
-            fillAction(p -> jdiSettings.LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
-            fillAction(p -> jdiSettings.LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
-            fillAction(p -> jdiSettings.LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
-            fillAction(p -> jdiSettings.LOGS.requestsStrategy = getLoggerStrategy(p), "requests.strategy");
-            fillAction(p -> getCommonSettings().killBrowser = p, "browser.kill");
-            fillAction(getWebSettings()::setSearchStrategy, "element.search.strategy");
-            fillAction(p -> jdiSettings.DRIVER.screenSize.read(p), "browser.size");
-            fillAction(p -> jdiSettings.DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
-            fillAction(p -> jdiSettings.PAGE.checkPageOpen = parse(p), "page.check.after.open");
-            fillAction(SoftAssert::setAssertType, "assert.type");
-            fillAction(p -> getJDISettings().ELEMENT.clickType = getClickType(p), "click.type");
-            fillAction(p -> getJDISettings().ELEMENT.getTextType = getTextType(p), "text.type");
-            fillAction(p -> getJDISettings().ELEMENT.setTextType = getSetTextType(p), "set.text.type");
-            // RemoteWebDriver properties
-            fillAction(p -> getJDISettings().DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
-            fillAction(p -> getJDISettings().DRIVER.remoteUrl = p, "driver.remote.url");
-            fillAction(p -> getJDISettings().LOGS.logLevel = parseLogLevel(p), "log.level");
-            logger.setLogLevel(getJDISettings().LOGS.logLevel);
-            fillAction(p -> getJDISettings().LOGS.writeToAllure = parseBoolean(p), "allure.steps");
-            fillAction(p -> getJDISettings().ELEMENT.smartTemplate = p.split(";")[0], "smart.locators");
-            fillAction(p -> getJDISettings().ELEMENT.smartName = getSmartSearchFunc(p), "smart.locators.toName");
-            fillAction(p -> getJDISettings().ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
-            fillAction(p -> getJDISettings().DRIVER.capabilities.common.put("headless", p), "headless");
+            TestProperties.getTestsProperties().forEach((k, v) ->
+            {
+                String propertyName = k;
+                JAction1<String> setPropertyAction = v.key;
+                JAction actionAfterPropertyLoading = v.value;
+                fillAction(setPropertyAction, propertyName);
+                actionAfterPropertyLoading.execute();
+            });
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
                     p -> p.forEach((key, value) -> getJDISettings().DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
@@ -303,6 +267,11 @@ public class WebSettings {
             default:
                 return UI_AND_ELEMENTS;
         }
+    }
+
+    private boolean getBoolean(String param) {
+        String lowerParams = param.toLowerCase();
+        return !lowerParams.equals("off") && !lowerParams.equals("false");
     }
 
     public void loadCapabilities(String property, String defaultPath, JAction1<Properties> setCapabilities) {
