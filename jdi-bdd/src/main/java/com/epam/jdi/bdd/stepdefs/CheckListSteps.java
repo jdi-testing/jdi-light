@@ -4,7 +4,6 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
 import static com.epam.jdi.tools.LinqUtils.toIntArray;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
-import static org.testng.Assert.assertEquals;
 
 import com.epam.jdi.light.elements.complex.Checklist;
 import cucumber.api.java.en.Then;

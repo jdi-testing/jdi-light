@@ -7,7 +7,6 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 import static org.hamcrest.core.IsIterableContaining.hasItems;
-import static org.testng.Assert.assertEquals;
 
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
 import cucumber.api.java.en.Then;

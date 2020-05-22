@@ -13,6 +13,7 @@ import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Integer.parseInt;
+import static java.lang.String.format;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 import static org.apache.commons.lang3.StringUtils.isBlank;

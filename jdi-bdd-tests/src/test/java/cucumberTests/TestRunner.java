@@ -1,4 +1,13 @@
-package cucmberTests;
+package cucumberTests;
+
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.entities.Users.DEFAULT_USER;
+import static io.github.com.pages.Header.loginForm;
+import static io.github.com.pages.Header.userIcon;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
@@ -9,19 +18,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-import static com.epam.jdi.light.driver.WebDriverUtils.*;
-import static com.epam.jdi.light.elements.init.InitActions.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.entities.Users.*;
-import static io.github.com.pages.Header.*;
-
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "classpath:features"
-        , glue = {"com.epam.jdi.bdd", "cucmberTests"}
-        // , tags = {"@radio"}
+    features = "classpath:features"
+    , glue = {"com.epam.jdi.bdd", "cucumberTests"}
+    // , tags = {"@radio"}
 )
 public class TestRunner {
     @BeforeClass
