@@ -98,7 +98,6 @@ jobs:
       name: Run tests - jdi-light
       script:
           - mvn -ntp install -DskipTests
-          - echo arguments=$CHROME_ARGS > "./$JDI_LIGHT_TESTS/src/test/resources/$CHROME_PROPERTIES"
           - mvn verify $WITH_PARAMS -pl $GROUP_ID:$JDI_LIGHT_TESTS
 
     - stage: reports
