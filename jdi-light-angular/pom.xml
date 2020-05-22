@@ -123,9 +123,9 @@
                         <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                    </argLine>
+<!--                    <argLine>-->
+<!--                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"-->
+<!--                    </argLine>-->
                     <properties>
                         <property>
                             <name>listener</name>
@@ -160,5 +160,25 @@
             </resource>
         </resources>
     </build>
+
+    <!-- Allure reporting config in parent-->
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>LATEST</version>
+                <configuration>
+                    <properties>
+                        <allure.results.directory>target/allure-results</allure.results.directory>
+                    </properties>
+                    <properties>
+                        <allure.link.issue.pattern>https://example.org/issue/{}</allure.link.issue.pattern>
+                    </properties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
