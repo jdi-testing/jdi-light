@@ -146,9 +146,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return rowHeader.get();
     }
     protected int getCount() {
-        if (columns.get().any())
+        if (columns.get().any()) {
             return columns.get().get(0).value.size();
-        return $$(fillByTemplate(columnLocator, 1), this).size();
+        }
+        //TODO: investigate case when there are multiple tables on the page
+        return $$(fillByTemplate(columnLocator, 1), this).getListFast().size();
     }
 
     /**
@@ -410,6 +412,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
                 int j = 1;
                 for (int i = 1; i <= size(); i++)
                     cells.get().update(i+"", new MapArray<>());
+                //TODO: replace with two "for" when getCount() and getListFast() is fixed
                 while (k < listOfCells.size()) {
                     for (int i = 1; i <= size(); i++) {
                         if (k >= listOfCells.size()) {
