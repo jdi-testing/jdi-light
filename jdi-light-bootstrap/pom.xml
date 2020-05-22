@@ -19,10 +19,15 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light</artifactId>
+            <version>1.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
             <version>1.2.10</version>
         </dependency>
-     </dependencies>
+    </dependencies>
 
     <build>
         <plugins>
@@ -36,9 +41,12 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+                <!--                <groupId>org.codehaus.mojo</groupId>-->
+                <!--                <artifactId>aspectj-maven-plugin</artifactId>-->
+                <!--                <version>${aspectj.maven}</version>-->
+                <groupId>com.nickwongdev</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>${aspectj.maven}</version>
+                <version>1.12.6</version>
                 <configuration>
                     <showWeaveInfo>true</showWeaveInfo>
                     <source>${java.version}</source>

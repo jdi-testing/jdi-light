@@ -1,22 +1,25 @@
 package com.epam.jdi.bdd.stepdefs;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static java.lang.Integer.parseInt;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.hamcrest.Matchers.matchesPattern;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
 import java.util.List;
-
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.elements.complex.table.Column.*;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static java.lang.Integer.*;
-import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

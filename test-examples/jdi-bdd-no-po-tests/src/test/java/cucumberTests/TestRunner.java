@@ -15,7 +15,7 @@ import static cucmberTests.test.data.TestData.*;
 @RunWith(Cucumber.class)
 @CucumberOptions(
     features = "classpath:features"
-    , glue = {"com.epam.jdi.bdd", "cucmberTests"}
+    , glue = {"com.epam.jdi.bdd", "cucumberTests"}
     , tags = {"@form"}
 )
 public class TestRunner {
