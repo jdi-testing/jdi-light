@@ -142,7 +142,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return result;
     }
     protected List<String> namedHeader(int index) {
-        return jsColumn(index);
+        return column(index);
     }
     public List<String> rowHeader() {
         return rowHeader.get();
@@ -182,7 +182,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         rows.get().update(rowNum+"", result);
         return result;
     }
-    private void validateRowIndex(int rowNum) {
+    protected void validateRowIndex(int rowNum) {
         if (rowNum < 1)
             throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
         if (rowNum > count()) {
@@ -200,7 +200,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public WebList webRow(String rowName) {
         return webRow(getRowIndex(), rowName);
     }
-    private int getRowIndex() {
+    protected int getRowIndex() {
         int headerIndex = getRowHeaderIndex();
         return headerIndex == -1 ? 1 : headerIndex;
     }
@@ -218,7 +218,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return result;
     }
     protected List<String> getJSValues(String locator) {
-        return (List<String>) core().js().executeScript("return Array.from(document.querySelectorAll('"+locator+"')).map(el=>el.innerText)");
+        return (List<String>) core().js().executeScript("return Array.from(document.querySelectorAll(\""+locator+"\")).map(el=>el.innerText)");
     }
     public List<String> jsCells() {
         return getJSValues(format("%s %s", getByLocator(base().getLocator()), getByLocator(jsColumn)));
@@ -235,7 +235,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public List<String> jsRow(String rowName) {
         return jsRow(getRowIndexByName(rowName));
     }
-    private void validateColumnIndex(int colNum) {
+    protected void validateColumnIndex(int colNum) {
         if (colNum < 1)
             throw exception("Columns numeration starts from 1 (but requested index is %s)", colNum);
         if (colNum > size())
@@ -254,9 +254,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return colIndex + 1;
     }
     public int getRowIndexByName(String rowName) {
-        List<String> rowHeader = getRowHeaderIndex() == -1
-            ? jsColumn(1)
-            : rowHeader();
+        List<String> rowHeader = rowHeader();
         int rowIndex = firstIndex(rowHeader, h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowName)));
         if (rowIndex == -1)
             throw exception("Can't find row '%s'", rowName);
@@ -297,7 +295,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             ? getMappedRow(row)
             : row;
     }
-    private WebList getMappedRow(WebList row) {
+    protected WebList getMappedRow(WebList row) {
         List<WebElement> result = new ArrayList<>();
         for (int i = 1; i <= header().size(); i++)
             result.add(row.get(getColumnIndex(i)-1));
@@ -311,7 +309,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         columns.gotAll();
         return columns.set(result);
     }
-    private int getColumnIndex(int index) {
+    protected int getColumnIndex(int index) {
         if (firstColumnIndex > 1)
             return index + firstColumnIndex - 1;
         if (columnsMapping.length > 0)
@@ -332,13 +330,13 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         }
         return headerIsRow ? rowNum + 1 : rowNum;
     }
-    private boolean headerIsRow() {
+    protected boolean headerIsRow() {
         List<String> firstRow = new ArrayList<>();
         try { firstRow = getRowByIndex(1).noWait(WebList::values, WebList.class); }
         catch (Exception ignore) { }
         return firstRow.isEmpty() || any(header(), firstRow::contains);
     }
-    private boolean headerSameAsFirstRow() {
+    protected boolean headerSameAsFirstRow() {
         List<String> firstRow = new ArrayList<>();
         try { firstRow = getRowByIndex(1).noWait(WebList::values, WebList.class); }
         catch (Exception ignore) { }
@@ -618,7 +616,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         }
         return value;
     }
-    private MapArray<String, String> getLineMap(Line row) {
+    protected MapArray<String, String> getLineMap(Line row) {
         return new MapArray<>(header(), row);
     }
 
