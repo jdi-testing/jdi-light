@@ -20,13 +20,8 @@ public class ColorPickerSteps {
         colorPicker(name).setColor(color);
     }
 
-    @Then("^the \"([^\"]*)\" color equals to \"([^\"]*)\"$")
-    public void haveColor(String name, String expectedColor) {
-        colorPicker(name).is().color(expectedColor);
-    }
-
-    @Then("^the \"([^\"]*)\" color is \"([^\"]*)\"$")
-    public void assertThatColor(String name, String color) {
-        colorPicker(name).is().color(color);
+    @Then("^the \"([^\"]*)\" has color \"([^\"]*)\"$")
+    public void hasColor(String name, String color) {
+        colorPicker(name).has().color(color);
     }
 }

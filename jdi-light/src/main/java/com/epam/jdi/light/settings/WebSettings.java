@@ -1,5 +1,18 @@
 package com.epam.jdi.light.settings;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.logger.JDILogger.instance;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.driver.WebDriverFactory;
@@ -15,13 +28,12 @@ import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
@@ -57,6 +69,7 @@ public class WebSettings {
         return "No Domain Found. Use test.properties or JDISettings.DRIVER.domain";
     }
     public static void setDomain(String domain) {
+        logger.debug("DRIVER.domain = " + domain);
         DRIVER.domain = domain;
     }
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
@@ -112,9 +125,21 @@ public class WebSettings {
             }
         });
     };
+    private static void fillAction(JAction1<String> action, String name) {
+        String prop = null;
+        try {
+            prop = getProperty(name);
+        } catch (Exception ignore) {}
+        if (prop == null) {
+            prop = "null";
+        }
+        logger.debug("fillAction(%s=%s)", name, prop);
+        PropertyReader.fillAction(action, name);
+    }
     public static boolean initialized = false;
     public static synchronized void init() {
         if (initialized) return;
+        logger.debug("init()");
         try {
             getProperties(COMMON.testPropertiesPath);
 			TestProperties.getTestsProperties().forEach((k, v) ->

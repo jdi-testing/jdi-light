@@ -30,7 +30,3 @@ Feature: TextField
     Given I open "Html5 Page"
     And I set text "Lorem" in "Name"
     Then the "Name" text equals to "Lorem"
-
-  Scenario: base validation test
-    Given I open "Html5 Page"
-    Then the "Name" is basically valid

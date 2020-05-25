@@ -36,7 +36,3 @@ Feature: DateTimeSelector, INPUT TYPE MONTH
     Then the "Month Date" text equals to "2018-05"
     When I set date "2018-10" in the "Month Date"
     Then the "Month Date" text equals to "2018-10"
-
-  Scenario: Base validation test
-    Given I open "Html5 Page"
-    Then the "Month Date" is basically valid
