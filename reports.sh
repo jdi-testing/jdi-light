@@ -121,9 +121,10 @@ function deployAllureResults() {
     generateAllureReports
     echo "LOG1"
     url="$(deployToNetlify "allure-report")"
-    echo   " report url ${urlKey}"
-    content=$(wget aboutNetlify -q -O -)
-    echo $content
+    reportLink=aboutNetlify
+    echo "report url ${reportLink}"
+    content=$(wget reportLink -q -O -)
+    echo "${content}"
     echo "LOG2"
     sendComment "$(aboutNetlify ${url})"
 }
