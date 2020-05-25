@@ -33,7 +33,6 @@ public class WaitDataListTests implements TestsInit {
     }
     @Test
     public void emptyTest() {
-
         try {
             searchS.is().empty();
             Assert.fail("List should not be empty");

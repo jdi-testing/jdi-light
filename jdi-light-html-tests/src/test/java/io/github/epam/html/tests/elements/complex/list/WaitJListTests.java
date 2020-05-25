@@ -35,13 +35,13 @@ public class WaitJListTests implements TestsInit {
     }
     @Test
     public void emptyTest() {
-        TIMEOUTS.element.setUp(2);
         try {
+            jsearchTitle.waitSec(2);
             jsearchTitle.is().empty();
             Assert.fail("List should not be empty");
         } catch (Throwable ignored) { }
         finally {
-            TIMEOUTS.element.drop();
+            jsearchTitle.waitSec(TIMEOUTS.element.get());
         }
         logger.info("Done");
     }

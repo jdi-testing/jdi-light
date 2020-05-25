@@ -14,7 +14,7 @@ public class SearchPage extends BaseSelPage {
 	@UI(".box") public DataList<SearchResult, Result> search;
 	@UI(".box") public DataList<SearchResult, ?> search2;
 	@UI(".box") public static List<SearchResult> search3;
-	@UI(".box") @WaitTimeout(2)
+	@UI(".box") @WaitTimeout(3)
 	public static DataList<SearchResult, ?> searchS;
 	@UI("//*[@class='box']/h3[text()=\"%s\"]")
 	public DataList<SearchResult, ?> searchT2;
