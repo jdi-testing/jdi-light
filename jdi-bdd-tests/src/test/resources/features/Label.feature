@@ -12,7 +12,3 @@ Feature: Label
   Scenario: Text matches
     Given I open "Html5 Page"
     Then the "Jdi Title" text matches to "\w{3} \w{7} \w{8}"
-    
-  Scenario: Base validation
-    Given I open "Html5 Page"
-    Then the "Jdi Title" is basically valid

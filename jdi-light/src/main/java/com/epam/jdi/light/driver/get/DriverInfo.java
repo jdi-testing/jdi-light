@@ -13,6 +13,7 @@ import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Integer.parseInt;
+import static java.lang.String.format;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -47,6 +48,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
         return isEmpty(DRIVER.remoteUrl) && (isNotBlank(DRIVER.path) && isNotBlank(path.execute()) || downloadType != null);
     }
     public WebDriver getDriver() {
+        logger.debug("getDriver(): " + toString());
         return isLocal()
             ? setupLocal()
             : setupRemote();
@@ -56,9 +58,15 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     private WebDriver setupRemote() {
         try {
-            return getRemoteDriver != null
-                ? getRemoteDriver.execute(getCapabilities())
-                : new RemoteWebDriver(new URL(getRemoteURL()), getCapabilities());
+            logger.debug("setupRemote()");
+            Capabilities caps = getCapabilities();
+            if (getRemoteDriver != null) {
+                logger.debug("getRemoteDriver.execute(caps: %s)", caps);
+                return getRemoteDriver.execute(caps);
+            } else {
+                logger.debug("new RemoteWebDriver(url:%s, caps: %s)", getRemoteURL(), caps);
+                return new RemoteWebDriver(new URL(getRemoteURL()), caps);
+            }
         } catch (Throwable ex) {
             throw exception(ex, "Failed to setup remote "+ downloadType.name+" driver");
         }
@@ -74,12 +82,17 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     private WebDriver setupLocal() {
         try {
-            String driverPath = isBlank(DRIVER.path)
+            boolean emptyDriverPath = isBlank(DRIVER.path);
+            logger.debug("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
+            String driverPath = emptyDriverPath
                 ? downloadDriver(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
             logger.info("Use driver path: " + driverPath);
+            logger.debug("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
-            return getDriver.execute(getCapabilities());
+            Capabilities caps = getCapabilities();
+            logger.debug("getDriver.execute(getCapabilities())", caps);
+            return getDriver.execute(caps);
         } catch (Throwable ex) {
             try {
                 if (isBlank(DRIVER.path) && DRIVER.version.equals(LATEST.value)) {
@@ -104,5 +117,9 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 return allVersions.get(i);
         }
         throw exception("Can't find version below current(" + wdm.getDownloadedVersion()+")");
+    }
+    @Override
+    public String toString() {
+        return format("DriverInfo:[downloadType: %s; initCapabilities: %s; path: %s; properties: %s]", downloadType.name, initCapabilities, path.execute(), properties);
     }
 }

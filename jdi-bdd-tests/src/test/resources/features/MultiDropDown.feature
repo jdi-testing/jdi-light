@@ -47,7 +47,3 @@ Feature: MultiDropDown
     Then the "Multi Dropdown" css "font-size" equals to "14px"
     And the "Multi Dropdown" css "font-family" contains "Source Sans Pro"
     And the "Multi Dropdown" css "font-family" matches to "(.*)sans-serif"
-
-  Scenario: Base validation test
-    Given I open "Html5 Page"
-    Then the "Multi Dropdown" is basically valid

@@ -56,8 +56,6 @@ public class PageFactory {
         for (Field pageField : getSiteFields(site)) {
             try {
                 info.field = pageField;
-                if (info.field.getName().equals("searchPage"))
-                    System.out.println("");
                 setFieldWithInstance(info, null);
             } catch (Throwable ex) {
                 throw exception(ex, initException(pageField, site));
@@ -65,6 +63,7 @@ public class PageFactory {
         }
     }
     private static void setFieldWithInstance(SiteInfo info, Object obj) throws IllegalAccessException {
+        logger.debug("setFieldWithInstance(info:%s)", info);
         Object instance = getElementInstance(info);
         if (instance != null) {
             addElement(instance);
@@ -73,8 +72,6 @@ public class PageFactory {
     }
     private static Object getElementInstance(SiteInfo info) {
         info.instance = getValueField(info.field, info.parent);
-        //if (info.name().equals("colors3"))
-        //    System.out.println("test");
         if (info.instance == null)
             initJdiField(info);
         if (info.instance != null)
@@ -83,20 +80,23 @@ public class PageFactory {
     }
 
     public static void initJdiField(SiteInfo info) {
+        logger.debug("initJdiField");
         if (info.type().isInterface())
             initUsingRules(info);
         else
             initWithConstructor(info);
     }
     public static void setupFieldUsingRules(SiteInfo info) {
-        MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) ->
-                r.condition.execute(info));
+        logger.debug("setupFieldUsingRules");
+        MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) -> r.condition.execute(info));
         if (setupRules.size() == 0)
             return;
         String ruleName = "UNDEFINED";
+        logger.debug("SETUP_RULES.count="+setupRules.size());
         try {
             for(Pair<String, SetupRule> rule : setupRules) {
                 ruleName = rule.key;
+                logger.debug("Use setupRule '%s'", ruleName);
                 rule.value.action.execute(info);
             }
         } catch (Throwable ex) {
@@ -133,9 +133,32 @@ public class PageFactory {
             throw exception(ex, initException(field, info.type()));
         }
     }
+    private static <T> T initUsingRules(SiteInfo info) {
+        logger.debug("initUsingRules");
+        Pair<String, InitRule> firstRule = INIT_RULES.first((k,r) ->
+                r.condition.execute(info.field));
+        if (firstRule != null) {
+            logger.debug("Use initRule: " + firstRule.key);
+            try {
+                return (T)(info.instance = firstRule.value.func.execute(info));
+            } catch (Exception ex) {
+                throw exception(ex, "Init rule '%s' failed. Can't init field '%s' on page '%s'",
+                        firstRule.key, info.name(), info.parentName());
+            }
+        }
+        else {
+            logger.debug("No initRules found");
+            throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
+                            "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
+                            "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
+                    info.name());
+        }
+    }
     private static void initWithConstructor(SiteInfo info) {
         try {
+            logger.debug("initWithConstructor");
             info.instance = create(info.type());
+            logger.debug("new %s() success", info.type().getSimpleName());
         } catch (Throwable exception) {
             try {
                 String msg = safeException(exception);
@@ -148,22 +171,6 @@ public class PageFactory {
                         info.name(), info.type(), info.type());
             }
         }
-    }
-    private static <T> T initUsingRules(SiteInfo info) {
-        Pair<String, InitRule> firstRule = INIT_RULES.first((k,r) ->
-                r.condition.execute(info.field));
-        if (firstRule != null)
-            try {
-                return (T)(info.instance = firstRule.value.func.execute(info));
-            } catch (Exception ex) {
-                throw exception(ex, "Init rule '%s' failed. Can't init field '%s' on page '%s'",
-                    firstRule.key, info.name(), info.parentName());
-            }
-        else
-            throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
-                    "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
-                    "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
-                info.name());
     }
     private static void initWebPage(WebPage webPage) {
         webPage.driverName = DRIVER.name;
