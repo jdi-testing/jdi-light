@@ -47,7 +47,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
      * Match passed value with table size
      * @param condition to compare
      */
-    @JDIAction("Assert that '{name}' size {0}")
+    @JDIAction("Assert that '{name}' size '{0}'")
     public A size(Matcher<Integer> condition) {
         jdiAssert(table().count(), condition);
         return (A) this;
@@ -57,7 +57,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
      * Match passed value with table size
      * @param size to compare
      */
-    @JDIAction("Assert that '{name}' size {0}")
+    @JDIAction("Assert that '{name}' size '{0}'")
     public A size(int size) {
         return size(Matchers.is(size));
     }
@@ -87,7 +87,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
      * Match passed value with table columns
      * @param condition to compare
      */
-    @JDIAction("Assert that '{name}' columns {0}")
+    @JDIAction("Assert that '{name}' columns '{0}'")
     public A columns(Matcher<Collection<? extends String>> condition) {
         jdiAssert(table().header(), condition);
         return (A) this;
@@ -96,7 +96,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
      * Check that the table has at list one specified row
      * @param matchers to compare
      */
-    @JDIAction("Assert that '{name}' has at least one row that {0}}")
+    @JDIAction("Assert that '{name}' has at least one row that '{0}'")
     public A rowThat(TableMatcher... matchers) {
         jdiAssert(TABLE_MATCHER.execute(table(), matchers), Matchers.is(not(Matchers.empty())));
         return (A) this;
@@ -105,7 +105,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
      * Check that the table has at list one specified row
      * @param matcher to compare
      */
-    @JDIAction("Assert that '{name}' has at least one row that {0}}")
+    @JDIAction("Assert that '{name}' has at least one row that '{0}'")
     public A rowThat(Single matcher, Column column) {
         jdiAssert(TABLE_MATCHER.execute(table(), new TableMatcher[] {matcher.toTableMatcher(column)}), Matchers.is(not(Matchers.empty())));
         return (A) this;
@@ -116,18 +116,18 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
      * @param matcher to compare
      * @return Table
      */
-    @JDIAction("Assert that '{name}' has rows that {0} in column {1}")
+    @JDIAction("Assert that '{name}' has rows that '{0}' in column '{1}'")
     public A row(Matcher<String> matcher, Column column) {
         jdiAssert(table().row(matcher, column), not(nullValue()));
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' row {0} equals to other row")
+    @JDIAction("Assert that '{name}' row '{0}' equals to other row")
     public A rowVisualValidation(String rowName, Line row) {
         jdiAssert(table().row(rowName).visualCompareTo(row), Matchers.is(true));
         return (A) this;
     }
-    @JDIAction("Assert that '{name}' row {0} equals to other row")
+    @JDIAction("Assert that '{name}' row '{0}' equals to other rows")
     public A rowsVisualValidation(String keyColumn, List<Line> rows) {
         List<Line> tableRows = table().rowsImages();
         for (int i = 0; i < table().count(); i++) {
@@ -144,7 +144,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
             throw exception("Can't find %s row with column %s", name, columnName);
         return line;
     }
-    @JDIAction("Assert that '{name}' is sorted by ascending")
+    @JDIAction("Assert that '{name}' is sorted by '{0}' in ascending order")
     public A sortedByAsc(String columnName) {
         List<String> column = table().webColumn(columnName).values();
         for (int i = 1; i < column.size(); i++)
@@ -152,7 +152,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
                 jdiAssert("Table is not by ascending at "+i+" row", Matchers.is(""));
         return (A)this;
     }
-    @JDIAction("Assert that '{name}' is sorted by descending")
+    @JDIAction("Assert that '{name}' is sorted by '{0}' in descending order")
     public A sortedByDesc(String columnName) {
         List<String> column = table().webColumn(columnName).values();
         for (int i = 1; i < column.size(); i++)
@@ -160,7 +160,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
                 jdiAssert("Table is not by descending at "+i+" row", Matchers.is(""));
         return (A)this;
     }
-    @JDIAction("Assert that '{name}' is sorted by ascending")
+    @JDIAction("Assert that '{name}' is sorted by '{0}' in ascending order")
     public A sortedNumByAsc(String columnName) {
         List<String> column = map(table().webColumn(columnName).values(), el -> el.replaceAll("[^0-9.,]", ""));
         for (int i = 1; i < column.size(); i++)
@@ -168,12 +168,17 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
                 jdiAssert("Table is not by ascending at "+i+" row", Matchers.is(""));
         return (A)this;
     }
-    @JDIAction("Assert that '{name}' is sorted by descending")
+    @JDIAction("Assert that '{name}' is sorted by '{0}' in descending order")
     public A sortedNumByDesc(String columnName) {
         List<String> column = map(table().webColumn(columnName).values(), el -> el.replaceAll("[^0-9.,+\\-]", ""));
         for (int i = 1; i < column.size(); i++)
             if (!isSorted(column.get(i), column.get(i-1), true, false))
                 jdiAssert("Table is not by descending at "+i+" row", Matchers.is(""));
+        return (A)this;
+    }
+    @JDIAction("Assert that '{name}' preview is correct")
+    public A preview(String preview) {
+        jdiAssert(table().preview(), Matchers.is(preview));
         return (A)this;
     }
 }

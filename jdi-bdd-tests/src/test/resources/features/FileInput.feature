@@ -6,10 +6,6 @@ Feature: File Input element functionality
     Then the "Avatar" label text equals to "Profile picture:"
     Then the "Avatar" label text contains "picture"
 
-  Scenario: Basic validation
-    Given I open "Html5 Page"
-    Then the "Avatar" is basically valid
-
   Scenario: Attribute of file input element
     Given I open "Html5 Page"
     Then the "Avatar" attribute "id" equals to "avatar"

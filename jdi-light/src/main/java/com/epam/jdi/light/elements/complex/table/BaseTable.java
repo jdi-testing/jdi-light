@@ -1,38 +1,11 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-import static com.epam.jdi.light.driver.WebDriverByUtils.fillByMsgTemplate;
-import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
-import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
-import static com.epam.jdi.light.elements.base.JDIBase.STRING_SIMPLIFY;
-import static com.epam.jdi.light.elements.complex.table.Line.initLine;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.all;
-import static com.epam.jdi.tools.LinqUtils.any;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.LinqUtils.firstIndex;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.LinqUtils.select;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static java.lang.String.format;
-import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.IHasSize;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
@@ -41,12 +14,30 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.elements.base.JDIBase.*;
+import static com.epam.jdi.light.elements.complex.table.Line.*;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.*;
+import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.LinqUtils.any;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.StringUtils.*;
+import static java.lang.String.format;
+import static java.util.Arrays.*;
+import static org.apache.commons.lang3.StringUtils.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -61,6 +52,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected By jsRow = By.cssSelector("tr");
     protected By jsColumn = By.cssSelector("td");
     protected By headerLocator = By.cssSelector("th");
+    protected By footer = By.cssSelector("tfoot");
     protected By fromCellToRow = By.xpath("../td");
     protected By filterLocator = By.cssSelector("th input[type=search],th input[type=text]");
     protected int rowHeaderIndex = -1;
@@ -114,6 +106,16 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         }
         return header.setName(getName() + " header");
     }
+    public WebList footerUI() {
+        WebList footer = $$(this.footer, this).setName(getName() + " footer");
+        if (footer.size() == 0) {
+            footer = getRowByIndex(1);
+            if (footer.size() == 0) {
+                throw exception("Can't find footer using locator '%s'. Please specify JTable.footer locator");
+            }
+        }
+        return footer.setName(getName() + " header");
+    }
     protected List<String> getHeader() {
         return headerUI().values();
     }
@@ -146,11 +148,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return rowHeader.get();
     }
     protected int getCount() {
-        if (columns.get().any()) {
+        if (columns.get().any())
             return columns.get().get(0).value.size();
-        }
-        //TODO: investigate case when there are multiple tables on the page
-        return $$(fillByTemplate(columnLocator, 1), this).getListFast().size();
+        int rowsCount = $$(fillByTemplate(columnLocator, getRowIndex()), this).getListFast().size();
+        return headerSameAsFirstRow() ? rowsCount - 1 : rowsCount;
     }
 
     /**
@@ -197,8 +198,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return webColumn(columnIndex).get(getRowIndexByName(rowName)).finds(fromCellToRow);
     }
     public WebList webRow(String rowName) {
-        int index = getRowHeaderIndex() == -1 ? 1 : getRowHeaderIndex();
-        return webRow(index, rowName);
+        return webRow(getRowIndex(), rowName);
+    }
+    private int getRowIndex() {
+        int headerIndex = getRowHeaderIndex();
+        return headerIndex == -1 ? 1 : headerIndex;
     }
     public WebList webRow(Enum rowName) {
         return webRow(getEnumValue(rowName));
@@ -324,13 +328,21 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected Boolean headerIsRow = null;
     protected int getRowIndex(int rowNum) {
         if (headerIsRow == null) {
-            List<String> firstRow = new ArrayList<>();
-            //TODO optimize with threads get 1st and 2nd row
-            try { firstRow = getRowByIndex(1).noWait(WebList::values, WebList.class); }
-            catch (Exception ignore) { }
-            headerIsRow = firstRow.isEmpty() || any(header(), firstRow::contains);
+            headerIsRow = headerIsRow();
         }
         return headerIsRow ? rowNum + 1 : rowNum;
+    }
+    private boolean headerIsRow() {
+        List<String> firstRow = new ArrayList<>();
+        try { firstRow = getRowByIndex(1).noWait(WebList::values, WebList.class); }
+        catch (Exception ignore) { }
+        return firstRow.isEmpty() || any(header(), firstRow::contains);
+    }
+    private boolean headerSameAsFirstRow() {
+        List<String> firstRow = new ArrayList<>();
+        try { firstRow = getRowByIndex(1).noWait(WebList::values, WebList.class); }
+        catch (Exception ignore) { }
+        return !firstRow.isEmpty() && any(header(), firstRow::contains);
     }
     public WebList filter() {
         return $$(filterLocator).setup(b-> {
@@ -345,109 +357,6 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public UIElement searchBy(String filterName) {
         int index = header().indexOf(filterName);
         return filter().get(index);
-    }
-    @Override
-    public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JTable.class, BaseTable.class))
-            return;
-        JTable j = field.getAnnotation(JTable.class);
-        String rowHeader = j.rowHeader();
-        List<String> header = asList(j.header());
-
-        if (isNotBlank(j.root()))
-            core().setLocator(defineLocator(j.root()));
-        if (isNotBlank(j.row()))
-            this.rowLocator = defineLocator(j.row());
-        if (isNotBlank(j.column()))
-            this.columnLocator = defineLocator(j.column());
-        if (isNotBlank(j.cell()))
-            this.cellLocator = defineLocator(j.cell());
-        if (isNotBlank(j.allCells()))
-            this.allCellsLocator = defineLocator(j.allCells());
-        if (isNotBlank(j.headers()))
-            this.headerLocator = defineLocator(j.headers());
-        if (isNotBlank(j.filter()))
-            this.filterLocator = defineLocator(j.filter());
-        if (isNotBlank(j.fromCellToRow()))
-            this.fromCellToRow = defineLocator(j.fromCellToRow());
-        if (header.size() > 0)
-            this.header.setFinal(header);
-        if (j.columnsMapping().length > 0)
-            this.columnsMapping = j.columnsMapping();
-        if (j.size() != -1)
-            this.size.setFinal(j.size());
-        if (j.count() != -1)
-            this.count.setFinal(j.count());
-        if (j.firstColumnIndex() != -1)
-            this.firstColumnIndex = j.firstColumnIndex();
-        if (isNotBlank(rowHeader))
-            rowHeaderName = rowHeader;
-    }
-
-    public T getTableJs() {
-        try {
-            List<String> listOfCells = jsCells();
-            cellsValues.set(new MapArray<>());
-            int k = 0;
-            int j = 1;
-            while (k < listOfCells.size()) {
-                MapArray<String, String> newRow = new MapArray<>();
-                for (int i = 1; i <= size(); i++)
-                    newRow.add(i+"", listOfCells.get(k++));
-                cellsValues.get().update(j+"", newRow);
-                j++;
-            }
-            cellsValues.gotAll();
-        } catch (Exception ex) {throw exception(ex, "Can't get all cells"); }
-        return (T) this;
-    }
-    protected T getTable() {
-        if (!cells.isGotAll()) {
-            try {
-                List<WebElement> listOfCells =
-                    $$(allCellsLocator, this)
-                    .core().noValidation().getAllElements();
-                cells.set(new MapArray<>());
-                int k = 0;
-                int j = 1;
-                for (int i = 1; i <= size(); i++)
-                    cells.get().update(i+"", new MapArray<>());
-                //TODO: replace with two "for" when getCount() and getListFast() is fixed
-                while (k < listOfCells.size()) {
-                    for (int i = 1; i <= size(); i++) {
-                        if (k >= listOfCells.size()) {
-                            break;
-                        }
-                        cells.get().get(i + "").update(j + "", new UIElement(listOfCells.get(k++)));
-                    }
-                    j++;
-                }
-                cells.gotAll();
-            } catch (Exception ex) {throw exception(ex, "Can't get all cells"); }
-        }
-        return (T) this;
-    }
-    public void clear() {
-        refresh();
-    }
-    public void refresh() {
-        rows.clear();
-        columns.clear();
-        cells.clear();
-        count.clear();
-        size.clear();
-        header.clear();
-        rowHeader.clear();
-    }
-
-    public void offCache() {
-        rows.useCache(false);
-        columns.useCache(false);
-        cells.useCache(false);
-        count.useCache(false);
-        size.useCache(false);
-        header.useCache(false);
-        rowHeader.useCache(false);
     }
 
     /**
@@ -682,9 +591,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return cell(getColIndexByName(colName), rowName);
     }
     public static JFunc1<String, String> TRIM_VALUE =
-            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "\\\\n");
+            el -> el.trim().replaceAll("\n", "\\\\n").replaceAll(" +", " ");
     public static JFunc1<String, String> TRIM_PREVIEW =
-            el -> el.trim().replaceAll(" +", " ").replaceAll("\n", "");
+            el -> el.trim().replaceAll("\n", " ").replaceAll(" +", " ");
 
     /**
      * Get table preview
@@ -713,4 +622,109 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return new MapArray<>(header(), row);
     }
 
+    @Override
+    public void setup(Field field) {
+        if (!fieldHasAnnotation(field, JTable.class, BaseTable.class))
+            return;
+        JTable j = field.getAnnotation(JTable.class);
+        String rowHeader = j.rowHeader();
+        List<String> header = asList(j.header());
+
+        if (isNotBlank(j.root()))
+            core().setLocator(defineLocator(j.root()));
+        if (!j.row().equals("//tr[%s]/td") || !getByLocator(this.rowLocator).equals("//tr[%s]/td"))
+            this.rowLocator = defineLocator(j.row());
+        if (!j.column().equals("//tr/td[%s]") || !getByLocator(this.columnLocator).equals("//tr/td[%s]"))
+            this.columnLocator = defineLocator(j.column());
+        if (!j.cell().equals("//tr[{1}]/td[{0}]") || !getByLocator(this.cellLocator).equals("//tr[{1}]/td[{0}]"))
+            this.cellLocator = defineLocator(j.cell());
+        if (!j.allCells().equals("td") || !getByLocator(this.allCellsLocator).equals("td"))
+            this.allCellsLocator = defineLocator(j.allCells());
+        if (!j.headers().equals("th") || !getByLocator(this.headerLocator).equals("th"))
+            this.headerLocator = defineLocator(j.headers());
+        if (!j.filter().equals("th input[type=search],th input[type=text]") || !getByLocator(this.filterLocator).equals("th input[type=search],th input[type=text]"))
+            this.filterLocator = defineLocator(j.filter());
+        if (!j.fromCellToRow().equals("../td") || !getByLocator(this.fromCellToRow).equals("../td"))
+            this.fromCellToRow = defineLocator(j.fromCellToRow());
+        if (!j.footer().equals("tfoot") || !getByLocator(this.fromCellToRow).equals("tfoot"))
+            this.footer = defineLocator(j.footer());
+        if (!j.jsRow().equals("tr") || !getByLocator(this.jsRow).equals("tr"))
+            this.jsRow = defineLocator(j.jsRow());
+        if (!j.jsColumn().equals("td") || !getByLocator(this.jsColumn).equals("td"))
+            this.jsColumn = defineLocator(j.jsColumn());
+        if (header.size() > 0)
+            this.header.setFinal(header);
+        if (j.columnsMapping().length > 0)
+            this.columnsMapping = j.columnsMapping();
+        if (j.size() != -1)
+            this.size.setFinal(j.size());
+        if (j.count() != -1)
+            this.count.setFinal(j.count());
+        if (j.firstColumnIndex() != -1)
+            this.firstColumnIndex = j.firstColumnIndex();
+        if (isNotBlank(rowHeader))
+            rowHeaderName = rowHeader;
+
+    }
+
+    public T getTableJs() {
+        try {
+            List<String> listOfCells = jsCells();
+            cellsValues.set(new MapArray<>());
+            int k = 0;
+            int j = 1;
+            while (k < listOfCells.size()) {
+                MapArray<String, String> newRow = new MapArray<>();
+                for (int i = 1; i <= size(); i++)
+                    newRow.add(i+"", listOfCells.get(k++));
+                cellsValues.get().update(j+"", newRow);
+                j++;
+            }
+            cellsValues.gotAll();
+        } catch (Exception ex) {throw exception(ex, "Can't get all cells"); }
+        return (T) this;
+    }
+    protected T getTable() {
+        if (!cells.isGotAll()) {
+            try {
+                List<WebElement> listOfCells =
+                        $$(allCellsLocator, core().parent)
+                                .core().noValidation().getAllElements();
+                cells.set(new MapArray<>());
+                int k = 0;
+                int j = 1;
+                for (int i = 1; i <= size(); i++)
+                    cells.get().update(i+"", new MapArray<>());
+                while (k < listOfCells.size()) {
+                    for (int i = 1; i <= size(); i++)
+                        cells.get().get(i+"").update(j+"", new UIElement(listOfCells.get(k++)));
+                    j++;
+                }
+                cells.gotAll();
+            } catch (Exception ex) {throw exception(ex, "Can't get all cells"); }
+        }
+        return (T) this;
+    }
+    public void clear() {
+        refresh();
+    }
+    public void refresh() {
+        rows.clear();
+        columns.clear();
+        cells.clear();
+        count.clear();
+        size.clear();
+        header.clear();
+        rowHeader.clear();
+    }
+
+    public void offCache() {
+        rows.useCache(false);
+        columns.useCache(false);
+        cells.useCache(false);
+        count.useCache(false);
+        size.useCache(false);
+        header.useCache(false);
+        rowHeader.useCache(false);
+    }
 }

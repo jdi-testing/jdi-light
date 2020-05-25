@@ -1,19 +1,21 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-
-import com.epam.jdi.bdd.elements.CustomMenu;
+import com.epam.jdi.light.elements.complex.Menu;
+import com.epam.jdi.light.elements.complex.WebList;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import java.util.List;
 
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+
 /**
- * Created by Roman Iovlev on 26.09.2019 Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class MenuSteps {
-
-    public static CustomMenu menu(String name) {
-        return getUI(name, CustomMenu.class);
+    public static WebList menu(String name) {
+       return getList(name, Menu.class);
     }
 
     @When("^(?:I |)select \"([^\"]*)\" in \"([^\"]*)\" menu$")

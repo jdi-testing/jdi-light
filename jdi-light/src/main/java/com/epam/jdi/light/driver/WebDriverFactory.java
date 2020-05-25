@@ -15,6 +15,7 @@ import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.get.DriverData.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.map.MapArray.*;
 import static com.epam.jdi.tools.pairs.Pair.*;
@@ -41,6 +42,7 @@ public class WebDriverFactory {
         return !getRunDrivers().any();
     }
     private static MapArray<String, WebDriver> getRunDrivers() {
+        logger.debug("SINGLE_THREAD=" + SINGLE_THREAD);
         return SINGLE_THREAD
             ? RUN_DRIVERS
             : THREAD_RUN_DRIVERS.get();
@@ -53,32 +55,47 @@ public class WebDriverFactory {
         }
     }
     public static WebDriver getDriverByName(String driverName) {
+        logger.debug("getDriverByName(%s)", driverName);
         Lock lock = new ReentrantLock();
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
+            logger.debug("SWITCH_THREAD = true");
             setRunDrivers(map($(driverName, INIT_DRIVER)));
             SWITCH_THREAD = true;
             return INIT_DRIVER;
         }
-        if (!DRIVERS.has(driverName))
+        if (!DRIVERS.has(driverName)) {
+            logger.debug("Has no driver");
             useDriver(driverName);
+        }
         try {
             lock.lock();
+            logger.debug("Lock");
             MapArray<String, WebDriver> rDrivers = getRunDrivers();
             if (rDrivers == null) {
+                logger.debug("rDrivers == null");
                 rDrivers = new MapArray<>();
             }
             if (!rDrivers.has(driverName)) {
+                logger.debug("rDrivers has no " + driverName);
                 WebDriver resultDriver = DRIVERS.get(driverName).invoke();
                 rDrivers.add(driverName, resultDriver);
                 setRunDrivers(rDrivers);
+                logger.debug("setRunDrivers");
             }
+            logger.debug("Get '%s' driver");
             WebDriver driver = rDrivers.get(driverName);
+            logger.debug("Successs: " + driver);
             if (driver.toString().contains("(null)")) {
+                logger.debug("driver contains (null)");
                 driver = DRIVERS.get(driverName).invoke();
                 rDrivers.update(driverName, driver);
+                logger.debug("update rDrivers");
             }
-            if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
+            if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId()) {
+                logger.debug("INIT_DRIVER = driver");
                 INIT_DRIVER = driver;
+            }
+            logger.debug("driver.manage().timeouts()");
             driver.manage().timeouts().implicitlyWait(0, SECONDS);
             return driver;
         } catch (Throwable ex) {
@@ -160,7 +177,7 @@ public class WebDriverFactory {
     public static void reopenDriver(String driverName) {
         MapArray<String, WebDriver> rDriver = getRunDrivers();
         if (rDriver.has(driverName)) {
-            rDriver.get(driverName).close();
+            closeDriver(rDriver.get(driverName));
             rDriver.removeByKey(driverName);
             setRunDrivers(rDriver);
         }
@@ -176,11 +193,17 @@ public class WebDriverFactory {
     }
 
     public static void close() {
-        for (Pair<String, WebDriver> pair : getRunDrivers())
-            try {
-                pair.value.quit();
-            } catch (Exception ignore) { }
+        for (Pair<String, WebDriver> pair : getRunDrivers()) {
+            closeDriver(pair.value);
+        }
         getRunDrivers().clear();
+    }
+
+    private static void closeDriver(WebDriver driver) {
+        try {
+            driver.close();
+            driver.quit();
+        } catch (Exception ignore) { }
     }
 
     public static void quit() {

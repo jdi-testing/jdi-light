@@ -302,10 +302,10 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return getEls(driver());
     }
     private WebElement getEl(SearchContext ctx) {
-        return ctx.findElement(getLocator());
+        return ctx.findElement(correctXPaths(getLocator()));
     }
     private List<WebElement> getEls(SearchContext ctx) {
-        return ctx.findElements(getLocator());
+        return ctx.findElements(correctXPaths(getLocator()));
     }
     public List<WebElement> getList(int minAmount) {
         List<WebElement> result = timer().getResultByCondition(this::tryGetList,

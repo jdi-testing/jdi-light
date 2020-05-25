@@ -42,10 +42,10 @@ public class DataTableTests implements TestsInit {
         notMoreThan(1500, table::preview);
         String value = table.preview();
         assertEquals(value.substring(0,194),
-        "Name Phone Email City" +
-            "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe" +
-            "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas" +
-            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauvais");
+        "Name Phone Email City " +
+            "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe " +
+            "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas " +
+            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv");
     }
 
     private void getValidation(Table table) {

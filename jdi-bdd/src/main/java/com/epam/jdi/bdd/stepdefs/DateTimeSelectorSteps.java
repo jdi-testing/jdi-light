@@ -1,7 +1,6 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static org.testng.Assert.assertEquals;
 
 import com.epam.jdi.light.ui.html.elements.common.DateTimeSelector;
 import cucumber.api.java.en.Then;
@@ -18,12 +17,12 @@ public class DateTimeSelectorSteps {
 
     @Then("^the \"([^\"]*)\" min equals to \"([^\"]*)\"$")
     public void attributeMinEquals(String name, String date) {
-        assertEquals(dateTimeSelector(name).min(), date);
+        dateTimeSelector(name).is().min(date);
     }
 
     @Then("^the \"([^\"]*)\" max equals to \"([^\"]*)\"$")
     public void attributeMaxEquals(String name, String date) {
-        assertEquals(dateTimeSelector(name).max(), date);
+        dateTimeSelector(name).is().max(date);
     }
 
     @When("^(?:I |)set date \"([^\"]*)\" in the \"([^\"]*)\"$")

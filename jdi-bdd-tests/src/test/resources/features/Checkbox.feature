@@ -39,8 +39,3 @@ Feature: Checkbox
     When I check "Accept Conditions"
     Then the "Accept Conditions" label text equals to "Accept terms and conditions"
     And the "Accept Conditions" label text contains "terms and conditions"
-
-  Scenario: Assert validation test
-    Given I open "Html5 Page"
-    When I check "Accept Conditions"
-    Then the "Accept Conditions" is basically valid

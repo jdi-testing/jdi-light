@@ -8,7 +8,7 @@ import io.github.com.entities.Furniture;
 
 public class SimpleTablePage extends WebPage {
 
-    public static Table usersTable;
+    public static Table simpleTable;
     public static DataTable<?, Furniture> products;
 
     @JTable(

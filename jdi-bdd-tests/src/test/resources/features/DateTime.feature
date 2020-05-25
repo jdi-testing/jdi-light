@@ -38,7 +38,3 @@ Feature: DateTimeSelector, INPUT TYPE DATETIME-LOCAL
     When I set date "2017-05-10T00:00" in the "Party Time"
     Then the "Party Time" text equals to "2017-05-10T00:00"
 
-  Scenario: Base validation test
-    Given I open "Html5 Page"
-    Then the "Party Time" is basically valid
-

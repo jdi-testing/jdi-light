@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
+import com.epam.jdi.light.asserts.generic.UIMSelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -27,8 +27,8 @@ import static java.util.Arrays.*;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class Selector extends UIBaseElement<UISelectAssert<?,?>>
-        implements ISelector, SetValue, HasPlaceholder {
+public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
+        implements IMultiSelector, SetValue, HasPlaceholder {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
     protected Select asSelect() {
         return core().asSelect();
@@ -198,7 +198,7 @@ public class Selector extends UIBaseElement<UISelectAssert<?,?>>
         return asSelect().isMultiple() ? print(checked(),";") : selected();
     }
     @Override
-    public UISelectAssert<?,?> is() {
-        return new UISelectAssert<>().set(this);
+    public UIMSelectAssert<?,?> is() {
+        return new UIMSelectAssert<>().set(this);
     }
 }
