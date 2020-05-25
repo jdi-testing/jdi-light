@@ -6,6 +6,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.interfaces.base.HasRefresh;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
@@ -44,7 +45,7 @@ import static org.hamcrest.Matchers.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAssert<?,?>> extends UIBaseElement<A>
-        implements ISetup, HasValue, HasAssert<A>, IHasSize, IsText {
+        implements ISetup, HasValue, HasAssert<A>, IHasSize, IsText, HasRefresh {
     protected By rowLocator = By.xpath("//tr[%s]/td");
     protected By columnLocator = By.xpath("//tr/td[%s]");
     protected By cellLocator = By.xpath("//tr[{1}]/td[{0}]");
@@ -133,16 +134,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         int index = getRowHeaderIndex();
         return index != -1
             ? namedHeader(index)
-            : indexHeader();
-    }
-    protected List<String> indexHeader() {
-        List<String> result = new ArrayList<>();
-        for (int i = 1; i <= count(); i++)
-            result.add(i+"");
-        return result;
+            : namedHeader(1);
     }
     protected List<String> namedHeader(int index) {
-        return column(index);
+        return webColumn(index).values();
     }
     public List<String> rowHeader() {
         return rowHeader.get();
@@ -195,7 +190,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         }
     }
     public WebList webRow(int columnIndex, String rowName) {
-        return webColumn(columnIndex).get(getRowIndexByName(rowName)).finds(fromCellToRow);
+        //return webColumn(columnIndex).get(getRowIndexByName(rowName)).finds(fromCellToRow);
+        return webColumn(columnIndex).get(jsRowIndexByName(rowName)).finds(fromCellToRow);
     }
     public WebList webRow(String rowName) {
         return webRow(getRowIndex(), rowName);
@@ -218,7 +214,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return result;
     }
     protected List<String> getJSValues(String locator) {
-        return (List<String>) core().js().executeScript("return Array.from(document.querySelectorAll(\""+locator+"\")).map(el=>el.innerText)");
+        List<String> values = (List<String>) core().js().executeScript("return Array.from(document.querySelectorAll(\""+locator+"\")).map(el=>el.innerText)");
+        return map(values, String::trim);
     }
     public List<String> jsCells() {
         return getJSValues(format("%s %s", getByLocator(base().getLocator()), getByLocator(jsColumn)));
@@ -233,7 +230,24 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return getJSValues(format("%s %s:nth-child(%s) %s", getByLocator(base().getLocator()), getByLocator(jsRow), getRowIndex(rowIndex), getByLocator(jsColumn)));
     }
     public List<String> jsRow(String rowName) {
-        return jsRow(getRowIndexByName(rowName));
+        return jsRow(jsRowIndexByName(rowName));
+    }
+    public int jsRowIndexByName(String rowName) {
+        int index = getRowHeaderIndex();
+        if (index == -1)
+            index = 1;
+        List<String> rowHeader;
+        try {
+            rowHeader = jsColumn(index);
+            if (rowHeader.size() == 0)
+                throw new RuntimeException();
+        } catch (Exception ex) {
+            rowHeader = webColumn(index).values();
+        }
+        int rowIndex = firstIndex(rowHeader, h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowName)));
+        if (rowIndex == -1)
+            throw exception("Can't find row '%s'", rowName);
+        return rowIndex + 1;
     }
     protected void validateColumnIndex(int colNum) {
         if (colNum < 1)

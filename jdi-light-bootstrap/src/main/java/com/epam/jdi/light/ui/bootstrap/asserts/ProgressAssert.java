@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.*;
 public class ProgressAssert extends UIAssert<ProgressAssert, Progress> {
     @JDIAction("Assert that '{name}' value {0}")
     public ProgressAssert value(Matcher<String> condition) {
-        jdiAssert(element.value(), condition);
+        jdiAssert(element().value(), condition);
         return this;
     }
     public ProgressAssert value(String value) {
@@ -26,7 +26,7 @@ public class ProgressAssert extends UIAssert<ProgressAssert, Progress> {
     }
     @JDIAction("Assert that '{name}' values {0}")
     public ProgressAssert values(Matcher<? super List<String>> condition) {
-        jdiAssert(element.values(), condition);
+        jdiAssert(element().values(), condition);
         return this;
     }
     public ProgressAssert values(String... values) {
@@ -34,7 +34,7 @@ public class ProgressAssert extends UIAssert<ProgressAssert, Progress> {
     }
     @JDIAction(value = "Get '{name}' min value {0}")
     public ProgressAssert min(Matcher<Integer> condition) {
-        jdiAssert(element.min(), condition);
+        jdiAssert(element().min(), condition);
         return this;
     }
     public ProgressAssert min(int minValue) {
@@ -43,7 +43,7 @@ public class ProgressAssert extends UIAssert<ProgressAssert, Progress> {
 
     @JDIAction(value = "Get '{name}' max value {0}")
     public ProgressAssert max(Matcher<Integer> condition) {
-        jdiAssert(element.max(), condition);
+        jdiAssert(element().max(), condition);
         return this;
     }
     public ProgressAssert max(int maxValue) {

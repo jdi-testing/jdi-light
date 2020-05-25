@@ -53,7 +53,7 @@ public enum LogLevels {
             case "error": return ERROR;
             case "warning": return WARNING;
             case "step": return STEP;
-            case "degug": return DEBUG;
+            case "debug": return DEBUG;
             case "trace": return TRACE;
             case "all": return ALL;
             default: return INFO;

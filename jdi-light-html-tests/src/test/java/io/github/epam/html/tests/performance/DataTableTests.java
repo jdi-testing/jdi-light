@@ -97,7 +97,7 @@ public class DataTableTests implements TestsInit {
         assertEquals(print(column, ";").substring(0, 30),
                 "076 1971 1687;(011307) 16843;0");
 
-        String value = notMoreThan(2000, () -> table.getValue());
+        String value = notMoreThan(2000, table::getValue);
         assertEquals(value.substring(0,228),
         "||X||Name|Phone|Email|City||" + LINE_BREAK +
             "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +

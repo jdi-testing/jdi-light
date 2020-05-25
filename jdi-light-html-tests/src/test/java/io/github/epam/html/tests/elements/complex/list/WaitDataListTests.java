@@ -43,10 +43,12 @@ public class WaitDataListTests implements TestsInit {
     @Test
     public void sizeTest() {
         assertEquals(searchS.size(), 6);
+        // FLAKY
         searchS.is().size(equalTo(8));
     }
     @Test
     public void sizeGreaterTest() {
+        // FLAKY
         searchS.is().size(greaterThan(7));
     }
 

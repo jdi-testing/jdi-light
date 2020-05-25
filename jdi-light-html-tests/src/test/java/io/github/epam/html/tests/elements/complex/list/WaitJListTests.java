@@ -48,10 +48,12 @@ public class WaitJListTests implements TestsInit {
     @Test
     public void sizeTest() {
         assertEquals(jsearchTitle.size(), 6);
+        // FLAKY
         jsearchTitle.is().size(equalTo(8));
     }
     @Test
     public void sizeNotEmptyTest() {
+        // FLAKY
         jsearchTitle.is().size(greaterThan(7));
     }
 
