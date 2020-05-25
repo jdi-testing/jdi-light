@@ -4,6 +4,8 @@ import com.epam.jdi.tools.DataClass;
 
 import java.lang.reflect.Field;
 
+import static java.lang.String.*;
+
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
@@ -54,4 +56,12 @@ public class SiteInfo extends DataClass<SiteInfo> {
         this.driverName = info.driverName;
     }
 
+    @Override
+    public String toString() {
+        try {
+            return format("SiteInfo[field:%s]", field.getName());
+        } catch (Exception ex) {
+            return "SiteInfo[field:null]";
+        }
+    }
 }

@@ -149,8 +149,7 @@ public final class WebDriverByUtils {
     private static List<WebElement> getEls(Object step, SearchContext ctx, List<WebElement> els) {
         if (isClass(step.getClass(), By.class)) {
             String byName = getByName((By) step);
-            if (byName.equals("id") ||
-                    (byName.equals("css") && getByLocator((By) step).matches("^#[a-zA-Z-]+$"))) {
+            if (byName.equals("id") || (byName.equals("css") && getByLocator((By) step).matches("^#[a-zA-Z-]+$"))) {
                 return getDriver().findElements((By) step);
             } else {
                 return els == null
