@@ -98,7 +98,8 @@ jobs:
       name: Run tests - jdi-light-unit-tests
       script:
           - mvn -ntp install -DskipTests
-          - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
+          - echo arguments=$CHROME_ARGS > "./$JDI_LIGHT_UNIT_TESTS/src/test/resources/$CHROME_PROPERTIES"
+          - mvn verify $WITH_PARAMS -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
 
     - stage: reports
       name: Deploy allure reports to netlify
