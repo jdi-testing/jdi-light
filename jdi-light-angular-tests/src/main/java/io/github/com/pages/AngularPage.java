@@ -3,7 +3,6 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import elements.common.BasicSpinner;
@@ -19,12 +18,12 @@ public class AngularPage extends WebPage {
     @UI("#mat-radio-3")
     public static Button secondBasicRadioButton;
 
-    @Css(".mat-spinner")
+    @UI("#basic_progress_spinner")
     public static BasicSpinner basicProgressSpinner;
 
-    @XPath("//mat-icon[contains(@aria-label,'home icon')]")
+    @UI("#basic_icon")
     public static Icon basicIcon;
 
-    @XPath("//mat-icon[contains(@aria-label,'SVG icon')]")
+    @UI("#svg_icon")
     public static Icon svgIcon;
 }
