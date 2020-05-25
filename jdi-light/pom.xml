@@ -183,9 +183,9 @@
                             <value>io.qameta.allure.testng.AllureTestNg</value>
                         </property>
                     </properties>
-<!--                    <systemPropertyVariables>-->
-<!--                        <allure.results.directory>target/allure-results</allure.results.directory>-->
-<!--                    </systemPropertyVariables>-->
+                    <systemPropertyVariables>
+                        <allure.results.directory>target/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>
