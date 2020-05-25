@@ -25,11 +25,11 @@ env:
     - EXAMPLES="jdi-light-examples"
     - EXAMPLES_PROPERTY="test-examples/jdi-light-examples"
     - PERFORMANCE="jdi-performance"
-    - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
+    - PERFORMANCE_PROPERTY="test-examples/jdi-performance
+    - JDI_LIGHT_UNIT_TESTS="jdi-light"
     - CHROME_ARGS="--headless"
     - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
     - PATH="$JAVA_HOME/bin:$PATH"
-    - JDI_LIGHT_TESTS="jdi-light"
 
 stages:
   - prepare
@@ -93,10 +93,10 @@ jobs:
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
 
     - stage: test
-      name: Run tests - jdi-light
+      name: Run tests - jdi-light-unit-tests
       script:
           - mvn -ntp install -DskipTests
-          - mvn verify -pl $GROUP_ID:$JDI_LIGHT_TESTS
+          - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
 
     - stage: reports
       name: Deploy allure reports to netlify
