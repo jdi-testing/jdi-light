@@ -3,7 +3,7 @@
 <suite name="JDI-Light Tests" parallel="methods" thread-count="1">
     <test name="Tests">
         <packages>
-            <package name="io.github.epam.properties"/>
+            <package name="io.github.epam.*"/>
         </packages>
     </test>
     <listeners>
