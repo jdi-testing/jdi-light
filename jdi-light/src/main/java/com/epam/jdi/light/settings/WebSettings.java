@@ -113,7 +113,7 @@ public class WebSettings {
             prop = "null";
         }
         logger.debug("fillAction(%s=%s)", name, prop);
-        fillAction(action, name);
+        PropertyReader.fillAction(action, name);
     }
     public static boolean initialized = false;
     public static synchronized void init() {
