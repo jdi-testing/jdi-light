@@ -4,11 +4,16 @@ import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.settings.WebSettings;
 
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
-import static com.epam.jdi.light.mobile.driver.MobileDriverData.*;
-import static com.epam.jdi.light.mobile.driver.MobileDriverInfos.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.PropertyReader.*;
+import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
+import static com.epam.jdi.light.mobile.driver.MobileDriverData.CAPABILITIES_FOR_ANDROID;
+import static com.epam.jdi.light.mobile.driver.MobileDriverData.CAPABILITIES_FOR_IOS;
+import static com.epam.jdi.light.mobile.driver.MobileDriverInfos.ANDROID_INFO;
+import static com.epam.jdi.light.mobile.driver.MobileDriverInfos.IOS_INFO;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.initialized;
+import static com.epam.jdi.light.settings.WebSettings.loadCapabilities;
+import static com.epam.jdi.tools.PropertyReader.fillAction;
 
 /**
  * Created by Roman Iovlev on 20.03.2019
@@ -29,8 +34,19 @@ public class MobileSettings {
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_IOS.put(key.toString(), value.toString())));
         initialized = true;
     }
+
     private static String getRemoteUrl(String prop) {
-        String trimProp = prop.toLowerCase().replaceAll(" ", "");
-        return trimProp.equals("appium") ? appium() : "";
+        switch (prop.toLowerCase().replaceAll(" ", "")) {
+            case "sauce":
+            case "saucelabs":
+                DRIVER.capabilities.common = sauceCapabilities();
+                return sauceLabs();
+            case "browserstack":
+                return browserstack();
+            case "appium":
+                return appium();
+            default:
+                return "";
+        }
     }
 }

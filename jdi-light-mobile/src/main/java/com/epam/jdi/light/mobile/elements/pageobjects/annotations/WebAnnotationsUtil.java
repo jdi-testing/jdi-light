@@ -5,6 +5,10 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.By;
 
+import static com.epam.jdi.light.mobile.driver.MobileDriverData.CAPABILITIES_FOR_ANDROID;
+import static com.epam.jdi.light.mobile.driver.MobileDriverData.CAPABILITIES_FOR_IOS;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 public class WebAnnotationsUtil {
 
     public static By mobileFindByToBy(MobileFindBy locator) {
@@ -52,5 +56,21 @@ public class WebAnnotationsUtil {
                 return MobileBy.image(locator.image());*/
         }
         return null;
+    }
+
+    public static void setApp(Class<?> app) {
+        if (app.isAnnotationPresent(JApp.class)) {
+            String appCapability = app.getAnnotation(JApp.class).app();
+            String appPackage = app.getAnnotation(JApp.class).appPackage();
+            String appActivity = app.getAnnotation(JApp.class).appActivity();
+            if (!isBlank(appCapability)) {
+                CAPABILITIES_FOR_IOS.put("app", appCapability);
+                CAPABILITIES_FOR_ANDROID.put("app", appCapability);
+            }
+            if (!isBlank(appPackage) || !isBlank(appActivity)) {
+                CAPABILITIES_FOR_ANDROID.put("appPackage", appPackage);
+                CAPABILITIES_FOR_ANDROID.put("appActivity", appActivity);
+            }
+        }
     }
 }
