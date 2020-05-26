@@ -21,15 +21,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.*;
 
 import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.PageChecks.NONE;
 import static com.epam.jdi.light.common.VisualCheckAction.*;
 import static com.epam.jdi.light.common.VisualCheckPage.*;
 import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.AllureLogger.*;
@@ -51,6 +52,7 @@ import static java.lang.Character.*;
 import static java.lang.String.format;
 import static java.lang.System.*;
 import static java.lang.Thread.*;
+import static java.util.Arrays.*;
 import static java.util.Collections.reverse;
 import static org.apache.commons.lang3.StringUtils.*;
 
@@ -60,6 +62,15 @@ import static org.apache.commons.lang3.StringUtils.*;
  */
 public class ActionHelper {
     static String getTemplate(LogLevels level) {
+        if (LOGS.logInfoDetails != null) {
+            switch (LOGS.logInfoDetails) {
+                case NONE: return "{action}";
+                case NAME: return "{action} ({name})";
+                case LOCATOR: return "{action} ({locator})";
+                case CONTEXT: return "{action} ({context})";
+                case ELEMENT: return "{action} ({element})";
+            }
+        }
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
     }
     public static int CUT_STEP_TEXT = 70;
@@ -89,7 +100,8 @@ public class ActionHelper {
                 MapArray<String, Object> args = methodArgs(jp, method);
                 MapArray<String, Object> core = core(jp);
                 MapArray<String, Object> fields = classFields(jp.getThis());
-                filledTemplate = getActionNameFromTemplate(method, filledTemplate, obj, args, core, fields);
+                MapArray<String, Object> methods = classMethods(jp.getThis());
+                filledTemplate = getActionNameFromTemplate(method, filledTemplate, obj, args, core, fields, methods);
                 if (filledTemplate.contains("{{VALUE}}") && args.size() > 0) {
                     filledTemplate = filledTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
                 }
@@ -203,12 +215,28 @@ public class ActionHelper {
     //region Private
     public static String getBeforeLogString(ProceedingJoinPoint jp) {
         String actionName = GET_ACTION_NAME.execute(jp);
-        String logString = jp.getThis() == null
-            ? actionName
-            : msgFormat(getTemplate(LOGS.logLevel), map(
-                $("action", actionName),
-                $("element", getElementName(jp))));
+        String logString;
+        if (jp.getThis() == null) {
+            logString = actionName;
+        } else {
+            MapArray<String, Object> logOptions = LOG_VALUES.execute(jp);
+            logOptions.add("action", actionName);
+            logString = msgFormat(getTemplate(LOGS.logLevel), logOptions);
+        }
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
+    }
+    public static JFunc1<ProceedingJoinPoint, MapArray<String, Object>> LOG_VALUES = ActionHelper::getLogOptions;
+    public static MapArray<String, Object> getLogOptions(ProceedingJoinPoint jp) {
+        MapArray<String, Object> map = new MapArray<>();
+        JFunc<String> elementName = () -> getElementName(jp);
+        map.add("name", elementName);
+        JFunc<String> element = () -> getFullInfo(jp);
+        map.add("element", element);
+        JFunc<String> context = () -> getElementContext(jp);
+        map.add("context", context);
+        JFunc<String> locator = () -> getElementLocator(jp);
+        map.add("locator", locator);
+        return map;
     }
     public static void processPage(ActionObject jInfo) {
         getWindows();
@@ -231,7 +259,11 @@ public class ActionHelper {
         if (jInfo.topLevel()) {
             logFailure(jInfo);
             reverse(failedMethods);
-            logger.error("Failed actions chain: " + print(failedMethods, " > "));
+            List<String> chainActions = new ArrayList<>(failedMethods);
+            try {
+                logger.error("Url: " + WebPage.getUrl());
+            } catch (Exception ignore) { }
+            logger.error("Failed actions chain: " + print(chainActions, " > "));
         }
         return exception(ex, getExceptionAround(ex, jInfo));
     }
@@ -331,6 +363,16 @@ public class ActionHelper {
     static MapArray<String, Object> classFields(Object obj) {
         return obj != null ? getAllFields(obj) : new MapArray<>();
     }
+    static MapArray<String, Object> classMethods(Object obj) {
+        return obj != null ? getMethods(obj) : new MapArray<>();
+    }
+    private static MapArray<String, Object> getMethods(Object obj) {
+        return new MapArray<>(obj.getClass().getMethods(),
+                method -> method.getName() + "()", v -> func(obj, v), true);
+    }
+    private static JFunc<String> func(Object obj, Method m) {
+        return () -> m.invoke(obj).toString();
+    }
     static String getElementName(JoinPoint jp) {
         try {
             Object obj = jp.getThis();
@@ -338,8 +380,47 @@ public class ActionHelper {
             return isInterface(getJpClass(jp), INamed.class)
                 ? ((INamed) obj).getName()
                 : obj.toString();
-        } catch (Exception ex) {
-            throw exception(ex, "Can't get element name");
+        } catch (Throwable ex) {
+            return "Can't get element name";
+        }
+    }
+    static String getElementContext(JoinPoint jp) {
+        try {
+            Object obj = jp.getThis();
+            if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
+            if (isInterface(getJpClass(jp), IBaseElement.class))
+                return ((IBaseElement) obj).base().printFullLocator();
+            return isInterface(getJpClass(jp), INamed.class)
+                    ? ((INamed) obj).getName()
+                    : obj.toString();
+        } catch (Throwable ex) {
+            return "Can't get context locator";
+        }
+    }
+    static String getFullInfo(JoinPoint jp) {
+        try {
+            Object obj = jp.getThis();
+            if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
+            if (isInterface(getJpClass(jp), IBaseElement.class))
+                return ((IBaseElement) obj).base().toString();
+            return isInterface(getJpClass(jp), INamed.class)
+                    ? ((INamed) obj).getName()
+                    : obj.toString();
+        } catch (Throwable ex) {
+            return "Can't get context locator";
+        }
+    }
+    static String getElementLocator(JoinPoint jp) {
+        try {
+            Object obj = jp.getThis();
+            if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
+            if (isInterface(getJpClass(jp), IBaseElement.class))
+                return ((IBaseElement) obj).base().locator.toString();
+            return isInterface(getJpClass(jp), INamed.class)
+                    ? ((INamed) obj).getName()
+                    : obj.toString();
+        } catch (Throwable ex) {
+            return "Can't get element locator";
         }
     }
     static String getActionNameFromTemplate(MethodSignature method, String value, MapArray<String, Object>... args) {
@@ -362,9 +443,14 @@ public class ActionHelper {
     //endregion
     public static void addFailedMethod(ProceedingJoinPoint jp) {
         String[] s = jp.toString().split("\\.");
-        String result = s[s.length-2]+"."+s[s.length-1].replaceAll("\\)\\)", ")");
+        String result = format("%s.%s%s", s[s.length-2], s[s.length-1].replaceAll("\\)\\)", ""),
+                printArgs(getArgs(jp)));
         if (!failedMethods.contains(result))
             failedMethods.add(result);
+    }
+    private static String printArgs(Object[] args) {
+        return args.length == 0 ? ")"
+                : format(":'%s')", print(asList(args), Object::toString));
     }
     public static String getExceptionAround(Throwable ex, ActionObject jInfo) {
         String result = safeException(ex);
@@ -388,10 +474,10 @@ public class ActionHelper {
     public static boolean notThisAround(String name) {
         return !arounds().get(0).getClassName().equals(name);
     }
-    public static int aroundCount(String name) {
+    public static int aroundCount() {
         return where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround") && s.getClassName().equals(name))
-                .size();
+            s -> s.getMethodName().equals("jdiAround"))
+            .size();
     }
     private static String getMethodName(ProceedingJoinPoint jp) {
         String className = getJpClass(jp).getSimpleName();

@@ -15,6 +15,7 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -58,6 +59,9 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
     public A values(String... values) {
         return values(hasItems(values));
     }
+    public A values(List<String> values) {
+        return values(toStringArray(values));
+    }
     @JDIAction("Assert that '{name}' values {0}")
     public A values(TextTypes type, Matcher<? super List<String>> condition) {
         jdiAssert(element.values(type), condition);
@@ -98,11 +102,11 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
     public A size(int size) {
         return size(equalTo(size));
     }
-    @JDIAction("Assert that '{name}' size {0}")
+    @JDIAction("Assert that '{name}' is empty")
     public A empty() {
         return size(0);
     }
-    @JDIAction("Assert that '{name}' size {0}")
+    @JDIAction("Assert that '{name}' is not empty")
     public A notEmpty() {
         return size(greaterThan(0));
     }

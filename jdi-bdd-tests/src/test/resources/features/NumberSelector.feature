@@ -45,9 +45,3 @@ Feature: NumberSelector
     Then the "Height" number selector value is greater than "0.0"
     And the "Height" number selector value less than "3.0"
     And the "Height" text equals to "2.1"
-  
-  Scenario: Base validation
-    Given I open "Html5 Page"
-    Then the "Height" is basically valid
-  
-  

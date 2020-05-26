@@ -21,10 +21,10 @@ import java.util.function.Supplier;
 import static com.epam.jdi.light.common.CheckTypes.NONE;
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.VisualCheckPage.*;
 import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.elements.base.OutputTemplates.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
@@ -46,6 +46,7 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebPage extends DriverBase implements PageObject {
+
     public String url = "";
     public String title = "";
 
@@ -53,12 +54,19 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = NONE;
 
+    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
+
     public <T> Form<T> asForm() {
-        return new Form<>().setPageObject(this).setup(Form.class,e->e.setName(getName()+" Form").setParent(this));
+        return new Form<>().setPageObject(this)
+            .setup(Form.class, e -> e.setName(getName() + " Form").setParent(this));
     }
 
     private static Safe<String> currentPage = new Safe<>("Undefined Page");
-    public static String getCurrentPage() { return currentPage.get(); }
+
+    public static String getCurrentPage() {
+        return currentPage.get();
+    }
+
     public static void setCurrentPage(WebPage page) {
         currentPage.set(page.getName());
     }
@@ -85,7 +93,9 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public static void openSite(Class<?> site) {
         initSite(site);
-        openSite();
+        WebPage page = new WebPage(getDomain());
+        page.setName(site.getSimpleName());
+        page.open();
     }
     /**
      * Get Web page URL
@@ -144,7 +154,7 @@ public class WebPage extends DriverBase implements PageObject {
      * Opens url specified for page
      * @param url
      */
-    @JDIAction("Open '{name}'(url={0})")
+    @JDIAction(value = "Open '{name}'(url={0})", timeout = 0)
     private void open(String url) {
         init();
         CacheValue.reset();
@@ -455,14 +465,18 @@ public class WebPage extends DriverBase implements PageObject {
             return equals == null || equals.equals("") || value.contains(equals);
         }
     }
+
     public static void beforeNewPage(WebPage page) {
-        if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
+        if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE) {
             visualWindowCheck();
-        logger.toLog("Page '"+page.getName()+"' opened");
+        }
+        logger.toLog("Page '" + page.getName() + "' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());
     }
+
     public static void beforeThisPage(WebPage page) {
-        if (PAGE.checkPageOpen != PageChecks.NONE)
+        if (PAGE.checkPageOpen != PageChecks.NONE) {
             page.checkOpened();
+        }
     }
 }

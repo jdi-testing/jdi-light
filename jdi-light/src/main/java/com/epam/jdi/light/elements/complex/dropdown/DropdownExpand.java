@@ -1,11 +1,11 @@
 package com.epam.jdi.light.elements.complex.dropdown;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
+import com.epam.jdi.light.asserts.complex.DropdownAssert;
+import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 
@@ -21,7 +21,7 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Created by Roman Iovlev on 02.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implements IsDropdown, ISetup {
+public class DropdownExpand extends UIBaseElement<DropdownAssert> implements IsDropdown, ISetup, ISelector, HasAssert<DropdownAssert> {
     public String expandLocator = ".caret";
 
     public UIElement expander() {
@@ -53,7 +53,7 @@ public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implement
         expander().click();
     }
 
-    @JDIAction(value = "Is '{name}' expanded", level = DEBUG)
+    @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
         try {
             return list().noWait(WebList::isDisplayed, WebList.class);
@@ -62,20 +62,19 @@ public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implement
         }
     }
 
-    @JDIAction(level = DEBUG)
+    @JDIAction(level = DEBUG, timeout = 0)
     public void expand() {
         if (!isExpanded())
             toggle();
     }
 
-    @JDIAction(level = DEBUG)
+    @JDIAction(level = DEBUG, timeout = 0)
     public void close() {
         if (isExpanded())
             toggle();
     }
 
-    @JDIAction("Select '{0}' in '{name}'")
-    @Override
+    @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(String value) {
         expand();
         list().select(value);
@@ -97,15 +96,13 @@ public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implement
     @JDIAction("Get selected value")
     @Override
     public String selected() {
-        expand();
-        return list().selected();
+        return value().getText();
     }
 
     @JDIAction("Is '{0}' selected")
     @Override
     public boolean selected(String value) {
-        expand();
-        return list().selected(value);
+        return selected().equals(value);
     }
 
     @Override
@@ -151,7 +148,7 @@ public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implement
             return;
         JDropdown j = field.getAnnotation(JDropdown.class);
         setup(j.root(), j.value(), j.list(), j.expand());
-        autoClose = j.autoclose();
+        autoClose = j.autoClose();
     }
 
     @JDIAction("Check that '{name}' is displayed")
@@ -159,7 +156,7 @@ public class DropdownExpand extends UIBaseElement<UISelectAssert<?,?>> implement
         return value().isDisplayed();
     }
     @Override
-    public UISelectAssert<?,?> is() {
-        return (UISelectAssert<?,?>) new UISelectAssert().set(this);
+    public DropdownAssert is() {
+        return new DropdownAssert().set(this);
     }
 }

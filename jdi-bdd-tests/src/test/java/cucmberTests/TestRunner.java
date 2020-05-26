@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import cucumber.api.testng.AbstractTestNGCucumberTests;
 import io.github.com.StaticSite;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -22,11 +21,12 @@ import static io.github.com.pages.Header.*;
 @CucumberOptions(
         features = "classpath:features"
         , glue = {"com.epam.jdi.bdd", "cucmberTests"}
-        //, tags = {"@menu"}
+        // , tags = {"@radio"}
 )
-public class TestRunner extends AbstractTestNGCucumberTests {
+public class TestRunner {
     @BeforeClass
     public static void setUp() {
+        killAllSeleniumDrivers();
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initElements(StaticSite.class);
         homePage.open();

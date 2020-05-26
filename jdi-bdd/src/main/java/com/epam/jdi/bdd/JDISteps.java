@@ -14,8 +14,8 @@ import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -288,12 +288,12 @@ public class JDISteps {
 
     @Then("^the current page url is \"(.*?)\"$")
     public void urlIs(String expectedUrl) {
-        assertEquals(expectedUrl, getUrl());
+        assertThat(expectedUrl, is(getUrl()));
     }
 
     @Then("^the current page title is \"([^\"]*)\"$")
     public void titleIs(String expectedUrl) {
-        assertEquals(expectedUrl, getTitle());
+        assertThat(expectedUrl, is(getTitle()));
     }
     //#endregion
 

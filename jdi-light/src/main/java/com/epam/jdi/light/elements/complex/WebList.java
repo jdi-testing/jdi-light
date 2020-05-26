@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
@@ -25,6 +26,7 @@ import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -41,7 +43,7 @@ import static org.apache.commons.lang3.StringUtils.*;
  */
 public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList,
         HasAssert<UISelectAssert<UISelectAssert<?,?>, WebList>> {
-    protected int startIndex = 1;
+    protected int startIndex = ELEMENT.startIndex;
     public WebList indexFromZero() {
         return startIndex(0);
     }
@@ -65,14 +67,13 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public WebList() {
         elements.useCache(true);
         textType = SMART_LIST;
-        noValidation();
     }
-    public WebList(By locator) { this(); setLocator(locator);}
+    public WebList(@MarkupLocator By locator) { this(); setLocator(locator);}
     public WebList(List<WebElement> elements) {
         this(); setWebElements(elements);
     }
     public WebList(MapArray<String, UIElement> map) {
-        elements.set(new MultiMap<>(map));
+        this(); elements.set(new MultiMap<>(map));
     }
     public WebList setValues(MultiMap<String, UIElement> map) {
         this.elements.set(map);
@@ -199,7 +200,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             nameIndex = true;
             return this;
         }
-        textType =type;
+        textType = type;
         return setUIElementName(type.func);
     }
     @Override
@@ -210,22 +211,29 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     /**
      * @param index
      */
-    @JDIAction(level = DEBUG) @Override
+    @Override
     public UIElement get(int index) {
         if (index < startIndex)
             throw exception("Can't get element with index '%s'. Index should be %s or more", index, startIndex);
+        return getByIndex(index);
+    }
+
+    @JDIAction(level = DEBUG)
+    private UIElement getByIndex(int index) {
+        if (index < startIndex)
+            throw exception("Can't get element with index '%s'. Index should be %s or more", index, startIndex);
         int getIndex = index - startIndex;
-        if (locator.isEmpty() && elements.isUseCache() && elements.get().size() > getIndex)
+        if (locator.isNull() && elements.isUseCache() && elements.get().size() > getIndex)
             return elements.get().get(getIndex).value;
         return (locator.isTemplate()
-            ? tryGetByIndex(index)
-            : getElementByLocator(getIndex, index))
-        .setName(nameFromIndex(index));
+                ? tryGetByIndex(index)
+                : getElementByLocator(getIndex, index))
+                .setName(nameFromIndex(index));
     }
     private UIElement getElementByLocator(int getIndex, int index) {
         return locator.isXPath()
             ? new UIElement(base(), locator.addIndex(index), index+"", parent)
-            : initElement(() -> getList(getIndex+1).get(getIndex));
+            : initElement(() -> getList(getIndex + 1).get(getIndex));
     }
     protected UIElement tryGetByIndex(int index) {
         try {
@@ -243,10 +251,17 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
-        UIElement element = get(value);
+        clickOnElement(get(value), value);
+    }
+    private void clickOnElement(UIElement element, String value) {
         if (element == null)
             throw exception("Can't get element '%s'", value);
-        element.click();
+        if (textType == LABEL) {
+            if (element.isDisabled())
+                throw exception("Can't perform click. Element is disabled");
+            element.label().click();
+        }
+        else element.click();
     }
 
     /**
@@ -349,17 +364,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         get(values[length-1]).click();
     }
 
-    /**
-     * Select the items by the values, hover and click on them
-     * @param value
-     */
-    @JDIAction("Select ({0}) for '{name}'")
-    public void hoverAndClick(String value) {
-        String[] split = value.split(">");
-        if (split.length == 1)
-            select(split[0]);
-        else hoverAndClick(split);
-    }
     public <TEnum extends Enum<?>> void select(TEnum value) {
         select(getEnumValue(value));
     }
@@ -380,7 +384,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
-        get(index).click();
+        clickOnElement(get(index), index+"");
     }
 
     /**
@@ -444,7 +448,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         try {
             return elements.isUseCache() && elements.get().size() > 0
                 ? elements.get().size()
-                : noWait(() -> getList(0).size());
+                : IList.super.size();
         } catch (Exception ex) {
             return 0;
         }

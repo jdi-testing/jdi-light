@@ -23,7 +23,3 @@ Background:
     Then the "Jdi Logo" attribute "src" contains "jdi-logo.jpg"
     And the "Jdi Logo" attribute "height" contains "100"
     And the "Jdi Logo" attribute "width" contains "101"
-
-  Scenario: Do base validation
-    Given I open "Html5 Page"
-    Then the "Jdi Logo" is basically valid

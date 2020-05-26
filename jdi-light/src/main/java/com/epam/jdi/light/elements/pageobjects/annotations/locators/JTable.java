@@ -9,17 +9,20 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JTable {
-    String root() default "";
+    @MarkupLocator String root() default "";
     String[] header() default {};
 
-    String headers() default "";
-    String filter() default "";
-    String row() default "";
-    String column() default "";
-    String cell() default "";
-    String allCells() default "";
-    String rowHeader() default "";
-    String fromCellToRow() default "";
+    @MarkupLocator String headers() default "th";
+    @MarkupLocator String filter() default "th input[type=search],th input[type=text]";
+    @MarkupLocator String row() default "//tr[%s]/td";
+    @MarkupLocator String jsRow() default "tr";
+    @MarkupLocator String column() default "//tr/td[%s]";
+    @MarkupLocator String jsColumn() default "td";
+    @MarkupLocator String cell() default "//tr[{1}]/td[{0}]";
+    @MarkupLocator String allCells() default "td";
+    @MarkupLocator String rowHeader() default "";
+    @MarkupLocator String fromCellToRow() default "../td";
+    @MarkupLocator String footer() default "tfoot";
     int size() default -1;
     int count() default -1;
     int firstColumnIndex() default -1;

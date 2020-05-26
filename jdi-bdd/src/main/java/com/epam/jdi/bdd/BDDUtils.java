@@ -59,4 +59,5 @@ public final class BDDUtils {
     public static ITextAssert textAssert(String name) {
         return (ITextAssert) getUI(name, HasAssert.class).is();
     }
+
 }

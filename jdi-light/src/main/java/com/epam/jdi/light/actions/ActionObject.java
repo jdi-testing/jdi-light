@@ -16,9 +16,8 @@ import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 
 public class ActionObject {
-    public ActionObject(ProceedingJoinPoint joinPoint, String className) {
+    public ActionObject(ProceedingJoinPoint joinPoint) {
         this.jp = joinPoint;
-        this.className = className;
         try {
             this.elementTimeout = element() != null
                 ? element().base().getTimeout()
@@ -29,11 +28,9 @@ public class ActionObject {
     }
     public ProceedingJoinPoint jp() { return jp; }
     private ProceedingJoinPoint jp;
-    public String className() { return className; }
-    private String className;
     public String stepUId = "";
     public boolean topLevel() {
-        return aroundCount(className()) == 1;
+        return aroundCount() == 1;
     }
     public Object object() { return obj.get(); }
     private CacheValue<Object> obj = new CacheValue<>(

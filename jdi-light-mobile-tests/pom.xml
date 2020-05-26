@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <version>1.2.0</version>
+    <version>1.2.10</version>
     <artifactId>jdi-light-mobile-tests</artifactId>
     <name>Tests: JDI Mobile</name>
     <groupId>com.epam.jdi</groupId>
@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
-        <allure.testng>2.13.1</allure.testng>
+        <allure.testng>2.13.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.1</aspectj.version>
@@ -24,12 +24,12 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.10</version>
         </dependency>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-mobile</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.10</version>
         </dependency>
 
         <!--Allure config in parent-->
@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.0.0</version>
+            <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

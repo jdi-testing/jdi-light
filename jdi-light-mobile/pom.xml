@@ -7,7 +7,7 @@
     <artifactId>jdi-light-mobile</artifactId>
     <name>JDI Light Mobile</name>
     <packaging>jar</packaging>
-    <version>1.2.0</version>
+    <version>1.2.10</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -15,12 +15,12 @@
         <aspectj.maven>1.11</aspectj.maven>
         <java.version>1.8</java.version>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.10</version>
         </dependency>
 
         <dependency>

@@ -28,6 +28,7 @@ public class FormContactsTests implements TestsInit {
 
     @Test
     public void fillContactFormTest() {
+        main.contactForm.description.getText();
         main.contactForm.fill(DEFAULT_CONTACT);
         main.contactForm.check(DEFAULT_CONTACT);
     }
