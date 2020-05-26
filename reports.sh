@@ -114,19 +114,15 @@ function uploadFile() {
     echo "${urlKey}" #return
 }
 
-    checkThatAllTestsPassed() {
+function checkThatAllTestsPassed() {
     content=$(wget "$url/widgets/summary.json" -q -O -)
     failed="$(echo $content| jq '.statistic.failed')"
     broken="$(echo $content| jq '.statistic.broken')"
-
-    echo $failed
-    echo $broken
-
     if [ $failed -gt 0 -o $broken -gt 0 ]; then
     echo "${TEST_FAILED_ERROR_MESSAGE}"
     exit 1
     fi
-    }
+}
 
 ######################         PART 2: Deploy allure results as allure reports to netlify
 function deployAllureResults() {
@@ -136,7 +132,6 @@ function deployAllureResults() {
     generateAllureReports
     echo "LOG1"
     url="$(deployToNetlify "allure-report")"
-    echo $url
     echo "LOG2"
     sendComment "$(aboutNetlify ${url})"
     checkThatAllTestsPassed #there is an exit inside
