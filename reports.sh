@@ -8,6 +8,7 @@
 ####################             VARS
 BRANCH_ERROR_MESSAGE="IF YOU DON'T SEE THE PULL REQUEST BUILD, THEN BRANCH CANNOT BE MERGED, YOU SHOULD FIX IT FIRST"
 URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
+TEST_FAILED_ERROR_MESSAGE="SOME OF THE TESTS IS NOT PASSED. PLEASE CHECK ALLURE REPORT, FOR GETTING MORE DETAILS"
 FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
 FASTER_FILE_SHARING="true"
 
@@ -79,6 +80,15 @@ function checkBranchIsOk() {
         exit 0
     fi
 }
+function checkThatAllTestsPassed() {
+    content=$(wget "$url/widgets/summary.json" -q -O -)
+    failed="$(echo ${content}| jq '.statistic.failed')"
+    broken="$(echo ${content}| jq '.statistic.broken')"
+    if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
+        echo "${TEST_FAILED_ERROR_MESSAGE}"
+        exit 1
+    fi
+}
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -123,6 +133,7 @@ function deployAllureResults() {
     url="$(deployToNetlify "allure-report")"
     echo "LOG2"
     sendComment "$(aboutNetlify ${url})"
+    checkThatAllTestsPassed #there is an exit with exception inside
 }
 
 function downloadAllureResults() {
