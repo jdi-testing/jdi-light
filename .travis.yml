@@ -91,6 +91,7 @@ jobs:
 #        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
 #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
 
+
     - stage: reports
       name: Deploy allure reports to netlify
       script:
