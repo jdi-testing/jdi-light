@@ -49,19 +49,19 @@ jobs:
       script:
         - mvn install -DskipTests
 
-    - stage: test
-      name: Run tests - bdd
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+#    - stage: test
+#      name: Run tests - bdd
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
-    - stage: test
-      name: Run tests - bootstrap
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+#    - stage: test
+#      name: Run tests - bootstrap
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
     - stage: test
       name: Run tests - angular
@@ -77,12 +77,12 @@ jobs:
 #        - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
 #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 
-    - stage: test
-      name: Run tests - examples
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+#    - stage: test
+#      name: Run tests - examples
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
 
     - stage: test
       name: Run tests - performance

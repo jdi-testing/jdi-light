@@ -138,8 +138,8 @@ function deployAllureResults() {
     url="$(deployToNetlify "allure-report")"
     echo $url
     echo "LOG2"
-    checkThatAllTestsPassed #there is an exit inside
     sendComment "$(aboutNetlify ${url})"
+    checkThatAllTestsPassed #there is an exit inside
 }
 
 function downloadAllureResults() {
