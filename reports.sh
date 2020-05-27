@@ -131,7 +131,7 @@ function checkThatAllTestsPassed() {
     echo $broken
 
     if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
-        echo "${TEST_FAILED_ERROR_MESSAGE}"
+        echo "${TEST_FAILED_ERROR_MESSAGE} $url"
 
         exit 1
     fi
