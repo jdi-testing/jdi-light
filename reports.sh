@@ -115,24 +115,16 @@ function uploadFile() {
 }
 
 function checkThatAllTestsPassed() {
-#    content=$(wget "$url/widgets/summary.json" -q -O -)
-    content=$(<.*/allure-report/widgets/summary.json)
-
-#    for entry in ".*/allure-report/widgets"/*
-#    do
-#    echo $entry
-#    done
+#    content=$(wget "$url/widgets/summary.json" -q -O -)  #web request
+    content=$(<.*/allure-report/widgets/summary.json)     #file system request
 
     echo "$content"
     failed="$(echo ${content}| jq '.statistic.failed')"
     broken="$(echo ${content}| jq '.statistic.broken')"
     echo $content
-    echo $failed
-    echo $broken
-
     if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
         echo "${TEST_FAILED_ERROR_MESSAGE} $url"
-
+        sleep 5
         exit 1
     fi
 }
@@ -147,10 +139,8 @@ function deployAllureResults() {
     url="$(deployToNetlify "allure-report")"
     echo "LOG2"
     sendComment "$(aboutNetlify ${url})"
-    sleep 3
-    echo "After sendComment call"
+    sleep 5
     checkThatAllTestsPassed #there is an exit with exception inside
-    echo "After checkThatAllTestsPassed call"
 }
 
 function downloadAllureResults() {
