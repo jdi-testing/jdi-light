@@ -81,20 +81,6 @@ function checkBranchIsOk() {
     fi
 }
 
-function checkThatAllTestsPassed() {
-    content=$(wget "$url/widgets/summary.json" -q -O -)
-    failed="$(echo ${content}| jq '.statistic.failed')"
-    broken="$(echo ${content}| jq '.statistic.broken')"
-    echo $content
-    echo $failed
-    echo $broken
-
-    if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
-        echo "${TEST_FAILED_ERROR_MESSAGE}"
-        exit 1
-    fi
-}
-
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #########################               PART 1: send allure results into web to collect it later
@@ -126,6 +112,20 @@ function uploadFile() {
         urlKey="$(echo "${url}"| awk -F/ '{print $4}')"
     fi
     echo "${urlKey}" #return
+}
+
+function checkThatAllTestsPassed() {
+    content=$(wget "$url/widgets/summary.json" -q -O -)
+    failed="$(echo ${content}| jq '.statistic.failed')"
+    broken="$(echo ${content}| jq '.statistic.broken')"
+    echo $content
+    echo $failed
+    echo $broken
+
+    if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
+        echo "${TEST_FAILED_ERROR_MESSAGE}"
+        exit 1
+    fi
 }
 
 ######################         PART 2: Deploy allure results as allure reports to netlify
