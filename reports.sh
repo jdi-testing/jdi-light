@@ -115,13 +115,13 @@ function uploadFile() {
 }
 
 checkThatAllTestsPassed() {
-    content=$(wget "$url/widgets/summary.json" -q -O -)
-#    content=$(<widgets/summury.json)
+#    content=$(wget "$url/widgets/summary.json" -q -O -)
+    content=$(<.*/allure-report/widgets/summury.json)
 
-    for entry in ".*/allure-report/widgets"/*
-    do
-    echo $entry
-    done
+#    for entry in ".*/allure-report/widgets"/*
+#    do
+#    echo $entry
+#    done
 
     echo "$content"
     failed="$(echo ${content}| jq '.statistic.failed')"
@@ -132,6 +132,7 @@ checkThatAllTestsPassed() {
 
     if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
         echo "${TEST_FAILED_ERROR_MESSAGE}"
+        sleep 5
         exit 1
     fi
 }
