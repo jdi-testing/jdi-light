@@ -82,9 +82,9 @@ function checkBranchIsOk() {
 }
 function checkThatAllTestsPassed() {
     content=$(wget "$url/widgets/summary.json" -q -O -)
-    failed="$(echo ${content}| jq '.statistic.failed')"
-    broken="$(echo ${content}| jq '.statistic.broken')"
-    if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
+    failed="$(echo $content| jq '.statistic.failed')"
+    broken="$(echo $content| jq '.statistic.broken')"
+    if [ $failed -gt 0 -o $broken -gt 0 ]; then
         echo "${TEST_FAILED_ERROR_MESSAGE}"
         exit 1
     fi
