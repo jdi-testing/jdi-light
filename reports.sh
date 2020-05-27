@@ -123,7 +123,7 @@ function checkThatAllTestsPassed() {
     broken="$(echo ${content}| jq '.statistic.broken')"
     echo $content
     if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
-        echo "${TEST_FAILED_ERROR_MESSAGE} $url"
+        echo "${TEST_FAILED_ERROR_MESSAGE}"
         sleep 5
         exit 1
     fi
