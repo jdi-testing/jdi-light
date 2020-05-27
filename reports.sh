@@ -132,7 +132,7 @@ function checkThatAllTestsPassed() {
 
     if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
         echo "${TEST_FAILED_ERROR_MESSAGE}"
-        sleep 5
+
         exit 1
     fi
 }
@@ -146,8 +146,11 @@ function deployAllureResults() {
     echo "LOG1"
     url="$(deployToNetlify "allure-report")"
     echo "LOG2"
-    checkThatAllTestsPassed #there is an exit with exception inside
     sendComment "$(aboutNetlify ${url})"
+    sleep 3
+    echo "After sendComment call"
+    checkThatAllTestsPassed #there is an exit with exception inside
+    echo "After checkThatAllTestsPassed call"
 }
 
 function downloadAllureResults() {
