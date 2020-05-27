@@ -19,6 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
+import static com.epam.jdi.tools.LinqUtils.toStringArray;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -60,6 +61,9 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
     }
     public A values(String... values) {
         return values(hasItems(values));
+    }
+    public A values(List<String> values) {
+        return values(toStringArray(values));
     }
     @JDIAction("Assert that '{name}' values {0}")
     public A values(TextTypes type, Matcher<? super List<String>> condition) {

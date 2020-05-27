@@ -6,20 +6,12 @@ import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.light.elements.interfaces.base.INamed;
-import com.epam.jdi.light.elements.interfaces.base.JDIElement;
+import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.LogLevels;
-import com.epam.jdi.light.settings.JDISettings;
-import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
+import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
 import io.qameta.allure.Step;
 import org.aspectj.lang.JoinPoint;
@@ -29,60 +21,38 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.common.OutputTemplates.DEFAULT_TEMPLATE;
-import static com.epam.jdi.light.common.OutputTemplates.FAILED_ACTION_TEMPLATE;
-import static com.epam.jdi.light.common.OutputTemplates.STEP_TEMPLATE;
+import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.PageChecks.NONE;
-import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
-import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
-import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
-import static com.epam.jdi.light.driver.WebDriverFactory.getWebDriverFactory;
-import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
-import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
-import static com.epam.jdi.light.elements.composite.WebPage.setCurrentPage;
-import static com.epam.jdi.light.elements.composite.WebPage.visualWindowCheck;
-import static com.epam.jdi.light.logger.AllureLogger.failStep;
-import static com.epam.jdi.light.logger.AllureLogger.passStep;
-import static com.epam.jdi.light.logger.AllureLogger.startStep;
-import static com.epam.jdi.light.logger.AllureLogger.takeHtmlCodeOnFailure;
-import static com.epam.jdi.light.logger.LogLevels.ERROR;
-import static com.epam.jdi.light.logger.LogLevels.INFO;
-import static com.epam.jdi.light.logger.LogLevels.STEP;
-import static com.epam.jdi.light.logger.Strategy.FAIL;
-import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
-import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
-import static com.epam.jdi.tools.JsonUtils.beautifyJson;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.where;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.getAllFields;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.arrayToString;
-import static com.epam.jdi.tools.StringUtils.msgFormat;
-import static com.epam.jdi.tools.StringUtils.splitLowerCase;
-import static com.epam.jdi.tools.Timer.nowTime;
-import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
+import static com.epam.jdi.light.common.VisualCheckAction.*;
+import static com.epam.jdi.light.common.VisualCheckPage.*;
+import static com.epam.jdi.light.driver.ScreenshotMaker.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
+import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.logger.AllureLogger.*;
+import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.logger.Strategy.*;
+import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.tools.JsonUtils.*;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.Timer.*;
 import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.$;
-import static com.epam.jdi.tools.switcher.SwitchActions.Case;
-import static com.epam.jdi.tools.switcher.SwitchActions.Default;
-import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
-import static com.epam.jdi.tools.switcher.SwitchActions.Value;
-import static java.lang.Character.toUpperCase;
+import static com.epam.jdi.tools.map.MapArray.*;
+import static com.epam.jdi.tools.pairs.Pair.*;
+import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static java.lang.Character.*;
 import static java.lang.String.format;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.currentThread;
 import static java.util.Collections.reverse;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -259,7 +229,7 @@ public class ActionHelper {
         } else {
             MapArray<String, Object> logOptions = LOG_VALUES.execute(jp);
             logOptions.add("action", actionName);
-            logString = msgFormat(getTemplate(jdiSettings.LOGS.logLevel), logOptions);
+            logString = msgFormat(getTemplate(LOGS.logLevel), logOptions);
         }
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
@@ -306,7 +276,7 @@ public class ActionHelper {
     }
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
     public static void logFailure(ActionObject jInfo) {
-        webSettings.logger.toLog(">>> " + jInfo.object().toString(), ERROR);
+        logger.toLog(">>> " + jInfo.object().toString(), ERROR);
         String screenName = "";
         String htmlSnapshot = "";
         String errors = "";
@@ -319,8 +289,8 @@ public class ActionHelper {
                     ? jInfo.element().base().driver()
                     : getWebDriverFactory().getDriver();
             List<LogEntry> requests = driver.manage().logs().get("performance").getAll();
-            List<String> errorEntries = LinqUtils.map(filter(requests, jdiSettings.LOGS.filterHttpRequests),
-                    logEntry -> beautifyJson(logEntry.getMessage()));
+            List<String> errorEntries = LinqUtils.map(filter(requests, LOGS.filterHttpRequests),
+                logEntry -> beautifyJson(logEntry.getMessage()));
             errors = print(errorEntries);
         }
         failStep(jInfo.stepUId, screenName, htmlSnapshot, errors);
@@ -420,8 +390,8 @@ public class ActionHelper {
             Object obj = jp.getThis();
             if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
             return isInterface(getJpClass(jp), INamed.class)
-                    ? ((INamed) obj).getName()
-                    : obj.toString();
+                ? ((INamed) obj).getName()
+                : obj.toString();
         } catch (Throwable ex) {
             return "Can't get element name";
         }
@@ -509,7 +479,7 @@ public class ActionHelper {
 
     private static List<StackTraceElement> arounds() {
         List<StackTraceElement> arounds = where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround"));
+            s -> s.getMethodName().equals("jdiAround"));
         Collections.reverse(arounds);
         return arounds;
     }
@@ -520,8 +490,8 @@ public class ActionHelper {
 
     public static int aroundCount() {
         return where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround"))
-                .size();
+            s -> s.getMethodName().equals("jdiAround"))
+            .size();
     }
 
     private static String getMethodName(ProceedingJoinPoint jp) {

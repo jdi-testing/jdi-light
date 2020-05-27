@@ -13,7 +13,6 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 import static org.hamcrest.core.IsIterableContaining.hasItems;
-import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -31,7 +30,7 @@ public class MultiDropDownSteps {
 
     @Then("^the \"([^\"]*)\" selected values:$")
     public void theSelectedValues(String name, List<String> values) {
-        assertEquals(multiDropDown(name).checked(), values);
+        multiDropDown(name).is().checked(values);
     }
 
     @When("^(?:I |)check in the \"([^\"]*)\" values by number:$")

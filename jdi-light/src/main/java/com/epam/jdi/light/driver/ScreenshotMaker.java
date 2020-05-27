@@ -66,6 +66,6 @@ public class ScreenshotMaker {
         String newName = fileName;
         while (new File(newName + jdiSettings.SCREEN.fileSuffix).exists())
             newName = fileName + "_" + num++;
-        return newName + jdiSettings.SCREEN.fileSuffix;
+        return newName + "." + jdiSettings.SCREEN.fileSuffix;
     }
 }

@@ -33,9 +33,6 @@ Scenario: Combobox is validation test
 Scenario: Assert validation test
   Then the "Ice Cream" text equals to "Coconut"
 
-Scenario: Base validation test
-  Then the "Ice Cream" is basically valid
-
 Scenario: Send keys test
   When input "Chocolate" in "Ice Cream"
   When I send keys "Test" to "Ice Cream"

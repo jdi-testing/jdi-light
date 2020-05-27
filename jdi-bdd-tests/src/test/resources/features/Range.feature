@@ -37,6 +37,3 @@ Scenario: Validation Volume element test
 Scenario: Label Test
   Then the "Volume" label text equals to "Volume"
   And the "Volume" label text contains "lume"
-
-Scenario: Base validation
-  Then the "Volume" is basically valid

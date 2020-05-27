@@ -6,6 +6,7 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.common.UseSmartSearch;
 import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.common.VisualCheckPage;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
@@ -61,7 +62,6 @@ import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.PropertyReader.fillAction;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.String.format;
@@ -123,6 +123,18 @@ public class WebSettings {
         });
     };
 
+    private void fillAction(JAction1<String> action, String name) {
+        String prop = null;
+        try {
+            prop = getProperty(name);
+        } catch (Exception ignore) {}
+        if (prop == null) {
+            prop = "null";
+        }
+        logger.debug("fillAction(%s=%s)", name, prop);
+        PropertyReader.fillAction(action, name);
+    }
+
     private WebSettings() {
         logger = instance("JDI");
         VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
@@ -178,6 +190,7 @@ public class WebSettings {
 
     public synchronized void init() {
         if (initialized) return;
+        logger.debug("init()");
         try {
             getProperties(getCommonSettings().testPropertiesPath);
             TestProperties.getTestsProperties().forEach((k, v) ->
@@ -187,7 +200,7 @@ public class WebSettings {
                 JAction actionAfterPropertyLoading = v.value;
                 fillAction(setPropertyAction, propertyName);
                 actionAfterPropertyLoading.execute();
-            });
+			});
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
                     p -> p.forEach((key, value) -> getJDISettings().DRIVER.capabilities.chrome.put(key.toString(), value.toString())));

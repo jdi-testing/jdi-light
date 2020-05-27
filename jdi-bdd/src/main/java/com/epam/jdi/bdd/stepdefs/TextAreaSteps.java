@@ -1,14 +1,12 @@
 package com.epam.jdi.bdd.stepdefs;
 
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static org.hamcrest.Matchers.is;
+
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
 import java.util.List;
-
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Ekaterina Vasilkova on 22.08.2019
@@ -40,7 +38,7 @@ public class TextAreaSteps {
 
     @Then("^the lines in the \"([^\"]*)\" are equal$")
     public void linesInTextAreaAreEqual(String name, List<String> lines) {
-        assertEquals(lines, textArea(name).getLines());
+        textArea(name).has().lines(lines);
     }
 
     @Then("^the \"([^\"]*)\" minimal length equals \"([^\"]*)\"$")

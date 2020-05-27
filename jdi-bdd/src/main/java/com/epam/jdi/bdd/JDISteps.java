@@ -1,16 +1,5 @@
 package com.epam.jdi.bdd;
 
-import com.epam.jdi.light.elements.complex.ISelector;
-import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.interfaces.base.HasCheck;
-import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.interfaces.base.IClickable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import org.openqa.selenium.Dimension;
-
 import static com.epam.jdi.bdd.BDDUtils.core;
 import static com.epam.jdi.bdd.BDDUtils.input;
 import static com.epam.jdi.bdd.BDDUtils.isAssert;
@@ -30,8 +19,20 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
 import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.matchesPattern;
-import static org.testng.Assert.assertEquals;
+
+import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.complex.ISelector;
+import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.interfaces.base.HasCheck;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import org.openqa.selenium.Dimension;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -304,12 +305,12 @@ public class JDISteps {
 
     @Then("^the current page url is \"(.*?)\"$")
     public void urlIs(String expectedUrl) {
-        assertEquals(expectedUrl, getUrl());
+        assertThat(expectedUrl, is(getUrl()));
     }
 
     @Then("^the current page title is \"([^\"]*)\"$")
     public void titleIs(String expectedUrl) {
-        assertEquals(expectedUrl, getTitle());
+        assertThat(expectedUrl, is(getTitle()));
     }
     //#endregion
 

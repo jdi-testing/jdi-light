@@ -1,6 +1,7 @@
 package com.epam.jdi.light.driver;
 
 import com.epam.jdi.light.driver.get.DriverTypes;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
@@ -39,6 +40,8 @@ public class WebDriverFactory {
     private boolean SWITCH_THREAD;
     private WebDriver INIT_DRIVER;
 
+    private WebSettings webSettings = WebSettings.getWebSettings();
+
 
     private WebDriverFactory() {
         RUN_DRIVERS = new MapArray<>();
@@ -73,6 +76,7 @@ public class WebDriverFactory {
     }
 
     private MapArray<String, WebDriver> getRunDrivers() {
+        webSettings.logger.debug("SINGLE_THREAD=" + SINGLE_THREAD);
         return SINGLE_THREAD
                 ? RUN_DRIVERS
                 : THREAD_RUN_DRIVERS.get();
@@ -87,32 +91,47 @@ public class WebDriverFactory {
     }
 
     public WebDriver getDriverByName(String driverName) {
+        webSettings.logger.debug("getDriverByName(%s)", driverName);
         Lock lock = new ReentrantLock();
         if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
+            webSettings.logger.debug("SWITCH_THREAD = true");
             setRunDrivers(map($(driverName, INIT_DRIVER)));
             SWITCH_THREAD = true;
             return INIT_DRIVER;
         }
-        if (!DRIVERS.has(driverName))
+        if (!DRIVERS.has(driverName)) {
+            webSettings.logger.debug("Has no driver");
             useDriver(driverName);
+        }
         try {
             lock.lock();
+            webSettings.logger.debug("Lock");
             MapArray<String, WebDriver> rDrivers = getRunDrivers();
             if (rDrivers == null) {
+                webSettings.logger.debug("rDrivers == null");
                 rDrivers = new MapArray<>();
             }
             if (!rDrivers.has(driverName)) {
+                webSettings.logger.debug("rDrivers has no " + driverName);
                 WebDriver resultDriver = DRIVERS.get(driverName).invoke();
                 rDrivers.add(driverName, resultDriver);
                 setRunDrivers(rDrivers);
+                webSettings.logger.debug("setRunDrivers");
             }
+            webSettings.logger.debug("Get '%s' driver");
             WebDriver driver = rDrivers.get(driverName);
+            webSettings.logger.debug("Successs: " + driver);
             if (driver.toString().contains("(null)")) {
+                webSettings.logger.debug("driver contains (null)");
                 driver = DRIVERS.get(driverName).invoke();
                 rDrivers.update(driverName, driver);
+                webSettings.logger.debug("update rDrivers");
             }
-            if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId())
+            if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId()) {
+                webSettings.logger.debug("INIT_DRIVER = driver");
                 INIT_DRIVER = driver;
+            }
+            webSettings.logger.debug("driver.manage().timeouts()");
             driver.manage().timeouts().implicitlyWait(0, SECONDS);
             return driver;
         } catch (Throwable ex) {
@@ -193,7 +212,7 @@ public class WebDriverFactory {
     public void reopenDriver(String driverName) {
         MapArray<String, WebDriver> rDriver = getRunDrivers();
         if (rDriver.has(driverName)) {
-            rDriver.get(driverName).close();
+            closeDriver(rDriver.get(driverName));
             rDriver.removeByKey(driverName);
             setRunDrivers(rDriver);
         }
@@ -209,12 +228,17 @@ public class WebDriverFactory {
     }
 
     public void close() {
-        for (Pair<String, WebDriver> pair : getRunDrivers())
-            try {
-                pair.value.quit();
-            } catch (Exception ignore) {
-            }
+        for (Pair<String, WebDriver> pair : getRunDrivers()) {
+            closeDriver(pair.value);
+        }
         getRunDrivers().clear();
+    }
+
+    private void closeDriver(WebDriver driver) {
+        try {
+            driver.close();
+            driver.quit();
+        } catch (Exception ignore) { }
     }
 
     public void quit() {

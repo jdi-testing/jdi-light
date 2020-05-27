@@ -85,7 +85,11 @@ public final class WebDriverByUtils {
         int index = byAsString.indexOf(": ") + 2;
         return byAsString.substring(index);
     }
-
+    private static MapArray<String, String> byReplace = new MapArray<>(new Object[][] {
+            {"cssSelector", "css"},
+            {"tagName", "tag"},
+            {"className", "class"}
+    });
     public static String getByName(By by) {
         Matcher m = Pattern.compile("By\\.(?<locator>[a-zA-Z]+):.*").matcher(by.toString());
         if (m.find()) {
@@ -167,12 +171,12 @@ public final class WebDriverByUtils {
                 return webDriver.findElements((By) step);
             } else {
                 return els == null
-                        ? ctx.findElements((By) step)
-                        : selectMany(els, e -> e.findElements((By) step));
+                    ? ctx.findElements((By) step)
+                    : selectMany(els, e -> e.findElements((By) step));
             }
-        } else if (isClass(step.getClass(), Integer.class) && els != null) {
-            return singletonList(els.get((Integer) step - 1));
         }
+        else if (isClass(step.getClass(), Integer.class) && els != null)
+            return singletonList(els.get((Integer) step - 1));
         throw exception("Unknown locator part '%s'. Can't get element. Please correct locator");
     }
 

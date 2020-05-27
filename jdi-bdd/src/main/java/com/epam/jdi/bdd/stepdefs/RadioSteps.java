@@ -26,7 +26,7 @@ public class RadioSteps {
 
     //#region Then
     @Then("^the \"([^\"]*)\" consists of next values:$")
-    public void theConsistOfNextValues(String name, String[] values) {
+    public void theConsistOfNextValues(String name, List<String> values) {
         radioButtons(name).has().values(values);
     }
 
