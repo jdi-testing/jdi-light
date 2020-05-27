@@ -80,11 +80,16 @@ function checkBranchIsOk() {
         exit 0
     fi
 }
+
 function checkThatAllTestsPassed() {
     content=$(wget "$url/widgets/summary.json" -q -O -)
-    failed="$(echo $content| jq '.statistic.failed')"
-    broken="$(echo $content| jq '.statistic.broken')"
-    if [ $failed -gt 0 -o $broken -gt 0 ]; then
+    failed="$(echo ${content}| jq '.statistic.failed')"
+    broken="$(echo ${content}| jq '.statistic.broken')"
+    echo $content
+    echo $failed
+    echo $broken
+
+    if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
         echo "${TEST_FAILED_ERROR_MESSAGE}"
         exit 1
     fi
@@ -95,7 +100,7 @@ function checkThatAllTestsPassed() {
 #########################               PART 1: send allure results into web to collect it later
 function grubAllureResults() {
     echo "Stage was: ${TRAVIS_BUILD_STAGE_NAME}"
-#    checkBranchIsOk #there is an exit inside
+    checkBranchIsOk #there is an exit inside
 
     if [[ "x${TRAVIS_BUILD_STAGE_NAME}" == "xtest" ]] ; then #don't remove x, it's useful
         for result in $(find -type d -regex ".*/jdi.*/target/allure-results")
@@ -125,7 +130,7 @@ function uploadFile() {
 
 ######################         PART 2: Deploy allure results as allure reports to netlify
 function deployAllureResults() {
-#    checkBranchIsOk #there is an exit inside
+    checkBranchIsOk #there is an exit inside
     downloadAllureResults
     extractAllureResults
     generateAllureReports
