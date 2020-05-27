@@ -116,6 +116,14 @@ function uploadFile() {
 
 checkThatAllTestsPassed() {
     content=$(wget "$url/widgets/summary.json" -q -O -)
+#    content=$(<widgets/summury.json)
+
+    for entry in ".*"/*
+    do
+    echo $entry
+    done
+
+    echo "$content"
     failed="$(echo ${content}| jq '.statistic.failed')"
     broken="$(echo ${content}| jq '.statistic.broken')"
     echo $content
