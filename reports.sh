@@ -114,9 +114,9 @@ function uploadFile() {
     echo "${urlKey}" #return
 }
 
-checkThatAllTestsPassed() {
+function checkThatAllTestsPassed() {
 #    content=$(wget "$url/widgets/summary.json" -q -O -)
-    content=$(<.*/allure-report/widgets/summury.json)
+    content=$(<.*/allure-report/widgets/summary.json)
 
 #    for entry in ".*/allure-report/widgets"/*
 #    do
