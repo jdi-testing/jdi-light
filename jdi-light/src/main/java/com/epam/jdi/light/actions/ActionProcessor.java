@@ -11,7 +11,9 @@ import static com.epam.jdi.light.actions.ActionHelper.BEFORE_JDI_ACTION;
 import static com.epam.jdi.light.actions.ActionHelper.defaultAction;
 import static com.epam.jdi.light.actions.ActionHelper.failedMethods;
 import static com.epam.jdi.light.actions.ActionHelper.stableAction;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.settings.JDISettings.getJDISettings;
+import static com.epam.jdi.light.settings.WebSettings.getWebSettings;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -35,7 +37,7 @@ public class ActionProcessor {
                 : defaultAction(jInfo);
             return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
-            getJDISettings().logger.debug("ActionProcessor exception:" + safeException(ex));
+            getWebSettings().logger.debug("ActionProcessor exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

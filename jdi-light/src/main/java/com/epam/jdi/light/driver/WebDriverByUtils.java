@@ -85,11 +85,6 @@ public final class WebDriverByUtils {
         int index = byAsString.indexOf(": ") + 2;
         return byAsString.substring(index);
     }
-    private static MapArray<String, String> byReplace = new MapArray<>(new Object[][] {
-            {"cssSelector", "css"},
-            {"tagName", "tag"},
-            {"className", "class"}
-    });
     public static String getByName(By by) {
         Matcher m = Pattern.compile("By\\.(?<locator>[a-zA-Z]+):.*").matcher(by.toString());
         if (m.find()) {

@@ -39,20 +39,24 @@ public class EntitiesCollection {
     static MapArray<String, String> jsonPages;
     static MapArray<String, String> jsonElements;
 
-    private EntitiesCollection() { }
+    private EntitiesCollection() {
+    }
 
     public static void addPage(WebPage page) {
         PAGES.update(page.getName(), page);
     }
+
     public static void updatePage(WebPage page) {
         String className = page.getClass().getSimpleName();
         if (PAGES.keys().contains(className))
             PAGES.removeByKey(className);
         PAGES.update(page.getName(), page);
     }
+
     static void readPagesFromJson() {
         jsonPages = getMapFromJson("pages", "json.page.objects");
     }
+
     public static WebPage getPage(String pageName) {
         getWebSettings().init();
         WebPage page = PAGES.get(pageName);
@@ -68,6 +72,7 @@ public class EntitiesCollection {
         }
         return page;
     }
+
     public static void addElement(Object jdi) {
         if (isInterface(jdi.getClass(), ICoreElement.class)) {
             ICoreElement element = (ICoreElement) jdi;
@@ -80,6 +85,7 @@ public class EntitiesCollection {
             }
         }
     }
+
     public static <T extends UIListBase> WebList getList(String name, Class<T> type) {
         Object element = getElement(name);
         if (element != null) {
@@ -90,12 +96,14 @@ public class EntitiesCollection {
         }
         throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
+
     public static <T> T getUI(String name, Class<T> type) {
         Object element = getElement(name);
         if (element != null && isClass(element.getClass(), type))
             return (T) element;
         throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
+
     public static <T> T getByType(ICoreElement element, Class<T> type) {
         try {
             ICoreElement core = isClass(element.getClass(), type)
@@ -106,14 +114,16 @@ public class EntitiesCollection {
             throw exception(ex, "Can't get element '%s' of type '%s'", element.getName(), type.getSimpleName());
         }
     }
+
     public static ICoreElement getUI(String name) {
         Object element = getElement(name);
         if (element != null && isInterface(element.getClass(), ICoreElement.class))
             return ((ICoreElement) element);
         throw exception("Can't find '%s' element", name);
     }
+
     static void readElementsFromJson() {
-        List<String> filePaths = scanFolder("src/test/resources"+getProperty("json.page.objects"));
+        List<String> filePaths = scanFolder("src/test/resources" + getProperty("json.page.objects"));
         jsonElements = new MapArray<>();
         for (String filePath : filePaths)
             try {
@@ -145,8 +155,8 @@ public class EntitiesCollection {
         if (jsonElements == null)
             readElementsFromJson();
         return jsonElements.keys().contains(name)
-            ? $(jsonElements.get(name))
-            : new UIElement().setName(name);
+                ? $(jsonElements.get(name))
+                : new UIElement().setName(name);
     }
 
     static Object getElementInSection(String name, String section) {

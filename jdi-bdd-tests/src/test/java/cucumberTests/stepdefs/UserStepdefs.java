@@ -10,8 +10,8 @@ import static io.github.com.pages.Header.loginForm;
 import static io.github.com.pages.Header.userIcon;
 import static io.github.com.pages.Header.userName;
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.FileInput;

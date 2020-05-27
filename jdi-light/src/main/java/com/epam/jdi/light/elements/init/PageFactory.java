@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -10,6 +11,8 @@ import com.epam.jdi.light.elements.init.rules.SetupRule;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.settings.JDISettings;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -70,7 +73,7 @@ public class PageFactory {
         }
     }
     private static void setFieldWithInstance(SiteInfo info, Object obj) throws IllegalAccessException {
-        jdiSettings.logger.debug("setFieldWithInstance(info:%s)", info);
+        webSettings.logger.debug("setFieldWithInstance(info:%s)", info);
         Object instance = getElementInstance(info);
         if (instance != null) {
             addElement(instance);
@@ -87,23 +90,23 @@ public class PageFactory {
     }
 
     public static void initJdiField(SiteInfo info) {
-        jdiSettings.logger.debug("initJdiField");
+        webSettings.logger.debug("initJdiField");
         if (info.type().isInterface())
             initUsingRules(info);
         else
             initWithConstructor(info);
     }
     public static void setupFieldUsingRules(SiteInfo info) {
-        jdiSettings.logger.debug("setupFieldUsingRules");
+        webSettings.logger.debug("setupFieldUsingRules");
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) -> r.condition.execute(info));
         if (setupRules.size() == 0)
             return;
         String ruleName = "UNDEFINED";
-        jdiSettings.logger.debug("SETUP_RULES.count="+setupRules.size());
+        webSettings.logger.debug("SETUP_RULES.count="+setupRules.size());
         try {
             for(Pair<String, SetupRule> rule : setupRules) {
                 ruleName = rule.key;
-                jdiSettings.logger.debug("Use setupRule '%s'", ruleName);
+                webSettings.logger.debug("Use setupRule '%s'", ruleName);
                 rule.value.action.execute(info);
             }
         } catch (Throwable ex) {
@@ -141,11 +144,11 @@ public class PageFactory {
         }
     }
     private static <T> T initUsingRules(SiteInfo info) {
-        jdiSettings.logger.debug("initUsingRules");
+        webSettings.logger.debug("initUsingRules");
         Pair<String, InitRule> firstRule = INIT_RULES.first((k,r) ->
                 r.condition.execute(info.field));
         if (firstRule != null) {
-            jdiSettings.logger.debug("Use initRule: " + firstRule.key);
+            webSettings.logger.debug("Use initRule: " + firstRule.key);
             try {
                 return (T)(info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
@@ -154,7 +157,7 @@ public class PageFactory {
             }
         }
         else {
-            jdiSettings.logger.debug("No initRules found");
+            webSettings.logger.debug("No initRules found");
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
                             "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
                             "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
@@ -163,14 +166,14 @@ public class PageFactory {
     }
     private static void initWithConstructor(SiteInfo info) {
         try {
-            jdiSettings.logger.debug("initWithConstructor");
+            webSettings.logger.debug("initWithConstructor");
             info.instance = create(info.type());
         } catch (Throwable exception) {
             try {
                 String msg = safeException(exception);
                 if (msg.contains("has no empty constructors")
                     || msg.contains("Can't init class. Class Type is null"))
-                    info.instance = create(info.type(), getDriver(info.driverName));
+                    info.instance = create(info.type(), getWebDriverFactory().getDriver(info.driverName));
                     throw exception(msg);
             } catch (Throwable ex) {
                 throw exception(ex, "Can't create field '%s' instance of type '%s'. Try new %s() to get more details",
@@ -240,7 +243,7 @@ public class PageFactory {
         }
     }
     public static void initElements(Class<?>... pages) {
-        List<Object> pageList = map(asList(pages), p -> getPageObject(getDriver(), p));
+        List<Object> pageList = map(asList(pages), p -> getPageObject(getWebDriverFactory().getDriver(), p));
         initElements(pageList.toArray(new Object[pageList.size()]));
     }
     public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy) {

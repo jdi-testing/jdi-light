@@ -95,7 +95,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             boolean emptyDriverPath = isBlank(jdiSettings.DRIVER.path);
             webSettings.logger.debug("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
             String driverPath = emptyDriverPath
-                ? downloadDriver(downloadType, getDriverPlatform(), DRIVER.version)
+                ? downloadDriver(downloadType, getDriverPlatform(), jdiSettings.DRIVER.version)
                 : path.execute();
             webSettings.logger.info("Use driver path: " + driverPath);
             webSettings.logger.debug("setProperty(properties:%s, driverPath:%s)", properties, driverPath);

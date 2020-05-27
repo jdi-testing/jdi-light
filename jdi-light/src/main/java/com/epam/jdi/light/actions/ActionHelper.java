@@ -9,6 +9,8 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.LogLevels;
+import com.epam.jdi.light.settings.JDISettings;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.func.*;
@@ -229,7 +231,7 @@ public class ActionHelper {
         } else {
             MapArray<String, Object> logOptions = LOG_VALUES.execute(jp);
             logOptions.add("action", actionName);
-            logString = msgFormat(getTemplate(LOGS.logLevel), logOptions);
+            logString = msgFormat(getTemplate(jdiSettings.LOGS.logLevel), logOptions);
         }
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
@@ -276,7 +278,7 @@ public class ActionHelper {
     }
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
     public static void logFailure(ActionObject jInfo) {
-        logger.toLog(">>> " + jInfo.object().toString(), ERROR);
+        webSettings.logger.toLog(">>> " + jInfo.object().toString(), ERROR);
         String screenName = "";
         String htmlSnapshot = "";
         String errors = "";
@@ -289,7 +291,7 @@ public class ActionHelper {
                     ? jInfo.element().base().driver()
                     : getWebDriverFactory().getDriver();
             List<LogEntry> requests = driver.manage().logs().get("performance").getAll();
-            List<String> errorEntries = LinqUtils.map(filter(requests, LOGS.filterHttpRequests),
+            List<String> errorEntries = LinqUtils.map(filter(requests, jdiSettings.LOGS.filterHttpRequests),
                 logEntry -> beautifyJson(logEntry.getMessage()));
             errors = print(errorEntries);
         }
