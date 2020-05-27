@@ -26,6 +26,7 @@ env:
     - EXAMPLES_PROPERTY="test-examples/jdi-light-examples"
     - PERFORMANCE="jdi-performance"
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
+    - JDI_LIGHT_UNIT_TESTS="jdi-light"
     - CHROME_ARGS="--headless"
     - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
     - PATH="$JAVA_HOME/bin:$PATH"
@@ -90,6 +91,12 @@ jobs:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+
+    - stage: test
+      name: Run tests - jdi-light-unit-tests
+      script:
+          - mvn -ntp install -DskipTests
+          - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
 
     - stage: reports
       name: Deploy allure reports to netlify

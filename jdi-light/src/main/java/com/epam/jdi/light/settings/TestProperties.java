@@ -4,6 +4,36 @@ import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
 import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.Property.ALLURE_STEPS_PROPERTY;
+import static com.epam.jdi.light.common.Property.ASSERT_TYPE_PROPERTY;
+import static com.epam.jdi.light.common.Property.CLICK_TYPE_PROPERTY;
+import static com.epam.jdi.light.common.Property.DOMAIN_PROPERTY;
+import static com.epam.jdi.light.common.Property.DRIVERS_FOLDER_PROPERTY;
+import static com.epam.jdi.light.common.Property.DRIVER_PROPERTY;
+import static com.epam.jdi.light.common.Property.DRIVER_REMOTE_URL_PROPERTY;
+import static com.epam.jdi.light.common.Property.DRIVER_VERSION_PROPERTY;
+import static com.epam.jdi.light.common.Property.ELEMENT_SEARCH_STRATEGY_PROPERTY;
+import static com.epam.jdi.light.common.Property.HEADLESS_PROPERTY;
+import static com.epam.jdi.light.common.Property.HTML_CODE_STRATEGY_PROPERTY;
+import static com.epam.jdi.light.common.Property.KILL_BROWSER_PROPERTY;
+import static com.epam.jdi.light.common.Property.LIST_START_INDEX_PROPERTY;
+import static com.epam.jdi.light.common.Property.LOG_INFO_DETAILS_PROPERTY;
+import static com.epam.jdi.light.common.Property.LOG_LEVEL_PROPERTY;
+import static com.epam.jdi.light.common.Property.REMOTE_TYPE_PROPERTY;
+import static com.epam.jdi.light.common.Property.REQUESTS_STRATEGY_PROPERTY;
+import static com.epam.jdi.light.common.Property.SCREENSHOT_STRATEGY_PROPERTY;
+import static com.epam.jdi.light.common.Property.SCREENS_FOLDER_PROPERTY;
+import static com.epam.jdi.light.common.Property.SET_TEXT_TYPE_PROPERTY;
+import static com.epam.jdi.light.common.Property.SMART_LOCATORS_TO_NAME_PROPERTY;
+import static com.epam.jdi.light.common.Property.SMART_SEARCH_PROPERTY;
+import static com.epam.jdi.light.common.Property.STRATEGY_PROPERTY;
+import static com.epam.jdi.light.common.Property.TEXT_TYPE_PROPERTY;
+import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_ELEMENT_PROPERTY;
+import static com.epam.jdi.light.common.Property.BROWSER_SIZE_PROPERTY;
+import static com.epam.jdi.light.common.Property.PAGE_LOAD_STRATEGY_PROPERTY;
+import static com.epam.jdi.light.common.Property.PAGE_CHECK_AFTER_OPEN;
+import static com.epam.jdi.light.common.Property.SMART_LOCATORS_PROPERTY;
+import static com.epam.jdi.light.common.Property.TIMEOUT_WAIT_PAGE_PROPERTY;
 import static com.epam.jdi.light.common.SearchStrategies.inView;
 import static com.epam.jdi.light.common.SearchStrategies.noValidation;
 import static com.epam.jdi.light.common.SearchStrategies.onlyVisible;
@@ -81,50 +111,50 @@ public class TestProperties {
 
   private static Map<String, Pair<JAction1<String>, JAction>> createTestProperties() {
     Map<String, Pair<JAction1<String>, JAction>> properties = new HashMap<>();
-    properties.put("strategy", combo(p -> COMMON.strategy = getStrategy(p),
+    properties.put(STRATEGY_PROPERTY.getName(), combo(p -> COMMON.strategy = getStrategy(p),
             COMMON.strategy.action));
     properties
-            .put("timeout.wait.element", single(p -> TIMEOUTS.element = new Timeout(parseInt(p))));
-    properties.put("timeout.wait.page", single(p -> TIMEOUTS.page = new Timeout(parseInt(p))));
-    properties.put("domain", single(WebSettings::setDomain));
+            .put(TIMEOUT_WAIT_ELEMENT_PROPERTY.getName(), single(p -> TIMEOUTS.element = new Timeout(parseInt(p))));
+    properties.put(TIMEOUT_WAIT_PAGE_PROPERTY.getName(), single(p -> TIMEOUTS.page = new Timeout(parseInt(p))));
+    properties.put(DOMAIN_PROPERTY.getName(), single(WebSettings::setDomain));
     if (DRIVER.name.equals(DEFAULT_DRIVER)) {
-      properties.put("driver",
+      properties.put(DRIVER_PROPERTY.getName(),
               single(p -> DRIVER.name = p));
     }
-    properties.put("driver.version", single(p -> DRIVER.version = p));
-    properties.put("drivers.folder", single(p -> DRIVER.path = p));
-    properties.put("screens.folder",
+    properties.put(DRIVER_VERSION_PROPERTY.getName(), single(p -> DRIVER.version = p));
+    properties.put(DRIVERS_FOLDER_PROPERTY.getName(), single(p -> DRIVER.path = p));
+    properties.put(SCREENS_FOLDER_PROPERTY.getName(),
             combo(p -> SCREEN.path = p, () -> addStrategy(FAIL, LOGS.screenStrategy)));
-    properties.put("list.start.index", single(p -> ELEMENT.startIndex = parseInt(p)));
+    properties.put(LIST_START_INDEX_PROPERTY.getName(), single(p -> ELEMENT.startIndex = parseInt(p)));
     properties
-            .put("log.info.details", single(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p)));
+            .put(LOG_INFO_DETAILS_PROPERTY.getName(), single(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p)));
     properties
-            .put("screenshot.strategy", single(p -> LOGS.screenStrategy = getLoggerStrategy(p)));
+            .put(SCREENSHOT_STRATEGY_PROPERTY.getName(), single(p -> LOGS.screenStrategy = getLoggerStrategy(p)));
     properties
-            .put("html.code.strategy", single(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p)));
+            .put(HTML_CODE_STRATEGY_PROPERTY.getName(), single(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p)));
     properties
-            .put("requests.strategy", single(p -> LOGS.requestsStrategy = getLoggerStrategy(p)));
-    properties.put("browser.kill", single(p -> COMMON.killBrowser = p));
-    properties.put("element.search.strategy", single(TestProperties::setSearchStrategy));
-    properties.put("browser.size", single(DRIVER.screenSize::read));
+            .put(REQUESTS_STRATEGY_PROPERTY.getName(), single(p -> LOGS.requestsStrategy = getLoggerStrategy(p)));
+    properties.put(KILL_BROWSER_PROPERTY.getName(), single(p -> COMMON.killBrowser = p));
+    properties.put(ELEMENT_SEARCH_STRATEGY_PROPERTY.getName(), single(TestProperties::setSearchStrategy));
+    properties.put(BROWSER_SIZE_PROPERTY.getName(), single(DRIVER.screenSize::read));
     properties
-            .put("page.load.strategy", single(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p)));
-    properties.put("page.check.after.open", single(p -> PAGE.checkPageOpen = parse(p)));
-    properties.put("assert.type", single(SoftAssert::setAssertType));
-    properties.put("click.type", single(p -> ELEMENT.clickType = getClickType(p)));
-    properties.put("text.type", single(p -> ELEMENT.getTextType = getTextType(p)));
-    properties.put("set.text.type", single(p -> ELEMENT.setTextType = getSetTextType(p)));
+            .put(PAGE_LOAD_STRATEGY_PROPERTY.getName(), single(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p)));
+    properties.put(PAGE_CHECK_AFTER_OPEN.getName(), single(p -> PAGE.checkPageOpen = parse(p)));
+    properties.put(ASSERT_TYPE_PROPERTY.getName(), single(SoftAssert::setAssertType));
+    properties.put(CLICK_TYPE_PROPERTY.getName(), single(p -> ELEMENT.clickType = getClickType(p)));
+    properties.put(TEXT_TYPE_PROPERTY.getName(), single(p -> ELEMENT.getTextType = getTextType(p)));
+    properties.put(SET_TEXT_TYPE_PROPERTY.getName(), single(p -> ELEMENT.setTextType = getSetTextType(p)));
 ///     RemoteWebDriver properties
-    properties.put("remote.type", single(p -> DRIVER.remoteUrl = getRemoteUrl(p)));
-    properties.put("driver.remote.url", single(p -> DRIVER.remoteUrl = p));
-    properties.put("log.level",
+    properties.put(REMOTE_TYPE_PROPERTY.getName(), single(p -> DRIVER.remoteUrl = getRemoteUrl(p)));
+    properties.put(DRIVER_REMOTE_URL_PROPERTY.getName(), single(p -> DRIVER.remoteUrl = p));
+    properties.put(LOG_LEVEL_PROPERTY.getName(),
             combo(p -> LOGS.logLevel = parseLogLevel(p), () -> logger.setLogLevel(LOGS.logLevel)));
-    properties.put("allure.steps", single(p -> LOGS.writeToAllure = parseBoolean(p)));
-    properties.put("smart.locators", single(p -> ELEMENT.smartTemplate = p.split(";")[0]));
+    properties.put(ALLURE_STEPS_PROPERTY.getName(), single(p -> LOGS.writeToAllure = parseBoolean(p)));
+    properties.put(SMART_LOCATORS_PROPERTY.getName(), single(p -> ELEMENT.smartTemplate = p.split(";")[0]));
     properties
-            .put("smart.locators.toName", single(p -> ELEMENT.smartName = getSmartSearchFunc(p)));
-    properties.put("smart.search", single(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p)));
-    properties.put("headless", single(p -> DRIVER.capabilities.common.put("headless", p)));
+            .put(SMART_LOCATORS_TO_NAME_PROPERTY.getName(), single(p -> ELEMENT.smartName = getSmartSearchFunc(p)));
+    properties.put(SMART_SEARCH_PROPERTY.getName(), single(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p)));
+    properties.put(HEADLESS_PROPERTY.getName(), single(p -> DRIVER.capabilities.common.put("headless", p)));
     return properties;
   }
 
