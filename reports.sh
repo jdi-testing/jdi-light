@@ -118,7 +118,7 @@ checkThatAllTestsPassed() {
     content=$(wget "$url/widgets/summary.json" -q -O -)
 #    content=$(<widgets/summury.json)
 
-    for entry in ".*"/*
+    for entry in ".*/allure-report"/*
     do
     echo $entry
     done
