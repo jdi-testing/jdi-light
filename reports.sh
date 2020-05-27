@@ -114,7 +114,7 @@ function uploadFile() {
     echo "${urlKey}" #return
 }
 
-function checkThatAllTestsPassed() {
+checkThatAllTestsPassed() {
     content=$(wget "$url/widgets/summary.json" -q -O -)
     failed="$(echo ${content}| jq '.statistic.failed')"
     broken="$(echo ${content}| jq '.statistic.broken')"
@@ -137,8 +137,8 @@ function deployAllureResults() {
     echo "LOG1"
     url="$(deployToNetlify "allure-report")"
     echo "LOG2"
-    sendComment "$(aboutNetlify ${url})"
     checkThatAllTestsPassed #there is an exit with exception inside
+    sendComment "$(aboutNetlify ${url})"
 }
 
 function downloadAllureResults() {
