@@ -117,11 +117,9 @@ function uploadFile() {
 function checkThatAllTestsPassed() {
 #    content=$(wget "$url/widgets/summary.json" -q -O -)  #web request
     content=$(<.*/allure-report/widgets/summary.json)     #file system request
-
-    echo "$content"
-    failed="$(echo ${content}| jq '.statistic.failed')"
-    broken="$(echo ${content}| jq '.statistic.broken')"
-    echo $content
+    failed="$(echo "${content}"| jq '.statistic.failed')"
+    broken="$(echo "${content}"| jq '.statistic.broken')"
+    echo "${content}"
     if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
         echo "${TEST_FAILED_ERROR_MESSAGE}"
         sleep 5
