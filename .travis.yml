@@ -54,7 +54,23 @@ jobs:
       name: Run tests - bdd
       jdk:
         - openjdk8
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+
+    - stage: test
+      name: Run tests - bdd
+      jdk:
         - openjdk10
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+
+    - stage: test
+      name: Run tests - bdd
+      jdk:
         - openjdk11
       script:
         - mvn -ntp install -DskipTests
@@ -63,10 +79,6 @@ jobs:
 
     - stage: test
       name: Run tests - bootstrap
-      jdk:
-        - openjdk8
-        - openjdk10
-        - openjdk11
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
@@ -74,10 +86,6 @@ jobs:
 
     - stage: test
       name: Run tests - angular
-      jdk:
-        - openjdk8
-        - openjdk10
-        - openjdk11
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
@@ -85,10 +93,6 @@ jobs:
 
     - stage: test
       name: Run tests - html
-      jdk:
-        - openjdk8
-        - openjdk10
-        - openjdk11
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
@@ -96,10 +100,6 @@ jobs:
 
     - stage: test
       name: Run tests - examples
-      jdk:
-        - openjdk8
-        - openjdk10
-        - openjdk11
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
@@ -107,10 +107,6 @@ jobs:
 
     - stage: test
       name: Run tests - performance
-      jdk:
-        - openjdk8
-        - openjdk10
-        - openjdk11
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
@@ -118,10 +114,6 @@ jobs:
 
     - stage: test
       name: Run tests - jdi-light-unit-tests
-      jdk:
-        - openjdk8
-        - openjdk10
-        - openjdk11
       script:
           - mvn -ntp install -DskipTests
           - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
