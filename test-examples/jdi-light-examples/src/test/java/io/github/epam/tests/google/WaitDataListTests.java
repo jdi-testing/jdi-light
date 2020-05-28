@@ -1,7 +1,6 @@
 package io.github.epam.tests.google;
 
 import io.github.epam.StaticTestsInit;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -36,13 +35,7 @@ public class WaitDataListTests extends StaticTestsInit {
 
     @Test
     public void emptyTest() {
-
-        try {
-            searchS.is().empty();
-            Assert.fail("List should not be empty");
-        } catch (Throwable ignored) {
-        }
-        searchS.is().notEmpty();
+        searchS.waitFor(2).notEmpty();
     }
 
     @Test
