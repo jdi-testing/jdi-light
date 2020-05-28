@@ -115,7 +115,6 @@ function uploadFile() {
 }
 
 function checkThatAllTestsPassed() {
-#    content=$(wget "$url/widgets/summary.json" -q -O -)  #web request
     content=$(<.*/allure-report/widgets/summary.json)     #file system request
     failed="$(echo "${content}"| jq '.statistic.failed')"
     broken="$(echo "${content}"| jq '.statistic.broken')"
