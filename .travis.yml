@@ -50,7 +50,7 @@ jobs:
         - mvn install -DskipTests
 
     - stage: test
-      name: Run tests - bdd jdk8
+      name: Run tests - bdd - jdk8
       jdk: openjdk8
       script:
         - java -version
@@ -59,7 +59,7 @@ jobs:
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
     - stage: test
-      name: Run tests - bdd jdk10
+      name: Run tests - bdd - jdk10
       jdk: openjdk10
       script:
         - java -version
@@ -68,7 +68,7 @@ jobs:
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
     - stage: test
-      name: Run tests - bdd jdk11
+      name: Run tests - bdd - jdk11
       jdk: openjdk11
       script:
         - java -version
@@ -77,42 +77,142 @@ jobs:
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
     - stage: test
-      name: Run tests - bootstrap
+      name: Run tests - bootstrap - jdk8
+      jdk: openjdk8
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
     - stage: test
-      name: Run tests - angular
+      name: Run tests - bootstrap - jdk10
+      jdk: openjdk10
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+
+    - stage: test
+      name: Run tests - bootstrap - jdk11
+      jdk: openjdk11
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+
+    - stage: test
+      name: Run tests - angular - jdk8
+      jdk: openjdk8
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
 
     - stage: test
-      name: Run tests - html
+      name: Run tests - angular - jdk10
+      jdk: openjdk10
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+
+    - stage: test
+      name: Run tests - angular - jdk11
+      jdk: openjdk11
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+
+    - stage: test
+      name: Run tests - html - jdk8
+      jdk: openjdk8
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 
     - stage: test
-      name: Run tests - examples
+      name: Run tests - html - jdk10
+      jdk: openjdk10
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
+
+    - stage: test
+      name: Run tests - html - jdk11
+      jdk: openjdk11
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
+
+    - stage: test
+      name: Run tests - examples - jdk8
+      jdk: openjdk8
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
 
     - stage: test
-      name: Run tests - performance
+      name: Run tests - examples - jdk10
+      jdk: openjdk10
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+
+    - stage: test
+      name: Run tests - examples - jdk11
+      jdk: openjdk11
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+
+    - stage: test
+      name: Run tests - performance - jdk8
+      jdk: openjdk8
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
 
     - stage: test
-      name: Run tests - jdi-light-unit-tests
+      name: Run tests - performance - jdk10
+      jdk: openjdk10
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+
+    - stage: test
+      name: Run tests - performance - jdk11
+      jdk: openjdk11
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+
+    - stage: test
+      name: Run tests - jdi-light-unit-tests - jdk8
+      jdk: openjdk8
+      script:
+          - mvn -ntp install -DskipTests
+          - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
+
+    - stage: test
+      name: Run tests - jdi-light-unit-tests - jdk10
+      jdk: openjdk10
+      script:
+          - mvn -ntp install -DskipTests
+          - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
+
+    - stage: test
+      name: Run tests - jdi-light-unit-tests - jdk11
+      jdk: openjdk11
       script:
           - mvn -ntp install -DskipTests
           - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
