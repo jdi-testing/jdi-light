@@ -1,4 +1,4 @@
-package io.github.com.custom;
+package com.epam.jdi.bdd.elements;
 
 import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.WebList;
