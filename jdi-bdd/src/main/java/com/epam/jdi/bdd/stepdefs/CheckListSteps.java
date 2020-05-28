@@ -4,7 +4,6 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
 import static com.epam.jdi.tools.LinqUtils.toIntArray;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
-import static org.testng.Assert.assertEquals;
 
 import com.epam.jdi.light.elements.complex.Checklist;
 import cucumber.api.java.en.Then;
@@ -92,12 +91,12 @@ public class CheckListSteps {
 
     @Then("in the \"([^\"]*)\" checklist checked elements are:$")
     public static void isCheckBoxesChecked(String name, List<String> values) {
-        assertEquals(checklist(name).checked(), values);
+        checklist(name).is().checked(values);
     }
 
     @Then("the \"([^\"]*)\" checklist value is \"([^\"]*)\"$")
     public static void checkListTextIs(String name, String text) {
-        assertEquals(checklist(name).getValue(), text);
+        checklist(name).has().text(text);
     }
 
     @When("^(?:I |)Select fields from \"([^\"]*)\":$")
