@@ -46,7 +46,7 @@ public class AllureLogger {
         if (isNotBlank(htmlSnapshot)) {
             attachText("HTML Code Snapshot", "text/html", htmlSnapshot);
         }
-        if (isNotBlank(htmlSnapshot)) {
+        if (isNotBlank(requests)) {
             attachText("HTTP Requests", "text/plain", requests);
         }
 
