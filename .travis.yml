@@ -36,13 +36,21 @@ stages:
   - test
   - reports
 
-tests-bdd: &tests-bdd
+testsbdd: &testsbdd
   stage: test
   name: "Run tests - bdd"
   script:
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+
+testsbootstrap: &testsbootstrap
+  stage: test
+  name: Run tests - bootstrap
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
 jobs:
   include:
@@ -57,30 +65,41 @@ jobs:
       script:
         - mvn install -DskipTests
 
-    - <<: *tests-bdd
+    - <<: *testsbdd
       name: "Run tests - bdd JDK8"
       jdk: openjdk8
       env:
         - JDK_VER="OpenJDK8"
 
-    - <<: *tests-bdd
+    - <<: *testsbdd
       name: "Run tests - bdd JDK10"
       jdk: openjdk10
       env:
         - JDK_VER="OpenJDK10"
 
-    - <<: *tests-bdd
+    - <<: *testsbdd
       name: "Run tests - bdd JDK11"
       jdk: openjdk11
       env:
         - JDK_VER="OpenJDK11"
 
-    - stage: test
-      name: Run tests - bootstrap
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+    - <<: *testsbootstrap
+      name: "Run tests - bootstrap JDK8"
+      jdk: openjdk8
+      env:
+        - JDK_VER="OpenJDK8"
+
+    - <<: *testsbootstrap
+      name: "Run tests - bootstrap JDK10"
+      jdk: openjdk10
+      env:
+        - JDK_VER="OpenJDK10"
+
+    - <<: *testsbootstrap
+      name: "Run tests - bootstrap JDK11"
+      jdk: openjdk11
+      env:
+        - JDK_VER="OpenJDK11"
 
     - stage: test
       name: Run tests - angular
