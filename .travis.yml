@@ -75,14 +75,14 @@ testsunit: &testsunit
     - mvn -ntp install -DskipTests
     - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
 
-testsangular: &testsangular
-  stage: test
-  name: Run tests - angular
-  script:
-    - mvn -ntp install -DskipTests
-    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
-
+#testsangular: &testsangular
+#  stage: test
+#  name: Run tests - angular
+#  script:
+#    - mvn -ntp install -DskipTests
+#    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+#    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+#
 testshtml: &testshtml
   stage: test
   name: Run tests - html
@@ -140,23 +140,12 @@ jobs:
       env:
         - JDK_VER="OpenJDK11"
 
-    - <<: *testsangular
-      name: "Run tests - angular JDK8"
-      jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
-
-    - <<: *testsangular
-      name: "Run tests - angular JDK10"
-      jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
-
-    - <<: *testsangular
-      name: "Run tests - angular JDK11"
-      jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
+    - stage: test
+      name: Run tests - angular
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
 
     - <<: *testshtml
       name: "Run tests - html JDK8"
