@@ -52,6 +52,29 @@ testsbootstrap: &testsbootstrap
     - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
+testsexamples: &testsexamples
+  stage: test
+  name: Run tests - examples
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+
+testsperformance: &testsperformance
+  stage: test
+  name: Run tests - performance
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+
+testsunit: &testsunit
+  stage: test
+  name: Run tests - jdi-light-unit-tests
+  script:
+    - mvn -ntp install -DskipTests
+    - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
+
 jobs:
   include:
     - stage: prepare
@@ -115,25 +138,59 @@ jobs:
         - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 
-    - stage: test
-      name: Run tests - examples
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+    - <<: *testsexamples
+      name: "Run tests - examples JDK8"
+      jdk: openjdk8
+      env:
+        - JDK_VER="OpenJDK8"
 
-    - stage: test
-      name: Run tests - performance
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+    - <<: *testsexamples
+      name: "Run tests - examples JDK10"
+      jdk: openjdk10
+      env:
+        - JDK_VER="OpenJDK10"
 
-    - stage: test
-      name: Run tests - jdi-light-unit-tests
-      script:
-        - mvn -ntp install -DskipTests
-        - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
+    - <<: *testsexamples
+      name: "Run tests - examples JDK11"
+      jdk: openjdk11
+      env:
+        - JDK_VER="OpenJDK11"
+
+    - <<: *testsperformance
+      name: "Run tests - performance JDK8"
+      jdk: openjdk8
+      env:
+        - JDK_VER="OpenJDK8"
+
+    - <<: *testsperformance
+      name: "Run tests - performance JDK10"
+      jdk: openjdk10
+      env:
+        - JDK_VER="OpenJDK10"
+
+    - <<: *testsperformance
+      name: "Run tests - performance JDK11"
+      jdk: openjdk11
+      env:
+        - JDK_VER="OpenJDK11"
+
+    - <<: *testsunit
+      name: "Run tests - jdi-light-unit-tests JDK8"
+      jdk: openjdk8
+      env:
+        - JDK_VER="OpenJDK8"
+
+    - <<: *testsunit
+      name: "Run tests - jdi-light-unit-tests JDK10"
+      jdk: openjdk10
+      env:
+        - JDK_VER="OpenJDK10"
+
+    - <<: *testsunit
+      name: "Run tests - jdi-light-unit-tests JDK11"
+      jdk: openjdk11
+      env:
+        - JDK_VER="OpenJDK11"
 
     - stage: reports
       name: Deploy allure reports to netlify
