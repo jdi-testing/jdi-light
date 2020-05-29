@@ -1,8 +1,4 @@
 language: java
-jdk:
-  - openjdk8
-  - openjdk10
-  - openjdk11
 before_install:
   - sudo apt-get -y install jq
   - java -Xmx32m -version
@@ -40,6 +36,14 @@ stages:
   - test
   - reports
 
+testsbdd: &tests-bdd
+      stage: test
+      name: Run tests - bdd
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+
 jobs:
   include:
     - stage: prepare
@@ -53,12 +57,7 @@ jobs:
       script:
         - mvn install -DskipTests
 
-    - stage: test
-      name: Run tests - bdd
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+    - <<: *tests-bdd
 
     - stage: test
       name: Run tests - bootstrap
