@@ -38,6 +38,7 @@ stages:
 
 tests-bdd: &tests-bdd
   stage: test
+  name: "Run tests - bdd"
   script:
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
