@@ -44,53 +44,53 @@ tests-bdd: &tests-bdd
         - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
-tests-bootstrap: &tests-bootstrap
-      stage: test
-      name: Run tests - bootstrap
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
-
-tests-angular: &tests-angular
-      stage: test
-      name: Run tests - angular
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
-
-tests-html: &tests-html
-      stage: test
-      name: Run tests - html
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
-
-tests-examples: &tests-examples
-      stage: test
-      name: Run tests - examples
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
-
-tests-performance: &tests-performance
-      stage: test
-      name: Run tests - performance
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
-
-tests-unit: &tests-unit
-      stage: test
-      name: Run tests - jdi-light-unit-tests
-      script:
-        - mvn -ntp install -DskipTests
-        - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
-
+#tests-bootstrap: &tests-bootstrap
+#      stage: test
+#      name: Run tests - bootstrap
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+#
+#tests-angular: &tests-angular
+#      stage: test
+#      name: Run tests - angular
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+#
+#tests-html: &tests-html
+#      stage: test
+#      name: Run tests - html
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
+#
+#tests-examples: &tests-examples
+#      stage: test
+#      name: Run tests - examples
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+#
+#tests-performance: &tests-performance
+#      stage: test
+#      name: Run tests - performance
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+#
+#tests-unit: &tests-unit
+#      stage: test
+#      name: Run tests - jdi-light-unit-tests
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
+#
 jobs:
   include:
     - stage: prepare
@@ -119,95 +119,95 @@ jobs:
       env:
         - JDK_VER="OpenJDK11"
 
-    - <<: *tests-bootstrap
-      jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
-
-    - <<: *tests-bootstrap
-      jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
-
-    - <<: *tests-bootstrap
-      jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
-
-    - <<: *tests-angular
-      jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
-
-    - <<: *tests-angular
-      jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
-
-    - <<: *tests-angular
-      jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
-
-    - <<: *tests-html
-      jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
-
-    - <<: *tests-html
-      jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
-
-    - <<: *tests-html
-      jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
-
-    - <<: *tests-examples
-      jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
-
-    - <<: *tests-examples
-      jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
-
-    - <<: *tests-examples
-      jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
-
-    - <<: *tests-performance
-      jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
-
-    - <<: *tests-performance
-      jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
-
-    - <<: *tests-performance
-      jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
-
-    - <<: *tests-unit
-      jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
-
-    - <<: *tests-unit
-      jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
-
-    - <<: *tests-unit
-      jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
+#    - <<: *tests-bootstrap
+#      jdk: openjdk8
+#      env:
+#        - JDK_VER="OpenJDK8"
+#
+#    - <<: *tests-bootstrap
+#      jdk: openjdk10
+#      env:
+#        - JDK_VER="OpenJDK10"
+#
+#    - <<: *tests-bootstrap
+#      jdk: openjdk11
+#      env:
+#        - JDK_VER="OpenJDK11"
+#
+#    - <<: *tests-angular
+#      jdk: openjdk8
+#      env:
+#        - JDK_VER="OpenJDK8"
+#
+#    - <<: *tests-angular
+#      jdk: openjdk10
+#      env:
+#        - JDK_VER="OpenJDK10"
+#
+#    - <<: *tests-angular
+#      jdk: openjdk11
+#      env:
+#        - JDK_VER="OpenJDK11"
+#
+#    - <<: *tests-html
+#      jdk: openjdk8
+#      env:
+#        - JDK_VER="OpenJDK8"
+#
+#    - <<: *tests-html
+#      jdk: openjdk10
+#      env:
+#        - JDK_VER="OpenJDK10"
+#
+#    - <<: *tests-html
+#      jdk: openjdk11
+#      env:
+#        - JDK_VER="OpenJDK11"
+#
+#    - <<: *tests-examples
+#      jdk: openjdk8
+#      env:
+#        - JDK_VER="OpenJDK8"
+#
+#    - <<: *tests-examples
+#      jdk: openjdk10
+#      env:
+#        - JDK_VER="OpenJDK10"
+#
+#    - <<: *tests-examples
+#      jdk: openjdk11
+#      env:
+#        - JDK_VER="OpenJDK11"
+#
+#    - <<: *tests-performance
+#      jdk: openjdk8
+#      env:
+#        - JDK_VER="OpenJDK8"
+#
+#    - <<: *tests-performance
+#      jdk: openjdk10
+#      env:
+#        - JDK_VER="OpenJDK10"
+#
+#    - <<: *tests-performance
+#      jdk: openjdk11
+#      env:
+#        - JDK_VER="OpenJDK11"
+#
+#    - <<: *tests-unit
+#      jdk: openjdk8
+#      env:
+#        - JDK_VER="OpenJDK8"
+#
+#    - <<: *tests-unit
+#      jdk: openjdk10
+#      env:
+#        - JDK_VER="OpenJDK10"
+#
+#    - <<: *tests-unit
+#      jdk: openjdk11
+#      env:
+#        - JDK_VER="OpenJDK11"
 
     - stage: reports
       name: Deploy allure reports to netlify
