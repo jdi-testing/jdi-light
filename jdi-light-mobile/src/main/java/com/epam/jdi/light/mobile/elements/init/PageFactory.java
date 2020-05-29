@@ -1,6 +1,7 @@
 package com.epam.jdi.light.mobile.elements.init;
 
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
+import com.epam.jdi.light.mobile.elements.pageobjects.annotations.WebAnnotationsUtil;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 import static com.epam.jdi.light.elements.init.InitActions.JDI_ANNOTATIONS;
 import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
 import static com.epam.jdi.light.mobile.elements.pageobjects.annotations.WebAnnotationsUtil.mobileFindByToBy;
-import static com.epam.jdi.light.mobile.settings.MobileSettings.*;
+import static com.epam.jdi.light.mobile.settings.MobileSettings.init;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.pairs.Pair.$;
@@ -22,6 +23,7 @@ public class PageFactory {
     public static void initMobile(Class<?> site) {
         init();
         initRules();
+        initApp(site);
         com.epam.jdi.light.elements.init.PageFactory.initSite(site);
     }
     public static void initMobile(Class<?> site, String driverName) {
@@ -88,5 +90,9 @@ public class PageFactory {
                 }
             }
         })));
+    }
+
+    private static void initApp(Class<?> app) {
+        WebAnnotationsUtil.setApp(app);
     }
 }

@@ -59,4 +59,9 @@ public class MobileAppUIElement extends MobileUIElement {
             return false;
         return getWebElement().isEnabled();
     }
+
+    @Override
+    public boolean isVisible() {
+        return getWebElement().isDisplayed();
+    }
 }
