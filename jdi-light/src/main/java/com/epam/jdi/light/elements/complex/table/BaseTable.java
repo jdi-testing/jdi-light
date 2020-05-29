@@ -240,7 +240,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         try {
             rowHeader = jsColumn(index);
             if (rowHeader.size() == 0)
-                throw new RuntimeException();
+                throw new IllegalStateException();
         } catch (Exception ex) {
             rowHeader = webColumn(index).values();
         }
