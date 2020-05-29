@@ -58,6 +58,13 @@ jobs:
         - mvn install -DskipTests
 
     - <<: *tests-bdd
+      jdk: openjdk8
+
+    - <<: *tests-bdd
+      jdk: openjdk10
+
+    - <<: *tests-bdd
+      jdk: openjdk11
 
     - stage: test
       name: Run tests - bootstrap
