@@ -10,10 +10,8 @@ addons:
   apt:
     packages:
       - openjdk-8-jdk
+
 env:
-  - JAVA_VER=openjdk8
-  - JAVA_VER=openjdk10
-  - JAVA_VER=openjdk11
   global:
     - CHROME_PROPERTIES="chrome.properties"
     - WITH_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
@@ -30,7 +28,7 @@ env:
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
     - JDI_LIGHT_UNIT_TESTS="jdi-light"
     - CHROME_ARGS="--headless"
-    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+#    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
     - PATH="$JAVA_HOME/bin:$PATH"
 
 stages:
@@ -38,6 +36,15 @@ stages:
   - compile
   - test
   - reports
+
+tests-bdd: &tests-bdd
+  stage: test
+  name: Run tests - bdd $JAVA_VER
+  script:
+    - echo "JAVA_VER=$JAVA_VER"
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
 jobs:
   include:
@@ -52,53 +59,61 @@ jobs:
       script:
         - mvn install -DskipTests
 
-    - stage: test
-      name: Run tests - bdd
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+    - <<: *tests-bdd
+      jdk: openjdk8
+      env:
+        - JAVA_VER=JDK8
 
-    - stage: test
-      name: Run tests - bootstrap
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+    - <<: *tests-bdd
+      jdk: openjdk10
+      env:
+        - JAVA_VER=JDK10
 
-    - stage: test
-      name: Run tests - angular
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+    - <<: *tests-bdd
+      jdk: openjdk11
+      env:
+        - JAVA_VER=JDK11
 
-    - stage: test
-      name: Run tests - html
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
-
-    - stage: test
-      name: Run tests - examples
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
-
-    - stage: test
-      name: Run tests - performance
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
-
-    - stage: test
-      name: Run tests - jdi-light-unit-tests
-      script:
-        - mvn -ntp install -DskipTests
-        - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
+#    - stage: test
+#      name: Run tests - bootstrap
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+#
+#    - stage: test
+#      name: Run tests - angular
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+#
+#    - stage: test
+#      name: Run tests - html
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
+#
+#    - stage: test
+#      name: Run tests - examples
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+#
+#    - stage: test
+#      name: Run tests - performance
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+#
+#    - stage: test
+#      name: Run tests - jdi-light-unit-tests
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
 
     - stage: reports
       name: Deploy allure reports to netlify
