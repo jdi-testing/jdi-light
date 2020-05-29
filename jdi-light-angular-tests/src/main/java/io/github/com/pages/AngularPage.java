@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+import io.github.com.pages.sections.SlideToggleSection;
 import elements.common.BasicSpinner;
 import elements.common.Icon;
 
@@ -26,4 +27,6 @@ public class AngularPage extends WebPage {
 
     @UI("#svg_icon")
     public static Icon svgIcon;
+
+    public static SlideToggleSection slideToggleSection;
 }
