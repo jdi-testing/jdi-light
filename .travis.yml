@@ -38,7 +38,7 @@ stages:
 
 testsbdd: &tests-bdd
       stage: test
-      name: "Run tests - bdd ${JDK_VER}, *jdk" ${JDK_VER} *jdk
+      name: "Run tests - bdd ${JDK_VER}, *jdk"
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
