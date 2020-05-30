@@ -13,7 +13,7 @@
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <aspectj.version>1.9.1</aspectj.version>
+        <aspectj.version>1.9.5</aspectj.version>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <allure.testng>2.13.1</allure.testng>
         <allure.maven>2.10.0</allure.maven>
@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.10</version>
+            <version>1.2.13</version>
         </dependency>
 
         <!--Allure-->

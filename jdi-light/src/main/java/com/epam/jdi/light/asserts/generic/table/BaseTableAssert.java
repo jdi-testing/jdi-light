@@ -22,8 +22,7 @@ import static org.hamcrest.Matchers.*;
  */
 public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert<?,?>> extends UIAssert<A, T> {
     protected T table() {
-        element.refresh();
-        return element;
+        return element();
     }
     /**
      * Check that the table is empty

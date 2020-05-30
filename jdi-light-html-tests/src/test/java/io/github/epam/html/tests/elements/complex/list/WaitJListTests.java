@@ -35,23 +35,25 @@ public class WaitJListTests implements TestsInit {
     }
     @Test
     public void emptyTest() {
-        TIMEOUTS.element.setUp(2);
         try {
+            jsearchTitle.waitSec(2);
             jsearchTitle.is().empty();
             Assert.fail("List should not be empty");
         } catch (Throwable ignored) { }
         finally {
-            TIMEOUTS.element.drop();
+            jsearchTitle.waitSec(TIMEOUTS.element.get());
         }
         logger.info("Done");
     }
     @Test
     public void sizeTest() {
         assertEquals(jsearchTitle.size(), 6);
+        // FLAKY
         jsearchTitle.is().size(equalTo(8));
     }
     @Test
     public void sizeNotEmptyTest() {
+        // FLAKY
         jsearchTitle.is().size(greaterThan(7));
     }
 
