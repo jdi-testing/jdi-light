@@ -82,7 +82,7 @@ public class WebDriverFactory {
                 setRunDrivers(rDrivers);
                 logger.debug("setRunDrivers");
             }
-            logger.debug("Get '%s' driver");
+            logger.debug("Get '%s' driver", driverName);
             WebDriver driver = rDrivers.get(driverName);
             logger.debug("Successs: " + driver);
             if (driver.toString().contains("(null)")) {

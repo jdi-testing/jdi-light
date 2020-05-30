@@ -20,8 +20,7 @@ public class ListAssert<A extends ListAssert<?,?,?>, T, E extends IListSelector<
         implements ITextAssert<A> {
 
     private List<T> list() {
-        element.refresh();
-        return element.elements(1).values();
+        return element().elements(1).values();
     }
     /**
      * Check that all elements meet condition

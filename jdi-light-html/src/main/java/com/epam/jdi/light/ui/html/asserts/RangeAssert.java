@@ -17,7 +17,7 @@ import static com.epam.jdi.light.ui.html.HtmlUtils.*;
 public class RangeAssert extends UIAssert<RangeAssert, Range> {
     @JDIAction("Assert that '{name}' volume {0}")
     public RangeAssert value(Matcher<Double> value) {
-        jdiAssert(getDouble("value", element.core()), value);
+        jdiAssert(getDouble("value", element().core()), value);
         return this;
     }
 
@@ -27,7 +27,7 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
 
     @JDIAction("Assert that '{name}' min volume is {0}")
     public RangeAssert minValue(Matcher<Double> min) {
-        jdiAssert(element.min(), min);
+        jdiAssert(element().min(), min);
         return this;
     }
     public RangeAssert minValue(double minValue) {
@@ -40,7 +40,7 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
 
     @JDIAction("Assert that '{name}' max volume {0}")
     public RangeAssert maxValue(Matcher<Double> max) {
-        jdiAssert(element.max(), max);
+        jdiAssert(element().max(), max);
         return this;
     }
 
@@ -52,7 +52,7 @@ public class RangeAssert extends UIAssert<RangeAssert, Range> {
     }
     @JDIAction("Assert that '{name}' step is {0}")
     public RangeAssert step(Matcher<Double> step) {
-        jdiAssert(element.step(), step);
+        jdiAssert(element().step(), step);
         return this;
     }
 
