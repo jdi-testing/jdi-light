@@ -7,7 +7,7 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
-import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.light.logger.*;
 import com.epam.jdi.tools.*;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.pairs.Pair;
@@ -137,16 +137,15 @@ public class WebSettings {
             getProperties(COMMON.testPropertiesPath);
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();
-            fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
-            fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
-            fillAction(WebSettings::setDomain, "domain");
             if (DRIVER.name.equals(DEFAULT_DRIVER))
                 fillAction(p -> DRIVER.name = p, "driver");
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
+            fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
+            fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
+            fillAction(WebSettings::setDomain, "domain");
             fillAction(p -> SCREEN.path = p, "screens.folder");
             fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
-            addStrategy(FAIL, LOGS.screenStrategy);
             fillAction(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
             fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
             fillAction(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
@@ -166,8 +165,8 @@ public class WebSettings {
             fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
             logger.setLogLevel(LOGS.logLevel);
             fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
-            fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locators");
-            fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locators.toName");
+            fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locator");
+            fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
             fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
             fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
 
@@ -195,7 +194,8 @@ public class WebSettings {
 
     private static ElementArea getClickType(String type) {
         ElementArea clickType = first(getAllEnumValues(ElementArea.class),
-                t -> t.toString().equals(type));
+            t -> t.toString().trim().replaceAll("[^a-z]", "")
+                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
         return clickType != null
                 ? clickType : CENTER;
     }
@@ -205,18 +205,21 @@ public class WebSettings {
     }
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
-                t -> t.toString().equals(type));
+            t -> t.toString().trim().replaceAll("[^a-z]", "")
+                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
         return textType != null
                 ? textType : SMART_TEXT;
     }
     private static SetTextTypes getSetTextType(String type) {
-        SetTextTypes textType = first(getAllEnumValues(SetTextTypes.class),
-                t -> t.toString().equals(type));
-        return textType != null
-                ? textType : SET_TEXT;
+        SetTextTypes setTextType = first(getAllEnumValues(SetTextTypes.class),
+            t -> t.toString().trim().replaceAll("[^a-z]", "")
+                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
+        return setTextType != null
+                ? setTextType : CLEAR_SEND_KEYS;
     }
     private static String getRemoteUrl(String prop) {
-        switch (prop.toLowerCase().replaceAll(" ", "")) {
+        String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
+        switch (value) {
             case "sauce":
             case "saucelabs":
                 DRIVER.capabilities.common = sauceCapabilities();
@@ -227,19 +230,25 @@ public class WebSettings {
     }
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
         if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
-            throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locators.toName' in test.properties." +
+            throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
                 "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }
     private static UseSmartSearch getSmartSearchUse(String prop) {
-        String propLower = prop.toLowerCase().trim().replaceAll(" ", "");
-        switch (propLower) {
-            case "false": return FALSE;
-            case "onlyui": return ONLY_UI;
-            case "uiandelements": return UI_AND_ELEMENTS;
-            case "always": return ALWAYS;
-            default: return UI_AND_ELEMENTS;
+        String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
+        switch (value) {
+            case "false":
+            case "off":
+                return FALSE;
+            case "onlyui":
+                return ONLY_UI;
+            case "uiandelements":
+                return UI_AND_ELEMENTS;
+            case "always":
+                return ALWAYS;
+            default:
+                return UI_AND_ELEMENTS;
         }
     }
 
@@ -329,7 +338,7 @@ public class WebSettings {
         }
     }
     private static List<com.epam.jdi.light.logger.Strategy> getLoggerStrategy(String strategy) {
-        if (isBlank(strategy))
+        if (isBlank(strategy) || strategy.trim().equalsIgnoreCase("off"))
             return new ArrayList<>();
         List<com.epam.jdi.light.logger.Strategy> strategies = new ArrayList<>();
         try {
@@ -339,10 +348,10 @@ public class WebSettings {
         return strategies;
     }
     private static Strategies getStrategy(String prop) {
-        String strategy = prop.trim().toLowerCase();
+        String strategy = prop.trim().toLowerCase().replaceAll("[^a-z]", "");
         switch (strategy) {
             case "jdi": return JDI;
-            case "jdi-stable": return JDI_STABLE;
+            case "jdismart": return JDI_SMART;
             case "selenium": return SELENIUM;
             default: return JDI;
         }

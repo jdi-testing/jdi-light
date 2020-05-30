@@ -1,0 +1,680 @@
+{
+  "properties": [
+    {
+      "name": "strategy",
+      "type": "java.lang.String",
+      "description": "Strategy which defines basic framework settings",
+      "defaultValue": "jdi"
+    },
+    {
+      "name": "driver",
+      "type": "java.lang.String",
+      "description": "Driver name used to run tests",
+      "defaultValue": "chrome"
+    },
+    {
+      "name": "driver.version",
+      "type": "java.lang.String",
+      "description": "Version of the web driver",
+      "defaultValue": "latest"
+    },
+    {
+      "name": "drivers.folder",
+      "type": "java.lang.String",
+      "description": "Absolute or relative path to the local driver folder",
+      "defaultValue": "/src/test/resources/drivers"
+    },
+    {
+      "name": "timeout.wait.element",
+      "type": "java.lang.Integer",
+      "description": "Timeout in seconds to wait for an element on the opened page",
+      "defaultValue": 5
+    },
+    {
+      "name": "timeout.wait.page",
+      "type": "java.lang.Integer",
+      "description": "Timeout in seconds to wait for a newly opened page to load",
+      "defaultValue": 30
+    },
+    {
+      "name": "domain",
+      "type": "java.lang.String",
+      "description": "Web application domain URL (in case of testing single application)"
+    },
+    {
+      "name": "screens.folder",
+      "type": "java.lang.String",
+      "description": "Absolute or relative path to folder with screenshots",
+      "defaultValue": "/target/.logs/screens"
+    },
+    {
+      "name": "list.start.index",
+      "type": "java.lang.Integer",
+      "description": "Index of initial element in WebList.",
+      "defaultValue": 1
+    },
+    {
+      "name": "log.info.details",
+      "type": "java.lang.String",
+      "description": "Specify additional info that should be logged for each action",
+      "defaultValue": "element"
+    },
+    {
+      "name": "screenshot.strategy",
+      "type": "java.lang.String",
+      "description": "Specify situation while JDI make screenshot",
+      "defaultValue": "off"
+    },
+    {
+      "name": "html.code.strategy",
+      "type": "java.lang.String",
+      "description": "A strategy for writing html-code of the web element last processed before test failure to log.",
+      "defaultValue": "off"
+    },
+    {
+      "name": "requests.strategy",
+      "type": "java.lang.String",
+      "description": "When to log requests 4ХХ, 5ХХ errors",
+      "defaultValue": "off"
+    },
+    {
+      "name": "browser.kill",
+      "type": "java.lang.String",
+      "description": "Specify when all test browser instances should be shut down [after/before test execution]",
+      "defaultValue": "afterAndBefore"
+    },
+    {
+      "name": "element.search.strategy",
+      "type": "java.lang.String",
+      "description": "Specify element's searching strategy",
+      "defaultValue": "strict"
+    },
+    {
+      "name": "browser.size",
+      "type": "java.lang.String",
+      "description": "The size of the browser by default",
+      "defaultValue": "MAXIMIZE"
+    },
+    {
+      "name": "page.load.strategy",
+      "type": "java.lang.String",
+      "description": "Similarly to Selenium, strategies to load the page",
+      "defaultValue": "normal"
+    },
+    {
+      "name": "page.check.after.open",
+      "type": "java.lang.String",
+      "description": "Specify should JDI check page url and title while it opens by default",
+      "defaultValue": "none"
+    },
+    {
+      "name": "assert.type",
+      "type": "java.lang.String",
+      "description": "Default assertion's type: strict or soft",
+      "defaultValue": "strict"
+    },
+    {
+      "name": "click.type",
+      "type": "java.lang.String",
+      "description": "Specify how JDI will perform click",
+      "defaultValue": "center"
+    },
+    {
+      "name": "text.type",
+      "type": "java.lang.String",
+      "description": "Specify how JDI will perform getText()",
+      "defaultValue": "smart getText"
+    },
+    {
+      "name": "set.text.type",
+      "type": "java.lang.String",
+      "description": "The way of setting text to the element.",
+      "defaultValue": "clear and sendKeys"
+    },
+    {
+      "name": "remote.type",
+      "type": "java.lang.String",
+      "description": "TSpecify remote run type: sauce labs, browserstack, selenium grid",
+      "defaultValue": "selenium localhost"
+    },
+    {
+      "name": "driver.remote.url",
+      "type": "java.lang.String",
+      "description": "Specify URL that will be used to run tests remotely",
+      "defaultValue": "http://localhost:4444/wd/hub/"
+    },
+    {
+      "name": "log.level",
+      "type": "java.lang.String",
+      "description": "Specify log level",
+      "defaultValue": "info"
+    },
+    {
+      "name": "allure.steps",
+      "type": "java.lang.Boolean",
+      "description": "Log steps in Allure",
+      "defaultValue": true
+    },
+    {
+      "name": "smart.locator",
+      "type": "java.lang.String",
+      "description": "Specify template for Smart locator",
+      "defaultValue": "#%s"
+    },
+    {
+      "name": "smart.locator.to.name",
+      "type": "java.lang.String",
+      "description": "Specify how element variable will be transformed to smart locator variable that will be placed instead of %s",
+      "defaultValue": "kebab-case"
+    },
+    {
+      "name": "smart.search",
+      "type": "java.lang.String",
+      "description": "When to use smart locators.",
+      "defaultValue": "ui and elements"
+    },
+    {
+      "name": "headless",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use headless browser or not.",
+      "defaultValue": false
+    },
+    {
+      "name": "chrome.capabilities.path",
+      "type": "java.lang.String",
+      "description": "Specify path/filename to chrome properties (relative from src/java/resources)",
+      "defaultValue": "chrome.properties"
+    },
+    {
+      "name": "ff.capabilities.path",
+      "type": "java.lang.String",
+      "description": "Specify path/filename to firefox properties (relative from src/java/resources)",
+      "defaultValue": "ff.properties"
+    },
+    {
+      "name": "ie.capabilities.path",
+      "type": "java.lang.String",
+      "description": "Specify path/filename to internet explorer properties (relative from src/java/resources)",
+      "defaultValue": "ie.properties"
+    },
+    {
+      "name": "edge.capabilities.path",
+      "type": "java.lang.String",
+      "description": "Specify path/filename to edge internet explorer properties (relative from src/java/resources)",
+      "defaultValue": "edge.properties"
+    },
+    {
+      "name": "opera.capabilities.path",
+      "type": "java.lang.String",
+      "description": "Specify path/filename to opera properties (relative from src/java/resources)",
+      "defaultValue": "opera.properties"
+    },
+    {
+      "name": "safari.capabilities.path",
+      "type": "java.lang.String",
+      "description": "Specify path/filename to safari properties (relative from src/java/resources)",
+      "defaultValue": "safari.properties"
+    },
+    {
+      "name": "common.capabilities.path",
+      "type": "java.lang.String",
+      "description": "Specify path/filename to common properties that will be applied for all browsers (relative from src/java/resources)",
+      "defaultValue": "common.properties"
+    }
+  ],
+  "hints": [
+    {
+      "name": "strategy",
+      "values": [
+        {
+          "value": "jdi",
+          "description": "Use Selenium like click in the Center of the element; Support Smart locators and elements cache; Smart Get text (try to get text from text, value and inner text of the element); Text Field input clear field before do sendKeys; Element considered as found if only one element found and it is visible"
+        },
+        {
+          "value": "jdi smart",
+          "description": "Use Smart click that try to find area to click on the element; scroll browser window to element before search; Support Smart locators and elements cache; Smart Get text (try to get text from text, value and inner text of the element); Text Field input as set value in to the \"value\" attribute; Element considered as found if only one element found and it is visible"
+        },
+        {
+          "value": "selenium",
+          "description": "Use Selenium like click in the Center of the element; Get element using simple findElement (no smart locators support); Get text using Selenium getText() method; Text Field input using Selenium sendKeys(...) method; Element considered as found if on the page no matter visible or not and if more then one element found than use first one"
+        }
+      ]
+    },
+    {
+      "name": "driver.version",
+      "values": [
+        {
+          "value": "LATEST",
+          "description": "Always use latest driver version"
+        },
+        {
+          "value": "PRELATEST",
+          "description": "Always use previous to latest driver version"
+        },
+        {
+          "value": "83.0.4103.61",
+          "description": "Use exact driver version"
+        }
+      ]
+    },
+    {
+      "name": "driver",
+      "values": [
+        {
+          "value": "chrome",
+          "description": "WebDriver for Chrome browser"
+        },
+        {
+          "value": "firefox",
+          "description": "WebDriver for Firefox browser"
+        },
+        {
+          "value": "ie",
+          "description": "WebDriver for Internet Explorer"
+        },
+        {
+          "value": "edge",
+          "description": "WebDriver for Internet Explorer Edge browser"
+        },
+        {
+          "value": "opera",
+          "description": "WebDriver for Opera browser"
+        },
+        {
+          "value": "safari",
+          "description": "WebDriver for Safari browser"
+        }
+      ]
+    },
+    {
+      "name": "screenshot.strategy",
+      "values": [
+        {
+          "value": "off",
+          "description": "User should specify the place where screenshot should be done"
+        },
+        {
+          "value": "on failure",
+          "description": "Make a screenshot of the page in case of test failure (highlight last used element and place screenshot in the log and report)"
+        },
+        {
+          "value": "on assert",
+          "description": "Make a screenshot of the page for each JDI assertion"
+        },
+        {
+          "value": "new page",
+          "description": "Do screenshot on each new opened page"
+        }
+      ]
+    },
+    {
+      "name": "html.code.strategy",
+      "values": [
+        {
+          "value": "off",
+          "description": "Do not write html-code of the web element to log"
+        },
+        {
+          "value": "on failure",
+          "description": "Attach html-code of the page in case of test failure"
+        },
+        {
+          "value": "on assert",
+          "description": "Attach html-code of the page for each JDI assertion"
+        },
+        {
+          "value": "new page",
+          "description": "Attach html-code of the page on each new opened page"
+        }
+      ]
+    },
+    {
+      "name": "requests.strategy",
+      "values": [
+        {
+          "value": "off",
+          "description": "No html requests will be added by default"
+        },
+        {
+          "value": "on failure",
+          "description": "Log requests 4ХХ, 5ХХ errors on the test failure"
+        },
+        {
+          "value": "on assert",
+          "description": "Log requests 4ХХ, 5ХХ errors on each JDI assert"
+        },
+        {
+          "value": "new page",
+          "description": "Log requests 4ХХ, 5ХХ errors on each new opened page"
+        }
+      ]
+    },
+    {
+      "name": "browser.kill",
+      "values": [
+        {
+          "value": "afterAndBefore",
+          "description": "Shut down the browser after and before test execution"
+        },
+        {
+          "value": "after",
+          "description": "Shut down the browser only after test execution"
+        },
+        {
+          "value": "before",
+          "description": "Shut down the browser only before test execution"
+        }
+      ]
+    },
+    {
+      "name": "element.search.strategy",
+      "values": [
+        {
+          "value": "strict",
+          "description": "[visible, single] Element considered as found if only one element found and it is visible"
+        },
+        {
+          "value": "soft",
+          "description": "[any, multiple] Element considered as found if on the page no matter visible or not and if more then one element found than use first one"
+        },
+        {
+          "value": "any",
+          "description": "Element considered as found if on the page no matter visible or not"
+        },
+        {
+          "value": "visible",
+          "description": "Element considered as found if it is visible"
+        },
+        {
+          "value": "single",
+          "description": "Element considered as found if only one element found"
+        },
+        {
+          "value": "multiple",
+          "description": "If  more than one element found then use first one"
+        }
+      ]
+    },
+    {
+      "name": "browser.size",
+      "values": [
+        {
+          "value": "MAXIMIZE",
+          "description": "Browser window will be maximized"
+        },
+        {
+          "value": "1024x762",
+          "description": "Browser window will be set to 1024x762 resolution"
+        }
+      ]
+    },
+    {
+      "name": "log.info.details",
+      "values": [
+        {
+          "value": "none",
+          "description": "No additional info. Log only test scenario"
+        },
+        {
+          "value": "name",
+          "description": "Log element name"
+        },
+        {
+          "value": "locator",
+          "description": "Log full element's locator (with context)"
+        },
+        {
+          "value": "element",
+          "description": "Log PageObject, element variable name and full locator"
+        }
+      ]
+    },
+    {
+      "name": "page.load.strategy",
+      "values": [
+        {
+          "value": "normal",
+          "description": "Indicates WebDriver should wait for the document readiness state to be \"complete\" after navigation"
+        },
+        {
+          "value": "none",
+          "description": "Indicates WebDriver should not wait on the document readiness state after a navigation event"
+        },
+        {
+          "value": "eager",
+          "description": "Indicates WebDriver should wait for the document readiness state to become \"interactive\" after navigation"
+        }
+      ]
+    },
+    {
+      "name": "page.check.after.open",
+      "values": [
+        {
+          "value": "none",
+          "description": "Do not check the page has been opened"
+        },
+        {
+          "value": "new page",
+          "description": "Execute checkOpened() for each new page in order to check that correct page opened"
+        },
+        {
+          "value": "every page",
+          "description": "Execute checkOpened() for every element's interaction in order to check that element placed on the correct page"
+        }
+      ]
+    },
+    {
+      "name": "assert.type",
+      "values": [
+        {
+          "value": "strict",
+          "description": "All JDI assertions are strict by default except verify()"
+        },
+        {
+          "value": "soft",
+          "description": "All JDI assertions are soft. You need to call assertResults() method in order to throw failed assertions"
+        }
+      ]
+    },
+    {
+      "name": "click.type",
+      "values": [
+        {
+          "value": "smart click",
+          "description": "Try to click on element even if it is partly overlapped"
+        },
+        {
+          "value": "top left",
+          "description": "Click at the top-left corner of the element"
+        },
+        {
+          "value": "top right",
+          "description": "Click at the top-right corner of the element"
+        },
+        {
+          "value": "bottom left",
+          "description": "Click at the bottom-left corner of the element"
+        },
+        {
+          "value": "bottom right",
+          "description": "Click at the bottom-right corner of the element"
+        },
+        {
+          "value": "selenium",
+          "description": "Use Selenium click at the center of the element"
+        },
+        {
+          "value": "center",
+          "description": "Use Selenium click at the center of the element"
+        },
+        {
+          "value": "JS",
+          "description": "Click using Java Script"
+        }
+      ]
+    },
+    {
+      "name": "text.type",
+      "values": [
+        {
+          "value": "smart text",
+          "description": "Smart Get text (try to get text from text, value and inner text of the element)"
+        },
+        {
+          "value": "text",
+          "description": "Get text of the element using Selenium getText() method"
+        },
+        {
+          "value": "value",
+          "description": "Get element's text from value attribute"
+        },
+        {
+          "value": "inner",
+          "description": "Get element's text from innerText of the element"
+        },
+        {
+          "value": "label",
+          "description": "Get text for element by label tag associated with this element (by \"for-id\" attributes)"
+        }
+      ]
+    },
+    {
+      "name": "set.text.type",
+      "values": [
+        {
+          "value": "setText",
+          "description": "Text Field input as set value in to the \"value\" attribute"
+        },
+        {
+          "value": "sendKeys",
+          "description": "Text Field input using Selenium sendKeys(...) method"
+        },
+        {
+          "value": "clear sendKeys",
+          "description": "Text Field input clear field before do sendKeys"
+        }
+      ]
+    },
+    {
+      "name": "remote.type",
+      "values": [
+        {
+          "value": "sauce",
+          "description": "Use Sauce Labs capabilities to run tests remotely"
+        },
+        {
+          "value": "saucelabs",
+          "description": "Use Sauce Labs capabilities to run tests remotely"
+        },
+        {
+          "value": "browserstack",
+          "description": "Use BrowserStack capabilities to run tests remotely"
+        },
+        {
+          "value": "selenium localhost",
+          "description": "Use Selenium  to run tests remotely, driver.remote.url should be specified."
+        }
+      ]
+    },
+    {
+      "name": "log.level",
+      "values": [
+        {
+          "value": "off",
+          "description": "No JDI logs"
+        },
+        {
+          "value": "fatal",
+          "description": "Log unexpected errors only"
+        },
+        {
+          "value": "error",
+          "description": "Log critical errors and unexpected errors"
+        },
+        {
+          "value": "warning",
+          "description": "Log errors and warnings"
+        },
+        {
+          "value": "step",
+          "description": "Log steps messages and errors"
+        },
+        {
+          "value": "info",
+          "description": "Log info and step messages as well as errors"
+        },
+        {
+          "value": "debug",
+          "description": "Log almost all messages except trace"
+        },
+        {
+          "value": "trace",
+          "description": "Log almost all messages including trace"
+        },
+        {
+          "value": "all",
+          "description": "Log all messages"
+        }
+      ]
+    },
+    {
+      "name": "smart.locator.to.name",
+      "values": [
+        {
+          "value": "kebab-case",
+          "description": "Convert element's variable name to \"kebab-case\" ([smart.locator=[ui=%s] and public TextField userName] > [ui=user-name])"
+        },
+        {
+          "value": "camelCase",
+          "description": "Convert element's variable name to \"camelCase\" ([smart.locator=[ui=%s] and public TextField userName] > [ui=userName])"
+        },
+        {
+          "value": "snake_case",
+          "description": "Convert element's variable name to \"snake_case\" ([smart.locator=[ui=%s] and public TextField userName] > [ui=user-name])"
+        },
+        {
+          "value": "PascalCase",
+          "description": "Convert element's variable name to \"PascalCase\" ([smart.locator=[ui=%s] and public TextField userName] > [ui=UserName])"
+        },
+        {
+          "value": "UPPER_SNAKE_CASE",
+          "description": "Convert element's variable name to \"UPPER_SNAKE_CASE\" ([smart.locator=[ui=%s] and public TextField userName] > [ui=USER_NAME])"
+        },
+        {
+          "value": "First Upper Case",
+          "description": "Convert element's variable name to \"First Upper Case\" ([smart.locator=//*[text()='%s'] and public Button submitButton] > //*[text()='Submit Button'])"
+        },
+        {
+          "value": "ALL UPPER CASE",
+          "description": "Convert element's variable name to \"ALL UPPER CASE\" ([smart.locator=//*[text()='%s'] and public Button submitButton] > //*[text()='SUBMIT BUTTON'])"
+        }
+      ]
+    },
+    {
+      "name": "smart.search",
+      "values": [
+        {
+          "value": "off",
+          "description": "Do not use smart search"
+        },
+        {
+          "value": "false",
+          "description": "Do not use smart search"
+        },
+        {
+          "value": "only ui",
+          "description": "Use smart search only if elements has @UI annotation"
+        },
+        {
+          "value": "ui and elements",
+          "description": "Use smart search if elements has @UI annotation or not a PageObjecct"
+        },
+        {
+          "value": "always",
+          "description": "Always use smart search"
+        }
+      ]
+    }
+  ]
+}
+
