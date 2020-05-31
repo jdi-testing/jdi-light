@@ -7,7 +7,7 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
-import com.epam.jdi.light.logger.*;
+import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.*;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.pairs.Pair;
