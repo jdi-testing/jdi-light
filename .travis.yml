@@ -147,6 +147,16 @@ jobs:
         - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
 
+    - stage: test
+      name: Run tests - angular JDK11
+      jdk: openjdk11
+      env:
+        - JDK_VER="OpenJDK11"
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+
     - <<: *testshtml
       name: "Run tests - html JDK8"
       jdk: openjdk8
