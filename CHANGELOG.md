@@ -4,6 +4,9 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
+## 1.2.14 (release 31.05.2020)
+* Update test properties description and capabilities
+
 ## 1.2.13 (release 25.05.2020)
 * Update version of AspectJ to 1.9.5. Support JDK 11
 
