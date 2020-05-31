@@ -33,7 +33,7 @@ public class ScreenSize {
             try {
                 setHeightWidth(parseInt(groups.get(0)), parseInt(groups.get(1)));
             } catch (Exception ex) {
-                throw exception("Can't parse property browser.size value (%s). Allowed format: 1024x768 or MAXIMIZED", property);
+                throw exception("Can't parse property browser.size value (%s). Allowed format: 1024x768 or MAXIMIZE", property);
             }
         } else {
             maximize = true;
