@@ -19,15 +19,12 @@ env:
     - NOPO_TESTS="jdi-bdd-no-po-tests"
     - NOPO_TESTS_PROPERTY="test-examples/jdi-bdd-no-po-tests"
     - BDD_TESTS="jdi-bdd-tests"
-    - BOOTSTRAP_TESTS="jdi-light-bootstrap-tests"
     - HTML_TESTS="jdi-light-html-tests"
-    - ANGULAR_UNIT_TESTS="jdi-light-angular"
     - ANGULAR_TESTS="jdi-light-angular-tests"
     - EXAMPLES="jdi-light-examples"
     - EXAMPLES_PROPERTY="test-examples/jdi-light-examples"
     - PERFORMANCE="jdi-performance"
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
-    - JDI_LIGHT_UNIT_TESTS="jdi-light"
     - CHROME_ARGS="--headless"
     - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
     - PATH="$JAVA_HOME/bin:$PATH"
@@ -58,25 +55,21 @@ jobs:
         - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
-    - stage: test
-      name: Run tests - bootstrap
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+    #TODO: bootstrap tests exceeded the maximum time limit for jobs (>50min)
+    #  - stage: test
+    #    name: Run tests - bootstrap
+    #    script:
+    #    - mvn -ntp install -DskipTests
+    #    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
+    #    - mvn verify $WITH_PARAMS -pl $BOOTSTRAP_TESTS
 
-    - stage: test
-      name: Run unit tests - angular
-      script:
-        - mvn -ntp install -DskipTests
-        - mvn verify -pl $GROUP_ID:$ANGULAR_UNIT_TESTS
-
-    - stage: test
-      name: Run tests - angular
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+    # TODO: uncomment after angular module is added
+    #    - stage: test
+    #      name: Run tests -
+    #      script:
+    #        - mvn -ntp install -DskipTests
+    #        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
 
     - stage: test
       name: Run tests - html
@@ -85,25 +78,20 @@ jobs:
         - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 
-    - stage: test
-      name: Run tests - examples
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
-
-    - stage: test
-      name: Run tests - performance
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
-
-    - stage: test
-      name: Run tests - jdi-light-unit-tests
-      script:
-          - mvn -ntp install -DskipTests
-          - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
+    # TODO: #1995
+    #    - stage: test
+    #      name: Run tests - examples
+    #      script:
+    #        - mvn -ntp install -DskipTests
+    #        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+    #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+    #
+    #    - stage: test
+    #      name: Run tests - performance
+    #      script:
+    #        - mvn -ntp install -DskipTests
+    #        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+    #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
 
     - stage: reports
       name: Deploy allure reports to netlify

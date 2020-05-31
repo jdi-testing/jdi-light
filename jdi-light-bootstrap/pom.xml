@@ -7,7 +7,7 @@
     <artifactId>jdi-light-bootstrap</artifactId>
     <name>JDI Light Bootstrap Elements</name>
     <packaging>jar</packaging>
-    <version>1.2.13</version>
+    <version>1.2.14</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -19,15 +19,10 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light</artifactId>
-            <version>1.2.13</version>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.13</version>
+            <version>1.2.14</version>
         </dependency>
-    </dependencies>
+     </dependencies>
 
     <build>
         <plugins>
@@ -41,12 +36,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <!--                <groupId>org.codehaus.mojo</groupId>-->
-                <!--                <artifactId>aspectj-maven-plugin</artifactId>-->
-                <!--                <version>${aspectj.maven}</version>-->
-                <groupId>com.nickwongdev</groupId>
+                <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.12.6</version>
+                <version>${aspectj.maven}</version>
                 <configuration>
                     <showWeaveInfo>true</showWeaveInfo>
                     <source>${java.version}</source>

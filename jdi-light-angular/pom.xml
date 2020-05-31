@@ -10,7 +10,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light</artifactId>
-            <version>1.2.13</version>
+            <version>1.2.14</version>
         </dependency>
 
         <dependency>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.13</version>
+            <version>1.2.14</version>
         </dependency>
 
         <dependency>
@@ -48,7 +48,7 @@
         <jetty.version>9.4.12.RC2</jetty.version>
     </properties>
 
-    <version>1.2.7</version>
+    <version>1.2.14</version>
 
     <build>
         <plugins>

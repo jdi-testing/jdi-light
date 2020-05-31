@@ -1,13 +1,14 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.core.IsIterableContaining.hasItem;
-
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import java.util.List;
+
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.core.IsIterableContaining.hasItem;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -26,7 +27,7 @@ public class RadioSteps {
     //#region Then
     @Then("^the \"([^\"]*)\" consists of next values:$")
     public void theConsistOfNextValues(String name, List<String> values) {
-        radioButtons(name).has().values(values.toArray(new String[0]));
+        radioButtons(name).has().values(values);
     }
 
     @Then("^the \"([^\"]*)\" contains \"([^\"]*)\" radio button$")

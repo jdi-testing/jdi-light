@@ -1,1 +1,0 @@
-allure.results.directory=target/allure-results
