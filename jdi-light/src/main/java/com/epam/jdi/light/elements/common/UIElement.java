@@ -256,7 +256,7 @@ public class UIElement extends JDIBase
         if (isHidden())
             return false;
         Object isInView = js().executeScript(
-    "const rect = arguments[0].getBoundingClientRect();\n" +
+            "const rect = arguments[0].getBoundingClientRect();\n" +
             "if (!rect) return false;\n" +
             "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight);\n" +
             "const windowWidth = Math.min(window.innerWidth || document.documentElement.clientWidth);\n" +
@@ -295,7 +295,7 @@ public class UIElement extends JDIBase
 
     @JDIAction("Click on '{name}' (x:{0}, y:{1})")
     public void click(int x, int y) {
-        actionsWithElement(a -> a.moveByOffset(x-getRect().width/2, y-getRect().height/2).click());
+        actionsWithElement(a -> a.moveByOffset(x - getRect().width / 2, y - getRect().height / 2).click());
     }
     @JDIAction("Click on '{name}'")
     public void click(ElementArea area) {
@@ -307,15 +307,15 @@ public class UIElement extends JDIBase
                 logger.debug("Click Top Left");
                 break;
             case TOP_RIGHT:
-                click(getRect().getWidth()-1,1);
+                click(getRect().getWidth() - 1,1);
                 logger.debug("Click Top Right");
                 break;
             case BOTTOM_LEFT:
-                click(1,getRect().getHeight()-1);
+                click(1,getRect().getHeight() - 1);
                 logger.debug("Click Bottom Left");
                 break;
             case BOTTOM_RIGHT:
-                click(getRect().getWidth()-1,getRect().getHeight()-1);
+                click(getRect().getWidth() - 1,getRect().getHeight() - 1);
                 logger.debug("Click Bottom Right");
                 break;
             case CENTER:
@@ -344,11 +344,11 @@ public class UIElement extends JDIBase
         return Switch().get(
             Case(t -> isClickable(), t-> CENTER),
             Case(t -> isClickable(1, 1), t-> TOP_LEFT),
-            Case(t -> isClickable(getRect().getWidth()-1,1),
+            Case(t -> isClickable(getRect().getWidth() - 1,1),
                 t-> TOP_RIGHT),
-            Case(t -> isClickable(1,getRect().getHeight()-1),
+            Case(t -> isClickable(1,getRect().getHeight() - 1),
                 t-> BOTTOM_LEFT),
-            Case(t -> isClickable(getRect().getWidth()-1,getRect().getHeight()-1),
+            Case(t -> isClickable(getRect().getWidth() - 1,getRect().getHeight() - 1),
                 t-> BOTTOM_RIGHT));
     }
 
@@ -396,7 +396,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(level = DEBUG)
     public void setAttribute(String name, String value) {
-        jsExecute("setAttribute('"+name+"','"+value+"')");
+        jsExecute("setAttribute('" + name + "','" + value + "')");
     }
 
     /**
@@ -494,8 +494,8 @@ public class UIElement extends JDIBase
     @JDIAction(level = DEBUG)
     public String printHtml() {
         return MessageFormat.format("<{0} {1}>{2}</{0}>", getTagName(),
-                print(getAllAttributes(), el -> format("%s=\"%s\"", el.key, el.value), " "),
-                getAttribute("innerHTML"));
+            print(getAllAttributes(), el -> format("%s=\"%s\"", el.key, el.value), " "),
+            getAttribute("innerHTML"));
     }
 
     /**
@@ -503,8 +503,9 @@ public class UIElement extends JDIBase
      */
     @JDIAction(timeout = 0)
     public void show() {
-        if (isDisplayed() && !isVisible())
+        if (isDisplayed() && !isVisible()) {
             jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
+        }
     }
 
     /**
@@ -654,8 +655,7 @@ public class UIElement extends JDIBase
     }
     @JDIAction("Get '{name}' text") @Override
     public String text(TextTypes type) {
-        String result = timer().getResult(() -> noWait(() -> type.func.execute(this)));
-        return result;
+        return timer().getResult(() -> noWait(() -> type.func.execute(this)));
     }
     public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
         String text = ui.text(TEXT);
@@ -665,9 +665,7 @@ public class UIElement extends JDIBase
         if (isNotBlank(text))
             return text;
         text = ui.text(VALUE);
-        return isNotBlank(text)
-            ? text
-            : isNotBlank(text) ? text : "";
+        return isNotBlank(text) ? text : "";
     };
     public static JFunc1<UIElement, String> SMART_LIST_TEXT = ui -> {
         String text = ui.text(TEXT);

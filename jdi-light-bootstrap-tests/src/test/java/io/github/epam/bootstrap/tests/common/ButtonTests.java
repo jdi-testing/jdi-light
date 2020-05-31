@@ -30,8 +30,6 @@ public class ButtonTests implements TestsInit {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         redButton.show();
-        Mouse.mouseClick(redButton);
-        Timer.sleep(10000);
     }
 
     @Test

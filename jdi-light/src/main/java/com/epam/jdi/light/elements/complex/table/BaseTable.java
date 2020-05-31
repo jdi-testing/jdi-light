@@ -700,8 +700,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (!cells.isGotAll()) {
             try {
                 List<WebElement> listOfCells =
-                        $$(allCellsLocator, core().parent)
-                                .core().noValidation().getAllElements();
+                    $$(allCellsLocator, this).core().noValidation().getAllElements();
                 cells.set(new MapArray<>());
                 int k = 0;
                 int j = 1;

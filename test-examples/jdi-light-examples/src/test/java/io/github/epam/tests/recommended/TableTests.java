@@ -25,6 +25,7 @@ public class TableTests extends StaticTestsInit {
         tablePage.shouldBeOpened();
     }
 
+    // too long for regular run
     @Test(enabled = false)
     public void tablePerformanceTest() {
         tablePerformance(users);
