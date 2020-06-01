@@ -140,7 +140,15 @@ jobs:
       env:
         - JDK_VER="OpenJDK11"
 
-    - <<: *testsangular
+    - stage: test
+      name: Run tests - angular
+      jdk: openjdk8
+      env:
+        - JDK_VER="OpenJDK8"
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
 
     - <<: *testshtml
       name: "Run tests - html JDK8"
