@@ -5,6 +5,7 @@ import io.qameta.allure.model.Label;
 import io.qameta.allure.util.ResultsUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 import static io.qameta.allure.Allure.getLifecycle;
 
@@ -16,8 +17,8 @@ public class CucumberHooks {
 
     @Before
     public void beforeTest() {
-        String uuid = getLifecycle().getCurrentTestCase().get();
-        getLifecycle().updateTestCase(uuid, testResult -> {
+        Optional<String> uuid = getLifecycle().getCurrentTestCase();
+        uuid.ifPresent(s -> getLifecycle().updateTestCase(s, testResult -> {
             List<Label> labels = testResult.getLabels();
             labels.stream()
                     .filter(label -> label.getName().equals("suite"))
@@ -25,6 +26,6 @@ public class CucumberHooks {
             labels.add(parentSuiteLabel);
             labels.add(suiteLabel);
             testResult.setLabels(labels);
-        });
+        }));
     }
 }
