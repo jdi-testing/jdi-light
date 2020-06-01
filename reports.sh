@@ -9,6 +9,7 @@
 BRANCH_ERROR_MESSAGE="IF YOU DON'T SEE THE PULL REQUEST BUILD, THEN BRANCH CANNOT BE MERGED, YOU SHOULD FIX IT FIRST"
 URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
 FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
+FASTER_FILE_SHARING="true"
 
 ####################             UTILS
 function getCommentsLastPageIndex(){
@@ -87,7 +88,7 @@ function grubAllureResults() {
     checkBranchIsOk #there is an exit inside
 
     if [[ "x${TRAVIS_BUILD_STAGE_NAME}" == "xtest" ]] ; then #don't remove x, it's useful
-        for result in $(find jdi*/target/allure-results -maxdepth 1 -type d)
+        for result in $(find -type d -regex ".*/jdi.*/target/allure-results")
         do
             echo RESULT: ${result}
             archiveFile="$(archive "${result}")"
@@ -102,12 +103,13 @@ function grubAllureResults() {
 
 function uploadFile() {
     file="$1"
-    # TODO : make an if depending of boolean variable to switch between transfer or between https://www.file.io/#one
-
-    #url=$(curl --upload-file "${file}" https://transfer.sh/${file})
-    response="$(curl -F "file=@${file}" https://file.io/)"
-    url="$(echo "${response}" |jq -j '.link')"
-    urlKey="$(echo "${url}"| awk -F/ '{print $4}')"
+    if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
+        urlKey="$(curl --upload-file "${file}" https://transfer.sh/"${file}")"
+    else
+        response="$(curl -F "file=@${file}" https://file.io/)"
+        url="$(echo "${response}" |jq -j '.link')"
+        urlKey="$(echo "${url}"| awk -F/ '{print $4}')"
+    fi
     echo "${urlKey}" #return
 }
 
@@ -130,10 +132,13 @@ function downloadAllureResults() {
     do
         urlExistence=true
         echo "Found: ${urlKey}"
-        # TODO: $4 for file.io, #5 for transfer.sh, add an IF
-        #fileName="$(echo "${url}.tar.gz"| awk -F/ '{print $5}')"
-        fileName="${urlKey}.tar.gz"
-        curl https://file.io/"${urlKey}" --output "${fileName}"
+        if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
+            fileName="$(echo "${urlKey}"| awk -F/ '{print $5}')"
+            curl "${urlKey}" --output "${fileName}"
+        else
+            fileName="${urlKey}.tar.gz"
+            curl https://file.io/"${urlKey}" --output "${fileName}"
+        fi
     done
     if [[ "x${urlExistence}" == "xfalse" ]] ; then
         echo "Failed inside downloadAllureResults()"
@@ -153,7 +158,7 @@ function extractAllureResults() {
 function generateAllureReports() {
     reportDirList="";
     allureDirExistence=false
-    for report in $(ls -d1 jdi*/target/)
+    for report in $(ls -d1 jdi*/target/ */jdi*/target/)
     do
         allureDirExistence=true
         allureDir="${report}allure-results"

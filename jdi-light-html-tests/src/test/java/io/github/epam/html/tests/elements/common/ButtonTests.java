@@ -2,6 +2,7 @@ package io.github.epam.html.tests.elements.common;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -67,7 +68,7 @@ public class ButtonTests implements TestsInit {
     public void rightClickTest() {
         rightClickButton.rightClick();
         validateAlert("Right Click");
-        keyPress("Escape");
+        redButton.core().sendKeys(Keys.ESCAPE);
     }
     @Test
     public void isValidationTest() {

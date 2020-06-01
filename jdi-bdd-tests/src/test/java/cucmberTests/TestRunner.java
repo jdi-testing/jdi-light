@@ -19,9 +19,9 @@ import static io.github.com.pages.Header.*;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "classpath:features"
-        , glue = {"com.epam.jdi.bdd", "cucmberTests"}
-        // , tags = {"@radio"}
+    features = "classpath:features"
+    , glue = {"com.epam.jdi.bdd", "cucumberTests"}
+    // , tags = {"@radio"}
 )
 public class TestRunner {
     @BeforeClass
