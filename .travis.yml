@@ -75,7 +75,7 @@ testsunit: &testsunit
     - mvn -ntp install -DskipTests
     - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
 
-testsangular: &testsangular
+testsangular: &testsangular # alias-anchor approach does not work with angular
   stage: test
   name: Run tests - angular
   script:
@@ -141,7 +141,7 @@ jobs:
         - JDK_VER="OpenJDK11"
 
     - stage: test
-      name: Run tests - angular
+      name: Run tests - angular JDK8
       jdk: openjdk8
       env:
         - JDK_VER="OpenJDK8"
