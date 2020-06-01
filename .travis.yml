@@ -141,7 +141,7 @@ jobs:
         - JDK_VER="OpenJDK11"
 
     - stage: test
-      name: Run tests - angular JDK8
+      name: Run tests - angular
       jdk: openjdk8
       env:
         - JDK_VER="OpenJDK8"
