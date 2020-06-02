@@ -28,6 +28,7 @@ env:
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
     - JDI_LIGHT_UNIT_TESTS="jdi-light"
     - CHROME_ARGS="--headless"
+    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
     - PATH="$JAVA_HOME/bin:$PATH"
 
 stages:
