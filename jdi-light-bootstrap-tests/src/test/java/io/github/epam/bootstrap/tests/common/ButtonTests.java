@@ -53,7 +53,7 @@ public class ButtonTests implements TestsInit {
             fail("Disabled button should not work, but work");
         } catch (Exception ex) {
             assertThat(safeException(ex),
-                    containsString("Can't perform click. Element is disabled"));
+                containsString("Can't perform click. Element is disabled"));
         }
     }
 
@@ -78,12 +78,12 @@ public class ButtonTests implements TestsInit {
         redButton.is().text(containsString("Red"));
         assertThat(redButton.core().css("font-size"), is("16px"));
         redButton.assertThat().displayed()
-                .and().text(is(text))
-                .core()
-                .css("font-size", is("16px"))
-                .cssClass("btn btn-danger")
-                .attr("type", "button")
-                .tag(is("button"));
+            .and().text(is(text))
+            .core()
+            .css("font-size", is("16px"))
+            .cssClass("btn btn-danger")
+            .attr("type", "button")
+            .tag(is("button"));
         disabledButton.is().text(containsString("Disabled button"));
         // disabledButtonInput.is().text(containsString("Disabled Button"));
         disabledButton.is().disabled();
