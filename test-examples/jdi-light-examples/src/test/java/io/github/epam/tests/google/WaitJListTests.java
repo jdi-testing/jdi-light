@@ -24,29 +24,29 @@ public class WaitJListTests extends StaticTestsInit {
     }
 
     @Test
-    public void notEmptyTest() {
+    public void isNotEmptyTest() {
         jsearchTitle.is().notEmpty();
     }
 
     @Test
-    public void notEmpty2Test() {
+    public void notEmptyAssertThatTest() {
         jsearchTitle.assertThat(not(empty()));
     }
 
     @Test
-    public void emptyTest() {
+    public void notEmptyTest() {
         jsearchTitle.waitFor(2).notEmpty();
     }
 
     @Test
     public void sizeTest() {
         assertEquals(jsearchTitle.size(), 6);
-        jsearchTitle.waitFor(10).size(equalTo(8));
+        jsearchTitle.is().size(equalTo(8));
     }
 
     @Test
     public void sizeNotEmptyTest() {
-        jsearchTitle.waitFor(10).size(greaterThan(7));
+        jsearchTitle.waitFor(5).size(greaterThan(7));
     }
 
 }

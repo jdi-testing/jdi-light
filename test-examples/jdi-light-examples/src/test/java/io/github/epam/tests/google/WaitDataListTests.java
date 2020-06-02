@@ -29,24 +29,19 @@ public class WaitDataListTests extends StaticTestsInit {
     }
 
     @Test
-    public void notEmpty2Test() {
+    public void notEmptyAssertThatTest() {
         searchS.assertThat(not(empty()));
-    }
-
-    @Test
-    public void emptyTest() {
-        searchS.waitFor(2).notEmpty();
     }
 
     @Test
     public void sizeTest() {
         assertEquals(searchS.size(), 6);
-        searchS.waitFor(10).size(equalTo(8));
+        searchS.has().size(equalTo(8));
     }
 
     @Test
     public void sizeGreaterTest() {
-        searchS.waitFor(10).size(greaterThan(7));
+        searchS.has().size(greaterThan(7));
     }
 
 }
