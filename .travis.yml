@@ -36,11 +36,6 @@ stages:
   - test
   - reports
 
-reportscript: &reportscript
-    - echo "REPORT SCRIPT line1 GOES HERE"
-    - echo "REPORT SCRIPT line2 GOES HERE"
-    - echo $JDK_VER
-
 testsbdd: &testsbdd
   stage: test
   name: "Run tests - bdd"
@@ -48,8 +43,6 @@ testsbdd: &testsbdd
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
-    - echo "REPORT SCRIPT LINE 0"
-    - *reportscript
 
 testsbootstrap: &testsbootstrap
   stage: test
@@ -242,6 +235,7 @@ after_failure:
 after_success:
   - echo "Build was successful"
 after_script:
+  - ls target/allure-results
   - source reports.sh
   - grubAllureResults
   - du -d 1 -h ./
@@ -249,3 +243,5 @@ after_script:
 # extra time during long builds
 install:
   - travis_wait
+
+#Things might have been easier with report portal

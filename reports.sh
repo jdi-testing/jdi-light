@@ -88,7 +88,7 @@ function grubAllureResults() {
     checkBranchIsOk #there is an exit inside
 
     if [[ "x${TRAVIS_BUILD_STAGE_NAME}" == "xtest" ]] ; then #don't remove x, it's useful
-        for result in $(find -type d -regex ".*/jdi.*/target/allure-results")
+        for result in $(find -type d -regex ".*/jdi.*/target/allure-results-*")
         do
             echo RESULT: ${result}
             archiveFile="$(archive "${result}")"
@@ -128,7 +128,7 @@ function deployAllureResults() {
 function downloadAllureResults() {
     urlExistence=false
     echo "TRAVIS_BUILD_NUMBER: ${TRAVIS_BUILD_NUMBER}"
-    for urlKey in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}")
+    for urlKey in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}") ##TODO: We'll likely want to pass JDK version here.
     do
         urlExistence=true
         echo "Found: ${urlKey}"
@@ -164,7 +164,7 @@ function generateAllureReports() {
         allureDir="${report}allure-results"
         if [[ -d "$allureDir" ]] ; then
             echo "Results found for ${report}"
-            reportDirList="${reportDirList} ${allureDir}"
+            reportDirList="${reportDirList} ${allureDir}" ## TODO: Research if we can run separate report generation scripts for different versions of JDK?
         else
             echo "RESULTS NOT FOUND FOR ${report}"
         fi
@@ -174,7 +174,7 @@ function generateAllureReports() {
         exitWithError
     fi
     echo ${reportDirList}
-    allure generate --clean ${reportDirList}
+    allure generate --clean ${reportDirList} ##KEEP IN MIND THAT WE CLEAR THE REPORTDIR HERE
 }
 
 function deployToNetlify() {
