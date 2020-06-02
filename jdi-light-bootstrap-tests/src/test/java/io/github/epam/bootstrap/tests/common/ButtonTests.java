@@ -6,6 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
+import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 import static com.epam.jdi.light.elements.common.Alerts.*;
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.BootstrapPage.*;
@@ -66,9 +68,11 @@ public class ButtonTests implements TestsInit {
 
     @Test
     public void rightClickTest() {
-        redButton.rightClick();
-        validateAlert("Right Click");
-        Keyboard.keyPress("Escape");
+        if (getOs().equals(WIN)) {
+            redButton.rightClick();
+            validateAlert("Right Click");
+            Keyboard.keyPress("Escape");
+        }
     }
 
     @Test
