@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.basicCheckbox;
+import static io.github.com.pages.AngularPage.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class CheckboxTests extends TestsInit {
@@ -23,5 +23,23 @@ public class CheckboxTests extends TestsInit {
         basicCheckbox.isSelected();
         basicCheckbox.uncheck();
         basicCheckbox.is().deselected();
+    }
+
+    @Test
+    public void configurableCheckboxTest() {
+        configurableCheckedCheckbox.show();
+        configurableCheckedCheckbox.check();
+        configurableResultCheckbox.isSelected();
+        configurableCheckedCheckbox.uncheck();
+        configurableResultCheckbox.is().deselected();
+
+        configurableIndeterminateCheckbox.check();
+        configurableResultCheckbox.hasClass("mat-checkbox-indeterminate");
+
+        configurableCheckboxAlignBeforeRadioButton.click();
+        configurableResultCheckbox.hasClass("mat-checkbox-label-before");
+
+        configurableDisabledCheckbox.click();
+        configurableResultCheckbox.hasClass("mat-checkbox-disabled");
     }
 }

@@ -29,8 +29,23 @@ public class AngularPage extends WebPage {
     @UI("#svg_icon")
     public static Icon svgIcon;
 
-    @UI("#mat-checkbox-1-input")
+    @UI("#mat-checkbox-1")
     public static Checkbox basicCheckbox;
+
+    @UI("#mat-checkbox-2")
+    public static Checkbox configurableCheckedCheckbox;
+
+    @UI("#mat-checkbox-3")
+    public static Checkbox configurableIndeterminateCheckbox;
+
+    @UI("#mat-radio-11-input")
+    public static Checkbox configurableCheckboxAlignBeforeRadioButton;
+
+    @UI("#mat-checkbox-4")
+    public static Checkbox configurableDisabledCheckbox;
+
+    @UI("#mat-checkbox-5")
+    public static Checkbox configurableResultCheckbox;
 
     public static SlideToggleSection slideToggleSection;
 }
