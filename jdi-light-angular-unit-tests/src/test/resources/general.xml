@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
         <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JDI-Light Angular Tests" parallel="methods" thread-count="1">
+<suite name="JDI-Light Angular Unit Tests" parallel="methods" thread-count="1">
     <test name="AngularUnitTests">
         <packages>
             <package name="io.github.epam.unit.tests.*"/>
