@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.elements.common.Alerts.*;
-import static com.epam.jdi.light.elements.common.Keyboard.*;
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.*;

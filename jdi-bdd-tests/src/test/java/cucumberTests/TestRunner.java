@@ -1,4 +1,4 @@
-package cucmberTests;
+package cucumberTests;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;

@@ -1,6 +1,5 @@
 package io.github.epam.bootstrap.tests.common;
 
-import com.epam.jdi.light.elements.common.Keyboard;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,6 +12,7 @@ import static io.github.epam.bootstrap.tests.BaseValidationsUtils.*;
 import static io.github.epam.states.States.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
+import static org.openqa.selenium.Keys.ESCAPE;
 import static org.testng.Assert.*;
 
 /**
@@ -53,7 +53,7 @@ public class ButtonTests implements TestsInit {
             fail("Disabled button should not work, but work");
         } catch (Exception ex) {
             assertThat(safeException(ex),
-                containsString("Can't perform click. Element is disabled"));
+                    containsString("Can't perform click. Element is disabled"));
         }
     }
 
@@ -67,7 +67,7 @@ public class ButtonTests implements TestsInit {
     public void rightClickTest() {
         redButton.rightClick();
         validateAlert("Right Click");
-        Keyboard.keyPress("Escape");
+        redButton.core().sendKeys(ESCAPE);
     }
 
     @Test
@@ -78,12 +78,12 @@ public class ButtonTests implements TestsInit {
         redButton.is().text(containsString("Red"));
         assertThat(redButton.core().css("font-size"), is("16px"));
         redButton.assertThat().displayed()
-            .and().text(is(text))
-            .core()
-            .css("font-size", is("16px"))
-            .cssClass("btn btn-danger")
-            .attr("type", "button")
-            .tag(is("button"));
+                .and().text(is(text))
+                .core()
+                .css("font-size", is("16px"))
+                .cssClass("btn btn-danger")
+                .attr("type", "button")
+                .tag(is("button"));
         disabledButton.is().text(containsString("Disabled button"));
         // disabledButtonInput.is().text(containsString("Disabled Button"));
         disabledButton.is().disabled();
