@@ -236,7 +236,7 @@ after_success:
   - echo "Build was successful"
 after_script:
   - ls
-  - ls jdi-*/target
+  - ls jdi-*/target/allure-results-*
   - source reports.sh
   - grubAllureResults
   - du -d 1 -h ./
