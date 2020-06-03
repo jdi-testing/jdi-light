@@ -115,7 +115,6 @@ jobs:
     - <<: *testsbdd
       name: "Run tests - bdd JDK11"
       jdk: openjdk11
-
 # TODO: Lines below were commented to reduce build time and fine-tune the reporting process
 #    - <<: *testsbootstrap
 #      name: "Run tests - bootstrap JDK8"
@@ -128,14 +127,14 @@ jobs:
 #    - <<: *testsbootstrap
 #      name: "Run tests - bootstrap JDK11"
 #      jdk: openjdk11
-#
-#    - stage: test
-#      name: Run tests - angular
-#      jdk: openjdk8
-#      script:
-#        - mvn -ntp install -DskipTests
-#        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+
+    - stage: test
+      name: Run tests - angular
+      jdk: openjdk8
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
 #
 #    - <<: *testshtml
 #      name: "Run tests - html JDK8"
