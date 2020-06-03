@@ -5,5 +5,5 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 
 class IssuePage73 extends WebPage {
     @Css("[id='stage-list-item-wrapper']")
-    UIList<StageItem, ?> stageItems;
+    public UIList<StageItem, ?> stageItems;
 }
