@@ -79,12 +79,12 @@ jobs:
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 
     # TODO: #1995
-      - stage: test
-        name: Run tests - examples
-        script:
-          - mvn -ntp install -DskipTests
-          - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-          - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+    - stage: test
+      name: Run tests - examples
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
     #
     #    - stage: test
     #      name: Run tests - performance
