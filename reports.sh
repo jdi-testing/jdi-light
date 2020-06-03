@@ -183,10 +183,11 @@ function generateAllureReports() {
         echo "Failed inside generateAllureReports()"
         exitWithError
     fi
-    echo ReportDirList is: ${reportDirList}
+    echo "Generating allure-report-$1 based on:\n ${reportDirList}"
     allure generate --clean ${reportDirList} ##KEEP IN MIND THAT WE CLEAR THE REPORTDIR HERE
+    mv allure-report allure-report-$1
     ls -alh | grep allure
-    echo End of allure generate
+    echo Report successfully renamed to allure-report-$1
 
 }
 
