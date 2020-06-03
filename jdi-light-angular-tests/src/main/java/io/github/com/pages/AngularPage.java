@@ -4,10 +4,10 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Icon;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import io.github.com.pages.sections.SlideToggleSection;
 import elements.common.BasicSpinner;
-import elements.common.Icon;
 
 public class AngularPage extends WebPage {
     @Css("radio-overview-example .mat-radio-group")
