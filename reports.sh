@@ -69,7 +69,8 @@ function aboutTransfer() {
 
 function aboutNetlify() {
     url="$1"
-    echo "[${TRAVIS_BUILD_NUMBER}] - Allure report on Netlify: ${url}" #return
+    jdk="$2"
+    echo "[${TRAVIS_BUILD_NUMBER}] - ${jdk} - Allure report on Netlify: ${url}" #return
 }
 
 function checkBranchIsOk() {
@@ -123,21 +124,18 @@ function deployAllureResults() {
     JDK_VERSIONS="openjdk8 openjdk10 openjdk11"
     for JDK in $JDK_VERSIONS;
     do
-      echo "Start of generate and deploy for $JDK"
       generateAllureReports ${JDK}
-      echo "deployToNetlify 'allure-report' should go here"
       echo "LOG1"
       url="$(deployToNetlify "allure-report-${JDK}")"
       echo "LOG2"
-      sendComment "$(aboutNetlify ${url})"
-      echo "End of $JDK"
+      sendComment "$(aboutNetlify ${url} ${JDK})"
     done
 }
 
 function downloadAllureResults() {
     urlExistence=false
     echo "TRAVIS_BUILD_NUMBER: ${TRAVIS_BUILD_NUMBER}"
-    for urlKey in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}") ##TODO: We'll likely want to pass JDK version here.
+    for urlKey in $(collectRelevantComments "${TRAVIS_BUILD_NUMBER}")
     do
         urlExistence=true
         echo "Found: ${urlKey}"
@@ -165,7 +163,6 @@ function extractAllureResults() {
 }
 
 function generateAllureReports() {
-    echo "Start of generateAllureReports function"
     reportDirList="";
     allureDirExistence=false
     for report in $(ls -d1 jdi*/target/ */jdi*/target/)
@@ -174,7 +171,7 @@ function generateAllureReports() {
         allureDir="${report}allure-results-$1"
         if [[ -d "$allureDir" ]] ; then
             echo "Results found for ${report}"
-            reportDirList="${reportDirList} ${allureDir}" ## TODO: Research if we can run separate report generation scripts for different versions of JDK?
+            reportDirList="${reportDirList} ${allureDir}"
         else
             echo "RESULTS NOT FOUND FOR ${report}"
         fi
@@ -186,7 +183,6 @@ function generateAllureReports() {
     echo "Generating allure-report-$1 based on:\n ${reportDirList}"
     allure generate --clean ${reportDirList} ##KEEP IN MIND THAT WE CLEAR THE REPORTDIR HERE
     mv allure-report allure-report-$1
-    ls -alh | grep allure
     echo Report successfully renamed to allure-report-$1
 
 }
