@@ -1,7 +1,7 @@
 package io.github.epam.unit.tests;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import elements.common.SlideToggle;
+import com.epam.jdi.angular.elements.common.SlideToggle;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;

@@ -1,7 +1,10 @@
-package elements.common;
+package com.epam.jdi.angular.elements.common;
 
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 
+/**
+ * Angular slide toggle documentation: https://jdi-docs.github.io/jdi-light/?java#slide-toggle
+ */
 public class SlideToggle extends Checkbox {
 
     @Override

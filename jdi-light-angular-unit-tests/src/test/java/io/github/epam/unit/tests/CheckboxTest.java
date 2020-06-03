@@ -1,7 +1,7 @@
 package io.github.epam.unit.tests;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import elements.common.Checkbox;
+import com.epam.jdi.angular.elements.common.Checkbox;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
