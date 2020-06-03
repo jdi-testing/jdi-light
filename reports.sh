@@ -185,6 +185,9 @@ function generateAllureReports() {
     fi
     echo ReportDirList is: ${reportDirList}
     allure generate --clean ${reportDirList} ##KEEP IN MIND THAT WE CLEAR THE REPORTDIR HERE
+    ls -alh | grep allure
+    echo End of allure generate
+
 }
 
 function deployToNetlify() {
