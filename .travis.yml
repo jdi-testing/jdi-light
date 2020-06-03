@@ -89,6 +89,7 @@ jobs:
 
     - stage: compile
       name: Compile jdi code
+      jdk: openjdk8
       script:
         - mvn install -DskipTests
 
