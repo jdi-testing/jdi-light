@@ -117,6 +117,10 @@ function uploadFile() {
 function deployAllureResults() {
     checkBranchIsOk #there is an exit inside
     downloadAllureResults
+    # great, now we have set of .tar.gz files for different versions of JDK
+    # Our goal now is to distribute them across multiple allure reports
+    echo "Downloaded allure results from file sharing:"
+    ls
     extractAllureResults
     generateAllureReports
     echo "LOG1"
