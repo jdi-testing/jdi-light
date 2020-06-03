@@ -124,7 +124,11 @@ function deployAllureResults() {
     for JDK in $JDK_VERSIONS;
     do
       echo "Extracting and deploying allure report for $JDK"
-      ls jdi*/target/allure-results-$JDK
+      REPORTFILES=$(ls jdi*/target/allure-results-$JDK)
+      echo "generateAllureReports goes here and uses ls -d1 jdi*/target/ */jdi*/target/:"
+      ls -d1 jdi*/target/ */jdi*/target/
+      echo "End of ls -d1 jdi*/target/ */jdi*/target/"
+      echo "deployToNetlify 'allure-report' should go here"
     done
     generateAllureReports
     echo "LOG1"
