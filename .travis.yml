@@ -107,44 +107,30 @@ jobs:
     - <<: *testsbdd
       name: "Run tests - bdd JDK8"
       jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
 
     - <<: *testsbdd
       name: "Run tests - bdd JDK10"
       jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
 
     - <<: *testsbdd
       name: "Run tests - bdd JDK11"
       jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
 
     - <<: *testsbootstrap
       name: "Run tests - bootstrap JDK8"
       jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
 
     - <<: *testsbootstrap
       name: "Run tests - bootstrap JDK10"
       jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
 
     - <<: *testsbootstrap
       name: "Run tests - bootstrap JDK11"
       jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
 
     - stage: test
       name: Run tests - angular
       jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
@@ -153,74 +139,50 @@ jobs:
     - <<: *testshtml
       name: "Run tests - html JDK8"
       jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
 
     - <<: *testshtml
       name: "Run tests - html JDK10"
       jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
 
     - <<: *testshtml
       name: "Run tests - html JDK11"
       jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
 
     - <<: *testsexamples
       name: "Run tests - examples JDK8"
       jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
 
     - <<: *testsexamples
       name: "Run tests - examples JDK10"
       jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
 
     - <<: *testsexamples
       name: "Run tests - examples JDK11"
       jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
 
     - <<: *testsperformance
       name: "Run tests - performance JDK8"
       jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
 
     - <<: *testsperformance
       name: "Run tests - performance JDK10"
       jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
 
     - <<: *testsperformance
       name: "Run tests - performance JDK11"
       jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
 
     - <<: *testsunit
       name: "Run tests - jdi-light-unit-tests JDK8"
       jdk: openjdk8
-      env:
-        - JDK_VER="OpenJDK8"
 
     - <<: *testsunit
       name: "Run tests - jdi-light-unit-tests JDK10"
       jdk: openjdk10
-      env:
-        - JDK_VER="OpenJDK10"
 
     - <<: *testsunit
       name: "Run tests - jdi-light-unit-tests JDK11"
       jdk: openjdk11
-      env:
-        - JDK_VER="OpenJDK11"
 
     - stage: reports
       name: Deploy allure reports to netlify
@@ -235,11 +197,12 @@ after_failure:
 after_success:
   - echo "Build was successful"
 after_script:
-  - echo $TRAVIS_JDK_VERSION
-  - ALLURE_RESULTS_DIR=$(find jdi-*/target/ -type d -name "allure-results")
-  - echo $ALLURE_RESULTS_DIR
-  - mv $ALLURE_RESULTS_DIR $ALLURE_RESULTS_DIR-$TRAVIS_JDK_VERSION
-  - ls jdi-*/target/
+  # following 4 lines are to rename allure-results dir to allure-results-<JDK VERSION>
+  - ALLURE_RESULTS=$(find jdi-*/target/ -type d -name "allure-results")
+  - ALLURE_RESULTS_JDK=$ALLURE_RESULTS-$TRAVIS_JDK_VERSION
+  - mv $ALLURE_RESULTS $ALLURE_RESULTS_JDK
+  - echo "$ALLURE_RESULTS dir has been renamed to $ALLURE_RESULTS_JDK"
+  # further actions
   - source reports.sh
   - grubAllureResults
   - du -d 1 -h ./
