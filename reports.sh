@@ -121,6 +121,7 @@ function deployAllureResults() {
     # Our goal now is to distribute them across multiple allure reports
     echo "Downloaded allure results from file sharing:"
     ls
+    echo "End of LS output"
     extractAllureResults
     generateAllureReports
     echo "LOG1"
@@ -160,6 +161,7 @@ function extractAllureResults() {
 }
 
 function generateAllureReports() {
+    echo "Start of generateAllureReports function"
     reportDirList="";
     allureDirExistence=false
     for report in $(ls -d1 jdi*/target/ */jdi*/target/)
