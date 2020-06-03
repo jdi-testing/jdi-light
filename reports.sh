@@ -123,18 +123,15 @@ function deployAllureResults() {
     JDK_VERSIONS="openjdk8 openjdk10 openjdk11"
     for JDK in $JDK_VERSIONS;
     do
-      echo "Extracting and deploying allure report for $JDK"
-      REPORTFILES=$(ls jdi*/target/allure-results-$JDK)
-      echo "generateAllureReports goes here and uses ls -d1 jdi*/target/ */jdi*/target/:"
-      ls -d1 jdi*/target/ */jdi*/target/
-      echo "End of ls -d1 jdi*/target/ */jdi*/target/"
+      echo "Start of generate and deploy for $JDK"
+      generateAllureReports ${JDK}
       echo "deployToNetlify 'allure-report' should go here"
+      echo "LOG1"
+      url="$(deployToNetlify "allure-report-${JDK}")"
+      echo "LOG2"
+      sendComment "$(aboutNetlify ${url})"
+      echo "End of $JDK"
     done
-    generateAllureReports
-    echo "LOG1"
-    url="$(deployToNetlify "allure-report")"
-    echo "LOG2"
-    sendComment "$(aboutNetlify ${url})"
 }
 
 function downloadAllureResults() {
@@ -174,7 +171,7 @@ function generateAllureReports() {
     for report in $(ls -d1 jdi*/target/ */jdi*/target/)
     do
         allureDirExistence=true
-        allureDir="${report}allure-results"
+        allureDir="${report}allure-results-$1"
         if [[ -d "$allureDir" ]] ; then
             echo "Results found for ${report}"
             reportDirList="${reportDirList} ${allureDir}" ## TODO: Research if we can run separate report generation scripts for different versions of JDK?
@@ -186,7 +183,7 @@ function generateAllureReports() {
         echo "Failed inside generateAllureReports()"
         exitWithError
     fi
-    echo ${reportDirList}
+    echo ReportDirList is: ${reportDirList}
     allure generate --clean ${reportDirList} ##KEEP IN MIND THAT WE CLEAR THE REPORTDIR HERE
 }
 
