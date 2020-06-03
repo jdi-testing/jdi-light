@@ -117,12 +117,15 @@ function uploadFile() {
 function deployAllureResults() {
     checkBranchIsOk #there is an exit inside
     downloadAllureResults
-    # great, now we have set of .tar.gz files for different versions of JDK
-    # Our goal now is to distribute them across multiple allure reports
-    echo "Downloaded allure results from file sharing:"
-    ls
-    echo "End of LS output"
     extractAllureResults
+    # Great, now we have huge amount of jsons for different JDKs distributed across directory tree
+    # Our goal now is to distribute them across multiple allure reports
+    JDK_VERSIONS="openjdk8 openjdk10 openjdk11"
+    for JDK in $JDK_VERSIONS;
+    do
+      echo "Extracting and deploying allure report for $JDK"
+      ls jdi*/target/allure-results-$JDK
+    done
     generateAllureReports
     echo "LOG1"
     url="$(deployToNetlify "allure-report")"
