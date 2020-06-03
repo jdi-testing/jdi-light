@@ -236,7 +236,7 @@ after_success:
   - echo "Build was successful"
 after_script:
   - echo $TRAVIS_JDK_VERSION
-  - ALLURE_RESULTS_DIR=$(find jdi-*/target/ -type d - name "allure-results")
+  - ALLURE_RESULTS_DIR=$(find jdi-*/target/ -type d -name "allure-results")
   - echo $ALLURE_RESULTS_DIR
   - mv $ALLURE_RESULTS_DIR $ALLURE_RESULTS_DIR-$TRAVIS_JDK_VERSION
   - ls jdi-*/target/
