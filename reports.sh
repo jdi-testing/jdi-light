@@ -52,7 +52,7 @@ function sendComment() {
 
 function archive() {
     directory="$1"
-    archiveName="$(echo "${directory}"| awk -F"/" '{print $1}')".tar.gz
+    archiveName="$(echo "${directory}"| awk -F"/" '{print $1}')-${TRAVIS_JDK_VERSION}".tar.gz
     tar -czf "${archiveName}" "${directory}" > /dev/null
     echo "${archiveName}" #return
 }
@@ -88,7 +88,7 @@ function grubAllureResults() {
     checkBranchIsOk #there is an exit inside
 
     if [[ "x${TRAVIS_BUILD_STAGE_NAME}" == "xtest" ]] ; then #don't remove x, it's useful
-        for result in $(find -type d -regex ".*/jdi.*/target/allure-results-${TRAVIS_JDK_VERSION}")
+        for result in $(find jdi*/target/allure-results -maxdepth 1 -type d)
         do
             echo RESULT: ${result}
             archiveFile="$(archive "${result}")"
