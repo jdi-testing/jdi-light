@@ -5,8 +5,6 @@ import com.epam.jdi.light.ui.html.elements.common.TextField;
 
 public class StageItem extends Section {
 
-    //@UI("[id='stageTitle']")
-    //@UI(".stageTitle")
     private TextField stageTitle;
 
     public void addBefore(){
