@@ -142,8 +142,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         if (nameIndex)
             return nameFromIndex(i);
         else {
-            String name = getElementName(element);
-            return (isNotBlank(name) ? name : nameFromIndex(i)).trim();
+            return getElementName(element);
+            // extra check, lead to pasting locators in value of empty elements
+            //return (isNotBlank(name) ? name : nameFromIndex(i)).trim();
         }
     }
     protected String getElementName(UIElement element) {
