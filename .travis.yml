@@ -102,7 +102,14 @@ jobs:
         - mvn --version #it is helpful
 
     - stage: compile
-      name: Compile jdi code
+      name: Compile jdi code - JDK8
+      jdk: openjdk8
+      script:
+        - mvn install -DskipTests
+
+    - stage: compile
+      name: Compile jdi code - JDK9
+      jdk: openjdk9
       script:
         - mvn install -DskipTests
 
