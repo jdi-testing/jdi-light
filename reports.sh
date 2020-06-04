@@ -190,7 +190,7 @@ function generateAllureReports() {
 function deployToNetlify() {
     directory="$1"
     result="$(netlify deploy --dir "${directory}" --json)"
-    deployUrl="$(echo "${result}"r |jq '.deploy_url' |sed 's/"//g')"
+    deployUrl="$(echo '"${result}"r' | jq '.deploy_url' | sed 's/"//g')"
     echo "${deployUrl}"
 }
 
