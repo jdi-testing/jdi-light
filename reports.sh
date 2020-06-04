@@ -188,17 +188,10 @@ function generateAllureReports() {
 }
 
 function deployToNetlify() {
-    echo "Start of deployToNetlify()"
     directory="$1"
-    echo "Evaluating result variable"
     result="$(netlify deploy --dir "${directory}" --json)"
-    echo "Evaluating deployUrl"
     deployUrl="$(echo "${result}"r |jq '.deploy_url' |sed 's/"//g')"
-    echo "RESULT"
-    echo ${result}
-    echo "END OF RESULT"
     echo "${deployUrl}"
-    echo "End of deployToNetlify()"
 }
 
 function exitWithError() {
