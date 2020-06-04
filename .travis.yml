@@ -28,7 +28,7 @@ env:
     - PERFORMANCE="jdi-performance"
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
     - CHROME_ARGS="--headless"
-    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+#    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
     - PATH="$JAVA_HOME/bin:$PATH"
 
 stages:
@@ -51,6 +51,27 @@ testsbootstrap: &testsbootstrap
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+testsangular: &testsangular
+  stage: test
+  name: Run tests - angular
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+testsangularunit: &testsangularunit
+  stage: test
+  name: Run unit tests - angular
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_UNIT_TESTS
+testshtml: &testshtml
+  stage: test
+  name: Run tests - html
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 testsexamples: &testsexamples
   stage: test
   name: Run tests - examples
@@ -71,20 +92,6 @@ testsunit: &testsunit
   script:
     - mvn -ntp install -DskipTests
     - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
-testsangular: &testsangular # alias-anchor approach does not work with angular
-  stage: test
-  name: Run tests - angular
-  script:
-    - mvn -ntp install -DskipTests
-    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
-testshtml: &testshtml
-  stage: test
-  name: Run tests - html
-  script:
-    - mvn -ntp install -DskipTests
-    - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
-    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 
 jobs:
   include:
@@ -151,26 +158,62 @@ jobs:
         - echo arguments=$CHROME_ARGS > "./$ANGULAR_UNIT_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_UNIT_TESTS
 
-    - stage: test
-      name: Run tests - html
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
+    - <<: *testshtml
+      name: Run tests - html - JDK8
+      jdk: openjdk8
+    - <<: *testshtml
+      name: Run tests - html - JDK9
+      jdk: openjdk9
+    - <<: *testshtml
+      name: Run tests - html - JDK10
+      jdk: openjdk10
+    - <<: *testshtml
+      name: Run tests - html - JDK11
+      jdk: openjdk11
+    - <<: *testshtml
+      name: Run tests - html - JDK12
+      jdk: openjdk12
+    - <<: *testshtml
+      name: Run tests - html - JDK13
+      jdk: openjdk13
 
-    - stage: test
-      name: Run tests - examples
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+    - <<: *testsexamples
+      name: Run tests - examples - JDK8
+      jdk: openjdk8
+    - <<: *testsexamples
+      name: Run tests - examples - JDK9
+      jdk: openjdk9
+    - <<: *testsexamples
+      name: Run tests - examples - JDK10
+      jdk: openjdk10
+    - <<: *testsexamples
+      name: Run tests - examples - JDK11
+      jdk: openjdk11
+    - <<: *testsexamples
+      name: Run tests - examples - JDK12
+      jdk: openjdk12
+    - <<: *testsexamples
+      name: Run tests - examples - JDK13
+      jdk: openjdk13
 
-    - stage: test
-      name: Run tests - performance
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+    - <<: *testsperformance
+      name: Run tests - performance - JDK8
+      jdk: openjdk8
+    - <<: *testsperformance
+      name: Run tests - performance - JDK9
+      jdk: openjdk9
+    - <<: *testsperformance
+      name: Run tests - performance - JDK10
+      jdk: openjdk10
+    - <<: *testsperformance
+      name: Run tests - performance - JDK11
+      jdk: openjdk11
+    - <<: *testsperformance
+      name: Run tests - performance - JDK12
+      jdk: openjdk12
+    - <<: *testsperformance
+      name: Run tests - performance - JDK13
+      jdk: openjdk13
 
     - stage: reports
       name: Deploy allure reports to netlify
