@@ -52,7 +52,7 @@ function sendComment() {
 
 function archive() {
     directory="$1"
-    archiveName="$(echo "${directory}"| awk -F"/" '{print $1}')".tar.gz
+    archiveName="$(echo "${directory}"| awk -F"/" '{print $1}')-${TRAVIS_JDK_VERSION}".tar.gz
     tar -czf "${archiveName}" "${directory}" > /dev/null
     echo "${archiveName}" #return
 }
@@ -69,7 +69,8 @@ function aboutTransfer() {
 
 function aboutNetlify() {
     url="$1"
-    echo "[${TRAVIS_BUILD_NUMBER}] - Allure report on Netlify: ${url}" #return
+    jdk="$2"
+    echo "[${TRAVIS_BUILD_NUMBER}] - ${jdk} - Allure report on Netlify: ${url}" #return
 }
 
 function checkBranchIsOk() {
@@ -88,7 +89,7 @@ function grubAllureResults() {
     checkBranchIsOk #there is an exit inside
 
     if [[ "x${TRAVIS_BUILD_STAGE_NAME}" == "xtest" ]] ; then #don't remove x, it's useful
-        for result in $(find -type d -regex ".*/jdi.*/target/allure-results")
+        for result in $(find jdi*/target/allure-results-${TRAVIS_JDK_VERSION} -maxdepth 1 -type d)
         do
             echo RESULT: ${result}
             archiveFile="$(archive "${result}")"
@@ -118,11 +119,17 @@ function deployAllureResults() {
     checkBranchIsOk #there is an exit inside
     downloadAllureResults
     extractAllureResults
-    generateAllureReports
-    echo "LOG1"
-    url="$(deployToNetlify "allure-report")"
-    echo "LOG2"
-    sendComment "$(aboutNetlify ${url})"
+    # Great, now we have huge amount of jsons for different JDKs distributed across directory tree
+    # Our goal now is to distribute them across multiple allure reports
+    JDK_VERSIONS="openjdk8 openjdk10 openjdk11"
+    for JDK in $JDK_VERSIONS;
+    do
+      generateAllureReports ${JDK}
+      echo "LOG1"
+      url="$(deployToNetlify "allure-report-${JDK}")"
+      echo "LOG2"
+      sendComment "$(aboutNetlify ${url} ${JDK})"
+    done
 }
 
 function downloadAllureResults() {
@@ -161,7 +168,7 @@ function generateAllureReports() {
     for report in $(ls -d1 jdi*/target/ ./*/jdi*/target/)
     do
         allureDirExistence=true
-        allureDir="${report}allure-results"
+        allureDir="${report}allure-results-$1"
         if [[ -d "$allureDir" ]] ; then
             echo "Results found for ${report}"
             reportDirList="${reportDirList} ${allureDir}"
@@ -173,14 +180,17 @@ function generateAllureReports() {
         echo "Failed inside generateAllureReports()"
         exitWithError
     fi
-    echo ${reportDirList}
+    echo "Generating allure-report-$1 based on: ${reportDirList}"
     allure generate --clean ${reportDirList}
+    mv allure-report allure-report-$1
+    echo Report successfully renamed to allure-report-$1
+
 }
 
 function deployToNetlify() {
     directory="$1"
     result="$(netlify deploy --dir "${directory}" --json)"
-    deployUrl="$(echo "${result}"r |jq '.deploy_url' |sed 's/"//g')"
+    deployUrl="$(echo "${result}"r | jq '.deploy_url' | sed 's/"//g')"
     echo "${deployUrl}"
 }
 
