@@ -101,15 +101,15 @@ jobs:
     - <<: *testsbdd
       name: "Run tests - bdd JDK11"
       jdk: openjdk11
-#    - <<: *testsbootstrap
-#      name: "Run tests - bootstrap JDK8"
-#      jdk: openjdk8
-#    - <<: *testsbootstrap
-#      name: "Run tests - bootstrap JDK10"
-#      jdk: openjdk10
-#    - <<: *testsbootstrap
-#      name: "Run tests - bootstrap JDK11"
-#      jdk: openjdk11
+    - <<: *testsbootstrap
+      name: "Run tests - bootstrap JDK8"
+      jdk: openjdk8
+    - <<: *testsbootstrap
+      name: "Run tests - bootstrap JDK10"
+      jdk: openjdk10
+    - <<: *testsbootstrap
+      name: "Run tests - bootstrap JDK11"
+      jdk: openjdk11
     - stage: test
       name: Run tests - angular
       jdk: openjdk8
