@@ -10,7 +10,6 @@ addons:
   apt:
     packages:
       - openjdk-8-jdk
-
 env:
   global:
     - CHROME_PROPERTIES="chrome.properties"
@@ -30,13 +29,11 @@ env:
     - CHROME_ARGS="--headless"
     - PATH="$JAVA_HOME/bin:$PATH"
     - USED_JDK_VERSIONS="" #We'll store set of used jdk versions here
-
 stages:
   - prepare
   - compile
   - test
   - reports
-
 testsbdd: &testsbdd
   stage: test
   name: "Run tests - bdd"
@@ -44,7 +41,6 @@ testsbdd: &testsbdd
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
-
 testsbootstrap: &testsbootstrap
   stage: test
   name: Run tests - bootstrap
@@ -52,7 +48,6 @@ testsbootstrap: &testsbootstrap
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
-
 testsexamples: &testsexamples
   stage: test
   name: Run tests - examples
@@ -60,7 +55,6 @@ testsexamples: &testsexamples
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
-
 testsperformance: &testsperformance
   stage: test
   name: Run tests - performance
@@ -68,14 +62,12 @@ testsperformance: &testsperformance
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
-
 testsunit: &testsunit
   stage: test
   name: Run tests - jdi-light-unit-tests
   script:
     - mvn -ntp install -DskipTests
     - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
-
 testsangular: &testsangular # alias-anchor approach does not work with angular
   stage: test
   name: Run tests - angular
@@ -83,7 +75,6 @@ testsangular: &testsangular # alias-anchor approach does not work with angular
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
-
 testshtml: &testshtml
   stage: test
   name: Run tests - html
@@ -91,7 +82,6 @@ testshtml: &testshtml
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
-
 jobs:
   include:
     - stage: prepare
@@ -99,36 +89,28 @@ jobs:
       script:
         - echo ------------------- WELCOME TO JDI ----------------------
         - mvn --version #it is helpful
-
     - stage: compile
       name: Compile jdi code
       script:
         - mvn install -DskipTests
-
     - <<: *testsbdd
       name: "Run tests - bdd JDK8"
       jdk: openjdk8
-
     - <<: *testsbdd
       name: "Run tests - bdd JDK10"
       jdk: openjdk10
-
     - <<: *testsbdd
       name: "Run tests - bdd JDK11"
       jdk: openjdk11
-
-    - <<: *testsbootstrap
-      name: "Run tests - bootstrap JDK8"
-      jdk: openjdk8
-
-    - <<: *testsbootstrap
-      name: "Run tests - bootstrap JDK10"
-      jdk: openjdk10
-
-    - <<: *testsbootstrap
-      name: "Run tests - bootstrap JDK11"
-      jdk: openjdk11
-
+#    - <<: *testsbootstrap
+#      name: "Run tests - bootstrap JDK8"
+#      jdk: openjdk8
+#    - <<: *testsbootstrap
+#      name: "Run tests - bootstrap JDK10"
+#      jdk: openjdk10
+#    - <<: *testsbootstrap
+#      name: "Run tests - bootstrap JDK11"
+#      jdk: openjdk11
     - stage: test
       name: Run tests - angular
       jdk: openjdk8
@@ -140,51 +122,39 @@ jobs:
 #    - <<: *testshtml
 #      name: "Run tests - html JDK8"
 #      jdk: openjdk8
-#
 #    - <<: *testshtml
 #      name: "Run tests - html JDK10"
 #      jdk: openjdk10
-#
 #    - <<: *testshtml
 #      name: "Run tests - html JDK11"
 #      jdk: openjdk11
-#
 #    - <<: *testsexamples
 #      name: "Run tests - examples JDK8"
 #      jdk: openjdk8
-#
 #    - <<: *testsexamples
 #      name: "Run tests - examples JDK10"
 #      jdk: openjdk10
-#
 #    - <<: *testsexamples
 #      name: "Run tests - examples JDK11"
 #      jdk: openjdk11
-#
 #    - <<: *testsperformance
 #      name: "Run tests - performance JDK8"
 #      jdk: openjdk8
-#
 #    - <<: *testsperformance
 #      name: "Run tests - performance JDK10"
 #      jdk: openjdk10
-#
 #    - <<: *testsperformance
 #      name: "Run tests - performance JDK11"
 #      jdk: openjdk11
-#
 #    - <<: *testsunit
 #      name: "Run tests - jdi-light-unit-tests JDK8"
 #      jdk: openjdk8
-#
 #    - <<: *testsunit
 #      name: "Run tests - jdi-light-unit-tests JDK10"
 #      jdk: openjdk10
-#
 #    - <<: *testsunit
 #      name: "Run tests - jdi-light-unit-tests JDK11"
 #      jdk: openjdk11
-
     - stage: reports
       name: Deploy allure reports to netlify
       script:
@@ -213,5 +183,3 @@ after_script:
 # extra time during long builds
 install:
   - travis_wait
-
-#Things might have been easier with report portal
