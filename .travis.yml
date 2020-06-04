@@ -37,6 +37,55 @@ stages:
   - test
   - reports
 
+testsbdd: &testsbdd
+  stage: test
+  name: Run tests - bdd
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+testsbootstrap: &testsbootstrap
+  stage: test
+  name: Run tests - bootstrap
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+testsexamples: &testsexamples
+  stage: test
+  name: Run tests - examples
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+testsperformance: &testsperformance
+  stage: test
+  name: Run tests - performance
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+testsunit: &testsunit
+  stage: test
+  name: Run tests - jdi-light-unit-tests
+  script:
+    - mvn -ntp install -DskipTests
+    - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
+testsangular: &testsangular # alias-anchor approach does not work with angular
+  stage: test
+  name: Run tests - angular
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+testshtml: &testshtml
+  stage: test
+  name: Run tests - html
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
+
 jobs:
   include:
     - stage: prepare
@@ -50,36 +99,43 @@ jobs:
       script:
         - mvn install -DskipTests
 
-    - stage: test
+    - <<: *testsbdd
       name: Run tests - bdd - JDK8
       jdk: openjdk8
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
-
-    - stage: test
+    - <<: *testsbdd
+      name: Run tests - bdd - JDK9
+      jdk: openjdk9
+    - <<: *testsbdd
       name: Run tests - bdd - JDK10
       jdk: openjdk10
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
-
-    - stage: test
+    - <<: *testsbdd
       name: Run tests - bdd - JDK11
       jdk: openjdk11
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+    - <<: *testsbdd
+      name: Run tests - bdd - JDK12
+      jdk: openjdk12
+    - <<: *testsbdd
+      name: Run tests - bdd - JDK13
+      jdk: openjdk13
 
-    - stage: test
-      name: Run tests - bootstrap
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+    - <<: *testsbootstrap
+      name: Run tests - bootstrap - JDK8
+      jdk: openjdk8
+    - <<: *testsbootstrap
+      name: Run tests - bootstrap - JDK9
+      jdk: openjdk9
+    - <<: *testsbootstrap
+      name: Run tests - bootstrap - JDK10
+      jdk: openjdk10
+    - <<: *testsbootstrap
+      name: Run tests - bootstrap - JDK11
+      jdk: openjdk11
+    - <<: *testsbootstrap
+      name: Run tests - bootstrap - JDK12
+      jdk: openjdk12
+    - <<: *testsbootstrap
+      name: Run tests - bootstrap - JDK13
+      jdk: openjdk13
 
     - stage: test
       name: Run tests - angular
