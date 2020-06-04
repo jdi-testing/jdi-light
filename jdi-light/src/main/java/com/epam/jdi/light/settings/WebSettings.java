@@ -1,5 +1,18 @@
 package com.epam.jdi.light.settings;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.logger.JDILogger.instance;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 import com.epam.jdi.light.common.VisualCheckAction;
 import com.epam.jdi.light.common.VisualCheckPage;
 import com.epam.jdi.light.driver.WebDriverFactory;
@@ -15,13 +28,14 @@ import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Property.CHROME_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.COMMON_CAPABILITIES_PATH;
@@ -37,35 +51,44 @@ import static com.epam.jdi.light.common.Property.SAFARI_CAPABILITIES_PATH;
  */
 public class WebSettings {
     public static ILogger logger = instance("JDI");
+
     public static String getDomain() {
         if (DRIVER.domain != null)
             return DRIVER.domain;
         init();
         return "No Domain Found. Use test.properties or JDISettings.DRIVER.domain";
     }
+
     public static void setDomain(String domain) {
         logger.debug("DRIVER.domain = " + domain);
         DRIVER.domain = domain;
     }
+
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
     public static boolean STRICT_SEARCH = true;
+
     public static boolean hasDomain() {
         init();
         return DRIVER.domain != null && DRIVER.domain.contains("://");
     }
+
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
+
     public static String useDriver(JFunc<WebDriver> driver) {
         return WebDriverFactory.useDriver(driver);
     }
+
     public static String useDriver(String driverName) {
         return WebDriverFactory.useDriver(driverName);
     }
+
     public static String useDriver(DriverTypes driverType) {
         return WebDriverFactory.useDriver(driverType);
     }
+
     public static String printSmartLocators(IBaseElement el) {
         try {
             return "smart: " + format(ELEMENT.smartTemplate, ELEMENT.smartName.value.execute(el.getName()));
@@ -73,6 +96,7 @@ public class WebSettings {
             return format("Can't define smart locator(%s, %s)", ELEMENT.smartTemplate, ELEMENT.smartName.key);
         }
     }
+
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
         switch (ELEMENT.useSmartSearch) {
             case FALSE:
@@ -92,7 +116,7 @@ public class WebSettings {
             UIElement ui = (ELEMENT.smartTemplate.equals("#%s")
                 ? $(locator)
                 : $(locator, el.base().parent))
-                    .setup(e -> e.setName(el.getName()).noWait());
+                .setup(e -> e.setName(el.getName()).noWait());
             try {
                 return ui.getWebElement();
             } catch (Exception ignore) {
@@ -100,35 +124,50 @@ public class WebSettings {
             }
         });
     };
+
+    private static void fillAction(JAction1<String> action, String name) {
+        String prop = null;
+        try {
+            prop = getProperty(name);
+        } catch (Exception ignore) {
+        }
+        if (prop == null) {
+            prop = "null";
+        }
+        logger.debug("fillAction(%s=%s)", name, prop);
+        PropertyReader.fillAction(action, name);
+    }
+
     public static boolean initialized = false;
+
     public static synchronized void init() {
         if (initialized) return;
         logger.debug("init()");
         try {
             getProperties(COMMON.testPropertiesPath);
-			TestProperties.getTestsProperties().forEach((k, v) ->
-			{
-				String propertyName = k;
-				JAction1<String> setPropertyAction = v.key;
-				JAction actionAfterPropertyLoading = v.value;
-				fillAction(setPropertyAction, propertyName);
+            TestProperties.getTestsProperties().forEach((k, v) ->
+            {
+                String propertyName = k;
+                JAction1<String> setPropertyAction = v.key;
+                JAction actionAfterPropertyLoading = v.value;
+                fillAction(setPropertyAction, propertyName);
                 actionAfterPropertyLoading.execute();
-			});
+            });
 
             loadCapabilities(CHROME_CAPABILITIES_PATH.getName(), "chrome.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
-            loadCapabilities(FF_CAPABILITIES_PATH.getName(),"ff.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
-            loadCapabilities(IE_CAPABILITIES_PATH.getName(),"ie.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
-            loadCapabilities(EDGE_CAPABILITIES_PATH.getName(),"edge.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
-            loadCapabilities(OPERA_CAPABILITIES_PATH.getName(),"opera.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
-            loadCapabilities(SAFARI_CAPABILITIES_PATH.getName(),"safari.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
-            loadCapabilities(COMMON_CAPABILITIES_PATH.getName(),"common.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
+                p -> p.forEach((key, value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
+            loadCapabilities(FF_CAPABILITIES_PATH.getName(), "ff.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
+            loadCapabilities(IE_CAPABILITIES_PATH.getName(), "ie.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
+            loadCapabilities(EDGE_CAPABILITIES_PATH.getName(), "edge.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
+            loadCapabilities(OPERA_CAPABILITIES_PATH.getName(), "opera.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
+            loadCapabilities(SAFARI_CAPABILITIES_PATH.getName(), "safari.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
+            loadCapabilities(COMMON_CAPABILITIES_PATH.getName(), "common.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
 
             INIT_THREAD_ID = Thread.currentThread().getId();
             initialized = true;
@@ -146,7 +185,8 @@ public class WebSettings {
         String path = "";
         try {
             path = System.getProperty(property, getProperty(property));
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+        }
         if (isEmpty(path))
             path = defaultPath;
         Properties properties = new PropReader(path).getProperties();
@@ -154,7 +194,8 @@ public class WebSettings {
             return;
         try {
             setCapabilities.execute(properties);
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+        }
     }
 
     private static Properties getProperties(String path) {
@@ -168,14 +209,14 @@ public class WebSettings {
             if (pTarget.size() > 0)
                 return pTarget;
             String propertiesPath = pTest.size() > 0
-                    ? path
-                    : mergePath("/../../target/classes/" + path);
+                ? path
+                : mergePath("/../../target/classes/" + path);
             properties = PropertyReader.getProperties(propertiesPath);
         }
         return properties;
     }
 
-    private static Properties getCiProperties(String path, File propertyFile){
+    private static Properties getCiProperties(String path, File propertyFile) {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(propertyFile));
