@@ -180,7 +180,7 @@ function generateAllureReports() {
         echo "Failed inside generateAllureReports()"
         exitWithError
     fi
-    echo "Generating allure-report-$1 based on:\n ${reportDirList}"
+    echo "Generating allure-report-$1 based on: ${reportDirList}"
     allure generate --clean ${reportDirList} ##KEEP IN MIND THAT WE CLEAR THE REPORTDIR HERE
     mv allure-report allure-report-$1
     echo Report successfully renamed to allure-report-$1
@@ -191,6 +191,9 @@ function deployToNetlify() {
     directory="$1"
     result="$(netlify deploy --dir "${directory}" --json)"
     deployUrl="$(echo "${result}"r |jq '.deploy_url' |sed 's/"//g')"
+    echo RESULT:
+    echo ${result}
+    echo END OF RESULT
     echo "${deployUrl}"
 }
 
