@@ -121,7 +121,7 @@ function deployAllureResults() {
     extractAllureResults
     # Great, now we have huge amount of jsons for different JDKs distributed across directory tree
     # Our goal now is to distribute them across multiple allure reports
-    JDK_VERSIONS="openjdk8 openjdk10 openjdk11"
+    JDK_VERSIONS="openjdk8 openjdk9 openjdk10 openjdk11 openjdk12 openjdk13"
     for JDK in $JDK_VERSIONS;
     do
       generateAllureReports ${JDK}
