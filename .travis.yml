@@ -127,33 +127,33 @@ jobs:
 #    - <<: *testshtml
 #      name: "Run tests - html JDK11"
 #      jdk: openjdk11
-#    - <<: *testsexamples
-#      name: "Run tests - examples JDK8"
-#      jdk: openjdk8
-#    - <<: *testsexamples
-#      name: "Run tests - examples JDK10"
-#      jdk: openjdk10
-#    - <<: *testsexamples
-#      name: "Run tests - examples JDK11"
-#      jdk: openjdk11
-#    - <<: *testsperformance
-#      name: "Run tests - performance JDK8"
-#      jdk: openjdk8
-#    - <<: *testsperformance
-#      name: "Run tests - performance JDK10"
-#      jdk: openjdk10
-#    - <<: *testsperformance
-#      name: "Run tests - performance JDK11"
-#      jdk: openjdk11
-#    - <<: *testsunit
-#      name: "Run tests - jdi-light-unit-tests JDK8"
-#      jdk: openjdk8
-#    - <<: *testsunit
-#      name: "Run tests - jdi-light-unit-tests JDK10"
-#      jdk: openjdk10
-#    - <<: *testsunit
-#      name: "Run tests - jdi-light-unit-tests JDK11"
-#      jdk: openjdk11
+    - <<: *testsexamples
+      name: "Run tests - examples JDK8"
+      jdk: openjdk8
+    - <<: *testsexamples
+      name: "Run tests - examples JDK10"
+      jdk: openjdk10
+    - <<: *testsexamples
+      name: "Run tests - examples JDK11"
+      jdk: openjdk11
+    - <<: *testsperformance
+      name: "Run tests - performance JDK8"
+      jdk: openjdk8
+    - <<: *testsperformance
+      name: "Run tests - performance JDK10"
+      jdk: openjdk10
+    - <<: *testsperformance
+      name: "Run tests - performance JDK11"
+      jdk: openjdk11
+    - <<: *testsunit
+      name: "Run tests - jdi-light-unit-tests JDK8"
+      jdk: openjdk8
+    - <<: *testsunit
+      name: "Run tests - jdi-light-unit-tests JDK10"
+      jdk: openjdk10
+    - <<: *testsunit
+      name: "Run tests - jdi-light-unit-tests JDK11"
+      jdk: openjdk11
     - stage: reports
       name: Deploy allure reports to netlify
       script:
