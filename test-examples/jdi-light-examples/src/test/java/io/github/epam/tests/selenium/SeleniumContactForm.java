@@ -1,10 +1,9 @@
 package io.github.epam.tests.selenium;
 
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import selenium.entities.User;
-import selenium.site.*;
 
-import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static selenium.seleniumPO.HomePage.*;
 import static selenium.seleniumPO.SiteSelenium.*;
 import static selenium.site.data.DefaultDataProvider.*;
@@ -15,7 +14,6 @@ public class SeleniumContactForm implements SimpleTestsInit {
     @BeforeMethod
     public void openPerformancePage() {
         homePage.open();
-        initElements(SiteJdi.class);
         login(new User());
         leftNavigation.select("Contact form");
     }
