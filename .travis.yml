@@ -28,7 +28,6 @@ env:
     - JDI_LIGHT_UNIT_TESTS="jdi-light"
     - CHROME_ARGS="--headless"
     - PATH="$JAVA_HOME/bin:$PATH"
-    - USED_JDK_VERSIONS="" #We'll store set of used jdk versions here
 stages:
   - prepare
   - compile
@@ -168,8 +167,6 @@ after_failure:
 after_success:
   - echo "Build was successful"
 after_script:
-  - ([[ !"$USED_JDK_VERSIONS" == *"$TRAVIS_JDK_VERSION"* ]] && USED_JDK_VERSIONS="$USED_JDK_VERSIONS $TRAVIS_JDK_VERSION")
-  - echo "List of JDK versions used so far $TRAVIS_JDK_VERSION"
   # following 4 lines are to rename allure-results dir to allure-results-<JDK VERSION>
   - ALLURE_RESULTS=$(find jdi-*/target/ -type d -name "allure-results")
   - ALLURE_RESULTS_JDK=$ALLURE_RESULTS-$TRAVIS_JDK_VERSION
