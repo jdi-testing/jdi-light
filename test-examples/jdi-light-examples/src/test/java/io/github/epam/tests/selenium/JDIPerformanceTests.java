@@ -6,18 +6,21 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import selenium.entities.User;
+import selenium.site.*;
 
 import static com.epam.jdi.light.elements.complex.table.Column.*;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
-import static selenium.entities.TestData.*;
+import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static selenium.seleniumPO.HomePage.*;
 import static selenium.seleniumPO.SiteSelenium.*;
 import static selenium.site.pages.JDIPerformancePage.*;
+import static selenium.entities.TestData.*;
 
 public class JDIPerformanceTests implements SimpleTestsInit {
 
     @BeforeMethod
     public void openPerformancePage() {
+        initElements(SiteJdi.class);
         homePage.open();
         login(new User());
         leftNavigation.select("Service", "Performance");
