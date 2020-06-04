@@ -19,7 +19,7 @@ public class IssueTest73 {
     //look locator io.github.epam.html.tests.issue.issue73 line10
     public void issueTest73(){
         issuePage73.open();
-        issuePage73.stageItems.get(0).AddBefore();
+        issuePage73.stageItems.get(0).addBefore();
     }
 
     @AfterMethod

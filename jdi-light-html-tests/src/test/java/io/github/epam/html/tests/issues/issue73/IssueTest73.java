@@ -13,6 +13,6 @@ public class IssueTest73 {
     public void issueTest73(){
         PageFactory.initElements(JDISite73.class);
         issuePage73.open();
-        issuePage73.stageItems.get(0).AddBefore();
+        issuePage73.stageItems.get(0).addBefore();
     }
 }

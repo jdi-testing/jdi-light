@@ -9,7 +9,7 @@ public class StageItem extends Section {
     //@UI(".stageTitle")
     private TextField stageTitle;
 
-    public void AddBefore(){
+    public void addBefore(){
         stageTitle.hover();
     }
 }
