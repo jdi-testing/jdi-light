@@ -41,6 +41,9 @@ public class AngularPage extends WebPage {
     @UI("#mat-radio-11-input")
     public static Checkbox configurableCheckboxAlignBeforeRadioButton;
 
+    @UI("#mat-radio-10-input")
+    public static Checkbox configurableCheckboxAlignAfterRadioButton;
+
     @UI("#mat-checkbox-4")
     public static Checkbox configurableDisabledCheckbox;
 

@@ -39,6 +39,9 @@ public class CheckboxTests extends TestsInit {
         configurableCheckboxAlignBeforeRadioButton.click();
         configurableResultCheckbox.hasClass("mat-checkbox-label-before");
 
+        configurableCheckboxAlignAfterRadioButton.click();
+        configurableResultCheckbox.hasClass("mat-checkbox-label-after");
+
         configurableDisabledCheckbox.click();
         configurableResultCheckbox.hasClass("mat-checkbox-disabled");
     }
