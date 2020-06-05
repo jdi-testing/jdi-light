@@ -38,6 +38,8 @@ public class StaticSite {
 	public static UsersPage usersPage;
 	@Url("/simple-table.html") @Title("Simple Table")
 	public static SimpleTablePage tablePage;
+	@Url("/table-pages.html") @Title("Table with pages")
+	public static TableWithPagesPage tableWithPagesPage;
 	@Url("/performance.html") @Title("Performance page")
 	public static PerformancePage performancePage;
 	@Url("/search.html")
