@@ -62,6 +62,7 @@
         <module>jdi-bdd-tests</module>
         <module>jdi-light-applitools-tests</module>
         <module>jdi-light-bootstrap-tests</module>
+        <module>jdi-light-properties-tests</module>
         <module>test-examples/jdi-performance</module>
         <module>test-examples/jdi-light-examples</module>
         <module>test-examples/jdi-bdd-no-po-tests</module>
