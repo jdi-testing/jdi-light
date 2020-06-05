@@ -253,7 +253,7 @@ after_success:
   - echo "Build was successful"
 after_script:
   # following 4 lines are to rename allure-results dir to allure-results-<JDK VERSION>
-  - ALLURE_RESULTS=$(find jdi-*/target/ -type d -name "allure-results")
+  - ALLURE_RESULTS=$(find -type d -regex ".*/jdi.*/target/allure-results")
   - ALLURE_RESULTS_JDK=$ALLURE_RESULTS-$TRAVIS_JDK_VERSION
   - mv $ALLURE_RESULTS $ALLURE_RESULTS_JDK
   - echo "$ALLURE_RESULTS dir has been renamed to $ALLURE_RESULTS_JDK"
