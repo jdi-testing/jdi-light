@@ -92,17 +92,17 @@ jobs:
       name: Compile jdi code
       script:
         - mvn install -DskipTests
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+    - <<: *testsbdd
+      name: "Run tests - bdd JDK8"
+      jdk: openjdk8
+    - <<: *testsbdd
+      name: "Run tests - bdd JDK10"
+      jdk: openjdk10
+    - <<: *testsbdd
+      name: "Run tests - bdd JDK11"
+      jdk: openjdk11
 # TODO: Lines below were commented to reduce build time and fine-tune the reporting process
-#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
-#    - <<: *testsbdd
-#      name: "Run tests - bdd JDK8"
-#      jdk: openjdk8
-#    - <<: *testsbdd
-#      name: "Run tests - bdd JDK10"
-#      jdk: openjdk10
-#    - <<: *testsbdd
-#      name: "Run tests - bdd JDK11"
-#      jdk: openjdk11
 #    - <<: *testsbootstrap
 #      name: "Run tests - bootstrap JDK8"
 #      jdk: openjdk8
@@ -168,8 +168,8 @@ after_success:
   - echo "Build was successful"
 after_script:
   # following 4 lines are to rename allure-results dir to allure-results-<JDK VERSION>
-  - find -type d -regex ".*/jdi.*/target/allure-results"
-  - ALLURE_RESULTS=$(find jdi-*/target/ -type d -name "allure-results")
+  - echo 'allure-results dir $(find -type d -regex ".*/jdi.*/target/allure-results")'
+  - ALLURE_RESULTS=$(find -type d -regex ".*/jdi.*/target/allure-results")
   - ALLURE_RESULTS_JDK=$ALLURE_RESULTS-$TRAVIS_JDK_VERSION
   - mv $ALLURE_RESULTS $ALLURE_RESULTS_JDK
   - echo "$ALLURE_RESULTS dir has been renamed to $ALLURE_RESULTS_JDK"
