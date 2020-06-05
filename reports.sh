@@ -52,7 +52,7 @@ function sendComment() {
 
 function archive() {
     directory="$1"
-    archiveName="$(echo "${directory}"| awk -F"/" '{print $1}')-${TRAVIS_JDK_VERSION}".tar.gz
+    archiveName="$(echo "${directory}"| grep -o "jdi-[a-z-]*")-${TRAVIS_JDK_VERSION}".tar.gz
     tar -czf "${archiveName}" "${directory}" > /dev/null
     echo "${archiveName}" #return
 }
