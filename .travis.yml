@@ -92,32 +92,32 @@ jobs:
       name: Compile jdi code
       script:
         - mvn install -DskipTests
-    - <<: *testsbdd
-      name: "Run tests - bdd JDK8"
-      jdk: openjdk8
-    - <<: *testsbdd
-      name: "Run tests - bdd JDK10"
-      jdk: openjdk10
-    - <<: *testsbdd
-      name: "Run tests - bdd JDK11"
-      jdk: openjdk11
-    - <<: *testsbootstrap
-      name: "Run tests - bootstrap JDK8"
-      jdk: openjdk8
-    - <<: *testsbootstrap
-      name: "Run tests - bootstrap JDK10"
-      jdk: openjdk10
-    - <<: *testsbootstrap
-      name: "Run tests - bootstrap JDK11"
-      jdk: openjdk11
-    - stage: test
-      name: Run tests - angular
-      jdk: openjdk8
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
 # TODO: Lines below were commented to reduce build time and fine-tune the reporting process
+#        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+#    - <<: *testsbdd
+#      name: "Run tests - bdd JDK8"
+#      jdk: openjdk8
+#    - <<: *testsbdd
+#      name: "Run tests - bdd JDK10"
+#      jdk: openjdk10
+#    - <<: *testsbdd
+#      name: "Run tests - bdd JDK11"
+#      jdk: openjdk11
+#    - <<: *testsbootstrap
+#      name: "Run tests - bootstrap JDK8"
+#      jdk: openjdk8
+#    - <<: *testsbootstrap
+#      name: "Run tests - bootstrap JDK10"
+#      jdk: openjdk10
+#    - <<: *testsbootstrap
+#      name: "Run tests - bootstrap JDK11"
+#      jdk: openjdk11
+#    - stage: test
+#      name: Run tests - angular
+#      jdk: openjdk8
+#      script:
+#        - mvn -ntp install -DskipTests
+#        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
 #    - <<: *testshtml
 #      name: "Run tests - html JDK8"
 #      jdk: openjdk8
@@ -145,15 +145,15 @@ jobs:
     - <<: *testsperformance
       name: "Run tests - performance JDK11"
       jdk: openjdk11
-    - <<: *testsunit
-      name: "Run tests - jdi-light-unit-tests JDK8"
-      jdk: openjdk8
-    - <<: *testsunit
-      name: "Run tests - jdi-light-unit-tests JDK10"
-      jdk: openjdk10
-    - <<: *testsunit
-      name: "Run tests - jdi-light-unit-tests JDK11"
-      jdk: openjdk11
+#    - <<: *testsunit
+#      name: "Run tests - jdi-light-unit-tests JDK8"
+#      jdk: openjdk8
+#    - <<: *testsunit
+#      name: "Run tests - jdi-light-unit-tests JDK10"
+#      jdk: openjdk10
+#    - <<: *testsunit
+#      name: "Run tests - jdi-light-unit-tests JDK11"
+#      jdk: openjdk11
     - stage: reports
       name: Deploy allure reports to netlify
       script:
@@ -168,6 +168,8 @@ after_success:
   - echo "Build was successful"
 after_script:
   # following 4 lines are to rename allure-results dir to allure-results-<JDK VERSION>
+  - ls
+  - find jdi-*/target
   - ALLURE_RESULTS=$(find jdi-*/target/ -type d -name "allure-results")
   - ALLURE_RESULTS_JDK=$ALLURE_RESULTS-$TRAVIS_JDK_VERSION
   - mv $ALLURE_RESULTS $ALLURE_RESULTS_JDK
