@@ -112,12 +112,12 @@ jobs:
 #    - <<: *testsbootstrap
 #      name: "Run tests - bootstrap JDK11"
 #      jdk: openjdk11
-#    - stage: test
-#      name: Run tests - angular
-#      jdk: openjdk8
-#      script:
-#        - mvn -ntp install -DskipTests
-#        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - stage: test
+      name: Run tests - angular
+      jdk: openjdk8
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
 #    - <<: *testshtml
 #      name: "Run tests - html JDK8"
 #      jdk: openjdk8
