@@ -96,7 +96,7 @@ jobs:
       name: Run tests - JDI properties
       script:
           - mvn -ntp install -DskipTests
-          - mvn verify -pl $GROUP_ID:JDI_LIGHT_PROPERTIES_TESTS
+          - mvn verify -pl $GROUP_ID:$JDI_LIGHT_PROPERTIES_TESTS
 
     - stage: reports
       name: Deploy allure reports to netlify
