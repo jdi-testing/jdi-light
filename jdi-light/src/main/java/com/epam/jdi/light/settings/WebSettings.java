@@ -123,11 +123,9 @@ public class WebSettings {
         try {
             prop = getProperty(name);
         } catch (Exception ignore) {}
-        if (prop == null) {
-            prop = "null";
-        }
-        logger.debug("fillAction(%s=%s)", name, prop);
-        PropertyReader.fillAction(action, name);
+        logger.debug("fillAction(%s=%s)", name, prop == null ? "null" : prop);
+        if (isBlank(prop)) return;
+        action.execute(prop);
     }
     public static boolean initialized = false;
     public static synchronized void init() {
