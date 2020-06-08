@@ -4,6 +4,19 @@ stages:
   - test
   - reports
 
+cronbuild: &cronbuild
+  if: type = cron
+
+custom_build: &custom_build
+    <<: *cronbuild
+    stage: test
+    script:
+      - echo "TRAVIS_EVENT_TYPE=$TRAVIS_EVENT_TYPE"
+      - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
+      - echo "TRAVIS_PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH"
+      - echo "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
+
+
 jobs:
   include:
     - stage: prepare
@@ -12,17 +25,17 @@ jobs:
         - echo ------------------- WELCOME TO JDI ----------------------
         - mvn --version #it is helpful
 
-    - stage: test
-      name: Run tests - all builds
+    - <<: *custom_build
+      name: Run tests - cron only
       script:
         - echo "TRAVIS_EVENT_TYPE=$TRAVIS_EVENT_TYPE"
         - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
         - echo "TRAVIS_PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH"
         - echo "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
 
-    - stage: test
-      name: Run tests - cron only
-      if: type = cron
+    - <<: *custom_build
+      name: Run tests - all builds
+      if: true
       script:
         - echo "TRAVIS_EVENT_TYPE=$TRAVIS_EVENT_TYPE"
         - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
