@@ -22,7 +22,7 @@ jobs:
 
     - stage: test
       name: Run tests - cron only
-      type: cron
+      if: type = cron
       script:
         - echo "TRAVIS_EVENT_TYPE=$TRAVIS_EVENT_TYPE"
         - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
