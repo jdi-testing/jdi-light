@@ -9,10 +9,17 @@
 BRANCH_ERROR_MESSAGE="IF YOU DON'T SEE THE PULL REQUEST BUILD, THEN BRANCH CANNOT BE MERGED, YOU SHOULD FIX IT FIRST"
 URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
 FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
+DESTINATION_PULL_REQUEST="${TRAVIS_PULL_REQUEST}"
 
+####################             PULL REQUEST TO LEAVE COMMENTS
+if [[ $TRAVIS_BRANCH == "cronjob-debug" && ($TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api") ]]
+  DESTINATION_PULL_REQUEST=${CRONJOB_COMMENTS_PR}
+  echo "This build was triggered against cronjob-debug branch by cronjob or api"
+  echo "Comments are going to be redirected to PR: ${CRONJOB_COMMENTS_PR}"
+fi
 ####################             UTILS
 function getCommentsLastPageIndex(){
-    url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
+    url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${DESTINATION_PULL_REQUEST}/comments"
     index="$(curl -I -H "Authorization: token ${GIT_COMMENT_USER}"\
          -X GET  "${url}" | grep Link: | awk '{print $4}' | egrep -o 'page=[0-9]{1,10}' | awk -F"=" '{print $2}')"
     reInteger='[0-9]+'
@@ -29,7 +36,7 @@ function collectRelevantComments(){
     fileName="${FILENAME_WITH_COMMENTS_FROM_GITHUB}"
     for (( pageIndex=1; pageIndex<=lastPageIndex; pageIndex++ ))
     do
-      url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments?page=${pageIndex}"
+      url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${DESTINATION_PULL_REQUEST}/comments?page=${pageIndex}"
     	curl -H "Authorization: token ${GIT_COMMENT_USER}"\
     	     -X GET  "${url}"\
     	     >> ${fileName}
@@ -39,7 +46,7 @@ function collectRelevantComments(){
 
 function sendComment() {
     body="$1"
-    url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments";
+    url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${DESTINATION_PULL_REQUEST}/comments";
     echo Body: ${body}
     echo URL: ${url}
     curl -H "Authorization: token ${GIT_COMMENT_USER}" \
@@ -72,7 +79,7 @@ function aboutNetlify() {
 }
 
 function checkBranchIsOk() {
-    if [[ "x${TRAVIS_PULL_REQUEST}" == "xfalse" ]] ; then
+    if [[ "x${DESTINATION_PULL_REQUEST}" == "xfalse" ]] ; then
         echo "${BRANCH_ERROR_MESSAGE}"
         sleep 3
         exit 0
