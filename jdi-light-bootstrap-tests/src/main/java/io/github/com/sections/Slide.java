@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 public class Slide extends Section implements IsText, HasAssert<TextAssert> {
     @UI("h5") public Label title;

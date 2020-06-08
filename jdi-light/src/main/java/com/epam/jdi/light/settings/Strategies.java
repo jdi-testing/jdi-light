@@ -1,15 +1,19 @@
 package com.epam.jdi.light.settings;
 
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.SetTextTypes;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JdiSettings;
 import com.epam.jdi.light.elements.base.SeleniumSettings;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.pairs.Pair;
 
-import static com.epam.jdi.light.common.SearchStrategies.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.common.SearchStrategies.ANY_ELEMENT;
+import static com.epam.jdi.light.common.SearchStrategies.VISIBLE_ELEMENT;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.STRICT_SEARCH;
 
 public enum Strategies {
     JDI_SMART(() -> {

@@ -4,15 +4,19 @@ import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.PathUtils.*;
-import static com.epam.jdi.tools.Timer.*;
-import static org.apache.commons.io.FileUtils.*;
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.openqa.selenium.OutputType.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.driver.WebDriverFactory.noRunDrivers;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.settings.JDISettings.SCREEN;
+import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.Timer.nowTime;
+import static org.apache.commons.io.FileUtils.copyFile;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.openqa.selenium.OutputType.FILE;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

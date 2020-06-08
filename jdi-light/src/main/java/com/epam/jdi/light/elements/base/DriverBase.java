@@ -12,11 +12,11 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.PAGES;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.StringUtils.splitCamelCase;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

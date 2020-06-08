@@ -7,17 +7,18 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.complex.table.Column.*;
+import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
-import static com.epam.jdi.tools.StringUtils.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.SimpleTablePage.*;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static java.util.Arrays.*;
-import static org.hamcrest.Matchers.*;
-import static org.jsoup.internal.StringUtil.*;
-import static org.testng.Assert.*;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static io.github.com.StaticSite.tablePage;
+import static io.github.com.pages.SimpleTablePage.furniture;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.jsoup.internal.StringUtil.isBlank;
+import static org.testng.Assert.assertEquals;
 
 public class FurnitureTests implements TestsInit {
     public Furniture TABLE = new Furniture().set(x -> {

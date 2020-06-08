@@ -4,11 +4,12 @@ import com.epam.jdi.tools.func.JFunc1;
 
 import java.io.File;
 
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.PathUtils.*;
-import static com.epam.jdi.tools.Timer.*;
-import static java.lang.String.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PathUtils.path;
+import static com.epam.jdi.tools.Timer.nowTime;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ScreenSettings {
     public String path = mergePath(COMMON.logsPath, "screens");

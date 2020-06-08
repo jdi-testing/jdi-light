@@ -26,10 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-import static com.epam.jdi.light.driver.WebDriverByUtils.fillByMsgTemplate;
-import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
-import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.JDIBase.STRING_SIMPLIFY;
 import static com.epam.jdi.light.elements.complex.table.Line.initLine;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;

@@ -5,14 +5,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.Header.*;
-import static io.github.com.pages.SearchPage.*;
-import static io.github.epam.html.tests.site.steps.States.*;
+import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.pages.Header.search;
+import static io.github.com.pages.SearchPage.jsearchTitle;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.

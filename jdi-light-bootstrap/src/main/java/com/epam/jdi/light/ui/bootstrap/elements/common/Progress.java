@@ -7,9 +7,9 @@ import com.epam.jdi.light.ui.bootstrap.asserts.ProgressAssert;
 
 import java.util.List;
 
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.ui.html.HtmlUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
+import static com.epam.jdi.tools.PrintUtils.print;
 
 /**
  * To see an example of bootstrap Progress bar please visit https://getbootstrap.com/docs/4.3/components/progress/

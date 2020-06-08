@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 
-import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 
 /**
  * To see an example of Alert web element please visit https://getbootstrap.com/docs/4.3/components/alerts/

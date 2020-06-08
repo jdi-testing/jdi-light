@@ -4,9 +4,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
+import static org.hamcrest.Matchers.greaterThan;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

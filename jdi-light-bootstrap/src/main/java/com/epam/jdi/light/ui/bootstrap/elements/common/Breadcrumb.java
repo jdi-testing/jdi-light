@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.complex.WebList;
 
-import static com.epam.jdi.light.elements.init.UIFactory.*;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
  * To see an example of Breadcrumb web element please visit https://getbootstrap.com/docs/4.3/components/breadcrumb/

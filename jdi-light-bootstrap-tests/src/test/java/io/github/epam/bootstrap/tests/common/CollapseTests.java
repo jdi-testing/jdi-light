@@ -4,10 +4,12 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.BootstrapPage.*;
-import static io.github.epam.states.States.*;
-import static org.testng.Assert.*;
+import static io.github.com.StaticSite.bsPage;
+import static io.github.com.pages.BootstrapPage.expandLink;
+import static io.github.com.pages.BootstrapPage.hiddenText;
+import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class CollapseTests implements TestsInit {
     final String text = "Collapse text shown";

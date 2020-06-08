@@ -8,13 +8,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.Header.*;
+import static io.github.com.StaticSite.searchPage;
+import static io.github.com.pages.Header.epamLogo;
+import static io.github.com.pages.Header.search;
 import static io.github.epam.test.data.ListData.*;
-import static io.github.epam.tests.recommended.steps.Preconditions.*;
-import static org.hamcrest.MatcherAssert.*;
+import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman_Iovlev on 3/2/2018.

@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
-import static io.github.epam.html.tests.site.steps.States.*;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 
 public class Menu2DTests implements TestsInit {
 

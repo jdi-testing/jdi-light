@@ -5,15 +5,16 @@ import com.epam.jdi.light.ui.html.elements.common.FileInput;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
-import static com.epam.jdi.bdd.stepdefs.CheckListSteps.*;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.PathUtils.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.entities.Users.*;
+import static com.epam.jdi.bdd.stepdefs.CheckListSteps.multiSelect;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
-import static java.util.Arrays.*;
-import static org.junit.Assert.*;
+import static java.util.Arrays.asList;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class UserStepdefs {
 

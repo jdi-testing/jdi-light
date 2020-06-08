@@ -4,9 +4,9 @@ import org.openqa.selenium.Dimension;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.tools.RegExUtils.*;
-import static java.lang.Integer.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.tools.RegExUtils.matches;
+import static java.lang.Integer.parseInt;
 
 public class ScreenSize {
     public int width, height;

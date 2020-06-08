@@ -4,14 +4,16 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.base.HasUIList;
+import com.epam.jdi.light.elements.interfaces.base.INamed;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 
 import java.util.List;
 
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.tools.EnumUtils.*;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.LinqUtils.map;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

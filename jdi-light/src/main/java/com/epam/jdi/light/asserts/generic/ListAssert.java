@@ -8,9 +8,11 @@ import org.hamcrest.Matchers;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.single;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -1,5 +1,12 @@
 package io.github.epam.tests.recommended;
 
+import com.epam.jdi.light.elements.complex.table.Table;
+import io.github.epam.StaticTestsInit;
+import io.github.epam.custom.UserRow;
+import io.github.epam.entities.UserInfo;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
@@ -10,18 +17,10 @@ import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLogge
 import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
 import static java.util.Arrays.asList;
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
-import com.epam.jdi.light.elements.complex.table.Table;
-import io.github.epam.StaticTestsInit;
-import io.github.epam.custom.UserRow;
-import io.github.epam.entities.UserInfo;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class TableTests extends StaticTestsInit {
     @BeforeMethod

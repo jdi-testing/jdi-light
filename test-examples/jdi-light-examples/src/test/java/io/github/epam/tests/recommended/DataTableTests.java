@@ -7,15 +7,16 @@ import io.github.epam.entities.UserInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.Alerts.*;
-import static io.github.com.StaticSite.*;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.PerformancePage.*;
-import static io.github.epam.test.data.TableData.*;
-import static io.github.epam.tests.recommended.steps.Preconditions.*;
-import static java.util.Arrays.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static io.github.epam.test.data.TableData.GRADY_BROCK;
+import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
 
 public class DataTableTests extends StaticTestsInit {
     @BeforeMethod
