@@ -27,20 +27,10 @@ jobs:
 
     - <<: *custom_build
       name: Run tests - cron only
-      script:
-        - echo "TRAVIS_EVENT_TYPE=$TRAVIS_EVENT_TYPE"
-        - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
-        - echo "TRAVIS_PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH"
-        - echo "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
 
     - <<: *custom_build
       name: Run tests - all builds
       if: true
-      script:
-        - echo "TRAVIS_EVENT_TYPE=$TRAVIS_EVENT_TYPE"
-        - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
-        - echo "TRAVIS_PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH"
-        - echo "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
 
     - stage: reports
       name: Deploy allure reports to netlify
