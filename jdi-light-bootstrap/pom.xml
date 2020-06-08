@@ -12,7 +12,7 @@
 
     <properties>
         <aspectj.version>1.9.5</aspectj.version>
-        <aspectj.maven>1.11</aspectj.maven>
+        <aspectj.maven>1.12.6</aspectj.maven>
         <java.version>1.8</java.version>
     </properties>
 
@@ -36,7 +36,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+                <groupId>com.nickwongdev</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
                 <version>${aspectj.maven}</version>
                 <configuration>
