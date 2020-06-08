@@ -124,11 +124,11 @@ function deployAllureResults() {
     JDK_VERSIONS="openjdk8 openjdk9 openjdk10 openjdk11 openjdk12 openjdk13"
     for JDK in $JDK_VERSIONS;
     do
-      generateAllureReports ${JDK}
+      generateAllureReports "${JDK}"
       echo "LOG1"
       url="$(deployToNetlify "allure-report-${JDK}")"
       echo "LOG2"
-      sendComment "$(aboutNetlify ${url} ${JDK})"
+      sendComment "$(aboutNetlify "${url}" "${JDK}")"
     done
 }
 
@@ -182,8 +182,8 @@ function generateAllureReports() {
     fi
     echo "Generating allure-report-$1 based on: ${reportDirList}"
     allure generate --clean ${reportDirList}
-    mv allure-report allure-report-$1
-    echo Report successfully renamed to allure-report-$1
+    mv "allure-report" "allure-report-$1"
+    echo "Report was renamed to allure-report-$1"
 
 }
 
