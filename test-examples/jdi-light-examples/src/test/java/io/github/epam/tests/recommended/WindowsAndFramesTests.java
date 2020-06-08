@@ -31,7 +31,7 @@ public class WindowsAndFramesTests extends StaticTestsInit {
         originalWindow(); // open original (first) window
         switchToWindow(2); // open second window
         assertEquals(repoDescription.getText(),
-        "Try JDI Light https://github.com/jdi-testing/jdi-light");
+            "Try JDI Light https://github.com/jdi-testing/jdi-light");
         setWindowName("Github");
         switchToWindow(1); // open first (original) window
 
@@ -39,7 +39,7 @@ public class WindowsAndFramesTests extends StaticTestsInit {
             containsString("QUIS NOSTRUD EXERCITATION"));
         switchToWindow("Github");
         assertEquals(repoDescription.getText(),
-                "Try JDI Light https://github.com/jdi-testing/jdi-light");
+            "Try JDI Light https://github.com/jdi-testing/jdi-light");
         closeWindow();
     }
 
@@ -47,15 +47,18 @@ public class WindowsAndFramesTests extends StaticTestsInit {
     public void frameTest() {
         iframe.userIcon.click();
     }
+
     @Test
     public void wolverinFrameTest() {
         wolverinFrame.has().attr("src", containsString("wolverin"));
     }
+
     @Test
     public void spidermanTest() {
         WebPage.reload();
         spidermanElement.has().attr("src", containsString("spider-man"));
     }
+
     @Test
     public void spidermanFrameTest() {
         WebPage.reload();

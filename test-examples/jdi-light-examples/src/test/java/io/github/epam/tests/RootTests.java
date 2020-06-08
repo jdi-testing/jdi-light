@@ -18,9 +18,11 @@ public class RootTests extends StaticTestsInit {
         loginForm.submit(DEFAULT_USER, "enter");
         homePage.checkOpened();
     }
+
     @Test
     public void initDeepTest() {
         Assert.assertNotNull(homePage.testField);
         Assert.assertNotNull(searchPage.testField);
     }
+
 }
