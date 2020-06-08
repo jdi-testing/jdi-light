@@ -12,7 +12,8 @@ FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
 DESTINATION_PULL_REQUEST="${TRAVIS_PULL_REQUEST}"
 
 ####################             PULL REQUEST TO LEAVE COMMENTS
-if [[ $TRAVIS_BRANCH == "cronjob-debug" && ($TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api") ]]
+if [[ $TRAVIS_BRANCH == "cronjob-debug" && ($TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api") ]];
+then
   DESTINATION_PULL_REQUEST=${CRONJOB_COMMENTS_PR}
   echo "This build was triggered against cronjob-debug branch by cronjob or api"
   echo "Comments are going to be redirected to PR: ${CRONJOB_COMMENTS_PR}"
