@@ -17,6 +17,7 @@ public class TestsInit extends TestNGListener {
         homePage.open();
         logger.toLog("Run Tests");
     }
+
     @AfterSuite(alwaysRun = true)
     public static void tearDown() {
         killAllSeleniumDrivers();
