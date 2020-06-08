@@ -128,7 +128,7 @@ function deployAllureResults() {
       echo "LOG1"
       url="$(deployToNetlify "allure-report-${JDK}")"
       echo "LOG2"
-      sendComment "$(aboutNetlify "${url}" "${JDK}")"
+      sendComment "$(aboutNetlify ${url} ${JDK})"
     done
 }
 
@@ -182,7 +182,7 @@ function generateAllureReports() {
     fi
     echo "Generating allure-report-$1 based on: ${reportDirList}"
     allure generate --clean ${reportDirList}
-    mv "allure-report" "allure-report-$1"
+    mv allure-report allure-report-$1
     echo "Report was renamed to allure-report-$1"
 
 }
