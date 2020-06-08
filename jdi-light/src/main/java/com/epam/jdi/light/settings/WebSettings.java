@@ -7,7 +7,7 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
-import com.epam.jdi.light.logger.*;
+import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.*;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.pairs.Pair;
@@ -123,13 +123,13 @@ public class WebSettings {
         try {
             prop = getProperty(name);
         } catch (Exception ignore) {}
-        if (prop == null) {
-            prop = "null";
-        }
-        logger.debug("fillAction(%s=%s)", name, prop);
-        PropertyReader.fillAction(action, name);
+        logger.debug("fillAction(%s=%s)", name, prop == null ? "null" : prop);
+        if (isBlank(prop)) return;
+        action.execute(prop);
     }
+    
     public static boolean initialized = false;
+
     public static synchronized void init() {
         if (initialized) return;
         logger.debug("init()");
