@@ -10,6 +10,7 @@ import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLogge
 import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
 import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
@@ -70,18 +71,16 @@ public class TableTests extends StaticTestsInit {
         logTime("Get column(Phone)");
 
         String value = table.preview();
-        assertEquals(value.substring(0,194),
-        "Name Phone Email City " +
+        assertThat(value, containsString("Name Phone Email City " +
             "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe " +
             "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas " +
-            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv");
+            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv"));
         logTime("Preview");
         value = table.getValue();
-        assertTrue(value.substring(0, 228).contains(
-            "||X||Name|Phone|Email|City||" + LINE_BREAK +
-                "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +
-                "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||" + LINE_BREAK +
-                "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||"));
+        assertThat(value, containsString("||X||Name|Phone|Email|City||" + LINE_BREAK +
+            "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +
+            "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||" + LINE_BREAK +
+            "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||"));
         logTime("Get value");
     }
 

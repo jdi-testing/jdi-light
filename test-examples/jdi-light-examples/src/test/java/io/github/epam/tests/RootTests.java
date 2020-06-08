@@ -26,4 +26,5 @@ public class RootTests extends StaticTestsInit {
         Assert.assertNotNull(homePage.testField);
         Assert.assertNotNull(searchPage.testField);
     }
+
 }

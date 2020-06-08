@@ -1,9 +1,11 @@
 package io.github.epam.tests.google;
 
 import io.github.epam.StaticTestsInit;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.pages.Header.search;
 import static io.github.com.pages.SearchPage.jsearchTitle;
@@ -34,19 +36,26 @@ public class WaitJListTests extends StaticTestsInit {
     }
 
     @Test
-    public void notEmptyTest() {
-        jsearchTitle.waitFor(2).notEmpty();
+    public void emptyTest() {
+        jsearchTitle.waitSec(2);
+        try {
+            jsearchTitle.is().empty();
+            Assert.fail("List should not be empty");
+        } catch (Throwable ignored) { }
+        finally {
+            jsearchTitle.waitSec(TIMEOUTS.element.get());
+        }
     }
 
     @Test
     public void sizeTest() {
         assertEquals(jsearchTitle.size(), 6);
-        jsearchTitle.is().size(equalTo(8));
+        jsearchTitle.has().size(equalTo(8));
     }
 
     @Test
     public void sizeNotEmptyTest() {
-        jsearchTitle.waitFor(5).size(greaterThan(7));
+        jsearchTitle.has().size(greaterThan(7));
     }
 
 }

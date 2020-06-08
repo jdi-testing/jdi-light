@@ -1,6 +1,7 @@
 package io.github.epam.html.tests.elements.complex.list;
 
 import io.github.epam.TestsInit;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -35,18 +36,22 @@ public class WaitDataListTests implements TestsInit {
 
     @Test
     public void emptyTest() {
+        try {
+            searchS.is().empty();
+            Assert.fail("List should not be empty");
+        } catch (Throwable ignored) { }
         searchS.is().notEmpty();
     }
 
     @Test
     public void sizeTest() {
         assertEquals(searchS.size(), 6);
-        searchS.waitFor(10).size(equalTo(8));
+        searchS.is().size(equalTo(8));
     }
 
     @Test
     public void sizeGreaterTest() {
-        searchS.waitFor(10).size(greaterThan(7));
+        searchS.is().size(greaterThan(7));
     }
 
 }

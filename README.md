@@ -2,7 +2,7 @@
 
 # JDI Light Test Automation Framework
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/angular/angular.js/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://mit-license.org/)
 [![stackoverflow](https://img.shields.io/badge/stackoverflow-jdi-blue.svg?style=flat)](http://stackoverflow.com/questions/tagged/jdi)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light?ref=badge_shield)
 

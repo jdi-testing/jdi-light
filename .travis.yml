@@ -78,6 +78,7 @@ jobs:
         - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
 
+    # TODO: #1995
     - stage: test
       name: Run tests - examples
       script:

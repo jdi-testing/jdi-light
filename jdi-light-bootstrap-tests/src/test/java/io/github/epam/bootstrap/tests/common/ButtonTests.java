@@ -68,11 +68,11 @@ public class ButtonTests implements TestsInit {
 
     @Test
     public void rightClickTest() {
-        if (getOs().equals(WIN)) {
-            redButton.rightClick();
-            validateAlert("Right Click");
-            Keyboard.keyPress("Escape");
-        }
+        if (!getOs().equals(WIN)) return;
+
+        redButton.rightClick();
+        validateAlert("Right Click");
+        Keyboard.keyPress("Escape");
     }
 
     @Test

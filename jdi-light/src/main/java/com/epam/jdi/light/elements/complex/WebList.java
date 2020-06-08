@@ -139,12 +139,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         return get(size() - startIndex + 1);
     }
     protected String getElementName(int i, UIElement element) {
-        if (nameIndex)
-            return nameFromIndex(i);
-        else {
-            String name = getElementName(element);
-            return (isNotBlank(name) ? name : nameFromIndex(i)).trim();
-        }
+        return nameIndex ? nameFromIndex(i) : getElementName(element);
     }
     protected String getElementName(UIElement element) {
         try {

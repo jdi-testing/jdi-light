@@ -21,8 +21,8 @@ public class CucumberHooks {
         uuid.ifPresent(s -> getLifecycle().updateTestCase(s, testResult -> {
             List<Label> labels = testResult.getLabels();
             labels.stream()
-                    .filter(label -> label.getName().equals("suite"))
-                    .forEach(label -> label.setName("subSuite"));
+                .filter(label -> label.getName().equals("suite"))
+                .forEach(label -> label.setName("subSuite"));
             labels.add(parentSuiteLabel);
             labels.add(suiteLabel);
             testResult.setLabels(labels);
