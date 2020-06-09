@@ -125,18 +125,18 @@ jobs:
     - <<: *testsbdd
       name: Run tests - bdd - JDK9
       jdk: openjdk9
-    - <<: *testsbdd
-      name: Run tests - bdd - JDK10
-      jdk: openjdk10
-    - <<: *testsbdd
-      name: Run tests - bdd - JDK11
-      jdk: openjdk11
-    - <<: *testsbdd
-      name: Run tests - bdd - JDK12
-      jdk: openjdk12
-    - <<: *testsbdd
-      name: Run tests - bdd - JDK13
-      jdk: openjdk13
+#    - <<: *testsbdd
+#      name: Run tests - bdd - JDK10
+#      jdk: openjdk10
+#    - <<: *testsbdd
+#      name: Run tests - bdd - JDK11
+#      jdk: openjdk11
+#    - <<: *testsbdd
+#      name: Run tests - bdd - JDK12
+#      jdk: openjdk12
+#    - <<: *testsbdd
+#      name: Run tests - bdd - JDK13
+#      jdk: openjdk13
 # THIS IS A PoC; Lines below are commented out to reduce build time
 #    - <<: *testsbootstrap
 #      name: Run tests - bootstrap - JDK8
