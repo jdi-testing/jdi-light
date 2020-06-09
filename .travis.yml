@@ -1,15 +1,286 @@
 language: java
+before_install:
+  - sudo apt-get -y install jq
+  - java -Xmx32m -version
+before_script:
+  - ls -lah
+  - google-chrome-stable --version
+addons:
+  chrome: stable
+  apt:
+    packages:
+      - openjdk-8-jdk
+
+env:
+  global:
+    - CHROME_PROPERTIES="chrome.properties"
+    - WITH_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
+    - GROUP_ID="com.epam.jdi"
+    - NOPO_TESTS="jdi-bdd-no-po-tests"
+    - NOPO_TESTS_PROPERTY="test-examples/jdi-bdd-no-po-tests"
+    - BDD_TESTS="jdi-bdd-tests"
+    - BOOTSTRAP_TESTS="jdi-light-bootstrap-tests"
+    - HTML_TESTS="jdi-light-html-tests"
+    - ANGULAR_TESTS="jdi-light-angular-tests"
+    - ANGULAR_UNIT_TESTS="jdi-light-angular-unit-tests"
+    - EXAMPLES="jdi-light-examples"
+    - EXAMPLES_PROPERTY="test-examples/jdi-light-examples"
+    - PERFORMANCE="jdi-performance"
+    - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
+    - CHROME_ARGS="--headless"
+    #    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+    - PATH="$JAVA_HOME/bin:$PATH"
+    - CRONJOB_COMMENTS_PR="2073" #PR to store cronjob comments
+
 stages:
+  - prepare
+  - compile
   - test
+  - reports
+
+cron_condition: &cron_condition
+  if: (branch = master) AND (type IN (cron, api))
+  #Stages that refer to cron_condition would trigger only under specified conditions
+testsbdd: &testsbdd
+  <<: *cron_condition
+  stage: test
+  name: Run tests - bdd
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+testsbootstrap: &testsbootstrap
+  stage: test
+  name: Run tests - bootstrap
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+testsangular: &testsangular
+  stage: test
+  name: Run tests - angular
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+testsangularunit: &testsangularunit
+  stage: test
+  name: Run unit tests - angular
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_UNIT_TESTS
+testshtml: &testshtml
+  stage: test
+  name: Run tests - html
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
+testsexamples: &testsexamples
+  stage: test
+  name: Run tests - examples
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+testsperformance: &testsperformance
+  stage: test
+  name: Run tests - performance
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+testsunit: &testsunit
+  stage: test
+  name: Run tests - jdi-light-unit-tests
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
+
 jobs:
   include:
-    - stage: test
-      name: Test stage
+    - stage: prepare
+      name: Welcome to jdi
       script:
-        - echo ------------------- TEST OUTPUT ----------------------
+        - echo ------------------- WELCOME TO JDI ----------------------
+        - mvn --version #it is helpful
+
+    - stage: compile
+      name: Compile jdi code
+      script:
+        - mvn install -DskipTests
+
+    - <<: *testsbdd
+      name: Run tests - bdd - JDK8
+      if: true #Stage will always be executed opposed to cron_condition stages
+      jdk: openjdk8
+    - <<: *testsbdd
+      name: Run tests - bdd - JDK9
+      jdk: openjdk9
+    - <<: *testsbdd
+      name: Run tests - bdd - JDK10
+      jdk: openjdk10
+        - <<: *testsbdd
+          name: Run tests - bdd - JDK11
+          jdk: openjdk11
+        - <<: *testsbdd
+          name: Run tests - bdd - JDK12
+          jdk: openjdk12
+        - <<: *testsbdd
+          name: Run tests - bdd - JDK13
+          jdk: openjdk13
+
+        - <<: *testsbootstrap
+          name: Run tests - bootstrap - JDK8
+          if: true
+          jdk: openjdk8
+        - <<: *testsbootstrap
+          name: Run tests - bootstrap - JDK9
+          jdk: openjdk9
+        - <<: *testsbootstrap
+          name: Run tests - bootstrap - JDK10
+          jdk: openjdk10
+        - <<: *testsbootstrap
+          name: Run tests - bootstrap - JDK11
+          jdk: openjdk11
+        - <<: *testsbootstrap
+          name: Run tests - bootstrap - JDK12
+          jdk: openjdk12
+        - <<: *testsbootstrap
+          name: Run tests - bootstrap - JDK13
+          jdk: openjdk13
+
+        - <<: *testsangular
+          name: Run tests - angular - JDK8
+          if: true
+          jdk: openjdk8
+        - <<: *testsangular
+          name: Run tests - angular - JDK9
+          jdk: openjdk9
+        - <<: *testsangular
+          name: Run tests - angular - JDK10
+          jdk: openjdk10
+        - <<: *testsangular
+          name: Run tests - angular - JDK11
+          jdk: openjdk11
+        - <<: *testsangular
+          name: Run tests - angular - JDK12
+          jdk: openjdk12
+        - <<: *testsangular
+          name: Run tests - angular - JDK13
+          jdk: openjdk13
+
+        - <<: *testsangularunit
+          name: Run unit tests - angular - JDK8
+          if: true
+          jdk: openjdk8
+        - <<: *testsangularunit
+          name: Run unit tests - angular - JDK9
+          jdk: openjdk9
+        - <<: *testsangularunit
+          name: Run unit tests - angular - JDK10
+          jdk: openjdk10
+        - <<: *testsangularunit
+          name: Run unit tests - angular - JDK11
+          jdk: openjdk11
+        - <<: *testsangularunit
+          name: Run unit tests - angular - JDK12
+          jdk: openjdk12
+        - <<: *testsangularunit
+          name: Run unit tests - angular - JDK13
+          jdk: openjdk13
+
+        - <<: *testshtml
+          name: Run tests - html - JDK8
+          if: true
+          jdk: openjdk8
+        - <<: *testshtml
+          name: Run tests - html - JDK9
+          jdk: openjdk9
+        - <<: *testshtml
+          name: Run tests - html - JDK10
+          jdk: openjdk10
+        - <<: *testshtml
+          name: Run tests - html - JDK11
+          jdk: openjdk11
+        - <<: *testshtml
+          name: Run tests - html - JDK12
+          jdk: openjdk12
+        - <<: *testshtml
+          name: Run tests - html - JDK13
+          jdk: openjdk13
+
+        - <<: *testsexamples
+          name: Run tests - examples - JDK8
+          if: true
+          jdk: openjdk8
+        - <<: *testsexamples
+          name: Run tests - examples - JDK9
+          jdk: openjdk9
+        - <<: *testsexamples
+          name: Run tests - examples - JDK10
+          jdk: openjdk10
+        - <<: *testsexamples
+          name: Run tests - examples - JDK11
+          jdk: openjdk11
+        - <<: *testsexamples
+          name: Run tests - examples - JDK12
+          jdk: openjdk12
+        - <<: *testsexamples
+          name: Run tests - examples - JDK13
+          jdk: openjdk13
+
+        - <<: *testsperformance
+          name: Run tests - performance - JDK8
+          if: true
+          jdk: openjdk8
+        - <<: *testsperformance
+          name: Run tests - performance - JDK9
+          jdk: openjdk9
+        - <<: *testsperformance
+          name: Run tests - performance - JDK10
+          jdk: openjdk10
+        - <<: *testsperformance
+          name: Run tests - performance - JDK11
+          jdk: openjdk11
+        - <<: *testsperformance
+          name: Run tests - performance - JDK12
+          jdk: openjdk12
+        - <<: *testsperformance
+          name: Run tests - performance - JDK13
+          jdk: openjdk13
+
+    - stage: reports
+      name: Deploy allure reports to netlify
+      script:
+        - npm install -g allure-commandline
+        - npm install -g netlify-cli
+        - allure --version
+        - source reports.sh
+        - deployAllureResults
 after_failure:
   - echo "Build was failed"
 after_success:
   - echo "Build was successful"
 after_script:
-  - echo "End of build"
+  # following 4 lines are to rename allure-results dir to allure-results-<JDK VERSION>
+  - ALLURE_RESULTS=$(find -type d -regex ".*/jdi.*/target/allure-results")
+  - ALLURE_RESULTS_JDK=$ALLURE_RESULTS-$TRAVIS_JDK_VERSION
+  - mv $ALLURE_RESULTS $ALLURE_RESULTS_JDK
+  - echo "$ALLURE_RESULTS dir has been renamed to $ALLURE_RESULTS_JDK"
+  # further actions
+  - source reports.sh
+  - grubAllureResults
+  - du -d 1 -h ./
+  - ls -la
+# extra time during long builds
+install:
+  - travis_wait
