@@ -13,7 +13,7 @@ FASTER_FILE_SHARING="true"
 DESTINATION_PULL_REQUEST=$TRAVIS_PULL_REQUEST
 
 ####################             PULL REQUEST TO LEAVE COMMENTS
-if [[ $TRAVIS_BRANCH == "cronjob-debug" && ($TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api") ]];
+if [[ $TRAVIS_BRANCH == "master" && ($TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api") ]];
 then
   DESTINATION_PULL_REQUEST=${CRONJOB_COMMENTS_PR}
   echo "This build was triggered against cronjob-debug branch by cronjob or api"
@@ -132,16 +132,15 @@ function deployAllureResults() {
     JDK_VERSIONS="openjdk8 openjdk9 openjdk10 openjdk11 openjdk12 openjdk13"
     for JDK in $JDK_VERSIONS;
     do
-      find -name "*$JDK*" -type d
       if [[ $(find -name "*$JDK*" -type d) ]]; then
-        echo $JDK related directories found
+        echo Generating and publishing allure results for $JDK
         generateAllureReports ${JDK}
         echo "LOG1"
         url="$(deployToNetlify "allure-report-${JDK}")"
         echo "LOG2"
         sendComment "$(aboutNetlify ${url} ${JDK})"
       else
-        echo "Skipping generate and deploy phase as no reports were found for $JDK"
+        echo "No allure reports found for $JDK"
       fi
     done
 }
