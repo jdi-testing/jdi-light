@@ -27,8 +27,4 @@ public class TestsInit {
     public static void tearDown() {
         killAllSeleniumDrivers();
     }
-
-    protected static boolean isFireFox() {
-        return DRIVER.name.equalsIgnoreCase("firefox");
-    }
 }

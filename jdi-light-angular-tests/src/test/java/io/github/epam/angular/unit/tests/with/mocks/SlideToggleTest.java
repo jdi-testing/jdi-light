@@ -1,7 +1,7 @@
-package io.github.epam.unit.tests;
+package io.github.epam.angular.unit.tests.with.mocks;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.angular.elements.common.SlideToggle;
+import com.epam.jdi.light.elements.common.UIElement;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 
 import static junit.framework.Assert.assertFalse;
 import static org.mockito.Mockito.when;
-
 import static org.testng.Assert.assertTrue;
 
 

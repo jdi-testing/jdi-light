@@ -21,7 +21,6 @@ env:
     - BDD_TESTS="jdi-bdd-tests"
     - HTML_TESTS="jdi-light-html-tests"
     - ANGULAR_TESTS="jdi-light-angular-tests"
-    - ANGULAR_UNIT_TESTS="jdi-light-angular-unit-tests"
     - EXAMPLES="jdi-light-examples"
     - EXAMPLES_PROPERTY="test-examples/jdi-light-examples"
     - PERFORMANCE="jdi-performance"
@@ -70,13 +69,6 @@ jobs:
         - mvn -ntp install -DskipTests
         -  echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
-
-    - stage: test
-      name: Run unit tests - angular
-      script:
-        - mvn -ntp install -DskipTests
-        - echo arguments=$CHROME_ARGS > "./$ANGULAR_UNIT_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_UNIT_TESTS
 
     - stage: test
       name: Run tests - html

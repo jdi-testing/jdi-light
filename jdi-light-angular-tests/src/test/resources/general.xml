@@ -6,7 +6,12 @@
             <package name="io.github.epam.angular.tests.*"/>
         </packages>
     </test>
-    <listeners>
+    <test name="Unit tests">
+        <packages>
+            <package name="io.github.epam.angular.unit.tests.*"/>
+        </packages>
+    </test>
+   <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener" />
     </listeners>
 </suite>

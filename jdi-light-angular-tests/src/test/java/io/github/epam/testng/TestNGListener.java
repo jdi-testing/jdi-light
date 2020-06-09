@@ -39,7 +39,10 @@ public class TestNGListener implements IInvokedMethodListener {
                 new SimpleDateFormat("mm:ss.SS")
                     .format(new Date(currentTimeMillis() - start.get())));
             if ("FAILED".equals(result)) {
-                takeScreen();
+                try {
+                    takeScreen();
+                } catch (RuntimeException ignored) {
+                }
                 logger.step("ERROR: " + r.getThrowable().getMessage());
             }
             logger.step("");

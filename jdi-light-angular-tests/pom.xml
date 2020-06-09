@@ -11,35 +11,33 @@
 
     <properties>
         <driver>chrome</driver>
+        <aspectj.version>1.9.5</aspectj.version>
+        <java.version>1.8</java.version>
         <allure.testng>2.13.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.1</aspectj.version>
     </properties>
 
     <dependencies>
-        <!--JDI-->
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-angular</artifactId>
-            <version>1.2.14</version>
-        </dependency>
-        <!--Allure config in parent-->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.testng}</version>
         </dependency>
+
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.2</version>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-angular</artifactId>
+            <version>1.2.14</version>
         </dependency>
+
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.0.0</version>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.3.3</version>
+            <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -49,11 +47,20 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
-            <!--Allure reporting config in parent-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                    <rulesUri>file://${project.basedir}/../maven-version-rules.xml</rulesUri>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -68,9 +75,6 @@
                         <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                    </argLine>
                     <properties>
                         <property>
                             <name>listener</name>
@@ -93,29 +97,21 @@
                 <version>${allure.maven}</version>
             </plugin>
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <generateBackupPoms>false</generateBackupPoms>
-                    <rulesUri>file://${project.basedir}/../maven-version-rules.xml</rulesUri>
-                </configuration>
-            </plugin>
         </plugins>
 
         <resources>
             <resource>
                 <directory>${project.basedir}/src/main/resources</directory>
             </resource>
-            <resource>
+        </resources>
+        <testResources>
+            <testResource>
                 <directory>src/test/resources</directory>
                 <filtering>true</filtering>
-            </resource>
-        </resources>
+            </testResource>
+        </testResources>
     </build>
 
-    <!-- Allure reporting config in parent-->
     <reporting>
         <excludeDefaults>true</excludeDefaults>
         <plugins>
@@ -134,5 +130,4 @@
             </plugin>
         </plugins>
     </reporting>
-
 </project>
