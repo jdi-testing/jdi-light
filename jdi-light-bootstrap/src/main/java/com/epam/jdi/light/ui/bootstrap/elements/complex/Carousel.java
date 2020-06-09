@@ -4,7 +4,9 @@ import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.complex.DataList;
+import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
@@ -15,10 +17,12 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.UIUtils.*;
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.asEntity;
+import static com.epam.jdi.light.common.UIUtils.initT;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 
 /**
  * To see an example of Carousel web element please visit https://getbootstrap.com/docs/4.3/components/carousel/#example

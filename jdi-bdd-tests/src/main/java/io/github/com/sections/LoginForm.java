@@ -5,7 +5,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.entities.User;
 
-import static io.github.com.pages.Header.*;
+import static io.github.com.pages.Header.userIcon;
 
 public class LoginForm extends Form<User> {
 	TextField name, password;

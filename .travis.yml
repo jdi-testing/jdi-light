@@ -19,6 +19,7 @@ env:
     - NOPO_TESTS="jdi-bdd-no-po-tests"
     - NOPO_TESTS_PROPERTY="test-examples/jdi-bdd-no-po-tests"
     - BDD_TESTS="jdi-bdd-tests"
+    - BOOTSTRAP_TESTS="jdi-light-bootstrap-tests"
     - HTML_TESTS="jdi-light-html-tests"
     - ANGULAR_TESTS="jdi-light-angular-tests"
     - EXAMPLES="jdi-light-examples"
@@ -55,13 +56,12 @@ jobs:
         - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
-    #TODO: bootstrap tests exceeded the maximum time limit for jobs (>50min)
-    #  - stage: test
-    #    name: Run tests - bootstrap
-    #    script:
-    #    - mvn -ntp install -DskipTests
-    #    - echo "arguments=$CHROME_ARGS" > $CHROME_PROPERTIES
-    #    - mvn verify $WITH_PARAMS -pl $BOOTSTRAP_TESTS
+    - stage: test
+      name: Run tests - bootstrap
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
     # TODO: uncomment after angular module is added
     #    - stage: test
@@ -85,13 +85,13 @@ jobs:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./$EXAMPLES_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
         - mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
-    #
-    #    - stage: test
-    #      name: Run tests - performance
-    #      script:
-    #        - mvn -ntp install -DskipTests
-    #        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
-    #        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+
+    - stage: test
+      name: Run tests - performance
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
 
     - stage: reports
       name: Deploy allure reports to netlify

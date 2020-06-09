@@ -8,14 +8,17 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.PrintUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.PerformancePage.*;
-import static io.github.epam.html.tests.elements.BaseValidations.*;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static java.util.Arrays.*;
-import static org.testng.Assert.*;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static io.github.com.StaticSite.performancePage;
+import static io.github.com.pages.PerformancePage.usersTableSetup;
+import static io.github.com.pages.PerformancePage.usersTableUI;
+import static io.github.epam.html.tests.elements.BaseValidations.notMoreThan;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.testng.Assert.assertEquals;
 
 public class DataTableTests implements TestsInit {
     @BeforeMethod
@@ -40,11 +43,10 @@ public class DataTableTests implements TestsInit {
         assertEquals(table.header(), asList("Name", "Phone", "Email", "City"));
         notMoreThan(1500, table::preview);
         String value = table.preview();
-        assertEquals(value.substring(0,194),
-        "Name Phone Email City " +
+        assertThat(value, containsString("Name Phone Email City " +
             "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe " +
             "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas " +
-            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv");
+            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv"));
     }
 
     private void getValidation(Table table) {
@@ -98,11 +100,10 @@ public class DataTableTests implements TestsInit {
                 "076 1971 1687;(011307) 16843;0");
 
         String value = notMoreThan(2000, table::getValue);
-        assertEquals(value.substring(0,228),
-        "||X||Name|Phone|Email|City||" + LINE_BREAK +
+        assertThat(value, containsString("||X||Name|Phone|Email|City||" + LINE_BREAK +
             "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +
             "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||" + LINE_BREAK +
-            "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||");
+            "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||"));
     }
 
 }

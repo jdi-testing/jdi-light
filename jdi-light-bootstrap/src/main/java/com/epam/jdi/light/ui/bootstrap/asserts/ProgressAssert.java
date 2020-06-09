@@ -8,8 +8,8 @@ import org.hamcrest.Matchers;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static org.hamcrest.Matchers.hasItems;
 
 /**
  * Created by Aleksandr Khmelinin on 2.10.2019

@@ -2,10 +2,12 @@ package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.base.HasRefresh;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

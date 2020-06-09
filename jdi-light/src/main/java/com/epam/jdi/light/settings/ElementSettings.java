@@ -1,14 +1,19 @@
 package com.epam.jdi.light.settings;
 
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.SetTextTypes;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.common.UseSmartSearch;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.tools.func.*;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
-import static com.epam.jdi.light.common.NameToLocator.*;
-import static com.epam.jdi.light.common.UseSmartSearch.*;
+import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
+import static com.epam.jdi.light.common.UseSmartSearch.UI_AND_ELEMENTS;
 
 public class ElementSettings {
     public JAction1<UIElement> beforeSearch;

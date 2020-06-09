@@ -6,8 +6,8 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Ekaterina Vasilkova on 22.08.2019

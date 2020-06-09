@@ -2,8 +2,8 @@ package com.epam.jdi.light.ui.html.elements.complex.vue;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.PrintUtils.*;
-import static java.lang.String.*;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static java.lang.String.format;
 
 public class ChartData {
     public List<String> labels;

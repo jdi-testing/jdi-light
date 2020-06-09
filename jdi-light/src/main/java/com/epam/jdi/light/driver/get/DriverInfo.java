@@ -3,25 +3,31 @@ package com.epam.jdi.light.driver.get;
 import com.epam.jdi.tools.DataClass;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.get.DownloadDriverManager.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.DriverVersion.*;
-import static com.epam.jdi.light.driver.get.OsTypes.*;
-import static com.epam.jdi.light.driver.get.Platform.*;
-import static com.epam.jdi.light.driver.get.RemoteDriver.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static java.lang.Integer.*;
-import static java.lang.String.*;
-import static java.lang.System.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
+import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
+import static com.epam.jdi.light.driver.get.DriverVersion.LATEST;
+import static com.epam.jdi.light.driver.get.OsTypes.WIN;
+import static com.epam.jdi.light.driver.get.Platform.X32;
+import static com.epam.jdi.light.driver.get.Platform.X64;
+import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.lang.Integer.parseInt;
+import static java.lang.String.format;
+import static java.lang.System.getProperty;
+import static java.lang.System.setProperty;
 import static org.apache.commons.lang3.StringUtils.*;
 
 /**
