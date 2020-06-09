@@ -132,11 +132,17 @@ function deployAllureResults() {
     JDK_VERSIONS="openjdk8 openjdk9 openjdk10 openjdk11 openjdk12 openjdk13"
     for JDK in $JDK_VERSIONS;
     do
-      generateAllureReports ${JDK}
-      echo "LOG1"
-      url="$(deployToNetlify "allure-report-${JDK}")"
-      echo "LOG2"
-      sendComment "$(aboutNetlify ${url} ${JDK})"
+      find -name "*$JDK*" -type d
+      if [[ $(find -name "*$JDK*" -type d) ]]; then
+        echo $JDK related directories found
+        generateAllureReports ${JDK}
+        echo "LOG1"
+        url="$(deployToNetlify "allure-report-${JDK}")"
+        echo "LOG2"
+        sendComment "$(aboutNetlify ${url} ${JDK})"
+      else
+        echo "Skipping generate and deploy phase as no reports were found for $JDK"
+      fi
     done
 }
 
