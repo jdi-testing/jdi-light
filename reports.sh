@@ -6,14 +6,14 @@
 # deployAllureResults - to deploy allure reports
 
 ####################             VARS
-BRANCH_ERROR_MESSAGE="IF YOU DON'T SEE THE PULL REQUEST BUILD, THEN BRANCH CANNOT BE MERGED, YOU SHOULD FIX IT FIRST"
+BRANCH_ERROR_MESSAGE="THIS BUILD HAS NO RELATED PULL REQUEST, ALLURE REPORTS ARE NOT SAVED"
 URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
 FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
 FASTER_FILE_SHARING="true"
 DESTINATION_PULL_REQUEST=$TRAVIS_PULL_REQUEST
 
 ####################             PULL REQUEST TO LEAVE COMMENTS
-if [[ $TRAVIS_BRANCH == "master" && ($TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api") ]];
+if [[ $TRAVIS_BRANCH == "cronjob-debug" && ($TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api") ]];
 then
   DESTINATION_PULL_REQUEST=${CRONJOB_COMMENTS_PR}
   echo "This build was triggered against cronjob-debug branch by cronjob or api"
@@ -133,12 +133,12 @@ function deployAllureResults() {
     for JDK in $JDK_VERSIONS;
     do
       if [[ $(find -name "*$JDK*" -type d) ]]; then
-        echo Generating and publishing allure results for $JDK
-        generateAllureReports ${JDK}
+        echo "Generating and publishing allure results for "$JDK""
+        generateAllureReports "${JDK}"
         echo "LOG1"
         url="$(deployToNetlify "allure-report-${JDK}")"
         echo "LOG2"
-        sendComment "$(aboutNetlify ${url} ${JDK})"
+        sendComment "$(aboutNetlify "${url}" "${JDK}")"
       else
         echo "No allure reports found for $JDK"
       fi
@@ -195,8 +195,8 @@ function generateAllureReports() {
     fi
     echo "Generating allure-report-$1 based on: ${reportDirList}"
     allure generate --clean ${reportDirList}
-    mv allure-report allure-report-$1
-    echo Report successfully renamed to allure-report-$1
+    mv "allure-report" "allure-report-$1"
+    echo "Report successfully renamed to allure-report-$1"
 
 }
 
