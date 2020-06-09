@@ -276,6 +276,8 @@ after_script:
   - ALLURE_RESULTS_JDK=$ALLURE_RESULTS-$TRAVIS_JDK_VERSION
   - mv $ALLURE_RESULTS $ALLURE_RESULTS_JDK
   - echo "$ALLURE_RESULTS dir has been renamed to $ALLURE_RESULTS_JDK"
+  - echo "JDK_VERSION=$TRAVIS_JDK_VERSION" > "$ALLURE_RESULTS_JDK/environment.properties"
+  - echo "BRANCH=$TRAVIS_BRANCH" >> "$ALLURE_RESULTS_JDK/environment.properties"
   # further actions
   - source reports.sh
   - grubAllureResults
