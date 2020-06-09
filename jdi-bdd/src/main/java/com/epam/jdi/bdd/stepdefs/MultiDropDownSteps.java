@@ -6,10 +6,11 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.bdd.BDDUtils.*;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.bdd.BDDUtils.selectAssert;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.tools.LinqUtils.toIntArray;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 import static org.hamcrest.core.IsIterableContaining.hasItems;
 

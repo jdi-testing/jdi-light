@@ -5,11 +5,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.*;
-import static io.github.com.StaticSite.*;
+import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
-import static io.github.epam.html.tests.site.steps.States.*;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Roman Iovlev on 19.08.2019

@@ -2,8 +2,9 @@ package io.github.epam.test.data;
 
 import org.testng.annotations.DataProvider;
 
-import static pseudo.site.PseudoSite.*;
-import static pseudo.site.pages.Header.*;
+import static pseudo.site.PseudoSite.pseudoHeader;
+import static pseudo.site.pages.Header.pseudoForm;
+import static pseudo.site.pages.Header.pseudoFormSmart;
 
 public class FormDataProvider {
     @DataProvider

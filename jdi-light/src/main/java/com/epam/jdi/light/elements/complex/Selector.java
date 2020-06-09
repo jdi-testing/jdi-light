@@ -15,13 +15,15 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.tools.EnumUtils.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static java.util.Arrays.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.tools.EnumUtils.getEnumValues;
+import static com.epam.jdi.tools.LinqUtils.ifSelect;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static java.util.Arrays.asList;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

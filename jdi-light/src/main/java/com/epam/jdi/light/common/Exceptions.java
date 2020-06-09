@@ -2,10 +2,11 @@ package com.epam.jdi.light.common;
 
 import java.lang.reflect.InvocationTargetException;
 
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman_Iovlev on 3/19/2018.

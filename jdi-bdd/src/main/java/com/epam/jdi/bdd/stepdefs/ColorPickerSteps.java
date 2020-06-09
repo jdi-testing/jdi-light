@@ -1,9 +1,11 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.ColorPicker;
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
-import static com.epam.jdi.light.mobile.settings.MobileSettings.*;
+import static com.epam.jdi.light.mobile.settings.MobileSettings.init;
 
 /**
  * Created by Roman Iovlev on 20.03.2019

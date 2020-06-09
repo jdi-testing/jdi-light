@@ -19,6 +19,7 @@ then
   echo "This build was triggered against cronjob-debug branch by cronjob or api"
   echo "Comments are going to be redirected to PR: ${CRONJOB_COMMENTS_PR}"
 fi
+
 ####################             UTILS
 function getCommentsLastPageIndex(){
     url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${DESTINATION_PULL_REQUEST}/comments"

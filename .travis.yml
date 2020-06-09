@@ -157,7 +157,7 @@ jobs:
         - <<: *testsbootstrap
           name: Run tests - bootstrap - JDK13
           jdk: openjdk13
-
+          
         - <<: *testsangular
           name: Run tests - angular - JDK8
           if: true

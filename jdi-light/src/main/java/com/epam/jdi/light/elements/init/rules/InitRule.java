@@ -6,7 +6,7 @@ import com.epam.jdi.tools.func.JFunc1;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.any;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

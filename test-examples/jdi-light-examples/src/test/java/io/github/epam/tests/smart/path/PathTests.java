@@ -1,22 +1,25 @@
 package io.github.epam.tests.smart.path;
 
 import io.github.epam.StaticTestsInit;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static io.github.com.StaticSite.*;
-import static io.github.epam.enums.Navigation.*;
-import static io.github.epam.tests.recommended.steps.Preconditions.*;
-import static java.util.Collections.*;
-import static org.apache.commons.lang3.ObjectUtils.*;
-import static org.testng.Assert.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverByUtils.searchBy;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static io.github.com.StaticSite.contactFormPage;
+import static io.github.com.StaticSite.navigationL;
+import static io.github.epam.enums.Navigation.Service;
+import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static java.util.Collections.singletonList;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
+import static org.testng.Assert.assertEquals;
 
 public class PathTests extends StaticTestsInit {
     private List<Object> bys;

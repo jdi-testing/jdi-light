@@ -3,7 +3,9 @@ package com.epam.jdi.light.elements.init;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.complex.DataList;
+import com.epam.jdi.light.elements.complex.JList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
@@ -20,20 +22,24 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.init.InitActions.*;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.setDomain;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.WebSettings.init;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.lang.String.format;
-import static java.lang.reflect.Modifier.*;
-import static java.util.Arrays.*;
+import static java.lang.reflect.Modifier.isStatic;
+import static java.util.Arrays.asList;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

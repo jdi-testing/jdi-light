@@ -4,14 +4,15 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
 import static io.github.epam.EpamGithubSite.*;
-import static io.github.epam.enums.ColorsList.*;
-import static io.github.epam.enums.Metals.*;
+import static io.github.epam.enums.ColorsList.Green;
+import static io.github.epam.enums.Metals.Gold;
 import static io.github.epam.enums.Navigation.*;
-import static io.github.epam.enums.NavigationNums.*;
-import static io.github.epam.tests.epam.steps.Preconditions.*;
-import static org.hamcrest.Matchers.*;
+import static io.github.epam.enums.NavigationNums.nContactForm;
+import static io.github.epam.enums.NavigationNums.nHome;
+import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.containsString;
 
 public class ComplexElementsTests extends TestsInit {
 

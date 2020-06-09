@@ -12,10 +12,10 @@ import org.hamcrest.Matchers;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.EnumUtils.*;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.LinqUtils.toStringArray;
 import static org.hamcrest.Matchers.*;
 
 /**

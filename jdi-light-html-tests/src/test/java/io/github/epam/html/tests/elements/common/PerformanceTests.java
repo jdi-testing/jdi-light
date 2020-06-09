@@ -5,15 +5,17 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.elements.common.Alerts.*;
-import static io.github.com.StaticSite.*;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
-import static io.github.epam.html.tests.elements.BaseValidations.*;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static io.github.epam.html.tests.elements.BaseValidations.durationImmediately;
+import static io.github.epam.html.tests.elements.BaseValidations.durationMoreThan;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.fail;
 
 /**
  * Created by Roman Iovlev on 19.08.2019

@@ -12,11 +12,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.UIUtils.*;
-import static com.epam.jdi.tools.EnumUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.UIUtils.asEntity;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

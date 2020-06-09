@@ -3,9 +3,9 @@ package com.epam.jdi.bdd.stepdefs;
 import com.epam.jdi.light.ui.html.elements.common.FileInput;
 import cucumber.api.java.en.When;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.PathUtils.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.tools.PathUtils.mergePath;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

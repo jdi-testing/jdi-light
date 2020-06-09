@@ -3,7 +3,10 @@ package com.epam.jdi.light.elements.composite;
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.*;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
+import com.epam.jdi.light.elements.interfaces.base.IClickable;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction4;
@@ -15,16 +18,18 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.FormFilters.*;
-import static com.epam.jdi.light.common.UIUtils.*;
+import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
+import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
 
 /**

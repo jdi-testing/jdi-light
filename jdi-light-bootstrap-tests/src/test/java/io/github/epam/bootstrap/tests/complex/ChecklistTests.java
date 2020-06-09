@@ -4,13 +4,14 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.BootstrapPage.*;
-import static io.github.epam.states.States.*;
-import static java.util.Arrays.*;
-import static org.hamcrest.MatcherAssert.*;
+import static io.github.com.StaticSite.bsPage;
+import static io.github.com.pages.BootstrapPage.checkNumbers;
+import static io.github.epam.states.States.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 public class ChecklistTests implements TestsInit {
 
