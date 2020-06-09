@@ -133,7 +133,7 @@ function deployAllureResults() {
     for JDK in $JDK_VERSIONS;
     do
       if [[ $(find -name "*$JDK*" -type d) ]]; then
-        echo "Generating and publishing allure results for "$JDK""
+        echo "Generating and publishing allure results for ${JDK}"
         generateAllureReports "${JDK}"
         echo "LOG1"
         url="$(deployToNetlify "allure-report-${JDK}")"
