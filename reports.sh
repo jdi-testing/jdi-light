@@ -6,15 +6,25 @@
 # deployAllureResults - to deploy allure reports
 
 ####################             VARS
-BRANCH_ERROR_MESSAGE="IF YOU DON'T SEE THE PULL REQUEST BUILD, THEN BRANCH CANNOT BE MERGED, YOU SHOULD FIX IT FIRST"
+BRANCH_ERROR_MESSAGE="THIS BUILD HAS NO RELATED PULL REQUEST, ALLURE REPORTS ARE NOT SAVED"
 URL_NOT_FOUND_ERROR_MESSAGE="NONE OF THE ALLURE REPORTS WERE FOUND"
 TEST_FAILED_ERROR_MESSAGE="SOME OF THE TESTS IS NOT PASSED. PLEASE CHECK ALLURE REPORT, FOR GETTING MORE DETAILS"
 FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
 FASTER_FILE_SHARING="true"
+DESTINATION_PULL_REQUEST=$TRAVIS_PULL_REQUEST
+JDK_VERSIONS="openjdk8 openjdk9 openjdk10 openjdk11 openjdk12 openjdk13"
+
+####################             PULL REQUEST TO LEAVE COMMENTS
+if [[ $TRAVIS_BRANCH == "master" && ($TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api") ]];
+then
+  DESTINATION_PULL_REQUEST=${CRONJOB_COMMENTS_PR}
+  echo "This build was triggered against cronjob-debug branch by cronjob or api"
+  echo "Comments are going to be redirected to PR: ${CRONJOB_COMMENTS_PR}"
+fi
 
 ####################             UTILS
 function getCommentsLastPageIndex(){
-    url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
+    url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${DESTINATION_PULL_REQUEST}/comments"
     index="$(curl -I -H "Authorization: token ${GIT_COMMENT_USER}"\
          -X GET  "${url}" | grep Link: | awk '{print $4}' | egrep -o 'page=[0-9]{1,10}' | awk -F"=" '{print $2}')"
     reInteger='[0-9]+'
@@ -31,7 +41,7 @@ function collectRelevantComments(){
     fileName="${FILENAME_WITH_COMMENTS_FROM_GITHUB}"
     for (( pageIndex=1; pageIndex<=lastPageIndex; pageIndex++ ))
     do
-      url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments?page=${pageIndex}"
+      url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${DESTINATION_PULL_REQUEST}/comments?page=${pageIndex}"
     	curl -H "Authorization: token ${GIT_COMMENT_USER}"\
     	     -X GET  "${url}"\
     	     >> ${fileName}
@@ -41,7 +51,7 @@ function collectRelevantComments(){
 
 function sendComment() {
     body="$1"
-    url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments";
+    url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${DESTINATION_PULL_REQUEST}/comments";
     echo Body: ${body}
     echo URL: ${url}
     curl -H "Authorization: token ${GIT_COMMENT_USER}" \
@@ -53,7 +63,7 @@ function sendComment() {
 
 function archive() {
     directory="$1"
-    archiveName="$(echo "${directory}"| awk -F"/" '{print $1}')".tar.gz
+    archiveName="$(echo "${directory}"| grep -o "jdi-[a-z-]*")-${TRAVIS_JDK_VERSION}".tar.gz
     tar -czf "${archiveName}" "${directory}" > /dev/null
     echo "${archiveName}" #return
 }
@@ -70,11 +80,12 @@ function aboutTransfer() {
 
 function aboutNetlify() {
     url="$1"
-    echo "[${TRAVIS_BUILD_NUMBER}] - Allure report on Netlify: ${url}" #return
+    jdk="$2"
+    echo "[${TRAVIS_BUILD_NUMBER}] - ${jdk} - Allure report on Netlify: ${url}" #return
 }
 
 function checkBranchIsOk() {
-    if [[ "x${TRAVIS_PULL_REQUEST}" == "xfalse" ]] ; then
+    if [[ "x${DESTINATION_PULL_REQUEST}" == "xfalse" ]] ; then
         echo "${BRANCH_ERROR_MESSAGE}"
         sleep 3
         exit 0
@@ -89,7 +100,7 @@ function grubAllureResults() {
     checkBranchIsOk #there is an exit inside
 
     if [[ "x${TRAVIS_BUILD_STAGE_NAME}" == "xtest" ]] ; then #don't remove x, it's useful
-        for result in $(find -type d -regex ".*/jdi.*/target/allure-results")
+        for result in $(find -type d -regex ".*/jdi.*/target/allure-results-${TRAVIS_JDK_VERSION}")
         do
             echo RESULT: ${result}
             archiveFile="$(archive "${result}")"
@@ -115,14 +126,33 @@ function uploadFile() {
 }
 
 function checkThatAllTestsPassed() {
-    content=$(<.*/allure-report/widgets/summary.json)     #file system request
-    failed="$(echo "${content}"| jq '.statistic.failed')"
-    broken="$(echo "${content}"| jq '.statistic.broken')"
-    echo "${content}"
-    if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
-        echo "${TEST_FAILED_ERROR_MESSAGE}"
-        sleep 5
-        exit 1
+    FAILED_OR_BROKEN_TESTS=false
+
+    echo "Brief passed/failed/broken/skipped summary by JDK:"
+    for JDK in $JDK_VERSIONS;
+    do
+      if [[ -d "allure-report-${JDK}" ]]; then                     #if directory exists
+        content=$(<"allure-report-${JDK}/widgets/summary.json")     #file system request
+        passed="$(echo "${content}"| jq '.statistic.passed')"
+        failed="$(echo "${content}"| jq '.statistic.failed')"
+        skipped="$(echo "${content}"| jq '.statistic.skipped')"
+        broken="$(echo "${content}"| jq '.statistic.broken')"
+        echo "${JDK}:"
+        echo "  Passed:  ${passed}"
+        echo "  Failed:  ${failed}"
+        echo "  Broken:  ${skipped}"
+        echo "  Skipped: ${broken}"
+        if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
+          FAILED_OR_BROKEN_TESTS=true
+        fi
+      fi
+    done
+    echo "End of summary"
+
+    if [[ "$FAILED_OR_BROKEN_TESTS" = true ]]; then
+      echo "${TEST_FAILED_ERROR_MESSAGE}"
+      sleep 5
+      exit 1
     fi
 }
 
@@ -131,11 +161,21 @@ function deployAllureResults() {
     checkBranchIsOk #there is an exit inside
     downloadAllureResults
     extractAllureResults
-    generateAllureReports
-    echo "LOG1"
-    url="$(deployToNetlify "allure-report")"
-    echo "LOG2"
-    sendComment "$(aboutNetlify ${url})"
+    # Great, now we have huge amount of jsons for different JDKs distributed across directory tree
+    # Our goal now is to distribute them across multiple allure reports
+    for JDK in $JDK_VERSIONS;
+    do
+      if [[ $(find -name "*$JDK*" -type d) ]]; then
+        echo "Generating and publishing allure results for ${JDK}"
+        generateAllureReports "${JDK}"
+        echo "LOG1"
+        url="$(deployToNetlify "allure-report-${JDK}")"
+        echo "LOG2"
+        sendComment "$(aboutNetlify "${url}" "${JDK}")"
+      else
+        echo "No allure reports found for $JDK"
+      fi
+    done
     checkThatAllTestsPassed #there is an exit with exception inside
 }
 
@@ -175,7 +215,7 @@ function generateAllureReports() {
     for report in $(ls -d1 jdi*/target/ ./*/jdi*/target/)
     do
         allureDirExistence=true
-        allureDir="${report}allure-results"
+        allureDir="${report}allure-results-$1"
         if [[ -d "$allureDir" ]] ; then
             echo "Results found for ${report}"
             reportDirList="${reportDirList} ${allureDir}"
@@ -187,14 +227,17 @@ function generateAllureReports() {
         echo "Failed inside generateAllureReports()"
         exitWithError
     fi
-    echo ${reportDirList}
+    echo "Generating allure-report-$1 based on: ${reportDirList}"
     allure generate --clean ${reportDirList}
+    mv "allure-report" "allure-report-$1"
+    echo "Report successfully renamed to allure-report-$1"
+
 }
 
 function deployToNetlify() {
     directory="$1"
     result="$(netlify deploy --dir "${directory}" --json)"
-    deployUrl="$(echo "${result}"r |jq '.deploy_url' |sed 's/"//g')"
+    deployUrl="$(echo "${result}"r | jq '.deploy_url' | sed 's/"//g')"
     echo "${deployUrl}"
 }
 
