@@ -12,6 +12,7 @@ TEST_FAILED_ERROR_MESSAGE="SOME OF THE TESTS IS NOT PASSED. PLEASE CHECK ALLURE 
 FILENAME_WITH_COMMENTS_FROM_GITHUB="comments"
 FASTER_FILE_SHARING="true"
 DESTINATION_PULL_REQUEST=$TRAVIS_PULL_REQUEST
+JDK_VERSIONS="openjdk8 openjdk9 openjdk10 openjdk11 openjdk12 openjdk13"
 
 ####################             PULL REQUEST TO LEAVE COMMENTS
 if [[ $TRAVIS_BRANCH == "master" && ($TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api") ]];
@@ -125,15 +126,18 @@ function uploadFile() {
 }
 
 function checkThatAllTestsPassed() {
-    content=$(<.*/allure-report/widgets/summary.json)     #file system request
-    failed="$(echo "${content}"| jq '.statistic.failed')"
-    broken="$(echo "${content}"| jq '.statistic.broken')"
-    echo "${content}"
-    if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
+    for JDK in $JDK_VERSIONS;
+    do
+      content=$(<".*/allure-report-${JDK}/widgets/summary.json")     #file system request
+      failed="$(echo "${content}"| jq '.statistic.failed')"
+      broken="$(echo "${content}"| jq '.statistic.broken')"
+      echo "${content}"
+      if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
         echo "${TEST_FAILED_ERROR_MESSAGE}"
         sleep 5
         exit 1
-    fi
+      fi
+    done
 }
 
 ######################         PART 2: Deploy allure results as allure reports to netlify
@@ -143,7 +147,6 @@ function deployAllureResults() {
     extractAllureResults
     # Great, now we have huge amount of jsons for different JDKs distributed across directory tree
     # Our goal now is to distribute them across multiple allure reports
-    JDK_VERSIONS="openjdk8 openjdk9 openjdk10 openjdk11 openjdk12 openjdk13"
     for JDK in $JDK_VERSIONS;
     do
       if [[ $(find -name "*$JDK*" -type d) ]]; then
@@ -157,7 +160,6 @@ function deployAllureResults() {
         echo "No allure reports found for $JDK"
       fi
     done
-    #TODO: Debug this for multi-jdk version
     checkThatAllTestsPassed #there is an exit with exception inside
 }
 
