@@ -126,9 +126,13 @@ function uploadFile() {
 }
 
 function checkThatAllTestsPassed() {
+    echo "checkThatAllTestsPassed()"
+    ls
+    ls allure-report-openjdk8
+    ls allure-report-openjdk8/widgets
     for JDK in $JDK_VERSIONS;
     do
-      content=$(<".*/allure-report-${JDK}/widgets/summary.json")     #file system request
+      content=$(<"allure-report-${JDK}/widgets/summary.json")     #file system request
       failed="$(echo "${content}"| jq '.statistic.failed')"
       broken="$(echo "${content}"| jq '.statistic.broken')"
       echo "${content}"
