@@ -130,7 +130,7 @@ function checkThatAllTestsPassed() {
 
     for JDK in $JDK_VERSIONS;
     do
-      if [[ --d "allure-report-${JDK}" ]]; then                     #if directory exists
+      if [[ -d "allure-report-${JDK}" ]]; then                     #if directory exists
         content=$(<"allure-report-${JDK}/widgets/summary.json")     #file system request
         passed="$(echo "${content}"| jq '.statistic.passed')"
         failed="$(echo "${content}"| jq '.statistic.failed')"
