@@ -126,22 +126,32 @@ function uploadFile() {
 }
 
 function checkThatAllTestsPassed() {
-    echo "checkThatAllTestsPassed()"
-    ls
-    ls allure-report-openjdk8
-    ls allure-report-openjdk8/widgets
+    FAILED_OR_BROKEN_TESTS=false
+
     for JDK in $JDK_VERSIONS;
     do
-      content=$(<"allure-report-${JDK}/widgets/summary.json")     #file system request
-      failed="$(echo "${content}"| jq '.statistic.failed')"
-      broken="$(echo "${content}"| jq '.statistic.broken')"
-      echo "${content}"
-      if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
-        echo "${TEST_FAILED_ERROR_MESSAGE}"
-        sleep 5
-        exit 1
+      if [[ --d "allure-report-${JDK}" ]]; then                     #if directory exists
+        content=$(<"allure-report-${JDK}/widgets/summary.json")     #file system request
+        passed="$(echo "${content}"| jq '.statistic.passed')"
+        failed="$(echo "${content}"| jq '.statistic.failed')"
+        skipped="$(echo "${content}"| jq '.statistic.skipped')"
+        broken="$(echo "${content}"| jq '.statistic.broken')"
+        echo "${JDK}:"
+        echo "  Passed:  ${passed}"
+        echo "  Failed:  ${failed}"
+        echo "  Broken:  ${skipped}"
+        echo "  Skipped: ${broken}"
+        if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
+          FAILED_OR_BROKEN_TESTS=true
+        fi
       fi
     done
+
+    if [[ "$FAILED_OR_BROKEN_TESTS" = true ]]; then
+      echo "${TEST_FAILED_ERROR_MESSAGE}"
+      sleep 5
+      exit 1
+    fi
 }
 
 ######################         PART 2: Deploy allure results as allure reports to netlify
