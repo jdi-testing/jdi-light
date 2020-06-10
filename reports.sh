@@ -128,6 +128,7 @@ function uploadFile() {
 function checkThatAllTestsPassed() {
     FAILED_OR_BROKEN_TESTS=false
 
+    echo "Brief passed/failed/broken/skipped summary by JDK:"
     for JDK in $JDK_VERSIONS;
     do
       if [[ -d "allure-report-${JDK}" ]]; then                     #if directory exists
@@ -146,6 +147,7 @@ function checkThatAllTestsPassed() {
         fi
       fi
     done
+    echo "End of summary"
 
     if [[ "$FAILED_OR_BROKEN_TESTS" = true ]]; then
       echo "${TEST_FAILED_ERROR_MESSAGE}"
