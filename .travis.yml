@@ -125,6 +125,7 @@ jobs:
       jdk: openjdk9
     - <<: *testsbdd
       name: Run tests - bdd - JDK10
+      if: true
       jdk: openjdk10
     - <<: *testsbdd
       name: Run tests - bdd - JDK11
@@ -145,6 +146,7 @@ jobs:
       jdk: openjdk9
     - <<: *testsbootstrap
       name: Run tests - bootstrap - JDK10
+      if: true
       jdk: openjdk10
     - <<: *testsbootstrap
       name: Run tests - bootstrap - JDK11
@@ -165,6 +167,7 @@ jobs:
 #      jdk: openjdk9
 #    - <<: *testsangular
 #      name: Run tests - angular - JDK10
+#      if: true
 #      jdk: openjdk10
 #    - <<: *testsangular
 #      name: Run tests - angular - JDK11
@@ -185,6 +188,7 @@ jobs:
 #      jdk: openjdk9
 #    - <<: *testsangularunit
 #      name: Run unit tests - angular - JDK10
+#      if: true
 #      jdk: openjdk10
 #    - <<: *testsangularunit
 #      name: Run unit tests - angular - JDK11
@@ -205,6 +209,7 @@ jobs:
       jdk: openjdk9
     - <<: *testshtml
       name: Run tests - html - JDK10
+      if: true
       jdk: openjdk10
     - <<: *testshtml
       name: Run tests - html - JDK11
@@ -225,6 +230,7 @@ jobs:
       jdk: openjdk9
     - <<: *testsexamples
       name: Run tests - examples - JDK10
+      if: true
       jdk: openjdk10
     - <<: *testsexamples
       name: Run tests - examples - JDK11
@@ -245,6 +251,7 @@ jobs:
       jdk: openjdk9
     - <<: *testsperformance
       name: Run tests - performance - JDK10
+      if: true
       jdk: openjdk10
     - <<: *testsperformance
       name: Run tests - performance - JDK11
