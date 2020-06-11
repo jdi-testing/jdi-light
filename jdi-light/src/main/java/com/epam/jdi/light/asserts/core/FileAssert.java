@@ -7,13 +7,13 @@ import org.hamcrest.Matcher;
 
 import java.io.File;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.PathUtils.*;
-import static java.util.Objects.*;
-import static org.apache.commons.io.FileUtils.*;
-import static org.hamcrest.MatcherAssert.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static java.util.Objects.requireNonNull;
+import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 /**

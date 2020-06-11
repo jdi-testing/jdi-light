@@ -3,12 +3,13 @@ package org.mytests.tests.example;
 import org.mytests.tests.TestsInit;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.complex.table.Row.*;
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.hamcrest.Matchers.*;
-import static org.mytests.uiobjects.example.entities.Defaults.*;
+import static com.epam.jdi.light.elements.complex.table.Row.inRow;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.hamcrest.Matchers.containsString;
+import static org.mytests.uiobjects.example.entities.Defaults.DEFAULT_USER;
+import static org.mytests.uiobjects.example.entities.Defaults.SPIDER_MAN;
 import static org.mytests.uiobjects.example.site.SiteJdi.*;
-import static org.mytests.uiobjects.example.site.pages.MarvelousPage.*;
+import static org.mytests.uiobjects.example.site.pages.MarvelousPage.userTable;
 
 public class UsersTest extends TestsInit {
     @Test

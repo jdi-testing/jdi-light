@@ -3,7 +3,7 @@ package com.epam.jdi.bdd.stepdefs;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import cucumber.api.java.en.Then;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

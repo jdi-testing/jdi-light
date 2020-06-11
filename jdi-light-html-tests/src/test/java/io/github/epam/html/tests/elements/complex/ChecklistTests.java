@@ -4,14 +4,16 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.com.StaticSite.html5Page;
+import static io.github.com.pages.HtmlElementsPage.checksGroup;
+import static io.github.com.pages.HtmlElementsPage.weather;
 import static io.github.epam.html.tests.elements.complex.enums.Weather.*;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static java.util.Arrays.*;
-import static org.hamcrest.MatcherAssert.*;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 public class ChecklistTests implements TestsInit {
 

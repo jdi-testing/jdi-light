@@ -4,8 +4,8 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.Smart;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
-import static com.epam.jdi.tools.PrintUtils.*;
-import static java.util.Arrays.*;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static java.util.Arrays.asList;
 
 public class Paragraph extends Section {
     @Smart("ui") public Button paragraph, paragraph2, paragraph3;

@@ -15,7 +15,7 @@ public class SearchPage extends BaseSelPage {
 	@Css(".box") public DataList<SearchResult, Result> search;
 	@Css(".box") public DataList<SearchResult, ?> search2;
 	@Css(".box") public static List<SearchResult> search3;
-	@Css(".box") @WaitTimeout(2)
+	@Css(".box") @WaitTimeout(3)
 	public static DataList<SearchResult, ?> searchS;
 	@XPath("//*[@class='box']/h3[text()=\"%s\"]")
 	public DataList<SearchResult, ?> searchT2;

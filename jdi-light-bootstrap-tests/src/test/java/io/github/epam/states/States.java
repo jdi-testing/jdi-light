@@ -3,10 +3,10 @@ package io.github.epam.states;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
-import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static io.github.com.StaticSite.*;
-import static io.github.epam.test.data.UsersUtils.*;
+import static io.github.epam.test.data.UsersUtils.DEFAULT_USER;
 
 /**
  * Created by Roman_Iovlev on 3/1/2018.

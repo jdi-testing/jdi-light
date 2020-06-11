@@ -15,8 +15,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 
 /**
  * Created by Roman Iovlev on 03.28.2018

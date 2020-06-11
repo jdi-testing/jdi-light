@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
-import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

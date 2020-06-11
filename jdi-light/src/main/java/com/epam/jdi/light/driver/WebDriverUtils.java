@@ -6,9 +6,9 @@ import com.epam.jdi.tools.func.JAction1;
 
 import java.io.IOException;
 
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static java.lang.Runtime.*;
-import static java.lang.String.*;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.lang.Runtime.getRuntime;
+import static java.lang.String.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -21,6 +21,12 @@ public final class WebDriverUtils {
     }
 
     /**
+     * The method frees up resources, closes open browsers and stops Selenium drivers.
+     * Use that method only if you sure, that in current test suite instance of web driver would not be needed.
+     * Be careful, method close browser as process, that mean, using this method with a Selenium Grid is not possible.
+     * Use methods {@link WebDriverFactory#getDriver()} getDriver.quit()} or {@link WebDriverFactory#quit()}, instead of
+     * {@link WebDriverUtils#killAllSeleniumDrivers()} to get a chance open and close browser in one test suite.
+     *
      * @throws IOException
      */
     public static void killAllSeleniumDrivers() {

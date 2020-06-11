@@ -6,12 +6,13 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.BootstrapPage.*;
-import static io.github.epam.bootstrap.tests.BaseValidationsUtils.*;
-import static io.github.epam.states.States.*;
-import static org.hamcrest.MatcherAssert.*;
+import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
+import static io.github.com.StaticSite.bsPage;
+import static io.github.com.StaticSite.homePage;
+import static io.github.com.pages.BootstrapPage.breadcrumb;
+import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
+import static io.github.epam.states.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 /**

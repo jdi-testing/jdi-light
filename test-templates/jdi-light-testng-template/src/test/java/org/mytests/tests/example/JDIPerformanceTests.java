@@ -7,11 +7,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.complex.table.Column.*;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
-import static org.mytests.tests.states.States.*;
-import static org.mytests.uiobjects.example.TestData.*;
-import static org.mytests.uiobjects.example.site.SiteJdi.*;
+import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static org.mytests.tests.states.States.shouldBeLoggedIn;
+import static org.mytests.uiobjects.example.TestData.TABLE_SNAPSHOOT;
+import static org.mytests.uiobjects.example.site.SiteJdi.performancePage;
 import static org.mytests.uiobjects.example.site.pages.JDIPerformancePage.*;
 
 public class JDIPerformanceTests implements TestsInit {

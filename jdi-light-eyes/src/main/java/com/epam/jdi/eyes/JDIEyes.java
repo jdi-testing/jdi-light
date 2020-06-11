@@ -21,14 +21,16 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.applitools.eyes.selenium.fluent.Target.*;
-import static com.epam.jdi.light.actions.ActionHelper.*;
-import static com.epam.jdi.light.actions.ActionOverride.*;
-import static com.epam.jdi.light.common.VisualCheckAction.*;
-import static com.epam.jdi.light.common.VisualCheckPage.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static java.lang.String.*;
+import static com.applitools.eyes.selenium.fluent.Target.region;
+import static com.epam.jdi.light.actions.ActionHelper.getBeforeLogString;
+import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
+import static com.epam.jdi.light.actions.ActionOverride.overrideAction;
+import static com.epam.jdi.light.common.VisualCheckAction.IS_DISPLAYED;
+import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
+import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static java.lang.String.format;
 
 public class JDIEyes {
     public static EyesConfig EYES_CONFIG = new EyesConfig();

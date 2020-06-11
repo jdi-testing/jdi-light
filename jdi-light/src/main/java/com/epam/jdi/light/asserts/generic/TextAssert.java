@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

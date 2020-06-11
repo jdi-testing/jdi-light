@@ -9,10 +9,10 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.TextTypes.VALUE;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.tools.LinqUtils.ifSelect;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
