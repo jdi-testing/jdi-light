@@ -29,7 +29,6 @@ env:
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
     - CHROME_ARGS="--headless"
     - PATH="$JAVA_HOME/bin:$PATH"
-    - CRONJOB_COMMENTS_PR="2073" #PR to store cronjob comments
 
 stages:
   - prepare
