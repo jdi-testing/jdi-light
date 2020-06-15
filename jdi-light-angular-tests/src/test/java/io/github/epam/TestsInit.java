@@ -1,6 +1,7 @@
 package io.github.epam;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.elements.composite.WebPage.openSite;
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
@@ -18,8 +19,7 @@ public class TestsInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         killAllSeleniumDrivers();
-        initSite(StaticSite.class);
-        openUrl(DRIVER.domain);
+        openSite(StaticSite.class);
         logger.toLog("Run Tests");
     }
 
