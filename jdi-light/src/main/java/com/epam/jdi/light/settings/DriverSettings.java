@@ -18,6 +18,7 @@ import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
 public class DriverSettings {
+    public String type = "default"; //local/remote/default
     public String name = CHROME.name;
     public String version = LATEST.value;
     public OsTypes os;

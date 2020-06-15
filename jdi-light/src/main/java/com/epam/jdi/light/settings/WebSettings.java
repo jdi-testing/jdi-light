@@ -151,6 +151,7 @@ public class WebSettings {
             if (DRIVER.name.equals(DEFAULT_DRIVER))
                 fillAction(p -> DRIVER.name = p, "driver");
             fillAction(p -> DRIVER.version = p, "driver.version");
+            fillAction(p -> DRIVER.type = p, "driver.type");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
             fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
             fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
