@@ -13,11 +13,12 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static io.github.com.pages.UIElementContactFormPage.*;
-import static io.github.epam.EpamGithubSite.*;
-import static io.github.epam.tests.epam.steps.Preconditions.*;
+import static io.github.epam.EpamGithubSite.contactFormPage;
+import static io.github.epam.EpamGithubSite.metalAndColorsPage;
+import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.testng.Assert.*;
 
 public class UIElementTests extends TestsInit {

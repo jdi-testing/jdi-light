@@ -8,7 +8,7 @@ import org.openqa.selenium.logging.LogEntry;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.logger.LogLevels.INFO;
 
 public class LogSettings {
     public LogLevels logLevel = INFO;

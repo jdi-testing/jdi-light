@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

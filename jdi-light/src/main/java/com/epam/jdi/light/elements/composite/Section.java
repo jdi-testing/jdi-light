@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 
-import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 
 /**
  * Created by Roman Iovlev on 29.03.2018

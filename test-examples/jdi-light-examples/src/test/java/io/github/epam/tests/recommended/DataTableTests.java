@@ -7,14 +7,16 @@ import io.github.epam.entities.UserInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.Alerts.*;
-import static io.github.com.StaticSite.*;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.PerformancePage.*;
-import static io.github.epam.test.data.TableData.*;
-import static io.github.epam.tests.recommended.steps.Preconditions.*;
-import static java.util.Arrays.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static io.github.epam.test.data.TableData.GRADY_BROCK;
+import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
 
 public class DataTableTests extends StaticTestsInit {
     @BeforeMethod
@@ -40,11 +42,10 @@ public class DataTableTests extends StaticTestsInit {
         assertEquals(table.count(), 400);
         assertEquals(table.header(), asList("Name", "Phone", "Email", "City"));
         String value = table.preview();
-        assertEquals(value.substring(0,194),
-        "Name Phone Email City " +
+        assertThat(value, containsString("Name Phone Email City " +
             "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe " +
             "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas " +
-            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv");
+            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv"));
     }
     @Test
     public void filterDataTest() {

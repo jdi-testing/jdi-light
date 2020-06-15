@@ -1,14 +1,16 @@
 package io.github.epam.html.tests.issues.issue69;
 
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static io.github.epam.html.tests.issues.issue69.IssuePage69.*;
-import static io.github.epam.html.tests.issues.issue69.JDISite69.*;
-import static org.testng.Assert.*;
+import static io.github.epam.html.tests.issues.issue69.JDISite69.issuePage69;
+import static org.testng.Assert.assertEquals;
 
 public class IssueTest69 {
     static boolean first = true;

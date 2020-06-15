@@ -6,16 +6,17 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.FormFilters.*;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static io.github.com.StaticSite.*;
+import static com.epam.jdi.light.common.FormFilters.ALL;
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
+import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
+import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.entities.Users.*;
-import static io.github.com.pages.ContactFormPage.*;
-import static io.github.com.pages.LogSidebar.*;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static io.github.com.pages.ContactFormPage.main;
+import static io.github.com.pages.LogSidebar.lastLogEntry;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.containsString;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class FormContactsTests implements TestsInit {
     @BeforeMethod

@@ -3,7 +3,7 @@ package com.epam.jdi.light.asserts.generic;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matcher;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

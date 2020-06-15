@@ -1,7 +1,8 @@
 package com.epam.jdi.light.settings;
 
-import static com.epam.jdi.light.settings.Strategies.*;
-import static com.epam.jdi.tools.PathUtils.*;
+import static com.epam.jdi.light.settings.Strategies.JDI;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PathUtils.path;
 
 public class CommonSettings {
     public Strategies strategy = JDI;

@@ -2,7 +2,9 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.complex.Selector;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.annotations.*;
 import com.epam.jdi.light.ui.html.elements.enums.MenuBehaviour;
 import com.epam.jdi.tools.func.JAction1;
@@ -10,17 +12,18 @@ import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static java.lang.String.*;
-import static java.util.Arrays.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 02.05.2020

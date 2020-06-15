@@ -7,16 +7,19 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static com.epam.jdi.light.asserts.core.FileAssert.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.PathUtils.*;
-import static io.github.com.StaticSite.*;
+import static com.epam.jdi.light.asserts.core.FileAssert.assertThatFile;
+import static com.epam.jdi.light.asserts.core.FileAssert.cleanupDownloads;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
-import static io.github.epam.html.tests.elements.BaseValidations.*;
-import static io.github.epam.html.tests.site.steps.States.*;
-import static org.apache.commons.io.FileUtils.*;
+import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
+import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
+import static org.apache.commons.io.FileUtils.writeStringToFile;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
