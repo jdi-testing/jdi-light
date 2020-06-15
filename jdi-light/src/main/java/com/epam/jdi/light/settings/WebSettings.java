@@ -44,6 +44,7 @@ import static com.epam.jdi.light.common.Property.IE_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.FF_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.OPERA_CAPABILITIES_PATH;
 import static com.epam.jdi.light.common.Property.SAFARI_CAPABILITIES_PATH;
+import static org.codehaus.plexus.util.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
