@@ -1,4 +1,4 @@
-package com.epam.jdi.light.common;
+package utils;
 
 import java.security.InvalidParameterException;
 import java.util.Properties;

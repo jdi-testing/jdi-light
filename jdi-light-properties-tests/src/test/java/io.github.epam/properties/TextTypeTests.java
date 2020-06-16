@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
-import static com.epam.jdi.light.common.Property.TEXT_TYPE_PROPERTY;
-import static com.epam.jdi.light.common.PropertyValidationUtils.LINK_TO_EXAMPLES;
-import static com.epam.jdi.light.common.PropertyValidationUtils.validateProperties;
+import static utils.Property.TEXT_TYPE_PROPERTY;
+import static utils.PropertyValidationUtils.LINK_TO_EXAMPLES;
+import static utils.PropertyValidationUtils.validateProperties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
