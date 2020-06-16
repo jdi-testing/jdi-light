@@ -275,6 +275,15 @@ after_failure:
   - echo "Build was failed"
 after_success:
   - echo "Build was successful"
+
+notifications:
+  webhooks:
+    urls:
+      - https://outlook.office.com/webhook/ac8f242a-5a99-4fab-a4d7-799de8968df5@b41b72d0-4e9f-4c26-8a69-f949f367c91d/TravisCI/116217b941a943a3a545d6290e152c78/1d65db1e-26ce-4372-9a58-9c3635f1f0bd
+    if: type = cron
+    on_success: always
+    on_failure: always
+
 after_script:
   # following 4 lines are to rename allure-results dir to allure-results-<JDK VERSION>
   - ALLURE_RESULTS=$(find -type d -regex ".*/jdi.*/target/allure-results")
