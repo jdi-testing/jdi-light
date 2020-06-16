@@ -1,8 +1,6 @@
 package io.github.epam.bootstrap.tests.common;
 
-import com.epam.jdi.light.elements.common.Keyboard;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -10,7 +8,7 @@ import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
-import static com.epam.jdi.light.elements.common.Keyboard.*;
+import static com.epam.jdi.light.elements.common.Keyboard.press;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
@@ -18,7 +16,7 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.openqa.selenium.Keys.*;
+import static org.openqa.selenium.Keys.ESCAPE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 

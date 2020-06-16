@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.common;
 
-import com.epam.jdi.light.elements.common.Keyboard;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
