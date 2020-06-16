@@ -4,6 +4,12 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
+## 1.2.16 (release 17.05.2020)
+* Add keyboard commands (press, command, commands, pasteText) to UIElement
+
+## 1.2.15 (release 08.06.2020)
+* Fix list issue with multiple same values
+
 ## 1.2.14 (release 31.05.2020)
 * Update test properties description and capabilities
 
