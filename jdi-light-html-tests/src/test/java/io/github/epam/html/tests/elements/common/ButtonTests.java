@@ -10,6 +10,7 @@ import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Keyboard.press;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.*;
@@ -76,7 +77,7 @@ public class ButtonTests implements TestsInit {
 
         rightClickButton.rightClick();
         validateAlert("Right Click");
-        Keyboard.keyPress("Escape");
+        press("Escape");
     }
 
     @Test

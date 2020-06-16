@@ -1,14 +1,12 @@
 package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.Keyboard;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.map.MapArray;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.List;
 
@@ -84,5 +82,19 @@ public interface ICoreElement extends IBaseElement {
     default void doubleClick() {
         iCore().doubleClick();
     }
-
+    default void press(Keys key) {
+        iCore().press(key);
+    }
+    default void command(String sequence) {
+        iCore().command(sequence);
+    }
+    default void commands(String... commands) {
+        iCore().commands(commands);
+    }
+    default void pasteText(String text) {
+        iCore().pasteText(text);
+    }
+    default void pasteText(String text, long timeToWaitMSec) {
+        iCore().pasteText(text, timeToWaitMSec);
+    }
 }
