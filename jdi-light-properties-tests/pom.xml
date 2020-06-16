@@ -76,7 +76,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/java/resources/general.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
