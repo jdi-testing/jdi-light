@@ -6,7 +6,7 @@
 
     <artifactId>jdi-light-angular-tests</artifactId>
     <name>Tests: JDI Angular</name>
-    <version>1.2.14</version>
+    <version>1.2.15</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
