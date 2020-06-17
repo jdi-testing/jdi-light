@@ -10,6 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
+import java.sql.Driver;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -44,15 +45,10 @@ public class DriverInfo extends DataClass<DriverInfo> {
     public JFunc1<Capabilities, WebDriver> getRemoteDriver;
 
     public boolean isLocal() {
-        switch (DRIVER.type) {
-            case "local":
-                return true;
-            case "remote":
-                return false;
-            case "default":
-            default:
-                return isEmpty(DRIVER.remoteUrl) && (isNotBlank(DRIVER.path) && isNotBlank(path.execute()) || downloadType != null);
-        }
+        //We use original logic in case driver.remoteRun is not set in test.properties file
+        return DRIVER.remoteRun != null
+                ? !DRIVER.remoteRun
+                : isEmpty(DRIVER.remoteUrl) && (isNotBlank(DRIVER.path) && isNotBlank(path.execute()) || downloadType != null);
     }
     public WebDriver getDriver() {
         logger.debug("getDriver(): " + toString());

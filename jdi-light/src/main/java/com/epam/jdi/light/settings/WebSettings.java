@@ -55,8 +55,8 @@ import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.PageLoadStrategy.EAGER;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
@@ -151,7 +151,6 @@ public class WebSettings {
             if (DRIVER.name.equals(DEFAULT_DRIVER))
                 fillAction(p -> DRIVER.name = p, "driver");
             fillAction(p -> DRIVER.version = p, "driver.version");
-            fillAction(p -> DRIVER.type = p, "driver.type");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
             fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
             fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
@@ -174,6 +173,7 @@ public class WebSettings {
             // RemoteWebDriver properties
             fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
             fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
+            fillAction(p -> DRIVER.remoteRun = parseRemoteRun(p), "driver.remote.run");
             fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
             logger.setLogLevel(LOGS.logLevel);
             fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
@@ -202,6 +202,18 @@ public class WebSettings {
         } catch (Throwable ex) {
             throw exception(ex, "Failed to init test.properties");
         }
+    }
+
+    private static Boolean parseRemoteRun(String remoteRunProperty) {
+        switch (remoteRunProperty.trim().toLowerCase()) {
+            case "true":
+                return true;
+            case "false":
+                return false;
+            default:
+                return null;
+        }
+
     }
 
     private static ElementArea getClickType(String type) {
