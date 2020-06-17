@@ -7,24 +7,24 @@ import io.github.com.entities.Users;
 
 public class InputsForm extends Form<Users> {
 
-    @UI("#mat-input-20")
+    @UI("#inputs_form_firstName")
     public static TextField firstName;
 
-    @UI("#mat-input-21")
+    @UI("#inputs_form_lastName")
     public static TextField lastName;
 
-    @UI("#mat-input-22")
+    @UI("#inputs_form_address")
     public static TextField address;
 
-    @UI("#mat-input-23")
+    @UI("#inputs_form_address2")
     public static TextField address2;
 
-    @UI("#mat-input-24")
+    @UI("#inputs_form_city")
     public static TextField city;
 
-    @UI("#mat-input-25")
+    @UI("#inputs_form_state")
     public static TextField state;
 
-    @UI("#mat-input-26")
+    @UI("#inputs_form_postalCode")
     public static TextField postalCode;
 }

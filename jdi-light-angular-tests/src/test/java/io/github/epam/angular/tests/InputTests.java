@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.*;
+import static io.github.com.pages.sections.InputSection.*;
 import static io.github.com.pages.sections.InputsForm.*;
 import static io.github.epam.data.TestData.DEFAULT_USER;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
