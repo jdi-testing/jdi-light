@@ -29,6 +29,7 @@ public class DriverSettings {
     public ScreenSize screenSize = new ScreenSize();
     public String domain;
     public String remoteUrl;
+    public boolean remoteRun;
     public String downloadsFolder = mergePath(COMMON.testPath, "resources", "downloads");
 
     public JFunc1<WebDriver, WebDriver> setup = DriverData::driverSettings;

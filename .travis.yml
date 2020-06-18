@@ -22,7 +22,6 @@ env:
     - BOOTSTRAP_TESTS="jdi-light-bootstrap-tests"
     - HTML_TESTS="jdi-light-html-tests"
     - ANGULAR_TESTS="jdi-light-angular-tests"
-    - ANGULAR_UNIT_TESTS="jdi-light-angular-unit-tests"
     - EXAMPLES="jdi-light-examples"
     - EXAMPLES_PROPERTY="test-examples/jdi-light-examples"
     - PERFORMANCE="jdi-performance"
@@ -63,14 +62,6 @@ testsangular: &testsangular
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
-testsangularunit: &testsangularunit
-  stage: test
-  name: Run unit tests - angular
-  <<: *cron_condition
-  script:
-    - mvn -ntp install -DskipTests
-    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_UNIT_TESTS
 testshtml: &testshtml
   stage: test
   name: Run tests - html
@@ -95,13 +86,6 @@ testsperformance: &testsperformance
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
-testsunit: &testsunit
-  stage: test
-  name: Run tests - jdi-light-unit-tests
-  <<: *cron_condition
-  script:
-    - mvn -ntp install -DskipTests
-    - mvn verify -pl $GROUP_ID:$JDI_LIGHT_UNIT_TESTS
 
 jobs:
   include:
@@ -157,48 +141,27 @@ jobs:
     - <<: *testsbootstrap
       name: Run tests - bootstrap - JDK13
       jdk: openjdk13
-# THERE IS NO ANGULAR TESTS IN MASTER BRANCH YET
-#    - <<: *testsangular
-#      name: Run tests - angular - JDK8
-#      if: true
-#      jdk: openjdk8
-#    - <<: *testsangular
-#      name: Run tests - angular - JDK9
-#      jdk: openjdk9
-#    - <<: *testsangular
-#      name: Run tests - angular - JDK10
-#      if: true
-#      jdk: openjdk10
-#    - <<: *testsangular
-#      name: Run tests - angular - JDK11
-#      jdk: openjdk11
-#    - <<: *testsangular
-#      name: Run tests - angular - JDK12
-#      jdk: openjdk12
-#    - <<: *testsangular
-#      name: Run tests - angular - JDK13
-#      jdk: openjdk13
-#
-#    - <<: *testsangularunit
-#      name: Run unit tests - angular - JDK8
-#      if: true
-#      jdk: openjdk8
-#    - <<: *testsangularunit
-#      name: Run unit tests - angular - JDK9
-#      jdk: openjdk9
-#    - <<: *testsangularunit
-#      name: Run unit tests - angular - JDK10
-#      if: true
-#      jdk: openjdk10
-#    - <<: *testsangularunit
-#      name: Run unit tests - angular - JDK11
-#      jdk: openjdk11
-#    - <<: *testsangularunit
-#      name: Run unit tests - angular - JDK12
-#      jdk: openjdk12
-#    - <<: *testsangularunit
-#      name: Run unit tests - angular - JDK13
-#      jdk: openjdk13
+
+    - <<: *testsangular
+      name: Run tests - angular - JDK8
+      if: true
+      jdk: openjdk8
+    - <<: *testsangular
+      name: Run tests - angular - JDK9
+      jdk: openjdk9
+    - <<: *testsangular
+      name: Run tests - angular - JDK10
+      if: true
+      jdk: openjdk10
+    - <<: *testsangular
+      name: Run tests - angular - JDK11
+      jdk: openjdk11
+    - <<: *testsangular
+      name: Run tests - angular - JDK12
+      jdk: openjdk12
+    - <<: *testsangular
+      name: Run tests - angular - JDK13
+      jdk: openjdk13
 
     - <<: *testshtml
       name: Run tests - html - JDK8
@@ -275,6 +238,15 @@ after_failure:
   - echo "Build was failed"
 after_success:
   - echo "Build was successful"
+
+notifications:
+  webhooks:
+    urls:
+      - https://outlook.office.com/webhook/ac8f242a-5a99-4fab-a4d7-799de8968df5@b41b72d0-4e9f-4c26-8a69-f949f367c91d/TravisCI/116217b941a943a3a545d6290e152c78/1d65db1e-26ce-4372-9a58-9c3635f1f0bd
+    if: type = cron
+    on_success: always
+    on_failure: always
+
 after_script:
   # following 4 lines are to rename allure-results dir to allure-results-<JDK VERSION>
   - ALLURE_RESULTS=$(find -type d -regex ".*/jdi.*/target/allure-results")
