@@ -778,6 +778,22 @@ public class UIElement extends JDIBase
         return timer().wait(() -> condition.execute(this));
     }
 
+    public void press(Keys key) {
+        Keyboard.press(key);
+    }
+    public void command(String sequence) {
+        Keyboard.command(sequence);
+    }
+    public void commands(String... commands) {
+        Keyboard.commands(commands);
+    }
+    public void pasteText(String text) {
+        Keyboard.pasteText(text);
+    }
+    public void pasteText(String text, long timeToWaitMSec) {
+        Keyboard.pasteText(text, timeToWaitMSec);
+    }
+
     public IsAssert is() {
         return new IsAssert().set(this);
     }
