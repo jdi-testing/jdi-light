@@ -18,7 +18,6 @@ import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
 public class DriverSettings {
-    public Boolean remoteRun;
     public String name = CHROME.name;
     public String version = LATEST.value;
     public OsTypes os;
