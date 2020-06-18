@@ -2,6 +2,7 @@ package io.github.com.pages.sections;
 
 import com.epam.jdi.angular.elements.common.Checkbox;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class CheckboxSection {
 
@@ -15,10 +16,10 @@ public class CheckboxSection {
     public Checkbox configurableIndeterminateCheckbox;
 
     @UI("#checkboxes-text_before_checkbox_radio")
-    public Checkbox configurableCheckboxAlignBeforeRadioButton;
+    public Button configurableCheckboxAlignBeforeRadioButton;
 
     @UI("#checkboxes-text_after_checkbox_radio")
-    public Checkbox configurableCheckboxAlignAfterRadioButton;
+    public Button configurableCheckboxAlignAfterRadioButton;
 
     @UI("#checkboxes-set_disabled_checkbox")
     public Checkbox configurableDisabledCheckbox;
