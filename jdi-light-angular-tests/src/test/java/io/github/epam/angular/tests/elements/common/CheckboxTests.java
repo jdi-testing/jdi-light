@@ -1,4 +1,4 @@
-package io.github.epam.angular.tests;
+package io.github.epam.angular.tests.elements.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -43,6 +43,6 @@ public class CheckboxTests extends TestsInit {
         configurableResultCheckbox.hasClass("mat-checkbox-label-after");
 
         configurableDisabledCheckbox.click();
-        configurableResultCheckbox.hasClass("mat-checkbox-disabled");
+        configurableResultCheckbox.is().disabled();
     }
 }

@@ -1,4 +1,4 @@
-package io.github.epam.angular.tests;
+package io.github.epam.angular.tests.elements.complex;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.basicRadioButtons;
