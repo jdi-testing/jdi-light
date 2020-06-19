@@ -3,12 +3,12 @@
 <suite name="JDI-Light Angular Tests" parallel="methods" thread-count="1">
     <test name="Tests">
         <packages>
-            <package name="io.github.epam.angular.tests.*"/>
+            <package name="io.github.epam.angular.tests.elements.*"/>
         </packages>
     </test>
     <test name="Unit tests">
         <packages>
-            <package name="io.github.epam.angular.unit.tests.*"/>
+            <package name="io.github.epam.angular.tests.unit.*"/>
         </packages>
     </test>
    <listeners>
