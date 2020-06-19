@@ -213,7 +213,6 @@ public class WebSettings {
             default:
                 return null;
         }
-
     }
 
     private static ElementArea getClickType(String type) {
