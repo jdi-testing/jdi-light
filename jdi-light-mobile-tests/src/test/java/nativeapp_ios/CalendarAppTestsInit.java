@@ -1,5 +1,6 @@
 package nativeapp_ios;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import io.appium.java_client.AppiumDriver;
 import nativeapp.ios.calendar.CalendarApp;
 import org.testng.annotations.AfterMethod;
@@ -8,7 +9,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.mobile.elements.init.PageFactory.initMobile;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
@@ -34,6 +34,6 @@ public class CalendarAppTestsInit {
 
     @AfterSuite(alwaysRun = true)
     public void tearDown() {
-        killAllSeleniumDrivers();
+        WebDriverFactory.quit();
     }
 }
