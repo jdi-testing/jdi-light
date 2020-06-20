@@ -24,6 +24,8 @@ public class AllureLogger {
     public static AttachmentStrategy HTML_CODE_LOGGING = ON_FAIL;
 
     public static String startStep(String message) {
+        if (!LOGS.writeToAllure) return "";
+
         try {
             StepResult step = new StepResult().withName(message);
             if (getLifecycle().getCurrentTestCase().isPresent()) {

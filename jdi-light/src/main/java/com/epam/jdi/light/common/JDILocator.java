@@ -108,7 +108,7 @@ public class JDILocator {
     public String toString() {
         try {
             By locator = getLocator(args);
-            if ((locator == null || !hasDomain() && !hasFrame()) && element != null)
+            if (locator == null && element != null)
                 return isNotBlank(ELEMENT.smartTemplate)
                         ? printSmartLocators(element)
                         : "";

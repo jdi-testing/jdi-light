@@ -145,11 +145,18 @@ public class WebSettings {
         if (initialized) return;
         logger.debug("init()");
         try {
-            getProperties(COMMON.testPropertiesPath);
+            Properties properties = getProperties(COMMON.testPropertiesPath);
+            if (properties.isEmpty()) {
+                LOGS.writeToAllure = false;
+                COMMON.strategy.action.execute();
+                return;
+
+            }
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();
-            if (DRIVER.name.equals(DEFAULT_DRIVER))
+            if (DRIVER.name.equalsIgnoreCase(DEFAULT_DRIVER)) {
                 fillAction(p -> DRIVER.name = p, "driver");
+            }
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
             fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");

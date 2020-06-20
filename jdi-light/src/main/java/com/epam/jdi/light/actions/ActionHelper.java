@@ -74,14 +74,14 @@ public class ActionHelper {
     static String getTemplate(LogLevels level) {
         if (LOGS.logInfoDetails != null) {
             switch (LOGS.logInfoDetails) {
-                case NONE: return "{action}";
-                case NAME: return "{action} ({name})";
-                case LOCATOR: return "{action} ({locator})";
-                case CONTEXT: return "{action} ({context})";
-                case ELEMENT: return "{action} ({element})";
+                case NONE: return STEP_TEMPLATE;
+                case NAME: return NAME_TEMPLATE;
+                case LOCATOR: return LOCATOR_TEMPLATE;
+                case CONTEXT: return CONTEXT_TEMPLATE;
+                case ELEMENT: return ELEMENT_TEMPLATE;
             }
         }
-        return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
+        return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : ELEMENT_TEMPLATE;
     }
     public static int CUT_STEP_TEXT = 70;
     public static String getActionName(ProceedingJoinPoint jp) {
@@ -89,8 +89,8 @@ public class ActionHelper {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
             return isBlank(template)
-                    ? getDefaultName(method.getName(), methodArgs(jp, method))
-                    : fillTemplate(template, jp, method);
+                ? getDefaultName(method.getName(), methodArgs(jp, method))
+                : fillTemplate(template, jp, method);
         } catch (Throwable ex) {
             throw exception(ex, "Surround method issue: Can't get action name: ");
         }
