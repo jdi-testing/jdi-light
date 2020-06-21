@@ -17,7 +17,7 @@ import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
 public class RangeAssert extends UIAssert<RangeAssert, Range> {
     @JDIAction("Assert that '{name}' volume {0}")
     public RangeAssert value(Matcher<Double> value) {
-        jdiAssert(getDouble("value", element().core()), value);
+        jdiAssert(element().value(), value);
         return this;
     }
 

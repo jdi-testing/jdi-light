@@ -35,21 +35,23 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
         return selected(Matchers.is(option));
     }
     @JDIAction("Assert that '{0}' option selected for '{name}'")
-    public A selected(int i) {
-        jdiAssert(element().selected(i), Matchers.is(true));
+    public A selected(int index) {
+        jdiAssert(element().selected(index), Matchers.is(true));
         return (A) this;
     }
     public <TEnum extends Enum<?>> UISelectAssert<?, ?> selected(TEnum option) {
         return selected(getEnumValue(option));
     }
     public A text(Matcher<String> condition) {
-        return selected(condition);
+        jdiAssert(element().text(), condition);
+        return (A) this;
     }
     public A text(String condition) {
-        return selected(condition);
+        return text(Matchers.is(condition));
     }
-    public <TEnum extends Enum<?>> UISelectAssert<?, ?> value(TEnum option) {
-        return selected(option);
+    public <TEnum extends Enum<?>> A value(TEnum option) {
+        jdiAssert(element().values(), hasItem(getEnumValue(option)));
+        return (A) this;
     }
     @JDIAction("Assert that '{name}' values {0}")
     public A values(Matcher<? super List<String>> condition) {
