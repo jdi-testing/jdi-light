@@ -10,27 +10,27 @@ import com.epam.jdi.angular.elements.common.SlideToggle;
 
 public class SlideToggleSection extends Section {
 
-    @UI("#mat-slide-toggle-1")
-    public static SlideToggle basicSlideToggle;
+    @UI("#slide-toggles-basic")
+    public SlideToggle basicSlideToggle;
 
-    @UI("#mat-slide-toggle-2")
-    public static SlideToggle resultSlideToggle;
+    @UI("#slide-toggles-configured")
+    public SlideToggle resultSlideToggle;
 
-    @UI("#mat-checkbox-6")
-    public static Checkbox checkedCheckbox;
+    @UI("#slide-toggles-set_checked_checkbox")
+    public Checkbox checkedCheckbox;
 
-    @UI("#mat-checkbox-7")
-    public static Checkbox disableCheckbox;
+    @UI("#slide-toggles-set_disabled_checkbox")
+    public Checkbox disableCheckbox;
 
-    @Css(".example-section .mat-radio-group")
-    public static RadioButtons colorRadioButtons;
+    @Css("#slide-toggles-colors_radio_buttons")
+    public RadioButtons colorRadioButtons;
 
-    @UI("#mat-radio-13")
-    public static Button primaryRadioButton;
+    @UI("#slide-toggles-set_primary_color_radio")
+    public Button primaryRadioButton;
 
-    @UI("#mat-radio-14")
-    public static Button accentRadioButton;
+    @UI("#slide-toggles-set_accent_color_radio")
+    public Button accentRadioButton;
 
-    @UI("#mat-radio-15")
-    public static Button warningRadioButton;
+    @UI("#slide-toggles-set_warn_color_radio")
+    public Button warningRadioButton;
 }
