@@ -3,9 +3,9 @@ package io.github.com.pages.sections;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
-import io.github.com.entities.Users;
+import io.github.com.entities.User;
 
-public class InputsForm extends Form<Users> {
+public class InputsForm extends Form<User> {
 
     @UI("#inputs_form_firstName")
     public static TextField firstName;
