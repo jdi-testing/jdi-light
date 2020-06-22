@@ -4,7 +4,7 @@ import com.epam.jdi.tools.DataClass;
 
 import java.lang.reflect.Field;
 
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

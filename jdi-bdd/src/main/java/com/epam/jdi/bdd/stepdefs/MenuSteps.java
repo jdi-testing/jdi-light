@@ -7,7 +7,7 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getList;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

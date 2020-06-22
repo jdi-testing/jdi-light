@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.google.gson.Gson;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 public class Chart extends UIBaseElement<TextAssert> implements IsText {
     static Gson gson = new Gson();

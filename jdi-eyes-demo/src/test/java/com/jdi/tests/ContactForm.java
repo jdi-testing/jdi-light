@@ -9,11 +9,13 @@ import com.jdi.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.jdi.states.State.*;
-import static com.jdi.test.data.DefaultDataProvider.*;
+import static com.jdi.states.State.loggedIn;
+import static com.jdi.test.data.DefaultDataProvider.FULL_CONTACT;
+import static com.jdi.test.data.DefaultDataProvider.SIMPLE_CONTACT;
 import static jdisite.enums.MenuOptions.ContactForm;
-import static jdisite.pages.ContactPage.*;
-import static jdisite.pages.JDISite.*;
+import static jdisite.pages.ContactPage.contactForm;
+import static jdisite.pages.JDISite.contactPage;
+import static jdisite.pages.JDISite.leftMenu;
 
 public class ContactForm extends TestsInit {
     @BeforeMethod

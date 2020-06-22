@@ -2,7 +2,7 @@ package io.github.epam.test.data.webpages;
 
 import org.testng.annotations.DataProvider;
 
-import static pseudo.site.PseudoSite.*;
+import static pseudo.site.PseudoSite.extendedWebPage;
 
 public class ExtendedWebPageDataProvider {
     @DataProvider

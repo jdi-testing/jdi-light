@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Objects;
 
-import static com.epam.jdi.light.common.ElementArea.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.light.common.ElementArea.CENTER;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 public class SearchStrategies {
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;

@@ -7,12 +7,14 @@ import org.openqa.selenium.By;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static java.lang.String.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.hasDomain;
+import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.countMatches;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

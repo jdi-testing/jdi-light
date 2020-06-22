@@ -4,10 +4,10 @@ import org.apache.logging.log4j.Level;
 
 import java.util.List;
 
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static java.lang.Integer.*;
-import static java.util.Arrays.*;
+import static com.epam.jdi.light.settings.JDISettings.LOGS;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static java.lang.Integer.MAX_VALUE;
+import static java.util.Arrays.asList;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -53,7 +53,7 @@ public enum LogLevels {
             case "error": return ERROR;
             case "warning": return WARNING;
             case "step": return STEP;
-            case "degug": return DEBUG;
+            case "debug": return DEBUG;
             case "trace": return TRACE;
             case "all": return ALL;
             default: return INFO;

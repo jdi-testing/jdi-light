@@ -18,34 +18,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
-import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D>, DataTableAssert<L, D>> {
-    private Class<L> lineClass;
-    private Class<D> dataClass;
+    protected Class<L> lineClass;
+    protected Class<D> dataClass;
 
     protected CacheAll<MapArray<String, L>> lines
         = new CacheAll<>(MapArray::new);
     protected CacheAll<MapArray<String, D>> datas
         = new CacheAll<>(MapArray::new);
 
-    private void hasLineClass() {
+    protected void hasLineClass() {
         if (lineClass == null || !isClass(lineClass, PageObject.class))
             throw exception("In order to use this method you must specify LineClass that extends PageObject for '%s' DataTable<LineClass, ?>", getName());
     }
-    private void hasDataClass() {
+    protected void hasDataClass() {
         if (dataClass == null)
             throw exception("In order to use this method you must specify DataClass for '%s' DataTable<?, DataClass>", getName());
     }
@@ -402,7 +402,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         }
         return value;
     }
-    private D lineToData(L line) {
+    protected D lineToData(L line) {
         D instance;
         try {
             instance = create(dataClass);
@@ -445,9 +445,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         datas.useCache(false);
         lines.useCache(false);
     }
-    @Override
-    public void setup(Field field) {
-        super.setup(field);
+    protected void setupGenericFields(Field field) {
         Type[] types = getGenericTypes(field);
         if (types.length != 2)
             return;
@@ -456,6 +454,14 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
             dataClass = types[1].toString().equals("?") ? null : (Class<D>) types[1];
         } catch (Exception ex) {
             throw exception(ex, "Can't get DataTable %s data or entity class", getName());
+        }
+    }
+    @Override
+    public void setup(Field field) {
+        super.setup(field);
+        try {
+            setupGenericFields(field);
+        } catch (Exception ignore) { // ignore if can't setup
         }
         if (header.hasValue()) return;
         List<Field> entityFields = new ArrayList<>();

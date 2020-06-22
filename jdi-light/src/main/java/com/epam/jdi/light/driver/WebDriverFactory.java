@@ -11,18 +11,18 @@ import org.openqa.selenium.WebDriver;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
-import static com.epam.jdi.light.driver.get.DriverTypes.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.StringUtils.*;
-import static com.epam.jdi.tools.map.MapArray.*;
-import static com.epam.jdi.tools.pairs.Pair.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
+import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.map.MapArray.map;
+import static com.epam.jdi.tools.pairs.Pair.$;
 import static java.lang.String.format;
-import static java.lang.Thread.*;
-import static java.util.concurrent.TimeUnit.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static java.lang.Thread.currentThread;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -82,7 +82,7 @@ public class WebDriverFactory {
                 setRunDrivers(rDrivers);
                 logger.debug("setRunDrivers");
             }
-            logger.debug("Get '%s' driver");
+            logger.debug("Get '%s' driver", driverName);
             WebDriver driver = rDrivers.get(driverName);
             logger.debug("Successs: " + driver);
             if (driver.toString().contains("(null)")) {

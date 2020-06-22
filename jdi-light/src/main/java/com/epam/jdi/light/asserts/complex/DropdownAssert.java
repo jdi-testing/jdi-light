@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -14,12 +14,12 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 public class DropdownAssert extends UISelectAssert<DropdownAssert, IsDropdown> {
     @JDIAction("Assert that '{name}' is expanded")
     public DropdownAssert expanded() {
-        jdiAssert(element.isExpanded() ? "expanded" : "collapsed", Matchers.is("expanded"));
+        jdiAssert(element().isExpanded() ? "expanded" : "collapsed", Matchers.is("expanded"));
         return this;
     }
     @JDIAction("Assert that '{name}' is collapsed")
     public DropdownAssert collapsed() {
-        jdiAssert(element.isExpanded() ? "expanded" : "collapsed", Matchers.is("collapsed"));
+        jdiAssert(element().isExpanded() ? "expanded" : "collapsed", Matchers.is("collapsed"));
         return this;
     }
 }

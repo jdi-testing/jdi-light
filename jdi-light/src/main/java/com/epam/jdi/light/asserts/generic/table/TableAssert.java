@@ -4,9 +4,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.complex.table.TableMatcher;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
+import static org.hamcrest.Matchers.greaterThan;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -51,7 +51,7 @@ public class TableAssert extends BaseTableAssert<Table, TableAssert> {
          */
         @JDIAction("Assert that '{name}' has at least '{0}' rows that {0}")
         public TableAssert rows(TableMatcher... matchers) {
-            jdiAssert(TABLE_MATCHER.execute(element, matchers).size(),
+            jdiAssert(TABLE_MATCHER.execute(element(), matchers).size(),
                     greaterThan(table().header().size()*count-1));
             return tAssert;
         }

@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import io.github.epam.html.tests.issues.issue70.po.DashboardPage;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.init.PageFactory.*;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 
 @JSite("https://jdi-testing.github.io/jdi-light/table-with-href/")
 public class TestJDIList {

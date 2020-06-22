@@ -6,14 +6,16 @@ import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
-import org.hamcrest.*;
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -23,8 +25,7 @@ import static org.hamcrest.Matchers.*;
 public class DataListAssert<T extends ICoreElement, D>
         extends UISelectAssert<DataListAssert<T, D>, DataList<T, D>> {
     public List<D> data() {
-        element.refresh();
-        return element.asData();
+        return element().asData();
     }
 
     /**
@@ -110,7 +111,7 @@ public class DataListAssert<T extends ICoreElement, D>
     @JDIAction("Assert that '{name}' elements [{0}] are displayed")
     public DataListAssert<T, D> displayed(String... names) {
         for (String name : names)
-            jdiAssert(element.get(name).isDisplayed() ? name + "displayed" : "hidden", Matchers.is(name + "displayed"));
+            jdiAssert(element().get(name).isDisplayed() ? name + "displayed" : "hidden", Matchers.is(name + "displayed"));
         return this;
     }
 
@@ -120,7 +121,7 @@ public class DataListAssert<T extends ICoreElement, D>
      */
     @JDIAction("Assert that '{name}' has at least one displayed element")
     public DataListAssert<T, D> displayed() {
-        jdiAssert(element.isDisplayed() ? "displayed" : "hidden", Matchers.is("displayed"));
+        jdiAssert(element().isDisplayed() ? "displayed" : "hidden", Matchers.is("displayed"));
         return this;
     }
 
@@ -130,7 +131,7 @@ public class DataListAssert<T extends ICoreElement, D>
      */
     @JDIAction("Assert that '{name}' is hidden")
     public DataListAssert<T, D> hidden() {
-        jdiAssert(map(element, this::isDisplayed), everyItem(Matchers.is(false)));
+        jdiAssert(map(element(), this::isDisplayed), everyItem(Matchers.is(false)));
         return this;
     }
     private boolean isDisplayed(T element) {
@@ -145,7 +146,7 @@ public class DataListAssert<T extends ICoreElement, D>
      */
     @JDIAction("Assert that '{name}' is empty")
     public DataListAssert<T, D> empty() {
-        jdiAssert(element.isEmpty() ? "list is empty" : "list is not empty", Matchers.is("list is empty"));
+        jdiAssert(element().isEmpty() ? "list is empty" : "list is not empty", Matchers.is("list is empty"));
         return this;
     }
 
@@ -155,7 +156,7 @@ public class DataListAssert<T extends ICoreElement, D>
      */
     @JDIAction("Assert that '{name}' is not empty")
     public DataListAssert<T, D> notEmpty() {
-        jdiAssert(element.isEmpty() ? "list is empty" : "list is not empty", Matchers.is("list is not empty"));
+        jdiAssert(element().isEmpty() ? "list is empty" : "list is not empty", Matchers.is("list is not empty"));
         return this;
     }
 
@@ -166,7 +167,7 @@ public class DataListAssert<T extends ICoreElement, D>
      */
     @JDIAction("Assert that '{name}' size {0}")
     public DataListAssert<T, D> size(Matcher<Integer> condition) {
-        jdiAssert(element.size(), condition);
+        jdiAssert(element().size(), condition);
         return this;
     }
 

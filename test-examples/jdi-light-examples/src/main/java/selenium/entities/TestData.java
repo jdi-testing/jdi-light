@@ -6,7 +6,7 @@ public class TestData {
             " Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas" +
             " Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauvais" +
             " Zachary Hendrix 07624 035724 ipsum.non.arcu@auctorullamcorper.ca Redcliffe" +
-            " Logan Simmons (01367) 073346 ac.mattis.velit@import static org.hamcrest.MatcherAssert.*;etmagnisdis.com Gierle" +
+            " Logan Simmons (01367) 073346 ac.mattis.velit@etmagnisdis.com Gierle" +
             " Colby Young 0963 451 3377 In.scelerisque.scelerisque@elitelitfermentum.net Driffield" +
             " Peter Mitchell (01256) 43239 ipsum.porta@arcu.edu Duncan" +
             " Hamilton Curry (0181) 775 6791 et@dignissimmagnaa.org Chemnitz" +

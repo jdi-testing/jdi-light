@@ -6,8 +6,8 @@ import org.hamcrest.Matcher;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -18,7 +18,7 @@ public class UIMSelectAssert<A extends UIMSelectAssert<?,?>, E extends IMultiSel
 
     @JDIAction("Assert that '{0}' values checked in '{name}'")
     public A checked(Matcher<? super List<String>> values) {
-        jdiAssert(element.checked(), values);
+        jdiAssert(element().checked(), values);
         return (A) this;
     }
     @JDIAction("Assert that '{0}' values checked in '{name}'")

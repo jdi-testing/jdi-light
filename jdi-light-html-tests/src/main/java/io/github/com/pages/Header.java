@@ -4,7 +4,9 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.*;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Icon;
+import com.epam.jdi.light.ui.html.elements.common.Image;
 import io.github.com.custom.LoginFormSmart;
 import io.github.com.entities.User;
 import io.github.com.sections.LoginForm;
@@ -26,10 +28,12 @@ public class Header extends Section {
 	@UI(".icon-search.active") static WebElement doSearch;
 
 	public static void search(String text) {
-		if(logout.isDisplayed())
+		if (logout.isDisplayed()) {
 			userName.click();
-		if (searchInput.isHidden())
+		}
+		if (searchInput.isHidden()) {
 			searchIcon.click();
+		}
 		searchInput.input(text);
 		doSearch.click();
 	}

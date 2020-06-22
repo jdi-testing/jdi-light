@@ -4,7 +4,7 @@ import com.epam.jdi.light.ui.html.elements.common.DateTimeSelector;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.*;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

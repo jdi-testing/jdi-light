@@ -8,46 +8,57 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.ILogger;
-import com.epam.jdi.tools.*;
-import com.epam.jdi.tools.func.*;
+import com.epam.jdi.tools.PropReader;
+import com.epam.jdi.tools.PropertyReader;
+import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.*;
+import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
+import java.util.Properties;
 
-import static com.epam.jdi.light.common.ElementArea.*;
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.common.NameToLocator.*;
-import static com.epam.jdi.light.common.PageChecks.*;
+import static com.epam.jdi.light.common.ElementArea.CENTER;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
+import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.SearchStrategies.*;
-import static com.epam.jdi.light.common.SetTextTypes.*;
-import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.common.UseSmartSearch.FALSE;
+import static com.epam.jdi.light.common.SetTextTypes.CLEAR_SEND_KEYS;
+import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.common.UseSmartSearch.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.driver.get.DriverData.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
-import static com.epam.jdi.light.driver.sauce.SauceSettings.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.light.logger.JDILogger.*;
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.logger.Strategy.*;
+import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.logger.JDILogger.instance;
+import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
+import static com.epam.jdi.light.logger.Strategy.parseStrategy;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.Strategies.*;
-import static com.epam.jdi.tools.EnumUtils.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PathUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static com.epam.jdi.tools.PropertyReader.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static java.lang.Boolean.*;
-import static java.lang.Integer.*;
-import static java.lang.String.*;
-import static java.util.Arrays.*;
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.openqa.selenium.PageLoadStrategy.*;
+import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static java.lang.Boolean.parseBoolean;
+import static java.lang.Integer.parseInt;
+import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.openqa.selenium.PageLoadStrategy.EAGER;
+import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -123,13 +134,13 @@ public class WebSettings {
         try {
             prop = getProperty(name);
         } catch (Exception ignore) {}
-        if (prop == null) {
-            prop = "null";
-        }
-        logger.debug("fillAction(%s=%s)", name, prop);
-        PropertyReader.fillAction(action, name);
+        logger.debug("fillAction(%s=%s)", name, prop == null ? "null" : prop);
+        if (isBlank(prop)) return;
+        action.execute(prop);
     }
+    
     public static boolean initialized = false;
+
     public static synchronized void init() {
         if (initialized) return;
         logger.debug("init()");
@@ -137,16 +148,15 @@ public class WebSettings {
             getProperties(COMMON.testPropertiesPath);
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();
-            fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
-            fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
-            fillAction(WebSettings::setDomain, "domain");
             if (DRIVER.name.equals(DEFAULT_DRIVER))
                 fillAction(p -> DRIVER.name = p, "driver");
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
+            fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
+            fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
+            fillAction(WebSettings::setDomain, "domain");
             fillAction(p -> SCREEN.path = p, "screens.folder");
             fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
-            addStrategy(FAIL, LOGS.screenStrategy);
             fillAction(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
             fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
             fillAction(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
@@ -166,8 +176,8 @@ public class WebSettings {
             fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
             logger.setLogLevel(LOGS.logLevel);
             fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
-            fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locators");
-            fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locators.toName");
+            fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locator");
+            fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
             fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
             fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
 
@@ -195,7 +205,8 @@ public class WebSettings {
 
     private static ElementArea getClickType(String type) {
         ElementArea clickType = first(getAllEnumValues(ElementArea.class),
-                t -> t.toString().equals(type));
+            t -> t.toString().trim().replaceAll("[^a-z]", "")
+                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
         return clickType != null
                 ? clickType : CENTER;
     }
@@ -205,18 +216,21 @@ public class WebSettings {
     }
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
-                t -> t.toString().equals(type));
+            t -> t.toString().trim().replaceAll("[^a-z]", "")
+                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
         return textType != null
                 ? textType : SMART_TEXT;
     }
     private static SetTextTypes getSetTextType(String type) {
-        SetTextTypes textType = first(getAllEnumValues(SetTextTypes.class),
-                t -> t.toString().equals(type));
-        return textType != null
-                ? textType : SET_TEXT;
+        SetTextTypes setTextType = first(getAllEnumValues(SetTextTypes.class),
+            t -> t.toString().trim().replaceAll("[^a-z]", "")
+                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
+        return setTextType != null
+                ? setTextType : CLEAR_SEND_KEYS;
     }
     private static String getRemoteUrl(String prop) {
-        switch (prop.toLowerCase().replaceAll(" ", "")) {
+        String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
+        switch (value) {
             case "sauce":
             case "saucelabs":
                 DRIVER.capabilities.common = sauceCapabilities();
@@ -228,19 +242,25 @@ public class WebSettings {
     }
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
         if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
-            throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locators.toName' in test.properties." +
+            throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
                 "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }
     private static UseSmartSearch getSmartSearchUse(String prop) {
-        String propLower = prop.toLowerCase().trim().replaceAll(" ", "");
-        switch (propLower) {
-            case "false": return FALSE;
-            case "onlyui": return ONLY_UI;
-            case "uiandelements": return UI_AND_ELEMENTS;
-            case "always": return ALWAYS;
-            default: return UI_AND_ELEMENTS;
+        String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
+        switch (value) {
+            case "false":
+            case "off":
+                return FALSE;
+            case "onlyui":
+                return ONLY_UI;
+            case "uiandelements":
+                return UI_AND_ELEMENTS;
+            case "always":
+                return ALWAYS;
+            default:
+                return UI_AND_ELEMENTS;
         }
     }
 
@@ -330,7 +350,7 @@ public class WebSettings {
         }
     }
     private static List<com.epam.jdi.light.logger.Strategy> getLoggerStrategy(String strategy) {
-        if (isBlank(strategy))
+        if (isBlank(strategy) || strategy.trim().equalsIgnoreCase("off"))
             return new ArrayList<>();
         List<com.epam.jdi.light.logger.Strategy> strategies = new ArrayList<>();
         try {
@@ -340,10 +360,10 @@ public class WebSettings {
         return strategies;
     }
     private static Strategies getStrategy(String prop) {
-        String strategy = prop.trim().toLowerCase();
+        String strategy = prop.trim().toLowerCase().replaceAll("[^a-z]", "");
         switch (strategy) {
             case "jdi": return JDI;
-            case "jdi-stable": return JDI_STABLE;
+            case "jdismart": return JDI_SMART;
             case "selenium": return SELENIUM;
             default: return JDI;
         }

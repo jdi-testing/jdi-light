@@ -11,10 +11,11 @@ public enum PageChecks {
         return this.value >= check.value;
     }
     public static PageChecks parse(String value) {
-        switch (value) {
-            case "NONE": return NONE;
-            case "NEW_PAGE": return NEW_PAGE;
-            case "EVERY_PAGE": return EVERY_PAGE;
+        String check = value.trim().toLowerCase().replaceAll("[^a-z]", "");
+        switch (check) {
+            case "none": return NONE;
+            case "newpage": return NEW_PAGE;
+            case "everypage": return EVERY_PAGE;
             default: return NONE;
         }
     }

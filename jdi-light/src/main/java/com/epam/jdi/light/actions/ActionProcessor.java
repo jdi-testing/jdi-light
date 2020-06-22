@@ -1,11 +1,13 @@
 package com.epam.jdi.light.actions;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

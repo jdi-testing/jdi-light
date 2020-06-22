@@ -5,8 +5,8 @@ import com.epam.jdi.tools.DataClass;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.System.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static java.lang.System.getenv;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class SauceSettings extends DataClass<SauceSettings> {
     public static String username = getenv("SAUCE_USERNAME"),

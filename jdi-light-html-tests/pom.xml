@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <version>1.2.10</version>
+    <version>1.2.16</version>
     <artifactId>jdi-light-html-tests</artifactId>
     <name>Tests: JDI Html</name>
     <groupId>com.epam.jdi</groupId>
@@ -16,7 +16,7 @@
         <allure.testng>2.13.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.1</aspectj.version>
+        <aspectj.version>1.9.5</aspectj.version>
     </properties>
 
     <dependencies>
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.10</version>
+            <version>1.2.16</version>
         </dependency>
 
         <!--Allure config in parent-->

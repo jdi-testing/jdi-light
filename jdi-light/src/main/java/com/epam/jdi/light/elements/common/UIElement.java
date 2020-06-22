@@ -2,7 +2,9 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
-import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -10,7 +12,9 @@ import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-import com.epam.jdi.tools.func.*;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
@@ -20,28 +24,33 @@ import org.openqa.selenium.support.ui.Select;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.ElementArea.*;
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.light.elements.init.UIFactory.*;
-import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.EnumUtils.*;
-import static com.epam.jdi.tools.JsonUtils.*;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.*;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.lang.Math.*;
+import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
+import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.settings.JDISettings.SCREEN;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.JsonUtils.getInt;
+import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.switcher.SwitchActions.Case;
+import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
+import static java.lang.Math.abs;
+import static java.lang.String.format;
 import static java.lang.String.valueOf;
-import static java.lang.String.*;
-import static java.util.Arrays.*;
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.openqa.selenium.Keys.*;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.openqa.selenium.Keys.BACK_SPACE;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -256,7 +265,7 @@ public class UIElement extends JDIBase
         if (isHidden())
             return false;
         Object isInView = js().executeScript(
-    "const rect = arguments[0].getBoundingClientRect();\n" +
+            "const rect = arguments[0].getBoundingClientRect();\n" +
             "if (!rect) return false;\n" +
             "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight);\n" +
             "const windowWidth = Math.min(window.innerWidth || document.documentElement.clientWidth);\n" +
@@ -295,7 +304,7 @@ public class UIElement extends JDIBase
 
     @JDIAction("Click on '{name}' (x:{0}, y:{1})")
     public void click(int x, int y) {
-        actionsWithElement(a -> a.moveByOffset(x-getRect().width/2, y-getRect().height/2).click());
+        actionsWithElement(a -> a.moveByOffset(x - getRect().width / 2, y - getRect().height / 2).click());
     }
     @JDIAction("Click on '{name}'")
     public void click(ElementArea area) {
@@ -307,15 +316,15 @@ public class UIElement extends JDIBase
                 logger.debug("Click Top Left");
                 break;
             case TOP_RIGHT:
-                click(getRect().getWidth()-1,1);
+                click(getRect().getWidth() - 1,1);
                 logger.debug("Click Top Right");
                 break;
             case BOTTOM_LEFT:
-                click(1,getRect().getHeight()-1);
+                click(1,getRect().getHeight() - 1);
                 logger.debug("Click Bottom Left");
                 break;
             case BOTTOM_RIGHT:
-                click(getRect().getWidth()-1,getRect().getHeight()-1);
+                click(getRect().getWidth() - 1,getRect().getHeight() - 1);
                 logger.debug("Click Bottom Right");
                 break;
             case CENTER:
@@ -344,11 +353,11 @@ public class UIElement extends JDIBase
         return Switch().get(
             Case(t -> isClickable(), t-> CENTER),
             Case(t -> isClickable(1, 1), t-> TOP_LEFT),
-            Case(t -> isClickable(getRect().getWidth()-1,1),
+            Case(t -> isClickable(getRect().getWidth() - 1,1),
                 t-> TOP_RIGHT),
-            Case(t -> isClickable(1,getRect().getHeight()-1),
+            Case(t -> isClickable(1,getRect().getHeight() - 1),
                 t-> BOTTOM_LEFT),
-            Case(t -> isClickable(getRect().getWidth()-1,getRect().getHeight()-1),
+            Case(t -> isClickable(getRect().getWidth() - 1,getRect().getHeight() - 1),
                 t-> BOTTOM_RIGHT));
     }
 
@@ -396,7 +405,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(level = DEBUG)
     public void setAttribute(String name, String value) {
-        jsExecute("setAttribute('"+name+"','"+value+"')");
+        jsExecute("setAttribute('" + name + "','" + value + "')");
     }
 
     /**
@@ -494,8 +503,8 @@ public class UIElement extends JDIBase
     @JDIAction(level = DEBUG)
     public String printHtml() {
         return MessageFormat.format("<{0} {1}>{2}</{0}>", getTagName(),
-                print(getAllAttributes(), el -> format("%s=\"%s\"", el.key, el.value), " "),
-                getAttribute("innerHTML"));
+            print(getAllAttributes(), el -> format("%s=\"%s\"", el.key, el.value), " "),
+            getAttribute("innerHTML"));
     }
 
     /**
@@ -503,8 +512,9 @@ public class UIElement extends JDIBase
      */
     @JDIAction(timeout = 0)
     public void show() {
-        if (isDisplayed() && !isVisible())
+        if (isDisplayed() && !isVisible()) {
             jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
+        }
     }
 
     /**
@@ -654,8 +664,7 @@ public class UIElement extends JDIBase
     }
     @JDIAction("Get '{name}' text") @Override
     public String text(TextTypes type) {
-        String result = timer().getResult(() -> noWait(() -> type.func.execute(this)));
-        return result;
+        return timer().getResult(() -> noWait(() -> type.func.execute(this)));
     }
     public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
         String text = ui.text(TEXT);
@@ -665,9 +674,7 @@ public class UIElement extends JDIBase
         if (isNotBlank(text))
             return text;
         text = ui.text(VALUE);
-        return isNotBlank(text)
-            ? text
-            : isNotBlank(text) ? text : "";
+        return isNotBlank(text) ? text : "";
     };
     public static JFunc1<UIElement, String> SMART_LIST_TEXT = ui -> {
         String text = ui.text(TEXT);
@@ -769,6 +776,22 @@ public class UIElement extends JDIBase
     //endregion
     public boolean wait(JFunc1<UIElement, Boolean> condition) {
         return timer().wait(() -> condition.execute(this));
+    }
+
+    public void press(Keys key) {
+        Keyboard.press(key);
+    }
+    public void command(String sequence) {
+        Keyboard.command(sequence);
+    }
+    public void commands(String... commands) {
+        Keyboard.commands(commands);
+    }
+    public void pasteText(String text) {
+        Keyboard.pasteText(text);
+    }
+    public void pasteText(String text, long timeToWaitMSec) {
+        Keyboard.pasteText(text, timeToWaitMSec);
     }
 
     public IsAssert is() {

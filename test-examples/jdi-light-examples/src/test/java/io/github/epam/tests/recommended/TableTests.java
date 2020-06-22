@@ -7,16 +7,20 @@ import io.github.epam.entities.UserInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.Alerts.*;
-import static com.epam.jdi.tools.StringUtils.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.PerformancePage.*;
-import static io.github.epam.test.data.TableData.*;
-import static io.github.epam.tests.recommended.steps.Preconditions.*;
-import static java.lang.System.*;
-import static java.util.Arrays.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static io.github.com.StaticSite.tablePage;
+import static io.github.com.pages.PerformancePage.users;
+import static io.github.com.pages.PerformancePage.usersSetup;
+import static io.github.epam.test.data.TableData.GRADY_BROCK;
+import static io.github.epam.tests.recommended.steps.Preconditions.shouldBeLoggedIn;
+import static java.lang.System.currentTimeMillis;
+import static java.lang.System.out;
+import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
 
 public class TableTests extends StaticTestsInit {
     @BeforeMethod
@@ -25,7 +29,8 @@ public class TableTests extends StaticTestsInit {
         tablePage.shouldBeOpened();
     }
 
-    @Test(enabled = false)
+    // too long for regular run
+    @Test
     public void tablePerformanceTest() {
         tablePerformance(users);
     }
@@ -65,18 +70,16 @@ public class TableTests extends StaticTestsInit {
         logTime("Get column(Phone)");
 
         String value = table.preview();
-        assertEquals(value.substring(0,194),
-        "Name Phone Email City " +
+        assertThat(value, containsString("Name Phone Email City " +
             "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe " +
             "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas " +
-            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv");
+            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv"));
         logTime("Preview");
         value = table.getValue();
-        assertEquals(value.substring(0,228),
-            "||X||Name|Phone|Email|City||" + LINE_BREAK +
+        assertThat(value, containsString("||X||Name|Phone|Email|City||" + LINE_BREAK +
             "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +
             "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||" + LINE_BREAK +
-            "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||");
+            "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||"));
         logTime("Get value");
     }
 

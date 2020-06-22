@@ -7,8 +7,8 @@ import org.hamcrest.Matcher;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -23,7 +23,7 @@ public class ChecklistAssert extends UISelectAssert<ChecklistAssert, IsChecklist
      */
     @JDIAction("Assert that '{name}' selected option {0}")
     public ChecklistAssert checked(Matcher<? super List<String>> condition) {
-        jdiAssert(element.checked(), condition);
+        jdiAssert(element().checked(), condition);
         return this;
     }
     @JDIAction("Assert that '{name}' selected option {0}")

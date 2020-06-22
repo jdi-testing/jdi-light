@@ -9,13 +9,13 @@ import org.openqa.selenium.WebDriver;
 
 import static com.epam.jdi.light.driver.get.DriverInfos.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.*;
-import static com.epam.jdi.light.driver.get.DriverVersion.*;
-import static com.epam.jdi.light.driver.get.GetDriverTypes.*;
-import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.tools.PathUtils.*;
-import static com.epam.jdi.tools.map.MapArray.*;
-import static com.epam.jdi.tools.pairs.Pair.*;
-import static org.openqa.selenium.PageLoadStrategy.*;
+import static com.epam.jdi.light.driver.get.DriverVersion.LATEST;
+import static com.epam.jdi.light.driver.get.GetDriverTypes.DOWNLOAD;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.epam.jdi.tools.map.MapArray.map;
+import static com.epam.jdi.tools.pairs.Pair.$;
+import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 
 public class DriverSettings {
     public String name = CHROME.name;
@@ -28,6 +28,7 @@ public class DriverSettings {
     public ScreenSize screenSize = new ScreenSize();
     public String domain;
     public String remoteUrl;
+    public boolean remoteRun;
     public String downloadsFolder = mergePath(COMMON.testPath, "resources", "downloads");
 
     public JFunc1<WebDriver, WebDriver> setup = DriverData::driverSettings;

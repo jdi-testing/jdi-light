@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

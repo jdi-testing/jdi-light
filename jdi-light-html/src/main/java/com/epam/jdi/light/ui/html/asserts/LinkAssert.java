@@ -7,7 +7,7 @@ import com.epam.jdi.light.ui.html.elements.common.Link;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -18,19 +18,19 @@ public class LinkAssert extends UIAssert<LinkAssert, Link>
 
     @JDIAction("Assert that '{name}' text {0}")
     public LinkAssert text(Matcher<String> condition) {
-        jdiAssert(element.getText(), condition);
+        jdiAssert(element().getText(), condition);
         return this;
     }
     @JDIAction("Assert that '{name}' alt {0}")
     public LinkAssert alt(Matcher<String> condition) {
-        jdiAssert(element.alt(), condition);
+        jdiAssert(element().alt(), condition);
         return this;
     }
     public LinkAssert alt(String alt) { return alt(Matchers.is(alt)); }
 
     @JDIAction("Assert that '{name}' ref {0}")
     public LinkAssert ref(Matcher<String> condition) {
-        jdiAssert(element.ref(), condition);
+        jdiAssert(element().ref(), condition);
         return this;
     }
     public LinkAssert ref(String ref) { return ref(Matchers.is(ref)); }

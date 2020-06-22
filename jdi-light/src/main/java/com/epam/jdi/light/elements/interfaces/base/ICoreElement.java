@@ -81,5 +81,19 @@ public interface ICoreElement extends IBaseElement {
     default void doubleClick() {
         iCore().doubleClick();
     }
-
+    default void press(Keys key) {
+        iCore().press(key);
+    }
+    default void command(String sequence) {
+        iCore().command(sequence);
+    }
+    default void commands(String... commands) {
+        iCore().commands(commands);
+    }
+    default void pasteText(String text) {
+        iCore().pasteText(text);
+    }
+    default void pasteText(String text, long timeToWaitMSec) {
+        iCore().pasteText(text, timeToWaitMSec);
+    }
 }

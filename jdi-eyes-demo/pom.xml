@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.1</aspectj.version>
+        <aspectj.version>1.9.5</aspectj.version>
     </properties>
 
     <dependencies>
@@ -26,13 +26,13 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.10</version>
+            <version>1.2.16</version>
         </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>RELEASE</version>
+            <version>6.14.3</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -101,15 +101,6 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>LATEST</version>
-                <configuration>
-                    <properties>
-                        <allure.results.directory>target/allure-results</allure.results.directory>
-                    </properties>
-                    <properties>
-                        <allure.link.issue.pattern>https://example.org/issue/{}</allure.link.issue.pattern>
-                    </properties>
-                </configuration>
             </plugin>
         </plugins>
     </reporting>

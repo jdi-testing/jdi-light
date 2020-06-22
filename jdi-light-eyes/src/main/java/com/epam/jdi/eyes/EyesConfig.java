@@ -14,9 +14,10 @@ import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
 import org.openqa.selenium.WebDriver;
 
-import static com.epam.jdi.eyes.JDIEyes.*;
-import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.eyes.JDIEyes.EYES_CONFIG;
+import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
+import static com.epam.jdi.light.settings.WebSettings.VISUAL_PAGE_STRATEGY;
+import static com.epam.jdi.tools.StringUtils.format;
 
 public class EyesConfig extends DataClass<EyesConfig> {
     public String appName;

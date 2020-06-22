@@ -2,7 +2,7 @@ package io.github.epam.test.data.sections;
 
 import org.testng.annotations.DataProvider;
 
-import static pseudo.site.PseudoSite.*;
+import static pseudo.site.PseudoSite.customSectionUI;
 
 public class CustomSectionUIDataProvider {
     @DataProvider

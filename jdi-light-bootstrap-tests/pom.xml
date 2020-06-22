@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <version>1.2.10</version>
+    <version>1.2.16</version>
     <artifactId>jdi-light-bootstrap-tests</artifactId>
     <name>Tests: JDI Bootstrap</name>
     <groupId>com.epam.jdi</groupId>
@@ -15,7 +15,7 @@
         <allure.maven>2.10.0</allure.maven>
         <allure.testng>2.13.2</allure.testng>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.1</aspectj.version>
+        <aspectj.version>1.9.5</aspectj.version>
     </properties>
 
     <dependencies>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-bootstrap</artifactId>
-            <version>1.2.10</version>
+            <version>1.2.16</version>
         </dependency>
 
         <!--Allure config in parent-->
@@ -42,8 +42,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>RELEASE</version>
-            <!--version>6.14.3</version-->
+            <version>6.14.3</version>
         </dependency>
     </dependencies>
 
@@ -127,15 +126,6 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>LATEST</version>
-                <configuration>
-                    <properties>
-                        <allure.results.directory>target/allure-results</allure.results.directory>
-                    </properties>
-                    <properties>
-                        <allure.link.issue.pattern>https://example.org/issue/{}</allure.link.issue.pattern>
-                    </properties>
-                </configuration>
             </plugin>
         </plugins>
     </reporting>

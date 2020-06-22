@@ -4,6 +4,21 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
+## 1.2.16 (release 17.05.2020)
+* Add keyboard commands (press, command, commands, pasteText) to UIElement
+
+## 1.2.15 (release 08.06.2020)
+* Fix list issue with multiple same values
+
+## 1.2.14 (release 31.05.2020)
+* Update test properties description and capabilities
+
+## 1.2.13 (release 25.05.2020)
+* Update version of AspectJ to 1.9.5. Support JDK 11
+
+## 1.2.11 (release 23.05.2020)
+* Technical release
+
 ## 1.2.10 (release 21.05.2020)
 * Improve tables add footer support and few more locators in JTable #2009
 

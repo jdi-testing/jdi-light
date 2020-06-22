@@ -6,7 +6,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -27,6 +27,6 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox>
 
     //protected
     protected String getIsSelected() {
-        return element.isSelected() ? "selected" : "not selected";
+        return element().isSelected() ? "selected" : "not selected";
     }
 }

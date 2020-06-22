@@ -10,10 +10,11 @@ import org.hamcrest.Matchers;
 import java.util.Collection;
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
-import static com.epam.jdi.light.common.Exceptions.*;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.*;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
+import static com.epam.jdi.tools.LinqUtils.isSorted;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -22,8 +23,7 @@ import static org.hamcrest.Matchers.*;
  */
 public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert<?,?>> extends UIAssert<A, T> {
     protected T table() {
-        element.refresh();
-        return element;
+        return element();
     }
     /**
      * Check that the table is empty

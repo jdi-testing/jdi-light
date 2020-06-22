@@ -7,8 +7,8 @@ import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.aspectj.lang.ProceedingJoinPoint;
 
-import static com.epam.jdi.light.actions.ActionHelper.*;
-import static org.apache.logging.log4j.util.Strings.*;
+import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
+import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
