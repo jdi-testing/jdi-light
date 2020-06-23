@@ -30,5 +30,4 @@ public class TableWithPagesPage extends WebPage {
         elem.click();
         return elem;
     }
-
 }
