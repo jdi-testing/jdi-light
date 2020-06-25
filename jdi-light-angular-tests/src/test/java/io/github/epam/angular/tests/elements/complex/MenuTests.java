@@ -17,21 +17,18 @@ public class MenuTests extends TestsInit {
     }
 
     @Test
-    public void basicMenuTest() throws InterruptedException {
+    public void basicMenuTest() {
         menuSection.basicMenu.is().displayed();
-        menuSection.basicMenu.select(1);
-        menuSection.matMenuPanel0.select("Item 1");
-        menuSection.matMenuPanel0.is().hidden();
-        Thread.sleep(5000);
+        menuSection.basicMenu.select("Item 1");
+        menuSection.nestedMenu.select("Vertebrates");
+        menuSection.nestedMenu.select("Vertebrates", "Fishes");
+        menuSection.nestedMenu.select("Vertebrates", "Fishes", "Bala shark");
     }
 
     @Test
     public void menuWithIconsTest() {
         menuSection.menuWithIcons.is().displayed();
         menuSection.menuWithIcons.select(1);
-        menuSection.matMenuPanel1.is().displayed();
-        menuSection.matMenuPanel1.select(1);
-        menuSection.matMenuPanel1.is().hidden();
     }
 
     @Test
