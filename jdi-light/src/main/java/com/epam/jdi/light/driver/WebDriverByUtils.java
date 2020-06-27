@@ -180,7 +180,7 @@ public final class WebDriverByUtils {
         String by = locator.contains("*root*")
             ? locator.replaceAll("\\*root\\*", "")
             : locator;
-        return by.contains("/") || by.contains("..")
+        return by.substring(0,2).contains("/") || by.contains("..")
                 ? By.xpath(locator)
                 : By.cssSelector(locator);
     }

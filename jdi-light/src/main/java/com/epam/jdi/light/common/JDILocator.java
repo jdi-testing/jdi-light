@@ -62,8 +62,8 @@ public class JDILocator {
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)
                 : locator;
-        if (byLocator.toString().contains("By.cssSelector"))
-            byLocator = defineLocator(getByLocator(byLocator));
+        // if (byLocator.toString().contains("By.cssSelector"))
+        //     byLocator = defineLocator(getByLocator(byLocator));
         this.element = element;
     }
     public void add(List<By> frames, JDIBase element) {

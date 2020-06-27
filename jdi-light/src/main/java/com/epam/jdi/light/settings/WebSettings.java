@@ -147,7 +147,7 @@ public class WebSettings {
         try {
             Properties properties = getProperties(COMMON.testPropertiesPath);
             if (properties.isEmpty()) {
-                LOGS.writeToAllure = false;
+                LOGS.writeToAllure = !getProperties("allure.properties").isEmpty();
                 COMMON.strategy.action.execute();
                 return;
 

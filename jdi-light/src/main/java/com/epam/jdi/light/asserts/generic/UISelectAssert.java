@@ -54,6 +54,14 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
         return (A) this;
     }
     @JDIAction("Assert that '{name}' values {0}")
+    public A value(Matcher<String> condition) {
+        return values(hasItem(condition));
+    }
+    @JDIAction("Assert that '{name}' has value {0}")
+    public A value(String value) {
+        return values(hasItem(value));
+    }
+    @JDIAction("Assert that '{name}' values {0}")
     public A values(Matcher<? super List<String>> condition) {
         jdiAssert(element().values(), condition);
         return (A) this;

@@ -14,6 +14,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -125,20 +126,22 @@ public class ActionHelper {
         }
     }
     public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
-    static String previousAllureStep = "";
+    static Safe<List<String>> allureSteps = new Safe<>(new ArrayList<>());
     public static void beforeJdiAction(ActionObject jInfo) {
         ProceedingJoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
-        if (LOGS.writeToAllure && logLevel(jp).equalOrMoreThan(INFO) && !previousAllureStep.equals(message))
-            jInfo.stepUId = startStep(message);
-        previousAllureStep = message;
         if (jInfo.topLevel()) {
+            allureSteps.reset();
             if (LOGS.writeToLog)
                 logger.toLog(message, logLevel(jp));
             if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
                 processPage(jInfo);
             if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
                 visualValidation(jp, message);
+        }
+        if (LOGS.writeToAllure && logLevel(jp).equalOrMoreThan(INFO) && (allureSteps.get().isEmpty() || !allureSteps.get().contains(message))) {
+            jInfo.stepUId = startStep(message);
+            allureSteps.get().add(message);
         }
     }
     private static void visualValidation(ProceedingJoinPoint jp, String message) {
