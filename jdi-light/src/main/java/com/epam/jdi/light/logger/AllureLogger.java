@@ -40,28 +40,32 @@ public class AllureLogger {
     public static void failStep(String uuid, String screenName, String htmlSnapshot, String requests) {
         if (!LOGS.writeToAllure || isBlank(uuid)) return;
 
-        getLifecycle().updateStep(uuid, s -> s.withStatus(FAILED));
-        if (isNotBlank(screenName)) {
-            try {
-                attachScreenshot(screenName);
-            } catch (IOException ex) {
-                throw exception(ex, "");
-            }
-        }
-        if (isNotBlank(htmlSnapshot)) {
-            attachText("HTML Code Snapshot", "text/html", htmlSnapshot);
-        }
-        if (isNotBlank(requests)) {
-            attachText("HTTP Requests", "text/plain", requests);
-        }
-
+        getLifecycle().updateStep(uuid, s -> s.setStatus(FAILED));
         getLifecycle().stopStep(uuid);
+
+        if (isNotBlank(screenName) || isNotBlank(htmlSnapshot) || isNotBlank(requests)) {
+            String detailsUUID = AllureLogger.startStep("Failure details");
+            if (isNotBlank(screenName)) {
+                try {
+                    attachScreenshot(screenName);
+                } catch (IOException ex) {
+                    throw exception(ex, "");
+                }
+            }
+            if (isNotBlank(htmlSnapshot)) {
+                attachText("HTML Code Snapshot", "text/html", htmlSnapshot);
+            }
+            if (isNotBlank(requests)) {
+                attachText("HTTP Requests", "text/plain", requests);
+            }
+            getLifecycle().stopStep(detailsUUID);
+        }
     }
 
     public static void passStep(String uuid) {
         if (!LOGS.writeToAllure || isBlank(uuid)) return;
 
-        getLifecycle().updateStep(uuid, s -> s.withStatus(PASSED));
+        getLifecycle().updateStep(uuid, s -> s.setStatus(PASSED));
         getLifecycle().stopStep(uuid);
     }
 

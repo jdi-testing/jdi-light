@@ -41,6 +41,7 @@ import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
+import static com.epam.jdi.light.logger.Strategy.FAIL;
 import static com.epam.jdi.light.logger.Strategy.parseStrategy;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.Strategies.*;
@@ -356,7 +357,9 @@ public class WebSettings {
         }
     }
     private static List<com.epam.jdi.light.logger.Strategy> getLoggerStrategy(String strategy) {
-        if (isBlank(strategy) || strategy.trim().equalsIgnoreCase("off"))
+        if (isBlank(strategy))
+            return asList(FAIL);
+        if (strategy.trim().equalsIgnoreCase("off"))
             return new ArrayList<>();
         List<com.epam.jdi.light.logger.Strategy> strategies = new ArrayList<>();
         try {
