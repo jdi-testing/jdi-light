@@ -50,7 +50,7 @@ public class ButtonTests implements TestsInit {
     @Test
     public void clickTest() {
         redButton.click();
-        validateAlert("Red button");
+        validateAlert("Red button2");
 
         blueButton.click();
         validateAlert("Blue button");

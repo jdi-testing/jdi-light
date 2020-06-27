@@ -2,6 +2,7 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.ScreenshotMaker;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -39,6 +40,7 @@ import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.PageChecks.NONE;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
+import static com.epam.jdi.light.driver.ScreenshotMaker.*;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
@@ -287,7 +289,9 @@ public class ActionHelper {
         String htmlSnapshot = "";
         String errors = "";
         if (LOGS.screenStrategy.contains(FAIL))
-            screenName = takeScreen();
+            screenName = SCREEN.tool.equalsIgnoreCase("robot")
+                ? takeRootScreenshot()
+                : takeScreen();
         if (LOGS.htmlCodeStrategy.contains(FAIL))
             htmlSnapshot = takeHtmlCodeOnFailure();
         if (LOGS.requestsStrategy.contains(FAIL)) {

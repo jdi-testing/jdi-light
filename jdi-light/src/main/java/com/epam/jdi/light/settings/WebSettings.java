@@ -164,6 +164,7 @@ public class WebSettings {
             fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(WebSettings::setDomain, "domain");
             fillAction(p -> SCREEN.path = p, "screens.folder");
+            fillAction(p -> SCREEN.tool = p, "screenshot.tool");
             fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
             fillAction(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
             fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
