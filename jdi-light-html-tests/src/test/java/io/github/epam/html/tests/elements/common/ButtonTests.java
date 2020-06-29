@@ -39,7 +39,7 @@ public class ButtonTests implements TestsInit {
 
     @Test
     public void getTextTest() {
-        assertEquals(redButton.getText(), text+"T");
+        assertEquals(redButton.getText(), text);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ButtonTests implements TestsInit {
     @Test
     public void clickTest() {
         redButton.click();
-        validateAlert("Red button2");
+        validateAlert("Red button");
 
         blueButton.click();
         validateAlert("Blue button");
