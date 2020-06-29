@@ -8,7 +8,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.light.settings.WebSettings.hasDomain;
 import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;

@@ -12,7 +12,8 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsVal
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.SimpleTablePage.*;
+import static io.github.com.pages.SimpleTablePage.furniture;
+import static io.github.com.pages.SimpleTablePage.simpleTable;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.greaterThan;

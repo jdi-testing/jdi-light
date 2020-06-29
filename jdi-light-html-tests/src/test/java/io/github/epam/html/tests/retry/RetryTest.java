@@ -1,9 +1,7 @@
 package io.github.epam.html.tests.retry;
 
 import io.github.epam.TestsInit;
-import io.qameta.allure.Step;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.html5Page;
