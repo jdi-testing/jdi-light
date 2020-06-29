@@ -65,7 +65,7 @@ public class DropdownITests implements TestsInit {
             dressCode3.select("Unknown");
             fail("You have selected dressCode that does not exist in dropdown - something went wrong");
         } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("Cannot locate element with with text: Unknown"));
+            assertThat(safeException(ex), containsString("Cannot locate element with text: Unknown"));
         }
     }
 

@@ -25,6 +25,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 
@@ -180,7 +181,12 @@ public final class WebDriverByUtils {
         String by = locator.contains("*root*")
             ? locator.replaceAll("\\*root\\*", "")
             : locator;
-        return by.substring(0,2).contains("/") || by.contains("..")
+        if (isBlank(by))
+            return By.cssSelector("");
+        if (by.length() == 1) {
+            return By.cssSelector(locator);
+        }
+        return by.substring(0,2).contains("/") || by.contains("..") || by.charAt(0) == '('
                 ? By.xpath(locator)
                 : By.cssSelector(locator);
     }

@@ -90,4 +90,8 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
 
         }
     }
+    @Override
+    public List<String> values() {
+        return LinqUtils.map(asData(), Object::toString);
+    }
 }
