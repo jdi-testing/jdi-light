@@ -34,7 +34,7 @@ public class ActionObject {
     }
     public Object object() { return obj.get(); }
     private CacheValue<Object> obj = new CacheValue<>(
-        () -> jp.getThis() != null ? jp.getThis() : new Object());
+        () -> jp.getThis() != null ? jp.getThis() : jp.getSignature().getDeclaringType().getSimpleName());
 
     public IBaseElement element() { return element.get(); }
     private CacheValue<IBaseElement> element = new CacheValue<>(this::getElement);

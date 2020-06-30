@@ -27,6 +27,9 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
+import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
+import static com.epam.jdi.light.logger.Strategy.FAIL;
+import static com.epam.jdi.light.logger.Strategy.parseStrategy;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
@@ -132,7 +135,12 @@ public class WebSettings {
         if (initialized) return;
         logger.debug("init()");
         try {
-            getProperties(COMMON.testPropertiesPath);
+            Properties properties = getProperties(COMMON.testPropertiesPath);
+            if (properties.isEmpty()) {
+                LOGS.writeToAllure = !getProperties("allure.properties").isEmpty();
+                COMMON.strategy.action.execute();
+                return;
+            }
             TestProperties.getTestsProperties().forEach((k, v) ->
             {
                 String propertyName = k;

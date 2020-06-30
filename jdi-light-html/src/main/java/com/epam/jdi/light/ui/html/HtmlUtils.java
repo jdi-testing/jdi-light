@@ -18,10 +18,12 @@ public class HtmlUtils {
      * @return int attribute value
      */
     public static int getInt(String attr, WebElement el) {
-        String value = el.getAttribute(attr);
+        return getInt(el.getAttribute(attr));
+    }
+    public static int getInt(String value) {
         try {
             return parseInt(value);
-        } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Integer", attr, value); }
+        } catch (Exception ex) { throw exception("Can't parse value '%s' to Integer", value); }
     }
     /**
      * Gets attribute and casts it to double
@@ -29,18 +31,19 @@ public class HtmlUtils {
      * @return int attribute value
      */
     public static double getDouble(String attr, WebElement el) {
-        String value = el.getAttribute(attr);
+        return getDouble(el.getAttribute(attr));
+    }
+    public static double getDouble(String value) {
         try {
             return parseDouble(value);
-        } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Double", attr, value); }
+        } catch (Exception ex) { throw exception("Can't parse value '%s' to Double", value); }
     }
 
     public static double getDouble(String attr, WebElement el, double defaultValue) {
         String value = el.getAttribute(attr);
         try {
             return parseDouble(value);
-        } catch (Exception ex) {
-            return defaultValue; }
+        } catch (Exception ex) { return defaultValue; }
     }
     /**
      * Gets attribute and casts it to float
@@ -48,9 +51,11 @@ public class HtmlUtils {
      * @return int attribute value
      */
     public static float getFloat(String attr, WebElement el) {
-        String value = el.getAttribute(attr);
+        return getFloat(el.getAttribute(attr));
+    }
+    public static float getFloat(String value) {
         try {
             return parseFloat(value);
-        } catch (Exception ex) { throw exception("Can't parse attribute '%s=%s' to Double", attr, value); }
+        } catch (Exception ex) { throw exception("Can't parse value '%s' to Double", value); }
     }
 }
