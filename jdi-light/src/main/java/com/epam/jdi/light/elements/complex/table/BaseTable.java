@@ -60,6 +60,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected By filterLocator = By.cssSelector("th input[type=search],th input[type=text]");
     protected int rowHeaderIndex = -1;
     protected int firstColumnIndex = -1;
+    protected int firstRowIndex = -1;
     protected int[] columnsMapping = new int[]{};
     protected String rowHeaderName = "";
 
@@ -341,6 +342,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
 
     protected Boolean headerIsRow = null;
     protected int getRowIndex(int rowNum) {
+        if (firstRowIndex > 1)
+            return rowNum + firstRowIndex - 1;
         if (headerIsRow == null) {
             headerIsRow = headerIsRow();
         }
@@ -370,7 +373,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Filter {name} by column {0}")
     public UIElement searchBy(String filterName) {
         int index = header().indexOf(filterName);
-        return filter().get(index);
+        return filter().get(index + 1);
     }
 
     /**
@@ -676,6 +679,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             this.count.setFinal(j.count());
         if (j.firstColumnIndex() != -1)
             this.firstColumnIndex = j.firstColumnIndex();
+        if (j.firstColumnIndex() != -1)
+            this.firstRowIndex = j.firstColumnIndex();
         if (isNotBlank(rowHeader))
             rowHeaderName = rowHeader;
 

@@ -2,6 +2,9 @@ package com.epam.jdi.light.driver;
 
 import org.openqa.selenium.TakesScreenshot;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -59,11 +62,31 @@ public class ScreenshotMaker {
         return screensFilePath;
     }
 
-    private String getFileName(String fileName) {
+    private static String getFileName(String fileName) {
         int num = 1;
         String newName = fileName;
         while (new File(newName + SCREEN.fileSuffix).exists())
             newName = fileName + "_" + num++;
         return newName + "." + SCREEN.fileSuffix;
+    }
+
+    public static String takeRootScreenshot() {
+        String name = TEST_NAME.get();
+        return takeRootScreenshot(isNotBlank(name) ? name : SCREEN_NAME, "yyyy-MM-dd-HH-mm-ss");
+    }
+    public static String takeRootScreenshot(String name, String dateFormat) {
+        String screensFilePath = getFileName(mergePath(getPath(), name + nowTime(dateFormat)));
+        try {
+            Rectangle rectangle = new Rectangle(
+                    Toolkit.getDefaultToolkit().getScreenSize());
+            new File(screensFilePath).getParentFile().mkdirs();
+            Robot robot = new Robot();
+            BufferedImage img = robot.createScreenCapture(rectangle);
+            ImageIO.write(img, "jpg", new File(screensFilePath));
+        } catch (Exception ex) {
+            throw exception(ex, "Failed to do screenshot with robot");
+        }
+        logger.info("Screenshot: " + screensFilePath);
+        return screensFilePath;
     }
 }

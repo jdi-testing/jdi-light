@@ -7,7 +7,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -17,7 +16,7 @@ import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
 public class RangeAssert extends UIAssert<RangeAssert, Range> {
     @JDIAction("Assert that '{name}' volume {0}")
     public RangeAssert value(Matcher<Double> value) {
-        jdiAssert(getDouble("value", element().core()), value);
+        jdiAssert(element().value(), value);
         return this;
     }
 
