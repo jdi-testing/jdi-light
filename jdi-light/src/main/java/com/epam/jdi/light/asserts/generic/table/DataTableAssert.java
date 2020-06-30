@@ -68,7 +68,7 @@ public class DataTableAssert<L extends PageObject, D>
         return this;
     }
     @JDIAction("Assert that '{name}' is sorted by ascending")
-    public <C extends HasValue> DataTableAssert<L, D> sortedByAsc(String columnName, JFunc1<UIElement, Object> getValue) {
+    public DataTableAssert<L, D> sortedByAsc(String columnName, JFunc1<UIElement, Object> getValue) {
         WebList column = table().webColumn(columnName);
         for (int i = 1; i < column.size(); i++)
             if (!isSorted(getValue.execute(column.get(i-1)), getValue.execute(column.get(i)), true, false))
@@ -76,7 +76,7 @@ public class DataTableAssert<L extends PageObject, D>
         return this;
     }
     @JDIAction("Assert that '{name}' is sorted by descending")
-    public <C extends HasValue> DataTableAssert<L, D> sortedByDesc(String columnName, JFunc1<UIElement, Object> getValue) {
+    public DataTableAssert<L, D> sortedByDesc(String columnName, JFunc1<UIElement, Object> getValue) {
         WebList column = table().webColumn(columnName);
         for (int i = 1; i < column.size(); i++)
             if (!isSorted(getValue.execute(column.get(i-1)), getValue.execute(column.get(i)), false, false))

@@ -13,6 +13,7 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.SimpleTablePage.furniture;
+import static io.github.com.pages.SimpleTablePage.simpleTable;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.greaterThan;
@@ -35,6 +36,17 @@ public class FurnitureTests implements TestsInit {
         assertEquals(furniture.size(), 4);
         assertEquals(furniture.count(), 5);
         assertEquals(furniture.header(), asList("Name", "Type", "Cost", "Weight"));
+    }
+    @Test
+    public void simpleTableParamsTest() {
+        assertEquals(simpleTable.size(), 3);
+        assertEquals(simpleTable.count(), 6);
+        assertEquals(simpleTable.header(), asList("Drivers", "Selenium Custom", "JavaScript, Appium, WinAPI, Sikuli"));
+    }
+    @Test
+    public void simpleTableInteractTest() {
+        assertEquals(simpleTable.cell(1,1), "Drivers");
+        assertEquals(simpleTable.cell(3,6), "Cucumber, Jbehave, Thucydides, SpecFlow");
     }
 
     @Test

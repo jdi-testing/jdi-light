@@ -153,7 +153,13 @@ public class InitActions {
         $("Smart Class", aRule(SClass.class, (e, a) -> e.base().setLocator(format(".%s", toKebabCase(e.getName()))))),
         $("List UI", aRule(UI.class, (e,a,f)-> {
             UI[] uis = f.getAnnotationsByType(UI.class);
-            if (uis.length > 0 && any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+            if (uis.length <= 0)
+                return;
+            if (uis.length == 1) {
+                e.base().setLocator(findByToBy(uis[0]));
+                return;
+            }
+            if (any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
                 e.base().setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
             })),
         $("FindBy UI", aRule(FindBy.class, (e,a,f)-> {
