@@ -16,8 +16,4 @@ public class RangeControl extends Range {
         for (int i = 0; i < count; i++)
             decreaseRange.click();
     }
-    @Override
-    public double value() {
-        return getDouble("value", $("default-range-value"));
-    }
 }

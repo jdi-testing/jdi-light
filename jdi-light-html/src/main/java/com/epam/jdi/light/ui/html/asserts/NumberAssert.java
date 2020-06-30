@@ -24,21 +24,21 @@ public class NumberAssert extends UIAssert<NumberAssert, NumberSelector>
     }
     @JDIAction("Assert that '{name}' minValue {0}")
     public NumberAssert min(Matcher<Double> min) {
-        jdiAssert(getDouble("min", element().core()), min);
+        jdiAssert(element().min(), min);
         return this;
     }
     public NumberAssert min(double min) { return min(Matchers.is(min)); }
 
     @JDIAction("Assert that '{name}' maxValue {0}")
     public NumberAssert max(Matcher<Double> max) {
-        jdiAssert(getDouble("max", element().core()), max);
+        jdiAssert(element().max(), max);
         return this;
     }
     public NumberAssert max(double max) { return max(Matchers.is(max)); }
 
     @JDIAction("Assert that '{name}' step {0}")
     public NumberAssert step(Matcher<Double> step) {
-        jdiAssert(getDouble("step", element().core()), step);
+        jdiAssert(element().step(), step);
         return this;
     }
     public NumberAssert step(double step) { return step(Matchers.is(step)); }
@@ -52,7 +52,7 @@ public class NumberAssert extends UIAssert<NumberAssert, NumberSelector>
 
     @JDIAction("Assert that '{name}' number {0}")
     public NumberAssert number(Matcher<Double> number) {
-        jdiAssert(getDouble("value", element().core()), number);
+        jdiAssert(getDouble(element().value()), number);
         return this;
     }
     public NumberAssert number(double number) { return number(Matchers.is(number)); }

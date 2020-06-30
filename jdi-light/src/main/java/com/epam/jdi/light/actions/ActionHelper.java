@@ -14,6 +14,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -38,6 +39,7 @@ import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.PageChecks.NONE;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
+import static com.epam.jdi.light.driver.ScreenshotMaker.takeRootScreenshot;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
@@ -74,14 +76,14 @@ public class ActionHelper {
     static String getTemplate(LogLevels level) {
         if (LOGS.logInfoDetails != null) {
             switch (LOGS.logInfoDetails) {
-                case NONE: return "{action}";
-                case NAME: return "{action} ({name})";
-                case LOCATOR: return "{action} ({locator})";
-                case CONTEXT: return "{action} ({context})";
-                case ELEMENT: return "{action} ({element})";
+                case NONE: return STEP_TEMPLATE;
+                case NAME: return NAME_TEMPLATE;
+                case LOCATOR: return LOCATOR_TEMPLATE;
+                case CONTEXT: return CONTEXT_TEMPLATE;
+                case ELEMENT: return ELEMENT_TEMPLATE;
             }
         }
-        return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : DEFAULT_TEMPLATE;
+        return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : ELEMENT_TEMPLATE;
     }
     public static int CUT_STEP_TEXT = 70;
     public static String getActionName(ProceedingJoinPoint jp) {
@@ -89,8 +91,8 @@ public class ActionHelper {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
             return isBlank(template)
-                    ? getDefaultName(method.getName(), methodArgs(jp, method))
-                    : fillTemplate(template, jp, method);
+                ? getDefaultName(method.getName(), methodArgs(jp, method))
+                : fillTemplate(template, jp, method);
         } catch (Throwable ex) {
             throw exception(ex, "Surround method issue: Can't get action name: ");
         }
@@ -125,20 +127,22 @@ public class ActionHelper {
         }
     }
     public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
-    static String previousAllureStep = "";
+    static Safe<List<String>> allureSteps = new Safe<>(new ArrayList<>());
     public static void beforeJdiAction(ActionObject jInfo) {
         ProceedingJoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
-        if (LOGS.writeToAllure && logLevel(jp).equalOrMoreThan(INFO) && !previousAllureStep.equals(message))
-            jInfo.stepUId = startStep(message);
-        previousAllureStep = message;
         if (jInfo.topLevel()) {
+            allureSteps.reset();
             if (LOGS.writeToLog)
                 logger.toLog(message, logLevel(jp));
             if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
                 processPage(jInfo);
             if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
                 visualValidation(jp, message);
+        }
+        if (LOGS.writeToAllure && logLevel(jp).equalOrMoreThan(INFO) && (allureSteps.get().isEmpty() || !allureSteps.get().contains(message))) {
+            jInfo.stepUId = startStep(message);
+            allureSteps.get().add(message);
         }
     }
     private static void visualValidation(ProceedingJoinPoint jp, String message) {
@@ -284,7 +288,9 @@ public class ActionHelper {
         String htmlSnapshot = "";
         String errors = "";
         if (LOGS.screenStrategy.contains(FAIL))
-            screenName = takeScreen();
+            screenName = SCREEN.tool.equalsIgnoreCase("robot")
+                ? takeRootScreenshot()
+                : takeScreen();
         if (LOGS.htmlCodeStrategy.contains(FAIL))
             htmlSnapshot = takeHtmlCodeOnFailure();
         if (LOGS.requestsStrategy.contains(FAIL)) {
