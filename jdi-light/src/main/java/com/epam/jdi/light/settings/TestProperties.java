@@ -66,12 +66,13 @@ public class TestProperties {
             .put("timeout.wait.element", single(p -> TIMEOUTS.element = new Timeout(parseInt(p))));
         properties.put("timeout.wait.page", single(p -> TIMEOUTS.page = new Timeout(parseInt(p))));
         properties.put("domain", single(WebSettings::setDomain));
-        if (DRIVER.name.equals(DEFAULT_DRIVER)) {
+        if (DRIVER.name.equalsIgnoreCase(DEFAULT_DRIVER)) {
             properties.put("driver", single(p -> DRIVER.name = p));
         }
         properties.put("driver.version", single(p -> DRIVER.version = p));
         properties.put("drivers.folder", single(p -> DRIVER.path = p));
-        properties.put("screens.folder", combo(p -> SCREEN.path = p, () -> addStrategy(FAIL, LOGS.screenStrategy)));
+        properties.put("screens.folder", single(p -> SCREEN.path = p));
+        properties.put("screenshot.tool", single(p -> SCREEN.tool = p));
         properties.put("list.start.index", single(p -> ELEMENT.startIndex = parseInt(p)));
         properties
             .put("log.info.details", single(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p)));
