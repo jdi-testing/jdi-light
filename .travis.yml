@@ -22,6 +22,7 @@ env:
     - BOOTSTRAP_TESTS="jdi-light-bootstrap-tests"
     - HTML_TESTS="jdi-light-html-tests"
     - ANGULAR_TESTS="jdi-light-angular-tests"
+    - ANGULAR_TESTS_WITH_MOCKS="jdi-light-angular-tests-with-mocks"
     - EXAMPLES="jdi-light-examples"
     - EXAMPLES_PROPERTY="test-examples/jdi-light-examples"
     - PERFORMANCE="jdi-performance"
@@ -86,6 +87,13 @@ testsperformance: &testsperformance
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$PERFORMANCE_PROPERTY/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+testsangularwithmocks: &testsangularwithmocks
+  stage: test
+  name: Run tests - angular unit tests with mocks
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS_WITH_MOCKS
 
 jobs:
   include:
@@ -223,6 +231,27 @@ jobs:
       name: Run tests - performance - JDK12
       jdk: openjdk12
     - <<: *testsperformance
+      name: Run tests - performance - JDK13
+      jdk: openjdk13
+
+    - <<: *testsangularwithmocks
+      name: Run tests - performance - JDK8
+      if: true
+      jdk: openjdk8
+    - <<: *testsangularwithmocks
+      name: Run tests - performance - JDK9
+      jdk: openjdk9
+    - <<: *testsangularwithmocks
+      name: Run tests - performance - JDK10
+      if: true
+      jdk: openjdk10
+    - <<: *testsangularwithmocks
+      name: Run tests - performance - JDK11
+      jdk: openjdk11
+    - <<: *testsangularwithmocks
+      name: Run tests - performance - JDK12
+      jdk: openjdk12
+    - <<: *testsangularwithmocks
       name: Run tests - performance - JDK13
       jdk: openjdk13
 
