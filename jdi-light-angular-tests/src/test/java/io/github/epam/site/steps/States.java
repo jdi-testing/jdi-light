@@ -1,16 +1,12 @@
 package io.github.epam.site.steps;
 
-import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
-import static com.epam.jdi.light.settings.JDISettings.DRIVER;
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.StaticSite.loginForm;
-import static io.github.com.StaticSite.logout;
-import static io.github.com.StaticSite.userIcon;
-import static io.github.com.StaticSite.userName;
-
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.com.StaticSite;
 import io.qameta.allure.Step;
+
+import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static io.github.com.StaticSite.*;
 
 public class States {
     @Step
