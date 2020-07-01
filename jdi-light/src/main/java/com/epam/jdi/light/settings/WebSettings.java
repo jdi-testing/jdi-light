@@ -182,6 +182,7 @@ public class WebSettings {
             // RemoteWebDriver properties
             fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
             fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
+            fillAction(p -> DRIVER.remoteRun = parseBoolean(p), "driver.remote.run");
             fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
             logger.setLogLevel(LOGS.logLevel);
             fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
