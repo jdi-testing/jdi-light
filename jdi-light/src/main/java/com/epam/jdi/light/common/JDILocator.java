@@ -8,7 +8,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.light.settings.WebSettings.hasDomain;
 import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -62,8 +61,8 @@ public class JDILocator {
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)
                 : locator;
-        if (byLocator.toString().contains("By.cssSelector"))
-            byLocator = defineLocator(getByLocator(byLocator));
+        // if (byLocator.toString().contains("By.cssSelector"))
+        //     byLocator = defineLocator(getByLocator(byLocator));
         this.element = element;
     }
     public void add(List<By> frames, JDIBase element) {
@@ -108,7 +107,7 @@ public class JDILocator {
     public String toString() {
         try {
             By locator = getLocator(args);
-            if ((locator == null || !hasDomain() && !hasFrame()) && element != null)
+            if (locator == null && element != null)
                 return isNotBlank(ELEMENT.smartTemplate)
                         ? printSmartLocators(element)
                         : "";

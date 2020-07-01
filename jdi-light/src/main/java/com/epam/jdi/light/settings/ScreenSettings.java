@@ -14,6 +14,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class ScreenSettings {
     public String path = mergePath(COMMON.logsPath, "screens");
     public String fileSuffix = "jpg";
+    public String tool = "selenium";
 
     public JFunc1<String, String> getScreenName = screenName -> {
         String fileName = mergePath(getPath(), screenName + nowTime("yyyy-MM-dd-HH-mm-ss"));

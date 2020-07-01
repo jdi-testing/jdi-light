@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.ui.html.asserts.NumberAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -18,13 +19,13 @@ public class NumberSelector extends UIBaseElement<NumberAssert>
     // region Actions
 
     @JDIAction(value = "Get '{name}' min value", level = DEBUG)
-    public String min() { return uiElement.attr("min"); }
+    public Double min() { return getDouble("min", uiElement); }
     @JDIAction(value = "Get '{name}' max value", level = DEBUG)
-    public String max() { return uiElement.attr("max"); }
+    public Double max() { return getDouble("max", uiElement); }
     @JDIAction(value = "Get '{name}' value", level = DEBUG)
     public String value() { return uiElement.attr("value"); }
     @JDIAction(value = "Get '{name}' step size", level = DEBUG)
-    public String step() { return uiElement.attr("step"); }
+    public Double step() { return getDouble("step", uiElement); }
     @JDIAction("Select number '{0}' for '{name}'")
     public void setNumber(String number) {
         uiElement.setAttribute("value", number);

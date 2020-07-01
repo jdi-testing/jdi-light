@@ -21,7 +21,7 @@ public class TableMatcher {
         return $$(locator, table);
     };
     public static TableMatcher hasValue(String value, Column column) {
-        return new TableMatcher("/td[%s][normalize-space(.) = "+ Quotes.escape(value)+"]",
+        return new TableMatcher("/td[%s][normalize-space(.)="+ Quotes.escape(value)+"]",
                 column, "has '"+value +"'");
     }
     public static TableMatcher containsValue(String value, Column column) {
