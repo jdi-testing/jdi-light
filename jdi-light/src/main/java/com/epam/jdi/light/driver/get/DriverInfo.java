@@ -45,10 +45,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     public JFunc1<Capabilities, WebDriver> getRemoteDriver;
 
     public boolean isLocal() {
-        //We use original logic in case driver.remoteRun is not set in test.properties file
-        return DRIVER.remoteRun != null
-                ? !DRIVER.remoteRun
-                : isEmpty(DRIVER.remoteUrl) && (isNotBlank(DRIVER.path) && isNotBlank(path.execute()) || downloadType != null);
+        return !DRIVER.remoteRun;
     }
     public WebDriver getDriver() {
         logger.debug("getDriver(): " + toString());

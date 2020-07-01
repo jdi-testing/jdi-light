@@ -182,7 +182,7 @@ public class WebSettings {
             // RemoteWebDriver properties
             fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
             fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
-            fillAction(p -> DRIVER.remoteRun = parseRemoteRun(p), "driver.remote.run");
+            fillAction(p -> DRIVER.remoteRun = parseBoolean(p), "driver.remote.run");
             fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
             logger.setLogLevel(LOGS.logLevel);
             fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
@@ -210,17 +210,6 @@ public class WebSettings {
             initialized = true;
         } catch (Throwable ex) {
             throw exception(ex, "Failed to init test.properties");
-        }
-    }
-
-    private static Boolean parseRemoteRun(String remoteRunProperty) {
-        switch (remoteRunProperty.trim().toLowerCase()) {
-            case "true":
-                return true;
-            case "false":
-                return false;
-            default:
-                return null;
         }
     }
 
