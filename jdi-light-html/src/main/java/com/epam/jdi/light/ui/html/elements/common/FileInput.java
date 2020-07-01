@@ -10,7 +10,6 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import static com.epam.jdi.light.common.ElementArea.JS;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
-import static com.epam.jdi.light.elements.common.Keyboard.pasteText;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.INFO;
+import static com.epam.jdi.light.logger.Strategy.FAIL;
+import static com.epam.jdi.tools.LinqUtils.newList;
 
 public class LogSettings {
     public LogLevels logLevel = INFO;
     public boolean writeToAllure = true;
     public boolean writeToLog = true;
-    public List<Strategy> screenStrategy = new ArrayList<>();
+    public List<Strategy> screenStrategy = newList(FAIL);
     public List<Strategy> htmlCodeStrategy = new ArrayList<>();
     public List<Strategy> requestsStrategy = new ArrayList<>();
     public JFunc1<LogEntry, Boolean> filterHttpRequests =

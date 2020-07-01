@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.ui.html.asserts.ProgressAssert;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -15,9 +16,9 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 public class ProgressBar extends UIBaseElement<ProgressAssert> implements HasLabel, HasValue {
     // region Actions
     @JDIAction(value = "Get '{name}' max limit", level = DEBUG)
-    public String max() { return uiElement.attr("max"); }
+    public int max() { return getInt(uiElement.attr("max")); }
     @JDIAction("Get '{name}' progress value ")
-    public String value() { return uiElement.attr("value"); }
+    public int value() { return getInt(uiElement.attr("value")); }
     // endregion
 
     // region Set and get value for Forms

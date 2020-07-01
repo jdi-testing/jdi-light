@@ -4,12 +4,12 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.ui.bootstrap.asserts.ProgressAssert;
+import com.epam.jdi.tools.PrintUtils;
 
 import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
-import static com.epam.jdi.tools.PrintUtils.print;
 
 /**
  * To see an example of bootstrap Progress bar please visit https://getbootstrap.com/docs/4.3/components/progress/
@@ -22,7 +22,7 @@ public class Progress extends UIBaseElement<ProgressAssert> implements HasValue 
     @JDIAction(value = "Get '{name}' min limit", level = DEBUG)
     public int min() { return getInt("aria-valuemin", uiElement.finds(".progress-bar").first()); }
     @JDIAction("Get '{name}' progress value ")
-    public String value() { return print(values(), ";"); }
+    public String value() { return PrintUtils.print(values(), ";"); }
     @JDIAction(value = "Get '{name}' min limit")
     public List<String> values() { return uiElement.finds(".progress-bar").values(); }
     // endregion

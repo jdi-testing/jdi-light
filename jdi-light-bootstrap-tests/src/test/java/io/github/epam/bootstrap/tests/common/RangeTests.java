@@ -16,9 +16,8 @@ public class RangeTests implements TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
+        bsPage.open();
         defaultRange.show();
-        defaultRange.setupValue(50);
     }
 
     @Test

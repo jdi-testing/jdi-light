@@ -38,15 +38,15 @@ public class NumberSelectorTests implements TestsInit {
 
     @Test
     public void minTest() {
-        assertEquals(height.min(), "0.3");
+        assertEquals(height.min(), 0.3);
     }
     @Test
     public void maxTest() {
-        assertEquals(height.max(), "2.5");
+        assertEquals(height.max(), 2.5);
     }
     @Test
     public void stepTest() {
-        assertEquals(height.step(), "0.2");
+        assertEquals(height.step(), 0.2);
     }
     @Test
     public void placeholderTest() {

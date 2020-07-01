@@ -31,11 +31,11 @@ public class ProgressTests implements TestsInit {
 
     @Test
     public void getValueTest() {
-        assertEquals(progress.value(), "70");
+        assertEquals(progress.value(), 70);
     }
     @Test
     public void maxTest() {
-        assertEquals(progress.max(), "100");
+        assertEquals(progress.max(), 100);
     }
 
     @Test
