@@ -12,4 +12,6 @@ public class ContactsListPage {
     public static SystemButton groupsButton;
     @MobileFindBy(accessibilityId = "Add")
     public static Button addButton;
+    @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"John Appleseed\"]")
+    public static MobileAppUIElement johnAppleseedCard;
 }

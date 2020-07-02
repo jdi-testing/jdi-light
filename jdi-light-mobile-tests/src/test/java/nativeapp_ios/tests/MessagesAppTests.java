@@ -1,16 +1,16 @@
-package nativeapp_ios;
+package nativeapp_ios.tests;
 
 import nativeapp.ios.messages.ContactsListPage;
 import nativeapp.ios.messages.MessagesListPage;
 import nativeapp.ios.messages.NewMessagePage;
 import nativeapp.ios.messages.WhatsNewPage;
+import nativeapp_ios.MessagesAppTestsInit;
 import org.testng.annotations.Test;
 
 public class MessagesAppTests extends MessagesAppTestsInit {
 
     @Test
-    public void addContactButtonTest() throws Exception {
-        Thread.sleep(5000);
+    public void addContactButtonTest() {
         if (WhatsNewPage.continueButton.isDisplayed()) {
             WhatsNewPage.continueButton.tap();
         }
@@ -19,7 +19,6 @@ public class MessagesAppTests extends MessagesAppTestsInit {
 
         NewMessagePage.addContactButton.openContacts();
 
-        Thread.sleep(5000);
         ContactsListPage.contactNavBar.is().displayed();
         ContactsListPage.cancelButton.cancel();
 

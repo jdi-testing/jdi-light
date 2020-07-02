@@ -7,6 +7,6 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 public class ContactsListPage {
     @MobileFindBy(xpath = "//XCUIElementTypeNavigationBar[@name=\"Contacts\"]")
     public static MobileAppUIElement contactNavBar;
-    @MobileFindBy(xpath = "(//XCUIElementTypeButton[@name=\"Cancel\"])[1]")
+    @MobileFindBy(xpath = "//XCUIElementTypeNavigationBar[@name='Contacts']//XCUIElementTypeButton[@name='Cancel']")
     public static SystemButton cancelButton;
 }

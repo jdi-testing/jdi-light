@@ -3,10 +3,10 @@ package nativeapp_ios;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import io.appium.java_client.AppiumDriver;
 import nativeapp.ios.calendar.CalendarApp;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.elements.init.PageFactory.initMobile;
@@ -14,10 +14,10 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class CalendarAppTestsInit {
 
-    @BeforeSuite(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setUp() {
         initMobile(CalendarApp.class);
-        logger.toLog("Run Tests");
+        logger.toLog("Run Calendars App Tests");
     }
 
     @BeforeMethod
@@ -32,7 +32,7 @@ public class CalendarAppTestsInit {
         driver.closeApp();
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
         WebDriverFactory.quit();
     }

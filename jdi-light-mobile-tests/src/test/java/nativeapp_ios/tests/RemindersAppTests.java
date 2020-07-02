@@ -1,9 +1,10 @@
-package nativeapp_ios;
+package nativeapp_ios.tests;
 
 import nativeapp.ios.reminders.EditDetailsPage;
 import nativeapp.ios.reminders.RemindersApp;
 import nativeapp.ios.reminders.RemindersListPage;
 import nativeapp.ios.reminders.RemindersPage;
+import nativeapp_ios.RemindersAppTestsInit;
 import org.testng.annotations.Test;
 
 public class RemindersAppTests extends RemindersAppTestsInit {
