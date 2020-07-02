@@ -501,6 +501,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
         if (element.webElement.hasValue())
             return printWebElement(element.webElement.get());
+        if (isBlank(element.varName))
+            return element.context;
         return Switch(LOGS.logLevel).get(
                 Case(l -> l == STEP,
                     l -> msgFormat(PRINT_ELEMENT_STEP, element)),

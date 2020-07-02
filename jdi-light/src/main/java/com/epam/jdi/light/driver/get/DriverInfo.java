@@ -28,7 +28,7 @@ import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -44,7 +44,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     public JFunc1<Capabilities, WebDriver> getRemoteDriver;
 
     public boolean isLocal() {
-        return isEmpty(DRIVER.remoteUrl) && (isNotBlank(DRIVER.path) && isNotBlank(path.execute()) || downloadType != null);
+        return !DRIVER.remoteRun;
     }
     public WebDriver getDriver() {
         logger.debug("getDriver(): " + toString());

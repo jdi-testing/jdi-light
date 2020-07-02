@@ -41,6 +41,7 @@ import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
+import static com.epam.jdi.light.logger.Strategy.FAIL;
 import static com.epam.jdi.light.logger.Strategy.parseStrategy;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.Strategies.*;
@@ -145,17 +146,25 @@ public class WebSettings {
         if (initialized) return;
         logger.debug("init()");
         try {
-            getProperties(COMMON.testPropertiesPath);
+            Properties properties = getProperties(COMMON.testPropertiesPath);
+            if (properties.isEmpty()) {
+                LOGS.writeToAllure = !getProperties("allure.properties").isEmpty();
+                COMMON.strategy.action.execute();
+                return;
+
+            }
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();
-            if (DRIVER.name.equals(DEFAULT_DRIVER))
+            if (DRIVER.name.equalsIgnoreCase(DEFAULT_DRIVER)) {
                 fillAction(p -> DRIVER.name = p, "driver");
+            }
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
             fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
             fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(WebSettings::setDomain, "domain");
             fillAction(p -> SCREEN.path = p, "screens.folder");
+            fillAction(p -> SCREEN.tool = p, "screenshot.tool");
             fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
             fillAction(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
             fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
@@ -173,6 +182,7 @@ public class WebSettings {
             // RemoteWebDriver properties
             fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
             fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
+            fillAction(p -> DRIVER.remoteRun = parseBoolean(p), "driver.remote.run");
             fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
             logger.setLogLevel(LOGS.logLevel);
             fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
@@ -350,7 +360,9 @@ public class WebSettings {
         }
     }
     private static List<com.epam.jdi.light.logger.Strategy> getLoggerStrategy(String strategy) {
-        if (isBlank(strategy) || strategy.trim().equalsIgnoreCase("off"))
+        if (isBlank(strategy))
+            return asList(FAIL);
+        if (strategy.trim().equalsIgnoreCase("off"))
             return new ArrayList<>();
         List<com.epam.jdi.light.logger.Strategy> strategies = new ArrayList<>();
         try {
