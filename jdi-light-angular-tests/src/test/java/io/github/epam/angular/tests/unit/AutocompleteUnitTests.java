@@ -81,6 +81,7 @@ public class AutocompleteUnitTests extends TestsInit {
 
     @Test
     public void disabledInputThrowsExceptionUponInputTest() {
+        autocompleteSection.autocompleteOverview.clear();
         autocompleteSection.autocompleteDisableInput.check();
         autocompleteSection.autocompleteOverview.waitFor(2);
         try {
@@ -136,10 +137,8 @@ public class AutocompleteUnitTests extends TestsInit {
     public void isInvalidatedTest() {
         autocompleteSection.autocompleteOverview.click();
         assertFalse(autocompleteSection.autocompleteOverview.isInvalidated());
-        autocompleteSection.optionGroupsAutocomplete.clear();
         autocompleteSection.optionGroupsAutocomplete.setValue("Florida");
         autocompleteSection.optionGroupsAutocomplete.clear();
-        autocompleteSection.optionGroupsAutocomplete.focusOut();
         assertTrue(autocompleteSection.optionGroupsAutocomplete.isInvalidated());
     }
 

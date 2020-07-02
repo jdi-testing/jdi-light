@@ -61,7 +61,8 @@ public class AutocompleteTests extends TestsInit {
     @Test
     public void verifyAutocompleteFirstOptionHighlighted() {
         autocompleteSection.autocompleteFirstOptionHighlighted.click();
-        autocompleteSection.autocompleteFirstOptionHighlighted.isOptionHighlighted("One");
+        assertTrue(autocompleteSection.autocompleteFirstOptionHighlighted.isOptionHighlighted("One"));
+        assertFalse(autocompleteSection.autocompleteFirstOptionHighlighted.isOptionHighlighted("Two"));
     }
 
 }

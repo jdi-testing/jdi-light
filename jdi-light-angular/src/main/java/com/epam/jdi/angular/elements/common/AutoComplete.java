@@ -22,9 +22,6 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
     private String displayValueCss = "mat-label";
     private String autocompleteAttrPrefix = "_ngcontent-";
 
-    public AutoComplete() {
-    }
-
     public void setUniqueAutoCompleteAttribute(String value) {
         autocompleteAttrPrefix = value;
     }
@@ -45,6 +42,7 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
     public void clear() {
         this.sendKeys(Keys.CONTROL + "a");
         this.sendKeys(Keys.DELETE);
+        focusOut();
     }
 
     public void select(String value) {
@@ -67,17 +65,13 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
     public boolean isOptionHighlighted(String value) {
         WebList values = new WebList(By.cssSelector(optionsCss));
         UIElement element = values.get(value);
-        String selected = element.core().getAttribute("aria-selected");
-        if ("true".equals(selected)) {
-            return true;
-        } else {
-            return false;
-        }
+        String selected = element.core().getAttribute("class");
+        return selected.contains("mat-active");
     }
 
     @JDIAction("Input '{0}' and select '{1}' in '{name}'")
     public void setValue(String inputValue, String selectValue) {
-        if (!("").equals(getValue())) {
+        if (!isEmpty()) {
             clear();
         }
         input(inputValue);
@@ -87,7 +81,7 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
     @JDIAction("Select '{0}' in '{name}'")
     @Override
     public void setValue(String selectValue) {
-        if (!("").equals(getValue())) {
+        if (!isEmpty()) {
             clear();
         }
         click();
@@ -180,19 +174,11 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
     }
 
     public boolean isMandatory() {
-        if ("true".equals(core().getAttribute("aria-required"))) {
-            return true;
-        } else {
-            return false;
-        }
+        return "true".equals(core().getAttribute("aria-required"));
     }
 
     public boolean isInvalidated() {
-        if ("true".equals(core().getAttribute("aria-invalid"))) {
-            return true;
-        } else {
-            return false;
-        }
+        return "true".equals(core().getAttribute("aria-invalid"));
     }
 
     @Override
