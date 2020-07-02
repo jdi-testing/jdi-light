@@ -88,6 +88,7 @@ public class TableTests implements TestsInit {
         usersTable.assertThat().size(greaterThan(3));
         usersTable.is().notEmpty().size(lessThanOrEqualTo(6));
     }
+
     // Compare Matchers
     @Test
     public void rowMatcherTest() {

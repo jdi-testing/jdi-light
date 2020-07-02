@@ -15,7 +15,6 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -89,7 +88,7 @@ public class DataListAssert<T extends ICoreElement, D>
      */
     @JDIAction("Assert that '{name}' text {0}")
     public DataListAssert<T, D> value(Matcher<String> condition) {
-        jdiAssert(print(data(), Object::toString), condition);
+        MatcherAssert.assertThat(element().values(), hasItem(condition));
         return this;
     }
 
@@ -100,7 +99,7 @@ public class DataListAssert<T extends ICoreElement, D>
      */
     @JDIAction("Assert that '{name}' text {0}")
     public DataListAssert<T, D> value(String text) {
-        jdiAssert(select(data(), Object::toString), hasItem(text));
+        MatcherAssert.assertThat(element().values(), hasItem(text));
         return this;
     }
 

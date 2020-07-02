@@ -7,7 +7,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -16,14 +15,14 @@ import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 public class ProgressAssert extends UIAssert<ProgressAssert, ProgressBar> {
     @JDIAction("Assert that '{name}' max value {0}")
     public ProgressAssert max(Matcher<Integer> max) {
-        jdiAssert(getInt("max", element().core()), max);
+        jdiAssert(element().max(), max);
         return this;
     }
     public ProgressAssert max(int maxVolume) { return max(Matchers.is(maxVolume)); }
 
     @JDIAction("Assert that '{name}' value {0}")
     public ProgressAssert value(Matcher<Integer> value) {
-        jdiAssert(getInt("value", element().core()), value);
+        jdiAssert(element().value(), value);
         return this;
     }
     public ProgressAssert value(int value) { return value(Matchers.is(value)); }
