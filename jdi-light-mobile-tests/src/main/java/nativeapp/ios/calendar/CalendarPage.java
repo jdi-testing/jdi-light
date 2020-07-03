@@ -8,6 +8,6 @@ public class CalendarPage {
 
     @MobileFindBy(accessibilityId = "DayViewContainerView")
     public static MobileAppUIElement dayViewNavBar;
-    @MobileFindBy(accessibilityId = "Calendars")
+    @MobileFindBy(xpath = "//XCUIElementTypeButton[@name='Calendars']")
     public static Button calendarsButton;
 }

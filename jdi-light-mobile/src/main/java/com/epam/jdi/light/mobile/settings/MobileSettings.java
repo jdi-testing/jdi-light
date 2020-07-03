@@ -1,10 +1,15 @@
 package com.epam.jdi.light.mobile.settings;
 
 import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
+import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
+import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
+import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import com.epam.jdi.light.settings.WebSettings;
 
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
+import static com.epam.jdi.light.elements.init.PageFactory.STOP_INIT_CLASSES;
 import static com.epam.jdi.light.mobile.driver.MobileDriverData.CAPABILITIES_FOR_ANDROID;
 import static com.epam.jdi.light.mobile.driver.MobileDriverData.CAPABILITIES_FOR_IOS;
 import static com.epam.jdi.light.mobile.driver.MobileDriverInfos.ANDROID_INFO;
@@ -23,6 +28,10 @@ public class MobileSettings {
     public static synchronized void init() {
         if (initialized) return;
         WebSettings.init();
+        STOP_INIT_CLASSES.add(MobileAppUIElement.class);
+        STOP_INIT_CLASSES.add(MobileAppBaseElement.class);
+        STOP_INIT_CLASSES.add(MobileBaseElement.class);
+        STOP_INIT_CLASSES.add(MobileUIElement.class);
         DRIVER.types.add("android", ANDROID_INFO);
         DRIVER.types.add("ios", IOS_INFO);
         ELEMENT.beforeSearch = el -> {};

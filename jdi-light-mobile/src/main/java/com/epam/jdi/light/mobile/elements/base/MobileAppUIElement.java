@@ -38,6 +38,7 @@ public class MobileAppUIElement extends MobileUIElement {
         new TouchAction<>((PerformsTouchActions) getDriver())
                 .longPress(LongPressOptions.longPressOptions()
                         .withElement(ElementOption.element(getWebElement())))
+                .release()
                 .perform();
     }
 
@@ -48,6 +49,7 @@ public class MobileAppUIElement extends MobileUIElement {
                 .longPress(LongPressOptions.longPressOptions()
                         .withElement(ElementOption.element(getWebElement()))
                         .withDuration(Duration.ofSeconds(seconds)))
+                .release()
                 .perform();
     }
 

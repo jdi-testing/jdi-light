@@ -1,6 +1,7 @@
-package nativeapp_ios;
+package nativeapp_ios.tests;
 
 import nativeapp.ios.calendar.*;
+import nativeapp_ios.CalendarAppTestsInit;
 import org.testng.annotations.Test;
 
 public class CalendarAppTests extends CalendarAppTestsInit {
