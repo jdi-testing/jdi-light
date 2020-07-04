@@ -158,4 +158,30 @@ public class AutocompleteUnitTests extends TestsInit {
         assertTrue(autocompleteSection.autocompleteOverview.isDisabled());
         autocompleteSection.autocompleteDisableInput.uncheck();
     }
+
+    @Test
+    public void isExpandedTest() {
+        autocompleteSection.autocompleteOverview.click();
+        assertTrue(autocompleteSection.autocompleteOverview.expanded());
+        autocompleteSection.simpleAutocomplete.click();
+        assertTrue(autocompleteSection.simpleAutocomplete.expanded());
+        autocompleteSection.displayValueAutocomplete.click();
+        assertTrue(autocompleteSection.displayValueAutocomplete.expanded());
+        autocompleteSection.filterAutocomplete.click();
+        assertTrue(autocompleteSection.filterAutocomplete.expanded());
+        autocompleteSection.optionGroupsAutocomplete.click();
+        assertTrue(autocompleteSection.optionGroupsAutocomplete.expanded());
+        autocompleteSection.autocompleteFirstOptionHighlighted.click();
+        assertTrue(autocompleteSection.autocompleteFirstOptionHighlighted.expanded());
+    }
+
+    @Test
+    public void isCollapsedTest() {
+        assertTrue(autocompleteSection.autocompleteOverview.collapsed());
+        assertTrue(autocompleteSection.simpleAutocomplete.collapsed());
+        assertTrue(autocompleteSection.displayValueAutocomplete.collapsed());
+        assertTrue(autocompleteSection.filterAutocomplete.collapsed());
+        assertTrue(autocompleteSection.optionGroupsAutocomplete.collapsed());
+        assertTrue(autocompleteSection.autocompleteFirstOptionHighlighted.collapsed());
+    }
 }

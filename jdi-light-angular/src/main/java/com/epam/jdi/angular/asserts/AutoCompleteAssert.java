@@ -12,26 +12,15 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 
 public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplete> implements ITextAssert<AutoCompleteAssert> {
 
-    private Boolean hasUniqueAttribute() {
-        return element.getOptions().get(1).
-            getAllAttributes().keys().
-            contains(element.getAutocompleteUniqueAttribute());
-    }
-
     @JDIAction("Assert that '{name}' is expanded")
     public AutoCompleteAssert expanded() {
-        jdiAssert(hasUniqueAttribute().toString(), Matchers.is("true"));
+        jdiAssert(element.expanded().toString(), Matchers.is("true"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is collapsed")
     public AutoCompleteAssert collapsed() {
-        Boolean isListEmpty = element.getOptions().isEmpty();
-        if (!isListEmpty) {
-            jdiAssert(hasUniqueAttribute().toString(), Matchers.is("false"));
-        } else {
-            jdiAssert(isListEmpty.toString(), Matchers.is("true"));
-        }
+        jdiAssert(element.collapsed().toString(), Matchers.is("true"));
         return this;
     }
 
@@ -67,7 +56,7 @@ public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplet
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has emty value")
+    @JDIAction("Assert that '{name}' has empty value")
     @Override
     public AutoCompleteAssert empty() {
         jdiAssert(element.getValue(), Matchers.is(""));

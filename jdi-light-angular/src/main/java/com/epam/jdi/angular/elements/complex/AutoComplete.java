@@ -168,15 +168,15 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return groupsAndOptionsValues;
     }
 
-    public WebList getOptions() {
+    private WebList getOptions() {
         return new WebList(By.cssSelector(optionsCss));
     }
 
-    public WebList getOptions(String css) {
+    private WebList getOptions(String css) {
         return new WebList(By.cssSelector(css));
     }
 
-    public String getAutocompleteUniqueAttribute() {
+    private String getAutocompleteUniqueAttribute() {
         final String[] curAttr = {""};
         MapArray<String, String> attributesAndValues = core().getAllAttributes();
         List<String> attributes = attributesAndValues.keys();
@@ -205,6 +205,22 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     @Override
     public boolean isEnabled() {
         return !isDisabled();
+    }
+
+    @JDIAction("If '{name}' is expanded")
+    public Boolean expanded() {
+        if (getOptions().isEmpty()) {
+            return false;
+        } else {
+            return getOptions().get(1).
+                getAllAttributes().keys().
+                contains(getAutocompleteUniqueAttribute());
+        }
+    }
+
+    @JDIAction("If '{name}' is collapsed")
+    public Boolean collapsed() {
+        return !expanded();
     }
 
     @Override
