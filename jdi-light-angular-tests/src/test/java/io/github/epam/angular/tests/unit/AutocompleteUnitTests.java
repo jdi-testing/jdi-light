@@ -65,7 +65,7 @@ public class AutocompleteUnitTests extends TestsInit {
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
         assertEquals(autocompleteSection.
                         simpleAutocomplete.
-                        values(),
+                options(),
                 expectedValues);
     }
 
@@ -75,7 +75,7 @@ public class AutocompleteUnitTests extends TestsInit {
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
         assertEquals(autocompleteSection.
                         optionGroupsAutocomplete.
-                        values("C"),
+                options("C"),
                 expectedValues);
     }
 
@@ -102,10 +102,10 @@ public class AutocompleteUnitTests extends TestsInit {
         String[] values = {"A", "C", "D", "F", "G", "H", "I", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "W"};
         List<String> groupsValues = Arrays.asList(values);
         assertEquals(autocompleteSection.
-                optionGroupsAutocomplete.groupsValues(), groupsValues);
+                optionGroupsAutocomplete.groups(), groupsValues);
         autocompleteSection.optionGroupsAutocomplete.input("C");
         assertEquals(autocompleteSection.
-                optionGroupsAutocomplete.groupsValues(), Arrays.asList(new String[]{"C"}));
+                optionGroupsAutocomplete.groups(), Arrays.asList(new String[]{"C"}));
     }
 
     @Test

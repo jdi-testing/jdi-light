@@ -1,6 +1,6 @@
-package com.epam.jdi.angular.elements.common;
+package com.epam.jdi.angular.elements.complex;
 
-import com.epam.jdi.light.asserts.complex.*;
+import com.epam.jdi.angular.asserts.*;
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.*;
 import com.epam.jdi.light.elements.common.*;
@@ -14,7 +14,7 @@ import java.util.*;
 
 import static com.epam.jdi.light.common.TextTypes.*;
 
-public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLabel, SetValue, HasPlaceholder, IsInput {
+public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements HasLabel, SetValue, HasPlaceholder, IsInput, IsText {
 
     private String optionsCss = "mat-option";
     private String optionsGroupsCss = "mat-optgroup>label";
@@ -27,49 +27,53 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
     }
 
     public void click() {
-        this.core().click();
+        core().click();
     }
 
+    @JDIAction("Get focus out from '{name}'")
     public void focusOut() {
-        this.sendKeys(Keys.TAB);
+        sendKeys(Keys.TAB);
     }
 
     public void input(String value) {
-        this.core().input(value);
+        core().input(value);
     }
 
+    @JDIAction("Clear value from '{name}'")
     @Override
     public void clear() {
-        this.sendKeys(Keys.CONTROL + "a");
-        this.sendKeys(Keys.DELETE);
+        sendKeys(Keys.CONTROL + "a");
+        sendKeys(Keys.DELETE);
         focusOut();
     }
 
+    @JDIAction("Select value {0} for '{name}'")
     public void select(String value) {
-        WebList options = new WebList(By.cssSelector(optionsCss));
+        WebList options = getOptions(optionsCss);
         options.get(value).click();
     }
 
+    @JDIAction("Get placeholder for '{name}'")
     @Override
     public String placeholder() {
-        return this.core().getAttribute("placeholder");
+        String placeholder = "placeholder";
+        return (core().hasAttribute(placeholder)) ? core().getAttribute(placeholder) : "";
     }
 
+    @JDIAction("Get display value for '{name}'")
     public String displayValue() {
-        String curAttr = getAutocompleteUniqueAttribute();
-        String displayValueXpath = displayValueCss + "[" + curAttr + "]";
-        WebList labels = new WebList(By.cssSelector(displayValueXpath));
-        return labels.get(1).getText();
+        String displayValueXpath = displayValueCss + "[" + getAutocompleteUniqueAttribute() + "]";
+        WebList labels = getOptions(displayValueXpath);
+        return (!labels.isEmpty()) ? labels.get(1).getText() : "";
     }
 
-    public boolean isOptionHighlighted(String value) {
-        WebList values = new WebList(By.cssSelector(optionsCss));
+    public Boolean isOptionHighlighted(String value) {
+        WebList values = getOptions(optionsCss);
         UIElement element = values.get(value);
         String selected = element.core().getAttribute("class");
         return selected.contains("mat-active");
     }
 
-    @JDIAction("Input '{0}' and select '{1}' in '{name}'")
     public void setValue(String inputValue, String selectValue) {
         if (!isEmpty()) {
             clear();
@@ -78,7 +82,6 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
         select(selectValue);
     }
 
-    @JDIAction("Select '{0}' in '{name}'")
     @Override
     public void setValue(String selectValue) {
         if (!isEmpty()) {
@@ -89,57 +92,61 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
     }
 
     @Override
-    public String getValue() {
+    public String text() {
         return core().text(VALUE);
     }
 
-    public WebList items() {
+    @Override
+    public String getValue() {
+        return text();
+    }
+
+    private WebList items() {
         click();
-        WebList options = new WebList(By.cssSelector(optionsCss));
+        WebList options = getOptions(optionsCss);
         this.click();
         return options;
     }
 
-    public WebList items(String inputValue) {
+    private WebList items(String inputValue) {
         input(inputValue);
-        WebList options = new WebList(By.cssSelector(optionsCss));
+        WebList options = getOptions(optionsCss);
         click();
         return options;
     }
 
-    public List<String> values() {
+    @JDIAction("Get options for '{name}'")
+    public List<String> options() {
         items();
         return getValues();
     }
 
-    public List<String> values(String inputValue) {
+    @JDIAction("Get options for '{name}' when {0} input is provided")
+    public List<String> options(String inputValue) {
         items(inputValue);
         return getValues();
     }
 
     private List<String> getValues() {
         List<String> values = new ArrayList<>();
-        WebList options = new WebList(By.cssSelector(optionsCss));
+        WebList options = getOptions(optionsCss);
         options.forEach(option -> values.add(option.getValue()));
         return values;
     }
 
-    public WebList groups() {
-        return new WebList(By.cssSelector(optionsGroupsCss));
-    }
-
-    public HashMap<UIElement, List<WebElement>> groupsAndOptions() {
-        WebList groups = new WebList(By.cssSelector(optionsGroupsCss));
+    private HashMap<UIElement, List<WebElement>> groupsAndOptions() {
+        WebList groups = getOptions(optionsGroupsCss);
         HashMap<UIElement, List<WebElement>> groupsAndOptions = new HashMap<>();
         groups.forEach(group -> {
-            WebList curOptions = new WebList(By.cssSelector(optionsGroupsAndValuesCss + ">" + optionsCss));
+            WebList curOptions = getOptions(optionsGroupsAndValuesCss + ">" + optionsCss);
             groupsAndOptions.put(group, curOptions.getWebElements());
         });
         return groupsAndOptions;
     }
 
-    public List<String> groupsValues() {
-        WebList groupsList = groups();
+    @JDIAction("Get groups for '{name}'")
+    public List<String> groups() {
+        WebList groupsList = getOptions(optionsGroupsCss);
         List<String> groupsValues = new ArrayList<>();
         groupsList.forEach(group -> {
             groupsValues.add(group.getValue());
@@ -147,6 +154,7 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
         return groupsValues;
     }
 
+    @JDIAction("Get groups and options for '{name}'")
     public HashMap<String, ArrayList<String>> groupsAndOptionsValues() {
         HashMap<UIElement, List<WebElement>> groupsAndOptionsMap = groupsAndOptions();
         HashMap<String, ArrayList<String>> groupsAndOptionsValues = new HashMap<>();
@@ -160,7 +168,15 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
         return groupsAndOptionsValues;
     }
 
-    private String getAutocompleteUniqueAttribute() {
+    public WebList getOptions() {
+        return new WebList(By.cssSelector(optionsCss));
+    }
+
+    public WebList getOptions(String css) {
+        return new WebList(By.cssSelector(css));
+    }
+
+    public String getAutocompleteUniqueAttribute() {
         final String[] curAttr = {""};
         MapArray<String, String> attributesAndValues = core().getAllAttributes();
         List<String> attributes = attributesAndValues.keys();
@@ -173,11 +189,11 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
         return curAttr[0];
     }
 
-    public boolean isMandatory() {
+    public Boolean isMandatory() {
         return "true".equals(core().getAttribute("aria-required"));
     }
 
-    public boolean isInvalidated() {
+    public Boolean isInvalidated() {
         return "true".equals(core().getAttribute("aria-invalid"));
     }
 
@@ -190,5 +206,8 @@ public class AutoComplete extends UIBaseElement<DropdownAssert> implements HasLa
     public boolean isEnabled() {
         return !isDisabled();
     }
+
+    @Override
+    public AutoCompleteAssert is() { return new AutoCompleteAssert().set(this); }
 
 }
