@@ -97,6 +97,11 @@ public class AutocompleteUnitTests extends TestsInit {
 
     @Test
     public void getGroupsValuesTest() {
+        autocompleteSection.autocompleteOverview.clear();
+        autocompleteSection.autocompleteOverview.click();
+        String[] emptyValues = {""};
+        assertEquals(autocompleteSection.
+            autocompleteOverview.groups(), Arrays.asList(emptyValues));
         autocompleteSection.optionGroupsAutocomplete.clear();
         autocompleteSection.optionGroupsAutocomplete.click();
         String[] values = {"A", "C", "D", "F", "G", "H", "I", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "W"};
@@ -110,6 +115,12 @@ public class AutocompleteUnitTests extends TestsInit {
 
     @Test
     public void getGroupsAndOptionsValuesTest() {
+        Map<String, List<String>> emptyGroupAndOptionsValues = new HashMap<>();
+        String emptyOptions[] = {""};
+        emptyGroupAndOptionsValues.put("", Arrays.asList(emptyOptions));
+        autocompleteSection.optionGroupsAutocomplete.input("B");
+        assertEquals(autocompleteSection.
+            optionGroupsAutocomplete.groupsAndOptionsValues(), emptyGroupAndOptionsValues);
         autocompleteSection.optionGroupsAutocomplete.input("C");
         Map<String, List<String>> groupAndOptionsValues = new HashMap<>();
         String[] options = {"California", "Colorado", "Connecticut"};

@@ -5,25 +5,25 @@ import com.epam.jdi.angular.elements.complex.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 
 public class AutocompleteSection {
-    @UI("#mat-input-0")
+    @UI("#autocomplete-overview-input")
     public AutoComplete autocompleteOverview;
 
     @UI("#mat-slide-toggle-3-input")
     public SlideToggle autocompleteDisableInput;
 
-    @UI("#mat-input-1")
+    @UI("#autocomplete-simple-input")
     public AutoComplete simpleAutocomplete;
 
-    @UI("#mat-input-2")
+    @UI("#autocomplete-display-value-input")
     public AutoComplete displayValueAutocomplete;
 
-    @UI("#mat-input-3")
+    @UI("#autocomplete-filter-input")
     public AutoComplete filterAutocomplete;
 
-    @UI("#mat-input-4")
+    @UI("#autocomplete-grouped-options-input")
     public AutoComplete optionGroupsAutocomplete;
 
-    @UI("#autocomplete_firstoption")
+    @UI("#autocomplete-first-option-highlighted-input")
     public AutoComplete autocompleteFirstOptionHighlighted;
 
 }

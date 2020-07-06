@@ -104,7 +104,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     private WebList items() {
         click();
         WebList options = getOptions(optionsCss);
-        this.click();
+        click();
         return options;
     }
 
@@ -137,6 +137,9 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     private HashMap<UIElement, List<WebElement>> groupsAndOptions() {
         WebList groups = getOptions(optionsGroupsCss);
         HashMap<UIElement, List<WebElement>> groupsAndOptions = new HashMap<>();
+        if (groups.isEmpty()) {
+            return null;
+        }
         groups.forEach(group -> {
             WebList curOptions = getOptions(optionsGroupsAndValuesCss + ">" + optionsCss);
             groupsAndOptions.put(group, curOptions.getWebElements());
@@ -147,6 +150,10 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     @JDIAction("Get groups for '{name}'")
     public List<String> groups() {
         WebList groupsList = getOptions(optionsGroupsCss);
+        if (groupsList.isEmpty()) {
+            String emptyArray[] = {""};
+            return Arrays.asList(emptyArray);
+        }
         List<String> groupsValues = new ArrayList<>();
         groupsList.forEach(group -> {
             groupsValues.add(group.getValue());
@@ -155,9 +162,14 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     }
 
     @JDIAction("Get groups and options for '{name}'")
-    public HashMap<String, ArrayList<String>> groupsAndOptionsValues() {
+    public HashMap<String, List<String>> groupsAndOptionsValues() {
         HashMap<UIElement, List<WebElement>> groupsAndOptionsMap = groupsAndOptions();
-        HashMap<String, ArrayList<String>> groupsAndOptionsValues = new HashMap<>();
+        HashMap<String, List<String>> groupsAndOptionsValues = new HashMap<>();
+        if (groupsAndOptionsMap == null) {
+            String emptyArray[] = {""};
+            groupsAndOptionsValues.put("", Arrays.asList(emptyArray));
+            return groupsAndOptionsValues;
+        }
         groupsAndOptionsMap.forEach((group, options) -> {
             ArrayList<String> values = new ArrayList<>();
             options.forEach(option -> {
@@ -207,7 +219,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return !isDisabled();
     }
 
-    @JDIAction("If '{name}' is expanded")
+    @JDIAction("Is '{name}' is expanded")
     public Boolean expanded() {
         if (getOptions().isEmpty()) {
             return false;
@@ -218,7 +230,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         }
     }
 
-    @JDIAction("If '{name}' is collapsed")
+    @JDIAction("Is '{name}' is collapsed")
     public Boolean collapsed() {
         return !expanded();
     }
