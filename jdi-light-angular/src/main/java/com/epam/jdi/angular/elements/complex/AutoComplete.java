@@ -201,19 +201,23 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return curAttr[0];
     }
 
+    @JDIAction("Is '{name} mandatory")
     public Boolean isMandatory() {
         return "true".equals(core().getAttribute("aria-required"));
     }
 
+    @JDIAction("Is '{name} invalidated")
     public Boolean isInvalidated() {
         return "true".equals(core().getAttribute("aria-invalid"));
     }
 
+    @JDIAction("Is '{name} disabled")
     @Override
     public boolean isDisabled() {
         return core().hasAttribute("disabled");
     }
 
+    @JDIAction("Is '{name} enabled")
     @Override
     public boolean isEnabled() {
         return !isDisabled();
