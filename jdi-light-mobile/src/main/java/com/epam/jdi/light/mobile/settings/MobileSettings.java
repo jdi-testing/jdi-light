@@ -34,6 +34,7 @@ public class MobileSettings {
         STOP_INIT_CLASSES.add(MobileUIElement.class);
         DRIVER.types.add("android", ANDROID_INFO);
         DRIVER.types.add("ios", IOS_INFO);
+        DRIVER.remoteRun = true;
         ELEMENT.beforeSearch = el -> {};
         ELEMENT.clickType = ElementArea.CENTER;
         fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
