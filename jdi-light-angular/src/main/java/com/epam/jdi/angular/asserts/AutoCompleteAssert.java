@@ -14,13 +14,13 @@ public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplet
 
     @JDIAction("Assert that '{name}' is expanded")
     public AutoCompleteAssert expanded() {
-        jdiAssert(element.expanded().toString(), Matchers.is("true"));
+        jdiAssert(element.expanded(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is collapsed")
     public AutoCompleteAssert collapsed() {
-        jdiAssert(element.collapsed().toString(), Matchers.is("true"));
+        jdiAssert(element.collapsed(), Matchers.is(true));
         return this;
     }
 
@@ -46,13 +46,13 @@ public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplet
 
     @JDIAction("Assert that '{name} is mandatory")
     public AutoCompleteAssert mandatory() {
-        jdiAssert(element.isMandatory().toString(), Matchers.is("true"));
+        jdiAssert(element.isMandatory(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name} is not mandatory")
     public AutoCompleteAssert notMandatory() {
-        jdiAssert(element.isMandatory().toString(), Matchers.is("false"));
+        jdiAssert(element.isMandatory(), Matchers.is(false));
         return this;
     }
 
@@ -65,13 +65,13 @@ public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplet
 
     @JDIAction("Assert that '{name} is invalid")
     public AutoCompleteAssert invalid() {
-        jdiAssert(element.isInvalidated().toString(), Matchers.is("true"));
+        jdiAssert(element.isInvalidated(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name} is valid")
     public AutoCompleteAssert valid() {
-        jdiAssert(element.isInvalidated().toString(), Matchers.is("false"));
+        jdiAssert(element.isInvalidated(), Matchers.is(false));
         return this;
     }
 
@@ -101,13 +101,13 @@ public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplet
 
     @JDIAction("Assert that '{name}' has the {0} option being highlighted")
     public AutoCompleteAssert optionHighlighted(String option) {
-        jdiAssert(element.isOptionHighlighted(option).toString(), Matchers.is("true"));
+        jdiAssert(element.isOptionHighlighted(option), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has the {0} option being not highlighted")
     public AutoCompleteAssert optionNotHighlighted(String option) {
-        jdiAssert(element.isOptionHighlighted(option).toString(), Matchers.is("false"));
+        jdiAssert(element.isOptionHighlighted(option), Matchers.is(false));
         return this;
     }
 

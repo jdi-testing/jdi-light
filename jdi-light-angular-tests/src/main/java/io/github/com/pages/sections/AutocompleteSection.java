@@ -8,7 +8,7 @@ public class AutocompleteSection {
     @UI("#autocomplete-overview-input")
     public AutoComplete autocompleteOverview;
 
-    @UI("#mat-slide-toggle-3-input")
+    @UI("#autocomplete-overview-slide-toggle")
     public SlideToggle autocompleteDisableInput;
 
     @UI("#autocomplete-simple-input")
