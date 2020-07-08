@@ -23,7 +23,9 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 @Aspect
 public class AngularActions {
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
-    protected void jdiPointcut() { }
+    protected void jdiPointcut() {
+        // this method is created only for passing as a parameter in the annotation @Around
+    }
 
     @Around("jdiPointcut()")
     public Object jdiAround(final ProceedingJoinPoint jp) {
