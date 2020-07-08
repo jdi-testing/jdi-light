@@ -13,6 +13,7 @@ import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.ToolbarSection;
 
 public class AngularPage extends WebPage {
+
     @Css("radio-overview-example .mat-radio-group")
     public static RadioButtons basicRadioButtons;
 
