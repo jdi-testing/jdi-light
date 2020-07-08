@@ -1,4 +1,4 @@
-package com.epam.jdi.angular.elements.common;
+package com.epam.jdi.light.angular.elements.common;
 
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 
