@@ -1,4 +1,4 @@
-package com.epam.jdi.angular.elements.common;
+package com.epam.jdi.light.angular.elements.common;
 
 /**
  * Angular checkbox documentation: https://jdi-docs.github.io/jdi-light/?java#checkboxes
