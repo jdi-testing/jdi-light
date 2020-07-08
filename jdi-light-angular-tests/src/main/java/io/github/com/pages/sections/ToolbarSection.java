@@ -17,5 +17,3 @@ public class ToolbarSection extends Section {
     @UI("#toolbar-table span:not(.example-spacer)")
     public static JList<Text> toolbarRowsElementsWithText;
 }
-
-
