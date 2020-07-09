@@ -8,6 +8,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import io.github.com.pages.sections.CheckboxSection;
+import io.github.com.pages.sections.GridListSection;
 import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.SlideToggleSection;
 
@@ -33,4 +34,5 @@ public class AngularPage extends WebPage {
     public static CheckboxSection checkboxSection;
     public static SlideToggleSection slideToggleSection;
     public static InputSection inputSection;
+    public static GridListSection gridListSection;
 }
