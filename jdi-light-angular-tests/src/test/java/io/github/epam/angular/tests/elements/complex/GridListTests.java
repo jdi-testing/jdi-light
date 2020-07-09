@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.gridListSection;
+import static io.github.com.pages.AngularPage.listSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 //import static
@@ -22,11 +23,17 @@ public class GridListTests extends TestsInit {
     }
 
     @Test
-    public void getTextTest(){
+    public void basicGridListTest(){
 
-        System.out.println( gridListSection.basicGridList.getValue() );
-        //assertEquals(gridListSection.basicGridList.size(), 4);
-        //gridListSection.basicGridList.isExist();
+        gridListSection.basicGridList.is().displayed();
+        gridListSection.basicGridList.get(1).show();
+
+        System.out.println(gridListSection.basicGridList.get(1).getValue());
+
+        gridListSection.dynamicGridList.is().displayed();
+        gridListSection.dynamicGridList.get(1).show();
+
+        System.out.println(gridListSection.dynamicGridList.get(1).getValue());
 
     }
 }

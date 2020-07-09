@@ -11,6 +11,7 @@ import io.github.com.pages.sections.CheckboxSection;
 import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.ListSection;
+import io.github.com.pages.sections.GridListSection;
 
 public class AngularPage extends WebPage {
     @Css("radio-overview-example .mat-radio-group")
@@ -35,4 +36,5 @@ public class AngularPage extends WebPage {
     public static SlideToggleSection slideToggleSection;
     public static InputSection inputSection;
     public static ListSection listSection;
+    public static GridListSection gridListSection;
 }

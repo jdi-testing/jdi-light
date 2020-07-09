@@ -8,10 +8,11 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 public class GridListSection {
 
     //@FindBy(id="basic-grid-list")
-    @UI("#basic-grid-list")
+    @UI("#basic-grid-list mat-grid-tile")
     //@UI("[ui=label] basic-grid-list")
     public JList<Label> basicGridList;
 
-    //public JList<Label> dynamicGridList;
+    @UI("#dynamic-grid-list mat-grid-tile")
+    public JList<Label> dynamicGridList;
 
 }
