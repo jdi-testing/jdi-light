@@ -11,10 +11,10 @@ public class AngularPage extends WebPage {
     @Css("radio-overview-example .mat-radio-group")
     public static RadioButtons basicRadioButtons;
 
-    @UI("#mat-radio-2")
+    @UI("#radio-option-one")
     public static Button firstBasicRadioButton;
 
-    @UI("#mat-radio-3")
+    @UI("#radio-option-two")
     public static Button secondBasicRadioButton;
 
     @UI("#basic_progress_spinner")
