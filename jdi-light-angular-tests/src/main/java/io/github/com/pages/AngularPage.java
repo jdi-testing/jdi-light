@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+import io.github.com.pages.sections.AutocompleteSection;
 import io.github.com.pages.sections.BasicButtonsSection;
 import io.github.com.pages.sections.ButtonToggleSection;
 import io.github.com.pages.sections.CheckboxSection;
