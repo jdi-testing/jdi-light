@@ -1,7 +1,7 @@
 package io.github.com.pages.sections;
 
-import com.epam.jdi.angular.elements.common.Checkbox;
-import com.epam.jdi.angular.elements.common.SlideToggle;
+import com.epam.jdi.light.angular.elements.common.Checkbox;
+import com.epam.jdi.light.angular.elements.common.SlideToggle;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
