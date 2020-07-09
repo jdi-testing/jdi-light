@@ -3,9 +3,6 @@ package io.github.com.pages.sections;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import org.openqa.selenium.*;
-
-import java.util.List;
 
 public class ListSection {
 
