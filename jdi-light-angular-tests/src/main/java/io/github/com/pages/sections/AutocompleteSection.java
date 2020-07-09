@@ -1,7 +1,7 @@
 package io.github.com.pages.sections;
 
-import com.epam.jdi.angular.elements.common.*;
-import com.epam.jdi.angular.elements.complex.*;
+import com.epam.jdi.light.angular.elements.common.*;
+import com.epam.jdi.light.angular.elements.complex.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 
 public class AutocompleteSection {

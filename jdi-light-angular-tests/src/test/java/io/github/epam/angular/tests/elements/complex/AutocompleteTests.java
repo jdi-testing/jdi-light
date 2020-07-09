@@ -10,6 +10,7 @@ import static io.github.com.pages.AngularPage.*;
 import static io.github.epam.site.steps.States.*;
 
 public class AutocompleteTests extends TestsInit {
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();

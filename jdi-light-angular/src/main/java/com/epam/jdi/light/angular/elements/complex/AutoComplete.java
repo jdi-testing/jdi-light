@@ -1,6 +1,6 @@
-package com.epam.jdi.angular.elements.complex;
+package com.epam.jdi.light.angular.elements.complex;
 
-import com.epam.jdi.angular.asserts.*;
+import com.epam.jdi.light.angular.asserts.*;
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.*;
 import com.epam.jdi.light.elements.common.*;

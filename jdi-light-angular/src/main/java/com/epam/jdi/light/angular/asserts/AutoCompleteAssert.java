@@ -1,10 +1,9 @@
-package com.epam.jdi.angular.asserts;
+package com.epam.jdi.light.angular.asserts;
 
-import com.epam.jdi.angular.elements.complex.*;
+import com.epam.jdi.light.angular.elements.complex.*;
 import com.epam.jdi.light.asserts.generic.*;
 import com.epam.jdi.light.common.*;
 import org.hamcrest.*;
-import org.hamcrest.Matcher;
 
 import java.util.*;
 

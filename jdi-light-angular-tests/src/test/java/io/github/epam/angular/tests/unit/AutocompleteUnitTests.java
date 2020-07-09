@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
 public class AutocompleteUnitTests extends TestsInit {
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
