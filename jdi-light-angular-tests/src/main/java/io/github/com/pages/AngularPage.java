@@ -10,8 +10,10 @@ import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import io.github.com.pages.sections.CheckboxSection;
 import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.SlideToggleSection;
+import io.github.com.pages.sections.ToolbarSection;
 
 public class AngularPage extends WebPage {
+
     @Css("radio-overview-example .mat-radio-group")
     public static RadioButtons basicRadioButtons;
 
@@ -31,6 +33,7 @@ public class AngularPage extends WebPage {
     public static Icon svgIcon;
 
     public static CheckboxSection checkboxSection;
+    public static ToolbarSection toolbarSection;
     public static SlideToggleSection slideToggleSection;
     public static InputSection inputSection;
 }
