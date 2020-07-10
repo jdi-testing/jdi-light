@@ -29,7 +29,7 @@ public class GridListTests extends TestsInit {
 
     @Test
     public void basicGridListColorTest() {
-        gridListSection.dynamicGridList.get(1).is().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
+        gridListSection.dynamicGridList.get(1).has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
     }
 
     @Test
