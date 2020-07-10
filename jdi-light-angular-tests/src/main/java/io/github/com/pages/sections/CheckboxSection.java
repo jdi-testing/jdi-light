@@ -1,6 +1,6 @@
 package io.github.com.pages.sections;
 
-import com.epam.jdi.angular.elements.common.Checkbox;
+import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
