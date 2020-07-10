@@ -9,6 +9,10 @@ import static io.github.com.pages.AngularPage.buttonToggleSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class ButtonToggleTest extends TestsInit {
+    private final String pressedAttribute = "aria-pressed";
+    private final String buttonIsPressed = "true";
+    private final String buttonIsNotPressed = "false";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -17,9 +21,9 @@ public class ButtonToggleTest extends TestsInit {
 
     @Test
     public void basicButtonToggleDisplayedTest() {
-        buttonToggleSection.basicButtonToggleBold.isDisplayed();
-        buttonToggleSection.basicButtonToggleItalic.isDisplayed();
-        buttonToggleSection.basicButtonToggleUnderline.isDisplayed();
+        buttonToggleSection.basicButtonToggleBold.is().displayed();
+        buttonToggleSection.basicButtonToggleItalic.is().displayed();
+        buttonToggleSection.basicButtonToggleUnderline.is().displayed();
     }
 
     @Test
@@ -31,9 +35,6 @@ public class ButtonToggleTest extends TestsInit {
 
     @Test
     public void basicBoldButtonToggleTest() {
-        String pressedAttribute = "aria-pressed";
-        String buttonIsPressed = "true";
-        String buttonIsNotPressed = "false";
         buttonToggleSection.basicButtonToggleBold.click();
         buttonToggleSection.basicButtonToggleBold.has().attr(pressedAttribute, buttonIsPressed);
         buttonToggleSection.basicButtonToggleBold.click();
@@ -42,9 +43,6 @@ public class ButtonToggleTest extends TestsInit {
 
     @Test
     public void basicItalicButtonToggleTest() {
-        String pressedAttribute = "aria-pressed";
-        String buttonIsPressed = "true";
-        String buttonIsNotPressed = "false";
         buttonToggleSection.basicButtonToggleItalic.click();
         buttonToggleSection.basicButtonToggleItalic.has().attr(pressedAttribute, buttonIsPressed);
         buttonToggleSection.basicButtonToggleItalic.click();
@@ -53,9 +51,6 @@ public class ButtonToggleTest extends TestsInit {
 
     @Test
     public void basicUnderlineButtonToggleTest() {
-        String pressedAttribute = "aria-pressed";
-        String buttonIsPressed = "true";
-        String buttonIsNotPressed = "false";
         buttonToggleSection.basicButtonToggleUnderline.click();
         buttonToggleSection.basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsPressed);
         buttonToggleSection.basicButtonToggleUnderline.click();
@@ -70,9 +65,7 @@ public class ButtonToggleTest extends TestsInit {
     }
 
     @Test
-    public void pressAllBasicButtonTogglesTest() {
-        String pressedAttribute = "aria-pressed";
-        String buttonIsPressed = "true";
+    public void pressAllBasicButtonToggleTest() {
         buttonToggleSection.basicButtonToggleBold.click();
         buttonToggleSection.basicButtonToggleItalic.click();
         buttonToggleSection.basicButtonToggleUnderline.click();
@@ -83,10 +76,10 @@ public class ButtonToggleTest extends TestsInit {
 
     @Test
     public void exclusiveButtonToggleDisplayedTest() {
-        buttonToggleSection.exclusiveButtonToggleLeft.isDisplayed();
-        buttonToggleSection.exclusiveButtonToggleCenter.isDisplayed();
-        buttonToggleSection.exclusiveButtonToggleRight.isDisplayed();
-        buttonToggleSection.exclusiveButtonToggleJustify.isDisplayed();
+        buttonToggleSection.exclusiveButtonToggleLeft.is().displayed();
+        buttonToggleSection.exclusiveButtonToggleCenter.is().displayed();
+        buttonToggleSection.exclusiveButtonToggleRight.is().displayed();
+        buttonToggleSection.exclusiveButtonToggleJustify.is().displayed();
     }
 
     @Test
@@ -99,9 +92,6 @@ public class ButtonToggleTest extends TestsInit {
 
     @Test
     public void exclusiveButtonToggleTest() {
-        String pressedAttribute = "aria-pressed";
-        String buttonIsPressed = "true";
-        String buttonIsNotPressed = "false";
         buttonToggleSection.exclusiveButtonToggleLeft.click();
         buttonToggleSection.exclusiveButtonToggleLeft.has().attr(pressedAttribute, buttonIsPressed);
 
