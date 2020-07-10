@@ -16,24 +16,50 @@ public class ButtonToggleTest extends TestsInit {
     }
 
     @Test
-    public void basicButtonToggleTest() {
+    public void basicButtonToggleDisplayedTest() {
         buttonToggleSection.basicButtonToggleBold.isDisplayed();
-        buttonToggleSection.basicButtonToggleBold.click();
-        buttonToggleSection.basicButtonToggleBold.has().attr("aria-pressed", "true");
-        buttonToggleSection.basicButtonToggleBold.click();
-        buttonToggleSection.basicButtonToggleBold.has().attr("aria-pressed", "false");
-
         buttonToggleSection.basicButtonToggleItalic.isDisplayed();
-        buttonToggleSection.basicButtonToggleItalic.click();
-        buttonToggleSection.basicButtonToggleItalic.has().attr("aria-pressed", "true");
-        buttonToggleSection.basicButtonToggleItalic.click();
-        buttonToggleSection.basicButtonToggleItalic.has().attr("aria-pressed", "false");
-
         buttonToggleSection.basicButtonToggleUnderline.isDisplayed();
+    }
+
+    @Test
+    public void basicButtonToggleEnabledTest() {
+        buttonToggleSection.basicButtonToggleBold.is().enabled();
+        buttonToggleSection.basicButtonToggleItalic.is().enabled();
+        buttonToggleSection.basicButtonToggleUnderline.is().enabled();
+    }
+
+    @Test
+    public void basicBoldButtonToggleTest() {
+        String pressedAttribute = "aria-pressed";
+        String buttonIsPressed = "true";
+        String buttonIsNotPressed = "false";
+        buttonToggleSection.basicButtonToggleBold.click();
+        buttonToggleSection.basicButtonToggleBold.has().attr(pressedAttribute, buttonIsPressed);
+        buttonToggleSection.basicButtonToggleBold.click();
+        buttonToggleSection.basicButtonToggleBold.has().attr(pressedAttribute, buttonIsNotPressed);
+    }
+
+    @Test
+    public void basicItalicButtonToggleTest() {
+        String pressedAttribute = "aria-pressed";
+        String buttonIsPressed = "true";
+        String buttonIsNotPressed = "false";
+        buttonToggleSection.basicButtonToggleItalic.click();
+        buttonToggleSection.basicButtonToggleItalic.has().attr(pressedAttribute, buttonIsPressed);
+        buttonToggleSection.basicButtonToggleItalic.click();
+        buttonToggleSection.basicButtonToggleItalic.has().attr(pressedAttribute, buttonIsNotPressed);
+    }
+
+    @Test
+    public void basicUnderlineButtonToggleTest() {
+        String pressedAttribute="aria-pressed";
+        String buttonIsPressed="true";
+        String buttonIsNotPressed="false";
         buttonToggleSection.basicButtonToggleUnderline.click();
-        buttonToggleSection.basicButtonToggleUnderline.has().attr("aria-pressed", "true");
+        buttonToggleSection.basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsPressed);
         buttonToggleSection.basicButtonToggleUnderline.click();
-        buttonToggleSection.basicButtonToggleUnderline.has().attr("aria-pressed", "false");
+        buttonToggleSection.basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsNotPressed);
     }
 
     @Test
@@ -45,40 +71,59 @@ public class ButtonToggleTest extends TestsInit {
 
     @Test
     public void pressAllBasicButtonTogglesTest() {
-        buttonToggleSection.basicButtonToggleBold.isDisplayed();
+        String pressedAttribute="aria-pressed";
+        String buttonIsPressed="true";
         buttonToggleSection.basicButtonToggleBold.click();
-        buttonToggleSection.basicButtonToggleItalic.isDisplayed();
         buttonToggleSection.basicButtonToggleItalic.click();
-        buttonToggleSection.basicButtonToggleUnderline.isDisplayed();
         buttonToggleSection.basicButtonToggleUnderline.click();
-        buttonToggleSection.basicButtonToggleBold.has().attr("aria-pressed", "true");
-        buttonToggleSection.basicButtonToggleItalic.has().attr("aria-pressed", "true");
-        buttonToggleSection.basicButtonToggleUnderline.has().attr("aria-pressed", "true");
+        buttonToggleSection.basicButtonToggleBold.has().attr(pressedAttribute, buttonIsPressed);
+        buttonToggleSection.basicButtonToggleItalic.has().attr(pressedAttribute, buttonIsPressed);
+        buttonToggleSection.basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsPressed);
+    }
+
+    @Test
+    public void exclusiveButtonToggleDisplayedTest() {
+        buttonToggleSection.exclusiveButtonToggleLeft.isDisplayed();
+        buttonToggleSection.exclusiveButtonToggleCenter.isDisplayed();
+        buttonToggleSection.exclusiveButtonToggleRight.isDisplayed();
+        buttonToggleSection.exclusiveButtonToggleJustify.isDisplayed();
+    }
+
+    @Test
+    public void exclusiveButtonToggleEnabledTest() {
+        buttonToggleSection.exclusiveButtonToggleLeft.is().enabled();
+        buttonToggleSection.exclusiveButtonToggleCenter.is().enabled();
+        buttonToggleSection.exclusiveButtonToggleRight.is().enabled();
+        buttonToggleSection.exclusiveButtonToggleJustify.is().disabled();
     }
 
     @Test
     public void exclusiveButtonToggleTest() {
-        buttonToggleSection.exclusiveButtonToggleLeft.isDisplayed();
+        String pressedAttribute = "aria-pressed";
+        String buttonIsPressed = "true";
+        String buttonIsNotPressed = "false";
         buttonToggleSection.exclusiveButtonToggleLeft.click();
-        buttonToggleSection.exclusiveButtonToggleLeft.has().attr("aria-pressed", "true");
-        buttonToggleSection.selectedValue.has().text("Selected value: left");
+        buttonToggleSection.exclusiveButtonToggleLeft.has().attr(pressedAttribute, buttonIsPressed);
 
-        buttonToggleSection.exclusiveButtonToggleCenter.isDisplayed();
         buttonToggleSection.exclusiveButtonToggleCenter.click();
-        buttonToggleSection.exclusiveButtonToggleCenter.has().attr("aria-pressed", "true");
-        buttonToggleSection.exclusiveButtonToggleLeft.has().attr("aria-pressed", "false");
-        buttonToggleSection.selectedValue.has().text("Selected value: center");
+        buttonToggleSection.exclusiveButtonToggleCenter.has().attr(pressedAttribute, buttonIsPressed);
+        buttonToggleSection.exclusiveButtonToggleLeft.has().attr(pressedAttribute, buttonIsNotPressed);
 
-        buttonToggleSection.exclusiveButtonToggleRight.isDisplayed();
         buttonToggleSection.exclusiveButtonToggleRight.click();
-        buttonToggleSection.exclusiveButtonToggleRight.has().attr("aria-pressed", "true");
-        buttonToggleSection.exclusiveButtonToggleCenter.has().attr("aria-pressed", "false");
-        buttonToggleSection.selectedValue.has().text("Selected value: right");
-
-        buttonToggleSection.exclusiveButtonToggleJustify.isDisplayed();
-        buttonToggleSection.exclusiveButtonToggleJustify.is().disabled();
+        buttonToggleSection.exclusiveButtonToggleRight.has().attr(pressedAttribute, buttonIsPressed);
+        buttonToggleSection.exclusiveButtonToggleCenter.has().attr(pressedAttribute, buttonIsNotPressed);
 
         buttonToggleSection.exclusiveButtonToggleLeft.click();
-        buttonToggleSection.exclusiveButtonToggleRight.has().attr("aria-pressed", "false");
+        buttonToggleSection.exclusiveButtonToggleRight.has().attr(pressedAttribute, buttonIsNotPressed);
+    }
+
+    @Test
+    public void exclusiveButtonToggleSelectedValueTest() {
+        buttonToggleSection.exclusiveButtonToggleLeft.click();
+        buttonToggleSection.selectedValue.has().text("Selected value: left");
+        buttonToggleSection.exclusiveButtonToggleCenter.click();
+        buttonToggleSection.selectedValue.has().text("Selected value: center");
+        buttonToggleSection.exclusiveButtonToggleRight.click();
+        buttonToggleSection.selectedValue.has().text("Selected value: right");
     }
 }
