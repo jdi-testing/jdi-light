@@ -3,16 +3,15 @@ package io.github.epam.angular.tests.elements.complex;
 //import io.github.com.pages.sections.GridListSection;
 //import io.github.com.pages.sections.GridListSection.*;
 //import io.github.com.pages.sections.GridListSection;
+
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.gridListSection;
-import static io.github.com.pages.AngularPage.listSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static org.testng.Assert.assertEquals;
-//import static
+
 
 public class GridListTests extends TestsInit {
 
@@ -23,7 +22,7 @@ public class GridListTests extends TestsInit {
     }
 
     @Test
-    public void basicGridListTest(){
+    public void basicGridListTest() {
 
         gridListSection.basicGridList.is().displayed();
         gridListSection.basicGridList.get(1).show();
@@ -34,6 +33,25 @@ public class GridListTests extends TestsInit {
         gridListSection.dynamicGridList.get(1).show();
 
         System.out.println(gridListSection.dynamicGridList.get(1).getValue());
+
+    }
+
+    @Test
+    public void dynamicGridListBasicTest() {
+        gridListSection.dynamicGridList.is().displayed();
+        gridListSection.dynamicGridList.get(1).show();
+    }
+
+    @Test
+    public void dynamicGridListColorTest() {
+        System.out.println(gridListSection.dynamicGridList.get(1).getText());
+        System.out.println(gridListSection.dynamicGridList.get(1).color());
+
+
+    }
+
+    @Test
+    public void dynamicGridListTextTest() {
 
     }
 }
