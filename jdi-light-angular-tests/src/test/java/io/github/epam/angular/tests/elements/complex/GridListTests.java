@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.AngularPage.basicIcon;
 import static io.github.com.pages.AngularPage.gridListSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
@@ -45,9 +46,8 @@ public class GridListTests extends TestsInit {
     @Test
     public void dynamicGridListColorTest() {
         System.out.println(gridListSection.dynamicGridList.get(1).getText());
-        System.out.println(gridListSection.dynamicGridList.get(1).color());
-
-
+        System.out.println(gridListSection.dynamicGridList.get(4).color());
+        gridListSection.dynamicGridList.get(1).has().attr("style","rgba(173, 216, 230, 1)");
     }
 
     @Test
