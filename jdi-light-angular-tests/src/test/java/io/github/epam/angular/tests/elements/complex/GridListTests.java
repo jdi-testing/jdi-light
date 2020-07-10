@@ -45,7 +45,7 @@ public class GridListTests extends TestsInit {
 
     @Test
     public void dynamicGridListColorTest() {
-        gridListSection.dynamicGridList.get(1).is().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
-        gridListSection.dynamicGridList.get(4).is().css("background-color", "rgba(" + 221 + ", " + 189 + ", " + 241 + ", 1)");
+        gridListSection.dynamicGridList.get(1).has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
+        gridListSection.dynamicGridList.get(4).has().css("background-color", "rgba(" + 221 + ", " + 189 + ", " + 241 + ", 1)");
     }
 }
