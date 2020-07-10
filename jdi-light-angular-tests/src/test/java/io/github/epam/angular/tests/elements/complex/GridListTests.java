@@ -1,18 +1,12 @@
 package io.github.epam.angular.tests.elements.complex;
 
-//import io.github.com.pages.sections.GridListSection;
-//import io.github.com.pages.sections.GridListSection.*;
-//import io.github.com.pages.sections.GridListSection;
-
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.basicIcon;
 import static io.github.com.pages.AngularPage.gridListSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-
 
 public class GridListTests extends TestsInit {
 
@@ -23,18 +17,19 @@ public class GridListTests extends TestsInit {
     }
 
     @Test
-    public void basicGridListTest() {
-
+    public void basicGridListBasicTest() {
         gridListSection.basicGridList.is().displayed();
         gridListSection.basicGridList.get(1).show();
+    }
 
-        System.out.println(gridListSection.basicGridList.get(1).getValue());
+    @Test
+    public void basicGridListTextTest() {
+        gridListSection.basicGridList.get(1).is().text("1");
+    }
 
-        gridListSection.dynamicGridList.is().displayed();
-        gridListSection.dynamicGridList.get(1).show();
-
-        System.out.println(gridListSection.dynamicGridList.get(1).getValue());
-
+    @Test
+    public void basicGridListColorTest() {
+        gridListSection.dynamicGridList.get(1).has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
     }
 
     @Test
@@ -44,14 +39,13 @@ public class GridListTests extends TestsInit {
     }
 
     @Test
-    public void dynamicGridListColorTest() {
-        System.out.println(gridListSection.dynamicGridList.get(1).getText());
-        System.out.println(gridListSection.dynamicGridList.get(4).color());
-        gridListSection.dynamicGridList.get(1).has().attr("style","rgba(173, 216, 230, 1)");
+    public void dynamicGridListTextTest() {
+        gridListSection.dynamicGridList.get(1).is().text("One");
     }
 
     @Test
-    public void dynamicGridListTextTest() {
-
+    public void dynamicGridListColorTest() {
+        gridListSection.dynamicGridList.get(1).has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
+        gridListSection.dynamicGridList.get(4).has().css("background-color", "rgba(" + 221 + ", " + 189 + ", " + 241 + ", 1)");
     }
 }
