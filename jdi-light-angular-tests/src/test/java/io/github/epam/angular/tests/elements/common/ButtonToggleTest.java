@@ -53,9 +53,9 @@ public class ButtonToggleTest extends TestsInit {
 
     @Test
     public void basicUnderlineButtonToggleTest() {
-        String pressedAttribute="aria-pressed";
-        String buttonIsPressed="true";
-        String buttonIsNotPressed="false";
+        String pressedAttribute = "aria-pressed";
+        String buttonIsPressed = "true";
+        String buttonIsNotPressed = "false";
         buttonToggleSection.basicButtonToggleUnderline.click();
         buttonToggleSection.basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsPressed);
         buttonToggleSection.basicButtonToggleUnderline.click();
@@ -71,8 +71,8 @@ public class ButtonToggleTest extends TestsInit {
 
     @Test
     public void pressAllBasicButtonTogglesTest() {
-        String pressedAttribute="aria-pressed";
-        String buttonIsPressed="true";
+        String pressedAttribute = "aria-pressed";
+        String buttonIsPressed = "true";
         buttonToggleSection.basicButtonToggleBold.click();
         buttonToggleSection.basicButtonToggleItalic.click();
         buttonToggleSection.basicButtonToggleUnderline.click();
