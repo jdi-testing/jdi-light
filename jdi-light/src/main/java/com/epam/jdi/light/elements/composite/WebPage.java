@@ -212,6 +212,18 @@ public class WebPage extends DriverBase implements PageObject {
         if (VISUAL_PAGE_STRATEGY == CHECK_PAGE)
             visualWindowCheck();
     }
+    public boolean isOnPage(String url) {
+        switch (checkUrlType) {
+            case NONE:
+            case EQUALS:
+                return url.equals(this.checkUrl);
+            case MATCH:
+                return url.matches(this.checkUrl);
+            case CONTAINS:
+                return url.contains(this.checkUrl);
+            default: return false;
+        }
+    }
     /**
      * Check that page opened
      */

@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.pairs.Pair;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -67,6 +68,10 @@ public class EntitiesCollection {
             } else page = new WebPage(jsonPages.get(pageName));
         }
         return page;
+    }
+    public static WebPage getPageByUrl(String url) {
+        Pair<String, WebPage> result = PAGES.first((k, v) -> v.isOnPage(url));
+        return result != null ? result.value : null;
     }
     public static void addElement(Object jdi) {
         if (isInterface(jdi.getClass(), ICoreElement.class)) {
