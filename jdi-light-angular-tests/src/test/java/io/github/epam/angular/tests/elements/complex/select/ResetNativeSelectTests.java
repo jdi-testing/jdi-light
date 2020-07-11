@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static io.github.com.pages.sections.SelectSection.resetNativeSelect;
 import static org.hamcrest.Matchers.hasItem;
@@ -41,8 +40,7 @@ public class ResetNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListEnabledOptions() {
-        List<String> expectedEnabled = Arrays.asList("", VOLVO, SAAB, MERCEDES, AUDI);
-        resetNativeSelect.has().listEnabled(expectedEnabled);
+        resetNativeSelect.has().listEnabled(Arrays.asList("", VOLVO, SAAB, MERCEDES, AUDI));
     }
 
     @Test

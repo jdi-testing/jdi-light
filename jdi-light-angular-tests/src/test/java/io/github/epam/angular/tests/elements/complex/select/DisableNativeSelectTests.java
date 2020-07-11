@@ -4,13 +4,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static io.github.com.pages.sections.SelectSection.disableNativeSelect;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
 public class DisableNativeSelectTests extends TestsSelectBase {
+    private static final String DISABLED = "disabled";
+
     @BeforeMethod(alwaysRun = true)
     public void before() {
         disableNativeSelect.show();
@@ -24,13 +25,13 @@ public class DisableNativeSelectTests extends TestsSelectBase {
     @Test
     public void verifyCheckboxCanDisableSelect() {
         pickDisableSelectCheckboxAsChecked();
-        disableNativeSelect.waitFor().assertThat().hasAttribute("disabled");
+        disableNativeSelect.waitFor().assertThat().hasAttribute(DISABLED);
     }
 
     @Test
     public void checkEnabledOptionCanBeSelectedByIndex() {
         pickDisableSelectCheckboxAsUnchecked();
-        if (disableNativeSelect.base().get().getAttribute("disabled") == null) {
+        if (disableNativeSelect.base().get().getAttribute(DISABLED) == null) {
             disableNativeSelect.select(2);
             disableNativeSelect.is().selected(VOLVO);
         }
@@ -39,7 +40,7 @@ public class DisableNativeSelectTests extends TestsSelectBase {
     @Test
     public void checkDisabledOptionCannotBeSelectedByName() {
         pickDisableSelectCheckboxAsUnchecked();
-        if (disableNativeSelect.base().get().getAttribute("disabled") == null) {
+        if (disableNativeSelect.base().get().getAttribute(DISABLED) == null) {
             String preselectedValue = disableNativeSelect.selected();
             disableNativeSelect.select(SAAB);
             disableNativeSelect.is().selected(preselectedValue);
@@ -48,14 +49,12 @@ public class DisableNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListDisabledOptions() {
-        List<String> expectedDisabled = Arrays.asList("", SAAB);
-        disableNativeSelect.has().listDisabled(expectedDisabled);
+        disableNativeSelect.has().listDisabled(Arrays.asList("", SAAB));
     }
 
     @Test
     public void checkListEnabledOptions() {
-        List<String> expectedEnabled = Arrays.asList(VOLVO, MERCEDES, AUDI);
-        disableNativeSelect.has().listEnabled(expectedEnabled);
+        disableNativeSelect.has().listEnabled(Arrays.asList(VOLVO, MERCEDES, AUDI));
     }
 
     @Test
