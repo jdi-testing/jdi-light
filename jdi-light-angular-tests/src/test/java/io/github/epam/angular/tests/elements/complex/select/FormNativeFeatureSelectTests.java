@@ -4,13 +4,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static io.github.com.pages.sections.SelectSection.formNativeFeatureSelect;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
 public class FormNativeFeatureSelectTests extends TestsSelectBase {
+    private static final String ARIA_INVALID = "aria-invalid";
+
     @BeforeMethod(alwaysRun = true)
     public void before() {
         formNativeFeatureSelect.show();
@@ -25,7 +26,7 @@ public class FormNativeFeatureSelectTests extends TestsSelectBase {
     public void checkOptionCanBeSelectedByNameAndHintMessageWillAppear() {
         formNativeFeatureSelect.select(MERCEDES);
         formNativeFeatureSelect.is().selected(MERCEDES);
-        formNativeFeatureSelect.waitFor().attr("aria-invalid", "false");
+        formNativeFeatureSelect.waitFor().attr(ARIA_INVALID, "false");
         formNativeFeatureSelect.hint().assertThat().text("You can pick up your favorite car here");
     }
 
@@ -36,8 +37,7 @@ public class FormNativeFeatureSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListEnabledOptions() {
-        List<String> expectedEnabled = Arrays.asList("", SAAB, MERCEDES, AUDI);
-        formNativeFeatureSelect.has().listEnabled(expectedEnabled);
+        formNativeFeatureSelect.has().listEnabled(Arrays.asList("", SAAB, MERCEDES, AUDI));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class FormNativeFeatureSelectTests extends TestsSelectBase {
         formNativeFeatureSelect.core().click(0, formNativeFeatureSelect.core().getRect().getHeight() + 1);
         formNativeFeatureSelect.core().click(0, formNativeFeatureSelect.core().getRect().getHeight() + 1);
         formNativeFeatureSelect.is().selected("");
-        formNativeFeatureSelect.waitFor().attr("aria-invalid", "true");
+        formNativeFeatureSelect.waitFor().attr(ARIA_INVALID, "true");
         formNativeFeatureSelect.error().assertThat().text("This field is required");
     }
 

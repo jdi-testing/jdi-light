@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static io.github.com.pages.sections.SelectSection.basicNativeSelect;
 import static org.hamcrest.Matchers.hasItem;
@@ -40,8 +39,7 @@ public class BasicNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListEnabledOptions() {
-        List<String> expectedEnabled = Arrays.asList(VOLVO, SAAB, MERCEDES, AUDI);
-        basicNativeSelect.has().listEnabled(expectedEnabled);
+        basicNativeSelect.has().listEnabled(Arrays.asList(VOLVO, SAAB, MERCEDES, AUDI));
     }
 
     @Test

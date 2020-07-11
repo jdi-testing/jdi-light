@@ -37,6 +37,7 @@ public class NativeSelectorAssert extends UIAssert<NativeSelectorAssert, NativeS
         jdiAssert(element().values(), hasItem(getEnumValue(option)));
         return this;
     }
+
     @JDIAction("Assert that '{name}' values {0}")
     public NativeSelectorAssert value(final Matcher<String> condition) {
         return values(hasItem(condition));

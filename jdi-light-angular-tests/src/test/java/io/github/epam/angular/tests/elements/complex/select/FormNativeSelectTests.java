@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static io.github.com.pages.sections.SelectSection.formNativeSelect;
 import static io.github.com.pages.sections.SelectSection.formNativeSelectConfirmation;
@@ -37,8 +36,7 @@ public class FormNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListEnabledOptions() {
-        List<String> expectedEnabled = Arrays.asList("", VOLVO, SAAB, MERCEDES);
-        formNativeSelect.has().listEnabled(expectedEnabled);
+        formNativeSelect.has().listEnabled(Arrays.asList("", VOLVO, SAAB, MERCEDES));
     }
 
     @Test

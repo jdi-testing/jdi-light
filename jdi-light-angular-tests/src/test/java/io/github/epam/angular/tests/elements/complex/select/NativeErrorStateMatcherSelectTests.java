@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static io.github.com.pages.sections.SelectSection.nativeErrorStateMatcherSelect;
 import static org.hamcrest.Matchers.hasItem;
@@ -49,8 +48,7 @@ public class NativeErrorStateMatcherSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListEnabledOptions() {
-        List<String> expectedEnabled = Arrays.asList("", VALID_OPTION, INVALID_OPTION);
-        nativeErrorStateMatcherSelect.has().listEnabled(expectedEnabled);
+        nativeErrorStateMatcherSelect.has().listEnabled(Arrays.asList("", VALID_OPTION, INVALID_OPTION));
     }
 
     @Test

@@ -13,6 +13,9 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
 public class OptionGroupsNativeSelectTests extends TestsSelectBase {
+    private static final String SWEDISH_CARS = "Swedish Cars";
+    private static final String GERMAN_CARS = "German Cars";
+
     @BeforeMethod(alwaysRun = true)
     public void before() {
         optionGroupsNativeSelect.show();
@@ -36,8 +39,7 @@ public class OptionGroupsNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListEnabledOptions() {
-        List<String> expectedEnabled = Arrays.asList(VOLVO, SAAB, MERCEDES, AUDI);
-        optionGroupsNativeSelect.has().listEnabled(expectedEnabled);
+        optionGroupsNativeSelect.has().listEnabled(Arrays.asList(VOLVO, SAAB, MERCEDES, AUDI));
     }
 
     @Test
@@ -47,16 +49,15 @@ public class OptionGroupsNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkAvailableGroups() {
-        List<String> expectedGroups = Arrays.asList("Swedish Cars", "German Cars");
+        List<String> expectedGroups = Arrays.asList(SWEDISH_CARS, GERMAN_CARS);
         optionGroupsNativeSelect.is().groups(expectedGroups);
     }
 
     @Test
     public void checkAvailableOptionsAndGroups() {
         Map<String, List<String>> expectedResult = new LinkedHashMap<>();
-        List<String> expectedGroups = Arrays.asList("Swedish Cars", "German Cars");
-        expectedResult.put(expectedGroups.get(0), Arrays.asList(VOLVO, SAAB));
-        expectedResult.put(expectedGroups.get(1), Arrays.asList(MERCEDES, AUDI));
+        expectedResult.put(SWEDISH_CARS, Arrays.asList(VOLVO, SAAB));
+        expectedResult.put(GERMAN_CARS, Arrays.asList(MERCEDES, AUDI));
         optionGroupsNativeSelect.assertThat().groupsAndOptions(expectedResult);
     }
 }
