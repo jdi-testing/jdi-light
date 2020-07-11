@@ -11,7 +11,6 @@ import java.util.Map;
 import static io.github.com.pages.sections.SelectSection.optionGroupsNativeSelect;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
-import static org.testng.Assert.assertEquals;
 
 public class OptionGroupsNativeSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
@@ -31,6 +30,17 @@ public class OptionGroupsNativeSelectTests extends TestsSelectBase {
     }
 
     @Test
+    public void checkListDisabledOptions() {
+        optionGroupsNativeSelect.has().emptyDisabled();
+    }
+
+    @Test
+    public void checkListEnabledOptions() {
+        List<String> expectedEnabled = Arrays.asList(VOLVO, SAAB, MERCEDES, AUDI);
+        optionGroupsNativeSelect.has().listEnabled(expectedEnabled);
+    }
+
+    @Test
     public void checkAvailableOptions() {
         optionGroupsNativeSelect.assertThat().values(hasItem(MERCEDES)).values(hasItems(VOLVO, SAAB, AUDI, MERCEDES));
     }
@@ -38,8 +48,7 @@ public class OptionGroupsNativeSelectTests extends TestsSelectBase {
     @Test
     public void checkAvailableGroups() {
         List<String> expectedGroups = Arrays.asList("Swedish Cars", "German Cars");
-        List<String> actualGroups = optionGroupsNativeSelect.groups();
-        assertEquals(actualGroups, expectedGroups, "Car groups are not equal");
+        optionGroupsNativeSelect.is().groups(expectedGroups);
     }
 
     @Test
@@ -48,7 +57,6 @@ public class OptionGroupsNativeSelectTests extends TestsSelectBase {
         List<String> expectedGroups = Arrays.asList("Swedish Cars", "German Cars");
         expectedResult.put(expectedGroups.get(0), Arrays.asList(VOLVO, SAAB));
         expectedResult.put(expectedGroups.get(1), Arrays.asList(MERCEDES, AUDI));
-        Map<String, List<String>> actualResult = optionGroupsNativeSelect.groupsAndOptions();
-        assertEquals(actualResult, expectedResult, "Some groups and (or) options in the Car map are not equal");
+        optionGroupsNativeSelect.assertThat().groupsAndOptions(expectedResult);
     }
 }

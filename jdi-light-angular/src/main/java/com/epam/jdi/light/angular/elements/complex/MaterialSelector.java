@@ -105,18 +105,18 @@ public class MaterialSelector extends Dropdown {
     /**
      * Check the element background has a color with the specified parameters.
      *
-     * @param R decimal representation of color Red of the form rgba(R,G,B,a)
-     * @param G decimal representation of color Green of the form rgba(R,G,B,a)
-     * @param B decimal representation of color Blue of the form rgba(R,G,B,a)
+     * @param red decimal representation of color Red of the form rgba(R,G,B,a)
+     * @param green decimal representation of color Green of the form rgba(R,G,B,a)
+     * @param blue decimal representation of color Blue of the form rgba(R,G,B,a)
      * @param a opacity of the color of the form rgba(R,G,B,a)
      * @return boolean is background has a specified color
      */
     @JDIAction("Check that rgba({0}, {1}, {2}, {3}) is the specified color")
-    public boolean hasColor(final int R, final int G, final int B, final double a) {
+    public boolean hasColor(final int red, final int green, final int blue, final double a) {
         expand();
         visibleExpander().waitFor();
         boolean hasColor = expandedSelector().css("background-color")
-                .equalsIgnoreCase("rgba(" + R + ", " + G + ", " + B + ", " + a + ")");
+                .equalsIgnoreCase("rgba(" + red + ", " + green + ", " + blue + ", " + a + ")");
         expandedSelector().core().click(pointOutsidePanel().getX(), pointOutsidePanel().getY());
         return hasColor;
     }

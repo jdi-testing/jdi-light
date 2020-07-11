@@ -18,6 +18,8 @@ public class TestsSelectBase extends TestsInit {
     protected static final String OPTION_1 = "Option 1";
     protected static final String OPTION_2 = "Option 2";
     protected static final String OPTION_3 = "Option 3";
+    protected static final String VALID_OPTION = "Valid option";
+    protected static final String INVALID_OPTION = "Invalid option";
     protected static final String EXTRA_CHEESE = "Extra cheese";
     protected static final String MUSHROOM = "Mushroom";
     protected static final String ONION = "Onion";
@@ -31,14 +33,14 @@ public class TestsSelectBase extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
-    protected void pickCheckboxDisableSelectAsUnchecked() {
+    protected void pickDisableSelectCheckboxAsUnchecked() {
         if (checkboxDisableSelect.isSelected()) {
             checkboxDisableSelect.uncheck();
         }
         checkboxDisableSelect.is().deselected();
     }
 
-    protected void pickCheckboxDisableSelectAsChecked() {
+    protected void pickDisableSelectCheckboxAsChecked() {
         if (!checkboxDisableSelect.isSelected()) {
             checkboxDisableSelect.check();
         }

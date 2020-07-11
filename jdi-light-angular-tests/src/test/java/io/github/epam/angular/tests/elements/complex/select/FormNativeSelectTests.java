@@ -3,11 +3,14 @@ package io.github.epam.angular.tests.elements.complex.select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static io.github.com.pages.sections.SelectSection.formNativeSelect;
 import static io.github.com.pages.sections.SelectSection.formNativeSelectConfirmation;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.hasItems;
 
 public class FormNativeSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
@@ -28,7 +31,18 @@ public class FormNativeSelectTests extends TestsSelectBase {
     }
 
     @Test
+    public void checkListDisabledOptions() {
+        formNativeSelect.has().emptyDisabled();
+    }
+
+    @Test
+    public void checkListEnabledOptions() {
+        List<String> expectedEnabled = Arrays.asList("", VOLVO, SAAB, MERCEDES);
+        formNativeSelect.has().listEnabled(expectedEnabled);
+    }
+
+    @Test
     public void checkAvailableOptions() {
-        formNativeSelect.assertThat().values(hasItem(containsString(VOLVO))).values(hasSize(4));
+        formNativeSelect.assertThat().values(hasItem(VOLVO)).values(hasItems(VOLVO, SAAB, MERCEDES));
     }
 }
