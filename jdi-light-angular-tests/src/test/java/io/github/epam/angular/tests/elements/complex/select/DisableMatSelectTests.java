@@ -26,13 +26,13 @@ public class DisableMatSelectTests extends TestsSelectBase {
 
     @Test
     public void verifyCheckboxCanDisableSelect() {
-        pickCheckboxDisableSelectAsChecked();
+        pickDisableSelectCheckboxAsChecked();
         disableMatSelect.waitFor().attr("aria-disabled", "true");
     }
 
     @Test
     public void checkEnabledOptionCanBeSelectedByIndex() {
-        pickCheckboxDisableSelectAsUnchecked();
+        pickDisableSelectCheckboxAsUnchecked();
         disableMatSelect.waitFor().attr("aria-disabled", "false");
         disableMatSelect.select(3);
         disableMatSelect.is().selected(OPTION_3);
@@ -40,7 +40,7 @@ public class DisableMatSelectTests extends TestsSelectBase {
 
     @Test
     public void checkDisabledOptionCannotBeSelectedByName() {
-        pickCheckboxDisableSelectAsUnchecked();
+        pickDisableSelectCheckboxAsUnchecked();
         disableMatSelect.waitFor().attr("aria-disabled", "false");
         String preselectedValue = disableMatSelect.selected();
         disableMatSelect.multipleSelect("Option 2 (disabled)");
