@@ -23,10 +23,34 @@ public class SnackbarUnitTests extends TestsInit{
 
     @Test
     public void displayedBasicTest() {
-        //assertFalse(snackbarSection.basicSnackbar.isDisplayed());
-        //snackbarSection.openButton.click();
-        //assertTrue(snackbarSection.basicSnackbar.isDisplayed());
+        assertFalse(snackbarSection.basicSnackbar.isDisplayed());
+        snackbarSection.openButton.click();
+        assertTrue(snackbarSection.basicSnackbar.isDisplayed());
+        refresh();
     }
+
+    @Test
+    public void correctMessageBasicTest() {
+        snackbarSection.openButton.click();
+        assertEquals(snackbarSection.basicSnackbar.children().get(1).getText(), snackbarSection.messageInput.getText());
+        refresh();
+    }
+
+    @Test
+    public void correctActionBasicTest() {
+        snackbarSection.openButton.click();
+        assertEquals(snackbarSection.basicSnackbar.children().get(2).getText(), snackbarSection.actionInput.getText());
+        refresh();
+    }
+
+    @Test
+    public void closingSnackbarBasicTest() {
+        snackbarSection.openButton.click();
+        snackbarSection.basicSnackbar.children().get(2).click();
+        assertFalse(snackbarSection.basicSnackbar.isDisplayed());
+        refresh();
+    }
+
 
     @Test
     public void displayedCustomTest() {

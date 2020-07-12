@@ -17,7 +17,7 @@ public class SnackbarSection extends Section {
     @UI("#snack-bar-open-button")
     public Button openButton;
 
-    @UI("#basic-snack-bar-container")
+    @UI("//*[@id='cdk-overlay-0']/snack-bar-container/simple-snack-bar")
     public Snackbar basicSnackbar;
 
     @UI("#snack-bar-custom-component-input")
