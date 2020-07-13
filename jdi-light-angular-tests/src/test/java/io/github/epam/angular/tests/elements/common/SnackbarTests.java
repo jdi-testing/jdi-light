@@ -1,7 +1,6 @@
 package io.github.epam.angular.tests.elements.common;
 
 import io.github.epam.TestsInit;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -33,5 +32,4 @@ public class SnackbarTests extends TestsInit {
     }
 
 
-    
 }

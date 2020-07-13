@@ -10,13 +10,13 @@ import static org.hamcrest.Matchers.lessThan;
 public class BaseValidationsUtils {
 
     public static void duration(int duration, JAction action) {
-        validateDuration(duration*1000-500, duration*1000+500, action);
+        validateDuration(duration * 1000 - 500, duration * 1000 + 500, action);
     }
 
     private static void validateDuration(long min, long max, JAction action) {
         long passedTime = getDuration(action);
         assertThat(passedTime, greaterThan(min));
-        assertThat(passedTime, lessThan(max+500));
+        assertThat(passedTime, lessThan(max + 500));
     }
 
     public static long getDuration(JAction action) {
