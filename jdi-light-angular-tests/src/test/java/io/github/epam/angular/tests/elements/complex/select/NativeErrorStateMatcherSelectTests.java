@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 import static io.github.com.pages.sections.SelectSection.nativeErrorStateMatcherSelect;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.matchesPattern;
 
 public class NativeErrorStateMatcherSelectTests extends TestsSelectBase {
@@ -43,7 +41,7 @@ public class NativeErrorStateMatcherSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListDisabledOptions() {
-        nativeErrorStateMatcherSelect.has().emptyDisabled();
+        nativeErrorStateMatcherSelect.has().listDisabled();
     }
 
     @Test
@@ -53,7 +51,6 @@ public class NativeErrorStateMatcherSelectTests extends TestsSelectBase {
 
     @Test
     public void checkAvailableOptions() {
-        nativeErrorStateMatcherSelect.assertThat().values(hasItem(VALID_OPTION))
-                .values(hasItems(VALID_OPTION, INVALID_OPTION, ""));
+        nativeErrorStateMatcherSelect.assertThat().values(VALID_OPTION).values(VALID_OPTION, INVALID_OPTION, "");
     }
 }

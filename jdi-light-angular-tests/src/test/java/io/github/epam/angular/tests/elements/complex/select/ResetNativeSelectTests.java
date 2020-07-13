@@ -35,7 +35,7 @@ public class ResetNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListDisabledOptions() {
-        resetNativeSelect.has().emptyDisabled();
+        resetNativeSelect.has().listDisabled();
     }
 
     @Test

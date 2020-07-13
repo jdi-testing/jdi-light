@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static io.github.com.pages.sections.SelectSection.basicNativeSelect;
 import static org.hamcrest.Matchers.hasItem;
@@ -34,7 +35,7 @@ public class BasicNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListDisabledOptions() {
-        basicNativeSelect.has().emptyDisabled();
+        basicNativeSelect.has().listDisabled(Collections.EMPTY_LIST);
     }
 
     @Test

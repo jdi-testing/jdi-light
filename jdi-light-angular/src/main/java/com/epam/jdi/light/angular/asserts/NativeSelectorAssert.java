@@ -7,7 +7,6 @@ import com.epam.jdi.light.common.TextTypes;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +37,7 @@ public class NativeSelectorAssert extends UIAssert<NativeSelectorAssert, NativeS
         return this;
     }
 
-    @JDIAction("Assert that '{name}' values {0}")
+    @JDIAction("Assert that '{name}' value {0}")
     public NativeSelectorAssert value(final Matcher<String> condition) {
         return values(hasItem(condition));
     }
@@ -73,32 +72,50 @@ public class NativeSelectorAssert extends UIAssert<NativeSelectorAssert, NativeS
     }
 
     @JDIAction("Assert that '{name}' has groups {0}")
-    public NativeSelectorAssert groups(final List<String> groups) {
-        jdiAssert(element.groups(), Matchers.is(groups));
+    public NativeSelectorAssert groups(final Matcher<? super List<String>> condition) {
+        jdiAssert(element().groups(), condition);
         return this;
+    }
+
+    public NativeSelectorAssert groups(final List<String> groups) {
+        return groups(toStringArray(groups));
+    }
+
+    public NativeSelectorAssert groups(final String... values) {
+        return groups(hasItems(values));
     }
 
     @JDIAction("Assert that '{name}' has groups and options {0}")
     public NativeSelectorAssert groupsAndOptions(final Map<String, List<String>> expectedGroupsAndOptions) {
-        jdiAssert(element.groupsAndOptions(), Matchers.is(expectedGroupsAndOptions));
+        jdiAssert(element().groupsAndOptions(), Matchers.is(expectedGroupsAndOptions));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has enabled values {0}")
-    public NativeSelectorAssert listEnabled(final List<String> listEnabled) {
-        jdiAssert(element.listEnabled(), Matchers.is(listEnabled));
+    public NativeSelectorAssert listEnabled(final Matcher<? super List<String>> condition) {
+        jdiAssert(element().listEnabled(), condition);
         return this;
+    }
+
+    public NativeSelectorAssert listEnabled(final List<String> listEnabled) {
+        return listEnabled(toStringArray(listEnabled));
+    }
+
+    public NativeSelectorAssert listEnabled(final String... values) {
+        return listEnabled(hasItems(values));
     }
 
     @JDIAction("Assert that '{name}' has disabled values {0}")
-    public NativeSelectorAssert listDisabled(final List<String> listDisabled) {
-        jdiAssert(element.listDisabled(), Matchers.is(listDisabled));
+    public NativeSelectorAssert listDisabled(final Matcher<? super List<String>> condition) {
+        jdiAssert(element().listDisabled(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no disabled values")
-    public NativeSelectorAssert emptyDisabled() {
-        jdiAssert(element.listDisabled(), Matchers.is(Collections.EMPTY_LIST));
-        return this;
+    public NativeSelectorAssert listDisabled(final List<String> listDisabled) {
+        return listDisabled(toStringArray(listDisabled));
+    }
+
+    public NativeSelectorAssert listDisabled(final String... values) {
+        return listDisabled(hasItems(values));
     }
 }
