@@ -34,13 +34,13 @@ public class SnackbarUnitTests extends TestsInit {
     @Test
     public void correctMessageBasicTest() {
         snackbarSection.openButton.click();
-        snackbarSection.basicSnackbar.children().get(1).is().text(snackbarSection.messageInput.getText());
+        snackbarSection.basicSnackbar.children().get(1).has().text(snackbarSection.messageInput.getText());
     }
 
     @Test
     public void correctActionBasicTest() {
         snackbarSection.openButton.click();
-        snackbarSection.basicSnackbar.children().get(2).is().text(snackbarSection.actionInput.getText());
+        snackbarSection.basicSnackbar.children().get(2).has().text(snackbarSection.actionInput.getText());
     }
 
     @Test

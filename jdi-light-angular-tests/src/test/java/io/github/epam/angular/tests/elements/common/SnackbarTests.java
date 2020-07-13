@@ -25,8 +25,8 @@ public class SnackbarTests extends TestsInit {
         snackbarSection.actionInput.setValue(ACTION);
         snackbarSection.openButton.click();
         snackbarSection.basicSnackbar.is().displayed();
-        snackbarSection.basicSnackbar.children().get(1).is().text(MESSAGE);
-        snackbarSection.basicSnackbar.children().get(2).is().text(ACTION);
+        snackbarSection.basicSnackbar.children().get(1).has().text(MESSAGE);
+        snackbarSection.basicSnackbar.children().get(2).has().text(ACTION);
         snackbarSection.basicSnackbar.children().get(2).click();
         snackbarSection.basicSnackbar.is().hidden();
     }
