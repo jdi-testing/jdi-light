@@ -36,6 +36,7 @@ public class BadgeTests extends TestsInit {
         badgeSection.buttonWithBadge.click();
         badgeSection.hiddenText.is().displayed();
         badgeSection.hiddenText.has().text("Top secret message");
+        badgeSection.buttonWithBadge.click();
     }
 
     @Test
@@ -43,5 +44,6 @@ public class BadgeTests extends TestsInit {
         badgeSection.textOnButton.has().text("Show message");
         badgeSection.buttonWithBadge.click();
         badgeSection.textOnButton.has().text("Hide message");
+        badgeSection.buttonWithBadge.click();
     }
 }
