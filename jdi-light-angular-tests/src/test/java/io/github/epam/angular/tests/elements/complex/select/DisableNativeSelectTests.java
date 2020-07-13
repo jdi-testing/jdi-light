@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 import static io.github.com.pages.sections.SelectSection.disableNativeSelect;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
 
 public class DisableNativeSelectTests extends TestsSelectBase {
     private static final String DISABLED = "disabled";
@@ -49,7 +47,7 @@ public class DisableNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListDisabledOptions() {
-        disableNativeSelect.has().listDisabled(Arrays.asList("", SAAB));
+        disableNativeSelect.has().listDisabled();
     }
 
     @Test
@@ -59,6 +57,6 @@ public class DisableNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkAvailableOptions() {
-        disableNativeSelect.assertThat().values(hasItem(AUDI)).values(hasItems(SAAB, MERCEDES, VOLVO));
+        disableNativeSelect.assertThat().values(AUDI).values(Arrays.asList(AUDI, SAAB, MERCEDES, VOLVO));
     }
 }

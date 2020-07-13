@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import static io.github.com.pages.sections.SelectSection.optionGroupsNativeSelect;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
 
 public class OptionGroupsNativeSelectTests extends TestsSelectBase {
     private static final String SWEDISH_CARS = "Swedish Cars";
@@ -34,7 +32,7 @@ public class OptionGroupsNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListDisabledOptions() {
-        optionGroupsNativeSelect.has().emptyDisabled();
+        optionGroupsNativeSelect.has().listDisabled();
     }
 
     @Test
@@ -44,13 +42,12 @@ public class OptionGroupsNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkAvailableOptions() {
-        optionGroupsNativeSelect.assertThat().values(hasItem(MERCEDES)).values(hasItems(VOLVO, SAAB, AUDI, MERCEDES));
+        optionGroupsNativeSelect.assertThat().values(MERCEDES).values(VOLVO, SAAB, AUDI, MERCEDES);
     }
 
     @Test
     public void checkAvailableGroups() {
-        List<String> expectedGroups = Arrays.asList(SWEDISH_CARS, GERMAN_CARS);
-        optionGroupsNativeSelect.is().groups(expectedGroups);
+        optionGroupsNativeSelect.is().groups(Arrays.asList(SWEDISH_CARS, GERMAN_CARS));
     }
 
     @Test

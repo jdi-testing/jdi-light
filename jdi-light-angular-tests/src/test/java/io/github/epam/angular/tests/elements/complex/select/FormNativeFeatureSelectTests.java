@@ -32,7 +32,7 @@ public class FormNativeFeatureSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListDisabledOptions() {
-        formNativeFeatureSelect.has().emptyDisabled();
+        formNativeFeatureSelect.has().listDisabled();
     }
 
     @Test
