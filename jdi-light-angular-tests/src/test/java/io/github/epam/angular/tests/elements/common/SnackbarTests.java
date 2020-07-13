@@ -30,6 +30,4 @@ public class SnackbarTests extends TestsInit {
         snackbarSection.basicSnackbar.children().get(2).click();
         snackbarSection.basicSnackbar.is().hidden();
     }
-
-
 }
