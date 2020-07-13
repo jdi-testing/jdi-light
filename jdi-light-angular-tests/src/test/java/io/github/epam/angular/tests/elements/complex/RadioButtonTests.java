@@ -19,11 +19,6 @@ public class RadioButtonTests extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
-    String enableSeasonButton = "mat-radio-button example-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
-    String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
-
-    String enableBasicButton = "mat-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
-    String disableBasicButton = "mat-radio-button mat-accent";
 
     @Test
     public void displayedBasicRadioButtonTest() {
@@ -50,15 +45,15 @@ public class RadioButtonTests extends TestsInit {
     @Test
     public void onlyOneOptionOneButtonEnabledTest() {
         radioButtonSection.firstBasicRadioButton.click();
-        radioButtonSection.firstBasicRadioButton.has().attr("class", enableBasicButton);
-        radioButtonSection.secondBasicRadioButton.has().attr("class", disableBasicButton);
+        radioButtonSection.firstBasicRadioButton.has().attr("class", radioButtonSection.enableBasicButton);
+        radioButtonSection.secondBasicRadioButton.has().attr("class", radioButtonSection.disableBasicButton);
     }
 
     @Test
     public void onlyOneOptionTwoButtonEnabledTest() {
         radioButtonSection.secondBasicRadioButton.click();
-        radioButtonSection.firstBasicRadioButton.has().attr("class", disableBasicButton);
-        radioButtonSection.secondBasicRadioButton.has().attr("class", enableBasicButton);
+        radioButtonSection.firstBasicRadioButton.has().attr("class", radioButtonSection.disableBasicButton);
+        radioButtonSection.secondBasicRadioButton.has().attr("class", radioButtonSection.enableBasicButton);
     }
 
     @Test
@@ -86,37 +81,37 @@ public class RadioButtonTests extends TestsInit {
     @Test
     public void onlyOneWinterButtonEnabledTest() {
         radioButtonSection.winterNGModelRadioButton.click();
-        radioButtonSection.winterNGModelRadioButton.has().attr("class",enableSeasonButton);
-        radioButtonSection.springNGModelRadioButton.has().attr("class", disableSeasonButton);
-        radioButtonSection.summerNGModelRadioButton.has().attr("class", disableSeasonButton);
-        radioButtonSection.autumnNGModelRadioButton.has().attr("class", disableSeasonButton);
+        radioButtonSection.winterNGModelRadioButton.has().attr("class",radioButtonSection.enableSeasonButton);
+        radioButtonSection.springNGModelRadioButton.has().attr("class", radioButtonSection.disableSeasonButton);
+        radioButtonSection.summerNGModelRadioButton.has().attr("class", radioButtonSection.disableSeasonButton);
+        radioButtonSection.autumnNGModelRadioButton.has().attr("class", radioButtonSection.disableSeasonButton);
     }
 
     @Test
     public void onlyOneSpringButtonEnabledTest() {
         radioButtonSection.springNGModelRadioButton.click();
-        radioButtonSection.winterNGModelRadioButton.has().attr("class",disableSeasonButton);
-        radioButtonSection.springNGModelRadioButton.has().attr("class", enableSeasonButton);
-        radioButtonSection.summerNGModelRadioButton.has().attr("class", disableSeasonButton);
-        radioButtonSection.autumnNGModelRadioButton.has().attr("class", disableSeasonButton);
+        radioButtonSection.winterNGModelRadioButton.has().attr("class",radioButtonSection.disableSeasonButton);
+        radioButtonSection.springNGModelRadioButton.has().attr("class", radioButtonSection.enableSeasonButton);
+        radioButtonSection.summerNGModelRadioButton.has().attr("class", radioButtonSection.disableSeasonButton);
+        radioButtonSection.autumnNGModelRadioButton.has().attr("class", radioButtonSection.disableSeasonButton);
     }
 
     @Test
     public void onlyOneSummerButtonEnabledTest() {
         radioButtonSection.summerNGModelRadioButton.click();
-        radioButtonSection.winterNGModelRadioButton.has().attr("class",disableSeasonButton);
-        radioButtonSection.springNGModelRadioButton.has().attr("class", disableSeasonButton);
-        radioButtonSection.summerNGModelRadioButton.has().attr("class", enableSeasonButton);
-        radioButtonSection.autumnNGModelRadioButton.has().attr("class", disableSeasonButton);
+        radioButtonSection.winterNGModelRadioButton.has().attr("class",radioButtonSection.disableSeasonButton);
+        radioButtonSection.springNGModelRadioButton.has().attr("class", radioButtonSection.disableSeasonButton);
+        radioButtonSection.summerNGModelRadioButton.has().attr("class", radioButtonSection.enableSeasonButton);
+        radioButtonSection.autumnNGModelRadioButton.has().attr("class", radioButtonSection.disableSeasonButton);
     }
 
     @Test
     public void onlyOneAutumnButtonEnabledTest() {
         radioButtonSection.autumnNGModelRadioButton.click();
-        radioButtonSection.winterNGModelRadioButton.has().attr("class",disableSeasonButton);
-        radioButtonSection.springNGModelRadioButton.has().attr("class", disableSeasonButton);
-        radioButtonSection.summerNGModelRadioButton.has().attr("class", disableSeasonButton);
-        radioButtonSection.autumnNGModelRadioButton.has().attr("class", enableSeasonButton);
+        radioButtonSection.winterNGModelRadioButton.has().attr("class",radioButtonSection.disableSeasonButton);
+        radioButtonSection.springNGModelRadioButton.has().attr("class", radioButtonSection.disableSeasonButton);
+        radioButtonSection.summerNGModelRadioButton.has().attr("class", radioButtonSection.disableSeasonButton);
+        radioButtonSection.autumnNGModelRadioButton.has().attr("class", radioButtonSection.enableSeasonButton);
     }
 
 }

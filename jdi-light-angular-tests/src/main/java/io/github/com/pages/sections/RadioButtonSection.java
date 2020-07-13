@@ -34,4 +34,9 @@ public class RadioButtonSection {
     @UI("/html/body/div[1]/div[2]/div/radio-ng-model-example/div")
     public static Text favoriteSeason;
 
+    public static String enableSeasonButton = "mat-radio-button example-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
+    public static String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
+
+    public static String enableBasicButton = "mat-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
+    public static String disableBasicButton = "mat-radio-button mat-accent";
 }
