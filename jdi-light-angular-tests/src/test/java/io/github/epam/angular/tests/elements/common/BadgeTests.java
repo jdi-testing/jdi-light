@@ -25,25 +25,23 @@ public class BadgeTests extends TestsInit {
 
     @Test
     public void badgeTextTest() {
-        badgeSection.badgeWithText.isDisplayed();
         badgeSection.badgeWithText.has().text("4");
-
-        badgeSection.badgeWithButton.isDisplayed();
         badgeSection.badgeWithButton.has().text("8");
-
-        badgeSection.badgeWithIcon.isDisplayed();
         badgeSection.badgeWithIcon.has().text("15");
-
     }
 
     @Test
     public void hiddenMessageTest() {
-        badgeSection.buttonWithBadge.isDisplayed();
-        badgeSection.textOnButton.has().text("Show message");
         badgeSection.hiddenText.isNotExist();
         badgeSection.buttonWithBadge.click();
-        badgeSection.textOnButton.has().text("Hide message");
         badgeSection.hiddenText.is().displayed();
         badgeSection.hiddenText.has().text("Top secret message");
+    }
+
+    @Test
+    public void textOnShowMessageButtonTest() {
+        badgeSection.textOnButton.has().text("Show message");
+        badgeSection.buttonWithBadge.click();
+        badgeSection.textOnButton.has().text("Hide message");
     }
 }
