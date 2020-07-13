@@ -19,6 +19,12 @@ public class RadioButtonTests extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
+    String enableSeasonButton = "mat-radio-button example-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
+    String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
+
+    String enableBasicButton = "mat-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
+    String disableBasicButton = "mat-radio-button mat-accent";
+
     @Test
     public void displayedBasicRadioButtonTest() {
         radioButtonSection.basicRadioButtons.is().displayed();
@@ -43,8 +49,6 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void onlyOneOptionOneButtonEnabledTest() {
-        String enableBasicButton = "mat-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
-        String disableBasicButton = "mat-radio-button mat-accent";
         radioButtonSection.firstBasicRadioButton.click();
         radioButtonSection.firstBasicRadioButton.has().attr("class", enableBasicButton);
         radioButtonSection.secondBasicRadioButton.has().attr("class", disableBasicButton);
@@ -52,8 +56,6 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void onlyOneOptionTwoButtonEnabledTest() {
-        String enableBasicButton = "mat-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
-        String disableBasicButton = "mat-radio-button mat-accent";
         radioButtonSection.secondBasicRadioButton.click();
         radioButtonSection.firstBasicRadioButton.has().attr("class", disableBasicButton);
         radioButtonSection.secondBasicRadioButton.has().attr("class", enableBasicButton);
@@ -83,8 +85,6 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void onlyOneWinterButtonEnabledTest() {
-        String enableSeasonButton = "mat-radio-button example-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
-        String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
         radioButtonSection.winterNGModelRadioButton.click();
         radioButtonSection.winterNGModelRadioButton.has().attr("class",enableSeasonButton);
         radioButtonSection.springNGModelRadioButton.has().attr("class", disableSeasonButton);
@@ -94,8 +94,6 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void onlyOneSpringButtonEnabledTest() {
-        String enableSeasonButton = "mat-radio-button example-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
-        String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
         radioButtonSection.springNGModelRadioButton.click();
         radioButtonSection.winterNGModelRadioButton.has().attr("class",disableSeasonButton);
         radioButtonSection.springNGModelRadioButton.has().attr("class", enableSeasonButton);
@@ -105,8 +103,6 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void onlyOneSummerButtonEnabledTest() {
-        String enableSeasonButton = "mat-radio-button example-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
-        String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
         radioButtonSection.summerNGModelRadioButton.click();
         radioButtonSection.winterNGModelRadioButton.has().attr("class",disableSeasonButton);
         radioButtonSection.springNGModelRadioButton.has().attr("class", disableSeasonButton);
@@ -116,8 +112,6 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void onlyOneAutumnButtonEnabledTest() {
-        String enableSeasonButton = "mat-radio-button example-radio-button mat-accent cdk-focused cdk-mouse-focused mat-radio-checked";
-        String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
         radioButtonSection.autumnNGModelRadioButton.click();
         radioButtonSection.winterNGModelRadioButton.has().attr("class",disableSeasonButton);
         radioButtonSection.springNGModelRadioButton.has().attr("class", disableSeasonButton);
