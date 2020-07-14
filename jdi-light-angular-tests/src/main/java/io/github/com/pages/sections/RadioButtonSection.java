@@ -34,9 +34,4 @@ public class RadioButtonSection {
     @UI("#your-favorite-season-text")
     public static Text favoriteSeason;
 
-    public static String enableSeasonButton = ".* cdk-focused cdk-mouse-focused mat-radio-checked";
-    public static String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
-
-    public static String enableBasicButton = ".* cdk-focused cdk-mouse-focused mat-radio-checked";
-    public static String disableBasicButton = "mat-radio-button mat-accent";
 }
