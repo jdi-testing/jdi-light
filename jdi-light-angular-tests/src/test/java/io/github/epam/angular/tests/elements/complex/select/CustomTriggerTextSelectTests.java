@@ -3,9 +3,9 @@ package io.github.epam.angular.tests.elements.complex.select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static io.github.com.pages.sections.SelectSection.customTriggerTextSelect;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
 
 public class CustomTriggerTextSelectTests extends TestsSelectBase {
     @BeforeMethod()
@@ -33,7 +33,18 @@ public class CustomTriggerTextSelectTests extends TestsSelectBase {
     }
 
     @Test
+    public void checkListDisabledOptions() {
+        customTriggerTextSelect.has().listDisabled();
+    }
+
+    @Test
+    public void checkListEnabledOptions() {
+        customTriggerTextSelect.has()
+                .listEnabled(Arrays.asList(EXTRA_CHEESE, MUSHROOM, ONION, PEPPERONI, SAUSAGE, TOMATO));
+    }
+
+    @Test
     public void checkAvailableOptions() {
-        customTriggerTextSelect.assertThat().values(hasItem(ONION)).values(hasItems(PEPPERONI, SAUSAGE, MUSHROOM));
+        customTriggerTextSelect.assertThat().values(EXTRA_CHEESE, PEPPERONI, SAUSAGE, MUSHROOM, ONION, TOMATO);
     }
 }

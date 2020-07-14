@@ -3,8 +3,9 @@ package io.github.epam.angular.tests.elements.complex.select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static io.github.com.pages.sections.SelectSection.multipleSelect;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
 public class MultipleSelectTests extends TestsSelectBase {
@@ -33,7 +34,17 @@ public class MultipleSelectTests extends TestsSelectBase {
     }
 
     @Test
+    public void checkListDisabledOptions() {
+        multipleSelect.has().listDisabled();
+    }
+
+    @Test
+    public void checkListEnabledOptions() {
+        multipleSelect.has().listEnabled(Arrays.asList(EXTRA_CHEESE, MUSHROOM, ONION, PEPPERONI, SAUSAGE, TOMATO));
+    }
+
+    @Test
     public void checkAvailableOptions() {
-        multipleSelect.assertThat().values(hasItem(MUSHROOM)).values(hasItems(PEPPERONI, SAUSAGE, TOMATO, ONION));
+        multipleSelect.assertThat().values(hasItems(PEPPERONI, SAUSAGE, TOMATO, ONION, EXTRA_CHEESE, MUSHROOM));
     }
 }

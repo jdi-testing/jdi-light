@@ -9,10 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.github.com.pages.sections.SelectSection.optionGroupsMatSelect;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.matchesPattern;
-import static org.testng.Assert.assertEquals;
 
 public class OptionGroupsMatSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
@@ -46,15 +43,12 @@ public class OptionGroupsMatSelectTests extends TestsSelectBase {
 
     @Test
     public void checkAvailableOptions() {
-        optionGroupsMatSelect.assertThat().values(hasItem("Bulbasaur"))
-                .values(hasItems("Bellsprout", "Squirtle", "Vulpix", "Mew", "Horsea", "Charmander", "Mewtwo"));
+        optionGroupsMatSelect.assertThat().values("Bellsprout", "Squirtle", "Vulpix", "Mew", "Horsea", "Charmander");
     }
 
     @Test
     public void checkAvailableGroups() {
-        List<String> expectedGroups = Arrays.asList("Grass", "Water", "Fire", "Psychic");
-        List<String> actualGroups = optionGroupsMatSelect.groups();
-        assertEquals(actualGroups, expectedGroups, "Pokemon groups are not equal");
+        optionGroupsMatSelect.has().groups(Arrays.asList("Grass", "Water", "Fire", "Psychic"));
     }
 
     @Test
@@ -64,7 +58,6 @@ public class OptionGroupsMatSelectTests extends TestsSelectBase {
         expectedResult.put("Water", Arrays.asList("Squirtle", "Psyduck", "Horsea"));
         expectedResult.put("Fire", Arrays.asList("Charmander", "Vulpix", "Flareon"));
         expectedResult.put("Psychic", Arrays.asList("Mew", "Mewtwo"));
-        Map<String, List<String>> actualResult = optionGroupsMatSelect.groupsAndOptions();
-        assertEquals(actualResult, expectedResult, "Some groups and (or) options in the Pokemon map are not equal");
+        optionGroupsMatSelect.has().groupsAndOptions(expectedResult);
     }
 }
