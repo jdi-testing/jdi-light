@@ -3,8 +3,10 @@ package io.github.epam.angular.tests.elements.complex.select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import static io.github.com.pages.sections.SelectSection.basicMatSelect;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
 public class BasicMatSelectTests extends TestsSelectBase {
@@ -25,7 +27,17 @@ public class BasicMatSelectTests extends TestsSelectBase {
     }
 
     @Test
+    public void checkListDisabledOptions() {
+        basicMatSelect.has().listDisabled(Collections.EMPTY_LIST);
+    }
+
+    @Test
+    public void checkListEnabledOptions() {
+        basicMatSelect.has().listEnabled(Arrays.asList(STEAK, PIZZA, TACOS));
+    }
+
+    @Test
     public void checkAvailableOptions() {
-        basicMatSelect.assertThat().values(hasItem(STEAK)).values(hasItems(TACOS, STEAK, PIZZA));
+        basicMatSelect.assertThat().values(hasItems(TACOS, STEAK, PIZZA));
     }
 }

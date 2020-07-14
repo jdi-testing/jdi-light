@@ -3,9 +3,9 @@ package io.github.epam.angular.tests.elements.complex.select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static io.github.com.pages.sections.SelectSection.formMatFeatureSelect;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.matchesPattern;
 
 public class FormMatFeatureSelectTests extends TestsSelectBase {
@@ -21,9 +21,9 @@ public class FormMatFeatureSelectTests extends TestsSelectBase {
 
     @Test
     public void checkOptionCanBeSelectedByNameAndHintMessageWillAppear() {
-        formMatFeatureSelect.select("Cat");
-        formMatFeatureSelect.is().selected("Cat");
-        formMatFeatureSelect.hint().assertThat().text("Meow!");
+        formMatFeatureSelect.select("Fox");
+        formMatFeatureSelect.is().selected("Fox");
+        formMatFeatureSelect.hint().assertThat().text("Wa-pa-pa-pa-pa-pa-pow!");
     }
 
     @Test
@@ -34,7 +34,17 @@ public class FormMatFeatureSelectTests extends TestsSelectBase {
     }
 
     @Test
+    public void checkListDisabledOptions() {
+        formMatFeatureSelect.has().listDisabled();
+    }
+
+    @Test
+    public void checkListEnabledOptions() {
+        formMatFeatureSelect.has().listEnabled(Arrays.asList("--", "Dog", "Cat", "Fox", "Cow"));
+    }
+
+    @Test
     public void checkAvailableOptions() {
-        formMatFeatureSelect.assertThat().values(hasItem("Cat")).values(hasItems("Cat", "Dog", "Fox", "Cow"));
+        formMatFeatureSelect.assertThat().values("--", "Cat", "Dog", "Fox", "Cow");
     }
 }

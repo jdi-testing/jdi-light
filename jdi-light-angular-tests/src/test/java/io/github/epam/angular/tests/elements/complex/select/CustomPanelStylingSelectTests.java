@@ -3,10 +3,16 @@ package io.github.epam.angular.tests.elements.complex.select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static io.github.com.pages.sections.SelectSection.customPanelStylingSelect;
-import static org.testng.Assert.assertTrue;
+import static org.hamcrest.Matchers.hasItems;
 
 public class CustomPanelStylingSelectTests extends TestsSelectBase {
+    private static final String RED = "Red";
+    private static final String GREEN = "Green";
+    private static final String BLUE = "Blue";
+
     @BeforeMethod()
     public void before() {
         customPanelStylingSelect.show();
@@ -19,28 +25,37 @@ public class CustomPanelStylingSelectTests extends TestsSelectBase {
 
     @Test
     public void checkRedOptionCanBeSelectedByName() {
-        String red = "Red";
-        customPanelStylingSelect.select(red);
-        customPanelStylingSelect.is().selected(red);
-        assertTrue(customPanelStylingSelect.hasColor(255, 0, 0, 0.5),
-                   String.format("The selected color should be medium %s", red));
+        customPanelStylingSelect.select(RED);
+        customPanelStylingSelect.is().selected(RED);
+        customPanelStylingSelect.has().color(255, 0, 0, 0.5);
     }
 
     @Test
     public void checkGreenOptionCanBeSelectedByName() {
-        String green = "Green";
-        customPanelStylingSelect.select(green);
-        customPanelStylingSelect.is().selected(green);
-        assertTrue(customPanelStylingSelect.hasColor(0, 255, 0, 0.5),
-                   String.format("The selected color should be medium %s", green));
+        customPanelStylingSelect.select(GREEN);
+        customPanelStylingSelect.is().selected(GREEN);
+        customPanelStylingSelect.has().color(0, 255, 0, 0.5);
     }
 
     @Test
     public void checkBlueOptionCanBeSelectedByName() {
-        String blue = "Blue";
-        customPanelStylingSelect.select(blue);
-        customPanelStylingSelect.is().selected(blue);
-        assertTrue(customPanelStylingSelect.hasColor(0, 0, 255, 0.5),
-                   String.format("The selected color should be medium %s", blue));
+        customPanelStylingSelect.select(BLUE);
+        customPanelStylingSelect.is().selected(BLUE);
+        customPanelStylingSelect.has().color(0, 0, 255, 0.5);
+    }
+
+    @Test
+    public void checkListDisabledOptions() {
+        customPanelStylingSelect.has().listDisabled();
+    }
+
+    @Test
+    public void checkListEnabledOptions() {
+        customPanelStylingSelect.has().listEnabled(Arrays.asList(RED, GREEN, BLUE));
+    }
+
+    @Test
+    public void checkAvailableOptions() {
+        customPanelStylingSelect.assertThat().values(hasItems(RED, GREEN, BLUE));
     }
 }

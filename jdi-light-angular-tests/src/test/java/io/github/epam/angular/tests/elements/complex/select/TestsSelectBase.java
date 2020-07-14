@@ -34,14 +34,14 @@ public class TestsSelectBase extends TestsInit {
     }
 
     protected void pickDisableSelectCheckboxAsUnchecked() {
-        if (checkboxDisableSelect.isSelected()) {
+        if (checkboxDisableSelect.isSelected() && checkboxDisableSelect.isVisible()) {
             checkboxDisableSelect.uncheck();
         }
         checkboxDisableSelect.is().deselected();
     }
 
     protected void pickDisableSelectCheckboxAsChecked() {
-        if (!checkboxDisableSelect.isSelected()) {
+        if (!checkboxDisableSelect.isSelected() && checkboxDisableSelect.isVisible()) {
             checkboxDisableSelect.check();
         }
         checkboxDisableSelect.assertThat().selected();

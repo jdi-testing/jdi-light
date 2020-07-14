@@ -3,13 +3,16 @@ package io.github.epam.angular.tests.elements.complex.select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static io.github.com.pages.sections.SelectSection.selectBindingConfirmation;
 import static io.github.com.pages.sections.SelectSection.twoBindingSelect;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.matchesPattern;
 
 public class TwoBindingSelectTests extends TestsSelectBase {
+    private static final String NONE = "None";
+
     @BeforeMethod(alwaysRun = true)
     public void before() {
         twoBindingSelect.show();
@@ -29,13 +32,23 @@ public class TwoBindingSelectTests extends TestsSelectBase {
 
     @Test
     public void checkNoneOptionCanBeSelectedByNameAndConfirmMessageWillBeEmpty() {
-        twoBindingSelect.select("None");
+        twoBindingSelect.select(NONE);
         twoBindingSelect.is().selected(matchesPattern("\\W+"));
         selectBindingConfirmation.assertThat().text("You selected:");
     }
 
     @Test
+    public void checkListDisabledOptions() {
+        twoBindingSelect.has().listDisabled();
+    }
+
+    @Test
+    public void checkListEnabledOptions() {
+        twoBindingSelect.has().listEnabled(Arrays.asList(NONE, OPTION_1, OPTION_2, OPTION_3));
+    }
+
+    @Test
     public void checkAvailableOptions() {
-        twoBindingSelect.assertThat().values(hasItem(OPTION_2)).values(hasItems("None", OPTION_1, OPTION_3));
+        twoBindingSelect.assertThat().values(hasItems(NONE, OPTION_1, OPTION_2, OPTION_3));
     }
 }
