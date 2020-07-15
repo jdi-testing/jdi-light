@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 
+
 public class RadioButtonSection {
     @Css("#basic-radio-group")
     public static RadioButtons basicRadioButtons;

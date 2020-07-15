@@ -1,18 +1,13 @@
 package io.github.epam.angular.tests.elements.complex;
 
-import io.github.com.pages.sections.RadioButtonSection;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static org.apache.tika.mime.MediaType.text;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.matchesRegex;
-import static org.testng.Assert.assertEquals;
 
 public class RadioButtonTests extends TestsInit {
 
