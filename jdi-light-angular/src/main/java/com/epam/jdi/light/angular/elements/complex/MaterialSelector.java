@@ -35,6 +35,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
 
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
+        setupLocators();
         try {
             return cdkOverlayContainer.list().noWait(WebList::isDisplayed, WebList.class);
         } catch (Exception ex) {
@@ -45,7 +46,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     /**
      * Select the specified element by the value.
      *
-     * @param value
+     * @param value string value
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
@@ -57,7 +58,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     /**
      * Select the specified element by the index.
      *
-     * @param index
+     * @param index integer value
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {

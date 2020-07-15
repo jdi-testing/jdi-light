@@ -145,7 +145,8 @@ public class CdkOverlayContainer extends Section {
      */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
-        List<String> list = getOptions(OPTIONS).stream().filter(e -> !e.hasAttribute("disabled"))
+        List<String> list = getOptions(OPTIONS).stream()
+                .filter(e -> !e.hasAttribute("disabled") && e.attr("aria-disabled").contains("false"))
                 .map(e -> e.text().trim()).collect(Collectors.toList());
         collapsePanel();
         return list;
@@ -158,7 +159,8 @@ public class CdkOverlayContainer extends Section {
      */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {
-        List<String> list = getOptions(OPTIONS).stream().filter(e -> e.hasAttribute("disabled"))
+        List<String> list = getOptions(OPTIONS).stream()
+                .filter(e -> e.hasAttribute("disabled") || e.attr("aria-disabled").contains("true"))
                 .map(e -> e.text().trim()).collect(Collectors.toList());
         collapsePanel();
         return list;
