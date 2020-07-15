@@ -20,13 +20,11 @@ public class RadioButtonTests extends TestsInit {
     private static String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
     private static String disableBasicButton = "mat-radio-button mat-accent";
 
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }
-
 
     @Test
     public void displayedBasicRadioButtonTest() {
@@ -72,7 +70,6 @@ public class RadioButtonTests extends TestsInit {
         radioButtonSection.autumnNGModelRadioButton.has().text("Autumn");
     }
 
-    
     @Test
     public void favoriteSeasonTest() {
         radioButtonSection.winterNGModelRadioButton.click();
@@ -84,7 +81,6 @@ public class RadioButtonTests extends TestsInit {
         radioButtonSection.autumnNGModelRadioButton.click();
         radioButtonSection.favoriteSeason.has().text("Your favorite season is: Autumn");
     }
-
 
     @Test
     public void onlyOneWinterButtonEnabledTest() {
@@ -121,5 +117,4 @@ public class RadioButtonTests extends TestsInit {
         radioButtonSection.summerNGModelRadioButton.has().attr("class", disableSeasonButton);
         radioButtonSection.autumnNGModelRadioButton.has().attr("class", matchesRegex(enableButton));
     }
-
 }

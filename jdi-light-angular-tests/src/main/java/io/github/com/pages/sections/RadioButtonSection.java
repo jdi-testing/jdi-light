@@ -33,5 +33,4 @@ public class RadioButtonSection {
 
     @UI("#your-favorite-season-text")
     public static Text favoriteSeason;
-
 }
