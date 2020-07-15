@@ -191,9 +191,8 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @return UIElement with hint text
      */
     public UIElement hint() {
-        return new UIElement(By.xpath(String.format(HINT_LOCATOR,
-                                                    this.uiElement.locator.printLocator().replace("css='#", "")
-                                                            .replace("'", ""))));
+        return new UIElement(
+                By.xpath(String.format(HINT_LOCATOR, this.uiElement.locator.printLocator().replace("smart: #", ""))));
     }
 
     /**
@@ -202,9 +201,8 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @return UIElement with error text
      */
     public UIElement error() {
-        return new UIElement(By.xpath(String.format(ERROR_LOCATOR,
-                                                    this.uiElement.locator.printLocator().replace("css='#", "")
-                                                            .replace("'", ""))));
+        return new UIElement(
+                By.xpath(String.format(ERROR_LOCATOR, this.uiElement.locator.printLocator().replace("smart: #", ""))));
     }
 
     @Override
