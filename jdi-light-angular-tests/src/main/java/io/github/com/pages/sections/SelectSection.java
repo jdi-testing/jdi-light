@@ -14,7 +14,7 @@ public class SelectSection {
     @UI("#basic-native-select")
     public static NativeSelector basicNativeSelect;
 
-    @JDropdown(value = "#select-binding")
+    @JDropdown(value = "#two-binding-select")
     public static MaterialSelector twoBindingSelect;
 
     @UI("#select-binding-confirm")
@@ -32,7 +32,7 @@ public class SelectSection {
     @UI("#form-native-select-confirm")
     public static Text formNativeSelectConfirmation;
 
-    @JDropdown(value = "#form-mat-feature")
+    @JDropdown(value = "#form-mat-feature-select")
     public static MaterialSelector formMatFeatureSelect;
 
     @UI("#form-native-feature")
@@ -71,7 +71,7 @@ public class SelectSection {
     @JDropdown(value = "#custom-panel-styling-select")
     public static MaterialSelector customPanelStylingSelect;
 
-    @JDropdown(value = "#mat-error-state-matcher")
+    @JDropdown(value = "#mat-error-state-matcher-select")
     public static MaterialSelector matErrorStateMatcherSelect;
 
     @UI(value = "#native-error-state-matcher")
