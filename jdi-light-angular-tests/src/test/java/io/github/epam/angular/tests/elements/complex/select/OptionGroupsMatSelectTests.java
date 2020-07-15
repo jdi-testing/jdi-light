@@ -42,6 +42,17 @@ public class OptionGroupsMatSelectTests extends TestsSelectBase {
     }
 
     @Test
+    public void checkListDisabledOptions() {
+        optionGroupsMatSelect.has().listDisabled("Charmander", "Vulpix", "Flareon");
+    }
+
+    @Test
+    public void checkListEnabledOptions() {
+        optionGroupsMatSelect.has()
+                .listEnabled("Bulbasaur", "Oddish", "Bellsprout", "Squirtle", "Psyduck", "Horsea", "Mew", "Mewtwo");
+    }
+
+    @Test
     public void checkAvailableOptions() {
         optionGroupsMatSelect.assertThat().values("Bellsprout", "Squirtle", "Vulpix", "Mew", "Horsea", "Charmander");
     }
