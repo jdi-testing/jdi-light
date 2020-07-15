@@ -5,8 +5,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.AngularPage.gridListSection;
 import static io.github.com.pages.AngularPage.listSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static org.hamcrest.core.StringContains.containsString;
 
 public class ListTests extends TestsInit {
 
@@ -19,7 +21,6 @@ public class ListTests extends TestsInit {
     @Test
     public void basicListBasicTest() {
         listSection.basicList.is().displayed();
-        listSection.basicList.get(1).show();
     }
 
     @Test
@@ -32,7 +33,15 @@ public class ListTests extends TestsInit {
     @Test
     public void listWithSectionsBasicTest() {
         listSection.listWithSection.is().displayed();
-        listSection.listWithSection.get(1).show();
+    }
+
+    @Test
+    public void listWithSectionsIconTest() {
+        listSection.listWithSection.get(1).children().get(3).is().text("folder");
+        listSection.listWithSection.get(2).children().get(3).is().text("folder");
+        listSection.listWithSection.get(3).children().get(3).is().text("folder");
+        listSection.listWithSection.get(4).children().get(3).is().text("note");
+        listSection.listWithSection.get(5).children().get(3).is().text("note");
     }
 
     @Test
