@@ -15,6 +15,8 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import io.github.com.pages.sections.BasicButtonsSection;
+import io.github.com.pages.sections.ButtonToggleSection;
+import io.github.com.pages.sections.CheckboxSection;
 import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.RadioButtonSection;
 import io.github.com.pages.sections.CheckboxSection;
@@ -49,4 +51,5 @@ public class AngularPage extends WebPage {
     public static InputSection inputSection;
     public static BasicButtonsSection basicButtonsSection;
     public static AutocompleteSection autocompleteSection;
+    public static ButtonToggleSection buttonToggleSection;
 }
