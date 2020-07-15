@@ -21,6 +21,7 @@ import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.CheckboxSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.ToolbarSection;
+import io.github.com.pages.sections.BadgeSection;
 import io.github.com.pages.sections.AutocompleteSection;
 
 public class AngularPage extends WebPage {
@@ -49,6 +50,7 @@ public class AngularPage extends WebPage {
     public static InputSection inputSection;
     public static ListSection listSection;
     public static GridListSection gridListSection;
+    public static BadgeSection badgeSection;
     public static BasicButtonsSection basicButtonsSection;
     public static AutocompleteSection autocompleteSection;
     public static ButtonToggleSection buttonToggleSection;
