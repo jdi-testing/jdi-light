@@ -18,6 +18,7 @@ import io.github.com.pages.sections.BasicButtonsSection;
 import io.github.com.pages.sections.ButtonToggleSection;
 import io.github.com.pages.sections.CheckboxSection;
 import io.github.com.pages.sections.InputSection;
+import io.github.com.pages.sections.RadioButtonSection;
 import io.github.com.pages.sections.CheckboxSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.ToolbarSection;
@@ -44,6 +45,7 @@ public class AngularPage extends WebPage {
     @UI("#svg_icon")
     public static Icon svgIcon;
 
+    public static RadioButtonSection radioButtonSection;
     public static CheckboxSection checkboxSection;
     public static ToolbarSection toolbarSection;
     public static SlideToggleSection slideToggleSection;
