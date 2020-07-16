@@ -4,16 +4,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import static io.github.com.pages.sections.SelectSection.optionGroupsNativeSelect;
 
 public class OptionGroupsNativeSelectTests extends TestsSelectBase {
-    private static final String SWEDISH_CARS = "Swedish Cars";
-    private static final String GERMAN_CARS = "German Cars";
-
     @BeforeMethod(alwaysRun = true)
     public void before() {
         optionGroupsNativeSelect.show();
@@ -52,9 +46,6 @@ public class OptionGroupsNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkAvailableOptionsAndGroups() {
-        Map<String, List<String>> expectedResult = new LinkedHashMap<>();
-        expectedResult.put(SWEDISH_CARS, Arrays.asList(VOLVO, SAAB));
-        expectedResult.put(GERMAN_CARS, Arrays.asList(MERCEDES, AUDI));
-        optionGroupsNativeSelect.assertThat().groupsAndOptions(expectedResult);
+        optionGroupsNativeSelect.assertThat().groupsAndOptions(getCarsMap());
     }
 }

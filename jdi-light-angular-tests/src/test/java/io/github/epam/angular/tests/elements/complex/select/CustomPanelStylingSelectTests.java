@@ -9,10 +9,6 @@ import static io.github.com.pages.sections.SelectSection.customPanelStylingSelec
 import static org.hamcrest.Matchers.hasItems;
 
 public class CustomPanelStylingSelectTests extends TestsSelectBase {
-    private static final String RED = "Red";
-    private static final String GREEN = "Green";
-    private static final String BLUE = "Blue";
-
     @BeforeMethod()
     public void before() {
         customPanelStylingSelect.show();

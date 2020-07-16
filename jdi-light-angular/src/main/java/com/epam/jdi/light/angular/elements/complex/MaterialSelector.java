@@ -18,6 +18,8 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> implements HasLabel {
     private static final String HINT_LOCATOR = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";
     private static final String ERROR_LOCATOR = "//*[@id='%s']/ancestor::mat-form-field//mat-error";
+    private static final String SMART = "smart: #";
+    private static final String CSS = "css='#";
     private CdkOverlayContainer cdkOverlayContainer;
     private DropdownExpand dropdown;
 
@@ -28,19 +30,41 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     }
 
     private void setupLocators() {
-        dropdown.expandLocator = this.uiElement.locator.printLocator().replace("smart: ", "");
-        dropdown.valueLocator = this.uiElement.locator.printLocator().replace("smart: ", "");
+        dropdown.expandLocator = this.uiElement.locator.printLocator().replace(SMART, "").replace(CSS, "")
+                .replace("'", "");
+        dropdown.valueLocator = this.uiElement.locator.printLocator().replace(SMART, "").replace(CSS, "")
+                .replace("'", "");
         dropdown.listLocator = "mat-option span";
+    }
+
+    @JDIAction(level = DEBUG, timeout = 0)
+    public void expand() {
+        setupLocators();
+        dropdown.expand();
+    }
+
+    @JDIAction(level = DEBUG, timeout = 0)
+    public void collapse() {
+        if (isExpanded()) {
+            setupLocators();
+            cdkOverlayContainer.collapsePanel();
+        }
     }
 
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
         setupLocators();
+        cdkOverlayContainer.waitFor();
         try {
             return cdkOverlayContainer.list().noWait(WebList::isDisplayed, WebList.class);
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    @JDIAction(value = "Is '{name}' collapsed", level = DEBUG, timeout = 0)
+    public boolean isCollapsed() {
+        return !isExpanded();
     }
 
     /**
@@ -50,8 +74,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
-        setupLocators();
-        dropdown.expand();
+        expand();
         cdkOverlayContainer.select(value);
     }
 
@@ -62,8 +85,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
-        setupLocators();
-        dropdown.expand();
+        expand();
         cdkOverlayContainer.select(index);
     }
 
@@ -79,48 +101,6 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
         return dropdown.selected(option);
     }
 
-    @JDIAction("Check that '{name}' is displayed")
-    @Override
-    public boolean isDisplayed() {
-        return iCore().isDisplayed();
-    }
-
-    /**
-     * Get the available selector values.
-     *
-     * @return List<String> list of available values
-     */
-    @JDIAction("Get '{name}' values")
-    public List<String> values() {
-        setupLocators();
-        dropdown.expand();
-        return cdkOverlayContainer.values();
-    }
-
-    /**
-     * Get the available selector groups.
-     *
-     * @return List<String> list of available groups
-     */
-    @JDIAction("Get '{name}' groups")
-    public List<String> groups() {
-        setupLocators();
-        dropdown.expand();
-        return cdkOverlayContainer.getGroups();
-    }
-
-    /**
-     * Get the available selector groups and options.
-     *
-     * @return Map<String, List < String>> map of available groups and options
-     */
-    @JDIAction("Get '{name}' groups and options")
-    public Map<String, List<String>> groupsAndOptions() {
-        setupLocators();
-        dropdown.expand();
-        return cdkOverlayContainer.getMapGroupsAndOptions();
-    }
-
     /**
      * Multiple select the specified elements by the value.
      *
@@ -128,8 +108,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     @JDIAction("Select {0} for '{name}'")
     public void multipleSelect(final String... values) {
-        setupLocators();
-        dropdown.expand();
+        expand();
         cdkOverlayContainer.multipleSelect(values);
     }
 
@@ -140,9 +119,41 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     @JDIAction("Select {0} for '{name}'")
     public void multipleSelect(final int... values) {
-        setupLocators();
-        dropdown.expand();
+        expand();
         cdkOverlayContainer.multipleSelect(values);
+    }
+
+    /**
+     * Get the available selector values.
+     *
+     * @return List<String> list of available values
+     */
+    @JDIAction("Get '{name}' values")
+    public List<String> values() {
+        expand();
+        return cdkOverlayContainer.values();
+    }
+
+    /**
+     * Get the available selector groups.
+     *
+     * @return List<String> list of available groups
+     */
+    @JDIAction("Get '{name}' groups")
+    public List<String> groups() {
+        expand();
+        return cdkOverlayContainer.getGroups();
+    }
+
+    /**
+     * Get the available selector groups and options.
+     *
+     * @return Map<String, List < String>> map of available groups and options
+     */
+    @JDIAction("Get '{name}' groups and options")
+    public Map<String, List<String>> groupsAndOptions() {
+        expand();
+        return cdkOverlayContainer.getMapGroupsAndOptions();
     }
 
     /**
@@ -152,8 +163,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
-        setupLocators();
-        dropdown.expand();
+        expand();
         return cdkOverlayContainer.listEnabled();
     }
 
@@ -164,8 +174,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {
-        setupLocators();
-        dropdown.expand();
+        expand();
         return cdkOverlayContainer.listDisabled();
     }
 
@@ -180,8 +189,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     @JDIAction("Check that rgba({0}, {1}, {2}, {3}) is the specified color")
     public boolean color(final int red, final int green, final int blue, final double a) {
-        setupLocators();
-        dropdown.expand();
+        expand();
         return cdkOverlayContainer.color(red, green, blue, a);
     }
 
@@ -191,8 +199,9 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @return UIElement with hint text
      */
     public UIElement hint() {
-        return new UIElement(
-                By.xpath(String.format(HINT_LOCATOR, this.uiElement.locator.printLocator().replace("smart: #", ""))));
+        return new UIElement(By.xpath(String.format(HINT_LOCATOR,
+                                                    this.uiElement.locator.printLocator().replace(SMART, "")
+                                                            .replace(CSS, "").replace("'", ""))));
     }
 
     /**
@@ -201,8 +210,9 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @return UIElement with error text
      */
     public UIElement error() {
-        return new UIElement(
-                By.xpath(String.format(ERROR_LOCATOR, this.uiElement.locator.printLocator().replace("smart: #", ""))));
+        return new UIElement(By.xpath(String.format(ERROR_LOCATOR,
+                                                    this.uiElement.locator.printLocator().replace(SMART, "")
+                                                            .replace(CSS, "").replace("'", ""))));
     }
 
     @Override

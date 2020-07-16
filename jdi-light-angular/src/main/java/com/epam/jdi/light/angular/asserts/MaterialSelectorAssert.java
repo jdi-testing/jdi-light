@@ -16,6 +16,18 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
 public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, MaterialSelector> {
+    @JDIAction("Assert that '{name}' expanded")
+    public MaterialSelectorAssert expanded() {
+        jdiAssert(element().isExpanded(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' collapsed")
+    public MaterialSelectorAssert collapsed() {
+        jdiAssert(element().isCollapsed(), Matchers.is(true));
+        return this;
+    }
+
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public MaterialSelectorAssert selected(final Matcher<String> condition) {
         jdiAssert(element().selected(), condition);
@@ -27,11 +39,11 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return selected(Matchers.is(option));
     }
 
-    public <TEnum extends Enum<?>> MaterialSelectorAssert selected(final TEnum option) {
+    public <T extends Enum<?>> MaterialSelectorAssert selected(final T option) {
         return selected(getEnumValue(option));
     }
 
-    public <TEnum extends Enum<?>> MaterialSelectorAssert value(final TEnum option) {
+    public <T extends Enum<?>> MaterialSelectorAssert value(final T option) {
         jdiAssert(element().values(), hasItem(getEnumValue(option)));
         return this;
     }

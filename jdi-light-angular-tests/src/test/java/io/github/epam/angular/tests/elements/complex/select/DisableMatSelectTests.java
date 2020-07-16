@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-import static io.github.com.pages.sections.SelectSection.checkboxDisableSelect;
+import static io.github.com.pages.sections.SelectSection.disableCheckboxSelect;
 import static io.github.com.pages.sections.SelectSection.disableMatSelect;
 
 public class DisableMatSelectTests extends TestsSelectBase {
@@ -24,7 +24,7 @@ public class DisableMatSelectTests extends TestsSelectBase {
 
     @Test
     public void verifyCheckboxLabelValue() {
-        checkboxDisableSelect.label().has().value("Disable select");
+        disableCheckboxSelect.label().has().value("Disable select");
     }
 
     @Test
