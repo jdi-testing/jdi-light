@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static io.github.com.pages.sections.SelectSection.formMatSelect;
-import static io.github.com.pages.sections.SelectSection.formMatSelectConfirmation;
+import static io.github.com.pages.sections.SelectSection.formMatSelectConfirm;
 import static org.hamcrest.Matchers.hasItems;
 
 public class FormMatSelectTests extends TestsSelectBase {
@@ -25,7 +25,7 @@ public class FormMatSelectTests extends TestsSelectBase {
     public void checkOptionCanBeSelectedByIndexAndConfirmMessageWillAppear() {
         formMatSelect.select(3);
         formMatSelect.is().selected(TACOS);
-        formMatSelectConfirmation.assertThat().text("Selected food: tacos-2");
+        formMatSelectConfirm.assertThat().text("Selected food: tacos-2");
     }
 
     @Test

@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CdkOverlayContainer extends Section {
-    private static final String BACKDROP_SHOWING_PANEL = "div[class*=cdk-overlay-backdrop-showing]";
     private static final String BACKDROP_SELECT_PANEL = "div.mat-select-panel.mat-primary";
     private static final String GROUPS_AND_OPTIONS_LIST = "div.mat-select-panel.mat-primary mat-optgroup";
     private static final String OPTION_SPAN = "mat-option span";
@@ -23,6 +22,18 @@ public class CdkOverlayContainer extends Section {
 
     public WebList list() {
         return getOptions();
+    }
+
+    @JDIAction("Check that '{name}' is displayed")
+    @Override
+    public boolean isDisplayed() {
+        return getBackdropSelectPanel().isDisplayed();
+    }
+
+    @JDIAction("Check that '{name}' is hidden")
+    @Override
+    public boolean isHidden() {
+        return !isDisplayed();
     }
 
     /**
@@ -177,15 +188,19 @@ public class CdkOverlayContainer extends Section {
      */
     @JDIAction("Check that rgba({0}, {1}, {2}, {3}) is the specified color")
     public boolean color(final int red, final int green, final int blue, final double a) {
-        getBackdropShowingPanel().waitFor();
+        getBackdropSelectPanel().waitFor();
         boolean hasColor = getBackdropSelectPanel().css("background-color")
                 .equalsIgnoreCase("rgba(" + red + ", " + green + ", " + blue + ", " + a + ")");
         collapsePanel();
         return hasColor;
     }
 
-    private UIElement getBackdropShowingPanel() {
-        return new UIElement(By.cssSelector(BACKDROP_SHOWING_PANEL));
+    /**
+     * Collapse backdrop select panel.
+     */
+    @JDIAction("Collapse '{name}' select panel")
+    public void collapsePanel() {
+        getBackdropSelectPanel().core().click(getPointOutsidePanel().getX(), getPointOutsidePanel().getY());
     }
 
     private UIElement getBackdropSelectPanel() {
@@ -195,9 +210,5 @@ public class CdkOverlayContainer extends Section {
     private Point getPointOutsidePanel() {
         UIElement uiElement = getBackdropSelectPanel();
         return new Point(uiElement.core().getRect().getWidth() + 2, uiElement.core().getRect().getHeight() + 2);
-    }
-
-    private void collapsePanel() {
-        getBackdropSelectPanel().core().click(getPointOutsidePanel().getX(), getPointOutsidePanel().getY());
     }
 }

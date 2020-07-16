@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-import static io.github.com.pages.sections.SelectSection.selectBindingConfirmation;
+import static io.github.com.pages.sections.SelectSection.selectBindingConfirm;
 import static io.github.com.pages.sections.SelectSection.twoBindingSelect;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.matchesPattern;
@@ -27,14 +27,14 @@ public class TwoBindingSelectTests extends TestsSelectBase {
     public void checkOptionCanBeSelectedByNameAndConfirmMessageWillAppear() {
         twoBindingSelect.select(OPTION_1);
         twoBindingSelect.is().selected(OPTION_1);
-        selectBindingConfirmation.assertThat().text("You selected: option1");
+        selectBindingConfirm.assertThat().text("You selected: option1");
     }
 
     @Test
     public void checkNoneOptionCanBeSelectedByNameAndConfirmMessageWillBeEmpty() {
         twoBindingSelect.select(NONE);
         twoBindingSelect.is().selected(matchesPattern("\\W+"));
-        selectBindingConfirmation.assertThat().text("You selected:");
+        selectBindingConfirm.assertThat().text("You selected:");
     }
 
     @Test

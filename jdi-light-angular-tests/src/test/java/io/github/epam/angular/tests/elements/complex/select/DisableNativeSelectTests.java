@@ -29,20 +29,18 @@ public class DisableNativeSelectTests extends TestsSelectBase {
     @Test
     public void checkEnabledOptionCanBeSelectedByIndex() {
         pickDisableSelectCheckboxAsUnchecked();
-        if (disableNativeSelect.base().get().getAttribute(DISABLED) == null) {
-            disableNativeSelect.select(2);
-            disableNativeSelect.is().selected(VOLVO);
-        }
+        disableNativeSelect.waitFor().displayed();
+        disableNativeSelect.select(2);
+        disableNativeSelect.is().selected(VOLVO);
     }
 
     @Test
     public void checkDisabledOptionCannotBeSelectedByName() {
         pickDisableSelectCheckboxAsUnchecked();
-        if (disableNativeSelect.base().get().getAttribute(DISABLED) == null) {
-            String preselectedValue = disableNativeSelect.selected();
-            disableNativeSelect.select(SAAB);
-            disableNativeSelect.is().selected(preselectedValue);
-        }
+        disableNativeSelect.waitFor().displayed();
+        String preselectedValue = disableNativeSelect.selected();
+        disableNativeSelect.select(SAAB);
+        disableNativeSelect.is().selected(preselectedValue);
     }
 
     @Test

@@ -21,6 +21,19 @@ public class BasicMatSelectTests extends TestsSelectBase {
     }
 
     @Test
+    public void checkSelectorExpanded() {
+        basicMatSelect.expand();
+        basicMatSelect.is().expanded();
+        basicMatSelect.collapse();
+    }
+
+    @Test
+    public void checkSelectorCollapsed() {
+        basicMatSelect.collapse();
+        basicMatSelect.is().collapsed();
+    }
+
+    @Test
     public void checkOptionCanBeSelectedByIndex() {
         basicMatSelect.select(2);
         basicMatSelect.is().selected(PIZZA);

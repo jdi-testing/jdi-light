@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 import static io.github.com.pages.sections.SelectSection.formNativeSelect;
-import static io.github.com.pages.sections.SelectSection.formNativeSelectConfirmation;
+import static io.github.com.pages.sections.SelectSection.formNativeSelectConfirm;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
@@ -26,7 +26,7 @@ public class FormNativeSelectTests extends TestsSelectBase {
     public void checkOptionCanBeSelectedByNameAndConfirmMessageWillAppear() {
         formNativeSelect.select(VOLVO);
         formNativeSelect.is().selected(containsString(VOLVO));
-        formNativeSelectConfirmation.assertThat().text("Selected car: volvo");
+        formNativeSelectConfirm.assertThat().text("Selected car: volvo");
     }
 
     @Test

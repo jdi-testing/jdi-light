@@ -174,8 +174,8 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      */
     public UIElement hint() {
         return new UIElement(By.xpath(String.format(HINT_LOCATOR,
-                                                    this.uiElement.locator.printLocator().replace("css='#", "")
-                                                            .replace("'", ""))));
+                                                    this.uiElement.locator.printLocator().replace("smart: #", "")
+                                                            .replace("css='#", "").replace("'", ""))));
     }
 
     /**
@@ -185,7 +185,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      */
     public UIElement error() {
         return new UIElement(By.xpath(String.format(ERROR_LOCATOR,
-                                                    this.uiElement.locator.printLocator().replace("css='#", "")
-                                                            .replace("'", ""))));
+                                                    this.uiElement.locator.printLocator().replace("smart: #", "")
+                                                            .replace("css='#", "").replace("'", ""))));
     }
 }
