@@ -12,10 +12,11 @@ import io.github.com.pages.sections.BadgeSection;
 import io.github.com.pages.sections.BasicButtonsSection;
 import io.github.com.pages.sections.ButtonToggleSection;
 import io.github.com.pages.sections.CheckboxSection;
+import io.github.com.pages.sections.GridListSection;
 import io.github.com.pages.sections.InputSection;
-import io.github.com.pages.sections.SelectSection;
+import io.github.com.pages.sections.ListSection;
 import io.github.com.pages.sections.RadioButtonSection;
-import io.github.com.pages.sections.CheckboxSection;
+import io.github.com.pages.sections.SelectSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.ToolbarSection;
 
