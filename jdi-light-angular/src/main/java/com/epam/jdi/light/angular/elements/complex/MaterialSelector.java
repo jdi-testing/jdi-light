@@ -18,7 +18,8 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> implements HasLabel {
     private static final String HINT_LOCATOR = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";
     private static final String ERROR_LOCATOR = "//*[@id='%s']/ancestor::mat-form-field//mat-error";
-    private static final String SMART = "smart: #";
+    private static final String SMART = "smart: ";
+    private static final String SMART_GRID = "smart: #";
     private static final String CSS = "css='#";
     private CdkOverlayContainer cdkOverlayContainer;
     private DropdownExpand dropdown;
@@ -200,7 +201,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     public UIElement hint() {
         return new UIElement(By.xpath(String.format(HINT_LOCATOR,
-                                                    this.uiElement.locator.printLocator().replace(SMART, "")
+                                                    this.uiElement.locator.printLocator().replace(SMART_GRID, "")
                                                             .replace(CSS, "").replace("'", ""))));
     }
 
@@ -211,7 +212,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     public UIElement error() {
         return new UIElement(By.xpath(String.format(ERROR_LOCATOR,
-                                                    this.uiElement.locator.printLocator().replace(SMART, "")
+                                                    this.uiElement.locator.printLocator().replace(SMART_GRID, "")
                                                             .replace(CSS, "").replace("'", ""))));
     }
 

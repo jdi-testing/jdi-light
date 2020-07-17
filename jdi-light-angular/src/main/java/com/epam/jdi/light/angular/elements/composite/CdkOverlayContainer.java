@@ -27,13 +27,15 @@ public class CdkOverlayContainer extends Section {
     @JDIAction("Check that '{name}' is displayed")
     @Override
     public boolean isDisplayed() {
+        getBackdropSelectPanel().waitFor().displayed();
         return getBackdropSelectPanel().isDisplayed();
     }
 
     @JDIAction("Check that '{name}' is hidden")
     @Override
     public boolean isHidden() {
-        return !isDisplayed();
+        getBackdropSelectPanel().waitFor().disappear();
+        return getBackdropSelectPanel().isHidden();
     }
 
     /**
@@ -200,6 +202,7 @@ public class CdkOverlayContainer extends Section {
      */
     @JDIAction("Collapse '{name}' select panel")
     public void collapsePanel() {
+        getBackdropSelectPanel().waitFor().displayed();
         getBackdropSelectPanel().core().click(getPointOutsidePanel().getX(), getPointOutsidePanel().getY());
     }
 
