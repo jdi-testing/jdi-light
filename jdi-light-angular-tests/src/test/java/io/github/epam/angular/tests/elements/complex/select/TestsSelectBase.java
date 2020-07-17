@@ -30,6 +30,9 @@ public class TestsSelectBase extends TestsInit {
     public static final String BLUE = "Blue";
     public static final String VALID_OPTION = "Valid option";
     public static final String INVALID_OPTION = "Invalid option";
+    public static final String ARIA_INVALID = "aria-invalid";
+    public static final String MUST_MAKE_SELECTION = "You must make a selection";
+    public static final String INVALID_SELECTON = "Your selection is invalid";
     public static final String EXTRA_CHEESE = "Extra cheese";
     public static final String MUSHROOM = "Mushroom";
     public static final String ONION = "Onion";

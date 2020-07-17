@@ -29,14 +29,14 @@ public class NativeErrorStateMatcherSelectTests extends TestsSelectBase {
     public void checkInvalidOptionCanBeSelectedByNameAndErrorMessageWillAppear() {
         nativeErrorStateMatcherSelect.select(INVALID_OPTION);
         nativeErrorStateMatcherSelect.is().selected(matchesPattern(INVALID_OPTION));
-        nativeErrorStateMatcherSelect.error().assertThat().text("Your selection is invalid");
+        nativeErrorStateMatcherSelect.error().assertThat().text(INVALID_SELECTON);
     }
 
     @Test
     public void checkClearOptionCanBeSelectedByNameAndErrorMessageWillAppear() {
         nativeErrorStateMatcherSelect.select("");
         nativeErrorStateMatcherSelect.is().selected("");
-        nativeErrorStateMatcherSelect.error().assertThat().text("You must make a selection");
+        nativeErrorStateMatcherSelect.error().assertThat().text(MUST_MAKE_SELECTION);
     }
 
     @Test

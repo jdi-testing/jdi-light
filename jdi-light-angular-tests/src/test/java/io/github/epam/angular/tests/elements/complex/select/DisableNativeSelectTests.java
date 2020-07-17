@@ -45,7 +45,7 @@ public class DisableNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkListDisabledOptions() {
-        disableNativeSelect.has().listDisabled();
+        disableNativeSelect.has().listDisabled("", SAAB);
     }
 
     @Test

@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CdkOverlayContainer extends Section {
-    private static final String BACKDROP_SELECT_PANEL = "div.mat-select-panel.mat-primary";
-    private static final String GROUPS_AND_OPTIONS_LIST = "div.mat-select-panel.mat-primary mat-optgroup";
-    private static final String OPTION_SPAN = "mat-option span";
-    private static final String OPTIONS = "mat-option";
+    public String backdropSelectPanel = "div.mat-select-panel.mat-primary";
+    public String groupsAndOptionsList = "div.mat-select-panel.mat-primary mat-optgroup";
+    public String matOptionSpan = "mat-option span";
+    public String matOptions = "mat-option";
 
     public WebList list() {
         return getOptions();
@@ -96,14 +96,14 @@ public class CdkOverlayContainer extends Section {
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         List<String> values = new ArrayList<>();
-        WebList options = getOptions(OPTION_SPAN);
+        WebList options = getOptions(matOptionSpan);
         options.forEach(option -> values.add(option.getValue()));
         collapsePanel();
         return values;
     }
 
     private WebList getOptions() {
-        return new WebList(By.cssSelector(OPTION_SPAN));
+        return new WebList(By.cssSelector(matOptionSpan));
     }
 
     private WebList getOptions(String css) {
@@ -118,7 +118,7 @@ public class CdkOverlayContainer extends Section {
     @JDIAction("Get '{name}' groups")
     public List<String> getGroups() {
         List<String> groups = new ArrayList<>();
-        WebList webList = new WebList(By.cssSelector(GROUPS_AND_OPTIONS_LIST));
+        WebList webList = new WebList(By.cssSelector(groupsAndOptionsList));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {
             String stringGroupsAndOptions = webList.values().get(i);
@@ -138,7 +138,7 @@ public class CdkOverlayContainer extends Section {
     @JDIAction("Get '{name}' groups and options")
     public Map<String, List<String>> getMapGroupsAndOptions() {
         Map<String, List<String>> map = new LinkedHashMap<>();
-        WebList webList = new WebList(By.cssSelector(GROUPS_AND_OPTIONS_LIST));
+        WebList webList = new WebList(By.cssSelector(groupsAndOptionsList));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {
             String stringGroupsAndOptions = webList.values().get(i);
@@ -158,7 +158,7 @@ public class CdkOverlayContainer extends Section {
      */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
-        List<String> list = getOptions(OPTIONS).stream()
+        List<String> list = getOptions(matOptions).stream()
                 .filter(e -> !e.hasAttribute("disabled") && e.attr("aria-disabled").contains("false"))
                 .map(e -> e.text().trim()).collect(Collectors.toList());
         collapsePanel();
@@ -172,7 +172,7 @@ public class CdkOverlayContainer extends Section {
      */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {
-        List<String> list = getOptions(OPTIONS).stream()
+        List<String> list = getOptions(matOptions).stream()
                 .filter(e -> e.hasAttribute("disabled") || e.attr("aria-disabled").contains("true"))
                 .map(e -> e.text().trim()).collect(Collectors.toList());
         collapsePanel();
@@ -206,11 +206,11 @@ public class CdkOverlayContainer extends Section {
         getBackdropSelectPanel().core().click(getPointOutsidePanel().getX(), getPointOutsidePanel().getY());
     }
 
-    private UIElement getBackdropSelectPanel() {
-        return new UIElement(By.cssSelector(BACKDROP_SELECT_PANEL));
+    protected UIElement getBackdropSelectPanel() {
+        return new UIElement(By.cssSelector(backdropSelectPanel));
     }
 
-    private Point getPointOutsidePanel() {
+    protected Point getPointOutsidePanel() {
         UIElement uiElement = getBackdropSelectPanel();
         return new Point(uiElement.core().getRect().getWidth() + 2, uiElement.core().getRect().getHeight() + 2);
     }

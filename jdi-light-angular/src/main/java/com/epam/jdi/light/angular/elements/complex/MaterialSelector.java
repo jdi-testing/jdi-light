@@ -16,13 +16,13 @@ import java.util.Map;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> implements HasLabel {
-    private static final String HINT_LOCATOR = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";
-    private static final String ERROR_LOCATOR = "//*[@id='%s']/ancestor::mat-form-field//mat-error";
-    private static final String SMART = "smart: ";
-    private static final String SMART_GRID = "smart: #";
-    private static final String CSS = "css='#";
-    private CdkOverlayContainer cdkOverlayContainer;
-    private DropdownExpand dropdown;
+    public String hintLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";
+    public String errorLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-error";
+    public String smart = "smart: ";
+    public String smartSharp = "smart: #";
+    public String cssSharp = "css='#";
+    protected CdkOverlayContainer cdkOverlayContainer;
+    protected DropdownExpand dropdown;
 
     public MaterialSelector() {
         cdkOverlayContainer = new CdkOverlayContainer();
@@ -30,10 +30,10 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
         dropdown.setCore(DropdownExpand.class, base());
     }
 
-    private void setupLocators() {
-        dropdown.expandLocator = this.uiElement.locator.printLocator().replace(SMART, "").replace(CSS, "")
+    protected void setupLocators() {
+        dropdown.expandLocator = this.uiElement.locator.printLocator().replace(smart, "").replace(cssSharp, "")
                 .replace("'", "");
-        dropdown.valueLocator = this.uiElement.locator.printLocator().replace(SMART, "").replace(CSS, "")
+        dropdown.valueLocator = this.uiElement.locator.printLocator().replace(smart, "").replace(cssSharp, "")
                 .replace("'", "");
         dropdown.listLocator = "mat-option span";
     }
@@ -90,16 +90,27 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
         cdkOverlayContainer.select(index);
     }
 
-    @JDIAction("Check that '{name}' is displayed")
+    /**
+     * Get selected element value.
+     *
+     * @return String selected value
+     */
+    @JDIAction("Get '{name}' selected value")
     public String selected() {
         setupLocators();
         return dropdown.selected();
     }
 
+    /**
+     * Checks selected element value.
+     *
+     * @param value element as string
+     * @return boolean is value selected
+     */
     @JDIAction("Is '{0}' selected")
-    public boolean selected(String option) {
+    public boolean selected(String value) {
         setupLocators();
-        return dropdown.selected(option);
+        return dropdown.selected(value);
     }
 
     /**
@@ -116,12 +127,12 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     /**
      * Multiple select the specified elements by the index.
      *
-     * @param values int values
+     * @param indexes integer values
      */
     @JDIAction("Select {0} for '{name}'")
-    public void multipleSelect(final int... values) {
+    public void multipleSelect(final int... indexes) {
         expand();
-        cdkOverlayContainer.multipleSelect(values);
+        cdkOverlayContainer.multipleSelect(indexes);
     }
 
     /**
@@ -200,9 +211,9 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @return UIElement with hint text
      */
     public UIElement hint() {
-        return new UIElement(By.xpath(String.format(HINT_LOCATOR,
-                                                    this.uiElement.locator.printLocator().replace(SMART_GRID, "")
-                                                            .replace(CSS, "").replace("'", ""))));
+        return new UIElement(By.xpath(String.format(hintLocator,
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 
     /**
@@ -211,9 +222,9 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @return UIElement with error text
      */
     public UIElement error() {
-        return new UIElement(By.xpath(String.format(ERROR_LOCATOR,
-                                                    this.uiElement.locator.printLocator().replace(SMART_GRID, "")
-                                                            .replace(CSS, "").replace("'", ""))));
+        return new UIElement(By.xpath(String.format(errorLocator,
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 
     @Override

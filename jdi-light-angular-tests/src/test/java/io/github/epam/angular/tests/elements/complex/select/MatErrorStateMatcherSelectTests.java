@@ -33,14 +33,14 @@ public class MatErrorStateMatcherSelectTests extends TestsSelectBase {
     public void checkInvalidOptionCanBeSelectedByNameAndErrorMessageWillAppear() {
         matErrorStateMatcherSelect.select(INVALID_OPTION);
         matErrorStateMatcherSelect.is().selected(matchesPattern(INVALID_OPTION));
-        matErrorStateMatcherSelect.error().assertThat().text("Your selection is invalid");
+        matErrorStateMatcherSelect.error().assertThat().text(INVALID_SELECTON);
     }
 
     @Test
     public void checkClearOptionCanBeSelectedByNameAndErrorMessageWillAppear() {
         matErrorStateMatcherSelect.select(CLEAR);
         matErrorStateMatcherSelect.is().selected(matchesPattern("\\W+"));
-        matErrorStateMatcherSelect.error().assertThat().text("You must make a selection");
+        matErrorStateMatcherSelect.error().assertThat().text(MUST_MAKE_SELECTION);
     }
 
     @Test

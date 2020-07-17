@@ -20,9 +20,11 @@ import java.util.stream.Stream;
 import static com.epam.jdi.tools.LinqUtils.map;
 
 public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implements HasLabel {
-    private static final String GROUPS_AND_OPTIONS_LIST = "optgroup";
-    private static final String HINT_LOCATOR = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";
-    private static final String ERROR_LOCATOR = "//*[@id='%s']/ancestor::mat-form-field//mat-error";
+    public String groupsAndOptionsList = "optgroup";
+    public String hintLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";
+    public String errorLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-error";
+    public String smartSharp = "smart: #";
+    public String cssSharp = "css='#";
 
     /**
      * Get MultiSelector wrapper.
@@ -34,7 +36,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     }
 
     /**
-     * Get WebList element.
+     * Get a list of expander items.
      *
      * @return WebList element
      */
@@ -43,9 +45,9 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     }
 
     /**
-     * Selects the value based on its visible text.
+     * Select the specified element by the value.
      *
-     * @param value String to search
+     * @param value string value
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(final String value) {
@@ -53,9 +55,9 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     }
 
     /**
-     * Selects the value based on its index.
+     * Select the specified element by the index.
      *
-     * @param index int to search
+     * @param index integer value
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(final int index) {
@@ -67,7 +69,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      *
      * @return String selected value
      */
-    @JDIAction("Get selected value")
+    @JDIAction("Get '{name}' selected value")
     public String selected() {
         return ms().selected();
     }
@@ -84,9 +86,9 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     }
 
     /**
-     * Get the elements values.
+     * Get the available selector values.
      *
-     * @return List<String> values
+     * @return List<String> list of available values
      */
     @JDIAction("Get '{name}' values")
     public List<String> values() {
@@ -94,14 +96,50 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     }
 
     /**
-     * Get the elements values.
+     * Get the available selector values by text type.
      *
      * @param type TextType
-     * @return List<String> values
+     * @return List<String> list of available values
      */
     @JDIAction("Get '{name}' values")
     public List<String> values(final TextTypes type) {
         return ms().values(type);
+    }
+
+    /**
+     * Get the available selector groups.
+     *
+     * @return List<String> list of available groups
+     */
+    @JDIAction("Get '{name}' groups")
+    public List<String> groups() {
+        List<String> groups = new ArrayList<>();
+        WebList webList = new WebList(By.cssSelector(groupsAndOptionsList));
+        int groupSize = webList.values().size();
+        for (int i = 0; i < groupSize; i++) {
+            groups.add(String.valueOf(webList.attrs("label").get(i)));
+        }
+        return groups;
+    }
+
+    /**
+     * Get the available selector groups and options.
+     *
+     * @return Map<String, List < String>> map of available groups and options
+     */
+    @JDIAction("Get '{name}' groups and options")
+    public Map<String, List<String>> groupsAndOptions() {
+        Map<String, List<String>> map = new LinkedHashMap<>();
+        WebList webList = new WebList(By.cssSelector(groupsAndOptionsList));
+        int groupSize = webList.values().size();
+        for (int i = 0; i < groupSize; i++) {
+            String stringGroupsAndOptions = webList.values().get(i);
+            List<String> listGroupsAndOptions = Stream.of(stringGroupsAndOptions.split("\n"))
+                    .collect(Collectors.toCollection(ArrayList::new));
+            String key = String.valueOf(webList.attrs("label").get(i));
+            map.put(key, listGroupsAndOptions);
+        }
+        return map;
     }
 
     /**
@@ -126,42 +164,6 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Get the available selector groups.
-     *
-     * @return List<String> list of available groups
-     */
-    @JDIAction("Get '{name}' groups")
-    public List<String> groups() {
-        List<String> groups = new ArrayList<>();
-        WebList webList = new WebList(By.cssSelector(GROUPS_AND_OPTIONS_LIST));
-        int groupSize = webList.values().size();
-        for (int i = 0; i < groupSize; i++) {
-            groups.add(String.valueOf(webList.attrs("label").get(i)));
-        }
-        return groups;
-    }
-
-    /**
-     * Get the available selector groups and options.
-     *
-     * @return Map<String, List < String>> map of available groups and options
-     */
-    @JDIAction("Get '{name}' groups and options")
-    public Map<String, List<String>> groupsAndOptions() {
-        Map<String, List<String>> map = new LinkedHashMap<>();
-        WebList webList = new WebList(By.cssSelector(GROUPS_AND_OPTIONS_LIST));
-        int groupSize = webList.values().size();
-        for (int i = 0; i < groupSize; i++) {
-            String stringGroupsAndOptions = webList.values().get(i);
-            List<String> listGroupsAndOptions = Stream.of(stringGroupsAndOptions.split("\n"))
-                    .collect(Collectors.toCollection(ArrayList::new));
-            String key = String.valueOf(webList.attrs("label").get(i));
-            map.put(key, listGroupsAndOptions);
-        }
-        return map;
-    }
-
     @Override
     public NativeSelectorAssert is() {
         return new NativeSelectorAssert().set(this);
@@ -173,9 +175,9 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      * @return UIElement with hint text
      */
     public UIElement hint() {
-        return new UIElement(By.xpath(String.format(HINT_LOCATOR,
-                                                    this.uiElement.locator.printLocator().replace("smart: #", "")
-                                                            .replace("css='#", "").replace("'", ""))));
+        return new UIElement(By.xpath(String.format(hintLocator,
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 
     /**
@@ -184,8 +186,8 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      * @return UIElement with error text
      */
     public UIElement error() {
-        return new UIElement(By.xpath(String.format(ERROR_LOCATOR,
-                                                    this.uiElement.locator.printLocator().replace("smart: #", "")
-                                                            .replace("css='#", "").replace("'", ""))));
+        return new UIElement(By.xpath(String.format(errorLocator,
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 }

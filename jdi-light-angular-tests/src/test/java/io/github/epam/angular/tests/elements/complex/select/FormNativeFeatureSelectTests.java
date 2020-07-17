@@ -10,8 +10,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
 public class FormNativeFeatureSelectTests extends TestsSelectBase {
-    private static final String ARIA_INVALID = "aria-invalid";
-
     @BeforeMethod(alwaysRun = true)
     public void before() {
         formNativeFeatureSelect.show();
