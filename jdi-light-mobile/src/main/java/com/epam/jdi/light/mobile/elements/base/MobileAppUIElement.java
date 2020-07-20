@@ -1,17 +1,76 @@
 package com.epam.jdi.light.mobile.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.ElementOption;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
+import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class MobileAppUIElement extends MobileUIElement {
+
+    //region Constructors
+    public MobileAppUIElement() { }
+    public MobileAppUIElement(WebElement el) { setWebElement(el); }
+    public MobileAppUIElement(List<WebElement> els) { setWebElements(els); }
+    public MobileAppUIElement(@MarkupLocator By locator) { setLocator(locator); }
+    public MobileAppUIElement(JDIBase base) {
+        super(base);
+    }
+    public MobileAppUIElement(JDIBase base, String locator, String name, Object parent) {
+        super(base);
+        setLocator(locator);
+        setName(name);
+        setParent(parent);
+    }
+    public MobileAppUIElement(JDIBase base, By locator, String name) {
+        super(base);
+        setLocator(locator);
+        setName(name);
+    }
+    public MobileAppUIElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
+        super(base);
+        setWebElement(el);
+        setGetFunc(func);
+    }
+    //endregion
+
+    //region Core
+    public MobileAppUIElement core() { return this; }
+    public MobileAppUIElement setup(JAction1<JDIBase> setup) {
+        return setup(MobileAppUIElement.class, setup);
+    }
+    @Override
+    public MobileAppUIElement setCore(JDIBase base) {
+        super.setCore(base);
+        return this;
+    }
+    @Override
+    public MobileAppUIElement setName(String name) {
+        super.setName(name);
+        return this;
+    }
+    @Override
+    public MobileAppUIElement waitSec(int timeout) {
+        super.waitSec(timeout);
+        return this;
+    }
+    @Override
+    public MobileAppUIElement noWait() {
+        super.noWait();
+        return this;
+    }
 
     @Override
     @JDIAction("Perform tap on '{name}'")

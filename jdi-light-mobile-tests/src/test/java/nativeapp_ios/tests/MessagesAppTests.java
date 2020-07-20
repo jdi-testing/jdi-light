@@ -24,4 +24,23 @@ public class MessagesAppTests extends MessagesAppTestsInit {
 
         NewMessagePage.addContactButton.is().displayed();
     }
+
+    @Test
+    public void editMenuTest() {
+        if (WhatsNewPage.continueButton.isDisplayed()) {
+            WhatsNewPage.continueButton.tap();
+        }
+
+        MessagesListPage.newMessageButton.tap();
+
+        NewMessagePage.messageTextField.setValue("Test");
+        NewMessagePage.messageTextField.doubleTap();
+        NewMessagePage.messageEditMenu.copy();
+        NewMessagePage.messageTextField.doubleTap();
+        NewMessagePage.messageEditMenu.cut();
+        NewMessagePage.messageTextField.is().empty();
+        NewMessagePage.messageTextField.doubleTap();
+        NewMessagePage.messageEditMenu.paste();
+        NewMessagePage.messageTextField.is().text("Test");
+    }
 }
