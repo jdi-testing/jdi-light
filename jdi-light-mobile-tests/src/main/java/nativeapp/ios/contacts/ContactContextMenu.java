@@ -6,7 +6,7 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class ContactContextMenu extends ContextMenu {
     @MobileFindBy(xpath = "//XCUIElementTypeButton[@name='Contact photo for John Appleseed']/XCUIElementTypeImage")
-    public static MobileAppUIElement johnApplessedPhoto;
+    public static MobileAppUIElement johnAppleseedPhoto;
     @MobileFindBy(xpath = "//*[contains(@name, 'Message')]/../*[@name='Expand']")
     public static MobileAppUIElement messageOptionExpand;
     @MobileFindBy(xpath = ".//*[contains(@name, 'John-Appleseed@mac.com')]")

@@ -1,6 +1,9 @@
 package nativeapp_ios.tests;
 
-import nativeapp.ios.calendar.*;
+import nativeapp.ios.calendar.AddCalendarPage;
+import nativeapp.ios.calendar.CalendarPage;
+import nativeapp.ios.calendar.CalendarsListPage;
+import nativeapp.ios.calendar.EditCalendarPage;
 import nativeapp_ios.CalendarAppTestsInit;
 import org.testng.annotations.Test;
 
@@ -8,9 +11,6 @@ public class CalendarAppTests extends CalendarAppTestsInit {
 
     @Test
     public void detailDisclosureButtonTest() {
-        if(WelcomePage.continueButton.isDisplayed())
-            WelcomePage.continueButton.tap();
-
         CalendarPage.calendarsButton.tap();
         CalendarsListPage.calendarsNavBar.is().visible();
 
@@ -25,9 +25,6 @@ public class CalendarAppTests extends CalendarAppTestsInit {
 
     @Test
     public void buttonTest() {
-        if(WelcomePage.continueButton.isDisplayed())
-            WelcomePage.continueButton.tap();
-
         CalendarPage.calendarsButton.has().text("Calendars");
         CalendarPage.calendarsButton.tap();
         CalendarsListPage.calendarsNavBar.is().visible();
