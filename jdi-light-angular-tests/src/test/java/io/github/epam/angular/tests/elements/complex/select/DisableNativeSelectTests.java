@@ -54,6 +54,11 @@ public class DisableNativeSelectTests extends TestsSelectBase {
     }
 
     @Test
+    public void checkAvailableGroups() {
+        disableNativeSelect.is().groups();
+    }
+
+    @Test
     public void checkAvailableOptions() {
         disableNativeSelect.assertThat().values(AUDI).values(Arrays.asList(AUDI, SAAB, MERCEDES, VOLVO));
     }
