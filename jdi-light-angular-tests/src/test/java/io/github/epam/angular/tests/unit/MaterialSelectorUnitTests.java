@@ -119,6 +119,6 @@ public class MaterialSelectorUnitTests extends TestsInit {
     public void errorTest() {
         matErrorStateMatcherSelect.show();
         matErrorStateMatcherSelect.select(INVALID_OPTION);
-        assertEquals(matErrorStateMatcherSelect.error().text(), INVALID_SELECTON);
+        assertEquals(matErrorStateMatcherSelect.error().text(), INVALID_SELECTION);
     }
 }

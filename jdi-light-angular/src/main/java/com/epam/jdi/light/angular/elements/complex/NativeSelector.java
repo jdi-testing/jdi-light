@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 import static com.epam.jdi.tools.LinqUtils.map;
 
 public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implements HasLabel {
-    public String groupsAndOptionsList = "optgroup";
+    public String groupsAndOptionsList = "#%s optgroup";
     public String hintLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";
     public String errorLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-error";
     public String smartSharp = "smart: #";
@@ -114,7 +114,10 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     @JDIAction("Get '{name}' groups")
     public List<String> groups() {
         List<String> groups = new ArrayList<>();
-        WebList webList = new WebList(By.cssSelector(groupsAndOptionsList));
+        WebList webList = new WebList(By.cssSelector(String.format(groupsAndOptionsList,
+                                                                   this.uiElement.locator.printLocator()
+                                                                           .replace(smartSharp, "")
+                                                                           .replace(cssSharp, "").replace("'", ""))));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {
             groups.add(String.valueOf(webList.attrs("label").get(i)));
@@ -130,7 +133,10 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     @JDIAction("Get '{name}' groups and options")
     public Map<String, List<String>> groupsAndOptions() {
         Map<String, List<String>> map = new LinkedHashMap<>();
-        WebList webList = new WebList(By.cssSelector(groupsAndOptionsList));
+        WebList webList = new WebList(By.cssSelector(String.format(groupsAndOptionsList,
+                                                                   this.uiElement.locator.printLocator()
+                                                                           .replace(smartSharp, "")
+                                                                           .replace(cssSharp, "").replace("'", ""))));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {
             String stringGroupsAndOptions = webList.values().get(i);

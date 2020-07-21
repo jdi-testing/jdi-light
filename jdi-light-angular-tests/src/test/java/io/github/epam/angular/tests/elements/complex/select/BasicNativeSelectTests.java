@@ -44,6 +44,11 @@ public class BasicNativeSelectTests extends TestsSelectBase {
     }
 
     @Test
+    public void checkAvailableGroups() {
+        basicNativeSelect.is().groups(Collections.EMPTY_LIST);
+    }
+
+    @Test
     public void checkAvailableOptions() {
         basicNativeSelect.assertThat().values(hasItem(AUDI)).values(hasItems(AUDI, VOLVO, SAAB, MERCEDES));
     }

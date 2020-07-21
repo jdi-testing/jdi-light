@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static io.github.com.pages.sections.SelectSection.nativeErrorStateMatcherSelect;
 import static org.hamcrest.Matchers.matchesPattern;
@@ -29,7 +30,7 @@ public class NativeErrorStateMatcherSelectTests extends TestsSelectBase {
     public void checkInvalidOptionCanBeSelectedByNameAndErrorMessageWillAppear() {
         nativeErrorStateMatcherSelect.select(INVALID_OPTION);
         nativeErrorStateMatcherSelect.is().selected(matchesPattern(INVALID_OPTION));
-        nativeErrorStateMatcherSelect.error().assertThat().text(INVALID_SELECTON);
+        nativeErrorStateMatcherSelect.error().assertThat().text(INVALID_SELECTION);
     }
 
     @Test
@@ -47,6 +48,11 @@ public class NativeErrorStateMatcherSelectTests extends TestsSelectBase {
     @Test
     public void checkListEnabledOptions() {
         nativeErrorStateMatcherSelect.has().listEnabled(Arrays.asList("", VALID_OPTION, INVALID_OPTION));
+    }
+
+    @Test
+    public void checkAvailableGroups() {
+        nativeErrorStateMatcherSelect.is().groups(Collections.emptyList());
     }
 
     @Test
