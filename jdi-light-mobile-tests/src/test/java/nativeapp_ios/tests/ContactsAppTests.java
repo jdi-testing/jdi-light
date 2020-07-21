@@ -27,7 +27,7 @@ public class ContactsAppTests extends ContactsAppTestsInit {
     @Test
     public void contextMenuTest() {
         ContactsListPage.johnAppleseedCard.longPress(2);
-        ContactContextMenu.johnApplessedPhoto.is().displayed();
+        ContactContextMenu.johnAppleseedPhoto.is().displayed();
         ContactContextMenu.messageOptionExpand.tap();
         ContactContextMenu.johnAppleseedEmail.is().displayed();
     }
