@@ -27,6 +27,7 @@ import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
 import io.github.com.pages.sections.TabGroupSection;
 import io.github.com.pages.sections.ToolbarSection;
+import io.github.com.pages.sections.MenuSection;
 import io.github.com.pages.sections.TooltipSection;
 import io.github.com.pages.sections.ExpansionPanelSection;
 
@@ -58,6 +59,7 @@ public class AngularPage extends WebPage {
     public static AutocompleteSection autocompleteSection;
     public static SnackbarSection snackbarSection;
     public static ButtonToggleSection buttonToggleSection;
+    public static MenuSection menuSection;
     public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
     public static SliderSection sliderSection;
