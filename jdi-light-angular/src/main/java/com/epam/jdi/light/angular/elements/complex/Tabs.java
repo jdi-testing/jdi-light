@@ -10,21 +10,12 @@ import java.util.List;
 
 public class Tabs extends UIBaseElement<TabsAssert> implements IsText {
 
-    /*elements clicks*/
-    public Tabs clickTab(int tabNumber) {
+    public void clickTab(int tabNumber) {
         getTabByNumber(tabNumber).click();
-        return this;
     }
 
-    public Tabs clickTab(String tabText) {
+    public void clickTab(String tabText) {
         getTabByText(tabText).click();
-        return this;
-    }
-
-    /*links nav bar*/
-    public Tabs clickTabLink(String tabText) {
-        getTabLinkByTitle(tabText).click();
-        return this;
     }
 
     /*TABS */
@@ -45,7 +36,6 @@ public class Tabs extends UIBaseElement<TabsAssert> implements IsText {
     }
 
     public List<String> getTabsTitlesValues() {
-        System.out.println(getTabs().values() + " TAB VALUES");
         return getTabs().values();
     }
 
@@ -64,7 +54,6 @@ public class Tabs extends UIBaseElement<TabsAssert> implements IsText {
     }
 
     public List<String> getTabPanelContentValues() {
-        System.out.println(getTabPanelContent().values() + "  CONTENT");
         return getTabPanelContent().values();
     }
 
@@ -73,7 +62,12 @@ public class Tabs extends UIBaseElement<TabsAssert> implements IsText {
         return getTabPanelContentValues().contains(valueForTest);
     }
 
-    /*TABS WITH NAV BAR LINKS*/
+    /*TABS NAV BAR LINKS*/
+
+    public void clickTabLink(String tabText) {
+        getTabLinkByTitle(tabText).click();
+    }
+
     public WebList getTabsLinks() {
         return this.finds("a");
     }
@@ -86,18 +80,17 @@ public class Tabs extends UIBaseElement<TabsAssert> implements IsText {
         return getTabsLinks().size();
     }
 
+    public List<String> getTabsLinksTitlesValues() {
+        return getTabsLinks().values();
+    }
+
+    /*boolean*/
     public Boolean tabsLinksTitlesContainValues(List<String> listForTest) {
         return getTabsLinksTitlesValues().containsAll(listForTest);
     }
 
     public Boolean tabWithLinkIsHighlighted(String tabName) {
         return getTabLinkByTitle(tabName).attr("ng-reflect-active").equals("true");
-    }
-
-    public List<String> getTabsLinksTitlesValues() {
-        System.out.println(getTabsLinks().values() + " TAB VALUES");
-        return getTabsLinks().values();
-
     }
 
     /*UTILS */
@@ -107,30 +100,4 @@ public class Tabs extends UIBaseElement<TabsAssert> implements IsText {
     }
 }
 
-//    public  WebList verifyTabPanelContentText(){
-//
-//        WebList list =  getTabPanelContent();
-//
-//        return list;
-//    }
-
-
-//    private List<String> getValues() {
-//        List<String> values = new ArrayList<>();
-//        WebList options = getTabs();
-//        options.forEach(option -> values.add(option.getValue()));
-//        return values;
-//    }
-
-
-//    @JDIAction("Is '{name}' is expanded")
-//    public Boolean expanded() {
-//        if (getOptions().isEmpty()) {
-//            return false;
-//        } else {
-//            return getOptions().get(1).
-//                    getAllAttributes().keys().
-//                    contains(getAutocompleteUniqueAttribute());
-//        }
-//    }
 

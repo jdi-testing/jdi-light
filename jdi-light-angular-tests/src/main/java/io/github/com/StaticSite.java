@@ -10,8 +10,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.AngularPage;
 
-//@JSite("https://jdi-testing.github.io/jdi-light/")
-@JSite("http://localhost:4200/")
+@JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 
     public static User DEFAULT_USER = new User();

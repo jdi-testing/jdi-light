@@ -1,5 +1,6 @@
 package io.github.com.pages.sections;
 
+import com.epam.jdi.light.angular.elements.complex.ButtonToggle;
 import com.epam.jdi.light.angular.elements.complex.Tabs;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -39,25 +40,22 @@ public class TabsSection {
     @UI("#tab-with-headers-on-the-bottom")
     public Tabs tabsWithHeadersOnTheBottom;
 
-
     /* TAB GROUP WHERE THE TAB CONTENT IS LOADED LAZILY (WHEN ACTIVATED)*/
     @UI("#tabs-with-lazy-loaded-content")
     public Tabs tabsWithLazyLoadedContent;
 
-
-
     /*CUSTOMIZING THE THEME OPTIONS ON THE TAB GROUP*/
-    @UI("#tab-group-them-example")
+    @UI("#tab-group-theme-example")
     public Tabs tabGroupThemeExample;
-
-
-
-
-
-
+    /*button-toggles*/
+    @UI("#mat-button-toggle-group-color")
+    public ButtonToggle  colorButtonToggle;
+    @UI("#mat-button-toggle-group-background-color")
+    public ButtonToggle backgroundButtonToggle;
 
     /* TAB GROUP WITH ASYNCHRONOUSLY LOADING TAB CONTENTS*/
-
+    @UI("#tabs-async-loading-content")
+    public Tabs tabsAsyncLoadingContent;
 
     /*BASIC USE OF THE TAB NAV BAR*/
     @UI("#tabs-nav-bar")
