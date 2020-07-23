@@ -10,8 +10,8 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class SnackbarTests extends TestsInit {
 
-    private static final String MESSAGE = "my message";
-    private static final String ACTION = "my action";
+    private static final String MESSAGE = "Test Message";
+    private static final String ACTION = "Test Action";
 
     @BeforeMethod
     public void before() {
@@ -20,14 +20,33 @@ public class SnackbarTests extends TestsInit {
     }
 
     @Test
-    public void basicSnackbarTest() {
+    public void checkBasicSnackbarTest() {
         snackbarSection.messageInput.setValue(MESSAGE);
         snackbarSection.actionInput.setValue(ACTION);
         snackbarSection.openButton.click();
+
         snackbarSection.basicSnackbar.is().displayed();
-        snackbarSection.basicSnackbar.children().get(1).has().text(MESSAGE);
-        snackbarSection.basicSnackbar.children().get(2).has().text(ACTION);
-        snackbarSection.basicSnackbar.children().get(2).click();
-        snackbarSection.basicSnackbar.is().hidden();
+        snackbarSection.basicSnackbar.has().message(MESSAGE);
+        snackbarSection.basicSnackbar.has().action(ACTION);
+        snackbarSection.basicSnackbar.is().disappear();
+    }
+
+    @Test
+    public void checkSnackbarClickActionDismissTest() {
+        snackbarSection.messageInput.setValue(MESSAGE);
+        snackbarSection.actionInput.setValue(ACTION);
+        snackbarSection.openButton.click();
+
+        snackbarSection.basicSnackbar.clickAction();
+        snackbarSection.basicSnackbar.is().disappear();
+    }
+
+    @Test
+    public void checkSnackbarWithNoActionTest() {
+        snackbarSection.messageInput.setValue(MESSAGE);
+        snackbarSection.actionInput.setValue("");
+        snackbarSection.openButton.click();
+
+        snackbarSection.basicSnackbar.has().action();
     }
 }

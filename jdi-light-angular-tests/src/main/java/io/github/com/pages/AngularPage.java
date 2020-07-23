@@ -17,6 +17,7 @@ import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.ListSection;
 import io.github.com.pages.sections.RadioButtonSection;
 import io.github.com.pages.sections.SelectSection;
+import io.github.com.pages.sections.SnackbarSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.ToolbarSection;
 
