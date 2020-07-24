@@ -10,8 +10,11 @@ import com.epam.jdi.light.common.JDIAction;
  * Angular snack-bar documentation: https://jdi-docs.github.io/jdi-light/?java#progress-spinner
  */
 public class Snackbar extends UIBaseElement<SnackbarAssert> {
-    protected UIElement message, action;
-    protected String messageLocator = "./span", actionLocator = ".//button";
+    protected UIElement message;
+    protected String messageLocator = "./span";
+
+    protected UIElement action;
+    protected String actionLocator = ".//button";
 
     public Snackbar() {
         message = new UIElement();
