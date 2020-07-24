@@ -6,13 +6,13 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class MenuSection {
 
-    @UI("#basic_menu_button")
+    @UI("#basic-menu-button")
     public static NestedDropdownMenu basicMenu;
 
-    @UI("#menu_with_icons_button")
+    @UI("#menu-with-icons-button")
     public static NestedDropdownMenu menuWithIcons;
 
-    @UI("#nested_menu_button")
+    @UI("#nested-menu-button")
     public static NestedDropdownMenu nestedMenu;
 
     @UI("#basic-menu-selected-option")

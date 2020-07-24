@@ -27,14 +27,14 @@ public class BasicMenuTests extends TestsInit {
 
     @Test
     public void checkBasicMenuIsExpandedTest() {
-        basicMenu.expandMenu();
+        basicMenu.expand();
         basicMenu.is().isExpanded();
     }
 
     @Test
     public void checkBasicMenuIsClosedTest() {
-        basicMenu.expandMenu();
-        basicMenu.closeMenu();
+        basicMenu.expand();
+        basicMenu.close();
         basicMenu.is().isClosed();
     }
 
@@ -47,7 +47,7 @@ public class BasicMenuTests extends TestsInit {
     @Test
     public void checkBasicMenuAvailableOptionsTest() {
         String[] expectedList = {"Item 1", "Item 2"};
-        basicMenu.expandMenu();
+        basicMenu.expand();
         List<String> actualList = basicMenu.values();
         for (int i = 0; i < expectedList.length; i++) {
             basicMenu.is().checkValue(expectedList[i], (actualList.get(i)));

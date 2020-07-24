@@ -31,7 +31,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return new NestedDropdownMenuAssert().set(this);
     }
 
-    public void expandMenu() {
+    public void expand() {
         if (!hasAttribute("aria-expanded"))
             getButton().click();
     }
@@ -41,7 +41,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return hasAttribute("aria-expanded");
     }
 
-    public void closeMenu() {
+    public void close() {
         if (hasAttribute("aria-expanded"))
             this.getButton().click(ElementArea.JS);
     }
@@ -52,12 +52,12 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
     }
 
     public WebList lastOpenedOptionsElements() {
-        expandMenu();
+        expand();
         return $$(getDriver().findElements(By.xpath(LAST_OPENED_MENU_OPTIONS_XPATH)), getName());
     }
 
     public WebList lastOpenedOptionsElementsForMenuWithIcons() {
-        expandMenu();
+        expand();
         return $$(getDriver().findElements(By.xpath(LAST_OPENED_MENU_OPTIONS_XPATH_FOR_MENU_WITH_ICONS)), getName());
     }
 
@@ -97,7 +97,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
     public void selectForMenuWithIcons(String value) {
         UIElement optionToClick = lastOpenedOptionsElementsForMenuWithIcons().get(value);
         optionToClick.click(ElementArea.JS);
-        closeMenu();
+        close();
     }
 
     @JDIAction("Check {name} option is disabled")
@@ -122,7 +122,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
                 optionToClick.click(ElementArea.JS);
             }
         }
-        closeMenu();
+        close();
         return list.get(list.size() - 1);
     }
 }

@@ -26,41 +26,41 @@ public class NestedMenuTests extends TestsInit {
 
     @Test
     public void checkNestedMenuIsExpandedTest() {
-        nestedMenu.expandMenu();
+        nestedMenu.expand();
         nestedMenu.is().isExpanded();
     }
 
     @Test
     public void checkNestedMenuIsClosedTest() {
-        nestedMenu.expandMenu();
-        nestedMenu.closeMenu();
+        nestedMenu.expand();
+        nestedMenu.close();
         nestedMenu.is().isClosed();
     }
 
     @Test
     public void nestedMenuFirstNestingLayerSelectTest() {
-        nestedMenu.expandMenu();
+        nestedMenu.expand();
         nestedMenu.select("Vertebrates");
         nestedMenuSelectedOption.is().text("Vertebrates");
     }
 
     @Test
     public void nestedMenuSecondNestingLayerSelectTest() {
-        nestedMenu.expandMenu();
+        nestedMenu.expand();
         nestedMenu.select("Vertebrates", "Fishes");
         nestedMenuSelectedOption.is().text("Fishes");
     }
 
     @Test
     public void nestedMenuThirdNestingLayerSelectTest() {
-        nestedMenu.expandMenu();
+        nestedMenu.expand();
         nestedMenu.select("Vertebrates", "Fishes", "Bala shark");
         nestedMenuSelectedOption.is().text("Bala shark");
     }
 
     @Test
     public void disabledNestedMenuOptionTest() {
-        nestedMenu.expandMenu();
+        nestedMenu.expand();
         nestedMenu.is().isDisabledNestedMenuOption("Vertebrates", "Reptiles", "Velociraptor");
     }
 
@@ -72,7 +72,7 @@ public class NestedMenuTests extends TestsInit {
                 "[Sonoran desert toad, Western toad, Arroyo toad, Yosemite toad]",
                 "[Banded Day Gecko, Banded Gila Monster, Black Tree Monitor, Blue Spiny Lizard, Velociraptor]",
                 "[Insects, Molluscs, Crustaceans, Corals, Arachnids, Velvet worms, Horseshoe crabs]"};
-        nestedMenu.expandMenu();
+        nestedMenu.expand();
         List<String> actualList = nestedMenu.valuesForNestedMenu();
         for (int i = 0; i < expectedList.length; i++) {
             nestedMenu.is().checkValue(expectedList[i], actualList.get(i));

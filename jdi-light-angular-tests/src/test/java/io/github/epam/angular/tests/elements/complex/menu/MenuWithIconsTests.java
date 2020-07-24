@@ -26,27 +26,27 @@ public class MenuWithIconsTests extends TestsInit {
 
     @Test
     public void checkBasicMenuIsExpandedTest() {
-        menuWithIcons.expandMenu();
+        menuWithIcons.expand();
         menuWithIcons.is().isExpanded();
     }
 
     @Test
     public void checkBasicMenuIsClosedTest() {
-        menuWithIcons.expandMenu();
-        menuWithIcons.closeMenu();
+        menuWithIcons.expand();
+        menuWithIcons.close();
         menuWithIcons.is().isClosed();
     }
 
     @Test
     public void menuWithIconsSelectTest() {
-        menuWithIcons.expandMenu();
+        menuWithIcons.expand();
         menuWithIcons.selectForMenuWithIcons("Redial");
         iconsMenuSelectedOption.is().text("Redial");
     }
 
     @Test
     public void disabledMenuWithIconsOptionTest() {
-        menuWithIcons.expandMenu();
+        menuWithIcons.expand();
         menuWithIcons.is().isDisabledMenuWithIconsOption("Check voice mail");
     }
 
@@ -54,7 +54,7 @@ public class MenuWithIconsTests extends TestsInit {
     public void checkBasicMenuAvailableOptionsTest() {
         String[] expectedList = {"Redial", "Check voice mail", "Disable alerts"};
         List<String> actualList = menuWithIcons.valuesForMenuWithIcons();
-        menuWithIcons.expandMenu();
+        menuWithIcons.expand();
         for (int i = 0; i < expectedList.length; i++) {
             menuWithIcons.checkValue(expectedList[i], actualList.get(i));
         }
