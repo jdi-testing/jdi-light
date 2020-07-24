@@ -5,10 +5,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
+
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.snackbarSection;
-import static io.github.epam.angular.tests.elements.BaseValidationsUtils.duration;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class SnackbarUnitTests extends TestsInit {
@@ -25,54 +28,27 @@ public class SnackbarUnitTests extends TestsInit {
     }
 
     @Test
-    public void displayedBasicTest() {
-        snackbarSection.basicSnackbar.is().hidden();
-        snackbarSection.openButton.click();
-        snackbarSection.basicSnackbar.is().displayed();
-    }
-
-    @Test
     public void correctMessageBasicTest() {
         snackbarSection.openButton.click();
-        snackbarSection.basicSnackbar.children().get(1).has().text(snackbarSection.messageInput.getText());
+        assertEquals(snackbarSection.basicSnackbar.getMessageText(),"Disco party!");
     }
 
     @Test
     public void correctActionBasicTest() {
         snackbarSection.openButton.click();
-        snackbarSection.basicSnackbar.children().get(2).has().text(snackbarSection.actionInput.getText());
+        assertEquals(snackbarSection.basicSnackbar.getActionText(),"Dance");
     }
 
     @Test
-    public void closingSnackbarBasicTest() {
+    public void visibilityActionSnackbarBasicTest() {
         snackbarSection.openButton.click();
-        snackbarSection.basicSnackbar.children().get(2).click();
-        snackbarSection.basicSnackbar.is().hidden();
+        assertTrue(snackbarSection.basicSnackbar.isActionDisplayed());
     }
 
     @Test
-    public void displayedCustomTest() {
-        snackbarSection.customSnackbar.is().hidden();
-        snackbarSection.durationInput.setValue("10");
-        snackbarSection.customSnackbarOpenButton.click();
-        snackbarSection.customSnackbar.is().displayed();
-    }
-
-    @Test
-    public void correctDurationCustomTest() {
-        int showDuration = 5;
-        snackbarSection.durationInput.setValue(String.valueOf(showDuration));
-        snackbarSection.customSnackbarOpenButton.click();
-        duration(showDuration, () -> {
-            snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().displayed());
-            snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().hidden());
-        });
-    }
-
-    @Test
-    public void correctTextCustomTest() {
-        snackbarSection.durationInput.setValue("10");
-        snackbarSection.customSnackbarOpenButton.click();
-        snackbarSection.customSnackbar.firstChild().is().text("Pizza party!!! \uD83C\uDF55");
+    public void emptyActionSnackbarBasicTest() {
+        snackbarSection.actionInput.setValue("");
+        snackbarSection.openButton.click();
+        assertFalse(snackbarSection.basicSnackbar.isActionDisplayed());
     }
 }
