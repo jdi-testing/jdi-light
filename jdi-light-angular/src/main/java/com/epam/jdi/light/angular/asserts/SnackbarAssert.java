@@ -1,6 +1,6 @@
 package com.epam.jdi.light.angular.asserts;
 
-import com.epam.jdi.light.angular.elements.common.Snackbar;
+import com.epam.jdi.light.angular.elements.complex.Snackbar;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;

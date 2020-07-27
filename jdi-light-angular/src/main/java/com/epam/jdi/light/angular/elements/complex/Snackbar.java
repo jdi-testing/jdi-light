@@ -1,4 +1,4 @@
-package com.epam.jdi.light.angular.elements.common;
+package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -6,9 +6,6 @@ import com.epam.jdi.light.angular.asserts.SnackbarAssert;
 
 import com.epam.jdi.light.common.JDIAction;
 
-/**
- * Angular snack-bar documentation: https://jdi-docs.github.io/jdi-light/?java#progress-spinner
- */
 public class Snackbar extends UIBaseElement<SnackbarAssert> {
     protected UIElement message;
     protected String messageLocator = "./span";
