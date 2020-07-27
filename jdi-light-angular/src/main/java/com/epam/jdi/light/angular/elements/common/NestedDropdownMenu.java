@@ -21,6 +21,14 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> {
     private String LAST_OPENED_MENU_OPTIONS_XPATH = "(.//div[contains(@class,'mat-menu-after')])[last()]//button";
     private String LAST_OPENED_MENU_OPTIONS_XPATH_FOR_MENU_WITH_ICONS = "(.//div[contains(@class,'mat-menu-after')])[last()]//button//span";
+    public static String[] BASIC_MENU_VALUES = {"Item 1", "Item 2"};
+    public static String[] MENU_WITH_ICONS_VALUES = {"Redial", "Check voice mail", "Disable alerts"};
+    public static String[] NESTED_MENU_VALUES = {"[Vertebrates, Invertebrates]",
+            "[Fishes, Amphibians, Reptiles, Birds, Mammals]",
+            "[Baikal oilfish, Bala shark, Ballan wrasse, Bamboo shark, Banded killifish]",
+            "[Sonoran desert toad, Western toad, Arroyo toad, Yosemite toad]",
+            "[Banded Day Gecko, Banded Gila Monster, Black Tree Monitor, Blue Spiny Lizard, Velociraptor]",
+            "[Insects, Molluscs, Crustaceans, Corals, Arachnids, Velvet worms, Horseshoe crabs]"};
 
     protected Button getButton() {
         return new Button().setCore(Button.class, base());

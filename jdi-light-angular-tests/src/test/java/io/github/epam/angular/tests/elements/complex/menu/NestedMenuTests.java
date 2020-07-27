@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.angular.elements.common.NestedDropdownMenu.NESTED_MENU_VALUES;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.MenuSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
@@ -66,12 +67,7 @@ public class NestedMenuTests extends TestsInit {
 
     @Test
     public void checkNestedMenuAvailableOptionsTest() {
-        String[] expectedList = {"[Vertebrates, Invertebrates]",
-                "[Fishes, Amphibians, Reptiles, Birds, Mammals]",
-                "[Baikal oilfish, Bala shark, Ballan wrasse, Bamboo shark, Banded killifish]",
-                "[Sonoran desert toad, Western toad, Arroyo toad, Yosemite toad]",
-                "[Banded Day Gecko, Banded Gila Monster, Black Tree Monitor, Blue Spiny Lizard, Velociraptor]",
-                "[Insects, Molluscs, Crustaceans, Corals, Arachnids, Velvet worms, Horseshoe crabs]"};
+        String[] expectedList = NESTED_MENU_VALUES;
         nestedMenu.expand();
         List<String> actualList = nestedMenu.valuesForNestedMenu();
         for (int i = 0; i < expectedList.length; i++) {

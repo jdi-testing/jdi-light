@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.angular.elements.common.NestedDropdownMenu.MENU_WITH_ICONS_VALUES;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.MenuSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
@@ -52,7 +53,7 @@ public class MenuWithIconsTests extends TestsInit {
 
     @Test
     public void checkBasicMenuAvailableOptionsTest() {
-        String[] expectedList = {"Redial", "Check voice mail", "Disable alerts"};
+        String[] expectedList = MENU_WITH_ICONS_VALUES;
         List<String> actualList = menuWithIcons.valuesForMenuWithIcons();
         menuWithIcons.expand();
         for (int i = 0; i < expectedList.length; i++) {
