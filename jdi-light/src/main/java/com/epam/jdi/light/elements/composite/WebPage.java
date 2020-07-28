@@ -90,7 +90,21 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public static void openUrl(String url) {
         init();
+        if (!hasDomain() && url.contains("://"))
+            DRIVER.domain = url;
         new WebPage(url).open();
+    }
+    public static void checkUrl(String url) {
+        init();
+        new WebPage(url).checkOpened();
+    }
+    public static void checkTitle(String title) {
+        init();
+        new WebPage("", title).checkOpened();
+    }
+    public static void checkPage(String url, String title) {
+        init();
+        new WebPage(url, title).checkOpened();
     }
     public static void openSite() {
         init();
