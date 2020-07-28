@@ -24,6 +24,7 @@ import io.qameta.allure.Step;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 
@@ -86,19 +87,20 @@ public class ActionHelper {
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : ELEMENT_TEMPLATE;
     }
     public static int CUT_STEP_TEXT = 70;
-    public static String getActionName(ProceedingJoinPoint jp) {
+    public static String getActionName(JoinPoint jp) {
         try {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
             return isBlank(template)
-                ? getDefaultName(method.getName(), methodArgs(jp, method))
+                ? getDefaultName(getClassMethodName(jp), methodArgs(jp, method))
                 : fillTemplate(template, jp, method);
         } catch (Throwable ex) {
-            throw exception(ex, "Surround method issue: Can't get action name: ");
+            takeScreen();
+            throw exception(ex, "Surround method issue: Can't get action name: " + getClassMethodName(jp));
         }
     }
-    public static JFunc1<ProceedingJoinPoint, String> GET_ACTION_NAME = ActionHelper::getActionName;
-    public static String fillTemplate(String template, ProceedingJoinPoint jp, MethodSignature method) {
+    public static JFunc1<JoinPoint, String> GET_ACTION_NAME = ActionHelper::getActionName;
+    public static String fillTemplate(String template, JoinPoint jp, MethodSignature method) {
         String filledTemplate = template;
         try {
             if (filledTemplate.contains("{0")) {
@@ -123,7 +125,7 @@ public class ActionHelper {
             }
             return filledTemplate;
         } catch (Exception ex) {
-            throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + method.getName());
+            throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + getClassMethodName(jp));
         }
     }
     public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
@@ -144,6 +146,10 @@ public class ActionHelper {
             jInfo.stepUId = startStep(message);
             allureSteps.get().add(message);
         }
+    }
+    public static void beforeStepAction(JoinPoint jp) {
+        String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
+        logger.toLog(message, logLevel(jp));
     }
     private static void visualValidation(ProceedingJoinPoint jp, String message) {
         Object obj = jp.getThis();
@@ -181,7 +187,7 @@ public class ActionHelper {
                 logger.toLog(">>> " + text, logLevel);
             }
         }
-        if (getJpMethod(jp).getName().equals("open"))
+        if (getMethodName(jp).equals("open"))
             PAGE.beforeNewPage.execute(getPage(jp.getThis()));
         TIMEOUTS.element.reset();
         return result;
@@ -219,7 +225,7 @@ public class ActionHelper {
                     logger.toLog(">>> " + text, logLevel);
                 }
             }
-            if (getJpMethod(jp).getName().equals("open"))
+            if (getMethodName(jp).equals("open"))
                 PAGE.beforeNewPage.execute(getPage(jp.getThis()));
             TIMEOUTS.element.reset();
         }
@@ -227,7 +233,7 @@ public class ActionHelper {
     }
     public static JFunc2<ActionObject, Object, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;
     //region Private
-    public static String getBeforeLogString(ProceedingJoinPoint jp) {
+    public static String getBeforeLogString(JoinPoint jp) {
         String actionName = GET_ACTION_NAME.execute(jp);
         String logString;
         if (jp.getThis() == null) {
@@ -239,8 +245,8 @@ public class ActionHelper {
         }
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
-    public static JFunc1<ProceedingJoinPoint, MapArray<String, Object>> LOG_VALUES = ActionHelper::getLogOptions;
-    public static MapArray<String, Object> getLogOptions(ProceedingJoinPoint jp) {
+    public static JFunc1<JoinPoint, MapArray<String, Object>> LOG_VALUES = ActionHelper::getLogOptions;
+    public static MapArray<String, Object> getLogOptions(JoinPoint jp) {
         MapArray<String, Object> map = new MapArray<>();
         JFunc<String> elementName = () -> getElementName(jp);
         map.add("name", elementName);
@@ -313,6 +319,13 @@ public class ActionHelper {
     }
     public static MethodSignature getJpMethod(JoinPoint joinPoint) {
         return (MethodSignature) joinPoint.getSignature();
+    }
+    public static String getMethodName(JoinPoint jp) {
+        try {
+            return getJpMethod(jp).getName();
+        } catch (Exception ignore) {
+            return "Unknown method";
+        }
     }
     static String methodNameTemplate(MethodSignature method) {
         try {
@@ -495,9 +508,9 @@ public class ActionHelper {
             s -> s.getMethodName().equals("jdiAround"))
             .size();
     }
-    private static String getMethodName(ProceedingJoinPoint jp) {
+    private static String getClassMethodName(JoinPoint jp) {
         String className = getJpClass(jp).getSimpleName();
-        String methodName = getJpMethod(jp).getMethod().getName();
+        String methodName = getMethodName(jp);
         return className + "." + methodName;
     }
     public static Class<?> getJpClass(ProceedingJoinPoint jp) {
@@ -506,20 +519,20 @@ public class ActionHelper {
             : jp.getSignature().getDeclaringType();
     }
     public static Object defaultAction(ActionObject jInfo) throws Throwable {
-        logger.debug("defaultAction: " + getMethodName(jInfo.jp()));
+        logger.debug("defaultAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         return jInfo.overrideAction() != null
                 ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
     }
     public static Object stableAction(ActionObject jInfo) {
-        logger.debug("stableAction: " + getMethodName(jInfo.jp()));
+        logger.debug("stableAction: " + getClassMethodName(jInfo.jp()));
         String exceptionMsg = "";
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
         Throwable exception = null;
         do {
             try {
-                logger.debug("do-while: " + getMethodName(jInfo.jp()));
+                logger.debug("do-while: " + getClassMethodName(jInfo.jp()));
                 Object result = jInfo.overrideAction() != null
                     ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
                 if (!condition(jInfo.jp())) continue;
@@ -540,7 +553,7 @@ public class ActionHelper {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
                     $("exception", exception),
                     $("timeout", jInfo.timeout()),
-                    $("action", method.getMethod().getName())
+                    $("action", getClassMethodName(jInfo.jp()))
             ));
             return fillTemplate(result, jInfo.jp(), method);
         } catch (Exception ex) {

@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.site.steps;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
@@ -13,11 +14,15 @@ import static io.github.com.pages.Header.*;
 public class States {
     @Step
     public static void shouldBeLoggedIn() {
+        moveToHomePage();
+        if (userName.isHidden())
+            login();
+    }
+    @Step
+    public static void moveToHomePage() {
         String url = WebPage.getUrl();
         if (!url.contains("https://jdi-testing.github.io/jdi-light/") || epamLogo.isNotExist())
             homePage.open();
-        if (userName.isHidden())
-            login();
     }
 
     @Step

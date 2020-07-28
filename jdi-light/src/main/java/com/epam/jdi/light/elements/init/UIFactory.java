@@ -24,7 +24,7 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
  */
 public class UIFactory {
     public static UIElement element(@MarkupLocator String locator) {
-        return locator.matches("[A-Z].*]")
+        return locator.matches("[A-Z].*")
             ? new UIElement().setName(locator)
             : element(defineLocator(locator));
     }
@@ -48,7 +48,7 @@ public class UIFactory {
     }
 
     public static WebList list(@MarkupLocator String locator) {
-        return locator.matches("[A-Z].*]")
+        return locator.matches("[A-Z].*")
                 ? new WebList()
                 : list(defineLocator(locator));
     }
@@ -75,12 +75,12 @@ public class UIFactory {
     }
 
     public static Selector selector(@MarkupLocator String locator) {
-        return locator.matches("[A-Z].*]")
+        return locator.matches("[A-Z].*")
             ? new Selector().setup(Selector.class, b-> b.setName(locator))
             : new Selector().setup(Selector.class, b-> b.setLocator(defineLocator(locator)));
     }
     public static IsDropdown dropdown(@MarkupLocator String locator) {
-        return locator.matches("[A-Z].*]")
+        return locator.matches("[A-Z].*")
                 ? new Dropdown().setup(Dropdown.class, b-> b.setName(locator))
                 : new Dropdown().setup(Dropdown.class, b-> b.setLocator(defineLocator(locator)));
     }
