@@ -1,6 +1,8 @@
 package io.github.epam.angular.tests.elements.complex.menu;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -14,7 +16,7 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class BasicMenuTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod (alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
@@ -52,6 +54,13 @@ public class BasicMenuTests extends TestsInit {
         List<String> actualList = basicMenu.values();
         for (int i = 0; i < expectedList.length; i++) {
             basicMenu.is().checkValue(expectedList[i], (actualList.get(i)));
+        }
+    }
+
+    @AfterMethod (alwaysRun = true)
+    public void after() {
+        if (basicMenu.isExpanded()){
+            basicMenu.close();
         }
     }
 }

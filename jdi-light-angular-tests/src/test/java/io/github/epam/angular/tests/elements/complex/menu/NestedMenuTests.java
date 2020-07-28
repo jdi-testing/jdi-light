@@ -1,6 +1,8 @@
 package io.github.epam.angular.tests.elements.complex.menu;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -13,11 +15,11 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class NestedMenuTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
-        nestedMenu.show();
+            nestedMenu.show();
     }
 
     @Test
@@ -72,6 +74,13 @@ public class NestedMenuTests extends TestsInit {
         List<String> actualList = nestedMenu.valuesForNestedMenu();
         for (int i = 0; i < expectedList.length; i++) {
             nestedMenu.is().checkValue(expectedList[i], actualList.get(i));
+        }
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (nestedMenu.isExpanded()){
+            nestedMenu.close();
         }
     }
 }

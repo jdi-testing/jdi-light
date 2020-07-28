@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -15,7 +16,7 @@ import static org.testng.Assert.assertTrue;
 
 public class MenuUnitTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod (alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
@@ -32,7 +33,6 @@ public class MenuUnitTests extends TestsInit {
         basicMenu.show();
         basicMenu.expand();
         assertTrue(basicMenu.isExpanded());
-        basicMenu.close();
     }
 
     @Test
@@ -55,20 +55,32 @@ public class MenuUnitTests extends TestsInit {
     public void valuesTestForNestedMenu() {
         nestedMenu.show();
         assertEquals(nestedMenu.valuesForNestedMenu(), Arrays.asList(NESTED_MENU_VALUES));
-        nestedMenu.close();
     }
 
     @Test
     public void valuesForMenuWithIconsTest() {
         menuWithIcons.show();
         assertEquals(menuWithIcons.valuesForMenuWithIcons(), Arrays.asList(MENU_WITH_ICONS_VALUES));
-        menuWithIcons.close();
     }
 
     @Test
     public void valuesTest() {
         basicMenu.show();
         assertEquals(basicMenu.values(), Arrays.asList(BASIC_MENU_VALUES));
-        basicMenu.close();
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (basicMenu.isExpanded()){
+            basicMenu.close();
+        }
+
+        if (menuWithIcons.isExpanded()){
+            menuWithIcons.close();
+        }
+
+        if (nestedMenu.isExpanded()){
+            nestedMenu.close();
+        }
     }
 }
