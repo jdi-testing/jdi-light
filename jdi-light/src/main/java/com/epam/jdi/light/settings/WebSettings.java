@@ -365,7 +365,7 @@ public class WebSettings {
             return new ArrayList<>();
         List<com.epam.jdi.light.logger.Strategy> strategies = new ArrayList<>();
         try {
-            String[] split = strategy.split(";");
+            String[] split = strategy.split("\\|");
             strategies = map(split, s -> parseStrategy(s.trim()));
         } catch (Exception ignore) { }
         return strategies;

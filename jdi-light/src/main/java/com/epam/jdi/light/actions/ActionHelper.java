@@ -2,6 +2,7 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.ScreenshotMaker;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -47,6 +48,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.AllureLogger.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.FAIL;
+import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.JsonUtils.beautifyJson;
@@ -66,6 +68,7 @@ import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.currentThread;
 import static java.util.Arrays.asList;
 import static java.util.Collections.reverse;
+import static org.apache.commons.lang3.StringUtils.capitalize;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -133,13 +136,13 @@ public class ActionHelper {
     public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
     static Safe<List<String>> allureSteps = new Safe<>(new ArrayList<>());
     public static void beforeJdiAction(ActionObject jInfo) {
-        ProceedingJoinPoint jp = jInfo.jp();
+        JoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
         if (jInfo.topLevel()) {
             allureSteps.reset();
             if (LOGS.writeToLog)
                 logger.toLog(message, logLevel(jp));
-            if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE)
+            if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE || LOGS.screenStrategy.contains(NEW_PAGE))
                 processPage(jInfo);
             if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
                 visualValidation(jp, message);
@@ -153,7 +156,7 @@ public class ActionHelper {
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
         logger.toLog(message, logLevel(jp));
     }
-    private static void visualValidation(ProceedingJoinPoint jp, String message) {
+    private static void visualValidation(JoinPoint jp, String message) {
         Object obj = jp.getThis();
         if (obj == null) {
             if (getJpMethod(jp).getMethod().getAnnotation(VisualCheck.class) != null)
@@ -177,7 +180,11 @@ public class ActionHelper {
     public static JAction1<ActionObject> BEFORE_JDI_ACTION = ActionHelper::beforeJdiAction;
     public static Object afterStepAction(ActionObject jInfo, Object result) {
         passStep(jInfo.stepUId);
-        ProceedingJoinPoint jp = jInfo.jp();
+        processAction(jInfo, result);
+        return result;
+    }
+    static void processAction(ActionObject jInfo, Object result) {
+        JoinPoint jp = jInfo.jp();
         if (logResult(jp)) {
             LogLevels logLevel = logLevel(jp);
             if (result == null || isInterface(getJpClass(jp), JAssert.class))
@@ -189,13 +196,12 @@ public class ActionHelper {
                 logger.toLog(">>> " + text, logLevel);
             }
         }
-        if (getMethodName(jp).equals("open"))
+        if (jInfo.methodName().equals("open"))
             PAGE.beforeNewPage.execute(getPage(jp.getThis()));
         TIMEOUTS.element.reset();
-        return result;
     }
     public static JFunc2<ActionObject, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
-    static boolean logResult(ProceedingJoinPoint jp) {
+    static boolean logResult(JoinPoint jp) {
         if (!LOGS.writeToLog)
             return false;
         Class<?> cl = getJpClass(jp);
@@ -204,7 +210,7 @@ public class ActionHelper {
         JDIAction ja = getJdiAction(jp);
         return ja != null && ja.logResult();
     }
-    static JDIAction getJdiAction(ProceedingJoinPoint jp) {
+    static JDIAction getJdiAction(JoinPoint jp) {
         return ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
     }
     protected static Class<?> getJpClass(JoinPoint jp) {
@@ -214,22 +220,8 @@ public class ActionHelper {
     }
     public static Object afterJdiAction(ActionObject jInfo, Object result) {
         passStep(jInfo.stepUId);
-        ProceedingJoinPoint jp = jInfo.jp();
         if (jInfo.topLevel()) {
-            if (logResult(jp)) {
-                LogLevels logLevel = logLevel(jp);
-                if (result == null || isInterface(getJpClass(jp), JAssert.class))
-                    logger.debug("Done");
-                else {
-                    String text = result.toString();
-                    if (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5)
-                        text = text.substring(0, CUT_STEP_TEXT) + "...";
-                    logger.toLog(">>> " + text, logLevel);
-                }
-            }
-            if (getMethodName(jp).equals("open"))
-                PAGE.beforeNewPage.execute(getPage(jp.getThis()));
-            TIMEOUTS.element.reset();
+            processAction(jInfo, result);
         }
         return result;
     }
@@ -264,12 +256,8 @@ public class ActionHelper {
         Object element = jInfo.jp().getThis();
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
             WebPage page = getPage(element);
-            String currentPage = getCurrentPage();
-            if (currentPage != null && page != null) {
-                if (!currentPage.equals(page.getName())) {
-                    setCurrentPage(page);
-                    PAGE.beforeNewPage.execute(page);
-                }
+            if (page != null) {
+                setCurrentPage(page);
                 PAGE.beforeEachStep.execute(page);
             }
         }
@@ -297,7 +285,7 @@ public class ActionHelper {
         if (LOGS.screenStrategy.contains(FAIL))
             screenName = SCREEN.tool.equalsIgnoreCase("robot")
                 ? takeRootScreenshot()
-                : takeScreen();
+                : new ScreenshotMaker().takeScreenshot("Failed"+capitalize(jInfo.methodName()));
         if (LOGS.htmlCodeStrategy.contains(FAIL))
             htmlSnapshot = takeHtmlCodeOnFailure();
         if (LOGS.requestsStrategy.contains(FAIL)) {
@@ -312,11 +300,13 @@ public class ActionHelper {
         failStep(jInfo.stepUId, screenName, htmlSnapshot, errors);
     }
     static WebPage getPage(Object element) {
-        if (!isClass(element.getClass(), DriverBase.class))
-            return null;
-        return isClass(element.getClass(), WebPage.class)
-            ? (WebPage) element
-            : ((DriverBase) element).getPage();
+        if (isInterface(element.getClass(), IBaseElement.class))
+            return ((IBaseElement) element).base().getPage();
+        if (isClass(element.getClass(), WebPage.class))
+            return (WebPage) element;
+        if (isClass(element.getClass(), DriverBase.class))
+            return ((DriverBase)element).getPage();
+        return null;
     }
     public static MethodSignature getJpMethod(JoinPoint joinPoint) {
         return (MethodSignature) joinPoint.getSignature();
@@ -477,7 +467,7 @@ public class ActionHelper {
         }
     }
     //endregion
-    public static void addFailedMethod(ProceedingJoinPoint jp) {
+    public static void addFailedMethod(JoinPoint jp) {
         String[] s = jp.toString().split("\\.");
         String result = format("%s.%s%s", s[s.length-2], s[s.length-1].replaceAll("\\)\\)", ""),
                 printArgs(getArgs(jp)));
@@ -515,7 +505,7 @@ public class ActionHelper {
             s -> s.getMethodName().equals("jdiAround"))
             .size();
     }
-    private static String getClassMethodName(JoinPoint jp) {
+    static String getClassMethodName(JoinPoint jp) {
         String className = getJpClass(jp).getSimpleName();
         String methodName = getMethodName(jp);
         return className + "." + methodName;
@@ -529,7 +519,7 @@ public class ActionHelper {
         logger.debug("defaultAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         return jInfo.overrideAction() != null
-                ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
+                ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
     }
     public static Object stableAction(ActionObject jInfo) {
         logger.debug("stableAction: " + getClassMethodName(jInfo.jp()));
@@ -541,7 +531,7 @@ public class ActionHelper {
             try {
                 logger.debug("do-while: " + getClassMethodName(jInfo.jp()));
                 Object result = jInfo.overrideAction() != null
-                    ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.jp().proceed();
+                    ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
                 if (!condition(jInfo.jp())) continue;
                 return result;
             } catch (Throwable ex) {
@@ -567,7 +557,7 @@ public class ActionHelper {
             throw exception(ex, "Surround method issue: Can't get failed message");
         }
     }
-    static String getConditionName(ProceedingJoinPoint jp) {
+    static String getConditionName(JoinPoint jp) {
         JDIAction ja = getJdiAction(jp);
         return ja != null ? ja.condition() : "";
     }
@@ -578,7 +568,7 @@ public class ActionHelper {
             $("not empty", result -> result instanceof List && ((List) result).size() > 0),
             $("empty", result -> result instanceof List && ((List) result).size() == 0)
     );
-    static boolean condition(ProceedingJoinPoint jp) {
+    static boolean condition(JoinPoint jp) {
         String conditionName = getConditionName(jp);
         return CONDITIONS.has(conditionName) && CONDITIONS.get(conditionName).execute(jp) || !CONDITIONS.has(conditionName) && true;
     }

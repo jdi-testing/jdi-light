@@ -3,10 +3,12 @@ package com.epam.jdi.light.elements.composite;
 import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
+import com.epam.jdi.light.driver.ScreenshotMaker;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.logger.Strategy;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import org.openqa.selenium.OutputType;
@@ -26,6 +28,7 @@ import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
+import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.checkNewWindowIsOpened;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
@@ -33,6 +36,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.JsonUtils.getDouble;
@@ -71,9 +75,15 @@ public class WebPage extends DriverBase implements PageObject {
     public static String getCurrentPage() {
         return currentPage.get();
     }
+    public static boolean pageChanged;
 
     public static void setCurrentPage(WebPage page) {
-        currentPage.set(page.getName());
+        String oldPage = currentPage.get();
+        String newPage = page.getName();
+        if (!oldPage.equals(newPage)) {
+            PAGE.beforeNewPage.execute(page);
+            currentPage.set(newPage);
+        }
     }
 
     public WebPage() {
@@ -510,6 +520,9 @@ public class WebPage extends DriverBase implements PageObject {
     public static void beforeNewPage(WebPage page) {
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE) {
             visualWindowCheck();
+        }
+        if (LOGS.screenStrategy.contains(NEW_PAGE)) {
+            new ScreenshotMaker().takeScreenshot(page.getName());
         }
         logger.toLog("Page '" + page.getName() + "' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());

@@ -2,10 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JDI-Light HTML Tests" parallel="methods" thread-count="2">
     <test name="Tests">
-        <classes>
-            <class name="io.github.epam.html.tests.elements.common.ButtonTests"/>
-        </classes>
-        <!--packages>
+        <packages>
             <package name="io.github.epam.html.tests.elements.common"/>
             <package name="io.github.epam.html.tests.elements.complex.*"/>
             <package name="io.github.epam.html.tests.elements.complex"/>
@@ -15,7 +12,7 @@
             <package name="io.github.epam.html.tests.issues.*"/>
             <package name="io.github.epam.html.tests.performance"/>
             <package name="io.github.epam.html.tests.site"/>
-        </packages-->
+        </packages>
     </test>
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener" />

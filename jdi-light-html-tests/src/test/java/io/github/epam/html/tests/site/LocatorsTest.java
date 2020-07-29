@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 
 public class LocatorsTest {
-    @Test
+    // @Test
     public void cssTest() {
         openUrl("https://jdi-testing.github.io/jdi-light/");
         $("#user-icon").click();
@@ -21,7 +21,7 @@ public class LocatorsTest {
         $$(".sidebar-menu").select("Contact form");
         assertThat(getUrl(), containsString("/jdi-light/contacts.html"));
     }
-    @Test
+    // @Test
     public void namedTest() {
         openUrl("https://jdi-testing.github.io/jdi-light/");
         $("User Icon").click();
@@ -33,7 +33,7 @@ public class LocatorsTest {
         $$(".sidebar-menu").select("Contact form");
         checkUrl("contacts.html");
     }
-    @Test
+    // @Test
     public void withText() {
         openUrl("https://jdi-testing.github.io/jdi-light/");
         $("#user-icon").click();
