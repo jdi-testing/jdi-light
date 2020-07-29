@@ -17,6 +17,7 @@ import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.Timer.nowTime;
+import static java.awt.Toolkit.getDefaultToolkit;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -85,10 +86,11 @@ public class ScreenshotMaker {
         return takeRobotScreenshot(name, DEFAULT_DATE);
     }
     public static String takeRobotScreenshot(String name, String dateFormat) {
+        if (!SCREEN.allowRobot)
+            return new ScreenshotMaker().takeScreenshot(name, dateFormat);
         String screensFilePath = getFileName(mergePath(getPath(), FILE_NAME.execute(name, dateFormat)));
         try {
-            Rectangle rectangle = new Rectangle(
-                    Toolkit.getDefaultToolkit().getScreenSize());
+            Rectangle rectangle = new Rectangle(getDefaultToolkit().getScreenSize());
             new File(screensFilePath).getParentFile().mkdirs();
             Robot robot = new Robot();
             BufferedImage img = robot.createScreenCapture(rectangle);

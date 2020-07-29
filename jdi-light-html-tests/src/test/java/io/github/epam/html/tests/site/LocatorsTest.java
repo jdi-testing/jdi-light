@@ -1,7 +1,5 @@
 package io.github.epam.html.tests.site;
 
-import org.testng.annotations.Test;
-
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;

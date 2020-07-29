@@ -29,6 +29,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +46,8 @@ import static com.epam.jdi.light.driver.ScreenshotMaker.takeRobotScreenshot;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
-import static com.epam.jdi.light.elements.composite.WebPage.*;
+import static com.epam.jdi.light.elements.composite.WebPage.setCurrentPage;
+import static com.epam.jdi.light.elements.composite.WebPage.visualWindowCheck;
 import static com.epam.jdi.light.logger.AllureLogger.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.*;
@@ -62,14 +64,14 @@ import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
 import static java.lang.Character.toUpperCase;
 import static java.lang.String.format;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.currentThread;
 import static java.util.Arrays.asList;
 import static java.util.Collections.reverse;
-import static org.apache.commons.lang3.StringUtils.capitalize;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -160,13 +162,23 @@ public class ActionHelper {
                 boolean lastActionIsNotAssert = isAssert.get() == null || !isAssert.get();
                 isAssert.set(true);
                 if (lastActionIsNotAssert) {
+                    String screenName = "Validate" + capitalize(jInfo.methodName());
+                    String screenPath;
                     if (!validateAlert(jInfo)) {
-                        takeScreen("Validate" + capitalize(jInfo.methodName()));
+                        screenPath = takeScreen(screenName);
                     } else {
                         Timer.sleep(200);
-                        takeRobotScreenshot("Validate" + capitalize(jInfo.methodName()));
-                        //Timer.sleep(200);
+                        screenPath = takeRobotScreenshot(screenName);
                     }
+                    String detailsUUID = startStep(screenName);
+                    if (isNotBlank(screenPath)) {
+                        try {
+                            attachScreenshot(screenPath);
+                        } catch (IOException ex) {
+                            throw exception(ex, "");
+                        }
+                    }
+                    getLifecycle().stopStep(detailsUUID);
                 }
             } else {
                 isAssert.set(false);

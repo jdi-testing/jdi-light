@@ -15,6 +15,7 @@ public class ScreenSettings {
     public String path = mergePath(COMMON.logsPath, "screens");
     public String fileSuffix = "jpg";
     public String tool = "selenium";
+    public boolean allowRobot = false;
 
     public JFunc1<String, String> getScreenName = screenName -> {
         String fileName = mergePath(getPath(), screenName + nowTime("yyyy-MM-dd-HH-mm-ss"));

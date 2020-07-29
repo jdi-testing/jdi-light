@@ -48,6 +48,17 @@
       "defaultValue": "/target/.logs/screens"
     },
     {
+      "name": "screenshot.tool",
+      "type": "java.lang.String",
+      "description": "Tool for making screenshots: Selenium or Robot",
+      "defaultValue": "selenium"
+    },
+    {
+      "name": "allow.robot",
+      "type": "java.lang.Boolean",
+      "description": "Allow robot for make screenshots"
+    },
+    {
       "name": "list.start.index",
       "type": "java.lang.Integer",
       "description": "Index of initial element in WebList.",
@@ -134,7 +145,7 @@
     {
       "name": "remote.type",
       "type": "java.lang.String",
-      "description": "TSpecify remote run type: sauce labs, browserstack, selenium grid",
+      "description": "Specify remote run type: sauce labs, browserstack, selenium grid",
       "defaultValue": "selenium localhost"
     },
     {
@@ -142,6 +153,12 @@
       "type": "java.lang.String",
       "description": "Specify URL that will be used to run tests remotely",
       "defaultValue": "http://localhost:4444/wd/hub/"
+    },
+    {
+      "name": "driver.remote.run",
+      "type": "java.lang.Boolean",
+      "description": "Should run remote or local",
+      "defaultValue": "false"
     },
     {
       "name": "log.level",
@@ -304,6 +321,23 @@
         {
           "value": "new page",
           "description": "Do screenshot on each new opened page"
+        },
+        {
+          "value": "flow",
+          "description": "Track screen changes. Includes: 'new page'+'on failure'+'on assert'"
+        }
+      ]
+    },
+    {
+      "name": "screenshot.tool",
+      "values": [
+        {
+          "value": "selenium",
+          "description": "Use selenium only for screenshots"
+        },
+        {
+          "value": "robot",
+          "description": "Allow use robot for screenshots where Selenium fail (e.g. popups)"
         }
       ]
     },

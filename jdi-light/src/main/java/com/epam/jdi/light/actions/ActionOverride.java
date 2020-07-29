@@ -6,7 +6,6 @@ import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 
 import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
 import static org.apache.logging.log4j.util.Strings.isNotBlank;

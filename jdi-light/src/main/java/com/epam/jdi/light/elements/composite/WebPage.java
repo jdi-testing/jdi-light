@@ -3,12 +3,11 @@ package com.epam.jdi.light.elements.composite;
 import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
-import com.epam.jdi.light.driver.ScreenshotMaker;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.logger.Strategy;
+import com.epam.jdi.light.logger.AllureLogger;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import org.openqa.selenium.OutputType;
@@ -18,6 +17,7 @@ import org.openqa.selenium.logging.LogEntry;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Supplier;
@@ -35,6 +35,7 @@ import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
+import static com.epam.jdi.light.logger.AllureLogger.attachScreenshot;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -45,6 +46,7 @@ import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
 import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -521,7 +523,17 @@ public class WebPage extends DriverBase implements PageObject {
             visualWindowCheck();
         }
         if (LOGS.screenStrategy.contains(NEW_PAGE)) {
-            takeScreen(page.getName());
+            String screenName = takeScreen(page.getName());
+            String detailsUUID = AllureLogger.startStep(page.getName());
+            if (isNotBlank(screenName)) {
+                try {
+                    attachScreenshot(screenName);
+                } catch (IOException ex) {
+                    throw exception(ex, "");
+                }
+            }
+            getLifecycle().stopStep(detailsUUID);
+
         }
         logger.toLog("Page '" + page.getName() + "' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());
