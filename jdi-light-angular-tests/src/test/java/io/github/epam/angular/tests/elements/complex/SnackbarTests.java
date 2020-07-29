@@ -1,4 +1,4 @@
-package io.github.epam.angular.tests.elements.common;
+package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
