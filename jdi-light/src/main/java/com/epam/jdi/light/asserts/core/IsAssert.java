@@ -8,6 +8,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.util.List;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.containsString;
 
@@ -80,12 +82,16 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' css class {0}")
+    public IsAssert cssClasses(Matcher<? super List<String>> condition) {
+        jdiAssert(element().classes(), condition);
+        return this;
+    }
     public IsAssert cssClass(Matcher<String> condition) {
         jdiAssert(element().getAttribute("class"), condition);
         return this;
     }
     public IsAssert cssClass(String className) {
-        return cssClass(Matchers.is(className));
+        return cssClasses(Matchers.hasItem(className));
     }
 
     /**
