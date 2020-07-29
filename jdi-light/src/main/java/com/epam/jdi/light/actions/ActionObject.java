@@ -20,6 +20,8 @@ import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class ActionObject {
+    private JoinPoint jp;
+
     public ActionObject(ProceedingJoinPoint joinPoint) {
         this.jp = joinPoint;
         try {
@@ -30,7 +32,6 @@ public class ActionObject {
             this.elementTimeout = 10;
         }
     }
-    private JoinPoint jp;
     public JoinPoint jp() { return jp; }
     public Object execute() throws Throwable {
         return pjp().proceed();

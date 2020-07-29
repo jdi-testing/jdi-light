@@ -80,6 +80,7 @@ import static org.apache.commons.lang3.StringUtils.*;
 public class ActionHelper {
     public static JFunc1<JoinPoint, String> GET_ACTION_NAME = ActionHelper::getActionName;
     public static JFunc1<JoinPoint, MapArray<String, Object>> LOG_VALUES = ActionHelper::getLogOptions;
+    public static Safe<Boolean> isAssert = new Safe<>(null);
 
     static String getTemplate(LogLevels level) {
         if (LOGS.logInfoDetails != null) {
@@ -188,7 +189,6 @@ public class ActionHelper {
     private static boolean validateAlert(ActionObject jInfo) {
         return isClass(jInfo.jpClass(), Alerts.class) && jInfo.methodName().startsWith("validate");
     }
-    public static Safe<Boolean> isAssert = new Safe<>(null);
     public static void beforeStepAction(JoinPoint jp) {
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
         logger.toLog(message, logLevel(jp));
