@@ -2,12 +2,10 @@ package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.complex.ButtonToggle;
 import com.epam.jdi.light.angular.elements.complex.Tabs;
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.*;
 
-public class TabsSection {
+public class TabSection {
 
     /* BASIC TABS */
     @UI("#basic-tab")
@@ -24,15 +22,12 @@ public class TabsSection {
     /*TAB GROUP WITH DYNAMICALLY CHANGING TABS*/
     @UI("#dynamically-changing-tabs")
     public Tabs tabsWithDynamicChangingCount;
-    /*buttons*/
     @UI("#add-new-tab-button")
     public Button addNewTabButton;
     @UI("#delete-tab-button")
     public Button deleteButton;
-    /*checkbox*/
     @UI("#select-after-adding-checkbox")
     public Checkbox selectTabAfterAddingCheckbox;
-    /*input*/
     @UI("#select-by-index-input")
     public TextArea selectTabIndexArea;
 
@@ -47,7 +42,6 @@ public class TabsSection {
     /*CUSTOMIZING THE THEME OPTIONS ON THE TAB GROUP*/
     @UI("#tab-group-theme-example")
     public Tabs tabGroupThemeExample;
-    /*button-toggles*/
     @UI("#mat-button-toggle-group-color")
     public ButtonToggle  colorButtonToggle;
     @UI("#mat-button-toggle-group-background-color")
@@ -60,9 +54,10 @@ public class TabsSection {
     /*BASIC USE OF THE TAB NAV BAR*/
     @UI("#tabs-nav-bar")
     public Tabs tabsNavBar;
-    /*buttons*/
     @UI("#add-link-button")
     public Button  addLinkButton;
     @UI("#toggle-background-button")
     public Button  toggleBackgroundButton;
+
+
 }

@@ -11,11 +11,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.tabsSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class TabsTests extends TestsInit {
+
+    private final String CLASS_ATTR = "class";
+    private final String ACCENT = "accent";
+    private final String PRIMARY = "primary";
+    private final String DYNAMIC_CONTENT = "Content %s";
+    private final String TAB_GROUP_DEFAULT_CLASS = "mat-tab-group mat-primary";
+    private final List<String> TITLES_DEFAULT_LIST = Arrays.asList("First", "Second", "Third");
 
     @BeforeMethod
     public void before() {
@@ -26,21 +34,19 @@ public class TabsTests extends TestsInit {
     /* BASIC TABS */
     @Test
     public void verifyTabs() {
-        String classForTest = "mat-tab-group mat-primary";
         tabsSection.basicTabsSection.is().displayed();
-        tabsSection.basicTabsSection.has().attr("class", classForTest);
+        tabsSection.basicTabsSection.has().attr(CLASS_ATTR, TAB_GROUP_DEFAULT_CLASS);
     }
 
     @Test
     public void verifyTabsTitles() {
-        List<String> listForTest = Arrays.asList("First", "Second", "Third");
-        tabsSection.basicTabsSection.is().assertTabsTitles(listForTest);
+        tabsSection.basicTabsSection.is().assertTabsTitles(TITLES_DEFAULT_LIST);
     }
 
     @Test
     public void verifyTabPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format("Content %s", tabNumberForTest);
+        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.basicTabsSection.clickTab(tabNumberForTest);
         tabsSection.basicTabsSection.is().assertTabPanelContent(stringForTest);
     }
@@ -51,14 +57,12 @@ public class TabsTests extends TestsInit {
         tabsSection.basicTabsSection.clickTab(tabNumberForTest);
         tabsSection.basicTabsSection.is().assertTabIsHighlighted(tabNumberForTest);
     }
-//------------------------------------------------------------------------------------------------------------------
 
     /* USING TABS WITH A CUSTOM LABEL TEMPLATE*/
     @Test
     public void verifyCustomLabelTemplateTabs() {
-        String classForTest = "mat-tab-group mat-primary";
         tabsSection.tabsWithCustomLabel.is().displayed();
-        tabsSection.tabsWithCustomLabel.has().attr("class", classForTest);
+        tabsSection.tabsWithCustomLabel.has().attr(CLASS_ATTR, TAB_GROUP_DEFAULT_CLASS);
     }
 
     @Test
@@ -70,7 +74,7 @@ public class TabsTests extends TestsInit {
     @Test
     public void verifyCustomLabelTemplateTabPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format("Content %s", tabNumberForTest);
+        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.basicTabsSection.clickTab(tabNumberForTest);
         tabsSection.basicTabsSection.is().assertTabPanelContent(stringForTest);
     }
@@ -87,7 +91,7 @@ public class TabsTests extends TestsInit {
     public void verifyDynamicHeightBasedOnContentsTabs() {
         String classForTest = "mat-tab-group mat-primary mat-tab-group-dynamic-height";
         tabsSection.tabsWithDynamicHeightBasedOnContent.is().displayed();
-        tabsSection.tabsWithDynamicHeightBasedOnContent.has().attr("class", classForTest);
+        tabsSection.tabsWithDynamicHeightBasedOnContent.has().attr(CLASS_ATTR, classForTest);
     }
 
     @Test
@@ -114,14 +118,13 @@ public class TabsTests extends TestsInit {
     /*TAB GROUP WITH DYNAMICALLY CHANGING TABS*/
     @Test
     public void verifyDynamicallyChangingTabs() {
-        String classForTest = "mat-tab-group mat-primary";
         tabsSection.tabsWithDynamicChangingCount.is().displayed();
-        tabsSection.tabsWithDynamicChangingCount.has().attr("class", classForTest);
+        tabsSection.tabsWithDynamicChangingCount.has().attr(CLASS_ATTR, TAB_GROUP_DEFAULT_CLASS);
     }
+
     @Test
     public void verifyDynamicallyChangingTabsTitles() {
-        List<String> listForTest = Arrays.asList("First", "Second", "Third");
-        tabsSection.tabsWithDynamicChangingCount.is().assertTabsTitles(listForTest);
+        tabsSection.tabsWithDynamicChangingCount.is().assertTabsTitles(TITLES_DEFAULT_LIST);
     }
 
     @Test
@@ -140,7 +143,6 @@ public class TabsTests extends TestsInit {
         tabsSection.tabsWithDynamicChangingCount.is().assertTabIsHighlighted(tabNumberForTest);
     }
 
-    /*add new tab button*/
     @Test
     public void verifyDynamicallyChangingTabsCountAfterAddingNewTabs() {
         int clicksCount = 2;
@@ -159,7 +161,6 @@ public class TabsTests extends TestsInit {
         tabsSection.tabsWithDynamicChangingCount.is().assertTabIsHighlighted(tabsCount);
     }
 
-    /*select tab by index input*/
     @Test
     public void selectedByIndexTabIsHighlighted() {
         int indexForTest = 2;
@@ -177,15 +178,12 @@ public class TabsTests extends TestsInit {
         tabsSection.tabsWithDynamicChangingCount.is().assertTabIsHighlighted(tabNumberForTest);
     }
 
-    /*delete*/
     @Test
     public void verifyTabsCountAfterDeleteTab() {
-        int tabNumberForTest = 2;
-        List<String> listForTest = Arrays.asList("First", "Third");
-        tabsSection.tabsWithDynamicChangingCount.clickTab(tabNumberForTest);
+        List<String> listForTest = Arrays.asList("Second", "Third");
+        tabsSection.selectTabIndexArea.clear();
         tabsSection.deleteButton.click();
         tabsSection.tabsWithDynamicChangingCount.is().assertTabsTitles(listForTest);
-        tabsSection.tabsWithDynamicChangingCount.is().assertTabIsHighlighted(tabNumberForTest);
     }
 
     /*TAB GROUP WITH THE HEADERS ON THE BOTTOM*/
@@ -193,19 +191,19 @@ public class TabsTests extends TestsInit {
     public void verifyTabsWithHeadersOnTheBottom() {
         String classForTest = "mat-tab-group mat-primary mat-tab-group-inverted-header";
         tabsSection.tabsWithHeadersOnTheBottom.is().displayed();
-        tabsSection.tabsWithHeadersOnTheBottom.has().attr("class", classForTest);
+        tabsSection.tabsWithHeadersOnTheBottom.has().attr(CLASS_ATTR, classForTest);
+        tabsSection.tabsWithHeadersOnTheBottom.has().attr("headerposition", "below");
     }
 
     @Test
     public void verifyTabsWithHeadersOnTheBottomTitles() {
-        List<String> listForTest = Arrays.asList("First", "Second", "Third");
-        tabsSection.tabsWithHeadersOnTheBottom.is().assertTabsTitles(listForTest);
+        tabsSection.tabsWithHeadersOnTheBottom.is().assertTabsTitles(TITLES_DEFAULT_LIST);
     }
 
     @Test
     public void verifyTabWithHeadersOnTheBottomPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format("Content %s", tabNumberForTest);
+        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.tabsWithHeadersOnTheBottom.clickTab(tabNumberForTest);
         tabsSection.tabsWithHeadersOnTheBottom.is().assertTabPanelContent(stringForTest);
     }
@@ -220,26 +218,24 @@ public class TabsTests extends TestsInit {
     /* TAB GROUP WHERE THE TAB CONTENT IS LOADED LAZILY (WHEN ACTIVATED)*/
     @Test
     public void verifyTabsWithLazyLoadedContent() {
-        String classForTest = "mat-tab-group mat-primary";
         tabsSection.tabsWithLazyLoadedContent.is().displayed();
-        tabsSection.tabsWithLazyLoadedContent.has().attr("class", classForTest);
+        tabsSection.tabsWithLazyLoadedContent.has().attr(CLASS_ATTR, TAB_GROUP_DEFAULT_CLASS);
     }
 
     @Test
     public void verifyTabsWithLazyLoadedContentTitles() {
-        List<String> listForTest = Arrays.asList("First", "Second", "Third");
-        tabsSection.tabsWithLazyLoadedContent.is().assertTabsTitles(listForTest);
+        tabsSection.tabsWithLazyLoadedContent.is().assertTabsTitles(TITLES_DEFAULT_LIST);
     }
 
     @Test
     public void verifyTabWithLazyLoadedContent() {
         int tabNumberForTest = 3;
-        SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("MMM dd, yyyy, hh:mm:ss aa");
+        refresh();
         tabsSection.tabsWithLazyLoadedContent.clickTab(tabNumberForTest);
+        SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("MMM dd, yyyy, h:mm:ss aa");
         dateTimeInGMT.setTimeZone(TimeZone.getTimeZone("GMT+3"));
         String timeForTest = dateTimeInGMT.format(new Date());
         String stringForTest = String.format("Content %s - Loaded: %s", tabNumberForTest, timeForTest);
-        //System.out.println(stringForTest + " STRING");
         tabsSection.tabsWithLazyLoadedContent.is().assertTabPanelContent(stringForTest);
     }
 
@@ -255,19 +251,18 @@ public class TabsTests extends TestsInit {
     public void verifyCustomThemeTabs() {
         String classForTest = "mat-tab-group mat-background-primary mat-primary";
         tabsSection.tabGroupThemeExample.is().displayed();
-        tabsSection.tabGroupThemeExample.has().attr("class", classForTest);
+        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, classForTest);
     }
 
     @Test
     public void verifyCustomThemeTabsTitles() {
-        List<String> listForTest = Arrays.asList("First", "Second", "Third");
-        tabsSection.tabGroupThemeExample.is().assertTabsTitles(listForTest);
+        tabsSection.tabGroupThemeExample.is().assertTabsTitles(TITLES_DEFAULT_LIST);
     }
 
     @Test
     public void verifyCustomThemeTabPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format("Content %s", tabNumberForTest);
+        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.tabGroupThemeExample.clickTab(tabNumberForTest);
         tabsSection.tabGroupThemeExample.is().assertTabPanelContent(stringForTest);
     }
@@ -281,42 +276,36 @@ public class TabsTests extends TestsInit {
 
     @Test
     public void verifyCustomThemeTabsBackgroundColor() {
-        String accentForTest = "accent";
-        String primaryForTest = "primary";
-        tabsSection.backgroundButtonToggle.clickButtonByValue(accentForTest);
-        tabsSection.tabGroupThemeExample.has().attr("ng-reflect-background-color", accentForTest);
-        tabsSection.backgroundButtonToggle.clickButtonByValue(primaryForTest);
-        tabsSection.tabGroupThemeExample.has().attr("ng-reflect-background-color", primaryForTest);
+        tabsSection.backgroundButtonToggle.clickButtonByValue(ACCENT);
+        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-primary mat-background-accent");
+        tabsSection.backgroundButtonToggle.clickButtonByValue(PRIMARY);
+        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-primary mat-background-primary");
     }
 
     @Test
     public void verifyCustomThemeHighlighterColor() {
-        String accentForTest = "accent";
-        String primaryForTest = "primary";
-        tabsSection.colorButtonToggle.clickButtonByValue(accentForTest);
-        tabsSection.tabGroupThemeExample.has().attr("ng-reflect-color", accentForTest);
-        tabsSection.colorButtonToggle.clickButtonByValue(primaryForTest);
-        tabsSection.tabGroupThemeExample.has().attr("ng-reflect-color", primaryForTest);
+        tabsSection.colorButtonToggle.clickButtonByValue(ACCENT);
+        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-background-primary mat-accent");
+        tabsSection.colorButtonToggle.clickButtonByValue(PRIMARY);
+        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-background-primary mat-primary");
     }
 
     /* TAB GROUP WITH ASYNCHRONOUSLY LOADING TAB CONTENTS*/
     @Test
     public void verifyTabsAsyncLoadingContent() {
-    String classForTest = "mat-tab-group mat-primary";
-    tabsSection.tabsAsyncLoadingContent.is().displayed();
-    tabsSection.tabsAsyncLoadingContent.has().attr("class", classForTest);
-}
+        tabsSection.tabsAsyncLoadingContent.is().displayed();
+        tabsSection.tabsAsyncLoadingContent.has().attr(CLASS_ATTR, TAB_GROUP_DEFAULT_CLASS);
+    }
 
     @Test
     public void verifyCustomThemeAsyncLoadingContentTabsTitles() {
-        List<String> listForTest = Arrays.asList("First", "Second", "Third");
-        tabsSection.tabsAsyncLoadingContent.is().assertTabsTitles(listForTest);
+        tabsSection.tabsAsyncLoadingContent.is().assertTabsTitles(TITLES_DEFAULT_LIST);
     }
 
     @Test
     public void verifyAsyncLoadingContentTabPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format("Content %s", tabNumberForTest);
+        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.tabsAsyncLoadingContent.clickTab(tabNumberForTest);
         tabsSection.tabsAsyncLoadingContent.is().assertTabPanelContent(stringForTest);
     }
@@ -330,10 +319,10 @@ public class TabsTests extends TestsInit {
 
     /*BASIC USE OF THE TAB NAV BAR*/
     @Test
-    public void verifyTabsWithLinks() {/**/
+    public void verifyTabsWithLinks() {
         String classForTest = "mat-tab-nav-bar mat-tab-header mat-primary mat-background-primary";
         tabsSection.tabsNavBar.is().displayed();
-        tabsSection.tabsNavBar.has().attr("class", classForTest);
+        tabsSection.tabsNavBar.has().attr(CLASS_ATTR, classForTest);
     }
 
     @Test
@@ -361,7 +350,7 @@ public class TabsTests extends TestsInit {
     @Test
     public void verifyTabWithLinkBackgroundColor() {
         tabsSection.toggleBackgroundButton.click();
-        tabsSection.tabsNavBar.has().attr("ng-reflect-background-color", "primary");
+        tabsSection.tabsNavBar.has().attr(CLASS_ATTR, "mat-tab-nav-bar mat-tab-header mat-primary " +
+                "mat-background-primary");
     }
-
 }
