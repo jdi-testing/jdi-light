@@ -7,9 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static io.github.com.pages.sections.SelectSection.basicNativeSelect;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.matchesPattern;
+import static org.hamcrest.Matchers.*;
 
 public class BasicNativeSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)

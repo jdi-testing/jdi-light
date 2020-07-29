@@ -15,6 +15,7 @@ import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -91,7 +92,7 @@ public class ActionHelper {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
             return isBlank(template)
-                ? getDefaultName(getClassMethodName(jp), methodArgs(jp, method))
+                ? getDefaultName(jp, method)
                 : fillTemplate(template, jp, method);
         } catch (Throwable ex) {
             takeScreen();
@@ -346,16 +347,22 @@ public class ActionHelper {
             ? m.getAnnotation(JDIAction.class).level()
             : INFO;
     }
-    static String getDefaultName(String method, MapArray<String, Object> args) {
-        if (args.size() == 1 && args.get(0).value.getClass().isArray())
-            return format("%s(%s)", method, arrayToString(args.get(0).value));
-        MapArray<String, String> methodArgs = args.toMapArray(Object::toString);
-        String stringArgs = Switch(methodArgs.size()).get(
-            Value(0, ""),
-            Value(1, v->"("+methodArgs.get(0).value+")"),
-            Default(v->"("+methodArgs.toString()+")")
-        );
-        return format("%s%s", method, stringArgs);
+    static String getDefaultName(JoinPoint jp, MethodSignature method) {
+        MapArray<String, Object> args = methodArgs(jp, method);
+        String methodName = splitCamelCase(getMethodName(jp));
+        if (args.size() == 0)
+            return methodName;
+        return format("%s%s", methodName, argsToString(args));
+    }
+    static String argsToString(MapArray<String, Object> args) {
+        return args.size() == 1
+                ? argToString(args)
+                : "("+args.toString()+")";
+    }
+    static String argToString(MapArray<String, Object> args) {
+        return args.get(0).value.getClass().isArray()
+                ? arrayToString(args.get(0).value)
+                : "("+args.get(0).value+")";
     }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
         return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint)));

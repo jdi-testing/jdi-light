@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static io.github.com.pages.sections.ToolbarSection.*;
+import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
 public class ToolbarTests extends TestsInit {

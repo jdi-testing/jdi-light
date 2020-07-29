@@ -16,82 +16,48 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 
-/**
- * Created by Roman Iovlev on 03.28.2018
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
- */
-public class UIFactory {
-    // Use JDITalk
-    @Deprecated
+public class JDITalk {
     public static UIElement element(@MarkupLocator String locator) {
         return locator.matches("[A-Z].*")
-            ? new UIElement().setName(locator)
-            : element(defineLocator(locator));
+                ? new UIElement().setName(locator)
+                : element(defineLocator(locator));
     }
-    // Use JDITalk
-    @Deprecated
     public static UIElement element(@MarkupLocator By byLocator) {
         return new UIElement(byLocator);
     }
-    public static UIElement $(@MarkupLocator String locator) {
-        return element(locator);
-    }
-    public static UIElement $(@MarkupLocator String locator, Object parent) {
-        return element(locator).setup(j->j.setParent(parent));
-    }
-    public static UIElement $(@MarkupLocator By locator) {
-        return element(locator);
-    }
-    public static UIElement $(WebElement webElement) {
-        return new UIElement(webElement);
-    }
-    public static UIElement $(@MarkupLocator By locator, Object parent) {
-        return element(locator).setup(j->j.setParent(parent));
-    }
-    // Use JDITalk
-    @Deprecated
+
     public static WebList list(@MarkupLocator String locator) {
         return locator.matches("[A-Z].*")
                 ? new WebList()
                 : list(defineLocator(locator));
     }
-    // Use JDITalk
-    @Deprecated
     public static WebList list(@MarkupLocator By byLocator) {
         return new WebList(byLocator);
     }
-    // Use JDITalk
-    @Deprecated
     public static WebList list(List<WebElement> els, String name) {
         return new WebList(els).setup(e->e.setName(name));
     }
-    public static WebList $$(@MarkupLocator String locator) {
-        return list(locator);
-    }
-    public static WebList $$(@MarkupLocator String locator, Object parent) {
-        return list(locator).setup(j->j.setParent(parent));
-    }
-    public static WebList $$(@MarkupLocator By locator) {
-        return list(locator);
-    }
-    public static WebList $$(@MarkupLocator By locator, Object parent) {
-        return list(locator).setup(j->j.setParent(parent));
-    }
-    public static WebList $$(List<WebElement> els, String name) {
-        return list(els, name);
-    }
 
-    // Use JDITalk
-    @Deprecated
+    public static void clickOn(String locator) {
+        $(locator).click();
+    }
+    public static InClass typeText(String text) {
+        return new InClass(text);
+    }
+    public static void show(String locator) {
+        $(locator).show();
+    }
+    public static DropClass drag(String locator) {
+        return new DropClass(locator);
+    }
     public static Selector selector(@MarkupLocator String locator) {
         return locator.matches("[A-Z].*")
-            ? new Selector().setup(Selector.class, b-> b.setName(locator))
-            : new Selector().setup(Selector.class, b-> b.setLocator(defineLocator(locator)));
+                ? new Selector().setup(Selector.class, b-> b.setName(locator))
+                : new Selector().setup(Selector.class, b-> b.setLocator(defineLocator(locator)));
     }
-    // Use JDITalk
-    @Deprecated
     public static IsDropdown dropdown(@MarkupLocator String locator) {
         return locator.matches("[A-Z].*")
                 ? new Dropdown().setup(Dropdown.class, b-> b.setName(locator))
@@ -103,48 +69,30 @@ public class UIFactory {
     private static <T> Form<T> formWithLocator(@MarkupLocator String locator) {
         return new Form<>().setup(Form.class, b -> b.setLocator(locator));
     }
-    // Use JDITalk
-    @Deprecated
     public static <T> Form<T> form(Class<T> entityClass) {
         return new Form<>();
     }
-    // Use JDITalk
-    @Deprecated
     public static <T> Form<T> form(@MarkupLocator String locator, Class<T> entityClass) {
         return formWithLocator(locator);
     }
-    // Use JDITalk
-    @Deprecated
     public static <T> void submitForm(T entity) {
         new Form<>().submit(entity);
     }
-    // Use JDITalk
-    @Deprecated
     public static <T> void submitForm(@MarkupLocator String locator, T entity) {
         formWithLocator(locator).submit(entity);
     }
-    // Use JDITalk
-    @Deprecated
     public static <T> void loginAs(T entity) {
         new Form<>().loginAs(entity);
     }
-    // Use JDITalk
-    @Deprecated
     public static <T> void loginAs(@MarkupLocator String locator, T entity) {
         formWithLocator(locator).loginAs(entity);
     }
-    // Use JDITalk
-    @Deprecated
     public static Table table(@MarkupLocator String locator) {
         return new Table().setup(Table.class, b -> b.setLocator(locator));
     }
-    // Use JDITalk
-    @Deprecated
     public static <D> DataTable<?, D> dataTable(@MarkupLocator String locator, Class<D> dataClass) {
         return new DataTable<>().setup(DataTable.class, b -> b.setLocator(locator));
     }
-    // Use JDITalk
-    @Deprecated
     public static WebPage page(String pageName) {
         return getPage(pageName);
     }

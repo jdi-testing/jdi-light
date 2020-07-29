@@ -98,6 +98,16 @@ public class WebPage extends DriverBase implements PageObject {
         init();
         new WebPage(url).checkOpened();
     }
+    @JDIAction
+    public static boolean verifyUrl(String url) {
+        init();
+        return getUrl().contains(url);
+    }
+    @JDIAction
+    public static boolean verifyTitle(String title) {
+        init();
+        return getTitle().contains(title);
+    }
     public static void checkTitle(String title) {
         init();
         new WebPage("", title).checkOpened();
