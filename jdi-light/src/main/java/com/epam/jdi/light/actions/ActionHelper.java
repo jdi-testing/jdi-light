@@ -73,6 +73,9 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class ActionHelper {
+    public static JFunc1<JoinPoint, String> GET_ACTION_NAME = ActionHelper::getActionName;
+    public static JFunc1<JoinPoint, MapArray<String, Object>> LOG_VALUES = ActionHelper::getLogOptions;
+
     static String getTemplate(LogLevels level) {
         if (LOGS.logInfoDetails != null) {
             switch (LOGS.logInfoDetails) {
@@ -98,7 +101,7 @@ public class ActionHelper {
             throw exception(ex, "Surround method issue: Can't get action name: " + getClassMethodName(jp));
         }
     }
-    public static JFunc1<JoinPoint, String> GET_ACTION_NAME = ActionHelper::getActionName;
+
     public static String fillTemplate(String template, JoinPoint jp, MethodSignature method) {
         String filledTemplate = template;
         try {
@@ -244,7 +247,6 @@ public class ActionHelper {
         }
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
-    public static JFunc1<JoinPoint, MapArray<String, Object>> LOG_VALUES = ActionHelper::getLogOptions;
     public static MapArray<String, Object> getLogOptions(JoinPoint jp) {
         MapArray<String, Object> map = new MapArray<>();
         JFunc<String> elementName = () -> getElementName(jp);
