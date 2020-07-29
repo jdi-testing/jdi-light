@@ -8,6 +8,8 @@ import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.util.List;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.tools.StringUtils.format;
 
@@ -104,6 +106,32 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
     }
     public A css(String css, String value) {
         return css(css, Matchers.is(value));
+    }
+
+    @JDIAction("Assert that '{name}' css class {0}")
+    public A cssClasses(Matcher<? super List<String>> condition) {
+        jdiAssert(element().classes(), condition);
+        return (A) this;
+    }
+    @JDIAction("Assert that '{name}' css class {0}")
+    public A classValue(Matcher<String> condition) {
+        jdiAssert(element().core().attr("class"), condition);
+        return (A) this;
+    }
+    public A classValue(String value) {
+        return classValue(Matchers.is(value));
+    }
+    public A cssClass(String className) {
+        return cssClasses(Matchers.hasItem(className));
+    }
+
+    @JDIAction("Assert that '{name}' tag {0}")
+    public A tag(Matcher<String> condition) {
+        jdiAssert(element().getTagName(), condition);
+        return (A) this;
+    }
+    public A tag(String tagName) {
+        return tag(Matchers.is(tagName));
     }
 
     /**

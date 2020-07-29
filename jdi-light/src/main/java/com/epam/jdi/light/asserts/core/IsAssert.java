@@ -11,7 +11,6 @@ import org.hamcrest.Matchers;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.containsString;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -78,8 +77,9 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
         jdiAssert(element().classes(), condition);
         return this;
     }
+    @JDIAction("Assert that '{name}' css class {0}")
     public IsAssert classValue(Matcher<String> condition) {
-        jdiAssert(element().getAttribute("class"), condition);
+        jdiAssert(element().attr("class"), condition);
         return this;
     }
     public IsAssert classValue(String value) {
