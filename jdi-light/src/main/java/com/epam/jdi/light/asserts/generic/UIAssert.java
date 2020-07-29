@@ -108,19 +108,10 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
 
     /**
      * Match passed value with the element class
-     * @param className to compare hasClass(String className)
+     * @param attrName to compare attr(String attrName)
      */
     @JDIAction("Assert that '{name}' has css class {0}")
-    public A hasClass(String className) {
-        jdiAssert(format(element().classes().contains(className) ? "has class '%s'" : "has no class '%s'", className) , Matchers.is("has class '"+className+"'"));
-        return (A) this;
-    }
-    /**
-     * Match passed value with the element class
-     * @param attrName to compare hasAttribute(String className)
-     */
-    @JDIAction("Assert that '{name}' has css class {0}")
-    public A hasAttribute(String attrName) {
+    public A attr(String attrName) {
         jdiAssert(format(element().hasAttribute(attrName) ? "has attribute '%s'" : "has no attribute '%s'", attrName) , Matchers.is("has attribute '"+attrName+"'"));
         return (A) this;
     }

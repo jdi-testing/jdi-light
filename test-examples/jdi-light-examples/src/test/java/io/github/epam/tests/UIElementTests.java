@@ -220,9 +220,9 @@ public class UIElementTests extends TestsInit {
         isAssertSubmit.attr("type", "submit");
         //TODO css and with Matcher<String> if possible
         isAssertSubmit.tag("button");
-        isAssertSubmit.hasClass("uui-button");
-        isAssertSubmit.hasClass("dark-blue");
-        isAssertSubmit.cssClass("uui-button dark-blue");
+        isAssertSubmit.cssClass("uui-button");
+        isAssertSubmit.cssClass("dark-blue");
+        isAssertSubmit.classValue("uui-button dark-blue");
 
         IsAssert isAssertForCalculateOne = new IsAssert();
         isAssertForCalculateOne.set(forCalculateOne);

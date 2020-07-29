@@ -49,7 +49,7 @@ public class BadgeTests implements TestsInit {
                 .and().text(is(text))
                 .core()
                 .css("font-size", is("16px"))
-                .cssClass("btn btn-primary")
+                .classValue("btn btn-primary")
                 .attr("type", "button")
                 .tag(is("button"));
     }

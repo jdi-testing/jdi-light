@@ -38,11 +38,11 @@ public class SlideToggleTests extends TestsInit {
         slideToggleSection.disableCheckbox.uncheck();
         slideToggleSection.resultSlideToggle.check();
         slideToggleSection.primaryRadioButton.click();
-        slideToggleSection.resultSlideToggle.is().hasClass("mat-primary");
+        slideToggleSection.resultSlideToggle.has().cssClass("mat-primary");
         slideToggleSection.accentRadioButton.click();
-        slideToggleSection.resultSlideToggle.is().hasClass("mat-accent");
+        slideToggleSection.resultSlideToggle.has().cssClass("mat-accent");
         slideToggleSection.warningRadioButton.click();
-        slideToggleSection.resultSlideToggle.is().hasClass("mat-warn");
+        slideToggleSection.resultSlideToggle.has().cssClass("mat-warn");
     }
 
     @Test

@@ -34,13 +34,13 @@ public class CheckboxTests extends TestsInit {
         checkboxSection.configurableResultCheckbox.is().deselected();
 
         checkboxSection.configurableIndeterminateCheckbox.check();
-        checkboxSection.configurableResultCheckbox.hasClass("mat-checkbox-indeterminate");
+        checkboxSection.configurableResultCheckbox.has().cssClass("mat-checkbox-indeterminate");
 
         checkboxSection.configurableCheckboxAlignBeforeRadioButton.click();
-        checkboxSection.configurableResultCheckbox.hasClass("mat-checkbox-label-before");
+        checkboxSection.configurableResultCheckbox.has().cssClass("mat-checkbox-label-before");
 
         checkboxSection.configurableCheckboxAlignAfterRadioButton.click();
-        checkboxSection.configurableResultCheckbox.hasClass("mat-checkbox-label-after");
+        checkboxSection.configurableResultCheckbox.has().cssClass("mat-checkbox-label-after");
 
         checkboxSection.configurableDisabledCheckbox.click();
         checkboxSection.configurableResultCheckbox.is().disabled();

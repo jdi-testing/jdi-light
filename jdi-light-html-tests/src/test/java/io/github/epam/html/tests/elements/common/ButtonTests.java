@@ -90,7 +90,7 @@ public class ButtonTests implements TestsInit {
             .and().text(is(text))
             .core()
             .css("font-size", is("14px"))
-            .cssClass("uui-button red")
+            .classValue("uui-button red")
             .attr("type", "button")
             .tag(is("input"));
         blueButton.is().text(containsString("Blue Button".toUpperCase()));

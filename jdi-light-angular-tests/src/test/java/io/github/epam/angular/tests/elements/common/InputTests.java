@@ -45,7 +45,7 @@ public class InputTests extends TestsInit {
     @Test
     public void autoResizingTextAreaTest() {
         autoSizeTextArea.isDisplayed();
-        autoSizeTextArea.hasClass("cdktextareaautosize");
+        autoSizeTextArea.has().cssClass("cdktextareaautosize");
         autoSizeTextArea.setLines("line1", "line2");
         autoSizeTextArea.addNewLine("line3");
         autoSizeTextArea.is().text("line1\nline2\nline3");

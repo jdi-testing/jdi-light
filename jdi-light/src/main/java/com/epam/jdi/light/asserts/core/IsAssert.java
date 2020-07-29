@@ -71,14 +71,6 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
     }
     /**
      * Match passed value with the element class
-     * @param className to compare
-     */
-    @JDIAction("Assert that '{name}' has css class {0}")
-    public IsAssert hasClass(String className) {
-        return cssClass(containsString(className));
-    }
-    /**
-     * Match passed value with the element class
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' css class {0}")
@@ -86,9 +78,12 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
         jdiAssert(element().classes(), condition);
         return this;
     }
-    public IsAssert cssClass(Matcher<String> condition) {
+    public IsAssert classValue(Matcher<String> condition) {
         jdiAssert(element().getAttribute("class"), condition);
         return this;
+    }
+    public IsAssert classValue(String value) {
+        return classValue(Matchers.is(value));
     }
     public IsAssert cssClass(String className) {
         return cssClasses(Matchers.hasItem(className));

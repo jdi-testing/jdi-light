@@ -88,7 +88,7 @@ public class ButtonTests implements TestsInit {
             .and().text(is(text))
             .core()
             .css("font-size", is("16px"))
-            .cssClass("btn btn-danger")
+            .classValue("btn btn-danger")
             .attr("type", "button")
             .tag(is("button"));
         disabledButton.is().text(containsString("Disabled button"));
