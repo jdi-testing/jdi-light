@@ -3,7 +3,7 @@ package io.github.epam.html.tests.retry;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 
-import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.redButton;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -23,7 +23,7 @@ public class RetryTest implements TestsInit {
     //@Test
     public void passedTest() {
         redButton.click();
-        validateAlert("Red button");
+        validateAndAcceptAlert("Red button");
     }
     //@Test
     public void retryPassTest() {
@@ -33,16 +33,16 @@ public class RetryTest implements TestsInit {
         log(time);
         log(fail);
         if (fail) {
-            validateAlert("Red button2");
+            validateAndAcceptAlert("Red button2");
         } else {
-            validateAlert("Red button");
+            validateAndAcceptAlert("Red button");
         }
     }
 
     //@Test
     public void failedTest() {
         redButton.click();
-        validateAlert("Red button2");
+        validateAndAcceptAlert("Red button2");
     }
     //@Step("{0}")
     public void log(Object status) {

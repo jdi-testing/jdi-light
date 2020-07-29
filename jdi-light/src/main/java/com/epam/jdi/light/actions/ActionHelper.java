@@ -2,9 +2,9 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.driver.ScreenshotMaker;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.common.Alerts;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
@@ -16,6 +16,7 @@ import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -40,15 +41,14 @@ import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.PageChecks.NONE;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
-import static com.epam.jdi.light.driver.ScreenshotMaker.takeRootScreenshot;
+import static com.epam.jdi.light.driver.ScreenshotMaker.takeRobotScreenshot;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
 import static com.epam.jdi.light.logger.AllureLogger.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
-import static com.epam.jdi.light.logger.Strategy.FAIL;
-import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
+import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.JsonUtils.beautifyJson;
@@ -139,19 +139,44 @@ public class ActionHelper {
         JoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
         if (jInfo.topLevel()) {
-            allureSteps.reset();
-            if (LOGS.writeToLog)
-                logger.toLog(message, logLevel(jp));
-            if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE || LOGS.screenStrategy.contains(NEW_PAGE))
-                processPage(jInfo);
-            if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
-                visualValidation(jp, message);
+            processBeforeAction(message, jInfo);
         }
         if (LOGS.writeToAllure && logLevel(jp).equalOrMoreThan(INFO) && (allureSteps.get().isEmpty() || !allureSteps.get().contains(message))) {
             jInfo.stepUId = startStep(message);
             allureSteps.get().add(message);
         }
     }
+    protected static void processBeforeAction(String message, ActionObject jInfo) {
+        allureSteps.reset();
+        JoinPoint jp = jInfo.jp();
+        if (LOGS.writeToLog)
+            logger.toLog(message, logLevel(jp));
+        if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE || LOGS.screenStrategy.contains(NEW_PAGE))
+            processPage(jInfo);
+        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
+            visualValidation(jp, message);
+        if (LOGS.screenStrategy.contains(ASSERT)) {
+            if (isInterface(jInfo.jpClass(), JAssert.class) || validateAlert(jInfo)) {
+                boolean lastActionIsNotAssert = isAssert.get() == null || !isAssert.get();
+                isAssert.set(true);
+                if (lastActionIsNotAssert) {
+                    if (!validateAlert(jInfo)) {
+                        takeScreen("Validate" + capitalize(jInfo.methodName()));
+                    } else {
+                        Timer.sleep(200);
+                        takeRobotScreenshot("Validate" + capitalize(jInfo.methodName()));
+                        //Timer.sleep(200);
+                    }
+                }
+            } else {
+                isAssert.set(false);
+            }
+        }
+    }
+    private static boolean validateAlert(ActionObject jInfo) {
+        return isClass(jInfo.jpClass(), Alerts.class) && jInfo.methodName().startsWith("validate");
+    }
+    public static Safe<Boolean> isAssert = new Safe<>(null);
     public static void beforeStepAction(JoinPoint jp) {
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
         logger.toLog(message, logLevel(jp));
@@ -180,10 +205,10 @@ public class ActionHelper {
     public static JAction1<ActionObject> BEFORE_JDI_ACTION = ActionHelper::beforeJdiAction;
     public static Object afterStepAction(ActionObject jInfo, Object result) {
         passStep(jInfo.stepUId);
-        processAction(jInfo, result);
+        afterAction(jInfo, result);
         return result;
     }
-    static void processAction(ActionObject jInfo, Object result) {
+    static void afterAction(ActionObject jInfo, Object result) {
         JoinPoint jp = jInfo.jp();
         if (logResult(jp)) {
             LogLevels logLevel = logLevel(jp);
@@ -196,8 +221,6 @@ public class ActionHelper {
                 logger.toLog(">>> " + text, logLevel);
             }
         }
-        if (jInfo.methodName().equals("open"))
-            PAGE.beforeNewPage.execute(getPage(jp.getThis()));
         TIMEOUTS.element.reset();
     }
     public static JFunc2<ActionObject, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
@@ -221,7 +244,7 @@ public class ActionHelper {
     public static Object afterJdiAction(ActionObject jInfo, Object result) {
         passStep(jInfo.stepUId);
         if (jInfo.topLevel()) {
-            processAction(jInfo, result);
+            afterAction(jInfo, result);
         }
         return result;
     }
@@ -284,8 +307,8 @@ public class ActionHelper {
         String errors = "";
         if (LOGS.screenStrategy.contains(FAIL))
             screenName = SCREEN.tool.equalsIgnoreCase("robot")
-                ? takeRootScreenshot()
-                : new ScreenshotMaker().takeScreenshot("Failed"+capitalize(jInfo.methodName()));
+                ? takeRobotScreenshot()
+                : takeScreen("Failed"+capitalize(jInfo.methodName()));
         if (LOGS.htmlCodeStrategy.contains(FAIL))
             htmlSnapshot = takeHtmlCodeOnFailure();
         if (LOGS.requestsStrategy.contains(FAIL)) {
@@ -332,8 +355,8 @@ public class ActionHelper {
             throw exception(ex, "Surround method issue: Can't get method name template");
         }
     }
-    static LogLevels logLevel(JoinPoint joinPoint) {
-        Method m = getJpMethod(joinPoint).getMethod();
+    static LogLevels logLevel(JoinPoint jp) {
+        Method m = getJpMethod(jp).getMethod();
         return m.isAnnotationPresent(JDIAction.class)
             ? m.getAnnotation(JDIAction.class).level()
             : INFO;

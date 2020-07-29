@@ -44,9 +44,16 @@ public class Alerts {
      * @param text to compare
      */
     @JDIAction
-    public static void validateAlert(Matcher<String> text) {
+    public static void validateAndAcceptAlert(Matcher<String> text) {
         assertThat(getAlertText(), text);
         acceptAlert();
+    }
+    public static void validateAndAcceptAlert(String text) {
+        validateAndAcceptAlert(is(text));
+    }
+    @JDIAction
+    public static void validateAlert(Matcher<String> text) {
+        assertThat(getAlertText(), text);
     }
     public static void validateAlert(String text) {
         validateAlert(is(text));

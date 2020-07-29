@@ -75,7 +75,6 @@ public class WebPage extends DriverBase implements PageObject {
     public static String getCurrentPage() {
         return currentPage.get();
     }
-    public static boolean pageChanged;
 
     public static void setCurrentPage(WebPage page) {
         String oldPage = currentPage.get();
@@ -522,7 +521,7 @@ public class WebPage extends DriverBase implements PageObject {
             visualWindowCheck();
         }
         if (LOGS.screenStrategy.contains(NEW_PAGE)) {
-            new ScreenshotMaker().takeScreenshot(page.getName());
+            takeScreen(page.getName());
         }
         logger.toLog("Page '" + page.getName() + "' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());

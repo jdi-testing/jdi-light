@@ -29,7 +29,9 @@ public class States {
         loginForm.isDisplayed();
         if (loginForm.isHidden())
             userIcon.click();
+        loginForm.is().displayed();
         loginForm.submit(DEFAULT_USER);
+        userName.has().text("ROMAN IOVLEV");
     }
 
     @Step

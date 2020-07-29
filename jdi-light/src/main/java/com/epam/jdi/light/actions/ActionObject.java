@@ -7,7 +7,9 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.reflect.MethodSignature;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,6 +105,13 @@ public class ActionObject {
         resetElementTimeout();
         isOverride.get().clear();
     }
+    public Method jpMethod() {
+        return ((MethodSignature)jp.getSignature()).getMethod();
+    }
+    public Class<?> jpClass() {
+        return getJpClass(jp);
+    }
+
     public String methodName() {
         return getMethodName(jp);
     }

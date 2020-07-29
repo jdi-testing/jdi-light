@@ -20,7 +20,7 @@ public class Header extends Section {
 	@UI("#login-form") public static Form<User> loginFormLightLocator;
 	@UI(".fa-sign-out") public static Button logout;
 	public static Icon userIcon;
-	public static Icon userName;
+	public static Button userName;
 	public static Image epamLogo;
 
 	@UI(".search-field input") static UIElement searchInput;

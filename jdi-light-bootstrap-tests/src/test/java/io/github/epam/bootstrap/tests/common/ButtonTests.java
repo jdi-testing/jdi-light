@@ -1,5 +1,6 @@
 package io.github.epam.bootstrap.tests.common;
 
+import com.epam.jdi.light.elements.common.Alerts;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -7,7 +8,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
-import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static com.epam.jdi.light.elements.common.Keyboard.press;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
@@ -48,7 +49,7 @@ public class ButtonTests implements TestsInit {
     @Test
     public void clickTest() {
         redButton.click();
-        validateAlert(is("Red button"));
+        Alerts.validateAndAcceptAlert(is("Red button"));
     }
 
     @Test
@@ -65,7 +66,7 @@ public class ButtonTests implements TestsInit {
     @Test
     public void doubleClickTest() {
         doubleButton.doubleClick();
-        validateAlert(is("Double Click"));
+        Alerts.validateAndAcceptAlert(is("Double Click"));
     }
 
     @Test
@@ -73,7 +74,7 @@ public class ButtonTests implements TestsInit {
         if (!getOs().equals(WIN)) return;
 
         redButton.rightClick();
-        validateAlert("Right Click");
+        validateAndAcceptAlert("Right Click");
         press(ESCAPE);
     }
 
