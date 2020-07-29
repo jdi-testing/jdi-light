@@ -45,7 +45,8 @@ public class TabsUnitTests extends TestsInit {
 
     @Test
     public void tabIsHighlightedTest() {
-        int tabNumberForTest = 1;
+        int tabNumberForTest = 3;
+        tabsSection.basicTabsSection.clickTab(tabNumberForTest);
         assertTrue(tabsSection.basicTabsSection.tabIsHighlighted(tabNumberForTest));
     }
 
