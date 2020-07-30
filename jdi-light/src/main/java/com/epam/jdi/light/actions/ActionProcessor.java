@@ -1,8 +1,10 @@
 package com.epam.jdi.light.actions;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
@@ -20,6 +22,7 @@ public class ActionProcessor {
     protected void jdiPointcut() {  }
     @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() {  }
+
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
         ActionObject jInfo = new ActionObject(jp);
@@ -37,5 +40,10 @@ public class ActionProcessor {
         finally {
             jInfo.clear();
         }
+    }
+
+    @Before("stepPointcut()")
+    public void step(JoinPoint jp) {
+        beforeStepAction(jp);
     }
 }

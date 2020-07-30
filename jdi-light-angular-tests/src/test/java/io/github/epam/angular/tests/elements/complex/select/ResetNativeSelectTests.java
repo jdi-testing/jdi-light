@@ -6,9 +6,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 import static io.github.com.pages.sections.SelectSection.resetNativeSelect;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.matchesPattern;
+import static org.hamcrest.Matchers.*;
 
 public class ResetNativeSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)

@@ -23,7 +23,7 @@ public class DisableNativeSelectTests extends TestsSelectBase {
     @Test
     public void verifyCheckboxCanDisableSelect() {
         pickDisableSelectCheckboxAsChecked();
-        disableNativeSelect.waitFor().assertThat().hasAttribute(DISABLED);
+        disableNativeSelect.waitFor().has().attr(DISABLED);
     }
 
     @Test

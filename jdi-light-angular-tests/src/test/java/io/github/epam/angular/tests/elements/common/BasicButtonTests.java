@@ -63,14 +63,14 @@ public class BasicButtonTests extends TestsInit {
     @Test
     public void clickTest() {
         basicBasicButton.click();
-        basicBasicButton.is().hasClass(FOCUSED_CLASS);
+        basicBasicButton.has().cssClass(FOCUSED_CLASS);
         basicButtonsSection.basicButtonsLabel.is().has().text(containsString(BASIC_TEXT));
     }
 
     @Test
     public void clickWithMoveTest() {
         basicWarnButton.click(ElementArea.TOP_LEFT);
-        basicWarnButton.is().hasClass(FOCUSED_CLASS);
+        basicWarnButton.has().cssClass(FOCUSED_CLASS);
         basicButtonsSection.basicButtonsLabel.is().has().text(containsString(WARN_TEXT));
     }
 
@@ -101,7 +101,7 @@ public class BasicButtonTests extends TestsInit {
                 .core()
                 .css("font-size", is("14px"))
                 .and()
-                .cssClass(containsString("mat-button"))
+                .cssClass("mat-button")
                 .and()
                 .attr("type")
                 .tag(is("button"));

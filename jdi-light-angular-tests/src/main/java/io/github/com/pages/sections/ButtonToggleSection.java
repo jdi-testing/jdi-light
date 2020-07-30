@@ -6,26 +6,26 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ButtonToggleSection {
     @UI("#bold-button-toggle-button")
-    public Button basicButtonToggleBold;
+    public static Button basicButtonToggleBold;
 
     @UI("#italic-button-toggle-button")
-    public Button basicButtonToggleItalic;
+    public static Button basicButtonToggleItalic;
 
     @UI("#underline-button-toggle-button")
-    public Button basicButtonToggleUnderline;
+    public static Button basicButtonToggleUnderline;
 
     @UI("#left-align-button-toggle-button")
-    public Button exclusiveButtonToggleLeft;
+    public static Button exclusiveButtonToggleLeft;
 
     @UI("#center-align-button-toggle-button")
-    public Button exclusiveButtonToggleCenter;
+    public static Button exclusiveButtonToggleCenter;
 
     @UI("#right-align-button-toggle-button")
-    public Button exclusiveButtonToggleRight;
+    public static Button exclusiveButtonToggleRight;
 
     @UI("#justify-align-button-toggle-button")
-    public Button exclusiveButtonToggleJustify;
+    public static Button exclusiveButtonToggleJustify;
 
     @UI("div.example-selected-value")
-    public Text selectedValue;
+    public static Text selectedValue;
 }

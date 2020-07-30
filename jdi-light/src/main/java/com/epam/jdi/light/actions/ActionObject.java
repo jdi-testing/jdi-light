@@ -5,17 +5,23 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.reflect.MethodSignature;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class ActionObject {
+    private JoinPoint jp;
+
     public ActionObject(ProceedingJoinPoint joinPoint) {
         this.jp = joinPoint;
         try {
@@ -26,8 +32,17 @@ public class ActionObject {
             this.elementTimeout = 10;
         }
     }
-    public ProceedingJoinPoint jp() { return jp; }
-    private ProceedingJoinPoint jp;
+    public JoinPoint jp() { return jp; }
+    public Object execute() throws Throwable {
+        return pjp().proceed();
+    }
+    public ProceedingJoinPoint pjp() {
+        try {
+            return (ProceedingJoinPoint) jp;
+        } catch (Exception ignore) {
+            throw exception("Failed to cast JoinPoint to ProceedingJoinPoint; AspectJ exception");
+        }
+    }
     public String stepUId = "";
     public boolean topLevel() {
         return aroundCount() == 1;
@@ -90,5 +105,21 @@ public class ActionObject {
     public void clear() {
         resetElementTimeout();
         isOverride.get().clear();
+    }
+    public Method jpMethod() {
+        return ((MethodSignature)jp.getSignature()).getMethod();
+    }
+    public Class<?> jpClass() {
+        return getJpClass(jp);
+    }
+
+    public String methodName() {
+        return getMethodName(jp);
+    }
+    public String className() {
+        return getJpClass(jp).getSimpleName();
+    }
+    public String methodFullName() {
+        return getClassMethodName(jp);
     }
 }
