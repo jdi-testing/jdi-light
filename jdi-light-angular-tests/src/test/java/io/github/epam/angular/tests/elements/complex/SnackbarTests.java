@@ -13,7 +13,6 @@ public class SnackbarTests extends TestsInit {
 
     private static final String MESSAGE = "Test Message";
     private static final String ACTION = "Test Action";
-    private static final int DURATION = 5;
 
     @BeforeMethod
     public void before() {
@@ -54,10 +53,12 @@ public class SnackbarTests extends TestsInit {
 
     @Test
     public void checkSnackbarDurationTest() {
+        final int DURATION = 5;
+
         snackbarSection.durationInput.setValue(String.valueOf(DURATION));
         snackbarSection.customSnackbarOpenButton.click();
 
-        duration(DURATION, () -> {
+        duration(DURATION, 1000, () -> {
             snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().displayed());
             snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().hidden());
         });

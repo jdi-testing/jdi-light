@@ -13,6 +13,10 @@ public class BaseValidationsUtils {
         validateDuration(duration * 1000 - 500, duration * 1000 + 500, action);
     }
 
+    public static void duration(int duration, int alpha, JAction action) {
+        validateDuration(duration * 1000 - alpha, duration * 1000 + alpha, action);
+    }
+
     private static void validateDuration(long min, long max, JAction action) {
         long passedTime = getDuration(action);
         assertThat(passedTime, greaterThan(min));
