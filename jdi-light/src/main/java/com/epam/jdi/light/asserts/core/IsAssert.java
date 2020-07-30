@@ -8,8 +8,9 @@ import com.epam.jdi.light.elements.common.UIElement;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.util.List;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.containsString;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -69,23 +70,23 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
     }
     /**
      * Match passed value with the element class
-     * @param className to compare
-     */
-    @JDIAction("Assert that '{name}' has css class {0}")
-    public IsAssert hasClass(String className) {
-        return cssClass(containsString(className));
-    }
-    /**
-     * Match passed value with the element class
      * @param condition to compare
      */
     @JDIAction("Assert that '{name}' css class {0}")
-    public IsAssert cssClass(Matcher<String> condition) {
-        jdiAssert(element().getAttribute("class"), condition);
+    public IsAssert cssClasses(Matcher<? super List<String>> condition) {
+        jdiAssert(element().classes(), condition);
         return this;
     }
+    @JDIAction("Assert that '{name}' css class {0}")
+    public IsAssert classValue(Matcher<String> condition) {
+        jdiAssert(element().attr("class"), condition);
+        return this;
+    }
+    public IsAssert classValue(String value) {
+        return classValue(Matchers.is(value));
+    }
     public IsAssert cssClass(String className) {
-        return cssClass(Matchers.is(className));
+        return cssClasses(Matchers.hasItem(className));
     }
 
     /**

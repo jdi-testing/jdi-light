@@ -27,17 +27,17 @@ public class AlertSteps {
     // region Verification
     @Then("^the Alert text equals to \"([^\"]*)\"$")
     public void alertTextEquals(String alertText) {
-        validateAlert(is(alertText));
+        validateAndAcceptAlert(is(alertText));
     }
 
     @Then("^the Alert text contains \"([^\"]*)\"$")
     public void alertTextContains(String alertText) {
-        validateAlert(containsString(alertText));
+        validateAndAcceptAlert(containsString(alertText));
     }
 
     @Then("^the Alert text matches to \"([^\"]*)\"$")
     public void alertTextMatches(String alertText) {
-        validateAlert(matchesPattern(alertText));
+        validateAndAcceptAlert(matchesPattern(alertText));
     }
     // endregion
 }

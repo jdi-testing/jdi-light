@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.durationImmediately;
@@ -36,7 +36,7 @@ public class PerformanceTests implements TestsInit {
     @Test
     public void suspendButtonTest() {
         durationMoreThan(3, () -> suspendButton.click());
-        validateAlert("Suspend button");
+        validateAndAcceptAlert("Suspend button");
     }
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
@@ -145,7 +145,7 @@ public class PerformanceTests implements TestsInit {
     @Test
     public void suspendButtonUITest() {
         durationMoreThan(3, () -> suspendButtonUI.click());
-        validateAlert("Suspend button");
+        validateAndAcceptAlert("Suspend button");
     }
     //if test fails then run `mvn clean install` in module JDI Light
     @Test

@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.buttonToggleSection;
+import static io.github.com.pages.sections.ButtonToggleSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class ButtonToggleTest extends TestsInit {
@@ -21,99 +21,99 @@ public class ButtonToggleTest extends TestsInit {
 
     @Test
     public void basicButtonToggleDisplayedTest() {
-        buttonToggleSection.basicButtonToggleBold.is().displayed();
-        buttonToggleSection.basicButtonToggleItalic.is().displayed();
-        buttonToggleSection.basicButtonToggleUnderline.is().displayed();
+        basicButtonToggleBold.is().displayed();
+        basicButtonToggleItalic.is().displayed();
+        basicButtonToggleUnderline.is().displayed();
     }
 
     @Test
     public void basicButtonToggleEnabledTest() {
-        buttonToggleSection.basicButtonToggleBold.is().enabled();
-        buttonToggleSection.basicButtonToggleItalic.is().enabled();
-        buttonToggleSection.basicButtonToggleUnderline.is().enabled();
+        basicButtonToggleBold.is().enabled();
+        basicButtonToggleItalic.is().enabled();
+        basicButtonToggleUnderline.is().enabled();
     }
 
     @Test
     public void basicBoldButtonToggleTest() {
-        buttonToggleSection.basicButtonToggleBold.click();
-        buttonToggleSection.basicButtonToggleBold.has().attr(pressedAttribute, buttonIsPressed);
-        buttonToggleSection.basicButtonToggleBold.click();
-        buttonToggleSection.basicButtonToggleBold.has().attr(pressedAttribute, buttonIsNotPressed);
+        basicButtonToggleBold.click();
+        basicButtonToggleBold.has().attr(pressedAttribute, buttonIsPressed);
+        basicButtonToggleBold.click();
+        basicButtonToggleBold.has().attr(pressedAttribute, buttonIsNotPressed);
     }
 
     @Test
     public void basicItalicButtonToggleTest() {
-        buttonToggleSection.basicButtonToggleItalic.click();
-        buttonToggleSection.basicButtonToggleItalic.has().attr(pressedAttribute, buttonIsPressed);
-        buttonToggleSection.basicButtonToggleItalic.click();
-        buttonToggleSection.basicButtonToggleItalic.has().attr(pressedAttribute, buttonIsNotPressed);
+        basicButtonToggleItalic.click();
+        basicButtonToggleItalic.has().attr(pressedAttribute, buttonIsPressed);
+        basicButtonToggleItalic.click();
+        basicButtonToggleItalic.has().attr(pressedAttribute, buttonIsNotPressed);
     }
 
     @Test
     public void basicUnderlineButtonToggleTest() {
-        buttonToggleSection.basicButtonToggleUnderline.click();
-        buttonToggleSection.basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsPressed);
-        buttonToggleSection.basicButtonToggleUnderline.click();
-        buttonToggleSection.basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsNotPressed);
+        basicButtonToggleUnderline.click();
+        basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsPressed);
+        basicButtonToggleUnderline.click();
+        basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsNotPressed);
     }
 
     @Test
     public void basicButtonToggleNamesTest() {
-        buttonToggleSection.basicButtonToggleBold.has().text("Bold");
-        buttonToggleSection.basicButtonToggleItalic.has().text("Italic");
-        buttonToggleSection.basicButtonToggleUnderline.has().text("Underline");
+        basicButtonToggleBold.has().text("Bold");
+        basicButtonToggleItalic.has().text("Italic");
+        basicButtonToggleUnderline.has().text("Underline");
     }
 
     @Test
     public void pressAllBasicButtonToggleTest() {
-        buttonToggleSection.basicButtonToggleBold.click();
-        buttonToggleSection.basicButtonToggleItalic.click();
-        buttonToggleSection.basicButtonToggleUnderline.click();
-        buttonToggleSection.basicButtonToggleBold.has().attr(pressedAttribute, buttonIsPressed);
-        buttonToggleSection.basicButtonToggleItalic.has().attr(pressedAttribute, buttonIsPressed);
-        buttonToggleSection.basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsPressed);
+        basicButtonToggleBold.click();
+        basicButtonToggleItalic.click();
+        basicButtonToggleUnderline.click();
+        basicButtonToggleBold.has().attr(pressedAttribute, buttonIsPressed);
+        basicButtonToggleItalic.has().attr(pressedAttribute, buttonIsPressed);
+        basicButtonToggleUnderline.has().attr(pressedAttribute, buttonIsPressed);
     }
 
     @Test
     public void exclusiveButtonToggleDisplayedTest() {
-        buttonToggleSection.exclusiveButtonToggleLeft.is().displayed();
-        buttonToggleSection.exclusiveButtonToggleCenter.is().displayed();
-        buttonToggleSection.exclusiveButtonToggleRight.is().displayed();
-        buttonToggleSection.exclusiveButtonToggleJustify.is().displayed();
+        exclusiveButtonToggleLeft.is().displayed();
+        exclusiveButtonToggleCenter.is().displayed();
+        exclusiveButtonToggleRight.is().displayed();
+        exclusiveButtonToggleJustify.is().displayed();
     }
 
     @Test
     public void exclusiveButtonToggleEnabledTest() {
-        buttonToggleSection.exclusiveButtonToggleLeft.is().enabled();
-        buttonToggleSection.exclusiveButtonToggleCenter.is().enabled();
-        buttonToggleSection.exclusiveButtonToggleRight.is().enabled();
-        buttonToggleSection.exclusiveButtonToggleJustify.is().disabled();
+        exclusiveButtonToggleLeft.is().enabled();
+        exclusiveButtonToggleCenter.is().enabled();
+        exclusiveButtonToggleRight.is().enabled();
+        exclusiveButtonToggleJustify.is().disabled();
     }
 
     @Test
     public void exclusiveButtonToggleTest() {
-        buttonToggleSection.exclusiveButtonToggleLeft.click();
-        buttonToggleSection.exclusiveButtonToggleLeft.has().attr(pressedAttribute, buttonIsPressed);
+        exclusiveButtonToggleLeft.click();
+        exclusiveButtonToggleLeft.has().attr(pressedAttribute, buttonIsPressed);
 
-        buttonToggleSection.exclusiveButtonToggleCenter.click();
-        buttonToggleSection.exclusiveButtonToggleCenter.has().attr(pressedAttribute, buttonIsPressed);
-        buttonToggleSection.exclusiveButtonToggleLeft.has().attr(pressedAttribute, buttonIsNotPressed);
+        exclusiveButtonToggleCenter.click();
+        exclusiveButtonToggleCenter.has().attr(pressedAttribute, buttonIsPressed);
+        exclusiveButtonToggleLeft.has().attr(pressedAttribute, buttonIsNotPressed);
 
-        buttonToggleSection.exclusiveButtonToggleRight.click();
-        buttonToggleSection.exclusiveButtonToggleRight.has().attr(pressedAttribute, buttonIsPressed);
-        buttonToggleSection.exclusiveButtonToggleCenter.has().attr(pressedAttribute, buttonIsNotPressed);
+        exclusiveButtonToggleRight.click();
+        exclusiveButtonToggleRight.has().attr(pressedAttribute, buttonIsPressed);
+        exclusiveButtonToggleCenter.has().attr(pressedAttribute, buttonIsNotPressed);
 
-        buttonToggleSection.exclusiveButtonToggleLeft.click();
-        buttonToggleSection.exclusiveButtonToggleRight.has().attr(pressedAttribute, buttonIsNotPressed);
+        exclusiveButtonToggleLeft.click();
+        exclusiveButtonToggleRight.has().attr(pressedAttribute, buttonIsNotPressed);
     }
 
     @Test
     public void exclusiveButtonToggleSelectedValueTest() {
-        buttonToggleSection.exclusiveButtonToggleLeft.click();
-        buttonToggleSection.selectedValue.has().text("Selected value: left");
-        buttonToggleSection.exclusiveButtonToggleCenter.click();
-        buttonToggleSection.selectedValue.has().text("Selected value: center");
-        buttonToggleSection.exclusiveButtonToggleRight.click();
-        buttonToggleSection.selectedValue.has().text("Selected value: right");
+        exclusiveButtonToggleLeft.click();
+        selectedValue.has().text("Selected value: left");
+        exclusiveButtonToggleCenter.click();
+        selectedValue.has().text("Selected value: center");
+        exclusiveButtonToggleRight.click();
+        selectedValue.has().text("Selected value: right");
     }
 }

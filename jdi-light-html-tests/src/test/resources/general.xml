@@ -2,9 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JDI-Light HTML Tests" parallel="methods" thread-count="1">
     <test name="Tests">
-        <!--packages>
-            <package name="io.github.epam.html.tests.retry"/>
-        </packages-->
         <packages>
             <package name="io.github.epam.html.tests.elements.common"/>
             <package name="io.github.epam.html.tests.elements.complex.*"/>

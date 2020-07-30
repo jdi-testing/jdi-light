@@ -186,6 +186,10 @@ public final class WebDriverByUtils {
         if (by.length() == 1) {
             return By.cssSelector(locator);
         }
+        if (by.matches("\\*=.*"))
+            return withText(by.substring(2));
+        if (by.matches("=.*"))
+            return byText(by.substring(1));
         return by.substring(0,2).contains("/") || by.contains("..") || by.charAt(0) == '('
                 ? By.xpath(locator)
                 : By.cssSelector(locator);

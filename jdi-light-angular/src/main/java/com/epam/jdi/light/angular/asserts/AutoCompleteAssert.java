@@ -1,13 +1,16 @@
 package com.epam.jdi.light.angular.asserts;
 
-import com.epam.jdi.light.angular.elements.complex.*;
-import com.epam.jdi.light.asserts.generic.*;
-import com.epam.jdi.light.common.*;
-import org.hamcrest.*;
+import com.epam.jdi.light.angular.elements.complex.AutoComplete;
+import com.epam.jdi.light.asserts.generic.ITextAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.common.JDIAction;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplete> implements ITextAssert<AutoCompleteAssert> {
 

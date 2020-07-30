@@ -7,23 +7,23 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 public class CheckboxSection {
 
     @UI("#checkboxes-basic_checkbox")
-    public Checkbox basicCheckbox;
+    public static Checkbox basicCheckbox;
 
     @UI("#checkboxes-set_checked_checkbox")
-    public Checkbox configurableCheckedCheckbox;
+    public static Checkbox configurableCheckedCheckbox;
 
     @UI("#checkboxes-set_indeterminate_checkbox")
-    public Checkbox configurableIndeterminateCheckbox;
+    public static Checkbox configurableIndeterminateCheckbox;
 
     @UI("#checkboxes-text_before_checkbox_radio")
-    public Button configurableCheckboxAlignBeforeRadioButton;
+    public static Button configurableCheckboxAlignBeforeRadioButton;
 
     @UI("#checkboxes-text_after_checkbox_radio")
-    public Button configurableCheckboxAlignAfterRadioButton;
+    public static Button configurableCheckboxAlignAfterRadioButton;
 
     @UI("#checkboxes-set_disabled_checkbox")
-    public Checkbox configurableDisabledCheckbox;
+    public static Checkbox configurableDisabledCheckbox;
 
     @UI("#checkboxes-configured_checkbox")
-    public Checkbox configurableResultCheckbox;
+    public static Checkbox configurableResultCheckbox;
 }

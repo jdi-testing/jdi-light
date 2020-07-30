@@ -1,5 +1,6 @@
 package io.github.epam.tests.recommended;
 
+import com.epam.jdi.light.elements.common.Alerts;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import io.github.epam.StaticTestsInit;
 import io.github.epam.custom.UserRow;
@@ -7,7 +8,7 @@ import io.github.epam.entities.UserInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.test.data.TableData.GRADY_BROCK;
@@ -79,7 +80,7 @@ public class DataTableTests extends StaticTestsInit {
 
     private void validateUserRow(UserRow line) {
         line.city.click();
-        validateAlert(is(GRADY_BROCK.city));
+        Alerts.validateAndAcceptAlert(is(GRADY_BROCK.city));
         assertEquals(line.email.getText(), GRADY_BROCK.email);
     }
 }

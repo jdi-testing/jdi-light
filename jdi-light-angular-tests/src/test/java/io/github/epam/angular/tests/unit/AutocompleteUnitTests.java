@@ -1,16 +1,20 @@
 package io.github.epam.angular.tests.unit;
 
-import io.github.epam.*;
-import org.testng.annotations.*;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static com.epam.jdi.light.common.Exceptions.*;
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.AngularPage.*;
-import static io.github.epam.site.steps.States.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
+import static com.epam.jdi.light.common.Exceptions.safeException;
+import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.AngularPage.autocompleteSection;
+import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.*;
 
 public class AutocompleteUnitTests extends TestsInit {

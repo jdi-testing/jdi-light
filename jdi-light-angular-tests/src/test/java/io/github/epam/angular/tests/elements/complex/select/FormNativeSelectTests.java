@@ -7,9 +7,7 @@ import java.util.Arrays;
 
 import static io.github.com.pages.sections.SelectSection.formNativeSelect;
 import static io.github.com.pages.sections.SelectSection.formNativeSelectConfirm;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.*;
 
 public class FormNativeSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)

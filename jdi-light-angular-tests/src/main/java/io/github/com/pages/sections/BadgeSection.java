@@ -9,20 +9,20 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 public class BadgeSection extends Section {
 
     @UI("#text-with-badge span")
-    public Badge badgeWithText;
+    public static Badge badgeWithText;
 
     @UI("#button-with-left-badge")
-    public Button buttonWithBadge;
+    public static Button buttonWithBadge;
 
     @UI("#button-with-left-badge span.mat-button-wrapper")
-    public Text textOnButton;
+    public static Text textOnButton;
 
     @UI("#button-with-left-badge span:not(.mat-button-wrapper)")
-    public Badge badgeWithButton;
+    public static Badge badgeWithButton;
 
     @UI("#icon-with-badge span")
-    public Badge badgeWithIcon;
+    public static Badge badgeWithIcon;
 
     @UI("#hidden-message")
-    public Text hiddenText;
+    public static Text hiddenText;
 }
