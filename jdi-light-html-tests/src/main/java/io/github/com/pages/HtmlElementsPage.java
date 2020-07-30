@@ -52,11 +52,9 @@ public class HtmlElementsPage extends WebPage {
     public static TextArea textArea;
     // @UI("#text-area") public static TextArea textArea;
     @UI("textarea[disabled]") public static TextArea disabledTextArea;
-
     public static FileInput avatar;
     // @UI("#avatar") public static FileInput avatar;
-    @UI("input[type=file][disabled]")
-    public static FileInput disabledFileInput;
+    @UI("input[type=file][disabled]") public static FileInput disabledFileInput;
     @UI("[download]") public static Link downloadJdiLogo;
 
     public static Image jdiLogo;

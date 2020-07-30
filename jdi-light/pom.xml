@@ -17,7 +17,7 @@
         <aspectj.maven>1.12.6</aspectj.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <java.version>1.8</java.version>
-        <log4j2.version>2.11.1</log4j2.version>
+        <log4j2.version>2.13.2</log4j2.version>
     </properties>
 
     <dependencies>
@@ -95,7 +95,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>22.0</version>
+            <version>[24.1.1,)</version>
         </dependency>
         <dependency>
             <groupId>com.google.api-client</groupId>
@@ -107,6 +107,10 @@
                     <artifactId>guava-jdk5</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency> <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-model</artifactId>
+            <version>RELEASE</version>
         </dependency>
     </dependencies>
 

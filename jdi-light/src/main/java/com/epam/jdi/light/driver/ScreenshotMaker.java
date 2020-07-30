@@ -1,5 +1,6 @@
 package com.epam.jdi.light.driver;
 
+import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.TakesScreenshot;
 
 import javax.imageio.ImageIO;
@@ -16,6 +17,7 @@ import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.Timer.nowTime;
+import static java.awt.Toolkit.getDefaultToolkit;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -27,9 +29,15 @@ import static org.openqa.selenium.OutputType.FILE;
  */
 public class ScreenshotMaker {
     public static String SCREEN_NAME = "screen";
+    public static String DEFAULT_DATE = "yyyy-MM-dd-HH-mm-ss";
+    public static JFunc2<String, String, String> FILE_NAME =
+        (name, dateFormat) -> nowTime(dateFormat) + name;
 
     public static String takeScreen() {
         return new ScreenshotMaker().takeScreenshot();
+    }
+    public static String takeScreen(String name) {
+        return new ScreenshotMaker().takeScreenshot(name);
     }
 
     public static String getPath() {
@@ -41,16 +49,16 @@ public class ScreenshotMaker {
     }
     public String takeScreenshot() {
         String name = TEST_NAME.get();
-        return takeScreenshot(isNotBlank(name) ? name : SCREEN_NAME, "yyyy-MM-dd-HH-mm-ss");
+        return takeScreenshot(isNotBlank(name) ? name : SCREEN_NAME, DEFAULT_DATE);
     }
     public String takeScreenshot(String value) {
-        return takeScreenshot(value, "yyyy-MM-dd-HH-mm-ss");
+        return takeScreenshot(value, DEFAULT_DATE);
     }
     public String takeScreenshot(String name, String dateFormat) {
         if (noRunDrivers())
             throw exception("Failed to do screenshot. No Drivers run");
         String screensFilePath = getFileName(mergePath(
-            getPath(), name + nowTime(dateFormat)));
+            getPath(), FILE_NAME.execute(name, dateFormat)));
         new File(screensFilePath).getParentFile().mkdirs();
         File screensFile = ((TakesScreenshot) getDriver()).getScreenshotAs(FILE);
         try {
@@ -70,15 +78,19 @@ public class ScreenshotMaker {
         return newName + "." + SCREEN.fileSuffix;
     }
 
-    public static String takeRootScreenshot() {
+    public static String takeRobotScreenshot() {
         String name = TEST_NAME.get();
-        return takeRootScreenshot(isNotBlank(name) ? name : SCREEN_NAME, "yyyy-MM-dd-HH-mm-ss");
+        return takeRobotScreenshot(isNotBlank(name) ? name : SCREEN_NAME, DEFAULT_DATE);
     }
-    public static String takeRootScreenshot(String name, String dateFormat) {
-        String screensFilePath = getFileName(mergePath(getPath(), name + nowTime(dateFormat)));
+    public static String takeRobotScreenshot(String name) {
+        return takeRobotScreenshot(name, DEFAULT_DATE);
+    }
+    public static String takeRobotScreenshot(String name, String dateFormat) {
+        if (!SCREEN.allowRobot)
+            return new ScreenshotMaker().takeScreenshot(name, dateFormat);
+        String screensFilePath = getFileName(mergePath(getPath(), FILE_NAME.execute(name, dateFormat)));
         try {
-            Rectangle rectangle = new Rectangle(
-                    Toolkit.getDefaultToolkit().getScreenSize());
+            Rectangle rectangle = new Rectangle(getDefaultToolkit().getScreenSize());
             new File(screensFilePath).getParentFile().mkdirs();
             Robot robot = new Robot();
             BufferedImage img = robot.createScreenCapture(rectangle);

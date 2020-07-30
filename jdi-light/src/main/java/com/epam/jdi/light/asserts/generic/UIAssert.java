@@ -8,6 +8,8 @@ import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.util.List;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.tools.StringUtils.format;
 
@@ -106,21 +108,38 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
         return css(css, Matchers.is(value));
     }
 
-    /**
-     * Match passed value with the element class
-     * @param className to compare hasClass(String className)
-     */
-    @JDIAction("Assert that '{name}' has css class {0}")
-    public A hasClass(String className) {
-        jdiAssert(format(element().classes().contains(className) ? "has class '%s'" : "has no class '%s'", className) , Matchers.is("has class '"+className+"'"));
+    @JDIAction("Assert that '{name}' css class {0}")
+    public A cssClasses(Matcher<? super List<String>> condition) {
+        jdiAssert(element().classes(), condition);
         return (A) this;
     }
+    @JDIAction("Assert that '{name}' css class {0}")
+    public A classValue(Matcher<String> condition) {
+        jdiAssert(element().core().attr("class"), condition);
+        return (A) this;
+    }
+    public A classValue(String value) {
+        return classValue(Matchers.is(value));
+    }
+    public A cssClass(String className) {
+        return cssClasses(Matchers.hasItem(className));
+    }
+
+    @JDIAction("Assert that '{name}' tag {0}")
+    public A tag(Matcher<String> condition) {
+        jdiAssert(element().getTagName(), condition);
+        return (A) this;
+    }
+    public A tag(String tagName) {
+        return tag(Matchers.is(tagName));
+    }
+
     /**
      * Match passed value with the element class
-     * @param attrName to compare hasAttribute(String className)
+     * @param attrName to compare attr(String attrName)
      */
     @JDIAction("Assert that '{name}' has css class {0}")
-    public A hasAttribute(String attrName) {
+    public A attr(String attrName) {
         jdiAssert(format(element().hasAttribute(attrName) ? "has attribute '%s'" : "has no attribute '%s'", attrName) , Matchers.is("has attribute '"+attrName+"'"));
         return (A) this;
     }

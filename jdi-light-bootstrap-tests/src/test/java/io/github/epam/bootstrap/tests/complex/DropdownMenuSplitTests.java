@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.dropdownMenuSplit;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
@@ -32,18 +32,18 @@ public class DropdownMenuSplitTests implements TestsInit {
     @Test
     public void selectTest() {
         dropdownMenuSplit.select("Paper");
-        validateAlert("Paper clicked");
+        validateAndAcceptAlert("Paper clicked");
     }
 
     @Test
     public void selectEnumTest() {
         dropdownMenuSplit.select(Scissors);
-        validateAlert("Scissors clicked");
+        validateAndAcceptAlert("Scissors clicked");
     }
     @Test
     public void selectNumTest() {
         dropdownMenuSplit.select(1);
-        validateAlert("Stone clicked");
+        validateAndAcceptAlert("Stone clicked");
     }
     @Test
     public void selectedTest() {

@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -28,10 +29,10 @@ public class StaticSite {
 	public static MetalAndColorsPage metalAndColorsPage;
 	@Url("/contacts.html") @Title("Contact Form")
 	public static ContactFormPage contactFormPage;
-	@Url(value = "/html5/%s", template = "/html5/+*", validate = CONTAINS)
-	public static HtmlElementsPage htmlElementsPage2;
 	@Url("/html5.html") public static HtmlElementsPage html5Page;
-	@Url("/suspend-html-page.html") public static HtmlElementsPage suspendHtml5Page;
+	@Url("/suspend-html-page.html") public static WebPage suspendHtml5Page;
+	@Url(value = "/html5/%s", template = "/html5/+*", validate = CONTAINS)
+	public static WebPage htmlElementsPage2;
 	@Url("/dates.html") @Title("Dates")
 	public static DatesPage datesPage;
 	@Url("/user-table.html") @Title("User Table")

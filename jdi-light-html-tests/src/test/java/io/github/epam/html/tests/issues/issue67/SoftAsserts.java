@@ -47,7 +47,7 @@ public class SoftAsserts implements TestsInit {
                 .disappear();
             redButton.is().text(is("Big Red *** Button-Input"))
                 .text(containsString("Red Button"))
-                .core().cssClass(is("uui-button red"))
+                .classValue(is("uui-button red"))
                 .attr("type", is("button"))
                 .tag(is("input"))
 
