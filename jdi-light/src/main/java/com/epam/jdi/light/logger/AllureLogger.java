@@ -73,7 +73,7 @@ public class AllureLogger {
         addAttachment(name, type, htmlSnapshot, "html");
     }
 
-    private static void attachScreenshot(String screenName) throws IOException {
+    public static void attachScreenshot(String screenName) throws IOException {
         addAttachment("Page screenshot", new ByteArrayInputStream(readAllBytes(get(screenName))));
     }
 

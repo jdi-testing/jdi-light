@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.badgeSection;
+import static io.github.com.pages.sections.BadgeSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class BadgeTests extends TestsInit {
@@ -18,32 +18,32 @@ public class BadgeTests extends TestsInit {
 
     @Test
     public void basicBadgeTest() {
-        badgeSection.badgeWithText.is().displayed();
-        badgeSection.badgeWithButton.is().displayed();
-        badgeSection.badgeWithIcon.is().displayed();
+        badgeWithText.is().displayed();
+        badgeWithButton.is().displayed();
+        badgeWithIcon.is().displayed();
     }
 
     @Test
     public void badgeTextTest() {
-        badgeSection.badgeWithText.has().text("4");
-        badgeSection.badgeWithButton.has().text("8");
-        badgeSection.badgeWithIcon.has().text("15");
+        badgeWithText.has().text("4");
+        badgeWithButton.has().text("8");
+        badgeWithIcon.has().text("15");
     }
 
     @Test
     public void hiddenMessageTest() {
-        badgeSection.hiddenText.isNotExist();
-        badgeSection.buttonWithBadge.click();
-        badgeSection.hiddenText.is().displayed();
-        badgeSection.hiddenText.has().text("Top secret message");
-        badgeSection.buttonWithBadge.click();
+        hiddenText.isNotExist();
+        buttonWithBadge.click();
+        hiddenText.is().displayed();
+        hiddenText.has().text("Top secret message");
+        buttonWithBadge.click();
     }
 
     @Test
     public void textOnShowMessageButtonTest() {
-        badgeSection.textOnButton.has().text("Show message");
-        badgeSection.buttonWithBadge.click();
-        badgeSection.textOnButton.has().text("Hide message");
-        badgeSection.buttonWithBadge.click();
+        textOnButton.has().text("Show message");
+        buttonWithBadge.click();
+        textOnButton.has().text("Hide message");
+        buttonWithBadge.click();
     }
 }

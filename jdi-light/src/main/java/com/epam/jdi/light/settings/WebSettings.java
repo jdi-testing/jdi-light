@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PropReader;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
@@ -41,11 +42,11 @@ import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
-import static com.epam.jdi.light.logger.Strategy.FAIL;
-import static com.epam.jdi.light.logger.Strategy.parseStrategy;
+import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.Strategies.*;
 import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PathUtils.mergePath;
@@ -165,6 +166,10 @@ public class WebSettings {
             fillAction(WebSettings::setDomain, "domain");
             fillAction(p -> SCREEN.path = p, "screens.folder");
             fillAction(p -> SCREEN.tool = p, "screenshot.tool");
+            if (SCREEN.tool.equals("robot")) {
+                SCREEN.allowRobot = true;
+            }
+            fillAction(p -> SCREEN.allowRobot = parseBoolean(p), "allow.robot");
             fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
             fillAction(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
             fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
@@ -363,9 +368,11 @@ public class WebSettings {
             return asList(FAIL);
         if (strategy.trim().equalsIgnoreCase("off"))
             return new ArrayList<>();
+        if (strategy.trim().equalsIgnoreCase("flow"))
+            return list(NEW_PAGE, FAIL, ASSERT);
         List<com.epam.jdi.light.logger.Strategy> strategies = new ArrayList<>();
         try {
-            String[] split = strategy.split(";");
+            String[] split = strategy.split("\\|");
             strategies = map(split, s -> parseStrategy(s.trim()));
         } catch (Exception ignore) { }
         return strategies;

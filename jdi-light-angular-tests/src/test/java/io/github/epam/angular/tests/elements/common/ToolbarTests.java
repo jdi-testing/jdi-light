@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static io.github.com.pages.sections.ToolbarSection.*;
+import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
 public class ToolbarTests extends TestsInit {
@@ -25,7 +25,7 @@ public class ToolbarTests extends TestsInit {
         String textForTest = "My App";
         String classForTest = "mat-toolbar";
         toolbarTextArea.is().displayed();
-        toolbarTable.is().hasClass(classForTest);
+        toolbarTable.has().cssClass(classForTest);
         toolbarTextArea.is().text(containsString(textForTest));
     }
 
@@ -34,7 +34,7 @@ public class ToolbarTests extends TestsInit {
         String classForTest = "mat-toolbar";
         List<String> listForTest = Arrays.asList("Custom Toolbar", "Second Line", "Third Line");
         toolbarTable.is().displayed();
-        toolbarTable.is().hasClass(classForTest);
+        toolbarTable.has().cssClass(classForTest);
         toolbarRowsElementsWithText.is().values(listForTest);
     }
 
