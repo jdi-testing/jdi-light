@@ -3,6 +3,7 @@
 <suite name="JDI-Light Applitools Tests" parallel="classes" thread-count="1">
     <test name="Tests">
         <packages>
+            <package name="com.jdi.tests"/>
             <package name="org.mytests.tests.example"/>
         </packages>
     </test>

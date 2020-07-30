@@ -72,10 +72,10 @@ public class AlertsTests implements TestsInit {
     @Test
     public void validateAlertTest() {
         redButton.click();
-        validateAlert(is("Red button"));
+        validateAndAcceptAlert(is("Red button"));
         redButton.click();
-        validateAlert(equalToIgnoringCase("red button"));
+        validateAndAcceptAlert(equalToIgnoringCase("red button"));
         redButton.click();
-        validateAlert(containsString("Red"));
+        validateAndAcceptAlert(containsString("Red"));
     }
 }

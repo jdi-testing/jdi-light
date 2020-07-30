@@ -89,7 +89,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>22.0</version>
+            <version>[24.1.1,)</version>
         </dependency>
         <dependency>
             <groupId>com.google.api-client</groupId>
@@ -101,6 +101,10 @@
                     <artifactId>guava-jdk5</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency> <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-model</artifactId>
+            <version>RELEASE</version>
         </dependency>
     </dependencies>
 
