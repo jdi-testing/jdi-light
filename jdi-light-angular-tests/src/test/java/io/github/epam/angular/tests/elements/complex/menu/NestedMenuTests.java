@@ -19,7 +19,7 @@ public class NestedMenuTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
-            nestedMenu.show();
+        nestedMenu.show();
     }
 
     @Test
@@ -79,7 +79,7 @@ public class NestedMenuTests extends TestsInit {
 
     @AfterMethod(alwaysRun = true)
     public void after() {
-        if (nestedMenu.isExpanded()){
+        if (nestedMenu.isExpanded()) {
             nestedMenu.close();
         }
     }

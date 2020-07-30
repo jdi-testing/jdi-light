@@ -74,11 +74,9 @@ public class MenuUnitTests extends TestsInit {
         if (basicMenu.isExpanded()){
             basicMenu.close();
         }
-
         if (menuWithIcons.isExpanded()){
             menuWithIcons.close();
         }
-
         if (nestedMenu.isExpanded()){
             nestedMenu.close();
         }

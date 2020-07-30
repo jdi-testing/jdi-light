@@ -71,7 +71,6 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
 
     @JDIAction("Check {name} is closed")
     public boolean checkValue(String expectedValue, String actualValue) {
-
         return actualValue.equals(expectedValue);
     }
 
@@ -92,7 +91,6 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         }
         return list;
     }
-
 
     public List<String> values() {
         return lastOpenedOptionsElements().values();
@@ -117,8 +115,6 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
     @JDIAction("Check {name} option is disabled")
     public boolean isDisabledNestedMenuOption(String... values) {
         return Boolean.parseBoolean(select(values).attr("aria-disabled"));
-
-
     }
 
     public UIElement select(String... values) {
