@@ -13,15 +13,15 @@ public class ContactsAppTests extends ContactsAppTestsInit {
 
     @Test
     public void systemButtonTest() {
-        ContactsListPage.groupsButton.tap();
+        ContactsListPage.contactsNavigationBar.groupsButton.tap();
         GroupsPage.groupsBar.is().displayed();
         GroupsPage.doneButton.done();
         ContactsListPage.contactsListView.is().displayed();
 
-        ContactsListPage.addButton.tap();
+        ContactsListPage.contactsNavigationBar.addButton.tap();
         AddNewContactPage.newContactNavBar.is().displayed();
         AddNewContactPage.cancelButton.cancel();
-        ContactsListPage.addButton.is().displayed();
+        ContactsListPage.contactsNavigationBar.addButton.is().displayed();
     }
 
     @Test
@@ -30,5 +30,28 @@ public class ContactsAppTests extends ContactsAppTestsInit {
         ContactContextMenu.johnAppleseedPhoto.is().displayed();
         ContactContextMenu.messageOptionExpand.tap();
         ContactContextMenu.johnAppleseedEmail.is().displayed();
+    }
+
+    @Test
+    public void navigationBarTest() {
+        ContactsListPage.contactsNavigationBar.is().displayed();
+        ContactsListPage.contactsNavigationBar.groupsButton.is().displayed();
+        ContactsListPage.contactsNavigationBar.tapBarButton("Groups");
+        GroupsPage.groupsBar.is().displayed();
+        GroupsPage.groupsBar.tapBarButton("Done");
+
+        ContactsListPage.contactsNavigationBar.groupsButton.tap();
+        GroupsPage.groupsBar.is().displayed();
+        GroupsPage.doneButton.done();
+
+        ContactsListPage.contactsNavigationBar.addButton.tap();
+        AddNewContactPage.newContactNavBar.is().displayed();
+        AddNewContactPage.cancelButton.cancel();
+        ContactsListPage.contactsNavigationBar.addButton.is().displayed();
+
+        ContactsListPage.contactsNavigationBar.tapBarButton("Add");
+        AddNewContactPage.newContactNavBar.is().displayed();
+        AddNewContactPage.newContactNavBar.tapBarButton("Cancel");
+        ContactsListPage.contactsNavigationBar.addButton.is().displayed();
     }
 }

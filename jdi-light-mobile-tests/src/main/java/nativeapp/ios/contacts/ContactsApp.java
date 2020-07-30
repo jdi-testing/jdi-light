@@ -8,7 +8,5 @@ public class ContactsApp {
     public static ContactsListPage contactsListPage;
     public static AddNewContactPage addNewContactPage;
 
-//    @MobileFindBy(xpath = "//XCUIElementTypeApplication[@name=\"Contacts\"]/XCUIElementTypeWindow[1]" +
-//            "/XCUIElementTypeOther/XCUIElementTypeOther[2]")
     public static ContactContextMenu contactContextMenu;
 }

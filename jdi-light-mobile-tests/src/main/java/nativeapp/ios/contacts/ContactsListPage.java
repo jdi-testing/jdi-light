@@ -14,4 +14,7 @@ public class ContactsListPage {
     public static Button addButton;
     @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"John Appleseed\"]")
     public static MobileAppUIElement johnAppleseedCard;
+
+    @MobileFindBy(xpath = "//XCUIElementTypeNavigationBar[@name='Contacts']")
+    public static ContactsNavigationBar contactsNavigationBar;
 }
