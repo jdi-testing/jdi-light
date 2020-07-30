@@ -29,7 +29,7 @@ public class TabsAssert extends UIAssert<TabsAssert, Tabs> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is highlighted when {0} tab number is provided")
+    @JDIAction("Assert that '{name}' is highlighted when '{0}' tab number is provided")
     public TabsAssert assertTabIsHighlighted(int tabNumber) {
         jdiAssert(element.tabIsHighlighted(tabNumber), Matchers.is(true));
         return this;
@@ -42,9 +42,10 @@ public class TabsAssert extends UIAssert<TabsAssert, Tabs> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is highlighted when {0} tab number is provided")
+    @JDIAction("Assert that '{name}' is highlighted when '{0}' tab number is provided")
     public TabsAssert assertTabWithLinkIsHighlighted(String tabTitle) {
         jdiAssert(element.tabWithLinkIsHighlighted(tabTitle), Matchers.is(true));
         return this;
     }
+
 }

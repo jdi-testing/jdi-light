@@ -59,5 +59,4 @@ public class TabSection {
     @UI("#toggle-background-button")
     public Button  toggleBackgroundButton;
 
-
 }

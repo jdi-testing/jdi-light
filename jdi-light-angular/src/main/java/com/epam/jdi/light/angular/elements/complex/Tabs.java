@@ -94,6 +94,7 @@ public class Tabs extends UIBaseElement<TabsAssert> implements IsText {
     public TabsAssert is() {
         return new TabsAssert().set(this);
     }
+
 }
 
 

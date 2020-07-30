@@ -353,4 +353,5 @@ public class TabsTests extends TestsInit {
         tabsSection.tabsNavBar.has().attr(CLASS_ATTR, "mat-tab-nav-bar mat-tab-header mat-primary " +
                 "mat-background-primary");
     }
+
 }

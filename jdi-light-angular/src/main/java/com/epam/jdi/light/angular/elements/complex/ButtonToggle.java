@@ -24,4 +24,5 @@ public class ButtonToggle extends UIBaseElement<TabsAssert> {
         }
         return element;
     }
+
 }
