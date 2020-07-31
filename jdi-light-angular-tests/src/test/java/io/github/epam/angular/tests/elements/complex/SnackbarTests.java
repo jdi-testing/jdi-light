@@ -29,7 +29,6 @@ public class SnackbarTests extends TestsInit {
         snackbarSection.basicSnackbar.is().displayed();
         snackbarSection.basicSnackbar.has().message(MESSAGE);
         snackbarSection.basicSnackbar.has().action(ACTION);
-        snackbarSection.basicSnackbar.is().disappear();
     }
 
     @Test
@@ -53,7 +52,7 @@ public class SnackbarTests extends TestsInit {
 
     @Test
     public void checkSnackbarDurationTest() {
-        final int DURATION = 5;
+        final int DURATION = 7;
 
         snackbarSection.durationInput.setValue(String.valueOf(DURATION));
         snackbarSection.customSnackbarOpenButton.click();
