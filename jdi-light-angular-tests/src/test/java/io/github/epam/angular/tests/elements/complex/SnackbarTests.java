@@ -52,12 +52,11 @@ public class SnackbarTests extends TestsInit {
 
     @Test
     public void checkSnackbarDurationTest() {
-        final int DURATION = 7;
-
+        final int DURATION = 5;
         snackbarSection.durationInput.setValue(String.valueOf(DURATION));
-        snackbarSection.customSnackbarOpenButton.click();
 
         duration(DURATION, 1000, () -> {
+            snackbarSection.customSnackbarOpenButton.click();
             snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().displayed());
             snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().hidden());
         });
