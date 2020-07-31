@@ -5,7 +5,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.JoinPoint;
 
 import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
@@ -16,9 +16,9 @@ import static org.apache.logging.log4j.util.Strings.isNotBlank;
  */
 public class ActionOverride {
     private ActionOverride() { }
-    static MapArray<JFunc1<ProceedingJoinPoint, Boolean>, JFunc1<Object, Object>> OVERRIDE_ACTIONS_LIST =
+    static MapArray<JFunc1<JoinPoint, Boolean>, JFunc1<Object, Object>> OVERRIDE_ACTIONS_LIST =
         new MapArray<>();
-    public static void overrideFunction(JFunc1<ProceedingJoinPoint, Boolean> condition, JFunc1<Object, Object> func) {
+    public static void overrideFunction(JFunc1<JoinPoint, Boolean> condition, JFunc1<Object, Object> func) {
         OVERRIDE_ACTIONS_LIST.add(condition, func);
     }
     public static void overrideFunction(String actionName, JFunc1<Object, Object> func) {
@@ -28,7 +28,7 @@ public class ActionOverride {
         OVERRIDE_ACTIONS_LIST.add(jp -> getJpTypeName(jp).equals(typeName)
                 && jp.getSignature().getName().equals(actionName), func);
     }
-    private static String getJpTypeName(ProceedingJoinPoint jp) {
+    private static String getJpTypeName(JoinPoint jp) {
         Object obj = jp.getThis();
         if (obj == null) {
             return getJpClass(jp).getSimpleName();
@@ -38,7 +38,7 @@ public class ActionOverride {
             ? typeName
             : jp.getThis().getClass().getSimpleName();
     }
-    public static void overrideAction(JFunc1<ProceedingJoinPoint, Boolean> condition, JAction1<Object> action) {
+    public static void overrideAction(JFunc1<JoinPoint, Boolean> condition, JAction1<Object> action) {
         overrideFunction(condition, jdi -> {
             action.execute(jdi);
             return null;
@@ -56,9 +56,9 @@ public class ActionOverride {
             return null;
         });
     }
-    public static JFunc1<Object, Object> getOverrideAction(ProceedingJoinPoint jp) {
+    public static JFunc1<Object, Object> getOverrideAction(JoinPoint jp) {
         if (OVERRIDE_ACTIONS_LIST.isEmpty()) return null;
-        for (Pair<JFunc1<ProceedingJoinPoint, Boolean>, JFunc1<Object, Object>> override : OVERRIDE_ACTIONS_LIST)
+        for (Pair<JFunc1<JoinPoint, Boolean>, JFunc1<Object, Object>> override : OVERRIDE_ACTIONS_LIST)
             if (override.key.execute(jp))
                 return override.value;
         return null;

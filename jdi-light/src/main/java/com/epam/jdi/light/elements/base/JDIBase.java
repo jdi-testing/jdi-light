@@ -182,7 +182,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
             = "Found %s elements instead of one for Element '%s' during %s seconds";
     public static final String ELEMENTS_FILTERED_MESSAGE
-            = "Found %s elements but none pass results filtering. Please change locator or filtering rules (WebSettings.SEARCH_RULE = )" +
+            = "Found %s elements but none pass results filtering. Please change locator or filtering rules (JDISettings.ELEMENT.searchRule = )" +
             LINE_BREAK + "Element '%s' search during %s seconds";
 
     public WebElement getWebElement() {
@@ -197,7 +197,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     private static void validateFoundElement(JDIBase base, WebElement element) {
         for (JFunc1<WebElement, Boolean> rule : base.searchRules().values())
             if (!rule.execute(element))
-                throw exception("Search rules failed for element. Please check searchRules() for element or in global settings(WebSettings.SEARCH_RULE)");
+                throw exception("Search rules failed for element. Please check base().searchRules() for element or in global settings(JDISettings.ELEMENT.searchRule)");
     }
     protected JFunc<WebElement> getElementFunc = null;
     public JDIBase setGetFunc(JFunc<WebElement> func) {
