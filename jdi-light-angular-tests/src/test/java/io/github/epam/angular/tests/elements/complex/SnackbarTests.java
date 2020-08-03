@@ -55,7 +55,7 @@ public class SnackbarTests extends TestsInit {
         final int DURATION = 5;
         snackbarSection.durationInput.setValue(String.valueOf(DURATION));
 
-        duration(DURATION, 1000, () -> {
+        duration(DURATION, 1500, () -> {
             snackbarSection.customSnackbarOpenButton.click();
             snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().displayed());
             snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().hidden());
