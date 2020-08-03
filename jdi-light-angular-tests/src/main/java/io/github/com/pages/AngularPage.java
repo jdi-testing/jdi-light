@@ -40,6 +40,7 @@ public class AngularPage extends WebPage {
     public static BasicButtonsSection basicButtonsSection;
     public static AutocompleteSection autocompleteSection;
     public static ButtonToggleSection buttonToggleSection;
+    public static ProgressBarSection progressBarSection;
     public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
     public static SliderSection sliderSection;
