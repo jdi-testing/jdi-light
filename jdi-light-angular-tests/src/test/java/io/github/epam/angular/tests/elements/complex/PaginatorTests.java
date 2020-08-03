@@ -13,6 +13,10 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class PaginatorTests extends TestsInit {
 
+    final String PAGESIZEOPTIONS = "1,5,10,25,100,500";
+    final int TOTAL = 50;
+    final int STEP = 10;
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -26,9 +30,6 @@ public class PaginatorTests extends TestsInit {
 
     @Test
     public void basicNavigationPaginatorTest() {
-        final int STEP = 10;
-        final int TOTAL = 50;
-
         paginatorSection.listLength.setValue(String.valueOf(TOTAL));
         paginatorSection.pageSize.setValue(String.valueOf(STEP));
 
@@ -63,7 +64,7 @@ public class PaginatorTests extends TestsInit {
 
     @Test
     public void navigationDisabledPaginatorTest() {
-        final String PAGESIZEOPTIONS = "5,10,25,100";
+        paginatorSection.pageSizeOptions.setValue(PAGESIZEOPTIONS);
 
         paginatorSection.listLength.setValue("0");
 
@@ -79,7 +80,6 @@ public class PaginatorTests extends TestsInit {
 
     @Test
     public void pageSizeOptionsPaginatorTest() {
-        final String PAGESIZEOPTIONS = "1,5,10,25,100,500";
         paginatorSection.pageSizeOptions.setValue(PAGESIZEOPTIONS);
 
         List<String> values = Arrays.asList(PAGESIZEOPTIONS.split(","));
@@ -88,19 +88,15 @@ public class PaginatorTests extends TestsInit {
 
     @Test
     public void itemPerPagePaginatorTest() {
-        final int TOTAL = 50;
-        final String PAGESIZEOPTIONS = "5,10,25,100";
-
         paginatorSection.listLength.setValue(String.valueOf(TOTAL));
         paginatorSection.pageSizeOptions.setValue(PAGESIZEOPTIONS);
 
-
         String[] options = PAGESIZEOPTIONS.split(",");
         for(String option : options) {
-            int i = Integer.valueOf(option);
+            int i = Integer.parseInt(option);
 
             paginatorSection.paginator.select(i);
-            paginatorSection.paginator.is().range(1, i < TOTAL ? i : TOTAL, TOTAL);
+            paginatorSection.paginator.is().range(1, Math.min(i, TOTAL), TOTAL);
         }
     }
 }
