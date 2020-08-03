@@ -1,6 +1,6 @@
 package com.epam.jdi.light.angular.asserts;
 
-import com.epam.jdi.light.angular.elements.complex.Tab;
+import com.epam.jdi.light.angular.elements.complex.TabGroup;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class TabsAssert extends UIAssert<TabsAssert, Tab> {
+public class TabsAssert extends UIAssert<TabsAssert, TabGroup> {
 
     @JDIAction("Assert that '{name}' has tabs count")
     public TabsAssert assertTabsCount(int tabsCountForTest) {

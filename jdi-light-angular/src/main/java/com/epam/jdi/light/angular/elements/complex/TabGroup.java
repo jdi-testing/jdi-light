@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 
 import java.util.List;
 
-public class Tab extends UIBaseElement<TabsAssert> implements IsText {
+public class TabGroup extends UIBaseElement<TabsAssert> implements IsText {
 
     /*TABS */
     private WebList getTabs() {
