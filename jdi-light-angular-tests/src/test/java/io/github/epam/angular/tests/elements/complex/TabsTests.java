@@ -232,7 +232,7 @@ public class TabsTests extends TestsInit {
         int tabNumberForTest = 3;
         refresh();
         tabsSection.tabsWithLazyLoadedContent.clickTab(tabNumberForTest);
-        SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("MMM dd, yyyy, h:mm:ss aa");
+        SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("MMM d, yyyy, h:mm:ss aa");
         dateTimeInGMT.setTimeZone(TimeZone.getTimeZone("GMT+3"));
         String timeForTest = dateTimeInGMT.format(new Date());
         String stringForTest = String.format("Content %s - Loaded: %s", tabNumberForTest, timeForTest);
