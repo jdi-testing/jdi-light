@@ -13,9 +13,8 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class PaginatorTests extends TestsInit {
 
-    final String PAGESIZEOPTIONS = "1,5,10,25,100,500";
-    final int TOTAL = 50;
-    final int STEP = 10;
+    private final String PAGESIZEOPTIONS = "1,5,10,25,100,500";
+    private final int TOTAL = 50;
 
     @BeforeMethod
     public void before() {
@@ -30,6 +29,8 @@ public class PaginatorTests extends TestsInit {
 
     @Test
     public void basicNavigationPaginatorTest() {
+        int STEP = 10;
+
         paginatorSection.listLength.setValue(String.valueOf(TOTAL));
         paginatorSection.pageSize.setValue(String.valueOf(STEP));
 
@@ -50,7 +51,7 @@ public class PaginatorTests extends TestsInit {
         paginatorSection.paginator.is().nextDisabled();
         paginatorSection.paginator.previous();
 
-        for (int i = TOTAL - 2*STEP + 1; i > 1; i -= STEP) {
+        for (int i = TOTAL - 2* STEP + 1; i > 1; i -= STEP) {
             paginatorSection.paginator.is().range(i, i + STEP - 1, TOTAL);
             paginatorSection.paginator.is().previousEnabled();
             paginatorSection.paginator.is().nextEnabled();

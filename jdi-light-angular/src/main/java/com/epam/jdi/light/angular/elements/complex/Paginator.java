@@ -73,12 +73,6 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
         return range.getText();
     }
 
-    @JDIAction("Is range '{0}' – '{1}' of '{2}' for '{name}'")
-    public boolean isRange(int from, int to, int total) {
-        String expected = String.format("%d – %d of %d", from, to, total);
-        return expected.equals(range());
-    }
-
     @JDIAction("Is previous button enabled for '{name}'")
     public boolean isPreviousEnabled() {
         return previous.isEnabled();

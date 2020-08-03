@@ -32,7 +32,8 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
 
     @JDIAction("Assert that range is '{0}' – '{1}' of '{2}' for '{name}'")
     public void range(final int from, final int to, final int total) {
-        jdiAssert(element.isRange(from, to, total), Matchers.is(true));
+        String expected = String.format("%d – %d of %d", from, to, total);
+        jdiAssert(element.range(), Matchers.is(expected));
     }
 
     @JDIAction("Assert that previous button enabled for '{name}'")
