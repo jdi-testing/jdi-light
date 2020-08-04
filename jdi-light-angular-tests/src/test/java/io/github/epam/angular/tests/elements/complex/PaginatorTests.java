@@ -28,11 +28,12 @@ public class PaginatorTests extends TestsInit {
     }
 
     @Test
-    public void basicNavigationPaginatorTest() {
-        int STEP = 10;
+    public void basicPaginatorTest() {
+        final int STEP = 10;
 
         paginatorSection.listLength.setValue(String.valueOf(TOTAL));
-        paginatorSection.pageSize.setValue(String.valueOf(STEP));
+        paginatorSection.pageSizeOptions.setValue(PAGESIZEOPTIONS);
+        paginatorSection.paginator.select(STEP);
 
         paginatorSection.paginator.is().range(1, STEP, TOTAL);
         paginatorSection.paginator.is().previousDisabled();
@@ -95,9 +96,9 @@ public class PaginatorTests extends TestsInit {
         String[] options = PAGESIZEOPTIONS.split(",");
         for(String option : options) {
             int i = Integer.parseInt(option);
-
             paginatorSection.paginator.select(i);
-            paginatorSection.paginator.is().range(1, Math.min(i, TOTAL), TOTAL);
+            paginatorSection.paginator.has().itemsPerPageSelected(i);
+            paginatorSection.paginator.has().range(1, Math.min(i, TOTAL), TOTAL);
         }
     }
 }
