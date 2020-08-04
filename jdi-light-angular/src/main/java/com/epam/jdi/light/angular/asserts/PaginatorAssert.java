@@ -17,11 +17,11 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
 
     @JDIAction("Assert that '{0}' option selected for '{name}'")
     public void itemsPerPageSelected(final int number) {
-        jdiAssert(element.selected(), Matchers.is(String.valueOf(number)));
+        jdiAssert(element.selected(), Matchers.is(number));
     }
 
     @JDIAction("Assert that '{0}' options for '{name}'")
-    public void itemsPerPageList(final List<String> options) {
+    public void itemsPerPageList(final List<Integer> options) {
         jdiAssert(element.options(), Matchers.is(options));
     }
 

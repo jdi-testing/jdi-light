@@ -6,6 +6,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Paginator extends UIBaseElement<PaginatorAssert> {
@@ -58,14 +59,19 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
     }
 
     @JDIAction("Get selected option for '{name}'")
-    public String selected() {
-        return select.getText();
+    public int selected() {
+        return Integer.parseInt(select.getText());
     }
 
     @JDIAction("Get options for '{name}'")
-    public List<String> options() {
+    public List<Integer> options() {
         select.click();
-        return container.values();
+        List<Integer> options = new ArrayList<>();
+        for (String x : container.values()) {
+            Integer parseInt = Integer.parseInt(x);
+            options.add(parseInt);
+        }
+        return options;
     }
 
     @JDIAction("Get range for '{name}'")

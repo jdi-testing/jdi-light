@@ -4,6 +4,10 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.testng.Assert.*;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.paginatorSection;
@@ -24,17 +28,20 @@ public class PaginatorUnitTests extends TestsInit {
 
     @Test
     public void verifyItemsPerPageListTest() {
-        final String options = "-1,0,1,5,10,25,100";
+        final List<Integer> optionList = Arrays.asList(-1,0,1,5,10,25,100);
+        final String options = optionList
+                .stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
         paginatorSection.pageSizeOptions.setValue(options);
 
-        String actual = String.join(",", paginatorSection.paginator.options());
-        assertEquals(actual, options);
+        assertEquals(optionList, paginatorSection.paginator.options());
     }
 
     @Test
     public void verifyItemsPerPageSelectedTest() {
-        final String option = "5";
-        paginatorSection.paginator.select(Integer.parseInt(option));
+        final int option = 5;
+        paginatorSection.paginator.select(option);
 
         assertEquals(paginatorSection.paginator.selected(), option);
     }
