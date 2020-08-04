@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex;
 
+import com.epam.jdi.tools.func.JAction;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -53,12 +54,15 @@ public class SnackbarTests extends TestsInit {
     @Test
     public void checkSnackbarDurationTest() {
         final int DURATION = 5;
-        snackbarSection.durationInput.setValue(String.valueOf(DURATION));
 
-        duration(DURATION, 1500, () -> {
-            snackbarSection.customSnackbarOpenButton.click();
+        JAction action = () -> {
             snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().displayed());
             snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().hidden());
-        });
+        };
+
+        snackbarSection.durationInput.setValue(String.valueOf(DURATION));
+        snackbarSection.customSnackbarOpenButton.click();
+
+        duration(DURATION, 1000, action);
     }
 }
