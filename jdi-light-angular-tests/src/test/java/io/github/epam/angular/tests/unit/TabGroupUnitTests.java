@@ -12,12 +12,12 @@ import static io.github.com.pages.AngularPage.tabsSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertTrue;
 
-public class TabsUnitTests extends TestsInit {
+public class TabGroupUnitTests extends TestsInit {
 
-    private final List<String> TABS_TITLES_DEFAULT_LIST = Arrays.asList("First", "Second", "Third");
-    List<String> TABS_LINKS_TITLES = Arrays.asList("First", "Second", "Third", "Disabled Link");
+    private static final List<String> TABS_TITLES_DEFAULT_LIST = Arrays.asList("First", "Second", "Third");
+    private static final List<String> TABS_LINKS_TITLES = Arrays.asList("First", "Second", "Third", "Disabled Link");
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
@@ -26,36 +26,36 @@ public class TabsUnitTests extends TestsInit {
     @Test
     public void clickTest() {
         int tabNumberForTest = 3;
-        tabsSection.basicTabsSection.clickTab(tabNumberForTest);
-        assertTrue(tabsSection.basicTabsSection.tabIsHighlighted(tabNumberForTest));
+        tabsSection.basicTab.clickTab(tabNumberForTest);
+        assertTrue(tabsSection.basicTab.tabIsHighlighted(tabNumberForTest));
     }
 
     @Test
     public void clickByNameTest() {
         int tabNumberForTest = 3;
         String tabNameForeTest = "Third";
-        tabsSection.basicTabsSection.clickTab(tabNameForeTest);
-        assertTrue(tabsSection.basicTabsSection.tabIsHighlighted(tabNumberForTest));
+        tabsSection.basicTab.clickTab(tabNameForeTest);
+        assertTrue(tabsSection.basicTab.tabIsHighlighted(tabNumberForTest));
     }
 
     @Test
     public void tabsTitlesContainValuesTest() {
-        assertTrue(tabsSection.basicTabsSection.tabsTitlesContainValues(TABS_TITLES_DEFAULT_LIST));
+        assertTrue(tabsSection.basicTab.tabsTitlesContainValues(TABS_TITLES_DEFAULT_LIST));
     }
 
     @Test
     public void tabIsHighlightedTest() {
         int tabNumberForTest = 3;
-        tabsSection.basicTabsSection.clickTab(tabNumberForTest);
-        assertTrue(tabsSection.basicTabsSection.tabIsHighlighted(tabNumberForTest));
+        tabsSection.basicTab.clickTab(tabNumberForTest);
+        assertTrue(tabsSection.basicTab.tabIsHighlighted(tabNumberForTest));
     }
 
     @Test
     public void tabPanelContainsValueTest() {
-       int tabNumberForTest = 2;
+        int tabNumberForTest = 2;
         String stringForTest = String.format("Content %s", tabNumberForTest);
-        tabsSection.basicTabsSection.clickTab(tabNumberForTest);
-        assertTrue(tabsSection.basicTabsSection.tabPanelContainsValue(stringForTest));
+        tabsSection.basicTab.clickTab(tabNumberForTest);
+        assertTrue(tabsSection.basicTab.tabPanelContainsValue(stringForTest));
     }
 
     @Test
@@ -76,5 +76,4 @@ public class TabsUnitTests extends TestsInit {
         tabsSection.tabsNavBar.clickTabLink(tabNameForeTest);
         assertTrue(tabsSection.tabsNavBar.tabWithLinkIsHighlighted(tabNameForeTest));
     }
-
 }

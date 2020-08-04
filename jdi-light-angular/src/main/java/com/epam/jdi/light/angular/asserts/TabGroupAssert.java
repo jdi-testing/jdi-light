@@ -9,43 +9,41 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class TabsAssert extends UIAssert<TabsAssert, TabGroup> {
+public class TabGroupAssert extends UIAssert<TabGroupAssert, TabGroup> {
 
-    @JDIAction("Assert that '{name}' has tabs count")
-    public TabsAssert assertTabsCount(int tabsCountForTest) {
+    @JDIAction("Assert that '{name}' has '{0}' tabs count")
+    public TabGroupAssert assertTabsCount(int tabsCountForTest) {
         jdiAssert(element.getTabsCount(), Matchers.is(tabsCountForTest));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has value")
-    public TabsAssert assertTabPanelContent(String stringForTest) {
+    @JDIAction("Assert that '{name}' has '{0}' value")
+    public TabGroupAssert assertTabPanelContent(String stringForTest) {
         jdiAssert(element.tabPanelContainsValue(stringForTest), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has values")
-    public TabsAssert assertTabsTitles(List<String> condition) {
+    @JDIAction("Assert that '{name}' has '{0}' values")
+    public TabGroupAssert assertTabsTitles(List<String> condition) {
         jdiAssert(element.tabsTitlesContainValues(condition), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is highlighted when '{0}' tab number is provided")
-    public TabsAssert assertTabIsHighlighted(int tabNumber) {
+    public TabGroupAssert assertTabIsHighlighted(int tabNumber) {
         jdiAssert(element.tabIsHighlighted(tabNumber), Matchers.is(true));
         return this;
     }
 
-    /*TABS NAV BAR LINKS ASSERTS*/
-    @JDIAction("Assert that '{name}' has values")
-    public TabsAssert assertTabsLinksTitles(List<String> condition) {
+    @JDIAction("Assert that '{name}' has '{0}' values")
+    public TabGroupAssert assertTabsLinksTitles(List<String> condition) {
         jdiAssert(element.tabsLinksTitlesContainValues(condition), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is highlighted when '{0}' tab number is provided")
-    public TabsAssert assertTabWithLinkIsHighlighted(String tabTitle) {
+    public TabGroupAssert assertTabWithLinkIsHighlighted(String tabTitle) {
         jdiAssert(element.tabWithLinkIsHighlighted(tabTitle), Matchers.is(true));
         return this;
     }
-
 }
