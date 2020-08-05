@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Paginator extends UIBaseElement<PaginatorAssert> {
 
@@ -66,12 +67,11 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
     @JDIAction("Get options for '{name}'")
     public List<Integer> options() {
         select.click();
-        List<Integer> options = new ArrayList<>();
-        for (String x : container.values()) {
-            Integer parseInt = Integer.parseInt(x);
-            options.add(parseInt);
-        }
-        return options;
+        return container
+                .values()
+                .stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     @JDIAction("Get range for '{name}'")
