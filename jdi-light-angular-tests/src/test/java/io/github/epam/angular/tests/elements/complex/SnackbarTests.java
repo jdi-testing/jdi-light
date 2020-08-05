@@ -60,7 +60,7 @@ public class SnackbarTests extends TestsInit {
             snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.is().hidden());
         };
 
-        snackbarSection.durationInput.setValue(String.valueOf(DURATION));
+        //snackbarSection.durationInput.setValue(String.valueOf(DURATION));
         snackbarSection.customSnackbarOpenButton.click();
 
         duration(DURATION, 1000, action);
