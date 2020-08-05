@@ -7,7 +7,7 @@ import java.util.List;
 
 import static io.github.com.pages.AngularPage.tabsSection;
 
-public class TGWithCustomLabelTemplateTests extends TestsTabGroupBase {
+public class TabsWithCustomLabelTemplateTests extends TestsTabGroupBase {
 
     @Test
     public void verifyCustomLabelTemplateTabs() {

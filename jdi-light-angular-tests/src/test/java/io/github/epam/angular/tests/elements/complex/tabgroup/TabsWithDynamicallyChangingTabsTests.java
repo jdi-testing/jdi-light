@@ -7,7 +7,7 @@ import java.util.List;
 
 import static io.github.com.pages.AngularPage.tabsSection;
 
-public class TGWithDynamicallyChangingTabsTests extends TestsTabGroupBase {
+public class TabsWithDynamicallyChangingTabsTests extends TestsTabGroupBase {
 
     @Test
     public void verifyDynamicallyChangingTabs() {

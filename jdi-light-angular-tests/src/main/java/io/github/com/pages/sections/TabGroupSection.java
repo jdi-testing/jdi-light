@@ -12,31 +12,23 @@ public class TabGroupSection {
 
     public TabGroup tabDynamicHeightBasedOnContent;
 
-    public TabGroup dynamicallyChangingTabs;
-
-    public Button addNewTabButton;
-
-    public Button deleteTabButton;
-
-    public Checkbox selectAfterAddingCheckbox;
-
-    public TextArea selectByIndexInput;
-
     public TabGroup tabWithHeadersOnTheBottom;
 
     public TabGroup tabsWithLazyLoadedContent;
 
-    public TabGroup tabGroupThemeExample;
-
-    public ButtonToggle matButtonToggleGroupColor;
-
-    public ButtonToggle matButtonToggleGroupBackgroundColor;
-
     public TabGroup tabsAsyncLoadingContent;
 
+    public TabGroup tabGroupThemeExample;
+    public ButtonToggle matButtonToggleGroupColor;
+    public ButtonToggle matButtonToggleGroupBackgroundColor;
+
     public TabGroup tabsNavBar;
-
     public Button addLinkButton;
-
     public Button toggleBackgroundButton;
+
+    public TabGroup dynamicallyChangingTabs;
+    public Button addNewTabButton;
+    public Button deleteTabButton;
+    public Checkbox selectAfterAddingCheckbox;
+    public TextArea selectByIndexInput;
 }

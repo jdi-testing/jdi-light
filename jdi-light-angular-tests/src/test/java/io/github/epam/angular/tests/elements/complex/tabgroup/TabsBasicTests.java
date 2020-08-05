@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.pages.AngularPage.tabsSection;
 
-public class BasicTabGroupTests extends TestsTabGroupBase {
+public class TabsBasicTests extends TestsTabGroupBase {
 
     @Test
     public void verifyTabs() {

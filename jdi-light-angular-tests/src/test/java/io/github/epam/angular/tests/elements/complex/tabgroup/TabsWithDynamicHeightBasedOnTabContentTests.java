@@ -7,7 +7,7 @@ import java.util.List;
 
 import static io.github.com.pages.AngularPage.tabsSection;
 
-public class TGWithDynamicHeightBasedOnTabContentTests extends TestsTabGroupBase {
+public class TabsWithDynamicHeightBasedOnTabContentTests extends TestsTabGroupBase {
 
     @Test
     public void verifyDynamicHeightBasedOnContentsTabs() {

@@ -9,7 +9,7 @@ import java.util.TimeZone;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.pages.AngularPage.tabsSection;
 
-public class TGWihLazilyLoadedContentTests extends TestsTabGroupBase {
+public class TabsWihLazilyLoadedContentTests extends TestsTabGroupBase {
 
     @Test
     public void verifyTabsWithLazyLoadedContent() {

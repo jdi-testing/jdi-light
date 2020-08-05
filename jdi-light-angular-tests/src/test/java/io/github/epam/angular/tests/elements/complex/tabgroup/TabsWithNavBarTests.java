@@ -8,7 +8,7 @@ import java.util.List;
 
 import static io.github.com.pages.AngularPage.tabsSection;
 
-public class TGWithNavBarTests extends TestsTabGroupBase {
+public class TabsWithNavBarTests extends TestsTabGroupBase {
 
     @Test
     public void verifyTabsWithLinks() {

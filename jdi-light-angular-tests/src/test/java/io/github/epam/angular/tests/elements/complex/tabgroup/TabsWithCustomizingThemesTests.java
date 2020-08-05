@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.pages.AngularPage.tabsSection;
 
-public class TGWithCustomizingThemesTests extends TestsTabGroupBase {
+public class TabsWithCustomizingThemesTests extends TestsTabGroupBase {
 
     @Test
     public void verifyCustomThemeTabs() {
