@@ -25,9 +25,8 @@ public class RemindersAppTestsInit {
 
     @BeforeMethod(alwaysRun = true)
     public void continueThroughWelcomePage() {
-        if (RemindersApp.continueButton.isDisplayed()) {
+        if (RemindersApp.continueButton.isDisplayed())
             RemindersApp.continueButton.click();
-        }
     }
 
     @AfterMethod(alwaysRun = true)

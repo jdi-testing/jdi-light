@@ -19,6 +19,19 @@ public class RemindersAppTests extends RemindersAppTestsInit {
     }
 
     @Test
+    public void switchTest() {
+        RemindersListPage.todayRemindersButton.tap();
+
+        RemindersPage.newReminderButton.tap();
+        RemindersPage.editDetailsInfoButton.openDetails();
+
+        EditDetailsPage.remindSwitch.setToOff();
+        EditDetailsPage.remindSwitch.is().off();
+        EditDetailsPage.remindSwitch.setToOn();
+        EditDetailsPage.remindSwitch.is().on();
+    }
+
+    @Test
     public void pickerWheelTest() {
         RemindersListPage.todayRemindersButton.tap();
 
