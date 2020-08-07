@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -8,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static org.testng.Assert.*;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.paginatorSection;
@@ -17,6 +19,8 @@ public class PaginatorUnitTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
+        getDriver().manage().window().setSize(new Dimension(1920,1080));
+
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }
