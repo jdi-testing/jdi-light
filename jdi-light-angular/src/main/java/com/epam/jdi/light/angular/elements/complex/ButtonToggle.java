@@ -13,18 +13,37 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
         getButtonByTagValue(value).click();
     }
 
+    public void getButtonToggleClass(String value){
+        System.out.println(getButtonByTagValue(value).attr("class"));
+        getButtonByTagValue(value).attr("class");
+    }
+
+    public boolean isButtonToggleSelected(String value){
+       return getButtonByTagValue(value).attr("class").contains("checked");
+    }
+
     @JDIAction("Get '{name}' tabs")
-    private WebList getButtonToggleGroups() {
+    private WebList getButtonToggleItems() {
         return this.finds(".mat-button-toggle");
     }
 
     private UIElement getButtonByTagValue(String value) {
         UIElement element = null;
-        for (UIElement e : getButtonToggleGroups()) {
+        for (UIElement e : getButtonToggleItems()) {
             if (e.attr("value").equals(value)) {
                 element = e;
             }
         }
         return element;
     }
+
+    @Override
+    public ButtonToggleAssert is() {
+        return new ButtonToggleAssert().set(this);
+    }
+
+
+//    div.example-selected-value"
+
+
 }

@@ -6,6 +6,8 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.AngularPage.buttonToggleSection;
+import static io.github.com.pages.AngularPage.tabsSection;
 import static io.github.com.pages.sections.ButtonToggleSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
@@ -22,6 +24,22 @@ public class ButtonToggleTest extends TestsInit {
     }
 
     @Test
+    public void verifyButtonToggle() {
+        buttonToggleSection.basicButtonToggle.clickButtonByValue("italic");
+        buttonToggleSection.basicButtonToggle.is().assertButtonToggleIsSelected("italic");
+    }
+
+
+//
+//    @Test
+//    public void verifyTabPanelContentByNumber() {
+//        int tabNumberForTest = 3;
+//        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
+//        tabsSection.basicTab.clickTab(tabNumberForTest);
+//        tabsSection.basicTab.is().assertTabPanelContent(stringForTest);
+//    }
+
+  /*  @Test
     public void basicButtonToggleDisplayedTest() {
         basicButtonToggleBold.is().displayed();
         basicButtonToggleItalic.is().displayed();
@@ -117,5 +135,5 @@ public class ButtonToggleTest extends TestsInit {
         selectedValue.has().text("Selected value: center");
         exclusiveButtonToggleRight.click();
         selectedValue.has().text("Selected value: right");
-    }
+    }*/
 }
