@@ -28,13 +28,13 @@ public class MenuWithIconsTests extends TestsInit {
     }
 
     @Test
-    public void checkBasicMenuIsExpandedTest() {
+    public void checkMenuWithIconsIsExpandedTest() {
         menuWithIcons.expand();
         menuWithIcons.is().isExpanded();
     }
 
     @Test
-    public void checkBasicMenuIsClosedTest() {
+    public void checkMenuWithIconsIsClosedTest() {
         menuWithIcons.expand();
         menuWithIcons.close();
         menuWithIcons.is().isClosed();
@@ -54,7 +54,7 @@ public class MenuWithIconsTests extends TestsInit {
     }
 
     @Test
-    public void checkBasicMenuAvailableOptionsTest() {
+    public void checkMenuWithIconsAvailableOptionsTest() {
         String[] expectedList = MENU_WITH_ICONS_VALUES;
         List<String> actualList = menuWithIcons.valuesForMenuWithIcons();
         menuWithIcons.expand();
