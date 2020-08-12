@@ -11,94 +11,96 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.paginatorSection;
+import static io.github.com.pages.sections.PaginatorSection.listLength;
+import static io.github.com.pages.sections.PaginatorSection.pageSizeOptions;
+import static io.github.com.pages.sections.PaginatorSection.paginator;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class PaginatorTests extends TestsInit {
 
-    private final List<Integer> PAGESIZEOPTIONS = Arrays.asList(1,5,10,25,100,500);
-    private final String OPTIONS =
+    private static final List<Integer> PAGESIZEOPTIONS = Arrays.asList(1, 5, 10, 25, 100, 500);
+    private static final String OPTIONS =
             PAGESIZEOPTIONS
                     .stream()
                     .map(String::valueOf)
                     .collect(Collectors.joining(","));
-    private final int TOTAL = 50;
+    private static final int TOTAL = 50;
 
     @BeforeMethod
     public void before() {
-        getDriver().manage().window().setSize(new Dimension(1920,1080));
+        getDriver().manage().window().setSize(new Dimension(1920, 1080));
 
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
 
-        paginatorSection.listLength.setValue(String.valueOf(TOTAL));
-        paginatorSection.pageSizeOptions.setValue(OPTIONS);
+        listLength.setValue(String.valueOf(TOTAL));
+        pageSizeOptions.setValue(OPTIONS);
     }
 
     @Test
     public void labelPaginationTest() {
-        paginatorSection.paginator.has().label("Items per page:");
+        paginator.has().label("Items per page:");
     }
 
     @Test
     public void basicPaginatorTest() {
         final int STEP = 10;
-        paginatorSection.paginator.select(STEP);
+        paginator.select(STEP);
 
-        paginatorSection.paginator.is().range(1, STEP, TOTAL);
-        paginatorSection.paginator.is().previousDisabled();
-        paginatorSection.paginator.is().nextEnabled();
-        paginatorSection.paginator.next();
+        paginator.is().range(1, STEP, TOTAL);
+        paginator.is().previousDisabled();
+        paginator.is().nextEnabled();
+        paginator.next();
 
-        for(int i = STEP + 1; i < TOTAL - STEP + 1; i += STEP) {
-            paginatorSection.paginator.is().range(i, i + STEP - 1, TOTAL);
-            paginatorSection.paginator.is().previousEnabled();
-            paginatorSection.paginator.is().nextEnabled();
-            paginatorSection.paginator.next();
+        for (int i = STEP + 1; i < TOTAL - STEP + 1; i += STEP) {
+            paginator.is().range(i, i + STEP - 1, TOTAL);
+            paginator.is().previousEnabled();
+            paginator.is().nextEnabled();
+            paginator.next();
         }
 
-        paginatorSection.paginator.is().range(TOTAL - STEP + 1, TOTAL, TOTAL);
-        paginatorSection.paginator.is().previousEnabled();
-        paginatorSection.paginator.is().nextDisabled();
-        paginatorSection.paginator.previous();
+        paginator.is().range(TOTAL - STEP + 1, TOTAL, TOTAL);
+        paginator.is().previousEnabled();
+        paginator.is().nextDisabled();
+        paginator.previous();
 
-        for (int i = TOTAL - 2* STEP + 1; i > 1; i -= STEP) {
-            paginatorSection.paginator.is().range(i, i + STEP - 1, TOTAL);
-            paginatorSection.paginator.is().previousEnabled();
-            paginatorSection.paginator.is().nextEnabled();
-            paginatorSection.paginator.previous();
+        for (int i = TOTAL - 2 * STEP + 1; i > 1; i -= STEP) {
+            paginator.is().range(i, i + STEP - 1, TOTAL);
+            paginator.is().previousEnabled();
+            paginator.is().nextEnabled();
+            paginator.previous();
         }
 
-        paginatorSection.paginator.is().range(1, STEP, TOTAL);
-        paginatorSection.paginator.is().previousDisabled();
-        paginatorSection.paginator.is().nextEnabled();
+        paginator.is().range(1, STEP, TOTAL);
+        paginator.is().previousDisabled();
+        paginator.is().nextEnabled();
     }
 
     @Test
     public void navigationDisabledPaginatorTest() {
-        paginatorSection.listLength.setValue("0");
+        listLength.setValue("0");
 
-        paginatorSection.paginator.has().range();
-        paginatorSection.paginator.has().previousDisabled();
-        paginatorSection.paginator.has().nextDisabled();
+        paginator.has().range();
+        paginator.has().previousDisabled();
+        paginator.has().nextDisabled();
 
-        paginatorSection.listLength.setValue("100");
-        paginatorSection.paginator.select(100);
-        paginatorSection.paginator.has().previousDisabled();
-        paginatorSection.paginator.has().nextDisabled();
+        listLength.setValue("100");
+        paginator.select(100);
+        paginator.has().previousDisabled();
+        paginator.has().nextDisabled();
     }
 
     @Test
     public void pageSizeOptionsPaginatorTest() {
-        paginatorSection.paginator.has().itemsPerPageList(PAGESIZEOPTIONS);
+        paginator.has().itemsPerPageList(PAGESIZEOPTIONS);
     }
 
     @Test
     public void itemPerPagePaginatorTest() {
-        for(Integer option : PAGESIZEOPTIONS) {
-            paginatorSection.paginator.select(option);
-            paginatorSection.paginator.has().itemsPerPageSelected(option);
-            paginatorSection.paginator.has().range(1, Math.min(option, TOTAL), TOTAL);
+        for (Integer option : PAGESIZEOPTIONS) {
+            paginator.select(option);
+            paginator.has().itemsPerPageSelected(option);
+            paginator.has().range(1, Math.min(option, TOTAL), TOTAL);
         }
     }
 }
