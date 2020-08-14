@@ -1,13 +1,18 @@
 package io.github.epam.angular.tests.elements.common;
 
+import com.epam.jdi.light.angular.elements.common.Tooltip;
+import com.epam.jdi.light.angular.elements.composite.CdkOverlayContainer;
 import com.epam.jdi.tools.func.JAction;
+import io.github.com.pages.AngularPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.tooltipSection;
+import static io.github.com.pages.sections.TooltipSection.*;
 import static io.github.epam.angular.tests.BaseValidationsUtils.duration;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
@@ -17,37 +22,41 @@ public class TooltipTests extends TestsInit {
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
+        if (tooltip.isDisplayed())
+            AngularPage.refresh();
     }
 
     @Test
     public void basicTooltipTest() {
-        tooltipSection.basicTooltipButton.hover();
-        tooltipSection.tooltip.has().text("Petit a petit, l’oiseau fait son nid");
+        basicTooltipButton.hover();
+        tooltip.has().text("Petit a petit, l’oiseau fait son nid");
     }
 
-    @Ignore
     @Test
     public void customPositionTooltipTest() {
-        String[] position = {
-                "after",
-                "before",
-                "above",
-                "below",
-                "left",
-                "right"
-        };
-        for (String p : position) {
-            tooltipSection.positionTooltipSelector.select(p);
-            tooltipSection.positionTooltipButton.hover();
-        }
+        Map<String, Tooltip.Position> position = new HashMap<>();
+        position.put("after", Tooltip.Position.RIGHT);
+        position.put("before", Tooltip.Position.LEFT);
+        position.put("above", Tooltip.Position.ABOVE);
+        position.put("below", Tooltip.Position.BELOW);
+        position.put("left", Tooltip.Position.LEFT);
+        position.put("right", Tooltip.Position.RIGHT);
+
+        position.forEach(
+                (k, v) -> {
+                    positionTooltipSelector.click();
+                    (new CdkOverlayContainer()).select(k);
+                    positionTooltipButton.hover();
+                    tooltip.has().position(v, positionTooltipButton);
+                }
+        );
     }
 
     @Test
     public void colorTooltipTest() {
         String red = "rgba(183, 28, 28, 1)";
-
-        tooltipSection.colorTooltipButton.hover();
-        tooltipSection.tooltip.has().css("background-color", red);
+        colorTooltipButton.hover();
+        tooltip.has().color(red);
     }
 
     @Test
@@ -55,67 +64,66 @@ public class TooltipTests extends TestsInit {
         int show = 3;
         int hide = 5;
 
-        JAction showAction = () -> tooltipSection.tooltip.waitFor().displayed();
-        JAction hideAction = () -> tooltipSection.tooltip.waitFor().hidden();
+        JAction showAction = () -> tooltip.waitFor().displayed();
+        JAction hideAction = () -> tooltip.waitFor().hidden();
 
-        tooltipSection.showDelayInput.setValue(String.valueOf(show*1000));
-        tooltipSection.hideDelayInput.setValue(String.valueOf(hide*1000));
+        showDelayInput.setValue(String.valueOf(show * 1000));
+        hideDelayInput.setValue(String.valueOf(hide * 1000));
 
-        tooltipSection.delayTooltipButton.hover();
+        delayTooltipButton.hover();
         duration(show, showAction);
 
-        tooltipSection.hideDelayInput.hover();
+        hideDelayInput.hover();
         duration(hide, hideAction);
     }
 
     @Test
     public void disabledTooltipTest() {
-        tooltipSection.disabledCheckbox.click();
-        tooltipSection.disabledTooltipButton.hover();
-        tooltipSection.tooltip.is().hidden();
+        disabledCheckbox.click();
+        disabledTooltipButton.hover();
+        tooltip.is().hidden();
 
-        tooltipSection.disabledCheckbox.click();
-        tooltipSection.disabledTooltipButton.hover();
-        tooltipSection.tooltip.is().displayed();
+        disabledCheckbox.click();
+        disabledTooltipButton.hover();
+        tooltip.is().displayed();
     }
 
     @Test
     public void manualShowHideTooltipTest() {
-        tooltipSection.showTooltipButton.click();
-        tooltipSection.tooltip.is().displayed();
+        showTooltipButton.click();
+        tooltip.is().displayed();
 
-        tooltipSection.hideTooltipButton.click();
-        tooltipSection.tooltip.is().hidden();
+        hideTooltipButton.click();
+        tooltip.is().hidden();
 
-        tooltipSection.toggleTooltipButton.click();
-        tooltipSection.tooltip.is().displayed();
+        toggleTooltipButton.click();
+        tooltip.is().displayed();
 
-        tooltipSection.toggleTooltipButton.click();
-        tooltipSection.tooltip.is().hidden();
+        toggleTooltipButton.click();
+        tooltip.is().hidden();
     }
 
     @Test
     public void changeMessageTooltipTest() {
         String message = "Test Tooltip Message";
 
-        tooltipSection.changeMessageTooltipTextField.setValue(message);
+        changeMessageTooltipTextField.setValue(message);
 
-        tooltipSection.changeMessageTooltipButton.hover();
-        tooltipSection.tooltip.has().text(message);
+        changeMessageTooltipButton.hover();
+        tooltip.has().text(message);
     }
 
     @Test
     public void autoHideTooltipTest() {
-        tooltipSection.autoHideTooltipButton.hover();
-        tooltipSection.tooltip.is().displayed();
+        autoHideTooltipButton.hover();
+        tooltip.is().displayed();
 
-        tooltipSection.autoHideTooltipContainer.core()
-                .jsExecute("scrollTop=500");
-
-        tooltipSection.autoHideTooltipContainer.core()
+        autoHideTooltipContainer.core()
+                .jsExecute("scrollTop=arguments[0].scrollHeight");
+        autoHideTooltipContainer.core()
                 .jsExecute("scrollTop=0");
 
-        tooltipSection.autoHideTooltipButton.is().displayed();
-        tooltipSection.tooltip.is().hidden();
+        autoHideTooltipButton.is().displayed();
+        tooltip.is().hidden();
     }
 }

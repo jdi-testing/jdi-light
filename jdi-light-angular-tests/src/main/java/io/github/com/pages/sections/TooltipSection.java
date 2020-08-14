@@ -2,7 +2,6 @@ package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.angular.elements.common.Tooltip;
-import com.epam.jdi.light.angular.elements.complex.MaterialSelector;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -13,60 +12,60 @@ public class TooltipSection extends Section {
 
     /* Basic tooltip */
     @UI("//tooltip-overview-example/button")
-    public Button basicTooltipButton;
+    public static Button basicTooltipButton;
 
     /* Tooltip with a custom position */
-
-    @UI("#mat-select-17")
-    public MaterialSelector positionTooltipSelector;
+    @UI("//tooltip-position-example//mat-select")
+    public static UIElement positionTooltipSelector;
 
     @UI("//tooltip-position-example/button")
-    public Button positionTooltipButton;
+    public static Button positionTooltipButton;
 
     /* Red tooltip */
     @UI("//tooltip-custom-class-example/button")
-    public Button colorTooltipButton;
+    public static Button colorTooltipButton;
 
     /* Tooltip with a show and hide delay */
-    @UI("#mat-input-78")
-    public TextField showDelayInput;
+    @UI("//tooltip-delay-example/mat-form-field[1]//input")
+    public static TextField showDelayInput;
 
-    @UI("#mat-input-79")
-    public TextField hideDelayInput;
+    @UI("//tooltip-delay-example/mat-form-field[2]//input")
+    public static TextField hideDelayInput;
 
     @UI("//tooltip-delay-example/button")
-    public Button delayTooltipButton;
+    public static Button delayTooltipButton;
 
     /* Tooltip that can be disabled */
-    @UI("#mat-checkbox-23")
-    public Checkbox disabledCheckbox;
+    @UI("//tooltip-disabled-example//input")
+    public static Checkbox disabledCheckbox;
 
     @UI("//tooltip-disabled-example/button")
-    public Button disabledTooltipButton;
+    public static Button disabledTooltipButton;
 
     /* Tooltip that can be manually shown/hidden */
     @UI("//tooltip-manual-example/div/button[1]")
-    public Button showTooltipButton;
+    public static Button showTooltipButton;
 
     @UI("//tooltip-manual-example/div/button[2]")
-    public Button hideTooltipButton;
+    public static Button hideTooltipButton;
 
     @UI("//tooltip-manual-example/div/button[3]")
-    public Button toggleTooltipButton;
+    public static Button toggleTooltipButton;
 
     /* Tooltip with a changing message */
-    @UI("#mat-input-80")
-    public TextField changeMessageTooltipTextField;
+    @UI("//tooltip-message-example//input")
+    public static TextField changeMessageTooltipTextField;
 
     @UI("//tooltip-message-example/button")
-    public Button changeMessageTooltipButton;
+    public static Button changeMessageTooltipButton;
 
     /* Tooltip that demonstrates auto-hiding */
     @UI("//tooltip-auto-hide-example/div")
-    public UIElement autoHideTooltipContainer;
+    public static UIElement autoHideTooltipContainer;
 
     @UI("//tooltip-auto-hide-example//button")
-    public Button autoHideTooltipButton;
+    public static Button autoHideTooltipButton;
 
-    public Tooltip tooltip;
+    @UI(".mat-tooltip")
+    public static Tooltip tooltip;
 }
