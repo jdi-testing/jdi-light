@@ -11,15 +11,15 @@ import com.epam.jdi.light.ui.html.elements.common.TextField;
 
 
 public class SliderSection extends Section {
-    public Slider matSliderConfigurable;
-    public Slider matSliderBasic;
-    public Slider matSliderFormatting;
-    public TextField sliderConfigurableValue;
-    public TextField sliderConfigurableMin;
-    public TextField sliderConfigurableMax;
-    public TextField sliderConfigurableStep;
-    public Checkbox sliderConfigurableThumbLabel;
-    public Checkbox sliderConfigurableVertical;
-    public Checkbox sliderConfigurableInvert;
-    public Checkbox sliderConfigurableDisabled;
+    public static Slider matSliderConfigurable;
+    public static Slider matSliderBasic;
+    public static Slider matSliderFormatting;
+    public static TextField sliderConfigurableValue;
+    public static TextField sliderConfigurableMin;
+    public static TextField sliderConfigurableMax;
+    public static TextField sliderConfigurableStep;
+    public static Checkbox sliderConfigurableThumbLabel;
+    public static Checkbox sliderConfigurableVertical;
+    public static Checkbox sliderConfigurableInvert;
+    public static Checkbox sliderConfigurableDisabled;
 }

@@ -6,17 +6,10 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
-import com.epam.jdi.light.ui.html.asserts.RangeAssert;
 import org.openqa.selenium.Keys;
-
-import com.epam.jdi.light.ui.html.elements.common.Range;
-
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
 
-/**
- * Angular slider documentation: TBD
- */
 public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, SetValue {
 
     @JDIAction(value = "Get '{name}' min limit", level = DEBUG)
@@ -57,7 +50,6 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
         UIElement sliderTrackFill = uiElement.find(".mat-slider-track-fill");
         UIElement sliderThumbContainer = uiElement.find(".mat-slider-thumb-container");
 
-        // set value for slider attributes to reflect changes on UI
         reflectSliderChangeOnUI(value, sliderTrackBackground, sliderTrackFill, sliderThumbContainer);
     }
 
@@ -68,18 +60,9 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
         UIElement sliderTrackFill = uiElement.find(".mat-slider-track-fill");
         UIElement sliderThumbContainer = uiElement.find(".mat-slider-thumb-container");
 
-        // set value for slider attributes to reflect changes on UI
         reflectSliderChangeOnUI(Double.parseDouble(value), sliderTrackBackground, sliderTrackFill, sliderThumbContainer);
     }
 
-    /**
-     * Set changes to style attributes to reflect value changes on slider UI
-     *
-     * @param value
-     * @param sliderTrackBackground
-     * @param sliderTrackFill
-     * @param sliderThumbContainer
-     */
     private void reflectSliderChangeOnUI(double value, UIElement sliderTrackBackground, UIElement sliderTrackFill, UIElement sliderThumbContainer) {
         double max = max();
         String currentTrackBackground = sliderTrackBackground.attr("style");
@@ -143,10 +126,8 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
         return value() + "";
     }
 
-    // region Extend assertions
     @Override
     public SliderAssert is() {
         return new SliderAssert().set(this);
     }
-    // endregion
 }
