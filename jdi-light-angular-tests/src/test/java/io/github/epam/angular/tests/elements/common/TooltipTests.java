@@ -120,8 +120,8 @@ public class TooltipTests extends TestsInit {
 
         autoHideTooltipContainer.core()
                 .jsExecute("scrollTop=arguments[0].scrollHeight");
-        autoHideTooltipContainer.core()
-                .jsExecute("scrollTop=0");
+        autoHideTooltipButton.core()
+                .jsExecute("scrollIntoView()");
 
         autoHideTooltipButton.is().displayed();
         tooltip.is().hidden();
