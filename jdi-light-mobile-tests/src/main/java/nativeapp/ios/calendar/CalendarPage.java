@@ -1,6 +1,6 @@
 package nativeapp.ios.calendar;
 
-import com.epam.jdi.light.mobile.elements.common.ios.app.Button;
+import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.composite.ios.app.NavigationBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
