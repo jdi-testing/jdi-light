@@ -42,4 +42,6 @@ public class AngularPage extends WebPage {
     public static ButtonToggleSection buttonToggleSection;
     public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
+    public static CardSection cardSection;
+    public static DividerSection dividerSection;
 }
