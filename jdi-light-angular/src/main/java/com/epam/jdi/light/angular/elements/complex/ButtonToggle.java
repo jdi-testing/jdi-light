@@ -5,21 +5,23 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import org.openqa.selenium.By;
 
 public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
 
     @JDIAction("Click '{name}' button by tag value '{0}'")
-    public void clickButtonByValue(String value){
-        getButtonByTagValue(value).click();
+    public void clickButtonToggleByValue(String value) {
+        getButtonToggleByTagValue(value).click();
     }
 
-    public void getButtonToggleClass(String value){
-        System.out.println(getButtonByTagValue(value).attr("class"));
-        getButtonByTagValue(value).attr("class");
+    @JDIAction("Is '{name}' pressed {0}'")
+    public boolean isButtonToggleButtonPressed(String value) {
+        return getButtonToggleByTagValue(value).find(By.cssSelector("button")).attr("aria-pressed").equals("true");
     }
 
-    public boolean isButtonToggleSelected(String value){
-       return getButtonByTagValue(value).attr("class").contains("checked");
+    @JDIAction("'{name}' has text {0}'")
+    public boolean buttonToggleHasText(String value) {
+        return getButtonToggleByTagValue(value).find(By.cssSelector("button")).getText().equalsIgnoreCase(value);
     }
 
     @JDIAction("Get '{name}' tabs")
@@ -27,7 +29,21 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
         return this.finds(".mat-button-toggle");
     }
 
-    private UIElement getButtonByTagValue(String value) {
+    @JDIAction("Is '{name}' selected {0}'")
+    public boolean isButtonToggleSelected(String value) {
+        UIElement element = getButtonToggleByTagValue(value);
+        if (isButtonToggleDisabled(value)) {
+            throw new UnsupportedOperationException(String.format("button toggle is disabled %s", value));
+        }
+        return element.attr("class").contains("checked");
+    }
+
+    private boolean isButtonToggleDisabled(String value) {
+        UIElement element = getButtonToggleByTagValue(value);
+        return element.hasAttribute("disabled");
+    }
+
+    private UIElement getButtonToggleByTagValue(String value) {
         UIElement element = null;
         for (UIElement e : getButtonToggleItems()) {
             if (e.attr("value").equals(value)) {
@@ -41,9 +57,4 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
     public ButtonToggleAssert is() {
         return new ButtonToggleAssert().set(this);
     }
-
-
-//    div.example-selected-value"
-
-
 }
