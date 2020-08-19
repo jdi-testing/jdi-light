@@ -100,7 +100,7 @@ public class ProgressBarUnitTests extends TestsInit {
         assertEquals(matProgressBarConfigurable.max(), 100);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void after() {
         if (matProgressBarIndeterminate.isDisplayed()) {
             matProgressBarIndeterminate.is().disappear(5);
