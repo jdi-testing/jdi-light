@@ -14,6 +14,9 @@ import static org.testng.Assert.assertTrue;
 
 public class TabGroupUnitTests extends TestsInit {
 
+    public static final String CLASS_ATTR = "class";
+    public static final String ACCENT = "accent";
+    public static final String PRIMARY = "primary";
     private static final List<String> TABS_TITLES_DEFAULT_LIST = Arrays.asList("First", "Second", "Third");
     private static final List<String> TABS_LINKS_TITLES = Arrays.asList("First", "Second", "Third", "Disabled Link");
 
@@ -75,5 +78,13 @@ public class TabGroupUnitTests extends TestsInit {
         String tabNameForeTest = "Third";
         tabsSection.tabsNavBar.clickTabLink(tabNameForeTest);
         assertTrue(tabsSection.tabsNavBar.tabWithLinkIsHighlighted(tabNameForeTest));
+    }
+
+    @Test
+    public void verifyCustomThemeHighlighterColor() {
+        tabsSection.matButtonToggleGroupColor.clickButtonToggleByValue(ACCENT);
+        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-background-primary mat-accent");
+        tabsSection.matButtonToggleGroupColor.clickButtonToggleByValue(PRIMARY);
+        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-background-primary mat-primary");
     }
 }
