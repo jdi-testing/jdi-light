@@ -1,13 +1,12 @@
 package io.github.com.pages.sections;
 
-import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.angular.elements.complex.Card;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class CardSection {
     @UI("#simple-card")
-    public static Text simpleCard;
+    public static Card simpleCard;
 
-    @UI("//*[contains(@class, 'example-card')]")
-    public static Section card;
+    @UI("#example-card")
+    public static Card card;
 }
