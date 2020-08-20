@@ -16,13 +16,18 @@ public class Exceptions {
         String message = args.length == 0 ? msg : format(msg, args);
         return new RuntimeException(LINE_BREAK + message);
     }
+
     public static RuntimeException exception(Throwable ex, String msg, Object... args) {
         String message = args.length == 0 ? msg : format(msg, args);
-        if (isClass(AssertionError.class, ex.getClass()))
+        final Class exceptionClass = ex.getClass();
+        if (isClass(AssertionError.class, exceptionClass))
             throw new AssertionError(message, ex);
-        else
-            return new RuntimeException(message, ex);
+        else if (isClass(exceptionClass, UnsupportedOperationException.class)) {
+            return new UnsupportedOperationException(message, ex);
+        }
+        return new RuntimeException(message, ex);
     }
+
     public static String safeException(Throwable ex) {
         String msg = ex.getMessage();
         if (isBlank(msg) && isClass(ex.getClass(), InvocationTargetException.class))
