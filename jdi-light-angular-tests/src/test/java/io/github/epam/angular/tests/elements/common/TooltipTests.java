@@ -29,7 +29,7 @@ public class TooltipTests extends TestsInit {
     @Test
     public void basicTooltipTest() {
         basicTooltipButton.hover();
-        tooltip.has().text("Petit a petit, l’oiseau fait son nid");
+        tooltip.has().assertTooltipText("Petit a petit, l’oiseau fait son nid");
     }
 
     @Test
@@ -47,7 +47,7 @@ public class TooltipTests extends TestsInit {
                     positionTooltipSelector.click();
                     (new CdkOverlayContainer()).select(k);
                     positionTooltipButton.hover();
-                    tooltip.has().position(v, positionTooltipButton);
+                    tooltip.has().assertTooltipPosition(v, positionTooltipButton);
                 }
         );
     }
@@ -56,7 +56,7 @@ public class TooltipTests extends TestsInit {
     public void colorTooltipTest() {
         String red = "rgba(183, 28, 28, 1)";
         colorTooltipButton.hover();
-        tooltip.has().color(red);
+        tooltip.has().assertTooltipColor(red);
     }
 
     @Test
@@ -110,7 +110,7 @@ public class TooltipTests extends TestsInit {
         changeMessageTooltipTextField.setValue(message);
 
         changeMessageTooltipButton.hover();
-        tooltip.has().text(message);
+        tooltip.has().assertTooltipText(message);
     }
 
     @Test
