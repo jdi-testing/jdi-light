@@ -1,24 +1,36 @@
 package com.epam.jdi.light.mobile.elements.common.ios.app;
 
 import com.epam.jdi.light.asserts.generic.TextAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
 import java.util.HashMap;
 
-public class Picker extends MobileAppBaseElement<TextAssert> implements HasTouchActions, IsText {
+public class PickerWheel extends MobileAppBaseElement<TextAssert> implements HasTouchActions, IsText {
 
-    public void sendKeys(String value) {
+    @JDIAction("Set {0} as value of '{name}'")
+    public void setPickerWheelValue(String value) {
         core().sendKeys(value);
     }
 
-    public void movePickerWheel(String order, String offset) {
+    private void movePickerWheel(String order, String offset) {
         HashMap<String, Object> params = new HashMap<>();
         params.put("order", order);
         params.put("offset", offset);
         params.put("element", this.core().get());
         core().js().executeScript("mobile: selectPickerWheelValue", params);
+    }
+
+    @JDIAction("Move '{name}' forward by {0} of its height")
+    public void movePickerWheelForward(String offset) {
+        movePickerWheel("next", offset);
+    }
+
+    @JDIAction("Move '{name}' backward by {0} of its height")
+    public void movePickerWheelBackward(String offset) {
+        movePickerWheel("previous", offset);
     }
 
     @Override

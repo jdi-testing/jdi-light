@@ -19,17 +19,21 @@ public class RemindersAppTests extends RemindersAppTestsInit {
     }
 
     @Test
-    public void pickerTest() {
+    public void pickerWheelTest() {
         RemindersListPage.todayRemindersButton.tap();
 
         RemindersPage.newReminderButton.tap();
         RemindersPage.editDetailsInfoButton.openDetails();
 
         EditDetailsPage.alarm.tap();
-        EditDetailsPage.yearPicker.sendKeys("2015");
+        EditDetailsPage.yearPicker.setPickerWheelValue("2015");
         EditDetailsPage.yearPicker.is().text("2015");
 
-        EditDetailsPage.yearPicker.movePickerWheel("next", "0.1");
+        EditDetailsPage.yearPicker.movePickerWheelForward("0.1");
         EditDetailsPage.yearPicker.is().text("2016");
+
+        EditDetailsPage.monthPicker.setPickerWheelValue("April");
+        EditDetailsPage.monthPicker.movePickerWheelBackward("0.1");
+        EditDetailsPage.monthPicker.is().text("March");
     }
 }
