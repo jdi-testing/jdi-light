@@ -16,7 +16,6 @@ public class ButtonToggleTests extends TestsInit {
     private final String LEFT = "left";
     private final String CENTER = "center";
     private final String RIGHT = "right";
-    private final String JUSTIFY = "justify";
 
     @BeforeMethod
     public void before() {
@@ -61,10 +60,5 @@ public class ButtonToggleTests extends TestsInit {
         basicButtonToggleAlign.is().assertButtonToggleIsSelected(LEFT);
         basicButtonToggleAlign.is().assertButtonToggleIsNotSelected(RIGHT);
         basicButtonToggleAlign.is().assertButtonToggleIsNotSelected(CENTER);
-    }
-
-    @Test(expectedExceptions = UnsupportedOperationException.class)
-    public void verifyExclusiveButtonToggleJustifyButton() {
-        basicButtonToggleAlign.is().assertButtonToggleIsSelected(JUSTIFY);
     }
 }

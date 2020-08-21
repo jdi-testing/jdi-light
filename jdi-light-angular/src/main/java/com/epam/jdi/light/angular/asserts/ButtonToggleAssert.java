@@ -21,13 +21,13 @@ public class ButtonToggleAssert extends UIAssert<ButtonToggleAssert, ButtonToggl
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has attr {0}'")
+    @JDIAction("Assert that '{name}' has attr '{0}'")
     public ButtonToggleAssert assertButtonToggleButtonIsPressed(String value) {
         jdiAssert(element.isButtonToggleButtonPressed(value), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has text {0}'")
+    @JDIAction("Assert that '{name}' has text '{0}'")
     public ButtonToggleAssert assertButtonToggleButtonHasText(String value) {
         jdiAssert(element.buttonToggleHasText(value), Matchers.is(true));
         return this;

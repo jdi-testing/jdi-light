@@ -14,12 +14,12 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
         getButtonToggleByTagValue(value).click();
     }
 
-    @JDIAction("Is '{name}' pressed {0}'")
+    @JDIAction("Is '{name}' pressed '{0}'")
     public boolean isButtonToggleButtonPressed(String value) {
         return getButtonToggleByTagValue(value).find(By.cssSelector("button")).attr("aria-pressed").equals("true");
     }
 
-    @JDIAction("'{name}' has text {0}'")
+    @JDIAction("'{name}' has text '{0}'")
     public boolean buttonToggleHasText(String value) {
         return getButtonToggleByTagValue(value).find(By.cssSelector("button")).getText().equalsIgnoreCase(value);
     }
@@ -29,7 +29,7 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
         return this.finds(".mat-button-toggle");
     }
 
-    @JDIAction("Is '{name}' selected {0}'")
+    @JDIAction("Is '{name}' selected '{0}'")
     public boolean isButtonToggleSelected(String value) {
         UIElement element = getButtonToggleByTagValue(value);
         if (isButtonToggleDisabled(value)) {
