@@ -11,19 +11,19 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> {
 
     @JDIAction("Assert that '{name}' has '{0}' text")
-    public TooltipAssert text(String text) {
+    public TooltipAssert assertTooltipText(String text) {
         jdiAssert(element.text(), Matchers.is(text));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has '{0}' color")
-    public TooltipAssert color(String color) {
+    public TooltipAssert assertTooltipColor(String color) {
         jdiAssert(element.color(), Matchers.is(color));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has '{0}' position relative to '{1}' ")
-    public TooltipAssert position(Tooltip.Position position, UIBaseElement<?> e) {
+    public TooltipAssert assertTooltipPosition(Tooltip.Position position, UIBaseElement<?> e) {
         jdiAssert(element.position(e), Matchers.is(position));
         return this;
     }
