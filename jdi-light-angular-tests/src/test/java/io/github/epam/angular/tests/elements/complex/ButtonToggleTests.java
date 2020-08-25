@@ -17,7 +17,6 @@ public class ButtonToggleTests extends TestsInit {
     private final String CENTER = "center";
     private final String RIGHT = "right";
 
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
