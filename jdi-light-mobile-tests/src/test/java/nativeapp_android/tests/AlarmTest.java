@@ -10,13 +10,15 @@ import static org.testng.Assert.assertTrue;
 public class AlarmTest extends ClockAppTestInit {
     @Test
     public void checkboxTests() {
+        alarmPageButton.click();
+        expandAlarmSettingsButton.click();
+        assertTrue(repeatAlarmCheckbox.isDisplayed());
         assertTrue(repeatAlarmCheckbox.isChecked());
         assertTrue(repeatDaysAlarmWidget.isDisplayed());
         repeatAlarmCheckbox.uncheck();
-        assertFalse(repeatDaysAlarmWidget.isDisplayed());
         assertFalse(repeatAlarmCheckbox.isChecked());
+        assertFalse(repeatDaysAlarmWidget.isDisplayed());
         manageVibrationCheckbox.check();
-        assertTrue(manageVibrationCheckbox.isChecked());
         assertTrue(manageVibrationCheckbox.isChecked());
         manageVibrationCheckbox.uncheck();
         assertFalse(manageVibrationCheckbox.isChecked());
