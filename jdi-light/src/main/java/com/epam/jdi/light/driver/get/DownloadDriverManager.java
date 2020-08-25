@@ -54,7 +54,7 @@ class DownloadDriverManager {
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
-            return wdm.getBinaryPath();
+            return wdm.getDownloadedDriverPath();
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);
         }
