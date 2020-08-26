@@ -188,7 +188,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
                 () -> elements(1), els -> hasKey(value));
             if (result != null)
                 return elements(1).get(value);
-            throw exception("Can't get '%s'. No elements with this name found", value);
+            throw exception("Failed to get '%s' in list '%s'. No elements with this name found", value, getName());
         }
     }
     private JFunc1<UIElement, String> UIELEMENT_NAME;

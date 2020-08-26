@@ -60,7 +60,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
         return last == null ? null : last.value;
     }
     default void ifDo(JFunc1<T, Boolean> condition, JAction1<T> action) {
-        elements(1).ifDo(p -> condition.execute(p.value), action::execute);
+        elements(1).ifDo(condition::execute, action::execute);
     }
     default <R> List<R> ifSelect(JFunc1<T, Boolean> condition, JFunc1<T, R> transform) {
         return elements(0).ifSelect((k,v) -> condition.execute(v), transform);

@@ -181,6 +181,11 @@ public class UIElement extends JDIBase
     public String getText() {
         return text(textType);
     }
+    @JDIAction("Get '{name}' text")
+    public String getTextForce() {
+        noValidation();
+        return text(textType);
+    }
 
     /**
      * Check the element is displayed

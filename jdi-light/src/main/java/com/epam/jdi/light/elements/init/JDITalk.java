@@ -21,18 +21,20 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
 
 public class JDITalk {
     public static UIElement element(@MarkupLocator String locator) {
-        return locator.matches("[A-Z].*")
-                ? new UIElement().setName(locator)
+        UIElement element = locator.matches("[A-Z].*")
+                ? new UIElement()
                 : element(defineLocator(locator));
+        return element.setName(locator);
     }
     public static UIElement element(@MarkupLocator By byLocator) {
         return new UIElement(byLocator);
     }
 
     public static WebList list(@MarkupLocator String locator) {
-        return locator.matches("[A-Z].*")
+        WebList list = locator.matches("[A-Z].*")
                 ? new WebList()
                 : list(defineLocator(locator));
+        return list.setName(locator);
     }
     public static WebList list(@MarkupLocator By byLocator) {
         return new WebList(byLocator);
@@ -90,7 +92,7 @@ public class JDITalk {
     public static Table table(@MarkupLocator String locator) {
         return new Table().setup(Table.class, b -> b.setLocator(locator));
     }
-    public static <D> DataTable<?, D> dataTable(@MarkupLocator String locator, Class<D> dataClass) {
+    public static <D> DataTable<?, D> dataTable(@MarkupLocator String locator) {
         return new DataTable<>().setup(DataTable.class, b -> b.setLocator(locator));
     }
     public static WebPage page(String pageName) {

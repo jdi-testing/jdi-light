@@ -462,9 +462,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public String printContext() {
         JDIBase jdiBase = getBase(parent);
         if (jdiBase == null) return "";
-        String locator = jdiBase.getLocator() == null
-                ? ""
-                : jdiBase.locator.printLocator();
+        String locator = jdiBase.locator.printLocator();
         if (jdiBase.parent == null)
             return locator;
         if (isBlank(locator))
@@ -487,20 +485,26 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             return PRINT_ELEMENT.execute(this);
         } catch (Exception ex) { throw exception(ex, "Can't print element"); }
     }
-    private static String printWebElement(WebElement element) {
+    public static String printWebElement(WebElement element) {
         String asString = element.toString().replaceAll("css selector", "css");
         String result = asString.startsWith("WebElement->")
                 ? "" : "WebElement->";
         if (asString.contains(")]")) {
-            String s = asString.split("-> ")[1];
+            String s = asString.substring(asString.indexOf("-> ")+3).replaceAll("]* -> ", "->");
             return result + s.substring(0,s.length()-1);
         }
         return asString;
     }
-
+    public String printWebElement() {
+        if (webElement.hasValue())
+            return printWebElement(webElement.get());
+        if (webElements.hasValue() && webElements.get().size() > 0)
+            return printWebElement(webElements.get().get(0));
+        return "";
+    }
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
         if (element.webElement.hasValue())
-            return printWebElement(element.webElement.get());
+            return element.printWebElement();
         if (isBlank(element.varName))
             return element.context;
         return Switch(LOGS.logLevel).get(
@@ -536,5 +540,5 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         webElement.useCache(false);
         webElements.useCache(false);
     }
-    public boolean isUseCache() { return webElement.isUseCache() && webElements.isUseCache(); }
+    public boolean isUseCache() { return webElement.isUseCache() || webElements.isUseCache(); }
 }
