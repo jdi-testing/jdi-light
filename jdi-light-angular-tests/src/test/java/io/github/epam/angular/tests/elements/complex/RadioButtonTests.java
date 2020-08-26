@@ -5,15 +5,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.RadioButtonSection.*;
+import static io.github.com.pages.sections.RadioButtonSection.basicRadioButtons;
+import static io.github.com.pages.sections.RadioButtonSection.seasonRadioButtons;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class RadioButtonTests extends TestsInit {
 
-    private final String SPRING = "Spring";
-    private final String SUMMER = "Summer";
-    private final String AUTUMN = "Autumn";
-    private final String WINTER = "Winter";
+    private static final String enableButton = ".* cdk-focused cdk-mouse-focused mat-radio-checked";
+    private static final String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
+    private static final String disableBasicButton = "mat-radio-button mat-accent";
+    private static final String attrNameButton = "class";
 
     @BeforeMethod
     public void before() {
@@ -22,30 +23,113 @@ public class RadioButtonTests extends TestsInit {
     }
 
     @Test
-    public void basicRadioButtonsTest() {
-        basicRadioButtons.is().displayed();
+    public void test() {
+       // basicRadioButtons.getRadioButtonByTagValue("2").has().text("Option 2");
         basicRadioButtons.clickRadioButtonByValue("2");
         basicRadioButtons.clickRadioButtonByValue("1");
         basicRadioButtons.clickRadioButtonByValue("2");
-
-        basicRadioButtons.is().assertRadioButtonIsChecked("2");
-        basicRadioButtons.is().assertRadioButtonIsNotChecked("1");
+        basicRadioButtons.clickRadioButtonByValue("1");
     }
 
     @Test
-    public void seasonsRadioButtonsTest() {
-        seasonRadioButtons.is().displayed();
-        seasonRadioButtons.clickRadioButtonByValue(SUMMER);
-        seasonRadioButtons.clickRadioButtonByValue(WINTER);
-        seasonRadioButtons.clickRadioButtonByValue(AUTUMN);
-
-        seasonRadioButtons.clickRadioButtonByValue(SPRING);
-        seasonRadioButtons.is().assertRadioButtonIsChecked(SPRING);
-        favoriteSeasonField.has().text(String.format("Your favorite season is: %s", SPRING));
-
-        seasonRadioButtons.is().assertRadioButtonIsNotChecked(WINTER);
-        seasonRadioButtons.is().assertRadioButtonIsNotChecked(SUMMER);
-        seasonRadioButtons.is().assertRadioButtonIsNotChecked(AUTUMN);
+    public void test2() {
+       // seasonRadioButtons.is().displayed();
+        seasonRadioButtons.clickRadioButtonByValue("Autumn");
+        seasonRadioButtons.clickRadioButtonByValue("Summer");
+        seasonRadioButtons.clickRadioButtonByValue("Winter");
+        seasonRadioButtons.clickRadioButtonByValue("Spring");
+        seasonRadioButtons.clickRadioButtonByValue("Autumn");
     }
-}
 
+//    @Test
+//    public void displayedBasicRadioButtonTest() {
+//        radioButtonSection.basicRadioButtons.is().displayed();
+//        radioButtonSection.firstBasicRadioButton.is().displayed();
+//        radioButtonSection.secondBasicRadioButton.is().displayed();
+//    }
+//
+//    @Test
+//    public void displayedSeasonRadioButtonTest() {
+//        radioButtonSection.seasonRadioButtons.is().displayed();
+//        radioButtonSection.winterNGModelRadioButton.is().displayed();
+//        radioButtonSection.springNGModelRadioButton.is().displayed();
+//        radioButtonSection.summerNGModelRadioButton.is().displayed();
+//        radioButtonSection.autumnNGModelRadioButton.is().displayed();
+//    }
+//
+//    @Test
+//    public void nameBasicRadioButtonTest() {
+//        radioButtonSection.firstBasicRadioButton.has().text("Option 1");
+//        radioButtonSection.secondBasicRadioButton.has().text("Option 2");
+//    }
+//
+//    @Test
+//    public void onlyOneOptionOneButtonEnabledTest() {
+//        radioButtonSection.firstBasicRadioButton.click();
+//        radioButtonSection.firstBasicRadioButton.has().attr(attrNameButton, matchesRegex(enableButton));
+//        radioButtonSection.secondBasicRadioButton.has().attr(attrNameButton, disableBasicButton);
+//    }
+//
+//    @Test
+//    public void onlyOneOptionTwoButtonEnabledTest() {
+//        radioButtonSection.secondBasicRadioButton.click();
+//        radioButtonSection.firstBasicRadioButton.has().attr(attrNameButton, disableBasicButton);
+//        radioButtonSection.secondBasicRadioButton.has().attr(attrNameButton, matchesRegex(enableButton));
+//    }
+//
+//    @Test
+//    public void nameSeasonRadioButtonTest() {
+//        radioButtonSection.winterNGModelRadioButton.has().text("Winter");
+//        radioButtonSection.springNGModelRadioButton.has().text("Spring");
+//        radioButtonSection.summerNGModelRadioButton.has().text("Summer");
+//        radioButtonSection.autumnNGModelRadioButton.has().text("Autumn");
+//    }
+//
+//    @Test
+//    public void favoriteSeasonTest() {
+//        radioButtonSection.winterNGModelRadioButton.click();
+//        radioButtonSection.favoriteSeason.has().text("Your favorite season is: Winter");
+//        radioButtonSection.springNGModelRadioButton.click();
+//        radioButtonSection.favoriteSeason.has().text("Your favorite season is: Spring");
+//        radioButtonSection.summerNGModelRadioButton.click();
+//        radioButtonSection.favoriteSeason.has().text("Your favorite season is: Summer");
+//        radioButtonSection.autumnNGModelRadioButton.click();
+//        radioButtonSection.favoriteSeason.has().text("Your favorite season is: Autumn");
+//    }
+//
+//    @Test
+//    public void onlyOneWinterButtonEnabledTest() {
+//        radioButtonSection.winterNGModelRadioButton.click();
+//        radioButtonSection.winterNGModelRadioButton.has().attr(attrNameButton, matchesRegex(enableButton));
+//        radioButtonSection.springNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//        radioButtonSection.summerNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//        radioButtonSection.autumnNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//    }
+//
+//    @Test
+//    public void onlyOneSpringButtonEnabledTest() {
+//        radioButtonSection.springNGModelRadioButton.click();
+//        radioButtonSection.winterNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//        radioButtonSection.springNGModelRadioButton.has().attr(attrNameButton, matchesRegex(enableButton));
+//        radioButtonSection.summerNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//        radioButtonSection.autumnNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//    }
+//
+//    @Test
+//    public void onlyOneSummerButtonEnabledTest() {
+//        radioButtonSection.summerNGModelRadioButton.click();
+//        radioButtonSection.winterNGModelRadioButton.has().attr(attrNameButton,disableSeasonButton);
+//        radioButtonSection.springNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//        radioButtonSection.summerNGModelRadioButton.has().attr(attrNameButton, matchesRegex(enableButton));
+//        radioButtonSection.autumnNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//    }
+//
+//    @Test
+//    public void onlyOneAutumnButtonEnabledTest() {
+//        radioButtonSection.autumnNGModelRadioButton.click();
+//        radioButtonSection.winterNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//        radioButtonSection.springNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//        radioButtonSection.summerNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
+//        radioButtonSection.autumnNGModelRadioButton.has().attr(attrNameButton, matchesRegex(enableButton));
+//    }
+}

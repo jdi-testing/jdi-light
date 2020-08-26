@@ -13,12 +13,8 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
         getRadioButtonByTagValue(value).click();
     }
 
-    @JDIAction("Check '{name}' radio button  contain value '{0}'")
-    public boolean isRadioButtonChecked(String value) {
-        return getRadioButtonByTagValue(value).attr("class").contains("mat-radio-checked");
-    }
 
-    private UIElement getRadioButtonByTagValue(String value) {
+    public UIElement getRadioButtonByTagValue(String value) {
         UIElement element = null;
         for (UIElement e : getRadioButtons()) {
             if (e.find("input").attr("value").equals(value)) {
@@ -28,7 +24,7 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
         return element;
     }
 
-    private WebList getRadioButtons() {
+    public WebList getRadioButtons() {
         return this.finds(".mat-radio-button");
     }
 
@@ -37,4 +33,3 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
         return new RadioButtonsAssert().set(this);
     }
 }
-
