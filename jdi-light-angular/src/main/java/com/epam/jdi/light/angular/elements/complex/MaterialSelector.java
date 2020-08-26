@@ -1,7 +1,7 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.MaterialSelectorAssert;
-import com.epam.jdi.light.angular.elements.composite.CdkOverlayContainer;
+import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -21,11 +21,11 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     public String smart = "smart: ";
     public String smartSharp = "smart: #";
     public String cssSharp = "css='#";
-    protected CdkOverlayContainer cdkOverlayContainer;
+    protected MaterialSelectorContainer cdkOverlayContainer;
     protected DropdownExpand dropdown;
 
     public MaterialSelector() {
-        cdkOverlayContainer = new CdkOverlayContainer();
+        cdkOverlayContainer = new MaterialSelectorContainer();
         dropdown = new DropdownExpand();
         dropdown.setCore(DropdownExpand.class, base());
     }
@@ -55,7 +55,6 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
         setupLocators();
-        cdkOverlayContainer.waitFor();
         try {
             return cdkOverlayContainer.list().noWait(WebList::isDisplayed, WebList.class);
         } catch (Exception ex) {

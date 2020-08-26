@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CdkOverlayContainer extends Section {
+public class MaterialSelectorContainer extends Section {
     public String backdropSelectPanel = "div.mat-select-panel.mat-primary";
     public String groupsAndOptionsList = "div.mat-select-panel.mat-primary mat-optgroup";
     public String matOptionSpan = "mat-option span";
