@@ -1,7 +1,7 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.PaginatorAssert;
-import com.epam.jdi.light.angular.elements.composite.CdkOverlayContainer;
+import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -17,7 +17,7 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
     protected UIElement select;
     protected String selectLocator = ".mat-select";
 
-    protected CdkOverlayContainer container;
+    protected MaterialSelectorContainer container;
 
     protected UIElement range;
     protected String rangeLocator = ".mat-paginator-range-label";
@@ -35,7 +35,7 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
         select = new UIElement();
         select.setLocator(selectLocator);
 
-        container = new CdkOverlayContainer();
+        container = new MaterialSelectorContainer();
 
         range = new UIElement();
         range.setLocator(rangeLocator);
