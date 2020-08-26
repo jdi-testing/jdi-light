@@ -317,7 +317,6 @@ public class DatepickerUnitTests extends TestsInit {
     public void checkDisabledPreviousMonthNavigationTest() {
         String minDate = getMinDate();
         minMaxDatepicker.show();
-        minMaxDatepicker.clear();
         minMaxDatepicker.setText(minDate);
         assertTrue(minMaxDatepicker.isDisabledNavigationElements(PREVIOUS_MONTH.getName()));
     }
@@ -333,7 +332,6 @@ public class DatepickerUnitTests extends TestsInit {
     public void checkDisabledNextMonthNavigationTest() {
         String maxDate = getMaxDate();
         minMaxDatepicker.show();
-        minMaxDatepicker.clear();
         minMaxDatepicker.setText(maxDate);
         assertTrue(minMaxDatepicker.isDisabledNavigationElements(NEXT_MONTH.getName()));
     }
@@ -350,7 +348,6 @@ public class DatepickerUnitTests extends TestsInit {
         String firstDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 2);
         String secondDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 1);
         minMaxDatepicker.show();
-        minMaxDatepicker.clear();
         minMaxDatepicker.openYearsView();
         assertTrue(minMaxDatepicker
                            .isDisabledNavigationElements(PREVIOUS_TWENTY_YEARS.getName(), NEXT_TWENTY_YEARS.getName(),
@@ -360,7 +357,6 @@ public class DatepickerUnitTests extends TestsInit {
     @Test
     public void checkDisabledSaturdaysTest() {
         filterDatepicker.show();
-        filterDatepicker.clear();
         filterDatepicker.setDate(LocalDate.of(2019, 9, 1));
         String[] disabledElemtnts = filterDatepicker.getWeekDayNumbers(SATURDAY);
         assertTrue(filterDatepicker.isDisabledNavigationElements(disabledElemtnts));
@@ -369,7 +365,6 @@ public class DatepickerUnitTests extends TestsInit {
     @Test
     public void checkDisabledSundaysTest() {
         filterDatepicker.show();
-        filterDatepicker.clear();
         filterDatepicker.setDate(LocalDate.of(2019, 12, 1));
         assertTrue(filterDatepicker.isDisabledNavigationElements(filterDatepicker.getWeekDayNumbers(SUNDAY)));
     }
@@ -377,7 +372,6 @@ public class DatepickerUnitTests extends TestsInit {
     @Test
     public void checkEnabledTuesdaysTest() {
         filterDatepicker.show();
-        filterDatepicker.clear();
         filterDatepicker.setDate(LocalDate.of(2020, 8, 1));
         assertTrue(filterDatepicker.isEnabledNavigationElements(filterDatepicker.getWeekDayNumbers(TUESDAY)));
     }
@@ -476,6 +470,15 @@ public class DatepickerUnitTests extends TestsInit {
         }
         if (!basicDatepicker.isEmpty()) {
             basicDatepicker.clear();
+        }
+        if (!deserializeDatepicker.isEmpty()) {
+            deserializeDatepicker.clear();
+        }
+        if (!minMaxDatepicker.isEmpty()) {
+            minMaxDatepicker.clear();
+        }
+        if (!filterDatepicker.isEmpty()) {
+            filterDatepicker.clear();
         }
         if (!differentLocaleDatepicker.isEmpty()) {
             differentLocaleDatepicker.clear();
