@@ -1,6 +1,6 @@
 package io.github.epam.angular.tests.unit;
 
-import com.epam.jdi.light.angular.elements.composite.CdkOverlayContainer;
+import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
@@ -10,20 +10,23 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.SelectSection.*;
+import static io.github.com.pages.sections.SelectSection.basicMatSelect;
+import static io.github.com.pages.sections.SelectSection.customPanelStylingSelect;
+import static io.github.com.pages.sections.SelectSection.multipleSelect;
+import static io.github.com.pages.sections.SelectSection.optionGroupsMatSelect;
 import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class CdkOverlayContainerUnitTests extends TestsInit {
-    private CdkOverlayContainer container;
+public class MaterialSelectorContainerUnitTests extends TestsInit {
+    private MaterialSelectorContainer container;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
-        container = new CdkOverlayContainer();
+        container = new MaterialSelectorContainer();
     }
 
     @Test
@@ -35,7 +38,7 @@ public class CdkOverlayContainerUnitTests extends TestsInit {
     }
 
     @Test
-    public void collapsedTest() {
+    public void hiddenTest() {
         basicMatSelect.show();
         basicMatSelect.expand();
         container.collapsePanel();
