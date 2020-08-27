@@ -59,7 +59,7 @@ testsbootstrap: &testsbootstrap
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
 testsangularunitcommon: &testsangularunitcommon
   stage: test
-  name: Run tests - angular
+  name: Run tests - angular unit tests & ui tests for common elements
   <<: *cron_condition
   script:
     - mvn -ntp install -DskipTests
@@ -67,7 +67,7 @@ testsangularunitcommon: &testsangularunitcommon
     - mvn verify $WITH_PARAMS $UNIT_COMMON -pl $GROUP_ID:$ANGULAR_TESTS
 testsangularcomplex: &testsangularcomplex
   stage: test
-  name: Run tests - angular
+  name: Run tests - angular ui tests for complex elements
   <<: *cron_condition
   script:
     - mvn -ntp install -DskipTests
