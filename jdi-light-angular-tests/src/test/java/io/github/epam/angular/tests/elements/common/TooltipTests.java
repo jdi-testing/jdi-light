@@ -1,7 +1,7 @@
 package io.github.epam.angular.tests.elements.common;
 
 import com.epam.jdi.light.angular.elements.common.Tooltip;
-import com.epam.jdi.light.angular.elements.composite.CdkOverlayContainer;
+import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.tools.func.JAction;
 import io.github.com.pages.AngularPage;
 import io.github.epam.TestsInit;
@@ -45,7 +45,7 @@ public class TooltipTests extends TestsInit {
         position.forEach(
                 (k, v) -> {
                     positionTooltipSelector.click();
-                    (new CdkOverlayContainer()).select(k);
+                    (new MaterialSelectorContainer()).select(k);
                     positionTooltipButton.hover();
                     tooltip.has().assertTooltipPosition(v, positionTooltipButton);
                 }
