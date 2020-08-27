@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.pages.sections.DatepickerSection.momentJsDatepicker;
 
 public class MomentJsDatepickerTests extends TestsDatepickerBase {
@@ -20,6 +21,12 @@ public class MomentJsDatepickerTests extends TestsDatepickerBase {
     @Test
     public void checkLabelValue() {
         momentJsDatepicker.label().has().value(momentDatepicker);
+    }
+
+    @Test
+    public void checkMomentDate() {
+        refresh();
+        momentJsDatepicker.is().selectedDate(LocalDate.of(2017, 1, 1));
     }
 
     @Test

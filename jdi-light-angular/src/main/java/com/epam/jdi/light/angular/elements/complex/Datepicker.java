@@ -167,6 +167,12 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         uiElement.click(getOutsidePoint().getX(), getOutsidePoint().getY());
     }
 
+    @JDIAction("Open years view in '{name}'")
+    public void openYearsView() {
+        expand();
+        cdkOverlayContainer.openYearsView();
+    }
+
     @JDIAction("Select '{0}' day '{name}' in previous month")
     public void selectDayInPreviousMonth(final int day) {
         expand();
@@ -174,10 +180,11 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         cdkOverlayContainer.selectDay(day);
     }
 
-    @JDIAction("Open years view in '{name}'")
-    public void openYearsView() {
+    @JDIAction("Select '{0}' day '{name}' in next month")
+    public void selectDayInNextMonth(final int day) {
         expand();
-        cdkOverlayContainer.openYearsView();
+        cdkOverlayContainer.selectNextMonth();
+        cdkOverlayContainer.selectDay(day);
     }
 
     @JDIAction("Select '{1}' day '{0}' month earlier '{name}'")
@@ -201,13 +208,6 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         for (int i = 0; i < monthCount; i++) {
             cdkOverlayContainer.selectNextMonth();
         }
-        cdkOverlayContainer.selectDay(day);
-    }
-
-    @JDIAction("Select '{0}' day '{name}' in next month")
-    public void selectDayInNextMonth(final int day) {
-        expand();
-        cdkOverlayContainer.selectNextMonth();
         cdkOverlayContainer.selectDay(day);
     }
 
@@ -351,12 +351,12 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         return cdkOverlayContainer.getWeekDayNumbers(weekName);
     }
 
-    @JDIAction("Select day '{0}' for '{name}'")
+    @JDIAction("Switch locale for '{name}'")
     public void switchLocale() {
         switchLocaleButton().click();
     }
 
-    @JDIAction(value = "Is '{name}' locale switched to '{0}'")
+    @JDIAction(value = "Is '{name}' locale '{0}'")
     public boolean isSelectedLocale(final Locale locale) {
         expand();
         return cdkOverlayContainer.isSelectedLocale(locale);

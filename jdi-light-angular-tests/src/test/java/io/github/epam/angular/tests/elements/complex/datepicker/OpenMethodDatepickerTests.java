@@ -31,7 +31,6 @@ public class OpenMethodDatepickerTests extends TestsDatepickerBase {
         openMethodDatepicker.is().collapsed();
     }
 
-
     @Test
     public void checkSelectedDate() {
         openMethodDatepicker.setDate(LocalDate.of(1997, 3, 10));
