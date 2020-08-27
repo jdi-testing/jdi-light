@@ -1,16 +1,14 @@
 package io.github.com.pages.sections;
 
-import com.epam.jdi.light.angular.asserts.RadioButtonsAssert;
 import com.epam.jdi.light.angular.elements.complex.RadioButtons;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
-public class RadioButtonSection extends UIBaseElement<RadioButtonsAssert> {
+public class RadioButtonSection  {
 
     @UI("#basic-radio-group")
     public static RadioButtons basicRadioButtons;
 
-    @UI("season-radio-group")
+    @UI("#season-radio-group")
     public static RadioButtons seasonRadioButtons;
 
 //    @UI("#radio-option-one")
