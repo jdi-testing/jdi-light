@@ -24,7 +24,7 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void test() {
-       // basicRadioButtons.getRadioButtonByTagValue("2").has().text("Option 2");
+        basicRadioButtons.getRadioButtonByTagValue("2").has().text("Option 2");
         basicRadioButtons.clickRadioButtonByValue("2");
         basicRadioButtons.clickRadioButtonByValue("1");
         basicRadioButtons.clickRadioButtonByValue("2");
@@ -33,7 +33,8 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void test2() {
-       // seasonRadioButtons.is().displayed();
+        seasonRadioButtons.is().displayed();
+        seasonRadioButtons.getRadioButtonByTagValue("Autumn").has().text("Autumn");
         seasonRadioButtons.clickRadioButtonByValue("Autumn");
         seasonRadioButtons.clickRadioButtonByValue("Summer");
         seasonRadioButtons.clickRadioButtonByValue("Winter");
