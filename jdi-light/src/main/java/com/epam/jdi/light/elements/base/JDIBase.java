@@ -19,6 +19,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -260,6 +261,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return (filtered.size() > 1 ? filtered : els).get(0);
     }
     private List<WebElement> filterElements(List<WebElement> elements) {
+        if (elements.size() == 0)
+            return new ArrayList<>();
         List<WebElement> result = elements;
         for (JFunc1<WebElement, Boolean> rule : searchRules().values())
             result = filter(result, rule::execute);

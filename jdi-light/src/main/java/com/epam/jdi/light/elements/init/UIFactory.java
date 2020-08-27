@@ -3,7 +3,6 @@ package com.epam.jdi.light.elements.init;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.Form;
@@ -14,9 +13,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 
 /**
  * Created by Roman Iovlev on 03.28.2018

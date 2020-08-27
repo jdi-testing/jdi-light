@@ -42,6 +42,9 @@ public class JDITalk {
     public static WebList list(List<WebElement> els, String name) {
         return new WebList(els).setup(e->e.setName(name));
     }
+    public static WebList list(List<WebElement> els) {
+        return list(els, "Elements list");
+    }
 
     public static void clickOn(String locator) {
         $(locator).click();

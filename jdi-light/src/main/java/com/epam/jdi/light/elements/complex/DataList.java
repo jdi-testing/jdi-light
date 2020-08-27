@@ -41,7 +41,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
     public List<D> asData() {
         try {
             if (dataType == null) return null;
-            return LinqUtils.map(elements(1).values(), v -> asEntity(v, dataType));
+            return LinqUtils.map(elements(1), v -> asEntity(v, dataType));
         } catch (Exception ex) {
             throw exception(ex, "Can't get DataList data");
         }
@@ -85,9 +85,14 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
                         field.getName(), types.length);
                 initClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
                 dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>) types[1];
-        } catch (Exception ignore) {
-
-        }
+        } catch (Exception ignore) { }
+    }
+    public int getIndex(String name) {
+        List<String> values = values();
+        for (int i = 0; i < values.size(); i++)
+            if (values.get(i).equalsIgnoreCase(name))
+                return i;
+        return -1;
     }
     @Override
     public List<String> values() {
