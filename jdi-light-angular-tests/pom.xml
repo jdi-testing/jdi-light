@@ -16,6 +16,7 @@
         <allure.testng>2.13.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
+        <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
     </properties>
 
     <dependencies>
@@ -65,7 +66,7 @@
                 <version>2.22.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
+                        <suiteXmlFile>${suite-xml-file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <properties>
@@ -109,4 +110,19 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <profiles>
+        <profile>
+            <id>unitcommon</id>
+            <properties>
+                <suite-xml-file>src/test/resources/unitcommon.xml</suite-xml-file>
+            </properties>
+        </profile>
+        <profile>
+            <id>complex</id>
+            <properties>
+                <suite-xml-file>src/test/resources/complex.xml</suite-xml-file>
+            </properties>
+        </profile>
+    </profiles>
 </project>
