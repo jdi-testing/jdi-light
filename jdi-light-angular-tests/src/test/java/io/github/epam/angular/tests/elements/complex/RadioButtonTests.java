@@ -11,10 +11,10 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class RadioButtonTests extends TestsInit {
 
-    private static final String enableButton = ".* cdk-focused cdk-mouse-focused mat-radio-checked";
-    private static final String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
-    private static final String disableBasicButton = "mat-radio-button mat-accent";
-    private static final String attrNameButton = "class";
+//    private static final String enableButton = ".* cdk-focused cdk-mouse-focused mat-radio-checked";
+//    private static final String disableSeasonButton = "mat-radio-button example-radio-button mat-accent";
+//    private static final String disableBasicButton = "mat-radio-button mat-accent";
+//    private static final String attrNameButton = "class";
 
     @BeforeMethod
     public void before() {
