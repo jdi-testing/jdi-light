@@ -113,9 +113,15 @@
 
     <profiles>
         <profile>
-            <id>unitcommon</id>
+            <id>unit</id>
             <properties>
-                <suite-xml-file>src/test/resources/unitcommon.xml</suite-xml-file>
+                <suite-xml-file>src/test/resources/unit.xml</suite-xml-file>
+            </properties>
+        </profile>
+        <profile>
+            <id>common</id>
+            <properties>
+                <suite-xml-file>src/test/resources/common.xml</suite-xml-file>
             </properties>
         </profile>
         <profile>
