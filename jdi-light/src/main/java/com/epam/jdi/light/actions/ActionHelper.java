@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
@@ -22,6 +23,7 @@ import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.pairs.Pair;
 import io.qameta.allure.Step;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -248,7 +250,16 @@ public class ActionHelper {
                 }
             }
         }
+        waitAfterAction(jInfo);
         TIMEOUTS.element.reset();
+    }
+    private static void waitAfterAction(ActionObject jInfo) {
+        IBaseElement element = jInfo.element();
+        if (element == null) return;
+        Pair<String, Integer> waitAfter = element.base().waitAfter();
+        if (isNotBlank(waitAfter.key) && jInfo.methodName().equalsIgnoreCase(waitAfter.key) && waitAfter.value > 0) {
+            Timer.sleep(waitAfter.value * 1000);
+        }
     }
     public static JFunc2<ActionObject, Object, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
     public static JFunc2<ActionObject, Object, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;

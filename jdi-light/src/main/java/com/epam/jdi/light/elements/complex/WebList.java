@@ -16,6 +16,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.pairs.Pair;
 import com.google.common.primitives.Ints;
 import org.apache.commons.lang3.ArrayUtils;
 import org.hamcrest.Matcher;
@@ -45,6 +46,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
@@ -123,7 +125,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         super.setName(name);
         return this;
     }
-    protected CacheValue<MapArray<String, UIElement>> map = new CacheValue<>();
+    protected CacheValue<MapArray<String, UIElement>> map = new CacheValue<>(MapArray::new);
 
     protected String nameFromIndex(int i) {
         return nameFromValue(i+1+"");
@@ -140,7 +142,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         if (minAmount < 0)
             throw exception("uiElements failed. minAmount should be more than 0, but " + minAmount);
         if (isUseCache()) {
-            if (map.hasValue() && map.get().size() > 0 && map.get().size() >= minAmount && isActual(map.get().values().get(0).get()))
+            if (map.hasValue() && map.get().size() > 0 && map.get().size() >= minAmount && isActual(map.get().values().get(0)))
                 return LinqUtils.select(map.get().values(), el -> el.get());
             if (webElements.hasValue() && webElements.get().size() > 0 && webElements.get().size() >= minAmount && isActual(webElements.get().get(0)))
                 return webElements.get();
@@ -170,37 +172,63 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     protected String getElementName(UIElement element) {
         try {
-            return (UIELEMENT_NAME != null
-                    ? UIELEMENT_NAME
-                    : textType.func).execute(element);
+            return nameFunc().execute(element);
         } catch (Exception ex) {
             return "";
         }
     }
+    protected JFunc1<UIElement, String> nameFunc() {
+        return UIELEMENT_NAME != null ? UIELEMENT_NAME : textType.func;
+    }
+
     protected boolean hasKey(String value) {
-        return map.hasValue() && any(map.get().keys(), key -> namesEqual(key, value));
+        if (map.hasValue() && any(map.get().keys(), key -> namesEqual(key, value)))
+            return isActual(map.get().get(value));
+        return false;
     }
     /**
      * @param value
      */
     @JDIAction(level = DEBUG) @Override
     public UIElement get(String value) {
-        if (hasKey(value))
-            return map.get().get(value);
-        return getUIElement(value);
+        return hasKey(value)
+            ? map.get().get(value)
+            : getUIElement(value);
     }
 
     public UIElement getUIElement(String value) {
-        if (locator.isTemplate())
-            return new UIElement(base(), getLocator(value), nameFromValue(value));
-        else {
-            refresh();
-            if (locator.isXPath())
-                return new UIElement(base(), locator.addText(value), nameFromValue(value), parent);
-            UIElement result = LinqUtils.first(elements(1), el -> namesEqual(el.text(textType), value));
-            if (result != null)
-                return result;
+        UIElement element = locator.isTemplate()
+            ? new UIElement(base(), getLocator(value), nameFromValue(value))
+            : getNewElementByValue(value);
+        map.get().update(value, element);
+        return element;
+    }
+    protected UIElement getNewElementByValue(String value) {
+        refresh();
+        if (locator.isXPath())
+            return new UIElement(base(), locator.addText(value), nameFromValue(value), parent);
+        UIElement result = firstUIElement(value);
+        if (result == null)
             throw exception("Failed to get '%s' in list '%s'. No elements with this name found", value, getName());
+        return result;
+    }
+    protected UIElement firstUIElement(String value) {
+        MapArray<String, UIElement> nameElement = new MapArray<>();
+        try {
+            for (UIElement element : elements(1)) {
+                String name = getElementName(element);
+                nameElement.add(name, element);
+                if (namesEqual(name, value))
+                    return element;
+            }
+            return null;
+        } finally {
+            if (map.hasValue()) {
+                for (Pair<String, UIElement> pair : map.get())
+                    if (!any(nameElement.keys(), name -> namesEqual(name, pair.key)))
+                        nameElement.add(pair);
+            }
+            map.set(nameElement);
         }
     }
     private JFunc1<UIElement, String> UIELEMENT_NAME;
@@ -239,7 +267,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             throw exception("Can't get element with index '%s'. Index should be %s or more", index, startIndex);
         int getIndex = index - startIndex;
         if (locator.isNull() && isUseCache()) {
-            if (map.hasValue() && map.get().size() > 0 && map.get().size() >= getIndex && isActual(map.get().values().get(0).get()))
+            if (map.hasValue() && map.get().size() > 0 && map.get().size() >= getIndex && isActual(map.get().values().get(0)))
                 return map.get().values().get(getIndex);
             if (webElements.hasValue() && webElements.get().size() > 0 && webElements.get().size() >= getIndex && isActual(webElements.get().get(0)))
                 return $(webElements.get().get(getIndex));
@@ -596,8 +624,13 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     protected boolean isActual(WebElement element) {
         try {
+            if (isClass(element.getClass(), UIElement.class))
+                return ((UIElement)element).noWait(() -> isNotBlank(element.getTagName()));
             return isNotBlank(element.getTagName());
-        } catch (Exception ex) { return false; }
+        } catch (Exception ex) {
+            map.clear();
+            return false;
+        }
     }
     protected UIElement initElement(JFunc<WebElement> func) {
         return initElement(func.execute(), func);

@@ -13,6 +13,7 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -42,6 +43,7 @@ import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -157,6 +159,18 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public List<By> getFrames() { return locator.getFrames(); }
 
     protected int timeout = -1;
+    protected int waitAfterTimeout = -1;
+    protected String waitAfterMethod = "";
+    public IBaseElement waitAfter(int timeout, String methodName) {
+        if (timeout > 0)
+            waitAfterTimeout = timeout;
+        if (isNotBlank(methodName))
+            waitAfterMethod = methodName;
+        return this;
+    }
+    public Pair<String, Integer> waitAfter() {
+        return new Pair<>(waitAfterMethod, waitAfterTimeout);
+    }
     @Override
     public IBaseElement waitSec(int sec) {
         timeout = sec;

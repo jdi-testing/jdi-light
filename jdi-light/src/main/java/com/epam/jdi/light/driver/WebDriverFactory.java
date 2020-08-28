@@ -89,7 +89,7 @@ public class WebDriverFactory {
                 driver = rDrivers.get(driverName);
             } catch (Throwable ex) {
                 if (driverDownloaded)
-                    throw exception(ex, "Failed to run downloaded driver. Please check that your browser and driver are compatible." + LINE_BREAK
+                    throw exception(ex, "Failed to run downloaded driver. Please check that your browser and driver are compatible or use local driver with 'drivers.folder' property in test.properties'." + LINE_BREAK
                         + "Driver: " + downloadedDriverInfo + LINE_BREAK
                         + "DriverPath: " + driverPath);
                 else throw exception(ex, "Failed to run driver");

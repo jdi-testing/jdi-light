@@ -158,6 +158,7 @@ public class WebSettings {
             }
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
+            fillAction(p -> DRIVER.path = p, "drivers.path");
             fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
             fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(WebSettings::setDomain, "domain");
