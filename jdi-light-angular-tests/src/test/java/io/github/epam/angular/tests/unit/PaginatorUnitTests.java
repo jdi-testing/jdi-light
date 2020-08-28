@@ -10,12 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static io.github.com.pages.sections.PaginatorSection.listLength;
-import static io.github.com.pages.sections.PaginatorSection.pageSizeOptions;
-import static io.github.com.pages.sections.PaginatorSection.paginator;
-import static org.testng.Assert.*;
 import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.sections.PaginatorSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static org.testng.Assert.*;
 
 public class PaginatorUnitTests extends TestsInit {
 
