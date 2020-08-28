@@ -778,6 +778,11 @@ public class UIElement extends JDIBase
             return false;
         }
     }
+    @Override
+    public UIElement noValidation() {
+        super.noValidation();
+        return this;
+    }
 
     public boolean isClickable() {
         return isClickable(getRect().getWidth()/2, getRect().getHeight()/2-1);

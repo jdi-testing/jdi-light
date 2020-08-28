@@ -36,7 +36,7 @@ public class ListPerformanceTests implements TestsInit {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList());
-        }, () -> firstRow.getValuesFast(), 0.8, 10);
+        }, () -> firstRow.getValuesFast(), 0.4, 10);
     }
     @Test(invocationCount = repeat)
     public void getValuesValueTest() {
@@ -46,21 +46,25 @@ public class ListPerformanceTests implements TestsInit {
 
         testScenario(() -> elements.stream().filter(
             el -> el.getText().equals(value)).findFirst().get().getText(),
-            () -> firstRow.get(value).getText(), 70, 10);
+            () -> firstRow.getFast(value).getText(), 35, 10);
     }
     @Test(invocationCount = repeat)
     public void getValueTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
-            return elements.stream().filter(el -> el.getText().equals(value)).findFirst().get().getText();
-        }, () -> firstTemplate.get(value).getText(), 90, 10);
+            for (WebElement el : elements) {
+                String text = el.getText();
+                if (text.equals(value))
+                    return text;
+            } return "";
+        }, () -> firstTemplate.getFast(value).getText(), 45, 10);
     }
     @Test(invocationCount = repeat)
     public void getIndexTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.get(index).getText();
-        }, () -> firstXpath.get(index+1).getText(), 0.9, 100);
+        }, () -> firstXpath.getFast(index+1).getText(), 0.45, 100);
     }
 
     private <T> void testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, double expectedRatio, int count) {
@@ -80,9 +84,9 @@ public class ListPerformanceTests implements TestsInit {
         }
         double avSelenium = getAverage("Selenium");
         double avJdi = getAverage("Jdi");
-        System.out.println("Average Selenium: " + avSelenium);
-        System.out.println("Average Jdi: " + avJdi);
-        System.out.println("Average Ratio: "+avSelenium/avJdi);
-        assertThat(avSelenium, greaterThan(avJdi*expectedRatio/2));
+        System.out.println("Average Selenium: " + avSelenium + " ms");
+        System.out.println("Average Jdi: " + avJdi + " ms");
+        System.out.println("JDI better than Selenium in "+avSelenium/avJdi + " times");
+        assertThat(avSelenium, greaterThan(avJdi*expectedRatio));
     }
 }
