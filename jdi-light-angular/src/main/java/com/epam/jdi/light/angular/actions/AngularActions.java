@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
+import static com.epam.jdi.light.actions.ActionProcessor.newInfo;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
@@ -18,22 +19,23 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 @Aspect
 public class AngularActions {
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
-    protected void jdiPointcut() {
-        // this method is created only for passing as a parameter in the annotation @Around
-    }
+    protected void jdiPointcut() { }
 
     @Around("jdiPointcut()")
     public Object jdiAround(final ProceedingJoinPoint jp) {
-        ActionObject jInfo = new ActionObject(jp);
+        ActionObject jInfo = newInfo(jp);
         try {
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
-            Object result = jInfo.topLevel() ? stableAction(jInfo) : defaultAction(jInfo);
+            Object result = jInfo.topLevel()
+                    ? stableAction(jInfo)
+                    : defaultAction(jInfo);
             return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
             logger.debug("ActionProcessor exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
-        } finally {
+        }
+        finally {
             jInfo.clear();
         }
     }
