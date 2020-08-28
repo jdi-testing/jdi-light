@@ -6,12 +6,12 @@
 
     <artifactId>jdi-light-angular-tests-with-mocks</artifactId>
     <name>Tests: JDI Angular unit tests with mocks</name>
-    <version>1.2.16</version>
+    <version>1.2.18</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
         <driver>chrome</driver>
-        <aspectj.version>1.9.5</aspectj.version>
+        <aspectj.version>1.9.6</aspectj.version>
         <java.version>1.8</java.version>
         <allure.testng>2.13.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-angular</artifactId>
-            <version>1.2.16</version>
+            <version>1.2.18</version>
         </dependency>
 
         <dependency>
