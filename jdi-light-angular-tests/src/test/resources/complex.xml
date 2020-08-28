@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JDI-Light Angular Complex elements Tests" parallel="methods" thread-count="2">
+<suite name="JDI-Light Angular Complex elements Tests" parallel="methods" thread-count="1">
     <test name="Complex elements tests">
         <packages>
             <package name="io.github.epam.angular.tests.elements.complex.*"/>

@@ -161,14 +161,14 @@ jobs:
       jdk: openjdk13
 
     - <<: *testsangularunitcommon
-      name: Run tests - angular - JDK8
+      name: Run tests - angular unit tests & ui tests for common elements - JDK8
       if: true
       jdk: openjdk8
     - <<: *testsangularunitcommon
       name: Run tests - angular - JDK9
       jdk: openjdk9
     - <<: *testsangularunitcommon
-      name: Run tests - angular - JDK10
+      name: Run tests - angular unit tests & ui tests for common elements - JDK10
       if: true
       jdk: openjdk10
     - <<: *testsangularunitcommon
@@ -182,14 +182,14 @@ jobs:
       jdk: openjdk13
 
     - <<: *testsangularcomplex
-      name: Run tests - angular - JDK8
+      name: Run tests - angular ui tests for complex elements - JDK8
       if: true
       jdk: openjdk8
     - <<: *testsangularcomplex
       name: Run tests - angular - JDK9
       jdk: openjdk9
     - <<: *testsangularcomplex
-      name: Run tests - angular - JDK10
+      name: Run tests - angular ui tests for complex elements - JDK10
       if: true
       jdk: openjdk10
     - <<: *testsangularcomplex
