@@ -15,6 +15,8 @@ env:
   global:
     - CHROME_PROPERTIES="chrome.properties"
     - WITH_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
+    - UNIT_COMMON="-Punitcommon"
+    - COMPLEX="-Pcomplex"
     - GROUP_ID="com.epam.jdi"
     - NOPO_TESTS="jdi-bdd-no-po-tests"
     - NOPO_TESTS_PROPERTY="test-examples/jdi-bdd-no-po-tests"
@@ -55,14 +57,22 @@ testsbootstrap: &testsbootstrap
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
-testsangular: &testsangular
+testsangularunitcommon: &testsangularunitcommon
   stage: test
   name: Run tests - angular
   <<: *cron_condition
   script:
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$ANGULAR_TESTS
+    - mvn verify $WITH_PARAMS $UNIT_COMMON -pl $GROUP_ID:$ANGULAR_TESTS
+testsangularcomplex: &testsangularcomplex
+  stage: test
+  name: Run tests - angular
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
 testshtml: &testshtml
   stage: test
   name: Run tests - html
@@ -150,24 +160,45 @@ jobs:
       name: Run tests - bootstrap - JDK13
       jdk: openjdk13
 
-    - <<: *testsangular
+    - <<: *testsangularunitcommon
       name: Run tests - angular - JDK8
       if: true
       jdk: openjdk8
-    - <<: *testsangular
+    - <<: *testsangularunitcommon
       name: Run tests - angular - JDK9
       jdk: openjdk9
-    - <<: *testsangular
+    - <<: *testsangularunitcommon
       name: Run tests - angular - JDK10
       if: true
       jdk: openjdk10
-    - <<: *testsangular
+    - <<: *testsangularunitcommon
       name: Run tests - angular - JDK11
       jdk: openjdk11
-    - <<: *testsangular
+    - <<: *testsangularunitcommon
       name: Run tests - angular - JDK12
       jdk: openjdk12
-    - <<: *testsangular
+    - <<: *testsangularunitcommon
+      name: Run tests - angular - JDK13
+      jdk: openjdk13
+
+    - <<: *testsangularcomplex
+      name: Run tests - angular - JDK8
+      if: true
+      jdk: openjdk8
+    - <<: *testsangularcomplex
+      name: Run tests - angular - JDK9
+      jdk: openjdk9
+    - <<: *testsangularcomplex
+      name: Run tests - angular - JDK10
+      if: true
+      jdk: openjdk10
+    - <<: *testsangularcomplex
+      name: Run tests - angular - JDK11
+      jdk: openjdk11
+    - <<: *testsangularcomplex
+      name: Run tests - angular - JDK12
+      jdk: openjdk12
+    - <<: *testsangularcomplex
       name: Run tests - angular - JDK13
       jdk: openjdk13
 
