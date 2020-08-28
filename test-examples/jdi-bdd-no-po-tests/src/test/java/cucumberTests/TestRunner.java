@@ -17,7 +17,7 @@ import static cucumberTests.test.data.TestData.ROMAN;
 @CucumberOptions(
     features = "classpath:features"
     , glue = {"com.epam.jdi.bdd", "cucumberTests"}
-    , tags = {"@form"}
+    //, tags = {"@form"}
 )
 public class TestRunner {
     @BeforeClass
