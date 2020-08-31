@@ -26,6 +26,7 @@ import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
 import io.github.com.pages.sections.TabGroupSection;
 import io.github.com.pages.sections.ToolbarSection;
+import io.github.com.pages.sections.TooltipSection;
 
 public class AngularPage extends WebPage {
     @Css("radio-overview-example .mat-radio-group")
@@ -59,9 +60,6 @@ public class AngularPage extends WebPage {
     public static SliderSection sliderSection;
     public static CardSection cardSection;
     public static DividerSection dividerSection;
-
     public static TooltipSection tooltipSection;
-
     public static DatepickerSection datepickerSection;
-
 }
