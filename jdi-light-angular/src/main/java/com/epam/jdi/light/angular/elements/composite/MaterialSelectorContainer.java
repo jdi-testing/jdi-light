@@ -192,7 +192,7 @@ public class MaterialSelectorContainer extends Section {
     public boolean color(final int red, final int green, final int blue, final double a) {
         getBackdropSelectPanel().waitFor();
         boolean hasColor = getBackdropSelectPanel().css("background-color")
-                .equalsIgnoreCase("rgba(" + red + ", " + green + ", " + blue + ", " + a + ")");
+                .equalsIgnoreCase(String.format("rgba(%s, %s, %s, %s)", red, green, blue, a));
         collapsePanel();
         return hasColor;
     }
