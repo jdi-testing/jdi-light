@@ -43,9 +43,9 @@ public class RadioButtonTests extends TestsInit {
         seasonRadioButtons.is().assertRadioButtonIsChecked(SPRING);
         favoriteSeasonField.has().text(String.format("Your favorite season is: %s", SPRING));
 
+
         seasonRadioButtons.is().assertRadioButtonIsNotChecked(WINTER);
         seasonRadioButtons.is().assertRadioButtonIsNotChecked(SUMMER);
         seasonRadioButtons.is().assertRadioButtonIsNotChecked(AUTUMN);
     }
 }
-

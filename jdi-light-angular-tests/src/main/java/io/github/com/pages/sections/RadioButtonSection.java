@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class RadioButtonSection {
-
+  
     @UI("#basic-radio-group")
     public static RadioButtons basicRadioButtons;
 

@@ -5,14 +5,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.tabsSection;
+import static io.github.com.pages.sections.ButtonToggleSection.basicButtonToggle;
+import static io.github.com.pages.sections.ButtonToggleSection.basicButtonToggleAlign;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static org.testng.Assert.assertTrue;
 
 public class ButtonToggleUnitTests extends TestsInit {
 
-    public static final String CLASS_ATTR = "class";
-    public static final String ACCENT = "accent";
-    public static final String PRIMARY = "primary";
+    private final String ITALIC = "italic";
+    private final String BOLD = "bold";
+    private final String UNDERLINE = "underline";
+    private final String JUSTIFY = "justify";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
@@ -21,11 +24,25 @@ public class ButtonToggleUnitTests extends TestsInit {
     }
 
     @Test
-    public void verifyCustomThemeHighlighterColor() {
-        tabsSection.matButtonToggleGroupColor.clickButtonByValue(ACCENT);
-        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-background-primary mat-accent");
-        tabsSection.matButtonToggleGroupColor.clickButtonByValue(PRIMARY);
-        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-background-primary mat-primary");
+    public void isButtonToggleSelectedTest() {
+        basicButtonToggle.clickButtonToggleByValue(ITALIC);
+        assertTrue(basicButtonToggle.isButtonToggleSelected(ITALIC));
+    }
+
+    @Test
+    public void isButtonToggleButtonPressedTest() {
+        basicButtonToggle.clickButtonToggleByValue(BOLD);
+        assertTrue(basicButtonToggle.isButtonToggleButtonPressed(BOLD));
+    }
+
+    @Test
+    public void buttonToggleHasTextTest() {
+        basicButtonToggle.clickButtonToggleByValue(UNDERLINE);
+        assertTrue(basicButtonToggle.buttonToggleHasText(UNDERLINE));
+    }
+
+    @Test(expectedExceptions = UnsupportedOperationException.class)
+    public void verifyExclusiveButtonToggleJustifyButton() {
+        basicButtonToggleAlign.is().assertButtonToggleIsSelected(JUSTIFY);
     }
 }
-
