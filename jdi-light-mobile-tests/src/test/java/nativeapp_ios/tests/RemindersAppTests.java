@@ -25,7 +25,7 @@ public class RemindersAppTests extends RemindersAppTestsInit {
         RemindersPage.newReminderButton.tap();
         RemindersPage.editDetailsInfoButton.openDetails();
 
-        EditDetailsPage.alarm.tap();
+        EditDetailsPage.alarmMenuItem.tap();
         EditDetailsPage.yearPicker.setPickerWheelValue("2015");
         EditDetailsPage.yearPicker.is().text("2015");
 

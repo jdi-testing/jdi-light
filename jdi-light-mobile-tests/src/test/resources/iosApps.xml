@@ -21,4 +21,9 @@
             <class name="nativeapp_ios.tests.MessagesAppTests"/>
         </classes>
     </test>
+    <test name="Settings app tests">
+        <classes>
+            <class name="nativeapp_ios.tests.SettingsAppTests"/>
+        </classes>
+    </test>
 </suite>
