@@ -5,9 +5,11 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
+import org.mytests.tests.testng.TestNGListener;
 import org.mytests.uiobjects.example.site.SiteJdi;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 
 import static com.epam.jdi.light.actions.ActionHelper.AFTER_JDI_ACTION;
 import static com.epam.jdi.light.actions.ActionHelper.BEFORE_JDI_ACTION;
@@ -21,6 +23,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mytests.tests.PerfStatistic.*;
 import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 
+@Listeners(TestNGListener.class)
 public class TestsInit {
     public static Safe<Timer> TIMER = new Safe<>();
     @BeforeSuite(alwaysRun = true)
