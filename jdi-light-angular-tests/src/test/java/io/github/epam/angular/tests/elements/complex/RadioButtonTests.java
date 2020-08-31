@@ -76,6 +76,7 @@ public class RadioButtonTests extends TestsInit {
         radioButtonSection.favoriteSeason.has().text("Your favorite season is: Summer");
         radioButtonSection.autumnNGModelRadioButton.click();
         radioButtonSection.favoriteSeason.has().text("Your favorite season is: Autumn");
+
     }
 
     @Test
@@ -99,7 +100,7 @@ public class RadioButtonTests extends TestsInit {
     @Test
     public void onlyOneSummerButtonEnabledTest() {
         radioButtonSection.summerNGModelRadioButton.click();
-        radioButtonSection.winterNGModelRadioButton.has().attr(attrNameButton,disableSeasonButton);
+        radioButtonSection.winterNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
         radioButtonSection.springNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);
         radioButtonSection.summerNGModelRadioButton.has().attr(attrNameButton, matchesRegex(enableButton));
         radioButtonSection.autumnNGModelRadioButton.has().attr(attrNameButton, disableSeasonButton);

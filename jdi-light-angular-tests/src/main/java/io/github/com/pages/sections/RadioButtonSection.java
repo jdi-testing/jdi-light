@@ -7,6 +7,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 
 public class RadioButtonSection {
+
     @Css("#basic-radio-group")
     public static RadioButtons basicRadioButtons;
 
@@ -16,7 +17,7 @@ public class RadioButtonSection {
     @UI("#radio-option-two")
     public static Button secondBasicRadioButton;
 
-    @Css("#season-radio-group")
+    @UI("#season-radio-group")
     public static RadioButtons seasonRadioButtons;
 
     @UI("#favorite-season-winter")
