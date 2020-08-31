@@ -9,7 +9,7 @@ import static io.github.com.pages.sections.SelectSection.customPanelStylingSelec
 import static org.hamcrest.Matchers.hasItems;
 
 public class CustomPanelStylingSelectTests extends TestsSelectBase {
-    @BeforeMethod()
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         customPanelStylingSelect.show();
     }
