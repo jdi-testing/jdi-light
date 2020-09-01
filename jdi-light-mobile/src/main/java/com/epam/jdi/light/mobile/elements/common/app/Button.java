@@ -1,4 +1,4 @@
-package com.epam.jdi.light.mobile.elements.common.ios.app;
+package com.epam.jdi.light.mobile.elements.common.app;
 
 import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
