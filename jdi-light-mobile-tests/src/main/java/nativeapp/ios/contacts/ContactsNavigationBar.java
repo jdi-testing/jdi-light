@@ -1,7 +1,7 @@
 package nativeapp.ios.contacts;
 
-import com.epam.jdi.light.mobile.elements.common.ios.app.Button;
-import com.epam.jdi.light.mobile.elements.common.ios.app.SystemButton;
+import com.epam.jdi.light.mobile.elements.common.app.Button;
+import com.epam.jdi.light.mobile.elements.common.app.ios.SystemButton;
 import com.epam.jdi.light.mobile.elements.composite.ios.app.NavigationBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 

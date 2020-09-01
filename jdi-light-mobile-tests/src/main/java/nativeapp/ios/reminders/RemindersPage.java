@@ -1,7 +1,7 @@
 package nativeapp.ios.reminders;
 
-import com.epam.jdi.light.mobile.elements.common.ios.app.Button;
-import com.epam.jdi.light.mobile.elements.common.ios.app.InfoButton;
+import com.epam.jdi.light.mobile.elements.common.app.Button;
+import com.epam.jdi.light.mobile.elements.common.app.ios.InfoButton;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class RemindersPage {

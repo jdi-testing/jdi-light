@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
-import com.epam.jdi.light.mobile.elements.common.ios.app.MenuItem;
+import com.epam.jdi.light.mobile.elements.common.app.ios.MenuItem;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.By;
