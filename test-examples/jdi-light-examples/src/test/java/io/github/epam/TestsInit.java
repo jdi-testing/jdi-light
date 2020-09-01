@@ -10,7 +10,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.epam.EpamGithubSite.homePage;
 
-@Listeners(TestNGListener.class)
+
 public class TestsInit extends TestNGListener {
 
     @BeforeSuite(alwaysRun = true)

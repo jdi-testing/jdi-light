@@ -16,7 +16,7 @@ import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
 
-@Listeners(TestNGListener.class)
+
 public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
