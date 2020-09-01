@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,12 +13,41 @@ import static io.github.com.pages.sections.SelectSection.customPanelStylingSelec
 import static io.github.com.pages.sections.SelectSection.matErrorStateMatcherSelect;
 import static io.github.com.pages.sections.SelectSection.multipleSelect;
 import static io.github.com.pages.sections.SelectSection.optionGroupsMatSelect;
-import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.*;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.BELLSPROUT;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.BULBASAUR;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.CHARMANDER;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.FIRE;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.FLAREON;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.GRASS;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.HORSEA;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.INVALID_OPTION;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.INVALID_SELECTION;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.MEW;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.MEWTWO;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.MUSHROOM;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.ODDISH;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.PEPPERONI;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.PIZZA;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.PSYCHIC;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.PSYDUCK;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.RED;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.SAUSAGE;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.SQUIRTLE;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.STEAK;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.TACOS;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.TOMATO;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.VALID_OPTION;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.VULPIX;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.WATER;
+import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.getPokemonsMap;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class MaterialSelectorUnitTests extends TestsInit {
+    private String[] multiOptions = new String[3];
+    private int[] multiSelect = new int[3];
+
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
@@ -29,7 +59,6 @@ public class MaterialSelectorUnitTests extends TestsInit {
         basicMatSelect.show();
         basicMatSelect.expand();
         assertTrue(basicMatSelect.isExpanded());
-        basicMatSelect.collapse();
     }
 
     @Test
@@ -56,17 +85,19 @@ public class MaterialSelectorUnitTests extends TestsInit {
     @Test
     public void multipleSelectByValuesTest() {
         multipleSelect.show();
-        multipleSelect.multipleSelect(MUSHROOM, PEPPERONI, SAUSAGE);
-        assertEquals(multipleSelect.selected(), MUSHROOM + ", " + PEPPERONI + ", " + SAUSAGE);
-        multipleSelect.multipleSelect(MUSHROOM, PEPPERONI, SAUSAGE);
+        multiOptions[0] = MUSHROOM;
+        multiOptions[1] = PEPPERONI;
+        multiOptions[2] = SAUSAGE;
+        multipleSelect.multipleSelect(multiOptions);
+        assertEquals(multipleSelect.selected(), multiOptions[0] + ", " + multiOptions[1] + ", " + multiOptions[2]);
     }
 
     @Test
     public void multipleSelectByIndexesTest() {
         multipleSelect.show();
-        multipleSelect.multipleSelect(2, 4, 6);
+        multiSelect = new int[] {2, 4, 6};
+        multipleSelect.multipleSelect(multiSelect);
         assertEquals(multipleSelect.selected(), MUSHROOM + ", " + PEPPERONI + ", " + TOMATO);
-        multipleSelect.multipleSelect(MUSHROOM, PEPPERONI, TOMATO);
     }
 
     @Test
@@ -120,5 +151,22 @@ public class MaterialSelectorUnitTests extends TestsInit {
         matErrorStateMatcherSelect.show();
         matErrorStateMatcherSelect.select(INVALID_OPTION);
         assertEquals(matErrorStateMatcherSelect.error().text(), INVALID_SELECTION);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (basicMatSelect.isExpanded()) {
+            basicMatSelect.collapse();
+        }
+        if (multiSelect[0] != 0) {
+            multipleSelect.multipleSelect(multiSelect);
+            multiSelect = new int[3];
+        }
+        if (multiOptions[0] != null) {
+            multipleSelect.multipleSelect(multiOptions);
+            multiOptions[0] = null;
+            multiOptions[1] = null;
+            multiOptions[2] = null;
+        }
     }
 }
