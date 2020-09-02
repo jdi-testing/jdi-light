@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -49,6 +50,7 @@ import static java.lang.Math.abs;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.Keys.BACK_SPACE;
 
@@ -136,6 +138,7 @@ public class UIElement extends JDIBase
         } else {
             el.sendKeys(value);
         }
+        waitAfterAction();
     }
     @Override
     public void clear() { get().clear();}
@@ -179,6 +182,11 @@ public class UIElement extends JDIBase
 
     @JDIAction("Get '{name}' text") @Override
     public String getText() {
+        return text(textType);
+    }
+    @JDIAction("Get '{name}' text")
+    public String getTextForce() {
+        noValidation();
         return text(textType);
     }
 
@@ -287,6 +295,7 @@ public class UIElement extends JDIBase
     @JDIAction("Input '{0}' in '{name}'")
     public void input(String value) {
         setTextType.action.execute(this, value);
+        waitAfterAction();
     }
     /**
      * Focus
@@ -345,11 +354,17 @@ public class UIElement extends JDIBase
                     }
                 } else click(clArea);
         }
+        waitAfterAction();
     }
-    private RuntimeException getNotClickableException() {
+    protected void waitAfterAction() {
+        if (isBlank(waitAfterMethod) && waitAfterTimeout > 0) {
+            Timer.sleep(waitAfterTimeout * 1000);
+        }
+    }
+    protected RuntimeException getNotClickableException() {
         return exception("%s is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong", getName());
     }
-    private ElementArea getElementClickableArea() {
+    protected ElementArea getElementClickableArea() {
         return Switch().get(
             Case(t -> isClickable(), t-> CENTER),
             Case(t -> isClickable(1, 1), t-> TOP_LEFT),
@@ -368,11 +383,15 @@ public class UIElement extends JDIBase
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
         get(value).click();
+        waitAfterAction();
     }
     @JDIAction("Select '{name}' element")
     public void select() { click(); }
     @JDIAction("Select '{0}' in '{name}'")
-    public void select(int index) { getWebElements().get(index).click(); }
+    public void select(int index) {
+        getWebElements().get(index).click();
+        waitAfterAction();
+    }
     /**
      * Select items by the values
      * @param names
@@ -539,6 +558,7 @@ public class UIElement extends JDIBase
     @JDIAction("DoubleClick on '{name}'") @Override
     public void doubleClick() {
         actionsWithElement((a,e) -> a.doubleClick(e));
+        waitAfterAction();
     }
     /**
      * Right click on the element
@@ -546,6 +566,7 @@ public class UIElement extends JDIBase
     @JDIAction("RightClick on '{name}'") @Override
     public void rightClick() {
         actionsWithElement((a,e) -> a.contextClick(e));
+        waitAfterAction();
     }
 
     /**
@@ -582,7 +603,7 @@ public class UIElement extends JDIBase
      * Get element's screen shot with red border
      * @return String
      */
-    private String imageFilePath;
+    protected String imageFilePath;
 
     public boolean hasImage() {
         return imageFilePath != null;
@@ -590,7 +611,7 @@ public class UIElement extends JDIBase
     public File getImageFile() {
         return hasImage() ? new File(imageFilePath) : null;
     }
-    private String getScreenshotName(String tag) {
+    protected String getScreenshotName(String tag) {
         return varName + tag + SCREEN.fileSuffix;
     }
 
@@ -604,7 +625,7 @@ public class UIElement extends JDIBase
             getScreenshotName(tag));
         return getImageFile();
     }
-    private int multiply(int value) {
+    protected int multiply(int value) {
         return (int)Math.round(value*zoomLevel());
     }
     @JDIAction("Visual compare '{0}'")
@@ -621,7 +642,7 @@ public class UIElement extends JDIBase
             }
         } catch (Exception ex) {throw exception(ex, "Can't compare files"); }
     }
-    private void compareImageFiles(File image1, File image2) {
+    protected void compareImageFiles(File image1, File image2) {
         long actual = image1.length();
         long expected = image2.length();
         String result = abs(actual - expected) < 100
@@ -763,15 +784,15 @@ public class UIElement extends JDIBase
     }
     public boolean isClickable(int x, int y) {
         return (Boolean) js().executeScript("var elem = arguments[0],    " +
-                "  rect = elem.getBoundingClientRect(),    " +
-                "  cx = rect.left + arguments[1],        " +
-                "  cy = rect.top + arguments[2],        " +
-                "  e = document.elementFromPoint(cx, cy); " +
-                "for (; e; e = e.parentElement) {         " +
-                "  if (e === elem)                        " +
-                "    return true;                         " +
-                "}                                        " +
-                "return false;                            ", getWebElement(), x, y);
+            "  rect = elem.getBoundingClientRect(),    " +
+            "  cx = rect.left + arguments[1],        " +
+            "  cy = rect.top + arguments[2],        " +
+            "  e = document.elementFromPoint(cx, cy); " +
+            "for (; e; e = e.parentElement) {         " +
+            "  if (e === elem)                        " +
+            "    return true;                         " +
+            "}                                        " +
+            "return false;                            ", getWebElement(), x, y);
     }
     //endregion
     public boolean wait(JFunc1<UIElement, Boolean> condition) {
