@@ -22,11 +22,11 @@ public class TableMatcher {
     };
     public static TableMatcher hasValue(String value, Column column) {
         return new TableMatcher("/td[%s][normalize-space(.)="+ Quotes.escape(value)+"]",
-                column, format("has '%s' in column '%s'", value, column));
+                column, "has '"+value +"'");
     }
     public static TableMatcher containsValue(String value, Column column) {
         return new TableMatcher("/td[%s][contains(normalize-space(.),"+ Quotes.escape(value)+")]",
-                column, format("contains '%s' in column '%s'", value, column));
+                column, "contains '"+value +"'");
     }
 
     private String locator;

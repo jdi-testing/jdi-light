@@ -2,10 +2,8 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 
@@ -17,10 +15,8 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.asEntity;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -45,7 +41,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
     public List<D> asData() {
         try {
             if (dataType == null) return null;
-            return LinqUtils.map(elements(1), v -> asEntity(v, dataType));
+            return LinqUtils.map(elements(1).values(), v -> asEntity(v, dataType));
         } catch (Exception ex) {
             throw exception(ex, "Can't get DataList data");
         }
@@ -89,12 +85,9 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
                         field.getName(), types.length);
                 initClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
                 dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>) types[1];
-        } catch (Exception ignore) { }
-    }
-    public int getIndex(String name) {
-        return list().hasKey(name)
-            ? list().map.get().indexOf(name)
-            : -1;
+        } catch (Exception ignore) {
+
+        }
     }
     @Override
     public List<String> values() {

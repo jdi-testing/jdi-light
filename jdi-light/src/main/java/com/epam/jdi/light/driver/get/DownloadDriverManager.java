@@ -7,20 +7,16 @@ import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;
 import static com.epam.jdi.light.driver.get.DriverVersion.PENULT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
-import static java.lang.String.format;
 
 /**
  * Created by Roman_Iovlev on 11/28/2017.
  */
-public class DownloadDriverManager {
+class DownloadDriverManager {
     private static boolean hasVersion(String version) {
         char c = version.charAt(0);
         return (c >= '0' && c <= '9');
     }
     static WebDriverManager wdm;
-    public static boolean driverDownloaded = false;
-    public static String downloadedDriverInfo;
-    public static String driverPath;
 
     static String downloadDriver(DriverTypes driverType, Platform platform, String version) {
         try {
@@ -58,9 +54,6 @@ public class DownloadDriverManager {
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
-            driverDownloaded = true;
-            downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
-            driverPath = wdm.getDownloadedDriverPath();
             return wdm.getDownloadedDriverPath();
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);
