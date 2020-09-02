@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Checklist;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.bootstrap.elements.common.*;
 import com.epam.jdi.light.ui.bootstrap.elements.complex.Carousel;
@@ -33,6 +34,7 @@ public class BootstrapPage extends WebPage {
     public static Switch switcher, disabledSwitcher;
     public static ButtonWithTooltip buttonWithTooltip;
     public static Button simpleToastButton;
+    @WaitAfterAction(1)
     public static Button expandLink;
     public static Text hiddenText;
     public static FullName multipleInputs;

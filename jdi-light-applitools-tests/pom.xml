@@ -16,7 +16,7 @@
         <applitools.version>3.157.10</applitools.version>
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
-        <aspectj.version>1.9.5</aspectj.version>
+        <aspectj.version>1.9.6</aspectj.version>
         <allure.testng>2.13.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.16</version>
+            <version>1.2.18</version>
         </dependency>
         <dependency>
             <groupId>com.epam.jdi</groupId>
