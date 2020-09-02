@@ -12,7 +12,7 @@ public class CustomTriggerTextSelectTests extends TestsSelectBase {
     private String[] multiOptions = new String[1];
     private int[] multiSelect = new int[6];
 
-    @BeforeMethod()
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         customTriggerTextSelect.show();
     }
