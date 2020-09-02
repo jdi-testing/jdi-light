@@ -195,9 +195,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             ? map.get().get(value)
             : getUIElement(value);
     }
-    public UIElement getFast(String value) {
-        return get(value).noValidation();
-    }
 
     public UIElement getUIElement(String value) {
         UIElement element = locator.isTemplate()
@@ -262,9 +259,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         if (index < startIndex)
             throw exception("Can't get element with index '%s'. Index should be %s or more", index, startIndex);
         return getByIndex(index);
-    }
-    public UIElement getFast(int index) {
-        return get(index).noValidation();
     }
 
     @JDIAction(level = DEBUG)
