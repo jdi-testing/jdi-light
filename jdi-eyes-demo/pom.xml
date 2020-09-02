@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <allure.maven>2.9</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.6</aspectj.version>
+        <aspectj.version>1.9.5</aspectj.version>
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
     </properties>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.18</version>
+            <version>1.2.16</version>
         </dependency>
 
         <dependency>

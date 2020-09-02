@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PropReader;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
@@ -46,6 +47,8 @@ import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.Strategies.*;
 import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
 import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
@@ -158,7 +161,6 @@ public class WebSettings {
             }
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
-            fillAction(p -> DRIVER.path = p, "drivers.path");
             fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
             fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(WebSettings::setDomain, "domain");

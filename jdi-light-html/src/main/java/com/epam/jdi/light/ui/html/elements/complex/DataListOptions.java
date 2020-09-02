@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.tools.LinqUtils;
 
 import java.util.List;
 
@@ -49,7 +48,7 @@ public class DataListOptions extends UIListBase<DropdownAssert> implements IsCom
      **/
     @JDIAction("Select '{0}' for '{name}'") @Override
     public void select(int index) {
-        setText(LinqUtils.map(list().elements(index), UIElement::getTextForce).get(index-1));
+        setText(list().elements(index).keys().get(index-1));
     }
     /**
     *

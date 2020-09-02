@@ -9,7 +9,6 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
  */
 public interface IsText extends ICoreElement {
     default String getText() { return core().getText(); }
-    default String getTextForce() { return core().getTextForce(); }
     default String text() { return getText(); }
     default String text(TextTypes type) { return core().text(type); }
     default String getValue() { return getText(); }
