@@ -22,11 +22,11 @@ public class ActionOverride {
         OVERRIDE_ACTIONS_LIST.add(condition, func);
     }
     public static void overrideFunction(String actionName, JFunc1<Object, Object> func) {
-        OVERRIDE_ACTIONS_LIST.add(jp -> jp.getSignature().getName().equalsIgnoreCase(actionName), func);
+        OVERRIDE_ACTIONS_LIST.add(jp -> jp.getSignature().getName().equals(actionName), func);
     }
     public static void overrideFunction(String typeName, String actionName, JFunc1<Object, Object> func) {
-        OVERRIDE_ACTIONS_LIST.add(jp -> getJpTypeName(jp).equalsIgnoreCase(typeName)
-                && jp.getSignature().getName().equalsIgnoreCase(actionName), func);
+        OVERRIDE_ACTIONS_LIST.add(jp -> getJpTypeName(jp).equals(typeName)
+                && jp.getSignature().getName().equals(actionName), func);
     }
     private static String getJpTypeName(JoinPoint jp) {
         Object obj = jp.getThis();

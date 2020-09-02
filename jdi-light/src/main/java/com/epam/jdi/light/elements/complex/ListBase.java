@@ -13,6 +13,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.map.MultiMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -34,12 +35,12 @@ import static com.epam.jdi.tools.ReflectionUtils.getValueField;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
-        extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
+    extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
     protected WebList list;
     public WebList list() {
         if (list == null) {
             list = new WebList(core()).setUIElementName(this::elementTitle)
-                    .setName(getName());
+                .setName(getName());
         }
         return list;
     }
@@ -50,9 +51,9 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     public Class<?> initClass = UIElement.class;
 
     private boolean actualMapValue() {
-        return values.hasValue() && values.get().size() > 0 && isActual(values.get().get(0));
+        return map.hasValue() && map.get().size() > 0 && isActual(map.get().get(0).value);
     }
-    protected CacheValue<List<T>> values = new CacheValue<>();
+    protected CacheValue<MultiMap<String, T>> map = new CacheValue<>(() -> new MultiMap<String, T>().ignoreKeyCase());
     private boolean isActual(T element) {
         try {
             element.getTagName();
@@ -61,10 +62,10 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     }
 
     @JDIAction(level = DEBUG)
-    public List<T> elements(int minAmount) {
+    public MultiMap<String, T> elements(int minAmount) {
         if (actualMapValue())
-            return values.get();
-        return LinqUtils.map(list().elements(minAmount), this::toT);
+            return map.get();
+        return list().elements(minAmount).toMultiMap(this::toT);
     }
 
     /**
@@ -162,8 +163,8 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         T first = logger.logOff(() ->
                 first(item -> getByType(item, CanBeSelected.class).isSelected()));
         return first != null
-                ? getByType(first, IsText.class).getText()
-                : "";
+            ? getByType(first, IsText.class).getText()
+            : "";
     }
 
     /**
@@ -180,7 +181,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     @JDIAction(level = DEBUG)
     public void clear() {
         list().clear();
-        values.clear();
+        map.clear();
     }
 
     public void setValue(String value) {

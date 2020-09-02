@@ -22,7 +22,7 @@ public class Link extends UIBaseElement<LinkAssert>
         implements HasValue, HasClick, IsText {
     // region Actions
 
-    @JDIAction(value = "Get '{name}' reference", level = DEBUG)
+    @JDIAction(value = "Get '{name}' text", level = DEBUG)
     public String ref() { return uiElement.attr("href"); }
 
     public URL url() {

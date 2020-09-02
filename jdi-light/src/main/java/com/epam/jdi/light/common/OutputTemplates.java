@@ -8,7 +8,7 @@ import com.epam.jdi.tools.func.JFunc1;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class OutputTemplates {
-    public static String PRINT_PAGE_STEP = "{varName}";
+    public static String PRINT_PAGE_STEP = "(url={url}; title={title})";
     public static String PRINT_PAGE_INFO = "{varName} (url={url}; title={title})";
     public static String PRINT_PAGE_DEBUG = "{varName} (url={url}; title={title})";
 

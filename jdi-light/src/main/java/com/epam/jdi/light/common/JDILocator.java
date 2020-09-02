@@ -107,13 +107,10 @@ public class JDILocator {
     public String toString() {
         try {
             By locator = getLocator(args);
-            if (locator == null && element != null) {
-                if (element.webElement.hasValue() || element.webElements.hasValue())
-                    return element.printWebElement();
-                if (isNotBlank(ELEMENT.smartTemplate))
-                    return printSmartLocators(element);
-                return "";
-            }
+            if (locator == null && element != null)
+                return isNotBlank(ELEMENT.smartTemplate)
+                        ? printSmartLocators(element)
+                        : "";
             String hasFrame = "";
             if (hasFrame())
                 hasFrame = "Frame: " + print(map(frames, WebDriverByUtils::shortBy));

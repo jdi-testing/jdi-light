@@ -13,14 +13,12 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.*;
 import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -43,7 +41,6 @@ import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -159,18 +156,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public List<By> getFrames() { return locator.getFrames(); }
 
     protected int timeout = -1;
-    protected int waitAfterTimeout = -1;
-    protected String waitAfterMethod = "";
-    public IBaseElement waitAfter(int timeout, String methodName) {
-        if (timeout > 0)
-            waitAfterTimeout = timeout;
-        if (isNotBlank(methodName))
-            waitAfterMethod = methodName;
-        return this;
-    }
-    public Pair<String, Integer> waitAfter() {
-        return new Pair<>(waitAfterMethod, waitAfterTimeout);
-    }
     @Override
     public IBaseElement waitSec(int sec) {
         timeout = sec;
@@ -275,8 +260,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return (filtered.size() > 1 ? filtered : els).get(0);
     }
     private List<WebElement> filterElements(List<WebElement> elements) {
-        if (elements.size() == 0)
-            return new ArrayList<>();
         List<WebElement> result = elements;
         for (JFunc1<WebElement, Boolean> rule : searchRules().values())
             result = filter(result, rule::execute);
@@ -479,7 +462,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public String printContext() {
         JDIBase jdiBase = getBase(parent);
         if (jdiBase == null) return "";
-        String locator = jdiBase.locator.printLocator();
+        String locator = jdiBase.getLocator() == null
+                ? ""
+                : jdiBase.locator.printLocator();
         if (jdiBase.parent == null)
             return locator;
         if (isBlank(locator))
@@ -502,26 +487,20 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             return PRINT_ELEMENT.execute(this);
         } catch (Exception ex) { throw exception(ex, "Can't print element"); }
     }
-    public static String printWebElement(WebElement element) {
+    private static String printWebElement(WebElement element) {
         String asString = element.toString().replaceAll("css selector", "css");
         String result = asString.startsWith("WebElement->")
                 ? "" : "WebElement->";
         if (asString.contains(")]")) {
-            String s = asString.substring(asString.indexOf("-> ")+3).replaceAll("]* -> ", "->");
+            String s = asString.split("-> ")[1];
             return result + s.substring(0,s.length()-1);
         }
         return asString;
     }
-    public String printWebElement() {
-        if (webElement.hasValue())
-            return printWebElement(webElement.get());
-        if (webElements.hasValue() && webElements.get().size() > 0)
-            return printWebElement(webElements.get().get(0));
-        return "";
-    }
+
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {
         if (element.webElement.hasValue())
-            return element.printWebElement();
+            return printWebElement(element.webElement.get());
         if (isBlank(element.varName))
             return element.context;
         return Switch(LOGS.logLevel).get(
@@ -557,5 +536,5 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         webElement.useCache(false);
         webElements.useCache(false);
     }
-    public boolean isUseCache() { return webElement.isUseCache() || webElements.isUseCache(); }
+    public boolean isUseCache() { return webElement.isUseCache() && webElements.isUseCache(); }
 }
