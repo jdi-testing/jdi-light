@@ -93,7 +93,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
     }
     public int getIndex(String name) {
         return list().hasKey(name)
-            ? list().map.get().indexOf(name)
+            ? list().map.get().pairs.indexOf(name)
             : -1;
     }
     @Override
