@@ -2,9 +2,7 @@ package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.complex.ButtonToggle;
 import com.epam.jdi.light.angular.elements.complex.TabGroup;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Checkbox;
-import com.epam.jdi.light.ui.html.elements.common.TextArea;
+import com.epam.jdi.light.ui.html.elements.common.*;
 
 public class TabGroupSection {
 

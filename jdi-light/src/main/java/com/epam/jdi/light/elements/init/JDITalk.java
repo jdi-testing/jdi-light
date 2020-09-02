@@ -21,29 +21,24 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
 
 public class JDITalk {
     public static UIElement element(@MarkupLocator String locator) {
-        UIElement element = locator.matches("[A-Z].*")
-                ? new UIElement()
+        return locator.matches("[A-Z].*")
+                ? new UIElement().setName(locator)
                 : element(defineLocator(locator));
-        return element.setName(locator);
     }
     public static UIElement element(@MarkupLocator By byLocator) {
         return new UIElement(byLocator);
     }
 
     public static WebList list(@MarkupLocator String locator) {
-        WebList list = locator.matches("[A-Z].*")
+        return locator.matches("[A-Z].*")
                 ? new WebList()
                 : list(defineLocator(locator));
-        return list.setName(locator);
     }
     public static WebList list(@MarkupLocator By byLocator) {
         return new WebList(byLocator);
     }
     public static WebList list(List<WebElement> els, String name) {
         return new WebList(els).setup(e->e.setName(name));
-    }
-    public static WebList list(List<WebElement> els) {
-        return list(els, "Elements list");
     }
 
     public static void clickOn(String locator) {
@@ -95,7 +90,7 @@ public class JDITalk {
     public static Table table(@MarkupLocator String locator) {
         return new Table().setup(Table.class, b -> b.setLocator(locator));
     }
-    public static <D> DataTable<?, D> dataTable(@MarkupLocator String locator) {
+    public static <D> DataTable<?, D> dataTable(@MarkupLocator String locator, Class<D> dataClass) {
         return new DataTable<>().setup(DataTable.class, b -> b.setLocator(locator));
     }
     public static WebPage page(String pageName) {

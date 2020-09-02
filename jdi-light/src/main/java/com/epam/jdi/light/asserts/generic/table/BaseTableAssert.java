@@ -128,7 +128,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
         return (A) this;
     }
     @JDIAction("Assert that '{name}' row '{0}' equals to other rows")
-    public A rowsLooksCorrect(String keyColumn, List<Line> rows) {
+    public A rowsVisualValidation(String keyColumn, List<Line> rows) {
         List<Line> tableRows = table().rowsImages();
         for (int i = 0; i < table().count(); i++) {
             Line tableRow = tableRows.get(i);
