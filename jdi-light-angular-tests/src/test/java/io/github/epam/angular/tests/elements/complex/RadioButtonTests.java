@@ -15,7 +15,7 @@ public class RadioButtonTests extends TestsInit {
     private final String AUTUMN = "Autumn";
     private final String WINTER = "Winter";
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();

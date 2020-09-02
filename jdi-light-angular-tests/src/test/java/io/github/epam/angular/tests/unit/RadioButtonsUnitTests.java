@@ -11,14 +11,14 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class RadioButtonsUnitTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }
 
     @Test
-    public void clickRadioButtonByValue(){
+    public void clickRadioButtonByValue() {
         seasonRadioButtons.clickRadioButtonByValue("Spring");
         assertTrue(seasonRadioButtons.isRadioButtonChecked("Spring"));
     }
