@@ -62,6 +62,7 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
         basicMatSelect.show();
         basicMatSelect.expand();
         assertTrue(container.isDisplayed());
+        container.collapsePanel();
     }
 
     @Test
@@ -168,9 +169,6 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
 
     @AfterMethod(alwaysRun = true)
     public void after() {
-        if (container.isDisplayed()) {
-            container.collapsePanel();
-        }
         if (multiSelect[0] != 0) {
             multipleSelect.expand();
             container.multipleSelect(multiSelect);
