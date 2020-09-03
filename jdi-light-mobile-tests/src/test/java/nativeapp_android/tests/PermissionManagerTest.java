@@ -2,6 +2,8 @@ package nativeapp_android.tests;
 
 import nativeapp.android.PermissionManager;
 import nativeapp_android.PermissionManagerTestInit;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -15,9 +17,9 @@ public class PermissionManagerTest extends PermissionManagerTestInit {
         PermissionManager.permissionManagerButton.click();
         PermissionManager.calendarButton.click();
         PermissionManager.calendarAppPermissionButton.click();
-        PermissionManager.denyRadioButton.clickOnTheRadioButton();
+        PermissionManager.permissionRadioGroup.select("Deny");
         PermissionManager.confirmButton.click();
-        assertEquals(PermissionManager.denyRadioButton.isRadioButtonSelected(), true);
-        assertEquals(PermissionManager.allowRadioButton.isRadioButtonSelected(), false);
+       // assertEquals(PermissionManager.permissionRadioGroup.select("Deny").isEnabled(), true);
+        //assertEquals(PermissionManager.permissionRadioGroup.isDisabled(), false);
     }
 }

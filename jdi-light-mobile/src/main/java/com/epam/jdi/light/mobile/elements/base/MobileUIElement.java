@@ -3,6 +3,7 @@ package com.epam.jdi.light.mobile.elements.base;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import com.epam.jdi.tools.func.JAction1;
@@ -22,7 +23,6 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.CoordinateConversionHelper.getCoordinatesOnScreen;
 
 public class MobileUIElement extends UIElement implements HasTouchActions {
-
     //region Constructors
     public MobileUIElement() { }
     public MobileUIElement(WebElement el) { setWebElement(el); }

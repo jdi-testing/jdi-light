@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.LongPressOptions;
@@ -16,7 +17,10 @@ import org.openqa.selenium.WebElement;
 import java.time.Duration;
 import java.util.List;
 
+import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class MobileAppUIElement extends MobileUIElement {
 
@@ -122,7 +126,31 @@ public class MobileAppUIElement extends MobileUIElement {
     }
 
     @Override
-    public boolean isVisible() {
+    public  boolean isVisible() {
         return getWebElement().isDisplayed();
     }
+
+    @Override
+    public boolean isNotVisible() {
+        return !getWebElement().isDisplayed();
+    }
+
+    public static JFunc1<MobileAppUIElement, String> MOBILE_SMART_LIST_TEXT = mobile -> {
+        String text = mobile.text(TEXT);
+        if (isNotBlank(text))
+            return text;
+        text = mobile.text(INNER);
+        if (isNotBlank(text))
+            return text;
+        String id = mobile.attr("id");
+        if (isNotBlank(id)) {
+            MobileAppUIElement label = (MobileAppUIElement) $(By.cssSelector("[for=" + id + "]"));
+            label.waitSec(0);
+            try {
+                text = label.getText();
+            } catch (Throwable ignore) { }
+        }
+        return isNotBlank(text) ? text : mobile.text(VALUE);
+    };
+
 }
