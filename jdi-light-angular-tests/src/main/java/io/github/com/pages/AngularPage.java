@@ -1,7 +1,6 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.ProgressSpinner;
-import com.epam.jdi.light.angular.elements.complex.Ripple;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -22,6 +21,7 @@ import io.github.com.pages.sections.ListSection;
 import io.github.com.pages.sections.PaginatorSection;
 import io.github.com.pages.sections.RadioButtonSection;
 import io.github.com.pages.sections.SelectSection;
+import io.github.com.pages.sections.SidenavSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
@@ -41,7 +41,6 @@ public class AngularPage extends WebPage {
     public static ProgressSpinner basicProgressSpinner;
     public static Icon basicIcon;
     public static Icon svgIcon;
-    public static Ripple rippleContainer;
 
     public static RadioButtonSection radioButtonSection;
     public static CheckboxSection checkboxSection;
@@ -62,4 +61,6 @@ public class AngularPage extends WebPage {
     public static CardSection cardSection;
     public static DividerSection dividerSection;
     public static DatepickerSection datepickerSection;
+    public static SidenavSection sidenavSection;
+
 }
