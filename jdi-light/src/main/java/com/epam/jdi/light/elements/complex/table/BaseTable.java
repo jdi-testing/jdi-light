@@ -28,7 +28,6 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.JDIBase.STRING_SIMPLIFY;
-import static com.epam.jdi.light.elements.complex.WebList.newList;
 import static com.epam.jdi.light.elements.complex.table.Line.initLine;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -212,7 +211,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (columns.get().has(colNum+""))
             return columns.get().get(colNum+"");
         WebList result = cells.isGotAll()
-            ? newList(cells.get().get(colNum + "").values())
+            ? new WebList(cells.get().get(colNum + ""))
             : getColumn(colNum);
         columns.get().update(colNum + "", result);
         return result;
@@ -449,7 +448,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get row '{0}' for '{name}' table")
     public Line row(int rowNum) {
-        return new Line(header(), webRow(rowNum));
+        return new Line(webRow(rowNum), header());
     }
 
     /**
@@ -459,7 +458,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get row '{0}' for '{name}' table")
     public Line row(String rowName) {
-        return new Line(header(), webRow(rowName));
+        return new Line(webRow(rowName), header());
     }
     public Line row(Enum rowName) {
         return row(getEnumValue(rowName));
@@ -471,7 +470,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get all '{name}' rows")
     public List<Line> rows() {
-        return map(getRows(), row -> new Line(header(), row.value));
+        return map(getRows(), row -> new Line(row.value, header()));
     }
     /**
      * Get all table rows
@@ -480,12 +479,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get all '{name}' rows")
     public List<Line> rowsImages() {
         MapArray<String, WebList> rows = getRows();
-        return map(rows, this::toLineSaveImages);
-    }
-    private Line toLineSaveImages(Pair<String, WebList> row) {
-        Line line = new Line(header(), row.value);
-        line.saveCellsImages();
-        return line;
+        return map(rows, row -> {
+            Line line = new Line(row.value, header());
+            line.saveCellsImages();
+            return line;
+        });
     }
 
     /**
@@ -541,7 +539,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(int colNum) {
-        return new Line(rowHeader(), webColumn(colNum));
+        return new Line(webColumn(colNum), rowHeader());
     }
     /**
      * Get table column by the name
@@ -550,7 +548,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(String colName) {
-        return new Line(rowHeader(), webColumn(colName));
+        return new Line(webColumn(colName), rowHeader());
     }
     public Line column(Enum colName) {
         return column(getEnumValue(colName));
@@ -562,7 +560,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get all '{name}' columns")
     public List<Line> columns() {
-        return map(getColumns(), row -> new Line(rowHeader(), row.value));
+        return map(getColumns(), row -> new Line(row.value, rowHeader()));
     }
     // Cells
     /**

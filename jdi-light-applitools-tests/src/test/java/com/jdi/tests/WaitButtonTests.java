@@ -10,6 +10,7 @@ import com.jdi.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static com.jdi.states.State.loggedIn;
 import static jdisite.enums.MenuOptions.ElementsPacks;
 import static jdisite.enums.MenuOptions.HTML5;

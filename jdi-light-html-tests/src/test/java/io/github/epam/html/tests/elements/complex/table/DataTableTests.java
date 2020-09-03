@@ -39,7 +39,7 @@ public class DataTableTests implements TestsInit {
     public void visualTableChecks() {
         List<Line> rows = users.rowsImages();
         users.assertThat()
-            .rowsLooksCorrect("User", rows);
+            .rowsVisualValidation("User", rows);
     }
 
     @Test

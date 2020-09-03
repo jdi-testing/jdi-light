@@ -26,6 +26,7 @@ public class States {
 
     @Step
     public static void login() {
+        loginForm.isDisplayed();
         if (loginForm.isHidden())
             userIcon.click();
         loginForm.is().displayed();
