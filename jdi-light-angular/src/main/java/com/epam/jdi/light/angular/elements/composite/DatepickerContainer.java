@@ -17,14 +17,7 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.CELL;
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.CHOOSE_DATE;
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.CHOOSE_MONTH_AND_YEAR;
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.NEXT_MONTH;
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.NEXT_TWENTY_YEARS;
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.PREVIOUS_MONTH;
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.PREVIOUS_TWENTY_YEARS;
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.VALUE;
+import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
 
 public class DatepickerContainer extends Section {
     public static final int YEAR_LENGTH = 4;

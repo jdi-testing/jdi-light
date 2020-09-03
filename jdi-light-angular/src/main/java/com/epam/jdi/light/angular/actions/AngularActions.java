@@ -24,16 +24,19 @@ public class AngularActions {
 
     @Around("jdiPointcut()")
     public Object jdiAround(final ProceedingJoinPoint jp) {
-        ActionObject jInfo = new ActionObject(jp);
+        ActionObject jInfo = newInfo(jp);
         try {
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
-            Object result = jInfo.topLevel() ? stableAction(jInfo) : defaultAction(jInfo);
+            Object result = jInfo.topLevel()
+                    ? stableAction(jInfo)
+                    : defaultAction(jInfo);
             return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
             logger.debug("ActionProcessor exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
-        } finally {
+        }
+        finally {
             jInfo.clear();
         }
     }

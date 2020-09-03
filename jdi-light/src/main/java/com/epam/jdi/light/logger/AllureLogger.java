@@ -69,7 +69,7 @@ public class AllureLogger {
         getLifecycle().stopStep(uuid);
     }
 
-    private static void attachText(String name, String type, String htmlSnapshot) {
+    public static void attachText(String name, String type, String htmlSnapshot) {
         addAttachment(name, type, htmlSnapshot, "html");
     }
 

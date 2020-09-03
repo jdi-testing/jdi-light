@@ -5,6 +5,7 @@ import com.epam.jdi.tools.DataClass;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.firstIndex;
+import static com.epam.jdi.tools.StringUtils.format;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -21,9 +22,13 @@ public class NameNum extends DataClass<NameNum> {
     }
     @Override
     public String toString() {
-        return hasName()
-            ? num > 0 ? super.toString() : name
-            : num+"";
+        if (!hasName() && num > 0)
+            return num + "";
+        if (hasName() && num == 0)
+            return name;
+        if (hasName() && num > 0)
+            return format("%s (%s)", name, num);
+        return "";
     }
     public int getIndex(List<String> headers) {
         return !hasName() ? num  : firstIndex(headers,
