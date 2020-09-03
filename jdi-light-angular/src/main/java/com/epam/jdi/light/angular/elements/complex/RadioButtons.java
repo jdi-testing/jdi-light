@@ -9,12 +9,12 @@ import com.epam.jdi.light.elements.complex.WebList;
 public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
 
     @JDIAction("Click '{name}' button by tag value '{0}'")
-    public void clickRadioButtonByValue(String value) {
+    public void click(String value) {
         getRadioButtonByTagValue(value).click();
     }
 
-    @JDIAction("Check '{name}' radio button  contain value '{0}'")
-    public boolean isRadioButtonChecked(String value) {
+    @JDIAction("'{name}' radio button  contain value '{0}'")
+    public boolean isChecked(String value) {
         return getRadioButtonByTagValue(value).attr("class").contains("mat-radio-checked");
     }
 
@@ -28,13 +28,13 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
         return element;
     }
 
-    private WebList getRadioButtons() {
-        return this.finds(".mat-radio-button");
-    }
-
     @Override
     public RadioButtonsAssert is() {
         return new RadioButtonsAssert().set(this);
+    }
+
+    private WebList getRadioButtons() {
+        return this.finds(".mat-radio-button");
     }
 }
 

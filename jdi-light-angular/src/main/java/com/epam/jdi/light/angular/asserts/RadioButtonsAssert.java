@@ -9,15 +9,15 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class RadioButtonsAssert extends UIAssert<RadioButtonsAssert, RadioButtons> {
 
-    @JDIAction("Assert that '{name}' is checked when '{0}' radio button value is provided")
-    public RadioButtonsAssert assertRadioButtonIsChecked(String value) {
-        jdiAssert(element.isRadioButtonChecked(value), Matchers.is(true));
+    @JDIAction("'{name}' is checked when '{0}' radio button value is provided")
+    public RadioButtonsAssert checked(String value) {
+        jdiAssert(element.isChecked(value), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not checked when '{0}' radio button value is provided")
-    public RadioButtonsAssert assertRadioButtonIsNotChecked(String value) {
-        jdiAssert(element.isRadioButtonChecked(value), Matchers.is(false));
+    @JDIAction("'{name}' is not checked when '{0}' radio button value is provided")
+    public RadioButtonsAssert notChecked(String value) {
+        jdiAssert(element.isChecked(value), Matchers.is(false));
         return this;
     }
 }

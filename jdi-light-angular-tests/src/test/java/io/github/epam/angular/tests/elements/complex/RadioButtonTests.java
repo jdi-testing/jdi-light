@@ -10,10 +10,10 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class RadioButtonTests extends TestsInit {
 
-    private final String SPRING = "Spring";
-    private final String SUMMER = "Summer";
-    private final String AUTUMN = "Autumn";
-    private final String WINTER = "Winter";
+    private static final String SPRING = "Spring";
+    private static final String SUMMER = "Summer";
+    private static final String AUTUMN = "Autumn";
+    private static final String WINTER = "Winter";
 
     @BeforeMethod
     public void before() {
@@ -23,29 +23,29 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void basicRadioButtonsTest() {
-        basicRadioButtons.is().displayed();
-        basicRadioButtons.clickRadioButtonByValue("2");
-        basicRadioButtons.clickRadioButtonByValue("1");
-        basicRadioButtons.clickRadioButtonByValue("2");
+        basicRadioGroup.is().displayed();
+        basicRadioGroup.click("2");
+        basicRadioGroup.click("1");
+        basicRadioGroup.click("2");
 
-        basicRadioButtons.is().assertRadioButtonIsChecked("2");
-        basicRadioButtons.is().assertRadioButtonIsNotChecked("1");
+        basicRadioGroup.is().checked("2");
+        basicRadioGroup.is().notChecked("1");
     }
 
     @Test
     public void seasonsRadioButtonsTest() {
-        seasonRadioButtons.is().displayed();
-        seasonRadioButtons.clickRadioButtonByValue(SUMMER);
-        seasonRadioButtons.clickRadioButtonByValue(WINTER);
-        seasonRadioButtons.clickRadioButtonByValue(AUTUMN);
+        seasonRadioGroup.is().displayed();
+        seasonRadioGroup.click(SUMMER);
+        seasonRadioGroup.click(WINTER);
+        seasonRadioGroup.click(AUTUMN);
 
-        seasonRadioButtons.clickRadioButtonByValue(SPRING);
-        seasonRadioButtons.is().assertRadioButtonIsChecked(SPRING);
-        favoriteSeasonField.has().text(String.format("Your favorite season is: %s", SPRING));
+        seasonRadioGroup.click(SPRING);
+        seasonRadioGroup.is().checked(SPRING);
+        yourFavoriteSeasonText.has().text(String.format("Your favorite season is: %s", SPRING));
 
-        seasonRadioButtons.is().assertRadioButtonIsNotChecked(WINTER);
-        seasonRadioButtons.is().assertRadioButtonIsNotChecked(SUMMER);
-        seasonRadioButtons.is().assertRadioButtonIsNotChecked(AUTUMN);
+        seasonRadioGroup.is().notChecked(WINTER);
+        seasonRadioGroup.is().notChecked(SUMMER);
+        seasonRadioGroup.is().notChecked(AUTUMN);
     }
 }
 
