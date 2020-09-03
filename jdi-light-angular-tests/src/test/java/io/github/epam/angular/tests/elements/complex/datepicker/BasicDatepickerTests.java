@@ -9,9 +9,7 @@ import java.time.Month;
 import java.time.Year;
 import java.util.Locale;
 
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.CELL;
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.NEXT_TWENTY_YEARS;
-import static com.epam.jdi.light.angular.entities.DatepickerNavigation.PREVIOUS_TWENTY_YEARS;
+import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
 import static io.github.com.pages.sections.DatepickerSection.basicDatepicker;
 
 public class BasicDatepickerTests extends TestsDatepickerBase {

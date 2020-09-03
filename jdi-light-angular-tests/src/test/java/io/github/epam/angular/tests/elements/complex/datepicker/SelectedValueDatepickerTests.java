@@ -8,9 +8,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 
-import static io.github.com.pages.sections.DatepickerSection.bindingDatepicker;
-import static io.github.com.pages.sections.DatepickerSection.deserializeDatepicker;
-import static io.github.com.pages.sections.DatepickerSection.selectedDatepicker;
+import static io.github.com.pages.sections.DatepickerSection.*;
 
 public class SelectedValueDatepickerTests extends TestsDatepickerBase {
     private final String valueBinding = "Value binding";
