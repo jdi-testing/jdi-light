@@ -72,7 +72,7 @@ public class DropdownCustomTests implements TestsInit {
             colorsCustom.select("GreyBrownCrimson");
             fail("You have selected color that does not exist in dropdown - something went wrong");
         } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("Failed to get 'GreyBrownCrimson' in list 'Colors Custom list'. No elements with this name found"));
+            assertThat(safeException(ex), containsString("Can't get 'GreyBrownCrimson'. No elements with this name found"));
         }
     }
 

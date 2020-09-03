@@ -5,7 +5,6 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.tools.LinqUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.List;
@@ -64,7 +63,7 @@ public interface IWebList<T extends ICoreElement> extends IList<T> {
     @JDIAction("Check only '{0}' in '{name}' list")
     default void check(String... names) {
         List<String> listNames = asList(names);
-        for (T value : elements(names.length)) {
+        for (T value : elements(names.length).values()) {
             if (value.isDisabled()) continue;
             if (getByType(value, CanBeSelected.class).isSelected() && !listNames.contains(getByType(value, IsText.class).text(base().textType).trim())
                     || !getByType(value, CanBeSelected.class).isSelected() && listNames.contains(getByType(value, IsText.class).getText().trim()))
@@ -74,7 +73,7 @@ public interface IWebList<T extends ICoreElement> extends IList<T> {
     @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
     default void uncheck(String... names) {
         List<String> listNames = asList(names);
-        for (T value : elements(names.length)) {
+        for (T value : elements(names.length).values()) {
             if (value.isDisabled()) continue;
             if (getByType(value, CanBeSelected.class).isSelected() && listNames.contains(getByType(value, IsText.class).text(base().textType).trim())
                     || !getByType(value, CanBeSelected.class).isSelected() && !listNames.contains(getByType(value, IsText.class).text(base().textType).trim()))
@@ -200,7 +199,7 @@ public interface IWebList<T extends ICoreElement> extends IList<T> {
     default List<String> values() {
         refresh();
         base().noValidation();
-        return LinqUtils.map(elements(0), el -> el.core().getText());
+        return elements(0).keys();
     }
 
     @JDIAction("Get '{name}' values")

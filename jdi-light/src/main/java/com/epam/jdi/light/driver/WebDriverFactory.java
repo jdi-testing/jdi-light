@@ -12,7 +12,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.get.DownloadDriverManager.*;
 import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
 import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
@@ -84,17 +83,8 @@ public class WebDriverFactory {
                 logger.debug("setRunDrivers");
             }
             logger.debug("Get '%s' driver", driverName);
-            WebDriver driver = null;
-            try {
-                driver = rDrivers.get(driverName);
-            } catch (Throwable ex) {
-                if (driverDownloaded)
-                    throw exception(ex, "Failed to run downloaded driver. Please check that your browser and driver are compatible or use local driver with 'drivers.folder' property in test.properties'." + LINE_BREAK
-                        + "Driver: " + downloadedDriverInfo + LINE_BREAK
-                        + "DriverPath: " + driverPath);
-                else throw exception(ex, "Failed to run driver");
-            }
-            logger.debug("Success: " + driver);
+            WebDriver driver = rDrivers.get(driverName);
+            logger.debug("Successs: " + driver);
             if (driver.toString().contains("(null)")) {
                 logger.debug("driver contains (null)");
                 driver = DRIVERS.get(driverName).invoke();

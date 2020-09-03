@@ -41,7 +41,7 @@ public class Line implements IList<String>, IBaseElement {
     }
 
     public Line() {}
-    public Line(List<String> headers, WebList elements) {
+    public Line(WebList elements, List<String> headers) {
         this.elements = elements;
         this.headers = headers;
         List<String> values = elements.values();
@@ -76,8 +76,8 @@ public class Line implements IList<String>, IBaseElement {
      * @return List
      */
     @JDIAction(level = DEBUG)
-    public List<String> elements(int minAmount) {
-        return getData(minAmount).values();
+    public MultiMap<String, String> elements(int minAmount) {
+        return getData(minAmount);
     }
     public MultiMap<String, UIElement> uiElements() {
         return new MultiMap<>(headers, elements.indexFromZero()).ignoreKeyCase();
@@ -92,7 +92,7 @@ public class Line implements IList<String>, IBaseElement {
             cell.makePhoto();
             result.add(cell);
         }
-        elements = new WebList(headers, result);
+        elements = new WebList().setValues(new MultiMap<>(headers, result).ignoreKeyCase());
     }
     public boolean visualCompareTo(Line line) {
         for (Pair<String, UIElement> cell : uiElements())
@@ -120,38 +120,36 @@ public class Line implements IList<String>, IBaseElement {
         return setupInstance.execute(instance);
     }
     public <D> D asData(Class<D> data) {
-        return getType("asData", data, instance -> getInstance(this, data, headers, instance));
+        return getType("asData", data, instance -> {
+            int i = 0;
+            List<Field> fields = asList(data.getDeclaredFields());
+            for (String name : headers) {
+                Field field = LinqUtils.first(fields, f -> namesEqual(getElementName(f), name));
+                if (field != null)
+                    try {
+                        setPrimitiveField(field, instance, getList(i).get(i));
+                    } catch (Exception ex) {
+                        throw exception(ex, "Can't set table value '%s' to field '%s'", getData(i).get(i), field.getName());
+                    }
+                i++;
+            }
+            return instance;
+        });
     }
     public <D> D asData(Class<D> data, MapArray<String, String> line) {
-        return getType("asDataLine", data, instance -> getLineInstance(instance, line));
-    }
-    protected static <D> D getInstance(Line line, Class<D> data, List<String> headers, D instance) {
-        int i = 0;
-        List<Field> fields = asList(data.getDeclaredFields());
-        for (String name : headers) {
-            Field field = LinqUtils.first(fields, f -> namesEqual(getElementName(f), name));
-            if (field != null)
-                try {
-                    setPrimitiveField(field, instance, line.getList(i).get(i));
-                } catch (Exception ex) {
-                    throw exception(ex, "Can't set table value '%s' to field '%s'", line.getData(i).get(i), field.getName());
-                }
-            i++;
-        }
-        return instance;
-    }
-    protected static <D> D getLineInstance(D instance, MapArray<String, String> line) {
-        for (Pair<String, String> cell : line) {
-            Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
+        return getType("asDataLine", data, instance -> {
+            for (Pair<String, String> cell : line) {
+                Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
                     f -> namesEqual(getElementName(f), cell.key));
-            if (field == null) continue;
-            try {
-                setPrimitiveField(field, instance, cell.value);
-            } catch (Exception ex) {
-                throw exception(ex, "asDataLine: Can't set table entity to field '%s'", field.getName());
+                if (field == null) continue;
+                try {
+                    setPrimitiveField(field, instance, cell.value);
+                } catch (Exception ex) {
+                    throw exception(ex, "asDataLine: Can't set table entity to field '%s'", field.getName());
+                }
             }
-        }
-        return instance;
+            return instance;
+        });
     }
 
     public <T> T asLine(Class<T> cl) {
