@@ -2,8 +2,6 @@ package nativeapp_android.tests;
 
 import nativeapp.android.PermissionManager;
 import nativeapp_android.PermissionManagerTestInit;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
