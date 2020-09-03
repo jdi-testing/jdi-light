@@ -58,7 +58,7 @@ public class DropdownMenuTests implements TestsInit {
             dropdownMenu.select("Unknown");
             fail("You have selected dropdownMenu that does not exist in dropdown - something went wrong");
         } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("Can't get 'Unknown'. No elements with this name found"));
+            assertThat(safeException(ex), containsString("Failed to get 'Unknown' in list 'Dropdown Menu list'. No elements with this name found"));
         }
     }
 
