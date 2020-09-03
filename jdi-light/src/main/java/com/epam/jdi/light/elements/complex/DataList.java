@@ -2,8 +2,10 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.pairs.Pair;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 
@@ -17,6 +19,7 @@ import static com.epam.jdi.light.common.UIUtils.asEntity;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
+import static com.epam.jdi.tools.StringUtils.namesEqual;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -41,7 +44,8 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
     public List<D> asData() {
         try {
             if (dataType == null) return null;
-            return LinqUtils.map(elements(1).values(), v -> asEntity(v, dataType));
+            List<T> elements = elements(0);
+            return LinqUtils.map(elements, v -> asEntity(v, dataType));
         } catch (Exception ex) {
             throw exception(ex, "Can't get DataList data");
         }
@@ -85,12 +89,34 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
                         field.getName(), types.length);
                 initClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
                 dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>) types[1];
-        } catch (Exception ignore) {
-
+        } catch (Exception ignore) { }
+    }
+    public int getIndex(String name) {
+        int i = list().startIndex;
+        if (list().map.hasValue() && list().isActualMap()) {
+            for (Pair<String, UIElement> pair : list().map.get().pairs) {
+                if (namesEqual(pair.key, name)) {
+                    if (list().isActual(pair.value))
+                        return i;
+                    else break;
+                }
+                i++;
+            }
         }
+        for (UIElement element : list().elements(1)) {
+            String title = elementTitle(element);
+            if (namesEqual(title, name))
+                return i;
+            i++;
+        };
+        return -1;
     }
     @Override
     public List<String> values() {
         return LinqUtils.map(asData(), Object::toString);
+    }
+    public List<String> keys() {
+        asData();
+        return list().map.get().keys();
     }
 }
