@@ -58,22 +58,6 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
     }
 
     @Test
-    public void displayedTest() {
-        basicMatSelect.show();
-        basicMatSelect.expand();
-        assertTrue(container.isDisplayed());
-        container.collapsePanel();
-    }
-
-    @Test
-    public void hiddenTest() {
-        basicMatSelect.show();
-        basicMatSelect.expand();
-        container.collapsePanel();
-        assertTrue(container.isHidden());
-    }
-
-    @Test
     public void listSizeTest() {
         assertEquals(container.list().size(), new WebList(By.cssSelector("mat-option span")).size());
     }
