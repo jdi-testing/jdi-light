@@ -16,5 +16,11 @@ public class SettingsAppTests extends SettingsAppTestInit {
 
         LargerTextPage.largerTextSlider.setSliderValue("0.5");
         LargerTextPage.largerTextSlider.is().text("50%");
+
+        LargerTextPage.largerTextSlider.setMaximumValue();
+        LargerTextPage.largerTextSlider.is().text("100%");
+
+        LargerTextPage.largerTextSlider.setMinimumValue();
+        LargerTextPage.largerTextSlider.is().text("0%");
     }
 }

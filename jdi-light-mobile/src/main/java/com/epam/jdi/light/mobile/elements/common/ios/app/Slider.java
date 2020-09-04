@@ -13,6 +13,16 @@ public class Slider extends MobileAppBaseElement<TextAssert> implements HasTouch
         core().sendKeys(value);
     }
 
+    @JDIAction("Set the minimum value for '{name}'")
+    public void setMinimumValue() {
+        setSliderValue("0");
+    }
+
+    @JDIAction("Set the maximum value for '{name}'")
+    public void setMaximumValue() {
+        setSliderValue("1");
+    }
+
     @Override
     public TextAssert is() {
         return new TextAssert().set(this);
