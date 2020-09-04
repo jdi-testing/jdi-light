@@ -6,8 +6,6 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MultiMap;
-import com.epam.jdi.tools.pairs.Pair;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -15,7 +13,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.LinqUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -25,70 +25,61 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
     /**
      *  Get all application elements
      *  */
-    MultiMap<String, T> elements(int minAmount);
+    List<T> elements(int minAmount);
     T get(String value);
 
     default T get(Enum<?> name) { return get(getEnumValue(name)); }
     default T last() {
-        MultiMap<String, T> elements = elements(1);
-        Pair<String, T> last = elements.last();
-        return last == null ? null : last.value;
+        return LinqUtils.last(elements(1));
     }
     default T first() {
         return get(0);
     }
     default List<T> where(JFunc1<T, Boolean> condition) {
-        return elements(0).values(condition);
+        return LinqUtils.where(elements(0), condition);
     }
     default List<T> filter(JFunc1<T, Boolean> condition) {
         return where(condition);
     }
     default <R> List<R> select(JFunc1<T, R> transform) {
-        return elements(0).select((k,v) -> transform.execute(v));
+        return LinqUtils.select(elements(0), transform::execute);
     }
     default <R> List<R> map(JFunc1<T, R> transform) {
         return select(transform);
     }
     default T first(JFunc1<T, Boolean> condition) {
-        MultiMap<String, T> elements = elements(1);
-        Pair<String, T> first = elements.first((k,v) -> condition.execute(v));
-        return first == null ? null : first.value;
+        return LinqUtils.first(elements(1), condition);
     }
     default T last(JFunc1<T, Boolean> condition) {
-        MultiMap<String, T> elements = elements(1);
-        Pair<String, T> last = elements.last((k,v) -> condition.execute(v));
-        return last == null ? null : last.value;
+        return LinqUtils.last(elements(1), condition);
     }
     default void ifDo(JFunc1<T, Boolean> condition, JAction1<T> action) {
-        elements(1).ifDo(p -> condition.execute(p.value), action::execute);
+        LinqUtils.ifDo(elements(1), condition, action);
     }
     default <R> List<R> ifSelect(JFunc1<T, Boolean> condition, JFunc1<T, R> transform) {
-        return elements(0).ifSelect((k,v) -> condition.execute(v), transform);
+        return LinqUtils.ifSelect(elements(1), condition, transform);
     }
     default void foreach(JAction1<T> action) {
-        elements(0).foreach((k,v) -> action.execute(v));
+        LinqUtils.foreach(elements(1), action);
     }
     default boolean hasAny(JFunc1<T, Boolean> condition) {
-        return elements(0).any(condition);
-    }
-    default boolean hasAnyKey(JFunc1<String, Boolean> condition) {
-        return LinqUtils.any(elements(0).keys(), condition);
+        return any(elements(0), condition);
     }
     default boolean all(JFunc1<T, Boolean> condition) {
-        return elements(0).all(condition);
+        return LinqUtils.all(elements(0), condition);
     }
     default List<T> slice(int from, int to) {
-        return elements(to).slice(from, to).values();
+        return listCopy(elements(to), from, to);
     }
     default List<T> slice(int from) {
-        return elements(from).slice(from).values();
+        return listCopy(elements(from), from);
     }
     default List<T> sliceTo(int to) {
-        return elements(to).sliceTo(to).values();
+        return listCopyUntil(elements(to), to);
     }
     default void refresh() { clear(); }
     default <R> List<R> selectMany(JFunc1<T, List<R>> func) {
-        return elements(0).selectMany((k,v) -> func.execute(v));
+        return LinqUtils.selectMany(elements(0), func);
     }
     @Override
     default int size() {
@@ -107,7 +98,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
     }
     @Override
     default Iterator<T> iterator() {
-        return elements(0).values().iterator();
+        return elements(0).iterator();
     }
     @Override
     default Object[] toArray() {
@@ -147,8 +138,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
     }
     @Override
     default T get(int index) {
-        Pair<String, T> result = elements(index).get(index);
-        return result != null ? result.value : null;
+        return elements(index + 1 - ELEMENT.startIndex).get(index);
     }
     @Override
     default T set(int index, T element) {
@@ -160,25 +150,23 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
     }
     @Override
     default T remove(int index) {
-        MultiMap<String, T> elements = elements(index);
-        Pair<String, T> removed = elements.removeByIndex(index);
-        return removed == null ? null : removed.value;
+        return elements(index + 1 - ELEMENT.startIndex).remove(index);
     }
     @Override
     default int indexOf(Object o) {
-        return elements(0).values().indexOf(o);
+        return elements(0).indexOf(o);
     }
     @Override
     default int lastIndexOf(Object o) {
-        return elements(0).values().lastIndexOf(o);
+        return elements(0).lastIndexOf(o);
     }
     @Override
     default ListIterator<T> listIterator() {
-        return elements(0).values().listIterator();
+        return elements(0).listIterator();
     }
     @Override
     default ListIterator<T> listIterator(int index) {
-        return elements(0).values().listIterator(index);
+        return elements(0).listIterator(index);
     }
     @Override
     default List<T> subList(int fromIndex, int toIndex) {

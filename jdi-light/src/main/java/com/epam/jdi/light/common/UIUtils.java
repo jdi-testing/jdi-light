@@ -105,7 +105,7 @@ public final class UIUtils {
             List<Field> dataFields = getFields(data, String.class);
             foreach(getFields(obj, HasValue.class), item -> {
                 Field field = first(dataFields, f ->
-                        namesEqual(f.getName(), item.getName()));
+                        namesEqual(getElementName(f), getElementName(item)));
                 if (field == null)
                     return;
                 try {
@@ -137,7 +137,7 @@ public final class UIUtils {
         } catch (Exception ex) { throw exception(ex, "Can't init new element for list"); }
     }
 
-    private static String getName(Object obj) {
+    public static String getName(Object obj) {
         return isInterface(obj.getClass(), INamed.class)
             ? ((INamed)obj).getName()
             : obj.getClass().getSimpleName();

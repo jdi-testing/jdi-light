@@ -2,10 +2,10 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
@@ -13,7 +13,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MultiMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -23,24 +22,24 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.initT;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getByType;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
-    extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
+        extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
     protected WebList list;
     public WebList list() {
         if (list == null) {
             list = new WebList(core()).setUIElementName(this::elementTitle)
-                .setName(getName());
+                    .setName(getName());
         }
         return list;
     }
@@ -51,9 +50,9 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     public Class<?> initClass = UIElement.class;
 
     private boolean actualMapValue() {
-        return map.hasValue() && map.get().size() > 0 && isActual(map.get().get(0).value);
+        return values.hasValue() && values.get().size() > 0 && isActual(values.get().get(0));
     }
-    protected CacheValue<MultiMap<String, T>> map = new CacheValue<>(() -> new MultiMap<String, T>().ignoreKeyCase());
+    protected CacheValue<List<T>> values = new CacheValue<>();
     private boolean isActual(T element) {
         try {
             element.getTagName();
@@ -62,10 +61,10 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     }
 
     @JDIAction(level = DEBUG)
-    public MultiMap<String, T> elements(int minAmount) {
-        if (actualMapValue())
-            return map.get();
-        return list().elements(minAmount).toMultiMap(this::toT);
+    public List<T> elements(int minAmount) {
+        if (actualMapValue() && values.get().size() >= minAmount)
+            return values.get();
+        return LinqUtils.map(list().elements(minAmount), this::toT);
     }
 
     /**
@@ -163,8 +162,8 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         T first = logger.logOff(() ->
                 first(item -> getByType(item, CanBeSelected.class).isSelected()));
         return first != null
-            ? getByType(first, IsText.class).getText()
-            : "";
+                ? getByType(first, IsText.class).getText()
+                : "";
     }
 
     /**
@@ -181,7 +180,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     @JDIAction(level = DEBUG)
     public void clear() {
         list().clear();
-        map.clear();
+        values.clear();
     }
 
     public void setValue(String value) {
@@ -209,25 +208,21 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         return list().checked();
     }
 
+    @Override
     public List<String> values() {
-        return list().values();
+        List<T> elements = LinqUtils.map(list().uiElements(0), el -> {
+            UIElement ui = $(el);
+            list().map.get().update(elementTitle(ui), ui);
+            return toT(ui);
+        });
+        return LinqUtils.map(elements, this::printValue);
+    }
+    protected String printValue(T element) {
+        return isInterface(element.getClass(), HasValue.class)
+            ? ((HasValue)element).getValue()
+            : element.toString();
     }
 
-    public List<String> values(TextTypes type) {
-        return list().values(type);
-    }
-
-    public List<String> attrs(String value) {
-        return list().attrs(value);
-    }
-
-    public List<String> listEnabled() {
-        return list().listEnabled();
-    }
-
-    public List<String> listDisabled() {
-        return list().listDisabled();
-    }
     @Override
     public boolean isDisplayed() {
         return list().isDisplayed();

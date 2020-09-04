@@ -6,9 +6,7 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
-import static io.github.com.pages.sections.DatepickerSection.completelyDisabledDatepicker;
-import static io.github.com.pages.sections.DatepickerSection.inputDisabledDatepicker;
-import static io.github.com.pages.sections.DatepickerSection.popupDisabledDatepicker;
+import static io.github.com.pages.sections.DatepickerSection.*;
 
 public class DisabledDatepickerTests extends TestsDatepickerBase {
     private final String completelyDisabled = "Completely disabled";
