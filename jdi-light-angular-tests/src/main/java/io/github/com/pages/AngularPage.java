@@ -21,7 +21,7 @@ import io.github.com.pages.sections.ListSection;
 import io.github.com.pages.sections.PaginatorSection;
 import io.github.com.pages.sections.RadioButtonSection;
 import io.github.com.pages.sections.SelectSection;
-import io.github.com.pages.sections.SidenavSection;
+import io.github.com.pages.sections.SideNavSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
@@ -61,6 +61,6 @@ public class AngularPage extends WebPage {
     public static CardSection cardSection;
     public static DividerSection dividerSection;
     public static DatepickerSection datepickerSection;
-    public static SidenavSection sidenavSection;
+    public static SideNavSection sidenavSection;
 
 }
