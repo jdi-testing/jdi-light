@@ -2,6 +2,7 @@ package io.github.epam.angular.tests.elements.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -9,6 +10,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SideNavSection.basicSideNav;
 import static io.github.com.pages.sections.SideNavSection.configurableMode;
+import static io.github.com.pages.sections.SideNavSection.customEscapeBackdrop;
 import static io.github.com.pages.sections.SideNavSection.implicitMainContent;
 import static io.github.com.pages.sections.SideNavSection.openCloseBehavior;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
@@ -59,28 +61,24 @@ public class SideNavTests extends TestsInit {
     }
 
     @Test
-    public void verifyOpenCloseBehaviorTest() {
-        refresh();
-        openCloseBehavior.has().classValue(SIDE_NAV_CLASS);
-        openCloseBehavior.toggleButton().click();
-        openCloseBehavior.base().timer().wait(() -> openCloseBehavior.isEnabled());
-        openCloseBehavior.getSideNav().has().attr(STYLE, STYLE_VISIBLE);
-        openCloseBehavior.getSideNav().has().text(SIDE_NAV_CONTENT);
-
-        openCloseBehavior.checkbox().click();
-        openCloseBehavior.base().timer().wait(() -> openCloseBehavior.isEnabled());
-        openCloseBehavior.getSideNav().has().attr(STYLE, STYLE_HIDDEN);
+    public void verifyOpenCloseBehaviorTest() throws InterruptedException {
         openCloseBehavior.getContent().is().displayed();
         openCloseBehavior.getContent().is().enabled();
+        openCloseBehavior.has().classValue(SIDE_NAV_CLASS);
+        openCloseBehavior.getContentToggleButton().click();
+        openCloseBehavior.getSideNav().has().text(SIDE_NAV_CONTENT);
+        openCloseBehavior.checkbox().click();
+        openCloseBehavior.base().timer().wait(() -> openCloseBehavior.isEnabled());
+        openCloseBehavior.getContent().has().text("sidenav.opened\nsidenav.toggle()\nEvents:\nopen!\nclose!");
+
     }
 
     @Test
     public void toggleButtonTest() {
-        refresh();
         configurableMode.has().classValue(SIDE_NAV_CLASS);
         configurableMode.getSideNav().has().attr(STYLE, STYLE_HIDDEN);
         configurableMode.getContentToggleButton().click();
-        configurableMode.base().timer().wait(() -> configurableMode.isEnabled());
+        configurableMode.base().timer().wait(() -> configurableMode.isVisible());
         configurableMode.getSideNav().has().attr(STYLE, STYLE_VISIBLE);
         configurableMode.getSideNavToggleButton().click();
 
@@ -88,7 +86,6 @@ public class SideNavTests extends TestsInit {
 
     @Test
     public void sideRadioGroupTest() {
-        refresh();
         configurableMode.getContentToggleButton().click();
         configurableMode.getContent().has().attr(STYLE, "");
         configurableMode.sideNavRadioButtons().get("Side").click();
@@ -99,11 +96,29 @@ public class SideNavTests extends TestsInit {
 
     @Test
     public void contentRadioButtonsTest() {
-        refresh();
         configurableMode.getContentToggleButton().click();
         configurableMode.sideNavRadioButtons().get("Side").click();
         configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
         configurableMode.getContentRadioButtons().get("Push").click();
         configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
     }
+
+    @Test
+    public void openAndToggleButtonsBehavior() {
+        customEscapeBackdrop.getContentToggleButton().click();
+        customEscapeBackdrop.getSideNavToggleButton().click();
+        customEscapeBackdrop.getContent().has().text("Open\nClosed due to: toggle button");
+    }
+
+    @Test
+    public void openAndToggleButtonsBehavior2() {
+        customEscapeBackdrop.getContentToggleButton().click();
+        customEscapeBackdrop.core().click();
+        customEscapeBackdrop.getContent().has().text("Open\nClosed due to: backdrop");
+    }
+
+//    @AfterMethod
+//    public void after(){
+//        refresh();
+//    }
 }
