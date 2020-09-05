@@ -5,6 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SideNavSection.basicSideNav;
 import static io.github.com.pages.sections.SideNavSection.configurableMode;
@@ -20,14 +21,20 @@ public class SideNavTests extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
-    private static final String SIDE_NAV_CLASS = "mat-drawer-container mat-sidenav-container example-container";
+    public static final String SIDE_NAV_CLASS = "mat-drawer-container mat-sidenav-container example-container";
+    public static final String STYLE = "style";
+    public static final String STYLE_VISIBLE = "transform: none; visibility: visible;";
+    public static final String STYLE_HIDDEN = "box-shadow: none; visibility: hidden;";
+    public static final String SIDE_NAV_CONTENT = "Sidenav content";
+    public static final String MODE = "mode";
+    public static final String SIDE = "side";
 
     @Test
     public void verifyBasicSideNavTest() {
         basicSideNav.has().classValue(SIDE_NAV_CLASS);
-        basicSideNav.getSideNav().has().attr("mode", "side");
-        basicSideNav.getSideNav().has().text("Sidenav content");
-        basicSideNav.getSideNav().has().attr("style", "transform: none; visibility: visible;");
+        basicSideNav.getSideNav().has().attr(MODE, SIDE);
+        basicSideNav.getSideNav().has().text(SIDE_NAV_CONTENT);
+        basicSideNav.getSideNav().has().attr(STYLE, STYLE_VISIBLE);
 
         basicSideNav.getContent().is().displayed();
         basicSideNav.getContent().is().enabled();
@@ -39,11 +46,11 @@ public class SideNavTests extends TestsInit {
         implicitMainContent.has().classValue(SIDE_NAV_CLASS);
         UIElement startSideNav = implicitMainContent.getSideNav("start");
         UIElement endSideNav = implicitMainContent.getSideNav("end");
-        startSideNav.has().attr("mode", "side");
-        startSideNav.has().attr("style", "transform: none; visibility: visible;");
+        startSideNav.has().attr(MODE, SIDE);
+        startSideNav.has().attr(STYLE, STYLE_VISIBLE);
         startSideNav.has().text("Start content");
-        endSideNav.has().attr("mode", "side");
-        endSideNav.has().attr("style", "transform: none; visibility: visible;");
+        endSideNav.has().attr(MODE, SIDE);
+        endSideNav.has().attr(STYLE, STYLE_VISIBLE);
         endSideNav.has().text("End content");
 
         implicitMainContent.getContent().has().text("Implicit main content");
@@ -51,30 +58,52 @@ public class SideNavTests extends TestsInit {
         implicitMainContent.getContent().is().enabled();
     }
 
-
     @Test
     public void verifyOpenCloseBehaviorTest() {
+        refresh();
         openCloseBehavior.has().classValue(SIDE_NAV_CLASS);
         openCloseBehavior.toggleButton().click();
         openCloseBehavior.base().timer().wait(() -> openCloseBehavior.isEnabled());
-        openCloseBehavior.getSideNav().has().attr("style", "transform: none; visibility: visible;");
-        openCloseBehavior.getSideNav().has().text("Sidenav content");
+        openCloseBehavior.getSideNav().has().attr(STYLE, STYLE_VISIBLE);
+        openCloseBehavior.getSideNav().has().text(SIDE_NAV_CONTENT);
 
         openCloseBehavior.checkbox().click();
         openCloseBehavior.base().timer().wait(() -> openCloseBehavior.isEnabled());
-        openCloseBehavior.getSideNav().has().attr("style", "box-shadow: none; visibility: hidden;");
-        openCloseBehavior.openCloseEvents().has().values("open!\nclose!");
-
+        openCloseBehavior.getSideNav().has().attr(STYLE, STYLE_HIDDEN);
         openCloseBehavior.getContent().is().displayed();
         openCloseBehavior.getContent().is().enabled();
     }
 
     @Test
-    public void verifyTest() {
+    public void toggleButtonTest() {
+        refresh();
         configurableMode.has().classValue(SIDE_NAV_CLASS);
+        configurableMode.getSideNav().has().attr(STYLE, STYLE_HIDDEN);
+        configurableMode.getContentToggleButton().click();
+        configurableMode.base().timer().wait(() -> configurableMode.isEnabled());
+        configurableMode.getSideNav().has().attr(STYLE, STYLE_VISIBLE);
+        configurableMode.getSideNavToggleButton().click();
 
+    }
 
-        configurableMode.getContent().is().displayed();
-        configurableMode.getContent().is().enabled();
+    @Test
+    public void sideRadioGroupTest() {
+        refresh();
+        configurableMode.getContentToggleButton().click();
+        configurableMode.getContent().has().attr(STYLE, "");
+        configurableMode.sideNavRadioButtons().get("Side").click();
+        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
+        configurableMode.sideNavRadioButtons().get("Push").click();
+        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
+    }
+
+    @Test
+    public void contentRadioButtonsTest() {
+        refresh();
+        configurableMode.getContentToggleButton().click();
+        configurableMode.sideNavRadioButtons().get("Side").click();
+        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
+        configurableMode.getContentRadioButtons().get("Push").click();
+        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
     }
 }
