@@ -44,24 +44,41 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
     public UIElement toggleButton(){
         return this.find("button");
     }
-    @JDIAction("Get '{name}' events'")
+    @JDIAction("Get '{name}' events")
     public WebList openCloseEvents(){
         return this.finds(".example-events");
     }
 
     /*configurable mode*/
     @JDIAction("Get '{name}' radio buttons'")
-    public UIElement sideRadioButtons(){
-        return this.getSideNav().find("mat-radio-group");
+    public WebList sideNavRadioButtons(){
+        return this.finds("mat-radio-group mat-radio-button");
     }
 
     @JDIAction("Get '{name}' radio buttons'")
-    public UIElement contentRadioButtons(){
-        return this.getContent().find("mat-radio-group");
+    public WebList getContentRadioButtons(){
+        return this.finds("mat-sidenav-content mat-radio-group mat-radio-button");
     }
 
+    @JDIAction("Get '{name}' radio buttons'")
+    public UIElement getSideNavToggleButton(){
+        return this.getSideNav().find("button");
+    }
 
+    @JDIAction("Get '{name}' radio buttons'")
+    public UIElement getContentToggleButton(){
+        return this.getContent().find("button");
+    }
 
+//    @JDIAction("Get '{name}' radio buttons'")
+//    public RadioButtons getRadioButtons(){
+//        return (RadioButtons) getDriver().findElement(By.cssSelector(".mat-sidenav .mat-radio-group"));
+//    }
+
+//    @JDIAction("Get '{name}' content radio buttons'")
+//    public UIElement contentRadioButtons(){
+//        return this.getContent().find("mat-radio-group");
+//    }
 
 
     @Override
