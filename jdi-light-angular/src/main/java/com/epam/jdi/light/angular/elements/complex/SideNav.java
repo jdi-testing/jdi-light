@@ -40,13 +40,10 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
     public UIElement checkbox(){
         return this.find("mat-checkbox");
     }
-    @JDIAction("Get '{name}' toggle button'")
-    public UIElement toggleButton(){
-        return this.find("button");
-    }
+
     @JDIAction("Get '{name}' events")
     public WebList openCloseEvents(){
-        return this.finds(".example-events");
+        return this.getContent().finds(".example-events div");
     }
 
     /*configurable mode*/
