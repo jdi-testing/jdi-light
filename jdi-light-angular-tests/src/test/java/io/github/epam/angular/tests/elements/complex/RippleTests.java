@@ -113,14 +113,13 @@ public class RippleTests extends TestsInit {
     }
 
     @Test
-    public void mouseClickCenteredAndRadiusTest() {
-        rippleContainer.center();
-        int x = 88;
-        int y = 111;
+    public void mouseClickByCoordinatesAndRadiusTest() {
+        int x = 0;
+        int y = 299;
         int expectedRadius = 300;
-        rippleContainer.ripple(x, y);
         rippleContainer.setRadius(expectedRadius);
-        rippleContainer.is().centered().and().radius(is(expectedRadius));
+        rippleContainer.ripple(x, y);
+        rippleContainer.is().rippleCenter(x, y).and().radius(expectedRadius);
     }
 
     @Test
