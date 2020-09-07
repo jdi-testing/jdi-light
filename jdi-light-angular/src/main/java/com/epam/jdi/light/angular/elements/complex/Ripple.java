@@ -13,6 +13,9 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 public class Ripple extends UIBaseElement<RippleAssert> {
     public static final String STYLE = "style";
+    public static final int INSCRIBED_CIRCLE_RADIUS = 150;
+    public static final String HEIGHT_SPX_WIDTH_SPX = "height: %spx; width: %spx;";
+    public static final String LEFT_SPX_TOP_SPX = "left: %spx; top: %spx;";
     public String containerLocator = "//*[@id='ripple-container']";
     public String rippleLocator = containerLocator.concat("/div");
     public String centeredCheckboxLocator = containerLocator
@@ -27,9 +30,9 @@ public class Ripple extends UIBaseElement<RippleAssert> {
             .concat("/preceding-sibling::mat-form-field[@id='ripple-color-input']//input");
     public String smartSharp = "smart: #";
     public String cssSharp = "css='#";
-    private Checkbox rippleCenteredCheckbox;
-    private Checkbox rippleDisabledCheckbox;
-    private Checkbox rippleUnboundedCheckbox;
+    private final Checkbox rippleCenteredCheckbox;
+    private final Checkbox rippleDisabledCheckbox;
+    private final Checkbox rippleUnboundedCheckbox;
 
     public Ripple() {
         rippleCenteredCheckbox = new Checkbox();
@@ -98,44 +101,17 @@ public class Ripple extends UIBaseElement<RippleAssert> {
     @JDIAction("Is '{name}' ripple disabled")
     @Override
     public boolean isDisabled() {
-        boolean isChecked = rippleDisabledCheckbox.isSelected();
-        ripple();
-        boolean isRipple = getRipple().isNotVisible();
-        return isChecked && isRipple;
+        return rippleDisabledCheckbox.isSelected();
     }
 
     @JDIAction("Is '{name}' ripple unbounded")
     public boolean isUnbounded() {
-        boolean isChecked = rippleUnboundedCheckbox.isSelected();
-        ripple();
-        boolean isUnbounded = container().attr("class").contains("mat-ripple-unbounded");
-        return isChecked && isUnbounded;
+        return rippleUnboundedCheckbox.isSelected();
     }
 
     @JDIAction("Is '{name}' ripple centered")
     public boolean isCentered() {
-        boolean isChecked = rippleCenteredCheckbox.isSelected();
-        int actualRadius = radius();
-        if (actualRadius == -1) {
-            return true;
-        }
-        int centralPoint = Math.abs(150 - actualRadius);
-        boolean isCentered;
-        String style = getRipple().attr(STYLE);
-        if (actualRadius == 0) {
-            ripple();
-            isCentered = style.contains(String.format("left: -%spx; top: -%spx;", actualRadius, actualRadius)) && style
-                    .contains(String.format("height: %spx; width: %spx;", actualRadius * 2, actualRadius * 2));
-        } else if (actualRadius > 150) {
-            ripple();
-            isCentered = style.contains(String.format("left: -%spx; top: -%spx;", centralPoint, centralPoint)) && style
-                    .contains(String.format("height: %spx; width: %spx;", actualRadius * 2, actualRadius * 2));
-        } else {
-            ripple();
-            isCentered = style.contains(String.format("left: %spx; top: %spx;", centralPoint, centralPoint)) && style
-                    .contains(String.format("height: %spx; width: %spx;", actualRadius * 2, actualRadius * 2));
-        }
-        return isChecked && isCentered;
+        return rippleCenteredCheckbox.isSelected();
     }
 
     @JDIAction("Is '{name}' ripple active")
@@ -192,7 +168,6 @@ public class Ripple extends UIBaseElement<RippleAssert> {
 
     @JDIAction("Get '{name}' ripple color")
     public String color() {
-        ripple();
         if (isCorrectColor()) {
             String style = getRipple().attr(STYLE);
             String backgroundColor = "background-color: ";
@@ -207,7 +182,6 @@ public class Ripple extends UIBaseElement<RippleAssert> {
     @JDIAction("Get '{name}' ripple radius")
     public int radius() {
         if (isCorrectRadius()) {
-            ripple();
             String style = getRipple().attr(STYLE);
             String height = "height: ";
             int beginIndex = style.lastIndexOf(height) + height.length();
