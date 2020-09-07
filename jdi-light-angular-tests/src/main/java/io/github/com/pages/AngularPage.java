@@ -19,13 +19,8 @@ public class AngularPage extends WebPage {
     @UI("#radio-option-two")
     public static Button secondBasicRadioButton;
 
-    @UI("#basic_progress_spinner")
     public static ProgressSpinner basicProgressSpinner;
-
-    @UI("#basic_icon")
     public static Icon basicIcon;
-
-    @UI("#svg_icon")
     public static Icon svgIcon;
 
     public static RadioButtonSection radioButtonSection;
@@ -44,4 +39,7 @@ public class AngularPage extends WebPage {
     public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
     public static SliderSection sliderSection;
+    public static CardSection cardSection;
+    public static DividerSection dividerSection;
+    public static DatepickerSection datepickerSection;
 }

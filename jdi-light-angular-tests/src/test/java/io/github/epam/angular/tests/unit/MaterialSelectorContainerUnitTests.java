@@ -1,9 +1,10 @@
 package io.github.epam.angular.tests.unit;
 
-import com.epam.jdi.light.angular.elements.composite.CdkOverlayContainer;
+import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -16,30 +17,16 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class CdkOverlayContainerUnitTests extends TestsInit {
-    private CdkOverlayContainer container;
+public class MaterialSelectorContainerUnitTests extends TestsInit {
+    private MaterialSelectorContainer container;
+    private String[] multiOptions = new String[3];
+    private int[] multiSelect = new int[3];
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
-        container = new CdkOverlayContainer();
-    }
-
-    @Test
-    public void displayedTest() {
-        basicMatSelect.show();
-        basicMatSelect.expand();
-        assertTrue(container.isDisplayed());
-        container.collapsePanel();
-    }
-
-    @Test
-    public void collapsedTest() {
-        basicMatSelect.show();
-        basicMatSelect.expand();
-        container.collapsePanel();
-        assertTrue(container.isHidden());
+        container = new MaterialSelectorContainer();
     }
 
     @Test
@@ -75,20 +62,20 @@ public class CdkOverlayContainerUnitTests extends TestsInit {
     public void multipleSelectByValuesTest() {
         multipleSelect.show();
         multipleSelect.expand();
-        container.multipleSelect(MUSHROOM, PEPPERONI, TOMATO);
-        assertTrue(multipleSelect.selected(MUSHROOM + ", " + PEPPERONI + ", " + TOMATO));
-        multipleSelect.expand();
-        container.multipleSelect(MUSHROOM, PEPPERONI, TOMATO);
+        multiOptions[0] = MUSHROOM;
+        multiOptions[1] = PEPPERONI;
+        multiOptions[2] = TOMATO;
+        container.multipleSelect(multiOptions);
+        assertTrue(multipleSelect.selected(multiOptions[0] + ", " + multiOptions[1] + ", " + multiOptions[2]));
     }
 
     @Test
     public void multipleSelectByIndexesTest() {
         multipleSelect.show();
         multipleSelect.expand();
-        container.multipleSelect(1, 3, 5);
+        multiSelect = new int[] {1, 3, 5};
+        container.multipleSelect(multiSelect);
         assertTrue(multipleSelect.selected(EXTRA_CHEESE + ", " + ONION + ", " + SAUSAGE));
-        multipleSelect.expand();
-        container.multipleSelect(1, 3, 5);
     }
 
     @Test
@@ -134,5 +121,21 @@ public class CdkOverlayContainerUnitTests extends TestsInit {
         customPanelStylingSelect.select(RED);
         customPanelStylingSelect.expand();
         assertTrue(container.color(255, 0, 0, 0.5));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (multiSelect[0] != 0) {
+            multipleSelect.expand();
+            container.multipleSelect(multiSelect);
+            multiSelect = new int[3];
+        }
+        if (multiOptions[0] != null) {
+            multipleSelect.expand();
+            container.multipleSelect(multiOptions);
+            multiOptions[0] = null;
+            multiOptions[1] = null;
+            multiOptions[2] = null;
+        }
     }
 }

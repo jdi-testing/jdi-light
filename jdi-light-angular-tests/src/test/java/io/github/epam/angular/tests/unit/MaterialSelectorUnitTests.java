@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,7 +15,10 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class MaterialSelectorUnitTests extends TestsInit {
-    @BeforeMethod
+    private String[] multiOptions = new String[3];
+    private int[] multiSelect = new int[3];
+
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
@@ -25,7 +29,6 @@ public class MaterialSelectorUnitTests extends TestsInit {
         basicMatSelect.show();
         basicMatSelect.expand();
         assertTrue(basicMatSelect.isExpanded());
-        basicMatSelect.collapse();
     }
 
     @Test
@@ -52,17 +55,19 @@ public class MaterialSelectorUnitTests extends TestsInit {
     @Test
     public void multipleSelectByValuesTest() {
         multipleSelect.show();
-        multipleSelect.multipleSelect(MUSHROOM, PEPPERONI, SAUSAGE);
-        assertEquals(multipleSelect.selected(), MUSHROOM + ", " + PEPPERONI + ", " + SAUSAGE);
-        multipleSelect.multipleSelect(MUSHROOM, PEPPERONI, SAUSAGE);
+        multiOptions[0] = MUSHROOM;
+        multiOptions[1] = PEPPERONI;
+        multiOptions[2] = SAUSAGE;
+        multipleSelect.multipleSelect(multiOptions);
+        assertEquals(multipleSelect.selected(), multiOptions[0] + ", " + multiOptions[1] + ", " + multiOptions[2]);
     }
 
     @Test
     public void multipleSelectByIndexesTest() {
         multipleSelect.show();
-        multipleSelect.multipleSelect(2, 4, 6);
+        multiSelect = new int[] {2, 4, 6};
+        multipleSelect.multipleSelect(multiSelect);
         assertEquals(multipleSelect.selected(), MUSHROOM + ", " + PEPPERONI + ", " + TOMATO);
-        multipleSelect.multipleSelect(MUSHROOM, PEPPERONI, TOMATO);
     }
 
     @Test
@@ -116,5 +121,22 @@ public class MaterialSelectorUnitTests extends TestsInit {
         matErrorStateMatcherSelect.show();
         matErrorStateMatcherSelect.select(INVALID_OPTION);
         assertEquals(matErrorStateMatcherSelect.error().text(), INVALID_SELECTION);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (basicMatSelect.isExpanded()) {
+            basicMatSelect.collapse();
+        }
+        if (multiSelect[0] != 0) {
+            multipleSelect.multipleSelect(multiSelect);
+            multiSelect = new int[3];
+        }
+        if (multiOptions[0] != null) {
+            multipleSelect.multipleSelect(multiOptions);
+            multiOptions[0] = null;
+            multiOptions[1] = null;
+            multiOptions[2] = null;
+        }
     }
 }

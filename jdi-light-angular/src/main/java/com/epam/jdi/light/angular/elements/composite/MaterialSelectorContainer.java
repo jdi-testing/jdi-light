@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CdkOverlayContainer extends Section {
+public class MaterialSelectorContainer extends Section {
     public String backdropSelectPanel = "div.mat-select-panel.mat-primary";
     public String groupsAndOptionsList = "div.mat-select-panel.mat-primary mat-optgroup";
     public String matOptionSpan = "mat-option span";
@@ -27,14 +27,12 @@ public class CdkOverlayContainer extends Section {
     @JDIAction("Check that '{name}' is displayed")
     @Override
     public boolean isDisplayed() {
-        getBackdropSelectPanel().waitFor().displayed();
         return getBackdropSelectPanel().isDisplayed();
     }
 
     @JDIAction("Check that '{name}' is hidden")
     @Override
     public boolean isHidden() {
-        getBackdropSelectPanel().waitFor().disappear();
         return getBackdropSelectPanel().isHidden();
     }
 
@@ -190,9 +188,8 @@ public class CdkOverlayContainer extends Section {
      */
     @JDIAction("Check that rgba({0}, {1}, {2}, {3}) is the specified color")
     public boolean color(final int red, final int green, final int blue, final double a) {
-        getBackdropSelectPanel().waitFor();
         boolean hasColor = getBackdropSelectPanel().css("background-color")
-                .equalsIgnoreCase("rgba(" + red + ", " + green + ", " + blue + ", " + a + ")");
+                .equalsIgnoreCase(String.format("rgba(%s, %s, %s, %s)", red, green, blue, a));
         collapsePanel();
         return hasColor;
     }
@@ -202,7 +199,6 @@ public class CdkOverlayContainer extends Section {
      */
     @JDIAction("Collapse '{name}' select panel")
     public void collapsePanel() {
-        getBackdropSelectPanel().waitFor().displayed();
         getBackdropSelectPanel().core().click(getPointOutsidePanel().getX(), getPointOutsidePanel().getY());
     }
 

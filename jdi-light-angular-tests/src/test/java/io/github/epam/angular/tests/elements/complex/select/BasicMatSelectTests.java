@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -24,7 +25,6 @@ public class BasicMatSelectTests extends TestsSelectBase {
     public void checkSelectorExpanded() {
         basicMatSelect.expand();
         basicMatSelect.is().expanded();
-        basicMatSelect.collapse();
     }
 
     @Test
@@ -52,5 +52,12 @@ public class BasicMatSelectTests extends TestsSelectBase {
     @Test
     public void checkAvailableOptions() {
         basicMatSelect.assertThat().values(hasItems(TACOS, STEAK, PIZZA));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (basicMatSelect.isExpanded()) {
+            basicMatSelect.collapse();
+        }
     }
 }
