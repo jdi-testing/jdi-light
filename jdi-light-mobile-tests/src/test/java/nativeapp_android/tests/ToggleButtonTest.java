@@ -1,12 +1,13 @@
 package nativeapp_android.tests;
 
+import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.android.apiDemos.ButtonsPage;
 import nativeapp.android.apiDemos.IndexPage;
 import nativeapp.android.apiDemos.ViewsPage;
 import nativeapp_android.ToggleButtonTestInit;
 import org.testng.annotations.Test;
 
-import static junit.framework.Assert.*;
+import static org.testng.Assert.*;
 
 public class ToggleButtonTest extends ToggleButtonTestInit {
 
