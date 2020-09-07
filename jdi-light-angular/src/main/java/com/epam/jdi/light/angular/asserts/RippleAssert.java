@@ -41,7 +41,7 @@ public class RippleAssert extends UIAssert<RippleAssert, Ripple> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' ripple center by coordinates x:'{0}'; y:'{0}'")
+    @JDIAction("Assert that '{name}' ripple center by coordinates x:'{0}'; y:'{1}'")
     public RippleAssert rippleCenter(final int x, final int y) {
         jdiAssert(element().isRippleCenter(x, y), Matchers.is(true));
         return this;

@@ -50,8 +50,13 @@ public class Ripple extends UIBaseElement<RippleAssert> {
     public void ripple() {
         container().click();
     }
-
-    @JDIAction("Ripple '{name}' by coordinates x:'{0}'; y:'{0}'")
+    /**
+     * Activate ripple by coordinates.
+     *
+     * @param x integer coordinate of the mouse click point; bound [0, 300)
+     * @param y integer coordinate of the mouse click point; bound [0, 300)
+     */
+    @JDIAction("Ripple '{name}' by coordinates x:'{0}'; y:'{1}'")
     public void ripple(final int x, final int y) {
         container().click(x, y);
     }
@@ -126,7 +131,7 @@ public class Ripple extends UIBaseElement<RippleAssert> {
      * @param y integer coordinate of the mouse click point; bound [0, 300)
      * @return boolean value
      */
-    @JDIAction("Is '{name}' ripple center by coordinates x:'{0}'; y:'{0}'")
+    @JDIAction("Is '{name}' ripple center by coordinates x:'{0}'; y:'{1}'")
     public boolean isRippleCenter(final int x, final int y) {
         int inputSubtract = Math.abs(x - y);
         if (getRipple().isDisplayed()) {
