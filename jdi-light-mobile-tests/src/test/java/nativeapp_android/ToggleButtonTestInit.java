@@ -7,14 +7,23 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+
 import static com.epam.jdi.light.mobile.elements.init.PageFactory.initMobile;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class ToggleButtonTestInit {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
+        final String FILE_NAME="src/main/resources/ApiDemos-debug.apk";
         initMobile(ApiDemosApp.class);
         logger.toLog("Run ApiDemos ToggleButton Tests");
+        File file = new File(FILE_NAME);
+        String path = file.getAbsolutePath();
+        AppManager.installApp(path);
+        AppManager.launchApp();
     }
 
     @AfterMethod(alwaysRun = true)

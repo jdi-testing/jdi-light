@@ -1,6 +1,5 @@
 package nativeapp_android.tests;
 
-import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.android.apiDemos.ButtonsPage;
 import nativeapp.android.apiDemos.IndexPage;
 import nativeapp.android.apiDemos.ViewsPage;
