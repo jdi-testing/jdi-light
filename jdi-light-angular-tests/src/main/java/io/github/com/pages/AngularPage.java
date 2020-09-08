@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.ProgressSpinner;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
+import com.epam.jdi.light.angular.elements.complex.BottomSheet;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -11,7 +12,6 @@ import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import io.github.com.pages.sections.AutocompleteSection;
 import io.github.com.pages.sections.BadgeSection;
 import io.github.com.pages.sections.BasicButtonsSection;
-import io.github.com.pages.sections.BottomSheetSection;
 import io.github.com.pages.sections.ButtonToggleSection;
 import io.github.com.pages.sections.CardSection;
 import io.github.com.pages.sections.CheckboxSection;
@@ -44,6 +44,7 @@ public class AngularPage extends WebPage {
     public static Icon basicIcon;
     public static Icon svgIcon;
     public static Ripple rippleContainer;
+    public static BottomSheet bottomSheet;
 
     public static RadioButtonSection radioButtonSection;
     public static CheckboxSection checkboxSection;
@@ -64,5 +65,4 @@ public class AngularPage extends WebPage {
     public static CardSection cardSection;
     public static DividerSection dividerSection;
     public static DatepickerSection datepickerSection;
-    public static BottomSheetSection bottomSheetSection;
 }
