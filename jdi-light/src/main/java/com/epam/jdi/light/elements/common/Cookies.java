@@ -38,12 +38,25 @@ public class Cookies {
     public static void addCookie(Cookie cookie) {
         manage().addCookie(cookie);
     }
-
     /**
      * Clear browsers cache
      */
     @JDIAction("Delete all cookies")
     public static void clearAllCookies() {
         manage().deleteAllCookies();
+    }
+    /**
+     * Clear browsers cache
+     */
+    @JDIAction("Delete all cookies")
+    public static void deleteCookie(Cookie cookie) {
+        manage().deleteCookie(cookie);
+    }
+    /**
+     * Clear browsers cache
+     */
+    @JDIAction("Delete all cookies")
+    public static void deleteCookie(String name) {
+        manage().deleteCookieNamed(name);
     }
 }

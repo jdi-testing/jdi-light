@@ -1,6 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.ProgressSpinner;
+import com.epam.jdi.light.angular.elements.complex.Ripple;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -41,6 +42,7 @@ public class AngularPage extends WebPage {
     public static ProgressSpinner basicProgressSpinner;
     public static Icon basicIcon;
     public static Icon svgIcon;
+    public static Ripple rippleContainer;
 
     public static RadioButtonSection radioButtonSection;
     public static CheckboxSection checkboxSection;
