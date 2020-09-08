@@ -11,6 +11,7 @@ import org.openqa.selenium.Point;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+// https://material.angular.io/components/ripple/examples
 public class Ripple extends UIBaseElement<RippleAssert> {
     public static final String STYLE = "style";
     public static final int INSCRIBED_CIRCLE_RADIUS = 150;
