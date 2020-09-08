@@ -22,15 +22,15 @@ public class BottomSheetTests extends TestsInit {
     @Test
     public void checkBottomSheetIsDisplayedTest() {
         bottomSheet.open();
-        bottomSheet.is().isOpened();
+        bottomSheet.is().opened();
     }
 
     @Test
     public void checkBottomSheetIsHiddenTest() {
         bottomSheet.open();
-        bottomSheet.is().isOpened();
+        bottomSheet.is().opened();
         bottomSheet.close();
-        bottomSheet.is().isClosed();
+        bottomSheet.is().closed();
     }
 
     @Test
@@ -41,9 +41,7 @@ public class BottomSheetTests extends TestsInit {
 
     @AfterMethod(alwaysRun = true)
     public void after() {
-        if (bottomSheet.isOpened()) {
-            bottomSheet.close();
-        }
+        bottomSheet.close();
     }
 }
 

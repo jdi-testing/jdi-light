@@ -30,8 +30,10 @@ public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
     }
 
     public void close() {
-        bottomSheetContainer.click();
-        bottomSheetContainer.waitFor().disappear();
+        if (isOpened()) {
+            bottomSheetContainer.core().click();
+            bottomSheetContainer.waitFor().disappear();
+        }
     }
 
     public boolean isOpened() {
@@ -39,6 +41,6 @@ public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
     }
 
     public boolean isClosed() {
-        return bottomSheetContainer.isHidden();
+        return !isOpened();
     }
 }

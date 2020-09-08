@@ -18,12 +18,12 @@ public class BottomSheetAssert extends UIAssert<BottomSheetAssert, BottomSheet> 
         return this;
     }
 
-    public BottomSheetAssert isOpened() {
+    public BottomSheetAssert opened() {
         jdiAssert(element().isOpened(), Matchers.is(true));
         return this;
     }
 
-    public BottomSheetAssert isClosed() {
+    public BottomSheetAssert closed() {
         jdiAssert(element().isClosed(), Matchers.is(true));
         return this;
     }
