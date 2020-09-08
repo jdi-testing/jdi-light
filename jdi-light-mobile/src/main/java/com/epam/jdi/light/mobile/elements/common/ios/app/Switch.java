@@ -4,10 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.mobile.asserts.SwitchAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
+import com.epam.jdi.light.mobile.elements.common.app.ISwitch;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
 public class Switch extends MobileAppBaseElement<SwitchAssert>
-        implements HasTouchActions, IsButton {
+        implements ISwitch, HasTouchActions, IsButton {
 
     @JDIAction(value = "Check that '{name}' is on")
     public boolean isOn() {

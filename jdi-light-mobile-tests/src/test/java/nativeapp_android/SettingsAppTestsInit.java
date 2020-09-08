@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeClass;
 import static com.epam.jdi.light.mobile.elements.init.PageFactory.initMobile;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
-public class NetworkAndInternetInit {
+public class SettingsAppTestsInit {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         initMobile(SettingsApp.class);

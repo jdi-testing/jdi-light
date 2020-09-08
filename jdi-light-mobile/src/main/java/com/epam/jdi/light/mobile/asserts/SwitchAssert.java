@@ -2,12 +2,13 @@ package com.epam.jdi.light.mobile.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.mobile.asserts.generic.ISwitchAssert;
 import com.epam.jdi.light.mobile.elements.common.ios.app.Switch;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
+public class SwitchAssert extends UIAssert<SwitchAssert, Switch> implements ISwitchAssert {
 
     @JDIAction("Assert that '{name}' is on")
     public SwitchAssert on() {
