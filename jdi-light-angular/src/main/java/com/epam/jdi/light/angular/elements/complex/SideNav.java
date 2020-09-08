@@ -6,6 +6,10 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 
+/**
+ * To see an example of Checkbox web element please visit https://material.angular.io/components/sidenav/overview.
+ */
+
 
 public class SideNav extends UIBaseElement<SideNavAssert> {
 
