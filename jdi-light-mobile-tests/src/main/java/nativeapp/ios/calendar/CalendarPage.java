@@ -10,4 +10,6 @@ public class CalendarPage {
     public static NavigationBar dayViewNavBar;
     @MobileFindBy(xpath = "//XCUIElementTypeButton[@name='Calendars']")
     public static Button calendarsButton;
+    @MobileFindBy(xpath = "//XCUIElementTypeButton[@name='Inbox']")
+    public static Button inboxButton;
 }
