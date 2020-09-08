@@ -17,19 +17,18 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class SideNavTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
-    }
-
     public static final String SIDE_NAV_CONTENT = "Sidenav content";
-
     public static final String STYLE = "style";
     public static final String STYLE_VISIBLE = "transform: none; visibility: visible;";
     public static final String STYLE_HIDDEN = "box-shadow: none; visibility: hidden;";
     public static final String MODE = "mode";
     public static final String SIDE = "side";
+
+    @BeforeMethod
+    public void before() {
+        shouldBeLoggedIn();
+        angularPage.shouldBeOpened();
+    }
 
     @Test
     public void verifyBasicSideNavTest() {
