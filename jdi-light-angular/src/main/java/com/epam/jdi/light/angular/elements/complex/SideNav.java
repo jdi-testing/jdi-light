@@ -117,11 +117,4 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
     public boolean navIsVisible() {
         return this.getSideNav().attr(STYLE).equals(STYLE_VISIBLE);
     }
-
-    /*two sides side nav*/
-    @JDIAction("'{name}' is visible")
-    public boolean startNavIsVisible() {
-        UIElement startSideNav = this.getSideNav("start");
-        return this.getSideNav().attr(STYLE).equals(STYLE_VISIBLE);
-    }
 }
