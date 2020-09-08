@@ -29,7 +29,6 @@ import io.github.com.pages.sections.SnackbarSection;
 import io.github.com.pages.sections.TabGroupSection;
 import io.github.com.pages.sections.ToolbarSection;
 
-
 public class AngularPage extends WebPage {
     @Css("radio-overview-example .mat-radio-group")
     public static RadioButtons basicRadioButtons;
