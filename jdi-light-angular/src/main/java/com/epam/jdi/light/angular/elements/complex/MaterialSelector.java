@@ -14,6 +14,10 @@ import java.util.Map;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * To see an example of MaterialSelector web element please visit https://material.angular.io/components/select/overview.
+ */
+
 public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> implements HasLabel {
     public String toggle = "//*[@id='%s']//div[contains(@class,'mat-select-arrow')][not(contains(@class, 'wrapper'))]";
     public String hintLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";

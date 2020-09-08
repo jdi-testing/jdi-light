@@ -4,7 +4,8 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.ui.html.asserts.ProgressAssert;
 
 /**
- * Angular progress spinner documentation: https://jdi-docs.github.io/jdi-light/?java#progress-spinner
+ * To see an example of ProgressSpinner web element please visit https://material.angular.io/components/progress-spinner/overview.
  */
+
 public class ProgressSpinner extends UIBaseElement<ProgressAssert> {
 }

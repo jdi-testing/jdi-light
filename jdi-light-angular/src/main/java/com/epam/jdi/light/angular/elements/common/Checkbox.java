@@ -1,8 +1,9 @@
 package com.epam.jdi.light.angular.elements.common;
 
 /**
- * Angular checkbox documentation: https://jdi-docs.github.io/jdi-light/?java#checkboxes
+ * To see an example of Checkbox web element please visit https://material.angular.io/components/checkbox/overview.
  */
+
 public class Checkbox extends com.epam.jdi.light.ui.html.elements.common.Checkbox {
 
     @Override

@@ -9,6 +9,10 @@ import com.epam.jdi.light.elements.common.UIElement;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * To see an example of Paginator web element please visit https://material.angular.io/components/paginator/overview.
+ */
+
 public class Paginator extends UIBaseElement<PaginatorAssert> {
 
     protected UIElement label;
