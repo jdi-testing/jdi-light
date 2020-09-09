@@ -34,9 +34,9 @@ public class Ripple extends UIBaseElement<RippleAssert> {
             .concat("/preceding-sibling::mat-form-field[@id='ripple-color-input']//input");
     public String smartSharp = "smart: #";
     public String cssSharp = "css='#";
-    private final Checkbox rippleCenteredCheckbox;
-    private final Checkbox rippleDisabledCheckbox;
-    private final Checkbox rippleUnboundedCheckbox;
+    protected final Checkbox rippleCenteredCheckbox;
+    protected final Checkbox rippleDisabledCheckbox;
+    protected final Checkbox rippleUnboundedCheckbox;
 
     public Ripple() {
         rippleCenteredCheckbox = new Checkbox();
