@@ -1,4 +1,4 @@
-package com.epam.jdi.light.mobile.elements.common.ios.app;
+package com.epam.jdi.light.mobile.elements.common.app.ios;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;

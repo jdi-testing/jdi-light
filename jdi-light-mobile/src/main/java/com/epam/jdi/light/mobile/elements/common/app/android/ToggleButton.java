@@ -1,6 +1,6 @@
-package com.epam.jdi.light.mobile.elements.common.android.app;
+package com.epam.jdi.light.mobile.elements.common.app.android;
 
-import com.epam.jdi.light.mobile.elements.common.ios.app.Button;
+import com.epam.jdi.light.mobile.elements.common.app.Button;
 
 public class ToggleButton extends Button {
 
