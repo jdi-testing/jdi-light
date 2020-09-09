@@ -14,7 +14,7 @@ public class EditDetailsPage {
     public static Switch remindSwitch;
 
     @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"Alarm\"]")
-    public static MenuItem alarm;
+    public static MenuItem alarmMenuItem;
 
     @MobileFindBy(xpath = "//XCUIElementTypePickerWheel[3]")
     public static PickerWheel yearPicker;

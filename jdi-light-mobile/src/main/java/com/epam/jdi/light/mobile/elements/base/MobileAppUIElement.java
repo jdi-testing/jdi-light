@@ -9,8 +9,11 @@ import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
@@ -110,6 +113,17 @@ public class MobileAppUIElement extends MobileUIElement {
                         .withDuration(Duration.ofSeconds(seconds)))
                 .release()
                 .perform();
+    }
+
+    @Override
+    @JDIAction("Drag '{name}' and drop it to coordinates: (x:{0}, y:{1})")
+    public void dragAndDropTo(int xOffset, int yOffset) {
+        Point location = getCenter();
+        new TouchAction<>((PerformsTouchActions) getDriver())
+                .press(PointOption.point(location))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(location.moveBy(xOffset, yOffset)))
+                .release().perform();
     }
 
     @Override
