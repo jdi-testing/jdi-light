@@ -2,7 +2,6 @@ package io.github.epam.angular.tests.elements.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -10,9 +9,17 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SideNavSection.basicSideNav;
 import static io.github.com.pages.sections.SideNavSection.configurableMode;
+import static io.github.com.pages.sections.SideNavSection.contentRadioButtons;
+import static io.github.com.pages.sections.SideNavSection.contentToggle;
 import static io.github.com.pages.sections.SideNavSection.customEscapeBackdrop;
 import static io.github.com.pages.sections.SideNavSection.implicitMainContent;
 import static io.github.com.pages.sections.SideNavSection.openCloseBehavior;
+import static io.github.com.pages.sections.SideNavSection.openSideNav;
+import static io.github.com.pages.sections.SideNavSection.sideNavOpened;
+import static io.github.com.pages.sections.SideNavSection.sideNavRadioButtons;
+import static io.github.com.pages.sections.SideNavSection.sideNavToggle;
+import static io.github.com.pages.sections.SideNavSection.sideToggle;
+import static io.github.com.pages.sections.SideNavSection.toggleSideNav;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class SideNavTests extends TestsInit {
@@ -30,17 +37,20 @@ public class SideNavTests extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
+    /* for Roman Y.lovlev: complex approach example */
     @Test
     public void verifyBasicSideNavTest() {
+        basicSideNav.show();
         basicSideNav.is().displayed();
         basicSideNav.is().enabled();
         basicSideNav.is().navVisible();
         basicSideNav.is().navText(SIDE_NAV_CONTENT);
         basicSideNav.is().contentText("Main content");
     }
-
+/*approach for discussion */
     @Test
     public void verifyImplicitMainContentWithTwoSideNavTest() {
+        implicitMainContent.show();
         UIElement startSideNav = implicitMainContent.getSideNav("start");
         UIElement endSideNav = implicitMainContent.getSideNav("end");
         startSideNav.has().attr(MODE, SIDE);
@@ -54,64 +64,68 @@ public class SideNavTests extends TestsInit {
         implicitMainContent.getContent().is().displayed();
         implicitMainContent.getContent().is().enabled();
     }
-
+/**/
     @Test
     public void verifyOpenCloseBehaviorTest() {
+        openCloseBehavior.show();
         openCloseBehavior.getContent().is().displayed();
         openCloseBehavior.getContent().is().enabled();
-        openCloseBehavior.getContentToggleButton().click();
+        sideNavToggle.click();
         openCloseBehavior.getSideNav().has().text(SIDE_NAV_CONTENT);
-        openCloseBehavior.checkbox().click();
+        sideNavOpened.click();
         openCloseBehavior.base().timer().wait(() -> openCloseBehavior.isEnabled());
-        openCloseBehavior.getContent().has().text("sidenav.opened\nsidenav.toggle()\nEvents:\nopen!\nclose!");
-
+        openCloseBehavior.getEvents().has().text("open!\nclose!");
+    }
+/**/
+    @Test
+    public void toggleButtonTest() {
+        refresh();
+        configurableMode.show();
+        contentToggle.click();
+        configurableMode.base().timer().wait(() -> configurableMode.visualValidation(".mat-sidenav"));
+        configurableMode.getSideNav().has().attr(STYLE, STYLE_VISIBLE);
+        sideToggle.click();
+        configurableMode.base().timer().wait(() -> configurableMode.visualValidation(".mat-sidenav"));
+        configurableMode.getSideNav().has().attr(STYLE, STYLE_HIDDEN);
     }
 
-//    @Test
-//    public void toggleButtonTest() throws InterruptedException {
-//        refresh();
-//        configurableMode.clickContentToggleButton();
-//        configurableMode.show();
-//        Assert.assertTrue(configurableMode.isNavToggled());
-//        configurableMode.base().timer().wait(() -> configurableMode.visualValidation(".mat-sidenav"));
-//        configurableMode.getSideNav().has().attr(STYLE, STYLE_VISIBLE);
-//        configurableMode.clickNavToggleButton();
-//        configurableMode.base().timer().wait(() -> configurableMode.visualValidation(".mat-sidenav"));
-//        configurableMode.getSideNav().has().attr(STYLE, STYLE_HIDDEN);
-//    }
-//
-//    @Test
-//    public void sideRadioGroupTest() {
-//        refresh();
-//        configurableMode.getContentToggleButton().click();
-//        configurableMode.getContent().has().attr(STYLE, "");
-//        configurableMode.clickNavRadioButton("Side");
-//        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
-//        configurableMode.clickNavRadioButton("Push");
-//        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
-//    }
-//
-//    @Test
-//    public void contentRadioButtonsTest() {
-//        configurableMode.getContentToggleButton().click();
-//        configurableMode.clickNavRadioButton("Side");
-//        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
-//        configurableMode.clickContentRadioButton("Push");
-//        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
-//    }
-//
-//    @Test
-//    public void openToggleBehaviorTest() {
-//        customEscapeBackdrop.getContentToggleButton().click();
-//        customEscapeBackdrop.getNavToggleButton().click();
-//        customEscapeBackdrop.getContent().has().text("Open\nClosed due to: toggle button");
-//    }
-//
-//    @Test
-//    public void toggleBackdropBehaviorTest() {
-//        customEscapeBackdrop.getContentToggleButton().click();
-//        customEscapeBackdrop.core().click();
-//        customEscapeBackdrop.getContent().has().text("Open\nClosed due to: backdrop");
-//    }
+    @Test
+    public void sideRadioGroupTest() {
+        refresh();
+        contentToggle.click();
+        configurableMode.getContent().has().attr(STYLE, "");
+        configurableMode.base().timer().wait(() -> configurableMode.visualValidation(".mat-sidenav"));
+        sideNavRadioButtons.click("Side");
+        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
+        configurableMode.base().timer().wait(() -> configurableMode.visualValidation(".mat-sidenav"));
+        sideNavRadioButtons.click("Push");
+        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
+    }
 
+    @Test
+    public void contentRadioButtonsTest() {
+        contentToggle.click();
+        sideNavRadioButtons.click("Side");
+        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
+        contentRadioButtons.click("Push");
+        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
+    }
+
+    /**/
+    @Test
+    public void closeByToggleTest() {
+        refresh();
+        customEscapeBackdrop.show();
+        openSideNav.click();
+        toggleSideNav.click();
+        customEscapeBackdrop.getContent().has().text("Open\nClosed due to: toggle button");
+    }
+
+    @Test
+    public void closeByBackdropTest() {
+        customEscapeBackdrop.show();
+        openSideNav.click();
+        customEscapeBackdrop.core().click();
+        customEscapeBackdrop.getContent().has().text("Open\nClosed due to: backdrop");
+    }
 }
