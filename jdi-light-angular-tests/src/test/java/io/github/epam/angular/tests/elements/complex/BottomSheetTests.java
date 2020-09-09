@@ -5,12 +5,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.bottomSheet;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class BottomSheetTests extends TestsInit {
-    private static final String[] BOTTOM_SHEET_VALUES = {"Google Keep", "Google Docs", "Google Plus", "Google Hangouts"};
+    private static final List<String> BOTTOM_SHEET_VALUES = Arrays.asList("Google Keep", "Google Docs", "Google Plus", "Google Hangouts");
 
     @BeforeClass(alwaysRun = true)
     public void before() {
@@ -36,7 +39,7 @@ public class BottomSheetTests extends TestsInit {
     @Test
     public void checkBottomSheetAvailableOptionsTest() {
         bottomSheet.open();
-        bottomSheet.values().is().values(BOTTOM_SHEET_VALUES);
+        bottomSheet.is().values(BOTTOM_SHEET_VALUES);
     }
 
     @AfterMethod(alwaysRun = true)

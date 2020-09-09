@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
     private static final String BOTTOM_SHEET_VALUES_CSS_SELECTOR = "#bottom-sheet-container .mat-list-text span:first-child";
     private Button bottomSheet;
@@ -21,8 +23,8 @@ public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
         return new BottomSheetAssert().set(this);
     }
 
-    public WebList values() {
-        return new WebList(By.cssSelector(BOTTOM_SHEET_VALUES_CSS_SELECTOR));
+    public List<String> values() {
+        return new WebList(By.cssSelector(BOTTOM_SHEET_VALUES_CSS_SELECTOR)).values();
     }
 
     public void open() {

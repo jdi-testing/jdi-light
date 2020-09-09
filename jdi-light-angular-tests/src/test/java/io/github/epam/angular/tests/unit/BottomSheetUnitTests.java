@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.bottomSheet;
@@ -14,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class BottomSheetUnitTests extends TestsInit {
-    private static final String[] BOTTOM_SHEET_VALUES = {"Google Keep", "Google Docs", "Google Plus", "Google Hangouts"};
+    private static final List<String> BOTTOM_SHEET_VALUES = Arrays.asList("Google Keep", "Google Docs", "Google Plus", "Google Hangouts");
 
     @BeforeClass(alwaysRun = true)
     public void before() {
@@ -36,11 +37,11 @@ public class BottomSheetUnitTests extends TestsInit {
         assertTrue(bottomSheet.isClosed());
     }
 
-//    @Test
-//    public void valuesTest() {
-//        bottomSheet.open();
-//        assertEquals(bottomSheet.values(), Arrays.asList(BOTTOM_SHEET_VALUES));
-//    }
+    @Test
+    public void valuesTest() {
+        bottomSheet.open();
+        assertEquals(bottomSheet.values(), BOTTOM_SHEET_VALUES);
+    }
 
     @AfterMethod(alwaysRun = true)
     public void after() {
