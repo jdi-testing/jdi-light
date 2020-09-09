@@ -4,12 +4,12 @@ package com.epam.jdi.light.mobile.elements.common.app.android;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.logger.LogLevels;
-import com.epam.jdi.light.mobile.asserts.SwitchAndroidAssert;
+import com.epam.jdi.light.mobile.asserts.SwitchAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.app.ISwitch;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
-public class Switch extends MobileAppBaseElement<SwitchAndroidAssert> implements ISwitch, HasTouchActions, IsButton {
+public class Switch extends MobileAppBaseElement<SwitchAssert> implements ISwitch, HasTouchActions, IsButton {
 
     @JDIAction(value = "Check that '{name}' is on", level = LogLevels.DEBUG)
     public boolean isOn() {
@@ -29,7 +29,7 @@ public class Switch extends MobileAppBaseElement<SwitchAndroidAssert> implements
     }
 
     @Override
-    public SwitchAndroidAssert is() {
-        return new SwitchAndroidAssert().set(this);
+    public SwitchAssert is() {
+        return new SwitchAssert().set(this);
     }
 }

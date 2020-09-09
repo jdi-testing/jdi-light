@@ -1,15 +1,10 @@
 package com.epam.jdi.light.mobile.elements.common.app;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.common.IsButton;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.logger.LogLevels;
-import com.epam.jdi.light.mobile.asserts.SwitchAndroidAssert;
-import com.epam.jdi.light.mobile.asserts.generic.ISwitchAssert;
-import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
-import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
-public interface ISwitch {
+public interface ISwitch extends ICoreElement {
 
     @JDIAction(value = "Check that '{name}' is on", level = LogLevels.DEBUG)
     boolean isOn();
@@ -19,5 +14,6 @@ public interface ISwitch {
 
     @JDIAction(value = "Set '{name}' to on", level = LogLevels.DEBUG)
     void setToOn();
+
 
 }

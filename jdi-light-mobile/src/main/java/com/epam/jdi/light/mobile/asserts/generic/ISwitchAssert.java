@@ -9,5 +9,6 @@ public interface ISwitchAssert<A> {
 
     @JDIAction("Assert that '{name}' is off")
     A off();
+    
 
 }
