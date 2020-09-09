@@ -50,7 +50,7 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
     /*boolean*/
     @JDIAction("'{name}' has '{0}' text")
     public boolean navHasText(String text) {
-        return this.getSideNav().text().equals(text);
+        return getSideNav().text().equals(text);
     }
 
     @JDIAction("'{name}' has '{0}' text")
@@ -60,12 +60,22 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
 
     @JDIAction("'{name}' is visible")
     public boolean navIsVisible() {
-        return this.getSideNav().attr(STYLE).equals(STYLE_VISIBLE);
+        return getSideNav().attr(STYLE).equals(STYLE_VISIBLE);
     }
 
     @JDIAction("Get '{name}' side nav content")
     public UIElement getEvents() {
         return getContent().find(".example-events");
+    }
+
+    @JDIAction("Get '{name}' side nav content")
+    public WebList getSideNavLinks() {
+        return getSideNav().finds("a");
+    }
+
+    @JDIAction("Get '{name}' side nav content")
+    public WebList getResponsiveResults() {
+        return getContent().finds("p");
     }
 
 }

@@ -12,14 +12,19 @@ import static io.github.com.pages.sections.SideNavSection.configurableMode;
 import static io.github.com.pages.sections.SideNavSection.contentRadioButtons;
 import static io.github.com.pages.sections.SideNavSection.contentToggle;
 import static io.github.com.pages.sections.SideNavSection.customEscapeBackdrop;
+import static io.github.com.pages.sections.SideNavSection.fixSideNav;
+import static io.github.com.pages.sections.SideNavSection.fixedPosition;
 import static io.github.com.pages.sections.SideNavSection.implicitMainContent;
 import static io.github.com.pages.sections.SideNavSection.openCloseBehavior;
 import static io.github.com.pages.sections.SideNavSection.openSideNav;
+import static io.github.com.pages.sections.SideNavSection.responsiveContent;
 import static io.github.com.pages.sections.SideNavSection.sideNavOpened;
 import static io.github.com.pages.sections.SideNavSection.sideNavRadioButtons;
 import static io.github.com.pages.sections.SideNavSection.sideNavToggle;
 import static io.github.com.pages.sections.SideNavSection.sideToggle;
+import static io.github.com.pages.sections.SideNavSection.toggleFixedSideNav;
 import static io.github.com.pages.sections.SideNavSection.toggleSideNav;
+import static io.github.com.pages.sections.SideNavSection.toolbarToggle;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class SideNavTests extends TestsInit {
@@ -47,7 +52,8 @@ public class SideNavTests extends TestsInit {
         basicSideNav.is().navText(SIDE_NAV_CONTENT);
         basicSideNav.is().contentText("Main content");
     }
-/*approach for discussion */
+
+    /*approach for discussion */
     @Test
     public void verifyImplicitMainContentWithTwoSideNavTest() {
         implicitMainContent.show();
@@ -64,7 +70,8 @@ public class SideNavTests extends TestsInit {
         implicitMainContent.getContent().is().displayed();
         implicitMainContent.getContent().is().enabled();
     }
-/**/
+
+    /**/
     @Test
     public void verifyOpenCloseBehaviorTest() {
         openCloseBehavior.show();
@@ -76,9 +83,10 @@ public class SideNavTests extends TestsInit {
         openCloseBehavior.base().timer().wait(() -> openCloseBehavior.isEnabled());
         openCloseBehavior.getEvents().has().text("open!\nclose!");
     }
-/**/
+
+    /**/
     @Test
-    public void toggleButtonTest() {
+    public void toggleConfigurableSideNavTest() {
         refresh();
         configurableMode.show();
         contentToggle.click();
@@ -123,9 +131,34 @@ public class SideNavTests extends TestsInit {
 
     @Test
     public void closeByBackdropTest() {
-        customEscapeBackdrop.show();
         openSideNav.click();
         customEscapeBackdrop.core().click();
         customEscapeBackdrop.getContent().has().text("Open\nClosed due to: backdrop");
+    }
+
+    /**/
+
+    @Test
+    public void fixedSideNavTest() {
+        fixedPosition.show();
+//        topGap.
+//        topGap.sendKeys("100");
+//        bottomGap.sendKeys("100");
+        fixSideNav.click();
+     //   fixedPosition.getSideNav().has().attr("style", ".*top: 100px; bottom: 100px;");
+        toggleFixedSideNav.click();
+    }
+
+    /**/
+
+    @Test
+    public void toggleResponsiveSideNavTest() {
+        responsiveContent.show();
+        toolbarToggle.click();
+        responsiveContent.getSideNavLinks().get(1).click();
+        responsiveContent.getResponsiveResults().get(1).has().text("Selected Nav Item 1");
+        responsiveContent.getSideNavLinks().get(3).click();
+        responsiveContent.getResponsiveResults().get(3).has().text("Selected Nav Item 3");
+
     }
 }

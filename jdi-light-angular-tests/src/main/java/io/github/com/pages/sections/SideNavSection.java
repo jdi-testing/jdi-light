@@ -3,8 +3,10 @@ package io.github.com.pages.sections;
 import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.angular.elements.complex.RadioButtons;
 import com.epam.jdi.light.angular.elements.complex.SideNav;
+import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 
 public class SideNavSection {
 
@@ -36,6 +38,16 @@ public class SideNavSection {
 
 
     public static SideNav fixedPosition;
+    @UI("#fixed-position mat-checkbox")
+    public static Checkbox fixSideNav;
+    @UI("#fixed-position .mat-sidenav-content button")
+    public static Button toggleFixedSideNav;
+//    @UI("#fixed-position .mat-sidenav-content button")
+//    public static Inp topGap;
+//    @UI("#fixed-position .mat-sidenav-content button")
+//    public static TextField bottomGap;
 
     public static SideNav responsiveContent;
+    @UI("//*[@id='responsive-content']/preceding-sibling::mat-toolbar/button")
+    public static Button toolbarToggle;
 }
