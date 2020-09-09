@@ -1,4 +1,49 @@
 package io.github.epam.angular.tests.unit;
 
-public class BottomSheetUnitTests {
+import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+
+import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.AngularPage.bottomSheet;
+import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+public class BottomSheetUnitTests extends TestsInit {
+    private static final String[] BOTTOM_SHEET_VALUES = {"Google Keep", "Google Docs", "Google Plus", "Google Hangouts"};
+
+    @BeforeClass(alwaysRun = true)
+    public void before() {
+        shouldBeLoggedIn();
+        angularPage.shouldBeOpened();
+        bottomSheet.show();
+    }
+
+    @Test
+    public void openedTest() {
+        bottomSheet.open();
+        assertTrue(bottomSheet.isOpened());
+    }
+
+    @Test
+    public void closedTest() {
+        bottomSheet.open();
+        bottomSheet.close();
+        assertTrue(bottomSheet.isClosed());
+    }
+
+//    @Test
+//    public void valuesTest() {
+//        bottomSheet.open();
+//        assertEquals(bottomSheet.values(), Arrays.asList(BOTTOM_SHEET_VALUES));
+//    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        bottomSheet.close();
+    }
 }
