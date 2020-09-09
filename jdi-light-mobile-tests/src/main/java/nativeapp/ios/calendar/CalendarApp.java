@@ -9,4 +9,5 @@ public class CalendarApp {
     public static CalendarsListPage calendarsListPage;
     public static EditCalendarPage editCalendarPage;
     public static AddCalendarPage addCalendarPage;
+    public static InboxPage inboxPage;
 }
