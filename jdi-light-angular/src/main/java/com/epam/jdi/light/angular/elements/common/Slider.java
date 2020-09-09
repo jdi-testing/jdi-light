@@ -11,6 +11,10 @@ import org.openqa.selenium.Keys;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
 
+/**
+ * To see an example of Slider web element please visit https://material.angular.io/components/slider/overview.
+ */
+
 public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, SetValue {
 
     @JDIAction(value = "Get '{name}' min limit", level = DEBUG)
