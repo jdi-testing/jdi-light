@@ -1,8 +1,8 @@
 package nativeapp.ios.reminders;
 
 import com.epam.jdi.light.mobile.elements.common.app.ios.MenuItem;
-import com.epam.jdi.light.mobile.elements.common.ios.app.PickerWheel;
-import com.epam.jdi.light.mobile.elements.common.ios.app.Switch;
+import com.epam.jdi.light.mobile.elements.common.app.ios.PickerWheel;
+import com.epam.jdi.light.mobile.elements.common.app.ios.Switch;
 import com.epam.jdi.light.mobile.elements.composite.ios.app.NavigationBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
