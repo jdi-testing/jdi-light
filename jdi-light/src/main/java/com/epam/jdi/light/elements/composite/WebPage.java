@@ -264,37 +264,59 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
     public static void visualWindowCheck() { }
-
+    public static boolean logDebug = false;
+    public static void log(String msg) {
+        if (logDebug)
+            logger.info(msg);
+    }
     /**
      * Check the page is opened
      * @return boolean
      */
     @JDIAction(level = DEBUG)
     public boolean isOpened() {
-        if (noRunDrivers())
-            return false;
-        boolean result = Switch(checkUrlType).get(
-                Value(NONE, t -> true),
-                Value(EQUALS, t -> url().check()),
-                Value(MATCH, t -> url().match()),
-                Value(CONTAINS, t -> url().contains()),
-                Else(false)
-        );
-        if (!result) return false;
-        result = Switch(checkTitleType).get(
-                Value(NONE, t -> true),
-                Value(EQUALS, t -> title().check()),
-                Value(MATCH, t -> title().match()),
-                Value(CONTAINS, t -> title().contains()),
-                Else(false)
-        );
-        if (result)
-            setCurrentPage(this);
-        return result;
+        try {
+            log("!!!In isOpened 1");
+            if (noRunDrivers())
+                return false;
+            log("!!!In isOpened 2");
+            boolean result = Switch(checkUrlType).get(
+                    Value(NONE, t -> true),
+                    Value(EQUALS, t -> url().check()),
+                    Value(MATCH, t -> url().match()),
+                    Value(CONTAINS, t -> url().contains()),
+                    Else(false)
+            );
+            log("!!!In isOpened 3");
+            try {
+                if (!result) return false;
+                result = Switch(checkTitleType).get(
+                        Value(NONE, t -> true),
+                        Value(EQUALS, t -> title().check()),
+                        Value(MATCH, t -> title().match()),
+                        Value(CONTAINS, t -> title().contains()),
+                        Else(false)
+                );
+            } catch (Exception ex) {
+                if (logDebug)
+                    log("!!!ERROR: " + ex.getMessage());
+                throw ex;
+            }
+            log("!!!In isOpened 4");
+            if (result)
+                setCurrentPage(this);
+            log("!!!In isOpened 5");
+            return result;
+        } catch (Exception ex) {
+            log("!!!In isOpened 6");
+            throw ex;
+        }
     }
 
     public void shouldBeOpened() {
+        log("!!!In shouldBeOpened");
         openedPage(url);
+        log("!!!Out shouldBeOpened");
     }
     public void shouldBeOpened(Object... params) {
         openedPage(getUrlWithParams(params));
@@ -306,9 +328,11 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("'{name}'(url={0}) should be opened")
     private void openedPage(String url) {
+        log("!!!In openedPage");
         if (isOpened()) return;
         open(url);
         checkOpened();
+        log("!!!Out shouldBeOpened");
     }
     /**
      * Reload current page
