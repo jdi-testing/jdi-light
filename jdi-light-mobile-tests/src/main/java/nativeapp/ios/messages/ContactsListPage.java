@@ -1,6 +1,6 @@
 package nativeapp.ios.messages;
 
-import com.epam.jdi.light.mobile.elements.common.ios.app.SystemButton;
+import com.epam.jdi.light.mobile.elements.common.app.ios.SystemButton;
 import com.epam.jdi.light.mobile.elements.composite.ios.app.NavigationBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
