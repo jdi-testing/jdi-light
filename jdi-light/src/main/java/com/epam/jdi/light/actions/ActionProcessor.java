@@ -13,7 +13,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.common.Exceptions.safeException;
-import static com.epam.jdi.light.elements.composite.WebPage.log;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
@@ -31,7 +30,6 @@ public class ActionProcessor {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        log("!!! ActionProcessor");
         ActionObject jInfo = null;
         try {
             jInfo = newInfo(jp);
@@ -48,13 +46,11 @@ public class ActionProcessor {
         finally {
             if (jInfo != null)
                 jInfo.clear();
-            log("!!! OUT ActionProcessor");
         }
     }
 
     @Before("stepPointcut()")
     public void step(JoinPoint jp) {
-        log("!!! Step");
         ActionObject jInfo = null;
         try {
             jInfo = newInfo(jp);
@@ -66,7 +62,6 @@ public class ActionProcessor {
         finally {
             if (jInfo != null)
                 jInfo.clear();
-            log("!!! OUT Step");
         }
     }
 }
