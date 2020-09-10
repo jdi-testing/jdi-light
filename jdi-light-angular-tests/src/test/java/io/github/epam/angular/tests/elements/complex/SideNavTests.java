@@ -58,7 +58,7 @@ public class SideNavTests extends TestsInit {
         implicitMainContent.show();
         UIElement startSideNav = implicitMainContent.getSideNav("start");
         UIElement endSideNav = implicitMainContent.getSideNav("end");
-        
+
         startSideNav.has().attr(MODE, SIDE);
         startSideNav.has().attr(STYLE, STYLE_VISIBLE);
         startSideNav.has().text("Start content");
