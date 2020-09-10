@@ -12,11 +12,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 
 public class SideNav extends UIBaseElement<SideNavAssert> {
 
-    @JDIAction("Get '{name}' side nav items")
-    public WebList getSideNavItems() {
-        return this.finds(".mat-sidenav");
-    }
-
     @JDIAction("Get '{name}' side nav")
     public UIElement getSideNav() {
         return this.find(".mat-sidenav");
@@ -32,16 +27,11 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
     public UIElement getSideNav(String position) {
         UIElement element = null;
         for (UIElement e : getSideNavItems()) {
-            if (e.attr("position").equals(position)) {
+            if (e.attr("position").equalsIgnoreCase(position)) {
                 element = e;
             }
         }
         return element;
-    }
-
-    @Override
-    public SideNavAssert is() {
-        return new SideNavAssert().set(this);
     }
 
     @JDIAction("Get '{name}' side nav content")
@@ -57,6 +47,16 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
     @JDIAction("Get '{name}' side nav content")
     public WebList getResponsiveResults() {
         return getContent().finds("p");
+    }
+
+    @Override
+    public SideNavAssert is() {
+        return new SideNavAssert().set(this);
+    }
+
+    @JDIAction("Get '{name}' side nav items")
+    private WebList getSideNavItems() {
+        return this.finds(".mat-sidenav");
     }
 
 }
