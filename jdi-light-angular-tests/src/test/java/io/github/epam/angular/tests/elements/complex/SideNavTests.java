@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SideNavSection.basicSideNav;
+import static io.github.com.pages.sections.SideNavSection.bottomGap;
 import static io.github.com.pages.sections.SideNavSection.configurableMode;
 import static io.github.com.pages.sections.SideNavSection.contentRadioButtons;
 import static io.github.com.pages.sections.SideNavSection.contentToggle;
@@ -25,6 +26,7 @@ import static io.github.com.pages.sections.SideNavSection.sideToggle;
 import static io.github.com.pages.sections.SideNavSection.toggleFixedSideNav;
 import static io.github.com.pages.sections.SideNavSection.toggleSideNav;
 import static io.github.com.pages.sections.SideNavSection.toolbarToggle;
+import static io.github.com.pages.sections.SideNavSection.topGap;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class SideNavTests extends TestsInit {
@@ -43,17 +45,18 @@ public class SideNavTests extends TestsInit {
     }
 
     /* for Roman Y.lovlev: complex approach example */
+
     @Test
     public void verifyBasicSideNavTest() {
         basicSideNav.show();
         basicSideNav.is().displayed();
         basicSideNav.is().enabled();
-        basicSideNav.is().navVisible();
-        basicSideNav.is().navText(SIDE_NAV_CONTENT);
-        basicSideNav.is().contentText("Main content");
+        basicSideNav.getSideNav().has().text(SIDE_NAV_CONTENT);
+        basicSideNav.getContent().has().text("Main content");
     }
 
     /*approach for discussion */
+
     @Test
     public void verifyImplicitMainContentWithTwoSideNavTest() {
         implicitMainContent.show();
@@ -72,6 +75,7 @@ public class SideNavTests extends TestsInit {
     }
 
     /**/
+
     @Test
     public void verifyOpenCloseBehaviorTest() {
         openCloseBehavior.show();
@@ -85,6 +89,7 @@ public class SideNavTests extends TestsInit {
     }
 
     /**/
+
     @Test
     public void toggleConfigurableSideNavTest() {
         refresh();
@@ -120,6 +125,7 @@ public class SideNavTests extends TestsInit {
     }
 
     /**/
+
     @Test
     public void closeByToggleTest() {
         refresh();
@@ -141,12 +147,17 @@ public class SideNavTests extends TestsInit {
     @Test
     public void fixedSideNavTest() {
         fixedPosition.show();
-//        topGap.
-//        topGap.sendKeys("100");
-//        bottomGap.sendKeys("100");
+        topGap.click();
+        topGap.clear();
+        topGap.sendKeys("100");
+        bottomGap.click();
+        bottomGap.clear();
+        bottomGap.sendKeys("100");
         fixSideNav.click();
-     //   fixedPosition.getSideNav().has().attr("style", ".*top: 100px; bottom: 100px;");
+        fixedPosition.getSideNav().has().attr(STYLE, "transform: none; visibility: visible; top: 100px; bottom: 100px;");
         toggleFixedSideNav.click();
+        fixedPosition.base().timer().wait(() -> fixedPosition.visualValidation(".mat-sidenav-content"));
+        fixedPosition.getSideNav().has().attr(STYLE, "top: 100px; bottom: 100px; box-shadow: none; visibility: hidden;");
     }
 
     /**/
@@ -159,6 +170,5 @@ public class SideNavTests extends TestsInit {
         responsiveContent.getResponsiveResults().get(1).has().text("Selected Nav Item 1");
         responsiveContent.getSideNavLinks().get(3).click();
         responsiveContent.getResponsiveResults().get(3).has().text("Selected Nav Item 3");
-
     }
 }

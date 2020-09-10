@@ -12,9 +12,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 
 public class SideNav extends UIBaseElement<SideNavAssert> {
 
-    public static final String STYLE_VISIBLE = "transform: none; visibility: visible;";
-    public static final String STYLE = "style";
-
     @JDIAction("Get '{name}' side nav items")
     public WebList getSideNavItems() {
         return this.finds(".mat-sidenav");
@@ -30,7 +27,7 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
         return this.find(".mat-sidenav-content");
     }
 
-    /*two side navs*/
+    /*for several side navs*/
     @JDIAction("Get '{name}' side nav  by '{0}' position value")
     public UIElement getSideNav(String position) {
         UIElement element = null;
@@ -45,22 +42,6 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
     @Override
     public SideNavAssert is() {
         return new SideNavAssert().set(this);
-    }
-
-    /*boolean*/
-    @JDIAction("'{name}' has '{0}' text")
-    public boolean navHasText(String text) {
-        return getSideNav().text().equals(text);
-    }
-
-    @JDIAction("'{name}' has '{0}' text")
-    public boolean contentHasText(String text) {
-        return getContent().text().equals(text);
-    }
-
-    @JDIAction("'{name}' is visible")
-    public boolean navIsVisible() {
-        return getSideNav().attr(STYLE).equals(STYLE_VISIBLE);
     }
 
     @JDIAction("Get '{name}' side nav content")
@@ -79,6 +60,23 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
     }
 
 }
+
+
+//    /*boolean*/
+//    @JDIAction("'{name}' has '{0}' text")
+//    public boolean navHasText(String text) {
+//        return getSideNav().text().equals(text);
+//    }
+//
+//    @JDIAction("'{name}' has '{0}' text")
+//    public boolean contentHasText(String text) {
+//        return getContent().text().equals(text);
+//    }
+//
+//    @JDIAction("'{name}' is visible")
+//    public boolean navIsVisible() {
+//        return getSideNav().attr(STYLE).equals(STYLE_VISIBLE);
+//    }
 
 /*open close events*/
   /*  @JDIAction("Get '{name}' checkbox")
