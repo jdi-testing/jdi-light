@@ -31,21 +31,28 @@ import static org.testng.Assert.*;
 public class CookiesTests implements TestsInit {
     @Test
     public void cookiesTest() {
-        Cookies.clearAllCookies();
-        Set<Cookie> cookies = Cookies.getCookies();
-        assertThat(cookies, empty());
+        Set<Cookie> savedCookies = null;
+        try {
+            savedCookies = Cookies.getCookies();
 
-        Cookie cookieIn = new Cookie("name", "Roman");
-        Cookies.addCookie(cookieIn);
-        Cookie cookieOut = Cookies.getCookie("name");
-        assertThat(cookieOut, equalTo(cookieIn));
-        cookies = Cookies.getCookies();
-        assertThat(cookies, hasSize(1));
-        assertThat(cookies, hasItem(cookieIn));
+            Cookies.clearAllCookies();
+            Set<Cookie> cookies = Cookies.getCookies();
+            assertThat(cookies, empty());
 
-        Cookies.clearAllCookies();
-        cookies = Cookies.getCookies();
-        assertThat(cookies, empty());
+            Cookie cookieIn = new Cookie("name", "Roman");
+            Cookies.addCookie(cookieIn);
+            Cookie cookieOut = Cookies.getCookie("name");
+            assertThat(cookieOut, equalTo(cookieIn));
+            cookies = Cookies.getCookies();
+            assertThat(cookies, hasSize(1));
+            assertThat(cookies, hasItem(cookieIn));
+
+            Cookies.clearAllCookies();
+            cookies = Cookies.getCookies();
+            assertThat(cookies, empty());
+        } finally {
+            Cookies.setCookies(savedCookies);
+        }
     }
 
 }

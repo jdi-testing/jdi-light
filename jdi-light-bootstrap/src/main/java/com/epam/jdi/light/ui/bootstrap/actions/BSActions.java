@@ -24,8 +24,9 @@ public class BSActions {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        ActionObject jInfo = newInfo(jp);
+        ActionObject jInfo = null;
         try {
+            jInfo = newInfo(jp);
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
@@ -37,7 +38,8 @@ public class BSActions {
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
-            jInfo.clear();
+            if (jInfo != null)
+                jInfo.clear();
         }
     }
 }

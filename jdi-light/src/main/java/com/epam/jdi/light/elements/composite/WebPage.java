@@ -274,19 +274,19 @@ public class WebPage extends DriverBase implements PageObject {
         if (noRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
-                Value(NONE, t -> true),
-                Value(EQUALS, t -> url().check()),
-                Value(MATCH, t -> url().match()),
-                Value(CONTAINS, t -> url().contains()),
-                Else(false)
+            Value(NONE, t -> true),
+            Value(EQUALS, t -> url().check()),
+            Value(MATCH, t -> url().match()),
+            Value(CONTAINS, t -> url().contains()),
+            Else(false)
         );
         if (!result) return false;
         result = Switch(checkTitleType).get(
-                Value(NONE, t -> true),
-                Value(EQUALS, t -> title().check()),
-                Value(MATCH, t -> title().match()),
-                Value(CONTAINS, t -> title().contains()),
-                Else(false)
+            Value(NONE, t -> true),
+            Value(EQUALS, t -> title().check()),
+            Value(MATCH, t -> title().match()),
+            Value(CONTAINS, t -> title().contains()),
+            Else(false)
         );
         if (result)
             setCurrentPage(this);
