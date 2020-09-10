@@ -7,6 +7,10 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import org.openqa.selenium.By;
 
+/**
+ * To see an example of ButtonToggle web element please visit https://material.angular.io/components/button-toggle/overview.
+ */
+
 public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
 
     @JDIAction("Click '{name}' button by tag value '{0}'")
