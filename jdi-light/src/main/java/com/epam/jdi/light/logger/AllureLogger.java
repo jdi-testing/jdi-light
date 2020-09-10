@@ -69,11 +69,11 @@ public class AllureLogger {
         getLifecycle().stopStep(uuid);
     }
 
-    private static void attachText(String name, String type, String htmlSnapshot) {
+    public static void attachText(String name, String type, String htmlSnapshot) {
         addAttachment(name, type, htmlSnapshot, "html");
     }
 
-    private static void attachScreenshot(String screenName) throws IOException {
+    public static void attachScreenshot(String screenName) throws IOException {
         addAttachment("Page screenshot", new ByteArrayInputStream(readAllBytes(get(screenName))));
     }
 

@@ -108,7 +108,7 @@ public class InitActions {
     public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
         if (jdi.parent == null)
             jdi.setParent(info.parent);
-        if (!jdi.name.matches("[A-Z].*]"))
+        if (!jdi.name.matches("[A-Z].*"))
             jdi.setName(info);
         jdi.driverName = isBlank(info.driverName) ? DRIVER.name : info.driverName;
         return jdi;
@@ -128,11 +128,14 @@ public class InitActions {
         $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
 
         $("WaitTimeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),
+        $("WaitAfterAction", aRule(WaitAfterAction.class,
+            (e,a)-> e.base().waitAfter(a.value(), a.method()))),
         $("NoWait", aRule(NoWait.class, (e,a)-> e.waitSec(0))),
         $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
         $("GetAny", aRule(GetAny.class, (e, a)-> e.base().noValidation())),
         $("GetVisible", aRule(GetVisible.class, (e, a)-> e.base().searchVisible())),
-        $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.base().visibleEnabled())),
+        $("GetVisibleEnabled", aRule(GetVisibleEnabled.class,
+            (e, a)-> e.base().visibleEnabled())),
         $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.base().inView())),
         $("PageName", aRule(PageName.class, (e, a)-> e.base().setPage(a.value()))),
         $("StartIndex", aRule(StartIndex.class, (e, a)-> {

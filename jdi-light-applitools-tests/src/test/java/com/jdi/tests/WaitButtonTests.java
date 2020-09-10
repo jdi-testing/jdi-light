@@ -5,11 +5,11 @@ package com.jdi.tests;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.elements.common.Alerts;
 import com.jdi.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static com.jdi.states.State.loggedIn;
 import static jdisite.enums.MenuOptions.ElementsPacks;
 import static jdisite.enums.MenuOptions.HTML5;
@@ -28,6 +28,6 @@ public class WaitButtonTests extends TestsInit {
     public void waitButtonTest() {
         htmlPage.checkOpened();
         suspendButton.click();
-        validateAlert(is("Suspend button"));
+        Alerts.validateAndAcceptAlert(is("Suspend button"));
     }
 }

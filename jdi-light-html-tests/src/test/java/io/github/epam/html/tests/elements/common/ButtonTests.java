@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.light.elements.common.Alerts;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -8,7 +9,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
-import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
+import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static com.epam.jdi.light.elements.common.Keyboard.press;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
@@ -47,10 +48,10 @@ public class ButtonTests implements TestsInit {
     @Test
     public void clickTest() {
         redButton.click();
-        validateAlert("Red button");
+        validateAndAcceptAlert("Red button");
 
         blueButton.click();
-        validateAlert("Blue button");
+        validateAndAcceptAlert("Blue button");
     }
 
     @Test
@@ -67,7 +68,7 @@ public class ButtonTests implements TestsInit {
     @Test
     public void doubleClickTest() {
         dblClickButton.doubleClick();
-        validateAlert("Double Click");
+        validateAndAcceptAlert("Double Click");
     }
 
     @Test
@@ -75,7 +76,7 @@ public class ButtonTests implements TestsInit {
         if (!getOs().equals(WIN)) return;
 
         rightClickButton.rightClick();
-        validateAlert("Right Click");
+        validateAndAcceptAlert("Right Click");
         press("Escape");
     }
 
@@ -90,7 +91,7 @@ public class ButtonTests implements TestsInit {
             .and().text(is(text))
             .core()
             .css("font-size", is("14px"))
-            .cssClass("uui-button red")
+            .classValue("uui-button red")
             .attr("type", "button")
             .tag(is("input"));
         blueButton.is().text(containsString("Blue Button".toUpperCase()));
@@ -104,7 +105,7 @@ public class ButtonTests implements TestsInit {
     public void suspendButtonTest() {
         WebPage.reload();
         durationMoreThan(3, () -> suspendButton.click());
-        validateAlert(is("Suspend button"));
+        Alerts.validateAndAcceptAlert(is("Suspend button"));
     }
 
     //if test fails then run `mvn clean install` in module JDI Light

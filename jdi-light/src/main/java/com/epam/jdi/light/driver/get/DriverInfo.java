@@ -110,13 +110,13 @@ public class DriverInfo extends DataClass<DriverInfo> {
         }
     }
     public static String getBelowVersion() {
-        String currentMajor = wdm.getDownloadedVersion().split("\\.")[0];
+        String currentMajor = wdm.getDownloadedDriverVersion().split("\\.")[0];
         List<String> allVersions = wdm.getDriverVersions();
         for (int i = allVersions.size()-1; i>=0; i--) {
             if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
                 return allVersions.get(i);
         }
-        throw exception("Can't find version below current(" + wdm.getDownloadedVersion()+")");
+        throw exception("Can't find version below current(" + wdm.getDownloadedDriverVersion()+")");
     }
     @Override
     public String toString() {

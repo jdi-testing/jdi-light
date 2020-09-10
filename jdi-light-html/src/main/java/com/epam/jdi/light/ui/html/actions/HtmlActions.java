@@ -22,13 +22,13 @@ public class HtmlActions {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        ActionObject jInfo = new ActionObject(jp);
+        ActionObject jInfo = newInfo(jp);
         try {
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
-                    ? stableAction(jInfo)
-                    : defaultAction(jInfo);
+                ? stableAction(jInfo)
+                : defaultAction(jInfo);
             return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
             logger.debug("ActionProcessor exception:" + safeException(ex));

@@ -25,22 +25,16 @@ public class ContactForm extends TestsInit {
     }
 
     @Test
-    public void submitContactDataTest() {
+    public void submitContactFormFullDataTest() {
         contactPage.checkOpened();
         contactForm.submit(FULL_CONTACT);
         contactForm.check(FULL_CONTACT);
-    }
-    @Test
-    public void submitContactSimpleDataTest() {
-        contactPage.checkOpened();
-        contactForm.submit(SIMPLE_CONTACT);
-        contactForm.check(SIMPLE_CONTACT);
     }
 
     @Test
-    public void submitContactFormSimpleTest() {
+    public void submitContactFormSimpleDataTest() {
         contactPage.checkOpened();
-        contactForm.submit(FULL_CONTACT);
-        contactForm.check(FULL_CONTACT);
+        contactForm.submit(SIMPLE_CONTACT);
+        contactForm.check(SIMPLE_CONTACT);
     }
 }

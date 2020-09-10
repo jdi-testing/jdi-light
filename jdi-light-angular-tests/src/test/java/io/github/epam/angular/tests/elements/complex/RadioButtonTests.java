@@ -5,13 +5,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.basicRadioButtons;
-import static io.github.com.pages.AngularPage.firstBasicRadioButton;
-import static io.github.com.pages.AngularPage.secondBasicRadioButton;
+import static io.github.com.pages.sections.RadioButtonSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static org.testng.Assert.assertEquals;
 
 public class RadioButtonTests extends TestsInit {
+
+    private static final String SPRING = "Spring";
+    private static final String SUMMER = "Summer";
+    private static final String AUTUMN = "Autumn";
+    private static final String WINTER = "Winter";
 
     @BeforeMethod
     public void before() {
@@ -20,15 +22,30 @@ public class RadioButtonTests extends TestsInit {
     }
 
     @Test
-    public void basicTest() {
-        basicRadioButtons.is().displayed();
-        firstBasicRadioButton.is().displayed();
-        secondBasicRadioButton.is().displayed();
+    public void basicRadioButtonsTest() {
+        basicRadioGroup.is().displayed();
+        basicRadioGroup.click("2");
+        basicRadioGroup.click("1");
+        basicRadioGroup.click("2");
+
+        basicRadioGroup.is().checked("2");
+        basicRadioGroup.is().notChecked("1");
     }
 
     @Test
-    public void getTextTest() {
-        assertEquals(firstBasicRadioButton.getText(), "Option 1");
-        assertEquals(secondBasicRadioButton.getText(), "Option 2");
+    public void seasonsRadioButtonsTest() {
+        seasonRadioGroup.is().displayed();
+        seasonRadioGroup.click(SUMMER);
+        seasonRadioGroup.click(WINTER);
+        seasonRadioGroup.click(AUTUMN);
+
+        seasonRadioGroup.click(SPRING);
+        seasonRadioGroup.is().checked(SPRING);
+        yourFavoriteSeasonText.has().text(String.format("Your favorite season is: %s", SPRING));
+
+        seasonRadioGroup.is().notChecked(WINTER);
+        seasonRadioGroup.is().notChecked(SUMMER);
+        seasonRadioGroup.is().notChecked(AUTUMN);
     }
 }
+

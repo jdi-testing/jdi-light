@@ -5,6 +5,21 @@
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 * **driver.remote.run** boolean property can be specified in **test.properties** file. If not specified, JDI would use the original logic and switch between local and remote driver depending on other properties
 
+## 1.2.19 (release 04.09.2020)
+* Bug fix
+
+## 1.2.18 (release 28.08.2020)
+* Fix JDITalk
+* Fix some error messages
+* Improve WebList capabilities
+* Update aspectj to 1.9.6
+* Prepare 1.2.18 version
+* Add WaitAfterAction function (@WaitAfterAction)
+* Improve Allure steps logging
+
+## 1.2.17 (release 13.08.2020)
+* Bug fix
+
 ## 1.2.16 (release 17.05.2020)
 * Add keyboard commands (press, command, commands, pasteText) to UIElement
 * Add option to take screenshot via Robot

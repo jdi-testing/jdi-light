@@ -1,10 +1,10 @@
 package io.github.epam.bootstrap.tests.common;
 
+import com.epam.jdi.light.elements.common.Alerts;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.Alerts.validateAlert;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.badge;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
@@ -37,7 +37,7 @@ public class BadgeTests implements TestsInit {
     @Test
     public void clickTest() {
         badge.click();
-        validateAlert(is("Button with badge"));
+        Alerts.validateAndAcceptAlert(is("Button with badge"));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class BadgeTests implements TestsInit {
                 .and().text(is(text))
                 .core()
                 .css("font-size", is("16px"))
-                .cssClass("btn btn-primary")
+                .classValue("btn btn-primary")
                 .attr("type", "button")
                 .tag(is("button"));
     }
