@@ -30,8 +30,9 @@ public class ActionProcessor {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        ActionObject jInfo = newInfo(jp);
+        ActionObject jInfo = null;
         try {
+            jInfo = newInfo(jp);
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
@@ -43,13 +44,24 @@ public class ActionProcessor {
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
-            jInfo.clear();
+            if (jInfo != null)
+                jInfo.clear();
         }
     }
 
     @Before("stepPointcut()")
     public void step(JoinPoint jp) {
-        newInfo(jp);
-        beforeStepAction(jp);
+        ActionObject jInfo = null;
+        try {
+            jInfo = newInfo(jp);
+            beforeStepAction(jp);
+        } catch (Throwable ex) {
+            logger.debug("StepProcessor exception:" + safeException(ex));
+            throw ACTION_FAILED.execute(jInfo, ex);
+        }
+        finally {
+            if (jInfo != null)
+                jInfo.clear();
+        }
     }
 }
