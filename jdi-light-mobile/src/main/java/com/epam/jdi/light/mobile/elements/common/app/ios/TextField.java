@@ -5,14 +5,21 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
+import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
+import org.openqa.selenium.By;
 
 import static com.epam.jdi.light.common.TextTypes.VALUE;
+import static com.epam.jdi.light.mobile.elements.init.MobileAppFactory.element;
 
 public class TextField extends MobileAppBaseElement<TextAssert>
         implements SetValue, IsInput, HasTouchActions {
 
     public void setValue(String value) {
+        MobileAppUIElement continueButton = element(By.xpath("//XCUIElementTypeButton[@name='Continue']"));
+        if (continueButton.isDisplayed()) {
+            continueButton.tap();
+        }
         input(value);
     }
     public String getValue() {
