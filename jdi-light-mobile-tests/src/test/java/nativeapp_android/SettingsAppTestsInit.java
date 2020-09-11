@@ -15,6 +15,7 @@ public class SettingsAppTestsInit {
     public void setUp() {
         initMobile(SettingsApp.class);
         logger.toLog("Run Settings App Tests");
+        AppManager.launchApp();
     }
 
     @AfterMethod(alwaysRun = true)

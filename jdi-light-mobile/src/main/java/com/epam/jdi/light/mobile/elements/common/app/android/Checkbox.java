@@ -1,11 +1,12 @@
 package com.epam.jdi.light.mobile.elements.common.app.android;
 
-import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
+import com.epam.jdi.light.mobile.asserts.CheckboxAssert;
+import com.epam.jdi.light.mobile.elements.common.app.ICheckbox;
 
-public class Checkbox extends MobileAppBaseElement<TextAssert> {
+public class Checkbox extends MobileAppBaseElement<CheckboxAssert> implements ICheckbox {
     @JDIAction(value = "Perform tap on '{name}' to get checked station", level = LogLevels.DEBUG)
     public void check() {
         if (!isChecked()) {
@@ -23,6 +24,11 @@ public class Checkbox extends MobileAppBaseElement<TextAssert> {
     @JDIAction(value = "Verify '{name}' is checked", level = LogLevels.DEBUG)
     public boolean isChecked() {
         return core().isSelected();
+    }
+
+    @Override
+    public CheckboxAssert is() {
+        return new CheckboxAssert().set(this);
     }
 }
 
