@@ -10,11 +10,12 @@ import org.testng.annotations.BeforeClass;
 import static com.epam.jdi.light.mobile.elements.init.PageFactory.initMobile;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
-public class ClockAppTestInit {
+public class ClockAppTestsInit {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         initMobile(ClockApp.class);
         logger.toLog("Run Clock Application Tests");
+        AppManager.launchApp();
     }
 
     @AfterMethod(alwaysRun = true)

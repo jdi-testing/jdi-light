@@ -58,6 +58,12 @@
             <artifactId>aspectjtools</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>1.2.19</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
