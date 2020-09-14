@@ -2,6 +2,7 @@ package nativeapp.android;
 
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.common.app.android.Checkbox;
+import com.epam.jdi.light.mobile.elements.common.app.android.Widget;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class AlarmPage {
@@ -18,6 +19,6 @@ public class AlarmPage {
     public static Checkbox manageVibrationCheckbox;
 
     @MobileFindBy(id = "com.google.android.deskclock:id/repeat_days")
-    public static Checkbox repeatDaysAlarmWidget;
+    public static Widget repeatDaysAlarmWidget;
 
 }
