@@ -40,7 +40,8 @@ stages:
   - reports
 
 cron_condition: &cron_condition
-  if: (branch = master) AND (type IN (cron, api))
+    if: (branch = 2343-shorten-travis-logs)
+  #  if: (branch = master) AND (type IN (cron, api)) TODO: commented to test, uncomment later
   #Stages that refer to cron_condition would trigger only under specified conditions
 testsbdd: &testsbdd
   <<: *cron_condition
@@ -349,7 +350,7 @@ after_script:
   - source reports.sh
   - grubAllureResults
   - du -d 1 -h ./
-  - ls -la
+#  - ls -la todo commented to shorten Travis log, remove or uncomment after the check
 # extra time during long builds
 install:
   - travis_wait
