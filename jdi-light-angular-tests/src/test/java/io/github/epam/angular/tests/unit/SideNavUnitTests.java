@@ -34,6 +34,7 @@ public class SideNavUnitTests extends TestsInit {
     @Test
     public void getEventsTest() {
         sideNavToggle.click();
+        openCloseBehavior.base().timer().wait(() -> openCloseBehavior.isEnabled());
         assertEquals(openCloseBehavior.getEvents().getText(), "open!");
     }
 
@@ -50,14 +51,3 @@ public class SideNavUnitTests extends TestsInit {
         assertEquals(responsiveContent.getResponsiveResults().get(1).getText(), "Selected Nav Item 1");
     }
 }
-
-//
-//    @JDIAction("Get '{name}' side nav content")
-//    public WebList getSideNavLinks() {
-//        return getSideNav().finds("a");
-//    }
-//
-//    @JDIAction("Get '{name}' side nav content")
-//    public WebList getResponsiveResults() {
-//        return getContent().finds("p");
-//    }
