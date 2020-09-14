@@ -11,12 +11,16 @@ import org.openqa.selenium.Point;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * To see an example of Ripple web element please visit https://material.angular.io/components/ripple/overview.
+ */
+
 public class Ripple extends UIBaseElement<RippleAssert> {
     public static final String STYLE = "style";
     public static final int INSCRIBED_CIRCLE_RADIUS = 150;
     public static final String HEIGHT_SPX_WIDTH_SPX = "height: %spx; width: %spx;";
     public static final String LEFT_SPX_TOP_SPX = "left: %spx; top: %spx;";
-    public String containerLocator = "//*[@id='ripple-container']";
+    public String containerLocator = "//*[@id='%s']";
     public String rippleLocator = containerLocator.concat("/div");
     public String centeredCheckboxLocator = containerLocator
             .concat("/preceding-sibling::mat-checkbox[@id='ripple-centered-checkbox']");
@@ -30,9 +34,9 @@ public class Ripple extends UIBaseElement<RippleAssert> {
             .concat("/preceding-sibling::mat-form-field[@id='ripple-color-input']//input");
     public String smartSharp = "smart: #";
     public String cssSharp = "css='#";
-    private final Checkbox rippleCenteredCheckbox;
-    private final Checkbox rippleDisabledCheckbox;
-    private final Checkbox rippleUnboundedCheckbox;
+    protected final Checkbox rippleCenteredCheckbox;
+    protected final Checkbox rippleDisabledCheckbox;
+    protected final Checkbox rippleUnboundedCheckbox;
 
     public Ripple() {
         rippleCenteredCheckbox = new Checkbox();

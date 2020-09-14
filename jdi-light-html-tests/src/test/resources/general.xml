@@ -13,6 +13,9 @@
             <package name="io.github.epam.html.tests.performance"/>
             <package name="io.github.epam.html.tests.site"/>
         </packages>
+        <!--classes>
+            <class name="io.github.epam.html.tests.elements.complex.combobox.DataListTests"/>
+        </classes-->
     </test>
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener" />

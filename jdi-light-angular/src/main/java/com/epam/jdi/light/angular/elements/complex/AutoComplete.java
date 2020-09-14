@@ -22,6 +22,10 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 
+/**
+ * To see an example of AutoComplete web element please visit https://material.angular.io/components/autocomplete/overview.
+ */
+
 public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements HasLabel, SetValue, HasPlaceholder, IsInput, IsText {
 
     private String optionsCss = "mat-option";

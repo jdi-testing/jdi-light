@@ -9,6 +9,10 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 
 import java.util.List;
 
+/**
+ * To see an example of TabGroup web element please visit https://material.angular.io/components/tabs/overview.
+ */
+
 public class TabGroup extends UIBaseElement<TabGroupAssert> implements IsText {
 
     @JDIAction("Get '{name}' tabs count")
