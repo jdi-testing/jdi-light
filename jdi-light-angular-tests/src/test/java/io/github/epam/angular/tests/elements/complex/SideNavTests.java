@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static org.hamcrest.Matchers.containsString;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
@@ -143,14 +144,14 @@ public class SideNavTests extends TestsInit {
         customEscapeBackdrop.show();
         openSideNav.click();
         toggleSideNav.click();
-        customEscapeBackdrop.getContent().has().text("Open\nClosed due to: toggle button");
+        customEscapeBackdrop.getContent().has().text(containsString("toggle button"));
     }
 
     @Test
     public void closeByBackdropTest() {
         openSideNav.click();
         customEscapeBackdrop.core().click();
-        customEscapeBackdrop.getContent().has().text("Open\nClosed due to: backdrop");
+        customEscapeBackdrop.getContent().has().text(containsString("backdrop"));
     }
 
     @Test
@@ -158,8 +159,7 @@ public class SideNavTests extends TestsInit {
         autoSizeSideNav.show();
         toggleAutoNav.click();
         toggleExtraText.click();
-        autoSizeSideNav.getMatDrawer().has().text("Auto-resizing sidenav\nLorem, ipsum dolor sit amet consectetur." +
-                "\nToggle extra text");
+        autoSizeSideNav.getMatDrawer().has().text(containsString("Toggle extra text"));
         autoSizeSideNav.getMatDrawerContent().has().attr(STYLE, "margin-left: 294px;");
     }
 
