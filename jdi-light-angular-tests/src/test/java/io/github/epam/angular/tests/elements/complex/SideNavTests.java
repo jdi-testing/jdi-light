@@ -160,6 +160,7 @@ public class SideNavTests extends TestsInit {
         toggleExtraText.click();
         autoSizeSideNav.getMatDrawer().has().text("Auto-resizing sidenav\nLorem, ipsum dolor sit amet consectetur." +
                 "\nToggle extra text");
+        autoSizeSideNav.getMatDrawerContent().has().attr(STYLE, "margin-left: 294px;");
     }
 
     @Test
