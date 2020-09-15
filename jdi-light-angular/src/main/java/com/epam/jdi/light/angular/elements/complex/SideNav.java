@@ -58,4 +58,15 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
     private WebList getSideNavItems() {
         return this.finds(".mat-sidenav");
     }
+
+    /*mat-drawer*/
+    @JDIAction("Get '{name}' mat drawer")
+    public UIElement getMatDrawer() {
+        return this.find(".mat-drawer");
+    }
+
+    @JDIAction("Get '{name}' mat drawer content content")
+    public UIElement getMatDrawerContent() {
+        return this.find(".mat-drawer-content");
+    }
 }

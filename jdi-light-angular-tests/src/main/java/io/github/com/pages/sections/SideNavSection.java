@@ -11,6 +11,8 @@ public class SideNavSection {
 
     public static SideNav basicSideNav;
 
+    public static SideNav basicDrawer;
+
     public static SideNav implicitMainContent;
 
     public static SideNav openCloseBehavior;
@@ -34,6 +36,12 @@ public class SideNavSection {
     public static Button toggleSideNav;
     @UI("#custom-escape-backdrop .mat-sidenav-content button")
     public static Button openSideNav;
+
+    public static SideNav autoSizeSideNav;
+    @UI("#auto-size-side-nav .mat-drawer-content button")
+    public static Button toggleAutoNav;
+    @UI("#auto-size-side-nav .mat-drawer button")
+    public static Button toggleExtraText;
 
     public static SideNav fixedPosition;
     @UI("#fixed-position mat-checkbox")

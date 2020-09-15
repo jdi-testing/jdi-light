@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.sections.SideNavSection.basicDrawer;
 import static io.github.com.pages.sections.SideNavSection.implicitMainContent;
 import static io.github.com.pages.sections.SideNavSection.openCloseBehavior;
 import static io.github.com.pages.sections.SideNavSection.responsiveContent;
@@ -49,5 +50,15 @@ public class SideNavUnitTests extends TestsInit {
         toolbarToggle.click();
         responsiveContent.getSideNavLinks().get(1).click();
         assertEquals(responsiveContent.getResponsiveResults().get(1).getText(), "Selected Nav Item 1");
+    }
+
+    @Test
+    public void getMatDrawerTest() {
+        assertEquals(basicDrawer.getMatDrawer().getText(), "Drawer content");
+    }
+
+    @Test
+    public void getMatDrawerContentTest() {
+        assertEquals(basicDrawer.getMatDrawerContent().getText(), "Main content");
     }
 }

@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.sections.SideNavSection.autoSizeSideNav;
+import static io.github.com.pages.sections.SideNavSection.basicDrawer;
 import static io.github.com.pages.sections.SideNavSection.basicSideNav;
 import static io.github.com.pages.sections.SideNavSection.bottomGap;
 import static io.github.com.pages.sections.SideNavSection.configurableMode;
@@ -23,6 +25,8 @@ import static io.github.com.pages.sections.SideNavSection.sideNavOpened;
 import static io.github.com.pages.sections.SideNavSection.sideNavRadioButtons;
 import static io.github.com.pages.sections.SideNavSection.sideNavToggle;
 import static io.github.com.pages.sections.SideNavSection.sideToggle;
+import static io.github.com.pages.sections.SideNavSection.toggleAutoNav;
+import static io.github.com.pages.sections.SideNavSection.toggleExtraText;
 import static io.github.com.pages.sections.SideNavSection.toggleFixedSideNav;
 import static io.github.com.pages.sections.SideNavSection.toggleSideNav;
 import static io.github.com.pages.sections.SideNavSection.toolbarToggle;
@@ -32,6 +36,8 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 public class SideNavTests extends TestsInit {
 
     public static final String SIDE_NAV_CONTENT = "Sidenav content";
+    public static final String DRAWER_CONTENT = "Drawer content";
+    public static final String MAIN_CONTENT = "Main content";
     public static final String STYLE = "style";
     public static final String STYLE_VISIBLE = "transform: none; visibility: visible;";
     public static final String STYLE_HIDDEN = "box-shadow: none; visibility: hidden;";
@@ -50,7 +56,16 @@ public class SideNavTests extends TestsInit {
         basicSideNav.is().displayed();
         basicSideNav.is().enabled();
         basicSideNav.getSideNav().has().text(SIDE_NAV_CONTENT);
-        basicSideNav.getContent().has().text("Main content");
+        basicSideNav.getContent().has().text(MAIN_CONTENT);
+    }
+
+    @Test
+    public void verifyBasicDrawerTest() {
+        basicDrawer.show();
+        basicDrawer.is().displayed();
+        basicDrawer.is().enabled();
+        basicDrawer.getMatDrawer().has().text(DRAWER_CONTENT);
+        basicDrawer.getMatDrawerContent().has().text(MAIN_CONTENT);
     }
 
     @Test
@@ -136,6 +151,15 @@ public class SideNavTests extends TestsInit {
         openSideNav.click();
         customEscapeBackdrop.core().click();
         customEscapeBackdrop.getContent().has().text("Open\nClosed due to: backdrop");
+    }
+
+    @Test
+    public void verifyAutoSizeSideNav() {
+        autoSizeSideNav.show();
+        toggleAutoNav.click();
+        toggleExtraText.click();
+        autoSizeSideNav.getMatDrawer().has().text("Auto-resizing sidenav\nLorem, ipsum dolor sit amet consectetur." +
+                "\nToggle extra text");
     }
 
     @Test
