@@ -44,7 +44,8 @@ public class BottomSheetTests extends TestsInit {
 
     @AfterMethod(alwaysRun = true)
     public void after() {
-        bottomSheet.close();
+        if (bottomSheet.isOpened()) {
+        bottomSheet.close();}
     }
 }
 

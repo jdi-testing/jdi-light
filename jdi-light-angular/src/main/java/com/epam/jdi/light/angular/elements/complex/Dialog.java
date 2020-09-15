@@ -53,11 +53,11 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     public boolean answerText(String answer) {
-       return getAnswerLabel().getText().equals("You chose: " + answer);
+        return getAnswerLabel().getText().equals("You choose: " + answer);
     }
 
     public boolean nameText(String name) {
-        return getGreetingLabel().getText().equals(("Hi " + name).toUpperCase());
+        return getGreetingLabel().getText().equalsIgnoreCase(("Hi " + name));
     }
 
     public boolean isOpened() {
@@ -65,6 +65,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     public boolean isClosed() {
+        getDialogContainer().waitFor().disappear();
         return !isOpened();
     }
 
@@ -92,5 +93,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         return new UIElement(By.cssSelector(answerLabel));
     }
 
-    protected UIElement getGreetingLabel() { return new UIElement(By.cssSelector(greetingLabel)); }
+    protected UIElement getGreetingLabel() {
+        return new UIElement(By.cssSelector(greetingLabel));
+    }
 }

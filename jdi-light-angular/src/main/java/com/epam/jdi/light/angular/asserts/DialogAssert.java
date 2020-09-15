@@ -12,6 +12,11 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
         return this;
     }
 
+    public DialogAssert closed() {
+        jdiAssert(element().isClosed(), Matchers.is(true));
+        return this;
+    }
+
     public DialogAssert nameText(String name) {
         jdiAssert(element().nameText(name), Matchers.is(true));
         return this;
