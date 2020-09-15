@@ -19,6 +19,7 @@ import io.github.com.pages.sections.DividerSection;
 import io.github.com.pages.sections.GridListSection;
 import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.ListSection;
+import io.github.com.pages.sections.MenuSection;
 import io.github.com.pages.sections.PaginatorSection;
 import io.github.com.pages.sections.RadioButtonSection;
 import io.github.com.pages.sections.SelectSection;

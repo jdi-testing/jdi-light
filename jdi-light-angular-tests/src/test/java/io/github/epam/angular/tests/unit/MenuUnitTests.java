@@ -7,16 +7,20 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-import static com.epam.jdi.light.angular.elements.common.NestedDropdownMenu.*;
+import static com.epam.jdi.light.angular.elements.complex.NestedDropdownMenu.BASIC_MENU_VALUES;
+import static com.epam.jdi.light.angular.elements.complex.NestedDropdownMenu.MENU_WITH_ICONS_VALUES;
+import static com.epam.jdi.light.angular.elements.complex.NestedDropdownMenu.NESTED_MENU_VALUES;
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.MenuSection.*;
+import static io.github.com.pages.sections.MenuSection.basicMenuButton;
+import static io.github.com.pages.sections.MenuSection.basicMenuSelectedOption;
+import static io.github.com.pages.sections.MenuSection.menuWithIconsButton;
+import static io.github.com.pages.sections.MenuSection.nestedMenuButton;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class MenuUnitTests extends TestsInit {
-
-    @BeforeMethod (alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
@@ -24,61 +28,61 @@ public class MenuUnitTests extends TestsInit {
 
     @Test
     public void displayedTest() {
-        basicMenu.show();
-        assertTrue(basicMenu.isDisplayed());
+        basicMenuButton.show();
+        assertTrue(basicMenuButton.isDisplayed());
     }
 
     @Test
     public void expandTest() {
-        basicMenu.show();
-        basicMenu.expand();
-        assertTrue(basicMenu.isExpanded());
+        basicMenuButton.show();
+        basicMenuButton.expand();
+        assertTrue(basicMenuButton.isExpanded());
     }
 
     @Test
     public void closedTest() {
-        basicMenu.show();
-        basicMenu.expand();
-        basicMenu.close();
-        assertTrue(basicMenu.isClosed());
+        basicMenuButton.show();
+        basicMenuButton.expand();
+        basicMenuButton.close();
+        assertTrue(basicMenuButton.isClosed());
     }
 
     @Test
     public void selectByValueTest() {
-        basicMenu.show();
-        basicMenu.expand();
-        basicMenu.select("Item 1");
+        basicMenuButton.show();
+        basicMenuButton.expand();
+        basicMenuButton.select("Item 1");
         assertEquals(basicMenuSelectedOption.getText(), "Item 1");
     }
 
     @Test
     public void valuesTestForNestedMenu() {
-        nestedMenu.show();
-        assertEquals(nestedMenu.valuesForNestedMenu(), Arrays.asList(NESTED_MENU_VALUES));
+        nestedMenuButton.show();
+        assertEquals(nestedMenuButton.valuesForNestedMenu(), Arrays.asList(NESTED_MENU_VALUES));
     }
 
     @Test
     public void valuesForMenuWithIconsTest() {
-        menuWithIcons.show();
-        assertEquals(menuWithIcons.valuesForMenuWithIcons(), Arrays.asList(MENU_WITH_ICONS_VALUES));
+        menuWithIconsButton.show();
+        assertEquals(menuWithIconsButton.valuesForMenuWithIcons(), Arrays.asList(MENU_WITH_ICONS_VALUES));
     }
 
     @Test
     public void valuesTest() {
-        basicMenu.show();
-        assertEquals(basicMenu.values(), Arrays.asList(BASIC_MENU_VALUES));
+        basicMenuButton.show();
+        assertEquals(basicMenuButton.values(), Arrays.asList(BASIC_MENU_VALUES));
     }
 
     @AfterMethod(alwaysRun = true)
     public void after() {
-        if (basicMenu.isExpanded()){
-            basicMenu.close();
+        if (basicMenuButton.isExpanded()) {
+            basicMenuButton.close();
         }
-        if (menuWithIcons.isExpanded()){
-            menuWithIcons.close();
+        if (menuWithIconsButton.isExpanded()) {
+            menuWithIconsButton.close();
         }
-        if (nestedMenu.isExpanded()){
-            nestedMenu.close();
+        if (nestedMenuButton.isExpanded()) {
+            nestedMenuButton.close();
         }
     }
 }

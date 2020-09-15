@@ -1,4 +1,4 @@
-package com.epam.jdi.light.angular.elements.common;
+package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.NestedDropdownMenuAssert;
 import com.epam.jdi.light.common.ElementArea;
@@ -12,15 +12,13 @@ import org.openqa.selenium.By;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-
 /**
- * Angular slide toggle documentation: https://jdi-docs.github.io/jdi-light/?java#slide-toggle
+ * To see an example of Ripple web element please visit https://material.angular.io/components/menu/overview.
  */
 public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> {
-    private String LAST_OPENED_MENU_OPTIONS_XPATH = "(.//div[contains(@class,'mat-menu-after')])[last()]//button";
-    private String LAST_OPENED_MENU_OPTIONS_XPATH_FOR_MENU_WITH_ICONS = "(.//div[contains(@class,'mat-menu-after')])[last()]//button//span";
+    public static String LAST_OPENED_MENU_OPTIONS_XPATH = "(.//div[contains(@class,'mat-menu-after')])[last()]//button";
+    public static String LAST_OPENED_MENU_OPTIONS_XPATH_FOR_MENU_WITH_ICONS
+            = "(.//div[contains(@class,'mat-menu-after')])[last()]//button//span";
     public static String[] BASIC_MENU_VALUES = {"Item 1", "Item 2"};
     public static String[] MENU_WITH_ICONS_VALUES = {"Redial", "Check voice mail", "Disable alerts"};
     public static String[] NESTED_MENU_VALUES = {"[Vertebrates, Invertebrates]",
@@ -59,17 +57,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return !hasAttribute("aria-expanded");
     }
 
-    public WebList lastOpenedOptionsElements() {
-        expand();
-        return $$(getDriver().findElements(By.xpath(LAST_OPENED_MENU_OPTIONS_XPATH)), getName());
-    }
-
-    public WebList lastOpenedOptionsElementsForMenuWithIcons() {
-        expand();
-        return $$(getDriver().findElements(By.xpath(LAST_OPENED_MENU_OPTIONS_XPATH_FOR_MENU_WITH_ICONS)), getName());
-    }
-
-    @JDIAction("Check {name} is closed")
+    @JDIAction("Check {name} expected value '{0} and actual value '{1}'")
     public boolean checkValue(String expectedValue, String actualValue) {
         return actualValue.equals(expectedValue);
     }
@@ -106,13 +94,13 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         close();
     }
 
-    @JDIAction("Check {name} option is disabled")
+    @JDIAction("Check {name} option '{0}' is disabled")
     public boolean isDisabledMenuWithIconsOption(String value) {
         UIElement optionToClick = lastOpenedOptionsElements().get("voicemail" + value);
         return Boolean.parseBoolean(optionToClick.attr("aria-disabled"));
     }
 
-    @JDIAction("Check {name} option is disabled")
+    @JDIAction("Check {name} option '{0}' is disabled")
     public boolean isDisabledNestedMenuOption(String... values) {
         return Boolean.parseBoolean(select(values).attr("aria-disabled"));
     }
@@ -128,5 +116,15 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         }
         close();
         return list.get(list.size() - 1);
+    }
+
+    protected WebList lastOpenedOptionsElements() {
+        expand();
+        return new WebList(By.xpath(LAST_OPENED_MENU_OPTIONS_XPATH));
+    }
+
+    protected WebList lastOpenedOptionsElementsForMenuWithIcons() {
+        expand();
+        return new WebList(By.xpath(LAST_OPENED_MENU_OPTIONS_XPATH_FOR_MENU_WITH_ICONS));
     }
 }
