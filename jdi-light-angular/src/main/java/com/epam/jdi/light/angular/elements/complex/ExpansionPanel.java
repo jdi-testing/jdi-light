@@ -94,7 +94,7 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
         getEndButtonLocator(title).click();
     }
 
-    @JDIAction("Input '{name}' panel by index '{0}'")
+    @JDIAction("Input '{name}' panel placeholder '{0}' text '{1}'")
     public void input(final String placeholder, final String inputText) {
         if ("Date".equalsIgnoreCase(placeholder)) {
             accordionDateInput.select(inputText);
