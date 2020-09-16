@@ -35,12 +35,11 @@ public class FormsTests implements TestsInit {
         main.contactForm.submit(DEFAULT_CONTACT);
         main.contactForm.check(DEFAULT_CONTACT);
     }
-
     @Test
     public void attrsTest() {
         shouldBeLoggedOut();
         MapArray<String, String> attrs = userIcon.core().attrs();
-        attrs = attrs.filter((k, v) -> isNotBlank(v));
+        attrs = attrs.filter((k,v) -> isNotBlank(v));
         assertThat(attrs.size(), is(2));
         assertThat(attrs.keys(), hasItem("src"));
     }

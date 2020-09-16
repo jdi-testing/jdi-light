@@ -19,14 +19,14 @@ public class LoginForm extends Form<User> {
         return new UIElement(By.cssSelector(".dropdown.uui-profile-menu.open")).isHidden();
     }
 
+    @Override
+    public boolean isDisplayed() {
+        return !isHidden();
+    }
+
     public void shouldBeOpened() {
         if (isHidden()) {
             userIcon.click();
         }
-    }
-
-    @Override
-    public boolean isDisplayed() {
-        return name.isDisplayed();
     }
 }
