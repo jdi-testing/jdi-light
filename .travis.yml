@@ -40,8 +40,7 @@ stages:
   - reports
 
 cron_condition: &cron_condition
-    if: (branch = 2343-shorten-travis-logs)
-  #  if: (branch = master) AND (type IN (cron, api)) TODO: commented to test, uncomment later
+    if: (branch = master) AND (type IN (cron, api))
   #Stages that refer to cron_condition would trigger only under specified conditions
 testsbdd: &testsbdd
   <<: *cron_condition
