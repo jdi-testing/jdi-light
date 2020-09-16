@@ -15,9 +15,8 @@ import java.util.List;
 
 public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
     private static final String BOTTOM_SHEET_VALUES_CSS_SELECTOR = "#bottom-sheet-container .mat-list-text span:first-child";
-    private Button bottomSheet;
-    private UIElement bottomSheetContainer;
-
+    protected Button bottomSheet;
+    protected UIElement bottomSheetContainer;
     public BottomSheet() {
         bottomSheet = new Button();
     }
