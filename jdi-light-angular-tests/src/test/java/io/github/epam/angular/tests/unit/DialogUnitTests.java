@@ -11,7 +11,6 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertTrue;
 
 public class DialogUnitTests extends TestsInit {
-
     @BeforeClass(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
