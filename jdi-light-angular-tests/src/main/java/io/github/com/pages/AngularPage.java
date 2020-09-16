@@ -15,7 +15,6 @@ import io.github.com.pages.sections.ButtonToggleSection;
 import io.github.com.pages.sections.CardSection;
 import io.github.com.pages.sections.CheckboxSection;
 import io.github.com.pages.sections.DatepickerSection;
-import io.github.com.pages.sections.DividerSection;
 import io.github.com.pages.sections.GridListSection;
 import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.ListSection;
@@ -29,19 +28,10 @@ import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
 import io.github.com.pages.sections.TabGroupSection;
 import io.github.com.pages.sections.ToolbarSection;
-import io.github.com.pages.sections.MenuSection;
 import io.github.com.pages.sections.TooltipSection;
 import io.github.com.pages.sections.ExpansionPanelSection;
 
 public class AngularPage extends WebPage {
-    @Css("radio-overview-example .mat-radio-group")
-    public static RadioButtons basicRadioButtons;
-
-    @UI("#radio-option-one")
-    public static Button firstBasicRadioButton;
-
-    @UI("#radio-option-two")
-    public static Button secondBasicRadioButton;
 
     public static ProgressSpinner basicProgressSpinner;
     public static Icon basicIcon;
@@ -66,7 +56,6 @@ public class AngularPage extends WebPage {
     public static TabGroupSection tabsSection;
     public static SliderSection sliderSection;
     public static CardSection cardSection;
-    public static DividerSection dividerSection;
     public static TooltipSection tooltipSection;
     public static DatepickerSection datepickerSection;
     public static SideNavSection sidenavSection;
