@@ -1,6 +1,6 @@
 package com.epam.jdi.light.angular.elements.complex;
 
-import com.epam.jdi.light.angular.asserts.SideNavAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.complex.WebList;
  * To see an example of Checkbox web element please visit https://material.angular.io/components/sidenav/overview.
  */
 
-public class SideNav extends UIBaseElement<SideNavAssert> {
+public class SideNav extends UIBaseElement<UIAssert<?, SideNav>> {
 
     @JDIAction("Get '{name}' side nav")
     public UIElement getSideNav() {
@@ -49,10 +49,10 @@ public class SideNav extends UIBaseElement<SideNavAssert> {
         return getContent().finds("p");
     }
 
-    @Override
-    public SideNavAssert is() {
-        return new SideNavAssert().set(this);
-    }
+//    @Override
+//    public SideNavAssert is() {
+//        return new SideNavAssert().set(this);
+//    }
 
     @JDIAction("Get '{name}' side nav items")
     private WebList getSideNavItems() {
