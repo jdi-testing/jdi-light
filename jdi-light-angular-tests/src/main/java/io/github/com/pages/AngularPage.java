@@ -23,6 +23,7 @@ import io.github.com.pages.sections.MenuSection;
 import io.github.com.pages.sections.PaginatorSection;
 import io.github.com.pages.sections.RadioButtonSection;
 import io.github.com.pages.sections.SelectSection;
+import io.github.com.pages.sections.SideNavSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
@@ -68,5 +69,6 @@ public class AngularPage extends WebPage {
     public static DividerSection dividerSection;
     public static TooltipSection tooltipSection;
     public static DatepickerSection datepickerSection;
+    public static SideNavSection sidenavSection;
     public static ExpansionPanelSection expansionPanelSection;
 }
