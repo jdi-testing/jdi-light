@@ -7,6 +7,10 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
+/**
+ * To see an example of Dialog web element please visit https://material.angular.io/components/dialog/overview.
+ */
+
 public class Dialog extends UIBaseElement<DialogAssert> {
     private Button dialog;
     private String answerLabel = "dialog-overview-example li.ng-star-inserted";

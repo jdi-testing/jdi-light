@@ -9,6 +9,10 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
+/**
+ * To see an example of BottomSheet web element please visit https://material.angular.io/components/bottom-sheet/overview.
+ */
+
 public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
     private static final String BOTTOM_SHEET_VALUES_CSS_SELECTOR = "#bottom-sheet-container .mat-list-text span:first-child";
     private Button bottomSheet;
