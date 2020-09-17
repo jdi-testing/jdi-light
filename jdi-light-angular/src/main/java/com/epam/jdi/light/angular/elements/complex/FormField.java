@@ -20,11 +20,8 @@ import static com.epam.jdi.light.driver.WebDriverFactory.*;
  **/
 
 public class FormField extends UIBaseElement<FormFieldsAssert> {
-
     private String matFormFieldPrefix = "//mat-form-field[@";
     private String autocompleteAttrPrefix = "_ngcontent-";
-
-
     private String containerAttribute;
 
     private String getContainerAttribute() {
@@ -40,7 +37,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         return curAttr[0];
     }
 
-    public UIElement getContainer() {
+    private UIElement getContainer() {
         containerAttribute = getContainerAttribute();
         WebElement element = null;
         try {
@@ -144,13 +141,6 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         return hint.getText();
     }
 
-    @JDIAction("Get hint for text area in '{name}' with index {0}")
-    public String textAreaHint(int index) {
-        UIElement hint = getTextAreas().get(index).
-            find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-hint"));
-        return hint.getText();
-    }
-
     @JDIAction("Get hint for '{name}' with index {0}")
     public String hint(int index) {
         UIElement hint = getFormFields().get(index).find(By.cssSelector("mat-hint"));
@@ -204,7 +194,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         focusOut();
     }
 
-    public String getType(int index) {
+    private String getType(int index) {
         String type = "";
         getContainer();
         String currentXpath = "(" + matFormFieldPrefix + containerAttribute + "])[" + index + "]";
@@ -228,7 +218,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         return type;
     }
 
-    public WebList getFormFields() {
+    private WebList getFormFields() {
         return getContainer().finds(By.xpath(matFormFieldPrefix + containerAttribute + "]"));
     }
 
@@ -317,6 +307,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
     }
 
     @Override
-    public FormFieldsAssert is() { return new FormFieldsAssert().set(this); }
-
+    public FormFieldsAssert is() {
+        return new FormFieldsAssert().set(this);
+    }
 }
