@@ -43,7 +43,6 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
     public UIElement getContainer() {
         containerAttribute = getContainerAttribute();
         WebElement element = null;
-        UIElement foundElement = null;
         try {
             element = getDriver().findElement(By.xpath("//form[@" +  containerAttribute + "]"));
         } catch (Exception e) {
@@ -54,7 +53,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
                 logger.error(exception.toString());
             }
         }
-        return foundElement = new UIElement(element);
+        return new UIElement(element);
     }
 
     public WebList getInputs() {
@@ -209,17 +208,16 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         String type = "";
         getContainer();
         String currentXpath = "(" + matFormFieldPrefix + containerAttribute + "])[" + index + "]";
-        WebElement element = null;
         try {
-            element = getDriver().findElement(By.xpath(currentXpath + "//input"));
+            getDriver().findElement(By.xpath(currentXpath + "//input"));
             type = "input";
         } catch (Exception e1) {
             try {
-                element = getDriver().findElement(By.xpath(currentXpath + "//mat-select"));
+                getDriver().findElement(By.xpath(currentXpath + "//mat-select"));
                 type = "mat-select";
             } catch (Exception e2) {
                 try{
-                    element = getDriver().findElement(By.xpath(currentXpath + "//textarea"));
+                    getDriver().findElement(By.xpath(currentXpath + "//textarea"));
                     type = "textarea";
                 } catch (Exception e3) {
                     JDILogger logger = new JDILogger();
@@ -251,6 +249,8 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
                 MaterialSelectorContainer cdkOverlayContainer = new MaterialSelectorContainer();
                 cdkOverlayContainer.select(value);
                 break;
+            default:
+                break;
         }
     }
 
@@ -269,6 +269,8 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
                 break;
             case "mat-select":
                 value = actualElement.getText();
+                break;
+            default:
                 break;
         }
         return value;
