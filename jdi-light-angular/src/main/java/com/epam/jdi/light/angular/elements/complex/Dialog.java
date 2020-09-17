@@ -12,14 +12,14 @@ import org.openqa.selenium.Keys;
  */
 
 public class Dialog extends UIBaseElement<DialogAssert> {
-    private Button dialog;
-    private String answerLabel = "dialog-overview-example li.ng-star-inserted";
-    private String dialogContainer = ".mat-dialog-container";
-    private String greetingLabel = "mat-dialog-container dialog-overview-example-dialog h1";
-    private String answerFormField = "mat-dialog-container dialog-overview-example-dialog input";
-    private String nameFormField = "#mat-input-74";
-    private String noThanksButton = ".mat-dialog-container .mat-dialog-actions button:first-child";
-    private String okButton = ".mat-dialog-container .mat-dialog-actions button:last-child";
+    protected Button dialog;
+    public String answerLabel = "dialog-overview-example li.ng-star-inserted";
+    public String dialogContainer = ".mat-dialog-container";
+    public String greetingLabel = "mat-dialog-container dialog-overview-example-dialog h1";
+    public String answerFormField = "mat-dialog-container dialog-overview-example-dialog input";
+    public String nameFormField = "#mat-input-74";
+    public String noThanksButton = ".mat-dialog-container .mat-dialog-actions button:first-child";
+    public String okButton = ".mat-dialog-container .mat-dialog-actions button:last-child";
 
     @Override
     public DialogAssert is() {

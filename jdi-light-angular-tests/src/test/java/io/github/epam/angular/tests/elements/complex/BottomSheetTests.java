@@ -31,7 +31,6 @@ public class BottomSheetTests extends TestsInit {
     @Test
     public void checkBottomSheetIsHiddenTest() {
         bottomSheet.open();
-        bottomSheet.is().opened();
         bottomSheet.close();
         bottomSheet.is().closed();
     }
