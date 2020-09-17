@@ -1,5 +1,10 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.angular.elements.common.*;
+import com.epam.jdi.light.angular.elements.complex.*;
+import com.epam.jdi.light.elements.composite.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
+import com.epam.jdi.light.ui.html.elements.common.*;
 import com.epam.jdi.light.angular.elements.common.ProgressSpinner;
 import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
@@ -34,6 +39,7 @@ import io.github.com.pages.sections.ToolbarSection;
 import io.github.com.pages.sections.MenuSection;
 import io.github.com.pages.sections.TooltipSection;
 import io.github.com.pages.sections.ExpansionPanelSection;
+import io.github.com.pages.sections.FormFieldsSection;
 
 public class AngularPage extends WebPage {
     @Css("radio-overview-example .mat-radio-group")
@@ -73,6 +79,7 @@ public class AngularPage extends WebPage {
     public static DividerSection dividerSection;
     public static TooltipSection tooltipSection;
     public static DatepickerSection datepickerSection;
+    public static FormFieldsSection formFieldsSection;
     public static SideNavSection sidenavSection;
     public static ExpansionPanelSection expansionPanelSection;
 }
