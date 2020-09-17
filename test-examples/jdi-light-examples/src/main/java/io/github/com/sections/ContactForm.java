@@ -7,7 +7,7 @@ import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
 
 public class ContactForm extends Form<User> {
-	WebElement name, lastName, position, passportNumber, passportSeria, passport,
+	WebElement firstName, lastName, position, passportNumber, passportSeria, passport,
 			acceptConditions, description;
 
 	Selector gender, religion, weather;
