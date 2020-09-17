@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import static io.github.com.pages.Header.userIcon;
 
 public class LoginForm extends Form<User> {
-    protected TextField name;
+    protected TextField firstName;
     protected TextField password;
     protected Button loginButton;
 
