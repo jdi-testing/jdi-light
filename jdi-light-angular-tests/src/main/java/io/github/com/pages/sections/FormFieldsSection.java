@@ -5,27 +5,27 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 
 public class FormFieldsSection {
     @UI("#simple-form-field-input")
-    public FormFields simpleFormField;
+    public FormField simpleFormField;
 
     @UI("#form-field-with-label-input-simple-placeholder")
-    public FormFields formFieldWithLabel;
+    public FormField formFieldWithLabel;
 
     @UI("#form-field-appearance-input-legacy")
-    public FormFields formFieldsVariants;
+    public FormField formFieldVariants;
 
     @UI("#form-field-example-container-input-limited")
-    public FormFields formFieldsHints;
+    public FormField formFieldHints;
 
     @UI("#form-field-email-input")
-    public FormFields formFieldsValidation;
+    public FormField formFieldValidation;
 
     @UI("#prefix-suffix-form-field-password")
-    public FormFields formFieldsPrefixSuffix;
+    public FormField formFieldPrefixSuffix;
 
     @UI("#modified-layout-form-field-color")
-    public FormFields formFieldsThemes;
+    public FormField formFieldThemes;
 
     @UI("#form-field-phone-number-id")
-    public FormFields fromFieldsCustomControl;
+    public FormField fromFieldsCustomControl;
 
 }

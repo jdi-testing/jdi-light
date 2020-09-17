@@ -7,7 +7,7 @@ import org.hamcrest.*;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.*;
 
-public class FormFieldsAssert extends UIAssert<FormFieldsAssert, FormFields> implements HasAssert<FormFieldsAssert> {
+public class FormFieldsAssert extends UIAssert<FormFieldsAssert, FormField> implements HasAssert<FormFieldsAssert> {
 
     @JDIAction("Assert that '{name}' input with index {0} has value {1}")
     public FormFieldsAssert inputText(int index, String expected) {
@@ -138,6 +138,12 @@ public class FormFieldsAssert extends UIAssert<FormFieldsAssert, FormFields> imp
     @JDIAction("Assert that {name} with index {0} has label {1}")
     public FormFieldsAssert label(int index, String expected) {
         jdiAssert(element.label(index), Matchers.is(expected));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} with index {0} has error {1}")
+    public FormFieldsAssert error(int index, String expected) {
+        jdiAssert(element.error(index), Matchers.is(expected));
         return this;
     }
 

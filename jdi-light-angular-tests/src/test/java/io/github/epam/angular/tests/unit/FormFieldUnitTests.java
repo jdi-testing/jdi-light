@@ -8,8 +8,8 @@ import static io.github.com.pages.AngularPage.*;
 import static io.github.epam.site.steps.States.*;
 import static org.testng.Assert.*;
 
-public class FormFieldsUnitTests extends TestsInit {
-    @BeforeMethod
+public class FormFieldUnitTests extends TestsInit {
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
@@ -19,8 +19,8 @@ public class FormFieldsUnitTests extends TestsInit {
     public void getInputsTest() {
         assertEquals(formFieldsSection.simpleFormField.getInputs().size(), 1);
         assertEquals(formFieldsSection.formFieldWithLabel.getInputs().size(), 2);
-        assertEquals(formFieldsSection.formFieldsValidation.getInputs().size(), 1);
-        assertEquals(formFieldsSection.formFieldsHints.getInputs().size(), 1);
+        assertEquals(formFieldsSection.formFieldValidation.getInputs().size(), 1);
+        assertEquals(formFieldsSection.formFieldHints.getInputs().size(), 1);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class FormFieldsUnitTests extends TestsInit {
     public void getDropdownsTest() {
         assertEquals(formFieldsSection.simpleFormField.getDropdowns().size(), 1);
         assertEquals(formFieldsSection.formFieldWithLabel.getDropdowns().size(), 1);
-        assertEquals(formFieldsSection.formFieldsHints.getDropdowns().size(), 1);
+        assertEquals(formFieldsSection.formFieldHints.getDropdowns().size(), 1);
     }
 
     @Test
@@ -53,8 +53,8 @@ public class FormFieldsUnitTests extends TestsInit {
 
     @Test
     public void setDropdownTest() {
-        formFieldsSection.formFieldsThemes.select(1, "Warn");
-        assertEquals(formFieldsSection.formFieldsThemes.getDropdownValue(1), "Warn");
+        formFieldsSection.formFieldThemes.select(1, "Warn");
+        assertEquals(formFieldsSection.formFieldThemes.getDropdownValue(1), "Warn");
     }
 
     @Test
@@ -71,5 +71,12 @@ public class FormFieldsUnitTests extends TestsInit {
     public void getPlaceHolderValueTest() {
         assertEquals(formFieldsSection.formFieldWithLabel.placeholder(1), "Simple placeholder");
         assertEquals(formFieldsSection.formFieldWithLabel.placeholder(2), "Simple placeholder");
+    }
+
+    @Test
+    public void errorInputTest() {
+        formFieldsSection.formFieldValidation.input(1, "test@");
+        formFieldsSection.formFieldValidation.focusOut();
+        assertEquals(formFieldsSection.formFieldValidation.error(1), "Not a valid email");
     }
 }

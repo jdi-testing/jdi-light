@@ -15,7 +15,11 @@ import java.util.*;
 import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 
-public class FormFields extends UIBaseElement<FormFieldsAssert> {
+/**
+ To see an example of FormField web element please visit https://material.angular.io/components/form-field/overview#form-field-appearance-variants
+ **/
+
+public class FormField extends UIBaseElement<FormFieldsAssert> {
 
     private String matFormFieldPrefix = "//mat-form-field[@";
     private String autocompleteAttrPrefix = "_ngcontent-";

@@ -8,9 +8,9 @@ import static io.github.com.pages.AngularPage.*;
 import static io.github.epam.site.steps.States.*;
 import static org.hamcrest.Matchers.*;
 
-public class FormFieldsTests extends TestsInit {
+public class FormFieldTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
@@ -66,56 +66,57 @@ public class FormFieldsTests extends TestsInit {
 
     @Test
     public void formFieldAppearanceVariantsTest() {
-        formFieldsSection.formFieldsVariants.show();
-        formFieldsSection.formFieldsVariants.input(1, "Input 1 value");
-        formFieldsSection.formFieldsVariants.has().value(1, "Input 1 value");
-        formFieldsSection.formFieldsVariants.has().fieldIcon(1, "sentiment_very_satisfied");
+        formFieldsSection.formFieldVariants.show();
+        formFieldsSection.formFieldVariants.input(1, "Input 1 value");
+        formFieldsSection.formFieldVariants.has().value(1, "Input 1 value");
+        formFieldsSection.formFieldVariants.has().fieldIcon(1, "sentiment_very_satisfied");
     }
 
     @Test
     public void formFieldWithErrorMessageTest() {
-        formFieldsSection.formFieldsValidation.show();
-        formFieldsSection.formFieldsValidation.input(1, "test@");
-        formFieldsSection.formFieldsValidation.focusOut();
-        formFieldsSection.formFieldsValidation.has().inputError(1, "Not a valid email");
-        formFieldsSection.formFieldsValidation.clearInput(1);
-        formFieldsSection.formFieldsValidation.has().inputError(1, "You must enter a value");
-        formFieldsSection.formFieldsValidation.set(1, "test@test.com");
-        formFieldsSection.formFieldsValidation.has().value(1, "test@test.com");
-        formFieldsSection.formFieldsValidation.clear(1);
-        formFieldsSection.formFieldsValidation.has().inputError(1, "You must enter a value");
+        formFieldsSection.formFieldValidation.show();
+        formFieldsSection.formFieldValidation.input(1, "test@");
+        formFieldsSection.formFieldValidation.focusOut();
+        formFieldsSection.formFieldValidation.has().inputError(1, "Not a valid email");
+        formFieldsSection.formFieldValidation.clearInput(1);
+        formFieldsSection.formFieldValidation.has().inputError(1, "You must enter a value");
+        formFieldsSection.formFieldValidation.has().error(1, "You must enter a value");
+        formFieldsSection.formFieldValidation.set(1, "test@test.com");
+        formFieldsSection.formFieldValidation.has().value(1, "test@test.com");
+        formFieldsSection.formFieldValidation.clear(1);
+        formFieldsSection.formFieldValidation.has().inputError(1, "You must enter a value");
     }
 
     @Test
     public void formFieldsWithHintsTest() {
-        formFieldsSection.formFieldsHints.show();
-        formFieldsSection.formFieldsHints.has().hint(1, "0/10");
-        formFieldsSection.formFieldsHints.has().hint(2, "Here's the dropdown arrow ^");
-        formFieldsSection.formFieldsHints.set(1, "12345678901");
-        formFieldsSection.formFieldsHints.has().hint(1, "10/10");
-        formFieldsSection.formFieldsHints.has().inputHint(1, "10/10");
-        formFieldsSection.formFieldsHints.has().value(1, "1234567890");
+        formFieldsSection.formFieldHints.show();
+        formFieldsSection.formFieldHints.has().hint(1, "0/10");
+        formFieldsSection.formFieldHints.has().hint(2, "Here's the dropdown arrow ^");
+        formFieldsSection.formFieldHints.set(1, "12345678901");
+        formFieldsSection.formFieldHints.has().hint(1, "10/10");
+        formFieldsSection.formFieldHints.has().inputHint(1, "10/10");
+        formFieldsSection.formFieldHints.has().value(1, "1234567890");
     }
 
     @Test
     public void formFieldsPrefixSuffixTest() {
-        formFieldsSection.formFieldsPrefixSuffix.show();
-        formFieldsSection.formFieldsPrefixSuffix.input(1, "Password");
-        formFieldsSection.formFieldsPrefixSuffix.clickIcon(1);
-        formFieldsSection.formFieldsPrefixSuffix.has().value(1, "Password");
-        formFieldsSection.formFieldsPrefixSuffix.set(1, "AnotherPassword");
-        formFieldsSection.formFieldsPrefixSuffix.has().value(1, "AnotherPassword");
-        formFieldsSection.formFieldsPrefixSuffix.clickIcon(1);
-        formFieldsSection.formFieldsPrefixSuffix.has().value(1, "AnotherPassword");
+        formFieldsSection.formFieldPrefixSuffix.show();
+        formFieldsSection.formFieldPrefixSuffix.input(1, "Password");
+        formFieldsSection.formFieldPrefixSuffix.clickIcon(1);
+        formFieldsSection.formFieldPrefixSuffix.has().value(1, "Password");
+        formFieldsSection.formFieldPrefixSuffix.set(1, "AnotherPassword");
+        formFieldsSection.formFieldPrefixSuffix.has().value(1, "AnotherPassword");
+        formFieldsSection.formFieldPrefixSuffix.clickIcon(1);
+        formFieldsSection.formFieldPrefixSuffix.has().value(1, "AnotherPassword");
     }
 
     @Test
     public void formFieldsThemesTest() {
-        formFieldsSection.formFieldsThemes.show();
-        formFieldsSection.formFieldsThemes.set(1, "Accent");
-        formFieldsSection.formFieldsThemes.has().color(1, "rgba(0, 0, 0, 0.87)");
-        formFieldsSection.formFieldsThemes.set(2, "20");
-        formFieldsSection.formFieldsThemes.has().font(2, containsString("20px"));
+        formFieldsSection.formFieldThemes.show();
+        formFieldsSection.formFieldThemes.set(1, "Accent");
+        formFieldsSection.formFieldThemes.has().color(1, "rgba(0, 0, 0, 0.87)");
+        formFieldsSection.formFieldThemes.set(2, "20");
+        formFieldsSection.formFieldThemes.has().font(2, containsString("20px"));
     }
 
 }
