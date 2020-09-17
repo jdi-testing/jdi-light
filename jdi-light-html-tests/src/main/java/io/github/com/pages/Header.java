@@ -18,7 +18,7 @@ public class Header extends Section {
 	public static LoginFormSmart loginFormSmart;
 	@UI("#login-form") public static Form<User> loginFormLight;
 	@UI("#login-form") public static Form<User> loginFormLightLocator;
-	@UI(".fa-sign-out") public static Button logout;
+	@UI("//*[@class='logout']//button") public static Button logout;
 	public static Icon userIcon;
 	public static Button userName;
 	public static Image epamLogo;
@@ -28,7 +28,7 @@ public class Header extends Section {
 	@UI(".icon-search.active") static WebElement doSearch;
 
 	public static void search(String text) {
-		if (logout.isDisplayed()) {
+		if (logout.isVisible()) {
 			userName.click();
 		}
 		if (searchInput.isHidden()) {
