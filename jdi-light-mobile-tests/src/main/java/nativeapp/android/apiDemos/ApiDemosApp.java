@@ -12,4 +12,8 @@ public class ApiDemosApp {
 
     public static CheckboxesPage checkboxesPage;
 
+    public static AnimationPage animationPage;
+
+    public static CheckboxesPage checkboxesPage;
+
 }
