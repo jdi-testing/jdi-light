@@ -14,5 +14,4 @@ public class BadgeSection extends Section {
 
     @UI("#icon-with-badge")
     public static Badge iconWithBadge;
-
 }
