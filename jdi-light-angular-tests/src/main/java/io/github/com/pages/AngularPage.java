@@ -6,7 +6,31 @@ import com.epam.jdi.light.elements.composite.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.ui.html.elements.common.*;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
-import io.github.com.pages.sections.*;
+import io.github.com.pages.sections.AutocompleteSection;
+import io.github.com.pages.sections.BadgeSection;
+import io.github.com.pages.sections.BasicButtonsSection;
+import io.github.com.pages.sections.ButtonToggleSection;
+import io.github.com.pages.sections.CardSection;
+import io.github.com.pages.sections.CheckboxSection;
+import io.github.com.pages.sections.DatepickerSection;
+import io.github.com.pages.sections.DividerSection;
+import io.github.com.pages.sections.GridListSection;
+import io.github.com.pages.sections.InputSection;
+import io.github.com.pages.sections.ListSection;
+import io.github.com.pages.sections.MenuSection;
+import io.github.com.pages.sections.PaginatorSection;
+import io.github.com.pages.sections.RadioButtonSection;
+import io.github.com.pages.sections.SelectSection;
+import io.github.com.pages.sections.SideNavSection;
+import io.github.com.pages.sections.SlideToggleSection;
+import io.github.com.pages.sections.SliderSection;
+import io.github.com.pages.sections.SnackbarSection;
+import io.github.com.pages.sections.TabGroupSection;
+import io.github.com.pages.sections.ToolbarSection;
+import io.github.com.pages.sections.MenuSection;
+import io.github.com.pages.sections.TooltipSection;
+import io.github.com.pages.sections.ExpansionPanelSection;
+import io.github.com.pages.sections.FormFieldsSection;
 
 public class AngularPage extends WebPage {
     @Css("radio-overview-example .mat-radio-group")
@@ -36,11 +60,15 @@ public class AngularPage extends WebPage {
     public static AutocompleteSection autocompleteSection;
     public static SnackbarSection snackbarSection;
     public static ButtonToggleSection buttonToggleSection;
+    public static MenuSection menuSection;
     public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
     public static SliderSection sliderSection;
     public static CardSection cardSection;
     public static DividerSection dividerSection;
+    public static TooltipSection tooltipSection;
     public static DatepickerSection datepickerSection;
     public static FormFieldsSection formFieldsSection;
+    public static SideNavSection sidenavSection;
+    public static ExpansionPanelSection expansionPanelSection;
 }

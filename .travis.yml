@@ -30,7 +30,7 @@ env:
     - EXAMPLES_PROPERTY="test-examples/jdi-light-examples"
     - PERFORMANCE="jdi-performance"
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
-    - CHROME_ARGS="--headless"
+    - CHROME_ARGS="--headless --window-size=1920,1080"
     - PATH="$JAVA_HOME/bin:$PATH"
 
 stages:
@@ -349,7 +349,7 @@ after_script:
   - source reports.sh
   - grubAllureResults
   - du -d 1 -h ./
-  - ls -la
+#  - ls -la todo commented to shorten Travis log, remove or uncomment after the check
 # extra time during long builds
 install:
   - travis_wait
