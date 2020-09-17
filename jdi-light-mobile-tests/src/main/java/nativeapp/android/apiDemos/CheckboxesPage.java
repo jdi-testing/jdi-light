@@ -5,17 +5,17 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class CheckboxesPage {
     @MobileFindBy(id = "io.appium.android.apis:id/customAnimCB")
-    public static Checkbox customAnimations;
+    public static Checkbox customAnimationsCheckbox;
 
     @MobileFindBy(id = "io.appium.android.apis:id/appearingCB")
-    public static Checkbox in;
+    public static Checkbox inCheckbox;
 
     @MobileFindBy(id = "io.appium.android.apis:id/disappearingCB")
-    public static Checkbox out;
+    public static Checkbox outCheckbox;
 
     @MobileFindBy(id = "io.appium.android.apis:id/changingAppearingCB")
-    public static Checkbox changingIn;
+    public static Checkbox changingInCheckbox;
 
     @MobileFindBy(id = "io.appium.android.apis:id/changingDisappearingCB")
-    public static Checkbox changingOut;
+    public static Checkbox changingOutCheckbox;
 }

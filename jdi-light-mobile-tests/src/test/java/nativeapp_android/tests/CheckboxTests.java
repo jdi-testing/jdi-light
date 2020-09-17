@@ -1,0 +1,62 @@
+package nativeapp_android.tests;
+
+import nativeapp_android.ApiDemosTestInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import static nativeapp.android.apiDemos.AnimationPage.*;
+import static nativeapp.android.apiDemos.CheckboxesPage.*;
+import static nativeapp.android.apiDemos.IndexPage.*;
+
+
+public class CheckboxTests extends ApiDemosTestInit {
+
+    @BeforeMethod
+    public void initSteps() {
+        animationPage.click();
+        layoutAnimationsButton.click();
+    }
+
+    @Test
+    public void customAnimationsCheckboxTest(){
+        customAnimationsCheckbox.check();
+        customAnimationsCheckbox.is().selected();
+        customAnimationsCheckbox.uncheck();
+        customAnimationsCheckbox.is().deselected();
+
+    }
+
+    @Test
+    public void inCheckboxTest(){
+        inCheckbox.check();
+        inCheckbox.is().selected();
+        inCheckbox.uncheck();
+        inCheckbox.is().deselected();
+    }
+
+    @Test
+    public void outCheckboxTest(){
+        outCheckbox.check();
+        outCheckbox.is().selected();
+        outCheckbox.uncheck();
+        outCheckbox.is().deselected();
+    }
+
+    @Test
+    public void changingInCheckboxTest(){
+        changingInCheckbox.check();
+        changingInCheckbox.is().selected();
+        changingInCheckbox.uncheck();
+        changingInCheckbox.is().deselected();
+    }
+
+    @Test
+    public void changingOutCheckboxTest(){
+        changingOutCheckbox.check();
+        changingOutCheckbox.is().selected();
+        changingOutCheckbox.uncheck();
+        changingOutCheckbox.is().deselected();
+    }
+}
+
+

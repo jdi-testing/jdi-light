@@ -1,28 +1,23 @@
 package com.epam.jdi.light.mobile.asserts;
 
 import com.epam.jdi.light.asserts.generic.ITextAssert;
-import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.light.logger.LogLevels;
-import com.epam.jdi.light.mobile.asserts.generic.ISwitchAssert;
-import com.epam.jdi.light.mobile.elements.common.app.ISwitch;
+import com.epam.jdi.light.mobile.elements.common.app.android.ToggleButton;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class SwitchAssert extends UIAssert<SwitchAssert, ISwitch> implements ISwitchAssert{
-
+public class ToggleButtonAssert extends UIAssert<ToggleButtonAssert, ToggleButton> implements ITextAssert<ToggleButtonAssert> {
     @JDIAction("Assert that '{name}' is on")
-    public SwitchAssert on() {
+    public ToggleButtonAssert on() {
         jdiAssert(getIsOn(), Matchers.is("on"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is off")
-    public SwitchAssert off() {
+    public ToggleButtonAssert off() {
         jdiAssert(getIsOn(), Matchers.is("off"));
         return this;
     }
@@ -32,5 +27,12 @@ public class SwitchAssert extends UIAssert<SwitchAssert, ISwitch> implements ISw
         return element().isOn() ? "on" : "off";
     }
 
+    @JDIAction("Assert that '{name}' text {0}")
+    public ToggleButtonAssert text(Matcher<String> condition) {
+        jdiAssert(element().getText(), condition);
+        return this;
+    }
+
+    public ToggleButtonAssert text(String text) { return text(Matchers.is(text)); }
 
 }

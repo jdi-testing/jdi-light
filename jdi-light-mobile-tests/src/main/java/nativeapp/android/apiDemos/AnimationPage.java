@@ -5,9 +5,6 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class AnimationPage {
 
-    @MobileFindBy(accessibilityId = "Animation")
-    public static Button animationButton;
-
     @MobileFindBy(xpath = "//android.widget.TextView[@content-desc=\"Layout Animations\"]")
     public static Button layoutAnimationsButton;
 

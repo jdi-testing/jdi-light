@@ -1,6 +1,7 @@
 package com.epam.jdi.light.mobile.elements.common.app.android;
 
 
+import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.logger.LogLevels;
@@ -32,4 +33,6 @@ public class Switch extends MobileAppBaseElement<SwitchAssert> implements ISwitc
     public SwitchAssert is() {
         return new SwitchAssert().set(this);
     }
+
+
 }
