@@ -7,7 +7,6 @@ import com.epam.jdi.light.common.UseSmartSearch;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.logger.HighlightStrategy;
-import com.epam.jdi.light.logger.Strategy;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;

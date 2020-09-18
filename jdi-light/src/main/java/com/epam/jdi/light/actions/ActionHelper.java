@@ -51,7 +51,6 @@ import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.setCurrentPage;
 import static com.epam.jdi.light.elements.composite.WebPage.visualWindowCheck;
 import static com.epam.jdi.light.logger.AllureLogger.*;
-import static com.epam.jdi.light.logger.HighlightStrategy.ACTION;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;

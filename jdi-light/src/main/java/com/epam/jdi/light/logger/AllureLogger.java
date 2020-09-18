@@ -16,7 +16,6 @@ import static com.epam.jdi.light.settings.JDISettings.LOGS;
 import static com.epam.jdi.light.settings.JDISettings.SCREEN;
 import static io.qameta.allure.Allure.addAttachment;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
-import static io.qameta.allure.model.Status.FAILED;
 import static io.qameta.allure.model.Status.PASSED;
 import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Paths.get;
