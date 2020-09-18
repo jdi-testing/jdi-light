@@ -44,6 +44,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.JsonUtils.getInt;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.create;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static java.lang.Math.abs;
@@ -802,6 +803,14 @@ public class UIElement extends JDIBase
     //endregion
     public boolean wait(JFunc1<UIElement, Boolean> condition) {
         return timer().wait(() -> condition.execute(this));
+    }
+
+    public <T> T with(Class<T> cl) {
+        try {
+            return create(cl, this);
+        } catch (Throwable ex) {
+            throw exception(ex, "Can't create instantiate class. %s class should have constructor with UIElement parameter in order to use with method", cl.getSimpleName());
+        }
     }
 
     public void press(Keys key) {

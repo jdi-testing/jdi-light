@@ -20,11 +20,7 @@ public interface ICoreElement extends IBaseElement {
     UIElement core();
     default UIElement iCore() { return core(); }
     default <T> T with(Class<T> cl) {
-        try {
-            return create(cl, core());
-        } catch (Throwable ex) {
-            throw exception(ex, "Can't create instantiate class. %s class should have empty constructor in order to use with method", cl.getSimpleName());
-        }
+        return core().with(cl);
     }
 
     @JDIAction("Hover to '{name}'")
