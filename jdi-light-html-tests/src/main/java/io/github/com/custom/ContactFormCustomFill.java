@@ -26,7 +26,7 @@ public class ContactFormCustomFill extends Form<Contacts> {
     @Override
     public void fillAction(Field field, Object element, Object parent, String setValue) {
         String value = setValue;
-        if (field.getName().equals("name"))
+        if (field.getName().equals("firstName"))
             value = setValue.toUpperCase();
         super.fillAction(field, element, parent, value);
     }
