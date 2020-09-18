@@ -36,7 +36,7 @@ public class SlideToggleTest {
     }
 
     @Test
-    public void isBaseElementUnselectedTest(){
+    public void isBaseElementUnselectedTest() {
         when(slideToggle.core().isSelected()).thenReturn(false);
         assertFalse(slideToggle.isSelected());
     }

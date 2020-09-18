@@ -25,7 +25,7 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
     private UIElement getRadioButtonByTagValue(String value) {
         UIElement element = null;
         for (UIElement e : getRadioButtons()) {
-            if (e.find("input").attr("value").equalsIgnoreCase(value)) {
+            if (e.find("input").attr("value").equals(value)) {
                 element = e;
             }
         }

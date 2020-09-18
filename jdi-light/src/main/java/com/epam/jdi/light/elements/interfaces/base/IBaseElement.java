@@ -10,7 +10,7 @@ import com.epam.jdi.tools.func.JAction1;
  */
 public interface IBaseElement extends JDIElement, HasCache {
     JDIBase base();
-    default IBaseElement waitSec(int sec){
+    default IBaseElement waitSec(int sec) {
         base().waitSec(sec);
         return this;
     }

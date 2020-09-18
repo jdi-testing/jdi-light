@@ -65,7 +65,7 @@ public class SoftAssert {
             throw new AssertionError(print(errors));
     }
 
-    public static void clearResults(){
+    public static void clearResults() {
         listOfErrors.get().clear();
     }
 }

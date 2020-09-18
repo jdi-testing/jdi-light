@@ -69,7 +69,7 @@ public class ListPerformanceTests implements TestsInit {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList()).toString();
-        }, () -> "[" + firstRow.getValue().replace(",", ", ") + "]", 0.6, 235, 10);
+        }, () -> "[" + firstRow.getValue().replace(",", ", ") + "]", 0.7, 235, 10);
     }
     @Test(invocationCount = repeat)
     public void getValuesValueTest() {

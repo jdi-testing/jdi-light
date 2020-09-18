@@ -26,4 +26,5 @@ public @interface JDIAction {
     String condition() default "";
     boolean logResult() default true;
     int timeout() default -1;
+    boolean isAssert() default false;
 }

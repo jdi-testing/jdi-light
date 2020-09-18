@@ -175,7 +175,7 @@ public class Form<T> extends Section {
      * @param map Specify entity as mapArray
      *            Verify that form filled correctly. If not throws error
      */
-    @JDIAction(value = "Check that '{name}' values are: {0}", timeout = 0)
+    @JDIAction(value = "Check that '{name}' values are: {0}", timeout = 0, isAssert = true)
     public void check(MapArray<String, String> map) {
         List<String> result = verify(map);
         if (result.size() != 0)
@@ -185,7 +185,6 @@ public class Form<T> extends Section {
      * @param entity Specify entity
      *               Verify that form filled correctly. If not throws error
      */
-    @JDIAction(value = "Check that '{name}' values are: {0}", timeout = 0)
     public void check(T entity) {
         check(getMapFromObject(entity));
     }

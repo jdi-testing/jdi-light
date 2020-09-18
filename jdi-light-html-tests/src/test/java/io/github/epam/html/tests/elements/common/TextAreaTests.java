@@ -79,25 +79,25 @@ public class TextAreaTests implements TestsInit {
     }
 
     @Test
-    public void addNewLineTest(){
+    public void addNewLineTest() {
         textArea.setLines("line1", "line2");
         textArea.addNewLine("line3");
         assertEquals(textArea.getText(), "line1\nline2\nline3");
     }
 
     @Test
-    public void setLinesTest(){
+    public void setLinesTest() {
         textArea.setLines("line1", "line2");
         assertEquals(textArea.getText(), "line1\nline2");
     }
     @Test
-    public void addLinesTest(){
+    public void addLinesTest() {
         textArea.addNewLine("line1");
         textArea.addNewLine("line2");
         assertEquals(textArea.getText(), "line1\nline2");
     }
     @Test
-    public void addEmptyLineTest(){
+    public void addEmptyLineTest() {
         textArea.addNewLine("line1");
         textArea.addNewLine("");
         textArea.addNewLine("line2");

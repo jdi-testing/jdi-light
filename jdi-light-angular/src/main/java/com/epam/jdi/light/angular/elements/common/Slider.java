@@ -32,6 +32,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
         return getDouble("aria-valuenow", uiElement, 0);
     }
 
+    // No needs in this method
     @JDIAction(value = "Get '{name}' orientation", level = DEBUG)
     public String orientation() {
         return uiElement.attr("aria-orientation");
