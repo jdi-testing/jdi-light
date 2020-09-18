@@ -301,7 +301,7 @@ public class UIElement extends JDIBase
      * Focus
      */
     @JDIAction(level = DEBUG) @Override
-    public void focus(){ sendKeys(""); }
+    public void focus() { sendKeys(""); }
     /**
      * Set the text in the attribute "value"
      * @param value

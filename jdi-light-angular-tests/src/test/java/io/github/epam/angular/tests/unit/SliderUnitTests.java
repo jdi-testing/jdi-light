@@ -80,6 +80,7 @@ public class SliderUnitTests extends TestsInit {
         assertEquals(matSliderConfigurable.value(), 34.0);
     }
 
+
     @Test
     public void setOrientationTest() {
         matSliderConfigurable.show();

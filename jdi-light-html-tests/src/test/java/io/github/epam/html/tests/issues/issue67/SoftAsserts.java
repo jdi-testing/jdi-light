@@ -122,7 +122,7 @@ public class SoftAsserts implements TestsInit {
     }
 
     @Test
-    public void dataTableSoftAssertTest(){
+    public void dataTableSoftAssertTest() {
         try {
             usersPage.open();
             // TODO fix performance
@@ -140,7 +140,7 @@ public class SoftAsserts implements TestsInit {
         }
     }
     @Test
-    public void customFailTest(){
+    public void customFailTest() {
         try {
             usersPage.open();
             // TODO fix performance

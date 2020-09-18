@@ -23,7 +23,7 @@ then
 fi
 
 ####################             UTILS
-function getCommentsLastPageIndex(){
+function getCommentsLastPageIndex() {
     url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${DESTINATION_PULL_REQUEST}/comments"
     index="$(curl -I -H "Authorization: token ${GIT_COMMENT_USER}"\
          -X GET  "${url}" | grep Link: | awk '{print $4}' | egrep -o 'page=[0-9]{1,10}' | awk -F"=" '{print $2}')"
@@ -35,7 +35,7 @@ function getCommentsLastPageIndex(){
     echo ${index}
 }
 
-function collectRelevantComments(){
+function collectRelevantComments() {
     lastPageIndex=$(getCommentsLastPageIndex)
     matchPattern="$1"
     fileName="${FILENAME_WITH_COMMENTS_FROM_GITHUB}"

@@ -27,7 +27,7 @@ public class ContactFormCustomGet extends Form<Contacts> {
     @Override
     public String getAction(Field field, Object element, Object parent) {
         String value = super.getAction(field, element, parent);
-        return field.getName().equals("firstName")
+        return field.getName().equals("name")
             ? value.toLowerCase()
             : value;
     }

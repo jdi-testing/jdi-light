@@ -8,6 +8,7 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import org.openqa.selenium.By;
@@ -25,6 +26,7 @@ import java.util.Locale;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.DATEPICKER;
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.TOGGLE;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 /**
@@ -44,6 +46,11 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     public Datepicker() {
         cdkOverlayContainer = new DatepickerContainer();
+    }
+
+    public UIElement calendar() {
+        String id = attr("data-mat-calendar");
+        return $("#"+id);
     }
 
     @JDIAction(level = DEBUG, timeout = 0)

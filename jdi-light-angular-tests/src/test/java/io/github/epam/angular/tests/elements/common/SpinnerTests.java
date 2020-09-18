@@ -21,4 +21,10 @@ public class SpinnerTests extends TestsInit {
         basicProgressSpinner.show();
         basicProgressSpinner.isDisplayed();
     }
+
+    // Need to add tests:
+    // Wait spinner for some time
+    // Spinner disappear
+    // Spinner appear
+    // See SpinnerTests in bootstrap
 }

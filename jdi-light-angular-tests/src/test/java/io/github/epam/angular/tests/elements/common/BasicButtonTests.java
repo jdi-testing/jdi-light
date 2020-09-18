@@ -13,7 +13,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-//todo only for one button
 public class BasicButtonTests extends TestsInit {
 
     private static final String BASIC_TEXT = "Basic";

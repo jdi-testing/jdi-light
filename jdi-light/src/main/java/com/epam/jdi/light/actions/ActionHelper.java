@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
+import com.epam.jdi.light.logger.HighlightStrategy;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
@@ -23,13 +24,13 @@ import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import io.qameta.allure.Step;
+import org.apache.commons.lang3.ObjectUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,6 +51,7 @@ import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.setCurrentPage;
 import static com.epam.jdi.light.elements.composite.WebPage.visualWindowCheck;
 import static com.epam.jdi.light.logger.AllureLogger.*;
+import static com.epam.jdi.light.logger.HighlightStrategy.ACTION;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -141,25 +143,36 @@ public class ActionHelper {
     public static void beforeJdiAction(ActionObject jInfo) {
         JoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
-        if (jInfo.topLevel()) {
-            processBeforeAction(message, jInfo);
-        }
         if (LOGS.writeToAllure && logLevel(jInfo).equalOrMoreThan(INFO) && (allureSteps.get().isEmpty() || !allureSteps.get().contains(message))) {
             jInfo.stepUId = startStep(message);
             allureSteps.get().add(message);
+        }
+        if (jInfo.topLevel()) {
+            processBeforeAction(message, jInfo);
         }
     }
     protected static void processBeforeAction(String message, ActionObject jInfo) {
         allureSteps.reset();
         JoinPoint jp = jInfo.jp();
-        if (LOGS.writeToLog)
+        if (LOGS.writeToLog) {
             logger.toLog(message, logLevel(jInfo));
-        if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE || LOGS.screenStrategy.contains(NEW_PAGE))
+        }
+        if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
+            if (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
+                || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo)) {
+                try {
+                    jInfo.core().highlight();
+                } catch (Exception ignore) { }
+            }
+        }
+        if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE || LOGS.screenStrategy.contains(NEW_PAGE)) {
             processPage(jInfo);
-        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
+        }
+        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
             visualValidation(jp, message);
+        }
         if (LOGS.screenStrategy.contains(ASSERT)) {
-            if (isInterface(jInfo.jpClass(), JAssert.class) || validateAlert(jInfo)) {
+            if (isAssert(jInfo)) {
                 performAssert(jInfo);
             } else {
                 isAssert.set(false);
@@ -171,26 +184,11 @@ public class ActionHelper {
         isAssert.set(true);
         if (lastActionIsNotAssert) {
             String screenName = "Validate" + capitalize(jInfo.methodName());
-            String screenPath;
-            if (!validateAlert(jInfo)) {
-                screenPath = takeScreen(screenName);
-            } else {
-                Timer.sleep(200);
-                screenPath = takeRobotScreenshot(screenName);
-            }
-            String detailsUUID = startStep(screenName);
-            if (isNotBlank(screenPath)) {
-                try {
-                    attachScreenshot(screenPath);
-                } catch (IOException ex) {
-                    throw exception(ex, "");
-                }
-            }
-            getLifecycle().stopStep(detailsUUID);
+            createAttachment(screenName, isClass(jInfo.jpClass(), Alerts.class));
         }
     }
-    private static boolean validateAlert(ActionObject jInfo) {
-        return isClass(jInfo.jpClass(), Alerts.class) && jInfo.methodName().startsWith("validate");
+    public static boolean isAssert(ActionObject jInfo) {
+        return isInterface(jInfo.jpClass(), JAssert.class) || jInfo.isAssertAnnotation();
     }
     public static void beforeStepAction(JoinPoint jp) {
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
@@ -322,31 +320,41 @@ public class ActionHelper {
                 logger.error("Url: " + WebPage.getUrl());
             } catch (Exception ignore) { }
             logger.error("Failed actions chain: " + print(chainActions, " > "));
+        } else {
+            if (LOGS.writeToAllure && isNotBlank(jInfo.stepUId))
+                getLifecycle().stopStep(jInfo.stepUId);
         }
         return exception(ex, getExceptionAround(ex, jInfo));
     }
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
     public static void logFailure(ActionObject jInfo) {
         logger.toLog(">>> " + jInfo.object().toString(), ERROR);
-        String screenName = "";
+        String screenPath = "";
         String htmlSnapshot = "";
         String errors = "";
+        if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
+            if (ELEMENT.highlight.contains(HighlightStrategy.FAIL)) {
+                try {
+                    jInfo.core().highlight();
+                } catch (Exception ignore) { }
+            }
+        }
         if (LOGS.screenStrategy.contains(FAIL))
-            screenName = SCREEN.tool.equalsIgnoreCase("robot")
-                    ? takeRobotScreenshot()
-                    : takeScreen("Failed"+capitalize(jInfo.methodName()));
+            screenPath = SCREEN.tool.equalsIgnoreCase("robot")
+                ? takeRobotScreenshot()
+                : takeScreen("Failed"+capitalize(jInfo.methodName()));
         if (LOGS.htmlCodeStrategy.contains(FAIL))
             htmlSnapshot = takeHtmlCodeOnFailure();
         if (LOGS.requestsStrategy.contains(FAIL)) {
             WebDriver driver = jInfo.element() != null
-                    ? jInfo.element().base().driver()
-                    : getDriver();
+                ? jInfo.element().base().driver()
+                : getDriver();
             List<LogEntry> requests = driver.manage().logs().get("performance").getAll();
             List<String> errorEntries = LinqUtils.map(filter(requests, LOGS.filterHttpRequests),
-                    logEntry -> beautifyJson(logEntry.getMessage()));
+                logEntry -> beautifyJson(logEntry.getMessage()));
             errors = print(errorEntries);
         }
-        failStep(jInfo.stepUId, screenName, htmlSnapshot, errors);
+        failStep(jInfo.stepUId, screenPath, htmlSnapshot, errors);
     }
     static WebPage getPage(Object element) {
         if (isInterface(element.getClass(), IBaseElement.class))
