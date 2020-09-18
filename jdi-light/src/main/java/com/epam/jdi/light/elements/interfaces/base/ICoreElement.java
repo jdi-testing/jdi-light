@@ -9,9 +9,6 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.ReflectionUtils.create;
-
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
