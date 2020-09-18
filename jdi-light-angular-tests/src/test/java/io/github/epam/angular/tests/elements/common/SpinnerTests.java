@@ -29,6 +29,7 @@ public class SpinnerTests extends TestsInit {
 
     @Test
     public void baseValidationTest() {
+        showSpinner.show();
         showSpinner.click();
         baseValidation(basicProgressSpinner);
     }
