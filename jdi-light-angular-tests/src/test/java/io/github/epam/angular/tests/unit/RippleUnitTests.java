@@ -9,7 +9,9 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.rippleContainer;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class RippleUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
