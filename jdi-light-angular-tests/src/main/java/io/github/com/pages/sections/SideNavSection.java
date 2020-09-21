@@ -10,12 +10,10 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 public class SideNavSection {
 
     public static SideNav basicSideNav;
-
     public static SideNav basicDrawer;
-
     public static SideNav implicitMainContent;
-
     public static SideNav openCloseBehavior;
+    
     @UI("#open-close-behavior mat-checkbox")
     public static Checkbox sideNavOpened;
     @UI("#open-close-behavior button")
