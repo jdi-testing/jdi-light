@@ -16,10 +16,8 @@ public class CheckboxTests extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
-    // Add more tests like in jdi-light-html
     @Test
     public void basicCheckboxTest() {
-        // Not so basic?
         basicCheckbox.isDisplayed();
         basicCheckbox.check();
         basicCheckbox.isSelected();
