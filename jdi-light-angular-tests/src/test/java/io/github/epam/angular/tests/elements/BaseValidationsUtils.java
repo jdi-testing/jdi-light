@@ -18,29 +18,29 @@ public class BaseValidationsUtils {
     public static final int ONE_SECOND_DURATION = 1000;
     public static final int HALF_SECOND_DURATION = 500;
 
-    public static void baseValidation(final ICoreElement el) {
-        logger.info("Check enabled");
-        assertTrue(el.isEnabled());
-        logger.info("Check displayed");
-        assertTrue(el.isDisplayed());
-        logger.info("Check disabled");
-        assertFalse(el.isDisabled());
-        logger.info("Check hidden");
-        assertFalse(el.isHidden());
-        logger.info("Check getLocation");
-        Point location = el.core().getLocation();
+    public static void baseValidation(final ICoreElement element) {
+        logger.info("Verify displayed");
+        assertTrue(element.isDisplayed());
+        logger.info("Verify hidden");
+        assertFalse(element.isHidden());
+        logger.info("Verify enabled");
+        assertTrue(element.isEnabled());
+        logger.info("Verify disabled");
+        assertFalse(element.isDisabled());
+        logger.info("Verify getSize");
+        Dimension size = element.core().getSize();
+        assertTrue(size.height > 0 && size.width > 0, "Size: " + size);
+        logger.info("Verify getLocation");
+        Point location = element.core().getLocation();
         assertTrue(location.x > 0 && location.y > 0, "Location: " + location);
-        logger.info("Check getSize");
-        Dimension size = el.core().getSize();
-        assertTrue(size.height > 0 && size.width > 0, "Size: " + location);
-        logger.info("Check setAttribute");
-        el.setAttribute("test-jdi", "test-value");
-        assertEquals(el.attr("test-jdi"), "test-value");
-        logger.info("Check highlight");
-        el.highlight("blue");
-        el.highlight();
-        logger.info("Check show");
-        el.show();
+        logger.info("Verify setAttribute");
+        element.setAttribute("jdi-test", "value-test");
+        assertEquals(element.attr("jdi-test"), "value-test");
+        logger.info("Verify highlight");
+        element.highlight("green");
+        element.highlight();
+        logger.info("Verify show");
+        element.show();
     }
 
     public static void duration(final int duration, final JAction action) {
