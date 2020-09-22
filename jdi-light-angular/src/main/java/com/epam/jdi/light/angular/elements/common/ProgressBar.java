@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.BUFFER;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.DETERMINATE;
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 
