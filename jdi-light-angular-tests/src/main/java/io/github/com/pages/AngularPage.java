@@ -1,10 +1,6 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.angular.elements.common.*;
-import com.epam.jdi.light.angular.elements.complex.*;
-import com.epam.jdi.light.elements.composite.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
-import com.epam.jdi.light.ui.html.elements.common.*;
+
 import com.epam.jdi.light.angular.elements.common.ProgressSpinner;
 import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
@@ -23,6 +19,7 @@ import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.ListSection;
 import io.github.com.pages.sections.MenuSection;
 import io.github.com.pages.sections.PaginatorSection;
+import io.github.com.pages.sections.ProgressBarSection;
 import io.github.com.pages.sections.RadioButtonSection;
 import io.github.com.pages.sections.SelectSection;
 import io.github.com.pages.sections.SideNavSection;
