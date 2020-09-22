@@ -187,8 +187,9 @@ function downloadAllureResults() {
         urlExistence=true
         echo "Found: ${urlKey}"
         if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
-            fileName="$(echo "${urlKey}"| awk -F/ '{print $5}')"
-            curl "${urlKey}" --output "${fileName}"
+            fileName # TODO commented to shorten Travis log, remove this line and uncomment next two lines after the check
+#            fileName="$(echo "${urlKey}"| awk -F/ '{print $5}')"
+#            curl "${urlKey}" --output "${fileName}"
         else
             fileName="${urlKey}.tar.gz"
             curl https://file.io/"${urlKey}" --output "${fileName}"
