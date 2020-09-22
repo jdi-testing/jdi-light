@@ -67,6 +67,16 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
         throw exception("Can't find label for element %s", this);
     }
 
+    @JDIAction("Click on '{name}'")
+    @Override
+    public void click() {
+        if (label().isDisplayed()) {
+            label().click();
+        } else {
+            core().click();
+        }
+    }
+
     @JDIAction("Is '{name}' indeterminate")
     public boolean isIndeterminate() {
         return hasClass("mat-checkbox-indeterminate") || attr("aria-checked").equals("mixed");
