@@ -1,7 +1,6 @@
 package io.github.com.pages;
 
 
-import com.epam.jdi.light.angular.elements.common.ProgressSpinner;
 import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
 import com.epam.jdi.light.angular.elements.complex.BottomSheet;
