@@ -70,7 +70,7 @@ function archive() {
 
 function extractArchive() {
     file="$1"
-    tar -zxvf "${file}"
+    tar -zxf "${file}" # replace with '-zxvf' to show the progress of archive file.
 }
 
 function aboutTransfer() {
@@ -187,9 +187,8 @@ function downloadAllureResults() {
         urlExistence=true
         echo "Found: ${urlKey}"
         if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
-            fileName # TODO commented to shorten Travis log, remove this line and uncomment next two lines after the check
-#            fileName="$(echo "${urlKey}"| awk -F/ '{print $5}')"
-#            curl "${urlKey}" --output "${fileName}"
+            fileName="$(echo "${urlKey}"| awk -F/ '{print $5}')"
+            curl "${urlKey}" --output "${fileName}"
         else
             fileName="${urlKey}.tar.gz"
             curl https://file.io/"${urlKey}" --output "${fileName}"
