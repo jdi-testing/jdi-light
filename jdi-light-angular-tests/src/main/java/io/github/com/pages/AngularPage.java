@@ -66,5 +66,4 @@ public class AngularPage extends WebPage {
     public static SideNavSection sidenavSection;
     public static ExpansionPanelSection expansionPanelSection;
     public static SpinnerSection spinnerSection;
-    public static ProgressBarSection progressBarSection;
 }

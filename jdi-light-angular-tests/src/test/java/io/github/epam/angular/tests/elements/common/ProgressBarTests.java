@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.*;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.*;
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.ProgressBarSection.*;
 import static io.github.com.pages.sections.ProgressBarSection.matProgressBarBuffer;
 import static io.github.com.pages.sections.ProgressBarSection.matProgressBarConfigurable;
 import static io.github.com.pages.sections.ProgressBarSection.matProgressBarDeterminate;
