@@ -7,4 +7,5 @@ public class ApiDemosApp {
     public static IndexPage indexPage;
     public static ViewsPage viewsPage;
     public static ButtonsPage buttonsPage;
+    public static SpinnerPage spinnerPage;
 }
