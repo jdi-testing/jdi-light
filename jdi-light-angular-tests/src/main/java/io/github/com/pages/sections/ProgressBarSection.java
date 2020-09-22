@@ -1,12 +1,9 @@
 package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.common.ProgressBar;
-import com.epam.jdi.light.angular.elements.common.SlideToggle;
 import com.epam.jdi.light.angular.elements.common.Slider;
 import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import org.openqa.selenium.WebElement;
 
 public class ProgressBarSection extends Section {
     public static Button showIndeterminateProgressBarButton;
