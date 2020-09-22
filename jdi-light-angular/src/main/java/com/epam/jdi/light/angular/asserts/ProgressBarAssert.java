@@ -13,7 +13,8 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> {
-    @JDIAction(value = "Get '{name}' value {0}", level = LogLevels.DEBUG)
+  
+    @JDIAction(value = "Get '{name}' value '{0}'")
     public ProgressBarAssert value(Matcher<Integer> value) throws Exception {
         jdiAssert(element.value(), value);
         return this;
@@ -23,7 +24,7 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return value(Matchers.is(value));
     }
 
-    @JDIAction(value = "Get '{name}' min value {0}", level = LogLevels.DEBUG)
+    @JDIAction(value = "Get '{name}' min value '{0}'")r
     public ProgressBarAssert min(Matcher<Integer> condition) {
         jdiAssert(element().min(), condition);
         return this;
@@ -33,7 +34,7 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return min(Matchers.is(minValue));
     }
 
-    @JDIAction(value = "Get '{name}' max value {0}", level = LogLevels.DEBUG)
+    @JDIAction(value = "Get '{name}' max value '{0}'")
     public ProgressBarAssert max(Matcher<Integer> condition) {
         jdiAssert(element().max(), condition);
         return this;
@@ -43,7 +44,7 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return max(Matchers.is(maxValue));
     }
 
-    @JDIAction(value = "Get '{name}' mode value '{0}'", level = LogLevels.DEBUG)
+    @JDIAction(value = "Get '{name}' mode value '{0}'")
     public ProgressBarAssert mode(Matcher<String> value) {
         jdiAssert(element().mode(), value);
         return this;
@@ -53,7 +54,7 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return mode(Matchers.is(mode.getMode()));
     }
 
-    @JDIAction(value = "Assert that '{name}' does not appear during {0} seconds", timeout = 0)
+    @JDIAction(value = "Assert that '{name}' does not appear during '{0}' seconds", timeout = 0)
     public ProgressBarAssert disappear(int timeoutSec) {
         boolean result = new Timer(timeoutSec * 1000L)
                 .wait(() -> element().isHidden());
@@ -66,7 +67,7 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return cssClass(color.getColor());
     }
 
-    @JDIAction(value = "Assert that '{name}' has buffer value {0}", level = LogLevels.DEBUG)
+    @JDIAction(value = "Assert that '{name}' has buffer value '{0}'", level = LogLevels.DEBUG)
     public ProgressBarAssert bufferValue(Matcher<Double> value) throws Exception {
         jdiAssert(element.bufferValue(), value);
         return this;
