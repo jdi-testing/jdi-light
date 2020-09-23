@@ -3,6 +3,7 @@ package nativeapp.ios.contacts;
 import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.common.app.ios.SystemButton;
+import com.epam.jdi.light.mobile.elements.composite.ios.app.SearchBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class ContactsListPage {
@@ -12,8 +13,10 @@ public class ContactsListPage {
     public static SystemButton groupsButton;
     @MobileFindBy(accessibilityId = "Add")
     public static Button addButton;
-    @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"John Appleseed\"]")
+    @MobileFindBy(xpath = "//XCUIElementTypeCell[contains(@name, 'John Appleseed')]")
     public static MobileAppUIElement johnAppleseedCard;
+    @MobileFindBy(xpath = "//XCUIElementTypeSearchField[@name='Search']")
+    public static SearchBar contactsSearchBar;
 
     @MobileFindBy(xpath = "//XCUIElementTypeNavigationBar[@name='Contacts']")
     public static ContactsNavigationBar contactsNavigationBar;
