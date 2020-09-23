@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.HighlightStrategy;
+import com.epam.jdi.light.logger.JDILogger;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
@@ -61,7 +62,6 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.Timer.nowTime;
-import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
@@ -98,11 +98,18 @@ public class ActionHelper {
     public static int CUT_STEP_TEXT = 70;
     public static String getActionName(JoinPoint jp) {
         try {
+            logger.debug("getActionName()");
+        } catch (Exception ignore) { }
+        try {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
-            return isBlank(template)
-                    ? getDefaultName(jp, method)
-                    : fillTemplate(template, jp, method);
+            String actionName = isBlank(template)
+                ? getDefaultName(jp, method)
+                : fillTemplate(template, jp, method);
+            try {
+                logger.debug("getActionName() => " + actionName);
+            } catch (Exception ignore) { }
+            return actionName;
         } catch (Throwable ex) {
             takeScreen();
             throw exception(ex, "Surround method issue: Can't get action name: " + getClassMethodName(jp));
@@ -110,28 +117,44 @@ public class ActionHelper {
     }
 
     public static String fillTemplate(String template, JoinPoint jp, MethodSignature method) {
+        try {
+            logger.debug("fillTemplate(): " + template);
+        } catch (Exception ignore) { }
         String filledTemplate = template;
         try {
             if (filledTemplate.contains("{0")) {
+                logger.debug("1");
                 Object[] args = getArgs(jp);
                 filledTemplate = msgFormat(filledTemplate, args);
             } else if (filledTemplate.contains("%s")) {
+                logger.debug("2");
                 filledTemplate = format(filledTemplate, getArgs(jp));
             }
             if (filledTemplate.contains("{")) {
-                MapArray<String, Object> obj = toMap(() -> new MapArray<>("this", getElementName(jp)));
+                logger.debug("3");
+                MapArray<String, Object> obj = new MapArray<>("this", getElementName(jp));
+                logger.debug("4");
                 MapArray<String, Object> args = methodArgs(jp, method);
+                logger.debug("5");
                 MapArray<String, Object> core = core(jp);
+                logger.debug("6");
                 MapArray<String, Object> fields = classFields(jp.getThis());
+                logger.debug("7");
                 MapArray<String, Object> methods = classMethods(jp.getThis());
+                logger.debug("8");
                 filledTemplate = getActionNameFromTemplate(method, filledTemplate, obj, args, core, fields, methods);
+                logger.debug("9");
                 if (filledTemplate.contains("{{VALUE}}") && args.size() > 0) {
                     filledTemplate = filledTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
                 }
                 if (filledTemplate.contains("{failElement}")) {
                     filledTemplate = filledTemplate.replaceAll("\\{failElement}", obj.get(0).value.toString());
                 }
+                logger.debug("10");
             }
+            try {
+                logger.debug("fillTemplate() => " + filledTemplate);
+            } catch (Exception ignore) { }
             return filledTemplate;
         } catch (Exception ex) {
             throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + getClassMethodName(jp));
@@ -140,17 +163,27 @@ public class ActionHelper {
     public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
     static Safe<List<String>> allureSteps = new Safe<>(ArrayList::new);
     public static void beforeJdiAction(ActionObject jInfo) {
+        try {
+            logger.debug("beforeJdiAction(): " + jInfo.toString());
+        } catch (Exception ignore) { }
         JoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
         if (LOGS.writeToAllure && logLevel(jInfo).equalOrMoreThan(INFO) && (allureSteps.get().isEmpty() || !allureSteps.get().contains(message))) {
+            try {
+                logger.debug("logAllure()");
+            } catch (Exception ignore) { }
             jInfo.stepUId = startStep(message);
-            allureSteps.get().add(message);
+            if (!allureSteps.get().contains(message))
+                allureSteps.get().add(message);
         }
         if (jInfo.topLevel()) {
             processBeforeAction(message, jInfo);
         }
     }
     protected static void processBeforeAction(String message, ActionObject jInfo) {
+        try {
+            logger.debug("processBeforeAction(): message: ", message);
+        } catch (Exception ignore) { }
         allureSteps.reset();
         JoinPoint jp = jInfo.jp();
         if (LOGS.writeToLog) {
@@ -274,13 +307,16 @@ public class ActionHelper {
     }
     //region Private
     public static String getBeforeLogString(JoinPoint jp) {
+        try {
+            logger.debug("getBeforeLogString()");
+        } catch (Exception ignore) { }
         String actionName = GET_ACTION_NAME.execute(jp);
         String logString;
         if (jp.getThis() == null) {
             logString = actionName;
         } else {
             MapArray<String, Object> logOptions = LOG_VALUES.execute(jp);
-            logOptions.add("action", actionName);
+            logOptions.update("action", actionName);
             logString = msgFormat(getTemplate(LOGS.logLevel), logOptions);
         }
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
@@ -288,13 +324,13 @@ public class ActionHelper {
     public static MapArray<String, Object> getLogOptions(JoinPoint jp) {
         MapArray<String, Object> map = new MapArray<>();
         JFunc<String> elementName = () -> getElementName(jp);
-        map.add("name", elementName);
+        map.update("name", elementName);
         JFunc<String> element = () -> getFullInfo(jp);
-        map.add("element", element);
+        map.update("element", element);
         JFunc<String> context = () -> getElementContext(jp);
-        map.add("context", context);
+        map.update("context", context);
         JFunc<String> locator = () -> getElementLocator(jp);
-        map.add("locator", locator);
+        map.update("locator", locator);
         return map;
     }
     public static void processPage(ActionObject jInfo) {
@@ -319,6 +355,9 @@ public class ActionHelper {
                 logger.error("Url: " + WebPage.getUrl());
             } catch (Exception ignore) { }
             logger.error("Failed actions chain: " + print(chainActions, " > "));
+            try {
+                ((JDILogger)logger).throwDebugInfo();
+            } catch (Exception ignore) { }
         } else {
             if (LOGS.writeToAllure && isNotBlank(jInfo.stepUId))
                 getLifecycle().stopStep(jInfo.stepUId);
@@ -417,13 +456,7 @@ public class ActionHelper {
                 : "("+args.get(0).value+")";
     }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
-        return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint)));
-    }
-    static MapArray<String, Object> toMap(JFunc<MapArray<String, Object>> getMap) {
-        IGNORE_NOT_UNIQUE = true;
-        MapArray<String, Object> map = getMap.execute();
-        IGNORE_NOT_UNIQUE = false;
-        return map;
+        return new MapArray<>(method.getParameterNames(), getArgs(joinPoint));
     }
     static Object[] getArgs(JoinPoint jp) {
         Object[] args = jp.getArgs();
@@ -432,11 +465,11 @@ public class ActionHelper {
         Object[] result = new Object[args.length];
         for (int i = 0; i< args.length; i++)
             result[i] = Switch(args[i]).get(
-                    Case(Objects::isNull, null),
-                    Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
-                    Case(arg -> isInterface(arg.getClass(), List.class),
-                            PrintUtils::printList),
-                    Default(arg -> arg));
+                Case(Objects::isNull, null),
+                Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
+                Case(arg -> isInterface(arg.getClass(), List.class),
+                        PrintUtils::printList),
+                Default(arg -> arg));
         return result;
     }
     static MapArray<String, Object> core(JoinPoint jp) {
@@ -653,8 +686,13 @@ public class ActionHelper {
             jStack.set(newList(jInfo));
         }
         else {
-            jStack.get().add(jInfo);
+            if (!jStack.get().contains(jInfo)) {
+                jStack.get().add(jInfo);
+            }
         }
+        try {
+            logger.debug("newInfo(): " + jInfo.toString());
+        } catch (Exception ignore) { }
         return jInfo;
     }
     public static ActionObject firstInfo(ActionObject jInfo) {

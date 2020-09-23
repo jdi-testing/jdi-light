@@ -22,6 +22,9 @@ public class HtmlActions {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
+        try {
+            logger.debug("HtmlActions.jdiAround(): " + getMethodName(jp));
+        } catch (Exception ignore) { }
         ActionObject jInfo = null;
         try {
             jInfo = newInfo(jp);

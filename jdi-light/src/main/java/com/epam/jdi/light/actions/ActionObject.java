@@ -152,4 +152,19 @@ public class ActionObject {
     public String methodFullName() {
         return getClassMethodName(jp());
     }
+
+    @Override
+    public String toString() {
+        String result = "AO:";
+        try {
+            result += "Class: " + className() + "; ";
+        } catch (Exception ignore) { }
+        try {
+            result += "Method: " + methodName() + "; ";
+        } catch (Exception ignore) { }
+        try {
+            result += "Element: " + element().toString() + "; ";
+        } catch (Exception ignore) { }
+        return result;
+    }
 }

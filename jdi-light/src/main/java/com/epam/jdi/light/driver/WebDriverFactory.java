@@ -84,7 +84,7 @@ public class WebDriverFactory {
                 logger.debug("setRunDrivers");
             }
             logger.debug("Get '%s' driver", driverName);
-            WebDriver driver = null;
+            WebDriver driver;
             try {
                 driver = rDrivers.get(driverName);
             } catch (Throwable ex) {
