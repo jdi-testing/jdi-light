@@ -70,7 +70,7 @@ function archive() {
 
 function extractArchive() {
     file="$1"
-    tar -zxvf "${file}"
+    tar -zxf "${file}" # replace with '-zxvf' to show the progress of archive file.
 }
 
 function aboutTransfer() {
