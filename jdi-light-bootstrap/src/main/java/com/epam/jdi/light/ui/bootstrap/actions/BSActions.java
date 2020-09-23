@@ -24,17 +24,20 @@ public class BSActions {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
+        try {
+            logger.debug("BSActions.jdiAround(): " + getMethodName(jp));
+        } catch (Exception ignore) { }
         ActionObject jInfo = null;
         try {
             jInfo = newInfo(jp);
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
-                ? stableAction(jInfo)
-                : defaultAction(jInfo);
+                    ? stableAction(jInfo)
+                    : defaultAction(jInfo);
             return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
-            logger.debug("ActionProcessor exception:" + safeException(ex));
+            logger.debug("BSActions exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

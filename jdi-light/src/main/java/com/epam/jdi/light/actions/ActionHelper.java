@@ -123,34 +123,24 @@ public class ActionHelper {
         String filledTemplate = template;
         try {
             if (filledTemplate.contains("{0")) {
-                logger.debug("1");
                 Object[] args = getArgs(jp);
                 filledTemplate = msgFormat(filledTemplate, args);
             } else if (filledTemplate.contains("%s")) {
-                logger.debug("2");
                 filledTemplate = format(filledTemplate, getArgs(jp));
             }
             if (filledTemplate.contains("{")) {
-                logger.debug("3");
                 MapArray<String, Object> obj = new MapArray<>("this", getElementName(jp));
-                logger.debug("4");
                 MapArray<String, Object> args = methodArgs(jp, method);
-                logger.debug("5");
                 MapArray<String, Object> core = core(jp);
-                logger.debug("6");
                 MapArray<String, Object> fields = classFields(jp.getThis());
-                logger.debug("7");
                 MapArray<String, Object> methods = classMethods(jp.getThis());
-                logger.debug("8");
                 filledTemplate = getActionNameFromTemplate(method, filledTemplate, obj, args, core, fields, methods);
-                logger.debug("9");
                 if (filledTemplate.contains("{{VALUE}}") && args.size() > 0) {
                     filledTemplate = filledTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
                 }
                 if (filledTemplate.contains("{failElement}")) {
                     filledTemplate = filledTemplate.replaceAll("\\{failElement}", obj.get(0).value.toString());
                 }
-                logger.debug("10");
             }
             try {
                 logger.debug("fillTemplate() => " + filledTemplate);

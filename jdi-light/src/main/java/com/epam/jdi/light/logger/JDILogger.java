@@ -1,5 +1,6 @@
 package com.epam.jdi.light.logger;
 
+import com.epam.jdi.tools.FixedQueue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
@@ -29,8 +30,8 @@ import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
 public class JDILogger implements ILogger {
     private static MapArray<String, JDILogger> loggers = new MapArray<>();
     private static Marker jdiMarker = MarkerManager.getMarker("JDI");
-    public Safe<FixedQueue<String>> debugLog = new Safe<>(() -> new FixedQueue<>(debugLogSize));
-    public static int debugLogSize = 0;
+    public Safe<FixedQueue<String>> debugLog = new Safe<>(() -> new FixedQueue<>(debugBufferSize));
+    public static int debugBufferSize = 0;
 
     public static JDILogger instance(String name) {
         if (!loggers.has(name))
@@ -110,6 +111,8 @@ public class JDILogger implements ILogger {
     }
 
     public void throwDebugInfo() {
+        if (debugBufferSize == 0)
+            return;
         String prefix = multiThread.size() > 1 ? "[" + currentThread().getId() + "] " : "";
         logger.error(jdiMarker, prefix + "DEBUG INFO: " + LINE_BREAK + print(debugLog.get().values(), LINE_BREAK));
     }

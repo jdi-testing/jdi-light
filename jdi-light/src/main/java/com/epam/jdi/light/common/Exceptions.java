@@ -22,7 +22,10 @@ public class Exceptions {
 
     public static RuntimeException exception(Throwable ex, String msg, Object... args) {
         String message = args.length == 0 ? msg : format(msg, args);
-        WebSettings.logger.debug("ERROR: " + message + ". Exception: " + ex.getMessage());
+        String exMsg = ex.getMessage();
+        if (exMsg == null)
+            exMsg = ex.getCause().getMessage();
+        WebSettings.logger.debug("ERROR: " + message + ". Exception: " + exMsg);
         final Class exceptionClass = ex.getClass();
         if (isClass(AssertionError.class, exceptionClass))
             throw new AssertionError(message, ex);

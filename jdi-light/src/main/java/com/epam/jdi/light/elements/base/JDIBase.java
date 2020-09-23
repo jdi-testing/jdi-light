@@ -31,8 +31,7 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
-import static com.epam.jdi.light.settings.WebSettings.STRICT_SEARCH;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -233,7 +232,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public WebElement get(Object... args) {
         return ELEMENT.getElementWithArgs.execute(this, args);
     }
-    UIElement getWebListFromArgs(Object... args) {
+    UIElement getUIElementFromArgs(Object... args) {
         if (locator.argsCount() == 0 && args.length == 1) {
             if (args[0].getClass() == String.class)
                 return new WebList(this).get(args[0].toString());
@@ -244,19 +243,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     WebElement getCachedElement() {
         WebElement element = purify(webElement.get());
-        try {
-            element.getTagName();
-            if (locator.isNull())
-                return element;
-            return purify(getUIElementByLocator(element));
-        } catch (Exception ignore) {
-            if (getElementFunc == null) {
-                webElement.clear();
-                return null;
-            } else {
-                return webElement.set(purify(getElementFunc.execute()));
-            }
-        }
+        element.getTagName();
+        return element;
     }
     public Boolean strictSearch;
     public void strictSearch(boolean strictSearch) {
@@ -301,6 +289,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return getAllElements(args);
     }
     public List<WebElement> getAllElements(Object... args) {
+        logger.debug("getAllElements()");
         getDefaultContext();
         if (webElements.hasValue()) {
             List<WebElement> elements = map(webElements.get(), this::purify);
@@ -311,10 +300,14 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         }
         if (locator.isNull())
             return singletonList(beforeSearch(getSmart()));
+        return getAllElementsInContext(args);
+    }
+    protected List<WebElement> getAllElementsInContext(Object... args) {
         SearchContext searchContext = getContext(parent, locator);
         List<WebElement> result = uiSearch(searchContext, correctLocator(getLocator(args)));
         if (result.size() > 0)
             beforeSearch(result.get(0));
+        logger.debug("getAllElements(): " + result.size());
         return result;
     }
     public WebElement getFast() {

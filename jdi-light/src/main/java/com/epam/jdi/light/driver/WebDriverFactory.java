@@ -44,9 +44,13 @@ public class WebDriverFactory {
     }
     private static MapArray<String, WebDriver> getRunDrivers() {
         logger.debug("SINGLE_THREAD=" + SINGLE_THREAD);
-        return SINGLE_THREAD
+        MapArray<String, WebDriver> list = SINGLE_THREAD
             ? RUN_DRIVERS
             : THREAD_RUN_DRIVERS.get();
+        logger.debug(list.size()+"");
+        if (list.isNotEmpty())
+            logger.debug(list.get(0)+"");
+        return list;
     }
     private static void setRunDrivers(MapArray<String, WebDriver> map) {
         if (SINGLE_THREAD) {
@@ -56,21 +60,17 @@ public class WebDriverFactory {
         }
     }
     public static WebDriver getDriverByName(String driverName) {
-        logger.debug("getDriverByName(%s)", driverName);
-        Lock lock = new ReentrantLock();
-        if (!SWITCH_THREAD && INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
-            logger.debug("SWITCH_THREAD = true");
-            setRunDrivers(map($(driverName, INIT_DRIVER)));
-            SWITCH_THREAD = true;
-            return INIT_DRIVER;
-        }
-        if (!DRIVERS.has(driverName)) {
-            logger.debug("Has no driver");
-            useDriver(driverName);
-        }
         try {
-            lock.lock();
-            logger.debug("Lock");
+            logger.debug("getDriverByName(%s)", driverName);
+            if (switchToMultiThread()) {
+                logger.info("[MultiThread] Driver '%s': %s", driverName, INIT_DRIVER);
+                THREAD_RUN_DRIVERS.set(map($(driverName, INIT_DRIVER)));
+                return INIT_DRIVER;
+            }
+            if (!DRIVERS.has(driverName)) {
+                logger.debug("Has no driver");
+                useDriver(driverName);
+            }
             MapArray<String, WebDriver> rDrivers = getRunDrivers();
             if (rDrivers == null) {
                 logger.debug("rDrivers == null");
@@ -79,6 +79,7 @@ public class WebDriverFactory {
             if (!rDrivers.has(driverName)) {
                 logger.debug("rDrivers has no " + driverName);
                 WebDriver resultDriver = DRIVERS.get(driverName).invoke();
+                logger.info("Driver '%s': %s", driverName, resultDriver);
                 rDrivers.add(driverName, resultDriver);
                 setRunDrivers(rDrivers);
                 logger.debug("setRunDrivers");
@@ -90,8 +91,8 @@ public class WebDriverFactory {
             } catch (Throwable ex) {
                 if (driverDownloaded)
                     throw exception(ex, "Failed to run downloaded driver. Please check that your browser and driver are compatible or use local driver with 'drivers.folder' property in test.properties'." + LINE_BREAK
-                        + "Driver: " + downloadedDriverInfo + LINE_BREAK
-                        + "DriverPath: " + driverPath);
+                            + "Driver: " + downloadedDriverInfo + LINE_BREAK
+                            + "DriverPath: " + driverPath);
                 else throw exception(ex, "Failed to run driver");
             }
             logger.debug("Success: " + driver);
@@ -101,8 +102,8 @@ public class WebDriverFactory {
                 rDrivers.update(driverName, driver);
                 logger.debug("update rDrivers");
             }
-            if (!SWITCH_THREAD && INIT_THREAD_ID == currentThread().getId()) {
-                logger.debug("INIT_DRIVER = driver");
+            if (INIT_DRIVER == null) {
+                logger.debug("INIT_DRIVER: " + driver);
                 INIT_DRIVER = driver;
             }
             logger.debug("driver.manage().timeouts()");
@@ -111,8 +112,22 @@ public class WebDriverFactory {
         } catch (Throwable ex) {
             throw exception(ex, "Can't get driver; Thread: " + currentThread().getId() + LINE_BREAK +
                     format("Drivers: %s; Run: %s", DRIVERS, getRunDrivers()));
+        }
+    }
+
+    private static boolean switchToMultiThread() {
+        Lock locker = new ReentrantLock();
+        locker.lock();
+        try {
+            if (MULTITHREAD)
+                return false;
+            if (INIT_DRIVER != null && INIT_THREAD_ID != currentThread().getId()) {
+                MULTITHREAD = true;
+                return true;
+            }
+            return false;
         } finally {
-            lock.unlock();
+            locker.unlock();
         }
     }
 
@@ -167,8 +182,8 @@ public class WebDriverFactory {
     }
 
     public static long INIT_THREAD_ID = -1;
-    public static boolean SWITCH_THREAD = false;
-    public static WebDriver INIT_DRIVER;
+    public static boolean MULTITHREAD = false;
+    public static WebDriver INIT_DRIVER = null;
     public static WebDriver getDriver(String driverName) {
         return DRIVER.getFunc.execute(driverName);
     }
