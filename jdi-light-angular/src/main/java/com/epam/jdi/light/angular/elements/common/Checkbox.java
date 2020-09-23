@@ -17,6 +17,8 @@ import static com.epam.jdi.light.common.Exceptions.exception;
  */
 
 public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel, HasClick, HasCheck, CanBeSelected {
+    public static final String ARIA_CHECKED = "aria-checked";
+
     @JDIAction("Check '{name}'")
     @Override
     public void check() {
@@ -36,7 +38,8 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
     @JDIAction("Is '{name}' selected")
     @Override
     public boolean isSelected() {
-        return hasClass("mat-checkbox-checked") || attr("aria-checked").equals("true");
+        boolean attribute = hasAttribute(ARIA_CHECKED) && attr(ARIA_CHECKED).equals("true");
+        return hasClass("mat-checkbox-checked") || attribute || core().isSelected();
     }
 
     @JDIAction("Is '{name}' enabled")
@@ -79,7 +82,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
 
     @JDIAction("Is '{name}' indeterminate")
     public boolean isIndeterminate() {
-        return hasClass("mat-checkbox-indeterminate") || attr("aria-checked").equals("mixed");
+        return hasClass("mat-checkbox-indeterminate") || attr(ARIA_CHECKED).equals("mixed");
     }
 
     @Override
