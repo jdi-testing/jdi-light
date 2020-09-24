@@ -31,6 +31,7 @@ public class AngularPage extends WebPage {
     public static MenuSection menuSection;
     public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
+    public static TableSection tableSection;
     public static SliderSection sliderSection;
     public static CardSection cardSection;
     public static TooltipSection tooltipSection;
