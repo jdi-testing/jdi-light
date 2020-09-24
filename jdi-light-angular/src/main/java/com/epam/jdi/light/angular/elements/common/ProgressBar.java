@@ -14,10 +14,13 @@ import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 
 public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
+
     @JDIAction(value = "Get '{name}' max limit")
+
     public int max() {
         return getInt(uiElement.attr("aria-valuemax"));
     }
+
 
     @JDIAction(value = "Get '{name}' min limit")
     public int min() {

@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+
 import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
 import com.epam.jdi.light.angular.elements.complex.BottomSheet;
@@ -53,6 +54,7 @@ public class AngularPage extends WebPage {
     public static AutocompleteSection autocompleteSection;
     public static SnackbarSection snackbarSection;
     public static ButtonToggleSection buttonToggleSection;
+    public static ProgressBarSection progressBarSection;
     public static MenuSection menuSection;
     public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
@@ -64,5 +66,4 @@ public class AngularPage extends WebPage {
     public static SideNavSection sidenavSection;
     public static ExpansionPanelSection expansionPanelSection;
     public static SpinnerSection spinnerSection;
-    public static ProgressBarSection progressBarSection;
 }
