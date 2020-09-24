@@ -24,11 +24,6 @@
         <!--JDI-->
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-html</artifactId>
-            <version>1.2.19</version>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-mobile</artifactId>
             <version>1.2.19</version>
         </dependency>

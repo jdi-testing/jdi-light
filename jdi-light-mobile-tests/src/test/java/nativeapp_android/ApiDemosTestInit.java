@@ -1,11 +1,11 @@
 package nativeapp_android;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.init.PageFactory;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.android.apiDemos.ApiDemosApp;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
+
 
 import java.io.File;
 
@@ -23,7 +23,6 @@ public class ApiDemosTestInit {
         AppManager.installApp(path);
         AppManager.launchApp();
     }
-
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
         AppManager.resetApp();

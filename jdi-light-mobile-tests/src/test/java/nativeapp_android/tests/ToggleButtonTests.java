@@ -9,17 +9,23 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class ToggleButtonTest extends ApiDemosTestInit {
+public class ToggleButtonTests extends ApiDemosTestInit {
 
     @Test
-    public void toggleButtonTest() {
+    public void toggleButtonTests() {
         IndexPage.viewsPage.click();
         ViewsPage.buttonsPage.click();
+
         ButtonsPage.toggleButton.is().displayed();
         ButtonsPage.toggleButton.is().off();
+        ButtonsPage.toggleButton.is().text("OFF");
+
         ButtonsPage.toggleButton.setToOn();
         ButtonsPage.toggleButton.is().on();
+        ButtonsPage.toggleButton.is().text("ON");
+
         ButtonsPage.toggleButton.setToOff();
         ButtonsPage.toggleButton.is().off();
+        ButtonsPage.toggleButton.is().text("OFF");
     }
 }
