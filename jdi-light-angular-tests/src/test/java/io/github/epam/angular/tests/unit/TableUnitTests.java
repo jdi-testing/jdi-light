@@ -4,8 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.TableSection.basicTable;
 import static io.github.com.pages.sections.TableSection.flexTable;
@@ -31,11 +29,7 @@ public class TableUnitTests extends TestsInit {
     public void checkMatTablesTest() {
         int row = 3;
         basicTable.show();
-        List<String> baseHeader = basicTable.header();
-        List<String> flexHeader = flexTable.header();
-        assertEquals(baseHeader,flexHeader);
-        List<String> baseRow = flexTable.getRow(row).getValuesFast();
-        List<String> flexRow = flexTable.getRow(row).getValuesFast();
-        assertEquals(baseRow,flexRow);
+        assertEquals(basicTable.header(),flexTable.header());
+        assertEquals(basicTable.getRow(row).getValuesFast(),flexTable.getRow(row).getValuesFast());
     }
 }
