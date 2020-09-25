@@ -1,6 +1,7 @@
 package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.complex.ButtonToggle;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -18,8 +19,22 @@ public class TableSection {
             allCells = "mat-cell")
     public static Table flexTable;
 
-    @UI("#mat-button-toggle-group-font")
-    public static ButtonToggle addButton;
+    @UI("table-dynamic-columns-example > button:nth-child(2)")
+    public static UIElement addButton;
+    @UI("table-dynamic-columns-example > button:nth-child(3)")
+    public static UIElement removeButton;
+    @UI("table-dynamic-columns-example > button:nth-child(4)")
+    public static UIElement shuffleButton;
+
     @JTable(root = "table-dynamic-columns-example > table")
     public static Table dynamicTable;
+
+    @JTable(root = "table-expandable-rows-example > table")
+    public static Table expandableRowsTable;
+
+    @JTable(root = "table-filtering-example > table")
+    public static Table filteringTable;
+
+    @JTable(root = "table-footer-row-example > table")
+    public static Table tableWithFooter;
 }
