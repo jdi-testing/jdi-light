@@ -16,10 +16,10 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.asEntity;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -95,7 +95,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
         int i = list().startIndex;
         if (list().map.hasValue() && list().isActualMap()) {
             for (Pair<String, UIElement> pair : list().map.get().pairs) {
-                if (namesEqual(pair.key, name)) {
+                if (ELEMENT.namesEqual.execute(pair.key, name)) {
                     if (list().isActual(pair.value))
                         return i;
                     else break;
@@ -105,7 +105,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
         }
         for (UIElement element : list().elements(1)) {
             String title = elementTitle(element);
-            if (namesEqual(title, name))
+            if (ELEMENT.namesEqual.execute(title, name))
                 return i;
             i++;
         };

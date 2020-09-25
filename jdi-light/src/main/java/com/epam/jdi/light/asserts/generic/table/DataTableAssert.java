@@ -37,12 +37,12 @@ public class DataTableAssert<L extends PageObject, D>
      * @param condition to compare
      * @return DataTableAssert
      */
-    @JDIAction("Assert that '{name}' has rows that meet expected condition")
+    @JDIAction("Assert that '{name}' has at least one row that meet expected condition")
     public DataTableAssert<L, D> row(JFunc1<D,Boolean> condition) {
         jdiAssert(table().dataRow(condition), not(nullValue()));
         return this;
     }
-    @JDIAction("Assert that '{name}' has rows that meet expected condition")
+    @JDIAction("Assert that '{name}' has at least one that meet expected condition")
     public DataTableAssert<L, D> value(JFunc1<D,Boolean> condition, Row row) {
         jdiAssert(condition.execute(table().dataRow(row.getIndex(table().header()))), Matchers.is(true));
         return this;

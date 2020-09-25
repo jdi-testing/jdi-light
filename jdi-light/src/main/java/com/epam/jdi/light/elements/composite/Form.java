@@ -24,12 +24,12 @@ import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
 
 /**
@@ -97,7 +97,7 @@ public class Form<T> extends Section {
         for (Pair<String, String> pair : map) {
             Field setField = null;
             try {
-                setField = first(allFields, f -> namesEqual(pair.key, getElementName(f)));
+                setField = first(allFields, f -> ELEMENT.namesEqual.execute(pair.key, getElementName(f)));
                 if (setField == null)
                     continue;
                 fillAction(setField, getValueField(setField, pageObject), pageObject, pair.value);
@@ -153,7 +153,7 @@ public class Form<T> extends Section {
         List<String> compareFalse = new ArrayList<>();
         for (Field field : allFields()) {
             String fieldValue = map.firstValue((name, value) ->
-                    namesEqual(name, getElementName(field)));
+                    ELEMENT.namesEqual.execute(name, getElementName(field)));
             if (fieldValue == null) continue;
             String actual = getAction(field, getValueField(field, pageObject), pageObject);
             if (!actual.equals(fieldValue))

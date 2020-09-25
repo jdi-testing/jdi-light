@@ -47,7 +47,6 @@ import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Collections.max;
@@ -182,12 +181,12 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
 
     protected boolean hasKey(String value) {
-        if (map.hasValue() && any(map.get().keys(), key -> namesEqual(key, value)))
+        if (map.hasValue() && any(map.get().keys(), key -> ELEMENT.namesEqual.execute(key, value)))
             return isActual(getByKey(value));
         return false;
     }
     protected UIElement getByKey(String value) {
-        return map.get().first((key,v) -> namesEqual(key, value)).value;
+        return map.get().first((key,v) -> ELEMENT.namesEqual.execute(key, value)).value;
     }
     /**
      * @param value
@@ -224,14 +223,14 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             for (UIElement element : elements(1)) {
                 String name = getElementName(element);
                 nameElement.add(name, element);
-                if (namesEqual(name, value))
+                if (ELEMENT.namesEqual.execute(name, value))
                     return element;
             }
             return null;
         } finally {
             if (map.hasValue()) {
                 for (Pair<String, UIElement> pair : map.get())
-                    if (!any(nameElement.keys(), name -> namesEqual(name, pair.key)))
+                    if (!any(nameElement.keys(), name -> ELEMENT.namesEqual.execute(name, pair.key)))
                         nameElement.add(pair);
             }
             map.set(nameElement);

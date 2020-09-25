@@ -23,8 +23,8 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.ReflectionUtils.create;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
 import static java.util.Arrays.asList;
 
@@ -41,6 +41,9 @@ public class Line implements IList<String>, IBaseElement {
     }
 
     public Line() {}
+    public Line(List<String> headers, List<WebElement> elements) {
+        this(headers, new WebList(elements));
+    }
     public Line(List<String> headers, WebList elements) {
         this.elements = elements;
         this.headers = headers;
@@ -79,8 +82,11 @@ public class Line implements IList<String>, IBaseElement {
     public List<String> elements(int minAmount) {
         return getData(minAmount).values();
     }
-    public MultiMap<String, UIElement> uiElements() {
+    public MultiMap<String, UIElement> uiMap() {
         return new MultiMap<>(headers, elements.indexFromZero()).ignoreKeyCase();
+    }
+    public WebList uiElements() {
+        return elements;
     }
     public void saveCellsImages() {
         String unique = Timer.nowMSecs();
@@ -95,9 +101,9 @@ public class Line implements IList<String>, IBaseElement {
         elements = new WebList(headers, result);
     }
     public boolean visualCompareTo(Line line) {
-        for (Pair<String, UIElement> cell : uiElements())
+        for (Pair<String, UIElement> cell : uiMap())
             try {
-                cell.value.visualValidation(line.uiElements().get(cell.key));
+                cell.value.visualValidation(line.uiMap().get(cell.key));
             } catch (Exception ex) { return false; }
         return true;
     }
@@ -129,7 +135,7 @@ public class Line implements IList<String>, IBaseElement {
         int i = 0;
         List<Field> fields = asList(data.getDeclaredFields());
         for (String name : headers) {
-            Field field = LinqUtils.first(fields, f -> namesEqual(getElementName(f), name));
+            Field field = LinqUtils.first(fields, f -> ELEMENT.namesEqual.execute(getElementName(f), name));
             if (field != null)
                 try {
                     setPrimitiveField(field, instance, line.getList(i).get(i));
@@ -143,7 +149,7 @@ public class Line implements IList<String>, IBaseElement {
     protected static <D> D getLineInstance(D instance, MapArray<String, String> line) {
         for (Pair<String, String> cell : line) {
             Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
-                    f -> namesEqual(getElementName(f), cell.key));
+                    f -> ELEMENT.namesEqual.execute(getElementName(f), cell.key));
             if (field == null) continue;
             try {
                 setPrimitiveField(field, instance, cell.value);
@@ -159,7 +165,7 @@ public class Line implements IList<String>, IBaseElement {
             for (int i = 1; i <= headers.size(); i++) {
                 String header = headers.get(i-1);
                 Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
-                        f -> namesEqual(getElementName(f), header));
+                        f -> ELEMENT.namesEqual.execute(getElementName(f), header));
                 if (field == null) continue;
                 try {
                     IBaseElement ui = ((IBaseElement)field.get(instance));

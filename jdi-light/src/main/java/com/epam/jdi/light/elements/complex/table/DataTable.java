@@ -5,7 +5,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
+import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -21,6 +23,8 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -155,11 +159,22 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get first '{name}' table row that match criteria")
     public D dataRow(JFunc1<D, Boolean> matcher) {
         hasDataClass();
-        for (int i = 1; i <= count(); i++) {
-            D data = dataRow(i);
-            if (matcher.execute(data))
-                return data;
+        if (datas.isGotAll()) {
+            Pair<String, D> dataRow = datas.get().first(matcher);
+            if (dataRow != null)
+                return dataRow.value;
         }
+        refresh();
+        getTable();
+        int count = count();
+        logger.debug("Count: " + count);
+        for (int i = 1; i <= count; i++) {
+            D dataRow = dataRow(i);
+            datas.get().add(i+"", dataRow);
+            if (matcher.execute(dataRow))
+                return dataRow;
+        }
+        datas.gotAll();
         return null;
     }
 
@@ -170,11 +185,23 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
      */
     @JDIAction("Get first '{name}' table row that match criteria")
     public L line(JFunc1<D, Boolean> matcher) {
-        hasLineClass();
-        for (int i = 1; i <= count(); i++) {
-            if (matcher.execute(dataRow(i)))
+        hasDataClass();
+        if (datas.isGotAll()) {
+            int index = datas.get().firstIndex(matcher);
+            if (index != -1)
+                return line(getRowIndex(index));
+        }
+        refresh();
+        getTable();
+        int count = count();
+        logger.debug("Count: " + count);
+        for (int i = 1; i <= count; i++) {
+            D dataRow = dataRow(i);
+            datas.get().add(i+"", dataRow);
+            if (matcher.execute(dataRow))
                 return line(i);
         }
+        datas.gotAll();
         return null;
     }
 
@@ -242,7 +269,6 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         hasLineClass();
         return map(rows(matchers), l -> l.asLine(lineClass));
     }
-
     /**
      * Get all table rows
      * @return List
@@ -252,7 +278,9 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         hasDataClass();
         if (datas.isGotAll()) return datas.get().values();
         MapArray<String, D> result = new MapArray<>();
-        for (int i = 1; i <= count(); i++)
+        int count = count();
+        logger.debug("Count: " + count);
+        for (int i = 1; i <= count; i++)
             result.update(i+"", dataRow(i));
         datas.gotAll();
         return datas.set(result).values();
@@ -414,7 +442,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         Field[] lineFields = line.getClass().getDeclaredFields();
         for (Field lineField : lineFields) {
             for (Field dataField : dataFields) {
-                if (namesEqual(getElementName(lineField), getElementName(dataField))) {
+                if (ELEMENT.namesEqual.execute(getElementName(lineField), getElementName(dataField))) {
                     Object lineFieldValue;
                     try {
                         lineFieldValue = lineField.get(line);
@@ -439,6 +467,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         super.refresh();
         datas.clear();
         lines.clear();
+
     }
     public void offCache() {
         super.offCache();

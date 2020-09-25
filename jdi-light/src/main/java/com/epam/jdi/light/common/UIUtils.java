@@ -23,6 +23,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
@@ -81,7 +82,7 @@ public final class UIUtils {
             if (fields.size() >= 1) {
                 Collection<IClickable> buttons = select(fields,
                     f -> (IClickable) getValueField(f, obj));
-                IClickable button = first(buttons, b -> namesEqual(toButton(((INamed) b).getName()), toButton(buttonName)));
+                IClickable button = first(buttons, b -> ELEMENT.namesEqual.execute(toButton(((INamed) b).getName()), toButton(buttonName)));
                 if (button != null)
                     return button;
             }
@@ -105,7 +106,7 @@ public final class UIUtils {
             List<Field> dataFields = getFields(data, String.class);
             foreach(getFields(obj, HasValue.class), item -> {
                 Field field = first(dataFields, f ->
-                        namesEqual(getElementName(f), getElementName(item)));
+                        ELEMENT.namesEqual.execute(getElementName(f), getElementName(item)));
                 if (field == null)
                     return;
                 try {
