@@ -58,16 +58,15 @@ public class TableUnitTests extends TestsInit {
     }
 
     @Test
-    public void expandableTablesTest() {
-        int row = 1;
-        int idx = 2;
+    public void expandableRowsTableTest() {
+       int idx = 2;
         expandableRowsTable.show();
-        for (int nn = 0; nn < chemElements.length; nn++) {
-            row = expandableRowsTable.getRowIndexByName(chemElements[nn]);
-            System.out.println(chemElements[nn]);
+        for (String nameElement: chemElements) {
+            int row = expandableRowsTable.getRowIndexByName(nameElement);
+            System.out.println(nameElement);
             expandableRowsTable.getRow(row).getFast().click();
             String[] info = expandableRowsTable.getRow(row+1).getValue().split("\n",5);
-            assertEquals(info[idx],chemElements[nn]);
+            assertEquals(info[idx],nameElement);
         }
     }
 
