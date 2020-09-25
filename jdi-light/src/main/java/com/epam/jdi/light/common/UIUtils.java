@@ -27,7 +27,8 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
+import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

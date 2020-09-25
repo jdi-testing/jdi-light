@@ -2,7 +2,6 @@ package com.epam.jdi.light.asserts.generic.table;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.complex.table.Column;
 import com.epam.jdi.light.elements.complex.table.IGrid;
 import com.epam.jdi.light.elements.complex.table.Line;
 import com.epam.jdi.tools.LinqUtils;
@@ -16,7 +15,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.LinqUtils.isSorted;
 import static com.epam.jdi.tools.LinqUtils.map;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItem;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
 

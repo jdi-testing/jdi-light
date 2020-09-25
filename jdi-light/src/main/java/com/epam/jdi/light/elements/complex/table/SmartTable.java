@@ -4,12 +4,6 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static java.lang.String.format;
-
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
