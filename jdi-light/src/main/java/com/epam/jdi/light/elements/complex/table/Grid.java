@@ -7,14 +7,18 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
+import org.apache.commons.lang3.ObjectUtils;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static com.epam.jdi.tools.LinqUtils.toList;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -33,10 +37,48 @@ public class Grid extends UIBaseElement<ITableAssert<?,?>>
     protected List<String> header = null;
     protected int size = -1;
     protected int count = -1;
+    protected List<Integer> columnsMapping;
+    protected boolean columnsValidated = false;
+    protected boolean locatorsValidated = false;
 
     public WebList webCells() {
         return core().finds(allCellsLocator)
             .setName(getName() + " webCells");
+    }
+    @Override
+    public UIElement core() {
+        UIElement core = super.core();
+        if (!locatorsValidated) {
+            validateLocators(core);
+            locatorsValidated = true;
+        }
+        return core;
+    }
+    protected void validateLocators(UIElement core) {
+        if (core.find("th").isExist()) {
+            headerLocator = "th";
+        }
+        if (core.find("tbody").isExist()) {
+            allCellsLocator = "tbody td";
+            cellTemplate = "//tbody//tr[{1}]/td[{0}]";
+            columnTemplate = "//tbody//tr/td[%s]";
+            rowTemplate = "//tbody//tr[%s]/td";
+        }
+    }
+    protected int getColumnIndex(int index) {
+        if (!columnsValidated) {
+            validateColumns();
+        }
+        return ObjectUtils.isEmpty(columnsMapping)
+            ? index : columnsMapping.get(index-1);
+    }
+    @Override
+    public int count() {
+        return count > -1 ? count : webColumn(1).size();
+    }
+    @Override
+    public int size() {
+        return size > -1 ? size : IGrid.super.size();
     }
     @Override
     public UIElement webCell(int colNum, int rowNum) {
@@ -45,15 +87,25 @@ public class Grid extends UIBaseElement<ITableAssert<?,?>>
     }
     @Override
     public WebList webColumn(int colNum) {
-        validateColumnIndex(colNum) ;
-        return core().finds(columnTemplate, colNum)
+        int index = getColumnIndex(colNum);
+        validateColumnIndex(index) ;
+        return core().finds(columnTemplate, index)
             .setName(getName() + " webColumn");
     }
     @Override
     public WebList webRow(int rowNum) {
-        validateRowIndex(rowNum) ;
+        validateRowIndex(rowNum);
         return core().finds(rowTemplate, rowNum)
             .setName(getName() + " webRow");
+        // if (rowNum == 1 && rowTemplate.equals("//tr[%s]/td") && webRow.size() != size() && core().find("tbody").isExist()) {
+        //     rowTemplate = "//tbody//tr[%s]/td";
+        //     columnTemplate = "//tbody//tr[%s]/td";
+        //     rowTemplate = "//tbody//tr[%s]/td";
+        //     return core().finds(rowTemplate, rowNum)
+        //             .setName(getName() + " webRow");
+        // } else {
+        //     return webRow;
+        // }
     }
     @Override
     public WebList headerUI() {
@@ -65,7 +117,6 @@ public class Grid extends UIBaseElement<ITableAssert<?,?>>
         return core().finds(footerLocator)
             .setName(getName() + " footerUI");
     }
-
 
     @Override
     public void setup(Field field) {
@@ -88,8 +139,15 @@ public class Grid extends UIBaseElement<ITableAssert<?,?>>
             this.headerLocator = j.headers();
         if (!j.footer().equals("tfoot") || !this.footerLocator.equals("tfoot"))
             this.footerLocator = j.footer();
-        if (header.size() > 0)
+        if (header.size() > 0) {
             this.header = header;
+            this.size = header.size();
+        }
+        if (j.columnsMapping().length > 0) {
+            this.columnsMapping = toList(j.columnsMapping());
+            this.size = j.columnsMapping().length;
+            this.columnsValidated = true;
+        }
         if (j.size() != -1)
             this.size = j.size();
         if (j.count() != -1)
@@ -109,6 +167,29 @@ public class Grid extends UIBaseElement<ITableAssert<?,?>>
     protected void validateRowIndex(int rowNum) {
         if (rowNum < 1)
             throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
+    }
+    protected void validateColumns() {
+        try {
+            WebList header = headerUI();
+            List<WebElement> visibleHeader = header.getAll();
+            List<WebElement> fullHeader = header.getWebElements();
+            if (visibleHeader.size() < fullHeader.size()) {
+                columnsMapping = new ArrayList<>();
+                int j = 0;
+                String visibleValue = visibleHeader.get(j++).getText();
+                for (int i = 0; i < fullHeader.size(); i++) {
+                    String fullValue = fullHeader.get(i).getText();
+                    if (fullValue.equals(visibleValue)) {
+                        columnsMapping.add(i + 1);
+                        if (j < visibleHeader.size())
+                            visibleValue = visibleHeader.get(j++).getText();
+                    }
+                }
+            }
+            columnsValidated = true;
+        } catch (Exception ex) {
+            throw exception(ex, "Column validation failed. Please correct header locator or just setup correct 'columnsMapping' in @JTable");
+        }
     }
     // endregion
 }

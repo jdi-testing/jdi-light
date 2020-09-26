@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.complex.table;
 
+import com.epam.jdi.light.elements.complex.table.Line;
 import io.github.com.entities.Furniture;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -10,6 +11,7 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static io.github.com.StaticSite.tablePage;
+import static io.github.com.pages.SimpleTablePage.*;
 import static io.github.com.pages.SimpleTablePage.furnitureSharp;
 import static io.github.epam.html.tests.elements.complex.table.TableDataProvider.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -27,10 +29,35 @@ public class GridSharpTests implements TestsInit {
     }
 
     @Test
-    public void tableParamsTest() {
+    public void webCellsTest() {
+        assertEquals(furnitureSharp.webCells().size(), 20);
+    }
+    @Test
+    public void sizeTest() {
         assertEquals(furnitureSharp.size(), 4);
+    }
+    @Test
+    public void countTest() {
         assertEquals(furnitureSharp.count(), 5);
+    }
+    @Test
+    public void columnsTest() {
+        List<Line> columns = furnitureSharp.columns();
+        assertEquals(columns.size(), 4);
+        assertEquals(columns.get(0).size(), 5);
+    }
+    @Test
+    public void rowsTest() {
+        List<Line> rows = furnitureSharp.rows();
+        assertEquals(rows.size(), 5);
+        assertEquals(rows.get(0).size(), 4);
+    }
+    @Test
+    public void headerTest() {
         assertEquals(furnitureSharp.header(), asList("Name", "Type", "Cost *", "#"));
+    }
+    @Test
+    public void rowHeaderTest() {
         assertEquals(furnitureSharp.rowHeader(), asList("1", "2", "3", "4", "5"));
     }
 

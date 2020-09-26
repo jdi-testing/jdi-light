@@ -31,8 +31,8 @@ public class HtmlActions {
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
-                    ? stableAction(jInfo)
-                    : defaultAction(jInfo);
+                ? stableAction(jInfo)
+                : defaultAction(jInfo);
             return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
             logger.debug("HtmlActions exception:" + safeException(ex));

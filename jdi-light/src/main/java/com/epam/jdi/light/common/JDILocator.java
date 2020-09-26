@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.elements.base.JdiSettings.addTextToXPath;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -80,7 +81,7 @@ public class JDILocator {
             : format("(%s)[%s]", getByLocator(byLocator), index);
     }
     public String addText(String text) {
-        return format("(%s)[.='%s']", getByLocator(byLocator), text);
+        return addTextToXPath(byLocator, text);
     }
     public int argsCount() {
         return byLocator != null

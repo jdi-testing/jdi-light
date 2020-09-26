@@ -82,9 +82,12 @@ public class UIElement extends JDIBase
         setName(name);
     }
     public UIElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
+        this(base, el);
+        setGetFunc(func);
+    }
+    public UIElement(JDIBase base, WebElement el) {
         super(base);
         setWebElement(el);
-        setGetFunc(func);
     }
     //endregion
 

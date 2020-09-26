@@ -2,6 +2,7 @@ package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.*;
+import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -16,9 +17,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,10 +34,13 @@ import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.common.SetTextTypes.CLEAR_SEND_KEYS;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.common.UseSmartSearch.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
+import static com.epam.jdi.light.elements.base.JdiSettings.getContext;
+import static com.epam.jdi.light.elements.base.JdiSettings.getWebElementFromContext;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
@@ -116,18 +118,14 @@ public class WebSettings {
                 break;
         }
         String locatorName = ELEMENT.smartName.value.execute(el.getName());
-        return el.base().timer().getResult(() -> {
-            String locator = format(ELEMENT.smartTemplate, locatorName);
-            UIElement ui = (ELEMENT.smartTemplate.equals("#%s")
-                ? $(locator)
-                : $(locator, el.base().parent))
-                    .setup(e -> e.setName(el.getName()).noWait());
-            try {
-                return ui.getWebElement();
-            } catch (Exception ignore) {
-                throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
-            }
-        });
+        By locator = defineLocator(format(ELEMENT.smartTemplate, locatorName));
+        try {
+            return ELEMENT.smartTemplate.equals("#%s")
+                ? el.base().driver().findElement(locator)
+                : getWebElementFromContext(el.base(), locator);
+        } catch (Exception ignore) {
+            throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
+        }
     };
     private static void fillAction(JAction1<String> action, String name) {
         String prop = null;

@@ -79,7 +79,7 @@ public interface IGrid extends IBaseElement, HasValue, IsText {
         return map(rows(), r -> r.asLine(cl));
     }
     default List<Line> rows() {
-        List<WebElement> webCells = webCells().getAllElements();
+        List<WebElement> webCells = webCells().getAll();
         List<Line> rows = new ArrayList<>();
         int k = 0;
         int i = 0;
@@ -130,7 +130,7 @@ public interface IGrid extends IBaseElement, HasValue, IsText {
         return column(getEnumValue(colName));
     }
     default List<Line> columns() {
-        List<WebElement> webCells = webCells().getAllElements();
+        List<WebElement> webCells = webCells().getAll();
         List<Line> columns = new ArrayList<>();
         int size = size();
         List<List<WebElement>> webColumns = new ArrayList<>();
@@ -140,7 +140,7 @@ public interface IGrid extends IBaseElement, HasValue, IsText {
         int k = 0;
         int i = 0;
         while (k < webCells.size()) {
-            webColumns.get(i).add(webCells().get(k++));
+            webColumns.get(i).add(webCells.get(k++));
             i = i == size - 1 ? 0 : i+1;
         }
         List<String> header = rowHeader();

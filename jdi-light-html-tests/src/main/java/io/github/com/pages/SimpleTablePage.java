@@ -24,12 +24,13 @@ public class SimpleTablePage extends WebPage {
 
     public static Grid products;
 
-    @JTable(root = "#products-2",
-            headers = "thead td",
-            column = "//tbody/tr/td[%s]",
-            row = "//tbody/tr[%s]/td",
-            cell = "//tbody/tr[{1}]/td[{0}]",
-            allCells = "tbody td")
+    // @JTable(root = "#products-2",
+    //         headers = "thead td",
+    //         column = "//tbody/tr/td[%s]",
+    //         row = "//tbody/tr[%s]/td",
+    //         cell = "//tbody/tr[{1}]/td[{0}]",
+    //         allCells = "tbody td")
+    @UI("#products-2")
     public static Grid productsJTable;
     @UI("#products")
     public static DataGrid<?, Furniture> dataGridProducts;
@@ -44,10 +45,12 @@ public class SimpleTablePage extends WebPage {
     @UI("#furniture-sharp")
     public static DataGrid<?, Furniture> dataGridFurnitureSharp;
 
+    // @JTable(columnsMapping = {1, 2, 3, 5})
     public static Grid furnitureHidden;
     @UI("#furniture-hidden")
     public static DataGrid<?, Furniture> dataGridFurnitureHidden;
 
+    // @JTable(columnsMapping = {2, 3, 4, 6})
     public static Grid furnitureDoubleHidden;
     @UI("#furniture-double-hidden")
     public static DataGrid<?, Furniture> dataGridFurnitureDoubleHidden;

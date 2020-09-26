@@ -86,7 +86,6 @@ public class DataGrid<L extends PageObject, D> extends Grid
         }
     }
 
-    protected List<Integer> columnsMapping;
     public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
     protected WebList tryFilterHeader(WebList headerUI) {
         if (headerUI.size() < size) {
