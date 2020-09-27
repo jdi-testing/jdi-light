@@ -1,11 +1,7 @@
 package io.github.com.pages.sections;
 
-import com.epam.jdi.light.angular.elements.complex.ButtonToggle;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class TableSection {
 
@@ -20,22 +16,15 @@ public class TableSection {
             allCells = "mat-cell")
     public static Table flexTable;
 
-    @UI("table-dynamic-columns-example > button:nth-child(2)")
-    public static Button addButton;
-    @UI("table-dynamic-columns-example > button:nth-child(3)")
-    public static Button removeButton;
-    @UI("table-dynamic-columns-example > button:nth-child(4)")
-    public static Button shuffleButton;
-
-    @JTable(root = "table-dynamic-columns-example > table")
-    public static Table dynamicTable;
+    public static TableDynamicSection dynamicSection;
 
     @JTable(root = "table-expandable-rows-example > table")
     public static Table expandableRowsTable;
 
-    @JTable(root = "table-filtering-example > table")
-    public static Table filteringTable;
+    public static TableFilteringSection filteringSection;
 
     @JTable(root = "table-footer-row-example > table")
     public static Table tableWithFooter;
+
+    public static TableOverviewSection overviewSection;
 }

@@ -7,6 +7,10 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.sections.TableDynamicSection.*;
+import static io.github.com.pages.sections.TableFilteringSection.filter;
+import static io.github.com.pages.sections.TableFilteringSection.filteringTable;
+import static io.github.com.pages.sections.TableOverviewSection.*;
 import static io.github.com.pages.sections.TableSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
@@ -72,10 +76,29 @@ public class TableUnitTests extends TestsInit {
     @Test
     public void filteringTablesTest() {
         filteringTable.show();
+        int primaryTableRows = filteringTable.getColumn(1).size();
+        filter.sendKeys("en");
+        filteringTable.is().shown();
+        assertTrue(filteringTable.getColumn(1).size()<primaryTableRows);
     }
 
     @Test
     public void footerTablesTest() {
         tableWithFooter.show();
+        String[] total = tableWithFooter.footerUI().getValue().split(" ",2);
+        List<String> cost = tableWithFooter.getColumn(2).getValuesFast();
+        assertEquals(cost.get(cost.size()-1),total[1]);
+    }
+
+    @Test
+    public void sortingPaginationAndFilteringTest() {
+        overviewTable.show();
+        List<Integer> visiblePages = overviewPaginator.options();
+        int linesTable = visiblePages.get(2);
+        overviewFilter.sendKeys("Cora");
+        overviewTable.is().shown();
+        overviewPaginator.select(linesTable);
+        overviewTable.is().shown();
+        assertTrue(overviewTable.getColumn(1).size()<=linesTable);
     }
 }
