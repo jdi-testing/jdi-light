@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.table.ITableAssert;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.LinqUtils.toList;
 import static java.util.Arrays.asList;
@@ -48,17 +50,28 @@ public class Grid extends UIBaseElement<ITableAssert<?,?>>
     @Override
     public UIElement core() {
         UIElement core = super.core();
-        if (!locatorsValidated) {
-            validateLocators(core);
-            locatorsValidated = true;
+        if (hasRunDrivers() && !locatorsValidated) {
+            try {
+                locatorsValidated = true;
+                validateLocators(core);
+            } catch (Exception ex) {
+                locatorsValidated = false;
+            }
         }
         return core;
     }
     protected void validateLocators(UIElement core) {
-        if (core.find("th").isExist()) {
-            headerLocator = "th";
+        if (headerLocator.equals("th,thead td")) {
+            if (core.find("th").isExist()) {
+                headerLocator = "th";
+            } else {
+                if (core.find("thead").isNotExist()) {
+                    headerLocator = "//tr[1]//td";
+                }
+            }
         }
-        if (core.find("tbody").isExist()) {
+        if (core.find("tbody").isExist() && allCellsLocator.equals("td") && cellTemplate.equals("//tr[{1}]/td[{0}]")
+                && columnTemplate.equals("//tr/td[%s]") && rowTemplate.equals("//tr[%s]/td")) {
             allCellsLocator = "tbody td";
             cellTemplate = "//tbody//tr[{1}]/td[{0}]";
             columnTemplate = "//tbody//tr/td[%s]";
@@ -97,15 +110,6 @@ public class Grid extends UIBaseElement<ITableAssert<?,?>>
         validateRowIndex(rowNum);
         return core().finds(rowTemplate, rowNum)
             .setName(getName() + " webRow");
-        // if (rowNum == 1 && rowTemplate.equals("//tr[%s]/td") && webRow.size() != size() && core().find("tbody").isExist()) {
-        //     rowTemplate = "//tbody//tr[%s]/td";
-        //     columnTemplate = "//tbody//tr[%s]/td";
-        //     rowTemplate = "//tbody//tr[%s]/td";
-        //     return core().finds(rowTemplate, rowNum)
-        //             .setName(getName() + " webRow");
-        // } else {
-        //     return webRow;
-        // }
     }
     @Override
     public WebList headerUI() {

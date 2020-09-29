@@ -67,7 +67,7 @@ Feature: TestsWithName
     Then the "Name" is displayed
 
   Scenario: setText element
-    When input "simple text" in "#name[placeholder='Input name']"
+    When input "simple text" in "#your-name[placeholder='Input name']"
     Then the "Name" text equals to "simple text"
     When set text "Input text" in "Name"
     Then the "Name" text equals to "Input text"

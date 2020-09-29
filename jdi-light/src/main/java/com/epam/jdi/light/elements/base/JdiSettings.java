@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.JDILocator;
+import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
@@ -14,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -26,20 +28,24 @@ import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static java.util.Collections.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JdiSettings {
 
     public static JAction2<JDIBase, WebElement> VALIDATE_FOUND_ELEMENT = JdiSettings::validateFoundElement;
 
-    public static JFunc2<JDIBase, Object[], WebElement> GET_WITH_ARGS = (b, args) -> {
-        logger.debug("GET_WITH_ARGS");
-        WebElement element = getWithArgs(b, args);
+    public static JFunc2<JDIBase, Object[], WebElement> GET_WITH_ARGS = JdiSettings::getWithArgs;
+    public static JFunc2<JDIBase, Object[], WebElement> GET_AND_VALIDATE = (b, args) -> {
+        WebElement element = GET_WITH_ARGS.execute(b, args);
+        logger.trace("Validate:" + element);
         VALIDATE_FOUND_ELEMENT.execute(b, element);
         b.beforeSearch(element);
         return element;
     };
     private static WebElement getWithArgs(JDIBase b, Object[] args) {
+        logger.trace("getWithArgs");
         if (b.webElement.hasValue()) {
             WebElement webElement = null;
             try {
@@ -49,7 +55,7 @@ public class JdiSettings {
             if (webElement != null)
                 return webElement;
         }
-        if (b.locator.isNull())
+        if (b.locator.isNull() && b.parent == null)
             return b.getSmart();
         if (b.locator.argsCount() != args.length)
             return getUIElementFromArgs(b, args);
@@ -58,7 +64,7 @@ public class JdiSettings {
     }
 
     // region Utilities
-    private static WebElement filterWebListToWebElement(JDIBase base, List<WebElement> els) {
+    public static WebElement filterWebListToWebElement(JDIBase base, List<WebElement> els) {
         if (els.size() == 1)
             return els.get(0);
         if (els.isEmpty())
@@ -88,8 +94,8 @@ public class JdiSettings {
     }
     public static WebElement purify(WebElement element) {
         return isInterface(element.getClass(), IBaseElement.class)
-                ? ((IBaseElement)element).base().get()
-                : element;
+            ? ((IBaseElement)element).base().get()
+            : element;
     }
 
     private static void validateFoundElement(JDIBase base, WebElement element) {
@@ -149,17 +155,27 @@ public class JdiSettings {
         if (frames != null)
             return getFrameContext(base.driver(), frames);
         return locator.isRoot || isRoot(parent)
-                ? getDefaultContext(driver)
-                : getSearchContext(driver, parent);
+            ? getDefaultContext(driver)
+            : getSearchContext(driver, parent);
     }
 
     private static SearchContext getFrameContext(WebDriver driver, List<By> frames) {
-        for (By frame : frames)
-            try {
-                driver = driver.switchTo().frame(uiSearch(driver, getFrameLocator(frame, driver)).get(0));
-            } catch (Exception ex) {
-                throw exception(ex, "Can't find frame by locator: '%s'", frame);
+        getDefaultContext(driver);
+        for (By frame : frames) {
+            List<WebElement> els = uiSearch(driver, getFrameLocator(frame, driver));
+            WebElement frameElement;
+            if (els.size() > 0) {
+                frameElement = els.get(0);
+            } else {
+                throw exception("Can't find frame by locator: '%s'", frame);
             }
+            try {
+                driver = driver.switchTo().frame(frameElement);
+                logger.debug("Switch to frame: " + shortBy(frame));
+            } catch (Exception ex) {
+                throw exception(ex, "Can't switch to frame by locator: '%s'", frame);
+            }
+        }
         return driver;
     }
     private static By getFrameLocator(By frame, WebDriver driver) {
@@ -177,11 +193,13 @@ public class JdiSettings {
         if (locator == null) return null;
         return correctXPaths(locator);
     }
+    @JDebug
     public static List<WebElement> getAllElementsInContext(JDIBase base, Object... args) {
         SearchContext searchContext = getContext(base);
-        List<WebElement> result = uiSearch(searchContext, correctLocator(base.getLocator(args)));
-        logger.debug("getAllElements(): " + result.size());
-        return result;
+        By locator = base.getLocator(args);
+        return locator == null
+            ? singletonList(base.getSmart())
+            : uiSearch(searchContext, correctLocator(locator));
     }
     private static WebElement getUIElementFromArgs(JDIBase base, Object... args) {
         if (base.locator.argsCount() == 0 && args.length == 1) {
@@ -204,17 +222,12 @@ public class JdiSettings {
         }
         throw exception("Can't get element with template locator '%s'. Expected %s arguments but found %s",base. getLocator(), base.locator.argsCount(), args.length);
     }
-    /*
-        if (locator.isXPath())
-            return new UIElement(base(), locator.addText(value), nameFromValue(value), parent);
-        UIElement result = firstUIElement(value);
-        if (result == null)
-            throw exception("Failed to get '%s' in list '%s'. No elements with this name found", value, getName());
-        return result;
-    */
-    public static WebElement getWebElementFromContext(JDIBase base, By locator) {
+    public static List<WebElement> getWebElementsFromContext(JDIBase base, By locator) {
         SearchContext searchContext = getContext(base);
-        List<WebElement> result = uiSearch(searchContext, locator);
+        return uiSearch(searchContext, locator);
+    }
+    public static WebElement getWebElementFromContext(JDIBase base, By locator) {
+        List<WebElement> result = getWebElementsFromContext(base, locator);
         if (result.size() == 0)
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, base.getName(), base.getTimeout());
         return result.get(0);

@@ -19,25 +19,28 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 @Aspect
 public class BSActions {
 
-    @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
+    @Pointcut("within(com.epam.jdi.light.ui.bootstrap..*) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { }
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
         try {
-            logger.debug("BSActions.jdiAround(): " + getMethodName(jp));
+            logger.trace("<> BS: " + getMethodName(jp));
         } catch (Exception ignore) { }
         ActionObject jInfo = null;
         try {
-            jInfo = newInfo(jp);
+            jInfo = newInfo(jp, "BS");
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
-                    ? stableAction(jInfo)
-                    : defaultAction(jInfo);
-            return AFTER_JDI_ACTION.execute(jInfo, result);
+                ? stableAction(jInfo)
+                : defaultAction(jInfo);
+            logger.trace("<> BS: " + getMethodName(jp) + " >>> " +
+                (result == null ? "NO RESULT" : result));
+            AFTER_JDI_ACTION.execute(jInfo, result);
+            return result;
         } catch (Throwable ex) {
-            logger.debug("BSActions exception:" + safeException(ex));
+            logger.trace("BS exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

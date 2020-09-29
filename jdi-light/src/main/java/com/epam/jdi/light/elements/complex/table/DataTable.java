@@ -165,10 +165,8 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         refresh();
         getTable();
         int count = count();
-        logger.debug("Count: " + count);
         for (int i = 1; i <= count; i++) {
             D dataRow = dataRow(i);
-            datas.get().add(i+"", dataRow);
             if (matcher.execute(dataRow))
                 return dataRow;
         }
@@ -195,7 +193,6 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         logger.debug("Count: " + count);
         for (int i = 1; i <= count; i++) {
             D dataRow = dataRow(i);
-            datas.get().add(i+"", dataRow);
             if (matcher.execute(dataRow))
                 return line(i);
         }

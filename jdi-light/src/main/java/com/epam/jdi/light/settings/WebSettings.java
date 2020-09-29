@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
+import com.epam.jdi.light.elements.base.JdiSettings;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.HighlightStrategy;
@@ -15,10 +16,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.By;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,7 +38,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
-import static com.epam.jdi.light.elements.base.JdiSettings.getWebElementFromContext;
+import static com.epam.jdi.light.elements.base.JdiSettings.*;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.logger.Strategy.*;
@@ -74,7 +72,6 @@ public class WebSettings {
         return "No Domain Found. Use test.properties or JDISettings.DRIVER.domain";
     }
     public static void setDomain(String domain) {
-        logger.debug("DRIVER.domain = " + domain);
         DRIVER.domain = domain;
     }
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
@@ -118,10 +115,12 @@ public class WebSettings {
         }
         String locatorName = ELEMENT.smartName.value.execute(el.getName());
         By locator = defineLocator(format(ELEMENT.smartTemplate, locatorName));
+        SearchContext ctx = getDefaultContext(el.base().driver());
         try {
-            return ELEMENT.smartTemplate.equals("#%s")
-                ? el.base().driver().findElement(locator)
-                : getWebElementFromContext(el.base(), locator);
+            List<WebElement> elements = ELEMENT.smartTemplate.equals("#%s")
+                ? ctx.findElements(locator)
+                : getWebElementsFromContext(el.base(), locator);
+            return filterWebListToWebElement(el.base(), elements);
         } catch (Exception ignore) {
             throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
         }
@@ -131,7 +130,7 @@ public class WebSettings {
         try {
             prop = getProperty(name);
         } catch (Exception ignore) {}
-        logger.debug("fillAction(%s=%s)", name, prop == null ? "null" : prop);
+        logger.trace("fillAction(%s=%s)", name, prop == null ? "null" : prop);
         if (isBlank(prop)) return;
         action.execute(prop);
     }
@@ -140,7 +139,7 @@ public class WebSettings {
 
     public static synchronized void init() {
         if (initialized) return;
-        logger.debug("init()");
+        logger.trace("init()");
         try {
             Properties properties = getProperties(COMMON.testPropertiesPath);
             if (properties.isEmpty()) {

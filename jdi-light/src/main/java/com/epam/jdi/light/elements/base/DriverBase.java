@@ -84,8 +84,8 @@ public abstract class DriverBase implements JDIElement {
     public WebPage getPage() {
         if (pageName != null)
             return PAGES.keys().contains(pageName)
-                    ? PAGES.get(pageName)
-                    : null;
+                ? PAGES.get(pageName)
+                : null;
         if (parent == null) return null;
         if (isClass(parent.getClass(), WebPage.class))
             return (WebPage) parent;
@@ -98,10 +98,12 @@ public abstract class DriverBase implements JDIElement {
         return ((DriverBase)parent).getPage();
     }
     public boolean hasParent(String name) {
-        if (parent == null) return false;
+        if (parent == null)
+            return false;
         if (isClass(parent.getClass(), WebPage.class))
             return ((WebPage) parent).getName().equals(name);
-        if (!isClass(parent.getClass(), JDIBase.class)) return false;
-        return ((JDIBase)parent).hasParent(name);
+        if (isClass(parent.getClass(), JDIBase.class))
+            return ((JDIBase)parent).hasParent(name);
+        return false;
     }
 }

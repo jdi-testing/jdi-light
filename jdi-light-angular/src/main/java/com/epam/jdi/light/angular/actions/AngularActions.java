@@ -17,7 +17,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 @SuppressWarnings("unused")
 @Aspect
 public class AngularActions {
-    @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
+    @Pointcut("within(com.epam.jdi.light.angular..*) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() {
         // this method is created only for passing as a parameter in the annotation @Around
     }
@@ -25,19 +25,22 @@ public class AngularActions {
     @Around("jdiPointcut()")
     public Object jdiAround(final ProceedingJoinPoint jp) {
         try {
-            logger.debug("AngularActions.jdiAround(): " + getMethodName(jp));
+            logger.trace("<> Angular: " + getMethodName(jp));
         } catch (Exception ignore) { }
         ActionObject jInfo = null;
         try {
-            jInfo = newInfo(jp);
+            jInfo = newInfo(jp, "Angular");
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
-                    ? stableAction(jInfo)
-                    : defaultAction(jInfo);
-            return AFTER_JDI_ACTION.execute(jInfo, result);
+                ? stableAction(jInfo)
+                : defaultAction(jInfo);
+            logger.trace("<> Angular: " + getMethodName(jp) + " >>> " +
+                (result == null ? "NO RESULT" : result));
+            AFTER_JDI_ACTION.execute(jInfo, result);
+            return result;
         } catch (Throwable ex) {
-            logger.debug("AngularActions exception:" + safeException(ex));
+            logger.debug("Angular exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

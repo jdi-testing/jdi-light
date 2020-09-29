@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDILocator;
+import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -74,6 +75,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public WebList setup(JAction1<JDIBase> setup) {
         return setup(WebList.class, setup);
     }
+    @JDebug
     public List<WebElement> webElements() {
         if (isUseCache()) {
             if (map.hasValue())
@@ -469,7 +471,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public void refresh() {
         webElements.clear();
         map.clear();
-        webElement.clear();
     }
 
     /**

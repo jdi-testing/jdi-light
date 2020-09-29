@@ -18,6 +18,7 @@ import static com.epam.jdi.light.settings.WebSettings.STRICT_SEARCH;
 public enum Strategies {
     JDI_SMART(() -> {
         ELEMENT.getElementWithArgs = JdiSettings.GET_WITH_ARGS;
+        ELEMENT.getElementAndValidate = JdiSettings.GET_AND_VALIDATE;
         ELEMENT.clickType = ElementArea.SMART_CLICK;
         ELEMENT.getTextType = TextTypes.SMART_TEXT;
         ELEMENT.setTextType = SetTextTypes.SET_TEXT;
@@ -29,6 +30,7 @@ public enum Strategies {
     JDI(() -> {
         ELEMENT.clickType = ElementArea.CENTER;
         ELEMENT.getElementWithArgs = JdiSettings.GET_WITH_ARGS;
+        ELEMENT.getElementAndValidate = JdiSettings.GET_AND_VALIDATE;
         ELEMENT.getTextType = TextTypes.SMART_TEXT;
         ELEMENT.setTextType = SetTextTypes.CLEAR_SEND_KEYS;
         ELEMENT.searchRule = Pair.$("Visible", VISIBLE_ELEMENT);
@@ -37,6 +39,7 @@ public enum Strategies {
     }),
     SELENIUM(() -> {
         ELEMENT.getElementWithArgs = SeleniumSettings.GET_WITH_ARGS;
+        ELEMENT.getElementAndValidate = SeleniumSettings.GET_AND_VALIDATE;
         ELEMENT.clickType = ElementArea.CENTER;
         ELEMENT.getTextType = TextTypes.TEXT;
         ELEMENT.setTextType = SetTextTypes.SEND_KEYS;

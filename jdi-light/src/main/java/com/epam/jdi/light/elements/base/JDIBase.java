@@ -31,7 +31,6 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
@@ -118,10 +117,12 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         searchRules.add(name, rule);
         return this;
     }
+    @JDebug
     public JDIBase setWebElement(WebElement el) {
         webElement.setForce(el);
         return this;
     }
+    @JDebug
     public JDIBase setWebElements(List<WebElement> els) {
         webElements.setForce(els);
         return this;
@@ -185,11 +186,13 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public void visualCheck(String message) { }
 
     // Get Web Element without validations and wait
+    @JDebug
     public WebElement getWebElement() {
-        return noValidation(() -> noWait(() -> get(new Object[]{})));
+        return ELEMENT.getElementWithArgs.execute(this, new Object[]{});
     }
 
     // Get Web Element using Search Rules and wait
+    @JDebug
     public WebElement get() {
         return get(new Object[]{});
     }
@@ -198,14 +201,16 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         getElementFunc = func;
         return this;
     }
+    @JDebug
     public WebElement get(Object... args) {
-        return ELEMENT.getElementWithArgs.execute(this, args);
+        return ELEMENT.getElementAndValidate.execute(this, args);
     }
 
     protected Boolean strictSearch;
     public void strictSearch(boolean strictSearch) {
         this.strictSearch = strictSearch;
     }
+    @JDebug
     public WebElement getSmart() {
         try {
             WebElement element = SMART_SEARCH.execute(this);
@@ -217,50 +222,67 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         }
     }
     // Get all webElements
+    @JDebug
     public List<WebElement> getWebElements(Object... args) {
-        logger.debug("getAllElements()");
+        List<WebElement> elements = getAllWebElements(args);
+        if (elements.size() > 0) {
+            beforeSearch(elements.get(0));
+        }
+        return elements;
+    }
+    @JDebug
+    private List<WebElement> getAllWebElements(Object... args) {
         getDefaultContext(driver());
         if (webElements.hasValue()) {
             List<WebElement> elements = map(webElements.get(), JdiSettings::purify);
-            try {
-                beforeSearch(elements.get(0)).getTagName();
-                return elements;
-            } catch (Exception ignore) { webElements.clear(); }
+            if (elements.size() > 0) {
+                try {
+                    elements.get(0).getTagName();
+                    return elements;
+                } catch (Exception ignore) {
+                    webElements.clear();
+                }
+            }
         }
         if (locator.isNull())
-            return singletonList(beforeSearch(getSmart()));
-        List<WebElement> result = getAllElementsInContext(this, args);
-        if (result.size() > 0)
-            beforeSearch(result.get(0));
-        return result;
+            return singletonList(getSmart());
+        return getAllElementsInContext(this, args);
     }
+    @JDebug
     public List<WebElement> getAll(Object... args) {
         return filterElements(this, getWebElements(args));
     }
 
+    @JDebug
     public WebElement getFast() {
         return getEl(getContext(this));
     }
+    @JDebug
     public List<WebElement> getListFast() {
         return getEls(getContext(this));
     }
+    @JDebug
     public WebElement seleniumElement() {
         return getEl(driver());
     }
+    @JDebug
     public List<WebElement> seleniumList() {
         return getEls(driver());
     }
 
+    @JDebug
     private WebElement getEl(SearchContext ctx) {
         return ctx.findElement(correctXPaths(getLocator()));
     }
+    @JDebug
     private List<WebElement> getEls(SearchContext ctx) {
         return ctx.findElements(correctXPaths(getLocator()));
     }
 
+    @JDebug
     public List<WebElement> getList(int minAmount) {
         List<WebElement> result = timer().getResultByCondition(this::tryGetList,
-                els -> els.size() >= minAmount);
+            els -> els.size() >= minAmount);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
         return filterElements(this, result);

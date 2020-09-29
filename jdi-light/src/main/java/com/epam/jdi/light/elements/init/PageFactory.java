@@ -86,23 +86,23 @@ public class PageFactory {
     }
 
     public static void initJdiField(SiteInfo info) {
-        logger.debug("initJdiField");
+        logger.trace("initJdiField");
         if (info.type().isInterface())
             initUsingRules(info);
         else
             initWithConstructor(info);
     }
     public static void setupFieldUsingRules(SiteInfo info) {
-        logger.debug("setupFieldUsingRules");
+        logger.trace("setupFieldUsingRules");
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) -> r.condition.execute(info));
         if (setupRules.size() == 0)
             return;
         String ruleName = "UNDEFINED";
-        logger.debug("SETUP_RULES.count="+setupRules.size());
+        logger.trace("SETUP_RULES.count="+setupRules.size());
         try {
             for(Pair<String, SetupRule> rule : setupRules) {
                 ruleName = rule.key;
-                logger.debug("Use setupRule '%s'", ruleName);
+                logger.trace("Use setupRule '%s'", ruleName);
                 rule.value.action.execute(info);
             }
         } catch (Throwable ex) {
@@ -140,11 +140,11 @@ public class PageFactory {
         }
     }
     private static <T> T initUsingRules(SiteInfo info) {
-        logger.debug("initUsingRules");
+        logger.trace("initUsingRules");
         Pair<String, InitRule> firstRule = INIT_RULES.first((k,r) ->
                 r.condition.execute(info.field));
         if (firstRule != null) {
-            logger.debug("Use initRule: " + firstRule.key);
+            logger.trace("Use initRule: " + firstRule.key);
             try {
                 return (T)(info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
@@ -153,7 +153,6 @@ public class PageFactory {
             }
         }
         else {
-            logger.debug("No initRules found");
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
                             "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
                             "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
@@ -162,9 +161,9 @@ public class PageFactory {
     }
     private static void initWithConstructor(SiteInfo info) {
         try {
-            logger.debug("initWithConstructor");
+            logger.trace("initWithConstructor");
             info.instance = create(info.type());
-            logger.debug("new %s() success", info.type().getSimpleName());
+            logger.trace("new %s() success", info.type().getSimpleName());
         } catch (Throwable exception) {
             try {
                 String msg = safeException(exception);

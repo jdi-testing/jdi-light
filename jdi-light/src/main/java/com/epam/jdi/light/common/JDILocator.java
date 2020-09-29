@@ -13,8 +13,7 @@ import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.countMatches;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -44,8 +43,8 @@ public class JDILocator {
         this.args = args;
         if (args.length == 0) return byLocator;
         return args.length == 1
-                ? fillByTemplate(byLocator, args)
-                : fillByMsgTemplate(byLocator, args);
+            ? fillByTemplate(byLocator, args)
+            : fillByMsgTemplate(byLocator, args);
     }
     public boolean isNull() {
         return byLocator == null;
@@ -62,8 +61,6 @@ public class JDILocator {
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)
                 : locator;
-        // if (byLocator.toString().contains("By.cssSelector"))
-        //     byLocator = defineLocator(getByLocator(byLocator));
         this.element = element;
     }
     public void add(List<By> frames, JDIBase element) {
@@ -108,17 +105,20 @@ public class JDILocator {
     public String toString() {
         try {
             By locator = getLocator(args);
-            if (locator == null && element != null) {
+            String hasFrame = "";
+            if (hasFrame())
+                hasFrame = "Frame: " + print(map(frames, WebDriverByUtils::shortBy));
+            if (locator == null && isBlank(hasFrame) && element != null) {
                 if (element.webElement.hasValue() || element.webElements.hasValue())
                     return element.printWebElement();
                 if (isNotBlank(ELEMENT.smartTemplate))
                     return printSmartLocators(element);
                 return "";
             }
-            String hasFrame = "";
-            if (hasFrame())
-                hasFrame = "Frame: " + print(map(frames, WebDriverByUtils::shortBy));
-            return hasFrame + shortBy(locator, element).replaceAll("%s", "{{VALUE}}");
+            String locatorString = locator != null
+                ? ">" + shortBy(locator, element).replaceAll("%s", "{{VALUE}}")
+                : "";
+            return hasFrame + locatorString;
         } catch (Exception ex) { return "Can't print locator"; }
     }
 }

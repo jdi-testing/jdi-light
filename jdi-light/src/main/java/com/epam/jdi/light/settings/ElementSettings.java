@@ -22,6 +22,7 @@ import static com.epam.jdi.light.common.UseSmartSearch.UI_AND_ELEMENTS;
 public class ElementSettings {
     public JAction1<UIElement> beforeSearch;
     public JFunc2<JDIBase, Object[], WebElement> getElementWithArgs;
+    public JFunc2<JDIBase, Object[], WebElement> getElementAndValidate;
     public ElementArea clickType;
     public TextTypes getTextType;
     public SetTextTypes setTextType;

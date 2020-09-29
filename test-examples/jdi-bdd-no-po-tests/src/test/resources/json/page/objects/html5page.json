@@ -1,6 +1,6 @@
 {
   "Red Button": "[value*='Red Button']",
-  "Name": "#name",
+  "Name": "#your-name",
   "Logout": ".fa-sign-out",
   "Submit Button": "#contact-form [type=submit]"
 }

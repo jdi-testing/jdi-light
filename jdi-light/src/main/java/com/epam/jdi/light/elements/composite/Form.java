@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
@@ -43,10 +44,12 @@ public class Form<T> extends Section {
     public static JFunc3<Field, Object, Object, String> GET_ACTION = (field, element, parent)
         -> ((HasValue) element).getValue().trim();
 
+    @JDebug
     public void fillAction(Field field, Object element, Object parent, String setValue) {
         logger.debug("Fill element '%s' with value '%s'", getFieldName(field, element), setValue);
         FILL_ACTION.execute(field, element, parent, setValue);
     }
+    @JDebug
     public String getAction(Field field, Object element, Object parent) {
         logger.debug("Try to get element '%s' value", getFieldName(field, element));
         return GET_ACTION.execute(field, element, parent);
@@ -78,6 +81,7 @@ public class Form<T> extends Section {
      * @param map Specify entity as map
      *            Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity
      */
+    @JDebug
     public void fill(MapArray<String, String> map) {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {

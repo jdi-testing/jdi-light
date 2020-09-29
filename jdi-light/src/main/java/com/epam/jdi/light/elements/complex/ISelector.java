@@ -47,10 +47,14 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     @JDIAction("Is '{0}' selected")
     default boolean selected(int index) { return list().selected(index); }
     @JDIAction(level = DEBUG)
-    default List<String> values() { return list().values(); }
+    default List<String> values() {
+        WebList list = list();
+        return list.noValidation(list::values);
+    }
     @JDIAction(level = DEBUG)
     default List<String> values(TextTypes type) {
-        return list().values(type);
+        WebList list = list();
+        return list.noValidation(() -> list.values(type));
     }
     @JDIAction(level = DEBUG)
     default List<String> listEnabled() { return list().listEnabled(); }

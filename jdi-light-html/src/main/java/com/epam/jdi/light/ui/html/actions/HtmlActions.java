@@ -17,25 +17,28 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 @SuppressWarnings("unused")
 @Aspect
 public class HtmlActions {
-    @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
+    @Pointcut("within(com.epam.jdi.light.ui.html..*) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() { }
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
         try {
-            logger.debug("HtmlActions.jdiAround(): " + getMethodName(jp));
+            logger.trace("<> Html: " + getMethodName(jp));
         } catch (Exception ignore) { }
         ActionObject jInfo = null;
         try {
-            jInfo = newInfo(jp);
+            jInfo = newInfo(jp, "Html");
             failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
-            return AFTER_JDI_ACTION.execute(jInfo, result);
+            logger.trace("<> Html: " + getMethodName(jp) + " >>> " +
+                (result == null ? "NO RESULT" : result));
+            AFTER_JDI_ACTION.execute(jInfo, result);
+            return result;
         } catch (Throwable ex) {
-            logger.debug("HtmlActions exception:" + safeException(ex));
+            logger.trace("Html exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

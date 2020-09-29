@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.complex.table;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
@@ -157,7 +158,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      * Get table rows count
      * @return int
      */
-    @JDIAction("Get {name} rows count")
+    @JDIAction("Get '{name}' rows count")
     public int count() {
         return count.get();
     }
@@ -169,8 +170,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return header.size();
     }
     // Amount of columns
+    @JDebug
     public int size() { return size.get(); }
 
+    @JDebug
     public WebList webRow(int rowNum) {
         validateRowIndex(rowNum);
         if (rows.get().has(rowNum+""))
@@ -197,6 +200,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         //return webColumn(columnIndex).get(getRowIndexByName(rowName)).finds(fromCellToRow);
         return webColumn(columnIndex).get(jsRowIndexByName(rowName)).finds(fromCellToRow);
     }
+    @JDebug
     public WebList webRow(String rowName) {
         return webRow(getRowIndex(), rowName);
     }
@@ -204,9 +208,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         int headerIndex = getRowHeaderIndex();
         return headerIndex == -1 ? 1 : headerIndex;
     }
+    @JDebug
     public WebList webRow(Enum rowName) {
         return webRow(getEnumValue(rowName));
     }
+    @JDebug
     public WebList webColumn(int colNum) {
         validateColumnIndex(colNum) ;
         if (columns.get().has(colNum+""))
@@ -259,6 +265,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (colNum > size())
             throw exception("Table has %s columns (but requested index is %s)", size(), colNum);
     }
+    @JDebug
     public WebList webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
     }
@@ -278,6 +285,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             throw exception("Can't find row '%s'", rowName);
         return rowIndex + 1;
     }
+    @JDebug
     public UIElement webCell(int colNum, int rowNum) {
         validateColumnIndex(colNum);
         validateRowIndex(rowNum);
@@ -307,6 +315,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return row;
     }
 
+    @JDebug
     public WebList getRow(int rowNum) {
         WebList row = getRowByIndex(getRowIndex(rowNum));
         return firstColumnIndex > 1 || columnsMapping.length > 0
@@ -334,9 +343,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             return columnsMapping[index-1];
         return index;
     }
+    @JDebug
     public WebList getColumn(int colNum) {
         return $$(fillByTemplate(columnLocator, getColumnIndex(colNum)), this).noValidation();
     }
+    @JDebug
     public UIElement getCell(int colNum, int rowNum) {
         return $(fillByMsgTemplate(cellLocator, getColumnIndex(colNum), getRowIndex(rowNum)), this);
     }
@@ -362,6 +373,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         catch (Exception ignore) { }
         return !firstRow.isEmpty() && any(header(), firstRow::contains);
     }
+    @JDebug
     public WebList filter() {
         return $$(filterLocator).setup(b-> {
             b.setParent(this);

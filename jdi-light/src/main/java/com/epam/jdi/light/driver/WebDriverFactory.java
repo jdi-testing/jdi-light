@@ -40,16 +40,19 @@ public class WebDriverFactory {
         = new Safe<>(MapArray::new);
 
     public static boolean noRunDrivers() {
-        return !getRunDrivers().any();
+        return !hasRunDrivers();
+    }
+    public static boolean hasRunDrivers() {
+        return getRunDrivers().any();
     }
     private static MapArray<String, WebDriver> getRunDrivers() {
-        logger.debug("SINGLE_THREAD=" + SINGLE_THREAD);
+        logger.trace("SINGLE_THREAD=" + SINGLE_THREAD);
         MapArray<String, WebDriver> list = SINGLE_THREAD
             ? RUN_DRIVERS
             : THREAD_RUN_DRIVERS.get();
-        logger.debug(list.size()+"");
+        logger.trace("List size: " + list.size() + "");
         if (list.isNotEmpty())
-            logger.debug(list.get(0)+"");
+            logger.trace("Driver:" + list.get(0) + "");
         return list;
     }
     private static void setRunDrivers(MapArray<String, WebDriver> map) {
@@ -61,30 +64,30 @@ public class WebDriverFactory {
     }
     public static WebDriver getDriverByName(String driverName) {
         try {
-            logger.debug("getDriverByName(%s)", driverName);
+            logger.trace("getDriverByName(%s)", driverName);
             if (switchToMultiThread()) {
                 logger.info("[MultiThread] Driver '%s': %s", driverName, INIT_DRIVER);
                 THREAD_RUN_DRIVERS.set(map($(driverName, INIT_DRIVER)));
                 return INIT_DRIVER;
             }
             if (!DRIVERS.has(driverName)) {
-                logger.debug("Has no driver");
+                logger.trace("Has no driver");
                 useDriver(driverName);
             }
             MapArray<String, WebDriver> rDrivers = getRunDrivers();
             if (rDrivers == null) {
-                logger.debug("rDrivers == null");
+                logger.trace("rDrivers == null");
                 rDrivers = new MapArray<>();
             }
             if (!rDrivers.has(driverName)) {
-                logger.debug("rDrivers has no " + driverName);
+                logger.trace("rDrivers has no " + driverName);
                 WebDriver resultDriver = DRIVERS.get(driverName).invoke();
                 logger.info("Driver '%s': %s", driverName, resultDriver);
                 rDrivers.add(driverName, resultDriver);
                 setRunDrivers(rDrivers);
-                logger.debug("setRunDrivers");
+                logger.trace("setRunDrivers");
             }
-            logger.debug("Get '%s' driver", driverName);
+            logger.trace("Get '%s' driver", driverName);
             WebDriver driver;
             try {
                 driver = rDrivers.get(driverName);
@@ -97,16 +100,16 @@ public class WebDriverFactory {
             }
             logger.debug("Success: " + driver);
             if (driver.toString().contains("(null)")) {
-                logger.debug("driver contains (null)");
+                logger.trace("driver contains (null)");
                 driver = DRIVERS.get(driverName).invoke();
                 rDrivers.update(driverName, driver);
-                logger.debug("update rDrivers");
+                logger.trace("update rDrivers");
             }
             if (INIT_DRIVER == null) {
-                logger.debug("INIT_DRIVER: " + driver);
+                logger.trace("INIT_DRIVER: " + driver);
                 INIT_DRIVER = driver;
             }
-            logger.debug("driver.manage().timeouts()");
+            logger.trace("driver.manage().timeouts()");
             driver.manage().timeouts().implicitlyWait(0, SECONDS);
             return driver;
         } catch (Throwable ex) {

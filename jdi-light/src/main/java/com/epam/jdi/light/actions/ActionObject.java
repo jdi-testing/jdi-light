@@ -5,6 +5,8 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import org.aspectj.lang.JoinPoint;
@@ -19,6 +21,8 @@ import java.util.UUID;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.util.UUID.randomUUID;
 
@@ -26,13 +30,16 @@ public class ActionObject {
     private JoinPoint jp;
     private ProceedingJoinPoint pjp;
     private UUID uuid;
+    private String processor;
 
-    public ActionObject(JoinPoint joinPoint) {
+    public ActionObject(JoinPoint joinPoint, String name) {
         this.jp = joinPoint;
+        this.processor = name;
         baseInit();
     }
-    public ActionObject(ProceedingJoinPoint joinPoint) {
+    public ActionObject(ProceedingJoinPoint joinPoint, String name) {
         this.pjp = joinPoint;
+        this.processor = name;
         baseInit();
     }
     private void baseInit() {
@@ -72,7 +79,7 @@ public class ActionObject {
                     return element;
             }
             return null;
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             return null;
         }
     }
@@ -84,7 +91,7 @@ public class ActionObject {
                     return element;
             }
             return null;
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             return null;
         }
     }
@@ -155,16 +162,20 @@ public class ActionObject {
 
     @Override
     public String toString() {
-        String result = "AO:";
+        String result = processor;
         try {
-            result += "Class: " + className() + "; ";
-        } catch (Exception ignore) { }
+            result += "[" + aroundCount() + "]: ";
+        } catch (Throwable ignore) { }
         try {
-            result += "Method: " + methodName() + "; ";
-        } catch (Exception ignore) { }
+            result += className() + "." + methodName() + "(";
+            if (jp().getArgs().length > 0) {
+                result += print(map(jp().getArgs(), Object::toString));
+            }
+            result += "); ";
+        } catch (Throwable ignore) { }
         try {
             result += "Element: " + element().toString() + "; ";
-        } catch (Exception ignore) { }
+        } catch (Throwable ignore) { }
         return result;
     }
 }

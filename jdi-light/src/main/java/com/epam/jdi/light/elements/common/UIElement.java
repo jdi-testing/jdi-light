@@ -472,11 +472,10 @@ public class UIElement extends JDIBase
 
     @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
     public boolean isExist() {
-        return noWait(() -> {
-            try {
-                getWebElement(); return true;
-            } catch (Exception ignore) { return false; }
-        });
+        try {
+            getWebElement();
+            return true;
+        } catch (Exception ignore) { return false; }
     }
     @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)
     public boolean isNotExist() {

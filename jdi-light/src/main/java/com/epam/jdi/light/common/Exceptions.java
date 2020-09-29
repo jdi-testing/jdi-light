@@ -26,7 +26,7 @@ public class Exceptions {
         if (exMsg == null)
             exMsg = ex.getCause().getMessage();
         WebSettings.logger.debug("ERROR: " + message + ". Exception: " + exMsg);
-        final Class exceptionClass = ex.getClass();
+        final Class<?> exceptionClass = ex.getClass();
         if (isClass(AssertionError.class, exceptionClass))
             throw new AssertionError(message, ex);
         else if (isClass(exceptionClass, UnsupportedOperationException.class)) {

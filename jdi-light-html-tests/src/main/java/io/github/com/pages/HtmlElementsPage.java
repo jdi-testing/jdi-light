@@ -44,9 +44,9 @@ public class HtmlElementsPage extends WebPage {
     public static Link githubLink;
     // @UI("[ui=github-link]") public static Link gitHubLink;
 
-    public static TextField name;
+    public static TextField yourName;
     @WaitTimeout(2) public static TextField disabledName;
-    // @UI("#name") public static TextField name;
+    // @UI("#your-name") public static TextField yourName;
     // @UI("#disabled-name") public static TextField disabledName;
 
     public static TextArea textArea;

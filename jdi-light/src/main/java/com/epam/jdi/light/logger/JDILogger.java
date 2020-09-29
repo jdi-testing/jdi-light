@@ -160,6 +160,7 @@ public class JDILogger implements ILogger {
                 case STEP: step(msg); break;
                 case INFO: info(msg); break;
                 case DEBUG: debug(msg); break;
+                case TRACE: trace(msg); break;
                 case OFF: break;
                 default: throw new RuntimeException("Unknown log level: " + level);
             }

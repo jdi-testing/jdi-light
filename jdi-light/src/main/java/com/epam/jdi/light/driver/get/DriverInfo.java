@@ -47,7 +47,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
         return !DRIVER.remoteRun;
     }
     public WebDriver getDriver() {
-        logger.debug("getDriver(): " + toString());
+        logger.trace("getDriver(): " + toString());
         return isLocal()
             ? setupLocal()
             : setupRemote();
@@ -82,15 +82,15 @@ public class DriverInfo extends DataClass<DriverInfo> {
     private WebDriver setupLocal() {
         try {
             boolean emptyDriverPath = isBlank(DRIVER.path);
-            logger.debug("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
+            logger.trace("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
             String driverPath = emptyDriverPath
                 ? downloadDriver(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
             logger.info("Use driver path: " + driverPath);
-            logger.debug("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
+            logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
             Capabilities caps = getCapabilities();
-            logger.debug("getDriver.execute(getCapabilities())", caps);
+            logger.trace("getDriver.execute(getCapabilities())", caps);
             return getDriver.execute(caps);
         } catch (Throwable ex) {
             try {

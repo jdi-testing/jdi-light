@@ -10,6 +10,7 @@ import static io.github.com.StaticSite.iframe;
 import static io.github.com.pages.GithubPage.repoDescription;
 import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;
+import static io.github.epam.html.tests.site.steps.States.moveToHomePage;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
@@ -18,8 +19,7 @@ public class WindowsAndFramesTests implements TestsInit {
 
     @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
-        homePage.shouldBeOpened();
+        moveToHomePage();
     }
     @Test
     public void windowsTest() {
@@ -44,5 +44,9 @@ public class WindowsAndFramesTests implements TestsInit {
     @Test
     public void frameTest() {
         iframe.epamLogo.click();
+    }
+    @Test
+    public void frameByLocatorTest() {
+        iframe.epamLogoFrame.click();
     }
 }
