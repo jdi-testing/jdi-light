@@ -26,6 +26,7 @@ import io.github.com.pages.sections.SideNavSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
+import io.github.com.pages.sections.SortingOverviewSection;
 import io.github.com.pages.sections.SpinnerSection;
 import io.github.com.pages.sections.TabGroupSection;
 import io.github.com.pages.sections.ToolbarSection;
@@ -66,4 +67,5 @@ public class AngularPage extends WebPage {
     public static SideNavSection sidenavSection;
     public static ExpansionPanelSection expansionPanelSection;
     public static SpinnerSection spinnerSection;
+    public static SortingOverviewSection sortingOverviewSection;
 }
