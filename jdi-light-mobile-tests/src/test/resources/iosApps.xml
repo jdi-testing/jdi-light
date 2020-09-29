@@ -26,4 +26,9 @@
             <class name="nativeapp_ios.tests.SettingsAppTests"/>
         </classes>
     </test>
+    <test name="Photos app tests">
+        <classes>
+            <class name="nativeapp_ios.tests.PhotosAppTests"/>
+        </classes>
+    </test>
 </suite>
