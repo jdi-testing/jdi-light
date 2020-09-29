@@ -1,16 +1,12 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.angular.elements.common.*;
-import com.epam.jdi.light.angular.elements.complex.*;
-import com.epam.jdi.light.elements.composite.*;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
-import com.epam.jdi.light.ui.html.elements.common.*;
-import com.epam.jdi.light.angular.elements.common.ProgressSpinner;
+
 import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
 import com.epam.jdi.light.angular.elements.complex.BottomSheet;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
+import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
 import io.github.com.pages.sections.AutocompleteSection;
 import io.github.com.pages.sections.BadgeSection;
 import io.github.com.pages.sections.BasicButtonsSection;
@@ -23,12 +19,14 @@ import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.ListSection;
 import io.github.com.pages.sections.MenuSection;
 import io.github.com.pages.sections.PaginatorSection;
+import io.github.com.pages.sections.ProgressBarSection;
 import io.github.com.pages.sections.RadioButtonSection;
 import io.github.com.pages.sections.SelectSection;
 import io.github.com.pages.sections.SideNavSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
+import io.github.com.pages.sections.SpinnerSection;
 import io.github.com.pages.sections.TabGroupSection;
 import io.github.com.pages.sections.ToolbarSection;
 import io.github.com.pages.sections.TooltipSection;
@@ -37,7 +35,6 @@ import io.github.com.pages.sections.FormFieldsSection;
 
 public class AngularPage extends WebPage {
 
-    public static ProgressSpinner basicProgressSpinner;
     public static Icon basicIcon;
     public static Icon svgIcon;
     public static Ripple rippleContainer;
@@ -57,6 +54,7 @@ public class AngularPage extends WebPage {
     public static AutocompleteSection autocompleteSection;
     public static SnackbarSection snackbarSection;
     public static ButtonToggleSection buttonToggleSection;
+    public static ProgressBarSection progressBarSection;
     public static MenuSection menuSection;
     public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
@@ -67,4 +65,5 @@ public class AngularPage extends WebPage {
     public static FormFieldsSection formFieldsSection;
     public static SideNavSection sidenavSection;
     public static ExpansionPanelSection expansionPanelSection;
+    public static SpinnerSection spinnerSection;
 }
