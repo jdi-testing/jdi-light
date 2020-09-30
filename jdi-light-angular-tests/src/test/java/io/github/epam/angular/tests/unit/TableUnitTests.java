@@ -1,6 +1,9 @@
 package io.github.epam.angular.tests.unit;
 
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.tools.map.MapArray;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -20,6 +23,9 @@ import static io.github.com.pages.sections.TableSection.basicTable;
 import static io.github.com.pages.sections.TableSection.flexTable;
 import static io.github.com.pages.sections.TableSection.expandableRowsTable;
 import static io.github.com.pages.sections.TableSection.tableWithFooter;
+import static io.github.com.pages.sections.TableStickySection.stickyHeaderTable;
+import static io.github.com.pages.sections.TableStickySection.stickyColumnsTable;
+import static io.github.com.pages.sections.TableStickySection.stickyFooterTable;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
@@ -108,5 +114,32 @@ public class TableUnitTests extends TestsInit {
         overviewPaginator.select(linesTable);
         overviewTable.is().shown();
         assertTrue(overviewTable.getColumn(1).size()<=linesTable);
+    }
+
+    @Test
+    public void stickyHeaderTablesTest() {
+        stickyHeaderTable.show();
+        int rows = stickyHeaderTable.getColumn(1).size();
+        assertTrue(stickyHeaderTable.headerUI().isDisplayed());
+        stickyHeaderTable.getCell(stickyHeaderTable.getRow(rows).size(),rows).show();
+        assertTrue(stickyHeaderTable.headerUI().isDisplayed());
+    }
+
+    @Test
+    public void stickyColumnsTablesTest() {
+        stickyColumnsTable.show();
+        int rows = stickyColumnsTable.getColumn(1).size();
+        assertTrue(stickyColumnsTable.headerUI().isDisplayed());
+        stickyColumnsTable.getCell(stickyColumnsTable.getRow(rows).size()-1,rows).click();
+        assertTrue(stickyColumnsTable.getColumn(1).isDisplayed());
+    }
+
+    @Test
+    public void stickyFooterTablesTest() {
+        stickyFooterTable.show();
+        int rows = stickyFooterTable.getColumn(1).size();
+        assertTrue(stickyFooterTable.footerUI().isDisplayed());
+        stickyFooterTable.getCell(2,rows-1).show();
+        assertTrue(stickyFooterTable.footerUI().isDisplayed());
     }
 }
