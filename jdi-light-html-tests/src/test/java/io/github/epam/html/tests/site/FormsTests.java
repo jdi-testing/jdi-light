@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.is;
 public class FormsTests implements TestsInit {
 
     @Test
-    public void aLoginTest() {
+    public void loginTest() {
         shouldBeLoggedOut();
         loginForm.shouldBeOpened();
         loginForm.loginAs(DEFAULT_USER);
