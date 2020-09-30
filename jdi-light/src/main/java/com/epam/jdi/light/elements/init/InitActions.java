@@ -21,6 +21,7 @@ import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
+import com.epam.jdi.tools.HasStartIndex;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
@@ -139,8 +140,8 @@ public class InitActions {
         $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.base().inView())),
         $("PageName", aRule(PageName.class, (e, a)-> e.base().setPage(a.value()))),
         $("StartIndex", aRule(StartIndex.class, (e, a)-> {
-            if (isInterface(e.getClass(), HasUIList.class))
-                ((HasUIList)e).list().startIndex(a.value());
+            if (isInterface(e.getClass(), HasStartIndex.class))
+                ((HasStartIndex)e).setStartIndex(a.value());
         })),
         $("CloseAfterSelect", aRule(CloseAfterSelect.class, (e, a)-> {
             if (isClass(e.getClass(), DropdownExpand.class))
