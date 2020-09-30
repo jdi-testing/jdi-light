@@ -9,7 +9,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SortingOverviewAssert extends UIAssert<SortingOverviewAssert, SortingOverview> {
 
-
     @JDIAction("Assert that table is visible")
     public SortingOverviewAssert tableIsVisible() {
         jdiAssert(element.getTableHeaders().is().displayed(), Matchers.is(true));
@@ -21,5 +20,4 @@ public class SortingOverviewAssert extends UIAssert<SortingOverviewAssert, Sorti
         jdiAssert(element.headerButtonIsClicked(), Matchers.is(true));
         return this;
     }
-
 }

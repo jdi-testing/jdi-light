@@ -41,7 +41,6 @@ public class AngularPage extends WebPage {
     public static Ripple rippleContainer;
     public static BottomSheet bottomSheet;
     public static Dialog dialog;
-
     public static RadioButtonSection radioButtonSection;
     public static CheckboxSection checkboxSection;
     public static ToolbarSection toolbarSection;

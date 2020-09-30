@@ -26,10 +26,8 @@ public class SortingOverview extends UIBaseElement<SortingOverviewAssert> {
         return this.find(".mat-sort-header-arrow").isDisplayed();
     }
 
-
     @Override
     public SortingOverviewAssert is() {
         return new SortingOverviewAssert().set(this);
     }
-
 }
