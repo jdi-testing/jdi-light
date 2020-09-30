@@ -27,4 +27,6 @@ public class TableSection {
     public static Table tableWithFooter;
 
     public static TableOverviewSection overviewSection;
+
+    public static TableStickySection stickyTables;
 }
