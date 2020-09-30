@@ -141,10 +141,8 @@ public class DataTableAssert<L extends PageObject, D>
     }
 
     public class Compare implements JAssert {
-
         public int count;
         public String name;
-        public String printText;
         DataTableAssert<L, D> dtAssert;
         CompareType compareType;
         public JDIBase base() { return DataTableAssert.this.base(); }
@@ -152,14 +150,12 @@ public class DataTableAssert<L extends PageObject, D>
         private Compare(DataTableAssert<L, D> dtAssert) {
             this.dtAssert = dtAssert;
             this.compareType = ALL;
-            this.printText = "all rows";
             this.name = dtAssert.name;
         }
         private Compare(int count, DataTableAssert<L, D> dtAssert, CompareType compareType) {
             this.count = count;
             this.dtAssert = dtAssert;
             this.compareType = compareType;
-            this.printText = format("has %s %s rows that", compareType.text, count);
             this.name = dtAssert.name;
         }
 

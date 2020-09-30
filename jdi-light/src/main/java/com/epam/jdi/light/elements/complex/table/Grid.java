@@ -1,8 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.asserts.generic.HasAssert;
-import com.epam.jdi.light.asserts.generic.table.ITableAssert;
-import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.asserts.generic.table.IGridAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -21,6 +19,7 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.LinqUtils.toList;
+import static com.epam.jdi.tools.Timer.getByCondition;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -28,8 +27,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class Grid extends UIBaseElement<ITableAssert<?,?>>
-        implements IGrid, HasAssert<ITableAssert<?,?>>, ISetup {
+public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
+        implements IGrid<Line>, ISetup {
     protected String allCellsLocator = "td";
     protected String cellTemplate = "//tr[{1}]/td[{0}]";
     protected String columnTemplate = "//tr/td[%s]";
@@ -60,6 +59,12 @@ public class Grid extends UIBaseElement<ITableAssert<?,?>>
         }
         return core;
     }
+    @Override
+    public List<String> header() {
+        return ObjectUtils.isNotEmpty(header)
+            ? header
+            : IGrid.super.header();
+    }
     protected void validateLocators(UIElement core) {
         if (headerLocator.equals("th,thead td")) {
             if (core.find("th").isExist()) {
@@ -89,10 +94,24 @@ public class Grid extends UIBaseElement<ITableAssert<?,?>>
     public int count() {
         return count > -1 ? count : webColumn(1).size();
     }
+
+    public List<Line> elements(int minAmount) {
+        return getByCondition(this::rows, r -> r.size() >= minAmount);
+    }
+    public Line get(String value) {
+        return row(value);
+    }
+
     @Override
     public int size() {
         return size > -1 ? size : IGrid.super.size();
     }
+
+    public void clear() {
+        size = -1;
+        count = -1;
+    }
+
     @Override
     public UIElement webCell(int colNum, int rowNum) {
         return core().find(MessageFormat.format(cellTemplate, colNum, rowNum))
@@ -159,8 +178,8 @@ public class Grid extends UIBaseElement<ITableAssert<?,?>>
     }
 
     @Override
-    public ITableAssert<?,?> is() {
-        return new ITableAssert<>().set(this);
+    public IGridAssert<Line, IGrid<Line>, ?> is() {
+        return new IGridAssert<>(this);
     }
     // region Utilities
     protected void validateColumnIndex(int colNum) {

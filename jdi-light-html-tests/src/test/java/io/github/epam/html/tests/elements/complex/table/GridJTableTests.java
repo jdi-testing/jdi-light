@@ -11,6 +11,7 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static io.github.com.StaticSite.tablePage;
+import static io.github.com.pages.SimpleTablePage.furnitureHidden;
 import static io.github.com.pages.SimpleTablePage.productsJTable;
 import static io.github.epam.html.tests.elements.complex.table.TableDataProvider.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -70,6 +71,13 @@ public class GridJTableTests implements TestsInit {
             "Sofa furniture 2 2\n" +
             "Kitchen kitchen 400\n" +
             "Robot robo");
+    }
+    @Test
+    public void iterationTest() {
+        int i = 0;
+        for (Line row : productsJTable) {
+            assertThat(row.get("Name"), is(NAME_COLUMN[i++]));
+        }
     }
 
     @Test

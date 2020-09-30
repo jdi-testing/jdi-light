@@ -15,7 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -28,8 +27,7 @@ import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
-import static java.util.Collections.*;
+import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JdiSettings {

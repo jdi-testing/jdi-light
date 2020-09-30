@@ -12,6 +12,7 @@ import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.SimpleTablePage.furnitureSharpHeader;
+import static io.github.com.pages.SimpleTablePage.productsJTable;
 import static io.github.epam.html.tests.elements.complex.table.TableDataProvider.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -53,7 +54,7 @@ public class GridSharpHeaderTests implements TestsInit {
     }
     @Test
     public void headerTest() {
-        assertEquals(furnitureSharpHeader.header(), asList("Name", "Type", "Cost *", "#"));
+        assertEquals(furnitureSharpHeader.header(), asList("Name", "Type", "Cost", "Weight"));
     }
     @Test
     public void rowHeaderTest() {
@@ -71,19 +72,26 @@ public class GridSharpHeaderTests implements TestsInit {
             "Kitchen kitchen 400\n" +
             "Robot robo");
     }
+    @Test
+    public void iterationTest() {
+        int i = 0;
+        for (Line row : furnitureSharpHeader) {
+            assertThat(row.get("Name"), is(NAME_COLUMN[i++]));
+        }
+    }
 
     @Test
     public void dataRowTestIndex() {
-        assertEquals(furnitureSharpHeader.row(1).asData(Furniture.class), SHORT_CHAIR);
-        assertEquals(furnitureSharpHeader.row(2).asData(Furniture.class), SHORT_TABLE);
-        assertEquals(furnitureSharpHeader.row(3).asData(Furniture.class), SHORT_SOFA);
+        assertEquals(furnitureSharpHeader.row(1).asData(Furniture.class), CHAIR);
+        assertEquals(furnitureSharpHeader.row(2).asData(Furniture.class), TABLE);
+        assertEquals(furnitureSharpHeader.row(3).asData(Furniture.class), SOFA);
     }
 
     @Test
     public void dataRowNameTest() {
-        assertThat(furnitureSharpHeader.row("1").asData(Furniture.class), is(SHORT_CHAIR));
-        assertThat(furnitureSharpHeader.row("2").asData(Furniture.class), is(SHORT_TABLE));
-        assertThat(furnitureSharpHeader.row("3").asData(Furniture.class), is(SHORT_SOFA));
+        assertThat(furnitureSharpHeader.row("1").asData(Furniture.class), is(CHAIR));
+        assertThat(furnitureSharpHeader.row("2").asData(Furniture.class), is(TABLE));
+        assertThat(furnitureSharpHeader.row("3").asData(Furniture.class), is(SOFA));
     }
 
     @Test
@@ -105,7 +113,7 @@ public class GridSharpHeaderTests implements TestsInit {
     @Test
     public void dataFilterTest() {
         List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(rows, hasItem(SHORT_TABLE));
+        assertThat(rows, hasItem(TABLE));
     }
 
     @Test
@@ -113,7 +121,7 @@ public class GridSharpHeaderTests implements TestsInit {
         List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
         List<Furniture> filteredData = filter(rows, d -> d.name.contains("Tab"));
         assertEquals(filteredData.size(), 1);
-        assertEquals(filteredData.get(0), SHORT_TABLE);
+        assertEquals(filteredData.get(0), TABLE);
     }
 
     @Test
@@ -134,7 +142,7 @@ public class GridSharpHeaderTests implements TestsInit {
     @Test
     public void rowDataMatcherTest() {
         List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(SHORT_TABLE)), hasSize(1));
+        assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
     }
 
     @Test
@@ -164,7 +172,7 @@ public class GridSharpHeaderTests implements TestsInit {
     @Test
     public void rowDataExactMatcherTest() {
         List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(SHORT_TABLE)), hasSize(1));
+        assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
     }
 
     @Test

@@ -1,9 +1,14 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.asserts.generic.HasDataTableAssert;
+import com.epam.jdi.light.asserts.generic.table.IDataGridAssert;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
+import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.WebElement;
 
@@ -16,7 +21,6 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
@@ -26,11 +30,54 @@ import static java.util.Arrays.asList;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DataGrid<L extends PageObject, D> extends Grid
-        implements HasDataTableAssert, IDataGrid<L, D> {
-
+public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAssert<D, IDataGrid<L, D>,?>>
+        implements ISetup, IGrid<D>, IDataGrid<L, D> {
+    protected Safe<Grid> grid = new Safe<>(Grid::new);
+    public Grid grid() {
+        return grid.get();
+    }
     protected Class<D> dataClass = null;
     protected Class<L> lineClass = null;
+    @Override
+    public UIElement core() {
+        return grid().core();
+    }
+    @Override
+    public boolean isEmpty() {
+        return IDataGrid.super.isEmpty();
+    }
+    @Override
+    public int size() {
+        return IDataGrid.super.size();
+    }
+    @Override
+    public int count() {
+        return IDataGrid.super.count();
+    }
+    @Override
+    public WebList webRow(int rowNum) {
+        return IDataGrid.super.webRow(rowNum);
+    }
+    @Override
+    public WebList webColumn(int colNum) {
+        return IDataGrid.super.webColumn(colNum);
+    }
+    @Override
+    public WebList webColumn(String colName) {
+        return IDataGrid.super.webColumn(colName);
+    }
+    @Override
+    public UIElement webCell(int colNum, int rowNum) {
+        return IDataGrid.super.webCell(colNum, rowNum);
+    }
+    @Override
+    public List<String> header() {
+        return IDataGrid.super.header();
+    }
+    @Override
+    public WebList footerUI() {
+        return IDataGrid.super.footerUI();
+    }
 
     public D rowAsData(WebList row) {
         return lineClass != null
@@ -40,24 +87,35 @@ public class DataGrid<L extends PageObject, D> extends Grid
     public L rowAsLine(WebList row) {
         return new Line(header(), row).asLine(lineClass);
     }
-
+    public List<D> elements(int minAmount) {
+        return allData();
+    }
+    public D get(String value) {
+        return data(value);
+    }
     @Override
-    public List<String> header() {
-        return header;
+    public WebList webCells() {
+        return grid().webCells();
+    }
+    @Override
+    public void clear() {
+        grid().clear();
     }
     @Override
     public WebList headerUI() {
-        WebList headerUI = super.headerUI();
-        return headerUI.size() == size
+        WebList headerUI = grid().headerUI();
+        return headerUI.size() == grid().size
             ? headerUI
             : tryFilterHeader(headerUI);
     }
+
     @Override
-    public int size() {
-        return size;
+    public IDataGridAssert<D, IDataGrid<L, D>,?> is() {
+        return new IDataGridAssert<>(this);
     }
+
     public void setup(Field field) {
-        super.setup(field);
+        grid().setup(field);
         try {
             setupGenericFields(field);
         } catch (Exception ignore) { // ignore if can't setup
@@ -68,9 +126,9 @@ public class DataGrid<L extends PageObject, D> extends Grid
         if (dataClass != null)
             entityFields.addAll(asList(dataClass.getDeclaredFields()));
         if (entityFields.size() > 0) {
-            header = map(entityFields, field1 -> splitCamelCase(field1.getName()))
+            grid().header = LinqUtils.map(entityFields, field1 -> splitCamelCase(field1.getName()))
                 .stream().distinct().collect(Collectors.toList());
-            size = header.size();
+            grid().size = grid().header.size();
         }
     }
 
@@ -88,23 +146,23 @@ public class DataGrid<L extends PageObject, D> extends Grid
 
     public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
     protected WebList tryFilterHeader(WebList headerUI) {
-        if (headerUI.size() < size) {
-            throw exception("Header has size less than expected - %s. Please verify header locator or override headerUI() method", size);
+        if (headerUI.size() < grid().size) {
+            throw exception("Header has size less than expected - %s. Please verify header locator or override headerUI() method", grid().size);
         }
         int i = 1;
         int j = 0;
         List<WebElement> elements = new ArrayList<>();
-        columnsMapping = new ArrayList<>();
+        grid().columnsMapping = new ArrayList<>();
         for (WebElement element : headerUI) {
-            if (SIMPLIFY.execute(element.getText()).equalsIgnoreCase(SIMPLIFY.execute(header.get(j)))) {
-                columnsMapping.add(i);
+            if (SIMPLIFY.execute(element.getText()).equalsIgnoreCase(SIMPLIFY.execute(grid().header.get(j)))) {
+                grid().columnsMapping.add(i);
                 elements.add(element);
                 j++;
             }
             i++;
         }
-        if (elements.size() != size)
-            throw exception("Header has size more than expected - %s. Please verify header locator or override headerUI() method", size);
+        if (elements.size() != grid().size)
+            throw exception("Header has size more than expected - %s. Please verify header locator or override headerUI() method", grid().size);
         return new WebList(elements);
     }
 

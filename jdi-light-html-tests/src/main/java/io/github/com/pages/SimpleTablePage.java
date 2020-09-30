@@ -23,6 +23,8 @@ public class SimpleTablePage extends WebPage {
     public static DataTable<?, Furniture> furnitureTable;
 
     public static Grid products;
+    @UI("#products")
+    public static DataGrid<?, Furniture> dataProducts;
 
     // @JTable(root = "#products-2",
     //         headers = "thead td",
@@ -32,26 +34,26 @@ public class SimpleTablePage extends WebPage {
     //         allCells = "tbody td")
     @UI("#products-2")
     public static Grid productsJTable;
-    @UI("#products")
-    public static DataGrid<?, Furniture> dataGridProducts;
+    @UI("#products-2")
+    public static DataGrid<?, Furniture> dataProductsJTable;
 
     public static Grid furniture;
     @UI("#furniture")
-    public static DataGrid<?, Furniture> dataGridFurniture;
+    public static DataGrid<?, Furniture> dataFurniture;
 
     public static Grid furnitureSharp;
     @JTable(root = "#furniture-sharp", header = {"Name", "Type", "Cost", "Weight"})
     public static Grid furnitureSharpHeader;
     @UI("#furniture-sharp")
-    public static DataGrid<?, Furniture> dataGridFurnitureSharp;
+    public static DataGrid<?, Furniture> dataFurnitureSharp;
 
     // @JTable(columnsMapping = {1, 2, 3, 5})
     public static Grid furnitureHidden;
     @UI("#furniture-hidden")
-    public static DataGrid<?, Furniture> dataGridFurnitureHidden;
+    public static DataGrid<?, Furniture> dataFurnitureHidden;
 
     // @JTable(columnsMapping = {2, 3, 4, 6})
     public static Grid furnitureDoubleHidden;
     @UI("#furniture-double-hidden")
-    public static DataGrid<?, Furniture> dataGridFurnitureDoubleHidden;
+    public static DataGrid<?, Furniture> dataFurnitureDoubleHidden;
 }

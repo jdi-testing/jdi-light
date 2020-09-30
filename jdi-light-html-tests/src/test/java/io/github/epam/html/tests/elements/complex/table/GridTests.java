@@ -71,6 +71,13 @@ public class GridTests implements TestsInit {
             "Kitchen kitchen 400\n" +
             "Robot robo");
     }
+    @Test
+    public void iterationTest() {
+        int i = 0;
+        for (Line row : products) {
+            assertThat(row.get("Name"), is(NAME_COLUMN[i++]));
+        }
+    }
 
     @Test
     public void dataRowTestIndex() {

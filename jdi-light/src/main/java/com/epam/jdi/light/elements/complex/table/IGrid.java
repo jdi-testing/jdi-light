@@ -1,10 +1,11 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.epam.jdi.tools.LinqUtils;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebElement;
 
@@ -15,13 +16,13 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.firstIndex;
 
 /**
  * Created by Roman Iovlev on 24.09.2020
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public interface IGrid extends IBaseElement, HasValue, IsText {
+public interface IGrid<T> extends HasValue, IsText, IList<T> {
     WebList webCells();
 
     default boolean isEmpty() { return count() == 0; }
@@ -73,10 +74,10 @@ public interface IGrid extends IBaseElement, HasValue, IsText {
         return row(getEnumValue(rowName));
     }
     default <D> List<D> rowsAs(Class<D> cl) {
-        return map(rows(), r -> r.asData(cl));
+        return LinqUtils.map(rows(), r -> r.asData(cl));
     }
     default <L> List<L> rowsLines(Class<L> cl) {
-        return map(rows(), r -> r.asLine(cl));
+        return LinqUtils.map(rows(), r -> r.asLine(cl));
     }
     default List<Line> rows() {
         List<WebElement> webCells = webCells().getAll();
@@ -170,23 +171,28 @@ public interface IGrid extends IBaseElement, HasValue, IsText {
     // endregion
 
     // region Matchers
-    default Line row(Matcher<Line> matcher) {
-        return first(rows(), matcher::matches);
-    }
-    default List<Line> rows(Matcher<Line> matcher) {
-        return filter(rows(), matcher::matches);
-    }
-    default Line column(Matcher<Line> matcher) {
-        return first(columns(), matcher::matches);
-    }
-    default List<Line> columns(Matcher<Line> matcher) {
-        return filter(columns(), matcher::matches);
-    }
-    default UIElement cell(Matcher<UIElement> matcher) {
-        return first(webCells(), matcher::matches);
-    }
-    default List<UIElement> cells(Matcher<UIElement> matcher) {
-        return filter(webCells(), matcher::matches);
-    }
+    //default Line row(Matcher<String> matcher) {
+    //    return LinqUtils.first(rows(), matcher::matches);
+    //}
+    //default List<Line> rows(Matcher<? super String> matcher) {
+    //    return LinqUtils.filter(rows(), matcher::matches);
+    //}
+    //default Line column(Matcher<String> matcher) {
+    //    return LinqUtils.first(columns(), matcher::matches);
+    //}
+    //default List<Line> columns(Matcher<? super String> matcher) {
+    //    return LinqUtils.filter(columns(), matcher::matches);
+    //}
+    //default UIElement cell(Matcher<String> matcher) {
+    //    return LinqUtils.first(webCells(), matcher::matches);
+    //}
+    //default List<UIElement> cells(Matcher<? super String> matcher) {
+    //    return LinqUtils.filter(webCells(), matcher::matches);
+    //}
     // endregion
+
+    // region TableMatchers
+    // TODO
+    // endregion
+
 }

@@ -11,8 +11,7 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.SimpleTablePage.furnitureDoubleHidden;
-import static io.github.com.pages.SimpleTablePage.products;
+import static io.github.com.pages.SimpleTablePage.productsJTable;
 import static io.github.epam.html.tests.elements.complex.table.TableDataProvider.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -21,7 +20,7 @@ import static org.hamcrest.Matchers.*;
 import static org.jsoup.internal.StringUtil.isBlank;
 import static org.testng.Assert.assertEquals;
 
-public class GridDoubleHiddenTests implements TestsInit {
+public class DataGridJTableTests implements TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -30,42 +29,42 @@ public class GridDoubleHiddenTests implements TestsInit {
 
     @Test
     public void webCellsTest() {
-        assertEquals(furnitureDoubleHidden.webCells().size(), 20);
+        assertEquals(productsJTable.webCells().size(), 20);
     }
     @Test
     public void sizeTest() {
-        assertEquals(furnitureDoubleHidden.size(), 4);
+        assertEquals(productsJTable.size(), 4);
     }
     @Test
     public void countTest() {
-        assertEquals(furnitureDoubleHidden.count(), 5);
+        assertEquals(productsJTable.count(), 5);
     }
     @Test
     public void columnsTest() {
-        List<Line> columns = furnitureDoubleHidden.columns();
+        List<Line> columns = productsJTable.columns();
         assertEquals(columns.size(), 4);
         assertEquals(columns.get(0).size(), 5);
     }
     @Test
     public void rowsTest() {
-        List<Line> rows = furnitureDoubleHidden.rows();
+        List<Line> rows = productsJTable.rows();
         assertEquals(rows.size(), 5);
         assertEquals(rows.get(0).size(), 4);
     }
     @Test
     public void headerTest() {
-        assertEquals(furnitureDoubleHidden.header(), asList("Name", "Type", "Cost *", "Weight"));
+        assertEquals(productsJTable.header(), asList("Name", "Type", "Cost", "Weight"));
     }
     @Test
     public void rowHeaderTest() {
-        assertEquals(furnitureDoubleHidden.rowHeader(), asList("1", "2", "3", "4", "5"));
+        assertEquals(productsJTable.rowHeader(), asList("1", "2", "3", "4", "5"));
     }
 
     @Test
     public void valueTest() {
-        String value = furnitureDoubleHidden.getValue();
+        String value = productsJTable.getValue();
         assertEquals(value,
-        "Name Type Cost * Weight\n" +
+        "Name Type Cost Weight\n" +
             "Chair furniture 3.5 2\n" +
             "Table furniture 3.5 3.5\n" +
             "Sofa furniture 2 2\n" +
@@ -75,51 +74,52 @@ public class GridDoubleHiddenTests implements TestsInit {
     @Test
     public void iterationTest() {
         int i = 0;
-        for (Line row : furnitureDoubleHidden) {
+        for (Line row : productsJTable) {
             assertThat(row.get("Name"), is(NAME_COLUMN[i++]));
         }
     }
 
     @Test
     public void dataRowTestIndex() {
-        assertEquals(furnitureDoubleHidden.row(1).asData(Furniture.class), CHAIR);
-        assertEquals(furnitureDoubleHidden.row(2).asData(Furniture.class), TABLE);
-        assertEquals(furnitureDoubleHidden.row(3).asData(Furniture.class), SOFA);
+        assertEquals(productsJTable.row(1).asData(Furniture.class), CHAIR);
+        assertEquals(productsJTable.row(2).asData(Furniture.class), TABLE);
+        assertEquals(productsJTable.row(3).asData(Furniture.class), SOFA);
     }
 
     @Test
     public void dataRowNameTest() {
-        assertThat(furnitureDoubleHidden.row("1").asData(Furniture.class), is(CHAIR));
-        assertThat(furnitureDoubleHidden.row("2").asData(Furniture.class), is(TABLE));
-        assertThat(furnitureDoubleHidden.row("3").asData(Furniture.class), is(SOFA));
+        assertThat(productsJTable.row("1").asData(Furniture.class), is(CHAIR));
+        assertThat(productsJTable.row("2").asData(Furniture.class), is(TABLE));
+        assertThat(productsJTable.row("3").asData(Furniture.class), is(SOFA));
     }
+
     @Test
     public void dataColumnTestIndex() {
-        assertThat(furnitureDoubleHidden.column(2), hasItems(TYPE_COLUMN));
-        assertThat(furnitureDoubleHidden.column(3), hasItems(COST_COLUMN));
-        assertThat(furnitureDoubleHidden.column(4), hasItems(WEIGHT_COLUMN));
+        assertThat(productsJTable.column(2), hasItems(TYPE_COLUMN));
+        assertThat(productsJTable.column(3), hasItems(COST_COLUMN));
+        assertThat(productsJTable.column(4), hasItems(WEIGHT_COLUMN));
     }
 
     @Test
     public void dataColumnNameTest() {
-        assertThat(furnitureDoubleHidden.column("Type"), hasItems(TYPE_COLUMN));
-        assertThat(furnitureDoubleHidden.column("Cost"), hasItems(COST_COLUMN));
-        assertThat(furnitureDoubleHidden.column("Weight"), hasItems(WEIGHT_COLUMN));
+        assertThat(productsJTable.column("Type"), hasItems(TYPE_COLUMN));
+        assertThat(productsJTable.column("Cost"), hasItems(COST_COLUMN));
+        assertThat(productsJTable.column("Weight"), hasItems(WEIGHT_COLUMN));
 
-        assertThat(furnitureDoubleHidden.column("TYPE"), hasItems(TYPE_COLUMN));
-        assertThat(furnitureDoubleHidden.column("COST *"), hasItems(COST_COLUMN));
-        assertThat(furnitureDoubleHidden.column("WEIGHT "), hasItems(WEIGHT_COLUMN));
+        assertThat(productsJTable.column("TYPE"), hasItems(TYPE_COLUMN));
+        assertThat(productsJTable.column("COST *"), hasItems(COST_COLUMN));
+        assertThat(productsJTable.column("WEIGHT "), hasItems(WEIGHT_COLUMN));
     }
 
     @Test
     public void dataFilterTest() {
-        List<Furniture> rows = furnitureDoubleHidden.rowsAs(Furniture.class);
+        List<Furniture> rows = productsJTable.rowsAs(Furniture.class);
         assertThat(rows, hasItem(TABLE));
     }
 
     @Test
     public void allDataFilterTest() {
-        List<Furniture> rows = furnitureDoubleHidden.rowsAs(Furniture.class);
+        List<Furniture> rows = productsJTable.rowsAs(Furniture.class);
         List<Furniture> filteredData = filter(rows, d -> d.name.contains("Tab"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), TABLE);
@@ -127,58 +127,58 @@ public class GridDoubleHiddenTests implements TestsInit {
 
     @Test
     public void commonMatchersTest() {
-        furnitureDoubleHidden.is().displayed();
-        furnitureDoubleHidden.has().size(5);
-        furnitureDoubleHidden.assertThat().size(greaterThan(3));
-        furnitureDoubleHidden.is().notEmpty().size(lessThanOrEqualTo(7));
+        productsJTable.is().displayed();
+        productsJTable.has().size(5);
+        productsJTable.assertThat().size(greaterThan(3));
+        productsJTable.is().notEmpty().size(lessThanOrEqualTo(7));
     }
 
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
-        List<Furniture> rows = furnitureDoubleHidden.rowsAs(Furniture.class);
+        List<Furniture> rows = productsJTable.rowsAs(Furniture.class);
         assertThat(first(rows, r -> r.name.contains("Tab")), not(nullValue()));
     }
 
     @Test
     public void rowDataMatcherTest() {
-        List<Furniture> rows = furnitureDoubleHidden.rowsAs(Furniture.class);
+        List<Furniture> rows = productsJTable.rowsAs(Furniture.class);
         assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
     }
 
     @Test
     public void rowsAllTest() {
-        List<Furniture> rows = furnitureDoubleHidden.rowsAs(Furniture.class);
+        List<Furniture> rows = productsJTable.rowsAs(Furniture.class);
         assertThat(all(rows, r -> r.name.length() >= 4), is(true));
     }
 
     @Test
     public void noRowsTest() {
-        List<Furniture> rows = furnitureDoubleHidden.rowsAs(Furniture.class);
+        List<Furniture> rows = productsJTable.rowsAs(Furniture.class);
         assertThat(any(rows, r -> isBlank(r.name)), is(false));
     }
 
     @Test
     public void atLeastTest() {
-        List<Furniture> rows = furnitureDoubleHidden.rowsAs(Furniture.class);
+        List<Furniture> rows = productsJTable.rowsAs(Furniture.class);
         assertThat(filter(rows, r -> r.type.contains("furniture")), hasSize(greaterThanOrEqualTo(3)));
     }
 
     @Test
     public void exactMatcherTest() {
-        List<Furniture> rows = furnitureDoubleHidden.rowsAs(Furniture.class);
+        List<Furniture> rows = productsJTable.rowsAs(Furniture.class);
         assertThat(filter(rows, r -> r.cost.contains("3.5")), hasSize(2));
     }
 
     @Test
     public void rowDataExactMatcherTest() {
-        List<Furniture> rows = furnitureDoubleHidden.rowsAs(Furniture.class);
+        List<Furniture> rows = productsJTable.rowsAs(Furniture.class);
         assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
     }
 
     @Test
     public void tableChainTest() {
-        furnitureDoubleHidden.assertThat()
+        productsJTable.assertThat()
             .displayed().size(5).size(greaterThan(3)).notEmpty();
     }
 }

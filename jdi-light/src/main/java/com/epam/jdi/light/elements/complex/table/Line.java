@@ -48,7 +48,7 @@ public class Line implements IList<String>, IBaseElement {
         this.elements = elements;
         this.headers = headers;
         List<String> values = elements.values();
-        this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();;
+        this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();
     }
     public static Line initLine(List<String> list, List<String> headers) {
         Line line = new Line();
@@ -111,7 +111,9 @@ public class Line implements IList<String>, IBaseElement {
     public String getValue() {
         return PrintUtils.print(getList(0), ";");
     }
-    public String print() { return getValue(); }
+    public String print() {
+        return getData(0).toString();
+    }
 
     public void clear() { data = null; }
 

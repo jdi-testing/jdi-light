@@ -4,7 +4,6 @@ import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
-import com.epam.jdi.light.elements.base.JdiSettings;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.HighlightStrategy;

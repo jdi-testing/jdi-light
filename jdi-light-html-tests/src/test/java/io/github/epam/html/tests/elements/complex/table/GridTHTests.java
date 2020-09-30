@@ -12,6 +12,7 @@ import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.SimpleTablePage.furniture;
+import static io.github.com.pages.SimpleTablePage.furnitureSharp;
 import static io.github.epam.html.tests.elements.complex.table.TableDataProvider.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -70,6 +71,13 @@ public class GridTHTests implements TestsInit {
             "Sofa furniture 2 2\n" +
             "Kitchen kitchen 400\n" +
             "Robot robo");
+    }
+    @Test
+    public void iterationTest() {
+        int i = 0;
+        for (Line row : furniture) {
+            assertThat(row.get("Name"), is(NAME_COLUMN[i++]));
+        }
     }
 
 

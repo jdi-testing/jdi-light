@@ -116,9 +116,11 @@ public class JDILocator {
                 return "";
             }
             String locatorString = locator != null
-                ? ">" + shortBy(locator, element).replaceAll("%s", "{{VALUE}}")
-                : "";
-            return hasFrame + locatorString;
+                    ? shortBy(locator, element).replaceAll("%s", "{{VALUE}}")
+                    : "";
+            if (isBlank(hasFrame))
+                return locatorString;
+            return isBlank(locatorString) ? hasFrame : hasFrame + ">" + locatorString;
         } catch (Exception ex) { return "Can't print locator"; }
     }
 }
