@@ -50,14 +50,6 @@ testshtml: &testshtml
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
-testsbdd: &testsbdd
-  <<: *cron_condition
-  stage: test
-  name: Run tests - bdd
-  script:
-    - mvn -ntp install -DskipTests
-    - echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 testsbootstrap: &testsbootstrap
   stage: test
   name: Run tests - bootstrap
@@ -146,27 +138,6 @@ jobs:
       jdk: openjdk12
     - <<: *testshtml
       name: Run tests - html - JDK13
-      jdk: openjdk13
-
-    - <<: *testsbdd
-      name: Run tests - bdd - JDK8
-      if: true #Stage will always be executed opposed to cron_condition stages
-      jdk: openjdk8
-    - <<: *testsbdd
-      name: Run tests - bdd - JDK9
-      jdk: openjdk9
-    - <<: *testsbdd
-      name: Run tests - bdd - JDK10
-      if: true
-      jdk: openjdk10
-    - <<: *testsbdd
-      name: Run tests - bdd - JDK11
-      jdk: openjdk11
-    - <<: *testsbdd
-      name: Run tests - bdd - JDK12
-      jdk: openjdk12
-    - <<: *testsbdd
-      name: Run tests - bdd - JDK13
       jdk: openjdk13
 
     - <<: *testsbootstrap
