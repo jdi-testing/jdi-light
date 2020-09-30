@@ -8,8 +8,8 @@
             <package name="io.github.epam.html.tests.elements.complex"/>
             <package name="io.github.epam.html.tests.elements.composite.*"/>
             <package name="io.github.epam.html.tests.elements.composite.page.init"/>
-            <package name="io.github.epam.html.tests.elements.composite"/>
-            <package name="io.github.epam.html.tests.issues.*"/>-->
+            <package name="io.github.epam.html.tests.elements.composite"/>-->
+            <package name="io.github.epam.html.tests.issues.*"/>
             <package name="io.github.epam.html.tests.performance"/>
             <package name="io.github.epam.html.tests.site"/>
         </packages>
