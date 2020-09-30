@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.disabledName;
-import static io.github.com.pages.HtmlElementsPage.name;
+import static io.github.com.pages.HtmlElementsPage.firstName;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
@@ -23,41 +23,41 @@ public class TextFieldTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        name.setText(text);
+        firstName.setText(text);
     }
     String text = "TextField";
 
     @Test
     public void getTextTest() {
-        assertEquals(name.getText(), text);
+        assertEquals(firstName.getText(), text);
     }
 
     @Test
     public void getValueTest() {
-        assertEquals(name.getValue(), text);
+        assertEquals(firstName.getValue(), text);
     }
 
     @Test
     public void sendKeysTest() {
-        name.sendKeys("Test");
-        assertEquals(name.getValue(), text+"Test");
+        firstName.sendKeys("Test");
+        assertEquals(firstName.getValue(), text+"Test");
     }
 
     @Test
     public void inputTest() {
-        name.input("New text");
-        assertEquals(name.getText(), "New text");
+        firstName.input("New text");
+        assertEquals(firstName.getText(), "New text");
     }
 
     @Test
     public void clearTest() {
-        name.clear();
-        assertEquals(name.getText(), "");
+        firstName.clear();
+        assertEquals(firstName.getText(), "");
     }
 
     @Test
     public void placeholderTest() {
-        assertEquals(name.placeholder(), "Input name");
+        assertEquals(firstName.placeholder(), "Input name");
     }
 
     //TODO Performance issue
@@ -71,50 +71,50 @@ public class TextFieldTests implements TestsInit {
 
     @Test
     public void focusTest() {
-        name.focus();
+        firstName.focus();
     }
 
     @Test
     public void isValidationTest() {
-        name.is().enabled();
-        name.is().text(is(text));
-        name.is().text(containsString("Field"));
+        firstName.is().enabled();
+        firstName.is().text(is(text));
+        firstName.is().text(containsString("Field"));
         disabledName.is().disabled();
     }
 
     @Test
     public void labelTest() {
-        assertEquals(name.label().getText(), "Your name:");
-        name.label().is().text(containsString("Your"));
+        assertEquals(firstName.label().getText(), "Your name:");
+        firstName.label().is().text(containsString("Your"));
         disabledName.label().is().text(equalToIgnoringCase("Surname:"));
     }
 
     @Test
     public void assertValidationTest() {
-        name.assertThat().text(is(text));
+        firstName.assertThat().text(is(text));
     }
 
     final String symbols = "`!@#//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
 
     @Test
     public void inputSymbolsTest() {
-        name.input(symbols);
-        assertEquals(name.getText(), symbols);
+        firstName.input(symbols);
+        assertEquals(firstName.getText(), symbols);
     }
     @Test
     public void setTextSymbolsTest() {
-        name.setText(symbols);
-        assertEquals(name.getText(), symbols);
+        firstName.setText(symbols);
+        assertEquals(firstName.getText(), symbols);
     }
     @Test
     public void sendKeysSymbolsTest() {
-        name.clear();
-        name.sendKeys(symbols);
-        assertEquals(name.getText(), symbols);
+        firstName.clear();
+        firstName.sendKeys(symbols);
+        assertEquals(firstName.getText(), symbols);
     }
 
     @Test
     public void baseValidationTest() {
-        baseValidation(name);
+        baseValidation(firstName);
     }
 }
