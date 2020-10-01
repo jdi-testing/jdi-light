@@ -15,11 +15,11 @@ Feature: TestsWithName
     Then the "[value*='Red Button']" text equals to "Big Red Button-Input"
 
   Scenario: labelText
-    Then the "Name" label text equals to "Your name:"
+    Then the "Your Name" label text equals to "Your name:"
 
   Scenario: input element
-    When I input "simple 1234" in "Name"
-    Then the "Name" text matches to "\w{6} \d{4}"
+    When I input "simple 1234" in "Your Name"
+    Then the "Your Name" text matches to "\w{6} \d{4}"
 
   Scenario: check element
     When check "Accept Conditions"
@@ -30,20 +30,20 @@ Feature: TestsWithName
     Then the "Accept Conditions" is deselected
 
   Scenario: clear element
-    When I input "simple text" in "Name"
-    Then the "Name" text equals to "simple text"
-    When I clear "Name"
-    Then the "Name" text equals to ""
+    When I input "simple text" in "Your Name"
+    Then the "Your Name" text equals to "simple text"
+    When I clear "Your Name"
+    Then the "Your Name" text equals to ""
 
   Scenario: css element
-    Then the "Name" css "font-size" equals to "14px"
+    Then the "Your Name" css "font-size" equals to "14px"
 
   Scenario: placeholder element
-    Then the "Name" placeholder equals to "Input name"
+    Then the "Your Name" placeholder equals to "Input name"
 
   Scenario: getValue element
-    When input "simple text" in "Name"
-    Then the "Name" text equals to "simple text"
+    When input "simple text" in "Your Name"
+    Then the "Your Name" text equals to "simple text"
 
   Scenario: getText element
     Then the "Blue Button" text equals to "BIG BLUE BUTTON"
@@ -52,7 +52,7 @@ Feature: TestsWithName
     Then the "Disabled Name" attribute "id" equals to "disabled-name"
 
   Scenario: isEnabled element
-    Then the "Name" is enabled
+    Then the "Your Name" is enabled
 
   Scenario: isDisabled element
     Then the "Disabled Name" is disabled
