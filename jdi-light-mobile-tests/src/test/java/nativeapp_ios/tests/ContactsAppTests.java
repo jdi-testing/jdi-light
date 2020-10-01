@@ -54,4 +54,16 @@ public class ContactsAppTests extends ContactsAppTestsInit {
         AddNewContactPage.newContactNavBar.tapBarButton("Cancel");
         ContactsListPage.contactsNavigationBar.addButton.is().displayed();
     }
+
+    @Test
+    public void searchBarTest() {
+        ContactsListPage.contactsSearchBar.setValue("John");
+        ContactsListPage.johnAppleseedCard.is().displayed();
+
+        ContactsListPage.contactsSearchBar.tapClearButton();
+        ContactsListPage.contactsSearchBar.is().text("Search");
+
+        ContactsListPage.contactsSearchBar.tapCancelButton();
+        ContactsListPage.contactsNavigationBar.addButton.is().displayed();
+    }
 }
