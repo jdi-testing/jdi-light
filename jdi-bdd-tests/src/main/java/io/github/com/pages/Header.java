@@ -11,7 +11,7 @@ import io.github.com.entities.User;
 
 public class Header extends Section {
 	public static Form<User> loginForm;
-	@UI(".fa-sign-out") public static Button logout;
+	@UI(".logout") public static Button logout;
 	public static Image epamLogo;
 	public static Icon userIcon;
 	public static Text userName;
