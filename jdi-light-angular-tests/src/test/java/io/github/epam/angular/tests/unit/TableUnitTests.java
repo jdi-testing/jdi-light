@@ -1,9 +1,6 @@
 package io.github.epam.angular.tests.unit;
 
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.tools.map.MapArray;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
