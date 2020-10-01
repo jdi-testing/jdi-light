@@ -15,11 +15,11 @@ Feature: TestsWithLocators
     Then the "[value*='Red Button']" text equals to "Big Red Button-Input"
 
   Scenario: labelText
-    Then the "#name" label text equals to "Your name:"
+    Then the "#your-name" label text equals to "Your name:"
 
   Scenario: input element
-    When I input "simple 1234" in "#name"
-    Then the "#name" text matches to "\w{6} \d{4}"
+    When I input "simple 1234" in "#your-name"
+    Then the "#your-name" text matches to "\w{6} \d{4}"
 
   Scenario: check element
     When check "#accept-conditions"
@@ -30,20 +30,20 @@ Feature: TestsWithLocators
     Then the "#accept-conditions" is deselected
 
   Scenario: clear element
-    When I input "simple text" in "#name"
-    Then the "#name" text equals to "simple text"
-    When I clear "#name"
-    Then the "#name" text equals to ""
+    When I input "simple text" in "#your-name"
+    Then the "#your-name" text equals to "simple text"
+    When I clear "#your-name"
+    Then the "#your-name" text equals to ""
 
   Scenario: css element
-    Then the "#name" css "font-size" equals to "14px"
+    Then the "#your-name" css "font-size" equals to "14px"
 
   Scenario: placeholder element
-    Then the "#name" placeholder equals to "Input name"
+    Then the "#your-name" placeholder equals to "Input name"
 
   Scenario: getValue element
-    When input "simple text" in "#name"
-    Then the "#name" text equals to "simple text"
+    When input "simple text" in "#your-name"
+    Then the "#your-name" text equals to "simple text"
 
   Scenario: getText element
     Then the "#blue-button" text equals to "BIG BLUE BUTTON"
@@ -52,7 +52,7 @@ Feature: TestsWithLocators
     Then the "#disabled-name" attribute "id" equals to "disabled-name"
 
   Scenario: isEnabled element
-    Then the "#name" is enabled
+    Then the "#your-name" is enabled
 
   Scenario: isDisabled element
     Then the "#disabled-name" is disabled
@@ -64,10 +64,10 @@ Feature: TestsWithLocators
     Then the ".logout" does not appear
 
   Scenario: isDisplayed element
-    Then the "#name" is displayed
+    Then the "#your-name" is displayed
 
   Scenario: setText element
-    When input "simple text" in "#name"
-    Then the "#name" text equals to "simple text"
-    When set text "Input text" in "#name"
-    Then the "#name" text equals to "Input text"
+    When input "simple text" in "#your-name"
+    Then the "#your-name" text equals to "simple text"
+    When set text "Input text" in "#your-name"
+    Then the "#your-name" text equals to "Input text"
