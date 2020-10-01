@@ -58,10 +58,10 @@ Feature: TestsWithLocators
     Then the "#disabled-name" is disabled
 
   Scenario: isHidden element
-    Then the ".fa-sign-out" is hidden
+    Then the ".logout" is hidden
 
   Scenario: element does not appear
-    Then the ".fa-sign-out" does not appear
+    Then the ".logout" does not appear
 
   Scenario: isDisplayed element
     Then the "#name" is displayed

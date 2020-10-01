@@ -17,5 +17,5 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 public class HomePage extends WebPage {
     public static Icon userIcon;
     public static Text userName;
-    @UI(".fa-sign-out") public static Button logout;
+    @UI(".logout") public static Button logout;
 }
