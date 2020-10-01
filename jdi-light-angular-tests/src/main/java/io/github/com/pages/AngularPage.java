@@ -11,6 +11,7 @@ import io.github.com.pages.sections.BasicButtonsSection;
 import io.github.com.pages.sections.ButtonToggleSection;
 import io.github.com.pages.sections.CardSection;
 import io.github.com.pages.sections.CheckboxSection;
+import io.github.com.pages.sections.ChipsSection;
 import io.github.com.pages.sections.DatepickerSection;
 import io.github.com.pages.sections.GridListSection;
 import io.github.com.pages.sections.InputSection;
@@ -62,4 +63,5 @@ public class AngularPage extends WebPage {
     public static SideNavSection sidenavSection;
     public static ExpansionPanelSection expansionPanelSection;
     public static SpinnerSection spinnerSection;
+    public static ChipsSection chipsSection;
 }
