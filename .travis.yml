@@ -349,7 +349,7 @@ after_script:
   - source reports.sh
   - grubAllureResults
   - du -d 1 -h ./
-#  - ls -la todo commented to shorten Travis log, remove or uncomment after the check
+  - ls -la
 # extra time during long builds
 install:
   - travis_wait

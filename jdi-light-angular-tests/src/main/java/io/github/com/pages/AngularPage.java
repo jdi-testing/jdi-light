@@ -1,10 +1,12 @@
 package io.github.com.pages;
 
+
 import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
 import com.epam.jdi.light.angular.elements.complex.BottomSheet;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
+import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
 import io.github.com.pages.sections.AutocompleteSection;
 import io.github.com.pages.sections.BadgeSection;
 import io.github.com.pages.sections.BasicButtonsSection;
@@ -18,6 +20,7 @@ import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.ListSection;
 import io.github.com.pages.sections.MenuSection;
 import io.github.com.pages.sections.PaginatorSection;
+import io.github.com.pages.sections.ProgressBarSection;
 import io.github.com.pages.sections.RadioButtonSection;
 import io.github.com.pages.sections.SelectSection;
 import io.github.com.pages.sections.SideNavSection;
@@ -52,6 +55,7 @@ public class AngularPage extends WebPage {
     public static AutocompleteSection autocompleteSection;
     public static SnackbarSection snackbarSection;
     public static ButtonToggleSection buttonToggleSection;
+    public static ProgressBarSection progressBarSection;
     public static MenuSection menuSection;
     public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
