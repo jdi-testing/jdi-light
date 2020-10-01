@@ -39,7 +39,8 @@ public class DataTableAssert<L extends PageObject, D>
      */
     @JDIAction("Assert that '{name}' has rows that meet expected condition")
     public DataTableAssert<L, D> row(JFunc1<D,Boolean> condition) {
-        jdiAssert(table().dataRow(condition), not(nullValue()));
+        jdiAssert(table().dataRow(condition) != null ? "has row" : "has no rows",
+            Matchers.is("has row"));
         return this;
     }
     @JDIAction("Assert that '{name}' has rows that meet expected condition")

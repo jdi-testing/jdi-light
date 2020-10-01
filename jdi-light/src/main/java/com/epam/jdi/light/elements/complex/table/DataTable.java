@@ -200,7 +200,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     public List<D> dataRows(JFunc1<D, Boolean> matcher, int amount) {
         hasDataClass();
         List<D> result = new ArrayList<>();
-        for (int i = getStartIndex(); i <= count() + getStartIndex(); i++) {
+        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
             if (matcher.execute(dataRow(i)))
                 result.add(dataRow(i));
             if (result.size() == amount)
