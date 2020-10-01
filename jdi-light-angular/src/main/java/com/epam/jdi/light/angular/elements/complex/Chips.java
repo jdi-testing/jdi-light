@@ -25,7 +25,7 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder, SetValue, IsInput {
 
-    private String removeIcon = "//*[@id='mat-chip-list-2']//*[2]/*[last()]";
+    //private String removeIcon = "//*[@id='mat-chip-list-2']//*[2]/*[last()]";
     public String backdropField = "#chips-autocomplete-field";
     private String matOptions = "mat-option";
 
