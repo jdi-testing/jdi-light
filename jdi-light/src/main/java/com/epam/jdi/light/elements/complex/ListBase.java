@@ -35,6 +35,12 @@ import static com.epam.jdi.tools.ReflectionUtils.*;
  */
 abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
+    public int getStartIndex() {
+        return list().getStartIndex();
+    }
+    public void setStartIndex(int index) {
+        list().setStartIndex(index);
+    }
     protected WebList list;
     public WebList list() {
         if (list == null) {

@@ -5,12 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.SideNavSection.basicDrawer;
-import static io.github.com.pages.sections.SideNavSection.implicitMainContent;
-import static io.github.com.pages.sections.SideNavSection.openCloseBehavior;
-import static io.github.com.pages.sections.SideNavSection.responsiveContent;
-import static io.github.com.pages.sections.SideNavSection.sideNavToggle;
-import static io.github.com.pages.sections.SideNavSection.toolbarToggle;
+import static io.github.com.pages.sections.SideNavSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 

@@ -4,35 +4,12 @@ import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.hamcrest.Matchers.containsString;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.SideNavSection.autoSizeSideNav;
-import static io.github.com.pages.sections.SideNavSection.basicDrawer;
-import static io.github.com.pages.sections.SideNavSection.basicSideNav;
-import static io.github.com.pages.sections.SideNavSection.bottomGap;
-import static io.github.com.pages.sections.SideNavSection.configurableMode;
-import static io.github.com.pages.sections.SideNavSection.contentRadioButtons;
-import static io.github.com.pages.sections.SideNavSection.contentToggle;
-import static io.github.com.pages.sections.SideNavSection.customEscapeBackdrop;
-import static io.github.com.pages.sections.SideNavSection.fixSideNav;
-import static io.github.com.pages.sections.SideNavSection.fixedPosition;
-import static io.github.com.pages.sections.SideNavSection.implicitMainContent;
-import static io.github.com.pages.sections.SideNavSection.openCloseBehavior;
-import static io.github.com.pages.sections.SideNavSection.openSideNav;
-import static io.github.com.pages.sections.SideNavSection.responsiveContent;
-import static io.github.com.pages.sections.SideNavSection.sideNavOpened;
-import static io.github.com.pages.sections.SideNavSection.sideNavRadioButtons;
-import static io.github.com.pages.sections.SideNavSection.sideNavToggle;
-import static io.github.com.pages.sections.SideNavSection.sideToggle;
-import static io.github.com.pages.sections.SideNavSection.toggleAutoNav;
-import static io.github.com.pages.sections.SideNavSection.toggleExtraText;
-import static io.github.com.pages.sections.SideNavSection.toggleFixedSideNav;
-import static io.github.com.pages.sections.SideNavSection.toggleSideNav;
-import static io.github.com.pages.sections.SideNavSection.toolbarToggle;
-import static io.github.com.pages.sections.SideNavSection.topGap;
+import static io.github.com.pages.sections.SideNavSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static org.hamcrest.Matchers.containsString;
 
 public class SideNavTests extends TestsInit {
 
