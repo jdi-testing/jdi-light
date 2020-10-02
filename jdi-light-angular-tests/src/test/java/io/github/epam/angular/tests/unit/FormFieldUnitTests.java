@@ -1,12 +1,13 @@
 package io.github.epam.angular.tests.unit;
 
-import io.github.epam.*;
-import org.testng.annotations.*;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.AngularPage.*;
-import static io.github.epam.site.steps.States.*;
-import static org.testng.Assert.*;
+import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.AngularPage.formFieldsSection;
+import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static org.testng.Assert.assertEquals;
 
 public class FormFieldUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)

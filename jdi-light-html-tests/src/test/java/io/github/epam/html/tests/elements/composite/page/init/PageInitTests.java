@@ -24,10 +24,10 @@ public class PageInitTests {
             first = false;
         }
         if ($("#user-name").isDisplayed()) {
-            if (!$(".fa-sign-out").isDisplayed()) {
+            if (!$(".logout").isDisplayed()) {
                 $("#user-icon").click();
             }
-            $(".fa-sign-out").click();
+            $(".logout").click();
         }
         if (!$("form #name").isDisplayed()) {
             $("#user-icon").click();

@@ -22,7 +22,7 @@ public class StaticSite {
 	@UI("#login-form")
 	public static Form<User> loginForm;
 
-	@Css(".fa-sign-out") public static Button logout;
+	@Css(".logout") public static Button logout;
 	public static Button userIcon;
 	public static Text userName;
 }

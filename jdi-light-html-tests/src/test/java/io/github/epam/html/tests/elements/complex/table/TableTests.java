@@ -37,7 +37,14 @@ public class TableTests implements TestsInit {
         assertEquals(usersTable.count(), 6);
         assertThat(usersTable.header(), hasItems("Number", "Type", "User", "Description"));
     }
-
+    @Test
+    public void iterationTest() {
+        String text = "";
+        for(String result : usersTable) {
+            text += result.charAt(0);
+        }
+        assertEquals(text, "123456");
+    }
     @Test
     public void previewTest() {
         String value = usersTable.preview();
