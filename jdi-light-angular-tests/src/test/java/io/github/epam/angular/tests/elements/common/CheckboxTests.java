@@ -6,12 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.CheckboxSection.alignBeforeRadioButton;
-import static io.github.com.pages.sections.CheckboxSection.basicCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.checkedCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.disabledCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.indeterminateCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.resultCheckbox;
+import static io.github.com.pages.sections.CheckboxSection.*;
 import static io.github.epam.angular.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 

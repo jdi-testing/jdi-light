@@ -23,7 +23,7 @@ public class SiteJdi {
     @Css("form") public static Form<User> loginForm;
 
     @Css(".profile-photo [ui=label]") public static UIElement userName;
-    @Css(".fa-sign-out") public static WebElement logout;
+    @Css(".logout") public static WebElement logout;
     @Css("img#user-icon") public static UIElement userIcon;
     @UI(".sidebar-menu li") public static Menu leftMenu;
     @UI(".sidebar-menu li") public static JList<MenuItem> menu;
