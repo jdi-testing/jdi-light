@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.settings.JDISettings;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.Dimension;
 
@@ -9,6 +10,7 @@ import java.util.Set;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -94,10 +96,10 @@ public class WindowsManager {
      */
     @JDIAction("Switch to window '{index}'")
     public static void switchToWindow(int index) {
-        if (index < 1)
+        if (index < ELEMENT.startIndex)
             throw exception("Window's index starts from 1. You try to use '%s' that less than 1.", index);
         int counter = 0;
-        if (getWindows().size() < index)
+        if (getWindows().size() < index - ELEMENT.startIndex + 1)
             throw exception(index + " is too much. Only "+getWindows().size()+" windows found");
         for (String window : getWindows()) {
             counter++;

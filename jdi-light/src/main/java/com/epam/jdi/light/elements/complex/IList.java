@@ -70,13 +70,13 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
         return LinqUtils.all(elements(0), condition);
     }
     default List<T> slice(int from, int to) {
-        return listCopy(elements(to), from, to);
+        return listCopy(elements(to-getStartIndex()+1), from, to);
     }
     default List<T> slice(int from) {
-        return listCopy(elements(from), from);
+        return listCopy(elements(from-getStartIndex()+1), from);
     }
     default List<T> sliceTo(int to) {
-        return listCopyUntil(elements(to), to);
+        return listCopyUntil(elements(to-getStartIndex()+1), to);
     }
     default void refresh() { clear(); }
     default <R> List<R> selectMany(JFunc1<T, List<R>> func) {
@@ -139,7 +139,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
     }
     @Override
     default T get(int index) {
-        return elements(index + 1 - ELEMENT.startIndex).get(index);
+        return elements(index-getStartIndex()+1).get(index-getStartIndex());
     }
     @Override
     default T set(int index, T element) {
@@ -151,7 +151,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
     }
     @Override
     default T remove(int index) {
-        return elements(index + 1 - ELEMENT.startIndex).remove(index);
+        return elements(index - getStartIndex() + 1).remove(index);
     }
     @Override
     default int indexOf(Object o) {

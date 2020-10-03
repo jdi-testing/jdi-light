@@ -10,10 +10,12 @@ import java.util.List;
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.SimpleTablePage.furniture;
 import static io.github.com.pages.SimpleTablePage.simpleTable;
+import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.greaterThan;
@@ -45,8 +47,8 @@ public class FurnitureTests implements TestsInit {
     }
     @Test
     public void simpleTableInteractTest() {
-        assertEquals(simpleTable.cell(1,1), "Drivers");
-        assertEquals(simpleTable.cell(3,6), "Cucumber, Jbehave, Thucydides, SpecFlow");
+        assertEquals(simpleTable.cell(ELEMENT.startIndex, ELEMENT.startIndex), "Drivers");
+        assertEquals(simpleTable.cell(ELEMENT.startIndex + 2, ELEMENT.startIndex + 5), "Cucumber, Jbehave, Thucydides, SpecFlow");
     }
 
     @Test
@@ -61,16 +63,16 @@ public class FurnitureTests implements TestsInit {
         String value = furniture.getValue();
         assertEquals(value,
             "||X||Name|Type|Cost|Weight||" + LINE_BREAK +
-            "||1||Chair|furniture|3.5|2||" + LINE_BREAK +
-            "||2||Table|furniture|3.5|3.5||" + LINE_BREAK +
-            "||3||Sofa|furniture|2|2||" + LINE_BREAK +
-            "||4||Kitchen|kitchen|400|||" + LINE_BREAK +
-            "||5||Robot|robo||||" + LINE_BREAK);
+            "||"+i(0)+"||Chair|furniture|3.5|2||" + LINE_BREAK +
+            "||"+i(1)+"||Table|furniture|3.5|3.5||" + LINE_BREAK +
+            "||"+i(2)+"||Sofa|furniture|2|2||" + LINE_BREAK +
+            "||"+i(3)+"||Kitchen|kitchen|400|||" + LINE_BREAK +
+            "||"+i(4)+"||Robot|robo||||" + LINE_BREAK);
     }
 
     @Test
     public void dataColumnTestIndex() {
-        assertEquals(furniture.dataRow(2), TABLE);
+        assertEquals(furniture.dataRow(ELEMENT.startIndex + 1), TABLE);
     }
 
     @Test

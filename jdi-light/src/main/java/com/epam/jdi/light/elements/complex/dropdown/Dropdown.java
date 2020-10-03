@@ -3,8 +3,11 @@ package com.epam.jdi.light.elements.complex.dropdown;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.tools.HasStartIndex;
 
 import java.util.List;
+
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**
  * Created by Roman Iovlev on 02.03.2018
@@ -21,7 +24,9 @@ public class Dropdown extends DropdownExpand {
 
     @Override
     public WebList list() {
-        return setupDone ? super.list() : ds().list();
+        WebList list = setupDone ? super.list() : ds().list();
+        list.setStartIndex(getStartIndex());
+        return list;
     }
     /**
      * Select the specified element by the value
