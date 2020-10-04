@@ -79,8 +79,8 @@ public class ListPerformanceTests implements TestsInit {
         firstRow.values();
 
         testScenario(() -> elements.stream().filter(
-                el -> el.getText().equals(value)).findFirst().get().getText(),
-                () -> firstRow.get(value).getText(), 70, 75, 10);
+            el -> el.getText().equals(value)).findFirst().get().getText(),
+            () -> firstRow.get(value).getText(), 70, 75, 10);
     }
     @Test(invocationCount = repeat)
     public void getValueTest() {
