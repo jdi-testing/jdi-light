@@ -389,7 +389,8 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         for (int i = 0; i < count(); i++) {
             List<String> list = new ArrayList<>();
             for (String h : header()) {
-                Field field = LinqUtils.first(fields.get(i), f -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(f.getName())));
+                Field field = LinqUtils.first(fields.get(i),
+                    f -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(f.getName())));
                 if (field != null)
                     try {
                         Object fieldObj = field.get(rows.get(i));

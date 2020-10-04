@@ -41,7 +41,6 @@ public class TableTests implements TestsInit {
     @Test
     public void iterationTest() {
         String text = "";
-        usersTable.webRow(ELEMENT.startIndex);
         for (String result : usersTable) {
             text += result.charAt(0);
         }
