@@ -2,7 +2,8 @@ package io.github.epam.html.tests.site.steps;
 
 import io.qameta.allure.Step;
 
-import static com.epam.jdi.light.elements.common.Cookies.*;
+import static com.epam.jdi.light.elements.common.Cookies.clearAllCookies;
+import static com.epam.jdi.light.elements.common.Cookies.hasNoCookie;
 import static com.epam.jdi.light.elements.composite.WebPage.openSite;
 import static com.epam.jdi.light.elements.composite.WebPage.verifyUrl;
 import static io.github.com.StaticSite.homePage;
@@ -24,7 +25,6 @@ public class States {
         if (!verifyUrl("https://jdi-testing.github.io/jdi-light/") || epamLogo.isNotExist())
             homePage.open();
     }
-
     @Step
     public static void login() {
         if (loginForm.isHidden())
@@ -33,17 +33,10 @@ public class States {
         loginForm.submit(DEFAULT_USER);
         userName.has().text("ROMAN IOVLEV");
     }
-
     @Step
     public static void shouldBeLoggedOut() {
         clearAllCookies();
         openSite();
-    }
-    @Step
-    public static void logout() {
-        if (!logout.isDisplayed())
-            userIcon.click();
-        logout.click();
     }
 
 }

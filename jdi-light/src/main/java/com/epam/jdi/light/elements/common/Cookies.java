@@ -2,14 +2,11 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.tools.LinqUtils;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Collection;
 import java.util.Set;
-
-import static com.epam.jdi.tools.LinqUtils.first;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

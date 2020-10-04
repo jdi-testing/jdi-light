@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.elements.complex.list;
 
 import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.tools.LinqUtils;
 import io.github.com.custom.Result;
 import io.github.com.custom.SearchResult;
 import io.github.epam.TestsInit;

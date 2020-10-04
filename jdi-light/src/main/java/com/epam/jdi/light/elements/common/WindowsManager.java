@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.settings.JDISettings;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.Dimension;
 
@@ -10,7 +9,7 @@ import java.util.Set;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
-import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**

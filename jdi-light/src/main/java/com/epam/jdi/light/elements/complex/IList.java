@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 

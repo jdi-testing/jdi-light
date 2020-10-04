@@ -3,11 +3,8 @@ package com.epam.jdi.light.elements.complex.dropdown;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.tools.HasStartIndex;
 
 import java.util.List;
-
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**
  * Created by Roman Iovlev on 02.03.2018
