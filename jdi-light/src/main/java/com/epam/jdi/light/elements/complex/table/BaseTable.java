@@ -77,7 +77,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
 
     protected int getRowHeaderIndex() {
         if (rowHeaderIndex == -1)
-            rowHeaderIndex = isNotBlank(rowHeaderName) ? getRowHeaderIndexFromName() : 0;
+            rowHeaderIndex = isNotBlank(rowHeaderName)
+                ? getRowHeaderIndexFromName()
+                : getStartIndex();
         return rowHeaderIndex;
     }
     protected int getShiftRowIndex() {
@@ -285,17 +287,21 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return webRow(getEnumValue(colName));
     }
     protected int getColIndexByName(String colName) {
-        int colIndex = firstIndex(header.get(), h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(colName)));
+        int colIndex = getIndexInHeader(header.get(), colName);
         if (colIndex == -1)
             throw exception("Can't find column '%s'", colName);
         return getColumnIndex(colIndex);
     }
     public int getRowIndexByName(String rowName) {
         List<String> rowHeader = rowHeader();
-        int rowIndex = firstIndex(rowHeader, h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowName)));
+        int rowIndex = getIndexInHeader(rowHeader, rowName);
         if (rowIndex == -1)
             throw exception("Can't find row '%s'", rowName);
         return getRowIndex(rowIndex);
+    }
+    protected int getIndexInHeader(List<String> header, String name) {
+        return firstIndex(header,
+            h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(name))) + getStartIndex();
     }
     public UIElement webCell(int colNum, int rowNum) {
         validateColumnIndex(colNum);

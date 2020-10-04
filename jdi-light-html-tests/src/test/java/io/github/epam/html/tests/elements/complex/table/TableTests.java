@@ -41,7 +41,7 @@ public class TableTests implements TestsInit {
     @Test
     public void iterationTest() {
         String text = "";
-        usersTable.webRow(0);
+        usersTable.webRow(ELEMENT.startIndex);
         for (String result : usersTable) {
             text += result.charAt(0);
         }
@@ -73,8 +73,8 @@ public class TableTests implements TestsInit {
             "||"+i(4)+"||5|Admin*User*Manager|Yoshi Tannamuri|Cyclope*some description*Vip||\n" +
             "||"+i(5)+"||6|Admin*User*Manager|Giovanni Rovelli|Hulk*some description*Vip||\n");
     }
-    static String i(int index) {
-        return index + usersTable.getStartIndex() + "";
+    public static String i(int index) {
+        return index + ELEMENT.startIndex + "";
     }
     @Test
     public void dataColumnTestIndex() {

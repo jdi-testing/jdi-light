@@ -8,10 +8,7 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 public class Grid extends Table {
-    public Grid() {
-        shiftColumnIndex = 1;
-        shiftRowIndex = 1;
-    }
+
     @Override
     protected int getCount() {
         if (columns.get().any())

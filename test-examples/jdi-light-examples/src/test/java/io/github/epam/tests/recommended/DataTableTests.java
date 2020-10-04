@@ -2,12 +2,14 @@ package io.github.epam.tests.recommended;
 
 import com.epam.jdi.light.elements.common.Alerts;
 import com.epam.jdi.light.elements.complex.table.DataTable;
+import com.epam.jdi.light.settings.JDISettings;
 import io.github.epam.StaticTestsInit;
 import io.github.epam.custom.UserRow;
 import io.github.epam.entities.UserInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.*;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.test.data.TableData.GRADY_BROCK;
@@ -49,7 +51,7 @@ public class DataTableTests extends StaticTestsInit {
     }
     @Test
     public void filterDataTest() {
-        assertEquals(usersData.dataRow(2), GRADY_BROCK);
+        assertEquals(usersData.dataRow(ELEMENT.startIndex + 1), GRADY_BROCK);
         assertEquals(usersData.dataRow("Grady Brock"), GRADY_BROCK);
         assertEquals(usersData.dataRow(d -> d.name.contains("Brock")), GRADY_BROCK);
         usersData.assertThat().row(d -> d.equals(GRADY_BROCK));
@@ -63,7 +65,7 @@ public class DataTableTests extends StaticTestsInit {
 
     @Test
     public void filterLinesTest() {
-        UserRow line =  usersData.line(2);
+        UserRow line =  usersData.line(ELEMENT.startIndex + 1);
         validateUserRow(line);
         line =  usersData.line("Grady Brock");
         validateUserRow(line);

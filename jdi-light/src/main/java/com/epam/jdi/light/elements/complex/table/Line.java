@@ -96,7 +96,7 @@ public class Line implements IList<String>, IBaseElement {
         String unique = Timer.nowMSecs();
         List<UIElement> result = new ArrayList<>();
         for (int i = 0; i < elements.size(); i++) {
-            UIElement cell = elements.get(i);
+            UIElement cell = elements.get(i + getStartIndex());
             cell.show();
             cell.varName = headers.get(i)+unique;
             cell.makePhoto();
@@ -166,7 +166,7 @@ public class Line implements IList<String>, IBaseElement {
 
     public <T> T asLine(Class<T> cl) {
         return getType("asLine", cl, instance -> {
-            int i = 0;
+            int i = getStartIndex();
             for (String header : headers) {
                 Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
                     f -> namesEqual(getElementName(f), header));
