@@ -11,6 +11,8 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class SortingOverviewUnitTests extends TestsInit {
 
+    private static final String DESSERT = "Dessert (100g)";
+
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
@@ -24,6 +26,8 @@ public class SortingOverviewUnitTests extends TestsInit {
 
     @Test
     public void verifyHeaderButtonIsClicked() {
+        SortingOverviewSection.sortingOverview.clickButtonByText(DESSERT);
+        SortingOverviewSection.sortingOverview.clickButtonByText(DESSERT);
         Assert.assertTrue(SortingOverviewSection.sortingOverview.headerButtonIsClicked());
     }
 }
