@@ -12,6 +12,10 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 public class SortingOverviewUnitTests extends TestsInit {
 
     private static final String DESSERT = "Dessert (100g)";
+    private static final String CALORIES = "Calories";
+    private static final String FAT = "Fat (g)";
+    private static final String CARBS = "Carbs (g)";
+    private static final String PROTEIN = "Protein (g)";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
@@ -25,9 +29,37 @@ public class SortingOverviewUnitTests extends TestsInit {
     }
 
     @Test
-    public void verifyHeaderButtonIsClicked() {
+    public void verifyHeaderButtonDessertIsClicked() {
         SortingOverviewSection.sortingOverview.clickButtonByText(DESSERT);
         SortingOverviewSection.sortingOverview.clickButtonByText(DESSERT);
+        Assert.assertTrue(SortingOverviewSection.sortingOverview.headerButtonIsClicked());
+    }
+
+    @Test
+    public void verifyHeaderButtonCaloriesIsClicked() {
+        SortingOverviewSection.sortingOverview.clickButtonByText(CALORIES);
+        SortingOverviewSection.sortingOverview.clickButtonByText(CALORIES);
+        Assert.assertTrue(SortingOverviewSection.sortingOverview.headerButtonIsClicked());
+    }
+
+    @Test
+    public void verifyHeaderButtonFatIsClicked() {
+        SortingOverviewSection.sortingOverview.clickButtonByText(FAT);
+        SortingOverviewSection.sortingOverview.clickButtonByText(FAT);
+        Assert.assertTrue(SortingOverviewSection.sortingOverview.headerButtonIsClicked());
+    }
+
+    @Test
+    public void verifyHeaderButtonCarbsIsClicked() {
+        SortingOverviewSection.sortingOverview.clickButtonByText(CARBS);
+        SortingOverviewSection.sortingOverview.clickButtonByText(CARBS);
+        Assert.assertTrue(SortingOverviewSection.sortingOverview.headerButtonIsClicked());
+    }
+
+    @Test
+    public void verifyHeaderButtonProteinIsClicked() {
+        SortingOverviewSection.sortingOverview.clickButtonByText(PROTEIN);
+        SortingOverviewSection.sortingOverview.clickButtonByText(PROTEIN);
         Assert.assertTrue(SortingOverviewSection.sortingOverview.headerButtonIsClicked());
     }
 }
