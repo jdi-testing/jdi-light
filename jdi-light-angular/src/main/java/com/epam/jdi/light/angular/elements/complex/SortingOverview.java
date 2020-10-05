@@ -26,6 +26,11 @@ public class SortingOverview extends UIBaseElement<SortingOverviewAssert> {
         return this.find(".mat-sort-header-arrow").isDisplayed();
     }
 
+    @JDIAction("Is header displayed")
+    public boolean isHeadersDisplayed() {
+        return getTableHeaders().isDisplayed();
+    }
+
     @Override
     public SortingOverviewAssert is() {
         return new SortingOverviewAssert().set(this);

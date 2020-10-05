@@ -11,7 +11,7 @@ public class SortingOverviewAssert extends UIAssert<SortingOverviewAssert, Sorti
 
     @JDIAction("Assert that table is visible")
     public SortingOverviewAssert tableIsVisible() {
-        jdiAssert(element.getTableHeaders().is().displayed(), Matchers.is(true));
+        jdiAssert(element.isHeadersDisplayed(), Matchers.is(true));
         return this;
     }
 
