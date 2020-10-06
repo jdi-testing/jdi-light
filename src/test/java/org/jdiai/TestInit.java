@@ -14,7 +14,7 @@ public class TestInit {
     static String HOME_PAGE = "https://jdi-testing.github.io/jdi-light/index.html";
     static String USERS_PAGE = "https://jdi-testing.github.io/jdi-light/user-table.html";
     private By defineLocator(String locator) {
-        return locator.startsWith("//")
+        return locator.contains("//")
                 ? By.xpath(locator)
                 : By.cssSelector(locator);
     }
@@ -35,5 +35,6 @@ public class TestInit {
         DRIVER = new ChromeDriver();
         DRIVER.get(HOME_PAGE);
         DRIVER.manage().window().maximize();
+        JSDriver.logQuery = true;
     }
 }

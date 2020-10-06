@@ -5,8 +5,6 @@ import org.openqa.selenium.*;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.jdiai.WebDriverByUtils.getByLocator;
-import static org.jdiai.WebDriverByUtils.getByType;
 
 public class JSElement implements WebElement {
     private final JSDriver js;
