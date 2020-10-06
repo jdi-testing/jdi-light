@@ -8,49 +8,51 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.WebDriverByUtils.getByLocator;
 import static org.jdiai.WebDriverByUtils.getByType;
 
-public class JSElement implements WebElement {
-    private final JSDriver js;
+public class TESTJSElement implements WebElement {
     private final WebDriver driver;
     private final By locator;
-    public JSElement(WebDriver driver, By locator) {
-        this.js = new JSDriver(driver, locator);
+    public TESTJSElement(WebDriver driver, By locator) {
         this.driver = driver;
         this.locator = locator;
     }
-    private void jsAction(String action) {
-        js.getOne(action);
-    }
-    private String jsResult(String action) {
-        return js.getOne(action);
-    }
-    private WebElement we() {
+
+    protected WebElement we() {
         return driver.findElement(locator);
     }
-
+    protected Object jsExecute(String text) { return ((JavascriptExecutor) driver).executeScript(text); }
+    protected String js(String text) {
+        return getByType(locator).equals("css") ? css(text) : xpath(text);
+    }
+    protected String xpath(String text) {
+        return (String) jsExecute("return document.evaluate('" + getByLocator(locator) + "', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue." + text);
+    }
+    protected String css(String text) {
+        return (String) jsExecute("return document.querySelector('" + getByLocator(locator) + "')." + text);
+    }
     public void click() {
-        jsAction("click()");
+        js("click()");
     }
 
     public void submit() {
-        jsAction("submit");
+        js("submit");
     }
 
     public void sendKeys(CharSequence... value) {
         // jsGet("val('" + value + "')");
         // jsGet("setAttribute('value', '"+value+"')");
-        jsAction("value='"+value+"'");
+        js("value='"+value+"'");
     }
 
     public void clear() {
-        jsAction("clear");
+        js("clear");
     }
 
     public String getTagName() {
-        return jsResult("tagName");
+        return js("tagName");
     }
 
     public String getAttribute(String name) {
-        return jsResult("getAttribute(" + name + ")");
+        return js("getAttribute(" + name + ")");
     }
 
     public boolean isSelected() {
@@ -61,15 +63,8 @@ public class JSElement implements WebElement {
         return isNotBlank(getAttribute("enabled"));
     }
 
-    public String getTextC() {
-        return jsResult("textContent");
-    }
-    public String getTextI() {
-        return jsResult("innerText");
-    }
-    public String getTextH() { return jsResult("innerHTML "); }
     public String getText() {
-        return getTextC();
+        return js("textContent");
     }
 
     public List<WebElement> findElements(By by) {
