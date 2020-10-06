@@ -1,6 +1,5 @@
 package io.github.com.pages;
 
-
 import com.epam.jdi.light.angular.elements.complex.BottomSheet;
 import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
@@ -27,6 +26,7 @@ import io.github.com.pages.sections.SideNavSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
+import io.github.com.pages.sections.SortingOverviewSection;
 import io.github.com.pages.sections.SpinnerSection;
 import io.github.com.pages.sections.TabGroupSection;
 import io.github.com.pages.sections.ToolbarSection;
@@ -41,7 +41,6 @@ public class AngularPage extends WebPage {
     public static Ripple rippleContainer;
     public static BottomSheet bottomSheet;
     public static Dialog dialog;
-
     public static RadioButtonSection radioButtonSection;
     public static CheckboxSection checkboxSection;
     public static ToolbarSection toolbarSection;
@@ -68,4 +67,5 @@ public class AngularPage extends WebPage {
     public static ExpansionPanelSection expansionPanelSection;
     public static SpinnerSection spinnerSection;
     public static ChipsSection chipsSection;
+    public static SortingOverviewSection sortingOverviewSection;
 }
