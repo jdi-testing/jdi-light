@@ -13,6 +13,7 @@ public interface ILogger {
     void logOff();
     void logOn();
     void dropLogOff();
+    void trace(String msg, Object... args);
     void debug(String msg, Object... args);
     void info(String msg, Object... args);
     void step(String msg, Object... args);

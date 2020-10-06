@@ -35,6 +35,15 @@ public class DataTableTests implements TestsInit {
             firstTime = false;
         }
     }
+
+    @Test
+    public void iterationTest() {
+        String text = "";
+        for(MarvelUserInfo user : users) {
+            text += user.number;
+        }
+        assertEquals(text, "123456");
+    }
     @Test
     public void visualTableChecks() {
         List<Line> rows = users.rowsImages();

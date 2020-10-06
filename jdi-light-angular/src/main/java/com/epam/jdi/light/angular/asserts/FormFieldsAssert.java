@@ -1,11 +1,13 @@
 package com.epam.jdi.light.angular.asserts;
 
-import com.epam.jdi.light.angular.elements.complex.*;
-import com.epam.jdi.light.asserts.generic.*;
-import com.epam.jdi.light.common.*;
-import org.hamcrest.*;
+import com.epam.jdi.light.angular.elements.complex.FormField;
+import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.common.JDIAction;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class FormFieldsAssert extends UIAssert<FormFieldsAssert, FormField> implements HasAssert<FormFieldsAssert> {
     @JDIAction("Assert that '{name}' input with index {0} has value {1}")
