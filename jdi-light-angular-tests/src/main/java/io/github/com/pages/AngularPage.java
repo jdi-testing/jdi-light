@@ -34,6 +34,7 @@ public class AngularPage extends WebPage {
     public static SliderSection sliderSection;
     public static CardSection cardSection;
     public static TooltipSection tooltipSection;
+    public static MaterialTreeSection materialTreeSection;
     public static DatepickerSection datepickerSection;
     public static FormFieldsSection formFieldsSection;
     public static SideNavSection sidenavSection;
