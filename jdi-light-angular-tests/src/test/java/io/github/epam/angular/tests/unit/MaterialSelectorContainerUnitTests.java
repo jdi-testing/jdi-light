@@ -54,7 +54,7 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
     public void selectByIndexTest() {
         basicMatSelect.show();
         basicMatSelect.expand();
-        container.select(1);
+        container.select(ELEMENT.startIndex);
         assertTrue(basicMatSelect.selected(STEAK));
     }
 

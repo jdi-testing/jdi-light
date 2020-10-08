@@ -1,8 +1,10 @@
 package io.github.epam.html.tests.site.steps;
 
-import com.epam.jdi.light.elements.composite.WebPage;
 import io.qameta.allure.Step;
 
+import static com.epam.jdi.light.elements.common.Cookies.clearAllCookies;
+import static com.epam.jdi.light.elements.common.Cookies.hasNoCookie;
+import static com.epam.jdi.light.elements.composite.WebPage.openSite;
 import static com.epam.jdi.light.elements.composite.WebPage.verifyUrl;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
@@ -15,7 +17,7 @@ public class States {
     @Step
     public static void shouldBeLoggedIn() {
         moveToHomePage();
-        if (userName.isHidden())
+        if (hasNoCookie("authUser"))
             login();
     }
     @Step
@@ -23,7 +25,6 @@ public class States {
         if (!verifyUrl("https://jdi-testing.github.io/jdi-light/") || epamLogo.isNotExist())
             homePage.open();
     }
-
     @Step
     public static void login() {
         if (loginForm.isHidden())
@@ -32,21 +33,10 @@ public class States {
         loginForm.submit(DEFAULT_USER);
         userName.has().text("ROMAN IOVLEV");
     }
-
     @Step
     public static void shouldBeLoggedOut() {
-        if (!WebPage.getUrl().contains("https://jdi-testing.github.io/jdi-light/"))
-            homePage.open();
-        if (userName.isDisplayed())
-            logout();
-        if (loginForm.isDisplayed())
-            userIcon.click();
-    }
-    @Step
-    public static void logout() {
-        if (!logout.isDisplayed())
-            userIcon.click();
-        logout.click();
+        clearAllCookies();
+        openSite();
     }
 
 }

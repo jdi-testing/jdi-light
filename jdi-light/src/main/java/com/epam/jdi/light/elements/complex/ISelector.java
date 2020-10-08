@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.epam.jdi.tools.HasStartIndex;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import static com.epam.jdi.tools.LinqUtils.map;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue  {
+public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue, HasStartIndex {
     @JDIAction("Select '{0}' in '{name}'")
     default void select(String value) { list().select(value); }
     @JDIAction("Select '{0}' in '{name}'")

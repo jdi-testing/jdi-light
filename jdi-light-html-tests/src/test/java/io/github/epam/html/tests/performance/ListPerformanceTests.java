@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.performancePage;
 import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.html.tests.performance.PerfStatistic.*;
@@ -61,7 +62,7 @@ public class ListPerformanceTests implements TestsInit {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.get(index).getText();
-        }, () -> firstXpath.getFast(index+1).getText(), 0.8, 0.8, 100);
+        }, () -> firstXpath.getFast(index + ELEMENT.startIndex).getText(), 0.8, 0.8, 100);
     }
 
     @Test(invocationCount = repeat)
@@ -78,8 +79,8 @@ public class ListPerformanceTests implements TestsInit {
         firstRow.values();
 
         testScenario(() -> elements.stream().filter(
-                el -> el.getText().equals(value)).findFirst().get().getText(),
-                () -> firstRow.get(value).getText(), 70, 75, 10);
+            el -> el.getText().equals(value)).findFirst().get().getText(),
+            () -> firstRow.get(value).getText(), 70, 75, 10);
     }
     @Test(invocationCount = repeat)
     public void getValueTest() {
@@ -93,7 +94,7 @@ public class ListPerformanceTests implements TestsInit {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.get(index).getText();
-        }, () -> firstXpath.get(index+1).getText(), 0.6, 0.6, 100);
+        }, () -> firstXpath.get(index + ELEMENT.startIndex).getText(), 0.6, 0.6, 100);
     }
 
 

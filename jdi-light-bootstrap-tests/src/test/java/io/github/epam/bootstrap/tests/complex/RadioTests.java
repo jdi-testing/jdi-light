@@ -37,7 +37,7 @@ public class RadioTests implements TestsInit {
 
     @Test
     public void selectNumTest() {
-        airClassOptions.select(2);
+        airClassOptions.select(ELEMENT.startIndex + 1);
         assertEquals(airClassOptions.getValue(), "Second class");
     }
     @Test
