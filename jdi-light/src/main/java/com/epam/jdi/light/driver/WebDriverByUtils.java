@@ -92,7 +92,7 @@ public final class WebDriverByUtils {
     }
 
     public static By correctXPaths(By byValue) {
-        return byValue.toString().contains("By.xpath: //")
+        return byValue.toString().contains("By.xpath: //") || byValue.toString().contains("By.xpath: (//")
                 ? getByFunc(byValue).apply(getByLocator(byValue)
                 .replaceFirst("/", "./"))
                 : byValue;

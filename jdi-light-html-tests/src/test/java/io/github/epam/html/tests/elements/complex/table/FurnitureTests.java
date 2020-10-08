@@ -13,7 +13,7 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.SimpleTablePage.furniture;
+import static io.github.com.pages.SimpleTablePage.furnitureJ;
 import static io.github.com.pages.SimpleTablePage.simpleTable;
 import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -35,9 +35,9 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void tableParamsTest() {
-        assertEquals(furniture.size(), 4);
-        assertEquals(furniture.count(), 5);
-        assertEquals(furniture.header(), asList("Name", "Type", "Cost", "Weight"));
+        assertEquals(furnitureJ.size(), 4);
+        assertEquals(furnitureJ.count(), 5);
+        assertEquals(furnitureJ.header(), asList("Name", "Type", "Cost", "Weight"));
     }
     @Test
     public void simpleTableParamsTest() {
@@ -53,14 +53,14 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void previewTest() {
-        String value = furniture.preview();
+        String value = furnitureJ.preview();
         assertEquals(value.replaceAll(" ", ""),
             "NameTypeCost*WeightChairfurniture3.52Tablefurniture3.53.5Sofafurniture22Kitchenkitchen400Robotrobo");
     }
 
     @Test
     public void valueTest() {
-        String value = furniture.getValue();
+        String value = furnitureJ.getValue();
         assertEquals(value,
             "||X||Name|Type|Cost|Weight||" + LINE_BREAK +
             "||"+i(0)+"||Chair|furniture|3.5|2||" + LINE_BREAK +
@@ -72,79 +72,79 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void dataColumnTestIndex() {
-        assertEquals(furniture.dataRow(ELEMENT.startIndex + 1), TABLE);
+        assertEquals(furnitureJ.dataRow(ELEMENT.startIndex + 1), TABLE);
     }
 
     @Test
     public void dataColumnNameTest() {
-        assertEquals(furniture.dataRow("Table"), TABLE);
+        assertEquals(furnitureJ.dataRow("Table"), TABLE);
     }
 
     @Test
     public void dataFilterTest() {
-        assertEquals(furniture.dataRow(d -> d.name.contains("Tab")), TABLE);
+        assertEquals(furnitureJ.dataRow(d -> d.name.contains("Tab")), TABLE);
     }
 
     @Test
     public void allDataFilterTest() {
-        List<Furniture> filteredData = furniture.dataRows(d -> d.name.contains("Tab"));
+        List<Furniture> filteredData = furnitureJ.dataRows(d -> d.name.contains("Tab"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), TABLE);
     }
 
     @Test
     public void commonMatchersTest() {
-        furniture.is().displayed();
-        furniture.has().size(5);
-        furniture.assertThat().size(greaterThan(3));
-        furniture.is().notEmpty().size(lessThanOrEqualTo(5));
+        furnitureJ.is().displayed();
+        furnitureJ.has().size(5);
+        furnitureJ.assertThat().size(greaterThan(3));
+        furnitureJ.is().notEmpty().size(lessThanOrEqualTo(5));
     }
 
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
-        furniture.has().row(d -> d.name.contains("Tab"));
+        furnitureJ.has().row(d -> d.name.contains("Tab"));
     }
 
     @Test
     public void rowDataMatcherTest() {
-        furniture.has().row(TABLE);
+        furnitureJ.has().row(TABLE);
     }
 
     @Test
     public void rowTableMatcherTest() {
-        furniture.has().rowThat(containsValue("furniture", inColumn("Type")),
+        furnitureJ.has().rowThat(containsValue("furniture", inColumn("Type")),
                 hasValue("Chair", inColumn("Name")));
     }
 
     @Test
     public void rowsAllTest() {
-        furniture.assertThat().all().rows(d -> d.name.length() >= 4);
+        furnitureJ.assertThat().all().rows(d -> d.name.length() >= 4);
     }
 
     @Test
     public void noRowsTest() {
-        furniture.assertThat().no().rows(d -> isBlank(d.name));
+        furnitureJ.assertThat().no().rows(d -> isBlank(d.name));
     }
 
     @Test
     public void atLeastTest() {
-        furniture.assertThat().atLeast(3).rows(d -> d.type.contains("furniture"));
+        furnitureJ.assertThat().atLeast(3).rows(d -> d.type.contains("furniture"));
     }
 
     @Test
     public void exactMatcherTest() {
-        furniture.assertThat().exact(2).rows(d -> d.cost.contains("3.5"));
+        furnitureJ.assertThat().exact(2).rows(d -> d.cost.contains("3.5"));
     }
 
     @Test
     public void rowDataExactMatcherTest() {
-        furniture.assertThat().exact(1).rows(TABLE);
+        furnitureJ.assertThat().exact(1).rows(TABLE);
     }
 
     @Test
     public void tableChainTest() {
-        furniture.assertThat()
+        furnitureJ.assertThat()
             .displayed().size(5).size(greaterThan(3)).notEmpty()
             .row(d -> d.name.contains("Tab"))
             .all().rows(d -> d.name.length() >= 4)

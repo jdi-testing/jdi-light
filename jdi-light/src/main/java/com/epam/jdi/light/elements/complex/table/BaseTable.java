@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.complex.table;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
@@ -27,6 +28,8 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.base.JDIBase.STRING_SIMPLIFY;
 import static com.epam.jdi.light.elements.complex.WebList.newList;
 import static com.epam.jdi.light.elements.complex.table.Line.initLine;
@@ -73,6 +76,38 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         startIndex = index;
     }
 
+    protected boolean locatorsValidated = false;
+    @Override
+    public UIElement core() {
+        UIElement core = super.core();
+        if (hasRunDrivers() && !locatorsValidated) {
+            try {
+                locatorsValidated = true;
+                validateLocators(core);
+            } catch (Exception ex) {
+                locatorsValidated = false;
+            }
+        }
+        return core;
+    }
+    protected void validateLocators(UIElement core) {
+        if (getByLocator(headerLocator).equals("th,thead td")) {
+            if (core.find("th").isExist()) {
+                headerLocator = By.cssSelector("th");
+            } else {
+                headerLocator = By.xpath(core.find("thead").isExist()
+                        ? "//thead//td" : "//tr[1]//td");
+            }
+        }
+        if (core.find("tbody").isExist() && getByLocator(allCellsLocator).equals("td") && getByLocator(cellLocator).equals("//tr[{1}]/td[{0}]")
+                && getByLocator(columnLocator).equals("//tr/td[%s]") && getByLocator(rowLocator).equals("//tr[%s]/td")) {
+            allCellsLocator = By.cssSelector("tbody td");
+            cellLocator = By.xpath("//tbody//tr[{1}]/td[{0}]");
+            columnLocator = By.xpath("//tbody//tr/td[%s]");
+            rowLocator = By.xpath("//tbody//tr[%s]/td");
+        }
+    }
+
     protected int getRowHeaderIndex() {
         if (rowHeaderIndex == -1)
             rowHeaderIndex = isNotBlank(rowHeaderName)
@@ -83,9 +118,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int getShiftRowIndex() {
         if (shiftRowIndex != -1)
             return shiftRowIndex;
-        shiftRowIndex = getByLocator(rowLocator).equals("//tr[%s]/td") && core().finds("tr th").size() > 0
-            ? 2 - getStartIndex()
-            : 1 - getStartIndex();
+        shiftRowIndex = 1 - getStartIndex();
         return shiftRowIndex;
     }
     protected int getShiftColumnIndex() {
