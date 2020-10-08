@@ -39,6 +39,7 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return selected(Matchers.is(option));
     }
 
+
     public <T extends Enum<?>> MaterialSelectorAssert selected(final T option) {
         return selected(getEnumValue(option));
     }
@@ -47,6 +48,7 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         jdiAssert(element().values(), hasItem(getEnumValue(option)));
         return this;
     }
+
 
     @JDIAction("Assert that '{name}' value '{0}'")
     public MaterialSelectorAssert value(final Matcher<String> condition) {
@@ -64,6 +66,7 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has  values '{0}'")
     public MaterialSelectorAssert values(final String... values) {
         return values(hasItems(values));
     }
@@ -78,11 +81,12 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has groups '{0}'")
     public MaterialSelectorAssert groups(final List<String> groups) {
         return groups(toStringArray(groups));
     }
 
-    public MaterialSelectorAssert groups(final String... values) {
+    private MaterialSelectorAssert groups(final String... values) {
         return groups(hasItems(values));
     }
 
@@ -98,10 +102,12 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has enabled values '{0}'")
     public MaterialSelectorAssert listEnabled(final List<String> listEnabled) {
         return listEnabled(toStringArray(listEnabled));
     }
 
+    @JDIAction("Assert that '{name}' has enabled values '{0}'")
     public MaterialSelectorAssert listEnabled(final String... values) {
         return listEnabled(hasItems(values));
     }
@@ -112,10 +118,12 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has disabled values '{0}'")
     public MaterialSelectorAssert listDisabled(final List<String> listDisabled) {
         return listDisabled(toStringArray(listDisabled));
     }
 
+    @JDIAction("Assert that '{name}' has disabled values '{0}'")
     public MaterialSelectorAssert listDisabled(final String... values) {
         return listDisabled(hasItems(values));
     }

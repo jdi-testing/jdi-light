@@ -19,6 +19,7 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return this;
     }
 
+    @JDIAction("Get value '{0}'")
     public ProgressBarAssert value(int value) throws Exception {
         return value(Matchers.is(value));
     }
@@ -29,6 +30,7 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return this;
     }
 
+    @JDIAction("Get min value '{0}'")
     public ProgressBarAssert min(int minValue) {
         return min(Matchers.is(minValue));
     }
@@ -39,6 +41,7 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return this;
     }
 
+    @JDIAction("Get max value '{0}'")
     public ProgressBarAssert max(int maxValue) {
         return max(Matchers.is(maxValue));
     }
@@ -49,6 +52,7 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return this;
     }
 
+    @JDIAction("Get mode '{0}'")
     public ProgressBarAssert mode(ProgressBarModes mode) {
         return mode(Matchers.is(mode.getMode()));
     }
@@ -61,17 +65,18 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return this;
     }
 
-    @JDIAction("Assert that '{name}' visible on th screen")
+    @JDIAction("Assert that '{name}' visible on the screen")
     public ProgressBarAssert color(ProgressBarColors color) {
         return cssClass(color.getColor());
     }
 
-    @JDIAction("Assert that '{name}' has buffer value '{0}'")
-    public ProgressBarAssert bufferValue(Matcher<Double> value) throws Exception {
+
+    private ProgressBarAssert bufferValue(Matcher<Double> value) throws Exception {
         jdiAssert(element.bufferValue(), value);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has buffer value '{0}'")
     public ProgressBarAssert bufferValue(Double value) throws Exception {
         return bufferValue(Matchers.is(value));
     }

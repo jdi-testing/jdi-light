@@ -37,6 +37,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return new NestedDropdownMenuAssert().set(this);
     }
 
+    @JDIAction("Expand menu")
     public void expand() {
         if (!hasAttribute("aria-expanded"))
             getButton().click();
@@ -47,6 +48,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return hasAttribute("aria-expanded");
     }
 
+    @JDIAction("Close menu")
     public void close() {
         if (hasAttribute("aria-expanded"))
             this.getButton().click(ElementArea.JS);
@@ -62,6 +64,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return actualValue.equals(expectedValue);
     }
 
+    @JDIAction("Get lis of values for nested menu")
     public List<String> valuesForNestedMenu() {
         List<String> list = new ArrayList();
         list.add(lastOpenedOptionsElements().values().toString());
@@ -80,14 +83,17 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return list;
     }
 
+    @JDIAction("Get list of values")
     public List<String> values() {
         return lastOpenedOptionsElements().values();
     }
 
+    @JDIAction("Get list of values in menu with icons")
     public List<String> valuesForMenuWithIcons() {
         return lastOpenedOptionsElementsForMenuWithIcons().values();
     }
 
+    @JDIAction("Select '{name}' value with icon")
     public void selectForMenuWithIcons(String value) {
         UIElement optionToClick = lastOpenedOptionsElementsForMenuWithIcons().get(value);
         optionToClick.click(ElementArea.JS);
@@ -105,6 +111,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return Boolean.parseBoolean(select(values).attr("aria-disabled"));
     }
 
+    @JDIAction("Select item")
     public UIElement select(String... values) {
         List<UIElement> list = new ArrayList();
         for (String value : values) {

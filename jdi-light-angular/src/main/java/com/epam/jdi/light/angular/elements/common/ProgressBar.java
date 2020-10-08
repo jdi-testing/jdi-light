@@ -16,7 +16,6 @@ import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
 
     @JDIAction(value = "Get '{name}' max limit")
-
     public int max() {
         return getInt(uiElement.attr("aria-valuemax"));
     }
@@ -40,6 +39,7 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
         throw new Exception("No exist 'value' attribute in this mode");
     }
 
+    @JDIAction("Get '{name}' progress value")
     public String getValue() throws Exception {
         return value() + "";
     }

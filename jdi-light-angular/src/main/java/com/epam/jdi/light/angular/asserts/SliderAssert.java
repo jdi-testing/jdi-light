@@ -15,27 +15,28 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         return this;
     }
 
+    @JDIAction("Assert that value has {0}")
     public SliderAssert value(double value) {
         return value(Matchers.is(value));
     }
 
-    @JDIAction("Assert that '{name}' min volume is {0}")
-    public SliderAssert minValue(Matcher<Double> min) {
+    private SliderAssert minValue(Matcher<Double> min) {
         jdiAssert(element().min(), min);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' min volume is {0}")
     public SliderAssert minValue(double minValue) {
         return minValue(Matchers.is(minValue));
     }
 
 
-    @JDIAction("Assert that '{name}' max volume {0}")
-    public SliderAssert maxValue(Matcher<Double> max) {
+    private SliderAssert maxValue(Matcher<Double> max) {
         jdiAssert(element().max(), max);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' max volume {0}")
     public SliderAssert maxValue(double maxValue) {
         return maxValue(Matchers.is(maxValue));
     }

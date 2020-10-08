@@ -44,6 +44,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      *
      * @return WebList element
      */
+    @JDIAction("Get list")
     public WebList list() {
         return ms().list();
     }
