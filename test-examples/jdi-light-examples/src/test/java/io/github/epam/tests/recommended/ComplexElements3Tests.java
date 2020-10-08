@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.originalWindow;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.*;
 import static io.github.com.pages.HomePage.githubLink;
 import static io.github.com.pages.HomePage.jdiText;
@@ -67,7 +68,7 @@ public class ComplexElements3Tests extends StaticTestsInit {
         contactFormPage.checkOpened();
         menu.select(Home);
         homePage.checkOpened();
-        navigationL.select(4);
+        navigationL.select(ELEMENT.startIndex + 3);
         menu.select(ComplexTable);
     }
 }

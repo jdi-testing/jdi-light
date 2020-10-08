@@ -42,6 +42,9 @@ public class WebDriverFactory {
     public static boolean noRunDrivers() {
         return !getRunDrivers().any();
     }
+    public static boolean hasRunDrivers() {
+        return getRunDrivers().any();
+    }
     private static MapArray<String, WebDriver> getRunDrivers() {
         logger.debug("SINGLE_THREAD=" + SINGLE_THREAD);
         return SINGLE_THREAD

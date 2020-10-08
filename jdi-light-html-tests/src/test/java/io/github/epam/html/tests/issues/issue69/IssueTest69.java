@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.epam.html.tests.issues.issue69.IssuePage69.*;
 import static io.github.epam.html.tests.issues.issue69.JDISite69.issuePage69;
 import static org.testng.Assert.assertEquals;
@@ -35,12 +36,12 @@ public class IssueTest69 {
     });
     @Test
     public void issue69DataTests() {
-        ParagraphData p = templateData.getData(1);
+        ParagraphData p = templateData.getData(ELEMENT.startIndex);
         assertEquals(p, expectedParagraph);
     }
     @Test
     public void issue69DataParagraphTests() {
-        ParagraphData p = paragraphsData.getData(2);
+        ParagraphData p = paragraphsData.getData(ELEMENT.startIndex + 1);
         assertEquals(p, expectedParagraph);
     }
 

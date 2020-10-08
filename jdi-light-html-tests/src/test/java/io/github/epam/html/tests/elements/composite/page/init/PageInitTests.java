@@ -8,6 +8,7 @@ import page.objects.jdi.HomePageWebEx;
 import page.objects.selenium.HomePage;
 import page.objects.selenium.HomePageEx;
 
+import static com.epam.jdi.light.elements.common.Cookies.clearAllCookies;
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static page.objects.selenium.PageBase.JDI_DOMAIN;
@@ -16,22 +17,11 @@ public class PageInitTests {
     static String expecterdUrl(String url) {
         return JDI_DOMAIN + url;
     }
-    boolean first = true;
     @BeforeMethod
     public void before() {
-        if (first) {
-            openUrl(JDI_DOMAIN);
-            first = false;
-        }
-        if ($("#user-name").isDisplayed()) {
-            if (!$(".logout").isDisplayed()) {
-                $("#user-icon").click();
-            }
-            $(".logout").click();
-        }
-        if (!$("form #name").isDisplayed()) {
-            $("#user-icon").click();
-        }
+        clearAllCookies();
+        openUrl(JDI_DOMAIN);
+        $("#user-icon").click();
     }
     @Test
     public void loginPageExTest() {
