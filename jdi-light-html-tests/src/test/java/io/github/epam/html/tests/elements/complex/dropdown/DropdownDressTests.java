@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
 import static io.github.com.pages.HtmlElementsPage.dressCode2;
@@ -47,7 +48,7 @@ public class DropdownDressTests implements TestsInit {
     }
     @Test
     public void selectNumTest() {
-        dressCode2.select(1);
+        dressCode2.select(ELEMENT.startIndex);
         assertEquals(dressCode2.getValue(), "Fancy");
     }
     @Test
