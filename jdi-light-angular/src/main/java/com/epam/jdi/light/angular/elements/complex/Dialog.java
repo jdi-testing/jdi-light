@@ -1,6 +1,7 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.DialogAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -26,48 +27,59 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         return new DialogAssert().set(this);
     }
 
+    @JDIAction("Click on button")
     public void clickOkButton() {
         getOkButton().click();
     }
 
+    @JDIAction("Click on noThanks button")
     public void clickNoThanksButton() {
         getNoThanksButton().click();
     }
 
+    @JDIAction("Send '{name}' to name form field")
     public void sendKeysToNameFormField(String name) {
         getNameFormField().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
         getNameFormField().sendKeys(name);
     }
 
+    @JDIAction("Send '{name}' to answer form field")
     public void sendKeysToAnswerFormField(String answer) {
         getAnswerFormField().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
         getAnswerFormField().sendKeys(answer);
     }
 
+    @JDIAction("Open dialog")
     public void open() {
         dialog.click();
     }
 
+    @JDIAction("Close dialog")
     public void close() {
         clickNoThanksButton();
     }
 
+    @JDIAction("Submit answer")
     public void submitAnswer() {
         clickOkButton();
     }
 
+    @JDIAction("Get '{name}' answer value")
     public boolean answerText(String answer) {
         return getAnswerLabel().getText().equals("You choose: " + answer);
     }
 
+    @JDIAction("Get '{name}' text value")
     public boolean nameText(String name) {
         return getGreetingLabel().getText().equalsIgnoreCase(("Hi " + name));
     }
 
+    @JDIAction("Is dialog container opened")
     public boolean isOpened() {
         return getDialogContainer().isDisplayed();
     }
 
+    @JDIAction("Is dialog container closed")
     public boolean isClosed() {
         getDialogContainer().waitFor().disappear();
         return !isOpened();

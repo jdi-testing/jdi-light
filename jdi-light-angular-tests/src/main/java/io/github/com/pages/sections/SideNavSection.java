@@ -9,9 +9,13 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class SideNavSection {
 
+    @UI("#basic-side-nav")
     public static SideNav basicSideNav;
+    @UI("#basic-drawer")
     public static SideNav basicDrawer;
+    @UI("#implicit-main-content")
     public static SideNav implicitMainContent;
+    @UI("open-close-behavior")
     public static SideNav openCloseBehavior;
 
     @UI("#open-close-behavior mat-checkbox")
@@ -19,6 +23,7 @@ public class SideNavSection {
     @UI("#open-close-behavior button")
     public static Button sideNavToggle;
 
+    @UI("#configurable-mode")
     public static SideNav configurableMode;
     @UI("#configurable-mode .mat-sidenav button")
     public static Button sideToggle;
@@ -29,18 +34,21 @@ public class SideNavSection {
     @UI("#configurable-mode .mat-sidenav-content .mat-radio-group")
     public static RadioButtons contentRadioButtons;
 
+    @UI("#custom-escape-backdrop")
     public static SideNav customEscapeBackdrop;
     @UI("#custom-escape-backdrop .mat-sidenav button")
     public static Button toggleSideNav;
     @UI("#custom-escape-backdrop .mat-sidenav-content button")
     public static Button openSideNav;
 
+    @UI("#auto-size-side-nav")
     public static SideNav autoSizeSideNav;
     @UI("#auto-size-side-nav .mat-drawer-content button")
     public static Button toggleAutoNav;
     @UI("#auto-size-side-nav .mat-drawer button")
     public static Button toggleExtraText;
 
+    @UI("#fixed-position")
     public static SideNav fixedPosition;
     @UI("#fixed-position mat-checkbox")
     public static Checkbox fixSideNav;
@@ -51,6 +59,7 @@ public class SideNavSection {
     @UI("#fixed-position .mat-sidenav-content mat-form-field input[formcontrolname='bottom']")
     public static UIElement bottomGap;
 
+    @UI("#responsive-content")
     public static SideNav responsiveContent;
     @UI("//*[@id='responsive-content']/preceding-sibling::mat-toolbar/button")
     public static Button toolbarToggle;

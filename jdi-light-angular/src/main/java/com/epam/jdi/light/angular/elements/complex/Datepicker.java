@@ -77,6 +77,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         }
     }
 
+    @JDIAction("Is datepicker collapsed")
     public boolean isCollapsed() {
         return !isExpanded();
     }
@@ -86,6 +87,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         return datepicker().attr(CLASS).contains("mat-focused");
     }
 
+    @JDIAction("Datepicker is valid")
     public boolean isValid() {
         return !isInvalid();
     }
@@ -106,6 +108,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         return datepicker().attr(CLASS).contains("mat-form-field-disabled");
     }
 
+    @JDIAction("Datepicker is enabled")
     public boolean isToggleEnabled() {
         return !isToggleDisabled();
     }
@@ -115,6 +118,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         return toggleButton().attr("disabled").contains("true");
     }
 
+    @JDIAction("Is input enabled")
     public boolean isInputEnabled() {
         return !isInputDisabled();
     }
@@ -124,6 +128,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         return input().hasAttribute("disabled");
     }
 
+    @JDIAction("Is enabled navigation element")
     public boolean isEnabledNavigationElements(final String... navigationElements) {
         return !isDisabledNavigationElements(navigationElements);
     }

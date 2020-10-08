@@ -55,14 +55,17 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         return new UIElement(element);
     }
 
+    @JDIAction("Get container locator")
     public WebList getInputs() {
         return getContainer().finds(By.xpath(matFormFieldPrefix + containerAttribute + "]//input"));
     }
 
+    @JDIAction("Get dropdown locator")
     public WebList getDropdowns() {
         return getContainer().finds(By.xpath(matFormFieldPrefix + containerAttribute + "]//mat-select"));
     }
 
+    @JDIAction("Get textarea locator")
     public WebList getTextAreas() {
         return getContainer().finds(By.xpath(matFormFieldPrefix + containerAttribute + "]//textarea"));
     }

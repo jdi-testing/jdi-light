@@ -58,6 +58,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
         reflectSliderChangeOnUI(value, sliderTrackBackground, sliderTrackFill, sliderThumbContainer);
     }
 
+    @JDIAction("Set value '{0}' for '{name}'")
     public void setValue(String value) {
         uiElement.setAttribute("aria-valuenow", value);
 

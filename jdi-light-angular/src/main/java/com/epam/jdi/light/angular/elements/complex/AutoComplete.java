@@ -34,10 +34,12 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     private String displayValueCss = "mat-label";
     private String autocompleteAttrPrefix = "_ngcontent-";
 
+    @JDIAction("Set attribute '{name}'")
     public void setUniqueAutoCompleteAttribute(String value) {
         autocompleteAttrPrefix = value;
     }
 
+    @JDIAction("Click to element")
     public void click() {
         core().click();
     }
@@ -47,6 +49,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         sendKeys(Keys.TAB);
     }
 
+    @JDIAction("Input value")
     public void input(String value) {
         core().input(value);
     }
@@ -79,6 +82,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return (!labels.isEmpty()) ? labels.get(1).getText() : "";
     }
 
+    @JDIAction("Is option highlighted")
     public Boolean isOptionHighlighted(String value) {
         WebList values = getOptions(optionsCss);
         UIElement element = values.get(value);
@@ -86,6 +90,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return selected.contains("mat-active");
     }
 
+    @JDIAction("Set value")
     public void setValue(String inputValue, String selectValue) {
         if (!isEmpty()) {
             clear();

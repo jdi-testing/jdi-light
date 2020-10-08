@@ -20,19 +20,23 @@ public class BottomSheetAssert extends UIAssert<BottomSheetAssert, BottomSheet> 
         return this;
     }
 
-    public BottomSheetAssert values(final String... values) {
+
+    private BottomSheetAssert values(final String... values) {
         return values(hasItems(values));
     }
 
+    @JDIAction("Verify '{name}' values")
     public BottomSheetAssert values(final List<String> values) {
         return values(toStringArray(values));
     }
 
+    @JDIAction("Verify that bottom opened")
     public BottomSheetAssert opened() {
         jdiAssert(element().isOpened(), Matchers.is(true));
         return this;
     }
 
+    @JDIAction("Verify that bottom closed")
     public BottomSheetAssert closed() {
         jdiAssert(element().isClosed(), Matchers.is(true));
         return this;

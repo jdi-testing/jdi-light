@@ -27,6 +27,7 @@ public class ExpansionPanelAssert extends UIAssert<ExpansionPanelAssert, Expansi
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has field '{0}' with value '{1}'")
     public ExpansionPanelAssert value(final String value, final String field) {
         return value(Matchers.is(field), value);
     }
@@ -37,6 +38,7 @@ public class ExpansionPanelAssert extends UIAssert<ExpansionPanelAssert, Expansi
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has title '{0}' with value '{1}'")
     public ExpansionPanelAssert title(final String title, final int titleNumber) {
         return title(Matchers.is(title), titleNumber);
     }
@@ -47,6 +49,7 @@ public class ExpansionPanelAssert extends UIAssert<ExpansionPanelAssert, Expansi
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has description '{0}' with value '{1}'")
     public ExpansionPanelAssert description(final String description, final int titleNumber) {
         return description(Matchers.is(description), titleNumber);
     }
@@ -57,6 +60,7 @@ public class ExpansionPanelAssert extends UIAssert<ExpansionPanelAssert, Expansi
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has description '{0}' with value '{1}'")
     public ExpansionPanelAssert content(final String content, final int titleNumber) {
         return content(Matchers.is(content), titleNumber);
     }

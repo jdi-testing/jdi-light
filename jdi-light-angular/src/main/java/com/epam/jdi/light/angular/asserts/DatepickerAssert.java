@@ -130,152 +130,154 @@ public class DatepickerAssert extends UIAssert<DatepickerAssert, Datepicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' placeholder '{0}'")
-    public DatepickerAssert placeholder(final Matcher<String> condition) {
+    private DatepickerAssert placeholder(final Matcher<String> condition) {
         jdiAssert(element().placeholder(), condition);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' placeholder '{0}'")
     public DatepickerAssert placeholder(final String date) {
         return placeholder(Matchers.is(date));
     }
 
-    @JDIAction("Assert that '{name}' date '{0}'")
-    public DatepickerAssert date(final Matcher<String> date) {
+
+    private DatepickerAssert date(final Matcher<String> date) {
         jdiAssert(element().getValue(), date);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' date '{0}'")
     public DatepickerAssert date(final String date) {
         return date(Matchers.is(date));
     }
 
-    @JDIAction("Assert that '{name}' has selected date '{0}'")
-    public DatepickerAssert selectedDate(final Matcher<LocalDate> selectedDate) {
+    private DatepickerAssert selectedDate(final Matcher<LocalDate> selectedDate) {
         jdiAssert(element().selectedDate(), selectedDate);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has selected date '{0}'")
     public DatepickerAssert selectedDate(final LocalDate selectedDate) {
         return selectedDate(Matchers.is(selectedDate));
     }
 
-    @JDIAction("Assert that '{name}' has selected date '{0}' with '{1}' locale")
-    public DatepickerAssert selectedDate(final Matcher<LocalDate> selectedDate, final Locale locale) {
+    private DatepickerAssert selectedDate(final Matcher<LocalDate> selectedDate, final Locale locale) {
         jdiAssert(element().selectedDate(locale), selectedDate);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has selected date '{0}' with '{1}' locale")
     public DatepickerAssert selectedDate(final LocalDate selectedDate, final Locale locale) {
         return selectedDate(Matchers.is(selectedDate), locale);
     }
 
-    @JDIAction("Assert that '{name}' month '{0}'")
-    public DatepickerAssert month(final Matcher<Month> month) {
+    private DatepickerAssert month(final Matcher<Month> month) {
         jdiAssert(element().getMonth(), month);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' month '{0}'")
     public DatepickerAssert month(final Month month) {
         return month(Matchers.is(month));
     }
 
-    @JDIAction("Assert that '{name}' has selected month '{0}'")
-    public DatepickerAssert selectedMonth(final Matcher<Month> selectedMonth) {
+    private DatepickerAssert selectedMonth(final Matcher<Month> selectedMonth) {
         jdiAssert(element().selectedMonth(), selectedMonth);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has selected month '{0}'")
     public DatepickerAssert selectedMonth(final Month selectedMonth) {
         return selectedMonth(Matchers.is(selectedMonth));
     }
 
-    @JDIAction("Assert that '{name}' has start month '{0}'")
-    public DatepickerAssert startMonth(final Matcher<Month> startMonth) {
+    private DatepickerAssert startMonth(final Matcher<Month> startMonth) {
         jdiAssert(element().startMonth(), startMonth);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has start month '{0}'")
     public DatepickerAssert startMonth(final Month startMonth) {
         return startMonth(Matchers.is(startMonth));
     }
 
-    @JDIAction("Assert that '{name}' year '{0}'")
-    public DatepickerAssert year(final Matcher<Year> year) {
+    private DatepickerAssert year(final Matcher<Year> year) {
         jdiAssert(element().getYear(), year);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' year '{0}'")
     public DatepickerAssert year(final Year year) {
         return year(Matchers.is(year));
     }
 
-    @JDIAction("Assert that '{name}' has selected year '{0}'")
-    public DatepickerAssert selectedYear(final Matcher<Year> selectedYear) {
+    private DatepickerAssert selectedYear(final Matcher<Year> selectedYear) {
         jdiAssert(element().selectedYear(), selectedYear);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has selected year '{0}'")
     public DatepickerAssert selectedYear(final Year selectedYear) {
         return selectedYear(Matchers.is(selectedYear));
     }
 
-    @JDIAction("Assert that '{name}' has start year '{0}'")
-    public DatepickerAssert startYear(final Matcher<Year> startYear) {
+    private DatepickerAssert startYear(final Matcher<Year> startYear) {
         jdiAssert(element().startYear(), startYear);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has start year '{0}'")
     public DatepickerAssert startYear(final Year startYear) {
         return startYear(Matchers.is(startYear));
     }
 
-    @JDIAction("Assert that '{name}' day '{0}'")
-    public DatepickerAssert day(final Matcher<Integer> day) {
+
+    private DatepickerAssert day(final Matcher<Integer> day) {
         jdiAssert(element().getDay(), day);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' day '{0}'")
     public DatepickerAssert day(final int day) {
         return day(Matchers.is(day));
     }
 
-    @JDIAction("Assert that '{name}' has selected day '{0}'")
-    public DatepickerAssert selectedDay(final Matcher<Integer> selectedDay) {
+    private DatepickerAssert selectedDay(final Matcher<Integer> selectedDay) {
         jdiAssert(element().selectedDay(), selectedDay);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has selected day '{0}'")
     public DatepickerAssert selectedDay(final int selectedDay) {
         return selectedDay(Matchers.is(selectedDay));
     }
 
-    @JDIAction("Assert that '{name}' has start day '{0}'")
-    public DatepickerAssert startDay(final Matcher<Integer> startDay) {
+    private DatepickerAssert startDay(final Matcher<Integer> startDay) {
         jdiAssert(element().startDay(), startDay);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has start day '{0}'")
     public DatepickerAssert startDay(final int startDay) {
         return startDay(Matchers.is(startDay));
     }
 
-    @JDIAction("Assert that '{name}' has start day '{0}' with '{1}' locale")
-    public DatepickerAssert startDay(final Matcher<Integer> startDay, final Locale locale) {
+    private DatepickerAssert startDay(final Matcher<Integer> startDay, final Locale locale) {
         jdiAssert(element().startDay(locale), startDay);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has start day '{0}' with '{1}' locale")
     public DatepickerAssert startDay(final int startDay, final Locale locale) {
         return startDay(Matchers.is(startDay), locale);
     }
 
-    @JDIAction("Assert that '{name}' has today day '{0}'")
-    public DatepickerAssert todayDay(final Matcher<Integer> todayDay) {
+    private DatepickerAssert todayDay(final Matcher<Integer> todayDay) {
         jdiAssert(element().todayDay(), todayDay);
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has today day '{0}'")
     public DatepickerAssert todayDay(final int todayDay) {
         return todayDay(Matchers.is(todayDay));
     }
