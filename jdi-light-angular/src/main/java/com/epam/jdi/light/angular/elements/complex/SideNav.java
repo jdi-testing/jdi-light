@@ -49,11 +49,6 @@ public class SideNav extends UIBaseElement<UIAssert<?, SideNav>> {
         return getContent().finds("p");
     }
 
-//    @Override
-//    public SideNavAssert is() {
-//        return new SideNavAssert().set(this);
-//    }
-
     @JDIAction("Get '{name}' side nav items")
     private WebList getSideNavItems() {
         return this.finds(".mat-sidenav");
