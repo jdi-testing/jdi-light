@@ -5,22 +5,15 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.SimpleTablePage.furniture;
-import static io.github.com.pages.SimpleTablePage.simpleTable;
 import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.jsoup.internal.StringUtil.isBlank;
+import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 
 public class BasicTests implements TestsInit {

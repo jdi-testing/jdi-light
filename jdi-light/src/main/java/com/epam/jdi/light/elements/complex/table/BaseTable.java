@@ -3,7 +3,6 @@ package com.epam.jdi.light.elements.complex.table;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
@@ -28,7 +27,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.base.JDIBase.STRING_SIMPLIFY;
 import static com.epam.jdi.light.elements.complex.WebList.newList;
