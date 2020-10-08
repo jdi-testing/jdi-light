@@ -4,6 +4,7 @@ import com.epam.jdi.light.angular.elements.complex.Datepicker;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
 public class DatepickerSection {
+
     @UI("#basic-datepicker")
     public static Datepicker basicDatepicker;
 
