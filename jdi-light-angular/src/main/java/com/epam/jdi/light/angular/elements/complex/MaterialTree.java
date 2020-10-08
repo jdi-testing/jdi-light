@@ -118,7 +118,8 @@ public class MaterialTree extends UIBaseElement<UIAssert<?, MaterialTree>> {
     protected List<UIElement> getExpansionIndicatorLocator() {
         String idName = this.uiElement.locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", "");
-        List<UIElement> nodes = new WebList(By.xpath(String.format(expansionIndicatorLocator, idName)));
+        String sl = String.format(expansionIndicatorLocator, idName);
+        List<UIElement> nodes = new WebList(By.xpath(sl));
         return nodes;
 //        return new WebList(By.xpath(String.format(expansionIndicatorLocator,
 //                this.uiElement.locator.printLocator().replace(smartSharp, "")
