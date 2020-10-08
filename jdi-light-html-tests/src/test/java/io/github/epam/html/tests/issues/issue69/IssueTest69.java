@@ -26,9 +26,12 @@ public class IssueTest69 {
 
     @Test(dataProvider = "paragraphs")
     public void issue69Tests(String paragraphName) {
-        int index = paragraphName.contains("template") ? 1 : 2;
+        int index = ELEMENT.startIndex - 1 + (paragraphName.contains("template") ? 1 : 2);
         Paragraph p = paragraph(paragraphName).get(index);
-        assertEquals(p.toString(), "element_1_1,element_1_2,element_1_3");
+        assertEquals(p.toString(), "" +
+                "element_" + index + "_1," +
+                "element_" + index + "_2," +
+                "element_" + index + "_3");
     }
 
     ParagraphData expectedParagraph = new ParagraphData().set(p-> {
@@ -36,7 +39,7 @@ public class IssueTest69 {
     });
     @Test
     public void issue69DataTests() {
-        ParagraphData p = templateData.getData(ELEMENT.startIndex);
+        ParagraphData p = templateData.getData(ELEMENT.startIndex + 1);
         assertEquals(p, expectedParagraph);
     }
     @Test
