@@ -12,6 +12,7 @@ import com.epam.jdi.tools.func.JFunc1;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**
  * Created by Roman Iovlev on 02.03.2018
@@ -21,7 +22,11 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
     protected Selector selector() {
         return new Selector().setCore(Selector.class, base());
     }
-    public WebList list() { return selector().list(); }
+    public WebList list() {
+        WebList list = selector().list();
+        list.setStartIndex(getStartIndex());
+        return list;
+    }
 
     /**
      * Select the specified element by the value
@@ -63,4 +68,11 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
     }
 
     public boolean isExpanded() { throw exception("isExpanded can not be used with this element"); }
+    protected int startIndex = ELEMENT.startIndex;
+    public int getStartIndex() {
+        return startIndex;
+    }
+    public void setStartIndex(int index) {
+        startIndex = index;
+    }
 }

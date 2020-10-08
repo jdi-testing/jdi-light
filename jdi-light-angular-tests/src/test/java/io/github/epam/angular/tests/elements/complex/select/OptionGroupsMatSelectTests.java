@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.optionGroupsMatSelect;
 import static org.hamcrest.Matchers.matchesPattern;
 
@@ -21,7 +22,7 @@ public class OptionGroupsMatSelectTests extends TestsSelectBase {
 
     @Test
     public void checkNoneOptionCanBeSelectedById() {
-        optionGroupsMatSelect.select(1);
+        optionGroupsMatSelect.select(ELEMENT.startIndex);
         optionGroupsMatSelect.is().selected(matchesPattern("\\W+"));
     }
 

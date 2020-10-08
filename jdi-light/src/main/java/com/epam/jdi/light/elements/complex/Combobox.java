@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -17,5 +18,13 @@ public class Combobox extends UIListBase<DropdownAssert> implements IsCombobox {
     @Override
     public DropdownAssert is() {
         return new DropdownAssert().set(this);
+    }
+
+    protected int startIndex = ELEMENT.startIndex;
+    public int getStartIndex() {
+        return startIndex;
+    }
+    public void setStartIndex(int index) {
+        startIndex = index;
     }
 }

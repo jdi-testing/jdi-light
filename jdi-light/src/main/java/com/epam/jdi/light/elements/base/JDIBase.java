@@ -208,6 +208,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         VALIDATE_FOUND_ELEMENT.execute(this, element);
         return element;
     }
+    public WebElement get(Object... args) {
+        return ELEMENT.getElementWithArgs.execute(this, args);
+    }
     public static JAction2<JDIBase, WebElement> VALIDATE_FOUND_ELEMENT = JDIBase::validateFoundElement;
     private static void validateFoundElement(JDIBase base, WebElement element) {
         for (JFunc1<WebElement, Boolean> rule : base.searchRules().values())
@@ -229,9 +232,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             b.searchRules = searchRules;
             b.timeout = timeout;
         });
-    }
-    public WebElement get(Object... args) {
-        return ELEMENT.getElementWithArgs.execute(this, args);
     }
     UIElement getWebListFromArgs(Object... args) {
         if (locator.argsCount() == 0 && args.length == 1) {
