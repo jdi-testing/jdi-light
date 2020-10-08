@@ -8,7 +8,6 @@ import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 
 public class TabGroupSection {
-
     @UI("#basic-tab")
     public TabGroup basicTab;
 
