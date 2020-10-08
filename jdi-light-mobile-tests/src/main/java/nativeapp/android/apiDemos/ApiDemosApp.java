@@ -7,4 +7,8 @@ public class ApiDemosApp {
     public static IndexPage indexPage;
     public static ViewsPage viewsPage;
     public static ButtonsPage buttonsPage;
+    public static SearchViewPage searchViewPage;
+    public static SearchViewActionBarPage searchViewActionBarPage;
+    public static SearchViewAlwaysExpandedPage searchViewAlwaysExpandedPage;
+    public static SearchViewFilterPage searchViewFilterPage;
 }
