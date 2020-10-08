@@ -6,6 +6,10 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 
+/**
+ * To see an example of Card web element please visit https://material.angular.io/components/card/overview.
+ */
+
 public class Card extends UIBaseElement<CardAssert> {
     @JDIAction("Get '{name}' header")
     public UIElement getHeader() {
@@ -53,12 +57,12 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get button with text '{text}'")
-    public UIElement getButtonByText(String text){
+    public UIElement getButtonByText(String text) {
         return this.getButtons().get(text);
     }
 
     @JDIAction("Get button with number '{number}'")
-    public UIElement getButtonByNumber(int number){
+    public UIElement getButtonByNumber(int number) {
         return this.getButtons().get(number);
     }
 

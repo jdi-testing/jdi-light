@@ -34,6 +34,7 @@ import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCH
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -64,13 +65,20 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int firstRowIndex = -1;
     protected int[] columnsMapping = new int[]{};
     protected String rowHeaderName = "";
+    protected int startIndex = ELEMENT.startIndex;
+    public int getStartIndex() {
+        return startIndex;
+    }
+    public void setStartIndex(int index) {
+        startIndex = index;
+    }
 
     protected int getRowHeaderIndex() {
         if (rowHeaderIndex == -1 && isNotBlank(rowHeaderName)) {
             int index = firstIndex(header(),
                 h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowHeaderName)));
             if (index > -1)
-                rowHeaderIndex = index + 1;
+                rowHeaderIndex = index + getStartIndex();
             else throw exception(
             "Can't find rowHeader '%s' in 'header' [%s]. Please correct JTable params",
                 rowHeaderName, print(header()));
@@ -150,7 +158,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (columns.get().any())
             return columns.get().get(0).value.size();
         int rowsCount = $$(fillByTemplate(columnLocator, getRowIndex()), this).getListFast().size();
-        return headerSameAsFirstRow() ? rowsCount - 1 : rowsCount;
+        return headerSameAsFirstRow() ? rowsCount - getStartIndex() : rowsCount;
     }
 
     /**
@@ -182,8 +190,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return result;
     }
     protected void validateRowIndex(int rowNum) {
-        if (rowNum < 1)
-            throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
+        if (rowNum < getStartIndex())
+            throw exception("Rows numeration starts from %s (but requested index is %s)", getStartIndex(), rowNum);
         if (rowNum > count()) {
             boolean gotAll = cells.isGotAll();
             waitFor().size(greaterThanOrEqualTo(rowNum));
@@ -202,7 +210,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
     protected int getRowIndex() {
         int headerIndex = getRowHeaderIndex();
-        return headerIndex == -1 ? 1 : headerIndex;
+        return headerIndex == -1 ? getStartIndex() : headerIndex;
     }
     public WebList webRow(Enum rowName) {
         return webRow(getEnumValue(rowName));
@@ -239,7 +247,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public int jsRowIndexByName(String rowName) {
         int index = getRowHeaderIndex();
         if (index == -1)
-            index = 1;
+            index = getStartIndex();
         List<String> rowHeader;
         try {
             rowHeader = jsColumn(index);
@@ -251,11 +259,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         int rowIndex = firstIndex(rowHeader, h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowName)));
         if (rowIndex == -1)
             throw exception("Can't find row '%s'", rowName);
-        return rowIndex + 1;
+        return rowIndex + getStartIndex();
     }
     protected void validateColumnIndex(int colNum) {
-        if (colNum < 1)
-            throw exception("Columns numeration starts from 1 (but requested index is %s)", colNum);
+        if (colNum < getStartIndex())
+            throw exception("Columns numeration starts from %s (but requested index is %s)", getStartIndex(), colNum);
         if (colNum > size())
             throw exception("Table has %s columns (but requested index is %s)", size(), colNum);
     }
@@ -269,14 +277,14 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         int colIndex = firstIndex(header.get(), h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(colName)));
         if (colIndex == -1)
             throw exception("Can't find column '%s'", colName);
-        return colIndex + 1;
+        return colIndex + getStartIndex();
     }
     public int getRowIndexByName(String rowName) {
         List<String> rowHeader = rowHeader();
         int rowIndex = firstIndex(rowHeader, h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowName)));
         if (rowIndex == -1)
             throw exception("Can't find row '%s'", rowName);
-        return rowIndex + 1;
+        return rowIndex + getStartIndex();
     }
     public UIElement webCell(int colNum, int rowNum) {
         validateColumnIndex(colNum);
@@ -296,7 +304,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected MapArray<String, WebList> getRows() {
         if (rows.isGotAll()) return rows.get();
         MapArray<String, WebList> result = new MapArray<>();
-        for (int i = 1; i <= count(); i++)
+        for (int i = getStartIndex(); i < count() + getStartIndex(); i++)
             result.add(i+"", webRow(i));
         rows.gotAll();
         return rows.set(result);
@@ -309,29 +317,29 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
 
     public WebList getRow(int rowNum) {
         WebList row = getRowByIndex(getRowIndex(rowNum));
-        return firstColumnIndex > 1 || columnsMapping.length > 0
+        return firstColumnIndex > getStartIndex() || columnsMapping.length > 0
             ? getMappedRow(row)
             : row;
     }
     protected WebList getMappedRow(WebList row) {
         List<WebElement> result = new ArrayList<>();
-        for (int i = 1; i <= header().size(); i++)
+        for (int i = getStartIndex(); i < header().size() + getStartIndex(); i++)
             result.add(row.get(getColumnIndex(i)-1));
         return new WebList(result);
     }
     protected MapArray<String, WebList> getColumns() {
         if (columns.isGotAll()) return columns.get();
         MapArray<String, WebList> result = new MapArray<>();
-        for (int i = 1; i <= size(); i++)
-            result.add(i+"", webColumn(i));
+        for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
+            result.add(i +"", webColumn(i));
         columns.gotAll();
         return columns.set(result);
     }
     protected int getColumnIndex(int index) {
-        if (firstColumnIndex > 1)
-            return index + firstColumnIndex - 1;
+        if (firstColumnIndex > getStartIndex())
+            return index + firstColumnIndex - getStartIndex();
         if (columnsMapping.length > 0)
-            return columnsMapping[index-1];
+            return columnsMapping[index-getStartIndex()];
         return index;
     }
     public WebList getColumn(int colNum) {
@@ -343,12 +351,12 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
 
     protected Boolean headerIsRow = null;
     protected int getRowIndex(int rowNum) {
-        if (firstRowIndex > 1)
-            return rowNum + firstRowIndex - 1;
+        if (firstRowIndex > getStartIndex())
+            return rowNum + firstRowIndex - getStartIndex();
         if (headerIsRow == null) {
             headerIsRow = headerIsRow();
         }
-        return headerIsRow ? rowNum + 1 : rowNum;
+        return headerIsRow ? rowNum + getStartIndex() : rowNum;
     }
     protected boolean headerIsRow() {
         List<String> firstRow = new ArrayList<>();
@@ -374,7 +382,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Filter {name} by column {0}")
     public UIElement searchBy(String filterName) {
         int index = header().indexOf(filterName);
-        return filter().get(index + 1);
+        return filter().get(index + getStartIndex());
     }
 
     /**
@@ -388,7 +396,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (lines == null || lines.size() == 0)
             return null;
         List<String> result = new ArrayList<>();
-        for (int i = 1; i <= header().size(); i++)
+        for (int i = getStartIndex(); i < header().size() + getStartIndex(); i++)
             result.add(lines.get(i).getText());
         return initLine(result, header());
     }
@@ -520,7 +528,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get '{name}' table row that match criteria in column '{1}'")
     public Line row(Matcher<String> matcher, Column column) {
         return first(rows(),
-                line -> matcher.matches(line.get(column.getIndex(header()))));
+            line -> matcher.matches(line.get(column.getIndex(header()))));
     }
 
     /**
@@ -531,7 +539,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get '{name}' table row that match criteria")
     public Line row(Pair<Matcher<String>, Column>... matchers) {
         return first(rows(), line ->
-                all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
+            all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
     }
     // Columns
     /**
@@ -631,7 +639,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public String getValue() {
         getTableJs();
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
-        for (int i = 1; i <= count(); i++) {
+        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
             List<String> row = cellsValues.get().get(i+"").values();
             value += "||" + i + "||" + print(map(row, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         }
@@ -693,10 +701,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             List<String> listOfCells = jsCells();
             cellsValues.set(new MapArray<>());
             int k = 0;
-            int j = 1;
+            int j = getStartIndex();
             while (k < listOfCells.size()) {
                 MapArray<String, String> newRow = new MapArray<>();
-                for (int i = 1; i <= size(); i++)
+                for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
                     newRow.add(i+"", listOfCells.get(k++));
                 cellsValues.get().update(j+"", newRow);
                 j++;
@@ -713,11 +721,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
                                 .core().noValidation().getAllElements();
                 cells.set(new MapArray<>());
                 int k = 0;
-                int j = 1;
-                for (int i = 1; i <= size(); i++)
+                int j = getStartIndex();
+                for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
                     cells.get().update(i+"", new MapArray<>());
                 while (k < listOfCells.size()) {
-                    for (int i = 1; i <= size(); i++)
+                    for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
                         cells.get().get(i+"").update(j+"", new UIElement(listOfCells.get(k++)));
                     j++;
                 }

@@ -35,7 +35,7 @@ public class CheckboxTest {
     }
 
     @Test
-    public void isBaseElementUnselectedTest(){
+    public void isBaseElementUnselectedTest() {
         when(checkbox.core().isSelected()).thenReturn(false);
         assertFalse(checkbox.isSelected());
     }

@@ -5,7 +5,7 @@ public class Defaults {
     public static User DEFAULT_USER = new User();
 
     public static Contacts DEFAULT_CONTACT = new Contacts().set(c-> {
-        c.name = "Roman";
+        c.firstName = "Roman";
         c.lastName = "Iovlev";
         c.position = "ChiefQA";
         c.passport = true;

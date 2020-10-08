@@ -13,7 +13,7 @@ import org.mytests.uiobjects.example.site.custom.MultiDropdown;
 
 @Url("/contacts.html") @Title("Contact Form")
 public class ContactsPage extends WebPage {
-	TextField name, lastName, position, passportNumber, passportSeria;
+	TextField firstName, lastName, position, passportNumber, passportSeria;
 
 	DropdownSelect gender;
 	MultiDropdown weather;

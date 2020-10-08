@@ -27,6 +27,10 @@ import static com.epam.jdi.light.angular.entities.DatepickerNavigation.DATEPICKE
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.TOGGLE;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * To see an example of Datepicker web element please visit https://material.angular.io/components/datepicker/overview.
+ */
+
 public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLabel, IsInput {
     public static final String CLASS = "class";
     public String inputLocator = DATEPICKER.getName().replace("/ancestor::mat-form-field", "");

@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class ContactForm extends Form<Contacts> {
-	TextField name, lastName, position, passportNumber, passportSeria;
+	TextField firstName, lastName, position, passportNumber, passportSeria;
 
 	DropdownSelect gender;
 	MultiDropdown weather;

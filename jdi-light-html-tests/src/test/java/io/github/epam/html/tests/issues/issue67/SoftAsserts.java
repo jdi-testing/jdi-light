@@ -122,7 +122,7 @@ public class SoftAsserts implements TestsInit {
     }
 
     @Test
-    public void dataTableSoftAssertTest(){
+    public void dataTableSoftAssertTest() {
         try {
             usersPage.open();
             // TODO fix performance
@@ -134,13 +134,13 @@ public class SoftAsserts implements TestsInit {
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(
-                "Expected: not null", "but: was null",
+                "Expected: is \"has row\"", "but: was \"has no rows\"",
                 "Expected: a collection with size <3>", "but: collection size was <0>"
             ));
         }
     }
     @Test
-    public void customFailTest(){
+    public void customFailTest() {
         try {
             usersPage.open();
             // TODO fix performance
@@ -152,7 +152,7 @@ public class SoftAsserts implements TestsInit {
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(
-                "Expected: not null", "but: was null",
+                "Expected: is \"has row\"", "but: was \"has no rows\"",
                 "Expected: a collection with size <3>", "but: collection size was <0>"
             ));
         }

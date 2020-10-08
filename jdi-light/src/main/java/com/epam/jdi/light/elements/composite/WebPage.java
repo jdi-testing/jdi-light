@@ -17,7 +17,6 @@ import org.openqa.selenium.logging.LogEntry;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Supplier;
@@ -28,14 +27,12 @@ import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
-import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.checkNewWindowIsOpened;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
-import static com.epam.jdi.light.logger.AllureLogger.attachScreenshot;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -46,7 +43,6 @@ import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
 import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -274,19 +270,19 @@ public class WebPage extends DriverBase implements PageObject {
         if (noRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
-                Value(NONE, t -> true),
-                Value(EQUALS, t -> url().check()),
-                Value(MATCH, t -> url().match()),
-                Value(CONTAINS, t -> url().contains()),
-                Else(false)
+            Value(NONE, t -> true),
+            Value(EQUALS, t -> url().check()),
+            Value(MATCH, t -> url().match()),
+            Value(CONTAINS, t -> url().contains()),
+            Else(false)
         );
         if (!result) return false;
         result = Switch(checkTitleType).get(
-                Value(NONE, t -> true),
-                Value(EQUALS, t -> title().check()),
-                Value(MATCH, t -> title().match()),
-                Value(CONTAINS, t -> title().contains()),
-                Else(false)
+            Value(NONE, t -> true),
+            Value(EQUALS, t -> title().check()),
+            Value(MATCH, t -> title().match()),
+            Value(CONTAINS, t -> title().contains()),
+            Else(false)
         );
         if (result)
             setCurrentPage(this);
@@ -313,7 +309,7 @@ public class WebPage extends DriverBase implements PageObject {
     /**
      * Reload current page
      */
-    @JDIAction("Reload current page")
+    @JDIAction(value = "Reload current page", isAssert = true)
     public static void refresh() {
         getDriver().navigate().refresh();
     }
@@ -523,23 +519,13 @@ public class WebPage extends DriverBase implements PageObject {
             visualWindowCheck();
         }
         if (LOGS.screenStrategy.contains(NEW_PAGE)) {
-            String screenName = takeScreen(page.getName());
-            String detailsUUID = AllureLogger.startStep(page.getName());
-            if (isNotBlank(screenName)) {
-                try {
-                    attachScreenshot(screenName);
-                } catch (IOException ex) {
-                    throw exception(ex, "");
-                }
-            }
-            getLifecycle().stopStep(detailsUUID);
-
+            AllureLogger.createAttachment(page.getName(), false);
         }
         logger.toLog("Page '" + page.getName() + "' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());
     }
 
-    public static void beforeThisPage(WebPage page) {
+    public static void beforeEachPage(WebPage page) {
         if (PAGE.checkPageOpen != PageChecks.NONE) {
             page.checkOpened();
         }

@@ -92,7 +92,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
         } catch (Exception ignore) { }
     }
     public int getIndex(String name) {
-        int i = list().startIndex;
+        int i = list().getStartIndex();
         if (list().map.hasValue() && list().isActualMap()) {
             for (Pair<String, UIElement> pair : list().map.get().pairs) {
                 if (namesEqual(pair.key, name)) {
