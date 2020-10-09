@@ -39,7 +39,7 @@ public class IssueTest69 {
     });
     @Test
     public void issue69DataTests() {
-        ParagraphData p = templateData.getData(1);
+        ParagraphData p = templateData.getData(ELEMENT.startIndex);
         assertEquals(p, expectedParagraph);
     }
     @Test
