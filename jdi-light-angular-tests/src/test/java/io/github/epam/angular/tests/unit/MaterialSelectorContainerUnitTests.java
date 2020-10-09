@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.*;
 import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.*;
