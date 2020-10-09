@@ -84,18 +84,18 @@ public class DataTableTests implements TestsInit {
         rowValue = notMoreThan(1200, () -> table.row(ELEMENT.startIndex + 394).getValue());
         assertEquals(rowValue, aileenText);
 
-        String zacharyEmail = "mattis.velit.justo@Maurismolestie.com";
+        String aileenEmail = "mattis.velit.justo@Maurismolestie.com";
         String cell = notMoreThan(1000, () -> table.cell(ELEMENT.startIndex + 2,ELEMENT.startIndex + 394));
-        assertEquals(cell, zacharyEmail);
+        assertEquals(cell, aileenEmail);
 
         cell = notMoreThan(1000, () -> table.cell("Email",ELEMENT.startIndex + 394));
-        assertEquals(cell, zacharyEmail);
+        assertEquals(cell, aileenEmail);
 
         cell = notMoreThan(1000, () -> table.cell(ELEMENT.startIndex + 2,"Aileen Rodriguez"));
-        assertEquals(cell, zacharyEmail);
+        assertEquals(cell, aileenEmail);
 
         cell = notMoreThan(1000, () -> table.cell("Email","Aileen Rodriguez"));
-        assertEquals(cell, zacharyEmail);
+        assertEquals(cell, aileenEmail);
 
         List<String> column = notMoreThan(1000, () -> table.jsColumn(ELEMENT.startIndex + 1));
         assertEquals(print(column, ";").substring(0, 30),

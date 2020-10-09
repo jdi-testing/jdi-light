@@ -32,8 +32,6 @@ import static com.epam.jdi.light.elements.base.JDIBase.STRING_SIMPLIFY;
 import static com.epam.jdi.light.elements.complex.WebList.newList;
 import static com.epam.jdi.light.elements.complex.table.Line.initLine;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -51,11 +49,11 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
  */
 public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAssert<?,?>> extends UIBaseElement<A>
         implements ISetup, HasValue, HasAssert<A>, IHasSize, IsText, HasRefresh {
-    protected By rowLocator = By.xpath("//tr[%s]/td");
-    protected By columnLocator = By.xpath("//tr/td[%s]");
-    protected By cellLocator = By.xpath("//tr[{1}]/td[{0}]");
-    protected By allCellsLocator = By.cssSelector("td");
-    protected By jsRow = By.cssSelector("tr");
+    protected By rowLocator = By.xpath("//tbody//tr[%s]/td");
+    protected By columnLocator = By.xpath("//tbody//tr/td[%s]");
+    protected By cellLocator = By.xpath("//tbody//tr[{1}]/td[{0}]");
+    protected By allCellsLocator = By.cssSelector("tbody td");
+    protected By jsRow = By.cssSelector("tbody tr");
     protected By jsColumn = By.cssSelector("td");
     protected By headerLocator = By.cssSelector("th");
     protected By footer = By.cssSelector("tfoot");
@@ -89,20 +87,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return core;
     }
     protected void validateLocators(UIElement core) {
-        if (getByLocator(headerLocator).equals("th,thead td")) {
-            if (core.find("th").isExist()) {
-                headerLocator = By.cssSelector("th");
-            } else {
-                headerLocator = By.xpath(core.find("thead").isExist()
-                        ? "//thead//td" : "//tr[1]//td");
+        if (getByLocator(headerLocator).equals("th")) {
+            if (core.finds("th").size() == 0) {
+                headerLocator = core.find("thead td").isExist()
+                    ? By.cssSelector("thead td") : By.xpath("//tr[1]//td");
             }
-        }
-        if (core.find("tbody").isExist() && getByLocator(allCellsLocator).equals("td") && getByLocator(cellLocator).equals("//tr[{1}]/td[{0}]")
-                && getByLocator(columnLocator).equals("//tr/td[%s]") && getByLocator(rowLocator).equals("//tr[%s]/td")) {
-            allCellsLocator = By.cssSelector("tbody td");
-            cellLocator = By.xpath("//tbody//tr[{1}]/td[{0}]");
-            columnLocator = By.xpath("//tbody//tr/td[%s]");
-            rowLocator = By.xpath("//tbody//tr[%s]/td");
         }
     }
 
@@ -155,7 +144,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
 
     public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
     public WebList headerUI() {
-        WebList header = $$(headerLocator, this).setName(getName() + " header");
+        WebList header = core().finds(headerLocator).setName(getName() + " header");
         if (header.size() == 0) {
             header = getRowByIndex(getRowHeaderIndex());
             if (header.size() > 0) {
@@ -168,7 +157,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return header.setName(getName() + " header");
     }
     public WebList footerUI() {
-        WebList footer = $$(this.footer, this).setName(getName() + " footer");
+        WebList footer = core().finds(this.footer).setName(getName() + " footer");
         if (footer.size() == 0) {
             footer = getRowByIndex(getRowHeaderIndex());
             if (footer.size() == 0) {
@@ -356,7 +345,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return rows.set(result);
     }
     protected WebList getRowByIndex(int rowNum) {
-        WebList row = $$(fillByTemplate(rowLocator, rowNum + getShiftRowIndex()), this);
+        WebList row = core().finds(fillByTemplate(rowLocator, rowNum + getShiftRowIndex()));
         row.searchVisible();
         return row;
     }
@@ -391,12 +380,12 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
     public WebList getColumn(int colNum) {
         int colIndex = getColumnLocatorIndex(colNum);
-        return $$(fillByTemplate(columnLocator, colIndex), this).noValidation();
+        return core().finds(fillByTemplate(columnLocator, colIndex)).noValidation();
     }
     public UIElement getCell(int colNum, int rowNum) {
         int colIndex = getColumnLocatorIndex(colNum);
         int rowIndex = getRowLocatorIndex(rowNum);
-        return $(fillByMsgTemplate(cellLocator, colIndex, rowIndex), this);
+        return core().find(fillByMsgTemplate(cellLocator, colIndex, rowIndex));
     }
 
     protected Boolean headerIsRow = null;
@@ -425,10 +414,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return !firstRow.isEmpty() && any(header(), firstRow::contains);
     }
     public WebList filter() {
-        return $$(filterLocator).setup(b-> {
-            b.setParent(this);
-            b.setName(getName()+" filter");}
-        );
+        return core().finds(filterLocator).setName(getName()+" filter");
     }
     public UIElement filterBy(String filterName) {
         return searchBy(filterName);
@@ -771,8 +757,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (!cells.isGotAll()) {
             try {
                 List<WebElement> listOfCells =
-                    $$(allCellsLocator, this)
-                                .core().noValidation().getAllElements();
+                        core().finds(allCellsLocator).getAllElements();
                 cells.set(new MapArray<>());
                 int k = 0;
                 int j = getStartIndex();
