@@ -30,6 +30,6 @@ public class ApiDemosTestInit {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        WebDriverFactory.quit();
+        WebDriverFactory.quitDriverNativeApp();
     }
 }
