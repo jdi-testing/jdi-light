@@ -15,7 +15,7 @@ public class ProgressBarUnitTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
     }
 
     @Test
@@ -98,15 +98,5 @@ public class ProgressBarUnitTests extends TestsInit {
         assertEquals(matProgressBarIndeterminate.max(), 100);
         assertEquals(matProgressBarQuery.max(), 100);
         assertEquals(matProgressBarConfigurable.max(), 100);
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (matProgressBarIndeterminate.isDisplayed()) {
-            matProgressBarIndeterminate.is().disappear(5);
-        }
-        if (matProgressBarBuffer.isDisplayed()) {
-            matProgressBarBuffer.is().disappear(5);
-        }
     }
 }

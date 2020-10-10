@@ -26,7 +26,7 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         container = new MaterialSelectorContainer();
     }
 
@@ -122,21 +122,5 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
         customPanelStylingSelect.select(RED);
         customPanelStylingSelect.expand();
         assertTrue(container.color(255, 0, 0, 0.5));
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (multiSelect[0] != 0) {
-            multipleSelect.expand();
-            container.multipleSelect(multiSelect);
-            multiSelect = new int[3];
-        }
-        if (multiOptions[0] != null) {
-            multipleSelect.expand();
-            container.multipleSelect(multiOptions);
-            multiOptions[0] = null;
-            multiOptions[1] = null;
-            multiOptions[2] = null;
-        }
     }
 }
