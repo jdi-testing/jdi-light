@@ -460,7 +460,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<Line> rows(TableMatcher... matchers) {
         List<String> lines = TABLE_MATCHER.execute(this, matchers).values();
-        if (lines == null || lines.size() < header().size())
+        if (lines == null || lines.size() > 0 && lines.size() < header().size())
             return null;
         List<Line> listOfLines = new ArrayList<>();
         List<String> result = new ArrayList<>();

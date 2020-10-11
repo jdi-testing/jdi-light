@@ -198,4 +198,11 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         }
         return instance;
     }
+    protected int startIndex = ELEMENT.startIndex;
+    public int getStartIndex() {
+        return startIndex;
+    }
+    public void setStartIndex(int index) {
+        startIndex = index;
+    }
 }

@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import org.apache.commons.lang3.ObjectUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -30,11 +32,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         implements IGrid<Line>, ISetup {
-    protected String allCellsLocator = "td";
-    protected String cellTemplate = "//tr[{1}]/td[{0}]";
-    protected String columnTemplate = "//tr/td[%s]";
-    protected String rowTemplate = "//tr[%s]/td";
-    protected String headerLocator = "th,thead td";
+    protected String allCellsLocator = "tbody td";
+    protected String cellTemplate = "//tbody//tr[{1}]/td[{0}]";
+    protected String columnTemplate = "//tbody//tr/td[%s]";
+    protected String rowTemplate = "//tbody//tr[%s]/td";
+    protected String headerLocator = "th";
     protected String footerLocator = "tfoot td";
     protected List<String> header = null;
     protected int size = -1;
@@ -61,20 +63,11 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         return core;
     }
     protected void validateLocators(UIElement core) {
-        if (headerLocator.equals("th,thead td")) {
-            if (core.find("th").isExist()) {
-                headerLocator = "th";
-            } else {
-                headerLocator = core.find("thead").isExist()
-                        ? "//thead//td" : "//tr[1]//td";
+        if (headerLocator.equals("th")) {
+            if (core.finds("th").size() == 0) {
+                headerLocator = core.find("thead td").isExist()
+                        ? "thead td" : "//tr[1]//td";
             }
-        }
-        if (core.find("tbody").isExist() && allCellsLocator.equals("td") && cellTemplate.equals("//tr[{1}]/td[{0}]")
-                && columnTemplate.equals("//tr/td[%s]") && rowTemplate.equals("//tr[%s]/td")) {
-            allCellsLocator = "tbody td";
-            cellTemplate = "//tbody//tr[{1}]/td[{0}]";
-            columnTemplate = "//tbody//tr/td[%s]";
-            rowTemplate = "//tbody//tr[%s]/td";
         }
     }
     @Override

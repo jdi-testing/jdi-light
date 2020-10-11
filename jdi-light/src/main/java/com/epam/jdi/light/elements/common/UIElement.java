@@ -481,8 +481,7 @@ public class UIElement extends JDIBase
     @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
     public boolean isExist() {
         try {
-            getWebElement();
-            return true;
+            return getWebElements().size() > 0;
         } catch (Exception ignore) { return false; }
     }
     @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)

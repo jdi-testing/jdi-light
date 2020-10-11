@@ -58,7 +58,7 @@ public class DataGridDoubleHiddenTests implements TestsInit {
     }
     @Test
     public void headerTest() {
-        assertEquals(dataFurnitureDoubleHidden.header(), asList("Name", "Type", "Cost *", "Weight"));
+        assertEquals(dataFurnitureDoubleHidden.header(), asList("Name", "Type", "Cost", "Weight"));
     }
     @Test
     public void rowHeaderTest() {

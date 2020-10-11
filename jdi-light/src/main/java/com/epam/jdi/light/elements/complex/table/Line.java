@@ -60,9 +60,14 @@ public class Line implements IList<String>, IBaseElement {
         this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();
     }
     public static Line initLine(List<String> list, List<String> headers) {
+        if (list == null || headers == null || list.size() == 0 || headers.size() == 0
+            || list.size() != headers.size())
+            throw exception("Failed to init Line[list: %s; headers: %s;]",
+                list == null ? "null" : list.toString(), headers == null ? "null" : headers.toString());
         Line line = new Line();
         line.list = new ArrayList<>(list);
         line.headers = new ArrayList<>(headers);
+        line.data = new MultiMap<>(headers, list).ignoreKeyCase();
         return line;
     }
     private MultiMap<String, String> data;
@@ -100,12 +105,12 @@ public class Line implements IList<String>, IBaseElement {
     public void saveCellsImages() {
         String unique = Timer.nowMSecs();
         List<UIElement> result = new ArrayList<>();
-        for (int i = 0; i < elements.size(); i++) {
-            UIElement cell = elements.get(i + getStartIndex());
-            cell.show();
-            cell.varName = headers.get(i)+unique;
-            cell.makePhoto();
-            result.add(cell);
+        int i = 0;
+        for (UIElement element : elements) {
+            element.show();
+            element.varName = headers.get(i++)+unique;
+            element.makePhoto();
+            result.add(element);
         }
         elements = new WebList(headers, result);
     }
@@ -121,7 +126,10 @@ public class Line implements IList<String>, IBaseElement {
         return PrintUtils.print(getList(0), ";");
     }
     public String print() {
-        return getData(0).toString();
+        System.out.println("REMOVE");
+        String s = getData(0).toString();
+        System.out.println("REMOVE 2");
+        return s;
     }
 
     public void clear() { data = null; }
@@ -191,6 +199,10 @@ public class Line implements IList<String>, IBaseElement {
             }
             return instance;
         });
+    }
+    @Override
+    public int size() {
+        return headers.size();
     }
 
     @Override
