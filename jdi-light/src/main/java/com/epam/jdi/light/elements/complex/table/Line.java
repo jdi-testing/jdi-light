@@ -126,10 +126,7 @@ public class Line implements IList<String>, IBaseElement {
         return PrintUtils.print(getList(0), ";");
     }
     public String print() {
-        System.out.println("REMOVE");
-        String s = getData(0).toString();
-        System.out.println("REMOVE 2");
-        return s;
+        return getData(0).toString();
     }
 
     public void clear() { data = null; }
