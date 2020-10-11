@@ -20,18 +20,13 @@ public class SimpleTablePage extends WebPage {
         row = "//tbody/tr[%s]/td",
         cell = "//tbody/tr[{1}]/td[{0}]",
         allCells = "//tbody//td")
-    public static DataTable<?, Furniture> furnitureTable;
+    public static DataTable<?, Furniture> furnitureJ;
+    // public static DataTable<FurnLine, Furniture> products;
 
     public static Grid products;
     @UI("#products")
     public static DataGrid<?, Furniture> dataProducts;
 
-    // @JTable(root = "#products-2",
-    //         headers = "thead td",
-    //         column = "//tbody/tr/td[%s]",
-    //         row = "//tbody/tr[%s]/td",
-    //         cell = "//tbody/tr[{1}]/td[{0}]",
-    //         allCells = "tbody td")
     @UI("#products-2")
     public static Grid productsJTable;
     @UI("#products-2")

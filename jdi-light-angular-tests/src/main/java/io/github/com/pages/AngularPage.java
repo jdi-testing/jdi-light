@@ -1,12 +1,10 @@
 package io.github.com.pages;
 
-
+import com.epam.jdi.light.angular.elements.complex.BottomSheet;
 import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
-import com.epam.jdi.light.angular.elements.complex.BottomSheet;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
-import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
 import io.github.com.pages.sections.AutocompleteSection;
 import io.github.com.pages.sections.BadgeSection;
 import io.github.com.pages.sections.BasicButtonsSection;
@@ -26,12 +24,14 @@ import io.github.com.pages.sections.SideNavSection;
 import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
+import io.github.com.pages.sections.SortingOverviewSection;
 import io.github.com.pages.sections.SpinnerSection;
 import io.github.com.pages.sections.TabGroupSection;
 import io.github.com.pages.sections.ToolbarSection;
 import io.github.com.pages.sections.TooltipSection;
 import io.github.com.pages.sections.ExpansionPanelSection;
 import io.github.com.pages.sections.FormFieldsSection;
+import io.github.com.pages.sections.ChipsSection;
 
 public class AngularPage extends WebPage {
 
@@ -40,7 +40,6 @@ public class AngularPage extends WebPage {
     public static Ripple rippleContainer;
     public static BottomSheet bottomSheet;
     public static Dialog dialog;
-
     public static RadioButtonSection radioButtonSection;
     public static CheckboxSection checkboxSection;
     public static ToolbarSection toolbarSection;
@@ -66,4 +65,6 @@ public class AngularPage extends WebPage {
     public static SideNavSection sidenavSection;
     public static ExpansionPanelSection expansionPanelSection;
     public static SpinnerSection spinnerSection;
+    public static SortingOverviewSection sortingOverviewSection;
+    public static ChipsSection chipsSection;
 }

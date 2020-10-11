@@ -23,7 +23,8 @@ import static com.epam.jdi.light.asserts.generic.table.DataTableAssert.CompareTy
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.tools.LinqUtils.isSorted;
 import static java.lang.String.format;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasSize;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -39,7 +40,8 @@ public class DataTableAssert<L extends PageObject, D>
      */
     @JDIAction("Assert that '{name}' has at least one row that meet expected condition")
     public DataTableAssert<L, D> row(JFunc1<D,Boolean> condition) {
-        jdiAssert(table().dataRow(condition), not(nullValue()));
+        jdiAssert(table().dataRow(condition) != null ? "has row" : "has no rows",
+            Matchers.is("has row"));
         return this;
     }
     @JDIAction("Assert that '{name}' has at least one that meet expected condition")

@@ -46,7 +46,7 @@ public class BreadcrumbTests implements TestsInit {
 
     @Test
     public void selectIndexTest() {
-        breadcrumb.select(1);
+        breadcrumb.select(ELEMENT.startIndex);
         homePage.checkOpenedInNewWindow();
         closeWindow();
     }

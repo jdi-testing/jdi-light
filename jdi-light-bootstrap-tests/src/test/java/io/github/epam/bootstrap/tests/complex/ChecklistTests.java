@@ -102,7 +102,7 @@ public class ChecklistTests implements TestsInit {
     }
     @Test
     public void selectNumTest() {
-        checkNumbers.select(4);
+        checkNumbers.select(ELEMENT.startIndex + 3);
         assertEquals(checkNumbers.checked(), asList("1", "4"));
     }
     @Test

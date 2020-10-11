@@ -26,7 +26,7 @@ public class DatepickerUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         basicDatepicker.show();
     }
 
@@ -442,24 +442,5 @@ public class DatepickerUnitTests extends TestsInit {
         inputChangeEventsDatepicker.setText("wrong date");
         inputChangeEventsDatepicker.clear();
         assertTrue(inputChangeEventsDatepicker.isLastChangeEvent(changeEvent));
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (basicDatepicker.isExpanded()) {
-            basicDatepicker.collapse();
-        }
-        if (startDateDatepicker.isExpanded()) {
-            startDateDatepicker.collapse();
-        }
-        if (openMethodDatepicker.isExpanded()) {
-            openMethodDatepicker.collapse();
-        }
-        if (!basicDatepicker.isEmpty()) {
-            basicDatepicker.clear();
-        }
-        if (!differentLocaleDatepicker.isEmpty()) {
-            differentLocaleDatepicker.clear();
-        }
     }
 }

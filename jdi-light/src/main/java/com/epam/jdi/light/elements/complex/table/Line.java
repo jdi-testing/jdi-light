@@ -45,9 +45,18 @@ public class Line implements IList<String>, IBaseElement {
         this(headers, new WebList(elements));
     }
     public Line(List<String> headers, WebList elements) {
+        if (headers == null) {
+            throw exception("Failed to create Line. Header has null value");
+        }
+        if (elements == null) {
+            throw exception("Failed to create Line. Elements has null value");
+        }
+        List<String> values = elements.values();
+        if (headers.size() != values.size()) {
+            throw exception("Failed to create Line. Headers size='%s' is not equal to Elements size='%s'", headers.size(), values.size());
+        }
         this.elements = elements;
         this.headers = headers;
-        List<String> values = elements.values();
         this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();
     }
     public static Line initLine(List<String> list, List<String> headers) {
@@ -92,7 +101,7 @@ public class Line implements IList<String>, IBaseElement {
         String unique = Timer.nowMSecs();
         List<UIElement> result = new ArrayList<>();
         for (int i = 0; i < elements.size(); i++) {
-            UIElement cell = elements.get(i+1);
+            UIElement cell = elements.get(i + getStartIndex());
             cell.show();
             cell.varName = headers.get(i)+unique;
             cell.makePhoto();
@@ -164,14 +173,14 @@ public class Line implements IList<String>, IBaseElement {
 
     public <T> T asLine(Class<T> cl) {
         return getType("asLine", cl, instance -> {
-            for (int i = 1; i <= headers.size(); i++) {
-                String header = headers.get(i-1);
+            int i = getStartIndex();
+            for (String header : headers) {
                 Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
                         f -> ELEMENT.namesEqual.execute(getElementName(f), header));
                 if (field == null) continue;
                 try {
                     IBaseElement ui = ((IBaseElement)field.get(instance));
-                    UIElement listElement = elements.get(i);
+                    UIElement listElement = elements.get(i++);
                     WebElement element = ui.base().hasLocator()
                         ? listElement.findElement(ui.base().getLocator())
                         : listElement.getWebElement();
@@ -191,5 +200,13 @@ public class Line implements IList<String>, IBaseElement {
 
     public boolean isUseCache() {
         return elements.isUseCache();
+    }
+
+    protected int startIndex = ELEMENT.startIndex;
+    public int getStartIndex() {
+        return startIndex;
+    }
+    public void setStartIndex(int index) {
+        startIndex = index;
     }
 }

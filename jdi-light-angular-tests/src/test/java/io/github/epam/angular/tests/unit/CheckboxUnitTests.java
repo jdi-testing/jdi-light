@@ -6,21 +6,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.CheckboxSection.basicCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.checkedCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.disabledCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.indeterminateCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.resultCheckbox;
+import static io.github.com.pages.sections.CheckboxSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class CheckboxUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         disabledCheckbox.show();
     }
 
@@ -59,14 +53,4 @@ public class CheckboxUnitTests extends TestsInit {
         assertTrue(resultCheckbox.isDisabled());
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (disabledCheckbox.isSelected()) {
-            disabledCheckbox.uncheck();
-        }
-        if (resultCheckbox.isSelected() || resultCheckbox.isIndeterminate()) {
-            indeterminateCheckbox.uncheck();
-            checkedCheckbox.uncheck();
-        }
-    }
 }

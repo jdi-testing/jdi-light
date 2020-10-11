@@ -6,12 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.CheckboxSection.alignBeforeRadioButton;
-import static io.github.com.pages.sections.CheckboxSection.basicCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.checkedCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.disabledCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.indeterminateCheckbox;
-import static io.github.com.pages.sections.CheckboxSection.resultCheckbox;
+import static io.github.com.pages.sections.CheckboxSection.*;
 import static io.github.epam.angular.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
@@ -19,7 +14,7 @@ public class CheckboxTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         disabledCheckbox.show();
     }
 
@@ -62,19 +57,5 @@ public class CheckboxTests extends TestsInit {
         indeterminateCheckbox.check();
         alignBeforeRadioButton.click();
         resultCheckbox.is().indeterminate().and().cssClass("mat-checkbox-label-before");
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (basicCheckbox.isSelected()) {
-            basicCheckbox.uncheck();
-        }
-        if (disabledCheckbox.isSelected()) {
-            disabledCheckbox.uncheck();
-        }
-        if (resultCheckbox.isSelected() || resultCheckbox.isIndeterminate()) {
-            indeterminateCheckbox.uncheck();
-            checkedCheckbox.uncheck();
-        }
     }
 }

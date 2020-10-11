@@ -18,6 +18,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.Timer.getByCondition;
 import static java.util.Arrays.asList;
@@ -212,6 +213,13 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         } catch (Exception ex) {
             throw exception(ex, "Column validation failed. Please correct header locator or just setup correct 'columnsMapping' in @JTable");
         }
+    }
+    protected int startIndex = ELEMENT.startIndex;
+    public int getStartIndex() {
+        return startIndex;
+    }
+    public void setStartIndex(int index) {
+        startIndex = index;
     }
     // endregion
 }

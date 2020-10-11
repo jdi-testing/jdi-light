@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.table.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
@@ -24,7 +25,6 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
@@ -34,7 +34,8 @@ import static java.util.Arrays.asList;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D>, DataTableAssert<L, D>> {
+public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D>, DataTableAssert<L, D>>
+        implements IList<D> {
     protected Class<L> lineClass;
     protected Class<D> dataClass;
 
@@ -157,18 +158,10 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get first '{name}' table row that match criteria")
     public D dataRow(JFunc1<D, Boolean> matcher) {
         hasDataClass();
-        if (datas.isGotAll()) {
-            Pair<String, D> dataRow = datas.get().first(matcher);
-            if (dataRow != null)
-                return dataRow.value;
-        }
-        refresh();
-        getTable();
-        int count = count();
-        for (int i = 1; i <= count; i++) {
-            D dataRow = dataRow(i);
-            if (matcher.execute(dataRow))
-                return dataRow;
+        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
+            D data = dataRow(i);
+            if (matcher.execute(data))
+                return data;
         }
         datas.gotAll();
         return null;
@@ -181,19 +174,9 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
      */
     @JDIAction("Get first '{name}' table row that match criteria")
     public L line(JFunc1<D, Boolean> matcher) {
-        hasDataClass();
-        if (datas.isGotAll()) {
-            int index = datas.get().firstIndex(matcher);
-            if (index != -1)
-                return line(getRowIndex(index));
-        }
-        refresh();
-        getTable();
-        int count = count();
-        logger.debug("Count: " + count);
-        for (int i = 1; i <= count; i++) {
-            D dataRow = dataRow(i);
-            if (matcher.execute(dataRow))
+        hasLineClass();
+        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
+            if (matcher.execute(dataRow(i)))
                 return line(i);
         }
         datas.gotAll();
@@ -221,7 +204,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     public List<D> dataRows(JFunc1<D, Boolean> matcher, int amount) {
         hasDataClass();
         List<D> result = new ArrayList<>();
-        for (int i = 1; i <= count(); i++) {
+        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
             if (matcher.execute(dataRow(i)))
                 result.add(dataRow(i));
             if (result.size() == amount)
@@ -238,7 +221,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get first '{name}' table row that match criteria")
     public List<L> lines(JFunc1<D, Boolean> matcher) {
         hasLineClass();
-        return ifSelect(rows(), r -> matcher.execute(r.asData(dataClass)),
+        return LinqUtils.ifSelect(rows(), r -> matcher.execute(r.asData(dataClass)),
                 r -> r.asLine(lineClass));
     }
 
@@ -251,7 +234,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     public List<D> dataRows(TableMatcher... matchers) {
         hasDataClass();
         if (matchers.length == 0) return allData();
-        return map(rows(matchers), r -> r.asData(dataClass));
+        return LinqUtils.map(rows(matchers), r -> r.asData(dataClass));
     }
 
     /**
@@ -262,7 +245,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<L> lines(TableMatcher... matchers) {
         hasLineClass();
-        return map(rows(matchers), l -> l.asLine(lineClass));
+        return LinqUtils.map(rows(matchers), l -> l.asLine(lineClass));
     }
     /**
      * Get all table rows
@@ -275,7 +258,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         MapArray<String, D> result = new MapArray<>();
         int count = count();
         logger.debug("Count: " + count);
-        for (int i = 1; i <= count; i++)
+        for (int i = getStartIndex(); i < count + getStartIndex(); i++)
             result.update(i+"", dataRow(i));
         datas.gotAll();
         return datas.set(result).values();
@@ -290,7 +273,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         hasLineClass();
         if (lines.isGotAll()) return lines.get().values();
         MapArray<String, L> result = new MapArray<>();
-        for (int i = 1; i <= count(); i++)
+        for (int i = getStartIndex(); i < count() + getStartIndex(); i++)
             result.add(i+"", line(i));
         lines.gotAll();
         return lines.set(result).values();
@@ -305,7 +288,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
     public List<D> filterData(Matcher<String> matcher, Column column) {
         hasDataClass();
-        return map(filterRows(matcher, column), r -> r.asData(dataClass));
+        return LinqUtils.map(filterRows(matcher, column), r -> r.asData(dataClass));
     }
 
     /**
@@ -317,7 +300,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
     public List<L> filterLines(Matcher<String> matcher, Column column) {
         hasLineClass();
-        return map(filterRows(matcher, column), l -> l.asLine(lineClass));
+        return LinqUtils.map(filterRows(matcher, column), l -> l.asLine(lineClass));
     }
 
     /**
@@ -328,7 +311,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Filter '{name}' table rows that match criteria")
     public List<D> filterDatas(Pair<Matcher<String>, Column>... matchers) {
         hasDataClass();
-        return map(filterRows(matchers), r -> r.asData(dataClass));
+        return LinqUtils.map(filterRows(matchers), r -> r.asData(dataClass));
     }
 
     /**
@@ -339,7 +322,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Filter '{name}' table rows that match criteria")
     public List<L> filterLines(Pair<Matcher<String>, Column>... matchers) {
         hasLineClass();
-        return map(filterRows(matchers), l -> l.asLine(lineClass));
+        return LinqUtils.map(filterRows(matchers), l -> l.asLine(lineClass));
     }
 
     /**
@@ -405,23 +388,24 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         getTable();
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
         List<Object> rows = dataClass != null
-            ? map(allData(), l -> l)
-            : map(allLines(), l -> l);
-        List<List<Field>> fields = map(rows, d -> getFieldsExact(d.getClass()));
-        for (int i = 1; i <= count(); i++) {
+            ? LinqUtils.map(allData(), l -> l)
+            : LinqUtils.map(allLines(), l -> l);
+        List<List<Field>> fields = LinqUtils.map(rows, d -> getFieldsExact(d.getClass()));
+        for (int i = 0; i < count(); i++) {
             List<String> list = new ArrayList<>();
             for (String h : header()) {
-                Field field = first(fields.get(i-1), f -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(f.getName())));
+                Field field = LinqUtils.first(fields.get(i),
+                    f -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(f.getName())));
                 if (field != null)
                     try {
-                        Object fieldObj = field.get(rows.get(i-1));
+                        Object fieldObj = field.get(rows.get(i));
                         String val = isInterface(field.getType(), HasValue.class)
                             ? ((HasValue)fieldObj).getValue()
                             : fieldObj.toString();
                         list.add(val);
                     } catch (Exception ex) { throw exception(ex, "Can't get field %s", field.getName()); }
             }
-            value += "||" + i + "||" + print(map(list, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
+            value += "||" + (i + getStartIndex()) + "||" + print(LinqUtils.map(list, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         }
         return value;
     }
@@ -457,6 +441,16 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         }
         return instance;
     }
+
+    public List<D> elements(int minAmount) {
+        return core().timer().getResultByCondition(
+            this::allData, data -> data.size() >= minAmount);
+    }
+
+    public D get(String value) {
+        return dataRow(value);
+    }
+
     @Override
     public void refresh() {
         super.refresh();
@@ -494,7 +488,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         if (dataClass != null)
             entityFields.addAll(asList(dataClass.getDeclaredFields()));
         if (entityFields.size() > 0) {
-            List<String> headers = map(entityFields, field1 -> splitCamelCase(field1.getName()))
+            List<String> headers = LinqUtils.map(entityFields, field1 -> splitCamelCase(field1.getName()))
                 .stream().distinct().collect(Collectors.toList());
             header.setFinal(headers);
             if (!size.hasValue())

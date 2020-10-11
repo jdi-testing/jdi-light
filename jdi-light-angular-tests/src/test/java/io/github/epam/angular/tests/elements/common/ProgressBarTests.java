@@ -7,22 +7,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.*;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.*;
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.ProgressBarSection.matProgressBarBuffer;
-import static io.github.com.pages.sections.ProgressBarSection.matProgressBarConfigurable;
-import static io.github.com.pages.sections.ProgressBarSection.matProgressBarDeterminate;
-import static io.github.com.pages.sections.ProgressBarSection.matProgressBarIndeterminate;
-import static io.github.com.pages.sections.ProgressBarSection.matProgressBarQuery;
-import static io.github.com.pages.sections.ProgressBarSection.progressBarsAccentColorRadio;
-import static io.github.com.pages.sections.ProgressBarSection.progressBarsBufferModeRadio;
-import static io.github.com.pages.sections.ProgressBarSection.progressBarsBufferSlider;
-import static io.github.com.pages.sections.ProgressBarSection.progressBarsDeterminateModeRadio;
-import static io.github.com.pages.sections.ProgressBarSection.progressBarsIndeterminateModeRadio;
-import static io.github.com.pages.sections.ProgressBarSection.progressBarsPrimaryColorRadio;
-import static io.github.com.pages.sections.ProgressBarSection.progressBarsProgressSlider;
-import static io.github.com.pages.sections.ProgressBarSection.progressBarsQueryModeRadio;
-import static io.github.com.pages.sections.ProgressBarSection.progressBarsWarnColorRadio;
-import static io.github.com.pages.sections.ProgressBarSection.showBufferProgressBarButton;
-import static io.github.com.pages.sections.ProgressBarSection.showIndeterminateProgressBarButton;
+import static io.github.com.pages.sections.ProgressBarSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class ProgressBarTests extends TestsInit {

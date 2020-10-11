@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.elements.interfaces.base.HasRefresh;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.tools.HasStartIndex;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
@@ -13,7 +14,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 
@@ -21,7 +21,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, HasRefresh {
+public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, HasRefresh, HasStartIndex {
     /**
      *  Get all application elements
      *  */
@@ -69,13 +69,13 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
         return LinqUtils.all(elements(0), condition);
     }
     default List<T> slice(int from, int to) {
-        return listCopy(elements(to), from, to);
+        return listCopy(elements(to-getStartIndex()+1), from, to);
     }
     default List<T> slice(int from) {
-        return listCopy(elements(from), from);
+        return listCopy(elements(from-getStartIndex()+1), from);
     }
     default List<T> sliceTo(int to) {
-        return listCopyUntil(elements(to), to);
+        return listCopyUntil(elements(to-getStartIndex()+1), to);
     }
     default void refresh() { clear(); }
     default <R> List<R> selectMany(JFunc1<T, List<R>> func) {
@@ -138,7 +138,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
     }
     @Override
     default T get(int index) {
-        return elements(index + 1 - ELEMENT.startIndex).get(index);
+        return elements(index-getStartIndex()+1).get(index-getStartIndex());
     }
     @Override
     default T set(int index, T element) {
@@ -150,7 +150,7 @@ public interface IList<T> extends IBaseElement, List<T>, HasValue, IHasSize, Has
     }
     @Override
     default T remove(int index) {
-        return elements(index + 1 - ELEMENT.startIndex).remove(index);
+        return elements(index - getStartIndex() + 1).remove(index);
     }
     @Override
     default int indexOf(Object o) {

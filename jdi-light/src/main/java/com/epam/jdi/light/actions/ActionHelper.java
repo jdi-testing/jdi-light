@@ -329,7 +329,9 @@ public class ActionHelper {
         }
         String beforeLogString = toUpperCase(logString.charAt(0)) + logString.substring(1);
         logger.trace("getBeforeLogString(): " + beforeLogString);
-        return beforeLogString;
+        if (isBlank(logString))
+            return "";
+        return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
     public static MapArray<String, Object> getLogOptions(JoinPoint jp) {
         MapArray<String, Object> map = new MapArray<>();
@@ -453,7 +455,8 @@ public class ActionHelper {
         String methodName = splitCamelCase(getMethodName(jp));
         if (args.size() == 0)
             return methodName;
-        return format("%s%s", methodName, argsToString(args));
+        String argsAsString = argsToString(args);
+        return format("%s%s", methodName, argsAsString);
     }
     static String argsToString(MapArray<String, Object> args) {
         return args.size() == 1
@@ -466,7 +469,9 @@ public class ActionHelper {
                 : "("+args.get(0).value+")";
     }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
-        return new MapArray<>(method.getParameterNames(), getArgs(joinPoint));
+        String[] names = method.getParameterNames();
+        Object[] args = getArgs(joinPoint);
+        return new MapArray<>(names, args);
     }
     static Object[] getArgs(JoinPoint jp) {
         Object[] args = jp.getArgs();

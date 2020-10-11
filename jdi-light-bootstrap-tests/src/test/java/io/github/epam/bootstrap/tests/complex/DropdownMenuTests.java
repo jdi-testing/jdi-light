@@ -42,7 +42,7 @@ public class DropdownMenuTests implements TestsInit {
     }
     @Test
     public void selectNumTest() {
-        dropdownMenu.select(2);
+        dropdownMenu.select(ELEMENT.startIndex + 1);
         validateAndAcceptAlert("Fire clicked");
     }
     @Test
