@@ -59,20 +59,13 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         }
         return core;
     }
-    @Override
-    public List<String> header() {
-        return ObjectUtils.isNotEmpty(header)
-            ? header
-            : IGrid.super.header();
-    }
     protected void validateLocators(UIElement core) {
         if (headerLocator.equals("th,thead td")) {
             if (core.find("th").isExist()) {
                 headerLocator = "th";
             } else {
-                if (core.find("thead").isNotExist()) {
-                    headerLocator = "//tr[1]//td";
-                }
+                headerLocator = core.find("thead").isExist()
+                        ? "//thead//td" : "//tr[1]//td";
             }
         }
         if (core.find("tbody").isExist() && allCellsLocator.equals("td") && cellTemplate.equals("//tr[{1}]/td[{0}]")
@@ -82,6 +75,12 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
             columnTemplate = "//tbody//tr/td[%s]";
             rowTemplate = "//tbody//tr[%s]/td";
         }
+    }
+    @Override
+    public List<String> header() {
+        return ObjectUtils.isNotEmpty(header)
+            ? header
+            : IGrid.super.header();
     }
     protected int getColumnIndex(int index) {
         if (!columnsValidated) {
