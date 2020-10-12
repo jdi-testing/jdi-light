@@ -179,11 +179,11 @@ public class WebPage extends DriverBase implements PageObject {
     }
 
     public StringCheckType url() {
-        return new StringCheckType(driver()::getCurrentUrl, checkUrl, "url");
+        return new StringCheckType(WebPage::getUrl, checkUrl, "url");
     }
 
     public StringCheckType title() {
-        return new StringCheckType(driver()::getTitle, title, "title");
+        return new StringCheckType(WebPage::getTitle, title, "title");
     }
 
     /**
@@ -230,7 +230,7 @@ public class WebPage extends DriverBase implements PageObject {
             Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
-            throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getCurrentUrl(), checkUrl));
+            throw exception("Page '%s' is not opened: %s", getName(), format(result, getUrl(), checkUrl));
         result = Switch(checkTitleType).get(
             Value(NONE, ""),
             Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
@@ -312,6 +312,7 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction(value = "Reload current page", isAssert = true)
     public static void refresh() {
         getDriver().navigate().refresh();
+        logger.info("Page url: " + getUrl());
     }
     public static void reload() { refresh(); }
 
