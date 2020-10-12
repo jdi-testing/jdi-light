@@ -42,7 +42,7 @@ public class DropdownMenuSplitTests implements TestsInit {
     }
     @Test
     public void selectNumTest() {
-        dropdownMenuSplit.select(1);
+        dropdownMenuSplit.select(ELEMENT.startIndex);
         validateAndAcceptAlert("Stone clicked");
     }
     @Test

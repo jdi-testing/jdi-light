@@ -14,7 +14,7 @@ public class DialogUnitTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         dialog.show();
     }
 
@@ -44,12 +44,5 @@ public class DialogUnitTests extends TestsInit {
         dialog.sendKeysToAnswerFormField("Lion");
         dialog.submitAnswer();
         assertTrue(dialog.answerText("Lion"));
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if(dialog.isOpened()){
-            dialog.close();
-        }
     }
 }

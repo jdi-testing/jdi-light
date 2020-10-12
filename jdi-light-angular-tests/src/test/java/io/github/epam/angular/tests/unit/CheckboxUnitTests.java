@@ -14,7 +14,7 @@ public class CheckboxUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         disabledCheckbox.show();
     }
 
@@ -53,14 +53,4 @@ public class CheckboxUnitTests extends TestsInit {
         assertTrue(resultCheckbox.isDisabled());
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (disabledCheckbox.isSelected()) {
-            disabledCheckbox.uncheck();
-        }
-        if (resultCheckbox.isSelected() || resultCheckbox.isIndeterminate()) {
-            indeterminateCheckbox.uncheck();
-            checkedCheckbox.uncheck();
-        }
-    }
 }
