@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.MetalAndColorsPage.odds;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -34,7 +35,7 @@ public class RadioLabelTests implements TestsInit {
 
     @Test
     public void selectNumTest() {
-        odds.select(1);
+        odds.select(ELEMENT.startIndex);
         assertEquals(odds.getValue(), "1");
     }
     @Test

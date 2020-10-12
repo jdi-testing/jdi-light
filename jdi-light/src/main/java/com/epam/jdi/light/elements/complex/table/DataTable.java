@@ -386,20 +386,21 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
             ? LinqUtils.map(allData(), l -> l)
             : LinqUtils.map(allLines(), l -> l);
         List<List<Field>> fields = LinqUtils.map(rows, d -> getFieldsExact(d.getClass()));
-        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
+        for (int i = 0; i < count(); i++) {
             List<String> list = new ArrayList<>();
             for (String h : header()) {
-                Field field = LinqUtils.first(fields.get(i-1), f -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(f.getName())));
+                Field field = LinqUtils.first(fields.get(i),
+                    f -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(f.getName())));
                 if (field != null)
                     try {
-                        Object fieldObj = field.get(rows.get(i-1));
+                        Object fieldObj = field.get(rows.get(i));
                         String val = isInterface(field.getType(), HasValue.class)
                             ? ((HasValue)fieldObj).getValue()
                             : fieldObj.toString();
                         list.add(val);
                     } catch (Exception ex) { throw exception(ex, "Can't get field %s", field.getName()); }
             }
-            value += "||" + i + "||" + print(LinqUtils.map(list, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
+            value += "||" + (i + getStartIndex()) + "||" + print(LinqUtils.map(list, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         }
         return value;
     }

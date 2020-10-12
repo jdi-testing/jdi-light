@@ -21,7 +21,7 @@ public class ExpansionPanelUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         basicExpansionPanel.show();
     }
 
@@ -165,14 +165,5 @@ public class ExpansionPanelUnitTests extends TestsInit {
     public void contentTest() {
         basicExpansionPanel.expand(2);
         assertEquals(basicExpansionPanel.content(2), "I'm visible because I am open");
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        basicExpansionPanel.collapse(1);
-        basicExpansionPanel.collapse(2);
-        accordionExpansionPanel.expand(1);
-        accordionExpansionPanel.collapse(2);
-        accordionExpansionPanel.collapse(3);
     }
 }

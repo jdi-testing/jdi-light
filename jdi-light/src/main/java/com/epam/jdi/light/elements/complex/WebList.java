@@ -291,7 +291,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     private UIElement getElementByLocator(int getIndex, int index) {
         return locator.isXPath()
-            ? new UIElement(base(), locator.addIndex(index), index+"", parent)
+            ? new UIElement(base(), locator.addIndex(index - getStartIndex() + 1), index+"", parent)
             : initElement(() -> getList(getIndex + 1).get(getIndex));
     }
     protected UIElement tryGetByIndex(int index) {

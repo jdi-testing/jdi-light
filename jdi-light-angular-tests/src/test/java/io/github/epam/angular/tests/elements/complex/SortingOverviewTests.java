@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.pages.AngularPage.sortingOverviewSection;
+import static io.github.com.pages.sections.SortingOverviewSection.sortingOverview;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static io.github.com.StaticSite.angularPage;
 
@@ -24,41 +25,41 @@ public class SortingOverviewTests extends TestsInit {
 
     @Test
     public void tableIsVisible() {
-        sortingOverviewSection.sortingOverview.is().tableIsVisible();
+        sortingOverview.is().tableIsVisible();
     }
 
     @Test
     public void sortingTableByFirstColumn() {
-        sortingOverviewSection.sortingOverview.clickButtonByText(DESSERT);
-        sortingOverviewSection.sortingOverview.clickButtonByText(DESSERT);
-        sortingOverviewSection.sortingOverview.is().arrowButtonClicked();
+        sortingOverview.clickButtonByText(DESSERT);
+        sortingOverview.clickButtonByText(DESSERT);
+        sortingOverview.is().arrowButtonClicked();
     }
 
     @Test
     public void sortingTableBySecondColumn() {
-        sortingOverviewSection.sortingOverview.clickButtonByText(CALORIES);
-        sortingOverviewSection.sortingOverview.clickButtonByText(CALORIES);
-        sortingOverviewSection.sortingOverview.is().arrowButtonClicked();
+        sortingOverview.clickButtonByText(CALORIES);
+        sortingOverview.clickButtonByText(CALORIES);
+        sortingOverview.is().arrowButtonClicked();
     }
 
     @Test
     public void sortingTableByThirdColumn() {
-        sortingOverviewSection.sortingOverview.clickButtonByText(FAT);
-        sortingOverviewSection.sortingOverview.clickButtonByText(FAT);
-        sortingOverviewSection.sortingOverview.is().arrowButtonClicked();
+        sortingOverview.clickButtonByText(FAT);
+        sortingOverview.clickButtonByText(FAT);
+        sortingOverview.is().arrowButtonClicked();
     }
 
     @Test
     public void sortingTableByFourthColumn() {
-        sortingOverviewSection.sortingOverview.clickButtonByText(CARBS);
-        sortingOverviewSection.sortingOverview.clickButtonByText(CARBS);
-        sortingOverviewSection.sortingOverview.is().arrowButtonClicked();
+        sortingOverview.clickButtonByText(CARBS);
+        sortingOverview.clickButtonByText(CARBS);
+        sortingOverview.is().arrowButtonClicked();
     }
 
     @Test
     public void sortingTableByFifthColumn() {
-        sortingOverviewSection.sortingOverview.clickButtonByText(PROTEIN);
-        sortingOverviewSection.sortingOverview.clickButtonByText(PROTEIN);
-        sortingOverviewSection.sortingOverview.is().arrowButtonClicked();
+        sortingOverview.clickButtonByText(PROTEIN);
+        sortingOverview.clickButtonByText(PROTEIN);
+        sortingOverview.is().arrowButtonClicked();
     }
 }

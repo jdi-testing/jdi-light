@@ -18,7 +18,7 @@ public class BottomSheetTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         bottomSheet.show();
     }
 
@@ -39,12 +39,6 @@ public class BottomSheetTests extends TestsInit {
     public void checkBottomSheetAvailableOptionsTest() {
         bottomSheet.open();
         bottomSheet.is().values(BOTTOM_SHEET_VALUES);
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (bottomSheet.isOpened()) {
-        bottomSheet.close();}
     }
 }
 
