@@ -9,13 +9,13 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SliderAssert extends UIAssert<SliderAssert, Slider> {
-    @JDIAction("Assert that '{name}' volume {0}")
+    @JDIAction("Assert that '{name}' volume '{0}'")
     public SliderAssert value(Matcher<Double> value) {
         jdiAssert(element().value(), value);
         return this;
     }
 
-    @JDIAction("Assert that value has {0}")
+    @JDIAction("Assert that value has '{0}'")
     public SliderAssert value(double value) {
         return value(Matchers.is(value));
     }
@@ -25,7 +25,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' min volume is {0}")
+    @JDIAction("Assert that '{name}' min volume is '{0}'")
     public SliderAssert minValue(double minValue) {
         return minValue(Matchers.is(minValue));
     }
@@ -36,7 +36,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' max volume {0}")
+    @JDIAction("Assert that '{name}' max volume {0}'{0}'")
     public SliderAssert maxValue(double maxValue) {
         return maxValue(Matchers.is(maxValue));
     }
@@ -54,7 +54,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
     }
 
 
-    @JDIAction("Assert that '{name'} thumb label is displayed")
+    @JDIAction("Assert that '{name}' thumb label is displayed")
     public SliderAssert thumbLabelDisplayed(boolean value) {
         jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(value));
         return this;

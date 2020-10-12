@@ -24,13 +24,13 @@ public class MaterialSelectorContainer extends Section {
         return getOptions();
     }
 
-    @JDIAction("Check that '{name}' is displayed")
+    @JDIAction("Check that element is displayed")
     @Override
     public boolean isDisplayed() {
         return getBackdropSelectPanel().isDisplayed();
     }
 
-    @JDIAction("Check that '{name}' is hidden")
+    @JDIAction("Check that element is hidden")
     @Override
     public boolean isHidden() {
         return getBackdropSelectPanel().isHidden();

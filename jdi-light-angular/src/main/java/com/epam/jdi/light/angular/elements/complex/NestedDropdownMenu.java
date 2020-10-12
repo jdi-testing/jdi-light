@@ -43,7 +43,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
             getButton().click();
     }
 
-    @JDIAction("Check {name} is expanded")
+    @JDIAction("Check '{name}' is expanded")
     public boolean isExpanded() {
         return hasAttribute("aria-expanded");
     }
@@ -54,12 +54,12 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
             this.getButton().click(ElementArea.JS);
     }
 
-    @JDIAction("Check {name} is closed")
+    @JDIAction("Check '{name}' is closed")
     public boolean isClosed() {
         return !hasAttribute("aria-expanded");
     }
 
-    @JDIAction("Check {name} expected value '{0} and actual value '{1}'")
+    @JDIAction("Check '{name}' expected value '{0} and actual value '{1}'")
     public boolean checkValue(String expectedValue, String actualValue) {
         return actualValue.equals(expectedValue);
     }
@@ -100,13 +100,13 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         close();
     }
 
-    @JDIAction("Check {name} option '{0}' is disabled")
+    @JDIAction("Check '{name}' option '{0}' is disabled")
     public boolean isDisabledMenuWithIconsOption(String value) {
         UIElement optionToClick = lastOpenedOptionsElements().get("voicemail" + value);
         return Boolean.parseBoolean(optionToClick.attr("aria-disabled"));
     }
 
-    @JDIAction("Check {name} option '{0}' is disabled")
+    @JDIAction("Check '{name}' option '{0}' is disabled")
     public boolean isDisabledNestedMenuOption(String... values) {
         return Boolean.parseBoolean(select(values).attr("aria-disabled"));
     }

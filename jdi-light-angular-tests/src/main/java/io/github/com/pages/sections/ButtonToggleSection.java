@@ -11,6 +11,7 @@ public class ButtonToggleSection {
 
     @UI("#mat-button-toggle-group-align")
     public static ButtonToggle basicButtonToggleAlign;
+
     @UI("div.example-selected-value")
     public static Text selectedValue;
 }
