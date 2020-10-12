@@ -20,7 +20,7 @@ public class BottomSheetUnitTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         bottomSheet.show();
     }
 
@@ -43,8 +43,4 @@ public class BottomSheetUnitTests extends TestsInit {
         assertEquals(bottomSheet.values(), BOTTOM_SHEET_VALUES);
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        bottomSheet.close();
-    }
 }

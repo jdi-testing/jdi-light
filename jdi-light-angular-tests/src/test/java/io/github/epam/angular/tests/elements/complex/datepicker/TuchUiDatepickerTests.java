@@ -1,6 +1,5 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -8,11 +7,13 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 
+import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.touchUiDatepicker;
 
 public class TuchUiDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
+        angularPage.open();
         touchUiDatepicker.show();
     }
 
@@ -54,15 +55,5 @@ public class TuchUiDatepickerTests extends TestsDatepickerBase {
     public void checkSelectStringDate() {
         touchUiDatepicker.select("11/25/2020");
         touchUiDatepicker.is().value("11/25/2020");
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (touchUiDatepicker.isExpanded()) {
-            touchUiDatepicker.collapse();
-        }
-        if (!touchUiDatepicker.isEmpty()) {
-            touchUiDatepicker.clear();
-        }
     }
 }

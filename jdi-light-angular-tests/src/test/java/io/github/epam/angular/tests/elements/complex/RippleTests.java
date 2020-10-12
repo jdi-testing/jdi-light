@@ -15,7 +15,7 @@ public class RippleTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         rippleContainer.show();
     }
 
@@ -130,14 +130,5 @@ public class RippleTests extends TestsInit {
         int y = RandomUtils.nextInt(0, 299);
         rippleContainer.ripple(x, y);
         rippleContainer.is().unbounded().and().centered();
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        rippleContainer.clearRadius();
-        rippleContainer.clearColor();
-        rippleContainer.enable();
-        rippleContainer.bound();
-        rippleContainer.decentralize();
     }
 }
