@@ -12,5 +12,12 @@ public class ApiDemosApp {
 
     public static CheckboxesPage checkboxesPage;
 
+    public static SearchViewPage searchViewPage;
+    public static SearchViewActionBarPage searchViewActionBarPage;
+    public static SearchViewAlwaysExpandedPage searchViewAlwaysExpandedPage;
+    public static SearchViewFilterPage searchViewFilterPage;
+
+
+
 
 }
