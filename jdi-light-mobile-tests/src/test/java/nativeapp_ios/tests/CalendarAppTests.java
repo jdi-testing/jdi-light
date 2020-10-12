@@ -44,7 +44,7 @@ public class CalendarAppTests extends CalendarAppTestsInit {
 
         InboxPage.eventTypesSegmentedControl.has().values(Arrays.asList("New", "Replied"));
 
-        InboxPage.eventTypesSegmentedControl.select("Replied");
+        InboxPage.eventTypesSegmentedControl.tapSegment("Replied");
         InboxPage.eventTypesSegmentedControl.is().selected("Replied");
         InboxPage.eventsInfoText.is().text("No Events You’ve Replied To");
     }

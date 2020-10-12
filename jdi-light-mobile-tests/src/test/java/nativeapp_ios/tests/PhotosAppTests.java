@@ -12,10 +12,10 @@ public class PhotosAppTests extends PhotosAppTestInit {
     public void tabBarTest() {
         PhotosPage.photosTabBar.has().values(Arrays.asList("All Photos", "For You", "Albums", "Search"));
 
-        PhotosPage.photosTabBar.select("Search");
+        PhotosPage.photosTabBar.tapBarButton("Search");
         PhotosPage.photosTabBar.is().selected("Search");
 
-        PhotosPage.photosTabBar.select("For You");
+        PhotosPage.photosTabBar.tapBarButton("For You");
         PhotosPage.noContentText.is().displayed();
     }
 }
