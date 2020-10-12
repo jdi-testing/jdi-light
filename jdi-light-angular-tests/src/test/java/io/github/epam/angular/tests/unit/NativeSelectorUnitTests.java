@@ -5,12 +5,16 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.*;
 import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -23,11 +27,8 @@ public class NativeSelectorUnitTests extends TestsInit {
 
     @Test
     public void listTest() {
-        assertTrue(basicNativeSelect.list().size() == 4
-                           && basicNativeSelect.list().get(1).text().equals(VOLVO)
-                           && basicNativeSelect.list().get(2).text().equals(SAAB)
-                           && basicNativeSelect.list().get(3).text().equals(MERCEDES)
-                           && basicNativeSelect.list().get(4).text().equals(AUDI));
+        assertThat(basicNativeSelect.list(), hasSize(4));
+        assertThat(basicNativeSelect.list().values(), hasItems(VOLVO, SAAB, MERCEDES, AUDI));
     }
 
     @Test

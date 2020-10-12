@@ -18,7 +18,7 @@ public class MenuUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
     }
 
     @Test
@@ -66,18 +66,5 @@ public class MenuUnitTests extends TestsInit {
     public void valuesTest() {
         basicMenuButton.show();
         assertEquals(basicMenuButton.values(), Arrays.asList(BASIC_MENU_VALUES));
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (basicMenuButton.isExpanded()) {
-            basicMenuButton.close();
-        }
-        if (menuWithIconsButton.isExpanded()) {
-            menuWithIconsButton.close();
-        }
-        if (nestedMenuButton.isExpanded()) {
-            nestedMenuButton.close();
-        }
     }
 }

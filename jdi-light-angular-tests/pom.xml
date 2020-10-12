@@ -21,17 +21,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            <version>${allure.testng}</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-angular</artifactId>
             <version>1.2.23</version>
         </dependency>
-
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.testng}</version>
+        </dependency>
     </dependencies>
 
     <build>

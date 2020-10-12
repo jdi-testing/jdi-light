@@ -9,6 +9,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.epam.html.tests.issues.issue69.IssuePage69.*;
 import static io.github.epam.html.tests.issues.issue69.JDISite69.issuePage69;
 import static org.testng.Assert.assertEquals;
@@ -26,12 +27,10 @@ public class IssueTest69 {
 
     @Test(dataProvider = "paragraphs")
     public void issue69Tests(String paragraphName) {
-        int index = ELEMENT.startIndex - 1 + (paragraphName.contains("template") ? 1 : 2);
+        logger.info("Element: " + paragraphName);
+        int index = paragraphName.contains("template") ? 1 : ELEMENT.startIndex + 1;
         Paragraph p = paragraph(paragraphName).get(index);
-        assertEquals(p.toString(), "" +
-                "element_" + index + "_1," +
-                "element_" + index + "_2," +
-                "element_" + index + "_3");
+        assertEquals(p.toString(), "element_1_1,element_1_2,element_1_3");
     }
 
     ParagraphData expectedParagraph = new ParagraphData().set(p-> {
@@ -44,7 +43,7 @@ public class IssueTest69 {
     }
     @Test
     public void issue69DataParagraphTests() {
-        ParagraphData p = paragraphsData.getData(1);
+        ParagraphData p = paragraphsData.getData(ELEMENT.startIndex + 1);
         assertEquals(p, expectedParagraph);
     }
 

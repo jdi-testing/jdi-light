@@ -17,7 +17,7 @@ public class MenuWithIconsTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         menuWithIconsButton.show();
     }
 
@@ -59,13 +59,6 @@ public class MenuWithIconsTests extends TestsInit {
         menuWithIconsButton.expand();
         for (int i = 0; i < expectedList.length; i++) {
             menuWithIconsButton.checkValue(expectedList[i], actualList.get(i));
-        }
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (menuWithIconsButton.isExpanded()) {
-            menuWithIconsButton.close();
         }
     }
 }

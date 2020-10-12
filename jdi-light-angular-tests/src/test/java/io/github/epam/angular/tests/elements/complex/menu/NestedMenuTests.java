@@ -17,7 +17,7 @@ public class NestedMenuTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         nestedMenuButton.show();
     }
 
@@ -73,13 +73,6 @@ public class NestedMenuTests extends TestsInit {
         List<String> actualList = nestedMenuButton.valuesForNestedMenu();
         for (int i = 0; i < expectedList.length; i++) {
             nestedMenuButton.is().checkValue(expectedList[i], actualList.get(i));
-        }
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (nestedMenuButton.isExpanded()) {
-            nestedMenuButton.close();
         }
     }
 }
