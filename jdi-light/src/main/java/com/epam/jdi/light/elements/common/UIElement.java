@@ -361,8 +361,9 @@ public class UIElement extends JDIBase
         waitAfterAction();
     }
     protected void waitAfterAction() {
-        if (isBlank(waitAfterMethod) && waitAfterTimeout > 0) {
-            Timer.sleep(waitAfterTimeout * 1000);
+        int timeout = waitAfter().value;
+        if (isBlank(waitAfterMethod) && timeout > 0) {
+            Timer.sleep(timeout * 1000);
         }
     }
     protected RuntimeException getNotClickableException() {

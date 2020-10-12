@@ -66,7 +66,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         webElements = base.webElements.copy();
         searchRules = base.searchRules.copy();
         beforeSearch = base.beforeSearch;
-        timeout = base.timeout;
+        timeout.set(base.timeout.get());
+        waitAfterTimeout.set(base.waitAfterTimeout.get());
+        waitAfterMethod = base.waitAfterMethod;
         return this;
     }
     public MapArray<String, Object> params = new MapArray<>();
@@ -151,26 +153,27 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public List<By> getFrames() { return locator.getFrames(); }
 
-    protected int timeout = -1;
-    protected int waitAfterTimeout = -1;
+    protected Safe<Integer> timeout = new Safe<>(() -> -1);
+    protected Safe<Integer>  waitAfterTimeout = new Safe<>(() -> -1);
     protected String waitAfterMethod = "";
     public IBaseElement waitAfter(int timeout, String methodName) {
         if (timeout > 0)
-            waitAfterTimeout = timeout;
+            waitAfterTimeout.set(timeout);
         if (isNotBlank(methodName))
             waitAfterMethod = methodName;
         return this;
     }
     public Pair<String, Integer> waitAfter() {
-        return new Pair<>(waitAfterMethod, waitAfterTimeout);
+        return new Pair<>(waitAfterMethod, waitAfterTimeout.get());
     }
     @Override
     public IBaseElement waitSec(int sec) {
-        timeout = sec;
+        timeout.set(sec);
         return this;
     }
     public int getTimeout() {
-        return timeout > -1 ? timeout : TIMEOUTS.element.get();
+        int t = timeout.get();
+        return t > -1 ?  t: TIMEOUTS.element.get();
     }
     public Timer timer() { return new Timer(getTimeout()*1000); }
 

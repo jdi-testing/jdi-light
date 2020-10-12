@@ -61,8 +61,6 @@ public class WebPage extends DriverBase implements PageObject {
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = NONE;
 
-    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
-
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this)
             .setup(Form.class, e -> e.setName(getName() + " Form").setParent(this));
@@ -322,6 +320,7 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction("Go back to previous page")
     public static void back() {
         getDriver().navigate().back();
+        logger.info("Page url: " + getUrl());
     }
 
     /**
@@ -330,6 +329,7 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction("Go forward to next page")
     public static void forward() {
         getDriver().navigate().forward();
+        logger.info("Page url: " + getUrl());
     }
 
     /**
