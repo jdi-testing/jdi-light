@@ -14,6 +14,12 @@ import static io.github.com.pages.sections.MaterialTreeSection.flatTree;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class MaterialTreeTests extends TestsInit {
+    final String fruits = "Fruits";
+    final String fruit = "Fruit";
+    final String vegetables = "Vegetables";
+    final String groceries = "Groceries";
+    final String reminders = "Reminders";
+
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
@@ -23,28 +29,28 @@ public class MaterialTreeTests extends TestsInit {
     @Test
     public void basicTreeTest() {
         dynamicExample.show();
-        dynamicTree.expand(1);
-        dynamicTree.is().displayed();
+        dynamicTree.expand(fruits);
+        dynamicTree.is().expanded(fruits).and().collapsed(vegetables);
     }
 
     @Test
     public void expandByNameTest() {
         dynamicExample.show();
-        dynamicTree.expandByName("Fruits"); // "Vegetables"
-        dynamicTree.is().displayed();
+        dynamicTree.expand(fruits);
+        dynamicTree.is().collapsed(vegetables);
     }
 
     @Test
     public void expandWithCheckBoxsTest() {
         checkBoxesExample.show();
-        checkBoxesTree.expandByName("Groceries");  // "Reminders"
-        checkBoxesTree.is().displayed();
+        checkBoxesTree.expand(groceries);  // "Reminders"
+        checkBoxesTree.is().expanded(groceries);
     }
 
     @Test
     public void flatByNameTest() {
         flatExample.show();
-        flatTree.expandByName("Vegetables");
-        flatTree.is().displayed();
+        flatTree.expand(vegetables);
+        flatTree.is().expanded(vegetables).and().collapsed(fruit);
     }
 }
