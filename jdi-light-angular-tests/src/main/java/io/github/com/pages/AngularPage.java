@@ -33,6 +33,7 @@ import io.github.com.pages.sections.ExpansionPanelSection;
 import io.github.com.pages.sections.FormFieldsSection;
 import io.github.com.pages.sections.ChipsSection;
 import io.github.com.pages.sections.TableSection;
+import io.github.com.pages.sections.MaterialTreeSection;
 
 public class AngularPage extends WebPage {
 
