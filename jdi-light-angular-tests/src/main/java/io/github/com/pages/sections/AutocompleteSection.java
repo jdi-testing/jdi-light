@@ -5,6 +5,7 @@ import com.epam.jdi.light.angular.elements.complex.AutoComplete;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
 public class AutocompleteSection {
+
     @UI("#autocomplete-overview-input")
     public AutoComplete autocompleteOverview;
 

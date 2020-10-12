@@ -138,7 +138,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return getValues();
     }
 
-    @JDIAction("Get options for '{name}' when {0} input is provided")
+    @JDIAction("Get options for '{name}' when '{0}' input is provided")
     public List<String> options(String inputValue) {
         items(inputValue);
         return getValues();
@@ -218,23 +218,23 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return curAttr[0];
     }
 
-    @JDIAction("Is '{name} mandatory")
+    @JDIAction("Is '{name}' mandatory")
     public Boolean isMandatory() {
         return "true".equals(core().getAttribute("aria-required"));
     }
 
-    @JDIAction("Is '{name} invalidated")
+    @JDIAction("Is '{name}' invalidated")
     public Boolean isInvalidated() {
         return "true".equals(core().getAttribute("aria-invalid"));
     }
 
-    @JDIAction("Is '{name} disabled")
+    @JDIAction("Is '{name}' disabled")
     @Override
     public boolean isDisabled() {
         return core().hasAttribute("disabled");
     }
 
-    @JDIAction("Is '{name} enabled")
+    @JDIAction("Is '{name}' enabled")
     @Override
     public boolean isEnabled() {
         return !isDisabled();

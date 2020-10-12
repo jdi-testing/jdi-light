@@ -9,33 +9,33 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class RippleAssert extends UIAssert<RippleAssert, Ripple> {
-    @JDIAction("Assert that '{name}' displayed")
+    @JDIAction("Assert that element displayed")
     @Override
     public RippleAssert displayed() {
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' disabled")
+    @JDIAction("Assert that element disabled")
     @Override
     public RippleAssert disabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' unbounded")
+    @JDIAction("Assert that element unbounded")
     public RippleAssert unbounded() {
         jdiAssert(element().isUnbounded(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' centered")
+    @JDIAction("Assert that element centered")
     public RippleAssert centered() {
         jdiAssert(element().isCentered(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is active")
+    @JDIAction("Assert that element is active")
     public RippleAssert active() {
         jdiAssert(element().isActive(), Matchers.is(true));
         return this;
@@ -71,25 +71,25 @@ public class RippleAssert extends UIAssert<RippleAssert, Ripple> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' input color is correct")
+    @JDIAction("Assert that element input color is correct")
     public RippleAssert correctColor() {
         jdiAssert(element().isCorrectColor(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' input color is incorrect")
+    @JDIAction("Assert that element input color is incorrect")
     public RippleAssert incorrectColor() {
         jdiAssert(element().isCorrectColor(), Matchers.is(false));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' input radius is correct")
+    @JDIAction("Assert that element input radius is correct")
     public RippleAssert correctRadius() {
         jdiAssert(element().isCorrectRadius(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' input radius is incorrect")
+    @JDIAction("Assert that element input radius is incorrect")
     public RippleAssert incorrectRadius() {
         jdiAssert(element().isCorrectRadius(), Matchers.is(false));
         return this;

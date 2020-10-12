@@ -16,19 +16,19 @@ import java.util.Locale;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class DatepickerAssert extends UIAssert<DatepickerAssert, Datepicker> implements ITextAssert<DatepickerAssert> {
-    @JDIAction("Assert that '{name}' expanded")
+    @JDIAction("Assert that element expanded")
     public DatepickerAssert expanded() {
         jdiAssert(element().isExpanded(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' collapsed")
+    @JDIAction("Assert that element collapsed")
     public DatepickerAssert collapsed() {
         jdiAssert(element().isCollapsed(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' focused")
+    @JDIAction("Assert that element focused")
     public DatepickerAssert focused() {
         jdiAssert(element().isFocused(), Matchers.is(true));
         return this;
@@ -64,49 +64,49 @@ public class DatepickerAssert extends UIAssert<DatepickerAssert, Datepicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has valid value")
+    @JDIAction("Assert that element has valid value")
     public DatepickerAssert valid() {
         jdiAssert(element().isValid(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has invalid value")
+    @JDIAction("Assert that element has invalid value")
     public DatepickerAssert invalid() {
         jdiAssert(element().isInvalid(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' enabled")
+    @JDIAction("Assert that element enabled")
     public DatepickerAssert enabled() {
         jdiAssert(element().isEnabled(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' disabled")
+    @JDIAction("Assert that element disabled")
     public DatepickerAssert disabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has enabled toggle")
+    @JDIAction("Assert that element has enabled toggle")
     public DatepickerAssert enabledToggle() {
         jdiAssert(element().isToggleEnabled(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has disabled toggle")
+    @JDIAction("Assert that element has disabled toggle")
     public DatepickerAssert disabledToggle() {
         jdiAssert(element().isToggleDisabled(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has enabled input")
+    @JDIAction("Assert that element has enabled input")
     public DatepickerAssert enabledInput() {
         jdiAssert(element().isInputEnabled(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has disabled input")
+    @JDIAction("Assert that element has disabled input")
     public DatepickerAssert disabledInput() {
         jdiAssert(element().isInputDisabled(), Matchers.is(true));
         return this;

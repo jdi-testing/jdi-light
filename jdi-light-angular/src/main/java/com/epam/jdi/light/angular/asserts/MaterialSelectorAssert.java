@@ -16,13 +16,13 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
 public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, MaterialSelector> {
-    @JDIAction("Assert that '{name}' expanded")
+    @JDIAction("Assert that element expanded")
     public MaterialSelectorAssert expanded() {
         jdiAssert(element().isExpanded(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' collapsed")
+    @JDIAction("Assert that element collapsed")
     public MaterialSelectorAssert collapsed() {
         jdiAssert(element().isCollapsed(), Matchers.is(true));
         return this;
@@ -128,7 +128,7 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return listDisabled(hasItems(values));
     }
 
-    @JDIAction("Assert that rgba({0}, {1}, {2}, {3}) is the specified color")
+    @JDIAction("Assert that rgba('{0}', '{1}', '{2}', '{3}') is the specified color")
     public MaterialSelectorAssert color(final int red, final int green, final int blue, final double a) {
         jdiAssert(element().color(red, green, blue, a), Matchers.is(true));
         return this;

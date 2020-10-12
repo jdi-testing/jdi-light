@@ -117,7 +117,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      *
      * @param values string values
      */
-    @JDIAction("Select {0} for '{name}'")
+    @JDIAction("Select '{0}' for '{name}'")
     public void multipleSelect(final String... values) {
         expand();
         cdkOverlayContainer.multipleSelect(values);
@@ -128,7 +128,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      *
      * @param indexes integer values
      */
-    @JDIAction("Select {0} for '{name}'")
+    @JDIAction("Select '{0}' for '{name}'")
     public void multipleSelect(final int... indexes) {
         expand();
         cdkOverlayContainer.multipleSelect(indexes);
@@ -198,7 +198,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @param a     opacity of the color of the form rgba(R,G,B,a)
      * @return boolean is background has a specified color
      */
-    @JDIAction("Check that rgba({0}, {1}, {2}, {3}) is the specified color")
+    @JDIAction("Check that rgba('{0}', '{1}', '{2}', '{3}') is the specified color")
     public boolean color(final int red, final int green, final int blue, final double a) {
         expand();
         return cdkOverlayContainer.color(red, green, blue, a);

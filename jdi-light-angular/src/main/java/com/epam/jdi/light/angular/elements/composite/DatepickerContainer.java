@@ -33,7 +33,7 @@ public class DatepickerContainer extends Section {
     /**
      * Collapse calendar date select panel.
      */
-    @JDIAction("Collapse '{name}' calendar")
+    @JDIAction("Collapse element calendar")
     public void collapse() {
         UIElement calendarPanel = getCalendar();
         if (calendarPanel.isDisplayed()) {
@@ -41,13 +41,13 @@ public class DatepickerContainer extends Section {
         }
     }
 
-    @JDIAction("Check that '{name}' is displayed")
+    @JDIAction("Check that element is displayed")
     @Override
     public boolean isDisplayed() {
         return getCalendar().isDisplayed();
     }
 
-    @JDIAction("Check that '{name}' is hidden")
+    @JDIAction("Check that element is hidden")
     @Override
     public boolean isHidden() {
         return !isDisplayed();
@@ -58,7 +58,7 @@ public class DatepickerContainer extends Section {
         getMonth(month, locale).click();
     }
 
-    @JDIAction("Select active month in '{name}'")
+    @JDIAction("Select active month in element")
     public void selectActiveMonth() {
         getMonth(startMonth().getValue(), Locale.US).click();
     }
@@ -73,12 +73,12 @@ public class DatepickerContainer extends Section {
         getMonth(startMonth().getValue(), locale).click();
     }
 
-    @JDIAction("Select '{name}' previous month")
+    @JDIAction("Select element previous month")
     public void selectPreviousMonth() {
         getPreviousMonth().click();
     }
 
-    @JDIAction("Select '{name}' next month")
+    @JDIAction("Select element next month")
     public void selectNextMonth() {
         getNextMoth().click();
     }
@@ -88,12 +88,12 @@ public class DatepickerContainer extends Section {
      *
      * @return Month value selected by the 'US' locale
      */
-    @JDIAction("Get '{name}' selected month value")
+    @JDIAction("Get element selected month value")
     public Month selectedMonth() {
         return getSelectedMonth(Locale.US);
     }
 
-    @JDIAction("Get '{name}' selected month value with '{0}' locale")
+    @JDIAction("Get element selected month value with '{0}' locale")
     public Month selectedMonth(final Locale locale) {
         return getSelectedMonth(locale);
     }
@@ -103,7 +103,7 @@ public class DatepickerContainer extends Section {
      *
      * @return Month value selected by the 'US' locale
      */
-    @JDIAction("Get '{name}' start month value")
+    @JDIAction("Get element start month value")
     public Month startMonth() {
         return getMonth(Locale.US);
     }
@@ -133,28 +133,28 @@ public class DatepickerContainer extends Section {
         getDay(day).click();
     }
 
-    @JDIAction("Get '{name}' value of the selected day")
+    @JDIAction("Get element value of the selected day")
     public int selectedDay() {
         int selectedDay = Integer.parseInt(getSelectedDay().text().trim());
         collapse();
         return selectedDay;
     }
 
-    @JDIAction("Get '{name}' today day value")
+    @JDIAction("Get element today day value")
     public int todayDay() {
         int todayDay = Integer.parseInt(getTodayDay().text().trim());
         collapse();
         return todayDay;
     }
 
-    @JDIAction("Get '{name}' active day value")
+    @JDIAction("Get element active day value")
     public int activeDay() {
         int todayDay = Integer.parseInt(getActiveDay().text().trim());
         collapse();
         return todayDay;
     }
 
-    @JDIAction("Get '{name}' value of the selected year")
+    @JDIAction("Get element value of the selected year")
     public Year selectedYear() {
         String selectedYear = getChosenMonthAndYear().text().trim().substring(YEAR_LENGTH);
         Year year = Year.parse(selectedYear);
@@ -162,7 +162,7 @@ public class DatepickerContainer extends Section {
         return year;
     }
 
-    @JDIAction("Get '{name}' start year value")
+    @JDIAction("Get element start year value")
     public Year startYear() {
         String startYear = getChosenDate().text().trim();
         Year year = Year.parse(startYear);

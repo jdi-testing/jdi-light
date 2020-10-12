@@ -8,32 +8,32 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
-    @JDIAction("Assert that '{name}' is selected")
+    @JDIAction("Assert that element is selected")
     public CheckboxAssert selected() {
         jdiAssert(element().isSelected(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not selected")
+    @JDIAction("Assert that element is not selected")
     public CheckboxAssert deselected() {
         jdiAssert(element().isSelected(), Matchers.is(false));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is indeterminate")
+    @JDIAction("Assert that element is indeterminate")
     public CheckboxAssert indeterminate() {
         jdiAssert(element().isIndeterminate(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is enabled")
+    @JDIAction("Assert that element is enabled")
     @Override
     public CheckboxAssert enabled() {
         jdiAssert(element().isEnabled(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that element is disabled")
     @Override
     public CheckboxAssert disabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true));
