@@ -549,8 +549,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         elements = elements(0);
         if (elements == null || elements.isEmpty())
             return new ArrayList<>();
-        // values = LinqUtils.map(elements, el -> el.noValidation(() -> el.text(textType)));
-        values = LinqUtils.map(elements, el -> el.text(textType));
+        values = LinqUtils.map(elements, el -> el.noValidation().text(textType));
         HashSet<String> unique = new HashSet<>(values);
         if (unique.size() == values.size()) {
             map.set(new MapArray<>(values, elements));
