@@ -32,6 +32,12 @@ public class TreeAssert extends UIAssert<TreeAssert, MaterialTree> {
     }
 
 //    @JDIAction("Assert that '{name}' has title '{0}' with value '{1}'")
+//    public TreeAssert attribute(final Matcher<String> attrib, final String value) {
+//        jdiAssert(element().attribute(attrib,value), attrib);
+//        return this;
+//    }
+
+//    @JDIAction("Assert that '{name}' has title '{0}' with value '{1}'")
 //    public TreeAssert title(final Matcher<String> title, final int titleNumber) {
 //        jdiAssert(element().title(titleNumber), title);
 //        return this;
