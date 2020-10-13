@@ -15,9 +15,11 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public String cssCheckBox = "mat-checkbox";
     public String cssChevronLocator = cssTreeNodeLocator + " > "+ cssButtonLocator;
 
-    public final String role = "role";
+    public final String attributeExpanded = "aria-expanded";
+    public final String attributeRole = "role";
     public final String item = "treeitem";
     public final String itemgroup = "group";
+    public final String attributeLevel = "aria-level";
 
     @JDIAction("Expand '{name}' node by name '{node}'")
     public void expand(final String nodeName) {
@@ -44,8 +46,8 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public boolean isCollapsed(final String nodeName) {
         UIElement expansionNode = getNodeByName(nodeName);
         expansionNode.waitFor();
-        boolean isNodeExpanded = expansionNode.getAttribute("aria-expanded").contains("false");
-        boolean isGroup = expansionNode.getAttribute(role).contains(itemgroup);
+        boolean isNodeExpanded = expansionNode.getAttribute(attributeExpanded).contains("false");
+        boolean isGroup = expansionNode.getAttribute(attributeRole).contains(itemgroup);
         return isNodeExpanded && isGroup;
     }
 
@@ -53,8 +55,8 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public boolean isCollapsed(final int indexNumber) {
         UIElement expansionNode = getNodeLocator().get(indexNumber);
         expansionNode.waitFor();
-        boolean isNodeExpanded = expansionNode.getAttribute("aria-expanded").contains("false");
-        boolean isGroup = expansionNode.getAttribute(role).contains(itemgroup);
+        boolean isNodeExpanded = expansionNode.getAttribute(attributeExpanded).contains("false");
+        boolean isGroup = expansionNode.getAttribute(attributeRole).contains(itemgroup);
         return isNodeExpanded && isGroup;
     }
 
@@ -83,5 +85,10 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public String value(final String field) {
         return "";
     }
+//
+//    @JDIAction("Get '{name}' '{0}' field")
+//    public TreeAssert attribute(final String attrib, final String field) {
+//        return new TreeAssert().set(this);
+//    }
 
 }
