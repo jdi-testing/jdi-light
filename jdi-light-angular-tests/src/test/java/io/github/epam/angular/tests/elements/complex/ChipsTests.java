@@ -8,14 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.ChipsSection.basicChipsRow;
-import static io.github.com.pages.sections.ChipsSection.basicSelectedValue;
-import static io.github.com.pages.sections.ChipsSection.chipsAutocompleteField;
-import static io.github.com.pages.sections.ChipsSection.chipsWithInputField;
-import static io.github.com.pages.sections.ChipsSection.chipsAutocompleteInput;
-import static io.github.com.pages.sections.ChipsSection.chipsWithInputInput;
-import static io.github.com.pages.sections.ChipsSection.stackedChipsList;
-import static io.github.com.pages.sections.ChipsSection.stackedSelectedValue;
+import static io.github.com.pages.sections.ChipsSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class ChipsTests extends TestsInit {
