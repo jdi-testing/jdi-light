@@ -4,10 +4,9 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.pages.AngularPage.sortingOverviewSection;
+import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SortingOverviewSection.sortingOverview;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static io.github.com.StaticSite.angularPage;
 
 public class SortingOverviewTests extends TestsInit {
 

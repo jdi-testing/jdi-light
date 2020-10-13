@@ -1,7 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
 import com.epam.jdi.light.angular.entities.DatepickerNavigation;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
