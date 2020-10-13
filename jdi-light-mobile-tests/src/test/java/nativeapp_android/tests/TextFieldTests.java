@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import static nativeapp.android.apiDemos.IndexPage.*;
 import static nativeapp.android.apiDemos.TextFieldsPage.*;
-import static nativeapp.android.apiDemos.ViewsPage.*;
+import static nativeapp.android.apiDemos.ViewsPage.textFieldsPage;
 
 public class TextFieldTests extends ApiDemosTestInit {
 
