@@ -13,6 +13,10 @@ import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.DETERMI
 import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 
+/**
+ * To see an example of ProgressBar web element please visit https://material.angular.io/components/progress-bar/overview#buffer.
+ */
+
 public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
 
     @JDIAction(value = "Get '{name}' max limit")
@@ -31,7 +35,7 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
         return uiElement.attr("mode");
     }
 
-    @JDIAction("Get '{name}' progress value ")
+    @JDIAction("Get '{name}' progress value")
     public int value() throws Exception {
         if (mode().equals(DETERMINATE.getMode()) || mode().equals(BUFFER.getMode())) {
             return getInt(uiElement.attr("aria-valuenow"));

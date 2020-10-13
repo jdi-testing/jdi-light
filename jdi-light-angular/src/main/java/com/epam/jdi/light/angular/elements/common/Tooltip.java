@@ -7,6 +7,9 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
 
+/**
+ * To see an example of Tooltip web element please visit https://material.angular.io/components/tooltip/overview.
+ */
 
 public class Tooltip extends UIBaseElement<TooltipAssert> implements IsText {
 
