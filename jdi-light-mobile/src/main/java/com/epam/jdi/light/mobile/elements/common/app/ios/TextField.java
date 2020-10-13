@@ -25,9 +25,11 @@ public class TextField extends MobileAppBaseElement<TextAssert>
         }
         input(value);
     }
+
     public String getValue() {
         return getText();
     }
+
     @Override
     public String getText() { return core().text(VALUE); }
 
