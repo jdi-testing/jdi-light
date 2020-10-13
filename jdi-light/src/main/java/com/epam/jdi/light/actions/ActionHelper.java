@@ -194,9 +194,9 @@ public class ActionHelper {
         if (LOGS.writeToLog) {
             logger.toLog(message, logLevel(jInfo));
         }
-        if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF))
-            if (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
-                    || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo)) {
+        if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)
+        && (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo))
+        || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo)) {
                 try {
                     jInfo.core().highlight();
                 } catch (Exception ignore) {
