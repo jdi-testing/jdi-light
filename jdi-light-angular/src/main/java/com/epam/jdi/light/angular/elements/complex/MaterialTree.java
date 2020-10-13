@@ -17,11 +17,12 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public String cssCheckBox = "mat-checkbox";
     public String cssChevronLocator = cssTreeNodeLocator + " > "+ cssButtonLocator;
 
-    public final String attributeExpanded = "aria-expanded";
-    public final String attributeRole = "role";
-    public final String item = "treeitem";
-    public final String itemgroup = "group";
-    public final String attributeLevel = "aria-level";
+    public final String ATTRIBUTEEXPANDED = "aria-expanded";
+    public final String ATTRIBUTEROLE = "role";
+    public final String TREEITEM = "treeitem";
+    public final String ITEMGROUP = "group";
+    public final String ATTRIBUTELEVEL = "aria-level";
+    public final String FALSE = "false";
 
     @JDIAction("Expand '{name}' node by name '{node}'")
     public void expand(final String nodeName) {
@@ -48,8 +49,8 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public boolean isCollapsed(final String nodeName) {
         UIElement expansionNode = getNodeByName(nodeName);
         expansionNode.waitFor();
-        boolean isNodeExpanded = expansionNode.getAttribute(attributeExpanded).contains("false");
-        boolean isGroup = expansionNode.getAttribute(attributeRole).contains(itemgroup);
+        boolean isNodeExpanded = expansionNode.getAttribute(ATTRIBUTEEXPANDED).contains(FALSE);
+        boolean isGroup = expansionNode.getAttribute(ATTRIBUTEROLE).contains(ITEMGROUP);
         return isNodeExpanded && isGroup;
     }
 
@@ -57,8 +58,8 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public boolean isCollapsed(final int indexNumber) {
         UIElement expansionNode = getNodes().get(indexNumber);
         expansionNode.waitFor();
-        boolean isNodeExpanded = expansionNode.getAttribute(attributeExpanded).contains("false");
-        boolean isGroup = expansionNode.getAttribute(attributeRole).contains(itemgroup);
+        boolean isNodeExpanded = expansionNode.getAttribute(ATTRIBUTEEXPANDED).contains(FALSE);
+        boolean isGroup = expansionNode.getAttribute(ATTRIBUTEROLE).contains(ITEMGROUP);
         return isNodeExpanded && isGroup;
     }
 
@@ -90,8 +91,8 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
 
     public List<UIElement> getNodeItems(int level) {
         List<UIElement> opened = this.uiElement.finds(By.cssSelector(cssTreeNodeLocator));
-        List<UIElement> branch = new ArrayList();
-        String shift = Integer.toString(level*40)+"px";
+        List<UIElement> branch = new ArrayList<>();
+        String shift = level*40+"px";
         for(UIElement item : opened) {
             if(item.getAttribute("style").contains(shift)) {
                 branch.add(item);
@@ -105,7 +106,7 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
         List<UIElement> branch = getNodeItems(level);
         for(UIElement item: branch) {
             if(item.getText().contains(name)) {
-                checkbox.setCore(checkbox.getClass(), item.find(By.cssSelector("mat-checkbox")));
+                checkbox.setCore(checkbox.getClass(), item.find(By.cssSelector(cssCheckBox)));
                 break;
             }
         }
