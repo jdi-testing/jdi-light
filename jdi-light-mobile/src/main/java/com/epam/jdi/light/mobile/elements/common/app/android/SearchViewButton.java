@@ -10,30 +10,26 @@ import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
 public class SearchViewButton extends MobileAppBaseElement<SearchViewAssert> implements ISearchView, HasTouchActions, IsButton {
 
-    @JDIAction(value = "Check that '{name}' is displayed", level = LogLevels.DEBUG)
+    @JDIAction(value = "Check that '{name}' is iconified", level = LogLevels.DEBUG)
     public boolean isIconified () {
         return core().isDisplayed();
     }
 
-    @JDIAction(value = "Set '{name}' to off", level = LogLevels.DEBUG)
+    @JDIAction(value = "Set '{name}' expanded", level = LogLevels.DEBUG)
     public void setExpanded() {
         if (isIconified())
             core().tap();
     }
 
-    @JDIAction(value = "Check that '{name}' is displayed", level = LogLevels.DEBUG)
+    @JDIAction(value = "Check that '{name}' is expanded", level = LogLevels.DEBUG)
     public boolean isExpanded () {
-        return core().attr("focused").equalsIgnoreCase("true");
+        return core().attr("focused").
+                equalsIgnoreCase("true");
     }
 
     @Override
     public String getValue() {
         return text();
-    }
-
-    @JDIAction("Is '{name}' is collapsed")
-    public Boolean collapsed() {
-        return !isExpanded();
     }
 
     public void input(String value) {
@@ -52,5 +48,4 @@ public class SearchViewButton extends MobileAppBaseElement<SearchViewAssert> imp
     public SearchViewAssert is() {
         return new SearchViewAssert().set(this);
     }
-
 }

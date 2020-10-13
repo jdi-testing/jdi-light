@@ -12,8 +12,8 @@ public class SearchViewAssert extends UIAssert<SearchViewAssert, ISearchView> im
 
     @JDIAction("Assert that '{name}' is iconified")
     @Override
-    public SearchViewAssert searchViewEnabled() {
-        jdiAssert(element.isEnabled(), Matchers.is("true"));
+    public SearchViewAssert enabled() {
+        jdiAssert(element.isEnabled(), Matchers.is(true));
         return this;
     }
 
@@ -26,16 +26,15 @@ public class SearchViewAssert extends UIAssert<SearchViewAssert, ISearchView> im
 
     @JDIAction("Assert that '{name}' is expanded")
     @Override
-    public SearchViewAssert searchViewExpanded() {
+    public SearchViewAssert expanded() {
         jdiAssert(element.isExpanded(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' text {0}")
     @Override
-    public SearchViewAssert searchViewText(String expected) {
+    public SearchViewAssert text(String expected) {
         jdiAssert(element().getValue(), Matchers.is(expected));
         return this;
     }
-
 }
