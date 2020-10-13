@@ -28,17 +28,17 @@ public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
         return new BottomSheetAssert().set(this);
     }
 
-    @JDIAction("Get value")
+    @JDIAction("Get '{name}' values")
     public List<String> values() {
         return new WebList(By.cssSelector(bottomSheetValuesCssSelector)).values();
     }
 
-    @JDIAction("Open bottom")
+    @JDIAction("Open '{name}'")
     public void open() {
         bottomSheet.click();
     }
 
-    @JDIAction("Close bottom")
+    @JDIAction("Close '{name}'")
     public void close() {
         if (isOpened()) {
             bottomSheetContainer.core().click();
@@ -46,12 +46,12 @@ public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
         }
     }
 
-    @JDIAction("Bottom opened")
+    @JDIAction("'{name}' is opened")
     public boolean isOpened() {
         return bottomSheetContainer.isDisplayed();
     }
 
-    @JDIAction("Bottom closed")
+    @JDIAction("'{name}' is closed")
     public boolean isClosed() {
         return !isOpened();
     }

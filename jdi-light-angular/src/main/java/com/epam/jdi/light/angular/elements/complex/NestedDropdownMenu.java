@@ -59,7 +59,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return !hasAttribute("aria-expanded");
     }
 
-    @JDIAction("Check '{name}' expected value '{0} and actual value '{1}'")
+    @JDIAction("Check '{name}' expected value '{0}' and actual value '{1}'")
     public boolean checkValue(String expectedValue, String actualValue) {
         return actualValue.equals(expectedValue);
     }

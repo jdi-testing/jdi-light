@@ -36,7 +36,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' max volume {0}'{0}'")
+    @JDIAction("Assert that '{name}' max volume '{0}'")
     public SliderAssert maxValue(double maxValue) {
         return maxValue(Matchers.is(maxValue));
     }

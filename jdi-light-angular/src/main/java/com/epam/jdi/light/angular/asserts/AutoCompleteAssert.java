@@ -101,7 +101,7 @@ public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplet
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has the {0} option being highlighted")
+    @JDIAction("Assert that '{name}' has the '{0}' option being highlighted")
     public AutoCompleteAssert optionHighlighted(String option) {
         jdiAssert(element.isOptionHighlighted(option), Matchers.is(true));
         return this;

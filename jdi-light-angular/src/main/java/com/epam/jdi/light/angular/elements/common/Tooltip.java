@@ -30,7 +30,7 @@ public class Tooltip extends UIBaseElement<TooltipAssert> implements IsText {
         return this.css("background-color");
     }
 
-    @JDIAction("Get '{name}' position")
+    @JDIAction("Get '{name}' by '{0}' position")
     public Position position(final UIBaseElement<?> element) {
         Rectangle r1 = element.core().getRect();
         Rectangle r2 = this.core().getRect();

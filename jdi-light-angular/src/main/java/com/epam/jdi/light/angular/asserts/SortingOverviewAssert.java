@@ -9,13 +9,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SortingOverviewAssert extends UIAssert<SortingOverviewAssert, SortingOverview> {
 
-    @JDIAction("Assert that table is visible")
+    @JDIAction("Assert that '{name}' is visible")
     public SortingOverviewAssert tableIsVisible() {
         jdiAssert(element.isHeadersDisplayed(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert arrow button clicked")
+    @JDIAction("Assert '{name}' clicked")
     public SortingOverviewAssert arrowButtonClicked() {
         jdiAssert(element.headerButtonIsClicked(), Matchers.is(true));
         return this;

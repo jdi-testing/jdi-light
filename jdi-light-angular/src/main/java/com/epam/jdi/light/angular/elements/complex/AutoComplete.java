@@ -28,10 +28,10 @@ import static com.epam.jdi.light.common.TextTypes.VALUE;
 
 public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements HasLabel, SetValue, HasPlaceholder, IsInput, IsText {
 
-    private String optionsCss = "mat-option";
-    private String optionsGroupsCss = "mat-optgroup>label";
-    private String optionsGroupsAndValuesCss = "mat-optgroup";
-    private String displayValueCss = "mat-label";
+    private final String optionsCss = "mat-option";
+    private final String optionsGroupsCss = "mat-optgroup>label";
+    private final String optionsGroupsAndValuesCss = "mat-optgroup";
+    private final String displayValueCss = "mat-label";
     private String autocompleteAttrPrefix = "_ngcontent-";
 
     @JDIAction("Set attribute '{name}'")
@@ -49,7 +49,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         sendKeys(Keys.TAB);
     }
 
-    @JDIAction("Input value")
+    @JDIAction("Input '{0}' value")
     public void input(String value) {
         core().input(value);
     }
@@ -62,7 +62,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         focusOut();
     }
 
-    @JDIAction("Select value {0} for '{name}'")
+    @JDIAction("Select value '{0}' for '{name}'")
     public void select(String value) {
         WebList options = getOptions(optionsCss);
         options.get(value).click();
@@ -82,7 +82,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return (!labels.isEmpty()) ? labels.get(1).getText() : "";
     }
 
-    @JDIAction("Is option highlighted")
+    @JDIAction("Is '{name}' option '{0}' is highlighted")
     public Boolean isOptionHighlighted(String value) {
         WebList values = getOptions(optionsCss);
         UIElement element = values.get(value);
@@ -90,7 +90,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return selected.contains("mat-active");
     }
 
-    @JDIAction("Set value")
+    @JDIAction("Set '{0}' value")
     public void setValue(String inputValue, String selectValue) {
         if (!isEmpty()) {
             clear();
@@ -168,7 +168,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     public List<String> groups() {
         WebList groupsList = getOptions(optionsGroupsCss);
         if (groupsList.isEmpty()) {
-            String emptyArray[] = {""};
+            String[] emptyArray = {""};
             return Arrays.asList(emptyArray);
         }
         List<String> groupsValues = new ArrayList<>();
@@ -183,7 +183,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         HashMap<UIElement, List<WebElement>> groupsAndOptionsMap = groupsAndOptions();
         HashMap<String, List<String>> groupsAndOptionsValues = new HashMap<>();
         if (groupsAndOptionsMap == null) {
-            String emptyArray[] = {""};
+            String[] emptyArray = {""};
             groupsAndOptionsValues.put("", Arrays.asList(emptyArray));
             return groupsAndOptionsValues;
         }

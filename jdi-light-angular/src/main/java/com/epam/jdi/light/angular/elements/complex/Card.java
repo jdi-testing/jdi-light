@@ -56,12 +56,12 @@ public class Card extends UIBaseElement<CardAssert> {
         return uiElement.getText();
     }
 
-    @JDIAction("Get button with text '{text}'")
+    @JDIAction("Get '{name}' button with text '{0}'")
     public UIElement getButtonByText(String text) {
         return this.getButtons().get(text);
     }
 
-    @JDIAction("Get button with number '{number}'")
+    @JDIAction("Get '{name}' button with number '{0}'")
     public UIElement getButtonByNumber(int number) {
         return this.getButtons().get(number);
     }
