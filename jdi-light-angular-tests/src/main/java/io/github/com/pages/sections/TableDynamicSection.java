@@ -12,6 +12,7 @@ public class TableDynamicSection {
     public static Button removeButton;
     @UI("table-dynamic-columns-example > button:nth-child(4)")
     public static Button shuffleButton;
+
     @JTable(root = "table-dynamic-columns-example > table")
     public static Table dynamicTable;
 }
