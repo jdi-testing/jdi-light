@@ -20,8 +20,7 @@ public class MaterialTreeTests extends TestsInit {
     final String FRUIT = "Fruit";
     final String VEGETABLES = "Vegetables";
     final String GROCERIES = "Groceries";
-    final String REMAINDERS = "Reminders";
-    final String ORGANICEGGS = "Organic eggs";
+    final String ORGANIC_GGS = "Organic eggs";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
@@ -49,7 +48,7 @@ public class MaterialTreeTests extends TestsInit {
         checkBoxesExample.show();
         checkBoxesTree.expand(GROCERIES);
         checkBoxesTree.is().expanded(GROCERIES);
-        Checkbox checkbox = checkBoxesTree.getCheckbox(1, ORGANICEGGS);
+        Checkbox checkbox = checkBoxesTree.getCheckbox(1, ORGANIC_GGS);
         checkbox.is().enabled();
         checkbox.check();
         checkbox.is().selected();
@@ -64,7 +63,7 @@ public class MaterialTreeTests extends TestsInit {
         checkBoxesTree.expand(GROCERIES);
         checkBoxesTree.is().expanded(GROCERIES);
         Checkbox checkbox = checkBoxesTree.getCheckbox(0, GROCERIES);
-        Checkbox checkbox1 = checkBoxesTree.getCheckbox(1, ORGANICEGGS);
+        Checkbox checkbox1 = checkBoxesTree.getCheckbox(1, ORGANIC_GGS);
         checkbox.is().enabled();
         checkbox.check();
         checkbox.is().selected();
