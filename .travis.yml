@@ -248,19 +248,19 @@ jobs:
                    - <<: *testsangularcomplexgroups
                    name: Run tests - angular ui tests for complexgroups elements - JDK9
                    jdk: openjdk9
-                   - <<: *testsangularcomplexgroups
-                     name: Run tests - angular ui tests for complexgroups elements - JDK10
-                     if: true
-                     jdk: openjdk10
-                   - <<: *testsangularcomplexgroups
-                     name: Run tests - angular ui tests for complexgroups elements - JDK11
-                     jdk: openjdk11
-                   - <<: *testsangularcomplexgroups
-                     name: Run tests - angular ui tests for complexgroups elements - JDK12
-                     jdk: openjdk12
-                   - <<: *testsangularcomplexgroups
-                     name: Run tests - angular ui tests for complexgroups elements - JDK13
-                     jdk: openjdk13
+                          - <<: *testsangularcomplexgroups
+                          name: Run tests - angular ui tests for complexgroups elements - JDK10
+                          if: true
+                          jdk: openjdk10
+                          - <<: *testsangularcomplexgroups
+                            name: Run tests - angular ui tests for complexgroups elements - JDK11
+                            jdk: openjdk11
+                          - <<: *testsangularcomplexgroups
+                            name: Run tests - angular ui tests for complexgroups elements - JDK12
+                            jdk: openjdk12
+                          - <<: *testsangularcomplexgroups
+                            name: Run tests - angular ui tests for complexgroups elements - JDK13
+                            jdk: openjdk13
 
     - <<: *testshtml
       name: Run tests - html - JDK8

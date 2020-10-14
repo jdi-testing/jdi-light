@@ -128,5 +128,11 @@
                 <suite-xml-file>src/test/resources/complex.xml</suite-xml-file>
             </properties>
         </profile>
+        <profile>
+            <id>complexgroups</id>
+            <properties>
+                <suite-xml-file>src/test/resources/complexgroups.xml</suite-xml-file>
+            </properties>
+        </profile>
     </profiles>
 </project>
