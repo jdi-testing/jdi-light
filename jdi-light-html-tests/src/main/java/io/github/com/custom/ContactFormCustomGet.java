@@ -14,7 +14,10 @@ import java.lang.reflect.Field;
 
 public class ContactFormCustomGet extends Form<Contacts> {
     TextField firstName;
-    TextField lastName, position, passportNumber, passportSeria;
+    TextField lastName;
+    TextField position;
+    TextField passportNumber;
+    TextField passportSeria;
 
     Dropdown gender;
     IsCombobox religion;

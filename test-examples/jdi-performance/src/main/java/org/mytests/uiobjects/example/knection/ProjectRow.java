@@ -8,6 +8,8 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 public class ProjectRow extends Section {
     @Title
     public Link name;
-    public Text projectCode, apiId, lastUpdated;
+    public Text projectCode;
+    public Text apiId;
+    public Text lastUpdated;
     public Link actions;
 }
