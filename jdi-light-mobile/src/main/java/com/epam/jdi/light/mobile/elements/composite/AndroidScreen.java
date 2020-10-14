@@ -1,10 +1,13 @@
 package com.epam.jdi.light.mobile.elements.composite;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.HasAndroidDeviceDetails;
 
 import java.awt.*;
 import java.util.Map;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
 public class AndroidScreen extends MobileScreen {
@@ -44,5 +47,17 @@ public class AndroidScreen extends MobileScreen {
             this.rect = rect;
             return this;
         }
+    }
+
+    static AndroidDriver driver= (AndroidDriver) getDriver();
+
+    public static void openStatusBar(){
+
+        driver.openNotifications();
+    }
+
+    public static void closeStatusBar(){
+        driver.navigate().back();
+
     }
 }
