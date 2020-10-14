@@ -9,8 +9,6 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.customTriggerTextSelect;
 
 public class CustomTriggerTextSelectTests extends TestsSelectBase {
-    private final String[] multiOptions = new String[1];
-    private int[] multiSelect = new int[6];
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
@@ -25,6 +23,7 @@ public class CustomTriggerTextSelectTests extends TestsSelectBase {
 
     @Test
     public void checkOptionCanBeSelectedByName() {
+        String[] multiOptions = new String[1];
         multiOptions[0] = SAUSAGE;
         customTriggerTextSelect.multipleSelect(multiOptions);
         customTriggerTextSelect.is().selected(multiOptions[0]);
@@ -32,7 +31,7 @@ public class CustomTriggerTextSelectTests extends TestsSelectBase {
 
     @Test
     public void checkAllOptionsCanBeSelectedById() {
-        multiSelect = new int[] {1, 2, 3, 4, 5, 6};
+        int[] multiSelect = new int[]{1, 2, 3, 4, 5, 6};
         customTriggerTextSelect.multipleSelect(multiSelect);
         customTriggerTextSelect.verify().selected(EXTRA_CHEESE + " (+5 others)");
     }

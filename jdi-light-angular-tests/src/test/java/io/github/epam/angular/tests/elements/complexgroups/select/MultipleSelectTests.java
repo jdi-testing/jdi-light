@@ -10,8 +10,6 @@ import static io.github.com.pages.sections.SelectSection.multipleSelect;
 import static org.hamcrest.Matchers.hasItems;
 
 public class MultipleSelectTests extends TestsSelectBase {
-    private final String[] multiOptions = new String[3];
-    private final int[] multiSelect = new int[1];
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
@@ -26,6 +24,7 @@ public class MultipleSelectTests extends TestsSelectBase {
 
     @Test
     public void checkSingleOptionCanBeSelectedById() {
+        int[] multiSelect = new int[1];
         multiSelect[0] = 3;
         multipleSelect.multipleSelect(multiSelect);
         multipleSelect.is().selected(ONION);
@@ -33,6 +32,7 @@ public class MultipleSelectTests extends TestsSelectBase {
 
     @Test
     public void checkThreeOptionsCanBeSelectedByName() {
+        String[] multiOptions = new String[3];
         multiOptions[0] = EXTRA_CHEESE;
         multiOptions[1] = PEPPERONI;
         multiOptions[2] = TOMATO;
