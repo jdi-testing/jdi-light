@@ -11,14 +11,10 @@ import io.github.com.pages.sections.BasicButtonsSection;
 import io.github.com.pages.sections.ButtonToggleSection;
 import io.github.com.pages.sections.CardSection;
 import io.github.com.pages.sections.CheckboxSection;
-import io.github.com.pages.sections.ChipsSection;
 import io.github.com.pages.sections.DatepickerSection;
-import io.github.com.pages.sections.ExpansionPanelSection;
-import io.github.com.pages.sections.FormFieldsSection;
 import io.github.com.pages.sections.GridListSection;
 import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.ListSection;
-import io.github.com.pages.sections.MaterialTreeSection;
 import io.github.com.pages.sections.MenuSection;
 import io.github.com.pages.sections.PaginatorSection;
 import io.github.com.pages.sections.ProgressBarSection;
@@ -31,9 +27,13 @@ import io.github.com.pages.sections.SnackbarSection;
 import io.github.com.pages.sections.SortingOverviewSection;
 import io.github.com.pages.sections.SpinnerSection;
 import io.github.com.pages.sections.TabGroupSection;
-import io.github.com.pages.sections.TableSection;
 import io.github.com.pages.sections.ToolbarSection;
 import io.github.com.pages.sections.TooltipSection;
+import io.github.com.pages.sections.ExpansionPanelSection;
+import io.github.com.pages.sections.FormFieldsSection;
+import io.github.com.pages.sections.ChipsSection;
+import io.github.com.pages.sections.TableSection;
+import io.github.com.pages.sections.MaterialTreeSection;
 
 public class AngularPage extends WebPage {
 
