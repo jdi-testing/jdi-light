@@ -57,17 +57,16 @@ public class SearchViewTests extends ApiDemosTestInit {
 
     @Test
     public void searchViewTestForFilter() {
+
         IndexPage.viewsPage.click();
         MobileScreen.scrollDown(3300);
         ViewsPage.searchViewPage.click();
         SearchViewPage.filterPage.click();
         SearchViewFilterPage.searchViewField.is().enabled();
         SearchViewFilterPage.searchViewField.has().text(PLACEHOLDER_Filter);
-        SearchViewFilterPage.searchViewField.input("aber");
-        SearchViewFilterPage.option.has().text("Abertam");
-        SearchViewFilterPage.crossIcon.click();
         SearchViewFilterPage.searchViewField.input("edam");
-        SearchViewFilterPage.option.has().text("Edam");
-        SearchViewFilterPage.option.click();
+        SearchViewFilterPage.crossIcon.click();
+        SearchViewFilterPage.searchViewField.input("yo");
+        SearchViewFilterPage.listView.select("Olde York");
     }
 }
