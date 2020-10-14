@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.*;
-import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.*;
+import static io.github.epam.angular.tests.elements.complexgroups.select.TestsSelectBase.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;

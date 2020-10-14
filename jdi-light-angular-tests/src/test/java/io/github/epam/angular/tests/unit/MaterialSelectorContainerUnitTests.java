@@ -12,14 +12,14 @@ import java.util.Arrays;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.*;
-import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.*;
+import static io.github.epam.angular.tests.elements.complexgroups.select.TestsSelectBase.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class MaterialSelectorContainerUnitTests extends TestsInit {
     private MaterialSelectorContainer container;
-    private String[] multiOptions = new String[3];
+    private final String[] multiOptions = new String[3];
     private int[] multiSelect = new int[3];
 
     @BeforeMethod(alwaysRun = true)

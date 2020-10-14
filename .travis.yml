@@ -18,6 +18,7 @@ env:
     - UNIT="-Punit"
     - COMMON="-Pcommon"
     - COMPLEX="-Pcomplex"
+    - COMPLEXGROUPS="-Pcomplexgroups"
     - GROUP_ID="com.epam.jdi"
     - NOPO_TESTS="jdi-bdd-no-po-tests"
     - NOPO_TESTS_PROPERTY="test-examples/jdi-bdd-no-po-tests"
@@ -82,6 +83,14 @@ testsangularcomplex: &testsangularcomplex
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
+testsangularcomplexgroups: &testsangularcomplexgroups
+  stage: test
+  name: Run tests - angular ui tests for complexgroups elements
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS $COMPLEXGROUPS -pl $GROUP_ID:$ANGULAR_TESTS
 testshtml: &testshtml
   stage: test
   name: Run tests - html
@@ -231,6 +240,27 @@ jobs:
     - <<: *testsangularcomplex
       name: Run tests - angular ui tests for complex elements - JDK13
       jdk: openjdk13
+
+        - <<: *testsangularcomplexgroups
+            name: Run tests - angular ui tests for complexgroups elements - JDK8
+            if: true
+            jdk: openjdk8
+                   - <<: *testsangularcomplexgroups
+                   name: Run tests - angular ui tests for complexgroups elements - JDK9
+                   jdk: openjdk9
+                   - <<: *testsangularcomplexgroups
+                     name: Run tests - angular ui tests for complexgroups elements - JDK10
+                     if: true
+                     jdk: openjdk10
+                   - <<: *testsangularcomplexgroups
+                     name: Run tests - angular ui tests for complexgroups elements - JDK11
+                     jdk: openjdk11
+                   - <<: *testsangularcomplexgroups
+                     name: Run tests - angular ui tests for complexgroups elements - JDK12
+                     jdk: openjdk12
+                   - <<: *testsangularcomplexgroups
+                     name: Run tests - angular ui tests for complexgroups elements - JDK13
+                     jdk: openjdk13
 
     - <<: *testshtml
       name: Run tests - html - JDK8

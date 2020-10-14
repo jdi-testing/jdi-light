@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.*;
-import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.*;
+import static io.github.epam.angular.tests.elements.complexgroups.select.TestsSelectBase.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;

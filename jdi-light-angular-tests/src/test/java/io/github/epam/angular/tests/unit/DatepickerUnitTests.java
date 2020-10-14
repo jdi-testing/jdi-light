@@ -16,7 +16,7 @@ import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.*;
-import static io.github.epam.angular.tests.elements.complex.datepicker.TestsDatepickerBase.*;
+import static io.github.epam.angular.tests.elements.complexgroups.datepicker.TestsDatepickerBase.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
