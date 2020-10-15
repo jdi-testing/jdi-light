@@ -8,7 +8,13 @@ package jdisite.entities;
 import com.epam.jdi.tools.DataClass;
 
 public class ContactInfo extends DataClass<ContactInfo> {
-    public String firstName, lastName, position, gender, religion, weather, description;
+    public String firstName;
+    public String lastName;
+    public String position;
+    public String gender;
+    public String religion;
+    public String weather;
+    public String description;
     public int passportNumber;
     public int passportSeria;
     public boolean passport;
