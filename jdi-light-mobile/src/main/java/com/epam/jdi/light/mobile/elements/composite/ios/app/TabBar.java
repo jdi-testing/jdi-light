@@ -10,16 +10,16 @@ import com.epam.jdi.light.mobile.interfaces.IViewControllersSwitch;
 import static com.epam.jdi.light.mobile.MobileUtils.GET_BUTTON;
 import static com.epam.jdi.light.mobile.elements.init.PageFactory.initElements;
 
-public class SegmentedControl extends MobileAppBaseElement<ViewControllersSwitchAssert> implements PageObject, HasTouchActions, IViewControllersSwitch {
+public class TabBar extends MobileAppBaseElement<ViewControllersSwitchAssert> implements PageObject, HasTouchActions, IViewControllersSwitch {
     private Object pageObject = this;
 
-    public SegmentedControl() {
+    public TabBar() {
         initElements(this);
     }
 
-    @JDIAction(value = "Perform tap on '{name}' {0} segment")
-    public void tapSegment(String segmentName) {
-        HasTouchActions button = GET_BUTTON.execute(pageObject, segmentName);
+    @JDIAction(value = "Perform tap on '{name}' {0} button")
+    public void tapBarButton(String buttonName) {
+        HasTouchActions button = GET_BUTTON.execute(pageObject, buttonName);
         button.tap();
     }
 
