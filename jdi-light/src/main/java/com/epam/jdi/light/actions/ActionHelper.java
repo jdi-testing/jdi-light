@@ -61,7 +61,6 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.Timer.nowTime;
-import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
@@ -110,21 +109,59 @@ public class ActionHelper {
     }
 
     public static String fillTemplate(String template, JoinPoint jp, MethodSignature method) {
+        logger.trace("fillTemplate(): " + template);
         String filledTemplate = template;
         try {
             if (filledTemplate.contains("{0")) {
-                Object[] args = getArgs(jp);
-                filledTemplate = msgFormat(filledTemplate, args);
+                try {
+                    Object[] args = getArgs(jp);
+                    filledTemplate = msgFormat(filledTemplate, args);
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate { 0 } failed");
+                }
             } else if (filledTemplate.contains("%s")) {
-                filledTemplate = format(filledTemplate, getArgs(jp));
+                try {
+                    filledTemplate = format(filledTemplate, getArgs(jp));
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate % s  failed");
+                }
             }
             if (filledTemplate.contains("{")) {
-                MapArray<String, Object> obj = toMap(() -> new MapArray<>("this", getElementName(jp)));
-                MapArray<String, Object> args = methodArgs(jp, method);
-                MapArray<String, Object> core = core(jp);
-                MapArray<String, Object> fields = classFields(jp.getThis());
-                MapArray<String, Object> methods = classMethods(jp.getThis());
-                filledTemplate = getActionNameFromTemplate(method, filledTemplate, obj, args, core, fields, methods);
+                MapArray<String, Object> obj;
+                MapArray<String, Object> args;
+                MapArray<String, Object> core;
+                MapArray<String, Object> fields;
+                MapArray<String, Object> methods;
+                try {
+                    obj = new MapArray<>("this", getElementName(jp));
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate get 'obj' failed");
+                }
+                try {
+                    args = methodArgs(jp, method);
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate get 'args' failed");
+                }
+                try {
+                    core = core(jp);
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate get 'core' failed");
+                }
+                try {
+                    fields = classFields(jp.getThis());
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate get 'fields' failed");
+                }
+                try {
+                    methods = classMethods(jp.getThis());
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate get 'methods' failed");
+                }
+                try {
+                    filledTemplate = getActionNameFromTemplate(method, filledTemplate, obj, args, core, fields, methods);
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate getActionNameFromTemplate failed");
+                }
                 if (filledTemplate.contains("{{VALUE}}") && args.size() > 0) {
                     filledTemplate = filledTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
                 }
@@ -132,8 +169,9 @@ public class ActionHelper {
                     filledTemplate = filledTemplate.replaceAll("\\{failElement}", obj.get(0).value.toString());
                 }
             }
+            logger.trace("fillTemplate() => " + filledTemplate);
             return filledTemplate;
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + getClassMethodName(jp));
         }
     }
@@ -191,7 +229,7 @@ public class ActionHelper {
     }
     public static void beforeStepAction(JoinPoint jp) {
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
-        logger.toLog(message, logLevel(new ActionObject(jp)));
+        logger.step(message);
     }
     private static void visualValidation(JoinPoint jp, String message) {
         Object obj = jp.getThis();
@@ -283,6 +321,8 @@ public class ActionHelper {
             logOptions.add("action", actionName);
             logString = msgFormat(getTemplate(LOGS.logLevel), logOptions);
         }
+        if (isBlank(logString))
+            return "";
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
     public static MapArray<String, Object> getLogOptions(JoinPoint jp) {
@@ -404,7 +444,8 @@ public class ActionHelper {
         String methodName = splitCamelCase(getMethodName(jp));
         if (args.size() == 0)
             return methodName;
-        return format("%s%s", methodName, argsToString(args));
+        String argsAsString = argsToString(args);
+        return format("%s%s", methodName, argsAsString);
     }
     static String argsToString(MapArray<String, Object> args) {
         return args.size() == 1
@@ -417,13 +458,9 @@ public class ActionHelper {
                 : "("+args.get(0).value+")";
     }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
-        return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint)));
-    }
-    static MapArray<String, Object> toMap(JFunc<MapArray<String, Object>> getMap) {
-        IGNORE_NOT_UNIQUE = true;
-        MapArray<String, Object> map = getMap.execute();
-        IGNORE_NOT_UNIQUE = false;
-        return map;
+        String[] names = method.getParameterNames();
+        Object[] args = getArgs(joinPoint);
+        return new MapArray<>(names, args);
     }
     static Object[] getArgs(JoinPoint jp) {
         Object[] args = jp.getArgs();
@@ -432,11 +469,11 @@ public class ActionHelper {
         Object[] result = new Object[args.length];
         for (int i = 0; i< args.length; i++)
             result[i] = Switch(args[i]).get(
-                    Case(Objects::isNull, null),
-                    Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
-                    Case(arg -> isInterface(arg.getClass(), List.class),
-                            PrintUtils::printList),
-                    Default(arg -> arg));
+                Case(Objects::isNull, null),
+                Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
+                Case(arg -> isInterface(arg.getClass(), List.class),
+                        PrintUtils::printList),
+                Default(arg -> arg));
         return result;
     }
     static MapArray<String, Object> core(JoinPoint jp) {

@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static io.github.com.pages.Header.epamLogo;
 import static io.github.com.pages.Header.search;
@@ -29,7 +30,7 @@ public class JListSearchTests implements TestsInit {
 
     @Test
     public void printResultTest() {
-        String result = jsearchS.get(2).print();
+        String result = jsearchS.get(ELEMENT.startIndex + 1).print();
         assertEquals(result, "SearchResult{NAME=JDI OWNER CONTACT; DESCRIPTION=Write an email directly to Framework owner and main architect Iovlev Roman; LINK=mailto:roman.iovlev.jdi@gmail.com}");
     }
     @Test
@@ -48,9 +49,10 @@ public class JListSearchTests implements TestsInit {
             "SearchResult{NAME=JDI PARTNERS GROUP - COMA QA; DESCRIPTION=Minsk Testing community Coma QA; LINK=https://www.facebook.com/comaqa.by/}");
         searchS.is().size(8);
         jsearchS.clear();
+        int startIndex = ELEMENT.startIndex;
         jsearchS.list().indexFromZero();
         String results2 = print(jsearchS, SearchResult::print);
-        jsearchS.list().startIndex(1);
+        jsearchS.list().setStartIndex(startIndex);
         assertEquals(results2,
          "SearchResult{NAME=JDI SKYPE; DESCRIPTION=JDI Skype group with active JDI users; LINK=https://join.skype.com/u2Cel0MWHkAO}," +
             "SearchResult{NAME=JDI OWNER CONTACT; DESCRIPTION=Write an email directly to Framework owner and main architect Iovlev Roman; LINK=mailto:roman.iovlev.jdi@gmail.com}," +

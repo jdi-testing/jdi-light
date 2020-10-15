@@ -1,20 +1,14 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-import static com.epam.jdi.light.angular.elements.complex.NestedDropdownMenu.BASIC_MENU_VALUES;
-import static com.epam.jdi.light.angular.elements.complex.NestedDropdownMenu.MENU_WITH_ICONS_VALUES;
-import static com.epam.jdi.light.angular.elements.complex.NestedDropdownMenu.NESTED_MENU_VALUES;
+import static com.epam.jdi.light.angular.elements.complex.NestedDropdownMenu.*;
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.MenuSection.basicMenuButton;
-import static io.github.com.pages.sections.MenuSection.basicMenuSelectedOption;
-import static io.github.com.pages.sections.MenuSection.menuWithIconsButton;
-import static io.github.com.pages.sections.MenuSection.nestedMenuButton;
+import static io.github.com.pages.sections.MenuSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -23,7 +17,7 @@ public class MenuUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
     }
 
     @Test
@@ -71,18 +65,5 @@ public class MenuUnitTests extends TestsInit {
     public void valuesTest() {
         basicMenuButton.show();
         assertEquals(basicMenuButton.values(), Arrays.asList(BASIC_MENU_VALUES));
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (basicMenuButton.isExpanded()) {
-            basicMenuButton.close();
-        }
-        if (menuWithIconsButton.isExpanded()) {
-            menuWithIconsButton.close();
-        }
-        if (nestedMenuButton.isExpanded()) {
-            nestedMenuButton.close();
-        }
     }
 }

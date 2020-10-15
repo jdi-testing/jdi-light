@@ -2,22 +2,19 @@ package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
 import org.apache.commons.lang3.RandomUtils;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.rippleContainer;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class RippleUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         rippleContainer.show();
     }
 
@@ -124,14 +121,5 @@ public class RippleUnitTests extends TestsInit {
         int y = RandomUtils.nextInt(0, 299);
         rippleContainer.ripple(x, y);
         assertTrue(rippleContainer.isRippleCenter(x, y));
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        rippleContainer.clearRadius();
-        rippleContainer.clearColor();
-        rippleContainer.enable();
-        rippleContainer.bound();
-        rippleContainer.decentralize();
     }
 }

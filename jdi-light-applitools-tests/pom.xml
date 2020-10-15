@@ -7,7 +7,7 @@
     <artifactId>jdi-light-applitools-tests</artifactId>
     <name>Tests: JDI Light Applitools Eyes</name>
     <packaging>jar</packaging>
-    <version>1.2.20</version>
+    <version>1.2.23</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -33,12 +33,12 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.20</version>
+            <version>1.2.23</version>
         </dependency>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-eyes</artifactId>
-            <version>1.2.20</version>
+            <version>1.2.23</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>

@@ -11,12 +11,6 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertTrue;
 
 public class ButtonToggleUnitTests extends TestsInit {
-
-    private final String ITALIC = "italic";
-    private final String BOLD = "bold";
-    private final String UNDERLINE = "underline";
-    private final String JUSTIFY = "justify";
-
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
@@ -25,24 +19,28 @@ public class ButtonToggleUnitTests extends TestsInit {
 
     @Test
     public void isButtonToggleSelectedTest() {
+        String ITALIC = "italic";
         basicButtonToggle.clickButtonToggleByValue(ITALIC);
         assertTrue(basicButtonToggle.isButtonToggleSelected(ITALIC));
     }
 
     @Test
     public void isButtonToggleButtonPressedTest() {
+        String BOLD = "bold";
         basicButtonToggle.clickButtonToggleByValue(BOLD);
         assertTrue(basicButtonToggle.isButtonToggleButtonPressed(BOLD));
     }
 
     @Test
     public void buttonToggleHasTextTest() {
+        String UNDERLINE = "underline";
         basicButtonToggle.clickButtonToggleByValue(UNDERLINE);
         assertTrue(basicButtonToggle.buttonToggleHasText(UNDERLINE));
     }
 
     @Test(expectedExceptions = UnsupportedOperationException.class)
     public void verifyExclusiveButtonToggleJustifyButton() {
+        String JUSTIFY = "justify";
         basicButtonToggleAlign.is().assertButtonToggleIsSelected(JUSTIFY);
     }
 }

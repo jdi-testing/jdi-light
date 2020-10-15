@@ -134,7 +134,7 @@ public class SoftAsserts implements TestsInit {
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(
-                "Expected: not null", "but: was null",
+                "Expected: is \"has row\"", "but: was \"has no rows\"",
                 "Expected: a collection with size <3>", "but: collection size was <0>"
             ));
         }
@@ -152,7 +152,7 @@ public class SoftAsserts implements TestsInit {
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(
-                "Expected: not null", "but: was null",
+                "Expected: is \"has row\"", "but: was \"has no rows\"",
                 "Expected: a collection with size <3>", "but: collection size was <0>"
             ));
         }

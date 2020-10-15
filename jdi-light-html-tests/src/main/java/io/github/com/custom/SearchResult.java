@@ -10,10 +10,14 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.String.format;
 
 public class SearchResult extends Section {
-        @UI("h3") public Label name;
-        @UI("p") public Text description;
-        @UI("a") public Link link;
+    @UI("h3") public Label name;
+    @UI("p") public Text description;
+    @UI("a") public Link link;
 
+    @Override
+    public String toString() {
+        return print();
+    }
     public String print() {
         return logger.logOff(
             () -> format("SearchResult{NAME=%s; DESCRIPTION=%s; LINK=%s}",

@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.interfaces.complex;
 import com.epam.jdi.light.asserts.complex.ChecklistAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.elements.complex.ISelector;
+import com.epam.jdi.tools.HasStartIndex;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public interface IsChecklist extends ISelector, HasAssert<ChecklistAssert> {
+public interface IsChecklist extends ISelector, HasAssert<ChecklistAssert>, HasStartIndex {
     void select(String name);
     void select(String... names);
     <TEnum extends Enum<?>> void select(TEnum value);
