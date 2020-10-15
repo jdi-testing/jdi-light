@@ -13,11 +13,10 @@ import io.appium.java_client.screenrecording.CanRecordScreen;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.lang3.NotImplementedException;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.function.Function;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -48,6 +47,12 @@ public class MobileScreen {
         }
         return screenSize;
     }
+
+    private static int getHeight(){
+        Dimension dimension = getScreenSize();
+        return dimension.getHeight();
+    }
+
     @JDIAction
     private static void scroll(Point startingPoint, int xOffset, int yOffset) {
         executeDriverMethod(PerformsTouchActions.class, (PerformsTouchActions driver) -> {
@@ -90,6 +95,21 @@ public class MobileScreen {
     @JDIAction("Scroll left by {0} px")
     public static void scrollLeft(int offset) {
         scrollHorizontally(offset);
+    }
+
+
+    private static int scrollDivider = 3;
+
+    //Works only if sought element exists.
+    public static void scrollDownToXpath(String xpath){
+        int height = getHeight();
+        while (true){
+            List<WebElement> soughtElement = getDriver().findElements(By.xpath(xpath));
+            if (!soughtElement.isEmpty()){
+                return;
+            }
+            scrollDown(height / scrollDivider);
+        }
     }
 
     public static void scrollToTop() {
