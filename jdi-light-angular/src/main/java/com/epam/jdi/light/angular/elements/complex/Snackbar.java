@@ -14,7 +14,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> {
     protected String messageLocator = "./span";
 
     protected UIElement action;
-    protected String actionLocator = ".//button";
+    protected String actionLocator = "#snack-bar-open-button";
 
     public Snackbar() {
         message = new UIElement();

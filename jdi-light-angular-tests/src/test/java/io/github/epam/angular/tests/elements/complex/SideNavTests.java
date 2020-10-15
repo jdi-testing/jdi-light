@@ -99,7 +99,7 @@ public class SideNavTests extends TestsInit {
         configurableMode.getContent().has().attr(STYLE, "");
 
         sideNavRadioButtons.click("Side");
-        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
+        configurableMode.getContent().has().attr(STYLE, "margin-left: 257px;");
 
         sideNavRadioButtons.click("Push");
         configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
@@ -109,7 +109,7 @@ public class SideNavTests extends TestsInit {
     public void contentRadioButtonsTest() {
         contentToggle.click();
         sideNavRadioButtons.click("Side");
-        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
+        configurableMode.getContent().has().attr(STYLE, "margin-left: 257px;");
 
         contentRadioButtons.click("Push");
         configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
@@ -137,7 +137,7 @@ public class SideNavTests extends TestsInit {
         toggleAutoNav.click();
         toggleExtraText.click();
         autoSizeSideNav.getMatDrawer().has().text(containsString("Toggle extra text"));
-        autoSizeSideNav.getMatDrawerContent().has().attr(STYLE, "margin-left: 294px;");
+        autoSizeSideNav.getMatDrawerContent().has().attr(STYLE, "margin-left: 293px;");
     }
 
     @Test

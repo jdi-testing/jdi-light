@@ -23,21 +23,21 @@ public class BottomSheetTests extends TestsInit {
 
     @Test
     public void checkBottomSheetIsDisplayedTest() {
-        bottomSheet.open();
-        bottomSheet.is().opened();
+        bottomSheet.base().timer().wait(() -> bottomSheet.open());
+        bottomSheet.base().timer().wait(() -> bottomSheet.is().opened());
     }
 
     @Test
     public void checkBottomSheetIsHiddenTest() {
-        bottomSheet.open();
-        bottomSheet.close();
-        bottomSheet.is().closed();
+        bottomSheet.base().timer().wait(() -> bottomSheet.open());
+        bottomSheet.base().timer().wait(() -> bottomSheet.close());
+        bottomSheet.base().timer().wait(() -> bottomSheet.is().closed());
     }
 
     @Test
     public void checkBottomSheetAvailableOptionsTest() {
-        bottomSheet.open();
-        bottomSheet.is().values(BOTTOM_SHEET_VALUES);
+        bottomSheet.base().timer().wait(() -> bottomSheet.open());
+        bottomSheet.base().timer().wait(() -> bottomSheet.is().values(BOTTOM_SHEET_VALUES));
     }
 }
 
