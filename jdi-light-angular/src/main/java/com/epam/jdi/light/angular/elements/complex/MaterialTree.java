@@ -2,6 +2,7 @@ package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.TreeAssert;
 import com.epam.jdi.light.angular.elements.common.Checkbox;
+import com.epam.jdi.light.angular.elements.common.ProgressBar;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -13,6 +14,7 @@ import java.util.List;
 public class MaterialTree extends UIBaseElement<TreeAssert> {
 
     public String cssTreeNodeLocator = "mat-tree-node";
+    public String cssProgressBarLocator = "mat-progress-bar";
     public String cssButtonLocator = "button > span > mat-icon";
     public String cssCheckBox = "mat-checkbox";
     public String cssChevronLocator = cssTreeNodeLocator + " > "+ cssButtonLocator;
@@ -23,21 +25,24 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public final String ITEMGROUP = "group";
     public final String ATTRIBUTELEVEL = "aria-level";
     public final String FALSE = "false";
+    public static ProgressBar matProgressBarNode = new ProgressBar();
 
     @JDIAction("Expand '{name}' node by name '{node}'")
-    public void expand(final String nodeName) {
-        UIElement expansionIndicator = getNodeByName(nodeName);
-        if (!expansionIndicator.isEmpty() && isCollapsed(nodeName)) {
-            expansionIndicator.finds(By.cssSelector(cssButtonLocator)).get(1).click();
+    public UIElement expand(final String nodeName) {
+        UIElement expansionNode = getNodeByName(nodeName);
+        if (!expansionNode.isEmpty() && isCollapsed(nodeName)) {
+            expansionNode.finds(By.cssSelector(cssButtonLocator)).get(1).click();
         }
+        return expansionNode;
     }
 
     @JDIAction("Collapse '{name}' panel by name '{node}'")
-    public void collapse(final String nodeName) {
-        UIElement expansionIndicator = getNodeByName(nodeName);
-        if (!expansionIndicator.isEmpty() && isExpanded(nodeName)) {
-            expansionIndicator.finds(By.cssSelector(cssButtonLocator)).get(1).click();
+    public UIElement collapse(final String nodeName) {
+        UIElement expansionNode = getNodeByName(nodeName);
+        if (!expansionNode.isEmpty() && isExpanded(nodeName)) {
+            expansionNode.finds(By.cssSelector(cssButtonLocator)).get(1).click();
         }
+        return expansionNode;
     }
 
     @JDIAction("Is '{name}' '{node}' panel expanded")
@@ -48,7 +53,6 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     @JDIAction("Is '{name}' '{node}' panel collapsed")
     public boolean isCollapsed(final String nodeName) {
         UIElement expansionNode = getNodeByName(nodeName);
-        expansionNode.waitFor();
         boolean isNodeExpanded = expansionNode.getAttribute(ATTRIBUTEEXPANDED).contains(FALSE);
         boolean isGroup = expansionNode.getAttribute(ATTRIBUTEROLE).contains(ITEMGROUP);
         return isNodeExpanded && isGroup;
@@ -57,7 +61,6 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     @JDIAction("Is '{name}' '{0}' panel collapsed")
     public boolean isCollapsed(final int indexNumber) {
         UIElement expansionNode = getNodes().get(indexNumber);
-        expansionNode.waitFor();
         boolean isNodeExpanded = expansionNode.getAttribute(ATTRIBUTEEXPANDED).contains(FALSE);
         boolean isGroup = expansionNode.getAttribute(ATTRIBUTEROLE).contains(ITEMGROUP);
         return isNodeExpanded && isGroup;
@@ -68,10 +71,17 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
         return new TreeAssert().set(this);
     }
 
+    public void waitExpandTree(UIElement node) {
+        matProgressBarNode.setCore(matProgressBarNode.getClass(), node.find(By.cssSelector(cssProgressBarLocator)));
+        if(matProgressBarNode.isExist()) {
+            matProgressBarNode.waitFor().disappear(1);
+        }
+    }
+
     protected UIElement getNodeByName(String name) {
         List<UIElement> nodes = getNodes();
         for(UIElement node: nodes) {
-            if(node.getText().split("\n")[1].equalsIgnoreCase(name)) return node;
+            if(node.getText().contains(name)) return node;
         }
         return null;
     }
