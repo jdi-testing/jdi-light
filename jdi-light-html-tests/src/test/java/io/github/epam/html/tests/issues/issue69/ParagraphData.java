@@ -6,4 +6,5 @@ public class ParagraphData extends DataClass<ParagraphData> {
     public String paragraphl;
     public String paragraph2;
     public String paragraph3;
+    public String paragraph;
 }
