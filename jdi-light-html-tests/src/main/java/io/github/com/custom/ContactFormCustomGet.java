@@ -22,7 +22,8 @@ public class ContactFormCustomGet extends Form<Contacts> {
     Dropdown gender;
     IsCombobox religion;
 
-    Checkbox passport, acceptConditions;
+    Checkbox passport;
+    Checkbox acceptConditions;
     TextArea description;
 
     @UI("['Submit']") public Button submit;
