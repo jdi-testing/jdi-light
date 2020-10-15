@@ -89,7 +89,7 @@ public class ActionHelper {
                 case NAME: return NAME_TEMPLATE;
                 case LOCATOR: return LOCATOR_TEMPLATE;
                 case CONTEXT: return CONTEXT_TEMPLATE;
-                case ELEMENT: return ELEMENT_TEMPLATE;
+                default: case ELEMENT: return ELEMENT_TEMPLATE;
             }
         }
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : ELEMENT_TEMPLATE;
