@@ -28,8 +28,10 @@ import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class JDILogger implements ILogger {
+
     private static final MapArray<String, JDILogger> loggers = new MapArray<>();
     private static final Marker jdiMarker = MarkerManager.getMarker("JDI");
+
     public Safe<FixedQueue<String>> debugLog = new Safe<>(() -> new FixedQueue<>(debugBufferSize));
     public static int debugBufferSize = 0;
 
