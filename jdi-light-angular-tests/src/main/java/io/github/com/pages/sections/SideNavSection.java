@@ -15,7 +15,7 @@ public class SideNavSection {
     public static SideNav basicDrawer;
     @UI("#implicit-main-content")
     public static SideNav implicitMainContent;
-    @UI("open-close-behavior")
+    @UI("#open-close-behavior")
     public static SideNav openCloseBehavior;
 
     @UI("#open-close-behavior mat-checkbox")

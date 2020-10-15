@@ -19,7 +19,7 @@ public class SideNav extends UIBaseElement<UIAssert<?, SideNav>> {
 
     @JDIAction("Get '{name}' side nav content")
     public UIElement getContent() {
-        return this.find(".mat-sidenav-content");
+        return this.find("#mat-checkbox-15");
     }
 
     /*for several side navs*/
@@ -36,7 +36,7 @@ public class SideNav extends UIBaseElement<UIAssert<?, SideNav>> {
 
     @JDIAction("Get '{name}' side nav content")
     public UIElement getEvents() {
-        return getContent().find(".example-events");
+        return this.find(".mat-sidenav-content");
     }
 
     @JDIAction("Get '{name}' side nav content")
