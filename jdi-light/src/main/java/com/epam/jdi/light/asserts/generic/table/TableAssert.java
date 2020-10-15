@@ -1,3 +1,4 @@
+
 package com.epam.jdi.light.asserts.generic.table;
 
 import com.epam.jdi.light.common.JDIAction;
