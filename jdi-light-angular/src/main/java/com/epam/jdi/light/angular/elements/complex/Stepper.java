@@ -1,4 +1,7 @@
 package com.epam.jdi.light.angular.elements.complex;
 
-public class Stepper {
+import com.epam.jdi.light.angular.asserts.StepperAssert;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+
+public class Stepper extends UIBaseElement<StepperAssert> {
 }
