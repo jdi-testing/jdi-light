@@ -133,9 +133,9 @@ public class FormContactsTests implements TestsInit {
 
     @Test
     public void addEntityMethodTest() {
-        main.contactFormCustom.add(DEFAULT_CONTACT);
-        main.contactFormCustom.check(DEFAULT_CONTACT);
-        checkContactFormSubmitted();
+        main.contactFormCustom.base().timer().wait(() -> main.contactFormCustom.add(DEFAULT_CONTACT));
+        main.contactFormCustom.base().timer().wait(() -> main.contactFormCustom.check(DEFAULT_CONTACT));
+        main.contactFormCustom.base().timer().wait(() -> checkContactFormSubmitted());
     }
 
     @Test
