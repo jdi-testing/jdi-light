@@ -3,9 +3,9 @@
 <suite name="JDI-Light HTML Tests" parallel="methods" thread-count="4">
     <test name="Tests">
         <packages>
-            <package name="io.github.epam.html.tests.elements.common"/>
-            <!--package name="io.github.epam.html.tests.elements.complex.*"/>
-            <package name="io.github.epam.html.tests.elements.complex"/>
+            <!--package name="io.github.epam.html.tests.elements.common"/-->
+            <package name="io.github.epam.html.tests.elements.complex.*"/>
+            <!--package name="io.github.epam.html.tests.elements.complex"/>
             <package name="io.github.epam.html.tests.elements.composite.*"/>
             <package name="io.github.epam.html.tests.elements.composite.page.init"/>
             <package name="io.github.epam.html.tests.elements.composite"/>

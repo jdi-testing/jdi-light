@@ -158,7 +158,8 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get first '{name}' table row that match criteria")
     public D dataRow(JFunc1<D, Boolean> matcher) {
         hasDataClass();
-        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
+        int count = count() + getStartIndex();
+        for (int i = getStartIndex(); i < count; i++) {
             D data = dataRow(i);
             if (matcher.execute(data))
                 return data;
@@ -175,7 +176,8 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get first '{name}' table row that match criteria")
     public L line(JFunc1<D, Boolean> matcher) {
         hasLineClass();
-        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
+        int count = count() + getStartIndex();
+        for (int i = getStartIndex(); i < count; i++) {
             if (matcher.execute(dataRow(i)))
                 return line(i);
         }
@@ -204,7 +206,8 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     public List<D> dataRows(JFunc1<D, Boolean> matcher, int amount) {
         hasDataClass();
         List<D> result = new ArrayList<>();
-        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
+        int count = count() + getStartIndex();
+        for (int i = getStartIndex(); i < count; i++) {
             if (matcher.execute(dataRow(i)))
                 result.add(dataRow(i));
             if (result.size() == amount)
@@ -256,9 +259,9 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         hasDataClass();
         if (datas.isGotAll()) return datas.get().values();
         MapArray<String, D> result = new MapArray<>();
-        int count = count();
+        int count = count() + getStartIndex();
         logger.debug("Count: " + count);
-        for (int i = getStartIndex(); i < count + getStartIndex(); i++)
+        for (int i = getStartIndex(); i < count; i++)
             result.update(i+"", dataRow(i));
         datas.gotAll();
         return datas.set(result).values();
@@ -273,7 +276,8 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         hasLineClass();
         if (lines.isGotAll()) return lines.get().values();
         MapArray<String, L> result = new MapArray<>();
-        for (int i = getStartIndex(); i < count() + getStartIndex(); i++)
+        int count = count() + getStartIndex();
+        for (int i = getStartIndex(); i < count; i++)
             result.add(i+"", line(i));
         lines.gotAll();
         return lines.set(result).values();
@@ -391,7 +395,8 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
             ? LinqUtils.map(allData(), l -> l)
             : LinqUtils.map(allLines(), l -> l);
         List<List<Field>> fields = LinqUtils.map(rows, d -> getFieldsExact(d.getClass()));
-        for (int i = 0; i < count(); i++) {
+        int count = count();
+        for (int i = 0; i < count; i++) {
             List<String> list = new ArrayList<>();
             for (String h : header()) {
                 Field field = LinqUtils.first(fields.get(i),

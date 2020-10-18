@@ -109,6 +109,9 @@ public class PageFactory {
             throw exception(ex, "Setup rule '%s' failed. Can't setup field '%s' on page '%s'",
                     ruleName, info.name(), info.parentName());
         }
+        if (isClass(info.instance.getClass(), UIBaseElement.class)) {
+            ((UIBaseElement) info.instance).init();
+        }
     }
     // endregion
 

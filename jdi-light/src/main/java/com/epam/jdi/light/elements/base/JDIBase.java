@@ -3,6 +3,8 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.init.SiteInfo;
+import com.epam.jdi.light.elements.init.rules.AnnotationRule;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
@@ -20,6 +22,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -27,11 +30,16 @@ import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.JdiSettings.*;
+import static com.epam.jdi.light.elements.init.InitActions.JDI_ANNOTATIONS;
+import static com.epam.jdi.light.elements.init.InitActions.defaultSetup;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.util.Collections.singletonList;
@@ -66,8 +74,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         webElements = base.webElements.copy();
         searchRules = base.searchRules.copy();
         beforeSearch = base.beforeSearch;
-        timeout.set(base.timeout.get());
-        waitAfterTimeout.set(base.waitAfterTimeout.get());
+        timeout = new Safe<>(() -> base.timeout.get());
+        waitAfterTimeout = new Safe<>(() -> base.waitAfterTimeout.get());
         waitAfterMethod = base.waitAfterMethod;
         return this;
     }
@@ -88,6 +96,24 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     WebElement beforeSearch(WebElement el) {
         (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new UIElement(el));
         return el;
+    }
+    public void setup(SiteInfo info) {
+        defaultSetup(info, this);
+        if (parent != null && isClass(parent.getClass(), IBaseElement.class)) {
+            JDIBase parentBase = ((IBaseElement)parent).base();
+            searchRules = parentBase.searchRules.copy();
+        }
+        if (info.field != null) {
+            for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
+                try {
+                    Class<? extends Annotation> annotation = aRule.value.annotation;
+                    if (hasAnnotation(info.field, annotation))
+                        aRule.value.action.execute(this, info.field.getAnnotation(annotation), info.field);
+                } catch (Exception ex) {
+                    throw exception(ex, "Setup element '%s' with Annotation '%s' failed", info.name(), aRule.key);
+                }
+            }
+        }
     }
 
     public JDIBase doBefore(JAction1<UIElement> action) { beforeSearch = action; return this; }
@@ -154,17 +180,19 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public List<By> getFrames() { return locator.getFrames(); }
 
     protected Safe<Integer> timeout = new Safe<>(() -> -1);
-    protected Safe<Integer>  waitAfterTimeout = new Safe<>(() -> -1);
+    protected Safe<Integer> waitAfterTimeout = new Safe<>(() -> -1);
     protected String waitAfterMethod = "";
     public IBaseElement waitAfter(int timeout, String methodName) {
-        if (timeout > 0)
-            waitAfterTimeout.set(timeout);
+        waitAfterTimeout = new Safe<>(() -> timeout > 0 ? timeout : 1);
         if (isNotBlank(methodName))
             waitAfterMethod = methodName;
         return this;
     }
     public Pair<String, Integer> waitAfter() {
         return new Pair<>(waitAfterMethod, waitAfterTimeout.get());
+    }
+    public void setTimeout(int sec) {
+        timeout = new Safe<>(() -> sec);
     }
     @Override
     public IBaseElement waitSec(int sec) {
@@ -388,7 +416,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         if (webElement.hasValue())
             return printWebElement(webElement.get());
         if (webElements.hasValue() && webElements.get().size() > 0)
-            return printWebElement(webElements.get().get(0));
+            return printWebElement(webElements.get().get(0)) + "[" + webElements.get().size() + "]";
         return "";
     }
     public static JFunc1<JDIBase, String> PRINT_ELEMENT = element -> {

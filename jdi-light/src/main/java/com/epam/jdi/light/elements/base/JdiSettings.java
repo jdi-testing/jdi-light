@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.base;
 
-import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;

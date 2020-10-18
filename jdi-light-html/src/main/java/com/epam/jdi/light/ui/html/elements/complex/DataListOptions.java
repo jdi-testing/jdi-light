@@ -26,7 +26,7 @@ import static com.epam.jdi.tools.LinqUtils.ifSelect;
 public class DataListOptions extends UIListBase<DropdownAssert> implements IsCombobox, HasStartIndex {
     @Override
     public WebList list() {
-        WebList list = $$("#"+ uiElement.attr("list")+" option")
+        WebList list = $$("#"+ core().attr("list")+" option")
             .setup(e -> e.noValidation().setName(getName() + "list"))
             .setUIElementName(VALUE);
         list.setStartIndex(startIndex);
@@ -34,7 +34,7 @@ public class DataListOptions extends UIListBase<DropdownAssert> implements IsCom
     }
     @Override
     public String getText() {
-        return uiElement.attr("value");
+        return core().attr("value");
     }
     /**
     *

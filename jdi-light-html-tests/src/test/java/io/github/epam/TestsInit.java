@@ -1,6 +1,5 @@
 package io.github.epam;
 
-import com.epam.jdi.light.elements.complex.table.Grid;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
@@ -21,8 +20,6 @@ import static io.github.com.StaticSite.homePage;
 public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
-        Grid g = new Grid();
-        g.base();
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         killAllSeleniumDrivers();
         initSite(StaticSite.class);

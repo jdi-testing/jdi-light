@@ -19,16 +19,16 @@ public class NumberSelector extends UIBaseElement<NumberAssert>
     // region Actions
 
     @JDIAction(value = "Get '{name}' min value", level = DEBUG)
-    public Double min() { return getDouble("min", uiElement); }
+    public Double min() { return getDouble("min", core()); }
     @JDIAction(value = "Get '{name}' max value", level = DEBUG)
-    public Double max() { return getDouble("max", uiElement); }
+    public Double max() { return getDouble("max", core()); }
     @JDIAction(value = "Get '{name}' value", level = DEBUG)
-    public String value() { return uiElement.attr("value"); }
+    public String value() { return core().attr("value"); }
     @JDIAction(value = "Get '{name}' step size", level = DEBUG)
-    public Double step() { return getDouble("step", uiElement); }
+    public Double step() { return getDouble("step", core()); }
     @JDIAction("Select number '{0}' for '{name}'")
     public void setNumber(String number) {
-        uiElement.setAttribute("value", number);
+        core().setAttribute("value", number);
     }
     // endregion
 

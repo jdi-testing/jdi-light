@@ -16,9 +16,9 @@ import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 public class ProgressBar extends UIBaseElement<ProgressAssert> implements HasLabel, HasValue {
     // region Actions
     @JDIAction(value = "Get '{name}' max limit", level = DEBUG)
-    public int max() { return getInt(uiElement.attr("max")); }
+    public int max() { return getInt(core().attr("max")); }
     @JDIAction("Get '{name}' progress value ")
-    public int value() { return getInt(uiElement.attr("value")); }
+    public int value() { return getInt(core().attr("value")); }
     // endregion
 
     // region Set and get value for Forms

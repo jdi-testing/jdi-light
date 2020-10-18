@@ -1,7 +1,6 @@
-package com.epam.jdi.light.common;
+package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.driver.WebDriverByUtils;
-import com.epam.jdi.light.elements.base.JDIBase;
 import org.openqa.selenium.By;
 
 import java.util.List;

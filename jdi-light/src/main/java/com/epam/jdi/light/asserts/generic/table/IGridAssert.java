@@ -6,7 +6,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.table.IGrid;
 import com.epam.jdi.light.elements.complex.table.Line;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -20,7 +19,6 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.lang.String.format;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.hasSize;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

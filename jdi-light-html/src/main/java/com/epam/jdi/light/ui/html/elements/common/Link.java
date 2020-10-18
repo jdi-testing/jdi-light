@@ -23,14 +23,14 @@ public class Link extends UIBaseElement<LinkAssert>
     // region Actions
 
     @JDIAction(value = "Get '{name}' reference", level = DEBUG)
-    public String ref() { return uiElement.attr("href"); }
+    public String ref() { return core().attr("href"); }
 
     public URL url() {
         try { return new URL(ref());
         } catch (MalformedURLException ex) { throw exception(safeException(ex)); }
     }
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
-    public String alt() { return uiElement.attr("alt"); }
+    public String alt() { return core().attr("alt"); }
     // endregion
 
     // region Set and get value for Forms

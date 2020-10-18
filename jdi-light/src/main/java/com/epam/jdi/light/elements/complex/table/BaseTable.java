@@ -346,7 +346,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected MapArray<String, WebList> getRows() {
         if (rows.isGotAll()) return rows.get();
         MapArray<String, WebList> result = new MapArray<>();
-        for (int i = getStartIndex(); i < count() + getStartIndex(); i++)
+        int count = count() + getStartIndex();
+        for (int i = getStartIndex(); i < count; i++)
             result.add(i+"", webRow(i));
         rows.gotAll();
         return rows.set(result);
@@ -373,7 +374,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected MapArray<String, WebList> getColumns() {
         if (columns.isGotAll()) return columns.get();
         MapArray<String, WebList> result = new MapArray<>();
-        for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
+        int size = size() + getStartIndex();
+        for (int i = getStartIndex(); i < size; i++)
             result.add(i +"", webColumn(i));
         columns.gotAll();
         return columns.set(result);
@@ -690,7 +692,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public String getValue() {
         getTableJs();
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
-        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
+        int count = count();
+        for (int i = getStartIndex(); i < count + getStartIndex(); i++) {
             List<String> row = cellsValues.get().get(i+"").values();
             value += "||" + i + "||" + print(map(row, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         }
@@ -752,9 +755,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             cellsValues.set(new MapArray<>());
             int k = 0;
             int j = getStartIndex();
+            int size = size() + getStartIndex();
             while (k < listOfCells.size()) {
                 MapArray<String, String> newRow = new MapArray<>();
-                for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
+                for (int i = getStartIndex(); i < size; i++)
                     newRow.add(i+"", listOfCells.get(k++));
                 cellsValues.get().update(j+"", newRow);
                 j++;
@@ -770,10 +774,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
                 cells.set(new MapArray<>());
                 int k = 0;
                 int j = getStartIndex();
-                for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
+                int size = size() + getStartIndex();
+                for (int i = getStartIndex(); i < size; i++)
                     cells.get().update(i+"", new MapArray<>());
                 while (k < listOfCells.size()) {
-                    for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
+                    for (int i = getStartIndex(); i < size; i++)
                         cells.get().get(i+"").update(j+"", new UIElement(listOfCells.get(k++)));
                     j++;
                 }

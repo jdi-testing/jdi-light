@@ -22,7 +22,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.asserts.generic.table.DataTableAssert.CompareType.*;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.tools.LinqUtils.isSorted;
-import static java.lang.String.format;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 
