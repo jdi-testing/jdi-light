@@ -21,6 +21,7 @@ public class TreeUnitTests extends TestsInit {
     private final String VEGETABLES = "Vegetables";
     private final String GROCERIES = "Groceries";
     private final String ORGANIC_GGS = "Organic eggs";
+    private final String PROTO_CITRUS = "Big lemon";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
@@ -75,5 +76,20 @@ public class TreeUnitTests extends TestsInit {
         flatExample.show();
         flatTree.waitExpandTree(flatTree.expand(VEGETABLES));
         assertTrue(flatTree.isExpanded(VEGETABLES) && flatTree.isCollapsed(FRUIT));
+    }
+
+    @Test
+    public void addItemTest() {
+        checkBoxesExample.show();
+        checkBoxesTree.expand(GROCERIES);
+        checkBoxesTree.is().expanded(GROCERIES);
+        checkBoxesTree.addNode(0,GROCERIES,PROTO_CITRUS);
+        Checkbox checkbox = checkBoxesTree.getCheckbox(1, PROTO_CITRUS);
+        assertTrue(checkbox.isEnabled());
+        checkbox.check();
+        assertTrue(checkbox.isSelected());
+        checkbox.uncheck();
+        checkbox.show();
+        assertTrue(!checkbox.isSelected());
     }
 }

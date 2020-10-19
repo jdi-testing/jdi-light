@@ -6,6 +6,8 @@ import com.epam.jdi.light.angular.elements.common.ProgressBar;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public String cssProgressBarLocator = "mat-progress-bar";
     public String cssButtonLocator = "button > span > mat-icon";
     public String cssCheckBox = "mat-checkbox";
+    public String cssTextField = "mat-form-field input";
     public String cssChevronLocator = cssTreeNodeLocator + " > "+ cssButtonLocator;
 
     public final String ATTRIBUTE_EXPANDED = "aria-expanded";
@@ -103,7 +106,7 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public List<UIElement> getNodeItems(int level) {
         List<UIElement> opened = this.uiElement.finds(By.cssSelector(cssTreeNodeLocator));
         List<UIElement> branch = new ArrayList<>();
-        String shift = level*40+"px";
+        String shift = " " + level*40+"px";
         for(UIElement item : opened) {
             if(item.getAttribute(ATTRIBUTE_STYLE).contains(shift)) {
                 branch.add(item);
@@ -122,5 +125,28 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
             }
         }
         return checkbox;
+    }
+
+    public void addNode(int level, String rootName, String newName) {
+        Button addButton = new Button();
+        TextField textField = new TextField();
+        List<UIElement> branch = getNodeItems(level);
+        for(UIElement item: branch) {
+            if(item.getText().contains(rootName)) {
+                List<UIElement> itPossibleToAddItems = item.finds(By.cssSelector(cssButtonLocator));
+                if(itPossibleToAddItems.size()>1) {
+                    addButton.setCore(addButton.getClass(), itPossibleToAddItems.get(2));
+                    addButton.click();
+                    List<UIElement> internalBranch = getNodeItems(level+1);
+                    UIElement newItem = internalBranch.get(internalBranch.size()-1);
+                    textField.setCore(textField.getClass(), newItem.find(By.cssSelector(cssTextField)));
+                    textField.sendKeys(newName);
+                    Button save = new Button();
+                    save.setCore(save.getClass(), newItem.finds(By.cssSelector("button")).get(2));
+                    save.click();
+                    break;
+                }
+            }
+        }
     }
 }
