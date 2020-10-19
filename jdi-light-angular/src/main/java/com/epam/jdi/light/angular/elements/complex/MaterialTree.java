@@ -17,17 +17,15 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
 
     public String cssTreeNodeLocator = "mat-tree-node";
     public String cssProgressBarLocator = "mat-progress-bar";
-    public String cssButtonLocator = "button > span > mat-icon";
+    public String cssButtonLocator = "button span mat-icon";
     public String cssCheckBox = "mat-checkbox";
     public String cssTextField = "mat-form-field input";
-    public String cssChevronLocator = cssTreeNodeLocator + " > "+ cssButtonLocator;
+    public String cssFormButton = "button";
 
     public final String ATTRIBUTE_EXPANDED = "aria-expanded";
     public final String ATTRIBUTE_ROLE = "role";
     public final String ATTRIBUTE_STYLE = "style";
-    public final String TREE_ITEM = "treeitem";
     public final String ITEM_GROUP = "group";
-    public final String ATTRIBUTE_LEVEL = "aria-level";
     public final String FALSE = "false";
     public static ProgressBar matProgressBarNode = new ProgressBar();
 
@@ -94,10 +92,6 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
         return this.uiElement.finds(By.cssSelector(cssTreeNodeLocator));
     }
 
-    protected List<UIElement> getExpansionButton() {
-        return this.uiElement.finds(By.cssSelector(cssChevronLocator));
-    }
-
     @JDIAction("Get '{name}' '{0}' value")
     public String value(final String field) {
         return "";
@@ -127,23 +121,24 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
         return checkbox;
     }
 
+    protected Button getItemButton(UIElement item, String subLocator) {
+        Button button = new Button();
+        button.setCore(button.getClass(), item.finds(By.cssSelector(subLocator)).get(2));
+        return button;
+    }
+
     public void addNode(int level, String rootName, String newName) {
-        Button addButton = new Button();
-        TextField textField = new TextField();
-        List<UIElement> branch = getNodeItems(level);
-        for(UIElement item: branch) {
+        List<UIElement> btree = getNodeItems(level);
+        for(UIElement item: btree) {
             if(item.getText().contains(rootName)) {
-                List<UIElement> itPossibleToAddItems = item.finds(By.cssSelector(cssButtonLocator));
-                if(itPossibleToAddItems.size()>1) {
-                    addButton.setCore(addButton.getClass(), itPossibleToAddItems.get(2));
-                    addButton.click();
-                    List<UIElement> internalBranch = getNodeItems(level+1);
-                    UIElement newItem = internalBranch.get(internalBranch.size()-1);
-                    textField.setCore(textField.getClass(), newItem.find(By.cssSelector(cssTextField)));
+                if(item.getAttribute(ATTRIBUTE_ROLE).contains(ITEM_GROUP)) {
+                    getItemButton(item,cssButtonLocator).click();
+                    List<UIElement> subTree = getNodeItems(level+1);
+                    UIElement newNode = subTree.get(subTree.size()-1);
+                    TextField textField = new TextField();
+                    textField.setCore(textField.getClass(), newNode.find(By.cssSelector(cssTextField)));
                     textField.sendKeys(newName);
-                    Button save = new Button();
-                    save.setCore(save.getClass(), newItem.finds(By.cssSelector("button")).get(2));
-                    save.click();
+                    getItemButton(newNode,cssFormButton).click();
                     break;
                 }
             }
