@@ -25,7 +25,9 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
     public final String ATTRIBUTE_EXPANDED = "aria-expanded";
     public final String ATTRIBUTE_ROLE = "role";
     public final String ATTRIBUTE_STYLE = "style";
+    public final String TREE_ITEM = "treeitem";
     public final String ITEM_GROUP = "group";
+    public final String ATTRIBUTE_LEVEL = "aria-level";
     public final String FALSE = "false";
     public static ProgressBar matProgressBarNode = new ProgressBar();
 
