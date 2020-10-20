@@ -16,6 +16,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements IActionBar, HasTouchActions, IsButton {
 
+
     @JDIAction(value = "Check that '{name}' is iconified", level = LogLevels.DEBUG)
     @Override
     public boolean isIconified() {
@@ -59,13 +60,8 @@ public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements 
         List<WebElement> options = getDriver().findElements(
                 new MobileBy.ByAndroidUIAutomator(
                         "new UiSelector().className(\"android.widget.TextView\")"));
-        for (WebElement element : options) {
-            if (text.equals(element.getText())) {
-                element.click();
-                break;
-            }
-        }
-        getDriver().getPageSource();
+        options.stream().filter(webElement -> webElement.getText().equalsIgnoreCase(text))
+                .forEach(webElement -> webElement.click());
     }
 
     @Override

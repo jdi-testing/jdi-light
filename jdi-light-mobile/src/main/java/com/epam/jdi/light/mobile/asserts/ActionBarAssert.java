@@ -1,12 +1,9 @@
 package com.epam.jdi.light.mobile.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
-import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.mobile.asserts.generic.ISearchViewButtonAssert;
 import com.epam.jdi.light.mobile.asserts.generic.ISearchViewFieldAssert;
 import com.epam.jdi.light.mobile.elements.common.app.IActionBar;
-import com.epam.jdi.light.mobile.elements.common.app.ISearchViewButton;
-import com.epam.jdi.light.mobile.elements.common.app.android.ActionBar;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
