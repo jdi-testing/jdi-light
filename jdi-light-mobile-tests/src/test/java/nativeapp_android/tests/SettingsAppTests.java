@@ -7,6 +7,7 @@ import static nativeapp.android.NetworkAndInternetPage.*;
 
 
 public class SettingsAppTests extends SettingsAppTestsInit {
+
     @Test
     public void switchAirplaneModeTest(){
         networkAndInternetButton.click();

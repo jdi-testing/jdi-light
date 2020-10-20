@@ -42,7 +42,7 @@ public class CalendarAppTests extends CalendarAppTestsInit {
     public void segmentedControlTest() {
         CalendarPage.inboxButton.tap();
 
-        InboxPage.eventTypesSegmentedControl.has().segments(Arrays.asList("New", "Replied"));
+        InboxPage.eventTypesSegmentedControl.has().values(Arrays.asList("New", "Replied"));
 
         InboxPage.eventTypesSegmentedControl.tapSegment("Replied");
         InboxPage.eventTypesSegmentedControl.is().selected("Replied");

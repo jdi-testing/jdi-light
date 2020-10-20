@@ -25,6 +25,6 @@ public class SettingsAppTestsInit {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        WebDriverFactory.quit();
+        WebDriverFactory.quitDriverNativeApp();
     }
 }

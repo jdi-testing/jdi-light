@@ -30,24 +30,27 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebDriverFactory {
-    private WebDriverFactory() { }
+    private WebDriverFactory() {
+    }
 
     public static MapArray<String, JFunc<WebDriver>> DRIVERS
-        = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
+            = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
     public static boolean SINGLE_THREAD = false;
     private static MapArray<String, WebDriver> RUN_DRIVERS = new MapArray<>();
     private static Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS
-        = new Safe<>(MapArray::new);
+            = new Safe<>(MapArray::new);
 
     public static boolean noRunDrivers() {
         return !getRunDrivers().any();
     }
+
     private static MapArray<String, WebDriver> getRunDrivers() {
         logger.debug("SINGLE_THREAD=" + SINGLE_THREAD);
         return SINGLE_THREAD
-            ? RUN_DRIVERS
-            : THREAD_RUN_DRIVERS.get();
+                ? RUN_DRIVERS
+                : THREAD_RUN_DRIVERS.get();
     }
+
     private static void setRunDrivers(MapArray<String, WebDriver> map) {
         if (SINGLE_THREAD) {
             RUN_DRIVERS = map;
@@ -55,6 +58,7 @@ public class WebDriverFactory {
             THREAD_RUN_DRIVERS.set(map);
         }
     }
+
     public static WebDriver getDriverByName(String driverName) {
         logger.debug("getDriverByName(%s)", driverName);
         Lock lock = new ReentrantLock();
@@ -90,8 +94,8 @@ public class WebDriverFactory {
             } catch (Throwable ex) {
                 if (driverDownloaded)
                     throw exception(ex, "Failed to run downloaded driver. Please check that your browser and driver are compatible or use local driver with 'drivers.folder' property in test.properties'." + LINE_BREAK
-                        + "Driver: " + downloadedDriverInfo + LINE_BREAK
-                        + "DriverPath: " + driverPath);
+                            + "Driver: " + downloadedDriverInfo + LINE_BREAK
+                            + "DriverPath: " + driverPath);
                 else throw exception(ex, "Failed to run driver");
             }
             logger.debug("Success: " + driver);
@@ -152,7 +156,7 @@ public class WebDriverFactory {
     }
 
     public static <T> T jsExecute(String script, Object... args) {
-        return (T)((JavascriptExecutor) getDriver()).executeScript(script, args);
+        return (T) ((JavascriptExecutor) getDriver()).executeScript(script, args);
     }
 
     public static WebDriver getDriver() {
@@ -169,6 +173,7 @@ public class WebDriverFactory {
     public static long INIT_THREAD_ID = -1;
     public static boolean SWITCH_THREAD = false;
     public static WebDriver INIT_DRIVER;
+
     public static WebDriver getDriver(String driverName) {
         return DRIVER.getFunc.execute(driverName);
     }
@@ -213,10 +218,25 @@ public class WebDriverFactory {
         try {
             driver.close();
             driver.quit();
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+        }
     }
 
     public static void quit() {
         close();
+    }
+
+    public static void quitDriverNativeApp() {
+        for (Pair<String, WebDriver> pair : getRunDrivers()) {
+            quitDriver(pair.value);
+        }
+        getRunDrivers().clear();
+    }
+
+    private static void quitDriver(WebDriver driver) {
+        try {
+            driver.quit();
+        } catch (Exception ignore) {
+        }
     }
 }

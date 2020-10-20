@@ -89,7 +89,7 @@ public class ActionHelper {
                 case NAME: return NAME_TEMPLATE;
                 case LOCATOR: return LOCATOR_TEMPLATE;
                 case CONTEXT: return CONTEXT_TEMPLATE;
-                case ELEMENT: return ELEMENT_TEMPLATE;
+                default: case ELEMENT: return ELEMENT_TEMPLATE;
             }
         }
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : ELEMENT_TEMPLATE;
@@ -188,20 +188,20 @@ public class ActionHelper {
             processBeforeAction(message, jInfo);
         }
     }
-    protected static void processBeforeAction(String message, ActionObject jInfo) {
+    private static void processBeforeAction(String message, ActionObject jInfo) {
         allureSteps.reset();
         JoinPoint jp = jInfo.jp();
         if (LOGS.writeToLog) {
             logger.toLog(message, logLevel(jInfo));
         }
-        if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
-            if (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
-                || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo)) {
+        if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)
+        && (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo))
+        || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo)) {
                 try {
                     jInfo.core().highlight();
-                } catch (Exception ignore) { }
+                } catch (Exception ignore) {
+                }
             }
-        }
         if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE || LOGS.screenStrategy.contains(NEW_PAGE)) {
             processPage(jInfo);
         }
