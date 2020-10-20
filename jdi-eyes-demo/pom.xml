@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-eyes-demo</artifactId>
-    <version>1.2.23</version>
+    <version>1.2.24</version>
     <name>Selenium to JDI Example with Eyes</name>
     <packaging>jar</packaging>
 
@@ -23,12 +23,12 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-eyes</artifactId>
-            <version>1.2.23</version>
+            <version>1.2.24</version>
         </dependency>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.23</version>
+            <version>1.2.24</version>
         </dependency>
 
         <dependency>
