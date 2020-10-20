@@ -10,6 +10,18 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class StepperAssert extends UIAssert<StepperAssert, Stepper> {
 
+    @JDIAction("Assert that '{name}' is at step '{0}'")
+    public StepperAssert active(String value) {
+        jdiAssert(element.isAtStep(value), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not at step '{0}'")
+    public StepperAssert notActive(String value) {
+        jdiAssert(element.isAtStep(value), Matchers.is(false));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has field '{0}' with value '{1}'")
     public StepperAssert value(final Matcher<String> value, final String field) {
         jdiAssert(element().value(field), value);

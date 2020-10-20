@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -26,6 +27,39 @@ public class StepperUnitTests extends TestsInit {
     @Test
     public void displayedTest() {
         assertTrue(linearStepper.isDisplayed() && optionalStepper.isDisplayed());
+    }
+
+    @Test
+    public void getActiveStepTest() {
+        linearStepper.show();
+        Assert.assertEquals(linearStepper.getActiveStep(), "1");
+    }
+
+    @Test
+    public void gotoStepTest() {
+        linearStepper.show();
+        linearStepper.gotoStep("2");
+        Assert.assertEquals(linearStepper.getActiveStep(), "2");
+        linearStepper.gotoStep("1");
+        Assert.assertEquals(linearStepper.getActiveStep(), "1");
+    }
+
+    @Test
+    public void nextPreviousButtonTest() {
+        linearStepper.show();
+        linearStepper.clickNextButton();
+        Assert.assertEquals(linearStepper.getActiveStep(), "2");
+        linearStepper.gotoStep("1");
+        Assert.assertEquals(linearStepper.getActiveStep(), "1");
+    }
+
+    @Test
+    public void previousButtonTest() {
+        linearStepper.show();
+        linearStepper.gotoStep("2");
+        Assert.assertEquals(linearStepper.getActiveStep(), "2");
+        linearStepper.clickPreviousButton();
+        Assert.assertEquals(linearStepper.getActiveStep(), "1");
     }
 
 }
