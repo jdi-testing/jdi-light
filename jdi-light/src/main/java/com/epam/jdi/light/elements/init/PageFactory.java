@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
+import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
@@ -109,8 +110,8 @@ public class PageFactory {
             throw exception(ex, "Setup rule '%s' failed. Can't setup field '%s' on page '%s'",
                     ruleName, info.name(), info.parentName());
         }
-        if (isClass(info.instance.getClass(), UIBaseElement.class)) {
-            ((UIBaseElement) info.instance).init();
+        if (isInterface(info.instance.getClass(), HasInit.class)) {
+            ((HasInit) info.instance).init();
         }
     }
     // endregion

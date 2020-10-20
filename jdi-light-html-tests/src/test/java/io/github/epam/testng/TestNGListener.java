@@ -22,7 +22,8 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.last;
 import static java.lang.System.currentTimeMillis;
 
-public class TestNGListener implements IInvokedMethodListener {    private Safe<Long> start = new Safe<>(0L);
+public class TestNGListener implements IInvokedMethodListener {
+    private Safe<Long> start = new Safe<>(0L);
 
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
@@ -63,8 +64,14 @@ public class TestNGListener implements IInvokedMethodListener {    private Safe<
                 return "PASSED";
             case ITestResult.SKIP:
                 return "SKIPPED";
-            default:
+            case ITestResult.FAILURE:
+            case ITestResult.SUCCESS_PERCENTAGE_FAILURE:
                 return "FAILED";
+            case ITestResult.STARTED:
+                return "STARTED";
+            case ITestResult.CREATED:
+                return "CREATED";
         }
+        return "FAILED";
     }
 }

@@ -11,9 +11,8 @@ import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.light.driver.WebDriverFactory.MULTI_THREAD;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
@@ -101,19 +100,16 @@ public class JDILogger implements ILogger {
     }
     private String name;
     private Logger logger;
-    private List<Long> multiThread = new ArrayList<>();
+    private Safe<Long> multiThread = new Safe(ArrayList::new);
     private String getRecord(String record, Object... args) {
-        long currentThreadId = currentThread().getId();
-        if (currentThreadId != INIT_THREAD_ID  && !multiThread.contains(currentThreadId))
-            multiThread.add(currentThreadId);
-        String prefix = multiThread.size() > 1 ? "[" + currentThread().getId() + "] " : "";
+        String prefix = MULTI_THREAD ? "[" + currentThread().getId() + "] " : "";
         return format(prefix + record, args);
     }
 
     public void throwDebugInfo() {
         if (debugBufferSize == 0)
             return;
-        String prefix = multiThread.size() > 1 ? "[" + currentThread().getId() + "] " : "";
+        String prefix = MULTI_THREAD ? "[" + currentThread().getId() + "] " : "";
         logger.error(jdiMarker, prefix + "DEBUG INFO: " + LINE_BREAK + print(debugLog.get().values(), LINE_BREAK));
     }
     public String getName() {

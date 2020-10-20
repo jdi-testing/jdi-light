@@ -106,7 +106,9 @@ public class ActionHelper {
             } catch (Throwable ignore) { }
             return actionName;
         } catch (Throwable ex) {
-            takeScreen();
+            try {
+                takeScreen();
+            } catch (Exception ignore) { }
             throw exception(ex, "Surround method issue: Can't get action name: " + getClassMethodName(jp));
         }
     }
@@ -389,12 +391,16 @@ public class ActionHelper {
                 } catch (Throwable ignore) { }
             }
         }
-        if (LOGS.screenStrategy.contains(FAIL))
-            screenPath = SCREEN.tool.equalsIgnoreCase("robot")
-                ? takeRobotScreenshot()
-                : takeScreen("Failed"+capitalize(jInfo.methodName()));
-        if (LOGS.htmlCodeStrategy.contains(FAIL))
+        if (LOGS.screenStrategy.contains(FAIL)) {
+            try {
+                screenPath = SCREEN.tool.equalsIgnoreCase("robot")
+                        ? takeRobotScreenshot()
+                        : takeScreen("Failed" + capitalize(jInfo.methodName()));
+            } catch (Exception ignore) { }
+        }
+        if (LOGS.htmlCodeStrategy.contains(FAIL)) {
             htmlSnapshot = takeHtmlCodeOnFailure();
+        }
         if (LOGS.requestsStrategy.contains(FAIL)) {
             WebDriver driver = jInfo.element() != null
                 ? jInfo.element().base().driver()

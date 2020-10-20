@@ -1,10 +1,12 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.table.IDataGridAssert;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.LinqUtils;
@@ -31,10 +33,15 @@ import static java.util.Arrays.asList;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAssert<D, IDataGrid<L, D>,?>>
-        implements ISetup, IGrid<D>, IDataGrid<L, D> {
+        implements ISetup, IGrid<D>, IDataGrid<L, D>, HasInit {
     protected Safe<Grid> grid = new Safe<>(Grid::new);
     public Grid grid() {
         return grid.get();
+    }
+    public void init() {
+        Grid element = grid.get();
+        element.init();
+        grid = new Safe<>(() -> element);
     }
     protected Class<D> dataClass = null;
     protected Class<L> lineClass = null;

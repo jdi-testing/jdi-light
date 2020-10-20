@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.Safe;
@@ -12,8 +13,8 @@ import com.epam.jdi.tools.Safe;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public abstract class UIBaseElement<A extends UIAssert<?,?>> implements ICoreElement, HasAssert<A> {
-    protected Safe<UIElement> uiElement = new Safe<>(() -> new UIElement());
+public abstract class UIBaseElement<A extends UIAssert<?,?>> implements ICoreElement, HasAssert<A>, HasInit {
+    protected Safe<UIElement> uiElement = new Safe<>(UIElement::new);
     public JDIBase base() { return core().base(); }
     public UIElement core() {
         return uiElement.get();

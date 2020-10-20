@@ -24,7 +24,6 @@ public interface TestsInit {
         killAllSeleniumDrivers();
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
-        homePage.open();
         logger.toLog("Run Tests");
     }
 

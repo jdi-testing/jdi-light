@@ -26,11 +26,11 @@ import static org.hamcrest.Matchers.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class IDataGridAssert<D, T extends IDataGrid<?, D>, A extends IDataGridAssert<D, T, A>> extends UIAssert<A, T> {
-    protected T dataGrid() {
+    public T dataGrid() {
         return element();
     }
     public IDataGridAssert(T grid) {
-        this.element = grid;
+        set(grid);
     }
 
     /**

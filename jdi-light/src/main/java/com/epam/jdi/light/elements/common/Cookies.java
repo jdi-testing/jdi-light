@@ -2,11 +2,15 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.settings.WebSettings;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Collection;
 import java.util.Set;
+
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.settings.WebSettings.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -14,7 +18,14 @@ import java.util.Set;
  */
 public class Cookies {
 
-    private static WebDriver.Options manage() { return WebDriverFactory.getDriver().manage(); }
+    private static WebDriver.Options manage() {
+        logger.trace("manage: START");
+        init();
+        logger.trace("manage: MIDDLE");
+        WebDriver.Options opt = getDriver().manage();
+        logger.trace("manage: END");
+        return opt;
+    }
     /**
      * Get all browser cookies
      * @return Set
@@ -70,7 +81,9 @@ public class Cookies {
      */
     @JDIAction("Delete all cookies")
     public static void clearAllCookies() {
+        logger.trace("clearAllCookies: START");
         manage().deleteAllCookies();
+        logger.trace("clearAllCookies: END");
     }
     /**
      * Clear browsers cache

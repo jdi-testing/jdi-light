@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.HighlightStrategy;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.PropReader;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
@@ -23,6 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -33,7 +36,7 @@ import static com.epam.jdi.light.common.SetTextTypes.CLEAR_SEND_KEYS;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.common.UseSmartSearch.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
@@ -138,6 +141,9 @@ public class WebSettings {
 
     public static synchronized void init() {
         if (initialized) return;
+        Lock locker = new ReentrantLock();
+        locker.lock();
+        logger.setLogLevel(LogLevels.TRACE);
         logger.trace("init()");
         try {
             Properties properties = getProperties(COMMON.testPropertiesPath);
@@ -145,7 +151,6 @@ public class WebSettings {
                 LOGS.writeToAllure = !getProperties("allure.properties").isEmpty();
                 COMMON.strategy.action.execute();
                 return;
-
             }
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();
@@ -155,6 +160,10 @@ public class WebSettings {
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
             fillAction(p -> DRIVER.path = p, "drivers.path");
+            fillAction(p -> {
+                if (parseBoolean(p))
+                    DRIVER.getFunc = name -> getDriverFromName(name, RUN_DRIVERS);
+            }, "single.thread");
             fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
             fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(WebSettings::setDomain, "domain");
@@ -206,10 +215,12 @@ public class WebSettings {
             loadCapabilities("common.capabilities.path","common.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
 
-            INIT_THREAD_ID = Thread.currentThread().getId();
             initialized = true;
         } catch (Throwable ex) {
             throw exception(ex, "Failed to init test.properties");
+        } finally {
+            logger.trace("init() DONE");
+            locker.unlock();
         }
     }
 

@@ -21,7 +21,6 @@ public class CustomDriverTestsInit {
         useDriver(() -> FIREFOX_INFO.getDriver() );
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(StaticSite.class);
-        homePage.open();
         logger.toLog("Run Tests");
     }
 

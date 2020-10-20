@@ -14,6 +14,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.driver.WebDriverFactory.DRIVERS;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
@@ -48,9 +49,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     public WebDriver getDriver() {
         logger.trace("getDriver(): " + toString());
-        return isLocal()
-            ? setupLocal()
-            : setupRemote();
+        return isLocal() ? setupLocal() : setupRemote();
     }
     private Capabilities getCapabilities() {
         return capabilities.execute(initCapabilities);

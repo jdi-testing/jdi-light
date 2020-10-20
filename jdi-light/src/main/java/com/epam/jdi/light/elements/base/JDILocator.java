@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.driver.WebDriverByUtils;
+import com.epam.jdi.tools.Safe;
 import org.openqa.selenium.By;
 
 import java.util.List;
@@ -20,12 +21,12 @@ import static org.apache.commons.lang3.StringUtils.*;
  */
 public class JDILocator {
     public JDILocator() {}
-    public JDILocator(JDIBase element) { this.element = element; }
+    public JDILocator(JDIBase element) { this.element = new Safe<>(() -> element); }
     public JDILocator copy() {
         JDILocator locator = new JDILocator();
         locator.byLocator = byLocator;
         locator.isRoot = isRoot;
-        locator.element = element;
+        locator.element = new Safe<>(() -> element.get());
         locator.frames = frames;
         return locator;
     }
@@ -33,7 +34,7 @@ public class JDILocator {
     private By byLocator;
     private List<By> frames;
     public boolean isRoot = false;
-    private JDIBase element;
+    private Safe<JDIBase> element = new Safe<>();
     private Object[] args = new Object[]{};
 
     public By getLocator() { return byLocator; }
@@ -60,11 +61,11 @@ public class JDILocator {
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)
                 : locator;
-        this.element = element;
+        this.element = new Safe<>(() -> element);
     }
     public void add(List<By> frames, JDIBase element) {
         this.frames = frames;
-        this.element = element;
+        this.element = new Safe<>(() -> element);
     }
     public boolean isTemplate() {
         return byLocator != null && byLocator.toString().contains("%s");
@@ -107,6 +108,7 @@ public class JDILocator {
             String hasFrame = "";
             if (hasFrame())
                 hasFrame = "Frame: " + print(map(frames, WebDriverByUtils::shortBy));
+            JDIBase element = this.element.get();
             if (locator == null && isBlank(hasFrame) && element != null) {
                 if (element.webElement.hasValue() || element.webElements.hasValue())
                     return element.printWebElement();
