@@ -4,13 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.logger.LogLevels;
 
-public interface ISearchView extends ICoreElement {
-
-    @JDIAction(value = "Check that '{name}' is iconified", level = LogLevels.DEBUG)
-    boolean isIconified();
-
-    @JDIAction(value = "Make '{name}' expanded", level = LogLevels.DEBUG)
-    void setExpanded();
+public interface ISearchViewField extends ICoreElement {
 
     @JDIAction(value = "Check that '{name}' is expanded", level = LogLevels.DEBUG)
     boolean isExpanded();
@@ -23,5 +17,4 @@ public interface ISearchView extends ICoreElement {
 
     @JDIAction(value = "Clear '{name}' from input field", level = LogLevels.DEBUG)
     void clear();
-
 }
