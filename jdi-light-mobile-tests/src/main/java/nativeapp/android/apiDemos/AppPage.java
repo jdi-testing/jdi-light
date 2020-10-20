@@ -7,4 +7,7 @@ public class AppPage {
 
     @MobileFindBy(accessibilityId = "Notification")
     public static Button notificationPage;
+
+    @MobileFindBy(accessibilityId = "Action Bar")
+    public static Button actionBarPage;
 }
