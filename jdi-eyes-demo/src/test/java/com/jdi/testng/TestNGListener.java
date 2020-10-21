@@ -23,7 +23,9 @@ import static com.epam.jdi.tools.LinqUtils.last;
 import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
+  
     private final Safe<Long> start = new Safe<>(0L);
+
 
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
