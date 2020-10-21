@@ -1,13 +1,16 @@
 package io.github.epam.tests.recommended;
 
 import com.epam.jdi.light.elements.common.Alerts;
+import com.epam.jdi.light.elements.complex.table.BaseTable;
 import com.epam.jdi.light.elements.complex.table.Table;
+import com.epam.jdi.light.settings.JDISettings;
 import io.github.epam.StaticTestsInit;
 import io.github.epam.custom.UserRow;
 import io.github.epam.entities.UserInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.PerformancePage.users;
@@ -44,7 +47,7 @@ public class TableTests extends StaticTestsInit {
         assertEquals(table.count(), 400);
         assertEquals(table.header(), asList("Name", "Phone", "Email", "City"));
         start();
-        assertEquals(table.row(1).getValue(),
+        assertEquals(table.row(ELEMENT.startIndex).getValue(),
                 "Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe");
         logTime("Get 1 row");
         //assertEquals(table.row("Imphal").getValue(),
@@ -54,16 +57,16 @@ public class TableTests extends StaticTestsInit {
         logTime("Get 'Burke Tucker' row");
 
         String zacharyEmail = "ipsum.non.arcu@auctorullamcorper.ca";
-        assertEquals(table.cell(3,4), zacharyEmail);
+        assertEquals(table.cell(ELEMENT.startIndex + 2,ELEMENT.startIndex + 3), zacharyEmail);
         logTime("Get cell(3,4)");
-        assertEquals(table.cell("Email",4), zacharyEmail);
+        assertEquals(table.cell("Email", ELEMENT.startIndex + 3), zacharyEmail);
         logTime("Get cell(Email,4)");
-        assertEquals(table.cell(3,"Zachary Hendrix"), zacharyEmail);
+        assertEquals(table.cell(ELEMENT.startIndex + 2,"Zachary Hendrix"), zacharyEmail);
         logTime("Get cell(3,Zachary Hendrix)");
         assertEquals(table.cell("Email","Zachary Hendrix"), zacharyEmail);
         logTime("Get cell(Email,Zachary Hendrix)");
 
-        assertEquals(table.jsColumn(2).get(1), "(011307) 16843");
+        assertEquals(table.jsColumn(ELEMENT.startIndex + 1).get(1), "(011307) 16843");
         logTime("Get column(2)");
 
         assertEquals(table.jsColumn("Phone").get(1),"(011307) 16843");
@@ -77,21 +80,23 @@ public class TableTests extends StaticTestsInit {
         logTime("Preview");
         value = table.getValue();
         assertThat(value, containsString("||X||Name|Phone|Email|City||" + LINE_BREAK +
-            "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +
-            "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||" + LINE_BREAK +
-            "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||"));
+            "||"+i(0)+"||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +
+            "||"+i(1)+"||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||" + LINE_BREAK +
+            "||"+i(2)+"||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||"));
         logTime("Get value");
     }
-
+    public static String i(int index) {
+        return index + ELEMENT.startIndex + "";
+    }
     @Test
     public void tableDataTest() {
-        assertEquals(users.row(2).asData(UserInfo.class),
+        assertEquals(users.row(ELEMENT.startIndex + 1).asData(UserInfo.class),
                 GRADY_BROCK);
     }
 
     @Test
     public void tableEntityTest() {
-        UserRow user = users.row(2).asLine(UserRow.class);
+        UserRow user = users.row(ELEMENT.startIndex + 1).asLine(UserRow.class);
         user.name.click();
         Alerts.validateAndAcceptAlert(containsString("Brock"));
         user.city.click();

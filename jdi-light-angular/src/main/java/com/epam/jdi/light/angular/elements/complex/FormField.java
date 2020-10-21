@@ -1,27 +1,29 @@
 package com.epam.jdi.light.angular.elements.complex;
 
-import com.epam.jdi.light.angular.asserts.*;
-import com.epam.jdi.light.angular.elements.composite.*;
-import com.epam.jdi.light.common.*;
-import com.epam.jdi.light.elements.base.*;
-import com.epam.jdi.light.elements.common.*;
-import com.epam.jdi.light.elements.complex.*;
-import com.epam.jdi.light.logger.*;
-import com.epam.jdi.tools.map.*;
-import org.openqa.selenium.*;
+import com.epam.jdi.light.angular.asserts.FormFieldsAssert;
+import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.logger.JDILogger;
+import com.epam.jdi.tools.map.MapArray;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
-import java.util.*;
+import java.util.List;
 
-import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
+import static com.epam.jdi.light.common.TextTypes.VALUE;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 /**
  To see an example of FormField web element please visit https://material.angular.io/components/form-field/overview#form-field-appearance-variants
  **/
 
 public class FormField extends UIBaseElement<FormFieldsAssert> {
-    private String matFormFieldPrefix = "//mat-form-field[@";
-    private String autocompleteAttrPrefix = "_ngcontent-";
+    private final String matFormFieldPrefix = "//mat-form-field[@";
+    private final String autocompleteAttrPrefix = "_ngcontent-";
     private String containerAttribute;
 
     private String getContainerAttribute() {

@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.resetMatSelect;
 import static org.hamcrest.Matchers.matchesPattern;
 
@@ -21,7 +22,7 @@ public class ResetMatSelectTests extends TestsSelectBase {
 
     @Test
     public void checkResetOptionCanBeSelectedById() {
-        resetMatSelect.select(1);
+        resetMatSelect.select(ELEMENT.startIndex);
         resetMatSelect.is().selected(matchesPattern("\\W+"));
     }
 

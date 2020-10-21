@@ -467,6 +467,14 @@ public class UIElement extends JDIBase
         return !isVisible();
     }
 
+    /**
+     * Check the element is displayed
+     * @return boolean
+     */
+    @JDIAction(value = "Check that '{name}' is displayed", timeout = 0, level = DEBUG)
+    public boolean isNotDisplayed() {
+        return !displayed();
+    }
     @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
     public boolean isExist() {
         return noWait(() -> {

@@ -9,6 +9,7 @@ import java.util.Set;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -17,7 +18,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  */
 public class WindowsManager {
     private static Set<String> windowHandles;
-    private static MapArray<String, String> windowHandlesMap = new MapArray<>();
+    private static final MapArray<String, String> windowHandlesMap = new MapArray<>();
     private static boolean newWindow = false;
 
     public static Set<String> getWindows() {
@@ -94,10 +95,10 @@ public class WindowsManager {
      */
     @JDIAction("Switch to window '{index}'")
     public static void switchToWindow(int index) {
-        if (index < 1)
+        if (index < ELEMENT.startIndex)
             throw exception("Window's index starts from 1. You try to use '%s' that less than 1.", index);
         int counter = 0;
-        if (getWindows().size() < index)
+        if (getWindows().size() < index - ELEMENT.startIndex + 1)
             throw exception(index + " is too much. Only "+getWindows().size()+" windows found");
         for (String window : getWindows()) {
             counter++;

@@ -1,5 +1,6 @@
 package com.epam.jdi.light.logger;
 
+import com.epam.jdi.tools.FixedQueue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
@@ -14,6 +15,8 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.format;
 import static java.lang.Thread.currentThread;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -25,8 +28,10 @@ import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class JDILogger implements ILogger {
-    private static MapArray<String, JDILogger> loggers = new MapArray<>();
-    private static Marker jdiMarker = MarkerManager.getMarker("JDI");
+    private static final MapArray<String, JDILogger> loggers = new MapArray<>();
+    private static final Marker jdiMarker = MarkerManager.getMarker("JDI");
+    public Safe<FixedQueue<String>> debugLog = new Safe<>(() -> new FixedQueue<>(debugBufferSize));
+    public static int debugBufferSize = 0;
 
     public static JDILogger instance(String name) {
         if (!loggers.has(name))
@@ -56,7 +61,7 @@ public class JDILogger implements ILogger {
         setRootLevel(getLog4j2Level(level));
         setLevel(name, getLog4j2Level(level));
     }
-    private Safe<Integer> logOffDeepness = new Safe<>(0);
+    private final Safe<Integer> logOffDeepness = new Safe<>(0);
 
     public void logOff() {
         logLevel.set(OFF);
@@ -94,44 +99,54 @@ public class JDILogger implements ILogger {
         logLevel.set(tempLevel);
         return result;
     }
-    private String name;
-    private Logger logger;
-    private List<Long> multiThread = new ArrayList<>();
+    private final String name;
+    private final Logger logger;
+    private final List<Long> multiThread = new ArrayList<>();
     private String getRecord(String record, Object... args) {
         long currentThreadId = currentThread().getId();
         if (currentThreadId != INIT_THREAD_ID  && !multiThread.contains(currentThreadId))
             multiThread.add(currentThreadId);
-        return format(multiThread.size() > 1
-                ? "[" + currentThread().getId() + "]" + record
-                : record, args);
+        String prefix = multiThread.size() > 1 ? "[" + currentThread().getId() + "] " : "";
+        return format(prefix + record, args);
     }
 
+    public void throwDebugInfo() {
+        if (debugBufferSize == 0)
+            return;
+        String prefix = multiThread.size() > 1 ? "[" + currentThread().getId() + "] " : "";
+        logger.error(jdiMarker, prefix + "DEBUG INFO: " + LINE_BREAK + print(debugLog.get().values(), LINE_BREAK));
+    }
     public String getName() {
         return name;
     }
 
     public void step(String s, Object... args) {
+        debugLog.get().push(format(s, args));
         if (logLevel.get().equalOrLessThan(STEP)) {
             logger.log(Level.forName("STEP", 350), jdiMarker, getRecord(s, args));
         }
     }
 
     public void trace(String s, Object... args) {
+        debugLog.get().push(format(s, args));
         if (logLevel.get().equalOrLessThan(TRACE)) {
             logger.trace(jdiMarker, getRecord(s, args));
         }
     }
     public void debug(String s, Object... args) {
+        debugLog.get().push(format(s, args));
         if (logLevel.get().equalOrLessThan(DEBUG)) {
             logger.debug(jdiMarker, getRecord(s, args));
         }
     }
     public void info(String s, Object... args) {
+        debugLog.get().push(format(s, args));
         if (logLevel.get().equalOrLessThan(INFO)) {
             logger.info(jdiMarker, getRecord(s, args));
         }
     }
     public void error(String s, Object... args) {
+        debugLog.get().push(format(s, args));
         logger.error(jdiMarker, getRecord(s, args));
     }
 
@@ -139,14 +154,18 @@ public class JDILogger implements ILogger {
         toLog(msg, logLevel.getDefault());
     }
     public void toLog(String msg, LogLevels level) {
-        if (logLevel.get().equalOrLessThan(level))
+        if (logLevel.get().equalOrLessThan(level)) {
             switch (level) {
                 case ERROR: error(msg); break;
                 case STEP: step(msg); break;
                 case INFO: info(msg); break;
                 case DEBUG: debug(msg); break;
+                case TRACE: trace(msg); break;
                 case OFF: break;
                 default: throw new RuntimeException("Unknown log level: " + level);
             }
+        } else {
+            debugLog.get().push(msg);
+        }
     }
 }

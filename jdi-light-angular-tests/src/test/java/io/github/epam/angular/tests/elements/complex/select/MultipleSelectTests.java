@@ -1,20 +1,21 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.multipleSelect;
 import static org.hamcrest.Matchers.hasItems;
 
 public class MultipleSelectTests extends TestsSelectBase {
-    private String[] multiOptions = new String[3];
-    private int[] multiSelect = new int[1];
+    private final String[] multiOptions = new String[3];
+    private final int[] multiSelect = new int[1];
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
+        angularPage.open();
         multipleSelect.show();
     }
 
@@ -52,19 +53,5 @@ public class MultipleSelectTests extends TestsSelectBase {
     @Test
     public void checkAvailableOptions() {
         multipleSelect.assertThat().values(hasItems(PEPPERONI, SAUSAGE, TOMATO, ONION, EXTRA_CHEESE, MUSHROOM));
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (multiSelect[0] != 0) {
-            multipleSelect.multipleSelect(multiSelect);
-            multiSelect[0] = 0;
-        }
-        if (multiOptions[0] != null) {
-            multipleSelect.multipleSelect(multiOptions);
-            multiOptions[0] = null;
-            multiOptions[1] = null;
-            multiOptions[2] = null;
-        }
     }
 }

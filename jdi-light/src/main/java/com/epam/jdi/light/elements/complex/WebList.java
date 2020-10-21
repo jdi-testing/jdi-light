@@ -60,12 +60,15 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList,
         HasAssert<UISelectAssert<UISelectAssert<?,?>, WebList>> {
     protected int startIndex = ELEMENT.startIndex;
-    public WebList indexFromZero() {
-        return startIndex(0);
+    public int getStartIndex() {
+        return startIndex;
     }
-    public WebList startIndex(int index) {
-        startIndex = index;
+    public WebList indexFromZero() {
+        setStartIndex(0);
         return this;
+    }
+    public void setStartIndex(int index) {
+        startIndex = index;
     }
     @Override
     public WebList list() { return this; }
@@ -161,11 +164,11 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     @Override
     public UIElement first() {
-        return get(startIndex);
+        return get(getStartIndex());
     }
     @Override
     public UIElement last() {
-        return get(size() - startIndex + 1);
+        return get(size() - getStartIndex() + 1);
     }
     protected String getElementName(int i, UIElement element) {
         return nameIndex ? nameFromIndex(i) : getElementName(element);
@@ -262,8 +265,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @Override
     public UIElement get(int index) {
-        if (index < startIndex)
-            throw exception("Can't get element with index '%s'. Index should be %s or more", index, startIndex);
+        if (index < getStartIndex())
+            throw exception("Can't get element with index '%s'. Index should be %s or more", index, getStartIndex());
         return getByIndex(index);
     }
     public UIElement getFast(int index) {
@@ -272,9 +275,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     @JDIAction(level = DEBUG)
     private UIElement getByIndex(int index) {
-        if (index < startIndex)
-            throw exception("Can't get element with index '%s'. Index should be %s or more", index, startIndex);
-        int getIndex = index - startIndex;
+        if (index < getStartIndex())
+            throw exception("Can't get element with index '%s'. Index should be %s or more", index, getStartIndex());
+        int getIndex = index - getStartIndex();
         if (locator.isNull() && isUseCache()) {
             if (map.hasValue() && map.get().size() > 0 && map.get().size() >= getIndex && isActualMap())
                 return map.get().values().get(getIndex);
@@ -288,7 +291,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     private UIElement getElementByLocator(int getIndex, int index) {
         return locator.isXPath()
-            ? new UIElement(base(), locator.addIndex(index), index+"", parent)
+            ? new UIElement(base(), locator.addIndex(index - getStartIndex() + 1), index+"", parent)
             : initElement(() -> getList(getIndex + 1).get(getIndex));
     }
     protected UIElement tryGetByIndex(int index) {
@@ -369,8 +372,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public void check(int... indexes) {
         List<Integer> listIndexes = toList(indexes);
         int max = max(Ints.asList(indexes));
-        List<UIElement> elements = elements(max - startIndex + 1);
-        int i = startIndex;
+        List<UIElement> elements = elements(max - getStartIndex() + 1);
+        int i = getStartIndex();
         for (UIElement element : elements) {
             if (element.isDisabled()) continue;
             if (selected(element) && !listIndexes.contains(i)
@@ -383,8 +386,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public void uncheck(int... indexes) {
         List<Integer> listIndexes = toList(indexes);
         int max = max(Ints.asList(indexes));
-        List<UIElement> elements = elements(max - startIndex + 1);
-        int i = startIndex;
+        List<UIElement> elements = elements(max - getStartIndex() + 1);
+        int i = getStartIndex();
         for (UIElement element : elements) {
             if (element.isDisabled()) continue;
             if (selected(element) && listIndexes.contains(i)

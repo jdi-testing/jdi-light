@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.iceCream;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -16,8 +17,8 @@ import static org.testng.Assert.assertEquals;
 
 public class DataListTests implements TestsInit {
 
-    private String text = "Coconut";
-    private String[] values = {"Chocolate", "Coconut", "Mint", "Strawberry", "Vanilla"};
+    private final String text = "Coconut";
+    private final String[] values = {"Chocolate", "Coconut", "Mint", "Strawberry", "Vanilla"};
 
     @BeforeMethod
     public void before() {
@@ -77,7 +78,7 @@ public class DataListTests implements TestsInit {
     @Test
     public void selectNumTest() {
         iceCream.clear();
-        iceCream.select(5);
+        iceCream.select(ELEMENT.startIndex + 4);
         assertEquals(iceCream.getValue(), "Vanilla");
     }
     @Test

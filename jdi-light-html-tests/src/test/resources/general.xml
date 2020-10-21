@@ -14,7 +14,7 @@
             <package name="io.github.epam.html.tests.site"/>
         </packages>
         <!--classes>
-            <class name="io.github.epam.html.tests.elements.complex.combobox.DataListTests"/>
+            <class name="io.github.epam.html.tests.debug.DebugTests"/>
         </classes-->
     </test>
     <listeners>

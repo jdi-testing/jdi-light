@@ -36,11 +36,14 @@ public class WebDriverFactory {
         = new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
     public static boolean SINGLE_THREAD = false;
     private static MapArray<String, WebDriver> RUN_DRIVERS = new MapArray<>();
-    private static Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS
+    private static final Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS
         = new Safe<>(MapArray::new);
 
     public static boolean noRunDrivers() {
         return !getRunDrivers().any();
+    }
+    public static boolean hasRunDrivers() {
+        return getRunDrivers().any();
     }
     private static MapArray<String, WebDriver> getRunDrivers() {
         logger.debug("SINGLE_THREAD=" + SINGLE_THREAD);

@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
 import static io.github.com.StaticSite.angularPage;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static io.github.com.pages.sections.TooltipSection.*;
+import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static org.testng.Assert.assertEquals;
 
 public class TooltipUnitTests extends TestsInit {
 
