@@ -1,7 +1,6 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -34,8 +33,6 @@ public class StepperTests extends TestsInit {
     @Test
     public void basicStepperTest() {
         linearStepper.show();
-        if (linearModeButton.getText().equals(DISABLE_LINEAR))
-            linearModeButton.click();
         linearStepper.is().active("1");
         linearStepper.gotoStep("2");
         linearStepper.is().active("2");
@@ -46,8 +43,6 @@ public class StepperTests extends TestsInit {
     @Test
     public void basicLinearStepperTest() {
         linearStepper.show();
-        if (linearModeButton.getText().equals(ENABLE_LINEAR))
-            linearModeButton.click();
         linearStepper.is().active("1");
         linearStepper.gotoStep("2");
         linearStepper.is().active("1").and().notActive("2");
@@ -56,8 +51,6 @@ public class StepperTests extends TestsInit {
     @Test
     public void basicOptionalStepperTest() {
         optionalStepper.show();
-        if (optionalStepButton.getText().equals(ENABLE_OPTIONAL))
-            optionalStepButton.click();
         optionalStepper.input("test name");
         optionalStepper.clickNextButton();
         optionalStepper.is().active("2");
