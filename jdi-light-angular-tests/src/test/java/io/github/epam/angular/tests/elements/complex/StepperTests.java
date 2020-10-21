@@ -43,20 +43,52 @@ public class StepperTests extends TestsInit {
     @Test
     public void basicLinearStepperTest() {
         linearStepper.show();
+        linearModeButton.click();
         linearStepper.is().active("1");
         linearStepper.gotoStep("2");
         linearStepper.is().active("1").and().notActive("2");
+        linearModeButton.click();
     }
 
     @Test
     public void basicOptionalStepperTest() {
         optionalStepper.show();
+        optionalStepButton.click();
         optionalStepper.input("test name");
         optionalStepper.clickNextButton();
         optionalStepper.is().active("2");
         optionalStepper.clickNextButton();
         optionalStepper.is().active("3").and().notActive("2");
         optionalStepper.gotoStep("1");
+        optionalStepper.is().active("1");
+        optionalStepButton.click();
+    }
+
+    @Test
+    public void fullLinearStepperFlowTest() {
+        linearStepper.show();
+        linearStepper.is().active("1");
+        linearStepper.input("test name");
+        linearStepper.clickNextButton();
+        linearStepper.is().active("2");
+        linearStepper.input("test address");
+        linearStepper.clickNextButton();
+        linearStepper.is().active("3");
+        linearStepper.clickResetButton();
+        linearStepper.is().active("1");
+    }
+
+    @Test
+    public void fullOptionalStepperFlowTest() {
+        optionalStepper.show();
+        optionalStepper.is().active("1");
+        optionalStepper.input("test name");
+        optionalStepper.clickNextButton();
+        optionalStepper.is().active("2");
+        optionalStepper.input("test address");
+        optionalStepper.clickNextButton();
+        optionalStepper.is().active("3");
+        optionalStepper.clickResetButton();
         optionalStepper.is().active("1");
     }
 
