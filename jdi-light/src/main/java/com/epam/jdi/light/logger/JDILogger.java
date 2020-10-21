@@ -28,6 +28,11 @@ import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class JDILogger implements ILogger {
+    private final Safe<Integer> logOffDeepness = new Safe<>(0);
+    private final String name;
+    private final Logger logger;
+    private final List<Long> multiThread = new ArrayList<>();
+
     private static final MapArray<String, JDILogger> loggers = new MapArray<>();
     private static final Marker jdiMarker = MarkerManager.getMarker("JDI");
     public Safe<FixedQueue<String>> debugLog = new Safe<>(() -> new FixedQueue<>(debugBufferSize));
@@ -61,7 +66,6 @@ public class JDILogger implements ILogger {
         setRootLevel(getLog4j2Level(level));
         setLevel(name, getLog4j2Level(level));
     }
-    private final Safe<Integer> logOffDeepness = new Safe<>(0);
 
     public void logOff() {
         logLevel.set(OFF);
@@ -99,9 +103,7 @@ public class JDILogger implements ILogger {
         logLevel.set(tempLevel);
         return result;
     }
-    private final String name;
-    private final Logger logger;
-    private final List<Long> multiThread = new ArrayList<>();
+
     private String getRecord(String record, Object... args) {
         long currentThreadId = currentThread().getId();
         if (currentThreadId != INIT_THREAD_ID  && !multiThread.contains(currentThreadId))
