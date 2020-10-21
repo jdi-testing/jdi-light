@@ -12,9 +12,6 @@ import static io.github.com.pages.sections.StepperSection.optionalStepper;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class StepperTests extends TestsInit {
-    private static final String ENABLE_LINEAR = "Enable linear mode";
-    private static final String DISABLE_LINEAR = "Disable linear mode";
-    private static final String ENABLE_OPTIONAL = "Enable optional steps";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
