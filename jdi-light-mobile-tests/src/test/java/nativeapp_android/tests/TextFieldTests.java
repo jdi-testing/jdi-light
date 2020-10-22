@@ -1,6 +1,7 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
+import nativeapp.ios.messages.NewMessagePage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

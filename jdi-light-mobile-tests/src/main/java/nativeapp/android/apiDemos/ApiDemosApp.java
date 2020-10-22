@@ -25,6 +25,11 @@ public class ApiDemosApp {
 
     public static TextFieldsPage textFieldsPage;
 
+    public static AppPage appPage;
+
+    public static NotificationPage notificationPage;
+
+    public static StatusBarPage statusBarPage;
 
 
 }
