@@ -40,7 +40,7 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
         return expansionNode;
     }
 
-    @JDIAction("Collapse '{name}' panel by name '{node}'")
+    @JDIAction("Collapse '{name}' node by name '{node}'")
     public UIElement collapse(final String nodeName) {
         UIElement expansionNode = getNodeByName(nodeName);
         if (!expansionNode.isEmpty() && isExpanded(nodeName)) {
@@ -49,22 +49,14 @@ public class MaterialTree extends UIBaseElement<TreeAssert> {
         return expansionNode;
     }
 
-    @JDIAction("Is '{name}' '{node}' panel expanded")
+    @JDIAction("Is '{name}' '{node}' node expanded")
     public boolean isExpanded(final String nodeName) {
         return !isCollapsed(nodeName);
     }
 
-    @JDIAction("Is '{name}' '{node}' panel collapsed")
+    @JDIAction("Is '{name}' '{node}' node collapsed")
     public boolean isCollapsed(final String nodeName) {
         UIElement expansionNode = getNodeByName(nodeName);
-        boolean isNodeExpanded = expansionNode.getAttribute(ATTRIBUTE_EXPANDED).contains(FALSE);
-        boolean isGroup = expansionNode.getAttribute(ATTRIBUTE_ROLE).contains(ITEM_GROUP);
-        return isNodeExpanded && isGroup;
-    }
-
-    @JDIAction("Is '{name}' '{0}' panel collapsed")
-    public boolean isCollapsed(final int indexNumber) {
-        UIElement expansionNode = getNodes().get(indexNumber);
         boolean isNodeExpanded = expansionNode.getAttribute(ATTRIBUTE_EXPANDED).contains(FALSE);
         boolean isGroup = expansionNode.getAttribute(ATTRIBUTE_ROLE).contains(ITEM_GROUP);
         return isNodeExpanded && isGroup;
