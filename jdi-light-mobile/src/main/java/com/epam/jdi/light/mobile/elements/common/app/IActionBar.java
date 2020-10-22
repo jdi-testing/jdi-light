@@ -6,5 +6,24 @@ import com.epam.jdi.light.logger.LogLevels;
 
 public interface IActionBar extends ICoreElement {
 
+    @JDIAction(value = "Check that '{name}' is iconified", level = LogLevels.DEBUG)
+    boolean isIconified();
 
+    @JDIAction(value = "Make '{name}' expanded", level = LogLevels.DEBUG)
+    void setExpanded();
+
+    @JDIAction(value = "Check that '{name}' is expanded", level = LogLevels.DEBUG)
+    boolean isExpanded();
+
+    @JDIAction(value = "Check that '{name}' has text value", level = LogLevels.DEBUG)
+    String getValue();
+
+    @JDIAction(value = "Input '{name}' into input field", level = LogLevels.DEBUG)
+    void input(String value);
+
+    @JDIAction(value = "Clear '{name}' from input field", level = LogLevels.DEBUG)
+    void clear();
+
+    @JDIAction(value = "Select {0} in '{name}'", level = LogLevels.DEBUG)
+    void selectOption(String text);
 }
