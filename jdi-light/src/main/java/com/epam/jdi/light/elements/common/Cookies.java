@@ -19,12 +19,7 @@ import static com.epam.jdi.light.settings.WebSettings.*;
 public class Cookies {
 
     private static WebDriver.Options manage() {
-        logger.trace("manage: START");
-        init();
-        logger.trace("manage: MIDDLE");
-        WebDriver.Options opt = getDriver().manage();
-        logger.trace("manage: END");
-        return opt;
+        return getDriver().manage();
     }
     /**
      * Get all browser cookies
@@ -81,9 +76,7 @@ public class Cookies {
      */
     @JDIAction("Delete all cookies")
     public static void clearAllCookies() {
-        logger.trace("clearAllCookies: START");
         manage().deleteAllCookies();
-        logger.trace("clearAllCookies: END");
     }
     /**
      * Clear browsers cache

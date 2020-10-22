@@ -2,6 +2,7 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.Alerts;
@@ -23,6 +24,7 @@ import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -37,14 +39,14 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.actions.ActionProcessor.jStack;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.PageChecks.NONE;
 import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeRobotScreenshot;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.composite.WebPage.setCurrentPage;
 import static com.epam.jdi.light.elements.composite.WebPage.visualWindowCheck;
@@ -236,9 +238,9 @@ public class ActionHelper {
     public static boolean isAssert(ActionObject jInfo) {
         return isInterface(jInfo.jpClass(), JAssert.class) || jInfo.isAssertAnnotation();
     }
-    public static void beforeStepAction(JoinPoint jp) {
-        String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
-        logger.toLog(message, logLevel(new ActionObject(jp, "AO")));
+    public static void beforeStepAction(ActionObject jInfo) {
+        String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jInfo.jp()));
+        logger.toLog(message, logLevel(jInfo));
     }
     private static void visualValidation(JoinPoint jp, String message) {
         Object obj = jp.getThis();
@@ -329,11 +331,11 @@ public class ActionHelper {
             logOptions.update("action", actionName);
             logString = msgFormat(getTemplate(LOGS.logLevel), logOptions);
         }
-        String beforeLogString = toUpperCase(logString.charAt(0)) + logString.substring(1);
+        String beforeLogString = capitalize(logString);
         logger.trace("getBeforeLogString(): " + beforeLogString);
         if (isBlank(logString))
             return "";
-        return toUpperCase(logString.charAt(0)) + logString.substring(1);
+        return capitalize(logString);
     }
     public static MapArray<String, Object> getLogOptions(JoinPoint jp) {
         MapArray<String, Object> map = new MapArray<>();
@@ -380,7 +382,7 @@ public class ActionHelper {
     }
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
     public static void logFailure(ActionObject jInfo) {
-        logger.toLog(">>> " + jInfo.object().toString(), ERROR);
+        logger.error("!>>> " + jInfo.object().toString());
         String screenPath = "";
         String htmlSnapshot = "";
         String errors = "";
@@ -689,12 +691,29 @@ public class ActionHelper {
     }
 
     public static ActionObject newInfo(ProceedingJoinPoint jp, String name) {
+        CHECK_MULTI_THREAD.execute();
         try {
             return newInfo(new ActionObject(jp, name));
         } catch (Throwable ex) {
             throw exception(ex, "Failed to init pjp aspect: ");
         }
     }
+    private static long previousThread = -1;
+    public static JAction CHECK_MULTI_THREAD = () -> {
+        if (previousThread == -1)
+            previousThread = currentThread().getId();
+        else {
+            if (previousThread != currentThread().getId()) {
+                MULTI_THREAD = true;
+                logger.trace("switch to getMultiThreadDriver");
+                DRIVER.getFunc = WebDriverFactory::getMultiThreadDriver;
+                CHECK_MULTI_THREAD = () -> {};
+                if (GETTING_DRIVER) {
+                    waitMultiThread();
+                }
+            }
+        }
+    };
     public static ActionObject newInfo(JoinPoint jp, String name) {
         try {
             return newInfo(new ActionObject(jp, name));

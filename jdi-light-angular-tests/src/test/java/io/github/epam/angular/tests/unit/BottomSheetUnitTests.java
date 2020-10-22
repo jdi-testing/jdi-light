@@ -1,7 +1,6 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

@@ -30,10 +30,11 @@ public class TestNGListener implements IInvokedMethodListener {
         if (m.isTestMethod()) {
             ITestNGMethod testMethod = m.getTestMethod();
             if (testMethod.getConstructorOrMethod().getMethod().isAnnotationPresent(Test.class)) {
-                TEST_NAME.set( last(testMethod.getTestClass().getName().split("\\.")) +
-                        "." + testMethod.getMethodName());
+                String testName = last(testMethod.getTestClass().getName().split("\\.")) +
+                        "." + testMethod.getMethodName();
+                TEST_NAME.set(testName);
                 start.set(currentTimeMillis());
-                logger.step("== Test '%s' START ==", TEST_NAME.get());
+                logger.step("== Test '%s' START ==", testName);
             }
         }
     }

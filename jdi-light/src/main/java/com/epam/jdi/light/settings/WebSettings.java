@@ -27,6 +27,7 @@ import java.util.Properties;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import static com.epam.jdi.light.actions.ActionHelper.CHECK_MULTI_THREAD;
 import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
@@ -140,10 +141,10 @@ public class WebSettings {
     public static boolean initialized = false;
 
     public static synchronized void init() {
+        CHECK_MULTI_THREAD.execute();
         if (initialized) return;
         Lock locker = new ReentrantLock();
         locker.lock();
-        logger.setLogLevel(LogLevels.TRACE);
         logger.trace("init()");
         try {
             Properties properties = getProperties(COMMON.testPropertiesPath);
@@ -331,7 +332,7 @@ public class WebSettings {
         return NORMAL;
     }
 
-    private static Properties getProperties(String path) {
+    public static Properties getProperties(String path) {
         File propertyFile = new File(path);
         Properties properties;
         if (propertyFile.exists()) {

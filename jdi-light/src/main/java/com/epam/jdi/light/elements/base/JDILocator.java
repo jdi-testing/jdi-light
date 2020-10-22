@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.driver.WebDriverByUtils;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.Safe;
 import org.openqa.selenium.By;
 
@@ -20,7 +21,7 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class JDILocator {
-    public JDILocator() {}
+    public JDILocator() { this.element = new Safe<>(UIElement::new); }
     public JDILocator(JDIBase element) { this.element = new Safe<>(() -> element); }
     public JDILocator copy() {
         JDILocator locator = new JDILocator();
@@ -34,7 +35,7 @@ public class JDILocator {
     private By byLocator;
     private List<By> frames;
     public boolean isRoot = false;
-    private Safe<JDIBase> element = new Safe<>();
+    private Safe<JDIBase> element;
     private Object[] args = new Object[]{};
 
     public By getLocator() { return byLocator; }

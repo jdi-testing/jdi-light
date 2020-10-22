@@ -108,7 +108,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
             if (ELEMENT.namesEqual.execute(title, name))
                 return i;
             i++;
-        };
+        }
         return -1;
     }
     @Override

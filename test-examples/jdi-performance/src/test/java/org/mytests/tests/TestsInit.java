@@ -25,7 +25,7 @@ import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 
 @Listeners(TestNGListener.class)
 public class TestsInit {
-    public static Safe<Timer> TIMER = new Safe<>();
+    public static Safe<Timer> TIMER = new Safe<>(Timer::new);
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);

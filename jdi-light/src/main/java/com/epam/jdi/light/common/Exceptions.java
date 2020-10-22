@@ -34,11 +34,4 @@ public class Exceptions {
         }
         return new RuntimeException(message, ex);
     }
-
-    public static String safeException(Throwable ex) {
-        String msg = ex.getMessage();
-        if (isBlank(msg) && isClass(ex.getClass(), InvocationTargetException.class))
-            msg = ((InvocationTargetException) ex).getTargetException().getMessage();
-        return isNotBlank(msg) ? msg : ex.toString();
-    }
 }

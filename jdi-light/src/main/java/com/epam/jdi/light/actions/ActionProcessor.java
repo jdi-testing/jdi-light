@@ -13,7 +13,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
@@ -77,7 +77,7 @@ public class ActionProcessor {
         ActionObject jInfo = null;
         try {
             jInfo = newInfo(jp, "AO");
-            beforeStepAction(jp);
+            beforeStepAction(jInfo);
         } catch (Throwable ex) {
             logger.debug("StepProcessor exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);

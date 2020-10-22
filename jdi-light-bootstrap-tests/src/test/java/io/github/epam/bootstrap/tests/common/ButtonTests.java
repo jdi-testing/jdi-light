@@ -5,7 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;

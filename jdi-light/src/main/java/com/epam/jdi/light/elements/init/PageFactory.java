@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.elements.init.InitActions.*;
@@ -254,7 +254,7 @@ public class PageFactory {
             webPage.getClass().getAnnotation(Url.class),
             webPage.getClass().getAnnotation(Title.class));
         webPage.setName(pageName);
-        PAGES.update(pageName, webPage);
+        PAGES.get().update(pageName, webPage);
         initElements(driver, page);
         return page;
     }

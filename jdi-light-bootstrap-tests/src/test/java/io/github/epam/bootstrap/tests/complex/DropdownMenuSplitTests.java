@@ -6,8 +6,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.dropdownMenuSplit;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;

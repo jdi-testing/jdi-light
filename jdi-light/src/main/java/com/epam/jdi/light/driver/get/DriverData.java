@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;

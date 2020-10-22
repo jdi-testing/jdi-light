@@ -10,14 +10,17 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
-import java.util.ArrayList;
+import java.util.Properties;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.MULTI_THREAD;
 import static com.epam.jdi.light.logger.LogLevels.*;
+import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.settings.WebSettings.getProperties;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.format;
 import static java.lang.Thread.currentThread;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.apache.logging.log4j.core.config.Configurator.setLevel;
 import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
@@ -44,7 +47,7 @@ public class JDILogger implements ILogger {
     public JDILogger(String name) {
         logger = getLogger(name);
         this.name = name;
-        setLogLevel(INFO);
+        setLogLevel(initialLogLevel());
     }
     public JDILogger(Class clazz) {
         this(clazz.getSimpleName());
@@ -54,6 +57,13 @@ public class JDILogger implements ILogger {
 
     public LogLevels getLogLevel() {
         return logLevel.get();
+    }
+    private LogLevels initialLogLevel() {
+        Properties properties = getProperties(COMMON.testPropertiesPath);
+        String logLevel = properties.getProperty("log.level");
+        return isNotBlank(logLevel)
+            ? parseLogLevel(logLevel)
+            : INFO;
     }
     public void setLogLevel(LogLevels level) {
         logLevel = new Safe<>(level);
@@ -100,7 +110,6 @@ public class JDILogger implements ILogger {
     }
     private String name;
     private Logger logger;
-    private Safe<Long> multiThread = new Safe(ArrayList::new);
     private String getRecord(String record, Object... args) {
         String prefix = MULTI_THREAD ? "[" + currentThread().getId() + "] " : "";
         return format(prefix + record, args);

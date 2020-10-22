@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 /**
