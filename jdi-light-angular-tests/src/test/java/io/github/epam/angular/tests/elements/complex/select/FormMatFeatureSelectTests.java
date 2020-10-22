@@ -42,9 +42,4 @@ public class FormMatFeatureSelectTests extends TestsSelectBase {
     public void checkListEnabledOptions() {
         formMatFeatureSelect.has().listEnabled(Arrays.asList("--", "Dog", "Cat", "Fox", "Cow"));
     }
-
-    @Test
-    public void checkAvailableOptions() {
-        formMatFeatureSelect.assertThat().values("--", "Cat", "Dog", "Fox", "Cow");
-    }
 }

@@ -46,9 +46,4 @@ public class TwoBindingSelectTests extends TestsSelectBase {
     public void checkListEnabledOptions() {
         twoBindingSelect.has().listEnabled(Arrays.asList(NONE, OPTION_1, OPTION_2, OPTION_3));
     }
-
-    @Test
-    public void checkAvailableOptions() {
-        twoBindingSelect.assertThat().values(hasItems(NONE, OPTION_1, OPTION_2, OPTION_3));
-    }
 }

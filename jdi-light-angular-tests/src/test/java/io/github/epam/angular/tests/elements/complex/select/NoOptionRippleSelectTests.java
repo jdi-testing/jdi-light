@@ -34,9 +34,4 @@ public class NoOptionRippleSelectTests extends TestsSelectBase {
     public void checkListEnabledOptions() {
         noOptionRippleSelect.has().listEnabled(Arrays.asList(OPTION_1, OPTION_2, OPTION_3));
     }
-
-    @Test
-    public void checkAvailableOptions() {
-        noOptionRippleSelect.assertThat().values(hasItems(OPTION_1, OPTION_2, OPTION_3));
-    }
 }

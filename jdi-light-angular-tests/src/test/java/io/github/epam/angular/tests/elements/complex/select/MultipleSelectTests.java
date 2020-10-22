@@ -49,9 +49,4 @@ public class MultipleSelectTests extends TestsSelectBase {
     public void checkListEnabledOptions() {
         multipleSelect.has().listEnabled(Arrays.asList(EXTRA_CHEESE, MUSHROOM, ONION, PEPPERONI, SAUSAGE, TOMATO));
     }
-
-    @Test
-    public void checkAvailableOptions() {
-        multipleSelect.assertThat().values(hasItems(PEPPERONI, SAUSAGE, TOMATO, ONION, EXTRA_CHEESE, MUSHROOM));
-    }
 }

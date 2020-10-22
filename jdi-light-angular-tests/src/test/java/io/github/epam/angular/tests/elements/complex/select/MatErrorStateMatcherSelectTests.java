@@ -52,9 +52,4 @@ public class MatErrorStateMatcherSelectTests extends TestsSelectBase {
     public void checkListEnabledOptions() {
         matErrorStateMatcherSelect.has().listEnabled(Arrays.asList(CLEAR, VALID_OPTION, INVALID_OPTION));
     }
-
-    @Test
-    public void checkAvailableOptions() {
-        matErrorStateMatcherSelect.assertThat().values(hasItems(VALID_OPTION, INVALID_OPTION, CLEAR));
-    }
 }

@@ -49,9 +49,4 @@ public class CustomPanelStylingSelectTests extends TestsSelectBase {
     public void checkListEnabledOptions() {
         customPanelStylingSelect.has().listEnabled(Arrays.asList(RED, GREEN, BLUE));
     }
-
-    @Test
-    public void checkAvailableOptions() {
-        customPanelStylingSelect.assertThat().values(hasItems(RED, GREEN, BLUE));
-    }
 }

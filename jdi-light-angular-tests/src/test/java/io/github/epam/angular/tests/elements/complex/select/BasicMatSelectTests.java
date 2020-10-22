@@ -50,10 +50,4 @@ public class BasicMatSelectTests extends TestsSelectBase {
     public void checkListEnabledOptions() {
         basicMatSelect.has().listEnabled(Arrays.asList(STEAK, PIZZA, TACOS));
     }
-
-    @Test
-    public void checkAvailableOptions() {
-        basicMatSelect.assertThat().values(hasItems(TACOS, STEAK, PIZZA));
-    }
-
 }

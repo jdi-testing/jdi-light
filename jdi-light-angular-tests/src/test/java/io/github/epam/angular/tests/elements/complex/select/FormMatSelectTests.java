@@ -38,9 +38,4 @@ public class FormMatSelectTests extends TestsSelectBase {
     public void checkListEnabledOptions() {
         formMatSelect.has().listEnabled(Arrays.asList(STEAK, PIZZA, TACOS));
     }
-
-    @Test
-    public void checkAvailableOptions() {
-        formMatSelect.assertThat().values(hasItems(STEAK, TACOS, PIZZA));
-    }
 }
