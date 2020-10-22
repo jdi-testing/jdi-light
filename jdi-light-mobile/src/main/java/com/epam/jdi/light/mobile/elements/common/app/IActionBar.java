@@ -26,5 +26,4 @@ public interface IActionBar extends ICoreElement {
 
     @JDIAction(value = "Select {0} in '{name}'", level = LogLevels.DEBUG)
     void selectOption(String text);
-
 }

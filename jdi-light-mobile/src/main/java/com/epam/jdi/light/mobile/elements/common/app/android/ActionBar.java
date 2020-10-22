@@ -16,7 +16,6 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements IActionBar, HasTouchActions, IsButton {
 
-
     @JDIAction(value = "Check that '{name}' is iconified", level = LogLevels.DEBUG)
     @Override
     public boolean isIconified() {
