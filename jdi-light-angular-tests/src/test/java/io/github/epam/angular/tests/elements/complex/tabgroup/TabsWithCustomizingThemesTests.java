@@ -40,12 +40,4 @@ public class TabsWithCustomizingThemesTests extends TestsTabGroupBase {
         tabsSection.matButtonToggleGroupBackgroundColor.clickButtonToggleByValue(PRIMARY);
         tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-primary mat-background-primary");
     }
-
-    @Test
-    public void verifyCustomThemeHighlighterColor() {
-        tabsSection.matButtonToggleGroupColor.clickButtonToggleByValue(ACCENT);
-        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-background-primary mat-accent");
-        tabsSection.matButtonToggleGroupColor.clickButtonToggleByValue(PRIMARY);
-        tabsSection.tabGroupThemeExample.has().attr(CLASS_ATTR, "mat-tab-group mat-background-primary mat-primary");
-    }
 }
