@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 
 public class ActionBarTests extends ApiDemosTestInit {
 
+    public static final String PLACEHOLDER = "Search…";
+
     @Test
     public void actionBarUsagePageSearchTest() {
         IndexPage.appPage.click();
@@ -18,6 +20,7 @@ public class ActionBarTests extends ApiDemosTestInit {
         ActionBarUsagePage.searchButton.is().iconifiedByDefault();
         ActionBarUsagePage.searchButton.setExpanded();
         ActionBarUsagePage.searchVield.is().enabled();
+        ActionBarUsagePage.searchVield.has().text(PLACEHOLDER);
         ActionBarUsagePage.searchVield.input("Internet");
         ActionBarUsagePage.text.has().text("Query so far: Internet");
         ActionBarUsagePage.clearQuery.click();
