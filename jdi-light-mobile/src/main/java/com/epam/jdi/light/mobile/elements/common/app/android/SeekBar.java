@@ -5,6 +5,10 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
+import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
 public class SeekBar extends MobileAppBaseElement<TextAssert> implements HasTouchActions, IsText {
     @JDIAction("Set {0} as value of '{name}'")
@@ -19,7 +23,10 @@ public class SeekBar extends MobileAppBaseElement<TextAssert> implements HasTouc
 
     @JDIAction("Set the maximum value for '{name}'")
     public void setMaximumValue() {
-        setSliderValue("100");
+        executeDriverMethod(PerformsTouchActions.class, (PerformsTouchActions driver) -> {
+            TouchAction<?> ta1 = new TouchAction<>(driver)
+                    .press(PointOption.point(getLocation().getX() + getSize().getWidth() - 1, getLocation().getY())).release().perform();
+        });
     }
 
     @Override

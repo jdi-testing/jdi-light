@@ -1,6 +1,9 @@
 package nativeapp_android.tests;
 
+import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
+import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
+import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import nativeapp.android.apiDemos.ButtonsPage;
 import nativeapp.android.apiDemos.IndexPage;
 import nativeapp.android.apiDemos.SeekBarPage;
@@ -32,14 +35,25 @@ public class ToggleButtonTests extends ApiDemosTestInit {
     @Test
     public void seekBarTests() throws InterruptedException {
         IndexPage.viewsPage.click();
-        AndroidScreen.scrollDown(2000);
-        ViewsPage.seekBarPage.click();
-        SeekBarPage.seekBar.setMinimumValue();
-        SeekBarPage.seekBar.is().text("0.0");
-        SeekBarPage.seekBar.setMaximumValue();
-        SeekBarPage.seekBar.is().text("100.0");
-        SeekBarPage.seekBar.setSliderValue("20");
-        SeekBarPage.seekBar.is().text("20.0");
-    }
+            clickOnElementInList(ViewsPage.seekBarPage);
+            SeekBarPage.seekBar.setMinimumValue();
+            SeekBarPage.seekBar.is().text("0.0");
+            SeekBarPage.seekBar.setMaximumValue();
+            SeekBarPage.seekBar.is().text("100.0");
+            SeekBarPage.seekBar.setSliderValue("20");
+            SeekBarPage.seekBar.is().text("20.0");
+        }
+
+        public void clickOnElementInList(Button element){
+            while (true) {
+                try {
+                    element.click();
+                    return;
+                } catch (RuntimeException e) {
+                    MobileScreen.scrollDown(1000);
+                }
+            }
+        }
+
 
 }
