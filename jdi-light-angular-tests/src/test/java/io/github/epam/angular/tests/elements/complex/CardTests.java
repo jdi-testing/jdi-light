@@ -40,7 +40,6 @@ public class CardTests extends TestsInit {
         card.getSubtitle().is().text("Dog Breed");
         card.getImage().is().displayed();
         card.getContent().is().displayed();
-        card.getContent().is().displayed();
     }
 
     @Test
