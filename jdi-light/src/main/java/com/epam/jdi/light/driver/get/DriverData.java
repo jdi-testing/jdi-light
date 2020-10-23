@@ -253,6 +253,7 @@ public class DriverData {
                 case LINUX:
                     driver.manage().window().maximize();
                     break;
+                default:
                 case MAC:
                     java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
                     setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());

@@ -110,6 +110,7 @@ public class WebSettings {
                 if (el.base().locator.isNull())
                     return null;
                 break;
+            default:
             case UI_AND_ELEMENTS:
                 if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
                     return null;
@@ -321,8 +322,9 @@ public class WebSettings {
             case "normal": return NORMAL;
             case "none": return PageLoadStrategy.NONE;
             case "eager": return EAGER;
+            default: return NORMAL;
         }
-        return NORMAL;
+
     }
 
     private static Properties getProperties(String path) {

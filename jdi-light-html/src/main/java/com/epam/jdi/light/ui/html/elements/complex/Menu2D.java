@@ -62,6 +62,7 @@ public class Menu2D extends Selector implements ISetup {
             case HOVER_AND_CLICK:
                 setActions(UIElement::hover, UIElement::click);
                 break;
+            default:
             case SELECT:
                 setActions(UIElement::click, UIElement::click);
                 break;

@@ -343,6 +343,7 @@ public class UIElement extends JDIBase
             case JS:
                 jsExecute("click()");
                 break;
+            default:
             case SMART_CLICK:
                 show();
                 ElementArea clArea = timer().getResultByCondition(

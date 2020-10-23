@@ -180,6 +180,7 @@ public class DataTableAssert<L extends PageObject, D>
                     List<D> rows = table().allData();
                     jdiAssert(LinqUtils.all(rows, condition), Matchers.is(true));
                     break;
+                default:
                 case ATLEAST:
                     jdiAssert(table().dataRows(condition, count), hasSize(count));
                     break;
