@@ -9,7 +9,5 @@ public class CheckboxSection {
     public static Checkbox indeterminateCheckbox;
     public static Checkbox disabledCheckbox;
     public static Checkbox resultCheckbox;
-
     public static Button alignBeforeRadioButton;
-    public static Button alignAfterRadioButton;
 }

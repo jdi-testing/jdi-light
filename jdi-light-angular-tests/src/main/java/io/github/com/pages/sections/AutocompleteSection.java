@@ -25,5 +25,4 @@ public class AutocompleteSection {
 
     @UI("#autocomplete-first-option-highlighted-input")
     public AutoComplete autocompleteFirstOptionHighlighted;
-
 }

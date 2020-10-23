@@ -9,15 +9,12 @@ import com.epam.jdi.light.ui.html.elements.common.TextArea;
 public class TabGroupSection {
 
     public TabGroup basicTab;
-
     public TabGroup tabWithCustomLabel;
 
     public TabGroup tabDynamicHeightBasedOnContent;
-
     public TabGroup tabWithHeadersOnTheBottom;
 
     public TabGroup tabsWithLazyLoadedContent;
-
     public TabGroup tabsAsyncLoadingContent;
 
     public TabGroup tabGroupThemeExample;

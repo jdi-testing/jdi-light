@@ -32,11 +32,9 @@ public class SelectSection {
     public static NativeSelector optionGroupsNativeSelect;
 
     public static MaterialSelector multipleSelect;
-
     public static MaterialSelector customTriggerTextSelect;
 
     public static MaterialSelector noOptionRippleSelect;
-
     public static MaterialSelector customPanelStylingSelect;
 
     public static MaterialSelector matErrorStateMatcherSelect;
