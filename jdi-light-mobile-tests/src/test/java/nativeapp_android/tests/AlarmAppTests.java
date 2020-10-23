@@ -4,6 +4,7 @@ import nativeapp_android.ClockAppTestsInit;
 import org.testng.annotations.Test;
 
 import static nativeapp.android.AlarmPage.*;
+import static nativeapp.android.AlarmSettings.*;
 
 public class AlarmAppTests extends ClockAppTestsInit {
     @Test
@@ -27,5 +28,14 @@ public class AlarmAppTests extends ClockAppTestsInit {
 
         manageVibrationCheckbox.check();
         manageVibrationCheckbox.is().selected();
+    }
+
+    @Test
+    public void seekbarTests() {
+        alarMoreOptions.click();
+        settingsButton.click();
+        alarmVolume.setMaximumValue();
+        alarmVolume.setMinimumValue();
+        alarmVolume.setSliderValue("5");
     }
 }
