@@ -8,9 +8,13 @@ public class ViewsPage {
     @MobileFindBy(accessibilityId = "Buttons")
     public static Button buttonsPage;
 
+    @MobileFindBy(accessibilityId = "Seek Bar")
+    public static Button seekBarPage;
+
     @MobileFindBy(accessibilityId = "Search View")
     public static Button searchViewPage;
 
     @MobileFindBy(accessibilityId = "TextFields")
     public static Button textFieldsPage;
+
 }
