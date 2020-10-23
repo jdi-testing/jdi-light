@@ -87,7 +87,7 @@ public class DriverData {
 
     // GET DRIVER
     public static WebDriver driverSettings(WebDriver driver) {
-        if (DRIVER.screenSize.maximize){
+        if (DRIVER.screenSize.maximize) {
             if (getOs().equals(MAC))
                 maximizeScreen(driver);
             else
@@ -168,8 +168,8 @@ public class DriverData {
     }
     public static JAction1<ChromeOptions> CHROME_OPTIONS = DriverData::defaultChromeOptions;
 
-    public static void setupCapability(ChromeOptions cap, String property, String value){
-        if(!property.equals(ARGUMENTS_PROPERTY)){
+    public static void setupCapability(ChromeOptions cap, String property, String value) {
+        if(!property.equals(ARGUMENTS_PROPERTY)) {
             cap.setCapability(property, stringToPrimitive(value));
         } else {
             cap.addArguments(value.split(" "));
@@ -253,7 +253,7 @@ public class DriverData {
                 case LINUX:
                     driver.manage().window().maximize();
                     break;
-                case MAC:
+                default: case MAC:
                     java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
                     setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
                     break;

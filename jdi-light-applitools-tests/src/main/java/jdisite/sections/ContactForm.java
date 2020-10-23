@@ -16,7 +16,11 @@ import jdisite.custom.MultiSelect;
 import jdisite.entities.ContactInfo;
 
 public class ContactForm extends Form<ContactInfo> {
-    TextField name, lastName, position, passportNumber, passportSeria;
+    TextField firstName;
+    TextField lastName;
+    TextField position;
+    TextField passportNumber;
+    TextField passportSeria;
 
     DropdownSelect gender;
     DataListOptions religion;

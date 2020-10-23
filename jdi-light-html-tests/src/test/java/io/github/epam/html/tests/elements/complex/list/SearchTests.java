@@ -51,7 +51,7 @@ public class SearchTests implements TestsInit {
         search3.clear();
         ((DataList)search3).list().indexFromZero();
         String results2 = print(search3, SearchResult::print);
-        ((DataList)search3).list().startIndex(1);
+        ((DataList)search3).list().setStartIndex(1);
         assertEquals(results2,
          "SearchResult{NAME=JDI SKYPE; DESCRIPTION=JDI Skype group with active JDI users; LINK=https://join.skype.com/u2Cel0MWHkAO}," +
             "SearchResult{NAME=JDI OWNER CONTACT; DESCRIPTION=Write an email directly to Framework owner and main architect Iovlev Roman; LINK=mailto:roman.iovlev.jdi@gmail.com}," +

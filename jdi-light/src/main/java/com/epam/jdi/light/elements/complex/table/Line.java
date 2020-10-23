@@ -23,6 +23,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.ReflectionUtils.create;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
@@ -45,7 +46,7 @@ public class Line implements IList<String>, IBaseElement {
         this.elements = elements;
         this.headers = headers;
         List<String> values = elements.values();
-        this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();;
+        this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();
     }
     public static Line initLine(List<String> list, List<String> headers) {
         Line line = new Line();
@@ -183,5 +184,13 @@ public class Line implements IList<String>, IBaseElement {
 
     public boolean isUseCache() {
         return elements.isUseCache();
+    }
+
+    protected int startIndex = ELEMENT.startIndex;
+    public int getStartIndex() {
+        return startIndex;
+    }
+    public void setStartIndex(int index) {
+        startIndex = index;
     }
 }

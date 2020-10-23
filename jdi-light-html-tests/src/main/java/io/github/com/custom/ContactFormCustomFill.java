@@ -13,12 +13,17 @@ import io.github.com.entities.Contacts;
 import java.lang.reflect.Field;
 
 public class ContactFormCustomFill extends Form<Contacts> {
-    TextField name,  lastName, position, passportNumber, passportSeria;
+    TextField firstName;
+    TextField lastName;
+    TextField position;
+    TextField passportNumber;
+    TextField passportSeria;
 
     Dropdown gender;
     IsCombobox religion;
 
-    Checkbox passport, acceptConditions;
+    Checkbox passport;
+    Checkbox acceptConditions;
     TextArea description;
 
     @UI("['Submit']") public Button submit;
@@ -26,7 +31,7 @@ public class ContactFormCustomFill extends Form<Contacts> {
     @Override
     public void fillAction(Field field, Object element, Object parent, String setValue) {
         String value = setValue;
-        if (field.getName().equals("name"))
+        if (field.getName().equals("firstName"))
             value = setValue.toUpperCase();
         super.fillAction(field, element, parent, value);
     }

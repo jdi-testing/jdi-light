@@ -8,6 +8,7 @@ public class Users {
         //u.passport = "true";
         //u.acceptConditions = "true";
         u.name = "Roman";
+        u.firstName = "Roman";
         u.lastName = "Iovlev";
         u.position = "ChiefQA";
         u.passportNumber = "4321";

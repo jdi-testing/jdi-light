@@ -42,36 +42,36 @@ public class UIElementTests extends TestsInit {
         assertEquals(description.getText(), "");
     }
     @Test
-    public void getTagName(){
+    public void getTagName() {
         assertEquals(submit.getTagName(), "button");
     }
     @Test
-    public void getAttribute(){
+    public void getAttribute() {
         assertEquals(submit.getAttribute("type"), "submit");
     }
     @Test
-    public void checkIfSelected(){
+    public void checkIfSelected() {
         assertTrue(forCalculateOne.isSelected());
     }
     @Test
-    public void checkIfDeselected(){
+    public void checkIfDeselected() {
         Assert.assertTrue(forCalculateThree.isDeselected());
     }
     @Test
-    public void checkIfEnabled(){
+    public void checkIfEnabled() {
         assertTrue(submit.isEnabled());
     }
     //TODO add not enabled, possible for button on another page
     @Test
-    public void isDisplayed(){
+    public void isDisplayed() {
         assertTrue(submit.isDisplayed());
     }
     @Test
-    public void isHidden(){
+    public void isHidden() {
         assertTrue(submitNotDisplayed.isHidden());
     }
     @Test
-    public void cantFindBySmartLocator(){
+    public void cantFindBySmartLocator() {
         assertTrue(smartLocator.isHidden());
     }
 
@@ -79,56 +79,56 @@ public class UIElementTests extends TestsInit {
         return getDriver().findElement(By.xpath("//*[.='Submit']"));
     }
     @Test
-    public void getLocation(){
+    public void getLocation() {
         assertEquals(submit.getLocation(), getSeleniumElement().getLocation());
     }
     @Test
-    public void getSize(){
+    public void getSize() {
         assertEquals(submit.getSize(), getSeleniumElement().getSize());
     }
     @Test
-    public void getRect(){
+    public void getRect() {
         assertEquals(submit.getRect(), getSeleniumElement().getRect());
     }
     @Test
-    public void jsExecute(){
+    public void jsExecute() {
         submit.jsExecute("click()");
         assertEquals(sum.getText(), "Summary: 3");
     }
     @Test
-    public void input(){
+    public void input() {
         description.input("Hello world!");
         assertEquals(description.getText(), "Hello world!");
         description.clear();
     }
     @Test
-    public void setTextGetText(){
+    public void setTextGetText() {
         description.setText("Hello world!");
         assertEquals(description.getText(), "Hello world!");
         description.clear();
     }
     @Test
-    public void clickPoint(){
+    public void clickPoint() {
         submit.click(10, 10);
         assertEquals(sum.getText(), "Summary: 3");
     }
     @Test
-    public void isClickable(){
+    public void isClickable() {
         assertTrue(submit.isClickable());
     }
     //TODO add isNotClickable
     @Test
-    public void clickCENTER(){
+    public void clickCENTER() {
         submit.click(ElementArea.CENTER);
         assertEquals(sum.getText(), "Summary: 3");
     }
     @Test
-    public void select(){
+    public void select() {
         submit.select();
         assertEquals(sum.getText(), "Summary: 3");
     }
     @Test
-    public void setAttribute(){
+    public void setAttribute() {
         String type = result.getAttribute("type");
         result.setAttribute("type", type + " happyType");
         assertEquals(result.attr("type"), type + " happyType");
@@ -136,20 +136,20 @@ public class UIElementTests extends TestsInit {
         assertEquals(result.attr("type"), type);
     }
     @Test
-    public void getAllAttributes(){
+    public void getAllAttributes() {
         assertEquals(submit.getAllAttributes().toString(), "class:uui-button dark-blue,type:submit");
     }
 
     @Test
-    public void isExist(){
+    public void isExist() {
         assertTrue(submit.isExist());
     }
     @Test
-    public void isNotExist(){
+    public void isNotExist() {
         assertTrue(submitNotDisplayed.isNotExist());
     }
     @Test
-    public void classes(){
+    public void classes() {
         assertEquals(submit.classes(), new ArrayList<>(Arrays.asList("uui-button", "dark-blue")));
     }
     @Test
@@ -158,7 +158,7 @@ public class UIElementTests extends TestsInit {
         assertTrue(submit.hasClass("dark-blue"));
     }
     @Test
-    public void hasNotClass(){
+    public void hasNotClass() {
         assertFalse(submit.hasClass("no-class"));
     }
     @Test
@@ -167,31 +167,31 @@ public class UIElementTests extends TestsInit {
         assertTrue(submit.hasAttribute("type"));
     }
     @Test
-    public void printHtml(){
+    public void printHtml() {
         assertEquals(submit.printHtml(), "<button class=\"uui-button dark-blue\" type=\"submit\">Submit</button>");
     }
     @Test
-    public void hasNotAttribute(){
+    public void hasNotAttribute() {
         assertFalse(submit.hasAttribute("no-attr"));
     }
 
 
     @Test
-    public void highlight(){
+    public void highlight() {
         String style = (result.getAttribute("style"));
         result.highlight();
         result.attr("style").contains("red");
         result.setAttribute("style", style);
     }
     @Test
-    public void highlightWithColor(){
+    public void highlightWithColor() {
         String style = (result.getAttribute("style"));
         result.highlight("green");
         result.attr("style").contains("green");
         result.setAttribute("style", style);
     }
     @Test
-    public void setValueGetValue(){
+    public void setValueGetValue() {
         description.setValue("Hello world!");
         assertEquals(description.getValue(), "Hello world!");
         description.clear();
@@ -199,21 +199,21 @@ public class UIElementTests extends TestsInit {
 
     //region Aliases
     @Test
-    public void attr(){
+    public void attr() {
         assertEquals(submit.attr("type"), "submit");
     }
     @Test
-    public void attrs(){
+    public void attrs() {
         assertEquals(submit.attrs().toString(), "class:uui-button dark-blue,type:submit");
     }
     @Test
-    public void text(){
+    public void text() {
         assertEquals(submit.text(), "SUBMIT");
     }
     //end region
 
     @Test
-    public void isAssert(){
+    public void isAssert() {
         IsAssert isAssertSubmit = new IsAssert();
         isAssertSubmit.set(submit);
         isAssertSubmit.text("SUBMIT");
@@ -234,86 +234,86 @@ public class UIElementTests extends TestsInit {
 
     //region annotations
     @Test
-    public void clickArea(){
+    public void clickArea() {
         submitClickArea.click();
     }
     @Test
-    public void getTextAs(){
+    public void getTextAs() {
         submit.click();
         assertEquals(sumGetTextAs.getText(), "Summary: 3");
     }
     @Test
-    public void isRoot(){
+    public void isRoot() {
         assertTrue(sumGetTextAs.locator.isRoot);
     }
     @Test
-    public void setTextAs(){
+    public void setTextAs() {
         descriptionSetTextAs.input("Hello world!");
         assertEquals(descriptionSetTextAs.getText(), "Hello world!");
         descriptionSetTextAs.clear();
     }
     @Test
-    public void noWait(){
+    public void noWait() {
         assertTrue(submitNotDisplayedNoWait.isHidden());
     }
     @Test
-    public void waitTimeout(){
+    public void waitTimeout() {
         descriptionWaitTimeout.input("Hello world!");
         assertEquals(descriptionWaitTimeout.getText(), "Hello world!");
         descriptionWaitTimeout.clear();
     }
     @Test
-    public void name(){
+    public void name() {
         assertEquals(submitNotDisplayedNoWait.getName(), "HappyName");
     }
     @Test
-    public void get(){
+    public void get() {
         submit.click();
         assertEquals(sumGet.getText(), "Summary: 3");
     }
     @Test
-    public void getInView(){
+    public void getInView() {
         assertTrue(submitGetShowInView.isClickable());
         assertTrue(submitGetShowInView.isDisplayed());
     }
     @Test
-    public void pageName(){
+    public void pageName() {
         assertEquals(submitPage.getPage().getTitle(), metalAndColorsPage.getTitle());
     }
     @Test
-    public void sId(){
+    public void sId() {
         assertEquals(sId.getLocator().toString(), "By.cssSelector: #s-id");
     }
     @Test
-    public void sText(){
+    public void sText() {
         assertEquals(sText.getLocator().toString(), "By.xpath: .//*/text()[normalize-space(.) = \"S Text\"]/parent::*");
     }
     @Test
-    public void smart(){
+    public void smart() {
         assertEquals(smart.getLocator().toString(), "By.cssSelector: [name='smart']");
     }
     @Test
-    public void smartId(){
+    public void smartId() {
         assertEquals(smartId.getLocator().toString(), "By.cssSelector: [id='smart']");
     }
     @Test
-    public void sClass(){
+    public void sClass() {
         assertEquals(sClass.getLocator().toString(), "By.cssSelector: .s-class");
     }
     @Test
-    public void findBy(){
+    public void findBy() {
         assertEquals(findBy.getLocator().toString(), "By.cssSelector: findBy");
     }
     @Test
-    public void findByNull(){
+    public void findByNull() {
         assertEquals(findByNull.toString(), "UIElementContactFormPage.findByNull (smart: #find-by-null)");
     }
     @Test
-    public void uiNull(){
+    public void uiNull() {
         assertEquals(uiNull.toString(), "UIElementContactFormPage.uiNull (css='')");
     }
     @Test
-    public void visualCheck(){
+    public void visualCheck() {
         assertTrue(visualCheck.params.has("visualCheck"));
     }
     //end region

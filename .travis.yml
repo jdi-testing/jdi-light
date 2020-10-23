@@ -30,7 +30,7 @@ env:
     - EXAMPLES_PROPERTY="test-examples/jdi-light-examples"
     - PERFORMANCE="jdi-performance"
     - PERFORMANCE_PROPERTY="test-examples/jdi-performance"
-    - CHROME_ARGS="--headless"
+    - CHROME_ARGS="--headless --window-size=1920,1080"
     - PATH="$JAVA_HOME/bin:$PATH"
 
 stages:
@@ -296,24 +296,24 @@ jobs:
       jdk: openjdk13
 
     - <<: *testsangularwithmocks
-      name: Run tests - performance - JDK8
+      name: Run tests - angular unit tests with mocks - JDK8
       if: true
       jdk: openjdk8
     - <<: *testsangularwithmocks
-      name: Run tests - performance - JDK9
+      name: Run tests - angular unit tests with mocks - JDK9
       jdk: openjdk9
     - <<: *testsangularwithmocks
-      name: Run tests - performance - JDK10
+      name: Run tests - angular unit tests with mocks - JDK10
       if: true
       jdk: openjdk10
     - <<: *testsangularwithmocks
-      name: Run tests - performance - JDK11
+      name: Run tests - angular unit tests with mocks - JDK11
       jdk: openjdk11
     - <<: *testsangularwithmocks
-      name: Run tests - performance - JDK12
+      name: Run tests - angular unit tests with mocks - JDK12
       jdk: openjdk12
     - <<: *testsangularwithmocks
-      name: Run tests - performance - JDK13
+      name: Run tests - angular unit tests with mocks - JDK13
       jdk: openjdk13
 
     - stage: reports

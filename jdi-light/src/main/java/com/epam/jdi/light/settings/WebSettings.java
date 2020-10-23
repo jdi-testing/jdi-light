@@ -7,6 +7,7 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
+import com.epam.jdi.light.logger.HighlightStrategy;
 import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.PropReader;
 import com.epam.jdi.tools.PropertyReader;
@@ -103,8 +104,6 @@ public class WebSettings {
     }
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
         switch (ELEMENT.useSmartSearch) {
-            case FALSE:
-                return null;
             case ONLY_UI:
                 if (el.base().locator.isNull())
                     return null;
@@ -113,6 +112,8 @@ public class WebSettings {
                 if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
                     return null;
                 break;
+            default:
+                return null;
         }
         String locatorName = ELEMENT.smartName.value.execute(el.getName());
         return el.base().timer().getResult(() -> {
@@ -170,9 +171,9 @@ public class WebSettings {
             fillAction(p -> SCREEN.allowRobot = parseBoolean(p), "allow.robot");
             fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
             fillAction(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
-            fillAction(p -> LOGS.screenStrategy = getLoggerStrategy(p), "screenshot.strategy");
-            fillAction(p -> LOGS.htmlCodeStrategy = getLoggerStrategy(p), "html.code.strategy");
-            fillAction(p -> LOGS.requestsStrategy = getLoggerStrategy(p), "requests.strategy");
+            fillAction(p -> LOGS.screenStrategy = getActionStrategy(p), "screenshot.strategy");
+            fillAction(p -> LOGS.htmlCodeStrategy = getActionStrategy(p), "html.code.strategy");
+            fillAction(p -> LOGS.requestsStrategy = getActionStrategy(p), "requests.strategy");
             fillAction(p -> COMMON.killBrowser = p, "browser.kill");
             fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
             fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
@@ -192,6 +193,7 @@ public class WebSettings {
             fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locator");
             fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
             fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
+            fillAction(p -> ELEMENT.highlight = getHighlightStrategy(p), "element.highlight");
             fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
@@ -317,11 +319,10 @@ public class WebSettings {
 
     private static PageLoadStrategy getPageLoadStrategy(String strategy) {
         switch (strategy.toLowerCase()) {
-            case "normal": return NORMAL;
             case "none": return PageLoadStrategy.NONE;
             case "eager": return EAGER;
+            default:  return NORMAL;
         }
-        return NORMAL;
     }
 
     private static Properties getProperties(String path) {
@@ -342,7 +343,7 @@ public class WebSettings {
         return properties;
     }
 
-    private static Properties getCiProperties(String path, File propertyFile){
+    private static Properties getCiProperties(String path, File propertyFile) {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(propertyFile));
@@ -362,7 +363,7 @@ public class WebSettings {
             default: return LogInfoDetails.ELEMENT;
         }
     }
-    private static List<com.epam.jdi.light.logger.Strategy> getLoggerStrategy(String strategy) {
+    private static List<com.epam.jdi.light.logger.Strategy> getActionStrategy(String strategy) {
         if (isBlank(strategy))
             return asList(FAIL);
         if (strategy.trim().equalsIgnoreCase("off"))
@@ -373,6 +374,18 @@ public class WebSettings {
         try {
             String[] split = strategy.split("\\|");
             strategies = map(split, s -> parseStrategy(s.trim()));
+        } catch (Exception ignore) { }
+        return strategies;
+    }
+    private static List<HighlightStrategy> getHighlightStrategy(String strategy) {
+        if (isBlank(strategy) || strategy.trim().equalsIgnoreCase("off"))
+            return new ArrayList<>();
+        if (strategy.trim().equalsIgnoreCase("flow"))
+            return list(HighlightStrategy.FAIL, HighlightStrategy.ACTION, HighlightStrategy.ASSERT);
+        List<HighlightStrategy> strategies = new ArrayList<>();
+        try {
+            String[] split = strategy.split("\\|");
+            strategies = map(split, s -> HighlightStrategy.parseStrategy(s.trim()));
         } catch (Exception ignore) { }
         return strategies;
     }

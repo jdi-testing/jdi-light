@@ -16,7 +16,7 @@ public class Users {
     public static final String lowerCaseName = defaultName.toLowerCase();
 
     public static Contacts DEFAULT_CONTACT = new Contacts().set(c -> {
-        c.name = defaultName;
+        c.firstName = defaultName;
         c.lastName = defaultLastName;
         c.position = defaultPosition;
         //c.passport = true;
@@ -29,7 +29,7 @@ public class Users {
     });
 
     public static Contacts LOWER_CASE_NAME_CONTACT = new Contacts().set(c -> {
-        c.name = lowerCaseName;
+        c.firstName = lowerCaseName;
         c.lastName = defaultLastName;
         c.position = defaultPosition;
         c.passportNumber = defaultPassportNumber;
@@ -40,7 +40,7 @@ public class Users {
         c.religion = defaultReligion;
     });
 
-    public static Contacts ONLY_NAME_FILLED_DEFAULT_CONTACT = new Contacts().set(c -> c.name = defaultName);
+    public static Contacts ONLY_NAME_FILLED_DEFAULT_CONTACT = new Contacts().set(c -> c.firstName = defaultName);
 
     public static Contacts ALL_EXCEPT_NAME_FILLED_DEFAULT_CONTACT = new Contacts().set(c -> {
         c.lastName = defaultLastName;

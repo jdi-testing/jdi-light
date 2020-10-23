@@ -16,6 +16,9 @@ import java.util.List;
 public interface ICoreElement extends IBaseElement {
     UIElement core();
     default UIElement iCore() { return core(); }
+    default <T> T with(Class<T> cl) {
+        return core().with(cl);
+    }
 
     @JDIAction("Hover to '{name}'")
     default void hover() { iCore().hover(); }

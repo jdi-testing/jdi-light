@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <version>1.2.19</version>
+    <version>1.2.21</version>
     <artifactId>jdi-light-mobile-tests</artifactId>
     <name>Tests: JDI Mobile</name>
     <groupId>com.epam.jdi</groupId>
@@ -24,8 +24,13 @@
         <!--JDI-->
         <dependency>
             <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>1.2.21</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-mobile</artifactId>
-            <version>1.2.19</version>
+            <version>1.2.21</version>
         </dependency>
 
         <!--Allure config in parent-->
@@ -63,6 +68,12 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjtools</artifactId>
             <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.17.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

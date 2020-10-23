@@ -2,6 +2,7 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
@@ -63,13 +64,23 @@ public class ActionObject {
     private CacheValue<Object> obj = new CacheValue<>(
             () -> jp().getThis() != null ? jp().getThis() : jp().getSignature().getDeclaringType().getSimpleName());
 
-    public IBaseElement element() { return element.get(); }
-    private CacheValue<IBaseElement> element = new CacheValue<>(this::getElement);
-    private IBaseElement getElement() {
+    public IBaseElement element() {
         try {
             if (jp().getThis() != null && isInterface(getJpClass(jp()), IBaseElement.class)) {
                 IBaseElement element = (IBaseElement) jp().getThis();
                 if (element.base() != null)
+                    return element;
+            }
+            return null;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+    public ICoreElement core() {
+        try {
+            if (jp().getThis() != null && isInterface(getJpClass(jp()), ICoreElement.class)) {
+                ICoreElement element = (ICoreElement) jp().getThis();
+                if (element.core() != null)
                     return element;
             }
             return null;
@@ -83,11 +94,18 @@ public class ActionObject {
     private CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
     private int getTimeout() {
         JDIAction ja = jp() != null
-            ? getJdiAction(jp())
+            ? jdiAnnotation()
             : null;
         return ja != null && ja.timeout() != -1
             ? ja.timeout()
             : elementTimeout;
+    }
+    public JDIAction jdiAnnotation() {
+        return getJdiAction(jp());
+    }
+    public boolean isAssertAnnotation() {
+        JDIAction ja = getJdiAction(jp());
+        return ja != null && ja.isAssert();
     }
 
     private void resetElementTimeout() {

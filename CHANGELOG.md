@@ -5,6 +5,16 @@
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 * **driver.remote.run** boolean property can be specified in **test.properties** file. If not specified, JDI would use the original logic and switch between local and remote driver depending on other properties
 
+## 1.2.21 (release 01.10.2020)
+* Make Tables and Data Tables iterable
+* Fix @Step issue with JList
+* Fix and unify startIndex 0 or 1 for all iterable elements (WebList, JList, DataList, Table, DataTable etc.)
+* Add the interface HasStartIndex
+
+## 1.2.20 (release 04.09.2020)
+* Add flow strategies for screenshots
+* Add flow strategies for elements highlights
+
 ## 1.2.19 (release 04.09.2020)
 * Bug fix
 

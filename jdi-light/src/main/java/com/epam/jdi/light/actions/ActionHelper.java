@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
+import com.epam.jdi.light.logger.HighlightStrategy;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
@@ -23,13 +24,13 @@ import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import io.qameta.allure.Step;
+import org.apache.commons.lang3.ObjectUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,7 +61,6 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.*;
 import static com.epam.jdi.tools.Timer.nowTime;
-import static com.epam.jdi.tools.map.MapArray.IGNORE_NOT_UNIQUE;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
@@ -89,7 +89,7 @@ public class ActionHelper {
                 case NAME: return NAME_TEMPLATE;
                 case LOCATOR: return LOCATOR_TEMPLATE;
                 case CONTEXT: return CONTEXT_TEMPLATE;
-                case ELEMENT: return ELEMENT_TEMPLATE;
+                default: case ELEMENT: return ELEMENT_TEMPLATE;
             }
         }
         return level.equalOrMoreThan(STEP) ? STEP_TEMPLATE : ELEMENT_TEMPLATE;
@@ -109,21 +109,59 @@ public class ActionHelper {
     }
 
     public static String fillTemplate(String template, JoinPoint jp, MethodSignature method) {
+        logger.trace("fillTemplate(): " + template);
         String filledTemplate = template;
         try {
             if (filledTemplate.contains("{0")) {
-                Object[] args = getArgs(jp);
-                filledTemplate = msgFormat(filledTemplate, args);
+                try {
+                    Object[] args = getArgs(jp);
+                    filledTemplate = msgFormat(filledTemplate, args);
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate { 0 } failed");
+                }
             } else if (filledTemplate.contains("%s")) {
-                filledTemplate = format(filledTemplate, getArgs(jp));
+                try {
+                    filledTemplate = format(filledTemplate, getArgs(jp));
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate % s  failed");
+                }
             }
             if (filledTemplate.contains("{")) {
-                MapArray<String, Object> obj = toMap(() -> new MapArray<>("this", getElementName(jp)));
-                MapArray<String, Object> args = methodArgs(jp, method);
-                MapArray<String, Object> core = core(jp);
-                MapArray<String, Object> fields = classFields(jp.getThis());
-                MapArray<String, Object> methods = classMethods(jp.getThis());
-                filledTemplate = getActionNameFromTemplate(method, filledTemplate, obj, args, core, fields, methods);
+                MapArray<String, Object> obj;
+                MapArray<String, Object> args;
+                MapArray<String, Object> core;
+                MapArray<String, Object> fields;
+                MapArray<String, Object> methods;
+                try {
+                    obj = new MapArray<>("this", getElementName(jp));
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate get 'obj' failed");
+                }
+                try {
+                    args = methodArgs(jp, method);
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate get 'args' failed");
+                }
+                try {
+                    core = core(jp);
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate get 'core' failed");
+                }
+                try {
+                    fields = classFields(jp.getThis());
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate get 'fields' failed");
+                }
+                try {
+                    methods = classMethods(jp.getThis());
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate get 'methods' failed");
+                }
+                try {
+                    filledTemplate = getActionNameFromTemplate(method, filledTemplate, obj, args, core, fields, methods);
+                } catch (Throwable ex) {
+                    throw exception(ex, "fillTemplate getActionNameFromTemplate failed");
+                }
                 if (filledTemplate.contains("{{VALUE}}") && args.size() > 0) {
                     filledTemplate = filledTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
                 }
@@ -131,8 +169,9 @@ public class ActionHelper {
                     filledTemplate = filledTemplate.replaceAll("\\{failElement}", obj.get(0).value.toString());
                 }
             }
+            logger.trace("fillTemplate() => " + filledTemplate);
             return filledTemplate;
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             throw exception(ex, "Surround method issue: Can't fill JDIAction template: " + template + " for method: " + getClassMethodName(jp));
         }
     }
@@ -141,25 +180,36 @@ public class ActionHelper {
     public static void beforeJdiAction(ActionObject jInfo) {
         JoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
-        if (jInfo.topLevel()) {
-            processBeforeAction(message, jInfo);
-        }
         if (LOGS.writeToAllure && logLevel(jInfo).equalOrMoreThan(INFO) && (allureSteps.get().isEmpty() || !allureSteps.get().contains(message))) {
             jInfo.stepUId = startStep(message);
             allureSteps.get().add(message);
         }
+        if (jInfo.topLevel()) {
+            processBeforeAction(message, jInfo);
+        }
     }
-    protected static void processBeforeAction(String message, ActionObject jInfo) {
+    private static void processBeforeAction(String message, ActionObject jInfo) {
         allureSteps.reset();
         JoinPoint jp = jInfo.jp();
-        if (LOGS.writeToLog)
+        if (LOGS.writeToLog) {
             logger.toLog(message, logLevel(jInfo));
-        if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE || LOGS.screenStrategy.contains(NEW_PAGE))
+        }
+        if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)
+        && (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo))
+        || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo)) {
+                try {
+                    jInfo.core().highlight();
+                } catch (Exception ignore) {
+                }
+            }
+        if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE || LOGS.screenStrategy.contains(NEW_PAGE)) {
             processPage(jInfo);
-        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION)
+        }
+        if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
             visualValidation(jp, message);
+        }
         if (LOGS.screenStrategy.contains(ASSERT)) {
-            if (isInterface(jInfo.jpClass(), JAssert.class) || validateAlert(jInfo)) {
+            if (isAssert(jInfo)) {
                 performAssert(jInfo);
             } else {
                 isAssert.set(false);
@@ -171,30 +221,15 @@ public class ActionHelper {
         isAssert.set(true);
         if (lastActionIsNotAssert) {
             String screenName = "Validate" + capitalize(jInfo.methodName());
-            String screenPath;
-            if (!validateAlert(jInfo)) {
-                screenPath = takeScreen(screenName);
-            } else {
-                Timer.sleep(200);
-                screenPath = takeRobotScreenshot(screenName);
-            }
-            String detailsUUID = startStep(screenName);
-            if (isNotBlank(screenPath)) {
-                try {
-                    attachScreenshot(screenPath);
-                } catch (IOException ex) {
-                    throw exception(ex, "");
-                }
-            }
-            getLifecycle().stopStep(detailsUUID);
+            createAttachment(screenName, isClass(jInfo.jpClass(), Alerts.class));
         }
     }
-    private static boolean validateAlert(ActionObject jInfo) {
-        return isClass(jInfo.jpClass(), Alerts.class) && jInfo.methodName().startsWith("validate");
+    public static boolean isAssert(ActionObject jInfo) {
+        return isInterface(jInfo.jpClass(), JAssert.class) || jInfo.isAssertAnnotation();
     }
     public static void beforeStepAction(JoinPoint jp) {
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
-        logger.toLog(message, logLevel(new ActionObject(jp)));
+        logger.step(message);
     }
     private static void visualValidation(JoinPoint jp, String message) {
         Object obj = jp.getThis();
@@ -286,6 +321,8 @@ public class ActionHelper {
             logOptions.add("action", actionName);
             logString = msgFormat(getTemplate(LOGS.logLevel), logOptions);
         }
+        if (isBlank(logString))
+            return "";
         return toUpperCase(logString.charAt(0)) + logString.substring(1);
     }
     public static MapArray<String, Object> getLogOptions(JoinPoint jp) {
@@ -322,31 +359,41 @@ public class ActionHelper {
                 logger.error("Url: " + WebPage.getUrl());
             } catch (Exception ignore) { }
             logger.error("Failed actions chain: " + print(chainActions, " > "));
+        } else {
+            if (LOGS.writeToAllure && isNotBlank(jInfo.stepUId))
+                getLifecycle().stopStep(jInfo.stepUId);
         }
         return exception(ex, getExceptionAround(ex, jInfo));
     }
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
     public static void logFailure(ActionObject jInfo) {
         logger.toLog(">>> " + jInfo.object().toString(), ERROR);
-        String screenName = "";
+        String screenPath = "";
         String htmlSnapshot = "";
         String errors = "";
+        if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
+            if (ELEMENT.highlight.contains(HighlightStrategy.FAIL)) {
+                try {
+                    jInfo.core().highlight();
+                } catch (Exception ignore) { }
+            }
+        }
         if (LOGS.screenStrategy.contains(FAIL))
-            screenName = SCREEN.tool.equalsIgnoreCase("robot")
-                    ? takeRobotScreenshot()
-                    : takeScreen("Failed"+capitalize(jInfo.methodName()));
+            screenPath = SCREEN.tool.equalsIgnoreCase("robot")
+                ? takeRobotScreenshot()
+                : takeScreen("Failed"+capitalize(jInfo.methodName()));
         if (LOGS.htmlCodeStrategy.contains(FAIL))
             htmlSnapshot = takeHtmlCodeOnFailure();
         if (LOGS.requestsStrategy.contains(FAIL)) {
             WebDriver driver = jInfo.element() != null
-                    ? jInfo.element().base().driver()
-                    : getDriver();
+                ? jInfo.element().base().driver()
+                : getDriver();
             List<LogEntry> requests = driver.manage().logs().get("performance").getAll();
             List<String> errorEntries = LinqUtils.map(filter(requests, LOGS.filterHttpRequests),
-                    logEntry -> beautifyJson(logEntry.getMessage()));
+                logEntry -> beautifyJson(logEntry.getMessage()));
             errors = print(errorEntries);
         }
-        failStep(jInfo.stepUId, screenName, htmlSnapshot, errors);
+        failStep(jInfo.stepUId, screenPath, htmlSnapshot, errors);
     }
     static WebPage getPage(Object element) {
         if (isInterface(element.getClass(), IBaseElement.class))
@@ -397,7 +444,8 @@ public class ActionHelper {
         String methodName = splitCamelCase(getMethodName(jp));
         if (args.size() == 0)
             return methodName;
-        return format("%s%s", methodName, argsToString(args));
+        String argsAsString = argsToString(args);
+        return format("%s%s", methodName, argsAsString);
     }
     static String argsToString(MapArray<String, Object> args) {
         return args.size() == 1
@@ -410,13 +458,9 @@ public class ActionHelper {
                 : "("+args.get(0).value+")";
     }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
-        return toMap(() -> new MapArray<>(method.getParameterNames(), getArgs(joinPoint)));
-    }
-    static MapArray<String, Object> toMap(JFunc<MapArray<String, Object>> getMap) {
-        IGNORE_NOT_UNIQUE = true;
-        MapArray<String, Object> map = getMap.execute();
-        IGNORE_NOT_UNIQUE = false;
-        return map;
+        String[] names = method.getParameterNames();
+        Object[] args = getArgs(joinPoint);
+        return new MapArray<>(names, args);
     }
     static Object[] getArgs(JoinPoint jp) {
         Object[] args = jp.getArgs();
@@ -425,11 +469,11 @@ public class ActionHelper {
         Object[] result = new Object[args.length];
         for (int i = 0; i< args.length; i++)
             result[i] = Switch(args[i]).get(
-                    Case(Objects::isNull, null),
-                    Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
-                    Case(arg -> isInterface(arg.getClass(), List.class),
-                            PrintUtils::printList),
-                    Default(arg -> arg));
+                Case(Objects::isNull, null),
+                Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
+                Case(arg -> isInterface(arg.getClass(), List.class),
+                        PrintUtils::printList),
+                Default(arg -> arg));
         return result;
     }
     static MapArray<String, Object> core(JoinPoint jp) {

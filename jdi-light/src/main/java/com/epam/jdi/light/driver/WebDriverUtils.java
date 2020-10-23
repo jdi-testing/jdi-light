@@ -40,7 +40,7 @@ public final class WebDriverUtils {
                 killAllWindowsDriverProcesses();
             }
         }
-        catch (Exception ignore){
+        catch (Exception ignore) {
             logger.info("Can't kill driver processes");
         }
     }
@@ -76,13 +76,13 @@ public final class WebDriverUtils {
         }
     }
 
-    private static String getDriverProcessName(String browserName){
+    private static String getDriverProcessName(String browserName) {
         String name = null;
         switch (browserName.toLowerCase()) {
             case "firefox":
                 name = "geckodriver";
                 break;
-            case "chrome":
+            default: case "chrome":
                 name = "chromedriver";
                 break;
 

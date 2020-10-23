@@ -5,6 +5,7 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -37,6 +38,25 @@ public class Cookies {
     @JDIAction("Add cookie '{0}'")
     public static void addCookie(Cookie cookie) {
         manage().addCookie(cookie);
+    }
+    /**
+     * @param cookies Specify collection of the cookies
+     *               Add cookies in browser
+     */
+    @JDIAction("Add cookie '{0}'")
+    public static void addCookies(Collection<Cookie> cookies) {
+        if (cookies == null)
+            return;
+        for (Cookie cookie : cookies)
+            addCookie(cookie);
+    }    /**
+     * @param cookies Specify collection of the cookies
+     *               Add cookies in browser
+     */
+    @JDIAction("Add cookie '{0}'")
+    public static void setCookies(Collection<Cookie> cookies) {
+        clearAllCookies();
+        addCookies(cookies);
     }
     /**
      * Clear browsers cache

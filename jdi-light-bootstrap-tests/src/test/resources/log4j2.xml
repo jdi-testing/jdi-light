@@ -7,9 +7,8 @@
   </Properties>
 
   <Appenders>
-    <Console name="ColoredConsoleAppender" target="SYSTEM_OUT" follow="true">
-      <PatternLayout
-              pattern="[%highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %d{mm:ss.SSS}] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%throwable}"/>
+    <Console name="consoleAppender" target="SYSTEM_OUT" ignoreExceptions="false">
+      <PatternLayout pattern="%d{mm:ss.SS} [%c:%p]: %m%n"/>
     </Console>
 
     <RollingFile name="fileAppender" fileName="${baseDir}/${logFileName}.log">
@@ -48,13 +47,14 @@
     <Root level="INFO">
       <AppenderRef ref="fileAppender"/>
       <AppenderRef ref="htmlFileLogger"/>
-      <AppenderRef ref="ColoredConsoleAppender"/>
+      <AppenderRef ref="consoleAppender"/>
     </Root>
 
     <!-- additivity means, that parent-logger (in every case the root-logger) will also get the chance to log this stuff -->
     <Logger name="JDI" additivity="FALSE" level="INFO">
       <AppenderRef ref="fileAppender"/>
       <AppenderRef ref="htmlFileLogger"/>
+      <AppenderRef ref="consoleAppender"/>
     </Logger>
 
   </Loggers>

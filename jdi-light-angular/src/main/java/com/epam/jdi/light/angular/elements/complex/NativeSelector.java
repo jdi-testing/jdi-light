@@ -19,6 +19,10 @@ import java.util.stream.Stream;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 
+/**
+ * To see an example of NativeSelector web element please visit https://material.angular.io/components/select/overview.
+ */
+
 public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implements HasLabel {
     public String groupsAndOptionsList = "#%s optgroup";
     public String hintLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";

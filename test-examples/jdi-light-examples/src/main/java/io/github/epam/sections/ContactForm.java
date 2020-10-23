@@ -8,7 +8,7 @@ import io.github.epam.entities.User;
 import org.openqa.selenium.WebElement;
 
 public class ContactForm extends Form<User> {
-	@FindBy(id = "name") public WebElement name;
+	@FindBy(id = "first-name") public WebElement firstName;
 	@FindBy(id = "passport") public WebElement passport;
 	@FindBy(id = "last-name") public WebElement lastName;
 	@FindBy(id = "position") public WebElement position;

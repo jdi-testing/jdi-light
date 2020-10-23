@@ -7,5 +7,5 @@ import com.epam.jdi.tools.func.JAction1;
 public class PageSettings {
     public PageChecks checkPageOpen = PageChecks.NONE;
     public JAction1<WebPage> beforeNewPage = WebPage::beforeNewPage;
-    public JAction1<WebPage> beforeEachStep = WebPage::beforeThisPage;
+    public JAction1<WebPage> beforeEachStep = WebPage::beforeEachPage;
 }

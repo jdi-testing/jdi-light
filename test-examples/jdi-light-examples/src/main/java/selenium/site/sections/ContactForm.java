@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class ContactForm {
-    @FindBy(id = "name") WebElement name;
+    @FindBy(id = "first-name") WebElement firstName;
     @FindBy(id = "last-name") WebElement lastName;
     @FindBy(id = "position") WebElement position;
     @FindBy(id = "passport-number") WebElement passportNumber;
@@ -35,9 +35,9 @@ public class ContactForm {
 
     public void submit(ContactInfo contact) {
         // TextFields
-        if (contact.name != null) {
-            name.clear();
-            name.sendKeys(contact.name);
+        if (contact.firstName != null) {
+            firstName.clear();
+            firstName.sendKeys(contact.firstName);
         }
         if (contact.lastName != null) {
             lastName.clear();
@@ -96,8 +96,8 @@ public class ContactForm {
     }
     public void check(ContactInfo contact) {
         // TextFields
-        if (contact.name != null)
-            assertThat(name.getText(), is(contact.name));
+        if (contact.firstName != null)
+            assertThat(firstName.getText(), is(contact.firstName));
         if (contact.lastName != null)
             assertThat(lastName.getText(), is(contact.lastName));
         if (contact.position != null)

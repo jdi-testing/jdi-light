@@ -131,23 +131,23 @@ public class WebAnnotationsUtil {
         return null;
     }
 
-    public static By findByToBy(Css locator){
+    public static By findByToBy(Css locator) {
         if (locator == null) return null;
         return By.cssSelector(locator.value());
     }
-    public static By findByToBy(XPath locator){
+    public static By findByToBy(XPath locator) {
         if (locator == null) return null;
         return By.xpath(locator.value());
     }
-    public static By findByToBy(UI locator){
+    public static By findByToBy(UI locator) {
         if (locator == null) return null;
         return defineLocator(locator.value());
     }
-    public static By findByToBy(ByText locator){
+    public static By findByToBy(ByText locator) {
         if (locator == null) return null;
         return byText(locator.value());
     }
-    public static By findByToBy(WithText locator){
+    public static By findByToBy(WithText locator) {
         if (locator == null) return null;
         return withText(locator.value());
     }

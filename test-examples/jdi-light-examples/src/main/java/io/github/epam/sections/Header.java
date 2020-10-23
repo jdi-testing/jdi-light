@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class Header extends Section {
 	@Css("form") public LoginForm loginForm;
-	@Css(".fa-sign-out") public WebElement logout;
+	@Css(".logout") public WebElement logout;
 	@Css("img#epam-logo") public WebElement epamLogo;
 	@Css("img#user-icon") public WebElement userIcon;
 	@XPath(".//*[@ui='label']") public WebElement userName;
