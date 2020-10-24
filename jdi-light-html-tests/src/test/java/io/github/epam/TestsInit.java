@@ -14,7 +14,6 @@ import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static io.github.com.StaticSite.homePage;
 
 @Listeners(TestNGListener.class)
 public interface TestsInit {

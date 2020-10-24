@@ -4,9 +4,9 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.common.TextTypes.INNER;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colors5;

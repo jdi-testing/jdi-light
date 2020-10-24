@@ -11,7 +11,6 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.SimpleTablePage.furnitureDoubleHidden;
 import static io.github.com.pages.SimpleTablePage.furnitureHidden;
 import static io.github.epam.html.tests.elements.complex.table.TableDataProvider.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;

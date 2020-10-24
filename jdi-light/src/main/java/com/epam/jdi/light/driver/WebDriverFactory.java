@@ -13,14 +13,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static java.lang.Thread.*;
+import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**

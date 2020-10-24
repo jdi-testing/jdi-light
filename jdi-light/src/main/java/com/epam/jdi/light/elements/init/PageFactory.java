@@ -24,7 +24,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.elements.init.InitActions.*;
@@ -33,8 +32,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.init;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;

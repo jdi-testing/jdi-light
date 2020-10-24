@@ -14,7 +14,7 @@ import com.epam.jdi.tools.Safe;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public abstract class UIBaseElement<A extends UIAssert<?,?>> implements ICoreElement, HasAssert<A>, HasInit {
-    protected Safe<UIElement> uiElement = new Safe<>(UIElement::new);
+    private Safe<UIElement> uiElement = new Safe<>(UIElement::new);
     public JDIBase base() { return core().base(); }
     public UIElement core() {
         return uiElement.get();

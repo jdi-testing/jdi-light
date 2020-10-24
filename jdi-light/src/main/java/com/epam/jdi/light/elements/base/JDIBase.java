@@ -37,7 +37,6 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;

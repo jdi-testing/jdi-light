@@ -2,7 +2,6 @@ package io.github.epam.html.tests.elements.complex.table;
 
 import com.epam.jdi.light.elements.complex.table.Single;
 import com.epam.jdi.light.elements.composite.WebPage;
-import io.github.com.custom.MarvelUser;
 import io.github.com.entities.MarvelUserSimple;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;

@@ -14,7 +14,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
@@ -22,7 +21,6 @@ import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static java.util.UUID.randomUUID;
 
 public class ActionObject {
     private JoinPoint jp;

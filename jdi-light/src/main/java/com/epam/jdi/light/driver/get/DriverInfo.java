@@ -13,7 +13,6 @@ import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
@@ -24,6 +23,7 @@ import static com.epam.jdi.light.driver.get.Platform.X64;
 import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static java.lang.System.getProperty;
