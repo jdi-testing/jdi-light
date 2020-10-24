@@ -24,23 +24,25 @@ public class BSActions {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
+        String classMethod = "";
         try {
-            logger.trace("<> BS: " + getMethodName(jp));
+            classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
+            logger.trace("<>@BS: " + classMethod);
         } catch (Exception ignore) { }
         ActionObject jInfo = null;
+        jInfo = newInfo(jp, "BS");
+        failedMethods.clear();
         try {
-            jInfo = newInfo(jp, "BS");
-            failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
-                ? stableAction(jInfo)
-                : defaultAction(jInfo);
-            logger.trace("<> BS: " + getMethodName(jp) + " >>> " +
-                (result == null ? "NO RESULT" : result));
+                    ? stableAction(jInfo)
+                    : defaultAction(jInfo);
+            logger.trace("<>@BS: " + classMethod + " >>> " +
+                    (result == null ? "NO RESULT" : result));
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {
-            logger.trace("BS exception:" + safeException(ex));
+            logger.debug("<>@BS exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

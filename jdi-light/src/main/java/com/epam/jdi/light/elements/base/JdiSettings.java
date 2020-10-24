@@ -79,6 +79,8 @@ public class JdiSettings {
         = "Found %s elements instead of one for Element '%s' during %s seconds";
     public static final String SEARCH_RULE_VALIDATION_FAILED
         = "Search rules failed for element. Please check base().searchRules() for element or in global settings(JDISettings.ELEMENT.searchRule)";
+
+    @JDebug
     public static List<WebElement> filterElements(JDIBase base, List<WebElement> elements) {
         if (elements.size() == 0)
             return new ArrayList<>();

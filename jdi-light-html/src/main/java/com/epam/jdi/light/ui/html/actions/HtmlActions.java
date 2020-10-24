@@ -22,23 +22,25 @@ public class HtmlActions {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
+        String classMethod = "";
         try {
-            logger.trace("<> Html: " + getMethodName(jp));
+            classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
+            logger.trace("<>@HM: " + classMethod);
         } catch (Exception ignore) { }
         ActionObject jInfo = null;
+        jInfo = newInfo(jp, "HM");
+        failedMethods.clear();
         try {
-            jInfo = newInfo(jp, "Html");
-            failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
-                ? stableAction(jInfo)
-                : defaultAction(jInfo);
-            logger.trace("<> Html: " + getMethodName(jp) + " >>> " +
-                (result == null ? "NO RESULT" : result));
+                    ? stableAction(jInfo)
+                    : defaultAction(jInfo);
+            logger.trace("<>@HM: " + classMethod + " >>> " +
+                    (result == null ? "NO RESULT" : result));
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {
-            logger.trace("Html exception:" + safeException(ex));
+            logger.debug("<>@HM exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

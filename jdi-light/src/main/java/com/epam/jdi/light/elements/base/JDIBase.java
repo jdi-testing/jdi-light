@@ -122,10 +122,14 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return setSearchRule("Any", ANY_ELEMENT);
     }
     public <T> T noValidation(JFunc<T> func) {
-        MapArray<String, JFunc1<WebElement, Boolean>> rules = searchRules.copy();
+        MapArray<String, JFunc1<WebElement, Boolean>> tempRules = searchRules.copy();
         searchRules.clear();
-        T result = func.execute();
-        searchRules = rules;
+        T result;
+        try {
+            result = func.execute();
+        } finally {
+            searchRules = tempRules;
+        }
         return result;
     }
     public JDIBase searchVisible() {
@@ -316,8 +320,10 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             els -> els.size() >= minAmount);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
-        return filterElements(this, result);
+        List<WebElement> l = filterElements(this, result);
+        return l;
     }
+    @JDebug
     protected List<WebElement> tryGetList() {
         List<WebElement> elements = getAll();
         if (elements == null)
@@ -397,10 +403,12 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
 
     @Override
     public String toString() {
-        initContext();
         try {
+            initContext();
             return PRINT_ELEMENT.execute(this);
-        } catch (Exception ex) { throw exception(ex, "Can't print element"); }
+        } catch (Exception ex) {
+            return "Can't print element";
+        }
     }
     public static String printWebElement(WebElement element) {
         String asString = element.toString().replaceAll("css selector", "css");

@@ -44,8 +44,8 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     }
     protected WebList list;
     public WebList list() {
-        WebList list = new WebList(core()).setUIElementName(this::elementTitle)
-                    .setName(getName());
+        WebList list = new WebList(core())
+            .setUIElementName(this::elementTitle).setName(getName());
         list.setStartIndex(getStartIndex());
         return list;
     }

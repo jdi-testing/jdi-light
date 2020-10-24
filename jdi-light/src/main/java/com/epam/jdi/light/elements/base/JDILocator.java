@@ -21,13 +21,13 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class JDILocator {
-    public JDILocator() { this.element = new Safe<>(UIElement::new); }
-    public JDILocator(JDIBase element) { this.element = new Safe<>(() -> element); }
+    public JDILocator(JDIBase base) { this.element = new Safe<>(() -> base); }
     public JDILocator copy() {
-        JDILocator locator = new JDILocator();
+        JDIBase base = element.get();
+        JDILocator locator = new JDILocator(base);
         locator.byLocator = byLocator;
         locator.isRoot = isRoot;
-        locator.element = new Safe<>(() -> element.get());
+        locator.element = new Safe<>(() -> base);
         locator.frames = frames;
         return locator;
     }

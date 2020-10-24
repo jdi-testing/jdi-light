@@ -12,6 +12,7 @@ import org.apache.logging.log4j.MarkerManager;
 
 import java.util.Properties;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.MULTI_THREAD;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
@@ -32,8 +33,8 @@ import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
 public class JDILogger implements ILogger {
     private static MapArray<String, JDILogger> loggers = new MapArray<>();
     private static Marker jdiMarker = MarkerManager.getMarker("JDI");
-    public Safe<FixedQueue<String>> debugLog = new Safe<>(() -> new FixedQueue<>(debugBufferSize));
     public static int debugBufferSize = 0;
+    public Safe<FixedQueue<String>> debugLog = new Safe<>(() -> new FixedQueue<>(debugBufferSize));
 
     public static JDILogger instance(String name) {
         if (!loggers.has(name))
@@ -93,20 +94,22 @@ public class JDILogger implements ILogger {
     }
     public <T> T logOff(JFunc<T> func) {
         LogLevels tempLevel = logLevel.get();
-        if (logLevel.get() == OFF) {
-            try { return func.invoke();
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
+        if (logLevel.get() == TRACE) {
+            try {
+                return func.invoke();
+            } catch (Throwable ex) {
+                throw exception(ex, "");
             }
         }
-        logLevel.set(OFF);
-        T result;
-        try{ result = func.invoke(); }
-        catch (Exception ex) {
-            throw new RuntimeException(ex);
+        logLevel.set(TRACE);
+        try {
+            return func.invoke();
+        } catch (Throwable ex) {
+            throw exception(ex, "");
         }
-        logLevel.set(tempLevel);
-        return result;
+        finally {
+            logLevel.set(tempLevel);
+        }
     }
     private String name;
     private Logger logger;

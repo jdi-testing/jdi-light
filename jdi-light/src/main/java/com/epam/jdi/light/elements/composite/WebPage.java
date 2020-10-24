@@ -33,6 +33,7 @@ import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
+import static com.epam.jdi.light.logger.AllureLogger.*;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -520,7 +521,7 @@ public class WebPage extends DriverBase implements PageObject {
             visualWindowCheck();
         }
         if (LOGS.screenStrategy.contains(NEW_PAGE)) {
-            AllureLogger.createAttachment(page.getName(), false);
+            createAttachment(page.getName(), false);
         }
         logger.toLog("Page '" + page.getName() + "' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());

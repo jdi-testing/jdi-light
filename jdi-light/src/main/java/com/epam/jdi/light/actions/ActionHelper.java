@@ -65,7 +65,6 @@ import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
-import static java.lang.Character.toUpperCase;
 import static java.lang.String.format;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.currentThread;
@@ -213,9 +212,7 @@ public class ActionHelper {
                 } catch (Throwable ignore) { }
             }
         }
-        if (PAGE.checkPageOpen != NONE || VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE || LOGS.screenStrategy.contains(NEW_PAGE)) {
-            processPage(jInfo);
-        }
+        processPage(jInfo);
         if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
             visualValidation(jp, message);
         }
@@ -230,7 +227,7 @@ public class ActionHelper {
     private static void performAssert(ActionObject jInfo) {
         boolean lastActionIsNotAssert = isAssert.get() == null || !isAssert.get();
         isAssert.set(true);
-        if (lastActionIsNotAssert) {
+        if (lastActionIsNotAssert && !LOGS.screenStrategy.contains(NEW_PAGE)) {
             String screenName = "Validate" + capitalize(jInfo.methodName());
             createAttachment(screenName, isClass(jInfo.jpClass(), Alerts.class));
         }
@@ -396,8 +393,8 @@ public class ActionHelper {
         if (LOGS.screenStrategy.contains(FAIL)) {
             try {
                 screenPath = SCREEN.tool.equalsIgnoreCase("robot")
-                        ? takeRobotScreenshot()
-                        : takeScreen("Failed" + capitalize(jInfo.methodName()));
+                    ? takeRobotScreenshot()
+                    : takeScreen("Failed" + capitalize(jInfo.methodName()));
             } catch (Exception ignore) { }
         }
         if (LOGS.htmlCodeStrategy.contains(FAIL)) {
@@ -490,8 +487,10 @@ public class ActionHelper {
             result[i] = Switch(args[i]).get(
                 Case(Objects::isNull, null),
                 Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
+                Case(arg -> isInterface(arg.getClass(), IBaseElement.class),
+                    arg -> ((IBaseElement)arg).base().toString()),
                 Case(arg -> isInterface(arg.getClass(), List.class),
-                        PrintUtils::printList),
+                    PrintUtils::printList),
                 Default(arg -> arg));
         return result;
     }
@@ -548,7 +547,7 @@ public class ActionHelper {
                 return ((IBaseElement) obj).base().toString();
             return isInterface(getJpClass(jp), INamed.class)
                     ? ((INamed) obj).getName()
-                    : obj.toString();
+                    : obj.getClass().getSimpleName();
         } catch (Throwable ex) {
             return "Can't get context locator";
         }
@@ -609,8 +608,7 @@ public class ActionHelper {
         return result;
     }
     private static List<StackTraceElement> arounds() {
-        List<StackTraceElement> arounds = where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround"));
+        List<StackTraceElement> arounds = getArounds();
         Collections.reverse(arounds);
         return arounds;
     }
@@ -618,9 +616,14 @@ public class ActionHelper {
         return !arounds().get(0).getClassName().equals(name);
     }
     public static int aroundCount() {
-        return where(currentThread().getStackTrace(),
-                s -> s.getMethodName().equals("jdiAround"))
-                .size();
+        return getArounds().size();
+    }
+    private static List<StackTraceElement> getArounds() {
+        return where(currentThread().getStackTrace(), ActionHelper::isAround);
+    }
+    private static boolean isAround(StackTraceElement ste) {
+        String methodName = ste.getMethodName();
+        return methodName.equals("jdiAround") || methodName.equals("stepAround");
     }
     static String getClassMethodName(JoinPoint jp) {
         String className = getJpClass(jp).getSimpleName();
@@ -665,9 +668,9 @@ public class ActionHelper {
         MethodSignature method = getJpMethod(jInfo.jp());
         try {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
-                    $("exception", exception),
-                    $("timeout", jInfo.timeout()),
-                    $("action", getClassMethodName(jInfo.jp()))
+                $("exception", exception),
+                $("timeout", jInfo.timeout()),
+                $("action", getClassMethodName(jInfo.jp()))
             ));
             return fillTemplate(result, jInfo.jp(), method);
         } catch (Throwable ex) {

@@ -34,23 +34,25 @@ public class ActionProcessor {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
+        String classMethod = "";
         try {
-            logger.trace("<> AO: " + getMethodName(jp));
+            classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
+            logger.trace("<>@AO: " + classMethod);
         } catch (Exception ignore) { }
         ActionObject jInfo = null;
+        jInfo = newInfo(jp, "AO");
+        failedMethods.clear();
         try {
-            jInfo = newInfo(jp, "AO");
-            failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
-            logger.trace("<> AO: " + getMethodName(jp) + " >>> " +
+            logger.trace("<>@AO: " + classMethod + " >>> " +
                 (result == null ? "NO RESULT" : result));
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {
-            logger.debug("AO exception:" + safeException(ex));
+            logger.debug("<>@AO exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
@@ -60,22 +62,25 @@ public class ActionProcessor {
     }
     @Around("debugPointcut()")
     public Object debugAround(ProceedingJoinPoint jp) {
-        logger.debug("<> JDebug: " + getMethodName(jp));
-        ActionObject jInfo = newInfo(jp, "AO");
+        String classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
+        logger.debug("<>@JDebug: " + classMethod);
         try {
+            ActionObject jInfo = newInfo(jp, "JDebug");
             Object result = jp.proceed();
-            logger.debug("<> JDebug: " + getMethodName(jp) + " >>> " +
-                (result == null ? "NO RESULT" : result));
+            logger.debug("<>@JDebug: %s >>> %s", classMethod, (result == null ? "NO RESULT" : result));
             return result;
         } catch (Throwable ex) {
+            logger.debug("debugAround exception:" + safeException(ex));
             throw exception(safeException(ex));
         }
     }
 
     @Before("stepPointcut()")
-    public void step(JoinPoint jp) {
+    public void stepAround(JoinPoint jp) {
         ActionObject jInfo = null;
         try {
+            String classMethod = getJpClass(jp).getSimpleName() + ":" + getMethodName(jp);
+            logger.debug("<>@Step: " + classMethod);
             jInfo = newInfo(jp, "AO");
             beforeStepAction(jInfo);
         } catch (Throwable ex) {

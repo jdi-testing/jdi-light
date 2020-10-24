@@ -24,23 +24,25 @@ public class AngularActions {
 
     @Around("jdiPointcut()")
     public Object jdiAround(final ProceedingJoinPoint jp) {
+        String classMethod = "";
         try {
-            logger.trace("<> Angular: " + getMethodName(jp));
+            classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
+            logger.trace("<>@AA: " + classMethod);
         } catch (Exception ignore) { }
         ActionObject jInfo = null;
+        jInfo = newInfo(jp, "AA");
+        failedMethods.clear();
         try {
-            jInfo = newInfo(jp, "Angular");
-            failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
-                ? stableAction(jInfo)
-                : defaultAction(jInfo);
-            logger.trace("<> Angular: " + getMethodName(jp) + " >>> " +
-                (result == null ? "NO RESULT" : result));
+                    ? stableAction(jInfo)
+                    : defaultAction(jInfo);
+            logger.trace("<>@AA: " + classMethod + " >>> " +
+                    (result == null ? "NO RESULT" : result));
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {
-            logger.debug("Angular exception:" + safeException(ex));
+            logger.debug("<>@AA exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

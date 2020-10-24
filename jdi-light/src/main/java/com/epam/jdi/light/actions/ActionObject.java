@@ -27,30 +27,32 @@ import static java.util.UUID.randomUUID;
 public class ActionObject {
     private JoinPoint jp;
     private ProceedingJoinPoint pjp;
-    private UUID uuid;
     private String processor;
 
-    public ActionObject(JoinPoint joinPoint, String name) {
-        this.jp = joinPoint;
+    private ActionObject(String name) {
         this.processor = name;
-        baseInit();
+    }
+    public ActionObject(JoinPoint joinPoint, String name) {
+        this(name);
+        this.jp = joinPoint;
     }
     public ActionObject(ProceedingJoinPoint joinPoint, String name) {
+        this(name);
         this.pjp = joinPoint;
-        this.processor = name;
-        baseInit();
     }
-    private void baseInit() {
-        uuid = randomUUID();
+    private int elementTimeout = -1;
+    private int elementTimeout() {
+        if (elementTimeout > -1)
+            return elementTimeout;
         try {
-            this.elementTimeout = element() != null
+            elementTimeout = element() != null
                 ? element().base().getTimeout()
                 : TIMEOUTS.element.get();
         } catch (Throwable ex) {
-            this.elementTimeout = 10;
+            elementTimeout = 10;
         }
+        return elementTimeout;
     }
-    public UUID uuid() { return uuid; }
     public JoinPoint jp() { return pjp != null ? pjp : jp; }
     public Object execute() throws Throwable {
         return pjp().proceed();
@@ -95,7 +97,6 @@ public class ActionObject {
     }
 
     public int timeout() { return timeout.get(); }
-    private int elementTimeout;
     private CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
     private int getTimeout() {
         JDIAction ja = jp() != null
@@ -103,7 +104,7 @@ public class ActionObject {
             : null;
         return ja != null && ja.timeout() != -1
             ? ja.timeout()
-            : elementTimeout;
+            : elementTimeout();
     }
     public JDIAction jdiAnnotation() {
         return getJdiAction(jp());
@@ -115,7 +116,7 @@ public class ActionObject {
 
     private void resetElementTimeout() {
         if (element() != null) {
-            element().base().waitSec(elementTimeout);
+            element().base().waitSec(elementTimeout());
         }
     }
     public void setElementTimeout() {
@@ -167,12 +168,12 @@ public class ActionObject {
         try {
             result += className() + "." + methodName() + "(";
             if (jp().getArgs().length > 0) {
-                result += print(map(jp().getArgs(), Object::toString));
+                result += print(map(jp().getArgs(), o -> o.getClass().getSimpleName()));
             }
             result += "); ";
         } catch (Throwable ignore) { }
         try {
-            result += "Element: " + element().toString() + "; ";
+            result += "Element: " + element().base().toString() + "; ";
         } catch (Throwable ignore) { }
         return result;
     }

@@ -43,7 +43,8 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
 
     public List<D> asData() {
         try {
-            if (dataType == null) return null;
+            if (dataType == null)
+                return null;
             List<T> elements = elements(0);
             return LinqUtils.map(elements, v -> asEntity(v, dataType));
         } catch (Exception ex) {
@@ -83,10 +84,10 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
             Type[] types = getGenericTypes(field);
             if (types.length == 0)
                 throw exception("Can't setup DataList generic parameters for field '%s'. Actual 0 but expected 1 or 2",
-                        field.getName());
+                    field.getName());
             if (types.length > 2)
                 throw exception("Can't setup DataList generic parameters for field '%s'. Actual more than %s but expected 1 or 2",
-                        field.getName(), types.length);
+                    field.getName(), types.length);
                 initClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
                 dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>) types[1];
         } catch (Exception ignore) { }
