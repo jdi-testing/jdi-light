@@ -102,7 +102,7 @@ public class IGridAssert<D, T extends IGrid<D>, A extends IGridAssert<D, T, A>> 
         jdiAssert(grid().row(rowName).visualCompareTo(row), Matchers.is(true));
         return (A) this;
     }
-    private Line findRow(List<Line> rows, String name, String columnName) {
+    public Line findRow(List<Line> rows, String name, String columnName) {
         Line line = first(rows, l -> l.get(columnName).equals(name));
         if (line == null)
             throw exception("Can't find %s row with column %s", name, columnName);
@@ -140,12 +140,6 @@ public class IGridAssert<D, T extends IGrid<D>, A extends IGridAssert<D, T, A>> 
                 jdiAssert("Table is not by descending at "+i+" row", Matchers.is(""));
         return (A)this;
     }
-
-     private Class<?> cl;
-     public A data(Class<?> cl) {
-         this.cl = cl;
-         return (A) this;
-     }
 
      public Compare exact(int count) {
          return new Compare(count, (A) this, EXACT);

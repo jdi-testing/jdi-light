@@ -22,10 +22,11 @@ import static org.hamcrest.Matchers.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class FileAssert extends BaseAssert<IBaseElement> {
+    private Safe<File> file = new Safe<>();
+
     public static FileAssert assertThatFile(String fileName) {
         return new FileAssert(fileName);
     }
-    private Safe<File> file = new Safe<>();
 
     public FileAssert(String fileName) {
         super(fileName);

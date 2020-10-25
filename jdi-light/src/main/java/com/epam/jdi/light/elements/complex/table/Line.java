@@ -36,9 +36,7 @@ public class Line implements IList<String>, IBaseElement {
     private JFunc<MultiMap<String, String>> dataMap;
     private WebList elements;
     private List<String> headers;
-    public JDIBase base() {
-        return elements.base();
-    }
+    protected int startIndex = ELEMENT.startIndex;
 
     public Line(List<String> list, List<String> headers, JDIBase base) {
         if (list == null || headers == null || list.size() == 0 || headers.size() == 0
@@ -67,6 +65,10 @@ public class Line implements IList<String>, IBaseElement {
             throw exception("Failed to create Line. Headers size='%s' is not equal to Elements size='%s'", headers.size(), values.size());
         }
         this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();
+    }
+
+    public JDIBase base() {
+        return elements.base();
     }
     private MultiMap<String, String> data;
     private List<String> list;
@@ -209,7 +211,6 @@ public class Line implements IList<String>, IBaseElement {
         return elements.isUseCache();
     }
 
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }

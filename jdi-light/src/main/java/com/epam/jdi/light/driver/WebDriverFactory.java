@@ -28,12 +28,13 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebDriverFactory {
-    private WebDriverFactory() { }
-
     public static boolean MULTI_THREAD = false;
     public static MapArray<String, JFunc<WebDriver>> DRIVERS = new MapArray<>();
     public static final MapArray<String, WebDriver> RUN_DRIVERS = new MapArray<>();
     private static final Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS = new Safe<>(MapArray::new);
+    public static boolean GETTING_DRIVER = false;
+
+    private WebDriverFactory() { }
 
     public static boolean noRunDrivers() {
         return !hasRunDrivers();
@@ -101,7 +102,6 @@ public class WebDriverFactory {
         }
         return driver;
     }
-    public static boolean GETTING_DRIVER = false;
     public static WebDriver getDriverByName(String driverName) {
         if (GETTING_DRIVER) {
             waitMultiThread();

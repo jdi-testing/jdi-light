@@ -30,9 +30,7 @@ import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JdiSettings {
-
     public static JAction2<JDIBase, WebElement> VALIDATE_FOUND_ELEMENT = JdiSettings::validateFoundElement;
-
     public static JFunc2<JDIBase, Object[], WebElement> GET_WITH_ARGS = JdiSettings::getWithArgs;
     public static JFunc2<JDIBase, Object[], WebElement> GET_AND_VALIDATE = (b, args) -> {
         WebElement element = GET_WITH_ARGS.execute(b, args);
@@ -41,6 +39,14 @@ public class JdiSettings {
         b.beforeSearch(element);
         return element;
     };
+
+    public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
+            = "Can't find Element '%s' during %s seconds";
+    public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
+            = "Found %s elements instead of one for Element '%s' during %s seconds";
+    public static final String SEARCH_RULE_VALIDATION_FAILED
+            = "Search rules failed for element. Please check base().searchRules() for element or in global settings(JDISettings.ELEMENT.searchRule)";
+
     private static WebElement getWithArgs(JDIBase b, Object[] args) {
         logger.trace("getWithArgs");
         if (b.webElement.hasValue()) {
@@ -73,12 +79,6 @@ public class JdiSettings {
             throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), base.toString(), base.getTimeout());
         return (filtered.size() > 1 ? filtered : els).get(0);
     }
-    public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
-        = "Can't find Element '%s' during %s seconds";
-    public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
-        = "Found %s elements instead of one for Element '%s' during %s seconds";
-    public static final String SEARCH_RULE_VALIDATION_FAILED
-        = "Search rules failed for element. Please check base().searchRules() for element or in global settings(JDISettings.ELEMENT.searchRule)";
 
     @JDebug
     public static List<WebElement> filterElements(JDIBase base, List<WebElement> elements) {
@@ -159,9 +159,10 @@ public class JdiSettings {
     }
 
     private static SearchContext getFrameContext(WebDriver driver, List<By> frames) {
+        WebDriver ctx = driver;
         getDefaultContext(driver);
         for (By frame : frames) {
-            List<WebElement> els = uiSearch(driver, getFrameLocator(frame, driver));
+            List<WebElement> els = uiSearch(ctx, getFrameLocator(frame, ctx));
             WebElement frameElement;
             if (els.size() > 0) {
                 frameElement = els.get(0);
@@ -169,13 +170,13 @@ public class JdiSettings {
                 throw exception("Can't find frame by locator: '%s'", frame);
             }
             try {
-                driver = driver.switchTo().frame(frameElement);
+                ctx = ctx.switchTo().frame(frameElement);
                 logger.debug("Switch to frame: " + shortBy(frame));
             } catch (Exception ex) {
                 throw exception(ex, "Can't switch to frame by locator: '%s'", frame);
             }
         }
-        return driver;
+        return ctx;
     }
     private static By getFrameLocator(By frame, WebDriver driver) {
         try {
@@ -234,6 +235,5 @@ public class JdiSettings {
     public static String addTextToXPath(By byLocator, String text) {
         return format("(%s)[.='%s']", getByLocator(byLocator), text);
     }
-
     // endregion
 }

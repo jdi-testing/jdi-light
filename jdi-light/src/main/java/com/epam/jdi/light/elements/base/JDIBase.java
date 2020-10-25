@@ -50,16 +50,32 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public abstract class JDIBase extends DriverBase implements IBaseElement, HasCache {
+    public MapArray<String, Object> params = new MapArray<>();
+    public JDILocator locator = new JDILocator(this);
+    public CacheValue<WebElement> webElement = new CacheValue<>();
+    public CacheValue<List<WebElement>> webElements = new CacheValue<>();
+    public MapArray<String, JFunc1<WebElement, Boolean>> searchRules = new MapArray<>();
+    public JAction1<UIElement> beforeSearch = null;
+    protected JFunc<WebElement> getElementFunc = null;
+    protected Safe<Integer> timeout = new Safe<>(() -> -1);
+    protected Safe<Integer> waitAfterTimeout = new Safe<>(() -> -1);
+    protected String waitAfterMethod = "";
+    private Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
+    public ElementArea clickAreaType = ELEMENT.clickType;
+    public TextTypes textType = ELEMENT.getTextType;
+    public SetTextTypes setTextType = ELEMENT.setTextType;
 
-    public JDIBase base() {
-        return this;
-    }
     public JDIBase() {
         searchRules.update(ELEMENT.searchRule);
     }
     public JDIBase(JDIBase base) {
         this(); setCore(base);
     }
+
+    public JDIBase base() {
+        return this;
+    }
+
     public JDIBase setCore(JDIBase base) {
         locator = base.locator.copy();
         name = base.name;
@@ -78,20 +94,14 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         waitAfterMethod = base.waitAfterMethod;
         return this;
     }
-    public MapArray<String, Object> params = new MapArray<>();
 
-    public JDILocator locator = new JDILocator(this);
     @Override
     public DriverBase setParent(Object parent) {
         return super.setParent(parent);
     }
-    public CacheValue<WebElement> webElement = new CacheValue<>();
-    public CacheValue<List<WebElement>> webElements = new CacheValue<>();
-    public MapArray<String, JFunc1<WebElement, Boolean>> searchRules = new MapArray<>();
     protected MapArray<String, JFunc1<WebElement, Boolean>> searchRules() {
         return searchRules;
     }
-    public JAction1<UIElement> beforeSearch = null;
     WebElement beforeSearch(WebElement el) {
         (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new UIElement(el));
         return el;
@@ -182,9 +192,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public List<By> getFrames() { return locator.getFrames(); }
 
-    protected Safe<Integer> timeout = new Safe<>(() -> -1);
-    protected Safe<Integer> waitAfterTimeout = new Safe<>(() -> -1);
-    protected String waitAfterMethod = "";
     public IBaseElement waitAfter(int timeout, String methodName) {
         waitAfterTimeout = new Safe<>(() -> timeout > 0 ? timeout : 1);
         if (isNotBlank(methodName))
@@ -230,7 +237,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public WebElement get() {
         return get(new Object[]{});
     }
-    protected JFunc<WebElement> getElementFunc = null;
     public JDIBase setGetFunc(JFunc<WebElement> func) {
         getElementFunc = func;
         return this;
@@ -454,11 +460,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public void actionsWithElement(JFunc1<Actions, Actions> action) {
         action.execute(actions.get().moveToElement(get())).build().perform();
     }
-    private Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
-
-    public ElementArea clickAreaType = ELEMENT.clickType;
-    public TextTypes textType = ELEMENT.getTextType;
-    public SetTextTypes setTextType = ELEMENT.setTextType;
 
     public void offCache() {
         webElement.useCache(false);

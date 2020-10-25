@@ -24,17 +24,20 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  */
 public abstract class DriverBase implements JDIElement {
     public String driverName = DRIVER.name;
+    public String name = "";
+    public String varName = "";
+    public String typeName = "";
+    public String failElement = "";
+    public Object parent;
+    protected String context;
+    private String pageName;
+
     public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
     public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }
 
     public <T> T asEntity(Class<T> entityClass) {
         return UIUtils.asEntity(this, entityClass);
     }
-    public String name = "";
-    public String varName = "";
-    public String typeName = "";
-    public String failElement = "";
-    public Object parent;
     public List<Object> parents() {
         List<Object> parents = new ArrayList<>();
         Object p = parent;
@@ -44,7 +47,6 @@ public abstract class DriverBase implements JDIElement {
         }
         return parents;
     }
-    protected String context;
     public DriverBase setParent(Object parent) {
         this.parent = parent;
         return this;
@@ -76,7 +78,6 @@ public abstract class DriverBase implements JDIElement {
     public String getName() {
         return isBlank(name) ? getClass().getSimpleName() : name;
     }
-    private String pageName;
     public void setPage(String page) {
         pageName = page;
     }

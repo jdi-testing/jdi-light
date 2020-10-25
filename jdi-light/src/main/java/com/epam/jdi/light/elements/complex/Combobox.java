@@ -14,13 +14,14 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
 public class Combobox extends UIListBase<DropdownAssert> implements IsCombobox {
+    protected int startIndex = ELEMENT.startIndex;
+
     public boolean isExpanded() { throw exception("isExpanded can not be used with this element"); }
     @Override
     public DropdownAssert is() {
         return new DropdownAssert().set(this);
     }
 
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }

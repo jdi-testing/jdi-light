@@ -9,9 +9,10 @@ import com.epam.jdi.tools.func.JFunc;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class CacheAll<T> extends CacheValue<T> {
+    private Safe<Boolean> gotAll = new Safe<>(() -> false);
+
     public CacheAll() { }
     public CacheAll(JFunc<T> getRule) { setRule(getRule); }
-    private Safe<Boolean> gotAll = new Safe<>(() -> false);
     protected boolean isGotAll() {
         if (!hasValue())
             gotAll.set(false);

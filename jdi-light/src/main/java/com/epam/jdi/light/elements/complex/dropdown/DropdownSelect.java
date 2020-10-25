@@ -19,6 +19,8 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsDropdown {
+    protected int startIndex = ELEMENT.startIndex;
+
     protected Selector selector() {
         return new Selector().setCore(Selector.class, base());
     }
@@ -68,7 +70,6 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
     }
 
     public boolean isExpanded() { throw exception("isExpanded can not be used with this element"); }
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }

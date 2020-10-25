@@ -16,13 +16,14 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
  */
 public class BaseAssert<E extends IBaseElement> implements IBaseElement {
     public String name;
+    public String failElement;
+    public Safe<E> element = new Safe<>(() -> null);
+    public static JFunc1<JDIElement, String> PRINT_ASSERT = JDIElement::toString;
+
     @Override
     public String getName() {
         return name;
     }
-    public String failElement;
-    public Safe<E> element = new Safe<>(() -> null);
-    public static JFunc1<JDIElement, String> PRINT_ASSERT = JDIElement::toString;
 
     public JDIBase base() {
         E instance = element.get();

@@ -23,7 +23,10 @@ import static com.epam.jdi.tools.LinqUtils.ifSelect;
  */
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
-public class DataListOptions extends UIListBase<DropdownAssert> implements IsCombobox, HasStartIndex {
+public class DataListOptions extends UIListBase<DropdownAssert>
+        implements IsCombobox, HasStartIndex {
+    protected int startIndex = ELEMENT.startIndex;
+
     @Override
     public WebList list() {
         WebList list = $$("#"+ core().attr("list")+" option")
@@ -97,7 +100,6 @@ public class DataListOptions extends UIListBase<DropdownAssert> implements IsCom
     public DropdownAssert is() {
         return new DropdownAssert().set(this);
     }
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }

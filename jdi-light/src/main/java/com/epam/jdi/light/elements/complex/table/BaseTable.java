@@ -64,6 +64,24 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int[] columnsMapping = new int[]{};
     protected String rowHeaderName = "";
     protected int startIndex = ELEMENT.startIndex;
+    public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
+    protected boolean locatorsValidated = false;
+
+    protected CacheAll<MapArray<String, WebList>> rows
+            = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, WebList>> columns
+            = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, MapArray<String, UIElement>>> cells
+            = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, MapArray<String, String>>> cellsValues
+            = new CacheAll<>(MapArray::new);
+    // Amount of Rows
+    protected CacheValue<Integer> count = new CacheValue<>(this::getCount);
+    protected CacheValue<List<String>> header = new CacheValue<>(this::getHeader);
+    protected CacheValue<List<String>> rowHeader = new CacheValue<>(this::getRowHeader);
+    // Amount of Columns
+    protected CacheValue<Integer> size = new CacheValue<>(this::getTableSize);
+
     public int getStartIndex() {
         return startIndex;
     }
@@ -71,7 +89,6 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         startIndex = index;
     }
 
-    protected boolean locatorsValidated = false;
     @Override
     public UIElement core() {
         UIElement core = super.core();
@@ -122,26 +139,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return index + getStartIndex();
     }
 
-    protected CacheAll<MapArray<String, WebList>> rows
-        = new CacheAll<>(MapArray::new);
-    protected CacheAll<MapArray<String, WebList>> columns
-        = new CacheAll<>(MapArray::new);
-    protected CacheAll<MapArray<String, MapArray<String, UIElement>>> cells
-            = new CacheAll<>(MapArray::new);
-    protected CacheAll<MapArray<String, MapArray<String, String>>> cellsValues
-            = new CacheAll<>(MapArray::new);
-    // Amount of Rows
-    protected CacheValue<Integer> count = new CacheValue<>(this::getCount);
-    protected CacheValue<List<String>> header = new CacheValue<>(this::getHeader);
-    protected CacheValue<List<String>> rowHeader = new CacheValue<>(this::getRowHeader);
-    // Amount of Columns
-    protected CacheValue<Integer> size = new CacheValue<>(this::getTableSize);
-
     public void setHeader(List<String> header) {
         this.header.setFinal(header);
     }
 
-    public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
     public WebList headerUI() {
         WebList header = core().finds(headerLocator).setName(getName() + " header");
         if (header.size() == 0) {

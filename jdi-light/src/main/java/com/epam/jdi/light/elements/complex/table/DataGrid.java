@@ -33,7 +33,12 @@ import static java.util.Arrays.asList;
  */
 public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAssert<D, IDataGrid<L, D>,?>>
         implements ISetup, IGrid<D>, IDataGrid<L, D>, HasInit {
+    protected Class<D> dataClass = null;
+    protected Class<L> lineClass = null;
     protected Safe<Grid> grid = new Safe<>(Grid::new);
+    public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
+    protected int startIndex = ELEMENT.startIndex;
+
     public Grid grid() {
         return grid.get();
     }
@@ -42,8 +47,6 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         element.init();
         grid = new Safe<>(() -> element);
     }
-    protected Class<D> dataClass = null;
-    protected Class<L> lineClass = null;
     @Override
     public UIElement core() {
         return grid().core();
@@ -149,8 +152,6 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
             throw exception(ex, "Can't get DataTable %s data or entity class", getName());
         }
     }
-
-    public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
     protected WebList tryFilterHeader(WebList headerUI) {
         if (headerUI.size() < grid().size) {
             throw exception("Header has size less than expected - %s. Please verify header locator or override headerUI() method", grid().size);
@@ -204,7 +205,6 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         }
         return instance;
     }
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }

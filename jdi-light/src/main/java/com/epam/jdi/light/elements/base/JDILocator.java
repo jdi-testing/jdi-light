@@ -20,6 +20,12 @@ import static org.apache.commons.lang3.StringUtils.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class JDILocator {
+    private By byLocator;
+    private List<By> frames;
+    public boolean isRoot = false;
+    private Safe<JDIBase> element;
+    private Object[] args = new Object[]{};
+
     public JDILocator(JDIBase base) { this.element = new Safe<>(() -> base); }
     public JDILocator copy() {
         JDIBase base = element.get();
@@ -30,12 +36,6 @@ public class JDILocator {
         locator.frames = frames;
         return locator;
     }
-
-    private By byLocator;
-    private List<By> frames;
-    public boolean isRoot = false;
-    private Safe<JDIBase> element;
-    private Object[] args = new Object[]{};
 
     public By getLocator() { return byLocator; }
     public List<By> getFrames() { return frames; }

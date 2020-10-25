@@ -42,6 +42,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     protected List<Integer> columnsMapping;
     protected boolean columnsValidated = false;
     protected boolean locatorsValidated = false;
+    protected int startIndex = ELEMENT.startIndex;
 
     public WebList webCells() {
         return core().finds(allCellsLocator)
@@ -205,7 +206,6 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
             throw exception(ex, "Column validation failed. Please correct header locator or just setup correct 'columnsMapping' in @JTable");
         }
     }
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }
