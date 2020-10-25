@@ -30,7 +30,6 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.complex.WebList.newList;
-import static com.epam.jdi.light.elements.complex.table.Line.initLine;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -451,7 +450,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         List<String> result = new ArrayList<>();
         for (int i = getStartIndex(); i < header().size() + getStartIndex(); i++)
             result.add(lines.get(i).getText());
-        return initLine(result, header());
+        return new Line(result, header(), base());
     }
 
     /**
@@ -469,7 +468,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         for (String line : lines) {
             result.add(line);
             if (result.size() == header().size()) {
-                listOfLines.add(initLine(result, header()));
+                listOfLines.add(new Line(result, header(), base()));
                 result.clear();
             }
         }

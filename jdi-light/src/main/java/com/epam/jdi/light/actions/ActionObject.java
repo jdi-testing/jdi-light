@@ -1,10 +1,12 @@
 package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import org.aspectj.lang.JoinPoint;
@@ -19,7 +21,6 @@ import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class ActionObject {
@@ -43,8 +44,8 @@ public class ActionObject {
         if (elementTimeout > -1)
             return elementTimeout;
         try {
-            elementTimeout = element() != null
-                ? element().base().getTimeout()
+            elementTimeout = isBase()
+                ? element().getTimeout()
                 : TIMEOUTS.element.get();
         } catch (Throwable ex) {
             elementTimeout = 10;
@@ -67,24 +68,33 @@ public class ActionObject {
     }
     public Object object() { return obj.get(); }
     private CacheValue<Object> obj = new CacheValue<>(
-            () -> jp().getThis() != null ? jp().getThis() : jp().getSignature().getDeclaringType().getSimpleName());
+            () -> instance() != null ? instance() : jp().getSignature().getDeclaringType().getSimpleName());
 
-    public IBaseElement element() {
+    public Object instance() {
+        return jp().getThis();
+    }
+    public JDIBase element() {
         try {
-            if (jp().getThis() != null && isInterface(getJpClass(jp()), IBaseElement.class)) {
-                IBaseElement element = (IBaseElement) jp().getThis();
+            if (instance() != null && isInterface(getJpClass(jp()), IBaseElement.class)) {
+                IBaseElement element = (IBaseElement) instance();
                 if (element.base() != null)
-                    return element;
+                    return element.base();
             }
             return null;
         } catch (Throwable ex) {
             return null;
         }
     }
+    public boolean isBase() {
+        return element() != null;
+    }
+    public boolean isCore() {
+        return core() != null;
+    }
     public ICoreElement core() {
         try {
-            if (jp().getThis() != null && isInterface(getJpClass(jp()), ICoreElement.class)) {
-                ICoreElement element = (ICoreElement) jp().getThis();
+            if (instance() != null && isInterface(getJpClass(jp()), ICoreElement.class)) {
+                ICoreElement element = (ICoreElement) instance();
                 if (element.core() != null)
                     return element;
             }
@@ -113,13 +123,14 @@ public class ActionObject {
     }
 
     private void resetElementTimeout() {
-        if (element() != null) {
-            element().base().waitSec(elementTimeout());
+        if (isBase()) {
+            element().waitSec(elementTimeout());
         }
     }
     public void setElementTimeout() {
-        if (element() != null) {
-            element().base().waitSec(timeout());
+        if (isBase()) {
+            elementTimeout = element().getTimeout();
+            element().waitSec(timeout());
         }
     }
 
@@ -157,8 +168,7 @@ public class ActionObject {
         return getClassMethodName(jp());
     }
 
-    @Override
-    public String toString() {
+    public String print() {
         String result = processor;
         try {
             result += "[" + aroundCount() + "]: ";
@@ -166,12 +176,13 @@ public class ActionObject {
         try {
             result += className() + "." + methodName() + "(";
             if (jp().getArgs().length > 0) {
-                result += print(map(jp().getArgs(), o -> o.getClass().getSimpleName()));
+                result += PrintUtils.print(map(jp().getArgs(), o -> o.getClass().getSimpleName()));
             }
             result += "); ";
         } catch (Throwable ignore) { }
         try {
-            result += "Element: " + element().base().toString() + "; ";
+            if (isBase())
+                result += "Element: " + element().toString() + "; ";
         } catch (Throwable ignore) { }
         return result;
     }

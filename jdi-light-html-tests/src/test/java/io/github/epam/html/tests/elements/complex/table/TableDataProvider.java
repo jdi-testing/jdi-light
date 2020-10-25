@@ -24,7 +24,7 @@ public class TableDataProvider {
 
 
     public static String[] NAME_COLUMN = { "Chair", "Table", "Sofa", "Kitchen", "Robot" };
-    public static String[] WEIGHT_COLUMN = { "2","3.5", "2", "", "" };
-    public static String[] COST_COLUMN = { "3.5","3.5", "2", "400", "" };
-    public static String[] TYPE_COLUMN = { "furniture","furniture", "furniture", "kitchen", "robo" };
+    public static String[] WEIGHT_COLUMN = { "2", "3.5", "2", "", "" };
+    public static String[] COST_COLUMN = { "3.5", "3.5", "2", "400", "" };
+    public static String[] TYPE_COLUMN = { "furniture", "furniture", "furniture", "kitchen", "robo" };
 }

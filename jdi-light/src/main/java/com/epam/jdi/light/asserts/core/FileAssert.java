@@ -3,6 +3,7 @@ package com.epam.jdi.light.asserts.core;
 import com.epam.jdi.light.asserts.generic.BaseAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.tools.Safe;
 import org.hamcrest.Matcher;
 
 import java.io.File;
@@ -24,11 +25,11 @@ public class FileAssert extends BaseAssert<IBaseElement> {
     public static FileAssert assertThatFile(String fileName) {
         return new FileAssert(fileName);
     }
-    private File file;
+    private Safe<File> file = new Safe<>();
 
     public FileAssert(String fileName) {
         super(fileName);
-        file = new File(mergePath(DRIVER.downloadsFolder, fileName));
+        file.set(new File(mergePath(DRIVER.downloadsFolder, fileName)));
     }
     /**
      * Check that file is downloaded
@@ -36,7 +37,7 @@ public class FileAssert extends BaseAssert<IBaseElement> {
      */
     @JDIAction("Assert that file '{name}' is downloaded")
     public FileAssert isDownloaded() {
-        assertThat(file.exists(), is(true));
+        assertThat(file.get().exists(), is(true));
         return this;
     }
 
@@ -48,7 +49,7 @@ public class FileAssert extends BaseAssert<IBaseElement> {
     @JDIAction("Assert that file '{name}' text {0}")
     public FileAssert text(Matcher<String> text) {
         try {
-            assertThat(readFileToString(file, "UTF-8"), text);
+            assertThat(readFileToString(file.get(), "UTF-8"), text);
             return this;
         } catch (Exception ex) {
             throw exception(ex, "Error reading file");
@@ -63,7 +64,7 @@ public class FileAssert extends BaseAssert<IBaseElement> {
      */
     @JDIAction("Assert file '{name}' size")
     public FileAssert hasSize(Matcher<Long> size) {
-        assertThat(file.length(), size);
+        assertThat(file.get().length(), size);
         return this;
     }
     /**
@@ -73,7 +74,7 @@ public class FileAssert extends BaseAssert<IBaseElement> {
      */
     @JDIAction("Assert file '{name}' size")
     public FileAssert hasSize(long min, long max) {
-        long fileSize = file.length();
+        long fileSize = file.get().length();
         assertThat(fileSize, greaterThan(min));
         assertThat(fileSize, lessThan(max));
         return this;

@@ -23,6 +23,7 @@ import static io.github.epam.test.data.ListData.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
+
 /**
  * Created by Roman_Iovlev on 3/2/2018.
  */
@@ -39,7 +40,7 @@ public class ElementsGoogleTests implements TestsInit {
         for(SearchResult result : data) {
             searchValues.add(result.getText());
         }
-        assertEquals(print(searchValues), searchResult);
+        assertThat(print(searchValues), containsString(searchResult));
     }
     @Step
     public void iterationStep2(List<SearchResult> data) {
@@ -47,7 +48,7 @@ public class ElementsGoogleTests implements TestsInit {
         for(SearchResult result : data) {
             searchValues.add(result.print());
         }
-        assertEquals(print(searchValues), searchResultPrint);
+        assertThat(print(searchValues), containsString(searchResultPrint));
     }
     @Test
     public void iterationWithStepTest() {
@@ -67,7 +68,7 @@ public class ElementsGoogleTests implements TestsInit {
         for(SearchResult result : searchPage.search) {
             searchValues.add(result.print());
         }
-        assertEquals(print(searchValues), searchResultPrint);
+        assertThat(print(searchValues), containsString(searchResultPrint));
     }
     @Test
     public void iterationTest1() {
@@ -75,7 +76,7 @@ public class ElementsGoogleTests implements TestsInit {
         for(SearchResult result : searchPage.search2) {
             searchValues.add(result.getText());
         }
-        assertEquals(print(searchValues), searchResult);
+        assertThat(print(searchValues), containsString(searchResult));
     }
     @Test
     public void iterationTest2() {
@@ -83,7 +84,7 @@ public class ElementsGoogleTests implements TestsInit {
         for(SearchResult result : search3) {
             searchValues.add(result.getText());
         }
-        assertEquals(print(searchValues), searchResult);
+        assertThat(print(searchValues), containsString(searchResult));
     }
     @Test
     public void validateEntitiesTests() {
@@ -128,23 +129,11 @@ public class ElementsGoogleTests implements TestsInit {
         "SearchResult{NAME=JDI OWNER CONTACT; DESCRIPTION=Write an email directly to Framework owner and main architect Iovlev Roman; LINK=mailto:roman.iovlev.jdi@gmail.com}," +
         "SearchResult{NAME=JDI TEST SITE; DESCRIPTION=JDI Site for testing; LINK=https://jdi-testing.github.io/jdi-light/}," +
         "SearchResult{NAME=JDI YOUTUBE CHANNEL; DESCRIPTION=JDI Tutorial Official Youtube; LINK=https://www.youtube.com/channel/UCck0VgwbPVgXht5h6PGCdgg/videos?view_as=subscriber}," +
-        "SearchResult{NAME=JDI DOCUMENTATION; DESCRIPTION=JDI Documentation; LINK=https://jdi-docs.github.io/jdi-light}," +
-        "SearchResult{NAME=JDI PARTNERS GROUP - COMA QA; DESCRIPTION=Minsk Testing community Coma QA; LINK=https://www.facebook.com/comaqa.by/}";
-    static final String searchResult = "JDI SKYPE\n" +
-        "JDI Skype group with active JDI users\n" +
-        "Join Skype group,JDI OWNER CONTACT\n" +
-        "Write an email directly to Framework owner and main architect Iovlev Roman\n" +
-        "Write email,JDI TEST SITE\n" +
-        "JDI Site for testing\n" +
-        "Visit Site,JDI YOUTUBE CHANNEL\n" +
-        "JDI Tutorial Official Youtube\n" +
-        "Visit Channel,JDI DOCUMENTATION\n" +
-        "JDI Documentation\n" +
-        "See more,JDI VK GROUP\n" +
-        "Russian Community VK group\n" +
-        "Visit Group,JDI FACEBOOK GROUP\n" +
-        "English Community Facebook group\n" +
-        "Visit Group,JDI PARTNERS GROUP - COMA QA\n" +
-        "Minsk Testing community Coma QA\n" +
-        "Visit Group";
+        "SearchResult{NAME=JDI DOCUMENTATION; DESCRIPTION=JDI Documentation; LINK=https://jdi-docs.github.io/jdi-light}";
+    static final String searchResult =
+        "JDI SKYPE\nJDI Skype group with active JDI users\nJoin Skype group," +
+        "JDI OWNER CONTACT\nWrite an email directly to Framework owner and main architect Iovlev Roman\nWrite email," +
+        "JDI TEST SITE\nJDI Site for testing\nVisit Site," +
+        "JDI YOUTUBE CHANNEL\nJDI Tutorial Official Youtube\nVisit Channel,JDI DOCUMENTATION\n" +
+        "JDI Documentation\nSee more";
 }

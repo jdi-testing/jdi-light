@@ -25,13 +25,18 @@ public class BaseAssert<E extends IBaseElement> implements IBaseElement {
     public static JFunc1<JDIElement, String> PRINT_ASSERT = JDIElement::toString;
 
     public JDIBase base() {
-        return element.get().base();
+        E instance = element.get();
+        if (instance == null)
+            return null;
+        return instance.base();
     }
     public E element() {
-        E el = element.get();
-        if (isInterface(el.getClass(), HasRefresh.class))
-            ((HasRefresh)el).refresh();
-        return el;
+        E instance = element.get();
+        if (instance == null)
+            return null;
+        if (isInterface(instance.getClass(), HasRefresh.class))
+            ((HasRefresh)instance).refresh();
+        return instance;
     }
 
     public BaseAssert() { }

@@ -183,7 +183,7 @@ public class ActionHelper {
     static Safe<List<String>> allureSteps = new Safe<>(ArrayList::new);
     public static void beforeJdiAction(ActionObject jInfo) {
         try {
-            logger.trace("beforeJdiAction(): " + jInfo.toString());
+            logger.trace("beforeJdiAction(): " + jInfo.print());
         } catch (Throwable ignore) { }
         JoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
@@ -202,7 +202,7 @@ public class ActionHelper {
         if (LOGS.writeToLog) {
             logger.toLog(message, logLevel(jInfo));
         }
-        if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
+        if (jInfo.isCore() && ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
             if (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
                 || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo)) {
                 try {
@@ -290,9 +290,9 @@ public class ActionHelper {
         TIMEOUTS.element.reset();
     }
     private static void waitAfterAction(ActionObject jInfo) {
-        IBaseElement element = jInfo.element();
+        JDIBase element = jInfo.element();
         if (element == null) return;
-        Pair<String, Integer> waitAfter = element.base().waitAfter();
+        Pair<String, Integer> waitAfter = element.waitAfter();
         if (isNotBlank(waitAfter.key) && jInfo.methodName().equalsIgnoreCase(waitAfter.key) && waitAfter.value > 0) {
             Timer.sleep(waitAfter.value * 1000);
         }
@@ -328,9 +328,9 @@ public class ActionHelper {
         }
         String beforeLogString = capitalize(logString);
         logger.trace("getBeforeLogString(): " + beforeLogString);
-        if (isBlank(logString))
+        if (isBlank(beforeLogString))
             return "";
-        return capitalize(logString);
+        return beforeLogString;
     }
     public static MapArray<String, Object> getLogOptions(JoinPoint jp) {
         MapArray<String, Object> map = new MapArray<>();
@@ -346,7 +346,7 @@ public class ActionHelper {
     }
     public static void processPage(ActionObject jInfo) {
         getWindows();
-        Object element = jInfo.jp().getThis();
+        Object element = jInfo.instance();
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
             WebPage page = getPage(element);
             if (page != null) {
@@ -399,8 +399,8 @@ public class ActionHelper {
             htmlSnapshot = takeHtmlCodeOnFailure();
         }
         if (LOGS.requestsStrategy.contains(FAIL)) {
-            WebDriver driver = jInfo.element() != null
-                ? jInfo.element().base().driver()
+            WebDriver driver = jInfo.isBase()
+                ? jInfo.element().driver()
                 : getDriver();
             List<LogEntry> requests = driver.manage().logs().get("performance").getAll();
             List<String> errorEntries = LinqUtils.map(filter(requests, LOGS.filterHttpRequests),
@@ -410,8 +410,11 @@ public class ActionHelper {
         failStep(jInfo.stepUId, screenPath, htmlSnapshot, errors);
     }
     static WebPage getPage(Object element) {
-        if (isInterface(element.getClass(), IBaseElement.class))
-            return ((IBaseElement) element).base().getPage();
+        if (isInterface(element.getClass(), IBaseElement.class)) {
+            JDIBase base = ((IBaseElement) element).base();
+            if (base != null)
+                return base.getPage();
+        }
         if (isClass(element.getClass(), WebPage.class))
             return (WebPage) element;
         if (isClass(element.getClass(), DriverBase.class))
@@ -513,55 +516,33 @@ public class ActionHelper {
     private static JFunc<String> func(Object obj, Method m) {
         return () -> m.invoke(obj).toString();
     }
-    static String getElementName(JoinPoint jp) {
+
+    static String getInfo(JoinPoint jp, JFunc1<JDIBase, String> baseInterface,
+              JFunc1<Object, String> defaultName, String defaultText) {
         try {
             Object obj = jp.getThis();
-            if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
+            if (obj == null)
+                return jp.getSignature().getDeclaringType().getSimpleName();
+            if (baseInterface != null && isInterface(getJpClass(jp), IBaseElement.class))
+                return baseInterface.execute(((IBaseElement) obj).base());
             return isInterface(getJpClass(jp), INamed.class)
                 ? ((INamed) obj).getName()
-                : obj.toString();
+                : defaultName.execute(obj);
         } catch (Throwable ex) {
-            return "Can't get element name";
+            return defaultText;
         }
     }
-    static String getElementContext(JoinPoint jp) {
-        try {
-            Object obj = jp.getThis();
-            if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
-            if (isInterface(getJpClass(jp), IBaseElement.class))
-                return ((IBaseElement) obj).base().printFullLocator();
-            return isInterface(getJpClass(jp), INamed.class)
-                    ? ((INamed) obj).getName()
-                    : obj.toString();
-        } catch (Throwable ex) {
-            return "Can't get context locator";
-        }
+    static String getElementName(JoinPoint jp) {
+        return getInfo(jp, null, Object::toString, "Can't get element name");
     }
     static String getFullInfo(JoinPoint jp) {
-        try {
-            Object obj = jp.getThis();
-            if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
-            if (isInterface(getJpClass(jp), IBaseElement.class))
-                return ((IBaseElement) obj).base().toString();
-            return isInterface(getJpClass(jp), INamed.class)
-                    ? ((INamed) obj).getName()
-                    : obj.getClass().getSimpleName();
-        } catch (Throwable ex) {
-            return "Can't get context locator";
-        }
+        return getInfo(jp, JDIBase::toString, o -> o.getClass().getSimpleName(), "Can't get full info");
+    }
+    static String getElementContext(JoinPoint jp) {
+        return getInfo(jp, JDIBase::printFullLocator, Object::toString, "Can't get context");
     }
     static String getElementLocator(JoinPoint jp) {
-        try {
-            Object obj = jp.getThis();
-            if (obj == null) return jp.getSignature().getDeclaringType().getSimpleName();
-            if (isInterface(getJpClass(jp), IBaseElement.class))
-                return ((IBaseElement) obj).base().locator.toString();
-            return isInterface(getJpClass(jp), INamed.class)
-                    ? ((INamed) obj).getName()
-                    : obj.toString();
-        } catch (Throwable ex) {
-            return "Can't get element locator";
-        }
+        return getInfo(jp, b -> b.locator.toString(), Object::toString, "Can't get element locator");
     }
     static String getActionNameFromTemplate(MethodSignature method, String value, MapArray<String, Object>... args) {
         String result;
@@ -732,7 +713,7 @@ public class ActionHelper {
             }
         }
         try {
-            logger.debug(jInfo.toString());
+            logger.debug(jInfo.print());
         } catch (Throwable ignore) { }
         return jInfo;
     }

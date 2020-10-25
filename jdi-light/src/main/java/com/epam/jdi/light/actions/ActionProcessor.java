@@ -39,16 +39,14 @@ public class ActionProcessor {
             classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
             logger.trace("<>@AO: " + classMethod);
         } catch (Exception ignore) { }
-        ActionObject jInfo = null;
-        jInfo = newInfo(jp, "AO");
+        ActionObject jInfo = newInfo(jp, "AO");
         failedMethods.clear();
         try {
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
-            logger.trace("<>@AO: " + classMethod + " >>> " +
-                (result == null ? "NO RESULT" : result));
+            logger.trace("<>@AO: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {
