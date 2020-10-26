@@ -1,25 +1,24 @@
 package org.jdiai;
 
+import com.epam.jdi.tools.LinqUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;
-import static java.lang.String.format;
-import static org.jdiai.GetTypes.dataType;
-import static org.jdiai.JSTemplates.*;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static org.jdiai.ListSearch.CHAIN;
 import static org.jdiai.ListSearch.MULTI;
-import static org.jdiai.WebDriverByUtils.getByLocator;
 
-public class JSDriver {
+public class JSDriver implements JSInterface {
     private final WebDriver driver;
     private final List<By> locators;
     public static boolean logQuery = false;
     public ListSearch strategy = CHAIN;
+
     public JSDriver(WebDriver driver, By... locators) {
         this(driver, newList(locators));
     }
@@ -35,70 +34,56 @@ public class JSDriver {
         strategy = MULTI;
         return this;
     }
-
-    protected Object jsExecute(String query) {
-        if (logQuery)
-            System.out.println(query);
-        return ((JavascriptExecutor) driver).executeScript(query);
+    private By first() {
+        return LinqUtils.first(locators);
     }
-    private String selector(By locator) {
-        return getByLocator(locator).replaceAll("'", "\"");
-    }
-
-
-    private String getOneFromOne(String context, By locator) {
-        return MessageFormat.format(dataType(locator).get, context, selector(locator));
-    }
-    private String getListFromOne(String context, By locator) {
-        return MessageFormat.format(dataType(locator).getAll, context, selector(locator)) + ";\n";
-    }
-    private String getListFromOne(String context, By locator, String param) {
-        GetData data = dataType(locator);
-        return "elements = " + MessageFormat.format(data.getAll, context, selector(locator)) + ";\n"
-                + format(GET_LIST, data.length, format(data.index, "i"), param);
-    }
-    private String getOneFromList(By locator) {
-        return format(GET_ONE_FROM_LIST, MessageFormat.format(dataType(locator).get, "elements[i]", selector(locator)));
-    }
-    private String getListFromList(By locator, By prevLocator) {
-        GetData prevData = dataType(prevLocator);
-        GetData data = dataType(locator);
-        return format(GET_LIST_FROM_LIST, prevData.length,
-                MessageFormat.format(data.getAll, "elements[i]", selector(locator)),
-                data.length, format(data.index, "j"));
-    }
-    private String getListFromList(By locator, By prevLocator, String param) {
-        GetData prevData = dataType(prevLocator);
-        GetData data = dataType(locator);
-        return format(GET_LIST_FROM_LIST, prevData.length,
-                MessageFormat.format(data.getAll, "elements[i]", selector(locator)),
-                data.length, format(data.index, "j"))
-                + format(GET_LIST, data.length, format(data.index, "i"), param);
-    }
-    protected String result(String query, String finalAction) {
-        return query + finalAction;
+    private By last() {
+        return LinqUtils.last(locators);
     }
 
     public String getOne(String text) {
         if (locators.size() == 1) {
-            String query = result("let element = " + getOneFromOne("document", last(locators)), "\nreturn element." + text);
-            return (String) jsExecute(query);
+            return new JSBuilder(driver)
+                    .getOneFromOne("document", locators.get(0))
+                    .executeQuery("element." + text);
         }
         switch (strategy) {
             case CHAIN: return getOneChain(text);
             case MULTI: return getOneMultiSearch(text);
-        default: return getOneChain(text);
+            default: return getOneChain(text);
         }
+    }
+    public JsonObject getOneJson(String json) {
+        String jsObject = new JSBuilder(driver)
+                .getOneFromOne("document", last())
+                .executeQuery("JSON.stringify(" + json + ");");
+        return new Gson().fromJson(jsObject, JsonObject.class);
+    }
+    public <T> T getOne(Class<T> cl, String json) {
+        String jsObject = new JSBuilder(driver)
+                .getOneFromOne("document", last())
+                .executeQuery("JSON.stringify(" + json + ");");
+        return new Gson().fromJson(jsObject, cl);
+    }
+    public JsonObject getOneJson(String... attributes) {
+        String json = "{ " + print(map(attributes, el -> "\"" + el + "\": element." + el), ", ") + " }";
+        return getOneJson(json);
+    }
+    public <T> T getOne(Class<T> cl, String... attributes) {
+        String json = "{ " + print(map(attributes, el -> "\"" + el + "\": element." + el), ", ") + " }";
+        return getOne(cl, json);
     }
 
     public String getStyle(String style) {
-        String query = result(getOneFromOne("document", last(locators)), "\nreturn getComputedStyle(element)." + style);
-        return (String) jsExecute(query);
+        return new JSBuilder(driver)
+                .getOneFromOne("document", last())
+                .executeQuery("getComputedStyle(element)." + style);
     }
     public List<String> getList(String text) {
         if (locators.size() == 1) {
-            String query = result("let " + getListFromOne("document", last(locators), text),"\nreturn result");
-            return (List<String>) jsExecute(query);
+            return new JSBuilder(driver)
+                    .getListFromOne("document", locators.get(0), text)
+                    .executeAsList("result");
         }
         switch (strategy) {
             case CHAIN: return getListChain(text);
@@ -106,65 +91,60 @@ public class JSDriver {
             default: return getListChain(text);
         }
     }
-    private String chainQuery(List<By> locators, String context) {
-        String query = "";
-        String scope = context;
-        for (By locator : locators) {
-            query += "element = " + MessageFormat.format(dataType(locator).get, scope, selector(locator)) + ";\n";
-            scope = "element";
-        }
-        return query;
-    }
+
     public String getOneChain(String text) {
         if (locators.size() == 1) {
             return getOne(text);
         }
-        String query = result(chainQuery(locators, "document"), "\nreturn element." + text);
-        return (String) jsExecute(query);
-    }
-
-    public List<String> getListChain(String text) {
-        if (locators.size() == 1) {
-            return getList(text);
+        JSBuilder builder =  new JSBuilder(driver);
+        String ctx = "document";
+        for (By locator : locators) {
+            builder.getOneFromOne(ctx, locator);
+            ctx = "element";
         }
-        List<By> hyperList = listCopyUntil(locators, -1);
-        By last = last(locators);
-        String query = result("let elements; let result; let " + chainQuery(hyperList, "document")
-                + getListFromOne("element", last, text), "\nreturn result;");
-        return (List<String>) jsExecute(query);
+        return builder.executeQuery("element." + text);
     }
-
     public String getOneMultiSearch(String text) {
         if (locators.size() == 1) {
             return getOne(text);
         }
-        By first = first(locators);
-        By last = last(locators);
-        String query = result("let result; let found; let element\nlet elements = " + getListFromOne("document", first)
-            + iterateGetList(listCopy(locators, 1, -1), first)
-            + getOneFromList(last),
-     "\nreturn element." + text);
-        return (String) jsExecute(query);
-    }
-    private String iterateGetList(List<By> locators, By prevLocator) {
-        String query = "";
-        By prev = prevLocator;
-        for (By locator : locators) {
-            query += getListFromList(locator, prev);
+        By first = first();
+        By last = last();
+        JSBuilder builder =  new JSBuilder(driver)
+                .getListFromOne("document", first);
+        By prev = first;
+        for (By locator : listCopy(locators, 1, -1)) {
+            builder.getListFromList(locator, prev);
             prev = locator;
         }
-        return query;
+        builder.getOneFromList(last);
+        return builder.executeQuery("element." + text);
+    }
+    public List<String> getListChain(String text) {
+        if (locators.size() == 1) {
+            return getList(text);
+        }
+        JSBuilder builder =  new JSBuilder(driver);
+        String ctx = "document";
+        for (By locator : listCopyUntil(locators, -1)) {
+            builder.getOneFromOne(ctx, locator);
+            ctx = "element";
+        }
+        builder.getListFromOne("element", last(), text);
+        return builder.executeAsList("result");
     }
     public List<String> getListMultiSearch(String text) {
         if (locators.size() == 1) {
             return getList(text);
         }
-        By first = first(locators);
-        By last = last(locators);
-        String query = result("let result; let element;\nlet elements = " + getListFromOne("document", first)
-            + iterateGetList(listCopy(locators, 1, -1), first)
-            + getListFromList(last, listCopy(locators, -2, -2).get(0), text),
-        ";\nreturn result");
-        return (List<String>) jsExecute(query);
+        JSBuilder builder =  new JSBuilder(driver);
+        builder.getListFromOne("document", first());
+        By prev = first();
+        for (By locator : listCopy(locators, 1, -1)) {
+            builder.getListFromList(locator, prev);
+            prev = locator;
+        }
+        builder.getListFromList(last(), listCopy(locators, -2, -2).get(0), text);
+        return builder.executeAsList("result");
     }
 }

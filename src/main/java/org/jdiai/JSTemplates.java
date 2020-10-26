@@ -4,13 +4,13 @@ public class JSTemplates {
     public static String GET_LIST = "result = [];\n" +
             "for(let i = 0; i < elements%s; i++) {\n" +
             "  result.push(elements%s.%s);\n" +
-            "}";
-    public static String GET_ONE_FROM_LIST = "found = false; i = 0; element;\n" +
+            "}\n";
+    public static String GET_ONE_FROM_LIST = "found = false; i = 0;\n" +
             "while (!found && i < elements.length) {\n" +
             "  element = %s;\n" +
             "  if (element != null) { found = true; }\n" +
             "  i++;\n" +
-            "}";
+            "}\n";
     public static String GET_LIST_FROM_LIST = "result = [];\n" +
             "for(let i = 0; i < elements%s; i++) {\n" +
             "  let subElements = %s;\n" +

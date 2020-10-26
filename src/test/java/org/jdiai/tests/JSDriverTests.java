@@ -1,5 +1,9 @@
-package org.jdiai;
+package org.jdiai.tests;
 
+import com.google.gson.JsonObject;
+import org.jdiai.TestInit;
+import org.jdiai.entity.Link;
+import org.jdiai.entity.LinkHtml;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -9,8 +13,8 @@ public class JSDriverTests extends TestInit {
 
     @BeforeMethod
     public void logout() {
-        DRIVER.manage().deleteAllCookies();
-        DRIVER.get(HOME_PAGE);
+        driver().manage().deleteAllCookies();
+        driver().get(HOME_PAGE);
     }
 
     @Test
@@ -109,5 +113,21 @@ public class JSDriverTests extends TestInit {
         js(inForm("#login-button")).getOneMultiSearch("click()");
 
         assertEquals(js(withParent("#user-name")).getStyle("visibility"), "visible");
+    }
+    @Test
+    public void toObjectTests() {
+        JsonObject json = js("#user-icon").getOneJson("{ \"tag\": element.tagName, \"ref\": element.src }");
+        Link link = js("#user-icon").getOne(Link.class, "{ \"tag\": element.tagName, \"ref\": element.src }");
+        assertEquals(link.tag, "IMG");
+        assertEquals(link.ref, "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
+        assertEquals(json.get("ref").getAsString(), link.ref);
+    }
+    @Test
+    public void toObjectAttrTests() {
+        JsonObject json = js("#user-icon").getOneJson("tagName", "src");
+        LinkHtml link = js("#user-icon").getOne(LinkHtml.class, "tagName", "src");
+        assertEquals(link.tagName, "IMG");
+        assertEquals(link.src, "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
+        assertEquals(json.get("src").getAsString(), link.src);
     }
 }

@@ -1,5 +1,7 @@
-package org.jdiai;
+package org.jdiai.tests;
 
+import org.jdiai.JSInterface;
+import org.jdiai.TestInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -11,14 +13,14 @@ public class JSDriverListTests extends TestInit {
 
     @BeforeMethod
     public void logout() {
-        if (DRIVER.manage().getCookieNamed("authUser") == null) {
+        if (driver().manage().getCookieNamed("authUser") == null) {
             js("#user-name").getOne("click()");
             js("#name").getOne("value='Roman'");
             js("#password").getOne("value='Jdi1234'");
             js("#login-button").getOne("click()");
         }
-        if (!DRIVER.getCurrentUrl().equals(USERS_PAGE)) {
-            DRIVER.get(USERS_PAGE);
+        if (!driver().getCurrentUrl().equals(USERS_PAGE)) {
+            driver().get(USERS_PAGE);
         }
     }
 
@@ -44,20 +46,20 @@ public class JSDriverListTests extends TestInit {
     }
     @Test
     public void multiListTest() {
-        JSDriver js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
+        JSInterface js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
             .multiSearch();
         assertEquals(js.getList("id").toString(), "[roman, vlad]");
     }
     @Test
     public void getOneMultiTest() {
-        JSDriver js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
+        JSInterface js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
             .multiSearch();
         assertEquals(js.getOne("id"), "roman");
     }
 
     @Test
     public void getOneChainTest() {
-        JSDriver js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]");
+        JSInterface js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]");
         try {
             js.getOne("id");
             Assert.fail("Chain search should fail");

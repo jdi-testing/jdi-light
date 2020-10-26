@@ -6,33 +6,33 @@ import static org.jdiai.WebDriverByUtils.getByType;
 
 public class GetTypes {
     public static GetData CSS = new GetData(
-        "ctx.querySelector(''%s'')",
-        "ctx.querySelectorAll(''%s'')",
+        "{0}.querySelector(''{1}'');\n",
+        "{0}.querySelectorAll(''{1}'');\n",
         ".length",
         "[%s]");
     public static GetData XPATH = new GetData(
-        "document.evaluate(''%s'', ctx, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue",
-        "document.evaluate(''%s'', ctx, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)",
+        "document.evaluate(''{1}'', {0}, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n",
+        "document.evaluate(''{1}'', {0}, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n",
         ".snapshotLength",
         ".snapshotItem(%s)");
     public static GetData ID = new GetData(
-        "ctx.getElementById(''%s'')",
-        "[...ctx.getElementById(''%s'')]",
+        "{0}.getElementById(''{1}'');\n",
+        "[...{0}.getElementById(''{1}'')];\n",
         ".length",
         "[%s]");
     public static GetData CLASS = new GetData(
-        "ctx.getElementsByClassName(''%s'')[0]",
-        "ctx.getElementsByClassName(''%s'')",
+        "{0}.getElementsByClassName(''{1}'')[0];\n",
+        "{0}.getElementsByClassName(''{1}'');\n",
         ".length",
         "[%s]");
     public static GetData NAME = new GetData(
-        "ctx.getElementsByName(''%s'')[0]",
-        "ctx.getElementsByName(''%s'')",
+        "{0}.getElementsByName(''{1}'')[0];\n",
+        "{0}.getElementsByName(''{1}'');\n",
         ".length",
         "[%s]");
     public static GetData TAG = new GetData(
-        "ctx.getElementsByTagName(''%s'')[0]",
-        "ctx.getElementsByTagName(''%s'')",
+        "{0}.getElementsByTagName(''{1}'')[0];\n",
+        "{0}.getElementsByTagName(''{1}'');\n",
         ".length",
         "[%s]");
     public static GetData dataType(By locator) {

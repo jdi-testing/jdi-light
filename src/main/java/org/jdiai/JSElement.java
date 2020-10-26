@@ -1,12 +1,10 @@
 package org.jdiai;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.remote.RemoteWebElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.copyList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JSElement implements WebElement {
