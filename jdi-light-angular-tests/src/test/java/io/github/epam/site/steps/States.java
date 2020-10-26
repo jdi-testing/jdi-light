@@ -15,7 +15,7 @@ public class States {
         if (!url.contains("https://jdi-testing.github.io/jdi-light/")) {
             angularPage.open();
         }
-        if (!userName.isHidden()) {
+        if (userName.isHidden()) {
             login();
         }
     }
