@@ -98,10 +98,9 @@ public class MobileScreen {
     }
 
 
-    private static int scrollDivider = 3;
-
     //Works only if sought element exists.
     public static void scrollDownToXpath(String xpath){
+        int scrollDivider = 3;
         int height = getHeight();
         while (true){
             List<WebElement> soughtElement = getDriver().findElements(By.xpath(xpath));
