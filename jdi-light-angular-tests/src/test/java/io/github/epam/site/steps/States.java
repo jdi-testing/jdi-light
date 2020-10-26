@@ -10,12 +10,16 @@ import static io.github.com.StaticSite.*;
 
 public class States {
     @Step
-    public static void shouldBeLoggedIn() throws InterruptedException {
+    public static void shouldBeLoggedIn() {
         String url = WebPage.getUrl();
         if (!url.contains("https://jdi-testing.github.io/jdi-light/")) {
             angularPage.open();
         }
-        Thread.sleep(5000);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (userName.isHidden()) {
             login();
         }
