@@ -21,14 +21,14 @@ public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, Is
     public void uploadFile(String path) {
         if (isDisabled())
             throw exception("FileInput '%s' is disabled. Can't upload file", getName());
-        uiElement.sendKeys(path);
+        core().sendKeys(path);
     }
 
     @JDIAction("Upload file '{0}' for '{name}'")
     public void uploadFileWithRobot(String path, long mSec) {
         if (isDisabled())
             throw exception("FileInput '%s' is disabled. Can't upload file", getName());
-        uiElement.click(JS);
+        core().click(JS);
         pasteText(path, mSec);
     }
     // endregion
@@ -39,7 +39,7 @@ public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, Is
     }
     @JDIAction("Get '{name}' file name ") @Override
     public String text() {
-        return uiElement.text(VALUE);
+        return core().text(VALUE);
     }
     public String getValue() {
         return text();

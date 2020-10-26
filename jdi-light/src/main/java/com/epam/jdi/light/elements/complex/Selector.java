@@ -33,6 +33,8 @@ import static java.util.Arrays.asList;
 public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
         implements IMultiSelector, SetValue, HasPlaceholder {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
+    protected int startIndex = ELEMENT.startIndex;
+
     protected Select asSelect() {
         return core().asSelect();
     }
@@ -206,7 +208,6 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
     public UIMSelectAssert<?,?> is() {
         return new UIMSelectAssert<>().set(this);
     }
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }

@@ -25,7 +25,6 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.ReflectionUtils.create;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
 import static java.util.Arrays.asList;
 
@@ -37,11 +36,21 @@ public class Line implements IList<String>, IBaseElement {
     private JFunc<MultiMap<String, String>> dataMap;
     private WebList elements;
     private List<String> headers;
-    public JDIBase base() {
-        return elements.base();
-    }
+    protected int startIndex = ELEMENT.startIndex;
 
-    public Line() {}
+    public Line(List<String> list, List<String> headers, JDIBase base) {
+        if (list == null || headers == null || list.size() == 0 || headers.size() == 0
+                || list.size() != headers.size())
+            throw exception("Failed to init Line[list: %s; headers: %s;]",
+                list == null ? "null" : list.toString(), headers == null ? "null" : headers.toString());
+        this.list = new ArrayList<>(list);
+        this.headers = new ArrayList<>(headers);
+        this.data = new MultiMap<>(headers, list).ignoreKeyCase();
+        this.elements = new WebList(base);
+    }
+    public Line(List<String> headers, List<WebElement> elements) {
+        this(headers, new WebList(elements));
+    }
     public Line(List<String> headers, WebList elements) {
         if (headers == null) {
             throw exception("Failed to create Line. Header has null value");
@@ -49,19 +58,17 @@ public class Line implements IList<String>, IBaseElement {
         if (elements == null) {
             throw exception("Failed to create Line. Elements has null value");
         }
+        this.elements = elements;
+        this.headers = headers;
         List<String> values = elements.values();
         if (headers.size() != values.size()) {
             throw exception("Failed to create Line. Headers size='%s' is not equal to Elements size='%s'", headers.size(), values.size());
         }
-        this.elements = elements;
-        this.headers = headers;
         this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();
     }
-    public static Line initLine(List<String> list, List<String> headers) {
-        Line line = new Line();
-        line.list = new ArrayList<>(list);
-        line.headers = new ArrayList<>(headers);
-        return line;
+
+    public JDIBase base() {
+        return elements.base();
     }
     private MultiMap<String, String> data;
     private List<String> list;
@@ -89,25 +96,28 @@ public class Line implements IList<String>, IBaseElement {
     public List<String> elements(int minAmount) {
         return getData(minAmount).values();
     }
-    public MultiMap<String, UIElement> uiElements() {
+    public MultiMap<String, UIElement> uiMap() {
         return new MultiMap<>(headers, elements.indexFromZero()).ignoreKeyCase();
+    }
+    public WebList uiElements() {
+        return elements;
     }
     public void saveCellsImages() {
         String unique = Timer.nowMSecs();
         List<UIElement> result = new ArrayList<>();
-        for (int i = 0; i < elements.size(); i++) {
-            UIElement cell = elements.get(i + getStartIndex());
-            cell.show();
-            cell.varName = headers.get(i)+unique;
-            cell.makePhoto();
-            result.add(cell);
+        int i = 0;
+        for (UIElement element : elements) {
+            element.show();
+            element.varName = headers.get(i++)+unique;
+            element.makePhoto();
+            result.add(element);
         }
         elements = new WebList(headers, result);
     }
     public boolean visualCompareTo(Line line) {
-        for (Pair<String, UIElement> cell : uiElements())
+        for (Pair<String, UIElement> cell : uiMap())
             try {
-                cell.value.visualValidation(line.uiElements().get(cell.key));
+                cell.value.visualValidation(line.uiMap().get(cell.key));
             } catch (Exception ex) { return false; }
         return true;
     }
@@ -115,7 +125,9 @@ public class Line implements IList<String>, IBaseElement {
     public String getValue() {
         return PrintUtils.print(getList(0), ";");
     }
-    public String print() { return getValue(); }
+    public String print() {
+        return getData(0).toString();
+    }
 
     public void clear() { data = null; }
 
@@ -139,7 +151,7 @@ public class Line implements IList<String>, IBaseElement {
         int i = 0;
         List<Field> fields = asList(data.getDeclaredFields());
         for (String name : headers) {
-            Field field = LinqUtils.first(fields, f -> namesEqual(getElementName(f), name));
+            Field field = LinqUtils.first(fields, f -> ELEMENT.namesEqual.execute(getElementName(f), name));
             if (field != null)
                 try {
                     setPrimitiveField(field, instance, line.getList(i).get(i));
@@ -153,7 +165,7 @@ public class Line implements IList<String>, IBaseElement {
     protected static <D> D getLineInstance(D instance, MapArray<String, String> line) {
         for (Pair<String, String> cell : line) {
             Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
-                f -> namesEqual(getElementName(f), cell.key));
+                    f -> ELEMENT.namesEqual.execute(getElementName(f), cell.key));
             if (field == null) continue;
             try {
                 setPrimitiveField(field, instance, cell.value);
@@ -169,7 +181,7 @@ public class Line implements IList<String>, IBaseElement {
             int i = getStartIndex();
             for (String header : headers) {
                 Field field = LinqUtils.first(instance.getClass().getDeclaredFields(),
-                    f -> namesEqual(getElementName(f), header));
+                        f -> ELEMENT.namesEqual.execute(getElementName(f), header));
                 if (field == null) continue;
                 try {
                     IBaseElement ui = ((IBaseElement)field.get(instance));
@@ -185,6 +197,10 @@ public class Line implements IList<String>, IBaseElement {
             return instance;
         });
     }
+    @Override
+    public int size() {
+        return headers.size();
+    }
 
     @Override
     public String toString() {
@@ -195,7 +211,6 @@ public class Line implements IList<String>, IBaseElement {
         return elements.isUseCache();
     }
 
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }

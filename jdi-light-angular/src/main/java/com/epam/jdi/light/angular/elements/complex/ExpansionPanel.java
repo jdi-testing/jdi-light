@@ -138,68 +138,63 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
     }
 
     protected List<UIElement> getHeadersLocator() {
-        return new WebList(By.xpath(String.format(headersLocator,
-                                                  this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                          .replace(cssSharp, "").replace("'", ""))));
+        return new WebList(By.xpath(String.format(headersLocator, core().locator.printLocator()
+            .replace(smartSharp, "") .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getContentsLocator() {
-        return new WebList(By.xpath(String.format(contentsLocator,
-                                                  this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                          .replace(cssSharp, "").replace("'", ""))));
+        return new WebList(By.xpath(String.format(contentsLocator, this.core().locator.printLocator()
+            .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getContentBodiesLocator() {
-        return new WebList(By.xpath(String.format(contentBodiesLocator,
-                                                  this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                          .replace(cssSharp, "").replace("'", ""))));
+        return new WebList(By.xpath(String.format(contentBodiesLocator, this.core().locator
+            .printLocator().replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getInputLocator(final String placeholder) {
-        return new UIElement(By.xpath(String.format(inputLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""), placeholder)));
+        return new UIElement(By.xpath(String.format(inputLocator, this.core().locator.printLocator()
+            .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""), placeholder)));
     }
 
     protected UIElement getNextButtonLocator(final String tittle) {
-        return new UIElement(By.xpath(String.format(nextButtonLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""), tittle)));
+        return new UIElement(By.xpath(String.format(nextButtonLocator, this.core().locator
+            .printLocator().replace(smartSharp, "").replace(cssSharp, "").replace("'", ""), tittle)));
     }
 
     protected UIElement getPreviousButtonLocator(final String tittle) {
         return new UIElement(By.xpath(String.format(previousButtonLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""), tittle)));
+            this.core().locator.printLocator().replace(smartSharp, "")
+                .replace(cssSharp, "").replace("'", ""), tittle)));
     }
 
     protected UIElement getEndButtonLocator(final String tittle) {
         return new UIElement(By.xpath(String.format(endButtonLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""), tittle)));
+            this.core().locator.printLocator().replace(smartSharp, "")
+                .replace(cssSharp, "").replace("'", ""), tittle)));
     }
 
     protected List<UIElement> getTitlesLocator() {
         return new WebList(By.xpath(String.format(titlesLocator,
-                                                  this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                          .replace(cssSharp, "").replace("'", ""))));
+            this.core().locator.printLocator().replace(smartSharp, "")
+                .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getIconsLocator() {
         return new WebList(By.xpath(String.format(iconsLocator,
-                                                  this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                          .replace(cssSharp, "").replace("'", ""))));
+            this.core().locator.printLocator().replace(smartSharp, "")
+                .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getDescriptionsLocator() {
         return new WebList(By.xpath(String.format(descriptionsLocator,
-                                                  this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                          .replace(cssSharp, "").replace("'", ""))));
+            this.core().locator.printLocator().replace(smartSharp, "")
+                .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getExpansionIndicatorLocator() {
         return new WebList(By.xpath(String.format(expansionIndicatorLocator,
-                                                  this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                          .replace(cssSharp, "").replace("'", ""))));
+            this.core().locator.printLocator().replace(smartSharp, "")
+                .replace(cssSharp, "").replace("'", ""))));
     }
 }

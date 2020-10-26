@@ -20,6 +20,8 @@ import static com.epam.jdi.tools.PrintUtils.print;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklist {
+    protected int startIndex = ELEMENT.startIndex;
+
     @Override
     public WebList list() {
         WebList list = super.list().setUIElementName(LABEL);
@@ -202,7 +204,6 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public ChecklistAssert is() {
         return new ChecklistAssert().set(this);
     }
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }

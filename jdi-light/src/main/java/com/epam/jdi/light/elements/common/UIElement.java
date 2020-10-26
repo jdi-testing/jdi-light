@@ -82,9 +82,12 @@ public class UIElement extends JDIBase
         setName(name);
     }
     public UIElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
+        this(base, el);
+        setGetFunc(func);
+    }
+    public UIElement(JDIBase base, WebElement el) {
         super(base);
         setWebElement(el);
-        setGetFunc(func);
     }
     //endregion
 
@@ -358,8 +361,9 @@ public class UIElement extends JDIBase
         waitAfterAction();
     }
     protected void waitAfterAction() {
-        if (isBlank(waitAfterMethod) && waitAfterTimeout > 0) {
-            Timer.sleep(waitAfterTimeout * 1000);
+        int timeout = waitAfter().value;
+        if (isBlank(waitAfterMethod) && timeout > 0) {
+            Timer.sleep(timeout * 1000);
         }
     }
     protected RuntimeException getNotClickableException() {
@@ -477,11 +481,9 @@ public class UIElement extends JDIBase
     }
     @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
     public boolean isExist() {
-        return noWait(() -> {
-            try {
-                getWebElement(); return true;
-            } catch (Exception ignore) { return false; }
-        });
+        try {
+            return getWebElements().size() > 0;
+        } catch (Exception ignore) { return false; }
     }
     @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)
     public boolean isNotExist() {
