@@ -1,46 +1,61 @@
 package org.jdiai;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.RemoteWebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.tools.LinqUtils.copyList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JSElement implements WebElement {
     private final JSDriver js;
     private final WebDriver driver;
-    private final By locator;
+    private final List<By> locators;
+
     public JSElement(WebDriver driver, By locator) {
-        this.js = new JSDriver(driver, locator);
-        this.driver = driver;
-        this.locator = locator;
+        this(driver, locator, null);
     }
-    private void jsAction(String action) {
-        js.getOne(action);
+    public JSElement(WebDriver driver, By locator, HasLocators parent) {
+        if (parent != null) {
+            List<By> pLocators = parent.locators();
+            this.locators = pLocators != null && pLocators.size() > 0
+                ? pLocators : new ArrayList<>();
+        } else {
+            this.locators = new ArrayList<>();
+        }
+        this.locators.add(locator);
+        this.js = new JSDriver(driver, locators);
+        this.driver = driver;
     }
     private String jsResult(String action) {
         return js.getOne(action);
     }
     private WebElement we() {
-        return driver.findElement(locator);
+        SearchContext ctx = driver;
+        for (By locator : locators) {
+            ctx = ctx.findElement(locator);
+        }
+        return (WebElement) ctx;
     }
 
     public void click() {
-        jsAction("click()");
+        jsResult("click()");
     }
 
     public void submit() {
-        jsAction("submit");
+        jsResult("submit");
     }
 
     public void sendKeys(CharSequence... value) {
         // jsGet("val('" + value + "')");
         // jsGet("setAttribute('value', '"+value+"')");
-        jsAction("value='"+value+"'");
+        jsResult("value='"+value+"'");
     }
 
     public void clear() {
-        jsAction("clear");
+        jsResult("clear");
     }
 
     public String getTagName() {
@@ -58,16 +73,13 @@ public class JSElement implements WebElement {
     public boolean isEnabled() {
         return isNotBlank(getAttribute("enabled"));
     }
+    public JSElement getAsInnerText() { getTextType = "innerText"; return this; }
+    public JSElement getAsTextContent() { getTextType = "textContent"; return this; }
+    public JSElement getAsInnerHTML() { getTextType = "innerHTML"; return this; }
 
-    public String getTextC() {
-        return jsResult("textContent");
-    }
-    public String getTextI() {
-        return jsResult("innerText");
-    }
-    public String getTextH() { return jsResult("innerHTML "); }
+    String getTextType = "innerText";
     public String getText() {
-        return getTextC();
+        return jsResult(getTextType);
     }
 
     public List<WebElement> findElements(By by) {

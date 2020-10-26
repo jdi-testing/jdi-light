@@ -9,7 +9,6 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
 import static org.jdiai.GetTypes.dataType;
 import static org.jdiai.JSTemplates.*;
 import static org.jdiai.ListSearch.CHAIN;
@@ -22,12 +21,15 @@ public class JSDriver {
     public static boolean logQuery = false;
     public ListSearch strategy = CHAIN;
     public JSDriver(WebDriver driver, By... locators) {
+        this(driver, newList(locators));
+    }
+    public JSDriver(WebDriver driver, List<By> locators) {
         if (driver == null)
             throw new JSException("JSDriver init failed: WebDriver == null");
-        if (locators == null || locators.length == 0)
+        if (locators == null || locators.size() == 0)
             throw new JSException("JSDriver init failed: Require at least 1 locator");
         this.driver = driver;
-        this.locators = asList(locators);
+        this.locators = copyList(locators);
     }
     public JSDriver multiSearch() {
         strategy = MULTI;
@@ -42,6 +44,8 @@ public class JSDriver {
     private String selector(By locator) {
         return getByLocator(locator).replaceAll("'", "\"");
     }
+
+
     private String getOneFromOne(String context, By locator) {
         return MessageFormat.format(dataType(locator).get, context, selector(locator));
     }
@@ -71,26 +75,29 @@ public class JSDriver {
                 data.length, format(data.index, "j"))
                 + format(GET_LIST, data.length, format(data.index, "i"), param);
     }
+    protected String result(String query, String finalAction) {
+        return query + finalAction;
+    }
 
     public String getOne(String text) {
         if (locators.size() == 1) {
-            String query = "return " + getOneFromOne("document", last(locators)) + "." + text;
+            String query = result("let element = " + getOneFromOne("document", last(locators)), "\nreturn element." + text);
             return (String) jsExecute(query);
         }
         switch (strategy) {
             case CHAIN: return getOneChain(text);
             case MULTI: return getOneMultiSearch(text);
         default: return getOneChain(text);
-    }
+        }
     }
 
     public String getStyle(String style) {
-        String query = "return getComputedStyle(" + getOneFromOne("document", last(locators)) + ")." + style;
+        String query = result(getOneFromOne("document", last(locators)), "\nreturn getComputedStyle(element)." + style);
         return (String) jsExecute(query);
     }
     public List<String> getList(String text) {
         if (locators.size() == 1) {
-            String query = "let " + getListFromOne("document", last(locators), text) + "\nreturn result;";
+            String query = result("let " + getListFromOne("document", last(locators), text),"\nreturn result");
             return (List<String>) jsExecute(query);
         }
         switch (strategy) {
@@ -112,7 +119,7 @@ public class JSDriver {
         if (locators.size() == 1) {
             return getOne(text);
         }
-        String query = chainQuery(locators, "document") + "return element." + text;
+        String query = result(chainQuery(locators, "document"), "\nreturn element." + text);
         return (String) jsExecute(query);
     }
 
@@ -122,8 +129,8 @@ public class JSDriver {
         }
         List<By> hyperList = listCopyUntil(locators, -1);
         By last = last(locators);
-        String query = "let elements; let result; let " + chainQuery(hyperList, "document")
-                + getListFromOne("element", last, text) + "\nreturn result;";
+        String query = result("let elements; let result; let " + chainQuery(hyperList, "document")
+                + getListFromOne("element", last, text), "\nreturn result;");
         return (List<String>) jsExecute(query);
     }
 
@@ -133,10 +140,10 @@ public class JSDriver {
         }
         By first = first(locators);
         By last = last(locators);
-        String query = "let result; let found; let element\nlet elements = " + getListFromOne("document", first)
+        String query = result("let result; let found; let element\nlet elements = " + getListFromOne("document", first)
             + iterateGetList(listCopy(locators, 1, -1), first)
-            + getOneFromList(last)
-            + "\nreturn element." + text;
+            + getOneFromList(last),
+     "\nreturn element." + text);
         return (String) jsExecute(query);
     }
     private String iterateGetList(List<By> locators, By prevLocator) {
@@ -154,9 +161,10 @@ public class JSDriver {
         }
         By first = first(locators);
         By last = last(locators);
-        String query = "let result; let element;\nlet elements = " + getListFromOne("document", first)
+        String query = result("let result; let element;\nlet elements = " + getListFromOne("document", first)
             + iterateGetList(listCopy(locators, 1, -1), first)
-            + getListFromList(last, listCopy(locators, -2, -2).get(0), text) + ";\nreturn result";;
+            + getListFromList(last, listCopy(locators, -2, -2).get(0), text),
+        ";\nreturn result");
         return (List<String>) jsExecute(query);
     }
 }

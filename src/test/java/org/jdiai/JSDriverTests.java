@@ -16,8 +16,8 @@ public class JSDriverTests extends TestInit {
     @Test
     public void oneTest() {
         assertEquals(js("#user-icon").getOne("tagName"), "IMG");
-        assertEquals(js("#user-name").getOne("textContent"), "Roman Iovlev");
         assertEquals(js("#user-name").getOne("innerText"), "Roman Iovlev");
+        assertEquals(js("#user-name").getOne("textContent"), "Roman Iovlev");
         assertEquals(js("#user-name").getOne("innerHTML"), "Roman Iovlev");
         assertEquals(js("#user-name").getStyle("visibility"), "hidden");
 
@@ -31,8 +31,8 @@ public class JSDriverTests extends TestInit {
     @Test
     public void chainTest() {
         assertEquals(js("#user-icon").getOneChain("tagName"), "IMG");
-        assertEquals(js("#user-name").getOneChain("textContent"), "Roman Iovlev");
         assertEquals(js("#user-name").getOneChain("innerText"), "Roman Iovlev");
+        assertEquals(js("#user-name").getOneChain("textContent"), "Roman Iovlev");
         assertEquals(js("#user-name").getOneChain("innerHTML"), "Roman Iovlev");
         assertEquals(js("#user-name").getStyle("visibility"), "hidden");
 
@@ -46,8 +46,8 @@ public class JSDriverTests extends TestInit {
     @Test
     public void multiTest() {
         assertEquals(js("#user-icon").getOneMultiSearch("tagName"), "IMG");
-        assertEquals(js("#user-name").getOneMultiSearch("textContent"), "Roman Iovlev");
         assertEquals(js("#user-name").getOneMultiSearch("innerText"), "Roman Iovlev");
+        assertEquals(js("#user-name").getOneMultiSearch("textContent"), "Roman Iovlev");
         assertEquals(js("#user-name").getOneMultiSearch("innerHTML"), "Roman Iovlev");
         assertEquals(js("#user-name").getStyle("visibility"), "hidden");
 
@@ -68,8 +68,8 @@ public class JSDriverTests extends TestInit {
     @Test
     public void oneFewLocatorsTest() {
         assertEquals(js(withParent("#user-icon")).getOne("tagName"), "IMG");
-        assertEquals(js(withParent("#user-name")).getOne("textContent"), "Roman Iovlev");
         assertEquals(js(withParent("#user-name")).getOne("innerText"), "Roman Iovlev");
+        assertEquals(js(withParent("#user-name")).getOne("textContent"), "Roman Iovlev");
         assertEquals(js(withParent("#user-name")).getOne("innerHTML"), "Roman Iovlev");
         assertEquals(js("#user-name").getStyle("visibility"), "hidden");
 
@@ -83,8 +83,8 @@ public class JSDriverTests extends TestInit {
     @Test
     public void chainFewLocatorsTest() {
         assertEquals(js(withParent("#user-icon")).getOneChain("tagName"), "IMG");
-        assertEquals(js(withParent("#user-name")).getOneChain("textContent"), "Roman Iovlev");
         assertEquals(js(withParent("#user-name")).getOneChain("innerText"), "Roman Iovlev");
+        assertEquals(js(withParent("#user-name")).getOneChain("textContent"), "Roman Iovlev");
         assertEquals(js(withParent("#user-name")).getOneChain("innerHTML"), "Roman Iovlev");
         assertEquals(js("#user-name").getStyle("visibility"), "hidden");
 
@@ -98,8 +98,8 @@ public class JSDriverTests extends TestInit {
     @Test
     public void multiFewLocatorsTest() {
         assertEquals(js(withParent("#user-icon")).getOneMultiSearch("tagName"), "IMG");
-        assertEquals(js(withParent("#user-name")).getOneMultiSearch("textContent"), "Roman Iovlev");
         assertEquals(js(withParent("#user-name")).getOneMultiSearch("innerText"), "Roman Iovlev");
+        assertEquals(js(withParent("#user-name")).getOneMultiSearch("textContent"), "Roman Iovlev");
         assertEquals(js(withParent("#user-name")).getOneMultiSearch("innerHTML"), "Roman Iovlev");
         assertEquals(js("#user-name").getStyle("visibility"), "hidden");
 
