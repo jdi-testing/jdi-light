@@ -307,7 +307,7 @@ public class WebSettings {
         if (p.equals("strict"))
             p = "visible, single";
         if (p.split(",").length == 2) {
-            List<String> params = asList(p.split(","));
+            List<String> params = map(asList(p.split(",")), a -> ELEMENT.simplifyString.execute(a));
             if (params.contains("visible") || params.contains("displayed"))
                 onlyVisible();
             if (params.contains("any") || params.contains("all"))
