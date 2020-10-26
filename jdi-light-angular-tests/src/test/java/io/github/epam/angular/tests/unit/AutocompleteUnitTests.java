@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.autocompleteSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;

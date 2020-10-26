@@ -137,20 +137,20 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
     @JDIAction(level = DEBUG, timeout = 0)
     @Override
     public void clear() {
-        uiElement.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
-        uiElement.click(getOutsidePoint().getX(), getOutsidePoint().getY());
+        core().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+        core().click(getOutsidePoint().getX(), getOutsidePoint().getY());
     }
 
     @JDIAction("Get '{name}' date")
     public String value() {
-        return uiElement.text(TextTypes.VALUE);
+        return core().text(TextTypes.VALUE);
     }
 
     @JDIAction("Send keys '{0}' for '{name}'")
     @Override
     public void sendKeys(final CharSequence... date) {
-        uiElement.sendKeys(date);
-        uiElement.click(getOutsidePoint().getX(), getOutsidePoint().getY());
+        core().sendKeys(date);
+        core().click(getOutsidePoint().getX(), getOutsidePoint().getY());
     }
 
     @JDIAction("Set text '{0}' for '{name}'")
@@ -167,8 +167,8 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     @JDIAction("Set date '{0}' for '{name}'")
     public void setDate(final LocalDate date) {
-        uiElement.sendKeys(date.format(DateTimeFormatter.ofPattern("M/dd/yyyy", Locale.ENGLISH)));
-        uiElement.click(getOutsidePoint().getX(), getOutsidePoint().getY());
+        core().sendKeys(date.format(DateTimeFormatter.ofPattern("M/dd/yyyy", Locale.ENGLISH)));
+        core().click(getOutsidePoint().getX(), getOutsidePoint().getY());
     }
 
     @JDIAction("Open years view in '{name}'")
@@ -217,8 +217,8 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     @JDIAction("Get '{name}' input month value")
     public Month getMonth() {
-        int slashIndex = uiElement.text().trim().indexOf("/");
-        return Month.of(Integer.valueOf(uiElement.text().trim().substring(0, slashIndex)));
+        int slashIndex = core().text().trim().indexOf("/");
+        return Month.of(Integer.valueOf(core().text().trim().substring(0, slashIndex)));
     }
 
     @JDIAction("Get '{name}' start month value")
@@ -231,9 +231,9 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     @JDIAction("Get '{name}' input day value")
     public int getDay() {
-        int firstSlashIndex = uiElement.text().trim().indexOf("/") + 1;
-        int secondSlashIndex = uiElement.text().trim().lastIndexOf("/");
-        return Integer.valueOf(uiElement.text().trim().substring(firstSlashIndex, secondSlashIndex));
+        int firstSlashIndex = core().text().trim().indexOf("/") + 1;
+        int secondSlashIndex = core().text().trim().lastIndexOf("/");
+        return Integer.valueOf(core().text().trim().substring(firstSlashIndex, secondSlashIndex));
     }
 
     @JDIAction("Get '{name}' start day value")
@@ -258,8 +258,8 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     @JDIAction("Get '{name}' input year value")
     public Year getYear() {
-        int secondSlashIndex = uiElement.text().trim().lastIndexOf("/") + 1;
-        return Year.of(Integer.valueOf(uiElement.text().trim().substring(secondSlashIndex)));
+        int secondSlashIndex = core().text().trim().lastIndexOf("/") + 1;
+        return Year.of(Integer.valueOf(core().text().trim().substring(secondSlashIndex)));
     }
 
     @JDIAction("Get '{name}' start year value")
@@ -407,47 +407,47 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     protected UIElement datepicker() {
         return new UIElement(By.xpath(String.format(DATEPICKER.getName(),
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                    this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement input() {
         return new UIElement(By.xpath(String.format(inputLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                    this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement toggle() {
         return new UIElement(By.xpath(String.format(TOGGLE.getName(),
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                    this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement toggleButton() {
         return new UIElement(By.xpath(String.format(toggleButton,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                    this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement openButton() {
-        String replaceExpression = this.uiElement.locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
+        String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
         return new UIElement(By.xpath(String.format(openButton, replaceExpression)));
     }
 
     protected WebList exampleEvents() {
-        String replaceExpression = this.uiElement.locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
+        String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
         return new WebList(By.xpath(String.format(exampleEvents, replaceExpression)));
     }
 
     protected UIElement switchLocaleButton() {
-        String replaceExpression = this.uiElement.locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
+        String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
         return new UIElement(By.xpath(String.format(switchLocaleButton, replaceExpression)));
     }
 
     protected Point getOutsidePoint() {
-        return new Point(uiElement.core().getRect().getWidth() + 2, uiElement.core().getRect().getHeight() + 2);
+        return new Point(core().core().getRect().getWidth() + 2, core().core().getRect().getHeight() + 2);
     }
 }

@@ -18,12 +18,13 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
  */
 public abstract class UIListBase<A extends UISelectAssert<?,?>> extends UIBaseElement<A>
         implements ISelector, SetValue {
+    protected int startIndex = ELEMENT.startIndex;
+
     public WebList list() {
         WebList webList = new WebList(base()).setup(JDIBase::searchVisible);
         webList.setStartIndex(getStartIndex());
         return webList;
     }
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }
