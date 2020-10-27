@@ -1,5 +1,6 @@
 package org.jdiai;
 
+import org.jdiai.jsdriver.JSDriver;
 import org.openqa.selenium.*;
 
 import java.util.ArrayList;

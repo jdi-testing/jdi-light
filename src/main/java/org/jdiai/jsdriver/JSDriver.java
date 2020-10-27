@@ -1,6 +1,9 @@
-package org.jdiai;
+package org.jdiai.jsdriver;
 
 import com.epam.jdi.tools.LinqUtils;
+import org.jdiai.JSBuilder;
+import org.jdiai.JSException;
+import org.jdiai.ListSearch;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

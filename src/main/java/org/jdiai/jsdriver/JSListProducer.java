@@ -1,4 +1,4 @@
-package org.jdiai;
+package org.jdiai.jsdriver;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

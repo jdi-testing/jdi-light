@@ -1,6 +1,6 @@
 package org.jdiai.tests;
 
-import org.jdiai.JSDriver;
+import org.jdiai.jsdriver.JSDriver;
 import org.jdiai.TestInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -12,16 +12,8 @@ import static org.testng.Assert.assertTrue;
 public class JSDriverListTests extends TestInit {
 
     @BeforeMethod
-    public void logout() {
-        if (driver().manage().getCookieNamed("authUser") == null) {
-            js("#user-name").invoke("click()");
-            js("#name").invoke("value='Roman'");
-            js("#password").invoke("value='Jdi1234'");
-            js("#login-button").invoke("click()");
-        }
-        if (!driver().getCurrentUrl().equals(USERS_PAGE)) {
-            driver().get(USERS_PAGE);
-        }
+    public void before() {
+        logout();
     }
 
     @Test

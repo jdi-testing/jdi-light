@@ -12,9 +12,8 @@ import static org.testng.Assert.assertEquals;
 public class JSDriverTests extends TestInit {
 
     @BeforeMethod
-    public void logout() {
-        driver().manage().deleteAllCookies();
-        driver().get(HOME_PAGE);
+    public void before() {
+        atHomePage();
     }
 
     @Test
@@ -61,13 +60,6 @@ public class JSDriverTests extends TestInit {
         js("#login-button").attribute("click()").getOneMultiSearch();
 
         assertEquals(js("#user-name").getStyle("visibility"), "visible");
-    }
-
-    private String[] withParent(String locator) {
-        return new String[] {".uui-header", ".profile-photo", locator };
-    }
-    private String[] inForm(String locator) {
-        return new String[] {".uui-header", "form", locator };
     }
     @Test
     public void oneFewLocatorsTest() {
