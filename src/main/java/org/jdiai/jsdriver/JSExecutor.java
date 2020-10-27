@@ -1,15 +1,14 @@
 package org.jdiai.jsdriver;
 
 import org.jdiai.JSBuilder;
-import org.jdiai.ListSearch;
 import org.openqa.selenium.By;
 
 import static com.epam.jdi.tools.LinqUtils.listCopy;
 import static com.epam.jdi.tools.LinqUtils.listCopyUntil;
 
 public class JSExecutor {
-    private String collector;
-    private JSDriver jsDriver;
+    private final String collector;
+    private final JSDriver jsDriver;
 
     public JSExecutor(String collector, JSDriver jsDriver) {
         this.collector = collector;
@@ -26,8 +25,8 @@ public class JSExecutor {
                 .executeQuery(collector));
         }
         switch (jsDriver.strategy) {
-            case ListSearch.CHAIN: return getOneChain();
-            case ListSearch.MULTI: return getOneMultiSearch();
+            case CHAIN: return getOneChain();
+            case MULTI: return getOneMultiSearch();
             default: return getOneChain();
         }
     }
@@ -38,8 +37,8 @@ public class JSExecutor {
                     .executeAsList("result"));
         }
         switch (jsDriver.strategy) {
-            case ListSearch.CHAIN: return getListChain();
-            case ListSearch.MULTI: return getListMultiSearch();
+            case CHAIN: return getListChain();
+            case MULTI: return getListMultiSearch();
             default: return getListChain();
         }
     }

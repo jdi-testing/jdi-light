@@ -17,41 +17,45 @@ public class JSObjectTest extends TestInit {
 
     @Test
     public void oneTest() {
-        TextInfo jsObject = entity(TextInfo.class, "#user-icon").getObject(
+        TextInfo jsObject = entity(TextInfo.class, "#user-name").getObject(
             " { \"tag\": element.tagName, \"iText\": element.innerText, " +
             "\"text\": element.textContent, \"iHtml\": element.innerHTML }");
-        assertEquals(jsObject.tag, "Roman Iovlev");
+
+        assertEquals(jsObject.tag, "SPAN");
         assertEquals(jsObject.iText, "Roman Iovlev");
         assertEquals(jsObject.text, "Roman Iovlev");
         assertEquals(jsObject.iHtml, "Roman Iovlev");
     }
     @Test
     public void oneAttributeTest() {
-        TextHtml jsObject = entity(TextHtml.class, "#user-icon")
+        TextHtml jsObject = entity(TextHtml.class, "#user-name")
             .getObject("tagName", "innerText", "textContent", "innerHTML");
-        assertEquals(jsObject.tagName, "Roman Iovlev");
+
+        assertEquals(jsObject.tagName, "SPAN");
         assertEquals(jsObject.innerText, "Roman Iovlev");
         assertEquals(jsObject.textContent, "Roman Iovlev");
         assertEquals(jsObject.innerHTML, "Roman Iovlev");
     }
     @Test
     public void oneFewLocatorsTest() {
-        TextInfo jsObject = entity(TextInfo.class, withParent("#user-icon")).getObject(
+        TextInfo jsObject = entity(TextInfo.class, withParent("#user-name")).getObject(
             " { \"tag\": element.tagName, \"iText\": element.innerText, " +
             "\"text\": element.textContent, \"iHtml\": element.innerHTML }");
-        assertEquals(jsObject.tag, "Roman Iovlev");
+
+        assertEquals(jsObject.tag, "SPAN");
         assertEquals(jsObject.iText, "Roman Iovlev");
         assertEquals(jsObject.text, "Roman Iovlev");
         assertEquals(jsObject.iHtml, "Roman Iovlev");
     }
     @Test
     public void oneFewLocatorsAttributesTest() {
-        TextInfo jsObject = entity(TextInfo.class, "#user-icon")
+        TextHtml jsObject = entity(TextHtml.class, "#user-name")
             .getObject("tagName", "innerText", "textContent", "innerHTML");
-        assertEquals(jsObject.tag, "Roman Iovlev");
-        assertEquals(jsObject.iText, "Roman Iovlev");
-        assertEquals(jsObject.text, "Roman Iovlev");
-        assertEquals(jsObject.iHtml, "Roman Iovlev");
+
+        assertEquals(jsObject.tagName, "SPAN");
+        assertEquals(jsObject.innerText, "Roman Iovlev");
+        assertEquals(jsObject.textContent, "Roman Iovlev");
+        assertEquals(jsObject.innerHTML, "Roman Iovlev");
     }
 
     @Test

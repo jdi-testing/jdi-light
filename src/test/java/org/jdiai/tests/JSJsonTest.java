@@ -17,38 +17,21 @@ public class JSJsonTest extends TestInit {
 
     @Test
     public void oneTest() {
-        JsonObject jsObject = json("#user-icon").getJson(
-            " { \"tag\": element.tagName, \"iText\": element.innerText, " +
-            "\"text\": element.textContent, \"iHtml\": element.innerHTML }");
-        assertEquals(jsObject.get("tag").getAsString(), "Roman Iovlev");
+        JsonObject jsObject = json("#user-name").getJson(
+            " { \"tag\": element.tagName, \"iText\": element.innerText, \"text\": element.textContent, \"iHtml\": element.innerHTML }");
+
+        assertEquals(jsObject.get("tag").getAsString(), "SPAN");
         assertEquals(jsObject.get("iText").getAsString(), "Roman Iovlev");
         assertEquals(jsObject.get("text").getAsString(), "Roman Iovlev");
         assertEquals(jsObject.get("iHtml").getAsString(), "Roman Iovlev");
-    }
-    @Test
-    public void oneAttributeTest() {
-        JsonObject jsObject = json("#user-icon")
-            .getJson("tagName", "innerText", "textContent", "innerHTML");
-        assertEquals(jsObject.get("tagName").getAsString(), "Roman Iovlev");
-        assertEquals(jsObject.get("innerText").getAsString(), "Roman Iovlev");
-        assertEquals(jsObject.get("textContent").getAsString(), "Roman Iovlev");
-        assertEquals(jsObject.get("innerHTML").getAsString(), "Roman Iovlev");
     }
     @Test
     public void oneFewLocatorsTest() {
-        JsonObject jsObject = json(withParent("#user-icon")).getJson(
+        JsonObject jsObject = json(withParent("#user-name")).getJson(
             " { \"tag\": element.tagName, \"iText\": element.innerText, " +
             "\"text\": element.textContent, \"iHtml\": element.innerHTML }");
-        assertEquals(jsObject.get("tag").getAsString(), "Roman Iovlev");
-        assertEquals(jsObject.get("iText").getAsString(), "Roman Iovlev");
-        assertEquals(jsObject.get("text").getAsString(), "Roman Iovlev");
-        assertEquals(jsObject.get("iHtml").getAsString(), "Roman Iovlev");
-    }
-    @Test
-    public void oneFewLocatorsAttributesTest() {
-        JsonObject jsObject = json("#user-icon")
-            .getJson("tagName", "innerText", "textContent", "innerHTML");
-        assertEquals(jsObject.get("tag").getAsString(), "Roman Iovlev");
+
+        assertEquals(jsObject.get("tag").getAsString(), "SPAN");
         assertEquals(jsObject.get("iText").getAsString(), "Roman Iovlev");
         assertEquals(jsObject.get("text").getAsString(), "Roman Iovlev");
         assertEquals(jsObject.get("iHtml").getAsString(), "Roman Iovlev");

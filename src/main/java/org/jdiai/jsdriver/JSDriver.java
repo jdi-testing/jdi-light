@@ -1,12 +1,15 @@
 package org.jdiai.jsdriver;
 
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.map.MapArray;
+import com.google.gson.JsonObject;
 import org.jdiai.JSBuilder;
 import org.jdiai.JSException;
 import org.jdiai.ListSearch;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -65,18 +68,24 @@ public class JSDriver {
         return new JSExecutor("element." + text, this);
     }
     public JSExecutor json(String json) {
-        return new JSExecutor("JSON.stringify(" + json + ");", this);
+        return new JSExecutor("JSON.stringify(" + json + ")", this);
     }
     public JSExecutor attributes(List<String> attributes) {
-        return json("{ " + print(map(attributes,
-            el -> "\"" + el + "\": element." + el), ", ") + " }");
+        String jsonObject = "{ " + print(map(attributes, el -> "\"" + el + "\": element." + el), ", ") + " }";
+        return json(jsonObject);
     }
     public JSExecutor attributes(String... attributes) {
         return attributes(asList(attributes));
     }
     public String getStyle(String style) {
-        return builder()
-            .getOneFromOne("document", lastLocator())
-            .executeQuery("getComputedStyle(element)." + style);
+        return json("{ \"style\": getComputedStyle(element)." + style + " }").getOne().asJson().get("style").getAsString();
+    }
+    public MapArray<String, String> getStyles(List<String> styles) {
+        String jsonObject = "{ " + print(map(styles, el -> "\"" + el + "\": getComputedStyle(element)." + el), ", ") + " }";
+        JsonObject json = json(jsonObject).getOne().asJson();
+        return new MapArray<>(styles, s -> s, s -> json.get(s).getAsString());
+    }
+    public MapArray<String, String> getStyles(String... styles) {
+        return getStyles(asList(styles));
     }
 }

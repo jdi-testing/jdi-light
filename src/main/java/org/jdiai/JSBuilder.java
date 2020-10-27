@@ -28,17 +28,23 @@ public class JSBuilder {
         this.logQuery = true;
         return this;
     }
-    public String executeQuery(String result) {
-        String jsScript = getScript() + "return " + result;
+    public String executeQuery(String getResult) {
+        String jsScript = getScript() + "return " + getResult;
         if (logQuery)
             System.out.println("Execute query:" + LINE_BREAK + jsScript);
-        return (String) js.executeScript(jsScript);
+        String result = (String) js.executeScript(jsScript);
+        if (result != null && logQuery)
+            System.out.println(">>> " + result);
+        return result;
     }
-    public List<String> executeAsList(String result) {
-        String jsScript = getScript() + "return " + result;
+    public List<String> executeAsList(String getResult) {
+        String jsScript = getScript() + "return " + getResult;
         if (logQuery)
             System.out.println("Execute query:" + LINE_BREAK + jsScript);
-        return (List<String>) js.executeScript(jsScript);
+        List<String> result = (List<String>) js.executeScript(jsScript);;
+        if (result != null && logQuery)
+            System.out.println(">>> " + result);
+        return result;
     }
     public String getQuery(String result) {
         return getScript() + "return " + result;

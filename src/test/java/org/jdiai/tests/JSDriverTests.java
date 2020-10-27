@@ -1,11 +1,14 @@
 package org.jdiai.tests;
 
+import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
 import org.jdiai.TestInit;
 import org.jdiai.entity.Link;
 import org.jdiai.entity.LinkHtml;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
@@ -121,5 +124,12 @@ public class JSDriverTests extends TestInit {
         assertEquals(link.tagName, "IMG");
         assertEquals(link.src, "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
         assertEquals(json.get("src").getAsString(), link.src);
+    }
+    @Test
+    public void getStylesTests() {
+        MapArray<String, String> styles = js("#user-icon").getStyles("color", "display", "fontSize");
+        assertEquals(styles.get("color"), "rgb(204, 204, 204)");
+        assertEquals(styles.get("display"), "block");
+        assertEquals(styles.get("fontSize"), "15px");
     }
 }
