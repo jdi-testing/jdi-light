@@ -3,7 +3,7 @@ package org.jdiai;
 public class JSTemplates {
     public static String GET_LIST = "result = [];\n" +
             "for(let i = 0; i < elements%s; i++) {\n" +
-            "  result.push(elements%s.%s);\n" +
+            "  result.push(%s);\n" +
             "}\n";
     public static String GET_ONE_FROM_LIST = "found = false; i = 0;\n" +
             "while (!found && i < elements.length) {\n" +

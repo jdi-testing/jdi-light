@@ -1,6 +1,6 @@
 package org.jdiai.tests;
 
-import org.jdiai.JSInterface;
+import org.jdiai.JSDriver;
 import org.jdiai.TestInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -14,10 +14,10 @@ public class JSDriverListTests extends TestInit {
     @BeforeMethod
     public void logout() {
         if (driver().manage().getCookieNamed("authUser") == null) {
-            js("#user-name").getOne("click()");
-            js("#name").getOne("value='Roman'");
-            js("#password").getOne("value='Jdi1234'");
-            js("#login-button").getOne("click()");
+            js("#user-name").invoke("click()");
+            js("#name").invoke("value='Roman'");
+            js("#password").invoke("value='Jdi1234'");
+            js("#login-button").invoke("click()");
         }
         if (!driver().getCurrentUrl().equals(USERS_PAGE)) {
             driver().get(USERS_PAGE);
@@ -26,42 +26,42 @@ public class JSDriverListTests extends TestInit {
 
     @Test
     public void list1Test() {
-        assertEquals(js("//*[@id='user-table']//td[3]").getList("innerText").toString(),
+        assertEquals(js("//*[@id='user-table']//td[3]").attribute("innerText").getList().asString().toString(),
         "[Roman, Sergey Ivan, Vladzimir, Helen Bennett, Yoshi Tannamuri, Giovanni Rovelli]");
     }
     @Test
     public void chain3Test() {
-        assertEquals(js("#user-table", ".//tr//*[*[span[contains(.,'er')]]]", "[checked]").getListChain("id").toString(),
+        assertEquals(js("#user-table", ".//tr//*[*[span[contains(.,'er')]]]", "[checked]").attribute("id").getListChain().asString().toString(),
                 "[roman]");
     }
     @Test
     public void list3Test() {
-        assertEquals(js("#user-table", ".//tr//*[*[span[contains(.,'er')]]]", "[checked]").getList("id").toString(),
+        assertEquals(js("#user-table", ".//tr//*[*[span[contains(.,'er')]]]", "[checked]").attribute("id").getList().asString().toString(),
                 "[roman]");
     }
     @Test
     public void multi3Test() {
-        assertEquals(js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]").getListMultiSearch("id").toString(),
+        assertEquals(js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]").attribute("id").getListMultiSearch().asString().toString(),
                 "[roman, vlad]");
     }
     @Test
     public void multiListTest() {
-        JSInterface js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
+        JSDriver js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
             .multiSearch();
-        assertEquals(js.getList("id").toString(), "[roman, vlad]");
+        assertEquals(js.attribute("id").getList().asString().toString(), "[roman, vlad]");
     }
     @Test
     public void getOneMultiTest() {
-        JSInterface js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
+        JSDriver js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
             .multiSearch();
-        assertEquals(js.getOne("id"), "roman");
+        assertEquals(js.attribute("id").getOne().asString(), "roman");
     }
 
     @Test
     public void getOneChainTest() {
-        JSInterface js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]");
+        JSDriver js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]");
         try {
-            js.getOne("id");
+            js.attribute("id").getOne().asString();
             Assert.fail("Chain search should fail");
         } catch (Exception ex) {
             assertTrue(ex.getMessage().contains("javascript error: Cannot read property 'querySelector' of null"));

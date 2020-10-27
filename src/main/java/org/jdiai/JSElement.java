@@ -28,7 +28,7 @@ public class JSElement implements WebElement {
         this.driver = driver;
     }
     private String jsResult(String action) {
-        return js.getOne(action);
+        return js.attribute(action).getOne().asString();
     }
     private WebElement we() {
         SearchContext ctx = driver;

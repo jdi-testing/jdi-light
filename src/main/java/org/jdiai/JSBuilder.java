@@ -60,15 +60,15 @@ public class JSBuilder {
     }
     public JSBuilder getListFromOne(String context, By locator) {
         query += register("elements") +
-            MessageFormat.format(dataType(locator).getAll, context, selector(locator)) + ";\n";
+            MessageFormat.format(dataType(locator).getAll, context, selector(locator));
         return this;
     }
-    public JSBuilder getListFromOne(String context, By locator, String param) {
+    public JSBuilder getListFromOne(String context, By locator, String collector) {
         GetData data = dataType(locator);
         register("result");
         query += register("elements") +
-            MessageFormat.format(data.getAll, context, selector(locator)) + ";\n" +
-            format(GET_LIST, data.length, format(data.index, "i"), param);
+            MessageFormat.format(data.getAll, context, selector(locator)) +
+            format(GET_LIST, data.length, collector.replaceAll("element", "elements" + format(data.index, "i")));
         return this;
     }
     public JSBuilder getListFromList(By locator, By prevLocator) {
@@ -81,7 +81,7 @@ public class JSBuilder {
             data.length, format(data.index, "j"));
         return this;
     }
-    public JSBuilder getListFromList(By locator, By prevLocator, String param) {
+    public JSBuilder getListFromList(By locator, By prevLocator, String collector) {
         register("elements");
         register("result");
         GetData prevData = dataType(prevLocator);
@@ -89,7 +89,7 @@ public class JSBuilder {
         query += format(GET_LIST_FROM_LIST, prevData.length,
             MessageFormat.format(data.getAll, "elements[i]", selector(locator)),
             data.length, format(data.index, "j"))
-            + format(GET_LIST, data.length, format(data.index, "i"), param);
+            + format(GET_LIST, data.length, collector.replaceAll("element", "elements" + format(data.index, "i")));
         return this;
     }
 
@@ -102,7 +102,7 @@ public class JSBuilder {
     private String getScript() {
         String jsScript = "";
         if (variables.size() == 1)
-            return "let " + query + ";\n";
+            return "let " + query;
         for (String variable : variables) {
             jsScript += "let " + variable + ";\n";
         }
