@@ -9,7 +9,7 @@ public class NavigationBar extends Menu {
     private Object pageObject = this;
 
     @JDIAction(value = "Perform tap on '{name}' {0} button")
-    public void tapBarButton(String buttonName) {
+    public void tapButton(String buttonName) {
         HasTouchActions button = GET_BUTTON.execute(pageObject, buttonName);
         button.tap();
     }

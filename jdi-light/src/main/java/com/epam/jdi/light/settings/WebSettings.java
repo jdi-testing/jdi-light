@@ -104,8 +104,6 @@ public class WebSettings {
     }
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
         switch (ELEMENT.useSmartSearch) {
-            case FALSE:
-                return null;
             case ONLY_UI:
                 if (el.base().locator.isNull())
                     return null;
@@ -114,6 +112,8 @@ public class WebSettings {
                 if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
                     return null;
                 break;
+            default:
+                return null;
         }
         String locatorName = ELEMENT.smartName.value.execute(el.getName());
         return el.base().timer().getResult(() -> {
@@ -319,11 +319,10 @@ public class WebSettings {
 
     private static PageLoadStrategy getPageLoadStrategy(String strategy) {
         switch (strategy.toLowerCase()) {
-            case "normal": return NORMAL;
             case "none": return PageLoadStrategy.NONE;
             case "eager": return EAGER;
+            default:  return NORMAL;
         }
-        return NORMAL;
     }
 
     private static Properties getProperties(String path) {

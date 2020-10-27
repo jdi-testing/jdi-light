@@ -7,6 +7,7 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBys;
 import java.util.List;
 
 public class ViewsPage {
+
     @MobileFindBy(accessibilityId = "Buttons")
     public static Button buttonsPage;
 
@@ -15,7 +16,7 @@ public class ViewsPage {
 
     @MobileFindBys(@MobileFindBy(id = "android:id/list"))
     public static List<Button> buttons;
-
+  
     @MobileFindBy(accessibilityId = "Seek Bar")
     public static Button seekBarPage;
 
@@ -24,4 +25,5 @@ public class ViewsPage {
 
     @MobileFindBy(accessibilityId = "TextFields")
     public static Button textFieldsPage;
+
 }

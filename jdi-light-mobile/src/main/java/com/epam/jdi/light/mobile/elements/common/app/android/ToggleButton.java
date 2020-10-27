@@ -9,8 +9,12 @@ import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.mobile.asserts.SwitchAssert;
 import com.epam.jdi.light.mobile.asserts.ToggleButtonAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
+import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
 import com.epam.jdi.light.mobile.elements.common.app.ISwitch;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ToolBar;
 import org.hamcrest.Matchers;
 
 public class ToggleButton extends MobileAppBaseElement<ToggleButtonAssert>  implements HasTouchActions, IsButton, IsText {
@@ -29,6 +33,7 @@ public class ToggleButton extends MobileAppBaseElement<ToggleButtonAssert>  impl
     public void setToOn() {
         if (!isOn())
             core().tap();
+
     }
 
     @Override

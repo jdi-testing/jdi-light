@@ -176,12 +176,12 @@ public class DataTableAssert<L extends PageObject, D>
                 case EXACT:
                     jdiAssert(table().dataRows(condition), hasSize(count));
                     break;
-                case ALL:
-                    List<D> rows = table().allData();
-                    jdiAssert(LinqUtils.all(rows, condition), Matchers.is(true));
-                    break;
                 case ATLEAST:
                     jdiAssert(table().dataRows(condition, count), hasSize(count));
+                    break;
+                default: case ALL:
+                    List<D> rows = table().allData();
+                    jdiAssert(LinqUtils.all(rows, condition), Matchers.is(true));
                     break;
             }
             return dtAssert;
