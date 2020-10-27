@@ -1,5 +1,8 @@
 package org.jdiai;
 
+import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,10 +18,11 @@ import static org.jdiai.JSTemplates.*;
 import static org.jdiai.WebDriverByUtils.getByLocator;
 
 public class JSBuilder {
-    List<String> variables = new ArrayList<>();
-    String query = "";
-    JavascriptExecutor js;
+    private final List<String> variables = new ArrayList<>();
+    private String query = "";
+    private JavascriptExecutor js;
     public boolean logQuery = false;
+    public static JAction1<String> logger = System.out::println;
 
     public JSBuilder(WebDriver driver) {
         this.js = (JavascriptExecutor) driver;
@@ -31,19 +35,19 @@ public class JSBuilder {
     public String executeQuery(String getResult) {
         String jsScript = getScript() + "return " + getResult;
         if (logQuery)
-            System.out.println("Execute query:" + LINE_BREAK + jsScript);
+            logger.execute("Execute query:" + LINE_BREAK + jsScript);
         String result = (String) js.executeScript(jsScript);
         if (result != null && logQuery)
-            System.out.println(">>> " + result);
+            logger.execute(">>> " + result);
         return result;
     }
     public List<String> executeAsList(String getResult) {
         String jsScript = getScript() + "return " + getResult;
         if (logQuery)
-            System.out.println("Execute query:" + LINE_BREAK + jsScript);
-        List<String> result = (List<String>) js.executeScript(jsScript);;
+            logger.execute("Execute query:" + LINE_BREAK + jsScript);
+        List<String> result = (List<String>) js.executeScript(jsScript);
         if (result != null && logQuery)
-            System.out.println(">>> " + result);
+            logger.execute(">>> " + result);
         return result;
     }
     public String getQuery(String result) {
@@ -53,49 +57,41 @@ public class JSBuilder {
     private String selector(By locator) {
         return getByLocator(locator).replaceAll("'", "\"");
     }
-    public JSBuilder getOneFromOne(String context, By locator) {
-        query += register("element") + MessageFormat.format(dataType(locator).get, context, selector(locator));
+
+    public JFunc2<String, By, String> oneToOne = (ctx, locator) ->
+        format(ONE_TO_ONE, MessageFormat.format(dataType(locator).get, ctx, selector(locator)));
+    public JSBuilder getOneToOne(String ctx, By locator) {
+        query += register("element") + oneToOne.execute(ctx, locator);
         return this;
     }
-    public JSBuilder getOneFromList(By locator) {
-        register("found");
-        register("i");
-        query += register("element") +
-            format(GET_ONE_FROM_LIST, MessageFormat.format(dataType(locator).get, "elements[i]", selector(locator)));
+    public JFunc1<By, String> listToOne = locator ->
+        format(LIST_TO_ONE, MessageFormat.format(dataType(locator).get, "elements[i]", selector(locator)));
+
+    public JSBuilder getListToOne(By locator) {
+        query += listToOne.execute(locator);
         return this;
     }
-    public JSBuilder getListFromOne(String context, By locator) {
-        query += register("elements") +
-            MessageFormat.format(dataType(locator).getAll, context, selector(locator));
+    public JFunc2<String, By, String> oneToList = (ctx, locator) ->
+            format(ONE_TO_LIST, MessageFormat.format(dataType(locator).getAll, ctx, selector(locator)));
+    public JSBuilder getOneToList(String ctx, By locator) {
+        query += register("elements") + oneToList.execute(ctx, locator);
         return this;
     }
-    public JSBuilder getListFromOne(String context, By locator, String collector) {
+
+    public JFunc1<By, String> listToList = (locator) -> {
         GetData data = dataType(locator);
-        register("result");
-        query += register("elements") +
-            MessageFormat.format(data.getAll, context, selector(locator)) +
-            format(GET_LIST, data.length, collector.replaceAll("element", "elements" + format(data.index, "i")));
-        return this;
-    }
-    public JSBuilder getListFromList(By locator, By prevLocator) {
-        register("elements");
-        register("result");
-        GetData prevData = dataType(prevLocator);
-        GetData data = dataType(locator);
-        query += format(GET_LIST_FROM_LIST, prevData.length,
-            MessageFormat.format(data.getAll, "elements[i]", selector(locator)),
+        return format(LIST_TO_LIST,
+            MessageFormat.format(data.getAll, "element", selector(locator)),
             data.length, format(data.index, "j"));
+    };
+    public JSBuilder getListToList(By locator) {
+        query += listToList.execute(locator);
         return this;
     }
-    public JSBuilder getListFromList(By locator, By prevLocator, String collector) {
-        register("elements");
-        register("result");
-        GetData prevData = dataType(prevLocator);
+
+    public JSBuilder collect(By locator, String collector) {
         GetData data = dataType(locator);
-        query += format(GET_LIST_FROM_LIST, prevData.length,
-            MessageFormat.format(data.getAll, "elements[i]", selector(locator)),
-            data.length, format(data.index, "j"))
-            + format(GET_LIST, data.length, collector.replaceAll("element", "elements" + format(data.index, "i")));
+        query += format(LIST_TO_RESULT, data.length, collector.replaceAll("element", "elements" + format(data.index, "i")));
         return this;
     }
 

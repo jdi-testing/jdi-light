@@ -8,7 +8,7 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.map;
 
 public class JSListProducer {
-    private List<String> result;
+    private final List<String> result;
     public JSListProducer(List<String> result) {
         this.result = result;
     }

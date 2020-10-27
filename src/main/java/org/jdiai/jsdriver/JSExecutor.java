@@ -21,7 +21,7 @@ public class JSExecutor {
     public JSProducer getOne() {
         if (jsDriver.locators().size() == 1) {
             return new JSProducer(builder()
-                .getOneFromOne("document", jsDriver.firstLocator())
+                .getOneToOne("document", jsDriver.firstLocator())
                 .executeQuery(collector));
         }
         switch (jsDriver.strategy) {
@@ -33,7 +33,8 @@ public class JSExecutor {
     public JSListProducer getList() {
         if (jsDriver.locators().size() == 1) {
             return new JSListProducer(builder()
-                    .getListFromOne("document", jsDriver.firstLocator(), collector)
+                    .getOneToList("document", jsDriver.firstLocator())
+                    .collect(jsDriver.firstLocator(), collector)
                     .executeAsList("result"));
         }
         switch (jsDriver.strategy) {
@@ -50,7 +51,7 @@ public class JSExecutor {
         JSBuilder builder =  builder();
         String ctx = "document";
         for (By locator : jsDriver.locators()) {
-            builder.getOneFromOne(ctx, locator);
+            builder.getOneToOne(ctx, locator);
             ctx = "element";
         }
         return new JSProducer(builder.executeQuery(collector));
@@ -60,13 +61,11 @@ public class JSExecutor {
             return getOne();
         }
         JSBuilder builder = builder()
-                .getListFromOne("document", jsDriver.firstLocator());
-        By prev = jsDriver.firstLocator();
+                .getOneToList("document", jsDriver.firstLocator());
         for (By locator : listCopy(jsDriver.locators(), 1, -1)) {
-            builder.getListFromList(locator, prev);
-            prev = locator;
+            builder.getListToList(locator);
         }
-        builder.getOneFromList(jsDriver.lastLocator());
+        builder.getListToOne(jsDriver.lastLocator());
         return new JSProducer(builder.executeQuery(collector));
     }
     public JSListProducer getListChain() {
@@ -76,10 +75,11 @@ public class JSExecutor {
         JSBuilder builder =  builder();
         String ctx = "document";
         for (By locator : listCopyUntil(jsDriver.locators(), -1)) {
-            builder.getOneFromOne(ctx, locator);
+            builder.getOneToOne(ctx, locator);
             ctx = "element";
         }
-        builder.getListFromOne("element", jsDriver.lastLocator(), collector);
+        builder.getOneToList("element", jsDriver.lastLocator())
+            .collect(jsDriver.lastLocator(), collector);
         return new JSListProducer(builder.executeAsList("result"));
     }
     public JSListProducer getListMultiSearch() {
@@ -87,13 +87,11 @@ public class JSExecutor {
             return getList();
         }
         JSBuilder builder =  builder();
-        builder.getListFromOne("document", jsDriver.firstLocator());
-        By prev = jsDriver.firstLocator();
+        builder.getOneToList("document", jsDriver.firstLocator());
         for (By locator : listCopy(jsDriver.locators(), 1, -1)) {
-            builder.getListFromList(locator, prev);
-            prev = locator;
+            builder.getListToList(locator);
         }
-        builder.getListFromList(jsDriver.lastLocator(), listCopy(jsDriver.locators(), -2, -2).get(0), collector);
+        builder.getListToList(jsDriver.lastLocator()).collect(jsDriver.lastLocator(), collector);
         return new JSListProducer(builder.executeAsList("result"));
     }
 
