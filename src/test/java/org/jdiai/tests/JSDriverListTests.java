@@ -1,7 +1,7 @@
 package org.jdiai.tests;
 
-import org.jdiai.jsdriver.JSDriver;
 import org.jdiai.TestInit;
+import org.jdiai.jsdriver.JSDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

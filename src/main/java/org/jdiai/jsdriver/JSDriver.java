@@ -9,7 +9,6 @@ import org.jdiai.ListSearch;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;

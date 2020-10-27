@@ -5,11 +5,9 @@ import com.google.gson.JsonObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
 public class JSElement extends JSBase {

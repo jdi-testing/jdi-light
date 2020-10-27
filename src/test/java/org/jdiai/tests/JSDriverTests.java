@@ -8,8 +8,6 @@ import org.jdiai.entity.LinkHtml;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static org.testng.Assert.assertEquals;
 
 public class JSDriverTests extends TestInit {

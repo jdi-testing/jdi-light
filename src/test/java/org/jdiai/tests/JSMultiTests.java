@@ -1,21 +1,18 @@
 package org.jdiai.tests;
 
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
 import org.jdiai.TestInit;
 import org.jdiai.entity.UserInfo;
-import org.jdiai.jsdriver.JSDriver;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.LinqUtils.ifSelect;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static org.jdiai.jselement.JSTalk.$;
 import static org.jdiai.jselement.JSTalk.entity;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class JSMultiTests extends TestInit {
 

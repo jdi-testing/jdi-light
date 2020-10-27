@@ -1,10 +1,8 @@
 package org.jdiai.jselement;
 
-import com.google.gson.JsonObject;
 import org.jdiai.JSException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
