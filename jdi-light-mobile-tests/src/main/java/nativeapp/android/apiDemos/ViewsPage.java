@@ -15,4 +15,13 @@ public class ViewsPage {
 
     @MobileFindBys(@MobileFindBy(id = "android:id/list"))
     public static List<Button> buttons;
+
+    @MobileFindBy(accessibilityId = "Seek Bar")
+    public static Button seekBarPage;
+
+    @MobileFindBy(accessibilityId = "Search View")
+    public static Button searchViewPage;
+
+    @MobileFindBy(accessibilityId = "TextFields")
+    public static Button textFieldsPage;
 }
