@@ -3,6 +3,7 @@ package com.epam.jdi.light.asserts.generic;
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
@@ -17,7 +18,7 @@ import static com.epam.jdi.tools.StringUtils.format;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAssert<E>
+public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends BaseAssert<E>
     implements CommonAssert<A> {
     /**
      * Check that the element is displayed
@@ -168,10 +169,10 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
         return t.execute((A) this);
     }
 
-    public A set(E element) {
-        this.element = element;
-        name = element.getName();
-        failElement = format("%s(%s)", name, element.core().printFullLocator());
+    public A set(E original) {
+        this.element = new Safe<>(() -> original);
+        name = original.getName();
+        failElement = format("%s(%s)", name, original.core().printFullLocator());
         return (A) this;
     }
 
