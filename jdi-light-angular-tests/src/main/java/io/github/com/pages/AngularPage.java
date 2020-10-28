@@ -1,6 +1,5 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.angular.elements.complex.BottomSheet;
 import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -12,7 +11,6 @@ public class AngularPage extends WebPage {
     public static Icon basicIcon;
     public static Icon svgIcon;
     public static Ripple rippleContainer;
-    public static BottomSheet bottomSheet;
     public static Dialog dialog;
     public static RadioButtonSection radioButtonSection;
     public static CheckboxSection checkboxSection;
@@ -26,7 +24,6 @@ public class AngularPage extends WebPage {
     public static BasicButtonsSection basicButtonsSection;
     public static AutocompleteSection autocompleteSection;
     public static SnackbarSection snackbarSection;
-    public static ButtonToggleSection buttonToggleSection;
     public static ProgressBarSection progressBarSection;
     public static MenuSection menuSection;
     public static PaginatorSection paginatorSection;
