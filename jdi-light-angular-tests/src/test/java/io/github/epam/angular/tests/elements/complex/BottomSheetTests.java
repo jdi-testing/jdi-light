@@ -25,6 +25,7 @@ public class BottomSheetTests extends TestsInit {
     public void checkBottomSheetIsDisplayedTest() {
         bottomSheet.open();
         bottomSheet.is().opened();
+        bottomSheet.close();
     }
 
     @Test
@@ -38,6 +39,8 @@ public class BottomSheetTests extends TestsInit {
     public void checkBottomSheetAvailableOptionsTest() {
         bottomSheet.open();
         bottomSheet.is().values(BOTTOM_SHEET_VALUES);
+        bottomSheet.close();
+        bottomSheet.is().closed();
     }
 }
 
