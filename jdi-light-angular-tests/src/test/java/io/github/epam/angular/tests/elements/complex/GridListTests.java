@@ -29,7 +29,7 @@ public class GridListTests extends TestsInit {
     @Test
     public void basicGridListColorTest() {
         gridListSection.basicGridList.get(1)
-                 .has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
+                .has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
     }
 
     @Test
@@ -45,12 +45,12 @@ public class GridListTests extends TestsInit {
     @Test
     public void dynamicGridListColorTest() {
         gridListSection.dynamicGridList.get(1)
-             .has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
+                .has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
         gridListSection.dynamicGridList.get(2)
-             .has().css("background-color", "rgba(" + 144 + ", " + 238 + ", " + 144 + ", 1)");
+                .has().css("background-color", "rgba(" + 144 + ", " + 238 + ", " + 144 + ", 1)");
         gridListSection.dynamicGridList.get(3)
-             .has().css("background-color", "rgba(" + 255 + ", " + 182 + ", " + 193 + ", 1)");
+                .has().css("background-color", "rgba(" + 255 + ", " + 182 + ", " + 193 + ", 1)");
         gridListSection.dynamicGridList.get(4)
-                 .has().css("background-color", "rgba(" + 221 + ", " + 189 + ", " + 241 + ", 1)");
+                .has().css("background-color", "rgba(" + 221 + ", " + 189 + ", " + 241 + ", 1)");
     }
 }
