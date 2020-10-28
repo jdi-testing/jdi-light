@@ -16,7 +16,7 @@ import static org.jdiai.JSTemplates.XPATH_LIST_FUNC;
 import static org.jdiai.WebDriverByUtils.getByLocator;
 import static org.jdiai.WebDriverByUtils.getByType;
 
-public class JSBuilder {
+public class JSBuilder implements IJSBuilder {
     private final List<String> variables = new ArrayList<>();
     private String query = "";
     private JavascriptExecutor js;
@@ -32,11 +32,11 @@ public class JSBuilder {
         this.js = (JavascriptExecutor) driver;
         this.builderActions = builderActions != null ? builderActions : new BuilderActions(this);
     }
-    public JSBuilder registerFunction(String name, String function) {
+    public IJSBuilder registerFunction(String name, String function) {
         useFunctions.update(name, function);
         return this;
     }
-    public JSBuilder logQuery() {
+    public IJSBuilder logQuery() {
         this.logQuery = true;
         return this;
     }
@@ -74,23 +74,23 @@ public class JSBuilder {
             registerFunction("xpathList", XPATH_LIST_FUNC);
         return selector;
     }
-    public JSBuilder getOneToOne(String ctx, By locator) {
+    public IJSBuilder getOneToOne(String ctx, By locator) {
         query += builderActions.oneToOne(ctx, locator);
         return this;
     }
-    public JSBuilder getListToOne(By locator) {
+    public IJSBuilder getListToOne(By locator) {
         query += builderActions.listToOne(locator);
         return this;
     }
-    public JSBuilder getOneToList(String ctx, By locator) {
+    public IJSBuilder getOneToList(String ctx, By locator) {
         query += builderActions.oneToList(ctx, locator);
         return this;
     }
-    public JSBuilder getListToList(By locator) {
+    public IJSBuilder getListToList(By locator) {
         query += builderActions.listToList(locator);
         return this;
     }
-    public JSBuilder collect(String collector) {
+    public IJSBuilder collect(String collector) {
         query += builderActions.collect(collector);
         return this;
     }

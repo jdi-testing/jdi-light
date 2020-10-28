@@ -3,6 +3,7 @@ package org.jdiai.jsdriver;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
+import org.jdiai.IJSBuilder;
 import org.jdiai.JSBuilder;
 import org.jdiai.JSException;
 import org.jdiai.ListSearch;
@@ -22,7 +23,7 @@ public class JSDriver {
     private final List<By> locators;
     public static boolean logQuery = false;
     public ListSearch strategy = CHAIN;
-    private JSBuilder builder;
+    private IJSBuilder builder;
 
     public JSDriver(WebDriver driver, By... locators) {
         this(driver, newList(locators));
@@ -52,7 +53,11 @@ public class JSDriver {
         return LinqUtils.last(locators);
     }
 
-    public JSBuilder builder() {
+    public JSDriver setBuilder(IJSBuilder builder) {
+        this.builder = builder;
+        return this;
+    }
+    public IJSBuilder builder() {
         if (builder != null)
             return builder;
         builder = new JSBuilder(driver());

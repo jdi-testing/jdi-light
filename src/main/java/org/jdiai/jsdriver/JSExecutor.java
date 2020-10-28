@@ -1,6 +1,6 @@
 package org.jdiai.jsdriver;
 
-import org.jdiai.JSBuilder;
+import org.jdiai.IJSBuilder;
 import org.openqa.selenium.By;
 
 import static com.epam.jdi.tools.LinqUtils.listCopy;
@@ -14,7 +14,7 @@ public class JSExecutor {
         this.collector = collector;
         this.jsDriver = jsDriver;
     }
-    private JSBuilder builder() {
+    private IJSBuilder builder() {
         return jsDriver.builder();
     }
 
@@ -48,7 +48,7 @@ public class JSExecutor {
         if (jsDriver.locators().size() == 1) {
             return getOne();
         }
-        JSBuilder builder =  builder();
+        IJSBuilder builder =  builder();
         String ctx = "document";
         for (By locator : jsDriver.locators()) {
             builder.getOneToOne(ctx, locator);
@@ -60,7 +60,7 @@ public class JSExecutor {
         if (jsDriver.locators().size() == 1) {
             return getOne();
         }
-        JSBuilder builder = builder()
+        IJSBuilder builder = builder()
                 .getOneToList("document", jsDriver.firstLocator());
         for (By locator : listCopy(jsDriver.locators(), 1, -1)) {
             builder.getListToList(locator);
@@ -72,7 +72,7 @@ public class JSExecutor {
         if (jsDriver.locators().size() == 1) {
             return getList();
         }
-        JSBuilder builder =  builder();
+        IJSBuilder builder =  builder();
         String ctx = "document";
         for (By locator : listCopyUntil(jsDriver.locators(), -1)) {
             builder.getOneToOne(ctx, locator);
@@ -86,7 +86,7 @@ public class JSExecutor {
         if (jsDriver.locators().size() == 1) {
             return getList();
         }
-        JSBuilder builder =  builder();
+        IJSBuilder builder =  builder();
         builder.getOneToList("document", jsDriver.firstLocator());
         for (By locator : listCopy(jsDriver.locators(), 1, -1)) {
             builder.getListToList(locator);

@@ -9,8 +9,8 @@ import static org.jdiai.GetTypes.dataType;
 import static org.jdiai.JSTemplates.*;
 
 public class BuilderActions implements IBuilderActions {
-    private final JSBuilder builder;
-    public BuilderActions(JSBuilder builder) {
+    private final IJSBuilder builder;
+    public BuilderActions(IJSBuilder builder) {
         this.builder = builder;
     }
     public String oneToOne(String ctx, By locator) {
