@@ -41,4 +41,7 @@ public class ApiDemosApp {
     public static ActionBarUsagePage actionBarUsagePage;
 
     public static ActionBarDisplayOptionsPage actionBarDisplayOptionsPage;
+    public static TabsPage tabsPage;
+
+
 }
