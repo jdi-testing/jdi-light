@@ -23,18 +23,18 @@ public class JSDriverListTests extends TestInit {
     }
     @Test
     public void chain3Test() {
-        assertEquals(js("#user-table", ".//tr//*[*[span[contains(.,'er')]]]", "[checked]").attribute("id").getListChain().asString().toString(),
-                "[roman]");
+        assertEquals(js("#user-table", ".//tr//*[*[span[contains(.,'er')]]]", "[checked]")
+            .attribute("id").getListChain().asString().toString(),"[roman]");
     }
     @Test
     public void list3Test() {
-        assertEquals(js("#user-table", ".//tr//*[*[span[contains(.,'er')]]]", "[checked]").attribute("id").getList().asString().toString(),
-                "[roman]");
+        assertEquals(js("#user-table", ".//tr//*[*[span[contains(.,'er')]]]", "[checked]")
+            .attribute("id").getList().asString().toString(),"[roman]");
     }
     @Test
     public void multi3Test() {
-        assertEquals(js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]").attribute("id").getListMultiSearch().asString().toString(),
-                "[roman, vlad]");
+        assertEquals(js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
+            .attribute("id").getListMultiSearch().asString().toString(),"[roman, vlad]");
     }
     @Test
     public void multiListTest() {

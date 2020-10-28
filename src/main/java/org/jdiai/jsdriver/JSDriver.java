@@ -22,6 +22,7 @@ public class JSDriver {
     private final List<By> locators;
     public static boolean logQuery = false;
     public ListSearch strategy = CHAIN;
+    private JSBuilder builder;
 
     public JSDriver(WebDriver driver, By... locators) {
         this(driver, newList(locators));
@@ -50,7 +51,7 @@ public class JSDriver {
     public By lastLocator() {
         return LinqUtils.last(locators);
     }
-    private JSBuilder builder;
+
     public JSBuilder builder() {
         if (builder != null)
             return builder;

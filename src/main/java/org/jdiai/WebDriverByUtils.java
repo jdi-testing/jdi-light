@@ -77,9 +77,9 @@ public final class WebDriverByUtils {
 
     public static By correctXPaths(By byValue) {
         return byValue.toString().contains("By.xpath: //")
-                ? getByFunc(byValue).apply(getByLocator(byValue)
-                .replaceFirst("/", "./"))
-                : byValue;
+            ? getByFunc(byValue).apply(getByLocator(byValue)
+            .replaceFirst("/", "./"))
+            : byValue;
     }
     public static String shortBy(By by) {
         return shortBy(by, () -> "No locator");

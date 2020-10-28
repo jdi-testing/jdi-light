@@ -33,9 +33,9 @@ public class JSExecutor {
     public JSListProducer getList() {
         if (jsDriver.locators().size() == 1) {
             return new JSListProducer(builder()
-                    .getOneToList("document", jsDriver.firstLocator())
-                    .collect(jsDriver.firstLocator(), collector)
-                    .executeAsList("result"));
+                .getOneToList("document", jsDriver.firstLocator())
+                .collect(collector)
+                .executeAsList("result"));
         }
         switch (jsDriver.strategy) {
             case CHAIN: return getListChain();
@@ -79,7 +79,7 @@ public class JSExecutor {
             ctx = "element";
         }
         builder.getOneToList("element", jsDriver.lastLocator())
-            .collect(jsDriver.lastLocator(), collector);
+            .collect(collector);
         return new JSListProducer(builder.executeAsList("result"));
     }
     public JSListProducer getListMultiSearch() {
@@ -91,7 +91,7 @@ public class JSExecutor {
         for (By locator : listCopy(jsDriver.locators(), 1, -1)) {
             builder.getListToList(locator);
         }
-        builder.getListToList(jsDriver.lastLocator()).collect(jsDriver.lastLocator(), collector);
+        builder.getListToList(jsDriver.lastLocator()).collect(collector);
         return new JSListProducer(builder.executeAsList("result"));
     }
 

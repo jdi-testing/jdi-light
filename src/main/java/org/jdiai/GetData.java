@@ -1,11 +1,9 @@
 package org.jdiai;
 
 public class GetData {
-    public String get, getAll, length, index;
-    public GetData(String get, String getAll, String length, String index) {
+    public String get, getAll;
+    public GetData(String get, String getAll) {
         this.get = get;
         this.getAll = getAll;
-        this.length = length;
-        this.index = index;
     }
 }

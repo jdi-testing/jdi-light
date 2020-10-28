@@ -7,34 +7,22 @@ import static org.jdiai.WebDriverByUtils.getByType;
 public class GetTypes {
     public static GetData CSS = new GetData(
         "{0}.querySelector(''{1}'');\n",
-        "{0}.querySelectorAll(''{1}'');\n",
-        ".length",
-        "[%s]");
+        "{0}.querySelectorAll(''{1}'');\n");
     public static GetData XPATH = new GetData(
-        "document.evaluate(''{1}'', {0}, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n",
-        "document.evaluate(''{1}'', {0}, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n",
-        ".snapshotLength",
-        ".snapshotItem(%s)");
+        "xpath({0}, ''{1}'');\n",
+        "xpathList({0}, ''{1}'');\n");
     public static GetData ID = new GetData(
         "{0}.getElementById(''{1}'');\n",
-        "[...{0}.getElementById(''{1}'')];\n",
-        ".length",
-        "[%s]");
+        "[...{0}.getElementById(''{1}'')];\n");
     public static GetData CLASS = new GetData(
         "{0}.getElementsByClassName(''{1}'')[0];\n",
-        "{0}.getElementsByClassName(''{1}'');\n",
-        ".length",
-        "[%s]");
+        "{0}.getElementsByClassName(''{1}'');\n");
     public static GetData NAME = new GetData(
         "{0}.getElementsByName(''{1}'')[0];\n",
-        "{0}.getElementsByName(''{1}'');\n",
-        ".length",
-        "[%s]");
+        "{0}.getElementsByName(''{1}'');\n");
     public static GetData TAG = new GetData(
         "{0}.getElementsByTagName(''{1}'')[0];\n",
-        "{0}.getElementsByTagName(''{1}'');\n",
-        ".length",
-        "[%s]");
+        "{0}.getElementsByTagName(''{1}'');\n");
     public static GetData dataType(By locator) {
         switch (getByType(locator)) {
             case "id": return ID;
