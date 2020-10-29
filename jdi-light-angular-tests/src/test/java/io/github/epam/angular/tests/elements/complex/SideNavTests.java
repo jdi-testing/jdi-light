@@ -153,7 +153,6 @@ public class SideNavTests extends TestsInit {
         fixSideNav.click();
         fixedPosition.getSideNav().has().attr(STYLE, "transform: none; visibility: visible; top: 100px; bottom: " +
                 "100px;");
-
         toggleFixedSideNav.click();
         fixedPosition.base().timer().wait(() -> fixedPosition.visualValidation(".mat-sidenav-content"));
         fixedPosition.getSideNav().has().attr(STYLE, "top: 100px; bottom: 100px; box-shadow: none; visibility: " +
