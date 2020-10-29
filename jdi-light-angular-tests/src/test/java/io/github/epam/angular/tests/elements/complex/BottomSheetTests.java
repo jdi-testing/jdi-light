@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -39,5 +40,13 @@ public class BottomSheetTests extends TestsInit {
         bottomSheet.open();
         bottomSheet.is().values(BOTTOM_SHEET_VALUES);
     }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (bottomSheet.isOpened()) {
+            bottomSheet.close();
+        }
+    }
+
 }
 
