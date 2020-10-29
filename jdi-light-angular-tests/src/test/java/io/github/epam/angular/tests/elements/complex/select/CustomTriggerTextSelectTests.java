@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -51,5 +52,17 @@ public class CustomTriggerTextSelectTests extends TestsSelectBase {
     @Test
     public void checkAvailableOptions() {
         customTriggerTextSelect.assertThat().values(EXTRA_CHEESE, PEPPERONI, SAUSAGE, MUSHROOM, ONION, TOMATO);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (multiSelect[0] != 0) {
+            customTriggerTextSelect.multipleSelect(multiSelect);
+            multiSelect = new int[6];
+        }
+        if (multiOptions[0] != null) {
+            customTriggerTextSelect.multipleSelect(multiOptions);
+            multiOptions[0] = null;
+        }
     }
 }

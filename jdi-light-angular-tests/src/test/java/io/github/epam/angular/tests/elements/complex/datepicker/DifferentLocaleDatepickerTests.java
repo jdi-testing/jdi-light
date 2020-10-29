@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -85,5 +86,15 @@ public class DifferentLocaleDatepickerTests extends TestsDatepickerBase {
         differentLocaleDatepicker.show();
         differentLocaleDatepicker.switchLocale();
         differentLocaleDatepicker.has().locale(Locale.FRANCE);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (differentLocaleDatepicker.isExpanded()) {
+            differentLocaleDatepicker.collapse();
+        }
+        if (!differentLocaleDatepicker.isEmpty()) {
+            differentLocaleDatepicker.clear();
+        }
     }
 }

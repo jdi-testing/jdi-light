@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -46,7 +47,7 @@ public class MinMaxDatepickerTests extends TestsDatepickerBase {
         String maxDate = getMaxDate();
         minMaxDatepicker.input(maxDate);
         minMaxDatepicker.is().month(Month.DECEMBER).day(31).year(Year.of(LocalDate.now().getYear() + 1))
-                        .and().disabledNavigation(NEXT_MONTH.getName());
+                .and().disabledNavigation(NEXT_MONTH.getName());
     }
 
     @Test
@@ -55,6 +56,18 @@ public class MinMaxDatepickerTests extends TestsDatepickerBase {
         String secondDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 1);
         minMaxDatepicker.openYearsView();
         minMaxDatepicker.has().disabledNavigation(PREVIOUS_TWENTY_YEARS.getName(),
-            NEXT_TWENTY_YEARS.getName(), firstDisabledYearCell, secondDisabledYearCell);
+                NEXT_TWENTY_YEARS.getName(),
+                firstDisabledYearCell,
+                secondDisabledYearCell);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (minMaxDatepicker.isExpanded()) {
+            minMaxDatepicker.collapse();
+        }
+        if (!minMaxDatepicker.isEmpty()) {
+            minMaxDatepicker.clear();
+        }
     }
 }

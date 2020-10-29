@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -58,5 +59,15 @@ public class MomentJsDatepickerTests extends TestsDatepickerBase {
     public void checkSendKeysDate() {
         momentJsDatepicker.sendKeys("11/03/2008");
         momentJsDatepicker.is().selectedDate(LocalDate.of(2008, 11, 3));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (momentJsDatepicker.isExpanded()) {
+            momentJsDatepicker.collapse();
+        }
+        if (!momentJsDatepicker.isEmpty()) {
+            momentJsDatepicker.clear();
+        }
     }
 }

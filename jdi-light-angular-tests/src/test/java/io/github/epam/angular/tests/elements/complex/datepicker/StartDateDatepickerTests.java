@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -40,5 +41,12 @@ public class StartDateDatepickerTests extends TestsDatepickerBase {
     @Test
     public void checkStartDayWithLocaleValue() {
         startDateDatepicker.has().startDay(1, Locale.US);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (startDateDatepicker.isExpanded()) {
+            startDateDatepicker.collapse();
+        }
     }
 }

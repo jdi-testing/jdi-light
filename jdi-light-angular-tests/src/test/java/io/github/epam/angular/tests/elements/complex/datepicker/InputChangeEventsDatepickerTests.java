@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -80,5 +81,15 @@ public class InputChangeEventsDatepickerTests extends TestsDatepickerBase {
         inputChangeEventsDatepicker.sendKeys("august");
         inputChangeEventsDatepicker.clear();
         inputChangeEventsDatepicker.is().lastChangeEvent(changeEvent);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (inputChangeEventsDatepicker.isExpanded()) {
+            inputChangeEventsDatepicker.collapse();
+        }
+        if (!inputChangeEventsDatepicker.isEmpty()) {
+            inputChangeEventsDatepicker.clear();
+        }
     }
 }

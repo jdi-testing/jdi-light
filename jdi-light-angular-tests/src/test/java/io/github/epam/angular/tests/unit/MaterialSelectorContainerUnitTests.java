@@ -4,6 +4,7 @@ import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -121,5 +122,21 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
         customPanelStylingSelect.select(RED);
         customPanelStylingSelect.expand();
         assertTrue(container.color(255, 0, 0, 0.5));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (multiSelect[0] != 0) {
+            multipleSelect.expand();
+            container.multipleSelect(multiSelect);
+            multiSelect = new int[3];
+        }
+        if (multiOptions[0] != null) {
+            multipleSelect.expand();
+            container.multipleSelect(multiOptions);
+            multiOptions[0] = null;
+            multiOptions[1] = null;
+            multiOptions[2] = null;
+        }
     }
 }

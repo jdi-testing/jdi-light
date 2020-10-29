@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -53,5 +54,15 @@ public class DisabledDatepickerTests extends TestsDatepickerBase {
     public void checkSelectDateByEnabledToggle() {
         inputDisabledDatepicker.select(LocalDate.of(2029, 2, 28));
         inputDisabledDatepicker.is().selectedDate(LocalDate.of(2029, 2, 28));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (completelyDisabledDatepicker.isExpanded()) {
+            completelyDisabledDatepicker.collapse();
+        }
+        if (!completelyDisabledDatepicker.isEmpty()) {
+            completelyDisabledDatepicker.clear();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,6 +15,8 @@ import static org.testng.Assert.assertTrue;
 
 public class MaterialSelectorUnitTests extends TestsInit {
     private final String[] multiOptions = new String[3];
+    private int[] multiSelect = new int[3];
+
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
@@ -117,6 +120,23 @@ public class MaterialSelectorUnitTests extends TestsInit {
         matErrorStateMatcherSelect.show();
         matErrorStateMatcherSelect.select(INVALID_OPTION);
         assertEquals(matErrorStateMatcherSelect.error().text(), INVALID_SELECTION);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (basicMatSelect.isExpanded()) {
+            basicMatSelect.collapse();
+        }
+        if (multiSelect[0] != 0) {
+            multipleSelect.multipleSelect(multiSelect);
+            multiSelect = new int[3];
+        }
+        if (multiOptions[0] != null) {
+            multipleSelect.multipleSelect(multiOptions);
+            multiOptions[0] = null;
+            multiOptions[1] = null;
+            multiOptions[2] = null;
+        }
     }
 
 }
