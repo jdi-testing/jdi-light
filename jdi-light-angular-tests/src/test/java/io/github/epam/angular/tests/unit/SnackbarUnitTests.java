@@ -11,7 +11,7 @@ import static org.testng.Assert.*;
 
 public class SnackbarUnitTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.open();

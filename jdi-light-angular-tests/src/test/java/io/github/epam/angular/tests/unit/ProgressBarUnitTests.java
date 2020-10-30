@@ -11,7 +11,7 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.*;
 
 public class ProgressBarUnitTests extends TestsInit {
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.open();

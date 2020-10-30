@@ -2,15 +2,17 @@ package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
+import static io.github.com.pages.AngularPage.bottomSheet;
 import static io.github.com.pages.AngularPage.dialog;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertTrue;
 
 public class DialogUnitTests extends TestsInit {
-    @BeforeClass(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.open();
@@ -21,6 +23,8 @@ public class DialogUnitTests extends TestsInit {
     public void openedTest() {
         dialog.open();
         assertTrue(dialog.isOpened());
+        dialog.clickNoThanksButton();
+        assertTrue(dialog.isClosed());
     }
 
     @Test
@@ -34,12 +38,16 @@ public class DialogUnitTests extends TestsInit {
     public void verifySendKeysToNameFormFieldTest() {
         dialog.sendKeysToNameFormField("EPAM Systems");
         dialog.open();
+        assertTrue(dialog.isOpened());
         assertTrue(dialog.nameText("EPAM Systems"));
+        dialog.clickNoThanksButton();
+        assertTrue(dialog.isClosed());
     }
 
     @Test
     public void verifySendKeysToAnswerFormFieldTest() {
         dialog.open();
+        assertTrue(dialog.isOpened());
         dialog.sendKeysToAnswerFormField("Lion");
         dialog.submitAnswer();
         assertTrue(dialog.answerText("Lion"));

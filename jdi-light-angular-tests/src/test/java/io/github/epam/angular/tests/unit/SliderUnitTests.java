@@ -10,7 +10,7 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.*;
 
 public class SliderUnitTests extends TestsInit {
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();

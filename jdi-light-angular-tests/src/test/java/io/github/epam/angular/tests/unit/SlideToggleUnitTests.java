@@ -12,7 +12,7 @@ import static org.testng.Assert.assertTrue;
 
 public class SlideToggleUnitTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();

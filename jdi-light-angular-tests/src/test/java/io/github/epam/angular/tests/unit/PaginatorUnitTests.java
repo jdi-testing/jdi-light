@@ -17,7 +17,7 @@ import static org.testng.Assert.*;
 
 public class PaginatorUnitTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         getDriver().manage().window().setSize(new Dimension(1920, 1080));
         shouldBeLoggedIn();

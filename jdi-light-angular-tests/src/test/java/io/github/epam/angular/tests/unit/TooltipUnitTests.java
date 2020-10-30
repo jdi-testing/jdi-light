@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
 
 public class TooltipUnitTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
