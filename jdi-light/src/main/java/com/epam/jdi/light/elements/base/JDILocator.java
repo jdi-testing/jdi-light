@@ -1,41 +1,41 @@
-package com.epam.jdi.light.common;
+package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.driver.WebDriverByUtils;
-import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.tools.Safe;
 import org.openqa.selenium.By;
 
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.elements.base.JdiSettings.addTextToXPath;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.countMatches;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class JDILocator {
-    public JDILocator() {}
-    public JDILocator(JDIBase element) { this.element = element; }
-    public JDILocator copy() {
-        JDILocator locator = new JDILocator();
-        locator.byLocator = byLocator;
-        locator.isRoot = isRoot;
-        locator.element = element;
-        locator.frames = frames;
-        return locator;
-    }
-
     private By byLocator;
     private List<By> frames;
     public boolean isRoot = false;
-    private JDIBase element;
+    private Safe<JDIBase> element;
     private Object[] args = new Object[]{};
+
+    public JDILocator(JDIBase base) { this.element = new Safe<>(() -> base); }
+    public JDILocator copy() {
+        JDIBase base = element.get();
+        JDILocator locator = new JDILocator(base);
+        locator.byLocator = byLocator;
+        locator.isRoot = isRoot;
+        locator.element = new Safe<>(() -> base);
+        locator.frames = frames;
+        return locator;
+    }
 
     public By getLocator() { return byLocator; }
     public List<By> getFrames() { return frames; }
@@ -43,8 +43,8 @@ public class JDILocator {
         this.args = args;
         if (args.length == 0) return byLocator;
         return args.length == 1
-                ? fillByTemplate(byLocator, args)
-                : fillByMsgTemplate(byLocator, args);
+            ? fillByTemplate(byLocator, args)
+            : fillByMsgTemplate(byLocator, args);
     }
     public boolean isNull() {
         return byLocator == null;
@@ -61,13 +61,11 @@ public class JDILocator {
         byLocator = setRootLocator(locator)
                 ? trimRoot(locator)
                 : locator;
-        // if (byLocator.toString().contains("By.cssSelector"))
-        //     byLocator = defineLocator(getByLocator(byLocator));
-        this.element = element;
+        this.element = new Safe<>(() -> element);
     }
     public void add(List<By> frames, JDIBase element) {
         this.frames = frames;
-        this.element = element;
+        this.element = new Safe<>(() -> element);
     }
     public boolean isTemplate() {
         return byLocator != null && byLocator.toString().contains("%s");
@@ -80,7 +78,7 @@ public class JDILocator {
             : format("(%s)[%s]", getByLocator(byLocator), index);
     }
     public String addText(String text) {
-        return format("(%s)[.='%s']", getByLocator(byLocator), text);
+        return addTextToXPath(byLocator, text);
     }
     public int argsCount() {
         return byLocator != null
@@ -107,17 +105,23 @@ public class JDILocator {
     public String toString() {
         try {
             By locator = getLocator(args);
-            if (locator == null && element != null) {
+            String hasFrame = "";
+            if (hasFrame())
+                hasFrame = "Frame: " + print(map(frames, WebDriverByUtils::shortBy));
+            JDIBase element = this.element.get();
+            if (locator == null && isBlank(hasFrame) && element != null) {
                 if (element.webElement.hasValue() || element.webElements.hasValue())
                     return element.printWebElement();
                 if (isNotBlank(ELEMENT.smartTemplate))
                     return printSmartLocators(element);
                 return "";
             }
-            String hasFrame = "";
-            if (hasFrame())
-                hasFrame = "Frame: " + print(map(frames, WebDriverByUtils::shortBy));
-            return hasFrame + shortBy(locator, element).replaceAll("%s", "{{VALUE}}");
+            String locatorString = locator != null
+                    ? shortBy(locator, element).replaceAll("%s", "{{VALUE}}")
+                    : "";
+            if (isBlank(hasFrame))
+                return locatorString;
+            return isBlank(locatorString) ? hasFrame : hasFrame + ">" + locatorString;
         } catch (Exception ex) { return "Can't print locator"; }
     }
 }

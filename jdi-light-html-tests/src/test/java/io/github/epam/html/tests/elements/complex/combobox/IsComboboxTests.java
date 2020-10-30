@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.iceCreamIs;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -75,7 +76,7 @@ public class IsComboboxTests implements TestsInit {
     @Test
     public void selectNumTest() {
         iceCreamIs.clear();
-        iceCreamIs.select(5);
+        iceCreamIs.select(ELEMENT.startIndex + 4);
         assertEquals(iceCreamIs.getValue(), "Vanilla");
     }
     @Test

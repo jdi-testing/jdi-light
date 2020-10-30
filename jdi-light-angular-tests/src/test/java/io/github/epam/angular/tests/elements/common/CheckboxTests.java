@@ -1,7 +1,6 @@
 package io.github.epam.angular.tests.elements.common;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,7 +13,7 @@ public class CheckboxTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         disabledCheckbox.show();
     }
 
@@ -57,19 +56,5 @@ public class CheckboxTests extends TestsInit {
         indeterminateCheckbox.check();
         alignBeforeRadioButton.click();
         resultCheckbox.is().indeterminate().and().cssClass("mat-checkbox-label-before");
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (basicCheckbox.isSelected()) {
-            basicCheckbox.uncheck();
-        }
-        if (disabledCheckbox.isSelected()) {
-            disabledCheckbox.uncheck();
-        }
-        if (resultCheckbox.isSelected() || resultCheckbox.isIndeterminate()) {
-            indeterminateCheckbox.uncheck();
-            checkedCheckbox.uncheck();
-        }
     }
 }

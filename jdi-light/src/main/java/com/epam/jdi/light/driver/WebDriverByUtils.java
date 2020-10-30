@@ -82,7 +82,7 @@ public final class WebDriverByUtils {
             {"tagName", "tag"},
             {"className", "class"}
     });
-    public static String getByName(By by) {
+    public static String getByType(By by) {
         Matcher m = Pattern.compile("By\\.(?<locator>[a-zA-Z]+):.*").matcher(by.toString());
         if (m.find()) {
             String result = m.group("locator");
@@ -92,7 +92,7 @@ public final class WebDriverByUtils {
     }
 
     public static By correctXPaths(By byValue) {
-        return byValue.toString().contains("By.xpath: //")
+        return byValue.toString().contains("By.xpath: //") || byValue.toString().contains("By.xpath: (//")
                 ? getByFunc(byValue).apply(getByLocator(byValue)
                 .replaceFirst("/", "./"))
                 : byValue;
@@ -107,7 +107,7 @@ public final class WebDriverByUtils {
     private static String shortBy(By by, JFunc<String> noLocator) {
         return (by == null
                 ? noLocator.execute()
-                : format("%s='%s'", getByName(by), getByLocator(by))).replaceAll("%s", "{{VALUE}}");
+                : format("%s='%s'", getByType(by), getByLocator(by))).replaceAll("%s", "{{VALUE}}");
     }
     public static By getByFromString(String stringLocator) {
         if (stringLocator == null || stringLocator.equals(""))
@@ -154,7 +154,7 @@ public final class WebDriverByUtils {
     }
     private static List<WebElement> getEls(Object step, SearchContext ctx, List<WebElement> els) {
         if (isClass(step.getClass(), By.class)) {
-            String byName = getByName((By) step);
+            String byName = getByType((By) step);
             if (byName.equals("id") || (byName.equals("css") && getByLocator((By) step).matches("^#[a-zA-Z-]+$"))) {
                 return getDriver().findElements((By) step);
             } else {
@@ -169,7 +169,7 @@ public final class WebDriverByUtils {
     }
     public static List<Object> searchBy(By by) {
         try {
-            if (!getByName(by).equals("css"))
+            if (!getByType(by).equals("css"))
                 return singletonList(by);
             String locator = getByLocator(by);
             List<By> result = replaceUp(locator);
@@ -228,7 +228,7 @@ public final class WebDriverByUtils {
     private static List<By> replaceText(List<By> bys) {
         List<By> result = new ArrayList<>();
         for (By by : bys)
-            if (getByName(by).equals("css"))
+            if (getByType(by).equals("css"))
                 result.addAll(replaceText(getByLocator(by)));
             else result.add(by);
         return result;
@@ -255,7 +255,7 @@ public final class WebDriverByUtils {
     private static List<Object> replaceChildren(List<By> bys) {
         List<Object> result = new ArrayList<>();
         for (By by : bys)
-            if (getByName(by).equals("css"))
+            if (getByType(by).equals("css"))
                 result.addAll(replaceChildren(getByLocator(by)));
             else result.add(by);
         return result;

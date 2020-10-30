@@ -4,8 +4,9 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.common.TextTypes.INNER;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colors2;
@@ -52,7 +53,7 @@ public class DropdownEx2Tests implements TestsInit {
 
     @Test
     public void selectIndexTest() {
-        colors2.select(4);
+        colors2.select(ELEMENT.startIndex + 3);
         lastLogEntry.assertThat()
             .text(containsString("Colors: value changed to Blue"));
     }

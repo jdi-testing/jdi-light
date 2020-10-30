@@ -10,13 +10,6 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class ButtonToggleTests extends TestsInit {
 
-    private final String ITALIC = "italic";
-    private final String BOLD = "bold";
-    private final String UNDERLINE = "underline";
-    private final String LEFT = "left";
-    private final String CENTER = "center";
-    private final String RIGHT = "right";
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -27,6 +20,7 @@ public class ButtonToggleTests extends TestsInit {
     public void verifyButtonToggle() {
         basicButtonToggle.is().displayed();
         basicButtonToggle.is().enabled();
+        String ITALIC = "italic";
         basicButtonToggle.clickButtonToggleByValue(ITALIC);
         basicButtonToggle.is().assertButtonToggleIsSelected(ITALIC);
         basicButtonToggle.is().assertButtonToggleButtonIsPressed(ITALIC);
@@ -35,7 +29,9 @@ public class ButtonToggleTests extends TestsInit {
 
     @Test
     public void verifyButtonToggleCombineSelection() {
+        String BOLD = "bold";
         basicButtonToggle.clickButtonToggleByValue(BOLD);
+        String UNDERLINE = "underline";
         basicButtonToggle.clickButtonToggleByValue(UNDERLINE);
         basicButtonToggle.is().assertButtonToggleIsSelected(BOLD);
         basicButtonToggle.is().assertButtonToggleIsSelected(UNDERLINE);
@@ -45,6 +41,7 @@ public class ButtonToggleTests extends TestsInit {
 
     @Test
     public void verifyExclusiveButtonToggle() {
+        String LEFT = "left";
         basicButtonToggleAlign.is().displayed();
         basicButtonToggleAlign.is().enabled();
         basicButtonToggleAlign.clickButtonToggleByValue(LEFT);
@@ -54,6 +51,9 @@ public class ButtonToggleTests extends TestsInit {
 
     @Test
     public void verifyExclusiveButtonToggleSeparateSelection() {
+        String CENTER = "center";
+        String LEFT = "left";
+        String RIGHT = "right";
         basicButtonToggleAlign.clickButtonToggleByValue(CENTER);
         basicButtonToggleAlign.clickButtonToggleByValue(RIGHT);
         basicButtonToggleAlign.clickButtonToggleByValue(LEFT);

@@ -1,7 +1,6 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -20,7 +19,7 @@ public class BottomSheetUnitTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
         bottomSheet.show();
     }
 
@@ -43,8 +42,4 @@ public class BottomSheetUnitTests extends TestsInit {
         assertEquals(bottomSheet.values(), BOTTOM_SHEET_VALUES);
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        bottomSheet.close();
-    }
 }

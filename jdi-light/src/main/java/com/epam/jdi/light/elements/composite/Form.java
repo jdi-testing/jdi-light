@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
@@ -24,12 +25,12 @@ import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
 import static com.epam.jdi.light.common.UIUtils.getMapFromObject;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
 
 /**
@@ -43,10 +44,12 @@ public class Form<T> extends Section {
     public static JFunc3<Field, Object, Object, String> GET_ACTION = (field, element, parent)
         -> ((HasValue) element).getValue().trim();
 
+    @JDebug
     public void fillAction(Field field, Object element, Object parent, String setValue) {
         logger.debug("Fill element '%s' with value '%s'", getFieldName(field, element), setValue);
         FILL_ACTION.execute(field, element, parent, setValue);
     }
+    @JDebug
     public String getAction(Field field, Object element, Object parent) {
         logger.debug("Try to get element '%s' value", getFieldName(field, element));
         return GET_ACTION.execute(field, element, parent);
@@ -78,6 +81,7 @@ public class Form<T> extends Section {
      * @param map Specify entity as map
      *            Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity
      */
+    @JDebug
     public void fill(MapArray<String, String> map) {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
@@ -97,7 +101,7 @@ public class Form<T> extends Section {
         for (Pair<String, String> pair : map) {
             Field setField = null;
             try {
-                setField = first(allFields, f -> namesEqual(pair.key, getElementName(f)));
+                setField = first(allFields, f -> ELEMENT.namesEqual.execute(pair.key, getElementName(f)));
                 if (setField == null)
                     continue;
                 fillAction(setField, getValueField(setField, pageObject), pageObject, pair.value);
@@ -153,7 +157,7 @@ public class Form<T> extends Section {
         List<String> compareFalse = new ArrayList<>();
         for (Field field : allFields()) {
             String fieldValue = map.firstValue((name, value) ->
-                    namesEqual(name, getElementName(field)));
+                    ELEMENT.namesEqual.execute(name, getElementName(field)));
             if (fieldValue == null) continue;
             String actual = getAction(field, getValueField(field, pageObject), pageObject);
             if (!actual.equals(fieldValue))

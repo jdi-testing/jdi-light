@@ -17,18 +17,18 @@ public class Image extends UIBaseElement<ImageAssert>
         implements HasClick, HasValue {
     // region Actions
     @JDIAction(value = "Get '{name}' image source path", level = DEBUG)
-    public String src() { return uiElement.attr("src"); }
+    public String src() { return core().attr("src"); }
     @JDIAction(value = "Get '{name}' image source path", level = DEBUG)
     public String fileName() {
-        String[] split = uiElement.attr("src").split("/");
+        String[] split = core().attr("src").split("/");
         return split[split.length-1];
     }
     @JDIAction(value = "Get '{name}' image height", level = DEBUG)
-    public int height() { return getInt("height", uiElement); }
+    public int height() { return getInt("height", core()); }
     @JDIAction(value = "Get '{name}' image width", level = DEBUG)
-    public int width() { return getInt("width", uiElement); }
+    public int width() { return getInt("width", core()); }
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
-    public String alt() { return uiElement.attr("alt"); }
+    public String alt() { return core().attr("alt"); }
     public String getValue() {
         return src();
     }
