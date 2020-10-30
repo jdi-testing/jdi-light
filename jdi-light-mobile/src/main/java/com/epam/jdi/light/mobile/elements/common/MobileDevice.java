@@ -6,6 +6,7 @@ import io.appium.java_client.MobileDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AuthenticatesByFinger;
 import io.appium.java_client.battery.BatteryInfo;
+import io.appium.java_client.clipboard.HasClipboard;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.PerformsTouchID;
 import io.appium.java_client.ios.ShakesDevice;
@@ -86,5 +87,13 @@ public class MobileDevice {
     // the next methods are for Android only
     public static void fingerPrint(int fingerPrintId) {
         executeDriverMethod(AuthenticatesByFinger.class, (AuthenticatesByFinger driver) -> driver.fingerPrint(fingerPrintId));
+    }
+    // this method is for Android only
+    public static void setClipBoardText(String text) {
+        executeDriverMethod(MobileDriver.class, (MobileDriver driver) -> (HasClipboard) driver).setClipboardText(text);
+    }
+    // this method is for Android only
+    public static String getClipBoardText() {
+        return executeDriverMethod(MobileDriver.class, (MobileDriver driver) -> (HasClipboard) driver).getClipboardText();
     }
 }
