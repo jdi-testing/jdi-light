@@ -16,14 +16,14 @@ public class DateTimeSelector extends UIBaseElement<DateTimeAssert>
         implements HasLabel, SetValue {
     // region Actions
     @JDIAction("Get '{name}' date-time ")
-    public String value() { return uiElement.attr("value"); }
+    public String value() { return core().attr("value"); }
     @JDIAction(value = "Get '{name}' min date-time value", level = DEBUG)
-    public String min() { return uiElement.attr("min"); }
+    public String min() { return core().attr("min"); }
     @JDIAction(value = "Get '{name}' max date-time value", level = DEBUG)
-    public String max() { return uiElement.attr("max"); }
+    public String max() { return core().attr("max"); }
     @JDIAction("Set date '{0}' for '{name}'")
     public void setDateTime(String dateTime) {
-        uiElement.setAttribute("value", dateTime);
+        core().setAttribute("value", dateTime);
     }
     // endregion
 

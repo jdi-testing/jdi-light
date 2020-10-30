@@ -1,7 +1,6 @@
 package io.github.epam.tests.google;
 
 import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.light.settings.JDISettings;
 import io.github.com.custom.Result;
 import io.github.com.custom.SearchResult;
 import io.github.epam.StaticTestsInit;

@@ -24,17 +24,20 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  */
 public abstract class DriverBase implements JDIElement {
     public String driverName = DRIVER.name;
+    public String name = "";
+    public String varName = "";
+    public String typeName = "";
+    public String failElement = "";
+    public Object parent;
+    protected String context;
+    private String pageName;
+
     public WebDriver driver() { return WebDriverFactory.getDriver(driverName); }
     public JavascriptExecutor js() { return (JavascriptExecutor) driver(); }
 
     public <T> T asEntity(Class<T> entityClass) {
         return UIUtils.asEntity(this, entityClass);
     }
-    public String name = "";
-    public String varName = "";
-    public String typeName = "";
-    public String failElement = "";
-    public Object parent;
     public List<Object> parents() {
         List<Object> parents = new ArrayList<>();
         Object p = parent;
@@ -44,7 +47,6 @@ public abstract class DriverBase implements JDIElement {
         }
         return parents;
     }
-    protected String context;
     public DriverBase setParent(Object parent) {
         this.parent = parent;
         return this;
@@ -76,32 +78,33 @@ public abstract class DriverBase implements JDIElement {
     public String getName() {
         return isBlank(name) ? getClass().getSimpleName() : name;
     }
-    private String pageName;
     public void setPage(String page) {
         pageName = page;
     }
 
     public WebPage getPage() {
         if (pageName != null)
-            return PAGES.keys().contains(pageName)
-                    ? PAGES.get(pageName)
-                    : null;
+            return PAGES.get().keys().contains(pageName)
+                ? PAGES.get().get(pageName)
+                : null;
         if (parent == null) return null;
         if (isClass(parent.getClass(), WebPage.class))
             return (WebPage) parent;
         if (!isClass(parent.getClass(), DriverBase.class)) {
             String pageName = splitCamelCase(parent.getClass().getSimpleName());
-            return PAGES.keys().contains(pageName)
-                ? PAGES.get(pageName)
+            return PAGES.get().keys().contains(pageName)
+                ? PAGES.get().get(pageName)
                 : null;
         }
         return ((DriverBase)parent).getPage();
     }
     public boolean hasParent(String name) {
-        if (parent == null) return false;
+        if (parent == null)
+            return false;
         if (isClass(parent.getClass(), WebPage.class))
             return ((WebPage) parent).getName().equals(name);
-        if (!isClass(parent.getClass(), JDIBase.class)) return false;
-        return ((JDIBase)parent).hasParent(name);
+        if (isClass(parent.getClass(), JDIBase.class))
+            return ((JDIBase)parent).hasParent(name);
+        return false;
     }
 }

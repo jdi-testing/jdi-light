@@ -101,9 +101,10 @@ public class TableInteractTests implements TestsInit {
     }
     @Test
     public void dataFilterTest() {
-        assertEquals(usersRow.row(hasValue("Sergey Ivan", inColumn("User")),
-                containsValue("User", inColumn("Type")))
-                .asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
+        Line mUserLine = usersRow.row(hasValue("Sergey Ivan", inColumn("User")),
+                containsValue("User", inColumn("Type")));
+        MarvelUserSimple mUser = mUserLine.asData(MarvelUserSimple.class);
+        assertEquals(mUser, SPIDER_MAN_SIMPLE);
     }
     @Test
     public void allDataFilterTest() {

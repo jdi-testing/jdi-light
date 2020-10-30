@@ -12,7 +12,6 @@ import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,17 +21,19 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.last;
 import static java.lang.System.currentTimeMillis;
 
-public class TestNGListener implements IInvokedMethodListener {    private Safe<Long> start = new Safe<>(0L);
+public class TestNGListener implements IInvokedMethodListener {
+    private Safe<Long> start = new Safe<>(0L);
 
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
         if (m.isTestMethod()) {
             ITestNGMethod testMethod = m.getTestMethod();
             if (testMethod.getConstructorOrMethod().getMethod().isAnnotationPresent(Test.class)) {
-                TEST_NAME.set( last(testMethod.getTestClass().getName().split("\\.")) +
-                        "." + testMethod.getMethodName());
+                String testName = last(testMethod.getTestClass().getName().split("\\.")) +
+                        "." + testMethod.getMethodName();
+                TEST_NAME.set(testName);
                 start.set(currentTimeMillis());
-                logger.step("== Test '%s' START ==", TEST_NAME.get());
+                logger.step("== Test '%s' START ==", testName);
             }
         }
     }
@@ -63,8 +64,14 @@ public class TestNGListener implements IInvokedMethodListener {    private Safe<
                 return "PASSED";
             case ITestResult.SKIP:
                 return "SKIPPED";
-            default:
+            case ITestResult.FAILURE:
+            case ITestResult.SUCCESS_PERCENTAGE_FAILURE:
                 return "FAILED";
+            case ITestResult.STARTED:
+                return "STARTED";
+            case ITestResult.CREATED:
+                return "CREATED";
         }
+        return "FAILED";
     }
 }
