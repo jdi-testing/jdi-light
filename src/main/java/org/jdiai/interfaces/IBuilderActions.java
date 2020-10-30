@@ -1,4 +1,4 @@
-package org.jdiai;
+package org.jdiai.interfaces;
 
 import org.openqa.selenium.By;
 
@@ -7,5 +7,6 @@ public interface IBuilderActions {
     String oneToList(String ctx, By locator);
     String listToOne(By locator);
     String listToList(By locator);
-    String collect(String collector);
+    String getResult(String collector);
+    String getResultList(String collector);
 }

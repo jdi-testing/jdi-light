@@ -9,6 +9,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
+import static java.util.Arrays.asList;
 
 public class JSObject<T> extends JSBase {
     protected Class<T> cl;
@@ -35,15 +36,21 @@ public class JSObject<T> extends JSBase {
     }
 
     public T getObject(String json) {
-        return driver.json(json).getOne().asObject(cl);
+        return driver.getOne(json).asObject(cl);
+    }
+    public T getObject(List<String> attributes) {
+        return driver.getOne(attributesToJson(attributes)).asObject(cl);
     }
     public T getObject(String... attributes) {
-        return driver.attributes(attributes).getOne().asObject(cl);
+        return getObject(asList(attributes));
     }
     public List<T> getObjectList(String json) {
-        return driver.json(json).getList().asObject(cl);
+        return driver.getList(json).asObject(cl);
+    }
+    public List<T> getObjectList(List<String> attributes) {
+        return driver.getList(attributesToJson(attributes)).asObject(cl);
     }
     public List<T> getObjectList(String... attributes) {
-        return driver.attributes(attributes).getList().asObject(cl);
+        return getObjectList(asList(attributes));
     }
 }

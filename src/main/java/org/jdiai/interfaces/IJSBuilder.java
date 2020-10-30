@@ -1,14 +1,16 @@
-package org.jdiai;
+package org.jdiai.interfaces;
 
 import org.openqa.selenium.By;
 
 import java.util.List;
 
 public interface IJSBuilder {
-    IJSBuilder getOneToOne(String ctx, By locator);
-    IJSBuilder getListToOne(By locator);
-    IJSBuilder getOneToList(String ctx, By locator);
-    IJSBuilder getListToList(By locator);
+    IJSBuilder oneToOne(String ctx, By locator);
+    IJSBuilder listToOne(By locator);
+    IJSBuilder oneToList(String ctx, By locator);
+    IJSBuilder listToList(By locator);
+    IJSBuilder getResult(String collector);
+    IJSBuilder getResultList(String collector);
     String executeQuery();
     List<String> executeAsList();
     String selector(By locator);

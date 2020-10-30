@@ -43,7 +43,7 @@ public class JSTalk {
     }
     public static By defineLocator(String locator) {
         return locator.contains("//")
-                ? By.xpath(locator)
-                : By.cssSelector(locator);
+            ? By.xpath(locator)
+            : By.cssSelector(locator);
     }
 }

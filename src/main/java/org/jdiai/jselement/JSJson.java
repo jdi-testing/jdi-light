@@ -15,9 +15,9 @@ public class JSJson extends JSBase {
     }
 
     public JsonObject getJson(String json) {
-        return driver.json(json).getOne().asJson();
+        return driver.getOne(json).asJson();
     }
     public List<JsonObject> getJsonList(String json) {
-        return driver.json(json).getList().asJson();
+        return driver.getList(json).asJson();
     }
 }

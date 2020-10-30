@@ -2,6 +2,8 @@ package org.jdiai;
 
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
+import org.jdiai.interfaces.IBuilderActions;
+import org.jdiai.interfaces.IJSBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -20,19 +22,20 @@ public class JSBuilder implements IJSBuilder {
     private final List<String> variables = new ArrayList<>();
     private String query = "";
     private JavascriptExecutor js;
-    public boolean logQuery = false;
+    public static boolean LOG_QUERY = false;
+    public boolean logQuery = LOG_QUERY;
     public static JAction1<String> logger = System.out::println;
     private MapArray<String, String> useFunctions = new MapArray<>();
     private IBuilderActions builderActions;
-    private final String collectResult;
 
-    public JSBuilder(WebDriver driver, String collectResult) {
-        this(driver, null, collectResult);
+    public JSBuilder(WebDriver driver) {
+        this(driver, null);
     }
-    public JSBuilder(WebDriver driver, IBuilderActions builderActions, String collectResult) {
+    public JSBuilder(WebDriver driver, IBuilderActions builderActions) {
         this.js = (JavascriptExecutor) driver;
-        this.builderActions = builderActions != null ? builderActions : new BuilderActions(this);
-        this.collectResult = collectResult;
+        this.builderActions = builderActions != null
+            ? builderActions
+            : new BuilderActions(this);
     }
     public IJSBuilder registerFunction(String name, String function) {
         useFunctions.update(name, function);
@@ -43,7 +46,7 @@ public class JSBuilder implements IJSBuilder {
         return this;
     }
     public String executeQuery() {
-        String jsScript = getScript() + "return " + collectResult;
+        String jsScript = getScript();
         if (logQuery)
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         String result = (String) js.executeScript(jsScript);
@@ -52,8 +55,7 @@ public class JSBuilder implements IJSBuilder {
         return result;
     }
     public List<String> executeAsList() {
-        query += builderActions.collect(collectResult);
-        String jsScript = getScript() + "return result;";
+        String jsScript = getScript();
         if (logQuery)
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         List<String> result = (List<String>) js.executeScript(jsScript);
@@ -77,21 +79,34 @@ public class JSBuilder implements IJSBuilder {
             registerFunction("xpathList", XPATH_LIST_FUNC);
         return selector;
     }
-    public IJSBuilder getOneToOne(String ctx, By locator) {
+    public IJSBuilder oneToOne(String ctx, By locator) {
         query += builderActions.oneToOne(ctx, locator);
         return this;
     }
-    public IJSBuilder getListToOne(By locator) {
+    public IJSBuilder listToOne(By locator) {
         query += builderActions.listToOne(locator);
         return this;
     }
-    public IJSBuilder getOneToList(String ctx, By locator) {
+    public IJSBuilder oneToList(String ctx, By locator) {
         query += builderActions.oneToList(ctx, locator);
         return this;
     }
-    public IJSBuilder getListToList(By locator) {
+    public IJSBuilder listToList(By locator) {
         query += builderActions.listToList(locator);
         return this;
+    }
+    public IJSBuilder getResult(String collectResult) {
+        query += builderActions.getResult(getCollector(collectResult));
+        return this;
+    }
+    public IJSBuilder getResultList(String collectResult) {
+        query += builderActions.getResultList(getCollector(collectResult));
+        return this;
+    }
+    private String getCollector(String collectResult) {
+        return collectResult.trim().startsWith("{")
+            ? "JSON.stringify(" + collectResult + ")"
+            : collectResult;
     }
 
     // region private

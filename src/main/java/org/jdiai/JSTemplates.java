@@ -14,11 +14,13 @@ public class JSTemplates {
         "function xpath(ctx, locator)\n{\n" +
         "  return document.evaluate(locator, ctx, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n" +
         "}\n";
+    public static String ONE_TO_RESULT = "return %s;";
     public static String LIST_TO_RESULT =
-        "result = [];\n" +
+        "let result = [];\n" +
         "for(let element of elements) {\n" +
         "  result.push(%s);\n" +
-        "}\n";
+        "}\n" +
+        "return result;";
     public static String ONE_TO_LIST = "%s";
     public static String ONE_TO_ONE = "%s";
     public static String LIST_TO_ONE =
@@ -29,12 +31,12 @@ public class JSTemplates {
         "  i++;\n" +
         "}\n";
     public static String LIST_TO_LIST =
-        "result = [];\n" +
+        "list = [];\n" +
         "for(let element of elements) {\n" +
         "  let subElements = %s" +
         "  for(let j = 0; j < subElements.length; j++) {\n" +
-        "    result.push(subElements[j]);\n" +
+        "    list.push(subElements[j]);\n" +
         "  }\n" +
         "}\n" +
-        "elements = result;\n";
+        "elements = list;\n";
 }

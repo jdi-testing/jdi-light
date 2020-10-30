@@ -1,5 +1,6 @@
 package org.jdiai;
 
+import org.jdiai.interfaces.HasLocators;
 import org.jdiai.jsdriver.JSDriver;
 import org.openqa.selenium.*;
 
@@ -29,7 +30,7 @@ public class JSElement implements WebElement {
         this.driver = driver;
     }
     private String jsResult(String action) {
-        return js.attribute(action).getOne().asString();
+        return js.getOne("element" + action).asString();
     }
     private WebElement we() {
         SearchContext ctx = driver;

@@ -19,20 +19,20 @@ public class JSElement extends JSBase {
     }
 
     public String getAttribute(String attribute) {
-        return driver.attribute(attribute).getOne().asString();
+        return driver.getOne("element." + attribute).asString();
     }
     public MapArray<String, String> getAttributes(List<String> attributes) {
-        JsonObject json = driver.attributes(attributes).getOne().asJson();
+        JsonObject json = driver.getOne(attributesToJson(attributes)).asJson();
         return new MapArray<>(attributes, s -> s, s -> json.get(s).getAsString());
     }
     public MapArray<String, String> getAttributes(String... attributes) {
         return getAttributes(asList(attributes));
     }
-    public List<String> getAttributeList(String text) {
-        return driver.attribute(text).getList().asString();
+    public List<String> getAttributeList(String attribute) {
+        return driver.getList("element." + attribute).asString();
     }
     public List<MapArray<String, String>> getMultiAttributes(List<String> attributes) {
-        List<JsonObject> objects = driver.attributes(attributes).getList().asJson();
+        List<JsonObject> objects = driver.getList(attributesToJson(attributes)).asJson();
         return map(objects, json -> new MapArray<>(attributes, k -> k, v -> json.get(v).getAsString()));
     }
     public List<MapArray<String, String>> getMultiAttributes(String... attributes) {

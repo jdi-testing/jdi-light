@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeSuite;
 
 import static java.lang.Runtime.getRuntime;
 import static java.util.Arrays.stream;
+import static org.jdiai.JSBuilder.LOG_QUERY;
 import static org.jdiai.jselement.JSTalk.defineLocator;
 
 public class TestInit {
@@ -36,7 +37,7 @@ public class TestInit {
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         killDrivers();
-        JSDriver.logQuery = true;
+        LOG_QUERY = true;
     }
 
     @AfterSuite(alwaysRun = true)

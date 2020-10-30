@@ -1,5 +1,7 @@
 package org.jdiai;
 
+import org.jdiai.interfaces.IBuilderActions;
+import org.jdiai.interfaces.IJSBuilder;
 import org.openqa.selenium.By;
 
 import java.text.MessageFormat;
@@ -25,11 +27,13 @@ public class BuilderActions implements IBuilderActions {
     }
     public String listToList(By locator) {
         GetData data = dataType(locator);
-        builder.registerVariable("result");
+        builder.registerVariable("list");
         return format(LIST_TO_LIST, MessageFormat.format(data.getAll, "element", builder.selectorAll(locator)));
     }
-    public String collect(String collector) {
-        builder.registerVariable("result");
+    public String getResult(String collector) {
+        return format(ONE_TO_RESULT, collector);
+    }
+    public String getResultList(String collector) {
         return format(LIST_TO_RESULT, collector);
     }
 }

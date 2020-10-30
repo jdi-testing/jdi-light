@@ -1,45 +1,127 @@
 package org.jdiai.jsdriver;
 
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.map.MapArray;
-import com.google.gson.JsonObject;
 import org.jdiai.JSBuilder;
 import org.jdiai.JSException;
 import org.jdiai.ListSearch;
+import org.jdiai.interfaces.IJSBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static java.util.Arrays.asList;
 import static org.jdiai.ListSearch.CHAIN;
 import static org.jdiai.ListSearch.MULTI;
 
 public class JSDriver {
     private final WebDriver driver;
     private final List<By> locators;
-    public static boolean logQuery = false;
+    private IJSBuilder builder;
     public ListSearch strategy = CHAIN;
 
     public JSDriver(WebDriver driver, By... locators) {
-        this(driver, newList(locators));
+        this(driver, newList(locators), null);
     }
     public JSDriver(WebDriver driver, List<By> locators) {
+        this(driver, locators, null);
+    }
+    public JSDriver(WebDriver driver, List<By> locators, IJSBuilder builder) {
         if (driver == null)
             throw new JSException("JSDriver init failed: WebDriver == null");
         if (locators == null || locators.size() == 0)
             throw new JSException("JSDriver init failed: Require at least 1 locator");
         this.driver = driver;
         this.locators = copyList(locators);
+        this.builder = builder;
     }
+
+    public JSProducer getOne(String collector) {
+        if (locators().size() == 1) {
+            return new JSProducer(builder()
+                .oneToOne("document", firstLocator())
+                .getResult(collector)
+                .executeQuery());
+        }
+        switch (strategy) {
+            case CHAIN: return getOneChain(collector);
+            case MULTI: return getOneMultiSearch(collector);
+            default: return getOneChain(collector);
+        }
+    }
+    public JSListProducer getList(String collector) {
+        if (locators().size() == 1) {
+            return new JSListProducer(builder()
+                .oneToList("document", firstLocator())
+                .getResultList(collector)
+                .executeAsList());
+        }
+        switch (strategy) {
+            case CHAIN: return getListChain(collector);
+            case MULTI: return getListMultiSearch(collector);
+            default: return getListChain(collector);
+        }
+    }
+
+    public JSProducer getOneChain(String collector) {
+        if (locators().size() == 1) {
+            return getOne(collector);
+        }
+        IJSBuilder builder =  builder();
+        String ctx = "document";
+        for (By locator : locators()) {
+            builder.oneToOne(ctx, locator);
+            ctx = "element";
+        }
+        return new JSProducer(builder.getResult(collector).executeQuery());
+    }
+    public JSProducer getOneMultiSearch(String collector) {
+        if (locators().size() == 1) {
+            return getOne(collector);
+        }
+        IJSBuilder builder = builder()
+                .oneToList("document", firstLocator());
+        for (By locator : listCopy(locators(), 1, -1)) {
+            builder.listToList(locator);
+        }
+        builder.listToOne(lastLocator()).getResult(collector);
+        return new JSProducer(builder.executeQuery());
+    }
+    public JSListProducer getListChain(String collector) {
+        if (locators().size() == 1) {
+            return getList(collector);
+        }
+        String ctx = "document";
+        for (By locator : listCopyUntil(locators(), -1)) {
+            builder().oneToOne(ctx, locator);
+            ctx = "element";
+        }
+        builder().oneToList("element", lastLocator()).getResultList(collector);
+        return new JSListProducer(builder().executeAsList());
+    }
+    public JSListProducer getListMultiSearch(String collector) {
+        if (locators().size() == 1) {
+            return getList(collector);
+        }
+        builder().oneToList("document", firstLocator());
+        for (By locator : listCopy(locators(), 1, -1)) {
+            builder().listToList(locator);
+        }
+        builder().listToList(lastLocator()).getResultList(collector);
+        return new JSListProducer(builder().executeAsList());
+    }
+    
     public JSDriver multiSearch() {
         strategy = MULTI;
         return this;
     }
     public WebDriver driver() {
         return this.driver;
+    }
+    private IJSBuilder builder() {
+        if (builder == null)
+            builder = new JSBuilder(driver());
+        return builder;
     }
     public List<By> locators() {
         return this.locators;
@@ -52,30 +134,6 @@ public class JSDriver {
     }
 
     public void invoke(String action) {
-        attribute(action).getOne();
-    }
-    public JSExecutor attribute(String text) {
-        return new JSExecutor(this, new JSBuilder(this.driver, "element." + text));
-    }
-    public JSExecutor json(String json) {
-        return new JSExecutor(this, new JSBuilder(this.driver, "JSON.stringify(" + json + ")"));
-    }
-    public JSExecutor attributes(List<String> attributes) {
-        String jsonObject = "{ " + print(map(attributes, el -> "\"" + el + "\": element." + el), ", ") + " }";
-        return json(jsonObject);
-    }
-    public JSExecutor attributes(String... attributes) {
-        return attributes(asList(attributes));
-    }
-    public String getStyle(String style) {
-        return json("{ \"style\": getComputedStyle(element)." + style + " }").getOne().asJson().get("style").getAsString();
-    }
-    public MapArray<String, String> getStyles(List<String> styles) {
-        String jsonObject = "{ " + print(map(styles, el -> "\"" + el + "\": getComputedStyle(element)." + el), ", ") + " }";
-        JsonObject json = json(jsonObject).getOne().asJson();
-        return new MapArray<>(styles, s -> s, s -> json.get(s).getAsString());
-    }
-    public MapArray<String, String> getStyles(String... styles) {
-        return getStyles(asList(styles));
+        getOne("element." + action).asString();
     }
 }
