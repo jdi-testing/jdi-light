@@ -11,7 +11,7 @@ public class RatingBarAssert extends UIAssert<RatingBarAssert, RatingBar> {
 
     @JDIAction("Assert that {name} is {value}")
     public RatingBarAssert value(double value){
-        jdiAssert(element.getRating(), Matchers.equalTo(value));
+        jdiAssert(element().getRating(), Matchers.equalTo(value));
         return this;
     }
 

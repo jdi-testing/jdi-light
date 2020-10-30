@@ -256,4 +256,18 @@ public class WebDriverFactory {
     public static void quit() {
         close();
     }
+
+    public static void quitDriverNativeApp() {
+        for (Pair<String, WebDriver> pair : getRunDrivers()) {
+            quitDriver(pair.value);
+        }
+        getRunDrivers().clear();
+    }
+
+    private static void quitDriver(WebDriver driver) {
+        try {
+            driver.quit();
+        } catch (Exception ignore) {
+        }
+    }
 }
