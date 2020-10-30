@@ -5,6 +5,7 @@ import io.appium.java_client.LocksDevice;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AuthenticatesByFinger;
+import io.appium.java_client.android.HasSupportedPerformanceDataType;
 import io.appium.java_client.battery.BatteryInfo;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.PerformsTouchID;
@@ -15,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.html5.Location;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -26,29 +28,37 @@ public class MobileDevice {
     public static void rotate(DeviceRotation rotation) {
         executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.rotate(rotation));
     }
+
     public static DeviceRotation getRotation() {
         return executeDriverMethod(AppiumDriver.class,
                 (Function<AppiumDriver, DeviceRotation>) AppiumDriver::rotation);
     }
+
     public static void rotate(ScreenOrientation orientation) {
         executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.rotate(orientation));
     }
+
     public static ScreenOrientation getOrientation() {
         return executeDriverMethod(AppiumDriver.class,
                 (Function<AppiumDriver, ScreenOrientation>) AppiumDriver::getOrientation);
     }
+
     public static void lockDevice() {
         executeDriverMethod(LocksDevice.class, (Consumer<LocksDevice>) LocksDevice::lockDevice);
     }
+
     public static void lockDevice(Duration duration) {
-        executeDriverMethod(LocksDevice.class, (LocksDevice driver) ->  driver.lockDevice(duration));
+        executeDriverMethod(LocksDevice.class, (LocksDevice driver) -> driver.lockDevice(duration));
     }
+
     public static void unlockDevice() {
         executeDriverMethod(LocksDevice.class, LocksDevice::unlockDevice);
     }
+
     public static boolean isLocked() {
         return executeDriverMethod(LocksDevice.class, LocksDevice::isDeviceLocked);
     }
+
     public static BatteryInfo getBatteryInfo() {
         WebDriver driver = getDriver();
         if (driver instanceof IOSDriver) {
@@ -59,15 +69,19 @@ public class MobileDevice {
             throw exception("This method is not supported by the driver. The driver needs to be the instance of either Ios or Android driver");
         }
     }
+
     public static Location getLocation() {
         return executeDriverMethod(AppiumDriver.class, (Function<AppiumDriver, Location>) AppiumDriver::location);
     }
+
     public static void setLocation(Location location) {
         executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.setLocation(location));
     }
+
     public static String getDeviceTime() {
         return executeDriverMethod(MobileDriver.class, (Function<MobileDriver, String>) MobileDriver::getDeviceTime);
     }
+
     public static String getDeviceTime(String format) {
         return executeDriverMethod(MobileDriver.class, (MobileDriver driver) -> driver.getDeviceTime(format));
     }
@@ -76,9 +90,11 @@ public class MobileDevice {
     public static void shake() {
         executeDriverMethod(ShakesDevice.class, ShakesDevice::shake);
     }
+
     public static void performTouchId(boolean match) {
         executeDriverMethod(PerformsTouchID.class, (PerformsTouchID driver) -> driver.performTouchID(match));
     }
+
     public static void toggleTouchIDEnrollment(boolean enabled) {
         executeDriverMethod(PerformsTouchID.class, (PerformsTouchID driver) -> driver.toggleTouchIDEnrollment(enabled));
     }
@@ -86,5 +102,13 @@ public class MobileDevice {
     // the next methods are for Android only
     public static void fingerPrint(int fingerPrintId) {
         executeDriverMethod(AuthenticatesByFinger.class, (AuthenticatesByFinger driver) -> driver.fingerPrint(fingerPrintId));
+    }
+
+    public static List<String> getPerformanceDataTypes() {
+        return executeDriverMethod(HasSupportedPerformanceDataType.class, HasSupportedPerformanceDataType::getSupportedPerformanceDataTypes);
+    }
+
+    public static List<List<Object>> getPerformanceData(String packageName, String dataType, int dataReadTimeout) {
+        return executeDriverMethod(HasSupportedPerformanceDataType.class, (HasSupportedPerformanceDataType driver) -> driver.getPerformanceData(packageName, dataType, dataReadTimeout));
     }
 }
