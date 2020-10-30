@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.complex.table;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
@@ -28,9 +29,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
-import static com.epam.jdi.light.elements.base.JDIBase.STRING_SIMPLIFY;
 import static com.epam.jdi.light.elements.complex.WebList.newList;
-import static com.epam.jdi.light.elements.complex.table.Line.initLine;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -65,6 +64,24 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int[] columnsMapping = new int[]{};
     protected String rowHeaderName = "";
     protected int startIndex = ELEMENT.startIndex;
+    public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
+    protected boolean locatorsValidated = false;
+
+    protected CacheAll<MapArray<String, WebList>> rows
+            = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, WebList>> columns
+            = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, MapArray<String, UIElement>>> cells
+            = new CacheAll<>(MapArray::new);
+    protected CacheAll<MapArray<String, MapArray<String, String>>> cellsValues
+            = new CacheAll<>(MapArray::new);
+    // Amount of Rows
+    protected CacheValue<Integer> count = new CacheValue<>(this::getCount);
+    protected CacheValue<List<String>> header = new CacheValue<>(this::getHeader);
+    protected CacheValue<List<String>> rowHeader = new CacheValue<>(this::getRowHeader);
+    // Amount of Columns
+    protected CacheValue<Integer> size = new CacheValue<>(this::getTableSize);
+
     public int getStartIndex() {
         return startIndex;
     }
@@ -72,7 +89,6 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         startIndex = index;
     }
 
-    protected boolean locatorsValidated = false;
     @Override
     public UIElement core() {
         UIElement core = super.core();
@@ -123,26 +139,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return index + getStartIndex();
     }
 
-    protected CacheAll<MapArray<String, WebList>> rows
-        = new CacheAll<>(MapArray::new);
-    protected CacheAll<MapArray<String, WebList>> columns
-        = new CacheAll<>(MapArray::new);
-    protected CacheAll<MapArray<String, MapArray<String, UIElement>>> cells
-            = new CacheAll<>(MapArray::new);
-    protected CacheAll<MapArray<String, MapArray<String, String>>> cellsValues
-            = new CacheAll<>(MapArray::new);
-    // Amount of Rows
-    protected CacheValue<Integer> count = new CacheValue<>(this::getCount);
-    protected CacheValue<List<String>> header = new CacheValue<>(this::getHeader);
-    protected CacheValue<List<String>> rowHeader = new CacheValue<>(this::getRowHeader);
-    // Amount of Columns
-    protected CacheValue<Integer> size = new CacheValue<>(this::getTableSize);
-
     public void setHeader(List<String> header) {
         this.header.setFinal(header);
     }
 
-    public JFunc1<String, String> SIMPLIFY = STRING_SIMPLIFY;
     public WebList headerUI() {
         WebList header = core().finds(headerLocator).setName(getName() + " header");
         if (header.size() == 0) {
@@ -201,7 +201,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      * Get table rows count
      * @return int
      */
-    @JDIAction("Get {name} rows count")
+    @JDIAction("Get '{name}' rows count")
     public int count() {
         return count.get();
     }
@@ -213,8 +213,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return header.size();
     }
     // Amount of columns
+    @JDebug
     public int size() { return size.get(); }
 
+    @JDebug
     public WebList webRow(int rowNum) {
         validateRowIndex(rowNum);
         if (rows.get().has(rowNum+""))
@@ -240,12 +242,15 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public WebList webRow(int columnIndex, String rowName) {
         return webColumn(columnIndex).get(jsRowIndexByName(rowName)).finds(fromCellToRow);
     }
+    @JDebug
     public WebList webRow(String rowName) {
         return webRow(getRowHeaderIndex(), rowName);
     }
+    @JDebug
     public WebList webRow(Enum rowName) {
         return webRow(getEnumValue(rowName));
     }
+    @JDebug
     public WebList webColumn(int colNum) {
         validateColumnIndex(colNum) ;
         if (columns.get().has(colNum+""))
@@ -298,6 +303,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (colNum > size())
             throw exception("Table has %s columns (but requested index is %s)", size(), colNum);
     }
+    @JDebug
     public WebList webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
     }
@@ -321,6 +327,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return firstIndex(header,
             h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(name))) + getStartIndex();
     }
+    @JDebug
     public UIElement webCell(int colNum, int rowNum) {
         validateColumnIndex(colNum);
         validateRowIndex(rowNum);
@@ -339,7 +346,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected MapArray<String, WebList> getRows() {
         if (rows.isGotAll()) return rows.get();
         MapArray<String, WebList> result = new MapArray<>();
-        for (int i = getStartIndex(); i < count() + getStartIndex(); i++)
+        int count = count() + getStartIndex();
+        for (int i = getStartIndex(); i < count; i++)
             result.add(i+"", webRow(i));
         rows.gotAll();
         return rows.set(result);
@@ -350,6 +358,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return row;
     }
 
+    @JDebug
     public WebList getRow(int rowNum) {
         WebList row = getRowByIndex(getRowIndex(rowNum));
         return shiftColumnIndex > getStartIndex() || columnsMapping.length > 0
@@ -365,7 +374,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected MapArray<String, WebList> getColumns() {
         if (columns.isGotAll()) return columns.get();
         MapArray<String, WebList> result = new MapArray<>();
-        for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
+        int size = size() + getStartIndex();
+        for (int i = getStartIndex(); i < size; i++)
             result.add(i +"", webColumn(i));
         columns.gotAll();
         return columns.set(result);
@@ -378,10 +388,12 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int getColumnLocatorIndex(int index) {
         return getColumnIndex(index) + getShiftColumnIndex();
     }
+    @JDebug
     public WebList getColumn(int colNum) {
         int colIndex = getColumnLocatorIndex(colNum);
         return core().finds(fillByTemplate(columnLocator, colIndex)).noValidation();
     }
+    @JDebug
     public UIElement getCell(int colNum, int rowNum) {
         int colIndex = getColumnLocatorIndex(colNum);
         int rowIndex = getRowLocatorIndex(rowNum);
@@ -413,6 +425,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         catch (Exception ignore) { }
         return !firstRow.isEmpty() && any(header(), firstRow::contains);
     }
+    @JDebug
     public WebList filter() {
         return core().finds(filterLocator).setName(getName()+" filter");
     }
@@ -438,7 +451,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         List<String> result = new ArrayList<>();
         for (int i = getStartIndex(); i < header().size() + getStartIndex(); i++)
             result.add(lines.get(i).getText());
-        return initLine(result, header());
+        return new Line(result, header(), base());
     }
 
     /**
@@ -449,14 +462,14 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<Line> rows(TableMatcher... matchers) {
         List<String> lines = TABLE_MATCHER.execute(this, matchers).values();
-        if (lines == null || lines.size() < header().size())
+        if (lines == null || lines.size() > 0 && lines.size() < header().size())
             return null;
         List<Line> listOfLines = new ArrayList<>();
         List<String> result = new ArrayList<>();
         for (String line : lines) {
             result.add(line);
             if (result.size() == header().size()) {
-                listOfLines.add(initLine(result, header()));
+                listOfLines.add(new Line(result, header(), base()));
                 result.clear();
             }
         }
@@ -679,7 +692,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public String getValue() {
         getTableJs();
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
-        for (int i = getStartIndex(); i < count() + getStartIndex(); i++) {
+        int count = count();
+        for (int i = getStartIndex(); i < count + getStartIndex(); i++) {
             List<String> row = cellsValues.get().get(i+"").values();
             value += "||" + i + "||" + print(map(row, TRIM_VALUE::execute), "|") + "||" + LINE_BREAK;
         }
@@ -733,7 +747,6 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             this.shiftRowIndex = j.shiftRowIndex();
         if (isNotBlank(rowHeader))
             rowHeaderName = rowHeader;
-
     }
 
     public T getTableJs() {
@@ -742,9 +755,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             cellsValues.set(new MapArray<>());
             int k = 0;
             int j = getStartIndex();
+            int size = size() + getStartIndex();
             while (k < listOfCells.size()) {
                 MapArray<String, String> newRow = new MapArray<>();
-                for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
+                for (int i = getStartIndex(); i < size; i++)
                     newRow.add(i+"", listOfCells.get(k++));
                 cellsValues.get().update(j+"", newRow);
                 j++;
@@ -756,15 +770,15 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected T getTable() {
         if (!cells.isGotAll()) {
             try {
-                List<WebElement> listOfCells =
-                        core().finds(allCellsLocator).getAllElements();
+                List<WebElement> listOfCells = core().finds(allCellsLocator).getWebElements();
                 cells.set(new MapArray<>());
                 int k = 0;
                 int j = getStartIndex();
-                for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
+                int size = size() + getStartIndex();
+                for (int i = getStartIndex(); i < size; i++)
                     cells.get().update(i+"", new MapArray<>());
                 while (k < listOfCells.size()) {
-                    for (int i = getStartIndex(); i < size() + getStartIndex(); i++)
+                    for (int i = getStartIndex(); i < size; i++)
                         cells.get().get(i+"").update(j+"", new UIElement(listOfCells.get(k++)));
                     j++;
                 }

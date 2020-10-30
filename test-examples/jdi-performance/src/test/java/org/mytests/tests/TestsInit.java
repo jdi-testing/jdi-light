@@ -25,7 +25,7 @@ import static org.mytests.uiobjects.example.site.SiteJdi.homePage;
 
 @Listeners(TestNGListener.class)
 public class TestsInit {
-    public static Safe<Timer> TIMER = new Safe<>();
+    public static Safe<Timer> TIMER = new Safe<>(Timer::new);
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
@@ -38,7 +38,7 @@ public class TestsInit {
         };
         AFTER_JDI_ACTION = (jInfo, result) -> {
             addStatistic(jInfo.jp().getSignature().getName(), TIMER.get().timePassedInMSec());
-            return ActionHelper.afterJdiAction(jInfo, result);
+            ActionHelper.afterJdiAction(jInfo, result);
         };
         homePage.open();
         logger.info("Run Tests");

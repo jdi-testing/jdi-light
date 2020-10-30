@@ -1,12 +1,13 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.driver.WebDriverFactory;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Collection;
 import java.util.Set;
+
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -14,7 +15,9 @@ import java.util.Set;
  */
 public class Cookies {
 
-    private static WebDriver.Options manage() { return WebDriverFactory.getDriver().manage(); }
+    private static WebDriver.Options manage() {
+        return getDriver().manage();
+    }
     /**
      * Get all browser cookies
      * @return Set

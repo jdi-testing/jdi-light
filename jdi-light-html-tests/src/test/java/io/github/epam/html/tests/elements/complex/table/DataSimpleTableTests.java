@@ -77,6 +77,7 @@ public class DataSimpleTableTests implements TestsInit {
     public void dataFilterTest() {
         assertEquals(usersData.dataRow(d -> d.user.contains("Ivan")), SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void allDataFilterTest() {
         List<MarvelUserSimple> filteredData = usersData.dataRows(d -> d.user.contains("Ivan"));

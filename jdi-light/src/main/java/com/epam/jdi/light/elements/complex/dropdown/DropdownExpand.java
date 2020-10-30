@@ -27,6 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class DropdownExpand extends UIBaseElement<DropdownAssert>
         implements IsDropdown, ISetup, ISelector, HasAssert<DropdownAssert> {
     public String expandLocator = ".caret";
+    protected int startIndex = ELEMENT.startIndex;
 
     public UIElement expander() {
         return linked(expandLocator, "expand");
@@ -163,7 +164,6 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     public DropdownAssert is() {
         return new DropdownAssert().set(this);
     }
-    protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }

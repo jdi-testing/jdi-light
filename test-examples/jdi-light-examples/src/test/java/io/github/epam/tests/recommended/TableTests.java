@@ -1,9 +1,7 @@
 package io.github.epam.tests.recommended;
 
 import com.epam.jdi.light.elements.common.Alerts;
-import com.epam.jdi.light.elements.complex.table.BaseTable;
 import com.epam.jdi.light.elements.complex.table.Table;
-import com.epam.jdi.light.settings.JDISettings;
 import io.github.epam.StaticTestsInit;
 import io.github.epam.custom.UserRow;
 import io.github.epam.entities.UserInfo;

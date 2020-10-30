@@ -100,7 +100,6 @@ public class DataTableTests implements TestsInit {
         List<String> column = notMoreThan(1000, () -> table.jsColumn(ELEMENT.startIndex + 1));
         assertEquals(print(column, ";").substring(0, 30),
                 "076 1971 1687;(011307) 16843;0");
-
         String value = notMoreThan(2000, table::getValue);
         assertThat(value, containsString("||X||Name|Phone|Email|City||" + LINE_BREAK +
             "||"+i(0)+"||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +
