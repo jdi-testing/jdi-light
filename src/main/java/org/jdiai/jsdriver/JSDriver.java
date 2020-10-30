@@ -3,7 +3,6 @@ package org.jdiai.jsdriver;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
-import org.jdiai.IJSBuilder;
 import org.jdiai.JSBuilder;
 import org.jdiai.JSException;
 import org.jdiai.ListSearch;
@@ -23,7 +22,6 @@ public class JSDriver {
     private final List<By> locators;
     public static boolean logQuery = false;
     public ListSearch strategy = CHAIN;
-    private IJSBuilder builder;
 
     public JSDriver(WebDriver driver, By... locators) {
         this(driver, newList(locators));
@@ -53,27 +51,14 @@ public class JSDriver {
         return LinqUtils.last(locators);
     }
 
-    public JSDriver setBuilder(IJSBuilder builder) {
-        this.builder = builder;
-        return this;
-    }
-    public IJSBuilder builder() {
-        if (builder != null)
-            return builder;
-        builder = new JSBuilder(driver());
-        if (logQuery)
-            builder.logQuery();
-        return builder;
-    }
-
     public void invoke(String action) {
         attribute(action).getOne();
     }
     public JSExecutor attribute(String text) {
-        return new JSExecutor("element." + text, this);
+        return new JSExecutor(this, new JSBuilder(this.driver, "element." + text));
     }
     public JSExecutor json(String json) {
-        return new JSExecutor("JSON.stringify(" + json + ")", this);
+        return new JSExecutor(this, new JSBuilder(this.driver, "JSON.stringify(" + json + ")"));
     }
     public JSExecutor attributes(List<String> attributes) {
         String jsonObject = "{ " + print(map(attributes, el -> "\"" + el + "\": element." + el), ", ") + " }";

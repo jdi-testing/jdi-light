@@ -9,9 +9,8 @@ public interface IJSBuilder {
     IJSBuilder getListToOne(By locator);
     IJSBuilder getOneToList(String ctx, By locator);
     IJSBuilder getListToList(By locator);
-    IJSBuilder collect(String collector);
-    String executeQuery(String getResult);
-    List<String> executeAsList(String getResult);
+    String executeQuery();
+    List<String> executeAsList();
     String selector(By locator);
     String selectorAll(By locator);
     IJSBuilder registerFunction(String name, String function);

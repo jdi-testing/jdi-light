@@ -24,13 +24,15 @@ public class JSBuilder implements IJSBuilder {
     public static JAction1<String> logger = System.out::println;
     private MapArray<String, String> useFunctions = new MapArray<>();
     private IBuilderActions builderActions;
+    private final String collectResult;
 
-    public JSBuilder(WebDriver driver) {
-        this(driver, null);
+    public JSBuilder(WebDriver driver, String collectResult) {
+        this(driver, null, collectResult);
     }
-    public JSBuilder(WebDriver driver, IBuilderActions builderActions) {
+    public JSBuilder(WebDriver driver, IBuilderActions builderActions, String collectResult) {
         this.js = (JavascriptExecutor) driver;
         this.builderActions = builderActions != null ? builderActions : new BuilderActions(this);
+        this.collectResult = collectResult;
     }
     public IJSBuilder registerFunction(String name, String function) {
         useFunctions.update(name, function);
@@ -40,8 +42,8 @@ public class JSBuilder implements IJSBuilder {
         this.logQuery = true;
         return this;
     }
-    public String executeQuery(String getResult) {
-        String jsScript = getScript() + "return " + getResult;
+    public String executeQuery() {
+        String jsScript = getScript() + "return " + collectResult;
         if (logQuery)
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         String result = (String) js.executeScript(jsScript);
@@ -49,8 +51,9 @@ public class JSBuilder implements IJSBuilder {
             logger.execute(">>> " + result);
         return result;
     }
-    public List<String> executeAsList(String getResult) {
-        String jsScript = getScript() + "return " + getResult;
+    public List<String> executeAsList() {
+        query += builderActions.collect(collectResult);
+        String jsScript = getScript() + "return result;";
         if (logQuery)
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         List<String> result = (List<String>) js.executeScript(jsScript);
@@ -88,10 +91,6 @@ public class JSBuilder implements IJSBuilder {
     }
     public IJSBuilder getListToList(By locator) {
         query += builderActions.listToList(locator);
-        return this;
-    }
-    public IJSBuilder collect(String collector) {
-        query += builderActions.collect(collector);
         return this;
     }
 

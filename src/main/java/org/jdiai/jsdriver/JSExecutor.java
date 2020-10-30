@@ -7,22 +7,21 @@ import static com.epam.jdi.tools.LinqUtils.listCopy;
 import static com.epam.jdi.tools.LinqUtils.listCopyUntil;
 
 public class JSExecutor {
-    private final String collector;
     private final JSDriver jsDriver;
+    private final IJSBuilder builder;
 
-    public JSExecutor(String collector, JSDriver jsDriver) {
-        this.collector = collector;
+    public JSExecutor(JSDriver jsDriver, IJSBuilder builder) {
         this.jsDriver = jsDriver;
+        this.builder = builder;
     }
     private IJSBuilder builder() {
-        return jsDriver.builder();
+        return builder;
     }
-
     public JSProducer getOne() {
         if (jsDriver.locators().size() == 1) {
             return new JSProducer(builder()
                 .getOneToOne("document", jsDriver.firstLocator())
-                .executeQuery(collector));
+                .executeQuery());
         }
         switch (jsDriver.strategy) {
             case CHAIN: return getOneChain();
@@ -34,8 +33,7 @@ public class JSExecutor {
         if (jsDriver.locators().size() == 1) {
             return new JSListProducer(builder()
                 .getOneToList("document", jsDriver.firstLocator())
-                .collect(collector)
-                .executeAsList("result"));
+                .executeAsList());
         }
         switch (jsDriver.strategy) {
             case CHAIN: return getListChain();
@@ -54,7 +52,7 @@ public class JSExecutor {
             builder.getOneToOne(ctx, locator);
             ctx = "element";
         }
-        return new JSProducer(builder.executeQuery(collector));
+        return new JSProducer(builder.executeQuery());
     }
     public JSProducer getOneMultiSearch() {
         if (jsDriver.locators().size() == 1) {
@@ -66,33 +64,30 @@ public class JSExecutor {
             builder.getListToList(locator);
         }
         builder.getListToOne(jsDriver.lastLocator());
-        return new JSProducer(builder.executeQuery(collector));
+        return new JSProducer(builder.executeQuery());
     }
     public JSListProducer getListChain() {
         if (jsDriver.locators().size() == 1) {
             return getList();
         }
-        IJSBuilder builder =  builder();
         String ctx = "document";
         for (By locator : listCopyUntil(jsDriver.locators(), -1)) {
-            builder.getOneToOne(ctx, locator);
+            builder().getOneToOne(ctx, locator);
             ctx = "element";
         }
-        builder.getOneToList("element", jsDriver.lastLocator())
-            .collect(collector);
-        return new JSListProducer(builder.executeAsList("result"));
+        builder().getOneToList("element", jsDriver.lastLocator());
+        return new JSListProducer(builder().executeAsList());
     }
     public JSListProducer getListMultiSearch() {
         if (jsDriver.locators().size() == 1) {
             return getList();
         }
-        IJSBuilder builder =  builder();
-        builder.getOneToList("document", jsDriver.firstLocator());
+        builder().getOneToList("document", jsDriver.firstLocator());
         for (By locator : listCopy(jsDriver.locators(), 1, -1)) {
-            builder.getListToList(locator);
+            builder().getListToList(locator);
         }
-        builder.getListToList(jsDriver.lastLocator()).collect(collector);
-        return new JSListProducer(builder.executeAsList("result"));
+        builder().getListToList(jsDriver.lastLocator());
+        return new JSListProducer(builder().executeAsList());
     }
 
 }
