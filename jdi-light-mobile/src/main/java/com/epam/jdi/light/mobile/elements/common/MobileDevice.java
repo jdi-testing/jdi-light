@@ -5,6 +5,7 @@ import io.appium.java_client.LocksDevice;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AuthenticatesByFinger;
+import io.appium.java_client.android.HasSupportedPerformanceDataType;
 import io.appium.java_client.battery.BatteryInfo;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.PerformsTouchID;
@@ -15,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.html5.Location;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -86,5 +88,13 @@ public class MobileDevice {
     // the next methods are for Android only
     public static void fingerPrint(int fingerPrintId) {
         executeDriverMethod(AuthenticatesByFinger.class, (AuthenticatesByFinger driver) -> driver.fingerPrint(fingerPrintId));
+    }
+
+    public static List<String> getPerformanceDataTypes (){
+        return executeDriverMethod(HasSupportedPerformanceDataType.class, HasSupportedPerformanceDataType::getSupportedPerformanceDataTypes);
+    }
+
+    public static List<List<Object>> getPerformanceData (String packageName, String dataType, int dataReadTimeout) {
+        return executeDriverMethod(HasSupportedPerformanceDataType.class, (HasSupportedPerformanceDataType driver) -> driver.getPerformanceData(packageName,dataType, dataReadTimeout));
     }
 }
