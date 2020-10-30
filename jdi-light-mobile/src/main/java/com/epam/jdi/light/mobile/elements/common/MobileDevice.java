@@ -90,10 +90,12 @@ public class MobileDevice {
     }
     // this method is for Android only
     public static void setClipBoardText(String text) {
-        executeDriverMethod(MobileDriver.class, (MobileDriver driver) -> (HasClipboard) driver).setClipboardText(text);
+        executeDriverMethod(MobileDriver.class,
+                (MobileDriver driver) -> (HasClipboard) driver).setClipboardText(text);
     }
     // this method is for Android only
     public static String getClipBoardText() {
-        return executeDriverMethod(MobileDriver.class, (MobileDriver driver) -> (HasClipboard) driver).getClipboardText();
+        return executeDriverMethod(MobileDriver.class,
+                (MobileDriver driver) -> (HasClipboard) driver).getClipboardText();
     }
 }
