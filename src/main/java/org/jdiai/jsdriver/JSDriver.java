@@ -36,6 +36,10 @@ public class JSDriver {
         this.builder = builder;
     }
 
+    public JSDriver setBuilder(IJSBuilder builder) {
+        this.builder = builder;
+        return this;
+    }
     public JSProducer getOne(String collector) {
         if (locators().size() == 1) {
             return new JSProducer(builder()

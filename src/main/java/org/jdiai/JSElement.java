@@ -26,13 +26,13 @@ public class JSElement implements WebElement {
             this.locators = new ArrayList<>();
         }
         this.locators.add(locator);
-        this.js = new JSDriver(driver, locators);
+        this.js = new JSDriver(driver, locators, new JSSmartBuilder(driver)).multiSearch();
         this.driver = driver;
     }
-    private String jsResult(String action) {
+    protected String jsResult(String action) {
         return js.getOne("element" + action).asString();
     }
-    private WebElement we() {
+    protected WebElement we() {
         SearchContext ctx = driver;
         for (By locator : locators) {
             ctx = ctx.findElement(locator);

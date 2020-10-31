@@ -1,6 +1,7 @@
 package org.jdiai.jselement;
 
 import com.epam.jdi.tools.Safe;
+import org.jdiai.JSSmartBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,10 +10,21 @@ import static java.util.Arrays.stream;
 
 public class JSTalk {
     public static Safe<WebDriver> DRIVER = new Safe<>(JSTalk::initDriver);
-    public static JSElement $(String locator) {
+    public static JSSmart $(String locator) {
+        return new JSSmart(DRIVER.get(), defineLocator(locator));
+    }
+    public static JSSmart $(String... locators) {
+        return new JSSmart(DRIVER.get(), locatorsToBy(locators));
+    }
+    public static <T> JSObject<T> $(Class<T> cl, String locator) {
+        JSObject<T> entity = new JSObject<T>(DRIVER.get(), defineLocator(locator)).initClass(cl);
+        entity.driver.setBuilder(new JSSmartBuilder(DRIVER.get()));
+        return entity;
+    }
+    public static JSElement element(String locator) {
         return new JSElement(DRIVER.get(), defineLocator(locator));
     }
-    public static JSElement $(String... locators) {
+    public static JSElement element(String... locators) {
         return new JSElement(DRIVER.get(), locatorsToBy(locators));
     }
     public static JSJson json(String locator) {

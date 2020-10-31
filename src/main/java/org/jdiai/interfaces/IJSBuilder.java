@@ -20,4 +20,5 @@ public interface IJSBuilder {
     String registerVariable(String variable);
     String getQuery(String result);
     IJSBuilder logQuery();
+    boolean LOG_QUERY = false;
 }

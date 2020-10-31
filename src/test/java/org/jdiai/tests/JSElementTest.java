@@ -1,10 +1,11 @@
 package org.jdiai.tests;
 
 import org.jdiai.TestInit;
+import org.jdiai.jselement.JSTalk;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.jdiai.jselement.JSTalk.$;
+import static org.jdiai.jselement.JSTalk.element;
 import static org.testng.Assert.assertEquals;
 
 public class JSElementTest extends TestInit {
@@ -16,54 +17,54 @@ public class JSElementTest extends TestInit {
 
     @Test
     public void oneTest() {
-        assertEquals($("#user-icon").getAttribute("tagName"), "IMG");
-        assertEquals($("#user-name").getAttribute("innerText"), "Roman Iovlev");
-        assertEquals($("#user-name").getAttribute("textContent"), "Roman Iovlev");
-        assertEquals($("#user-name").getAttribute("innerHTML"), "Roman Iovlev");
-        assertEquals($("#user-name").getStyle("visibility"), "hidden");
+        assertEquals(JSTalk.element("#user-icon").getAttribute("tagName"), "IMG");
+        assertEquals(JSTalk.element("#user-name").getAttribute("innerText"), "Roman Iovlev");
+        assertEquals(JSTalk.element("#user-name").getAttribute("textContent"), "Roman Iovlev");
+        assertEquals(JSTalk.element("#user-name").getAttribute("innerHTML"), "Roman Iovlev");
+        assertEquals(JSTalk.element("#user-name").getStyle("visibility"), "hidden");
 
-        $("#user-name").doAction("click()");
-        $("#name").doAction("value='Roman'");
-        $("#password").doAction("value='Jdi1234'");
-        $("#login-button").doAction("click()");
+        JSTalk.element("#user-name").doAction("click()");
+        JSTalk.element("#name").doAction("value='Roman'");
+        JSTalk.element("#password").doAction("value='Jdi1234'");
+        JSTalk.element("#login-button").doAction("click()");
 
-        assertEquals($("#user-name").getStyle("visibility"), "visible");
+        assertEquals(JSTalk.element("#user-name").getStyle("visibility"), "visible");
     }
     @Test
     public void oneFewLocatorsTest() {
-        assertEquals($(withParent("#user-icon")).getAttribute("tagName"), "IMG");
-        assertEquals($(withParent("#user-name")).getAttribute("innerText"), "Roman Iovlev");
-        assertEquals($(withParent("#user-name")).getAttribute("textContent"), "Roman Iovlev");
-        assertEquals($(withParent("#user-name")).getAttribute("innerHTML"), "Roman Iovlev");
-        assertEquals($("#user-name").getStyle("visibility"), "hidden");
+        assertEquals(element(withParent("#user-icon")).getAttribute("tagName"), "IMG");
+        assertEquals(element(withParent("#user-name")).getAttribute("innerText"), "Roman Iovlev");
+        assertEquals(element(withParent("#user-name")).getAttribute("textContent"), "Roman Iovlev");
+        assertEquals(element(withParent("#user-name")).getAttribute("innerHTML"), "Roman Iovlev");
+        assertEquals(JSTalk.element("#user-name").getStyle("visibility"), "hidden");
 
-        $(withParent("#user-name")).doAction("click()");
-        $(inForm("#name")).doAction("value='Roman'");
-        $(inForm("#password")).doAction("value='Jdi1234'");
-        $(inForm("#login-button")).doAction("click()");
+        element(withParent("#user-name")).doAction("click()");
+        element(inForm("#name")).doAction("value='Roman'");
+        element(inForm("#password")).doAction("value='Jdi1234'");
+        element(inForm("#login-button")).doAction("click()");
 
-        assertEquals($(withParent("#user-name")).getStyle("visibility"), "visible");
+        assertEquals(element(withParent("#user-name")).getStyle("visibility"), "visible");
     }
     @Test
     public void styleTest() {
-        assertEquals($("#user-name").getStyle("visibility"), "hidden");
+        assertEquals(JSTalk.element("#user-name").getStyle("visibility"), "hidden");
 
-        $(withParent("#user-name")).doAction("click()");
-        $(inForm("#name")).doAction("value='Roman'");
-        $(inForm("#password")).doAction("value='Jdi1234'");
-        $(inForm("#login-button")).doAction("click()");
+        element(withParent("#user-name")).doAction("click()");
+        element(inForm("#name")).doAction("value='Roman'");
+        element(inForm("#password")).doAction("value='Jdi1234'");
+        element(inForm("#login-button")).doAction("click()");
 
-        assertEquals($("#user-name").getStyle("visibility"), "visible");
+        assertEquals(JSTalk.element("#user-name").getStyle("visibility"), "visible");
     }
     @Test
     public void styleMultiTest() {
-        assertEquals($(withParent("#user-name")).getStyle("visibility"), "hidden");
+        assertEquals(element(withParent("#user-name")).getStyle("visibility"), "hidden");
 
-        $(withParent("#user-name")).doAction("click()");
-        $(inForm("#name")).doAction("value='Roman'");
-        $(inForm("#password")).doAction("value='Jdi1234'");
-        $(inForm("#login-button")).doAction("click()");
+        element(withParent("#user-name")).doAction("click()");
+        element(inForm("#name")).doAction("value='Roman'");
+        element(inForm("#password")).doAction("value='Jdi1234'");
+        element(inForm("#login-button")).doAction("click()");
 
-        assertEquals($(withParent("#user-name")).getStyle("visibility"), "visible");
+        assertEquals(element(withParent("#user-name")).getStyle("visibility"), "visible");
     }
 }

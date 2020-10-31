@@ -19,14 +19,14 @@ import static org.jdiai.WebDriverByUtils.getByLocator;
 import static org.jdiai.WebDriverByUtils.getByType;
 
 public class JSBuilder implements IJSBuilder {
-    private final List<String> variables = new ArrayList<>();
-    private String query = "";
-    private JavascriptExecutor js;
+    protected final List<String> variables = new ArrayList<>();
+    protected String query = "";
+    protected JavascriptExecutor js;
     public static boolean LOG_QUERY = false;
     public boolean logQuery = LOG_QUERY;
     public static JAction1<String> logger = System.out::println;
-    private MapArray<String, String> useFunctions = new MapArray<>();
-    private IBuilderActions builderActions;
+    protected MapArray<String, String> useFunctions = new MapArray<>();
+    protected IBuilderActions builderActions;
 
     public JSBuilder(WebDriver driver) {
         this(driver, null);
@@ -103,7 +103,7 @@ public class JSBuilder implements IJSBuilder {
         query += builderActions.getResultList(getCollector(collectResult));
         return this;
     }
-    private String getCollector(String collectResult) {
+    protected String getCollector(String collectResult) {
         return collectResult.trim().startsWith("{")
             ? "JSON.stringify(" + collectResult + ")"
             : collectResult;
@@ -121,7 +121,7 @@ public class JSBuilder implements IJSBuilder {
             variables.add(variable);
         return variable + " = ";
     }
-    private String getScript() {
+    protected String getScript() {
         String jsScript = print(useFunctions.values(), "");
         if (variables.size() == 1)
             return jsScript + "let " + query;

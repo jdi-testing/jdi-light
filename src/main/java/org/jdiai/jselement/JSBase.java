@@ -38,6 +38,19 @@ public abstract class JSBase {
         return getStyles(asList(styles));
     }
 
+    public List<String> getStylesList(String style) {
+        List<JsonObject> styles = driver.getList("{ \"style\": getComputedStyle(element)." + style + " }").asJson();
+        return map(styles, s -> s.get("style").getAsString());
+    }
+    public List<MapArray<String, String>> getMultiStyles(List<String> styles) {
+        String jsonObject = "{ " + print(map(styles, el -> "\"" + el + "\": getComputedStyle(element)." + el), ", ") + " }";
+        List<JsonObject> jsonList = driver.getList(jsonObject).asJson();
+        return map(jsonList, j -> new MapArray<>(styles, s -> s, s -> j.get(s).getAsString()));
+    }
+    public List<MapArray<String, String>> getMultiStyles(String... styles) {
+        return getMultiStyles(asList(styles));
+    }
+
     protected String attributesToJson(List<String> attributes) {
         return  "{ " + print(map(attributes, el -> "\"" + el + "\": element." + el), ", ") + " }";
     }

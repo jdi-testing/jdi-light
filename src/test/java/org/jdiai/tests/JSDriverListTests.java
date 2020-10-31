@@ -13,7 +13,7 @@ public class JSDriverListTests extends TestInit {
 
     @BeforeMethod
     public void before() {
-        logout();
+        atUsersPage();
     }
 
     @Test
