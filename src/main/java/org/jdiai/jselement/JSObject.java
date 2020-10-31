@@ -11,7 +11,7 @@ import java.util.List;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 import static java.util.Arrays.asList;
 
-public class JSObject<T> extends JSBase {
+public class JSObject<T> extends JSBase<JSObject<T>> {
     protected Class<T> cl;
     public JSObject(WebDriver driver, List<By> locators) {
         super(driver, locators);

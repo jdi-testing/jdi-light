@@ -122,7 +122,7 @@ public class JSDriver {
     public WebDriver driver() {
         return this.driver;
     }
-    private IJSBuilder builder() {
+    public IJSBuilder builder() {
         if (builder == null)
             builder = new JSBuilder(driver());
         return builder;

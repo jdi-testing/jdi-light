@@ -12,7 +12,7 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.util.Arrays.asList;
 
-public class JSSmart extends JSElement {
+public class JSSmart extends JSBase<JSSmart> {
     public JSSmart(WebDriver driver, List<By> locators) {
         super(driver, locators);
         this.driver.setBuilder(new JSSmartBuilder(driver));
@@ -40,6 +40,12 @@ public class JSSmart extends JSElement {
     }
     public List<MapArray<String, String>> getMultiAttributes(String... attributes) {
         return getMultiAttributes(asList(attributes));
+    }
+    public JsonObject getJson(String json) {
+        return driver.getOne(json).asJson();
+    }
+    public List<JsonObject> getJsonList(String json) {
+        return driver.getList(json).asJson();
     }
 
 }

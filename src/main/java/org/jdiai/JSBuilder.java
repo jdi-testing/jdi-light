@@ -13,10 +13,6 @@ import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static org.jdiai.JSTemplates.XPATH_FUNC;
-import static org.jdiai.JSTemplates.XPATH_LIST_FUNC;
-import static org.jdiai.WebDriverByUtils.getByLocator;
-import static org.jdiai.WebDriverByUtils.getByType;
 
 public class JSBuilder implements IJSBuilder {
     protected final List<String> variables = new ArrayList<>();
@@ -66,42 +62,36 @@ public class JSBuilder implements IJSBuilder {
     public String getQuery(String result) {
         return getScript() + "return " + result;
     }
-
-    public String selector(By locator) {
-        String selector = getByLocator(locator).replaceAll("'", "\"");
-        if (getByType(locator).equals("xpath"))
-            registerFunction("xpath", XPATH_FUNC);
-        return selector;
+    public String getQuery() {
+        return getScript();
     }
-    public String selectorAll(By locator) {
-        String selector = getByLocator(locator).replaceAll("'", "\"");
-        if (getByType(locator).equals("xpath"))
-            registerFunction("xpathList", XPATH_LIST_FUNC);
-        return selector;
+    public IJSBuilder addJSCode(String code) {
+        query += code;
+        return this;
     }
     public IJSBuilder oneToOne(String ctx, By locator) {
-        query += builderActions.oneToOne(ctx, locator);
-        return this;
+        return addJSCode(builderActions.oneToOne(ctx, locator));
     }
     public IJSBuilder listToOne(By locator) {
-        query += builderActions.listToOne(locator);
-        return this;
+        return addJSCode(builderActions.listToOne(locator));
     }
     public IJSBuilder oneToList(String ctx, By locator) {
-        query += builderActions.oneToList(ctx, locator);
-        return this;
+        return addJSCode(builderActions.oneToList(ctx, locator));
     }
     public IJSBuilder listToList(By locator) {
-        query += builderActions.listToList(locator);
-        return this;
+        return addJSCode(builderActions.listToList(locator));
     }
     public IJSBuilder getResult(String collectResult) {
-        query += builderActions.getResult(getCollector(collectResult));
-        return this;
+        return addJSCode(builderActions.getResult(getCollector(collectResult)));
     }
     public IJSBuilder getResultList(String collectResult) {
-        query += builderActions.getResultList(getCollector(collectResult));
-        return this;
+        return addJSCode(builderActions.getResultList(getCollector(collectResult)));
+    }
+    public IJSBuilder trigger(String event) {
+        return trigger(event,"'bubbles': true");
+    }
+    public IJSBuilder trigger(String event, String options) {
+        return addJSCode("element.dispatchEvent(new Event('" + event + "', { " + options + " }));\n");
     }
     protected String getCollector(String collectResult) {
         return collectResult.trim().startsWith("{")

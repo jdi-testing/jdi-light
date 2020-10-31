@@ -10,7 +10,7 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.util.Arrays.asList;
 
-public class JSElement extends JSBase {
+public class JSElement extends JSBase<JSElement> {
     public JSElement(WebDriver driver, List<By> locators) {
         super(driver, locators);
     }

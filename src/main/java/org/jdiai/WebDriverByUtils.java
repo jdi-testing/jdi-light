@@ -2,6 +2,7 @@ package org.jdiai;
 
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
+import org.jdiai.interfaces.IJSBuilder;
 import org.openqa.selenium.By;
 
 import java.text.MessageFormat;
@@ -15,6 +16,8 @@ import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
+import static org.jdiai.JSTemplates.XPATH_FUNC;
+import static org.jdiai.JSTemplates.XPATH_LIST_FUNC;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 
 /**
@@ -115,5 +118,18 @@ public final class WebDriverByUtils {
     }
     public static By withText(String text) {
         return By.xpath(asContainsTextLocator(text));
+    }
+
+    public static String selector(By locator, IJSBuilder builder) {
+        String selector = getByLocator(locator).replaceAll("'", "\"");
+        if (getByType(locator).equals("xpath"))
+            builder.registerFunction("xpath", XPATH_FUNC);
+        return selector;
+    }
+    public static String selectorAll(By locator, IJSBuilder builder) {
+        String selector = getByLocator(locator).replaceAll("'", "\"");
+        if (getByType(locator).equals("xpath"))
+            builder.registerFunction("xpathList", XPATH_LIST_FUNC);
+        return selector;
     }
 }

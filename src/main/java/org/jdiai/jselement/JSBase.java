@@ -12,8 +12,15 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
-public abstract class JSBase {
+public abstract class JSBase<T extends JSBase<?>> {
     protected JSDriver driver;
+    public JSDriver jsDriver() {
+        return driver;
+    }
+    public T multiSearch() {
+        driver.multiSearch();
+        return (T) this;
+    }
 
     public JSBase(WebDriver driver, List<By> locators) {
         this.driver = new JSDriver(driver, locators);

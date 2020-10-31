@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class JSJson extends JSBase {
+public class JSJson extends JSBase<JSJson> {
     public JSJson(WebDriver driver, List<By> locators) {
         super(driver, locators);
     }
