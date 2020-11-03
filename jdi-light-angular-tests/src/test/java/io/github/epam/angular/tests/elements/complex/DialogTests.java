@@ -1,7 +1,7 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
@@ -10,7 +10,7 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class DialogTests extends TestsInit {
 
-    @BeforeClass(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         angularPage.open();
