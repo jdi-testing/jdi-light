@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -17,7 +18,7 @@ public class MenuUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
     }
 
     @Test
@@ -65,5 +66,18 @@ public class MenuUnitTests extends TestsInit {
     public void valuesTest() {
         basicMenuButton.show();
         assertEquals(basicMenuButton.values(), Arrays.asList(BASIC_MENU_VALUES));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (basicMenuButton.isExpanded()) {
+            basicMenuButton.close();
+        }
+        if (menuWithIconsButton.isExpanded()) {
+            menuWithIconsButton.close();
+        }
+        if (nestedMenuButton.isExpanded()) {
+            nestedMenuButton.close();
+        }
     }
 }

@@ -9,8 +9,6 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 
-import static java.lang.String.format;
-
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
@@ -56,17 +54,11 @@ public interface ICoreElement extends IBaseElement {
     default UIElement find(@MarkupLocator String by) {
         return iCore().find(by);
     }
-    default UIElement find(@MarkupLocator String by, Object... args) {
-        return find(format(by, args));
-    }
     default UIElement find(@MarkupLocator By by) {
         return iCore().find(by);
     }
     default WebList finds(@MarkupLocator String by) {
         return iCore().finds(by);
-    }
-    default WebList finds(@MarkupLocator String by, Object... args) {
-        return finds(format(by, args));
     }
     default WebList finds(@MarkupLocator By by) { return iCore().finds(by); }
     default UIElement firstChild() { return iCore().firstChild(); }

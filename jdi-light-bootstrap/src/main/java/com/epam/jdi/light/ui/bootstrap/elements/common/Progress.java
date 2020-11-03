@@ -18,13 +18,13 @@ import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 public class Progress extends UIBaseElement<ProgressAssert> implements HasValue {
     // region Actions
     @JDIAction(value = "Get '{name}' max limit", level = DEBUG)
-    public int max() { return getInt("aria-valuemax", core().finds(".progress-bar").first()); }
+    public int max() { return getInt("aria-valuemax", uiElement.finds(".progress-bar").first()); }
     @JDIAction(value = "Get '{name}' min limit", level = DEBUG)
-    public int min() { return getInt("aria-valuemin", core().finds(".progress-bar").first()); }
+    public int min() { return getInt("aria-valuemin", uiElement.finds(".progress-bar").first()); }
     @JDIAction("Get '{name}' progress value ")
     public String value() { return PrintUtils.print(values(), ";"); }
     @JDIAction(value = "Get '{name}' min limit")
-    public List<String> values() { return core().finds(".progress-bar").values(); }
+    public List<String> values() { return uiElement.finds(".progress-bar").values(); }
     // endregion
 
     // region Set and get value for Forms

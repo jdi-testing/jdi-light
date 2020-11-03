@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
@@ -23,7 +24,6 @@ import static com.epam.jdi.light.driver.get.Platform.X64;
 import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.safeException;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static java.lang.System.getProperty;
@@ -47,8 +47,10 @@ public class DriverInfo extends DataClass<DriverInfo> {
         return !DRIVER.remoteRun;
     }
     public WebDriver getDriver() {
-        logger.trace("getDriver(): " + toString());
-        return isLocal() ? setupLocal() : setupRemote();
+        logger.debug("getDriver(): " + toString());
+        return isLocal()
+            ? setupLocal()
+            : setupRemote();
     }
     private Capabilities getCapabilities() {
         return capabilities.execute(initCapabilities);
@@ -81,15 +83,15 @@ public class DriverInfo extends DataClass<DriverInfo> {
     private WebDriver setupLocal() {
         try {
             boolean emptyDriverPath = isBlank(DRIVER.path);
-            logger.trace("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
+            logger.debug("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
             String driverPath = emptyDriverPath
                 ? downloadDriver(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
             logger.info("Use driver path: " + driverPath);
-            logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
+            logger.debug("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
             Capabilities caps = getCapabilities();
-            logger.trace("getDriver.execute(getCapabilities())", caps);
+            logger.debug("getDriver.execute(getCapabilities())", caps);
             return getDriver.execute(caps);
         } catch (Throwable ex) {
             try {

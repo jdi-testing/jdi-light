@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,7 +14,7 @@ public class CheckboxUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         disabledCheckbox.show();
     }
 
@@ -52,4 +53,14 @@ public class CheckboxUnitTests extends TestsInit {
         assertTrue(resultCheckbox.isDisabled());
     }
 
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (disabledCheckbox.isSelected()) {
+            disabledCheckbox.uncheck();
+        }
+        if (resultCheckbox.isSelected() || resultCheckbox.isIndeterminate()) {
+            indeterminateCheckbox.uncheck();
+            checkedCheckbox.uncheck();
+        }
+    }
 }

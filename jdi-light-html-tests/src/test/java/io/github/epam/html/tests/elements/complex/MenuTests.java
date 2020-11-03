@@ -5,7 +5,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -26,11 +25,6 @@ public class MenuTests implements TestsInit {
     public void selectEnumTest() {
         leftMenu.select(MetalsColors);
         metalAndColorsPage.checkOpened();
-    }
-    @Test
-    public void selectNumTest() {
-        leftMenu.select(ELEMENT.startIndex + 1);
-        contactFormPage.checkOpened();
     }
     @Test
     public void selectTestList() {

@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -19,7 +20,7 @@ public class ExpansionPanelTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         basicExpansionPanel.show();
     }
 
@@ -157,5 +158,14 @@ public class ExpansionPanelTests extends TestsInit {
     public void contentTest() {
         basicExpansionPanel.expand(2);
         basicExpansionPanel.has().content("I'm visible because I am open", 2);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        basicExpansionPanel.collapse(1);
+        basicExpansionPanel.collapse(2);
+        accordionExpansionPanel.expand(1);
+        accordionExpansionPanel.collapse(2);
+        accordionExpansionPanel.collapse(3);
     }
 }

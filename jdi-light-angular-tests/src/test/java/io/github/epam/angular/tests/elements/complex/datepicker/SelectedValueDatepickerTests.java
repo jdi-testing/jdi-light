@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -7,24 +8,23 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 
-import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.*;
 
 public class SelectedValueDatepickerTests extends TestsDatepickerBase {
+    private final String valueBinding = "Value binding";
+    private final String angularForms = "Angular forms";
+    private final String angularFormsDeserialization = "Angular forms (w/ deserialization)";
+
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
         selectedDatepicker.show();
         selectedDatepicker.clear();
     }
 
     @Test
     public void checkLabelValue() {
-        String angularForms = "Angular forms";
         selectedDatepicker.label().has().value(angularForms);
-        String angularFormsDeserialization = "Angular forms (w/ deserialization)";
         deserializeDatepicker.label().has().value(angularFormsDeserialization);
-        String valueBinding = "Value binding";
         bindingDatepicker.label().has().value(valueBinding);
     }
 
@@ -100,5 +100,18 @@ public class SelectedValueDatepickerTests extends TestsDatepickerBase {
         deserializeDatepicker.clear();
         deserializeDatepicker.setText("2020-13-02");
         deserializeDatepicker.is().invalid();
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (selectedDatepicker.isExpanded()) {
+            selectedDatepicker.collapse();
+        }
+        if (bindingDatepicker.isExpanded()) {
+            bindingDatepicker.collapse();
+        }
+        if (!selectedDatepicker.isEmpty()) {
+            selectedDatepicker.clear();
+        }
     }
 }

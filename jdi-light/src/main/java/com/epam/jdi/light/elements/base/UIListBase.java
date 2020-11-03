@@ -10,7 +10,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -18,19 +17,11 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
  */
 public abstract class UIListBase<A extends UISelectAssert<?,?>> extends UIBaseElement<A>
         implements ISelector, SetValue {
-    protected int startIndex = ELEMENT.startIndex;
-
+    protected WebList list;
     public WebList list() {
-        WebList webList = new WebList(base()).setup(JDIBase::searchVisible);
-        webList.setStartIndex(getStartIndex());
-        return webList;
+        return new WebList(base()).setup(JDIBase::searchVisible);
     }
-    public int getStartIndex() {
-        return startIndex;
-    }
-    public void setStartIndex(int index) {
-        startIndex = index;
-    }
+    protected void setList(WebList webList) { list = webList; }
     public UIElement first() { return list().first(); }
     public UIElement last() {
         return list().last();

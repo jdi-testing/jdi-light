@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -7,21 +8,19 @@ import java.time.LocalDate;
 import java.util.Locale;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.differentLocaleDatepicker;
 
 public class DifferentLocaleDatepickerTests extends TestsDatepickerBase {
+    private final String differentLocale = "Different locale";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
         differentLocaleDatepicker.show();
         differentLocaleDatepicker.clear();
     }
 
     @Test
     public void checkLabelValue() {
-        String differentLocale = "Different locale";
         differentLocaleDatepicker.label().has().value(differentLocale);
     }
 
@@ -85,5 +84,15 @@ public class DifferentLocaleDatepickerTests extends TestsDatepickerBase {
         differentLocaleDatepicker.show();
         differentLocaleDatepicker.switchLocale();
         differentLocaleDatepicker.has().locale(Locale.FRANCE);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (differentLocaleDatepicker.isExpanded()) {
+            differentLocaleDatepicker.collapse();
+        }
+        if (!differentLocaleDatepicker.isEmpty()) {
+            differentLocaleDatepicker.clear();
+        }
     }
 }

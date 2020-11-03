@@ -10,12 +10,10 @@ import java.util.List;
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.SimpleTablePage.furnitureJ;
+import static io.github.com.pages.SimpleTablePage.furniture;
 import static io.github.com.pages.SimpleTablePage.simpleTable;
-import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.greaterThan;
@@ -35,9 +33,9 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void tableParamsTest() {
-        assertEquals(furnitureJ.size(), 4);
-        assertEquals(furnitureJ.count(), 5);
-        assertEquals(furnitureJ.header(), asList("Name", "Type", "Cost", "Weight"));
+        assertEquals(furniture.size(), 4);
+        assertEquals(furniture.count(), 5);
+        assertEquals(furniture.header(), asList("Name", "Type", "Cost", "Weight"));
     }
     @Test
     public void simpleTableParamsTest() {
@@ -47,104 +45,104 @@ public class FurnitureTests implements TestsInit {
     }
     @Test
     public void simpleTableInteractTest() {
-        assertEquals(simpleTable.cell(ELEMENT.startIndex, ELEMENT.startIndex), "Drivers");
-        assertEquals(simpleTable.cell(ELEMENT.startIndex + 2, ELEMENT.startIndex + 5), "Cucumber, Jbehave, Thucydides, SpecFlow");
+        assertEquals(simpleTable.cell(1,1), "Drivers");
+        assertEquals(simpleTable.cell(3,6), "Cucumber, Jbehave, Thucydides, SpecFlow");
     }
 
     @Test
     public void previewTest() {
-        String value = furnitureJ.preview();
+        String value = furniture.preview();
         assertEquals(value.replaceAll(" ", ""),
             "NameTypeCost*WeightChairfurniture3.52Tablefurniture3.53.5Sofafurniture22Kitchenkitchen400Robotrobo");
     }
 
     @Test
     public void valueTest() {
-        String value = furnitureJ.getValue();
+        String value = furniture.getValue();
         assertEquals(value,
             "||X||Name|Type|Cost|Weight||" + LINE_BREAK +
-            "||"+i(0)+"||Chair|furniture|3.5|2||" + LINE_BREAK +
-            "||"+i(1)+"||Table|furniture|3.5|3.5||" + LINE_BREAK +
-            "||"+i(2)+"||Sofa|furniture|2|2||" + LINE_BREAK +
-            "||"+i(3)+"||Kitchen|kitchen|400|||" + LINE_BREAK +
-            "||"+i(4)+"||Robot|robo||||" + LINE_BREAK);
+            "||1||Chair|furniture|3.5|2||" + LINE_BREAK +
+            "||2||Table|furniture|3.5|3.5||" + LINE_BREAK +
+            "||3||Sofa|furniture|2|2||" + LINE_BREAK +
+            "||4||Kitchen|kitchen|400|||" + LINE_BREAK +
+            "||5||Robot|robo||||" + LINE_BREAK);
     }
 
     @Test
     public void dataColumnTestIndex() {
-        assertEquals(furnitureJ.dataRow(ELEMENT.startIndex + 1), TABLE);
+        assertEquals(furniture.dataRow(2), TABLE);
     }
 
     @Test
     public void dataColumnNameTest() {
-        assertEquals(furnitureJ.dataRow("Table"), TABLE);
+        assertEquals(furniture.dataRow("Table"), TABLE);
     }
 
     @Test
     public void dataFilterTest() {
-        assertEquals(furnitureJ.dataRow(d -> d.name.contains("Tab")), TABLE);
+        assertEquals(furniture.dataRow(d -> d.name.contains("Tab")), TABLE);
     }
 
     @Test
     public void allDataFilterTest() {
-        List<Furniture> filteredData = furnitureJ.dataRows(d -> d.name.contains("Tab"));
+        List<Furniture> filteredData = furniture.dataRows(d -> d.name.contains("Tab"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), TABLE);
     }
 
     @Test
     public void commonMatchersTest() {
-        furnitureJ.is().displayed();
-        furnitureJ.has().size(5);
-        furnitureJ.assertThat().size(greaterThan(3));
-        furnitureJ.is().notEmpty().size(lessThanOrEqualTo(5));
+        furniture.is().displayed();
+        furniture.has().size(5);
+        furniture.assertThat().size(greaterThan(3));
+        furniture.is().notEmpty().size(lessThanOrEqualTo(5));
     }
 
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
-        furnitureJ.has().row(d -> d.name.contains("Tab"));
+        furniture.has().row(d -> d.name.contains("Tab"));
     }
 
     @Test
     public void rowDataMatcherTest() {
-        furnitureJ.has().row(TABLE);
+        furniture.has().row(TABLE);
     }
 
     @Test
     public void rowTableMatcherTest() {
-        furnitureJ.has().rowThat(containsValue("furniture", inColumn("Type")),
+        furniture.has().rowThat(containsValue("furniture", inColumn("Type")),
                 hasValue("Chair", inColumn("Name")));
     }
 
     @Test
     public void rowsAllTest() {
-        furnitureJ.assertThat().all().rows(d -> d.name.length() >= 4);
+        furniture.assertThat().all().rows(d -> d.name.length() >= 4);
     }
 
     @Test
     public void noRowsTest() {
-        furnitureJ.assertThat().no().rows(d -> isBlank(d.name));
+        furniture.assertThat().no().rows(d -> isBlank(d.name));
     }
 
     @Test
     public void atLeastTest() {
-        furnitureJ.assertThat().atLeast(3).rows(d -> d.type.contains("furniture"));
+        furniture.assertThat().atLeast(3).rows(d -> d.type.contains("furniture"));
     }
 
     @Test
     public void exactMatcherTest() {
-        furnitureJ.assertThat().exact(2).rows(d -> d.cost.contains("3.5"));
+        furniture.assertThat().exact(2).rows(d -> d.cost.contains("3.5"));
     }
 
     @Test
     public void rowDataExactMatcherTest() {
-        furnitureJ.assertThat().exact(1).rows(TABLE);
+        furniture.assertThat().exact(1).rows(TABLE);
     }
 
     @Test
     public void tableChainTest() {
-        furnitureJ.assertThat()
+        furniture.assertThat()
             .displayed().size(5).size(greaterThan(3)).notEmpty()
             .row(d -> d.name.contains("Tab"))
             .all().rows(d -> d.name.length() >= 4)

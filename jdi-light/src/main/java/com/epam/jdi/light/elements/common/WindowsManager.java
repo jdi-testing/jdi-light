@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.Dimension;
 
@@ -10,7 +9,6 @@ import java.util.Set;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -18,16 +16,15 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WindowsManager {
-    private static Safe<Set<String>> windowHandles = new Safe<>();
-    private static Safe<MapArray<String, String>> windowHandlesMap = new Safe<>(MapArray::new);
-    private static Safe<Boolean> newWindow = new Safe<>(() -> false);
+    private static Set<String> windowHandles;
+    private static MapArray<String, String> windowHandlesMap = new MapArray<>();
+    private static boolean newWindow = false;
 
     public static Set<String> getWindows() {
         Set<String> wHandles = getDriver().getWindowHandles();
-        if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size())
-            newWindow.set(true);
-        windowHandles.set(wHandles);
-        return wHandles;
+        if (windowHandles != null && windowHandles.size() < wHandles.size())
+            newWindow = true;
+        return windowHandles = wHandles;
     }
 
     /**
@@ -36,8 +33,8 @@ public class WindowsManager {
      */
     public static boolean newWindowIsOpened() {
         getWindows();
-        if (newWindow.get()) {
-            newWindow.set(false);
+        if (newWindow) {
+            newWindow = false;
             return true;
         }
         return false;
@@ -50,7 +47,7 @@ public class WindowsManager {
         switchToNewWindow();
     }
     public static void setWindowName(String value) {
-        windowHandlesMap.get().update(value, getDriver().getWindowHandle());
+        windowHandlesMap.update(value, getDriver().getWindowHandle());
     }
 
     /**
@@ -97,10 +94,10 @@ public class WindowsManager {
      */
     @JDIAction("Switch to window '{index}'")
     public static void switchToWindow(int index) {
-        if (index < ELEMENT.startIndex)
+        if (index < 1)
             throw exception("Window's index starts from 1. You try to use '%s' that less than 1.", index);
         int counter = 0;
-        if (getWindows().size() < index - ELEMENT.startIndex + 1)
+        if (getWindows().size() < index)
             throw exception(index + " is too much. Only "+getWindows().size()+" windows found");
         for (String window : getWindows()) {
             counter++;
@@ -117,9 +114,9 @@ public class WindowsManager {
      */
     @JDIAction("Switch to window '{0}'")
     public static void switchToWindow(String value) {
-        if (!windowHandlesMap.get().has(value))
+        if (!windowHandlesMap.has(value))
             throw exception("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
-        getDriver().switchTo().window(windowHandlesMap.get().get(value));
+        getDriver().switchTo().window(windowHandlesMap.get(value));
     }
 
     /**
