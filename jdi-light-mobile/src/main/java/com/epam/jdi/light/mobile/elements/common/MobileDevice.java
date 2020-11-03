@@ -110,5 +110,6 @@ public class MobileDevice {
 
     public static List<List<Object>> getPerformanceData(String packageName, String dataType, int dataReadTimeout) {
         return executeDriverMethod(HasSupportedPerformanceDataType.class, (HasSupportedPerformanceDataType driver) -> driver.getPerformanceData(packageName, dataType, dataReadTimeout));
+
     }
 }
