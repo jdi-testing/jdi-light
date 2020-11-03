@@ -11,6 +11,7 @@ import java.util.List;
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.usersTable;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -40,7 +41,7 @@ public class TableTests implements TestsInit {
     @Test
     public void iterationTest() {
         String text = "";
-        for(String result : usersTable) {
+        for (String result : usersTable) {
             text += result.charAt(0);
         }
         assertEquals(text, "123456");
@@ -64,16 +65,19 @@ public class TableTests implements TestsInit {
             .replaceAll("\\\\n", "*").replaceAll("\\* ", "*");
         assertEquals(value,
         "||X||Number|Type|User|Description||\n" +
-            "||1||1|Admin*User*Manager|Roman|Wolverine*Vip||\n" +
-            "||2||2|Admin*User*Manager|Sergey Ivan|Spider Man*Vip||\n" +
-            "||3||3|Admin*User*Manager|Vladzimir|Punisher*Vip||\n" +
-            "||4||4|Admin*User*Manager|Helen Bennett|Captain America*some description*Vip||\n" +
-            "||5||5|Admin*User*Manager|Yoshi Tannamuri|Cyclope*some description*Vip||\n" +
-            "||6||6|Admin*User*Manager|Giovanni Rovelli|Hulk*some description*Vip||\n");
+            "||"+i(0)+"||1|Admin*User*Manager|Roman|Wolverine*Vip||\n" +
+            "||"+i(1)+"||2|Admin*User*Manager|Sergey Ivan|Spider Man*Vip||\n" +
+            "||"+i(2)+"||3|Admin*User*Manager|Vladzimir|Punisher*Vip||\n" +
+            "||"+i(3)+"||4|Admin*User*Manager|Helen Bennett|Captain America*some description*Vip||\n" +
+            "||"+i(4)+"||5|Admin*User*Manager|Yoshi Tannamuri|Cyclope*some description*Vip||\n" +
+            "||"+i(5)+"||6|Admin*User*Manager|Giovanni Rovelli|Hulk*some description*Vip||\n");
+    }
+    public static String i(int index) {
+        return index + ELEMENT.startIndex + "";
     }
     @Test
     public void dataColumnTestIndex() {
-        assertEquals(usersTable.row(2)
+        assertEquals(usersTable.row(ELEMENT.startIndex + 1)
             .asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
     }
     @Test

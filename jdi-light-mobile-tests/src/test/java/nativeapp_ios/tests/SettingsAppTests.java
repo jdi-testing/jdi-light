@@ -23,4 +23,15 @@ public class SettingsAppTests extends SettingsAppTestInit {
         LargerTextPage.largerTextSlider.setMinimumValue();
         LargerTextPage.largerTextSlider.is().text("0%");
     }
+
+    @Test
+    public void pullDownMenuTest() {
+        SettingsListPage.accessibilityMenuItem.tap();
+        AccessibilityPage.displayAndTextSizeMenuItem.tap();
+
+        DisplayAndTextSizePage.backButton.longPress();
+        DisplayAndTextSizePage.settingsPullDownMenu.tapButton("Settings");
+
+        SettingsListPage.settingsNavigationBar.is().displayed();
+    }
 }

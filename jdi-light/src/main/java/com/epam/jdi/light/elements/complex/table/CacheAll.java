@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc;
 
 /**
@@ -8,15 +9,16 @@ import com.epam.jdi.tools.func.JFunc;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class CacheAll<T> extends CacheValue<T> {
+    private Safe<Boolean> gotAll = new Safe<>(() -> false);
+
     public CacheAll() { }
     public CacheAll(JFunc<T> getRule) { setRule(getRule); }
-    private boolean gotAll = false;
     protected boolean isGotAll() {
         if (!hasValue())
-            gotAll = false;
-        return gotAll;
+            gotAll.set(false);
+        return gotAll.get();
     }
-    public void gotAll() { gotAll = true; }
+    public void gotAll() { gotAll.set(true); }
     @Override
-    public void clear() { super.clear(); gotAll = false; }
+    public void clear() { super.clear(); gotAll.set(false); }
 }

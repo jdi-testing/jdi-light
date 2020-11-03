@@ -12,6 +12,8 @@ public class ApiDemosApp {
 
     public static ButtonsPage buttonsPage;
 
+    public static RatingBarPage ratingBarPage;
+
     public static AnimationPage animationPage;
 
     public static CheckboxesPage checkboxesPage;

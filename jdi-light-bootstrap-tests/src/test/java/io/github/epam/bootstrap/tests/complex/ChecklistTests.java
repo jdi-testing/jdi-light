@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.checkNumbers;
 import static io.github.epam.states.States.shouldBeLoggedIn;
@@ -78,36 +79,36 @@ public class ChecklistTests implements TestsInit {
     }
     @Test
     public void checkNumTest() {
-        checkNumbers.check(4);
+        checkNumbers.check(ELEMENT.startIndex + 3);
         assertEquals(checkNumbers.checked(), asList("4"));
     }
     @Test
     public void checkNumTwoTest() {
-        checkNumbers.check(1, 4);
+        checkNumbers.check(ELEMENT.startIndex, ELEMENT.startIndex + 3);
         assertEquals(checkNumbers.checked(), asList("1", "4"));
     }
     @Test
     public void uncheckNumTest() {
         checkNumbers.checkAll();
-        checkNumbers.uncheck(1);
+        checkNumbers.uncheck(ELEMENT.startIndex);
         checkNumbers.is().checked(hasSize(3));
         checkNumbers.is().checked(hasItems("2", "3", "4"));
     }
     @Test
     public void uncheckNumTwoTest() {
         checkNumbers.checkAll();
-        checkNumbers.uncheck(1, 4);
+        checkNumbers.uncheck(ELEMENT.startIndex, ELEMENT.startIndex + 3);
         checkNumbers.is().checked(hasSize(2));
         checkNumbers.is().checked(hasItems("2", "3"));
     }
     @Test
     public void selectNumTest() {
-        checkNumbers.select(4);
+        checkNumbers.select(ELEMENT.startIndex + 3);
         assertEquals(checkNumbers.checked(), asList("1", "4"));
     }
     @Test
     public void selectNumTwoTest() {
-        checkNumbers.select(1, 4);
+        checkNumbers.select(ELEMENT.startIndex, ELEMENT.startIndex + 3);
         assertEquals(checkNumbers.checked(), asList("4"));
     }
 

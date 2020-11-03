@@ -5,10 +5,11 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
+import com.epam.jdi.light.mobile.interfaces.IMenu;
 
 import static com.epam.jdi.light.mobile.elements.init.PageFactory.initElements;
 
-public class Menu extends MobileAppBaseElement<TextAssert> implements PageObject, IsText, HasTouchActions {
+public class Menu extends MobileAppBaseElement<TextAssert> implements PageObject, IsText, HasTouchActions, IMenu {
 
     public Menu() {
         initElements(this);

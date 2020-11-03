@@ -1,6 +1,5 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -10,11 +9,13 @@ import java.time.Year;
 import java.util.Locale;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
+import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.basicDatepicker;
 
 public class BasicDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
+        angularPage.open();
         basicDatepicker.show();
     }
 
@@ -170,15 +171,5 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
         basicDatepicker.has()
                 .enabledNavigation(PREVIOUS_TWENTY_YEARS.getName(), NEXT_TWENTY_YEARS.getName(), firstEnabledYearCell,
                                    lastEnabledYearCell);
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (basicDatepicker.isExpanded()) {
-            basicDatepicker.collapse();
-        }
-        if (!basicDatepicker.isEmpty()) {
-            basicDatepicker.clear();
-        }
     }
 }

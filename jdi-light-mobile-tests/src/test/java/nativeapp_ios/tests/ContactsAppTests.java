@@ -36,9 +36,9 @@ public class ContactsAppTests extends ContactsAppTestsInit {
     public void navigationBarTest() {
         ContactsListPage.contactsNavigationBar.is().displayed();
         ContactsListPage.contactsNavigationBar.groupsButton.is().displayed();
-        ContactsListPage.contactsNavigationBar.tapBarButton("Groups");
+        ContactsListPage.contactsNavigationBar.tapButton("Groups");
         GroupsPage.groupsBar.is().displayed();
-        GroupsPage.groupsBar.tapBarButton("Done");
+        GroupsPage.groupsBar.tapButton("Done");
 
         ContactsListPage.contactsNavigationBar.groupsButton.tap();
         GroupsPage.groupsBar.is().displayed();
@@ -49,9 +49,9 @@ public class ContactsAppTests extends ContactsAppTestsInit {
         AddNewContactPage.cancelButton.cancel();
         ContactsListPage.contactsNavigationBar.addButton.is().displayed();
 
-        ContactsListPage.contactsNavigationBar.tapBarButton("Add");
+        ContactsListPage.contactsNavigationBar.tapButton("Add");
         AddNewContactPage.newContactNavBar.is().displayed();
-        AddNewContactPage.newContactNavBar.tapBarButton("Cancel");
+        AddNewContactPage.newContactNavBar.tapButton("Cancel");
         ContactsListPage.contactsNavigationBar.addButton.is().displayed();
     }
 

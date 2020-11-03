@@ -31,7 +31,7 @@ public class BootstrapPage extends WebPage {
     public static Button decreaseProgress;
     public static Button resetProgress;
     public static Progress progressbar;
-    public static Progress ProgressmultiProgressbar;
+    public static Progress multiProgressbar;
     public static Breadcrumb breadcrumb;
     public static Checkbox acceptCheckbox;
     @UI(".checkbox-input") public static Checklist checkNumbers;

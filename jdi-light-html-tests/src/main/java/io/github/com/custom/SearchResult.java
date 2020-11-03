@@ -16,11 +16,12 @@ public class SearchResult extends Section {
 
     @Override
     public String toString() {
-        return print();
+       return print();
     }
     public String print() {
-        return logger.logOff(
+        String s = logger.logOff(
             () -> format("SearchResult{NAME=%s; DESCRIPTION=%s; LINK=%s}",
                 name.getText(), description.getText(), link.ref()));
+        return s;
     }
 }

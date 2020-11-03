@@ -3,9 +3,10 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.JDILocator;
+import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.JDILocator;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
@@ -47,7 +48,6 @@ import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Collections.max;
@@ -78,6 +78,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public WebList setup(JAction1<JDIBase> setup) {
         return setup(WebList.class, setup);
     }
+    @JDebug
     public List<WebElement> webElements() {
         if (isUseCache()) {
             if (map.hasValue())
@@ -185,12 +186,12 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
 
     protected boolean hasKey(String value) {
-        if (map.hasValue() && any(map.get().keys(), key -> namesEqual(key, value)))
+        if (map.hasValue() && any(map.get().keys(), key -> ELEMENT.namesEqual.execute(key, value)))
             return isActual(getByKey(value));
         return false;
     }
     protected UIElement getByKey(String value) {
-        return map.get().first((key,v) -> namesEqual(key, value)).value;
+        return map.get().first((key,v) -> ELEMENT.namesEqual.execute(key, value)).value;
     }
     /**
      * @param value
@@ -227,14 +228,14 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             for (UIElement element : elements(1)) {
                 String name = getElementName(element);
                 nameElement.add(name, element);
-                if (namesEqual(name, value))
+                if (ELEMENT.namesEqual.execute(name, value))
                     return element;
             }
             return null;
         } finally {
             if (map.hasValue()) {
                 for (Pair<String, UIElement> pair : map.get())
-                    if (!any(nameElement.keys(), name -> namesEqual(name, pair.key)))
+                    if (!any(nameElement.keys(), name -> ELEMENT.namesEqual.execute(name, pair.key)))
                         nameElement.add(pair);
             }
             map.set(nameElement);
@@ -291,7 +292,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
     private UIElement getElementByLocator(int getIndex, int index) {
         return locator.isXPath()
-            ? new UIElement(base(), locator.addIndex(index), index+"", parent)
+            ? new UIElement(base(), locator.addIndex(index - getStartIndex() + 1), index+"", parent)
             : initElement(() -> getList(getIndex + 1).get(getIndex));
     }
     protected UIElement tryGetByIndex(int index) {
@@ -473,7 +474,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public void refresh() {
         webElements.clear();
         map.clear();
-        webElement.clear();
     }
 
     /**
@@ -545,10 +545,11 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             }
         }
         refresh();
-        elements = noValidation(() -> elements(0));
+        // elements = noValidation(() -> elements(0));
+        elements = elements(0);
         if (elements == null || elements.isEmpty())
             return new ArrayList<>();
-        values = LinqUtils.map(elements, el -> el.noValidation(() -> el.text(textType)));
+        values = LinqUtils.map(elements, el -> el.noValidation().text(textType));
         HashSet<String> unique = new HashSet<>(values);
         if (unique.size() == values.size()) {
             map.set(new MapArray<>(values, elements));

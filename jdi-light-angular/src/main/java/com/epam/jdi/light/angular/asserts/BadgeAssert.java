@@ -11,7 +11,7 @@ public class BadgeAssert  extends UIAssert<BadgeAssert, Badge> {
 
     @JDIAction("'{name}' has '{0}' color")
     public BadgeAssert color(String value) {
-        jdiAssert(element.color(value), Matchers.is(true));
+        jdiAssert(element().color(value), Matchers.is(true));
         return this;
     }
 }

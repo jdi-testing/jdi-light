@@ -142,7 +142,6 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return getCoordinatesOnScreen(getCenterInViewport());
     }
 
-    @Override
     protected SearchContext getDefaultContext() {
         return driver();
     }
