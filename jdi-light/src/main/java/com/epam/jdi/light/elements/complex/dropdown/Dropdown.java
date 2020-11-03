@@ -21,9 +21,7 @@ public class Dropdown extends DropdownExpand {
 
     @Override
     public WebList list() {
-        WebList list = setupDone ? super.list() : ds().list();
-        list.setStartIndex(getStartIndex());
-        return list;
+        return setupDone ? super.list() : ds().list();
     }
     /**
      * Select the specified element by the value

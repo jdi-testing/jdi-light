@@ -16,13 +16,11 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.users;
 import static io.github.com.pages.UsersPage.usersRow;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN_SIMPLE;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -39,7 +37,7 @@ public class TableInteractTests implements TestsInit {
 
     @Test
     public void lineByIndexTest() {
-        MarvelUser line = usersRow.line(ELEMENT.startIndex);
+        MarvelUser line = usersRow.line(1);
         line.type.select("User");
         assertEquals(typeSelected(),"User");
         line.type.select("Admin");
@@ -87,24 +85,23 @@ public class TableInteractTests implements TestsInit {
         String value = usersRow.getValue();
         assertEquals(value,
         "||X||Number|Type|User|Description||" + LINE_BREAK +
-            "||"+i(0)+"||1|Admin|Roman|Wolverine:VIP||" + LINE_BREAK +
-            "||"+i(1)+"||2|User|Sergey Ivan|Spider Man:Dude||" + LINE_BREAK +
-            "||"+i(2)+"||3|Manager|Vladzimir|Punisher:VIP||" + LINE_BREAK +
-            "||"+i(3)+"||4|User|Helen Bennett|Captain America\\nsome description:Dude||" + LINE_BREAK +
-            "||"+i(4)+"||5|User|Yoshi Tannamuri|Cyclope\\nsome description:Dude||" + LINE_BREAK +
-            "||"+i(5)+"||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||" + LINE_BREAK);
+            "||1||1|Admin|Roman|Wolverine:VIP||" + LINE_BREAK +
+            "||2||2|User|Sergey Ivan|Spider Man:Dude||" + LINE_BREAK +
+            "||3||3|Manager|Vladzimir|Punisher:VIP||" + LINE_BREAK +
+            "||4||4|User|Helen Bennett|Captain America\\nsome description:Dude||" + LINE_BREAK +
+            "||5||5|User|Yoshi Tannamuri|Cyclope\\nsome description:Dude||" + LINE_BREAK +
+            "||6||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||" + LINE_BREAK);
     }
     @Test
     public void dataColumnTestIndex() {
-        assertEquals(usersRow.row(ELEMENT.startIndex + 1)
+        assertEquals(usersRow.row(2)
                 .asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
     }
     @Test
     public void dataFilterTest() {
-        Line mUserLine = usersRow.row(hasValue("Sergey Ivan", inColumn("User")),
-                containsValue("User", inColumn("Type")));
-        MarvelUserSimple mUser = mUserLine.asData(MarvelUserSimple.class);
-        assertEquals(mUser, SPIDER_MAN_SIMPLE);
+        assertEquals(usersRow.row(hasValue("Sergey Ivan", inColumn("User")),
+                containsValue("User", inColumn("Type")))
+                .asData(MarvelUserSimple.class), SPIDER_MAN_SIMPLE);
     }
     @Test
     public void allDataFilterTest() {

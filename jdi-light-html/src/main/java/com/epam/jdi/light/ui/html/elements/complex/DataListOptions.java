@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.tools.HasStartIndex;
 import com.epam.jdi.tools.LinqUtils;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 
 /**
@@ -23,21 +21,16 @@ import static com.epam.jdi.tools.LinqUtils.ifSelect;
  */
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
-public class DataListOptions extends UIListBase<DropdownAssert>
-        implements IsCombobox, HasStartIndex {
-    protected int startIndex = ELEMENT.startIndex;
-
+public class DataListOptions extends UIListBase<DropdownAssert> implements IsCombobox {
     @Override
     public WebList list() {
-        WebList list = $$("#"+ core().attr("list")+" option")
+        return $$("#"+ uiElement.attr("list")+" option")
             .setup(e -> e.noValidation().setName(getName() + "list"))
             .setUIElementName(VALUE);
-        list.setStartIndex(startIndex);
-        return list;
     }
     @Override
     public String getText() {
-        return core().attr("value");
+        return uiElement.attr("value");
     }
     /**
     *
@@ -56,7 +49,7 @@ public class DataListOptions extends UIListBase<DropdownAssert>
      **/
     @JDIAction("Select '{0}' for '{name}'") @Override
     public void select(int index) {
-        setText(LinqUtils.map(list().elements(index), UIElement::getTextForce).get(index - startIndex));
+        setText(LinqUtils.map(list().elements(index), UIElement::getTextForce).get(index-1));
     }
     /**
     *
@@ -99,11 +92,5 @@ public class DataListOptions extends UIListBase<DropdownAssert>
     @Override
     public DropdownAssert is() {
         return new DropdownAssert().set(this);
-    }
-    public int getStartIndex() {
-        return startIndex;
-    }
-    public void setStartIndex(int index) {
-        startIndex = index;
     }
 }

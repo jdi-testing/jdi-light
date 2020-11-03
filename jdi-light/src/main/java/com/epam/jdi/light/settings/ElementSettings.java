@@ -22,7 +22,6 @@ import static com.epam.jdi.light.common.UseSmartSearch.UI_AND_ELEMENTS;
 public class ElementSettings {
     public JAction1<UIElement> beforeSearch;
     public JFunc2<JDIBase, Object[], WebElement> getElementWithArgs;
-    public JFunc2<JDIBase, Object[], WebElement> getElementAndValidate;
     public ElementArea clickType;
     public TextTypes getTextType;
     public SetTextTypes setTextType;
@@ -34,8 +33,4 @@ public class ElementSettings {
     public UseSmartSearch useSmartSearch = UI_AND_ELEMENTS;
     public JFunc1<UIElement, String> listLabel = el -> el.getText().trim();
     public List<HighlightStrategy> highlight = new ArrayList<>();
-    public JFunc1<String, String> simplifyString =
-            s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
-    public JFunc2<String, String, Boolean> namesEqual =
-            (s1, s2) -> simplifyString.execute(s1).equals(simplifyString.execute(s2));
 }

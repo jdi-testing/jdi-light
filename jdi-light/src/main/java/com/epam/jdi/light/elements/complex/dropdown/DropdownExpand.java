@@ -17,17 +17,14 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.INNER;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 02.03.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class DropdownExpand extends UIBaseElement<DropdownAssert>
-        implements IsDropdown, ISetup, ISelector, HasAssert<DropdownAssert> {
+public class DropdownExpand extends UIBaseElement<DropdownAssert> implements IsDropdown, ISetup, ISelector, HasAssert<DropdownAssert> {
     public String expandLocator = ".caret";
-    protected int startIndex = ELEMENT.startIndex;
 
     public UIElement expander() {
         return linked(expandLocator, "expand");
@@ -90,7 +87,7 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     @JDIAction("Select '{0}' in '{name}'")
     @Override
     public void select(int index) {
-        if (index < getStartIndex())
+        if (index < 1)
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
         expand();
         list().select(index);
@@ -163,11 +160,5 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     @Override
     public DropdownAssert is() {
         return new DropdownAssert().set(this);
-    }
-    public int getStartIndex() {
-        return startIndex;
-    }
-    public void setStartIndex(int index) {
-        startIndex = index;
     }
 }

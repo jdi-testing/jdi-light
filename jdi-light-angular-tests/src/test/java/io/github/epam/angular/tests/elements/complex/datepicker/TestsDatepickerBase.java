@@ -9,7 +9,6 @@ import java.util.List;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static java.lang.String.format;
 
 public class TestsDatepickerBase extends TestsInit {
     public static final String CHOOSE_A_DATE = "Choose a date";
@@ -25,11 +24,11 @@ public class TestsDatepickerBase extends TestsInit {
     }
 
     public static String getMinDate() {
-        return "1/1/" + MIN_YEAR;
+        return new StringBuilder("1/1/").append(MIN_YEAR).toString();
     }
 
     public static String getMaxDate() {
-        return "12/31/" + MAX_YEAR;
+        return new StringBuilder("12/31/").append(MAX_YEAR).toString();
     }
 
     public static List<String> getInputChangeEvents(LocalDate localDate) {
@@ -39,8 +38,10 @@ public class TestsDatepickerBase extends TestsInit {
         month = month.replaceFirst(month.substring(0, 1), month.toUpperCase().substring(0, 1));
         String dayOfMonth = String.valueOf(localDate.getDayOfMonth());
         String year = String.valueOf(localDate.getYear());
-        String inputEvent = format("input: %s %s %s %s", day, month, dayOfMonth, year);
-        String changeEvent = format("change: %s %s %s %s", day, month, dayOfMonth, year);
+        String inputEvent = new StringBuilder().append("input: ").append(day).append(" ").append(month).append(" ")
+                .append(dayOfMonth).append(" ").append(year).toString();
+        String changeEvent = new StringBuilder().append("change: ").append(day).append(" ").append(month).append(" ")
+                .append(dayOfMonth).append(" ").append(year).toString();
         List<String> inputChangeEvents = new ArrayList<>();
         inputChangeEvents.add(inputEvent);
         inputChangeEvents.add(changeEvent);

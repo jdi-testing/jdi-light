@@ -4,7 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.colors;
 import static io.github.com.pages.HtmlElementsPage.colorsNoLocator;
@@ -47,7 +46,7 @@ public class RadioTests implements TestsInit {
     }
     @Test
     public void selectNumTest() {
-        colors.select(ELEMENT.startIndex);
+        colors.select(1);
         assertEquals(colors.getValue(), "Red");
     }
     @Test

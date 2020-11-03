@@ -1,20 +1,18 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.basicMatSelect;
 import static org.hamcrest.Matchers.hasItems;
 
 public class BasicMatSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
         basicMatSelect.show();
     }
 
@@ -37,7 +35,7 @@ public class BasicMatSelectTests extends TestsSelectBase {
 
     @Test
     public void checkOptionCanBeSelectedByIndex() {
-        basicMatSelect.select(ELEMENT.startIndex + 1);
+        basicMatSelect.select(2);
         basicMatSelect.is().selected(PIZZA);
     }
 
@@ -56,4 +54,10 @@ public class BasicMatSelectTests extends TestsSelectBase {
         basicMatSelect.assertThat().values(hasItems(TACOS, STEAK, PIZZA));
     }
 
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (basicMatSelect.isExpanded()) {
+            basicMatSelect.collapse();
+        }
+    }
 }

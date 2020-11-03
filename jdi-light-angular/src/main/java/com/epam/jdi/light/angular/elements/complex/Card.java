@@ -53,7 +53,7 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get '{name}' text")
     public String getCardText() {
-        return core().getText();
+        return uiElement.getText();
     }
 
     @JDIAction("Get button with text '{text}'")

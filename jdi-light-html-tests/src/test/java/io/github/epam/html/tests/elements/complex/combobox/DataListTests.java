@@ -4,7 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.iceCream;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -78,7 +77,7 @@ public class DataListTests implements TestsInit {
     @Test
     public void selectNumTest() {
         iceCream.clear();
-        iceCream.select(ELEMENT.startIndex + 4);
+        iceCream.select(5);
         assertEquals(iceCream.getValue(), "Vanilla");
     }
     @Test

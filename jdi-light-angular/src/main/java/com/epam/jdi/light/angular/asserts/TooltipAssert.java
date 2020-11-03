@@ -12,19 +12,19 @@ public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> {
 
     @JDIAction("Assert that '{name}' has '{0}' text")
     public TooltipAssert assertTooltipText(String text) {
-        jdiAssert(element().text(), Matchers.is(text));
+        jdiAssert(element.text(), Matchers.is(text));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has '{0}' color")
     public TooltipAssert assertTooltipColor(String color) {
-        jdiAssert(element().color(), Matchers.is(color));
+        jdiAssert(element.color(), Matchers.is(color));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has '{0}' position relative to '{1}' ")
     public TooltipAssert assertTooltipPosition(Tooltip.Position position, UIBaseElement<?> e) {
-        jdiAssert(element().position(e), Matchers.is(position));
+        jdiAssert(element.position(e), Matchers.is(position));
         return this;
     }
 }

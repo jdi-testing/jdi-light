@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.disableCheckboxSelect;
 import static io.github.com.pages.sections.SelectSection.disableMatSelect;
 
@@ -38,7 +37,7 @@ public class DisableMatSelectTests extends TestsSelectBase {
     public void checkEnabledOptionCanBeSelectedByIndex() {
         pickDisableSelectCheckboxAsUnchecked();
         disableMatSelect.waitFor().attr(ARIA_DISABLED, "false");
-        disableMatSelect.select(ELEMENT.startIndex + 2);
+        disableMatSelect.select(3);
         disableMatSelect.is().selected(OPTION_3);
     }
 

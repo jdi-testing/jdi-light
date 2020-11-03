@@ -4,7 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -38,12 +37,12 @@ public class Menu2DTests implements TestsInit {
     }
     @Test
     public void selectIndexTest() {
-        menu2D.select(ELEMENT.startIndex + 3);
+        menu2D.select(4);
         metalAndColorsPage.checkOpened();
     }
     @Test
     public void selectIndexListTest() {
-        menu2D.select(ELEMENT.startIndex + 2, ELEMENT.startIndex + 1);
+        menu2D.select(3, 2);
         datesPage.checkOpened();
     }
 }

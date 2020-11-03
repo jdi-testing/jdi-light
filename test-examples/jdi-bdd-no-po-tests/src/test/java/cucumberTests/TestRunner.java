@@ -1,6 +1,7 @@
 package cucumberTests;
 
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.init.JDITalk;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import cucumberTests.test.data.User;
@@ -9,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static com.epam.jdi.light.elements.init.JDITalk.form;
+import static com.epam.jdi.light.elements.init.JDITalk.*;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static cucumberTests.test.data.TestData.ROMAN;
 

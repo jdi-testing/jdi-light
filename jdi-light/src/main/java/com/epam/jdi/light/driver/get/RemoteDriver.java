@@ -21,7 +21,7 @@ public class RemoteDriver {
         return browserstack(getenv("USERNAME"), getenv("ACCESS_KEY"));
     }
     public static String browserstack(String userName, String accessKey) {
-        return getRemoteURL(format("https://%s:%s@hub-cloud.browserstack.com/", userName, accessKey));
+        return getRemoteURL(format("https://%s:%s/@hub-cloud.browserstack.com/", userName, accessKey));
     }
     public static String appium() {return getRemoteURL("http://0.0.0.0:4723/");}
     public static String getRemoteURL() {

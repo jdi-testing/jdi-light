@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -14,18 +13,9 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 // Implements TextField + Droplist
 // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist
 public class Combobox extends UIListBase<DropdownAssert> implements IsCombobox {
-    protected int startIndex = ELEMENT.startIndex;
-
     public boolean isExpanded() { throw exception("isExpanded can not be used with this element"); }
     @Override
     public DropdownAssert is() {
         return new DropdownAssert().set(this);
-    }
-
-    public int getStartIndex() {
-        return startIndex;
-    }
-    public void setStartIndex(int index) {
-        startIndex = index;
     }
 }

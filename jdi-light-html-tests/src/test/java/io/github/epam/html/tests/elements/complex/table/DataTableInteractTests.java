@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.users;
 import static io.github.com.pages.UsersPage.usersSetup;
@@ -26,7 +25,7 @@ public class DataTableInteractTests implements TestsInit {
 
     @Test
     public void lineByIndexTest() {
-        MarvelUser line = users.line(ELEMENT.startIndex + 1);
+        MarvelUser line = users.line(2);
         validateUserRow(line);
     }
     @Test
