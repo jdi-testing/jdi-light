@@ -31,20 +31,16 @@ public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTou
         .findFirst().get().getAttribute("text");
     }
 
-    @JDIAction(value = "Select {0} in '{name}'", level = LogLevels.DEBUG)
-    public void selectByNumber(int tabNumber) {
-        WebElement tab = getDriver().findElement(
-                new MobileBy.ByAndroidUIAutomator(
-                        "new UiSelector().resourceId(\"android:id/tabs\").childSelector(new UiSelector().className(\"android.widget.LinearLayout\").index("+ (tabNumber -1) +"))"));
-        tab.click();
-        getDriver().getPageSource();
-    }
-
     @JDIAction(value = "Check that '{name}' is selected", level = LogLevels.DEBUG)
     public void selectByText(String tabName) {
         core().get().findElements(By.id("android:id/title"))
                 .stream()
                 .filter(element -> element.getAttribute("text").equals(tabName))
                 .findFirst().get().click();
+    }
+
+    @JDIAction(value = "Check that '{name}' is selected", level = LogLevels.DEBUG)
+    public void selectByNumber(int tabNumber) {
+        core().get().findElements(By.className("android.widget.LinearLayout")).get(tabNumber-1).click();
     }
 }
