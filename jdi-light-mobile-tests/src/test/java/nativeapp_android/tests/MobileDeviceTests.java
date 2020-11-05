@@ -65,6 +65,16 @@ public class MobileDeviceTests {
         assertThat(deviceTime).isNotEqualTo(deviceTimeWithFormat);
     }
 
+    @Test
+
+    public void performanceDataTest() {
+        System.out.println(MobileDevice.getPerformanceDataTypes());
+        System.out.println(MobileDevice.getPerformanceData("", "cpuinfo", 5));
+        //System.out.println(MobileDevice.getPerformanceData("com.google.android.deskclock","memoryinfo",5));
+        System.out.println(MobileDevice.getPerformanceData("", "batteryinfo", 5));
+        System.out.println(MobileDevice.getPerformanceData("", "networkinfo", 5));
+    }
+
     @AfterClass(alwaysRun = true)
     public void tearDown() {
         WebDriverFactory.quit();
