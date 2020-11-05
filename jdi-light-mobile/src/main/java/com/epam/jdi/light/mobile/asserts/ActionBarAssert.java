@@ -4,7 +4,6 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.mobile.asserts.generic.ISearchViewButtonAssert;
 import com.epam.jdi.light.mobile.asserts.generic.ISearchViewFieldAssert;
 import com.epam.jdi.light.mobile.elements.common.app.IActionBar;
-
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
