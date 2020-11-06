@@ -66,7 +66,6 @@ public class MobileDeviceTests {
     }
 
     @Test
-
     public void performanceDataTest() {
         System.out.println(MobileDevice.getPerformanceDataTypes());
         System.out.println(MobileDevice.getPerformanceData("", "cpuinfo", 5));
