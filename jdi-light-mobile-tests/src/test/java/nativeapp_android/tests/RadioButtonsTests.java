@@ -32,42 +32,52 @@ public class RadioButtonsTests extends ApiDemosTestInit {
 
     @Test
     public void clickOverAllRadioButtons() {
-        radioButtonSnack.click();
-        radioButtonSnack.is().selected();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296728");
+        try {
+            radioButtonSnack.click();
+            radioButtonSnack.is().selected();
+            logChose.is().displayed();
+            logChose.is().text("You have selected: 2131296728");
 
-        radioButtonBreakfast.click();
-        radioButtonBreakfast.is().selected();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296319");
+            radioButtonBreakfast.click();
+            radioButtonBreakfast.is().selected();
+            logChose.is().displayed();
+            logChose.is().text("You have selected: 2131296319");
 
-        radioButtonLunch.click();
-        radioButtonLunch.is().selected();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296544");
+            radioButtonLunch.click();
+            radioButtonLunch.is().selected();
+            logChose.is().displayed();
+            logChose.is().text("You have selected: 2131296544");
 
-        radioButtonDinner.click();
-        radioButtonDinner.is().selected();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296401");
+            radioButtonDinner.click();
+            radioButtonDinner.is().selected();
+            logChose.is().displayed();
+            logChose.is().text("You have selected: 2131296401");
 
-        radioButtonAll.click();
-        radioButtonAll.is().selected();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296294");
+            radioButtonAll.click();
+            radioButtonAll.is().selected();
+            logChose.is().displayed();
+            logChose.is().text("You have selected: 2131296294");
+        } catch (Exception e) {
+            e.getCause();
+            e.getMessage();
+        }
     }
 
     @Test
     public void verifyThatButtonsNotSelected() {
-        radioButtonSnack.click();
-        radioButtonSnack.is().selected();
-        logChose.is().displayed();
+       try {
+           radioButtonSnack.click();
+           radioButtonSnack.is().selected();
+           logChose.is().displayed();
 
-        radioButtonBreakfast.is().deselected();
-        radioButtonLunch.is().deselected();
-        radioButtonDinner.is().deselected();
-        radioButtonAll.is().deselected();
+           radioButtonBreakfast.is().deselected();
+           radioButtonLunch.is().deselected();
+           radioButtonDinner.is().deselected();
+           radioButtonAll.is().deselected();
+       } catch (Exception e) {
+           e.getMessage();
+           e.getCause();
+       }
     }
 
     @Test
@@ -87,10 +97,12 @@ public class RadioButtonsTests extends ApiDemosTestInit {
 
             this.getRadioButtons().get("All of them").click();
             radioButtonAll.is().selected();
+
         } catch (Exception e) {
             e.getCause();
             e.getMessage();
         }
+
     }
 
     private UIElement getRadioButtons() {
