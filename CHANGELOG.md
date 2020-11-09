@@ -1,9 +1,15 @@
 # Changelog
 
-## 1.3.0 (planed July 2020)
+## 1.3.10 (planed July 2020)
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 * **driver.remote.run** boolean property can be specified in **test.properties** file. If not specified, JDI would use the original logic and switch between local and remote driver depending on other properties
+
+#1.3.1 (09.11.2020)
+* Fixed few small internal map issues
+
+#1.3.0 (25.10.2020)
+* Important parallelization and stability fix
 
 #1.2.24 (16.10.2020)
 * Bug fix for browserstack
