@@ -7,6 +7,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AuthenticatesByFinger;
 import io.appium.java_client.android.HasSupportedPerformanceDataType;
 import io.appium.java_client.battery.BatteryInfo;
+import io.appium.java_client.clipboard.HasClipboard;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.PerformsTouchID;
 import io.appium.java_client.ios.ShakesDevice;
@@ -104,12 +105,22 @@ public class MobileDevice {
         executeDriverMethod(AuthenticatesByFinger.class, (AuthenticatesByFinger driver) -> driver.fingerPrint(fingerPrintId));
     }
 
+    // this method is for Android only
+    public static void setClipBoardText(String text) {
+        executeDriverMethod(MobileDriver.class,
+                (MobileDriver driver) -> (HasClipboard) driver).setClipboardText(text);
+    }
+    // this method is for Android only
+    public static String getClipBoardText() {
+        return executeDriverMethod(MobileDriver.class,
+                (MobileDriver driver) -> (HasClipboard) driver).getClipboardText();
+    }
+
     public static List<String> getPerformanceDataTypes() {
         return executeDriverMethod(HasSupportedPerformanceDataType.class, HasSupportedPerformanceDataType::getSupportedPerformanceDataTypes);
     }
 
     public static List<List<Object>> getPerformanceData(String packageName, String dataType, int dataReadTimeout) {
         return executeDriverMethod(HasSupportedPerformanceDataType.class, (HasSupportedPerformanceDataType driver) -> driver.getPerformanceData(packageName, dataType, dataReadTimeout));
-
     }
 }
