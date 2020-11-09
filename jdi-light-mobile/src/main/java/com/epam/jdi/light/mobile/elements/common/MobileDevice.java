@@ -114,6 +114,7 @@ public class MobileDevice {
     public static String getClipBoardText() {
         return executeDriverMethod(MobileDriver.class,
                 (MobileDriver driver) -> (HasClipboard) driver).getClipboardText();
+    }
 
     public static List<String> getPerformanceDataTypes() {
         return executeDriverMethod(HasSupportedPerformanceDataType.class, HasSupportedPerformanceDataType::getSupportedPerformanceDataTypes);
