@@ -150,7 +150,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return setSearchRule("Element in view", ELEMENT_IN_VIEW);
     }
     public JDIBase addSearchRule(String name, JFunc1<WebElement, Boolean> rule) {
-        searchRules.add(name, rule);
+        searchRules.update(name, rule);
         return this;
     }
     public JDIBase setSearchRule(String name, JFunc1<WebElement, Boolean> rule) {

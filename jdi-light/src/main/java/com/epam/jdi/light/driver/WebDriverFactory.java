@@ -61,7 +61,7 @@ public class WebDriverFactory {
     }
     private static WebDriver registerNewDriver(String driverName, WebDriver driver, MapArray<String, WebDriver> drivers) {
         logger.trace("registerNewDriver >> " + driver);
-        drivers.add(driverName, driver);
+        drivers.update(driverName, driver);
         return driver;
     }
     private static WebDriver registerNewDriver(String driverName, MapArray<String, WebDriver> drivers) {
@@ -194,11 +194,11 @@ public class WebDriverFactory {
     }
 
     public static WebDriver getDriver() {
+        String driverName = isNotBlank(DRIVER.name) ? DRIVER.name : CHROME.name;
         try {
-            String driverName = isNotBlank(DRIVER.name) ? DRIVER.name : CHROME.name;
             return getDriver(driverName);
         } catch (Exception ex) {
-            throw exception(ex, "Can't get WebDriver");
+            throw exception(ex, "Can't get WebDriver: " + driverName);
         }
     }
 
