@@ -44,11 +44,9 @@ public class ActionBarTests extends ApiDemosTestInit {
         ActionBarPage.actionBarUsagePage.click();
         ActionBarUsagePage.moreOptions.is().enabled();
         ActionBarUsagePage.moreOptions.click();
-        ActionBarUsagePage.moreOptions.selectOption("Add");
+        ActionBarUsagePage.listView.selectOption("Sort");
+        ActionBarUsagePage.listView.selectOption("Alphabetically");
         ActionBarUsagePage.text.is().displayed();
-        ActionBarUsagePage.moreOptions.click();
-        ActionBarUsagePage.moreOptions.selectOption("Sort");
-        ActionBarUsagePage.moreOptions.selectOption("Alphabetically");
     }
 
     @Test
@@ -58,7 +56,7 @@ public class ActionBarTests extends ApiDemosTestInit {
         ActionBarPage.displayOptionsPage.click();
         ActionBarDisplayOptionsPage.moreOptions.is().enabled();
         ActionBarDisplayOptionsPage.moreOptions.click();
-        ActionBarDisplayOptionsPage.moreOptions.selectOption("Menu Item");
+        ActionBarDisplayOptionsPage.listView.selectOption("Menu Item");
     }
 
     @Test

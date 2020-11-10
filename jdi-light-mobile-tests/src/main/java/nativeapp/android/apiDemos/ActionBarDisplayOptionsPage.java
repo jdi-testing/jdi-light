@@ -8,6 +8,9 @@ public class ActionBarDisplayOptionsPage {
     @MobileFindBy(accessibilityId = "More options")
     public static ActionBar moreOptions;
 
+    @MobileFindBy(className = "android.widget.FrameLayout")
+    public static ActionBar listView;
+
     @MobileFindBy(accessibilityId = "DISPLAY_HOME_AS_UP")
     public static ActionBar displayHomeAsUp;
 

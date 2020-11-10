@@ -7,12 +7,9 @@ import com.epam.jdi.light.mobile.asserts.ActionBarAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.app.IActionBar;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
-import io.appium.java_client.MobileBy;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements IActionBar, HasTouchActions, IsButton {
 
@@ -56,11 +53,10 @@ public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements 
 
     @JDIAction("Select {0} in '{name}'")
     public void selectOption(String text) {
-        List<WebElement> options = getDriver().findElements(
-                new MobileBy.ByAndroidUIAutomator(
-                        "new UiSelector().className(\"android.widget.TextView\")"));
-        options.stream().filter(webElement -> webElement.getText().equalsIgnoreCase(text))
-                .forEach(webElement -> webElement.click());
+            core().get().findElements(By.className("android.widget.TextView"))
+            .stream()
+            .filter(webElement -> webElement.getAttribute("text").equalsIgnoreCase(text))
+                    .forEach(WebElement::click);
     }
 
     @Override

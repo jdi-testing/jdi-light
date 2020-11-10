@@ -23,4 +23,7 @@ public class ActionBarUsagePage {
 
     @MobileFindBy(accessibilityId = "Clear query")
     public static ActionBar clearQuery;
+
+    @MobileFindBy(className = "android.widget.ListView")
+    public static ActionBar listView;
 }
