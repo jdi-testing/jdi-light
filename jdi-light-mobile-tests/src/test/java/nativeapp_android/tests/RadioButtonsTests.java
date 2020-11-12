@@ -1,8 +1,12 @@
 package nativeapp_android.tests;
 
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
+import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 import nativeapp_android.ApiDemosTestInit;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,6 +16,14 @@ import static nativeapp.android.apiDemos.ViewsPage.*;
 
 
 public class RadioButtonsTests extends ApiDemosTestInit {
+
+    protected UIElement buttonsList;
+    protected String listOfButtons = "io.appium.android.apis:id";
+
+    public RadioButtonsTests() {
+        buttonsList = new UIElement();
+        buttonsList.core().setLocator(listOfButtons);
+    }
 
     @BeforeMethod
     public void initSteps() {
@@ -32,80 +44,62 @@ public class RadioButtonsTests extends ApiDemosTestInit {
 
     @Test
     public void clickOverAllRadioButtons() {
-        try {
-            radioButtonSnack.click();
-            radioButtonSnack.is().selected();
-            logChose.is().displayed();
-            logChose.is().text("You have selected: 2131296728");
+        radioButtonSnack.click();
+        radioButtonSnack.is().selected();
+        logChose.is().displayed();
+        logChose.is().text("You have selected: 2131296728");
 
-            radioButtonBreakfast.click();
-            radioButtonBreakfast.is().selected();
-            logChose.is().displayed();
-            logChose.is().text("You have selected: 2131296319");
+        radioButtonBreakfast.click();
+        radioButtonBreakfast.is().selected();
+        logChose.is().displayed();
+        logChose.is().text("You have selected: 2131296319");
 
-            radioButtonLunch.click();
-            radioButtonLunch.is().selected();
-            logChose.is().displayed();
-            logChose.is().text("You have selected: 2131296544");
+        radioButtonLunch.click();
+        radioButtonLunch.is().selected();
+        logChose.is().displayed();
+        logChose.is().text("You have selected: 2131296544");
 
-            radioButtonDinner.click();
-            radioButtonDinner.is().selected();
-            logChose.is().displayed();
-            logChose.is().text("You have selected: 2131296401");
+        radioButtonDinner.click();
+        radioButtonDinner.is().selected();
+        logChose.is().displayed();
+        logChose.is().text("You have selected: 2131296401");
 
-            radioButtonAll.click();
-            radioButtonAll.is().selected();
-            logChose.is().displayed();
-            logChose.is().text("You have selected: 2131296294");
-        } catch (Exception e) {
-            e.getCause();
-            e.getMessage();
-        }
+        radioButtonAll.click();
+        radioButtonAll.is().selected();
+        logChose.is().displayed();
+        logChose.is().text("You have selected: 2131296294");
     }
 
     @Test
     public void verifyThatButtonsNotSelected() {
-       try {
-           radioButtonSnack.click();
-           radioButtonSnack.is().selected();
-           logChose.is().displayed();
+        radioButtonSnack.click();
+        radioButtonSnack.is().selected();
+        logChose.is().displayed();
 
-           radioButtonBreakfast.is().deselected();
-           radioButtonLunch.is().deselected();
-           radioButtonDinner.is().deselected();
-           radioButtonAll.is().deselected();
-       } catch (Exception e) {
-           e.getMessage();
-           e.getCause();
-       }
+        radioButtonBreakfast.is().deselected();
+        radioButtonLunch.is().deselected();
+        radioButtonDinner.is().deselected();
+        radioButtonAll.is().deselected();
     }
 
     @Test
     public void getButtonByText() {
-        try {
-            this.getRadioButtons().get("Snack").click();
-            radioButtonSnack.is().selected();
-
-            this.getRadioButtons().get("Breakfast").click();
-            radioButtonBreakfast.is().selected();
-
-            this.getRadioButtons().get("Lunch").click();
-            radioButtonLunch.is().selected();
-
-            this.getRadioButtons().get("Dinner").click();
-            radioButtonDinner.is().selected();
-
-            this.getRadioButtons().get("All of them").click();
-            radioButtonAll.is().selected();
-
-        } catch (Exception e) {
-            e.getCause();
-            e.getMessage();
-        }
-
+        UIElement menuElements = buttonsList.find("/snack");
+        menuElements.click();
+        radioButtonSnack.is().selected();
     }
 
-    private UIElement getRadioButtons() {
-        return listOfButtons.find("io.appium.android.apis:id");
+    @Test
+    public void clickOverAllItemsByText() {
+         allItemsInMenu.core().get().findElements(By.className("android.widget.RadioButton"))
+                 .stream()
+                 .filter(element -> element.getText().equals("Snack"))
+                 .findAny().get().click();
+    }
+
+
+    @Test
+    public void clickByText() {
+        allItemsInMenu.finds(By.className("android.widget.RadioButton")).foreach(e -> e.find(By.id("io.appium.android.apis:id/snack")).click());
     }
 }

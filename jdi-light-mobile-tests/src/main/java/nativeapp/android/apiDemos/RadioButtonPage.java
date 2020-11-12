@@ -1,6 +1,7 @@
 package nativeapp.android.apiDemos;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
@@ -24,9 +25,6 @@ public class RadioButtonPage {
     @MobileFindBy(id = "io.appium.android.apis:id/choice")
     public static UIElement logChose;
 
-    @MobileFindBy(id = "io.appium.android.apis:id/clear")
-    public static Button clearButton;
-
-    @MobileFindBy(id = "io.appium.android.apis:id/menu")
-    public static UIElement listOfButtons;
+    @MobileFindBy(className = "android.widget.RadioGroup")
+    public static UIElement allItemsInMenu;
 }
