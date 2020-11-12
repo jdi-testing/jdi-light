@@ -36,4 +36,5 @@ public class ApiDemosApp {
 
     public static StatusBarPage statusBarPage;
 
+    public static SpinnerPage spinnerPage;
 }

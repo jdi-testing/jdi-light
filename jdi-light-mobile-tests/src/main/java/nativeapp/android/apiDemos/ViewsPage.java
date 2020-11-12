@@ -26,4 +26,6 @@ public class ViewsPage {
     @MobileFindBy(accessibilityId = "TextFields")
     public static Button textFieldsPage;
 
+    @MobileFindBy(accessibilityId = "Spinner")
+    public static Button spinnerPage;
 }
