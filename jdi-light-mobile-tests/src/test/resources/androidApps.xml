@@ -11,6 +11,7 @@
             <class name="nativeapp_android.tests.MobileKeyboardTests"></class>
             <class name="nativeapp_android.tests.RatingBarTests"></class>
             <class name="nativeapp_android.tests.SearchViewTests"></class>
+            <class name="nativeapp_android.tests.SeekBarTest"></class>
             <class name="nativeapp_android.tests.SettingsAppTests"></class>
             <class name="nativeapp_android.tests.StatusBarTests"></class>
             <class name="nativeapp_android.tests.TextFieldTests"></class>

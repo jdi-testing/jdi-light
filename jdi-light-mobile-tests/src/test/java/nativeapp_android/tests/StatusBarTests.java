@@ -2,16 +2,21 @@ package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
 import nativeapp_android.ApiDemosTestInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static nativeapp.android.apiDemos.AppPage.*;
 import static nativeapp.android.apiDemos.IndexPage.*;
 import static nativeapp.android.apiDemos.NotificationPage.*;
 import static nativeapp.android.apiDemos.StatusBarPage.*;
 
 public class StatusBarTests extends ApiDemosTestInit {
+
+    @BeforeClass
+    public void beforeClass() {
+        logger.toLog("Run StatusBarTests");
+    }
 
     @BeforeMethod
     public void initSteps() {
@@ -48,7 +53,7 @@ public class StatusBarTests extends ApiDemosTestInit {
         clearNotificationButton.click();
         AndroidScreen.openStatusBar();
         noNotifications.is().displayed();
-        AndroidScreen.closeStatusBar();
+//        AndroidScreen.closeStatusBar();
 
     }
 
@@ -61,6 +66,12 @@ public class StatusBarTests extends ApiDemosTestInit {
 
         AndroidScreen.openStatusBar();
         noNotifications.is().displayed();
+//        AndroidScreen.closeStatusBar();
+    }
+
+    @AfterMethod
+    public void afterMethodCloseStatusBar() {
         AndroidScreen.closeStatusBar();
     }
+
 }

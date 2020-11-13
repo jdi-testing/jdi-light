@@ -5,9 +5,12 @@ import nativeapp.android.apiDemos.IndexPage;
 import nativeapp.android.apiDemos.RatingBarPage;
 import nativeapp.android.apiDemos.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.annotations.DataProvider;
+
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class RatingBarTests extends ApiDemosTestInit {
 
@@ -29,6 +32,11 @@ public class RatingBarTests extends ApiDemosTestInit {
         return new Object[][]{
                 {-1.0}, {7.0}
         };
+    }
+
+    @BeforeClass
+    public void beforeClass() {
+        logger.toLog("Run RatingBarTests");
     }
 
     @BeforeMethod
