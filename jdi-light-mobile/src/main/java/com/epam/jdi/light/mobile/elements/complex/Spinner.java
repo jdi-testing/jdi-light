@@ -6,16 +6,11 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.Text;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
-import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBys;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import io.appium.java_client.MobileBy;
-import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Assert;
-import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.io.Console;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
