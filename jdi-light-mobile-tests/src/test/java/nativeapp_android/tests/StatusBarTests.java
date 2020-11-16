@@ -30,7 +30,7 @@ public class StatusBarTests extends ApiDemosTestInit {
     @Test
     public void openNotificationTest() {
 
-        AndroidScreen.openStatusBar();
+        AndroidScreen.openNotificationPanel();
         notificationPanel.is().displayed();
         appIcon.is().displayed();
 
@@ -46,30 +46,30 @@ public class StatusBarTests extends ApiDemosTestInit {
     @Test
     public void clearNotificationButtonTest(){
 
-        AndroidScreen.openStatusBar();
+        AndroidScreen.openNotificationPanel();
         notificationPanel.is().displayed();
-        AndroidScreen.closeStatusBar();
+        AndroidScreen.closeNotificationPanel();
 
         clearNotificationButton.click();
-        AndroidScreen.openStatusBar();
+        AndroidScreen.openNotificationPanel();
         noNotifications.is().displayed();
     }
 
     @Test
     public void clearAllButtonTest(){
 
-        AndroidScreen.openStatusBar();
+        AndroidScreen.openNotificationPanel();
         notificationPanel.is().displayed();
         clearAllButton.click();
         notificationPanel.waitFor().hidden();
 
-        AndroidScreen.openStatusBar();
+        AndroidScreen.openNotificationPanel();
         noNotifications.is().displayed();
     }
 
     @AfterMethod
     public void afterMethodCloseStatusBar() {
-        AndroidScreen.closeStatusBar();
+        AndroidScreen.closeNotificationPanel();
     }
 
 }
