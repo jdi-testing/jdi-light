@@ -53,8 +53,6 @@ public class StatusBarTests extends ApiDemosTestInit {
         clearNotificationButton.click();
         AndroidScreen.openStatusBar();
         noNotifications.is().displayed();
-//        AndroidScreen.closeStatusBar();
-
     }
 
     @Test
@@ -63,10 +61,10 @@ public class StatusBarTests extends ApiDemosTestInit {
         AndroidScreen.openStatusBar();
         notificationPanel.is().displayed();
         clearAllButton.click();
+        notificationPanel.waitFor().hidden();
 
         AndroidScreen.openStatusBar();
         noNotifications.is().displayed();
-//        AndroidScreen.closeStatusBar();
     }
 
     @AfterMethod
