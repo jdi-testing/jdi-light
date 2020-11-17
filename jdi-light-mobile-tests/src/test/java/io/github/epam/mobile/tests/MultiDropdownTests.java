@@ -10,11 +10,7 @@ import static io.github.epam.sections.HtmlMobileElements.htmlMobileElements;
 import static io.github.epam.sections.LeftMenu.leftMenu;
 import static io.github.epam.steps.Preconditions.shouldBeLoggedIn;
 
-public class MultiDropdownTests extends StaticTestsInit{
-
-    // //select[@id='multi-dropdown']/..//button
-    //  //select[@id='multi-dropdown']/..//button//span
-    //  //select[@id='multi-dropdown']/..//ul//input
+public class MultiDropdownTests extends StaticTestsInit {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
@@ -26,10 +22,26 @@ public class MultiDropdownTests extends StaticTestsInit{
     @Test
     public void basicTest() {
         getButton().click();
-//        getOptions().get("Steam").click();
-//        getButton().click();
-//        System.out.println(getValue().getText());
-//        getValue().getText().equals("Non selected");
+        getOptions().get("Steam").click();
+        multiDropdown.core().click();
+        getValue().has().text("None selected");
+    }
+
+    @Test
+    public void allOptionsCheckedTest() {
+        getButton().click();
+        getOptions().get("Electro").click();
+        getOptions().get("Metalic").click();
+        getOptions().get("Wood").click();
+        multiDropdown.core().click();
+        getValue().has().text("4 selected");
+    }
+
+    @Test
+    public void disabledOptionTest() {
+        getButton().click();
+        getOptions().get("Disabled").find("input").is().disabled();
+        multiDropdown.core().click();
     }
 
     private UIElement getValue(){
@@ -41,6 +53,6 @@ public class MultiDropdownTests extends StaticTestsInit{
     }
 
     private WebList getOptions() {
-        return multiDropdown.finds("input");
+        return multiDropdown.finds("a");
     }
 }
