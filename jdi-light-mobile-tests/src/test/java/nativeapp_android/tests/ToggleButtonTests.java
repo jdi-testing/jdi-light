@@ -1,12 +1,7 @@
 package nativeapp_android.tests;
 
-import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
-import com.epam.jdi.light.mobile.elements.common.app.Button;
-import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
-import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import nativeapp.android.apiDemos.ButtonsPage;
 import nativeapp.android.apiDemos.IndexPage;
-import nativeapp.android.apiDemos.SeekBarPage;
 import nativeapp.android.apiDemos.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeClass;

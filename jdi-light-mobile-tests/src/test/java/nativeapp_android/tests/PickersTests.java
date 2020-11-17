@@ -1,63 +1,91 @@
 package nativeapp_android.tests;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
-import io.appium.java_client.MobileElement;
-import nativeapp.ios.calendar.InboxPage;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import nativeapp_android.ApiDemosTestInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.net.SocketOption;
-
+import static com.epam.jdi.light.mobile.elements.common.MobileKeyboard.pressKey;
 import static nativeapp.android.apiDemos.DateWidgetsPage.*;
 import static nativeapp.android.apiDemos.IndexPage.*;
 import static nativeapp.android.apiDemos.ViewsPage.*;
-import static org.testng.Assert.assertEquals;
+import static nativeapp.android.apiDemos.RadialPickerPage.*;
+import static nativeapp.android.apiDemos.DatePickerPage.*;
+import static nativeapp.android.apiDemos.PickerPage.*;
 
 public class PickersTests extends ApiDemosTestInit {
 
-    @Test
-    public void radialTimePickerTest(){
+    @BeforeMethod
+    public void initSteps() {
         viewsPage.click();
         dateWidgetsPage.click();
         dialogPage.click();
+    }
+
+    @Test
+    public void radialPickerTest(){
+
         radialTimePickerButton.click();
 
         hoursHeader.click();
-        radialPickerNumbers.select("7");
+        radialPicker.selectTimePicker("7");
         hoursHeader.is().text("7");
 
         minutesHeader.click();
-        radialPickerNumbers.select("35");
+        radialPicker.selectTimePicker("35");
         minutesHeader.is().text("35");
-
-        hoursHeader.click();
-        radialPickerNumbers.selectPicker("6");
-        hoursHeader.is().text("6");
-
-        minutesHeader.click();
-        radialPickerNumbers.selectPicker("30");
-        minutesHeader.is().text("30");
-
-        hoursHeader.click();
-        radialPickerNumbers.selectPickerFinds("5");
-        hoursHeader.is().text("5");
-
-        minutesHeader.click();
-        radialPickerNumbers.selectPickerFinds("25");
-        minutesHeader.is().text("25");
-
-
     }
 
     @Test
     public void datePickerTest(){
-        viewsPage.click();
-        dateWidgetsPage.click();
-        dialogPage.click();
+
         datePickerButton.click();
-        datePickerNumbers.select("23 September 2020");
-        datePickerNumbers.is().text("23 September 2020");
+
+        yearPickerHeader.click();
+        yearPicker.selectYearPicker("2018");
+        yearPickerHeader.is().text("2018");
+
+        nextMonth.click();
+        datePicker.selectDatePicker("23 December 2018");
+        datePickerHeader.is().text("Sun, Dec 23");
+        yearPickerHeader.is().text("2018");
+    }
+
+    @Test
+    public void swipePickerTest(){
+
+        timePickerButton.click();
+        picker.is().displayed();
+
+        picker.swipeHour("7");
+        picker.is().selected("7");
+
+        picker.swipeMinute("20");
+        picker.is().selected("20");
+
+        picker.swipeInterval("PM");
+        picker.is().selected("PM");
+    }
+
+    @Test
+    public void typePickerTest(){
+
+        timePickerButton.click();
+        picker.is().displayed();
+
+        picker.setHour();
+        pressKey(new KeyEvent(AndroidKey.DIGIT_5));
+        pressKey(new KeyEvent(AndroidKey.ENTER));
+        picker.is().selected("5");
+
+        picker.setMinute();
+        pressKey(new KeyEvent(AndroidKey.DIGIT_5));
+        pressKey(new KeyEvent(AndroidKey.ENTER));
+        picker.is().selected("05");
+
+        picker.setInterval("PM");
+        picker.is().selected("PM");
 
     }
 }

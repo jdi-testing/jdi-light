@@ -23,6 +23,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 import static java.lang.Math.round;
+import static java.time.Duration.ofMillis;
 
 public class MobileScreen {
 
@@ -44,6 +45,7 @@ public class MobileScreen {
                 throw exception("Cannot use this method. The driver needs to extend/implement the AppiumDriver class");
             }
             screenCenter = new Point(screenSize.width / 2, screenSize.height / 2);
+
         }
         return screenSize;
     }
@@ -97,6 +99,22 @@ public class MobileScreen {
         scrollHorizontally(offset);
     }
 
+    //Android
+    public static void swipeToElement(WebElement startElement, WebElement endElement) {
+        int startX = startElement.getLocation().getX() + (startElement.getSize().getWidth() / 2);
+        int startY = startElement.getLocation().getY() + (startElement.getSize().getHeight() / 2);
+
+        int endX = endElement.getLocation().getX() + (endElement.getSize().getWidth() / 2);
+        int endY = endElement.getLocation().getY() + (endElement.getSize().getHeight() / 2);
+
+        executeDriverMethod(PerformsTouchActions.class, (PerformsTouchActions driver) -> {
+                    new TouchAction<>(driver)
+                            .press(PointOption.point(startX,startY))
+                .waitAction(WaitOptions.waitOptions(ofMillis(300)))
+                .moveTo(PointOption.point(endX, endY))
+                .release().perform();
+    });
+    }
 
     //Works only if sought element exists.
     public static void scrollDownToXpath(String xpath){

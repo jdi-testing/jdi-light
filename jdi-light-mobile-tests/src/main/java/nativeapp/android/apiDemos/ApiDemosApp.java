@@ -41,4 +41,12 @@ public class ApiDemosApp {
     public static ActionBarUsagePage actionBarUsagePage;
 
     public static ActionBarDisplayOptionsPage actionBarDisplayOptionsPage;
+    public static DateWidgetsPage dateWidgetsPage;
+
+    public static DatePickerPage datePickerPage;
+
+    public static RadialPickerPage radialPickerPage;
+
+    public static PickerPage pickerPage;
+
 }

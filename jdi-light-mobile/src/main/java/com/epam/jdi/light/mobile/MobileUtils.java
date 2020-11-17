@@ -5,13 +5,12 @@ import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
-import com.epam.jdi.light.mobile.elements.common.app.android.Picker;
 import com.epam.jdi.light.mobile.elements.common.app.ios.MenuItem;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
 
 import java.lang.reflect.Field;
 import java.util.Collection;
