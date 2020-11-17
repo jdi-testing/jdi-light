@@ -19,7 +19,7 @@ public class RadioButtonsTests extends StaticTestsInit {
     }
 
     @Test
-    public void test() {
+    public void basicTest() {
         getRadioButtons().get("Blue").click();
         getRadioButtons().get("Green").click();
         getRadioButtons().get("Red").click();
