@@ -23,9 +23,6 @@ public class Spinner extends MobileAppBaseElement<TextAssert>
     @MobileFindBy(xpath = "*/android.widget.TextView")
     public Text spinnerValue;
 
-    @MobileFindBy(xpath = "*/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView")
-    public By value;
-
     @Override
     public TextAssert is() {
         return new TextAssert().set(this);
