@@ -1,10 +1,8 @@
 package com.epam.jdi.light.mobile.asserts;
 
 import com.epam.jdi.light.asserts.generic.ITextAssert;
-import com.epam.jdi.light.asserts.generic.SelectedAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.mobile.elements.common.app.android.TabBar;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;

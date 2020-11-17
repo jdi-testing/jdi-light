@@ -3,7 +3,6 @@ package nativeapp.android.apiDemos;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.common.app.android.TabBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
-import com.epam.jdi.light.ui.html.elements.complex.Tabs;
 
 public class TabsPage {
 

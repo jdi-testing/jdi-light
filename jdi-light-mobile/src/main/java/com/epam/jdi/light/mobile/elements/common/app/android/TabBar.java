@@ -7,14 +7,8 @@ import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.mobile.asserts.TabBarAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
-import io.appium.java_client.MobileBy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import java.util.List;
-import java.util.Optional;
-
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTouchActions, IsButton, IsText {
 

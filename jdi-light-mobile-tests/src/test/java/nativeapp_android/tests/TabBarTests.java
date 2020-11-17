@@ -4,7 +4,6 @@ import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import static nativeapp.android.apiDemos.IndexPage.*;
 import static nativeapp.android.apiDemos.ViewsPage.*;
 import static nativeapp.android.apiDemos.TabsPage.*;
