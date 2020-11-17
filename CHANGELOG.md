@@ -5,7 +5,7 @@
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 * **driver.remote.run** boolean property can be specified in **test.properties** file. If not specified, JDI would use the original logic and switch between local and remote driver depending on other properties
 
-#1.2.24 (16.10.2020)
+##1.2.24 (16.10.2020)
 * Bug fix for browserstack
 
 ## 1.2.22-23 (release 01.10.2020)
