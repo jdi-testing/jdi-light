@@ -6,8 +6,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 
 public class LeftMenu extends Section {
 
-    //@UI("#mCSB_1_container > ul > li.menu-title.active")
-    //  @FindBy(css = "#mCSB_1_container > ul > li.menu-title.active")
     @FindBy(css = "#mCSB_1_container > ul > li:nth-child(5)")
     public static UIElement leftMenu;
 
