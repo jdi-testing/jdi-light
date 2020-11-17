@@ -36,4 +36,9 @@ public class ApiDemosApp {
 
     public static StatusBarPage statusBarPage;
 
+    public static ActionBarPage actionBarPage;
+
+    public static ActionBarUsagePage actionBarUsagePage;
+
+    public static ActionBarDisplayOptionsPage actionBarDisplayOptionsPage;
 }
