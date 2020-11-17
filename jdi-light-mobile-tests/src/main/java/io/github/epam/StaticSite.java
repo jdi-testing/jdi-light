@@ -9,7 +9,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import io.github.epam.pages.*;
 import io.github.epam.sections.Footer;
 import io.github.epam.sections.FrameSpiderman;
