@@ -4,9 +4,17 @@ import nativeapp.android.apiDemos.ButtonsPage;
 import nativeapp.android.apiDemos.IndexPage;
 import nativeapp.android.apiDemos.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
+
 public class ToggleButtonTests extends ApiDemosTestInit {
+
+    @BeforeClass
+    public void beforeClass() {
+        logger.toLog("Run ToggleButtonTests");
+    }
 
     @Test
     public void toggleButtonTests() {

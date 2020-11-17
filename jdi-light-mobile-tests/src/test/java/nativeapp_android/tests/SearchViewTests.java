@@ -10,13 +10,21 @@ import nativeapp.android.apiDemos.SearchViewFilterPage;
 import nativeapp.android.apiDemos.SearchViewPage;
 import nativeapp.android.apiDemos.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class SearchViewTests extends ApiDemosTestInit {
 
     public static final String PLACEHOLDER_ActionBar = "   Search Demo Hint";
     public static final String PLACEHOLDER_AlwaysExpanded = "Search Demo Hint";
     public static final String PLACEHOLDER_Filter = "Cheese hunt";
+
+    @BeforeClass
+    public void beforeClass() {
+        logger.toLog("Run SearchViewTests");
+    }
 
     @Test
     public void searchViewTestForActionBar() {
