@@ -10,9 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.epam.pages.*;
-import io.github.epam.sections.Footer;
-import io.github.epam.sections.FrameSpiderman;
-import io.github.epam.sections.Header;
+import io.github.epam.sections.*;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -56,4 +54,7 @@ public class StaticSite {
 	public static FrameSpiderman frameSpiderman;
 
 	public static GithubPage githubPage;
+	public static HtmlMobilePage htmlMobilePage;
+	public static LeftMenu leftMenu;
+	public static HtmlMobileElements htmlMobileElements;
 }
