@@ -21,26 +21,42 @@ public class MobileWebTextFieldTests  extends StaticTestsInit {
         leftMenu.click();
         htmlMenu.click();
 
+        HtmlMobilePage.nameArea.focus();
         HtmlMobilePage.nameArea.sendKeys(CONDITION1);
         HtmlMobilePage.nameArea.has().text(CONDITION1);
         HtmlMobilePage.nameArea.clear();
 
+        HtmlMobilePage.nameArea.focus();
         HtmlMobilePage.nameArea.sendKeys(CONDITION2);
         HtmlMobilePage.nameArea.has().text(CONDITION2);
         HtmlMobilePage.nameArea.clear();
 
+        HtmlMobilePage.nameArea.focus();
         HtmlMobilePage.nameArea.sendKeys(CONDITION3);
         HtmlMobilePage.nameArea.has().text(CONDITION3);
         HtmlMobilePage.nameArea.clear();
 
+        HtmlMobilePage.nameArea.focus();
         HtmlMobilePage.nameArea.sendKeys(CONDITION4);
         HtmlMobilePage.nameArea.has().text(CONDITION4);
         HtmlMobilePage.nameArea.clear();
 
+        HtmlMobilePage.nameArea.focus();
         HtmlMobilePage.nameArea.sendKeys(CONDITION5);
         HtmlMobilePage.nameArea.has().text(CONDITION5);
         HtmlMobilePage.nameArea.clear();
     }
+
+    @Test
+    public void setTextTests() {
+        shouldBeLoggedIn();
+        leftMenu.click();
+        htmlMenu.click();
+        HtmlMobilePage.nameArea.setValue(CONDITION1);
+        HtmlMobilePage.nameArea.placeholder().equals(CONDITION1);
+    }
+
+
 
     @Test
     public void isNameAreaDisplayed() {
