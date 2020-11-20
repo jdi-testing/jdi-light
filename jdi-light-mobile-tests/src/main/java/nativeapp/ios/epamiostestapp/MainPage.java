@@ -1,6 +1,5 @@
 package nativeapp.ios.epamiostestapp;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.mobile.elements.common.app.ios.MenuItem;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
@@ -35,8 +34,5 @@ public class MainPage {
 
     @MobileFindBy(xpath = "//XCUIElementTypeButton[@name=\"Stepper\"]")
     public static MenuItem menuStepper;
-
-    @MobileFindBy(xpath = "//XCUIElementTypeStaticText[contains(@name, 'Current')]")
-    public static UIElement sliderValue;
 
 }
