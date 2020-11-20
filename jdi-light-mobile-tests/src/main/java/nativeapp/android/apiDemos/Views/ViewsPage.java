@@ -1,4 +1,4 @@
-package nativeapp.android.apiDemos;
+package nativeapp.android.apiDemos.Views;
 
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
@@ -25,5 +25,7 @@ public class ViewsPage {
 
     @MobileFindBy(accessibilityId = "TextFields")
     public static Button textFieldsPage;
+
+
 
 }
