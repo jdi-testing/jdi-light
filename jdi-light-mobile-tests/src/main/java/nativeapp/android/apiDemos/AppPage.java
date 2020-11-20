@@ -10,4 +10,7 @@ public class AppPage {
 
     @MobileFindBy(accessibilityId = "Action Bar")
     public static Button actionBarPage;
+
+    @MobileFindBy(accessibilityId = "Fragment")
+    public static Button fragmentPage;
 }

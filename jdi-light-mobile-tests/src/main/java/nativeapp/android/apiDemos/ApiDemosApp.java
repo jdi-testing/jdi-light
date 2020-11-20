@@ -41,4 +41,9 @@ public class ApiDemosApp {
     public static ActionBarUsagePage actionBarUsagePage;
 
     public static ActionBarDisplayOptionsPage actionBarDisplayOptionsPage;
+
+    public static FragmentPage fragmentPage;
+
+    public static ContextMenuPage contextMenuPage;
+
 }
