@@ -3,6 +3,7 @@ package epamiostestapp.tests;
 import epamiostestapp.IosApplicationInit;
 import org.testng.annotations.Test;
 
+import static nativeapp.ios.epamiostestapp.MainPage.menuSegmentedControl;
 import static nativeapp.ios.epamiostestapp.SegmentedControlPage.segmentedControl;
 
 public class SegmentedContolTest extends IosApplicationInit {
