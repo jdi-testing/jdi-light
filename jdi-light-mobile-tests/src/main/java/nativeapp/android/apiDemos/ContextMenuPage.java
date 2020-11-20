@@ -11,7 +11,4 @@ public class ContextMenuPage {
     @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView")
     public static Button menuView;
 
-    @MobileFindBy(linkText = "Menu A")
-    public static Button menuAButton;
-
 }
