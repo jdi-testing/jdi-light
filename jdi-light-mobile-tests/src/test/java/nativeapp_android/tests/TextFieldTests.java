@@ -7,9 +7,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static nativeapp.android.apidemos.IndexPage.*;
-import static nativeapp.android.apidemos.TextFieldsPage.*;
-import static nativeapp.android.apidemos.ViewsPage.textFieldsPage;
+import static nativeapp.android.apiDemos.IndexPage.*;
+import static nativeapp.android.apiDemos.TextFieldsPage.*;
+import static nativeapp.android.apiDemos.ViewsPage.textFieldsPage;
 
 public class TextFieldTests extends ApiDemosTestInit {
 
