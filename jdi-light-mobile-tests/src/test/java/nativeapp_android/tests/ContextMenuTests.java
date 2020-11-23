@@ -3,7 +3,7 @@ package nativeapp_android.tests;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.Test;
 
-import static nativeapp.android.apiDemos.AppPage.fragmentPage;
+import static nativeapp.android.apiDemos.App.AppPage.fragmentPage;
 import static nativeapp.android.apiDemos.ContextMenuPage.longPressButton;
 import static nativeapp.android.apiDemos.ContextMenuPage.menuView;
 import static nativeapp.android.apiDemos.FragmentPage.contextMenuPage;
