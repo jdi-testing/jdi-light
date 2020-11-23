@@ -1,8 +1,8 @@
 package nativeapp_android.tests;
 
-import nativeapp.android.apiDemos.ButtonsPage;
+import nativeapp.android.apiDemos.Views.ButtonsPage;
 import nativeapp.android.apiDemos.IndexPage;
-import nativeapp.android.apiDemos.ViewsPage;
+import nativeapp.android.apiDemos.Views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
