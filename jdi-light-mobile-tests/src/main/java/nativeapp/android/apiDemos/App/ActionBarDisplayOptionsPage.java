@@ -1,4 +1,4 @@
-package nativeapp.android.apiDemos;
+package nativeapp.android.apiDemos.App;
 
 import com.epam.jdi.light.mobile.elements.common.app.android.ActionBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
