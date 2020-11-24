@@ -9,4 +9,3 @@ public class HtmlMobilePage extends WebPage {
     @FindBy(xpath = "//input[@type='radio']/..")
     public static UIElement radioButtons;
 }
-

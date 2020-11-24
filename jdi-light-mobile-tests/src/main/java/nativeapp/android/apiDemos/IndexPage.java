@@ -14,6 +14,4 @@ public class IndexPage {
 
     @MobileFindBy(accessibilityId = "App")
     public static Button appPage;
-
-
 }

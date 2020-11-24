@@ -3,12 +3,20 @@ package nativeapp_android.tests;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import nativeapp.android.apiDemos.IndexPage;
-import nativeapp.android.apiDemos.SeekBarPage;
-import nativeapp.android.apiDemos.ViewsPage;
+import nativeapp.android.apiDemos.Views.SeekBarPage;
+import nativeapp.android.apiDemos.Views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
+
 public class SeekBarTest extends ApiDemosTestInit {
+
+    @BeforeClass
+    public void beforeClass() {
+        logger.toLog("Run SeekBarTest");
+    }
 
     @Test
     public void seekBarTests() throws InterruptedException {
