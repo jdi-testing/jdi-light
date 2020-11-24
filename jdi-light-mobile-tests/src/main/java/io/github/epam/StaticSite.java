@@ -22,7 +22,9 @@ import io.github.epam.sections.LeftMenu;
 import io.github.epam.sections.Header;
 import io.github.epam.sections.Footer;
 import io.github.epam.sections.FrameSpiderman;
-
+import io.github.epam.sections.Header;
+import io.github.epam.sections.HtmlMobileElements;
+import io.github.epam.sections.LeftMenu;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -66,7 +68,8 @@ public class StaticSite {
 	public static FrameSpiderman frameSpiderman;
 
 	public static GithubPage githubPage;
-	public static HtmlMobilePage htmlMobilePage;
 	public static LeftMenu leftMenu;
 	public static HtmlMobileElements htmlMobileElements;
+	public static HtmlMobilePage htmlMobilePage;
+
 }
