@@ -1,0 +1,53 @@
+package nativeapp_android.tests;
+
+import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
+import nativeapp.android.apiDemos.IndexPage;
+import nativeapp.android.apiDemos.ProgressBarPage;
+import nativeapp_android.ApiDemosTestInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class ProgressBarTests extends ApiDemosTestInit {
+
+    @BeforeMethod
+    public void init() {
+        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Views']");
+        IndexPage.viewsPage.click();
+        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Progress Bar']");
+        IndexPage.goToProgressBarPageStageOne.click();
+        IndexPage.goToProgressBarPageStageTwo.click();
+    }
+
+    @Test
+    public void isProgressBarHidden() {
+        ProgressBarPage.progressBarLine.is().hidden();
+    }
+
+    @Test
+    public void decreaseStandardProgressBar() {
+        ProgressBarPage.decreaseStandardButton.click();
+        ProgressBarPage.decreaseStandardButton.is().enabled();
+        ProgressBarPage.progressBarLine.isExist();
+    }
+
+    @Test
+    public void increaseStandardProgressBar() {
+        ProgressBarPage.increaseStandardButton.click();
+        ProgressBarPage.increaseStandardButton.is().enabled();
+        ProgressBarPage.progressBarLine.isExist();
+    }
+
+    @Test
+    public void decreaseSecondaryProgressBar() {
+        ProgressBarPage.decreaseSecondaryButton.click();
+        ProgressBarPage.decreaseSecondaryButton.is().enabled();
+        ProgressBarPage.progressBarLine.isExist();
+    }
+
+    @Test
+    public void increaseSecondaryProgressBar() {
+        ProgressBarPage.increaseSecondaryButton.click();
+        ProgressBarPage.increaseSecondaryButton.is().enabled();
+        ProgressBarPage.progressBarLine.isExist();
+    }
+}
