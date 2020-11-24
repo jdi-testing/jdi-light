@@ -6,10 +6,10 @@ import org.testng.annotations.*;
 
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static nativeapp.android.apiDemos.AppPage.*;
+import static nativeapp.android.apiDemos.App.AppPage.*;
 import static nativeapp.android.apiDemos.IndexPage.*;
-import static nativeapp.android.apiDemos.NotificationPage.*;
-import static nativeapp.android.apiDemos.StatusBarPage.*;
+import static nativeapp.android.apiDemos.App.NotificationPage.*;
+import static nativeapp.android.apiDemos.App.StatusBarPage.*;
 
 public class StatusBarTests extends ApiDemosTestInit {
 

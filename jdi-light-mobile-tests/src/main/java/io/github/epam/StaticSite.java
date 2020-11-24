@@ -9,12 +9,23 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import io.github.epam.pages.*;
+import io.github.epam.pages.ContactFormPage;
+import io.github.epam.pages.HomePage;
+import io.github.epam.pages.MetalAndColorsPage;
+import io.github.epam.pages.PerformancePage;
+import io.github.epam.pages.HtmlMobilePage;
+import io.github.epam.pages.SearchPage;
+import io.github.epam.pages.HomePageFrame;
+import io.github.epam.pages.GithubPage;
+import io.github.epam.sections.HtmlMobileElements;
+import io.github.epam.sections.LeftMenu;
+import io.github.epam.sections.Header;
 import io.github.epam.sections.Footer;
 import io.github.epam.sections.FrameSpiderman;
 import io.github.epam.sections.Header;
 import io.github.epam.sections.HtmlMobileElements;
 import io.github.epam.sections.LeftMenu;
+
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -58,7 +69,7 @@ public class StaticSite {
 	public static FrameSpiderman frameSpiderman;
 
 	public static GithubPage githubPage;
+	public static HtmlMobilePage htmlMobilePage;
 	public static LeftMenu leftMenu;
 	public static HtmlMobileElements htmlMobileElements;
-	public static HtmlMobilePage htmlMobilePage;
 }

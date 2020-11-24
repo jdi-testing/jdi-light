@@ -8,5 +8,4 @@ public class LeftMenu extends Section {
 
     @FindBy(css = "#mCSB_1_container > ul > li:nth-child(5)")
     public static UIElement leftMenu;
-
 }
