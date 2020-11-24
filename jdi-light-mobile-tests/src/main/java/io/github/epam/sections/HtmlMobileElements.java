@@ -8,5 +8,6 @@ public class HtmlMobileElements extends Section {
 
     @FindBy(css = "#mCSB_1_container > ul > li:nth-child(5) > ul > li:nth-child(1)")
     public static UIElement htmlMobileElements;
+
 }
 
