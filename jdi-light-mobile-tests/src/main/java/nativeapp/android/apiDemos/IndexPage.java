@@ -1,7 +1,6 @@
 package nativeapp.android.apiDemos;
 
 import com.epam.jdi.light.mobile.elements.common.app.Button;
-import com.epam.jdi.light.mobile.elements.common.app.android.StatusBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class IndexPage {
@@ -14,6 +13,5 @@ public class IndexPage {
 
     @MobileFindBy(accessibilityId = "App")
     public static Button appPage;
-
 
 }

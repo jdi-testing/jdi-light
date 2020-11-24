@@ -26,4 +26,7 @@ public class ViewsPage {
     @MobileFindBy(accessibilityId = "TextFields")
     public static Button textFieldsPage;
 
+    @MobileFindBy(accessibilityId = "Gallery")
+    public static Button galleryPage;
+
 }
