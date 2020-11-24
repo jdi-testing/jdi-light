@@ -59,4 +59,7 @@ public class ApiDemosApp {
     public static ActionBarDisplayOptionsPage actionBarDisplayOptionsPage;
 
     public static ProgressBarPage progressBarPage;
+
+    public static SpinnerPage spinnerPage;
+  
 }
