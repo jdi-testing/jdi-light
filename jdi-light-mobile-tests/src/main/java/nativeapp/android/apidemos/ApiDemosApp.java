@@ -1,23 +1,25 @@
-package nativeapp.android.apiDemos;
+package nativeapp.android.apidemos;
 
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.JApp;
-import nativeapp.android.apiDemos.Animation.AnimationPage;
-import nativeapp.android.apiDemos.Animation.CheckboxesPage;
-import nativeapp.android.apiDemos.App.ActionBarDisplayOptionsPage;
-import nativeapp.android.apiDemos.App.ActionBarPage;
-import nativeapp.android.apiDemos.App.ActionBarUsagePage;
-import nativeapp.android.apiDemos.App.AppPage;
-import nativeapp.android.apiDemos.App.NotificationPage;
-import nativeapp.android.apiDemos.App.StatusBarPage;
-import nativeapp.android.apiDemos.Views.ButtonsPage;
-import nativeapp.android.apiDemos.Views.RatingBarPage;
-import nativeapp.android.apiDemos.Views.SearchViewActionBarPage;
-import nativeapp.android.apiDemos.Views.SearchViewAlwaysExpandedPage;
-import nativeapp.android.apiDemos.Views.SearchViewFilterPage;
-import nativeapp.android.apiDemos.Views.SearchViewPage;
-import nativeapp.android.apiDemos.Views.SeekBarPage;
-import nativeapp.android.apiDemos.Views.TextFieldsPage;
-import nativeapp.android.apiDemos.Views.ViewsPage;
+import nativeapp.android.apidemos.animation.AnimationPage;
+import nativeapp.android.apidemos.animation.CheckboxesPage;
+import nativeapp.android.apidemos.app.ActionBarDisplayOptionsPage;
+import nativeapp.android.apidemos.app.ActionBarPage;
+import nativeapp.android.apidemos.app.ActionBarUsagePage;
+import nativeapp.android.apidemos.app.AppPage;
+import nativeapp.android.apidemos.app.NotificationPage;
+import nativeapp.android.apidemos.app.StatusBarPage;
+import nativeapp.android.apidemos.views.ButtonsPage;
+import nativeapp.android.apidemos.views.RatingBarPage;
+import nativeapp.android.apidemos.views.SearchViewActionBarPage;
+import nativeapp.android.apidemos.views.SearchViewAlwaysExpandedPage;
+import nativeapp.android.apidemos.views.SearchViewFilterPage;
+import nativeapp.android.apidemos.views.SearchViewPage;
+import nativeapp.android.apidemos.views.SeekBarPage;
+import nativeapp.android.apidemos.views.TextFieldsPage;
+import nativeapp.android.apidemos.views.ViewsPage;
+import nativeapp.android.apidemos.app.FragmentPage;
+import nativeapp.android.apidemos.app.ContextMenuPage;
 
 @JApp(appPackage = "io.appium.android.apis", appActivity = "io.appium.android.apis.ApiDemos")
 public class ApiDemosApp {

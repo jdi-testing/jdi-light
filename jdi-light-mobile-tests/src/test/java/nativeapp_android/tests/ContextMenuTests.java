@@ -3,11 +3,11 @@ package nativeapp_android.tests;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.Test;
 
-import static nativeapp.android.apiDemos.App.AppPage.fragmentPage;
-import static nativeapp.android.apiDemos.ContextMenuPage.longPressButton;
-import static nativeapp.android.apiDemos.ContextMenuPage.menuView;
-import static nativeapp.android.apiDemos.FragmentPage.contextMenuPage;
-import static nativeapp.android.apiDemos.IndexPage.appPage;
+import static nativeapp.android.apidemos.IndexPage.appPage;
+import static nativeapp.android.apidemos.app.AppPage.fragmentPage;
+import static nativeapp.android.apidemos.app.ContextMenuPage.longPressButton;
+import static nativeapp.android.apidemos.app.ContextMenuPage.menuView;
+import static nativeapp.android.apidemos.app.FragmentPage.contextMenuPage;
 
 public class ContextMenuTests extends ApiDemosTestInit {
 
