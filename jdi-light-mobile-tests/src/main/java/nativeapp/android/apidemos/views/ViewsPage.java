@@ -1,4 +1,4 @@
-package nativeapp.android.apiDemos.Views;
+package nativeapp.android.apidemos.views;
 
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
@@ -26,6 +26,6 @@ public class ViewsPage {
     @MobileFindBy(accessibilityId = "TextFields")
     public static Button textFieldsPage;
 
-
-
+    @MobileFindBy(accessibilityId = "Spinner")
+    public static Button spinnerPage;
 }
