@@ -11,6 +11,8 @@ public class HtmlMobilePage extends WebPage {
     @FindBy(xpath = "//select[@id='multi-dropdown']/..")
     public static UIElement multiDropdown;
 
+    @FindBy(css = "#progress")
+    public static ProgressBar staticProgressBar;
     @FindBy(css = "#accept-conditions")
     public UIElement singleCheckBox;
 
