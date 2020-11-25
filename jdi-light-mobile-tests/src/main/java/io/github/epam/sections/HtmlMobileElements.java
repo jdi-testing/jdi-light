@@ -6,6 +6,8 @@ import com.epam.jdi.light.mobile.elements.common.app.Button;
 
 public class HtmlMobileElements extends Section {
 
+
     @FindBy(css = "#mCSB_1_container > ul > li:nth-child(5) > ul > li:nth-child(2) > a")
     public static Button htmlMenu;
 }
+
