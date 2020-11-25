@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.mobile.elements.common.app.android.TextField;
+import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
 
 
 public class HtmlMobilePage extends WebPage {
