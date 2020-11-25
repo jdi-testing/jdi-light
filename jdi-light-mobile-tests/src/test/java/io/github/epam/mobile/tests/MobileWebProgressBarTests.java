@@ -13,16 +13,16 @@ public class MobileWebProgressBarTests extends StaticTestsInit {
     @Test
     public void progressBarGetValue() {
         shouldBeLoggedIn();
-        leftMenu.click();
-        htmlMenu.click();
+        leftMenu.tap();
+        htmlMenu.tap();
         staticProgressBar.is().value(70);
     }
 
     @Test
     public void progressBarIsDisplayed() {
         shouldBeLoggedIn();
-        leftMenu.click();
-        htmlMenu.click();
+        leftMenu.tap();
+        htmlMenu.tap();
         staticProgressBar.is().displayed();
     }
 }
