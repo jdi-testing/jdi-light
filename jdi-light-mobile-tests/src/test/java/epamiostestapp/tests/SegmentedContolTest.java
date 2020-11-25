@@ -8,7 +8,7 @@ import static nativeapp.ios.epamiostestapp.SegmentedControlPage.segmentedControl
 
 public class SegmentedContolTest extends IosApplicationInit {
     @Test
-    public void SegmentedControlTest() {
+    public void segmentedControlTest() {
         menuSegmentedControl.tap();
 
         segmentedControl.tapSegment("Two");
