@@ -1,4 +1,4 @@
-package nativeapp.android.apiDemos;
+package nativeapp.android.apidemos;
 
 import com.epam.jdi.light.mobile.elements.complex.Spinner;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;

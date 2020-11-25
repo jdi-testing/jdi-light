@@ -1,9 +1,9 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
-import nativeapp.android.apiDemos.IndexPage;
-import nativeapp.android.apiDemos.SpinnerPage;
-import nativeapp.android.apiDemos.Views.ViewsPage;
+import nativeapp.android.apidemos.IndexPage;
+import nativeapp.android.apidemos.SpinnerPage;
+import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

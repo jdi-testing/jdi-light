@@ -1,4 +1,4 @@
-package nativeapp.android.apiDemos.Animation;
+package nativeapp.android.apidemos.animation;
 
 import com.epam.jdi.light.mobile.elements.common.app.android.Checkbox;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;

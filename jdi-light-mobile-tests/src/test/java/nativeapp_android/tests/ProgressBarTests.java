@@ -1,8 +1,8 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
-import nativeapp.android.apiDemos.IndexPage;
-import nativeapp.android.apiDemos.ProgressBarPage;
+import nativeapp.android.apidemos.IndexPage;
+import nativeapp.android.apidemos.ProgressBarPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
