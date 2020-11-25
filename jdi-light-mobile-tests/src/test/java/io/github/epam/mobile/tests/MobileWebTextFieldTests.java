@@ -3,7 +3,7 @@ package io.github.epam.mobile.tests;
 import io.github.epam.pages.HtmlMobilePage;
 import org.testng.annotations.Test;
 
-import static io.github.epam.sections.HtmlMobileElements.htmlMenu;
+import static io.github.epam.sections.HtmlMobileElements.htmlMobileElements;
 import static io.github.epam.sections.LeftMenu.leftMenu;
 import static io.github.epam.steps.Preconditions.shouldBeLoggedIn;
 
@@ -19,41 +19,41 @@ public class MobileWebTextFieldTests  extends StaticTestsInit {
     public void textFieldTests() {
         shouldBeLoggedIn();
         leftMenu.click();
-        htmlMenu.click();
+        htmlMobileElements.click();
 
-        HtmlMobilePage.nameArea.focus();
-        HtmlMobilePage.nameArea.sendKeys(CONDITION1);
-        HtmlMobilePage.nameArea.has().text(CONDITION1);
-        HtmlMobilePage.nameArea.clear();
+        HtmlMobilePage.multiDropdown.focus();
+        HtmlMobilePage.multiDropdown.sendKeys(CONDITION1);
+        HtmlMobilePage.multiDropdown.has().text(CONDITION1);
+        HtmlMobilePage.multiDropdown.clear();
 
-        HtmlMobilePage.nameArea.focus();
-        HtmlMobilePage.nameArea.sendKeys(CONDITION2);
-        HtmlMobilePage.nameArea.has().text(CONDITION2);
-        HtmlMobilePage.nameArea.clear();
+        HtmlMobilePage.multiDropdown.focus();
+        HtmlMobilePage.multiDropdown.sendKeys(CONDITION2);
+        HtmlMobilePage.multiDropdown.has().text(CONDITION2);
+        HtmlMobilePage.multiDropdown.clear();
 
-        HtmlMobilePage.nameArea.focus();
-        HtmlMobilePage.nameArea.sendKeys(CONDITION3);
-        HtmlMobilePage.nameArea.has().text(CONDITION3);
-        HtmlMobilePage.nameArea.clear();
+        HtmlMobilePage.multiDropdown.focus();
+        HtmlMobilePage.multiDropdown.sendKeys(CONDITION3);
+        HtmlMobilePage.multiDropdown.has().text(CONDITION3);
+        HtmlMobilePage.multiDropdown.clear();
 
-        HtmlMobilePage.nameArea.focus();
-        HtmlMobilePage.nameArea.sendKeys(CONDITION4);
-        HtmlMobilePage.nameArea.has().text(CONDITION4);
-        HtmlMobilePage.nameArea.clear();
+        HtmlMobilePage.multiDropdown.focus();
+        HtmlMobilePage.multiDropdown.sendKeys(CONDITION4);
+        HtmlMobilePage.multiDropdown.has().text(CONDITION4);
+        HtmlMobilePage.multiDropdown.clear();
 
-        HtmlMobilePage.nameArea.focus();
-        HtmlMobilePage.nameArea.sendKeys(CONDITION5);
-        HtmlMobilePage.nameArea.has().text(CONDITION5);
-        HtmlMobilePage.nameArea.clear();
+        HtmlMobilePage.multiDropdown.focus();
+        HtmlMobilePage.multiDropdown.sendKeys(CONDITION5);
+        HtmlMobilePage.multiDropdown.has().text(CONDITION5);
+        HtmlMobilePage.multiDropdown.clear();
     }
 
     @Test
     public void setTextTests() {
         shouldBeLoggedIn();
         leftMenu.click();
-        htmlMenu.click();
-        HtmlMobilePage.nameArea.setValue(CONDITION1);
-        HtmlMobilePage.nameArea.placeholder().equals(CONDITION1);
+        htmlMobileElements.click();
+        HtmlMobilePage.multiDropdown.setValue(CONDITION1);
+        HtmlMobilePage.multiDropdown.placeholder().equals(CONDITION1);
     }
 
 
@@ -62,7 +62,7 @@ public class MobileWebTextFieldTests  extends StaticTestsInit {
     public void isNameAreaDisplayed() {
         shouldBeLoggedIn();
         leftMenu.click();
-        htmlMenu.click();
-        HtmlMobilePage.nameArea.is().displayed();
+        htmlMobileElements.click();
+        HtmlMobilePage.multiDropdown.is().displayed();
     }
 }

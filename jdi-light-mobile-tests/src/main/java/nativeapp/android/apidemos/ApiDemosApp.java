@@ -18,6 +18,8 @@ import nativeapp.android.apidemos.views.SearchViewPage;
 import nativeapp.android.apidemos.views.SeekBarPage;
 import nativeapp.android.apidemos.views.TextFieldsPage;
 import nativeapp.android.apidemos.views.ViewsPage;
+import nativeapp.android.apidemos.app.FragmentPage;
+import nativeapp.android.apidemos.app.ContextMenuPage;
 
 @JApp(appPackage = "io.appium.android.apis", appActivity = "io.appium.android.apis.ApiDemos")
 public class ApiDemosApp {
@@ -58,8 +60,11 @@ public class ApiDemosApp {
 
     public static ActionBarDisplayOptionsPage actionBarDisplayOptionsPage;
 
+    public static FragmentPage fragmentPage;
+
+    public static ContextMenuPage contextMenuPage;
+
     public static ProgressBarPage progressBarPage;
 
     public static SpinnerPage spinnerPage;
-  
 }
