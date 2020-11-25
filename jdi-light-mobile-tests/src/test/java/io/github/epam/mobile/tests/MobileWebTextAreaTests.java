@@ -16,8 +16,8 @@ public class MobileWebTextAreaTests extends StaticTestsInit {
     @Test
     public void textAreaIsDisplayed() {
         shouldBeLoggedIn();
-        leftMenu.click();
-        htmlMenu.click();
+        leftMenu.tap();
+        htmlMenu.tap();
         HtmlMobilePage.textArea.is().displayed();
     }
 
@@ -29,8 +29,8 @@ public class MobileWebTextAreaTests extends StaticTestsInit {
         inputText.add("It is very convenient to write auto tests");
 
         shouldBeLoggedIn();
-        leftMenu.click();
-        htmlMenu.click();
+        leftMenu.tap();
+        htmlMenu.tap();
         HtmlMobilePage.textArea.focus();
         HtmlMobilePage.textArea.clear();
         HtmlMobilePage.textArea.input(String.valueOf(inputText));
@@ -46,8 +46,8 @@ public class MobileWebTextAreaTests extends StaticTestsInit {
         inputText.add("It is very convenient to write auto tests");
 
         shouldBeLoggedIn();
-        leftMenu.click();
-        htmlMenu.click();
+        leftMenu.tap();
+        htmlMenu.tap();
         HtmlMobilePage.textArea.focus();
         HtmlMobilePage.textArea.clear();
         HtmlMobilePage.textArea.sendKeys(String.valueOf(inputText));
@@ -63,8 +63,8 @@ public class MobileWebTextAreaTests extends StaticTestsInit {
         inputText.add("It is very convenient to write auto tests");
 
         shouldBeLoggedIn();
-        leftMenu.click();
-        htmlMenu.click();
+        leftMenu.tap();
+        htmlMenu.tap();
         HtmlMobilePage.textArea.focus();
         HtmlMobilePage.textArea.input("New line instead old");
         HtmlMobilePage.textArea.placeholder().equals("New line instead old");
