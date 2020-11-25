@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static nativeapp.android.apiDemos.IndexPage.*;
-import static nativeapp.android.apiDemos.Views.TextFieldsPage.*;
-import static nativeapp.android.apiDemos.Views.ViewsPage.textFieldsPage;
+import static nativeapp.android.apiDemos.views.TextFieldsPage.*;
+import static nativeapp.android.apiDemos.views.ViewsPage.textFieldsPage;
 
 public class TextFieldTests extends ApiDemosTestInit {
 

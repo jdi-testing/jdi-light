@@ -1,23 +1,23 @@
 package nativeapp.android.apiDemos;
 
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.JApp;
-import nativeapp.android.apiDemos.Animation.AnimationPage;
-import nativeapp.android.apiDemos.Animation.CheckboxesPage;
-import nativeapp.android.apiDemos.App.ActionBarDisplayOptionsPage;
-import nativeapp.android.apiDemos.App.ActionBarPage;
-import nativeapp.android.apiDemos.App.ActionBarUsagePage;
-import nativeapp.android.apiDemos.App.AppPage;
-import nativeapp.android.apiDemos.App.NotificationPage;
-import nativeapp.android.apiDemos.App.StatusBarPage;
-import nativeapp.android.apiDemos.Views.ButtonsPage;
-import nativeapp.android.apiDemos.Views.RatingBarPage;
-import nativeapp.android.apiDemos.Views.SearchViewActionBarPage;
-import nativeapp.android.apiDemos.Views.SearchViewAlwaysExpandedPage;
-import nativeapp.android.apiDemos.Views.SearchViewFilterPage;
-import nativeapp.android.apiDemos.Views.SearchViewPage;
-import nativeapp.android.apiDemos.Views.SeekBarPage;
-import nativeapp.android.apiDemos.Views.TextFieldsPage;
-import nativeapp.android.apiDemos.Views.ViewsPage;
+import nativeapp.android.apiDemos.animation.AnimationPage;
+import nativeapp.android.apiDemos.animation.CheckboxesPage;
+import nativeapp.android.apiDemos.app.ActionBarDisplayOptionsPage;
+import nativeapp.android.apiDemos.app.ActionBarPage;
+import nativeapp.android.apiDemos.app.ActionBarUsagePage;
+import nativeapp.android.apiDemos.app.AppPage;
+import nativeapp.android.apiDemos.app.NotificationPage;
+import nativeapp.android.apiDemos.app.StatusBarPage;
+import nativeapp.android.apiDemos.views.ButtonsPage;
+import nativeapp.android.apiDemos.views.RatingBarPage;
+import nativeapp.android.apiDemos.views.SearchViewActionBarPage;
+import nativeapp.android.apiDemos.views.SearchViewAlwaysExpandedPage;
+import nativeapp.android.apiDemos.views.SearchViewFilterPage;
+import nativeapp.android.apiDemos.views.SearchViewPage;
+import nativeapp.android.apiDemos.views.SeekBarPage;
+import nativeapp.android.apiDemos.views.TextFieldsPage;
+import nativeapp.android.apiDemos.views.ViewsPage;
 
 @JApp(appPackage = "io.appium.android.apis", appActivity = "io.appium.android.apis.ApiDemos")
 public class ApiDemosApp {

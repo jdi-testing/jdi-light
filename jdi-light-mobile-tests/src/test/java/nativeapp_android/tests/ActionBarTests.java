@@ -1,9 +1,9 @@
 package nativeapp_android.tests;
 
-import nativeapp.android.apiDemos.App.ActionBarDisplayOptionsPage;
-import nativeapp.android.apiDemos.App.ActionBarPage;
-import nativeapp.android.apiDemos.App.ActionBarUsagePage;
-import nativeapp.android.apiDemos.App.AppPage;
+import nativeapp.android.apiDemos.app.ActionBarDisplayOptionsPage;
+import nativeapp.android.apiDemos.app.ActionBarPage;
+import nativeapp.android.apiDemos.app.ActionBarUsagePage;
+import nativeapp.android.apiDemos.app.AppPage;
 import nativeapp.android.apiDemos.IndexPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.Test;

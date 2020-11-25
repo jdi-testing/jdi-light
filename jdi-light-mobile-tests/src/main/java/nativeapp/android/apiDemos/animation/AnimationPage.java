@@ -1,4 +1,4 @@
-package nativeapp.android.apiDemos.Animation;
+package nativeapp.android.apiDemos.animation;
 
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
