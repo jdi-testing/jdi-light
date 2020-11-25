@@ -6,9 +6,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static nativeapp.android.apiDemos.Animation.AnimationPage.*;
-import static nativeapp.android.apiDemos.Animation.CheckboxesPage.*;
-import static nativeapp.android.apiDemos.IndexPage.*;
+import static nativeapp.android.apidemos.animation.AnimationPage.*;
+import static nativeapp.android.apidemos.animation.CheckboxesPage.*;
+import static nativeapp.android.apidemos.IndexPage.*;
 
 
 public class CheckboxTests extends ApiDemosTestInit {
