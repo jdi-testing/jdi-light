@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.epam.pages.HtmlMobilePage.radioButtons;
-import static io.github.epam.sections.HtmlMobileElements.htmlMobileElements;
+import static io.github.epam.sections.HtmlMobileElements.htmlMenu;
 import static io.github.epam.sections.LeftMenu.leftMenu;
 import static io.github.epam.steps.Preconditions.shouldBeLoggedIn;
 
@@ -15,7 +15,7 @@ public class RadioButtonsTests extends StaticTestsInit {
     public void before() {
         shouldBeLoggedIn();
         leftMenu.click();
-        htmlMobileElements.click();
+        htmlMenu.click();
     }
 
     @Test
