@@ -19,4 +19,7 @@ public class HtmlMobilePage extends WebPage {
 
     @FindBy(css = "#name")
     public static TextField nameArea;
+
+    @FindBy(xpath = "//input[@name='checks-group']/..")
+    public UIElement checkList;
 }
