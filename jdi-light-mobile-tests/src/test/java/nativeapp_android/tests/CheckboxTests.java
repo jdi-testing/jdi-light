@@ -20,8 +20,8 @@ public class CheckboxTests extends ApiDemosTestInit {
 
     @BeforeMethod
     public void initSteps() {
-        animationPage.click();
-        layoutAnimationsButton.click();
+        animationPage.tap();
+        layoutAnimationsButton.tap();
     }
 
     @Test
