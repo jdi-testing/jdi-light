@@ -8,7 +8,6 @@ import static nativeapp.android.apidemos.IndexPage.viewsPage;
 import static nativeapp.android.apidemos.views.ExpandableListPage.arnoldName;
 import static nativeapp.android.apidemos.views.ExpandableListPage.catNames;
 import static nativeapp.android.apidemos.views.ExpandableListPage.child1;
-import static nativeapp.android.apidemos.views.ExpandableListPage.child1odd;
 import static nativeapp.android.apidemos.views.ExpandableListPage.customAdapter;
 import static nativeapp.android.apidemos.views.ExpandableListPage.dogNames;
 import static nativeapp.android.apidemos.views.ExpandableListPage.fishNames;
