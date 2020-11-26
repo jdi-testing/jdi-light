@@ -5,7 +5,9 @@ import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static nativeapp.android.apidemos.IndexPage.*;
-import static nativeapp.android.apiDemos.TabsPage.*;
+import static nativeapp.android.apidemos.views.TabsPage.scrollableButton;
+import static nativeapp.android.apidemos.views.TabsPage.tabBar;
+import static nativeapp.android.apidemos.views.TabsPage.tabContent;
 import static nativeapp.android.apidemos.views.ViewsPage.tabsPage;
 
 public class TabBarTests extends ApiDemosTestInit {

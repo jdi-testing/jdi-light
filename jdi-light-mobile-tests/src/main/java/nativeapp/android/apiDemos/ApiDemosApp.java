@@ -16,6 +16,7 @@ import nativeapp.android.apidemos.views.SearchViewAlwaysExpandedPage;
 import nativeapp.android.apidemos.views.SearchViewFilterPage;
 import nativeapp.android.apidemos.views.SearchViewPage;
 import nativeapp.android.apidemos.views.SeekBarPage;
+import nativeapp.android.apidemos.views.TabsPage;
 import nativeapp.android.apidemos.views.TextFieldsPage;
 import nativeapp.android.apidemos.views.ViewsPage;
 
@@ -57,5 +58,5 @@ public class ApiDemosApp {
     public static ActionBarUsagePage actionBarUsagePage;
 
     public static ActionBarDisplayOptionsPage actionBarDisplayOptionsPage;
-    public static nativeapp.android.apiDemos.TabsPage tabsPage;
+    public static TabsPage tabsPage;
 }
