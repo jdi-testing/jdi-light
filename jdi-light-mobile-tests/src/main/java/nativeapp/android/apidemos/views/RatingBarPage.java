@@ -1,4 +1,4 @@
-package nativeapp.android.apidemos;
+package nativeapp.android.apidemos.views;
 
 import com.epam.jdi.light.mobile.elements.common.Text;
 import com.epam.jdi.light.mobile.elements.common.app.android.RatingBar;

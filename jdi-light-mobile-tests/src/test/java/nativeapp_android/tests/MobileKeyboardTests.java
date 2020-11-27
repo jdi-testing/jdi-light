@@ -6,7 +6,7 @@ import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import nativeapp.android.apidemos.TextFieldsPage;
-import nativeapp.android.apidemos.ViewsPage;
+import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

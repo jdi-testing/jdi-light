@@ -5,10 +5,10 @@ import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.*;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static nativeapp.android.apidemos.AppPage.*;
+import static nativeapp.android.apidemos.app.AppPage.*;
 import static nativeapp.android.apidemos.IndexPage.*;
-import static nativeapp.android.apidemos.NotificationPage.*;
-import static nativeapp.android.apidemos.StatusBarPage.*;
+import static nativeapp.android.apidemos.app.NotificationPage.*;
+import static nativeapp.android.apidemos.app.StatusBarPage.*;
 
 public class StatusBarTests extends ApiDemosTestInit {
 

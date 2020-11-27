@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.mobile.elements.common.MobileKeyboard.pressKey;
 import static nativeapp.android.apidemos.DateWidgetsPage.*;
 import static nativeapp.android.apidemos.IndexPage.*;
-import static nativeapp.android.apidemos.ViewsPage.*;
+import static nativeapp.android.apidemos.views.ViewsPage.*;
 import static nativeapp.android.apidemos.RadialPickerPage.*;
 import static nativeapp.android.apidemos.DatePickerPage.*;
 import static nativeapp.android.apidemos.PickerPage.*;

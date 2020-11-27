@@ -2,8 +2,8 @@ package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import nativeapp.android.apidemos.IndexPage;
-import nativeapp.android.apidemos.RatingBarPage;
-import nativeapp.android.apidemos.ViewsPage;
+import nativeapp.android.apidemos.views.RatingBarPage;
+import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
