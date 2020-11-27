@@ -12,15 +12,16 @@ public class TooltipsTest extends ApiDemosTestInit {
 
     @Test
     public void tooltipTests() {
-        IndexPage.viewsPage.click();
+        IndexPage.viewsPage.tap();
         clickOnElementInList(ViewsPage.galleryPage);
-        PhotosPage.photoButton.click();
+        PhotosPage.photoButton.tap();
         //getDriver().findElement(MobileBy.AccessibilityId("1. Photos")).click();
-        PhotosPage.photo.click();
+        PhotosPage.photo.longPress();
         //PhotosPage.photo.get(0).click();
         //getDriver().findElements(MobileBy.xpath("//android.widget.ImageView")).get(0).click();
         PhotosPage.tooltip.isVisible();
-        PhotosPage.tooltip.is().text("0");
+        PhotosPage.tooltip.getText().equalsIgnoreCase("Testing");
+        PhotosPage.tooltip.core().longPress();
         //System.out.println(getDriver().findElement(MobileBy.xpath("//*[@class='android.widget.Toast']")).getText());
     }
 

@@ -14,6 +14,6 @@ public class PhotosPage {
     @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.Gallery/android.widget.ImageView[1]")
     public static MobileAppUIElement photo;
 
-    @MobileFindBy(xpath = "//*[@class='android.widget.Toast']")
+    @MobileFindBy(xpath = "//*[@class='android.widget.TextView']")
     public static Tooltip tooltip;
 }
