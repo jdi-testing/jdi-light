@@ -1,7 +1,8 @@
 package nativeapp.contacts;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
+import com.epam.jdi.light.mobile.elements.common.app.ios.TextField;
+
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 
 public class CreateNewContact {

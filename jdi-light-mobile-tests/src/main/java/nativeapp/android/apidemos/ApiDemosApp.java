@@ -10,6 +10,10 @@ import nativeapp.android.apidemos.app.AppPage;
 import nativeapp.android.apidemos.app.NotificationPage;
 import nativeapp.android.apidemos.app.StatusBarPage;
 import nativeapp.android.apidemos.views.ButtonsPage;
+import nativeapp.android.apidemos.views.DatePickerPage;
+import nativeapp.android.apidemos.views.DateWidgetsPage;
+import nativeapp.android.apidemos.views.PickerPage;
+import nativeapp.android.apidemos.views.RadialPickerPage;
 import nativeapp.android.apidemos.views.ExpandableListPage;
 import nativeapp.android.apidemos.views.RatingBarPage;
 import nativeapp.android.apidemos.views.SearchViewActionBarPage;
@@ -62,6 +66,14 @@ public class ApiDemosApp {
 
     public static ActionBarDisplayOptionsPage actionBarDisplayOptionsPage;
 
+    public static DateWidgetsPage dateWidgetsPage;
+
+    public static DatePickerPage datePickerPage;
+
+    public static RadialPickerPage radialPickerPage;
+
+    public static PickerPage pickerPage;
+
     public static FragmentPage fragmentPage;
 
     public static ContextMenuPage contextMenuPage;
@@ -73,5 +85,5 @@ public class ApiDemosApp {
     public static ExpandableListPage expandableListPage;
 
     public static TabsPage tabsPage;
-    
+
 }
