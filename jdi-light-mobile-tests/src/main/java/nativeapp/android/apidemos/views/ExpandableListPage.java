@@ -41,11 +41,4 @@ public class ExpandableListPage {
 
     @MobileFindBy(xpath = "//android.widget.TextView[@text='Child 1']")
     public static Button child1;
-
-    @MobileFindBy(xpath = "//android.widget.TextView[@text='This child is odd'][1]")
-    public static Button child1odd;
-
-
-
-
 }
