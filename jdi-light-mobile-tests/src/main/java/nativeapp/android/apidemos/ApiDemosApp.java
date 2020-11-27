@@ -10,12 +10,17 @@ import nativeapp.android.apidemos.app.AppPage;
 import nativeapp.android.apidemos.app.NotificationPage;
 import nativeapp.android.apidemos.app.StatusBarPage;
 import nativeapp.android.apidemos.views.ButtonsPage;
+import nativeapp.android.apidemos.views.DatePickerPage;
+import nativeapp.android.apidemos.views.DateWidgetsPage;
+import nativeapp.android.apidemos.views.PickerPage;
+import nativeapp.android.apidemos.views.RadialPickerPage;
 import nativeapp.android.apidemos.views.RatingBarPage;
 import nativeapp.android.apidemos.views.SearchViewActionBarPage;
 import nativeapp.android.apidemos.views.SearchViewAlwaysExpandedPage;
 import nativeapp.android.apidemos.views.SearchViewFilterPage;
 import nativeapp.android.apidemos.views.SearchViewPage;
 import nativeapp.android.apidemos.views.SeekBarPage;
+import nativeapp.android.apidemos.views.TextFieldsPage;
 import nativeapp.android.apidemos.views.ViewsPage;
 
 @JApp(appPackage = "io.appium.android.apis", appActivity = "io.appium.android.apis.ApiDemos")
@@ -56,6 +61,7 @@ public class ApiDemosApp {
     public static ActionBarUsagePage actionBarUsagePage;
 
     public static ActionBarDisplayOptionsPage actionBarDisplayOptionsPage;
+
     public static DateWidgetsPage dateWidgetsPage;
 
     public static DatePickerPage datePickerPage;
