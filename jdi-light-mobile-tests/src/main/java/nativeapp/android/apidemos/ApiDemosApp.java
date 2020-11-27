@@ -17,7 +17,6 @@ import nativeapp.android.apidemos.views.SearchViewAlwaysExpandedPage;
 import nativeapp.android.apidemos.views.SearchViewFilterPage;
 import nativeapp.android.apidemos.views.SearchViewPage;
 import nativeapp.android.apidemos.views.SeekBarPage;
-import nativeapp.android.apidemos.views.TabsPage;
 import nativeapp.android.apidemos.views.TextFieldsPage;
 import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp.android.apidemos.app.FragmentPage;
@@ -73,6 +72,5 @@ public class ApiDemosApp {
     public static ExpandableListPage expandableListPage;
 
     public static TabsPage tabsPage;
-
 
 }
