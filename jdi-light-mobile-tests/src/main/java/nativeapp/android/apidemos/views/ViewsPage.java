@@ -31,4 +31,8 @@ public class ViewsPage {
 
     @MobileFindBy(accessibilityId = "Spinner")
     public static Button spinnerPage;
+
+    @MobileFindBy(accessibilityId = "Expandable Lists")
+    public static Button expandableList;
+
 }
