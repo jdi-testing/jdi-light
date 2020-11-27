@@ -1,6 +1,5 @@
-package nativeapp.android.apiDemos;
+package nativeapp.android.apidemos;
 
-import com.epam.jdi.light.mobile.elements.common.app.android.SeekBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.JApp;
 
 @JApp(appPackage = "io.appium.android.apis", appActivity = "io.appium.android.apis.ApiDemos")
