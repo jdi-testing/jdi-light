@@ -1,20 +1,27 @@
 package nativeapp_android.tests;
 
 import nativeapp_android.ApiDemosTestInit;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static nativeapp.android.apiDemos.AnimationPage.*;
-import static nativeapp.android.apiDemos.CheckboxesPage.*;
-import static nativeapp.android.apiDemos.IndexPage.*;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static nativeapp.android.apidemos.animation.AnimationPage.*;
+import static nativeapp.android.apidemos.animation.CheckboxesPage.*;
+import static nativeapp.android.apidemos.IndexPage.*;
 
 
 public class CheckboxTests extends ApiDemosTestInit {
 
+    @BeforeClass
+    public void beforeClass() {
+        logger.toLog("Run CheckboxTests");
+    }
+
     @BeforeMethod
     public void initSteps() {
-        animationPage.click();
-        layoutAnimationsButton.click();
+        animationPage.tap();
+        layoutAnimationsButton.tap();
     }
 
     @Test
