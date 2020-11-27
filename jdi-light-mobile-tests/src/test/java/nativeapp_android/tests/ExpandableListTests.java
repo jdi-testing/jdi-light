@@ -21,17 +21,17 @@ public class ExpandableListTests extends ApiDemosTestInit {
 
     @BeforeMethod
     public void initSteps() {
-        viewsPage.click();
-        expandableList.click();
+        viewsPage.tap();
+        expandableList.tap();
     }
 
     @Test
     public void customAdapterTest() {
-        customAdapter.click();
-        peopleNames.click();
-        dogNames.click();
-        catNames.click();
-        fishNames.click();
+        customAdapter.tap();
+        peopleNames.tap();
+        dogNames.tap();
+        catNames.tap();
+        fishNames.tap();
 
         arnoldName.is().enabled();
         arnoldName.is().displayed();
@@ -44,11 +44,11 @@ public class ExpandableListTests extends ApiDemosTestInit {
 
     @Test
     public void simpleAdapterTest(){
-        simpleAdapter.click();
-        group0.click();
+        simpleAdapter.tap();
+        group0.tap();
         child1.is().enabled();
         child1.is().displayed();
         child1.is().text("Child 1");
-        group0.click();
+        group0.tap();
     }
 }
