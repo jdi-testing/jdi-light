@@ -21,4 +21,5 @@ public class TabBarTest  extends IosApplicationInit {
         tabBar.tapBarButton("Exit");
         tabBar.is().selected("Exit");
     }
+
 }
