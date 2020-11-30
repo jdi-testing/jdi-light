@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
         <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JDI Light Mobile iOS Native Apps Tests" thread-count="1">
-    <test name="Calendars app tests">
+
+    <test name="Ios native app tests">
+        <classes>
+            <class name="epamiostestapp.tests.SegmentedContolTest"></class>
+        </classes>
+    </test>
+<!--    <test name="Calendars app tests">
         <classes>
             <class name="nativeapp_ios.tests.CalendarAppTests"/>
         </classes>
@@ -30,5 +36,5 @@
         <classes>
             <class name="nativeapp_ios.tests.PhotosAppTests"/>
         </classes>
-    </test>
+    </test> -->
 </suite>
