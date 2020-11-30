@@ -9,21 +9,7 @@ import nativeapp.android.apidemos.app.ActionBarUsagePage;
 import nativeapp.android.apidemos.app.AppPage;
 import nativeapp.android.apidemos.app.NotificationPage;
 import nativeapp.android.apidemos.app.StatusBarPage;
-import nativeapp.android.apidemos.views.ButtonsPage;
-import nativeapp.android.apidemos.views.DatePickerPage;
-import nativeapp.android.apidemos.views.DateWidgetsPage;
-import nativeapp.android.apidemos.views.PickerPage;
-import nativeapp.android.apidemos.views.RadialPickerPage;
-import nativeapp.android.apidemos.views.ExpandableListPage;
-import nativeapp.android.apidemos.views.RatingBarPage;
-import nativeapp.android.apidemos.views.SearchViewActionBarPage;
-import nativeapp.android.apidemos.views.SearchViewAlwaysExpandedPage;
-import nativeapp.android.apidemos.views.SearchViewFilterPage;
-import nativeapp.android.apidemos.views.SearchViewPage;
-import nativeapp.android.apidemos.views.SeekBarPage;
-import nativeapp.android.apidemos.views.TabsPage;
-import nativeapp.android.apidemos.views.TextFieldsPage;
-import nativeapp.android.apidemos.views.ViewsPage;
+import nativeapp.android.apidemos.views.*;
 import nativeapp.android.apidemos.app.FragmentPage;
 import nativeapp.android.apidemos.app.ContextMenuPage;
 
@@ -85,5 +71,7 @@ public class ApiDemosApp {
     public static ExpandableListPage expandableListPage;
 
     public static TabsPage tabsPage;
+
+    public static PopupPage popupPage;
 
 }
