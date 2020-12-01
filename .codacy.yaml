@@ -4,5 +4,3 @@ exclude_paths:
   - '*.md'
   - '*.ps1'
   - '.idea/**'
-  - '.jdi-light-html/**
-  - '.jdi-light-html-tests/**
