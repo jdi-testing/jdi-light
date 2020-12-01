@@ -4,3 +4,6 @@ exclude_paths:
   - '.github/**'
   - '*.md'
   - '*.ps1'
+  - '.idea/**'
+  - '.jdi-light-html/**'
+  - '.jdi-light-html-tests/**'
