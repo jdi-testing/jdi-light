@@ -19,4 +19,7 @@ public class IndexPage {
 
     @MobileFindBy(accessibilityId = "1. Incremental")
     public static Button goToProgressBarPageStageTwo;
+
+    @MobileFindBy(accessibilityId = "Seek Bar")
+    public static Button seekBarPage;
 }

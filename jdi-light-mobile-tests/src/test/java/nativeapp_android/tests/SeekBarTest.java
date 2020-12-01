@@ -1,43 +1,37 @@
 package nativeapp_android.tests;
 
-import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import nativeapp.android.apidemos.IndexPage;
 import nativeapp.android.apidemos.views.SeekBarPage;
-import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class SeekBarTest extends ApiDemosTestInit {
 
-    @BeforeClass
-    public void beforeClass() {
-        logger.toLog("Run SeekBarTest");
+    @BeforeMethod
+    public void init() {
+        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Views']");
+        IndexPage.viewsPage.click();
+        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Seek Bar']");
+        IndexPage.seekBarPage.click();
     }
 
     @Test
-    public void seekBarTests() throws InterruptedException {
-        IndexPage.viewsPage.click();
-        clickOnElementInList(ViewsPage.seekBarPage);
-        SeekBarPage.seekBar.setMinimumValue();
-        SeekBarPage.seekBar.is().text("0.0");
-        SeekBarPage.seekBar.setMaximumValue();
-        SeekBarPage.seekBar.is().text("100.0");
+    public void setMinValue() {
         SeekBarPage.seekBar.setSliderValue("20");
         SeekBarPage.seekBar.is().text("20.0");
     }
 
-    public void clickOnElementInList(Button element) {
-        while (true) {
-            try {
-                element.click();
-                return;
-            } catch (RuntimeException e) {
-                MobileScreen.scrollDown(1000);
-            }
-        }
+    @Test
+    public void setMaxValue() {
+        SeekBarPage.seekBar.setMaximumValue();
+        SeekBarPage.seekBar.is().text("100.0");
+    }
+
+    @Test
+    public void setSliderValue() {
+        SeekBarPage.seekBar.setMinimumValue();
+        SeekBarPage.seekBar.is().text("0.0");
     }
 }
