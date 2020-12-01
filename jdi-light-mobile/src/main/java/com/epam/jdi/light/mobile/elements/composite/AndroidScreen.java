@@ -3,6 +3,7 @@ package com.epam.jdi.light.mobile.elements.composite;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.HasAndroidDeviceDetails;
 
+
 import java.awt.*;
 import java.util.Map;
 
@@ -47,11 +48,11 @@ public class AndroidScreen extends MobileScreen {
         }
     }
 
-    public static void openStatusBar() {
+    public static void openNotificationPanel() {
         executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.openNotifications());
     }
 
-    public static void closeStatusBar() {
+    public static void closeNotificationPanel() {
         executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.navigate().back());
     }
 

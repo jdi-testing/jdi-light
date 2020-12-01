@@ -15,4 +15,5 @@ public abstract class MobileAppBaseElement<A extends UIAssert<?,?>> extends UIBa
             mobileAppUIElement = new MobileAppUIElement();
         return mobileAppUIElement;
     }
+
 }

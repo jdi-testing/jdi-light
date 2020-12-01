@@ -22,7 +22,7 @@ public class MobileDeviceTests {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         initMobile(ClockApp.class);
-        logger.toLog("Run Application Tests");
+        logger.toLog("Run MobileDevice Tests");
         AppManager.launchApp();
     }
 

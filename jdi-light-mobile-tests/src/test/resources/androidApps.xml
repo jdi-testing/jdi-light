@@ -3,18 +3,27 @@
 <suite name="JDI Light Mobile Android Native Apps Tests" thread-count="1">
     <test name="Android native app tests">
         <classes>
-            <class name="nativeapp_android.tests.AlarmAppTests"></class>
+            <class name="nativeapp_android.tests.ActionBarTests"></class>
+            <class name="nativeapp_android.tests.ActivityTests"></class>
             <class name="nativeapp_android.tests.CheckboxTests"></class>
             <class name="nativeapp_android.tests.ClipBoardTests"></class>
+            <class name="nativeapp_android.tests.ContextMenuTests"></class>
+            <class name="nativeapp_android.tests.ExpandableListTests"></class>
             <class name="nativeapp_android.tests.MobileDeviceTests"></class>
             <class name="nativeapp_android.tests.MobileFileManagerTests"></class>
             <class name="nativeapp_android.tests.MobileKeyboardTests"></class>
+            <class name="nativeapp_android.tests.PickersTests"></class>
+            <class name="nativeapp_android.tests.ProgressBarTests"></class>
             <class name="nativeapp_android.tests.RatingBarTests"></class>
             <class name="nativeapp_android.tests.SearchViewTests"></class>
+            <class name="nativeapp_android.tests.SeekBarTest"></class>
             <class name="nativeapp_android.tests.SettingsAppTests"></class>
+            <class name="nativeapp_android.tests.SpinnerTest"></class>
             <class name="nativeapp_android.tests.StatusBarTests"></class>
+            <class name="nativeapp_android.tests.TabBarTests"></class>
             <class name="nativeapp_android.tests.TextFieldTests"></class>
             <class name="nativeapp_android.tests.ToggleButtonTests"></class>
+
         </classes>
     </test>
 </suite>
