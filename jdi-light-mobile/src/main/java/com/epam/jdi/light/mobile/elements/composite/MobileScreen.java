@@ -138,7 +138,7 @@ public class MobileScreen {
     }
 
     public static UIAssert scrollToElementInList(Button element) {
-        int shift = getHeight() /2  - 1 ;
+        int shift = getHeight()/2-1;
         String oldPage = WebDriverFactory.getDriver().getPageSource();
         while (true) {
             try {
