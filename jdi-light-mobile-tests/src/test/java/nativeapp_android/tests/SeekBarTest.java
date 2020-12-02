@@ -1,5 +1,6 @@
 package nativeapp_android.tests;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import nativeapp.android.apidemos.IndexPage;
@@ -21,7 +22,8 @@ public class SeekBarTest extends ApiDemosTestInit {
     @Test
     public void seekBarTests() throws InterruptedException {
         IndexPage.viewsPage.click();
-        clickOnElementInList(ViewsPage.seekBarPage);
+        MobileScreen.scrollToElementInList(ViewsPage.seekBarPage).visible();
+        ViewsPage.seekBarPage.click();
         SeekBarPage.seekBar.setMinimumValue();
         SeekBarPage.seekBar.is().text("0.0");
         SeekBarPage.seekBar.setMaximumValue();
@@ -30,14 +32,11 @@ public class SeekBarTest extends ApiDemosTestInit {
         SeekBarPage.seekBar.is().text("20.0");
     }
 
-    public void clickOnElementInList(Button element) {
-        while (true) {
-            try {
-                element.click();
-                return;
-            } catch (RuntimeException e) {
-                MobileScreen.scrollDown(1000);
-            }
-        }
+    @Test
+    public void scrollTests() {
+        IndexPage.viewsPage.click();
+        MobileScreen.scrollToBottom();
+        MobileScreen.scrollToTop();
+        MobileScreen.scrollToElementInList(IndexPage.viewsPage).notAppear();
     }
 }
