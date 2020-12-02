@@ -3,8 +3,7 @@ package epamiostestapp.tests;
 import epamiostestapp.IosApplicationInit;
 import org.testng.annotations.Test;
 
-import static nativeapp.ios.epamiostestapp.ContextMenuPage.contextMenu;
-import static nativeapp.ios.epamiostestapp.ContextMenuPage.popUpMenu;
+import static nativeapp.ios.epamiostestapp.ContextMenuPage.*;
 import static nativeapp.ios.epamiostestapp.MainPage.menuContextMenu;
 
 public class ContextMenuTest extends IosApplicationInit {
@@ -12,9 +11,17 @@ public class ContextMenuTest extends IosApplicationInit {
     @Test
     public void contextMenuTest(){
         menuContextMenu.tap();
-        contextMenu.longPress();
-        popUpMenu.tapBarButton("one");
 
-        contextMenu.is().text("one");
+        contextMenu.longPress();
+        optionOne.tap();
+        optionOne.is().displayed();
+
+        contextMenu.longPress();
+        optionTwo.tap();
+        optionTwo.is().displayed();
+
+        contextMenu.longPress(2);
+        optionThree.tap();
+        optionThree.is().displayed();
     }
 }
