@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.formMatSelect;
 import static io.github.com.pages.sections.SelectSection.formMatSelectConfirm;
 import static org.hamcrest.Matchers.hasItems;
@@ -24,7 +23,7 @@ public class FormMatSelectTests extends TestsSelectBase {
 
     @Test
     public void checkOptionCanBeSelectedByIndexAndConfirmMessageWillAppear() {
-        formMatSelect.select(ELEMENT.startIndex + 2);
+        formMatSelect.select(3);
         formMatSelect.is().selected(TACOS);
         formMatSelectConfirm.assertThat().text("Selected food: tacos-2");
     }

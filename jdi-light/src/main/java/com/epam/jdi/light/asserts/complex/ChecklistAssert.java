@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class ChecklistAssert extends UISelectAssert<ChecklistAssert, IsChecklist> {
+
     /**
      * Match passed value with selected option
      * @param condition to compare

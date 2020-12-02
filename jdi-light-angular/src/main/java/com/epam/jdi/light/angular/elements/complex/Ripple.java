@@ -245,46 +245,48 @@ public class Ripple extends UIBaseElement<RippleAssert> {
     }
 
     protected UIElement container() {
-        return new UIElement(By.xpath(String.format(containerLocator, core().locator.printLocator()
-            .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
+        return new UIElement(By.xpath(String.format(containerLocator,
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getRipple() {
-        return new UIElement(By.xpath(String.format(rippleLocator, core().locator.printLocator()
-            .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
+        return new UIElement(By.xpath(String.format(rippleLocator,
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement centeredCheckbox() {
         return new UIElement(By.xpath(String.format(centeredCheckboxLocator,
-                                                    core().locator.printLocator().replace(smartSharp, "")
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement disabledCheckbox() {
         return new UIElement(By.xpath(String.format(disabledCheckboxLocator,
-                                                    core().locator.printLocator().replace(smartSharp, "")
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement unboundedCheckbox() {
         return new UIElement(By.xpath(String.format(unboundedCheckboxLocator,
-                                                    core().locator.printLocator().replace(smartSharp, "")
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getRadiusInput() {
         return new UIElement(By.xpath(String.format(radiusLocator,
-                                                    core().locator.printLocator().replace(smartSharp, "")
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getColorInput() {
         return new UIElement(By.xpath(String.format(colorLocator,
-                                                    core().locator.printLocator().replace(smartSharp, "")
+                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected Point getOutsidePoint() {
-        return new Point(core().getRect().getWidth() + 2, core().getRect().getHeight() + 2);
+        return new Point(uiElement.core().getRect().getWidth() + 2, uiElement.core().getRect().getHeight() + 2);
     }
 }

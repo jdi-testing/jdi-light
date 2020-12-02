@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -13,7 +14,7 @@ public class DialogUnitTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         dialog.show();
     }
 
@@ -43,5 +44,12 @@ public class DialogUnitTests extends TestsInit {
         dialog.sendKeysToAnswerFormField("Lion");
         dialog.submitAnswer();
         assertTrue(dialog.answerText("Lion"));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if(dialog.isOpened()){
+            dialog.close();
+        }
     }
 }

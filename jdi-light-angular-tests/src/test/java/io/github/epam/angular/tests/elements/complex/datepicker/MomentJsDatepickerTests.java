@@ -1,26 +1,25 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.momentJsDatepicker;
 
 public class MomentJsDatepickerTests extends TestsDatepickerBase {
+    private final String momentDatepicker = "Moment.js datepicker";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
         momentJsDatepicker.show();
         momentJsDatepicker.clear();
     }
 
     @Test
     public void checkLabelValue() {
-        String momentDatepicker = "Moment.js datepicker";
         momentJsDatepicker.label().has().value(momentDatepicker);
     }
 
@@ -58,5 +57,15 @@ public class MomentJsDatepickerTests extends TestsDatepickerBase {
     public void checkSendKeysDate() {
         momentJsDatepicker.sendKeys("11/03/2008");
         momentJsDatepicker.is().selectedDate(LocalDate.of(2008, 11, 3));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (momentJsDatepicker.isExpanded()) {
+            momentJsDatepicker.collapse();
+        }
+        if (!momentJsDatepicker.isEmpty()) {
+            momentJsDatepicker.clear();
+        }
     }
 }

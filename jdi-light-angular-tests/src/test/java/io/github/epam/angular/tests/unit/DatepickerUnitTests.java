@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -25,7 +26,7 @@ public class DatepickerUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         basicDatepicker.show();
     }
 
@@ -441,5 +442,24 @@ public class DatepickerUnitTests extends TestsInit {
         inputChangeEventsDatepicker.setText("wrong date");
         inputChangeEventsDatepicker.clear();
         assertTrue(inputChangeEventsDatepicker.isLastChangeEvent(changeEvent));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (basicDatepicker.isExpanded()) {
+            basicDatepicker.collapse();
+        }
+        if (startDateDatepicker.isExpanded()) {
+            startDateDatepicker.collapse();
+        }
+        if (openMethodDatepicker.isExpanded()) {
+            openMethodDatepicker.collapse();
+        }
+        if (!basicDatepicker.isEmpty()) {
+            basicDatepicker.clear();
+        }
+        if (!differentLocaleDatepicker.isEmpty()) {
+            differentLocaleDatepicker.clear();
+        }
     }
 }

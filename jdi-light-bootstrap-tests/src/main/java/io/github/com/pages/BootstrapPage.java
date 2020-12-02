@@ -24,14 +24,20 @@ import io.github.com.sections.Slide;
 public class BootstrapPage extends WebPage {
     public static UIElement inputGroupWrap, inputGroupNowrap;
     public static Badge badge;
-    public static Button redButton, doubleButton, disabledButton, increaseProgress,
-        decreaseProgress, resetProgress;
-    public static Progress progressbar, multiProgressbar;
+    public static Button redButton;
+    public static Button doubleButton;
+    public static Button disabledButton;
+    public static Button increaseProgress;
+    public static Button decreaseProgress;
+    public static Button resetProgress;
+    public static Progress progressbar;
+    public static Progress multiProgressbar;
     public static Breadcrumb breadcrumb;
     public static Checkbox acceptCheckbox;
     @UI(".checkbox-input") public static Checklist checkNumbers;
     public static RadioButtons airClassOptions;
-    public static Switch switcher, disabledSwitcher;
+    public static Switch switcher;
+    public static Switch disabledSwitcher;
     public static ButtonWithTooltip buttonWithTooltip;
     public static Button simpleToastButton;
     @WaitAfterAction(1)

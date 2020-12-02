@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.logger.AllureLogger;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
 import org.openqa.selenium.OutputType;
@@ -32,7 +33,6 @@ import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
-import static com.epam.jdi.light.logger.AllureLogger.createAttachment;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -60,6 +60,8 @@ public class WebPage extends DriverBase implements PageObject {
     public String checkUrl;
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = NONE;
+
+    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
 
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this)
@@ -177,11 +179,11 @@ public class WebPage extends DriverBase implements PageObject {
     }
 
     public StringCheckType url() {
-        return new StringCheckType(WebPage::getUrl, checkUrl, "url");
+        return new StringCheckType(driver()::getCurrentUrl, checkUrl, "url");
     }
 
     public StringCheckType title() {
-        return new StringCheckType(WebPage::getTitle, title, "title");
+        return new StringCheckType(driver()::getTitle, title, "title");
     }
 
     /**
@@ -228,7 +230,7 @@ public class WebPage extends DriverBase implements PageObject {
             Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
-            throw exception("Page '%s' is not opened: %s", getName(), format(result, getUrl(), checkUrl));
+            throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getCurrentUrl(), checkUrl));
         result = Switch(checkTitleType).get(
             Value(NONE, ""),
             Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
@@ -310,7 +312,6 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction(value = "Reload current page", isAssert = true)
     public static void refresh() {
         getDriver().navigate().refresh();
-        logger.info("Page url: " + getUrl());
     }
     public static void reload() { refresh(); }
 
@@ -320,7 +321,6 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction("Go back to previous page")
     public static void back() {
         getDriver().navigate().back();
-        logger.info("Page url: " + getUrl());
     }
 
     /**
@@ -329,7 +329,6 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction("Go forward to next page")
     public static void forward() {
         getDriver().navigate().forward();
-        logger.info("Page url: " + getUrl());
     }
 
     /**
@@ -520,7 +519,7 @@ public class WebPage extends DriverBase implements PageObject {
             visualWindowCheck();
         }
         if (LOGS.screenStrategy.contains(NEW_PAGE)) {
-            createAttachment(page.getName(), false);
+            AllureLogger.createAttachment(page.getName(), false);
         }
         logger.toLog("Page '" + page.getName() + "' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());
