@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
         <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JDI Light Mobile iOS Native Apps Tests" thread-count="1">
+
     <test name="Calendars app tests">
         <classes>
             <class name="nativeapp_ios.tests.CalendarAppTests"/>
@@ -8,7 +9,7 @@
     </test>
     <test name="Reminders app tests">
         <classes>
-            <class name="nativeapp_ios.tests.RemindersAppTests"/>
+            <class name="nativeapp_is.tests.RemindersAppTests"/>
         </classes>
     </test>
     <test name="Contacts app tests">
