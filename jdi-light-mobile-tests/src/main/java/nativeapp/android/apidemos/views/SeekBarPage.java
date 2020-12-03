@@ -1,4 +1,4 @@
-package nativeapp.android.apiDemos.views;
+package nativeapp.android.apidemos.views;
 
 import com.epam.jdi.light.mobile.elements.common.app.android.SeekBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;

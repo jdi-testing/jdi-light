@@ -5,8 +5,8 @@ import com.epam.jdi.light.mobile.elements.common.MobileKeyboard;
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
-import nativeapp.android.apiDemos.views.TextFieldsPage;
-import nativeapp.android.apiDemos.views.ViewsPage;
+import nativeapp.android.apidemos.views.TextFieldsPage;
+import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static nativeapp.android.apiDemos.IndexPage.viewsPage;
+import static nativeapp.android.apidemos.IndexPage.viewsPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MobileKeyboardTests extends ApiDemosTestInit {

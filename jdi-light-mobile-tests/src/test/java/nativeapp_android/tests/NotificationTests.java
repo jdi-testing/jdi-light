@@ -10,7 +10,7 @@ import org.testng.asserts.SoftAssert;
 
 import static nativeapp.android.NotifyPage.clearAllButton;
 import static nativeapp.android.NotifyPage.notification;
-import static nativeapp.android.apiDemos.app.StatusBarPage.notificationPanel;
+import static nativeapp.android.apidemos.app.StatusBarPage.notificationPanel;
 
 public class NotificationTests extends NotificationTestInit {
 
