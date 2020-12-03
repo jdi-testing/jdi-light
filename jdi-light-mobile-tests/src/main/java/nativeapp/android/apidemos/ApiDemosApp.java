@@ -74,4 +74,8 @@ public class ApiDemosApp {
 
     public static PopupPage popupPage;
 
+    public static GalleryPage galleryPage;
+
+    public static ImageSwitcherPage imageSwitcherPage;
+
 }
