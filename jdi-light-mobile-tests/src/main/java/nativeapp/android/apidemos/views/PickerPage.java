@@ -8,8 +8,4 @@ public class PickerPage {
     @MobileFindBy(id = "android:id/timePickerLayout")
     public static Picker picker;
 
-
-
-
-
 }

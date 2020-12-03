@@ -37,4 +37,10 @@ public class ViewsPage {
 
     @MobileFindBy(accessibilityId = "Date Widgets")
     public static Button dateWidgetsPage;
+
+    @MobileFindBy(accessibilityId = "Gallery")
+    public static Button galleryPage;
+
+    @MobileFindBy(accessibilityId = "ImageSwitcher")
+    public static Button imageSwitcherPage;
 }
