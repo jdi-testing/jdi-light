@@ -54,12 +54,15 @@ public class RadioButtonsTests extends ApiDemosTestInit {
 
         buttonClear.click();
         logChose.is().text("You have selected: (none)");
+
+        getItemByText("Dinner").click();
+        logChose.is().text("You have selected: 2131296401");
     }
 
     private WebElement getItemByText(String item) {
         return  getDriver().findElements(By.className("android.widget.RadioButton"))
                 .stream()
-                .filter(element -> element.getText().equals(item))
+                .filter(e -> e.getText().equals(item))
                 .findAny().get();
     }
 }
