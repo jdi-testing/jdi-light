@@ -58,6 +58,8 @@ public class ApiDemosApp {
 
     public static RadialPickerPage radialPickerPage;
 
+    public static RadioButtonsPage radioButtonsPage;
+
     public static PickerPage pickerPage;
 
     public static FragmentPage fragmentPage;
