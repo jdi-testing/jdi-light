@@ -13,7 +13,7 @@ public class ToggleButton extends MobileAppBaseElement<ToggleButtonAssert>  impl
     public boolean isOn() {
         return core().attr("checked").equals("true");
     }
-    //text().equals("ON");
+
     @JDIAction(value = "Set '{name}' to off", level = LogLevels.DEBUG)
     public void setToOff() {
         if (isOn())

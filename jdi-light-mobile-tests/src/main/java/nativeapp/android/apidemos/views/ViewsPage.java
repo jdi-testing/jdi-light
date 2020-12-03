@@ -16,7 +16,7 @@ public class ViewsPage {
 
     @MobileFindBys(@MobileFindBy(id = "android:id/list"))
     public static List<Button> buttons;
-  
+
     @MobileFindBy(accessibilityId = "Seek Bar")
     public static Button seekBarPage;
 
@@ -26,6 +26,21 @@ public class ViewsPage {
     @MobileFindBy(accessibilityId = "TextFields")
     public static Button textFieldsPage;
 
+    @MobileFindBy(accessibilityId = "Tabs")
+    public static Button tabsPage;
 
+    @MobileFindBy(accessibilityId = "Spinner")
+    public static Button spinnerPage;
 
+    @MobileFindBy(accessibilityId = "Expandable Lists")
+    public static Button expandableList;
+
+    @MobileFindBy(accessibilityId = "Date Widgets")
+    public static Button dateWidgetsPage;
+
+    @MobileFindBy(accessibilityId = "Gallery")
+    public static Button galleryPage;
+
+    @MobileFindBy(accessibilityId = "ImageSwitcher")
+    public static Button imageSwitcherPage;
 }

@@ -13,4 +13,13 @@ public class IndexPage {
 
     @MobileFindBy(accessibilityId = "App")
     public static Button appPage;
+
+    @MobileFindBy(accessibilityId = "Progress Bar")
+    public static Button goToProgressBarPageStageOne;
+
+    @MobileFindBy(accessibilityId = "1. Incremental")
+    public static Button goToProgressBarPageStageTwo;
+
+    @MobileFindBy(accessibilityId = "Popup Menu")
+    public static Button popUpMenu;
 }

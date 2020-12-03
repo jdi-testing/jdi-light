@@ -4,8 +4,7 @@ import com.epam.jdi.light.mobile.elements.common.AppManager;
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import org.testng.annotations.Test;
 
-import static io.github.epam.StaticSite.homePage;
-import static io.github.epam.StaticSite.supportPage;
+import static io.github.epam.StaticSite.*;
 import static io.github.epam.sections.Footer.aboutLink;
 import static io.github.epam.sections.Header.loginForm;
 import static io.github.epam.sections.Header.userIcon;
