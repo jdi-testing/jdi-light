@@ -3,15 +3,8 @@ package nativeapp.android.apidemos;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.JApp;
 import nativeapp.android.apidemos.animation.AnimationPage;
 import nativeapp.android.apidemos.animation.CheckboxesPage;
-import nativeapp.android.apidemos.app.ActionBarDisplayOptionsPage;
-import nativeapp.android.apidemos.app.ActionBarPage;
-import nativeapp.android.apidemos.app.ActionBarUsagePage;
-import nativeapp.android.apidemos.app.AppPage;
-import nativeapp.android.apidemos.app.NotificationPage;
-import nativeapp.android.apidemos.app.StatusBarPage;
+import nativeapp.android.apidemos.app.*;
 import nativeapp.android.apidemos.views.*;
-import nativeapp.android.apidemos.app.FragmentPage;
-import nativeapp.android.apidemos.app.ContextMenuPage;
 
 @JApp(appPackage = "io.appium.android.apis", appActivity = "io.appium.android.apis.ApiDemos")
 public class ApiDemosApp {
@@ -46,6 +39,8 @@ public class ApiDemosApp {
 
     public static StatusBarPage statusBarPage;
 
+    public static PhotosPage photosPage;
+
     public static ActionBarPage actionBarPage;
 
     public static ActionBarUsagePage actionBarUsagePage;
@@ -79,5 +74,4 @@ public class ApiDemosApp {
     public static GalleryPage galleryPage;
 
     public static ImageSwitcherPage imageSwitcherPage;
-
 }
