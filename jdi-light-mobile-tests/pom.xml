@@ -121,6 +121,7 @@
                 <artifactId>allure-maven</artifactId>
                 <version>${allure.maven}</version>
             </plugin>
+
         </plugins>
 
         <resources>
@@ -132,6 +133,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
     </build>
 
     <!-- Allure reporting config in parent-->

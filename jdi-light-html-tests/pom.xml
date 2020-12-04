@@ -45,6 +45,12 @@
             <version>6.14.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-mobile</artifactId>
+            <version>1.2.21</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
