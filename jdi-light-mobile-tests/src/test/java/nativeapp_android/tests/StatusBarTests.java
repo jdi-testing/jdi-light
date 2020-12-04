@@ -25,11 +25,6 @@ import static nativeapp.android.apidemos.app.StatusBarPage.statusBarLatestEventC
 
 public class StatusBarTests extends ApiDemosTestInit {
 
-    @BeforeClass
-    public void beforeClass() {
-        logger.toLog("Run StatusBarTests");
-    }
-
     @BeforeMethod
     public void initSteps() {
         appPage.click();

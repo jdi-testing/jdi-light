@@ -34,15 +34,10 @@ public class RatingBarTests extends ApiDemosTestInit {
         };
     }
 
-    @BeforeClass
-    public void beforeClass() {
-        logger.toLog("Run RatingBarTests");
-    }
-
     @BeforeMethod
     public void init(){
         IndexPage.viewsPage.click();
-        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc=\"Rating Bar\"]");
+        MobileScreen.scrollToElementInList(IndexPage.goToRatingBar);
         ViewsPage.ratingBarPage.click();
     }
 

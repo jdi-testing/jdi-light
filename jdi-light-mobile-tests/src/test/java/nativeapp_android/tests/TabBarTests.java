@@ -1,6 +1,7 @@
 package nativeapp_android.tests;
 
-import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
+import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
+import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,7 +16,7 @@ public class TabBarTests extends ApiDemosTestInit {
     @BeforeMethod
     public void initSteps() {
         viewsPage.click();
-        AndroidScreen.scrollDown(3000);
+        MobileScreen.scrollToElementInList(ViewsPage.tabsPage);
         tabsPage.click();
         scrollableButton.click();
     }

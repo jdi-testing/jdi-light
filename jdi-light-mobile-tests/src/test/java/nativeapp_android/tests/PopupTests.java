@@ -12,9 +12,9 @@ public class PopupTests extends ApiDemosTestInit {
 
     @BeforeMethod
     public void init() {
-        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Views']");
+        MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
         IndexPage.viewsPage.click();
-        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Popup Menu']");
+        MobileScreen.scrollToElementInList(IndexPage.goToPopupMenuPage);
         IndexPage.popUpMenu.click();
     }
 
