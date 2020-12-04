@@ -53,6 +53,8 @@ public class ApiDemosApp {
 
     public static RadialPickerPage radialPickerPage;
 
+    public static RadioButtonsPage radioButtonsPage;
+
     public static PickerPage pickerPage;
 
     public static FragmentPage fragmentPage;
@@ -68,4 +70,8 @@ public class ApiDemosApp {
     public static TabsPage tabsPage;
 
     public static PopupPage popupPage;
+
+    public static GalleryPage galleryPage;
+
+    public static ImageSwitcherPage imageSwitcherPage;
 }

@@ -2,20 +2,28 @@ package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
 import nativeapp_android.ApiDemosTestInit;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static nativeapp.android.apidemos.app.AppPage.*;
-import static nativeapp.android.apidemos.IndexPage.*;
-import static nativeapp.android.apidemos.app.NotificationPage.*;
-import static nativeapp.android.apidemos.app.StatusBarPage.*;
+import static nativeapp.android.apidemos.IndexPage.appPage;
+import static nativeapp.android.apidemos.app.AppPage.notificationPage;
+import static nativeapp.android.apidemos.app.NotificationPage.clearNotificationButton;
+import static nativeapp.android.apidemos.app.NotificationPage.happyButton;
+import static nativeapp.android.apidemos.app.NotificationPage.happyIconButton;
+import static nativeapp.android.apidemos.app.NotificationPage.statusBarButton;
+import static nativeapp.android.apidemos.app.StatusBarPage.appName;
+import static nativeapp.android.apidemos.app.StatusBarPage.title;
+import static nativeapp.android.apidemos.app.StatusBarPage.appText;
+import static nativeapp.android.apidemos.app.StatusBarPage.appIcon;
+import static nativeapp.android.apidemos.app.StatusBarPage.clearAllButton;
+import static nativeapp.android.apidemos.app.StatusBarPage.noNotifications;
+import static nativeapp.android.apidemos.app.StatusBarPage.notificationPanel;
+import static nativeapp.android.apidemos.app.StatusBarPage.statusBarLatestEventContent;
 
 public class StatusBarTests extends ApiDemosTestInit {
-
-    @BeforeClass
-    public void beforeClass() {
-        logger.toLog("Run StatusBarTests");
-    }
 
     @BeforeMethod
     public void initSteps() {

@@ -23,6 +23,8 @@
             <class name="nativeapp_android.tests.TabBarTests"></class>
             <class name="nativeapp_android.tests.TextFieldTests"></class>
             <class name="nativeapp_android.tests.ToggleButtonTests"></class>
+            <class name="nativeapp_android.tests.ToggleDataTests"></class>
+            <class name="nativeapp_android.tests.ToggleWiFiTests"></class>
 
         </classes>
     </test>
