@@ -18,7 +18,7 @@ public class TooltipsTest extends ApiDemosTestInit {
     public void tooltipTests() {
         viewsPage.tap();
         MobileScreen.scrollToElementInList(galleryPage);
-        galleryPage.click();
+        galleryPage.tap();
         photos.tap();
         select(0).click();
         assertTrue(WebDriverFactory.getDriver().findElement(MobileBy.xpath("//*[@class='android.widget.Toast']")).getText().equals("0"));
