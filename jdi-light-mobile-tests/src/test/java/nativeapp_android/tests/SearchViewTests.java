@@ -21,11 +21,6 @@ public class SearchViewTests extends ApiDemosTestInit {
     public static final String PLACEHOLDER_AlwaysExpanded = "Search Demo Hint";
     public static final String PLACEHOLDER_Filter = "Cheese hunt";
 
-    @BeforeClass
-    public void beforeClass() {
-        logger.toLog("Run SearchViewTests");
-    }
-
     @Test
     public void searchViewTestForActionBar() {
         IndexPage.viewsPage.click();

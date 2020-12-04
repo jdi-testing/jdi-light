@@ -11,11 +11,6 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class ToggleButtonTests extends ApiDemosTestInit {
 
-    @BeforeClass
-    public void beforeClass() {
-        logger.toLog("Run ToggleButtonTests");
-    }
-
     @Test
     public void toggleButtonTests() {
         IndexPage.viewsPage.click();
