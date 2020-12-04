@@ -1,20 +1,16 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
-import com.epam.jdi.light.mobile.elements.common.app.android.Tooltip;
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import io.appium.java_client.MobileBy;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.Assert;
-import org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 import static nativeapp.android.apidemos.IndexPage.viewsPage;
 import static nativeapp.android.apidemos.views.PhotosPage.photo;
 import static nativeapp.android.apidemos.views.PhotosPage.photoButton;
-import static nativeapp.android.apidemos.views.PhotosPage.tooltip;
 import static nativeapp.android.apidemos.views.ViewsPage.galleryPage;
 
 public class TooltipsTest extends ApiDemosTestInit {
