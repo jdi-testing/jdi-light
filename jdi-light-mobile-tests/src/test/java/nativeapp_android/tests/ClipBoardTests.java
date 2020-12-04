@@ -1,6 +1,5 @@
 package nativeapp_android.tests;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.mobile.elements.common.MobileDevice;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
