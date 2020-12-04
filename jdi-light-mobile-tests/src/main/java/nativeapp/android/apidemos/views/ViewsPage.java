@@ -43,4 +43,7 @@ public class ViewsPage {
 
     @MobileFindBy(accessibilityId = "ImageSwitcher")
     public static Button imageSwitcherPage;
+
+    @MobileFindBy(accessibilityId = "Radio Group")
+    public static Button radioGroupViewPage;
 }
