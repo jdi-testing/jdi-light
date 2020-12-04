@@ -6,9 +6,9 @@ import io.appium.java_client.MobileBy;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.mobile.elements.complex.Images.select;
 import static nativeapp.android.apidemos.IndexPage.viewsPage;
-import static nativeapp.android.apidemos.views.PhotosPage.photo;
-import static nativeapp.android.apidemos.views.PhotosPage.photoButton;
+import static nativeapp.android.apidemos.views.GalleryPage.photos;
 import static nativeapp.android.apidemos.views.ViewsPage.galleryPage;
 import static org.testng.Assert.assertTrue;
 
@@ -19,8 +19,8 @@ public class TooltipsTest extends ApiDemosTestInit {
         viewsPage.tap();
         MobileScreen.scrollToElementInList(galleryPage);
         galleryPage.click();
-        photoButton.tap();
-        photo.tap();
+        photos.tap();
+        select(0).click();
         assertTrue(WebDriverFactory.getDriver().findElement(MobileBy.xpath("//*[@class='android.widget.Toast']")).getText().equals("0"));
     }
 }
