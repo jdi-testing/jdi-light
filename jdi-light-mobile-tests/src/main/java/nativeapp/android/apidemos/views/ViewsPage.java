@@ -26,6 +26,9 @@ public class ViewsPage {
     @MobileFindBy(accessibilityId = "TextFields")
     public static Button textFieldsPage;
 
+    @MobileFindBy(accessibilityId = "Gallery")
+    public static Button galleryPage;
+
     @MobileFindBy(accessibilityId = "Tabs")
     public static Button tabsPage;
 
@@ -37,9 +40,6 @@ public class ViewsPage {
 
     @MobileFindBy(accessibilityId = "Date Widgets")
     public static Button dateWidgetsPage;
-
-    @MobileFindBy(accessibilityId = "Gallery")
-    public static Button galleryPage;
 
     @MobileFindBy(accessibilityId = "ImageSwitcher")
     public static Button imageSwitcherPage;
