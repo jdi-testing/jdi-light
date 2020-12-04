@@ -14,18 +14,18 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 public class ApiDemosTestInit {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
-        final String FILE_NAME = "src/main/resources/ApiDemos-debug.apk";
+//        final String FILE_NAME = "src/main/resources/ApiDemos-debug.apk";
         initMobile(ApiDemosApp.class);
         logger.toLog("Run ApiDemos App Tests");
-        File file = new File(FILE_NAME);
-        String path = file.getAbsolutePath();
-        AppManager.installApp(path);
+//        File file = new File(FILE_NAME);
+//        String path = file.getAbsolutePath();
+//        AppManager.installApp(path);
         AppManager.launchApp();
     }
-    @AfterMethod(alwaysRun = true)
-    public void resetApp() {
-        AppManager.resetApp();
-    }
+//    @AfterMethod(alwaysRun = true)
+//    public void resetApp() {
+//        AppManager.resetApp();
+//    }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
