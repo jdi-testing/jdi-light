@@ -1,11 +1,14 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.common.app.android.Tooltip;
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import io.appium.java_client.MobileBy;
 import nativeapp_android.ApiDemosTestInit;
+import org.testng.Assert;
+import org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 import static nativeapp.android.apidemos.IndexPage.viewsPage;
@@ -19,17 +22,11 @@ public class TooltipsTest extends ApiDemosTestInit {
     @Test
     public void tooltipTests() {
         viewsPage.tap();
-        clickOnElementInList(galleryPage);
+        MobileScreen.scrollToElementInList(galleryPage);
+        galleryPage.click();
         photoButton.tap();
-        //getDriver().findElement(MobileBy.AccessibilityId("1. Photos")).click();
-        System.out.println(WebDriverFactory.getDriver().getPageSource());
         photo.tap();
-        //PhotosPage.photo.get(0).click();
-        //getDriver().findElements(MobileBy.xpath("//android.widget.ImageView")).get(0).click();
-        System.out.println(WebDriverFactory.getDriver().getPageSource());
-        Tooltip tooltip = (Tooltip)WebDriverFactory.getDriver().findElement(MobileBy.xpath("//*[@class='android.widget.Toast']"));
-        tooltip.getText().equals("0");
-        //System.out.println(getDriver().findElement(MobileBy.xpath("//*[@class='android.widget.Toast']")).getText());
+        Assert.assertTrue(WebDriverFactory.getDriver().findElement(MobileBy.xpath("//*[@class='android.widget.Toast']")).getText().equals("0"));
     }
 
     public void clickOnElementInList(Button element) {
