@@ -16,7 +16,7 @@ import static nativeapp.android.apidemos.animation.CheckboxesPage.outCheckbox;
 public class CheckboxTests extends ApiDemosTestInit {
 
     @BeforeMethod
-    public void initSteps() {
+    public void init() {
         animationPage.tap();
         layoutAnimationsButton.tap();
     }

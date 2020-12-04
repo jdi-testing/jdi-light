@@ -1,6 +1,6 @@
 package nativeapp_android.tests;
 
-import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
+import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import nativeapp.android.apidemos.IndexPage;
 import nativeapp.android.apidemos.SpinnerPage;
 import nativeapp.android.apidemos.views.ViewsPage;
@@ -8,15 +8,18 @@ import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static nativeapp.android.apidemos.IndexPage.viewsPage;
+
 public class SpinnerTest extends ApiDemosTestInit {
 
     private final String[] COLOR_ITEMS = {"red", "orange", "yellow", "green", "blue", "violet"};
     private final String[] PLANET_ITEMS = {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"};
 
     @BeforeMethod
-    public void baseSpinnerTest(){
-        IndexPage.viewsPage.click();
-        AndroidScreen.scrollDown(3000);
+    public void init(){
+        MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
+        viewsPage.click();
+        MobileScreen.scrollToElementInList(ViewsPage.spinnerPage);
         ViewsPage.spinnerPage.click();
     }
 

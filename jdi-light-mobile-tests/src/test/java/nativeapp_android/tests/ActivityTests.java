@@ -12,12 +12,11 @@ public class ActivityTests extends ActivityTestsInit {
     @DataProvider(name = "forStartActivityTest")
     public Object[][] providerForStartActivity() {
         return new Object[][]{
-            //packageName, activityName
-            {"com.android.dialer",                  ".main.impl.MainActivity"},         /*calling application*/
-            {"com.google.android.apps.messaging",   ".ui.ConversationListActivity"},        /*messages*/
-            {"com.google.android.deskclock",        "com.android.deskclock.DeskClock"},     /*clock*/
-            {"com.android.camera2",                 "com.android.camera.CameraLauncher"},   /*camera*/
-            {"com.android.settings",                ".Settings"}                            /*Settings*/
+            {"com.android.dialer",                  ".main.impl.MainActivity"},
+            {"com.google.android.apps.messaging",   ".ui.ConversationListActivity"},
+            {"com.google.android.deskclock",        "com.android.deskclock.DeskClock"},
+            {"com.android.camera2",                 "com.android.camera.CameraLauncher"},
+            {"com.android.settings",                ".Settings"}
         };
     }
 

@@ -10,10 +10,10 @@ import nativeapp.android.apidemos.views.SearchViewFilterPage;
 import nativeapp.android.apidemos.views.SearchViewPage;
 import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static nativeapp.android.apidemos.IndexPage.viewsPage;
 
 public class SearchViewTests extends ApiDemosTestInit {
 
@@ -21,11 +21,16 @@ public class SearchViewTests extends ApiDemosTestInit {
     public static final String PLACEHOLDER_AlwaysExpanded = "Search Demo Hint";
     public static final String PLACEHOLDER_Filter = "Cheese hunt";
 
+    @BeforeMethod
+    public void init() {
+        MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
+        viewsPage.click();
+        MobileScreen.scrollToElementInList(ViewsPage.searchViewPage);
+        ViewsPage.searchViewPage.click();
+    }
+
     @Test
     public void searchViewTestForActionBar() {
-        IndexPage.viewsPage.click();
-        MobileScreen.scrollDown(3300);
-        ViewsPage.searchViewPage.click();
         SearchViewPage.actionBarPage.click();
         SearchViewActionBarPage.searchViewButton.is().iconifiedByDefault();
         SearchViewActionBarPage.searchViewButton.setExpanded();
@@ -44,9 +49,6 @@ public class SearchViewTests extends ApiDemosTestInit {
 
     @Test
     public void searchViewTestForAlwaysExpanded() {
-        IndexPage.viewsPage.click();
-        MobileScreen.scrollDown(3300);
-        ViewsPage.searchViewPage.click();
         SearchViewPage.alwaysExpandedPage.click();
         SearchViewAlwaysExpandedPage.searchViewField.is().enabled();
         SearchViewAlwaysExpandedPage.searchViewField.has().text(PLACEHOLDER_AlwaysExpanded);
@@ -60,10 +62,6 @@ public class SearchViewTests extends ApiDemosTestInit {
 
     @Test
     public void searchViewTestForFilter() {
-
-        IndexPage.viewsPage.click();
-        MobileScreen.scrollDown(3300);
-        ViewsPage.searchViewPage.click();
         SearchViewPage.filterPage.click();
         SearchViewFilterPage.searchViewField.is().enabled();
         SearchViewFilterPage.searchViewField.has().text(PLACEHOLDER_Filter);

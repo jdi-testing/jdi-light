@@ -26,10 +26,9 @@ import static nativeapp.android.apidemos.app.StatusBarPage.statusBarLatestEventC
 public class StatusBarTests extends ApiDemosTestInit {
 
     @BeforeMethod
-    public void initSteps() {
+    public void init() {
         appPage.click();
         notificationPage.click();
-
         statusBarButton.click();
         happyButton.click();
     }

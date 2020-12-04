@@ -6,17 +6,22 @@ import nativeapp.android.apidemos.app.ActionBarUsagePage;
 import nativeapp.android.apidemos.app.AppPage;
 import nativeapp.android.apidemos.IndexPage;
 import nativeapp_android.ApiDemosTestInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ActionBarTests extends ApiDemosTestInit {
 
     public static final String PLACEHOLDER = "Search…";
 
-    @Test
-    public void actionBarUsagePageSearchTest() {
+    @BeforeMethod
+    public void init() {
         IndexPage.appPage.click();
         AppPage.actionBarPage.click();
         ActionBarPage.actionBarUsagePage.click();
+    }
+
+    @Test
+    public void actionBarUsagePageSearchTest() {
         ActionBarUsagePage.searchButton.is().iconifiedByDefault();
         ActionBarUsagePage.searchButton.setExpanded();
         ActionBarUsagePage.searchVield.is().enabled();
@@ -29,9 +34,6 @@ public class ActionBarTests extends ApiDemosTestInit {
 
     @Test
     public void actionBarUsagePageEditTest() {
-        IndexPage.appPage.click();
-        AppPage.actionBarPage.click();
-        ActionBarPage.actionBarUsagePage.click();
         ActionBarUsagePage.edit.is().enabled();
         ActionBarUsagePage.edit.click();
         ActionBarUsagePage.text.is().displayed();
@@ -39,9 +41,6 @@ public class ActionBarTests extends ApiDemosTestInit {
 
     @Test
     public void actionBarUsagePageMoreOptionsTest() {
-        IndexPage.appPage.click();
-        AppPage.actionBarPage.click();
-        ActionBarPage.actionBarUsagePage.click();
         ActionBarUsagePage.moreOptions.is().enabled();
         ActionBarUsagePage.moreOptions.click();
         ActionBarUsagePage.listView.selectOption("Sort");
@@ -51,9 +50,6 @@ public class ActionBarTests extends ApiDemosTestInit {
 
     @Test
     public void displayOptionsPageMoreOptionsTest() {
-        IndexPage.appPage.click();
-        AppPage.actionBarPage.click();
-        ActionBarPage.displayOptionsPage.click();
         ActionBarDisplayOptionsPage.moreOptions.is().enabled();
         ActionBarDisplayOptionsPage.moreOptions.click();
         ActionBarDisplayOptionsPage.listView.selectOption("Menu Item");
@@ -61,9 +57,6 @@ public class ActionBarTests extends ApiDemosTestInit {
 
     @Test
     public void displayOptionsPageDisplayHomeAsUpTest() {
-        IndexPage.appPage.click();
-        AppPage.actionBarPage.click();
-        ActionBarPage.displayOptionsPage.click();
         ActionBarDisplayOptionsPage.displayHomeAsUp.is().enabled();
         ActionBarDisplayOptionsPage.displayHomeAsUp.click();
         ActionBarDisplayOptionsPage.navigateUp.is().displayed();
@@ -71,9 +64,6 @@ public class ActionBarTests extends ApiDemosTestInit {
 
     @Test
     public void displayOptionsPageDisplayShowHomeAndDisplayUseLogoTest() {
-        IndexPage.appPage.click();
-        AppPage.actionBarPage.click();
-        ActionBarPage.displayOptionsPage.click();
         ActionBarDisplayOptionsPage.displayShowHome.is().enabled();
         ActionBarDisplayOptionsPage.displayShowHome.click();
         ActionBarDisplayOptionsPage.imageView.is().displayed();
@@ -84,9 +74,6 @@ public class ActionBarTests extends ApiDemosTestInit {
 
     @Test
     public void displayOptionsPageDisplayShowTitleAndDisplayShowCustomAndCycleCustomGravityTest() {
-        IndexPage.appPage.click();
-        AppPage.actionBarPage.click();
-        ActionBarPage.displayOptionsPage.click();
         ActionBarDisplayOptionsPage.displayShowTitle.is().enabled();
         ActionBarDisplayOptionsPage.displayShowTitle.click();
         ActionBarDisplayOptionsPage.textView.is().hidden();
@@ -99,9 +86,6 @@ public class ActionBarTests extends ApiDemosTestInit {
 
     @Test
     public void displayOptionsPageNavigationTest() {
-        IndexPage.appPage.click();
-        AppPage.actionBarPage.click();
-        ActionBarPage.displayOptionsPage.click();
         ActionBarDisplayOptionsPage.navigation.is().enabled();
         ActionBarDisplayOptionsPage.navigation.click();
         ActionBarDisplayOptionsPage.horizontalScrollView.is().displayed();
