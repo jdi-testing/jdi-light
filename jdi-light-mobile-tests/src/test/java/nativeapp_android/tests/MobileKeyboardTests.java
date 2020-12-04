@@ -17,17 +17,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MobileKeyboardTests extends ApiDemosTestInit {
 
-    @BeforeMethod(alwaysRun = true)
-    public void initSteps() {
+    @BeforeMethod
+    public void init() {
         viewsPage.click();
-        while (true) {
-            try {
-                ViewsPage.textFieldsPage.click();
-                return;
-            } catch (RuntimeException e) {
-                MobileScreen.scrollDown(1000);
-            }
-        }
+        MobileScreen.scrollToElementInList(ViewsPage.textFieldsPage);
+        ViewsPage.textFieldsPage.click();
     }
 
     @Test
