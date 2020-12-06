@@ -19,6 +19,7 @@ public class RadioLabelTests implements TestsInit {
         metalAndColorsPage.shouldBeOpened();
         odds.select(text);
     }
+
     String text = "5";
 
     @Test
@@ -37,10 +38,12 @@ public class RadioLabelTests implements TestsInit {
         odds.select(1);
         assertEquals(odds.getValue(), "1");
     }
+
     @Test
     public void selectedTest() {
         assertEquals(odds.selected(), text);
     }
+
     @Test
     public void valuesTest() {
         assertEquals(odds.values(), asList("1", "3", "5", "7"));

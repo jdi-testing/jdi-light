@@ -32,6 +32,7 @@ public class DropdownITests implements TestsInit {
         html5Page.shouldBeOpened();
         dressCode3.select(text);
     }
+
     String text = "Casual";
 
     @Test
@@ -45,11 +46,13 @@ public class DropdownITests implements TestsInit {
         dressCode3.select(Fancy);
         assertEquals(dressCode3.getValue(), "Fancy");
     }
+
     @Test
     public void selectNumTest() {
         dressCode3.select(1);
         assertEquals(dressCode3.getValue(), "Fancy");
     }
+
     @Test
     public void selectedTest() {
         dressCode3.select(Pirate);
@@ -73,6 +76,7 @@ public class DropdownITests implements TestsInit {
     public void sizeTest() {
         assertEquals(dressCode3.size(), 4);
     }
+
     @Test
     public void disabledTest() {
         if (isFireFox()) return;
@@ -103,26 +107,27 @@ public class DropdownITests implements TestsInit {
         dressCode3.assertThat().values(hasItem("Pirate"));
         dressCode3.assertThat().values(hasItems("Fancy", "Pirate", "Casual", "Disabled"));
         dressCode3.assertThat()
-            .disabled(hasItem("Disabled"))
-            .enabled(not(hasItem("Disabled")))
-            .enabled(hasItems("Pirate", "Fancy"));
+                .disabled(hasItem("Disabled"))
+                .enabled(not(hasItem("Disabled")))
+                .enabled(hasItems("Pirate", "Fancy"));
     }
 
     @Test
     public void listEnabledTest() {
         assertEquals(dressCode3.listEnabled(), asList("Fancy", "Casual", "Pirate"));
         dressCode3.is()
-            .enabled(hasItems("Fancy", "Pirate", "Casual"))
-            .enabled(not(hasItem("Disabled")));
+                .enabled(hasItems("Fancy", "Pirate", "Casual"))
+                .enabled(not(hasItem("Disabled")));
     }
 
     @Test
     public void listDisabledTest() {
         assertEquals(dressCode3.listDisabled(), asList("Disabled"));
         dressCode3.is()
-            .disabled(hasItems("Disabled"))
-            .disabled(not(hasItems("Fancy", "Pirate", "Casual")));
+                .disabled(hasItems("Disabled"))
+                .disabled(not(hasItems("Fancy", "Pirate", "Casual")));
     }
+
     @Test
     public void assertValidationTest() {
         dressCode3.assertThat().values(contains("Fancy", "Casual", "Disabled", "Pirate"));

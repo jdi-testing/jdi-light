@@ -34,10 +34,11 @@ public class DataConversionTests {
         for (Field field : expected.getClass().getDeclaredFields()) {
             try {
                 Field dataField = first(pData.getClass().getDeclaredFields(),
-                    f -> f.getName().equals(field.getName()));
+                        f -> f.getName().equals(field.getName()));
                 if (field.get(expected) != null)
                     setPrimitiveField(dataField, pData, field.get(expected).toString());
-            } catch (Exception ignore) {}
+            } catch (Exception ignore) {
+            }
         }
         assertEquals(pData, expected);
     }

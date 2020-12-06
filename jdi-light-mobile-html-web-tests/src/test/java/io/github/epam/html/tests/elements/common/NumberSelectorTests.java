@@ -24,6 +24,7 @@ public class NumberSelectorTests implements TestsInit {
         html5Page.shouldBeOpened();
         height.setNumber(number);
     }
+
     String number = "2.1";
 
     @Test
@@ -40,18 +41,22 @@ public class NumberSelectorTests implements TestsInit {
     public void minTest() {
         assertEquals(height.min(), 0.3);
     }
+
     @Test
     public void maxTest() {
         assertEquals(height.max(), 2.5);
     }
+
     @Test
     public void stepTest() {
         assertEquals(height.step(), 0.2);
     }
+
     @Test
     public void placeholderTest() {
         assertEquals(height.placeholder(), "20 cm increments. Range [0.3,2.5]");
     }
+
     @Test
     public void setNumberTest() {
         height.setNumber("1.4");

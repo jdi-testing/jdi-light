@@ -14,6 +14,7 @@ import static org.testng.Assert.assertEquals;
 
 public class IssueTest69 {
     static boolean first = true;
+
     @BeforeMethod
     public void before() {
         if (first) {
@@ -30,14 +31,18 @@ public class IssueTest69 {
         assertEquals(p.toString(), "element_1_1,element_1_2,element_1_3");
     }
 
-    ParagraphData expectedParagraph = new ParagraphData().set(p-> {
-        p.paragraph="element_1_1"; p.paragraph2="element_1_2"; p.paragraph3="element_1_3";
+    ParagraphData expectedParagraph = new ParagraphData().set(p -> {
+        p.paragraph = "element_1_1";
+        p.paragraph2 = "element_1_2";
+        p.paragraph3 = "element_1_3";
     });
+
     @Test
     public void issue69DataTests() {
         ParagraphData p = templateData.getData(1);
         assertEquals(p, expectedParagraph);
     }
+
     @Test
     public void issue69DataParagraphTests() {
         ParagraphData p = paragraphsData.getData(2);
@@ -48,25 +53,32 @@ public class IssueTest69 {
     // region DataProvider
     public static List<Paragraph> paragraph(String paragraph) {
         switch (paragraph) {
-            case "template"         : return template;
-            case "paragraphs"       : return paragraphs;
-            case "templateList"     : return templateList;
-            case "paragraphsList"   : return paragraphsList;
-            case "templateData"     : return templateData;
-            case "paragraphsData"   : return paragraphsData;
-            default: return new ArrayList<>();
+            case "template":
+                return template;
+            case "paragraphs":
+                return paragraphs;
+            case "templateList":
+                return templateList;
+            case "paragraphsList":
+                return paragraphsList;
+            case "templateData":
+                return templateData;
+            case "paragraphsData":
+                return paragraphsData;
+            default:
+                return new ArrayList<>();
         }
-   }
+    }
 
     @DataProvider(name = "paragraphs")
     public static Object[][] paragraphs() {
-        return new Object[][] {
-                { "template"      },
-                { "paragraphs"    },
-                { "templateList"  },
-                { "paragraphsList"},
-                { "templateData"  },
-                { "paragraphsData"}
+        return new Object[][]{
+                {"template"},
+                {"paragraphs"},
+                {"templateList"},
+                {"paragraphsList"},
+                {"templateData"},
+                {"paragraphsData"}
         };
     }
     // endregion

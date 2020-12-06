@@ -23,8 +23,12 @@ import static org.testng.Assert.assertEquals;
 
 public class FurnitureTests implements TestsInit {
     public Furniture TABLE = new Furniture().set(x -> {
-        x.name = "Table"; x.type = "furniture"; x.cost = "3.5"; x.weight = "3.5";
+        x.name = "Table";
+        x.type = "furniture";
+        x.cost = "3.5";
+        x.weight = "3.5";
     });
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -37,35 +41,37 @@ public class FurnitureTests implements TestsInit {
         assertEquals(furniture.count(), 5);
         assertEquals(furniture.header(), asList("Name", "Type", "Cost", "Weight"));
     }
+
     @Test
     public void simpleTableParamsTest() {
         assertEquals(simpleTable.size(), 3);
         assertEquals(simpleTable.count(), 6);
         assertEquals(simpleTable.header(), asList("Drivers", "Selenium Custom", "JavaScript, Appium, WinAPI, Sikuli"));
     }
+
     @Test
     public void simpleTableInteractTest() {
-        assertEquals(simpleTable.cell(1,1), "Drivers");
-        assertEquals(simpleTable.cell(3,6), "Cucumber, Jbehave, Thucydides, SpecFlow");
+        assertEquals(simpleTable.cell(1, 1), "Drivers");
+        assertEquals(simpleTable.cell(3, 6), "Cucumber, Jbehave, Thucydides, SpecFlow");
     }
 
     @Test
     public void previewTest() {
         String value = furniture.preview();
         assertEquals(value.replaceAll(" ", ""),
-            "NameTypeCost*WeightChairfurniture3.52Tablefurniture3.53.5Sofafurniture22Kitchenkitchen400Robotrobo");
+                "NameTypeCost*WeightChairfurniture3.52Tablefurniture3.53.5Sofafurniture22Kitchenkitchen400Robotrobo");
     }
 
     @Test
     public void valueTest() {
         String value = furniture.getValue();
         assertEquals(value,
-            "||X||Name|Type|Cost|Weight||" + LINE_BREAK +
-            "||1||Chair|furniture|3.5|2||" + LINE_BREAK +
-            "||2||Table|furniture|3.5|3.5||" + LINE_BREAK +
-            "||3||Sofa|furniture|2|2||" + LINE_BREAK +
-            "||4||Kitchen|kitchen|400|||" + LINE_BREAK +
-            "||5||Robot|robo||||" + LINE_BREAK);
+                "||X||Name|Type|Cost|Weight||" + LINE_BREAK +
+                        "||1||Chair|furniture|3.5|2||" + LINE_BREAK +
+                        "||2||Table|furniture|3.5|3.5||" + LINE_BREAK +
+                        "||3||Sofa|furniture|2|2||" + LINE_BREAK +
+                        "||4||Kitchen|kitchen|400|||" + LINE_BREAK +
+                        "||5||Robot|robo||||" + LINE_BREAK);
     }
 
     @Test
@@ -143,13 +149,13 @@ public class FurnitureTests implements TestsInit {
     @Test
     public void tableChainTest() {
         furniture.assertThat()
-            .displayed().size(5).size(greaterThan(3)).notEmpty()
-            .row(d -> d.name.contains("Tab"))
-            .all().rows(d -> d.name.length() >= 4)
-            .no().rows(d -> isBlank(d.name))
-            .atLeast(3).rows(d -> d.type.contains("furniture"))
-            .and().row(TABLE)
-            .exact(2).rows(d -> d.cost.contains("3.5"))
-            .exact(1).rows(TABLE);
+                .displayed().size(5).size(greaterThan(3)).notEmpty()
+                .row(d -> d.name.contains("Tab"))
+                .all().rows(d -> d.name.length() >= 4)
+                .no().rows(d -> isBlank(d.name))
+                .atLeast(3).rows(d -> d.type.contains("furniture"))
+                .and().row(TABLE)
+                .exact(2).rows(d -> d.cost.contains("3.5"))
+                .exact(1).rows(TABLE);
     }
 }

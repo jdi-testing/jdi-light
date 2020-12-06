@@ -17,15 +17,19 @@ public class PerfStatistic {
     private PerfStatistic() {
         stats = new ArrayListValuedHashMap<>();
     }
+
     private MultiValuedMap<String, Long> stats;
+
     private static LongStream toLong(Collection<Long> collection) {
         return collection.stream().mapToLong(a -> a);
     }
+
     private LongStream values() {
         return toLong(instance.stats.values());
     }
 
     private static PerfStatistic instance;
+
     private static PerfStatistic Statistic() {
         if (instance == null)
             instance = new PerfStatistic();
@@ -35,6 +39,7 @@ public class PerfStatistic {
     public static void addStatistic(String action, Long time) {
         Statistic().stats.put(action, time);
     }
+
     public static void StartStatistic() {
         instance = new PerfStatistic();
     }
@@ -42,9 +47,11 @@ public class PerfStatistic {
     public static double getAverage(String action) {
         return toLong(instance.stats.get(action)).average().orElse(-1);
     }
+
     public static Long maxTime() {
         return Statistic().values().max().orElse(-1);
     }
+
     public static Pair<String, Long> maxAction() {
         Pair<String, Long> maxAction = null;
         for (Entry<String, Collection<Long>> stat : Statistic().stats.asMap().entrySet()) {
@@ -54,9 +61,11 @@ public class PerfStatistic {
         }
         return maxAction;
     }
+
     public static Long minTime() {
         return Statistic().values().min().orElse(-1);
     }
+
     public static Pair<String, Long> minAction() {
         Pair<String, Long> minAction = null;
         for (Entry<String, Collection<Long>> stat : Statistic().stats.asMap().entrySet()) {
@@ -66,14 +75,17 @@ public class PerfStatistic {
         }
         return minAction;
     }
+
     public static Double averageTime() {
         return Statistic().values().average().orElse(-1);
     }
+
     public static void printStatistic() {
         for (Entry<String, Collection<Long>> stat : Statistic().stats.asMap().entrySet())
             System.out.println(format("%s:[%s]", stat.getKey(),
-                    print(select(stat.getValue(), v -> v+""))));
+                    print(select(stat.getValue(), v -> v + ""))));
     }
+
     public static int actionsCount() {
         return Statistic().stats.size();
     }

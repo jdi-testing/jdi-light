@@ -37,6 +37,7 @@ public class CheckboxTests implements TestsInit {
         acceptConditions.check();
         assertTrue(acceptConditions.isSelected());
     }
+
     @Test
     public void uncheckTest() {
         acceptConditions.uncheck();
@@ -63,6 +64,7 @@ public class CheckboxTests implements TestsInit {
         acceptConditions.label().is().text(containsString("terms and conditions"));
         acceptConditions.label().is().text(equalToIgnoringCase("accept terms and conditions"));
     }
+
     @Test
     public void assertValidationTest() {
         acceptConditions.assertThat().selected();

@@ -18,7 +18,7 @@ public class CustomDriverTestsInit {
 
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        useDriver(() -> FIREFOX_INFO.getDriver() );
+        useDriver(() -> FIREFOX_INFO.getDriver());
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(StaticSite.class);
         homePage.open();

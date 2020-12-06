@@ -24,6 +24,7 @@ public class MultiSelectorTests implements TestsInit {
         html5Page.shouldBeOpened();
         ages.check(text);
     }
+
     String text = "Steam";
 
     @Test
@@ -42,11 +43,13 @@ public class MultiSelectorTests implements TestsInit {
         ages.check(Wood, Steam);
         assertEquals(ages.checked(), asList("Steam", "Wood"));
     }
+
     @Test
     public void selectNumTest() {
         ages.check(1, 5);
         assertEquals(ages.checked(), asList("Electro", "Wood"));
     }
+
     @Test
     public void selectedTest() {
         assertEquals(ages.checked(), asList(text));

@@ -30,31 +30,33 @@ public class DropdownEx2Tests implements TestsInit {
         metalAndColorsPage.shouldBeOpened();
         colors2.select(text);
     }
+
     String text = "Colors";
 
     @Test
     public void getValueTest() {
         assertEquals(colors2.getValue(), text);
     }
+
     @Test
     public void selectStringTest() {
         colors2.select("Red");
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Red"));
+                .text(containsString("Colors: value changed to Red"));
     }
 
     @Test
     public void selectEnumTest() {
         colors2.select(Green);
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Green"));
+                .text(containsString("Colors: value changed to Green"));
     }
 
     @Test
     public void selectIndexTest() {
         colors2.select(4);
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Blue"));
+                .text(containsString("Colors: value changed to Blue"));
     }
 
     @Test
@@ -86,10 +88,12 @@ public class DropdownEx2Tests implements TestsInit {
     public void assertValidationTest() {
         colors2.assertThat().values(INNER, contains("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void innerValuesTest() {
         assertThat(colors2.values(INNER), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void expandTests() {
         assertThat(colors2.isExpanded(), is(false));
@@ -99,6 +103,7 @@ public class DropdownEx2Tests implements TestsInit {
         assertThat(colors2.listDisabled(), empty());
         assertThat(colors2.values(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void baseValidationTest() {
         baseValidation(colors2.value());

@@ -21,6 +21,7 @@ public class WindowsAndFramesTests implements TestsInit {
         shouldBeLoggedIn();
         homePage.shouldBeOpened();
     }
+
     @Test
     public void windowsTest() {
         githubLink.click();
@@ -29,12 +30,12 @@ public class WindowsAndFramesTests implements TestsInit {
         originalWindow(); // open original (first) window
         switchToWindow(2); // open second window
         assertEquals(repoDescription.getText(),
-        "Try JDI Light https://github.com/jdi-testing/jdi-light");
+                "Try JDI Light https://github.com/jdi-testing/jdi-light");
         setWindowName("Github 2");
         switchToWindow(1); // open first (original) window
 
         jdiText.is().text(
-            containsString("QUIS NOSTRUD EXERCITATION"));
+                containsString("QUIS NOSTRUD EXERCITATION"));
         switchToWindow("Github 2");
         assertEquals(repoDescription.getText(),
                 "Try JDI Light https://github.com/jdi-testing/jdi-light");

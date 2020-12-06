@@ -36,7 +36,7 @@ public class FileUploadTests implements TestsInit {
 
     @Test
     public void uploadTest() {
-        avatar.uploadFile(mergePath(COMMON.projectPath,"/src/test/resources/general.xml"));
+        avatar.uploadFile(mergePath(COMMON.projectPath, "/src/test/resources/general.xml"));
         avatar.is().text(containsString("general.xml"));
         assertTrue(avatar.getText().contains("general.xml"));
         assertTrue(avatar.getValue().contains("general.xml"));
@@ -46,9 +46,11 @@ public class FileUploadTests implements TestsInit {
     public void disabledUploadTest() {
         try {
             disabledFileInput.uploadFile(mergePath(COMMON.projectPath, "/src/test/resources/general.xml"));
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
+        }
         disabledFileInput.is().text(is(""));
     }
+
     @Test
     public void labelTest() {
         assertEquals(avatar.labelText(), "Profile picture:");
@@ -61,16 +63,18 @@ public class FileUploadTests implements TestsInit {
         cleanupDownloads();
         downloadJdiLogo.click();
         assertThatFile("jdi-logo.jpg")
-            .isDownloaded()
-            .hasSize(32225L);
+                .isDownloaded()
+                .hasSize(32225L);
         assertThatFile("jdi-logo.jpg").hasSize(greaterThan(100L));
     }
+
     private void createTextFile(String fileName) throws IOException {
         File txtFile = new File(mergePath(DRIVER.downloadsFolder, fileName));
         writeStringToFile(txtFile,
                 "Earth provides enough to satisfy every man's needs, but not every man's greed",
                 "UTF-8");
     }
+
     @Test
     public void assertFileTest() throws IOException {
         cleanupDownloads();
@@ -79,6 +83,7 @@ public class FileUploadTests implements TestsInit {
         // Validate file in DOWNLOADS_DIR folder
         assertThatFile(fileName).text(containsString("enough to satisfy"));
     }
+
     @Test
     public void baseValidationTest() {
         baseValidation(avatar);

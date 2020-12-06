@@ -23,6 +23,7 @@ public class IsChecklistTests implements TestsInit {
         html5Page.shouldBeOpened();
         isWeather.check(text);
     }
+
     String text = "Hot option";
 
     @Test
@@ -35,11 +36,13 @@ public class IsChecklistTests implements TestsInit {
         isWeather.check("Cold");
         assertEquals(isWeather.checked(), asList("Cold"));
     }
+
     @Test
     public void checkTwoTest() {
         isWeather.check("Cold", "Hot option");
         assertEquals(isWeather.checked(), asList("Hot option", "Cold"));
     }
+
     @Test
     public void uncheckTest() {
         isWeather.check("Rainy day", "Sunny");
@@ -47,6 +50,7 @@ public class IsChecklistTests implements TestsInit {
         isWeather.is().checked(hasSize(3));
         isWeather.is().checked(hasItems("Hot option", "Cold", "Sunny"));
     }
+
     @Test
     public void uncheckTwoTest() {
         isWeather.check("Rainy day", "Sunny");
@@ -54,11 +58,13 @@ public class IsChecklistTests implements TestsInit {
         isWeather.is().checked(hasSize(2));
         isWeather.is().checked(hasItems("Hot option", "Cold"));
     }
+
     @Test
     public void selectTest() {
         isWeather.select("Cold");
         assertEquals(isWeather.checked(), asList("Hot option", "Cold"));
     }
+
     @Test
     public void selectTwoTest() {
         isWeather.select("Cold", "Hot option");
@@ -70,11 +76,13 @@ public class IsChecklistTests implements TestsInit {
         isWeather.check(Cold);
         assertEquals(isWeather.checked(), asList("Cold"));
     }
+
     @Test
     public void checkEnumTwoTest() {
         isWeather.check(Cold, Hot);
         assertEquals(isWeather.checked(), asList("Hot option", "Cold"));
     }
+
     @Test
     public void uncheckEnumTest() {
         isWeather.check("Rainy day", "Sunny");
@@ -82,6 +90,7 @@ public class IsChecklistTests implements TestsInit {
         isWeather.is().checked(hasSize(3));
         isWeather.is().checked(hasItems("Hot option", "Cold", "Sunny"));
     }
+
     @Test
     public void uncheckEnumTwoTest() {
         isWeather.check("Rainy day", "Sunny");
@@ -89,11 +98,13 @@ public class IsChecklistTests implements TestsInit {
         isWeather.is().checked(hasSize(2));
         isWeather.is().checked(hasItems("Hot option", "Cold"));
     }
+
     @Test
     public void selectEnumTest() {
         isWeather.select(Cold);
         assertEquals(isWeather.checked(), asList("Hot option", "Cold"));
     }
+
     @Test
     public void selectEnumTwoTest() {
         isWeather.select(Cold, Hot);
@@ -105,11 +116,13 @@ public class IsChecklistTests implements TestsInit {
         isWeather.check(4);
         assertEquals(isWeather.checked(), asList("Sunny"));
     }
+
     @Test
     public void checkNumTwoTest() {
         isWeather.check(1, 4);
         assertEquals(isWeather.checked(), asList("Hot option", "Sunny"));
     }
+
     @Test
     public void uncheckNumTest() {
         isWeather.checkAll();
@@ -117,6 +130,7 @@ public class IsChecklistTests implements TestsInit {
         isWeather.is().checked(hasSize(3));
         isWeather.is().checked(hasItems("Cold", "Rainy day", "Sunny"));
     }
+
     @Test
     public void uncheckNumTwoTest() {
         isWeather.checkAll();
@@ -124,11 +138,13 @@ public class IsChecklistTests implements TestsInit {
         isWeather.is().checked(hasSize(2));
         isWeather.is().checked(hasItems("Cold", "Rainy day"));
     }
+
     @Test
     public void selectNumTest() {
         isWeather.select(4);
         assertEquals(isWeather.checked(), asList("Hot option", "Sunny"));
     }
+
     @Test
     public void selectNumTwoTest() {
         isWeather.select(1, 4);
@@ -156,9 +172,9 @@ public class IsChecklistTests implements TestsInit {
         isWeather.is().displayed().selected("Hot option");
         isWeather.is().selected(Hot);
         isWeather.assertThat().values(hasItem("Sunny"))
-            .disabled(hasItem("Disabled"))
-            .enabled(not(hasItem("Disabled")))
-            .enabled(hasItems("Cold", "Sunny"));
+                .disabled(hasItem("Disabled"))
+                .enabled(not(hasItem("Disabled")))
+                .enabled(hasItems("Cold", "Sunny"));
     }
 
     @Test
@@ -174,6 +190,7 @@ public class IsChecklistTests implements TestsInit {
         isWeather.uncheckAll();
         isWeather.is().checked(hasSize(0));
     }
+
     @Test
     public void checkAllTest() {
         isWeather.checkAll();

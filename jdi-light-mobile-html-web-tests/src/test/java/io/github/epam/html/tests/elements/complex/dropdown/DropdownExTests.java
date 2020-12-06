@@ -30,31 +30,33 @@ public class DropdownExTests implements TestsInit {
         metalAndColorsPage.shouldBeOpened();
         colors.select(text);
     }
+
     String text = "Colors";
 
     @Test
     public void getValueTest() {
         assertEquals(colors.getValue(), text);
     }
+
     @Test
     public void selectStringTest() {
         colors.select("Red");
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Red"));
+                .text(containsString("Colors: value changed to Red"));
     }
 
     @Test
     public void selectEnumTest() {
         colors.select(Green);
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Green"));
+                .text(containsString("Colors: value changed to Green"));
     }
 
     @Test
     public void selectIndexTest() {
         colors.select(4);
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Blue"));
+                .text(containsString("Colors: value changed to Blue"));
     }
 
     @Test
@@ -86,10 +88,12 @@ public class DropdownExTests implements TestsInit {
     public void assertValidationTest() {
         colors.assertThat().values(INNER, contains("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void innerValuesTest() {
         assertThat(colors.values(INNER), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void expandTests() {
         assertThat(colors.isExpanded(), is(false));

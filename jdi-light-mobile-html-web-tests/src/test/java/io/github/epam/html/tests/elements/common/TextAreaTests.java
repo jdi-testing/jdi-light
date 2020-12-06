@@ -27,6 +27,7 @@ public class TextAreaTests implements TestsInit {
         html5Page.shouldBeOpened();
         textArea.clear();
     }
+
     String text = "TextArea";
 
     @Test
@@ -45,8 +46,9 @@ public class TextAreaTests implements TestsInit {
     public void sendKeysTest() {
         textArea.setText(text);
         textArea.sendKeys("Test");
-        assertEquals(textArea.getValue(), text+"Test");
+        assertEquals(textArea.getValue(), text + "Test");
     }
+
     @Test
     public void inputTest() {
         textArea.setText(text);
@@ -90,12 +92,14 @@ public class TextAreaTests implements TestsInit {
         textArea.setLines("line1", "line2");
         assertEquals(textArea.getText(), "line1\nline2");
     }
+
     @Test
     public void addLinesTest() {
         textArea.addNewLine("line1");
         textArea.addNewLine("line2");
         assertEquals(textArea.getText(), "line1\nline2");
     }
+
     @Test
     public void addEmptyLineTest() {
         textArea.addNewLine("line1");
@@ -103,6 +107,7 @@ public class TextAreaTests implements TestsInit {
         textArea.addNewLine("line2");
         assertEquals(textArea.getText(), "line1\n\nline2");
     }
+
     @Test
     public void focusTest() {
         textArea.focus();

@@ -19,6 +19,7 @@ public class LocatorsTest {
         $$(".sidebar-menu").select("Contact form");
         assertThat(getUrl(), containsString("/jdi-light/contacts.html"));
     }
+
     // @Test
     public void namedTest() {
         openUrl("https://jdi-testing.github.io/jdi-light/");
@@ -31,6 +32,7 @@ public class LocatorsTest {
         $$(".sidebar-menu").select("Contact form");
         checkUrl("contacts.html");
     }
+
     // @Test
     public void withText() {
         openUrl("https://jdi-testing.github.io/jdi-light/");

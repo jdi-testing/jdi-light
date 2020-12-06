@@ -31,6 +31,7 @@ public class DataTableTests implements TestsInit {
     public void tableTest() {
         tableValidation(usersTableSetup);
     }
+
     @Test
     public void getTableTest() {
         getValidation(usersTableUI);
@@ -44,9 +45,9 @@ public class DataTableTests implements TestsInit {
         notMoreThan(1500, table::preview);
         String value = table.preview();
         assertThat(value, containsString("Name Phone Email City " +
-            "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe " +
-            "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas " +
-            "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv"));
+                "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe " +
+                "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas " +
+                "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauv"));
     }
 
     private void getValidation(Table table) {
@@ -83,16 +84,16 @@ public class DataTableTests implements TestsInit {
         assertEquals(rowValue, aileenText);
 
         String zacharyEmail = "mattis.velit.justo@Maurismolestie.com";
-        String cell = notMoreThan(1000, () -> table.cell(3,395));
+        String cell = notMoreThan(1000, () -> table.cell(3, 395));
         assertEquals(cell, zacharyEmail);
 
-        cell = notMoreThan(1000, () -> table.cell("Email",395));
+        cell = notMoreThan(1000, () -> table.cell("Email", 395));
         assertEquals(cell, zacharyEmail);
 
-        cell = notMoreThan(1000, () -> table.cell(3,"Aileen Rodriguez"));
+        cell = notMoreThan(1000, () -> table.cell(3, "Aileen Rodriguez"));
         assertEquals(cell, zacharyEmail);
 
-        cell = notMoreThan(1000, () -> table.cell("Email","Aileen Rodriguez"));
+        cell = notMoreThan(1000, () -> table.cell("Email", "Aileen Rodriguez"));
         assertEquals(cell, zacharyEmail);
 
         List<String> column = notMoreThan(1000, () -> table.jsColumn(2));
@@ -101,9 +102,9 @@ public class DataTableTests implements TestsInit {
 
         String value = notMoreThan(2000, table::getValue);
         assertThat(value, containsString("||X||Name|Phone|Email|City||" + LINE_BREAK +
-            "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +
-            "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||" + LINE_BREAK +
-            "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||"));
+                "||1||Burke Tucker|076 1971 1687|et.euismod.et@ut.edu|GozŽe||" + LINE_BREAK +
+                "||2||Grady Brock|(011307) 16843|cursus.et@commodo.org|Alcobendas||" + LINE_BREAK +
+                "||3||Harding Lloyd|0800 1111|neque.In.ornare@mauris.co.uk|Beauvais||"));
     }
 
 }

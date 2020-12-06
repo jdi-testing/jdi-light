@@ -41,8 +41,8 @@ public class WaitJListTests implements TestsInit {
         try {
             jsearchTitle.is().empty();
             Assert.fail("List should not be empty");
-        } catch (Throwable ignored) { }
-        finally {
+        } catch (Throwable ignored) {
+        } finally {
             jsearchTitle.waitSec(TIMEOUTS.element.get());
         }
     }

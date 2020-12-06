@@ -28,6 +28,7 @@ public class SoftAsserts implements TestsInit {
         html5Page.shouldBeOpened();
         assertStrict();
     }
+
     @AfterMethod
     public void after() {
         clearResults();
@@ -39,49 +40,51 @@ public class SoftAsserts implements TestsInit {
         assertSoft();
         redButton.is().hidden().displayed().disabled().enabled();
     }
+
     @Test
     public void buttonSoftAssertTest() {
         try {
             redButton.verify().hidden().displayed()
-                .disabled().enabled()
-                .disappear();
+                    .disabled().enabled()
+                    .disappear();
             redButton.is().text(is("Big Red *** Button-Input"))
-                .text(containsString("Red Button"))
-                .classValue(is("uui-button red"))
-                .attr("type", is("button"))
-                .tag(is("input"))
+                    .text(containsString("Red Button"))
+                    .classValue(is("uui-button red"))
+                    .attr("type", is("button"))
+                    .tag(is("input"))
 
-                .assertResults();
+                    .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(
-                "Expected: is \"hidden\"", "but: was \"displayed\",",
-                "Expected: is \"disabled\"",  "but: was \"enabled\",",
-                "Expected: is \"hidden\"", "but: was \"displayed\",",
-                "Expected: is \"Big Red *** Button-Input\"", "but: was \"Big Red Button-Input\""
+                    "Expected: is \"hidden\"", "but: was \"displayed\",",
+                    "Expected: is \"disabled\"", "but: was \"enabled\",",
+                    "Expected: is \"hidden\"", "but: was \"displayed\",",
+                    "Expected: is \"Big Red *** Button-Input\"", "but: was \"Big Red Button-Input\""
             ));
         }
     }
+
     @Test
     public void multipleValidationsTest() {
         try {
             assertSoft();
             redButton.is().hidden().displayed().disabled().enabled();
             jdiLogo.is().alt(is("Jdi Logo 777"))
-                .src(containsString("jdi-logo.jpg777"))
-                .height(is(100))
-                .width(is(1000));
+                    .src(containsString("jdi-logo.jpg777"))
+                    .height(is(100))
+                    .width(is(1000));
 
             SoftAssert.assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(
-                "Expected: is \"hidden\"", "but: was \"displayed\",",
-                "Expected: is \"disabled\"",  "but: was \"enabled\",",
-                "Expected: is \"Jdi Logo 777\"", "but: was \"Jdi Logo 2\",",
-                "Expected: a string containing \"jdi-logo.jpg777\"",
-                "but: was \"https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg\"",
-                "Expected: is <1000>", "but: was <101>"
+                    "Expected: is \"hidden\"", "but: was \"displayed\",",
+                    "Expected: is \"disabled\"", "but: was \"enabled\",",
+                    "Expected: is \"Jdi Logo 777\"", "but: was \"Jdi Logo 2\",",
+                    "Expected: a string containing \"jdi-logo.jpg777\"",
+                    "but: was \"https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg\"",
+                    "Expected: is <1000>", "but: was <101>"
             ));
         }
     }
@@ -90,19 +93,19 @@ public class SoftAsserts implements TestsInit {
     public void imageSoftAssertTest() {
         try {
             jdiLogo.verify()
-                .alt(is("Jdi Logo 777"))
-                .src(containsString("jdi-logo.jpg777"))
-                .height(is(100))
-                .width(is(1000))
+                    .alt(is("Jdi Logo 777"))
+                    .src(containsString("jdi-logo.jpg777"))
+                    .height(is(100))
+                    .width(is(1000))
 
-                .assertResults();
+                    .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(
-                "Expected: is \"Jdi Logo 777\"", "but: was \"Jdi Logo 2\"",
-                "Expected: a string containing \"jdi-logo.jpg777\"",
-                "but: was \"https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg\"",
-                "Expected: is <1000>", "but: was <101>"
+                    "Expected: is \"Jdi Logo 777\"", "but: was \"Jdi Logo 2\"",
+                    "Expected: a string containing \"jdi-logo.jpg777\"",
+                    "but: was \"https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg\"",
+                    "Expected: is <1000>", "but: was <101>"
             ));
         }
     }
@@ -111,12 +114,12 @@ public class SoftAsserts implements TestsInit {
     public void checkboxSoftAssertTest() {
         try {
             acceptConditions.verify().deselected().selected().disabled().displayed()
-                .assertResults();
+                    .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(
-                "Expected: is \"not selected\"", "but: was \"selected\"",
-                "Expected: is \"disabled\"", "but: was \"enabled\""
+                    "Expected: is \"not selected\"", "but: was \"selected\"",
+                    "Expected: is \"disabled\"", "but: was \"enabled\""
             ));
         }
     }
@@ -127,33 +130,34 @@ public class SoftAsserts implements TestsInit {
             usersPage.open();
             // TODO fix performance
             users.verify()
-                .row(d -> d.user.contains("Ivannn"))
-                .all().rows(d -> d.user.length() > 4)
-                .atLeast(3).rows(d -> d.type.contains("Userrr"))
-                .assertResults();
+                    .row(d -> d.user.contains("Ivannn"))
+                    .all().rows(d -> d.user.length() > 4)
+                    .atLeast(3).rows(d -> d.type.contains("Userrr"))
+                    .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(
-                "Expected: is \"has row\"", "but: was \"has no rows\"",
-                "Expected: a collection with size <3>", "but: collection size was <0>"
+                    "Expected: is \"has row\"", "but: was \"has no rows\"",
+                    "Expected: a collection with size <3>", "but: collection size was <0>"
             ));
         }
     }
+
     @Test
     public void customFailTest() {
         try {
             usersPage.open();
             // TODO fix performance
             users.verify()
-                .row(d -> d.user.contains("Ivannn"))
-                .all().rows(d -> d.user.length() > 4)
-                .atLeast(3).rows(d -> d.type.contains("Userrr"))
-                .assertResults();
+                    .row(d -> d.user.contains("Ivannn"))
+                    .all().rows(d -> d.user.length() > 4)
+                    .atLeast(3).rows(d -> d.type.contains("Userrr"))
+                    .assertResults();
             Assert.fail("Test should throw asserts");
         } catch (Throwable tr) {
             assertList(tr.getMessage(), asList(
-                "Expected: is \"has row\"", "but: was \"has no rows\"",
-                "Expected: a collection with size <3>", "but: collection size was <0>"
+                    "Expected: is \"has row\"", "but: was \"has no rows\"",
+                    "Expected: a collection with size <3>", "but: collection size was <0>"
             ));
         }
     }

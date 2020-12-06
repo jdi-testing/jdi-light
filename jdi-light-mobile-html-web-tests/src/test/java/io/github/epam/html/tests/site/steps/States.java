@@ -18,6 +18,7 @@ public class States {
         if (userName.isHidden())
             login();
     }
+
     @Step
     public static void moveToHomePage() {
         if (!verifyUrl("https://jdi-testing.github.io/jdi-light/") || epamLogo.isNotExist())
@@ -42,6 +43,7 @@ public class States {
         if (loginForm.isDisplayed())
             userIcon.click();
     }
+
     @Step
     public static void logout() {
         if (!logout.isDisplayed())

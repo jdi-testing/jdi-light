@@ -25,6 +25,7 @@ public class ColorPickerTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
+
     String color = "#ffd7a6";
 
     @Test
@@ -36,6 +37,7 @@ public class ColorPickerTests implements TestsInit {
     public void getColorTest() {
         assertEquals(disabledPicker.color(), color);
     }
+
     @Test
     public void setColorTest() {
         colorPicker.setColor("#432376");

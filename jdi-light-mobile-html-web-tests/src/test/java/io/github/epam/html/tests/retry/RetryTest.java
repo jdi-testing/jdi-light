@@ -20,11 +20,13 @@ public class RetryTest implements TestsInit {
         shouldBeLoggedIn();
         html5Page.open();
     }
+
     //@Test
     public void passedTest() {
         redButton.click();
         validateAndAcceptAlert("Red button");
     }
+
     //@Test
     public void retryPassTest() {
         redButton.click();
@@ -44,6 +46,7 @@ public class RetryTest implements TestsInit {
         redButton.click();
         validateAndAcceptAlert("Red button2");
     }
+
     //@Step("{0}")
     public void log(Object status) {
         System.out.println(status);

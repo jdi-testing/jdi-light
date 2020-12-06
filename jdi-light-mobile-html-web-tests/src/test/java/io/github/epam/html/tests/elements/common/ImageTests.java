@@ -27,12 +27,14 @@ public class ImageTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
+
     String text = "https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg";
 
     @Test
     public void getSrcTest() {
         assertEquals(jdiLogo.src(), text);
     }
+
     @Test
     public void getAltTest() {
         assertEquals(jdiLogo.alt(), "Jdi Logo 2");

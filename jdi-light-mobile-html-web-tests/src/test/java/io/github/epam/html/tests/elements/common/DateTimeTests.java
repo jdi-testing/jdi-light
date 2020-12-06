@@ -43,6 +43,7 @@ public class DateTimeTests implements TestsInit {
     public void maxTest() {
         assertEquals(partyTime.max(), "2018-06-14T00:00");
     }
+
     @Test
     public void setDateTimeTest() {
         partyTime.setDateTime("2017-05-10T00:00");

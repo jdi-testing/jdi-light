@@ -45,38 +45,47 @@ public class BaseValidations {
     }
 
     public static void durationMoreThan(int duration, JAction action) {
-        validateDuration(duration*1000-500, duration*1000+1000, action);
+        validateDuration(duration * 1000 - 500, duration * 1000 + 1000, action);
     }
+
     public static void durationLessThan(int duration, JAction action) {
-        validateDuration(duration*1000-1000, duration*1000+500, action);
+        validateDuration(duration * 1000 - 1000, duration * 1000 + 500, action);
     }
+
     public static void duration(int duration, JAction action) {
-        validateDuration(duration*1000-500, duration*1000+500, action);
+        validateDuration(duration * 1000 - 500, duration * 1000 + 500, action);
     }
+
     public static void notMoreThan(int maxMs, JAction action) {
         validateDuration(0, maxMs, action);
     }
+
     public static <T> T notMoreThan(int maxMs, JFunc<T> func) {
         return validateDuration(0, maxMs, func);
     }
+
     public static void durationImmediately(JAction action) {
         durationMoreThan(0, action);
     }
+
     public static long getDuration(JAction action) {
         long start = currentTimeMillis();
         action.execute();
         return currentTimeMillis() - start;
     }
+
     private static <T> Pair<Long, T> getDuration(JFunc<T> action) {
         long start = currentTimeMillis();
         T result = action.execute();
         return $(currentTimeMillis() - start, result);
     }
+
     private static void validateDuration(long min, long max, JAction action) {
         long passedTime = getDuration(action);
         assertThat(passedTime, greaterThan(min));
-        assertThat(passedTime, lessThan(max+500));
+        assertThat(passedTime, lessThan(max + 500));
     }
+
     private static <T> T validateDuration(long min, long max, JFunc<T> func) {
         Pair<Long, T> result = getDuration(func);
         assertThat(result.key, greaterThan(min));

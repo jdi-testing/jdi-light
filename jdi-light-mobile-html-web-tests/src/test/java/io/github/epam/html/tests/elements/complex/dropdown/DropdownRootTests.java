@@ -31,31 +31,33 @@ public class DropdownRootTests implements TestsInit {
         metalAndColorsPage.shouldBeOpened();
         colorsRoot.select(text);
     }
+
     String text = "Colors";
 
     @Test
     public void getValueTest() {
         assertEquals(colorsRoot.getValue(), text);
     }
+
     @Test
     public void selectStringTest() {
         colorsRoot.select("Red");
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Red"));
+                .text(containsString("Colors: value changed to Red"));
     }
 
     @Test
     public void selectEnumTest() {
         colorsRoot.select(Green);
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Green"));
+                .text(containsString("Colors: value changed to Green"));
     }
 
     @Test
     public void selectIndexTest() {
         colorsRoot.select(4);
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Blue"));
+                .text(containsString("Colors: value changed to Blue"));
     }
 
     @Test
@@ -87,16 +89,19 @@ public class DropdownRootTests implements TestsInit {
     public void assertValidationTest() {
         colorsRoot.assertThat().values(INNER, contains("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void innerValuesTest() {
         assertThat(colorsRoot.values(INNER), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void expandTests() {
         assertThat(colorsRoot.listEnabled(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
         assertThat(colorsRoot.listDisabled(), empty());
         assertThat(colorsRoot.values(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void baseValidationTest() {
         baseValidation(colors5.value());

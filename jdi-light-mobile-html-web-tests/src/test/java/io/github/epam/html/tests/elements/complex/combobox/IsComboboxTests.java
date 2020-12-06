@@ -22,6 +22,7 @@ public class IsComboboxTests implements TestsInit {
         html5Page.shouldBeOpened();
         iceCreamIs.select(text);
     }
+
     String text = "Coconut";
 
     @Test
@@ -59,8 +60,9 @@ public class IsComboboxTests implements TestsInit {
     @Test
     public void sendKeysTest() {
         iceCreamIs.sendKeys("Test");
-        assertEquals(iceCreamIs.getValue(), text+"Test");
+        assertEquals(iceCreamIs.getValue(), text + "Test");
     }
+
     @Test
     public void selectTest() {
         iceCreamIs.select("Chocolate");
@@ -72,12 +74,14 @@ public class IsComboboxTests implements TestsInit {
         iceCreamIs.select(Strawberry);
         assertEquals(iceCreamIs.getValue(), "Strawberry");
     }
+
     @Test
     public void selectNumTest() {
         iceCreamIs.clear();
         iceCreamIs.select(5);
         assertEquals(iceCreamIs.getValue(), "Vanilla");
     }
+
     @Test
     public void selectedTest() {
         assertEquals(iceCreamIs.selected(), text);

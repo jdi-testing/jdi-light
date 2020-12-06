@@ -32,6 +32,7 @@ public class DropdownSelectTests implements TestsInit {
         html5Page.shouldBeOpened();
         dressCode.select(text);
     }
+
     String text = "Casual";
 
     @Test
@@ -45,11 +46,13 @@ public class DropdownSelectTests implements TestsInit {
         dressCode.select(Fancy);
         assertEquals(dressCode.getValue(), "Fancy");
     }
+
     @Test
     public void selectNumTest() {
         dressCode.select(1);
         assertEquals(dressCode.getValue(), "Fancy");
     }
+
     @Test
     public void selectedTest() {
         dressCode.select(Pirate);
@@ -68,10 +71,12 @@ public class DropdownSelectTests implements TestsInit {
             assertThat(safeException(ex), containsString("Cannot locate element with text: Unknown"));
         }
     }
+
     @Test
     public void sizeTest() {
         assertEquals(dressCode.size(), 4);
     }
+
     @Test
     public void disabledTest() {
         if (isFireFox()) return;
@@ -122,6 +127,7 @@ public class DropdownSelectTests implements TestsInit {
                 .disabled(hasItems("Disabled"))
                 .disabled(not(hasItems("Fancy", "Pirate", "Casual")));
     }
+
     @Test
     public void assertValidationTest() {
         dressCode.assertThat().values(contains("Fancy", "Casual", "Disabled", "Pirate"));

@@ -25,6 +25,7 @@ public class LabelTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
+
     String text = "JDI TESTING PLATFORM";
 
     @Test

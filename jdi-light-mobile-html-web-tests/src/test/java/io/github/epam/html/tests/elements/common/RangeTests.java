@@ -34,6 +34,7 @@ public class RangeTests implements TestsInit {
     public void getValueTest() {
         assertEquals(disabledRange.value(), 50.0);
     }
+
     @Test
     public void minTest() {
         assertEquals(volume.min(), 10.0);
@@ -41,6 +42,7 @@ public class RangeTests implements TestsInit {
         assertEquals(minMaxRange.min(), 1.0);
         assertEquals(fractionalRange.min(), 2.0);
     }
+
     @Test
     public void maxTest() {
         assertEquals(volume.max(), 100.0);
@@ -48,6 +50,7 @@ public class RangeTests implements TestsInit {
         assertEquals(minMaxRange.max(), 10.0);
         assertEquals(fractionalRange.max(), 7.0);
     }
+
     @Test
     public void stepTest() {
         assertEquals(volume.step(), 5.0);

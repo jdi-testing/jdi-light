@@ -39,7 +39,8 @@ public class WaitDataListTests implements TestsInit {
         try {
             searchS.is().empty();
             Assert.fail("List should not be empty");
-        } catch (Throwable ignored) { }
+        } catch (Throwable ignored) {
+        }
         searchS.is().notEmpty();
     }
 

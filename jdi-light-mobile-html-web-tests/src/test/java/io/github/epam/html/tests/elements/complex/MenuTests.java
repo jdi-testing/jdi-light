@@ -16,21 +16,25 @@ public class MenuTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
+
     @Test
     public void selectTest() {
         leftMenu.select("Contact form");
         contactFormPage.checkOpened();
     }
+
     @Test
     public void selectEnumTest() {
         leftMenu.select(MetalsColors);
         metalAndColorsPage.checkOpened();
     }
+
     @Test
     public void selectTestList() {
         leftMenuList.select("Contact form");
         contactFormPage.checkOpened();
     }
+
     @Test
     public void getTestList() {
         UIElement item = leftMenuList.get("Contact form");
@@ -40,25 +44,30 @@ public class MenuTests implements TestsInit {
         item.is().selected();
         contactFormPage.checkOpened();
     }
+
     @Test
     public void selectEnumTestList() {
         leftMenuList.select(MetalsColors);
         metalAndColorsPage.checkOpened();
     }
+
     @Test
     public void selectListTest() {
         leftMenu.select("Service", "Dates");
         datesPage.checkOpened();
     }
+
     @Test
     public void selectEnumListTest() {
         leftMenu.select(Service, Dates);
         datesPage.checkOpened();
     }
+
     //@Test
     public void isValidationTest() {
         leftMenu.is().selected(HTML5);
     }
+
     //@Test
     public void assertValidationTest() {
         leftMenu.assertThat().selected(HTML5);

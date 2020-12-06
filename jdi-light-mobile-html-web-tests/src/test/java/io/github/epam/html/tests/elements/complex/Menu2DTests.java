@@ -15,31 +15,37 @@ public class Menu2DTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
+
     @Test
     public void selectTest() {
         leftMenu2D.select("Contact form");
         contactFormPage.checkOpened();
     }
+
     @Test
     public void selectEnumTest() {
         leftMenu2D.select(MetalsColors);
         metalAndColorsPage.checkOpened();
     }
+
     @Test
     public void selectListTest() {
         leftMenu2D.select("Service", "Dates");
         datesPage.checkOpened();
     }
+
     @Test
     public void selectEnumListTest() {
         leftMenu2D.select(Service, Dates);
         datesPage.checkOpened();
     }
+
     @Test
     public void selectIndexTest() {
         menu2D.select(4);
         metalAndColorsPage.checkOpened();
     }
+
     @Test
     public void selectIndexListTest() {
         menu2D.select(3, 2);

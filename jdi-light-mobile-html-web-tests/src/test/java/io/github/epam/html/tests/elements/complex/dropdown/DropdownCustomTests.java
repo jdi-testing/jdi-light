@@ -30,31 +30,33 @@ public class DropdownCustomTests implements TestsInit {
         metalAndColorsPage.shouldBeOpened();
         colorsCustom.select(text);
     }
+
     String text = "Colors";
 
     @Test
     public void getValueTest() {
         assertEquals(colorsCustom.getValue(), text);
     }
+
     @Test
     public void selectStringTest() {
         colorsCustom.select("Red");
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Red"));
+                .text(containsString("Colors: value changed to Red"));
     }
 
     @Test
     public void selectEnumTest() {
         colorsCustom.select(Green);
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Green"));
+                .text(containsString("Colors: value changed to Green"));
     }
 
     @Test
     public void selectIndexTest() {
         colorsCustom.select(4);
         lastLogEntry.assertThat()
-            .text(containsString("Colors: value changed to Blue"));
+                .text(containsString("Colors: value changed to Blue"));
     }
 
     @Test
@@ -86,16 +88,19 @@ public class DropdownCustomTests implements TestsInit {
     public void assertValidationTest() {
         colorsCustom.assertThat().values(INNER, contains("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void innerValuesTest() {
         assertThat(colorsCustom.values(INNER), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void expandTests() {
         assertThat(colorsCustom.listEnabled(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
         assertThat(colorsCustom.listDisabled(), empty());
         assertThat(colorsCustom.values(), hasItems("Colors", "Red", "Green", "Blue", "Yellow"));
     }
+
     @Test
     public void baseValidationTest() {
         baseValidation(colorsCustom.value());

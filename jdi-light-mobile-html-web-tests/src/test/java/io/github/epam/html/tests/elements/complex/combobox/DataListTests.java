@@ -61,8 +61,9 @@ public class DataListTests implements TestsInit {
     @Test
     public void sendKeysTest() {
         iceCream.sendKeys("Test");
-        assertEquals(iceCream.getValue(), text+"Test");
+        assertEquals(iceCream.getValue(), text + "Test");
     }
+
     @Test
     public void selectTest() {
         iceCream.select("Chocolate");
@@ -74,12 +75,14 @@ public class DataListTests implements TestsInit {
         iceCream.select(Strawberry);
         assertEquals(iceCream.getValue(), "Strawberry");
     }
+
     @Test
     public void selectNumTest() {
         iceCream.clear();
         iceCream.select(5);
         assertEquals(iceCream.getValue(), "Vanilla");
     }
+
     @Test
     public void selectedTest() {
         assertEquals(iceCream.selected(), text);

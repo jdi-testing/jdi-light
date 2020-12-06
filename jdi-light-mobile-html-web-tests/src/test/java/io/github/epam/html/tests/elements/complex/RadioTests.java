@@ -22,6 +22,7 @@ public class RadioTests implements TestsInit {
         html5Page.shouldBeOpened();
         colors.select(text);
     }
+
     String text = "Blue";
 
     @Test
@@ -44,15 +45,18 @@ public class RadioTests implements TestsInit {
         colorsNoLocator.select(Red);
         colorsNoLocator.is().selected(Red);
     }
+
     @Test
     public void selectNumTest() {
         colors.select(1);
         assertEquals(colors.getValue(), "Red");
     }
+
     @Test
     public void selectedTest() {
         assertEquals(colors.selected(), text);
     }
+
     @Test
     public void valuesTest() {
         assertEquals(colors.values(), asList("Red", "Green", "Blue", "Yellow"));

@@ -25,6 +25,7 @@ public class TextFieldTests implements TestsInit {
         html5Page.shouldBeOpened();
         yourName.setText(text);
     }
+
     String text = "TextField";
 
     @Test
@@ -40,7 +41,7 @@ public class TextFieldTests implements TestsInit {
     @Test
     public void sendKeysTest() {
         yourName.sendKeys("Test");
-        assertEquals(yourName.getValue(), text+"Test");
+        assertEquals(yourName.getValue(), text + "Test");
     }
 
     @Test
@@ -65,7 +66,8 @@ public class TextFieldTests implements TestsInit {
     public void disabledTest() {
         try {
             disabledName.sendKeys(text);
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
+        }
         assertEquals(disabledName.getText(), "");
     }
 
@@ -101,11 +103,13 @@ public class TextFieldTests implements TestsInit {
         yourName.input(symbols);
         assertEquals(yourName.getText(), symbols);
     }
+
     @Test
     public void setTextSymbolsTest() {
         yourName.setText(symbols);
         assertEquals(yourName.getText(), symbols);
     }
+
     @Test
     public void sendKeysSymbolsTest() {
         yourName.clear();

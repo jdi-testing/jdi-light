@@ -23,6 +23,7 @@ public class MenuTests implements TestsInit {
         shouldBeLoggedIn();
         homePage.open();
     }
+
     @Test
     public void menuTest() {
         leftMenu.select(Service, Dates);
@@ -39,10 +40,11 @@ public class MenuTests implements TestsInit {
         assertEquals(menu.selected(), Service.value);
         datesPage.checkOpened();
     }
+
     @Test
     public void iterationTest() {
         List<String> menuValues = new ArrayList<>();
-        for(MenuItem item : menu) {
+        for (MenuItem item : menu) {
             menuValues.add(item.getText());
         }
         assertThat(menuValues, hasItems("Home", "Contact form", "Service", "Metals & Colors", "Elements packs"));
@@ -66,6 +68,7 @@ public class MenuTests implements TestsInit {
         leftMenu.select(Service);
         leftMenu.select(Dates);
     }
+
     @Test
     public void refreshIndexSelectTest() {
         menu.select(3);
