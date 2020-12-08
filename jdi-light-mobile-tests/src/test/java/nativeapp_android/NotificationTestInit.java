@@ -2,7 +2,6 @@ package nativeapp_android;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
-import nativeapp.android.NotifyPage;
 import nativeapp.android.apidemos.ApiDemosApp;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -18,7 +17,7 @@ public class NotificationTestInit {
     public void setUp() {
         final String FILE_NAME = "src/main/resources/ApiDemos-debug.apk";
         initMobile(ApiDemosApp.class);
-        initMobile(NotifyPage.class);
+//        initMobile(NotifyPage.class);
         logger.toLog("Run Notification Tests");
         File file = new File(FILE_NAME);
         String path = file.getAbsolutePath();

@@ -2,6 +2,7 @@ package com.epam.jdi.light.mobile.elements.common.app.android.notification;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.mobile.elements.common.Icon;
+
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class Notification extends BaseNotification {

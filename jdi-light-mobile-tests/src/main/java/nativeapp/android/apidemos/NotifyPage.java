@@ -1,7 +1,8 @@
-package nativeapp.android;
+package nativeapp.android.apidemos;
 
 import com.epam.jdi.light.mobile.elements.common.MobileDevice;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
+
 import com.epam.jdi.light.mobile.elements.common.app.android.notification.Notification;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 

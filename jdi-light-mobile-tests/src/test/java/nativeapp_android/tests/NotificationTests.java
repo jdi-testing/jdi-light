@@ -1,15 +1,18 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
-import nativeapp.android.NotifyPage;
+
+import nativeapp.android.apidemos.NotifyPage;
 import nativeapp_android.NotificationTestInit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import static nativeapp.android.NotifyPage.clearAllButton;
-import static nativeapp.android.NotifyPage.notification;
+
+
+import static nativeapp.android.apidemos.NotifyPage.notification;
+import static nativeapp.android.apidemos.app.StatusBarPage.clearAllButton;
 import static nativeapp.android.apidemos.app.StatusBarPage.notificationPanel;
 
 public class NotificationTests extends NotificationTestInit {
@@ -28,13 +31,13 @@ public class NotificationTests extends NotificationTestInit {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(notification.appName(), "Messages");
         softAssert.assertEquals(notification.time(), "now");
-        //softAssert.assertEquals(notification.isHeaderIconDisplayed(), true);
+        softAssert.assertEquals(notification.isHeaderIconDisplayed(), true);
         softAssert.assertAll();
-//        System.out.println("Notification header text = " + notification.headerText());
+        System.out.println("Notification header text = " + notification.headerText());
     }
 
     @Test
-    public void ContentInformationTest() {
+    public void contentInformationTest() {
         new NotifyPage().sendSMS("333-4545", "What a wonderful world");
 
         AndroidScreen.openNotificationPanel();
