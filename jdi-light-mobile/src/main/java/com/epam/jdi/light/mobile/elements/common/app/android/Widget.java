@@ -12,5 +12,4 @@ public class Widget extends MobileAppBaseElement<TextAssert> implements IsText {
         return new TextAssert().set(this);
     }
 
-
 }

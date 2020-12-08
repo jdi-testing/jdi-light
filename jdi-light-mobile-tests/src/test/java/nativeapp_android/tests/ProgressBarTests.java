@@ -11,9 +11,9 @@ public class ProgressBarTests extends ApiDemosTestInit {
 
     @BeforeMethod
     public void init() {
-        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Views']");
+        MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
         IndexPage.viewsPage.click();
-        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Progress Bar']");
+        MobileScreen.scrollToElementInList(IndexPage.goToProgressBarPageStageThree);
         IndexPage.goToProgressBarPageStageOne.click();
         IndexPage.goToProgressBarPageStageTwo.click();
     }

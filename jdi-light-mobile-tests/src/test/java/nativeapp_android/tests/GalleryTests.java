@@ -1,7 +1,11 @@
 package nativeapp_android.tests;
 
+import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
+import nativeapp.android.apidemos.IndexPage;
+import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.mobile.elements.complex.Images.itemIsSelected;
@@ -14,12 +18,17 @@ public class GalleryTests extends ApiDemosTestInit {
 
     private WebElement element;
 
-    @Test
-    public void selectPhotosInGallery() {
+    @BeforeMethod
+    public void init() {
+        MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
         viewsPage.click();
+        MobileScreen.scrollToElementInList(ViewsPage.galleryPage);
         galleryPage.click();
         photos.click();
+    }
 
+    @Test
+    public void selectPhotosInGallery() {
         element = select(0);
         itemIsSelected(element,true);
 

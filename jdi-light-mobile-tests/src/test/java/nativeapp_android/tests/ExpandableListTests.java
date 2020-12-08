@@ -20,7 +20,7 @@ import static nativeapp.android.apidemos.views.ViewsPage.expandableList;
 public class ExpandableListTests extends ApiDemosTestInit {
 
     @BeforeMethod
-    public void initSteps() {
+    public void init() {
         viewsPage.tap();
         expandableList.tap();
     }

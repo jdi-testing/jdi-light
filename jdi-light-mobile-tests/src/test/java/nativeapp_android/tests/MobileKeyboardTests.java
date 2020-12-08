@@ -9,32 +9,19 @@ import nativeapp.android.apidemos.views.TextFieldsPage;
 import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static nativeapp.android.apidemos.IndexPage.viewsPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MobileKeyboardTests extends ApiDemosTestInit {
 
-    @BeforeClass
-    public void beforeClass() {
-        logger.toLog("Run MobileKeyboardTests");
-    }
-
-    @BeforeMethod(alwaysRun = true)
-    public void initSteps() {
+    @BeforeMethod
+    public void init() {
         viewsPage.click();
-        while (true) {
-            try {
-                ViewsPage.textFieldsPage.click();
-                return;
-            } catch (RuntimeException e) {
-                MobileScreen.scrollDown(1000);
-            }
-        }
+        MobileScreen.scrollToElementInList(ViewsPage.textFieldsPage);
+        ViewsPage.textFieldsPage.click();
     }
 
     @Test

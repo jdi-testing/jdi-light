@@ -3,21 +3,8 @@ package nativeapp.android.apidemos;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.JApp;
 import nativeapp.android.apidemos.animation.AnimationPage;
 import nativeapp.android.apidemos.animation.CheckboxesPage;
-import nativeapp.android.apidemos.app.ActionBarDisplayOptionsPage;
-import nativeapp.android.apidemos.app.ActionBarPage;
-import nativeapp.android.apidemos.app.ActionBarUsagePage;
-import nativeapp.android.apidemos.app.AppPage;
-import nativeapp.android.apidemos.app.NotificationPage;
-import nativeapp.android.apidemos.app.StatusBarPage;
-import nativeapp.android.apidemos.views.ButtonsPage;
-import nativeapp.android.apidemos.views.RatingBarPage;
-import nativeapp.android.apidemos.views.SearchViewActionBarPage;
-import nativeapp.android.apidemos.views.SearchViewAlwaysExpandedPage;
-import nativeapp.android.apidemos.views.SearchViewFilterPage;
-import nativeapp.android.apidemos.views.SearchViewPage;
-import nativeapp.android.apidemos.views.SeekBarPage;
-import nativeapp.android.apidemos.views.TextFieldsPage;
-import nativeapp.android.apidemos.views.ViewsPage;
+import nativeapp.android.apidemos.app.*;
+import nativeapp.android.apidemos.views.*;
 
 @JApp(appPackage = "io.appium.android.apis", appActivity = "io.appium.android.apis.ApiDemos")
 public class ApiDemosApp {
@@ -57,4 +44,32 @@ public class ApiDemosApp {
     public static ActionBarUsagePage actionBarUsagePage;
 
     public static ActionBarDisplayOptionsPage actionBarDisplayOptionsPage;
+
+    public static DateWidgetsPage dateWidgetsPage;
+
+    public static DatePickerPage datePickerPage;
+
+    public static RadialPickerPage radialPickerPage;
+
+    public static RadioButtonsPage radioButtonsPage;
+
+    public static PickerPage pickerPage;
+
+    public static FragmentPage fragmentPage;
+
+    public static ContextMenuPage contextMenuPage;
+
+    public static ProgressBarPage progressBarPage;
+
+    public static SpinnerPage spinnerPage;
+
+    public static ExpandableListPage expandableListPage;
+
+    public static TabsPage tabsPage;
+
+    public static PopupPage popupPage;
+
+    public static GalleryPage galleryPage;
+
+    public static ImageSwitcherPage imageSwitcherPage;
 }
