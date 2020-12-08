@@ -19,8 +19,4 @@ public class SegmentedControlPage {
     @MobileFindBy(accessibilityId = "Selected value is: Three")
     public static MobileAppUIElement selectedValueThree;
 
-    public static void testi(){
-
-    }
-
 }
