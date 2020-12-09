@@ -25,9 +25,6 @@ public class NotificationTests extends NotificationTestInit {
 
     @Test
     public void headerInformationTest() {
-//        new NotifyPage().sendSMS("333-45-45", "Hello From Tests");
-//
-//        AndroidScreen.openNotificationPanel();
         notificationPanel.is().displayed();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(notification.appName(), "Messages");
@@ -59,7 +56,6 @@ public class NotificationTests extends NotificationTestInit {
         NotificationActions.reply.tap();
         NotificationActions.replyInput.sendKeys("Hello From Tester");
         NotificationActions.send.tap();
-//        notification.
 
     }
 

@@ -1,8 +1,8 @@
 package com.epam.jdi.light.mobile.elements.common.app.android.notification;
 
+
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.mobile.elements.common.Icon;
-
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class Notification extends BaseNotification {
@@ -10,10 +10,10 @@ public class Notification extends BaseNotification {
     protected NotificationHeader notificationHeader;
     @MobileFindBy(id = "android:id/notification_main_column")
     protected NotificationContent notificationContent;
-    @MobileFindBy(xpath = "//android.widget.LinearLayout[@resource-id=\"android:id/right_icon_container\"]/android.widget.ImageView")
+    @MobileFindBy(xpath = "//android.widget.LinearLayout[@resource-id='android:id/right_icon_container']/android.widget.ImageView")
     protected Icon rightIcon;
-    //    @MobileFindBy()
-    //    protected NotificationActions notificationActions;
+    @MobileFindBy(xpath = "//android.widget.FrameLayout[@resource-id='android:id/actions_container']/android.widget.LinearLayout[@resource-id='android:id/actions']")
+    public static NotificationActions notificationActions;
 
     // TODO: implement notificationActions Section
     // TODO: refactor the structure of Notification and it's related Sections if possible and needed
@@ -36,7 +36,9 @@ public class Notification extends BaseNotification {
     }
 
     @JDIAction("Get '{name}' time")
-    public String time() {return notificationHeader.getNotificationTime();}
+    public String time() {
+        return notificationHeader.getNotificationTime();
+    }
 
     @JDIAction("Click on '{name}' \"expand\" button")
     public void expand() {
