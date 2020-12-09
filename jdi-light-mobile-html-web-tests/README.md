@@ -19,7 +19,7 @@ module <b>jdi-light-mobile-html-web-tests</b>.
 1.1) Set following settings in android.properties file:<br>
 <b>platformName=Android</b>; <br>
 <b>deviceName=emulator-5554</b>; <br>
-<b>chromedriverExecutable=emulator-5554</b>; <br>
+<b>chromedriverExecutable=PATH_TO_LOCAL_WEBDRIVER</b>; <br>
 Here <b>deviceName</b> and <b>platformName</b> must be the same as Desired Capabilities in Inspector Session window was
 started from Appium (see future steps).
 
