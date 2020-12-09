@@ -1,5 +1,6 @@
 package nativeapp_android.tests;
 
+import com.epam.jdi.light.mobile.elements.common.app.android.notification.NotificationActions;
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
 
 import nativeapp.android.apidemos.NotifyPage;
@@ -10,7 +11,6 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 
-
 import static nativeapp.android.apidemos.NotifyPage.notification;
 import static nativeapp.android.apidemos.app.StatusBarPage.clearAllButton;
 import static nativeapp.android.apidemos.app.StatusBarPage.notificationPanel;
@@ -19,28 +19,26 @@ public class NotificationTests extends NotificationTestInit {
 
     @BeforeMethod
     public void initSteps() {
-
+        new NotifyPage().sendSMS("333-45-45", "Hello From Tests");
+        AndroidScreen.openNotificationPanel();
     }
 
     @Test
     public void headerInformationTest() {
-        new NotifyPage().sendSMS("333-45-45", "Hello From Tests");
-
-        AndroidScreen.openNotificationPanel();
+//        new NotifyPage().sendSMS("333-45-45", "Hello From Tests");
+//
+//        AndroidScreen.openNotificationPanel();
         notificationPanel.is().displayed();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(notification.appName(), "Messages");
         softAssert.assertEquals(notification.time(), "now");
-        softAssert.assertEquals(notification.isHeaderIconDisplayed(), true);
-        softAssert.assertAll();
+//         notification.isHeaderIconDisplayed();
+//        softAssert.assertAll();
         System.out.println("Notification header text = " + notification.headerText());
     }
 
     @Test
     public void contentInformationTest() {
-        new NotifyPage().sendSMS("333-4545", "What a wonderful world");
-
-        AndroidScreen.openNotificationPanel();
         notificationPanel.is().displayed();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(notification.title(), "333-4545");
@@ -49,9 +47,25 @@ public class NotificationTests extends NotificationTestInit {
         softAssert.assertAll();
     }
 
+    @Test
+    public void actionsMarkAsReadTest() {
+        notificationPanel.is().displayed();
+        NotificationActions.markAsRead.tap();
+    }
+
+    @Test
+    public void actionsReplyTest() {
+        notificationPanel.is().displayed();
+        NotificationActions.reply.tap();
+        NotificationActions.replyInput.sendKeys("Hello From Tester");
+        NotificationActions.send.tap();
+//        notification.
+
+    }
+
     @AfterMethod
     public void afterMethodCloseStatusBar() {
-        clearAllButton.click();
+        if (clearAllButton.isDisplayed()) clearAllButton.click();
         AndroidScreen.closeNotificationPanel();
     }
 }
