@@ -3,25 +3,21 @@ package nativeapp_android.tests;
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static nativeapp.android.apidemos.IndexPage.appPage;
 import static nativeapp.android.apidemos.app.AppPage.notificationPage;
 import static nativeapp.android.apidemos.app.NotificationPage.clearNotificationButton;
 import static nativeapp.android.apidemos.app.NotificationPage.happyButton;
-import static nativeapp.android.apidemos.app.NotificationPage.happyIconButton;
 import static nativeapp.android.apidemos.app.NotificationPage.statusBarButton;
-import static nativeapp.android.apidemos.app.StatusBarPage.appName;
-import static nativeapp.android.apidemos.app.StatusBarPage.title;
-import static nativeapp.android.apidemos.app.StatusBarPage.appText;
 import static nativeapp.android.apidemos.app.StatusBarPage.appIcon;
+import static nativeapp.android.apidemos.app.StatusBarPage.appName;
+import static nativeapp.android.apidemos.app.StatusBarPage.appText;
 import static nativeapp.android.apidemos.app.StatusBarPage.clearAllButton;
 import static nativeapp.android.apidemos.app.StatusBarPage.noNotifications;
 import static nativeapp.android.apidemos.app.StatusBarPage.notificationPanel;
-import static nativeapp.android.apidemos.app.StatusBarPage.statusBarLatestEventContent;
+import static nativeapp.android.apidemos.app.StatusBarPage.title;
 
 public class StatusBarTests extends ApiDemosTestInit {
 
@@ -44,33 +40,19 @@ public class StatusBarTests extends ApiDemosTestInit {
         title.is().text("Mood ring");
         appText.is().text("I am happy");
 
-        statusBarLatestEventContent.click();
-        happyIconButton.is().displayed();
-        happyIconButton.click();
+        appIcon.click();
+        appIcon.is().displayed();
+        AndroidScreen.closeNotificationPanel();
     }
 
     @Test
-    public void clearNotificationButtonTest(){
-
+    public void clearAllButtonTest() {
         AndroidScreen.openNotificationPanel();
         notificationPanel.is().displayed();
         AndroidScreen.closeNotificationPanel();
-
-        clearNotificationButton.click();
-        AndroidScreen.openNotificationPanel();
-        noNotifications.is().displayed();
-    }
-
-    @Test
-    public void clearAllButtonTest(){
-
-        AndroidScreen.openNotificationPanel();
-        notificationPanel.is().displayed();
         clearAllButton.click();
-        notificationPanel.waitFor().hidden();
-
         AndroidScreen.openNotificationPanel();
-        noNotifications.is().displayed();
+        notificationPanel.waitFor().is().displayed();
     }
 
     @AfterMethod
