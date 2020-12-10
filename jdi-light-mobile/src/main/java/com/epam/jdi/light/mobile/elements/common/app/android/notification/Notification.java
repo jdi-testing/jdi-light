@@ -8,11 +8,16 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 public class Notification extends BaseNotification {
     @MobileFindBy(id = "android:id/notification_header")
     protected NotificationHeader notificationHeader;
-    @MobileFindBy(id = "android:id/notification_main_column")
-    protected NotificationContent notificationContent;
+
+    @MobileFindBy(id = "android:id/conversation_header")
+    protected NotificationHeader notificationConversationHeader;
+
+    @MobileFindBy(id = "android:id/notification_messaging")
+    protected NotificationContent notificationMessagingContent;
+
     @MobileFindBy(xpath = "//android.widget.LinearLayout[@resource-id='android:id/right_icon_container']/android.widget.ImageView")
     protected Icon rightIcon;
-    @MobileFindBy(xpath = "//android.widget.FrameLayout[@resource-id='android:id/actions_container']/android.widget.LinearLayout[@resource-id='android:id/actions']")
+    @MobileFindBy(xpath = "//android.widget.LinearLayout[@resource-id='android:id/actions']")
     public static NotificationActions notificationActions;
 
     // TODO: implement notificationActions Section
@@ -21,13 +26,18 @@ public class Notification extends BaseNotification {
     // TODO: implement swipe L and R actions for notification.
 
     @JDIAction("Check that '{name}' header Icon is displayed")
-    public boolean isHeaderIconDisplayed() {
-        return notificationHeader.isIconDisplayed();
+    public boolean isHeaderConversationIconDisplayed() {
+        return notificationConversationHeader.isIconDisplayed();
     }
 
     @JDIAction("Get '{name}' application Name from header")
-    public String appName() {
-        return notificationHeader.getAppName();
+    public String appConversationName() {
+        return notificationConversationHeader.getAppName();
+    }
+
+    @JDIAction("Get '{name}' application Name from header")
+    public String notificationConversationName() {
+        return notificationConversationHeader.getConversationName();
     }
 
     @JDIAction("Get '{name}' header text")
@@ -47,17 +57,17 @@ public class Notification extends BaseNotification {
 
     @JDIAction("Get '{name}' content title")
     public String title() {
-        return notificationContent.getContentTitle();
+        return notificationMessagingContent.getContentTitle();
     }
 
     @JDIAction("Get '{name}' content text")
     public String contentText() {
-        return notificationContent.getContentText();
+        return notificationMessagingContent.getContentText();
     }
 
     @JDIAction("Check if '{name}' Large Icon is displayed")
     public boolean isLargeIconDisplayed() {
-        return notificationContent.isLargeIconDisplayed();
+        return notificationMessagingContent.isLargeIconDisplayed();
     }
 
     @JDIAction("Click '{name}' right Icon")

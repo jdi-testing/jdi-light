@@ -18,7 +18,6 @@ public class NotificationTestInit {
     public void setUp() {
         final String FILE_NAME = "src/main/resources/ApiDemos-debug.apk";
         initMobile(ApiDemosApp.class);
-        initMobile(NotifyPage.class);
         logger.toLog("Run Notification Tests");
         File file = new File(FILE_NAME);
         String path = file.getAbsolutePath();

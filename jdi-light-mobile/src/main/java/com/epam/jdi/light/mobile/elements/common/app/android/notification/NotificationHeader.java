@@ -11,6 +11,8 @@ public class NotificationHeader extends Section {
     @MobileFindBy(id = "android:id/app_name_text")
     private Text appName;
     @MobileFindBy(id = "android:id/header_text")
+    private Text conversationName;
+    @MobileFindBy(id = "android:id/conversation_text")
     private Text headerText; //optional
     @MobileFindBy(id = "android:id/time")
     private Text timeStamp; //optional
@@ -23,6 +25,9 @@ public class NotificationHeader extends Section {
 
     public String getAppName() {
         return appName.getText();
+    }
+    public String getConversationName() {
+        return conversationName.getText();
     }
 
     public String getHeaderText() {

@@ -13,6 +13,7 @@ import java.util.List;
 public class NotificationContent extends Section {
     private Text contentTitle;
     private Text contentText;
+
     @MobileFindBy(xpath = "//../android.widget.ImageView")
     private Icon largeIcon; // optional
 
@@ -21,6 +22,8 @@ public class NotificationContent extends Section {
     @MobileFindBys(@MobileFindBy(xpath = "//../android.widget.TextView")) //TODO: find way to fix this
     private List<Text> notificationTexts;
 
+    @MobileFindBy(xpath = "//../android.widget.ImageView")
+    private Text lastEventContent; // optional
 
     public String getContentTitle() {
         getWholeContent();
