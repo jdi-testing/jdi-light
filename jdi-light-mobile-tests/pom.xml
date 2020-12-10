@@ -18,6 +18,7 @@
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.6</aspectj.version>
         <suite.xml.file>src/test/resources/androidApps.xml</suite.xml.file>
+        <suite.xml.file>src/test/resources/iosApps.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/webMobileTests.xml</suite.xml.file>
     </properties>
 
@@ -103,8 +104,6 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>${suite.xml.file}</suiteXmlFile>
                     </suiteXmlFiles>
-                    <forkCount>2.5C</forkCount>
-                    <reuseForks>false</reuseForks>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
@@ -145,21 +144,4 @@
             </plugin>
         </plugins>
     </reporting>
-
-    <profiles>
-        <profile>
-            <id>ios</id>
-            <properties>
-                <suite.xml.file>src/test/resources/iosApps.xml</suite.xml.file>
-            </properties>
-        </profile>
-        <profile>
-            <id>android</id>
-            <properties>
-                <suite-xml-file>src/test/resources/androidApps.xml</suite-xml-file>
-            </properties>
-        </profile>
-
-    </profiles>
-
 </project>

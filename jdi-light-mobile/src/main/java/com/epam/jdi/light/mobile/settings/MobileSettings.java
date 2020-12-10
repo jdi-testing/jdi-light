@@ -38,7 +38,6 @@ public class MobileSettings {
         ELEMENT.beforeSearch = el -> {};
         ELEMENT.clickType = ElementArea.CENTER;
         fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
-        fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
         loadCapabilities("android.capabilities.path","android.properties",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_ANDROID.put(key.toString(), value.toString())));
         loadCapabilities("ios.capabilities.path","ios.properties",
