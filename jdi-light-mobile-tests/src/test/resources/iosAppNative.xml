@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="WINDOWS-1251"?>
+        <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JDI Light Mobile iOS Native Apps Tests" thread-count="1">
+
+    <test name="Calendars app tests">
+        <classes>
+            <class name="nativeapp_ios.tests.CalendarAppTests"/>
+        </classes>
+    </test>
+    <test name="Reminders app tests">
+        <classes>
+            <class name="epamiostestapp.tests.ContextMenuTest"/>
+            <class name="epamiostestapp.tests.EditMenuTest"/>
+            <class name="epamiostestapp.tests.SegmentedControlTest"/>
+            <class name="epamiostestapp.tests.SwitchTest"/>
+            <class name="epamiostestapp.tests.TabBarTest"/>
+        </classes>
+    </test>
+    <test name="Add allure environment properties">
+        <classes>
+            <class name="nativeapp.AllurePropertiesGenerator">
+                <methods>
+                    <include name="createAllureProperties" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,8 +1,6 @@
 package nativeapp.ios.epamiostestapp;
 
-import com.epam.jdi.light.mobile.elements.pageobjects.annotations.JApp;
-
-@JApp(app = "epam.com.EpamIOSTestAPP")
+//@JApp(app = "epam.com.EpamIOSTestAPP")
 public class IOSAppInit {
 
     public static ActionSheetPage actionSheetPage;
