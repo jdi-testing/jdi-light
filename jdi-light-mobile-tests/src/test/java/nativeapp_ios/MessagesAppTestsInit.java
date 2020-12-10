@@ -1,6 +1,7 @@
 package nativeapp_ios;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.ios.messages.MessagesApp;
 import nativeapp.ios.messages.WhatsNewPage;
@@ -34,6 +35,7 @@ public class MessagesAppTestsInit {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
+        new AllurePropertiesGenerator().createAllureProperties();
         WebDriverFactory.quit();
     }
 }

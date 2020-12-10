@@ -1,5 +1,6 @@
 package nativeapp;
 
+import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import nativeapp.contacts.StaticAppUtil;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -18,6 +19,7 @@ public interface TestsInit {
 
     @AfterSuite(alwaysRun = true)
     default void tearDown() {
+        new AllurePropertiesGenerator().createAllureProperties();
         killAllSeleniumDrivers();
     }
 }

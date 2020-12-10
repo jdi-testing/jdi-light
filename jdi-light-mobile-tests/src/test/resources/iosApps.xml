@@ -9,7 +9,7 @@
     </test>
     <test name="Reminders app tests">
         <classes>
-            <class name="nativeapp_is.tests.RemindersAppTests"/>
+            <class name="nativeapp_ios.tests.RemindersAppTests"/>
         </classes>
     </test>
     <test name="Contacts app tests">
@@ -30,15 +30,6 @@
     <test name="Photos app tests">
         <classes>
             <class name="nativeapp_ios.tests.PhotosAppTests"/>
-        </classes>
-    </test>
-    <test name="Add allure environment properties">
-        <classes>
-            <class name="nativeapp.AllurePropertiesGenerator">
-                <methods>
-                    <include name="createAllureProperties" />
-                </methods>
-            </class>
         </classes>
     </test>
 </suite>

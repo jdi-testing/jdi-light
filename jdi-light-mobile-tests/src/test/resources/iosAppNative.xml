@@ -16,13 +16,4 @@
             <class name="epamiostestapp.tests.TabBarTest"/>
         </classes>
     </test>
-    <test name="Add allure environment properties">
-        <classes>
-            <class name="nativeapp.AllurePropertiesGenerator">
-                <methods>
-                    <include name="createAllureProperties" />
-                </methods>
-            </class>
-        </classes>
-    </test>
 </suite>

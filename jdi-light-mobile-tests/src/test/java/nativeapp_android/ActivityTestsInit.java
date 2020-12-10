@@ -1,6 +1,7 @@
 package nativeapp_android;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.android.apidemos.ApiDemosApp;
 import org.testng.annotations.AfterClass;
@@ -28,6 +29,7 @@ public class ActivityTestsInit {
         logger.toLog("tearDown Activity Tests");
         AppManager.closeApp();
         AppManager.removeApp("io.appium.android.apis");
+        new AllurePropertiesGenerator().createAllureProperties();
         WebDriverFactory.quitDriverNativeApp();
     }
 }
