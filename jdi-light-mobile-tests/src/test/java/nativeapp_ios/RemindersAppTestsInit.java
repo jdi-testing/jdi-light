@@ -1,6 +1,7 @@
 package nativeapp_ios;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
 import io.appium.java_client.AppiumDriver;
 import nativeapp.ios.reminders.RemindersApp;
@@ -36,6 +37,7 @@ public class RemindersAppTestsInit {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
+        new AllurePropertiesGenerator().createAllureProperties();
         WebDriverFactory.quit();
     }
 }

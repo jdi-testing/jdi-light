@@ -43,8 +43,8 @@ started from Appium (see future steps).
 <h5>Test Run</h5>
 
 1. Run maven script from the module root:<br>
-   <b>mvn clean test -U -Dtest=TestClassToRunName.java#testMethodToRun</b> <br>
-   or just execute script: <b>mvn clean test -U</b><br>
+   <b>mvn clean test site -U -Dtest=TestClassToRunName.java#testMethodToRun</b> <br>
+   or just execute script: <b>mvn clean test site -U</b><br>
 
    <h5> Debug </h5>
     Debug from maven run (with breakpoints in IDE) could be performed like example below:<br>
@@ -70,4 +70,4 @@ Note: Do not delete old TestsInit.java interface in src/test/java<br>
  1. Go to module <b>jdi-light-html-tests</b><br>
  2. Edit or develop source code of tests in src/test folder<br>
 3. When finish - repeat step 6) ii." <br>
-4. Go to module <b>jdi-light-mobile-html-web-tests</b> and rerun maven script to apply changes: <b>mvn clean install -U -DskipTests</b>
+4. Go to module <b>jdi-light-mobile-html-web-tests</b> and rerun maven script to apply changes: <b>mvn clean install -U -DskipTests</b></b>

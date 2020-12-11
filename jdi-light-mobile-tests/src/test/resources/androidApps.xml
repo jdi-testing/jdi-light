@@ -30,16 +30,6 @@
             <class name="nativeapp_android.tests.ToggleDataTests"></class>
             <class name="nativeapp_android.tests.ToggleWiFiTests"></class>
             <class name="nativeapp_android.tests.TooltipsTest"></class>
-
-        </classes>
-    </test>
-    <test name="Add allure environment properties">
-        <classes>
-            <class name="nativeapp.AllurePropertiesGenerator">
-                <methods>
-                    <include name="createAllureProperties" />
-                </methods>
-            </class>
         </classes>
     </test>
 </suite>

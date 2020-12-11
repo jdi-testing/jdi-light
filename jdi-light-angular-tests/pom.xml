@@ -31,7 +31,12 @@
             <artifactId>jdi-light-angular</artifactId>
             <version>1.2.21</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-mobile</artifactId>
+            <version>1.2.21</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -84,7 +89,18 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>

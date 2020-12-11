@@ -1,6 +1,7 @@
 package nativeapp_android;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.android.AndroidFileManager;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -58,6 +59,7 @@ public class MobileFileManagerInit {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
+        new AllurePropertiesGenerator().createAllureProperties();
         WebDriverFactory.quit();
     }
 

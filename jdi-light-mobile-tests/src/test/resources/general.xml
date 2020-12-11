@@ -13,16 +13,4 @@
             <package name="io.github.epam.html.tests.site"/>
         </packages>
     </test>
-    <listeners>
-        <listener class-name="io.github.epam.testng.TestNGListener" />
-    </listeners>
-    <test name="Add allure environment properties">
-        <classes>
-            <class name="nativeapp.AllurePropertiesGenerator">
-                <methods>
-                    <include name="createAllureProperties" />
-                </methods>
-            </class>
-        </classes>
-    </test>
 </suite>

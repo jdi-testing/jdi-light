@@ -1,6 +1,7 @@
 package io.github.epam;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.settings.MobileSettings;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
@@ -32,6 +33,7 @@ public interface TestsInit {
 
     @AfterSuite(alwaysRun = true)
     default void tearDown() {
+        new AllurePropertiesGenerator().createAllureProperties();
         killAllSeleniumDrivers();
     }
 
