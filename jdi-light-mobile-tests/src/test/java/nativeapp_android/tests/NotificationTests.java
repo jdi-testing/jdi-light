@@ -1,10 +1,8 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.common.MobileKeyboard;
-import com.epam.jdi.light.mobile.elements.common.app.android.notification.Notification;
-import com.epam.jdi.light.mobile.elements.common.app.android.notification.NotificationActions;
-import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
 
+import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import nativeapp.android.apidemos.NotifyPage;
@@ -12,64 +10,62 @@ import nativeapp_android.NotificationTestInit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
-
-import static nativeapp.android.apidemos.NotifyPage.notification;
-import static nativeapp.android.apidemos.app.StatusBarPage.*;
+import static com.epam.jdi.light.mobile.elements.common.MobileDevice.sendSMS;
+import static nativeapp.android.apidemos.NotifyPage.*;
 
 public class NotificationTests extends NotificationTestInit {
+    public static final String NUMBER = "333-4545";
+    public static final String MESSAGES = "Messages";
+    public static final String MESSAGE = "Hello From Tests";
+    public static final String TEST_MESSAGE = "a";
+    public static final String NOW = "now";
+    public static final String YOU = "You";
 
     @BeforeMethod
     public void initSteps() {
-        new NotifyPage().sendSMS("333-45-45", "Hello From Tests");
+        sendSMS(NUMBER, MESSAGE);
         AndroidScreen.openNotificationPanel();
-
+        NotifyPage.notificationPanel.waitFor(5).is().displayed();
     }
 
     @Test
     public void headerInformationTest() {
-        notificationPanel.is().displayed();
-        new SoftAssert().assertEquals(notification.appConversationName(), "Messages");
-        new SoftAssert().assertEquals(notification.notificationConversationName(), "333-4545");
-        new SoftAssert().assertEquals(notification.time(), "now");
-//         notification.isHeaderIconDisplayed();
-//        softAssert.assertAll();
-        System.out.println("Notification header text = " + notification.headerText());
+        appName.has().text(MESSAGES);
+        timeStamp.has().text(NOW);
     }
 
     @Test
     public void contentInformationTest() {
-        notificationPanel.is().displayed();
-        new SoftAssert().assertEquals(notification.notificationConversationName(),"333-4545");
-        new SoftAssert().assertEquals(notification.contentText(), "Hello From Tests");
-        new SoftAssert().assertEquals(notification.isLargeIconDisplayed(), true);
-        new SoftAssert().assertAll();
+        notificationMessagingContent.has().text(MESSAGE);
+        notificationName.has().text(NUMBER);
+        appIcon.is().displayed();
     }
 
     @Test
     public void actionsMarkAsReadTest() {
         notificationPanel.is().displayed();
-        NotificationActions.markAsRead.tap();
+        markAsRead.tap();
+        notificationMessagingContent.is().disappear();
     }
 
     @Test
     public void actionsReplyTest() {
         notificationPanel.is().displayed();
-        NotificationActions.reply.tap();
+        reply.tap();
         MobileKeyboard.pressKey(new KeyEvent(AndroidKey.A));
-        NotificationActions.send.tap();
-        new SoftAssert().assertEquals(notification.notificationConversationName(),"333-4545");
-
-        //check reply text
+        send.tap();
+        findNotificationMessageText("name", YOU).waitFor(2).is().displayed();
+        findNotificationMessageText("name", NUMBER).is().displayed();
+        findNotificationMessageText("text", MESSAGE).is().displayed();
+        findNotificationMessageText("text", TEST_MESSAGE).is().displayed();
     }
-
-
 
 
     @AfterMethod
     public void afterMethodCloseStatusBar() {
-        if (clearAllButton.isDisplayed()) clearAllButton.click();
+        if (clearAllButton.isDisplayed()) clearAllButton.tap();
+        if (markAsRead.isDisplayed()) markAsRead.tap();
         AndroidScreen.closeNotificationPanel();
     }
 }
