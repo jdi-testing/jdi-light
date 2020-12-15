@@ -14,6 +14,7 @@
             <class name="nativeapp_android.tests.ToggleDataTests"></class>
             <class name="nativeapp_android.tests.ToggleWiFiTests"></class>
             <class name="nativeapp_android.tests.TooltipsTest"></class>
+            <class name="nativeapp_android.tests.NotificationTests"></class>
         </classes>
     </test>
 </suite>
