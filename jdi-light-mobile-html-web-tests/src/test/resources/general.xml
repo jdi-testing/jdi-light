@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="WINDOWS-1251"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JDI-Light Mobile HTML Web Tests">
     <test name="Tests">
@@ -13,9 +13,6 @@
             <package name="io.github.epam.html.tests.performance"/>
             <package name="io.github.epam.html.tests.site"/>
         </packages>
-        <!--classes>
-            <class name="io.github.epam.html.tests.debug.DebugTests"/>
-        </classes-->
     </test>
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener"/>
