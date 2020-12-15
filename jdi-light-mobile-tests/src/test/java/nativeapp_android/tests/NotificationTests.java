@@ -6,7 +6,7 @@ import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import nativeapp.android.apidemos.NotifyPage;
-import nativeapp_android.NotificationTestInit;
+import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.mobile.elements.common.MobileDevice.sendSMS;
 import static nativeapp.android.apidemos.NotifyPage.*;
 
-public class NotificationTests extends NotificationTestInit {
+public class NotificationTests extends ApiDemosTestInit {
     public static final String NUMBER = "333-4545";
     public static final String MESSAGES = "Messages";
     public static final String MESSAGE = "Hello From Tests";
@@ -60,7 +60,6 @@ public class NotificationTests extends NotificationTestInit {
         findNotificationMessageText("text", MESSAGE).is().displayed();
         findNotificationMessageText("text", TEST_MESSAGE).is().displayed();
     }
-
 
     @AfterMethod
     public void afterMethodCloseStatusBar() {
