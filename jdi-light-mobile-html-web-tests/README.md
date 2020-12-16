@@ -1,6 +1,7 @@
-<h1> How to launch HTMl Web tests on Android emulator</h1>  
+<h1> How to launch HTMl Web tests on Android emulator or IOS simulator</h1>  
 
-Required tools: Android Studio, Appium, Maven.
+<h2> Requires for Android</h2>
+Required tools for Android: Android Studio, Appium, Maven.
 
 0) Download chrome driver For more details
    visit: https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/web/chromedriver.md
@@ -71,3 +72,23 @@ Note: Do not delete old TestsInit.java interface in src/test/java<br>
  2. Edit or develop source code of tests in src/test folder<br>
 3. When finish - repeat step 6) ii." <br>
 4. Go to module <b>jdi-light-mobile-html-web-tests</b> and rerun maven script to apply changes: <b>mvn clean install -U -DskipTests</b></b>
+
+
+<h2> Requires for Ios</h2>
+Required tools for Ios: Xcode, Appium, Maven.
+
+In general settings absolutely the same as for Android but you need to use ios.properties instead of android.properties 
+and in test.properties change two fields which use android to ios:
+
+1) Set following settings in test.properties file: <br>
+   <b>driver=ios</b>; <br>
+   <b>remote.type=appium</b>; <br>
+   <b>appium.capabilities.path=ios.properties</b>; <br>
+   <b>driver.remote.run=true</b>; <br>
+
+2) Set following settings in ios.properties file:<br>
+    <b>platformName=ios</b>; <br>
+    <b>automationName=XCUITest</b>;<br>
+    <b>platformVersion=14.2</b>;<br>
+    <b>deviceName=iPhone 11</b>; <br>
+    <b>browserName=Safari</b>; <br>
