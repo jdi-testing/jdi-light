@@ -74,7 +74,7 @@ Note: Do not delete old TestsInit.java interface in src/test/java<br>
 4. Go to module <b>jdi-light-mobile-html-web-tests</b> and rerun maven script to apply changes: <b>mvn clean install -U -DskipTests</b></b>
 
 
-<h2> Requires for Ios</h2>
+<h2> Requirement for Ios</h2>
 Required tools for Ios: Xcode, Appium, Maven.
 
 In general settings absolutely the same as for Android but you need to use ios.properties instead of android.properties 
