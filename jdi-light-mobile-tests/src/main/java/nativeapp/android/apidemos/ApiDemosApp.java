@@ -72,4 +72,6 @@ public class ApiDemosApp {
     public static GalleryPage galleryPage;
 
     public static ImageSwitcherPage imageSwitcherPage;
+
+    public static NotifyPage notifyPage;
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JDI-Light HTML Demo Tests">
+    <test name="Tests">
+        <classes>
+            <class name="io.github.epam.html.tests.elements.common.ButtonTests"></class>
+            <class name="io.github.epam.html.tests.elements.common.AlertsTests"></class>
+        </classes>
+    </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.TestNGListener"/>
+    </listeners>
+</suite>
+
+

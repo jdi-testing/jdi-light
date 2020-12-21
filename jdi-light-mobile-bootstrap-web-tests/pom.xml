@@ -22,6 +22,8 @@
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.6</aspectj.version>
+        <suite.xml.file>src/test/resources/demoRun.xml</suite.xml.file>
+        <suite.xml.file>src/test/resources/general.xml</suite.xml.file>
     </properties>
 
     <dependencies>
@@ -98,7 +100,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
+                        <suiteXmlFile>${suite.xml.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
