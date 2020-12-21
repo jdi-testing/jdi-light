@@ -3,10 +3,6 @@
 <suite name="JDI-Light HTML Demo Tests">
     <test name="Common Tests">
         <classes>
-            <class name="io.github.epam.html.tests.elements.common.ButtonTests"></class>
-            <class name="io.github.epam.html.tests.elements.common.AlertsTests"></class>
-            <class name="io.github.epam.html.tests.elements.common.ColorPickerTests"></class>
-            <class name="io.github.epam.html.tests.elements.common.FileUploadTests"></class>
             <class name="io.github.epam.html.tests.elements.complex.table.DataConversionTests"></class>
         </classes>
     </test>
