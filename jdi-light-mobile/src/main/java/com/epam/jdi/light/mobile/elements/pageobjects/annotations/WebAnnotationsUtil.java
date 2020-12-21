@@ -47,10 +47,10 @@ public class WebAnnotationsUtil {
                 return MobileBy.name(locator.name());
             if (!"".equals(locator.androidUIAutomator()))
                 return MobileBy.AndroidUIAutomator(locator.androidUIAutomator());
-            //TODO: Yet to be checked   (native app needed)
-/*            if (!"".equals(locator.androidDataMatcher()))
+            if (!"".equals(locator.androidDataMatcher()))
                 return MobileBy.androidDataMatcher(locator.androidDataMatcher());
-            if (!"".equals(locator.androidViewTag()))
+            //TODO: Yet to be checked   (native app needed)
+/*            if (!"".equals(locator.androidViewTag()))
                 return MobileBy.AndroidViewTag(locator.androidViewTag());
             if (!"".equals(locator.image()))
                 return MobileBy.image(locator.image());*/
