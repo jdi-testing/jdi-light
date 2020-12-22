@@ -3,7 +3,7 @@ package nativeapp.android.apidemos.views;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.common.app.android.TextField;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
-
+import org.openqa.selenium.By;
 
 public class RadioButtonsPage {
 
@@ -12,4 +12,6 @@ public class RadioButtonsPage {
 
     @MobileFindBy(id = "io.appium.android.apis:id/choice")
     public static TextField logChose;
+
+    public static By radioButton = new By.ByClassName("android.widget.RadioButton");
 }
