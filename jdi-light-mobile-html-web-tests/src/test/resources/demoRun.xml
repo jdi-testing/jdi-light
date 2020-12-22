@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JDI-Light HTML Demo Tests">
-    <test name="Tests">
+    <test name="Common Tests">
         <classes>
-            <class name="io.github.epam.html.tests.elements.common.ButtonTests"></class>
-            <class name="io.github.epam.html.tests.elements.common.AlertsTests"></class>
+            <class name="io.github.epam.html.tests.elements.complex.table.DataConversionTests"></class>
+        </classes>
+    </test>
+    <test name="Complex Tests">
+        <classes>
+            <class name="io.github.epam.html.tests.elements.complex.table.DataConversionTests"></class>
+        </classes>
+    </test>
+    <test name="Composite Tests">
+        <classes>
+            <class name="io.github.epam.html.tests.elements.composite.FormInitTests"></class>
+            <class name="io.github.epam.html.tests.elements.composite.section.CustomSectionTests"></class>
+            <class name="io.github.epam.html.tests.elements.composite.section.CustomSectionUITests"></class>
+            <class name="io.github.epam.html.tests.elements.composite.section.ExtendedSectionTests"></class>
+            <class name="io.github.epam.html.tests.elements.composite.section.ExtendedSectionUITests"></class>
+            <class name="io.github.epam.html.tests.elements.composite.webpage.AnnotationsWebPageTests"></class>
+            <class name="io.github.epam.html.tests.elements.composite.webpage.CustomWebPageTests"></class>
+            <class name="io.github.epam.html.tests.elements.composite.webpage.CustomWebPageUITests"></class>
+            <class name="io.github.epam.html.tests.elements.composite.webpage.ExtendedWebPageTests"></class>
+            <class name="io.github.epam.html.tests.elements.composite.webpage.ExtendedWebPageUITests"></class>
         </classes>
     </test>
     <listeners>
