@@ -17,7 +17,8 @@ public class MobileUIElementList {
         List<WebElement> elements = getDriver().findElements(locator);
         WebElement element = elements.stream().filter(item -> item.getText().contains(name))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("Expected WebElement with text" + name + "is missing in the list"));
+                .orElseThrow(() -> new NoSuchElementException(
+                        "Expected WebElement with text" + name + "is missing in the list"));
         return element;
     }
 }
