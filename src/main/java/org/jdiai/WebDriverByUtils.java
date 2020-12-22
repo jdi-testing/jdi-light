@@ -91,7 +91,7 @@ public final class WebDriverByUtils {
     private static String shortBy(By by, JFunc<String> noLocator) {
         return (by == null
                 ? noLocator.execute()
-                : format("%s='%s'", getByType(by), getByLocator(by))).replaceAll("%s", "{{VALUE}}");
+                : format("%s='%s'", getByType(by), getByLocator(by)));
     }
 
     private static Map<String, Function<String, By>> getMapByTypes() {

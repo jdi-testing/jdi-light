@@ -18,7 +18,7 @@ public class JSJsonTest extends TestInit {
     @Test
     public void oneTest() {
         JsonObject jsObject = json("#user-name").getJson(
-            " { \"tag\": element.tagName, \"iText\": element.innerText, \"text\": element.textContent, \"iHtml\": element.innerHTML }");
+            " { 'tag': element.tagName, 'iText': element.innerText, 'text': element.textContent, 'iHtml': element.innerHTML }");
 
         assertEquals(jsObject.get("tag").getAsString(), "SPAN");
         assertEquals(jsObject.get("iText").getAsString(), "Roman Iovlev");
@@ -28,8 +28,8 @@ public class JSJsonTest extends TestInit {
     @Test
     public void oneFewLocatorsTest() {
         JsonObject jsObject = json(withParent("#user-name")).getJson(
-            " { \"tag\": element.tagName, \"iText\": element.innerText, " +
-            "\"text\": element.textContent, \"iHtml\": element.innerHTML }");
+            " { 'tag': element.tagName, 'iText': element.innerText, " +
+            "'text': element.textContent, 'iHtml': element.innerHTML }");
 
         assertEquals(jsObject.get("tag").getAsString(), "SPAN");
         assertEquals(jsObject.get("iText").getAsString(), "Roman Iovlev");

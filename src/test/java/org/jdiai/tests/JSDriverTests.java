@@ -116,8 +116,8 @@ public class JSDriverTests extends TestInit {
     }
     @Test
     public void toObjectTests() {
-        JsonObject json = js("#user-icon").getOne("{ \"tag\": element.tagName, \"ref\": element.src }").asJson();
-        Link link = js("#user-icon").getOne("{ \"tag\": element.tagName, \"ref\": element.src }").asObject(Link.class);
+        JsonObject json = js("#user-icon").getOne("{ 'tag': element.tagName, 'ref': element.src }").asJson();
+        Link link = js("#user-icon").getOne("{ 'tag': element.tagName, 'ref': element.src }").asObject(Link.class);
         assertEquals(link.tag, "IMG");
         assertEquals(link.ref, "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
         assertEquals(json.get("ref").getAsString(), link.ref);
@@ -131,10 +131,10 @@ public class JSDriverTests extends TestInit {
     }
 
     private String getStyle(JSDriver driver, String style) {
-        return driver.getOne("{ \"style\": getComputedStyle(element)." + style + " }").asJson().get("style").getAsString();
+        return driver.getOne("{ 'style': getComputedStyle(element)." + style + " }").asJson().get("style").getAsString();
     }
     private MapArray<String, String> getStyles(JSDriver driver, List<String> styles) {
-        String jsonObject = "{ " + print(map(styles, el -> "\"" + el + "\": getComputedStyle(element)." + el), ", ") + " }";
+        String jsonObject = "{ " + print(map(styles, el -> "'" + el + "': getComputedStyle(element)." + el), ", ") + " }";
         JsonObject json = driver.getOne(jsonObject).asJson();
         return new MapArray<>(styles, s -> s, s -> json.get(s).getAsString());
     }

@@ -18,8 +18,8 @@ public class JSObjectTest extends TestInit {
     @Test
     public void oneTest() {
         TextInfo jsObject = entity(TextInfo.class, "#user-name").getObject(
-            " { \"tag\": element.tagName, \"iText\": element.innerText, " +
-            "\"text\": element.textContent, \"iHtml\": element.innerHTML }");
+            " { 'tag': element.tagName, 'iText': element.innerText, " +
+            "'text': element.textContent, 'iHtml': element.innerHTML }");
 
         assertEquals(jsObject.tag, "SPAN");
         assertEquals(jsObject.iText, "Roman Iovlev");
@@ -39,8 +39,8 @@ public class JSObjectTest extends TestInit {
     @Test
     public void oneFewLocatorsTest() {
         TextInfo jsObject = entity(TextInfo.class, withParent("#user-name")).getObject(
-            " { \"tag\": element.tagName, \"iText\": element.innerText, " +
-            "\"text\": element.textContent, \"iHtml\": element.innerHTML }");
+            " { 'tag': element.tagName, 'iText': element.innerText, " +
+            "'text': element.textContent, 'iHtml': element.innerHTML }");
 
         assertEquals(jsObject.tag, "SPAN");
         assertEquals(jsObject.iText, "Roman Iovlev");

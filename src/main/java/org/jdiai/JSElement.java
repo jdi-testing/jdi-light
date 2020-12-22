@@ -61,7 +61,7 @@ public class JSElement implements WebElement {
 
     public void slide(String value) {
         //Actions a = new Actions(DRIVER.get());
-        //a.dragAndDropBy(DRIVER.get().findElement(By.xpath("[aria-labelledby='range-slider'][data-index=\"0\"]")),20, 0)
+        //a.dragAndDropBy(DRIVER.get().findElement(By.xpath("[aria-labelledby='range-slider'][data-index='0']")),20, 0)
         //        .build().perform();
         //js.jsDriver().builder().oneToOne("document", locators.get(0))
         //        .addJSCode("element.value='" + value + "';\n")
@@ -79,7 +79,7 @@ public class JSElement implements WebElement {
     }
 
     public String getAttribute(String name) {
-        return jsResult("getAttribute(\"" + name + "\")");
+        return jsResult("getAttribute('" + name + "')");
     }
 
     public boolean isSelected() {
@@ -107,9 +107,9 @@ public class JSElement implements WebElement {
     }
 
     public boolean isDisplayed() {
-        return js.getJson("{ \"displayed\": element !== null && " +
-            "getComputedStyle(element).visibility === \"visible\" && " +
-            "getComputedStyle(element).display !== \"none\" }").get("displayed").getAsBoolean();
+        return js.getJson("{ 'displayed': element !== null && " +
+            "getComputedStyle(element).visibility === 'visible' && " +
+            "getComputedStyle(element).display !== 'none' }").get("displayed").getAsBoolean();
     }
 
     public boolean weDisplayed() {

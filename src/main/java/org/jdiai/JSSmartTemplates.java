@@ -3,7 +3,7 @@ package org.jdiai;
 public class JSSmartTemplates {
     public static String FILTER_FUNC =
         "function filter(element)\n{\n" +
-        "  return element != null && getComputedStyle(element).visibility === \"visible\";\n" +
+        "  return element != null && getComputedStyle(element).visibility === 'visible';\n" +
         "}\n";
     public static String ONE_TO_RESULT = "return %s;";
     public static String LIST_TO_RESULT =

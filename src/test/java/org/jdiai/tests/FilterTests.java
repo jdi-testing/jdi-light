@@ -38,13 +38,13 @@ public class FilterTests extends TestInit {
     @Test
     public void complexTest() {
         String json =
-            "{ \"tag\": element.tagName, " +
-            "\"id\": element.id, " +
-            "\"text\": element.textContent, " +
-            "\"visibility\": getComputedStyle(element).visibility, " +
-            "\"fontSize\": getComputedStyle(element).fontSize, " +
-            "\"selected\": !!element.selected, " +
-            "\"html\": element.innerHTML }";
+            "{ 'tag': element.tagName, " +
+            "'id': element.id, " +
+            "'text': element.textContent, " +
+            "'visibility': getComputedStyle(element).visibility, " +
+            "'fontSize': getComputedStyle(element).fontSize, " +
+            "'selected': !!element.selected, " +
+            "'html': element.innerHTML }";
         List<ElementInfo> info = entity(ElementInfo.class, "#furniture-double-hidden th")
             .getObjectList(json);
         assertEquals(info.size(), 6);

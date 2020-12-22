@@ -34,10 +34,10 @@ public abstract class JSBase<T extends JSBase<?>> {
     }
 
     public String getStyle(String style) {
-        return driver.getOne("{ \"style\": getComputedStyle(element)." + style + " }").asJson().get("style").getAsString();
+        return driver.getOne("{ 'style': getComputedStyle(element)." + style + " }").asJson().get("style").getAsString();
     }
     public MapArray<String, String> getStyles(List<String> styles) {
-        String jsonObject = "{ " + print(map(styles, el -> "\"" + el + "\": getComputedStyle(element)." + el), ", ") + " }";
+        String jsonObject = "{ " + print(map(styles, style -> "'" + style + "': getComputedStyle(element)." + style), ", ") + " }";
         JsonObject json = driver.getOne(jsonObject).asJson();
         return new MapArray<>(styles, s -> s, s -> json.get(s).getAsString());
     }
@@ -46,11 +46,11 @@ public abstract class JSBase<T extends JSBase<?>> {
     }
 
     public List<String> getStylesList(String style) {
-        List<JsonObject> styles = driver.getList("{ \"style\": getComputedStyle(element)." + style + " }").asJson();
+        List<JsonObject> styles = driver.getList("{ 'style': getComputedStyle(element)." + style + " }").asJson();
         return map(styles, s -> s.get("style").getAsString());
     }
     public List<MapArray<String, String>> getMultiStyles(List<String> styles) {
-        String jsonObject = "{ " + print(map(styles, el -> "\"" + el + "\": getComputedStyle(element)." + el), ", ") + " }";
+        String jsonObject = "{ " + print(map(styles, el -> "'" + el + "': getComputedStyle(element)." + el), ", ") + " }";
         List<JsonObject> jsonList = driver.getList(jsonObject).asJson();
         return map(jsonList, j -> new MapArray<>(styles, s -> s, s -> j.get(s).getAsString()));
     }
@@ -59,6 +59,6 @@ public abstract class JSBase<T extends JSBase<?>> {
     }
 
     protected String attributesToJson(List<String> attributes) {
-        return  "{ " + print(map(attributes, el -> "\"" + el + "\": element." + el), ", ") + " }";
+        return  "{ " + print(map(attributes, el -> "'" + el + "': element." + el), ", ") + " }";
     }
 }
