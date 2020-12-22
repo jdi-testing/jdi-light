@@ -5,7 +5,10 @@ import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
+import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
+import com.epam.jdi.light.elements.pageobjects.annotations.Title;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.annotations.JMenu;
@@ -44,7 +47,6 @@ public class StaticSite {
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static WebList navigationL;
 	@Css("[ui=label]") public static UIElement navigationElement;
-	@WaitAfterAction
 	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList navigationS;
 	//TODO
 	//@UI("[ui=label][*'%s']") public static WebList navigationS;

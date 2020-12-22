@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static io.github.com.pages.Header.epamLogo;
 import static io.github.com.pages.Header.search;
@@ -31,7 +30,7 @@ public class SearchTests extends StaticTestsInit {
 
     @Test
     public void printResultTest() {
-        String result = search3.get(ELEMENT.startIndex + 1).print();
+        String result = search3.get(2).print();
         assertEquals(result, "SearchResult{NAME=JDI OWNER CONTACT; DESCRIPTION=Write an email directly to Framework owner and main architect Iovlev Roman; LINK=mailto:roman.iovlev.jdi@gmail.com}");
     }
     @Test

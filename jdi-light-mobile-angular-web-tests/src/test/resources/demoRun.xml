@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JDI-Light Angular Demo Tests">
+    <test name="Unit tests">
+        <classes>
+            <class name="io.github.epam.angular.tests.unit.BadgeUnitTests"></class>
+            <class name="io.github.epam.angular.tests.unit.ButtonToggleUnitTests"></class>
+        </classes>
+    </test>
+    <test name=" Complex tests">
+        <classes>
+            <class name="io.github.epam.angular.tests.elements.complex.ListTests"></class>
+            <class name="io.github.epam.angular.tests.elements.complex.RadioButtonTests"></class>
+        </classes>
+    </test>
+    <test name="Common tests">
+        <classes>
+            <class name="io.github.epam.angular.tests.elements.common.BadgeTests"></class>
+        </classes>
+    </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.TestNGListener"/>
+    </listeners>
+</suite>

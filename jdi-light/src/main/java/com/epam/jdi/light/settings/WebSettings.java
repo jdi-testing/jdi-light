@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.driver.get.DriverTypes;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.HighlightStrategy;
@@ -15,7 +16,9 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.pairs.Pair;
-import org.openqa.selenium.*;
+import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,10 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
-import static com.epam.jdi.light.actions.ActionHelper.CHECK_MULTI_THREAD;
 import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
@@ -35,13 +35,11 @@ import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.common.SetTextTypes.CLEAR_SEND_KEYS;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.common.UseSmartSearch.*;
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-import static com.epam.jdi.light.driver.WebDriverFactory.RUN_DRIVERS;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriverFromName;
+import static com.epam.jdi.light.driver.WebDriverFactory.INIT_THREAD_ID;
 import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
-import static com.epam.jdi.light.elements.base.JdiSettings.*;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.logger.Strategy.*;
@@ -75,6 +73,7 @@ public class WebSettings {
         return "No Domain Found. Use test.properties or JDISettings.DRIVER.domain";
     }
     public static void setDomain(String domain) {
+        logger.debug("DRIVER.domain = " + domain);
         DRIVER.domain = domain;
     }
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
@@ -105,8 +104,6 @@ public class WebSettings {
     }
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
         switch (ELEMENT.useSmartSearch) {
-            case FALSE:
-                return null;
             case ONLY_UI:
                 if (el.base().locator.isNull())
                     return null;
@@ -115,25 +112,29 @@ public class WebSettings {
                 if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
                     return null;
                 break;
+            default:
+                return null;
         }
         String locatorName = ELEMENT.smartName.value.execute(el.getName());
-        By locator = defineLocator(format(ELEMENT.smartTemplate, locatorName));
-        SearchContext ctx = getDefaultContext(el.base().driver());
-        try {
-            List<WebElement> elements = ELEMENT.smartTemplate.equals("#%s")
-                ? ctx.findElements(locator)
-                : getWebElementsFromContext(el.base(), locator);
-            return filterWebListToWebElement(el.base(), elements);
-        } catch (Exception ignore) {
-            throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
-        }
+        return el.base().timer().getResult(() -> {
+            String locator = format(ELEMENT.smartTemplate, locatorName);
+            UIElement ui = (ELEMENT.smartTemplate.equals("#%s")
+                ? $(locator)
+                : $(locator, el.base().parent))
+                    .setup(e -> e.setName(el.getName()).noWait());
+            try {
+                return ui.getWebElement();
+            } catch (Exception ignore) {
+                throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
+            }
+        });
     };
     private static void fillAction(JAction1<String> action, String name) {
         String prop = null;
         try {
             prop = getProperty(name);
         } catch (Exception ignore) {}
-        logger.trace("fillAction(%s=%s)", name, prop == null ? "null" : prop);
+        logger.debug("fillAction(%s=%s)", name, prop == null ? "null" : prop);
         if (isBlank(prop)) return;
         action.execute(prop);
     }
@@ -141,17 +142,15 @@ public class WebSettings {
     public static boolean initialized = false;
 
     public static synchronized void init() {
-        CHECK_MULTI_THREAD.execute();
         if (initialized) return;
-        Lock locker = new ReentrantLock();
-        locker.lock();
-        logger.trace("init()");
+        logger.debug("init()");
         try {
             Properties properties = getProperties(COMMON.testPropertiesPath);
             if (properties.isEmpty()) {
                 LOGS.writeToAllure = !getProperties("allure.properties").isEmpty();
                 COMMON.strategy.action.execute();
                 return;
+
             }
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();
@@ -161,10 +160,6 @@ public class WebSettings {
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
             fillAction(p -> DRIVER.path = p, "drivers.path");
-            fillAction(p -> {
-                if (parseBoolean(p))
-                    DRIVER.getFunc = name -> getDriverFromName(name, RUN_DRIVERS);
-            }, "single.thread");
             fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
             fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(WebSettings::setDomain, "domain");
@@ -216,12 +211,10 @@ public class WebSettings {
             loadCapabilities("common.capabilities.path","common.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
 
+            INIT_THREAD_ID = Thread.currentThread().getId();
             initialized = true;
         } catch (Throwable ex) {
             throw exception(ex, "Failed to init test.properties");
-        } finally {
-            logger.trace("init() DONE");
-            locker.unlock();
         }
     }
 
@@ -258,6 +251,7 @@ public class WebSettings {
                 DRIVER.capabilities.common = sauceCapabilities();
                 return sauceLabs();
             case "browserstack": return browserstack();
+            case "appium": return appium();
             default: return seleniumLocalhost();
         }
     }
@@ -307,7 +301,7 @@ public class WebSettings {
         if (p.equals("strict"))
             p = "visible, single";
         if (p.split(",").length == 2) {
-            List<String> params = map(asList(p.split(",")), a -> ELEMENT.simplifyString.execute(a));
+            List<String> params = asList(p.split(","));
             if (params.contains("visible") || params.contains("displayed"))
                 onlyVisible();
             if (params.contains("any") || params.contains("all"))
@@ -325,14 +319,13 @@ public class WebSettings {
 
     private static PageLoadStrategy getPageLoadStrategy(String strategy) {
         switch (strategy.toLowerCase()) {
-            case "normal": return NORMAL;
             case "none": return PageLoadStrategy.NONE;
             case "eager": return EAGER;
+            default:  return NORMAL;
         }
-        return NORMAL;
     }
 
-    public static Properties getProperties(String path) {
+    private static Properties getProperties(String path) {
         File propertyFile = new File(path);
         Properties properties;
         if (propertyFile.exists()) {

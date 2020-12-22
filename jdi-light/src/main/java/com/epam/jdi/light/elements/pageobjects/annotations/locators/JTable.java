@@ -28,7 +28,7 @@ public @interface JTable {
     @MarkupLocator String footer() default "tfoot";
     int size() default -1;
     int count() default -1;
-    int shiftColumnIndex() default -1;
-    int shiftRowIndex() default -1;
+    int firstColumnIndex() default -1;
+    int firstRowIndex() default -1;
     int[] columnsMapping() default {};
 }

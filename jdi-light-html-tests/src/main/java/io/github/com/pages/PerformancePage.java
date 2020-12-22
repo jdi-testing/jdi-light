@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.GetAny;
 import com.epam.jdi.light.elements.pageobjects.annotations.NoCache;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -13,10 +12,7 @@ import io.github.com.custom.UserTable;
 import io.github.com.entities.UserInfo;
 
 public class PerformancePage extends WebPage {
-	@UI("#users-table tr>td:first-child")
-	public static WebList firstRow;
-	@UI("#users-table tr>td:first-child")  @GetAny
-	public static WebList firstRowNoValidation;
+	@UI("#users-table tr>td:first-child") public static WebList firstRow;
 	@UI("//*[@id='users-table']//tr/td[1][text()='%s']") public static WebList firstTemplate;
 	@UI("//*[@id='users-table']//tr/td[1]") public static WebList firstXpath;
 

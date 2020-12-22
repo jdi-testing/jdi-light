@@ -43,7 +43,7 @@ public class DownloadDriverManager {
                 case X32:
                     wdm = wdm.arch32();
                     break;
-                case X64:
+                default: case X64:
                     wdm = wdm.arch64();
                     break;
             }
