@@ -49,3 +49,18 @@ If your version of Appium has its own URL (not http://0.0.0.0:4723), specify it 
 5) Run tests from JDI Light Mobile tests directory:<br>
   <code>mvn clean test</code>
 
+# How to launch Android system tests example
+**Required tools:** OS Android 10.0, device emulator Pixel XL, Appium 1.18.3
+1) Set the following settings in test.properties file: 
+**driver=android** <br>
+**remote.type=appium** <br>
+If your version of Appium has its own URL (not http://0.0.0.0:4723), specify it in the <b>driver.remote.url</b> property
+2) Set the following settings in android.properties file:
+**platformName=Android** <br>
+**deviceName=emulator-5554 (the name of your emulated device)** <br>
+3) Launch Appium client
+4) Open Android device emulator
+5) Run tests from JDI Light Mobile tests directory:<br>
+**System test also available for Android 11. There are in package SystemAndroid11Tests**<br>
+**Directory SystemAndroid10Tests**<br>
+  <code>mvn clean test</code>

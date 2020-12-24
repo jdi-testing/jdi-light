@@ -1,4 +1,4 @@
-package nativeapp_android.tests;
+package nativeapp_android.tests.SystemAndroid10Tests;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.mobile.elements.common.AppManager;

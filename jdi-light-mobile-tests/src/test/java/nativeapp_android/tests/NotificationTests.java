@@ -37,7 +37,7 @@ public class NotificationTests extends ApiDemosTestInit {
 
     @Test
     public void contentInformationTest() {
-        notificationMessagingContent.has().text(MESSAGE);
+        NotifyPage.notificationMessagingContent.has().text(MESSAGE);
         notificationName.has().text(NUMBER);
         appIcon.is().displayed();
     }
@@ -46,7 +46,7 @@ public class NotificationTests extends ApiDemosTestInit {
     public void actionsMarkAsReadTest() {
         notificationPanel.is().displayed();
         markAsRead.tap();
-        notificationMessagingContent.is().disappear();
+        NotifyPage.notificationMessagingContent.is().disappear();
     }
 
     @Test

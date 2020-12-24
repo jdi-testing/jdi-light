@@ -14,4 +14,7 @@ public class NetworkAndInternetPage {
     @MobileFindBy(id = "android:id/switch_widget")
     public static Switch airplaneModeSwitch;
 
+    @MobileFindBy(id = "android:id/switch_widget")
+    public static Switch airplaneModeForAndroid11;
+
 }
