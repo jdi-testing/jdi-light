@@ -23,13 +23,13 @@ public class TooltipsTest extends ApiDemosTestInit {
 
     @Test
     public void getAllToolTipsFromGallery() {
-        GalleryPage.photoOne.longPress();
+        GalleryPage.photoOne.tap();
         GalleryPage.galleryLayout.find(By.linkText("0")).isExist();
 
-        GalleryPage.photoTwo.longPress();
+        GalleryPage.photoTwo.tap();
         GalleryPage.galleryLayout.find(By.linkText("1")).isExist();
 
-        GalleryPage.photoThree.longPress();
+        GalleryPage.photoThree.tap();
         GalleryPage.galleryLayout.find(By.linkText("2")).isExist();
     }
 
