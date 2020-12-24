@@ -1,4 +1,4 @@
-package nativeapp_android.tests;
+package nativeapp_android.tests.SystemAndroid10Tests;
 
 import nativeapp_android.SettingsAppTestsInit;
 import org.testng.annotations.BeforeMethod;

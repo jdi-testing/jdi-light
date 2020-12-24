@@ -1,4 +1,4 @@
-package nativeapp_android.tests;
+package nativeapp_android.tests.SystemAndroid11Tests;
 
 import com.epam.jdi.light.mobile.elements.common.MobileDeviceActivity;
 import nativeapp_android.ActivityTestsInit;
@@ -12,16 +12,16 @@ public class ActivityTests extends ActivityTestsInit {
     @DataProvider(name = "forStartActivityTest")
     public Object[][] providerForStartActivity() {
         return new Object[][]{
-            {"com.android.dialer",                  ".main.impl.MainActivity"},
-            {"com.google.android.apps.messaging",   ".ui.ConversationListActivity"},
-            {"com.google.android.deskclock",        "com.android.deskclock.DeskClock"},
-            {"com.android.camera2",                 "com.android.camera.CameraLauncher"},
-            {"com.android.settings",                ".Settings"}
+                {"com.android.dialer",                  ".main.impl.MainActivity"},
+                {"com.google.android.apps.messaging",   ".ui.ConversationListActivity"},
+                {"com.google.android.deskclock",        "com.android.deskclock.DeskClock"},
+                {"com.android.camera2",                 "com.android.camera.CameraLauncher"},
+                {"com.android.settings",                ".Settings"}
         };
     }
 
     @Test(dependsOnMethods = {"getPackageTest", "getActivityTest"},
-          dataProvider = "forStartActivityTest")
+            dataProvider = "forStartActivityTest")
     public void startActivityTest(String expPack, String expActivity) {
         MobileDeviceActivity.startActivity(expPack, expActivity);
         String currentPack = MobileDeviceActivity.currentPackage();
