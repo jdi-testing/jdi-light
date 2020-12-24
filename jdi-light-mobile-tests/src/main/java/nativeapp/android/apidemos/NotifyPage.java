@@ -3,7 +3,6 @@ package nativeapp.android.apidemos;
 import com.epam.jdi.light.mobile.elements.common.Text;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
-import org.openqa.selenium.By;
 
 public class NotifyPage {
     @MobileFindBy(id = "com.android.systemui:id/notification_panel")
@@ -47,7 +46,10 @@ public class NotifyPage {
             "android.widget.TextView[5]")
     public static Text timeStamp;
 
-    public static By messageName = new By.ById("android:id/message_name");
-    public static By messageText = new By.ById("android:id/message_text");
+    @MobileFindBy(id = "android:id/message_name")
+    public static Text messageName;
+
+    @MobileFindBy(id = "android:id/message_text")
+    public static Text messageText;
 
 }
