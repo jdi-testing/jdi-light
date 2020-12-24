@@ -15,7 +15,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 
 public class JSBuilder implements IJSBuilder {
-    protected final List<String> variables = new ArrayList<>();
+    protected List<String> variables = new ArrayList<>();
     protected String query = "";
     protected JavascriptExecutor js;
     public static boolean LOG_QUERY = false;
@@ -43,9 +43,17 @@ public class JSBuilder implements IJSBuilder {
     }
     public String executeQuery() {
         String jsScript = getScript();
-        if (logQuery)
+        if (logQuery) {
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
-        String result = (String) js.executeScript(jsScript);
+        }
+        String result;
+        try {
+            Object obj = js.executeScript(jsScript);
+            cleanup();
+            result = obj == null ? "" : obj.toString();
+        } catch (Exception ex) {
+            result = "JS ScriptExecution failed: " + ex.getMessage();
+        }
         if (result != null && logQuery)
             logger.execute(">>> " + result);
         return result;
@@ -55,6 +63,7 @@ public class JSBuilder implements IJSBuilder {
         if (logQuery)
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         List<String> result = (List<String>) js.executeScript(jsScript);
+        cleanup();
         if (result != null && logQuery)
             logger.execute(">>> " + result);
         return result;
@@ -119,6 +128,11 @@ public class JSBuilder implements IJSBuilder {
             jsScript += "let " + variable + "; ";
         }
         return jsScript + "\n" + query;
+    }
+    protected void cleanup() {
+        useFunctions.clear();
+        query = "";
+        variables = new ArrayList<>();
     }
     // endregion
 }

@@ -33,9 +33,9 @@ public class BuilderActions implements IBuilderActions {
         return format(LIST_TO_LIST, MessageFormat.format(data.getAll, "element", selectorAll(locator, builder)));
     }
     public String getResult(String collector) {
-        return format(ONE_TO_RESULT, collector);
+        return collector.contains("return") ? collector : format(ONE_TO_RESULT, collector);
     }
     public String getResultList(String collector) {
-        return format(LIST_TO_RESULT, collector);
+        return collector.contains("return") ? collector : format(LIST_TO_RESULT, collector);
     }
 }

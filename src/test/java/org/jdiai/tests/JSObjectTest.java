@@ -1,11 +1,13 @@
 package org.jdiai.tests;
 
+import org.jdiai.ClientRect;
 import org.jdiai.TestInit;
 import org.jdiai.entity.TextHtml;
 import org.jdiai.entity.TextInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static java.util.Arrays.asList;
 import static org.jdiai.jselement.JSTalk.entity;
 import static org.testng.Assert.assertEquals;
 
@@ -17,7 +19,7 @@ public class JSObjectTest extends TestInit {
 
     @Test
     public void oneTest() {
-        TextInfo jsObject = entity(TextInfo.class, "#user-name").getObject(
+        TextInfo jsObject = entity(TextInfo.class, "#user-name").getEntity(
             " { 'tag': element.tagName, 'iText': element.innerText, " +
             "'text': element.textContent, 'iHtml': element.innerHTML }");
 
@@ -29,7 +31,17 @@ public class JSObjectTest extends TestInit {
     @Test
     public void oneAttributeTest() {
         TextHtml jsObject = entity(TextHtml.class, "#user-name")
-            .getObject("tagName", "innerText", "textContent", "innerHTML");
+            .getEntity("tagName", "innerText", "textContent", "innerHTML");
+
+        assertEquals(jsObject.tagName, "SPAN");
+        assertEquals(jsObject.innerText, "Roman Iovlev");
+        assertEquals(jsObject.textContent, "Roman Iovlev");
+        assertEquals(jsObject.innerHTML, "Roman Iovlev");
+    }
+    @Test
+    public void oneAttributeListTest() {
+        TextHtml jsObject = entity(TextHtml.class, "#user-name")
+                .getEntity(asList("tagName", "innerText", "textContent", "innerHTML"));
 
         assertEquals(jsObject.tagName, "SPAN");
         assertEquals(jsObject.innerText, "Roman Iovlev");
@@ -38,7 +50,7 @@ public class JSObjectTest extends TestInit {
     }
     @Test
     public void oneFewLocatorsTest() {
-        TextInfo jsObject = entity(TextInfo.class, withParent("#user-name")).getObject(
+        TextInfo jsObject = entity(TextInfo.class, withParent("#user-name")).getEntity(
             " { 'tag': element.tagName, 'iText': element.innerText, " +
             "'text': element.textContent, 'iHtml': element.innerHTML }");
 
@@ -50,7 +62,17 @@ public class JSObjectTest extends TestInit {
     @Test
     public void oneFewLocatorsAttributesTest() {
         TextHtml jsObject = entity(TextHtml.class, "#user-name")
-            .getObject("tagName", "innerText", "textContent", "innerHTML");
+            .getEntity("tagName", "innerText", "textContent", "innerHTML");
+
+        assertEquals(jsObject.tagName, "SPAN");
+        assertEquals(jsObject.innerText, "Roman Iovlev");
+        assertEquals(jsObject.textContent, "Roman Iovlev");
+        assertEquals(jsObject.innerHTML, "Roman Iovlev");
+    }
+    @Test
+    public void oneFewLocatorsAttributesListTest() {
+        TextHtml jsObject = entity(TextHtml.class, "#user-name")
+                .getEntity(asList("tagName", "innerText", "textContent", "innerHTML"));
 
         assertEquals(jsObject.tagName, "SPAN");
         assertEquals(jsObject.innerText, "Roman Iovlev");

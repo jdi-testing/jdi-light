@@ -3,7 +3,6 @@ package org.jdiai.jselement;
 import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
 import org.jdiai.JSSmartBuilder;
-import org.jdiai.jsdriver.JSDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -22,7 +21,7 @@ public class JSSmart extends JSBase<JSSmart> {
     }
 
     public String getAttribute(String attribute) {
-        return driver.getOne("element." + attribute).asString();
+        return getValue("element." + attribute);
     }
     public MapArray<String, String> getAttributes(List<String> attributes) {
         JsonObject json = driver.getOne(attributesToJson(attributes)).asJson();
@@ -44,8 +43,28 @@ public class JSSmart extends JSBase<JSSmart> {
     public JsonObject getJson(String json) {
         return driver.getOne(json).asJson();
     }
+    public String getValue(String valueFunc) {
+        return driver.getOne(valueFunc).asString();
+    }
     public List<JsonObject> getJsonList(String json) {
         return driver.getList(json).asJson();
     }
 
+    protected Class<?> entity;
+    public JSSmart setEntity(Class<?> entity) {
+        this.entity = entity;
+        return this;
+    }
+    public <T> T getEntity(String objectMap) {
+        return (T) driver.getOne(objectMap).asObject(entity);
+    }
+    public <T> T getEntityFromObject(String jsObject) {
+        return getEntity("JSON.stringify(" + jsObject + ")");
+    }
+    public <T> T getEntity(List<String> attributes) {
+        return (T) driver.getOne(attributesToJson(attributes)).asObject(entity);
+    }
+    public <T> T getEntity(String... attributes) {
+        return getEntity(asList(attributes));
+    }
 }

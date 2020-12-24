@@ -35,17 +35,20 @@ public class JSObject<T> extends JSBase<JSObject<T>> {
 
     }
 
-    public T getObject(String json) {
-        return driver.getOne(json).asObject(cl);
+    public T getEntity(String objectMap) {
+        return driver.getOne(objectMap).asObject(cl);
     }
-    public T getObject(List<String> attributes) {
+    public T getEntityFromObject(String jsObject) {
+        return getEntity("JSON.stringify(" + jsObject + ")");
+    }
+    public T getEntity(List<String> attributes) {
         return driver.getOne(attributesToJson(attributes)).asObject(cl);
     }
-    public T getObject(String... attributes) {
-        return getObject(asList(attributes));
+    public T getEntity(String... attributes) {
+        return getEntity(asList(attributes));
     }
-    public List<T> getObjectList(String json) {
-        return driver.getList(json).asObject(cl);
+    public List<T> getObjectList(String objectMap) {
+        return driver.getList(objectMap).asObject(cl);
     }
     public List<T> getObjectList(List<String> attributes) {
         return driver.getList(attributesToJson(attributes)).asObject(cl);
