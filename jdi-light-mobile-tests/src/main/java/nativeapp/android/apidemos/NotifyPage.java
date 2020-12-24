@@ -1,13 +1,8 @@
 package nativeapp.android.apidemos;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.mobile.elements.common.Text;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class NotifyPage {
     @MobileFindBy(id = "com.android.systemui:id/notification_panel")
@@ -28,21 +23,33 @@ public class NotifyPage {
     @MobileFindBy(id = "com.android.systemui:id/remote_input_send")
     public static Button send;
 
-    @MobileFindBy(xpath = "//android.widget.ScrollView/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ImageView[@resource-id='android:id/icon']")
+    @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/" +
+            "android.widget.FrameLayout/android.widget.ScrollView/android.widget.FrameLayout[2]/" +
+            "android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.FrameLayout[1]/" +
+            "android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ImageView[2]")
     public static Button appIcon;
 
-    @MobileFindBy(xpath = "//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[1]")
+    @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/" +
+            "android.widget.FrameLayout/android.widget.ScrollView/android.widget.FrameLayout[2]/" +
+            "android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/" +
+            "android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/" +
+            "android.widget.TextView[3]")
     public static Text appName;
 
-    @MobileFindBy(id = "android:id/message_name")
+    @MobileFindBy(id = "android:id/conversation_text")
     public static Text notificationName;
 
-    @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.ScrollView/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[3]")
+    @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/" +
+            "android.widget.FrameLayout/android.widget.ScrollView/android.widget.FrameLayout[2]/" +
+            "android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/" +
+            "android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/" +
+            "android.widget.TextView[5]")
     public static Text timeStamp;
 
-    public static UIElement findNotificationMessageText(String parameter, String name) {
-        WebElement foundElement = getDriver().findElements(By.id("android:id/message_" + parameter))
-                .stream().filter(item -> item.getText().contains(name)).findAny().get();
-        return new UIElement(foundElement);
-    }
+    @MobileFindBy(id = "android:id/message_name")
+    public static Text messageName;
+
+    @MobileFindBy(id = "android:id/message_text")
+    public static Text messageText;
+
 }
