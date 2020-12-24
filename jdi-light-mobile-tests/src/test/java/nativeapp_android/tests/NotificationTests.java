@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.mobile.elements.common.MobileDevice.sendSMS;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static nativeapp.android.apidemos.NotifyPage.*;
 
 public class NotificationTests extends ApiDemosTestInit {
@@ -55,10 +56,9 @@ public class NotificationTests extends ApiDemosTestInit {
         reply.tap();
         MobileKeyboard.pressKey(new KeyEvent(AndroidKey.A));
         send.tap();
-        findNotificationMessageText("name", YOU).waitFor(2).is().displayed();
-        findNotificationMessageText("name", NUMBER).is().displayed();
-        findNotificationMessageText("text", MESSAGE).is().displayed();
-        findNotificationMessageText("text", TEST_MESSAGE).is().displayed();
+        $(messageName.core(), YOU).isDisplayed();
+        $(messageText.core(), MESSAGE).isDisplayed();
+        $(messageText.core(), TEST_MESSAGE).isDisplayed();
     }
 
     @AfterMethod
