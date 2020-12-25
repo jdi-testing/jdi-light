@@ -22,37 +22,37 @@ public class RadioButtonsTests extends ApiDemosTestInit {
 
     @Test
     public void clickOverAllRadioButtons() {
-        $(radioButton.core(), "Snack").click();
+        $(radioButton, "Snack").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296728");
 
-        $(radioButton.core(), "Breakfast").click();
+        $(radioButton, "Breakfast").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296319");
 
-        $(radioButton.core(), "Lunch").click();
+        $(radioButton, "Lunch").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296544");
 
-        $(radioButton.core(), "Dinner").click();
+        $(radioButton, "Dinner").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296401");
 
-        $(radioButton.core(), "All of them").click();
+        $(radioButton, "All of them").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296294");
     }
 
     @Test
     public void verifyThatButtonsNotSelected() {
-        $(radioButton.core(), "All of them").click();
+        $(radioButton, "All of them").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296294");
 
         buttonClear.click();
         logChose.is().text("You have selected: (none)");
 
-        $(radioButton.core(), "Dinner").click();
+        $(radioButton, "Dinner").click();
         logChose.is().text("You have selected: 2131296401");
     }
 }
