@@ -1,4 +1,4 @@
-<h1> How to launch HTMl Web tests on Android emulator</h1>  
+ <h1> How to launch HTMl Web tests on Android emulator or IOS simulator</h1> 
 
 Required tools: Android Studio, Appium, Maven.
 
@@ -37,14 +37,35 @@ started from Appium (see future steps).
     1. Go to module <b>jdi-light-bootstrap-tests</b>
     2. Run maven script: <b>mvn clean package -U -DskipTests</b> to make .jar package of tests for future dependency.
 
-<h3> Debugging and test running. </h3>
+<h2> Requirement for Ios</h2>
+Required tools for Ios: Xcode, Appium, Maven.
+
+In general settings absolutely the same as for Android but you need to use ios.properties instead of android.properties 
+and in test.properties change two fields which use android to ios:
+
+1) Set following settings in test.properties file: <br>
+   <b>driver=ios</b>; <br>
+   <b>remote.type=appium</b>; <br>
+   <b>appium.capabilities.path=ios.properties</b>; <br>
+   <b>driver.remote.run=true</b>; <br>
+
+2) Set following settings in ios.properties file:<br>
+    <b>platformName=ios</b>; <br>
+    <b>automationName=XCUITest</b>;<br>
+    <b>platformVersion=14.2</b>;<br>
+    <b>deviceName=iPhone 11</b>; <br>
+    <b>browserName=Safari</b>; <br>
+    
+<h2> Debugging and test running. </h2>
     Go to module <b>jdi-light-mobile-bootstrap-web-tests</b>
 
 <h5>Test Run</h5>
 
 1. Run maven script from the module root:<br>
-   <b>mvn clean test site -U -Dtest=TestClassToRunName.java#testMethodToRun</b> <br>
+   - <b>mvn clean test site -U -Dtest=TestClassToRunName.java#testMethodToRun</b> <br>
    or just execute script: <b>mvn clean test site -U</b><br>
+   - <b>mvn clean test site -Dsuite.xml.file=src/test/resources/demoRun.xml</b> <br>
+    <br>(for run tests which is already exist in xml-file; use 'site' for Allure Report) 
 
    <h5> Debug </h5>
     Debug from maven run (with breakpoints in IDE) could be performed like example below:<br>
