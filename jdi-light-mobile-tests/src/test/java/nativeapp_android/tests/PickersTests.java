@@ -38,18 +38,6 @@ public class PickersTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void datePickerTest(){
-        datePickerButton.click();
-        yearPickerHeader.click();
-        yearPicker.selectYearPicker("2018");
-        yearPickerHeader.is().text("2018");
-        nextMonth.click();
-        datePicker.selectDatePicker("23 December 2018");
-        datePickerHeader.is().text("Sun, Dec 23");
-        yearPickerHeader.is().text("2018");
-    }
-
-    @Test
     public void swipePickerTest(){
         timePickerButton.click();
         picker.is().displayed();
