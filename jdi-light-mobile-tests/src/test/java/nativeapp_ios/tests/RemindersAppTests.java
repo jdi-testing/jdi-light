@@ -1,52 +1,64 @@
 package nativeapp_ios.tests;
 
-import nativeapp.ios.reminders.EditDetailsPage;
-import nativeapp.ios.reminders.RemindersListPage;
-import nativeapp.ios.reminders.RemindersPage;
 import nativeapp_ios.RemindersAppTestsInit;
 import org.testng.annotations.Test;
+
+import java.time.LocalDate;
+import java.time.Month;
+
+import static nativeapp.ios.reminders.RemindersApp.*;
 
 public class RemindersAppTests extends RemindersAppTestsInit {
 
     @Test
-    public void infoButtonTest() {
-        RemindersListPage.todayRemindersButton.tap();
+    public void switchTest() {
+        remindersListPage.todayRemindersButton.tap();
 
-        RemindersPage.newReminderButton.tap();
-        RemindersPage.editDetailsInfoButton.openDetails();
+        remindersPage.newReminderButton.tap();
+        remindersPage.editDetailsInfoButton.openDetails();
 
-        EditDetailsPage.detailsNavBar.is().displayed();
+        editDetailsPage.dateSwitch.setToOff();
+        editDetailsPage.dateSwitch.is().off();
+        editDetailsPage.dateSwitch.setToOn();
+        editDetailsPage.dateSwitch.is().on();
     }
 
     @Test
-    public void switchTest() {
-        RemindersListPage.todayRemindersButton.tap();
+    public void infoButtonTest() {
+        remindersListPage.todayRemindersButton.tap();
 
-        RemindersPage.newReminderButton.tap();
-        RemindersPage.editDetailsInfoButton.openDetails();
+        remindersPage.newReminderButton.tap();
+        remindersPage.editDetailsInfoButton.openDetails();
 
-        EditDetailsPage.remindSwitch.setToOff();
-        EditDetailsPage.remindSwitch.is().off();
-        EditDetailsPage.remindSwitch.setToOn();
-        EditDetailsPage.remindSwitch.is().on();
+        editDetailsPage.detailsNavBar.is().displayed();
     }
 
     @Test
     public void pickerWheelTest() {
-        RemindersListPage.todayRemindersButton.tap();
+        remindersListPage.todayRemindersButton.tap();
 
-        RemindersPage.newReminderButton.tap();
-        RemindersPage.editDetailsInfoButton.openDetails();
+        remindersPage.newReminderButton.tap();
+        remindersPage.editDetailsInfoButton.openDetails();
 
-        EditDetailsPage.alarmMenuItem.tap();
-        EditDetailsPage.yearPicker.setPickerWheelValue("2015");
-        EditDetailsPage.yearPicker.is().text("2015");
+        editDetailsPage.dateButton.tap();
+        editDetailsPage.showYearPicker.tap();
 
-        EditDetailsPage.yearPicker.movePickerWheelForward("0.1");
-        EditDetailsPage.yearPicker.is().text("2016");
+        LocalDate localDate = LocalDate.now();
+        int year = localDate.getYear();
+        Month month = localDate.getMonth();
 
-        EditDetailsPage.monthPicker.setPickerWheelValue("April");
-        EditDetailsPage.monthPicker.movePickerWheelBackward("0.1");
-        EditDetailsPage.monthPicker.is().text("March");
+        editDetailsPage.yearPicker.movePickerWheelForward("0.1");
+        editDetailsPage.yearPicker.is().text(String.valueOf(year + 1));
+        editDetailsPage.yearPicker.movePickerWheelBackward("0.1");
+        editDetailsPage.yearPicker.is().text(String.valueOf(year));
+
+        editDetailsPage.monthPicker.movePickerWheelBackward("0.1");
+        editDetailsPage.monthPicker.is().text(onlyFirstLetterToUpperCase(month.minus(1).toString()));
+        editDetailsPage.monthPicker.movePickerWheelForward("0.1");
+        editDetailsPage.monthPicker.is().text(onlyFirstLetterToUpperCase(month.toString()));
+    }
+
+    private String onlyFirstLetterToUpperCase(String month) {
+        return month.toString().substring(0, 1).toUpperCase() + month.toString().substring(1).toLowerCase();
     }
 }
