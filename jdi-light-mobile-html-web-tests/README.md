@@ -1,4 +1,4 @@
-<h1> How to launch HTMl Web tests on Android emulator or IOS simulator</h1>  
+ <h1> How to launch HTMl Web tests on Android emulator or IOS simulator</h1>  
 
 <h2> Requires for Android</h2>
 Required tools for Android: Android Studio, Appium, Maven.
@@ -66,7 +66,7 @@ and in test.properties change two fields which use android to ios:
 1. Run maven script from the module root:<br>
    - mvn clean test site -U -Dtest=TestClassToRunName.java#testMethodToRun</b> <br>
    or just execute script: <b>mvn clean test site -U</b><br>
-   - mvn clean test site -Dsuite.xml.file=src/test/resources/demoRun.xml
+   - <b>mvn clean test site -Dsuite.xml.file=src/test/resources/demoRun.xml</b> 
     <br>(for run tests which is already exist in xml-file; use 'site' for Allure Report) 
      
    <h5> Debug </h5>
