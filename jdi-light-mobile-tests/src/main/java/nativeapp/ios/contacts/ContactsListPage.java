@@ -13,8 +13,8 @@ public class ContactsListPage {
     public static SystemButton groupsButton;
     @MobileFindBy(accessibilityId = "Add")
     public static Button addButton;
-    @MobileFindBy(xpath = "//XCUIElementTypeCell[contains(@name, 'John Appleseed')]")
-    public static MobileAppUIElement johnAppleseedCard;
+    @MobileFindBy(xpath = "//XCUIElementTypeCell[contains(@name, 'Higgins')]")
+    public static MobileAppUIElement manNameCard;
     @MobileFindBy(xpath = "//XCUIElementTypeSearchField[@name='Search']")
     public static SearchBar contactsSearchBar;
 
