@@ -6,7 +6,9 @@ import org.testng.annotations.Test;
 import java.time.LocalDate;
 import java.time.Month;
 
-import static nativeapp.ios.reminders.RemindersApp.*;
+import static nativeapp.ios.reminders.RemindersApp.editDetailsPage;
+import static nativeapp.ios.reminders.RemindersApp.remindersListPage;
+import static nativeapp.ios.reminders.RemindersApp.remindersPage;
 
 public class RemindersAppTests extends RemindersAppTestsInit {
 
@@ -53,12 +55,12 @@ public class RemindersAppTests extends RemindersAppTestsInit {
         editDetailsPage.yearPicker.is().text(String.valueOf(year));
 
         editDetailsPage.monthPicker.movePickerWheelBackward("0.1");
-        editDetailsPage.monthPicker.is().text(onlyFirstLetterToUpperCase(month.minus(1).toString()));
+        editDetailsPage.monthPicker.is().text(onlyFirstLetterToUpperCase(month.minus(1)));
         editDetailsPage.monthPicker.movePickerWheelForward("0.1");
-        editDetailsPage.monthPicker.is().text(onlyFirstLetterToUpperCase(month.toString()));
+        editDetailsPage.monthPicker.is().text(onlyFirstLetterToUpperCase(month));
     }
 
-    private String onlyFirstLetterToUpperCase(String month) {
+    private String onlyFirstLetterToUpperCase(Month month) {
         return month.toString().substring(0, 1).toUpperCase() + month.toString().substring(1).toLowerCase();
     }
 }
