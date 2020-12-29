@@ -27,8 +27,7 @@ public class ContactsAppTests extends ContactsAppTestsInit {
     public void contextMenuTest() {
         contactsListPage.manNameCard.longPress(2);
         contactContextMenu.mensPhoto.is().displayed();
-        contactContextMenu.messageOptionExpand.tap();
-        contactContextMenu.mensMobile.is().displayed();
+        contactContextMenu.mensMail.is().displayed();
     }
 
     @Test

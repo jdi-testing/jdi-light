@@ -11,7 +11,8 @@ public class ContactContextMenu extends ContextMenu {
     @MobileFindBy(accessibilityId = "Message")
     public static MobileAppUIElement messageOptionExpand;
 
-    @MobileFindBy(accessibilityId = "mobile")
-    public static MobileAppUIElement mensMobile;
+    @MobileFindBy(accessibilityId = "Mail")
+    public static MobileAppUIElement mensMail;
 
 }
+
