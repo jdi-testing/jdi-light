@@ -26,6 +26,7 @@ public class ContactForm extends Form<ContactInfo> {
     DataListOptions religion;
     @UI("#weather") MultiSelect weather;
 
-    Checkbox passport, acceptConditions;
+    Checkbox passport;
+    Checkbox acceptConditions;
     TextArea description;
 }
