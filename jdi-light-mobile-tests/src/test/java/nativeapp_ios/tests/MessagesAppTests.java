@@ -1,48 +1,36 @@
 package nativeapp_ios.tests;
 
-import nativeapp.ios.messages.ContactsListPage;
-import nativeapp.ios.messages.MessagesListPage;
-import nativeapp.ios.messages.NewMessagePage;
 import nativeapp_ios.MessagesAppTestsInit;
 import org.testng.annotations.Test;
+
+import static nativeapp.ios.messages.MessagesApp.messagesListPage;
+import static nativeapp.ios.messages.MessagesApp.newMessagePage;
 
 public class MessagesAppTests extends MessagesAppTestsInit {
 
     @Test
-    public void addContactButtonTest() {
-        MessagesListPage.newMessageButton.tap();
-
-        NewMessagePage.addContactButton.openContacts();
-
-        ContactsListPage.contactNavBar.is().displayed();
-        ContactsListPage.cancelButton.cancel();
-
-        NewMessagePage.addContactButton.is().displayed();
-    }
-
-    @Test
     public void textFieldTest() {
-        MessagesListPage.newMessageButton.tap();
+        messagesListPage.firstMenInMessages.tap();
 
-        NewMessagePage.messageTextField.setValue("Test");
-        NewMessagePage.messageTextField.is().text("Test");
+        newMessagePage.messageTextField.setValue("Test");
+        newMessagePage.messageTextField.is().text("Test");
 
-        NewMessagePage.messageTextField.clear();
-        NewMessagePage.messageTextField.is().empty();
+        newMessagePage.messageTextField.clear();
+        newMessagePage.messageTextField.is().text("iMessage");
     }
 
     @Test
     public void editMenuTest() {
-        MessagesListPage.newMessageButton.tap();
+        messagesListPage.firstMenInMessages.tap();
 
-        NewMessagePage.messageTextField.setValue("Test");
-        NewMessagePage.messageTextField.doubleTap();
-        NewMessagePage.messageEditMenu.copy();
-        NewMessagePage.messageTextField.doubleTap();
-        NewMessagePage.messageEditMenu.cut();
-        NewMessagePage.messageTextField.is().empty();
-        NewMessagePage.messageTextField.doubleTap();
-        NewMessagePage.messageEditMenu.paste();
-        NewMessagePage.messageTextField.is().text("Test");
+        newMessagePage.messageTextField.setValue("Test");
+        newMessagePage.messageTextField.doubleTap();
+        newMessagePage.messageEditMenu.copy();
+        newMessagePage.messageTextField.doubleTap();
+        newMessagePage.messageEditMenu.cut();
+        newMessagePage.messageTextField.is().text("iMessage");
+        newMessagePage.messageTextField.doubleTap();
+        newMessagePage.messageEditMenu.paste();
+        newMessagePage.messageTextField.is().text("Test");
     }
 }
