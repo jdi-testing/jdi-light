@@ -22,7 +22,8 @@ public class ContactForm extends Form<Contacts> {
 	DropdownSelect gender;
 	MultiDropdown weather;
 
-	Checkbox passport, acceptConditions;
+	Checkbox passport;
+	Checkbox acceptConditions;
 	TextArea description;
 
 	//jdi will find [type=submit] element in this context automatically
