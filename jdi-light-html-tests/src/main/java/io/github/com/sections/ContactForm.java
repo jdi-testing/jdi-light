@@ -18,7 +18,8 @@ public class ContactForm extends Form<Contacts> {
 	TextField passportSeria;
 	Dropdown gender;
 	IsCombobox religion;
-	Checkbox passport, acceptConditions;
+	Checkbox passport;
+	Checkbox acceptConditions;
 	public TextArea description;
 
 	@UI("['Submit']") public Button submit;
