@@ -7,9 +7,9 @@ public class User extends DataClass<User> {
     public String password = "Jdi1234";
     public String lastName;
     public String acceptConditions;
-    public String position'
+    public String position;
     public String passportNumber;
-    public String passportSeria,
+    public String passportSeria;
     public String description;
     public String gender;
     public String religion;
