@@ -11,7 +11,11 @@ import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.entities.Contacts;
 
 public class ContactForm extends Form<Contacts> {
-	TextField firstName, lastName, position, passportNumber, passportSeria;
+	TextField firstName;
+	TextField lastName;
+	TextField position;
+	TextField passportNumber;
+	TextField passportSeria;
 	Dropdown gender;
 	IsCombobox religion;
 	Checkbox passport, acceptConditions;
