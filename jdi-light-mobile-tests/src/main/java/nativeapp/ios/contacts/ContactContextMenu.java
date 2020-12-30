@@ -5,10 +5,14 @@ import com.epam.jdi.light.mobile.elements.composite.ios.app.ContextMenu;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class ContactContextMenu extends ContextMenu {
-    @MobileFindBy(xpath = "//XCUIElementTypeButton[@name='Contact photo for John Appleseed']/XCUIElementTypeImage")
-    public static MobileAppUIElement johnAppleseedPhoto;
-    @MobileFindBy(xpath = "//*[contains(@name, 'Message')]/../*[@name='Expand']")
+    @MobileFindBy(accessibilityId = "Contact photo for Daniel Higgins Jr.")
+    public static MobileAppUIElement mensPhoto;
+
+    @MobileFindBy(accessibilityId = "Message")
     public static MobileAppUIElement messageOptionExpand;
-    @MobileFindBy(xpath = ".//*[contains(@name, 'John-Appleseed@mac.com')]")
-    public static MobileAppUIElement johnAppleseedEmail;
+
+    @MobileFindBy(accessibilityId = "Mail")
+    public static MobileAppUIElement mensMail;
+
 }
+

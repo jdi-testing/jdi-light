@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JDI Light Mobile Android System Tests" thread-count="1">
+    <test name="Android system tests">
+        <classes>
+            <class name="nativeapp_android.tests.SystemAndroid11Tests.ActivityTests"></class>
+            <class name="nativeapp_android.tests.SystemAndroid11Tests.ClipBoardTests"></class>
+            <class name="nativeapp_android.tests.SystemAndroid11Tests.MobileDeviceTests"></class>
+            <class name="nativeapp_android.tests.SystemAndroid11Tests.MobileFileManagerTests"></class>
+            <class name="nativeapp_android.tests.SystemAndroid11Tests.SettingsAppTests"></class>
+            <class name="nativeapp_android.tests.SystemAndroid11Tests.ToggleButtonTests"></class>
+            <class name="nativeapp_android.tests.SystemAndroid11Tests.ToggleAirplaneModeTests"></class>
+            <class name="nativeapp_android.tests.SystemAndroid11Tests.ToggleDataTests"></class>
+            <class name="nativeapp_android.tests.SystemAndroid11Tests.ToggleWiFiTests"></class>
+
+        </classes>
+    </test>
+</suite>

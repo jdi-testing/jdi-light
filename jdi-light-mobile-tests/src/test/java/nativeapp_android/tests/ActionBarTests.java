@@ -54,43 +54,6 @@ public class ActionBarTests extends ApiDemosTestInit {
         ActionBarDisplayOptionsPage.moreOptions.click();
         ActionBarDisplayOptionsPage.listView.selectOption("Menu Item");
     }
-
-    @Test
-    public void displayOptionsPageDisplayHomeAsUpTest() {
-        ActionBarDisplayOptionsPage.displayHomeAsUp.is().enabled();
-        ActionBarDisplayOptionsPage.displayHomeAsUp.click();
-        ActionBarDisplayOptionsPage.navigateUp.is().displayed();
-    }
-
-    @Test
-    public void displayOptionsPageDisplayShowHomeAndDisplayUseLogoTest() {
-        ActionBarDisplayOptionsPage.displayShowHome.is().enabled();
-        ActionBarDisplayOptionsPage.displayShowHome.click();
-        ActionBarDisplayOptionsPage.imageView.is().displayed();
-        ActionBarDisplayOptionsPage.displayUseLogo.is().enabled();
-        ActionBarDisplayOptionsPage.displayUseLogo.click();
-        ActionBarDisplayOptionsPage.imageView.is().displayed();
-    }
-
-    @Test
-    public void displayOptionsPageDisplayShowTitleAndDisplayShowCustomAndCycleCustomGravityTest() {
-        ActionBarDisplayOptionsPage.displayShowTitle.is().enabled();
-        ActionBarDisplayOptionsPage.displayShowTitle.click();
-        ActionBarDisplayOptionsPage.textView.is().hidden();
-        ActionBarDisplayOptionsPage.displayShowCustom.is().enabled();
-        ActionBarDisplayOptionsPage.displayShowCustom.click();
-        ActionBarDisplayOptionsPage.customView.is().displayed();
-        ActionBarDisplayOptionsPage.cycleCustomViewGravity.is().enabled();
-        ActionBarDisplayOptionsPage.cycleCustomViewGravity.click();
-    }
-
-    @Test
-    public void displayOptionsPageNavigationTest() {
-        ActionBarDisplayOptionsPage.navigation.is().enabled();
-        ActionBarDisplayOptionsPage.navigation.click();
-        ActionBarDisplayOptionsPage.horizontalScrollView.is().displayed();
-        ActionBarDisplayOptionsPage.horizontalScrollView.selectOption("TAB 1");
-    }
 }
 
 

@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.mobile.elements.common.MobileDevice.sendSMS;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static nativeapp.android.apidemos.NotifyPage.*;
 
 public class NotificationTests extends ApiDemosTestInit {
@@ -37,7 +38,7 @@ public class NotificationTests extends ApiDemosTestInit {
 
     @Test
     public void contentInformationTest() {
-        notificationMessagingContent.has().text(MESSAGE);
+        NotifyPage.notificationMessagingContent.has().text(MESSAGE);
         notificationName.has().text(NUMBER);
         appIcon.is().displayed();
     }
@@ -46,7 +47,7 @@ public class NotificationTests extends ApiDemosTestInit {
     public void actionsMarkAsReadTest() {
         notificationPanel.is().displayed();
         markAsRead.tap();
-        notificationMessagingContent.is().disappear();
+        NotifyPage.notificationMessagingContent.is().disappear();
     }
 
     @Test
@@ -55,10 +56,9 @@ public class NotificationTests extends ApiDemosTestInit {
         reply.tap();
         MobileKeyboard.pressKey(new KeyEvent(AndroidKey.A));
         send.tap();
-        findNotificationMessageText("name", YOU).waitFor(2).is().displayed();
-        findNotificationMessageText("name", NUMBER).is().displayed();
-        findNotificationMessageText("text", MESSAGE).is().displayed();
-        findNotificationMessageText("text", TEST_MESSAGE).is().displayed();
+        $(messageName, YOU).isDisplayed();
+        $(messageText, MESSAGE).isDisplayed();
+        $(messageText, TEST_MESSAGE).isDisplayed();
     }
 
     @AfterMethod

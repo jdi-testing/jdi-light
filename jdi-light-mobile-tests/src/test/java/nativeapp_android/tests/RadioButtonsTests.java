@@ -2,15 +2,12 @@ package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import nativeapp_android.ApiDemosTestInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static nativeapp.android.apidemos.IndexPage.viewsPage;
-import static nativeapp.android.apidemos.views.RadioButtonsPage.buttonClear;
-import static nativeapp.android.apidemos.views.RadioButtonsPage.logChose;
+import static nativeapp.android.apidemos.views.RadioButtonsPage.*;
 import static nativeapp.android.apidemos.views.ViewsPage.radioGroupViewPage;
 
 public class RadioButtonsTests extends ApiDemosTestInit {
@@ -25,44 +22,37 @@ public class RadioButtonsTests extends ApiDemosTestInit {
 
     @Test
     public void clickOverAllRadioButtons() {
-        getItemByText("Snack").click();
+        $(radioButton, "Snack").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296728");
 
-        getItemByText("Breakfast").click();
+        $(radioButton, "Breakfast").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296319");
 
-        getItemByText("Lunch").click();
+        $(radioButton, "Lunch").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296544");
 
-        getItemByText("Dinner").click();
+        $(radioButton, "Dinner").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296401");
 
-        getItemByText("All of them").click();
+        $(radioButton, "All of them").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296294");
     }
 
     @Test
     public void verifyThatButtonsNotSelected() {
-        getItemByText("All of them").click();
+        $(radioButton, "All of them").click();
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296294");
 
         buttonClear.click();
         logChose.is().text("You have selected: (none)");
 
-        getItemByText("Dinner").click();
+        $(radioButton, "Dinner").click();
         logChose.is().text("You have selected: 2131296401");
-    }
-
-    private WebElement getItemByText(String item) {
-        return  getDriver().findElements(By.className("android.widget.RadioButton"))
-                .stream()
-                .filter(e -> e.getText().equals(item))
-                .findAny().get();
     }
 }

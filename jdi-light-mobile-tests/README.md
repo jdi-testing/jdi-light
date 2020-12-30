@@ -1,5 +1,7 @@
 How to launch web tests on Android emulator  
 
+Stable environment: Java 8, Maven 3.6.3, Jdi 1.2.21, TestNG 6.14.3, Aspectj 1.9.6, Appium 1.18.3, Android 10 <br>
+
 0) Download chrome driver 
 For more details visit: https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/web/chromedriver.md
 It is recommended to use the version of chromedriver > 75. 
@@ -47,7 +49,10 @@ If your version of Appium has its own URL (not http://0.0.0.0:4723), specify it 
 3) Launch Appium client
 4) Open Android device emulator
 5) Run tests from JDI Light Mobile tests directory:<br>
+**Directory SystemAndroid10Tests**<br>
   <code>mvn clean test</code>
+  
+**System test also available for Android 11. There are in package SystemAndroid11Tests**<br>  
 
 <br><br>
 <h1>How to launch Android Espresso tests example</h1>

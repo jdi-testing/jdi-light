@@ -1,6 +1,6 @@
 package nativeapp.ios.reminders;
 
-import com.epam.jdi.light.mobile.elements.common.app.ios.MenuItem;
+import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.common.app.ios.PickerWheel;
 import com.epam.jdi.light.mobile.elements.common.app.ios.Switch;
 import com.epam.jdi.light.mobile.elements.composite.ios.app.NavigationBar;
@@ -10,15 +10,19 @@ public class EditDetailsPage {
     @MobileFindBy(xpath = "//XCUIElementTypeNavigationBar[@name=\"Details\"]")
     public static NavigationBar detailsNavBar;
 
-    @MobileFindBy(xpath = "//XCUIElementTypeSwitch[@name=\"Remind me on a day\"]")
-    public static Switch remindSwitch;
+    @MobileFindBy(xpath = "//XCUIElementTypeSwitch[contains(@name, 'Date')]")
+    public static Switch dateSwitch;
 
-    @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"Alarm\"]")
-    public static MenuItem alarmMenuItem;
+    @MobileFindBy(accessibilityId = "Date")
+    public static Button dateButton;
 
-    @MobileFindBy(xpath = "//XCUIElementTypePickerWheel[3]")
+    @MobileFindBy(accessibilityId = "Show year picker")
+    public static Button showYearPicker;
+
+    @MobileFindBy(xpath = "//XCUIElementTypeTable[@name=\"ReminderDetail.ID.DetailsTable\"]/XCUIElementTypeCell[4]/XCUIElementTypePicker/XCUIElementTypePickerWheel[2]")
     public static PickerWheel yearPicker;
 
-    @MobileFindBy(xpath = "//XCUIElementTypePickerWheel[1]")
+    @MobileFindBy(xpath = "//XCUIElementTypeTable[@name=\"ReminderDetail.ID.DetailsTable\"]/XCUIElementTypeCell[4]/XCUIElementTypePicker/XCUIElementTypePickerWheel[1]")
     public static PickerWheel monthPicker;
+
 }

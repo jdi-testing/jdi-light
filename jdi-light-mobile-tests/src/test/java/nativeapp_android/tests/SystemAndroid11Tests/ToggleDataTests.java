@@ -1,4 +1,4 @@
-package nativeapp_android.tests;
+package nativeapp_android.tests.SystemAndroid11Tests;
 
 import com.epam.jdi.light.mobile.elements.common.network.Toggle;
 import nativeapp_android.ApiDemosTestInit;
