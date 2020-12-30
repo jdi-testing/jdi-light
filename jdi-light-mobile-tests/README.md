@@ -49,3 +49,27 @@ If your version of Appium has its own URL (not http://0.0.0.0:4723), specify it 
 5) Run tests from JDI Light Mobile tests directory:<br>
   <code>mvn clean test</code>
 
+<br><br>
+<h1>How to launch Android Espresso tests example</h1>
+<b>Required tools:</b> OS Android 11.0, device emulator Pixel 3a, Appium 1.18.3
+
+0) Set following settings in test.properties file: <br>
+   <b>driver=android</b> <br>
+   <b>remote.type=appium</b> <br>
+   If your version of appium has its own URL (not http://0.0.0.0:4723), specify it in the <b>driver.remote.url</b> property
+1) Set following settings in android.properties file: <br>
+   <b>platformName=Android</b> <br>
+   <b>deviceName=emulator-5554 (the name of your emulated device)</b> <br>
+   <b>autoLaunch=true</b> <br>
+   <b>appPackage=io.appium.android.apis</b> <br>
+   <b>appActivity=ApiDemos</b> <br>
+   <b>automationName=Espresso</b> <br>
+   <b>forceEspressoRebuild=true</b> <br>
+   <b>fullReset=true</b> <br>
+   <b>app=<<path_to_jdi-light-mobile-tests_project>>/src/main/resources/ApiDemosEspresso-debug.apk 
+   (where <<path_to_jdi-light-mobile-tests_project>> - absolute path to jdi-light-mobile-tests module) </b>
+2) Launch Appium client
+3) Open Android device emulator
+4) Run tests from JDI Light Mobile tests directory:<br>
+   <code>mvn clean test -Dsuite.xml.file=src/test/resources/androidAppsEspresso.xml</code>
+
