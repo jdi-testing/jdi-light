@@ -11,8 +11,8 @@ public class MainPage {
     @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"Slider\"]")
     public static MenuItem menuSliderItem;
 
-    @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"ActionSheet\"]")
-    public static MenuItem menuActionSheet;
+    @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"NavigationBar\"]")
+    public static MenuItem menuNavigationBar;
 
     @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"ContextMenu\"]")
     public static MenuItem menuContextMenu;
