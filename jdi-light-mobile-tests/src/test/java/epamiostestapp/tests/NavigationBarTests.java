@@ -14,7 +14,6 @@ public class NavigationBarTests extends IosApplicationInit {
 
         NavigationBarPage.navigationBarMainPage.tapButton("Show detail view");
         NavigationBarPage.detailViewPageNavigationBar.is().displayed();
-
         NavigationBarPage.detailViewPageNavigationBar.tapButton("Back");
         NavigationBarPage.navigationBarMainPage.is().displayed();
 

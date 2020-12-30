@@ -23,7 +23,8 @@ public class ContactsPage extends WebPage {
 	DropdownSelect gender;
 	MultiDropdown weather;
 
-	Checkbox passport, acceptConditions;
+	Checkbox passport;
+	Checkbox acceptConditions;
 	TextArea description;
 
 	@UI("['Submit']") public Button submit;
