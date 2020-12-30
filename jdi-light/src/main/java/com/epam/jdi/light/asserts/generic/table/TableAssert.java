@@ -32,7 +32,9 @@ public class TableAssert extends BaseTableAssert<Table, TableAssert> {
 
     public class Compare {
         public int count;
-        public String name, failElement, type;
+        public String name;
+        public String failElement;
+        public String type;
         TableAssert tAssert;
         boolean exact;
 
