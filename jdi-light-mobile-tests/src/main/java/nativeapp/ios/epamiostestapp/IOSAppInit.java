@@ -5,7 +5,7 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.JApp;
 @JApp(app = "epam.com.EpamIOSTestAPP")
 public class IOSAppInit {
 
-    public static ActionSheetPage actionSheetPage;
+    public static NavigationBarPage navigationBarPage;
     public static AlertDialogPage alertDialogPage;
     public static ContextMenuPage contextMenuPage;
     public static DatePickerPage datePickerPage;
