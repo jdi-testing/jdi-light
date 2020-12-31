@@ -16,5 +16,6 @@ public class IOSAppInit {
     public static TextFieldPage textFieldPage;
     public static ToggleSwitchPage toggleSwitchPage;
     public static MainPage mainPage;
+    public static LabelViewPage labelViewPage;
 
 }
