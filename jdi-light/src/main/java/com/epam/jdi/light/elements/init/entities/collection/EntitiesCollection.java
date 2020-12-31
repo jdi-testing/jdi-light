@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,53 +34,54 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class EntitiesCollection {
-    public static Safe<MapArray<String, WebPage>> PAGES = new Safe<>(MapArray::new);
-    public static Safe<MapArray<String, List<Object>>> ELEMENTS = new Safe<>(MapArray::new);
+    public static MapArray<String, WebPage> PAGES = new MapArray<>();
+    public static MapArray<String, List<Object>> ELEMENTS = new MapArray<>();
+
     static MapArray<String, String> jsonPages;
     static MapArray<String, String> jsonElements;
 
     private EntitiesCollection() { }
 
     public static void addPage(WebPage page) {
-        PAGES.get().update(page.getName(), page);
+        PAGES.update(page.getName(), page);
     }
     public static void updatePage(WebPage page) {
         String className = page.getClass().getSimpleName();
-        if (PAGES.get().keys().contains(className))
-            PAGES.get().removeByKey(className);
-        PAGES.get().update(page.getName(), page);
+        if (PAGES.keys().contains(className))
+            PAGES.removeByKey(className);
+        PAGES.update(page.getName(), page);
     }
     static void readPagesFromJson() {
         jsonPages = getMapFromJson("pages", "json.page.objects");
     }
     public static WebPage getPage(String pageName) {
         init();
-        WebPage page = PAGES.get().get(pageName);
+        WebPage page = PAGES.get(pageName);
         if (page == null)
-            page = PAGES.get().get(pageName + " Page");
+            page = PAGES.get(pageName + " Page");
         if (page == null) {
             if (jsonPages == null)
                 readPagesFromJson();
             if (jsonPages == null) {
                 throw exception("Can't find page with name %s. Available pages: %s", pageName,
-                        print(PAGES.get().keys()));
+                        print(PAGES.keys()));
             } else page = new WebPage(jsonPages.get(pageName));
         }
         return page;
     }
     public static WebPage getPageByUrl(String url) {
-        Pair<String, WebPage> result = PAGES.get().first((k, v) -> v.isOnPage(url));
+        Pair<String, WebPage> result = PAGES.first((k, v) -> v.isOnPage(url));
         return result != null ? result.value : null;
     }
     public static void addElement(Object jdi) {
         if (isInterface(jdi.getClass(), ICoreElement.class)) {
             ICoreElement element = (ICoreElement) jdi;
-            if (ELEMENTS.get().has(element.getName()))
-                ELEMENTS.get().get(element.getName()).add(jdi);
+            if (ELEMENTS.has(element.getName()))
+                ELEMENTS.get(element.getName()).add(jdi);
             else {
                 List<Object> newList = new ArrayList<>();
                 newList.add(element);
-                ELEMENTS.get().add(element.getName(), newList);
+                ELEMENTS.add(element.getName(), newList);
             }
         }
     }
@@ -134,9 +134,9 @@ public class EntitiesCollection {
         String[] split = name.split("\\.");
         if (split.length == 2)
             return getElementInSection(split[1], split[0]);
-        if (ELEMENTS.get().has(name)) {
-            List<Object> elements = ELEMENTS.get().get(name);
-            if (ELEMENTS.get().size() > 1) {
+        if (ELEMENTS.has(name)) {
+            List<Object> elements = ELEMENTS.get(name);
+            if (elements.size() > 1) {
                 Object element = LinqUtils.first(elements, el -> {
                     WebPage page = ((ICoreElement) el).base().getPage();
                     return page != null && page.getName().equals(getCurrentPage());
@@ -145,7 +145,7 @@ public class EntitiesCollection {
                     return element;
                 }
             }
-            return ELEMENTS.get().get(0);
+            return elements.get(0);
         }
         if (jsonElements == null)
             readElementsFromJson();
@@ -155,8 +155,8 @@ public class EntitiesCollection {
     }
 
     static Object getElementInSection(String name, String section) {
-        if (ELEMENTS.get().has(name)) {
-            List<Object> els = ELEMENTS.get().get(name);
+        if (ELEMENTS.has(name)) {
+            List<Object> els = ELEMENTS.get(name);
             Object result = first(els, el -> isInterface(el.getClass(), IBaseElement.class) && ((IBaseElement) el).base().hasParent(section));
             if (result == null)
                 throw exception("Can't find '%s' element at '%s'", name, section);

@@ -9,6 +9,7 @@ import static io.github.com.pages.sections.RadioButtonSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class RadioButtonTests extends TestsInit {
+
     private static final String SPRING = "Spring";
     private static final String SUMMER = "Summer";
     private static final String AUTUMN = "Autumn";

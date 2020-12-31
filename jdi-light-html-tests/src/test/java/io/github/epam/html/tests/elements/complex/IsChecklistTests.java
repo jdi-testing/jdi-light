@@ -4,7 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.checksGroup;
 import static io.github.com.pages.HtmlElementsPage.isWeather;
@@ -103,36 +102,36 @@ public class IsChecklistTests implements TestsInit {
 
     @Test
     public void checkNumTest() {
-        isWeather.check(ELEMENT.startIndex + 3);
+        isWeather.check(4);
         assertEquals(isWeather.checked(), asList("Sunny"));
     }
     @Test
     public void checkNumTwoTest() {
-        isWeather.check(ELEMENT.startIndex, ELEMENT.startIndex + 3);
+        isWeather.check(1, 4);
         assertEquals(isWeather.checked(), asList("Hot option", "Sunny"));
     }
     @Test
     public void uncheckNumTest() {
         isWeather.checkAll();
-        isWeather.uncheck(ELEMENT.startIndex);
+        isWeather.uncheck(1);
         isWeather.is().checked(hasSize(3));
         isWeather.is().checked(hasItems("Cold", "Rainy day", "Sunny"));
     }
     @Test
     public void uncheckNumTwoTest() {
         isWeather.checkAll();
-        isWeather.uncheck(ELEMENT.startIndex, ELEMENT.startIndex + 3);
+        isWeather.uncheck(1, 4);
         isWeather.is().checked(hasSize(2));
         isWeather.is().checked(hasItems("Cold", "Rainy day"));
     }
     @Test
     public void selectNumTest() {
-        isWeather.select(ELEMENT.startIndex + 3);
+        isWeather.select(4);
         assertEquals(isWeather.checked(), asList("Hot option", "Sunny"));
     }
     @Test
     public void selectNumTwoTest() {
-        isWeather.select(ELEMENT.startIndex, ELEMENT.startIndex + 3);
+        isWeather.select(1, 4);
         assertEquals(isWeather.checked(), asList("Sunny"));
     }
 

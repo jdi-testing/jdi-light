@@ -8,7 +8,6 @@ import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.tools.HasStartIndex;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ import static com.epam.jdi.tools.LinqUtils.map;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue, HasStartIndex {
+public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue  {
     @JDIAction("Select '{0}' in '{name}'")
     default void select(String value) { list().select(value); }
     @JDIAction("Select '{0}' in '{name}'")
@@ -48,14 +47,10 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     @JDIAction("Is '{0}' selected")
     default boolean selected(int index) { return list().selected(index); }
     @JDIAction(level = DEBUG)
-    default List<String> values() {
-        WebList list = list();
-        return list.noValidation(list::values);
-    }
+    default List<String> values() { return list().values(); }
     @JDIAction(level = DEBUG)
     default List<String> values(TextTypes type) {
-        WebList list = list();
-        return list.noValidation(() -> list.values(type));
+        return list().values(type);
     }
     @JDIAction(level = DEBUG)
     default List<String> listEnabled() { return list().listEnabled(); }

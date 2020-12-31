@@ -51,7 +51,7 @@ public class AllureLogger {
         if (!LOGS.writeToAllure) return "";
 
         try {
-            StepResult step = new StepResult().setName(message);
+            StepResult step = new StepResult().withName(message);
             if (getLifecycle().getCurrentTestCase().isPresent()) {
                 String uuid = randomUUID().toString();
                 getLifecycle().startStep(uuid, step);

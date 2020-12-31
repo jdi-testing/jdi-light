@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JDI-Light Bootstrap Demo Tests">
+    <test name="Tests">
+        <classes>
+            <class name="io.github.epam.bootstrap.tests.common.AlertTests"></class>
+            <class name="io.github.epam.bootstrap.tests.common.BadgeTests"></class>
+            <class name="io.github.epam.bootstrap.tests.complex.MultipleInputsTests"></class>
+            <class name="io.github.epam.bootstrap.tests.common.MultiProgressTests"></class>
+            <class name="io.github.epam.bootstrap.tests.common.BreadcrumbTests"></class>
+            <class name="io.github.epam.bootstrap.tests.common.RangeTests"></class>
+
+        </classes>
+    </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.TestNGListener"/>
+    </listeners>
+</suite>
+
+

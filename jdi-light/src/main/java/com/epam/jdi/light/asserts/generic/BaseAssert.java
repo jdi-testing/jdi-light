@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.HasRefresh;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
-import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
@@ -16,34 +15,27 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
  */
 public class BaseAssert<E extends IBaseElement> implements IBaseElement {
     public String name;
-    public String failElement;
-    public Safe<E> element = new Safe<>(() -> null);
-    public static JFunc1<JDIElement, String> PRINT_ASSERT = JDIElement::toString;
-
     @Override
     public String getName() {
         return name;
     }
+    public String failElement;
+    public E element;
+    public static JFunc1<JDIElement, String> PRINT_ASSERT = JDIElement::toString;
 
     public JDIBase base() {
-        E instance = element.get();
-        if (instance == null)
-            return null;
-        return instance.base();
+        return element().base();
     }
     public E element() {
-        E instance = element.get();
-        if (instance == null)
-            return null;
-        if (isInterface(instance.getClass(), HasRefresh.class))
-            ((HasRefresh)instance).refresh();
-        return instance;
+        if (isInterface(element.getClass(), HasRefresh.class))
+            ((HasRefresh)element).refresh();
+        return element;
     }
 
     public BaseAssert() { }
     public BaseAssert(E element) {
         this(element.getName(), element.getName());
-        this.element.set(element);
+        this.element = element;
     }
     public BaseAssert(String name, String failElement) {
         this.name = name;
@@ -55,8 +47,8 @@ public class BaseAssert<E extends IBaseElement> implements IBaseElement {
 
     @Override
     public String toString() {
-        return element.get() != null
-            ? PRINT_ASSERT.execute(element.get()) : name;
+        return element != null
+            ? PRINT_ASSERT.execute(element) : name;
     }
 
     public void assertResults() {

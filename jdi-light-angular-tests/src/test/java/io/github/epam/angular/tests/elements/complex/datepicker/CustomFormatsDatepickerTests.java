@@ -1,25 +1,24 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
-import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.customFormatsDatepicker;
 
 public class CustomFormatsDatepickerTests extends TestsDatepickerBase {
+    private final String verboseDatepicker = "Verbose datepicker";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
         customFormatsDatepicker.show();
         customFormatsDatepicker.clear();
     }
 
     @Test
     public void checkLabelValue() {
-        String verboseDatepicker = "Verbose datepicker";
         customFormatsDatepicker.label().has().value(verboseDatepicker);
     }
 
@@ -45,5 +44,15 @@ public class CustomFormatsDatepickerTests extends TestsDatepickerBase {
     public void checkSelectDate() {
         customFormatsDatepicker.select(LocalDate.of(2017, 7, 2));
         customFormatsDatepicker.is().text("July 2, 2017");
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (customFormatsDatepicker.isExpanded()) {
+            customFormatsDatepicker.collapse();
+        }
+        if (!customFormatsDatepicker.isEmpty()) {
+            customFormatsDatepicker.clear();
+        }
     }
 }

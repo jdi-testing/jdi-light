@@ -3,6 +3,7 @@ package io.github.epam.angular.tests.unit;
 import com.epam.jdi.light.angular.elements.composite.DatepickerContainer;
 import com.epam.jdi.light.angular.entities.DatepickerNavigation;
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -28,7 +29,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         container = new DatepickerContainer();
     }
 
@@ -334,4 +335,22 @@ public class DatepickerContainerUnitTests extends TestsInit {
         assertTrue(container.isSelectedLocale(Locale.FRANCE));
     }
 
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (container.isDisplayed()) {
+            container.collapse();
+        }
+        if (!basicDatepicker.isEmpty()) {
+            basicDatepicker.clear();
+        }
+        if (!minMaxDatepicker.isEmpty()) {
+            minMaxDatepicker.clear();
+        }
+        if (!filterDatepicker.isEmpty()) {
+            filterDatepicker.clear();
+        }
+        if (!differentLocaleDatepicker.isEmpty()) {
+            differentLocaleDatepicker.clear();
+        }
+    }
 }
