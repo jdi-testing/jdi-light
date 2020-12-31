@@ -22,7 +22,8 @@ import io.github.com.sections.DismissAlert;
 import io.github.com.sections.Slide;
 
 public class BootstrapPage extends WebPage {
-    public static UIElement inputGroupWrap, inputGroupNowrap;
+    public static UIElement inputGroupWrap;
+    public static inputGroupNowrap;
     public static Badge badge;
     public static Button redButton;
     public static Button doubleButton;
