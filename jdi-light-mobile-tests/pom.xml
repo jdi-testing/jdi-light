@@ -20,6 +20,7 @@
         <suite.xml.file>src/test/resources/android10SystemTests.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/android11SystemTests.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/androidApps.xml</suite.xml.file>
+        <suite.xml.file>src/test/resources/androidAppsEspresso.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/iosApps.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/webMobileTests.xml</suite.xml.file>
     </properties>
