@@ -18,5 +18,5 @@ public class ContactInfo extends DataClass<ContactInfo> {
     public int passportNumber;
     public int passportSeria;
     public boolean passport;
-    \\\\\\\\\public boolean acceptConditions;
+    public boolean acceptConditions;
 }
