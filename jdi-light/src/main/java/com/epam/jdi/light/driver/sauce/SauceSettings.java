@@ -16,7 +16,11 @@ public class SauceSettings extends DataClass<SauceSettings> {
     public static String commandTimeout = "600";
     public static String idleTimeout = "1000";
     public static String build = "JDI uild";
-        browserName, browserVersion, platformName, screenResolution, timeZone;
+    public static String browserName;
+    public static String browserVersion;
+    public static String platformName;
+    public static String screenResolution;
+    public static String timeZone;
     public static boolean recordVideo;
     public static boolean videoUploadOnPass;
     public static boolean recordScreenshots;
