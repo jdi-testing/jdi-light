@@ -4,8 +4,6 @@ import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
-import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
-import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
