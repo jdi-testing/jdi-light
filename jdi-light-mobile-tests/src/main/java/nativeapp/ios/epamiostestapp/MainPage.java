@@ -35,7 +35,7 @@ public class MainPage {
     @MobileFindBy(xpath = "//XCUIElementTypeButton[@name=\"Stepper\"]")
     public static MenuItem menuStepper;
 
-    @MobileFindBy(xpath = "//XCUIElementTypeButton[@name=\"LabelView\"]")
+    @MobileFindBy(xpath = "//XCUIElementTypeButton[@name=\"LabelViewPage\"]")
     public static MenuItem menuLabelView;
 
 }

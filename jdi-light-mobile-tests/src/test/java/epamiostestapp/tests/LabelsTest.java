@@ -1,24 +1,29 @@
 package epamiostestapp.tests;
 
 import epamiostestapp.IosApplicationInit;
+import nativeapp.ios.epamiostestapp.LabelViewPage;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.mobile.elements.init.MobileAppFactory.$;
 import static nativeapp.ios.epamiostestapp.MainPage.menuLabelView;
-import static nativeapp.ios.epamiostestapp.LabelViewPage.label;
 
 public class LabelsTest extends IosApplicationInit {
     @Test
     public void iosLabelsTest() {
         menuLabelView.tap();
-        $(label, "Label1").is().displayed();
-        $(label, "Label2").is().displayed();
-        $(label, "Label1").isDisplayed();//or that one
+        String labelAssert = LabelViewPage.label1.getValue();
+        LabelViewPage.label1.is().text(labelAssert);
+
+        LabelViewPage.label2.is().text("Label2");
+
     }
 
     @Test
     public void iosTextUnderTheLabelsTest() {
         menuLabelView.tap();
+        String labelAssert = LabelViewPage.text_under_label1.getValue();
+        LabelViewPage.text_under_label1.is().text(labelAssert);
+
+        LabelViewPage.text_under_label2.is().text("Text2 under the label");
 
     }
 }
