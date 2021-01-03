@@ -2,7 +2,9 @@ package org.jdiai.jselement;
 
 import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
-import org.jdiai.JSSmartBuilder;
+import org.jdiai.jsbuilder.IJSBuilder;
+import org.jdiai.jsbuilder.JSBuilder;
+import org.jdiai.jsbuilder.SmartBuilderActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -11,10 +13,10 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.util.Arrays.asList;
 
-public class JSSmart extends JSBase<JSSmart> {
+public class JSSmart extends JSElement {
     public JSSmart(WebDriver driver, List<By> locators) {
         super(driver, locators);
-        this.driver.setBuilder(new JSSmartBuilder(driver));
+        this.driver.setBuilder(new JSBuilder(driver, new SmartBuilderActions()));
     }
     public JSSmart(WebDriver driver, By... locators) {
         this(driver, asList(locators));
@@ -66,5 +68,10 @@ public class JSSmart extends JSBase<JSSmart> {
     }
     public <T> T getEntity(String... attributes) {
         return getEntity(asList(attributes));
+    }
+    public String jsExecute(String script) {
+        IJSBuilder builder = jsDriver().builder();
+        builder.addJSCode(script);
+        return builder.executeQuery();
     }
 }

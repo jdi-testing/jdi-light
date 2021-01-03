@@ -1,8 +1,9 @@
-package org.jdiai.interfaces;
+package org.jdiai.jsbuilder;
 
 import org.openqa.selenium.By;
 
 public interface IBuilderActions {
+    void setBuilder(IJSBuilder builder);
     String oneToOne(String ctx, By locator);
     String oneToList(String ctx, By locator);
     String listToOne(By locator);

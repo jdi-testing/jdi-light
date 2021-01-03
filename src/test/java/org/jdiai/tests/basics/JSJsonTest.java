@@ -1,22 +1,10 @@
-package org.jdiai.tests;
+package org.jdiai.tests.basics;
 
-import com.epam.jdi.tools.Timer;
 import com.google.gson.JsonObject;
-import org.jdiai.ImageTypes;
-import org.jdiai.JSElement;
 import org.jdiai.TestInit;
-import org.jdiai.jselement.JSTalk;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Base64;
-
-import static org.jdiai.ImageTypes.*;
-import static org.jdiai.jselement.JSTalk.$;
 import static org.jdiai.jselement.JSTalk.json;
 import static org.testng.Assert.assertEquals;
 
@@ -25,13 +13,6 @@ public class JSJsonTest extends TestInit {
     @BeforeMethod
     public void before() {
         atHomePage();
-    }
-
-    @Test
-    public void test() {
-        JSElement js = new JSElement(JSTalk.DRIVER.get(), By.className("sidebar-menu"));
-        js.makeScreenshot(JPG).asFile("test");
-        js.recordVideo(VIDEO_WEBM, 5000).asFile("recordVideo");
     }
 
     @Test

@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Base64;
 
-public class ScreenshotMaker {
+public class StreamToImageVideo {
     private final String base64;
     private final ImageTypes imageType;
-    public ScreenshotMaker(String stream, ImageTypes imageType) {
+    public StreamToImageVideo(String stream, ImageTypes imageType) {
         this.base64 = stream.contains("base64") ? stream.substring(stream.indexOf("base64")+7) : "";
         this.imageType = imageType;
     }
@@ -23,14 +23,22 @@ public class ScreenshotMaker {
     }
     public File asFile(String fileName) {
         String path = fileName + "." + imageType.suffix;
+        FileOutputStream osf = null;
+        File file;
         try {
-            File file = new File(path);
-            FileOutputStream osf = new FileOutputStream(file);
+            file = new File(path);
+            osf = new FileOutputStream(file);
             osf.write(asByteStream());
             osf.flush();
             return file;
         } catch (Exception ex) {
             throw new JSException(ex, "Failed to save screenshot to file: " + path);
+        } finally {
+            try {
+                if (osf != null) {
+                    osf.close();
+                }
+            } catch (Exception ignore) { }
         }
     }
 }

@@ -1,6 +1,5 @@
-package org.jdiai.tests;
+package org.jdiai.tests.basics;
 
-import org.jdiai.ClientRect;
 import org.jdiai.TestInit;
 import org.jdiai.entity.TextHtml;
 import org.jdiai.entity.TextInfo;
@@ -8,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static java.util.Arrays.asList;
-import static org.jdiai.jselement.JSTalk.entity;
+import static org.jdiai.jselement.JSTalk.element;
 import static org.testng.Assert.assertEquals;
 
 public class JSObjectTest extends TestInit {
@@ -19,8 +18,8 @@ public class JSObjectTest extends TestInit {
 
     @Test
     public void oneTest() {
-        TextInfo jsObject = entity(TextInfo.class, "#user-name").getEntity(
-            " { 'tag': element.tagName, 'iText': element.innerText, " +
+        TextInfo jsObject = element(TextInfo.class, "#user-name").getEntity(
+            "{ 'tag': element.tagName, 'iText': element.innerText, " +
             "'text': element.textContent, 'iHtml': element.innerHTML }");
 
         assertEquals(jsObject.tag, "SPAN");
@@ -30,7 +29,7 @@ public class JSObjectTest extends TestInit {
     }
     @Test
     public void oneAttributeTest() {
-        TextHtml jsObject = entity(TextHtml.class, "#user-name")
+        TextHtml jsObject = element(TextHtml.class, "#user-name")
             .getEntity("tagName", "innerText", "textContent", "innerHTML");
 
         assertEquals(jsObject.tagName, "SPAN");
@@ -40,7 +39,7 @@ public class JSObjectTest extends TestInit {
     }
     @Test
     public void oneAttributeListTest() {
-        TextHtml jsObject = entity(TextHtml.class, "#user-name")
+        TextHtml jsObject = element(TextHtml.class, "#user-name")
                 .getEntity(asList("tagName", "innerText", "textContent", "innerHTML"));
 
         assertEquals(jsObject.tagName, "SPAN");
@@ -50,7 +49,7 @@ public class JSObjectTest extends TestInit {
     }
     @Test
     public void oneFewLocatorsTest() {
-        TextInfo jsObject = entity(TextInfo.class, withParent("#user-name")).getEntity(
+        TextInfo jsObject = element(TextInfo.class, withParent("#user-name")).getEntity(
             " { 'tag': element.tagName, 'iText': element.innerText, " +
             "'text': element.textContent, 'iHtml': element.innerHTML }");
 
@@ -61,7 +60,7 @@ public class JSObjectTest extends TestInit {
     }
     @Test
     public void oneFewLocatorsAttributesTest() {
-        TextHtml jsObject = entity(TextHtml.class, "#user-name")
+        TextHtml jsObject = element(TextHtml.class, "#user-name")
             .getEntity("tagName", "innerText", "textContent", "innerHTML");
 
         assertEquals(jsObject.tagName, "SPAN");
@@ -71,7 +70,7 @@ public class JSObjectTest extends TestInit {
     }
     @Test
     public void oneFewLocatorsAttributesListTest() {
-        TextHtml jsObject = entity(TextHtml.class, "#user-name")
+        TextHtml jsObject = element(TextHtml.class, "#user-name")
                 .getEntity(asList("tagName", "innerText", "textContent", "innerHTML"));
 
         assertEquals(jsObject.tagName, "SPAN");
@@ -82,24 +81,24 @@ public class JSObjectTest extends TestInit {
 
     @Test
     public void styleTest() {
-        assertEquals(entity("#user-name").getStyle("visibility"), "hidden");
+        assertEquals(element(TextHtml.class, "#user-name").getStyle("visibility"), "hidden");
 
-        entity(withParent("#user-name")).doAction("click()");
-        entity(inForm("#name")).doAction("value='Roman'");
-        entity(inForm("#password")).doAction("value='Jdi1234'");
-        entity(inForm("#login-button")).doAction("click()");
+        element(TextHtml.class, withParent("#user-name")).doAction("click()");
+        element(TextHtml.class, inForm("#name")).doAction("value='Roman'");
+        element(TextHtml.class, inForm("#password")).doAction("value='Jdi1234'");
+        element(TextHtml.class, inForm("#login-button")).doAction("click()");
 
-        assertEquals(entity("#user-name").getStyle("visibility"), "visible");
+        assertEquals(element(TextHtml.class, "#user-name").getStyle("visibility"), "visible");
     }
     @Test
     public void styleMultiTest() {
-        assertEquals(entity(withParent("#user-name")).getStyle("visibility"), "hidden");
+        assertEquals(element(TextHtml.class, withParent("#user-name")).getStyle("visibility"), "hidden");
 
-        entity(withParent("#user-name")).doAction("click()");
-        entity(inForm("#name")).doAction("value='Roman'");
-        entity(inForm("#password")).doAction("value='Jdi1234'");
-        entity(inForm("#login-button")).doAction("click()");
+        element(TextHtml.class, withParent("#user-name")).doAction("click()");
+        element(TextHtml.class, inForm("#name")).doAction("value='Roman'");
+        element(TextHtml.class, inForm("#password")).doAction("value='Jdi1234'");
+        element(TextHtml.class, inForm("#login-button")).doAction("click()");
 
-        assertEquals(entity(withParent("#user-name")).getStyle("visibility"), "visible");
+        assertEquals(element(TextHtml.class, withParent("#user-name")).getStyle("visibility"), "visible");
     }
 }

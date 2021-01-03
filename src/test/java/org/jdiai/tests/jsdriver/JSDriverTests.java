@@ -1,4 +1,4 @@
-package org.jdiai.tests;
+package org.jdiai.tests.jsdriver;
 
 import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
@@ -54,7 +54,7 @@ public class JSDriverTests extends TestInit {
         assertEquals(getStyle(js("#user-name"), "visibility"), "visible");
     }
     @Test
-    public void multiTest() {        
+    public void multiTest() {
         assertEquals(js("#user-icon").getOneMultiSearch("element.tagName").asString(), "IMG");
         assertEquals(js("#user-name").getOneMultiSearch("element.innerText").asString(), "Roman Iovlev");
         assertEquals(js("#user-name").getOneMultiSearch("element.textContent").asString(), "Roman Iovlev");

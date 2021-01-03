@@ -1,4 +1,4 @@
-package org.jdiai;
+package org.jdiai.jsbuilder;
 
 public class JSSmartTemplates {
     public static String FILTER_FUNC =

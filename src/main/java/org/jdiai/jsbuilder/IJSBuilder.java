@@ -1,4 +1,4 @@
-package org.jdiai.interfaces;
+package org.jdiai.jsbuilder;
 
 import org.openqa.selenium.By;
 

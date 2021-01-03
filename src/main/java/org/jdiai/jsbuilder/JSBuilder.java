@@ -1,9 +1,7 @@
-package org.jdiai;
+package org.jdiai.jsbuilder;
 
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.map.MapArray;
-import org.jdiai.interfaces.IBuilderActions;
-import org.jdiai.interfaces.IJSBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -31,8 +29,10 @@ public class JSBuilder implements IJSBuilder {
         this.js = (JavascriptExecutor) driver;
         this.builderActions = builderActions != null
             ? builderActions
-            : new BuilderActions(this);
+            : new BuilderActions();
+        this.builderActions.setBuilder(this);
     }
+
     public IJSBuilder registerFunction(String name, String function) {
         useFunctions.update(name, function);
         return this;
@@ -49,10 +49,9 @@ public class JSBuilder implements IJSBuilder {
         String result;
         try {
             Object obj = js.executeScript(jsScript);
-            cleanup();
             result = obj == null ? "" : obj.toString();
-        } catch (Exception ex) {
-            result = "JS ScriptExecution failed: " + ex.getMessage();
+        } finally {
+            cleanup();
         }
         if (result != null && logQuery)
             logger.execute(">>> " + result);
@@ -62,8 +61,12 @@ public class JSBuilder implements IJSBuilder {
         String jsScript = getScript();
         if (logQuery)
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
-        List<String> result = (List<String>) js.executeScript(jsScript);
-        cleanup();
+        List<String> result;
+        try {
+            result = (List<String>) js.executeScript(jsScript);
+        } finally {
+            cleanup();
+        }
         if (result != null && logQuery)
             logger.execute(">>> " + result);
         return result;
@@ -121,6 +124,9 @@ public class JSBuilder implements IJSBuilder {
         return variable + " = ";
     }
     protected String getScript() {
+        if (variables.size() == 0 && useFunctions.size() == 0) {
+            return query;
+        }
         String jsScript = print(useFunctions.values(), "");
         if (variables.size() == 1)
             return jsScript + "let " + query;

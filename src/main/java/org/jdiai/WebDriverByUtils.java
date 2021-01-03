@@ -2,7 +2,7 @@ package org.jdiai;
 
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.map.MapArray;
-import org.jdiai.interfaces.IJSBuilder;
+import org.jdiai.jsbuilder.IJSBuilder;
 import org.openqa.selenium.By;
 
 import java.text.MessageFormat;
@@ -16,8 +16,8 @@ import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
-import static org.jdiai.JSTemplates.XPATH_FUNC;
-import static org.jdiai.JSTemplates.XPATH_LIST_FUNC;
+import static org.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
+import static org.jdiai.jsbuilder.JSTemplates.XPATH_LIST_FUNC;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 
 /**

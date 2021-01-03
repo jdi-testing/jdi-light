@@ -1,10 +1,12 @@
 package org.jdiai.jsdriver;
 
 import com.epam.jdi.tools.LinqUtils;
-import org.jdiai.JSBuilder;
 import org.jdiai.JSException;
 import org.jdiai.ListSearch;
-import org.jdiai.interfaces.IJSBuilder;
+import org.jdiai.jsbuilder.IJSBuilder;
+import org.jdiai.jsbuilder.JSBuilder;
+import org.jdiai.jsproducer.JSListProducer;
+import org.jdiai.jsproducer.JSProducer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,7 +20,7 @@ public class JSDriver {
     private final WebDriver driver;
     private final List<By> locators;
     private IJSBuilder builder;
-    public ListSearch strategy = CHAIN;
+    protected ListSearch strategy = CHAIN;
 
     public JSDriver(WebDriver driver, By... locators) {
         this(driver, newList(locators), null);

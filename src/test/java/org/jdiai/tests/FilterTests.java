@@ -7,7 +7,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.jdiai.jselement.JSTalk.*;
+import static org.jdiai.jselement.JSTalk.$;
+import static org.jdiai.jselement.JSTalk.element;
 import static org.testng.Assert.assertEquals;
 
 public class FilterTests extends TestInit {
@@ -45,7 +46,7 @@ public class FilterTests extends TestInit {
             "'fontSize': getComputedStyle(element).fontSize, " +
             "'selected': !!element.selected, " +
             "'html': element.innerHTML }";
-        List<ElementInfo> info = entity(ElementInfo.class, "#furniture-double-hidden th")
+        List<ElementInfo> info = element(ElementInfo.class, "#furniture-double-hidden th")
             .getObjectList(json);
         assertEquals(info.size(), 6);
         assertEquals(info.toString(), INFO);

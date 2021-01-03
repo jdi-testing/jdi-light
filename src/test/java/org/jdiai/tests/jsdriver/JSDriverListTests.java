@@ -1,4 +1,4 @@
-package org.jdiai.tests;
+package org.jdiai.tests.jsdriver;
 
 import org.jdiai.TestInit;
 import org.jdiai.jsdriver.JSDriver;

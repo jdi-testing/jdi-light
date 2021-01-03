@@ -11,19 +11,19 @@ import java.util.List;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 import static java.util.Arrays.asList;
 
-public class JSObject<T> extends JSBase<JSObject<T>> {
+public class JSEntity<T> extends JSElement {
     protected Class<T> cl;
-    public JSObject(WebDriver driver, List<By> locators) {
+    public JSEntity(WebDriver driver, List<By> locators) {
         super(driver, locators);
     }
-    public JSObject(WebDriver driver, By... locators) {
+    public JSEntity(WebDriver driver, By... locators) {
         super(driver, locators);
     }
-    public JSObject<T> initClass(Class<T> cl) {
+    public JSEntity<T> initClass(Class<T> cl) {
         this.cl = cl;
         return this;
     }
-    public void initFromField(Field field) {
+    public void setup(Field field) {
         Type[] types;
         try {
             types = getGenericTypes(field);
@@ -35,10 +35,11 @@ public class JSObject<T> extends JSBase<JSObject<T>> {
 
     }
 
+    // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public T getEntity(String objectMap) {
         return driver.getOne(objectMap).asObject(cl);
     }
-    public T getEntityFromObject(String jsObject) {
+    protected T getEntityFromObject(String jsObject) {
         return getEntity("JSON.stringify(" + jsObject + ")");
     }
     public T getEntity(List<String> attributes) {

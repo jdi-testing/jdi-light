@@ -1,8 +1,8 @@
-package org.jdiai;
+package org.jdiai.jsbuilder;
 
 public class JSTemplates {
     public static String XPATH_LIST_FUNC =
-        "function xpathList(ctx, locator)\n{\n" +
+        "function xpathList(ctx, locator) {\n" +
         "  let xpath = document.evaluate(locator, ctx, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n" +
         "  let xList = [];\n" +
         "  for (let i = 0; i < xpath.snapshotLength; i++)\n  {\n" +
@@ -11,7 +11,7 @@ public class JSTemplates {
         "  return xList;\n" +
         "}\n";
     public static String XPATH_FUNC =
-        "function xpath(ctx, locator)\n{\n" +
+        "function xpath(ctx, locator) {\n" +
         "  return document.evaluate(locator, ctx, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n" +
         "}\n";
     public static String ONE_TO_RESULT = "return %s;";

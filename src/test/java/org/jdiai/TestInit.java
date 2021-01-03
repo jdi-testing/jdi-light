@@ -10,8 +10,7 @@ import org.testng.annotations.BeforeSuite;
 
 import static java.lang.Runtime.getRuntime;
 import static java.util.Arrays.stream;
-import static org.jdiai.JSBuilder.LOG_QUERY;
-import static org.jdiai.jselement.JSTalk.element;
+import static org.jdiai.jsbuilder.JSBuilder.LOG_QUERY;
 import static org.jdiai.jselement.JSTalk.defineLocator;
 
 public class TestInit {
