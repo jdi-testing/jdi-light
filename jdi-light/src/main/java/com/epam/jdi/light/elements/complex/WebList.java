@@ -34,7 +34,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.common.TextTypes.INDEX;
+import static com.epam.jdi.light.common.TextTypes.LABEL;
+import static com.epam.jdi.light.common.TextTypes.SMART_LIST;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
@@ -227,6 +229,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         try {
             for (UIElement element : elements(1)) {
                 String name = getElementName(element);
+                if (nameElement.keys().contains(name))
+                    continue;
                 nameElement.add(name, element);
                 if (ELEMENT.namesEqual.execute(name, value))
                     return element;
@@ -236,7 +240,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             if (map.hasValue()) {
                 for (Pair<String, UIElement> pair : map.get())
                     if (!any(nameElement.keys(), name -> ELEMENT.namesEqual.execute(name, pair.key)))
-                        nameElement.add(pair);
+                        nameElement.update(pair);
             }
             map.set(nameElement);
         }
