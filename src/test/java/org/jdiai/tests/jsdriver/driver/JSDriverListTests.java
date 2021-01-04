@@ -1,11 +1,12 @@
-package org.jdiai.tests.jsdriver;
+package org.jdiai.tests.jsdriver.driver;
 
-import org.jdiai.TestInit;
 import org.jdiai.jsdriver.JSDriver;
+import org.jdiai.tests.jsdriver.TestInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static org.jdiai.tests.jsdriver.states.States.atUsersPage;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 

@@ -1,4 +1,4 @@
-package org.jdiai.jselement;
+package org.jdiai.jswrap;
 
 import org.jdiai.JSException;
 import org.openqa.selenium.By;
@@ -32,29 +32,26 @@ public class JSEntity<T> extends JSElement {
         try {
             this.cl = (Class<T>) types[0];
         } catch (Exception ex) { throw new JSException(ex, "Can't init JSObject class."); }
-
     }
 
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public T getEntity(String objectMap) {
         return driver.getOne(objectMap).asObject(cl);
     }
-    protected T getEntityFromObject(String jsObject) {
-        return getEntity("JSON.stringify(" + jsObject + ")");
-    }
     public T getEntity(List<String> attributes) {
         return driver.getOne(attributesToJson(attributes)).asObject(cl);
     }
-    public T getEntity(String... attributes) {
+    public T getEntityFromAttr(String... attributes) {
         return getEntity(asList(attributes));
     }
-    public List<T> getObjectList(String objectMap) {
+    // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
+    public List<T> getEntityList(String objectMap) {
         return driver.getList(objectMap).asObject(cl);
     }
-    public List<T> getObjectList(List<String> attributes) {
+    public List<T> getEntityList(List<String> attributes) {
         return driver.getList(attributesToJson(attributes)).asObject(cl);
     }
-    public List<T> getObjectList(String... attributes) {
-        return getObjectList(asList(attributes));
+    public List<T> getEntityListFromAttr(String... attributes) {
+        return getEntityList(asList(attributes));
     }
 }

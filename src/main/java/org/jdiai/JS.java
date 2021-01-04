@@ -4,7 +4,7 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc2;
 import org.jdiai.interfaces.HasLocators;
-import org.jdiai.jselement.JSSmart;
+import org.jdiai.jswrap.JSSmart;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
@@ -12,39 +12,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.System.currentTimeMillis;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.GetTextTypes.VALUE;
 import static org.jdiai.ImageTypes.*;
 import static org.openqa.selenium.OutputType.*;
 
-public class JSElement implements WebElement {
+public class JS implements WebElement {
     public final JSSmart js;
     private final WebDriver driver;
     private final List<By> locators;
     private final Safe<Actions> actions;
     private String name = "";
 
-    public JSElement(WebDriver driver, By locator) {
-        this(driver, locator, null);
-    }
-    public JSElement(WebDriver driver, By locator, HasLocators parent) {
-        if (parent != null) {
-            List<By> pLocators = parent.locators();
-            this.locators = pLocators != null && pLocators.size() > 0
-                ? pLocators : new ArrayList<>();
-        } else {
-            this.locators = new ArrayList<>();
-        }
-        this.locators.add(locator);
+    public JS(WebDriver driver, List<By> locators) {
+        this.locators = locators;
+        this.driver = driver;
         this.js = new JSSmart(driver, locators);
         this.js.multiSearch();
-        this.driver = driver;
         this.actions = new Safe<>(() -> new Actions(driver));
     }
-    protected String jsResult(String action) {
+    public JS(WebDriver driver, By... locators) {
+        this(driver, asList(locators));
+    }
+    public JS(WebDriver driver, By locator, HasLocators parent) {
+        this(driver, locatorsFromParent(locator, parent));
+    }
+    private static List<By> locatorsFromParent(By locator, HasLocators parent) {
+        List<By> locators;
+        if (parent != null) {
+            List<By> pLocators = parent.locators();
+            locators = pLocators != null && pLocators.size() > 0
+                    ? pLocators : new ArrayList<>();
+        } else {
+            locators = new ArrayList<>();
+        }
+        locators.add(locator);
+        return locators;
+    }
+    public String getJSResult(String action) {
         return js.getAttribute(action);
     }
-    protected void doJSAction(String action) {
+    public void set(String action) {
         js.getAttribute(action);
     }
     public WebElement we() {
@@ -60,13 +69,13 @@ public class JSElement implements WebElement {
     public void actions(JFunc2<Actions, WebElement, Actions> action) {
         action.execute(actions.get(), this).build().perform();
     }
-    public JSElement setName(String name) {
+    public JS setName(String name) {
         this.name = name;
         return this;
     }
 
     public void click() {
-        doJSAction("click()");
+        set("click()");
     }
     public void rightClick() {
         actionsWithElement(Actions::contextClick);
@@ -79,7 +88,7 @@ public class JSElement implements WebElement {
     }
 
     public void submit() {
-        doJSAction("submit()");
+        set("submit()");
     }
 
     public void sendKeys(CharSequence... value) {
@@ -103,15 +112,15 @@ public class JSElement implements WebElement {
         //        .trigger("mousemove", { which: 1, pageX: 460 })
     }
     public void clear() {
-        doJSAction("clear()");
+        set("clear()");
     }
 
     public String getTagName() {
-        return jsResult("tagName");
+        return getJSResult("tagName");
     }
 
     public String getAttribute(String name) {
-        return jsResult("getAttribute('" + name + "')");
+        return getJSResult("getAttribute('" + name + "')");
     }
 
     public boolean isSelected() {
@@ -121,7 +130,7 @@ public class JSElement implements WebElement {
     public boolean isEnabled() {
         return isNotBlank(getAttribute("enabled"));
     }
-    public JSElement setGetTextType(GetTextTypes getTextType) { this.getTextType = getTextType; return this; }
+    public JS setGetTextType(GetTextTypes getTextType) { this.getTextType = getTextType; return this; }
 
     protected GetTextTypes getTextType;
     public String getText() {
@@ -130,7 +139,7 @@ public class JSElement implements WebElement {
     public String getText(GetTextTypes textType) {
         return textType == VALUE
             ? getAttribute("value")
-            : jsResult(getTextType.value);
+            : getJSResult(getTextType.value);
     }
 
     public List<WebElement> findElements(By by) {
@@ -282,7 +291,7 @@ public class JSElement implements WebElement {
     }
 
     protected String objectMap;
-    public JSElement setObjectMapping(String objectMap, Class<?> cl) {
+    public JS setObjectMapping(String objectMap, Class<?> cl) {
         this.objectMap = objectMap;
         this.js.setEntity(cl);
         return this;

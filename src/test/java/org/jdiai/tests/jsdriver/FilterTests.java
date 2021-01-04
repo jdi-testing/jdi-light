@@ -1,14 +1,14 @@
-package org.jdiai.tests;
+package org.jdiai.tests.jsdriver;
 
-import org.jdiai.TestInit;
 import org.jdiai.entity.ElementInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.jdiai.jselement.JSTalk.$;
-import static org.jdiai.jselement.JSTalk.element;
+import static org.jdiai.jswrap.JSWrapper.$;
+import static org.jdiai.jswrap.JSWrapper.element;
+import static org.jdiai.tests.jsdriver.states.States.atSimplePage;
 import static org.testng.Assert.assertEquals;
 
 public class FilterTests extends TestInit {
@@ -47,11 +47,11 @@ public class FilterTests extends TestInit {
             "'selected': !!element.selected, " +
             "'html': element.innerHTML }";
         List<ElementInfo> info = element(ElementInfo.class, "#furniture-double-hidden th")
-            .getObjectList(json);
+            .getEntityList(json);
         assertEquals(info.size(), 6);
         assertEquals(info.toString(), INFO);
         List<ElementInfo> filteredInfo = $(ElementInfo.class, "#furniture-double-hidden th")
-            .getObjectList(json);
+            .getEntityList(json);
         assertEquals(filteredInfo.size(), 4);
         assertEquals(filteredInfo.toString(), FILTERED_INFO);
     }

@@ -1,7 +1,7 @@
-package org.jdiai.jselement;
+package org.jdiai.jswrap;
 
-import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
+import org.jdiai.Json;
 import org.jdiai.jsbuilder.IJSBuilder;
 import org.jdiai.jsbuilder.JSBuilder;
 import org.jdiai.jsbuilder.SmartBuilderActions;
@@ -25,21 +25,21 @@ public class JSSmart extends JSElement {
     public String getAttribute(String attribute) {
         return getValue("element." + attribute);
     }
-    public MapArray<String, String> getAttributes(List<String> attributes) {
+    public Json getAttributes(List<String> attributes) {
         JsonObject json = driver.getOne(attributesToJson(attributes)).asJson();
-        return new MapArray<>(attributes, s -> s, s -> json.get(s).getAsString());
+        return new Json(attributes, s -> json.get(s).getAsString());
     }
-    public MapArray<String, String> getAttributes(String... attributes) {
+    public Json getAttributes(String... attributes) {
         return getAttributes(asList(attributes));
     }
     public List<String> getAttributeList(String attribute) {
         return driver.getList("element." + attribute).asString();
     }
-    public List<MapArray<String, String>> getMultiAttributes(List<String> attributes) {
+    public List<Json> getMultiAttributes(List<String> attributes) {
         List<JsonObject> objects = driver.getList(attributesToJson(attributes)).asJson();
-        return map(objects, json -> new MapArray<>(attributes, k -> k, v -> json.get(v).getAsString()));
+        return map(objects, json -> new Json(attributes, v -> json.get(v).getAsString()));
     }
-    public List<MapArray<String, String>> getMultiAttributes(String... attributes) {
+    public List<Json> getMultiAttributes(String... attributes) {
         return getMultiAttributes(asList(attributes));
     }
     public JsonObject getJson(String json) {
@@ -57,21 +57,24 @@ public class JSSmart extends JSElement {
         this.entity = entity;
         return this;
     }
+    // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public <T> T getEntity(String objectMap) {
         return (T) driver.getOne(objectMap).asObject(entity);
-    }
-    public <T> T getEntityFromObject(String jsObject) {
-        return getEntity("JSON.stringify(" + jsObject + ")");
     }
     public <T> T getEntity(List<String> attributes) {
         return (T) driver.getOne(attributesToJson(attributes)).asObject(entity);
     }
-    public <T> T getEntity(String... attributes) {
+    public <T> T getEntityFromAttr(String... attributes) {
         return getEntity(asList(attributes));
     }
-    public String jsExecute(String script) {
-        IJSBuilder builder = jsDriver().builder();
-        builder.addJSCode(script);
-        return builder.executeQuery();
+    // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
+    public <T> List<T> getEntityList(String objectMap) {
+        return map(driver.getList(objectMap).asObject(entity), el -> (T) el);
+    }
+    public <T> List<T> getEntityList(List<String> attributes) {
+        return map(driver.getList(attributesToJson(attributes)).asObject(entity), el -> (T) el);
+    }
+    public <T> List<T> getEntityListFromAttr(String... attributes) {
+        return getEntityList(asList(attributes));
     }
 }

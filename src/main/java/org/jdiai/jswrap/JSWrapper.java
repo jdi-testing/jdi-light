@@ -1,16 +1,18 @@
-package org.jdiai.jselement;
+package org.jdiai.jswrap;
 
 import com.epam.jdi.tools.Safe;
 import org.jdiai.jsbuilder.JSBuilder;
 import org.jdiai.jsbuilder.SmartBuilderActions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static java.util.Arrays.stream;
+import static org.jdiai.WebDriverByUtils.defineLocator;
+import static org.jdiai.WebDriverByUtils.locatorsToBy;
 
-public class JSTalk {
-    public static Safe<WebDriver> DRIVER = new Safe<>(JSTalk::initDriver);
+public class JSWrapper {
+    public static Safe<WebDriver> DRIVER = new Safe<>(JSWrapper::chromeDriver);
+
     public static JSSmart $(String locator) {
         return new JSSmart(DRIVER.get(), defineLocator(locator));
     }
@@ -46,17 +48,12 @@ public class JSTalk {
         return new JSJson(DRIVER.get(), locatorsToBy(locators));
     }
 
-
-    private static WebDriver initDriver() {
+    public static WebDriver chromeDriver() {
         System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
         return new ChromeDriver();
     }
-    public static By[] locatorsToBy(String... locators) {
-        return stream(locators).map(JSTalk::defineLocator).toArray(By[]::new);
-    }
-    public static By defineLocator(String locator) {
-        return locator.contains("//")
-            ? By.xpath(locator)
-            : By.cssSelector(locator);
+    public static WebDriver firefoxDriver() {
+        System.setProperty("webdriver.gecko.driver", "C:\\Selenium\\geckodriver.exe");
+        return new FirefoxDriver();
     }
 }

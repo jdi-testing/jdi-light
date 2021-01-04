@@ -1,10 +1,10 @@
-package org.jdiai.tests.jsdriver;
+package org.jdiai.tests.jsdriver.driver;
 
 import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
-import org.jdiai.TestInit;
 import org.jdiai.entity.Link;
 import org.jdiai.jsdriver.JSDriver;
+import org.jdiai.tests.jsdriver.TestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,12 +13,15 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
+import static org.jdiai.tests.jsdriver.states.States.atHomePage;
+import static org.jdiai.tests.jsdriver.states.States.logout;
 import static org.testng.Assert.assertEquals;
 
 public class JSDriverTests extends TestInit {
 
     @BeforeMethod
     public void before() {
+        logout();
         atHomePage();
     }
 
