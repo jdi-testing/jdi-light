@@ -227,6 +227,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         try {
             for (UIElement element : elements(1)) {
                 String name = getElementName(element);
+                if (nameElement.keys().contains(name))
+                    continue;
                 nameElement.add(name, element);
                 if (ELEMENT.namesEqual.execute(name, value))
                     return element;
@@ -236,7 +238,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             if (map.hasValue()) {
                 for (Pair<String, UIElement> pair : map.get())
                     if (!any(nameElement.keys(), name -> ELEMENT.namesEqual.execute(name, pair.key)))
-                        nameElement.add(pair);
+                        nameElement.update(pair);
             }
             map.set(nameElement);
         }
