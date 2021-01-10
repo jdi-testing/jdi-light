@@ -13,6 +13,7 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
+import static org.jdiai.tests.jsdriver.states.Pages.DOMAIN;
 import static org.jdiai.tests.jsdriver.states.States.atHomePage;
 import static org.jdiai.tests.jsdriver.states.States.logout;
 import static org.testng.Assert.assertEquals;
@@ -122,7 +123,7 @@ public class JSDriverTests extends TestInit {
         JsonObject json = js("#user-icon").getOne("{ 'tag': element.tagName, 'ref': element.src }").asJson();
         Link link = js("#user-icon").getOne("{ 'tag': element.tagName, 'ref': element.src }").asObject(Link.class);
         assertEquals(link.tag, "IMG");
-        assertEquals(link.ref, "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
+        assertEquals(link.ref, DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(json.get("ref").getAsString(), link.ref);
     }
     @Test

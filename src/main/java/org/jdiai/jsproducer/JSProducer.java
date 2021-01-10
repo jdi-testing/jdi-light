@@ -1,21 +1,32 @@
 package org.jdiai.jsproducer;
 
+import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.jdiai.JSException;
+import org.jdiai.Json;
+
+import java.util.Map;
 
 public class JSProducer {
-    private String result;
-    public JSProducer(String result) {
+    private Object result;
+    public JSProducer(Object result) {
         this.result = result;
     }
 
     public String asString() {
-        return result;
+        return result == null ? "NULL" : result.toString();
     }
     public JsonObject asJson() {
-        return new Gson().fromJson(result, JsonObject.class);
+        if (result == null) { return null; }
+        return new Gson().fromJson(result.toString(), JsonObject.class);
+    }
+    public Json asMap() {
+        if (result == null) { return null; }
+        return new Json(new Gson().fromJson(result.toString(), Map.class));
     }
     public <T> T asObject(Class<T> cl) {
-        return new Gson().fromJson(result, cl);
+        if (result == null) { return null; }
+        return new Gson().fromJson(result.toString(), cl);
     }
 }

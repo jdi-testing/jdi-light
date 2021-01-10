@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JSDriver Tests" parallel="methods" thread-count="4">
+<suite name="JSDriver Tests" parallel="methods" thread-count="8">
     <test name="Tests">
         <packages>
-            <package name="org.jdiai.tests"/>
+            <package name="org.jdiai.tests.jsdriver.basics.*"/>
+            <package name="org.jdiai.tests.jsdriver.driver.*"/>
+            <package name="org.jdiai.tests.jsdriver.*"/>
         </packages>
     </test>
     <listeners>

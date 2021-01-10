@@ -1,6 +1,5 @@
 package org.jdiai.tests.jsdriver.basics;
 
-import com.google.gson.JsonObject;
 import org.jdiai.Json;
 import org.jdiai.entity.Header;
 import org.jdiai.entity.HeaderRaw;
@@ -15,13 +14,12 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.jdiai.jswrap.JSWrapper.element;
-import static org.jdiai.jswrap.JSWrapper.json;
+import static org.jdiai.tests.jsdriver.states.Pages.DOMAIN;
 import static org.jdiai.tests.jsdriver.states.States.*;
-import static org.jdiai.tests.jsdriver.states.States.atSimplePage;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class JSObjectTest extends TestInit {
+public class JSObjectTests extends TestInit {
     @BeforeMethod
     public void before() {
         logout();
@@ -189,14 +187,14 @@ public class JSObjectTest extends TestInit {
     public void attributesTest() {
         Json attributes = element(TextInfo.class, "#user-icon").getAttributes("id", "src", "tagName");
         assertEquals(attributes.get("id"), "user-icon");
-        assertEquals(attributes.get("src"), "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
+        assertEquals(attributes.get("src"), DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(attributes.get("tagName"), "IMG");
     }
     @Test
     public void attributesLocatorListTest() {
         Json attributes = element(TextInfo.class, withParent("#user-icon")).getAttributes("id", "src", "tagName");
         assertEquals(attributes.get("id"), "user-icon");
-        assertEquals(attributes.get("src"), "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
+        assertEquals(attributes.get("src"), DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(attributes.get("tagName"), "IMG");
     }
     @Test
@@ -234,6 +232,13 @@ public class JSObjectTest extends TestInit {
         login();
         visibility = element(TextInfo.class, "#user-name").getStyle("visibility");
         assertEquals(visibility, "visible");
+    }
+    @Test
+    public void allStylesTest() {
+        Json styles = element("#user-name").getAllStyles();
+        assertEquals(styles.size(), 320);
+        String visibility = styles.get("visibility");
+        assertEquals(visibility, "hidden");
     }
     @Test
     public void styleLocatorListTest() {

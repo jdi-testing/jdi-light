@@ -1,24 +1,20 @@
 package org.jdiai.tests.jsdriver.states;
 
-import org.jdiai.JS;
+import org.openqa.selenium.Cookie;
 
 import static org.jdiai.tests.jsdriver.states.Pages.*;
-import static org.jdiai.tools.JSTalk.*;
+import static org.jdiai.tools.JSTalk.driver;
+import static org.jdiai.tools.JSTalk.openPage;
 
 public class States {
-    static JS userName = $("#user-name");
-    static JS loginName = $("#name");
-    static JS password = $("#password");
-    static JS loginButton = $("#login-button");
 
     public static void logout() {
         driver().manage().deleteAllCookies();
+        driver().navigate().refresh();
     }
     public static void login() {
-        userName.click();
-        loginName.set("value='Roman'");
-        password.set("value='Jdi1234'");
-        loginButton.click();
+        driver().manage().addCookie(new Cookie("authUser", "true"));
+        driver().navigate().refresh();
     }
     public static void atHomePage() {
         openPage(HOME_PAGE);

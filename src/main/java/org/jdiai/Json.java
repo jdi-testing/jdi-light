@@ -3,6 +3,7 @@ package org.jdiai;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.*;
@@ -110,6 +111,16 @@ public class Json extends MapArray<String, String> {
         if (objects != null) {
             add(objects);
         }
+    }
+    private static List<String> jsonToList(JsonElement json) {
+        List<String> result = new ArrayList<>();
+        for (JsonElement js : json.getAsJsonArray()) {
+            result.add(js.getAsString());
+        }
+        return result;
+    }
+    public Json(JsonElement keys, JsonElement values) {
+        this(jsonToList(keys), jsonToList(values));
     }
     public Json(Collection<String> keys, Collection<String> values) {
         this();

@@ -15,10 +15,12 @@ public interface IJSBuilder {
     IJSBuilder getResultList(String collector);
     IJSBuilder trigger(String event);
     IJSBuilder trigger(String event, String options);
-    String executeQuery();
+    Object executeQuery();
     List<String> executeAsList();
     IJSBuilder registerFunction(String name, String function);
     void registerVariables(String... vars);
     String registerVariable(String variable);
     String getQuery();
+    IJSBuilder setTemplate(String replaceTo);
+    IJSBuilder logQuery();
 }

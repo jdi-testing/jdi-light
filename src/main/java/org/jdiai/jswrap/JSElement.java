@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import org.jdiai.Json;
 import org.jdiai.jsbuilder.IJSBuilder;
 import org.jdiai.jsdriver.JSDriver;
+import org.jdiai.jsproducer.JSProducer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -21,10 +22,13 @@ public class JSElement {
     public void multiSearch() {
         driver.multiSearch();
     }
-    public String jsExecute(String script) {
+    public JSProducer jsGet(String script) {
         IJSBuilder builder = jsDriver().builder();
         builder.addJSCode(script);
-        return builder.executeQuery();
+        return new JSProducer(builder.executeQuery());
+    }
+    public String jsExecute(String script) {
+        return jsGet(script).asString();
     }
 
     public JSElement(WebDriver driver, List<By> locators) {
@@ -67,7 +71,7 @@ public class JSElement {
 
     // region Styles
     public String getStyle(String style) {
-        return driver.getOne("{ 'style': getComputedStyle(element)." + style + " }").asJson().get("style").getAsString();
+        return driver.getOne("getComputedStyle(element)." + style).asString();
     }
     public Json getStyles(List<String> styles) {
         String jsonObject = "{ " + print(map(styles, style -> "'" + style + "': getComputedStyle(element)." + style), ", ") + " }";
@@ -76,6 +80,11 @@ public class JSElement {
     }
     public Json getStyles(String... styles) {
         return getStyles(asList(styles));
+    }
+    public Json getAllStyles() {
+        JsonObject json =  driver.getOne("{ keys: [...getComputedStyle(element)], " +
+            "values: [...getComputedStyle(element)].map(style=> getComputedStyle(element).getPropertyValue(style)) }").asJson();
+        return new Json(json.get("keys"), json.get("values"));
     }
 
     public List<String> getStylesList(String style) {

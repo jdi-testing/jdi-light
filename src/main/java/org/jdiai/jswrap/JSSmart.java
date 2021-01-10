@@ -2,7 +2,6 @@ package org.jdiai.jswrap;
 
 import com.google.gson.JsonObject;
 import org.jdiai.Json;
-import org.jdiai.jsbuilder.IJSBuilder;
 import org.jdiai.jsbuilder.JSBuilder;
 import org.jdiai.jsbuilder.SmartBuilderActions;
 import org.openqa.selenium.By;
@@ -47,6 +46,9 @@ public class JSSmart extends JSElement {
     }
     public String getValue(String valueFunc) {
         return driver.getOne(valueFunc).asString();
+    }
+    public Json getMap(String valueFunc) {
+        return driver.getOne(valueFunc).asMap();
     }
     public List<JsonObject> getJsonList(String json) {
         return driver.getList(json).asJson();

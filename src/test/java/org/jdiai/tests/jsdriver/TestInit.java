@@ -16,7 +16,6 @@ import static org.jdiai.WebDriverByUtils.defineLocator;
 import static org.jdiai.jsbuilder.JSBuilder.LOG_QUERY;
 import static org.jdiai.jswrap.JSWrapper.chromeDriver;
 import static org.jdiai.tests.jsdriver.states.Pages.HOME_PAGE;
-import static org.jdiai.tools.JSTalk.DRIVER;
 import static org.jdiai.tools.JSTalk.driver;
 
 public class TestInit {

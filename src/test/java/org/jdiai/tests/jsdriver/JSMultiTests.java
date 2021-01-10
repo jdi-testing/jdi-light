@@ -26,10 +26,10 @@ public class JSMultiTests extends TestInit {
         List<Json> users = element("#user-table input").getMultiAttributes("type", "id", "checked");
         assertEquals(users.size(), 6);
         List<String> userIds = map(users, u -> u.get("id"));
+        assertEquals(userIds.toString(), "[roman, ivan, vlad, helen, yoshi, gio]");
         List<String> vipUsers = ifSelect(users,
             u -> u.get("checked").equals("true"),
             u -> u.get("id"));
-        assertEquals(userIds.toString(), "[roman, ivan, vlad, helen, yoshi, gio]");
         assertEquals(vipUsers.toString(), "[roman, vlad]");
     }
     @Test
@@ -37,10 +37,10 @@ public class JSMultiTests extends TestInit {
         List<UserInfo> users = element(UserInfo.class, "#user-table input").getEntityList(asList("type", "id", "checked"));
         assertEquals(users.size(), 6);
         List<String> userIds = map(users, u -> u.id);
+        assertEquals(userIds.toString(), "[roman, ivan, vlad, helen, yoshi, gio]");
         List<String> vipUsers = ifSelect(users,
             u -> u.checked.equals("true"),
             u -> u.id);
-        assertEquals(userIds.toString(), "[roman, ivan, vlad, helen, yoshi, gio]");
         assertEquals(vipUsers.toString(), "[roman, vlad]");
     }
 }

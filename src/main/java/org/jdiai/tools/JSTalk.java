@@ -2,6 +2,7 @@ package org.jdiai.tools;
 
 import com.epam.jdi.tools.Safe;
 import org.jdiai.JS;
+import org.jdiai.jswrap.JSSmart;
 import org.jdiai.jswrap.JSWrapper;
 import org.openqa.selenium.WebDriver;
 
@@ -22,4 +23,5 @@ public class JSTalk {
     public static JS $(String... locators) {
         return new JS(driver(), locatorsToBy(locators));
     }
+    public static JSSmart jsDriver() { return new JSSmart(driver()); }
 }

@@ -296,7 +296,6 @@ global.Whammy = (function(){
 	// only browser which supports get as webp
 
 	//Converting between a string of 0010101001's and binary back and forth is probably inefficient
-	//TODO: get rid of this function
 	function toBinStr_old(bits){
 		var data = '';
 		var pad = (bits.length % 8) ? (new Array(1 + 8 - (bits.length % 8))).join('0') : '';

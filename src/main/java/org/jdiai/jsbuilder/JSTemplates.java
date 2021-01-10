@@ -14,7 +14,7 @@ public class JSTemplates {
         "function xpath(ctx, locator) {\n" +
         "  return document.evaluate(locator, ctx, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n" +
         "}\n";
-    public static String ONE_TO_RESULT = "return %s;";
+    public static String ONE_TO_RESULT = "%s";
     public static String LIST_TO_RESULT =
         "let result = [];\n" +
         "for(let element of elements) {\n" +

@@ -16,11 +16,12 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.jdiai.jswrap.JSWrapper.$;
+import static org.jdiai.tests.jsdriver.states.Pages.DOMAIN;
 import static org.jdiai.tests.jsdriver.states.States.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class JSSmartTest extends TestInit {
+public class JSSmartTests extends TestInit {
     @BeforeMethod
     public void before() {
         logout();
@@ -116,7 +117,7 @@ public class JSSmartTest extends TestInit {
         JsonObject json = $("#user-icon")
                 .getJson("{ 'id': element.id, 'source': element.src, 'tag': element.tagName }");
         assertEquals(json.get("id").getAsString(), "user-icon");
-        assertEquals(json.get("source").getAsString(), "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
+        assertEquals(json.get("source").getAsString(), DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(json.get("tag").getAsString(), "IMG");
     }
     @Test
@@ -124,7 +125,7 @@ public class JSSmartTest extends TestInit {
         JsonObject json = $(withParent("#user-icon"))
                 .getJson("{ 'id': element.id, 'source': element.src, 'tag': element.tagName }");
         assertEquals(json.get("id").getAsString(), "user-icon");
-        assertEquals(json.get("source").getAsString(), "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
+        assertEquals(json.get("source").getAsString(), DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(json.get("tag").getAsString(), "IMG");
     }
     @Test
@@ -270,14 +271,14 @@ public class JSSmartTest extends TestInit {
     public void attributesTest() {
         Json attributes = $(TextInfo.class, "#user-icon").getAttributes("id", "src", "tagName");
         assertEquals(attributes.get("id"), "user-icon");
-        assertEquals(attributes.get("src"), "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
+        assertEquals(attributes.get("src"), DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(attributes.get("tagName"), "IMG");
     }
     @Test
     public void attributesLocatorListTest() {
         Json attributes = $(TextInfo.class, withParent("#user-icon")).getAttributes("id", "src", "tagName");
         assertEquals(attributes.get("id"), "user-icon");
-        assertEquals(attributes.get("src"), "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg");
+        assertEquals(attributes.get("src"), DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(attributes.get("tagName"), "IMG");
     }
     @Test
@@ -309,6 +310,13 @@ public class JSSmartTest extends TestInit {
         login();
         visibility = $(TextInfo.class, "#user-name").getStyle("visibility");
         assertEquals(visibility, "visible");
+    }
+    @Test
+    public void allStylesTest() {
+        Json styles = $(TextInfo.class, "#user-name").getAllStyles();
+        assertEquals(styles.size(), 320);
+        String visibility = styles.get("visibility");
+        assertEquals(visibility, "hidden");
     }
     @Test
     public void styleLocatorListTest() {

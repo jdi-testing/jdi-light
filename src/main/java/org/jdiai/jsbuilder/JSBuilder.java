@@ -1,7 +1,9 @@
 package org.jdiai.jsbuilder;
 
 import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
+import org.jdiai.JSException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -11,10 +13,14 @@ import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static java.lang.String.*;
+import static org.jdiai.jsbuilder.RetryFunctions.LIST_RETRY_DEFAULT;
+import static org.jdiai.jsbuilder.RetryFunctions.RETRY_DEFAULT;
 
 public class JSBuilder implements IJSBuilder {
     protected List<String> variables = new ArrayList<>();
     protected String query = "";
+    protected String replaceValue;
     protected JavascriptExecutor js;
     public static boolean LOG_QUERY = false;
     public boolean logQuery = LOG_QUERY;
@@ -41,15 +47,19 @@ public class JSBuilder implements IJSBuilder {
         this.logQuery = true;
         return this;
     }
-    public String executeQuery() {
-        String jsScript = getScript();
+    public IJSBuilder setTemplate(String replaceTo) {
+        this.replaceValue = replaceTo;
+        return this;
+    }
+    public static JFunc2<JavascriptExecutor, String, Object> RETRY = RETRY_DEFAULT;
+    public Object executeQuery() {
+        String jsScript = getQuery();
         if (logQuery) {
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         }
-        String result;
+        Object result;
         try {
-            Object obj = js.executeScript(jsScript);
-            result = obj == null ? "" : obj.toString();
+            result = RETRY.execute(js, jsScript);
         } finally {
             cleanup();
         }
@@ -57,13 +67,14 @@ public class JSBuilder implements IJSBuilder {
             logger.execute(">>> " + result);
         return result;
     }
+    public static JFunc2<JavascriptExecutor, String, List<String>> LIST_RETRY = LIST_RETRY_DEFAULT;
     public List<String> executeAsList() {
-        String jsScript = getScript();
+        String jsScript = getQuery();
         if (logQuery)
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         List<String> result;
         try {
-            result = (List<String>) js.executeScript(jsScript);
+            result = LIST_RETRY.execute(js, jsScript);
         } finally {
             cleanup();
         }
@@ -72,10 +83,7 @@ public class JSBuilder implements IJSBuilder {
         return result;
     }
     public String getQuery(String result) {
-        return getScript() + "return " + result;
-    }
-    public String getQuery() {
-        return getScript();
+        return getQuery() + "return " + result;
     }
     public IJSBuilder addJSCode(String code) {
         query += code;
@@ -106,7 +114,7 @@ public class JSBuilder implements IJSBuilder {
         return addJSCode("element.dispatchEvent(new Event('" + event + "', { " + options + " }));\n");
     }
     protected String getCollector(String collectResult) {
-        return collectResult.trim().startsWith("{")
+        return collectResult.trim().startsWith("{") || collectResult.trim().startsWith("[")
             ? "JSON.stringify(" + collectResult + ")"
             : collectResult;
     }
@@ -123,6 +131,14 @@ public class JSBuilder implements IJSBuilder {
             variables.add(variable);
         return variable + " = ";
     }
+    public String getQuery() {
+        String script = getScript();
+        if (!script.contains("%s"))
+            return script;
+        if (replaceValue != null)
+            return format(script, replaceValue);
+        throw new JSException("Failed to execute js script for template without replaceValue. Use setTemplate(...) method for builder to set replaceValue");
+    }
     protected String getScript() {
         if (variables.size() == 0 && useFunctions.size() == 0) {
             return query;
@@ -131,6 +147,7 @@ public class JSBuilder implements IJSBuilder {
         if (variables.size() == 1)
             return jsScript + "let " + query;
         for (String variable : variables) {
+            //noinspection StringConcatenationInLoop
             jsScript += "let " + variable + "; ";
         }
         return jsScript + "\n" + query;
@@ -139,6 +156,7 @@ public class JSBuilder implements IJSBuilder {
         useFunctions.clear();
         query = "";
         variables = new ArrayList<>();
+        replaceValue = null;
     }
     // endregion
 }
