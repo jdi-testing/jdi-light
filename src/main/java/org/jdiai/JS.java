@@ -2,10 +2,9 @@ package org.jdiai;
 
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.pairs.Pair;
 import org.jdiai.interfaces.HasLocators;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.HasParent;
@@ -22,16 +21,19 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.Math.*;
+import static java.lang.Math.min;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.jdiai.Direction.VECTOR_SIMILARITY;
 import static org.jdiai.ImageTypes.VIDEO_WEBM;
+import static org.jdiai.RelationsManager.*;
 import static org.jdiai.VisualSettings.*;
 import static org.jdiai.WebDriverByUtils.defineLocator;
 import static org.openqa.selenium.OutputType.*;
-import static org.testng.Assert.assertEquals;
 
 public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
+    public static String JDI_STORAGE = "src/test/jdi";
     public final JSSmart js;
     private final WebDriver driver;
     private final List<By> locators;
@@ -91,10 +93,19 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         this.name = name;
         return this;
     }
+    public String getFullName() {
+        String name = "";
+        if (parent() != null) {
+            name += isInterface(parent().getClass(), HasName.class)
+                ? ((HasName<?>)parent()).getName()
+                : parent().getClass().getSimpleName();
+            name += ".";
+        }
+        return name + getName();
+    }
     public Object parent() {
         return this.parent;
     }
-
 
     public void click() {
         doAction("click()");
@@ -282,8 +293,8 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         int x, y;
         if (inVision(rect))
             return new Point(-1, -1);
-        int left = Math.max(rect.left, 0);
-        int top = Math.max(rect.top, 0);
+        int left = max(rect.left, 0);
+        int top = max(rect.top, 0);
         x = left + getWidth(rect) / 2;
         y = top + getHeight(rect) / 2;
         return new Point(x, y);
@@ -302,12 +313,12 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         return new Dimension(width, height);
     }
     private int getWidth(ClientRect rect) {
-        int left = Math.max(rect.left, 0);
+        int left = max(rect.left, 0);
         int right = min(rect.right, rect.windowWidth);
         return right - left;
     }
     private int getHeight(ClientRect rect) {
-        int top = Math.max(rect.top, 0);
+        int top = max(rect.top, 0);
         int bottom = min(rect.bottom, rect.windowHeight);
         return bottom - top;
     }
@@ -335,12 +346,9 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
             return (X) screen.asByteStream();
         }
         if (outputType == FILE) {
-            return (X) screen.asFile(screenshotName());
+            return (X) screen.asFile(IMAGE_TEMPLATE.execute("", this));
         }
         throw new JSException("Failed to get screenshot - unknown type: " + outputType);
-    }
-    private String screenshotName() {
-        return imageTemplate.execute(defaultImageName.execute());
     }
     private String canvas2Image(ImageTypes imageType) {
         return "toDataURL('" + imageType.value + "')";
@@ -466,17 +474,14 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
 
     public List<By> locators() { return js.jsDriver().locators; }
-
-    public JFunc<String> defaultImageName = () -> DEFAULT_IMAGE_NAME.execute(this);
-    public JFunc1<String, String> imageTemplate = tag -> IMAGE_TEMPLATE.execute(tag, this);
     protected MapArray<String, String> images;
-    public File imageFile;
+    protected File imageFile;
 
+    public File getImageFile() {
+        return getImageFile("");
+    }
     public File getImageFile(String tag) {
         return images.has(tag) ? new File(images.get(tag)) : null;
-    }
-    protected String getScreenshotName(String tag) {
-        return imageTemplate.execute(tag);
     }
     public void visualValidation() {
         visualValidation("");
@@ -486,6 +491,65 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
     public void visualCompareWith(JS element) {
         COMPARE_IMAGES.execute(imageFile, element.imageFile);
+    }
+    public Direction getDirectionTo(JS element) {
+        ClientRect destinationCoordinates = element.getClientRect();
+        ClientRect elementCoordinates = getClientRect();
+        Direction direction = new Direction(getCenter(elementCoordinates) , getCenter(destinationCoordinates));
+        if (relations == null) {
+            new MapArray<>(element.getFullName(), direction);
+        } else {
+            relations.update(element.getName(), direction);
+        }
+        return direction;
+    }
+    public boolean validateRelativePosition(JS element, Direction expected) {
+        return COMPARE_POSITIONS.execute(getDirectionTo(element), expected);
+    }
+    public MapArray<String, Direction> relations;
+    public void clearRelations() {
+        relations = null;
+    }
+    public MapArray<String, Direction> getRelativePosition(JS... elements) {
+        relations = new MapArray<>();
+        for (JS element : elements) {
+            relations.update(element.getName(), getDirectionTo(element));
+        }
+        storeRelations(this, relations);
+        return relations;
+    }
+    public List<String> validateRelations() {
+        MapArray<String, Direction> storedRelations = readRelations(this);
+        if (storedRelations.size() == 0) {
+            return asList("No relations found in: " + RELATIONS_STORAGE);
+        }
+        List<String> failures = new ArrayList<>();
+        if (relations == null || relations.size() == 0) {
+            return asList("No element relations found: use getRelativePosition(...) first and save element relations");
+        }
+        MapArray<String, Direction> newRelations = new MapArray<>();
+        for (Pair<String, Direction> relation : relations) {
+            if (storedRelations.has(relation.key)) {
+                Direction expectedRelation = storedRelations.get(relation.key);
+                if (!VECTOR_SIMILARITY.execute(relation.value, expectedRelation)) {
+                    failures.add(format("Elements '%s' and '%s' are misplaced: angle: %s => %s; length: %s => %s",
+                        getFullName(), relation.key, relation.value.getAngle(), expectedRelation.getAngle(),
+                        relation.value.getLength(), expectedRelation.getLength()));
+                }
+            } else {
+                newRelations.add(relation);
+            }
+        }
+        if (newRelations.size() > 0) {
+            storeRelations(this, newRelations);
+        }
+        return failures;
+    }
+
+    protected Point getCenter(ClientRect rect) {
+        int x = rect.left + (rect.right - rect.left) / 2;
+        int y = rect.top + (rect.bottom - rect.top) / 2;
+        return new Point(x, y);
     }
 
 }
