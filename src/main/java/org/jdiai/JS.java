@@ -25,8 +25,8 @@ import static java.lang.Math.*;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.jdiai.ImageTypes.JPG;
 import static org.jdiai.ImageTypes.VIDEO_WEBM;
+import static org.jdiai.VisualSettings.*;
 import static org.jdiai.WebDriverByUtils.defineLocator;
 import static org.openqa.selenium.OutputType.*;
 import static org.testng.Assert.assertEquals;
@@ -326,7 +326,6 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public String getCssValue(String style) {
         return js.getStyle(style);
     }
-    public static ImageTypes DEFAULT_IMAGE_TYPE = JPG;
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
         StreamToImageVideo screen = makeScreenshot(DEFAULT_IMAGE_TYPE);
         if (outputType == BASE64) {
@@ -456,29 +455,18 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
     public boolean isClickable(int x, int y) {
         return js.getValue("rect = element.getBoundingClientRect();\n" +
-                "cx = rect.left + "+x+";\n" +
-                "cy = rect.top + "+y+";\n" +
-                "e = document.elementFromPoint(cx, cy);\n" +
-                "for (; e; e = e.parentElement) {\n" +
-                "  if (e === element)\n" +
-                "    return true;\n" +
-                "}\n" +
-                "return false;").equals("true");
+            "cx = rect.left + "+x+";\n" +
+            "cy = rect.top + "+y+";\n" +
+            "e = document.elementFromPoint(cx, cy);\n" +
+            "for (; e; e = e.parentElement) {\n" +
+            "  if (e === element)\n" +
+            "    return true;\n" +
+            "}\n" +
+            "return false;").equals("true");
     }
 
     public List<By> locators() { return js.jsDriver().locators; }
 
-    public static JFunc2<String, JS, String> IMAGE_TEMPLATE =  (tag, js) -> "src/test/images/" + tag;
-    public static JFunc1<JS, String> DEFAULT_IMAGE_NAME = js -> {
-        String name = "";
-        if (js.parent() != null) {
-            name += isInterface(js.parent().getClass(), HasName.class)
-                ? ((HasName<?>)js.parent()).getName()
-                : js.parent().getClass().getSimpleName();
-            name += "_";
-        }
-        return name + js.getName();
-    };
     public JFunc<String> defaultImageName = () -> DEFAULT_IMAGE_NAME.execute(this);
     public JFunc1<String, String> imageTemplate = tag -> IMAGE_TEMPLATE.execute(tag, this);
     protected MapArray<String, String> images;
@@ -490,40 +478,14 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     protected String getScreenshotName(String tag) {
         return imageTemplate.execute(tag);
     }
-
-    protected File makePhoto(String tag) {
-        show();
-        File imageFile = makeScreenshot().asFile(getScreenshotName(tag));
-        images.update(tag, imageFile.getPath());
-        this.imageFile = imageFile;
-        return imageFile;
-    }
     public void visualValidation() {
         visualValidation("");
     }
     public void visualValidation(String tag) {
-        try {
-            if (images.has(tag)) {
-                File baseLineImage = new File(images.get(tag));
-                File newImage = makePhoto(tag + "-new");
-                compareImageFiles(newImage, baseLineImage);
-            } else {
-                makePhoto(tag);
-            }
-        } catch (Exception ex) { throw new JSException(ex, "Can't compare files"); }
+        VISUAL_VALIDATION.execute(tag, this);
     }
-    protected void compareImageFiles(File image1, File image2) {
-        long actual = image1.length();
-        long expected = image2.length();
-        long threshHold = Math.round(min(max(actual, expected) * 0.01, 100));
-        String result = abs(actual - expected) < threshHold
-                ? "Images are the same"
-                : format("Images are different '%s' '%s'", image1.getAbsolutePath(), image2.getAbsolutePath());
-        assertEquals(result, "Images are the same");
-    }
-
     public void visualCompareWith(JS element) {
-        compareImageFiles(imageFile, element.imageFile);
+        COMPARE_IMAGES.execute(imageFile, element.imageFile);
     }
 
 }
