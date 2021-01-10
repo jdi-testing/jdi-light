@@ -6,6 +6,7 @@ package org.jdiai.testng;
  */
 
 import com.epam.jdi.tools.Safe;
+import org.jdiai.tools.JSTalk;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestNGMethod;
@@ -45,6 +46,7 @@ public class TestNGListener implements IInvokedMethodListener {
             if ("FAILED".equals(result)) {
                 if (tr.getThrowable() != null) {
                     System.out.println("ERROR: " + tr.getThrowable().getMessage());
+                    System.out.println("URL: " + JSTalk.driver().getCurrentUrl());
                 } else {
                     System.out.println("UNKNOWN ERROR");
                 }

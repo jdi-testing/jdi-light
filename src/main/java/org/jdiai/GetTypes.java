@@ -26,9 +26,9 @@ public class GetTypes {
     public static GetData dataType(By locator) {
         switch (getByType(locator)) {
             case "id": return ID;
-            case "tagName": return TAG;
+            case "tag": return TAG;
             case "name": return NAME;
-            case "className": return CLASS;
+            case "class": return CLASS;
             case "css": return CSS;
             case "xpath": return XPATH;
         }
