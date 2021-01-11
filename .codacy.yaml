@@ -1,9 +1,9 @@
 ---
 exclude_paths:
--'.git/**'
--'.github/**'
--'**.md'
--'**.ps1'
--'.idea/**'
--'.jdi-light-html/**'
--'.jdi-light-html-tests/**'
+- '.git/**'
+- '.github/**'
+- '**.md'
+- '**.ps1'
+- '.idea/**'
+- '.jdi-light-html/**'
+- '.jdi-light-html-tests/**'
