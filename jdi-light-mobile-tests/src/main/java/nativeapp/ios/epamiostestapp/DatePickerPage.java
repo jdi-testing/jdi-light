@@ -1,5 +1,5 @@
 package nativeapp.ios.epamiostestapp;
 
-public class DatePickerPage {
+public class DatePickerPage { //todo: useless?
 
 }

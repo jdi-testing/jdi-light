@@ -11,5 +11,4 @@ public class NavigationBarPage {
     @MobileFindBy(accessibilityId = "_TtGC7SwiftUIP13$7fff56a9141428DestinationHosting")
     public static NavigationBar detailViewPageNavigationBar;
 
-
 }

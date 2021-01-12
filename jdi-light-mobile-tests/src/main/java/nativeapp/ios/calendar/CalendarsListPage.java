@@ -10,10 +10,13 @@ public class CalendarsListPage {
 
     @MobileFindBy(xpath = "//XCUIElementTypeNavigationBar[@name=\"Calendars\"]")
     public static NavigationBar calendarsNavBar;
+
     @MobileFindBy(accessibilityId = "Done")
     public static SystemButton doneButton;
+
     @MobileFindBy(xpath = "(//XCUIElementTypeButton[@name=\"More Info\"])[1]")
     public static DetailsDisclosureButton firstCalendarDetailsButton;
+
     @MobileFindBy(accessibilityId = "Add Calendar")
     public static Button addCalendarButton;
 

@@ -14,4 +14,5 @@ public class RadialPickerPage {
 
     @MobileFindBy(id = "android:id/radial_picker")
     public static Picker radialPicker;
+
 }

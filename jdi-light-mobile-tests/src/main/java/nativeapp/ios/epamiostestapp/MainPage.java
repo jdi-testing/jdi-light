@@ -9,7 +9,7 @@ public class MainPage {
     public static MenuItem menuDataPicker;
 
     @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"Slider\"]")
-    public static MenuItem menuSliderItem;
+    public static MenuItem menuSliderItem; //todo: useless?
 
     @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"NavigationBar\"]")
     public static MenuItem menuNavigationBar;

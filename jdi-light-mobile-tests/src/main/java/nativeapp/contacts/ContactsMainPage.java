@@ -16,5 +16,6 @@ public class ContactsMainPage {
 
     public void createNewContact(){
         addNewContactBtn.click();
-    }
+    }//todo: is it ok to have methods here?
+
 }

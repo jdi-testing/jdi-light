@@ -26,7 +26,7 @@ public class ProgressBarTests extends ApiDemosTestInit {
     @Test
     public void decreaseStandardProgressBar() {
         ProgressBarPage.decreaseStandardButton.click();
-        ProgressBarPage.decreaseStandardButton.is().enabled();
+        ProgressBarPage.decreaseStandardButton.is().enabled(); //todo: mb check it before click?
         ProgressBarPage.progressBarLine.isExist();
     }
 

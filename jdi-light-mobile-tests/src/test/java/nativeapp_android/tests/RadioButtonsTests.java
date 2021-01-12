@@ -16,7 +16,7 @@ public class RadioButtonsTests extends ApiDemosTestInit {
     public void initSteps() {
         MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Views']");
         viewsPage.click();
-        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Radio Group']");
+        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Radio Group']"); //todo: scroll to element?
         radioGroupViewPage.click();
     }
 

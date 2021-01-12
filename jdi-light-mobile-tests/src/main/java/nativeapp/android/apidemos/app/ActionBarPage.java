@@ -9,7 +9,7 @@ public class ActionBarPage {
     public static Button actionBarUsagePage;
 
     @MobileFindBy(accessibilityId = "Display Options")
-    public static Button displayOptionsPage;
+    public static Button displayOptionsPage; //todo: useless?
 
 
 }

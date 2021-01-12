@@ -16,8 +16,9 @@ public class ActionBarDisplayOptionsPage {
 
     @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/" +
             "android.widget.FrameLayout[1]/android.widget.HorizontalScrollView")
-    public static ActionBar horizontalScrollView;
+    public static ActionBar horizontalScrollView;//todo: useless?
 
     @MobileFindBy(accessibilityId = "Cycle Custom View Gravity")
     public static ActionBar cycleCustomViewGravity;
+
 }

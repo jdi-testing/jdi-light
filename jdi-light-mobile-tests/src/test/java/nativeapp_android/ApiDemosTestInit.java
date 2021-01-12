@@ -13,6 +13,7 @@ import static com.epam.jdi.light.mobile.elements.init.PageFactory.initMobile;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class ApiDemosTestInit {
+
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         final String FILE_NAME = "src/main/resources/ApiDemos-debug.apk";
@@ -23,6 +24,7 @@ public class ApiDemosTestInit {
         AppManager.installApp(path);
         AppManager.launchApp();
     }
+
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
         AppManager.resetApp();

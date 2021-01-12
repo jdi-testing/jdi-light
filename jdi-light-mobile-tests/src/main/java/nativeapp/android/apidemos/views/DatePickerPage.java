@@ -4,7 +4,7 @@ import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.common.app.android.Picker;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
-public class DatePickerPage {
+public class DatePickerPage { //todo: useless?
 
     @MobileFindBy(id = "android:id/month_view")
     public static Picker datePicker;

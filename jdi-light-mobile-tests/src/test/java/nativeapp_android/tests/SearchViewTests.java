@@ -68,6 +68,6 @@ public class SearchViewTests extends ApiDemosTestInit {
         SearchViewFilterPage.searchViewField.input("edam");
         SearchViewFilterPage.crossIcon.click();
         SearchViewFilterPage.searchViewField.input("yo");
-        SearchViewFilterPage.listView.select("Olde York");
+        SearchViewFilterPage.listView.select("Olde York"); //todo: need asserts
     }
 }

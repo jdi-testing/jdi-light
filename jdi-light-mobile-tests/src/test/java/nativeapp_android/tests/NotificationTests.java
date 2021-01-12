@@ -16,6 +16,7 @@ import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static nativeapp.android.apidemos.NotifyPage.*;
 
 public class NotificationTests extends ApiDemosTestInit {
+
     public static final String NUMBER = "333-4545";
     public static final String MESSAGES = "Messages";
     public static final String MESSAGE = "Hello From Tests";
@@ -27,7 +28,7 @@ public class NotificationTests extends ApiDemosTestInit {
     public void initSteps() {
         sendSMS(NUMBER, MESSAGE);
         AndroidScreen.openNotificationPanel();
-        NotifyPage.notificationPanel.waitFor(5).is().displayed();
+        NotifyPage.notificationPanel.waitFor(5).is().displayed(); //todo: asserts in initialization?(delete)
     }
 
     @Test

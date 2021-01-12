@@ -4,6 +4,7 @@ import com.epam.jdi.light.mobile.elements.common.app.android.Checkbox;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class CheckboxesPage {
+
     @MobileFindBy(id = "io.appium.android.apis:id/customAnimCB")
     public static Checkbox customAnimationsCheckbox;
 
@@ -18,4 +19,5 @@ public class CheckboxesPage {
 
     @MobileFindBy(id = "io.appium.android.apis:id/changingDisappearingCB")
     public static Checkbox changingOutCheckbox;
+
 }

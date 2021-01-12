@@ -20,6 +20,6 @@ public class TabsPage {
     public static TabBar tab;
 
     @MobileFindBy(xpath = "//android.widget.TabWidget")
-    public static TabBar tabBa;
+    public static TabBar tabBa;//todo: useless?
 
 }

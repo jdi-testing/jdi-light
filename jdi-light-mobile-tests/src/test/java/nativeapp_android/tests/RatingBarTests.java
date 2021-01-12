@@ -61,7 +61,7 @@ public class RatingBarTests extends ApiDemosTestInit {
     @Test(dataProvider = "threeStarsData")
     public void checkThreeStars(double data){
         RatingBarPage.ratingBar1.setRating(data);
-        RatingBarPage.ratingBar1.is().value(data);
+        RatingBarPage.ratingBar1.is().value(data); //todo: why less asserts?
     }
 
     @Test(dataProvider = "fiveStarsData")
@@ -82,6 +82,6 @@ public class RatingBarTests extends ApiDemosTestInit {
     @Test(expectedExceptions = IllegalArgumentException.class, dataProvider = "incorrectData")
     public void checkIncorrectValue(double value){
         RatingBarPage.ratingBar1.setRatingByClick(value, 6.0);
-    }
+    }//todo: where assert or catch for error?
 
 }

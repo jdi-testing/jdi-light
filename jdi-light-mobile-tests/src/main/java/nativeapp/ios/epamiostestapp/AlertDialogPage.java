@@ -10,4 +10,5 @@ public class AlertDialogPage {
 
     @MobileFindBy(xpath = "//XCUIElementTypeAlert[@name=\"Important message\"]")
     public static Button alert;
+
 }

@@ -31,8 +31,7 @@ public class StatusBarTests extends ApiDemosTestInit {
 
     @Test
     public void openNotificationTest() {
-
-        AndroidScreen.openNotificationPanel();
+        AndroidScreen.openNotificationPanel(); // todo: this could be in before method
         notificationPanel.is().displayed();
         appIcon.is().displayed();
 
@@ -42,7 +41,7 @@ public class StatusBarTests extends ApiDemosTestInit {
 
         appIcon.click();
         appIcon.is().displayed();
-        AndroidScreen.closeNotificationPanel();
+        AndroidScreen.closeNotificationPanel(); //todo: this is in after method
     }
 
     @Test
@@ -52,7 +51,7 @@ public class StatusBarTests extends ApiDemosTestInit {
         AndroidScreen.closeNotificationPanel();
         clearAllButton.click();
         AndroidScreen.openNotificationPanel();
-        notificationPanel.waitFor().is().displayed();
+        notificationPanel.waitFor().is().displayed(); //todo: didn't get it
     }
 
     @AfterMethod

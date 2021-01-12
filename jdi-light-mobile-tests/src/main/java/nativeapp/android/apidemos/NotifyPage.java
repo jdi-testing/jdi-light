@@ -5,6 +5,7 @@ import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class NotifyPage {
+
     @MobileFindBy(id = "com.android.systemui:id/notification_panel")
     public static Text notificationPanel;
 

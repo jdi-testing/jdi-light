@@ -8,6 +8,7 @@ public class EditCalendarPage {
 
     @MobileFindBy(xpath = "//XCUIElementTypeNavigationBar[@name=\"Edit Calendar\"]")
     public static NavigationBar editCalendarNavBar;
+
     @MobileFindBy(accessibilityId = "Cancel")
     public static SystemButton cancelButton;
 

@@ -1,4 +1,4 @@
 package nativeapp.ios.epamiostestapp;
 
-public class StepperPage {
+public class StepperPage { //todo: useless?
 }

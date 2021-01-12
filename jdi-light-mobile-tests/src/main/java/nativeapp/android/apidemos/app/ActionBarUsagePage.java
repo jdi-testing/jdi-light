@@ -13,7 +13,7 @@ public class ActionBarUsagePage {
     public static ActionBar searchButton;
 
     @MobileFindBy(id = "android:id/search_src_text")
-    public static ActionBar searchVield;
+    public static ActionBar searchVield; //todo: mb field?
 
     @MobileFindBy(accessibilityId = "Edit")
     public static ActionBar edit;
@@ -26,4 +26,5 @@ public class ActionBarUsagePage {
 
     @MobileFindBy(className = "android.widget.ListView")
     public static ActionBar listView;
+
 }

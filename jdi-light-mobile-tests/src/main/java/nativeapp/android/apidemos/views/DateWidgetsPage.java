@@ -10,7 +10,7 @@ public class DateWidgetsPage {
     public static Button dialogPage;
 
     @MobileFindBy(accessibilityId = "change the date")
-    public static Button datePickerButton;
+    public static Button datePickerButton; //todo: useless?
 
     @MobileFindBy(accessibilityId = "change the time")
     public static Button radialTimePickerButton;

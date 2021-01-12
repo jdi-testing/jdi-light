@@ -15,6 +15,6 @@ public class NotificationPage {
     public static Button happyButton;
 
     @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ImageButton")
-    public static Button happyIconButton;
+    public static Button happyIconButton; //todo: useless?
 
 }

@@ -7,4 +7,5 @@ public class ToggleSwitchPage {
 
     @MobileFindBy(accessibilityId = "ToggleId")
     public static Switch switchButton;
+
 }

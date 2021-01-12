@@ -63,6 +63,5 @@ public class PickersTests extends ApiDemosTestInit {
         picker.is().selected("05");
         picker.setInterval("PM");
         picker.is().selected("PM");
-
     }
 }

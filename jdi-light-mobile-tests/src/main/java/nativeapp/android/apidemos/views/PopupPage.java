@@ -24,4 +24,5 @@ public class PopupPage {
 
     @MobileFindBy(className = "android.widget.LinearLayout")
     public static UIElement screen;
+
 }

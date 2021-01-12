@@ -6,8 +6,9 @@ import com.epam.jdi.light.mobile.elements.common.app.android.Widget;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class AlarmPage {
+
     @MobileFindBy(accessibilityId = "Alarm")
-    public static Button alarmPageButton;
+    public static Button alarmPageButton; //todo: isn't it useless?
 
     @MobileFindBy(xpath = "(//android.widget.ImageButton[@content-desc='Expand alarm'])[1]")
     public static Button expandAlarmSettingsButton;

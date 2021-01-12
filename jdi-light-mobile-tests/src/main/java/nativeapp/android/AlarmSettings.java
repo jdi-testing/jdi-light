@@ -4,7 +4,8 @@ import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.common.app.android.SeekBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
-public class AlarmSettings {
+public class AlarmSettings { //todo: isn't it useless?
+
     @MobileFindBy(accessibilityId = "More options")
     public static Button alarMoreOptions;
 
@@ -13,4 +14,5 @@ public class AlarmSettings {
 
     @MobileFindBy(id = "com.google.android.deskclock:id/alarm_volume_slider")
     public static SeekBar alarmVolume;
+
 }

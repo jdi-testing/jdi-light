@@ -27,7 +27,6 @@ public class CheckboxTests extends ApiDemosTestInit {
         customAnimationsCheckbox.is().selected();
         customAnimationsCheckbox.uncheck();
         customAnimationsCheckbox.is().deselected();
-
     }
 
     @Test

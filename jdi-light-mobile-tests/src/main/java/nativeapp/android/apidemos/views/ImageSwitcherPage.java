@@ -1,4 +1,4 @@
 package nativeapp.android.apidemos.views;
 
-public class ImageSwitcherPage {
+public class ImageSwitcherPage {//todo: useless?
 }
