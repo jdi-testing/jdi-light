@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.mobile.elements.init.MobileAppFactory.sizeOfList;
 import static nativeapp.ios.epamiostestapp.MainPage.menuToolBarPage;
 
-public class ToolBarTests extends IosApplicationInit {
+public class ToolBarTest extends IosApplicationInit {
 
     private int INITIAL_VALUE_OF_STRING = 5;
 
