@@ -17,5 +17,6 @@ public class IOSAppInit {
     public static ToggleSwitchPage toggleSwitchPage;
     public static MainPage mainPage;
     public static LabelViewPage labelViewPage;
+    public static ToolBarPage toolBarPage;
 
 }

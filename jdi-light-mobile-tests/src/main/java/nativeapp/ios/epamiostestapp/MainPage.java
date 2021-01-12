@@ -38,4 +38,7 @@ public class MainPage {
     @MobileFindBy(xpath = "//XCUIElementTypeButton[@name=\"LabelViewPage\"]")
     public static MenuItem menuLabelView;
 
+    @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"ToolBarPage\"]")
+    public static MenuItem menuToolBarPage;
+
 }
