@@ -16,7 +16,6 @@ public class ToolBarTests extends IosApplicationInit {
     public void toolbarTest() {
         menuToolBarPage.tap();
 
-        int initialSizeOfList = sizeOfList(ToolBarPage.listOfStrings);
         Assert.assertEquals(sizeOfList(ToolBarPage.listOfStrings), INITIAL_VALUE_OF_STRING);
         ToolBarPage.toolBar.tapButton("Add");
         Assert.assertEquals(sizeOfList(ToolBarPage.listOfStrings), INITIAL_VALUE_OF_STRING + 1);
