@@ -1,7 +1,6 @@
 package nativeapp_android.tests.SystemAndroid10Tests;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.mobile.elements.common.AppManager;
 import com.epam.jdi.light.mobile.elements.common.MobileDevice;
 import nativeapp.android.ClockApp;
 import org.openqa.selenium.DeviceRotation;
@@ -22,7 +21,6 @@ public class MobileDeviceTests {
     @BeforeMethod
     public void init() {
         initMobile(ClockApp.class);
-        AppManager.launchApp();
     }
 
     @Test
