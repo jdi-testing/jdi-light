@@ -9,10 +9,7 @@ public class ToolBarPage {
     @MobileFindBy(accessibilityId = "Toolbar")
     public static ToolBar toolBar;
 
-    @MobileFindBy(accessibilityId = "ListOfID")
-    public static MobileUIElement listOfID;
+    @MobileFindBy(xpath = "//XCUIElementTypeCell[@name=\"New string generated\"]")
+    public static MobileUIElement listOfStrings;
 
-    public static void testi(){
-
-    }
 }

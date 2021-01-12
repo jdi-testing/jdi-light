@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
+import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -59,5 +60,14 @@ public class MobileAppFactory extends UIFactory {
                 .orElseThrow(() -> new NoSuchElementException(
                         "Expected element with text " + valueToFilter + "' is missing in the list"));
         return element;
+    }
+
+    public static int sizeOfList(MobileUIElement appBaseElement) {
+        new WebDriverWait(getDriver(), 2).until(ExpectedConditions
+                .presenceOfAllElementsLocatedBy(appBaseElement.core().getLocator()));
+        List<MobileAppUIElement> originalElementList = appBaseElement.core().getWebElements()
+                .stream().map(MobileAppUIElement::new).collect(Collectors.toList());
+
+        return originalElementList.size();
     }
 }
