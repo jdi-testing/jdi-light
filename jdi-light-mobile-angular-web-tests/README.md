@@ -1,17 +1,19 @@
 <h1> How to launch HTMl Web tests on Android emulator or IOS simulator</h1>  
 
 Required tools: Android Studio, Appium, Maven.
+
 1. Download chrome driver For more details
    visit: https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/web/chromedriver.md
 The version of Chrome browser in the Android emulator must be the same. Then go to <b>src/test/resources</b> of
-module <b>jdi-light-mobile-angular-web-tests</b>.<br>
+module <b>jdi-light-mobile-angular-web-tests</b>.
+
 2. Set following settings in test.properties file: <br>
    <b>driver=android</b>; <br>
    <b>remote.type=appium</b>; <br>
    <b>appium.capabilities.path=android.properties</b>; <br>
    <b>driver.remote.run=true</b>; <br>
    If your version of appium has its own URL (not http://0.0.0.0:4723), specify it in the <b>driver.remote.url</b>
-   property<br>
+   property.   
 2.1. Set following settings in android.properties file:<br>
 <b>platformName=Android</b>; <br>
 <b>deviceName=emulator-5554</b>; <br>
@@ -20,11 +22,15 @@ Here <b>deviceName</b> and <b>platformName</b> must be the same as Desired Capab
 started from Appium (see future steps).<br>
 2.2. Set following settings in chrome.properties file: <br>
 <b>w3c=false</b>;
-3. Launch Android emulator and wait until home screen is ready.<br>
+
+3. Launch Android emulator and wait until home screen is ready.
+
 4. Launch Appium from console or using UI.<br>
-   <code>appium -p 4723 --chromedriver-executable /path/to/your/chromedriver</code><br>
+   <code>appium -p 4723 --chromedriver-executable /path/to/your/chromedriver</code>
+   
 5. Wait for Appium server ready and then open new Inspector Session window and set Desired Capabilities as described in
-   1.1<br>
+   2.1
+   
 6. 1 Go to module <b>jdi-light-angular-tests</b><br>
    2 Run maven script: <code>mvn clean package -U -DskipTests</code> to make .jar package of tests for future dependency.
 
