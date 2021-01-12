@@ -52,4 +52,13 @@ public class NotifyPage {
     @MobileFindBy(id = "android:id/message_text")
     public static Text messageText;
 
+    @MobileFindBy(xpath = "//android.widget.Switch[@content-desc=\"Mobile data, Mobile data off\"]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ImageView")
+    public static Button toggleDataIcon;
+
+    @MobileFindBy(xpath = "//android.widget.Switch[@content-desc=\"Wi-Fi,Wifi signal full.,AndroidWifi\"]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.ImageView")
+    public static Button wifiIcon;
+
+    @MobileFindBy(xpath = "//android.widget.Switch[@content-desc=\"Airplane mode\"]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ImageView")
+    public static Button airplaneModeIcon;
+
 }
