@@ -1,4 +1,4 @@
-package nativeapp_android.tests.SystemAndroid10Tests;
+package android10NonApplicationTests;
 
 import com.epam.jdi.light.mobile.elements.common.network.Toggle;
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;

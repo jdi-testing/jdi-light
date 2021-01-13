@@ -1,4 +1,4 @@
-package nativeapp_android.tests.SystemAndroid10Tests;
+package android10NonApplicationTests;
 
 import nativeapp_android.MobileFileManagerInit;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;

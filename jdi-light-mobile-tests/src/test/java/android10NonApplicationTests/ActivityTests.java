@@ -1,4 +1,4 @@
-package nativeapp_android.tests.SystemAndroid10Tests;
+package android10NonApplicationTests;
 
 import com.epam.jdi.light.mobile.elements.common.MobileDeviceActivity;
 import nativeapp_android.ActivityTestsInit;

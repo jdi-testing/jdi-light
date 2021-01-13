@@ -1,4 +1,4 @@
-package nativeapp_android.tests.SystemAndroid10Tests;
+package android10NonApplicationTests;
 
 import com.epam.jdi.light.mobile.elements.common.network.Toggle;
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
@@ -11,9 +11,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static nativeapp.android.apidemos.NotifyPage.airplaneModeIcon;
+import static nativeapp.android.apidemos.NotifyPage.wifiIcon;
 
-public class ToggleAirplaneModeTests extends ApiDemosTestInit {
+public class ToggleWiFiTests extends ApiDemosTestInit {
 
     @BeforeMethod
     public void init() {
@@ -21,15 +21,15 @@ public class ToggleAirplaneModeTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void toggleAirplaneModeTests(){
-        airplaneModeIcon.click();
-        Toggle.getConnection().isAirplaneModeEnabled();
+    public void toggleWiFiTests(){
+        wifiIcon.click();
+        Toggle.getConnection().isWiFiEnabled();
     }
 
     @AfterMethod
     public void tearDown() {
         TouchAction touchAction = new TouchAction((PerformsTouchActions) getDriver());
-        touchAction.press(PointOption.point(954, 313)).release().perform();
+        touchAction.press(PointOption.point(121, 333)).release().perform();
         AndroidScreen.closeNotificationPanel();
     }
 }

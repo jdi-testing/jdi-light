@@ -3,15 +3,15 @@
 <suite name="JDI Light Mobile Android System Tests" thread-count="1">
     <test name="Android system tests">
         <classes>
-            <class name="nativeapp_android.tests.SystemAndroid10Tests.ActivityTests"></class>
-            <class name="nativeapp_android.tests.SystemAndroid10Tests.ClipBoardTests"></class>
-            <class name="nativeapp_android.tests.SystemAndroid10Tests.MobileDeviceTests"></class>
-            <class name="nativeapp_android.tests.SystemAndroid10Tests.MobileFileManagerTests"></class>
-            <class name="nativeapp_android.tests.SystemAndroid10Tests.SettingsAppTests"></class>
-            <class name="nativeapp_android.tests.SystemAndroid10Tests.ToggleButtonTests"></class>
-            <class name="nativeapp_android.tests.SystemAndroid10Tests.ToggleAirplaneModeTests"></class>
-            <class name="nativeapp_android.tests.SystemAndroid10Tests.ToggleDataTests"></class>
-            <class name="nativeapp_android.tests.SystemAndroid10Tests.ToggleWiFiTests"></class>
+            <class name="android10NonApplicationTests.ActivityTests"></class>
+            <class name="android10NonApplicationTests.ClipBoardTests"></class>
+            <class name="android10NonApplicationTests.MobileDeviceTests"></class>
+            <class name="android10NonApplicationTests.MobileFileManagerTests"></class>
+            <class name="android10NonApplicationTests.SettingsAppTests"></class>
+            <class name="android10NonApplicationTests.ToggleButtonTests"></class>
+            <class name="android10NonApplicationTests.ToggleAirplaneModeTests"></class>
+            <class name="android10NonApplicationTests.ToggleDataTests"></class>
+            <class name="android10NonApplicationTests.ToggleWiFiTests"></class>
         </classes>
     </test>
 </suite>
