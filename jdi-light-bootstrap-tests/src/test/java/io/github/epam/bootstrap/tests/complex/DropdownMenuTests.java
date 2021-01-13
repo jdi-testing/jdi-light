@@ -6,9 +6,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.dropdownMenu;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
@@ -43,7 +42,7 @@ public class DropdownMenuTests implements TestsInit {
     }
     @Test
     public void selectNumTest() {
-        dropdownMenu.select(ELEMENT.startIndex + 1);
+        dropdownMenu.select(2);
         validateAndAcceptAlert("Fire clicked");
     }
     @Test

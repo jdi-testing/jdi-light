@@ -7,8 +7,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
+import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.safeException;
 
 /**
  * Created by Roman Iovlev on 14.02.2018.
@@ -17,29 +17,24 @@ import static com.epam.jdi.tools.LinqUtils.safeException;
 @SuppressWarnings("unused")
 @Aspect
 public class AngularActions {
-    @Pointcut("within(com.epam.jdi.light.angular..*) && @annotation(com.epam.jdi.light.common.JDIAction)")
+    @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() {
         // this method is created only for passing as a parameter in the annotation @Around
     }
 
     @Around("jdiPointcut()")
-    public Object jdiAround(final ProceedingJoinPoint jp) {        String classMethod = "";
+    public Object jdiAround(final ProceedingJoinPoint jp) {
+        ActionObject jInfo = null;
         try {
-            classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
-            logger.trace("<>@AA: " + classMethod);
-        } catch (Exception ignore) { }
-        ActionObject jInfo = newInfo(jp, "AO");
-        failedMethods.clear();
-        try {
+            jInfo = newInfo(jp);
+            failedMethods.clear();
             BEFORE_JDI_ACTION.execute(jInfo);
             Object result = jInfo.topLevel()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
-            logger.trace("<>@AA: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
-            AFTER_JDI_ACTION.execute(jInfo, result);
-            return result;
+            return AFTER_JDI_ACTION.execute(jInfo, result);
         } catch (Throwable ex) {
-            logger.debug("<>@AA exception:" + safeException(ex));
+            logger.debug("ActionProcessor exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

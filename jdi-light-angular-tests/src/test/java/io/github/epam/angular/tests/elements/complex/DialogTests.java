@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -13,7 +14,7 @@ public class DialogTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         dialog.show();
     }
 
@@ -27,5 +28,12 @@ public class DialogTests extends TestsInit {
         dialog.submitAnswer();
         dialog.is().closed();
         dialog.is().answerText("Lion");
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if(dialog.isOpened()){
+            dialog.close();
+        }
     }
 }

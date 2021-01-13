@@ -1,3 +1,4 @@
+
 package org.mytests.uiobjects.example.site.pages;
 
 import com.epam.jdi.light.elements.complex.dropdown.DropdownSelect;
@@ -13,12 +14,17 @@ import org.mytests.uiobjects.example.site.custom.MultiDropdown;
 
 @Url("/contacts.html") @Title("Contact Form")
 public class ContactsPage extends WebPage {
-	TextField firstName, lastName, position, passportNumber, passportSeria;
+	TextField firstName;
+	TextField lastName;
+	TextField position;
+	TextField passportNumber;
+	TextField passportSeria;
 
 	DropdownSelect gender;
 	MultiDropdown weather;
 
-	Checkbox passport, acceptConditions;
+	Checkbox passport;
+	Checkbox acceptConditions;
 	TextArea description;
 
 	@UI("['Submit']") public Button submit;

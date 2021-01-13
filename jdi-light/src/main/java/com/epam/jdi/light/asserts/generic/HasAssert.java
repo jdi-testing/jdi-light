@@ -8,25 +8,25 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public interface HasAssert<A> {
-    A is();
-    default A assertThat() {
+public interface HasAssert<T> {
+    T is();
+    default T assertThat() {
         return is();
     }
-    default A has() {
+    default T has() {
         return is();
     }
-    default A waitFor() {
+    default T waitFor() {
         return is();
     }
-    default A waitFor(int sec) {
+    default T waitFor(int sec) {
         ((IBaseElement)this).waitSec(sec);
         return is();
     }
-    default A shouldBe() {
+    default T shouldBe() {
         return is();
     }
-    default A verify() {
+    default T verify() {
         assertSoft(); return is();
     }
 }

@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.closeWindow;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.pages.BootstrapPage.breadcrumb;
@@ -47,7 +46,7 @@ public class BreadcrumbTests implements TestsInit {
 
     @Test
     public void selectIndexTest() {
-        breadcrumb.select(ELEMENT.startIndex);
+        breadcrumb.select(1);
         homePage.checkOpenedInNewWindow();
         closeWindow();
     }

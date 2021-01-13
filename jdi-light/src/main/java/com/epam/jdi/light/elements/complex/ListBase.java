@@ -35,26 +35,25 @@ import static com.epam.jdi.tools.ReflectionUtils.*;
  */
 abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
-    protected int startIndex = ELEMENT.startIndex;
+    public int getStartIndex() {
+        return list().getStartIndex();
+    }
+    public void setStartIndex(int index) {
+        list().setStartIndex(index);
+    }
     protected WebList list;
-    public Class<?> initClass = UIElement.class;
+    public WebList list() {
+        if (list == null) {
+            list = new WebList(core()).setUIElementName(this::elementTitle)
+                    .setName(getName());
+        }
+        return list;
+    }
 
     ListBase() {}
     ListBase(By locator) { list = new WebList(locator); }
     ListBase(List<WebElement> elements) { list = new WebList(elements); }
-
-    public int getStartIndex() {
-        return startIndex;
-    }
-    public void setStartIndex(int index) {
-        startIndex = index;
-    }
-    public WebList list() {
-        WebList list = new WebList(core())
-                .setUIElementName(this::elementTitle).setName(getName());
-        list.setStartIndex(getStartIndex());
-        return list;
-    }
+    public Class<?> initClass = UIElement.class;
 
     private boolean actualMapValue() {
         return values.hasValue() && values.get().size() > 0 && isActual(values.get().get(0));

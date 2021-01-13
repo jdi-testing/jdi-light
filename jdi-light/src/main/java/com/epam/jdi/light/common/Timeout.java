@@ -27,7 +27,7 @@ public class Timeout {
         return result;
     }
     public void freeze() {
-        freeze.update( v -> v + 1);
+        freeze.update(v->v+1);
     }
     public void unfreeze() {
         if (freeze.get() > 0)

@@ -14,6 +14,7 @@ import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static io.github.com.StaticSite.homePage;
 
 @Listeners(TestNGListener.class)
 public interface TestsInit {
@@ -23,6 +24,7 @@ public interface TestsInit {
         killAllSeleniumDrivers();
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
+        homePage.open();
         logger.toLog("Run Tests");
     }
 

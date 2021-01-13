@@ -1,24 +1,27 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.*;
 import static io.github.epam.angular.tests.elements.complex.select.TestsSelectBase.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class MaterialSelectorUnitTests extends TestsInit {
-    private final String[] multiOptions = new String[3];
+    private String[] multiOptions = new String[3];
+    private int[] multiSelect = new int[3];
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
     }
 
     @Test
@@ -62,7 +65,7 @@ public class MaterialSelectorUnitTests extends TestsInit {
     @Test
     public void multipleSelectByIndexesTest() {
         multipleSelect.show();
-        int[] multiSelect = new int[] {2, 4, 6};
+        multiSelect = new int[] {2, 4, 6};
         multipleSelect.multipleSelect(multiSelect);
         assertEquals(multipleSelect.selected(), MUSHROOM + ", " + PEPPERONI + ", " + TOMATO);
     }
@@ -70,13 +73,13 @@ public class MaterialSelectorUnitTests extends TestsInit {
     @Test
     public void valuesTest() {
         multipleSelect.show();
-        assertEquals(basicMatSelect.values(), asList(STEAK, PIZZA, TACOS));
+        assertEquals(basicMatSelect.values(), Arrays.asList(STEAK, PIZZA, TACOS));
     }
 
     @Test
     public void getGroupsTest() {
         optionGroupsMatSelect.show();
-        assertEquals(optionGroupsMatSelect.groups(), asList(GRASS, WATER, FIRE, PSYCHIC));
+        assertEquals(optionGroupsMatSelect.groups(), Arrays.asList(GRASS, WATER, FIRE, PSYCHIC));
     }
 
     @Test
@@ -89,13 +92,14 @@ public class MaterialSelectorUnitTests extends TestsInit {
     public void listEnabledTest() {
         optionGroupsMatSelect.show();
         assertEquals(optionGroupsMatSelect.listEnabled(),
-            asList("-- None --", BULBASAUR, ODDISH, BELLSPROUT, SQUIRTLE, PSYDUCK, HORSEA, MEW, MEWTWO));
+                     Arrays.asList("-- None --", BULBASAUR, ODDISH, BELLSPROUT, SQUIRTLE, PSYDUCK, HORSEA, MEW,
+                                   MEWTWO));
     }
 
     @Test
     public void listDisabledTest() {
         optionGroupsMatSelect.show();
-        assertEquals(optionGroupsMatSelect.listDisabled(), asList(CHARMANDER, VULPIX, FLAREON));
+        assertEquals(optionGroupsMatSelect.listDisabled(), Arrays.asList(CHARMANDER, VULPIX, FLAREON));
     }
 
     @Test
@@ -119,4 +123,20 @@ public class MaterialSelectorUnitTests extends TestsInit {
         assertEquals(matErrorStateMatcherSelect.error().text(), INVALID_SELECTION);
     }
 
+    @AfterMethod(alwaysRun = true)
+    public void after() {
+        if (basicMatSelect.isExpanded()) {
+            basicMatSelect.collapse();
+        }
+        if (multiSelect[0] != 0) {
+            multipleSelect.multipleSelect(multiSelect);
+            multiSelect = new int[3];
+        }
+        if (multiOptions[0] != null) {
+            multipleSelect.multipleSelect(multiOptions);
+            multiOptions[0] = null;
+            multiOptions[1] = null;
+            multiOptions[2] = null;
+        }
+    }
 }

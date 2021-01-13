@@ -13,12 +13,17 @@ import io.github.com.entities.Contacts;
 import java.lang.reflect.Field;
 
 public class ContactFormCustomFill extends Form<Contacts> {
-    TextField firstName,  lastName, position, passportNumber, passportSeria;
+    TextField firstName;
+    TextField lastName;
+    TextField position;
+    TextField passportNumber;
+    TextField passportSeria;
 
     Dropdown gender;
     IsCombobox religion;
 
-    Checkbox passport, acceptConditions;
+    Checkbox passport;
+    Checkbox acceptConditions;
     TextArea description;
 
     @UI("['Submit']") public Button submit;

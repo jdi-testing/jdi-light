@@ -1,13 +1,12 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Collection;
 import java.util.Set;
-
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -15,9 +14,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
  */
 public class Cookies {
 
-    private static WebDriver.Options manage() {
-        return getDriver().manage();
-    }
+    private static WebDriver.Options manage() { return WebDriverFactory.getDriver().manage(); }
     /**
      * Get all browser cookies
      * @return Set
@@ -26,20 +23,13 @@ public class Cookies {
     public static Set<Cookie> getCookies() {
         return manage().getCookies();
     }
-
-    public static boolean hasCookie(String name) {
-        return getCookie(name) != null;
-    }
-    public static boolean hasNoCookie(String name) {
-        return getCookie(name) == null;
-    }
     /**
      * Get cookie by name
-     * @param name Get cookie by name
+     * @param value Get cookie by name
      */
     @JDIAction("Get cookie '{0}'")
-    public static Cookie getCookie(String name) {
-        return manage().getCookieNamed(name);
+    public static Cookie getCookie(String value) {
+        return manage().getCookieNamed(value);
     }
     /**
      * @param cookie Specify cookie

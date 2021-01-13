@@ -16,13 +16,13 @@ public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplet
 
     @JDIAction("Assert that '{name}' is expanded")
     public AutoCompleteAssert expanded() {
-        jdiAssert(element().expanded(), Matchers.is(true));
+        jdiAssert(element.expanded(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is collapsed")
     public AutoCompleteAssert collapsed() {
-        jdiAssert(element().collapsed(), Matchers.is(true));
+        jdiAssert(element.collapsed(), Matchers.is(true));
         return this;
     }
 
@@ -42,74 +42,74 @@ public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplet
 
     @JDIAction("Assert that '{name}' has placeholder {0}")
     public AutoCompleteAssert placeholder(String expected) {
-        jdiAssert(element().placeholder(), Matchers.is(expected));
+        jdiAssert(element.placeholder(), Matchers.is(expected));
         return this;
     }
 
     @JDIAction("Assert that '{name} is mandatory")
     public AutoCompleteAssert mandatory() {
-        jdiAssert(element().isMandatory(), Matchers.is(true));
+        jdiAssert(element.isMandatory(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name} is not mandatory")
     public AutoCompleteAssert notMandatory() {
-        jdiAssert(element().isMandatory(), Matchers.is(false));
+        jdiAssert(element.isMandatory(), Matchers.is(false));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has empty value")
     @Override
     public AutoCompleteAssert empty() {
-        jdiAssert(element().getValue(), Matchers.is(""));
+        jdiAssert(element.getValue(), Matchers.is(""));
         return this;
     }
 
     @JDIAction("Assert that '{name} is invalid")
     public AutoCompleteAssert invalid() {
-        jdiAssert(element().isInvalidated(), Matchers.is(true));
+        jdiAssert(element.isInvalidated(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name} is valid")
     public AutoCompleteAssert valid() {
-        jdiAssert(element().isInvalidated(), Matchers.is(false));
+        jdiAssert(element.isInvalidated(), Matchers.is(false));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has display value")
     public AutoCompleteAssert displayValue(String expected) {
-        jdiAssert(element().displayValue(), Matchers.is(expected));
+        jdiAssert(element.displayValue(), Matchers.is(expected));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has options")
     public AutoCompleteAssert options(List<String> options) {
-        jdiAssert(element().options(), Matchers.is(options));
+        jdiAssert(element.options(), Matchers.is(options));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has groups")
     public AutoCompleteAssert groups(List<String> groups) {
-        jdiAssert(element().groups(), Matchers.is(groups));
+        jdiAssert(element.groups(), Matchers.is(groups));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has groups and options")
     public AutoCompleteAssert groupsAndOptions(Map<String, List<String>> expectedGroupsAndOptions) {
-        jdiAssert(element().groupsAndOptionsValues(), Matchers.is(expectedGroupsAndOptions));
+        jdiAssert(element.groupsAndOptionsValues(), Matchers.is(expectedGroupsAndOptions));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has the {0} option being highlighted")
     public AutoCompleteAssert optionHighlighted(String option) {
-        jdiAssert(element().isOptionHighlighted(option), Matchers.is(true));
+        jdiAssert(element.isOptionHighlighted(option), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has the {0} option being not highlighted")
     public AutoCompleteAssert optionNotHighlighted(String option) {
-        jdiAssert(element().isOptionHighlighted(option), Matchers.is(false));
+        jdiAssert(element.isOptionHighlighted(option), Matchers.is(false));
         return this;
     }
 

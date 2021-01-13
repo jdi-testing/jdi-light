@@ -19,51 +19,51 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
 
     @JDIAction(value = "Get '{name}' min limit", level = DEBUG)
     public double min() {
-        return getDouble("aria-valuemin", core(), 0);
+        return getDouble("aria-valuemin", uiElement, 0);
     }
 
     @JDIAction(value = "Get '{name}' max limit", level = DEBUG)
     public double max() {
-        return getDouble("aria-valuemax", core(), 100);
+        return getDouble("aria-valuemax", uiElement, 100);
     }
 
     @JDIAction(value = "Get '{name}' value", level = DEBUG)
     public double value() {
-        return getDouble("aria-valuenow", core(), 0);
+        return getDouble("aria-valuenow", uiElement, 0);
     }
 
     @JDIAction(value = "Get '{name}' orientation", level = DEBUG)
     public String orientation() {
-        return core().attr("aria-orientation");
+        return uiElement.attr("aria-orientation");
     }
 
     @JDIAction(value = "Is '{name}' inverted", level = DEBUG)
     public boolean isInverted() {
-        return core().hasClass("mat-slider-axis-inverted");
+        return uiElement.hasClass("mat-slider-axis-inverted");
     }
 
     @JDIAction(value = "Is '{name}' thumb label displayed", level = DEBUG)
     public boolean isThumbLabelDisplayed() {
-        return core().find(".mat-slider-thumb-label-text").isVisible();
+        return uiElement.find(".mat-slider-thumb-label-text").isVisible();
     }
 
     @JDIAction(value = "Set value '{0}' for '{name}'", level = DEBUG)
     public void setupValue(double value) {
-        core().setAttribute("aria-valuenow", value + "");
+        uiElement.setAttribute("aria-valuenow", value + "");
 
-        UIElement sliderTrackBackground = core().find(".mat-slider-track-background");
-        UIElement sliderTrackFill = core().find(".mat-slider-track-fill");
-        UIElement sliderThumbContainer = core().find(".mat-slider-thumb-container");
+        UIElement sliderTrackBackground = uiElement.find(".mat-slider-track-background");
+        UIElement sliderTrackFill = uiElement.find(".mat-slider-track-fill");
+        UIElement sliderThumbContainer = uiElement.find(".mat-slider-thumb-container");
 
         reflectSliderChangeOnUI(value, sliderTrackBackground, sliderTrackFill, sliderThumbContainer);
     }
 
     public void setValue(String value) {
-        core().setAttribute("aria-valuenow", value);
+        uiElement.setAttribute("aria-valuenow", value);
 
-        UIElement sliderTrackBackground = core().find(".mat-slider-track-background");
-        UIElement sliderTrackFill = core().find(".mat-slider-track-fill");
-        UIElement sliderThumbContainer = core().find(".mat-slider-thumb-container");
+        UIElement sliderTrackBackground = uiElement.find(".mat-slider-track-background");
+        UIElement sliderTrackFill = uiElement.find(".mat-slider-track-fill");
+        UIElement sliderThumbContainer = uiElement.find(".mat-slider-thumb-container");
 
         reflectSliderChangeOnUI(Double.parseDouble(value), sliderTrackBackground, sliderTrackFill, sliderThumbContainer);
     }
@@ -96,28 +96,28 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
 
     @JDIAction(value = "drag & drop based on percentage length of '{name}'", level = DEBUG)
     public void slide(double percentage) {
-        int xOffset = (int) Math.round(percentage * getStepInPixels(core()));
-        core().find(".mat-slider-thumb").dragAndDropTo(xOffset, 0);
+        int xOffset = (int) Math.round(percentage * getStepInPixels(this.uiElement));
+        uiElement.find(".mat-slider-thumb").dragAndDropTo(xOffset, 0);
     }
 
     private Double getStepInPixels(UIElement uiElement) {
-        return core().getSize().width / 100.0;
+        return uiElement.getSize().width / 100.0;
     }
 
     @JDIAction(value = "Move '{name}' carriage to right", level = DEBUG)
     public void moveRight() {
-        core().sendKeys(Keys.ARROW_RIGHT);
+        uiElement.sendKeys(Keys.ARROW_RIGHT);
     }
 
     @JDIAction(value = "Move '{name}' carriage to left", level = DEBUG)
     public void moveLeft() {
-        core().sendKeys(Keys.ARROW_LEFT);
+        uiElement.sendKeys(Keys.ARROW_LEFT);
     }
 
     @JDIAction("Is '{name} disabled")
     @Override
     public boolean isDisabled() {
-        return core().attr("aria-disabled").equals("true");
+        return uiElement.attr("aria-disabled").equals("true");
     }
 
     @JDIAction("Is '{name} enabled")

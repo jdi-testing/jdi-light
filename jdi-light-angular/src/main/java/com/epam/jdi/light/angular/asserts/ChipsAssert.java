@@ -20,13 +20,13 @@ public class ChipsAssert extends UIAssert<ChipsAssert, Chips> {
 
     @JDIAction("Assert that '{name}' has options")
     public ChipsAssert assertChipsHasOptions(List<String> options) {
-        jdiAssert(element().options(), Matchers.is(options));
+        jdiAssert(element.options(), Matchers.is(options));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has placeholder '{0}'")
     public ChipsAssert assertChipsHasPlaceholder(String expected) {
-        jdiAssert(element().getPlaceholderForChips(), Matchers.is(expected));
+        jdiAssert(element.getPlaceholderForChips(), Matchers.is(expected));
         return this;
     }
 }

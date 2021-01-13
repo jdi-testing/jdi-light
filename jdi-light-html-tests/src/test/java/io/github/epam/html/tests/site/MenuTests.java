@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.*;
 import static io.github.com.enums.Navigation.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -69,8 +68,8 @@ public class MenuTests implements TestsInit {
     }
     @Test
     public void refreshIndexSelectTest() {
-        menu.select(ELEMENT.startIndex + 2);
-        menu.select(ELEMENT.startIndex + 8);
+        menu.select(3);
+        menu.select(9);
         usersPage.checkOpened();
     }
 
