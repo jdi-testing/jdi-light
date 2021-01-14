@@ -70,5 +70,7 @@
         <module>test-examples/jdi-bdd-no-po-tests</module>
         <module>test-templates/jdi-light-junit-template</module>
         <module>test-templates/jdi-light-testng-template</module>
+        <module>jdi-light-material-ui</module>
+        <module>jdi-light-material-ui-tests</module>
     </modules>
 </project>
