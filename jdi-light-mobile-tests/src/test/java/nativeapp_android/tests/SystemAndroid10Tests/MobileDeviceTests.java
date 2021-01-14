@@ -19,11 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MobileDeviceTests extends ApiDemosTestInit {
 
-   /* @BeforeMethod
-    public void init() {
-        initMobile(ClockApp.class);
-    }*///todo:comment
-
     @Test
     public void mobileRotationTest() {
         MobileDevice.rotate(new DeviceRotation(0, 0, 90));

@@ -52,7 +52,7 @@ public class ActionBarTests extends ApiDemosTestInit {
     public void displayOptionsPageMoreOptionsTest() {
         ActionBarDisplayOptionsPage.moreOptions.is().enabled();
         ActionBarDisplayOptionsPage.moreOptions.click();
-        ActionBarDisplayOptionsPage.listView.selectOption("Menu Item"); //todo: where assert?
+        ActionBarDisplayOptionsPage.listView.selectOption("Menu Item");
     }
 }
 

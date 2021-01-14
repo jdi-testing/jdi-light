@@ -23,7 +23,7 @@ public class RatingBarTests extends ApiDemosTestInit {
     @DataProvider
     public Object[][] fiveStarsData(){
         return new Object[][]{
-                {1.0}, {6.0}, {10.0} //todo: overtested
+                {1.0}, {6.0}, {10.0}
         };
     }
 
@@ -82,6 +82,6 @@ public class RatingBarTests extends ApiDemosTestInit {
     @Test(expectedExceptions = IllegalArgumentException.class, dataProvider = "incorrectData")
     public void checkIncorrectValue(double value){
         RatingBarPage.ratingBar1.setRatingByClick(value, 6.0);
-    }//todo: where assert or catch for error?
+    }
 
 }

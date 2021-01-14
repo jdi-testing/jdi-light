@@ -6,6 +6,6 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 public class SliderPage {
 
     @MobileFindBy(accessibilityId = "SliderId")
-    public static Slider slider; //todo: useless?
+    public static Slider slider;
 
 }

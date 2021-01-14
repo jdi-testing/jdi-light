@@ -8,7 +8,7 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 public class NewMessagePage {
 
     @MobileFindBy(accessibilityId = "ComposeRecipientAddButton")
-    public static AddContactButton addContactButton; //todo: useless?
+    public static AddContactButton addContactButton;
 
     @MobileFindBy(accessibilityId = "messageBodyField")
     public static TextField messageTextField;

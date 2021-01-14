@@ -5,7 +5,7 @@ import com.epam.jdi.light.mobile.elements.common.app.ios.TextField;
 
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 
-public class CreateNewContact {   //todo: idk what is going on here
+public class CreateNewContact {
 
     @FindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.EditText[1]")
     private TextField name;
@@ -28,7 +28,7 @@ public class CreateNewContact {   //todo: idk what is going on here
 
     private void fillName() {
         name.sendKeys("TestName");
-    }//todo: hardcode
+    }
 
     private void fillLastName() {
         lastName.sendKeys("TestLastName");
