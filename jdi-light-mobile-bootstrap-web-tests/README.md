@@ -1,25 +1,27 @@
 <h1>How to launch HTML Web tests on Android emulator or IOS simulator</h1>
+<h3> Requirements for Android</h3>
 
 Required tools: Android Studio, Appium, Maven.<br>
-1. Download chrome driver For more details
+1. Download <b>chrome driver</b> For more details
    visit: https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/web/chromedriver.md
-<br>The version of Chrome browser in the Android emulator must be the same. Then go to <b>src/test/resources</b> of
+<br>It is recommended to use the version of <b>chrome driver</b> >= 87.
+The version of Chrome browser in the Android emulator must be the same. Then go to <b>src/test/resources</b> of
 module <b>jdi-light-mobile-bootstrap-web-tests</b>.
 
-2. Set following settings in test.properties file:<br>
+2. Set following settings in <b>test.properties</b> file:<br>
 <b>driver=android</b>;<br>
 <b>remote.type=appium</b>;<br>
 <b>appium.capabilities.path=android.properties</b>;<br>
 <b>driver.remote.run=true</b>;<br>
 If your version of appium has its own URL (not http://0.0.0.0:4723), specify it in the <b>driver.remote.url</b>
 property<br>
-2.1. Set following settings in android.properties file:<br>
+2.1. Set following settings in <b>android.properties</b> file:<br>
 <b>platformName=Android</b>;<br>
 <b>deviceName=emulator-5554</b>;<br>
 <b>chromedriverExecutable=emulator-5554</b>;<br>
 Here <b>deviceName</b> and <b>platformName</b> must be the same as Desired Capabilities in Inspector Session window was
 started from Appium (see future steps).<br>
-2.2. Set following settings in chrome.properties file: 
+2.2. Set following settings in <b>chrome.properties</b> file: 
 <b>w3c=false</b>;
 
 3. Launch Android emulator and wait until home screen is ready
@@ -32,19 +34,21 @@ started from Appium (see future steps).<br>
 6. 1 Go to module <b>jdi-light-bootstrap-tests</b><br>
    2 Run maven script: <code>mvn clean package -U -DskipTests</code> to make .jar package of tests for future dependency.
 
+Note: Before reloading module <b>jdi-light-mobile-bootstrap-web-tests</b> should be reloaded module <b>jdi-light</b>. 
+
 <h1>Requirement for iOS</h1>
 
 Required tools for iOS: Xcode, Appium, Maven.<br>
-In general settings absolutely the same as for Android but you need to use ios.properties instead of android.properties 
-and in test.properties change two fields which use android to ios:
+In general settings absolutely the same as for Android but you need to use <b>ios.properties</b> instead of <b>android.properties</b> 
+and in <b>test.properties</b> change two fields which use android to ios:
 
-1. Set following settings in test.properties file: <br>
+1. Set following settings in <b>test.properties</b> file: <br>
    <b>driver=ios</b>; <br>
    <b>remote.type=appium</b>; <br>
    <b>appium.capabilities.path=ios.properties</b>; <br>
    <b>driver.remote.run=true</b>;
    
-2. Set following settings in ios.properties file:<br>
+2. Set following settings in <b>ios.properties</b> file:<br>
     <b>platformName=ios</b>; <br>
     <b>automationName=XCUITest</b>;<br>
     <b>platformVersion=14.2</b>;<br>
@@ -57,8 +61,10 @@ and in test.properties change two fields which use android to ios:
 <h5>Test Run</h5>
 
 Run maven script from the module root:<br>
+
 - <code>mvn clean test site -U -Dtest=TestClassToRunName.java#testMethodToRun</code> <br>
 or just execute script: <code>mvn clean test site -U</code><br>
+
 - <code>mvn clean test site -Dsuite.xml.file=src/test/resources/demoRun.xml</code>
 <br>(for run tests which is already exist in xml-file; use 'site' for Allure Report) 
 
@@ -75,14 +81,14 @@ Debug from maven run (with breakpoints in IDE) could be performed like example b
 
 1. In <b>pom.xml</b> comment or delete <b>test-jar</b> dependency: <b>jdi-light-bootstrap-tests</b> with  <b>test-jar</b> type
  
-2. Go to module jdi-light-bootstrap-tests and copy all from <b>src/test/java</b><br>
+2. Go to module <b>jdi-light-bootstrap-tests</b> and copy all from <b>src/test/java</b><br>
 <b>But TestsInit.java interface must be excluded</b>
 
-3. Go to module jdi-light-mobile-html-web-tests <br>
+3. Go to module <b>jdi-light-mobile-html-web-tests</b> <br>
 Note: Do not delete old TestsInit.java interface in src/test/java<br>
-3.1 But delete all from src/test/java except TestsInit.java
+3.1 But delete all from <b>src/test/java</b> except <b>TestsInit.java</b>
 
-4. Paste all from 2. to <b>src/test/java</b><br> but do not replace TestsInit.java
+4. Paste all from 2. to <b>src/test/java</b><br> but do not replace <b>TestsInit.java</b>
 
 5. Run tests or debug like described before.
 
@@ -93,6 +99,6 @@ Note: Do not delete old TestsInit.java interface in src/test/java<br>
 
 2. Edit or develop source code of tests in src/test folder
 
-3. When finish - repeat step 6.2
+3. When finish - repeat step 6.2 from <b>Requirements for Android</b>> section
 
 4. Go to module <b>jdi-light-mobile-bootstrap-web-tests</b> and rerun maven script to apply changes: <code>mvn clean install -U -DskipTests</code>
