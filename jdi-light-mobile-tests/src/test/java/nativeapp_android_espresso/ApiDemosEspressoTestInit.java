@@ -12,11 +12,11 @@ import static com.epam.jdi.light.mobile.elements.init.PageFactory.initMobile;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class ApiDemosEspressoTestInit {
+
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         initMobile(ApiDemosEspressoApp.class);
         logger.toLog("Run ApiDemos App Tests");
-
     }
 
     @AfterMethod(alwaysRun = true)

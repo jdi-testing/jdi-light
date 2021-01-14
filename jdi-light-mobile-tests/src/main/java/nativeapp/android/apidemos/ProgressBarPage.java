@@ -20,4 +20,5 @@ public class ProgressBarPage {
 
     @MobileFindBy(id = "io.appium.android.apis:id/increase_secondary")
     public static Button increaseSecondaryButton;
+
 }

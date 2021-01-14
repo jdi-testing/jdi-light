@@ -16,10 +16,4 @@ public class TabsPage {
             "/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.TabHost/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.TextView")
     public static TabBar tabContent;
 
-    @MobileFindBy(id = "android:id/title")
-    public static TabBar tab;
-
-    @MobileFindBy(xpath = "//android.widget.TabWidget")
-    public static TabBar tabBa;
-
 }

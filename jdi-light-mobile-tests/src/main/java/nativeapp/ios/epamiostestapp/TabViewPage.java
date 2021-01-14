@@ -7,4 +7,5 @@ public class TabViewPage {
 
     @MobileFindBy(accessibilityId = "Tab Bar")
     public static TabBar tabBar;
+
 }

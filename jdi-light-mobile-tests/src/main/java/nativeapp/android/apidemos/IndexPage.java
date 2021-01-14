@@ -34,4 +34,5 @@ public class IndexPage {
 
     @MobileFindBy(xpath = "//android.widget.TextView[@content-desc='Rating Bar']")
     public static Button goToRatingBar;
+
 }

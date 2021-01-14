@@ -25,29 +25,29 @@ public class ProgressBarTests extends ApiDemosTestInit {
 
     @Test
     public void decreaseStandardProgressBar() {
-        ProgressBarPage.decreaseStandardButton.click();
         ProgressBarPage.decreaseStandardButton.is().enabled();
+        ProgressBarPage.decreaseStandardButton.click();
         ProgressBarPage.progressBarLine.isExist();
     }
 
     @Test
     public void increaseStandardProgressBar() {
-        ProgressBarPage.increaseStandardButton.click();
         ProgressBarPage.increaseStandardButton.is().enabled();
+        ProgressBarPage.increaseStandardButton.click();
         ProgressBarPage.progressBarLine.isExist();
     }
 
     @Test
     public void decreaseSecondaryProgressBar() {
-        ProgressBarPage.decreaseSecondaryButton.click();
         ProgressBarPage.decreaseSecondaryButton.is().enabled();
+        ProgressBarPage.decreaseSecondaryButton.click();
         ProgressBarPage.progressBarLine.isExist();
     }
 
     @Test
     public void increaseSecondaryProgressBar() {
-        ProgressBarPage.increaseSecondaryButton.click();
         ProgressBarPage.increaseSecondaryButton.is().enabled();
+        ProgressBarPage.increaseSecondaryButton.click();
         ProgressBarPage.progressBarLine.isExist();
     }
 }

@@ -8,8 +8,4 @@ public class ActionBarPage {
     @MobileFindBy(accessibilityId = "Action Bar Usage")
     public static Button actionBarUsagePage;
 
-    @MobileFindBy(accessibilityId = "Display Options")
-    public static Button displayOptionsPage;
-
-
 }

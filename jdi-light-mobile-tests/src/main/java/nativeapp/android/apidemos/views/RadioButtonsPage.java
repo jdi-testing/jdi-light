@@ -16,4 +16,5 @@ public class RadioButtonsPage {
 
     @MobileFindBy(className = "android.widget.RadioButton")
     public static Text radioButton;
+
 }

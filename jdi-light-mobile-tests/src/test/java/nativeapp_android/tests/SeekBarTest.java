@@ -12,9 +12,9 @@ public class SeekBarTest extends ApiDemosTestInit {
 
     @BeforeMethod
     public void init() {
-        MobileScreen.scrollToElementInList(IndexPage.viewsPage).visible();
+        MobileScreen.scrollToElementInList(IndexPage.viewsPage);
         IndexPage.viewsPage.click();
-        MobileScreen.scrollToElementInList(ViewsPage.seekBarPage).visible();
+        MobileScreen.scrollToElementInList(ViewsPage.seekBarPage);
         ViewsPage.seekBarPage.click();
     }
 

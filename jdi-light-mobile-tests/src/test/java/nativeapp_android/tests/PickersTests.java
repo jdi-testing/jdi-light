@@ -13,7 +13,6 @@ import static nativeapp.android.apidemos.views.DateWidgetsPage.*;
 import static nativeapp.android.apidemos.IndexPage.*;
 import static nativeapp.android.apidemos.views.ViewsPage.*;
 import static nativeapp.android.apidemos.views.RadialPickerPage.*;
-import static nativeapp.android.apidemos.views.DatePickerPage.*;
 import static nativeapp.android.apidemos.views.PickerPage.*;
 
 public class PickersTests extends ApiDemosTestInit {
@@ -63,6 +62,5 @@ public class PickersTests extends ApiDemosTestInit {
         picker.is().selected("05");
         picker.setInterval("PM");
         picker.is().selected("PM");
-
     }
 }

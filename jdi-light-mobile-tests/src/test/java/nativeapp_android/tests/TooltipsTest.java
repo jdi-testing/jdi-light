@@ -32,6 +32,4 @@ public class TooltipsTest extends ApiDemosTestInit {
         GalleryPage.photoThree.tap();
         GalleryPage.galleryLayout.find(By.linkText("2")).isExist();
     }
-
-
 }

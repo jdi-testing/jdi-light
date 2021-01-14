@@ -17,4 +17,5 @@ public class ContactsMainPage {
     public void createNewContact(){
         addNewContactBtn.click();
     }
+
 }

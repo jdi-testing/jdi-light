@@ -26,4 +26,5 @@ public class ActionBarUsagePage {
 
     @MobileFindBy(className = "android.widget.ListView")
     public static ActionBar listView;
+
 }

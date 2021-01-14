@@ -23,7 +23,6 @@ public class TextFieldTests extends ApiDemosTestInit {
 
     @Test
     public void textFieldTest(){
-
         visibleTextField.setValue("Test");
         visibleTextField.is().text("Test");
         visibleTextField.clear();
@@ -32,7 +31,6 @@ public class TextFieldTests extends ApiDemosTestInit {
 
     @Test
     public void hiddenInputFieldTest(){
-
         hiddenInputTextField.setValue("Test");
         hiddenInputTextField.is().text("••••");
         displayedInputTextField.is().text("Test");

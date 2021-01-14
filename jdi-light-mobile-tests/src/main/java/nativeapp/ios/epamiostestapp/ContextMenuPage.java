@@ -11,8 +11,11 @@ public class ContextMenuPage {
 
     @MobileFindBy(accessibilityId = "one")
     public static MobileAppUIElement optionOne;
+
     @MobileFindBy(accessibilityId = "two")
     public static MobileAppUIElement optionTwo;
+
     @MobileFindBy(accessibilityId = "three")
     public static MobileAppUIElement optionThree;
+
 }

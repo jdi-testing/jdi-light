@@ -7,8 +7,11 @@ public class SearchViewPage {
 
     @MobileFindBy(accessibilityId = "Action Bar")
     public static Button actionBarPage;
+
     @MobileFindBy(accessibilityId = "Always Expanded")
     public static Button alwaysExpandedPage;
+
     @MobileFindBy(accessibilityId = "Filter")
     public static Button filterPage;
+
 }

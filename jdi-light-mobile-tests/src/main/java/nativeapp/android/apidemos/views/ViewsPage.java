@@ -14,9 +14,6 @@ public class ViewsPage {
     @MobileFindBy(accessibilityId = "Rating Bar")
     public static Button ratingBarPage;
 
-    @MobileFindBys(@MobileFindBy(id = "android:id/list"))
-    public static List<Button> buttons;
-
     @MobileFindBy(accessibilityId = "Seek Bar")
     public static Button seekBarPage;
 
@@ -46,4 +43,5 @@ public class ViewsPage {
 
     @MobileFindBy(accessibilityId = "Radio Group")
     public static Button radioGroupViewPage;
+
 }

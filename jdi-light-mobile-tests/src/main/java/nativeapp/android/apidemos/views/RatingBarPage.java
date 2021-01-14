@@ -5,6 +5,7 @@ import com.epam.jdi.light.mobile.elements.common.app.android.RatingBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class RatingBarPage {
+
     @MobileFindBy(id = "io.appium.android.apis:id/ratingbar1")
     public static RatingBar ratingBar1;
 
@@ -19,4 +20,5 @@ public class RatingBarPage {
 
     @MobileFindBy(id = "io.appium.android.apis:id/rating")
     public static Text rating;
+
 }

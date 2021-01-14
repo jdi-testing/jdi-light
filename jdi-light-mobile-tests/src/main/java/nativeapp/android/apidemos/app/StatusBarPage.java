@@ -26,4 +26,5 @@ public class StatusBarPage {
 
     @MobileFindBy(xpath = "//android.widget.Button[@content-desc='Clear notification']")
     public static Button clearAllButton;
+
 }

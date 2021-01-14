@@ -27,12 +27,11 @@ public class StatusBarTests extends ApiDemosTestInit {
         notificationPage.click();
         statusBarButton.click();
         happyButton.click();
+        AndroidScreen.openNotificationPanel();
     }
 
     @Test
     public void openNotificationTest() {
-
-        AndroidScreen.openNotificationPanel();
         notificationPanel.is().displayed();
         appIcon.is().displayed();
 
@@ -42,12 +41,10 @@ public class StatusBarTests extends ApiDemosTestInit {
 
         appIcon.click();
         appIcon.is().displayed();
-        AndroidScreen.closeNotificationPanel();
     }
 
     @Test
     public void clearAllButtonTest() {
-        AndroidScreen.openNotificationPanel();
         notificationPanel.is().displayed();
         AndroidScreen.closeNotificationPanel();
         clearAllButton.click();

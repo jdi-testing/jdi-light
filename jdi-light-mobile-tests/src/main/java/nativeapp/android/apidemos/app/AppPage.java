@@ -13,4 +13,5 @@ public class AppPage {
 
     @MobileFindBy(accessibilityId = "Fragment")
     public static Button fragmentPage;
+
 }
