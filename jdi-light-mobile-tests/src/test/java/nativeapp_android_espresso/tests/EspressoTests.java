@@ -1,8 +1,8 @@
-package nativeapp_android.tests;
+package nativeapp_android_espresso.tests;
 
 import nativeapp.android.apidemosespresso.EspressoIndexPage;
 import nativeapp.android.apidemosespresso.app.EspressoAppPage;
-import nativeapp_android.ApiDemosEspressoTestInit;
+import nativeapp_android_espresso.ApiDemosEspressoTestInit;
 import org.testng.annotations.Test;
 
 public class EspressoTests extends ApiDemosEspressoTestInit {
