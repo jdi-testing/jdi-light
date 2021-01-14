@@ -20,7 +20,7 @@ module <b>jdi-light-mobile-angular-web-tests</b>.
 <b>platformName=Android</b>; <br>
 <b>deviceName=emulator-5554</b>; <br>
 <b>chromedriverExecutable=emulator-5554</b>; <br>
-Here <b>deviceName</b> and <b>platformName</b> must be the same as Desired Capabilities in Inspector Session window was
+Here <b>deviceName</b> and <b>platformName</b> must be the same as Desired Capabilities in Inspector Session window that was
 started from Appium (see future steps).<br>
 2.2. Set following settings in <b>chrome.properties file</b>: <br>
 <b>w3c=false</b>;
