@@ -47,8 +47,6 @@ public class ApiDemosApp {
 
     public static DateWidgetsPage dateWidgetsPage;
 
-    //public static DatePickerPage datePickerPage;
-
     public static RadialPickerPage radialPickerPage;
 
     public static RadioButtonsPage radioButtonsPage;

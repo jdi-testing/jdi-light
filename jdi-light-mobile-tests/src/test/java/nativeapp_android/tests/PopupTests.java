@@ -21,7 +21,6 @@ public class PopupTests extends ApiDemosTestInit {
     @Test
     public void isPopupDisplayedFromSearchItem() {
         PopupPage.makePopupButton.click();
-        //PopupPage.searchItem.longPress();
         PopupPage.searchItem.tap();
         PopupPage.screen.find(By.linkText("Clicked popup menu item Search")).isExist();
     }
