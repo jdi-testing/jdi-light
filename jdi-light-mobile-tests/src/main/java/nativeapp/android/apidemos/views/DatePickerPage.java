@@ -1,6 +1,6 @@
 package nativeapp.android.apidemos.views;
 
-import com.epam.jdi.light.mobile.elements.common.app.Button;
+/*import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.common.app.android.Picker;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
@@ -24,4 +24,4 @@ public class DatePickerPage { //todo: useless?
     @MobileFindBy(id = "android:id/date_picker_year_picker")
     public static Picker yearPicker;
 
-}
+}*/

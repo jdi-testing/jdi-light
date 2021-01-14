@@ -1,3 +1,4 @@
+/*
 package nativeapp.android;
 
 import com.epam.jdi.light.mobile.elements.common.app.Button;
@@ -16,3 +17,4 @@ public class NetworkAndInternet { //todo: useless?
     public static ToggleButton airplaneMode;
 
 }
+*/

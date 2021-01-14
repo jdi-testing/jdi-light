@@ -1,6 +1,7 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
+import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,9 +15,11 @@ public class RadioButtonsTests extends ApiDemosTestInit {
 
     @BeforeMethod
     public void initSteps() {
-        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Views']");
+        MobileScreen.scrollToElementInList(viewsPage);
+        //MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Views']");
         viewsPage.click();
-        MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Radio Group']"); //todo: scroll to element?
+        MobileScreen.scrollToElementInList(radioGroupViewPage);
+        //MobileScreen.scrollDownToXpath("//android.widget.TextView[@content-desc='Radio Group']"); //todo: scroll to element?
         radioGroupViewPage.click();
     }
 

@@ -7,7 +7,7 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class AlarmPage {
 
-    @MobileFindBy(accessibilityId = "Alarm")
+    /*@MobileFindBy(accessibilityId = "Alarm")
     public static Button alarmPageButton; //todo: isn't it useless?
 
     @MobileFindBy(xpath = "(//android.widget.ImageButton[@content-desc='Expand alarm'])[1]")
@@ -17,7 +17,7 @@ public class AlarmPage {
     public static Checkbox repeatAlarmCheckbox;
 
     @MobileFindBy(id = "com.google.android.deskclock:id/vibrate_onoff")
-    public static Checkbox manageVibrationCheckbox;
+    public static Checkbox manageVibrationCheckbox;*/
 
     @MobileFindBy(id = "com.google.android.deskclock:id/repeat_days")
     public static Widget repeatDaysAlarmWidget;

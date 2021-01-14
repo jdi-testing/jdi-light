@@ -140,7 +140,6 @@ public class MobileScreen {
     public static UIAssert scrollToElementInList(Button element) {
         int shift = getHeight()/2-1;
         String oldPage = WebDriverFactory.getDriver().getPageSource();
-        System.out.println(oldPage);
         while (true) {
             try {
                 element.isEnabled();
@@ -148,7 +147,6 @@ public class MobileScreen {
             } catch (RuntimeException e) {
                 MobileScreen.scrollDown(shift);
                 String newPage = WebDriverFactory.getDriver().getPageSource();
-                System.out.println(newPage);
                 if (oldPage.equals(newPage)) {
                     return new UIAssert().set(element);
                 }

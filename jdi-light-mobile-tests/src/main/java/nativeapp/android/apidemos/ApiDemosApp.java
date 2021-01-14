@@ -47,7 +47,7 @@ public class ApiDemosApp {
 
     public static DateWidgetsPage dateWidgetsPage;
 
-    public static DatePickerPage datePickerPage;
+    //public static DatePickerPage datePickerPage;
 
     public static RadialPickerPage radialPickerPage;
 
@@ -71,7 +71,7 @@ public class ApiDemosApp {
 
     public static GalleryPage galleryPage;
 
-    public static ImageSwitcherPage imageSwitcherPage;
+    //public static ImageSwitcherPage imageSwitcherPage; //todo:comment
 
     public static NotifyPage notifyPage;
 

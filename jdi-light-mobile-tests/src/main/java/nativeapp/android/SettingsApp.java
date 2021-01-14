@@ -14,6 +14,6 @@ public class SettingsApp {
     @MobileFindBy(id = "android:id/search_src_text")
     public static SearchViewField searchText;
 
-    public static NetworkAndInternetPage networkAndInternetPage; //todo: useless?
+   /* public static NetworkAndInternetPage networkAndInternetPage; *///todo: useless?
 
 }

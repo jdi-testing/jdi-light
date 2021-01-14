@@ -14,7 +14,7 @@ public class NotificationPage {
     @MobileFindBy(id = "io.appium.android.apis:id/happy")
     public static Button happyButton;
 
-    @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ImageButton")
-    public static Button happyIconButton; //todo: useless?
+    /*@MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ImageButton")
+    public static Button happyIconButton;*/ //todo: useless?
 
 }

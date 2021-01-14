@@ -1,4 +1,4 @@
-package nativeapp.android;
+/*package nativeapp.android;
 
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.JApp;
 
@@ -7,6 +7,7 @@ public class ClockApp {
 
     public static AlarmPage alarm;
 
-    public static AlarmSettings alarmSettings;//todo: useless?
+    //public static AlarmSettings alarmSettings;//todo: useless?
 
-}
+}*/
+

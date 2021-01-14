@@ -2,26 +2,27 @@ package nativeapp_android.tests.SystemAndroid10Tests;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.mobile.elements.common.MobileDevice;
-import nativeapp.android.ClockApp;
+//import nativeapp.android.ClockApp;
+import nativeapp_android.ApiDemosTestInit;
 import org.openqa.selenium.DeviceRotation;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.html5.Location;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
+//import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.mobile.elements.init.PageFactory.initMobile;
+//import static com.epam.jdi.light.mobile.elements.init.PageFactory.initMobile;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MobileDeviceTests {
+public class MobileDeviceTests extends ApiDemosTestInit {
 
-    @BeforeMethod
+   /* @BeforeMethod
     public void init() {
         initMobile(ClockApp.class);
-    }
+    }*///todo:comment
 
     @Test
     public void mobileRotationTest() {

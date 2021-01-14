@@ -21,29 +21,34 @@ public class PopupTests extends ApiDemosTestInit {
     @Test
     public void isPopupDisplayedFromSearchItem() {
         PopupPage.makePopupButton.click();
-        PopupPage.searchItem.longPress();
+        //PopupPage.searchItem.longPress();
+        PopupPage.searchItem.tap();
         PopupPage.screen.find(By.linkText("Clicked popup menu item Search")).isExist();
     }
 
     @Test
     public void isPopupDisplayedFromAddItem() {
         PopupPage.makePopupButton.click();
-        PopupPage.addItem.longPress();
+        //PopupPage.addItem.longPress();//todo:comment
+        PopupPage.addItem.tap();
         PopupPage.screen.find(By.linkText("Clicked popup menu item Add")).isExist();
     }
 
     @Test
     public void isPopupDisplayedFromEditItem() {
         PopupPage.makePopupButton.click();
-        PopupPage.editItem.longPress();
+        //PopupPage.editItem.longPress();
+        PopupPage.editItem.tap();
         PopupPage.screen.find(By.linkText("Clicked popup menu item Edit")).isExist();
     }
 
     @Test
     public void isPopupDisplayedFromShareItem() {
         PopupPage.makePopupButton.click();
-        PopupPage.editItem.longPress();
-        PopupPage.shareItem.longPress();
+        //PopupPage.editItem.longPress();
+        PopupPage.editItem.tap();
+        //PopupPage.shareItem.longPress();
+        PopupPage.shareItem.tap();
         PopupPage.screen.find(By.linkText("Clicked popup menu item Share")).isExist();
     }
 }

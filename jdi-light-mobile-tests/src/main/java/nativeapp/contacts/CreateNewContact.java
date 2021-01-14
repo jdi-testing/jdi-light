@@ -28,7 +28,7 @@ public class CreateNewContact {   //todo: idk what is going on here
 
     private void fillName() {
         name.sendKeys("TestName");
-    }
+    }//todo: hardcode
 
     private void fillLastName() {
         lastName.sendKeys("TestLastName");
