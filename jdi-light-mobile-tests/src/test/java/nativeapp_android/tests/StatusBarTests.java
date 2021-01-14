@@ -32,27 +32,24 @@ public class StatusBarTests extends ApiDemosTestInit {
 
     @Test
     public void openNotificationTest() {
-        //AndroidScreen.openNotificationPanel(); // todo: this could be in before method
         notificationPanel.is().displayed();
         appIcon.is().displayed();
 
-        appName.is().text("API Demos");//todo: failed assert
+        appName.is().text("API Demos");
         title.is().text("Mood ring");
         appText.is().text("I am happy");
 
         appIcon.click();
         appIcon.is().displayed();
-        //AndroidScreen.closeNotificationPanel(); //todo: this is in after method
     }
 
     @Test
     public void clearAllButtonTest() {
-        //AndroidScreen.openNotificationPanel();
         notificationPanel.is().displayed();
         AndroidScreen.closeNotificationPanel();
         clearAllButton.click();
         AndroidScreen.openNotificationPanel();
-        notificationPanel.waitFor().is().displayed(); //todo: didn't get it
+        notificationPanel.waitFor().is().displayed();
     }
 
     @AfterMethod

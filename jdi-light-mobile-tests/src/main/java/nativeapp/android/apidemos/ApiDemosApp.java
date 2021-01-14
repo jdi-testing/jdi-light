@@ -71,8 +71,6 @@ public class ApiDemosApp {
 
     public static GalleryPage galleryPage;
 
-    //public static ImageSwitcherPage imageSwitcherPage; //todo:comment
-
     public static NotifyPage notifyPage;
 
 }

@@ -13,7 +13,6 @@ import static nativeapp.android.apidemos.views.DateWidgetsPage.*;
 import static nativeapp.android.apidemos.IndexPage.*;
 import static nativeapp.android.apidemos.views.ViewsPage.*;
 import static nativeapp.android.apidemos.views.RadialPickerPage.*;
-//import static nativeapp.android.apidemos.views.DatePickerPage.*; //todo:comment
 import static nativeapp.android.apidemos.views.PickerPage.*;
 
 public class PickersTests extends ApiDemosTestInit {

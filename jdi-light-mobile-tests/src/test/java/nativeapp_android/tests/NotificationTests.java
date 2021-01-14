@@ -28,7 +28,7 @@ public class NotificationTests extends ApiDemosTestInit {
     public void initSteps() {
         sendSMS(NUMBER, MESSAGE);
         AndroidScreen.openNotificationPanel();
-        NotifyPage.notificationPanel.waitFor(5)/*.is().displayed()*/; //todo: asserts in initialization?(delete)
+        NotifyPage.notificationPanel.waitFor(5);
     }
 
     @Test

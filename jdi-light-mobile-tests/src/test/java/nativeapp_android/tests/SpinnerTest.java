@@ -31,9 +31,9 @@ public class SpinnerTest extends ApiDemosTestInit {
         SpinnerPage.colorSpinner.select("red");
         SpinnerPage.colorSpinner.has().text("red");
 
-        /*SpinnerPage.colorSpinner.tap();
+        SpinnerPage.colorSpinner.tap();
         SpinnerPage.colorSpinner.select("yellow");
-        SpinnerPage.colorSpinner.has().text("yellow"); //todo: isn't it the same?*/
+        SpinnerPage.colorSpinner.has().text("yellow");
 
         SpinnerPage.colorSpinner.tap();
         SpinnerPage.colorSpinner.select("violet");

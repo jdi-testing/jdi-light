@@ -17,13 +17,13 @@ public class RatingBarTests extends ApiDemosTestInit {
     @DataProvider
     public Object[][] threeStarsData(){
         return new Object[][]{
-                {1.0}, {3.0}, {4.0}, {6.0}
+                {1.0}, {3.0}, {6.0}
         };
     }
     @DataProvider
     public Object[][] fiveStarsData(){
         return new Object[][]{
-                {1.0}, {2.0}, {3.0}, {4.0}, {6.0}, {7.0}, {8.0}, {9.0}, {10.0} //todo: overtested
+                {1.0}, {6.0}, {10.0} //todo: overtested
         };
     }
 
@@ -61,7 +61,7 @@ public class RatingBarTests extends ApiDemosTestInit {
     @Test(dataProvider = "threeStarsData")
     public void checkThreeStars(double data){
         RatingBarPage.ratingBar1.setRating(data);
-        RatingBarPage.ratingBar1.is().value(data); //todo: why less asserts?
+        RatingBarPage.ratingBar1.is().value(data);
     }
 
     @Test(dataProvider = "fiveStarsData")
