@@ -1,4 +1,5 @@
 <h1> How to launch HTML Web tests on Android emulator or IOS simulator</h1>  
+<h3> Requirements for Android</h3>
 
 Required tools: Android Studio, Appium, Maven.
 
@@ -99,6 +100,6 @@ Note: Do not delete old <b>TestsInit.java</b> interface in <b>src/test/java</b><
 
 2. Edit or develop source code of tests in src/test folder
 
-3. When finish - repeat step 6.2
+3. When finish - repeat step 6.2 from <b>Requirements for Android</b> section
 
 4. Go to module <b>jdi-light-mobile-angular-web-tests</b> and rerun maven script to apply changes: <code>mvn clean install -U -DskipTests</code></b>
