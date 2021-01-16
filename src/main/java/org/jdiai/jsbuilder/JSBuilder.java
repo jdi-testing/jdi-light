@@ -1,6 +1,7 @@
 package org.jdiai.jsbuilder;
 
 import com.epam.jdi.tools.func.JAction1;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import org.jdiai.JSException;
@@ -13,7 +14,7 @@ import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static java.lang.String.*;
+import static java.lang.String.format;
 import static org.jdiai.jsbuilder.RetryFunctions.LIST_RETRY_DEFAULT;
 import static org.jdiai.jsbuilder.RetryFunctions.RETRY_DEFAULT;
 
@@ -23,6 +24,8 @@ public class JSBuilder implements IJSBuilder {
     protected String replaceValue;
     protected JavascriptExecutor js;
     public static boolean LOG_QUERY = false;
+    public static JFunc1<String, String> PROCESS_RESULT =
+        result -> result.length() > 200  ? result.substring(0, 195) + "..." : result;
     public boolean logQuery = LOG_QUERY;
     public static JAction1<String> logger = System.out::println;
     protected MapArray<String, String> useFunctions = new MapArray<>();
@@ -64,7 +67,7 @@ public class JSBuilder implements IJSBuilder {
             cleanup();
         }
         if (result != null && logQuery)
-            logger.execute(">>> " + result);
+            logger.execute(">>> " + PROCESS_RESULT.execute(result.toString()));
         return result;
     }
     public static JFunc2<JavascriptExecutor, String, List<String>> LIST_RETRY = LIST_RETRY_DEFAULT;
@@ -79,7 +82,7 @@ public class JSBuilder implements IJSBuilder {
             cleanup();
         }
         if (result != null && logQuery)
-            logger.execute(">>> " + result);
+            logger.execute(">>> " + PROCESS_RESULT.execute(result.toString()));
         return result;
     }
     public String getQuery(String result) {
@@ -144,13 +147,10 @@ public class JSBuilder implements IJSBuilder {
             return query;
         }
         String jsScript = print(useFunctions.values(), "");
-        if (variables.size() == 1)
-            return jsScript + "let " + query;
-        for (String variable : variables) {
-            //noinspection StringConcatenationInLoop
-            jsScript += "let " + variable + "; ";
-        }
-        return jsScript + "\n" + query;
+        String letVariables = variables.size() > 1
+            ? print(variables, ", ") + ";\n"
+            : "";
+        return jsScript + "let " + letVariables + query;
     }
     protected void cleanup() {
         useFunctions.clear();

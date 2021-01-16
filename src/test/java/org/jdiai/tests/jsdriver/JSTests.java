@@ -1,11 +1,10 @@
 package org.jdiai.tests.jsdriver;
 
-import org.jdiai.tools.JSTalk;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.jdiai.jswrap.JSWrapper.element;
-import static org.jdiai.tests.jsdriver.states.States.*;
+import static org.jdiai.tests.jsdriver.states.States.atHomePage;
+import static org.jdiai.tests.jsdriver.states.States.login;
 
 public class JSTests extends TestInit {
 
@@ -17,6 +16,5 @@ public class JSTests extends TestInit {
 
     @Test
     public void doActionTest() {
-        JSTalk.$("#epam-logo").isClickable();
     }
 }

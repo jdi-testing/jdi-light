@@ -4,6 +4,7 @@ import static java.lang.String.format;
 
 public class JSException extends RuntimeException {
     public JSException(String message) { super(message); }
+    public JSException(String message, Object... args) { super(format(message, args)); }
 
     public JSException(Throwable ex, String msg, Object... args) {
         super(getExceptionMessage(ex, msg, args));

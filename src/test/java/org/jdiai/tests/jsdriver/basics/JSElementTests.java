@@ -3,7 +3,6 @@ package org.jdiai.tests.jsdriver.basics;
 import org.jdiai.Json;
 import org.jdiai.jswrap.JSElement;
 import org.jdiai.tests.jsdriver.TestInit;
-import org.jdiai.tools.JSTalk;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
