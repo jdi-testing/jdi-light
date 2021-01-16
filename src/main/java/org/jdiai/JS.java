@@ -2,6 +2,7 @@ package org.jdiai;
 
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -20,7 +21,7 @@ import java.util.List;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static java.lang.Math.*;
+import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
@@ -503,8 +504,14 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         }
         return direction;
     }
-    public boolean validateRelativePosition(JS element, Direction expected) {
+    public boolean relativePosition(JS element, Direction expected) {
         return COMPARE_POSITIONS.execute(getDirectionTo(element), expected);
+    }
+    public OfElement isOn(JFunc1<Direction, Boolean> expected) {
+        return new OfElement(expected, this);
+    }
+    public boolean relativePosition(JS element, JFunc1<Direction, Boolean> expected) {
+        return expected.execute(getDirectionTo(element));
     }
     public MapArray<String, Direction> relations;
     public void clearRelations() {
@@ -533,8 +540,8 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
                 Direction expectedRelation = storedRelations.get(relation.key);
                 if (!VECTOR_SIMILARITY.execute(relation.value, expectedRelation)) {
                     failures.add(format("Elements '%s' and '%s' are misplaced: angle: %s => %s; length: %s => %s",
-                        getFullName(), relation.key, relation.value.getAngle(), expectedRelation.getAngle(),
-                        relation.value.getLength(), expectedRelation.getLength()));
+                        getFullName(), relation.key, relation.value.angle(), expectedRelation.angle(),
+                        relation.value.length(), expectedRelation.length()));
                 }
             } else {
                 newRelations.add(relation);

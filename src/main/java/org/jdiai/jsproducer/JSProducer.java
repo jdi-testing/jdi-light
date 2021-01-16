@@ -1,9 +1,7 @@
 package org.jdiai.jsproducer;
 
-import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import org.jdiai.JSException;
 import org.jdiai.Json;
 
 import java.util.Map;

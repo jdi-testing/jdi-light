@@ -49,11 +49,13 @@ public class JSWrapper {
     }
 
     public static WebDriver chromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/Users/romaniovlev/Downloads/chromedriver");
+        // System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
         return new ChromeDriver();
     }
     public static WebDriver firefoxDriver() {
         System.setProperty("webdriver.gecko.driver", "C:\\Selenium\\geckodriver.exe");
+        // System.setProperty("webdriver.gecko.driver", "C:\\Selenium\\geckodriver.exe");
         return new FirefoxDriver();
     }
 }

@@ -16,9 +16,9 @@ import static org.jdiai.JS.JDI_STORAGE;
 public class RelationsManager {
     public static String RELATIONS_STORAGE = JDI_STORAGE + "/relations.json";
     public static JFunc2<Direction, Direction, Boolean> EQUAL_POSITIONS = (actual, expected)
-        -> actual.getAngle() == expected.getAngle() && actual.getLength() == expected.getLength();
+        -> actual.angle() == expected.angle() && actual.length() == expected.length();
     public static JFunc2<Direction, Direction, Boolean> ALMOST_SAME_POSITIONS = (actual, expected)
-        -> abs(actual.getAngle() - expected.getAngle()) < 3 && abs(actual.getLength() / expected.getLength()) < 1.05;
+        -> abs(actual.angle() - expected.angle()) < 3 && abs(actual.length() / expected.length()) < 1.05;
     public static JFunc2<Direction, Direction, Boolean> COMPARE_POSITIONS = ALMOST_SAME_POSITIONS;
 
     public static File getRelationsStorage() {

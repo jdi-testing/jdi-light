@@ -3,7 +3,8 @@ package org.jdiai;
 import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.Point;
 
-import static java.lang.Math.*;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 import static java.lang.String.format;
 
 public class Direction {
@@ -18,13 +19,20 @@ public class Direction {
         this.length = length;
     }
     public Direction(Point point1, Point point2) {
-        double difY = point2.y - point1.y;
         double difX = point2.x - point1.x;
-        angle = (int) toDegrees(atan(difY / difX));
+        double difY = point2.y - point1.y;
+        angle = calculateAngle(difX, difY);
         length = (int) sqrt(pow(difY, 2) + pow(difX, 2));
     }
-    public int getAngle() { return angle; }
-    public double getLength() { return length; }
+    private int calculateAngle(double difX, double difY) {
+        float angle = (float) Math.toDegrees(Math.atan2(-difY, difX));
+        if(angle < 0){
+            angle += 360;
+        }
+        return (int) angle;
+    }
+    public int angle() { return angle; }
+    public double length() { return length; }
     public boolean isSimilarTo(Direction vector) {
         return VECTOR_SIMILARITY.execute(this, vector);
     }
