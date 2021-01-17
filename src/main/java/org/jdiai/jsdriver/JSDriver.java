@@ -3,6 +3,8 @@ package org.jdiai.jsdriver;
 import com.epam.jdi.tools.LinqUtils;
 import org.jdiai.JSException;
 import org.jdiai.ListSearch;
+import org.jdiai.jsbuilder.BuilderActions;
+import org.jdiai.jsbuilder.IBuilderActions;
 import org.jdiai.jsbuilder.IJSBuilder;
 import org.jdiai.jsbuilder.JSBuilder;
 import org.jdiai.jsproducer.JSListProducer;
@@ -22,11 +24,17 @@ public class JSDriver {
     private IJSBuilder builder;
     protected ListSearch strategy = CHAIN;
 
+    private static IJSBuilder defaultBuilder(WebDriver driver) {
+        return new JSBuilder(driver, new BuilderActions());
+    }
     public JSDriver(WebDriver driver, By... locators) {
-        this(driver, newList(locators), null);
+        this(driver, newList(locators), defaultBuilder(driver));
     }
     public JSDriver(WebDriver driver, List<By> locators) {
-        this(driver, locators, null);
+        this(driver, locators, defaultBuilder(driver));
+    }
+    public JSDriver(WebDriver driver, List<By> locators, IBuilderActions actions) {
+        this(driver, locators, new JSBuilder(driver, actions));
     }
     public JSDriver(WebDriver driver, List<By> locators, IJSBuilder builder) {
         if (driver == null)
@@ -122,8 +130,10 @@ public class JSDriver {
             return buildList();
         }
         builder().oneToList("document", firstLocator());
-        for (By locator : listCopy(locators(), 1, -1)) {
-            builder().listToList(locator);
+        if (locators().size() > 2) {
+            for (By locator : listCopy(locators(), 1, -1)) {
+                builder().listToList(locator);
+            }
         }
         builder().listToList(lastLocator());
         return builder();

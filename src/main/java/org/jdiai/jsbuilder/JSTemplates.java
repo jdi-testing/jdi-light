@@ -14,29 +14,29 @@ public class JSTemplates {
         "function xpath(ctx, locator) {\n" +
         "  return document.evaluate(locator, ctx, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n" +
         "}\n";
-    public static String ONE_TO_RESULT = "return %s";
+    public static String ONE_TO_RESULT = "return %s;";
     public static String LIST_TO_RESULT =
         "let result = [];\n" +
         "for(let element of elements) {\n" +
         "  result.push(%s);\n" +
         "}\n" +
         "return result;";
-    public static String ONE_TO_LIST = "%s";
-    public static String ONE_TO_ONE = "%s";
+    public static String ONE_TO_LIST = "Array.from(%s);\n";
+    public static String ONE_TO_ONE = "%s;\n";
     public static String LIST_TO_ONE =
         "found = false;\ni = 0;\n" +
         "while (!found && i < elements.length) {\n" +
-        "  element = %s" +
+        "  element = %s;\n" +
         "  if (element !== null) { found = true; }\n" +
         "  i++;\n" +
         "}\n";
     public static String LIST_TO_LIST =
         "list = [];\n" +
         "for(let element of elements) {\n" +
-        "  let subElements = %s" +
+        "  let subElements = %s;\n" +
         "  for(let j = 0; j < subElements.length; j++) {\n" +
         "    list.push(subElements[j]);\n" +
         "  }\n" +
         "}\n" +
-        "elements = list;\n";
+        "elements = Array.from(list);\n";
 }

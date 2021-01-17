@@ -11,8 +11,10 @@ public interface IJSBuilder {
     IJSBuilder listToOne(By locator);
     IJSBuilder oneToList(String ctx, By locator);
     IJSBuilder listToList(By locator);
+
     IJSBuilder getResult(String collector);
     IJSBuilder getResultList(String collector);
+
     IJSBuilder trigger(String event);
     IJSBuilder trigger(String event, String options);
     Object executeQuery();

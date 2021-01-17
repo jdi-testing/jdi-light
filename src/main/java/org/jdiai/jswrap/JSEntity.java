@@ -8,8 +8,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static java.util.Arrays.asList;
 
 public class JSEntity<T> extends JSElement {
     protected Class<T> cl;
@@ -42,7 +42,7 @@ public class JSEntity<T> extends JSElement {
         return driver.getOne(attributesToJson(attributes)).asObject(cl);
     }
     public T getEntityFromAttr(String... attributes) {
-        return getEntity(asList(attributes));
+        return getEntity(newList(attributes));
     }
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public List<T> getEntityList(String objectMap) {
@@ -52,6 +52,6 @@ public class JSEntity<T> extends JSElement {
         return driver.getList(attributesToJson(attributes)).asObject(cl);
     }
     public List<T> getEntityListFromAttr(String... attributes) {
-        return getEntityList(asList(attributes));
+        return getEntityList(newList(attributes));
     }
 }

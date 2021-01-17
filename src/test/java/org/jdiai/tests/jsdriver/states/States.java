@@ -32,4 +32,9 @@ public class States {
             login();
         openPage(USERS_PAGE);
     }
+    public static void atPerformancePage() {
+        if (!isLoggedIn())
+            login();
+        openPage(PERFORMANCE_PAGE);
+    }
 }

@@ -11,8 +11,8 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static java.util.Arrays.asList;
 
 public class JSElement {
     protected JSDriver driver;
@@ -54,7 +54,7 @@ public class JSElement {
         return driver.getList("element." + attribute).asString();
     }
     public Json getAttributes(String... attributes) {
-        return getAttributes(asList(attributes));
+        return getAttributes(newList(attributes));
     }
     public Json getAttributes(List<String> attributes) {
         JsonObject json = driver.getOne(attributesToJson(attributes)).asJson();
@@ -65,7 +65,7 @@ public class JSElement {
         return map(objects, json -> new Json(attributes, v -> json.get(v).getAsString()));
     }
     public List<Json> getMultiAttributes(String... attributes) {
-        return getMultiAttributes(asList(attributes));
+        return getMultiAttributes(newList(attributes));
     }
     // endregion
 
@@ -79,7 +79,7 @@ public class JSElement {
         return new Json(styles, json);
     }
     public Json getStyles(String... styles) {
-        return getStyles(asList(styles));
+        return getStyles(newList(styles));
     }
     public Json getAllStyles() {
         JsonObject json =  driver.getOne("{ keys: [...getComputedStyle(element)], " +
@@ -97,7 +97,7 @@ public class JSElement {
         return map(jsonList, j -> new Json(styles, s -> j.get(s).getAsString()));
     }
     public List<Json> getMultiStyles(String... styles) {
-        return getMultiStyles(asList(styles));
+        return getMultiStyles(newList(styles));
     }
     // endregion
 
