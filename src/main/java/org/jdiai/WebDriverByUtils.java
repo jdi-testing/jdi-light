@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
 import static org.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
@@ -61,14 +62,14 @@ public final class WebDriverByUtils {
     }
     public static boolean isIFrame(By by) {
         if (by == null) return false;
-        return by.toString().contains(": frame:");
+        return isClass(by.getClass(), ByFrame.class);
     }
     public static String getByLocator(By by) {
         if (by == null) return null;
+        if (isIFrame(by)) return ((ByFrame) by).locator;
         String byAsString = by.toString();
         int index = byAsString.indexOf(": ") + 2;
-        String locator = byAsString.substring(index);
-        return locator.startsWith("frame:") ? locator.substring(6) : locator;
+        return byAsString.substring(index);
     }
     private static MapArray<String, String> byReplace = new MapArray<>(new Object[][] {
         {"cssSelector", "css"},
@@ -76,6 +77,7 @@ public final class WebDriverByUtils {
         {"className", "class"}
     });
     public static String getByType(By by) {
+        if (isIFrame(by)) return "frame";
         Matcher m = Pattern.compile("By\\.(?<locator>[a-zA-Z]+):.*").matcher(by.toString());
         if (m.find()) {
             String result = m.group("locator");
@@ -143,8 +145,14 @@ public final class WebDriverByUtils {
         return stream(locators).map(WebDriverByUtils::defineLocator).toArray(By[]::new);
     }
     public static By defineLocator(String locator) {
+        if (locator.contains("//"))
+            return By.xpath(locator);
+        if (locator.contains("frame:#"))
+            return ByFrame.id(locator.substring(7));
+        if (locator.contains("frame:"))
+            return ByFrame.css(locator.substring(6));
         return locator.contains("//")
-                ? By.xpath(locator)
-                : By.cssSelector(locator);
+            ? By.xpath(locator)
+            : By.cssSelector(locator);
     }
 }

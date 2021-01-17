@@ -3,7 +3,6 @@ package org.jdiai;
 import org.openqa.selenium.By;
 
 import static org.jdiai.WebDriverByUtils.getByType;
-import static org.jdiai.WebDriverByUtils.isIFrame;
 
 public class GetTypes {
     public static GetData CSS = new GetData(
@@ -32,6 +31,7 @@ public class GetTypes {
             case "class": return CLASS;
             case "css": return CSS;
             case "xpath": return XPATH;
+            case "frame": return ((ByFrame)locator).type.equals("id") ? ID : CSS;
         }
         throw new RuntimeException("Unknown locator type: " + locator);
     }

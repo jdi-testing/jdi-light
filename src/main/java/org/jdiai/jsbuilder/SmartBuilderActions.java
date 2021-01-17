@@ -17,8 +17,10 @@ public class SmartBuilderActions implements IBuilderActions {
         this.builder = builder;
     }
     public String oneToOne(String ctx, By locator) {
-        String jsScript = builder.registerVariable("element") + format(ONE_TO_ONE, MessageFormat.format(dataType(locator).get, ctx, selector(locator, builder)));
-        return isIFrame(locator) ? jsScript + ".contentWindow.document" : jsScript;
+        return builder.registerVariable("element") + format(ONE_TO_ONE, MessageFormat.format(dataType(locator).get + iFrame(locator), ctx, selector(locator, builder)));
+    }
+    private String iFrame(By locator) {
+        return isIFrame(locator) ? ".contentWindow.document" : "";
     }
     public String oneToList(String ctx, By locator) {
         if (isIFrame(locator))
@@ -30,8 +32,7 @@ public class SmartBuilderActions implements IBuilderActions {
     public String listToOne(By locator) {
         builder.registerVariables("found", "i", "element", "first");
         builder.registerFunction("filter", FILTER_FUNC);
-        String jsScript = format(LIST_TO_ONE, MessageFormat.format(dataType(locator).get, "elements[i]", selector(locator, builder)));
-        return isIFrame(locator) ? jsScript + ".contentWindow.document" : jsScript;
+        return format(LIST_TO_ONE, MessageFormat.format(dataType(locator).get + iFrame(locator), "elements[i]", selector(locator, builder)));
     }
     public String listToList(By locator) {
         if (isIFrame(locator))

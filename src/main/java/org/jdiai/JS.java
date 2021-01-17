@@ -10,6 +10,7 @@ import org.jdiai.interfaces.HasLocators;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.HasParent;
 import org.jdiai.jswrap.JSSmart;
+import org.openqa.selenium.By;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
