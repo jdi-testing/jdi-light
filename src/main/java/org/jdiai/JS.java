@@ -19,12 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
+import static com.epam.jdi.tools.LinqUtils.copyList;
+import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.Direction.VECTOR_SIMILARITY;
 import static org.jdiai.ImageTypes.VIDEO_WEBM;
@@ -50,17 +51,17 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         this.actions = new Safe<>(() -> new Actions(driver));
     }
     public JS(WebDriver driver, By... locators) {
-        this(driver, asList(locators));
+        this(driver, newList(locators));
     }
     public JS(WebDriver driver, By locator, Object parent) {
-        this(driver, locatorsFromParent(locator, parent));this.parent = parent;
+        this(driver, locatorsFromParent(locator, parent)); this.parent = parent;
     }
     private static List<By> locatorsFromParent(By locator, Object parent) {
         List<By> locators;
         if (parent != null && isInterface(parent.getClass(), HasLocators.class)) {
             List<By> pLocators = ((HasLocators)parent).locators();
             locators = pLocators != null && pLocators.size() > 0
-                    ? pLocators : new ArrayList<>();
+                    ? copyList(pLocators) : new ArrayList<>();
         } else {
             locators = new ArrayList<>();
         }
@@ -195,7 +196,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public List<String> classes() {
         String cl = attr("class");
         return cl.length() > 0
-                ? asList(cl.split(" "))
+                ? newList(cl.split(" "))
                 : new ArrayList<>();
     }
     public boolean hasClass(String className) {
@@ -474,7 +475,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
             "return false;").equals("true");
     }
 
-    public List<By> locators() { return js.jsDriver().locators; }
+    public List<By> locators() { return locators; }
     protected MapArray<String, String> images;
     protected File imageFile;
 
@@ -528,11 +529,11 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public List<String> validateRelations() {
         MapArray<String, Direction> storedRelations = readRelations(this);
         if (storedRelations.size() == 0) {
-            return asList("No relations found in: " + RELATIONS_STORAGE);
+            return newList("No relations found in: " + RELATIONS_STORAGE);
         }
         List<String> failures = new ArrayList<>();
         if (relations == null || relations.size() == 0) {
-            return asList("No element relations found: use getRelativePosition(...) first and save element relations");
+            return newList("No element relations found: use getRelativePosition(...) first and save element relations");
         }
         MapArray<String, Direction> newRelations = new MapArray<>();
         for (Pair<String, Direction> relation : relations) {

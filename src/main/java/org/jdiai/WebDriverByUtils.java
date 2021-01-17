@@ -59,16 +59,21 @@ public final class WebDriverByUtils {
         String byLocator = getByLocator(by);
         return getByFunc(by).apply(byLocator);
     }
+    public static boolean isIFrame(By by) {
+        if (by == null) return false;
+        return by.toString().contains(": frame:");
+    }
     public static String getByLocator(By by) {
         if (by == null) return null;
         String byAsString = by.toString();
         int index = byAsString.indexOf(": ") + 2;
-        return byAsString.substring(index);
+        String locator = byAsString.substring(index);
+        return locator.startsWith("frame:") ? locator.substring(6) : locator;
     }
     private static MapArray<String, String> byReplace = new MapArray<>(new Object[][] {
-            {"cssSelector", "css"},
-            {"tagName", "tag"},
-            {"className", "class"}
+        {"cssSelector", "css"},
+        {"tagName", "tag"},
+        {"className", "class"}
     });
     public static String getByType(By by) {
         Matcher m = Pattern.compile("By\\.(?<locator>[a-zA-Z]+):.*").matcher(by.toString());

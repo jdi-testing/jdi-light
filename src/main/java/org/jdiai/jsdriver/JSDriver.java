@@ -122,8 +122,10 @@ public class JSDriver {
             return buildList();
         }
         builder().oneToList("document", firstLocator());
-        for (By locator : listCopy(locators(), 1, -1)) {
-            builder().listToList(locator);
+        if (locators().size() > 2) {
+            for (By locator : listCopy(locators(), 1, -1)) {
+                builder().listToList(locator);
+            }
         }
         builder().listToList(lastLocator());
         return builder();

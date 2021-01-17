@@ -8,9 +8,9 @@ import com.google.gson.JsonObject;
 
 import java.util.*;
 
+import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
 
 public class Json extends MapArray<String, String> {
     public Json(List<String> keys, JsonObject json) {
@@ -26,7 +26,7 @@ public class Json extends MapArray<String, String> {
     }
 
     public Json(Pair<String, String>... pairs) {
-        this(asList(pairs));
+        this(newList(pairs));
     }
     public Json(List<Pair<String, String>> pairs) {
         this();
@@ -59,13 +59,13 @@ public class Json extends MapArray<String, String> {
     }
 
     public Json(String[] array, JFunc1<String, String> value) {
-        this(asList(array), value);
+        this(newList(array), value);
     }
     public <T> Json(T[] array, JFunc1<T, String> key, JFunc1<T, String> value) {
         this(array, key, value, false);
     }
     public <T> Json(T[] array, JFunc1<T, String> key, JFunc1<T, String> value, boolean ignoreNotUnique) {
-        this(asList(array), key, value, ignoreNotUnique);
+        this(newList(array), key, value, ignoreNotUnique);
     }
 
     public Json(int count, JFunc1<Integer, String> keyFunc, JFunc1<Integer, String> value) {
@@ -136,6 +136,6 @@ public class Json extends MapArray<String, String> {
         }
     }
     public Json(String[] keys, String[] values) {
-        this(asList(keys), asList(values));
+        this(newList(keys), newList(values));
     }
 }

@@ -6,4 +6,5 @@ public class Pages {
     public static String HOME_PAGE = DOMAIN + "/index.html";
     public static String USERS_PAGE = DOMAIN + "/user-table.html";
     public static String SIMPLE_PAGE = DOMAIN + "/simple-table.html";
+    public static String PERFORMANCE_PAGE = DOMAIN + "/performance.html";
 }

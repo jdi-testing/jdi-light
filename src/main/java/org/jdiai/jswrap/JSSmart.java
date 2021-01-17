@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.map;
-import static java.util.Arrays.asList;
+import static com.epam.jdi.tools.LinqUtils.newList;
 
 public class JSSmart extends JSElement {
     public JSSmart(WebDriver driver, List<By> locators) {
@@ -18,7 +18,7 @@ public class JSSmart extends JSElement {
         this.driver.setBuilder(new JSBuilder(driver, new SmartBuilderActions()));
     }
     public JSSmart(WebDriver driver, By... locators) {
-        this(driver, asList(locators));
+        this(driver, newList(locators));
     }
 
     public String getAttribute(String attribute) {
@@ -29,7 +29,7 @@ public class JSSmart extends JSElement {
         return new Json(attributes, s -> json.get(s).getAsString());
     }
     public Json getAttributes(String... attributes) {
-        return getAttributes(asList(attributes));
+        return getAttributes(newList(attributes));
     }
     public List<String> getAttributeList(String attribute) {
         return driver.getList("element." + attribute).asString();
@@ -39,7 +39,7 @@ public class JSSmart extends JSElement {
         return map(objects, json -> new Json(attributes, v -> json.get(v).getAsString()));
     }
     public List<Json> getMultiAttributes(String... attributes) {
-        return getMultiAttributes(asList(attributes));
+        return getMultiAttributes(newList(attributes));
     }
     public JsonObject getJson(String json) {
         return driver.getOne(json).asJson();
@@ -67,7 +67,7 @@ public class JSSmart extends JSElement {
         return (T) driver.getOne(attributesToJson(attributes)).asObject(entity);
     }
     public <T> T getEntityFromAttr(String... attributes) {
-        return getEntity(asList(attributes));
+        return getEntity(newList(attributes));
     }
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public <T> List<T> getEntityList(String objectMap) {
@@ -77,6 +77,6 @@ public class JSSmart extends JSElement {
         return map(driver.getList(attributesToJson(attributes)).asObject(entity), el -> (T) el);
     }
     public <T> List<T> getEntityListFromAttr(String... attributes) {
-        return getEntityList(asList(attributes));
+        return getEntityList(newList(attributes));
     }
 }
