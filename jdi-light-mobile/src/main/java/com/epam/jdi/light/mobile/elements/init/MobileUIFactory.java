@@ -50,7 +50,8 @@ public class MobileUIFactory extends UIFactory {
     }
 
     public static MobileUIElement $(MobileBaseElement appBaseElement, String valueToFilter) {
-        new MobileWebList(appBaseElement.core().getLocator()).size();
+        new MobileWebList(appBaseElement.core().getLocator())
+                .getAll();
 
         new WebDriverWait(getDriver(), 2).until(ExpectedConditions
                 .presenceOfAllElementsLocatedBy(appBaseElement.core().getLocator()));
