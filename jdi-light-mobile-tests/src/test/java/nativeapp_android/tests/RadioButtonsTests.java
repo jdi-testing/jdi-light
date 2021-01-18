@@ -22,6 +22,12 @@ public class RadioButtonsTests extends ApiDemosTestInit {
     }
 
     @Test
+    public void xxxTest() {
+        $(radioButton, "Snack").click();
+        logChose.is().displayed();
+    }
+
+    @Test
     public void clickOverAllRadioButtons() {
         $(radioButton, "Snack").click();
         logChose.is().displayed();

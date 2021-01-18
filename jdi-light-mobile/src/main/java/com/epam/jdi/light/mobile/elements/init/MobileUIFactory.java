@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
+import com.epam.jdi.light.mobile.elements.complex.MobileWebList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -49,6 +50,8 @@ public class MobileUIFactory extends UIFactory {
     }
 
     public static MobileUIElement $(MobileBaseElement appBaseElement, String valueToFilter) {
+        new MobileWebList(appBaseElement.core().getLocator()).size();
+
         new WebDriverWait(getDriver(), 2).until(ExpectedConditions
                 .presenceOfAllElementsLocatedBy(appBaseElement.core().getLocator()));
         List<MobileUIElement> originalElementList = appBaseElement.core().getWebElements()
