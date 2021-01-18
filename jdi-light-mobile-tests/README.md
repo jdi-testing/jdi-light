@@ -57,7 +57,7 @@ If your version of Appium has its own URL (not http://0.0.0.0:4723), specify it 
 
 5. Run tests from JDI Light Mobile tests directory:<br>
 <b>Directory android10NonApplicationTests</b><br>
-<code>mvn clean test</code>
+<code>mvn clean test site -Dsuite.xml.file=src/test/resources/androidApps.xml</code>
   
 <b>System test also available for Android 11. There are in package SystemAndroid11Tests</b><br>  
 
