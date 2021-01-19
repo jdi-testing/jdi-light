@@ -50,25 +50,6 @@ public class MobileWebList extends WebList {
 
     protected CacheValue<MapArray<String, MobileUIElement>> map = new CacheValue<>(MapArray::new);
 
-//    @Override
-//    public MobileUIElement getUIElement(String value) {
-//        MobileUIElement element = locator.isTemplate()
-//                ? new MobileUIElement(base(), getLocator(value), nameFromValue(value))
-//                : getNewElementByValue(value);
-//        map.get().update(value, element);
-//        return element;
-//    }
-
-//    @Override
-//    protected MobileUIElement getNewElementByValue(String value) {
-//        refresh();
-//        if (locator.isXPath())
-//            return new MobileUIElement(base(), locator.addText(value), nameFromValue(value), parent);
-//        MobileUIElement result = firstUIElement(value);
-//        if (result == null)
-//            throw exception("Failed to get '%s' in list '%s'. No elements with this name found", value, getName());
-//        return result;
-//    }
 
     private MobileUIElement getElementByLocator(int getIndex, int index) {
         return locator.isXPath()
@@ -135,35 +116,66 @@ public class MobileWebList extends WebList {
     }
 
     @JDIAction(level = DEBUG)
+    @Override
     public MobileWebList elements(int minAmount) {
         return new MobileWebList(uiElements(minAmount));
     }
 
-//    @Override
-//    public Iterator<MobileUIElement> iterator() {
-//        return LinqUtils.map(uiElements(0), el -> $(el)).iterator();
-//    }
+    public Iterator<MobileUIElement> iteratorMobile() {
+        return LinqUtils.map(uiElements(0), el -> $(el)).iterator();
+    }
 
-//    @Override
-//    protected MobileUIElement firstUIElement(String value) {
-//        MapArray<String, MobileUIElement> nameElement = new MapArray<>();
-//        try {
-//            for (MobileUIElement element : elements(1)) {
-//                String name = getElementName(element);
-//                nameElement.add(name, element);
-//                if (namesEqual(name, value))
-//                    return element;
-//            }
-//            return null;
-//        } finally {
-//            if (map.hasValue()) {
-//                for (Pair<String, MobileUIElement> pair : map.get())
-//                    if (!any(nameElement.keys(), name -> namesEqual(name, pair.key)))
-//                        nameElement.add(pair);
-//            }
-//            map.set(nameElement);
-//        }
-//    }
+    /**
+     * @param index
+     */
+    @Override
+    public MobileUIElement get(int index) {
+        if (index < getStartIndex())
+            throw exception("Can't get element with index '%s'. Index should be %s or more", index, getStartIndex());
+        return getByIndex(index);
+    }
 
+    @Override
+    protected MobileUIElement firstUIElement(String value) {
+        MapArray<String, MobileUIElement> nameElement = new MapArray<>();
+        try {
+            MobileWebList elements = elements(1);
+            for (int i = 0; i < elements.size(); i++) {
+                MobileUIElement element = elements.get(i);
+                String name = getElementName(element);
+                nameElement.add(name, element);
+                if (namesEqual(name, value))
+                    return element;
+            }
+            return null;
+        } finally {
+            if (map.hasValue()) {
+                for (Pair<String, MobileUIElement> pair : map.get())
+                    if (!any(nameElement.keys(), name -> namesEqual(name, pair.key)))
+                        nameElement.add(pair);
+            }
+            map.set(nameElement);
+        }
+    }
+
+    @Override
+    public MobileUIElement getUIElement(String value) {
+        MobileUIElement element = locator.isTemplate()
+                ? new MobileUIElement(base(), getLocator(value), nameFromValue(value))
+                : getNewElementByValue(value);
+        map.get().update(value, element);
+        return element;
+    }
+
+    @Override
+    protected MobileUIElement getNewElementByValue(String value) {
+        refresh();
+        if (locator.isXPath())
+            return new MobileUIElement(base(), locator.addText(value), nameFromValue(value), parent);
+        MobileUIElement result = firstUIElement(value);
+        if (result == null)
+            throw exception("Failed to get '%s' in list '%s'. No elements with this name found", value, getName());
+        return result;
+    }
 
 }

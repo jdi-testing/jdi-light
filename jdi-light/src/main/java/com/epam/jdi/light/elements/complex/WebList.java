@@ -182,7 +182,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
                     "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator(), this));
         return getListElements(minAmount);
     }
-
     @Override
     public Iterator<UIElement> iterator() {
         return LinqUtils.map(uiElements(0), el -> $(el)).iterator();
