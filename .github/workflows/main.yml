@@ -24,7 +24,7 @@ env:
 
 on:
   push:
-    branches: [ test-ga ]
+    branches: [ test_ga ]
 
 jobs:
   build:
