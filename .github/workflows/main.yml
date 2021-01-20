@@ -45,6 +45,7 @@ jobs:
       uses: nanasess/setup-chromedriver@master
     - name: Prepare environment
       run: |
+        echo Installed chrome_driver in $CHROMEWEBDRIVER
         java -Xmx32m -version
         ls -lah
         google-chrome-stable --version
