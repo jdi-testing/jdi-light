@@ -41,6 +41,8 @@ jobs:
       with:
         java-version: ${{ matrix.java }}
         java-package: jdk
+    - name: Prepare Selenium
+      uses: nanasess/setup-chromedriver@master
     - name: Prepare environment
       run: |
         java -Xmx32m -version
