@@ -50,7 +50,7 @@ jobs:
           
     - name: Welcome to JDI
       run: |
-        echo ------------------- WELCOME TO JDI ----------------------
+        echo ------------------- WELCOME TO JDI -----------------------
         mvn --version
 
     - name: Compile jdi code
