@@ -20,7 +20,7 @@ env:
     EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
     PERFORMANCE: "jdi-performance"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
-    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-extensions --disable-gpu --remote-debugging-port=922 --window-size=1920,1080"
+    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --remote-debugging-port=922 --window-size=1920,1080"
 
 on:
   push:
@@ -29,7 +29,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         java: [8]
