@@ -54,11 +54,10 @@ jobs:
         mvn --version
 
     - name: Compile jdi code
-      run: mvn install -DskipTests
+      run: mvn -ntp install -DskipTests
 
     - name: Tests BDD
       run: |
-          mvn -ntp install -DskipTests
           echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
           mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
     
