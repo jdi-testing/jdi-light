@@ -47,7 +47,7 @@ jobs:
         ls -lah
         google-chrome-stable --version
         env
-        chrome --headless --disable-gpu --dump-dom https://jdi-testing.github.io/jdi-light/index.html
+        google-chrome-stable --headless --disable-gpu --dump-dom https://jdi-testing.github.io/jdi-light/index.html
           
     - name: Welcome to JDI
       run: |
