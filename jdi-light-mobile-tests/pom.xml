@@ -32,12 +32,6 @@
             <artifactId>jdi-light-html</artifactId>
             <version>1.2.21</version>
         </dependency>
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-mobile</artifactId>
-            <version>1.2.21</version>
-        </dependency>
-
         <!--Allure config in parent-->
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -78,12 +72,6 @@
             <artifactId>assertj-core</artifactId>
             <version>3.17.2</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.14.3</version>
-            <scope>compile</scope>
         </dependency>
 
     </dependencies>
