@@ -3,7 +3,6 @@ package nativeapp_ios;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
-import nativeapp.TestsInit;
 import nativeapp.ios.calendar.CalendarApp;
 import nativeapp.ios.calendar.WelcomePage;
 import org.testng.annotations.AfterClass;
