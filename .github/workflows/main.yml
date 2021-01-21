@@ -20,7 +20,7 @@ env:
     EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
     PERFORMANCE: "jdi-performance"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
-    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --remote-debugging-port=0 --remote-debugging-address=0.0.0.0 --window-size=1920,1080"
+    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --remote-debugging-port=9223 --window-size=1920,1080"
 
 on:
   push:
@@ -47,7 +47,7 @@ jobs:
         ls -lah
         google-chrome-stable --version
         env
-        google-chrome-stable --headless --disable-gpu --dump-dom https://jdi-testing.github.io/jdi-light/index.html
+        id
           
     - name: Welcome to JDI
       run: |
