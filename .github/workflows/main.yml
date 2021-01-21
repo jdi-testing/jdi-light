@@ -4,7 +4,7 @@
 name: Java CI with Maven
 env:
     CHROME_PROPERTIES: "chrome.properties"
-    WITH_PARAMS: "-ntp -Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES" #add -ntp when maven will be >=3.6.1 on travis
+    WITH_PARAMS: "-ntp -Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES"
     UNIT: "-Punit"
     COMMON: "-Pcommon"
     COMPLEX: "-Pcomplex"
@@ -20,7 +20,7 @@ env:
     EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
     PERFORMANCE: "jdi-performance"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
-    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-infobars --disable-extensions --disable-gpu --remote-debugging-port=922"
+    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-extensions --disable-gpu --remote-debugging-port=922 --window-size=1920,1080"
 
 on:
   push:
@@ -47,6 +47,7 @@ jobs:
         ls -lah
         google-chrome-stable --version
         env
+        chrome --headless --disable-gpu --dump-dom https://jdi-testing.github.io/jdi-light/index.html
           
     - name: Welcome to JDI
       run: |
