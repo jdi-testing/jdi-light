@@ -49,8 +49,6 @@ jobs:
         google-chrome --version
         env
         id
-        free
-        ps -aux
 
           
     - name: Welcome to JDI
