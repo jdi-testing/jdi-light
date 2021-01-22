@@ -151,6 +151,7 @@ public class DriverData {
     }
 
     public static void defaultChromeOptions(ChromeOptions cap) {
+        logger.trace("Set default Chrome options");
         HashMap<String, Object> chromePrefs = new HashMap<>();
         setUp("Set Chrome Prefs", () -> {
             chromePrefs.put("credentials_enable_service", false);
@@ -183,6 +184,7 @@ public class DriverData {
     public static JAction1<ChromeOptions> CHROME_OPTIONS = DriverData::defaultChromeOptions;
 
     public static void setupCapability(ChromeOptions cap, String property, String value) {
+        logger.info("Setup Chrome cap %s to %s", property, value);
         switch (property) {
             case ARGUMENTS_PROPERTY:
                 cap.addArguments(value.split(" "));

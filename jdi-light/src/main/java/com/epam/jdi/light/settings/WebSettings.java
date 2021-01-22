@@ -155,7 +155,7 @@ public class WebSettings {
             }
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();
-            if (DRIVER.name.equalsIgnoreCase(DEFAULT_DRIVER)) {
+            if (!DRIVER.name.equalsIgnoreCase(DEFAULT_DRIVER)) {
                 fillAction(p -> DRIVER.name = p, "driver");
             }
             fillAction(p -> DRIVER.version = p, "driver.version");
