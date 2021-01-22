@@ -1,5 +1,6 @@
 package com.epam.jdi.light.mobile.elements.init;
 
+
 import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
@@ -49,9 +50,19 @@ public class MobileUIFactory extends UIFactory {
         return element(locator).setup(j -> j.setParent(parent));
     }
 
+    public static MobileWebList $$(@MarkupLocator String locator) {
+        return MobileJDITalk.list(locator);
+    }
+    @Deprecated
+    public static MobileWebList list(@MarkupLocator By byLocator) {
+        return MobileJDITalk.list(byLocator);
+    }
+
     public static MobileUIElement $(MobileBaseElement appBaseElement, String valueToFilter) {
-        new MobileWebList(appBaseElement.core().getLocator())
-                .getAll();
+//        new MobileWebList(appBaseElement.core().getLocator())
+//                .getAll();
+        list(appBaseElement.core().getLocator())
+                .select("Snack");
 
         new WebDriverWait(getDriver(), 2).until(ExpectedConditions
                 .presenceOfAllElementsLocatedBy(appBaseElement.core().getLocator()));
@@ -64,7 +75,4 @@ public class MobileUIFactory extends UIFactory {
                         "Expected element with text " + valueToFilter + "' is missing in the list"));
         return element;
     }
-
-
-
 }

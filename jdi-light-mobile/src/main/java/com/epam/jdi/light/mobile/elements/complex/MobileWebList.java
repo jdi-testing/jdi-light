@@ -21,16 +21,28 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.TextTypes.LABEL;
 import static com.epam.jdi.light.common.TextTypes.SMART_LIST;
+import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.LinqUtils.any;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.namesEqual;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class MobileWebList extends WebList {
+    protected int startIndex = ELEMENT.startIndex;
 
     public MobileWebList(By locator) {
         super(locator);
+    }
+
+    @Override
+    public MobileWebList setName(String name) {
+        super.setName(name);
+        return this;
     }
 
     @Override
@@ -86,7 +98,22 @@ public class MobileWebList extends WebList {
                 : getElementByLocator(getIndex, index);
         return element.setName(nameFromIndex(index));
     }
+    @Override
+    public boolean isUseCache() {
+        return webElements.isUseCache();
+    }
 
+    @Override
+    protected boolean isActual(WebElement element) {
+        try {
+            if (isClass(element.getClass(), MobileUIElement.class))
+                return ((MobileUIElement) element).noWait(() -> isNotBlank(element.getTagName()));
+            return isNotBlank(element.getTagName());
+        } catch (Exception ex) {
+            map.clear();
+            return false;
+        }
+    }
     protected MobileUIElement tryGetByIndex(int index) {
         try {
             return new MobileUIElement(base(), getLocator(index), nameFromIndex(index));
@@ -94,6 +121,45 @@ public class MobileWebList extends WebList {
             throw exception(ex, "Can't get element with index '%s' for template locator. " +
                     "Maybe locator is wrong or you need to get element by name", index);
         }
+    }
+
+    /**
+     * Select the item by the value
+     *
+     * @param value
+     */
+
+    @JDIAction("Select '{0}' for '{name}'")
+    public void select(String value) {
+        tapOnElement(get(value), value);
+    }
+
+    private void tapOnElement(MobileUIElement element, String value) {
+        if (element == null)
+            throw exception("Can't get element '%s'", value);
+        if (textType == LABEL) {
+            if (element.isDisabled())
+                throw exception("Can't perform click. Element is disabled");
+            element
+                    .mobileLabel()
+                    .core()
+                    .tap();
+        } else element.tap();
+    }
+
+    /**
+     * @param value
+     */
+    @JDIAction(level = DEBUG)
+    @Override
+    public MobileUIElement get(String value) {
+        return hasKey(value)
+                ? getByKey(value)
+                : getUIElement(value);
+    }
+
+    protected MobileUIElement getByKey(String value) {
+        return map.get().first((key, v) -> namesEqual(key, value)).value;
     }
 
     protected String getElementName(MobileUIElement element) {
@@ -121,6 +187,20 @@ public class MobileWebList extends WebList {
         return new MobileWebList(uiElements(minAmount));
     }
 
+    protected List<WebElement> uiElements(int minAmount) {
+        if (minAmount < 0)
+            throw exception("uiElements failed. minAmount should be more than 0, but " + minAmount);
+        if (isUseCache()) {
+            if (map.hasValue() && map.get().size() > 0 && map.get().size() >= minAmount && isActualMap())
+                return LinqUtils.select(map.get().values(), el -> el.get());
+            if (webElements.hasValue() && webElements.get().size() > 0 && webElements.get().size() >= minAmount && isActual(webElements.get().get(0)))
+                return webElements.get();
+        }
+        if (locator.isTemplate())
+            throw exception("You call method that can't be used with template locator. " +
+                    "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator(), this));
+        return getListElements(minAmount);
+    }
     public Iterator<MobileUIElement> iteratorMobile() {
         return LinqUtils.map(uiElements(0), el -> $(el)).iterator();
     }
@@ -133,6 +213,12 @@ public class MobileWebList extends WebList {
         if (index < getStartIndex())
             throw exception("Can't get element with index '%s'. Index should be %s or more", index, getStartIndex());
         return getByIndex(index);
+    }
+
+
+    @Override
+    public int getStartIndex() {
+        return startIndex;
     }
 
     @Override
@@ -177,5 +263,4 @@ public class MobileWebList extends WebList {
             throw exception("Failed to get '%s' in list '%s'. No elements with this name found", value, getName());
         return result;
     }
-
 }

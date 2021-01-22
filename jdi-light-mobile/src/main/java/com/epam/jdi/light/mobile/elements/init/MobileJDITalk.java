@@ -1,4 +1,4 @@
-package com.epam.jdi.light.elements.init;
+package com.epam.jdi.light.mobile.elements.init;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
@@ -8,8 +8,12 @@ import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.init.DropClass;
+import com.epam.jdi.light.elements.init.InClass;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
+import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
+import com.epam.jdi.light.mobile.elements.complex.MobileWebList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -19,32 +23,32 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 
-public class JDITalk {
-    public static UIElement element(@MarkupLocator String locator) {
-        UIElement element = locator.matches("[A-Z].*")
-                ? new UIElement()
+public class MobileJDITalk {
+    public static MobileUIElement element(@MarkupLocator String locator) {
+        MobileUIElement element = locator.matches("[A-Z].*")
+                ? new MobileUIElement()
                 : element(defineLocator(locator));
         return element.setName(locator);
     }
-    public static UIElement element(@MarkupLocator By byLocator) {
-        return new UIElement(byLocator);
+    public static MobileUIElement element(@MarkupLocator By byLocator) {
+        return new MobileUIElement(byLocator);
     }
 
-    public static WebList list(@MarkupLocator String locator) {
-        WebList list = locator.matches("[A-Z].*")
-                ? new WebList()
+    public static MobileWebList list(@MarkupLocator String locator) {
+        MobileWebList list = locator.matches("[A-Z].*")
+                ? new MobileWebList()
                 : list(defineLocator(locator));
         return list.setName(locator);
     }
 
-    public static WebList list(@MarkupLocator By byLocator) {
-        return new WebList(byLocator);
+    public static MobileWebList list(@MarkupLocator By byLocator) {
+        return new MobileWebList(byLocator);
     }
-    public static WebList list(List<WebElement> els, String name) {
-        return new WebList(els).setup(e->e.setName(name));
+    public static MobileWebList list(List<WebElement> els, String name) {
+        return new MobileWebList(els).setup(e->e.setName(name));
     }
-    public static WebList list(List<WebElement> els) {
-        return list(els, "Elements list");
+    public static MobileWebList list(List<WebElement> els) {
+        return list(els, "MobileUIElements list");
     }
 
     public static void clickOn(String locator) {

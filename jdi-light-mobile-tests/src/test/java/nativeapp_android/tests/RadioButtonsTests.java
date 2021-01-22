@@ -22,44 +22,38 @@ public class RadioButtonsTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void xxxTest() {
-        $(radioButton, "Snack").click();
-        logChose.is().displayed();
-    }
-
-    @Test
     public void clickOverAllRadioButtons() {
         $(radioButton, "Snack").click();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296728");
-
-        $(radioButton, "Breakfast").click();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296319");
-
-        $(radioButton, "Lunch").click();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296544");
-
-        $(radioButton, "Dinner").click();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296401");
-
-        $(radioButton, "All of them").click();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296294");
+//        logChose.is().displayed();
+//        logChose.is().text("You have selected: 2131296728");
+//
+//        $(radioButton, "Breakfast").click();
+//        logChose.is().displayed();
+//        logChose.is().text("You have selected: 2131296319");
+//
+//        $(radioButton, "Lunch").click();
+//        logChose.is().displayed();
+//        logChose.is().text("You have selected: 2131296544");
+//
+//        $(radioButton, "Dinner").click();
+//        logChose.is().displayed();
+//        logChose.is().text("You have selected: 2131296401");
+//
+//        $(radioButton, "All of them").click();
+//        logChose.is().displayed();
+//        logChose.is().text("You have selected: 2131296294");
     }
 
     @Test
     public void verifyThatButtonsNotSelected() {
-        $(radioButton, "All of them").click();
-        logChose.is().displayed();
-        logChose.is().text("You have selected: 2131296294");
-
-        buttonClear.click();
-        logChose.is().text("You have selected: (none)");
-
-        $(radioButton, "Dinner").click();
-        logChose.is().text("You have selected: 2131296401");
+//        $(radioButton, "All of them").click();
+//        logChose.is().displayed();
+//        logChose.is().text("You have selected: 2131296294");
+//
+//        buttonClear.click();
+//        logChose.is().text("You have selected: (none)");
+//
+//        $(radioButton, "Dinner").click();
+//        logChose.is().text("You have selected: 2131296401");
     }
 }
