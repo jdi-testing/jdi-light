@@ -65,7 +65,6 @@ jobs:
     - name: Tests BDD
       run: |
         echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        echo drivers.folder=/usr/bin/ >> "./$BDD_TESTS/src/test/resources/test.properties"
         mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
     - name: PS list
