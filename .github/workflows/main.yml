@@ -52,6 +52,8 @@ jobs:
         ls -l /opt/google/chrome/google-chrome
         ls -l /etc/alternatives/google-chrome
         ls -l /usr/local/share/chrome_driver
+        chown runner:docker /opt/google/chrome/google-chrome
+        chown runner:docker /usr/local/share/chrome_driver/chromedriver
           
     - name: Welcome to JDI
       run: |
