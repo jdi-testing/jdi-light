@@ -46,8 +46,8 @@ jobs:
         java -Xmx32m -version
         ls -lah
         google-chrome --version
-        alias google-chrome="./usr/bin/google-chrome-stable --no-sandbox --headless --disable-dev-shm-usage"
-        alias chromedriver="./usr/bin/chromedriver"
+        alias google-chrome="/usr/bin/google-chrome-stable --no-sandbox --headless --disable-dev-shm-usage"
+        alias chromedriver="/usr/bin/chromedriver"
         google-chrome --version
         env
         id
