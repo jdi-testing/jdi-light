@@ -48,6 +48,7 @@ jobs:
         google-chrome --version
         env
         id
+        ls -l /usr/bin | grep chrome
           
     - name: Welcome to JDI
       run: |
