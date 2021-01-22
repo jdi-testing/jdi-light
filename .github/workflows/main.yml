@@ -51,6 +51,7 @@ jobs:
         env
         id
         free
+        ps -aux
 
           
     - name: Welcome to JDI
@@ -68,6 +69,10 @@ jobs:
         free
         df -a
         mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+
+    - name: PS list
+      if: ${{ always() }}
+      run: ps -aux
     
     # - name: Tests bootstrap
     #   run: |
