@@ -186,8 +186,10 @@ public class DriverData {
         switch (property) {
             case ARGUMENTS_PROPERTY:
                 cap.addArguments(value.split(" "));
+                logger.trace("Browser args was changed to %s", value);
                 break;
             case PATH_PROPERTY:
+                logger.trace("Browser binary was changed to %s", value);
                 cap.setBinary(value);
                 break;
             default:
