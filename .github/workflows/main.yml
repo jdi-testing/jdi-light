@@ -41,6 +41,8 @@ jobs:
       with:
         java-version: ${{ matrix.java }}
         java-package: jdk
+    - name: Install Chomium
+      run: sudo apt-get install chromium-browser
 
     - name: Prepare environment
       run: |
