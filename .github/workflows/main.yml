@@ -45,7 +45,10 @@ jobs:
       run: |
         java -Xmx32m -version
         ls -lah
-        google-chrome-stable --version
+        google-chrome --version
+        rm /usr/bin/google-chrome
+        alias google-chrome="./usr/bin/google-chrome-stable --no-sandbox --headless --disable-dev-shm-usage"
+        google-chrome --version
         env
         id
           
