@@ -20,7 +20,7 @@ env:
     EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
     PERFORMANCE: "jdi-performance"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
-    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --remote-debugging-port=15223 --disable-extensions --log-level=OFF --window-size=1920,1080"
+    CHROME_ARGS: "--window-size=1920,1080"
 
 on:
   push:
@@ -41,8 +41,6 @@ jobs:
       with:
         java-version: ${{ matrix.java }}
         java-package: jdk
-    - name: Prepare Selenium
-      uses: nanasess/setup-chromedriver@master
 
     - name: Optional display change
       run: |
