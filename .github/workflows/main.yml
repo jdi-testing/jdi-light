@@ -59,8 +59,9 @@ jobs:
 
     - name: Tests BDD
       run: |
-          echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-          mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+        echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        chrome --headless --disable-gpu --dump-dom https://jdi-testing.github.io/jdi-light/index.html
+        mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
     
     # - name: Tests bootstrap
     #   run: |
