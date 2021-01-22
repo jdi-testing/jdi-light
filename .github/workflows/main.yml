@@ -48,12 +48,10 @@ jobs:
         java -Xmx32m -version
         ls -lah
         google-chrome --version
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        sudo apt install ./google-chrome*.deb
-        google-chrome --version
         env
         id
         free
+
           
     - name: Welcome to JDI
       run: |
@@ -68,6 +66,7 @@ jobs:
         echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
         google-chrome --headless --disable-gpu --dump-dom https://jdi-testing.github.io/jdi-light/index.html
         free
+        df -a
         mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
     
     # - name: Tests bootstrap
