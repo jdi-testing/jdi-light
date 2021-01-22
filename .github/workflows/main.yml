@@ -48,12 +48,7 @@ jobs:
         google-chrome --version
         env
         id
-        ls -l /usr/bin | grep chrome
-        ls -l /opt/google/chrome/google-chrome
-        ls -l /etc/alternatives/google-chrome
-        ls -l /usr/local/share/chrome_driver
-        chown runner:docker /opt/google/chrome/google-chrome
-        chown runner:docker /usr/local/share/chrome_driver/chromedriver
+        free
           
     - name: Welcome to JDI
       run: |
@@ -67,6 +62,7 @@ jobs:
       run: |
         echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
         google-chrome --headless --disable-gpu --dump-dom https://jdi-testing.github.io/jdi-light/index.html
+        free
         mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
     
     # - name: Tests bootstrap
