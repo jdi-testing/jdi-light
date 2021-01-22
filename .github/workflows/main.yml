@@ -50,7 +50,6 @@ jobs:
       run: |
         java -Xmx32m -version
         ls -lah
-        google-chrome --version
         env
         id
 
