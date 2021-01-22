@@ -20,7 +20,7 @@ env:
     EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
     PERFORMANCE: "jdi-performance"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
-    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --remote-debugging-port=9223 --window-size=1920,1080"
+    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --remote-debugging-port=15223 --log-level=OFF --window-size=1920,1080"
 
 on:
   push:
@@ -45,9 +45,6 @@ jobs:
       run: |
         java -Xmx32m -version
         ls -lah
-        google-chrome --version
-        alias google-chrome="/usr/bin/google-chrome-stable --no-sandbox --headless --disable-dev-shm-usage"
-        alias chromedriver="/usr/bin/chromedriver"
         google-chrome --version
         env
         id
