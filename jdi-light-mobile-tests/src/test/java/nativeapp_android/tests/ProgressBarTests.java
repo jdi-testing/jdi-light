@@ -9,6 +9,11 @@ import org.testng.annotations.Test;
 
 public class ProgressBarTests extends ApiDemosTestInit {
 
+    private static final String DECREASED_STANDARD_BAR = "49.0";
+    private static final String INCREASED_STANDARD_BAR = "50.0";
+    private static final String DECREASED_SECONDARY_BAR = "74.0";
+    private static final String INCREASED_SECONDARY_BAR = "75.0";
+
     @BeforeMethod
     public void init() {
         MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
@@ -19,35 +24,30 @@ public class ProgressBarTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void isProgressBarHidden() {
-        ProgressBarPage.progressBarLine.is().hidden();
-    }
-
-    @Test
     public void decreaseStandardProgressBar() {
         ProgressBarPage.decreaseStandardButton.is().enabled();
         ProgressBarPage.decreaseStandardButton.click();
-        ProgressBarPage.progressBarLine.isExist();
+        ProgressBarPage.progressBarLine.getProgressValue().equals(DECREASED_STANDARD_BAR);
     }
 
     @Test
     public void increaseStandardProgressBar() {
         ProgressBarPage.increaseStandardButton.is().enabled();
         ProgressBarPage.increaseStandardButton.click();
-        ProgressBarPage.progressBarLine.isExist();
+        ProgressBarPage.progressBarLine.getProgressValue().equals(INCREASED_STANDARD_BAR);
     }
 
     @Test
     public void decreaseSecondaryProgressBar() {
         ProgressBarPage.decreaseSecondaryButton.is().enabled();
         ProgressBarPage.decreaseSecondaryButton.click();
-        ProgressBarPage.progressBarLine.isExist();
+        ProgressBarPage.progressBarLine.getProgressValue().equals(DECREASED_SECONDARY_BAR);
     }
 
     @Test
     public void increaseSecondaryProgressBar() {
         ProgressBarPage.increaseSecondaryButton.is().enabled();
         ProgressBarPage.increaseSecondaryButton.click();
-        ProgressBarPage.progressBarLine.isExist();
+        ProgressBarPage.progressBarLine.getProgressValue().equals(INCREASED_SECONDARY_BAR);
     }
 }

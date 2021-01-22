@@ -1,8 +1,8 @@
 package nativeapp.android.apidemos;
 
 import com.epam.jdi.light.mobile.elements.common.app.Button;
+import com.epam.jdi.light.mobile.elements.common.app.android.ProgressBar;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
-import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
 
 public class ProgressBarPage {
 
