@@ -64,6 +64,7 @@ jobs:
     - name: Tests BDD
       run: |
         echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+        echo path=/usr/bin/chromium-browser >> "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
         google-chrome --headless --disable-gpu --dump-dom https://jdi-testing.github.io/jdi-light/index.html
         free
         df -a
