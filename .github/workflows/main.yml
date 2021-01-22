@@ -49,6 +49,9 @@ jobs:
         env
         id
         ls -l /usr/bin | grep chrome
+        ls -l /opt/google/chrome/google-chrome
+        ls -l /etc/alternatives/google-chrome
+        ls -l /usr/local/share/chrome_driver
           
     - name: Welcome to JDI
       run: |
