@@ -36,7 +36,6 @@ public class JDITalk {
                 : list(defineLocator(locator));
         return list.setName(locator);
     }
-
     public static WebList list(@MarkupLocator By byLocator) {
         return new WebList(byLocator);
     }
