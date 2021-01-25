@@ -50,9 +50,7 @@ jobs:
 #        sudo apt-get install chromium-browser
     - name: Install geckodriver
       run: |
-        json=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest)
-        url=$(echo "$json" | jq -r '.assets[].browser_download_url | select(contains("linux64"))')
-        curl -s -L "$url" | tar -xz
+        curl -s -L "https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz" | tar -xz
         chmod +x geckodriver
         sudo mv geckodriver "/usr/local/bin"
         sudo ln -s /usr/local/bin/geckodriver /usr/bin/geckodriver
