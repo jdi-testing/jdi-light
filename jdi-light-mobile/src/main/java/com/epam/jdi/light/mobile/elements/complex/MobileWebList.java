@@ -168,6 +168,12 @@ public class MobileWebList extends WebList {
                 : getUIElement(value);
     }
 
+    protected boolean hasKey(String value) {
+        if (map.hasValue() && any(map.get().keys(), key -> namesEqual(key, value)))
+            return isActual(getByKey(value));
+        return false;
+    }
+
     protected MobileUIElement getByKey(String value) {
         return map.get().first((key, v) -> namesEqual(key, value)).value;
     }
@@ -212,8 +218,9 @@ public class MobileWebList extends WebList {
         return getListElements(minAmount);
     }
 
-    public Iterator<MobileUIElement> iteratorMobile() {
-        return LinqUtils.map(uiElements(0), el -> $(el)).iterator();
+    @Override
+    public boolean isActualMap() {
+        return isActual(map.get().values().get(0));
     }
 
     /**
@@ -238,7 +245,7 @@ public class MobileWebList extends WebList {
         try {
             MobileWebList elements = elements(1);
             for (int i = 0; i < elements.size(); i++) {
-                MobileUIElement element = elements.get(i);
+                MobileUIElement element = elements.get(i + 1);
                 String name = getElementName(element);
                 nameElement.add(name, element);
                 if (namesEqual(name, value))
