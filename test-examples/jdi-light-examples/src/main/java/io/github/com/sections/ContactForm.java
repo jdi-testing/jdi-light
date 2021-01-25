@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 public class ContactForm extends Form<User> {
 	WebElement firstName;
-	WebElement lastName
+	WebElement lastName;
 	WebElement position;
 	WebElement passportNumber;
 	WebElement passportSeria;

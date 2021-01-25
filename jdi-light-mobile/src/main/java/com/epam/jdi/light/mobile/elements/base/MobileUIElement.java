@@ -4,9 +4,12 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
+
+import com.epam.jdi.light.mobile.elements.common.app.android.Label;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.map.MapArray;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.LongPressOptions;
@@ -19,6 +22,7 @@ import java.time.Duration;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.mobile.CoordinateConversionHelper.getCoordinatesOnScreen;
 
 public class MobileUIElement extends UIElement implements HasTouchActions {
@@ -147,6 +151,44 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return driver();
     }
 
+
+    public Label mobileLabel() {
+        return new Label().setup(Label.class, j->j
+                .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))
+                .setName(getName() + " label"));
+    }
+    //region Aliases
+    /** getAllAttributes alias */
+    public MapArray<String, String> attrs() { return getAllAttributes(); }
+    /** getAttribute alias */
+    public String attr(String value) { return getAttribute(value); }
+    /** getText alias */ @Override
+    public String text() { return text(textType); }
+    /** getCssValue alias */
+    public String css(String prop) {
+        return getCssValue(prop);
+    }
+    //endregion
+
+    //region SetValue
+    public void setValue(String value) {
+        input(value);
+    }
+    public String getValue() {
+        return getText();
+    }
+    //endregion
+    /**
+     * Get all element's attributes
+     */
+    @JDIAction(level = DEBUG)
+    public MapArray<String, String> getAllAttributes() {
+        List<String> jsList;
+        try {
+            jsList = (List<String>) js().executeScript("var s = []; var attrs = arguments[0].attributes; for (var l = 0; l < attrs.length; ++l) { var a = attrs[l]; s.push(a.name + '=\"' + a.value + '\"'); } ; return s;", getWebElement());
+            return new MapArray<>(jsList, r -> r.split("=")[0], r -> r.split("=")[1].replace("\"", ""));
+        } catch (Exception ignore) { return new MapArray<>(); }
+    }
     @Override
     protected boolean enabled() {
         if (hasClass("active") || hasAttribute("enabled"))
