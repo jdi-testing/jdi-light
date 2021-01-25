@@ -21,37 +21,37 @@ public class RadioButtonsTests extends ApiDemosTestInit {
 
     @Test
     public void clickOverAllRadioButtons() {
-        radioButton.select(1);
+        radioButton.select("Snack");
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296728");
 
-        radioButton.select(2);
+        radioButton.select("Breakfast");
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296319");
 
-        radioButton.select(3);
+        radioButton.select("Lunch");
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296544");
 
-        radioButton.select(4);
+        radioButton.select("Dinner");
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296401");
 
-        radioButton.select(5);
+        radioButton.select("All of Them");
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296294");
     }
 
     @Test
     public void verifyThatButtonsNotSelected() {
-        radioButton.select(5);
+        radioButton.select("All of Them");
         logChose.is().displayed();
         logChose.is().text("You have selected: 2131296294");
 
         buttonClear.click();
         logChose.is().text("You have selected: (none)");
 
-        radioButton.select(4);
+        radioButton.select("Dinner");
         logChose.is().text("You have selected: 2131296401");
     }
 }
