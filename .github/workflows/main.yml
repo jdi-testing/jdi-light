@@ -63,7 +63,7 @@ jobs:
         mvn --version
 
     - name: Prepare configs
-        run: |
+      run: |
           echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
           echo arguments=$FIREFOX_ARGS > "./$BDD_TESTS/src/test/resources/$FIREFOX_PROPERTIES"
           echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
