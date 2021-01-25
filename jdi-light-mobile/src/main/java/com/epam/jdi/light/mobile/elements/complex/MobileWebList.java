@@ -46,7 +46,7 @@ public class MobileWebList extends WebList {
     }
 
     @Override
-    public UIElement core() {
+    public MobileUIElement core() {
         return new MobileUIElement(base());
     }
 
@@ -98,6 +98,7 @@ public class MobileWebList extends WebList {
                 : getElementByLocator(getIndex, index);
         return element.setName(nameFromIndex(index));
     }
+
     @Override
     public boolean isUseCache() {
         return webElements.isUseCache();
@@ -114,6 +115,7 @@ public class MobileWebList extends WebList {
             return false;
         }
     }
+
     protected MobileUIElement tryGetByIndex(int index) {
         try {
             return new MobileUIElement(base(), getLocator(index), nameFromIndex(index));
@@ -124,27 +126,35 @@ public class MobileWebList extends WebList {
     }
 
     /**
+     * Select the item by the index
+     *
+     * @param index
+     */
+    @JDIAction("Select '{0}' for '{name}'")
+    public void select(int index) {
+        clickOnElement(get(index), index + "");
+    }
+
+    /**
      * Select the item by the value
      *
      * @param value
      */
 
     @JDIAction("Select '{0}' for '{name}'")
+    @Override
     public void select(String value) {
-        tapOnElement(get(value), value);
+        clickOnElement(get(value), value);
     }
 
-    private void tapOnElement(MobileUIElement element, String value) {
+    private void clickOnElement(UIElement element, String value) {
         if (element == null)
             throw exception("Can't get element '%s'", value);
         if (textType == LABEL) {
             if (element.isDisabled())
                 throw exception("Can't perform click. Element is disabled");
-            element
-                    .mobileLabel()
-                    .core()
-                    .tap();
-        } else element.tap();
+            element.label().click();
+        } else element.click();
     }
 
     /**
@@ -201,6 +211,7 @@ public class MobileWebList extends WebList {
                     "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator(), this));
         return getListElements(minAmount);
     }
+
     public Iterator<MobileUIElement> iteratorMobile() {
         return LinqUtils.map(uiElements(0), el -> $(el)).iterator();
     }
@@ -216,10 +227,10 @@ public class MobileWebList extends WebList {
     }
 
 
-    @Override
-    public int getStartIndex() {
-        return startIndex;
-    }
+//    @Override
+//    public int getStartIndex() {
+//        return startIndex;
+//    }
 
     @Override
     protected MobileUIElement firstUIElement(String value) {

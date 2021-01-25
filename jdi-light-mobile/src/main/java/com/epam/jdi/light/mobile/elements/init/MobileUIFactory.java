@@ -3,20 +3,14 @@ package com.epam.jdi.light.mobile.elements.init;
 
 import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import com.epam.jdi.light.mobile.elements.complex.MobileWebList;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class MobileUIFactory extends UIFactory {
 
@@ -53,26 +47,20 @@ public class MobileUIFactory extends UIFactory {
     public static MobileWebList $$(@MarkupLocator String locator) {
         return MobileJDITalk.list(locator);
     }
-    @Deprecated
-    public static MobileWebList list(@MarkupLocator By byLocator) {
-        return MobileJDITalk.list(byLocator);
+
+    public static MobileWebList $$(@MarkupLocator String locator, Object parent) {
+        return MobileJDITalk.list(locator).setup(j -> j.setParent(parent));
     }
 
-    public static MobileUIElement $(MobileBaseElement appBaseElement, String valueToFilter) {
-//        new MobileWebList(appBaseElement.core().getLocator())
-//                .getAll();
-        list(appBaseElement.core().getLocator())
-                .select("Snack");
+    public static MobileWebList $$(@MarkupLocator By locator) {
+        return MobileJDITalk.list(locator);
+    }
 
-        new WebDriverWait(getDriver(), 2).until(ExpectedConditions
-                .presenceOfAllElementsLocatedBy(appBaseElement.core().getLocator()));
-        List<MobileUIElement> originalElementList = appBaseElement.core().getWebElements()
-                .stream().map(MobileUIElement::new).collect(Collectors.toList());
-        MobileUIElement element = originalElementList.stream()
-                .filter(item -> item.getText().contains(valueToFilter))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException(
-                        "Expected element with text " + valueToFilter + "' is missing in the list"));
-        return element;
+    public static MobileWebList $$(@MarkupLocator By locator, Object parent) {
+        return MobileJDITalk.list(locator).setup(j -> j.setParent(parent));
+    }
+
+    public static MobileWebList $$(List<WebElement> els, String name) {
+        return MobileJDITalk.list(els, name);
     }
 }
