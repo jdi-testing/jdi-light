@@ -82,9 +82,9 @@ jobs:
       if: ${{ always() }}
       run: mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
-    - name: Run tests - angular unit tests
-      if: ${{ always() }}
-      run: mvn verify $WITH_PARAMS $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
+#    - name: Run tests - angular unit tests
+#      if: ${{ always() }}
+#      run: mvn verify $WITH_PARAMS $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Collect reports
       if: ${{ always() }}
