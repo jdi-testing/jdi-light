@@ -62,27 +62,41 @@ jobs:
         echo ------------------- WELCOME TO JDI -----------------------
         mvn --version
 
+    - name: Prepare configs
+        run: |
+          echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
+          echo arguments=$FIREFOX_ARGS > "./$BDD_TESTS/src/test/resources/$FIREFOX_PROPERTIES"
+          echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
+          echo arguments=$FIREFOX_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$FIREFOX_PROPERTIES"
+          echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
+          echo arguments=$FIREFOX_ARGS > "./$ANGULAR_TESTS/src/test/resources/$FIREFOX_PROPERTIES"
+
     - name: Compile jdi code
       run: mvn -ntp install -DskipTests
 
     - name: Tests BDD
       run: |
-        echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-        echo arguments=$FIREFOX_ARGS > "./$BDD_TESTS/src/test/resources/$FIREFOX_PROPERTIES"
         mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
 
     - name: PS list
       if: ${{ always() }}
       run: ps -aux
     
-    # - name: Tests bootstrap
-    #   run: |
+    - name: Tests bootstrap
+      if: ${{ always() }}
+      run: |
     #       mvn -ntp install -DskipTests
     #       echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
-    #       mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+           mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
-    # - name: Run tests - angular unit tests
-    #   run: | 
+    - name: Run tests - angular unit tests
+      if: ${{ always() }}
+      run: |
     #       mvn -ntp install -DskipTests
     #       echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-    #       mvn verify $WITH_PARAMS $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
+           mvn verify $WITH_PARAMS $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
+
+    - name: Collect reports
+      if: ${{ always() }}
+      run: |
+        echo Collecting Allure Reports....
