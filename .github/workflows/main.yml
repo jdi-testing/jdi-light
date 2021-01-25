@@ -44,10 +44,18 @@ jobs:
       with:
         java-version: ${{ matrix.java }}
         java-package: jdk
-    - name: Install Chomium
+#    - name: Install Chomium
+#      run: |
+#        sudo apt-get remove google-chrome-stable
+#        sudo apt-get install chromium-browser
+    - name: Install geckodriver
       run: |
-        sudo apt-get remove google-chrome-stable
-        sudo apt-get install chromium-browser
+        json=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest)
+        url=$(echo "$json" | jq -r '.assets[].browser_download_url | select(contains("linux64"))')
+        curl -s -L "$url" | tar -xz
+        chmod +x geckodriver
+        sudo mv geckodriver "/usr/local/bin"
+        sudo ln -s /usr/local/bin/geckodriver /usr/bin/geckodriver
 
     - name: Prepare environment
       run: |
