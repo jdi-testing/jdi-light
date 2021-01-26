@@ -57,6 +57,8 @@ public class NotificationTests extends ApiDemosTestInit {
         reply.tap();
         MobileKeyboard.pressKey(new KeyEvent(AndroidKey.A));
         send.tap();
+        System.out.println(messages.size());
+        System.out.println(messages.get(1).getAllAttributes().toString());
 //        $(messageName, YOU).isDisplayed();
 //        $(messageText, MESSAGE).isDisplayed();
 //        $(messageText, TEST_MESSAGE).isDisplayed();

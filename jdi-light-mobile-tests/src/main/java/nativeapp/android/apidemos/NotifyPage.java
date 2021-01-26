@@ -2,6 +2,7 @@ package nativeapp.android.apidemos;
 
 import com.epam.jdi.light.mobile.elements.common.Text;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
+import com.epam.jdi.light.mobile.elements.complex.MobileWebList;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class NotifyPage {
@@ -61,5 +62,8 @@ public class NotifyPage {
 
     @MobileFindBy(xpath = "//android.widget.Switch[@content-desc=\"Airplane mode\"]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ImageView")
     public static Button airplaneModeIcon;
+
+    @MobileFindBy(xpath = "//*[@resource-id='android:id/status_bar_latest_event_content']")
+    public static MobileWebList messages;
 
 }
