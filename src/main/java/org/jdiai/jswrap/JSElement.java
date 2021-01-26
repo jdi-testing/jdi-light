@@ -5,6 +5,7 @@ import org.jdiai.Json;
 import org.jdiai.jsbuilder.IJSBuilder;
 import org.jdiai.jsdriver.JSDriver;
 import org.jdiai.jsproducer.JSProducer;
+import org.jdiai.scripts.NTC;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -77,6 +78,17 @@ public class JSElement {
         String jsonObject = "{ " + print(map(styles, style -> "'" + style + "': getComputedStyle(element)." + style), ", ") + " }";
         JsonObject json = driver.getOne(jsonObject).asJson();
         return new Json(styles, json);
+    }
+    public String color() {
+        return getColor("color");
+    }
+    public String backgroundColor() {
+        return getColor("backgroundColor");
+    }
+    public String getColor(String name) {
+        driver.builder().addJSCode(NTC.script).executeQuery();
+        return driver.getOne("rgb = getComputedStyle(element)."+name+";\n" +
+            "return jdi.ntc.name(rgb)[1]").asString();
     }
     public Json getStyles(String... styles) {
         return getStyles(newList(styles));

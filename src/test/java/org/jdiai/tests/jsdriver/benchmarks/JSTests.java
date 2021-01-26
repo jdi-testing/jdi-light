@@ -25,13 +25,20 @@ public class JSTests extends TestInit {
         atPerformancePage();
     }
 
-    @Test(invocationCount = repeat, enabled = false)
+    @Test(invocationCount = repeat)
     public void getValuesTest() {
         JS userTable = $("#users-table");
         testScenario(() -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList());
         }, () -> userTable.find("tr>td:first-child").js.getAttributeList("innerText"), 30);
+    }
+    @Test(invocationCount = repeat)
+    public void getText() {
+        testScenario(
+            () -> driver().findElement(By.cssSelector("#users-table tr>th")).getText(),
+            () -> $("#users-table tr>th").getText(),
+            500);
     }
     // @Test(invocationCount = repeat)
     // public void getValuesValueTest() {

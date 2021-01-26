@@ -10,6 +10,7 @@ import org.jdiai.interfaces.HasLocators;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.HasParent;
 import org.jdiai.jswrap.JSSmart;
+import org.jdiai.scripts.Whammy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -28,7 +29,9 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.jdiai.ColorMap.asColor;
 import static org.jdiai.Direction.VECTOR_SIMILARITY;
+import static org.jdiai.GetTextTypes.*;
 import static org.jdiai.ImageTypes.VIDEO_WEBM;
 import static org.jdiai.RelationsManager.*;
 import static org.jdiai.VisualSettings.*;
@@ -249,7 +252,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
     public JS setGetTextType(GetTextTypes getTextType) { this.getTextType = getTextType; return this; }
 
-    protected GetTextTypes getTextType;
+    protected GetTextTypes getTextType = INNER_TEXT;
     public String getText() {
         return getText(getTextType);
     }
@@ -474,6 +477,12 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
             "    return true;\n" +
             "}\n" +
             "return false;").equals("true");
+    }
+    public String color() {
+        return js.color();
+    }
+    public String fontColor() {
+        return asColor(js.getStyle("font-color"));
     }
 
     public List<By> locators() { return locators; }
