@@ -10,6 +10,7 @@ import org.jdiai.interfaces.HasLocators;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.HasParent;
 import org.jdiai.jswrap.JSSmart;
+import org.jdiai.scripts.Whammy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -29,10 +30,11 @@ import static java.lang.Math.min;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.Direction.VECTOR_SIMILARITY;
+import static org.jdiai.GetTextTypes.INNER_TEXT;
 import static org.jdiai.ImageTypes.VIDEO_WEBM;
 import static org.jdiai.RelationsManager.*;
 import static org.jdiai.VisualSettings.*;
-import static org.jdiai.WebDriverByUtils.defineLocator;
+import static org.jdiai.WebDriverByUtils.NAME_TO_LOCATOR;
 import static org.openqa.selenium.OutputType.*;
 
 public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
@@ -249,7 +251,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
     public JS setGetTextType(GetTextTypes getTextType) { this.getTextType = getTextType; return this; }
 
-    protected GetTextTypes getTextType;
+    protected GetTextTypes getTextType = INNER_TEXT;
     public String getText() {
         return getText(getTextType);
     }
@@ -440,7 +442,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
 
     public JS find(String by) {
-        return find(defineLocator(by));
+        return find(NAME_TO_LOCATOR.execute(by));
     }
     public JS find(By by) {
         return new JS(this.driver, by, this);
@@ -474,6 +476,12 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
             "    return true;\n" +
             "}\n" +
             "return false;").equals("true");
+    }
+    public String fontColor() {
+        return js.color();
+    }
+    public String bgColor() {
+        return js.bgColor();
     }
 
     public List<By> locators() { return locators; }

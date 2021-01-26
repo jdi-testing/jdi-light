@@ -1,4 +1,4 @@
-package org.jdiai;
+package org.jdiai.scripts;
 
 public class Whammy {
     public static final String script =

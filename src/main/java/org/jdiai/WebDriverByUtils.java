@@ -1,6 +1,7 @@
 package org.jdiai;
 
 import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.jdiai.jsbuilder.IJSBuilder;
 import org.openqa.selenium.By;
@@ -142,8 +143,9 @@ public final class WebDriverByUtils {
     }
 
     public static By[] locatorsToBy(String... locators) {
-        return stream(locators).map(WebDriverByUtils::defineLocator).toArray(By[]::new);
+        return stream(locators).map(NAME_TO_LOCATOR).toArray(By[]::new);
     }
+    public static JFunc1<String, By> NAME_TO_LOCATOR = WebDriverByUtils::defineLocator;
     public static By defineLocator(String locator) {
         if (locator.contains("//"))
             return By.xpath(locator);
