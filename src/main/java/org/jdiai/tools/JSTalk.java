@@ -11,6 +11,7 @@ import static org.jdiai.WebDriverByUtils.locatorsToBy;
 
 public class JSTalk {
     public static Safe<WebDriver> DRIVER = new Safe<>(JSWrapper::chromeDriver);
+
     public static WebDriver driver() {
         return DRIVER.get();
     }

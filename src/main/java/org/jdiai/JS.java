@@ -35,6 +35,7 @@ import static org.jdiai.GetTextTypes.*;
 import static org.jdiai.ImageTypes.VIDEO_WEBM;
 import static org.jdiai.RelationsManager.*;
 import static org.jdiai.VisualSettings.*;
+import static org.jdiai.WebDriverByUtils.NAME_TO_LOCATOR;
 import static org.jdiai.WebDriverByUtils.defineLocator;
 import static org.openqa.selenium.OutputType.*;
 
@@ -443,7 +444,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
 
     public JS find(String by) {
-        return find(defineLocator(by));
+        return find(NAME_TO_LOCATOR.execute(by));
     }
     public JS find(By by) {
         return new JS(this.driver, by, this);
