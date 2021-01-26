@@ -29,14 +29,12 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.jdiai.ColorMap.asColor;
 import static org.jdiai.Direction.VECTOR_SIMILARITY;
-import static org.jdiai.GetTextTypes.*;
+import static org.jdiai.GetTextTypes.INNER_TEXT;
 import static org.jdiai.ImageTypes.VIDEO_WEBM;
 import static org.jdiai.RelationsManager.*;
 import static org.jdiai.VisualSettings.*;
 import static org.jdiai.WebDriverByUtils.NAME_TO_LOCATOR;
-import static org.jdiai.WebDriverByUtils.defineLocator;
 import static org.openqa.selenium.OutputType.*;
 
 public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
@@ -479,11 +477,11 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
             "}\n" +
             "return false;").equals("true");
     }
-    public String color() {
+    public String fontColor() {
         return js.color();
     }
-    public String fontColor() {
-        return asColor(js.getStyle("font-color"));
+    public String bgColor() {
+        return js.bgColor();
     }
 
     public List<By> locators() { return locators; }

@@ -7,7 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static org.jdiai.WebDriverByUtils.*;
+import static org.jdiai.WebDriverByUtils.NAME_TO_LOCATOR;
+import static org.jdiai.WebDriverByUtils.locatorsToBy;
 
 public class JSWrapper {
     public static Safe<WebDriver> DRIVER = new Safe<>(JSWrapper::chromeDriver);

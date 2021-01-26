@@ -82,7 +82,7 @@ public class JSElement {
     public String color() {
         return getColor("color");
     }
-    public String backgroundColor() {
+    public String bgColor() {
         return getColor("backgroundColor");
     }
     public String getColor(String name) {
