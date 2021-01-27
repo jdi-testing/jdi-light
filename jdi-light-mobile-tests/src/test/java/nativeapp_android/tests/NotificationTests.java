@@ -12,7 +12,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.mobile.elements.common.MobileDevice.sendSMS;
-import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static nativeapp.android.apidemos.NotifyPage.*;
 
 public class NotificationTests extends ApiDemosTestInit {
@@ -57,9 +56,10 @@ public class NotificationTests extends ApiDemosTestInit {
         reply.tap();
         MobileKeyboard.pressKey(new KeyEvent(AndroidKey.A));
         send.tap();
-//        $(messageName, YOU).isDisplayed();
-//        $(messageText, MESSAGE).isDisplayed();
-//        $(messageText, TEST_MESSAGE).isDisplayed();
+        messageNames.get(1).is().text(NUMBER);
+        messageNames.get(2).is().text(YOU);
+        messageTexts.get(1).is().text(MESSAGE);
+        messageTexts.get(2).is().text(TEST_MESSAGE);
     }
 
     @AfterMethod

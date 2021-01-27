@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 
 import com.epam.jdi.light.mobile.elements.common.app.android.Label;
+import com.epam.jdi.light.mobile.elements.complex.MobileWebList;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
@@ -22,6 +23,8 @@ import java.time.Duration;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.mobile.CoordinateConversionHelper.getCoordinatesOnScreen;
 
@@ -79,6 +82,38 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return this;
     }
 
+    @Override
+    public MobileUIElement find(@MarkupLocator String by) {
+        return $(by, this);
+    }
+
+    @Override
+    public UIElement findFirst(@MarkupLocator String by) {
+        UIElement element = $(by, this);
+        element.strictSearch(false);
+        return element;
+    }
+
+    @Override
+    public MobileUIElement find(@MarkupLocator By by) {
+        return $(by, this);
+    }
+
+    @Override
+    public MobileWebList finds(@MarkupLocator String by) {
+        return $$(by, this);
+    }
+
+    @Override
+    public MobileWebList finds(@MarkupLocator By by) {
+        return $$(by, this);
+    }
+
+    @Override
+    public MobileUIElement firstChild() { return this.find("*"); }
+
+    @Override
+    public MobileWebList children() { return finds("*"); }
 
     @JDIAction("Perform tap on '{name}'")
     public void tap() {
