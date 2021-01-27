@@ -46,14 +46,21 @@ import static org.openqa.selenium.remote.CapabilityType.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class DriverData {
+    public static final String DEFAULT_DRIVER = "chrome";
+    public static final String ARGUMENTS_PROPERTY = "arguments";
+    public static final String PATH_PROPERTY = "path";
+    public static List<String> setupErrors = new ArrayList<>();
+    public static JAction1<ChromeOptions> CHROME_OPTIONS = DriverData::defaultChromeOptions;
+    public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = DriverData::defaultFirefoxOptions;
+    public static JAction1<InternetExplorerOptions> IE_OPTIONS = DriverData::defaultIEOptions;
+    public static JAction1<EdgeOptions> EDGE_OPTIONS = DriverData::defaultEdgeOptions;
+    public static JAction1<OperaOptions> OPERA_OPTIONS = DriverData::defaultOperaOptions;
+    public static JAction1<SafariOptions> SAFARI_OPTIONS = DriverData::defaultSafariOptions;
+
     public static String getDriverFolder() {
         return isNotBlank(DRIVER.path) && !DRIVER.path.equalsIgnoreCase("default")
                 ? DRIVER.path : mergePath(COMMON.testPath, "resources", "drivers");
     }
-
-    public static final String DEFAULT_DRIVER = "chrome";
-    public static final String ARGUMENTS_PROPERTY = "arguments";
-    public static final String PATH_PROPERTY = "path";
 
     public static String chromeDriverPath() {
         return mergePath(getDriverFolder(), getOs() == WIN ? "chromedriver.exe" : "chromedriver");
@@ -140,8 +147,6 @@ public class DriverData {
         return capabilities;
     }
 
-    public static List<String> setupErrors = new ArrayList<>();
-
     public static void setUp(String name, JAction action) {
         try {
             action.invoke();
@@ -180,8 +185,6 @@ public class DriverData {
         // Capabilities from settings
         DRIVER.capabilities.chrome.forEach((property, value) -> setupChomeCapability(cap, property, value));
     }
-
-    public static JAction1<ChromeOptions> CHROME_OPTIONS = DriverData::defaultChromeOptions;
 
     public static void setupChomeCapability(ChromeOptions cap, String property, String value) {
         logger.info("Setup Chrome cap %s to %s", property, value);
@@ -228,8 +231,6 @@ public class DriverData {
         DRIVER.capabilities.firefox.forEach((property, value) -> setupFirefoxCapability(cap, property, value));
     }
 
-    public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = DriverData::defaultFirefoxOptions;
-
     public static void setupFirefoxCapability(FirefoxOptions cap, String property, String value) {
         logger.info("Setup Firefox cap %s to %s", property, value);
         switch (property) {
@@ -244,7 +245,6 @@ public class DriverData {
             default:
                 cap.setCapability(property, stringToPrimitive(value));
         }
-
     }
 
     public static void defaultIEOptions(InternetExplorerOptions cap) {
@@ -272,25 +272,17 @@ public class DriverData {
         DRIVER.capabilities.ie.forEach(cap::setCapability);
     }
 
-    public static JAction1<InternetExplorerOptions> IE_OPTIONS = DriverData::defaultIEOptions;
-
     public static void defaultEdgeOptions(EdgeOptions cap) {
         DRIVER.capabilities.ieEdge.forEach(cap::setCapability);
     }
-
-    public static JAction1<EdgeOptions> EDGE_OPTIONS = DriverData::defaultEdgeOptions;
 
     public static void defaultOperaOptions(OperaOptions cap) {
         DRIVER.capabilities.opera.forEach(cap::setCapability);
     }
 
-    public static JAction1<OperaOptions> OPERA_OPTIONS = DriverData::defaultOperaOptions;
-
     public static void defaultSafariOptions(SafariOptions cap) {
         DRIVER.capabilities.safari.forEach(cap::setCapability);
     }
-
-    public static JAction1<SafariOptions> SAFARI_OPTIONS = DriverData::defaultSafariOptions;
 
     private static WebDriver maximizeScreen(WebDriver driver) {
         try {
