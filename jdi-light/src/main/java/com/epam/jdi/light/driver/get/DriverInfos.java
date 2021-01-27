@@ -24,7 +24,7 @@ public class DriverInfos {
     public static DriverInfo CHROME_INFO = new DriverInfo()
         .set(d -> {
             d.downloadType = CHROME;
-            d.initCapabilities = new ChromeOptions().setHeadless(true);
+            d.initCapabilities = new ChromeOptions();
             d.capabilities = c -> getCapabilities(c, cap -> CHROME_OPTIONS.execute((ChromeOptions) cap));
             d.properties = "webdriver.chrome.driver";
             d.path = DriverData::chromeDriverPath;
@@ -34,7 +34,7 @@ public class DriverInfos {
     public static DriverInfo FIREFOX_INFO = new DriverInfo()
         .set(d -> {
             d.downloadType = FIREFOX;
-            d.initCapabilities = new FirefoxOptions().setHeadless(true);
+            d.initCapabilities = new FirefoxOptions();
             d.capabilities = c -> getCapabilities(c, cap -> FIREFOX_OPTIONS.execute((FirefoxOptions) cap));
             d.properties = "webdriver.gecko.driver";
             d.path = DriverData::firefoxDriverPath;

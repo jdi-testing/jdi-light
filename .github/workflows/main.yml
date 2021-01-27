@@ -53,16 +53,15 @@ jobs:
         env
         id
 
-    - name: Install Reporting utils
+    - name: Install Allure
       run: |
-        echo "Install Allure ${ALLURE_VERSION}"
         curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
         sudo tar -zxvf allure-${ALLURE_VERSION}.tgz -C /opt/
         sudo ln -s /opt/allure-${ALLURE_VERSION}/bin/allure /usr/bin/allure
         allure --version
 
-        echo "Install Netlify-cli"
-        sudo npm install -g netlify-cli
+    - name: Install Allure
+      run: sudo npm install -g netlify-cli
 
     - name: Welcome to JDI
       run: |

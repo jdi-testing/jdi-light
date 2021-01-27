@@ -178,12 +178,12 @@ public class DriverData {
                     cap.setCapability(LOGGING_PREFS, logPrefs);
                 });
         // Capabilities from settings
-        DRIVER.capabilities.chrome.forEach((property, value) -> setupCapability(cap, property, value));
+        DRIVER.capabilities.chrome.forEach((property, value) -> setupChomeCapability(cap, property, value));
     }
 
     public static JAction1<ChromeOptions> CHROME_OPTIONS = DriverData::defaultChromeOptions;
 
-    public static void setupCapability(ChromeOptions cap, String property, String value) {
+    public static void setupChomeCapability(ChromeOptions cap, String property, String value) {
         logger.info("Setup Chrome cap %s to %s", property, value);
         switch (property) {
             case ARGUMENTS_PROPERTY:
@@ -225,10 +225,27 @@ public class DriverData {
         setUp("Firefox: Firefox Profile",
                 () -> cap.setProfile(firefoxProfile));
         // Capabilities from settings
-        DRIVER.capabilities.firefox.forEach(cap::setCapability);
+        DRIVER.capabilities.firefox.forEach((property, value) -> setupFirefoxCapability(cap, property, value));
     }
 
     public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = DriverData::defaultFirefoxOptions;
+
+    public static void setupFirefoxCapability(FirefoxOptions cap, String property, String value) {
+        logger.info("Setup Firefox cap %s to %s", property, value);
+        switch (property) {
+            case ARGUMENTS_PROPERTY:
+                cap.addArguments(value.split(" "));
+                logger.trace("Browser args was changed to %s", value);
+                break;
+            case PATH_PROPERTY:
+                logger.trace("Browser binary was changed to %s", value);
+                cap.setBinary(value);
+                break;
+            default:
+                cap.setCapability(property, stringToPrimitive(value));
+        }
+
+    }
 
     public static void defaultIEOptions(InternetExplorerOptions cap) {
         setUp("IE: introduceFlakinessByIgnoringSecurityDomains",
