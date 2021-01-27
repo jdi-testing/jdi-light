@@ -68,41 +68,12 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
  */
 public class WebSettings {
     public static final ILogger logger = instance("JDI");
-    public static String getDomain() {
-        if (DRIVER.domain != null)
-            return DRIVER.domain;
-        init();
-        return "No Domain Found. Use test.properties or JDISettings.DRIVER.domain";
-    }
-    public static void setDomain(String domain) {
-        DRIVER.domain = domain;
-    }
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
     public static boolean STRICT_SEARCH = true;
-    public static boolean hasDomain() {
-        init();
-        return DRIVER.domain != null && DRIVER.domain.contains("://");
-    }
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
-    public static String useDriver(JFunc<WebDriver> driver) {
-        return WebDriverFactory.useDriver(driver);
-    }
-    public static String useDriver(String driverName) {
-        return WebDriverFactory.useDriver(driverName);
-    }
-    public static String useDriver(DriverTypes driverType) {
-        return WebDriverFactory.useDriver(driverType);
-    }
-    public static String printSmartLocators(IBaseElement el) {
-        try {
-            return "smart: " + format(ELEMENT.smartTemplate, ELEMENT.smartName.value.execute(el.getName()));
-        } catch (Exception ex) {
-            return format("Can't define smart locator(%s, %s)", ELEMENT.smartTemplate, ELEMENT.smartName.key);
-        }
-    }
     public static JFunc1<IBaseElement, WebElement> SMART_SEARCH = el -> {
         switch (ELEMENT.useSmartSearch) {
             case FALSE:
@@ -121,24 +92,61 @@ public class WebSettings {
         SearchContext ctx = getDefaultContext(el.base().driver());
         try {
             List<WebElement> elements = ELEMENT.smartTemplate.equals("#%s")
-                ? ctx.findElements(locator)
-                : getWebElementsFromContext(el.base(), locator);
+                    ? ctx.findElements(locator)
+                    : getWebElementsFromContext(el.base(), locator);
             return filterWebListToWebElement(el.base(), elements);
         } catch (Exception ignore) {
             throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
         }
     };
+    public static boolean initialized = false;
+
+    public static String getDomain() {
+        if (DRIVER.domain != null)
+            return DRIVER.domain;
+        init();
+        return "No Domain Found. Use test.properties or JDISettings.DRIVER.domain";
+    }
+
+    public static void setDomain(String domain) {
+        DRIVER.domain = domain;
+    }
+
+    public static boolean hasDomain() {
+        init();
+        return DRIVER.domain != null && DRIVER.domain.contains("://");
+    }
+
+    public static String useDriver(JFunc<WebDriver> driver) {
+        return WebDriverFactory.useDriver(driver);
+    }
+
+    public static String useDriver(String driverName) {
+        return WebDriverFactory.useDriver(driverName);
+    }
+
+    public static String useDriver(DriverTypes driverType) {
+        return WebDriverFactory.useDriver(driverType);
+    }
+
+    public static String printSmartLocators(IBaseElement el) {
+        try {
+            return "smart: " + format(ELEMENT.smartTemplate, ELEMENT.smartName.value.execute(el.getName()));
+        } catch (Exception ex) {
+            return format("Can't define smart locator(%s, %s)", ELEMENT.smartTemplate, ELEMENT.smartName.key);
+        }
+    }
+
     private static void fillAction(JAction1<String> action, String name) {
         String prop = null;
         try {
             prop = getProperty(name);
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
+        }
         logger.trace("fillAction(%s=%s)", name, prop == null ? "null" : prop);
         if (isBlank(prop)) return;
         action.execute(prop);
     }
-    
-    public static boolean initialized = false;
 
     public static synchronized void init() {
         CHECK_MULTI_THREAD.execute();
@@ -202,19 +210,19 @@ public class WebSettings {
             fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
-            loadCapabilities("ff.capabilities.path","ff.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
-            loadCapabilities("ie.capabilities.path","ie.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
-            loadCapabilities("edge.capabilities.path","edge.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
-            loadCapabilities("opera.capabilities.path","opera.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
-            loadCapabilities("safari.capabilities.path","safari.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
-            loadCapabilities("common.capabilities.path","common.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
+                    p -> p.forEach((key, value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
+            loadCapabilities("ff.capabilities.path", "ff.properties",
+                    p -> p.forEach((key, value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
+            loadCapabilities("ie.capabilities.path", "ie.properties",
+                    p -> p.forEach((key, value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
+            loadCapabilities("edge.capabilities.path", "edge.properties",
+                    p -> p.forEach((key, value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
+            loadCapabilities("opera.capabilities.path", "opera.properties",
+                    p -> p.forEach((key, value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
+            loadCapabilities("safari.capabilities.path", "safari.properties",
+                    p -> p.forEach((key, value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
+            loadCapabilities("common.capabilities.path", "common.properties",
+                    p -> p.forEach((key, value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
 
             initialized = true;
         } catch (Throwable ex) {
@@ -227,29 +235,33 @@ public class WebSettings {
 
     private static ElementArea getClickType(String type) {
         ElementArea clickType = first(getAllEnumValues(ElementArea.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
+                t -> t.toString().trim().replaceAll("[^a-z]", "")
+                        .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
         return clickType != null
                 ? clickType : CENTER;
     }
+
     private static boolean getBoolean(String param) {
         String lowerParams = param.toLowerCase();
         return !lowerParams.equals("off") && !lowerParams.equals("false");
     }
+
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
+                t -> t.toString().trim().replaceAll("[^a-z]", "")
+                        .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
         return textType != null
                 ? textType : SMART_TEXT;
     }
+
     private static SetTextTypes getSetTextType(String type) {
         SetTextTypes setTextType = first(getAllEnumValues(SetTextTypes.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
+                t -> t.toString().trim().replaceAll("[^a-z]", "")
+                        .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
         return setTextType != null
                 ? setTextType : CLEAR_SEND_KEYS;
     }
+
     private static String getRemoteUrl(String prop) {
         String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
         switch (value) {
@@ -257,17 +269,21 @@ public class WebSettings {
             case "saucelabs":
                 DRIVER.capabilities.common = sauceCapabilities();
                 return sauceLabs();
-            case "browserstack": return browserstack();
-            default: return seleniumLocalhost();
+            case "browserstack":
+                return browserstack();
+            default:
+                return seleniumLocalhost();
         }
     }
+
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
         if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
             throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
-                "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
+                    "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }
+
     private static UseSmartSearch getSmartSearchUse(String prop) {
         String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
         switch (value) {
@@ -289,15 +305,21 @@ public class WebSettings {
         String path = "";
         try {
             path = System.getProperty(property, getProperty(property));
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+            logger.trace("Error on read property %s. %s", property, ignore);
+        }
         if (isEmpty(path))
             path = defaultPath;
         Properties properties = new PropReader(path).getProperties();
-        if (properties.isEmpty())
+        if (properties.isEmpty()) {
+            logger.trace("There is no properties in %s", property);
             return;
+        }
         try {
             setCapabilities.execute(properties);
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+            logger.trace("Error set properties %s. %s", property, ignore);
+        }
     }
 
     private static void setSearchStrategy(String p) {
@@ -325,9 +347,12 @@ public class WebSettings {
 
     private static PageLoadStrategy getPageLoadStrategy(String strategy) {
         switch (strategy.toLowerCase()) {
-            case "normal": return NORMAL;
-            case "none": return PageLoadStrategy.NONE;
-            case "eager": return EAGER;
+            case "normal":
+                return NORMAL;
+            case "none":
+                return PageLoadStrategy.NONE;
+            case "eager":
+                return EAGER;
         }
         return NORMAL;
     }
@@ -360,16 +385,24 @@ public class WebSettings {
         }
         return properties;
     }
+
     private static LogInfoDetails getInfoDetailsLevel(String option) {
         switch (option.toLowerCase()) {
-            case "none": return LogInfoDetails.NONE;
-            case "name": return LogInfoDetails.NAME;
-            case "locator": return LogInfoDetails.LOCATOR;
-            case "context": return LogInfoDetails.CONTEXT;
-            case "element": return LogInfoDetails.ELEMENT;
-            default: return LogInfoDetails.ELEMENT;
+            case "none":
+                return LogInfoDetails.NONE;
+            case "name":
+                return LogInfoDetails.NAME;
+            case "locator":
+                return LogInfoDetails.LOCATOR;
+            case "context":
+                return LogInfoDetails.CONTEXT;
+            case "element":
+                return LogInfoDetails.ELEMENT;
+            default:
+                return LogInfoDetails.ELEMENT;
         }
     }
+
     private static List<com.epam.jdi.light.logger.Strategy> getActionStrategy(String strategy) {
         if (isBlank(strategy))
             return asList(FAIL);
@@ -381,9 +414,11 @@ public class WebSettings {
         try {
             String[] split = strategy.split("\\|");
             strategies = map(split, s -> parseStrategy(s.trim()));
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+        }
         return strategies;
     }
+
     private static List<HighlightStrategy> getHighlightStrategy(String strategy) {
         if (isBlank(strategy) || strategy.trim().equalsIgnoreCase("off"))
             return new ArrayList<>();
@@ -393,16 +428,22 @@ public class WebSettings {
         try {
             String[] split = strategy.split("\\|");
             strategies = map(split, s -> HighlightStrategy.parseStrategy(s.trim()));
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+        }
         return strategies;
     }
+
     private static Strategies getStrategy(String prop) {
         String strategy = prop.trim().toLowerCase().replaceAll("[^a-z]", "");
         switch (strategy) {
-            case "jdi": return JDI;
-            case "jdismart": return JDI_SMART;
-            case "selenium": return SELENIUM;
-            default: return JDI;
+            case "jdi":
+                return JDI;
+            case "jdismart":
+                return JDI_SMART;
+            case "selenium":
+                return SELENIUM;
+            default:
+                return JDI;
         }
     }
 }
