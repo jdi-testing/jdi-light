@@ -70,12 +70,12 @@ jobs:
 
     - name: Prepare configs
       run: |
-          echo arguments=$CHROME_ARGS > "./${BDD_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
-          echo arguments=$FIREFOX_ARGS > "./${BDD_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
-          echo arguments=$CHROME_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
-          echo arguments=$FIREFOX_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
-          echo arguments=$CHROME_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
-          echo arguments=$FIREFOX_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${BDD_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${BDD_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
 
     - name: Compile jdi code
       run: mvn -ntp install -DskipTests
@@ -83,7 +83,15 @@ jobs:
     - name: Tests BDD
       continue-on-error: true
       run: |
-        mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
+          mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
+          tar -czf "bdd_results_${{ matrix.java }}" "$./{BDD_TESTS}/target/allure-results" > /dev/null
+
+    - name: 'Upload BDD results'
+      uses: actions/upload-artifact@v2
+      with:
+        name: bdd-results
+        path: "bdd_results_${{ matrix.java }}.tar"
+        retention-days: 2
 
     - name: PS list
       run: ps -aux
@@ -98,4 +106,8 @@ jobs:
 
     - name: Collect reports
       continue-on-error: true
-      run: echo Collecting Allure Reports....
+      run: |
+        echo Collecting Allure Reports....
+        sudo chmod +x reporting.sh
+        source reporting.sh
+        generateAllureReports

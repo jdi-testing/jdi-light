@@ -314,8 +314,7 @@ public class WebSettings {
         if (properties.isEmpty()) {
             logger.trace("There is no properties in %s", property);
             File p = new File("."+path);
-            logger.trace("Abs prop path %s", p.getAbsolutePath());
-            logger.trace("Exist %s", p.exists());
+            logger.trace("Abs prop path %s, Properties file exists? = %s", p.getAbsolutePath(), p.exists());
             return;
         }
         try {
