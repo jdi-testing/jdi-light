@@ -24,6 +24,7 @@ env:
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
     CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
+    ALLURE_VERSION: "2.7.0"
 
 on:
   push:
@@ -52,16 +53,17 @@ jobs:
         env
         id
 
-    - name: Install Allure
+    - name: Install Reporting utils
       run: |
-        sudo apt-add-repository ppa:qameta/allure
-        sudo apt-get update
-        sudo apt-get install allure
-        echo "Install Netlify-cli"
-        sudo npm install -g netlify-cli
+        echo "Install Allure ${ALLURE_VERSION}"
+        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
+        sudo tar -zxvf allure-${ALLURE_VERSION}.tgz -C /opt/
+        sudo ln -s /opt/allure-${ALLURE_VERSION}/bin/allure /usr/bin/allure
         allure --version
 
-          
+        echo "Install Netlify-cli"
+        sudo npm install -g netlify-cli
+
     - name: Welcome to JDI
       run: |
         echo ------------------- WELCOME TO JDI -----------------------
