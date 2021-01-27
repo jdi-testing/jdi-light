@@ -52,6 +52,15 @@ jobs:
         env
         id
 
+    - name: Install Allure
+      run: |
+        sudo apt-add-repository ppa:qameta/allure
+        sudo apt-get update
+        sudo apt-get install allure
+        echo "Install Netlify-cli"
+        npm install -g netlify-cli
+        allure --version
+
           
     - name: Welcome to JDI
       run: |
@@ -82,9 +91,9 @@ jobs:
       if: ${{ always() }}
       run: mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
-    - name: Run tests - angular unit tests
-      if: ${{ always() }}
-      run: mvn verify $WITH_PARAMS $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
+#    - name: Run tests - angular unit tests
+#      if: ${{ always() }}
+#      run: mvn verify $WITH_PARAMS $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Collect reports
       if: ${{ always() }}
