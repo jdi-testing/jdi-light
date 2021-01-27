@@ -15,6 +15,9 @@ public class States {
         if (!url.contains("https://jdi-testing.github.io/jdi-light/")) {
             angularPage.open();
         }
+        if (!logo.isDisplayed()) {
+            logo.waitFor().visible();
+        }
         if (userName.isHidden()) {
             login();
         }

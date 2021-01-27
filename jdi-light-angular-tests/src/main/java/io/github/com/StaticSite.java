@@ -21,6 +21,9 @@ public class StaticSite {
     @UI("#login-form")
     public static Form<User> loginForm;
 
+    @UI("#epam-logo")
+    public static Button logo;
+
     @Css(".logout")
     public static Button logout;
     public static Button userIcon;
