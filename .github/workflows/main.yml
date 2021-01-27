@@ -5,8 +5,8 @@ name: Java CI with Maven
 env:
     CHROME_PROPERTIES: "chrome.properties"
     FIREFOX_PROPERTIES: "ff.properties"
-    #WITH_PARAMS: "-ntp -Ddriver=chrome -Dchrome.capabilities.path=${CHROME_PROPERTIES}"
-    WITH_PARAMS: "-ntp -Ddriver=firefox -Dff.capabilities.path=${FIREFOX_PROPERTIES}"
+    #WITH_PARAMS: "-ntp -Ddriver=chrome"
+    WITH_PARAMS: "-ntp -Ddriver=firefox"
     UNIT: "-Punit"
     COMMON: "-Pcommon"
     COMPLEX: "-Pcomplex"
@@ -83,14 +83,14 @@ jobs:
     - name: Tests BDD
       continue-on-error: true
       run: |
-        mvn verify $WITH_PARAMS -pl $GROUP_ID:$BDD_TESTS
+        mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
 
     - name: PS list
       run: ps -aux
     
     - name: Tests bootstrap Unit
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -pl $GROUP_ID:$BOOTSTRAP_TESTS
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
 #    - name: Run tests - angular unit tests
 #      continue-on-error: true
