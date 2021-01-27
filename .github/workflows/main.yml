@@ -5,8 +5,8 @@ name: Java CI with Maven
 env:
     CHROME_PROPERTIES: "chrome.properties"
     FIREFOX_PROPERTIES: "ff.properties"
-    #WITH_PARAMS: "-ntp -Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES"
-    WITH_PARAMS: "-ntp -Ddriver=firefox -Dff.capabilities.path=$FIREFOX_PROPERTIES"
+    #WITH_PARAMS: "-ntp -Ddriver=chrome -Dchrome.capabilities.path=${CHROME_PROPERTIES}"
+    WITH_PARAMS: "-ntp -Ddriver=firefox -Dff.capabilities.path=${FIREFOX_PROPERTIES}"
     UNIT: "-Punit"
     COMMON: "-Pcommon"
     COMPLEX: "-Pcomplex"
@@ -60,7 +60,7 @@ jobs:
         sudo ln -s /opt/allure-${ALLURE_VERSION}/bin/allure /usr/bin/allure
         allure --version
 
-    - name: Install Allure
+    - name: Install Netlify
       run: sudo npm install -g netlify-cli
 
     - name: Welcome to JDI
@@ -70,12 +70,12 @@ jobs:
 
     - name: Prepare configs
       run: |
-          echo arguments=$CHROME_ARGS > "./$BDD_TESTS/src/test/resources/$CHROME_PROPERTIES"
-          echo arguments=$FIREFOX_ARGS > "./$BDD_TESTS/src/test/resources/$FIREFOX_PROPERTIES"
-          echo arguments=$CHROME_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$CHROME_PROPERTIES"
-          echo arguments=$FIREFOX_ARGS > "./$BOOTSTRAP_TESTS/src/test/resources/$FIREFOX_PROPERTIES"
-          echo arguments=$CHROME_ARGS > "./$ANGULAR_TESTS/src/test/resources/$CHROME_PROPERTIES"
-          echo arguments=$FIREFOX_ARGS > "./$ANGULAR_TESTS/src/test/resources/$FIREFOX_PROPERTIES"
+          echo arguments=$CHROME_ARGS > "./${BDD_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+          echo arguments=$FIREFOX_ARGS > "./${BDD_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+          echo arguments=$CHROME_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+          echo arguments=$FIREFOX_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+          echo arguments=$CHROME_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+          echo arguments=$FIREFOX_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
 
     - name: Compile jdi code
       run: mvn -ntp install -DskipTests
