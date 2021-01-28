@@ -22,19 +22,24 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
 
     @Override
     public Label label() {
+        Label label = safeGetLabel();
+        if (label != null) {
+            return label;
+        }
+        throw exception("Can't find label for element %s", this);
+    }
+    private Label safeGetLabel() {
         if (core().label().isDisplayed()) {
             return core().label();
         }
         UIElement input = core().find("input[type=checkbox]");
-        if (input.label().isDisplayed()) {
-            return input.label();
-        }
-        throw exception("Can't find label for element %s", this);
+        return input.label().isDisplayed() ? input.label() : null;
     }
     @Override
     public void click() {
-        if (label().isDisplayed()) {
-            label().click();
+        Label label = safeGetLabel();
+        if (label != null) {
+            label.click();
         } else {
             core().click();
         }

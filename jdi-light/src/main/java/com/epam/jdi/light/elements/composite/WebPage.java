@@ -32,7 +32,7 @@ import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
-import static com.epam.jdi.light.logger.AllureLogger.createAttachment;
+import static com.epam.jdi.light.logger.AllureLogger.logDataToAllure;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -474,6 +474,11 @@ public class WebPage extends DriverBase implements PageObject {
             Default(msgFormat(PRINT_PAGE_DEBUG, this))
         );
     }
+    public String details() {
+        return format("url=%s, title='%s', checkUrl='%s'%s, checkTitle='%s'",
+            url, title, checkUrlType,
+            isNotBlank(checkUrl) ? ("[checkUrl=" + checkUrl+ "]") : "", checkTitleType);
+    }
 
     public static class StringCheckType {
         private Supplier<String> actual;
@@ -519,9 +524,7 @@ public class WebPage extends DriverBase implements PageObject {
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE) {
             visualWindowCheck();
         }
-        if (LOGS.screenStrategy.contains(NEW_PAGE)) {
-            createAttachment(page.getName(), false);
-        }
+        logDataToAllure(NEW_PAGE, page.getName(), false);
         logger.toLog("Page '" + page.getName() + "' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());
     }

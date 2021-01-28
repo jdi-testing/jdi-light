@@ -526,6 +526,10 @@ public class UIElement extends JDIBase
     @JDIAction(value = "Get '{name}' placeholder", level = DEBUG) @Override
     public String placeholder() { return getAttribute("placeholder"); }
 
+    public String pseudo(String elementName, String propertyName) {
+        return js().executeScript("return window.getComputedStyle(arguments[0], arguments[1])" +
+                ".getPropertyValue(arguments[2]);", getWebElement(), elementName, propertyName).toString();
+    }
     /**
      * Get the element attribute "innerHTML" value
      * @return String

@@ -10,31 +10,32 @@ import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
+import com.epam.jdi.tools.func.JFunc1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 
 public class JDITalk {
-    public static UIElement element(@MarkupLocator String locator) {
-        UIElement element = locator.matches("[A-Z].*")
+    public static JFunc1<String, UIElement> NAME_TO_ELEMENT = s -> {
+        UIElement element = s.matches("[A-Z].*")
                 ? new UIElement()
-                : element(defineLocator(locator));
-        return element.setName(locator);
+                : element(NAME_TO_LOCATOR.execute(s));
+            return element.setName(s);
+        };
+    public static UIElement element(@MarkupLocator String locator) {
+        return NAME_TO_ELEMENT.execute(locator);
     }
     public static UIElement element(@MarkupLocator By byLocator) {
         return new UIElement(byLocator);
     }
 
     public static WebList list(@MarkupLocator String locator) {
-        WebList list = locator.matches("[A-Z].*")
-                ? new WebList()
-                : list(defineLocator(locator));
-        return list.setName(locator);
+        return new WebList().setCore(NAME_TO_ELEMENT.execute(locator)).setName(locator);
     }
     public static WebList list(@MarkupLocator By byLocator) {
         return new WebList(byLocator);
@@ -59,14 +60,14 @@ public class JDITalk {
         return new DropClass(locator);
     }
     public static Selector selector(@MarkupLocator String locator) {
-        return locator.matches("[A-Z].*")
-                ? new Selector().setup(Selector.class, b-> b.setName(locator))
-                : new Selector().setup(Selector.class, b-> b.setLocator(defineLocator(locator)));
+        Selector selector = new Selector().setCore(Selector.class, NAME_TO_ELEMENT.execute(locator));
+        selector.setName(locator);
+        return selector;
     }
     public static IsDropdown dropdown(@MarkupLocator String locator) {
-        return locator.matches("[A-Z].*")
-                ? new Dropdown().setup(Dropdown.class, b-> b.setName(locator))
-                : new Dropdown().setup(Dropdown.class, b-> b.setLocator(defineLocator(locator)));
+        Dropdown dropdown = new Dropdown().setCore(Dropdown.class, NAME_TO_ELEMENT.execute(locator));
+        dropdown.setName(locator);
+        return dropdown;
     }
     public static IsDropdown dropdown(String root, String value, String list, String expand) {
         return new Dropdown().setup(root, value, list, expand);

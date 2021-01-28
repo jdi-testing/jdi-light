@@ -30,6 +30,7 @@ public class DriverSettings {
     public String remoteUrl;
     public boolean remoteRun = false;
     public String downloadsFolder = mergePath(COMMON.testPath, "resources", "downloads");
+    public String videoUrl;
 
     public JFunc1<WebDriver, WebDriver> setup = DriverData::driverSettings;
     public MapArray<String, DriverInfo> types = map(

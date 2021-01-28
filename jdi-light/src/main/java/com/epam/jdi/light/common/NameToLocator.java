@@ -15,5 +15,6 @@ public class NameToLocator {
         $("PascalCase", StringUtils::toPascalCase),
         $("UPPER_SNAKE_CASE", StringUtils::toUpperSnakeCase),
         $("First Upper Case", StringUtils::splitCamelCase),
-        $("ALL UPPER CASE", value -> StringUtils.splitCamelCase(value).toUpperCase()));
+        $("ALL UPPER CASE", value -> StringUtils.splitCamelCase(value).toUpperCase()),
+        $("Name", value -> value));
 }

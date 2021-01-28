@@ -59,7 +59,7 @@ public class WebAnnotationsUtil {
         if (frames == null) return null;
         List<By> result = new ArrayList<>();
         for (String frame : frames.value())
-            result.add(defineLocator(frame));
+            result.add(NAME_TO_LOCATOR.execute(frame));
         return result;
     }
 
@@ -142,7 +142,7 @@ public class WebAnnotationsUtil {
     }
     public static By findByToBy(UI locator) {
         if (locator == null) return null;
-        return defineLocator(locator.value());
+        return NAME_TO_LOCATOR.execute(locator.value());
     }
     public static By findByToBy(ByText locator) {
         if (locator == null) return null;

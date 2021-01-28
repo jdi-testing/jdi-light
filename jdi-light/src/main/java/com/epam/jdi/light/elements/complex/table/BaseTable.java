@@ -712,27 +712,27 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         List<String> header = asList(j.header());
 
         if (isNotBlank(j.root()))
-            core().setLocator(defineLocator(j.root()));
+            core().setLocator(NAME_TO_LOCATOR.execute(j.root()));
         if (!j.row().equals("//tr[%s]/td") || !getByLocator(this.rowLocator).equals("//tr[%s]/td"))
-            this.rowLocator = defineLocator(j.row());
+            this.rowLocator = NAME_TO_LOCATOR.execute(j.row());
         if (!j.column().equals("//tr/td[%s]") || !getByLocator(this.columnLocator).equals("//tr/td[%s]"))
-            this.columnLocator = defineLocator(j.column());
+            this.columnLocator = NAME_TO_LOCATOR.execute(j.column());
         if (!j.cell().equals("//tr[{1}]/td[{0}]") || !getByLocator(this.cellLocator).equals("//tr[{1}]/td[{0}]"))
-            this.cellLocator = defineLocator(j.cell());
+            this.cellLocator = NAME_TO_LOCATOR.execute(j.cell());
         if (!j.allCells().equals("td") || !getByLocator(this.allCellsLocator).equals("td"))
-            this.allCellsLocator = defineLocator(j.allCells());
+            this.allCellsLocator = NAME_TO_LOCATOR.execute(j.allCells());
         if (!j.headers().equals("th") || !getByLocator(this.headerLocator).equals("th"))
-            this.headerLocator = defineLocator(j.headers());
+            this.headerLocator = NAME_TO_LOCATOR.execute(j.headers());
         if (!j.filter().equals("th input[type=search],th input[type=text]") || !getByLocator(this.filterLocator).equals("th input[type=search],th input[type=text]"))
-            this.filterLocator = defineLocator(j.filter());
+            this.filterLocator = NAME_TO_LOCATOR.execute(j.filter());
         if (!j.fromCellToRow().equals("../td") || !getByLocator(this.fromCellToRow).equals("../td"))
-            this.fromCellToRow = defineLocator(j.fromCellToRow());
+            this.fromCellToRow = NAME_TO_LOCATOR.execute(j.fromCellToRow());
         if (!j.footer().equals("tfoot") || !getByLocator(this.fromCellToRow).equals("tfoot"))
-            this.footer = defineLocator(j.footer());
+            this.footer = NAME_TO_LOCATOR.execute(j.footer());
         if (!j.jsRow().equals("tr") || !getByLocator(this.jsRow).equals("tr"))
-            this.jsRow = defineLocator(j.jsRow());
+            this.jsRow = NAME_TO_LOCATOR.execute(j.jsRow());
         if (!j.jsColumn().equals("td") || !getByLocator(this.jsColumn).equals("td"))
-            this.jsColumn = defineLocator(j.jsColumn());
+            this.jsColumn = NAME_TO_LOCATOR.execute(j.jsColumn());
         if (header.size() > 0)
             this.header.setFinal(header);
         if (j.columnsMapping().length > 0)
