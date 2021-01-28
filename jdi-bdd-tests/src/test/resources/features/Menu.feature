@@ -1,4 +1,4 @@
-@menu
+@menu @ignore_ci
 Feature: Menu
   Background:
     Given I open "Html5 Page"

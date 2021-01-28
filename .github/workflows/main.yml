@@ -60,8 +60,8 @@ jobs:
         sudo ln -s /opt/allure-${ALLURE_VERSION}/bin/allure /usr/bin/allure
         allure --version
 
-    - name: Install Netlify
-      run: sudo npm install -g netlify-cli
+#    - name: Install Netlify
+#      run: sudo npm install -g netlify-cli
 
     - name: Welcome to JDI
       run: |
@@ -76,6 +76,12 @@ jobs:
         echo arguments=$FIREFOX_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
         echo arguments=$FIREFOX_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${HTML_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${HTML_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
 
     - name: Compile jdi code
       run: mvn -ntp install -DskipTests
@@ -83,54 +89,60 @@ jobs:
     - name: Tests BDD
       continue-on-error: true
       run: |
-          mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
+          mvn verify $WITH_PARAMS -DCucumber.options="--tags 'not @ignore_ci'" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
 
-#    - name: Archive results BDD tests
-#      continue-on-error: true
-#      run: |
-#          tar -czf "bdd_results_${{ matrix.java }}.tar" ./${BDD_TESTS}/target/allure-results/ > /dev/null
-
+# Delete comment is original allure data for BDD tests is needed
 #    - name: 'Upload BDD results'
 #      uses: actions/upload-artifact@v2
 #      with:
 #        name: bdd-results-${{ matrix.java }}
-#        path: "bdd_results_${{ matrix.java }}.tar"
+#        path: ./${BDD_TESTS}/target/allure-results/
 #        retention-days: 1
 
-    - name: PS list to check browsers
-      run: ps -aux
-    
     - name: Tests bootstrap Unit
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS
-
-#    - name: Archive results bootstrap tests
-#      continue-on-error: true
-#      run: |
-#        tar -czf "bootstrap_results_${{ matrix.java }}.tar" ./${BOOTSTRAP_TESTS}/target/allure-results/ > /dev/null
 
 #    - name: 'Upload Bootstrap results'
 #      uses: actions/upload-artifact@v2
 #      with:
 #        name: bootstrap-results-${{ matrix.java }}
-#        path: "bootstrap_results_${{ matrix.java }}.tar"
+#        path: ./${BOOTSTRAP_TESTS}/target/allure-results/
 #        retention-days: 2
 
-#    - name: Run tests - angular unit tests
-#      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
-    - name: PS list to check browsers
-      run: ps -aux
+    - name: Run tests - Angular Unit tests
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
+
+    - name: Run tests - Angular Common tests
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS $COMMON -pl $GROUP_ID:$ANGULAR_TESTS
+
+    - name: Run tests - Angular Complex tests
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
+
+    - name: Run tests - HTML
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
+
+    - name: Run tests - Test Examples
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+
+    - name: Run tests - Performance
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
 
     - name: Collect reports
       continue-on-error: true
       run: |
         echo Collecting Allure Reports....
         sudo chmod +x reporting.sh
-        ls -d1 jdi*/target/allure-results
         source reporting.sh
         generateAllureReports
-        ls -l
+        printAllureSummary ${{ matrix.java }}
+
 
     - name: 'All allure report'
       uses: actions/upload-artifact@v2

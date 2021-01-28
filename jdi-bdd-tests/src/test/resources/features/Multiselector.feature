@@ -20,12 +20,14 @@ Feature: Multiselector
     Then the "Ages" contains items:
     | Electro | Steam| Metalic | Disabled | Wood |
 
+  @ignore_ci
   Scenario: Multiple selection in multiselector
     When I check in the "Multi Dropdown" values:
       | Electro | Metalic |
     Then the "Multi Dropdown" selected values:
       | Electro | Metalic |
 
+  @ignore_ci
   Scenario: Select values by number in multiselector
     Given I open "Html5 Page"
     When I check in the "Multi Dropdown" values by number:

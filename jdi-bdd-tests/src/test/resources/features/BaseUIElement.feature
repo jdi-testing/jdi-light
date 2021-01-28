@@ -78,7 +78,8 @@ Feature: BaseUIElement
   Scenario: isDisabled
 	Given I open "Html5 Page" 	
 	Then the "Disabled Button" is disabled
-	
+
+  @ignore_ci
   Scenario: isHidden
 	Given I open "Html5 Page" 	
 	Then the "Logout" is hidden

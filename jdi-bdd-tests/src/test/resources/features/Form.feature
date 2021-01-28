@@ -1,4 +1,4 @@
-@form
+@form @ignore_ci
 Feature: Form
 
   Scenario: fill Contact Form from json

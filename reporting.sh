@@ -61,39 +61,6 @@ function sendComment() {
              }";
 }
 
-function archive() {
-    directory="$1"
-    archiveName="$(echo "${directory}"| grep -o "jdi-[a-z-]*")-${TRAVIS_JDK_VERSION}".tar.gz
-    tar -czf "${archiveName}" "${directory}" > /dev/null
-    echo "${archiveName}" #return
-}
-
-function extractArchive() {
-    file="$1"
-    tar -zxf "${file}" # replace with '-zxvf' to show the progress of archive file.
-}
-
-function aboutTransfer() {
-    url="$1"
-    echo "[${TRAVIS_BUILD_NUMBER}] - ${url}" #return
-}
-
-function aboutNetlify() {
-    url="$1"
-    jdk="$2"
-    echo "[${TRAVIS_BUILD_NUMBER}] - ${jdk} - Allure report on Netlify: ${url}" #return
-}
-
-function checkBranchIsOk() {
-    if [[ "x${DESTINATION_PULL_REQUEST}" == "xfalse" ]] ; then
-        echo "${BRANCH_ERROR_MESSAGE}"
-        sleep 3
-        exit 0
-    fi
-}
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 #########################               PART 1: send allure results into web to collect it later
 function grubAllureResults() {
     echo "Stage was: ${TRAVIS_BUILD_STAGE_NAME}"
@@ -113,47 +80,27 @@ function grubAllureResults() {
     fi
 }
 
-function uploadFile() {
-    file="$1"
-    if [[ "x${FASTER_FILE_SHARING}" == "xfalse" ]] ; then
-        urlKey="$(curl --upload-file "${file}" https://transfer.sh/"${file}")"
-    else
-        response="$(curl -F "file=@${file}" https://file.io/)"
-        url="$(echo "${response}" |jq -j '.link')"
-        urlKey="$(echo "${url}"| awk -F/ '{print $4}')"
-    fi
-    echo "${urlKey}" #return
-}
 
-function checkThatAllTestsPassed() {
+function printAllureSummary() {
     FAILED_OR_BROKEN_TESTS=false
 
-    echo "Brief passed/failed/broken/skipped summary by JDK:"
-    for JDK in $JDK_VERSIONS;
-    do
-      if [[ -d "allure-report-${JDK}" ]]; then                     #if directory exists
-        content=$(<"allure-report-${JDK}/widgets/summary.json")     #file system request
-        passed="$(echo "${content}"| jq '.statistic.passed')"
-        failed="$(echo "${content}"| jq '.statistic.failed')"
-        skipped="$(echo "${content}"| jq '.statistic.skipped')"
-        broken="$(echo "${content}"| jq '.statistic.broken')"
-        echo "${JDK}:"
-        echo "  Passed:  ${passed}"
-        echo "  Failed:  ${failed}"
-        echo "  Broken:  ${skipped}"
-        echo "  Skipped: ${broken}"
-        if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
-          FAILED_OR_BROKEN_TESTS=true
-        fi
-      fi
-    done
-    echo "End of summary"
+    echo "Brief passed/failed/broken/skipped summary by JDK: $1"
 
-    if [[ "$FAILED_OR_BROKEN_TESTS" = true ]]; then
-      echo "${TEST_FAILED_ERROR_MESSAGE}"
-      sleep 5
-      exit 1
+    content=$(<"allure-report/widgets/summary.json")     #file system request
+    passed="$(echo "${content}"| jq '.statistic.passed')"
+    failed="$(echo "${content}"| jq '.statistic.failed')"
+    skipped="$(echo "${content}"| jq '.statistic.skipped')"
+    broken="$(echo "${content}"| jq '.statistic.broken')"
+    echo "${JDK}:"
+    echo "  Passed:  ${passed}"
+    echo "  Failed:  ${failed}"
+    echo "  Broken:  ${skipped}"
+    echo "  Skipped: ${broken}"
+    if [[ ${failed} -gt 0 || ${broken} -gt 0 ]]; then
+      FAILED_OR_BROKEN_TESTS=true
     fi
+
+    echo "End of summary"
 }
 
 ######################         PART 2: Deploy allure results as allure reports to netlify
@@ -212,7 +159,7 @@ function extractAllureResults() {
 function generateAllureReports() {
     reportDirList="";
     allureDirExistence=false
-    for report in $(ls -d1 jdi*/target/allure-results)
+    for report in $(ls -d1 jdi*/target/allure-results ./*/jdi*/target/allure-results)
     do
         allureDirExistence=true
         reportDirList="${reportDirList} ${report}"
@@ -225,17 +172,3 @@ function generateAllureReports() {
     allure generate --clean ${reportDirList}
 
 }
-
-function deployToNetlify() {
-    directory="$1"
-    result="$(netlify deploy --dir "${directory}" --json)"
-    deployUrl="$(echo "${result}"r | jq '.deploy_url' | sed 's/"//g')"
-    echo "${deployUrl}"
-}
-
-function exitWithError() {
-    echo "${URL_NOT_FOUND_ERROR_MESSAGE}"
-    sleep 3
-    exit 1
-}
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`

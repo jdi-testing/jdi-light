@@ -1,6 +1,7 @@
 @multidropdown
 Feature: MultiDropDown
 
+  @ignore_ci
   Scenario: Check one value test
     Given I open "Html5 Page"
     When I check value "Steam" in the "Multi Dropdown"
@@ -11,6 +12,7 @@ Feature: MultiDropDown
     Then the "Multi Dropdown" contains items:
       | Disabled | Wood | Steam | Electro | Metalic |
 
+  @ignore_ci
   Scenario: Check disabled element value
     When I select "Disabled" field from "Multi Dropdown"
     Then the "Multi Dropdown" selected value is "Steam"
@@ -24,12 +26,14 @@ Feature: MultiDropDown
     And the "Multi Dropdown" has enabled items:
       | Electro | Metalic |
 
+  @ignore_ci
   Scenario: Check  values test
     When I check in the "Multi Dropdown" values:
       | Electro | Metalic |
     Then the "Multi Dropdown" selected values:
       | Electro | Metalic |
 
+  @ignore_ci
   Scenario: Check values by number test
     When I check in the "Multi Dropdown" values by number:
       | 1 | 5 |
