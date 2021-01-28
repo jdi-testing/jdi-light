@@ -85,17 +85,17 @@ jobs:
       run: |
           mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
 
-    - name: Archive results BDD tests
-      continue-on-error: true
-      run: |
-          tar -czf "bdd_results_${{ matrix.java }}.tar" ./${BDD_TESTS}/target/allure-results/ > /dev/null
+#    - name: Archive results BDD tests
+#      continue-on-error: true
+#      run: |
+#          tar -czf "bdd_results_${{ matrix.java }}.tar" ./${BDD_TESTS}/target/allure-results/ > /dev/null
 
-    - name: 'Upload BDD results'
-      uses: actions/upload-artifact@v2
-      with:
-        name: bdd-results-${{ matrix.java }}
-        path: "bdd_results_${{ matrix.java }}.tar"
-        retention-days: 1
+#    - name: 'Upload BDD results'
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: bdd-results-${{ matrix.java }}
+#        path: "bdd_results_${{ matrix.java }}.tar"
+#        retention-days: 1
 
     - name: PS list to check browsers
       run: ps -aux
@@ -130,11 +130,10 @@ jobs:
         ls -d1 jdi*/target/allure-results
         source reporting.sh
         generateAllureReports
-        tar -czf "allure_report_${{ matrix.java }}.tar" ./allure-report/ > /dev/null
 
     - name: 'All allure report'
       uses: actions/upload-artifact@v2
       with:
         name: allure-report-${{ matrix.java }}
-        path: "./allure_report/"
+        path: ${{ github.workspace }}/allure_report/
         retention-days: 1
