@@ -13,7 +13,7 @@ public class NotifyPage {
     @MobileFindBy(accessibilityId = "Clear all notifications.")
     public static Button clearAllButton;
 
-    @MobileFindBy(id = "android:id/message_text")
+    @MobileFindBy(xpath = "//*[@resource-id='android:id/message_text']")
     public static Text notificationMessagingContent;
 
     @MobileFindBy(xpath = "//android.widget.Button[@content-desc=\"Mark as read\"]")
@@ -25,34 +25,17 @@ public class NotifyPage {
     @MobileFindBy(id = "com.android.systemui:id/remote_input_send")
     public static Button send;
 
-    @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/" +
-            "android.widget.FrameLayout/android.widget.ScrollView/android.widget.FrameLayout[2]/" +
-            "android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.FrameLayout[1]/" +
-            "android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ImageView[2]")
+    @MobileFindBy(xpath = "//*[@resource-id='com.android.systemui:id/notification_stack_scroller']/android.widget.FrameLayout[1]//*[@resource-id='android:id/icon']")
     public static Button appIcon;
 
-    @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/" +
-            "android.widget.FrameLayout/android.widget.ScrollView/android.widget.FrameLayout[2]/" +
-            "android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/" +
-            "android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/" +
-            "android.widget.TextView[3]")
+    @MobileFindBy(xpath = "//*[@resource-id='com.android.systemui:id/notification_stack_scroller']/android.widget.FrameLayout[1]//*[@resource-id='android:id/app_name_text']")
     public static Text appName;
 
-    @MobileFindBy(id = "android:id/conversation_text")
+    @MobileFindBy(xpath = "//*[@resource-id='android:id/message_name']")
     public static Text notificationName;
 
-    @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/" +
-            "android.widget.FrameLayout/android.widget.ScrollView/android.widget.FrameLayout[2]/" +
-            "android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/" +
-            "android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/" +
-            "android.widget.TextView[5]")
+    @MobileFindBy(xpath = "//*[@resource-id='com.android.systemui:id/notification_stack_scroller']/android.widget.FrameLayout[1]//*[@resource-id='android:id/time']")
     public static Text timeStamp;
-
-    @MobileFindBy(id = "android:id/message_name")
-    public static Text messageName;
-
-    @MobileFindBy(id = "android:id/message_text")
-    public static Text messageText;
 
     @MobileFindBy(xpath = "//android.widget.Switch[@content-desc=\"Mobile data, Mobile data off\"]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ImageView")
     public static Button toggleDataIcon;

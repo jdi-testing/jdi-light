@@ -31,16 +31,12 @@ public class NotificationTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void headerInformationTest() {
+    public void contentInformationTest() {
+        appIcon.is().displayed();
         appName.has().text(MESSAGES);
         timeStamp.has().text(NOW);
-    }
-
-    @Test
-    public void contentInformationTest() {
-        NotifyPage.notificationMessagingContent.has().text(MESSAGE);
+        notificationMessagingContent.has().text(MESSAGE);
         notificationName.has().text(NUMBER);
-        appIcon.is().displayed();
     }
 
     @Test
