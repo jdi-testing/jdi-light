@@ -85,29 +85,42 @@ jobs:
       run: |
           mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
 
-    - name: Archive results
+    - name: Archive results BDD tests
       continue-on-error: true
       run: |
-          ls -l
           tar -czf "bdd_results_${{ matrix.java }}.tar" ./${BDD_TESTS}/target/allure-results/ > /dev/null
 
     - name: 'Upload BDD results'
       uses: actions/upload-artifact@v2
       with:
-        name: bdd-results
+        name: bdd-results-${{ matrix.java }}
         path: "bdd_results_${{ matrix.java }}.tar"
         retention-days: 2
 
-    - name: PS list
+    - name: PS list to check browsers
       run: ps -aux
     
     - name: Tests bootstrap Unit
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
+#    - name: Archive results bootstrap tests
+#      continue-on-error: true
+#      run: |
+#        tar -czf "bootstrap_results_${{ matrix.java }}.tar" ./${BOOTSTRAP_TESTS}/target/allure-results/ > /dev/null
+
+#    - name: 'Upload Bootstrap results'
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: bootstrap-results-${{ matrix.java }}
+#        path: "bootstrap_results_${{ matrix.java }}.tar"
+#        retention-days: 2
+
 #    - name: Run tests - angular unit tests
 #      continue-on-error: true
 #      run: mvn verify $WITH_PARAMS $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
+    - name: PS list to check browsers
+      run: ps -aux
 
     - name: Collect reports
       continue-on-error: true

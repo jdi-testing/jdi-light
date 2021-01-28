@@ -215,7 +215,7 @@ function generateAllureReports() {
     for report in $(ls -d1 jdi*/target/allure-results)
     do
         allureDirExistence=true
-        reportDirList="${reportDirList} ${allureDir}"
+        reportDirList="${reportDirList} ${report}"
     done
     if [[ "x${allureDirExistence}" == "xfalse" ]] ; then
         echo "Failed inside generateAllureReports()"
