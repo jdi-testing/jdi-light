@@ -130,10 +130,11 @@ jobs:
         ls -d1 jdi*/target/allure-results
         source reporting.sh
         generateAllureReports
+        ls -l
 
     - name: 'All allure report'
       uses: actions/upload-artifact@v2
       with:
         name: allure-report-${{ matrix.java }}
-        path: ${{ github.workspace }}/allure_report/
+        path: ./allure-report/
         retention-days: 1
