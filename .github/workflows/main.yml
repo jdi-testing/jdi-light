@@ -95,7 +95,7 @@ jobs:
       with:
         name: bdd-results-${{ matrix.java }}
         path: "bdd_results_${{ matrix.java }}.tar"
-        retention-days: 2
+        retention-days: 1
 
     - name: PS list to check browsers
       run: ps -aux
@@ -135,6 +135,6 @@ jobs:
     - name: 'All allure report'
       uses: actions/upload-artifact@v2
       with:
-        name: allure-report_-${{ matrix.java }}
-        path: "allure_report_${{ matrix.java }}.tar"
+        name: allure-report-${{ matrix.java }}
+        path: "./allure_report/"
         retention-days: 1
