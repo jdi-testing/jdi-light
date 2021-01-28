@@ -20,7 +20,7 @@ public class ResetNativeSelectTests extends TestsSelectBase {
         resetNativeSelect.label().has().value("Select your car");
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkResetOptionCanBeSelectedById() {
         resetNativeSelect.select(ELEMENT.startIndex);
         resetNativeSelect.is().selected(matchesPattern("\\W*"));

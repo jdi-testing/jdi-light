@@ -89,7 +89,7 @@ jobs:
     - name: Tests BDD
       continue-on-error: true
       run: |
-          mvn verify $WITH_PARAMS -DCucumber.options="--tags 'not @ignore_ci'" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
+          mvn verify $WITH_PARAMS -DCucumber.options="--tags ~@ignore_ci" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
 
 # Delete comment is original allure data for BDD tests is needed
 #    - name: 'Upload BDD results'
@@ -112,27 +112,27 @@ jobs:
 
     - name: Run tests - Angular Unit tests
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - Angular Common tests
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS $COMMON -pl $GROUP_ID:$ANGULAR_TESTS
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - Angular Complex tests
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - HTML
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS
 
     - name: Run tests - Test Examples
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -pl $GROUP_ID:$EXAMPLES
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES
 
     - name: Run tests - Performance
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -pl $GROUP_ID:$PERFORMANCE
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE
 
     - name: Collect reports
       continue-on-error: true

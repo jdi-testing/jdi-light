@@ -19,23 +19,23 @@ public class NoOptionRippleSelectTests extends TestsSelectBase {
         noOptionRippleSelect.label().has().value("Select an option");
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkOptionCanBeSelectedByName() {
         noOptionRippleSelect.select(OPTION_1);
         noOptionRippleSelect.is().selected(OPTION_1);
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkListDisabledOptions() {
         noOptionRippleSelect.has().listDisabled();
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkListEnabledOptions() {
         noOptionRippleSelect.has().listEnabled(Arrays.asList(OPTION_1, OPTION_2, OPTION_3));
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkAvailableOptions() {
         noOptionRippleSelect.assertThat().values(hasItems(OPTION_1, OPTION_2, OPTION_3));
     }

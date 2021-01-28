@@ -87,7 +87,7 @@ public class DatepickerUnitTests extends TestsInit {
         assertTrue(basicDatepicker.isCollapsed());
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkClearTest() {
         basicDatepicker.select(LocalDate.now());
         basicDatepicker.clear();
@@ -112,7 +112,7 @@ public class DatepickerUnitTests extends TestsInit {
         assertEquals(basicDatepicker.value(), "12/8/2017");
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkSendKeysTest() {
         basicDatepicker.sendKeys("31-DEC-1812");
         assertEquals(basicDatepicker.getValue(), "12/31/1812");
@@ -198,7 +198,7 @@ public class DatepickerUnitTests extends TestsInit {
         assertEquals(basicDatepicker.selectedMonth().getValue(), nextMonth);
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkNavigateToDayInPreviousMonthsTest() {
         int currentMonth = LocalDate.now().getMonth().getValue();
         int monthCountEarlier = 2;
@@ -222,13 +222,13 @@ public class DatepickerUnitTests extends TestsInit {
         assertEquals(basicDatepicker.selectedMonth().getValue(), nextMonth);
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkInputYearTest() {
         basicDatepicker.input("07-OCTOBER-2021");
         assertEquals(basicDatepicker.getYear(), Year.of(2021));
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkSelectedYearTest() {
         basicDatepicker.setText("16-sep-2003");
         assertEquals(basicDatepicker.selectedYear(), Year.of(2003));
@@ -404,7 +404,7 @@ public class DatepickerUnitTests extends TestsInit {
         assertTrue(inputChangeEventsDatepicker.isLastInputChangeEvents(inputChangeEvents));
     }
 
-    @Test
+    @Test(enabled = false)
     public void selectLastNullInputChangeEventsTest() {
         LocalDate eventDate = LocalDate.now();
         List<String> inputChangeEvents = new ArrayList<>(Arrays.asList("input: null", "change: null"));
@@ -414,7 +414,7 @@ public class DatepickerUnitTests extends TestsInit {
         assertTrue(inputChangeEventsDatepicker.isLastInputChangeEvents(inputChangeEvents));
     }
 
-    @Test
+    @Test(enabled = false)
     public void selectLastNullChangeEventTest() {
         LocalDate eventDate = LocalDate.now();
         String changeEvent = "change: null";
@@ -424,7 +424,7 @@ public class DatepickerUnitTests extends TestsInit {
         assertTrue(inputChangeEventsDatepicker.isLastChangeEvent(changeEvent));
     }
 
-    @Test
+    @Test(enabled = false)
     public void selectLastNullInputEventTest() {
         String inputEvent = "input: null";
         inputChangeEventsDatepicker.show();

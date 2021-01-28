@@ -21,13 +21,13 @@ public class BottomSheetTests extends TestsInit {
         bottomSheet.show();
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkBottomSheetIsDisplayedTest() {
         bottomSheet.open();
         bottomSheet.is().opened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkBottomSheetIsHiddenTest() {
         bottomSheet.open();
         bottomSheet.close();

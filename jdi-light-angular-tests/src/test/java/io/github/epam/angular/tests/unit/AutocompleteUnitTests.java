@@ -25,7 +25,7 @@ public class AutocompleteUnitTests extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void getPlaceHolderValueTest() {
         assertEquals(autocompleteSection.
                 autocompleteOverview.placeholder(), "State");
@@ -57,7 +57,7 @@ public class AutocompleteUnitTests extends TestsInit {
         assertEquals(autocompleteSection.autocompleteOverview.getValue(), "Arkansas");
     }
 
-    @Test
+    @Test(enabled = false)
     public void clickOverviewSelectTest() {
         autocompleteSection.autocompleteOverview.
                 setValue("TexasPopulation: 27.47M");
@@ -74,7 +74,7 @@ public class AutocompleteUnitTests extends TestsInit {
                 expectedValues);
     }
 
-    @Test
+    @Test(enabled = false)
     public void optionGroupsAutocompleteGetItemsValuesTest() {
         String expectedValuesArray[] = {"California", "Colorado", "Connecticut"};
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
@@ -84,7 +84,7 @@ public class AutocompleteUnitTests extends TestsInit {
                 expectedValues);
     }
 
-    @Test
+    @Test(enabled = false)
     public void disabledInputThrowsExceptionUponInputTest() {
         autocompleteSection.autocompleteOverview.clear();
         autocompleteSection.autocompleteDisableInput.check();
@@ -100,7 +100,7 @@ public class AutocompleteUnitTests extends TestsInit {
         autocompleteSection.autocompleteDisableInput.uncheck();
     }
 
-    @Test
+    @Test(enabled = false)
     public void getGroupsValuesTest() {
         autocompleteSection.autocompleteOverview.clear();
         autocompleteSection.autocompleteOverview.click();
@@ -135,7 +135,7 @@ public class AutocompleteUnitTests extends TestsInit {
                 optionGroupsAutocomplete.groupsAndOptionsValues(), groupAndOptionsValues);
     }
 
-    @Test
+    @Test(enabled = false)
     public void clearTest() {
         autocompleteSection.simpleAutocomplete.setValue("Two");
         autocompleteSection.simpleAutocomplete.clear();
@@ -168,14 +168,14 @@ public class AutocompleteUnitTests extends TestsInit {
         assertTrue(autocompleteSection.autocompleteFirstOptionHighlighted.isEnabled());
     }
 
-    @Test
+    @Test(enabled = false)
     public void isDisabledTest() {
         autocompleteSection.autocompleteDisableInput.check();
         assertTrue(autocompleteSection.autocompleteOverview.isDisabled());
         autocompleteSection.autocompleteDisableInput.uncheck();
     }
 
-    @Test
+    @Test(enabled = false)
     public void isExpandedTest() {
         autocompleteSection.autocompleteOverview.click();
         assertTrue(autocompleteSection.autocompleteOverview.expanded());

@@ -19,38 +19,38 @@ public class CustomPanelStylingSelectTests extends TestsSelectBase {
         customPanelStylingSelect.label().has().value("Panel color");
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkRedOptionCanBeSelectedByName() {
         customPanelStylingSelect.select(RED);
         customPanelStylingSelect.is().selected(RED);
         customPanelStylingSelect.has().color(255, 0, 0, 0.5);
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkGreenOptionCanBeSelectedByName() {
         customPanelStylingSelect.select(GREEN);
         customPanelStylingSelect.is().selected(GREEN);
         customPanelStylingSelect.has().color(0, 255, 0, 0.5);
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkBlueOptionCanBeSelectedByName() {
         customPanelStylingSelect.select(BLUE);
         customPanelStylingSelect.is().selected(BLUE);
         customPanelStylingSelect.has().color(0, 0, 255, 0.5);
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkListDisabledOptions() {
         customPanelStylingSelect.has().listDisabled();
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkListEnabledOptions() {
         customPanelStylingSelect.has().listEnabled(Arrays.asList(RED, GREEN, BLUE));
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkAvailableOptions() {
         customPanelStylingSelect.assertThat().values(hasItems(RED, GREEN, BLUE));
     }

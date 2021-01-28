@@ -68,7 +68,7 @@ public class BasicButtonTests extends TestsInit {
         basicButtonsSection.basicButtonsLabel.is().has().text(containsString(BASIC_TEXT));
     }
 
-    @Test
+    @Test(enabled = false)
     public void clickWithMoveTest() {
         basicWarnButton.click(ElementArea.TOP_LEFT);
         basicWarnButton.has().cssClass(FOCUSED_CLASS);

@@ -138,7 +138,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
         basicDatepicker.is().value("11/25/2020");
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkNavigateToDayInPreviousMonths() {
         int currentMonth = LocalDate.now().getMonth().getValue();
         int monthCountEarlier = 4;
