@@ -88,7 +88,8 @@ jobs:
     - name: Archive results
       continue-on-error: true
       run: |
-          tar -czf "bdd_results_${{ matrix.java }}" "./${BDD_TESTS}/target/allure-results" > /dev/null
+          ls -l
+          tar -czf "bdd_results_${{ matrix.java }}.tar" ./${BDD_TESTS}/target/allure-results/ > /dev/null
 
     - name: 'Upload BDD results'
       uses: actions/upload-artifact@v2
