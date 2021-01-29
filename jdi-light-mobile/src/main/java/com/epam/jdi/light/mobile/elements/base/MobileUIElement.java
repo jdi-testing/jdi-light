@@ -153,25 +153,22 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return $(by, this);
     }
 
-/*    @Override
-    public MobileWebList finds(@MarkupLocator String by) {
+    public MobileWebList findsMobileElements(@MarkupLocator String by) {
         return $$(by, this);
     }
 
-    @Override
-    public MobileWebList finds(@MarkupLocator By by) {
+    public MobileWebList findsMobileElemrnts(@MarkupLocator By by) {
         return $$(by, this);
-    }*/
+    }
 
     @Override
     public MobileUIElement firstChild() {
         return this.find("*");
     }
 
-/*    @Override
-    public MobileWebList children() {
-        return finds("*");
-    }*/
+    public MobileWebList findsChildren() {
+        return findsMobileElements("*");
+    }
 
     @JDIAction("Perform tap on '{name}'")
     public void tap() {

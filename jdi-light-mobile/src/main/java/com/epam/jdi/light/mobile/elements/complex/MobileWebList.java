@@ -755,9 +755,8 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         return null;
     }
 
-    /*@Override
-    public MobileWebList finds(By locator) {
+    public MobileWebList findsMobileElements(By locator) {
         List<WebElement> els = elements(1).selectMany(el -> el.finds(locator).webElements());
-        return $$(els, context + ">" + locator);
-    }*/
+        return MobileUIFactory.$$(els, context + ">" + locator);
+    }
 }
