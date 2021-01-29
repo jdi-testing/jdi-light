@@ -118,11 +118,11 @@ public class WebSettings {
         }
         String locatorName = ELEMENT.smartName.value.execute(el.getName());
         By locator = defineLocator(format(ELEMENT.smartTemplate, locatorName));
-        SearchContext ctx = getDefaultContext(el.base().driver());
+        SearchContext ctx = DEFAULT_CONTEXT.execute(el.base().driver());
         try {
             List<WebElement> elements = ELEMENT.smartTemplate.equals("#%s")
-                ? ctx.findElements(locator)
-                : getWebElementsFromContext(el.base(), locator);
+                    ? ctx.findElements(locator)
+                    : getWebElementsFromContext(el.base(), locator);
             return filterWebListToWebElement(el.base(), elements);
         } catch (Exception ignore) {
             throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
@@ -137,7 +137,7 @@ public class WebSettings {
         if (isBlank(prop)) return;
         action.execute(prop);
     }
-    
+
     public static boolean initialized = false;
 
     public static synchronized void init() {
@@ -202,19 +202,19 @@ public class WebSettings {
             fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
+                    p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
             loadCapabilities("ff.capabilities.path","ff.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
+                    p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
             loadCapabilities("ie.capabilities.path","ie.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
+                    p -> p.forEach((key,value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
             loadCapabilities("edge.capabilities.path","edge.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
+                    p -> p.forEach((key,value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
             loadCapabilities("opera.capabilities.path","opera.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
+                    p -> p.forEach((key,value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
             loadCapabilities("safari.capabilities.path","safari.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
+                    p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
             loadCapabilities("common.capabilities.path","common.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
+                    p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
 
             initialized = true;
         } catch (Throwable ex) {
@@ -227,8 +227,8 @@ public class WebSettings {
 
     private static ElementArea getClickType(String type) {
         ElementArea clickType = first(getAllEnumValues(ElementArea.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
+                t -> t.toString().trim().replaceAll("[^a-z]", "")
+                        .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
         return clickType != null
                 ? clickType : CENTER;
     }
@@ -238,15 +238,15 @@ public class WebSettings {
     }
     private static TextTypes getTextType(String type) {
         TextTypes textType = first(getAllEnumValues(TextTypes.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
+                t -> t.toString().trim().replaceAll("[^a-z]", "")
+                        .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
         return textType != null
                 ? textType : SMART_TEXT;
     }
     private static SetTextTypes getSetTextType(String type) {
         SetTextTypes setTextType = first(getAllEnumValues(SetTextTypes.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
+                t -> t.toString().trim().replaceAll("[^a-z]", "")
+                        .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
         return setTextType != null
                 ? setTextType : CLEAR_SEND_KEYS;
     }
@@ -264,7 +264,7 @@ public class WebSettings {
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
         if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
             throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
-                "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
+                    "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }

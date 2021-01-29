@@ -1,8 +1,12 @@
 package com.epam.jdi.light.mobile.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.JdiSettings;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
+import static com.epam.jdi.light.elements.base.JdiSettings.DEFAULT_CONTEXT;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import io.appium.java_client.PerformsTouchActions;
@@ -20,6 +24,10 @@ import java.time.Duration;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.elements.base.JdiSettings.getAllElementsInContext;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.tools.LinqUtils.map;
+import static java.util.Collections.singletonList;
 
 public class MobileAppUIElement extends MobileUIElement {
 
@@ -138,5 +146,39 @@ public class MobileAppUIElement extends MobileUIElement {
     @Override
     public boolean isVisible() {
         return getWebElement().isDisplayed();
+    }
+
+    @JDebug
+    @Override
+    public List<WebElement> getWebElements(Object... args) {
+        List<WebElement> elements = getAllWebElements(args);
+        if (elements.size() > 0) {
+            beforeSearch(elements.get(0));
+        }
+        return elements;
+    }
+
+    @JDebug
+    private List<WebElement> getAllWebElements(Object... args) {
+        DEFAULT_CONTEXT.execute(driver());
+        if (webElements.hasValue()) {
+            List<WebElement> elements = map(webElements.get(), JdiSettings::purify);
+            if (elements.size() > 0) {
+                try {
+                    elements.get(0).getTagName();
+                    return elements;
+                } catch (Exception ignore) {
+                    webElements.clear();
+                }
+            }
+        }
+        if (locator.isNull())
+            return singletonList(getSmart());
+        return getAllElementsInContext(this, args);
+    }
+
+    WebElement beforeSearch(WebElement el) {
+        (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new UIElement(el));
+        return el;
     }
 }

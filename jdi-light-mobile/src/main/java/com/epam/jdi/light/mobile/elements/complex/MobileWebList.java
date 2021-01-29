@@ -53,10 +53,6 @@ public class MobileWebList extends WebList {
         return setup(MobileWebList.class, setup);
     }
 
-    protected SearchContext getDefaultContext() {
-        return driver();
-    }
-
     protected CacheValue<MapArray<String, MobileUIElement>> map = new CacheValue<>(MapArray::new);
 
 

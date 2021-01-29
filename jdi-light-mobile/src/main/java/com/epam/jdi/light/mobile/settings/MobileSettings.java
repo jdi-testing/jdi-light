@@ -6,6 +6,7 @@ import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
 import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import com.epam.jdi.light.settings.WebSettings;
+import static com.epam.jdi.light.elements.base.JdiSettings.DEFAULT_CONTEXT;
 
 import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
@@ -42,6 +43,7 @@ public class MobileSettings {
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_ANDROID.put(key.toString(), value.toString())));
         loadCapabilities("ios.capabilities.path","ios.properties",
             p -> p.forEach((key,value) -> CAPABILITIES_FOR_IOS.put(key.toString(), value.toString())));
+        DEFAULT_CONTEXT = driver ->driver;
         initialized = true;
     }
 

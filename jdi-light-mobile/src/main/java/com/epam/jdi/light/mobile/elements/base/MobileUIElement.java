@@ -181,12 +181,6 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return getCoordinatesOnScreen(getCenterInViewport());
     }
 
-    //@Override
-    protected SearchContext getDefaultContext() {
-        return driver();
-    }
-
-
     public Label mobileLabel() {
         return new Label().setup(Label.class, j->j
                 .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))

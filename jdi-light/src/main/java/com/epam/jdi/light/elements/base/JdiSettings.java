@@ -93,8 +93,8 @@ public class JdiSettings {
     }
     public static WebElement purify(WebElement element) {
         return isInterface(element.getClass(), IBaseElement.class)
-            ? ((IBaseElement)element).base().get()
-            : element;
+                ? ((IBaseElement)element).base().get()
+                : element;
     }
 
     private static void validateFoundElement(JDIBase base, WebElement element) {
@@ -119,11 +119,11 @@ public class JdiSettings {
     private static SearchContext getSearchContext(WebDriver driver, Object parent) {
         JDIBase base = getBase(parent);
         if (base == null)
-            return getDefaultContext(driver);
+            return DEFAULT_CONTEXT.execute(driver);        ;
         if (base.webElement.hasValue())
             return base.webElement.get();
         if (base.locator.isRoot() && base.locator.isNull())
-            return getDefaultContext(driver);
+            return DEFAULT_CONTEXT.execute(driver);
         List<By> frames = base.getFrames();
         if (frames != null)
             return getFrameContext(driver, frames);
@@ -154,13 +154,13 @@ public class JdiSettings {
         if (frames != null)
             return getFrameContext(base.driver(), frames);
         return locator.isRoot || isRoot(parent)
-            ? getDefaultContext(driver)
-            : getSearchContext(driver, parent);
+                ? DEFAULT_CONTEXT.execute(driver)
+                : getSearchContext(driver, parent);
     }
 
     private static SearchContext getFrameContext(WebDriver driver, List<By> frames) {
         WebDriver ctx = driver;
-        getDefaultContext(driver);
+        DEFAULT_CONTEXT.execute(driver);
         for (By frame : frames) {
             List<WebElement> els = uiSearch(ctx, getFrameLocator(frame, ctx));
             WebElement frameElement;
@@ -186,6 +186,8 @@ public class JdiSettings {
             return By.id(getByLocator(frame));
         }
     }
+    public static JFunc1<WebDriver, SearchContext> DEFAULT_CONTEXT
+            = JdiSettings::getDefaultContext;
     public static SearchContext getDefaultContext(WebDriver driver) {
         return driver.switchTo().defaultContent();
     }
@@ -198,8 +200,8 @@ public class JdiSettings {
         SearchContext searchContext = getContext(base);
         By locator = base.getLocator(args);
         return locator == null
-            ? singletonList(base.getSmart())
-            : uiSearch(searchContext, correctLocator(locator));
+                ? singletonList(base.getSmart())
+                : uiSearch(searchContext, correctLocator(locator));
     }
     private static WebElement getUIElementFromArgs(JDIBase base, Object... args) {
         if (base.locator.argsCount() == 0 && args.length == 1) {
