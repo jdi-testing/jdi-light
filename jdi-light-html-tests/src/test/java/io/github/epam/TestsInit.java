@@ -32,6 +32,7 @@ public interface TestsInit {
     }
 
     default boolean isFireFox() {
+        logger.info("Browser %s is used ", DRIVER.name);
         return DRIVER.name.equalsIgnoreCase("firefox")
                 || DRIVER.name.equalsIgnoreCase("geckodriver");
     }
