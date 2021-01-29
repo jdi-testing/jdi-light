@@ -39,7 +39,7 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
 import static com.epam.jdi.light.driver.WebDriverFactory.RUN_DRIVERS;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriverFromName;
 import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
-import static com.epam.jdi.light.driver.get.RemoteDriver.*;
+import static com.epam.jdi.light.driver.get.RemoteDriverInfo.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.base.JdiSettings.DEFAULT_CONTEXT;
 import static com.epam.jdi.light.elements.base.JdiSettings.getWebElementsFromContext;
@@ -53,6 +53,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
+import static com.epam.jdi.tools.PropertyReader.hasProperty;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
@@ -69,10 +70,10 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
 public class WebSettings {
     public static ILogger logger = instance("JDI");
     public static String getDomain() {
-        if (isNotBlank(DRIVER.domain))
-            return DRIVER.domain;
-        init();
-        return "No Domain Found. Use test.properties or JDISettings.DRIVER.domain";
+        if (isBlank(DRIVER.domain)) {
+            init();
+        }
+        return isNotBlank(DRIVER.domain) ? DRIVER.domain : "";
     }
     public static void setDomain(String domain) {
         DRIVER.domain = domain;
@@ -157,7 +158,8 @@ public class WebSettings {
             fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
             COMMON.strategy.action.execute();
             if (DRIVER.name.equalsIgnoreCase(DEFAULT_DRIVER)) {
-                fillAction(p -> DRIVER.name = p, "driver");
+                fillAction(p -> DRIVER.name = p,
+                    isNotBlank(getProperty("driver")) ? "driver" : "browser");
             }
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
@@ -168,7 +170,8 @@ public class WebSettings {
             }, "single.thread");
             fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
             fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
-            fillAction(WebSettings::setDomain, "domain");
+            fillAction(WebSettings::setDomain,
+                isNotBlank(getProperty("site.url")) ? "site.url" : "domain");
             fillAction(p -> SCREEN.path = p, "screens.folder");
             fillAction(p -> SCREEN.tool = p, "screenshot.tool");
             if (SCREEN.tool.equals("robot")) {
@@ -192,7 +195,11 @@ public class WebSettings {
             // RemoteWebDriver properties
             fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
             fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
-            fillAction(p -> DRIVER.remoteRun = parseBoolean(p), "driver.remote.run");
+            if (hasProperty("driver.remote.run")) {
+                fillAction(p -> DRIVER.remoteRun = parseBoolean(p), "driver.remote.run");
+            } else {
+                DRIVER.remoteRun = hasProperty("driver.remote.url") && DRIVER.remoteRun == null;
+            }
             fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
             logger.setLogLevel(LOGS.logLevel);
             fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
@@ -257,9 +264,10 @@ public class WebSettings {
             case "sauce":
             case "saucelabs":
                 DRIVER.capabilities.common = sauceCapabilities();
-                return sauceLabs();
+                return SAUCE_LABS;
             case "browserstack": return browserstack();
-            default: return seleniumLocalhost();
+            case "selenoid": return SELENIDE_LOCAL;
+            default: return SELENIUM_LOCAL_HOST;
         }
     }
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {

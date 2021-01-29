@@ -147,12 +147,12 @@ public class ActionHelper {
                     throw exception(ex, "fillTemplate get 'core' failed");
                 }
                 try {
-                    fields = classFields(jp.getThis());
+                    fields = classFields(getJpInstance(jp));
                 } catch (Throwable ex) {
                     throw exception(ex, "fillTemplate get 'fields' failed");
                 }
                 try {
-                    methods = classMethods(jp.getThis());
+                    methods = classMethods(getJpInstance(jp));
                 } catch (Throwable ex) {
                     throw exception(ex, "fillTemplate get 'methods' failed");
                 }
@@ -244,7 +244,7 @@ public class ActionHelper {
         logger.toLog(message, logLevel(jInfo));
     }
     private static void visualValidation(JoinPoint jp, String message) {
-        Object obj = jp.getThis();
+        Object obj = getJpInstance(jp);
         if (obj == null) {
             if (getJpMethod(jp).getMethod().getAnnotation(VisualCheck.class) != null)
                 try {
@@ -315,9 +315,10 @@ public class ActionHelper {
     static JDIAction getJdiAction(JoinPoint jp) {
         return ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
     }
-    protected static Class<?> getJpClass(JoinPoint jp) {
-        return jp.getThis() != null
-                ? jp.getThis().getClass()
+    public static Class<?> getJpClass(JoinPoint jp) {
+        Object instance = getJpInstance(jp);
+        return instance != null
+                ? instance.getClass()
                 : jp.getSignature().getDeclaringType();
     }
     //region Private
@@ -474,7 +475,7 @@ public class ActionHelper {
         return result;
     }
     static MapArray<String, Object> core(JoinPoint jp) {
-        Object instance = jp.getThis();
+        Object instance = getJpInstance(jp);
         if (instance != null && isInterface(instance.getClass(), ICoreElement.class)) {
             UIElement el = ((ICoreElement) instance).core();
             return getAllFields(el);
@@ -498,7 +499,7 @@ public class ActionHelper {
     static String getInfo(JoinPoint jp, JFunc1<JDIBase, String> baseInterface,
               JFunc1<Object, String> defaultName, String defaultText) {
         try {
-            Object obj = jp.getThis();
+            Object obj = getJpInstance(jp);
             if (obj == null)
                 return jp.getSignature().getDeclaringType().getSimpleName();
             if (baseInterface != null && isInterface(getJpClass(jp), IBaseElement.class))
@@ -587,10 +588,11 @@ public class ActionHelper {
         String methodName = getMethodName(jp);
         return className + "." + methodName;
     }
-    public static Class<?> getJpClass(ProceedingJoinPoint jp) {
-        return jp.getThis() != null
-                ? jp.getThis().getClass()
-                : jp.getSignature().getDeclaringType();
+    public static Object getJpInstance(JoinPoint jp) {
+        Object result = jp.getThis();
+        if (result == null)
+            result = jp.getTarget();
+        return result;
     }
     public static Object defaultAction(ActionObject jInfo) throws Throwable {
         logger.trace("defaultAction: " + getClassMethodName(jInfo.jp()));

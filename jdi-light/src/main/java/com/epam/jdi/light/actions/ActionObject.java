@@ -74,7 +74,7 @@ public class ActionObject {
             () -> instance() != null ? instance() : jp().getSignature().getDeclaringType().getSimpleName());
 
     public Object instance() {
-        return jp().getThis();
+        return getJpInstance(jp());
     }
     public JDIBase element() {
         try {

@@ -123,11 +123,23 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public static void openSite() {
         init();
-        new WebPage(getDomain()).open();
+        String domain = getDomain();
+        if (isBlank(domain)) {
+            throw exception("No Domain Found. Add browser=MY_SITE_DOMAIN in test.properties or JDISettings.DRIVER.domain");
+        }
+        WebPage site = new WebPage();
+        if(isNotBlank(DRIVER.siteName)) {
+            site.setName(DRIVER.siteName);
+        }
+        site.open(domain);
     }
     public static void openSite(Class<?> site) {
         initSite(site);
-        WebPage page = new WebPage(getDomain());
+        String domain = getDomain();
+        if (isBlank(domain)) {
+            throw exception("No Domain Found. Use test.properties or JDISettings.DRIVER.domain");
+        }
+        WebPage page = new WebPage(domain);
         page.setName(site.getSimpleName());
         page.open();
     }
@@ -190,6 +202,9 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(value = "Open '{name}'(url={0})", timeout = 0)
     private void open(String url) {
+        if (isBlank(url)) {
+            throw exception("Failed to open page with empty url");
+        }
         init();
         CacheValue.reset();
         driver().navigate().to(url);
