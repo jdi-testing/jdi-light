@@ -90,7 +90,7 @@ jobs:
   # ========== steps before are needed for all tasks ==================
 
     - name: Tests BDD
-      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      if: ${{ steps.jdi-compile.conclusion == 'success' }}
       timeout-minutes: 120 # prevent blocking
       run: |
           mvn verify $WITH_PARAMS -DCucumber.options="--tags ~@ignore_ci" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
@@ -104,42 +104,42 @@ jobs:
 #        retention-days: 1
 
     - name: Tests bootstrap Unit
-      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      if: ${{ steps.jdi-compile.conclusion == 'success' }}
       timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
     - name: Run tests - Angular Unit tests
-      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      if: ${{ steps.jdi-compile.conclusion == 'success' }}
       timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - Angular Common tests
-      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      if: ${{ steps.jdi-compile.conclusion == 'success' }}
       timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - Angular Complex tests
-      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      if: ${{ steps.jdi-compile.conclusion == 'success' }}
       timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - HTML
-      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      if: ${{ steps.jdi-compile.conclusion == 'success' }}
       timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS
 
     - name: Run tests - Test Examples
-      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      if: ${{ steps.jdi-compile.conclusion == 'success' }}
       timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES
 
     - name: Run tests - Performance
-      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      if: ${{ steps.jdi-compile.conclusion == 'success' }}
       timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE
 
     - name: Collect reports
-      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      if: ${{ steps.jdi-compile.conclusion == 'success' }}
       run: |
         echo --------------- Collecting Allure Reports.... ------------------
         sudo chmod +x reporting.sh

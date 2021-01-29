@@ -32,6 +32,7 @@ public interface TestsInit {
     }
 
     default boolean isFireFox() {
-        return DRIVER.name.toLowerCase().equals("firefox");
+        return DRIVER.name.equalsIgnoreCase("firefox")
+                || DRIVER.name.equalsIgnoreCase("geckodriver");
     }
 }

@@ -56,7 +56,7 @@ public class FileUploadTests implements TestsInit {
         avatar.label().is().text(containsString("picture"));
     }
 
-    @Test(enabled = false)
+    @Test
     public void downloadTest() {
         if (isFireFox()) return;
         cleanupDownloads();
