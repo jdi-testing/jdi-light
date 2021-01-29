@@ -4,12 +4,13 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-
 import com.epam.jdi.light.mobile.elements.common.app.android.Label;
 import com.epam.jdi.light.mobile.elements.complex.MobileWebList;
+import com.epam.jdi.light.mobile.elements.init.MobileUIFactory;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
@@ -22,33 +23,50 @@ import org.openqa.selenium.*;
 import java.time.Duration;
 import java.util.List;
 
+import static com.epam.jdi.light.common.TextTypes.*;
+import static com.epam.jdi.light.common.TextTypes.VALUE;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.mobile.CoordinateConversionHelper.getCoordinatesOnScreen;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class MobileUIElement extends UIElement implements HasTouchActions {
 
     //region Constructors
-    public MobileUIElement() { }
-    public MobileUIElement(WebElement el) { setWebElement(el); }
-    public MobileUIElement(List<WebElement> els) { setWebElements(els); }
-    public MobileUIElement(@MarkupLocator By locator) { setLocator(locator); }
+    public MobileUIElement() {
+    }
+
+    public MobileUIElement(WebElement el) {
+        setWebElement(el);
+    }
+
+    public MobileUIElement(List<WebElement> els) {
+        setWebElements(els);
+    }
+
+    public MobileUIElement(@MarkupLocator By locator) {
+        setLocator(locator);
+    }
+
     public MobileUIElement(JDIBase base) {
         super(base);
     }
+
     public MobileUIElement(JDIBase base, String locator, String name, Object parent) {
         super(base);
         setLocator(locator);
         setName(name);
         setParent(parent);
     }
+
     public MobileUIElement(JDIBase base, By locator, String name) {
         super(base);
         setLocator(locator);
         setName(name);
     }
+
     public MobileUIElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
         super(base);
         setWebElement(el);
@@ -57,25 +75,32 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     //endregion
 
     //region Core
-    public MobileUIElement core() { return this; }
+    public MobileUIElement core() {
+        return this;
+    }
+
     public MobileUIElement setup(JAction1<JDIBase> setup) {
         return setup(MobileUIElement.class, setup);
     }
+
     @Override
     public MobileUIElement setCore(JDIBase base) {
         super.setCore(base);
         return this;
     }
+
     @Override
     public MobileUIElement setName(String name) {
         super.setName(name);
         return this;
     }
+
     @Override
     public MobileUIElement waitSec(int timeout) {
         super.waitSec(timeout);
         return this;
     }
+
     @Override
     public MobileUIElement noWait() {
         super.noWait();
@@ -94,26 +119,56 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return element;
     }
 
+    public static JFunc1<MobileUIElement, String> SMART_GET_TEXT = ui -> {
+        String text = ui.text(TEXT);
+        if (isNotBlank(text))
+            return text;
+        text = ui.text(INNER);
+        if (isNotBlank(text))
+            return text;
+        text = ui.text(VALUE);
+        return isNotBlank(text) ? text : "";
+    };
+    public static JFunc1<MobileUIElement, String> SMART_LIST_TEXT = ui -> {
+        String text = ui.text(TEXT);
+        if (isNotBlank(text))
+            return text;
+        text = ui.text(INNER);
+        if (isNotBlank(text))
+            return text;
+        String id = ui.attr("id");
+        if (isNotBlank(id)) {
+            MobileUIElement label = MobileUIFactory.$(By.cssSelector("[for=" + id + "]"));
+            label.waitSec(0);
+            try {
+                text = label.getText();
+            } catch (Throwable ignore) {
+            }
+        }
+        return isNotBlank(text) ? text : ui.text(VALUE);
+    };
+
     @Override
     public MobileUIElement find(@MarkupLocator By by) {
         return $(by, this);
     }
 
-    @Override
-    public MobileWebList finds(@MarkupLocator String by) {
+    public MobileWebList findsMobileElements(@MarkupLocator String by) {
+        return $$(by, this);
+    }
+
+    public MobileWebList findsMobileElemrnts(@MarkupLocator By by) {
         return $$(by, this);
     }
 
     @Override
-    public MobileWebList finds(@MarkupLocator By by) {
-        return $$(by, this);
+    public MobileUIElement firstChild() {
+        return this.find("*");
     }
 
-    @Override
-    public MobileUIElement firstChild() { return this.find("*"); }
-
-    @Override
-    public MobileWebList children() { return finds("*"); }
+    public MobileWebList findsChildren() {
+        return findsMobileElements("*");
+    }
 
     @JDIAction("Perform tap on '{name}'")
     public void tap() {
@@ -121,6 +176,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
                 .tap(TapOptions.tapOptions().withPosition(PointOption.point(getCenterOnScreen())))
                 .perform();
     }
+
     @JDIAction("Perform double tap on '{name}'")
     public void doubleTap() {
         new TouchAction<>((PerformsTouchActions) getDriver())
@@ -129,12 +185,14 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
                         .withPosition(PointOption.point(getCenterOnScreen())))
                 .perform();
     }
+
     @JDIAction("Perform long press on '{name}'")
     public void longPress() {
         new TouchAction<>((PerformsTouchActions) getDriver())
                 .longPress(LongPressOptions.longPressOptions().withPosition(PointOption.point(getCenterOnScreen())))
                 .perform();
     }
+
     @JDIAction("Perform long press on '{name}' with duration of {0} seconds")
     public void longPress(int seconds) {
         new TouchAction<>((PerformsTouchActions) getDriver())
@@ -143,6 +201,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
                         .withDuration(Duration.ofSeconds(seconds)))
                 .perform();
     }
+
     @Override
     @JDIAction("Drag '{name}' and drop it to coordinates: (x:{0}, y:{1})")
     public void dragAndDropTo(int xOffset, int yOffset) {
@@ -161,6 +220,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         Rectangle rect = getRect();
         return new Point(rect.x, rect.y);
     }
+
     public Point getCenter() {
         Rectangle rect = getRect();
         return new Point(rect.x, rect.y).moveBy(rect.width / 2, rect.height / 2);
@@ -170,13 +230,16 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         Rectangle rect = getPosition();
         return new Point(rect.x, rect.y);
     }
+
     public Point getCenterInViewport() {
         Rectangle rect = getPosition();
         return new Point(rect.x, rect.y).moveBy(rect.width / 2, rect.height / 2);
     }
+
     public Point getLocationOnScreen() {
         return getCoordinatesOnScreen(getLocationInViewport());
     }
+
     public Point getCenterOnScreen() {
         return getCoordinatesOnScreen(getCenterInViewport());
     }
@@ -188,18 +251,37 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
 
 
     public Label mobileLabel() {
-        return new Label().setup(Label.class, j->j
-                .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))
+        return new Label().setup(Label.class, j -> j
+                .setLocator(By.cssSelector("[for=" + core().attr("id") + "]"))
                 .setName(getName() + " label"));
     }
     //region Aliases
-    /** getAllAttributes alias */
-    public MapArray<String, String> attrs() { return getAllAttributes(); }
-    /** getAttribute alias */
-    public String attr(String value) { return getAttribute(value); }
-    /** getText alias */ @Override
-    public String text() { return text(textType); }
-    /** getCssValue alias */
+
+    /**
+     * getAllAttributes alias
+     */
+    public MapArray<String, String> attrs() {
+        return getAllAttributes();
+    }
+
+    /**
+     * getAttribute alias
+     */
+    public String attr(String value) {
+        return getAttribute(value);
+    }
+
+    /**
+     * getText alias
+     */
+    @Override
+    public String text() {
+        return text(textType);
+    }
+
+    /**
+     * getCssValue alias
+     */
     public String css(String prop) {
         return getCssValue(prop);
     }
@@ -209,10 +291,12 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     public void setValue(String value) {
         input(value);
     }
+
     public String getValue() {
         return getText();
     }
     //endregion
+
     /**
      * Get all element's attributes
      */
@@ -222,8 +306,11 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         try {
             jsList = (List<String>) js().executeScript("var s = []; var attrs = arguments[0].attributes; for (var l = 0; l < attrs.length; ++l) { var a = attrs[l]; s.push(a.name + '=\"' + a.value + '\"'); } ; return s;", getWebElement());
             return new MapArray<>(jsList, r -> r.split("=")[0], r -> r.split("=")[1].replace("\"", ""));
-        } catch (Exception ignore) { return new MapArray<>(); }
+        } catch (Exception ignore) {
+            return new MapArray<>();
+        }
     }
+
     @Override
     protected boolean enabled() {
         if (hasClass("active") || hasAttribute("enabled"))
