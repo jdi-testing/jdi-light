@@ -48,6 +48,7 @@ jobs:
 
     - name: Prepare environment
       run: |
+        sudo apt install zip
         java -Xmx32m -version
         ls -lah
         env
@@ -137,16 +138,17 @@ jobs:
     - name: Collect reports
       continue-on-error: true
       run: |
-        echo Collecting Allure Reports....
+        echo ------------ Collecting Allure Reports.... ------------------
         sudo chmod +x reporting.sh
         source reporting.sh
         generateAllureReports
         printAllureSummary ${{ matrix.java }}
+        zip -r allure-report.zip ./allure-report/
 
 
-    - name: 'All allure report'
+    - name: 'Upload allure report'
       uses: actions/upload-artifact@v2
       with:
-        name: allure-report-${{ matrix.java }}
-        path: ./allure-report/
+        name: allure-report-sdk${{ matrix.java }}
+        path: ./allure-report.zip
         retention-days: 1

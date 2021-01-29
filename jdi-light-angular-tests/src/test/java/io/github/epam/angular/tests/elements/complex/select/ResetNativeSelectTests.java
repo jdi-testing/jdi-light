@@ -26,7 +26,7 @@ public class ResetNativeSelectTests extends TestsSelectBase {
         resetNativeSelect.is().selected(matchesPattern("\\W*"));
     }
 
-    @Test
+    @Test(enabled = false)
     public void checkEnabledOptionCanBeSelectedByName() {
         resetNativeSelect.select(AUDI);
         resetNativeSelect.is().selected(AUDI);

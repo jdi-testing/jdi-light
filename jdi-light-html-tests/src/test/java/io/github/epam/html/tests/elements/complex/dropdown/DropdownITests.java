@@ -74,7 +74,8 @@ public class DropdownITests implements TestsInit {
     public void sizeTest() {
         assertEquals(dressCode3.size(), 4);
     }
-    @Test
+
+    @Test(enabled = false)
     public void disabledTest() {
         if (isFireFox()) return;
         disabledDropdown.select("Pirate");
@@ -124,7 +125,8 @@ public class DropdownITests implements TestsInit {
             .disabled(hasItems("Disabled"))
             .disabled(not(hasItems("Fancy", "Pirate", "Casual")));
     }
-    @Test
+
+    @Test(enabled = false)
     public void assertValidationTest() {
         dressCode3.assertThat().values(contains("Fancy", "Casual", "Disabled", "Pirate"));
         disabledDropdown.assertThat().selected("Disabled");

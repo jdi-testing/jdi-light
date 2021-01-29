@@ -57,7 +57,7 @@ public class DataSimpleTableTests implements TestsInit {
             "NumberTypeUserDescription1AdminUserManagerRomanWolverineVip2AdminUserManagerSergeyIvanSpiderManVip3AdminUserManagerVladzimirPunisherVip4AdminUserManagerHelenBennettCaptainAmericasomedescriptionVip5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
     }
 
-    @Test
+    @Test(enabled = false)
     public void valueTest() {
         String value = usersData.getValue().replaceAll("\r", "");
         assertEquals(value,

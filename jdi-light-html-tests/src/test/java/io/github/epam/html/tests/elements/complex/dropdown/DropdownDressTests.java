@@ -74,7 +74,8 @@ public class DropdownDressTests implements TestsInit {
     public void sizeTest() {
         assertEquals(dressCode2.size(), 4);
     }
-    @Test
+
+    @Test(enabled = false)
     public void disabledTest() {
         if (isFireFox()) return;
         disabledDropdown.select("Pirate");

@@ -49,13 +49,14 @@ public class FileUploadTests implements TestsInit {
         } catch (Exception ignore) {}
         disabledFileInput.is().text(is(""));
     }
+
     @Test
     public void labelTest() {
         assertEquals(avatar.labelText(), "Profile picture:");
         avatar.label().is().text(containsString("picture"));
     }
 
-    @Test
+    @Test(enabled = false)
     public void downloadTest() {
         if (isFireFox()) return;
         cleanupDownloads();
@@ -71,7 +72,8 @@ public class FileUploadTests implements TestsInit {
                 "Earth provides enough to satisfy every man's needs, but not every man's greed",
                 "UTF-8");
     }
-    @Test
+
+    @Test(enabled = false)
     public void assertFileTest() throws IOException {
         cleanupDownloads();
         String fileName = "gandhi.txt";
@@ -79,6 +81,7 @@ public class FileUploadTests implements TestsInit {
         // Validate file in DOWNLOADS_DIR folder
         assertThatFile(fileName).text(containsString("enough to satisfy"));
     }
+
     @Test
     public void baseValidationTest() {
         baseValidation(avatar);
