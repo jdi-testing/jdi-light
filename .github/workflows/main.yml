@@ -5,8 +5,7 @@ name: Java CI with Maven
 env:
     CHROME_PROPERTIES: "chrome.properties"
     FIREFOX_PROPERTIES: "ff.properties"
-    #WITH_PARAMS: "-ntp -Ddriver=chrome"
-    WITH_PARAMS: "-ntp -Ddriver=firefox"
+    WITH_PARAMS: "-ntp -Ddriver=firefox" # for Chrome: "-ntp -Ddriver=chrome"
     UNIT: "-Punit"
     COMMON: "-Pcommon"
     COMPLEX: "-Pcomplex"
@@ -36,7 +35,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        java: [8]
+        java: [8] # all [8, 9, 10, 11, 12, 13]
 
     steps:
     - uses: actions/checkout@v2
@@ -85,60 +84,64 @@ jobs:
         echo arguments=$FIREFOX_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
 
     - name: Compile jdi code
+      id: jdi-compile
       run: mvn -ntp install -DskipTests
 
+  # ========== steps before are needed for all tasks ==================
+
     - name: Tests BDD
-      continue-on-error: true
+      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      timeout-minutes: 120 # prevent blocking
       run: |
           mvn verify $WITH_PARAMS -DCucumber.options="--tags ~@ignore_ci" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
 
-# Delete comment is original allure data for BDD tests is needed
+#####  Example for original allure data upload
 #    - name: 'Upload BDD results'
 #      uses: actions/upload-artifact@v2
 #      with:
-#        name: bdd-results-${{ matrix.java }}
+#        name: bdd-results-sdk${{ matrix.java }}
 #        path: ./${BDD_TESTS}/target/allure-results/
 #        retention-days: 1
 
     - name: Tests bootstrap Unit
-      continue-on-error: true
+      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
-#    - name: 'Upload Bootstrap results'
-#      uses: actions/upload-artifact@v2
-#      with:
-#        name: bootstrap-results-${{ matrix.java }}
-#        path: ./${BOOTSTRAP_TESTS}/target/allure-results/
-#        retention-days: 2
-
     - name: Run tests - Angular Unit tests
-      continue-on-error: true
+      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - Angular Common tests
-      continue-on-error: true
+      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - Angular Complex tests
-      continue-on-error: true
+      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - HTML
-      continue-on-error: true
+      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS
 
     - name: Run tests - Test Examples
-      continue-on-error: true
+      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES
 
     - name: Run tests - Performance
-      continue-on-error: true
+      if: {{ steps.jdi-compile.conclusion == 'success' }}
+      timeout-minutes: 120 # prevent blocking
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE
 
     - name: Collect reports
-      continue-on-error: true
+      if: {{ steps.jdi-compile.conclusion == 'success' }}
       run: |
-        echo ------------ Collecting Allure Reports.... ------------------
+        echo --------------- Collecting Allure Reports.... ------------------
         sudo chmod +x reporting.sh
         source reporting.sh
         generateAllureReports
@@ -147,8 +150,9 @@ jobs:
 
 
     - name: 'Upload allure report'
+      if: {{ steps.jdi-compile.conclusion == 'success' }}
       uses: actions/upload-artifact@v2
       with:
-        name: allure-report-sdk${{ matrix.java }}
+        name: allure-report-jdk${{ matrix.java }}
         path: ./allure-report.zip
         retention-days: 1
