@@ -84,7 +84,8 @@ Feature: BaseUIElement
 	Given I open "Html5 Page" 	
 	Then the "Logout" is hidden
 
-  Scenario: isHidden
+  @ignore_ci
+  Scenario: doesntNotAppear
 	Given I open "Html5 Page"
 	Then the "Logout" does not appear
 
