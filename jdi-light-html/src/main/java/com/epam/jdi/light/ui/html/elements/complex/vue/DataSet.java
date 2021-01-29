@@ -5,8 +5,6 @@ import com.epam.jdi.tools.DataClass;
 import java.util.List;
 
 public class DataSet extends DataClass<DataSet> {
-    public String label;
-    public String bgColor;
-    public String borderColor;
+    public String label, bgColor, borderColor;
     public List<Integer> data;
 }

@@ -9,15 +9,8 @@ import java.lang.reflect.Field;
 import static com.epam.jdi.light.common.Exceptions.exception;
 
 public class Workspace extends DataClass<Workspace> {
-    public String category;
-    public String name;
-    public String projectCode;
-    public String apiId;
-    public String therapeuticArea;
-    public String processes;
-    public String parentWorkspace;
-    public String lastUpdated;
-    public String id;
+    public String category, name, projectCode, apiId, therapeuticArea, processes,
+        parentWorkspace, lastUpdated, id;
 
     public Workspace copy(JAction1<Workspace> change) {
         Workspace ws = copy();

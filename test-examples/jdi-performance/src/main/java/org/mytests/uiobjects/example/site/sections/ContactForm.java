@@ -14,18 +14,13 @@ import java.lang.reflect.Field;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class ContactForm extends Form<Contacts> {
-	TextField firstName;
-	TextField lastName;
-	TextField position;
-	TextField passportNumber;
-	TextField passportSeria;
+	TextField firstName, lastName, position, passportNumber, passportSeria;
 
 	DropdownSelect gender;
 	IsCombobox religion;
 	MultiDropdown weather;
 
-	Checkbox passport;
-	Checkbox acceptConditions;
+	Checkbox passport, acceptConditions;
 	TextArea description;
 
 	//@UI("['Submit']") public Button submit;

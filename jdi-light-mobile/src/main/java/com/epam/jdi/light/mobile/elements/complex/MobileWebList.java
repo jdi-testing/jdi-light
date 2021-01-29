@@ -1,8 +1,8 @@
 package com.epam.jdi.light.mobile.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.JDILocator;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.base.JDILocator;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
@@ -17,7 +17,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -25,7 +24,6 @@ import static com.epam.jdi.light.common.TextTypes.LABEL;
 import static com.epam.jdi.light.common.TextTypes.SMART_LIST;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
@@ -55,7 +53,6 @@ public class MobileWebList extends WebList {
         return setup(MobileWebList.class, setup);
     }
 
-    @Override
     protected SearchContext getDefaultContext() {
         return driver();
     }

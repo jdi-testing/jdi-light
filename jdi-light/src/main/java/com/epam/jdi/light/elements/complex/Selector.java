@@ -19,6 +19,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -32,11 +33,15 @@ import static java.util.Arrays.asList;
 public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
         implements IMultiSelector, SetValue, HasPlaceholder {
     public static By LABEL_LOCATOR = By.xpath(".//label[text()='%s']");
+    protected int startIndex = ELEMENT.startIndex;
+
     protected Select asSelect() {
         return core().asSelect();
     }
     public WebList list() {
-        return $$(asSelect().getOptions(), getName());
+        WebList list = $$(asSelect().getOptions(), getName());
+        list.setStartIndex(getStartIndex());
+        return list;
     }
     /**
      * Selects the value based on its visible text
@@ -53,9 +58,9 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
-        if (index < 1)
+        if (index < getStartIndex())
             throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
-        asSelect().selectByIndex(index - 1);
+        asSelect().selectByIndex(index - getStartIndex());
     }
 
     /**
@@ -202,5 +207,11 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
     @Override
     public UIMSelectAssert<?,?> is() {
         return new UIMSelectAssert<>().set(this);
+    }
+    public int getStartIndex() {
+        return startIndex;
+    }
+    public void setStartIndex(int index) {
+        startIndex = index;
     }
 }

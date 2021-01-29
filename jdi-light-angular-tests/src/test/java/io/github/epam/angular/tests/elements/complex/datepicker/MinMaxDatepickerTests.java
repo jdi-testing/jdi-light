@@ -1,6 +1,5 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -9,11 +8,13 @@ import java.time.Month;
 import java.time.Year;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
+import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.minMaxDatepicker;
 
 public class MinMaxDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
+        angularPage.open();
         minMaxDatepicker.show();
     }
 
@@ -54,18 +55,6 @@ public class MinMaxDatepickerTests extends TestsDatepickerBase {
         String secondDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 1);
         minMaxDatepicker.openYearsView();
         minMaxDatepicker.has().disabledNavigation(PREVIOUS_TWENTY_YEARS.getName(),
-                                                  NEXT_TWENTY_YEARS.getName(),
-                                                  firstDisabledYearCell,
-                                                  secondDisabledYearCell);
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void after() {
-        if (minMaxDatepicker.isExpanded()) {
-            minMaxDatepicker.collapse();
-        }
-        if (!minMaxDatepicker.isEmpty()) {
-            minMaxDatepicker.clear();
-        }
+            NEXT_TWENTY_YEARS.getName(), firstDisabledYearCell, secondDisabledYearCell);
     }
 }

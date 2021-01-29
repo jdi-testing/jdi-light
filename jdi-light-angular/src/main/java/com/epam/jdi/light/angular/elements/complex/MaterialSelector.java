@@ -35,9 +35,9 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     }
 
     protected void setupLocators() {
-        dropdown.expandLocator = this.uiElement.locator.printLocator().replace(smart, "").replace(cssSharp, "")
+        dropdown.expandLocator = this.core().locator.printLocator().replace(smart, "").replace(cssSharp, "")
                 .replace("'", "");
-        dropdown.valueLocator = this.uiElement.locator.printLocator().replace(smart, "").replace(cssSharp, "")
+        dropdown.valueLocator = this.core().locator.printLocator().replace(smart, "").replace(cssSharp, "")
                 .replace("'", "");
         dropdown.listLocator = "mat-option span";
     }
@@ -211,7 +211,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     public UIElement hint() {
         return new UIElement(By.xpath(String.format(hintLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                    this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
@@ -222,7 +222,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     public UIElement error() {
         return new UIElement(By.xpath(String.format(errorLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                    this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
@@ -233,7 +233,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
 
     protected UIElement toggle() {
         return new UIElement(By.xpath(String.format(toggle,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                    this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 }

@@ -13,14 +13,14 @@ public class SearchViewFieldAssert extends UIAssert<SearchViewFieldAssert, ISear
     @JDIAction("Assert that '{name}' is iconified")
     @Override
     public SearchViewFieldAssert enabled() {
-        jdiAssert(element.isEnabled(), Matchers.is(true));
+        jdiAssert(element.get().isEnabled(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is expanded")
     @Override
     public SearchViewFieldAssert expanded() {
-        jdiAssert(element.isExpanded(), Matchers.is(true));
+        jdiAssert(element.get().isExpanded(), Matchers.is(true));
         return this;
     }
 

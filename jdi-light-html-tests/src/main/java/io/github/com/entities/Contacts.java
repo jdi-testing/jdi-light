@@ -5,11 +5,7 @@ import com.epam.jdi.light.common.Order;
 import com.epam.jdi.tools.DataClass;
 
 public class Contacts extends DataClass<Contacts> {
-    public String firstName;
-    public String lastName;
-    public String acceptConditions;
-    public String position;
-    public String passportNumber;
+    public String firstName, lastName, acceptConditions, position, passportNumber;
     public String passportSeria;
     @Order(1)
     public String description;

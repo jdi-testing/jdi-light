@@ -1,10 +1,12 @@
 package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.CacheValue;
+import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import org.aspectj.lang.JoinPoint;
@@ -14,38 +16,42 @@ import org.aspectj.lang.reflect.MethodSignature;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static java.util.UUID.randomUUID;
 
 public class ActionObject {
     private JoinPoint jp;
     private ProceedingJoinPoint pjp;
-    private UUID uuid;
+    private String processor;
 
-    public ActionObject(JoinPoint joinPoint) {
+    private ActionObject(String name) {
+        this.processor = name;
+    }
+    public ActionObject(JoinPoint joinPoint, String name) {
+        this(name);
         this.jp = joinPoint;
-        baseInit();
     }
-    public ActionObject(ProceedingJoinPoint joinPoint) {
+    public ActionObject(ProceedingJoinPoint joinPoint, String name) {
+        this(name);
         this.pjp = joinPoint;
-        baseInit();
     }
-    private void baseInit() {
-        uuid = randomUUID();
+    private int elementTimeout = -1;
+    private int elementTimeout() {
+        if (elementTimeout > -1)
+            return elementTimeout;
         try {
-            this.elementTimeout = element() != null
-                ? element().base().getTimeout()
+            elementTimeout = isBase()
+                ? element().getTimeout()
                 : TIMEOUTS.element.get();
         } catch (Throwable ex) {
-            this.elementTimeout = 10;
+            elementTimeout = 10;
         }
+        return elementTimeout;
     }
-    public UUID uuid() { return uuid; }
     public JoinPoint jp() { return pjp != null ? pjp : jp; }
     public Object execute() throws Throwable {
         return pjp().proceed();
@@ -62,35 +68,43 @@ public class ActionObject {
     }
     public Object object() { return obj.get(); }
     private CacheValue<Object> obj = new CacheValue<>(
-            () -> jp().getThis() != null ? jp().getThis() : jp().getSignature().getDeclaringType().getSimpleName());
+            () -> instance() != null ? instance() : jp().getSignature().getDeclaringType().getSimpleName());
 
-    public IBaseElement element() {
+    public Object instance() {
+        return jp().getThis();
+    }
+    public JDIBase element() {
         try {
-            if (jp().getThis() != null && isInterface(getJpClass(jp()), IBaseElement.class)) {
-                IBaseElement element = (IBaseElement) jp().getThis();
+            if (instance() != null && isInterface(getJpClass(jp()), IBaseElement.class)) {
+                IBaseElement element = (IBaseElement) instance();
                 if (element.base() != null)
-                    return element;
+                    return element.base();
             }
             return null;
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             return null;
         }
     }
+    public boolean isBase() {
+        return element() != null;
+    }
+    public boolean isCore() {
+        return core() != null;
+    }
     public ICoreElement core() {
         try {
-            if (jp().getThis() != null && isInterface(getJpClass(jp()), ICoreElement.class)) {
-                ICoreElement element = (ICoreElement) jp().getThis();
+            if (instance() != null && isInterface(getJpClass(jp()), ICoreElement.class)) {
+                ICoreElement element = (ICoreElement) instance();
                 if (element.core() != null)
                     return element;
             }
             return null;
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             return null;
         }
     }
 
     public int timeout() { return timeout.get(); }
-    private int elementTimeout;
     private CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
     private int getTimeout() {
         JDIAction ja = jp() != null
@@ -98,7 +112,7 @@ public class ActionObject {
             : null;
         return ja != null && ja.timeout() != -1
             ? ja.timeout()
-            : elementTimeout;
+            : elementTimeout();
     }
     public JDIAction jdiAnnotation() {
         return getJdiAction(jp());
@@ -109,13 +123,14 @@ public class ActionObject {
     }
 
     private void resetElementTimeout() {
-        if (element() != null) {
-            element().base().waitSec(elementTimeout);
+        if (isBase()) {
+            element().waitSec(elementTimeout());
         }
     }
     public void setElementTimeout() {
-        if (element() != null) {
-            element().base().waitSec(timeout());
+        if (isBase()) {
+            elementTimeout = element().getTimeout();
+            element().waitSec(timeout());
         }
     }
 
@@ -151,5 +166,24 @@ public class ActionObject {
     }
     public String methodFullName() {
         return getClassMethodName(jp());
+    }
+
+    public String print() {
+        String result = processor;
+        try {
+            result += "[" + aroundCount() + "]: ";
+        } catch (Throwable ignore) { }
+        try {
+            result += className() + "." + methodName() + "(";
+            if (jp().getArgs().length > 0) {
+                result += PrintUtils.print(map(jp().getArgs(), o -> o.getClass().getSimpleName()));
+            }
+            result += "); ";
+        } catch (Throwable ignore) { }
+        try {
+            if (isBase())
+                result += "Element: " + element().toString() + "; ";
+        } catch (Throwable ignore) { }
+        return result;
     }
 }

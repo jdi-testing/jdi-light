@@ -82,7 +82,7 @@ public final class WebDriverUtils {
             case "firefox":
                 name = "geckodriver";
                 break;
-            default: case "chrome":
+            case "chrome":
                 name = "chromedriver";
                 break;
 

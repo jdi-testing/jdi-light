@@ -16,17 +16,12 @@ import jdisite.custom.MultiSelect;
 import jdisite.entities.ContactInfo;
 
 public class ContactForm extends Form<ContactInfo> {
-    TextField firstName;
-    TextField lastName;
-    TextField position;
-    TextField passportNumber;
-    TextField passportSeria;
+    TextField firstName, lastName, position, passportNumber, passportSeria;
 
     DropdownSelect gender;
     DataListOptions religion;
     @UI("#weather") MultiSelect weather;
 
-    Checkbox passport;
-    Checkbox acceptConditions;
+    Checkbox passport, acceptConditions;
     TextArea description;
 }

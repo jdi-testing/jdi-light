@@ -22,11 +22,11 @@ import java.util.List;
 import java.util.logging.Level;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.stringToPrimitive;
@@ -253,7 +253,7 @@ public class DriverData {
                 case LINUX:
                     driver.manage().window().maximize();
                     break;
-                default: case MAC:
+                case MAC:
                     java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
                     setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
                     break;

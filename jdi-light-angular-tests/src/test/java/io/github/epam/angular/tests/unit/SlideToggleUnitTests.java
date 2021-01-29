@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.slideToggleSection;
+import static io.github.com.pages.sections.SlideToggleSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -20,32 +20,32 @@ public class SlideToggleUnitTests extends TestsInit {
 
     @Test
     public void checkTest() {
-        slideToggleSection.basicSlideToggle.check();
-        assertTrue(slideToggleSection.basicSlideToggle.isSelected());
+        basicSlideToggle.check();
+        assertTrue(basicSlideToggle.isSelected());
     }
 
     @Test
     public void uncheckTest() {
-        slideToggleSection.basicSlideToggle.uncheck();
-        assertFalse(slideToggleSection.basicSlideToggle.isSelected());
+        basicSlideToggle.uncheck();
+        assertFalse(basicSlideToggle.isSelected());
     }
 
     @Test
     public void clickTest() {
-        assertTrue(slideToggleSection.basicSlideToggle.isSelected());
-        slideToggleSection.basicSlideToggle.click();
-        assertFalse(slideToggleSection.basicSlideToggle.isSelected());
+        assertTrue(basicSlideToggle.isSelected());
+        basicSlideToggle.click();
+        assertFalse(basicSlideToggle.isSelected());
     }
 
     @Test
     public void testEnabledOption() {
-        slideToggleSection.disableCheckbox.uncheck();
-        assertTrue(slideToggleSection.resultSlideToggle.isEnabled());
+        disableCheckbox.uncheck();
+        assertTrue(resultSlideToggle.isEnabled());
     }
 
     @Test
     public void testDisabledOption() {
-        slideToggleSection.disableCheckbox.check();
-        assertTrue(slideToggleSection.resultSlideToggle.isDisabled());
+        disableCheckbox.check();
+        assertTrue(resultSlideToggle.isDisabled());
     }
 }

@@ -130,7 +130,8 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
     @JDIAction("Assert that '{name}' row '{0}' equals to other rows")
     public A rowsLooksCorrect(String keyColumn, List<Line> rows) {
         List<Line> tableRows = table().rowsImages();
-        for (int i = 0; i < table().count(); i++) {
+        int count = table().count();
+        for (int i = 0; i < count; i++) {
             Line tableRow = tableRows.get(i);
             String valueToSearch = tableRow.get(keyColumn);
             Line searchRow = findRow(rows, valueToSearch, keyColumn);

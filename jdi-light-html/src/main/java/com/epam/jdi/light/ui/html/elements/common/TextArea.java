@@ -34,13 +34,13 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     }
 
     @JDIAction(level = DEBUG)
-    public int rows() { return getInt("rows", uiElement); }
+    public int rows() { return getInt("rows", core()); }
     @JDIAction(level = DEBUG)
-    public int cols() { return getInt("cols", uiElement); }
+    public int cols() { return getInt("cols", core()); }
     @JDIAction(level = DEBUG)
-    public int minlength() { return getInt("minlength", uiElement); }
+    public int minlength() { return getInt("minlength", core()); }
     @JDIAction(level = DEBUG)
-    public int maxlength() { return getInt("maxlength", uiElement); }
+    public int maxlength() { return getInt("maxlength", core()); }
     @JDIAction("Add ne line '{0}' in '{name}'")
     public void addNewLine(String line) {
         if (isNotEmpty())

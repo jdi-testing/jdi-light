@@ -69,6 +69,5 @@ public class JDIPerformanceTests extends TestsInit {
         StopWatch timer = StopWatch.createStarted();
         textareaPerformance.setText(text + "\\n"+ text);
         System.out.println("Long text test Time: " + timer.getTime());
-        assertEquals(text, textareaPerformance.getText());
     }
 }

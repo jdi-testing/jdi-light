@@ -128,6 +128,7 @@ public class WebAnnotationsUtil {
             return By.className(locator.className());
         if (!"".equals(locator.name()))
             return By.name(locator.name());
+
         return null;
     }
 

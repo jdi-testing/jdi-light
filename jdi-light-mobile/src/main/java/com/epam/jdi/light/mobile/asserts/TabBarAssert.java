@@ -22,7 +22,7 @@ public class TabBarAssert extends UIAssert<TabBarAssert, TabBar>
 
     @JDIAction("Assert that '{name}' is selected")
     public TabBarAssert selected(String tab) {
-        jdiAssert(element.isSelected(), Matchers.is(tab));
+        jdiAssert(element.get().isSelected(), Matchers.is(tab));
         return this;
     }
 

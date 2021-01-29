@@ -12,13 +12,13 @@ public class ActionBarAssert extends UIAssert<ActionBarAssert, IActionBar> imple
 
     @Override
     public ActionBarAssert enabled() {
-        jdiAssert(element.isEnabled(), Matchers.is(true));
+        jdiAssert(element.get().isEnabled(), Matchers.is(true));
         return this;
     }
 
     @Override
     public ActionBarAssert expanded() {
-        jdiAssert(element.isExpanded(), Matchers.is(true));
+        jdiAssert(element.get().isExpanded(), Matchers.is(true));
         return this;
     }
 
@@ -30,7 +30,7 @@ public class ActionBarAssert extends UIAssert<ActionBarAssert, IActionBar> imple
 
     @Override
     public ActionBarAssert iconifiedByDefault() {
-        jdiAssert(element.isIconified(), Matchers.is(true));
+        jdiAssert(element.get().isIconified(), Matchers.is(true));
         return this;
     }
 }
