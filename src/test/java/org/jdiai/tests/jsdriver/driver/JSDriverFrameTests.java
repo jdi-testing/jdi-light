@@ -1,10 +1,10 @@
 package org.jdiai.tests.jsdriver.driver;
 
-import org.jdiai.By;
-import org.jdiai.jsbuilder.JSBuilder;
-import org.jdiai.jsbuilder.SmartBuilderActions;
 import org.jdiai.jsdriver.JSDriver;
+import org.jdiai.jsdriver.jsbuilder.JSBuilder;
+import org.jdiai.jsdriver.jsbuilder.SmartBuilderActions;
 import org.jdiai.tests.jsdriver.TestInit;
+import org.jdiai.tools.locators.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

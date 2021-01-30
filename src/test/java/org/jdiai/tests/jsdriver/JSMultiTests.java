@@ -1,7 +1,7 @@
 package org.jdiai.tests.jsdriver;
 
-import org.jdiai.Json;
 import org.jdiai.entity.UserInfo;
+import org.jdiai.jsdriver.jsproducer.Json;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.util.Arrays.asList;
-import static org.jdiai.jswrap.JSWrapper.element;
+import static org.jdiai.jswraper.JSWrapper.element;
 import static org.jdiai.tests.jsdriver.states.States.atUsersPage;
 import static org.testng.Assert.assertEquals;
 

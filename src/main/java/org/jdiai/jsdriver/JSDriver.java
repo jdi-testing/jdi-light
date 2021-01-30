@@ -1,22 +1,17 @@
 package org.jdiai.jsdriver;
 
 import com.epam.jdi.tools.LinqUtils;
-import org.jdiai.JSException;
-import org.jdiai.ListSearch;
-import org.jdiai.jsbuilder.BuilderActions;
-import org.jdiai.jsbuilder.IBuilderActions;
-import org.jdiai.jsbuilder.IJSBuilder;
-import org.jdiai.jsbuilder.JSBuilder;
-import org.jdiai.jsproducer.JSListProducer;
-import org.jdiai.jsproducer.JSProducer;
+import org.jdiai.jsdriver.jsbuilder.*;
+import org.jdiai.jsdriver.jsproducer.JSListProducer;
+import org.jdiai.jsdriver.jsproducer.JSProducer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;
-import static org.jdiai.ListSearch.CHAIN;
-import static org.jdiai.ListSearch.MULTI;
+import static org.jdiai.jsdriver.jsbuilder.ListSearch.CHAIN;
+import static org.jdiai.jsdriver.jsbuilder.ListSearch.MULTI;
 
 public class JSDriver {
     private final WebDriver driver;

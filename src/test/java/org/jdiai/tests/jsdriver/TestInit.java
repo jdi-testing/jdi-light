@@ -1,9 +1,9 @@
 package org.jdiai.tests.jsdriver;
 
 import com.epam.jdi.tools.Safe;
-import org.jdiai.WebDriverByUtils;
 import org.jdiai.jsdriver.JSDriver;
-import org.jdiai.jswrap.JSWrapper;
+import org.jdiai.jsdriver.WebDriverByUtils;
+import org.jdiai.jswraper.JSWrapper;
 import org.jdiai.tools.JSTalk;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +12,9 @@ import org.testng.annotations.BeforeSuite;
 
 import static java.lang.Runtime.getRuntime;
 import static java.util.Arrays.stream;
-import static org.jdiai.WebDriverByUtils.defineLocator;
-import static org.jdiai.jsbuilder.JSBuilder.LOG_QUERY;
-import static org.jdiai.jswrap.JSWrapper.chromeDriver;
+import static org.jdiai.jsdriver.WebDriverByUtils.defineLocator;
+import static org.jdiai.jsdriver.jsbuilder.JSBuilder.LOG_QUERY;
+import static org.jdiai.jswraper.JSWrapper.chromeDriver;
 import static org.jdiai.tests.jsdriver.states.Pages.HOME_PAGE;
 import static org.jdiai.tools.JSTalk.driver;
 
