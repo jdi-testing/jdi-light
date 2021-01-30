@@ -11,6 +11,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.getDomain;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -37,7 +38,7 @@ public class WebAnnotationsUtil {
             return field.getAnnotation(Name.class).value();
         if (field.getType().isAnnotationPresent(Name.class))
             return field.getType().getAnnotation(Name.class).value();
-        return splitCamelCase(field.getName());
+        return ELEMENT.name.execute(field);
     }
 
     public static void setDomain(Class<?> siteClass) {
