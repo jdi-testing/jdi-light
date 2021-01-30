@@ -54,6 +54,7 @@ public class PageFactory {
         init();
         SiteInfo info = new SiteInfo(driverName)
             .set(s->s.parentClass = site);
+        DRIVER.siteName = site.getSimpleName();
         initialize(site, info);
     }
     private static void initialize(Class<?> site, SiteInfo info) {

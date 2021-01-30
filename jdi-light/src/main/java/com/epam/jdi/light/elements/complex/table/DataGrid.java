@@ -135,7 +135,7 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         if (dataClass != null)
             entityFields.addAll(asList(dataClass.getDeclaredFields()));
         if (entityFields.size() > 0) {
-            grid().header = LinqUtils.map(entityFields, field1 -> splitCamelCase(field1.getName()))
+            grid().header = LinqUtils.map(entityFields, field1 -> ELEMENT.name.execute(field1))
                 .stream().distinct().collect(Collectors.toList());
             grid().size = grid().header.size();
         }

@@ -22,7 +22,7 @@ import static io.github.com.pages.Header.userIcon;
 @CucumberOptions(
     features = "classpath:features"
     , glue = {"com.epam.jdi.bdd", "cucumberTests"}
-    // , tags = {"@radio"}
+    // , tags = {"@base"}
 )
 public class TestRunner {
     @BeforeClass

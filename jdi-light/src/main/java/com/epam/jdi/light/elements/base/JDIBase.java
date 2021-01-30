@@ -41,7 +41,6 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -170,7 +169,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
 
     public JDIBase setLocator(@MarkupLocator String locator) {
-        return setLocator(defineLocator(locator));
+        return setLocator(NAME_TO_LOCATOR.execute(locator));
     }
     public JDIBase setLocator(@MarkupLocator By locator) {
         if (locator != null) {
@@ -194,8 +193,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
 
     public IBaseElement waitAfter(int timeout, String methodName) {
         waitAfterTimeout = new Safe<>(() -> timeout > 0 ? timeout : 1);
-        if (isNotBlank(methodName))
+        if (isNotBlank(methodName)) {
             waitAfterMethod = methodName;
+        }
         return this;
     }
     public Pair<String, Integer> waitAfter() {
@@ -218,7 +218,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     @Override
     public JDIBase setName(String name) {
         this.name = name;
-        this.varName = name;
+        if (isBlank(this.varName)) {
+            this.varName = name;
+        }
         this.failElement = name;
         return this;
     }
@@ -251,15 +253,19 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         this.strictSearch = strictSearch;
     }
     @JDebug
-    public WebElement getSmart() {
+    public List<WebElement> getSmartList() {
         try {
-            WebElement element = SMART_SEARCH.execute(this);
+            List<WebElement> element = SMART_SEARCH.execute(this);
             if (element != null)
                 return element;
             throw exception("");
         } catch (Exception ex) {
             throw exception(ex, FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
         }
+    }
+    @JDebug
+    public WebElement getSmart() {
+        return filterWebListToWebElement(base(), getSmartList());
     }
     // Get all webElements
     @JDebug
@@ -272,7 +278,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     @JDebug
     private List<WebElement> getAllWebElements(Object... args) {
-        getDefaultContext(driver());
+        DEFAULT_CONTEXT.execute(driver());
         if (webElements.hasValue()) {
             List<WebElement> elements = map(webElements.get(), JdiSettings::purify);
             if (elements.size() > 0) {
@@ -285,7 +291,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             }
         }
         if (locator.isNull())
-            return singletonList(getSmart());
+            return getSmartList();
         return getAllElementsInContext(this, args);
     }
     @JDebug
@@ -466,4 +472,5 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         webElements.useCache(false);
     }
     public boolean isUseCache() { return webElement.isUseCache() || webElements.isUseCache(); }
+    public static MapArray<Integer, String> NAMES = new MapArray<>();
 }
