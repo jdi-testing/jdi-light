@@ -33,7 +33,11 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
             return core().label();
         }
         UIElement input = core().find("input[type=checkbox]");
-        return input.label().isDisplayed() ? input.label() : null;
+        boolean hasLabelInput;
+        try {
+            hasLabelInput = input.label().isDisplayed();
+        } catch (Exception ignore) { hasLabelInput = false; }
+        return hasLabelInput ? input.label() : null;
     }
     @Override
     public void click() {

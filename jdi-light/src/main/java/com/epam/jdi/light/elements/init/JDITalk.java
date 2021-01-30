@@ -76,22 +76,34 @@ public class JDITalk {
         return new Form<>().setup(Form.class, b -> b.setLocator(locator));
     }
     public static <T> Form<T> form(Class<T> entityClass) {
-        return new Form<>();
+        Form<T> form = new Form<>();
+        form.setName(entityClass.getSimpleName());
+        return form;
     }
     public static <T> Form<T> form(@MarkupLocator String locator, Class<T> entityClass) {
-        return formWithLocator(locator);
+        Form<T> form = formWithLocator(locator);
+        form.setName(entityClass.getSimpleName());
+        return form;
     }
     public static <T> void submitForm(T entity) {
-        new Form<>().submit(entity);
+        Form<T> form = new Form<>();
+        form.setName(entity.getClass().getSimpleName());
+        form.submit(entity);
     }
     public static <T> void submitForm(@MarkupLocator String locator, T entity) {
-        formWithLocator(locator).submit(entity);
+        Form<T> form = formWithLocator(locator);
+        form.setName(entity.getClass().getSimpleName());
+        form.submit(entity);
     }
     public static <T> void loginAs(T entity) {
-        new Form<>().loginAs(entity);
+        Form<T> form = new Form<>();
+        form.setName(entity.getClass().getSimpleName());
+        form.loginAs(entity);
     }
     public static <T> void loginAs(@MarkupLocator String locator, T entity) {
-        formWithLocator(locator).loginAs(entity);
+        Form<T> form = formWithLocator(locator);
+        form.setName(entity.getClass().getSimpleName());
+        form.loginAs(entity);
     }
     public static Table table(@MarkupLocator String locator) {
         return new Table().setup(Table.class, b -> b.setLocator(locator));
