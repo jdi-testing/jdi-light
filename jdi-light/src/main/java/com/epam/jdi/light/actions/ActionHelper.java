@@ -620,7 +620,7 @@ public class ActionHelper {
                     Thread.sleep(200);
                 } catch (Throwable ignore) { }
             }
-        } while (currentTimeMillis() - start < jInfo.timeout() * 1000);
+        } while (currentTimeMillis() - start < jInfo.timeout() * 1000L);
         throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
     }
     static String getFailedMessage(ActionObject jInfo, String exception) {
