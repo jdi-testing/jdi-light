@@ -6,8 +6,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.jdiai.jswrap.JSWrapper.$;
-import static org.jdiai.jswrap.JSWrapper.element;
+import static org.jdiai.jswraper.JSWrapper.$;
+import static org.jdiai.jswraper.JSWrapper.element;
 import static org.jdiai.tests.jsdriver.states.States.atSimplePage;
 import static org.testng.Assert.assertEquals;
 

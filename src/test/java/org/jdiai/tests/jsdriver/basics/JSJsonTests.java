@@ -1,15 +1,15 @@
 package org.jdiai.tests.jsdriver.basics;
 
 import com.google.gson.JsonObject;
-import org.jdiai.Json;
-import org.jdiai.jswrap.JSElement;
+import org.jdiai.jsdriver.jsproducer.Json;
+import org.jdiai.jswraper.JSElement;
 import org.jdiai.tests.jsdriver.TestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.jdiai.jswrap.JSWrapper.json;
+import static org.jdiai.jswraper.JSWrapper.json;
 import static org.jdiai.tests.jsdriver.states.Pages.DOMAIN;
 import static org.jdiai.tests.jsdriver.states.States.*;
 import static org.testng.Assert.assertEquals;

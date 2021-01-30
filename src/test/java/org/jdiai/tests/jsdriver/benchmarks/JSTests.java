@@ -1,7 +1,7 @@
 package org.jdiai.tests.jsdriver.benchmarks;
 
-import org.jdiai.JS;
 import org.jdiai.tests.jsdriver.TestInit;
+import org.jdiai.tools.JS;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
