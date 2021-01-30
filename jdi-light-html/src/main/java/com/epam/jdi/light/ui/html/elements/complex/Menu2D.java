@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -276,7 +276,7 @@ public class Menu2D extends Selector implements ISetup {
     public WebList list() {
         By locator = locators.isEmpty()
             ? base().getLocator()
-            : defineLocator(locators.get(0));
+            : NAME_TO_LOCATOR.execute(locators.get(0));
         return $$(locator, base().parent);
     }
 }

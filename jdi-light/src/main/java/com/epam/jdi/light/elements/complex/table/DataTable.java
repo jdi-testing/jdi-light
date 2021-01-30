@@ -493,7 +493,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         if (dataClass != null)
             entityFields.addAll(asList(dataClass.getDeclaredFields()));
         if (entityFields.size() > 0) {
-            List<String> headers = LinqUtils.map(entityFields, field1 -> splitCamelCase(field1.getName()))
+            List<String> headers = LinqUtils.map(entityFields, field1 -> ELEMENT.name.execute(field1))
                 .stream().distinct().collect(Collectors.toList());
             header.setFinal(headers);
             if (!size.hasValue())

@@ -27,9 +27,11 @@ public class DriverSettings {
     public PageLoadStrategy pageLoadStrategy = NORMAL;
     public ScreenSize screenSize = new ScreenSize();
     public String domain;
+    public String siteName;
     public String remoteUrl;
-    public boolean remoteRun = false;
+    public Boolean remoteRun = null;
     public String downloadsFolder = mergePath(COMMON.testPath, "resources", "downloads");
+    public String videoUrl;
 
     public JFunc1<WebDriver, WebDriver> setup = DriverData::driverSettings;
     public MapArray<String, DriverInfo> types = map(

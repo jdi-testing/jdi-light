@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -141,7 +141,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         List<String> header = asList(j.header());
 
         if (isNotBlank(j.root()))
-            core().setLocator(defineLocator(j.root()));
+            core().setLocator(NAME_TO_LOCATOR.execute(j.root()));
         if (!j.row().equals("//tr[%s]/td") || !this.rowTemplate.equals("//tr[%s]/td"))
             this.rowTemplate = j.row();
         if (!j.column().equals("//tr/td[%s]") || !this.columnTemplate.equals("//tr/td[%s]"))

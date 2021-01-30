@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.Condition;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
@@ -9,7 +10,9 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static java.lang.String.format;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -92,6 +95,9 @@ public interface ICoreElement extends IBaseElement {
     default void doubleClick() {
         iCore().doubleClick();
     }
+    default String pseudo(String elementName, String propertyName) {
+        return iCore().pseudo(elementName, propertyName);
+    }
     default void press(Keys key) {
         iCore().press(key);
     }
@@ -107,4 +113,11 @@ public interface ICoreElement extends IBaseElement {
     default void pasteText(String text, long timeToWaitMSec) {
         iCore().pasteText(text, timeToWaitMSec);
     }
+    default ICoreElement shouldBe(Condition... conditions) {
+        for (Condition condition : conditions) {
+            jdiAssert(condition.execute(this), is(true));
+        }
+        return this;
+    }
+    default ICoreElement should(Condition... condition) { return shouldBe(condition);}
 }

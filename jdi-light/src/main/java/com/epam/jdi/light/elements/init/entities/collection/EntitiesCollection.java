@@ -146,7 +146,7 @@ public class EntitiesCollection {
                     return element;
                 }
             }
-            return ELEMENTS.get().get(0);
+            return ELEMENTS.get().get(name).get(0);
         }
         if (jsonElements == null)
             readElementsFromJson();

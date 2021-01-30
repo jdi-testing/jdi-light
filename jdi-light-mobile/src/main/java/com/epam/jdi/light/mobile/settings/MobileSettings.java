@@ -2,7 +2,7 @@ package com.epam.jdi.light.mobile.settings;
 
 import com.epam.jdi.light.settings.WebSettings;
 
-import static com.epam.jdi.light.driver.get.RemoteDriver.appium;
+import static com.epam.jdi.light.driver.get.RemoteDriverInfo.appium;
 import static com.epam.jdi.light.mobile.driver.MobileDriverData.CAPABILITIES_FOR_ANDROID;
 import static com.epam.jdi.light.mobile.driver.MobileDriverData.CAPABILITIES_FOR_IOS;
 import static com.epam.jdi.light.mobile.driver.MobileDriverInfos.ANDROID_INFO;

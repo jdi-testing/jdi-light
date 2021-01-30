@@ -148,7 +148,7 @@ public class InitActions {
             e.base().setLocator("#" + toKebabCase(e.getName()));
             e.base().locator.isRoot = true;
         })),
-        $("Smart Text", aRule(SText.class, (e, a) -> e.base().setLocator(asTextLocator(splitCamelCase(e.getName()))))),
+        $("Smart Text", aRule(SText.class, (e, a) -> e.base().setLocator(asTextLocator(e.getName())))),
         $("Smart Name", aRule(SName.class, (e, a) -> e.base().setLocator(format("[name='%s']", toKebabCase(e.getName()))))),
         $("Smart", aRule(Smart.class, (e, a) -> e.base().setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName()))))),
         $("Smart Class", aRule(SClass.class, (e, a) -> e.base().setLocator(format(".%s", toKebabCase(e.getName()))))),

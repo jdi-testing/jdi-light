@@ -32,7 +32,7 @@ import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
-import static com.epam.jdi.light.logger.AllureLogger.createAttachment;
+import static com.epam.jdi.light.logger.AllureLogger.logDataToAllure;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -123,11 +123,23 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public static void openSite() {
         init();
-        new WebPage(getDomain()).open();
+        String domain = getDomain();
+        if (isBlank(domain)) {
+            throw exception("No Domain Found. Add browser=MY_SITE_DOMAIN in test.properties or JDISettings.DRIVER.domain");
+        }
+        WebPage site = new WebPage();
+        if(isNotBlank(DRIVER.siteName)) {
+            site.setName(DRIVER.siteName);
+        }
+        site.open(domain);
     }
     public static void openSite(Class<?> site) {
         initSite(site);
-        WebPage page = new WebPage(getDomain());
+        String domain = getDomain();
+        if (isBlank(domain)) {
+            throw exception("No Domain Found. Use test.properties or JDISettings.DRIVER.domain");
+        }
+        WebPage page = new WebPage(domain);
         page.setName(site.getSimpleName());
         page.open();
     }
@@ -190,6 +202,9 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(value = "Open '{name}'(url={0})", timeout = 0)
     private void open(String url) {
+        if (isBlank(url)) {
+            throw exception("Failed to open page with empty url");
+        }
         init();
         CacheValue.reset();
         driver().navigate().to(url);
@@ -474,6 +489,11 @@ public class WebPage extends DriverBase implements PageObject {
             Default(msgFormat(PRINT_PAGE_DEBUG, this))
         );
     }
+    public String details() {
+        return format("url=%s, title='%s', checkUrl='%s'%s, checkTitle='%s'",
+            url, title, checkUrlType,
+            isNotBlank(checkUrl) ? ("[checkUrl=" + checkUrl+ "]") : "", checkTitleType);
+    }
 
     public static class StringCheckType {
         private Supplier<String> actual;
@@ -519,9 +539,7 @@ public class WebPage extends DriverBase implements PageObject {
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE) {
             visualWindowCheck();
         }
-        if (LOGS.screenStrategy.contains(NEW_PAGE)) {
-            createAttachment(page.getName(), false);
-        }
+        logDataToAllure(NEW_PAGE, page.getName(), false);
         logger.toLog("Page '" + page.getName() + "' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());
     }
