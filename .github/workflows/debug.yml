@@ -32,7 +32,7 @@ on:
 
 jobs:
   build:
-
+    name: Degug tests run on JDK
     runs-on: ubuntu-18.04
     strategy:
       matrix:
