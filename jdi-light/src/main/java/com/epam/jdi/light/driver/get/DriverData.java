@@ -51,7 +51,7 @@ public class DriverData {
             ? DRIVER.path : mergePath(COMMON.testPath, "resources", "drivers");
     }
     public static final String DEFAULT_DRIVER = "chrome";
-    public static String ARGUMENTS_PROPERTY = "arguments";
+    public static final String ARGUMENTS_PROPERTY = "arguments";
     public static final String PATH_PROPERTY = "path";
 
     public static String chromeDriverPath() {
@@ -215,6 +215,8 @@ public class DriverData {
         // Capabilities from settings
         DRIVER.capabilities.firefox.forEach((property, value) -> setupFirefoxCapability(cap, property, value));
     }
+
+    public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = DriverData::defaultFirefoxOptions;
 
     public static void setupFirefoxCapability(FirefoxOptions cap, String property, String value) {
         logger.info("Setup Firefox cap %s to %s", property, value);
