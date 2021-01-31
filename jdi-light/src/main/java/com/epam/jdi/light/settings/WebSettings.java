@@ -53,7 +53,6 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
-import static com.epam.jdi.tools.PropertyReader.hasProperty;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
@@ -420,6 +419,16 @@ public class WebSettings {
             case "jdismart": return JDI_SMART;
             case "selenium": return SELENIUM;
             default: return JDI;
+        }
+    }
+
+    /* TODO: Remove after jdi-lightsaber 2.1.7 release */
+    /* import static com.epam.jdi.tools.PropertyReader.hasProperty; */
+    public static boolean hasProperty(String name) {
+        try {
+            return isNotBlank(getProperty(name));
+        } catch (Exception ignore) {
+            return false;
         }
     }
 }
