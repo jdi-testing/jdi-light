@@ -8,7 +8,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.URL;
 
 import static com.epam.jdi.light.driver.get.DriverData.getCapabilities;
-import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
+import static com.epam.jdi.light.driver.get.RemoteDriverInfo.getRemoteURL;
 import static com.epam.jdi.light.mobile.driver.MobileDriverData.ANDROID_OPTIONS;
 import static com.epam.jdi.light.mobile.driver.MobileDriverData.IOS_OPTIONS;
 

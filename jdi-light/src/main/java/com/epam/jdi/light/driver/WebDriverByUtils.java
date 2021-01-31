@@ -2,6 +2,7 @@ package com.epam.jdi.light.driver;
 
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -114,7 +115,7 @@ public final class WebDriverByUtils {
             throw new RuntimeException("Can't get By locator from string empty or null string");
         String[] split = stringLocator.split("(^=)*=.*");
         if (split.length == 1)
-            return defineLocator(split[0]);
+            return NAME_TO_LOCATOR.execute(split[0]);
         switch (split[0]) {
             case "css": return By.cssSelector(split[1]);
             case "xpath": return By.xpath(split[1]);
@@ -177,6 +178,7 @@ public final class WebDriverByUtils {
             return valueOrDefault(replaceChildren(result), one(by));
         } catch (Exception ex) { throw new RuntimeException("Search By failed"); }
     }
+    public static JFunc1<String, By> NAME_TO_LOCATOR = WebDriverByUtils::defineLocator;
     public static By defineLocator(String locator) {
         String by = locator.contains("*root*")
             ? locator.replaceAll("\\*root\\*", "")

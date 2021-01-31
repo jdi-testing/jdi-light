@@ -2,6 +2,8 @@ package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
+import com.epam.jdi.light.elements.common.Alerts;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.logger.LogLevels;
@@ -21,6 +23,7 @@ import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class ActionObject {
@@ -71,7 +74,7 @@ public class ActionObject {
             () -> instance() != null ? instance() : jp().getSignature().getDeclaringType().getSimpleName());
 
     public Object instance() {
-        return jp().getThis();
+        return getJpInstance(jp());
     }
     public JDIBase element() {
         try {
@@ -88,8 +91,14 @@ public class ActionObject {
     public boolean isBase() {
         return element() != null;
     }
+    public boolean isPage() {
+        return instance() != null && isClass(instance().getClass(), WebPage.class);
+    }
     public boolean isCore() {
         return core() != null;
+    }
+    public WebPage page() {
+        return (WebPage) instance();
     }
     public ICoreElement core() {
         try {
@@ -103,7 +112,6 @@ public class ActionObject {
             return null;
         }
     }
-
     public int timeout() { return timeout.get(); }
     private CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
     private int getTimeout() {
@@ -156,6 +164,9 @@ public class ActionObject {
     }
     public Class<?> jpClass() {
         return getJpClass(jp());
+    }
+    public boolean isAssert() {
+        return isClass(jpClass(), Alerts.class);
     }
 
     public String methodName() {
