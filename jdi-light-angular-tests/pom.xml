@@ -66,7 +66,7 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>${suite-xml-file}</suiteXmlFile>
                     </suiteXmlFiles>
-                    <testFailureIgnore>true</testFailureIgnore>
+                    <!-- testFailureIgnore>true</testFailureIgnore -->
                     <properties>
                         <property>
                             <name>listener</name>
