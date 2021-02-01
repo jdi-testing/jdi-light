@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 
-public class MobileUIFactory extends UIFactory {
+public class MobileUIFactory {
 
     public static MobileUIElement element(@MarkupLocator String locator) {
         return locator.matches("[A-Z].*]")
