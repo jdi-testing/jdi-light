@@ -1,5 +1,6 @@
 package com.epam.jdi.light.common;
 
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 
