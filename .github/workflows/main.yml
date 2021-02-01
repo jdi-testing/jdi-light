@@ -46,7 +46,7 @@ jobs:
       max-parallel: 2
       fail-fast: false
       matrix:
-        java: [8, 9, 10, 11, 12, 13] # all [8, 9, 10, 11, 12, 13]
+        java: [8] # all [8, 9, 10, 11, 12, 13]
 
     steps:
     - uses: actions/checkout@v2
@@ -102,6 +102,7 @@ jobs:
   # ========== steps before are needed for all tasks ==================
 
     - name: Tests BDD
+      id: tests-bdd
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
@@ -117,42 +118,49 @@ jobs:
 #        retention-days: 1
 
     - name: Tests bootstrap Unit
+      id: tests-bootstrap
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
     - name: Run tests - Angular Unit tests
+      id: tests-angular-unit
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - Angular Common tests
+      id: tests-angular-common
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - Angular Complex tests
+      id: tests-angular-complex
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - HTML
+      id: tests-html
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS
 
     - name: Run tests - Test Examples
+      id: tests-examples
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES
 
     - name: Run tests - Performance
+      id: tests-perf
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
@@ -176,3 +184,15 @@ jobs:
         name: allure-report-jdk${{ matrix.java }}
         path: ./allure-report.zip
         retention-days: 1
+
+    - name: Check tests are passed
+      if: (${{ steps.tests-bdd.outcome }} == 'failure' || ${{ steps.tests-bootstrap.outcome }} == 'failure')
+      run: exit 1
+
+    - name: Check angular tests are passed
+      if: (${{ steps.tests-angular-unit.outcome }} == 'failure' || ${{ steps.tests-angular-common.outcome }} == 'failure' || ${{ steps.tests-angular-complex.outcome }} == 'failure')
+      run: exit 1
+
+    - name: Check html tests are passed
+      if: (${{ steps.tests-html.outcome }} == 'failure' || ${{ steps.tests-examples.outcome }} == 'failure' || ${{ steps.tests-perf.outcome }} == 'failure')
+      run: exit 1
