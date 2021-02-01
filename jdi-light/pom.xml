@@ -11,7 +11,7 @@
     <groupId>com.epam.jdi</groupId>
 
     <properties>
-        <surefire.version>2.20</surefire.version>
+        <surefire.version>2.21.0</surefire.version>
         <allure.maven>2.10.0</allure.maven>
         <aspectj.version>1.9.5</aspectj.version>
         <aspectj.maven>1.12.6</aspectj.maven>

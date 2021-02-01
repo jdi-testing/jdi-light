@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-selenium-java3</artifactId>
-            <version>RELEASE</version>
+            <version>[3.191.4,)</version>
         </dependency>
     </dependencies>
 
