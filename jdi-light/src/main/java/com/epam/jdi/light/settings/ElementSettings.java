@@ -22,6 +22,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
 import static com.epam.jdi.light.common.UseSmartSearch.UI_AND_ELEMENTS;
 import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
+import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.lang.String.format;
 
@@ -40,7 +41,7 @@ public class ElementSettings {
         = Pair.$("kebab-case", SMART_MAP_NAME_TO_LOCATOR.get("kebab-case"));
 
     public JFunc1<IBaseElement, String> smartLocatorName = el -> smartName.value.execute(el.getName());
-    public JFunc2<IBaseElement, String, By> smartLocator = (el, name) -> NAME_TO_LOCATOR.execute(format(smartTemplate, name));
+    public JFunc2<IBaseElement, String, By> smartLocator = (el, n) -> defineLocator(format(smartTemplate, n));
     public UseSmartSearch useSmartSearch = UI_AND_ELEMENTS;
     public JFunc1<UIElement, String> listLabel = el -> el.getText().trim();
     public List<HighlightStrategy> highlight = new ArrayList<>();
