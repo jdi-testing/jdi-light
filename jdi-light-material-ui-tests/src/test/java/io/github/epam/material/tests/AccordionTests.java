@@ -15,12 +15,10 @@ public class AccordionTests extends TestsInit {
 
         materialPageFrame.accordion.is().collapsed();
         materialPageFrame.accordion.is().enabled();
-        materialPageFrame.accordion.click();
-        materialPageFrame.accordion.is().expanded();
+        materialPageFrame.accordion.expand();
         materialPageFrame.accordion.is().contentVisible();
 
-        materialPageFrame.accordion.click();
-        materialPageFrame.accordion.is().collapsed();
+        materialPageFrame.accordion.collapse();
         materialPageFrame.accordion.is().contentInvisible();
     }
 

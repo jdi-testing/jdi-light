@@ -5,8 +5,6 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.surfaces.AccordionAssert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Accordion extends UIBaseElement<AccordionAssert> {
 
@@ -23,6 +21,20 @@ public class Accordion extends UIBaseElement<AccordionAssert> {
     @JDIAction("Click '{name}'")
     public void click() {
         core().click();
+    }
+
+    public void expand() {
+        if (isCollapsed()) {
+            this.click();
+            this.is().expanded();
+        }
+    }
+
+    public void collapse() {
+        if (isExpanded()) {
+            this.click();
+            this.is().collapsed();
+        }
     }
 
     @JDIAction("Is '{name}' is expanded")
@@ -49,14 +61,6 @@ public class Accordion extends UIBaseElement<AccordionAssert> {
 
     public UIElement content() {
         return this.find(By.xpath("//div[contains(@class,'MuiAccordionDetails-root')]"));
-    }
-
-    public boolean isContentInvisible() {
-        return !content().isDisplayed();
-    }
-
-    public boolean isContentVisible() {
-        return content().isDisplayed();
     }
 
     @Override
