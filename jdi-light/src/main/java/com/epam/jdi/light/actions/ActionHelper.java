@@ -343,7 +343,7 @@ public class ActionHelper {
         return map;
     }
     public static void processPage(ActionObject jInfo) {
-        getWindows();
+        //getWindows();
         Object element = jInfo.instance();
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
             WebPage page = getPage(element);

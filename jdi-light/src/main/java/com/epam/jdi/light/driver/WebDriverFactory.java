@@ -14,6 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.*;
+import static com.epam.jdi.light.driver.get.DriverData.DEFAULT_DRIVER;
 import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
@@ -29,7 +30,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 public class WebDriverFactory {
     public static boolean MULTI_THREAD = false;
-    public static MapArray<String, JFunc<WebDriver>> DRIVERS = new MapArray<>();
+    public static MapArray<String, JFunc<WebDriver>> DRIVERS =
+            new MapArray<>(DEFAULT_DRIVER, () -> initDriver(CHROME));
     public static final MapArray<String, WebDriver> RUN_DRIVERS = new MapArray<>();
     private static final Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS = new Safe<>(MapArray::new);
     public static boolean GETTING_DRIVER = false;
@@ -178,6 +180,14 @@ public class WebDriverFactory {
         return useDriver(driverType.name);
     }
 
+    private static WebDriver initDriver(DriverTypes type) {
+        if (!DRIVER.types.has(type.name)) {
+            throw exception("Unknown driver: " + type);
+        }
+        WebDriver driver = DRIVER.types.get(type.name).getDriver();
+        return DRIVER.setup.execute(driver);
+    }
+
     // GET DRIVER
     public static String useDriver(DriverTypes driverType, JFunc<WebDriver> driver) {
         return useDriver(driverType.name, driver);
@@ -250,10 +260,25 @@ public class WebDriverFactory {
         try {
             driver.close();
             driver.quit();
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+        }
     }
 
     public static void quit() {
         close();
+    }
+
+    public static void quitDriverNativeApp() {
+        for (Pair<String, WebDriver> pair : getRunDrivers()) {
+            quitDriver(pair.value);
+        }
+        getRunDrivers().clear();
+    }
+
+    private static void quitDriver(WebDriver driver) {
+        try {
+            driver.quit();
+        } catch (Exception ignore) {
+        }
     }
 }

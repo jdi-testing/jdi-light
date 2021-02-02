@@ -24,6 +24,7 @@ env:
     - BDD_TESTS="jdi-bdd-tests"
     - BOOTSTRAP_TESTS="jdi-light-bootstrap-tests"
     - HTML_TESTS="jdi-light-html-tests"
+    - MOBILE_HTML_WEB_TESTS="jdi-light-mobile-html-web-tests"
     - ANGULAR_TESTS="jdi-light-angular-tests"
     - ANGULAR_TESTS_WITH_MOCKS="jdi-light-angular-tests-with-mocks"
     - EXAMPLES="jdi-light-examples"
@@ -90,6 +91,16 @@ testshtml: &testshtml
     - mvn -ntp install -DskipTests
     - echo arguments=$CHROME_ARGS > "./$HTML_TESTS/src/test/resources/$CHROME_PROPERTIES"
     - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
+
+testsmobilehtmlweb: &testsmobilehtmlweb
+  stage: test
+  name: Run tests - mobilehtml
+  <<: *cron_condition
+  script:
+    - mvn -ntp install -DskipTests
+    - echo arguments=$CHROME_ARGS > "./$MOBILE_HTML_WEB_TESTS/src/test/resources/$CHROME_PROPERTIES"
+    - mvn verify $WITH_PARAMS -pl $GROUP_ID:$HTML_TESTS
+
 testsexamples: &testsexamples
   stage: test
   name: Run tests - examples
@@ -233,23 +244,44 @@ jobs:
       jdk: openjdk13
 
     - <<: *testshtml
-      name: Run tests - html - JDK8
+      name: Run tests - mobilehtml - JDK8
       if: true
       jdk: openjdk8
     - <<: *testshtml
-      name: Run tests - html - JDK9
+      name: Run tests - mobilehtml - JDK9
       jdk: openjdk9
     - <<: *testshtml
-      name: Run tests - html - JDK10
+      name: Run tests - mobilehtml - JDK10
       if: true
       jdk: openjdk10
     - <<: *testshtml
-      name: Run tests - html - JDK11
+      name: Run tests - mobilehtml - JDK11
       jdk: openjdk11
     - <<: *testshtml
-      name: Run tests - html - JDK12
+      name: Run tests - mobilehtml - JDK12
       jdk: openjdk12
     - <<: *testshtml
+      name: Run tests - mobilehtml - JDK13
+      jdk: openjdk13
+
+    - <<: *testsmobilehtmlweb
+      name: Run tests - html - JDK8
+      if: true
+      jdk: openjdk8
+    - <<: *testsmobilehtmlweb
+      name: Run tests - html - JDK9
+      jdk: openjdk9
+    - <<: *testsmobilehtmlweb
+      name: Run tests - html - JDK10
+      if: true
+      jdk: openjdk10
+    - <<: *testsmobilehtmlweb
+      name: Run tests - html - JDK11
+      jdk: openjdk11
+    - <<: *testsmobilehtmlweb
+      name: Run tests - html - JDK12
+      jdk: openjdk12
+    - <<: *testsmobilehtmlweb
       name: Run tests - html - JDK13
       jdk: openjdk13
 

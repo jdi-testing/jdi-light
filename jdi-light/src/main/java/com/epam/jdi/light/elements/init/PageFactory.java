@@ -21,6 +21,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -199,10 +200,10 @@ public class PageFactory {
     }
     //endregion
 
-    public static List<Class<?>> STOP_INIT_CLASSES = asList(
-        Object.class, WebPage.class, PageObject.class, UIElement.class,
+    public static ArrayList<Class<?>> STOP_INIT_CLASSES = new ArrayList<>(asList(
+            Object.class, WebPage.class, PageObject.class, UIElement.class,
             UIBaseElement.class, UIListBase.class,
-            DataList.class, JList.class, WebList.class);
+            DataList.class, JList.class, WebList.class));
 
     public static void initElements(SiteInfo info) {
         List<Field> poFields = recursion(info.instance.getClass(),
