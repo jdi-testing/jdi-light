@@ -157,11 +157,12 @@ public class DriverData {
             () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
         setUp("Chrome: setExperimentalOption: prefs",
             () -> cap.setExperimentalOption("prefs", chromePrefs));
-        setUp("Chrome: setExperimentalOption: prefs",
+        setUp("Chrome: setUpExperimentalOption: prefs",
             () -> {
                 LoggingPreferences logPrefs = new LoggingPreferences();
                 logPrefs.enable(PERFORMANCE, Level.ALL);
                 cap.setCapability(LOGGING_PREFS, logPrefs);
+                cap.setCapability("goog:loggingPrefs", logPrefs);
             });
         // Capabilities from settings
         DRIVER.capabilities.chrome.forEach((property, value) -> setupCapability(cap, property, value));

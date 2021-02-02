@@ -5,6 +5,15 @@
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 * **driver.remote.run** boolean property can be specified in **test.properties** file. If not specified, JDI would use the original logic and switch between local and remote driver depending on other properties
 
+##1.3.3 (28.01.2021)
+* Add should verifications and Conditions to ICoreElement
+* Add NAME_TO_LOCATOR, DEFAULT_CONTEXT, MAP_FORM
+* Improve Allure Logging
+* Improve attachments to Allure log: Html Code, Screenshots, Error HTTP. Add infoStep() for after log data in any place (for example after test end)
+* Add "As Is" and "First capital" options for smart.name.to.locator
+* Add Selenoid remote run support
+* Add @MapToField annotation to map fields in forms
+
 ##1.3.2 (04.01.2021)
 * Fix small add to WebList issue 
 
@@ -37,7 +46,7 @@
 * Fix JDITalk
 * Fix some error messages
 * Improve WebList capabilities
-* Update aspectj to 1.9.6
+* Update aspectj to 1.9.5
 * Prepare 1.2.18 version
 * Add WaitAfterAction function (@WaitAfterAction)
 * Improve Allure steps logging

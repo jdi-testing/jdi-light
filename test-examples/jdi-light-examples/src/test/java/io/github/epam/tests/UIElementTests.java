@@ -286,7 +286,7 @@ public class UIElementTests extends TestsInit {
     }
     @Test
     public void sText() {
-        assertEquals(sText.getLocator().toString(), "By.xpath: .//*/text()[normalize-space(.) = \"S Text\"]/parent::*");
+        assertEquals(sText.getLocator().toString(), "By.xpath: .//*/text()[normalize-space(.) = \"SText\"]/parent::*");
     }
     @Test
     public void smart() {

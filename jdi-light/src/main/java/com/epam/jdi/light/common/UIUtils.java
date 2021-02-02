@@ -28,7 +28,6 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -67,7 +66,7 @@ public final class UIUtils {
             return field.getAnnotation(Name.class).value();
         if (field.getType().isAnnotationPresent(Name.class))
             return field.getType().getAnnotation(Name.class).value();
-        return splitCamelCase(field.getName());
+        return ELEMENT.name.execute(field);
     }
 
     public static JFunc2<Object, String, IClickable> GET_DEFAULT_BUTTON =
