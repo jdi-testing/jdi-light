@@ -1,9 +1,17 @@
 package com.epam.jdi.light.mobile.settings;
 
+import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
+import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
+import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
+import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import com.epam.jdi.light.settings.WebSettings;
+
+import static com.epam.jdi.light.driver.get.RemoteDriverInfo.SAUCE_LABS;
+import static com.epam.jdi.light.driver.get.RemoteDriverInfo.appium;
+import static com.epam.jdi.light.driver.get.RemoteDriverInfo.browserstack;
 import static com.epam.jdi.light.elements.base.JdiSettings.DEFAULT_CONTEXT;
 
-import static com.epam.jdi.light.driver.get.RemoteDriver.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.init.PageFactory.STOP_INIT_CLASSES;
 import static com.epam.jdi.light.mobile.driver.MobileDriverData.CAPABILITIES_FOR_ANDROID;
@@ -47,7 +55,7 @@ public class MobileSettings {
             case "sauce":
             case "saucelabs":
                 DRIVER.capabilities.common = sauceCapabilities();
-                return sauceLabs();
+                return SAUCE_LABS;
             case "browserstack":
                 return browserstack();
             case "appium":

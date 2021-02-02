@@ -11,6 +11,7 @@ import java.net.URL;
 import static com.epam.jdi.light.driver.get.DriverData.getCapabilities;
 import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
 import static com.epam.jdi.light.driver.get.DriverTypes.SAFARI;
+import static com.epam.jdi.light.driver.get.RemoteDriverInfo.getRemoteURL;
 import static com.epam.jdi.light.mobile.driver.MobileDriverData.ANDROID_OPTIONS;
 import static com.epam.jdi.light.mobile.driver.MobileDriverData.IOS_OPTIONS;
 
