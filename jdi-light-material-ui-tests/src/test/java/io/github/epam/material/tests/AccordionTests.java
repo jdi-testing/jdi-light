@@ -3,7 +3,9 @@ package io.github.epam.material.tests;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
+import static io.github.com.StaticSite.materialPageFrame;
+import static io.github.com.StaticSite.surfaceAccordionDisabledPage;
+import static io.github.com.StaticSite.surfaceAccordionPage;
 
 public class AccordionTests extends TestsInit {
 
