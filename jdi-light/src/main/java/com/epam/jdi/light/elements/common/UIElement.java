@@ -269,26 +269,25 @@ public class UIElement extends JDIBase
     }
 
     /**
-     * Check the element is displayed
+     * Check the element is visible on display
      * @return boolean
      */
     @JDIAction(value = "Check that '{name}' is visible by user", timeout = 0)
     public boolean isVisible() {
         if (isHidden())
             return false;
+
         Object isInView = js().executeScript(
             "const rect = arguments[0].getBoundingClientRect();\n" +
             "if (!rect) return false;\n" +
             "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight);\n" +
             "const windowWidth = Math.min(window.innerWidth || document.documentElement.clientWidth);\n" +
-            "const ratio = arguments[1];\n" +
-            "const reduceHeight = ratio*windowHeight;\n" +
-            "const reduceWidth = ratio*windowWidth\n" +
-            "if (rect.top < reduceHeight) return false;\n" +
-            "if (rect.left < reduceWidth) return false;\n" +
-            "if (rect.bottom > windowHeight-reduceHeight) return false;\n" +
-            "if (rect.right > windowWidth-reduceWidth) return false;\n" +
-            "return true;", getWebElement(), 0.05);
+            "const diff = arguments[1];\n" +
+            "if (rect.top < diff) return false;\n" +
+            "if (rect.left < diff) return false;\n" +
+            "if (rect.bottom > windowHeight-diff) return false;\n" +
+            "if (rect.right > windowWidth-diff) return false;\n" +
+            "return true;", getWebElement(), 2);
         return (boolean)isInView;
     }
 
