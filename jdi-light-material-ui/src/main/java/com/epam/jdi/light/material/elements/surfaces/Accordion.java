@@ -10,7 +10,7 @@ public class Accordion extends UIBaseElement<AccordionAssert> {
 
     @JDIAction("Get summary text for '{name}'")
     public String summaryValue() {
-        return this.find(By.xpath("//div[contains(@class,'MuiAccordionSummary-root')]")).getText();
+        return summary().getText();
     }
 
     @JDIAction("Get content text for '{name}'")
@@ -25,14 +25,14 @@ public class Accordion extends UIBaseElement<AccordionAssert> {
 
     public void expand() {
         if (isCollapsed()) {
-            this.click();
+            summary().click();
             this.is().expanded();
         }
     }
 
     public void collapse() {
         if (isExpanded()) {
-            this.click();
+            summary().click();
             this.is().collapsed();
         }
     }
@@ -61,6 +61,10 @@ public class Accordion extends UIBaseElement<AccordionAssert> {
 
     public UIElement content() {
         return this.find(By.xpath("//div[contains(@class,'MuiAccordionDetails-root')]"));
+    }
+
+    public UIElement summary() {
+        return this.find(By.xpath("//div[contains(@class,'MuiAccordionSummary-root')]"));
     }
 
     @Override
