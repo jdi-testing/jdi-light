@@ -8,10 +8,10 @@ import com.epam.jdi.light.material.elements.surfaces.Accordion;
 public class MaterialPage extends Section {
 
     // inputs
-    @UI("span[class*='MuiSwitch-root']")
+    @UI(".MuiSwitch-root")
     public Switch aSwitch;
 
     // surfaces
-    @UI("div[class*='MuiAccordion-root']")
+    @UI(".MuiAccordion-root")
     public Accordion accordion;
 }

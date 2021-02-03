@@ -19,6 +19,12 @@ public class StaticSite {
     @Url("/material-ui-switch--default")
     public static WebPage inputSwitchDefaultPage;
 
+    @Url("/material-ui-switch--disabled")
+    public static WebPage inputSwitchDisabledPage;
+
+    @Url("/material-ui-switch--disabled-and-checked")
+    public static WebPage inputSwitchDisabledAndCheckedPage;
+
     // surfaces
     @Url("/material-ui-surfaces-accordion--default")
     public static WebPage surfaceAccordionPage;

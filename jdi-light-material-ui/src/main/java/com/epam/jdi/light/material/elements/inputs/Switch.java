@@ -10,7 +10,7 @@ public class Switch extends UIBaseElement<SwitchAssert> {
 
     @JDIAction("Toggle '{name}'")
     public void toggle() {
-        selector().click();
+        core().click();
     }
 
     @JDIAction("Is '{name}' checked")
