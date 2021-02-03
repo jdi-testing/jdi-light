@@ -36,7 +36,7 @@ public class ElementSettings {
     public int startIndex = 1;
     public Pair<String, JFunc1<WebElement, Boolean>> searchRule;
     public JFunc1<Field, String> name = field -> splitCamelCase(field.getName());
-    public String smartTemplate = "[data-testid='%s']";
+    public String smartTemplate = "#%s";
     public Pair<String, JFunc1<String, String>> smartName
         = Pair.$("kebab-case", SMART_MAP_NAME_TO_LOCATOR.get("kebab-case"));
 

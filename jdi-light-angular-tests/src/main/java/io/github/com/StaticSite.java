@@ -26,7 +26,9 @@ public class StaticSite {
 
     @Css(".logout")
     public static Button logout;
+    @UI("#user-icon")
     public static Button userIcon;
+    @UI("#user-name")
     public static Text userName;
 
     public static class User extends DataClass<User> {
