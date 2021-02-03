@@ -12,7 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.MaterialPage;
 
-@JSite("http://192.168.0.103:6006/?path=/story/")
+@JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 
     // inputs
