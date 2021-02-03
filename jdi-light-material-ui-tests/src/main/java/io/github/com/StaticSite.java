@@ -12,9 +12,14 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.MaterialPage;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("http://192.168.0.103:6006/?path=/story/")
 public class StaticSite {
 
+    // inputs
+    @Url("/material-ui-switch--default")
+    public static WebPage inputSwitchDefaultPage;
+
+    // surfaces
     @Url("/material-ui-surfaces-accordion--default")
     public static WebPage surfaceAccordionPage;
 

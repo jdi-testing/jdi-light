@@ -1,4 +1,4 @@
-package io.github.epam.material.tests;
+package io.github.epam.material.tests.surfaces;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
