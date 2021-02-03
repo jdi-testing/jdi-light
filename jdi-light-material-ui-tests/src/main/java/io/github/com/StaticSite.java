@@ -1,6 +1,8 @@
 package io.github.com;
 
 import com.epam.jdi.light.elements.composite.Form;
+import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
@@ -13,10 +15,14 @@ import io.github.com.pages.MaterialPage;
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 
-    public static User DEFAULT_USER = new User();
+    @Url("/material-ui-surfaces-accordion--default")
+    public static WebPage surfaceAccordionPage;
 
-    @Url("/material.html")
-    public static MaterialPage materialPage;
+    @Url("/material-ui-surfaces-accordion--disabled")
+    public static WebPage surfaceAccordionDisabledPage;
+
+    @Frame("storybook-preview-iframe")
+    public static MaterialPage materialPageFrame;
 
     @UI("#login-form")
     public static Form<User> loginForm;
