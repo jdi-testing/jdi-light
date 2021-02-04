@@ -74,7 +74,7 @@ public class FileUploadTests implements TestsInit {
                 "UTF-8");
     }
 
-    @Test(enabled = false)
+    @Test
     public void assertFileTest() throws IOException {
         cleanupDownloads();
         String fileName = "gandhi.txt";

@@ -126,7 +126,7 @@ public class DropdownITests implements TestsInit {
             .disabled(not(hasItems("Fancy", "Pirate", "Casual")));
     }
 
-    @Test(enabled = false)
+    @Test
     public void assertValidationTest() {
         dressCode3.assertThat().values(contains("Fancy", "Casual", "Disabled", "Pirate"));
         disabledDropdown.assertThat().selected("Disabled");

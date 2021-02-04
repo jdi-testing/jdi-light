@@ -29,11 +29,11 @@ public class DataTableTests implements TestsInit {
         performancePage.shouldBeOpened();
     }
 
-    @Test(enabled = false)
+    @Test
     public void tableTest() {
         tableValidation(usersTableSetup);
     }
-    @Test(enabled = false)
+    @Test
     public void getTableTest() {
         getValidation(usersTableUI);
     }

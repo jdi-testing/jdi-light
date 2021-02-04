@@ -5,7 +5,7 @@ name: JDI auto-tests
 env:
     CHROME_PROPERTIES: "chrome.properties"
     FIREFOX_PROPERTIES: "ff.properties"
-    WITH_PARAMS: "-ntp -Ddriver=firefox" # for Chrome: "-ntp -Ddriver=chrome"
+    WITH_PARAMS: "-ntp -Ddriver=chrome" # for Chrome: "-ntp -Ddriver=chrome"
     UNIT: "-Punit"
     COMMON: "-Pcommon"
     COMPLEX: "-Pcomplex"
@@ -105,8 +105,7 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
-      run: |
-          mvn verify $WITH_PARAMS -DCucumber.options="--tags ~@ignore_ci" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
 
 #####  Example for original allure data upload
 #    - name: 'Upload BDD results'

@@ -12,7 +12,7 @@ public class TestJDIList {
     @Url("table-with-href.html")
     public static DashboardPage dashboardPage;
 
-    @Test(enabled = false)
+    @Test
     public void issue70() {
         initSite(TestJDIList.class);
         dashboardPage.open();

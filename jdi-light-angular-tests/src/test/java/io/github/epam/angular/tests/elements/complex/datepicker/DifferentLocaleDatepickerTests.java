@@ -25,7 +25,7 @@ public class DifferentLocaleDatepickerTests extends TestsDatepickerBase {
         differentLocaleDatepicker.label().has().value(differentLocale);
     }
 
-    @Test(enabled = false)
+    @Test
     public void checkInputDate() {
         refresh();
         differentLocaleDatepicker.input("2002/12/13");

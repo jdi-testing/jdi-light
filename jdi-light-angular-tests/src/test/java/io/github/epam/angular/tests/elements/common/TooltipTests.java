@@ -26,13 +26,13 @@ public class TooltipTests extends TestsInit {
             AngularPage.refresh();
     }
 
-    @Test(enabled = false)
+    @Test
     public void basicTooltipTest() {
         basicTooltipButton.hover();
         tooltip.has().assertTooltipText("Petit a petit, l’oiseau fait son nid");
     }
 
-    @Test(enabled = false)
+    @Test
     public void customPositionTooltipTest() {
         Map<String, Tooltip.Position> position = new HashMap<>();
         position.put("after", Tooltip.Position.RIGHT);
@@ -52,14 +52,14 @@ public class TooltipTests extends TestsInit {
         );
     }
 
-    @Test(enabled = false)
+    @Test
     public void colorTooltipTest() {
         String red = "rgba(183, 28, 28, 1)";
         colorTooltipButton.hover();
         tooltip.has().assertTooltipColor(red);
     }
 
-    @Test(enabled = false)
+    @Test
     public void delayTooltipTest() {
         int show = 3;
         int hide = 5;
@@ -77,7 +77,7 @@ public class TooltipTests extends TestsInit {
         duration(hide, hideAction);
     }
 
-    @Test(enabled = false)
+    @Test
     public void disabledTooltipTest() {
         disabledCheckbox.click();
         disabledTooltipButton.hover();
@@ -113,7 +113,7 @@ public class TooltipTests extends TestsInit {
         tooltip.has().assertTooltipText(message);
     }
 
-    @Test(enabled = false)
+    @Test
     public void autoHideTooltipTest() {
         autoHideTooltipButton.hover();
         tooltip.is().displayed();

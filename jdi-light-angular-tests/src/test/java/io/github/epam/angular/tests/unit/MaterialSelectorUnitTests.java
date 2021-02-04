@@ -67,7 +67,7 @@ public class MaterialSelectorUnitTests extends TestsInit {
         assertEquals(multipleSelect.selected(), MUSHROOM + ", " + PEPPERONI + ", " + TOMATO);
     }
 
-    @Test(enabled = false)
+    @Test
     public void valuesTest() {
         multipleSelect.show();
         assertEquals(basicMatSelect.values(), asList(STEAK, PIZZA, TACOS));

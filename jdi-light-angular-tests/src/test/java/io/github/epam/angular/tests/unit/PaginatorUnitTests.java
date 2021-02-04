@@ -29,7 +29,7 @@ public class PaginatorUnitTests extends TestsInit {
         assertEquals(paginator.label(), "Items per page:");
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyItemsPerPageListTest() {
         final List<Integer> optionList = Arrays.asList(-1, 0, 1, 5, 10, 25, 100);
         final String options = optionList
@@ -41,7 +41,7 @@ public class PaginatorUnitTests extends TestsInit {
         assertEquals(optionList, paginator.options());
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyItemsPerPageSelectedTest() {
         final int option = 5;
         paginator.select(option);
@@ -49,7 +49,7 @@ public class PaginatorUnitTests extends TestsInit {
         assertEquals(paginator.selected(), option);
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyNavigationTest() {
         listLength.setValue("75");
         paginator.select(25);
@@ -73,7 +73,7 @@ public class PaginatorUnitTests extends TestsInit {
         assertEquals(paginator.range(), "0 of 0");
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyRangeTest() {
         final String TOTAL = "50";
         final int STEP = 25;

@@ -24,7 +24,7 @@ public class JDIPerformanceTests implements SimpleTestsInit {
         leftNavigation.select("Service", "Performance");
     }
 
-    @Test(enabled = false)
+    @Test
     public void hugeTableSearchTest() {
         StopWatch timer = StopWatch.createStarted();
         Line row = usersTable.row(

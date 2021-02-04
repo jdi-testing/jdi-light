@@ -28,35 +28,35 @@ public class SortingOverviewUnitTests extends TestsInit {
         Assert.assertTrue(SortingOverviewSection.sortingOverview.getTableHeaders().isDisplayed());
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyHeaderButtonDessertIsClicked() {
         SortingOverviewSection.sortingOverview.clickButtonByText(DESSERT);
         SortingOverviewSection.sortingOverview.clickButtonByText(DESSERT);
         Assert.assertTrue(SortingOverviewSection.sortingOverview.headerButtonIsClicked());
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyHeaderButtonCaloriesIsClicked() {
         SortingOverviewSection.sortingOverview.clickButtonByText(CALORIES);
         SortingOverviewSection.sortingOverview.clickButtonByText(CALORIES);
         Assert.assertTrue(SortingOverviewSection.sortingOverview.headerButtonIsClicked());
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyHeaderButtonFatIsClicked() {
         SortingOverviewSection.sortingOverview.clickButtonByText(FAT);
         SortingOverviewSection.sortingOverview.clickButtonByText(FAT);
         Assert.assertTrue(SortingOverviewSection.sortingOverview.headerButtonIsClicked());
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyHeaderButtonCarbsIsClicked() {
         SortingOverviewSection.sortingOverview.clickButtonByText(CARBS);
         SortingOverviewSection.sortingOverview.clickButtonByText(CARBS);
         Assert.assertTrue(SortingOverviewSection.sortingOverview.headerButtonIsClicked());
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyHeaderButtonProteinIsClicked() {
         SortingOverviewSection.sortingOverview.clickButtonByText(PROTEIN);
         SortingOverviewSection.sortingOverview.clickButtonByText(PROTEIN);

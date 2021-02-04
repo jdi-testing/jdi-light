@@ -17,12 +17,12 @@ public class BadgeUnitTests extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
-    @Test(enabled = false)
+    @Test
     public void badgeTest() {
         assertTrue(textWithBadge.badge().isDisplayed());
     }
 
-    @Test(enabled = false)
+    @Test
     public void colorTest() {
         assertTrue(textWithBadge.color("Violet"));
     }

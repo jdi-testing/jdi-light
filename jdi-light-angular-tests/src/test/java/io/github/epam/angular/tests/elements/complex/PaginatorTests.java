@@ -87,7 +87,7 @@ public class PaginatorTests extends TestsInit {
         paginator.has().nextDisabled();
     }
 
-    @Test(enabled = false)
+    @Test
     public void pageSizeOptionsPaginatorTest() {
         paginator.has().itemsPerPageList(PAGESIZEOPTIONS);
     }

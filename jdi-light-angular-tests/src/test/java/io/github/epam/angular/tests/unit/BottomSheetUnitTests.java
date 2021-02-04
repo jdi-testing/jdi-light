@@ -36,7 +36,7 @@ public class BottomSheetUnitTests extends TestsInit {
         assertTrue(bottomSheet.isClosed());
     }
 
-    @Test(enabled = false)
+    @Test
     public void valuesTest() {
         bottomSheet.open();
         assertEquals(bottomSheet.values(), BOTTOM_SHEET_VALUES);

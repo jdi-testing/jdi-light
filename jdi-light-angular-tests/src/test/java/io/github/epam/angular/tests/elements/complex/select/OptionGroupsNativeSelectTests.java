@@ -18,7 +18,7 @@ public class OptionGroupsNativeSelectTests extends TestsSelectBase {
         optionGroupsNativeSelect.label().has().value("Cars");
     }
 
-    @Test(enabled = false)
+    @Test
     public void checkEnabledOptionCanBeSelectedByName() {
         optionGroupsNativeSelect.select(SAAB);
         optionGroupsNativeSelect.is().selected(SAAB);

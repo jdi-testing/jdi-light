@@ -20,7 +20,7 @@ public class WindowsAndFramesTests implements TestsInit {
         moveToHomePage();
     }
 
-    @Test(enabled = false)
+    @Test
     public void windowsTest() {
         githubLink.click();
         System.out.println("New window is opened: " + newWindowIsOpened());
@@ -40,12 +40,12 @@ public class WindowsAndFramesTests implements TestsInit {
         closeWindow();
     }
 
-    @Test(enabled = false)
+    @Test
     public void frameTest() {
         iframe.epamLogo.click();
     }
 
-    @Test(enabled = false)
+    @Test
     public void frameByLocatorTest() {
         iframe.epamLogoFrame.click();
     }

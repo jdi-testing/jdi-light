@@ -20,48 +20,48 @@ public class OptionGroupsMatSelectTests extends TestsSelectBase {
         optionGroupsMatSelect.label().has().value("Pokemon");
     }
 
-    @Test(enabled = false)
+    @Test
     public void checkNoneOptionCanBeSelectedById() {
         optionGroupsMatSelect.select(ELEMENT.startIndex);
         optionGroupsMatSelect.is().selected(matchesPattern("\\W+"));
     }
 
-    @Test(enabled = false)
+    @Test
     public void checkEnabledOptionCanBeSelectedByName() {
         optionGroupsMatSelect.select(ODDISH);
         optionGroupsMatSelect.is().selected(ODDISH);
     }
 
-    @Test(enabled = false)
+    @Test
     public void checkDisabledOptionCannotBeSelectedByName() {
         String preselectedValue = optionGroupsMatSelect.selected();
         optionGroupsMatSelect.multipleSelect(FLAREON);
         optionGroupsMatSelect.is().selected(preselectedValue);
     }
 
-    @Test(enabled = false)
+    @Test
     public void checkListDisabledOptions() {
         optionGroupsMatSelect.has().listDisabled(CHARMANDER, VULPIX, FLAREON);
     }
 
-    @Test(enabled = false)
+    @Test
     public void checkListEnabledOptions() {
         optionGroupsMatSelect.has()
                 .listEnabled("-- None --", BULBASAUR, ODDISH, BELLSPROUT, SQUIRTLE, PSYDUCK, HORSEA, MEW, MEWTWO);
     }
 
-    @Test(enabled = false)
+    @Test
     public void checkAvailableOptions() {
         optionGroupsMatSelect.assertThat()
                 .values("-- None --", BELLSPROUT, ODDISH, SQUIRTLE, VULPIX, MEW, HORSEA, CHARMANDER);
     }
 
-    @Test(enabled = false)
+    @Test
     public void checkAvailableGroups() {
         optionGroupsMatSelect.has().groups(Arrays.asList(GRASS, WATER, FIRE, PSYCHIC));
     }
 
-    @Test(enabled = false)
+    @Test
     public void checkAvailableOptionsAndGroups() {
         optionGroupsMatSelect.has().groupsAndOptions(getPokemonsMap());
     }

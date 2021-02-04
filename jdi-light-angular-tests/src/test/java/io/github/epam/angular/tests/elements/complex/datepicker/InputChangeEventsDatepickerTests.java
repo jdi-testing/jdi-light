@@ -27,7 +27,7 @@ public class InputChangeEventsDatepickerTests extends TestsDatepickerBase {
         inputChangeEventsDatepicker.label().has().value(inputChangeEvents);
     }
 
-    @Test(enabled = false)
+    @Test
     public void selectFirstInputChangeEventsTest() {
         refresh();
         LocalDate firstEventDate = LocalDate.now();

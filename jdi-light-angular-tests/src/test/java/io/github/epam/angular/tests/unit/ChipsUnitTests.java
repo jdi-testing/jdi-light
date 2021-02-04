@@ -34,13 +34,13 @@ public class ChipsUnitTests extends TestsInit {
         assertTrue(basicChipsRow.isDisplayed());
     }
 
-    @Test(enabled = false)
+    @Test
     public void basicChipsHasTextTest() {
         basicChipsRow.clickChipsByTextValue(ONEFISH);
         Assert.assertTrue(basicChipsRow.chipsHasText(ONEFISH));
     }
 
-    @Test(enabled = false)
+    @Test
     public void stackedChipsHasTextTest() {
         stackedChipsList.clickChipsByTextValue(NONE);
         Assert.assertTrue(stackedChipsList.chipsHasText(NONE));
@@ -57,7 +57,7 @@ public class ChipsUnitTests extends TestsInit {
         assertEquals(chipsAutocompleteInput.getPlaceholderForChips(), PLACEHOLDER);
     }
 
-    @Test(enabled = false)
+    @Test
     public void chipsAutocompleteGetValuesTest() {
         String[] expectedValuesArray = {"Apple", "Lemon", "Lime", "Orange", "Strawberry"};
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
