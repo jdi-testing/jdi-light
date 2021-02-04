@@ -36,7 +36,7 @@ public class AccordionAssert extends UIAssert<AccordionAssert, Accordion> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is content visible")
+    @JDIAction("Assert that '{name}' content is visible")
     public AccordionAssert contentVisible() {
         boolean isVisible = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().content().isDisplayed());
@@ -44,7 +44,7 @@ public class AccordionAssert extends UIAssert<AccordionAssert, Accordion> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is content invisible")
+    @JDIAction("Assert that '{name}' content is invisible")
     public AccordionAssert contentInvisible() {
         boolean isVisible = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> !element().content().isDisplayed());
