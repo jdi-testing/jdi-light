@@ -12,7 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.MaterialPage;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("http://localhost:6006/?path=")
 public class StaticSite {
 
     @Url("/material-ui-surfaces-accordion--default")
@@ -20,6 +20,9 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
+
+    @Url("/story/material-ui-inputs-checkbox--primary")
+    public static WebPage primaryCheckBoxPage;
 
     @Frame("storybook-preview-iframe")
     public static MaterialPage materialPageFrame;
