@@ -13,6 +13,18 @@ public class Switch extends UIBaseElement<SwitchAssert> {
         core().click();
     }
 
+    public void check() {
+        if (isUnchecked()) {
+            toggle();
+        }
+    }
+
+    public void uncheck() {
+        if (isChecked()) {
+            toggle();
+        }
+    }
+
     @JDIAction("Is '{name}' checked")
     public Boolean isChecked() {
         return selector().hasClass("Mui-checked");

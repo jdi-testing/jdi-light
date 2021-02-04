@@ -16,10 +16,10 @@ public class SwitchTests extends TestsInit {
 
         switchFrame.aSwitch.is().enabled();
         switchFrame.aSwitch.is().unchecked();
-        switchFrame.aSwitch.toggle();
+        switchFrame.aSwitch.check();
         switchFrame.aSwitch.is().checked();
 
-        switchFrame.aSwitch.toggle();
+        switchFrame.aSwitch.uncheck();
         switchFrame.aSwitch.isUnchecked();
     }
 
@@ -29,7 +29,7 @@ public class SwitchTests extends TestsInit {
 
         switchFrame.aSwitch.is().disabled();
         switchFrame.aSwitch.is().unchecked();
-        switchFrame.aSwitch.toggle();
+        switchFrame.aSwitch.check();
         switchFrame.aSwitch.is().unchecked();
     }
 
@@ -40,7 +40,7 @@ public class SwitchTests extends TestsInit {
         switchFrame.aSwitch.is().disabled();
 
         switchFrame.aSwitch.is().checked();
-        switchFrame.aSwitch.toggle();
+        switchFrame.aSwitch.uncheck();
         switchFrame.aSwitch.is().checked();
     }
 }
