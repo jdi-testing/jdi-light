@@ -14,6 +14,7 @@ import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.PaperFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -67,6 +68,13 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
+
+    // paper
+    @Frame("storybook-preview-iframe")
+    public static PaperFrame paperFrame;
+
+    @Url("/material-ui-surfaces-paper--default")
+    public static WebPage surfacePaperDefaultPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
