@@ -5,6 +5,12 @@
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 * **driver.remote.run** boolean property can be specified in **test.properties** file. If not specified, JDI would use the original logic and switch between local and remote driver depending on other properties
 
+##1.3.4 (04.02.2021)
+* Switch to Lightsaber 2.1.8
+* Correct allure WebSettings
+* Add AllureLogger steps
+* Fix issue with version of junit-provider
+
 ##1.3.3 (28.01.2021)
 * Add should verifications and Conditions to ICoreElement
 * Add NAME_TO_LOCATOR, DEFAULT_CONTEXT, MAP_FORM
