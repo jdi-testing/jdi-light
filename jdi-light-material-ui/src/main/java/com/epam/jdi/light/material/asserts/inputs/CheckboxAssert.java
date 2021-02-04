@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.asserts.surfaces;
+package com.epam.jdi.light.material.asserts.inputs;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
