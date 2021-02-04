@@ -18,6 +18,9 @@ public class StaticSite {
 
     // inputs
     // switch
+    @Frame("storybook-preview-iframe")
+    public static SwitchFrame switchFrame;
+
     @Url("/material-ui-switch--default")
     public static WebPage inputSwitchDefaultPage;
 
@@ -27,19 +30,16 @@ public class StaticSite {
     @Url("/material-ui-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
 
-    @Frame("storybook-preview-iframe")
-    public static SwitchFrame switchFrame;
-
     // surfaces
     // accordion
+    @Frame("storybook-preview-iframe")
+    public static AccordionFrame accordionFrame;
+
     @Url("/material-ui-surfaces-accordion--default")
     public static WebPage surfaceAccordionPage;
 
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
-
-    @Frame("storybook-preview-iframe")
-    public static AccordionFrame accordionFrame;
 
     @UI("#login-form")
     public static Form<User> loginForm;
