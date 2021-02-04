@@ -6,11 +6,6 @@ import com.epam.jdi.light.material.asserts.surfaces.inputs.CheckboxAssert;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert> {
 
-//    @JDIAction("Get '{name}'")
-//    public UIElement primaryCheckbox() {
-//        return e.find(By.xpath("//span[contains(@class,'MuiButtonBase-root')]"));
-//    }
-
     @JDIAction("Click on '{name}'")
     public void clickOnCheckbox() {
         core().click();
