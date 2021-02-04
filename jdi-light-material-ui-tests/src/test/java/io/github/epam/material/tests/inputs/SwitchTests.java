@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.inputSwitchDefaultPage;
 import static io.github.com.StaticSite.inputSwitchDisabledAndCheckedPage;
 import static io.github.com.StaticSite.inputSwitchDisabledPage;
-import static io.github.com.StaticSite.materialPageFrame;
+import static io.github.com.StaticSite.switchFrame;
 
 public class SwitchTests extends TestsInit {
 
@@ -14,34 +14,33 @@ public class SwitchTests extends TestsInit {
     public void defaultSwitchTest() {
         inputSwitchDefaultPage.shouldBeOpened();
 
-        materialPageFrame.aSwitch.is().enabled();
-        materialPageFrame.aSwitch.is().unchecked();
-        materialPageFrame.aSwitch.toggle();
-        materialPageFrame.aSwitch.is().checked();
+        switchFrame.aSwitch.is().enabled();
+        switchFrame.aSwitch.is().unchecked();
+        switchFrame.aSwitch.toggle();
+        switchFrame.aSwitch.is().checked();
 
-        materialPageFrame.aSwitch.toggle();
-        materialPageFrame.aSwitch.isUnchecked();
+        switchFrame.aSwitch.toggle();
+        switchFrame.aSwitch.isUnchecked();
     }
 
     @Test
     public void disabledSwitchTest() {
         inputSwitchDisabledPage.shouldBeOpened();
 
-        materialPageFrame.aSwitch.is().disabled();
-
-        materialPageFrame.aSwitch.is().unchecked();
-        materialPageFrame.aSwitch.toggle();
-        materialPageFrame.aSwitch.is().unchecked();
+        switchFrame.aSwitch.is().disabled();
+        switchFrame.aSwitch.is().unchecked();
+        switchFrame.aSwitch.toggle();
+        switchFrame.aSwitch.is().unchecked();
     }
 
     @Test
     public void disabledAndCheckedSwitchTest() {
         inputSwitchDisabledAndCheckedPage.shouldBeOpened();
 
-        materialPageFrame.aSwitch.is().disabled();
+        switchFrame.aSwitch.is().disabled();
 
-        materialPageFrame.aSwitch.is().checked();
-        materialPageFrame.aSwitch.toggle();
-        materialPageFrame.aSwitch.is().checked();
+        switchFrame.aSwitch.is().checked();
+        switchFrame.aSwitch.toggle();
+        switchFrame.aSwitch.is().checked();
     }
 }

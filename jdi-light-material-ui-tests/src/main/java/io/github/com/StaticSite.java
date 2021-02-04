@@ -10,12 +10,14 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
-import io.github.com.pages.MaterialPage;
+import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.surfaces.AccordionFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 
     // inputs
+    // switch
     @Url("/material-ui-switch--default")
     public static WebPage inputSwitchDefaultPage;
 
@@ -25,7 +27,11 @@ public class StaticSite {
     @Url("/material-ui-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
 
+    @Frame("storybook-preview-iframe")
+    public static SwitchFrame switchFrame;
+
     // surfaces
+    // accordion
     @Url("/material-ui-surfaces-accordion--default")
     public static WebPage surfaceAccordionPage;
 
@@ -33,7 +39,7 @@ public class StaticSite {
     public static WebPage surfaceAccordionDisabledPage;
 
     @Frame("storybook-preview-iframe")
-    public static MaterialPage materialPageFrame;
+    public static AccordionFrame accordionFrame;
 
     @UI("#login-form")
     public static Form<User> loginForm;
