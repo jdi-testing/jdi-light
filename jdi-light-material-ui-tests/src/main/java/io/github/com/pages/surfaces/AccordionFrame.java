@@ -10,6 +10,4 @@ public class AccordionFrame extends Section {
     @UI(".MuiAccordion-root")
     public Accordion accordion;
 
-    @UI(".MuiButton-root")
-    public Button button;
 }
