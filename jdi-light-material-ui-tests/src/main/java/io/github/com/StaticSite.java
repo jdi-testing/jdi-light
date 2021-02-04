@@ -38,6 +38,12 @@ public class StaticSite {
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
 
+    @Url("/material-ui-button--default")
+    public static WebPage buttonDefaultPage;
+
+    @Url("/material-ui-button--disabled")
+    public static WebPage buttonDisabledPage;
+
     @Frame("storybook-preview-iframe")
     public static AccordionFrame accordionFrame;
 
