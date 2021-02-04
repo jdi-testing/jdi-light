@@ -11,7 +11,7 @@ public class AccordionTests extends TestsInit {
 
     @Test
     public void defaultAccordionTest() {
-        surfaceAccordionPage.shouldBeOpened();
+        surfaceAccordionPage.open();
 
         materialPageFrame.accordion.is().collapsed();
         materialPageFrame.accordion.is().enabled();
@@ -24,7 +24,7 @@ public class AccordionTests extends TestsInit {
 
     @Test
     public void disabledAccordionTest() {
-        surfaceAccordionDisabledPage.shouldBeOpened();
+        surfaceAccordionDisabledPage.open();
 
         materialPageFrame.accordion.is().collapsed();
         materialPageFrame.accordion.is().disabled();

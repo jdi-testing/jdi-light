@@ -12,7 +12,7 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void defaultSwitchTest() {
-        inputSwitchDefaultPage.shouldBeOpened();
+        inputSwitchDefaultPage.open();
 
         materialPageFrame.aSwitch.is().enabled();
         materialPageFrame.aSwitch.is().unchecked();
@@ -25,7 +25,7 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void disabledSwitchTest() {
-        inputSwitchDisabledPage.shouldBeOpened();
+        inputSwitchDisabledPage.open();
 
         materialPageFrame.aSwitch.is().disabled();
 
@@ -36,7 +36,7 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void disabledAndCheckedSwitchTest() {
-        inputSwitchDisabledAndCheckedPage.shouldBeOpened();
+        inputSwitchDisabledAndCheckedPage.open();
 
         materialPageFrame.aSwitch.is().disabled();
 
