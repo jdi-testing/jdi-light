@@ -1,12 +1,12 @@
-package io.github.epam.material.tests;
+package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.tools.LinqUtils.safeException;
-import static io.github.com.StaticSite.buttonDefaultPage;
-import static io.github.com.StaticSite.buttonDisabledPage;
-import static io.github.com.StaticSite.materialPageFrame;
+import static io.github.com.StaticSite.buttonFrame;
+import static io.github.com.StaticSite.inputButtonDefaultPage;
+import static io.github.com.StaticSite.inputButtonDisabledPage;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.fail;
@@ -15,20 +15,20 @@ public class ButtonTests extends TestsInit {
 
     @Test
     public void defaultButtonTest() {
-        buttonDefaultPage.shouldBeOpened();
+        inputButtonDefaultPage.open();
 
-        materialPageFrame.button.click();
-        materialPageFrame.button.is().enabled();
-        materialPageFrame.button.has().text(containsString("BUTTON"));
+        buttonFrame.button.click();
+        buttonFrame.button.is().enabled();
+        buttonFrame.button.has().text(containsString("BUTTON"));
     }
 
     @Test
     public void disabledButtonTest() {
-        buttonDisabledPage.shouldBeOpened();
+        inputButtonDisabledPage.shouldBeOpened();
 
-        materialPageFrame.button.is().disabled();
+        buttonFrame.button.is().disabled();
         try {
-            materialPageFrame.button.click();
+            buttonFrame.button.click();
             fail("Disabled button shouldn't work, but it does");
         } catch (Exception ex) {
             assertThat(safeException(ex),
