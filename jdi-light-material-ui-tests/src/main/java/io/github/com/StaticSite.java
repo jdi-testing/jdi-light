@@ -12,7 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.MaterialPage;
 
-@JSite("http://localhost:6006/?path=")
+@JSite("https://jdi-testing.github.io/jdi-light")
 public class StaticSite {
 
     @Url("/material-ui-surfaces-accordion--default")
