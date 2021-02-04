@@ -60,11 +60,11 @@ public class Accordion extends UIBaseElement<AccordionAssert> {
     }
 
     public UIElement content() {
-        return this.find(By.xpath("//div[contains(@class,'MuiAccordionDetails-root')]"));
+        return this.find(By.cssSelector("div[class*='MuiAccordionDetails-root']"));
     }
 
     public UIElement summary() {
-        return this.find(By.xpath("//div[contains(@class,'MuiAccordionSummary-root')]"));
+        return this.find(By.cssSelector("div[class*='MuiAccordionSummary-root']"));
     }
 
     @Override
