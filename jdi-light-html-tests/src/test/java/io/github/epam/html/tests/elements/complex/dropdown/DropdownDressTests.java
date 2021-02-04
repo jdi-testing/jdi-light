@@ -77,7 +77,7 @@ public class DropdownDressTests implements TestsInit {
 
     @Test
     public void disabledTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
         disabledDropdown.select("Pirate");
         assertEquals(disabledDropdown.getValue(), "Disabled");
     }

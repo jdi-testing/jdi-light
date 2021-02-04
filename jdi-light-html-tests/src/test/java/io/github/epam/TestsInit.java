@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
 import io.github.epam.testng.TestNGListener;
+import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
@@ -32,8 +33,14 @@ public interface TestsInit {
     }
 
     default boolean isFireFox() {
-        logger.info("Browser %s is used ", DRIVER.name);
-        return DRIVER.name.equalsIgnoreCase("firefox")
-                || DRIVER.name.equalsIgnoreCase("geckodriver");
+        String ffName = "firefox";
+        logger.info("Browser %s is used. isFirefox=%s", DRIVER.name, ffName.equalsIgnoreCase(DRIVER.name));
+        return ffName.equalsIgnoreCase(DRIVER.name);
+    }
+
+    default void skipForFirefox() {
+        if (isFireFox()) {
+            throw new SkipException("Test is skipped for Firefox browser");
+        }
     }
 }

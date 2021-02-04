@@ -58,7 +58,8 @@ public class FileUploadTests implements TestsInit {
 
     @Test
     public void downloadTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
+
         cleanupDownloads();
         downloadJdiLogo.click();
         assertThatFile("jdi-logo.jpg")
