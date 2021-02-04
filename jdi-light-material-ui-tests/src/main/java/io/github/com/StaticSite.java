@@ -7,9 +7,11 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
@@ -30,10 +32,11 @@ public class StaticSite {
     @Url("/material-ui-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
 
-    // surfaces
-    // accordion
     @Frame("storybook-preview-iframe")
     public static AccordionFrame accordionFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static CheckboxFrame checkboxFrame;
 
     @Url("/material-ui-surfaces-accordion--default")
     public static WebPage surfaceAccordionPage;
@@ -43,9 +46,6 @@ public class StaticSite {
 
     @Url("/story/material-ui-inputs-checkbox--primary")
     public static WebPage primaryCheckBoxPage;
-
-    @Frame("storybook-preview-iframe")
-    public static MaterialPage materialPageFrame;
 
     @UI("#login-form")
     public static Form<User> loginForm;

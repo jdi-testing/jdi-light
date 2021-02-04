@@ -9,7 +9,4 @@ public class AccordionFrame extends Section {
 
     @UI(".MuiAccordion-root")
     public Accordion accordion;
-
-    @UI("//span[contains(@class,'MuiButtonBase-root')]")
-    public Checkbox checkbox;
 }
