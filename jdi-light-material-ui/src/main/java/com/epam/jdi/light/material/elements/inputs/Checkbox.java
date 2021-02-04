@@ -1,8 +1,8 @@
-package com.epam.jdi.light.material.elements.surfaces.inputs;
+package com.epam.jdi.light.material.elements.inputs;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.material.asserts.surfaces.inputs.CheckboxAssert;
+import com.epam.jdi.light.material.asserts.surfaces.CheckboxAssert;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert> {
 
@@ -13,7 +13,12 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> {
 
     @JDIAction("Is '{name}' selected")
     public boolean isSelectedCheckbox() {
-        return core().isDisplayed();
+        return core().hasClass("Mui-checked");
+    }
+
+    @JDIAction("Is '{name}' not selected")
+    public boolean isNotSelectedCheckbox() {
+        return !isSelectedCheckbox();
     }
 
     @JDIAction("Is '{name}' selected")

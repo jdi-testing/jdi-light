@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.materialPageFrame;
 import static io.github.com.StaticSite.primaryCheckBoxPage;
 
-public class PrimaryCheckBoxTests extends TestsInit {
+public class CheckBoxTests extends TestsInit {
 
     @Test
     public void primaryCheckBoxTest() {
@@ -15,6 +15,7 @@ public class PrimaryCheckBoxTests extends TestsInit {
         materialPageFrame.checkbox.clickOnCheckbox();
         materialPageFrame.checkbox.is().selectedCheckbox();
         materialPageFrame.checkbox.clickOnCheckbox();
+        materialPageFrame.checkbox.is().unSelectedCheckbox();
     }
 
 }

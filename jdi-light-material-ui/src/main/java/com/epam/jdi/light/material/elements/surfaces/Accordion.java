@@ -3,7 +3,7 @@ package com.epam.jdi.light.material.elements.surfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.material.asserts.surfaces.AccordionAssert;
+import com.epam.jdi.light.material.asserts.inputs.AccordionAssert;
 import org.openqa.selenium.By;
 
 public class Accordion extends UIBaseElement<AccordionAssert> {
