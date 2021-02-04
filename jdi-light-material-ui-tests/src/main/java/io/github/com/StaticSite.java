@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.inputs.FabFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
@@ -43,6 +44,16 @@ public class StaticSite {
 
     @Url("/material-ui-button--disabled")
     public static WebPage inputButtonDisabledPage;
+
+    // floating action button
+    @Frame("storybook-preview-iframe")
+    public static FabFrame fabFrame;
+
+    @Url("/material-ui-fab--default")
+    public static WebPage inputFabDefaultPage;
+
+    @Url("/material-ui-fab--disabled")
+    public static WebPage inputFabDisabledPage;
 
     // surfaces
     // accordion
