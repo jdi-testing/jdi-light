@@ -56,8 +56,6 @@ public class MobileSettings {
         initialized = true;
     }
 
-    public JFunc1<WebDriver, WebDriver> setup = DriverData::driverSettings;
-
     private static String getRemoteUrl(String prop) {
         switch (prop.toLowerCase().replaceAll(" ", "")) {
             case "sauce":
