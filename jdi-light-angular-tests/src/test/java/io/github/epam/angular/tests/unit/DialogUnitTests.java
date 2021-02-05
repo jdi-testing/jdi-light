@@ -2,7 +2,6 @@ package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
@@ -10,10 +9,10 @@ import static io.github.com.pages.AngularPage.dialog;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertTrue;
 
-@Ignore("failed on HitHub CI")
 public class DialogUnitTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
+        skipForFirefox();
         shouldBeLoggedIn();
         angularPage.open();
         dialog.show();
@@ -23,6 +22,7 @@ public class DialogUnitTests extends TestsInit {
     public void openedTest() {
         dialog.open();
         assertTrue(dialog.isOpened());
+        dialog.close();
     }
 
     @Test
@@ -37,6 +37,7 @@ public class DialogUnitTests extends TestsInit {
         dialog.sendKeysToNameFormField("EPAM Systems");
         dialog.open();
         assertTrue(dialog.nameText("EPAM Systems"));
+        dialog.close();
     }
 
     @Test

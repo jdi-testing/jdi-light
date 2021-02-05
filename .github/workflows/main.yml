@@ -46,7 +46,7 @@ jobs:
       max-parallel: 2
       fail-fast: false
       matrix:
-        java: [8, 11] # all [8, 9, 10, 11, 12, 13]
+        java: [8] # all [8, 9, 10, 11, 12, 13]
 
     steps:
     - uses: actions/checkout@v2

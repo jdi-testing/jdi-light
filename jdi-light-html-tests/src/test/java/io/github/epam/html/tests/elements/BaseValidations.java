@@ -44,8 +44,12 @@ public class BaseValidations {
         el.show();
     }
 
+    public static void durationIsAbout(int duration, JAction action) {
+        validateDuration(duration*1000-1500, duration*1000+1500, action);
+    }
+
     public static void durationMoreThan(int duration, JAction action) {
-        validateDuration(duration*1000-500, duration*1000+1000, action);
+        validateDuration(duration*1000-1000, duration*1000+1000, action);
     }
     public static void durationLessThan(int duration, JAction action) {
         validateDuration(duration*1000-1000, duration*1000+500, action);

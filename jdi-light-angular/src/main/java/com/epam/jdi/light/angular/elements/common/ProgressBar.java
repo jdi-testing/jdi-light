@@ -66,14 +66,12 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
                         "if (!rect) return false;\n" +
                         "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight);\n" +
                         "const windowWidth = Math.min(window.innerWidth || document.documentElement.clientWidth);\n" +
-                        "const ratio = arguments[1];\n" +
-                        "const reduceHeight = ratio*windowHeight;\n" +
-                        "const reduceWidth = ratio*windowWidth\n" +
-                        "if (rect.top < reduceHeight) return false;\n" +
-                        "if (rect.left < reduceWidth) return false;\n" +
-                        "if (rect.bottom > windowHeight-reduceHeight) return false;\n" +
-                        "if (rect.right > windowWidth-reduceWidth) return false;\n" +
-                        "return true;", core().getWebElement(), 0.001);
+                        "const diff = arguments[1];\n" +
+                        "if (rect.top < diff) return false;\n" +
+                        "if (rect.left < diff) return false;\n" +
+                        "if (rect.bottom > windowHeight-diff) return false;\n" +
+                        "if (rect.right > windowWidth-diff) return false;\n" +
+                        "return true;", core().getWebElement(), 5);
         return (boolean) isInView;
     }
 

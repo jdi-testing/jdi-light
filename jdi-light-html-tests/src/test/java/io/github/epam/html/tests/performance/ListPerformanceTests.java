@@ -40,7 +40,7 @@ public class ListPerformanceTests implements TestsInit {
             return elements.stream().map(WebElement::getText).collect(Collectors.toList());
         }, () -> firstRow.getValuesFast(), 1, 1, 10);
     }
-    @Test(invocationCount = repeat, enabled = false)
+    @Test(invocationCount = repeat)
     public void getValuesValueFastTest() {
         List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
         elements.stream().map(WebElement::getText).collect(Collectors.toList());
@@ -65,21 +65,21 @@ public class ListPerformanceTests implements TestsInit {
         }, () -> firstXpath.getFast(index + ELEMENT.startIndex).getText(), 0.8, 0.8, 100);
     }
 
-    @Test(invocationCount = repeat, enabled = false)
+    @Test(invocationCount = repeat)
     public void getValuesTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList()).toString();
         }, () -> "[" + firstRowNoValidation.getValue().replace(",", ", ") + "]", 0.7, 235, 10);
     }
-    @Test(invocationCount = repeat, enabled = false)
+    @Test(invocationCount = repeat)
     public void getValuesVisibleTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList()).toString();
         }, () -> "[" + firstRow.getValue().replace(",", ", ") + "]", 0.2, 235, 10);
     }
-    @Test(invocationCount = repeat, enabled = false)
+    @Test(invocationCount = repeat)
     public void getValuesValueTest() {
         List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
         elements.stream().map(WebElement::getText).collect(Collectors.toList());
@@ -89,7 +89,7 @@ public class ListPerformanceTests implements TestsInit {
             el -> el.getText().equals(value)).findFirst().get().getText(),
             () -> firstRow.get(value).getText(), 65, 70, 10);
     }
-    @Test(invocationCount = repeat, enabled = false)
+    @Test(invocationCount = repeat)
     public void getValueTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));

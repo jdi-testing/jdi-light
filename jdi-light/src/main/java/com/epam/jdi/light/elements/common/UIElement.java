@@ -287,7 +287,7 @@ public class UIElement extends JDIBase
             "if (rect.left < diff) return false;\n" +
             "if (rect.bottom > windowHeight-diff) return false;\n" +
             "if (rect.right > windowWidth-diff) return false;\n" +
-            "return true;", getWebElement(), 2);
+            "return true;", getWebElement(), 5);
         return (boolean)isInView;
     }
 

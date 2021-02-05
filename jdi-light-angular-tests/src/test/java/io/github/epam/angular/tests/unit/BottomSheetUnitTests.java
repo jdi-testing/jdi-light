@@ -14,7 +14,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class BottomSheetUnitTests extends TestsInit {
-    private static final List<String> BOTTOM_SHEET_VALUES = Arrays.asList("Google Keep", "Google Docs", "Google Plus", "Google Hangouts");
+    private static final List<String> BOTTOM_SHEET_VALUES =
+            Arrays.asList("Google Keep", "Google Docs", "Google Plus", "Google Hangouts");
 
     @BeforeClass(alwaysRun = true)
     public void before() {

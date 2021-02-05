@@ -9,8 +9,7 @@ import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
-import static io.github.epam.html.tests.elements.BaseValidations.durationImmediately;
-import static io.github.epam.html.tests.elements.BaseValidations.durationMoreThan;
+import static io.github.epam.html.tests.elements.BaseValidations.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -42,7 +41,7 @@ public class PerformanceTests implements TestsInit {
     @Test
     public void isDisplayedTest() {
         durationImmediately(() -> ghostButton.is().displayed());
-        durationMoreThan(3, () -> suspendButton.is().displayed());
+        durationIsAbout(3, () -> suspendButton.is().displayed());
     }
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
