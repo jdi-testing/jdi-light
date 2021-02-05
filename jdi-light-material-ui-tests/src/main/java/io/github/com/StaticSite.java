@@ -12,6 +12,8 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.utils.PopoverClickFrame;
+import io.github.com.pages.utils.PopoverHoverFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -41,6 +43,21 @@ public class StaticSite {
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
 
+    // utils
+    // popover
+    @Frame("storybook-preview-iframe")
+    public static PopoverClickFrame popoverClickFrame;
+
+    @Url("/material-ui-utils-popover--click")
+    public static WebPage utilsPopoverClickPage;
+
+    @Frame("storybook-preview-iframe")
+    public static PopoverHoverFrame popoverHoverFrame;
+
+    @Url("/material-ui-utils-popover--hover")
+    public static WebPage utilsPopoverHoverPage;
+
+    // login page
     @UI("#login-form")
     public static Form<User> loginForm;
 
