@@ -117,6 +117,15 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
 
+    - name: Get proc list
+      run: ps -aux
+
+    - name: Kill chromes
+      run: pkill -f "chrome"
+
+    - name: Get proc list
+      run: ps -aux
+
 #    - name: Run tests - Angular Common tests
 #      if: ${{ steps.jdi-compile.outcome == 'success' }}
 #      timeout-minutes: 90 # prevent blocking

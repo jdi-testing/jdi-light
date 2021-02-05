@@ -329,6 +329,7 @@ public class UIElement extends JDIBase
                 logger.debug("Click Bottom Right");
                 break;
             case CENTER:
+                logger.debug("Click Center");
                 get().click();
                 break;
             case JS:
@@ -336,10 +337,12 @@ public class UIElement extends JDIBase
                 break;
             case SMART_CLICK:
                 show();
+                logger.debug("Click Smart");
                 ElementArea clArea = timer().getResultByCondition(
                     this::getElementClickableArea, Objects::nonNull);
                 if (clArea == null || clArea == CENTER) {
                     try {
+                        logger.debug("Real Click Smart");
                         get().click();
                     } catch (Exception ex) {
                         throw getNotClickableException();
