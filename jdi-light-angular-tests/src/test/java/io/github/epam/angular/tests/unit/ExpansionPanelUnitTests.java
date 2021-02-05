@@ -20,7 +20,7 @@ public class ExpansionPanelUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         basicExpansionPanel.show();
     }
 

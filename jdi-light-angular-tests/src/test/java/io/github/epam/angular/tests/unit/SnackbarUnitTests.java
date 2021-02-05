@@ -14,7 +14,7 @@ public class SnackbarUnitTests extends TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
     }
 
     @Test

@@ -7,12 +7,13 @@ import java.time.LocalDate;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.*;
+import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class DisabledDatepickerTests extends TestsDatepickerBase {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         completelyDisabledDatepicker.show();
     }
 

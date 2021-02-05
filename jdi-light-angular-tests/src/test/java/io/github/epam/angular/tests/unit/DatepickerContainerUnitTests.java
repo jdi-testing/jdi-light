@@ -29,7 +29,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
     public void before() {
         skipForFirefox();
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         container = new DatepickerContainer();
     }
 

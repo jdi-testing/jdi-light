@@ -26,7 +26,7 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
     public void before() {
         skipForFirefox();
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         container = new MaterialSelectorContainer();
     }
 

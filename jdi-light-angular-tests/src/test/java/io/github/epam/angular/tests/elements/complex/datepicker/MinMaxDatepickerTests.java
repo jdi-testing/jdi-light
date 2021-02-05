@@ -10,11 +10,12 @@ import java.time.Year;
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.minMaxDatepicker;
+import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class MinMaxDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         minMaxDatepicker.show();
     }
 

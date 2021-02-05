@@ -8,11 +8,12 @@ import java.time.LocalDate;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.filterDatepicker;
+import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class FilterDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         filterDatepicker.show();
     }
 

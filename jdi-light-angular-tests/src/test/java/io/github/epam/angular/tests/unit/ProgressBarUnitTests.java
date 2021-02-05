@@ -15,7 +15,7 @@ public class ProgressBarUnitTests extends TestsInit {
     public void before() {
         skipForFirefox();
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
     }
 
     @Test

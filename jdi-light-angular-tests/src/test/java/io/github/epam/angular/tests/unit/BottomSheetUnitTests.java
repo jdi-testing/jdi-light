@@ -20,7 +20,7 @@ public class BottomSheetUnitTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         bottomSheet.show();
     }
 

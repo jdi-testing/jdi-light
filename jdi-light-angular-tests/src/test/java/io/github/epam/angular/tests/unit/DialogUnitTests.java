@@ -14,7 +14,7 @@ public class DialogUnitTests extends TestsInit {
     public void before() {
         skipForFirefox();
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         dialog.show();
     }
 

@@ -9,12 +9,13 @@ import java.util.Collections;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.basicMatSelect;
+import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.hasItems;
 
 public class BasicMatSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         basicMatSelect.show();
     }
 

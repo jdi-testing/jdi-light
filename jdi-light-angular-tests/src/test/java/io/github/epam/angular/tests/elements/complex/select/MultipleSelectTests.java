@@ -15,7 +15,7 @@ public class MultipleSelectTests extends TestsSelectBase {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         multipleSelect.show();
     }
 
