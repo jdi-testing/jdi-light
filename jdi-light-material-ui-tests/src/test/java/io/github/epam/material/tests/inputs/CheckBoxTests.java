@@ -12,9 +12,10 @@ public class CheckBoxTests extends TestsInit {
     public void primaryCheckBoxTest() {
         primaryCheckBoxPage.shouldBeOpened();
         checkboxFrame.checkbox.is().enabledCheckbox();
-        checkboxFrame.checkbox.clickOnCheckbox();
+        checkboxFrame.checkbox.check();
         checkboxFrame.checkbox.is().selectedCheckbox();
         checkboxFrame.checkbox.clickOnCheckbox();
+        checkboxFrame.checkbox.unCheck();
         checkboxFrame.checkbox.is().unSelectedCheckbox();
     }
 
