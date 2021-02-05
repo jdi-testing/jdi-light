@@ -2,6 +2,7 @@ package io.github.epam;
 
 import io.github.com.StaticSite;
 import io.github.epam.testng.TestNGListener;
+import org.testng.ITestResult;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -30,9 +31,10 @@ public class TestsInit {
     }
 
     @AfterMethod
-    public static void refreshPage() {
-        // definitely needed after fail
-        reload();
+    public static void refreshPageOnFailure(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            reload();
+        }
     }
 
     public boolean isFireFox() {
