@@ -15,8 +15,8 @@ public class CheckBoxTests extends TestsInit {
         checkboxFrame.checkbox.check();
         checkboxFrame.checkbox.is().selectedCheckbox();
         checkboxFrame.checkbox.clickOnCheckbox();
-        checkboxFrame.checkbox.unCheck();
         checkboxFrame.checkbox.is().unSelectedCheckbox();
+        checkboxFrame.checkbox.unCheck();
     }
 
 }
