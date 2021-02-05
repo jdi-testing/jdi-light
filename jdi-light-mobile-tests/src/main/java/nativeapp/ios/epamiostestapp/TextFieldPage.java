@@ -6,7 +6,7 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
 public class TextFieldPage {
 
-    @MobileFindBy(accessibilityId = "Enter username")
+    @MobileFindBy(xpath = "//XCUIElementTypeTextField")
     public static TextField textField;
 
     public static EditMenu editMenu;
