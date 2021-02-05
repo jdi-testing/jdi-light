@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
@@ -29,6 +30,12 @@ public class StaticSite {
 
     @Url("/material-ui-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
+
+    @Url("/story/material-ui-inputs-checkbox--disabled")
+    public static WebPage inputCheckboxDisabled;
+
+    @Frame("storybook-preview-iframe")
+    public static CheckboxFrame checkboxFrame;
 
     // surfaces
     // accordion
