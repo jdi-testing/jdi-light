@@ -33,7 +33,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
         return new PickerAssert().set(this);
     }
 
-    @JDIAction(value = "Check that '{name}' is selected", level = LogLevels.DEBUG)
+    @JDIAction(value = "Check that '{name}' is selected")
     public String isSelected(String selected) {
         return core().get().findElements(By.id("android:id/numberpicker_input")).stream()
                 .filter(element -> element.getAttribute("text").equals(selected))

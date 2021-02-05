@@ -13,20 +13,20 @@ import org.openqa.selenium.WebElement;
 
 public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements IActionBar, HasTouchActions, IsButton {
 
-    @JDIAction(value = "Check that '{name}' is iconified", level = LogLevels.DEBUG)
+    @JDIAction(value = "Check that '{name}' is iconified")
     @Override
     public boolean isIconified() {
         return core().isDisplayed();
     }
 
-    @JDIAction(value = "Set '{name}' expanded", level = LogLevels.DEBUG)
+    @JDIAction(value = "Set '{name}' expanded")
     @Override
     public void setExpanded() {
         if (isIconified())
             core().tap();
     }
 
-    @JDIAction(value = "Check that '{name}' is expanded", level = LogLevels.DEBUG)
+    @JDIAction(value = "Check that '{name}' is expanded")
     @Override
     public boolean isExpanded() {
         return core().attr("focused")

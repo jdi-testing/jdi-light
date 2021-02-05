@@ -9,18 +9,18 @@ import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
 public class ToggleButton extends MobileAppBaseElement<ToggleButtonAssert>  implements HasTouchActions, IsButton, IsText {
-    @JDIAction(value = "Check that '{name}' is on", level = LogLevels.DEBUG)
+    @JDIAction(value = "Check that '{name}' is on")
     public boolean isOn() {
         return core().attr("checked").equals("true");
     }
 
-    @JDIAction(value = "Set '{name}' to off", level = LogLevels.DEBUG)
+    @JDIAction(value = "Set '{name}' to off")
     public void setToOff() {
         if (isOn())
             core().tap();
     }
 
-    @JDIAction(value = "Set '{name}' to on", level = LogLevels.DEBUG)
+    @JDIAction(value = "Set '{name}' to on")
     public void setToOn() {
         if (!isOn())
             core().tap();

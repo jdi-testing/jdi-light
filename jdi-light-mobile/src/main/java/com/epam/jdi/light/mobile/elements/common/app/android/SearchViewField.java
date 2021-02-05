@@ -16,7 +16,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class SearchViewField extends MobileAppBaseElement<SearchViewFieldAssert> implements ISearchViewField, HasTouchActions, IsButton {
 
-    @JDIAction(value = "Check that '{name}' is expanded", level = LogLevels.DEBUG)
+    @JDIAction(value = "Check that '{name}' is expanded")
     @Override
     public boolean isExpanded () {
         return core().attr("focused")

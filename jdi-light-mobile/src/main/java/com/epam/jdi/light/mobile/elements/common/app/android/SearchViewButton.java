@@ -10,12 +10,12 @@ import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
 public class SearchViewButton extends MobileAppBaseElement<SearchViewButtonAssert> implements ISearchViewButton, HasTouchActions, IsButton {
 
-    @JDIAction(value = "Check that '{name}' is iconified", level = LogLevels.DEBUG)
+    @JDIAction(value = "Check that '{name}' is iconified")
     public boolean isIconified () {
         return core().isDisplayed();
     }
 
-    @JDIAction(value = "Set '{name}' expanded", level = LogLevels.DEBUG)
+    @JDIAction(value = "Set '{name}' expanded")
     public void setExpanded() {
         if (isIconified())
             core().tap();

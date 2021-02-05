@@ -90,8 +90,8 @@ public class DriverData {
         if (DRIVER.screenSize.maximize) {
             if (getOs().equals(MAC))
                 maximizeScreen(driver);
-//            else
-//                driver.manage().window().maximize();
+            else
+                driver.manage().window().maximize();
         } else {
             driver.manage().window().setSize(DRIVER.screenSize.asDimension());
         }
