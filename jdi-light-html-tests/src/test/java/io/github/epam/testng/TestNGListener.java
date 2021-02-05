@@ -5,6 +5,7 @@ package io.github.epam.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+import com.epam.jdi.light.logger.AllureLogger;
 import com.epam.jdi.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -47,7 +48,7 @@ public class TestNGListener implements IInvokedMethodListener {
                             .format(new Date(currentTimeMillis() - start.get())));
             if ("FAILED".equals(result)) {
                 try {
-                    takeScreen();
+                    AllureLogger.screenshotStep("TestNG Fail Screenshot");
                 } catch (RuntimeException ignored) { }
                 if (tr.getThrowable() != null) {
                     logger.step("ERROR: " + tr.getThrowable().getMessage());

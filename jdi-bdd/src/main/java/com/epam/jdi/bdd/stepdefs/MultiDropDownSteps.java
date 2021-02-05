@@ -1,8 +1,8 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.List;
 
@@ -23,52 +23,55 @@ public class MultiDropDownSteps {
         return getUI(name, MultiSelector.class);
     }
 
-    @When("^(?:I |)check in the \"([^\"]*)\" values:$")
+    @When("I check in the {string} values:")
+    @When("check in the {string} values:")
     public void iCheckInTheValues(String name, List<String> values) {
         multiDropDown(name).check(values.toArray(new String[0]));
     }
 
-    @Then("^the \"([^\"]*)\" selected values:$")
+    @Then("the {string} selected values:")
     public void theSelectedValues(String name, List<String> values) {
         multiDropDown(name).is().checked(values);
     }
 
-    @When("^(?:I |)check in the \"([^\"]*)\" values by number:$")
+    @When("I check in the {string} values by number:")
+    @When("check in the {string} values by number:")
     public void iCheckInTheValuesByNumber(String name, List<Integer> values) {
         multiDropDown(name).check(toIntArray(values));
     }
 
-    @When("^(?:I |)check value \"([^\"]*)\" in the \"([^\"]*)\"$")
+    @When("I check value {string} in the {string}")
+    @When("check value {string} in the {string}")
     public void iCheckValueInThe(String value, String name) {
         multiDropDown(name).check(value);
     }
 
-    @Then("^the \"([^\"]*)\" selected value is \"([^\"]*)\"$")
+    @Then("the {string} selected value is {string}")
     public void theSelectedValueIs(String name, String value) {
         selectAssert(name).selected(value);
     }
 
-    @Then("^the \"([^\"]*)\" values has item \"([^\"]*)\"$")
+    @Then("the {string} values has item {string}")
     public void theValuesHasItem(String name, String value) {
         selectAssert(name).values(hasItem(value));
     }
 
-    @Then("^the \"([^\"]*)\" has disabled item \"([^\"]*)\"$")
+    @Then("the {string} has disabled item {string}")
     public void theHasDisabledItem(String name, String value) {
         selectAssert(name).disabled(hasItem(value));
     }
 
-    @Then("^the \"([^\"]*)\" has no enabled item \"([^\"]*)\"$")
+    @Then("the {string} has no enabled item {string}")
     public void theHasNotEnabledItem(String name, String value) {
         selectAssert(name).enabled(not(hasItem(value)));
     }
 
-    @Then("^the \"([^\"]*)\" has enabled items:$")
+    @Then("the {string} has enabled items:")
     public void theHasEnabledItems(String name, List<String> values) {
         selectAssert(name).enabled(hasItems(values.toArray(new String[0])));
     }
 
-    @Then("^the \"([^\"]*)\" contains items:$")
+    @Then("the {string} contains items:")
     public void theContainsItems(String name, List<String> values) {
         selectAssert(name).values(containsInAnyOrder(values.toArray(new String[0])));
     }

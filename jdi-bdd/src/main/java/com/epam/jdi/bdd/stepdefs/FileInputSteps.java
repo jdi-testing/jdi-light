@@ -1,7 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.FileInput;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.When;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
@@ -16,7 +16,8 @@ public class FileInputSteps {
         return getUI(name, FileInput.class);
     }
 
-    @When("^I upload file \"([^\"]*)\" by \"([^\"]*)\" file input element$")
+    @When("I upload file {string} by {string} file input element")
+    @When("upload file {string} by {string} file input element")
     public void iUploadFileByFileInputElement(String pathToFile, String name) {
         fileInput(name).uploadFile(mergePath(COMMON.projectPath, pathToFile));
     }

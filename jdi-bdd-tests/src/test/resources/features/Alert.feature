@@ -2,7 +2,7 @@
 Feature: Alert
 
   Scenario: alert text equals
-    Given I open "Html5 Page"
+    Given I open "Html5 Page" page
     When click on "Red Button"
     And accept alert
     And click on "Red Button"

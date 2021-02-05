@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-tests</artifactId>
-    <version>[1.3.4,)</version>
+    <version>1.3.4</version>
     <name>Tests: JDI BDD</name>
 
     <properties>

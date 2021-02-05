@@ -1,8 +1,8 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.List;
 
@@ -19,33 +19,34 @@ public class RadioSteps {
         return getUI(name, RadioButtons.class);
     }
 
-    @When("^(?:I |)select the radio button with \"([^\"]*)\" index from \"([^\"]*)\"$")
+    @When("I select the radio button with {string} index from {string}")
+    @When("select the radio button with {string} index from {string}")
     public void selectRadioIndex(int index, String name) {
         radioButtons(name).select(index);
     }
 
     //#region Then
-    @Then("^the \"([^\"]*)\" consists of next values:$")
+    @Then("the {string} consists of next values:")
     public void theConsistOfNextValues(String name, List<String> values) {
         radioButtons(name).has().values(values);
     }
 
-    @Then("^the \"([^\"]*)\" contains \"([^\"]*)\" radio button$")
+    @Then("the {string} contains {string} radio button")
     public void theContainsRadioButton(String name, String value) {
         radioButtons(name).is().values(hasItem(value));
     }
 
-    @Then("^the \"([^\"]*)\" contains \"([^\"]*)\" disabled radio button$")
+    @Then("the {string} contains {string} disabled radio button")
     public void theContainsDisabledRadioButton(String name, String value) {
         radioButtons(name).is().disabled(hasItem(value));
     }
 
-    @Then("^the \"([^\"]*)\" does not contain \"([^\"]*)\" enabled radio button$")
+    @Then("the {string} does not contain {string} enabled radio button")
     public void theDoesNotContainEnabledRadioButton(String name, String value) {
         radioButtons(name).is().enabled(not(hasItem(value)));
     }
 
-    @Then("^the \"([^\"]*)\" contains next enabled values:$")
+    @Then("the {string} contains next enabled values:")
     public void theContainsNextValues(String name, List<String> values) {
         for (String string : values) {
             radioButtons(name).is().enabled(hasItem(string));

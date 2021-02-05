@@ -1,8 +1,8 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.List;
 
@@ -17,37 +17,39 @@ public class TextAreaSteps {
         return getUI(name, TextArea.class);
     }
 
-    @When("^(?:I |)input in the \"([^\"]*)\" line \"([^\"]*)\"$")
+    @When("I input in the {string} line {string}")
+    @When("input in the {string} line {string}")
     public void addNewLine(String name, String line) {
         textArea(name).addNewLine(line);
     }
 
-    @When("^(?:I |)input in the \"([^\"]*)\" lines$")
+    @When("I input in the {string} lines")
+    @When("input in the {string} lines")
     public void inputIn(String name, List<String> lines) {
         textArea(name).setLines(lines.toArray(new String[0]));
     }
 
-    @Then("^the \"([^\"]*)\" rows count equals \"([^\"]*)\"$")
+    @Then("the {string} rows count equals {string}")
     public void rowsCountEquals(String name, int rows) {
         textArea(name).is().rowsCount(is(rows));
     }
 
-    @Then("^the \"([^\"]*)\" columns count equals \"([^\"]*)\"$")
+    @Then("the {string} columns count equals {string}")
     public void colsCountEquals(String name, int cols) {
         textArea(name).is().colsCount(is(cols));
     }
 
-    @Then("^the lines in the \"([^\"]*)\" are equal$")
+    @Then("the lines in the {string} are equal")
     public void linesInTextAreaAreEqual(String name, List<String> lines) {
         textArea(name).has().lines(lines);
     }
 
-    @Then("^the \"([^\"]*)\" minimal length equals \"([^\"]*)\"$")
+    @Then("the {string} minimal length equals {string}")
     public void minLengthEquals(String name, int minLength) {
         textArea(name).is().minlength(is(minLength));
     }
 
-    @Then("^the \"([^\"]*)\" maximal length equals \"([^\"]*)\"$")
+    @Then("the {string} maximal length equals {string}")
     public void maxLengthEquals(String name, int maxLength) {
         textArea(name).is().maxlength(is(maxLength));
     }

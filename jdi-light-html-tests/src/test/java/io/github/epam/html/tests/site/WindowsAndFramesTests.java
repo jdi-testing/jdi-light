@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
+import static io.github.com.StaticSite.homePage;
 import static io.github.com.StaticSite.iframe;
 import static io.github.com.pages.GithubPage.repoDescription;
 import static io.github.com.pages.HomePage.githubLink;
@@ -17,7 +18,7 @@ public class WindowsAndFramesTests implements TestsInit {
 
     @BeforeMethod
     public void before() {
-        moveToHomePage();
+        homePage.shouldBeOpened();
     }
     @Test
     public void windowsTest() {
