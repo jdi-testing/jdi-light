@@ -26,8 +26,8 @@ public class MenuSteps {
 
     @When("I select items in {string} menu:")
     @When("select items in {string} menu:")
-    public void selectItems(String name, List<String> values) {
-        for (String item : values)
+    public void selectItems(String name, List<List<String>> values) {
+        for (String item : values.get(0))
             menu(name).select(item);
     }
 

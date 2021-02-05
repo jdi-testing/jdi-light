@@ -46,7 +46,7 @@ public class UserStepdefs {
     @When("I select {string} disabled option {string}")
     public void iSelectDisabled(String name, String option) {
         try {
-            multiSelect(name, asList(option));
+            multiSelect(name, asList(asList(option)));
             fail("Select disabled should throw exception");
         } catch (Exception ignore) {}
     }

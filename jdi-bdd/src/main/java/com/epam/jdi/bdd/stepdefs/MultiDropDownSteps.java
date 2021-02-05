@@ -25,19 +25,19 @@ public class MultiDropDownSteps {
 
     @When("I check in the {string} values:")
     @When("check in the {string} values:")
-    public void iCheckInTheValues(String name, List<String> values) {
-        multiDropDown(name).check(values.toArray(new String[0]));
+    public void iCheckInTheValues(String name, List<List<String>> values) {
+        multiDropDown(name).check(values.get(0).toArray(new String[0]));
     }
 
     @Then("the {string} selected values:")
-    public void theSelectedValues(String name, List<String> values) {
-        multiDropDown(name).is().checked(values);
+    public void theSelectedValues(String name, List<List<String>> values) {
+        multiDropDown(name).is().checked(values.get(0));
     }
 
     @When("I check in the {string} values by number:")
     @When("check in the {string} values by number:")
-    public void iCheckInTheValuesByNumber(String name, List<Integer> values) {
-        multiDropDown(name).check(toIntArray(values));
+    public void iCheckInTheValuesByNumber(String name, List<List<Integer>> values) {
+        multiDropDown(name).check(toIntArray(values.get(0)));
     }
 
     @When("I check value {string} in the {string}")
@@ -67,12 +67,12 @@ public class MultiDropDownSteps {
     }
 
     @Then("the {string} has enabled items:")
-    public void theHasEnabledItems(String name, List<String> values) {
-        selectAssert(name).enabled(hasItems(values.toArray(new String[0])));
+    public void theHasEnabledItems(String name, List<List<String>> values) {
+        selectAssert(name).enabled(hasItems(values.get(0).toArray(new String[0])));
     }
 
     @Then("the {string} contains items:")
-    public void theContainsItems(String name, List<String> values) {
-        selectAssert(name).values(containsInAnyOrder(values.toArray(new String[0])));
+    public void theContainsItems(String name, List<List<String>> values) {
+        selectAssert(name).values(containsInAnyOrder(values.get(0).toArray(new String[0])));
     }
 }

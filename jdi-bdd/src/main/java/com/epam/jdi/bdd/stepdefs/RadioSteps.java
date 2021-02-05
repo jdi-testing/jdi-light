@@ -19,16 +19,16 @@ public class RadioSteps {
         return getUI(name, RadioButtons.class);
     }
 
-    @When("I select the radio button with {string} index from {string}")
-    @When("select the radio button with {string} index from {string}")
+    @When("I select the radio button with {int} index from {string}")
+    @When("select the radio button with {int} index from {string}")
     public void selectRadioIndex(int index, String name) {
         radioButtons(name).select(index);
     }
 
     //#region Then
     @Then("the {string} consists of next values:")
-    public void theConsistOfNextValues(String name, List<String> values) {
-        radioButtons(name).has().values(values);
+    public void theConsistOfNextValues(String name, List<List<String>> values) {
+        radioButtons(name).has().values(values.get(0));
     }
 
     @Then("the {string} contains {string} radio button")
@@ -47,8 +47,8 @@ public class RadioSteps {
     }
 
     @Then("the {string} contains next enabled values:")
-    public void theContainsNextValues(String name, List<String> values) {
-        for (String string : values) {
+    public void theContainsNextValues(String name, List<List<String>> values) {
+        for (String string : values.get(0)) {
             radioButtons(name).is().enabled(hasItem(string));
         }
     }

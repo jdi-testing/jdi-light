@@ -38,34 +38,34 @@ public class TableSteps {
     //endregion
 
     //#region Then
-    @Then("the {string} table has {string} columns")
-    @Then("the {string} has {string} columns")
+    @Then("the {string} table has {int} columns")
+    @Then("the {string} has {int} columns")
     public void assertColumnsCount(String name, int size) {
         table(name).assertThat().columns(hasSize(size));
     }
 
-    @Then("the {string} table has {string} rows")
-    @Then("the {string} has {string} rows")
+    @Then("the {string} table has {int} rows")
+    @Then("the {string} has {int} rows")
     public void assertRowsCount(String name, int count) {
         table(name).has().size(count);
     }
 
-    @Then("the {string} table has at least {string} rows")
-    @Then("the {string} has at least {string} rows")
+    @Then("the {string} table has at least {int} rows")
+    @Then("the {string} has at least {int} rows")
     public void atLeastRows(String name, int count) {
         table(name).has().size(greaterThanOrEqualTo(count));
     }
 
-    @Then("the {string} table has not more than {string} rows")
-    @Then("the {string} has not more than {string} rows")
+    @Then("the {string} table has not more than {int} rows")
+    @Then("the {string} has not more than {int} rows")
     public void notMoreThan(String name, int count) {
         table(name).has().size(lessThanOrEqualTo(count));
     }
 
     @Then("the {string} table has header:")
     @Then("the {string} has header:")
-    public void assertHasItems(String name, List<String> values) {
-        table(name).has().columns(values);
+    public void assertHasItems(String name, List<List<String>> values) {
+        table(name).has().columns(values.get(0));
     }
 
     @Then("the {string} table preview is:")
@@ -105,20 +105,20 @@ public class TableSteps {
         table(name).assertThat().no().rows(hasValue(value, inColumn(column)));
     }
 
-    @Then("the {string} table has at least {string} rows which contains {string} in column {string}")
-    @Then("the {string} has at least {string} rows which contains {string} in column {string}")
+    @Then("the {string} table has at least {int} rows which contains {string} in column {string}")
+    @Then("the {string} has at least {int} rows which contains {string} in column {string}")
     public void assertAtLeastRowsContainValue(String name, int rows, String value, String column) {
         table(name).assertThat().atLeast(rows).rows(containsValue(value, inColumn(column)));
     }
 
-    @Then("the {string} table has exact {string} rows which contains {string} in column {string}")
-    @Then("the {string} has exact {string} rows which contains {string} in column {string}")
+    @Then("the {string} table has exact {int} rows which contains {string} in column {string}")
+    @Then("the {string} has exact {int} rows which contains {string} in column {string}")
     public void assertExactRowsContainValue(String name, int rows, String value, String column) {
         table(name).assertThat().exact(rows).rows(containsValue(value, inColumn(column)));
     }
 
-    @Then("the {string} table has exact {string} rows with {string} in column {string}")
-    @Then("the {string} has exact {string} rows with {string} in column {string}")
+    @Then("the {string} table has exact {int} rows with {string} in column {string}")
+    @Then("the {string} has exact {int} rows with {string} in column {string}")
     public void assertExactRowsHaveValue(String name, int rows, String value, String column) {
         table(name).assertThat().exact(rows).rows(hasValue(value, inColumn(column)));
     }

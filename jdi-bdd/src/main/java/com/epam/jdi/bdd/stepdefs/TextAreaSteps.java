@@ -25,31 +25,31 @@ public class TextAreaSteps {
 
     @When("I input in the {string} lines")
     @When("input in the {string} lines")
-    public void inputIn(String name, List<String> lines) {
-        textArea(name).setLines(lines.toArray(new String[0]));
+    public void inputIn(String name, List<List<String>> lines) {
+        textArea(name).setLines(lines.get(0).toArray(new String[0]));
     }
 
-    @Then("the {string} rows count equals {string}")
+    @Then("the {string} rows count equals {int}")
     public void rowsCountEquals(String name, int rows) {
         textArea(name).is().rowsCount(is(rows));
     }
 
-    @Then("the {string} columns count equals {string}")
+    @Then("the {string} columns count equals {int}")
     public void colsCountEquals(String name, int cols) {
         textArea(name).is().colsCount(is(cols));
     }
 
     @Then("the lines in the {string} are equal")
-    public void linesInTextAreaAreEqual(String name, List<String> lines) {
-        textArea(name).has().lines(lines);
+    public void linesInTextAreaAreEqual(String name, List<List<String>> lines) {
+        textArea(name).has().lines(lines.get(0));
     }
 
-    @Then("the {string} minimal length equals {string}")
+    @Then("the {string} minimal length equals {int}")
     public void minLengthEquals(String name, int minLength) {
         textArea(name).is().minlength(is(minLength));
     }
 
-    @Then("the {string} maximal length equals {string}")
+    @Then("the {string} maximal length equals {int}")
     public void maxLengthEquals(String name, int maxLength) {
         textArea(name).is().maxlength(is(maxLength));
     }
