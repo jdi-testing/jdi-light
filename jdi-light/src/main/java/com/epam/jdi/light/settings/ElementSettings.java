@@ -21,7 +21,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
 import static com.epam.jdi.light.common.UseSmartSearch.UI_AND_ELEMENTS;
-import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.lang.String.format;
@@ -36,7 +35,7 @@ public class ElementSettings {
     public int startIndex = 1;
     public Pair<String, JFunc1<WebElement, Boolean>> searchRule;
     public JFunc1<Field, String> name = field -> splitCamelCase(field.getName());
-    public String smartTemplate = "#%s";
+    public String smartTemplate = "[data-testid='%s']";
     public Pair<String, JFunc1<String, String>> smartName
         = Pair.$("kebab-case", SMART_MAP_NAME_TO_LOCATOR.get("kebab-case"));
 

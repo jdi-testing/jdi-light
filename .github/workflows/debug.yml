@@ -103,7 +103,7 @@ jobs:
 #      uses: actions/upload-artifact@v2
 #      with:
 #        name: bdd-results-sdk${{ matrix.java }}
-#        path: ./${BDD_TESTS}/target/allure-results/
+#        path: ./${BDD_TESTS}/target/.logs/screens
 #        retention-days: 1
 
 #    - name: Tests bootstrap Unit
@@ -117,10 +117,17 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
 
+    - name: 'Upload Angular screens'
+      uses: actions/upload-artifact@v2
+      with:
+        name: angular-screens-results-sdk${{ matrix.java }}
+        path: ./${ANGULAR_TESTS}/target/.logs/screens
+        retention-days: 1
+
     - name: Get proc list
       run: ps -aux
 
-    - name: Kill chromes
+    - name: Kill Chrome
       run: pkill -f "chrome"
 
     - name: Get proc list

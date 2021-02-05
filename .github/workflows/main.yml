@@ -107,6 +107,9 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
 
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
 #####  Example for original allure data upload
 #    - name: 'Upload BDD results'
 #      uses: actions/upload-artifact@v2
@@ -122,12 +125,18 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS --fail-at-end
 
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
     - name: Run tests - Angular Unit tests
       id: tests-angular-unit
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
 
     - name: Run tests - Angular Common tests
       id: tests-angular-common
@@ -136,12 +145,18 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
     - name: Run tests - Angular Complex tests
       id: tests-angular-complex
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
 
     - name: Run tests - HTML
       id: tests-html
@@ -150,12 +165,18 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS --fail-at-end
 
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
     - name: Run tests - Test Examples
       id: tests-examples
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES --fail-at-end
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
 
     - name: Run tests - Performance
       id: tests-perf
