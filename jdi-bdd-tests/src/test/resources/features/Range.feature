@@ -9,7 +9,7 @@ Background:
 Scenario: Check label text
   Then the "Volume" label text equals to "Volume"
 
-@ignore_ci
+@ignore_for_firefox
 Scenario: Validate value test
   Then the "Volume" attribute "value" equals to "90"
 
@@ -26,7 +26,7 @@ Scenario: Change Volume value
   When set "Volume" value to 5
   Then the "Volume" attribute "value" equals to "10"
 
-@ignore_ci
+@ignore_for_firefox
 Scenario: Validation Volume element test
   Then the "Volume" is enabled
   And the "Volume" attribute "min" equals to "10"

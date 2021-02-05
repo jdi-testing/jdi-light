@@ -277,18 +277,7 @@ public class UIElement extends JDIBase
         if (isHidden())
             return false;
 
-        Object isInView = js().executeScript(
-            "const rect = arguments[0].getBoundingClientRect();\n" +
-            "if (!rect) return false;\n" +
-            "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight);\n" +
-            "const windowWidth = Math.min(window.innerWidth || document.documentElement.clientWidth);\n" +
-            "const diff = arguments[1];\n" +
-            "if (rect.top < diff) return false;\n" +
-            "if (rect.left < diff) return false;\n" +
-            "if (rect.bottom > windowHeight-diff) return false;\n" +
-            "if (rect.right > windowWidth-diff) return false;\n" +
-            "return true;", getWebElement(), 5);
-        return (boolean)isInView;
+        return displayed();
     }
 
     /**

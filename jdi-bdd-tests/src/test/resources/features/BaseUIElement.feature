@@ -79,12 +79,12 @@ Feature: BaseUIElement
 	Given I open "Html5 Page" 	
 	Then the "Disabled Button" is disabled
 
-  @ignore_ci
+  @ignore_for_firefox
   Scenario: isHidden
 	Given I open "Html5 Page" 	
 	Then the "Logout" is hidden
 
-  @ignore_ci
+  @ignore_for_firefox
   Scenario: doesntNotAppear
 	Given I open "Html5 Page"
 	Then the "Logout" does not appear

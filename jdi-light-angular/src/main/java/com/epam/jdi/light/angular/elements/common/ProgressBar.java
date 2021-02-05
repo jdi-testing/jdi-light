@@ -71,7 +71,7 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
                         "if (rect.left < diff) return false;\n" +
                         "if (rect.bottom > windowHeight-diff) return false;\n" +
                         "if (rect.right > windowWidth-diff) return false;\n" +
-                        "return true;", core().getWebElement(), 5);
+                        "return true;", core().getWebElement(), 0);
         return (boolean) isInView;
     }
 

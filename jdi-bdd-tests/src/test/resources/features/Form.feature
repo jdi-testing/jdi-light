@@ -1,4 +1,4 @@
-@form @ignore_ci
+@form @ignore_for_firefox
 Feature: Form
 
   Scenario: fill Contact Form from json

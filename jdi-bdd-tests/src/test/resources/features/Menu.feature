@@ -1,4 +1,4 @@
-@menu @ignore_ci
+@menu @ignore_for_firefox
 Feature: Menu
   Background:
     Given I open "Html5 Page"
