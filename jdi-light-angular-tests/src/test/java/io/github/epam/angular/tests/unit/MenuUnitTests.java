@@ -14,25 +14,21 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class MenuUnitTests extends TestsInit {
-    /*@BeforeMethod(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         skipForFirefox();
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
-    }*/
+    }
 
     @Test
     public void displayedTest() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
         basicMenuButton.show();
         assertTrue(basicMenuButton.isDisplayed());
     }
 
     @Test
     public void expandTest() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
         basicMenuButton.show();
         basicMenuButton.expand();
         assertTrue(basicMenuButton.isExpanded());
