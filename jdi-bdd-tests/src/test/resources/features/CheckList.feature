@@ -68,13 +68,11 @@ Feature: CheckList
      And the "Weather" values has item "Sunny"
      And the "Weather" has disabled item "Disabled"
     And the "Weather" has enabled items:
-      | Cold |
-      | Sunny |
+      | Cold | Sunny |
 
   Scenario: Uncheck All test
     When I check elements in "Weather" checklist:
-      | Rainy day |
-      | Sunny     |
+      | Rainy day | Sunny |
     And I uncheck all elements in "Weather" checklist
     Then count of selected elements in "Weather" checklist is 0
 
@@ -82,7 +80,4 @@ Feature: CheckList
     When I check all elements in "Weather" checklist
     Then count of selected elements in "Weather" checklist is 4
     And in the "Weather" checklist checked elements are:
-      | Hot option |
-      | Cold       |
-      | Rainy day  |
-      | Sunny      |
+      | Hot option | Cold | Rainy day | Sunny |
