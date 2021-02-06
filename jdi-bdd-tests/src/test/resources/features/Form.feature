@@ -56,7 +56,3 @@ Feature: Form
   Scenario: is displayed
     Given I open "Contact Form Page"
     Then the "Contact Form" is displayed
-    
-
-    
-  

@@ -6,10 +6,7 @@ Feature: Table
     Then the "Users Table" has 4 columns
     And the "Users Table" has 6 rows
     And the "Users Table" has header:
-      | Number      |
-      | Type        |
-      | User        |
-      | Description |
+      | Number | Type | User | Description |
 
   Scenario: Preview test
     Given I open "Users Page"

@@ -36,8 +36,3 @@ Feature: DateTimeSelector, INPUT TYPE TIME
     Then the "Booking Time" text equals to "11:00"
     Then I set date "05:00" in the "Booking Time"
     Then the "Booking Time" text equals to "05:00"
-
-
-
-
-

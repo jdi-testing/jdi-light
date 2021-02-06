@@ -35,8 +35,3 @@ Feature: DateTimeSelector, INPUT TYPE WEEK
     Then the "Autumn Week" text equals to "2018-W40"
     When I set date "2018-W12" in the "Autumn Week"
     Then the "Autumn Week" text equals to "2018-W12"
-
-
-
-
-

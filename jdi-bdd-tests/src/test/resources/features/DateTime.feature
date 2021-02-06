@@ -37,4 +37,3 @@ Feature: DateTimeSelector, INPUT TYPE DATETIME-LOCAL
     Then the "Party Time" text equals to "2018-06-12T19:30"
     When I set date "2017-05-10T00:00" in the "Party Time"
     Then the "Party Time" text equals to "2017-05-10T00:00"
-

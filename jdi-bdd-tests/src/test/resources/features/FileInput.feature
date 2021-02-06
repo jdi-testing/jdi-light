@@ -24,4 +24,3 @@ Feature: File Input element functionality
     Given I open "Html5 Page"
     When I try to upload file "/src/test/resources/steps_list" by "Disabled File Input" file input element
     Then the "Disabled File Input" text equals to ""
-
