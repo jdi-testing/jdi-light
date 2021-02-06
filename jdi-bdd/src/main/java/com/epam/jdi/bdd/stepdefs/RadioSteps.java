@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 
 import java.util.List;
 
+import static com.epam.jdi.bdd.BDDUtils.getListFromData;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
@@ -28,7 +29,7 @@ public class RadioSteps {
     //#region Then
     @Then("the {string} consists of next values:")
     public void theConsistOfNextValues(String name, List<List<String>> values) {
-        radioButtons(name).has().values(values.get(0));
+        radioButtons(name).has().values(getListFromData(values));
     }
 
     @Then("the {string} contains {string} radio button")
@@ -48,7 +49,7 @@ public class RadioSteps {
 
     @Then("the {string} contains next enabled values:")
     public void theContainsNextValues(String name, List<List<String>> values) {
-        for (String string : values.get(0)) {
+        for (String string : getListFromData(values)) {
             radioButtons(name).is().enabled(hasItem(string));
         }
     }

@@ -6,8 +6,10 @@ import io.cucumber.java.en.When;
 
 import java.util.List;
 
+import static com.epam.jdi.bdd.BDDUtils.getListFromData;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.tools.LinqUtils.toIntArray;
+import static com.epam.jdi.tools.LinqUtils.toStringArray;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -29,13 +31,13 @@ public class CheckListSteps {
     @When("I check elements in {string} checklist:")
     @When("check elements in {string} checklist:")
     public static void iCheckCheckboxes(String name, List<List<String>> values) {
-        checklist(name).check(values.get(0).toArray(new String[0]));
+        checklist(name).check(toStringArray(getListFromData(values)));
     }
 
     @When("I uncheck in {string} checklist elements:")
     @When("uncheck in {string} checklist elements:")
     public static void iUncheckElements(String name, List<List<String>> values) {
-        checklist(name).uncheck(values.get(0).toArray(new String[0]));
+        checklist(name).uncheck(toStringArray(getListFromData(values)));
     }
 
     @When("I uncheck element {string} in {string} checklist")
@@ -47,7 +49,7 @@ public class CheckListSteps {
     @When("I check in {string} checklist elements by numbers:")
     @When("check in {string} checklist elements by numbers:")
     public static void iCheckElementsByNumbers(String name, List<List<Integer>> values) {
-        checklist(name).check(toIntArray(values.get(0)));
+        checklist(name).check(toIntArray(getListFromData(values)));
     }
 
     @When("I check in {string} checklist element by numbers {int}")
@@ -59,7 +61,7 @@ public class CheckListSteps {
     @When("I uncheck in {string} checklist elements by numbers:")
     @When("uncheck in {string} checklist elements by numbers:")
     public static void iUncheckCheckBoxesByNumbers(String name, List<List<Integer>> values) {
-        checklist(name).uncheck(toIntArray(values.get(0)));
+        checklist(name).uncheck(toIntArray(getListFromData(values)));
     }
 
     @When("I uncheck in {string} checklist element by numbers {int}")
@@ -71,7 +73,7 @@ public class CheckListSteps {
     @When("I select elements in {string} checklist by numbers:")
     @When("select elements in {string} checklist by numbers:")
     public static void iSelectCheckBoxesByNumbers(String name, List<List<Integer>> values) {
-        checklist(name).select(toIntArray(values.get(0)));
+        checklist(name).select(toIntArray(getListFromData(values)));
     }
 
     @When("I select element in {string} checklist by number {int}")
@@ -104,7 +106,7 @@ public class CheckListSteps {
 
     @Then("in the {string} checklist checked elements are:")
     public static void isCheckBoxesChecked(String name, List<List<String>> values) {
-        checklist(name).is().checked(values.get(0));
+        checklist(name).is().checked(getListFromData(values));
     }
 
     @Then("the {string} checklist value is {string}")
@@ -115,6 +117,6 @@ public class CheckListSteps {
     @When("I Select fields from {string}:")
     @When("Select fields from {string}:")
     public static void multiSelect(String name, List<List<String>> values) {
-        checklist(name).select(values.get(0).toArray(new String[0]));
+        checklist(name).select(toStringArray(getListFromData(values)));
     }
 }

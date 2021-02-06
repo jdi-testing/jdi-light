@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 
 import java.util.List;
 
+import static com.epam.jdi.bdd.BDDUtils.getListFromData;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getList;
 
 /**
@@ -27,7 +28,7 @@ public class MenuSteps {
     @When("I select items in {string} menu:")
     @When("select items in {string} menu:")
     public void selectItems(String name, List<List<String>> values) {
-        for (String item : values.get(0))
+        for (String item : getListFromData(values))
             menu(name).select(item);
     }
 

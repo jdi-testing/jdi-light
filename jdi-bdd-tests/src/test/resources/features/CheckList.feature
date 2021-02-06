@@ -11,18 +11,16 @@ Feature: CheckList
 
   Scenario: Check elements test
     When I check elements in "Weather" checklist:
-      | Hot option |
-      | Cold       |
+      | Hot option | Cold |
     Then in "Weather" checklist "Cold" is checked
 
   Scenario: Uncheck elements test
     When I check elements in "Weather" checklist:
-      | Rainy day |
-      | Sunny     |
+      | Rainy day | Sunny |
     Then count of selected elements in "Weather" checklist is 2
     Then in the "Weather" checklist checked elements are:
-        | Rainy day |
-        | Sunny     |
+      | Rainy day |
+      | Sunny     |
     And I uncheck in "Weather" checklist elements:
       | Rainy day |
       | Sunny     |
@@ -33,8 +31,8 @@ Feature: CheckList
 
   Scenario: Select checkbox test
     When I Select fields from "Weather":
-    |Cold|
-    |Hot option|
+      |Cold|
+      |Hot option|
     Then in "Weather" checklist "Cold" is checked
 
   Scenario: Check element via numbers test

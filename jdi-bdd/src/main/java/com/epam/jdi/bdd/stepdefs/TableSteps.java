@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 
 import java.util.List;
 
+import static com.epam.jdi.bdd.BDDUtils.getListFromData;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
@@ -65,7 +66,7 @@ public class TableSteps {
     @Then("the {string} table has header:")
     @Then("the {string} has header:")
     public void assertHasItems(String name, List<List<String>> values) {
-        table(name).has().columns(values.get(0));
+        table(name).has().columns(getListFromData(values));
     }
 
     @Then("the {string} table preview is:")

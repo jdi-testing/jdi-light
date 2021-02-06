@@ -6,7 +6,9 @@ import io.cucumber.java.en.When;
 
 import java.util.List;
 
+import static com.epam.jdi.bdd.BDDUtils.getListFromData;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
+import static com.epam.jdi.tools.LinqUtils.toStringArray;
 import static org.hamcrest.Matchers.is;
 
 /**
@@ -26,7 +28,7 @@ public class TextAreaSteps {
     @When("I input in the {string} lines")
     @When("input in the {string} lines")
     public void inputIn(String name, List<List<String>> lines) {
-        textArea(name).setLines(lines.get(0).toArray(new String[0]));
+        textArea(name).setLines(toStringArray(getListFromData(lines)));
     }
 
     @Then("the {string} rows count equals {int}")
@@ -41,7 +43,7 @@ public class TextAreaSteps {
 
     @Then("the lines in the {string} are equal")
     public void linesInTextAreaAreEqual(String name, List<List<String>> lines) {
-        textArea(name).has().lines(lines.get(0));
+        textArea(name).has().lines(getListFromData(lines));
     }
 
     @Then("the {string} minimal length equals {int}")
