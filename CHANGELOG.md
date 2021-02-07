@@ -9,7 +9,6 @@
 * Correct allure WebSettings
 * Add AllureLogger steps
 * Fix issue with the version of junit-provider
-* Switch from info.cukes 1.2.6 to io.cucumber 6.9.1
 
 ##1.3.3 (28.01.2021)
 * Add should verifications and Conditions to ICoreElement
