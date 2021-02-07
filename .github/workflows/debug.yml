@@ -126,29 +126,29 @@ jobs:
     - name: Get proc list
       run: ps -aux
 
-#    - name: Run tests - Angular Common tests
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS
+    - name: Run tests - Angular Common tests
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS
 
-#    - name: Run tests - Angular Complex tests
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
+    - name: Run tests - Angular Complex tests
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
 
-#    - name: Run tests - HTML
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS
+    - name: Run tests - HTML
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS
 
-#    - name: Run tests - Test Examples
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES
+    - name: Run tests - Test Examples
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES
 
 #    - name: Run tests - Performance
 #      if: ${{ steps.jdi-compile.outcome == 'success' }}
