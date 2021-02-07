@@ -20,7 +20,7 @@ import static io.github.com.pages.Header.userIcon;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-    features = "classpath:features"
+    features = "src/test/resources/features"
     , glue = {"com.epam.jdi.bdd", "cucumberTests"}
     , plugin = {
         "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm",

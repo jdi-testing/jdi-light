@@ -27,8 +27,9 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>[6.9.1,)</version>
+            <version>[5.7.0,)</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -68,8 +69,8 @@
                 <version>2.22.2</version>
                 <configuration>
                     <argLine>
-                        -Dfile.encoding=UTF-8
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"
                     </argLine>
                 </configuration>
                 <dependencies>
