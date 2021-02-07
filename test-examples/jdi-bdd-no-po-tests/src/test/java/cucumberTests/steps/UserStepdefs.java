@@ -1,9 +1,9 @@
 package cucumberTests.steps;
 
-import io.cucumber.java.en.Given;
+import cucumber.api.java.en.Given;
 
 public class UserStepdefs {
-    @Given("CUSTOM {string} STEP")
+    @Given("^CUSTOM \"([^\"]*)\" STEP$")
     public void customStep(String name) {
     }
 }

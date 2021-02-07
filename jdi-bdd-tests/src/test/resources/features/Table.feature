@@ -3,10 +3,13 @@ Feature: Table
 
   Scenario: Get label text test
     Given I open "Users Page"
-    Then the "Users Table" has 4 columns
-    And the "Users Table" has 6 rows
+    Then the "Users Table" has "4" columns
+    And the "Users Table" has "6" rows
     And the "Users Table" has header:
-      | Number | Type | User | Description |
+      | Number      |
+      | Type        |
+      | User        |
+      | Description |
 
   Scenario: Preview test
     Given I open "Users Page"
@@ -21,9 +24,9 @@ Feature: Table
 
   Scenario: Common matchers test
     Given I open "Users Page"
-    Then the "Users Table" has 6 rows
-    And the "Users Table" has at least 3 rows
-    And the "Users Table" has not more than 6 rows
+    Then the "Users Table" has "6" rows
+    And the "Users Table" has at least "3" rows
+    And the "Users Table" has not more than "6" rows
     And the "Users Table" table is not empty
 
   Scenario: Row matcher test
@@ -40,15 +43,15 @@ Feature: Table
 
   Scenario: At least test
     Given I open "Users Page"
-    Then the "Users Table" has at least 3 rows which contains " " in column "User"
+    Then the "Users Table" has at least "3" rows which contains " " in column "User"
 
   Scenario: Exact matcher test
     Given I open "Users Page"
-    Then the "Users Table" has exact 2 rows which contains "R" in column "User"
+    Then the "Users Table" has exact "2" rows which contains "R" in column "User"
 
   Scenario: Raw data exact matcher test
     Given I open "Users Page"
-    Then the "Users Table" has exact 1 rows with "Roman" in column "User"
+    Then the "Users Table" has exact "1" rows with "Roman" in column "User"
 
   Scenario: Line by index test
     Given I open "Simple Page"

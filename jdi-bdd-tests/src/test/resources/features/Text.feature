@@ -14,3 +14,8 @@ Feature: Text
       And the "Jdi Text" css "font-size" equals to "14px"
       And the "Jdi Text" css "font-family" contains "Source Sans Pro"
       And the "Jdi Text" css "font-family" matches to "(.*)sans-serif"
+
+
+
+
+

@@ -1,8 +1,8 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.DateTimeSelector;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
@@ -15,18 +15,17 @@ public class DateTimeSelectorSteps {
         return getUI(name, DateTimeSelector.class);
     }
 
-    @Then("the {string} min equals to {string}")
+    @Then("^the \"([^\"]*)\" min equals to \"([^\"]*)\"$")
     public void attributeMinEquals(String name, String date) {
         dateTimeSelector(name).is().min(date);
     }
 
-    @Then("the {string} max equals to {string}")
+    @Then("^the \"([^\"]*)\" max equals to \"([^\"]*)\"$")
     public void attributeMaxEquals(String name, String date) {
         dateTimeSelector(name).is().max(date);
     }
 
-    @When("I set date {string} in the {string}")
-    @When("set date {string} in the {string}")
+    @When("^(?:I |)set date \"([^\"]*)\" in the \"([^\"]*)\"$")
     public void iSetDate(String date, String name) {
         dateTimeSelector(name).setDateTime(date);
     }

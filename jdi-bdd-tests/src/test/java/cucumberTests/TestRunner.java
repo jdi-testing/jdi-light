@@ -2,8 +2,8 @@ package cucumberTests;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 import io.github.com.StaticSite;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -20,14 +20,9 @@ import static io.github.com.pages.Header.userIcon;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-    features = "src/test/resources/features"
+    features = "classpath:features"
     , glue = {"com.epam.jdi.bdd", "cucumberTests"}
-    , plugin = {
-        "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm",
-        "progress",
-        "summary"
-    }
-    , tags = "@textarea"
+    // , tags = {"@base"}
 )
 public class TestRunner {
     @BeforeClass

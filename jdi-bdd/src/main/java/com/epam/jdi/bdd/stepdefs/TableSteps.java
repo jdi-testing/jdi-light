@@ -3,12 +3,11 @@ package com.epam.jdi.bdd.stepdefs;
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.bdd.BDDUtils.getListFromData;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
@@ -39,87 +38,73 @@ public class TableSteps {
     //endregion
 
     //#region Then
-    @Then("the {string} table has {int} columns")
-    @Then("the {string} has {int} columns")
+    @Then("^the \"([^\"]*)\" (?:table |)has \"([^\"]*)\" columns$")
     public void assertColumnsCount(String name, int size) {
         table(name).assertThat().columns(hasSize(size));
     }
 
-    @Then("the {string} table has {int} rows")
-    @Then("the {string} has {int} rows")
+    @Then("^the \"([^\"]*)\" (?:table |)has \"([^\"]*)\" rows$")
     public void assertRowsCount(String name, int count) {
         table(name).has().size(count);
     }
 
-    @Then("the {string} table has at least {int} rows")
-    @Then("the {string} has at least {int} rows")
+    @Then("^the \"([^\"]*)\" (?:table |)has at least \"([^\"]*)\" rows$")
     public void atLeastRows(String name, int count) {
         table(name).has().size(greaterThanOrEqualTo(count));
     }
 
-    @Then("the {string} table has not more than {int} rows")
-    @Then("the {string} has not more than {int} rows")
+    @Then("^the \"([^\"]*)\" (?:table |)has not more than \"([^\"]*)\" rows$")
     public void notMoreThan(String name, int count) {
         table(name).has().size(lessThanOrEqualTo(count));
     }
 
-    @Then("the {string} table has header:")
-    @Then("the {string} has header:")
-    public void assertHasItems(String name, List<List<String>> values) {
-        table(name).has().columns(getListFromData(values));
+    @Then("^the \"([^\"]*)\" (?:table |)has header:$")
+    public void assertHasItems(String name, List<String> values) {
+        table(name).has().columns(values);
     }
 
-    @Then("the {string} table preview is:")
-    @Then("the {string} preview is:")
+    @Then("^the \"([^\"]*)\" (?:table |)preview is:$")
     public void assertEqualsValues(String name, List<List<String>> values) {
         String preview = print(map(values, v -> print(map(v, String::trim), " ")), " ");
         table(name).has().preview(preview);
     }
 
-    @Then("the {string} table is not empty")
-    @Then("the {string} is not empty")
+    @Then("^the \"([^\"]*)\" (?:table |)is not empty$")
     public void assertNotEmpty(String name) {
         table(name).is().notEmpty();
     }
 
-    @Then("the {string} table is empty")
-    @Then("the {string} is empty")
+    @Then("^the \"([^\"]*)\" (?:table |)is empty$")
     public void assertEmpty(String name) {
         table(name).is().empty();
     }
 
-    @Then("the {string} table has row with {string} in column {string}")
-    @Then("the {string} has row with {string} in column {string}")
+    @Then("^the \"([^\"]*)\" (?:table |)has row with \"([^\"]*)\" in column \"([^\"]*)\"$")
     public void assertHasRowContainValue(String name, String value, String column) {
         table(name).has().rowThat(containsValue(value, inColumn(column)));
     }
 
-    @Then("all rows of the {string} table contains {string} in column {string}")
-    @Then("all rows of the {string} contains {string} in column {string}")
+    @Then("^all rows of the \"([^\"]*)\" (?:table |)contains \"([^\"]*)\" in column \"([^\"]*)\"$")
     public void assertAllRowsContainValue(String name, String value, String column) {
         table(name).assertThat().all().rows(containsValue(value, inColumn(column)));
     }
 
-    @Then("the {string} table has no rows which has {string} in column {string}")
-    @Then("the {string} has no rows which has {string} in column {string}")
+    @Then("^the \"([^\"]*)\" (?:table |)has no rows which has \"([^\"]*)\" in column \"([^\"]*)\"$")
     public void assertNoRowsContainValue(String name, String value, String column) {
         table(name).assertThat().no().rows(hasValue(value, inColumn(column)));
     }
 
-    @Then("the {string} table has at least {int} rows which contains {string} in column {string}")
-    @Then("the {string} has at least {int} rows which contains {string} in column {string}")
+    @Then("^the \"([^\"]*)\" (?:table |)has at least \"([^\"]*)\" rows which contains \"([^\"]*)\" in column \"([^\"]*)\"$")
     public void assertAtLeastRowsContainValue(String name, int rows, String value, String column) {
         table(name).assertThat().atLeast(rows).rows(containsValue(value, inColumn(column)));
     }
 
-    @Then("the {string} table has exact {int} rows which contains {string} in column {string}")
-    @Then("the {string} has exact {int} rows which contains {string} in column {string}")
+    @Then("^the \"([^\"]*)\" (?:table |)has exact \"([^\"]*)\" rows which contains \"([^\"]*)\" in column \"([^\"]*)\"$")
     public void assertExactRowsContainValue(String name, int rows, String value, String column) {
         table(name).assertThat().exact(rows).rows(containsValue(value, inColumn(column)));
     }
 
-    @Then("the {string} table has exact {int} rows with {string} in column {string}")
-    @Then("the {string} has exact {int} rows with {string} in column {string}")
+    @Then("^the \"([^\"]*)\" (?:table |)has exact \"([^\"]*)\" rows with \"([^\"]*)\" in column \"([^\"]*)\"$")
     public void assertExactRowsHaveValue(String name, int rows, String value, String column) {
         table(name).assertThat().exact(rows).rows(hasValue(value, inColumn(column)));
     }
