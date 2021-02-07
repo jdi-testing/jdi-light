@@ -19,13 +19,6 @@ public interface TestsInit {
     static void setUp() {
         openSite(StaticSite.class);
         logger.toLog("Run Tests");
-        SMART_SEARCH = el -> {
-            String locatorName = splitHyphen(el.getName());
-            UIElement ui = $("[qa-item='" + locatorName + "']").setName(el.getName());
-            if (ui.isDisplayed())
-                return ui.getAll();
-            throw exception("Element '%s' has no locator and Smart Search failed. Please add locator to element or be sure that element can be found using Smart Search", el.getName());
-        };
     }
 
     @AfterSuite(alwaysRun = true)
