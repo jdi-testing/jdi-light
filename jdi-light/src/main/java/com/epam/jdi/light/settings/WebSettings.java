@@ -48,8 +48,9 @@ import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.Strategies.*;
-import static com.epam.jdi.tools.EnumUtils.getAllEnumValues;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.EnumUtils.getEnumValueByName;
+import static com.epam.jdi.tools.LinqUtils.list;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.PropertyReader.getProperty;
@@ -139,7 +140,7 @@ public class WebSettings {
         if (isBlank(prop)) return;
         action.execute(prop);
     }
-    
+
     public static boolean initialized = false;
 
     public static synchronized void init() {
@@ -159,7 +160,7 @@ public class WebSettings {
             COMMON.strategy.action.execute();
             if (DRIVER.name.equalsIgnoreCase(DEFAULT_DRIVER)) {
                 fillAction(p -> DRIVER.name = p,
-                    isNotBlank(getProperty("driver")) ? "driver" : "browser");
+                        isNotBlank(getProperty("driver")) ? "driver" : "browser");
             }
             fillAction(p -> DRIVER.version = p, "driver.version");
             fillAction(p -> DRIVER.path = p, "drivers.folder");
@@ -171,7 +172,7 @@ public class WebSettings {
             fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
             fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
             fillAction(WebSettings::setDomain,
-                isNotBlank(getProperty("site.url")) ? "site.url" : "domain");
+                    isNotBlank(getProperty("site.url")) ? "site.url" : "domain");
             fillAction(p -> SCREEN.path = p, "screens.folder");
             fillAction(p -> SCREEN.tool = p, "screenshot.tool");
             if (SCREEN.tool.equals("robot")) {
@@ -189,9 +190,9 @@ public class WebSettings {
             fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
             fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
             fillAction(SoftAssert::setAssertType, "assert.type");
-            fillAction(p -> ELEMENT.clickType = getClickType(p), "click.type");
-            fillAction(p -> ELEMENT.getTextType = getTextType(p), "text.type");
-            fillAction(p -> ELEMENT.setTextType = getSetTextType(p), "set.text.type");
+            fillAction(p -> ELEMENT.clickType = getEnumValueByName(ElementArea.class, p, CENTER), "click.type");
+            fillAction(p -> ELEMENT.getTextType = getEnumValueByName(TextTypes.class, p, SMART_TEXT), "text.type");
+            fillAction(p -> ELEMENT.setTextType = getEnumValueByName(SetTextTypes.class, p, CLEAR_SEND_KEYS), "set.text.type");
             // RemoteWebDriver properties
             fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
             fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
@@ -202,7 +203,12 @@ public class WebSettings {
             }
             fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
             logger.setLogLevel(LOGS.logLevel);
-            fillAction(p -> LOGS.writeToAllure = parseBoolean(p), "allure.steps");
+            if (hasProperty("allure")) {
+                fillAction(p -> LOGS.writeToAllure = onOff(p), "allure");
+            } else {
+                fillAction(p -> LOGS.writeToAllure = onOff(p), "allure.steps");
+
+            }
             fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locator");
             fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
             fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
@@ -233,30 +239,8 @@ public class WebSettings {
         }
     }
 
-    private static ElementArea getClickType(String type) {
-        ElementArea clickType = first(getAllEnumValues(ElementArea.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
-        return clickType != null
-                ? clickType : CENTER;
-    }
-    private static boolean getBoolean(String param) {
-        String lowerParams = param.toLowerCase();
-        return !lowerParams.equals("off") && !lowerParams.equals("false");
-    }
-    private static TextTypes getTextType(String type) {
-        TextTypes textType = first(getAllEnumValues(TextTypes.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
-        return textType != null
-                ? textType : SMART_TEXT;
-    }
-    private static SetTextTypes getSetTextType(String type) {
-        SetTextTypes setTextType = first(getAllEnumValues(SetTextTypes.class),
-            t -> t.toString().trim().replaceAll("[^a-z]", "")
-                .equalsIgnoreCase(type.trim().replaceAll("[^a-z]", "")));
-        return setTextType != null
-                ? setTextType : CLEAR_SEND_KEYS;
+    private static boolean onOff(String onOff) {
+        return onOff.equals("true") || onOff.equals("on");
     }
     private static String getRemoteUrl(String prop) {
         String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
@@ -273,7 +257,7 @@ public class WebSettings {
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
         if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
             throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
-                "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
+                    "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }
