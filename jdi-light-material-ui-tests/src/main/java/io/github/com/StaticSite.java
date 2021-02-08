@@ -41,6 +41,18 @@ public class StaticSite {
     @Url("/material-ui-button--disabled")
     public static WebPage inputButtonDisabledPage;
 
+    @Url("/material-ui-textfield--field-with-default")
+    public static WebPage inputTextFieldFilledWithDefaultPage;
+
+    @Url("/material-ui-textfield--filled")
+    public static WebPage inputTextFieldFilledPage;
+
+    @Url("/material-ui-textfield--disabled")
+    public static WebPage inputTextFieldDisabledPage;
+
+    @Url("/material-ui-textfield--time")
+    public static WebPage inputTextFieldTimePage;
+
     // surfaces
     // accordion
     @Frame("storybook-preview-iframe")
