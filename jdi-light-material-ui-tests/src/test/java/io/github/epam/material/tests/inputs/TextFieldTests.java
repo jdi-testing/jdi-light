@@ -4,8 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.tools.LinqUtils.safeException;
-import static io.github.com.StaticSite.inputTextFieldStandardPage;
-import static io.github.com.StaticSite.textFieldFrame;
 import static io.github.com.StaticSite.inputTextFieldDisabledPage;
 import static io.github.com.StaticSite.inputTextFieldFilledPage;
 import static io.github.com.StaticSite.inputTextFieldFilledWithDefaultPage;
