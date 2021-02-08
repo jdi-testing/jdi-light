@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.ExpansionPanelSection.accordionExpansionPanel;
 import static io.github.com.pages.sections.ExpansionPanelSection.basicExpansionPanel;
@@ -150,6 +151,8 @@ public class ExpansionPanelUnitTests extends TestsInit {
 
     @Test
     public void descriptionTest() {
+        refresh();
+        basicExpansionPanel.show();
         assertEquals(basicExpansionPanel.description(1), "Type your name and age");
         assertEquals(basicExpansionPanel.description(2), "Currently I am closed");
     }

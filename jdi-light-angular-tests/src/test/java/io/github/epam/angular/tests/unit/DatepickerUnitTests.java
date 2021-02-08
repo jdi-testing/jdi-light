@@ -45,6 +45,7 @@ public class DatepickerUnitTests extends TestsInit {
         openMethodDatepicker.show();
         openMethodDatepicker.expand();
         assertTrue(openMethodDatepicker.isExpanded());
+        openMethodDatepicker.collapse();
     }
 
     @Test
@@ -114,6 +115,7 @@ public class DatepickerUnitTests extends TestsInit {
 
     @Test
     public void checkSendKeysTest() {
+        refresh();
         basicDatepicker.sendKeys("31-DEC-1812");
         assertEquals(basicDatepicker.getValue(), "12/31/1812");
     }
@@ -146,7 +148,6 @@ public class DatepickerUnitTests extends TestsInit {
 
     @Test
     public void checkSelectStringDateWithDifferentLocaleTest() {
-        refresh();
         differentLocaleDatepicker.show();
         differentLocaleDatepicker.select("7/17/2040", Locale.JAPAN);
         assertEquals(differentLocaleDatepicker.selectedDate(Locale.JAPAN), LocalDate.of(2040, 7, 17));
@@ -178,12 +179,14 @@ public class DatepickerUnitTests extends TestsInit {
 
     @Test
     public void checkStartMonthTest() {
+        refresh();
         startDateDatepicker.show();
         assertEquals(startDateDatepicker.startMonth(), Month.JANUARY);
     }
 
     @Test
     public void checkSelectDayInPreviousMonthTest() {
+        refresh();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int previousMonth = currentMonth == 1 ? 12 : currentMonth - 1;
         basicDatepicker.selectDayInPreviousMonth(1);
@@ -192,6 +195,7 @@ public class DatepickerUnitTests extends TestsInit {
 
     @Test
     public void checkSelectDayInNextMonthTest() {
+        refresh();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int nextMonth = currentMonth == 12 ? 1 : currentMonth + 1;
         basicDatepicker.selectDayInNextMonth(2);
@@ -200,6 +204,7 @@ public class DatepickerUnitTests extends TestsInit {
 
     @Test
     public void checkNavigateToDayInPreviousMonthsTest() {
+        refresh();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int monthCountEarlier = 2;
         int monthCount = monthCountEarlier % 12;
@@ -212,6 +217,7 @@ public class DatepickerUnitTests extends TestsInit {
 
     @Test
     public void checkNavigateToDayInNextMonthsTest() {
+        refresh();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int monthCountLater = 3;
         int monthCount = monthCountLater % 12;
@@ -273,7 +279,6 @@ public class DatepickerUnitTests extends TestsInit {
     @Test
     public void checkInputValidDateValueTest() {
         deserializeDatepicker.show();
-        deserializeDatepicker.clear();
         deserializeDatepicker.input("12/12/2020");
         assertTrue(deserializeDatepicker.isValid());
     }
@@ -281,7 +286,6 @@ public class DatepickerUnitTests extends TestsInit {
     @Test
     public void checkInputInvalidDateValueTest() {
         deserializeDatepicker.show();
-        deserializeDatepicker.clear();
         deserializeDatepicker.input("13/1/2020");
         assertTrue(deserializeDatepicker.isInvalid());
     }
@@ -297,7 +301,6 @@ public class DatepickerUnitTests extends TestsInit {
     public void checkDisabledPreviousMonthNavigationTest() {
         String minDate = getMinDate();
         minMaxDatepicker.show();
-        minMaxDatepicker.clear();
         minMaxDatepicker.setText(minDate);
         assertTrue(minMaxDatepicker.isDisabledNavigationElements(PREVIOUS_MONTH.getName()));
     }
@@ -313,7 +316,6 @@ public class DatepickerUnitTests extends TestsInit {
     public void checkDisabledNextMonthNavigationTest() {
         String maxDate = getMaxDate();
         minMaxDatepicker.show();
-        minMaxDatepicker.clear();
         minMaxDatepicker.setText(maxDate);
         assertTrue(minMaxDatepicker.isDisabledNavigationElements(NEXT_MONTH.getName()));
     }
@@ -340,7 +342,6 @@ public class DatepickerUnitTests extends TestsInit {
     @Test
     public void checkDisabledSaturdaysTest() {
         filterDatepicker.show();
-        filterDatepicker.clear();
         filterDatepicker.setDate(LocalDate.of(2019, 9, 1));
         String[] disabledElemtnts = filterDatepicker.getWeekDayNumbers(SATURDAY);
         assertTrue(filterDatepicker.isDisabledNavigationElements(disabledElemtnts));
@@ -349,7 +350,6 @@ public class DatepickerUnitTests extends TestsInit {
     @Test
     public void checkDisabledSundaysTest() {
         filterDatepicker.show();
-        filterDatepicker.clear();
         filterDatepicker.setDate(LocalDate.of(2019, 12, 1));
         assertTrue(filterDatepicker.isDisabledNavigationElements(filterDatepicker.getWeekDayNumbers(SUNDAY)));
     }
@@ -357,7 +357,6 @@ public class DatepickerUnitTests extends TestsInit {
     @Test
     public void checkEnabledTuesdaysTest() {
         filterDatepicker.show();
-        filterDatepicker.clear();
         filterDatepicker.setDate(LocalDate.of(2020, 8, 1));
         assertTrue(filterDatepicker.isEnabledNavigationElements(filterDatepicker.getWeekDayNumbers(TUESDAY)));
     }
@@ -365,7 +364,6 @@ public class DatepickerUnitTests extends TestsInit {
     @Test
     public void basicLocaleTest() {
         assertTrue(basicDatepicker.isSelectedLocale(Locale.US));
-
     }
 
     @Test

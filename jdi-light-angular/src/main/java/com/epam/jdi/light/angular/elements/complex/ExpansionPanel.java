@@ -56,7 +56,7 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
         else {
             logger.debug("Do nothing to expand. Is panel collapsed: %s", isCollapsed(indexNumber));
         }
-
+        waitFor().expanded(indexNumber);
     }
 
     @JDIAction(value = "Collapse '{name}' panel by index '{0}'", timeout = 1)
@@ -71,6 +71,7 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
         else {
             logger.debug("Do nothing to collapse. Is panel expanded: %s", isExpanded(indexNumber));
         }
+        waitFor().collapsed(indexNumber);
     }
 
     @JDIAction("Is '{name}' '{0}' panel expanded")

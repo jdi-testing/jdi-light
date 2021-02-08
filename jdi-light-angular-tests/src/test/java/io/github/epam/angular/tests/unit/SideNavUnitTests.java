@@ -15,7 +15,7 @@ public class SideNavUnitTests extends TestsInit {
     public void before() {
         skipForFirefox();
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
     }
 
     @Test

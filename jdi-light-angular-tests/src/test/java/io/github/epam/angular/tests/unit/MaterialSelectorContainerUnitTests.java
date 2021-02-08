@@ -59,7 +59,8 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
         assertTrue(basicMatSelect.selected(STEAK));
     }
 
-    @Test
+    @Test(enabled = false)
+    // duplicated. Page should be reload for this test, skip to increase performance
     public void multipleSelectByValuesTest() {
         multipleSelect.show();
         multipleSelect.expand();

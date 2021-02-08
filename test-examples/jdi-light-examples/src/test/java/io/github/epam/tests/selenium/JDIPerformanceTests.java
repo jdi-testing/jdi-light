@@ -33,6 +33,7 @@ public class JDIPerformanceTests implements SimpleTestsInit {
             containsValue("Meyer", inColumn("Name")),
             containsValue("co.uk", inColumn("Email")));
         logger.info("Huge table search test Time: %s", timer.getTime());
+        Assert.assertNotNull(row, "Row was not found");
         Assert.assertEquals(row.getValue(),
         "Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston");
     }
