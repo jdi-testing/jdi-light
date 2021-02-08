@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
@@ -29,6 +30,16 @@ public class StaticSite {
 
     @Url("/material-ui-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
+
+    // button
+    @Frame("storybook-preview-iframe")
+    public static ButtonFrame buttonFrame;
+
+    @Url("/material-ui-button--default")
+    public static WebPage inputButtonDefaultPage;
+
+    @Url("/material-ui-button--disabled")
+    public static WebPage inputButtonDisabledPage;
 
     // surfaces
     // accordion
