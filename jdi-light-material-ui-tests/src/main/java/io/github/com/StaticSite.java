@@ -14,7 +14,7 @@ import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.inputs.DateTimePickersFrame;
 
-@JSite("http://localhost:6006/?path=/story")
+@JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 
     // inputs
