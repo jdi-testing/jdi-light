@@ -12,8 +12,9 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.inputs.DateTimePickersFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("http://localhost:6006/?path=/story")
 public class StaticSite {
 
     // inputs
@@ -29,6 +30,19 @@ public class StaticSite {
 
     @Url("/material-ui-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
+
+    //date and time pickers
+    @Frame("storybook-preview-iframe")
+    public static DateTimePickersFrame dateTimePickersFrame;
+
+    @Url("/material-ui-inputs-date-time-pickers--date-picker-inline")
+    public static WebPage datePickerInlinePage;
+
+    @Url("material-ui-inputs-date-time-pickers--date-picker-dialog")
+    public static WebPage datePickerDialogPage;
+
+    @Url("material-ui-inputs-date-time-pickers--time-picker")
+    public static WebPage timePickerPage;
 
     // surfaces
     // accordion
