@@ -11,9 +11,11 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+//@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("http://100.64.56.255:6006/?path=/story/")
 public class StaticSite {
 
     // inputs
@@ -29,6 +31,13 @@ public class StaticSite {
 
     @Url("/material-ui-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
+
+    // text field
+    @Frame("storybook-preview-iframe")
+    public static TextFieldFrame textFieldFrame;
+
+    @Url("/material-ui-textfield--standard")
+    public static WebPage inputTextFieldStandardPage;
 
     // surfaces
     // accordion
