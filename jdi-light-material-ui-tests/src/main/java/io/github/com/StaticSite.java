@@ -13,6 +13,7 @@ import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
@@ -57,6 +58,13 @@ public class StaticSite {
 
     @Url("/material-ui-sliders--vertical-slider")
     public static WebPage inputSliderVerticalPage;
+
+    // text field
+    @Frame("storybook-preview-iframe")
+    public static TextFieldFrame textFieldFrame;
+
+    @Url("/material-ui-textfield--standard")
+    public static WebPage inputTextFieldStandardPage;
 
     @Url("/material-ui-textfield--field-with-default")
     public static WebPage inputTextFieldFilledWithDefaultPage;
