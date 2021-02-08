@@ -12,6 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
@@ -40,6 +41,13 @@ public class StaticSite {
 
     @Url("/material-ui-button--disabled")
     public static WebPage inputButtonDisabledPage;
+
+    // text field
+    @Frame("storybook-preview-iframe")
+    public static TextFieldFrame textFieldFrame;
+
+    @Url("/material-ui-textfield--standard")
+    public static WebPage inputTextFieldStandardPage;
 
     @Url("/material-ui-textfield--field-with-default")
     public static WebPage inputTextFieldFilledWithDefaultPage;
