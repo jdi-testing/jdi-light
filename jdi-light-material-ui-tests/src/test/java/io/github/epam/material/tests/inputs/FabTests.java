@@ -31,9 +31,9 @@ public class FabTests extends TestsInit {
         try {
             fabFrame.fab.click();
             fail("Disabled button shouldn't work, but it does");
-        } catch (ElementClickInterceptedException ex) {
+        } catch (Exception ex) {
             assertThat(safeException(ex),
-                    containsString("element click intercepted"));
+                    containsString("Can't perform click. Element is disabled"));
         }
     }
 
