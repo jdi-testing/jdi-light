@@ -27,7 +27,7 @@
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>6.9.1</version>
+            <version>1.2.6</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
