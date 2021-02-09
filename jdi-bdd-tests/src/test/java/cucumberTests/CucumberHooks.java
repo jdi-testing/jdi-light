@@ -1,6 +1,6 @@
 package cucumberTests;
 
-import cucumber.api.java.Before;
+import io.cucumber.java.Before;
 import io.qameta.allure.model.Label;
 import io.qameta.allure.util.ResultsUtils;
 

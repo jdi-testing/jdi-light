@@ -5,7 +5,7 @@ Feature: RadioButtons
     Given I open "Html5 Page" page
     And I select "Blue" field from "Html5 Page.Colors"
     Then the "Html5 Page.Colors" text equals to "Blue"
-    When I select the radio button with "1" index from "Html5 Page.Colors"
+    When I select the radio button with 1 index from "Html5 Page.Colors"
     Then the "Html5 Page.Colors" text equals to "Red"
 
   Scenario: Consist of

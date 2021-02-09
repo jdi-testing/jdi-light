@@ -2,8 +2,8 @@ package cucumberTests.stepdefs;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.FileInput;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 
 import static com.epam.jdi.bdd.stepdefs.CheckListSteps.multiSelect;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
@@ -18,7 +18,7 @@ import static org.junit.Assert.fail;
 
 public class UserStepdefs {
 
-    @Given("^I should be logged in$")
+    @Given("I should be logged in")
     public void iShouldBeLogin() {
         String url = WebPage.getUrl();
         if (!url.contains("https://jdi-testing.github.io/jdi-light/")
@@ -33,7 +33,7 @@ public class UserStepdefs {
         }
     }
 
-    @When("^I try to upload file \"([^\"]*)\" by \"([^\"]*)\" file input element$")
+    @When("I try to upload file {string} by {string} file input element")
     public void iTryToUploadFileByFileInputElement(String pathToFile, String elementName) {
         FileInput fileInput = getUI(elementName, FileInput.class);
         try {
@@ -43,10 +43,10 @@ public class UserStepdefs {
             assertTrue(ex.getLocalizedMessage().contains("FileInput 'Disabled File Input' is disabled. Can't upload file"));
         }
     }
-    @When("^I select \"([^\"]*)\" disabled option \"([^\"]*)\"")
+    @When("I select {string} disabled option {string}")
     public void iSelectDisabled(String name, String option) {
         try {
-            multiSelect(name, asList(option));
+            multiSelect(name, asList(asList(option)));
             fail("Select disabled should throw exception");
         } catch (Exception ignore) {}
     }

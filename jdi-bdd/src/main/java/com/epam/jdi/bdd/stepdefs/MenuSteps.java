@@ -2,11 +2,12 @@ package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.WebList;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.List;
 
+import static com.epam.jdi.bdd.BDDUtils.getListFromData;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getList;
 
 /**
@@ -18,18 +19,20 @@ public class MenuSteps {
        return getList(name, Menu.class);
     }
 
-    @When("^(?:I |)select \"([^\"]*)\" in \"([^\"]*)\" menu$")
+    @When("I select {string} in {string} menu")
+    @When("select {string} in {string} menu")
     public void select(String value, String name) {
         menu(name).select(value);
     }
 
-    @When("^(?:I |)select items in \"([^\"]*)\" menu:$")
-    public void selectItems(String name, List<String> values) {
-        for (String item : values)
+    @When("I select items in {string} menu:")
+    @When("select items in {string} menu:")
+    public void selectItems(String name, List<List<String>> values) {
+        for (String item : getListFromData(values))
             menu(name).select(item);
     }
 
-    @Then("^the \"([^\"]*)\" in \"([^\"]*)\" menu is selected$")
+    @Then("the {string} in {string} menu is selected")
     public void isSelected(String value, String name) {
         menu(name).is().selected(value);
     }

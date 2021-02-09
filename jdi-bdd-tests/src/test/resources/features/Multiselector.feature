@@ -18,7 +18,7 @@ Feature: Multiselector
   Scenario: Validate multiselector list of values
     Given I open "Html5 Page"
     Then the "Ages" contains items:
-    | Electro | Steam| Metalic | Disabled | Wood |
+    | Electro | Steam | Metalic | Disabled | Wood |
 
   @ignore_for_firefox
   Scenario: Multiple selection in multiselector

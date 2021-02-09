@@ -1,8 +1,8 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.NumberSelector;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.*;
@@ -16,47 +16,48 @@ public class NumberSelectorSteps {
         return getUI(name, NumberSelector.class);
     }
 
-    @When("^(?:I |)set number \"([^\"]*)\" in \"([^\"]*)\"$")
+    @When("I set number {string} in {string}")
+    @When("set number {string} in {string}")
     public void setNumber(String value, String name) {
         numberSelector(name).setNumber(value);
     }
 
-    @Then("^the \"([^\"]*)\" number selector value equals to \"([^\"]*)\"$")
+    @Then("the {string} number selector value equals to {string}")
     public void getValue(String name, String value) {
         numberSelector(name).has().number(is(Double.valueOf((value))));
     }
 
-    @Then("^the \"([^\"]*)\" number selector min is \"([^\"]*)\"$")
+    @Then("the {string} number selector min is {string}")
     public void getMin(String name, String value) {
         numberSelector(name).has().min(is(Double.valueOf((value))));
     }
 
-    @Then("^the \"([^\"]*)\" number selector max is \"([^\"]*)\"$")
+    @Then("the {string} number selector max is {string}")
     public void getMax(String name, String value) {
         numberSelector(name).has().max(is(Double.valueOf((value))));
     }
 
-    @Then("^the \"([^\"]*)\" number selector step is \"([^\"]*)\"$")
+    @Then("the {string} number selector step is {string}")
     public void getStep(String name, String value) {
         numberSelector(name).has().step(is(Double.valueOf((value))));
     }
 
-    @Then("^the \"([^\"]*)\" number selector value is greater or equal to \"([^\"]*)\"$")
+    @Then("the {string} number selector value is greater or equal to {string}")
     public void numberIsGreaterOrEqual(String name, String value) {
         numberSelector(name).is().number(greaterThanOrEqualTo(Double.valueOf(value)));
     }
 
-    @Then("^the \"([^\"]*)\" number selector value less or equal to \"([^\"]*)\"$")
+    @Then("the {string} number selector value less or equal to {string}")
     public void numberLessThanOrEqual(String name, String value) {
         numberSelector(name).is().number(lessThanOrEqualTo(Double.valueOf(value)));
     }
 
-    @Then("^the \"([^\"]*)\" number selector value is greater than \"([^\"]*)\"$")
+    @Then("the {string} number selector value is greater than {string}")
     public void numberIsGreaterThan(String name, String value) {
         numberSelector(name).is().number(greaterThan(Double.valueOf(value)));
     }
 
-    @Then("^the \"([^\"]*)\" number selector value less than \"([^\"]*)\"$")
+    @Then("the {string} number selector value less than {string}")
     public void numberLessThan(String name, String value) {
         numberSelector(name).is().number(lessThan(Double.valueOf(value)));
     }
