@@ -12,6 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.layouts.HiddenFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
@@ -51,6 +52,14 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
+
+    // layouts
+    // hidden
+    @Frame("storybook-preview-iframe")
+    public static HiddenFrame hiddenFrame;
+
+    @Url("/material-ui-hidden--default-hidden")
+    public static WebPage defaultHiddenPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
