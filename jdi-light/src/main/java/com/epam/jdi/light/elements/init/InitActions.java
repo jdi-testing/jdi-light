@@ -174,11 +174,15 @@ public class InitActions {
             }
             })),
         $("Visual Check", aRule(VisualCheck.class, (e, a) ->  {
-            if (a.value())
+            if (a.value()) {
                 e.base().params.update("visualCheck", "");
-            else
-                if (e.base().params.keys().contains("visualCheck"))
+                e.base().searchVisible();
+            }
+            else {
+                if (e.base().params.keys().contains("visualCheck")) {
                     e.base().params.removeByKey("visualCheck");
+                }
+            }
         }))
     );
 
