@@ -1,14 +1,12 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.bdd.BDDUtils.getListFromData;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static com.epam.jdi.tools.LinqUtils.toStringArray;
 import static org.hamcrest.Matchers.is;
 
 /**
@@ -19,39 +17,37 @@ public class TextAreaSteps {
         return getUI(name, TextArea.class);
     }
 
-    @When("I input in the {string} line {string}")
-    @When("input in the {string} line {string}")
+    @When("^(?:I |)input in the \"([^\"]*)\" line \"([^\"]*)\"$")
     public void addNewLine(String name, String line) {
         textArea(name).addNewLine(line);
     }
 
-    @When("I input in the {string} lines")
-    @When("input in the {string} lines")
-    public void inputIn(String name, List<List<String>> lines) {
-        textArea(name).setLines(toStringArray(getListFromData(lines)));
+    @When("^(?:I |)input in the \"([^\"]*)\" lines$")
+    public void inputIn(String name, List<String> lines) {
+        textArea(name).setLines(lines.toArray(new String[0]));
     }
 
-    @Then("the {string} rows count equals {int}")
+    @Then("^the \"([^\"]*)\" rows count equals \"([^\"]*)\"$")
     public void rowsCountEquals(String name, int rows) {
         textArea(name).is().rowsCount(is(rows));
     }
 
-    @Then("the {string} columns count equals {int}")
+    @Then("^the \"([^\"]*)\" columns count equals \"([^\"]*)\"$")
     public void colsCountEquals(String name, int cols) {
         textArea(name).is().colsCount(is(cols));
     }
 
-    @Then("the lines in the {string} are equal")
-    public void linesInTextAreaAreEqual(String name, List<List<String>> lines) {
-        textArea(name).has().lines(getListFromData(lines));
+    @Then("^the lines in the \"([^\"]*)\" are equal$")
+    public void linesInTextAreaAreEqual(String name, List<String> lines) {
+        textArea(name).has().lines(lines);
     }
 
-    @Then("the {string} minimal length equals {int}")
+    @Then("^the \"([^\"]*)\" minimal length equals \"([^\"]*)\"$")
     public void minLengthEquals(String name, int minLength) {
         textArea(name).is().minlength(is(minLength));
     }
 
-    @Then("the {string} maximal length equals {int}")
+    @Then("^the \"([^\"]*)\" maximal length equals \"([^\"]*)\"$")
     public void maxLengthEquals(String name, int maxLength) {
         textArea(name).is().maxlength(is(maxLength));
     }
