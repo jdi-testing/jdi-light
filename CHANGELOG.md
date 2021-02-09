@@ -10,6 +10,16 @@
 * Add AllureLogger steps
 * Fix issue with the version of junit-provider
 
+##1.3.5 (09.02.2021)
+* Stability fixes for collections: Switch to Lightsaber 2.1.10
+* Switch JDI BDD to io.cucumber 6.9.1
+
+##1.3.4 (04.02.2021)
+* Switch to Lightsaber 2.1.8
+* Correct allure WebSettings
+* Add AllureLogger steps
+* Fix issue with version of junit-provider
+
 ##1.3.3 (28.01.2021)
 * Add should verifications and Conditions to ICoreElement
 * Add NAME_TO_LOCATOR, DEFAULT_CONTEXT, MAP_FORM

@@ -1,9 +1,9 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.ColorPicker;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
@@ -16,13 +16,13 @@ public class ColorPickerSteps {
         return getUI(name, ColorPicker.class);
     }
 
-    @Given("^the \"([^\"]*)\" was set to \"([^\"]*)\" color$")
-    @When("^I set \"([^\"]*)\" to \"([^\"]*)\" color$")
+    @Given("the {string} was set to {string} color")
+    @When("I set {string} to {string} color")
     public void preSetColor(String name, String color) {
         colorPicker(name).setColor(color);
     }
 
-    @Then("^the \"([^\"]*)\" has color \"([^\"]*)\"$")
+    @Then("the {string} has color {string}")
     public void hasColor(String name, String color) {
         colorPicker(name).has().color(color);
     }
