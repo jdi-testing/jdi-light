@@ -28,6 +28,8 @@ public class BasicMatSelectTests extends TestsSelectBase {
     public void checkSelectorExpanded() {
         basicMatSelect.expand();
         basicMatSelect.is().expanded();
+        basicMatSelect.collapse();
+        basicMatSelect.is().collapsed();
     }
 
     @Test

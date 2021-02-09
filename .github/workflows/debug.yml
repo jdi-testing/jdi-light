@@ -27,7 +27,7 @@ env:
 
 on:
   push:
-    branches: [ test_ga ] # ENTER branch name there
+    branches: [ fix_branch_for_some_tests ] # ENTER branch name there
 # !!!! PLEASE do not change this file in master, as it's only template for branch debug in GitHub Actions
 
 jobs:
@@ -93,68 +93,54 @@ jobs:
 # !!! select required project you debug to save time.
 # All other projects you can delete or comment.
 
-#    - name: Tests BDD
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
+    - name: Tests BDD
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      run: |
+          mvn verify $WITH_PARAMS -DCucumber.options="--tags ~@ignore_for_firefox" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
 
 #####  Example for original allure data upload
 #    - name: 'Upload BDD results'
 #      uses: actions/upload-artifact@v2
 #      with:
 #        name: bdd-results-sdk${{ matrix.java }}
-#        path: ./${BDD_TESTS}/target/.logs/screens
+#        path: ./${BDD_TESTS}/target/allure-results/
 #        retention-days: 1
 
-#    - name: Tests bootstrap Unit
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS
+    - name: Tests bootstrap Unit
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS
 
     - name: Run tests - Angular Unit tests
       if: ${{ steps.jdi-compile.outcome == 'success' }}
       timeout-minutes: 90 # prevent blocking
-      continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
-
-    - name: Get proc list
-      run: ps -aux
-
-    - name: Kill Chrome
-      run: pkill -f "chrome"
-
-    - name: Get proc list
-      run: ps -aux
 
     - name: Run tests - Angular Common tests
       if: ${{ steps.jdi-compile.outcome == 'success' }}
       timeout-minutes: 90 # prevent blocking
-      continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - Angular Complex tests
       if: ${{ steps.jdi-compile.outcome == 'success' }}
       timeout-minutes: 90 # prevent blocking
-      continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
 
     - name: Run tests - HTML
       if: ${{ steps.jdi-compile.outcome == 'success' }}
       timeout-minutes: 90 # prevent blocking
-      continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS
 
     - name: Run tests - Test Examples
       if: ${{ steps.jdi-compile.outcome == 'success' }}
       timeout-minutes: 90 # prevent blocking
-      continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES
 
-#    - name: Run tests - Performance
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE
+    - name: Run tests - Performance
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE
 
     - name: Collect reports
       if: ${{ steps.jdi-compile.outcome == 'success' }}

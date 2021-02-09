@@ -27,6 +27,8 @@ public class RippleTests extends TestsInit {
     public void disabledTest() {
         rippleContainer.disable();
         rippleContainer.is().disabled();
+        rippleContainer.enable();
+        rippleContainer.is().enabled();
     }
 
     @Test

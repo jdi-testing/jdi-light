@@ -29,6 +29,7 @@ public class RippleUnitTests extends TestsInit {
         rippleContainer.disable();
         assertTrue(rippleContainer.isDisabled());
         rippleContainer.enable();
+        assertTrue(rippleContainer.isEnabled());
     }
 
     @Test

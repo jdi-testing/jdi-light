@@ -29,6 +29,7 @@ on:
   push:
     branches:
       - master
+      - test_ga
   pull_request:
     branches:
       - master

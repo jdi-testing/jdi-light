@@ -9,6 +9,8 @@ import java.time.Year;
 import java.util.Locale;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
+import static com.epam.jdi.light.elements.composite.WebPage.reload;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.basicDatepicker;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
@@ -17,6 +19,11 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         angularPage.shouldBeOpened();
+        basicDatepicker.show();
+    }
+
+    public void reInit() {
+        refresh();
         basicDatepicker.show();
     }
 
@@ -29,6 +36,8 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
     public void checkExpanded() {
         basicDatepicker.expand();
         basicDatepicker.is().expanded();
+        basicDatepicker.collapse();
+        basicDatepicker.is().collapsed();
     }
 
     @Test
@@ -84,6 +93,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkEmptyDateValue() {
+        reInit();
         basicDatepicker.has().value("");
     }
 
@@ -113,6 +123,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkSelectDayInPreviousMonth() {
+        reInit();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int previousMonth = currentMonth == 1 ? 12 : currentMonth - 1;
         basicDatepicker.selectDayInPreviousMonth(1);
@@ -121,6 +132,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkSelectDayInNextMonth() {
+        reInit();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int nextMonth = currentMonth == 12 ? 1 : currentMonth + 1;
         basicDatepicker.selectDayInNextMonth(2);
@@ -141,6 +153,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkNavigateToDayInPreviousMonths() {
+        reInit();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int monthCountEarlier = 4;
         int monthCount = monthCountEarlier % 12;
@@ -153,6 +166,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkNavigateToDayInNextMonths() {
+        reInit();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int monthCountLater = 5;
         int monthCount = monthCountLater % 12;

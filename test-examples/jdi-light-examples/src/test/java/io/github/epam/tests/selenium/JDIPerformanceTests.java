@@ -19,7 +19,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class JDIPerformanceTests implements SimpleTestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void openPerformancePage() {
         homePage.open();
         login(new User());
