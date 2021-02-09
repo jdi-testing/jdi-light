@@ -50,6 +50,9 @@ public class StaticSite {
     @Url("/material-ui-buttongroup--default")
     public static WebPage inputButtonGroupDefaultPage;
 
+    @Url("/material-ui-buttongroup--disabled")
+    public static WebPage inputButtonGroupDisabledPage;
+
     // surfaces
     // accordion
     @Frame("storybook-preview-iframe")

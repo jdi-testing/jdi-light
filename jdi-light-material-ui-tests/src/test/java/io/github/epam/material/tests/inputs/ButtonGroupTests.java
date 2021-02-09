@@ -1,11 +1,16 @@
 package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.buttonGroupFrame;
 import static io.github.com.StaticSite.inputButtonGroupDefaultPage;
+import static io.github.com.StaticSite.inputButtonGroupDisabledPage;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.containsStringIgnoringCase;
+import static org.testng.Assert.fail;
 
 public class ButtonGroupTests extends TestsInit {
 
@@ -13,19 +18,30 @@ public class ButtonGroupTests extends TestsInit {
     public void defaultButtonGroupTest() {
         inputButtonGroupDefaultPage.open();
 
-        // click by index
-        buttonGroupFrame.buttonGroup.finds(By.className("MuiButton-root")).get(1).click();
-        buttonGroupFrame.buttonGroup.finds(By.className("MuiButton-root")).get(2).click();
-        buttonGroupFrame.buttonGroup.finds(By.className("MuiButton-root")).get(3).click();
+        buttonGroupFrame.buttonGroup.buttonWithIndex(1).click();
+        buttonGroupFrame.buttonGroup.buttonWithIndex(2).click();
+        buttonGroupFrame.buttonGroup.buttonWithIndex(3).click();
 
-        // click by button text
-        buttonGroupFrame.buttonGroup.find(By.xpath("//span[contains(text(), 'One')]")).click();
-        buttonGroupFrame.buttonGroup.find(By.xpath("//span[contains(text(), 'Two')]")).click();
-        buttonGroupFrame.buttonGroup.find(By.xpath("//span[contains(text(), 'Three')]")).click();
+        buttonGroupFrame.buttonGroup.buttonWithText("One").click();
+        buttonGroupFrame.buttonGroup.buttonWithText("Two").click();
+        buttonGroupFrame.buttonGroup.buttonWithText("Three").click();
 
-
+        buttonGroupFrame.buttonGroup.buttonWithIndex(1).is().enabled();
+        buttonGroupFrame.buttonGroup.buttonWithIndex(1).has().text(containsStringIgnoringCase("One"));
     }
 
-    // disabled button group contains disabled buttons
+    @Test
+    public void disabledButtonGroupTest() {
+        inputButtonGroupDisabledPage.open();
 
+        buttonGroupFrame.buttonGroup.buttonWithIndex(1).is().disabled();
+        buttonGroupFrame.buttonGroup.buttonWithText("Two").is().disabled();
+        try {
+            buttonGroupFrame.buttonGroup.buttonWithText("Three").click();
+            fail("Disabled button shouldn't work, but it does");
+        } catch (Exception ex) {
+            assertThat(safeException(ex),
+                    containsString("Can't perform click. Element is disabled"));
+        }
+    }
 }
