@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd</artifactId>
-    <version>1.3.4</version>
+    <version>1.3.5</version>
     <name>JDI BDD</name>
 
     <properties>
@@ -18,17 +18,17 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>[1.3.4,)</version>
+            <version>1.3.5</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>[6.9.1,)</version>
+            <version>6.9.1</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber5-jvm</artifactId>
-            <version>[2.13.8,)</version>
+            <version>2.13.8</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>

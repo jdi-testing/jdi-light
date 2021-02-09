@@ -24,6 +24,7 @@ import com.epam.jdi.tools.HasStartIndex;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
 
