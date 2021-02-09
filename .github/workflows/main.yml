@@ -104,7 +104,7 @@ jobs:
     - name: Tests BDD
       id: tests-bdd
       if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 90 # prevent blocking
+      timeout-minutes: 30 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
 
@@ -122,7 +122,7 @@ jobs:
     - name: Tests bootstrap Unit
       id: tests-bootstrap
       if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 90 # prevent blocking
+      timeout-minutes: 20 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS --fail-at-end
 
@@ -132,7 +132,7 @@ jobs:
     - name: Run tests - Angular Unit tests
       id: tests-angular-unit
       if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 90 # prevent blocking
+      timeout-minutes: 40 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
@@ -142,7 +142,7 @@ jobs:
     - name: Run tests - Angular Common tests
       id: tests-angular-common
       if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 90 # prevent blocking
+      timeout-minutes: 30 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
@@ -152,7 +152,7 @@ jobs:
     - name: Run tests - Angular Complex tests
       id: tests-angular-complex
       if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 90 # prevent blocking
+      timeout-minutes: 60 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
@@ -172,7 +172,7 @@ jobs:
     - name: Run tests - Test Examples
       id: tests-examples
       if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 90 # prevent blocking
+      timeout-minutes: 20 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES --fail-at-end
 
@@ -182,7 +182,7 @@ jobs:
     - name: Run tests - Performance
       id: tests-perf
       if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 90 # prevent blocking
+      timeout-minutes: 20 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE --fail-at-end
 
