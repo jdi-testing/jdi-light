@@ -78,6 +78,9 @@ public class StaticSite {
     @Url("/material-ui-inputs-text-field--time")
     public static WebPage inputTextFieldTimePage;
 
+    @Url("/material-ui-buttongroup--disabled")
+    public static WebPage inputButtonGroupDisabledPage;
+
     // surfaces
     // accordion
     @Frame("storybook-preview-iframe")
