@@ -10,8 +10,8 @@
 * Add AllureLogger steps
 * Fix issue with the version of junit-provider
 
-##1.3.5 (09.02.2021)
-* Stability fixes for collections: Switch to Lightsaber 2.1.10
+##1.3.5-6 (09.02.2021)
+* Stability fixes for collections: Switch to Lightsaber 2.1.11
 
 ##1.3.4 (04.02.2021)
 * Switch to Lightsaber 2.1.8
