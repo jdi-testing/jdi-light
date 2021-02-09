@@ -3,7 +3,12 @@
 ## 1.3.10 (planed July 2020)
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
-* **driver.remote.run** boolean property can be specified in **test.properties** file. If not specified, JDI would use the original logic and switch between local and remote driver depending on other properties
+
+##1.3.4 (06.02.2021)
+* Switch to Lightsaber 2.1.8
+* Correct allure WebSettings
+* Add AllureLogger steps
+* Fix issue with the version of junit-provider
 
 ##1.3.5 (09.02.2021)
 * Stability fixes for collections: Switch to Lightsaber 2.1.10
