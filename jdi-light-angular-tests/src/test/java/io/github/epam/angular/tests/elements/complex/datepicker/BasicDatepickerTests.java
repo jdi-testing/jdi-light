@@ -154,12 +154,8 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
     @Test
     public void checkNavigateToDayInPreviousMonths() {
         reInit();
-        int currentMonth = LocalDate.now().getMonth().getValue();
         int monthCountEarlier = 4;
-        int monthCount = monthCountEarlier % 12;
-        int previousMonth = monthCount == 0 ?
-                currentMonth :
-                (currentMonth - monthCount) == 0 ? 12 : currentMonth - monthCount;
+        int previousMonth = LocalDate.now().minusMonths(monthCountEarlier).getMonthValue();
         basicDatepicker.navigateToDayInPreviousMonths(monthCountEarlier, 12);
         basicDatepicker.has().selectedMonth(Month.of(previousMonth));
     }
@@ -167,12 +163,8 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
     @Test
     public void checkNavigateToDayInNextMonths() {
         reInit();
-        int currentMonth = LocalDate.now().getMonth().getValue();
         int monthCountLater = 5;
-        int monthCount = monthCountLater % 12;
-        int nextMonth = monthCount == 0 ?
-                currentMonth :
-                (currentMonth + monthCount) > 12 ? (currentMonth + monthCount) - 12 : currentMonth + monthCount;
+        int nextMonth = LocalDate.now().plusMonths(monthCountLater).getMonthValue();
         basicDatepicker.navigateToDayInNextMonths(monthCountLater, 12);
         basicDatepicker.has().selectedMonth(Month.of(nextMonth));
     }

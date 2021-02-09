@@ -26,6 +26,8 @@ public class MaterialSelectorUnitTests extends TestsInit {
         basicMatSelect.show();
         basicMatSelect.expand();
         assertTrue(basicMatSelect.isExpanded());
+        basicMatSelect.collapse();
+        assertTrue(basicMatSelect.isCollapsed());
     }
 
     @Test

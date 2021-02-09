@@ -15,7 +15,7 @@ public class SideNavUnitTests extends TestsInit {
     public void before() {
         skipForFirefox();
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
     }
 
     @Test
@@ -37,13 +37,19 @@ public class SideNavUnitTests extends TestsInit {
 
     @Test
     public void getSideNavLinksTest() {
-        sideNavToggle.click();
+        responsiveContent.show();
+        if (responsiveContent.getSideNav().isNotDisplayed()) {
+            toolbarToggle.click();
+        }
         assertEquals(responsiveContent.getSideNavLinks().get(1).getText(), "Nav Item 1");
     }
 
     @Test
     public void getResponsiveResultsTest() {
-        toolbarToggle.click();
+        responsiveContent.show();
+        if (responsiveContent.getSideNav().isNotDisplayed()) {
+            toolbarToggle.click();
+        }
         responsiveContent.getSideNavLinks().get(1).click();
         assertEquals(responsiveContent.getResponsiveResults().get(1).getText(), "Selected Nav Item 1");
     }
