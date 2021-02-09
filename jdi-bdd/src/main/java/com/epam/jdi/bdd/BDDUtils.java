@@ -7,14 +7,9 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.tools.map.MapArray;
-import io.cucumber.datatable.DataTable;
+import cucumber.api.DataTable;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -25,7 +20,8 @@ public final class BDDUtils {
     }
 
     public static MapArray<String, String> getMapFromTable(DataTable table) {
-        return new MapArray<>(table.asMap(String.class, String.class));
+        return new MapArray<>(table.getGherkinRows(),
+                r -> r.getCells().get(0), r -> r.getCells().get(1));
     }
 
     public static UIElement core(String name) {
@@ -64,28 +60,4 @@ public final class BDDUtils {
         return (ITextAssert) getUI(name, HasAssert.class).is();
     }
 
-    public static <T> List<T> getListFromData(List<List<T>> data) {
-        if (isEmpty(data))
-            return new ArrayList<>();
-        if (data.size() == 1) {
-            return data.get(0);
-        }
-        List<T> result = new ArrayList<>();
-        for (int i = 0; i < data.size(); i++) {
-            List<T> list = data.get(i);
-            if (list.size() == 1) {
-                result.add(getValue(list.get(0)));
-            } else {
-                throw exception("Expected list data but found 2D array: " + data);
-            }
-        }
-        return result;
-    }
-    private static <T> T getValue(T value) {
-        try {
-            return value != null ? value : (T) "";
-        } catch (Exception ex) {
-            throw exception("Failed to cast null value to String. Empty values are allowed only for String lists");
-        }
-    }
 }

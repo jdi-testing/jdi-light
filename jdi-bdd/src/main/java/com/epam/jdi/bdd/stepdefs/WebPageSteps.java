@@ -1,7 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
@@ -18,76 +18,69 @@ public class WebPageSteps {
     private final int SCROLLX = 0;
 
     //    ACTIONS
-    @When("I scroll to the bottom of the page")
-    @When("scroll to the bottom of the page")
+    @When("^(?:I |)scroll to the bottom of the page$")
     public void scrollToBottomOfPage() {
         scrollToBottom();
     }
 
-    @When("I scroll to the top of the page")
-    @When("scroll to the top of the page")
+    @When("^(?:I |)scroll to the top of the page$")
     public void scrollToTopOfPage() {
         scrollToTop();
     }
 
-    @When("I scroll {int}(px) down")
-    @When("scroll {int}(px) down")
+    @When("^(?:I |)scroll \"(\\d+)\" px down$")
     public void scrollNPxDownAndNPxUp(int x) {
         scrollDown(x);
     }
 
-    @When("I scroll {int}(px) up")
-    @When("scroll {int}(px) up")
+    @When("^(?:I |)scroll \"(\\d+)\" px up$")
     public void scrollNPxUp(int x) {
         scrollUp(x);
     }
 
-    @When("I scroll {int}(px) right")
-    @When("scroll {int}(px) right")
+    @When("^(?:I |)scroll \"(\\d+)\" px right$")
     public void scrollNPxRight(int x) {
         scrollRight(x);
     }
 
-    @When("I scroll {int}(px) left")
-    @When("scroll {int}(px) left")
+    @When("^(?:I |)scroll \"(\\d+)\" px left$")
     public void scrollNPxLeft(int x) {
         scrollLeft(x);
     }
 
-    @When("I zoom in {int} times")
-    @When("zoom in {int} times")
+    @When("^(?:I |)zoom in \"(\\d+)\" times$")
     public void zoomIn(int x) {
         zoom(x);
     }
 
     //    ASSERTIONS
-    @Then("the bottom of the page is reached")
+    @Then("^the bottom of the page is reached$")
     public void bottomOfPageReached() {
         boolean execResult = isBottomOfThePage();
         assertThat(execResult, is(true));
     }
 
-    @Then("the top of the page is reached")
+    @Then("^the top of the page is reached$")
     public void topOfPageReached() {
         boolean execResult = isTopOfThePage();
         assertThat(execResult, is(true));
     }
 
-    @Then("the page scrolled by {int}(px) down")
+    @Then("^the page scrolled by \"(\\d+)\" px down$")
     public void pageScrolledDown(int y) {
         int execResult = getInt(jsExecute("return window.scrollY;"));
         assertThat(execResult, greaterThan(SCROLLY + y-2));
         assertThat(execResult, lessThan(SCROLLY + y+1));
     }
 
-    @Then("the page scrolled by {int}(px) right")
+    @Then("^the page scrolled by \"(\\d+)\" px right$")
     public void pageScrolledRight(int x) {
         int execResult = getInt(jsExecute("return Math.ceil(window.scrollX);"));
         assertThat(execResult, greaterThan(SCROLLX + x-2));
         assertThat(execResult, lessThan(SCROLLX + x+1));
     }
 
-    @Then("the page is zoomed {int} times")
+    @Then("^the page is zoomed \"(\\d+)\" times$")
     public void pageIsZoomed(double x) {
         assertThat(zoomLevel(), is(x));
     }

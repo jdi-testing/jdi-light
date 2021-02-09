@@ -1,7 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
-import io.cucumber.java.en.Then;
+import cucumber.api.java.en.Then;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -16,12 +16,12 @@ public class ProgressBarSteps {
         return getUI(name, ProgressBar.class);
     }
 
-    @Then("the {string} progress value greater or equal to {int}")
+    @Then("^the \"([^\"]*)\" progress value greater or equal to (\\d+)$")
     public void valueGreaterOrEqualTo(String name, int value) {
         progressBar(name).is().value(greaterThanOrEqualTo(value));
     }
 
-    @Then("the {string} progress value less or equal to {int}")
+    @Then("^the \"([^\"]*)\" progress value less or equal to (\\d+)$")
     public void valueLessOrEqualTo(String name, int value) {
         progressBar(name).is().value(lessThanOrEqualTo(value));
     }

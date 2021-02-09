@@ -73,16 +73,16 @@ Feature: Textarea
 
   Scenario: Count rows test
     Given I open "Html5 Page"
-    Then the "Text Area" rows count equals 3
+    Then the "Text Area" rows count equals "3"
 
   Scenario: Count cols test
     Given I open "Html5 Page"
-    Then the "Text Area" columns count equals 33
+    Then the "Text Area" columns count equals "33"
 
   Scenario: Minimal lenght test
     Given I open "Html5 Page"
-    Then the "Text Area" minimal length equals 10
+    Then the "Text Area" minimal length equals "10"
 
   Scenario: Maximal lenght test
     Given I open "Html5 Page"
-    Then the "Text Area" maximal length equals 200
+    Then the "Text Area" maximal length equals "200"

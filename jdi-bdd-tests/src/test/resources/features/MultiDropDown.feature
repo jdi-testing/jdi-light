@@ -27,7 +27,7 @@ Feature: MultiDropDown
       | Electro | Metalic |
 
   @ignore_for_firefox
-  Scenario: Check  values test
+  Scenario: Check values test
     When I check in the "Multi Dropdown" values:
       | Electro | Metalic |
     Then the "Multi Dropdown" selected values:

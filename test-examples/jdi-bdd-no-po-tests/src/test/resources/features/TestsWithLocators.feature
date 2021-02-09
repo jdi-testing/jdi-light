@@ -1,7 +1,7 @@
 @locators
 Feature: TestsWithLocators
   Background:
-    Given Page with url "https://jdi-testing.github.io/jdi-light/html5.html" opened
+    Given Page with url "https://jdi-testing.github.io/jdi-light/html5.html" openned
 
   Scenario: click element
     When I click on "[value*='Red Button']"
