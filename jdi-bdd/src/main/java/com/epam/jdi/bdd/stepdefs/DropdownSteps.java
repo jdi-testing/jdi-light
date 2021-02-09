@@ -1,7 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
-import io.cucumber.java.en.Then;
+import cucumber.api.java.en.Then;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 
@@ -14,7 +14,7 @@ public class DropdownSteps {
         return getUI(name, IsDropdown.class);
     }
 
-    @Then("the {string} in {string} is selected")
+    @Then("^the \"([^\"]*)\" in \"([^\"]*)\" is selected$")
     public void theInIsSelected(String textValue, String name) {
         dropdown(name).is().selected(textValue);
     }

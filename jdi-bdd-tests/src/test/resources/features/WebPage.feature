@@ -20,14 +20,14 @@ Feature: Checking Basic WebPage Actions
     Then the top of the page is reached
 
   Scenario: scroll down and up test
-    When I scroll 30px down
-    And I scroll 20px up
-    Then the page scrolled by 10px down
+    When I scroll "30" px down
+    And I scroll "20" px up
+    Then the page scrolled by "10" px down
 
   Scenario: scroll right and left test
-    When I scroll 10px right
-    And I scroll 5px left
-    Then the page scrolled by 5px right
+    When I scroll "10" px right
+    And I scroll "5" px left
+    Then the page scrolled by "5" px right
   # TODO
   #Scenario: zoom test
   #  When I zoom in "2" times
