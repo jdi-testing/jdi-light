@@ -157,7 +157,7 @@ public class PageFactory {
         }
         else {
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
-                        "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
+                        "Maybe you can solve your problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
                         "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
                     info.name());
         }
