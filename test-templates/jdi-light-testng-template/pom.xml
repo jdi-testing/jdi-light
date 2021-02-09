@@ -26,11 +26,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-<<<<<<< HEAD
             <version>1.3.5</version>
-=======
-            <version>[1.3.4,)</version>
->>>>>>> f3097032be834e98861f4abf486b19d734e25e58
         </dependency>
 
         <!--Allure-->
