@@ -223,8 +223,8 @@ jobs:
       if: ${{ steps.tests-angular-common.outcome != 'success' }}
 # for full angular should be
 #      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}
-      run: |
-        echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
 #        echo Angular Complex tests result: ${{ steps.tests-angular-complex.outcome }}
 #        echo Angular Unit tests result: ${{ steps.tests-angular-unit.outcome }}
+      run: |
+        echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
         exit 1
