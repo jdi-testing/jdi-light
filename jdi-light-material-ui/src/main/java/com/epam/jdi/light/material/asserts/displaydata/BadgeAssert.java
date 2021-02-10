@@ -28,4 +28,10 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has '{0}' alignment")
+    public BadgeAssert alignment(String alignment) {
+        jdiAssert(element().hasAlignment(alignment), Matchers.is(true));
+        return this;
+    }
+
 }
