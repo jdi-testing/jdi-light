@@ -21,13 +21,11 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
   String moveLeftButton;
   String moveAllRightButton;
   String moveAllLeftButton;
-  String itemTextArea;
   String itemCheckbox;
   String leftListItems;
   String rightListItems;
   String allItemsLeftCheckbox;
   String allItemsRightCheckbox;
-  String subHeadersText;
 
   private CacheAll<List<String>> leftItems = new CacheAll<>(ArrayList:: new);
   private CacheAll<List<String>> rightItems = new CacheAll<>(ArrayList:: new);
@@ -54,6 +52,25 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
     }
   }
 
+  abstract void moveAllElementsRight();
+  abstract void moveAllElementsLeft();
+
+  public boolean isMoveRightButtonEnable(){
+    return !isMoveRightButtonDisable();
+  }
+
+  public boolean isMoveRightButtonDisable(){
+    return this.find(moveRightButton).hasClass("Mui-disabled");
+  }
+
+  public boolean isMoveLeftButtonEnable(){
+    return !isMoveLeftButtonDisable();
+  }
+
+  public boolean isMoveLeftButtonDisable(){
+    return this.find(moveLeftButton).hasClass("Mui-disabled");
+  }
+
   @JDIAction("Is '{name}' checked")
   public Boolean isChecked(String itemText) {
     return selector(itemText).hasClass("Mui-checked");
@@ -62,12 +79,6 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
   @JDIAction("Is '{name}' unchecked")
   public Boolean isUnchecked(String itemText) {
     return !isChecked(itemText);
-  }
-
-  @JDIAction("Is '{name} enabled")
-  @Override
-  public boolean isEnabled() {
-    return !isDisabled();
   }
 
   public UIElement selector(String itemText) {
@@ -92,12 +103,10 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
     moveAllRightButton = j.moveAllRightButton();
     moveLeftButton = j.moveLeftButton();
     moveRightButton = j.moveRightButton();
-    itemTextArea = j.itemText();
     leftListItems = j.leftListItems();
     rightListItems = j.rightListItems();
     allItemsLeftCheckbox = j.allItemsLeftCheckbox();
     allItemsRightCheckbox = j.allItemsRightCheckbox();
-    subHeadersText = j.subHeadersText();
   }
 
   @Override

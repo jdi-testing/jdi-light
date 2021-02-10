@@ -6,7 +6,8 @@ import com.epam.jdi.light.material.elements.inputs.TransferList.EnhancedTransfer
 
 public class EnhancedTransferListFrame extends Section {
 
-    @JDITransferList(root = "#root")
+    @JDITransferList(root = "#root", allItemsLeftCheckbox = "(//span[./input[@aria-label='all items selected']])[1]",
+        allItemsRightCheckbox = "(//span[./input[@aria-label='all items selected']])[2]")
     public EnhancedTransferList enhancedTransferList;
 
 }

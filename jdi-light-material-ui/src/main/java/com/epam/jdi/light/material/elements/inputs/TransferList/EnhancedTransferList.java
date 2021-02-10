@@ -2,9 +2,18 @@ package com.epam.jdi.light.material.elements.inputs.TransferList;
 
 public class EnhancedTransferList extends TransferList {
 
-  public boolean isSubhesdersCorrect(String leftHeader, String rightHeader){
-    return leftHeader.equals(this.finds(subHeadersText).get(0)) &&
-        rightHeader.equals(this.finds(subHeadersText).get(1));
+  @Override
+  public void moveAllElementsLeft() {
+    //TODO replace to checkbox
+    this.find(allItemsRightCheckbox).click();
+    this.find(moveLeftButton).click();
+  }
+
+
+  @Override
+  public void moveAllElementsRight() {
+    this.find(allItemsLeftCheckbox).click();
+    this.find(moveRightButton).click();
   }
 
 }

@@ -36,14 +36,14 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static SimpleTransferListFrame simpleTransferListFrame;
 
-    @Url("/material-ui-inputs-transferlist--simple-transfer-list-view")
+    @Url("/material-ui-inputs-transfer-list--simple-transfer-list-view")
     public static WebPage inputSimpleTransferListPage;
 
     //enhanced transfer list
     @Frame("storybook-preview-iframe")
     public static EnhancedTransferListFrame enhancedTransferListFrame;
 
-    @Url("/material-ui-inputs-transferlist--enhanced-transfer-list-view")
+    @Url("/material-ui-inputs-transfer-list--enhanced-transfer-list-view")
     public static WebPage inputEnhancedTransferListPage;
 
 

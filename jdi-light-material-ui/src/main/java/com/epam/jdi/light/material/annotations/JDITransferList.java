@@ -15,10 +15,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDITransferList {
     @MarkupLocator String root() default "";
-    String[] header() default {};
 
-
-    @MarkupLocator String itemText() default "//span[text()='%s']";
     @MarkupLocator String itemCheckbox() default "//div[./span[text()='%s']]/preceding-sibling::div/span";
 
     @MarkupLocator String leftListItems() default "(//*[contains(@class,'MuiPaper-rounded')])[1]//div[contains(@class, 'MuiListItem-root')]";
@@ -31,6 +28,4 @@ public @interface JDITransferList {
 
     @MarkupLocator String allItemsLeftCheckbox() default "";
     @MarkupLocator String allItemsRightCheckbox() default "";
-    @MarkupLocator String subHeadersText() default "";
-
 }
