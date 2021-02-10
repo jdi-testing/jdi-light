@@ -99,6 +99,9 @@ public class StaticSite {
     @Url("/material-ui-tooltip--interactive")
     public static WebPage displayDataTooltipInteractivePage;
 
+    @Url("/material-ui-data-display-badge--alignment")
+    public static WebPage dataDisplayBadgeAlignmentPage;
+
     @UI("#login-form")
     public static Form<User> loginForm;
 
