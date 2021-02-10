@@ -53,4 +53,8 @@ public interface TestsInit {
             reload();
         }
     }
+
+    default void skip() {
+        throw new SkipException("Test is skipped for Firefox browser");
+    }
 }

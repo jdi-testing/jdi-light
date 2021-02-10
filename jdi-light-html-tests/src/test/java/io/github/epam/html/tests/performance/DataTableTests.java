@@ -23,7 +23,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
 public class DataTableTests implements TestsInit {
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         performancePage.shouldBeOpened();

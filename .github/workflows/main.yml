@@ -5,7 +5,7 @@ name: JDI auto-tests
 env:
     CHROME_PROPERTIES: "chrome.properties"
     FIREFOX_PROPERTIES: "ff.properties"
-    WITH_PARAMS: "-ntp -Ddriver=chrome" # for Chrome: "-ntp -Ddriver=chrome"
+    WITH_PARAMS: "-ntp -Ddriver=chrome" # for Chrome: "-ntp -Ddriver=chrome", for FF: "-ntp -Ddriver=firefox"
     UNIT: "-Punit"
     COMMON: "-Pcommon"
     COMPLEX: "-Pcomplex"
@@ -43,7 +43,6 @@ jobs:
     name: Tests on JDK
     runs-on: ubuntu-18.04
     strategy:
-      max-parallel: 2
       fail-fast: false
       matrix:
         java: [8, 9, 10, 11, 12, 13, 14] # all [8, 9, 10, 11, 12, 13, 14]
@@ -129,15 +128,15 @@ jobs:
     - name: Kill Chrome
       run: pkill -f "chrome"
 
-    - name: Run tests - Angular Unit tests
-      id: tests-angular-unit
-      if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 40 # prevent blocking
-      continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
-
-    - name: Kill Chrome
-      run: pkill -f "chrome"
+#    - name: Run tests - Angular Unit tests
+#      id: tests-angular-unit
+#      if: steps.jdi-compile.outcome == 'success'
+#      timeout-minutes: 40 # prevent blocking
+#      continue-on-error: true
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#
+#    - name: Kill Chrome
+#      run: pkill -f "chrome"
 
     - name: Run tests - Angular Common tests
       id: tests-angular-common
@@ -149,15 +148,15 @@ jobs:
     - name: Kill Chrome
       run: pkill -f "chrome"
 
-    - name: Run tests - Angular Complex tests
-      id: tests-angular-complex
-      if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 60 # prevent blocking
-      continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
-
-    - name: Kill Chrome
-      run: pkill -f "chrome"
+#    - name: Run tests - Angular Complex tests
+#      id: tests-angular-complex
+#      if: steps.jdi-compile.outcome == 'success'
+#      timeout-minutes: 60 # prevent blocking
+#      continue-on-error: true
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#
+#    - name: Kill Chrome
+#      run: pkill -f "chrome"
 
     - name: Run tests - HTML
       id: tests-html

@@ -7,6 +7,7 @@ import com.epam.jdi.tools.func.JFunc;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.SkipException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -27,7 +28,8 @@ public class ListPerformanceTests implements TestsInit {
     final String value = "Yen Stevenson";
     final int index = 385;
     final int repeat = 1;
-    @BeforeMethod
+
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         performancePage.open();

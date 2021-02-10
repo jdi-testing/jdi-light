@@ -151,7 +151,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
                 this.header.setRule(() -> getRowByIndex(getRowHeaderIndex()).values());
                 this.size.setRule(() -> getRowByIndex(getRowHeaderIndex()).size());
             } else {
-                throw exception("Can't find header using locator '%s'. Please specify JTable.headers locator or set JTable.header list");
+                throw exception("Can't find header using locator '%s'. Please specify JTable.headers locator or set JTable.header list",
+                        headerLocator);
             }
         }
         return header.setName(getName() + " header");
@@ -161,7 +162,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (footer.size() == 0) {
             footer = getRowByIndex(getRowHeaderIndex());
             if (footer.size() == 0) {
-                throw exception("Can't find footer using locator '%s'. Please specify JTable.footer locator");
+                throw exception("Can't find footer using locator '%s'. Please specify JTable.footer locator", footer);
             }
         }
         return footer.setName(getName() + " header");
