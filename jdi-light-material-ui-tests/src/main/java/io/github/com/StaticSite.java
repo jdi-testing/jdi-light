@@ -10,6 +10,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.inputs.EnhancedTransferListFrame;
+import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
@@ -29,6 +31,21 @@ public class StaticSite {
 
     @Url("/material-ui-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
+
+    //simple transfer list
+    @Frame("storybook-preview-iframe")
+    public static SimpleTransferListFrame simpleTransferListFrame;
+
+    @Url("/material-ui-inputs-transferlist--simple-transfer-list-view")
+    public static WebPage inputSimpleTransferListPage;
+
+    //enhanced transfer list
+    @Frame("storybook-preview-iframe")
+    public static EnhancedTransferListFrame enhancedTransferListFrame;
+
+    @Url("/material-ui-inputs-transferlist--enhanced-transfer-list-view")
+    public static WebPage inputEnhancedTransferListPage;
+
 
     // surfaces
     // accordion
