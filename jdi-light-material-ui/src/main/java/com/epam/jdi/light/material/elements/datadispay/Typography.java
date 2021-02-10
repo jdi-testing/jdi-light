@@ -17,7 +17,6 @@ public class Typography extends UIBaseElement<TypographyAssert> {
     }
 
     public boolean hasStyleClass(String style) {
-        return core().classes().stream()
-                .anyMatch(styleClass -> styleClass.equals(String.format(STYLE_CLASS_PATTERN, style)));
+        return core().hasClass(String.format(STYLE_CLASS_PATTERN, style));
     }
 }
