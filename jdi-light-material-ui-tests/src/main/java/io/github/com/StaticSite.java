@@ -35,6 +35,15 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static AccordionFrame accordionFrame;
 
+    @Url("/story/material-ui-inputs-checkbox--disabled")
+    public static WebPage inputCheckboxDisabled;
+
+    @Url("/material-ui-inputs-checkbox--form-control")
+    public static WebPage formControlCheckBox;
+
+    @Url("/material-ui-inputs-checkbox--group")
+    public static WebPage groupCheckBox;
+
     @Frame("storybook-preview-iframe")
     public static CheckboxFrame checkboxFrame;
 

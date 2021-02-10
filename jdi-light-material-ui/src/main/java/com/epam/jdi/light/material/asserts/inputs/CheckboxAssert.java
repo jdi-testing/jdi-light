@@ -26,4 +26,40 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         jdiAssert(element().isNotSelectedCheckbox(), Matchers.is(true));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' is disabled")
+    public CheckboxAssert disabledCheckbox() {
+        jdiAssert(element().isDisabledCheckbox(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is displayed")
+    public CheckboxAssert formControlDisplayed() {
+        jdiAssert(element().isFormControlDisplayed(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert '{name}' text")
+    public CheckboxAssert assertEmailText() {
+        jdiAssert(element().emailText(), Matchers.containsString("Email address"));
+        return this;
+    }
+
+    @JDIAction("Assert '{name}' text")
+    public CheckboxAssert assertHelperText() {
+        jdiAssert(element().helperText(), Matchers.containsString("We ll never share your email."));
+        return this;
+    }
+
+    @JDIAction("Assert that group '{name}' is disabled")
+    public CheckboxAssert assertGroupDisabled() {
+        jdiAssert(element().isGroupCheckboxDisplayed(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that group '{name}' is checked")
+    public CheckboxAssert assertGroupChecked() {
+        jdiAssert(element().checkGroupSecondCheckbox(), Matchers.is(true));
+        return this;
+    }
 }

@@ -7,4 +7,7 @@ public class CheckboxFrame {
 
     @UI("//span[contains(@class,'MuiButtonBase-root')]")
     public Checkbox checkbox;
+
+    @UI("MuiFormGroup-root MuiFormGroup-row")
+    public Checkbox groupCheckBox;
 }
