@@ -16,21 +16,15 @@ public class IconAssert extends UIAssert<IconAssert, Icon> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is large")
-    public IconAssert largeSize() {
-        jdiAssert(element().isLarge(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' has correct size")
+    public IconAssert checkSize(String size) {
+        jdiAssert(element().isSize(size), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is inherit")
-    public IconAssert inheritSize() {
-        jdiAssert(element().isInherit(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is small")
-    public IconAssert smallSize() {
-        jdiAssert(element().isSmall(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' has correct color")
+    public IconAssert checkColor(String color) {
+        jdiAssert(element().isColor(color), Matchers.is(true));
         return this;
     }
 }
