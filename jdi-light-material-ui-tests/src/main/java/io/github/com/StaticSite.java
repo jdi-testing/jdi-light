@@ -82,6 +82,9 @@ public class StaticSite {
     @Url("/material-ui-data-display-badge--invisible")
     public static WebPage dataDisplayBadgeInvisiblePage;
 
+    @Url("/material-ui-data-display-badge--alignment")
+    public static WebPage dataDisplayBadgeAlignmentPage;
+
     @UI("#login-form")
     public static Form<User> loginForm;
 

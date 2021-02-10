@@ -8,6 +8,7 @@ public class Badge extends UIBaseElement<BadgeAssert> {
     private static final String BADGE_CONTENT_CLASS = ".MuiBadge-badge";
     private static final String BADGE_DOT_CLASS = "MuiBadge-dot";
     private static final String BADGE_INVISIBLE_CLASS = "MuiBadge-invisible";
+    private static final String BADGE_ALIGNMENT_PATTERN = "MuiBadge-anchorOrigin%sRectangle";
 
     @Override
     public BadgeAssert is() {
@@ -29,6 +30,10 @@ public class Badge extends UIBaseElement<BadgeAssert> {
 
     public boolean isDot() {
         return core().find(BADGE_CONTENT_CLASS).hasClass(BADGE_DOT_CLASS);
+    }
+
+    public boolean hasAlignment(String alignment) {
+        return core().find(BADGE_CONTENT_CLASS).hasClass(String.format(BADGE_ALIGNMENT_PATTERN, alignment.replaceAll("\\s+", "")));
     }
 
 }
