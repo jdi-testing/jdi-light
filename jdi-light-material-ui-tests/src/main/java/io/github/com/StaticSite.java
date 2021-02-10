@@ -12,6 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
+import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
@@ -46,6 +47,16 @@ public class StaticSite {
     @Url("/material-ui-inputs-transfer-list--enhanced-transfer-list-view")
     public static WebPage inputEnhancedTransferListPage;
 
+
+    // button
+    @Frame("storybook-preview-iframe")
+    public static ButtonFrame buttonFrame;
+
+    @Url("/material-ui-button--default")
+    public static WebPage inputButtonDefaultPage;
+
+    @Url("/material-ui-button--disabled")
+    public static WebPage inputButtonDisabledPage;
 
     // surfaces
     // accordion
