@@ -10,19 +10,14 @@ public class Icon extends UIBaseElement<IconAssert> {
         return core().isDisplayed();
     }
 
-    @JDIAction("Is '{name}' large")
-    public Boolean isLarge() {
-        return core().hasClass("MuiSvgIcon-fontSizeLarge");
+    @JDIAction("Is '{name}' has correct size")
+    public Boolean isSize(String size) {
+        return core().hasClass(String.format("MuiSvgIcon-fontSize%s", size));
     }
 
-    @JDIAction("Is '{name}' small")
-    public Boolean isSmall() {
-        return core().hasClass("MuiSvgIcon-fontSizeSmall");
-    }
-
-    @JDIAction("Is '{name}' inherit")
-    public Boolean isInherit() {
-        return core().hasClass("MuiSvgIcon-fontSizeInherit");
+    @JDIAction("Is '{name}' has correct color")
+    public Boolean isColor(String color) {
+        return core().hasClass(String.format("MuiSvgIcon-color%s", color));
     }
 
     @Override

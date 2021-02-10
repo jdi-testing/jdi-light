@@ -19,6 +19,7 @@ public class IconTests extends TestsInit {
     public void largeMaterialIconTest() {
         displayDataLargeMaterialIconPage.open();
         iconFrame.icon.is().visible();
-        iconFrame.icon.is().largeSize();
+        iconFrame.icon.is().checkSize("Large");
+        iconFrame.icon.is().checkColor("Secondary");
     }
 }
