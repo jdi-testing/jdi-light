@@ -204,19 +204,11 @@ jobs:
         path: ./allure-report.zip
         retention-days: 1
 
-    - name: Check for any failure
+    - name: Check BDD and Bootstap are passed
       if: ${{ steps.tests-bdd.outcome != 'success' || steps.tests-bootstrap.outcome != 'success' }}
       run: |
         echo BDD tests result: ${{ steps.tests-bdd.outcome }}
         echo Bootstrap tests result: ${{ steps.tests-bootstrap.outcome }}
-        exit 1
-
-    - name: Check angular tests are passed
-      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}
-      run: |
-        echo Angular Unit tests result: ${{ steps.tests-angular-unit.outcome }}
-        echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
-        echo Angular Complex tests result: ${{ steps.tests-angular-complex.outcome }}
         exit 1
 
     - name: Check html tests are passed
@@ -225,4 +217,14 @@ jobs:
         echo HTML tests result: ${{ steps.tests-html.outcome }}
         echo Example tests result: ${{ steps.tests-examples.outcome }}
         echo Performance tests result: ${{ steps.tests-perf.outcome }}
+        exit 1
+
+    - name: Check angular tests are passed
+      if: ${{ steps.tests-angular-common.outcome != 'success' }}
+# for full angular should be
+#      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}
+      run: |
+        echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
+#        echo Angular Complex tests result: ${{ steps.tests-angular-complex.outcome }}
+#        echo Angular Unit tests result: ${{ steps.tests-angular-unit.outcome }}
         exit 1

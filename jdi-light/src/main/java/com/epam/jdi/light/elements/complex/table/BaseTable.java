@@ -41,6 +41,7 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -92,7 +93,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @Override
     public UIElement core() {
         UIElement core = super.core();
-        if (hasRunDrivers() && !locatorsValidated) {
+        if (hasRunDrivers() && !locatorsValidated && core.isDisplayed()) {
             try {
                 locatorsValidated = true;
                 validateLocators(core);
@@ -100,15 +101,19 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
                 locatorsValidated = false;
             }
         }
+        else {
+            logger.debug("No validation needed");
+        }
         return core;
     }
     protected void validateLocators(UIElement core) {
         if (getByLocator(headerLocator).equals("th")) {
-            if (core.finds("th").size() == 0) {
+            if (core.finds("th").size() == 0 && core.finds("td").size() > 0) {
                 headerLocator = core.find("thead td").isExist()
                     ? By.cssSelector("thead td") : By.xpath("//tr[1]//td");
             }
         }
+        logger.debug("After Table validation header locator is '%s'", headerLocator);
     }
 
     protected int getRowHeaderIndex() {
@@ -144,6 +149,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
 
     public WebList headerUI() {
+        logger.debug("Search header with locator '%s'", headerLocator);
         WebList header = core().finds(headerLocator).setName(getName() + " header");
         if (header.size() == 0) {
             header = getRowByIndex(getRowHeaderIndex());
@@ -722,8 +728,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             this.cellLocator = NAME_TO_LOCATOR.execute(j.cell());
         if (!j.allCells().equals("td") || !getByLocator(this.allCellsLocator).equals("td"))
             this.allCellsLocator = NAME_TO_LOCATOR.execute(j.allCells());
-        if (!j.headers().equals("th") || !getByLocator(this.headerLocator).equals("th"))
+        if (!j.headers().equals("th") || !getByLocator(this.headerLocator).equals("th")) {
             this.headerLocator = NAME_TO_LOCATOR.execute(j.headers());
+            logger.debug("Header locator is changed to '%s'", this.headerLocator);
+        }
         if (!j.filter().equals("th input[type=search],th input[type=text]") || !getByLocator(this.filterLocator).equals("th input[type=search],th input[type=text]"))
             this.filterLocator = NAME_TO_LOCATOR.execute(j.filter());
         if (!j.fromCellToRow().equals("../td") || !getByLocator(this.fromCellToRow).equals("../td"))

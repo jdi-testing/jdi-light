@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JDI-Light HTML Tests" parallel="methods" thread-count="2">
-    <test name="Tests">
+<suite name="JDI-Light HTML Tests" parallel="methods">
+    <test name="Functional Tests" thread-count="3">
         <packages>
             <package name="io.github.epam.html.tests.elements.common"/>
             <package name="io.github.epam.html.tests.elements.complex.*"/>
@@ -11,11 +11,15 @@
             <package name="io.github.epam.html.tests.elements.composite"/>
             <package name="io.github.epam.html.tests.issues.*"/>
             <package name="io.github.epam.html.tests.site"/>
-            <package name="io.github.epam.html.tests.performance"/>
         </packages>
         <!--classes>
             <class name="io.github.epam.html.tests.debug.DebugTests"/>
         </classes-->
+    </test>
+    <test name="Performance Tests" thread-count="1">
+        <packages>
+            <package name="io.github.epam.html.tests.performance"/>
+        </packages>
     </test>
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener" />
