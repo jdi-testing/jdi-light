@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
@@ -54,7 +55,7 @@ public class StaticSite {
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
 
-    // inputs
+    // Display data
     // switch
     @Frame("storybook-preview-iframe")
     public static InsetDividerFrame insetDividerFrame;
@@ -68,6 +69,18 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
+    // badge
+    @Frame("storybook-preview-iframe")
+    public static BadgeFrame badgeFrame;
+
+    @Url("/material-ui-data-display-badge--primary")
+    public static WebPage dataDisplayBadgePrimaryPage;
+
+    @Url("/material-ui-data-display-badge--dot")
+    public static WebPage dataDisplayBadgeDotPage;
+
+    @Url("/material-ui-data-display-badge--invisible")
+    public static WebPage dataDisplayBadgeInvisiblePage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
