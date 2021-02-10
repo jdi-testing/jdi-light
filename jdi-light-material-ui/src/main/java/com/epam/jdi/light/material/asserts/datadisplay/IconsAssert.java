@@ -11,9 +11,10 @@ public class IconsAssert extends UIAssert<IconsAssert, Icons> {
     @JDIAction("Assert that {name} is visible")
     @Override
     public IconsAssert displayed() {
-        boolean isVisible = new Timer(base().getTimeout() * 1000L)
+        boolean isDisplayed = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDisplayed());
-        jdiAssert(isVisible, Matchers.is(true));
+        jdiAssert(isDisplayed, Matchers.is(true));
         return this;
     }
 }
+
