@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.datadisplay.IconsFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
@@ -51,6 +52,20 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
+
+    // data display
+    //icons
+    @Frame("storybook-preview-iframe")
+    public static IconsFrame iconsFrame;
+
+    @Url("/material-ui-icons--simple-icons")
+    public static WebPage simpleIconsPage;
+
+    @Url("/material-ui-icons--color-icons")
+    public static WebPage colorIconsPage;
+
+    @Url("/material-ui-icons--size-icons")
+    public static WebPage sizeIconsPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
