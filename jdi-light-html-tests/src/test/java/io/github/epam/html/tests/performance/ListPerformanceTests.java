@@ -21,14 +21,13 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.lang.String.format;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.greaterThan;
 
 public class ListPerformanceTests implements TestsInit {
     final String value = "Yen Stevenson";
     final int index = 385;
     final int repeat = 1;
-
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         performancePage.open();
@@ -145,9 +144,8 @@ public class ListPerformanceTests implements TestsInit {
             : format("First time result: " + firstResult + ". JDI in average is %s than Selenium in %s times with maximum %s in %s times", goodBad, ratio, goodBadMax, max);
         System.out.println(toLog);
         assertThat(format("Expected ratio: %s; but Actual: %s", expectedRatio, avJdi*expectedRatio),
-                avSelenium, lessThan(avJdi*expectedRatio*5));
-        // first execution can change from time to time
+                avSelenium, greaterThan(avJdi*expectedRatio*0.5));
         assertThat(format("Expected result: %s; but Actual: %s", expectedFirst, firstResult),
-                firstResult, lessThan(expectedFirst*5));
+                firstResult, greaterThan(expectedFirst*0.5));
     }
 }
