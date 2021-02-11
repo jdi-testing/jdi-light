@@ -10,13 +10,15 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.displaydata.TooltipFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+//@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("http://100.64.56.255:6006/?path=/story/")
 public class StaticSite {
 
     // inputs
@@ -54,8 +56,8 @@ public class StaticSite {
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
 
-    // inputs
-    // switch
+    // Display data
+    // divider
     @Frame("storybook-preview-iframe")
     public static InsetDividerFrame insetDividerFrame;
 
@@ -68,6 +70,12 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
+    // tooltip
+    @Frame("storybook-preview-iframe")
+    public static TooltipFrame tooltipFrame;
+
+    @Url("/material-ui-tooltip--default")
+    public static WebPage displayDataTooltipDefaultPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
