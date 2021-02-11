@@ -6,7 +6,7 @@ import com.epam.jdi.light.material.elements.inputs.ButtonWithTooltip;
 
 public class TooltipFrame extends Section {
 
-    @UI(".MuiIconButton-root:nth-child(1)")
+    @UI(".MuiIconButton-root[1]")
     public ButtonWithTooltip buttonWithTooltip;
 
 }

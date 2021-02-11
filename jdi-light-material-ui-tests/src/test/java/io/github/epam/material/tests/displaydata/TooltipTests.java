@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.displayDataTooltipDefaultPage;
+import static io.github.com.StaticSite.displayDataTooltipInteractivePage;
 import static io.github.com.StaticSite.tooltipFrame;
 
 public class TooltipTests extends TestsInit {
@@ -13,14 +14,17 @@ public class TooltipTests extends TestsInit {
         displayDataTooltipDefaultPage.open();
 
         tooltipFrame.buttonWithTooltip.hover();
-        System.out.println(tooltipFrame.buttonWithTooltip.tooltip().getTagName());
-        System.out.println(tooltipFrame.buttonWithTooltip.tooltip().core().classes());
-        System.out.println(tooltipFrame.buttonWithTooltip.tooltip().core().getText());
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        tooltipFrame.buttonWithTooltip.tooltip().is().visible();
+        tooltipFrame.buttonWithTooltip.tooltip().has().text("Add");
+    }
+
+    @Test
+    public void interactiveTooltipTest() {
+        displayDataTooltipInteractivePage.open();
+
+        tooltipFrame.buttonWithTooltip.hover();
+        tooltipFrame.buttonWithTooltip.tooltip().is().visible();
+        tooltipFrame.buttonWithTooltip.tooltip().is().interactive();
     }
 
 }

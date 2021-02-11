@@ -77,6 +77,9 @@ public class StaticSite {
     @Url("/material-ui-tooltip--default")
     public static WebPage displayDataTooltipDefaultPage;
 
+    @Url("/material-ui-tooltip--interactive")
+    public static WebPage displayDataTooltipInteractivePage;
+
     @UI("#login-form")
     public static Form<User> loginForm;
 
