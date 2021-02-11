@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JDI-Light HTML Tests" parallel="methods">
-    <test name="Functional Tests" thread-count="2">
+    <test name="Functional Tests" thread-count="3">
         <packages>
             <package name="io.github.epam.html.tests.elements.common"/>
             <package name="io.github.epam.html.tests.elements.complex.*"/>
