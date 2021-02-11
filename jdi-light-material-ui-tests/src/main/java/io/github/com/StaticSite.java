@@ -56,7 +56,7 @@ public class StaticSite {
     public static WebPage surfaceAccordionDisabledPage;
 
     // Display data
-    // switch
+    // divider
     @Frame("storybook-preview-iframe")
     public static InsetDividerFrame insetDividerFrame;
 
