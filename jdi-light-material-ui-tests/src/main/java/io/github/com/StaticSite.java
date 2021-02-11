@@ -96,6 +96,9 @@ public class StaticSite {
     @Url("/material-ui-surfaces-paper--default")
     public static WebPage surfacePaperDefaultPage;
 
+    @Url("/material-ui-tooltip--interactive")
+    public static WebPage displayDataTooltipInteractivePage;
+
     @UI("#login-form")
     public static Form<User> loginForm;
 
