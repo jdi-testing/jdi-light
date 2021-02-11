@@ -21,7 +21,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.lang.String.format;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThan;
 
 public class ListPerformanceTests implements TestsInit {
     final String value = "Yen Stevenson";
@@ -144,8 +144,10 @@ public class ListPerformanceTests implements TestsInit {
             ? "First time result: " + firstResult + ". JDI has the same result in average as Selenium with max better in " + max + "times"
             : format("First time result: " + firstResult + ". JDI in average is %s than Selenium in %s times with maximum %s in %s times", goodBad, ratio, goodBadMax, max);
         System.out.println(toLog);
-        assertThat(format("Expected ratio: %s; but Actual: %s", expectedRatio, avJdi*expectedRatio), avSelenium, greaterThan(avJdi*expectedRatio*0.8));
+        assertThat(format("Expected ratio: %s; but Actual: %s", expectedRatio, avJdi*expectedRatio),
+                avSelenium, lessThan(avJdi*expectedRatio*1.5));
         // first execution can change from time to time
-        assertThat(format("Expected result: %s; but Actual: %s", expectedFirst, firstResult), firstResult, greaterThan(expectedFirst*0.6));
+        assertThat(format("Expected result: %s; but Actual: %s", expectedFirst, firstResult),
+                firstResult, lessThan(expectedFirst*1.5));
     }
 }
