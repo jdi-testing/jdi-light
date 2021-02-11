@@ -145,9 +145,9 @@ public class ListPerformanceTests implements TestsInit {
             : format("First time result: " + firstResult + ". JDI in average is %s than Selenium in %s times with maximum %s in %s times", goodBad, ratio, goodBadMax, max);
         System.out.println(toLog);
         assertThat(format("Expected ratio: %s; but Actual: %s", expectedRatio, avJdi*expectedRatio),
-                avSelenium, lessThan(avJdi*expectedRatio*1.5));
+                avSelenium, lessThan(avJdi*expectedRatio*5));
         // first execution can change from time to time
         assertThat(format("Expected result: %s; but Actual: %s", expectedFirst, firstResult),
-                firstResult, lessThan(expectedFirst*1.5));
+                firstResult, lessThan(expectedFirst*5));
     }
 }
