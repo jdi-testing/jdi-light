@@ -93,7 +93,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @Override
     public UIElement core() {
         UIElement core = super.core();
-        if (hasRunDrivers() && !locatorsValidated && core.isExist()) {
+        if (hasRunDrivers() && !locatorsValidated && core.firstChild() != null) {
             try {
                 locatorsValidated = true;
                 validateLocators(core);
