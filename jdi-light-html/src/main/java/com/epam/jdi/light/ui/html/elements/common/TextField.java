@@ -17,7 +17,7 @@ public class TextField extends UIBaseElement<TextAssert>
         implements HasLabel, SetValue, HasPlaceholder, IsInput {
     // region Set and get value for Forms
     public void setValue(String value) {
-        input(value);
+        setText(value);
     }
     public String getValue() {
         return getText();

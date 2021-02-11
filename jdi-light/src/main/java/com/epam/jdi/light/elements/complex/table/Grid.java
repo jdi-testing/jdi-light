@@ -51,7 +51,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     @Override
     public UIElement core() {
         UIElement core = super.core();
-        if (hasRunDrivers() && !locatorsValidated) {
+        if (hasRunDrivers() && !locatorsValidated && core.firstChild() != null) {
             try {
                 locatorsValidated = true;
                 validateLocators(core);
