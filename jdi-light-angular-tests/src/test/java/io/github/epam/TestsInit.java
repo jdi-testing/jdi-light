@@ -48,4 +48,8 @@ public class TestsInit {
             throw new SkipException("Test is skipped for Firefox browser");
         }
     }
+
+    public void skip() {
+        throw new SkipException("Test is skipped for Firefox browser");
+    }
 }
