@@ -15,6 +15,7 @@ import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.utils.TransitionFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -68,6 +69,16 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
+    // utils
+    // transition
+    @Frame("storybook-preview-iframe")
+    public static TransitionFrame transitionFrame;
+
+    @Url("/material-ui-utils-transitions--fade-transition")
+    public static WebPage utilsTransitionFadePage;
+
+    @Url("/material-ui-utils-transitions--collapse-transition")
+    public static WebPage utilsTransitionCollapsePage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
