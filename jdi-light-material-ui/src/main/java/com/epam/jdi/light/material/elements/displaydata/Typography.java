@@ -1,5 +1,6 @@
 package com.epam.jdi.light.material.elements.displaydata;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.displaydata.TypographyAssert;
 
@@ -12,6 +13,7 @@ public class Typography extends UIBaseElement<TypographyAssert> {
         return new TypographyAssert().set(this);
     }
 
+    @JDIAction("Get value of '{name}'")
     public String getValue() {
         return core().getText();
     }
