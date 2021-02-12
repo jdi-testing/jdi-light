@@ -1,5 +1,6 @@
 package com.epam.jdi.light.material.elements.displaydata;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
 
@@ -20,6 +21,7 @@ public class Badge extends UIBaseElement<BadgeAssert> {
         return new BadgeAssert().set(this);
     }
 
+    @JDIAction("Get content of '{name}'")
     public String getBadgeContent() {
         return core().find(BADGE_CONTENT_CLASS).getText();
     }
