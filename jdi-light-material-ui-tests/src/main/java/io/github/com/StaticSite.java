@@ -15,6 +15,7 @@ import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.utils.PopperFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -67,6 +68,20 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
+
+    // utils
+    // popper
+    @Frame("storybook-preview-iframe")
+    public static PopperFrame popperFrame;
+
+    @Url("/material-ui-utils-popper--simple")
+    public static WebPage utilsSimplePopperPage;
+
+    @Url("/material-ui-utils-popper--transitions")
+    public static WebPage utilsTransitionsPopperPage;
+
+    @Url("/material-ui-utils-popper--positioned")
+    public static WebPage utilsPositionedPoppersPage;
 
 
     @UI("#login-form")
