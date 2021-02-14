@@ -64,8 +64,15 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public JS(WebDriver driver, By... locators) {
         this(driver, newList(locators));
     }
+
+    public JS(JS parent, By locator) {
+        this(parent.driver, locator, parent, true);
+    }
     public JS(WebDriver driver, By locator, Object parent) {
         this(driver, locator, parent, true);
+    }
+    public JS(JS parent, By locator, boolean useParentLocators) {
+        this(parent.driver, locator, parent, useParentLocators);
     }
     public JS(WebDriver driver, By locator, Object parent, boolean useParentLocators) {
         this(driver, locatorsFromParent(locator, parent, useParentLocators));
@@ -508,11 +515,28 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public JS findFirst(String by, String condition) {
         return findFirst(defineLocator(by), condition);
     }
+    public JS get(int index) {
+        return listToOne("element = elements[" + index + "];\n");
+    }
+    public JS get(String by, int index) {
+        return get(defineLocator(by), index);
+    }
+    public JS get(By by, int index) {
+        return listToOne("element = elements.filter(e => "+
+            MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+
+            ")[" + index + "];\n");
+    }
+    public JS findFirst(String condition) {
+        return listToOne("element = elements.find(e => e && e."+ condition + ");\n");
+    }
     public JS findFirst(By by, String condition) {
-        JS result = new JS(driver);
-        result.js.jsDriver().builder().addContextCode(js.jsDriver().buildList().rawQuery() + "element = elements.find(e => { const td = " +
+        return listToOne("element = elements.find(e => { const td = " +
             MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+"; " +
             "return td && td."+ condition + "; });\n");
+    }
+    private JS listToOne(String script) {
+        JS result = new JS(driver);
+        result.js.jsDriver().builder().addContextCode(js.jsDriver().buildList().rawQuery() + script);
         result.js.jsDriver().elementCtx();
         result.js.jsDriver().builder().updateFromBuilder(js.jsDriver().builder());
         js.jsDriver().builder().cleanup();

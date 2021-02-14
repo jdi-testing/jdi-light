@@ -4,6 +4,7 @@ import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.tools.pairs.Pair;
 import org.jdiai.jsdriver.JSException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -195,9 +196,16 @@ public class JSBuilder implements IJSBuilder {
         if (!isClass(builder.getClass(), JSBuilder.class))
             return;
         JSBuilder jsBuilder = (JSBuilder) builder;
-        useFunctions.addAll(jsBuilder.useFunctions);
-        variables.addAll(jsBuilder.variables);
-        ctxCode = jsBuilder.ctxCode + ctxCode;
+        for (Pair<String, String> pair : jsBuilder.useFunctions) {
+            if (!useFunctions.has(pair.key)) {
+                useFunctions.add(pair);
+            }
+        }
+        for (String variable : jsBuilder.variables) {
+            if (!variables.contains(variable)) {
+                variables.add(variable);
+            }
+        }
     }
     public JSBuilder copy() {
         JSBuilder result = new JSBuilder();

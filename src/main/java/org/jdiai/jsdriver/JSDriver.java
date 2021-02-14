@@ -67,6 +67,9 @@ public class JSDriver {
         return new JSProducer(buildOne().getResult(collector).executeQuery());
     }
     public IJSBuilder buildList() {
+        if (locators().isEmpty()) {
+            return builder();
+        }
         if (locators().size() == 1) {
             return builder().oneToList(context, firstLocator());
         }
