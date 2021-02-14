@@ -42,9 +42,15 @@ public class SmartBuilderActions implements IBuilderActions {
         return format(LIST_TO_LIST, MessageFormat.format(data.getAll, "element", selectorAll(locator, builder)));
     }
     public String getResult(String collector) {
-        return collector.contains("return") ? collector : format(ONE_TO_RESULT, collector);
+        return addBeforeReturn(collector) +
+            (collector.contains("return") ? collector : format(ONE_TO_RESULT, collector));
     }
     public String getResultList(String collector) {
-        return collector.contains("return") ? collector : format(LIST_TO_RESULT, collector);
+        return addBeforeReturn(collector) +
+            (collector.contains("return") ? collector : format(LIST_TO_RESULT, collector));
+    }
+    private String addBeforeReturn(String collector) {
+        return collector.contains("styles.") && !collector.contains("getComputedStyle")
+            ? "const styles = getComputedStyle(element);\n" : "";
     }
 }

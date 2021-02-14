@@ -130,19 +130,19 @@ public class JSBuilder implements IJSBuilder {
         if (smartStringify) {
             if (collectResult.trim().contains("return {") && collectResult.trim().contains("}")) {
                 return collectResult.replace("return {", "return JSON.stringify({")
-                        .replace("}", "})");
+                    .replace("}", "})");
             }
             if (collectResult.trim().contains("return [") && collectResult.trim().contains("]")) {
                 return collectResult.replace("return [", "return JSON.stringify([")
-                        .replace("}", "})");
+                    .replace("}", "})");
             }
             if (collectResult.trim().startsWith("{") && collectResult.trim().contains("}")) {
                 return collectResult.replace("{", "JSON.stringify({")
-                        .replace("}", "})");
+                    .replace("}", "})");
             }
             if (collectResult.trim().startsWith("[") && collectResult.trim().contains("]")) {
                 return collectResult.replace("[", "JSON.stringify([")
-                        .replace("]", "])");
+                    .replace("]", "])");
             }
         }
         return collectResult;

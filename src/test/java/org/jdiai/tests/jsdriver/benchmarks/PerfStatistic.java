@@ -34,15 +34,17 @@ public class PerfStatistic {
         double avJdi = getAverage(jsStats);
         System.out.println("Average Selenium: " + avSelenium);
         System.out.println("Average JS: " + avJdi);
-        String avRatio = df2.format(avSelenium/avJdi);
+        String avRatio = df2(avSelenium/avJdi);
         System.out.println("Average Ratio: " + avRatio);
-        String min = df2.format(min(seleniumStats, jsStats));
-        String max = df2.format(max(seleniumStats, jsStats));
+        String min = df2(min(seleniumStats, jsStats));
+        String max = df2(max(seleniumStats, jsStats));
         System.out.println("Min [" + min + "] and Max [" + max + "]");
         return format("Selenium[average:%s];JS[average:%s];Ratio[average:%s;min:%s;max:%s]",
-            avSelenium, avJdi, avRatio, min, max);
+            df2(avSelenium), df2(avJdi), avRatio, min, max);
     }
-    private static final DecimalFormat df2 = new DecimalFormat("#.##");
+    private static String df2(double value) {
+        return new DecimalFormat("#.##").format(value);
+    }
 
     private static double getAverage(Collection<Long> times) {
         return toLong(times).average().orElse(-1);

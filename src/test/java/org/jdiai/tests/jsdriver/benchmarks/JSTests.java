@@ -60,8 +60,7 @@ public class JSTests extends TestInit {
             return "id:"+id+",ui:"+ui+",tag:"+tag+",font:"+font+",bg-color:"+bgColor;
         }, () -> {
             Json data = $("#users-table").getJson(
-        "const styles = getComputedStyle(element);\n" +
-                "return { 'id': element.id, 'ui': element.getAttribute('ui'), 'tag': element.tagName, " +
+                "{ 'id': element.id, 'ui': element.getAttribute('ui'), 'tag': element.tagName, " +
                 "'font': styles.fontSize, 'bg-color': styles.backgroundColor }");
             return data.toString();
         },
