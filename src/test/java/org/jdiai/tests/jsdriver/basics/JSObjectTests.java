@@ -156,7 +156,7 @@ public class JSObjectTests extends TestInit {
     @Test
     public void valueTest() {
         boolean isVisible = element(TextInfo.class, "#user-icon").getValue(
-            "let styles = getComputedStyle(element);\n" +
+            "const styles = getComputedStyle(element);\n" +
                     "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
@@ -164,7 +164,7 @@ public class JSObjectTests extends TestInit {
     @Test
     public void valueLocatorListTest() {
         boolean isVisible = element(TextInfo.class, withParent("#user-icon")).getValue(
-            "let styles = getComputedStyle(element);\n" +
+            "const styles = getComputedStyle(element);\n" +
                     "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);

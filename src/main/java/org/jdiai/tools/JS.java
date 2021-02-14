@@ -6,6 +6,7 @@ import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import com.google.gson.JsonObject;
 import org.jdiai.interfaces.HasLocators;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.HasParent;
@@ -29,12 +30,14 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.copyList;
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.jdiai.jsdriver.WebDriverByUtils.NAME_TO_LOCATOR;
+import static org.jdiai.jsdriver.WebDriverByUtils.*;
+import static org.jdiai.jsdriver.jsbuilder.GetTypes.dataType;
 import static org.jdiai.tools.GetTextTypes.INNER_TEXT;
 import static org.jdiai.tools.VisualSettings.*;
 import static org.jdiai.visual.Direction.VECTOR_SIMILARITY;
@@ -62,19 +65,36 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         this(driver, newList(locators));
     }
     public JS(WebDriver driver, By locator, Object parent) {
-        this(driver, locatorsFromParent(locator, parent)); this.parent = parent;
+        this(driver, locator, parent, true);
     }
-    private static List<By> locatorsFromParent(By locator, Object parent) {
-        List<By> locators;
-        if (parent != null && isInterface(parent.getClass(), HasLocators.class)) {
-            List<By> pLocators = ((HasLocators)parent).locators();
-            locators = pLocators != null && pLocators.size() > 0
-                    ? copyList(pLocators) : new ArrayList<>();
-        } else {
-            locators = new ArrayList<>();
+    public JS(WebDriver driver, By locator, Object parent, boolean useParentLocators) {
+        this(driver, locatorsFromParent(locator, parent, useParentLocators));
+        this.parent = parent;
+        if (isClass(parent.getClass(), JS.class)) {
+            this.js.updateDriver(((JS) parent).js.jsDriver());
+        }
+    }
+    private static List<By> locatorsFromParent(By locator, Object parent, boolean useParentLocators) {
+        List<By> locators = new ArrayList<>();
+        if (useParentLocators) {
+            if (parent != null && isInterface(parent.getClass(), HasLocators.class)) {
+                List<By> pLocators = ((HasLocators) parent).locators();
+                if (pLocators != null && pLocators.size() > 0) {
+                    locators.addAll(copyList(pLocators));
+                }
+            }
         }
         locators.add(locator);
         return locators;
+    }
+    public String getElement(String valueFunc) {
+        return js.getValue(valueFunc);
+    }
+    public List<String> getList(String valueFunc) {
+        return js.getValues(valueFunc);
+    }
+    public String filterElements(String valueFunc) {
+        return js.firstValue(valueFunc);
     }
     public String getJSResult(String action) {
         return js.getAttribute(action);
@@ -198,6 +218,10 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public String getAttribute(String attrName) {
         return getJSResult("getAttribute('" + attrName + "')");
     }
+
+    public Json getJson(String valueFunc) {
+        return js.getMap(valueFunc);
+    }
     public String attr(String attrName) {
         return getAttribute(attrName);
     }
@@ -215,7 +239,8 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
 
     public Json getAllAttributes() {
-        return js.getMap("return [...element.attributes].reduce((map,attr)=> { map[attr.name]=attr.value; return map; }, {})");
+        return js.getMap("return '{'+[...element.attributes].map((attr)=> `'${attr.name}'='${attr.value}'`).join()+'}'");
+        //return js.getMap("return [...element.attributes].reduce((map,attr)=> { map.set('attr.name','attr.value'); return map; }, new Map())");
     }
     public String printHtml() {
         return MessageFormat.format("<{0} {1}>{2}</{0}>", getTagName().toLowerCase(),
@@ -273,7 +298,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
 
     public boolean isDisplayed() {
-        return js.getValue("let styles = getComputedStyle(element);\n" +
+        return getElement("const styles = getComputedStyle(element);\n" +
             "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
                 .equalsIgnoreCase("true");
     }
@@ -370,7 +395,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         return makeScreenshot(DEFAULT_IMAGE_TYPE);
     }
     public StreamToImageVideo makeScreenshot(ImageTypes imageType) {
-        String stream = js.getValue("if (element.toDataURL) { return element."+canvas2Image(imageType)+"; }\n"
+        String stream = getElement("if (element.toDataURL) { return element."+canvas2Image(imageType)+"; }\n"
             + "try { return "+element2Image(imageType)+"; } catch {\n"
             + "return await import(`https://html2canvas.hertzen.com/dist/html2canvas.min.js`).then("
             + "() => "+element2Image(imageType)+") }"
@@ -381,7 +406,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         startRecording(VIDEO_WEBM);
     }
     public void startRecording(ImageTypes imageType) {
-        String value = js.getValue("let blobs = [];\n" +
+        String value = getElement("let blobs = [];\n" +
             "const recorder = new MediaRecorder(element.captureStream(), { mimeType: '" + imageType.value + "' });\n" +
             "recorder.ondataavailable = (e) => {\n" +
             "  if (e.data && e.data.size > 0) { blobs.push(e.data); }\n}\n" +
@@ -402,7 +427,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         js.jsExecute("window.jdiRecorder.stop();");
         String stream = "";
         Timer timer = new Timer(renderTimeout);
-        while (stream.length() < 10 && !timer.timeoutPassed()) {
+        while (stream.length() < 10 && timer.isRunning()) {
             stream = js.jsExecute("return window.jdiVideoBase64;");
         }
         return new StreamToImageVideo(stream, imageType);
@@ -415,18 +440,18 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
     public StreamToImageVideo recordCanvasVideo(ImageTypes imageType, int sec) {
         startRecording(imageType);
-        Timer.sleep((sec+1) * 1000);
+        Timer.sleep((sec+1) * 1000L);
         return stopRecordingAndSave(imageType);
     }
     // TODO Experimental record video for any element
     public StreamToImageVideo recordVideo(int sec) {
         js.jsExecute("await import(`https://html2canvas.hertzen.com/dist/html2canvas.min.js`)");
-        js.getValue(Whammy.script);
-        Timer.sleep((sec+5) * 1000);
+        getElement(Whammy.script);
+        Timer.sleep((sec+5) * 1000L);
         js.jsExecute("jdi.recording = false; jdi.compile();");
         String stream = "";
         Timer timer = new Timer(renderTimeout);
-        while (stream.length() < 10 && !timer.timeoutPassed()) {
+        while (stream.length() < 10 && timer.isRunning()) {
             stream = js.jsExecute("return jdi.videoBase64");
         }
         return new StreamToImageVideo(stream, VIDEO_WEBM);
@@ -437,6 +462,9 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         this.objectMap = objectMap;
         this.js.setEntity(cl);
         return this;
+    }
+    public JsonObject getJSObject(String json) {
+        return js.getJson(json);
     }
     public <T> T getEntity() {
         return js.getEntity(objectMap);
@@ -450,12 +478,45 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         return find(NAME_TO_LOCATOR.execute(by));
     }
     public JS find(By by) {
-        return new JS(this.driver, by, this);
+        return new JS(this.driver, by, this, false);
     }
     public JS firstChild() { return find("*"); }
 
-    public JS findFirst(By by) {
-        return new JS(driver, by, this);
+    public List<String> values(GetTextTypes getTextType) {
+        return js.getAttributeList(getTextType.value);
+    }
+    public List<String> values() {
+        return values(getTextType);
+    }
+    public List<JsonObject> getObjectList(String json) {
+        return js.getJsonList(json);
+    }
+    public <T> List<T> getEntityList() {
+        return js.getEntityList(objectMap);
+    }
+    public <T> List<T> getEntityList(String objectMap, Class<?> cl) {
+        js.setEntity(cl);
+        return js.getEntityList(objectMap);
+    }
+
+    public JS findFirst(String by, Condition condition) {
+        return findFirst(defineLocator(by), condition.addTextType(getTextType).getScript());
+    }
+    public JS findFirst(By by, Condition condition) {
+        return findFirst(by, condition.addTextType(getTextType).getScript());
+    }
+    public JS findFirst(String by, String condition) {
+        return findFirst(defineLocator(by), condition);
+    }
+    public JS findFirst(By by, String condition) {
+        JS result = new JS(driver);
+        result.js.jsDriver().builder().addContextCode(js.jsDriver().buildList().rawQuery() + "element = elements.find(e => { const td = " +
+            MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+"; " +
+            "return td && td."+ condition + "; });\n");
+        result.js.jsDriver().elementCtx();
+        result.js.jsDriver().builder().updateFromBuilder(js.jsDriver().builder());
+        js.jsDriver().builder().cleanup();
+        return result;
     }
     // TODO
     // public WebList finds(@MarkupLocator String by) {
@@ -472,7 +533,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         return isClickable(dimension.getWidth()/2, dimension.getHeight()/2-1);
     }
     public boolean isClickable(int x, int y) {
-        return js.getValue("rect = element.getBoundingClientRect();\n" +
+        return getElement("rect = element.getBoundingClientRect();\n" +
             "cx = rect.left + "+x+";\n" +
             "cy = rect.top + "+y+";\n" +
             "e = document.elementFromPoint(cx, cy);\n" +

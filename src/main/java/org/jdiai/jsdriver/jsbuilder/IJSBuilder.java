@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface IJSBuilder {
     IJSBuilder addJSCode(String code);
+    IJSBuilder addContextCode(String code) ;
 
     IJSBuilder oneToOne(String ctx, By locator);
     IJSBuilder listToOne(By locator);
@@ -22,7 +23,11 @@ public interface IJSBuilder {
     IJSBuilder registerFunction(String name, String function);
     void registerVariables(String... vars);
     String registerVariable(String variable);
+    String rawQuery();
     String getQuery();
     IJSBuilder setTemplate(String replaceTo);
     IJSBuilder logQuery();
+    void cleanup();
+    void updateFromBuilder(IJSBuilder builder);
+    IJSBuilder copy();
 }

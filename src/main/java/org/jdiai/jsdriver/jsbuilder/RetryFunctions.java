@@ -12,7 +12,7 @@ public class RetryFunctions {
     public static JFunc2<JavascriptExecutor, String, Object> RETRY_TIMEOUT = (js, jsScript) -> {
         Timer t = new Timer(1000);
         Object obj = null;
-        while (obj == null && !t.timeoutPassed()) {
+        while (obj == null && t.isRunning()) {
             try {
                 obj = js.executeScript(jsScript);
             } catch (Exception ignore) { }
@@ -25,7 +25,7 @@ public class RetryFunctions {
     public static JFunc2<JavascriptExecutor, String, List<String>> LIST_RETRY_TIMEOUT = (js, jsScript) -> {
         Timer t = new Timer(1000);
         List<String> obj = null;
-        while (obj == null && !t.timeoutPassed()) {
+        while (obj == null && t.isRunning()) {
             try {
                 obj = (List<String>) js.executeScript(jsScript);
                 if (obj == null || obj.size() == 0) {

@@ -20,6 +20,12 @@ public class JSElement {
     public JSDriver jsDriver() {
         return driver;
     }
+    public void updateDriver(JSDriver driver) {
+        this.driver.context = driver.context;
+        this.driver.strategy = driver.strategy;
+        this.driver.setBuilder(driver.builder());
+    }
+
     public void multiSearch() {
         driver.multiSearch();
     }

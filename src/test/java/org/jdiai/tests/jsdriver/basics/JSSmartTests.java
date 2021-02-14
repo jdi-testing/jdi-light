@@ -115,7 +115,7 @@ public class JSSmartTests extends TestInit {
     @Test
     public void jsonTest() {
         JsonObject json = $("#user-icon")
-                .getJson("{ 'id': element.id, 'source': element.src, 'tag': element.tagName }");
+            .getJson("{ 'id': element.id, 'source': element.src, 'tag': element.tagName }");
         assertEquals(json.get("id").getAsString(), "user-icon");
         assertEquals(json.get("source").getAsString(), DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(json.get("tag").getAsString(), "IMG");
@@ -123,7 +123,7 @@ public class JSSmartTests extends TestInit {
     @Test
     public void jsonLocatorListTest() {
         JsonObject json = $(withParent("#user-icon"))
-                .getJson("{ 'id': element.id, 'source': element.src, 'tag': element.tagName }");
+            .getJson("{ 'id': element.id, 'source': element.src, 'tag': element.tagName }");
         assertEquals(json.get("id").getAsString(), "user-icon");
         assertEquals(json.get("source").getAsString(), DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(json.get("tag").getAsString(), "IMG");
@@ -132,7 +132,7 @@ public class JSSmartTests extends TestInit {
     public void jsonMultiTest() {
         atSimplePage();
         List<JsonObject> headers = $("#furniture-double-hidden th")
-                .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
+            .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
 
         assertEquals(headers.get(0).get("text").getAsString(), "Name");
@@ -143,7 +143,7 @@ public class JSSmartTests extends TestInit {
     public void jsonMultiLocatorListTest() {
         atSimplePage();
         List<JsonObject> headers = $("#furniture-double-hidden", "th")
-                .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
+            .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
 
         assertEquals(headers.get(0).get("text").getAsString(), "Name");
@@ -240,7 +240,7 @@ public class JSSmartTests extends TestInit {
     @Test
     public void valueTest() {
         boolean isVisible = $(TextInfo.class, "#user-icon").getValue(
-            "let styles = getComputedStyle(element);\n" +
+            "const styles = getComputedStyle(element);\n" +
                     "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
@@ -248,7 +248,7 @@ public class JSSmartTests extends TestInit {
     @Test
     public void valueLocatorListTest() {
         boolean isVisible = $(TextInfo.class, withParent("#user-icon")).getValue(
-            "let styles = getComputedStyle(element);\n" +
+            "const styles = getComputedStyle(element);\n" +
                     "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);

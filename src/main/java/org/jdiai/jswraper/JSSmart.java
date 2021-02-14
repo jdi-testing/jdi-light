@@ -47,6 +47,12 @@ public class JSSmart extends JSElement {
     public String getValue(String valueFunc) {
         return driver.getOne(valueFunc).asString();
     }
+    public List<String> getValues(String valueFunc) {
+        return driver.getList(valueFunc).asString();
+    }
+    public String firstValue(String valueFunc) {
+        return driver.getFirst(valueFunc).asString();
+    }
     public Json getMap(String valueFunc) {
         return driver.getOne(valueFunc).asMap();
     }
