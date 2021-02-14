@@ -35,6 +35,16 @@ public class JSTests extends TestInit {
             () -> $("#users-table tr>th").getText(),
         200) + "\n";
     }
+
+    @Test(invocationCount = repeat)
+    public void multiLocator() {
+        totalResult += "multiLocator: " + testScenario(
+            () -> driver().findElement(By.cssSelector("#users-table"))
+                .findElement(By.xpath(".//tr[2]"))
+                .findElement(By.tagName("td")).getText(),
+            () -> $("#users-table", ".//tr[2]", "td").getText(),
+            200) + "\n";
+    }
     @Test(invocationCount = repeat)
     public void getAllAttributes() {
         totalResult += "getAllAttributes: " + testScenario(() -> {
@@ -47,7 +57,7 @@ public class JSTests extends TestInit {
         },
         () -> $(".sidebar-tooltip").getAllAttributes().toString(),
         200) + "\n";
-    }//<div data-toggle="tooltip" data-placement="right" title="Toggle Navigation" class="sidebar-tooltip">
+    }
     @Test(invocationCount = repeat)
     public void getMultiData() {
         totalResult += "getMultiData: " + testScenario(() -> {
@@ -75,20 +85,28 @@ public class JSTests extends TestInit {
         30) + "\n";
     }
     @Test(invocationCount = repeat)
-    public void getValueTest() {
-         totalResult += "getValueTest: " + testScenario(() -> {
-            List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr"));
-            WebElement row = elements.stream().filter(el -> {
-                WebElement td = null;
-                boolean isExist = true;
-                try {
-                    td = el.findElement(By.cssSelector("td:first-child"));
-                } catch (Exception ex) { isExist = false; }
-                return isExist && td.getText().equals(value);
-            }).findFirst().get();
-            return row.findElement(By.xpath(".//td[3]")).getText();
+    public void getValueByIndexTest() {
+        totalResult += "getValueByNameTest: " + testScenario(
+            () -> driver().findElements(By.cssSelector("#users-table tr"))
+                .get(index).findElement(By.xpath(".//td[3]")).getText(),
+            () -> $("#users-table tr").get(index).find("td").get(2).getText(),
+        200) + "\n";
+    }
+    @Test(invocationCount = repeat)
+    public void getValueByNameTest() {
+        totalResult += "getValueByNameTest: " + testScenario(() -> {
+        List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr"));
+        WebElement row = elements.stream().filter(el -> {
+            WebElement td = null;
+            boolean isExist = true;
+            try {
+                td = el.findElement(By.cssSelector("td:first-child"));
+            } catch (Exception ex) { isExist = false; }
+            return isExist && td.getText().equals(value);
+        }).findFirst().get();
+        return row.findElement(By.xpath(".//td[3]")).getText();
         }, () -> $("#users-table tr").findFirst("td", textEquals(value)).find(".//td[3]").getText(),
-         30) + "\n";;
+    30) + "\n";
     }
 
     @AfterClass
