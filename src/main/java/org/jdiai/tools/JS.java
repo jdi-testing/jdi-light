@@ -11,7 +11,6 @@ import org.jdiai.interfaces.HasLocators;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.HasParent;
 import org.jdiai.jsdriver.JSException;
-import org.jdiai.jsdriver.jsbuilder.IJSBuilder;
 import org.jdiai.jsdriver.jsproducer.Json;
 import org.jdiai.jswraper.JSSmart;
 import org.jdiai.scripts.Whammy;

@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.LongStream;
 
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
 
