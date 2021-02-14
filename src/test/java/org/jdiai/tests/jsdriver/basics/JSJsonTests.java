@@ -103,16 +103,16 @@ public class JSJsonTests extends TestInit {
     @Test
     public void valueTest() {
         boolean isVisible = json("#user-icon").getValue(
-                "let styles = getComputedStyle(element);\n" +
-                        "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+        "const styles = getComputedStyle(element);\n" +
+                "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
                 .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
     @Test
     public void valueLocatorListTest() {
         boolean isVisible = json(withParent("#user-icon")).getValue(
-                "let styles = getComputedStyle(element);\n" +
-                        "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+        "const styles = getComputedStyle(element);\n" +
+                "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
                 .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }

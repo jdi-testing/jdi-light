@@ -13,14 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.jsdriver.jsbuilder.RetryFunctions.LIST_RETRY_DEFAULT;
 import static org.jdiai.jsdriver.jsbuilder.RetryFunctions.RETRY_DEFAULT;
 
 public class JSBuilder implements IJSBuilder {
     protected List<String> variables = new ArrayList<>();
     protected String query = "";
+    protected String ctxCode = "";
     protected String replaceValue;
     protected JavascriptExecutor js;
     public static boolean LOG_QUERY = false;
@@ -31,6 +34,7 @@ public class JSBuilder implements IJSBuilder {
     protected MapArray<String, String> useFunctions = new MapArray<>();
     protected IBuilderActions builderActions;
 
+    public JSBuilder() { }
     public JSBuilder(WebDriver driver) {
         this(driver, null);
     }
@@ -71,6 +75,8 @@ public class JSBuilder implements IJSBuilder {
         return result;
     }
     public static JFunc2<JavascriptExecutor, String, List<String>> LIST_RETRY = LIST_RETRY_DEFAULT;
+    private static boolean smartStringify = true;
+    public static void switchOffStringify() { smartStringify = false; }
     public List<String> executeAsList() {
         String jsScript = getQuery();
         if (logQuery)
@@ -90,6 +96,10 @@ public class JSBuilder implements IJSBuilder {
     }
     public IJSBuilder addJSCode(String code) {
         query += code;
+        return this;
+    }
+    public IJSBuilder addContextCode(String code) {
+        ctxCode += code;
         return this;
     }
     public IJSBuilder oneToOne(String ctx, By locator) {
@@ -117,9 +127,25 @@ public class JSBuilder implements IJSBuilder {
         return addJSCode("element.dispatchEvent(new Event('" + event + "', { " + options + " }));\n");
     }
     protected String getCollector(String collectResult) {
-        return collectResult.trim().startsWith("{") || collectResult.trim().startsWith("[")
-            ? "JSON.stringify(" + collectResult + ")"
-            : collectResult;
+        if (smartStringify) {
+            if (collectResult.trim().contains("return {") && collectResult.trim().contains("}")) {
+                return collectResult.replace("return {", "return JSON.stringify({")
+                        .replace("}", "})");
+            }
+            if (collectResult.trim().contains("return [") && collectResult.trim().contains("]")) {
+                return collectResult.replace("return [", "return JSON.stringify([")
+                        .replace("}", "})");
+            }
+            if (collectResult.trim().startsWith("{") && collectResult.trim().contains("}")) {
+                return collectResult.replace("{", "JSON.stringify({")
+                        .replace("}", "})");
+            }
+            if (collectResult.trim().startsWith("[") && collectResult.trim().contains("]")) {
+                return collectResult.replace("[", "JSON.stringify([")
+                        .replace("]", "])");
+            }
+        }
+        return collectResult;
     }
 
     // region private
@@ -133,6 +159,12 @@ public class JSBuilder implements IJSBuilder {
         if (!variables.contains(variable))
             variables.add(variable);
         return variable + " = ";
+    }
+    private String beforeScript() {
+        return isNotBlank(ctxCode) ? ctxCode + "\n": "";
+    }
+    public String rawQuery() {
+        return beforeScript() + query;
     }
     public String getQuery() {
         String script = getScript();
@@ -150,13 +182,33 @@ public class JSBuilder implements IJSBuilder {
         String letVariables = variables.size() > 1
             ? print(variables, ", ") + ";\n"
             : "";
-        return jsScript + "let " + letVariables + query;
+        return jsScript + "let " + letVariables + rawQuery();
     }
-    protected void cleanup() {
+    public void cleanup() {
         useFunctions.clear();
         query = "";
         variables = new ArrayList<>();
         replaceValue = null;
+        ctxCode = "";
+    }
+    public void updateFromBuilder(IJSBuilder builder) {
+        if (!isClass(builder.getClass(), JSBuilder.class))
+            return;
+        JSBuilder jsBuilder = (JSBuilder) builder;
+        useFunctions.addAll(jsBuilder.useFunctions);
+        variables.addAll(jsBuilder.variables);
+        ctxCode = jsBuilder.ctxCode + ctxCode;
+    }
+    public JSBuilder copy() {
+        JSBuilder result = new JSBuilder();
+        result.builderActions = builderActions;
+        result.ctxCode = ctxCode;
+        result.js = js;
+        result.useFunctions = useFunctions;
+        result.logQuery = logQuery;
+        result.replaceValue = replaceValue;
+        result.variables = variables;
+        return result;
     }
     // endregion
 }

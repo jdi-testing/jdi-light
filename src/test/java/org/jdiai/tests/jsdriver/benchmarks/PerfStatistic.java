@@ -3,18 +3,22 @@ package org.jdiai.tests.jsdriver.benchmarks;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.LongStream;
 
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
 
 public class PerfStatistic {
-    public static  <T> void testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
+    public static  <T> String testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
         List<Long> seleniumStats = new ArrayList<>();
         List<Long> jsStats = new ArrayList<>();
         for (int i = 0; i < count; i++) {
+            System.out.println("RUN №"+ i);
             Timer t = new Timer();
             T seleniumResult = seleniumAction.execute();
             long seleniumTime = t.timePassedInMSec();
@@ -31,11 +35,38 @@ public class PerfStatistic {
         double avJdi = getAverage(jsStats);
         System.out.println("Average Selenium: " + avSelenium);
         System.out.println("Average JS: " + avJdi);
-        System.out.println("Average Ratio: "+avSelenium/avJdi);
+        String avRatio = df2.format(avSelenium/avJdi);
+        System.out.println("Average Ratio: " + avRatio);
+        String min = df2.format(min(seleniumStats, jsStats));
+        String max = df2.format(max(seleniumStats, jsStats));
+        System.out.println("Min [" + min + "] and Max [" + max + "]");
+        return format("Selenium[average:%s];JS[average:%s];Ratio[average:%s;min:%s;max:%s]",
+            avSelenium, avJdi, avRatio, min, max);
     }
+    private static final DecimalFormat df2 = new DecimalFormat("#.##");
 
     private static double getAverage(Collection<Long> times) {
         return toLong(times).average().orElse(-1);
+    }
+    private static double min(List<Long> selenium, List<Long> js) {
+        double min = Double.MAX_VALUE;
+        for (int i = 0; i < js.size(); i++) {
+            double ratio = (double) selenium.get(i)/js.get(i);
+            if (min > ratio) {
+                min = ratio;
+            }
+        }
+        return min;
+    }
+    private static double max(List<Long> selenium, List<Long> js) {
+        double max = -1;
+        for (int i = 0; i < js.size(); i++) {
+            double ratio = (double) selenium.get(i) / js.get(i);
+            if (max < ratio) {
+                max = ratio;
+            }
+        }
+        return max;
     }
     private static LongStream toLong(Collection<Long> collection) {
         return collection.stream().mapToLong(a -> a);

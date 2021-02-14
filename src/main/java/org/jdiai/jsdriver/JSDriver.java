@@ -17,7 +17,8 @@ public class JSDriver {
     private final WebDriver driver;
     public final List<By> locators;
     private IJSBuilder builder;
-    protected ListSearch strategy = CHAIN;
+    public ListSearch strategy = CHAIN;
+    public String context = "document";
 
     private static IJSBuilder defaultBuilder(WebDriver driver) {
         return new JSBuilder(driver, new BuilderActions());
@@ -40,13 +41,21 @@ public class JSDriver {
     }
 
     public JSDriver setBuilder(IJSBuilder builder) {
-        this.builder = builder;
+        this.builder = builder.copy();
+        return this;
+    }
+    public JSDriver elementCtx() {
+        builder().registerVariable("element");
+        context = "element";
         return this;
     }
 
-    protected IJSBuilder buildOne() {
+    public IJSBuilder buildOne() {
+        if (locators().isEmpty()) {
+            return builder();
+        }
         if (locators().size() == 1) {
-            return builder().oneToOne("document", firstLocator());
+            return builder().oneToOne(context, firstLocator());
         }
         switch (strategy) {
             case CHAIN: return buildOneChain();
@@ -57,9 +66,9 @@ public class JSDriver {
     public JSProducer getOne(String collector) {
         return new JSProducer(buildOne().getResult(collector).executeQuery());
     }
-    protected IJSBuilder buildList() {
+    public IJSBuilder buildList() {
         if (locators().size() == 1) {
-            return builder().oneToList("document", firstLocator());
+            return builder().oneToList(context, firstLocator());
         }
         switch (strategy) {
             case CHAIN: return buildListChain();
@@ -70,18 +79,24 @@ public class JSDriver {
     public JSListProducer getList(String collector) {
         return new JSListProducer(buildList().getResultList(collector).executeAsList());
     }
+    public JSProducer getFirst(String collector) {
+        return new JSProducer(buildList().getResult(collector).executeQuery());
+    }
     public long getCount() {
         try {
             return (Long) buildList().addJSCode("return elements.length;").executeQuery();
         } catch (Exception ignore) { return -1; }
     }
 
-    protected IJSBuilder buildOneChain() {
+    public IJSBuilder buildOneChain() {
+        if (locators().isEmpty()) {
+            return builder();
+        }
         if (locators().size() == 1) {
             return buildOne();
         }
         IJSBuilder builder =  builder();
-        String ctx = "document";
+        String ctx = context;
         for (By locator : locators()) {
             builder.oneToOne(ctx, locator);
             ctx = "element";
@@ -91,11 +106,14 @@ public class JSDriver {
     public JSProducer getOneChain(String collector) {
         return new JSProducer(buildOneChain().getResult(collector).executeQuery());
     }
-    protected IJSBuilder buildOneMultiSearch() {
+    public IJSBuilder buildOneMultiSearch() {
+        if (locators().isEmpty()) {
+            return builder();
+        }
         if (locators().size() == 1) {
             return buildOne();
         }
-        builder() .oneToList("document", firstLocator());
+        builder().oneToList(context, firstLocator());
         for (By locator : listCopy(locators(), 1, -1)) {
             builder.listToList(locator);
         }
@@ -105,11 +123,11 @@ public class JSDriver {
     public JSProducer getOneMultiSearch(String collector) {
         return new JSProducer(buildOneMultiSearch().getResult(collector).executeQuery());
     }
-    protected IJSBuilder buildListChain() {
+    public IJSBuilder buildListChain() {
         if (locators().size() == 1) {
             return buildList();
         }
-        String ctx = "document";
+        String ctx = context;
         for (By locator : listCopyUntil(locators(), -1)) {
             builder().oneToOne(ctx, locator);
             ctx = "element";
@@ -124,7 +142,7 @@ public class JSDriver {
         if (locators().size() == 1) {
             return buildList();
         }
-        builder().oneToList("document", firstLocator());
+        builder().oneToList(context, firstLocator());
         if (locators().size() > 2) {
             for (By locator : listCopy(locators(), 1, -1)) {
                 builder().listToList(locator);
