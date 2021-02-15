@@ -18,7 +18,7 @@ public class Badge extends UIBaseElement<BadgeAssert> {
 
     @Override
     public BadgeAssert has() {
-        return new BadgeAssert().set(this);
+        return this.is();
     }
 
     @JDIAction("Get content of '{name}'")
