@@ -14,6 +14,7 @@ import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.layouts.BoxFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
@@ -68,6 +69,13 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
+    // layouts
+    //box
+    @Frame("storybook-preview-iframe")
+    public static BoxFrame boxFrame;
+
+    @Url("/material-ui-box--default")
+    public static WebPage defaultBoxPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
