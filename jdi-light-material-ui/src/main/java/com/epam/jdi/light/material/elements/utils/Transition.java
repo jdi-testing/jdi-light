@@ -42,7 +42,7 @@ public class Transition extends UIBaseElement<TransitionAssert> implements ISetu
 
     @Override
     public TransitionAssert has() {
-        return new TransitionAssert().set(this);
+        return this.is();
     }
 
     @Override
