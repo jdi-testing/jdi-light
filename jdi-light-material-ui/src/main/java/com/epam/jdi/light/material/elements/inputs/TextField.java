@@ -38,7 +38,7 @@ public class TextField extends UIBaseElement<TextFieldAssert> {
 
     @Override
     public TextFieldAssert has() {
-        return new TextFieldAssert().set(this);
+        return this.is();
     }
 
 }
