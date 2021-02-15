@@ -11,4 +11,7 @@ public class DialogFrame extends Section {
     @JDIDialog(root = "#root")
     public Dialog scrollDialog;
 
+    @JDIDialog(root = "#root")
+    public Dialog dialogWithInput;
+
 }

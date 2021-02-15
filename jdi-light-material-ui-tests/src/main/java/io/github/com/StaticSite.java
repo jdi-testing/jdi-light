@@ -17,7 +17,7 @@ import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("http://localhost:6006/?path=/story")
 public class StaticSite {
 
     // inputs
@@ -79,6 +79,9 @@ public class StaticSite {
 
     @Url("/material-ui-feedback-dialog--dialog-with-list")
     public static WebPage feedbackWithListDialogPage;
+
+    @Url("/material-ui-feedback-dialog--dialog-form")
+    public static WebPage feedbackWithInputDialogPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;

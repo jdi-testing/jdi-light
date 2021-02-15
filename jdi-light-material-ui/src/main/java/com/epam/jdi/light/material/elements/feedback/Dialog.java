@@ -50,9 +50,9 @@ public class Dialog extends UIBaseElement<DialogAssert> implements ISetup {
     }
 
     public void selectOption(String option){
-        System.out.println();
+//        System.out.println();
         this.finds(dialogOptions).select(option);
-        System.out.println();
+//        System.out.println();
     }
 
 

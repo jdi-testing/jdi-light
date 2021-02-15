@@ -12,12 +12,14 @@ import java.lang.annotation.Target;
 public @interface JDIDialog {
 
   @MarkupLocator String root() default "";
-  @MarkupLocator String button() default ".MuiButton-label";
+  @MarkupLocator String button() default ".MuiButton-label"; //remove
   @MarkupLocator String dialogTitle() default "h2";
-  @MarkupLocator String dialogContent() default ".MuiDialogContentText-root";
-  @MarkupLocator String dialogInputField() default ".MuiInput-input";
+  @MarkupLocator String dialogContent() default ".MuiDialogContentText-root";//remove
   @MarkupLocator String dialogCloseButton() default "//*[text()='Close']";
   @MarkupLocator String dialogOkButton() default "//*[text()='Ok']";
+  @MarkupLocator String dialogCancelButton() default "//*[text()='Cancel']";
+
   @MarkupLocator String dialogOptions() default ".MuiListItemText-primary";
+  @MarkupLocator String dialogInputField() default ".MuiInput-input";
 
 }
