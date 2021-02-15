@@ -26,7 +26,7 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
 
     @Override
     public TooltipAssert has() {
-        return new TooltipAssert().set(this);
+        return this.is();
     }
 
     @Override
