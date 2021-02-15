@@ -12,6 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 
@@ -47,11 +48,17 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static ButtonGroupFrame buttonGroupFrame;
 
+    @Frame("storybook-preview-iframe")
+    public static SplitButtonGroupFrame splitButtonGroupFrame;
+
     @Url("/material-ui-buttongroup--default")
     public static WebPage inputButtonGroupDefaultPage;
 
     @Url("/material-ui-buttongroup--disabled")
     public static WebPage inputButtonGroupDisabledPage;
+
+    @Url("/material-ui-buttongroup--split-button")
+    public static WebPage inputButtonGroupSplitPage;
 
     // surfaces
     // accordion
