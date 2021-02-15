@@ -17,13 +17,14 @@ import java.util.stream.Collectors;
 
 public abstract class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
 
+  private String itemCheckbox;
+  private String leftListItems;
+  private String rightListItems;
+
   String moveRightButton;
   String moveLeftButton;
   String moveAllRightButton;
   String moveAllLeftButton;
-  String itemCheckbox;
-  String leftListItems;
-  String rightListItems;
   String allItemsLeftCheckbox;
   String allItemsRightCheckbox;
 
