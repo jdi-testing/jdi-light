@@ -30,7 +30,7 @@ public class ButtonTests extends TestsInit {
         try {
             buttonFrame.button.click();
             fail("Disabled button shouldn't work, but it does");
-        } catch (Exception ex) {
+        } catch (RuntimeException ex) {
             assertThat(safeException(ex),
                     containsString("Can't perform click. Element is disabled"));
         }

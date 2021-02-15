@@ -1,7 +1,6 @@
 package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.ElementClickInterceptedException;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.tools.LinqUtils.safeException;
@@ -31,7 +30,7 @@ public class FabTests extends TestsInit {
         try {
             fabFrame.fab.click();
             fail("Disabled button shouldn't work, but it does");
-        } catch (Exception ex) {
+        } catch (RuntimeException ex) {
             assertThat(safeException(ex),
                     containsString("Can't perform click. Element is disabled"));
         }

@@ -12,7 +12,7 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
 
     @JDIAction("Assert that '{name}' text is '{0}'")
     public ButtonAssert text(Matcher<String> condition) {
-        jdiAssert(element().getValue(), condition);
+        jdiAssert(element().getText(), condition);
         return this;
     }
 
@@ -26,7 +26,7 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
     @JDIAction("Assert that '{name}' is disabled")
     @Override
     public ButtonAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true));
+        jdiAssert(element().hasClass("Mui-disabled"), Matchers.is(true));
         return this;
     }
 
