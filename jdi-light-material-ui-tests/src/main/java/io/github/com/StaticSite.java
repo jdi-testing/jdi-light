@@ -16,6 +16,7 @@ import io.github.com.pages.feedback.DialogFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.PaperFrame;
 
 @JSite("http://localhost:6006/?path=/story")
 public class StaticSite {
@@ -54,6 +55,13 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
+
+    // paper
+    @Frame("storybook-preview-iframe")
+    public static PaperFrame paperFrame;
+
+    @Url("/material-ui-surfaces-paper--default")
+    public static WebPage surfacePaperDefaultPage;
 
     // inputs
     // switch
