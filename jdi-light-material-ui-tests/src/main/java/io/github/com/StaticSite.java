@@ -10,9 +10,12 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.displaydata.InsetDividerFrame;
+import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.PaperFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -51,6 +54,27 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
+
+    // paper
+    @Frame("storybook-preview-iframe")
+    public static PaperFrame paperFrame;
+
+    @Url("/material-ui-surfaces-paper--default")
+    public static WebPage surfacePaperDefaultPage;
+
+    // inputs
+    // switch
+    @Frame("storybook-preview-iframe")
+    public static InsetDividerFrame insetDividerFrame;
+
+    @Url("/material-ui-data-display-dividers--inset-dividers-view")
+    public static WebPage dataDisplayInsetDividerPage;
+
+    @Frame("storybook-preview-iframe")
+    public static VerticalDividerFrame verticalDividerFrame;
+
+    @Url("/material-ui-data-display-dividers--vertical-dividers-view")
+    public static WebPage dataDisplayVerticalDividerPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
