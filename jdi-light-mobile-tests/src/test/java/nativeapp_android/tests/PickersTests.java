@@ -53,12 +53,12 @@ public class PickersTests extends ApiDemosTestInit {
         timePickerButton.click();
         picker.is().displayed();
         picker.setHour();
-        pressKey(new KeyEvent(AndroidKey.DIGIT_5));
-        pressKey(new KeyEvent(AndroidKey.ENTER));
+        pressKey(AndroidKey.DIGIT_5);
+        pressKey(AndroidKey.ENTER);
         picker.is().selected("5");
         picker.setMinute();
-        pressKey(new KeyEvent(AndroidKey.DIGIT_5));
-        pressKey(new KeyEvent(AndroidKey.ENTER));
+        pressKey(AndroidKey.DIGIT_5);
+        pressKey(AndroidKey.ENTER);
         picker.is().selected("05");
         picker.setInterval("PM");
         picker.is().selected("PM");

@@ -17,7 +17,7 @@ public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTou
         return new TabBarAssert().set(this);
     }
 
-    @JDIAction(value = "Check that '{name}' is selected")
+    @JDIAction(value = "Get selected value from '{name}'")
     public String isSelected() {
         return core().get().findElements(By.id("android:id/title"))
         .stream()
@@ -25,7 +25,7 @@ public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTou
         .findFirst().get().getAttribute("text");
     }
 
-    @JDIAction(value = "Check that '{name}' is selected")
+    @JDIAction(value = "Select {0} on '{name}'")
     public void selectByText(String tabName) {
         core().get().findElements(By.id("android:id/title"))
                 .stream()
@@ -33,7 +33,7 @@ public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTou
                 .findFirst().get().click();
     }
 
-    @JDIAction(value = "Check that '{name}' is selected")
+    @JDIAction(value = "Select tab {0} on '{name}'")
     public void selectByNumber(int tabNumber) {
         core().get().findElements(By.className("android.widget.LinearLayout")).get(tabNumber-1).click();
     }

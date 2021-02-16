@@ -52,7 +52,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
         }
     }
 
-    @JDIAction("Select {0} in '{name}'")
+    @JDIAction("Select time {0} in '{name}'")
     public void selectTimePicker(String time) {
         core().get().findElements(By.className("android.widget.RadialTimePickerView$RadialPickerTouchHelper"))
                 .stream()
@@ -60,7 +60,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
                 .findFirst().get().click();
     }
 
-    @JDIAction("Select {0} in '{name}'")
+    @JDIAction("Select date {0} in '{name}'")
     public void selectDatePicker(String date) {
         core().get().findElements(By.className("android.view.View"))
                 .stream()
@@ -68,7 +68,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
                 .findFirst().get().click();
     }
 
-    @JDIAction("Select {0} in '{name}'")
+    @JDIAction("Select year {0} in '{name}'")
     public void selectYearPicker(String value){
         WebElement list= getDriver().findElement(
                 new MobileBy.ByAndroidUIAutomator(
@@ -78,7 +78,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
         list.click();
     }
 
-    @JDIAction("Select {0} in '{name}'")
+    @JDIAction("Swipe hour to {0} in '{name}'")
     public void swipeHour(String hour){
 
         WebElement hours=getDriver().findElements(By.id("android:id/numberpicker_input")).get(0);
@@ -96,7 +96,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
         }
     }
 
-    @JDIAction("Select {0} in '{name}'")
+    @JDIAction("Swipe minutes to {0} in '{name}'")
     public void swipeMinute(String minute){
 
         WebElement minutes = getDriver().findElements(By.id("android:id/numberpicker_input")).get(1);
@@ -114,7 +114,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
         }
     }
 
-    @JDIAction("Select {0} in '{name}'")
+    @JDIAction("Swipe interval to {0} in '{name}'")
     public void swipeInterval(String interval){
 
         WebElement intervals=getDriver().findElements(By.id("android:id/numberpicker_input")).get(2);
@@ -127,29 +127,29 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
         }
     }
 
-    @JDIAction("Select {0} in '{name}'")
+    @JDIAction("Set hour to {0} in '{name}'")
     public void setHour() {
         core().get().findElements(By.id("android:id/numberpicker_input")).get(0).click();
     }
 
-    @JDIAction("Select {0} in '{name}'")
+    @JDIAction("Set minute to {0} in '{name}'")
     public void setMinute() {
         core().get().findElements(By.id("android:id/numberpicker_input")).get(1).click();
     }
 
-    @JDIAction("Select {0} in '{name}'")
+    @JDIAction("Set interval to {0} in '{name}'")
     public void setInterval(String interval) {
         core().get().findElements(By.id("android:id/numberpicker_input")).get(2).click();
         switch (interval){
             case "AM":
-                pressKey(new KeyEvent(AndroidKey.A));
-                pressKey(new KeyEvent(AndroidKey.M));
-                pressKey(new KeyEvent(AndroidKey.ENTER));
+                pressKey(AndroidKey.A);
+                pressKey(AndroidKey.M);
+                pressKey(AndroidKey.ENTER);
                 break;
             case "PM":
-                pressKey(new KeyEvent(AndroidKey.P));
-                pressKey(new KeyEvent(AndroidKey.M));
-                pressKey(new KeyEvent(AndroidKey.ENTER));
+                pressKey(AndroidKey.P);
+                pressKey(AndroidKey.M);
+                pressKey(AndroidKey.ENTER);
                 break;
             default:
                 break;

@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -82,12 +83,12 @@ public class JdiSettings {
 
     @JDebug
     public static List<WebElement> filterElements(JDIBase base, List<WebElement> elements) {
-        if (elements.size() == 0)
+        if (ObjectUtils.isEmpty(elements))
             return new ArrayList<>();
         List<WebElement> result = elements;
         for (JFunc1<WebElement, Boolean> rule : base.searchRules().values())
             result = filter(result, rule::execute);
-        if (result.size() == 0 && base.textType == LABEL)
+        if (ObjectUtils.isEmpty(result) && base.textType == LABEL)
             return elements;
         return result;
     }
@@ -98,9 +99,11 @@ public class JdiSettings {
     }
 
     private static void validateFoundElement(JDIBase base, WebElement element) {
-        for (JFunc1<WebElement, Boolean> rule : base.searchRules().values())
-            if (!rule.execute(element))
+        for (JFunc1<WebElement, Boolean> rule : base.searchRules().values()) {
+            if (!rule.execute(element)) {
                 throw exception(SEARCH_RULE_VALIDATION_FAILED);
+            }
+        }
     }
 
     private static SearchContext getContextByLocator(JDIBase base, By locator) {
@@ -113,13 +116,14 @@ public class JdiSettings {
             return  (JDIBase) element;
         else {
             if (isInterface(element.getClass(), IBaseElement.class))
-                return ((IBaseElement) element).base(); }
+                return ((IBaseElement) element).base();
+        }
         return null;
     }
     private static SearchContext getSearchContext(WebDriver driver, Object parent) {
         JDIBase base = getBase(parent);
         if (base == null)
-            return DEFAULT_CONTEXT.execute(driver);        ;
+            return DEFAULT_CONTEXT.execute(driver);
         if (base.webElement.hasValue())
             return base.webElement.get();
         if (base.locator.isRoot() && base.locator.isNull())

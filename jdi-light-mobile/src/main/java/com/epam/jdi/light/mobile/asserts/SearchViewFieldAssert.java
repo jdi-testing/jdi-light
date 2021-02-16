@@ -10,7 +10,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SearchViewFieldAssert extends UIAssert<SearchViewFieldAssert, ISearchViewField> implements ISearchViewFieldAssert<SearchViewFieldAssert> {
 
-    @JDIAction("Assert that '{name}' is iconified")
+    @JDIAction("Assert that '{name}' is enabled")
     @Override
     public SearchViewFieldAssert enabled() {
         jdiAssert(element.get().isEnabled(), Matchers.is(true));

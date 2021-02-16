@@ -21,7 +21,6 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
 import static com.epam.jdi.light.common.UseSmartSearch.UI_AND_ELEMENTS;
-import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.lang.String.format;

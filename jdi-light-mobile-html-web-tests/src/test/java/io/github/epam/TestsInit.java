@@ -14,7 +14,6 @@ import pseudo.site.PseudoSite;
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
-import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
 
@@ -35,9 +34,5 @@ public interface TestsInit {
     default void tearDown() {
         new AllurePropertiesGenerator().createAllureProperties();
         killAllSeleniumDrivers();
-    }
-
-    default boolean isFireFox() {
-        return DRIVER.name.toLowerCase().equals("firefox");
     }
 }
