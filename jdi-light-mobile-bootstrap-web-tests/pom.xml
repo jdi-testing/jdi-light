@@ -5,7 +5,7 @@
     <parent>
         <artifactId>jdi-2</artifactId>
         <groupId>com.epam.jdi</groupId>
-        <version>1.3.3</version>
+        <version>1.3.6</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -21,6 +21,7 @@
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.6</aspectj.version>
+        <jdi.version>1.3.6</jdi.version>
         <suite.xml.file>src/test/resources/demoRun.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/general.xml</suite.xml.file>
     </properties>
@@ -30,17 +31,17 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-bootstrap</artifactId>
-            <version>1.3.3</version>
+            <version>${jdi.version}</version>
         </dependency>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-mobile-tests</artifactId>
-            <version>1.3.3</version>
+            <version>${jdi.version}</version>
         </dependency>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-mobile</artifactId>
-            <version>1.3.3</version>
+            <version>${jdi.version}</version>
             <scope>test</scope>
         </dependency>
 
