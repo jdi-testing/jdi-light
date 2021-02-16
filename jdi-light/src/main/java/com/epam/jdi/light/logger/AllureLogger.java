@@ -2,16 +2,12 @@ package com.epam.jdi.light.logger;
 
 import com.epam.jdi.light.actions.ActionObject;
 import com.epam.jdi.light.elements.common.Alerts;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import io.qameta.allure.model.StepResult;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.logging.LogEntry;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,7 +15,6 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeRobotScreenshot;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.logger.AttachmentStrategy.OFF;
 import static com.epam.jdi.light.logger.AttachmentStrategy.ON_FAIL;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -28,7 +23,6 @@ import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static io.qameta.allure.Allure.addAttachment;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
 import static io.qameta.allure.model.Status.PASSED;
@@ -56,120 +50,39 @@ public class AllureLogger {
         String detailsUUID = startStep(stepName);
         try {
             if (screenshot) {
-                attachScreenshot();
+                String screenPath;
+                try {
+                    screenPath = makeScreenshot("After test");
+                    attachScreenshot("Screenshot", screenPath);
+                } catch (Exception ex) {
+                    attachText("Screenshot failed", "text/plain", ex.getMessage());
+                }
             }
             if (pageSource) {
-                attachPageSource();
+                String htmlCode;
+                try {
+                    htmlCode = getDriver().getPageSource();
+                    attachText("HTML Code", "text/html", htmlCode);
+                } catch (Exception ex) {
+                    attachText("HTML Code failed", "text/plain", ex.getMessage());
+                }
             }
             if (htmlErrors) {
-                attachHttpErrors();
+                String httpErrors;
+                try {
+                    httpErrors = getHtmlErrors();
+                    attachText("HTTP Errors", "text/plain", httpErrors);
+                } catch (Exception ex) {
+                    attachText("HTTP Errors failed", "text/plain", ex.getMessage());
+                }
             }
             if (video) {
-                attachVideo(DRIVER.videoUrl);
+                addAttachment("Video", "text/html", htmlVideo(DRIVER.videoUrl), ".html");
             }
         } catch (Exception ex) {
             throw exception(ex, "Failed to add attachments to Allure step");
         }
-        getLifecycle().stopStep(detailsUUID);
-    }
-
-    public static void attachScreenshotStep(ICoreElement element) {
-        attachScreenshotStep(element.getName(), element.core());
-    }
-    public static void attachScreenshotStep(String stepName, WebElement element) {
-        String detailsUUID = startStep(stepName);
-        try {
-            UIElement uiElement = isInterface(element.getClass(), ICoreElement.class)
-                    ? ((ICoreElement)element).core()
-                    : $(element);
-            File elementScreen = uiElement.makePhoto();
-            attachScreenshot("Screenshot", elementScreen.getAbsolutePath());
-        } catch (Exception ex) {
-            attachText("Screenshot failed", "text/plain", ex.getMessage());
-        }
-        getLifecycle().stopStep(detailsUUID);
-    }
-    public static void attachScreenshotStep(String stepName) {
-        String detailsUUID = startStep(stepName);
-        String screenPath;
-        try {
-            screenPath = makeScreenshot("After test");
-            attachScreenshot("Screenshot", screenPath);
-        } catch (Exception ex) {
-            attachText("Screenshot failed", "text/plain", ex.getMessage());
-        }
-        getLifecycle().stopStep(detailsUUID);
-    }
-    private static void attachScreenshot() {
-        String screenPath;
-        try {
-            screenPath = makeScreenshot("After test");
-            attachScreenshot("Screenshot", screenPath);
-        } catch (Exception ex) {
-            attachText("Screenshot failed", "text/plain", ex.getMessage());
-        }
-    }
-
-    public static void attachPageSourceStep(String stepName) {
-        String detailsUUID = startStep(stepName);
-        attachPageSource();
-        getLifecycle().stopStep(detailsUUID);
-    }
-    private static void attachPageSource() {
-        String htmlCode;
-        try {
-            htmlCode = getDriver().getPageSource();
-            attachText("HTML Code", "text/html", htmlCode);
-        } catch (Exception ex) {
-            attachText("HTML Code failed", "text/plain", ex.getMessage());
-        }
-    }
-    public static void attachElementHtmlStep(ICoreElement element) {
-        attachElementHtmlStep(element.getName(), element.core());
-    }
-    public static void attachElementHtmlStep(String stepName, WebElement element) {
-        String detailsUUID = startStep(stepName);
-        try {
-            UIElement uiElement = isInterface(element.getClass(), ICoreElement.class)
-                    ? ((ICoreElement)element).core()
-                    : $(element);
-            String html = uiElement.printHtml();
-            attachText("HTML Code", "text/html", html);
-        } catch (Exception ex) {
-            attachText("Screenshot failed", "text/plain", ex.getMessage());
-        }
-        getLifecycle().stopStep(detailsUUID);
-    }
-
-    public static void attachHttpErrorsStep(String stepName) {
-        String detailsUUID = startStep(stepName);
-        attachHttpErrors();
-        getLifecycle().stopStep(detailsUUID);
-    }
-    private static void attachHttpErrors() {
-        String httpErrors;
-        try {
-            httpErrors = getHtmlErrors();
-            attachText("HTTP Errors", "text/plain", httpErrors);
-        } catch (Exception ex) {
-            attachText("HTTP Errors failed", "text/plain", ex.getMessage());
-        }
-    }
-
-    public static void attachVideoStep(String stepName) {
-        attachVideoStep(stepName, DRIVER.videoUrl);
-    }
-    public static void attachVideoStep(String stepName, String videoUrl) {
-        String detailsUUID = startStep(stepName);
-        attachVideo(videoUrl);
-        getLifecycle().stopStep(detailsUUID);
-    }
-    private static void attachVideo(String videoUrl) {
-        addAttachment("Video", "text/html", htmlVideo(videoUrl), ".html");
-    }
-
-    private static String htmlVideo(String url) {
-        return "<html><body><video width='100%' height='100%' controls autoplay><source src='"+url+"' type='video/mp4'></video></body></html>";
+            getLifecycle().stopStep(detailsUUID);
     }
     public static void createScreenAttachment(String screenName) {
         String screenPath = makeScreenshot(screenName);
@@ -280,8 +193,8 @@ public class AllureLogger {
         try {
             Timer.sleep(200);
             return SCREEN.tool.equalsIgnoreCase("robot") || isAssert
-                    ? takeRobotScreenshot(screenName)
-                    : takeScreen(screenName);
+                ? takeRobotScreenshot(screenName)
+                : takeScreen(screenName);
         } catch (Exception ignore) { return ""; }
     }
     public static String getHtmlErrors() {
@@ -292,6 +205,14 @@ public class AllureLogger {
         List<String> errorEntries = map(filter(requests, filterHttpRequests),
                 logEntry -> beautifyJson(logEntry.getMessage()));
         return print(errorEntries);
+    }
+    public static void attachVideoStep(String stepName, String videoUrl) {
+        String detailsUUID = startStep(stepName);
+        addAttachment(stepName, "text/html", htmlVideo(videoUrl), ".html");
+        getLifecycle().stopStep(detailsUUID);
+    }
+    private static String htmlVideo(String url) {
+        return "<html><body><video width='100%' height='100%' controls autoplay><source src='"+url+"' type='video/mp4'></video></body></html>";
     }
 
 }
