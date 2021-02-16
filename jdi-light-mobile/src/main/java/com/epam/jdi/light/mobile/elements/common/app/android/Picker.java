@@ -34,7 +34,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
     }
 
     @JDIAction(value = "Check that '{name}' is selected")
-    public String isSelected(String selected) {
+    public String getSelected(String selected) {
         return core().get().findElements(By.id("android:id/numberpicker_input")).stream()
                 .filter(element -> element.getAttribute("text").equals(selected))
                 .findFirst().get().getAttribute("text");
