@@ -2,13 +2,14 @@ package com.epam.jdi.light.material.asserts.inputs;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.material.asserts.CommonAssertMaterialUi;
 import com.epam.jdi.light.material.elements.inputs.Button;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
+public class ButtonAssert extends CommonAssertMaterialUi<ButtonAssert, Button> {
 
     @JDIAction("Assert that '{name}' text is '{0}'")
     public ButtonAssert text(Matcher<String> condition) {

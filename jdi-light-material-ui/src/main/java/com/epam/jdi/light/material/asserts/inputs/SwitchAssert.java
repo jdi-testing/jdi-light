@@ -2,13 +2,14 @@ package com.epam.jdi.light.material.asserts.inputs;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.material.asserts.CommonAssertMaterialUi;
 import com.epam.jdi.light.material.elements.inputs.Switch;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
+public class SwitchAssert extends CommonAssertMaterialUi<SwitchAssert, Switch> {
 
     @JDIAction("Assert that '{name}' is enabled")
     @Override
