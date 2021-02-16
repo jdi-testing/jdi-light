@@ -12,6 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
+import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
@@ -75,6 +76,14 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
+
+    // feedback
+    // backdrop
+    @Frame("storybook-preview-iframe")
+    public static BackdropFrame backdropFrame;
+
+    @Url("/material-ui-feedback-backdrop--default-backdrop")
+    public static WebPage feedbackBackdropDefaultPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
