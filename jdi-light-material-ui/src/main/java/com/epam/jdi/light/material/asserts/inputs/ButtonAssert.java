@@ -12,7 +12,7 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
 
     @JDIAction("Assert that '{name}' text is '{0}'")
     public ButtonAssert text(Matcher<String> condition) {
-        jdiAssert(element().getValue(), condition);
+        jdiAssert(element().getText(), condition);
         return this;
     }
 
