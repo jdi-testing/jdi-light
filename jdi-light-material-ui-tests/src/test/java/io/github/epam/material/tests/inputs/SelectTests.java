@@ -16,24 +16,26 @@ public class SelectTests extends TestsInit {
     @Test
     public void disabledSelectTest() {
         inputSelectDisabledPage.open();
-        selectFrame.select.is().disabled();
+        selectFrame.disabledSelect.is().disabled();
     }
 
     @Test
     public void simpleSelectTest() {
-        String item = "Henry";
+        String item1 = "Henry";
+        String item2 = "Hansen";
 
         inputSelectSimplePage.open();
-        selectFrame.select.is().enabled();
-        selectFrame.select.selectItem(item);
-        selectFrame.select.is().itemTextDisplayed(item);
-        selectFrame.select.is().collapsed();
+        selectFrame.simpleSelect.is().enabled();
+        selectFrame.simpleSelect.open();
+        selectFrame.simpleSelect.is().expanded();
+        selectFrame.simpleSelect.selectItemByText(item1);
+        selectFrame.simpleSelect.is().itemTextDisplayed(item1);
 
-        inputSelectSimplePage.open();
-        selectFrame.select.is().enabled();
-        selectFrame.select.selectItem(1);
-        selectFrame.select.is().itemTextDisplayed(item);
-        selectFrame.select.is().collapsed();
+        selectFrame.simpleSelect.is().enabled();
+        selectFrame.simpleSelect.open();
+        selectFrame.simpleSelect.is().expanded();
+        selectFrame.simpleSelect.selectItemByIndex(1);
+        selectFrame.simpleSelect.is().itemTextDisplayed(item2);
     }
 
     @Test
@@ -41,9 +43,11 @@ public class SelectTests extends TestsInit {
         List<String> items = Arrays.asList("Omar", "Carlos", "Miriam");
 
         inputSelectMultiplePage.open();
-        selectFrame.select.is().enabled();
-        selectFrame.select.multipleSelect(items);
-        selectFrame.select.close();
-        selectFrame.select.is().itemsTextDisplayed(items);
+        selectFrame.multipleSelect.is().enabled();
+        selectFrame.multipleSelect.open();
+        selectFrame.multipleSelect.is().expanded();
+        selectFrame.multipleSelect.multipleSelect(items);
+        selectFrame.multipleSelect.close();
+        selectFrame.multipleSelect.is().itemsTextDisplayed(items);
     }
 }
