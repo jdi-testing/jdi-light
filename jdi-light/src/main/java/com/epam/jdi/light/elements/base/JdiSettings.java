@@ -29,7 +29,6 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class JdiSettings {
     public static JAction2<JDIBase, WebElement> VALIDATE_FOUND_ELEMENT = JdiSettings::validateFoundElement;
@@ -124,7 +123,7 @@ public class JdiSettings {
     private static SearchContext getSearchContext(WebDriver driver, Object parent) {
         JDIBase base = getBase(parent);
         if (base == null)
-            return DEFAULT_CONTEXT.execute(driver);        ;
+            return DEFAULT_CONTEXT.execute(driver);
         if (base.webElement.hasValue())
             return base.webElement.get();
         if (base.locator.isRoot() && base.locator.isNull())

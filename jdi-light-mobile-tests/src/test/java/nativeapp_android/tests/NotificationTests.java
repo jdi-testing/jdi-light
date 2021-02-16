@@ -50,7 +50,7 @@ public class NotificationTests extends ApiDemosTestInit {
     public void actionsReplyTest() {
         notificationPanel.is().displayed();
         reply.tap();
-        MobileKeyboard.pressKey(new KeyEvent(AndroidKey.A));
+        MobileKeyboard.pressKey(AndroidKey.A);
         send.tap();
         messageNames.get(1).is().text(NUMBER);
         messageNames.get(2).is().text(YOU);

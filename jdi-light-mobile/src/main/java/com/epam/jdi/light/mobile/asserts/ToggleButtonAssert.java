@@ -12,18 +12,18 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ToggleButtonAssert extends UIAssert<ToggleButtonAssert, ToggleButton> implements ITextAssert<ToggleButtonAssert> {
     @JDIAction("Assert that '{name}' is on")
     public ToggleButtonAssert on() {
-        jdiAssert(getIsOn(), Matchers.is("on"));
+        jdiAssert(getState(), Matchers.is("on"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is off")
     public ToggleButtonAssert off() {
-        jdiAssert(getIsOn(), Matchers.is("off"));
+        jdiAssert(getState(), Matchers.is("off"));
         return this;
     }
 
 
-    protected String getIsOn() {
+    protected String getState() {
         return element().isOn() ? "on" : "off";
     }
 

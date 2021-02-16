@@ -16,22 +16,22 @@ public class CreateNewContact {
     @FindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Spinner")
     private DataListOptions phoneType;
 
-    public void fillInNewContactInformation() {
-        fillName();
-        fillLastName();
-        choosePhoneType();
+    public void fillInNewContactInformation(String contactName, String contactLastName, int phoneTypeIdx) {
+        fillName(contactName);
+        fillLastName(contactLastName);
+        choosePhoneType(phoneTypeIdx);
     }
 
-    private void choosePhoneType() {
-        phoneType.select(3);
+    private void choosePhoneType(int typeIdx) {
+        phoneType.select(typeIdx);
     }
 
-    private void fillName() {
-        name.sendKeys("TestName");
+    private void fillName(String contactName) {
+        name.sendKeys(contactName);
     }
 
-    private void fillLastName() {
-        lastName.sendKeys("TestLastName");
+    private void fillLastName(String contactLastName) {
+        lastName.sendKeys(contactLastName);
     }
 
 }

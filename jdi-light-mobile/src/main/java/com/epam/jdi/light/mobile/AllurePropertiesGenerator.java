@@ -31,38 +31,41 @@ public class AllurePropertiesGenerator {
     }
 
     public void createAllureProperties() {
-        if(initiated == false) {
-            String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-            String propsPath = rootPath + "test.properties";
-            Properties appProps = new Properties();
-            try {
-                appProps.load(new FileInputStream(propsPath));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            List<String> properties = Arrays.asList(
-                    formatProperties(DRIVER, "Chrome", appProps),
-                    formatProperties(DEVICE_NAME_PROPERTY, "unset in test.properties", appProps),
-                    formatProperties(PLATFORM_NAME_PROPERTY, "Chrome", appProps),
-                    formatProperties(APPIUM_URL_PROPERTY, "-", appProps)
-            );
-
-            try {
-                Path allureResults = Paths.get(getSystemResource("").toURI()).getParent();
-                allureResults = Paths.get(allureResults.toAbsolutePath().toString(),
-                        ALLURE_RESULTS_DIR, ENVIRONMENT_PROPERTIES_FILENAME);
-                if (!Files.exists(allureResults.getParent())) {
-                    Files.createDirectories(allureResults.getParent());
-                }
-                logger.info(String.format("allure prop file path: %s", allureResults.toAbsolutePath()));
-                Files.write(allureResults, properties, StandardCharsets.UTF_8);
-            } catch (Exception e) {
-                logger.error("Can not create property file for allure results.", e);
-                logger.toLog(e.toString());
-            }
-            initiated = true;
+        if (initiated) {
+            return;
         }
+
+        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String propsPath = rootPath + "test.properties";
+        Properties appProps = new Properties();
+        try {
+            appProps.load(new FileInputStream(propsPath));
+        } catch (IOException e) {
+            logger.error("Error during read test.properties file from %s. %s", propsPath, e);
+        }
+
+        List<String> properties = Arrays.asList(
+                formatProperties(DRIVER, "Chrome", appProps),
+                formatProperties(DEVICE_NAME_PROPERTY, "unset in test.properties", appProps),
+                formatProperties(PLATFORM_NAME_PROPERTY, "Chrome", appProps),
+                formatProperties(APPIUM_URL_PROPERTY, "-", appProps)
+        );
+
+        try {
+            Path allureResults = Paths.get(getSystemResource("").toURI()).getParent();
+            allureResults = Paths.get(allureResults.toAbsolutePath().toString(),
+                    ALLURE_RESULTS_DIR, ENVIRONMENT_PROPERTIES_FILENAME);
+            if (!Files.exists(allureResults.getParent())) {
+                Files.createDirectories(allureResults.getParent());
+            }
+            logger.info(String.format("allure prop file path: %s", allureResults.toAbsolutePath()));
+            Files.write(allureResults, properties, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            logger.error("Can not create property file for allure results.", e);
+            logger.toLog(e.toString());
+        }
+        initiated = true;
+
     }
 
     private String formatProperties(String propertyName, String defValue, Properties appProps) {

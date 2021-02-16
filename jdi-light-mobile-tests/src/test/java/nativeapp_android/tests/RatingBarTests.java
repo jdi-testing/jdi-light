@@ -34,7 +34,7 @@ public class RatingBarTests extends ApiDemosTestInit {
         };
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void init(){
         IndexPage.viewsPage.click();
         MobileScreen.scrollToElementInList(IndexPage.goToRatingBar);

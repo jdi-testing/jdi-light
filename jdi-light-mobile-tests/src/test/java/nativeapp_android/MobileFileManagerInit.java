@@ -23,10 +23,11 @@ public class MobileFileManagerInit {
     protected File createdFile;
     protected File pulledFile;
     public static final String FILE_NAME_TEST = "TEST.txt";
-    protected static final String PATH_TO_FILE_ANDROID = "/sdcard/download/" + FILE_NAME_TEST;
     protected static final String PATH_TO_ANDROID_FOLDER = "/sdcard/download";
-    protected static final String PATH_TO_FILE_LOCAL = "src/main/resources/" + FILE_NAME_TEST;
+    protected static final String PATH_TO_FILE_ANDROID = PATH_TO_ANDROID_FOLDER + FILE_NAME_TEST;
     protected static final String FILE_PULL_PATH_LOCAL = "src/main/resources/";
+    protected static final String PATH_TO_FILE_LOCAL = FILE_PULL_PATH_LOCAL + FILE_NAME_TEST;
+
 
     @BeforeClass(alwaysRun = true)
     public void setUp() {

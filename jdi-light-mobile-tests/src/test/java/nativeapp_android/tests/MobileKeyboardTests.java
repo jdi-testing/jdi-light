@@ -27,16 +27,16 @@ public class MobileKeyboardTests extends ApiDemosTestInit {
     @Test
     public void pressKeyTest() {
         TextFieldsPage.visibleTextField.tap();
-        MobileKeyboard.pressKey(new KeyEvent(AndroidKey.APOSTROPHE));
+        MobileKeyboard.pressKey(AndroidKey.APOSTROPHE);
         assertThat(TextFieldsPage.visibleTextField.getText()).isEqualTo("'");
     }
 
     @Test
     public void longPressKeyTest() {
         TextFieldsPage.visibleTextField.tap();
-        MobileKeyboard.pressKey(new KeyEvent(AndroidKey.APOSTROPHE));
-        MobileKeyboard.pressKey(new KeyEvent(AndroidKey.APOSTROPHE));
-        MobileKeyboard.longPressKey(new KeyEvent(AndroidKey.DEL));
+        MobileKeyboard.pressKey(AndroidKey.APOSTROPHE);
+        MobileKeyboard.pressKey(AndroidKey.APOSTROPHE);
+        MobileKeyboard.longPressKey(AndroidKey.DEL);
         assertThat(TextFieldsPage.visibleTextField.getText())
                 .isEqualTo("");
     }

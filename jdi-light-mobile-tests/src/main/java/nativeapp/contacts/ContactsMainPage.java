@@ -9,10 +9,10 @@ public class ContactsMainPage {
     private static final String LOCATOR_PATH = "com.google.android.contacts:id/";
 
     @FindBy(id = LOCATOR_PATH + "floating_action_button")
-    public static Button addNewContactBtn;
+    public Button addNewContactBtn;
 
     @FindBy(id = "android:id/text1")
-    public static Text noContactsInThisAccountText;
+    public Text noContactsInThisAccountText;
 
     public void createNewContact(){
         addNewContactBtn.click();

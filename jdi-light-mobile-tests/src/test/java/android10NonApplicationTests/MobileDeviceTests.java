@@ -13,6 +13,7 @@ import java.time.Duration;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class MobileDeviceTests extends ApiDemosTestInit {
 
@@ -56,10 +57,13 @@ public class MobileDeviceTests extends ApiDemosTestInit {
 
     @Test
     public void performanceDataTest() {
-        System.out.println(MobileDevice.getPerformanceDataTypes());
-        System.out.println(MobileDevice.getPerformanceData("", "cpuinfo", 5));
-        System.out.println(MobileDevice.getPerformanceData("", "batteryinfo", 5));
-        System.out.println(MobileDevice.getPerformanceData("", "networkinfo", 5));
+        logger.info("Performace data types %s", MobileDevice.getPerformanceDataTypes());
+        logger.info("CPU info %s",
+                MobileDevice.getPerformanceData("", "cpuinfo", 5));
+        logger.info("Battery info",
+                MobileDevice.getPerformanceData("", "batteryinfo", 5));
+        logger.info("Network info %s",
+                MobileDevice.getPerformanceData("", "networkinfo", 5));
     }
 
     @AfterClass(alwaysRun = true)

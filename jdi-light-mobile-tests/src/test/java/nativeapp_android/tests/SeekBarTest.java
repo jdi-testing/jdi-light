@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class SeekBarTest extends ApiDemosTestInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void init() {
         MobileScreen.scrollToElementInList(IndexPage.viewsPage);
         IndexPage.viewsPage.click();
