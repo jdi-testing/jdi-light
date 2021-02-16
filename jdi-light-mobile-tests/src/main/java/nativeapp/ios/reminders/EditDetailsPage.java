@@ -9,21 +9,21 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 public class EditDetailsPage {
 
     @MobileFindBy(xpath = "//XCUIElementTypeNavigationBar[@name=\"Details\"]")
-    public static NavigationBar detailsNavBar;
+    public NavigationBar detailsNavBar;
 
     @MobileFindBy(xpath = "//XCUIElementTypeSwitch[contains(@name, 'Date')]")
-    public static Switch dateSwitch;
+    public Switch dateSwitch;
 
     @MobileFindBy(accessibilityId = "Date")
-    public static Button dateButton;
+    public Button dateButton;
 
     @MobileFindBy(accessibilityId = "Show year picker")
-    public static Button showYearPicker;
+    public Button showYearPicker;
 
     @MobileFindBy(xpath = "//XCUIElementTypeTable[@name=\"ReminderDetail.ID.DetailsTable\"]/XCUIElementTypeCell[4]/XCUIElementTypePicker/XCUIElementTypePickerWheel[2]")
-    public static PickerWheel yearPicker;
+    public PickerWheel yearPicker;
 
     @MobileFindBy(xpath = "//XCUIElementTypeTable[@name=\"ReminderDetail.ID.DetailsTable\"]/XCUIElementTypeCell[4]/XCUIElementTypePicker/XCUIElementTypePickerWheel[1]")
-    public static PickerWheel monthPicker;
+    public PickerWheel monthPicker;
 
 }
