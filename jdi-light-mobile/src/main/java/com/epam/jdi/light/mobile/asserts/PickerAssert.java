@@ -13,7 +13,7 @@ public class PickerAssert extends UIAssert<PickerAssert, Picker> implements ITex
 
     @JDIAction(value = "Assert that {0} value selected for '{name}'")
     public PickerAssert selected(String selectedElement) {
-        jdiAssert(element().isSelected(selectedElement), Matchers.is(selectedElement));
+        jdiAssert(element().getSelected(selectedElement), Matchers.is(selectedElement));
         return this;
     }
 

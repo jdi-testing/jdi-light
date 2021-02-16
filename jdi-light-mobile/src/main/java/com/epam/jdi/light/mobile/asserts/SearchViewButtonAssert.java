@@ -18,7 +18,6 @@ public class SearchViewButtonAssert extends UIAssert<SearchViewButtonAssert, ISe
         }
 
         @JDIAction("Assert that '{name}' is iconified")
-        @Override
         public SearchViewButtonAssert iconifiedByDefault() {
             jdiAssert(element.get().isIconified(), Matchers.is(true));
             return this;

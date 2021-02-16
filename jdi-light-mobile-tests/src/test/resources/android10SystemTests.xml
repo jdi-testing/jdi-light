@@ -7,10 +7,8 @@
             <class name="android10NonApplicationTests.ClipBoardTests"></class>
             <class name="android10NonApplicationTests.MobileDeviceTests"></class>
             <class name="android10NonApplicationTests.MobileFileManagerTests"></class>
-            <class name="android10NonApplicationTests.SettingsAppTests"></class>
             <class name="android10NonApplicationTests.ToggleButtonTests"></class>
             <class name="android10NonApplicationTests.ToggleAirplaneModeTests"></class>
-            <class name="android10NonApplicationTests.ToggleDataTests"></class>
             <class name="android10NonApplicationTests.ToggleWiFiTests"></class>
         </classes>
     </test>

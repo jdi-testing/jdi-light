@@ -37,9 +37,6 @@ public class NotifyPage {
     @MobileFindBy(xpath = "//*[@resource-id='com.android.systemui:id/notification_stack_scroller']/android.widget.FrameLayout[1]//*[@resource-id='android:id/time']")
     public static Text timeStamp;
 
-    @MobileFindBy(xpath = "//android.widget.Switch[@content-desc=\"Mobile data, Mobile data off\"]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ImageView")
-    public static Button toggleDataIcon;
-
     @MobileFindBy(xpath = "//android.widget.Switch[@content-desc=\"Wi-Fi,Wifi signal full.,AndroidWifi\"]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.ImageView")
     public static Button wifiIcon;
 

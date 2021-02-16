@@ -2,7 +2,6 @@ package com.epam.jdi.light.mobile.elements.common.app.android;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
-import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.mobile.asserts.ActionBarAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.app.IActionBar;
@@ -13,16 +12,10 @@ import org.openqa.selenium.WebElement;
 
 public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements IActionBar, HasTouchActions, IsButton {
 
-    @JDIAction(value = "Check that '{name}' is iconified")
-    @Override
-    public boolean isIconified() {
-        return core().isDisplayed();
-    }
-
     @JDIAction(value = "Set '{name}' expanded")
     @Override
     public void setExpanded() {
-        if (isIconified())
+        if (core().isDisplayed())
             core().tap();
     }
 

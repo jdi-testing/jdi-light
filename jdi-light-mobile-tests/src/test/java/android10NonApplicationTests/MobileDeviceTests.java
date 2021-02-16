@@ -48,14 +48,6 @@ public class MobileDeviceTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void mobileTimeTest() throws InterruptedException {
-        String deviceTime = MobileDevice.getDeviceTime();
-        getDriver().wait(3000);
-        String deviceTimeWithFormat = MobileDevice.getDeviceTime("DD-MM-YYYY");
-        assertThat(deviceTime).isNotEqualTo(deviceTimeWithFormat);
-    }
-
-    @Test
     public void performanceDataTest() {
         logger.info("Performace data types %s", MobileDevice.getPerformanceDataTypes());
         logger.info("CPU info %s",

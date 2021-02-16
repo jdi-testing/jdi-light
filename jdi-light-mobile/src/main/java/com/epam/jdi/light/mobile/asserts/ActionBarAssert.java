@@ -28,9 +28,4 @@ public class ActionBarAssert extends UIAssert<ActionBarAssert, IActionBar> imple
         return this;
     }
 
-    @Override
-    public ActionBarAssert iconifiedByDefault() {
-        jdiAssert(element.get().isIconified(), Matchers.is(true));
-        return this;
-    }
 }

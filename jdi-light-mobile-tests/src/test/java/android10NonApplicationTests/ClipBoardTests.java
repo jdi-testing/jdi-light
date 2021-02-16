@@ -21,15 +21,4 @@ public class ClipBoardTests extends SettingsAppTestsInit {
         String getText = MobileDevice.getClipBoardText();
         assertThat(getText.contains(text));
     }
-
-    @Test
-    public void clipBoardSetOnDeviceTest() throws InterruptedException {
-        MobileDevice.setClipBoardText(text);
-        SettingsApp.search.click();
-        TouchAction touchAction = new TouchAction((PerformsTouchActions) getDriver());
-        getDriver().wait(3000);
-        touchAction.press(PointOption.point(899, 1472)).release().perform();
-        touchAction.press(PointOption.point(291,1702)).release().perform();
-        assertThat(SettingsApp.searchText.getText().equals(text));
-    }
 }

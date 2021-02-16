@@ -4,9 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 
 public interface ISearchViewButtonAssert<A> {
 
-    @JDIAction("Assert that '{name}' is iconified")
-    A iconifiedByDefault();
-
     @JDIAction("Assert that '{name}' is enabled")
     A enabled();
 }
