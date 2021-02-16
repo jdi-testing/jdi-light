@@ -44,6 +44,19 @@
             <version>${jdi.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-bootstrap-tests</artifactId>
+            <version>${jdi.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-bootstrap-tests</artifactId>
+            <version>${jdi.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
 
         <!--Allure config in parent-->
         <dependency>
@@ -62,19 +75,7 @@
             <version>6.14.3</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-bootstrap-tests</artifactId>
-            <version>1.3.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-bootstrap-tests</artifactId>
-            <version>1.3.3</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
+
     </dependencies>
 
     <build>
