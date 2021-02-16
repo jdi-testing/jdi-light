@@ -14,6 +14,7 @@ import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
@@ -75,6 +76,29 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
+
+    // navigation
+    // links
+    @Frame("storybook-preview-iframe")
+    public static LinkFrame linkFrame;
+
+    @Url("/material-ui-navigation-link--default")
+    public static WebPage defaultLinkPage;
+
+    @Url("/material-ui-navigation-link--secondary")
+    public static WebPage secondaryLinkPage;
+
+    @Url("/material-ui-navigation-link--text-primary")
+    public static WebPage textPrimaryLinkPage;
+
+    @Url("/material-ui-navigation-link--text-secondary")
+    public static WebPage textSecondaryLinkPage;
+
+    @Url("/material-ui-navigation-link--error")
+    public static WebPage errorLinkPage;
+
+    @Url("/material-ui-navigation-link--underline-always")
+    public static WebPage underlineAlwaysLinkPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
