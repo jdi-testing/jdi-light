@@ -11,14 +11,14 @@ import org.hamcrest.Matchers;
 public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
 
     @JDIAction("Assert that dialog title text is correct")
-    public DialogAssert dialogTitleTextCorrect(String title) {
-        jdiAssert(title.equals(element().getDialogTitle()), Matchers.is(true));
+    public DialogAssert dialogDisplayed() {
+        jdiAssert(element().isDialogDisplayed(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that dialog title text is correct")
-    public DialogAssert dialogTitleTextDisplayed(String title) {
-        jdiAssert(element().getDialogTitle(), Matchers.is(true));
+    public DialogAssert titleDisplayed(String title) {
+        jdiAssert(element().isTitleCorrect(title), Matchers.is(true));
         return this;
     }
 

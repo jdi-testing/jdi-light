@@ -9,9 +9,12 @@ import com.epam.jdi.light.material.elements.inputs.Button;
 public class DialogFrame extends Section {
 
     @JDIDialog(root = "#root")
-    public Dialog scrollDialog;
+    public Dialog dialog;
 
-    @JDIDialog(root = "#root")
-    public Dialog dialogWithInput;
+    @UI(".MuiButton-label")
+    public Button button;
+
+    @UI(".MuiButtonBase-root")
+    public Button confirmButton;
 
 }

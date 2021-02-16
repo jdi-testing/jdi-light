@@ -5,56 +5,46 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIDialog;
-import com.epam.jdi.light.material.asserts.displaydata.DividerAssert;
 import com.epam.jdi.light.material.asserts.feedback.DialogAssert;
 
 import java.lang.reflect.Field;
 
 public class Dialog extends UIBaseElement<DialogAssert> implements ISetup {
 
-    String button;
-    String dialogTitle;
-    String dialogContent;
-    String dialogInputField;
-    String dialogCloseButton;
-    String dialogOkButton;
-    String dialogOptions;
-
-    @Override
-    public DialogAssert is() {
-        return new DialogAssert().set(this);
-    }
-
-    public void openDialog(){
-        this.find(button).click();
-    }
+    private String root;
+    private String dialogCancelButton;
+    private String dialogTitle;
+    private String dialogCloseButton;
+    private String dialogOkButton;
 
     public void clickCloseButton(){
         this.find(dialogCloseButton).click();
+    }
+
+    public void clickCancelButton(){
+        this.find(dialogCancelButton).click();
     }
 
     public void clickOkButton(){
         this.find(dialogOkButton).click();
     }
 
-    public String getDialogTitle(){
+    private String getDialogTitle(){
         return this.find(dialogTitle).getText();
     }
 
-    public String getDialogContent(){
-        return this.find(dialogContent).getText();
+    public boolean isTitleCorrect(String title){
+        return title.equals(getDialogTitle());
     }
 
-    public void setTextToInput(String text){
-        this.find(dialogInputField).setText(text);
+    public boolean isDialogDisplayed(){
+        return this.find(root).isDisplayed();
     }
 
-    public void selectOption(String option){
-//        System.out.println();
-        this.finds(dialogOptions).select(option);
-//        System.out.println();
+    @Override
+    public DialogAssert is() {
+        return new DialogAssert().set(this);
     }
-
 
     @Override
     public void setup(Field field) {
@@ -62,12 +52,11 @@ public class Dialog extends UIBaseElement<DialogAssert> implements ISetup {
             return;
         JDIDialog j = field.getAnnotation(JDIDialog.class);
 
-        button = j.button();
+        root = j.root();
         dialogTitle = j.dialogTitle();
-        dialogContent = j.dialogContent();
-        dialogInputField = j.dialogInputField();
         dialogCloseButton = j.dialogCloseButton();
         dialogOkButton = j.dialogOkButton();
-        dialogOptions = j.dialogOptions();
+        dialogCancelButton = j.dialogCancelButton();
+
     }
 }

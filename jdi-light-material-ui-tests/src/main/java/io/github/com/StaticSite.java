@@ -69,19 +69,16 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
-    // inputs
-    // switch
+    // feedback
+    // dialog
     @Frame("storybook-preview-iframe")
     public static DialogFrame dialogFrame;
 
-    @Url("/material-ui-feedback-dialog--dialog-scroll-body")
-    public static WebPage feedbackDialogPage;
+    @Url("/material-ui-feedback-dialog--dialog-alert")
+    public static WebPage alertDialogPage;
 
-    @Url("/material-ui-feedback-dialog--dialog-with-list")
-    public static WebPage feedbackWithListDialogPage;
-
-    @Url("/material-ui-feedback-dialog--dialog-form")
-    public static WebPage feedbackWithInputDialogPage;
+    @Url("/material-ui-feedback-dialog--dialog-confirm")
+    public static WebPage confirmDialogPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
