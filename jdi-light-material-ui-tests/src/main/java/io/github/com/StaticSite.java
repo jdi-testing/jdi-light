@@ -13,6 +13,7 @@ import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.RadioFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
@@ -43,6 +44,13 @@ public class StaticSite {
 
     @Url("/material-ui-button--disabled")
     public static WebPage inputButtonDisabledPage;
+
+    // radio
+    @Frame("storybook-preview-iframe")
+    public static RadioFrame radioFrame;
+
+    @Url("/material-ui-inputs-radio--default")
+    public static WebPage radioDefaultPage;
 
     // surfaces
     // accordion
