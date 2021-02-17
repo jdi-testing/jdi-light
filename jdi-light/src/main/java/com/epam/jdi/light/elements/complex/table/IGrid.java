@@ -16,6 +16,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.firstIndex;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * Created by Roman Iovlev on 24.09.2020
@@ -51,6 +52,8 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         for (int i = 0; i < size(); i++) {
              row.add(webCells().get(startIndex + i));
         }
+        String cacheName = getName() + "  webRow" + rowNum;
+        logger.debug("Row will be caches as %s", cacheName);
         return $$(row, getName() + " webRow");
     }
     default int getRowIndexByName(String rowName) {
@@ -108,7 +111,9 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         for (int i = 0; i < count(); i++) {
             column.add(webCells().get(colIndex + i*size));
         }
-        return $$(column, getName() + " webColumn");
+        String cacheName = getName() + "  webColumn" + colIndex;
+        logger.debug("Row will be caches as %s", cacheName);
+        return $$(column, cacheName);
     }
     default int getColIndexByName(String colName) {
         return firstIndex(header(), h -> ELEMENT.namesEqual.execute(h, colName)) + 1;

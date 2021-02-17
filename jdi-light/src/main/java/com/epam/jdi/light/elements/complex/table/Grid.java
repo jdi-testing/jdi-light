@@ -23,6 +23,7 @@ import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.Timer.getByCondition;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -106,21 +107,27 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
 
     @Override
     public UIElement webCell(int colNum, int rowNum) {
+        String cacheName = getName() + "  webCell" + colNum + "|" +rowNum;
+        logger.debug("Cell will be caches as %s", cacheName);
         return core().find(MessageFormat.format(cellTemplate, colNum, rowNum))
-            .setName(getName() + " webCell");
+            .setName(cacheName);
     }
     @Override
     public WebList webColumn(int colNum) {
         int index = getColumnIndex(colNum);
-        validateColumnIndex(index) ;
+        validateColumnIndex(index);
+        String cacheName = getName() + "  webColumn" + index;
+        logger.debug("Column will be caches as %s", cacheName);
         return core().finds(columnTemplate, index)
-            .setName(getName() + " webColumn");
+            .setName(cacheName);
     }
     @Override
     public WebList webRow(int rowNum) {
         validateRowIndex(rowNum);
+        String cacheName = getName() + "  webRow" + rowNum;
+        logger.debug("Row will be caches as %s", cacheName);
         return core().finds(rowTemplate, rowNum)
-            .setName(getName() + " webRow");
+            .setName(cacheName);
     }
     @Override
     public WebList headerUI() {
