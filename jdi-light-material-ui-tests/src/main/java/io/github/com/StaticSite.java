@@ -7,17 +7,13 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
-import io.github.com.pages.displaydata.IconFrame;
-import io.github.com.pages.displaydata.InsetDividerFrame;
-import io.github.com.pages.displaydata.VerticalDividerFrame;
-import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SwitchFrame;
-import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
-import io.github.com.pages.surfaces.PaperFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -70,11 +66,26 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static AccordionFrame accordionFrame;
 
+    @Url("/story/material-ui-inputs-checkbox--disabled")
+    public static WebPage inputCheckboxDisabled;
+
+    @Url("/material-ui-inputs-checkbox--form-control")
+    public static WebPage formControlCheckBox;
+
+    @Url("/material-ui-inputs-checkbox--group")
+    public static WebPage groupCheckBox;
+
+    @Frame("storybook-preview-iframe")
+    public static CheckboxFrame checkboxFrame;
+
     @Url("/material-ui-surfaces-accordion--default")
     public static WebPage surfaceAccordionPage;
 
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
+
+    @Url("/story/material-ui-inputs-checkbox--primary")
+    public static WebPage primaryCheckBoxPage;
 
     // paper
     @Frame("storybook-preview-iframe")
@@ -107,7 +118,7 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
-  
+
     @UI("#login-form")
     public static Form<User> loginForm;
 
