@@ -79,9 +79,13 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     }
 
     public UIElement coreUI() {
+        UIElement c = core();
+        if (c.isExist()) {
+            return c;
+        }
         try {
             new Timer(TIMEOUTS.element.get() * 1000)
-                    .wait(() -> core().isNotExist());
+                    .wait(() -> core().isExist());
         }
         catch (Exception skip) {
             logger.debug("Error during waiting grid existance %s", skip);

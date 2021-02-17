@@ -119,9 +119,13 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
 
     public UIElement coreUI() {
+        UIElement c = core();
+        if (c.isExist()) {
+            return c;
+        }
         try {
             new Timer(TIMEOUTS.element.get() * 1000)
-                    .wait(() -> core().isNotExist());
+                    .wait(() -> core().isExist());
         }
         catch (Exception skip) {
             logger.debug("Error during waiting table existance %s", skip);
