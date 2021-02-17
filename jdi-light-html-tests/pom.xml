@@ -118,4 +118,19 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <profiles>
+        <profile>
+            <id>performance</id>
+            <properties>
+                <suite-xml-file>src/test/resources/performance.xml</suite-xml-file>
+            </properties>
+        </profile>
+        <profile>
+            <id>functional</id>
+            <properties>
+                <suite-xml-file>src/test/resources/functional.xml</suite-xml-file>
+            </properties>
+        </profile>
+    </profiles>
 </project>
