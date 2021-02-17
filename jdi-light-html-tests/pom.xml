@@ -26,6 +26,18 @@
             <version>1.3.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>ru.yandex.qatools.ashot</groupId>
+            <artifactId>ashot</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-remote-driver</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>1.5.4</version>
+        </dependency>
+
         <!--Allure config in parent-->
         <dependency>
             <groupId>io.qameta.allure</groupId>

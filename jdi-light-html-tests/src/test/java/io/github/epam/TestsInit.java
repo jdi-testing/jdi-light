@@ -13,6 +13,7 @@ import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.JDISettings.SCREEN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 @Listeners(TestNGListener.class)
@@ -21,6 +22,7 @@ public interface TestsInit {
     default void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         killAllSeleniumDrivers();
+        SCREEN.fileSuffix = "png";
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
         logger.toLog("Run Tests");

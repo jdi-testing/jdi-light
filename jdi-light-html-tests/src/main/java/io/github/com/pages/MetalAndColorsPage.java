@@ -50,8 +50,8 @@ public class MetalAndColorsPage extends WebPage {
 		list = "*root*div[ui=combobox] li", expand = ".caret")
 	public static Dropdown metals2;
 
-	@Css("div[ui=droplist]")
-	public static MultiSelector vegetables;
+	// @Css("div[ui=droplist]")
+	// public static MultiSelector vegetables;
 	@ByText("Calculate") public static Button calculate;
 	@ByText("Submit") public static Button submit;
 

@@ -26,12 +26,12 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.openqa.selenium.Rectangle;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.epam.jdi.light.actions.ActionProcessor.jStack;
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -203,19 +203,36 @@ public class ActionHelper {
             processBeforeAction(message, jInfo);
         }
     }
+    protected static MapArray<String, Long> GLOBAL_NAMES = new MapArray<>();
     protected static void processBeforeAction(String message, ActionObject jInfo) {
         allureSteps.reset();
         JoinPoint jp = jInfo.jp();
         if (LOGS.writeToLog) {
             logger.toLog(message, logLevel(jInfo));
         }
-        if (jInfo.isCore() && ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
-            if (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
-                || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo)) {
+        // if (jInfo.topLevel() && jInfo.isCore() && jInfo.core().isDisplayed()) {
+        //     try {
+        //         UIElement el = jInfo.core().core();
+        //         if (GLOBAL_NAMES.has(el.typeName)) {
+        //             GLOBAL_NAMES.update(el.typeName, GLOBAL_NAMES.get(el.typeName) + 1);
+        //         } else {
+        //             GLOBAL_NAMES.add(el.typeName, 1L);
+        //         }
+        //         String name = el.typeName + "_" + String.format("%05d", GLOBAL_NAMES.get(el.typeName));
+        //         el.makePhoto(name);
+        //         File csvOutputFile = new File("D:\\Github\\Java\\JDIGit\\JDILight\\jdi-light-html-tests\\target\\.logs\\screens\\" + name + ".csv");
+        //         Rectangle rect = el.getRect();
+        //         try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+        //             pw.println(format("%s,%s,%s,%s,%s", el.typeName.toLowerCase(), rect.x, rect.y, rect.width, rect.height));
+        //         } catch (Exception ignore) { }
+        //     } catch (Exception ignore) { }
+        // }
+        if (jInfo.isCore() && ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)
+            && (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
+                || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo))) {
                 try {
                     jInfo.core().highlight();
                 } catch (Throwable ignore) { }
-            }
         }
         processPage(jInfo);
         if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
@@ -598,7 +615,8 @@ public class ActionHelper {
         logger.trace("defaultAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         return jInfo.overrideAction() != null
-                ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
+            ? jInfo.overrideAction().execute(jInfo.object())
+            : jInfo.execute();
     }
     public static Object stableAction(ActionObject jInfo) {
         logger.trace("stableAction: " + getClassMethodName(jInfo.jp()));
