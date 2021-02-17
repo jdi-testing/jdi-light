@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
+import com.epam.jdi.tools.Timer;
 import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.WebElement;
 
@@ -19,6 +20,7 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.Timer.getByCondition;
 import static java.util.Arrays.asList;
@@ -46,19 +48,24 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     protected int startIndex = ELEMENT.startIndex;
 
     public WebList webCells() {
-        return core().finds(allCellsLocator)
+        return coreUI().finds(allCellsLocator)
             .setName(getName() + " webCells");
     }
     @Override
     public UIElement core() {
         UIElement core = super.core();
         if (hasRunDrivers() && !locatorsValidated && core.firstChild() != null) {
+            logger.debug("Grid Run validation");
             try {
                 locatorsValidated = true;
                 validateLocators(core);
             } catch (Exception ex) {
+                logger.debug("Grid Validation failed. Rerun needed.");
                 locatorsValidated = false;
             }
+        }
+        else {
+            logger.debug("Grid Validation is not needed");
         }
         return core;
     }
@@ -70,6 +77,18 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
             }
         }
     }
+
+    public UIElement coreUI() {
+        try {
+            new Timer(TIMEOUTS.element.get() * 1000)
+                    .wait(() -> core().isNotExist());
+        }
+        catch (Exception skip) {
+            logger.debug("Error during waiting grid existance %s", skip);
+        }
+        return core();
+    }
+
     @Override
     public List<String> header() {
         return ObjectUtils.isNotEmpty(header)
@@ -109,7 +128,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     public UIElement webCell(int colNum, int rowNum) {
         String cacheName = getName() + "  webCell" + colNum + "|" +rowNum;
         logger.debug("Cell will be caches as %s", cacheName);
-        return core().find(MessageFormat.format(cellTemplate, colNum, rowNum))
+        return coreUI().find(MessageFormat.format(cellTemplate, colNum, rowNum))
             .setName(cacheName);
     }
     @Override
@@ -118,7 +137,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         validateColumnIndex(index);
         String cacheName = getName() + "  webColumn" + index;
         logger.debug("Column will be caches as %s", cacheName);
-        return core().finds(columnTemplate, index)
+        return coreUI().finds(columnTemplate, index)
             .setName(cacheName);
     }
     @Override
@@ -126,17 +145,17 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         validateRowIndex(rowNum);
         String cacheName = getName() + "  webRow" + rowNum;
         logger.debug("Row will be caches as %s", cacheName);
-        return core().finds(rowTemplate, rowNum)
+        return coreUI().finds(rowTemplate, rowNum)
             .setName(cacheName);
     }
     @Override
     public WebList headerUI() {
-        return core().finds(headerLocator)
+        return coreUI().finds(headerLocator)
             .setName(getName() + " headerUI");
     }
     @Override
     public WebList footerUI() {
-        return core().finds(footerLocator)
+        return coreUI().finds(footerLocator)
             .setName(getName() + " footerUI");
     }
 
