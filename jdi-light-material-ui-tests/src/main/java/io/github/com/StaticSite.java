@@ -17,6 +17,7 @@ import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
@@ -82,6 +83,13 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-paper--default")
     public static WebPage surfacePaperDefaultPage;
+
+    // app bar
+    @Frame("storybook-preview-iframe")
+    public static AppBarFrame appBarFrame;
+
+    @Url("/material-ui-surfaces-app-bar--simple-app-bar")
+    public static WebPage surfaceSimpleAppBarPage;
 
     // inputs
     // switch
