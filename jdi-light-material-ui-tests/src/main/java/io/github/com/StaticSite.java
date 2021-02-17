@@ -14,6 +14,7 @@ import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.navigation.BottomNavigationFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
@@ -54,6 +55,14 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
+
+    // navigation
+    // bottom navigation
+    @Frame("storybook-preview-iframe")
+    public static BottomNavigationFrame bottomNavigationFrame;
+
+    @Url("/material-ui-navigation-bottom-navigation--default")
+    public static WebPage bottomNavigationPage;
 
     // paper
     @Frame("storybook-preview-iframe")
