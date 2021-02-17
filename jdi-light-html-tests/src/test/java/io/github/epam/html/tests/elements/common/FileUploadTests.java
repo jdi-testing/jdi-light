@@ -36,16 +36,16 @@ public class FileUploadTests implements TestsInit {
 
     @Test
     public void uploadTest() {
-        avatar.uploadFile(mergePath(COMMON.projectPath,"/src/test/resources/general.xml"));
-        avatar.is().text(containsString("general.xml"));
-        assertTrue(avatar.getText().contains("general.xml"));
-        assertTrue(avatar.getValue().contains("general.xml"));
+        avatar.uploadFile(mergePath(COMMON.projectPath,"/src/test/resources/functional.xml"));
+        avatar.is().text(containsString("functional.xml"));
+        assertTrue(avatar.getText().contains("functional.xml"));
+        assertTrue(avatar.getValue().contains("functional.xml"));
     }
 
     @Test
     public void disabledUploadTest() {
         try {
-            disabledFileInput.uploadFile(mergePath(COMMON.projectPath, "/src/test/resources/general.xml"));
+            disabledFileInput.uploadFile(mergePath(COMMON.projectPath, "/src/test/resources/functional.xml"));
         } catch (Exception ignore) {}
         disabledFileInput.is().text(is(""));
     }

@@ -9,6 +9,8 @@ env:
     UNIT: "-Punit"
     COMMON: "-Pcommon"
     COMPLEX: "-Pcomplex"
+    PERF: "-Pperformance"
+    FUNC: "-Pfunctional"
     GROUP_ID: "com.epam.jdi"
     NOPO_TESTS: "jdi-bdd-no-po-tests"
     NOPO_TESTS_PROPERTY: "test-examples/jdi-bdd-no-po-tests"
@@ -158,12 +160,22 @@ jobs:
 #    - name: Kill Chrome
 #      run: pkill -f "chrome"
 
-    - name: Run tests - HTML
-      id: tests-html
+    - name: Run tests - HTML functional
+      id: tests-html-func
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS --fail-at-end
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
+    - name: Run tests - HTML performace
+      id: tests-html-perf
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 90 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $PERF -pl $GROUP_ID:$HTML_TESTS --fail-at-end
 
     - name: Kill Chrome
       run: pkill -f "chrome"
@@ -212,11 +224,10 @@ jobs:
         exit 1
 
     - name: Check html tests are passed
-      if: ${{ steps.tests-html.outcome != 'success' || steps.tests-examples.outcome != 'success' || steps.tests-perf.outcome != 'success' }}
+      if: ${{ steps.tests-html-func.outcome != 'success' || steps.tests-examples.outcome != 'success' }}
       run: |
-        echo HTML tests result: ${{ steps.tests-html.outcome }}
+        echo HTML tests result: ${{ steps.tests-html-func.outcome }}
         echo Example tests result: ${{ steps.tests-examples.outcome }}
-        echo Performance tests result: ${{ steps.tests-perf.outcome }}
         exit 1
 
     - name: Check angular tests are passed
@@ -227,4 +238,11 @@ jobs:
 #        echo Angular Unit tests result: ${{ steps.tests-angular-unit.outcome }}
       run: |
         echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
+        exit 1
+
+    - name: Check performance tests are passed
+      if: ${{ steps.tests-html-perf.outcome != 'success' || steps.tests-perf.outcome != 'success' }}
+      run: |
+        echo HTML Performance tests result: ${{ steps.tests-html-perf.outcome }}
+        echo Performance tests result: ${{ steps.tests-perf.outcome }}
         exit 1
