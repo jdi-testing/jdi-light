@@ -1,5 +1,6 @@
 package com.epam.jdi.light.material.elements.inputs;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 import com.epam.jdi.light.common.JDIAction;
@@ -75,7 +76,7 @@ public class Select extends UIBaseElement<SelectAssert> implements ISetup {
             try {
                 core().find(String.format(itemByText, item)).click();
             } catch (NoSuchElementException e){
-                e.printStackTrace();
+                throw exception("There is no item " + item);
             }
         }
     }
