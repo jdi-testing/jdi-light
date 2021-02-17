@@ -116,7 +116,11 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         return $$(column, cacheName);
     }
     default int getColIndexByName(String colName) {
-        return firstIndex(header(), h -> ELEMENT.namesEqual.execute(h, colName)) + 1;
+        int indx = firstIndex(header(), h -> ELEMENT.namesEqual.execute(h, colName)) + 1;
+        if (indx == 0) {
+            logger.error("Column %s was not found. The first column will be used.", colName);
+        }
+        return indx;
     }
     default WebList webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
