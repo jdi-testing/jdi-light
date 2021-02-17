@@ -7,9 +7,11 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.GridView.GridView;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.GridView.GridViewFrame;
 import io.github.com.pages.displaydata.IconFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
@@ -107,6 +109,12 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
+
+    @Frame("storybook-preview-iframe")
+    public static GridViewFrame gridFrame;
+
+    @Url("/story/material-ui-grid--grid-view")
+    public static WebPage gridViewPage;
   
     @UI("#login-form")
     public static Form<User> loginForm;
