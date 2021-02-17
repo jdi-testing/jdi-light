@@ -10,50 +10,32 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 
     @JDIAction("Assert that '{name}' is enabled")
-    public CheckboxAssert enabledCheckbox() {
-        jdiAssert(element().isEnabledCheckbox(), Matchers.is(true));
+    public CheckboxAssert enabled() {
+        jdiAssert(element().isEnabled(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is selected")
-    public CheckboxAssert selectedCheckbox() {
-        jdiAssert(element().isSelectedCheckbox(), Matchers.is(true));
+    public CheckboxAssert selected() {
+        jdiAssert(element().isSelected(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not selected")
-    public CheckboxAssert unSelectedCheckbox() {
-        jdiAssert(element().isNotSelectedCheckbox(), Matchers.is(true));
+    public CheckboxAssert unSelected() {
+        jdiAssert(element().isNotSelected(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is disabled")
-    public CheckboxAssert disabledCheckbox() {
+    public CheckboxAssert disabled() {
         jdiAssert(element().isDisabledCheckbox(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is displayed")
-    public CheckboxAssert formControlDisplayed() {
-        jdiAssert(element().isFormControlDisplayed(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert '{name}' text")
-    public CheckboxAssert assertEmailText() {
-        jdiAssert(element().emailText(), Matchers.containsString("Email address"));
-        return this;
-    }
-
-    @JDIAction("Assert '{name}' text")
-    public CheckboxAssert assertHelperText() {
-        jdiAssert(element().helperText(), Matchers.containsString("We ll never share your email."));
         return this;
     }
 
     @JDIAction("Assert that group '{name}' is disabled")
     public CheckboxAssert assertGroupDisabled() {
-        jdiAssert(element().isGroupCheckboxDisplayed(), Matchers.is(true));
+        jdiAssert(element().isDisabledCheckbox(), Matchers.is(true));
         return this;
     }
 
