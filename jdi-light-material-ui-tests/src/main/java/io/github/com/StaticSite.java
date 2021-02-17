@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.displaydata.AvatarFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
@@ -75,6 +76,30 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
+
+    @Frame("storybook-preview-iframe")
+    public static AvatarFrame dataDisplayAvatarFrame;
+
+    @Url("/material-ui-data-display-avatar--no-image")
+    public static WebPage dataDisplayNoImageAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--circle")
+    public static WebPage dataDisplayCircleAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--square")
+    public static WebPage dataDisplaySquareAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--rounded")
+    public static WebPage dataDisplayRoundedAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--fallback-alt")
+    public static WebPage dataDisplayFallbackAltAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--letter")
+    public static WebPage dataDisplayLetterAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--icon")
+    public static WebPage dataDisplayIconAvatarPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
