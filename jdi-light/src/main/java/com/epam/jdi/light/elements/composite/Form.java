@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.light.elements.pageobjects.annotations.MapToField;
+import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction4;
 import com.epam.jdi.tools.func.JFunc1;

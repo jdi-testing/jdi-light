@@ -41,7 +41,6 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -202,7 +201,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public Pair<String, Integer> waitAfter() {
         return new Pair<>(waitAfterMethod, waitAfterTimeout.get());
     }
-    @Override
     public void setTimeout(int sec) {
         timeout = new Safe<>(() -> sec);
     }
@@ -273,7 +271,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     @JDebug
     public List<WebElement> getWebElements(Object... args) {
         List<WebElement> elements = getAllWebElements(args);
-        if (isNotEmpty(elements)) {
+        if (elements.size() > 0) {
             beforeSearch(elements.get(0));
         }
         return elements;
@@ -283,7 +281,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         DEFAULT_CONTEXT.execute(driver());
         if (webElements.hasValue()) {
             List<WebElement> elements = map(webElements.get(), JdiSettings::purify);
-            if (isNotEmpty(elements.size())) {
+            if (elements.size() > 0) {
                 try {
                     elements.get(0).getTagName();
                     return elements;
@@ -333,7 +331,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             els -> els.size() >= minAmount);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
-        return filterElements(this, result);
+        List<WebElement> l = filterElements(this, result);
+        return l;
     }
     @JDebug
     protected List<WebElement> tryGetList() {
@@ -423,7 +422,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         }
     }
     public static String printWebElement(WebElement element) {
-        String asString = element.toString().replace("css selector", "css");
+        String asString = element.toString().replaceAll("css selector", "css");
         String result = asString.startsWith("WebElement->")
                 ? "" : "WebElement->";
         if (asString.contains(")]")) {
@@ -435,7 +434,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public String printWebElement() {
         if (webElement.hasValue())
             return printWebElement(webElement.get());
-        if (isNotEmpty(webElements) && webElements.hasValue())
+        if (webElements.hasValue() && webElements.get().size() > 0)
             return printWebElement(webElements.get().get(0)) + "[" + webElements.get().size() + "]";
         return "";
     }
@@ -468,12 +467,10 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         action.execute(actions.get().moveToElement(get())).build().perform();
     }
 
-    @Override
     public void offCache() {
         webElement.useCache(false);
         webElements.useCache(false);
     }
-    @Override
     public boolean isUseCache() { return webElement.isUseCache() || webElements.isUseCache(); }
     public static MapArray<Integer, String> NAMES = new MapArray<>();
 }
