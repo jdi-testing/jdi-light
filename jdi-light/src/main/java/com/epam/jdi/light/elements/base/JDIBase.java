@@ -30,6 +30,7 @@ import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.JdiSettings.*;
+import static com.epam.jdi.light.elements.base.JdiSettings.DEFAULT_CONTEXT;
 import static com.epam.jdi.light.elements.init.InitActions.JDI_ANNOTATIONS;
 import static com.epam.jdi.light.elements.init.InitActions.defaultSetup;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
@@ -330,7 +331,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     @JDebug
     public List<WebElement> getList(int minAmount) {
         List<WebElement> result = timer().getResultByCondition(this::tryGetList,
-            els -> els.size() >= minAmount);
+                els -> els.size() >= minAmount);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
         return filterElements(this, result);
@@ -446,11 +447,11 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             return element.context;
         return Switch(LOGS.logLevel).get(
                 Case(l -> l == STEP,
-                    l -> msgFormat(PRINT_ELEMENT_STEP, element)),
+                        l -> msgFormat(PRINT_ELEMENT_STEP, element)),
                 Case(l -> l == INFO,
-                    l -> msgFormat(PRINT_ELEMENT_INFO, element)),
+                        l -> msgFormat(PRINT_ELEMENT_INFO, element)),
                 Case(l -> l == ERROR,
-                    l -> msgFormat(PRINT_ERROR_STEP, element)),
+                        l -> msgFormat(PRINT_ERROR_STEP, element)),
                 Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
         );
     };

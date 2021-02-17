@@ -27,8 +27,8 @@ import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.String.format;
+import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class JdiSettings {
     public static JAction2<JDIBase, WebElement> VALIDATE_FOUND_ELEMENT = JdiSettings::validateFoundElement;
@@ -94,8 +94,8 @@ public class JdiSettings {
     }
     public static WebElement purify(WebElement element) {
         return isInterface(element.getClass(), IBaseElement.class)
-            ? ((IBaseElement)element).base().get()
-            : element;
+                ? ((IBaseElement)element).base().get()
+                : element;
     }
 
     private static void validateFoundElement(JDIBase base, WebElement element) {
@@ -158,8 +158,8 @@ public class JdiSettings {
         if (frames != null)
             return getFrameContext(base.driver(), frames);
         return locator.isRoot || isRoot(parent)
-            ? DEFAULT_CONTEXT.execute(driver)
-            : getSearchContext(driver, parent);
+                ? DEFAULT_CONTEXT.execute(driver)
+                : getSearchContext(driver, parent);
     }
 
     private static SearchContext getFrameContext(WebDriver driver, List<By> frames) {
@@ -191,7 +191,7 @@ public class JdiSettings {
         }
     }
     public static JFunc1<WebDriver, SearchContext> DEFAULT_CONTEXT
-        = JdiSettings::getDefaultContext;
+            = JdiSettings::getDefaultContext;
     public static SearchContext getDefaultContext(WebDriver driver) {
         return driver.switchTo().defaultContent();
     }
@@ -204,8 +204,8 @@ public class JdiSettings {
         SearchContext searchContext = getContext(base);
         By locator = base.getLocator(args);
         return locator == null
-            ? base.getSmartList()
-            : uiSearch(searchContext, correctLocator(locator));
+                ? singletonList(base.getSmart())
+                : uiSearch(searchContext, correctLocator(locator));
     }
     private static WebElement getUIElementFromArgs(JDIBase base, Object... args) {
         if (base.locator.argsCount() == 0 && args.length == 1) {

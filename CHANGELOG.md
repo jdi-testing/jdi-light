@@ -1,8 +1,12 @@
 # Changelog
 
-## 1.3.10 (planed July 2020)
+## 1.3.10 (future plans)
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
+
+
+##next version (**.02.2021)
+* Stability fixes for collections: Switch to Lightsaber 2.1.11
 
 ##1.3.4 (06.02.2021)
 * Switch to Lightsaber 2.1.8
