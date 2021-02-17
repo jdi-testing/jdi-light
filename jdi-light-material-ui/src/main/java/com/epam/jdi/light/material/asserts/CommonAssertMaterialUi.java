@@ -10,7 +10,7 @@ public abstract class CommonAssertMaterialUi<T extends CommonAssertMaterialUi<?,
 
     @JDIAction("Assert that '{name}' displayed")
     public IsAssert isMaterialUiElementDisplayed() {
-       return core().classValue(".-root");
+       return core().classValue("-root");
     }
 
     @JDIAction("Assert that '{name}' disabled")
