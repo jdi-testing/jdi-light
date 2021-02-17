@@ -6,10 +6,13 @@ import com.epam.jdi.light.material.annotations.JDISnackbar;
 import com.epam.jdi.light.material.elements.feedback.Snackbar;
 import com.epam.jdi.light.material.elements.inputs.Button;
 
-public class SnackbarFrame extends Section {
+public class ConsecutiveSnackbarFrame extends Section {
 
-    @UI(".MuiButton-root")
-    public Button openSnackbarButton;
+    @UI(".MuiButton-root[1]")
+    public Button openFirstSnackbarButton;
+
+    @UI(".MuiButton-root[2]")
+    public Button openSecondSnackbarButton;
 
     @JDISnackbar(root = ".MuiSnackbar-root",
             message = ".MuiSnackbarContent-message",
