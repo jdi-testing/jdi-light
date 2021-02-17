@@ -15,6 +15,7 @@ import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
@@ -61,6 +62,13 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-paper--default")
     public static WebPage surfacePaperDefaultPage;
+
+    // card
+    @Frame("storybook-preview-iframe")
+    public static CardFrame cardFrame;
+
+    @Url("/material-ui-surfaces-card--card-with-clickable-area")
+    public static WebPage surfaceCardPage;
 
     // inputs
     // switch
