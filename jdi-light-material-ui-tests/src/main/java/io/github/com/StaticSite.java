@@ -64,7 +64,7 @@ public class StaticSite {
     @Url("/material-ui-surfaces-paper--default")
     public static WebPage surfacePaperDefaultPage;
 
-    // inputs
+    // data display
     // switch
     @Frame("storybook-preview-iframe")
     public static InsetDividerFrame insetDividerFrame;
@@ -102,7 +102,6 @@ public class StaticSite {
     @Url("/material-ui-data-display-avatar--icon")
     public static WebPage dataDisplayIconAvatarPage;
 
-    // Display data
     // material icon
     @Frame("storybook-preview-iframe")
     public static IconFrame iconFrame;
