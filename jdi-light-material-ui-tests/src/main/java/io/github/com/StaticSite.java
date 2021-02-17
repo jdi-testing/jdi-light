@@ -56,14 +56,6 @@ public class StaticSite {
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
 
-    // navigation
-    // bottom navigation
-    @Frame("storybook-preview-iframe")
-    public static BottomNavigationFrame bottomNavigationFrame;
-
-    @Url("/material-ui-navigation-bottom-navigation--default")
-    public static WebPage bottomNavigationPage;
-
     // paper
     @Frame("storybook-preview-iframe")
     public static PaperFrame paperFrame;
@@ -84,6 +76,14 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
+
+    // navigation
+    // bottom navigation
+    @Frame("storybook-preview-iframe")
+    public static BottomNavigationFrame bottomNavigationFrame;
+
+    @Url("/material-ui-navigation-bottom-navigation--default")
+    public static WebPage bottomNavigationPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
