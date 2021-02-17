@@ -13,6 +13,7 @@ import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.displaydata.IconFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
+import io.github.com.pages.feedback.SnackbarFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
@@ -107,7 +108,15 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
-  
+
+    // feedback
+    // snackbar
+    @Frame("storybook-preview-iframe")
+    public static SnackbarFrame snackbarFrame;
+
+    @Url("/material-ui-feedback-snackbar--simple-snackbar")
+    public static WebPage feedbackSnackbarSimplePage;
+
     @UI("#login-form")
     public static Form<User> loginForm;
 
