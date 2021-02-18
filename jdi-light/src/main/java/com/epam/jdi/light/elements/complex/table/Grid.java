@@ -58,25 +58,22 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         if (hasRunDrivers() && !locatorsValidated && core.firstChild() != null) {
             logger.debug("Grid Run validation");
             try {
-                locatorsValidated = true;
                 validateLocators(core);
             } catch (Exception ex) {
                 logger.debug("Grid Validation failed. Rerun needed.");
                 locatorsValidated = false;
             }
         }
-        else {
-            logger.debug("Grid Validation is not needed");
-        }
         return core;
     }
-    protected void validateLocators(UIElement core) {
+    protected synchronized void validateLocators(UIElement core) {
         if (headerLocator.equals("th")) {
             if (core.finds("th").size() == 0) {
                 headerLocator = core.find("thead td").isExist()
                         ? "thead td" : "//tr[1]//td";
             }
         }
+        locatorsValidated = true;
     }
 
     public UIElement coreUI() {
@@ -214,7 +211,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         if (rowNum < 1)
             throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
     }
-    protected void validateColumns() {
+    protected synchronized void validateColumns() {
         try {
             WebList header = headerUI();
             logger.debug("Start column validation");

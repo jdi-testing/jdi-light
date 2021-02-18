@@ -97,24 +97,21 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         UIElement core = super.core();
         if (hasRunDrivers() && !locatorsValidated && core.firstChild() != null) {
             try {
-                locatorsValidated = true;
                 validateLocators(core);
             } catch (Exception ex) {
                 locatorsValidated = false;
             }
         }
-        else {
-            logger.debug("No validation needed");
-        }
         return core;
     }
-    protected void validateLocators(UIElement core) {
+    protected synchronized void validateLocators(UIElement core) {
         if (getByLocator(headerLocator).equals("th")) {
             if (core.finds("th").size() == 0 && core.finds("td").size() > 0) {
                 headerLocator = core.find("thead td").isExist()
                     ? By.cssSelector("thead td") : By.xpath("//tr[1]//td");
             }
         }
+        locatorsValidated = true;
         logger.debug("After Table validation header locator is '%s'", headerLocator);
     }
 
