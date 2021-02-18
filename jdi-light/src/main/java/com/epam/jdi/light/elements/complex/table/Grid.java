@@ -58,6 +58,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         if (hasRunDrivers() && !locatorsValidated && core.firstChild() != null) {
             logger.debug("Grid Run validation");
             try {
+                locatorsValidated = true;
                 validateLocators(core);
             } catch (Exception ex) {
                 logger.debug("Grid Validation failed. Rerun needed.");
@@ -66,16 +67,13 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         }
         return core;
     }
-    protected synchronized void validateLocators(UIElement core) {
-        if (locatorsValidated)
-            return;
+    protected void validateLocators(UIElement core) {
         if (headerLocator.equals("th")) {
             if (core.finds("th").size() == 0) {
                 headerLocator = core.find("thead td").isExist()
                         ? "thead td" : "//tr[1]//td";
             }
         }
-        locatorsValidated = true;
     }
 
     public UIElement coreUI() {
