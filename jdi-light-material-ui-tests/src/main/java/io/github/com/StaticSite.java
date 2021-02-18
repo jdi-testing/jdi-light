@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.popover.HoverOverPop;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
@@ -16,6 +17,7 @@ import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
+import io.github.com.pages.popOver.PopOverFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
@@ -107,6 +109,18 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
+
+    @Frame("storybook-preview-iframe")
+    public static PopOverFrame popOverFrame;
+
+    @Url("/story/material-ui-utils-popover--click")
+    public static WebPage popOverPage;
+
+    @Frame("storybook-preview-iframe")
+    public static HoverOverPop hoverOverPop;
+
+    @Url("/story/material-ui-utils-popover--hover")
+    public static WebPage hoverOverPopPage;
   
     @UI("#login-form")
     public static Form<User> loginForm;
