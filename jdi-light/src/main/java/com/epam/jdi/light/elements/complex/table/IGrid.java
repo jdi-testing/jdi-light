@@ -54,7 +54,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         }
         String cacheName = getName() + "  webRow" + rowNum;
         logger.debug("Row will be caches as %s", cacheName);
-        return $$(row, getName() + " webRow");
+        return $$(row, cacheName);
     }
     default int getRowIndexByName(String rowName) {
         return firstIndex(rowHeader(), h -> ELEMENT.namesEqual.execute(h, rowName)) + 1;
