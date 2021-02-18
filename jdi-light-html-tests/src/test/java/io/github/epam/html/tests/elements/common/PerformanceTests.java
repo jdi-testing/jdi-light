@@ -24,7 +24,7 @@ import static org.testng.Assert.fail;
 
 public class PerformanceTests implements TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
