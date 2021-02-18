@@ -18,6 +18,7 @@ import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
+import io.github.com.pages.utils.PortalFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -107,6 +108,14 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
+
+    // utils
+    // portal
+    @Frame("storybook-preview-iframe")
+    public static PortalFrame portalFrame;
+
+    @Url("/material-ui-utils-portal--default")
+    public static WebPage defaultPortalPage;
   
     @UI("#login-form")
     public static Form<User> loginForm;
