@@ -16,10 +16,11 @@ import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
+import io.github.com.pages.layout.GridListFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("http://localhost:6006/?path=/story")
 public class StaticSite {
 
     // inputs
@@ -107,7 +108,15 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
-  
+
+    // Layout
+    // Grid list
+    @Frame("storybook-preview-iframe")
+    public static GridListFrame gridListFrame;
+
+    @Url("/material-ui-layout-grid-list--title-bar-grid-list-view")
+    public static WebPage layoutGridListPage;
+
     @UI("#login-form")
     public static Form<User> loginForm;
 
