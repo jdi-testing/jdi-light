@@ -105,6 +105,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return core;
     }
     protected synchronized void validateLocators(UIElement core) {
+        if (locatorsValidated)
+            return;
         if (getByLocator(headerLocator).equals("th")) {
             if (core.finds("th").size() == 0 && core.finds("td").size() > 0) {
                 headerLocator = core.find("thead td").isExist()

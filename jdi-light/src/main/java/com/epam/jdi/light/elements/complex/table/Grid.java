@@ -67,6 +67,8 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         return core;
     }
     protected synchronized void validateLocators(UIElement core) {
+        if (locatorsValidated)
+            return;
         if (headerLocator.equals("th")) {
             if (core.finds("th").size() == 0) {
                 headerLocator = core.find("thead td").isExist()
@@ -212,6 +214,8 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
             throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
     }
     protected synchronized void validateColumns() {
+        if (columnsValidated)
+            return;
         try {
             WebList header = headerUI();
             logger.debug("Start column validation");
