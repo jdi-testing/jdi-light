@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
@@ -216,6 +217,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     protected void validateColumns() {
         try {
             WebList header = headerUI();
+            logger.debug("Start column validation");
             List<WebElement> visibleHeader = header.getAll();
             List<WebElement> fullHeader = header.getWebElements();
             if (visibleHeader.size() < fullHeader.size()) {
@@ -230,6 +232,9 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
                             visibleValue = visibleHeader.get(j++).getText();
                     }
                 }
+                logger.debug("Columns mapping is %s", columnsMapping.toString());
+            } else {
+                logger.debug("Columns mapping is not needed");
             }
             columnsValidated = true;
         } catch (Exception ex) {
