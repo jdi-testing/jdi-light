@@ -227,6 +227,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
                 for (int i = 0; i < fullHeader.size(); i++) {
                     String fullValue = fullHeader.get(i).getText();
                     if (fullValue.equals(visibleValue)) {
+                        logger.debug("Column '%s' is %d (text is '%s')", visibleValue, i+1, fullValue);
                         columnsMapping.add(i + 1);
                         if (j < visibleHeader.size())
                             visibleValue = visibleHeader.get(j++).getText();
