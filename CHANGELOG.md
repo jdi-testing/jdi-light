@@ -1,14 +1,11 @@
 # Changelog
 
-## 1.3.10 (planed July 2020)
+## 1.3.10 (planed March 2021)
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
-##1.3.4 (06.02.2021)
-* Switch to Lightsaber 2.1.8
-* Correct allure WebSettings
-* Add AllureLogger steps
-* Fix issue with the version of junit-provider
+##1.3.7 (17.02.2021)
+* Small bug fixing in Actions helper
 
 ##1.3.5-6 (09.02.2021)
 * Stability fixes for collections: Switch to Lightsaber 2.1.11

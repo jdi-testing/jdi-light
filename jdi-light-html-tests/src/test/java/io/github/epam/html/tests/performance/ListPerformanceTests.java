@@ -137,8 +137,12 @@ public class ListPerformanceTests implements TestsInit {
         System.out.println("Average ratio: " + ratio + " ms");
         String goodBad = avSelenium/avJdi > 1 ? "better" : "worse";
         String goodBadMax = max > 1 ? "better" : "worse";
-        if (ratio < 1) ratio = 1 / ratio;
-        if (max < 1) max = 1 / max;
+        if (ratio < 1) {
+            ratio = 1 / ratio;
+        }
+        if (max < 1) {
+            max = 1 / max;
+        }
         String toLog = Math.abs(ratio - 1) < 0.1
             ? "First time result: " + firstResult + ". JDI has the same result in average as Selenium with max better in " + max + "times"
             : format("First time result: " + firstResult + ". JDI in average is %s than Selenium in %s times with maximum %s in %s times", goodBad, ratio, goodBadMax, max);
