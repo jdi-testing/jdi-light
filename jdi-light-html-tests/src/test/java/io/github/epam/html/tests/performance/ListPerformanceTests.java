@@ -55,7 +55,7 @@ public class ListPerformanceTests implements TestsInit {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().filter(el -> el.getText().equals(value)).findFirst().get().getText();
-        }, () -> firstTemplate.getFast(value).getText(), 10, 45, 10);
+        }, () -> firstTemplate.getFast(value).getText(), 100, 45, 10);
     }
     @Test
     public void getIndexFastTest() {
