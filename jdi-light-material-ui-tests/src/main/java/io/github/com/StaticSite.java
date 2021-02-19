@@ -18,6 +18,7 @@ import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
+import io.github.com.pages.tooltip.ToolTipFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -107,6 +108,21 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
+
+    @Frame("storybook-preview-iframe")
+    public static ToolTipFrame toolTipFrame;
+
+    @Url("/story/material-ui-tooltip--default")
+    public static WebPage toolTipDefaultPage;
+
+    @Url("/story/material-ui-tooltip--triggers")
+    public static WebPage triggersToolTipPage;
+
+    @Url("/story/material-ui-tooltip--interactive")
+    public static WebPage interactiveToolTipPage;
+
+    @Url("/story/material-ui-tooltip--customized")
+    public static WebPage customozedToolTipPage;
   
     @UI("#login-form")
     public static Form<User> loginForm;
