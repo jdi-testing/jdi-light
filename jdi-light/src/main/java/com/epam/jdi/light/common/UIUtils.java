@@ -46,8 +46,8 @@ public final class UIUtils {
         if (withOrder.size() > 0) {
             MultiMap<Integer, Field> orderMap = new MultiMap<>(withOrder,
                 k -> k.getAnnotation(Order.class).value(), v -> v).ignoreKeyCase();
-            orderMap.pairs.sort((d1, d2) -> d2.key - d1.key);
-            for (Pair<Integer, Field> pairs : orderMap.pairs)
+            orderMap.getPairs().sort((d1, d2) -> d2.key - d1.key);
+            for (Pair<Integer, Field> pairs : orderMap.getPairs())
                 ordered.add(pairs.value);
             ordered.addAll(filter(notNullFields, f -> f.getAnnotation(Order.class) == null));
         } else ordered = notNullFields;

@@ -449,10 +449,18 @@ public class WebPage extends DriverBase implements PageObject {
         return jsExecute("return window.pageYOffset;");
     }
     @JDIAction(level = DEBUG)
+    public static String windowScreenshot(String path) {
+        try {
+            File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            File imageFile = new File(path);
+            copyFile(screenshot, imageFile);
+            return path;
+        } catch (Exception ex) { throw exception(ex, "Can't take screenshot"); }
+    }
+    @JDIAction(level = DEBUG)
     public static String windowScreenshot() {
         try {
             File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-            //show();
             String path = mergePath(getPath(), getCurrentPage()+".png");
             File imageFile = new File(path);
             copyFile(screenshot, imageFile);
@@ -466,7 +474,6 @@ public class WebPage extends DriverBase implements PageObject {
         String path;
         try {
             screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-            //show();
             path = mergePath(getPath(), name);
             imageFile = new File(path);
         } catch (Exception ex) { throw exception(ex, "Can't take windowScreenshot"); }
