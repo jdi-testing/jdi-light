@@ -16,7 +16,7 @@
         <allure.version>2.13.8</allure.version>
         <allure.maven>2.10.0</allure.maven>
         <surfire.version>2.19.1</surfire.version>
-        <aspectj.version>1.9.5</aspectj.version>
+        <aspectj.version>1.9.6</aspectj.version>
     </properties>
 
     <dependencies>

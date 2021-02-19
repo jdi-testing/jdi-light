@@ -11,7 +11,7 @@
     <groupId>com.epam.jdi</groupId>
 
     <properties>
-        <aspectj.version>1.9.5</aspectj.version>
+        <aspectj.version>1.9.6</aspectj.version>
         <aspectj.maven>1.12.6</aspectj.maven>
         <java.version>1.8</java.version>
     </properties>
