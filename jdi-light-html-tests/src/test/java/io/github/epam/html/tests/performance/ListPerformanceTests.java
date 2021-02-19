@@ -101,7 +101,7 @@ public class ListPerformanceTests implements TestsInit {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.get(index).getText();
-        }, () -> firstXpath.get(index + ELEMENT.startIndex).getText(), 0.6, 0.6, 100);
+        }, () -> firstXpath.get(index + ELEMENT.startIndex).getText(), 1, 0.6, 100);
     }
 
 
