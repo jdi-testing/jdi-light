@@ -23,14 +23,9 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
     }
 
     @JDIAction("Assert that '{name}' content is '{0}'")
-    public TransitionAssert content(Matcher<String> condition) {
-        jdiAssert(element().getContent(), condition);
+    public TransitionAssert content(String text) {
+        jdiAssert(element().getContent(), Matchers.is(text));
         return this;
     }
-
-    public TransitionAssert content(String text) {
-        return content(Matchers.is(text));
-    }
-
 
 }
