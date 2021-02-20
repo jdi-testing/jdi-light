@@ -63,19 +63,19 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static TextFieldFrame textFieldFrame;
 
-    @Url("/material-ui-textfield--standard")
+    @Url("/material-ui-inputs-text-field--standard")
     public static WebPage inputTextFieldStandardPage;
 
-    @Url("/material-ui-textfield--field-with-default")
+    @Url("/material-ui-inputs-text-field--field-with-default")
     public static WebPage inputTextFieldFilledWithDefaultPage;
 
-    @Url("/material-ui-textfield--filled")
+    @Url("/material-ui-inputs-text-field--filled")
     public static WebPage inputTextFieldFilledPage;
 
-    @Url("/material-ui-textfield--disabled")
+    @Url("/material-ui-inputs-text-field--disabled")
     public static WebPage inputTextFieldDisabledPage;
 
-    @Url("/material-ui-textfield--time")
+    @Url("/material-ui-inputs-text-field--time")
     public static WebPage inputTextFieldTimePage;
 
     // surfaces
