@@ -11,13 +11,9 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
 
     @JDIAction("Assert that '{name}' content is '{0}'")
-    public SnackbarAssert content(Matcher<String> condition) {
-        jdiAssert(element().getMessageContent(), condition);
-        return this;
-    }
-
     public SnackbarAssert content(String text) {
-        return content(Matchers.is(text));
+        jdiAssert(element().getMessageContent(), Matchers.is(text));
+        return this;
     }
 
     @JDIAction("Assert that '{name}' is visible")

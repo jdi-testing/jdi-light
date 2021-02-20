@@ -13,7 +13,7 @@ public class SimpleSnackbarFrame extends Section {
 
     @JDISnackbar(root = ".MuiSnackbar-root",
             message = ".MuiSnackbarContent-message",
-            action = ".MuiSnackbarContent-action")
+            actions = ".MuiSnackbarContent-action button")
     public Snackbar snackbar;
 
 }

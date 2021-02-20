@@ -18,7 +18,8 @@ public class SnackbarTests extends TestsInit {
         simpleSnackbarFrame.openSnackbarButton.click();
         simpleSnackbarFrame.snackbar.is().visible();
         simpleSnackbarFrame.snackbar.has().content("Note archived");
-        simpleSnackbarFrame.snackbar.clickAction();
+        simpleSnackbarFrame.snackbar.getActionByIndex(1).has().text("UNDO");
+        simpleSnackbarFrame.snackbar.clickActionByIndex(2);
         simpleSnackbarFrame.snackbar.is().notExist();
     }
 
@@ -30,10 +31,12 @@ public class SnackbarTests extends TestsInit {
         consecutiveSnackbarFrame.openFirstSnackbarButton.click();
         consecutiveSnackbarFrame.snackbar.is().visible();
         consecutiveSnackbarFrame.snackbar.has().content("Message A");
+        consecutiveSnackbarFrame.snackbar.getActionByIndex(1).has().text("UNDO");
         consecutiveSnackbarFrame.openSecondSnackbarButton.click();
         consecutiveSnackbarFrame.snackbar.is().visible();
         consecutiveSnackbarFrame.snackbar.has().content("Message B");
-        consecutiveSnackbarFrame.snackbar.clickAction();
+        consecutiveSnackbarFrame.snackbar.clickActionByIndex(1);
+
         consecutiveSnackbarFrame.snackbar.is().notExist();
     }
 

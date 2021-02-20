@@ -13,6 +13,6 @@ public @interface JDISnackbar {
 
     @MarkupLocator String root() default "";
     @MarkupLocator String message() default "";
-    @MarkupLocator String action() default "";
+    @MarkupLocator String actions() default "";
 
 }
