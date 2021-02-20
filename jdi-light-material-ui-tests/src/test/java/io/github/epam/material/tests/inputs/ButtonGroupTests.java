@@ -32,19 +32,12 @@ public class ButtonGroupTests extends TestsInit {
         buttonGroupFrame.buttonGroup.buttonWithIndex(1).has().text(containsStringIgnoringCase("One"));
     }
 
-    @Test
+    @Test(expectedExceptions = {RuntimeException.class})
     public void disabledButtonGroupTest() {
         inputButtonGroupDisabledPage.open();
 
         buttonGroupFrame.buttonGroup.buttonWithIndex(1).is().disabled();
         buttonGroupFrame.buttonGroup.buttonWithText("Two").is().disabled();
-        try {
-            buttonGroupFrame.buttonGroup.buttonWithText("Three").click();
-            fail("Disabled button shouldn't work, but it does");
-        } catch (Exception ex) {
-            assertThat(safeException(ex),
-                    containsString("Can't perform click. Element is disabled"));
-        }
     }
 
     @Test
