@@ -3,16 +3,12 @@ package io.github.epam.material.tests.inputs;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.buttonGroupFrame;
 import static io.github.com.StaticSite.inputButtonGroupDefaultPage;
 import static io.github.com.StaticSite.inputButtonGroupDisabledPage;
 import static io.github.com.StaticSite.inputButtonGroupSplitPage;
 import static io.github.com.StaticSite.splitButtonGroupFrame;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.containsStringIgnoringCase;
-import static org.testng.Assert.fail;
 
 public class ButtonGroupTests extends TestsInit {
 
@@ -32,12 +28,14 @@ public class ButtonGroupTests extends TestsInit {
         buttonGroupFrame.buttonGroup.buttonWithIndex(1).has().text(containsStringIgnoringCase("One"));
     }
 
-    @Test(expectedExceptions = {RuntimeException.class})
+    @Test(expectedExceptions = {RuntimeException.class},
+            expectedExceptionsMessageRegExp = ".*(Can't perform click. Element is disabled)")
     public void disabledButtonGroupTest() {
         inputButtonGroupDisabledPage.open();
 
         buttonGroupFrame.buttonGroup.buttonWithIndex(1).is().disabled();
         buttonGroupFrame.buttonGroup.buttonWithText("Two").is().disabled();
+        buttonGroupFrame.buttonGroup.buttonWithText("Two").click();
     }
 
     @Test
