@@ -7,6 +7,7 @@
     <version>1.3.7</version>
     <artifactId>jdi-light-mobile-bootstrap-web-tests</artifactId>
     <name>Tests: JDI Mobile Bootstrap Web</name>
+    <groupId>com.epam.jdi</groupId>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
