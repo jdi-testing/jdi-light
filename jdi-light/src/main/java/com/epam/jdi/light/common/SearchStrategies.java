@@ -13,11 +13,12 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 public class SearchStrategies {
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
-    public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = WebElement::isDisplayed;
+    public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = el ->
+        el != null && el.isDisplayed();
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
-            el != null && el.isDisplayed() && el.isEnabled();
+        el != null && el.isDisplayed() && el.isEnabled();
     public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->
-            el != null && el.isDisplayed() && $(el).isClickable();
+        el != null && el.isDisplayed() && $(el).isClickable();
 
     public static void setSearchRule(String name, JFunc1<WebElement, Boolean> rule) {
         ELEMENT.searchRule = Pair.$(name, rule);
