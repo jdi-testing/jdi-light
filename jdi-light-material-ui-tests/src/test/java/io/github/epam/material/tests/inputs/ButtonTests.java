@@ -19,7 +19,7 @@ public class ButtonTests extends TestsInit {
         buttonFrame.button.has().text(containsString("BUTTON"));
     }
 
-    @Test
+    @Test(expectedExceptions = {RuntimeException.class})
     public void disabledButtonTest() {
         inputButtonDisabledPage.shouldBeOpened();
 
