@@ -3,6 +3,7 @@ package android10NonApplicationTests;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.mobile.elements.common.MobileDevice;
 import nativeapp_android.ApiDemosTestInit;
+import org.hamcrest.Matchers;
 import org.openqa.selenium.DeviceRotation;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.html5.Location;
@@ -11,8 +12,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class MobileDeviceTests extends ApiDemosTestInit {
@@ -20,17 +20,17 @@ public class MobileDeviceTests extends ApiDemosTestInit {
     @Test
     public void mobileRotationTest() {
         MobileDevice.rotate(new DeviceRotation(0, 0, 90));
-        assertThat(MobileDevice.getRotation().getX()).isEqualTo(0);
-        assertThat(MobileDevice.getRotation().getY()).isEqualTo(0);
-        assertThat(MobileDevice.getRotation().getZ()).isEqualTo(90);
+        jdiAssert(MobileDevice.getRotation().getX(), Matchers.is(0));
+        jdiAssert(MobileDevice.getRotation().getY(), Matchers.is(0));
+        jdiAssert(MobileDevice.getRotation().getZ(), Matchers.is(90));
     }
 
     @Test
     public void mobileOrientationTest() {
         MobileDevice.rotate(ScreenOrientation.LANDSCAPE);
-        assertThat(MobileDevice.getOrientation()).isEqualTo(ScreenOrientation.LANDSCAPE);
+        jdiAssert(MobileDevice.getOrientation(), Matchers.is(ScreenOrientation.LANDSCAPE));
         MobileDevice.rotate(ScreenOrientation.PORTRAIT);
-        assertThat(MobileDevice.getOrientation()).isEqualTo(ScreenOrientation.PORTRAIT);
+        jdiAssert(MobileDevice.getOrientation(), Matchers.is(ScreenOrientation.PORTRAIT));
     }
 
     @Test
@@ -43,8 +43,8 @@ public class MobileDeviceTests extends ApiDemosTestInit {
     @Test
     public void mobileLocationTest() {
         MobileDevice.setLocation(new Location(49, 123, 10));
-        assertThat(MobileDevice.getLocation().getLatitude()).isEqualTo(49.0);
-        assertThat(MobileDevice.getLocation().getLongitude()).isEqualTo(123.0);
+        jdiAssert(MobileDevice.getLocation().getLatitude(), Matchers.is(49.0));
+        jdiAssert(MobileDevice.getLocation().getLongitude(), Matchers.is(123.0));
     }
 
     @Test

@@ -33,6 +33,10 @@ import static com.epam.jdi.tools.StringUtils.namesEqual;
  * cannot be called with the current driver
  */
 public class MobileUtils {
+    private MobileUtils(){
+        throw new IllegalStateException("Utility class");
+    }
+
     public static <I> void executeDriverMethod(Class<I> clazz, Consumer<I> consumer) {
         WebDriver driver = getDriver();
         if (clazz.isInstance(driver)) {
@@ -55,17 +59,18 @@ public class MobileUtils {
             (obj, buttonName) -> $(By.xpath(String.format("//XCUIElementTypeButton[@name='%s']", buttonName)),
                     obj).setName(buttonName);
 
-    public static JFunc2<Object, String, HasTouchActions> GET_BUTTON = (obj, buttonName) -> {
+    public static final JFunc2<Object, String, HasTouchActions> GET_BUTTON = (obj, buttonName) -> {
         List<Field> fields = getFields(obj, IsButton.class);
-        if (fields.size() == 0)
+        if (fields.isEmpty())
             fields = getFieldsExact(obj, MobileAppUIElement.class, UIElement.class);
-        if (fields.size() > 1) {
+        if (!fields.isEmpty()) {
             fields = filter(fields, f ->
                     isInterfaceAnd(getValueField(f, obj).getClass(), HasTouchActions.class, INamed.class));
-            if (fields.size() >= 1) {
+            if (!fields.isEmpty()) {
                 Collection<HasTouchActions> buttons = select(fields,
                         f -> (HasTouchActions) getValueField(f, obj));
-                HasTouchActions button = first(buttons, b -> namesEqual(toButton(((INamed) b).getName()), toButton(buttonName)));
+                HasTouchActions button = first(buttons,
+                        b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
                 if (button != null)
                     return button;
             }
@@ -89,15 +94,15 @@ public class MobileUtils {
 
     public static JFunc2<Object, String, HasTouchActions> GET_APP_MENU_ITEM = (obj, buttonName) -> {
         List<Field> fields = getFields(obj, MenuItem.class);
-        if (fields.size() == 0)
+        if (fields.isEmpty())
             fields = getFieldsExact(obj, MobileAppUIElement.class, UIElement.class);
-        if (fields.size() > 1) {
+        if (!fields.isEmpty()) {
             fields = filter(fields, f ->
                     isInterfaceAnd(getValueField(f, obj).getClass(), HasTouchActions.class, INamed.class));
-            if (fields.size() >= 1) {
+            if (!fields.isEmpty()) {
                 Collection<HasTouchActions> buttons = select(fields,
                         f -> (HasTouchActions) getValueField(f, obj));
-                HasTouchActions button = first(buttons, b -> namesEqual(toButton(((INamed) b).getName()), toButton(buttonName)));
+                HasTouchActions button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
                 if (button != null)
                     return button;
             }
@@ -110,8 +115,4 @@ public class MobileUtils {
         }
         return GET_DEFAULT_APP_MENU_ITEM.execute(obj, buttonName);
     };
-
-
-
-
 }
