@@ -32,6 +32,7 @@ public class SearchViewTests extends ApiDemosTestInit {
     @Test
     public void searchViewTestForActionBar() {
         SearchViewPage.actionBarPage.click();
+        SearchViewActionBarPage.searchViewButton.is().iconifiedByDefault();
         SearchViewActionBarPage.searchViewButton.setExpanded();
         SearchViewActionBarPage.searchViewField.is().expanded();
         SearchViewActionBarPage.home.click();

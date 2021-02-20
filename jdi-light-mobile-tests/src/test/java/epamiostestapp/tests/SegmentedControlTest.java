@@ -1,11 +1,12 @@
 package epamiostestapp.tests;
 
 import epamiostestapp.IosApplicationInit;
-import org.eclipse.core.runtime.Assert;
+import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import static nativeapp.ios.epamiostestapp.MainPage.menuSegmentedControl;
 import static nativeapp.ios.epamiostestapp.SegmentedControlPage.*;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SegmentedControlTest extends IosApplicationInit {
 
@@ -28,12 +29,12 @@ public class SegmentedControlTest extends IosApplicationInit {
         menuSegmentedControl.tap();
 
         segmentedControl.tapSegment("Two");
-        Assert.isTrue(selectedValueTwo.isDisplayed());
+        jdiAssert(selectedValueTwo.isDisplayed(), Matchers.is(true));
 
         segmentedControl.tapSegment("Three");
-        Assert.isTrue(selectedValueThree.isDisplayed());
+        jdiAssert(selectedValueThree.isDisplayed(), Matchers.is(true));
 
         segmentedControl.tapSegment("One");
-        Assert.isTrue(selectedValueOne.isDisplayed());
+        jdiAssert(selectedValueOne.isDisplayed(), Matchers.is(true));
     }
 }

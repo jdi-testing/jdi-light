@@ -19,9 +19,6 @@ public class ApiDemosTestInit {
     public void setUp() {
         final String FILE_NAME = "src/main/resources/ApiDemos-debug.apk";
         initMobile(ApiDemosApp.class);
-        BEFORE_JDI_ACTION = jInfo -> {
-        };
-
         logger.toLog("Run ApiDemos App Tests");
         File file = new File(FILE_NAME);
         String path = file.getAbsolutePath();
