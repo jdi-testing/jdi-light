@@ -51,10 +51,10 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static FabFrame fabFrame;
 
-    @Url("/material-ui-fab--default")
+    @Url("/material-ui-inputs-floating-action-button--default")
     public static WebPage inputFabDefaultPage;
 
-    @Url("/material-ui-fab--disabled")
+    @Url("/material-ui-inputs-floating-action-button--disabled")
     public static WebPage inputFabDisabledPage;
 
     // text field

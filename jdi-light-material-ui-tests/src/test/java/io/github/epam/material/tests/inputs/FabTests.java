@@ -3,13 +3,9 @@ package io.github.epam.material.tests.inputs;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.fabFrame;
 import static io.github.com.StaticSite.inputFabDefaultPage;
 import static io.github.com.StaticSite.inputFabDisabledPage;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.testng.Assert.fail;
 
 public class FabTests extends TestsInit {
 
@@ -22,11 +18,13 @@ public class FabTests extends TestsInit {
         fabFrame.fab.is().enabled();
     }
 
-    @Test(expectedExceptions = {RuntimeException.class})
+    @Test(expectedExceptions = {RuntimeException.class},
+            expectedExceptionsMessageRegExp = ".*(Can't perform click. Element is disabled)")
     public void disabledFabTest() {
         inputFabDisabledPage.open();
 
         fabFrame.fab.is().disabled();
+        fabFrame.fab.click();
     }
 
 }
