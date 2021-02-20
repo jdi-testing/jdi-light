@@ -5,6 +5,7 @@ import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.android.apidemos.ApiDemosApp;
 import org.testng.annotations.*;
+import static com.epam.jdi.light.actions.ActionHelper.BEFORE_JDI_ACTION;
 
 
 import java.io.File;
@@ -18,6 +19,9 @@ public class ApiDemosTestInit {
     public void setUp() {
         final String FILE_NAME = "src/main/resources/ApiDemos-debug.apk";
         initMobile(ApiDemosApp.class);
+        BEFORE_JDI_ACTION = jInfo -> {
+        };
+
         logger.toLog("Run ApiDemos App Tests");
         File file = new File(FILE_NAME);
         String path = file.getAbsolutePath();
