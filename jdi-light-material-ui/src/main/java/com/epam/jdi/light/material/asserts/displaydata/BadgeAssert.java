@@ -11,8 +11,8 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
 
     @JDIAction("Assert that '{name}' badge content is '{0}'")
-    public BadgeAssert badgeContent(Matcher<String> condition) {
-        jdiAssert(element().getBadgeContent(), condition);
+    public BadgeAssert badgeContent(String text) {
+        jdiAssert(element().getBadgeContent(), Matchers.is(text));
         return this;
     }
 

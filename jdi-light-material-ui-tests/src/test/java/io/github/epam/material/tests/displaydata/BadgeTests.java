@@ -8,14 +8,13 @@ import static io.github.com.StaticSite.dataDisplayBadgeAlignmentPage;
 import static io.github.com.StaticSite.dataDisplayBadgePrimaryPage;
 import static io.github.com.StaticSite.dataDisplayBadgeDotPage;
 import static io.github.com.StaticSite.dataDisplayBadgeInvisiblePage;
-import static org.hamcrest.Matchers.containsString;
 
 public class BadgeTests extends TestsInit {
 
     @Test
     public void primaryBadgeTest() {
         dataDisplayBadgePrimaryPage.open();
-        badgeFrame.badge.has().badgeContent(containsString("4"));
+        badgeFrame.badge.has().badgeContent("4");
         badgeFrame.badge.has().alignment("Top Right");
     }
 
@@ -36,6 +35,5 @@ public class BadgeTests extends TestsInit {
         dataDisplayBadgeAlignmentPage.open();
         badgeFrame.badge.has().alignment("Bottom Left");
     }
-
 
 }
