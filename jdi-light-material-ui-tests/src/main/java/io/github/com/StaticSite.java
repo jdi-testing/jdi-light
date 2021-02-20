@@ -16,6 +16,7 @@ import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
+import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
@@ -107,7 +108,16 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
-  
+
+    // layout
+    // container
+    @Frame("storybook-preview-iframe")
+    public static ContainerFrame containerFrame;
+
+    @Url("/material-ui-layout-container--default")
+    public static WebPage defaultContainerPage;
+
+
     @UI("#login-form")
     public static Form<User> loginForm;
 
