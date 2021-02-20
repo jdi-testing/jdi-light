@@ -247,9 +247,9 @@ public class UIElement extends JDIBase
     }
 
     @JDIAction(level = DEBUG)
-    public WebElement findElement(@MarkupLocator By locator) { return $(locator, this).getWebElement(); }
+    public WebElement findElement(@MarkupLocator By locator) { return getWebElement().findElement(locator); }
     @JDIAction(level = DEBUG)
-    public List<WebElement> findElements(@MarkupLocator By locator) { return $(locator, this).getWebElements(); }
+    public List<WebElement> findElements(@MarkupLocator By locator) { return getWebElement().findElements(locator); }
 
     /** Get screen screen shot */
     @JDIAction(level = DEBUG)
@@ -627,7 +627,7 @@ public class UIElement extends JDIBase
         return hasImage() ? new File(imageFilePath) : null;
     }
     protected String getScreenshotName(String tag) {
-        return varName + tag + SCREEN.fileSuffix;
+        return tag + "." + SCREEN.fileSuffix;
     }
 
     @JDIAction(level = DEBUG)
@@ -687,7 +687,7 @@ public class UIElement extends JDIBase
     public Label label() {
         return new Label().setup(Label.class, j->j
             .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))
-            .setName(getName() + " label"));
+            .setName(getName() + " label").setTypeName("Label"));
     }
 
     /**
