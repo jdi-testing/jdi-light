@@ -6,9 +6,6 @@ import com.epam.jdi.light.logger.LogLevels;
 
 public interface ISearchViewButton extends ICoreElement {
 
-        @JDIAction(value = "Check that '{name}' is iconified", level = LogLevels.DEBUG)
-        boolean isIconified();
-
         @JDIAction(value = "Make '{name}' expanded", level = LogLevels.DEBUG)
         void setExpanded();
 }

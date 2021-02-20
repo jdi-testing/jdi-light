@@ -36,7 +36,6 @@ public class SearchViewTests extends ApiDemosTestInit {
         SearchViewActionBarPage.searchViewButton.setExpanded();
         SearchViewActionBarPage.searchViewField.is().expanded();
         SearchViewActionBarPage.home.click();
-        SearchViewActionBarPage.searchViewButton.isIconified();
         SearchViewActionBarPage.searchViewButton.setExpanded();
         SearchViewActionBarPage.searchViewField.has().text(PLACEHOLDER_ACTION_BAR);
         SearchViewActionBarPage.searchViewField.input("Settings");
