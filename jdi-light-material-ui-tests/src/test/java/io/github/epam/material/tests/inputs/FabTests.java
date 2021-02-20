@@ -22,18 +22,11 @@ public class FabTests extends TestsInit {
         fabFrame.fab.is().enabled();
     }
 
-    @Test
+    @Test(expectedExceptions = {RuntimeException.class})
     public void disabledFabTest() {
         inputFabDisabledPage.open();
 
         fabFrame.fab.is().disabled();
-        try {
-            fabFrame.fab.click();
-            fail("Disabled button shouldn't work, but it does");
-        } catch (RuntimeException ex) {
-            assertThat(safeException(ex),
-                    containsString("Can't perform click. Element is disabled"));
-        }
     }
 
 }
