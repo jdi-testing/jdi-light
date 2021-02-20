@@ -168,11 +168,11 @@ public class DriverData {
                 cap.setCapability("goog:loggingPrefs", logPrefs);
             });
         // Capabilities from settings
-        DRIVER.capabilities.chrome.forEach((property, value) -> setupChomeCapability(cap, property, value));
+        DRIVER.capabilities.chrome.forEach((property, value) -> setupChromeCapability(cap, property, value));
     }
     public static JAction1<ChromeOptions> CHROME_OPTIONS = DriverData::defaultChromeOptions;
 
-    public static void setupChomeCapability(ChromeOptions cap, String property, String value) {
+    public static void setupChromeCapability(ChromeOptions cap, String property, String value) {
         logger.info("Setup Chrome cap %s to %s", property, value);
         switch (property) {
             case ARGUMENTS_PROPERTY:

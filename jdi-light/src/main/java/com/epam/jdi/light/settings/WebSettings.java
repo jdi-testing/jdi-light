@@ -69,7 +69,7 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebSettings {
-    public static final ILogger logger = instance("JDI");
+    public static ILogger logger = instance("JDI");
     public static String getDomain() {
         if (isBlank(DRIVER.domain)) {
             init();
