@@ -11,10 +11,12 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.inputs.FabFrame;
+import io.github.com.pages.displaydata.IconFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
@@ -55,6 +57,25 @@ public class StaticSite {
     @Url("/material-ui-fab--disabled")
     public static WebPage inputFabDisabledPage;
 
+    // text field
+    @Frame("storybook-preview-iframe")
+    public static TextFieldFrame textFieldFrame;
+
+    @Url("/material-ui-textfield--standard")
+    public static WebPage inputTextFieldStandardPage;
+
+    @Url("/material-ui-textfield--field-with-default")
+    public static WebPage inputTextFieldFilledWithDefaultPage;
+
+    @Url("/material-ui-textfield--filled")
+    public static WebPage inputTextFieldFilledPage;
+
+    @Url("/material-ui-textfield--disabled")
+    public static WebPage inputTextFieldDisabledPage;
+
+    @Url("/material-ui-textfield--time")
+    public static WebPage inputTextFieldTimePage;
+
     // surfaces
     // accordion
     @Frame("storybook-preview-iframe")
@@ -87,6 +108,17 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
+    // Display data
+    // material icon
+    @Frame("storybook-preview-iframe")
+    public static IconFrame iconFrame;
+
+    @Url("/material-ui-data-display-icon--default")
+    public static WebPage displayDataDefaultMaterialIconPage;
+
+    @Url("/material-ui-data-display-icon--secondary")
+    public static WebPage displayDataLargeMaterialIconPage;
+  
     @UI("#login-form")
     public static Form<User> loginForm;
 
