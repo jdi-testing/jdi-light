@@ -11,8 +11,8 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
 
     @JDIAction("Assert that '{name}' text is '{0}'")
-    public ButtonAssert text(Matcher<String> condition) {
-        jdiAssert(element().getText(), condition);
+    public ButtonAssert text(String text) {
+        jdiAssert(element().getText(), Matchers.is(text));
         return this;
     }
 

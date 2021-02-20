@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.buttonFrame;
 import static io.github.com.StaticSite.inputButtonDefaultPage;
 import static io.github.com.StaticSite.inputButtonDisabledPage;
-import static org.hamcrest.Matchers.containsString;
 
 public class ButtonTests extends TestsInit {
 
@@ -16,14 +15,16 @@ public class ButtonTests extends TestsInit {
 
         buttonFrame.button.is().enabled();
         buttonFrame.button.click();
-        buttonFrame.button.has().text(containsString("BUTTON"));
+        buttonFrame.button.has().text("BUTTON");
     }
 
-    @Test(expectedExceptions = {RuntimeException.class})
+    @Test(expectedExceptions = {RuntimeException.class},
+            expectedExceptionsMessageRegExp = ".*(Can't perform click. Element is disabled)")
     public void disabledButtonTest() {
         inputButtonDisabledPage.shouldBeOpened();
 
         buttonFrame.button.is().disabled();
+        buttonFrame.button.click();
     }
 
 }

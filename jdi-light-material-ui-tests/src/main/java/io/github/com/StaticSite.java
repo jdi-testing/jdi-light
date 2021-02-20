@@ -40,10 +40,10 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static ButtonFrame buttonFrame;
 
-    @Url("/material-ui-button--default")
+    @Url("/material-ui-inputs-button--default")
     public static WebPage inputButtonDefaultPage;
 
-    @Url("/material-ui-button--disabled")
+    @Url("/material-ui-inputs-button--disabled")
     public static WebPage inputButtonDisabledPage;
 
     // text field
