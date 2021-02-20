@@ -11,8 +11,8 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class TypographyAssert extends UIAssert<TypographyAssert, Typography> {
 
     @JDIAction("Assert that '{name}' text is '{0}'")
-    public TypographyAssert text(Matcher<String> condition) {
-        jdiAssert(element().getValue(), condition);
+    public TypographyAssert text(String text) {
+        jdiAssert(element().getValue(), Matchers.is(text));
         return this;
     }
 
