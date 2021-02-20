@@ -209,13 +209,12 @@ public class ActionHelper {
         if (LOGS.writeToLog) {
             logger.toLog(message, logLevel(jInfo));
         }
-        if (jInfo.isCore() && ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
-            if (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
-                || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo)) {
+        if (jInfo.isCore() && ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)
+            && (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
+                || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo))) {
                 try {
                     jInfo.core().highlight();
                 } catch (Throwable ignore) { }
-            }
         }
         processPage(jInfo);
         if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
@@ -343,7 +342,7 @@ public class ActionHelper {
         return map;
     }
     public static void processPage(ActionObject jInfo) {
-        //getWindows();
+        getWindows();
         Object element = jInfo.instance();
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
             WebPage page = getPage(element);
@@ -598,7 +597,8 @@ public class ActionHelper {
         logger.trace("defaultAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         return jInfo.overrideAction() != null
-                ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
+            ? jInfo.overrideAction().execute(jInfo.object())
+            : jInfo.execute();
     }
     public static Object stableAction(ActionObject jInfo) {
         logger.trace("stableAction: " + getClassMethodName(jInfo.jp()));
