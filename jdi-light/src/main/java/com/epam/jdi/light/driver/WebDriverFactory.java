@@ -249,26 +249,11 @@ public class WebDriverFactory {
 
     private static void closeDriver(WebDriver driver) {
         try {
-            driver.close();
             driver.quit();
         } catch (Exception ignore) { }
     }
 
     public static void quit() {
         close();
-    }
-
-    public static void quitDriverNativeApp() {
-        for (Pair<String, WebDriver> pair : getRunDrivers()) {
-            quitDriver(pair.value);
-        }
-        getRunDrivers().clear();
-    }
-
-    private static void quitDriver(WebDriver driver) {
-        try {
-            driver.quit();
-        } catch (Exception ignore) {
-        }
     }
 }

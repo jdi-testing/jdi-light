@@ -31,6 +31,6 @@ public class ActivityTestsInit {
         AppManager.closeApp();
         AppManager.removeApp("io.appium.android.apis");
         new AllurePropertiesGenerator().createAllureProperties();
-        WebDriverFactory.quitDriverNativeApp();
+        WebDriverFactory.quit();
     }
 }

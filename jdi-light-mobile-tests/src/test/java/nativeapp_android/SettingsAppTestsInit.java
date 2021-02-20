@@ -27,6 +27,6 @@ public class SettingsAppTestsInit {
     @AfterClass(alwaysRun = true)
     public void tearDown() {
         new AllurePropertiesGenerator().createAllureProperties();
-        WebDriverFactory.quitDriverNativeApp();
+        WebDriverFactory.quit();
     }
 }

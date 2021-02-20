@@ -18,7 +18,7 @@ public class EmulatorPowerInit {
     }
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        WebDriverFactory.quitDriverNativeApp();
+        WebDriverFactory.quit();
     }
 
 }
