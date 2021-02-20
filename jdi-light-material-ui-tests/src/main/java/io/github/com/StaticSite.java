@@ -112,10 +112,10 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static TooltipFrame tooltipFrame;
 
-    @Url("/material-ui-tooltip--default")
+    @Url("/material-ui-data-display-tooltip--default")
     public static WebPage displayDataTooltipDefaultPage;
 
-    @Url("/material-ui-tooltip--interactive")
+    @Url("/material-ui-data-display-tooltip--interactive")
     public static WebPage displayDataTooltipInteractivePage;
 
     @UI("#login-form")

@@ -11,13 +11,9 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> {
 
     @JDIAction("Assert that '{name}' text is '{0}'")
-    public TooltipAssert text(Matcher<String> condition) {
-        jdiAssert(element().getValue(), condition);
-        return this;
-    }
-
     public TooltipAssert text(String text) {
-        return text(Matchers.is(text));
+        jdiAssert(element().getValue(), Matchers.is(text));
+        return this;
     }
 
     @JDIAction("Assert that '{name}' text is visible")
