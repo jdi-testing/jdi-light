@@ -547,7 +547,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             }
         }
         refresh();
-        // elements = noValidation(() -> elements(0));
         elements = elements(0);
         if (elements == null || elements.isEmpty())
             return new ArrayList<>();
