@@ -78,6 +78,7 @@ public class DataListAssert<T extends ICoreElement, D>
      */
     @JDIAction("Assert that '{name}' text {0}")
     public DataListAssert<T, D> value(D item) {
+        // MatcherAssert.assertThat(element().hasAny(d -> d.equals(item)), Matchers.is(true));
         return and(hasItem(item));
     }
 

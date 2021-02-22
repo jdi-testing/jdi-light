@@ -15,6 +15,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -24,7 +25,9 @@ import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
@@ -38,6 +41,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
+import static java.util.Arrays.*;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -61,7 +65,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int rowHeaderIndex = -1;
     protected int shiftColumnIndex = -1;
     protected int shiftRowIndex = -1;
-    protected int[] columnsMapping = new int[]{};
+    protected Safe<List<Integer>> columnsMapping = new Safe<>(ArrayList::new);
     protected String rowHeaderName = "";
     protected int startIndex = ELEMENT.startIndex;
     public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
@@ -361,7 +365,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDebug
     public WebList getRow(int rowNum) {
         WebList row = getRowByIndex(getRowIndex(rowNum));
-        return shiftColumnIndex > getStartIndex() || columnsMapping.length > 0
+        return shiftColumnIndex > getStartIndex() || columnsMapping.get().size() > 0
             ? getMappedRow(row)
             : row;
     }
@@ -381,8 +385,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return columns.set(result);
     }
     protected int getColumnIndex(int index) {
-        return shiftColumnIndex == -1 && columnsMapping.length > 0
-            ? columnsMapping[index - getStartIndex()]
+        return shiftColumnIndex == -1 && columnsMapping.get().size() > 0
+            ? columnsMapping.get().get(index - getStartIndex())
             : index;
     }
     protected int getColumnLocatorIndex(int index) {
@@ -735,8 +739,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             this.jsColumn = NAME_TO_LOCATOR.execute(j.jsColumn());
         if (header.size() > 0)
             this.header.setFinal(header);
-        if (j.columnsMapping().length > 0)
-            this.columnsMapping = j.columnsMapping();
+        if (j.columnsMapping().length > 0) {
+            this.columnsMapping.set(stream(j.columnsMapping()).boxed().collect(Collectors.toList()));
+        }
         if (j.size() != -1)
             this.size.setFinal(j.size());
         if (j.count() != -1)
