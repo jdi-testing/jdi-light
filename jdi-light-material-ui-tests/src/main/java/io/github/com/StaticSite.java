@@ -10,11 +10,16 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.inputs.ButtonGroupFrame;
+import io.github.com.pages.displaydata.TypographyFrame;
 import io.github.com.pages.displaydata.IconFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
+import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
+import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
@@ -67,6 +72,22 @@ public class StaticSite {
     @Url("/material-ui-inputs-text-field--time")
     public static WebPage inputTextFieldTimePage;
 
+    // button group
+    @Frame("storybook-preview-iframe")
+    public static ButtonGroupFrame buttonGroupFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static SplitButtonGroupFrame splitButtonGroupFrame;
+
+    @Url("/material-ui-inputs-button-group--default")
+    public static WebPage inputButtonGroupDefaultPage;
+
+    @Url("/material-ui-inputs-button-group--disabled")
+    public static WebPage inputButtonGroupDisabledPage;
+
+    @Url("/material-ui-inputs-button-group--split-button")
+    public static WebPage inputButtonGroupSplitPage;
+
     // surfaces
     // accordion
     @Frame("storybook-preview-iframe")
@@ -110,6 +131,13 @@ public class StaticSite {
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
 
+    // typography
+    @Frame("storybook-preview-iframe")
+    public static TypographyFrame typographyFrame;
+
+    @Url("/material-ui-data-display-typography--typography-view")
+    public static WebPage dataDisplayTypographyPage;
+
     // feedback
     // backdrop
     @Frame("storybook-preview-iframe")
@@ -117,6 +145,19 @@ public class StaticSite {
 
     @Url("/material-ui-feedback-backdrop--default-backdrop")
     public static WebPage feedbackBackdropDefaultPage;
+
+    // snackbar
+    @Frame("storybook-preview-iframe")
+    public static SimpleSnackbarFrame simpleSnackbarFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static ConsecutiveSnackbarFrame consecutiveSnackbarFrame;
+
+    @Url("/material-ui-feedback-snackbar--simple-snackbar")
+    public static WebPage feedbackSnackbarSimplePage;
+
+    @Url("/material-ui-feedback-snackbar--consecutive-snackbars")
+    public static WebPage feedbackSnackbarConsecutivePage;
 
     // utils
     // transition
