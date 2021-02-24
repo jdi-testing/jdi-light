@@ -15,16 +15,16 @@ public class ButtonGroupTests extends TestsInit {
     public void defaultButtonGroupTest() {
         inputButtonGroupDefaultPage.open();
 
-        buttonGroupFrame.buttonGroup.buttonWithIndex(1).click();
-        buttonGroupFrame.buttonGroup.buttonWithIndex(2).click();
-        buttonGroupFrame.buttonGroup.buttonWithIndex(3).click();
+        buttonGroupFrame.buttonGroup.getButtonByIndex(1).click();
+        buttonGroupFrame.buttonGroup.getButtonByIndex(2).click();
+        buttonGroupFrame.buttonGroup.getButtonByIndex(3).click();
 
-        buttonGroupFrame.buttonGroup.buttonWithText("Three").click();
-        buttonGroupFrame.buttonGroup.buttonWithText("Two").click();
-        buttonGroupFrame.buttonGroup.buttonWithText("One").click();
+        buttonGroupFrame.buttonGroup.getButtonByText("Three").click();
+        buttonGroupFrame.buttonGroup.getButtonByText("Two").click();
+        buttonGroupFrame.buttonGroup.getButtonByText("One").click();
 
-        buttonGroupFrame.buttonGroup.buttonWithIndex(1).is().enabled();
-        buttonGroupFrame.buttonGroup.buttonWithIndex(1).has().text("ONE");
+        buttonGroupFrame.buttonGroup.getButtonByIndex(1).is().enabled();
+        buttonGroupFrame.buttonGroup.getButtonByIndex(1).has().text("ONE");
     }
 
     @Test(expectedExceptions = {RuntimeException.class},
@@ -32,20 +32,20 @@ public class ButtonGroupTests extends TestsInit {
     public void disabledButtonGroupTest() {
         inputButtonGroupDisabledPage.open();
 
-        buttonGroupFrame.buttonGroup.buttonWithIndex(1).is().disabled();
-        buttonGroupFrame.buttonGroup.buttonWithText("Two").is().disabled();
-        buttonGroupFrame.buttonGroup.buttonWithText("Two").click();
+        buttonGroupFrame.buttonGroup.getButtonByIndex(1).is().disabled();
+        buttonGroupFrame.buttonGroup.getButtonByText("Two").is().disabled();
+        buttonGroupFrame.buttonGroup.getButtonByText("Two").click();
     }
 
     @Test
     public void splitButtonGroupTest() {
         inputButtonGroupSplitPage.open();
 
-        splitButtonGroupFrame.buttonGroup.mainButton().click();
-        splitButtonGroupFrame.buttonGroup.mainButton()
+        splitButtonGroupFrame.buttonGroup.getMainButton().click();
+        splitButtonGroupFrame.buttonGroup.getMainButton()
                 .has().text("SQUASH AND MERGE");
         splitButtonGroupFrame.buttonGroup.select("Update project");
-        splitButtonGroupFrame.buttonGroup.mainButton()
+        splitButtonGroupFrame.buttonGroup.getMainButton()
                 .has().text("UPDATE PROJECT");
 
 

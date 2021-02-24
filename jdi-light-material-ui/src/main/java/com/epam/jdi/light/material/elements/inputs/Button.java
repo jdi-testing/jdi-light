@@ -7,9 +7,7 @@ import com.epam.jdi.light.material.asserts.inputs.ButtonAssert;
 
 public class Button extends UIBaseElement<ButtonAssert> {
 
-    Button() {
-
-    }
+    Button() {}
 
     Button(UIElement element) {
         core().setCore(element);

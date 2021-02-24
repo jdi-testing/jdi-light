@@ -21,17 +21,17 @@ public class ButtonGroup extends UIBaseElement<ButtonGroupAssert> implements ISe
     String list;
 
     @JDIAction("Get Button with index '{0}'")
-    public Button buttonWithIndex(int index) {
+    public Button getButtonByIndex(int index) {
         return new Button(core().finds(BUTTON_PATTERN).get(index));
     }
 
     @JDIAction("Get Button with text '{0}'")
-    public Button buttonWithText(String text) {
+    public Button getButtonByText(String text) {
         return new Button(core().find(String.format(BUTTON_WITH_TEXT_PATTERN, text)));
     }
 
     @JDIAction("Get main button")
-    public Button mainButton() {
+    public Button getMainButton() {
         return new Button(core().find(mainButton));
     }
 
@@ -40,7 +40,7 @@ public class ButtonGroup extends UIBaseElement<ButtonGroupAssert> implements ISe
         core().find(expand).click();
         UIElement element = core().find(list).finds("li")
                 .stream().filter(el -> item.equals(el.getText())).findAny()
-                .orElseThrow(() -> new IllegalArgumentException("s"));
+                .orElseThrow(() -> new IllegalArgumentException("Item does not exist"));
         element.click();
     }
 
