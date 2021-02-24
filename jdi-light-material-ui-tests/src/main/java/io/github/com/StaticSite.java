@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.displaydata.TypographyFrame;
 import io.github.com.pages.displaydata.IconFrame;
@@ -137,6 +138,22 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-typography--typography-view")
     public static WebPage dataDisplayTypographyPage;
+
+    // badge
+    @Frame("storybook-preview-iframe")
+    public static BadgeFrame badgeFrame;
+
+    @Url("/material-ui-data-display-badge--primary")
+    public static WebPage dataDisplayBadgePrimaryPage;
+
+    @Url("/material-ui-data-display-badge--dot")
+    public static WebPage dataDisplayBadgeDotPage;
+
+    @Url("/material-ui-data-display-badge--invisible")
+    public static WebPage dataDisplayBadgeInvisiblePage;
+
+    @Url("/material-ui-data-display-badge--alignment")
+    public static WebPage dataDisplayBadgeAlignmentPage;
 
     // feedback
     // backdrop
