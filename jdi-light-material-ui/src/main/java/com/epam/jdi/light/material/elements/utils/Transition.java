@@ -51,6 +51,6 @@ public class Transition extends UIBaseElement<TransitionAssert> implements ISetu
             return;
         JDITransition j = field.getAnnotation(JDITransition.class);
         switchBase = j.switchBase();
-        paper = j.paper();
+        paper = j.expandedElement();
     }
 }

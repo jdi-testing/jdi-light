@@ -9,7 +9,7 @@ public class TransitionFrame extends Section {
     @JDITransition(
             root = "#root",
             switchBase = ".MuiSwitch-root",
-            paper = ".MuiPaper-root")
+            expandedElement = ".MuiPaper-root")
     public Transition transition;
 
 }

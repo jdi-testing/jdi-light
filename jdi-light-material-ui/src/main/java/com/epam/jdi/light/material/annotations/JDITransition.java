@@ -13,6 +13,6 @@ public @interface JDITransition {
 
     @MarkupLocator String root() default "";
     @MarkupLocator String switchBase() default "";
-    @MarkupLocator String paper() default "";
+    @MarkupLocator String expandedElement() default "";
 
 }
