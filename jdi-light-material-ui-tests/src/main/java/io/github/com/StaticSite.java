@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.displaydata.TypographyFrame;
 import io.github.com.pages.displaydata.IconFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
@@ -110,6 +111,13 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
+
+    // typography
+    @Frame("storybook-preview-iframe")
+    public static TypographyFrame typographyFrame;
+
+    @Url("/material-ui-data-display-typography--typography-view")
+    public static WebPage dataDisplayTypographyPage;
 
     // feedback
     // backdrop
