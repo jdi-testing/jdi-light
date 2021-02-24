@@ -13,8 +13,8 @@ public class Typography extends UIBaseElement<TypographyAssert> {
         return new TypographyAssert().set(this);
     }
 
-    @JDIAction("Get value of '{name}'")
-    public String getValue() {
+    @JDIAction("Get text of '{name}'")
+    public String getText() {
         return core().getText();
     }
 
