@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <version>1.3.7</version>
+    <version>1.3.8</version>
     <artifactId>jdi-light-mobile-html-web-tests</artifactId>
     <name>Tests: JDI Mobile HTML Web</name>
     <groupId>com.epam.jdi</groupId>
@@ -17,7 +17,7 @@
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.6</aspectj.version>
-        <jdi.version>1.3.7</jdi.version>
+        <jdi.version>1.3.8</jdi.version>
         <suite.xml.file>src/test/resources/demoRun.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/general.xml</suite.xml.file>
     </properties>
