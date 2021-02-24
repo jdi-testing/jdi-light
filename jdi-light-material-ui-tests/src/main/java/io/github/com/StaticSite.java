@@ -14,6 +14,7 @@ import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.displaydata.TypographyFrame;
 import io.github.com.pages.displaydata.IconFrame;
+import io.github.com.pages.displaydata.TooltipFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
@@ -154,6 +155,16 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-badge--alignment")
     public static WebPage dataDisplayBadgeAlignmentPage;
+
+    // tooltip
+    @Frame("storybook-preview-iframe")
+    public static TooltipFrame tooltipFrame;
+
+    @Url("/material-ui-data-display-tooltip--default")
+    public static WebPage displayDataTooltipDefaultPage;
+
+    @Url("/material-ui-data-display-tooltip--interactive")
+    public static WebPage displayDataTooltipInteractivePage;
 
     // feedback
     // backdrop
