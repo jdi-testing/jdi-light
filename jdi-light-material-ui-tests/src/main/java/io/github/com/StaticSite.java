@@ -23,6 +23,7 @@ import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.utils.TransitionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
@@ -157,6 +158,17 @@ public class StaticSite {
 
     @Url("/material-ui-feedback-snackbar--consecutive-snackbars")
     public static WebPage feedbackSnackbarConsecutivePage;
+
+    // utils
+    // transition
+    @Frame("storybook-preview-iframe")
+    public static TransitionFrame transitionFrame;
+
+    @Url("/material-ui-utils-transitions--fade-transition")
+    public static WebPage utilsTransitionFadePage;
+
+    @Url("/material-ui-utils-transitions--collapse-transition")
+    public static WebPage utilsTransitionCollapsePage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
