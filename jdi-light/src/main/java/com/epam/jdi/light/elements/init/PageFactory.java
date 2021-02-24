@@ -200,8 +200,8 @@ public class PageFactory {
     }
     //endregion
 
-    public static ArrayList<Class<?>> STOP_INIT_CLASSES = new ArrayList<>(asList(
-            Object.class, WebPage.class, PageObject.class, UIElement.class,
+    public static List<Class<?>> STOP_INIT_CLASSES = new ArrayList<>(asList(
+        Object.class, WebPage.class, PageObject.class, UIElement.class,
             UIBaseElement.class, UIListBase.class,
             DataList.class, JList.class, WebList.class));
 
