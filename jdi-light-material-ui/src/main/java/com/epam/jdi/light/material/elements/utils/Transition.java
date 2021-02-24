@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.elements.utils;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDITransition;
 import com.epam.jdi.light.material.asserts.utils.TransitionAssert;
@@ -13,7 +14,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 public class Transition extends UIBaseElement<TransitionAssert> implements ISetup {
 
     String switchBase;
-    String paper;
+    String expandedElement;
 
     @JDIAction("Click switch in '{name}'")
     public void clickSwitch() {
@@ -22,17 +23,21 @@ public class Transition extends UIBaseElement<TransitionAssert> implements ISetu
 
     @JDIAction("Get content of '{name}'")
     public String getContent() {
-        return core().find(paper).getText();
+        return getExpandedElement().getText();
     }
 
     @Override
     public boolean isVisible() {
-        return "visible".equalsIgnoreCase(core().find(paper).getCssValue("visibility"));
+        return "visible".equalsIgnoreCase(getExpandedElement().getCssValue("visibility"));
     }
 
     @Override
     public boolean isHidden() {
-        return "hidden".equalsIgnoreCase(core().find(paper).getCssValue("visibility"));
+        return "hidden".equalsIgnoreCase(getExpandedElement().getCssValue("visibility"));
+    }
+
+    public UIElement getExpandedElement() {
+        return core().find(expandedElement);
     }
 
     @Override
@@ -51,6 +56,6 @@ public class Transition extends UIBaseElement<TransitionAssert> implements ISetu
             return;
         JDITransition j = field.getAnnotation(JDITransition.class);
         switchBase = j.switchBase();
-        paper = j.expandedElement();
+        expandedElement = j.expandedElement();
     }
 }
