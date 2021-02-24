@@ -14,6 +14,7 @@ import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.displaydata.IconFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
+import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
@@ -41,29 +42,29 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static ButtonFrame buttonFrame;
 
-    @Url("/material-ui-button--default")
+    @Url("/material-ui-inputs-button--default")
     public static WebPage inputButtonDefaultPage;
 
-    @Url("/material-ui-button--disabled")
+    @Url("/material-ui-inputs-button--disabled")
     public static WebPage inputButtonDisabledPage;
 
     // text field
     @Frame("storybook-preview-iframe")
     public static TextFieldFrame textFieldFrame;
 
-    @Url("/material-ui-textfield--standard")
+    @Url("/material-ui-inputs-text-field--standard")
     public static WebPage inputTextFieldStandardPage;
 
-    @Url("/material-ui-textfield--field-with-default")
+    @Url("/material-ui-inputs-text-field--field-with-default")
     public static WebPage inputTextFieldFilledWithDefaultPage;
 
-    @Url("/material-ui-textfield--filled")
+    @Url("/material-ui-inputs-text-field--filled")
     public static WebPage inputTextFieldFilledPage;
 
-    @Url("/material-ui-textfield--disabled")
+    @Url("/material-ui-inputs-text-field--disabled")
     public static WebPage inputTextFieldDisabledPage;
 
-    @Url("/material-ui-textfield--time")
+    @Url("/material-ui-inputs-text-field--time")
     public static WebPage inputTextFieldTimePage;
 
     // surfaces
@@ -98,6 +99,8 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
+    // Display data
+    // material icon
     @Frame("storybook-preview-iframe")
     public static IconFrame iconFrame;
 
@@ -122,6 +125,14 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-badge--alignment")
     public static WebPage dataDisplayBadgeAlignmentPage;
+
+    // feedback
+    // backdrop
+    @Frame("storybook-preview-iframe")
+    public static BackdropFrame backdropFrame;
+
+    @Url("/material-ui-feedback-backdrop--default-backdrop")
+    public static WebPage feedbackBackdropDefaultPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
