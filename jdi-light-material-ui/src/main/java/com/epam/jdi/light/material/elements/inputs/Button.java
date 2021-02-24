@@ -21,6 +21,17 @@ public class Button extends UIBaseElement<ButtonAssert> {
         return this.is();
     }
 
+    @JDIAction("Check if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !isDisabled();
+    }
+
+    @JDIAction("Check if '{name}' is disabled")
+    public boolean isDisabled() {
+        return core().hasClass("Mui-disabled");
+    }
+
+    @JDIAction("Check text in '{name}'")
     public String getText() {
         return core().getText();
     }
