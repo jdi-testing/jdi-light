@@ -14,7 +14,7 @@ import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.displaydata.TypographyFrame;
 import io.github.com.pages.inputs.FabFrame;
-import io.github.com.pages.displaydata.IconFrame;
+import io.github.com.pages.displaydata.MaterialIconFrame;
 import io.github.com.pages.displaydata.TooltipFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
@@ -37,13 +37,13 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static SwitchFrame switchFrame;
 
-    @Url("/material-ui-switch--default")
+    @Url("/material-ui-inputs-switch--default")
     public static WebPage inputSwitchDefaultPage;
 
-    @Url("/material-ui-switch--disabled")
+    @Url("/material-ui-inputs-switch--disabled")
     public static WebPage inputSwitchDisabledPage;
 
-    @Url("/material-ui-switch--disabled-and-checked")
+    @Url("/material-ui-inputs-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
 
     // button
@@ -136,12 +136,12 @@ public class StaticSite {
     // Display data
     // material icon
     @Frame("storybook-preview-iframe")
-    public static IconFrame iconFrame;
+    public static MaterialIconFrame materialIconFrame;
 
-    @Url("/material-ui-data-display-icon--default")
+    @Url("/material-ui-data-display-material-icons--default")
     public static WebPage displayDataDefaultMaterialIconPage;
 
-    @Url("/material-ui-data-display-icon--secondary")
+    @Url("/material-ui-data-display-material-icons--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
 
     // typography
