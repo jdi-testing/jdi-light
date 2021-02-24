@@ -2,9 +2,9 @@ package com.epam.jdi.light.material.elements.displaydata;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.material.asserts.displaydata.IconAssert;
+import com.epam.jdi.light.material.asserts.displaydata.MaterialIconAssert;
 
-public class Icon extends UIBaseElement<IconAssert> {
+public class MaterialIcon extends UIBaseElement<MaterialIconAssert> {
     @JDIAction("Is '{name}' displayed")
     public boolean isDisplayed() {
         return core().isDisplayed();
@@ -21,7 +21,7 @@ public class Icon extends UIBaseElement<IconAssert> {
     }
 
     @Override
-    public IconAssert is() {
-        return new IconAssert().set(this);
+    public MaterialIconAssert is() {
+        return new MaterialIconAssert().set(this);
     }
 }
