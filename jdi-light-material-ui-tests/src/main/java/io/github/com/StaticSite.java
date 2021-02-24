@@ -13,6 +13,8 @@ import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.displaydata.IconFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
+import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
+import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SwitchFrame;
@@ -116,6 +118,19 @@ public class StaticSite {
 
     @Url("/material-ui-feedback-backdrop--default-backdrop")
     public static WebPage feedbackBackdropDefaultPage;
+
+    // snackbar
+    @Frame("storybook-preview-iframe")
+    public static SimpleSnackbarFrame simpleSnackbarFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static ConsecutiveSnackbarFrame consecutiveSnackbarFrame;
+
+    @Url("/material-ui-feedback-snackbar--simple-snackbar")
+    public static WebPage feedbackSnackbarSimplePage;
+
+    @Url("/material-ui-feedback-snackbar--consecutive-snackbars")
+    public static WebPage feedbackSnackbarConsecutivePage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
