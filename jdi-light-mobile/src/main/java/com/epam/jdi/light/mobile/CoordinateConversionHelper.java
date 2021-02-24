@@ -5,7 +5,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.*;
 
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;

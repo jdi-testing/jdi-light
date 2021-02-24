@@ -5,8 +5,6 @@ import io.appium.java_client.android.SupportsNetworkStateManagement;
 import io.appium.java_client.android.connection.ConnectionState;
 import io.appium.java_client.android.connection.HasNetworkConnection;
 
-import javax.naming.Context;
-
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
 /**

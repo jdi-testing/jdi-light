@@ -1,8 +1,6 @@
 package com.epam.jdi.light.mobile.elements.init;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Table;

@@ -27,9 +27,6 @@ public class AllurePropertiesGenerator {
     public static final String APPIUM_URL_PROPERTY = "driver.remote.url";
     boolean initiated = false;
 
-    public AllurePropertiesGenerator() {
-    }
-
     public void createAllureProperties() {
         if (initiated) {
             return;
@@ -38,8 +35,8 @@ public class AllurePropertiesGenerator {
         String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
         String propsPath = rootPath + "test.properties";
         Properties appProps = new Properties();
-        try {
-            appProps.load(new FileInputStream(propsPath));
+        try (FileInputStream propStream = new FileInputStream(propsPath)) {
+            appProps.load(propStream);
         } catch (IOException e) {
             logger.error("Error during read test.properties file from %s. %s", propsPath, e);
         }
@@ -71,7 +68,7 @@ public class AllurePropertiesGenerator {
     private String formatProperties(String propertyName, String defValue, Properties appProps) {
         String propertyValue = appProps.getProperty(propertyName);
         if (propertyValue == null) {
-            if ("android".equalsIgnoreCase(appProps.getProperty("driver"))) {
+            if ("android".equalsIgnoreCase(appProps.getProperty(DRIVER))) {
                 propertyValue = MobileDriverData.CAPABILITIES_FOR_ANDROID.get(propertyName);
             } else {
                 propertyValue = MobileDriverData.CAPABILITIES_FOR_IOS.get(propertyName);

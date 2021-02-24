@@ -1,15 +1,12 @@
 package com.epam.jdi.light.mobile.settings;
 
 import com.epam.jdi.light.common.ElementArea;
-import com.epam.jdi.light.driver.get.DriverData;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
 import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import com.epam.jdi.light.settings.JDISettings;
 import com.epam.jdi.light.settings.WebSettings;
-import com.epam.jdi.tools.func.JFunc1;
-import org.openqa.selenium.WebDriver;
 
 import static com.epam.jdi.light.driver.get.RemoteDriverInfo.SAUCE_LABS;
 import static com.epam.jdi.light.driver.get.RemoteDriverInfo.appium;

@@ -24,10 +24,12 @@ public class SeekBar extends MobileAppBaseElement<TextAssert> implements HasTouc
 
     @JDIAction("Set the maximum value for '{name}'")
     public void setMaximumValue() {
-        executeDriverMethod(PerformsTouchActions.class, (PerformsTouchActions driver) -> {
-            TouchAction<?> ta1 = new TouchAction<>(driver)
-                    .press(PointOption.point(getLocation().getX() + getSize().getWidth() - 1, getLocation().getY())).release().perform();
-        });
+        executeDriverMethod(PerformsTouchActions.class, (PerformsTouchActions driver) ->
+            new TouchAction<>(driver)
+                    .press(PointOption.point(getLocation().getX() + getSize().getWidth() - 1, getLocation().getY()))
+                    .release()
+                    .perform()
+        );
     }
 
     @Override

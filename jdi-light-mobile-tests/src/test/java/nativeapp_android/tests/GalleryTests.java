@@ -2,7 +2,6 @@ package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import nativeapp.android.apidemos.IndexPage;
-import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
@@ -22,7 +21,7 @@ public class GalleryTests extends ApiDemosTestInit {
     public void init() {
         MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
         viewsPage.click();
-        MobileScreen.scrollToElementInList(ViewsPage.galleryPage);
+        MobileScreen.scrollToElementInList(galleryPage);
         galleryPage.click();
         photos.click();
     }

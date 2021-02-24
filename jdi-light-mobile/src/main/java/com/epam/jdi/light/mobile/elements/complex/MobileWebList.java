@@ -41,7 +41,6 @@ import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getByType;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
@@ -55,7 +54,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.max;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class MobileWebList extends JDIBase implements IList<MobileUIElement>, SetValue, ISelector, HasUIList,
+public class    MobileWebList extends JDIBase implements IList<MobileUIElement>, SetValue, ISelector, HasUIList,
         HasAssert<UISelectAssert<UISelectAssert<?, ?>, MobileWebList>> {
     protected int startIndex = MOBILE_ELEMENT.startIndex;
     protected CacheValue<MapArray<String, MobileUIElement>> map = new CacheValue<>(MapArray::new);
@@ -247,9 +246,10 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         if (minAmount < 0)
             throw exception("uiElements failed. minAmount should be more than 0, but " + minAmount);
         if (isUseCache()) {
-            if (map.hasValue() && map.get().size() > 0 && map.get().size() >= minAmount && isActualMap())
-                return LinqUtils.select(map.get().values(), el -> el.get());
-            if (webElements.hasValue() && webElements.get().size() > 0 && webElements.get().size() >= minAmount && isActual(webElements.get().get(0)))
+            if (map.hasValue() && map.get().isNotEmpty() && map.get().size() >= minAmount && isActualMap())
+                return LinqUtils.select(map.get().values(), JDIBase::get);
+            if (webElements.hasValue() && !webElements.get().isEmpty()
+                    && webElements.get().size() >= minAmount && isActual(webElements.get().get(0)))
                 return webElements.get();
         }
         if (locator.isTemplate())
@@ -328,7 +328,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     public List<WebElement> webElements() {
         if (isUseCache()) {
             if (map.hasValue())
-                return LinqUtils.select(map.get().values(), el -> el.get());
+                return LinqUtils.select(map.get().values(), JDIBase::get);
             if (webElements.hasValue())
                 return webElements.get();
         }
@@ -361,7 +361,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
 
     @Override
     public Iterator<MobileUIElement> iterator() {
-        return LinqUtils.map(uiElements(0), el -> MobileUIFactory.$(el)).iterator();
+        return LinqUtils.map(uiElements(0), MobileUIFactory::$).iterator();
     }
 
     protected List<WebElement> getListElements(int minAmount) {
@@ -503,6 +503,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         get(values[length - 1]).click();
     }
 
+    @Override
     public <TEnum extends Enum<?>> void select(TEnum value) {
         select(getEnumValue(value));
     }
@@ -512,6 +513,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
      *
      * @param values
      */
+    @Override
     @JDIAction("Select ({0}) for '{name}'")
     public <TEnum extends Enum<?>> void select(TEnum... values) {
         for (TEnum value : values)
@@ -523,6 +525,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
      *
      * @param indexes
      */
+     @Override
     @JDIAction("Select ({0}) for '{name}'")
     public void select(int... indexes) {
         for (int index : indexes)
@@ -534,6 +537,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
      *
      * @return String
      */
+    @Override
     @JDIAction("Get '{name}' selected value")
     public String selected() {
         refresh();
@@ -544,6 +548,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     /**
      * Refresh the element
      */
+    @Override
     @JDIAction(level = DEBUG)
     public void refresh() {
         webElements.clear();
@@ -595,6 +600,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         }
     }
 
+    @Override
     @JDIAction("Check that '{option}' is selected in '{name}'")
     public boolean selected(String option) {
         return get(option).isSelected();
@@ -605,6 +611,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         return ifSelect(ui -> getByType(ui, CanBeSelected.class).isSelected(), this::getElementName);
     }
 
+    @Override
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         List<String> values;
@@ -616,7 +623,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
                 values = LinqUtils.map(webElements.get(), element -> MobileUIFactory.$(element).text(textType));
                 HashSet<String> unique = new HashSet<>(values);
                 if (unique.size() == values.size()) {
-                    map.set(new MapArray<>(values, LinqUtils.map(webElements.get(), el -> MobileUIFactory.$(el))));
+                    map.set(new MapArray<>(values, LinqUtils.map(webElements.get(), MobileUIFactory::$)));
                 }
                 return values;
             }
@@ -644,58 +651,69 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         return values();
     }
 
+    @Override
     @JDIAction("Get list of attributes for '{name}'")
     public List<String> attrs(String value) {
         return noValidation(() -> map(e -> e.attr(value)));
     }
 
+    @Override
     @JDIAction("Get list of enabled values for '{name}'")
     public List<String> listEnabled() {
         return noValidation(() -> ifSelect(UIElement::isEnabled, this::getElementName));
     }
 
+    @Override
     @JDIAction("Get list of disabled values for '{name}'")
     public List<String> listDisabled() {
         return noValidation(() -> ifSelect(UIElement::isDisabled, this::getElementName));
     }
 
+    @Override
     @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
     public boolean isDisplayed() {
         refresh();
         return isNotEmpty();
     }
 
+    @Override
     @JDIAction(value = "Check that '{name}' is hidden", timeout = 0)
     public boolean isHidden() {
         return !isDisplayed();
     }
 
+    @Override
     @JDIAction(value = "Check that '{name}' is enabled", timeout = 0)
     public boolean isEnabled() {
         return isNotEmpty() && first().isEnabled();
     }
 
+    @Override
     @JDIAction(value = "Check that '{name}' is disabled", timeout = 0)
     public boolean isDisabled() {
         return !isEnabled();
     }
 
     ////
+    @Override
     @JDIAction(level = DEBUG)
     public void highlight(String color) {
         foreach(el -> el.highlight(color));
     }
 
+    @Override
     @JDIAction(level = DEBUG)
     public void highlight() {
         foreach(UIElement::highlight);
     }
 
+    @Override
     @JDIAction(level = DEBUG)
     public void hover() {
         first().hover();
     }
 
+    @Override
     @JDIAction(level = DEBUG)
     public void show() {
         first().show();

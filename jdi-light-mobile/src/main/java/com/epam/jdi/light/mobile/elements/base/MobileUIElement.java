@@ -79,6 +79,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return this;
     }
 
+    @Override
     public MobileUIElement setup(JAction1<JDIBase> setup) {
         return setup(MobileUIElement.class, setup);
     }
@@ -157,7 +158,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return $$(by, this);
     }
 
-    public MobileWebList findsMobileElemrnts(@MarkupLocator By by) {
+    public MobileWebList findsMobileElements(@MarkupLocator By by) {
         return $$(by, this);
     }
 
@@ -170,6 +171,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return findsMobileElements("*");
     }
 
+    @Override
     @JDIAction("Perform tap on '{name}'")
     public void tap() {
         new TouchAction<>((PerformsTouchActions) getDriver())
@@ -177,6 +179,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
                 .perform();
     }
 
+    @Override
     @JDIAction("Perform double tap on '{name}'")
     public void doubleTap() {
         new TouchAction<>((PerformsTouchActions) getDriver())
@@ -186,6 +189,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
                 .perform();
     }
 
+    @Override
     @JDIAction("Perform long press on '{name}'")
     public void longPress() {
         new TouchAction<>((PerformsTouchActions) getDriver())
@@ -193,6 +197,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
                 .perform();
     }
 
+    @Override
     @JDIAction("Perform long press on '{name}' with duration of {0} seconds")
     public void longPress(int seconds) {
         new TouchAction<>((PerformsTouchActions) getDriver())
@@ -254,6 +259,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     /**
      * getAllAttributes alias
      */
+    @Override
     public MapArray<String, String> attrs() {
         return getAllAttributes();
     }
@@ -261,6 +267,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     /**
      * getAttribute alias
      */
+    @Override
     public String attr(String value) {
         return getAttribute(value);
     }
@@ -276,16 +283,19 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     /**
      * getCssValue alias
      */
+    @Override
     public String css(String prop) {
         return getCssValue(prop);
     }
     //endregion
 
     //region SetValue
+    @Override
     public void setValue(String value) {
         input(value);
     }
 
+    @Override
     public String getValue() {
         return getText();
     }
@@ -294,15 +304,10 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     /**
      * Get all element's attributes
      */
+    @Override
     @JDIAction(level = DEBUG)
     public MapArray<String, String> getAllAttributes() {
-        List<String> jsList;
-        try {
-            jsList = (List<String>) js().executeScript("var s = []; var attrs = arguments[0].attributes; for (var l = 0; l < attrs.length; ++l) { var a = attrs[l]; s.push(a.name + '=\"' + a.value + '\"'); } ; return s;", getWebElement());
-            return new MapArray<>(jsList, r -> r.split("=")[0], r -> r.split("=")[1].replace("\"", ""));
-        } catch (Exception ignore) {
-            return new MapArray<>();
-        }
+        return super.getAllAttributes();
     }
 
     @Override

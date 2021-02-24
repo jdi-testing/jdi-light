@@ -9,8 +9,6 @@ import com.epam.jdi.light.mobile.elements.common.app.ITextField;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
 import static com.epam.jdi.light.common.TextTypes.TEXT;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-
 
 public class TextField extends MobileAppBaseElement<TextAssert>
         implements SetValue, IsInput, HasTouchActions, ITextField {

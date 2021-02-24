@@ -2,8 +2,6 @@ package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import io.appium.java_client.android.nativekey.AndroidKey;
-import io.appium.java_client.android.nativekey.KeyEvent;
-import nativeapp.android.apidemos.IndexPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,7 +17,7 @@ public class PickersTests extends ApiDemosTestInit {
 
     @BeforeMethod
     public void init() {
-        MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
+        MobileScreen.scrollToElementInList(goToViewPage);
         viewsPage.click();
         dateWidgetsPage.click();
         dialogPage.click();
