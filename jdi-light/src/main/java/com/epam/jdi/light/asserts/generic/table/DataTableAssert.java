@@ -22,6 +22,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.asserts.generic.table.DataTableAssert.CompareType.*;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
 import static com.epam.jdi.tools.LinqUtils.isSorted;
+import static java.lang.String.format;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -144,6 +145,7 @@ public class DataTableAssert<L extends PageObject, D>
     public class Compare implements JAssert {
         public int count;
         public String name;
+        public String printText;
         DataTableAssert<L, D> dtAssert;
         CompareType compareType;
         public JDIBase base() { return DataTableAssert.this.base(); }
@@ -151,12 +153,14 @@ public class DataTableAssert<L extends PageObject, D>
         private Compare(DataTableAssert<L, D> dtAssert) {
             this.dtAssert = dtAssert;
             this.compareType = ALL;
+            this.printText = "all rows";
             this.name = dtAssert.name;
         }
         private Compare(int count, DataTableAssert<L, D> dtAssert, CompareType compareType) {
             this.count = count;
             this.dtAssert = dtAssert;
             this.compareType = compareType;
+            this.printText = format("has %s %s rows that", compareType.text, count);
             this.name = dtAssert.name;
         }
 

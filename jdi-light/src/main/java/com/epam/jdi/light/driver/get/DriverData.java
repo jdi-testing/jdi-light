@@ -58,10 +58,10 @@ public class DriverData {
         return mergePath(getDriverFolder(), getOs() == WIN ? "chromedriver.exe" : "chromedriver");
     }
     public static String ieDriverPath() {
-        return mergePath(getDriverFolder(), "IEDriverServer.exe");
+        return mergePath(getDriverFolder(),"IEDriverServer.exe");
     }
     public static String edgeDriverPath() {
-        return mergePath(getDriverFolder(), "MicrosoftWebDriver.exe");
+        return mergePath(getDriverFolder(),"MicrosoftWebDriver.exe");
     }
     public static String operaDriverPath() {
         return driverPath("operadriver");
@@ -98,7 +98,6 @@ public class DriverData {
         }
         return driver;
     }
-
     private static WebDriver setBrowserSizeForMac(WebDriver driver, int width, int height) {
         try {
             Point position = new Point(0, 0);
@@ -112,12 +111,12 @@ public class DriverData {
     }
 
     public static MutableCapabilities getCapabilities(
-            MutableCapabilities capabilities, JAction1<MutableCapabilities> defaultCapabilities) {
+            MutableCapabilities caps, JAction1<MutableCapabilities> defaultCapabilities) {
         try {
             setupErrors.clear();
-            defaultCapabilities.execute(capabilities);
+            defaultCapabilities.execute(caps);
         } catch (Throwable ex) {
-            setupErrors.add("Setup capabilities exception: " + safeException(ex));
+            setupErrors.add("Setup caps exception: " + safeException(ex));
         }
         if (isNotEmpty(setupErrors)) {
             logger.info("Failed to set Default Capabilities for Driver:");
@@ -125,12 +124,25 @@ public class DriverData {
             setupErrors.clear();
         }
         try {
-            DRIVER.capabilities.common.forEach(capabilities::setCapability);
+            DRIVER.capabilities.common.forEach((property, value) -> setupCapability(caps, property, value));
         } catch (Throwable ex) {
             logger.info("Failed to set COMMON_CAPABILITIES Capabilities for Driver: " + safeException(ex));
         }
-        return capabilities;
+        return caps;
     }
+
+    public static void setupCapability(MutableCapabilities cap, String property, String value) {
+        if(!property.equals(ARGUMENTS_PROPERTY)) {
+            cap.setCapability(property, stringToPrimitive(value));
+        } else {
+            if (isClass(cap.getClass(), ChromeOptions.class)) {
+                ((ChromeOptions) cap).addArguments(value.split(" "));
+            } else if (isClass(cap.getClass(), FirefoxOptions.class)) {
+                ((FirefoxOptions) cap).addArguments(value.split(" "));
+            }
+        }
+    }
+
     public static List<String> setupErrors = new ArrayList<>();
     public static void setUp(String name, JAction action) {
         try {
@@ -139,7 +151,6 @@ public class DriverData {
             setupErrors.add(format("%s: %s", name, safeException(ex)));
         }
     }
-
     public static void defaultChromeOptions(ChromeOptions cap) {
         HashMap<String, Object> chromePrefs = new HashMap<>();
         setUp("Set Chrome Prefs", () -> {
@@ -168,7 +179,7 @@ public class DriverData {
                 cap.setCapability("goog:loggingPrefs", logPrefs);
             });
         // Capabilities from settings
-        DRIVER.capabilities.chrome.forEach((property, value) -> setupChromeCapability(cap, property, value));
+        DRIVER.capabilities.chrome.forEach((property, value) -> setupCapability(cap, property, value));
     }
     public static JAction1<ChromeOptions> CHROME_OPTIONS = DriverData::defaultChromeOptions;
 
@@ -213,26 +224,9 @@ public class DriverData {
         setUp("Firefox: Firefox Profile",
             () -> cap.setProfile(firefoxProfile));
         // Capabilities from settings
-        DRIVER.capabilities.firefox.forEach((property, value) -> setupFirefoxCapability(cap, property, value));
+        DRIVER.capabilities.firefox.forEach((property, value) -> setupCapability(cap, property, value));
     }
-
     public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = DriverData::defaultFirefoxOptions;
-
-    public static void setupFirefoxCapability(FirefoxOptions cap, String property, String value) {
-        logger.info("Setup Firefox cap %s to %s", property, value);
-        switch (property) {
-            case ARGUMENTS_PROPERTY:
-                cap.addArguments(value.split(" "));
-                logger.trace("Browser args was changed to %s", value);
-                break;
-            case PATH_PROPERTY:
-                logger.trace("Browser binary was changed to %s", value);
-                cap.setBinary(value);
-                break;
-            default:
-                cap.setCapability(property, stringToPrimitive(value));
-        }
-    }
 
     public static void defaultIEOptions(InternetExplorerOptions cap) {
         setUp("IE: introduceFlakinessByIgnoringSecurityDomains",

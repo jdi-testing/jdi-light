@@ -15,7 +15,6 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -25,7 +24,9 @@ import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
@@ -40,6 +41,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
+import static java.util.Arrays.*;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -64,7 +66,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int rowHeaderIndex = -1;
     protected int shiftColumnIndex = -1;
     protected int shiftRowIndex = -1;
-    protected int[] columnsMapping = new int[]{};
+    protected Safe<List<Integer>> columnsMapping = new Safe<>(ArrayList::new);
     protected String rowHeaderName = "";
     protected int startIndex = ELEMENT.startIndex;
     public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
@@ -107,27 +109,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
     protected void validateLocators(UIElement core) {
         if (getByLocator(headerLocator).equals("th")) {
-            if (core.finds("th").size() == 0 && core.finds("td").size() > 0) {
+            if (core.finds("th").size() == 0) {
                 headerLocator = core.find("thead td").isExist()
                     ? By.cssSelector("thead td") : By.xpath("//tr[1]//td");
             }
         }
-        logger.debug("After Table validation header locator is '%s'", headerLocator);
-    }
-
-    public UIElement coreUI() {
-        UIElement c = core();
-        if (c.isExist()) {
-            return c;
-        }
-        try {
-            new Timer(TIMEOUTS.element.get() * 1000)
-                    .wait(() -> core().isExist());
-        }
-        catch (Exception skip) {
-            logger.debug("Error during waiting table existance %s", skip);
-        }
-        return core();
     }
 
     protected int getRowHeaderIndex() {
@@ -163,8 +149,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
 
     public WebList headerUI() {
-        logger.debug("Search header with locator '%s'", headerLocator);
-        WebList header = coreUI().finds(headerLocator).setName(getName() + " header");
+        WebList header = core().finds(headerLocator).setName(getName() + " header");
         if (header.size() == 0) {
             header = getRowByIndex(getRowHeaderIndex());
             if (header.size() > 0) {
@@ -178,7 +163,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return header.setName(getName() + " header");
     }
     public WebList footerUI() {
-        WebList footer = coreUI().finds(this.footer).setName(getName() + " footer");
+        WebList footer = core().finds(this.footer).setName(getName() + " footer");
         if (footer.size() == 0) {
             footer = getRowByIndex(getRowHeaderIndex());
             if (footer.size() == 0) {
@@ -283,7 +268,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return result;
     }
     protected List<String> getJSValues(String locator) {
-        List<String> values = (List<String>) coreUI().js().executeScript("return Array.from(document.querySelectorAll(\""+locator+"\")).map(el=>el.innerText)");
+        List<String> values = (List<String>) core().js().executeScript("return Array.from(document.querySelectorAll(\""+locator+"\")).map(el=>el.innerText)");
         return map(values, String::trim);
     }
     public List<String> jsCells() {
@@ -374,7 +359,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return rows.set(result);
     }
     protected WebList getRowByIndex(int rowNum) {
-        WebList row = coreUI().finds(fillByTemplate(rowLocator, rowNum + getShiftRowIndex()));
+        WebList row = core().finds(fillByTemplate(rowLocator, rowNum + getShiftRowIndex()));
         row.searchVisible();
         return row;
     }
@@ -382,7 +367,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDebug
     public WebList getRow(int rowNum) {
         WebList row = getRowByIndex(getRowIndex(rowNum));
-        return shiftColumnIndex > getStartIndex() || columnsMapping.length > 0
+        return shiftColumnIndex > getStartIndex() || columnsMapping.get().size() > 0
             ? getMappedRow(row)
             : row;
     }
@@ -402,8 +387,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return columns.set(result);
     }
     protected int getColumnIndex(int index) {
-        return shiftColumnIndex == -1 && columnsMapping.length > 0
-            ? columnsMapping[index - getStartIndex()]
+        return shiftColumnIndex == -1 && columnsMapping.get().size() > 0
+            ? columnsMapping.get().get(index - getStartIndex())
             : index;
     }
     protected int getColumnLocatorIndex(int index) {
@@ -412,13 +397,13 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDebug
     public WebList getColumn(int colNum) {
         int colIndex = getColumnLocatorIndex(colNum);
-        return coreUI().finds(fillByTemplate(columnLocator, colIndex)).noValidation();
+        return core().finds(fillByTemplate(columnLocator, colIndex)).noValidation();
     }
     @JDebug
     public UIElement getCell(int colNum, int rowNum) {
         int colIndex = getColumnLocatorIndex(colNum);
         int rowIndex = getRowLocatorIndex(rowNum);
-        return coreUI().find(fillByMsgTemplate(cellLocator, colIndex, rowIndex));
+        return core().find(fillByMsgTemplate(cellLocator, colIndex, rowIndex));
     }
 
     protected Boolean headerIsRow = null;
@@ -448,7 +433,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
     @JDebug
     public WebList filter() {
-        return coreUI().finds(filterLocator).setName(getName()+" filter");
+        return core().finds(filterLocator).setName(getName()+" filter");
     }
     public UIElement filterBy(String filterName) {
         return searchBy(filterName);
@@ -702,7 +687,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Preview '{name}' table")
     public String preview() {
-        return TRIM_PREVIEW.execute(coreUI().getText());
+        return TRIM_PREVIEW.execute(core().getText());
     }
 
     /**
@@ -742,10 +727,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             this.cellLocator = NAME_TO_LOCATOR.execute(j.cell());
         if (!j.allCells().equals("td") || !getByLocator(this.allCellsLocator).equals("td"))
             this.allCellsLocator = NAME_TO_LOCATOR.execute(j.allCells());
-        if (!j.headers().equals("th") || !getByLocator(this.headerLocator).equals("th")) {
+        if (!j.headers().equals("th") || !getByLocator(this.headerLocator).equals("th"))
             this.headerLocator = NAME_TO_LOCATOR.execute(j.headers());
-            logger.debug("Header locator is changed to '%s'", this.headerLocator);
-        }
         if (!j.filter().equals("th input[type=search],th input[type=text]") || !getByLocator(this.filterLocator).equals("th input[type=search],th input[type=text]"))
             this.filterLocator = NAME_TO_LOCATOR.execute(j.filter());
         if (!j.fromCellToRow().equals("../td") || !getByLocator(this.fromCellToRow).equals("../td"))
@@ -758,8 +741,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             this.jsColumn = NAME_TO_LOCATOR.execute(j.jsColumn());
         if (header.size() > 0)
             this.header.setFinal(header);
-        if (j.columnsMapping().length > 0)
-            this.columnsMapping = j.columnsMapping();
+        if (j.columnsMapping().length > 0) {
+            this.columnsMapping.set(stream(j.columnsMapping()).boxed().collect(Collectors.toList()));
+        }
         if (j.size() != -1)
             this.size.setFinal(j.size());
         if (j.count() != -1)
@@ -793,7 +777,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected T getTable() {
         if (!cells.isGotAll()) {
             try {
-                List<WebElement> listOfCells = coreUI().finds(allCellsLocator).getWebElements();
+                List<WebElement> listOfCells = core().finds(allCellsLocator).getWebElements();
                 cells.set(new MapArray<>());
                 int k = 0;
                 int j = getStartIndex();

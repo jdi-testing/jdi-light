@@ -404,7 +404,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
                     f -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(f.getName())));
                 if (field != null)
                     try {
-                        Object fieldObj = field.get(rows.get(i));
+                        Object fieldObj = getValueField(field, rows.get(i));
                         String val = isInterface(field.getType(), HasValue.class)
                             ? ((HasValue)fieldObj).getValue()
                             : fieldObj.toString();

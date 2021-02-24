@@ -213,7 +213,11 @@ public class WebSettings {
             fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
             fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
             fillAction(p -> ELEMENT.highlight = getHighlightStrategy(p), "element.highlight");
-            fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
+            fillAction(p -> {
+                if (parseBoolean(p)) {
+                    DRIVER.capabilities.common.put("arguments", "--headless");
+                }
+            }, "headless");
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
