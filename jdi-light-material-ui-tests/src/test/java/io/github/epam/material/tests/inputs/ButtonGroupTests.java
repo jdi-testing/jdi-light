@@ -8,7 +8,6 @@ import static io.github.com.StaticSite.inputButtonGroupDefaultPage;
 import static io.github.com.StaticSite.inputButtonGroupDisabledPage;
 import static io.github.com.StaticSite.inputButtonGroupSplitPage;
 import static io.github.com.StaticSite.splitButtonGroupFrame;
-import static org.hamcrest.Matchers.containsStringIgnoringCase;
 
 public class ButtonGroupTests extends TestsInit {
 
@@ -25,7 +24,7 @@ public class ButtonGroupTests extends TestsInit {
         buttonGroupFrame.buttonGroup.buttonWithText("One").click();
 
         buttonGroupFrame.buttonGroup.buttonWithIndex(1).is().enabled();
-        buttonGroupFrame.buttonGroup.buttonWithIndex(1).has().text(containsStringIgnoringCase("One"));
+        buttonGroupFrame.buttonGroup.buttonWithIndex(1).has().text("ONE");
     }
 
     @Test(expectedExceptions = {RuntimeException.class},
@@ -44,10 +43,10 @@ public class ButtonGroupTests extends TestsInit {
 
         splitButtonGroupFrame.buttonGroup.mainButton().click();
         splitButtonGroupFrame.buttonGroup.mainButton()
-                .has().text(containsStringIgnoringCase("Squash and merge"));
+                .has().text("SQUASH AND MERGE");
         splitButtonGroupFrame.buttonGroup.select("Update project");
         splitButtonGroupFrame.buttonGroup.mainButton()
-                .has().text(containsStringIgnoringCase("Update project"));
+                .has().text("UPDATE PROJECT");
 
 
     }

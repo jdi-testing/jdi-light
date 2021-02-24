@@ -75,13 +75,13 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static SplitButtonGroupFrame splitButtonGroupFrame;
 
-    @Url("/material-ui-buttongroup--default")
+    @Url("/material-ui-inputs-button-group--default")
     public static WebPage inputButtonGroupDefaultPage;
 
-    @Url("/material-ui-buttongroup--disabled")
+    @Url("/material-ui-inputs-button-group--disabled")
     public static WebPage inputButtonGroupDisabledPage;
 
-    @Url("/material-ui-buttongroup--split-button")
+    @Url("/material-ui-inputs-button-group--split-button")
     public static WebPage inputButtonGroupSplitPage;
 
     // surfaces
