@@ -32,16 +32,4 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         jdiAssert(element().isDisabledCheckbox(), Matchers.is(true));
         return this;
     }
-
-    @JDIAction("Assert that group '{name}' is disabled")
-    public CheckboxAssert assertGroupDisabled() {
-        jdiAssert(element().isDisabledCheckbox(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that group '{name}' is checked")
-    public CheckboxAssert assertGroupChecked() {
-        jdiAssert(element().checkGroupSecondCheckbox(), Matchers.is(true));
-        return this;
-    }
 }

@@ -47,11 +47,6 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> {
         return core().hasClass("Mui-disabled");
     }
 
-    @JDIAction("Select group '{name}'")
-    public boolean checkGroupSecondCheckbox() {
-        return core().hasClass("Mui-checked");
-    }
-
     @Override
     public CheckboxAssert is() {
         return new CheckboxAssert().set(this);

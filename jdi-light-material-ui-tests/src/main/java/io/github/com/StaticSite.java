@@ -20,7 +20,7 @@ import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("https://jdi-testing.github.io/jdi-light")
 public class StaticSite {
 
     // inputs
@@ -73,12 +73,6 @@ public class StaticSite {
 
     @Url("/story/material-ui-inputs-checkbox--disabled")
     public static WebPage inputCheckboxDisabled;
-
-    @Url("/material-ui-inputs-checkbox--form-control")
-    public static WebPage formControlCheckBox;
-
-    @Url("/material-ui-inputs-checkbox--group")
-    public static WebPage groupCheckBox;
 
     @Frame("storybook-preview-iframe")
     public static CheckboxFrame checkboxFrame;
