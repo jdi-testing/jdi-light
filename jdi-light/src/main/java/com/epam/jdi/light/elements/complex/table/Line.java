@@ -25,6 +25,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.ReflectionUtils.create;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
 import static java.util.Arrays.asList;
 
@@ -184,7 +185,7 @@ public class Line implements IList<String>, IBaseElement {
                         f -> ELEMENT.namesEqual.execute(getElementName(f), header));
                 if (field == null) continue;
                 try {
-                    IBaseElement ui = ((IBaseElement)field.get(instance));
+                    IBaseElement ui = (IBaseElement) getValueField(field, instance);
                     UIElement listElement = elements.get(i++);
                     WebElement element = ui.base().hasLocator()
                         ? listElement.findElement(ui.base().getLocator())

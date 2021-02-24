@@ -18,7 +18,8 @@ public interface Condition extends JFunc1<ICoreElement, Boolean> {
     @Override
     default Boolean execute(ICoreElement element) {
         return executes(getName().replace(" %not%", "")
-            .replace(" %no%", ""), element);
+            .replace(" %no%", "")
+            .replace("%element%", "'"+element.getName()+"'"), element);
     }
     @JDIAction("Assert that {0}")
     default Boolean executes(String text, ICoreElement element) {

@@ -37,6 +37,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
 import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.logger.AllureLogger.attachScreenshot;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.SCREEN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -611,8 +612,13 @@ public class UIElement extends JDIBase
         actions((a,e) -> a.dragAndDropBy(e, x, y));
     }
 
+    public void makePhotoToAllure() {
+        try {
+            attachScreenshot(getName(), makePhoto(getName()).getAbsolutePath());
+        } catch (Exception ignore) { }
+    }
     public File makePhoto() {
-        return makePhoto("");
+        return makePhoto(getName());
     }
     /**
      * Get element's screen shot with red border
@@ -748,6 +754,9 @@ public class UIElement extends JDIBase
     }
     public UIElement firstChild() { return find("*"); }
     public WebList children() { return finds("*"); }
+    public UIElement findUp() {
+        return find("./..");
+    }
     //endregion
 
     //region Aliases

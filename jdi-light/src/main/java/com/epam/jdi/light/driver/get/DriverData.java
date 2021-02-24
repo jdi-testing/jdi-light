@@ -29,7 +29,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.stringToPrimitive;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.awt.Toolkit.getDefaultToolkit;
@@ -110,12 +110,12 @@ public class DriverData {
     }
 
     public static MutableCapabilities getCapabilities(
-            MutableCapabilities capabilities, JAction1<MutableCapabilities> defaultCapabilities) {
+            MutableCapabilities caps, JAction1<MutableCapabilities> defaultCapabilities) {
         try {
             setupErrors.clear();
-            defaultCapabilities.execute(capabilities);
+            defaultCapabilities.execute(caps);
         } catch (Throwable ex) {
-            setupErrors.add("Setup capabilities exception: " + safeException(ex));
+            setupErrors.add("Setup caps exception: " + safeException(ex));
         }
         if (isNotEmpty(setupErrors)) {
             logger.info("Failed to set Default Capabilities for Driver:");
@@ -123,12 +123,25 @@ public class DriverData {
             setupErrors.clear();
         }
         try {
-            DRIVER.capabilities.common.forEach(capabilities::setCapability);
+            DRIVER.capabilities.common.forEach((property, value) -> setupCapability(caps, property, value));
         } catch (Throwable ex) {
             logger.info("Failed to set COMMON_CAPABILITIES Capabilities for Driver: " + safeException(ex));
         }
-        return capabilities;
+        return caps;
     }
+
+    public static void setupCapability(MutableCapabilities cap, String property, String value) {
+        if(!property.equals(ARGUMENTS_PROPERTY)) {
+            cap.setCapability(property, stringToPrimitive(value));
+        } else {
+            if (isClass(cap.getClass(), ChromeOptions.class)) {
+                ((ChromeOptions) cap).addArguments(value.split(" "));
+            } else if (isClass(cap.getClass(), FirefoxOptions.class)) {
+                ((FirefoxOptions) cap).addArguments(value.split(" "));
+            }
+        }
+    }
+
     public static List<String> setupErrors = new ArrayList<>();
     public static void setUp(String name, JAction action) {
         try {
@@ -169,14 +182,6 @@ public class DriverData {
     }
     public static JAction1<ChromeOptions> CHROME_OPTIONS = DriverData::defaultChromeOptions;
 
-    public static void setupCapability(ChromeOptions cap, String property, String value) {
-        if(!property.equals(ARGUMENTS_PROPERTY)) {
-            cap.setCapability(property, stringToPrimitive(value));
-        } else {
-            cap.addArguments(value.split(" "));
-        }
-    }
-
     public static void defaultFirefoxOptions(FirefoxOptions cap) {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         setUp("Set FirefoxProfile", () -> {
@@ -202,7 +207,7 @@ public class DriverData {
         setUp("Firefox: Firefox Profile",
             () -> cap.setProfile(firefoxProfile));
         // Capabilities from settings
-        DRIVER.capabilities.firefox.forEach(cap::setCapability);
+        DRIVER.capabilities.firefox.forEach((property, value) -> setupCapability(cap, property, value));
     }
     public static JAction1<FirefoxOptions> FIREFOX_OPTIONS = DriverData::defaultFirefoxOptions;
 

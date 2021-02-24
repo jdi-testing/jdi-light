@@ -15,6 +15,7 @@ import com.epam.jdi.light.logger.AllureLogData;
 import com.epam.jdi.light.logger.HighlightStrategy;
 import com.epam.jdi.light.logger.JDILogger;
 import com.epam.jdi.light.logger.LogLevels;
+import com.epam.jdi.tools.EnumUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
@@ -49,6 +50,7 @@ import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.EnumUtils.*;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
@@ -470,6 +472,8 @@ public class ActionHelper {
                     arg -> ((IBaseElement)arg).base().toString()),
                 Case(arg -> isInterface(arg.getClass(), List.class),
                     PrintUtils::printList),
+                Case(arg -> isClass(arg.getClass(), Enum.class),
+                    arg -> getEnumValue((Enum<?>)arg)),
                 Default(arg -> arg));
         return result;
     }

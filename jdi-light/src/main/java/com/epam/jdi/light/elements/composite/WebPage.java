@@ -32,6 +32,7 @@ import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
+import static com.epam.jdi.light.logger.AllureLogger.attachScreenshot;
 import static com.epam.jdi.light.logger.AllureLogger.logDataToAllure;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
@@ -447,6 +448,11 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction(level = DEBUG)
     public static long yOffset() {
         return jsExecute("return window.pageYOffset;");
+    }
+    public void windowScreenshotToAllure() {
+        try {
+            attachScreenshot(getName(), windowScreenshot());
+        } catch (Exception ignore) { }
     }
     @JDIAction(level = DEBUG)
     public static String windowScreenshot(String path) {
