@@ -14,6 +14,7 @@ import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.displaydata.IconFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
+import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchFrame;
@@ -125,6 +126,14 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-icon--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
+
+    // feedback
+    // backdrop
+    @Frame("storybook-preview-iframe")
+    public static BackdropFrame backdropFrame;
+
+    @Url("/material-ui-feedback-backdrop--default-backdrop")
+    public static WebPage feedbackBackdropDefaultPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
