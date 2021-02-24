@@ -25,7 +25,7 @@ public class Button extends UIBaseElement<ButtonAssert> {
 
     @Override
     public ButtonAssert has() {
-        return new ButtonAssert().set(this);
+        return this.is();
     }
 
     @JDIAction("Check if '{name}' is enabled")

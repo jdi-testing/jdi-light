@@ -13,6 +13,7 @@ import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.displaydata.TypographyFrame;
+import io.github.com.pages.inputs.FabFrame;
 import io.github.com.pages.displaydata.IconFrame;
 import io.github.com.pages.displaydata.TooltipFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
@@ -54,6 +55,16 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-button--disabled")
     public static WebPage inputButtonDisabledPage;
+
+    // floating action button
+    @Frame("storybook-preview-iframe")
+    public static FabFrame fabFrame;
+
+    @Url("/material-ui-inputs-floating-action-button--default")
+    public static WebPage inputFabDefaultPage;
+
+    @Url("/material-ui-inputs-floating-action-button--disabled")
+    public static WebPage inputFabDisabledPage;
 
     // text field
     @Frame("storybook-preview-iframe")
