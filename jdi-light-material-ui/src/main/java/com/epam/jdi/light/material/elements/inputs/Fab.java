@@ -16,4 +16,9 @@ public class Fab extends UIBaseElement<FabAssert> {
         return new FabAssert().set(this);
     }
 
+    @Override
+    public boolean isDisabled() {
+        return core().hasClass("Mui-disabled");
+    }
+
 }

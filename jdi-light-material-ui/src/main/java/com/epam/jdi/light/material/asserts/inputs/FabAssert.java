@@ -19,7 +19,7 @@ public class FabAssert extends UIAssert<FabAssert, Fab> {
     @JDIAction("Assert that '{name}' is disabled")
     @Override
     public FabAssert disabled() {
-        jdiAssert(element().hasClass("Mui-disabled"), Matchers.is(true));
+        jdiAssert(element().isDisabled(), Matchers.is(true));
         return this;
     }
 
