@@ -1,8 +1,6 @@
 package io.github.epam;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
-import com.epam.jdi.light.mobile.settings.MobileSettings;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
 import io.github.epam.testng.TestNGListener;
@@ -13,7 +11,7 @@ import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
-import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+import static com.epam.jdi.light.mobile.elements.init.PageFactory.initMobile;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
 
@@ -21,11 +19,10 @@ import static io.github.com.StaticSite.homePage;
 public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
-        MobileSettings.init();
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         killAllSeleniumDrivers();
-        initSite(StaticSite.class);
-        initSite(PseudoSite.class);
+        initMobile(StaticSite.class);
+        initMobile(PseudoSite.class);
         homePage.open();
         logger.toLog("Run Tests");
     }

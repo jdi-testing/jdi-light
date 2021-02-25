@@ -14,4 +14,7 @@
             <class name="epamiostestapp.tests.ToolBarTest"/>
         </classes>
     </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.SuiteListener"/>
+    </listeners>
 </suite>

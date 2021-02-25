@@ -1,9 +1,7 @@
 package nativeapp_ios;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import nativeapp.ios.photos.PhotosApp;
-import nativeapp.ios.reminders.RemindersApp;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;

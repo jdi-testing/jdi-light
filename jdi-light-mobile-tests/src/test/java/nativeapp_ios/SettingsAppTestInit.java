@@ -1,7 +1,6 @@
 package nativeapp_ios;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import nativeapp.ios.settings.SettingsApp;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

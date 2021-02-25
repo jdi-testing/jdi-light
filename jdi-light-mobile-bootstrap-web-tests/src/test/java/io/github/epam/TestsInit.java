@@ -1,8 +1,7 @@
 package io.github.epam;
 
-import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
-import com.epam.jdi.light.mobile.settings.MobileSettings;
 import io.github.com.StaticSite;
+import io.github.epam.testng.SuiteListener;
 import io.github.epam.testng.TestNGListener;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -12,11 +11,10 @@ import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static com.epam.jdi.light.elements.composite.WebPage.openSite;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
-@Listeners(TestNGListener.class)
+@Listeners({TestNGListener.class, SuiteListener.class})
 public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
-        MobileSettings.init();
         openSite(StaticSite.class);
         logger.toLog("Run Tests Bootstrap mobile");
     }

@@ -1,12 +1,9 @@
 package nativeapp_android;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.android.apidemos.ApiDemosApp;
 import org.testng.annotations.*;
-import static com.epam.jdi.light.actions.ActionHelper.BEFORE_JDI_ACTION;
-
 
 import java.io.File;
 

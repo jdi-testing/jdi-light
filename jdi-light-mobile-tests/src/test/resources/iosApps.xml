@@ -32,4 +32,7 @@
             <class name="nativeapp_ios.tests.PhotosAppTests"/>
         </classes>
     </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.SuiteListener"/>
+    </listeners>
 </suite>

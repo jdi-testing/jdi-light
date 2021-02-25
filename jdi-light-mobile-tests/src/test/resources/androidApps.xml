@@ -24,4 +24,7 @@
             <class name="nativeapp_android.tests.TooltipsTest"></class>
         </classes>
     </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.SuiteListener"/>
+    </listeners>
 </suite>

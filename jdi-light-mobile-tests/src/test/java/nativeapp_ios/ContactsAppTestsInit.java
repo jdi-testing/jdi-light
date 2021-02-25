@@ -1,7 +1,6 @@
 package nativeapp_ios;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.ios.contacts.ContactsApp;
 import org.testng.annotations.AfterClass;

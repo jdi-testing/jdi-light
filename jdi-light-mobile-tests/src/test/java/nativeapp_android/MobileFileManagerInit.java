@@ -1,7 +1,6 @@
 package nativeapp_android;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.android.AndroidFileManager;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -73,7 +72,9 @@ public class MobileFileManagerInit {
 
     private void deleteFileIfExist(File file) {
         if (file != null) {
-            file.delete();
+            if (!file.delete()) {
+                logger.error("Can't delete file %s", file.getAbsolutePath());
+            }
         }
     }
 }

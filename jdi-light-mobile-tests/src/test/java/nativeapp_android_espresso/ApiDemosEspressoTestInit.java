@@ -1,7 +1,6 @@
 package nativeapp_android_espresso;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.mobile.AllurePropertiesGenerator;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
 import nativeapp.android.apidemosespresso.ApiDemosEspressoApp;
 import org.testng.annotations.AfterClass;

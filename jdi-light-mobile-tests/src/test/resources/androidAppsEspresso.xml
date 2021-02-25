@@ -6,4 +6,7 @@
             <class name="nativeapp_android_espresso.tests.EspressoTests"></class>
         </classes>
     </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.SuiteListener"/>
+    </listeners>
 </suite>

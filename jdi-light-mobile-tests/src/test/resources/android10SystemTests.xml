@@ -12,4 +12,7 @@
             <class name="android10NonApplicationTests.ToggleWiFiTests"></class>
         </classes>
     </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.SuiteListener"/>
+    </listeners>
 </suite>
