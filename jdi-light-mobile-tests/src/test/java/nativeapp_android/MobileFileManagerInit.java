@@ -71,10 +71,8 @@ public class MobileFileManagerInit {
     }
 
     private void deleteFileIfExist(File file) {
-        if (file != null) {
-            if (!file.delete()) {
-                logger.error("Can't delete file %s", file.getAbsolutePath());
-            }
+        if (file != null && !file.delete()) {
+            logger.error("Can't delete file %s", file.getAbsolutePath());
         }
     }
 }

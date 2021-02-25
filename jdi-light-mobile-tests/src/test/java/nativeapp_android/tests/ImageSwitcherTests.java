@@ -14,8 +14,6 @@ import static nativeapp.android.apidemos.views.ViewsPage.imageSwitcherPage;
 
 public class ImageSwitcherTests extends ApiDemosTestInit {
 
-    private WebElement element;
-
     @BeforeMethod
     public void init() {
         MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
@@ -26,7 +24,7 @@ public class ImageSwitcherTests extends ApiDemosTestInit {
 
     @Test
     public void selectPhotosInImageSwitcher() {
-        element = select(1);
+        WebElement element = select(1);
         itemIsSelected(element,true);
 
         element = select(2);

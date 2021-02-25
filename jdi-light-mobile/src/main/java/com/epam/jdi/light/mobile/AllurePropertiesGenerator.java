@@ -25,7 +25,7 @@ public class AllurePropertiesGenerator {
     public static final String DEVICE_NAME_PROPERTY = "deviceName";
     public static final String PLATFORM_NAME_PROPERTY = "platformName";
     public static final String APPIUM_URL_PROPERTY = "driver.remote.url";
-    boolean initiated = false;
+    boolean initiated;
 
     public void createAllureProperties() {
         if (initiated) {

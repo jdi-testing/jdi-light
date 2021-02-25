@@ -15,7 +15,6 @@ import io.appium.java_client.screenrecording.BaseStopScreenRecordingOptions;
 import io.appium.java_client.screenrecording.CanRecordScreen;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.*;
 
 import java.time.Duration;
@@ -139,14 +138,14 @@ public class MobileScreen {
 
     public static UIAssert scrollToElementInList(Button element) {
         int shift = getHeight()/2-1;
-        String oldPage = WebDriverFactory.getDriver().getPageSource();
+        String oldPage = getDriver().getPageSource();
         while (true) {
             try {
                 element.isEnabled();
                 return new UIAssert().set(element);
             } catch (RuntimeException e) {
                 MobileScreen.scrollDown(shift);
-                String newPage = WebDriverFactory.getDriver().getPageSource();
+                String newPage = getDriver().getPageSource();
                 if (oldPage.equals(newPage)) {
                     return new UIAssert().set(element);
                 }
@@ -157,10 +156,10 @@ public class MobileScreen {
 
     public static void scrollToTop() {
         int shift = 1000;
-        String oldPage = WebDriverFactory.getDriver().getPageSource();
+        String oldPage = getDriver().getPageSource();
         while (true) {
             MobileScreen.scrollDown(-shift);
-            String newPage = WebDriverFactory.getDriver().getPageSource();
+            String newPage = getDriver().getPageSource();
             if (oldPage.equals(newPage)) {
                 return;
             }
@@ -170,10 +169,10 @@ public class MobileScreen {
 
     public static void scrollToBottom() {
         int shift = 1000;
-        String oldPage = WebDriverFactory.getDriver().getPageSource();
+        String oldPage = getDriver().getPageSource();
         while (true) {
             MobileScreen.scrollDown(shift);
-            String newPage = WebDriverFactory.getDriver().getPageSource();
+            String newPage = getDriver().getPageSource();
             if (oldPage.equals(newPage)) {
                 return;
             }

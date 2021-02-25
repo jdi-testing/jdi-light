@@ -8,7 +8,6 @@ import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 
-import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.mobile.asserts.PickerAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 
@@ -16,7 +15,6 @@ import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.nativekey.AndroidKey;
-import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

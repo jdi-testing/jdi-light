@@ -2,7 +2,6 @@ package com.epam.jdi.light.mobile.elements.common.app.android;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
-import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.mobile.asserts.SearchViewFieldAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.app.ISearchViewField;
@@ -14,7 +13,8 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
-public class SearchViewField extends MobileAppBaseElement<SearchViewFieldAssert> implements ISearchViewField, HasTouchActions, IsButton {
+public class SearchViewField extends MobileAppBaseElement<SearchViewFieldAssert>
+        implements ISearchViewField, HasTouchActions, IsButton {
 
     @JDIAction(value = "Check that '{name}' is expanded")
     @Override

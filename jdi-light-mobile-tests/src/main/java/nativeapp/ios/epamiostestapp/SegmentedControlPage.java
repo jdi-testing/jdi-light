@@ -3,7 +3,6 @@ package nativeapp.ios.epamiostestapp;
 import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
 import com.epam.jdi.light.mobile.elements.composite.ios.app.SegmentedControl;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
-import io.appium.java_client.ios.IOSElement;
 
 public class SegmentedControlPage {
 

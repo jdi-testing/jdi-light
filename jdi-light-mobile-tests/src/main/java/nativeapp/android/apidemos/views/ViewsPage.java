@@ -2,9 +2,6 @@ package nativeapp.android.apidemos.views;
 
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
-import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBys;
-
-import java.util.List;
 
 public class ViewsPage {
 
