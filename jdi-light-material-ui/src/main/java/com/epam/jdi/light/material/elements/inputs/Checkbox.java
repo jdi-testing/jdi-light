@@ -1,15 +1,14 @@
 package com.epam.jdi.light.material.elements.inputs;
 
+import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.HasCheck;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
 
-public class Checkbox extends UIBaseElement<CheckboxAssert> {
-
-    @JDIAction("Click on '{name}'")
-    public void click() {
-        core().click();
-    }
+public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasCheck,
+    HasAssert<CheckboxAssert> {
 
     @JDIAction("Is '{name}' selected")
     public boolean isSelected() {
@@ -21,30 +20,32 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> {
         return !isSelected();
     }
 
-    @JDIAction("Is '{name}' selected")
-    public boolean isEnabled() {
-        return core().isEnabled();
-    }
-
     @JDIAction("Check '{name}'")
-    public boolean check() {
-        if (isSelected()) {
-            return true;
-        } else
-            return false;
+    @Override
+    public void check() {
+        if (isNotSelected()) {
+            click();
+        }
     }
 
-    @JDIAction("Do not check '{name}'")
-    public boolean unCheck() {
-        if(isNotSelected()) {
-            return true;
-        } else
-            return false;
+    @JDIAction("Uncheck '{name}'")
+    @Override
+    public void uncheck() {
+        if(isSelected()) {
+            click();
+        }
     }
 
     @JDIAction("Is '{name}' disabled")
-    public boolean isDisabledCheckbox() {
+    @Override
+    public boolean isDisabled() {
         return core().hasClass("Mui-disabled");
+    }
+
+    @JDIAction("Is '{name}' enabled")
+    @Override
+    public boolean isEnabled() {
+        return core().isEnabled() && !isDisabled();
     }
 
     @Override

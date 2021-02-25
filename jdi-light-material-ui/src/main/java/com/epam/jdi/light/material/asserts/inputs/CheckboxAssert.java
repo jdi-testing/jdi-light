@@ -29,7 +29,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 
     @JDIAction("Assert that '{name}' is disabled")
     public CheckboxAssert disabled() {
-        jdiAssert(element().isDisabledCheckbox(), Matchers.is(true));
+        jdiAssert(element().isDisabled(), Matchers.is(true));
         return this;
     }
 }

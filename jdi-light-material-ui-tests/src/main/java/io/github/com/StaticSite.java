@@ -66,25 +66,26 @@ public class StaticSite {
     @Url("/material-ui-textfield--time")
     public static WebPage inputTextFieldTimePage;
 
+    //checkbox
+    @Frame("storybook-preview-iframe")
+    public static CheckboxFrame checkboxFrame;
+
+    @Url("/material-ui-inputs-checkbox--disabled")
+    public static WebPage inputCheckboxDisabled;
+
+    @Url("/material-ui-inputs-checkbox--primary")
+    public static WebPage primaryCheckBoxPage;
+
     // surfaces
     // accordion
     @Frame("storybook-preview-iframe")
     public static AccordionFrame accordionFrame;
-
-    @Url("/story/material-ui-inputs-checkbox--disabled")
-    public static WebPage inputCheckboxDisabled;
-
-    @Frame("storybook-preview-iframe")
-    public static CheckboxFrame checkboxFrame;
 
     @Url("/material-ui-surfaces-accordion--default")
     public static WebPage surfaceAccordionPage;
 
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
-
-    @Url("/story/material-ui-inputs-checkbox--primary")
-    public static WebPage primaryCheckBoxPage;
 
     // paper
     @Frame("storybook-preview-iframe")

@@ -6,6 +6,6 @@ import com.epam.jdi.light.material.elements.inputs.Checkbox;
 
 public class CheckboxFrame extends Section {
 
-    @UI("//span[contains(@class,'MuiButtonBase-root')]")
+    @UI(".MuiCheckbox-root")
     public Checkbox checkbox;
 }
