@@ -28,7 +28,7 @@ public class MobileKeyboardTests extends ApiDemosTestInit {
     public void pressKeyTest() {
         TextFieldsPage.visibleTextField.tap();
         MobileKeyboard.pressKey(AndroidKey.APOSTROPHE);
-        jdiAssert(TextFieldsPage.visibleTextField.getText(), Matchers.is(""));
+        jdiAssert(TextFieldsPage.visibleTextField.getText(), Matchers.is("'"));
     }
 
     @Test
