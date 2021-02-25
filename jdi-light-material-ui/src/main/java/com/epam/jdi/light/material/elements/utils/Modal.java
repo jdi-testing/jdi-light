@@ -2,15 +2,11 @@ package com.epam.jdi.light.material.elements.utils;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.utils.ModalAssert;
 import org.openqa.selenium.By;
 
-public class Modal extends UIBaseElement<ModalAssert> {
-
-    @JDIAction("Click on '{name}'")
-    public void clickOn() {
-        core().click();
-    }
+public class Modal extends UIBaseElement<ModalAssert> implements HasClick {
 
     @JDIAction("Is '{name}' enabled")
     public boolean isModalEnabled() {

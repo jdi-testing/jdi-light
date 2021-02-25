@@ -10,8 +10,8 @@ import static io.github.com.StaticSite.transitionsModalPage;
 
 public class ModalTests extends TestsInit {
 
-    private String expectedSimpleDescription = "Duis mollis, est non commodo luctus, nisi erat porttitor ligula.";
-    private String expectedTransitionDescription = "react-transition-group animates me.";
+    private static final String expectedSimpleDescription = "Duis mollis, est non commodo luctus, nisi erat porttitor ligula.";
+    private static final String expectedTransitionDescription = "react-transition-group animates me.";
 
 
 
@@ -20,7 +20,7 @@ public class ModalTests extends TestsInit {
         simpleModalPage.shouldBeOpened();
 
         modalFrame.modal.is().simpleAssertEnabled();
-        modalFrame.modal.clickOn();
+        modalFrame.modal.click();
         modalFrame.modal.is().isSimpleModalPageOpened();
         modalFrame.modal.is().simpleModalDescription(expectedSimpleDescription);
     }
@@ -30,7 +30,7 @@ public class ModalTests extends TestsInit {
         transitionsModalPage.shouldBeOpened();
 
         modalFrame.modal.is().isTransitionModalEnabled();
-        modalFrame.modal.clickOn();
+        modalFrame.modal.click();
         modalFrame.modal.is().isTransitionModalOpened();
         modalFrame.modal.is().transitionModalDescription(expectedTransitionDescription);
     }
@@ -40,7 +40,7 @@ public class ModalTests extends TestsInit {
         springModalPage.shouldBeOpened();
 
         modalFrame.modal.is().isSpringModalEnabled();
-        modalFrame.modal.clickOn();
+        modalFrame.modal.click();
         modalFrame.modal.is().isSpringModalOpened();
         modalFrame.modal.is().springModalDescription(expectedTransitionDescription);
     }

@@ -19,16 +19,21 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.LABEL;
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
+import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
+import static com.epam.jdi.light.driver.WebDriverByUtils.correctXPaths;
+import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
+import static com.epam.jdi.light.driver.WebDriverByUtils.uiSearch;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
+import static com.epam.jdi.light.settings.WebSettings.STRICT_SEARCH;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class JdiSettings {
     public static JAction2<JDIBase, WebElement> VALIDATE_FOUND_ELEMENT = JdiSettings::validateFoundElement;
