@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.composite;
 
-import com.epam.jdi.light.actions.ActionProcessor;
 import com.epam.jdi.light.common.CheckTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
@@ -22,7 +21,7 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static com.epam.jdi.light.actions.ActionProcessor.*;
+import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
