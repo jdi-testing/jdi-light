@@ -21,6 +21,7 @@ import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
+import io.github.com.pages.feedback.CircularFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchFrame;
@@ -100,6 +101,22 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-button-group--split-button")
     public static WebPage inputButtonGroupSplitPage;
+
+    // circular
+    @Url("/material-ui-feedback-progress--circular-indeterminate")
+    public static WebPage circularIndeterminatePage;
+
+    @Url("/material-ui-feedback-progress--circular-determinate")
+    public static WebPage circularDeterminatePage;
+
+    @Url("/material-ui-feedback-progress--circular-integration")
+    public static WebPage circularIntegrationPage;
+
+    @Url("/material-ui-feedback-progress--circular-with-value-label")
+    public static WebPage circularWithValueLabel;
+
+    @Frame("storybook-preview-iframe")
+    public static CircularFrame circularFrame;
 
     // surfaces
     // accordion
