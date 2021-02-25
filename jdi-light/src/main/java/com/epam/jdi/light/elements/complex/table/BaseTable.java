@@ -25,7 +25,6 @@ import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,8 +40,8 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
-import static java.util.Arrays.*;
 import static java.util.Arrays.asList;
+import static java.util.Arrays.stream;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 

@@ -115,7 +115,7 @@ public interface ICoreElement extends IBaseElement {
     }
     default ICoreElement shouldBe(Condition... conditions) {
         for (Condition condition : conditions) {
-            jdiAssert(condition.execute(this), is(true));
+            jdiAssert(condition.execute(this), is(true), condition.getName());
         }
         return this;
     }

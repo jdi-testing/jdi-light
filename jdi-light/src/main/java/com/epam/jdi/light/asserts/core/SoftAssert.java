@@ -38,16 +38,20 @@ public class SoftAssert {
                 throw new AssertionError(error);
         }
     }
-    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
+    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher, String errorMsg) {
         try {
             assertThat(actual, matcher);
             logger.debug(">>> " + actual);
         } catch (Throwable error) {
+            AssertionError failError = new AssertionError(errorMsg != null ? errorMsg : error.getMessage());
             if (IS_SOFT_ASSERT) {
-                addError(error);
+                addError(failError);
             } else
-                throw new AssertionError(error);
+                throw failError;
         }
+    }
+    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
+        jdiAssert(actual, matcher, null);
     }
     private static void addError(Throwable error) {
         listOfErrors.get().add(error.getMessage().replace("java.lang.AssertionError: ", ""));
@@ -61,8 +65,9 @@ public class SoftAssert {
     public static void assertResults() {
         List<String> errors = new ArrayList<>(listOfErrors.get());
         clearResults();
-        if (!errors.isEmpty())
+        if (!errors.isEmpty()) {
             throw new AssertionError(print(errors));
+        }
     }
 
     public static void clearResults() {

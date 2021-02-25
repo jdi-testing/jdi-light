@@ -215,7 +215,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         int t = timeout.get();
         return t > -1 ?  t: TIMEOUTS.element.get();
     }
-    public Timer timer() { return new Timer(getTimeout()*1000); }
+    public Timer timer() { return new Timer(getTimeout() * 1000L); }
 
     @Override
     public JDIBase setName(String name) {
