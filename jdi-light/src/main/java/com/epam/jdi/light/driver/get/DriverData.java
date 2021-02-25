@@ -51,8 +51,7 @@ public class DriverData {
             ? DRIVER.path : mergePath(COMMON.testPath, "resources", "drivers");
     }
     public static final String DEFAULT_DRIVER = "chrome";
-    public static final String ARGUMENTS_PROPERTY = "arguments";
-    public static final String PATH_PROPERTY = "path";
+    public static String ARGUMENTS_PROPERTY = "arguments";
 
     public static String chromeDriverPath() {
         return mergePath(getDriverFolder(), getOs() == WIN ? "chromedriver.exe" : "chromedriver");
@@ -182,22 +181,6 @@ public class DriverData {
         DRIVER.capabilities.chrome.forEach((property, value) -> setupCapability(cap, property, value));
     }
     public static JAction1<ChromeOptions> CHROME_OPTIONS = DriverData::defaultChromeOptions;
-
-    public static void setupChromeCapability(ChromeOptions cap, String property, String value) {
-        logger.info("Setup Chrome cap %s to %s", property, value);
-        switch (property) {
-            case ARGUMENTS_PROPERTY:
-                cap.addArguments(value.split(" "));
-                logger.trace("Browser args was changed to %s", value);
-                break;
-            case PATH_PROPERTY:
-                logger.trace("Browser binary was changed to %s", value);
-                cap.setBinary(value);
-                break;
-            default:
-                cap.setCapability(property, stringToPrimitive(value));
-        }
-    }
 
     public static void defaultFirefoxOptions(FirefoxOptions cap) {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
