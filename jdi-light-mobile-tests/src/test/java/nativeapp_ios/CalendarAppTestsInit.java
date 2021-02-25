@@ -34,7 +34,6 @@ public class CalendarAppTestsInit {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        new AllurePropertiesGenerator().createAllureProperties();
         WebDriverFactory.quit();
     }
 }

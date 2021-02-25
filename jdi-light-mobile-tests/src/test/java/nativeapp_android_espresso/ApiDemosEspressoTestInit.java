@@ -26,7 +26,6 @@ public class ApiDemosEspressoTestInit {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        new AllurePropertiesGenerator().createAllureProperties();
         WebDriverFactory.quit();
     }
 }

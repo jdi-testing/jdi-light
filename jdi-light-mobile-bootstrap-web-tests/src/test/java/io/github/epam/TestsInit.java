@@ -23,7 +23,6 @@ public interface TestsInit {
 
     @AfterSuite(alwaysRun = true)
     default void tearDown() {
-        new AllurePropertiesGenerator().createAllureProperties();
         killAllSeleniumDrivers();
     }
 }
