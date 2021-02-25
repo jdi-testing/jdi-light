@@ -10,18 +10,18 @@ module **jdi-light-mobile-html-web-tests**.
 
 1. Set following settings in **test.properties** file: <br>
 ```   
-   **driver=android**; <br>
-   **remote.type=appium**; <br>
-   **appium.capabilities.path=android.properties**; <br>
-   **driver.remote.run=true**; <br>
+   driver=android;
+   remote.type=appium;
+   appium.capabilities.path=android.properties;
+   driver.remote.run=true;
 ``` 
    If your version of appium has its own URL (not http://0.0.0.0:4723), specify it in the **driver.remote.url**
    property<br>
     1. Set following settings in **android.properties** file:<br>
 ``` 
-**platformName=Android**; <br>
-**deviceName=emulator-5554**; <br>
-**chromedriverExecutable=emulator-5554**; <br>
+platformName=Android;
+deviceName=emulator-5554;
+chromedriverExecutable=emulator-5554;
 ``` 
 Here **deviceName** and **platformName** must be the same as Desired Capabilities in Inspector Session window that was
 started from Appium (see future steps).<br>

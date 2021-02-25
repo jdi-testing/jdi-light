@@ -10,7 +10,7 @@ module **jdi-light-mobile-bootstrap-web-tests**.
 
 1. Set following settings in **test.properties** file:<br>
 ```
-    driver=android;<
+    driver=android;
     remote.type=appium;
     appium.capabilities.path=android.properties;
     driver.remote.run=true;
