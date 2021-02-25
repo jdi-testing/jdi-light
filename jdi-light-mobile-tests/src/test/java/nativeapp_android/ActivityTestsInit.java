@@ -30,7 +30,6 @@ public class ActivityTestsInit {
         logger.toLog("tearDown Activity Tests");
         AppManager.closeApp();
         AppManager.removeApp("io.appium.android.apis");
-        new AllurePropertiesGenerator().createAllureProperties();
         WebDriverFactory.quit();
     }
 }
