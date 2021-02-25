@@ -10,28 +10,28 @@ module **jdi-light-mobile-bootstrap-web-tests**.
 
 1. Set following settings in **test.properties** file:<br>
 ```
-    driver=android;
-    remote.type=appium;
-    appium.capabilities.path=android.properties;
-    driver.remote.run=true;
+    driver=android
+    remote.type=appium
+    appium.capabilities.path=android.properties
+    driver.remote.run=true
 ```
 If your version of appium has its own URL (not http://0.0.0.0:4723), specify it in the **driver.remote.url**
 property<br>
     1. Set following settings in **android.properties** file:<br>
 ```
-    platformName=Android;
-    deviceName=emulator-5554;
-    chromedriverExecutable=emulator-5554;
+    platformName=Android
+    deviceName=emulator-5554
+    chromedriverExecutable={ABSOLUTE_PATH_TO_CHROMEDRIVER}\\chromedriver.exe
 ```
 Here **deviceName** and **platformName** must be the same as Desired Capabilities in Inspector Session window that was
-started from Appium (see future steps).<br>
+started from Appium (see future steps). **chromedriverExecutable** should be an absolute path to chromedriver file (version must be equal to the Chrome browser version on your device at least the number before the first dot)<br>
     1. Set following settings in **chrome.properties** file: 
 **w3c=false**;
 
 1. Launch Android emulator and wait until home screen is ready
 
-1. Launch Appium from console or using UI.<br>
-   <code>appium -p 4723 --chromedriver-executable /path/to/your/chromedriver</code>
+1. Launch Appium from console or using UI. For commandline it is just<br>
+   `appium`
    
 1. Wait for Appium server ready and then open new Inspector Session window and set Desired Capabilities as described in 1.1
 
@@ -48,21 +48,21 @@ and in **test.properties** change two fields which use android to ios:
 
 1. Set following settings in **test.properties** file: <br>
 ```   
-   driver=ios; 
-   remote.type=appium; 
-   appium.capabilities.path=ios.properties; 
-   driver.remote.run=true;
+   driver=ios 
+   remote.type=appium 
+   appium.capabilities.path=ios.properties
+   driver.remote.run=true
 ```   
 1. Set following settings in **ios.properties** file:<br>
 ``` 
-    platformName=ios; 
-    automationName=XCUITest;
-    platformVersion=14.2;
-    deviceName=iPhone 11; 
-    browserName=Safari;
+    platformName=ios
+    automationName=XCUITest
+    platformVersion=14.2
+    deviceName=iPhone 11
+    browserName=Safari
 ```    
 #Debugging and test running. 
-    Go to module **jdi-light-mobile-bootstrap-web-tests**
+Go to module **jdi-light-mobile-bootstrap-web-tests**
 
 #####Test Run
 

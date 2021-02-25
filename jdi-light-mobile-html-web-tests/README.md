@@ -10,28 +10,29 @@ module **jdi-light-mobile-html-web-tests**.
 
 1. Set following settings in **test.properties** file: <br>
 ```   
-   driver=android;
-   remote.type=appium;
-   appium.capabilities.path=android.properties;
-   driver.remote.run=true;
+   driver=android
+   remote.type=appium
+   appium.capabilities.path=android.properties
+   driver.remote.run=true
 ``` 
    If your version of appium has its own URL (not http://0.0.0.0:4723), specify it in the **driver.remote.url**
    property<br>
     1. Set following settings in **android.properties** file:<br>
 ``` 
-platformName=Android;
-deviceName=emulator-5554;
-chromedriverExecutable=emulator-5554;
+platformName=Android
+deviceName=emulator-5554
+chromedriverExecutable={ABSOLUTE_PATH_TO_CHROMEDRIVER}\\chromedriver.exe
 ``` 
 Here **deviceName** and **platformName** must be the same as Desired Capabilities in Inspector Session window that was
-started from Appium (see future steps).<br>
+started from Appium (see future steps). **chromedriverExecutable** should be an absolute path to chromedriver file (version must be equal to the Chrome browser version on your device at least the number before the first dot)<br>
+
     1. Set following settings in **chrome.properties** file: <br>
 **w3c=false**;
 
 1. Launch Android emulator and wait until home screen is ready.
 
-1. Launch Appium from console or using UI.<br>
-   `appium -p 4723 --chromedriver-executable /path/to/your/chromedriver`
+1. Launch Appium from console or using UI. For command line it is just<br>
+   `appium`
    
 1. Wait for Appium server ready and then open new Inspector Session window and set Desired Capabilities as described in
    2.1
@@ -64,7 +65,7 @@ and in **test.properties** change two fields which use android to iOS:
 ```     
     
 ### Debugging and test running for iOS and Android
-    Go to module **jdi-light-mobile-html-web-tests**
+Go to module **jdi-light-mobile-html-web-tests**
 
 #####Test Run
 
