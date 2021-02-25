@@ -107,7 +107,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
     protected void validateLocators(UIElement core) {
         if (getByLocator(headerLocator).equals("th")) {
-            if (core.finds("th").size() == 0) {
+            if (core.finds("th").isEmpty() && core.finds("td").isNotEmpty()) {
                 headerLocator = core.find("thead td").isExist()
                     ? By.cssSelector("thead td") : By.xpath("//tr[1]//td");
             }
@@ -148,9 +148,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
 
     public WebList headerUI() {
         WebList header = core().finds(headerLocator).setName(getName() + " header");
-        if (header.size() == 0) {
+        if (header.isEmpty()) {
             header = getRowByIndex(getRowHeaderIndex());
-            if (header.size() > 0) {
+            if (header.isNotEmpty()) {
                 this.header.setRule(() -> getRowByIndex(getRowHeaderIndex()).values());
                 this.size.setRule(() -> getRowByIndex(getRowHeaderIndex()).size());
             } else {
@@ -162,9 +162,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
     public WebList footerUI() {
         WebList footer = core().finds(this.footer).setName(getName() + " footer");
-        if (footer.size() == 0) {
+        if (footer.isEmpty()) {
             footer = getRowByIndex(getRowHeaderIndex());
-            if (footer.size() == 0) {
+            if (footer.isEmpty()) {
                 throw exception("Can't find footer using locator '%s'. Please specify JTable.footer locator", footer);
             }
         }
@@ -291,7 +291,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         List<String> rowHeader;
         try {
             rowHeader = jsColumn(index);
-            if (rowHeader.size() == 0)
+            if (rowHeader.isEmpty())
                 throw new IllegalStateException();
         } catch (Exception ex) {
             rowHeader = webColumn(index).values();
@@ -365,7 +365,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDebug
     public WebList getRow(int rowNum) {
         WebList row = getRowByIndex(getRowIndex(rowNum));
-        return shiftColumnIndex > getStartIndex() || columnsMapping.get().size() > 0
+        return shiftColumnIndex > getStartIndex() || !columnsMapping.get().isEmpty()
             ? getMappedRow(row)
             : row;
     }
@@ -385,7 +385,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return columns.set(result);
     }
     protected int getColumnIndex(int index) {
-        return shiftColumnIndex == -1 && columnsMapping.get().size() > 0
+        return shiftColumnIndex == -1 && !columnsMapping.get().isEmpty()
             ? columnsMapping.get().get(index - getStartIndex())
             : index;
     }
@@ -450,7 +450,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get first '{name}' table row that match criteria")
     public Line row(TableMatcher... matchers) {
         WebList lines = TABLE_MATCHER.execute(this, matchers);
-        if (lines == null || lines.size() == 0)
+        if (lines == null || lines.isEmpty())
             return null;
         List<String> result = new ArrayList<>();
         for (int i = getStartIndex(); i < header().size() + getStartIndex(); i++)
@@ -466,7 +466,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<Line> rows(TableMatcher... matchers) {
         List<String> lines = TABLE_MATCHER.execute(this, matchers).values();
-        if (lines == null || lines.size() > 0 && lines.size() < header().size())
+        if (lines == null || !lines.isEmpty() && lines.size() < header().size())
             return null;
         List<Line> listOfLines = new ArrayList<>();
         List<String> result = new ArrayList<>();
