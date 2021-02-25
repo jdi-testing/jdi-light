@@ -1,6 +1,7 @@
 package com.epam.jdi.light.asserts.core;
 
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.Timer.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -43,12 +45,16 @@ public class SoftAssert {
             assertThat(actual, matcher);
             logger.debug(">>> " + actual);
         } catch (Throwable error) {
-            AssertionError failError = new AssertionError(errorMsg != null ? errorMsg : error.getMessage());
+            String errorMessage = nowTimeShort() + " " + getErrorMsg(errorMsg, error);
+            AssertionError failError = new AssertionError(errorMessage);
             if (IS_SOFT_ASSERT) {
                 addError(failError);
             } else
                 throw failError;
         }
+    }
+    private static String getErrorMsg(String errorMsg, Throwable error) {
+        return errorMsg != null ? errorMsg : error.getMessage();
     }
     public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
         jdiAssert(actual, matcher, null);

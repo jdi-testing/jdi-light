@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.init.rules.AnnotationRule;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
@@ -25,6 +26,7 @@ import org.openqa.selenium.interactions.Actions;
 import java.lang.annotation.Annotation;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.SearchStrategies.*;
@@ -44,6 +46,7 @@ import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -359,6 +362,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public WebList list(Object... args) {
         return $$(getAll(args), getName());
     }
+    public void waitAction(int sec, JAction1<IBaseElement> action) {
+        waitAction(sec, action, IBaseElement.class);
+    }
     public <TE extends IBaseElement> void waitAction(int sec, JAction1<TE> action, Class<TE> type) {
         waitFunc(sec, j -> { action.execute(j); return this; }, type);
     }
@@ -476,4 +482,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     @Override
     public boolean isUseCache() { return webElement.isUseCache() || webElements.isUseCache(); }
     public static MapArray<Integer, String> NAMES = new MapArray<>();
+
+    @JDIAction("Assert that %s")
+    public static void executeShouldBe(String name, Condition condition, ICoreElement element) {
+        jdiAssert(condition.execute(element), is(true), name);
+    }
 }

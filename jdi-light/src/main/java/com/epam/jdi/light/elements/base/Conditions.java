@@ -6,19 +6,25 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public abstract class Conditions {
-    public static final Condition visible = condition("%element% is %not% visible",  el -> el.isVisible());
+    public static Condition visible = condition("%element% is %not% visible",  el -> {
+        if (el.isHidden()) {
+            return false;
+        }
+        el.show();
+        return el.isVisible();
+    });
 
-    public static final Condition displayed = condition("%element% is %not% displayed",  el -> el.isDisplayed());
+    public static Condition displayed = condition("%element% is %not% displayed",  el -> el.isDisplayed());
 
-    public static final Condition exist = condition("%element% is exist on page", el -> el.isExist());
+    public static Condition exist = condition("%element% is exist on page", el -> el.isExist());
     
-    public static final Condition hidden = not(visible);
+    public static Condition hidden = not(displayed);
 
-    public static final Condition appear = condition("%element% is %not% appear",  visible);
+    public static Condition appear = condition("%element% is %not% appear",  displayed);
 
-    public static final Condition disappear = not(appear);
+    public static Condition disappear = not(appear);
 
-    public static final Condition readonly = attribute("readonly");
+    public static Condition readonly = attribute("readonly");
     
     public static Condition attribute(String attributeName) {
         return condition("%element% has %no% '" + attributeName + "' attribute",
@@ -88,7 +94,7 @@ public abstract class Conditions {
         return attribute("id", id);
     }
 
-    public static final Condition empty =
+    public static Condition empty =
             condition("%element% is %not% empty", el -> el.core().text().equals(""));
 
     public static Condition matchesText(String text) {
@@ -118,28 +124,28 @@ public abstract class Conditions {
                 el -> el.css(name).equals(value));
     }
 
-    public static final Condition image = condition("%element% has %no% image",
+    public static Condition image = condition("%element% has %no% image",
         el -> el.core().jsExecute("tagName.toLowerCase() === 'img' && " +
             "arguments[0].complete && typeof arguments[0].naturalWidth != 'undefined' && " +
             "arguments[0].naturalWidth > 0").equals("true"));
 
-    public static final Condition focused = condition("%element% is %not% in focus",
+    public static Condition focused = condition("%element% is %not% in focus",
         el -> {
             WebElement element = (WebElement)el.core().js().executeScript("return document.activeElement");
             return element != null && element.equals(el.core().getWebElement());
         });
 
-    public static final Condition enabled =
+    public static Condition enabled =
         condition("%element% is %not% enabled", el -> el.isEnabled());
 
-    public static final Condition disabled = not(enabled);
+    public static Condition disabled = not(enabled);
 
-    public static final Condition selected =
+    public static Condition selected =
         condition("%element% is %not% selected", el -> el.core().isSelected());
 
-    public static final Condition checked = selected;
+    public static Condition checked = selected;
 
-    public static Condition not(final Condition condition) {
+    public static Condition not(Condition condition) {
         return condition(getNotName(condition), el -> !condition.execute(el));
     }
     private static String getNotName(Condition condition) {

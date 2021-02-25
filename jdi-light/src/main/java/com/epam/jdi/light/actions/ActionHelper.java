@@ -48,8 +48,7 @@ import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.LogLevels.STEP;
 import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.settings.WebSettings.*;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -205,6 +204,7 @@ public class ActionHelper {
             processBeforeAction(message, jInfo);
         }
     }
+    public static List<String> NOT_FILL_TEMPLATE = new ArrayList<>();
     protected static void processBeforeAction(String message, ActionObject jInfo) {
         allureSteps.reset();
         JoinPoint jp = jInfo.jp();
