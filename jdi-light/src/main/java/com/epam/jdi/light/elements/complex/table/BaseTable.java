@@ -95,7 +95,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @Override
     public UIElement core() {
         UIElement core = super.core();
-        if (hasRunDrivers() && !locatorsValidated && core.firstChild() != null) {
+        if (hasRunDrivers() && !locatorsValidated) {
             try {
                 locatorsValidated = true;
                 validateLocators(core);
@@ -106,11 +106,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return core;
     }
     protected void validateLocators(UIElement core) {
-        if (getByLocator(headerLocator).equals("th")) {
-            if (core.finds("th").isEmpty() && core.finds("td").isNotEmpty()) {
-                headerLocator = core.find("thead td").isExist()
-                    ? By.cssSelector("thead td") : By.xpath("//tr[1]//td");
-            }
+        if (getByLocator(headerLocator).equals("th") && core.finds("th").isEmpty()) {
+            headerLocator = core.find("thead td").isExist()
+                ? By.cssSelector("thead td") : By.xpath("//tr[1]//td");
         }
     }
 

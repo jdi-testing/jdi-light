@@ -53,7 +53,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     @Override
     public UIElement core() {
         UIElement core = super.core();
-        if (hasRunDrivers() && !locatorsValidated && core.firstChild() != null) {
+        if (hasRunDrivers() && !locatorsValidated) {
             logger.debug("Grid Run validation");
             try {
                 validateLocators(core);
@@ -65,7 +65,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         return core;
     }
     protected void validateLocators(UIElement core) {
-        if (headerLocator.equals("th") && core.finds("th").isEmpty()) {
+        if (headerLocator.equals("th")) {
             headerLocator = core.find("thead td").isExist()
                 ? "thead td"
                 : "//tr[1]//td";
