@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static com.epam.jdi.light.settings.JDISettings.PAGE;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.ghostButton;
@@ -36,14 +37,15 @@ public class BeforeNewPageTests implements TestsInit {
         homePage.open();
         PAGE.beforeNewPage = page -> {
             WebPage.beforeNewPage(page);
+            redButton.waitFor().displayed();
             timer.restart();
             ghostButton.waitFor().disappear();
         };
         try {
-            timer.restart();
             html5Page.open();
             redButton.click();
             long time = timer.timePassedInMSec();
+            logger.info(time + "");
             validateAndAcceptAlert("Red button");
             assertThat(time, greaterThan(2500L));
         } finally {
@@ -54,10 +56,12 @@ public class BeforeNewPageTests implements TestsInit {
     @Test
     public void withoutBeforeNewPage() {
         homePage.open();
-        timer.restart();
         html5Page.open();
+        redButton.waitFor().displayed();
+        timer.restart();
         redButton.click();
         long time = timer.timePassedInMSec();
+        logger.info(time + "");
         validateAndAcceptAlert("Red button");
         assertThat(time, lessThan(1000L));
     }
