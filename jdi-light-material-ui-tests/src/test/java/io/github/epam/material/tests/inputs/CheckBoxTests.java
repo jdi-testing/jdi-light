@@ -14,9 +14,9 @@ public class CheckBoxTests extends TestsInit {
         primaryCheckBoxPage.shouldBeOpened();
         checkboxFrame.checkbox.is().enabled();
         checkboxFrame.checkbox.check();
-        checkboxFrame.checkbox.is().selected();
+        checkboxFrame.checkbox.is().checked();
         checkboxFrame.checkbox.uncheck();
-        checkboxFrame.checkbox.is().unSelected();
+        checkboxFrame.checkbox.is().unChecked();
     }
 
     @Test

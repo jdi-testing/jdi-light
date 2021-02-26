@@ -10,20 +10,20 @@ import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
 public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasCheck,
     HasAssert<CheckboxAssert> {
 
-    @JDIAction("Is '{name}' selected")
-    public boolean isSelected() {
+    @JDIAction("Is '{name}' checked")
+    public boolean isChecked() {
         return core().hasClass("Mui-checked");
     }
 
     @JDIAction("Is '{name}' not selected")
-    public boolean isNotSelected() {
-        return !isSelected();
+    public boolean isNotChecked() {
+        return !isChecked();
     }
 
     @JDIAction("Check '{name}'")
     @Override
     public void check() {
-        if (isNotSelected()) {
+        if (isNotChecked()) {
             click();
         }
     }
@@ -31,7 +31,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
     @JDIAction("Uncheck '{name}'")
     @Override
     public void uncheck() {
-        if(isSelected()) {
+        if(isChecked()) {
             click();
         }
     }
