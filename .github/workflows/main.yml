@@ -17,8 +17,8 @@ env:
     BDD_TESTS: "jdi-bdd-tests"
     BOOTSTRAP_TESTS: "jdi-light-bootstrap-tests"
     HTML_TESTS: "jdi-light-html-tests"
-    # ANGULAR_TESTS: "jdi-light-angular-tests"
-    # ANGULAR_TESTS_WITH_MOCKS: "jdi-light-angular-tests-with-mocks"
+    ANGULAR_TESTS: "jdi-light-angular-tests"
+    ANGULAR_TESTS_WITH_MOCKS: "jdi-light-angular-tests-with-mocks"
     EXAMPLES: "jdi-light-examples"
     EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
     PERFORMANCE: "jdi-performance"
@@ -86,6 +86,8 @@ jobs:
         echo arguments=$FIREFOX_ARGS > "./${BDD_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
         echo arguments=$FIREFOX_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${HTML_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
         echo arguments=$FIREFOX_ARGS > "./${HTML_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
@@ -143,18 +145,18 @@ jobs:
 #    - name: Kill Chrome
 #      run: pkill -f "chrome"
 
-#    - name: Run tests - Angular Common tests
-#      id: tests-angular-common
-#      if: steps.jdi-compile.outcome == 'success'
-#      timeout-minutes: 30 # prevent blocking
-#      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
-#
-#    - name: Check Chrome
-#      run: ps -aux | grep chrome
-#
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
+    - name: Run tests - Angular Common tests
+      id: tests-angular-common
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 30 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+
+    - name: Check Chrome
+      run: ps -aux | grep chrome
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
 
 #    - name: Run tests - Angular Complex tests
 #      id: tests-angular-complex
@@ -245,8 +247,8 @@ jobs:
         echo Example tests result: ${{ steps.tests-examples.outcome }}
         exit 1
 
-#    - name: Check angular tests are passed
-#      if: ${{ steps.tests-angular-common.outcome != 'success' }}
+    - name: Check angular tests are passed
+      if: ${{ steps.tests-angular-common.outcome != 'success' }}
 # for full angular should be
 #      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}
 #        echo Angular Complex tests result: ${{ steps.tests-angular-complex.outcome }}

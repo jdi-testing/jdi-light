@@ -32,7 +32,7 @@ public class BeforeNewPageTests implements TestsInit {
     }
 
     final Timer timer= new Timer();
-    @Test
+    @Test(enabled = false)
     public void withBeforeNewPage() {
         homePage.open();
         PAGE.beforeNewPage = page -> {
