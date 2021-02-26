@@ -5,16 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static nativeapp.android.apidemos.IndexPage.viewsPage;
-import static nativeapp.android.apidemos.views.ExpandableListPage.arnoldName;
-import static nativeapp.android.apidemos.views.ExpandableListPage.catNames;
-import static nativeapp.android.apidemos.views.ExpandableListPage.child1;
-import static nativeapp.android.apidemos.views.ExpandableListPage.customAdapter;
-import static nativeapp.android.apidemos.views.ExpandableListPage.dogNames;
-import static nativeapp.android.apidemos.views.ExpandableListPage.fishNames;
-import static nativeapp.android.apidemos.views.ExpandableListPage.bubblesName;
-import static nativeapp.android.apidemos.views.ExpandableListPage.group0;
-import static nativeapp.android.apidemos.views.ExpandableListPage.peopleNames;
-import static nativeapp.android.apidemos.views.ExpandableListPage.simpleAdapter;
+import static nativeapp.android.apidemos.views.ExpandableListPage.*;
 import static nativeapp.android.apidemos.views.ViewsPage.expandableList;
 
 public class ExpandableListTests extends ApiDemosTestInit {

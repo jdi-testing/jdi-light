@@ -5,7 +5,6 @@ package com.jdi.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.light.logger.AllureLogger;
 import com.epam.jdi.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -16,7 +15,7 @@ import org.testng.annotations.Test;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
+import static com.epam.jdi.light.logger.AllureLogger.screenshotStep;
 import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.last;
@@ -47,7 +46,7 @@ public class TestNGListener implements IInvokedMethodListener {
                             .format(new Date(currentTimeMillis() - start.get())));
             if ("FAILED".equals(result)) {
                 try {
-                    AllureLogger.screenshotStep("On Fail Screenshot");
+                    screenshotStep("On Fail Screenshot");
                 } catch (RuntimeException ignored) { }
                 logger.step("ERROR: " + tr.getThrowable().getMessage());
             }

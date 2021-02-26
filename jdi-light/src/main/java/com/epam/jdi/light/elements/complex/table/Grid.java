@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
-import com.epam.jdi.tools.Timer;
 import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.WebElement;
 
@@ -20,10 +19,10 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.Timer.getByCondition;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -48,46 +47,29 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     protected int startIndex = ELEMENT.startIndex;
 
     public WebList webCells() {
-        return coreUI().finds(allCellsLocator)
+        return core().finds(allCellsLocator)
             .setName(getName() + " webCells");
     }
     @Override
     public UIElement core() {
         UIElement core = super.core();
-        if (hasRunDrivers() && !locatorsValidated && core.firstChild() != null) {
+        if (hasRunDrivers() && !locatorsValidated) {
             logger.debug("Grid Run validation");
             try {
-                locatorsValidated = true;
                 validateLocators(core);
+                locatorsValidated = true;
             } catch (Exception ex) {
-                logger.debug("Grid Validation failed. Rerun needed.");
                 locatorsValidated = false;
             }
         }
         return core;
     }
     protected void validateLocators(UIElement core) {
-        if (headerLocator.equals("th")) {
-            if (core.finds("th").size() == 0) {
-                headerLocator = core.find("thead td").isExist()
-                        ? "thead td" : "//tr[1]//td";
-            }
+        if (headerLocator.equals("th") && core.finds("th").isEmpty()) {
+            headerLocator = core.find("thead td").isExist()
+                ? "thead td"
+                : "//tr[1]//td";
         }
-    }
-
-    public UIElement coreUI() {
-        UIElement c = core();
-        if (c.isExist()) {
-            return c;
-        }
-        try {
-            new Timer(TIMEOUTS.element.get() * 1000)
-                    .wait(() -> core().isExist());
-        }
-        catch (Exception skip) {
-            logger.debug("Error during waiting grid existance %s", skip);
-        }
-        return core();
     }
 
     @Override
@@ -127,36 +109,30 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
 
     @Override
     public UIElement webCell(int colNum, int rowNum) {
-        String cacheName = getName() + "  webCell" + colNum + "|" +rowNum;
-        logger.debug("Cell will be caches as %s", cacheName);
-        return coreUI().find(MessageFormat.format(cellTemplate, colNum, rowNum))
-            .setName(cacheName);
+        return core().find(MessageFormat.format(cellTemplate, colNum, rowNum))
+            .setName(format("%s cell(%s,%s)", getName(), colNum, rowNum));
     }
     @Override
     public WebList webColumn(int colNum) {
         int index = getColumnIndex(colNum);
         validateColumnIndex(index);
-        String cacheName = getName() + "  webColumn" + index;
-        logger.debug("Column will be caches as %s", cacheName);
-        return coreUI().finds(columnTemplate, index)
-            .setName(cacheName);
+        return core().finds(columnTemplate, index)
+            .setName(format("%s column:%s", getName(), index));
     }
     @Override
     public WebList webRow(int rowNum) {
         validateRowIndex(rowNum);
-        String cacheName = getName() + "  webRow" + rowNum;
-        logger.debug("Row will be caches as %s", cacheName);
-        return coreUI().finds(rowTemplate, rowNum)
-            .setName(cacheName);
+        return core().finds(rowTemplate, rowNum)
+            .setName(format("%s row:%s", getName(), rowNum));
     }
     @Override
     public WebList headerUI() {
-        return coreUI().finds(headerLocator)
+        return core().finds(headerLocator)
             .setName(getName() + " headerUI");
     }
     @Override
     public WebList footerUI() {
-        return coreUI().finds(footerLocator)
+        return core().finds(footerLocator)
             .setName(getName() + " footerUI");
     }
 
@@ -233,7 +209,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
                 }
                 logger.debug("Columns mapping is %s", columnsMapping.toString());
             } else {
-                logger.debug("Columns mapping is not needed");
+                logger.debug("Columns mapping is not required");
             }
             columnsValidated = true;
         } catch (Exception ex) {

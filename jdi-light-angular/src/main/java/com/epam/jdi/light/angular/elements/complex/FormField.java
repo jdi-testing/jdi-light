@@ -6,7 +6,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.logger.JDILogger;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

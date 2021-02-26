@@ -199,7 +199,7 @@ public class UIElement extends JDIBase
      * Check the element is displayed
      * @return boolean
      */
-    @JDIAction(value = "Check that '{name}' is displayed", level = DEBUG)
+    @JDIAction(value = "Check that '{name}' is displayed", timeout = 0, level = DEBUG)
     public boolean isDisplayed() {
         if (params.keys().contains("visualCheck"))
             visualCheck("Check that '"+getName()+"' is displayed");
@@ -342,7 +342,6 @@ public class UIElement extends JDIBase
                 logger.debug("Click Bottom Right");
                 break;
             case CENTER:
-                logger.debug("Click Center");
                 get().click();
                 break;
             case JS:
@@ -355,7 +354,6 @@ public class UIElement extends JDIBase
                     this::getElementClickableArea, Objects::nonNull);
                 if (clArea == null || clArea == CENTER) {
                     try {
-                        logger.debug("Real Click Smart");
                         get().click();
                     } catch (Exception ex) {
                         throw getNotClickableException();
@@ -367,7 +365,7 @@ public class UIElement extends JDIBase
     protected void waitAfterAction() {
         int timeout = waitAfter().value;
         if (isBlank(waitAfterMethod) && timeout > 0) {
-            Timer.sleep(timeout * 1000);
+            Timer.sleep(timeout * 1000L);
         }
     }
     protected RuntimeException getNotClickableException() {

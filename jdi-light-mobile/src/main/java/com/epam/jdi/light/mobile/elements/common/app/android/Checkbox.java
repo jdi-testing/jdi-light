@@ -1,9 +1,8 @@
 package com.epam.jdi.light.mobile.elements.common.app.android;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.logger.LogLevels;
-import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.asserts.CheckboxAssert;
+import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.app.ICheckbox;
 
 public class Checkbox extends MobileAppBaseElement<CheckboxAssert> implements ICheckbox {

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Locale;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.elements.composite.WebPage.reload;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.*;

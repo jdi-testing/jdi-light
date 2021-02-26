@@ -5,11 +5,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.epam.EpamGithubSite.*;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class WindowsAndFramesTests extends TestsInit {
 

@@ -1,7 +1,6 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.common.MobileKeyboard;
-
 import com.epam.jdi.light.mobile.elements.composite.AndroidScreen;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import nativeapp.android.apidemos.NotifyPage;

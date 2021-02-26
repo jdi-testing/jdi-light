@@ -6,11 +6,7 @@ import org.testng.annotations.Test;
 
 import static nativeapp.android.apidemos.IndexPage.animationPage;
 import static nativeapp.android.apidemos.animation.AnimationPage.layoutAnimationsButton;
-import static nativeapp.android.apidemos.animation.CheckboxesPage.changingInCheckbox;
-import static nativeapp.android.apidemos.animation.CheckboxesPage.changingOutCheckbox;
-import static nativeapp.android.apidemos.animation.CheckboxesPage.customAnimationsCheckbox;
-import static nativeapp.android.apidemos.animation.CheckboxesPage.inCheckbox;
-import static nativeapp.android.apidemos.animation.CheckboxesPage.outCheckbox;
+import static nativeapp.android.apidemos.animation.CheckboxesPage.*;
 
 
 public class CheckboxTests extends ApiDemosTestInit {

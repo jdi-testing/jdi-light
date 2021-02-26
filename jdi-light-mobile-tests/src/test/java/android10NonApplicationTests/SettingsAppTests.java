@@ -4,9 +4,7 @@ import nativeapp_android.SettingsAppTestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static nativeapp.android.NetworkAndInternetPage.networkAndInternetButton;
-import static nativeapp.android.NetworkAndInternetPage.airplaneModeSwitch;
-import static nativeapp.android.NetworkAndInternetPage.wiFiSwitch;
+import static nativeapp.android.NetworkAndInternetPage.*;
 
 
 public class SettingsAppTests extends SettingsAppTestsInit {

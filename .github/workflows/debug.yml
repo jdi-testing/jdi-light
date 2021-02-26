@@ -23,7 +23,7 @@ env:
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
     CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
-    ALLURE_VERSION: "2.7.0"
+    ALLURE_VERSION: "2.13.8"
 
 on:
   push:
@@ -88,7 +88,7 @@ jobs:
       id: jdi-compile
       run: mvn -ntp install -DskipTests
 
-# ========== steps before are needed for all tasks ==================
+# ========== steps before required for all tasks ==================
 
 # !!! select required project you debug to save time.
 # All other projects you can delete or comment.

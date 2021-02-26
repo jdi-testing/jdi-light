@@ -11,12 +11,13 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.firstIndex;
+import static java.lang.String.format;
 
 /**
  * Created by Roman Iovlev on 24.09.2020
@@ -47,17 +48,22 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
 
     // region Rows
     default WebList webRow(int rowNum) {
+        if (rowNum < 0) {
+            throw exception("Failed to find webRow. Index should be >= 0");
+        }
         List<WebElement> row = new ArrayList<>();
         int startIndex = (rowNum-1)*size();
         for (int i = 0; i < size(); i++) {
              row.add(webCells().get(startIndex + i));
         }
-        String cacheName = getName() + "  webRow" + rowNum;
-        logger.debug("Row will be caches as %s", cacheName);
-        return $$(row, cacheName);
+        return $$(row, format("%s row:%s", getName(), rowNum));
     }
     default int getRowIndexByName(String rowName) {
-        return firstIndex(rowHeader(), h -> ELEMENT.namesEqual.execute(h, rowName)) + 1;
+        int index = firstIndex(rowHeader(), h -> ELEMENT.namesEqual.execute(h, rowName));
+        if (index == -1) {
+            throw exception("Failed to find webRow. Index should be >= 0");
+        }
+        return index + 1;
     }
     default WebList webRow(String rowName) {
         return webRow(getRowIndexByName(rowName));
@@ -111,16 +117,14 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         for (int i = 0; i < count(); i++) {
             column.add(webCells().get(colIndex + i*size));
         }
-        String cacheName = getName() + "  webColumn" + colIndex;
-        logger.debug("Row will be caches as %s", cacheName);
-        return $$(column, cacheName);
+        return $$(column, format("%s column:%s", getName(), colIndex));
     }
     default int getColIndexByName(String colName) {
-        int indx = firstIndex(header(), h -> ELEMENT.namesEqual.execute(h, colName)) + 1;
-        if (indx == 0) {
-            logger.error("Column %s was not found. The first column will be used.", colName);
+        int index = firstIndex(header(), h -> ELEMENT.namesEqual.execute(h, colName));;
+        if (index == -1) {
+            throw exception("Column '%s' was not found", colName);
         }
-        return indx;
+        return index + 1;
     }
     default WebList webColumn(String colName) {
         return webColumn(getColIndexByName(colName));

@@ -2,7 +2,6 @@ package com.epam.jdi.light.mobile.elements.composite;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.mobile.MobileContextHolder;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import io.appium.java_client.MultiTouchAction;

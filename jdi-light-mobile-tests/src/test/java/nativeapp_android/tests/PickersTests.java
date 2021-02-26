@@ -7,11 +7,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.mobile.elements.common.MobileKeyboard.pressKey;
+import static nativeapp.android.apidemos.IndexPage.goToViewPage;
+import static nativeapp.android.apidemos.IndexPage.viewsPage;
 import static nativeapp.android.apidemos.views.DateWidgetsPage.*;
-import static nativeapp.android.apidemos.IndexPage.*;
-import static nativeapp.android.apidemos.views.ViewsPage.*;
+import static nativeapp.android.apidemos.views.PickerPage.picker;
 import static nativeapp.android.apidemos.views.RadialPickerPage.*;
-import static nativeapp.android.apidemos.views.PickerPage.*;
+import static nativeapp.android.apidemos.views.ViewsPage.dateWidgetsPage;
 
 public class PickersTests extends ApiDemosTestInit {
 

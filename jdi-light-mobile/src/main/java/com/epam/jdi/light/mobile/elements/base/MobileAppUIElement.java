@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.JdiSettings;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-import static com.epam.jdi.light.elements.base.JdiSettings.DEFAULT_CONTEXT;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import io.appium.java_client.PerformsTouchActions;
@@ -24,6 +23,7 @@ import java.time.Duration;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.elements.base.JdiSettings.DEFAULT_CONTEXT;
 import static com.epam.jdi.light.elements.base.JdiSettings.getAllElementsInContext;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.LinqUtils.map;

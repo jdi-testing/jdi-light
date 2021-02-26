@@ -302,7 +302,7 @@ public class ActionHelper {
         if (element == null) return;
         Pair<String, Integer> waitAfter = element.waitAfter();
         if (isNotBlank(waitAfter.key) && jInfo.methodName().equalsIgnoreCase(waitAfter.key) && waitAfter.value > 0) {
-            Timer.sleep(waitAfter.value * 1000);
+            Timer.sleep(waitAfter.value * 1000L);
         }
     }
     public static JAction2<ActionObject, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;

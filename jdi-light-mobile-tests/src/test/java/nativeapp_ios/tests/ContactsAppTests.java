@@ -3,10 +3,7 @@ package nativeapp_ios.tests;
 import nativeapp_ios.ContactsAppTestsInit;
 import org.testng.annotations.Test;
 
-import static nativeapp.ios.contacts.ContactsApp.addNewContactPage;
-import static nativeapp.ios.contacts.ContactsApp.contactContextMenu;
-import static nativeapp.ios.contacts.ContactsApp.contactsListPage;
-import static nativeapp.ios.contacts.ContactsApp.groupsPage;
+import static nativeapp.ios.contacts.ContactsApp.*;
 
 public class ContactsAppTests extends ContactsAppTestsInit {
 

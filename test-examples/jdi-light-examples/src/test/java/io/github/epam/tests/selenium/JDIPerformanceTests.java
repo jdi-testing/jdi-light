@@ -4,19 +4,17 @@ import com.epam.jdi.light.elements.complex.table.Line;
 import org.apache.commons.lang3.time.StopWatch;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import selenium.entities.User;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static selenium.entities.TestData.TABLE_SNAPSHOOT;
 import static selenium.seleniumPO.HomePage.leftNavigation;
 import static selenium.seleniumPO.SiteSelenium.homePage;
 import static selenium.seleniumPO.SiteSelenium.login;
 import static selenium.site.pages.JDIPerformancePage.*;
-
-import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class JDIPerformanceTests implements SimpleTestsInit {
 

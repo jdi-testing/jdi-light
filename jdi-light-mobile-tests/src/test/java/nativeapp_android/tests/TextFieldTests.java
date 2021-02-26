@@ -6,9 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static nativeapp.android.apidemos.IndexPage.viewsPage;
-import static nativeapp.android.apidemos.views.TextFieldsPage.displayedInputTextField;
-import static nativeapp.android.apidemos.views.TextFieldsPage.hiddenInputTextField;
-import static nativeapp.android.apidemos.views.TextFieldsPage.visibleTextField;
+import static nativeapp.android.apidemos.views.TextFieldsPage.*;
 import static nativeapp.android.apidemos.views.ViewsPage.textFieldsPage;
 
 public class TextFieldTests extends ApiDemosTestInit {

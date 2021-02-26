@@ -60,7 +60,7 @@ public class WebAnnotationsUtil {
         if (!"".equals(locator.androidDataMatcher()))
             return MobileBy.androidDataMatcher(locator.androidDataMatcher());
         /*
-TODO: Yet to be checked   (native app needed)
+TODO: Yet to be checked   (native app required)
         if (!"".equals(locator.androidViewTag()))
                 return MobileBy.AndroidViewTag(locator.androidViewTag());
         if (!"".equals(locator.image()))

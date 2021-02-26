@@ -10,12 +10,7 @@ import static nativeapp.android.apidemos.IndexPage.appPage;
 import static nativeapp.android.apidemos.app.AppPage.notificationPage;
 import static nativeapp.android.apidemos.app.NotificationPage.happyButton;
 import static nativeapp.android.apidemos.app.NotificationPage.statusBarButton;
-import static nativeapp.android.apidemos.app.StatusBarPage.appIcon;
-import static nativeapp.android.apidemos.app.StatusBarPage.appName;
-import static nativeapp.android.apidemos.app.StatusBarPage.appText;
-import static nativeapp.android.apidemos.app.StatusBarPage.clearAllButton;
-import static nativeapp.android.apidemos.app.StatusBarPage.notificationPanel;
-import static nativeapp.android.apidemos.app.StatusBarPage.title;
+import static nativeapp.android.apidemos.app.StatusBarPage.*;
 
 public class StatusBarTests extends ApiDemosTestInit {
 
