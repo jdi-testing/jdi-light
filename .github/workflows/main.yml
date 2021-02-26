@@ -253,9 +253,9 @@ jobs:
 #      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}
 #        echo Angular Complex tests result: ${{ steps.tests-angular-complex.outcome }}
 #        echo Angular Unit tests result: ${{ steps.tests-angular-unit.outcome }}
-#      run: |
-#        echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
-#        exit 1
+      run: |
+        echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
+        exit 1
 
     - name: Check performance tests are passed
       if: ${{ steps.tests-html-perf.outcome != 'success' || steps.tests-perf.outcome != 'success' }}
