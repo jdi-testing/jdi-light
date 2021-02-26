@@ -2,9 +2,16 @@ package com.epam.jdi.light.material.elements.inputs;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.inputs.ButtonAssert;
 
 public class Button extends UIBaseElement<ButtonAssert> {
+
+    Button() {}
+
+    Button(UIElement element) {
+        core().setCore(element);
+    }
 
     @JDIAction("Click '{name}'")
     public void click() {
@@ -18,7 +25,7 @@ public class Button extends UIBaseElement<ButtonAssert> {
 
     @Override
     public ButtonAssert has() {
-        return new ButtonAssert().set(this);
+        return this.is();
     }
 
     @JDIAction("Check if '{name}' is enabled")
