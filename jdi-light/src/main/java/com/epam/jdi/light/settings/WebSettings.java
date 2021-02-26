@@ -189,6 +189,8 @@ public class WebSettings {
             fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
             fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
             fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
+            fillAction(p -> DRIVER.gitHubTokenName = p, "gitHubTokenName");
+            fillAction(p -> DRIVER.gitHubTokenSecret = p, "gitHubTokenSecret");
             fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
             fillAction(SoftAssert::setAssertType, "assert.type");
             fillAction(p -> ELEMENT.clickType = getEnumValueByName(ElementArea.class, p, CENTER), "click.type");
