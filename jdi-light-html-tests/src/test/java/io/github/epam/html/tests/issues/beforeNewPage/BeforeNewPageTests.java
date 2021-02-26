@@ -38,11 +38,14 @@ public class BeforeNewPageTests implements TestsInit {
         PAGE.beforeNewPage = page -> {
             WebPage.beforeNewPage(page);
             redButton.waitFor().displayed();
+            logger.info("timer restart");
             timer.restart();
             ghostButton.waitFor().disappear();
+            logger.info("ghost button hidden");
         };
         try {
             html5Page.open();
+            logger.info("redbtn click");
             redButton.click();
             long time = timer.timePassedInMSec();
             logger.info(time + "");
