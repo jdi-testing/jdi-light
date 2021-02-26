@@ -7,9 +7,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 
-import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.touchUiDatepicker;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class TuchUiDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)

@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.momentJsDatepicker;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class MomentJsDatepickerTests extends TestsDatepickerBase {
 

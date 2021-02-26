@@ -21,7 +21,8 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.lang.String.format;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThan;
 
 public class ListPerformanceTests implements TestsInit {
     final String value = "Yen Stevenson";
