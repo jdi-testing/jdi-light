@@ -10,14 +10,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
-import io.github.com.pages.displaydata.BadgeFrame;
+import io.github.com.pages.displaydata.*;
 import io.github.com.pages.inputs.ButtonGroupFrame;
-import io.github.com.pages.displaydata.TypographyFrame;
 import io.github.com.pages.inputs.FabFrame;
-import io.github.com.pages.displaydata.MaterialIconFrame;
-import io.github.com.pages.displaydata.TooltipFrame;
-import io.github.com.pages.displaydata.InsetDividerFrame;
-import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
@@ -176,6 +171,25 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-tooltip--interactive")
     public static WebPage displayDataTooltipInteractivePage;
+
+    // chip
+    @Frame("storybook-preview-iframe")
+    public static ChipFrame chipFrame;
+
+    @Url("/material-ui-data-display-chips--default-chip")
+    public static WebPage displayDataDefaultChipPage;
+
+    @Url("/material-ui-data-display-chips--outlined-chip")
+    public static WebPage displayDataOutlinedChipPage;
+
+    @Url("/material-ui-data-display-chips--chip-array")
+    public static WebPage displayDataArrayChipPage;
+
+    @Url("/material-ui-data-display-chips--small-default-chip")
+    public static WebPage displayDataSmallDefaultChipPage;
+
+    @Url("/material-ui-data-display-chips--small-outlined-chip")
+    public static WebPage displayDataSmallOutlinedChipPage;
 
     // feedback
     // backdrop
