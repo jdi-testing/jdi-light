@@ -16,7 +16,13 @@
         <allure.testng>2.13.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.5</aspectj.version>
+        <aspectj.version>1.9.6</aspectj.version>
+        <suite.xml.file>src/test/resources/android10SystemTests.xml</suite.xml.file>
+        <suite.xml.file>src/test/resources/android11SystemTests.xml</suite.xml.file>
+        <suite.xml.file>src/test/resources/androidApps.xml</suite.xml.file>
+        <suite.xml.file>src/test/resources/androidAppsEspresso.xml</suite.xml.file>
+        <suite.xml.file>src/test/resources/iosApps.xml</suite.xml.file>
+        <suite.xml.file>src/test/resources/webMobileTests.xml</suite.xml.file>
     </properties>
 
     <dependencies>
@@ -50,6 +56,29 @@
             <version>6.14.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.17.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -75,7 +104,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
+                        <suiteXmlFile>${suite.xml.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>

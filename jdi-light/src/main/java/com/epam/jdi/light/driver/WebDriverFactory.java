@@ -249,7 +249,6 @@ public class WebDriverFactory {
 
     private static void closeDriver(WebDriver driver) {
         try {
-            driver.close();
             driver.quit();
         } catch (Exception ignore) { }
     }

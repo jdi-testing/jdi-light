@@ -12,6 +12,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -23,11 +24,16 @@ public class WindowsManager {
     private static Safe<Boolean> newWindow = new Safe<>(() -> false);
 
     public static Set<String> getWindows() {
-        Set<String> wHandles = getDriver().getWindowHandles();
-        if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size())
-            newWindow.set(true);
-        windowHandles.set(wHandles);
-        return wHandles;
+        try {
+            Set<String> wHandles = getDriver().getWindowHandles();
+            if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size())
+                newWindow.set(true);
+            windowHandles.set(wHandles);
+        }
+        catch (Throwable ignore) {
+            logger.error("Error during getWindows handles. Ignore error in case of mobile device");
+        }
+        return windowHandles.get();
     }
 
     /**
