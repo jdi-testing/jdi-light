@@ -33,6 +33,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.actions.ActionProcessor.jStack;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
@@ -49,7 +50,7 @@ import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
@@ -204,6 +205,7 @@ public class ActionHelper {
             processBeforeAction(message, jInfo);
         }
     }
+    public static List<String> NOT_FILL_TEMPLATE = new ArrayList<>();
     protected static void processBeforeAction(String message, ActionObject jInfo) {
         allureSteps.reset();
         JoinPoint jp = jInfo.jp();
@@ -609,22 +611,28 @@ public class ActionHelper {
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
         Throwable exception = null;
-        do {
-            try {
-                logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
-                Object result = jInfo.overrideAction() != null
-                        ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
-                if (!condition(jInfo.jp())) continue;
-                return result;
-            } catch (Throwable ex) {
-                exception = ex;
+        isTop.set(false);
+        try {
+            do {
                 try {
-                    exceptionMsg = safeException(ex);
-                    Thread.sleep(200);
-                } catch (Throwable ignore) { }
-            }
-        } while (currentTimeMillis() - start < jInfo.timeout() * 1000L);
-        throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
+                    logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
+                    Object result = jInfo.overrideAction() != null
+                            ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
+                    if (!condition(jInfo.jp())) continue;
+                    return result;
+                } catch (Throwable ex) {
+                    exception = ex;
+                    try {
+                        exceptionMsg = safeException(ex);
+                        Thread.sleep(200);
+                    } catch (Throwable ignore) {
+                    }
+                }
+            } while (currentTimeMillis() - start < jInfo.timeout() * 1000L);
+            throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
+        } finally {
+            isTop.set(true);
+        }
     }
     static String getFailedMessage(ActionObject jInfo, String exception) {
         MethodSignature method = getJpMethod(jInfo.jp());

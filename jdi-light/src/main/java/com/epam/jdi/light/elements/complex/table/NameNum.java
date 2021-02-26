@@ -4,12 +4,12 @@ import com.epam.jdi.tools.DataClass;
 
 import java.util.List;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.firstIndex;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.format;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.PrintUtils.print;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
