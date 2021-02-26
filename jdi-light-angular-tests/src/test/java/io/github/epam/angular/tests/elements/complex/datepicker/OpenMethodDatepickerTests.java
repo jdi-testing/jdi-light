@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.openMethodDatepicker;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class OpenMethodDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)

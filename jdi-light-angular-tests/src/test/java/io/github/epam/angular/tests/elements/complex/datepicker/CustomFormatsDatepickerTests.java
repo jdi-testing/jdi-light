@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.customFormatsDatepicker;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class CustomFormatsDatepickerTests extends TestsDatepickerBase {
 

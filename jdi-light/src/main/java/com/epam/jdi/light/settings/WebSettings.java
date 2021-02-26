@@ -142,6 +142,7 @@ public class WebSettings {
     }
 
     public static boolean initialized = false;
+    public static Runnable additionalInit = () -> {};
 
     public static synchronized void init() {
         CHECK_MULTI_THREAD.execute();
@@ -233,6 +234,8 @@ public class WebSettings {
                 p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
             loadCapabilities("common.capabilities.path","common.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
+
+            additionalInit.run();
 
             initialized = true;
         } catch (Throwable ex) {

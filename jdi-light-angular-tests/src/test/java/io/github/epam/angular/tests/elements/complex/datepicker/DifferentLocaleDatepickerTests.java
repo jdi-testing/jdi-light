@@ -9,7 +9,6 @@ import java.util.Locale;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.differentLocaleDatepicker;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class DifferentLocaleDatepickerTests extends TestsDatepickerBase {
 
