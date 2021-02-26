@@ -69,7 +69,7 @@ jobs:
     - name: Install Allure
       run: |
         sudo tar -zxvf allure.tgz -C /opt/
-        sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+        sudo ln -s /opt/allure-${ALLURE_VERSION}/bin/allure /usr/bin/allure
         allure --version
 
 #    - name: Install Netlify
