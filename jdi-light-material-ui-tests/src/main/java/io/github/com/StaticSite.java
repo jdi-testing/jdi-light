@@ -23,6 +23,7 @@ import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.feedback.CircularFrame;
 import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
@@ -85,6 +86,16 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-text-field--time")
     public static WebPage inputTextFieldTimePage;
+
+    //checkbox
+    @Frame("storybook-preview-iframe")
+    public static CheckboxFrame checkboxFrame;
+
+    @Url("/material-ui-inputs-checkbox--disabled")
+    public static WebPage inputCheckboxDisabled;
+
+    @Url("/material-ui-inputs-checkbox--primary")
+    public static WebPage primaryCheckBoxPage;
 
     // button group
     @Frame("storybook-preview-iframe")
