@@ -86,8 +86,6 @@ jobs:
         echo arguments=$FIREFOX_ARGS > "./${BDD_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
         echo arguments=$FIREFOX_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
-#        echo arguments=$CHROME_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
-#        echo arguments=$FIREFOX_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${HTML_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
         echo arguments=$FIREFOX_ARGS > "./${HTML_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
