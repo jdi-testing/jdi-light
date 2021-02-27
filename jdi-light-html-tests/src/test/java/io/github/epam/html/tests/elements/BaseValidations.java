@@ -43,21 +43,21 @@ public class BaseValidations {
         logger.info("Check show");
         el.show();
     }
-
+    public static long RANGE = 1000L;
     public static void durationMoreThan(int duration, JAction action) {
-        validateDuration(duration * 1000L - 1000, duration * 1000L + 2000, action);
+        validateDuration(duration * 1000L - RANGE, duration * 1000L + 2 * RANGE, action);
     }
     public static void durationLessThan(int duration, JAction action) {
-        validateDuration(duration * 1000L - 2000, duration * 1000L + 1000, action);
+        validateDuration(duration * 1000L - 2 * RANGE, duration * 1000L + RANGE, action);
     }
     public static void duration(int duration, JAction action) {
-        validateDuration(duration * 1000L - 1000, duration * 1000L + 1000, action);
+        validateDuration(duration * 1000L - RANGE, duration * 1000L + RANGE, action);
     }
     public static void notMoreThan(int maxMs, JAction action) {
-        validateDuration(0, maxMs, action);
+        validateDuration(0, maxMs + RANGE, action);
     }
     public static <T> T notMoreThan(int maxMs, JFunc<T> func) {
-        return validateDuration(0, maxMs, func);
+        return validateDuration(0, maxMs + RANGE, func);
     }
     public static void durationImmediately(JAction action) {
         durationMoreThan(0, action);
