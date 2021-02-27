@@ -90,10 +90,10 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
     public D rowAsData(WebList row) {
         return lineClass != null
             ? lineToData(rowAsLine(row))
-            : new Line(header(), row).asData(dataClass);
+            : new Line(header(), row, row.getName()).asData(dataClass);
     }
     public L rowAsLine(WebList row) {
-        return new Line(header(), row).asLine(lineClass);
+        return new Line(header(), row, row.getName()).asLine(lineClass);
     }
     public List<D> elements(int minAmount) {
         return allData();

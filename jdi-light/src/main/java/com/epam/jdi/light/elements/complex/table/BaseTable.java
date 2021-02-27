@@ -521,7 +521,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get row '{0}' for '{name}' table")
     public Line row(int rowNum) {
-        return new Line(header(), webRow(rowNum));
+        return new Line(header(), webRow(rowNum), getName() + " line[" + rowNum + "]");
     }
 
     /**
@@ -531,7 +531,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get row '{0}' for '{name}' table")
     public Line row(String rowName) {
-        return new Line(header(), webRow(rowName));
+        return new Line(header(), webRow(rowName), getName() + " line[" + rowName + "]");
     }
     public Line row(Enum rowName) {
         return row(getEnumValue(rowName));
@@ -543,7 +543,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get all '{name}' rows")
     public List<Line> rows() {
-        return map(getRows(), row -> new Line(header(), row.value));
+        return map(getRows(), row -> new Line(header(), row.value, getName() + " line[" + row.key + "]"));
     }
     /**
      * Get all table rows
@@ -555,7 +555,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return map(rows, this::toLineSaveImages);
     }
     private Line toLineSaveImages(Pair<String, WebList> row) {
-        Line line = new Line(header(), row.value);
+        Line line = new Line(header(), row.value, getName() + " line[" + row.key + "]");
         line.saveCellsImages();
         return line;
     }
@@ -613,7 +613,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(int colNum) {
-        return new Line(rowHeader(), webColumn(colNum));
+        return new Line(rowHeader(), webColumn(colNum), getName() + " column[" + colNum + "]");
     }
     /**
      * Get table column by the name
@@ -622,7 +622,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(String colName) {
-        return new Line(rowHeader(), webColumn(colName));
+        return new Line(rowHeader(), webColumn(colName), getName() + " column[" + colName + "]");
     }
     public Line column(Enum colName) {
         return column(getEnumValue(colName));
@@ -634,7 +634,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get all '{name}' columns")
     public List<Line> columns() {
-        return map(getColumns(), row -> new Line(rowHeader(), row.value));
+        return map(getColumns(), row -> new Line(rowHeader(), row.value, getName() + " column[" + row.key + "]"));
     }
     // Cells
     /**

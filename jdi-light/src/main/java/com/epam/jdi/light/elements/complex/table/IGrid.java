@@ -89,7 +89,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     }
 
     default Line row(int rowNum) {
-        return new Line(header(), webRow(rowNum));
+        return new Line(header(), webRow(rowNum), getName() + " line[" + rowNum + "]");
     }
     default Line row(String rowName) {
         return row(getRowIndexByName(rowName));
@@ -108,6 +108,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         List<Line> rows = new ArrayList<>();
         int k = 0;
         int i = 0;
+        int j = 1;
         int size = size();
         List<String> header = header();
         List<WebElement> row = new ArrayList<>();
@@ -115,7 +116,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
             row.add(webCells.get(k++));
             if (i == size - 1) {
                 i = 0;
-                rows.add(new Line(header, row));
+                rows.add(new Line(header, row, getName() + " line[" + j++ + "]"));
                 row = new ArrayList<>();
             } else {
                 i++;
@@ -150,7 +151,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     }
 
     default Line column(int colNum) {
-        return new Line(rowHeader(), webColumn(colNum));
+        return new Line(rowHeader(), webColumn(colNum), getName() + " column[" + colNum + "]");
     }
     default Line column(String colName) {
         return column(getColIndexByName(colName));
@@ -174,7 +175,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         }
         List<String> header = rowHeader();
         for (int j = 0; j < size; j++) {
-            columns.add(new Line(header, webColumns.get(j)));
+            columns.add(new Line(header, webColumns.get(j), getName() + " column[" + (j+1) + "]"));
         }
         return columns;
     }

@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static io.github.com.StaticSite.performancePage;
 import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.html.tests.performance.PerfStatistic.*;
@@ -148,9 +149,12 @@ public class ListPerformanceTests implements TestsInit {
             ? "First time result: " + firstResult + ". JDI has the same result in average as Selenium with max better in " + max + "times"
             : format("First time result: " + firstResult + ". JDI in average is %s than Selenium in %s times with maximum %s in %s times", goodBad, ratio, goodBadMax, max);
         logger.info(toLog);
-        assertThat(format("Expected ratio: %s; but Actual: %s", expectedRatio, avJdi*expectedRatio),
-                avSelenium, lessThan(avJdi*expectedRatio*2));
-        assertThat(format("Expected result: %s; but Actual: %s", expectedFirst, firstResult),
-                firstResult, lessThan(expectedFirst*2));
+        boolean validatePerformance = Boolean.parseBoolean(getProperty("validate.performance"));
+        if (validatePerformance) {
+            assertThat(format("Expected ratio: %s; but Actual: %s", expectedRatio, avJdi * expectedRatio),
+                avSelenium, lessThan(avJdi * expectedRatio * 2));
+            assertThat(format("Expected result: %s; but Actual: %s", expectedFirst, firstResult),
+                firstResult, lessThan(expectedFirst * 2));
+        }
     }
 }
