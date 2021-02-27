@@ -11,8 +11,6 @@ import org.hamcrest.Matcher;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.*;
-
 /**
  * Created by Roman Iovlev on 24.09.2020
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
