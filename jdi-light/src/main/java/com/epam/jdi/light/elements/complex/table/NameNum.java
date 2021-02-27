@@ -16,11 +16,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class NameNum extends DataClass<NameNum> {
-    public int num = 0;
+    public int num = -1;
     public String name;
 
     public boolean hasName() {
-        return isNotBlank(name);
+        return isNotBlank(name) && num > -1;
     }
     @Override
     public String toString() {
@@ -34,9 +34,12 @@ public class NameNum extends DataClass<NameNum> {
     }
     public int getIndex(List<String> headers) {
         logger.debug("Find header with ");
-        int index = !hasName() ? num : firstIndex(headers, h -> equalsIgnoreCase(h, name));
+        if (hasName()) {
+            return num + 1;
+        }
+        int index = firstIndex(headers, h -> equalsIgnoreCase(h, name));
         if (index < 0) {
-            throw exception("Failed to find webRow. Index should be >= 0");
+            throw exception("Failed to getIndex. Index should be >= 0");
         }
         return index + 1;
     }

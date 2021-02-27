@@ -45,29 +45,29 @@ public class PerformanceTests implements TestsInit {
         durationMoreThan(3, () -> suspendButton.is().displayed());
     }
     //if test fails then run `mvn clean install` in module JDI Light
-    @Test(enabled = false)
+    @Test
     public void vanishButtonTest() {
         durationImmediately(() -> suspendButton.is().hidden());
         durationMoreThan(3, () -> ghostButton.is().disappear());
     }
     //if test fails then run `mvn clean install` in module JDI Light
-    @Test(enabled = false) // failed in CI
+    @Test
     public void vanishGhostButtonTest() {
         durationMoreThan(3, () -> ghostButton.is().disappear());
     }
     //if test fails then run `mvn clean install` in module JDI Light
-    @Test(enabled = false) // failed in CI
+    @Test
     public void vanishRemoveButtonTest() {
         durationMoreThan(3, () -> removeButton.is().disappear());
     }
     //if test fails then run `mvn clean install` in module JDI Light
-    @Test(enabled = false) // failed in CI
+    @Test
     public void vanishHiddenButtonTest() {
         durationImmediately(() -> suspendButton.is().hidden());
         durationMoreThan(3, () -> ghostButton.is().hidden());
     }
     //if test fails then run `mvn clean install` in module JDI Light
-    @Test(enabled = false) // failed in CI
+    @Test
     public void vanishHiddenRemoveButtonTest() {
         durationMoreThan(3, () -> removeButton.is().hidden());
     }
@@ -154,7 +154,7 @@ public class PerformanceTests implements TestsInit {
         durationMoreThan(3, () -> suspendButtonUI.is().displayed());
     }
     //if test fails then run `mvn clean install` in module JDI Light
-    @Test(enabled = false)
+    @Test
     public void vanishButtonUITest() {
         durationImmediately(() -> suspendButtonUI.is().hidden());
         durationMoreThan(3, () -> ghostButtonUI.is().disappear());
@@ -165,7 +165,7 @@ public class PerformanceTests implements TestsInit {
         durationMoreThan(3, () -> removeButtonUI.is().disappear());
     }
     //if test fails then run `mvn clean install` in module JDI Light
-    @Test(enabled = false)
+    @Test
     public void vanishHiddenButtonUITest() {
         durationImmediately(() -> suspendButtonUI.is().hidden());
         durationMoreThan(3, () -> ghostButtonUI.is().hidden());

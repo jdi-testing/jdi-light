@@ -60,7 +60,7 @@ public class RadioLabelTests implements TestsInit {
         odds.assertThat().values(contains("1", "3", "5", "7"));
     }
 
-    @Test(enabled = false)
+    @Test
     public void problems() {
         odds.list();
         odds.core().finds(By.xpath("../")).get(1).getTagName();

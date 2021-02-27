@@ -141,7 +141,7 @@ public class GridSharpHeaderTests implements TestsInit {
     @Test
     public void rowDataMatcherTest() {
         List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
+        assertThat(rows, hasItem(TABLE));
     }
 
     @Test

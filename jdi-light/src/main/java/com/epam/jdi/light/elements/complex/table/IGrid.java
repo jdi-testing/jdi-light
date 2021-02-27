@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.PrintUtils;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.firstIndex;
+import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
 
 /**
@@ -29,6 +32,14 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     default boolean isEmpty() { return count() == 0; }
     default boolean isNotEmpty() { return count() > 0; }
     default String getValue() { return getText(); }
+    default String print() {
+        String output = "||X||" + PrintUtils.print(header(), "|") + "||" + LINE_BREAK;
+        List<Line> rows = rows();
+        for (int i = 0; i < rows.size(); i++) {
+            output += "||" + rowHeader().get(i) + "||" + PrintUtils.print(rows.get(i), "|") + "||" + LINE_BREAK;
+        }
+        return output;
+    }
 
     default WebList headerUI() { return webRow(1); }
     default WebList footerUI() { return null; }
@@ -52,16 +63,22 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
             throw exception("Failed to find webRow. Index should be >= 0");
         }
         List<WebElement> row = new ArrayList<>();
-        int startIndex = (rowNum-1)*size();
-        for (int i = 0; i < size(); i++) {
-             row.add(webCells().get(startIndex + i));
+        if (size() != 0) {
+            int startIndex = (rowNum - 1) * size();
+            for (int i = 0; i < size(); i++) {
+                row.add(webCells().get(startIndex + i));
+            }
         }
         return $$(row, format("%s row:%s", getName(), rowNum));
     }
     default int getRowIndexByName(String rowName) {
-        int index = firstIndex(rowHeader(), h -> ELEMENT.namesEqual.execute(h, rowName));
+        List<String> rowsHeader = rowHeader();
+        if (rowsHeader.isEmpty()) {
+            throw exception("Failed to getRowIndexByName. rowsHeader is empty");
+        }
+        int index = firstIndex(rowsHeader, h -> ELEMENT.namesEqual.execute(h, rowName));
         if (index == -1) {
-            throw exception("Failed to find webRow. Index should be >= 0");
+            throw exception("Failed to getRowIndexByName. rowsHeader[%s] has no element '%s'", PrintUtils.print(rowsHeader), rowName);
         }
         return index + 1;
     }

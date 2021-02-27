@@ -142,7 +142,7 @@ public class GridSharpTests implements TestsInit {
     @Test
     public void rowDataMatcherTest() {
         List<Furniture> rows = furnitureSharp.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(SHORT_TABLE)), hasSize(1));
+        assertThat(rows, hasItem(SHORT_TABLE));
     }
 
     @Test

@@ -98,6 +98,8 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
     public List<D> elements(int minAmount) {
         return allData();
     }
+    public List<D> dataEqualsTo(D data) { return dataMatches(d -> d == data); }
+    public List<D> dataMatches(JFunc1<D, Boolean> matcher) { return filter(matcher); }
     public D get(String value) {
         return data(value);
     }

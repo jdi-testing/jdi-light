@@ -97,12 +97,11 @@ public class ActionHelper {
             String actionName = isBlank(template)
                 ? getDefaultName(jp, method)
                 : fillTemplate(template, jp, method);
-            try {
-                logger.trace("getActionName() => " + actionName);
-            } catch (Throwable ignore) { }
+            logger.trace("getActionName() => " + actionName);
             return actionName;
         } catch (Throwable ex) {
             try {
+                showElement(new ActionObject(jp, "getActionName"));
                 takeScreen();
             } catch (Exception ignore) { }
             throw exception(ex, "Surround method issue: Can't get action name: " + getClassMethodName(jp));
@@ -164,10 +163,10 @@ public class ActionHelper {
                     throw exception(ex, "fillTemplate getActionNameFromTemplate failed");
                 }
                 if (filledTemplate.contains("{{VALUE}}") && args.size() > 0) {
-                    filledTemplate = filledTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
+                    filledTemplate = filledTemplate.replace("{{VALUE}}", args.get(0).toString());
                 }
                 if (filledTemplate.contains("{failElement}")) {
-                    filledTemplate = filledTemplate.replaceAll("\\{failElement}", obj.get(0).value.toString());
+                    filledTemplate = filledTemplate.replace("{failElement}", obj.get(0).value.toString());
                 }
             }
             logger.trace("fillTemplate() => " + filledTemplate);
@@ -205,7 +204,6 @@ public class ActionHelper {
             processBeforeAction(message, jInfo);
         }
     }
-    public static List<String> NOT_FILL_TEMPLATE = new ArrayList<>();
     protected static void processBeforeAction(String message, ActionObject jInfo) {
         allureSteps.reset();
         JoinPoint jp = jInfo.jp();
@@ -233,6 +231,7 @@ public class ActionHelper {
         boolean lastActionIsNotAssert = isAssert.get() == null || !isAssert.get();
         isAssert.set(true);
         if (lastActionIsNotAssert && !LOGS.screenStrategy.contains(NEW_PAGE)) {
+            showElement(jInfo);
             AllureLogData logData = logDataToAllure(ASSERT,
             "Validate" + capitalize(jInfo.methodName()), jInfo.isAssert());
             attachDataToStep(logData);
@@ -244,6 +243,13 @@ public class ActionHelper {
     public static void beforeStepAction(ActionObject jInfo) {
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jInfo.jp()));
         logger.toLog(message, logLevel(jInfo));
+    }
+    private static void showElement(ActionObject jInfo) {
+        try {
+            if (jInfo.isCore()) {
+                jInfo.core().show();
+            }
+        } catch (Exception ignore) { }
     }
     private static void visualValidation(JoinPoint jp, String message) {
         Object obj = getJpInstance(jp);
@@ -386,6 +392,7 @@ public class ActionHelper {
                 } catch (Throwable ignore) { }
             }
         }
+        showElement(jInfo);
         AllureLogData logData = logDataToAllure(FAIL,
             "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
         failStep(jInfo.stepUId, logData);

@@ -38,7 +38,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     protected String rowTemplate = "//tbody//tr[%s]/td";
     protected String headerLocator = "th";
     protected String footerLocator = "tfoot td";
-    protected List<String> header = null;
+    protected List<String> header = new ArrayList<>();
     protected int size = -1;
     protected int count = -1;
     protected List<Integer> columnsMapping;
@@ -54,21 +54,20 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     public UIElement core() {
         UIElement core = super.core();
         if (hasRunDrivers() && !locatorsValidated) {
-            logger.debug("Grid Run validation");
             try {
-                validateLocators(core);
                 locatorsValidated = true;
-            } catch (Exception ex) {
+                validateLocators(core);
+                logger.debug(getName() + ": Validation success");
+            } catch (Throwable ex) {
                 locatorsValidated = false;
             }
         }
         return core;
     }
     protected void validateLocators(UIElement core) {
-        if (headerLocator.equals("th")) {
-            headerLocator = core.find("thead td").isExist()
-                ? "thead td"
-                : "//tr[1]//td";
+        if (headerLocator.equals("th") && core.finds("th").isEmpty()) {
+            headerLocator = core.finds("thead td").isNotEmpty()
+                ? "thead td" : "//tr[1]//td";
         }
     }
 
