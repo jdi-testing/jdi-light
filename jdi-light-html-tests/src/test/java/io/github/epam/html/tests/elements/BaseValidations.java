@@ -45,13 +45,13 @@ public class BaseValidations {
     }
 
     public static void durationMoreThan(int duration, JAction action) {
-        validateDuration(duration*1000-1000, duration*1000+2000, action);
+        validateDuration(duration * 1000L - 1000, duration * 1000L + 2000, action);
     }
     public static void durationLessThan(int duration, JAction action) {
-        validateDuration(duration*1000-2000, duration*1000+1000, action);
+        validateDuration(duration * 1000L - 2000, duration * 1000L + 1000, action);
     }
     public static void duration(int duration, JAction action) {
-        validateDuration(duration*1000-1000, duration*1000+1000, action);
+        validateDuration(duration * 1000L - 1000, duration * 1000L + 1000, action);
     }
     public static void notMoreThan(int maxMs, JAction action) {
         validateDuration(0, maxMs, action);

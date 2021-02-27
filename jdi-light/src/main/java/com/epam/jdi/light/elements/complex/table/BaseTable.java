@@ -19,6 +19,7 @@ import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import org.apache.commons.lang3.ObjectUtils;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -107,8 +108,13 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
     protected void validateLocators(UIElement core) {
         if (getByLocator(headerLocator).equals("th") && core.finds("th").isEmpty()) {
-            headerLocator = core.find("thead td").isExist()
-                ? By.cssSelector("thead td") : By.xpath("//tr[1]//td");
+            if (core.finds("thead td").isNotEmpty()) {
+                headerLocator = By.cssSelector("thead td");
+            } else {
+                if (core.finds("//tr[1]//td").isNotEmpty()) {
+                    headerLocator = By.xpath("//tr[1]//td");
+                }
+            }
         }
     }
 
@@ -176,7 +182,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      * Get table header
      * @return List
      */
-    @JDIAction("Get {name} header")
+    @JDIAction("Get '{name}' header")
     public List<String> header() {
         return header.get();
     }
@@ -447,6 +453,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get first '{name}' table row that match criteria")
     public Line row(TableMatcher... matchers) {
+        if (ObjectUtils.isEmpty(header())) {
+            throw exception(getName() + " table has empty header");
+        }
         WebList lines = TABLE_MATCHER.execute(this, matchers);
         if (lines == null || lines.isEmpty())
             return null;
