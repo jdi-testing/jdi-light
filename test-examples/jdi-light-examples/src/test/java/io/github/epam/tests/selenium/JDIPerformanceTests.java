@@ -3,12 +3,13 @@ package io.github.epam.tests.selenium;
 import com.epam.jdi.light.elements.complex.table.Line;
 import org.apache.commons.lang3.time.StopWatch;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import selenium.entities.User;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static selenium.entities.TestData.TABLE_SNAPSHOOT;
 import static selenium.seleniumPO.HomePage.leftNavigation;
 import static selenium.seleniumPO.SiteSelenium.homePage;
@@ -17,7 +18,7 @@ import static selenium.site.pages.JDIPerformancePage.*;
 
 public class JDIPerformanceTests implements SimpleTestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void openPerformancePage() {
         homePage.open();
         login(new User());
@@ -30,7 +31,8 @@ public class JDIPerformanceTests implements SimpleTestsInit {
         Line row = usersTable.row(
             containsValue("Meyer", inColumn("Name")),
             containsValue("co.uk", inColumn("Email")));
-        System.out.println("Huge table search test Time: " + timer.getTime());
+        logger.info("Huge table search test Time: %s", timer.getTime());
+        Assert.assertNotNull(row, "Row was not found");
         Assert.assertEquals(row.getValue(),
         "Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston");
     }
@@ -39,7 +41,7 @@ public class JDIPerformanceTests implements SimpleTestsInit {
     public void hugeTableValidateTest() {
         StopWatch timer = StopWatch.createStarted();
         String actualTable = usersTable.preview();
-        System.out.println("Huge table validate test Time: " + timer.getTime());
+        logger.info("Huge table validate test Time: " + timer.getTime());
         Assert.assertEquals(actualTable, TABLE_SNAPSHOOT);
     }
 
@@ -48,7 +50,7 @@ public class JDIPerformanceTests implements SimpleTestsInit {
         String name = "Charles Byers";
         StopWatch timer = StopWatch.createStarted();
         userNames.select(name);
-        System.out.println("Big dropdown test Time: " + timer.getTime());
+        logger.info("Big dropdown test Time: " + timer.getTime());
         Assert.assertEquals(userNames.selected(), name);
     }
 
@@ -61,6 +63,6 @@ public class JDIPerformanceTests implements SimpleTestsInit {
                 "Usu esse utroque sapientem ad. Eam ut consul soleat sapientem, cu dolor consequuntur vis. Erat temporibus mea id, has ex dicam tritani. Pertinacia expetendis consectetuer eos ei, vidit malis periculis est ea, ne nam movet fuisset. Pro id habemus definitiones, in ferri solum reprehendunt mei. Vel eligendi honestatis liberavisse id.";
         StopWatch timer = StopWatch.createStarted();
         textareaPerformance.setText(text + "\\n"+ text);
-        System.out.println("Long text test Time: " + timer.getTime());
+        logger.info("Long text test Time: " + timer.getTime());
     }
 }

@@ -142,6 +142,7 @@ public class WebSettings {
     }
 
     public static boolean initialized = false;
+    public static Runnable additionalInit = () -> {};
 
     public static synchronized void init() {
         CHECK_MULTI_THREAD.execute();
@@ -188,6 +189,8 @@ public class WebSettings {
             fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
             fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
             fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
+            fillAction(p -> DRIVER.gitHubTokenName = p, "gitHubTokenName");
+            fillAction(p -> DRIVER.gitHubTokenSecret = p, "gitHubTokenSecret");
             fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
             fillAction(SoftAssert::setAssertType, "assert.type");
             fillAction(p -> ELEMENT.clickType = getEnumValueByName(ElementArea.class, p, CENTER), "click.type");
@@ -213,7 +216,11 @@ public class WebSettings {
             fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
             fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
             fillAction(p -> ELEMENT.highlight = getHighlightStrategy(p), "element.highlight");
-            fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
+            fillAction(p -> {
+                if (parseBoolean(p)) {
+                    DRIVER.capabilities.common.put("arguments", "--headless");
+                }
+            }, "headless");
 
             loadCapabilities("chrome.capabilities.path", "chrome.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
@@ -229,6 +236,8 @@ public class WebSettings {
                 p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
             loadCapabilities("common.capabilities.path","common.properties",
                 p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
+
+            additionalInit.run();
 
             initialized = true;
         } catch (Throwable ex) {
@@ -282,15 +291,23 @@ public class WebSettings {
         String path = "";
         try {
             path = System.getProperty(property, getProperty(property));
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+            logger.trace("Error on read property %s. %s", property, ignore);
+        }
         if (isEmpty(path))
             path = defaultPath;
         Properties properties = new PropReader(path).getProperties();
-        if (properties.isEmpty())
+        if (properties.isEmpty()) {
+            logger.trace("There is no properties in %s", property);
+            File p = new File("."+path);
+            logger.trace("Abs prop path %s, Properties file exists? = %s", p.getAbsolutePath(), p.exists());
             return;
+        }
         try {
             setCapabilities.execute(properties);
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+            logger.trace("Error set properties %s. %s", property, ignore);
+        }
     }
 
     private static void setSearchStrategy(String p) {
@@ -347,7 +364,7 @@ public class WebSettings {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(propertyFile));
-            System.out.println("Property file found: " + propertyFile.getAbsolutePath());
+            logger.info("Property file found: %s", propertyFile.getAbsolutePath());
         } catch (IOException ex) {
             throw exception("Couldn't load properties for CI Server" + path);
         }

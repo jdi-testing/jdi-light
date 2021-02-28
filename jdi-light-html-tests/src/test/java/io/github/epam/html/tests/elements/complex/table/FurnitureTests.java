@@ -35,15 +35,15 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void tableParamsTest() {
+        assertEquals(furnitureJ.header(), asList("Name", "Type", "Cost", "Weight"));
         assertEquals(furnitureJ.size(), 4);
         assertEquals(furnitureJ.count(), 5);
-        assertEquals(furnitureJ.header(), asList("Name", "Type", "Cost", "Weight"));
     }
     @Test
     public void simpleTableParamsTest() {
+        assertEquals(simpleTable.header(), asList("Drivers", "Selenium Custom", "JavaScript, Appium, WinAPI, Sikuli"));
         assertEquals(simpleTable.size(), 3);
         assertEquals(simpleTable.count(), 6);
-        assertEquals(simpleTable.header(), asList("Drivers", "Selenium Custom", "JavaScript, Appium, WinAPI, Sikuli"));
     }
     @Test
     public void simpleTableInteractTest() {

@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.*;
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.ProgressBarSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
@@ -13,8 +14,9 @@ import static org.testng.Assert.*;
 public class ProgressBarUnitTests extends TestsInit {
     @BeforeMethod
     public void before() {
+        skipForFirefox();
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
     }
 
     @Test
@@ -44,6 +46,7 @@ public class ProgressBarUnitTests extends TestsInit {
 
     @Test
     public void verifyDisappearTest() {
+        refresh();
         assertFalse(matProgressBarIndeterminate.isDisplayed());
         showIndeterminateProgressBarButton.click();
         assertTrue(matProgressBarIndeterminate.isDisplayed());

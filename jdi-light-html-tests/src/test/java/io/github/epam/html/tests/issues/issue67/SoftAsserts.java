@@ -39,6 +39,7 @@ public class SoftAsserts implements TestsInit {
         assertSoft();
         redButton.is().hidden().displayed().disabled().enabled();
     }
+
     @Test
     public void buttonSoftAssertTest() {
         try {

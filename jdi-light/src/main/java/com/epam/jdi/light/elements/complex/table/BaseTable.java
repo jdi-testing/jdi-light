@@ -15,9 +15,11 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import org.apache.commons.lang3.ObjectUtils;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -25,6 +27,7 @@ import org.openqa.selenium.WebElement;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
@@ -39,6 +42,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
+import static java.util.Arrays.stream;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
@@ -61,7 +65,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int rowHeaderIndex = -1;
     protected int shiftColumnIndex = -1;
     protected int shiftRowIndex = -1;
-    protected int[] columnsMapping = new int[]{};
+    protected Safe<List<Integer>> columnsMapping = new Safe<>(ArrayList::new);
     protected String rowHeaderName = "";
     protected int startIndex = ELEMENT.startIndex;
     public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
@@ -103,10 +107,13 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return core;
     }
     protected void validateLocators(UIElement core) {
-        if (getByLocator(headerLocator).equals("th")) {
-            if (core.finds("th").size() == 0) {
-                headerLocator = core.find("thead td").isExist()
-                    ? By.cssSelector("thead td") : By.xpath("//tr[1]//td");
+        if (getByLocator(headerLocator).equals("th") && core.finds("th").isEmpty()) {
+            if (core.finds("thead td").isNotEmpty()) {
+                headerLocator = By.cssSelector("thead td");
+            } else {
+                if (core.finds("//tr[1]//td").isNotEmpty()) {
+                    headerLocator = By.xpath("//tr[1]//td");
+                }
             }
         }
     }
@@ -145,23 +152,24 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
 
     public WebList headerUI() {
         WebList header = core().finds(headerLocator).setName(getName() + " header");
-        if (header.size() == 0) {
+        if (header.isEmpty()) {
             header = getRowByIndex(getRowHeaderIndex());
-            if (header.size() > 0) {
+            if (header.isNotEmpty()) {
                 this.header.setRule(() -> getRowByIndex(getRowHeaderIndex()).values());
                 this.size.setRule(() -> getRowByIndex(getRowHeaderIndex()).size());
             } else {
-                throw exception("Can't find header using locator '%s'. Please specify JTable.headers locator or set JTable.header list");
+                throw exception("Can't find header using locator '%s'. Please specify JTable.headers locator or set JTable.header list",
+                        headerLocator);
             }
         }
         return header.setName(getName() + " header");
     }
     public WebList footerUI() {
         WebList footer = core().finds(this.footer).setName(getName() + " footer");
-        if (footer.size() == 0) {
+        if (footer.isEmpty()) {
             footer = getRowByIndex(getRowHeaderIndex());
-            if (footer.size() == 0) {
-                throw exception("Can't find footer using locator '%s'. Please specify JTable.footer locator");
+            if (footer.isEmpty()) {
+                throw exception("Can't find footer using locator '%s'. Please specify JTable.footer locator", footer);
             }
         }
         return footer.setName(getName() + " header");
@@ -174,7 +182,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      * Get table header
      * @return List
      */
-    @JDIAction("Get {name} header")
+    @JDIAction("Get '{name}' header")
     public List<String> header() {
         return header.get();
     }
@@ -287,7 +295,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         List<String> rowHeader;
         try {
             rowHeader = jsColumn(index);
-            if (rowHeader.size() == 0)
+            if (rowHeader.isEmpty())
                 throw new IllegalStateException();
         } catch (Exception ex) {
             rowHeader = webColumn(index).values();
@@ -361,7 +369,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDebug
     public WebList getRow(int rowNum) {
         WebList row = getRowByIndex(getRowIndex(rowNum));
-        return shiftColumnIndex > getStartIndex() || columnsMapping.length > 0
+        return shiftColumnIndex > getStartIndex() || !columnsMapping.get().isEmpty()
             ? getMappedRow(row)
             : row;
     }
@@ -381,8 +389,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return columns.set(result);
     }
     protected int getColumnIndex(int index) {
-        return shiftColumnIndex == -1 && columnsMapping.length > 0
-            ? columnsMapping[index - getStartIndex()]
+        return shiftColumnIndex == -1 && !columnsMapping.get().isEmpty()
+            ? columnsMapping.get().get(index - getStartIndex())
             : index;
     }
     protected int getColumnLocatorIndex(int index) {
@@ -445,8 +453,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get first '{name}' table row that match criteria")
     public Line row(TableMatcher... matchers) {
+        if (ObjectUtils.isEmpty(header())) {
+            throw exception(getName() + " table has empty header");
+        }
         WebList lines = TABLE_MATCHER.execute(this, matchers);
-        if (lines == null || lines.size() == 0)
+        if (lines == null || lines.isEmpty())
             return null;
         List<String> result = new ArrayList<>();
         for (int i = getStartIndex(); i < header().size() + getStartIndex(); i++)
@@ -462,7 +473,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<Line> rows(TableMatcher... matchers) {
         List<String> lines = TABLE_MATCHER.execute(this, matchers).values();
-        if (lines == null || lines.size() > 0 && lines.size() < header().size())
+        if (lines == null || !lines.isEmpty() && lines.size() < header().size())
             return null;
         List<Line> listOfLines = new ArrayList<>();
         List<String> result = new ArrayList<>();
@@ -510,7 +521,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get row '{0}' for '{name}' table")
     public Line row(int rowNum) {
-        return new Line(header(), webRow(rowNum));
+        return new Line(header(), webRow(rowNum), getName() + " line[" + rowNum + "]");
     }
 
     /**
@@ -520,7 +531,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get row '{0}' for '{name}' table")
     public Line row(String rowName) {
-        return new Line(header(), webRow(rowName));
+        return new Line(header(), webRow(rowName), getName() + " line[" + rowName + "]");
     }
     public Line row(Enum rowName) {
         return row(getEnumValue(rowName));
@@ -532,7 +543,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get all '{name}' rows")
     public List<Line> rows() {
-        return map(getRows(), row -> new Line(header(), row.value));
+        return map(getRows(), row -> new Line(header(), row.value, getName() + " line[" + row.key + "]"));
     }
     /**
      * Get all table rows
@@ -544,7 +555,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return map(rows, this::toLineSaveImages);
     }
     private Line toLineSaveImages(Pair<String, WebList> row) {
-        Line line = new Line(header(), row.value);
+        Line line = new Line(header(), row.value, getName() + " line[" + row.key + "]");
         line.saveCellsImages();
         return line;
     }
@@ -602,7 +613,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(int colNum) {
-        return new Line(rowHeader(), webColumn(colNum));
+        return new Line(rowHeader(), webColumn(colNum), getName() + " column[" + colNum + "]");
     }
     /**
      * Get table column by the name
@@ -611,7 +622,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get column '{0}' of '{name}' table")
     public Line column(String colName) {
-        return new Line(rowHeader(), webColumn(colName));
+        return new Line(rowHeader(), webColumn(colName), getName() + " column[" + colName + "]");
     }
     public Line column(Enum colName) {
         return column(getEnumValue(colName));
@@ -623,7 +634,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get all '{name}' columns")
     public List<Line> columns() {
-        return map(getColumns(), row -> new Line(rowHeader(), row.value));
+        return map(getColumns(), row -> new Line(rowHeader(), row.value, getName() + " column[" + row.key + "]"));
     }
     // Cells
     /**
@@ -735,8 +746,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             this.jsColumn = NAME_TO_LOCATOR.execute(j.jsColumn());
         if (header.size() > 0)
             this.header.setFinal(header);
-        if (j.columnsMapping().length > 0)
-            this.columnsMapping = j.columnsMapping();
+        if (j.columnsMapping().length > 0) {
+            this.columnsMapping.set(stream(j.columnsMapping()).boxed().collect(Collectors.toList()));
+        }
         if (j.size() != -1)
             this.size.setFinal(j.size());
         if (j.count() != -1)
