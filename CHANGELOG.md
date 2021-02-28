@@ -4,6 +4,19 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
+##1.3.9 (25.02.2021)
+* Fix beforeNewPage issue
+* Fix issues with getting private fields by forms and other elements
+* Fix print enum values in reports
+* Fix print conditions
+
+##1.3.8 (21.02.2021)
+* Fix print table search filters
+* Fix using default and Firefox capabilities from properties file
+* Add makeScreenshot and attach to allure step for elements and WebPage
+* Add checkIsNotChanged() method for WebPage
+* Fix headless from properties issue
+
 ##1.3.7 (17.02.2021)
 * Small bug fixing in Actions helper
 

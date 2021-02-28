@@ -3,7 +3,10 @@ package com.epam.jdi.light.mobile;
 import com.epam.jdi.light.common.JDIAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebDriver;
 
 import java.util.function.Function;
 

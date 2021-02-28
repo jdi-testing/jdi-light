@@ -6,9 +6,7 @@ import org.testng.annotations.Test;
 import java.time.LocalDate;
 import java.time.Month;
 
-import static nativeapp.ios.reminders.RemindersApp.editDetailsPage;
-import static nativeapp.ios.reminders.RemindersApp.remindersListPage;
-import static nativeapp.ios.reminders.RemindersApp.remindersPage;
+import static nativeapp.ios.reminders.RemindersApp.*;
 
 public class RemindersAppTests extends RemindersAppTestsInit {
 

@@ -8,6 +8,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.Timer.nowTimeShort;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -38,16 +39,24 @@ public class SoftAssert {
                 throw new AssertionError(error);
         }
     }
-    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
+    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher, String errorMsg) {
         try {
             assertThat(actual, matcher);
             logger.debug(">>> " + actual);
         } catch (Throwable error) {
+            String errorMessage = nowTimeShort() + " " + getErrorMsg(errorMsg, error);
+            AssertionError failError = new AssertionError(errorMessage);
             if (IS_SOFT_ASSERT) {
-                addError(error);
+                addError(failError);
             } else
-                throw new AssertionError(error);
+                throw failError;
         }
+    }
+    private static String getErrorMsg(String errorMsg, Throwable error) {
+        return errorMsg != null ? errorMsg : error.getMessage();
+    }
+    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
+        jdiAssert(actual, matcher, null);
     }
     private static void addError(Throwable error) {
         listOfErrors.get().add(error.getMessage().replace("java.lang.AssertionError: ", ""));
@@ -61,8 +70,9 @@ public class SoftAssert {
     public static void assertResults() {
         List<String> errors = new ArrayList<>(listOfErrors.get());
         clearResults();
-        if (!errors.isEmpty())
+        if (!errors.isEmpty()) {
             throw new AssertionError(print(errors));
+        }
     }
 
     public static void clearResults() {

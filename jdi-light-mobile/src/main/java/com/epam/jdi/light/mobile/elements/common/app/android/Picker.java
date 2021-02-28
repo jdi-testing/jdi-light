@@ -1,28 +1,23 @@
 package com.epam.jdi.light.mobile.elements.common.app.android;
 
 import com.epam.jdi.light.common.JDIAction;
-
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
-
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-
 import com.epam.jdi.light.mobile.asserts.PickerAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
-
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
-
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.elements.common.MobileKeyboard.pressKey;
 import static com.epam.jdi.light.mobile.elements.composite.MobileScreen.swipeToElement;
-
-import java.util.List;
 
 public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInput, HasClick, HasTouchActions, IsButton, IsText {
 

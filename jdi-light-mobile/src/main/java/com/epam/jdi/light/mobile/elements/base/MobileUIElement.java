@@ -18,18 +18,20 @@ import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
 import java.util.List;
 
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.common.TextTypes.VALUE;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
-import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.mobile.CoordinateConversionHelper.getCoordinatesOnScreen;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class MobileUIElement extends UIElement implements HasTouchActions {
@@ -219,7 +221,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
                 .release().perform();
     }
 
-    /*This is needed for W3C compatibility*/
+    /*This is required for W3C compatibility*/
     @Override
     public Point getLocation() {
         Rectangle rect = getRect();

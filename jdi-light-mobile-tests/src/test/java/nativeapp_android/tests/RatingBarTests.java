@@ -6,8 +6,8 @@ import nativeapp.android.apidemos.views.RatingBarPage;
 import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class RatingBarTests extends ApiDemosTestInit {
 

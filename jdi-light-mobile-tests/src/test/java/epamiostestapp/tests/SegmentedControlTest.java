@@ -4,12 +4,9 @@ import epamiostestapp.IosApplicationInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import static nativeapp.ios.epamiostestapp.MainPage.menuSegmentedControl;
-import static nativeapp.ios.epamiostestapp.SegmentedControlPage.segmentedControl;
-import static nativeapp.ios.epamiostestapp.SegmentedControlPage.selectedValueOne;
-import static nativeapp.ios.epamiostestapp.SegmentedControlPage.selectedValueTwo;
-import static nativeapp.ios.epamiostestapp.SegmentedControlPage.selectedValueThree;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static nativeapp.ios.epamiostestapp.MainPage.menuSegmentedControl;
+import static nativeapp.ios.epamiostestapp.SegmentedControlPage.*;
 
 public class SegmentedControlTest extends IosApplicationInit {
 

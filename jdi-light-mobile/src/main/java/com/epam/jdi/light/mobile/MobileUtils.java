@@ -11,7 +11,6 @@ import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;

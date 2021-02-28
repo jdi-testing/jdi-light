@@ -3,7 +3,6 @@ package com.epam.jdi.light.mobile.elements.composite;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.HasAndroidDeviceDetails;
 
-
 import java.awt.*;
 import java.util.Map;
 

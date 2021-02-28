@@ -15,7 +15,6 @@ import com.epam.jdi.light.logger.AllureLogData;
 import com.epam.jdi.light.logger.HighlightStrategy;
 import com.epam.jdi.light.logger.JDILogger;
 import com.epam.jdi.light.logger.LogLevels;
-import com.epam.jdi.tools.EnumUtils;
 import com.epam.jdi.tools.PrintUtils;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
@@ -34,6 +33,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.actions.ActionProcessor.jStack;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
@@ -50,7 +50,7 @@ import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.EnumUtils.*;
+import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
@@ -97,12 +97,11 @@ public class ActionHelper {
             String actionName = isBlank(template)
                 ? getDefaultName(jp, method)
                 : fillTemplate(template, jp, method);
-            try {
-                logger.trace("getActionName() => " + actionName);
-            } catch (Throwable ignore) { }
+            logger.trace("getActionName() => " + actionName);
             return actionName;
         } catch (Throwable ex) {
             try {
+                showElement(new ActionObject(jp, "getActionName"));
                 takeScreen();
             } catch (Exception ignore) { }
             throw exception(ex, "Surround method issue: Can't get action name: " + getClassMethodName(jp));
@@ -164,10 +163,10 @@ public class ActionHelper {
                     throw exception(ex, "fillTemplate getActionNameFromTemplate failed");
                 }
                 if (filledTemplate.contains("{{VALUE}}") && args.size() > 0) {
-                    filledTemplate = filledTemplate.replaceAll("\\{\\{VALUE}}", args.get(0).toString());
+                    filledTemplate = filledTemplate.replace("{{VALUE}}", args.get(0).toString());
                 }
                 if (filledTemplate.contains("{failElement}")) {
-                    filledTemplate = filledTemplate.replaceAll("\\{failElement}", obj.get(0).value.toString());
+                    filledTemplate = filledTemplate.replace("{failElement}", obj.get(0).value.toString());
                 }
             }
             logger.trace("fillTemplate() => " + filledTemplate);
@@ -232,6 +231,7 @@ public class ActionHelper {
         boolean lastActionIsNotAssert = isAssert.get() == null || !isAssert.get();
         isAssert.set(true);
         if (lastActionIsNotAssert && !LOGS.screenStrategy.contains(NEW_PAGE)) {
+            showElement(jInfo);
             AllureLogData logData = logDataToAllure(ASSERT,
             "Validate" + capitalize(jInfo.methodName()), jInfo.isAssert());
             attachDataToStep(logData);
@@ -243,6 +243,13 @@ public class ActionHelper {
     public static void beforeStepAction(ActionObject jInfo) {
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jInfo.jp()));
         logger.toLog(message, logLevel(jInfo));
+    }
+    private static void showElement(ActionObject jInfo) {
+        try {
+            if (jInfo.isCore()) {
+                jInfo.core().show();
+            }
+        } catch (Exception ignore) { }
     }
     private static void visualValidation(JoinPoint jp, String message) {
         Object obj = getJpInstance(jp);
@@ -301,7 +308,7 @@ public class ActionHelper {
         if (element == null) return;
         Pair<String, Integer> waitAfter = element.waitAfter();
         if (isNotBlank(waitAfter.key) && jInfo.methodName().equalsIgnoreCase(waitAfter.key) && waitAfter.value > 0) {
-            Timer.sleep(waitAfter.value * 1000);
+            Timer.sleep(waitAfter.value * 1000L);
         }
     }
     public static JAction2<ActionObject, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
@@ -385,6 +392,7 @@ public class ActionHelper {
                 } catch (Throwable ignore) { }
             }
         }
+        showElement(jInfo);
         AllureLogData logData = logDataToAllure(FAIL,
             "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
         failStep(jInfo.stepUId, logData);
@@ -610,22 +618,28 @@ public class ActionHelper {
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
         Throwable exception = null;
-        do {
-            try {
-                logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
-                Object result = jInfo.overrideAction() != null
-                        ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
-                if (!condition(jInfo.jp())) continue;
-                return result;
-            } catch (Throwable ex) {
-                exception = ex;
+        isTop.set(false);
+        try {
+            do {
                 try {
-                    exceptionMsg = safeException(ex);
-                    Thread.sleep(200);
-                } catch (Throwable ignore) { }
-            }
-        } while (currentTimeMillis() - start < jInfo.timeout() * 1000L);
-        throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
+                    logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
+                    Object result = jInfo.overrideAction() != null
+                            ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
+                    if (!condition(jInfo.jp())) continue;
+                    return result;
+                } catch (Throwable ex) {
+                    exception = ex;
+                    try {
+                        exceptionMsg = safeException(ex);
+                        Thread.sleep(200);
+                    } catch (Throwable ignore) {
+                    }
+                }
+            } while (currentTimeMillis() - start < jInfo.timeout() * 1000L);
+            throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
+        } finally {
+            isTop.set(true);
+        }
     }
     static String getFailedMessage(ActionObject jInfo, String exception) {
         MethodSignature method = getJpMethod(jInfo.jp());

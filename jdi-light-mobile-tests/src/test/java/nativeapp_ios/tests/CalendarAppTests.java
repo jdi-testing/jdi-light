@@ -1,10 +1,6 @@
 package nativeapp_ios.tests;
 
-import nativeapp.ios.calendar.AddCalendarPage;
-import nativeapp.ios.calendar.CalendarPage;
-import nativeapp.ios.calendar.CalendarsListPage;
-import nativeapp.ios.calendar.EditCalendarPage;
-import nativeapp.ios.calendar.InboxPage;
+import nativeapp.ios.calendar.*;
 import nativeapp_ios.CalendarAppTestsInit;
 import org.testng.annotations.Test;
 

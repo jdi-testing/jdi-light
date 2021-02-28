@@ -49,16 +49,17 @@ public class Line implements IList<String>, IBaseElement {
         this.data = new MultiMap<>(headers, list).ignoreKeyCase();
         this.elements = new WebList(base);
     }
-    public Line(List<String> headers, List<WebElement> elements) {
-        this(headers, new WebList(elements));
+    public Line(List<String> headers, List<WebElement> elements, String name) {
+        this(headers, new WebList(elements), name);
     }
-    public Line(List<String> headers, WebList elements) {
+    public Line(List<String> headers, WebList elements, String name) {
         if (headers == null) {
             throw exception("Failed to create Line. Header has null value");
         }
         if (elements == null) {
             throw exception("Failed to create Line. Elements has null value");
         }
+        elements.setName(name);
         this.elements = elements;
         this.headers = headers;
         List<String> values = elements.values();

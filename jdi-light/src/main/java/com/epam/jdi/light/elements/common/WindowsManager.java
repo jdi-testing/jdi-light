@@ -11,8 +11,8 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -1,7 +1,7 @@
 package android10NonApplicationTests;
 
-import nativeapp.android.apidemos.views.ButtonsPage;
 import nativeapp.android.apidemos.IndexPage;
+import nativeapp.android.apidemos.views.ButtonsPage;
 import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.Test;

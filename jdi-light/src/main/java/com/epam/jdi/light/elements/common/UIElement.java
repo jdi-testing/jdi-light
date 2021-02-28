@@ -349,6 +349,7 @@ public class UIElement extends JDIBase
                 break;
             case SMART_CLICK:
                 show();
+                logger.debug("Click Smart");
                 ElementArea clArea = timer().getResultByCondition(
                     this::getElementClickableArea, Objects::nonNull);
                 if (clArea == null || clArea == CENTER) {
@@ -364,7 +365,7 @@ public class UIElement extends JDIBase
     protected void waitAfterAction() {
         int timeout = waitAfter().value;
         if (isBlank(waitAfterMethod) && timeout > 0) {
-            Timer.sleep(timeout * 1000);
+            Timer.sleep(timeout * 1000L);
         }
     }
     protected RuntimeException getNotClickableException() {

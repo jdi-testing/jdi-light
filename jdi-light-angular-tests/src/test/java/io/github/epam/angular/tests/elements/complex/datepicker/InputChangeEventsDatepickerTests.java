@@ -16,7 +16,7 @@ public class InputChangeEventsDatepickerTests extends TestsDatepickerBase {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         inputChangeEventsDatepicker.show();
         inputChangeEventsDatepicker.clear();
     }

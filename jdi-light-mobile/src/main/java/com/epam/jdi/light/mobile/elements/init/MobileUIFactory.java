@@ -1,7 +1,6 @@
 package com.epam.jdi.light.mobile.elements.init;
 
 
-import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import com.epam.jdi.light.mobile.elements.complex.MobileWebList;

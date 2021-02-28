@@ -1,0 +1,160 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: JDI auto-tests debug
+env:
+    CHROME_PROPERTIES: "chrome.properties"
+    FIREFOX_PROPERTIES: "ff.properties"
+    WITH_PARAMS: "-ntp -Ddriver=chrome" # for Chrome: "-ntp -Ddriver=chrome"
+    UNIT: "-Punit"
+    COMMON: "-Pcommon"
+    COMPLEX: "-Pcomplex"
+    GROUP_ID: "com.epam.jdi"
+    NOPO_TESTS: "jdi-bdd-no-po-tests"
+    NOPO_TESTS_PROPERTY: "test-examples/jdi-bdd-no-po-tests"
+    BDD_TESTS: "jdi-bdd-tests"
+    BOOTSTRAP_TESTS: "jdi-light-bootstrap-tests"
+    HTML_TESTS: "jdi-light-html-tests"
+#    ANGULAR_TESTS: "jdi-light-angular-tests"
+#    ANGULAR_TESTS_WITH_MOCKS: "jdi-light-angular-tests-with-mocks"
+    EXAMPLES: "jdi-light-examples"
+    EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
+    PERFORMANCE: "jdi-performance"
+    PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
+    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
+    FIREFOX_ARGS: "-headless"
+    ALLURE_VERSION: "2.13.8"
+
+on:
+  push:
+    branches: [ fix_branch_for_some_tests ] # ENTER branch name there
+# !!!! PLEASE do not change this file in master, as it's only template for branch debug in GitHub Actions
+
+jobs:
+  build:
+    name: Degug tests run on JDK
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        java: [8] # by default we use only 8. can be changed to any, the full list is [8, 9, 10, 11, 12, 13]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 8
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ matrix.java }}
+        java-package: jdk
+
+    - name: Prepare environment
+      run: |
+        sudo apt install zip
+        java -Xmx32m -version
+        ls -lah
+        env
+        id
+
+    - name: Install Allure
+      run: |
+        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
+        sudo tar -zxvf allure-${ALLURE_VERSION}.tgz -C /opt/
+        sudo ln -s /opt/allure-${ALLURE_VERSION}/bin/allure /usr/bin/allure
+        allure --version
+
+#    - name: Install Netlify
+#      run: sudo npm install -g netlify-cli
+
+    - name: Welcome to JDI
+      run: |
+        echo ------------------- WELCOME TO JDI -----------------------
+        mvn --version
+
+    - name: Prepare configs
+      run: |
+        echo arguments=$CHROME_ARGS > "./${BDD_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${BDD_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${HTML_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${HTML_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
+
+    - name: Compile jdi code
+      id: jdi-compile
+      run: mvn -ntp install -DskipTests
+
+# ========== steps before required for all tasks ==================
+
+# !!! select required project you debug to save time.
+# All other projects you can delete or comment.
+
+    - name: Tests BDD
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      run: |
+          mvn verify $WITH_PARAMS -DCucumber.options="--tags ~@ignore_for_firefox" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS
+
+#####  Example for original allure data upload
+#    - name: 'Upload BDD results'
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: bdd-results-sdk${{ matrix.java }}
+#        path: ./${BDD_TESTS}/target/allure-results/
+#        retention-days: 1
+
+    - name: Tests bootstrap Unit
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS
+
+#    - name: Run tests - Angular Unit tests
+#      if: ${{ steps.jdi-compile.outcome == 'success' }}
+#      timeout-minutes: 90 # prevent blocking
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS
+#
+#    - name: Run tests - Angular Common tests
+#      if: ${{ steps.jdi-compile.outcome == 'success' }}
+#      timeout-minutes: 90 # prevent blocking
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS
+#
+#    - name: Run tests - Angular Complex tests
+#      if: ${{ steps.jdi-compile.outcome == 'success' }}
+#      timeout-minutes: 90 # prevent blocking
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS
+
+    - name: Run tests - HTML
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS
+
+    - name: Run tests - Test Examples
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES
+
+    - name: Run tests - Performance
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      timeout-minutes: 90 # prevent blocking
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE
+
+    - name: Collect reports
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      run: |
+        echo --------------- Collecting Allure Reports.... ------------------
+        sudo chmod +x reporting.sh
+        source reporting.sh
+        generateAllureReports
+        printAllureSummary ${{ matrix.java }}
+        zip -r allure-report.zip ./allure-report/
+
+
+    - name: 'Upload allure report'
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-report-jdk${{ matrix.java }}
+        path: ./allure-report.zip
+        retention-days: 1

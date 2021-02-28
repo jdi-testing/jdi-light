@@ -12,8 +12,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static nativeapp.android.apidemos.IndexPage.viewsPage;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static nativeapp.android.apidemos.IndexPage.viewsPage;
 
 public class MobileKeyboardTests extends ApiDemosTestInit {
 
