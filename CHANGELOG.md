@@ -4,7 +4,7 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
-##1.3.9 (25.02.2021)
+##1.3.9 (28.02.2021)
 * Fix beforeNewPage issue
 * Fix issues with getting private fields by forms and other elements
 * Fix print enum values in reports
