@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JDI-Light HTML5 Tests">
     <suite-files>
-        <suite-file path="functional.xml"></suite-file>
-        <suite-file path="performance.xml"></suite-file>
+        <suite-file path="functional.xml" />
+        <suite-file path="performance.xml" />
     </suite-files>
 </suite>
