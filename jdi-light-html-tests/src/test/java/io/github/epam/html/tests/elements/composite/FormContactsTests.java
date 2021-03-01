@@ -186,7 +186,6 @@ public class FormContactsTests implements TestsInit {
         main.contactFormCustom.check(DEFAULT_CONTACT);
         checkContactFormSubmitted();
     }
-
     @Test
     public void nextMethodTest() {
         main.contactFormCustom.next(DEFAULT_CONTACT);
