@@ -28,6 +28,8 @@ import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.utils.PopoverClickFrame;
+import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
@@ -237,6 +239,21 @@ public class StaticSite {
     @Url("/material-ui-utils-transitions--collapse-transition")
     public static WebPage utilsTransitionCollapsePage;
 
+    // utils
+    // popover
+    @Frame("storybook-preview-iframe")
+    public static PopoverClickFrame popoverClickFrame;
+
+    @Url("/material-ui-utils-popover--click")
+    public static WebPage utilsPopoverClickPage;
+
+    @Frame("storybook-preview-iframe")
+    public static PopoverHoverFrame popoverHoverFrame;
+
+    @Url("/material-ui-utils-popover--hover")
+    public static WebPage utilsPopoverHoverPage;
+
+    // login page
     @UI("#login-form")
     public static Form<User> loginForm;
 
