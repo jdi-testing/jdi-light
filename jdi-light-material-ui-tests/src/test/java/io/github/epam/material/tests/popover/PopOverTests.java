@@ -13,7 +13,7 @@ public class PopOverTests extends TestsInit {
         popOverPage.shouldBeOpened();
 
         popOverFrame.popOver.is().isEnabled();
-        popOverFrame.popOver.clickOn();
+        popOverFrame.popOver.click();
         popOverFrame.popOver.is().isOpened();
     }
 }
