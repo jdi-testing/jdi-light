@@ -2,18 +2,14 @@ package com.epam.jdi.light.material.elements.tooltip;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.tooltip.ToolTipAssert;
 
-public class ToolTip extends UIBaseElement<ToolTipAssert> {
+public class ToolTip extends UIBaseElement<ToolTipAssert> implements HasClick {
 
     @JDIAction("Hover on '{name}'")
     public void hoverOn() {
         core().hover();
-    }
-
-    @JDIAction("Click on '{name}'")
-    public void clickOn() {
-        core().click();
     }
 
     @JDIAction("Is '{name}' displayed")

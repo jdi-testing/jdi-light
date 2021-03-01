@@ -17,12 +17,12 @@ public class ToolTipTests extends TestsInit {
 
         toolTipFrame.toolTipButton.hoverOn();
         toolTipFrame.toolTipButton.is().isDefaultDisplayed();
-        toolTipFrame.toolTipButton.clickOn();
+        toolTipFrame.toolTipButton.click();
         toolTipFrame.toolTipButton.is().isDefaultDisplayed();
 
         toolTipFrame.labelButton.hoverOn();
         toolTipFrame.labelButton.is().isDeleteDisplayed();
-        toolTipFrame.labelButton.clickOn();
+        toolTipFrame.labelButton.click();
         toolTipFrame.labelButton.is().isDeleteDisplayed();
     }
 
@@ -30,9 +30,9 @@ public class ToolTipTests extends TestsInit {
     public void triggerToolTipTest() {
         triggersToolTipPage.shouldBeOpened();
 
-        toolTipFrame.labelButton.clickOn();
+        toolTipFrame.labelButton.click();
         toolTipFrame.labelButton.is().isTriggerDisplayed();
-        toolTipFrame.toolTipButton.clickOn();
+        toolTipFrame.toolTipButton.click();
         toolTipFrame.toolTipButton.is().isTriggerNotDisplayed();
     }
 
@@ -50,17 +50,17 @@ public class ToolTipTests extends TestsInit {
 
         toolTipFrame.toolTipButton.hoverOn();
         toolTipFrame.toolTipButton.is().isPlusDisplayed();
-        toolTipFrame.toolTipButton.clickOn();
+        toolTipFrame.toolTipButton.click();
         toolTipFrame.toolTipButton.is().isPlusDisplayed();
 
         toolTipFrame.fadeButton.hoverOn();
         toolTipFrame.fadeButton.is().isFadeDisplayed();
-        toolTipFrame.fadeButton.clickOn();
+        toolTipFrame.fadeButton.click();
         toolTipFrame.fadeButton.is().isFadeDisplayed();
 
         toolTipFrame.labelButton.hoverOn();
         toolTipFrame.labelButton.is().isCustomosedDisplayed();
-        toolTipFrame.labelButton.clickOn();
+        toolTipFrame.labelButton.click();
         toolTipFrame.labelButton.is().isCustomosedDisplayed();
     }
 }
