@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JDI-Light HTML Functional Tests" parallel="classes">
+<suite name="JDI-Light HTML Functional Tests" parallel="methods">
     <test name="Functional Tests" thread-count="6">
         <packages>
             <package name="io.github.epam.html.tests.elements.common"/>
