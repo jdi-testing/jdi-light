@@ -1,4 +1,4 @@
-package io.github.epam.html.tests.issues.issue67;
+package io.github.epam.html.tests.performance;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
 import io.github.epam.TestsInit;
