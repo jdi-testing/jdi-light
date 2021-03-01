@@ -1,8 +1,12 @@
 # Changelog
 
-## 1.3.10 (planed March 2021)
+## 1.3.12 (planed March 2021)
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
+
+##1.3.10 (01.03.2021)
+* Fix issue with actions
+* Fix Grid header locators validation
 
 ##1.3.9 (28.02.2021)
 * Fix beforeNewPage issue

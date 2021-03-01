@@ -17,10 +17,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class SoftAssert {
     private static Safe<List<String>> listOfErrors = new Safe<>(new ArrayList<>());
-    private static boolean IS_SOFT_ASSERT = false;
+    private static Safe<Boolean> IS_SOFT_ASSERT = new Safe<>(() -> false);
 
     public static void setAssertType(String type) {
-        IS_SOFT_ASSERT = type.equalsIgnoreCase("soft");
+        IS_SOFT_ASSERT.set(type.equalsIgnoreCase("soft"));
         clearResults();
     }
     public static void assertSoft() {
@@ -33,7 +33,7 @@ public class SoftAssert {
         try {
             assertThat(actual, matcher);
         } catch (Throwable error) {
-            if (IS_SOFT_ASSERT) {
+            if (IS_SOFT_ASSERT.get()) {
                 addError(error);
             } else
                 throw new AssertionError(error);
@@ -46,7 +46,7 @@ public class SoftAssert {
         } catch (Throwable error) {
             String errorMessage = nowTimeShort() + " " + getErrorMsg(errorMsg, error);
             AssertionError failError = new AssertionError(errorMessage);
-            if (IS_SOFT_ASSERT) {
+            if (IS_SOFT_ASSERT.get()) {
                 addError(failError);
             } else
                 throw failError;

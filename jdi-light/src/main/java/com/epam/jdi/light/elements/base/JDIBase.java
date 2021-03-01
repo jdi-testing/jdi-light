@@ -63,7 +63,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     protected Safe<Integer> timeout = new Safe<>(() -> -1);
     protected Safe<Integer> waitAfterTimeout = new Safe<>(() -> -1);
     protected String waitAfterMethod = "";
-    private Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
     public ElementArea clickAreaType = ELEMENT.clickType;
     public TextTypes textType = ELEMENT.getTextType;
     public SetTextTypes setTextType = ELEMENT.setTextType;
@@ -451,28 +450,15 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         if (isBlank(element.varName))
             return element.context;
         return Switch(LOGS.logLevel).get(
-                Case(l -> l == STEP,
-                    l -> msgFormat(PRINT_ELEMENT_STEP, element)),
-                Case(l -> l == INFO,
-                    l -> msgFormat(PRINT_ELEMENT_INFO, element)),
-                Case(l -> l == ERROR,
-                    l -> msgFormat(PRINT_ERROR_STEP, element)),
-                Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
+            Case(l -> l == STEP,
+                l -> msgFormat(PRINT_ELEMENT_STEP, element)),
+            Case(l -> l == INFO,
+                l -> msgFormat(PRINT_ELEMENT_INFO, element)),
+            Case(l -> l == ERROR,
+                l -> msgFormat(PRINT_ERROR_STEP, element)),
+            Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
         );
     };
-
-    public void actions(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(actions.get(), get()).build().perform();
-    }
-    public void actions(JFunc1<Actions, Actions> action) {
-        action.execute(actions.get()).build().perform();
-    }
-    public void actionsWithElement(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(actions.get().moveToElement(get()), get()).build().perform();
-    }
-    public void actionsWithElement(JFunc1<Actions, Actions> action) {
-        action.execute(actions.get().moveToElement(get())).build().perform();
-    }
 
     @Override
     public void offCache() {

@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import org.apache.commons.lang3.ObjectUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
+import static com.epam.jdi.light.driver.WebDriverByUtils.getByLocator;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -66,8 +68,13 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     }
     protected void validateLocators(UIElement core) {
         if (headerLocator.equals("th") && core.finds("th").isEmpty()) {
-            headerLocator = core.finds("thead td").isNotEmpty()
-                ? "thead td" : "//tr[1]//td";
+            if (core.finds("thead td").isNotEmpty()) {
+                headerLocator = "thead td";
+            } else {
+                if (core.finds("//tr[1]//td").isNotEmpty()) {
+                    headerLocator = "//tr[1]//td";
+                }
+            }
         }
     }
 
