@@ -3,10 +3,7 @@
 <suite name="JDI Light Mobile Android Native Apps Espresso Tests" thread-count="1">
     <test name="Android native app Espresso tests">
         <classes>
-            <class name="nativeapp_android_espresso.tests.EspressoTests"></class>
+            <class name="nativeapp_android_espresso.tests.EspressoTests" />
         </classes>
     </test>
-    <listeners>
-        <listener class-name="io.github.epam.testng.SuiteListener"/>
-    </listeners>
 </suite>
