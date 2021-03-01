@@ -13,7 +13,7 @@ public class GridViewTests extends TestsInit {
         gridViewPage.shouldBeOpened();
 
         gridFrame.gridView.is().isEnabled();
-        gridFrame.gridView.clickOn();
+        gridFrame.gridView.click();
 
     }
 }
