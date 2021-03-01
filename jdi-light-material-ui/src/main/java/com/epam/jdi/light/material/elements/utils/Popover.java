@@ -11,11 +11,7 @@ public class Popover extends UIBaseElement<PopoverAssert> {
 
     @JDIAction("Get '{name}' text content")
     public String getText() {
-        return content().getText();
-    }
-
-    public UIElement content() {
-        return this.find(By.cssSelector("div"));
+        return this.firstChild().getText();
     }
 
     @Override

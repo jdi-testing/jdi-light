@@ -13,7 +13,7 @@ public class PopoverAssert extends UIAssert<PopoverAssert, Popover> {
     @JDIAction("Assert that '{name}' is visible")
     public PopoverAssert visible() {
         boolean isVisible = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().content().isDisplayed());
+                .wait(() -> element().isDisplayed());
         jdiAssert(isVisible, Matchers.is(true));
         return this;
     }
@@ -21,7 +21,7 @@ public class PopoverAssert extends UIAssert<PopoverAssert, Popover> {
     @JDIAction("Assert that '{name}' is invisible")
     public PopoverAssert invisible() {
         boolean isVisible = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> !element().content().isDisplayed());
+                .wait(() -> !element().isDisplayed());
         jdiAssert(isVisible, Matchers.is(true));
         return this;
     }
