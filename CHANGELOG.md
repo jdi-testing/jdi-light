@@ -1,9 +1,29 @@
 # Changelog
 
-## 1.3.10 (planed July 2020)
+## 1.3.10 (planed March 2021)
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
-* **driver.remote.run** boolean property can be specified in **test.properties** file. If not specified, JDI would use the original logic and switch between local and remote driver depending on other properties
+
+##1.3.7 (17.02.2021)
+* Small bug fixing in Actions helper
+
+##1.3.5-6 (09.02.2021)
+* Stability fixes for collections: Switch to Lightsaber 2.1.11
+
+##1.3.4 (04.02.2021)
+* Switch to Lightsaber 2.1.8
+* Correct allure WebSettings
+* Add AllureLogger steps
+* Fix issue with version of junit-provider
+
+##1.3.3 (28.01.2021)
+* Add should verifications and Conditions to ICoreElement
+* Add NAME_TO_LOCATOR, DEFAULT_CONTEXT, MAP_FORM
+* Improve Allure Logging
+* Improve attachments to Allure log: Html Code, Screenshots, Error HTTP. Add infoStep() for after log data in any place (for example after test end)
+* Add "As Is" and "First capital" options for smart.name.to.locator
+* Add Selenoid remote run support
+* Add @MapToField annotation to map fields in forms
 
 ##1.3.3 (28.01.2021)
 * Add should verifications and Conditions to ICoreElement
