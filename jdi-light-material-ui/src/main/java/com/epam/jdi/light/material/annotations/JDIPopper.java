@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDIPopper {
-  @MarkupLocator String root() default "";
 
-  @MarkupLocator String button() default "";
+  @MarkupLocator String root() default "";
   @MarkupLocator String popper() default "";
   @MarkupLocator String tooltip() default "";
+
 }

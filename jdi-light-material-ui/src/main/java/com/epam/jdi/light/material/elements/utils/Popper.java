@@ -12,16 +12,8 @@ import java.lang.reflect.Field;
 
 public class Popper extends UIBaseElement<PopperAssert> implements ISetup {
 
-    String button;
     String popper;
     String tooltip;
-
-    @JDIAction("Click on button")
-    public void clickButton() {
-        if (!this.find(button).isDisabled()) {
-            core().find(button).click();
-        }
-    }
 
     @JDIAction("Popper is displayed")
     public boolean isPopperDisplayed(){
@@ -49,7 +41,6 @@ public class Popper extends UIBaseElement<PopperAssert> implements ISetup {
             return;
         JDIPopper j = field.getAnnotation(JDIPopper.class);
 
-        button = j.button();
         popper = j.popper();
         tooltip = j.tooltip();
     }
