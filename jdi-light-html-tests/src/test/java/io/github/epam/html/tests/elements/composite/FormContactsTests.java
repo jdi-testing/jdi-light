@@ -187,7 +187,7 @@ public class FormContactsTests implements TestsInit {
         checkContactFormSubmitted();
     }
 
-    @Test(enabled = false)
+    @Test
     public void nextMethodTest() {
         main.contactFormCustom.next(DEFAULT_CONTACT);
         main.contactFormCustom.check(DEFAULT_CONTACT);
