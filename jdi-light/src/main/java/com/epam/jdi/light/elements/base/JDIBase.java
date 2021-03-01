@@ -459,22 +459,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
         );
     };
-    private Actions getActions() {
-        return new Actions(driver());
-    } 
-    public void actions(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(getActions(), getWebElement()).build().perform();
-    }
-    public void actions(JFunc1<Actions, Actions> action) {
-        action.execute(getActions()).build().perform();
-    }
-    public void actionsWithElement(JFunc2<Actions, WebElement, Actions> action) {
-        WebElement webElement= getWebElement();
-        action.execute(getActions().moveToElement(webElement), webElement).build().perform();
-    }
-    public void actionsWithElement(JFunc1<Actions, Actions> action) {
-        action.execute(getActions().moveToElement(getWebElement())).build().perform();
-    }
 
     @Override
     public void offCache() {

@@ -16,6 +16,7 @@ import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
@@ -553,6 +554,29 @@ public class UIElement extends JDIBase
         }
     }
 
+    private Actions getActions() {
+        return new Actions(driver());
+    }
+    private WebElement showElement() {
+        show();
+        return getWebElement();
+    }
+    public void actions(JFunc2<Actions, WebElement, Actions> action) {
+        WebElement webElement = showElement();
+        action.execute(getActions(), webElement).build().perform();
+    }
+    public void actions(JFunc1<Actions, Actions> action) {
+        show();
+        action.execute(getActions()).build().perform();
+    }
+    public void actionsWithElement(JFunc2<Actions, WebElement, Actions> action) {
+        WebElement webElement = showElement();
+        action.execute(getActions().moveToElement(webElement), webElement).build().perform();
+    }
+    public void actionsWithElement(JFunc1<Actions, Actions> action) {
+        WebElement webElement = showElement();
+        action.execute(getActions().moveToElement(webElement)).build().perform();
+    }
     /**
      * Scroll view to element and make a border around with specified color
      * @param color

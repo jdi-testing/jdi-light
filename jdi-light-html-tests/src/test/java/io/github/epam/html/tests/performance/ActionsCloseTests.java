@@ -36,7 +36,7 @@ public class ActionsCloseTests implements TestsInit {
             sendKeys("a").
             keyUp(Keys.CONTROL));
         yourName.sendKeys("Test");
-        assertEquals(yourName.getValue(), text+"Test");
+        assertEquals(yourName.getValue(), "Test");
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ActionsCloseTests implements TestsInit {
             sendKeys("a").
             keyUp(Keys.CONTROL));
         yourName.sendKeys("Test");
-        assertEquals(yourName.getValue(), text+"Test");
+        assertEquals(yourName.getValue(), "Test");
     }
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
