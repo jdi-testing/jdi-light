@@ -28,7 +28,7 @@ public class ActionsCloseTests implements TestsInit {
     }
     String text = "TextField";
 
-    @Test
+    @Test(enabled = false)
     public void getValueTest() {
         yourName.core().actionsWithElement(a -> a.
             click().
@@ -39,7 +39,7 @@ public class ActionsCloseTests implements TestsInit {
         assertEquals(yourName.getValue(), "Test");
     }
 
-    @Test
+    @Test(enabled = false)
     public void sendKeysTest() {
         yourName.core().actionsWithElement(a -> a.
             click().
