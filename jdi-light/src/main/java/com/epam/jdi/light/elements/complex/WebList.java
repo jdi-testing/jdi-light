@@ -682,6 +682,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @Override
     public WebList finds(By locator) {
         List<WebElement> els = elements(1).selectMany(el -> el.finds(locator).webElements());
-        return $$(els, context + ">" + locator);
+        return $$(els, getName() + ">" + locator);
     }
 }

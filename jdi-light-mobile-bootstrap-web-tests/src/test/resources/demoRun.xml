@@ -3,18 +3,17 @@
 <suite name="JDI-Light Bootstrap Demo Tests">
     <test name="Tests">
         <classes>
-            <class name="io.github.epam.bootstrap.tests.common.AlertTests"></class>
-            <class name="io.github.epam.bootstrap.tests.common.BadgeTests"></class>
-            <class name="io.github.epam.bootstrap.tests.complex.MultipleInputsTests"></class>
-            <class name="io.github.epam.bootstrap.tests.common.MultiProgressTests"></class>
-            <class name="io.github.epam.bootstrap.tests.common.BreadcrumbTests"></class>
-            <class name="io.github.epam.bootstrap.tests.common.RangeTests"></class>
+            <class name="io.github.epam.bootstrap.tests.common.AlertTests" />
+            <class name="io.github.epam.bootstrap.tests.common.BadgeTests" />
+            <class name="io.github.epam.bootstrap.tests.complex.MultipleInputsTests" />
+            <class name="io.github.epam.bootstrap.tests.common.MultiProgressTests" />
+            <class name="io.github.epam.bootstrap.tests.common.BreadcrumbTests" />
+            <class name="io.github.epam.bootstrap.tests.common.RangeTests" />
 
         </classes>
     </test>
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener"/>
-        <listener class-name="io.github.epam.testng.SuiteListener"/>
     </listeners>
 </suite>
 
