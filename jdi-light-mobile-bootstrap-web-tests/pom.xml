@@ -26,11 +26,6 @@
         <!--JDI-->
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light-bootstrap</artifactId>
-            <version>${jdi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-mobile</artifactId>
             <version>${jdi.version}</version>
             <scope>test</scope>
