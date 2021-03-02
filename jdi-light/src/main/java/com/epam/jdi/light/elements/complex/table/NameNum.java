@@ -20,21 +20,21 @@ public class NameNum extends DataClass<NameNum> {
     public String name;
 
     public boolean hasName() {
-        return isNotBlank(name) && num > -1;
+        return isNotBlank(name);
     }
     @Override
     public String toString() {
-        if (!hasName() && num > 0)
+        if (!hasName() && num > -1)
             return num + "";
-        if (hasName() && num == 0)
+        if (hasName() && num == -1)
             return name;
-        if (hasName() && num > 0)
-            return format("%s (%s)", name, num);
+        if (hasName() && num > -1)
+            return format("%s(%s)", name, num);
         return "";
     }
     public int getIndex(List<String> headers) {
         logger.debug("Find header with ");
-        if (hasName()) {
+        if (!hasName()) {
             return num + 1;
         }
         int index = firstIndex(headers, h -> equalsIgnoreCase(h, name));

@@ -9,6 +9,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -18,7 +19,7 @@ public class TableMatcher {
     public static JFunc2<BaseTable, TableMatcher[], WebList> TABLE_MATCHER = (table, matchers) -> {
         String locator = format("./%s/ancestor::*/td", print(map(matchers, m ->
                 m.getLocator(table)),"/ancestor::*"));
-        return $$(locator, table);
+        return $$(locator, table).setName("Matcher: " + print(asList(matchers), Object::toString));
     };
     public static TableMatcher hasValue(String value, Column column) {
         return new TableMatcher("/td[%s][normalize-space(.)="+ Quotes.escape(value)+"]",

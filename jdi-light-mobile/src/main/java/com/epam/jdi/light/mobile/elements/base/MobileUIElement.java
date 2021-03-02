@@ -157,11 +157,11 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     }
 
     public MobileWebList findsMobileElements(@MarkupLocator String by) {
-        return $$(by, this);
+        return $$(by, this).setName(getName());
     }
 
     public MobileWebList findsMobileElements(@MarkupLocator By by) {
-        return $$(by, this);
+        return $$(by, this).setName(getName());
     }
 
     @Override
