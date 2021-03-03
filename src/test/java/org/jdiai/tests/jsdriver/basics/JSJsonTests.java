@@ -1,7 +1,7 @@
 package org.jdiai.tests.jsdriver.basics;
 
 import com.google.gson.JsonObject;
-import org.jdiai.jsdriver.jsproducer.Json;
+import org.jdiai.jsproducer.Json;
 import org.jdiai.jswraper.JSElement;
 import org.jdiai.tests.jsdriver.TestInit;
 import org.testng.annotations.BeforeMethod;

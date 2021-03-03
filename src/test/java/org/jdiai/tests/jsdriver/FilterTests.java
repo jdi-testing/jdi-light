@@ -1,6 +1,6 @@
 package org.jdiai.tests.jsdriver;
 
-import org.jdiai.entity.ElementInfo;
+import org.jdiai.entities.ElementInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

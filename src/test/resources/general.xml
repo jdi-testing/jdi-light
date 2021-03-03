@@ -4,7 +4,7 @@
     <test name="Tests">
         <packages>
             <package name="org.jdiai.tests.jsdriver.basics.*"/>
-            <package name="org.jdiai.tests.jsdriver.driver.*"/>
+            <package name="org.jdiai.tests.*"/>
             <package name="org.jdiai.tests.jsdriver.*"/>
         </packages>
     </test>

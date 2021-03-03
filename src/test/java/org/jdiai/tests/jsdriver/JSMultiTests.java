@@ -1,7 +1,7 @@
 package org.jdiai.tests.jsdriver;
 
-import org.jdiai.entity.UserInfo;
-import org.jdiai.jsdriver.jsproducer.Json;
+import org.jdiai.entities.UserInfo;
+import org.jdiai.jsproducer.Json;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

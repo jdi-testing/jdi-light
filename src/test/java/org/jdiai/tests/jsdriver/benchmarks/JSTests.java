@@ -1,6 +1,6 @@
 package org.jdiai.tests.jsdriver.benchmarks;
 
-import org.jdiai.jsdriver.jsproducer.Json;
+import org.jdiai.jsproducer.Json;
 import org.jdiai.tests.jsdriver.TestInit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

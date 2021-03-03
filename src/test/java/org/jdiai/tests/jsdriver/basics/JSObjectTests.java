@@ -1,10 +1,10 @@
 package org.jdiai.tests.jsdriver.basics;
 
-import org.jdiai.entity.Header;
-import org.jdiai.entity.HeaderRaw;
-import org.jdiai.entity.TextHtml;
-import org.jdiai.entity.TextInfo;
-import org.jdiai.jsdriver.jsproducer.Json;
+import org.jdiai.entities.Header;
+import org.jdiai.entities.HeaderRaw;
+import org.jdiai.entities.TextHtml;
+import org.jdiai.entities.TextInfo;
+import org.jdiai.jsproducer.Json;
 import org.jdiai.jswraper.JSElement;
 import org.jdiai.tests.jsdriver.TestInit;
 import org.testng.annotations.BeforeMethod;

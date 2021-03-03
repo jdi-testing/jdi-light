@@ -2,14 +2,14 @@ package org.jdiai.tests.jsdriver.flow;
 
 import com.epam.jdi.tools.DataClass;
 import com.google.gson.JsonObject;
-import org.jdiai.entity.User;
+import org.jdiai.entities.User;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
-import static org.jdiai.entity.User.Roman;
+import static org.jdiai.entities.User.Roman;
 import static org.jdiai.tests.jsdriver.flow.TestData.SearchResults;
 import static org.jdiai.tests.jsdriver.flow.TestData.SearchResultsJson;
 import static org.jdiai.tests.jsdriver.states.States.atHomePage;

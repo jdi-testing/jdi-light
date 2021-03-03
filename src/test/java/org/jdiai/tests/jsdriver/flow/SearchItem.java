@@ -2,7 +2,7 @@ package org.jdiai.tests.jsdriver.flow;
 
 import com.epam.jdi.tools.DataClass;
 import org.jdiai.tools.GetValue;
-import org.jdiai.tools.locators.UI;
+import org.jdiai.locators.UI;
 import org.openqa.selenium.support.FindBy;
 
 public class SearchItem extends DataClass<SearchItem> {
