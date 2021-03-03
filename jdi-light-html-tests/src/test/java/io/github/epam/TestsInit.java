@@ -1,6 +1,5 @@
 package io.github.epam;
 
-import com.epam.jdi.light.actions.ActionHelper;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
@@ -19,7 +18,6 @@ import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.PrintUtils.print;
 
 @Listeners(TestNGListener.class)
 public interface TestsInit {
@@ -34,8 +32,6 @@ public interface TestsInit {
 
     @AfterSuite(alwaysRun = true)
     default void tearDown() {
-        logger.info("Size: " + ActionHelper.FAILED.size());
-        logger.info("List: " + print(ActionHelper.FAILED));
         killAllSeleniumDrivers();
     }
 

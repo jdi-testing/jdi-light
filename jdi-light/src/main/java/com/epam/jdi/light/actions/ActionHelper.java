@@ -97,9 +97,6 @@ public class ActionHelper {
             String actionName = isBlank(template)
                 ? getDefaultName(jp, method)
                 : fillTemplate(template, jp, method);
-            if (actionName.contains("{")) {
-               FAILED.add(actionName + "::::" + new ActionObject(jp, "").print());
-            }
             logger.trace("getActionName() => " + actionName);
             return actionName;
         } catch (Throwable ex) {
@@ -110,7 +107,6 @@ public class ActionHelper {
             throw exception(ex, "Surround method issue: Can't get action name: " + getClassMethodName(jp));
         }
     }
-    public static List<String> FAILED = new ArrayList<>();
 
     public static String fillTemplate(String template, JoinPoint jp, MethodSignature method) {
         logger.trace("fillTemplate(): " + template);
