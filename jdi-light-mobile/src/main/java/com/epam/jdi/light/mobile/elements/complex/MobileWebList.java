@@ -56,7 +56,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.max;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class    MobileWebList extends JDIBase implements IList<MobileUIElement>, SetValue, ISelector, HasUIList,
+public class MobileWebList extends JDIBase implements IList<MobileUIElement>, SetValue, ISelector, HasUIList,
         HasAssert<UISelectAssert<UISelectAssert<?, ?>, MobileWebList>> {
     protected int startIndex = MOBILE_ELEMENT.startIndex;
     protected CacheValue<MapArray<String, MobileUIElement>> map = new CacheValue<>(MapArray::new);
