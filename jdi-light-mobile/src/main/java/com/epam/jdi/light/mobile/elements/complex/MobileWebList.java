@@ -41,7 +41,8 @@ import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getByType;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.*;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
@@ -55,7 +56,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.max;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class    MobileWebList extends JDIBase implements IList<MobileUIElement>, SetValue, ISelector, HasUIList,
+public class MobileWebList extends JDIBase implements IList<MobileUIElement>, SetValue, ISelector, HasUIList,
         HasAssert<UISelectAssert<UISelectAssert<?, ?>, MobileWebList>> {
     protected int startIndex = MOBILE_ELEMENT.startIndex;
     protected CacheValue<MapArray<String, MobileUIElement>> map = new CacheValue<>(MapArray::new);

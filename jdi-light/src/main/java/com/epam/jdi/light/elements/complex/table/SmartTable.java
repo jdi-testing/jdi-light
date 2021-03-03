@@ -259,7 +259,7 @@ public abstract class SmartTable<T extends SmartTable<?,?>, A extends BaseTableA
         int headerIndex = getRowHeaderIndex();
         return headerIndex == -1 ? 1 : headerIndex;
     }
-    public WebList webRow(Enum rowName) {
+    public WebList webRow(Enum<?> rowName) {
         return webRow(getEnumValue(rowName));
     }
     public WebList webColumn(int colNum) {
@@ -317,7 +317,7 @@ public abstract class SmartTable<T extends SmartTable<?,?>, A extends BaseTableA
     public WebList webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
     }
-    public WebList webColumn(Enum colName) {
+    public WebList webColumn(Enum<?> colName) {
         return webRow(getEnumValue(colName));
     }
     protected int getColIndexByName(String colName) {
@@ -483,7 +483,7 @@ public abstract class SmartTable<T extends SmartTable<?,?>, A extends BaseTableA
     public Line row(String rowName) {
         return new Line(header(), webRow(rowName));
     }
-    public Line row(Enum rowName) {
+    public Line row(Enum<?> rowName) {
         return row(getEnumValue(rowName));
     }
 
@@ -534,7 +534,7 @@ public abstract class SmartTable<T extends SmartTable<?,?>, A extends BaseTableA
     public Line column(String colName) {
         return new Line(rowHeader(), webColumn(colName));
     }
-    public Line column(Enum colName) {
+    public Line column(Enum<?> colName) {
         return column(getEnumValue(colName));
     }
     @JDIAction("Get all '{name}' columns")

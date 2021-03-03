@@ -108,6 +108,10 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public WebList(MapArray<String, UIElement> map) {
         this.map.set(map);
     }
+    public WebList(List<WebElement> elements, String name) {
+        this(elements);
+        setName(name);
+    }
     public WebList(List<String> header, List<UIElement> elements) {
         this(new MapArray<>(header, elements));
     }
