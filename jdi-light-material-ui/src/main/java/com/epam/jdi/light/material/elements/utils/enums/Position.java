@@ -6,11 +6,11 @@ public enum Position {
   LEFT("left"),
   RIGHT("right");
 
+  String position;
+
   public String getPosition() {
     return position;
   }
-
-  String position;
 
   Position(String position) {
     this.position = position;
