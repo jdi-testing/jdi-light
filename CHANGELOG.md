@@ -4,9 +4,15 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
-##1.3.11 (01.03.2021)
+##1.3.11 (03.03.2021)
 * Switch to Lightsaber 2.1.13
 * Fix print column in a table matchers
+* Switch to Lightsaber 2.1.13
+* Move Table Matchers to com.epam.jdi.light.elements.complex.table.matchers and rename TableMatcher > ColumnMatcher; Single > ValueMatcher
+* Make constructors public and fields protected
+* Add TableMatchersSettings
+* Set Deprecated for old matchers
+* Fix few table logs
 
 ##1.3.10 (01.03.2021)
 * Fix issue with actions
