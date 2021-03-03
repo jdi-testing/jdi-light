@@ -8,14 +8,15 @@ import java.util.List;
 
 import static org.jdiai.jswraper.JSWrapper.$;
 import static org.jdiai.jswraper.JSWrapper.element;
-import static org.jdiai.tests.jsdriver.states.States.atSimplePage;
+import static org.jdiai.tests.jsdriver.states.Pages.SIMPLE_PAGE;
+import static org.jdiai.tests.jsdriver.states.States.loggedInAt;
 import static org.testng.Assert.assertEquals;
 
 public class FilterTests extends TestInit {
 
     @BeforeMethod
     public void before() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
     }
 
     @Test
@@ -55,6 +56,19 @@ public class FilterTests extends TestInit {
         assertEquals(filteredInfo.size(), 4);
         assertEquals(filteredInfo.toString(), FILTERED_INFO);
     }
+
+    @Test
+    public void complexSmartTest() {
+        List<ElementInfo> info = element(ElementInfo.class, "#furniture-double-hidden th")
+            .getEntityList();
+        assertEquals(info.size(), 6);
+        assertEquals(info.toString(), INFO);
+        List<ElementInfo> filteredInfo = $(ElementInfo.class, "#furniture-double-hidden th")
+            .getEntityList();
+        assertEquals(filteredInfo.size(), 4);
+        assertEquals(filteredInfo.toString(), FILTERED_INFO);
+    }
+
     String INFO =
         "[ElementInfo(tag:TH; id:; text:\n\t\t\t\t\t\t\t\t; html:\n\t\t\t\t\t\t\t\t; visibility:hidden; fontSize:14px; selected:false), " +
         "ElementInfo(tag:TH; id:; text:Name; html:Name; visibility:visible; fontSize:14px; selected:false), " +

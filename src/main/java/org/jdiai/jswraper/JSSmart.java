@@ -11,6 +11,7 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.newList;
+import static org.jdiai.jswraper.JSEntity.CLASS_TO_MAP;
 
 public class JSSmart extends JSElement {
     public JSSmart(WebDriver driver, List<By> locators) {
@@ -69,6 +70,9 @@ public class JSSmart extends JSElement {
     public <T> T getEntity(String objectMap) {
         return (T) driver.getOne(objectMap).asObject(entity);
     }
+    public <T> T getEntity() {
+        return getEntity(CLASS_TO_MAP.execute(entity));
+    }
     public <T> T getEntity(List<String> attributes) {
         return (T) driver.getOne(attributesToJson(attributes)).asObject(entity);
     }
@@ -79,10 +83,14 @@ public class JSSmart extends JSElement {
     public <T> List<T> getEntityList(String objectMap) {
         return map(driver.getList(objectMap).asObject(entity), el -> (T) el);
     }
+    public <T> List<T> getEntityList() {
+        return getEntityList(CLASS_TO_MAP.execute(entity));
+    }
     public <T> List<T> getEntityList(List<String> attributes) {
         return map(driver.getList(attributesToJson(attributes)).asObject(entity), el -> (T) el);
     }
     public <T> List<T> getEntityListFromAttr(String... attributes) {
         return getEntityList(newList(attributes));
     }
+
 }

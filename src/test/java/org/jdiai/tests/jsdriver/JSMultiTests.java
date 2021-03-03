@@ -11,14 +11,15 @@ import static com.epam.jdi.tools.LinqUtils.ifSelect;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.util.Arrays.asList;
 import static org.jdiai.jswraper.JSWrapper.element;
-import static org.jdiai.tests.jsdriver.states.States.atUsersPage;
+import static org.jdiai.tests.jsdriver.states.Pages.USERS_PAGE;
+import static org.jdiai.tests.jsdriver.states.States.loggedInAt;
 import static org.testng.Assert.assertEquals;
 
 public class JSMultiTests extends TestInit {
 
     @BeforeMethod
     public void before() {
-        atUsersPage();
+        loggedInAt(USERS_PAGE);
     }
 
     @Test

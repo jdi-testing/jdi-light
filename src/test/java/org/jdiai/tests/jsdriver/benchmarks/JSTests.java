@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.jdiai.tests.jsdriver.benchmarks.PerfStatistic.testScenario;
-import static org.jdiai.tests.jsdriver.states.States.atPerformancePage;
+import static org.jdiai.tests.jsdriver.states.Pages.PERFORMANCE_PAGE;
+import static org.jdiai.tests.jsdriver.states.States.loggedInAt;
 import static org.jdiai.tools.Conditions.textEquals;
 import static org.jdiai.tools.JSTalk.$;
 import static org.jdiai.tools.JSTalk.driver;
@@ -25,7 +26,7 @@ public class JSTests extends TestInit {
 
     @BeforeMethod
     public void before() {
-        atPerformancePage();
+        loggedInAt(PERFORMANCE_PAGE);;
     }
 
     @Test(invocationCount = repeat)

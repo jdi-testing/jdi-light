@@ -1,7 +1,9 @@
 package org.jdiai.tools;
 
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.Timer;
+import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
@@ -14,14 +16,17 @@ import org.jdiai.jsdriver.JSException;
 import org.jdiai.jsdriver.jsproducer.Json;
 import org.jdiai.jswraper.JSSmart;
 import org.jdiai.scripts.Whammy;
+import org.jdiai.tools.locators.UI;
 import org.jdiai.visual.Direction;
 import org.jdiai.visual.ImageTypes;
 import org.jdiai.visual.OfElement;
 import org.jdiai.visual.StreamToImageVideo;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,17 +37,20 @@ import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.StringUtils.*;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.jsdriver.WebDriverByUtils.*;
 import static org.jdiai.jsdriver.jsbuilder.GetTypes.dataType;
+import static org.jdiai.tools.Conditions.textEquals;
 import static org.jdiai.tools.GetTextTypes.INNER_TEXT;
 import static org.jdiai.tools.VisualSettings.*;
 import static org.jdiai.visual.Direction.VECTOR_SIMILARITY;
 import static org.jdiai.visual.ImageTypes.VIDEO_WEBM;
 import static org.jdiai.visual.RelationsManager.*;
+import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.OutputType.*;
 
 public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
@@ -108,6 +116,12 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
     public void set(String action) {
         doAction(action);
+    }
+    public void setOption(String option) {
+        doAction("option.value = " + option);
+    }
+    public void selectByName(String value) {
+        doAction("selectedIndex = [...element.options].findIndex(option => option.text === '" + value + "')");
     }
     public void doAction(String action) {
         js.getAttribute(action);
@@ -487,7 +501,8 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public JS find(By by) {
         return new JS(this.driver, by, this, false);
     }
-    public JS firstChild() { return find("*"); }
+    public JS children() { return find("*"); }
+    public JS ancestor() { return find("/.."); }
 
     public List<String> values(GetTextTypes getTextType) {
         return js.getAttributeList(getTextType.value);
@@ -500,6 +515,47 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
     public <T> List<T> getEntityList() {
         return js.getEntityList(objectMap);
+    }
+    public static JFunc1<String, By> SMART_LOCATOR = fieldName ->
+        cssSelector("[data-testid='" + toKebabCase(fieldName) + "']");
+
+    public static JAction2<Field, List<String>> FIELD_TO_MAP = (field, result) -> {
+        By locator = null;
+        if (field.isAnnotationPresent(FindBy.class)) {
+            FindBy findBy = field.getAnnotation(FindBy.class);
+            locator = findByToBy(findBy);
+        } else if (field.isAnnotationPresent(UI.class)) {
+            UI findBy = field.getAnnotation(UI.class);
+            locator = uiToBy(findBy);
+            if (locator == null) {
+                locator = SMART_LOCATOR.execute(field.getName());
+            }
+        }
+        if (locator != null) {
+            String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
+            result.add(format("'%s': %s", field.getName(), getValueType(field, element)));
+        }
+    };
+    public static String getValueType(Field field, String element) {
+        String value = field.isAnnotationPresent(GetValue.class)
+            ? field.getAnnotation(GetValue.class).value()
+            : "innerText";
+        if (value.contains("style.")) {
+            return value.replace("style", "getComputedStyle(" +  element + ")");
+        } else if (value.contains("{element}")) {
+            return value.replace("{element}", element);
+        }
+        return element + "." + value;
+    }
+
+    public <T> List<T> getEntityList(Class<T> cl) {
+        Field[] allFields = cl.getDeclaredFields();
+        List<String> mapList = new ArrayList<>();
+        for (Field field : allFields) {
+            FIELD_TO_MAP.execute(field, mapList);
+        }
+        String objectMapper = "{ " + print(mapList, ", ") + " }";
+        return getEntityList(objectMapper, cl);
     }
     public <T> List<T> getEntityList(String objectMap, Class<?> cl) {
         js.setEntity(cl);
@@ -526,6 +582,13 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
             MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+
             ")[" + index + "];\n");
     }
+
+    public JS get(String value) {
+        return findFirst(textEquals(value));
+    }
+    public JS findFirst(Condition condition) {
+        return findFirst(condition.addTextType(getTextType).getScript());
+    }
     public JS findFirst(String condition) {
         return listToOne("element = elements.find(e => e && e."+ condition + ");\n");
     }
@@ -549,7 +612,6 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     // public WebList finds(@MarkupLocator By by) {
     //     return $$(by, this);
     // }
-    // public WebList children() { return finds("*"); }
 
     public boolean isClickable() {
         Dimension dimension = getSize();

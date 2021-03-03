@@ -6,7 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.jdiai.tests.jsdriver.states.States.atUsersPage;
+import static org.jdiai.tests.jsdriver.states.Pages.USERS_PAGE;
+import static org.jdiai.tests.jsdriver.states.States.loggedInAt;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -14,7 +15,7 @@ public class JSDriverListTests extends TestInit {
 
     @BeforeMethod
     public void before() {
-        atUsersPage();
+        loggedInAt(USERS_PAGE);
     }
 
     @Test

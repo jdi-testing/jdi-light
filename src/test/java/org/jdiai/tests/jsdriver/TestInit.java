@@ -53,7 +53,7 @@ public class TestInit {
         driver.manage().window().maximize();
         return driver;
     }
-    private static void killDrivers() {
+    public static void killDrivers() {
         try {
             getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
         } catch (Exception ignore) { }

@@ -17,6 +17,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.jdiai.jswraper.JSWrapper.$;
 import static org.jdiai.tests.jsdriver.states.Pages.DOMAIN;
+import static org.jdiai.tests.jsdriver.states.Pages.SIMPLE_PAGE;
 import static org.jdiai.tests.jsdriver.states.States.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -79,7 +80,7 @@ public class JSSmartTests extends TestInit {
 
     @Test
     public void multiEntitiesTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Header> headers = $(Header.class, "#furniture-double-hidden th")
             .getEntityList("{ 'text': element.innerText, 'visibility': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
@@ -87,7 +88,7 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void multiEntitiesLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Header> headers = $(Header.class, "#furniture-double-hidden", "th")
             .getEntityList("{ 'text': element.innerText, 'visibility': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
@@ -95,7 +96,7 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void multiEntitiesByAttrTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<HeaderRaw> headers = $(HeaderRaw.class, "#furniture-double-hidden th")
             .getEntityList(asList("innerText", "className", "tagName"));
         assertEquals(headers.size(), 4);
@@ -103,7 +104,7 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void multiEntitiesByAttrLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<HeaderRaw> headers = $(HeaderRaw.class, "#furniture-double-hidden", "th")
             .getEntityList(asList("innerText", "className", "tagName"));
         assertEquals(headers.size(), 4);
@@ -130,7 +131,7 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void jsonMultiTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<JsonObject> headers = $("#furniture-double-hidden th")
             .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
@@ -141,7 +142,7 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void jsonMultiLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<JsonObject> headers = $("#furniture-double-hidden", "th")
             .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
@@ -192,14 +193,14 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void smartMultiEntitiesTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Header> headers = header().getEntityList("{ 'text': element.innerText, 'visibility': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
         assertEquals(headers.get(0), expectedHeader());
     }
     @Test
     public void smartMultiEntitiesByAttrTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<HeaderRaw> headers = headerRaw().getEntityList(asList("innerText", "className", "tagName"));
         assertEquals(headers.size(), 4);
         assertEquals(headers.get(0), expectedHeaderRaw());
@@ -255,14 +256,14 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void attributeListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> headers = $(TextInfo.class, "#products th").getAttributeList("innerText");
         assertEquals(headers.size(), 4);
         assertEquals(headers.toString(), "[Name, Type, Cost, Weight]");
     }
     @Test
     public void attributesListLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> headers = $(TextInfo.class, "#products", "th").getAttributeList("innerText");
         assertEquals(headers.size(), 4);
         assertEquals(headers.toString(), "[Name, Type, Cost, Weight]");
@@ -283,7 +284,7 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void multiAttributesTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> headers = $(TextInfo.class, "#furniture-double-hidden th").getMultiAttributes("innerText", "className ", "tagName");
         assertEquals(headers.size(), 4);
 
@@ -293,7 +294,7 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void multiAttributesLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> headers = $(TextInfo.class, "#furniture-double-hidden", "th").getMultiAttributes("innerText", "className", "tagName");
         assertEquals(headers.size(), 4);
 
@@ -343,21 +344,21 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void stylesListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> visibility = $(TextInfo.class, "#furniture-double-hidden th").getStylesList("visibility");
         assertEquals(visibility.size(), 4);
         assertEquals(visibility.get(0), "visible");
     }
     @Test
     public void stylesListLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> visibility = $(TextInfo.class, "#furniture-double-hidden", "th").getStylesList("visibility");
         assertEquals(visibility.size(), 4);
         assertEquals(visibility.get(0), "visible");
     }
     @Test
     public void multiStylesTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> visibility = $(TextInfo.class, "#furniture-double-hidden th").getMultiStyles("visibility", "display");
         assertEquals(visibility.size(), 4);
 
@@ -366,7 +367,7 @@ public class JSSmartTests extends TestInit {
     }
     @Test
     public void multiStylesLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> visibility = $(TextInfo.class, "#furniture-double-hidden", "th").getMultiStyles("visibility", "display");
         assertEquals(visibility.size(), 4);
 

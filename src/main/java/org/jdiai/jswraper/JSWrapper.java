@@ -54,7 +54,7 @@ public class JSWrapper {
         return new ChromeDriver();
     }
     public static WebDriver firefoxDriver() {
-        System.setProperty("webdriver.gecko.driver", "C:\\Selenium\\geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "~/Downloads/chromedriver");
         // System.setProperty("webdriver.gecko.driver", "C:\\Selenium\\geckodriver.exe");
         return new FirefoxDriver();
     }
