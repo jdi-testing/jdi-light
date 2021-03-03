@@ -11,6 +11,7 @@ import java.util.List;
 
 import static org.jdiai.jswraper.JSWrapper.json;
 import static org.jdiai.tests.jsdriver.states.Pages.DOMAIN;
+import static org.jdiai.tests.jsdriver.states.Pages.SIMPLE_PAGE;
 import static org.jdiai.tests.jsdriver.states.States.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -41,7 +42,7 @@ public class JSJsonTests extends TestInit {
     }
     @Test
     public void jsonMultiTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<JsonObject> headers = json("#furniture-double-hidden th")
             .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 6);
@@ -55,7 +56,7 @@ public class JSJsonTests extends TestInit {
     }
     @Test
     public void jsonMultiLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<JsonObject> headers = json("#furniture-double-hidden", "th")
             .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 6);
@@ -118,14 +119,14 @@ public class JSJsonTests extends TestInit {
     }
     @Test
     public void attributeListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> headers = json("#products th").getAttributeList("innerText");
         assertEquals(headers.size(), 4);
         assertEquals(headers.toString(), "[Name, Type, Cost, Weight]");
     }
     @Test
     public void attributesListLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> headers = json("#products", "th").getAttributeList("innerText");
         assertEquals(headers.size(), 4);
         assertEquals(headers.toString(), "[Name, Type, Cost, Weight]");
@@ -146,7 +147,7 @@ public class JSJsonTests extends TestInit {
     }
     @Test
     public void multiAttributesTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> headers = json("#furniture-double-hidden th").getMultiAttributes("innerText", "className ", "tagName");
         assertEquals(headers.size(), 6);
         assertEquals(headers.get(4).get("innerText"), "");
@@ -159,7 +160,7 @@ public class JSJsonTests extends TestInit {
     }
     @Test
     public void multiAttributesLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> headers = json("#furniture-double-hidden", "th").getMultiAttributes("innerText", "className", "tagName");
         assertEquals(headers.size(), 6);
         assertEquals(headers.get(4).get("innerText"), "");
@@ -212,7 +213,7 @@ public class JSJsonTests extends TestInit {
     }
     @Test
     public void stylesListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> visibility = json("#furniture-double-hidden th").getStylesList("visibility");
         assertEquals(visibility.size(), 6);
         assertEquals(visibility.get(0), "hidden");
@@ -220,7 +221,7 @@ public class JSJsonTests extends TestInit {
     }
     @Test
     public void stylesListLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> visibility = json("#furniture-double-hidden", "th").getStylesList("visibility");
         assertEquals(visibility.size(), 6);
         assertEquals(visibility.get(0), "hidden");
@@ -228,7 +229,7 @@ public class JSJsonTests extends TestInit {
     }
     @Test
     public void multiStylesTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> visibility = json("#furniture-double-hidden th").getMultiStyles("visibility", "display");
         assertEquals(visibility.size(), 6);
         assertEquals(visibility.get(0).get("visibility"), "hidden");
@@ -239,7 +240,7 @@ public class JSJsonTests extends TestInit {
     }
     @Test
     public void multiStylesLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> visibility = json("#furniture-double-hidden", "th").getMultiStyles("visibility", "display");
         assertEquals(visibility.size(), 6);
         assertEquals(visibility.get(0).get("visibility"), "hidden");

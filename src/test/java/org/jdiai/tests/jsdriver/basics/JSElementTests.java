@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.jdiai.jswraper.JSWrapper.element;
 import static org.jdiai.tests.jsdriver.states.Pages.DOMAIN;
+import static org.jdiai.tests.jsdriver.states.Pages.SIMPLE_PAGE;
 import static org.jdiai.tests.jsdriver.states.States.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -72,14 +73,14 @@ public class JSElementTests extends TestInit {
     }
     @Test
     public void attributeListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> headers = element("#products th").getAttributeList("innerText");
         assertEquals(headers.size(), 4);
         assertEquals(headers.toString(), "[Name, Type, Cost, Weight]");
     }
     @Test
     public void attributesListLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> headers = element("#products", "th").getAttributeList("innerText");
         assertEquals(headers.size(), 4);
         assertEquals(headers.toString(), "[Name, Type, Cost, Weight]");
@@ -100,7 +101,7 @@ public class JSElementTests extends TestInit {
     }
     @Test
     public void multiAttributesTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> headers = element("#furniture-double-hidden th").getMultiAttributes("innerText", "className ", "tagName");
         assertEquals(headers.size(), 6);
         assertEquals(headers.get(4).get("innerText"), "");
@@ -113,7 +114,7 @@ public class JSElementTests extends TestInit {
     }
     @Test
     public void multiAttributesLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> headers = element("#furniture-double-hidden", "th").getMultiAttributes("innerText", "className", "tagName");
         assertEquals(headers.size(), 6);
         assertEquals(headers.get(4).get("innerText"), "");
@@ -167,7 +168,7 @@ public class JSElementTests extends TestInit {
     }
     @Test
     public void stylesListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> visibility = element("#furniture-double-hidden th").getStylesList("visibility");
         assertEquals(visibility.size(), 6);
         assertEquals(visibility.get(0), "hidden");
@@ -175,7 +176,7 @@ public class JSElementTests extends TestInit {
     }
     @Test
     public void stylesListLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<String> visibility = element("#furniture-double-hidden", "th").getStylesList("visibility");
         assertEquals(visibility.size(), 6);
         assertEquals(visibility.get(0), "hidden");
@@ -183,7 +184,7 @@ public class JSElementTests extends TestInit {
     }
     @Test
     public void multiStylesTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> visibility = element("#furniture-double-hidden th").getMultiStyles("visibility", "display");
         assertEquals(visibility.size(), 6);
         assertEquals(visibility.get(0).get("visibility"), "hidden");
@@ -194,7 +195,7 @@ public class JSElementTests extends TestInit {
     }
     @Test
     public void multiStylesLocatorListTest() {
-        atSimplePage();
+        loggedInAt(SIMPLE_PAGE);
         List<Json> visibility = element("#furniture-double-hidden", "th").getMultiStyles("visibility", "display");
         assertEquals(visibility.size(), 6);
         assertEquals(visibility.get(0).get("visibility"), "hidden");
