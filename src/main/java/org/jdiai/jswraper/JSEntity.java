@@ -1,17 +1,12 @@
 package org.jdiai.jswraper;
 
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import org.jdiai.jsdriver.JSException;
-import org.jdiai.tools.GetValue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -19,9 +14,6 @@ import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 import static java.lang.String.format;
-import static org.jdiai.jsdriver.WebDriverByUtils.findByToBy;
-import static org.jdiai.jsdriver.WebDriverByUtils.getByLocator;
-import static org.jdiai.jsdriver.jsbuilder.GetTypes.dataType;
 import static org.jdiai.tools.JS.getValueType;
 
 public class JSEntity<T> extends JSElement {

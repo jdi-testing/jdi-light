@@ -1,6 +1,7 @@
 package org.jdiai.tools;
 
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.tools.func.JFunc1;
@@ -15,6 +16,7 @@ import org.jdiai.jsdriver.JSException;
 import org.jdiai.jsdriver.jsproducer.Json;
 import org.jdiai.jswraper.JSSmart;
 import org.jdiai.scripts.Whammy;
+import org.jdiai.tools.locators.UI;
 import org.jdiai.visual.Direction;
 import org.jdiai.visual.ImageTypes;
 import org.jdiai.visual.OfElement;
@@ -35,6 +37,7 @@ import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.StringUtils.*;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
@@ -47,6 +50,7 @@ import static org.jdiai.tools.VisualSettings.*;
 import static org.jdiai.visual.Direction.VECTOR_SIMILARITY;
 import static org.jdiai.visual.ImageTypes.VIDEO_WEBM;
 import static org.jdiai.visual.RelationsManager.*;
+import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.OutputType.*;
 
 public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
@@ -512,10 +516,22 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public <T> List<T> getEntityList() {
         return js.getEntityList(objectMap);
     }
+    public static JFunc1<String, By> SMART_LOCATOR = fieldName ->
+        cssSelector("[data-testid='" + toKebabCase(fieldName) + "']");
+
     public static JAction2<Field, List<String>> FIELD_TO_MAP = (field, result) -> {
+        By locator = null;
         if (field.isAnnotationPresent(FindBy.class)) {
             FindBy findBy = field.getAnnotation(FindBy.class);
-            By locator = findByToBy(findBy);
+            locator = findByToBy(findBy);
+        } else if (field.isAnnotationPresent(UI.class)) {
+            UI findBy = field.getAnnotation(UI.class);
+            locator = uiToBy(findBy);
+            if (locator == null) {
+                locator = SMART_LOCATOR.execute(field.getName());
+            }
+        }
+        if (locator != null) {
             String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
             result.add(format("'%s': %s", field.getName(), getValueType(field, element)));
         }
