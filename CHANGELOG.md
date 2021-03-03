@@ -4,6 +4,10 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
+##1.3.11 (01.03.2021)
+* Switch to Lightsaber 2.1.13
+* Fix print column in a table matchers
+
 ##1.3.10 (01.03.2021)
 * Fix issue with actions
 * Fix Grid header locators validation

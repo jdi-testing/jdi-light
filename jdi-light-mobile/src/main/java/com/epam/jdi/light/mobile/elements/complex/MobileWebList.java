@@ -41,6 +41,8 @@ import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getByType;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
+import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
@@ -54,7 +56,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.max;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class    MobileWebList extends JDIBase implements IList<MobileUIElement>, SetValue, ISelector, HasUIList,
+public class MobileWebList extends JDIBase implements IList<MobileUIElement>, SetValue, ISelector, HasUIList,
         HasAssert<UISelectAssert<UISelectAssert<?, ?>, MobileWebList>> {
     protected int startIndex = MOBILE_ELEMENT.startIndex;
     protected CacheValue<MapArray<String, MobileUIElement>> map = new CacheValue<>(MapArray::new);
@@ -159,7 +161,7 @@ public class    MobileWebList extends JDIBase implements IList<MobileUIElement>,
             if (map.hasValue() && map.get().size() > 0 && map.get().size() >= getIndex && isActualMap())
                 return map.get().values().get(getIndex);
             if (webElements.hasValue() && webElements.get().size() > 0 && webElements.get().size() >= getIndex && isActual(webElements.get().get(0)))
-                return MobileUIFactory.$(webElements.get().get(getIndex));
+                return $(webElements.get().get(getIndex));
         }
         MobileUIElement element = locator.isTemplate()
                 ? tryGetByIndex(index)
@@ -620,7 +622,7 @@ public class    MobileWebList extends JDIBase implements IList<MobileUIElement>,
             if (map.hasValue() && map.get().size() > 0 && isActualMap())
                 return map.get().keys();
             if (webElements.hasValue() && webElements.get().size() > 0 && isActual(webElements.get().get(0))) {
-                values = LinqUtils.map(webElements.get(), element -> MobileUIFactory.$(element).text(textType));
+                values = LinqUtils.map(webElements.get(), element -> $(element).text(textType));
                 HashSet<String> unique = new HashSet<>(values);
                 if (unique.size() == values.size()) {
                     map.set(new MapArray<>(values, LinqUtils.map(webElements.get(), MobileUIFactory::$)));
@@ -775,6 +777,6 @@ public class    MobileWebList extends JDIBase implements IList<MobileUIElement>,
 
     public MobileWebList findsMobileElements(By locator) {
         List<WebElement> els = elements(1).selectMany(el -> el.finds(locator).webElements());
-        return MobileUIFactory.$$(els, context + ">" + locator);
+        return $$(els, context + ">" + locator).setName(getName());
     }
 }

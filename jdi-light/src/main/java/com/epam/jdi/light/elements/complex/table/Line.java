@@ -14,6 +14,7 @@ import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.map.MultiMap;
 import com.epam.jdi.tools.pairs.Pair;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -40,7 +41,7 @@ public class Line implements IList<String>, IBaseElement {
     protected int startIndex = ELEMENT.startIndex;
 
     public Line(List<String> list, List<String> headers, JDIBase base) {
-        if (list == null || headers == null || list.size() == 0 || headers.size() == 0
+        if (list == null || headers == null || ObjectUtils.isEmpty(list) || ObjectUtils.isEmpty(headers)
                 || list.size() != headers.size())
             throw exception("Failed to init Line[list: %s; headers: %s;]",
                 list == null ? "null" : list.toString(), headers == null ? "null" : headers.toString());
@@ -50,7 +51,7 @@ public class Line implements IList<String>, IBaseElement {
         this.elements = new WebList(base);
     }
     public Line(List<String> headers, List<WebElement> elements, String name) {
-        this(headers, new WebList(elements), name);
+        this(headers, new WebList(elements, name), name);
     }
     public Line(List<String> headers, WebList elements, String name) {
         if (headers == null) {

@@ -84,7 +84,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     default WebList webRow(String rowName) {
         return webRow(getRowIndexByName(rowName));
     }
-    default WebList webRow(Enum rowName) {
+    default WebList webRow(Enum<?> rowName) {
         return webRow(getEnumValue(rowName));
     }
 
@@ -94,7 +94,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     default Line row(String rowName) {
         return row(getRowIndexByName(rowName));
     }
-    default Line row(Enum rowName) {
+    default Line row(Enum<?> rowName) {
         return row(getEnumValue(rowName));
     }
     default <D> List<D> rowsAs(Class<D> cl) {
@@ -146,7 +146,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     default WebList webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
     }
-    default WebList webColumn(Enum colName) {
+    default WebList webColumn(Enum<?> colName) {
         return webColumn(getEnumValue(colName));
     }
 
@@ -156,7 +156,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     default Line column(String colName) {
         return column(getColIndexByName(colName));
     }
-    default Line column(Enum colName) {
+    default Line column(Enum<?> colName) {
         return column(getEnumValue(colName));
     }
     default List<Line> columns() {

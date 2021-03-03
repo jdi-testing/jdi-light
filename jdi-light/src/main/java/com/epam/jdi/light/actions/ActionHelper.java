@@ -600,10 +600,7 @@ public class ActionHelper {
         return className + "." + methodName;
     }
     public static Object getJpInstance(JoinPoint jp) {
-        Object result = jp.getThis();
-        if (result == null)
-            result = jp.getTarget();
-        return result;
+        return jp.getTarget();
     }
     public static Object defaultAction(ActionObject jInfo) throws Throwable {
         logger.trace("defaultAction: " + getClassMethodName(jInfo.jp()));

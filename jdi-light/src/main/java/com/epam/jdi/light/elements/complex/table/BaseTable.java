@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.interfaces.base.HasRefresh;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
@@ -33,7 +34,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.complex.WebList.newList;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
+import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.TABLE_MATCHER;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -255,7 +256,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return webRow(getRowHeaderIndex(), rowName);
     }
     @JDebug
-    public WebList webRow(Enum rowName) {
+    public WebList webRow(Enum<?> rowName) {
         return webRow(getEnumValue(rowName));
     }
     @JDebug
@@ -315,7 +316,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public WebList webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
     }
-    public WebList webColumn(Enum colName) {
+    public WebList webColumn(Enum<?> colName) {
         return webRow(getEnumValue(colName));
     }
     protected int getColIndexByName(String colName) {
@@ -452,7 +453,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      * @return Line
      */
     @JDIAction("Get first '{name}' table row that match criteria")
-    public Line row(TableMatcher... matchers) {
+    public Line row(ColumnMatcher... matchers) {
         if (ObjectUtils.isEmpty(header())) {
             throw exception(getName() + " table has empty header");
         }
@@ -471,7 +472,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      * @return List
      */
     @JDIAction("Get all '{name}' table rows that match criteria")
-    public List<Line> rows(TableMatcher... matchers) {
+    public List<Line> rows(ColumnMatcher... matchers) {
         List<String> lines = TABLE_MATCHER.execute(this, matchers).values();
         if (lines == null || !lines.isEmpty() && lines.size() < header().size())
             return null;
@@ -533,7 +534,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public Line row(String rowName) {
         return new Line(header(), webRow(rowName), getName() + " line[" + rowName + "]");
     }
-    public Line row(Enum rowName) {
+    public Line row(Enum<?> rowName) {
         return row(getEnumValue(rowName));
     }
 
@@ -624,7 +625,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public Line column(String colName) {
         return new Line(rowHeader(), webColumn(colName), getName() + " column[" + colName + "]");
     }
-    public Line column(Enum colName) {
+    public Line column(Enum<?> colName) {
         return column(getEnumValue(colName));
     }
 

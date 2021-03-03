@@ -3,31 +3,30 @@
 <suite name="JDI-Light HTML Demo Tests">
     <test name="Common Tests">
         <classes>
-            <class name="io.github.epam.html.tests.elements.complex.table.DataConversionTests"></class>
+            <class name="io.github.epam.html.tests.elements.complex.table.DataConversionTests" />
         </classes>
     </test>
     <test name="Complex Tests">
         <classes>
-            <class name="io.github.epam.html.tests.elements.complex.table.DataConversionTests"></class>
+            <class name="io.github.epam.html.tests.elements.complex.table.DataConversionTests" />
         </classes>
     </test>
     <test name="Composite Tests">
         <classes>
-            <class name="io.github.epam.html.tests.elements.composite.FormInitTests"></class>
-            <class name="io.github.epam.html.tests.elements.composite.section.CustomSectionTests"></class>
-            <class name="io.github.epam.html.tests.elements.composite.section.CustomSectionUITests"></class>
-            <class name="io.github.epam.html.tests.elements.composite.section.ExtendedSectionTests"></class>
-            <class name="io.github.epam.html.tests.elements.composite.section.ExtendedSectionUITests"></class>
-            <class name="io.github.epam.html.tests.elements.composite.webpage.AnnotationsWebPageTests"></class>
-            <class name="io.github.epam.html.tests.elements.composite.webpage.CustomWebPageTests"></class>
-            <class name="io.github.epam.html.tests.elements.composite.webpage.CustomWebPageUITests"></class>
-            <class name="io.github.epam.html.tests.elements.composite.webpage.ExtendedWebPageTests"></class>
-            <class name="io.github.epam.html.tests.elements.composite.webpage.ExtendedWebPageUITests"></class>
+            <class name="io.github.epam.html.tests.elements.composite.FormInitTests" />
+            <class name="io.github.epam.html.tests.elements.composite.section.CustomSectionTests" />
+            <class name="io.github.epam.html.tests.elements.composite.section.CustomSectionUITests" />
+            <class name="io.github.epam.html.tests.elements.composite.section.ExtendedSectionTests" />
+            <class name="io.github.epam.html.tests.elements.composite.section.ExtendedSectionUITests" />
+            <class name="io.github.epam.html.tests.elements.composite.webpage.AnnotationsWebPageTests" />
+            <class name="io.github.epam.html.tests.elements.composite.webpage.CustomWebPageTests" />
+            <class name="io.github.epam.html.tests.elements.composite.webpage.CustomWebPageUITests" />
+            <class name="io.github.epam.html.tests.elements.composite.webpage.ExtendedWebPageTests" />
+            <class name="io.github.epam.html.tests.elements.composite.webpage.ExtendedWebPageUITests" />
         </classes>
     </test>
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener"/>
-        <listener class-name="io.github.epam.testng.SuiteListener"/>
     </listeners>
 </suite>
 

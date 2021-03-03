@@ -47,7 +47,7 @@ public interface IDataGrid<L extends PageObject, D> extends HasGrid, ICoreElemen
     default D data(String rowName) {
         return rowAsData(grid().webRow(rowName));
     }
-    default D data(Enum rowName) {
+    default D data(Enum<?> rowName) {
         return rowAsData(grid().webRow(rowName));
     }
     default List<D> allData() {
@@ -65,7 +65,7 @@ public interface IDataGrid<L extends PageObject, D> extends HasGrid, ICoreElemen
     default L line(String rowName) {
         return rowAsLine(grid().webRow(rowName));
     }
-    default L line(Enum rowName) {
+    default L line(Enum<?> rowName) {
         return rowAsLine(grid().webRow(rowName));
     }
     default List<L> lines() {

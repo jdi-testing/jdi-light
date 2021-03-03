@@ -17,6 +17,5 @@
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener"/>
         <listener class-name="io.github.epam.testng.RetryListenerClass"/>
-        <listener class-name="io.github.epam.testng.SuiteListener"/>
     </listeners>
 </suite>
