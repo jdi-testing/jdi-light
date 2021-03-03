@@ -2,7 +2,11 @@ package com.epam.jdi.light.asserts.generic.table;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.complex.table.*;
+import com.epam.jdi.light.elements.complex.table.BaseTable;
+import com.epam.jdi.light.elements.complex.table.Column;
+import com.epam.jdi.light.elements.complex.table.Line;
+import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
+import com.epam.jdi.light.elements.complex.table.matchers.ValueMatcher;
 import com.epam.jdi.tools.LinqUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -12,7 +16,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
+import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.TABLE_MATCHER;
 import static com.epam.jdi.tools.LinqUtils.isSorted;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static org.hamcrest.Matchers.*;
@@ -97,7 +101,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
      * @param matchers to compare
      */
     @JDIAction("Assert that '{name}' has at least one row that '{0}'")
-    public A rowThat(TableMatcher... matchers) {
+    public A rowThat(ColumnMatcher... matchers) {
         jdiAssert(TABLE_MATCHER.execute(table(), matchers), Matchers.is(not(Matchers.empty())));
         return (A) this;
     }
@@ -106,8 +110,9 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
      * @param matcher to compare
      */
     @JDIAction("Assert that '{name}' has at least one row that '{0}'")
-    public A rowThat(Single matcher, Column column) {
-        jdiAssert(TABLE_MATCHER.execute(table(), new TableMatcher[] {matcher.toTableMatcher(column)}), Matchers.is(not(Matchers.empty())));
+    public A rowThat(ValueMatcher matcher, Column column) {
+        jdiAssert(TABLE_MATCHER.execute(table(),
+            new ColumnMatcher[] {matcher.toTableMatcher(column)}), Matchers.is(not(Matchers.empty())));
         return (A) this;
     }
 

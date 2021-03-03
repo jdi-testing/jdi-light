@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.performance;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.AfterMethod;
