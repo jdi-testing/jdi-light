@@ -4,21 +4,27 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
-##1.3.11 (01.03.2021)
+## 1.3.11 (03.03.2021)
 * Switch to Lightsaber 2.1.13
 * Fix print column in a table matchers
+* Switch to Lightsaber 2.1.13
+* Move Table Matchers to com.epam.jdi.light.elements.complex.table.matchers and rename TableMatcher > ColumnMatcher; Single > ValueMatcher
+* Make constructors public and fields protected
+* Add TableMatchersSettings
+* Set Deprecated for old matchers
+* Fix few table logs
 
-##1.3.10 (01.03.2021)
+## 1.3.10 (01.03.2021)
 * Fix issue with actions
 * Fix Grid header locators validation
 
-##1.3.9 (28.02.2021)
+## 1.3.9 (28.02.2021)
 * Fix beforeNewPage issue
 * Fix issues with getting private fields by forms and other elements
 * Fix print enum values in reports
 * Fix print conditions
 
-##1.3.8 (21.02.2021)
+## 1.3.8 (21.02.2021)
 * Fix print table search filters
 * Fix using default and Firefox capabilities from properties file
 * Add makeScreenshot and attach to allure step for elements and WebPage
@@ -28,16 +34,16 @@
 ##1.3.7 (17.02.2021)
 * Small bug fixing in Actions helper
 
-##1.3.5-6 (09.02.2021)
+## 1.3.5-6 (09.02.2021)
 * Stability fixes for collections: Switch to Lightsaber 2.1.11
 
-##1.3.4 (04.02.2021)
+## 1.3.4 (04.02.2021)
 * Switch to Lightsaber 2.1.8
 * Correct allure WebSettings
 * Add AllureLogger steps
 * Fix issue with version of junit-provider
 
-##1.3.3 (28.01.2021)
+## 1.3.3 (28.01.2021)
 * Add should verifications and Conditions to ICoreElement
 * Add NAME_TO_LOCATOR, DEFAULT_CONTEXT, MAP_FORM
 * Improve Allure Logging
@@ -46,13 +52,13 @@
 * Add Selenoid remote run support
 * Add @MapToField annotation to map fields in forms
 
-##1.3.2 (04.01.2021)
+## 1.3.2 (04.01.2021)
 * Fix small add to WebList issue 
 
-##1.3.1 (09.11.2020)
+## 1.3.1 (09.11.2020)
 * Fixed few small internal map issues
 
-##1.3.0 (25.10.2020)
+## 1.3.0 (25.10.2020)
 * Important parallelization and stability fix
 
 ## 1.2.24 (16.10.2020)
