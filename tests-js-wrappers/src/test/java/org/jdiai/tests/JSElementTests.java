@@ -3,7 +3,9 @@ package org.jdiai.tests;
 import org.jdiai.TestInit;
 import org.jdiai.jsproducer.Json;
 import org.jdiai.jswraper.JSElement;
+import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import static org.jdiai.states.States.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+@Listeners(TestNGListener.class)
 public class JSElementTests implements TestInit {
 
     @BeforeMethod
