@@ -26,6 +26,7 @@ import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
+import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
@@ -41,9 +42,6 @@ public class StaticSite {
     // switch
     @Frame("storybook-preview-iframe")
     public static SwitchFrame switchFrame;
-
-    @Frame("storybook-preview-iframe")
-    public static SelectFrame selectFrame;
 
     @Url("/material-ui-inputs-switch--default")
     public static WebPage inputSwitchDefaultPage;
@@ -135,6 +133,9 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static CircularFrame circularFrame;
 
+    @Frame("storybook-preview-iframe")
+    public static SelectFrame selectFrame;
+
     @Url("/material-ui-inputs-select--disabled-select-view")
     public static WebPage inputSelectDisabledPage;
 
@@ -143,6 +144,19 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-select--simple-select-view")
     public static WebPage inputSelectSimplePage;
+
+    //slider
+    @Frame("storybook-preview-iframe")
+    public static SliderFrame sliderFrame;
+
+    @Url("/material-ui-sliders--default-and-disabled-sliders")
+    public static WebPage inputSliderDefaultAnfDisabledPage;
+
+    @Url("/material-ui-sliders--range-slider")
+    public static WebPage inputSliderRangePage;
+
+    @Url("/material-ui-sliders--vertical-slider")
+    public static WebPage inputSliderVerticalPage;
 
     // surfaces
     // accordion
@@ -267,7 +281,6 @@ public class StaticSite {
     public static WebPage utilsPopoverHoverPage;
 
     // login page
-
     @UI("#login-form")
     public static Form<User> loginForm;
 
