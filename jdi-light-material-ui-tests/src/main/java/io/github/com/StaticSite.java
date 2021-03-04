@@ -10,30 +10,14 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
-import io.github.com.pages.displaydata.BadgeFrame;
-import io.github.com.pages.inputs.ButtonGroupFrame;
-import io.github.com.pages.displaydata.TypographyFrame;
-import io.github.com.pages.inputs.FabFrame;
-import io.github.com.pages.displaydata.MaterialIconFrame;
-import io.github.com.pages.displaydata.TooltipFrame;
-import io.github.com.pages.displaydata.InsetDividerFrame;
-import io.github.com.pages.displaydata.VerticalDividerFrame;
-import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
-import io.github.com.pages.feedback.SimpleSnackbarFrame;
-import io.github.com.pages.feedback.BackdropFrame;
-import io.github.com.pages.feedback.CircularFrame;
-import io.github.com.pages.inputs.SelectFrame;
-import io.github.com.pages.inputs.ButtonFrame;
-import io.github.com.pages.inputs.CheckboxFrame;
-import io.github.com.pages.inputs.SplitButtonGroupFrame;
-import io.github.com.pages.inputs.SliderFrame;
-import io.github.com.pages.inputs.SwitchFrame;
-import io.github.com.pages.inputs.TextFieldFrame;
+import io.github.com.pages.displaydata.*;
+import io.github.com.pages.feedback.*;
+import io.github.com.pages.inputs.*;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.PaperFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
-import io.github.com.pages.surfaces.PaperFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -116,22 +100,6 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-button-group--split-button")
     public static WebPage inputButtonGroupSplitPage;
-
-    // circular
-    @Url("/material-ui-feedback-progress--circular-indeterminate")
-    public static WebPage circularIndeterminatePage;
-
-    @Url("/material-ui-feedback-progress--circular-determinate")
-    public static WebPage circularDeterminatePage;
-
-    @Url("/material-ui-feedback-progress--circular-integration")
-    public static WebPage circularIntegrationPage;
-
-    @Url("/material-ui-feedback-progress--circular-with-value-label")
-    public static WebPage circularWithValueLabel;
-
-    @Frame("storybook-preview-iframe")
-    public static CircularFrame circularFrame;
 
     @Frame("storybook-preview-iframe")
     public static SelectFrame selectFrame;
@@ -241,6 +209,44 @@ public class StaticSite {
 
     @Url("/material-ui-feedback-backdrop--default-backdrop")
     public static WebPage feedbackBackdropDefaultPage;
+
+    // circular
+    @Url("/material-ui-feedback-progress--circular-indeterminate")
+    public static WebPage circularIndeterminatePage;
+
+    @Url("/material-ui-feedback-progress--circular-determinate")
+    public static WebPage circularDeterminatePage;
+
+    @Url("/material-ui-feedback-progress--circular-integration")
+    public static WebPage circularIntegrationPage;
+
+    @Url("/material-ui-feedback-progress--circular-with-value-label")
+    public static WebPage circularWithValueLabel;
+
+    @Frame("storybook-preview-iframe")
+    public static CircularFrame circularFrame;
+
+    // linear
+    @Frame("storybook-preview-iframe")
+    public static LinearFrame linearFrame;
+
+    @Url("/material-ui-feedback-progress--linear-indeterminate")
+    public static WebPage linearIndeterminatePage;
+
+    @Url("/material-ui-feedback-progress--linear-determinate")
+    public static WebPage linearDeterminatePage;
+
+    @Url("/material-ui-feedback-progress--linear-buffer")
+    public static WebPage linearBufferPage;
+
+    @Url("/material-ui-feedback-progress--linear-with-value-label")
+    public static WebPage linearWithLabelPage;
+
+    @Url("/material-ui-feedback-progress--customized-progress-bars")
+    public static WebPage customisedProgressPage;
+
+    @Url("/material-ui-feedback-progress--delaying-appearance")
+    public static WebPage delayingAppearancePage;
 
     // snackbar
     @Frame("storybook-preview-iframe")
