@@ -35,6 +35,10 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
+      - name: Code Compile
+        id: js-driver-compile
+        run: mvn -ntp install -DskipTests
+
       - name: JS Driver Tests
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
