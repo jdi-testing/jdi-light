@@ -202,6 +202,18 @@ public class StaticSite {
     @Url("/material-ui-data-display-material-icons--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
 
+    @Frame("storybook-preview-iframe")
+    public static ModalFrame modalFrame;
+
+    @Url("/material-ui-utils-modal--simple-modal")
+    public static WebPage simpleModalPage;
+
+    @Url("/material-ui-utils-modal--transitions-modal")
+    public static WebPage transitionsModalPage;
+
+    @Url("/story/material-ui-utils-modal--spring-modal")
+    public static WebPage springModalPage;
+
     // typography
     @Frame("storybook-preview-iframe")
     public static TypographyFrame typographyFrame;
