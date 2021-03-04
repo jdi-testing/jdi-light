@@ -2,6 +2,7 @@ package org.jdiai.tests;
 
 import com.epam.jdi.tools.DataClass;
 import com.google.gson.JsonObject;
+import org.jdiai.TestInit;
 import org.jdiai.entities.User;
 import org.jdiai.states.States;
 import org.testng.annotations.BeforeMethod;
@@ -16,7 +17,7 @@ import static org.jdiai.tests.TestData.SearchResultsJson;
 import static org.jdiai.tools.JSTalk.$;
 import static org.testng.AssertJUnit.assertEquals;
 
-public class ListEntitiesTest implements FlowInit {
+public class ListEntitiesTest implements TestInit {
     @BeforeMethod
     public void before() {
         States.logout();

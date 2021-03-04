@@ -51,23 +51,27 @@ public class PerfStatistic {
     }
     private static double min(List<Long> selenium, List<Long> js) {
         double min = Double.MAX_VALUE;
+        double prev = -1;
         for (int i = 0; i < js.size(); i++) {
             double ratio = (double) selenium.get(i)/js.get(i);
             if (min > ratio) {
+                prev = min;
                 min = ratio;
             }
         }
-        return min;
+        return prev;
     }
     private static double max(List<Long> selenium, List<Long> js) {
         double max = -1;
+        double prev = -1;
         for (int i = 0; i < js.size(); i++) {
             double ratio = (double) selenium.get(i) / js.get(i);
             if (max < ratio) {
+                prev = max;
                 max = ratio;
             }
         }
-        return max;
+        return prev;
     }
     private static LongStream toLong(Collection<Long> collection) {
         return collection.stream().mapToLong(a -> a);

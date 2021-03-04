@@ -24,6 +24,8 @@ public class JSTests implements TestInit {
     final int index = 385;
     final int repeat = 1;
     static String totalResult = "";
+    final int lightTestsCount = 100;
+    final int heavyTestsCount = 10;
 
     @BeforeMethod
     public void before() {
@@ -35,7 +37,7 @@ public class JSTests implements TestInit {
         totalResult += "getText: " + testScenario(
             () -> driver().findElement(By.cssSelector("#users-table tr>th")).getText(),
             () -> $("#users-table tr>th").getText(),
-        200) + "\n";
+        lightTestsCount) + "\n";
     }
 
     @Test(invocationCount = repeat)
@@ -45,7 +47,7 @@ public class JSTests implements TestInit {
                 .findElement(By.xpath(".//tr[2]"))
                 .findElement(By.tagName("td")).getText(),
             () -> $("#users-table", ".//tr[2]", "td").getText(),
-            200) + "\n";
+        lightTestsCount) + "\n";
     }
     @Test(invocationCount = repeat)
     public void getAllAttributes() {
@@ -58,7 +60,7 @@ public class JSTests implements TestInit {
             return "data-toggle:"+dt+",data-placement:"+dp+",title:"+title+",class:"+cl;
         },
         () -> $(".sidebar-tooltip").getAllAttributes().toString(),
-        200) + "\n";
+        lightTestsCount) + "\n";
     }
     @Test(invocationCount = repeat)
     public void getMultiData() {
@@ -76,7 +78,7 @@ public class JSTests implements TestInit {
                 "'font': styles.fontSize, 'bg-color': styles.backgroundColor }");
             return data.toString();
         },
-        200) + "\n";
+        lightTestsCount) + "\n";
     }
     @Test(invocationCount = repeat)
     public void listGetValuesTest() {
@@ -84,7 +86,7 @@ public class JSTests implements TestInit {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList());
         }, () -> $("#users-table tr>td:first-child").values(),
-        30) + "\n";
+        heavyTestsCount) + "\n";
     }
     @Test(invocationCount = repeat)
     public void getValueByIndexTest() {
@@ -92,7 +94,7 @@ public class JSTests implements TestInit {
             () -> driver().findElements(By.cssSelector("#users-table tr"))
                 .get(index).findElement(By.xpath(".//td[3]")).getText(),
             () -> $("#users-table tr").get(index).find("td").get(2).getText(),
-        200) + "\n";
+        lightTestsCount) + "\n";
     }
     @Test(invocationCount = repeat)
     public void getValueByNameTopTest() {
@@ -108,7 +110,7 @@ public class JSTests implements TestInit {
             }).findFirst().get();
             return row.findElement(By.xpath(".//td[3]")).getText();
         }, () -> $("#users-table tr").findFirst("td", textEquals(atTop)).find(".//td[3]").getText(),
-    30) + "\n";
+        heavyTestsCount) + "\n";
     }
 
 
@@ -126,7 +128,7 @@ public class JSTests implements TestInit {
             }).findFirst().get();
             return row.findElement(By.xpath(".//td[3]")).getText();
         }, () -> $("#users-table tr").findFirst("td", textEquals(atBottom)).find(".//td[3]").getText(),
-        30) + "\n";
+        heavyTestsCount) + "\n";
     }
 
     @AfterClass

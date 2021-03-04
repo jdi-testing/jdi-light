@@ -1,5 +1,6 @@
 package org.jdiai.tests;
 
+import org.jdiai.TestInit;
 import org.jdiai.entities.User;
 import org.jdiai.locators.By;
 import org.testng.annotations.Test;
@@ -11,7 +12,7 @@ import static org.jdiai.tools.JSTalk.$;
 import static org.jdiai.tools.JSTalk.openPage;
 import static org.testng.AssertJUnit.assertEquals;
 
-public class FillFormTest implements FlowInit {
+public class FillFormTest implements TestInit {
 
     @Test
     public void loginTest() {

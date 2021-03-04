@@ -241,16 +241,14 @@ public class JSSmartTests implements TestInit {
     @Test
     public void valueTest() {
         boolean isVisible = $(TextInfo.class, "#user-icon").getValue(
-            "const styles = getComputedStyle(element);\n" +
-                    "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
     @Test
     public void valueLocatorListTest() {
         boolean isVisible = $(TextInfo.class, withParent("#user-icon")).getValue(
-            "const styles = getComputedStyle(element);\n" +
-                    "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
