@@ -43,9 +43,6 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static SwitchFrame switchFrame;
 
-    @Frame("storybook-preview-iframe")
-    public static SelectFrame selectFrame;
-
     @Url("/material-ui-inputs-switch--default")
     public static WebPage inputSwitchDefaultPage;
 
@@ -135,6 +132,9 @@ public class StaticSite {
 
     @Frame("storybook-preview-iframe")
     public static CircularFrame circularFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static SelectFrame selectFrame;
 
     @Url("/material-ui-inputs-select--disabled-select-view")
     public static WebPage inputSelectDisabledPage;
