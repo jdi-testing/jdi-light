@@ -22,6 +22,7 @@ import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.feedback.CircularFrame;
+import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
@@ -40,6 +41,9 @@ public class StaticSite {
     // switch
     @Frame("storybook-preview-iframe")
     public static SwitchFrame switchFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static SelectFrame selectFrame;
 
     @Url("/material-ui-inputs-switch--default")
     public static WebPage inputSwitchDefaultPage;
@@ -130,6 +134,15 @@ public class StaticSite {
 
     @Frame("storybook-preview-iframe")
     public static CircularFrame circularFrame;
+
+    @Url("/material-ui-inputs-select--disabled-select-view")
+    public static WebPage inputSelectDisabledPage;
+
+    @Url("/material-ui-inputs-select--multiple-select-view")
+    public static WebPage inputSelectMultiplePage;
+
+    @Url("/material-ui-inputs-select--simple-select-view")
+    public static WebPage inputSelectSimplePage;
 
     // surfaces
     // accordion
@@ -254,6 +267,7 @@ public class StaticSite {
     public static WebPage utilsPopoverHoverPage;
 
     // login page
+
     @UI("#login-form")
     public static Form<User> loginForm;
 
