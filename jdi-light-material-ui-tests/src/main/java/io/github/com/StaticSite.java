@@ -15,6 +15,7 @@ import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.GroupCheckBoxFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
@@ -97,6 +98,12 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
+
+    @Frame("storybook-preview-iframe")
+    public static GroupCheckBoxFrame groupCheckBoxFrame;
+
+    @Url("/story/material-ui-inputs-checkbox--group")
+    public static WebPage groupCheckBoxPage;
 
     // Display data
     // material icon
