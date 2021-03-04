@@ -295,15 +295,6 @@ public class StaticSite {
 
     // login page
 
-    @Frame("storybook-preview-iframe")
-    public static ModalFrame modalFrame;
-
-    @Url("/material-ui-utils-modal--simple-modal")
-    public static WebPage simpleModalPage;
-
-    @Url("/material-ui-utils-modal--transitions-modal")
-    public static WebPage transitionsModalPage;
-
     @Url("/story/material-ui-utils-modal--server-modal")
     public static WebPage serverSideModalPage;
 
