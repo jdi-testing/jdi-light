@@ -17,6 +17,10 @@ public class JSTalk {
     public static WebDriver driver() {
         return DRIVER.get();
     }
+    public static void openSite(String url) {
+        DOMAIN = url;
+        openSite();
+    }
     public static void openSite() {
         openPage(DOMAIN);
     }

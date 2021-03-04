@@ -17,6 +17,8 @@
         <module>js-talk</module>
         <module>tests-js-driver</module>
         <module>tests-js-wrappers</module>
+        <module>tests-js-talk</module>
+        <module>tests-js-e2e</module>
     </modules>
 
     <!--build>

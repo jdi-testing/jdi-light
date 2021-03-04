@@ -12,9 +12,9 @@ public class ElementInfo extends DataClass<ElementInfo> {
     public String text;
     @GetValue("innerHTML")
     public String html;
-    @GetValue("style.visibility")
+    @GetValue("styles.visibility")
     public String visibility;
-    @GetValue("style.fontSize")
+    @GetValue("styles.fontSize")
     public String fontSize;
     @GetValue("!!{element}.selected")
     public String selected;

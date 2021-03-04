@@ -278,7 +278,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
     public void highlight(String color) {
         show();
-        set("style.border='3px dashed "+color+"'");
+        set("styles.border='3px dashed "+color+"'");
     }
     public void highlight() {
         highlight("red");
@@ -543,8 +543,8 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         String value = field.isAnnotationPresent(GetValue.class)
             ? field.getAnnotation(GetValue.class).value()
             : "innerText";
-        if (value.contains("style.")) {
-            return value.replace("style", "getComputedStyle(" +  element + ")");
+        if (value.contains("styles.")) {
+            return value.replace("styles", "getComputedStyle(" +  element + ")");
         } else if (value.contains("{element}")) {
             return value.replace("{element}", element);
         }

@@ -32,8 +32,8 @@ public class JSWrappersUtils {
         String value = field.isAnnotationPresent(GetValue.class)
                 ? field.getAnnotation(GetValue.class).value()
                 : "innerText";
-        if (value.contains("style.")) {
-            return value.replace("style", "getComputedStyle(" +  element + ")");
+        if (value.contains("styles.")) {
+            return value.replace("styles", "getComputedStyle(" +  element + ")");
         } else if (value.contains("{element}")) {
             return value.replace("{element}", element);
         }

@@ -50,7 +50,7 @@ public class SmartBuilderActions implements IBuilderActions {
             (collector.contains("return") ? collector : format(LIST_TO_RESULT, collector));
     }
     private String addBeforeReturn(String collector) {
-        return collector.contains("styles.") && !collector.contains("getComputedStyle")
+        return collector.contains("styles.")
             ? "const styles = getComputedStyle(element);\n" : "";
     }
 }

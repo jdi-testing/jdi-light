@@ -129,6 +129,7 @@ public class JSBuilder implements IJSBuilder {
     }
     protected String getCollector(String collectResult) {
         if (smartStringify) {
+            if (collectResult.contains(""))
             if (collectResult.trim().contains("return {") && collectResult.trim().contains("}")) {
                 return collectResult.replace("return {", "return JSON.stringify({")
                     .replace("}", "})");

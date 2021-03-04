@@ -31,8 +31,8 @@ public class Pages {
     }
 
     public static WebDriver chromeDriver() {
-        // System.setProperty("webdriver.chrome.driver", "/Users/romaniovlev/Downloads/chromedriver");
-        System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/Users/romaniovlev/Downloads/chromedriver");
+        // System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         return new ChromeDriver(options);

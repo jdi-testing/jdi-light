@@ -4,30 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.jdiai.jswraper.JSWrapper.DRIVER;
+import static org.jdiai.tools.JSTalk.DOMAIN;
 
 public class Pages {
-    public static final String DOMAIN = "https://jdi-testing.github.io/jdi-light";
     // public static final String DOMAIN = "http://localhost:8000";
     public static String HOME_PAGE = DOMAIN + "/index.html";
-    public static String USERS_PAGE = DOMAIN + "/user-table.html";
-    public static String SIMPLE_PAGE = DOMAIN + "/simple-table.html";
-
-    public static void openSite() {
-        openPage(DOMAIN);
-    }
-    public static void openPage(String url) {
-        if (isEmpty(DOMAIN) || url.contains("//")) {
-            driver().get(url);
-        }
-        else {
-            driver().get(DOMAIN + url);
-        }
-    }
-    public static WebDriver driver() {
-        return DRIVER.get();
-    }
+    public static String PERFORMANCE_PAGE = DOMAIN + "/performance.html";
 
     public static WebDriver chromeDriver() {
         System.setProperty("webdriver.chrome.driver", "/Users/romaniovlev/Downloads/chromedriver");
