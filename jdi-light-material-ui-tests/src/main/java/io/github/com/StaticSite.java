@@ -22,10 +22,10 @@ import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.feedback.CircularFrame;
+import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
-import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
@@ -43,6 +43,9 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static SwitchFrame switchFrame;
 
+    @Frame("storybook-preview-iframe")
+    public static SelectFrame selectFrame;
+
     @Url("/material-ui-inputs-switch--default")
     public static WebPage inputSwitchDefaultPage;
 
@@ -51,6 +54,8 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
+
+    // button
     @Frame("storybook-preview-iframe")
     public static ButtonFrame buttonFrame;
 
