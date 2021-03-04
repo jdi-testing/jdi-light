@@ -32,6 +32,9 @@ import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 import io.github.com.pages.utils.ModalFrame;
+import io.github.com.pages.utils.PopoverClickFrame;
+import io.github.com.pages.utils.PopoverHoverFrame;
+import io.github.com.pages.utils.TransitionFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
@@ -289,8 +292,8 @@ public class StaticSite {
     @Url("/material-ui-utils-modal--transitions-modal")
     public static WebPage transitionsModalPage;
 
-    @Url("/story/material-ui-utils-modal--spring-modal")
-    public static WebPage springModalPage;
+    @Url("/story/material-ui-utils-modal--server-modal")
+    public static WebPage serverSideModalPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
