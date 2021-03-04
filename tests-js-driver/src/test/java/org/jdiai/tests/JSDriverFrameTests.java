@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static java.util.Arrays.asList;
-import static org.jdiai.Pages.driver;
+import static org.jdiai.DriverManager.driver;
 import static org.jdiai.states.States.atHomePage;
 import static org.jdiai.states.States.logout;
 import static org.testng.Assert.assertEquals;

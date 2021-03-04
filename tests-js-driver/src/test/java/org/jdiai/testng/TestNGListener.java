@@ -18,7 +18,7 @@ import java.util.Date;
 import static com.epam.jdi.tools.LinqUtils.last;
 import static java.lang.String.format;
 import static java.lang.System.currentTimeMillis;
-import static org.jdiai.Pages.driver;
+import static org.jdiai.DriverManager.driver;
 
 public class TestNGListener implements IInvokedMethodListener {
     private Safe<Long> start = new Safe<>(0L);

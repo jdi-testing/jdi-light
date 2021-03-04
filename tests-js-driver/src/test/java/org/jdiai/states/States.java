@@ -2,7 +2,9 @@ package org.jdiai.states;
 
 import org.openqa.selenium.Cookie;
 
-import static org.jdiai.Pages.*;
+import static org.jdiai.DriverManager.driver;
+import static org.jdiai.Pages.HOME_PAGE;
+import static org.jdiai.Pages.openPage;
 
 public class States {
 

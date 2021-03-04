@@ -1,16 +1,14 @@
 package org.jdiai;
 
-import com.epam.jdi.tools.Safe;
 import org.jdiai.jsdriver.JSDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static java.lang.Runtime.getRuntime;
 import static java.util.Arrays.stream;
+import static org.jdiai.DriverManager.*;
 import static org.jdiai.LocatorUtils.defineLocator;
-import static org.jdiai.Pages.*;
+import static org.jdiai.Pages.openSite;
 import static org.jdiai.jsbuilder.JSBuilder.LOG_QUERY;
 
 public interface TestInit {
@@ -42,17 +40,4 @@ public interface TestInit {
         killDrivers();
     }
 
-    default void initDriver() {
-        DRIVER = new Safe<>(() -> {
-            WebDriver driver = chromeDriver();
-            driver.get(HOME_PAGE);
-            driver.manage().window().maximize();
-            return driver;
-        });
-    }
-    default void killDrivers() {
-        try {
-            getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
-        } catch (Exception ignore) { }
-    }
 }

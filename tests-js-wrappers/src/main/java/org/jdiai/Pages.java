@@ -1,11 +1,7 @@
 package org.jdiai;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.jdiai.jswraper.JSWrapper.DRIVER;
+import static org.jdiai.jswraper.JSWrapper.driver;
 
 public class Pages {
     public static final String DOMAIN = "https://jdi-testing.github.io/jdi-light";
@@ -24,16 +20,5 @@ public class Pages {
         else {
             driver().get(DOMAIN + url);
         }
-    }
-    public static WebDriver driver() {
-        return DRIVER.get();
-    }
-
-    public static WebDriver chromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "/Users/romaniovlev/Downloads/chromedriver");
-        //System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        return new ChromeDriver(options);
     }
 }

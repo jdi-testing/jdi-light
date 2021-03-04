@@ -45,6 +45,24 @@ jobs:
         continue-on-error: true
         run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-driver --fail-at-end
 
+      - name: JS Wrappers Tests
+        if: steps.allure-setup.outcome == 'success'
+        timeout-minutes: 10
+        continue-on-error: true
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-wrappers --fail-at-end
+
+      - name: JS Talk Tests
+        if: steps.allure-setup.outcome == 'success'
+        timeout-minutes: 10
+        continue-on-error: true
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-talk --fail-at-end
+
+      - name: JS E2E Tests
+        if: steps.allure-setup.outcome == 'success'
+        timeout-minutes: 10
+        continue-on-error: true
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-e2e --fail-at-end
+
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
