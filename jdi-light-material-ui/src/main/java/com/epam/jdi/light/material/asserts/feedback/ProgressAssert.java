@@ -12,80 +12,59 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ProgressAssert extends UIAssert<ProgressAssert, ProgressBar> {
 
     @JDIAction(value = "Get '{name}' value '{0}'")
-    public ProgressAssert value(Matcher<Integer> value) throws Exception {
-        jdiAssert(element().value(), value);
+    public ProgressAssert value(Matcher<Integer> value) {
+        jdiAssert(element().getValueNow(), value);
         return this;
     }
 
-    public ProgressAssert value(int value) throws Exception {
+    public ProgressAssert value(int value) {
         return value(Matchers.is(value));
     }
 
     @JDIAction("Assert that '{name}' is indeterminate")
-    public ProgressAssert indeterminate() {
+    public void indeterminate() {
         boolean isIndeterminate = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isIndeterminate());
         jdiAssert(isIndeterminate, Matchers.is(true));
-        return this;
     }
 
     @JDIAction("Assert that '{name}' is determinate")
-    public ProgressAssert determinate() {
+    public void determinate() {
         boolean isDeterminate = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDeterminate());
         jdiAssert(isDeterminate, Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is in progress")
-    public ProgressAssert inProgress() throws Exception {
-        boolean inProgress = element().inProgress();
-        jdiAssert(inProgress, Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is shrinkDisabled")
-    public ProgressAssert shrinkDisabled() throws Exception {
-        boolean isShrinkDisabled = element().isShrinkDisabled();
-        jdiAssert(isShrinkDisabled, Matchers.is(true));
-        return this;
     }
 
     @JDIAction(value = "Get '{name}' min value {0}")
-    public ProgressAssert min(Matcher<Integer> condition) {
-        jdiAssert(element().min(), condition);
-        return this;
+    public void min(Matcher<Integer> condition) {
+        jdiAssert(element().getMinValue(), condition);
     }
 
-    public ProgressAssert min(int minValue) {
-        return min(Matchers.is(minValue));
+    public void min(int minValue) {
+        min(Matchers.is(minValue));
     }
 
     @JDIAction(value = "Get '{name}' max value {0}")
-    public ProgressAssert max(Matcher<Integer> condition) {
-        jdiAssert(element().max(), condition);
-        return this;
+    public void max(Matcher<Integer> condition) {
+        jdiAssert(element().getMaxValue(), condition);
     }
 
-    public ProgressAssert max(int maxValue) {
-        return max(Matchers.is(maxValue));
+    public void max(int maxValue) {
+        max(Matchers.is(maxValue));
     }
 
     @JDIAction("Assert that '{name}' has correct color")
-    public ProgressAssert color(String color) {
-        jdiAssert(element().color(color), Matchers.is(true));
-        return this;
+    public void color(String color) {
+        jdiAssert(element().isColorCorrect(color), Matchers.is(true));
     }
 
     @JDIAction("Assert that '{name}' has correct colors")
-    public ProgressAssert color(String bar1Color, String bar2Color) {
+    public void color(String bar1Color, String bar2Color) {
         jdiAssert(element().bufferColors(bar1Color, bar2Color), Matchers.is(true));
-        return this;
     }
 
     @JDIAction("Assert that '{name}' is buffer")
-    public ProgressAssert buffer() {
+    public void buffer() {
         jdiAssert(element().isBuffer(), Matchers.is(true));
-        return this;
     }
 }

@@ -3,7 +3,12 @@ package io.github.epam.material.tests.feedback;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
+import static io.github.com.StaticSite.circularFrame;
+import static io.github.com.StaticSite.circularIndeterminatePage;
+import static io.github.com.StaticSite.circularDeterminatePage;
+import static io.github.com.StaticSite.circularIntegrationPage;
+import static io.github.com.StaticSite.circularWithValueLabel;
+import static io.github.com.StaticSite.delayingAppearancePage;
 
 public class CircularTests extends TestsInit {
     private final String defaultColor = "rgba(63, 81, 181, 1)";
@@ -15,7 +20,7 @@ public class CircularTests extends TestsInit {
     }
 
     @Test
-    public void verifyDeterminateStagesCircularTest() throws Exception {
+    public void verifyDeterminateStagesCircularTest() {
         circularDeterminatePage.open();
         circularFrame.circularDefault.is().determinate();
         circularFrame.circularDefault.has().color(defaultColor);
@@ -23,14 +28,12 @@ public class CircularTests extends TestsInit {
         circularFrame.circularSecond.has().value(50);
         circularFrame.circularDeterminateThreeQ.has().value(75);
         circularFrame.circularDeterminateFull.has().value(100);
-        circularFrame.circularDeterminateWithStep10.is().inProgress();
     }
 
     @Test
-    public void verifyDeterminateShrinkCircularTest() throws Exception {
+    public void verifyDeterminateShrinkCircularTest() {
         circularDeterminatePage.open();
         circularFrame.circularIndeterminateDisableShrink.is().indeterminate();
-        circularFrame.circularIndeterminateDisableShrink.is().shrinkDisabled();
         circularFrame.circularIndeterminateDisableShrink.has().color(defaultColor);
     }
 
@@ -39,8 +42,8 @@ public class CircularTests extends TestsInit {
         circularIntegrationPage.open();
         circularFrame.acceptTermsButton.click();
         circularFrame.circularDefault.is().indeterminate();
-        circularFrame.circularDefault.base().timer().wait(() -> circularFrame.circularDefault.isHidden());
-        circularFrame.acceptTermsIconButton.click();
+        circularFrame.circularDefault.base().timer().wait(() -> circularFrame.acceptTermsButton.isEnabled());
+        circularFrame.acceptTermsButton.click();
         circularFrame.circularSecond.is().indeterminate();
     }
 
@@ -53,7 +56,7 @@ public class CircularTests extends TestsInit {
     }
 
     @Test
-    public void verifyDelayingAppearanceTest()  {
+    public void verifyDelayingAppearanceTest() {
         delayingAppearancePage.open();
         circularFrame.loadingButton.click();
         circularFrame.circularDefault.is().indeterminate();

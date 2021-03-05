@@ -3,7 +3,12 @@ package io.github.epam.material.tests.feedback;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
+import static io.github.com.StaticSite.linearFrame;
+import static io.github.com.StaticSite.linearIndeterminatePage;
+import static io.github.com.StaticSite.linearDeterminatePage;
+import static io.github.com.StaticSite.linearBufferPage;
+import static io.github.com.StaticSite.linearWithLabelPage;
+import static io.github.com.StaticSite.customisedProgressPage;
 
 public class LinearTests extends TestsInit {
     private final String defaultColor = "rgba(63, 81, 181, 1)";
@@ -15,24 +20,21 @@ public class LinearTests extends TestsInit {
     public void verifyIndeterminateLinearTest() {
         linearIndeterminatePage.open();
         linearFrame.linearDefault.is().indeterminate();
-        linearFrame.linearDefault.is().indeterminate();
     }
 
     @Test
-    public void verifyDeterminateLinearTest() throws Exception {
+    public void verifyDeterminateLinearTest() {
         linearDeterminatePage.open();
         linearFrame.linearDefault.is().determinate();
-        linearFrame.linearDefault.is().inProgress();
         linearFrame.linearDefault.has().max(100);
         linearFrame.linearDefault.has().min(0);
         linearFrame.linearDefault.has().color(defaultColor);
     }
 
     @Test
-    public void verifyBufferProgressBarTest() throws Exception {
+    public void verifyBufferProgressBarTest() {
         linearBufferPage.open();
         linearFrame.linearDefault.is().buffer();
-        linearFrame.linearDefault.inProgress();
         linearFrame.linearDefault.has().max(100);
         linearFrame.linearDefault.has().min(0);
         linearFrame.linearDefault.has().color(defaultColor, bufferBar2Color);
@@ -47,7 +49,7 @@ public class LinearTests extends TestsInit {
     }
 
     @Test
-    public void verifyCustomizedProgressTest() throws Exception {
+    public void verifyCustomizedProgressTest() {
         customisedProgressPage.open();
         linearFrame.circularTop.has().color(customColorTop);
         linearFrame.circularBackground.has().color(customColorBack);

@@ -9,11 +9,9 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JDIBufferLinear {
+public @interface JDIProgressBar {
 
     @MarkupLocator String root() default "";
-
-    @MarkupLocator String dashed() default "";
 
     @MarkupLocator String bar1() default "";
 
