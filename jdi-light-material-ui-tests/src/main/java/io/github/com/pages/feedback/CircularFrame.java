@@ -2,38 +2,40 @@ package io.github.com.pages.feedback;
 
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.annotations.JDIProgressBar;
 import com.epam.jdi.light.material.elements.displaydata.Typography;
-import com.epam.jdi.light.material.elements.feedback.Circular;
+import com.epam.jdi.light.material.elements.feedback.ProgressBar;
 import com.epam.jdi.light.material.elements.inputs.Button;
 
 public class CircularFrame extends Section {
 
-    @UI("(//*[contains(@class, 'MuiCircularProgress-root')])[1]")
-    public Circular circularDefault;
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[1]")
+    public ProgressBar circularDefault;
 
-    @UI("(//*[contains(@class, 'MuiCircularProgress-root')])[2]")
-    public Circular circularSecond;
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[2]")
+    public ProgressBar circularSecond;
 
-    @UI("(//*[contains(@class, 'MuiCircularProgress-root')])[3]")
-    public Circular circularDeterminateThreeQ;
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[3]")
+    public ProgressBar circularDeterminateThreeQ;
 
-    @UI("(//*[contains(@class, 'MuiCircularProgress-root')])[4]")
-    public Circular circularDeterminateFull;
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[4]")
+    public ProgressBar circularDeterminateFull;
 
-    @UI("(//*[contains(@class, 'MuiCircularProgress-root')])[5]")
-    public Circular circularDeterminateWithStep10;
-
-    @UI("(//*[contains(@class, 'MuiCircularProgress-root')])[6]")
-    public Circular circularIndeterminateDisableShrink;
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[6]")
+    public ProgressBar circularIndeterminateDisableShrink;
 
     @UI(".MuiButton-root")
     public Button acceptTermsButton;
 
-    @UI(".MuiFab-root")
-    public Button acceptTermsIconButton;
-
     @UI(".MuiTypography-root")
     public Typography circularTypography;
+
+    @UI("(//*[contains(@class, 'MuiButton-root')])[1]")
+    public Button loadingButton;
+
+    @UI("(//*[contains(@class, 'MuiButton-root')])[2]")
+    public Button simulateLoadButton;
 }
+
 
 

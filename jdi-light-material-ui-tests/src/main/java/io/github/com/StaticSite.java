@@ -22,6 +22,7 @@ import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.feedback.CircularFrame;
+import io.github.com.pages.feedback.LinearFrame;
 import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.CheckboxFrame;
@@ -116,22 +117,6 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-button-group--split-button")
     public static WebPage inputButtonGroupSplitPage;
-
-    // circular
-    @Url("/material-ui-feedback-progress--circular-indeterminate")
-    public static WebPage circularIndeterminatePage;
-
-    @Url("/material-ui-feedback-progress--circular-determinate")
-    public static WebPage circularDeterminatePage;
-
-    @Url("/material-ui-feedback-progress--circular-integration")
-    public static WebPage circularIntegrationPage;
-
-    @Url("/material-ui-feedback-progress--circular-with-value-label")
-    public static WebPage circularWithValueLabel;
-
-    @Frame("storybook-preview-iframe")
-    public static CircularFrame circularFrame;
 
     @Frame("storybook-preview-iframe")
     public static SelectFrame selectFrame;
@@ -241,6 +226,44 @@ public class StaticSite {
 
     @Url("/material-ui-feedback-backdrop--default-backdrop")
     public static WebPage feedbackBackdropDefaultPage;
+
+    // circular
+    @Url("/material-ui-feedback-progress--circular-indeterminate")
+    public static WebPage circularIndeterminatePage;
+
+    @Url("/material-ui-feedback-progress--circular-determinate")
+    public static WebPage circularDeterminatePage;
+
+    @Url("/material-ui-feedback-progress--circular-integration")
+    public static WebPage circularIntegrationPage;
+
+    @Url("/material-ui-feedback-progress--circular-with-value-label")
+    public static WebPage circularWithValueLabel;
+
+    @Frame("storybook-preview-iframe")
+    public static CircularFrame circularFrame;
+
+    // linear
+    @Frame("storybook-preview-iframe")
+    public static LinearFrame linearFrame;
+
+    @Url("/material-ui-feedback-progress--linear-indeterminate")
+    public static WebPage linearIndeterminatePage;
+
+    @Url("/material-ui-feedback-progress--linear-determinate")
+    public static WebPage linearDeterminatePage;
+
+    @Url("/material-ui-feedback-progress--linear-buffer")
+    public static WebPage linearBufferPage;
+
+    @Url("/material-ui-feedback-progress--linear-with-value-label")
+    public static WebPage linearWithLabelPage;
+
+    @Url("/material-ui-feedback-progress--customized-progress-bars")
+    public static WebPage customisedProgressPage;
+
+    @Url("/material-ui-feedback-progress--delaying-appearance")
+    public static WebPage delayingAppearancePage;
 
     // snackbar
     @Frame("storybook-preview-iframe")
