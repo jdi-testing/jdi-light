@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="WINDOWS-1251"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JSDriver Tests" parallel="methods" thread-count="1">
+    <test name="Tests">
+        <packages>
+            <package name="org.jdiai.tests.*"/>
+        </packages>
+    </test>
+    <listeners>
+        <listener class-name="org.jdiai.testng.TestNGListener" />
+        <listener class-name="org.jdiai.testng.RetryListener" />
+    </listeners>
+</suite>

@@ -6,51 +6,19 @@
     <modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.epam.jdi.tools</groupId>
-    <artifactId>js-driver</artifactId>
+    <artifactId>js-driver-framework</artifactId>
 	<version>1.0.0</version>
     <name>JS WebDriver</name>
-    <packaging>jar</packaging>
-	
-    <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>[3.141.59,3.999.0)</version>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.jdi.tools</groupId>
-            <artifactId>jdi-light-saber</artifactId>
-            <version>2.1.11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>[7.3.0,)</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <packaging>pom</packaging>
 
-    <build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
-                <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-            </plugin>
-		</plugins>
-    </build>
+    <modules>
+        <module>js-driver</module>
+        <module>js-wrappers</module>
+        <module>js-talk</module>
+        <module>tests-js-driver</module>
+        <module>tests-js-wrappers</module>
+        <module>tests-js-talk</module>
+        <module>tests-js-e2e</module>
+    </modules>
+
 </project>

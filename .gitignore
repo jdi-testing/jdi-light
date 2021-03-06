@@ -6,3 +6,4 @@ target/
 .logs/
 *.xlsx
 *.log
+.DS_Store
