@@ -109,12 +109,12 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
         return css(css, Matchers.is(value));
     }
 
-    @JDIAction("Assert that '{name}' css class {0}")
+    @JDIAction("Assert that '{name}' css class is '{0}'")
     public A cssClasses(Matcher<? super List<String>> condition) {
         jdiAssert(element().classes(), condition);
         return (A) this;
     }
-    @JDIAction("Assert that '{name}' css class {0}")
+    @JDIAction("Assert that '{name}' css class is '{0}'")
     public A classValue(Matcher<String> condition) {
         jdiAssert(element().core().attr("class"), condition);
         return (A) this;
@@ -126,7 +126,7 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
         return cssClasses(Matchers.hasItem(className));
     }
 
-    @JDIAction("Assert that '{name}' tag {0}")
+    @JDIAction("Assert that '{name}' tag is '{0}'")
     public A tag(Matcher<String> condition) {
         jdiAssert(element().getTagName(), condition);
         return (A) this;
@@ -139,7 +139,7 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
      * Match passed value with the element class
      * @param attrName to compare attr(String attrName)
      */
-    @JDIAction("Assert that '{name}' has css class {0}")
+    @JDIAction("Assert that '{name}' has css class '{0}'")
     public A attr(String attrName) {
         jdiAssert(format(element().hasAttribute(attrName) ? "has attribute '%s'" : "has no attribute '%s'", attrName) , Matchers.is("has attribute '"+attrName+"'"));
         return (A) this;
