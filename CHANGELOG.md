@@ -1,8 +1,12 @@
 # Changelog
 
-## 1.3.12 (planed March 2021)
+## 1.3.15 (planed March 2021)
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
+
+## 1.3.12 (03.06.2021)
+* update log names
+* add description for First capital and As Is options for smart locators
 
 ## 1.3.11 (03.03.2021)
 * Switch to Lightsaber 2.1.13

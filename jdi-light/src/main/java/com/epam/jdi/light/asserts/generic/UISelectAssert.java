@@ -25,7 +25,7 @@ import static org.hamcrest.Matchers.*;
 public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> extends UIAssert<A, E>
         implements ITextAssert<A> {
 
-    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    @JDIAction("Assert that {0} option selected for '{name}'")
     public A selected(Matcher<String> condition) {
         jdiAssert(element().selected(), condition);
         return (A) this;
@@ -34,7 +34,7 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
     public A selected(String option) {
         return selected(Matchers.is(option));
     }
-    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    @JDIAction("Assert that {0} option selected for '{name}'")
     public A selected(int index) {
         jdiAssert(element().selected(index), Matchers.is(true));
         return (A) this;
@@ -57,7 +57,7 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
     public A value(Matcher<String> condition) {
         return values(hasItem(condition));
     }
-    @JDIAction("Assert that '{name}' has value {0}")
+    @JDIAction("Assert that '{name}' has value '{0}'")
     public A value(String value) {
         return values(hasItem(value));
     }

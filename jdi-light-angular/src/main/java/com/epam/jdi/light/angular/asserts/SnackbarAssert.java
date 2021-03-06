@@ -9,7 +9,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
 
-    @JDIAction("Assert that '{name}' has message {0}")
+    @JDIAction("Assert that '{name}' has message '{0}'")
     public SnackbarAssert message(String expected) {
         jdiAssert(element().getMessageText(), Matchers.is(expected));
         return this;

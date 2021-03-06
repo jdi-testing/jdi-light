@@ -51,7 +51,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
      * Match passed value with table size
      * @param condition to compare
      */
-    @JDIAction("Assert that '{name}' size '{0}'")
+    @JDIAction("Assert that '{name}' size {0}")
     public A size(Matcher<Integer> condition) {
         jdiAssert(table().count(), condition);
         return (A) this;
@@ -61,7 +61,7 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
      * Match passed value with table size
      * @param size to compare
      */
-    @JDIAction("Assert that '{name}' size '{0}'")
+    @JDIAction("Assert that '{name}' size {0}")
     public A size(int size) {
         return size(Matchers.is(size));
     }
