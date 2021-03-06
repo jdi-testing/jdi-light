@@ -109,12 +109,12 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
         return css(css, Matchers.is(value));
     }
 
-    @JDIAction("Assert that '{name}' css class is '{0}'")
+    @JDIAction("Assert that '{name}' css class {0}")
     public A cssClasses(Matcher<? super List<String>> condition) {
         jdiAssert(element().classes(), condition);
         return (A) this;
     }
-    @JDIAction("Assert that '{name}' css class is '{0}'")
+    @JDIAction("Assert that '{name}' css class {0}")
     public A classValue(Matcher<String> condition) {
         jdiAssert(element().core().attr("class"), condition);
         return (A) this;
@@ -126,7 +126,7 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
         return cssClasses(Matchers.hasItem(className));
     }
 
-    @JDIAction("Assert that '{name}' tag is '{0}'")
+    @JDIAction("Assert that '{name}' tag {0}")
     public A tag(Matcher<String> condition) {
         jdiAssert(element().getTagName(), condition);
         return (A) this;
