@@ -17,13 +17,13 @@ public class LinearTests extends TestsInit {
     private final String customColorBack = "rgba(238, 238, 238, 1)";
 
     @Test
-    public void verifyIndeterminateLinearTest() {
+    public void indeterminateLinearTest() {
         linearIndeterminatePage.open();
         linearFrame.linearDefault.is().indeterminate();
     }
 
     @Test
-    public void verifyDeterminateLinearTest() {
+    public void determinateLinearTest() {
         linearDeterminatePage.open();
         linearFrame.linearDefault.is().determinate();
         linearFrame.linearDefault.has().max(100);
@@ -32,7 +32,7 @@ public class LinearTests extends TestsInit {
     }
 
     @Test
-    public void verifyBufferProgressBarTest() {
+    public void bufferProgressBarTest() {
         linearBufferPage.open();
         linearFrame.linearDefault.is().buffer();
         linearFrame.linearDefault.has().max(100);
@@ -41,15 +41,14 @@ public class LinearTests extends TestsInit {
     }
 
     @Test
-    public void verifyLinearLabelTest() {
+    public void linearLabelTest() {
         linearWithLabelPage.open();
         linearFrame.linearDefault.is().determinate();
         linearFrame.linearTypography.has().styleClass("body2");
-        linearFrame.linearTypography.has().text("10%");
     }
 
     @Test
-    public void verifyCustomizedProgressTest() {
+    public void customizedProgressTest() {
         customisedProgressPage.open();
         linearFrame.circularTop.has().color(customColorTop);
         linearFrame.circularBackground.has().color(customColorBack);

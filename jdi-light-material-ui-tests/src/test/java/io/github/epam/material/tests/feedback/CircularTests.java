@@ -14,13 +14,13 @@ public class CircularTests extends TestsInit {
     private final String defaultColor = "rgba(63, 81, 181, 1)";
 
     @Test
-    public void verifyIndeterminateCircularTest() {
+    public void indeterminateCircularTest() {
         circularIndeterminatePage.open();
         circularFrame.circularDefault.is().indeterminate();
     }
 
     @Test
-    public void verifyDeterminateStagesCircularTest() {
+    public void determinateStagesCircularTest() {
         circularDeterminatePage.open();
         circularFrame.circularDefault.is().determinate();
         circularFrame.circularDefault.has().color(defaultColor);
@@ -31,14 +31,14 @@ public class CircularTests extends TestsInit {
     }
 
     @Test
-    public void verifyDeterminateShrinkCircularTest() {
+    public void determinateShrinkCircularTest() {
         circularDeterminatePage.open();
         circularFrame.circularIndeterminateDisableShrink.is().indeterminate();
         circularFrame.circularIndeterminateDisableShrink.has().color(defaultColor);
     }
 
     @Test
-    public void verifyCircularIntegrationTest() {
+    public void circularIntegrationTest() {
         circularIntegrationPage.open();
         circularFrame.acceptTermsButton.click();
         circularFrame.circularDefault.is().indeterminate();
@@ -48,15 +48,14 @@ public class CircularTests extends TestsInit {
     }
 
     @Test
-    public void verifyCircularLabelTest() {
+    public void circularLabelTest() {
         circularWithValueLabel.open();
         circularFrame.circularDefault.is().determinate();
         circularFrame.circularTypography.has().styleClass("caption");
-        circularFrame.circularTypography.has().text("10%");
     }
 
     @Test
-    public void verifyDelayingAppearanceTest() {
+    public void delayingAppearanceTest() {
         delayingAppearancePage.open();
         circularFrame.loadingButton.click();
         circularFrame.circularDefault.is().indeterminate();
