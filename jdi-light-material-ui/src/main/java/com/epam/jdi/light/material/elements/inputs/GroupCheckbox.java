@@ -2,19 +2,24 @@ package com.epam.jdi.light.material.elements.inputs;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.inputs.GroupCheckBoxAssert;
 
 public class GroupCheckbox extends UIBaseElement<GroupCheckBoxAssert> implements HasClick {
 
+    private WebList getCheckBoxByIndex() {
+        return core().finds(".MuiCheckbox-root");
+    }
+
     @JDIAction("Click on '{name}'")
     public void clickOnCheckBoxByIndex(int index) {
-        core().finds(".MuiCheckbox-root").get(index).click();
+        getCheckBoxByIndex().get(index).click();
     }
 
     @JDIAction("Is '{name}' checked")
     public boolean isCheckboxChecked(int index) {
-        return core().finds(".MuiCheckbox-root").get(index).hasClass("Mui-checked");
+        return getCheckBoxByIndex().get(index).hasClass("Mui-checked");
     }
 
     @JDIAction("Is '{name}' unchecked")
@@ -24,12 +29,12 @@ public class GroupCheckbox extends UIBaseElement<GroupCheckBoxAssert> implements
 
     @JDIAction("Is '{name}' disabled")
     public boolean isCheckBoxDisabled(int index) {
-        return core().finds(".MuiCheckbox-root").get(index).hasClass("Mui-disabled");
+        return getCheckBoxByIndex().get(index).hasClass("Mui-disabled");
     }
 
     @JDIAction("Is '{name}' enabled")
     public boolean isCheckBoxEnabled(int index) {
-        return core().finds(".MuiCheckbox-root").get(index).isEnabled();
+        return getCheckBoxByIndex().get(index).isEnabled();
     }
 
     @Override
