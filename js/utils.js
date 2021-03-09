@@ -546,6 +546,9 @@ function includeSideBar() {
                     <li ui="label" index="7"><a href="angular.html">\
                         <span>Angular</span>\
                     </a></li>\
+                    <li ui="label" index="8"><a href="material">\
+                                            <span>Material UI</span>\
+                                        </a></li>\
                 </ul>\
             </li>\
         </ul>\
