@@ -10,26 +10,26 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class GroupCheckBoxAssert extends UIAssert<GroupCheckBoxAssert, GroupCheckbox> {
 
     @JDIAction("Assert that '{name}' is enabled")
-    public GroupCheckBoxAssert enabled() {
-        jdiAssert(element().isCheckBoxEnabled(), Matchers.is(true));
+    public GroupCheckBoxAssert enabled(int index) {
+        jdiAssert(element().isCheckBoxEnabled(index), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is disabled")
+    public GroupCheckBoxAssert disabled(int index) {
+        jdiAssert(element().isCheckBoxDisabled(index), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is checked")
-    public GroupCheckBoxAssert checked() {
-        jdiAssert(element().isCheckBoxChecked(), Matchers.is(true));
+    public GroupCheckBoxAssert checked(int index) {
+        jdiAssert(element().isCheckboxChecked(index), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is unchecked")
-    public GroupCheckBoxAssert unchecked() {
-        jdiAssert(element().isCheckBoxUnchecked(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is checked")
-    public GroupCheckBoxAssert disabled() {
-        jdiAssert(element().isCheckBoxDisabled(), Matchers.is(true));
+    public GroupCheckBoxAssert unchecked(int index) {
+        jdiAssert(element().isCheckboxUnchecked(index), Matchers.is(true));
         return this;
     }
 }

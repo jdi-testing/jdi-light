@@ -6,6 +6,6 @@ import com.epam.jdi.light.material.elements.inputs.GroupCheckbox;
 
 public class GroupCheckBoxFrame extends Section {
 
-    @UI("MuiFormGroup-root")
+    @UI("#root")
     public GroupCheckbox groupCheckbox;
 }

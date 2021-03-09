@@ -36,7 +36,7 @@ import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("https://jdi-testing.github.io/jdi-light")
 public class StaticSite {
 
     // inputs

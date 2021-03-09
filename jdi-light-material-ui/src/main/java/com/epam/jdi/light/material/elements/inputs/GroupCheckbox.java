@@ -8,33 +8,33 @@ import com.epam.jdi.light.material.asserts.inputs.GroupCheckBoxAssert;
 public class GroupCheckbox extends UIBaseElement<GroupCheckBoxAssert> implements HasClick {
 
     @JDIAction("Click on '{name}'")
-    public void clickUncheckedCheckBox() {
-        core().find("#root > div > span:nth-child(1)").click();
+    public void clickOnCheckBoxByIndex(int index) {
+        core().finds(".MuiCheckbox-root").get(index).click();
     }
 
-    @JDIAction("Click on '{name}'")
-    public void clickCheckedCheckBox() {
-        core().find("#root > div > span:nth-child(2)").click();
+    @JDIAction("Get '{name}'")
+    public boolean isCheckboxChecked(int index) {
+        return core().finds(".MuiCheckbox-root").get(index).hasClass("Mui-checked");
+    }
+
+    @JDIAction("Get '{name}'")
+    public boolean isCheckboxUnchecked(int index) {
+        return !isCheckboxChecked(index);
     }
 
     @JDIAction("Is '{name}' disabled")
-    public boolean isCheckBoxDisabled() {
-        return core().find("#root > div > span:nth-child(3)").isDisabled();
+    public boolean isCheckBoxDisabled(int index) {
+        return core().finds(".MuiCheckbox-root").get(index).hasClass("Mui-disabled");
     }
 
-    @JDIAction("Is '{name}' disabled")
-    public boolean isCheckBoxEnabled() {
-        return core().find("MuiIconButton-root").isEnabled();
+    @JDIAction("Is '{name}' enabled")
+    public boolean isCheckBoxEnabled(int index) {
+        return core().finds(".MuiCheckbox-root").get(index).isEnabled();
     }
 
-    @JDIAction("Is '{name}' checked")
-    public boolean isCheckBoxChecked() {
-        return core().find("Mui-checked").isDisplayed();
-    }
-
-    @JDIAction("Is '{name}' unchecked")
-    public boolean isCheckBoxUnchecked() {
-        return !isCheckBoxChecked();
+    @Override
+    public GroupCheckBoxAssert is() {
+        return new GroupCheckBoxAssert().set(this);
     }
 
 }
