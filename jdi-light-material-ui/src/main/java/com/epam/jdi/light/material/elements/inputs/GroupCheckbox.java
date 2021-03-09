@@ -12,12 +12,12 @@ public class GroupCheckbox extends UIBaseElement<GroupCheckBoxAssert> implements
         core().finds(".MuiCheckbox-root").get(index).click();
     }
 
-    @JDIAction("Get '{name}'")
+    @JDIAction("Is '{name}' checked")
     public boolean isCheckboxChecked(int index) {
         return core().finds(".MuiCheckbox-root").get(index).hasClass("Mui-checked");
     }
 
-    @JDIAction("Get '{name}'")
+    @JDIAction("Is '{name}' unchecked")
     public boolean isCheckboxUnchecked(int index) {
         return !isCheckboxChecked(index);
     }
