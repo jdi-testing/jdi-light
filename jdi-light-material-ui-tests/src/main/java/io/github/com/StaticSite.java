@@ -25,6 +25,7 @@ import io.github.com.pages.feedback.CircularFrame;
 import io.github.com.pages.feedback.LinearFrame;
 import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.GroupCheckBoxFrame;
 import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
@@ -36,7 +37,7 @@ import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("https://jdi-testing.github.io/jdi-light")
 public class StaticSite {
 
     // inputs
@@ -174,6 +175,12 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
+
+    @Frame("storybook-preview-iframe")
+    public static GroupCheckBoxFrame groupCheckBoxFrame;
+
+    @Url("/material-ui-inputs-checkbox--group")
+    public static WebPage groupCheckBoxPage;
 
     // Display data
     // material icon
