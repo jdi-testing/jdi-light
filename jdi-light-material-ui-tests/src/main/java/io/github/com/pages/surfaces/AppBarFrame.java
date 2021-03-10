@@ -6,6 +6,6 @@ import com.epam.jdi.light.material.elements.surfaces.AppBar;
 
 public class AppBarFrame extends Section {
 
-    @UI(".MuiToolbar-root")
+    @UI("#root")
     public AppBar appBar;
 }

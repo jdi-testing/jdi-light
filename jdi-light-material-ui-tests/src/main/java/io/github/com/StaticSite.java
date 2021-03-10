@@ -38,7 +38,7 @@ import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light")
+@JSite("http://localhost:6006/?path=/story/")
 public class StaticSite {
 
     // inputs
@@ -156,7 +156,7 @@ public class StaticSite {
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
 
-    @Url("/story/material-ui-surfaces-appbar--simple-app-bar")
+    @Url("material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage appBarPage;
 
     @Frame("storybook-preview-iframe")
