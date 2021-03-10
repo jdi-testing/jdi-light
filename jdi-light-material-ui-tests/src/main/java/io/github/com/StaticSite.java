@@ -194,7 +194,7 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static GroupCheckBoxFrame groupCheckBoxFrame;
 
-    @Url("/story/material-ui-inputs-checkbox--group")
+    @Url("/material-ui-inputs-checkbox--group")
     public static WebPage groupCheckBoxPage;
 
     // Display data

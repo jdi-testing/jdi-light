@@ -11,7 +11,6 @@ public class GroupCheckBoxTests extends TestsInit {
     private final int indexOne = 1;
     private final int indexTwo = 2;
     private final int indexThree = 3;
-    private final int indexFour = 4;
 
     @Test
     public void verifyingGroupCheckBoxTests() {
@@ -28,19 +27,5 @@ public class GroupCheckBoxTests extends TestsInit {
         groupCheckBoxFrame.groupCheckbox.is().checked(indexTwo);
 
         groupCheckBoxFrame.groupCheckbox.is().disabled(indexThree);
-    }
-
-    @Test(expectedExceptions = {IndexOutOfBoundsException.class},
-            expectedExceptionsMessageRegExp = ".*(Can't perform click. Element is out of bound)")
-    public void outOfBoundTest() {
-        groupCheckBoxPage.shouldBeOpened();
-
-        try {
-            groupCheckBoxFrame.groupCheckbox.clickOnCheckBoxByIndex(indexFour);
-        } catch (IndexOutOfBoundsException e) {
-            e.getCause();
-            e.getMessage();
-        }
-
     }
 }
