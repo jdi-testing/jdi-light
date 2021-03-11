@@ -36,19 +36,20 @@ public class FileUploadTests implements TestsInit {
 
     @Test
     public void uploadTest() {
-        avatar.uploadFile(mergePath(COMMON.projectPath,"/src/test/resources/general.xml"));
-        avatar.is().text(containsString("general.xml"));
-        assertTrue(avatar.getText().contains("general.xml"));
-        assertTrue(avatar.getValue().contains("general.xml"));
+        avatar.uploadFile(mergePath(COMMON.projectPath,"/src/test/resources/functional.xml"));
+        avatar.is().text(containsString("functional.xml"));
+        assertTrue(avatar.getText().contains("functional.xml"));
+        assertTrue(avatar.getValue().contains("functional.xml"));
     }
 
     @Test
     public void disabledUploadTest() {
         try {
-            disabledFileInput.uploadFile(mergePath(COMMON.projectPath, "/src/test/resources/general.xml"));
+            disabledFileInput.uploadFile(mergePath(COMMON.projectPath, "/src/test/resources/functional.xml"));
         } catch (Exception ignore) {}
         disabledFileInput.is().text(is(""));
     }
+
     @Test
     public void labelTest() {
         assertEquals(avatar.labelText(), "Profile picture:");
@@ -57,7 +58,8 @@ public class FileUploadTests implements TestsInit {
 
     @Test
     public void downloadTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
+
         cleanupDownloads();
         downloadJdiLogo.click();
         assertThatFile("jdi-logo.jpg")
@@ -71,6 +73,7 @@ public class FileUploadTests implements TestsInit {
                 "Earth provides enough to satisfy every man's needs, but not every man's greed",
                 "UTF-8");
     }
+
     @Test
     public void assertFileTest() throws IOException {
         cleanupDownloads();
@@ -79,6 +82,7 @@ public class FileUploadTests implements TestsInit {
         // Validate file in DOWNLOADS_DIR folder
         assertThatFile(fileName).text(containsString("enough to satisfy"));
     }
+
     @Test
     public void baseValidationTest() {
         baseValidation(avatar);

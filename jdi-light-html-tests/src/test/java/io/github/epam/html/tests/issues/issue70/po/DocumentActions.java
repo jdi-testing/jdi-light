@@ -8,7 +8,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 public class DocumentActions extends UIElement {
     private UIElement documentActionsBtn = $(".document-actions-btn");
-    private WebList actions = $$(".%s-btn");
+    private WebList actions = $$(".%s-btn").setName("Document actions");
 
     @Override
     public void select(String name) {

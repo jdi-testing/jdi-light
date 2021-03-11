@@ -9,6 +9,7 @@ import java.util.List;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.elements.base.JdiSettings.addTextToXPath;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -122,6 +123,9 @@ public class JDILocator {
             if (isBlank(hasFrame))
                 return locatorString;
             return isBlank(locatorString) ? hasFrame : hasFrame + ">" + locatorString;
-        } catch (Exception ex) { return "Can't print locator"; }
+        } catch (Exception ex) {
+            logger.error("Error on get locator value %s", ex);
+            return "Can't print locator";
+        }
     }
 }

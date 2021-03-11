@@ -11,7 +11,7 @@ import static io.github.com.pages.sections.DatepickerSection.openMethodDatepicke
 public class OpenMethodDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         openMethodDatepicker.show();
     }
 

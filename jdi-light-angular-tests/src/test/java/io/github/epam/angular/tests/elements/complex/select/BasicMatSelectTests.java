@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.hasItems;
 public class BasicMatSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         basicMatSelect.show();
     }
 
@@ -27,6 +27,8 @@ public class BasicMatSelectTests extends TestsSelectBase {
     public void checkSelectorExpanded() {
         basicMatSelect.expand();
         basicMatSelect.is().expanded();
+        basicMatSelect.collapse();
+        basicMatSelect.is().collapsed();
     }
 
     @Test
