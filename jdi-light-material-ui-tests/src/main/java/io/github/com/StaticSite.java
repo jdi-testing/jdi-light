@@ -21,8 +21,8 @@ import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
-import io.github.com.pages.feedback.CircularFrame;
-import io.github.com.pages.feedback.LinearFrame;
+import io.github.com.pages.feedback.CircularProgressFrame;
+import io.github.com.pages.feedback.LinearProgressFrame;
 import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.GroupCheckBoxFrame;
@@ -248,11 +248,11 @@ public class StaticSite {
     public static WebPage circularWithValueLabel;
 
     @Frame("storybook-preview-iframe")
-    public static CircularFrame circularFrame;
+    public static CircularProgressFrame circularProgressFrame;
 
     // linear
     @Frame("storybook-preview-iframe")
-    public static LinearFrame linearFrame;
+    public static LinearProgressFrame linearProgressFrame;
 
     @Url("/material-ui-feedback-progress--linear-indeterminate")
     public static WebPage linearIndeterminatePage;

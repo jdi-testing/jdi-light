@@ -6,7 +6,7 @@ import com.epam.jdi.light.material.annotations.JDIProgressBar;
 import com.epam.jdi.light.material.elements.displaydata.Typography;
 import com.epam.jdi.light.material.elements.feedback.ProgressBar;
 
-public class LinearFrame extends Section {
+public class LinearProgressFrame extends Section {
 
      @JDIProgressBar(root = ".MuiLinearProgress-root",
             bar1 = "(//*[contains(@class, 'MuiLinearProgress-bar')])[1]",
