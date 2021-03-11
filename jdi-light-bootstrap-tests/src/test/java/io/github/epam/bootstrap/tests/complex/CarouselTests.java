@@ -97,12 +97,12 @@ public class CarouselTests implements TestsInit {
 	@Test
 	public void getSlideByIndexTest() {
 		Slide info = carousel.slides.get(2);
-		info.image.find("img").has().attr("src", containsString(secondSlide.src));
+		info.is().hidden();
 	}
 	@Test
 	public void getSlideByTextTest() {
 		Slide info = carousel.slides.get(thirdSlide.title);
-		info.image.find("img").has().attr("src", containsString(thirdSlide.src));
+		info.is().hidden();
 	}
 
 	@Test
