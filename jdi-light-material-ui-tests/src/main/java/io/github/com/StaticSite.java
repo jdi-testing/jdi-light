@@ -135,13 +135,13 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static SliderFrame sliderFrame;
 
-    @Url("/material-ui-sliders--default-and-disabled-sliders")
+    @Url("/material-ui-inputs-sliders--default-and-disabled-sliders")
     public static WebPage inputSliderDefaultAnfDisabledPage;
 
-    @Url("/material-ui-sliders--range-slider")
+    @Url("/material-ui-inputs-sliders--range-slider")
     public static WebPage inputSliderRangePage;
 
-    @Url("/material-ui-sliders--vertical-slider")
+    @Url("/material-ui-inputs-sliders--vertical-slider")
     public static WebPage inputSliderVerticalPage;
 
     // surfaces
