@@ -83,6 +83,7 @@ public class WebSettings {
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
     public static boolean STRICT_SEARCH = true;
+    public static boolean FAST_SEARCH = true;
     public static boolean hasDomain() {
         init();
         return DRIVER.domain != null && DRIVER.domain.contains("://");
@@ -318,18 +319,26 @@ public class WebSettings {
             p = "visible, single";
         if (p.split(",").length == 2) {
             List<String> params = map(asList(p.split(",")), a -> ELEMENT.simplifyString.execute(a));
-            if (params.contains("visible") || params.contains("displayed"))
+            if (params.contains("visible") || params.contains("displayed")) {
                 onlyVisible();
+                FAST_SEARCH = false;
+            }
             if (params.contains("any") || params.contains("all"))
                 noValidation();
-            if (params.contains("enabled"))
+            if (params.contains("enabled")) {
                 visibleEnabled();
-            if (params.contains("inview"))
+                FAST_SEARCH = false;
+            }
+            if (params.contains("inview")) {
                 inView();
+                FAST_SEARCH = false;
+            }
             if (params.contains("single"))
                 STRICT_SEARCH = true;
             if (params.contains("multiple"))
                 STRICT_SEARCH = false;
+            if (params.contains("fast"))
+                FAST_SEARCH = true;
         }
     }
 

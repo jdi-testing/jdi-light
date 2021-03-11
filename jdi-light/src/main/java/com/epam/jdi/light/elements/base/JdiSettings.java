@@ -68,10 +68,10 @@ public class JdiSettings {
 
     // region Utilities
     public static WebElement filterWebListToWebElement(JDIBase base, List<WebElement> els) {
-        if (els.size() == 1)
-            return els.get(0);
         if (els.isEmpty())
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, base.toString(), base.getTimeout());
+        if (FAST_SEARCH && els.size() == 1)
+            return els.get(0);
         List<WebElement> filtered = filterElements(base, els);
         if (filtered.size() == 1)
             return filtered.get(0);
