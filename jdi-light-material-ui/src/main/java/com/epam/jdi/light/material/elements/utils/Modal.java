@@ -24,7 +24,7 @@ public class Modal extends UIBaseElement<ModalAssert> implements HasClick, ISetu
     String modalTitle;
     String modalDescription;
 
-    @JDIAction("Is '{name}' enabled")
+    @JDIAction("Ifs '{name}' enabled")
     public void clickModalButton() {
         this.find(BUTTON).click();
     }
