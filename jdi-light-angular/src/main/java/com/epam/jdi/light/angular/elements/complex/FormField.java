@@ -6,7 +6,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.logger.JDILogger;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -16,6 +15,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  To see an example of FormField web element please visit https://material.angular.io/components/form-field/overview#form-field-appearance-variants
@@ -48,7 +48,6 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
             try {
                 element = getDriver().findElement(By.xpath("//div[@" + containerAttribute + "]"));
             } catch (Exception exception) {
-                JDILogger logger = new JDILogger();
                 logger.error(exception.toString());
             }
         }
@@ -212,7 +211,6 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
                     getDriver().findElement(By.xpath(currentXpath + "//textarea"));
                     type = "textarea";
                 } catch (Exception e3) {
-                    JDILogger logger = new JDILogger();
                     logger.error(e3.toString());
                 }
             }

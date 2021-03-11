@@ -8,10 +8,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.any;
-import static com.epam.jdi.tools.LinqUtils.*;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.SimpleTablePage.furnitureSharpHeader;
+import static io.github.com.pages.SimpleTablePage.dataFurnitureSharp;
 import static io.github.epam.html.tests.elements.complex.table.TableDataProvider.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -29,154 +27,143 @@ public class DataGridSharpHeaderTests implements TestsInit {
 
     @Test
     public void webCellsTest() {
-        assertEquals(furnitureSharpHeader.webCells().size(), 20);
+        assertEquals(dataFurnitureSharp.webCells().size(), 20);
     }
+
     @Test
     public void sizeTest() {
-        assertEquals(furnitureSharpHeader.size(), 4);
+        assertEquals(dataFurnitureSharp.size(), 4);
     }
+
     @Test
     public void countTest() {
-        assertEquals(furnitureSharpHeader.count(), 5);
+        assertEquals(dataFurnitureSharp.count(), 5);
     }
+
     @Test
     public void columnsTest() {
-        List<Line> columns = furnitureSharpHeader.columns();
+        List<Line> columns = dataFurnitureSharp.columns();
         assertEquals(columns.size(), 4);
         assertEquals(columns.get(0).size(), 5);
     }
+
     @Test
     public void rowsTest() {
-        List<Line> rows = furnitureSharpHeader.rows();
+        List<Line> rows = dataFurnitureSharp.rows();
         assertEquals(rows.size(), 5);
         assertEquals(rows.get(0).size(), 4);
     }
+
     @Test
     public void headerTest() {
-        assertEquals(furnitureSharpHeader.header(), asList("Name", "Type", "Cost", "Weight"));
+        assertEquals(dataFurnitureSharp.header(), asList("Name", "Type", "Cost", "Weight"));
     }
+
     @Test
     public void rowHeaderTest() {
-        assertEquals(furnitureSharpHeader.rowHeader(), asList("1", "2", "3", "4", "5"));
+        assertEquals(dataFurnitureSharp.rowHeader(), asList("1", "2", "3", "4", "5"));
     }
 
     @Test
     public void valueTest() {
-        String value = furnitureSharpHeader.getValue();
+        String value = dataFurnitureSharp.getValue();
         assertEquals(value,
-        "Name Type Cost * #\n" +
-            "Chair furniture 3.5 2\n" +
-            "Table furniture 3.5 3.5\n" +
-            "Sofa furniture 2 2\n" +
-            "Kitchen kitchen 400\n" +
-            "Robot robo");
+                "Name Type Cost * #\n" +
+                        "Chair furniture 3.5 2\n" +
+                        "Table furniture 3.5 3.5\n" +
+                        "Sofa furniture 2 2\n" +
+                        "Kitchen kitchen 400\n" +
+                        "Robot robo");
     }
+
     @Test
     public void iterationTest() {
         int i = 0;
-        for (Line row : furnitureSharpHeader) {
-            assertThat(row.get("Name"), is(NAME_COLUMN[i++]));
+        for (Furniture furniture : dataFurnitureSharp) {
+            assertThat(furniture.name, is(NAME_COLUMN[i++]));
         }
     }
 
     @Test
     public void dataRowTestIndex() {
-        assertEquals(furnitureSharpHeader.row(1).asData(Furniture.class), CHAIR);
-        assertEquals(furnitureSharpHeader.row(2).asData(Furniture.class), TABLE);
-        assertEquals(furnitureSharpHeader.row(3).asData(Furniture.class), SOFA);
-    }
-
-    @Test
-    public void dataRowNameTest() {
-        assertThat(furnitureSharpHeader.row("1").asData(Furniture.class), is(CHAIR));
-        assertThat(furnitureSharpHeader.row("2").asData(Furniture.class), is(TABLE));
-        assertThat(furnitureSharpHeader.row("3").asData(Furniture.class), is(SOFA));
+        dataFurnitureSharp.has().row(CHAIR);
+        dataFurnitureSharp.has().row(TABLE);
+        dataFurnitureSharp.has().row(SOFA);
     }
 
     @Test
     public void dataColumnTestIndex() {
-        assertThat(furnitureSharpHeader.column(2), hasItems(TYPE_COLUMN));
-        assertThat(furnitureSharpHeader.column(3), hasItems(COST_COLUMN));
-        assertThat(furnitureSharpHeader.column(4), hasItems(WEIGHT_COLUMN));
+        assertThat(dataFurnitureSharp.column(2), hasItems(TYPE_COLUMN));
+        assertThat(dataFurnitureSharp.column(3), hasItems(COST_COLUMN));
+        assertThat(dataFurnitureSharp.column(4), hasItems(WEIGHT_COLUMN));
     }
 
     @Test
     public void dataColumnNameTest() {
-        assertThat(furnitureSharpHeader.column("Type"), hasItems(TYPE_COLUMN));
-        assertThat(furnitureSharpHeader.column("Cost"), hasItems(COST_COLUMN));
+        assertThat(dataFurnitureSharp.column("Type"), hasItems(TYPE_COLUMN));
+        assertThat(dataFurnitureSharp.column("Cost"), hasItems(COST_COLUMN));
+        assertThat(dataFurnitureSharp.column("Weight"), hasItems(WEIGHT_COLUMN));
 
-        assertThat(furnitureSharpHeader.column("TYPE"), hasItems(TYPE_COLUMN));
-        assertThat(furnitureSharpHeader.column("COST *"), hasItems(COST_COLUMN));
-    }
-
-    @Test
-    public void dataFilterTest() {
-        List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(rows, hasItem(TABLE));
+        assertThat(dataFurnitureSharp.column("TYPE"), hasItems(TYPE_COLUMN));
+        assertThat(dataFurnitureSharp.column("COST *"), hasItems(COST_COLUMN));
+        assertThat(dataFurnitureSharp.column("WEIGHT "), hasItems(WEIGHT_COLUMN));
     }
 
     @Test
     public void allDataFilterTest() {
-        List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        List<Furniture> filteredData = filter(rows, d -> d.name.contains("Tab"));
+        List<Furniture> filteredData = dataFurnitureSharp.dataList(d -> d.name.contains("Tab"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), TABLE);
     }
 
     @Test
     public void commonMatchersTest() {
-        furnitureSharpHeader.is().displayed();
-        furnitureSharpHeader.has().size(5);
-        furnitureSharpHeader.assertThat().size(greaterThan(3));
-        furnitureSharpHeader.is().notEmpty().size(lessThanOrEqualTo(7));
+        dataFurnitureSharp.is().displayed();
+        dataFurnitureSharp.has().size(5);
+        dataFurnitureSharp.assertThat().size(greaterThan(3));
+        dataFurnitureSharp.is().notEmpty().size(lessThanOrEqualTo(7));
     }
 
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
-        List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(first(rows, r -> r.name.contains("Tab")), not(nullValue()));
+        dataFurnitureSharp.has().row(r -> r.name.contains("Tab"));
     }
 
     @Test
     public void rowDataMatcherTest() {
-        List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
+        dataFurnitureSharp.has().row(TABLE);
     }
 
     @Test
     public void rowsAllTest() {
-        List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(all(rows, r -> r.name.length() >= 4), is(true));
+        dataFurnitureSharp.has().all().rows(r -> r.name.length() >= 4);
     }
 
     @Test
     public void noRowsTest() {
-        List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(any(rows, r -> isBlank(r.name)), is(false));
+        dataFurnitureSharp.has().no().rows(r -> isBlank(r.name));
     }
 
     @Test
     public void atLeastTest() {
-        List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.type.contains("furniture")), hasSize(greaterThanOrEqualTo(3)));
+        dataFurnitureSharp.has()
+            .atLeast(3).rows(r -> r.type.contains("furniture"));
     }
 
     @Test
     public void exactMatcherTest() {
-        List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.cost.contains("3.5")), hasSize(2));
+        dataFurnitureSharp.has().exact(2).rows(r -> r.cost.contains("3.5"));
     }
 
     @Test
     public void rowDataExactMatcherTest() {
-        List<Furniture> rows = furnitureSharpHeader.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
+        dataFurnitureSharp.has().exact(1).row(TABLE);
     }
 
     @Test
     public void tableChainTest() {
-        furnitureSharpHeader.assertThat()
+        dataFurnitureSharp.assertThat()
             .displayed().size(5).size(greaterThan(3)).notEmpty();
     }
 }

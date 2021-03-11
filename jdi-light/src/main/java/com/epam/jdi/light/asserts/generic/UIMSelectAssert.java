@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 public class UIMSelectAssert<A extends UIMSelectAssert<?,?>, E extends IMultiSelector>
         extends UISelectAssert<UIMSelectAssert<?,?>, IMultiSelector> {
 
-    @JDIAction("Assert that '{0}' values checked in '{name}'")
+    @JDIAction("Assert that {0} values checked in '{name}'")
     public A checked(Matcher<? super List<String>> values) {
         jdiAssert(element().checked(), values);
         return (A) this;
