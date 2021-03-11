@@ -10,10 +10,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDIModal {
-
-    @MarkupLocator String modalTitle() default "simple-modal-title";
-    @MarkupLocator String modalDescription() default "simple-modal-description";
-    @MarkupLocator String modalInnerButton() default "//button[contains('type=\"button\"')]";
-    @MarkupLocator String innerModalPage() default  "body > div:nth-child(10) > div.makeStyles-paper-32";
-
+    @MarkupLocator String modalRoot() default "";
+    @MarkupLocator String buttonModalRoot() default "";
+    @MarkupLocator String modalTitle() default "";
+    @MarkupLocator String modalDescription() default "";
 }

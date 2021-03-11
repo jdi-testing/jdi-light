@@ -9,24 +9,39 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ModalAssert extends UIAssert<ModalAssert, Modal> {
 
-    private String expectedTitle;
-    private String expectedDescription;
-
     @JDIAction("Assert '{name}")
-    public ModalAssert verifyingTitle(String actualTitle) {
-        jdiAssert(element().verifyModalTitle(actualTitle), Matchers.is(expectedTitle));
+    public ModalAssert verifyingSimpleTitle(String actualSimpleTitle) {
+        jdiAssert(element().verifySimpleModalTitle(actualSimpleTitle), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert '{name}")
-    public ModalAssert verifyingDescription(String actualDescription) {
-        jdiAssert(element().verifyModalDescription(actualDescription), Matchers.is(expectedDescription));
+    public ModalAssert verifyingTransitionTitle(String actualTransitionTitle) {
+        jdiAssert(element().verifyTransitionModalTitle(actualTransitionTitle), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name} opened")
-    public ModalAssert verifyInnerModalPageOpened() {
-        jdiAssert(element().isInnerModalOpened(), Matchers.is(true));
+    @JDIAction("Assert '{name}")
+    public ModalAssert verifyingServerTitle(String actualServerTitle) {
+        jdiAssert(element().verifyServerModalTitle(actualServerTitle), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert '{name}")
+    public ModalAssert verifyingSimpleDescription(String actualSimpleDescription) {
+        jdiAssert(element().verifySimpleModalDescription(actualSimpleDescription), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert '{name}")
+    public ModalAssert verifyingTransitionDescription(String actualTransitionDescription) {
+        jdiAssert(element().verifyTransitionModalDescription(actualTransitionDescription), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert '{name}")
+    public ModalAssert verifyingServerDescription(String actualServerDescription) {
+        jdiAssert(element().verifyServerModalDescription(actualServerDescription), Matchers.is(true));
         return this;
     }
 }

@@ -4,12 +4,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.material.annotations.JDIModal;
-import com.epam.jdi.light.material.annotations.JDISnackbar;
 import com.epam.jdi.light.material.asserts.utils.ModalAssert;
-import com.epam.jdi.light.material.elements.feedback.Snackbar;
-import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
 
@@ -17,34 +13,79 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 
 public class Modal extends UIBaseElement<ModalAssert> implements HasClick, ISetup {
 
+    private static final String BUTTON = "#root > div > button";
+    private static final String SIMPLE_MODAL_TITLE = "#simple-modal-title";
+    private static final String SIMPLE_MODAL_DESCRIPTION = "#simple-modal-description";
+    private static final String TRANSITION_MODAL_TITLE = "#transition-modal-title";
+    private static final String TRANSITION_MODAL_DESCRIPTION = "#transition-modal-description";
+    private static final String SERVER_MODAL_TITLE = "#server-modal-title";
+    private static final String SERVER_MODAL_DESCRIPTION = "#server-modal-description";
+
     String modalTitle;
     String modalDescription;
-    String modalInnerButton;
-    String innerModalPage;
 
     @JDIAction("Is '{name}' enabled")
-    public void getModalButton() {
-        core().click();
+    public void clickModalButton() {
+        this.find(BUTTON).click();
     }
 
-    @JDIAction("Is '{name}' opened")
-    public boolean isInnerModalOpened() {
-        return core().hasClass(innerModalPage);
+    private String getSimpleModalTitle() {
+        return this.find(SIMPLE_MODAL_TITLE).getText();
     }
 
-    @JDIAction("Get '{name}'")
-    public boolean verifyModalTitle(String actualTitle) {
-        return core().find(modalTitle).getText().equals(actualTitle);
+    private String getTransitionModalTitle() {
+        return this.find(TRANSITION_MODAL_TITLE).getText();
     }
 
-    @JDIAction("Get '{name}'")
-    public boolean verifyModalDescription(String actualDescription) {
-        return core().find(modalDescription).getText().equals(actualDescription);
+    private String getServerModalTitle() {
+        return this.find(SERVER_MODAL_TITLE).getText();
     }
 
-    @JDIAction("Get '{name}'")
-    public void getInnerModalWindow() {
-        core().find(modalInnerButton);
+    private String getSimpleModalDescription() {
+        return this.find(SIMPLE_MODAL_DESCRIPTION).getText();
+    }
+
+    private String getTransitionModalDescription() {
+        return this.find(TRANSITION_MODAL_DESCRIPTION).getText();
+    }
+
+    private String getServerModalDescription() {
+        return this.find(SERVER_MODAL_DESCRIPTION).getText();
+    }
+
+    @JDIAction("Verify '{name}'")
+    public boolean verifySimpleModalTitle(String actualTitle) {
+        return getSimpleModalTitle().equals(actualTitle);
+    }
+
+    @JDIAction("Verify '{name}'")
+    public boolean verifyTransitionModalTitle(String actualTitle) {
+        return getTransitionModalTitle().equals(actualTitle);
+    }
+
+    @JDIAction("Verify '{name}'")
+    public boolean verifyServerModalTitle(String actualTitle) {
+        return getServerModalTitle().equals(actualTitle);
+    }
+
+    @JDIAction("Verify '{name}'")
+    public boolean verifySimpleModalDescription(String actualDescription) {
+        return getSimpleModalDescription().equals(actualDescription);
+    }
+
+    @JDIAction("Verify '{name}'")
+    public boolean verifyTransitionModalDescription(String actualDescription) {
+        return getTransitionModalDescription().equals(actualDescription);
+    }
+
+    @JDIAction("Verify '{name}'")
+    public boolean verifyServerModalDescription(String actualDescription) {
+        return getServerModalDescription().equals(actualDescription);
+    }
+
+    @Override
+    public ModalAssert is() {
+        return new ModalAssert().set(this);
     }
 
     @Override
@@ -54,8 +95,6 @@ public class Modal extends UIBaseElement<ModalAssert> implements HasClick, ISetu
         JDIModal j = field.getAnnotation(JDIModal.class);
         modalTitle = j.modalTitle();
         modalDescription = j.modalDescription();
-        modalInnerButton = j.modalInnerButton();
-        innerModalPage = j.innerModalPage();
     }
 
 

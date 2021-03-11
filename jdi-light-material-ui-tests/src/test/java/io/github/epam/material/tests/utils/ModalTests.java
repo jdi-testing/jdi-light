@@ -20,30 +20,28 @@ public class ModalTests extends TestsInit {
 
     @Test
     public void simpleModalTest() {
-        simpleModalPage.shouldBeOpened();
+        simpleModalPage.open();
 
-        modalFrame.modal.getModalButton();
-        modalFrame.modal.is().verifyingTitle(expectedSimpleTitle);
-        modalFrame.modal.is().verifyingDescription(expectedSimpleDescription);
-        modalFrame.modal.getInnerModalWindow();
-        modalFrame.modal.is().verifyInnerModalPageOpened();
+        modalFrame.buttonModal.clickModalButton();
+        modalFrame.modal.is().verifyingSimpleTitle(expectedSimpleTitle);
+        modalFrame.modal.is().verifyingSimpleDescription(expectedSimpleDescription);
     }
 
     @Test
     public void transitionModalTests() {
-        transitionsModalPage.shouldBeOpened();
+        transitionsModalPage.open();
 
-        modalFrame.modal.getModalButton();
-        modalFrame.modal.is().verifyingTitle(expectedTransitionTitle);
-        modalFrame.modal.is().verifyingDescription(expectedTransitionDescription);
+        modalFrame.buttonModal.clickModalButton();
+        modalFrame.modal.is().verifyingTransitionTitle(expectedTransitionTitle);
+        modalFrame.modal.is().verifyingTransitionDescription(expectedTransitionDescription);
     }
 
     @Test
     public void serverSideModalTests() {
-        serverSideModalPage.shouldBeOpened();
+        serverSideModalPage.open();
 
-        modalFrame.modal.is().verifyingTitle(expectedServerTitle);
-        modalFrame.modal.is().verifyingDescription(expectedServerDescription);
+        modalFrame.modal.is().verifyingServerTitle(expectedServerTitle);
+        modalFrame.modal.is().verifyingServerDescription(expectedServerDescription);
 
     }
 }

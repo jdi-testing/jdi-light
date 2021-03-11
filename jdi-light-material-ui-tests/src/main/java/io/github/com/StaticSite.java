@@ -36,7 +36,7 @@ import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("https://jdi-testing.github.io/jdi-light")
 public class StaticSite {
 
     // inputs
@@ -211,8 +211,8 @@ public class StaticSite {
     @Url("/material-ui-utils-modal--transitions-modal")
     public static WebPage transitionsModalPage;
 
-    @Url("/story/material-ui-utils-modal--spring-modal")
-    public static WebPage springModalPage;
+    @Url("/material-ui-utils-modal--server-modal")
+    public static WebPage serverSideModalPage;
 
     // typography
     @Frame("storybook-preview-iframe")
@@ -294,9 +294,6 @@ public class StaticSite {
     public static WebPage utilsPopoverHoverPage;
 
     // login page
-
-    @Url("/story/material-ui-utils-modal--server-modal")
-    public static WebPage serverSideModalPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
