@@ -7,7 +7,7 @@ import com.epam.jdi.light.material.elements.displaydata.Typography;
 import com.epam.jdi.light.material.elements.feedback.ProgressBar;
 import com.epam.jdi.light.material.elements.inputs.Button;
 
-public class CircularFrame extends Section {
+public class CircularProgressFrame extends Section {
 
     @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[1]")
     public ProgressBar circularDefault;
