@@ -71,6 +71,12 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
  */
 public class WebSettings {
     public static ILogger logger = instance("JDI");
+
+    public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
+    public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
+    public static boolean STRICT_SEARCH = true;
+    public static boolean FAST_SEARCH = true;
+
     public static String getDomain() {
         if (isBlank(DRIVER.domain)) {
             init();
@@ -80,14 +86,11 @@ public class WebSettings {
     public static void setDomain(String domain) {
         DRIVER.domain = domain;
     }
-    public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
-    public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
-    public static boolean STRICT_SEARCH = true;
-    public static boolean FAST_SEARCH = true;
     public static boolean hasDomain() {
         init();
         return DRIVER.domain != null && DRIVER.domain.contains("://");
     }
+
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
