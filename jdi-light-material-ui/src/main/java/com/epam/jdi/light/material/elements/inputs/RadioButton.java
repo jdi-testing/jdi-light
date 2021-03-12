@@ -2,9 +2,9 @@ package com.epam.jdi.light.material.elements.inputs;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.material.asserts.inputs.RadioAssert;
+import com.epam.jdi.light.material.asserts.inputs.RadioButtonAssert;
 
-public class Radio extends UIBaseElement<RadioAssert> {
+public class RadioButton extends UIBaseElement<RadioButtonAssert> {
     @JDIAction("Toggle '{name}'")
     public void toggle() {
         core().click();
@@ -20,7 +20,7 @@ public class Radio extends UIBaseElement<RadioAssert> {
         return !isChecked();
     }
 
-    public String getValue() {
+    public String getText() {
         return core().getText();
     }
 
@@ -37,7 +37,7 @@ public class Radio extends UIBaseElement<RadioAssert> {
     }
 
     @Override
-    public RadioAssert is() {
-        return new RadioAssert().set(this);
+    public RadioButtonAssert is() {
+        return new RadioButtonAssert().set(this);
     }
 }

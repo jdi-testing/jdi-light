@@ -24,7 +24,7 @@ import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.feedback.CircularFrame;
 import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.ButtonFrame;
-import io.github.com.pages.inputs.RadioFrame;
+import io.github.com.pages.inputs.RadioButtonFrame;
 import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
@@ -65,7 +65,7 @@ public class StaticSite {
 
     // radio
     @Frame("storybook-preview-iframe")
-    public static RadioFrame radioFrame;
+    public static RadioButtonFrame radioButtonFrame;
 
     @Url("/material-ui-inputs-radio--default")
     public static WebPage radioDefaultPage;
