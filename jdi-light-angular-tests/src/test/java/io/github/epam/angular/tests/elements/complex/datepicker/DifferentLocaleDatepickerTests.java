@@ -14,7 +14,7 @@ public class DifferentLocaleDatepickerTests extends TestsDatepickerBase {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         differentLocaleDatepicker.show();
         differentLocaleDatepicker.clear();
     }

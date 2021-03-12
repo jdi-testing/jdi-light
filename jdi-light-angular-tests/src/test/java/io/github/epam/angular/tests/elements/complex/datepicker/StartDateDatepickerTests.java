@@ -13,7 +13,7 @@ import static io.github.com.pages.sections.DatepickerSection.startDateDatepicker
 public class StartDateDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         startDateDatepicker.show();
     }
 

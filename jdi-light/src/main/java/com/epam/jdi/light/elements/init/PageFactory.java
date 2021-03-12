@@ -95,7 +95,7 @@ public class PageFactory {
     public static void setupFieldUsingRules(SiteInfo info) {
         logger.trace("setupFieldUsingRules");
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) -> r.condition.execute(info));
-        if (setupRules.size() == 0)
+        if (setupRules.isEmpty())
             return;
         String ruleName = "UNDEFINED";
         logger.trace("SETUP_RULES.count="+setupRules.size());
@@ -149,7 +149,7 @@ public class PageFactory {
         if (firstRule != null) {
             logger.trace("Use initRule: " + firstRule.key);
             try {
-                return (T)(info.instance = firstRule.value.func.execute(info));
+                return (T) (info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
                 throw exception(ex, "Init rule '%s' failed. Can't init field '%s' on page '%s'",
                         firstRule.key, info.name(), info.parentName());
@@ -157,8 +157,8 @@ public class PageFactory {
         }
         else {
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
-                            "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
-                            "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
+                        "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
+                        "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
                     info.name());
         }
     }
@@ -199,10 +199,9 @@ public class PageFactory {
     }
     //endregion
 
-    public static List<Class<?>> STOP_INIT_CLASSES = asList(
-        Object.class, WebPage.class, PageObject.class, UIElement.class,
-            UIBaseElement.class, UIListBase.class,
-            DataList.class, JList.class, WebList.class);
+    public static List<Class<?>> STOP_INIT_CLASSES = newList(
+        Object.class, WebPage.class, PageObject.class, UIElement.class, UIBaseElement.class, UIListBase.class,
+        DataList.class, JList.class, WebList.class);
 
     public static void initElements(SiteInfo info) {
         List<Field> poFields = recursion(info.instance.getClass(),

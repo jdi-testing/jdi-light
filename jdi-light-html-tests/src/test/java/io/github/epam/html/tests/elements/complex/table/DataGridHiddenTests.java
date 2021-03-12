@@ -8,10 +8,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.any;
-import static com.epam.jdi.tools.LinqUtils.*;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.SimpleTablePage.furnitureHidden;
+import static io.github.com.pages.SimpleTablePage.dataFurnitureHidden;
 import static io.github.epam.html.tests.elements.complex.table.TableDataProvider.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -29,40 +27,40 @@ public class DataGridHiddenTests implements TestsInit {
 
     @Test
     public void webCellsTest() {
-        assertEquals(furnitureHidden.webCells().size(), 20);
+        assertEquals(dataFurnitureHidden.webCells().size(), 20);
     }
     @Test
     public void sizeTest() {
-        assertEquals(furnitureHidden.size(), 4);
+        assertEquals(dataFurnitureHidden.size(), 4);
     }
     @Test
     public void countTest() {
-        assertEquals(furnitureHidden.count(), 5);
+        assertEquals(dataFurnitureHidden.count(), 5);
     }
     @Test
     public void columnsTest() {
-        List<Line> columns = furnitureHidden.columns();
+        List<Line> columns = dataFurnitureHidden.columns();
         assertEquals(columns.size(), 4);
         assertEquals(columns.get(0).size(), 5);
     }
     @Test
     public void rowsTest() {
-        List<Line> rows = furnitureHidden.rows();
+        List<Line> rows = dataFurnitureHidden.rows();
         assertEquals(rows.size(), 5);
         assertEquals(rows.get(0).size(), 4);
     }
     @Test
     public void headerTest() {
-        assertEquals(furnitureHidden.header(), asList("Name", "Type", "Cost *", "Weight"));
+        assertEquals(dataFurnitureHidden.header(), asList("Name", "Type", "Cost", "Weight"));
     }
     @Test
     public void rowHeaderTest() {
-        assertEquals(furnitureHidden.rowHeader(), asList("1", "2", "3", "4", "5"));
+        assertEquals(dataFurnitureHidden.rowHeader(), asList("1", "2", "3", "4", "5"));
     }
 
     @Test
     public void valueTest() {
-        String value = furnitureHidden.getValue();
+        String value = dataFurnitureHidden.getValue();
         assertEquals(value,
         "Name Type Cost * Weight\n" +
             "Chair furniture 3.5 2\n" +
@@ -74,110 +72,86 @@ public class DataGridHiddenTests implements TestsInit {
     @Test
     public void iterationTest() {
         int i = 0;
-        for (Line row : furnitureHidden) {
-            assertThat(row.get("Name"), is(NAME_COLUMN[i++]));
+        for (Furniture furniture : dataFurnitureHidden) {
+            assertThat(furniture.name, is(NAME_COLUMN[i++]));
         }
     }
 
     @Test
     public void dataRowTestIndex() {
-        assertEquals(furnitureHidden.row(1).asData(Furniture.class), CHAIR);
-        assertEquals(furnitureHidden.row(2).asData(Furniture.class), TABLE);
-        assertEquals(furnitureHidden.row(3).asData(Furniture.class), SOFA);
+        dataFurnitureHidden.has().row(CHAIR);
+        dataFurnitureHidden.has().row(TABLE);
+        dataFurnitureHidden.has().row(SOFA);
     }
 
     @Test
-    public void dataRowNameTest() {
-        assertThat(furnitureHidden.row("1").asData(Furniture.class), is(CHAIR));
-        assertThat(furnitureHidden.row("2").asData(Furniture.class), is(TABLE));
-        assertThat(furnitureHidden.row("3").asData(Furniture.class), is(SOFA));
-    }
-    @Test
     public void dataColumnTestIndex() {
-        assertThat(furnitureHidden.column(2), hasItems(TYPE_COLUMN));
-        assertThat(furnitureHidden.column(3), hasItems(COST_COLUMN));
-        assertThat(furnitureHidden.column(4), hasItems(WEIGHT_COLUMN));
+        assertThat(dataFurnitureHidden.column(2), hasItems(TYPE_COLUMN));
+        assertThat(dataFurnitureHidden.column(3), hasItems(COST_COLUMN));
+        assertThat(dataFurnitureHidden.column(4), hasItems(WEIGHT_COLUMN));
     }
 
     @Test
     public void dataColumnNameTest() {
-        assertThat(furnitureHidden.column("Type"), hasItems(TYPE_COLUMN));
-        assertThat(furnitureHidden.column("Cost"), hasItems(COST_COLUMN));
-        assertThat(furnitureHidden.column("Weight"), hasItems(WEIGHT_COLUMN));
+        assertThat(dataFurnitureHidden.column("Type"), hasItems(TYPE_COLUMN));
+        assertThat(dataFurnitureHidden.column("Cost"), hasItems(COST_COLUMN));
+        assertThat(dataFurnitureHidden.column("Weight"), hasItems(WEIGHT_COLUMN));
 
-        assertThat(furnitureHidden.column("TYPE"), hasItems(TYPE_COLUMN));
-        assertThat(furnitureHidden.column("COST *"), hasItems(COST_COLUMN));
-        assertThat(furnitureHidden.column("WEIGHT "), hasItems(WEIGHT_COLUMN));
-    }
-
-    @Test
-    public void dataFilterTest() {
-        List<Furniture> rows = furnitureHidden.rowsAs(Furniture.class);
-        assertThat(rows, hasItem(TABLE));
+        assertThat(dataFurnitureHidden.column("TYPE"), hasItems(TYPE_COLUMN));
+        assertThat(dataFurnitureHidden.column("COST *"), hasItems(COST_COLUMN));
+        assertThat(dataFurnitureHidden.column("WEIGHT "), hasItems(WEIGHT_COLUMN));
     }
 
     @Test
     public void allDataFilterTest() {
-        List<Furniture> rows = furnitureHidden.rowsAs(Furniture.class);
-        List<Furniture> filteredData = filter(rows, d -> d.name.contains("Tab"));
+        List<Furniture> filteredData = dataFurnitureHidden.dataList(d -> d.name.contains("Tab"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), TABLE);
     }
 
     @Test
     public void commonMatchersTest() {
-        furnitureHidden.is().displayed();
-        furnitureHidden.has().size(5);
-        furnitureHidden.assertThat().size(greaterThan(3));
-        furnitureHidden.is().notEmpty().size(lessThanOrEqualTo(7));
+        dataFurnitureHidden.is().displayed();
+        dataFurnitureHidden.has().size(5);
+        dataFurnitureHidden.assertThat().size(greaterThan(3));
+        dataFurnitureHidden.is().notEmpty().size(lessThanOrEqualTo(7));
     }
 
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
-        List<Furniture> rows = furnitureHidden.rowsAs(Furniture.class);
-        assertThat(first(rows, r -> r.name.contains("Tab")), not(nullValue()));
+        dataFurnitureHidden.has().row(r -> r.name.contains("Tab"));
     }
 
     @Test
     public void rowDataMatcherTest() {
-        List<Furniture> rows = furnitureHidden.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
+        dataFurnitureHidden.has().row(TABLE);
     }
-
     @Test
     public void rowsAllTest() {
-        List<Furniture> rows = furnitureHidden.rowsAs(Furniture.class);
-        assertThat(all(rows, r -> r.name.length() >= 4), is(true));
+        dataFurnitureHidden.has().all().rows(r -> r.name.length() >= 4);
     }
-
     @Test
     public void noRowsTest() {
-        List<Furniture> rows = furnitureHidden.rowsAs(Furniture.class);
-        assertThat(any(rows, r -> isBlank(r.name)), is(false));
+        dataFurnitureHidden.has().no().rows(r -> isBlank(r.name));
     }
-
     @Test
     public void atLeastTest() {
-        List<Furniture> rows = furnitureHidden.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.type.contains("furniture")), hasSize(greaterThanOrEqualTo(3)));
+        dataFurnitureHidden.has()
+            .atLeast(3).rows(r -> r.type.contains("furniture"));
     }
-
     @Test
     public void exactMatcherTest() {
-        List<Furniture> rows = furnitureHidden.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.cost.contains("3.5")), hasSize(2));
+        dataFurnitureHidden.has().exact(2).rows(r -> r.cost.contains("3.5"));
     }
-
     @Test
     public void rowDataExactMatcherTest() {
-        List<Furniture> rows = furnitureHidden.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
+        dataFurnitureHidden.has().exact(1).row(TABLE);
     }
 
     @Test
     public void tableChainTest() {
-        furnitureHidden.assertThat()
+        dataFurnitureHidden.assertThat()
             .displayed().size(5).size(greaterThan(3)).notEmpty();
     }
 }
