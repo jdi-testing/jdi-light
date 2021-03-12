@@ -31,6 +31,7 @@ import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
+import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
@@ -309,6 +310,20 @@ public class StaticSite {
 
     @Url("/material-ui-utils-popover--hover")
     public static WebPage utilsPopoverHoverPage;
+
+    // navigation
+    // stepper
+    @Frame("storybook-preview-iframe")
+    public static StepperFrame stepperFrame;
+
+    @Url("/material-ui-navigation-stepper--horizontal-linear-stepper")
+    public static WebPage navigationStepperHorizontalLinearStepperPage;
+
+    @Url("/material-ui-navigation-stepper--stepper-with-optional-step")
+    public static WebPage navigationStepperWithOptionalStepPage;
+
+    @Url("/material-ui-navigation-stepper--nonlinear-stepper")
+    public static WebPage navigationStepperNonlinearStepperPage;
 
     // login page
     @UI("#login-form")
