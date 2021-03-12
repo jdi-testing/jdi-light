@@ -195,35 +195,6 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
-    // navigation
-    // links
-    @Frame("storybook-preview-iframe")
-    public static LinkFrame linkFrame;
-
-    @Url("/material-ui-navigation-link--default")
-    public static WebPage defaultLinkPage;
-
-    @Url("/material-ui-navigation-link--secondary")
-    public static WebPage secondaryLinkPage;
-
-    @Url("/material-ui-navigation-link--text-primary")
-    public static WebPage textPrimaryLinkPage;
-
-    @Url("/material-ui-navigation-link--text-secondary")
-    public static WebPage textSecondaryLinkPage;
-
-    @Url("/material-ui-navigation-link--error")
-    public static WebPage errorLinkPage;
-
-    @Url("/material-ui-navigation-link--underline-always")
-    public static WebPage underlineAlwaysLinkPage;
-
-    @Frame("storybook-preview-iframe")
-    public static GroupCheckBoxFrame groupCheckBoxFrame;
-
-    @Url("/material-ui-inputs-checkbox--group")
-    public static WebPage groupCheckBoxPage;
-
     // Display data
     // material icon
     @Frame("storybook-preview-iframe")
@@ -365,6 +336,34 @@ public class StaticSite {
 
     @Url("/material-ui-navigation-stepper--nonlinear-stepper")
     public static WebPage navigationStepperNonlinearStepperPage;
+
+    // links
+    @Frame("storybook-preview-iframe")
+    public static LinkFrame linkFrame;
+
+    @Url("/material-ui-navigation-link--default")
+    public static WebPage defaultLinkPage;
+
+    @Url("/material-ui-navigation-link--secondary")
+    public static WebPage secondaryLinkPage;
+
+    @Url("/material-ui-navigation-link--text-primary")
+    public static WebPage textPrimaryLinkPage;
+
+    @Url("/material-ui-navigation-link--text-secondary")
+    public static WebPage textSecondaryLinkPage;
+
+    @Url("/material-ui-navigation-link--error")
+    public static WebPage errorLinkPage;
+
+    @Url("/material-ui-navigation-link--underline-always")
+    public static WebPage underlineAlwaysLinkPage;
+
+    @Frame("storybook-preview-iframe")
+    public static GroupCheckBoxFrame groupCheckBoxFrame;
+
+    @Url("/material-ui-inputs-checkbox--group")
+    public static WebPage groupCheckBoxPage;
 
     // login page
     @UI("#login-form")

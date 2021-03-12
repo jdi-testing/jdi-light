@@ -45,9 +45,15 @@ public class LinkAssert extends UIAssert<LinkAssert, Link> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is underline hover")
+    public LinkAssert underlineHover() {
+        jdiAssert(element().isUnderlineHover(), Matchers.is(true));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' text is '{0}'")
     public LinkAssert text(Matcher<String> condition) {
-        jdiAssert(element().getValue(), condition);
+        jdiAssert(element().getText(), condition);
         return this;
     }
 }
