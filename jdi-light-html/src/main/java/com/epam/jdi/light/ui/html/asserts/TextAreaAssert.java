@@ -50,16 +50,16 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
     }
     public TextAreaAssert maxlength(int maxlength) { return maxlength(Matchers.is(maxlength)); }
 
-    @JDIAction("Assert that '{name}' has expected lines")
+    @JDIAction("Assert that '{name}' has lines {0}")
     public TextAreaAssert lines(Matcher<? super List<String>> condition) {
         jdiAssert(element().getLines(), condition);
         return this;
     }
-    @JDIAction("Assert that '{name}' has expected lines")
+    @JDIAction("Assert that '{name}' has lines: {0}")
     public TextAreaAssert lines(String... lines) {
         return lines(containsInAnyOrder(lines));
     }
-    @JDIAction("Assert that '{name}' has expected lines")
+    @JDIAction("Assert that '{name}' has  lines: {0}")
     public TextAreaAssert lines(List<String> lines) {
         return lines(containsInAnyOrder(lines.toArray()));
     }

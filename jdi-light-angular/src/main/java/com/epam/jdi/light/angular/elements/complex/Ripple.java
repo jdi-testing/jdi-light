@@ -157,11 +157,13 @@ public class Ripple extends UIBaseElement<RippleAssert> {
 
     @JDIAction("Input radius '{0}' for '{name}' ripple")
     public void setRadius(final int radius) {
+        clearRadius();
         getRadiusInput().sendKeys(String.valueOf(radius));
     }
 
     @JDIAction("Input color '{0}' for '{name}' ripple")
     public void setColor(final String color) {
+        clearColor();
         getColorInput().sendKeys(color);
     }
 

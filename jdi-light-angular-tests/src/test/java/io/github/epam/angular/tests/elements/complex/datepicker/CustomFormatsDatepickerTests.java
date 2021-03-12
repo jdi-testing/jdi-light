@@ -12,7 +12,7 @@ public class CustomFormatsDatepickerTests extends TestsDatepickerBase {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         customFormatsDatepicker.show();
         customFormatsDatepicker.clear();
     }
