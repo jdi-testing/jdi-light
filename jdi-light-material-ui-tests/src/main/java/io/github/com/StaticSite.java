@@ -32,6 +32,7 @@ import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
@@ -341,6 +342,28 @@ public class StaticSite {
 
     @Url("/material-ui-navigation-stepper--nonlinear-stepper")
     public static WebPage navigationStepperNonlinearStepperPage;
+
+    // links
+    @Frame("storybook-preview-iframe")
+    public static LinkFrame linkFrame;
+
+    @Url("/material-ui-navigation-link--default")
+    public static WebPage defaultLinkPage;
+
+    @Url("/material-ui-navigation-link--secondary")
+    public static WebPage secondaryLinkPage;
+
+    @Url("/material-ui-navigation-link--text-primary")
+    public static WebPage textPrimaryLinkPage;
+
+    @Url("/material-ui-navigation-link--text-secondary")
+    public static WebPage textSecondaryLinkPage;
+
+    @Url("/material-ui-navigation-link--error")
+    public static WebPage errorLinkPage;
+
+    @Url("/material-ui-navigation-link--underline-always")
+    public static WebPage underlineAlwaysLinkPage;
 
     // login page
     @UI("#login-form")
