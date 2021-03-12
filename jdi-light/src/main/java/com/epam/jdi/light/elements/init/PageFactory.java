@@ -149,7 +149,7 @@ public class PageFactory {
         if (firstRule != null) {
             logger.trace("Use initRule: " + firstRule.key);
             try {
-                return (T)(info.instance = firstRule.value.func.execute(info));
+                return (T) (info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
                 throw exception(ex, "Init rule '%s' failed. Can't init field '%s' on page '%s'",
                         firstRule.key, info.name(), info.parentName());
@@ -157,8 +157,8 @@ public class PageFactory {
         }
         else {
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
-                            "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
-                            "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
+                        "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
+                        "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
                     info.name());
         }
     }
