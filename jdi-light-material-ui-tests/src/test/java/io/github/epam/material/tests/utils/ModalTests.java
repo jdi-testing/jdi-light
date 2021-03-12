@@ -10,38 +10,40 @@ import static io.github.com.StaticSite.transitionsModalPage;
 
 public class ModalTests extends TestsInit {
 
-    private static final String expectedSimpleTitle = "Text in a modal";
-    private static final String expectedSimpleDescription = "Duis mollis, est non commodo luctus, nisi erat porttitor ligula.";
-    private static final String expectedTransitionTitle = "Transition modal";
-    private static final String expectedTransitionDescription = "react-transition-group animates me.";
-    private static final String expectedServerTitle = "Server-side modal";
-    private static final String expectedServerDescription = "If you disable JavaScript, you will still see me.";
+    private static final String EXPECTED_SIMPLE_TITLE = "Text in a modal";
+    private static final String EXPECTED_SIMPLE_DESCRIPTION = "Duis mollis, est non commodo luctus, nisi erat porttitor ligula.";
+    private static final String EXPECTED_TRANSITION_TITLE = "Transition modal";
+    private static final String EXPECTED_TRANSITION_DESCRIPTION = "react-transition-group animates me.";
+    private static final String EXPECTED_SERVER_TITLE = "Server-side modal";
+    private static final String EXPECTED_SERVER_DESCRIPTION = "If you disable JavaScript, you will still see me.";
 
 
     @Test
     public void simpleModalTest() {
         simpleModalPage.open();
 
-        modalFrame.buttonModal.clickModalButton();
-        modalFrame.modal.is().verifyingSimpleTitle(expectedSimpleTitle);
-        modalFrame.modal.is().verifyingSimpleDescription(expectedSimpleDescription);
+        modalFrame.buttonModal.click();
+        modalFrame.simpleModalTitle.is().verifyingTitle(EXPECTED_SIMPLE_TITLE);
+        modalFrame.simpleModalDescription.is().verifyingDescription(EXPECTED_SIMPLE_DESCRIPTION);
+        modalFrame.innerButton.click();
+        modalFrame.additionalModal.is().verifyingAdditionalModalDisplayed();
     }
 
     @Test
     public void transitionModalTests() {
         transitionsModalPage.open();
 
-        modalFrame.buttonModal.clickModalButton();
-        modalFrame.modal.is().verifyingTransitionTitle(expectedTransitionTitle);
-        modalFrame.modal.is().verifyingTransitionDescription(expectedTransitionDescription);
+        modalFrame.buttonModal.click();
+        modalFrame.transitionModalTitle.is().verifyingTitle(EXPECTED_TRANSITION_TITLE);
+        modalFrame.transitionModalDescription.is().verifyingDescription(EXPECTED_TRANSITION_DESCRIPTION);
     }
 
     @Test
     public void serverSideModalTests() {
         serverSideModalPage.open();
 
-        modalFrame.modal.is().verifyingServerTitle(expectedServerTitle);
-        modalFrame.modal.is().verifyingServerDescription(expectedServerDescription);
+        modalFrame.serverModalTitle.is().verifyingTitle(EXPECTED_SERVER_TITLE);
+        modalFrame.serverModalDescription.is().verifyingDescription(EXPECTED_SERVER_DESCRIPTION);
 
     }
 }

@@ -10,8 +10,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDIModal {
-    @MarkupLocator String modalRoot() default "";
-    @MarkupLocator String buttonModalRoot() default "";
+    @MarkupLocator String root() default "";
     @MarkupLocator String modalTitle() default "";
     @MarkupLocator String modalDescription() default "";
+    @MarkupLocator String additionalModal() default "";
 }
