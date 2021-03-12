@@ -53,7 +53,7 @@ public class LinkAssert extends UIAssert<LinkAssert, Link> {
 
     @JDIAction("Assert that '{name}' text is '{0}'")
     public LinkAssert text(Matcher<String> condition) {
-        jdiAssert(element().getText(), condition);
+        jdiAssert(element().getLinkText(), condition);
         return this;
     }
 }

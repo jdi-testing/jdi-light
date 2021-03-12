@@ -200,7 +200,7 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-checkbox--group")
     public static WebPage groupCheckBoxPage;
-    
+
     // Display data
     // material icon
     @Frame("storybook-preview-iframe")

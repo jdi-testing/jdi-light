@@ -50,7 +50,7 @@ public class Link extends UIBaseElement<LinkAssert> {
         return new LinkAssert().set(this);
     }
 
-    public String getText() {
+    public String getLinkText() {
         return core().getText();
     }
 }
