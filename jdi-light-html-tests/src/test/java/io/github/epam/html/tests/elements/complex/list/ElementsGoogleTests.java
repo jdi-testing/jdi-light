@@ -129,6 +129,8 @@ public class ElementsGoogleTests implements TestsInit {
 
     @Test
     public void validateFilterTests() {
+        searchPage.search.assertThat().displayed();
+
         DataList<SearchResult, Result> jobs = searchPage.search;
 
         jobs.assertThat().value(containsString(
