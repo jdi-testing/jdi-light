@@ -195,6 +195,12 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
+    @Frame("storybook-preview-iframe")
+    public static GroupCheckBoxFrame groupCheckBoxFrame;
+
+    @Url("/material-ui-inputs-checkbox--group")
+    public static WebPage groupCheckBoxPage;
+    
     // Display data
     // material icon
     @Frame("storybook-preview-iframe")
@@ -358,12 +364,6 @@ public class StaticSite {
 
     @Url("/material-ui-navigation-link--underline-always")
     public static WebPage underlineAlwaysLinkPage;
-
-    @Frame("storybook-preview-iframe")
-    public static GroupCheckBoxFrame groupCheckBoxFrame;
-
-    @Url("/material-ui-inputs-checkbox--group")
-    public static WebPage groupCheckBoxPage;
 
     // login page
     @UI("#login-form")
