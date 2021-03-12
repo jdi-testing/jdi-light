@@ -10,6 +10,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.inputs.EnhancedTransferListFrame;
+import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.displaydata.TypographyFrame;
@@ -53,6 +55,21 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
+
+    //simple transfer list
+    @Frame("storybook-preview-iframe")
+    public static SimpleTransferListFrame simpleTransferListFrame;
+
+    @Url("/material-ui-inputs-transfer-list--simple-transfer-list-view")
+    public static WebPage inputSimpleTransferListPage;
+
+    //enhanced transfer list
+    @Frame("storybook-preview-iframe")
+    public static EnhancedTransferListFrame enhancedTransferListFrame;
+
+    @Url("/material-ui-inputs-transfer-list--enhanced-transfer-list-view")
+    public static WebPage inputEnhancedTransferListPage;
+
 
     // button
     @Frame("storybook-preview-iframe")
