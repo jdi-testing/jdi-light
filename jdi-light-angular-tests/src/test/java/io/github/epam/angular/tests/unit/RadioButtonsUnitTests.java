@@ -13,6 +13,7 @@ public class RadioButtonsUnitTests extends TestsInit {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
+        skipForFirefox();
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }

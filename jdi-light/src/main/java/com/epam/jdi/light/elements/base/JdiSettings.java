@@ -195,8 +195,7 @@ public class JdiSettings {
             return By.id(getByLocator(frame));
         }
     }
-    public static JFunc1<WebDriver, SearchContext> DEFAULT_CONTEXT
-        = JdiSettings::getDefaultContext;
+    public static JFunc1<WebDriver, SearchContext> DEFAULT_CONTEXT = JdiSettings::getDefaultContext;
     public static SearchContext getDefaultContext(WebDriver driver) {
         return driver.switchTo().defaultContent();
     }

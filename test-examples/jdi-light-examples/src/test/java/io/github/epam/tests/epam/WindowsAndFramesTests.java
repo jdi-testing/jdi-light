@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.*;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.epam.EpamGithubSite.*;
 import static io.github.epam.tests.epam.steps.Preconditions.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
@@ -14,16 +15,14 @@ public class WindowsAndFramesTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        getWindows();
         shouldBeLoggedIn();
         homePage.shouldBeOpened();
     }
     @Test
     public void windowsTest() {
-        homePage.shouldBeOpened();
         homePage.githubLink.click();
-        System.out.println("New window is opened: " + newWindowIsOpened());
-        System.out.println("Windows count: " + windowsCount());
+        logger.info("New window is opened: " + newWindowIsOpened());
+        logger.info("Windows count: " + windowsCount());
         originalWindow(); // open original (first) window
         switchToWindow(2); // open second window
         assertEquals(githubPage.repoDescription.getText(),
