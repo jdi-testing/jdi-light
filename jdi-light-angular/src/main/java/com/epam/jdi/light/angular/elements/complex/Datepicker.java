@@ -139,6 +139,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
     public void clear() {
         core().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
         core().click(getOutsidePoint().getX(), getOutsidePoint().getY());
+        core().waitFor().value("");
     }
 
     @JDIAction("Get '{name}' date")
@@ -156,17 +157,20 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
     @JDIAction("Set text '{0}' for '{name}'")
     @Override
     public void setText(final String date) {
+        clear();
         sendKeys(date);
     }
 
     @JDIAction("Input text '{0}' for '{name}'")
     @Override
     public void input(final String date) {
+        clear();
         sendKeys(date);
     }
 
     @JDIAction("Set date '{0}' for '{name}'")
     public void setDate(final LocalDate date) {
+        clear();
         core().sendKeys(date.format(DateTimeFormatter.ofPattern("M/dd/yyyy", Locale.ENGLISH)));
         core().click(getOutsidePoint().getX(), getOutsidePoint().getY());
     }

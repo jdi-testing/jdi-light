@@ -12,8 +12,9 @@ import static org.testng.Assert.assertTrue;
 public class DialogUnitTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
+        skipForFirefox();
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         dialog.show();
     }
 
@@ -21,6 +22,7 @@ public class DialogUnitTests extends TestsInit {
     public void openedTest() {
         dialog.open();
         assertTrue(dialog.isOpened());
+        dialog.close();
     }
 
     @Test
@@ -35,6 +37,7 @@ public class DialogUnitTests extends TestsInit {
         dialog.sendKeysToNameFormField("EPAM Systems");
         dialog.open();
         assertTrue(dialog.nameText("EPAM Systems"));
+        dialog.close();
     }
 
     @Test

@@ -76,8 +76,9 @@ public class DataListAssert<T extends ICoreElement, D>
      * @param item to compare
      * @return DataListAssert
      */
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction("Assert that '{name}' has {0}")
     public DataListAssert<T, D> value(D item) {
+        // MatcherAssert.assertThat(element().hasAny(d -> d.equals(item)), Matchers.is(true));
         return and(hasItem(item));
     }
 
@@ -86,7 +87,7 @@ public class DataListAssert<T extends ICoreElement, D>
      * @param condition to compare
      * @return DataListAssert
      */
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction("Assert that '{name}' value {0}")
     public DataListAssert<T, D> value(Matcher<String> condition) {
         MatcherAssert.assertThat(element().values(), hasItem(condition));
         return this;
@@ -97,7 +98,7 @@ public class DataListAssert<T extends ICoreElement, D>
      * @param text to compare
      * @return DataListAssert
      */
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction("Assert that '{name}' has text '{0}'")
     public DataListAssert<T, D> value(String text) {
         MatcherAssert.assertThat(element().values(), hasItem(text));
         return this;
