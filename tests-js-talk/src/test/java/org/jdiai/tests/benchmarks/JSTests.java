@@ -28,7 +28,7 @@ public class JSTests implements TestInit {
     final int index = 385;
     final int repeat = 1;
     static String totalResult = "";
-    final int lightTestsCount = 300;
+    final int lightTestsCount = 500;
     final int heavyTestsCount = 30;
 
     @BeforeMethod
@@ -112,7 +112,7 @@ public class JSTests implements TestInit {
     }
     @Test(invocationCount = repeat)
     public void getValueByIndexTest() {
-        totalResult += "getValueByNameTest: " + testScenario(
+        totalResult += "getValueByIndexTest: " + testScenario(
             () -> driver().findElements(By.cssSelector("#users-table tr"))
                 .get(index).findElement(By.xpath(".//td[3]")).getText(),
             () -> $("#users-table tr").get(index).find("td").get(2).getText(),
@@ -120,7 +120,7 @@ public class JSTests implements TestInit {
     }
     @Test(invocationCount = repeat)
     public void getValueByNameTopTest() {
-        totalResult += "getValueByNameTest: " + testScenario(() -> {
+        totalResult += "getValueByNameTopTest: " + testScenario(() -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr"));
             WebElement row = elements.stream().filter(el -> {
                 WebElement td = null;
@@ -138,7 +138,7 @@ public class JSTests implements TestInit {
 
     @Test(invocationCount = repeat)
     public void getValueByNameBottomTest() {
-        totalResult += "getValueByNameTest: " + testScenario(() -> {
+        totalResult += "getValueByNameBottomTest: " + testScenario(() -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr"));
             WebElement row = elements.stream().filter(el -> {
                 WebElement td = null;

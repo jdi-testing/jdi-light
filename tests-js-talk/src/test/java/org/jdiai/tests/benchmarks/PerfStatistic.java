@@ -9,14 +9,18 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.LongStream;
 
+import static com.epam.jdi.tools.PropertyReader.getProperties;
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
 
 public class PerfStatistic {
-    public static  <T> String testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
+    public static <T> String testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
         List<Long> seleniumStats = new ArrayList<>();
         List<Long> jsStats = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        int executionCount = parseBoolean(getProperties("/../../target/classes/test.properties")
+            .getProperty("run.performance")) ? count : 1;
+        for (int i = 0; i < executionCount; i++) {
             System.out.println("RUN №"+ i);
             Timer t = new Timer();
             T seleniumResult = seleniumAction.execute();
