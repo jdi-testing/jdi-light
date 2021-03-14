@@ -2,7 +2,6 @@ package org.jdiai;
 
 import com.epam.jdi.tools.Safe;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.jdiai.tools.JSTalk;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static java.lang.Runtime.getRuntime;
 import static org.jdiai.Pages.HOME_PAGE;
-import static org.jdiai.tools.JSTalk.*;
+import static org.jdiai.tools.JSTalk.DRIVER;
 
 public class DriverManager {
     public static void downloadDriver() {

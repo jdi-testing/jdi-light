@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableMap;
 import org.jdiai.jsdriver.JSException;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.*;
+import org.openqa.selenium.remote.Command;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.Response;
 
 import java.io.IOException;
 
