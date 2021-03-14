@@ -25,7 +25,7 @@ public class HttpExecutor {
     }
     public static Object execute(RemoteWebDriver driver, String script) {
         Command command = new Command(driver.getSessionId(), EXECUTE_SCRIPT,
-            ImmutableMap.of("script", script, "args", new Object[] { }));
+                ImmutableMap.of("script", script, "args", new Object[]{}));
         Response response;
         try {
             response = driver.getCommandExecutor().execute(command);
@@ -35,15 +35,13 @@ public class HttpExecutor {
         if (response == null || response.getStatus() == null) {
             throw new JSException(FAILED_TO_EXECUTE_SCRIPT + script);
         }
-        if (response.getStatus() != SUCCESS) {
-            if (response.getStatus() == JAVASCRIPT_ERROR && response.getValue() instanceof JavascriptException) {
-                JavascriptException jsException = (JavascriptException) response.getValue();
-                throw new JSException(jsException, FAILED_TO_EXECUTE_SCRIPT + script);
-            } else {
-                throw new JSException(FAILED_TO_EXECUTE_SCRIPT + script);
-            }
+        if (response.getStatus() == SUCCESS) {
+            return response.getValue();
         }
-        return response.getValue();
+        if (response.getStatus() != JAVASCRIPT_ERROR || !(response.getValue() instanceof JavascriptException)) {
+            throw new JSException(FAILED_TO_EXECUTE_SCRIPT + script);
+        }
+        JavascriptException jsException = (JavascriptException) response.getValue();
+        throw new JSException(jsException, FAILED_TO_EXECUTE_SCRIPT + script);
     }
-    // "return !!document['readyState'];")
 }
