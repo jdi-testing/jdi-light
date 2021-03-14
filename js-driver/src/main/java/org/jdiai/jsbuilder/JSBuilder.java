@@ -59,7 +59,7 @@ public class JSBuilder implements IJSBuilder {
         this.replaceValue = replaceTo;
         return this;
     }
-    public static JFunc2<JavascriptExecutor, String, Object> RETRY = RETRY_DEFAULT;
+    public static JFunc2<WebDriver, String, Object> RETRY = RETRY_DEFAULT;
     public Object executeQuery() {
         String jsScript = getQuery();
         if (logQuery) {
@@ -67,7 +67,7 @@ public class JSBuilder implements IJSBuilder {
         }
         Object result;
         try {
-            result = RETRY.execute(js, jsScript);
+            result = RETRY.execute((WebDriver) js, jsScript);
         } finally {
             cleanup();
         }
@@ -75,7 +75,7 @@ public class JSBuilder implements IJSBuilder {
             logger.execute(">>> " + PROCESS_RESULT.execute(result.toString()));
         return result;
     }
-    public static JFunc2<JavascriptExecutor, String, List<String>> LIST_RETRY = LIST_RETRY_DEFAULT;
+    public static JFunc2<WebDriver, String, List<String>> LIST_RETRY = LIST_RETRY_DEFAULT;
     private static boolean smartStringify = true;
     public static void switchOffStringify() { smartStringify = false; }
     public List<String> executeAsList() {
@@ -84,7 +84,7 @@ public class JSBuilder implements IJSBuilder {
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         List<String> result;
         try {
-            result = LIST_RETRY.execute(js, jsScript);
+            result = LIST_RETRY.execute((WebDriver) js, jsScript);
         } finally {
             cleanup();
         }
