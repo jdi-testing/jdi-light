@@ -54,6 +54,9 @@ public class PerfStatistic {
         return toLong(times).average().orElse(-1);
     }
     private static double min(List<Long> selenium, List<Long> js) {
+        if (selenium.size() == 1) {
+            return (double) selenium.get(0) / js.get(0);
+        }
         double min = Double.MAX_VALUE;
         double prev = Double.MAX_VALUE;
         for (int i = 0; i < js.size(); i++) {
@@ -66,6 +69,9 @@ public class PerfStatistic {
         return prev == Double.MAX_VALUE ? min : prev;
     }
     private static double max(List<Long> selenium, List<Long> js) {
+        if (selenium.size() == 1) {
+            return (double) selenium.get(0) / js.get(0);
+        }
         double max = -1;
         double prev = -1;
         for (int i = 0; i < js.size(); i++) {
