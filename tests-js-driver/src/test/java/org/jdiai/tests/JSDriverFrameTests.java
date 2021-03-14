@@ -5,7 +5,9 @@ import org.jdiai.jsbuilder.JSBuilder;
 import org.jdiai.jsbuilder.SmartBuilderActions;
 import org.jdiai.jsdriver.JSDriver;
 import org.jdiai.locators.By;
+import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static java.util.Arrays.asList;
@@ -15,6 +17,7 @@ import static org.jdiai.states.States.logout;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+@Listeners(TestNGListener.class)
 public class JSDriverFrameTests implements TestInit {
 
     @BeforeMethod

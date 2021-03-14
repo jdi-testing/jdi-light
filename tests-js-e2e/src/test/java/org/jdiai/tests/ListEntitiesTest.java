@@ -5,7 +5,9 @@ import com.google.gson.JsonObject;
 import org.jdiai.TestInit;
 import org.jdiai.entities.User;
 import org.jdiai.states.States;
+import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import static org.jdiai.tests.TestData.SearchResultsJson;
 import static org.jdiai.tools.JSTalk.$;
 import static org.testng.AssertJUnit.assertEquals;
 
+@Listeners(TestNGListener.class)
 public class ListEntitiesTest implements TestInit {
     @BeforeMethod
     public void before() {

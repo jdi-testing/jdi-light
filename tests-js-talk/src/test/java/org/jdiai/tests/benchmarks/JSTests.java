@@ -3,11 +3,13 @@ package org.jdiai.tests.benchmarks;
 import com.google.gson.JsonObject;
 import org.jdiai.TestInit;
 import org.jdiai.jsproducer.Json;
+import org.jdiai.testng.TestNGListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import static org.jdiai.tools.Conditions.textEquals;
 import static org.jdiai.tools.JSTalk.$;
 import static org.jdiai.tools.JSTalk.driver;
 
+@Listeners(TestNGListener.class)
 public class JSTests implements TestInit {
     final String atTop = "Zachary Hendrix";
     final String atBottom = "Yen Stevenson";

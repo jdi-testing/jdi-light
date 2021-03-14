@@ -5,7 +5,9 @@ import com.google.gson.JsonObject;
 import org.jdiai.TestInit;
 import org.jdiai.entities.Link;
 import org.jdiai.jsdriver.JSDriver;
+import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -18,6 +20,7 @@ import static org.jdiai.states.States.atHomePage;
 import static org.jdiai.states.States.logout;
 import static org.testng.Assert.assertEquals;
 
+@Listeners(TestNGListener.class)
 public class JSDriverTests implements TestInit {
 
     @BeforeMethod

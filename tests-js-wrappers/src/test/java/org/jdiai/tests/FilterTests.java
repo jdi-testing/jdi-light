@@ -2,7 +2,9 @@ package org.jdiai.tests;
 
 import org.jdiai.TestInit;
 import org.jdiai.entities.ElementInfo;
+import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import static org.jdiai.jswraper.JSWrapper.element;
 import static org.jdiai.states.States.loggedInAt;
 import static org.testng.Assert.assertEquals;
 
+@Listeners(TestNGListener.class)
 public class FilterTests implements TestInit {
 
     @BeforeMethod

@@ -44,14 +44,14 @@ jobs:
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
         continue-on-error: true
-        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-driver --fail-at-end
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-driver
 
       - name: JS Wrappers Tests
         id: js-wrappers-tests
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
         continue-on-error: true
-        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-wrappers --fail-at-end
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-wrappers
 
       - name: JS Talk Tests
         id: js-talk-tests
@@ -65,7 +65,7 @@ jobs:
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
         continue-on-error: true
-        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-e2e --fail-at-end
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-e2e
 
       - name: Check Tests passed
         if: ${{ steps.js-driver-tests.outcome != 'success' || steps.js-wrappers-tests.outcome != 'success' || steps.js-talk-tests.outcome != 'success' || steps.js-e2e-tests.outcome != 'success' }}

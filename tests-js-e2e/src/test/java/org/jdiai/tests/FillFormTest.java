@@ -3,6 +3,8 @@ package org.jdiai.tests;
 import org.jdiai.TestInit;
 import org.jdiai.entities.User;
 import org.jdiai.locators.By;
+import org.jdiai.testng.TestNGListener;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.jdiai.entities.User.Triss;
@@ -12,6 +14,7 @@ import static org.jdiai.tools.JSTalk.$;
 import static org.jdiai.tools.JSTalk.openPage;
 import static org.testng.AssertJUnit.assertEquals;
 
+@Listeners(TestNGListener.class)
 public class FillFormTest implements TestInit {
 
     @Test

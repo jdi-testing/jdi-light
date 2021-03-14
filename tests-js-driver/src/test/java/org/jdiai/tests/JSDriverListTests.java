@@ -2,8 +2,10 @@ package org.jdiai.tests;
 
 import org.jdiai.TestInit;
 import org.jdiai.jsdriver.JSDriver;
+import org.jdiai.testng.TestNGListener;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.jdiai.Pages.USERS_PAGE;
@@ -11,6 +13,7 @@ import static org.jdiai.states.States.loggedInAt;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+@Listeners(TestNGListener.class)
 public class JSDriverListTests implements TestInit {
 
     @BeforeMethod

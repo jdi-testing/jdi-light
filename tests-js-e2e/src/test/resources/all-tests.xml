@@ -8,5 +8,6 @@
     </test>
     <listeners>
         <listener class-name="org.jdiai.testng.TestNGListener" />
+        <listener class-name="org.jdiai.testng.RetryListener" />
     </listeners>
 </suite>
