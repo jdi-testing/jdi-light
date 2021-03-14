@@ -35,12 +35,13 @@ public class HttpExecutor {
         if (response == null || response.getStatus() == null) {
             throw new JSException(FAILED_TO_EXECUTE_SCRIPT + script);
         }
-        if (response.getStatus() == JAVASCRIPT_ERROR && response.getValue() instanceof JavascriptException) {
-            JavascriptException jsException = (JavascriptException) response.getValue();
-            throw new JSException(jsException, FAILED_TO_EXECUTE_SCRIPT + script);
-        }
         if (response.getStatus() != SUCCESS) {
-            throw new JSException(FAILED_TO_EXECUTE_SCRIPT + script);
+            if (response.getStatus() == JAVASCRIPT_ERROR && response.getValue() instanceof JavascriptException) {
+                JavascriptException jsException = (JavascriptException) response.getValue();
+                throw new JSException(jsException, FAILED_TO_EXECUTE_SCRIPT + script);
+            } else {
+                throw new JSException(FAILED_TO_EXECUTE_SCRIPT + script);
+            }
         }
         return response.getValue();
     }
