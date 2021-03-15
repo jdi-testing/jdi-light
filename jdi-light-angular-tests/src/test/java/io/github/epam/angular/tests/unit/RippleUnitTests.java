@@ -5,6 +5,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.rippleContainer;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
@@ -14,7 +15,7 @@ public class RippleUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         rippleContainer.show();
     }
 
@@ -27,6 +28,8 @@ public class RippleUnitTests extends TestsInit {
     public void disabledTest() {
         rippleContainer.disable();
         assertTrue(rippleContainer.isDisabled());
+        rippleContainer.enable();
+        assertTrue(rippleContainer.isEnabled());
     }
 
     @Test
@@ -108,6 +111,7 @@ public class RippleUnitTests extends TestsInit {
 
     @Test
     public void mouseClickCenteredTest() {
+        refresh();
         rippleContainer.center();
         int x = 179;
         int y = 243;
@@ -115,8 +119,11 @@ public class RippleUnitTests extends TestsInit {
         assertTrue(rippleContainer.isCentered());
     }
 
-    @Test
+    @Test(enabled = false)
     public void randomMouseClickTest() {
+        refresh();
+        rippleContainer.show();
+        rippleContainer.center();
         int x = RandomUtils.nextInt(0, 299);
         int y = RandomUtils.nextInt(0, 299);
         rippleContainer.ripple(x, y);

@@ -12,7 +12,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class ColorAssert extends UIAssert<ColorAssert, ColorPicker> {
-    @JDIAction("Assert that '{name}' color is {0}")
+    @JDIAction("Assert that '{name}' color is '{0}'")
     public ColorAssert color(String color) {
         jdiAssert(element().color(), Matchers.is(color));
         return this;

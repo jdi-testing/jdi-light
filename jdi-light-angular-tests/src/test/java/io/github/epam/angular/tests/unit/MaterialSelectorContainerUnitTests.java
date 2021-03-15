@@ -24,8 +24,9 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
+        skipForFirefox();
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         container = new MaterialSelectorContainer();
     }
 
@@ -58,7 +59,8 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
         assertTrue(basicMatSelect.selected(STEAK));
     }
 
-    @Test
+    @Test(enabled = false)
+    // duplicated. Page should be reload for this test, skip to increase performance
     public void multipleSelectByValuesTest() {
         multipleSelect.show();
         multipleSelect.expand();

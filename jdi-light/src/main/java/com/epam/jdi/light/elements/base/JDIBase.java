@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.init.rules.AnnotationRule;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
@@ -14,17 +15,16 @@ import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.SearchStrategies.*;
@@ -44,6 +44,7 @@ import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -60,7 +61,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     protected Safe<Integer> timeout = new Safe<>(() -> -1);
     protected Safe<Integer> waitAfterTimeout = new Safe<>(() -> -1);
     protected String waitAfterMethod = "";
-    private Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
     public ElementArea clickAreaType = ELEMENT.clickType;
     public TextTypes textType = ELEMENT.getTextType;
     public SetTextTypes setTextType = ELEMENT.setTextType;
@@ -215,7 +215,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         int t = timeout.get();
         return t > -1 ?  t: TIMEOUTS.element.get();
     }
-    public Timer timer() { return new Timer(getTimeout()*1000); }
+    public Timer timer() { return new Timer(getTimeout() * 1000L); }
 
     @Override
     public JDIBase setName(String name) {
@@ -359,6 +359,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public WebList list(Object... args) {
         return $$(getAll(args), getName());
     }
+    public void waitAction(int sec, JAction1<IBaseElement> action) {
+        waitAction(sec, action, IBaseElement.class);
+    }
     public <TE extends IBaseElement> void waitAction(int sec, JAction1<TE> action, Class<TE> type) {
         waitFunc(sec, j -> { action.execute(j); return this; }, type);
     }
@@ -445,28 +448,15 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         if (isBlank(element.varName))
             return element.context;
         return Switch(LOGS.logLevel).get(
-                Case(l -> l == STEP,
-                    l -> msgFormat(PRINT_ELEMENT_STEP, element)),
-                Case(l -> l == INFO,
-                    l -> msgFormat(PRINT_ELEMENT_INFO, element)),
-                Case(l -> l == ERROR,
-                    l -> msgFormat(PRINT_ERROR_STEP, element)),
-                Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
+            Case(l -> l == STEP,
+                l -> msgFormat(PRINT_ELEMENT_STEP, element)),
+            Case(l -> l == INFO,
+                l -> msgFormat(PRINT_ELEMENT_INFO, element)),
+            Case(l -> l == ERROR,
+                l -> msgFormat(PRINT_ERROR_STEP, element)),
+            Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
         );
     };
-
-    public void actions(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(actions.get(), get()).build().perform();
-    }
-    public void actions(JFunc1<Actions, Actions> action) {
-        action.execute(actions.get()).build().perform();
-    }
-    public void actionsWithElement(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(actions.get().moveToElement(get()), get()).build().perform();
-    }
-    public void actionsWithElement(JFunc1<Actions, Actions> action) {
-        action.execute(actions.get().moveToElement(get())).build().perform();
-    }
 
     @Override
     public void offCache() {
@@ -476,4 +466,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     @Override
     public boolean isUseCache() { return webElement.isUseCache() || webElements.isUseCache(); }
     public static MapArray<Integer, String> NAMES = new MapArray<>();
+
+    @JDIAction("Assert that %s")
+    public static void executeShouldBe(String name, Condition condition, ICoreElement element) {
+        jdiAssert(condition.execute(element), is(true), name);
+    }
 }

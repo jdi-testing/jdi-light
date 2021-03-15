@@ -681,6 +681,14 @@
         {
           "value": "ALL UPPER CASE",
           "description": "Convert element's variable name to \"ALL UPPER CASE\" ([smart.locator=//*[text()='%s'] and public Button submitButton] > //*[text()='SUBMIT BUTTON'])"
+        },
+        {
+          "value": "First capital",
+          "description": "Convert element's variable name to \"First capital\" ([smart.locator=//*[text()='%s'] and public Button submitButton] > //*[text()='Submit button'])"
+        },
+        {
+          "value": "As Is",
+          "description": "Leave element's variable name as is ([ui=%s] and public TextField userName] > [ui=userName])"
         }
       ]
     },

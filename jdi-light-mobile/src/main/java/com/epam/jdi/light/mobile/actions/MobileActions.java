@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
+import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.safeException;
 
@@ -21,7 +22,8 @@ public class MobileActions {
     protected void jdiPointcut() { }
 
     @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) {        String classMethod = "";
+    public Object jdiAround(ProceedingJoinPoint jp) {
+        String classMethod = "";
         try {
             classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
             logger.trace("<>@MA: " + classMethod);
@@ -30,7 +32,7 @@ public class MobileActions {
         failedMethods.clear();
         try {
             BEFORE_JDI_ACTION.execute(jInfo);
-            Object result = jInfo.topLevel()
+            Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
             logger.trace("<>@MA: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
