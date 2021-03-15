@@ -64,13 +64,13 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static DateTimePickersFrame dateTimePickersFrame;
 
-    @Url("/material-ui-inputs-date-time-pickers--date-picker-inline")
+    @Url("/material-ui-inputs-date-time--date-picker-inline")
     public static WebPage datePickerInlinePage;
 
-    @Url("material-ui-inputs-date-time-pickers--date-picker-dialog")
+    @Url("/material-ui-inputs-date-time--date-picker-dialog")
     public static WebPage datePickerDialogPage;
 
-    @Url("material-ui-inputs-date-time-pickers--time-picker")
+    @Url("/material-ui-inputs-date-time--time-picker")
     public static WebPage timePickerPage;
 
     //simple transfer list
