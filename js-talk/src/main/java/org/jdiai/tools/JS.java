@@ -596,9 +596,9 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         return listToOne("element = elements.find(e => e && e."+ condition + ");\n");
     }
     public JS findFirst(By by, String condition) {
-        return listToOne("element = elements.find(e => { const td = " +
+        return listToOne("element = elements.find(e => { const fel = " +
             MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+"; " +
-            "return td && td."+ condition + "; });\n");
+            "return fel && fel."+ condition + "; });\n");
     }
     private JS listToOne(String script) {
         JS result = new JS(driver);
@@ -621,10 +621,10 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         if (dimension.getWidth() == 0) return false;
         return isClickable(dimension.getWidth()/2, dimension.getHeight()/2-1);
     }
-    public boolean isClickable(int x, int y) {
+    public boolean isClickable(int xOffset, int yOffset) {
         return getElement("rect = element.getBoundingClientRect();\n" +
-            "cx = rect.left + "+x+";\n" +
-            "cy = rect.top + "+y+";\n" +
+            "cx = rect.left + " + xOffset + ";\n" +
+            "cy = rect.top + " + yOffset + ";\n" +
             "e = document.elementFromPoint(cx, cy);\n" +
             "for (; e; e = e.parentElement) {\n" +
             "  if (e === element)\n" +
@@ -712,7 +712,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
                 newRelations.add(relation);
             }
         }
-        if (newRelations.size() > 0) {
+        if (isNotEmpty(newRelations)) {
             storeRelations(this, newRelations);
         }
         return failures;

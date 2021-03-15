@@ -10,6 +10,12 @@
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <run.performance>true</run.performance>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.jdiai</groupId>
@@ -53,6 +59,15 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
 
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 </project>

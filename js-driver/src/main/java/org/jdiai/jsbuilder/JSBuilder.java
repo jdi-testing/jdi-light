@@ -18,8 +18,8 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.jdiai.jsbuilder.RetryFunctions.LIST_RETRY_DEFAULT;
-import static org.jdiai.jsbuilder.RetryFunctions.RETRY_DEFAULT;
+import static org.jdiai.jsbuilder.RetryFunctions.DEFAULT_LIST_SCRIPT_EXECUTE;
+import static org.jdiai.jsbuilder.RetryFunctions.DEFAULT_SCRIPT_EXECUTE;
 
 public class JSBuilder implements IJSBuilder {
     protected List<String> variables = new ArrayList<>();
@@ -59,7 +59,7 @@ public class JSBuilder implements IJSBuilder {
         this.replaceValue = replaceTo;
         return this;
     }
-    public static JFunc2<JavascriptExecutor, String, Object> RETRY = RETRY_DEFAULT;
+    public static JFunc2<Object, String, Object> EXECUTE_SCRIPT = DEFAULT_SCRIPT_EXECUTE;
     public Object executeQuery() {
         String jsScript = getQuery();
         if (logQuery) {
@@ -67,7 +67,7 @@ public class JSBuilder implements IJSBuilder {
         }
         Object result;
         try {
-            result = RETRY.execute(js, jsScript);
+            result = EXECUTE_SCRIPT.execute(js, jsScript);
         } finally {
             cleanup();
         }
@@ -75,7 +75,7 @@ public class JSBuilder implements IJSBuilder {
             logger.execute(">>> " + PROCESS_RESULT.execute(result.toString()));
         return result;
     }
-    public static JFunc2<JavascriptExecutor, String, List<String>> LIST_RETRY = LIST_RETRY_DEFAULT;
+    public static JFunc2<Object, String, List<String>> EXECUTE_LIST_SCRIPT = DEFAULT_LIST_SCRIPT_EXECUTE;
     private static boolean smartStringify = true;
     public static void switchOffStringify() { smartStringify = false; }
     public List<String> executeAsList() {
@@ -84,7 +84,7 @@ public class JSBuilder implements IJSBuilder {
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         List<String> result;
         try {
-            result = LIST_RETRY.execute(js, jsScript);
+            result = EXECUTE_LIST_SCRIPT.execute(js, jsScript);
         } finally {
             cleanup();
         }

@@ -40,28 +40,42 @@ jobs:
         run: mvn -ntp install -DskipTests
 
       - name: JS Driver Tests
+        id: js-driver-tests
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
         continue-on-error: true
         run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-driver
 
       - name: JS Wrappers Tests
+        id: js-wrappers-tests
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
         continue-on-error: true
         run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-wrappers
 
       - name: JS Talk Tests
+        id: js-talk-tests
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
         continue-on-error: true
-        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-talk
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-talk -Drun.performance=false --fail-at-end
 
       - name: JS E2E Tests
+        id: js-e2e-tests
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
         continue-on-error: true
         run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-e2e
+
+      - name: Check Tests passed
+        if: ${{ steps.js-driver-tests.outcome != 'success' || steps.js-wrappers-tests.outcome != 'success' || steps.js-talk-tests.outcome != 'success' || steps.js-e2e-tests.outcome != 'success' }}
+        run: |
+          echo Tests failed:
+          echo JS Driver Tests: ${{ steps.js-driver-tests.outcome }}
+          echo JS Wrappers Tests: ${{ steps.js-wrappers-tests.outcome }}
+          echo JS Talk Tests: ${{ steps.js-talk-tests.outcome }}
+          echo JS E2E Tests: ${{ steps.js-e2e-tests.outcome }}
+          exit 1
 
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master

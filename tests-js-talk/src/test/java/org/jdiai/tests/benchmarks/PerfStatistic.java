@@ -9,14 +9,18 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.LongStream;
 
+import static com.epam.jdi.tools.PropertyReader.getProperties;
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
 
 public class PerfStatistic {
-    public static  <T> String testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
+    public static <T> String testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
         List<Long> seleniumStats = new ArrayList<>();
         List<Long> jsStats = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        int executionCount = parseBoolean(getProperties("/../../target/classes/test.properties")
+            .getProperty("run.performance")) ? count : 1;
+        for (int i = 0; i < executionCount; i++) {
             System.out.println("RUN №"+ i);
             Timer t = new Timer();
             T seleniumResult = seleniumAction.execute();
@@ -50,8 +54,11 @@ public class PerfStatistic {
         return toLong(times).average().orElse(-1);
     }
     private static double min(List<Long> selenium, List<Long> js) {
+        if (selenium.size() == 1) {
+            return (double) selenium.get(0) / js.get(0);
+        }
         double min = Double.MAX_VALUE;
-        double prev = -1;
+        double prev = Double.MAX_VALUE;
         for (int i = 0; i < js.size(); i++) {
             double ratio = (double) selenium.get(i)/js.get(i);
             if (min > ratio) {
@@ -59,9 +66,12 @@ public class PerfStatistic {
                 min = ratio;
             }
         }
-        return prev;
+        return prev == Double.MAX_VALUE ? min : prev;
     }
     private static double max(List<Long> selenium, List<Long> js) {
+        if (selenium.size() == 1) {
+            return (double) selenium.get(0) / js.get(0);
+        }
         double max = -1;
         double prev = -1;
         for (int i = 0; i < js.size(); i++) {
@@ -71,7 +81,7 @@ public class PerfStatistic {
                 max = ratio;
             }
         }
-        return prev;
+        return prev == -1 ? max : prev;
     }
     private static LongStream toLong(Collection<Long> collection) {
         return collection.stream().mapToLong(a -> a);

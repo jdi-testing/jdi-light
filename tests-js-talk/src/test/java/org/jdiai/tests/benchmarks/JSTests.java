@@ -1,18 +1,22 @@
 package org.jdiai.tests.benchmarks;
 
+import com.google.gson.JsonObject;
 import org.jdiai.TestInit;
 import org.jdiai.jsproducer.Json;
 import org.jdiai.testng.TestNGListener;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.asList;
 import static org.jdiai.Pages.PERFORMANCE_PAGE;
 import static org.jdiai.states.States.loggedInAt;
 import static org.jdiai.tests.benchmarks.PerfStatistic.testScenario;
@@ -27,8 +31,8 @@ public class JSTests implements TestInit {
     final int index = 385;
     final int repeat = 1;
     static String totalResult = "";
-    final int lightTestsCount = 100;
-    final int heavyTestsCount = 10;
+    final int lightTestsCount = 500;
+    final int heavyTestsCount = 30;
 
     @BeforeMethod
     public void before() {
@@ -37,6 +41,7 @@ public class JSTests implements TestInit {
 
     @Test(invocationCount = repeat)
     public void getText() {
+        ((JavascriptExecutor)driver()).executeScript("");
         totalResult += "getText: " + testScenario(
             () -> driver().findElement(By.cssSelector("#users-table tr>th")).getText(),
             () -> $("#users-table tr>th").getText(),
@@ -84,6 +89,23 @@ public class JSTests implements TestInit {
         lightTestsCount) + "\n";
     }
     @Test(invocationCount = repeat)
+    public void multiElements() {
+        totalResult += "multiElements: " + testScenario(() -> {
+            WebElement element = driver().findElement(By.xpath("//*[@id='users-table']//tr[2]"));
+            List<String> result = new ArrayList<>();
+            for (int i = 1; i <= 4; i++) {
+                result.add(element.findElement(By.xpath(".//td[" + i + "]")).getText());
+            }
+            return result;
+        }, () -> {
+            JsonObject jo = $("//*[@id='users-table']//tr[2]").getJSObject(
+            "{ '1': xpath(element, 'td[1]').innerText, '2': xpath(element, 'td[2]').innerText, " +
+                "'3': xpath(element, 'td[3]').innerText, '4': xpath(element, 'td[4]').innerText }");
+                return asList(jo.get("1").getAsString(), jo.get("2").getAsString(), jo.get("3").getAsString(), jo.get("4").getAsString());
+        },
+        lightTestsCount) + "\n";
+    }
+    @Test(invocationCount = repeat)
     public void listGetValuesTest() {
         totalResult += "listGetValuesTest: " + testScenario(() -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr>td:first-child"));
@@ -93,7 +115,7 @@ public class JSTests implements TestInit {
     }
     @Test(invocationCount = repeat)
     public void getValueByIndexTest() {
-        totalResult += "getValueByNameTest: " + testScenario(
+        totalResult += "getValueByIndexTest: " + testScenario(
             () -> driver().findElements(By.cssSelector("#users-table tr"))
                 .get(index).findElement(By.xpath(".//td[3]")).getText(),
             () -> $("#users-table tr").get(index).find("td").get(2).getText(),
@@ -101,7 +123,7 @@ public class JSTests implements TestInit {
     }
     @Test(invocationCount = repeat)
     public void getValueByNameTopTest() {
-        totalResult += "getValueByNameTest: " + testScenario(() -> {
+        totalResult += "getValueByNameTopTest: " + testScenario(() -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr"));
             WebElement row = elements.stream().filter(el -> {
                 WebElement td = null;
@@ -119,7 +141,7 @@ public class JSTests implements TestInit {
 
     @Test(invocationCount = repeat)
     public void getValueByNameBottomTest() {
-        totalResult += "getValueByNameTest: " + testScenario(() -> {
+        totalResult += "getValueByNameBottomTest: " + testScenario(() -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr"));
             WebElement row = elements.stream().filter(el -> {
                 WebElement td = null;
