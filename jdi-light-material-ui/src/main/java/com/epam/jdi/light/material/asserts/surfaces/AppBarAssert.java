@@ -9,15 +9,15 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
 
-    @JDIAction("Assert that menu '{name}' is enabled")
-    public AppBarAssert isEnabledMenu() {
-        jdiAssert(element().isButtonMenuEnabled(), Matchers.is(true));
+    @JDIAction("Assert '{name}'")
+    public AppBarAssert assertTitle(String actualTitle) {
+        jdiAssert(element().verifyTitle(actualTitle), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that login '{name}' is enabled")
-    public AppBarAssert isEnabledLogin() {
-        jdiAssert(element().isLoginEnabled(), Matchers.is(true));
+    @JDIAction("Assert '{name}'")
+    public AppBarAssert enabled(int index) {
+        jdiAssert(element().isMenuButtonEnabled(index), Matchers.is(true));
         return this;
     }
 }

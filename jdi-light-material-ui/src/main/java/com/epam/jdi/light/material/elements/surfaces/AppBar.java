@@ -3,37 +3,55 @@ package com.epam.jdi.light.material.elements.surfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.material.annotations.JDIAppBar;
 import com.epam.jdi.light.material.asserts.surfaces.AppBarAssert;
-import org.openqa.selenium.By;
+import com.epam.jdi.light.material.elements.inputs.Select;
 
-public class AppBar extends UIBaseElement<AppBarAssert> {
+import java.lang.reflect.Field;
 
-    private UIElement isElementEnabled(){
-        return core().find(".MuiButtonBase-root");
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+
+public class AppBar extends UIBaseElement<AppBarAssert> implements ISetup {
+
+    String buttons;
+    String appTitle;
+
+    private UIElement appBarElement(int index) {
+        return this.finds(buttons).get(index);
     }
 
-    @JDIAction("Is '{name}' button enabled")
-    public boolean isButtonMenuEnabled() {
-        return isElementEnabled().isExist();
+    @JDIAction("Is '{name}' enabled by index")
+    public boolean isMenuButtonEnabled(int index) {
+        return appBarElement(index).isEnabled();
     }
 
-    @JDIAction("Is '{name}' login enabled")
-    public boolean isLoginEnabled() {
-        return isElementEnabled().isExist();
+    @JDIAction("Click on '{name}' by index")
+    public void clickOnElementByIndex(int index) {
+        appBarElement(index).click();
     }
 
-    @JDIAction("Click on '{name}' menu")
-    public void appBarMenuClick() {
-        core().find(".MuiIconButton-colorInherit.MuiIconButton-edgeStart").click();
+    private String getTitle() {
+        return this.find(appTitle).getText();
     }
 
-    @JDIAction("Click on '{name}' login")
-    public void loginClick() {
-        core().find(By.className("MuiButton-label")).click();
+    @JDIAction("Verify '{name}'")
+    public boolean verifyTitle(String actualTitle) {
+        return getTitle().equals(actualTitle);
     }
 
     @Override
     public AppBarAssert is() {
         return new AppBarAssert().set(this);
+    }
+
+    @Override
+    public void setup(Field field) {
+        if (!fieldHasAnnotation(field, JDIAppBar.class, AppBar.class))
+            return;
+        JDIAppBar j = field.getAnnotation(JDIAppBar.class);
+
+        buttons = j.buttons();
+        appTitle = j.appTitle();
     }
 }

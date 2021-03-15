@@ -156,7 +156,7 @@ public class StaticSite {
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
 
-    @Url("material-ui-surfaces-app-bar--simple-app-bar")
+    @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage appBarPage;
 
     @Frame("storybook-preview-iframe")

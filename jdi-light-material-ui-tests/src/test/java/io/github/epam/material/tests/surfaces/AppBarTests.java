@@ -8,13 +8,16 @@ import static io.github.com.StaticSite.appBarPage;
 
 public class AppBarTests extends TestsInit {
 
+    private static final String TITLE = "News";
+
     @Test
     public void appBarTests() {
         appBarPage.shouldBeOpened();
 
-        appBarFrame.appBar.is().isEnabledMenu();
-        appBarFrame.appBar.appBarMenuClick();
-        appBarFrame.appBar.is().isEnabledLogin();
-        appBarFrame.appBar.loginClick();
+        appBarFrame.appBarElement.is().enabled(1);
+        appBarFrame.appBarElement.clickOnElementByIndex(1);
+        appBarFrame.appBarElement.is().enabled(2);
+        appBarFrame.appBarElement.clickOnElementByIndex(2);
+        appBarFrame.appTitle.is().assertTitle(TITLE);
     }
 }
