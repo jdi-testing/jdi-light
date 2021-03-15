@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
+
 /**
  * To see an example of BottomSheet web element please visit https://material.angular.io/components/bottom-sheet/overview.
  */
@@ -39,6 +41,9 @@ public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
         if (isOpened()) {
             bottomSheetContainer.core().click();
             bottomSheetContainer.waitFor().disappear();
+        }
+        else {
+            logger.info("BottomSheet is already closed. Do nothing");
         }
     }
 

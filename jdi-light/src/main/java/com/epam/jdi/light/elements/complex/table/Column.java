@@ -11,9 +11,9 @@ public class Column extends NameNum {
     public static Column column(String value) {
         return (Column)new Column().set(row -> row.name = value);
     }
-    public static Column column(Enum name) { return column(getEnumValue(name)); }
+    public static Column column(Enum<?> name) { return column(getEnumValue(name)); }
     public static Column inColumn(int num) { return column(num); }
     public static Column inColumn(String value) { return column(value); }
-    public static Column inColumn(Enum name) { return column(getEnumValue(name)); }
+    public static Column inColumn(Enum<?> name) { return column(getEnumValue(name)); }
 
 }

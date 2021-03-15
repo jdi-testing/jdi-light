@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import java.lang.reflect.Field;
 
 import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
 import static org.testng.Assert.assertEquals;
 
@@ -35,8 +36,8 @@ public class DataConversionTests {
             try {
                 Field dataField = first(pData.getClass().getDeclaredFields(),
                     f -> f.getName().equals(field.getName()));
-                if (field.get(expected) != null)
-                    setPrimitiveField(dataField, pData, field.get(expected).toString());
+                if (getValueField(field, expected) != null)
+                    setPrimitiveField(dataField, pData, getValueField(field, expected).toString());
             } catch (Exception ignore) {}
         }
         assertEquals(pData, expected);

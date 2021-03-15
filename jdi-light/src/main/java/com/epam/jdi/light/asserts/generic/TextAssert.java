@@ -13,7 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  */
 public class TextAssert extends UIAssert<TextAssert, IsText>
         implements ITextAssert<TextAssert> {
-    @JDIAction("Assert that '{name}' text is '{0}'")
+    @JDIAction("Assert that '{name}' text {0}")
     public TextAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;

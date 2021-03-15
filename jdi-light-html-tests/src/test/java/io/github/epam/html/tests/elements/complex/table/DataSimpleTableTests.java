@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements.complex.table;
 
-import com.epam.jdi.light.elements.complex.table.Single;
+import com.epam.jdi.light.elements.complex.table.matchers.ValueMatcher;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.com.entities.MarvelUserSimple;
 import io.github.epam.TestsInit;
@@ -10,8 +10,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.hasValue;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.emptyTable;
@@ -106,7 +106,7 @@ public class DataSimpleTableTests implements TestsInit {
     }
     @Test
     public void rowTableMatcherSingleTest() {
-        usersData.has().rowThat(Single.hasValue("Sergey Ivan"), inColumn("User"));
+        usersData.has().rowThat(ValueMatcher.hasValue("Sergey Ivan"), inColumn("User"));
     }
     @Test
     public void rowTableMatcherTest() {
