@@ -20,10 +20,6 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> {
         return !isChecked();
     }
 
-    public String getText() {
-        return core().getText();
-    }
-
     @JDIAction("Is '{name} disabled")
     @Override
     public boolean isDisabled() {

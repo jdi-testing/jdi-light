@@ -26,12 +26,6 @@ public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton> 
         return this;
     }
 
-    @JDIAction("Assert that '{name}' text is '{0}'")
-    public RadioButtonAssert text(Matcher<String> condition) {
-        jdiAssert(element().getText(), condition);
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' is enabled")
     @Override
     public RadioButtonAssert enabled() {

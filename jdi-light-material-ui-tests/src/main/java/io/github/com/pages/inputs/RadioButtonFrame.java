@@ -1,5 +1,6 @@
 package io.github.com.pages.inputs;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.RadioButton;
@@ -18,5 +19,5 @@ public class RadioButtonFrame extends Section {
     public RadioButton disabledRadioButton;
 
     @UI("//fieldset/p")
-    public RadioButton textField;
+    public UIElement textField;
 }
