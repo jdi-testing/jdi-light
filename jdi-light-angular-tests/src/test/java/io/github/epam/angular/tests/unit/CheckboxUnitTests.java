@@ -13,7 +13,7 @@ public class CheckboxUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         disabledCheckbox.show();
     }
 

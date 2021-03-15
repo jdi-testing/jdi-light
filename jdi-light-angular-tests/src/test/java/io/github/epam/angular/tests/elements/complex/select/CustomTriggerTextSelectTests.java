@@ -14,7 +14,7 @@ public class CustomTriggerTextSelectTests extends TestsSelectBase {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         customTriggerTextSelect.show();
     }
 

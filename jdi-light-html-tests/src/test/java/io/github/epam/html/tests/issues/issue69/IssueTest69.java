@@ -47,7 +47,6 @@ public class IssueTest69 {
         assertEquals(p, expectedParagraph);
     }
 
-
     // region DataProvider
     public static List<Paragraph> paragraph(String paragraph) {
         switch (paragraph) {
