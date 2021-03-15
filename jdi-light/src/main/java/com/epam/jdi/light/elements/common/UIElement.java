@@ -16,6 +16,7 @@ import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
@@ -37,6 +38,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
 import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.logger.AllureLogger.attachScreenshot;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.SCREEN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -247,9 +249,9 @@ public class UIElement extends JDIBase
     }
 
     @JDIAction(level = DEBUG)
-    public WebElement findElement(@MarkupLocator By locator) { return $(locator, this).getWebElement(); }
+    public WebElement findElement(@MarkupLocator By locator) { return getWebElement().findElement(locator); }
     @JDIAction(level = DEBUG)
-    public List<WebElement> findElements(@MarkupLocator By locator) { return $(locator, this).getWebElements(); }
+    public List<WebElement> findElements(@MarkupLocator By locator) { return getWebElement().findElements(locator); }
 
     /** Get screen screen shot */
     @JDIAction(level = DEBUG)
@@ -348,6 +350,7 @@ public class UIElement extends JDIBase
                 break;
             case SMART_CLICK:
                 show();
+                logger.debug("Click Smart");
                 ElementArea clArea = timer().getResultByCondition(
                     this::getElementClickableArea, Objects::nonNull);
                 if (clArea == null || clArea == CENTER) {
@@ -363,7 +366,7 @@ public class UIElement extends JDIBase
     protected void waitAfterAction() {
         int timeout = waitAfter().value;
         if (isBlank(waitAfterMethod) && timeout > 0) {
-            Timer.sleep(timeout * 1000);
+            Timer.sleep(timeout * 1000L);
         }
     }
     protected RuntimeException getNotClickableException() {
@@ -551,6 +554,29 @@ public class UIElement extends JDIBase
         }
     }
 
+    private Actions getActions() {
+        return new Actions(driver());
+    }
+    private WebElement showElement() {
+        show();
+        return getWebElement();
+    }
+    public void actions(JFunc2<Actions, WebElement, Actions> action) {
+        WebElement webElement = showElement();
+        action.execute(getActions(), webElement).build().perform();
+    }
+    public void actions(JFunc1<Actions, Actions> action) {
+        show();
+        action.execute(getActions()).build().perform();
+    }
+    public void actionsWithElement(JFunc2<Actions, WebElement, Actions> action) {
+        WebElement webElement = showElement();
+        action.execute(getActions().moveToElement(webElement), webElement).build().perform();
+    }
+    public void actionsWithElement(JFunc1<Actions, Actions> action) {
+        WebElement webElement = showElement();
+        action.execute(getActions().moveToElement(webElement)).build().perform();
+    }
     /**
      * Scroll view to element and make a border around with specified color
      * @param color
@@ -611,8 +637,13 @@ public class UIElement extends JDIBase
         actions((a,e) -> a.dragAndDropBy(e, x, y));
     }
 
+    public void makePhotoToAllure() {
+        try {
+            attachScreenshot(getName(), makePhoto(getName()).getAbsolutePath());
+        } catch (Exception ignore) { }
+    }
     public File makePhoto() {
-        return makePhoto("");
+        return makePhoto(getName());
     }
     /**
      * Get element's screen shot with red border
@@ -627,7 +658,7 @@ public class UIElement extends JDIBase
         return hasImage() ? new File(imageFilePath) : null;
     }
     protected String getScreenshotName(String tag) {
-        return varName + tag + SCREEN.fileSuffix;
+        return tag + "." + SCREEN.fileSuffix;
     }
 
     @JDIAction(level = DEBUG)
@@ -687,7 +718,7 @@ public class UIElement extends JDIBase
     public Label label() {
         return new Label().setup(Label.class, j->j
             .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))
-            .setName(getName() + " label"));
+            .setName(getName() + " label").setTypeName("Label"));
     }
 
     /**
@@ -748,6 +779,9 @@ public class UIElement extends JDIBase
     }
     public UIElement firstChild() { return find("*"); }
     public WebList children() { return finds("*"); }
+    public UIElement findUp() {
+        return find("./..");
+    }
     //endregion
 
     //region Aliases

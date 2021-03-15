@@ -16,7 +16,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 public class Breadcrumb extends UIListBase<UISelectAssert<UISelectAssert<?,?>, WebList>> {
     @Override
     public WebList list() {
-        return $$(".breadcrumb-item", this);
+        return $$(".breadcrumb-item", this).setName(getName() + " breadcrumb");
     }
     public String selected() {
         return list().first(el -> el.hasClass("active")).getText();

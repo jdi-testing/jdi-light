@@ -73,9 +73,10 @@ public class DropdownSelectTests implements TestsInit {
     public void sizeTest() {
         assertEquals(dressCode.size(), 4);
     }
+
     @Test
     public void disabledTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
         disabledDropdown.select("Pirate");
         assertEquals(disabledDropdown.getValue(), "Disabled");
     }

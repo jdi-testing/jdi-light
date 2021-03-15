@@ -183,6 +183,12 @@ public class IDataGridAssert<D, T extends IDataGrid<?, D>, A extends IDataGridAs
     public Compare atLeast(int count) {
         return new Compare(count, this, ATLEAST);
     }
+    public Compare moreThan(int count) {
+        return atLeast(count + 1);
+    }
+    public Compare lessThan(int count) {
+        return new Compare(count, this, LESSTHAN);
+    }
     public Compare no() {
         return exact(0);
     }
@@ -194,7 +200,7 @@ public class IDataGridAssert<D, T extends IDataGrid<?, D>, A extends IDataGridAs
     }
 
     public enum CompareType {
-        EXACT("exactly"), ATLEAST("at least"), ALL("all");
+        EXACT("exactly"), LESSTHAN("less than"), ATLEAST("at least"), ALL("all");
         public String text;
         CompareType(String text) { this.text = text; }
     }
@@ -231,16 +237,16 @@ public class IDataGridAssert<D, T extends IDataGrid<?, D>, A extends IDataGridAs
         public IDataGridAssert<D, T, A> rows(JFunc1<D, Boolean> condition) {
             switch (compareType) {
                 case EXACT:
-                    // TODO
-                    // jdiAssert(dataGrid().datas(condition), hasSize(count));
+                    jdiAssert(dataGrid().dataList(condition), hasSize(count));
                     break;
                 case ALL:
-                    // TODO
-                    // jdiAssert(dataGrid().datas(condition), hasSize(dataGrid().count()));
+                    jdiAssert(dataGrid().dataList(condition), hasSize(dataGrid().count()));
                     break;
                 case ATLEAST:
-                    // TODO
-                    // jdiAssert(dataGrid().first(condition), hasSize(greaterThanOrEqualTo(count)));
+                    jdiAssert(dataGrid().dataList(condition), hasSize(greaterThanOrEqualTo(count)));
+                    break;
+                case LESSTHAN:
+                    jdiAssert(dataGrid().dataList(condition), hasSize(Matchers.lessThan(count)));
                     break;
             }
             return dtAssert;
