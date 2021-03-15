@@ -16,7 +16,7 @@ public class ListsFrame extends UIElement {
     public Lists lineItemFirst;
 
     @XPath("//*[contains(text(),'Line item 1')]/../../div[contains(@class, 'MuiListItemIcon-root')]/span")
-    public  Lists checkboxLineItemFirst;
+    public Lists checkboxLineItemFirst;
 
     @UI("//*[contains(text(),'sticky 0')]")
     public Lists stickyZero;

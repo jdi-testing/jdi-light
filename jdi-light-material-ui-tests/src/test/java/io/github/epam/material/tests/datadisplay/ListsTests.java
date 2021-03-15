@@ -1,4 +1,5 @@
 package io.github.epam.material.tests.datadisplay;
+import static org.hamcrest.Matchers.hasToString;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
@@ -15,7 +16,9 @@ public class ListsTests extends TestsInit{
         dataDisplayListsSimpleListPage.open();
 
         listsFrame.firstListItem.is().enabled();
+        listsFrame.firstListItem.is().text(hasToString("List item 1"));
         listsFrame.secondListItem.is().enabled();
+        listsFrame.secondListItem.is().text(hasToString("List item 2"));
     }
 
     @Test
@@ -23,6 +26,7 @@ public class ListsTests extends TestsInit{
         dataDisplayCheckboxListPage.open();
 
         listsFrame.lineItemFirst.is().enabled();
+        listsFrame.lineItemFirst.is().text(hasToString("Line item 1"));
         listsFrame.checkboxLineItemFirst.is().checked();
 
         listsFrame.checkboxLineItemFirst.uncheck();
@@ -37,7 +41,9 @@ public class ListsTests extends TestsInit{
         dataPinnedSubheaderListPage.open();
 
         listsFrame.stickyZero.is().enabled();
+        listsFrame.stickyZero.is().text(hasToString("I'm sticky 0"));
         listsFrame.stickyOne.is().enabled();
+        listsFrame.stickyOne.is().text(hasToString("I'm sticky 1"));
     }
 
 }

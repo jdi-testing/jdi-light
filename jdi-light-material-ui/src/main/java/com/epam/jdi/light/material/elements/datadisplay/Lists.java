@@ -50,4 +50,9 @@ public class Lists extends UIBaseElement<ListsAssert> {
         return new ListsAssert().set(this);
     }
 
+    @JDIAction("Get text")
+    public String getText() {
+        return core().getText();
+    }
+
 }

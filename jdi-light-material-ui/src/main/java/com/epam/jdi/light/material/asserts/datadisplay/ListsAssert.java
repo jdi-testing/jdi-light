@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.datadisplay.Lists;
 import com.epam.jdi.tools.Timer;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 
@@ -39,6 +40,12 @@ public class ListsAssert extends UIAssert<ListsAssert, Lists> {
         boolean isUnchecked = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isUnchecked());
         jdiAssert(isUnchecked, Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' text is '{0}'")
+    public ListsAssert text(Matcher<String> condition) {
+        jdiAssert(element().getText(), condition);
         return this;
     }
 }
