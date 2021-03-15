@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIAppBar;
 import com.epam.jdi.light.material.asserts.surfaces.AppBarAssert;
-import com.epam.jdi.light.material.elements.inputs.Select;
 
 import java.lang.reflect.Field;
 
