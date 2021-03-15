@@ -176,14 +176,6 @@ public class StaticSite {
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
 
-    // layouts
-    // hidden
-    @Frame("storybook-preview-iframe")
-    public static HiddenFrame hiddenFrame;
-
-    @Url("/material-ui-hidden--default-hidden")
-    public static WebPage defaultHiddenPage;
-
     // paper
     @Frame("storybook-preview-iframe")
     public static PaperFrame paperFrame;
@@ -387,6 +379,14 @@ public class StaticSite {
 
     @Url("/material-ui-navigation-link--underline-always")
     public static WebPage underlineAlwaysLinkPage;
+
+    // layouts
+    // hidden
+    @Frame("storybook-preview-iframe")
+    public static HiddenFrame hiddenFrame;
+
+    @Url("/material-ui-layout-hidden--default-hidden")
+    public static WebPage defaultHiddenPage;
 
     // login page
     @UI("#login-form")
