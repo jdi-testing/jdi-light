@@ -33,20 +33,20 @@ public class MultiDropdownTests implements TestsInit {
 
     @Test
     public void selectTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
         multiDropdown.check("Electro", "Metalic");
         assertEquals(multiDropdown.checked(), asList("Electro", "Metalic"));
     }
 
     @Test
     public void selectEnumTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
         multiDropdown.check(Wood, Steam);
         assertEquals(multiDropdown.checked(), asList("Steam", "Wood"));
     }
     @Test
     public void selectNumTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
         multiDropdown.check(ELEMENT.startIndex, ELEMENT.startIndex + 4);
         assertEquals(multiDropdown.checked(), asList("Electro", "Wood"));
     }
@@ -57,7 +57,7 @@ public class MultiDropdownTests implements TestsInit {
 
     @Test
     public void disabledTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
         multiDropdown.select("Disabled");
         assertEquals(multiDropdown.selected(), "Steam");
     }

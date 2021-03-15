@@ -9,13 +9,19 @@ import java.time.Year;
 import java.util.Locale;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.basicDatepicker;
 
 public class BasicDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
+        basicDatepicker.show();
+    }
+
+    public void reInit() {
+        refresh();
         basicDatepicker.show();
     }
 
@@ -28,6 +34,8 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
     public void checkExpanded() {
         basicDatepicker.expand();
         basicDatepicker.is().expanded();
+        basicDatepicker.collapse();
+        basicDatepicker.is().collapsed();
     }
 
     @Test
@@ -83,6 +91,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkEmptyDateValue() {
+        reInit();
         basicDatepicker.has().value("");
     }
 
@@ -112,6 +121,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkSelectDayInPreviousMonth() {
+        reInit();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int previousMonth = currentMonth == 1 ? 12 : currentMonth - 1;
         basicDatepicker.selectDayInPreviousMonth(1);
@@ -120,6 +130,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkSelectDayInNextMonth() {
+        reInit();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int nextMonth = currentMonth == 12 ? 1 : currentMonth + 1;
         basicDatepicker.selectDayInNextMonth(2);
@@ -140,24 +151,18 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkNavigateToDayInPreviousMonths() {
-        int currentMonth = LocalDate.now().getMonth().getValue();
+        reInit();
         int monthCountEarlier = 4;
-        int monthCount = monthCountEarlier % 12;
-        int previousMonth = monthCount == 0 ?
-                currentMonth :
-                (currentMonth - monthCount) == 0 ? 12 : currentMonth - monthCount;
+        int previousMonth = LocalDate.now().minusMonths(monthCountEarlier).getMonthValue();
         basicDatepicker.navigateToDayInPreviousMonths(monthCountEarlier, 12);
         basicDatepicker.has().selectedMonth(Month.of(previousMonth));
     }
 
     @Test
     public void checkNavigateToDayInNextMonths() {
-        int currentMonth = LocalDate.now().getMonth().getValue();
+        reInit();
         int monthCountLater = 5;
-        int monthCount = monthCountLater % 12;
-        int nextMonth = monthCount == 0 ?
-                currentMonth :
-                (currentMonth + monthCount) > 12 ? (currentMonth + monthCount) - 12 : currentMonth + monthCount;
+        int nextMonth = LocalDate.now().plusMonths(monthCountLater).getMonthValue();
         basicDatepicker.navigateToDayInNextMonths(monthCountLater, 12);
         basicDatepicker.has().selectedMonth(Month.of(nextMonth));
     }
