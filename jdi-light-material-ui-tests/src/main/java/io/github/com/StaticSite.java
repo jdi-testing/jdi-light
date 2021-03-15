@@ -29,6 +29,7 @@ import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
+import io.github.com.pages.navigation.BreadcrumbsFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
@@ -279,6 +280,29 @@ public class StaticSite {
 
     @Url("/material-ui-utils-popover--hover")
     public static WebPage utilsPopoverHoverPage;
+
+    // navigation
+    // breadcrumbs
+    @Frame("storybook-preview-iframe")
+    public static BreadcrumbsFrame breadcrumbsFrame;
+
+    @Url("/material-ui-navigation-breadcrumbs--simple")
+    public static WebPage simpleBreadcrumbsPage;
+
+    @Url("/material-ui-navigation-breadcrumbs--custom-separator")
+    public static WebPage customSeparatorBreadcrumbsPage;
+
+    @Url("/material-ui-navigation-breadcrumbs--with-icons")
+    public static WebPage withIconsBreadcrumbsPage;
+
+    @Url("/material-ui-navigation-breadcrumbs--collapsed")
+    public static WebPage collapsedBreadcrumbsPage;
+
+    @Url("/material-ui-navigation-breadcrumbs--router-integration")
+    public static WebPage routerIntegrationBreadcrumbsPage;
+
+    @Url("/material-ui-navigation-breadcrumbs--customized")
+    public static WebPage customizedBreadcrumbsPage;
 
     // login page
     @UI("#login-form")
