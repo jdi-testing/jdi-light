@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.datadisplay.ListsFrame;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.displaydata.BadgeFrame;
@@ -32,12 +33,14 @@ import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.layouts.HiddenFrame;
 import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 import io.github.com.pages.utils.ModalFrame;
+import io.github.com.pages.inputs.DateTimePickersFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
@@ -59,6 +62,19 @@ public class StaticSite {
     @Url("/material-ui-inputs-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
 
+    //date and time pickers
+    @Frame("storybook-preview-iframe")
+    public static DateTimePickersFrame dateTimePickersFrame;
+
+    @Url("/material-ui-inputs-date-time--date-picker-inline")
+    public static WebPage datePickerInlinePage;
+
+    @Url("/material-ui-inputs-date-time--date-picker-dialog")
+    public static WebPage datePickerDialogPage;
+
+    @Url("/material-ui-inputs-date-time--time-picker")
+    public static WebPage timePickerPage;
+
     //simple transfer list
     @Frame("storybook-preview-iframe")
     public static SimpleTransferListFrame simpleTransferListFrame;
@@ -72,7 +88,6 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-transfer-list--enhanced-transfer-list-view")
     public static WebPage inputEnhancedTransferListPage;
-
 
     // button
     @Frame("storybook-preview-iframe")
@@ -258,6 +273,19 @@ public class StaticSite {
     @Url("/material-ui-data-display-tooltip--interactive")
     public static WebPage displayDataTooltipInteractivePage;
 
+    // lists
+    @Frame("storybook-preview-iframe")
+    public static ListsFrame listsFrame;
+
+    @Url("/material-ui-data-display-lists--simple-list")
+    public static WebPage dataDisplayListsSimpleListPage;
+
+    @Url("/material-ui-data-display-lists--checkbox-list")
+    public static WebPage dataDisplayCheckboxListPage;
+
+    @Url("/material-ui-data-display-lists--pinned-subheader-list")
+    public static WebPage dataPinnedSubheaderListPage;
+
     // feedback
     // backdrop
     @Frame("storybook-preview-iframe")
@@ -377,6 +405,14 @@ public class StaticSite {
 
     @Url("/material-ui-navigation-link--underline-always")
     public static WebPage underlineAlwaysLinkPage;
+
+    // layouts
+    // hidden
+    @Frame("storybook-preview-iframe")
+    public static HiddenFrame hiddenFrame;
+
+    @Url("/material-ui-layout-hidden--default-hidden")
+    public static WebPage defaultHiddenPage;
 
     // login page
 
