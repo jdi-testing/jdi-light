@@ -69,7 +69,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
     public void select(int... indexes) {
         expand();
         for (int i = 1; i <= indexes.length; i++) {
-            UIElement value = $$(values, this).get(indexes[i]);
+            UIElement value = $$(values, this).setName(getName()).get(indexes[i]);
             if (value.isEnabled())
                 value.click();
         }

@@ -1,0 +1,263 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: JDI auto-tests
+env:
+    CHROME_PROPERTIES: "chrome.properties"
+    FIREFOX_PROPERTIES: "ff.properties"
+    WITH_PARAMS: "-ntp -Ddriver=chrome" # for Chrome: "-ntp -Ddriver=chrome", for FF: "-ntp -Ddriver=firefox"
+    UNIT: "-Punit"
+    COMMON: "-Pcommon"
+    COMPLEX: "-Pcomplex"
+    PERF: "-Pperformance"
+    FUNC: "-Pfunctional"
+    GROUP_ID: "com.epam.jdi"
+    NOPO_TESTS: "jdi-bdd-no-po-tests"
+    NOPO_TESTS_PROPERTY: "test-examples/jdi-bdd-no-po-tests"
+    BDD_TESTS: "jdi-bdd-tests"
+    BOOTSTRAP_TESTS: "jdi-light-bootstrap-tests"
+    HTML_TESTS: "jdi-light-html-tests"
+#    ANGULAR_TESTS: "jdi-light-angular-tests"
+#    ANGULAR_TESTS_WITH_MOCKS: "jdi-light-angular-tests-with-mocks"
+    EXAMPLES: "jdi-light-examples"
+    EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
+    PERFORMANCE: "jdi-performance"
+    PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
+    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
+    FIREFOX_ARGS: "-headless"
+    ALLURE_VERSION: "2.13.8"
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  page_build:
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
+
+jobs:
+  build:
+    name: Tests on JDK
+    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [8, 9, 10, 11, 12, 13, 14] # all [8, 9, 10, 11, 12, 13, 14]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK ${{ matrix.java }}
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ matrix.java }}
+        java-package: jdk
+
+    - name: Prepare environment
+      run: |
+        sudo apt install zip
+        java -Xmx32m -version
+        ls -lah
+        env
+        id
+
+# run cann't start from comment
+#        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
+    - name: Install Allure
+      run: |
+        sudo tar -zxvf allure.tgz -C /opt/
+        sudo ln -s /opt/allure-${ALLURE_VERSION}/bin/allure /usr/bin/allure
+        allure --version
+
+#    - name: Install Netlify
+#      run: sudo npm install -g netlify-cli
+
+    - name: Welcome to JDI
+      run: |
+        echo ------------------- WELCOME TO JDI -----------------------
+        mvn --version
+
+    - name: Prepare configs
+      run: |
+        echo arguments=$CHROME_ARGS > "./${BDD_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${BDD_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${BOOTSTRAP_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${HTML_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${HTML_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
+
+    - name: Compile jdi code
+      id: jdi-compile
+      run: mvn -ntp install -DskipTests
+
+  # ========== steps before required for all tasks ==================
+
+    - name: Tests BDD
+      id: tests-bdd
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 30 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
+
+    - name: Check Chrome
+      run: ps -aux | grep chrome
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
+#####  Example for original allure data upload
+#    - name: 'Upload BDD results'
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: bdd-results-sdk${{ matrix.java }}
+#        path: ./${BDD_TESTS}/target/allure-results/
+#        retention-days: 1
+
+    - name: Tests bootstrap Unit
+      id: tests-bootstrap
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 20 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS --fail-at-end
+
+    - name: Check Chrome
+      run: ps -aux | grep chrome
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
+#    - name: Run tests - Angular Unit tests
+#      id: tests-angular-unit
+#      if: steps.jdi-compile.outcome == 'success'
+#      timeout-minutes: 40 # prevent blocking
+#      continue-on-error: true
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#
+#    - name: Kill Chrome
+#      run: pkill -f "chrome"
+
+#    - name: Run tests - Angular Common tests
+#      id: tests-angular-common
+#      if: steps.jdi-compile.outcome == 'success'
+#      timeout-minutes: 30 # prevent blocking
+#      continue-on-error: true
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#
+#    - name: Check Chrome
+#      run: ps -aux | grep chrome
+#
+#    - name: Kill Chrome
+#      run: pkill -f "chrome"
+
+#    - name: Run tests - Angular Complex tests
+#      id: tests-angular-complex
+#      if: steps.jdi-compile.outcome == 'success'
+#      timeout-minutes: 60 # prevent blocking
+#      continue-on-error: true
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#
+#    - name: Kill Chrome
+#      run: pkill -f "chrome"
+
+    - name: Run tests - HTML functional
+      id: tests-html-func
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 90 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS --fail-at-end
+
+    - name: Check Chrome
+      run: ps -aux | grep chrome
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
+    - name: Run tests - HTML performace
+      id: tests-html-perf
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 90 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $PERF -pl $GROUP_ID:$HTML_TESTS --fail-at-end
+
+    - name: Check Chrome
+      run: ps -aux | grep chrome
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
+    - name: Run tests - Test Examples
+      id: tests-examples
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 20 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES --fail-at-end
+
+    - name: Check Chrome
+      run: ps -aux | grep chrome
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
+    - name: Run tests - Performance
+      id: tests-perf
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 20 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE --fail-at-end
+
+    - name: Collect reports
+      if: steps.jdi-compile.outcome == 'success'
+      run: |
+        echo --------------- Collecting Allure Reports.... ------------------
+        sudo chmod +x reporting.sh
+        source reporting.sh
+        generateAllureReports
+        printAllureSummary ${{ matrix.java }}
+        zip -r allure-report.zip ./allure-report/
+
+
+    - name: 'Upload allure report'
+      if: steps.jdi-compile.outcome == 'success'
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-report-jdk${{ matrix.java }}
+        path: ./allure-report.zip
+        retention-days: 1
+
+    - name: Check BDD and Bootstap are passed
+      if: ${{ steps.tests-bdd.outcome != 'success' || steps.tests-bootstrap.outcome != 'success' }}
+      run: |
+        echo BDD tests result: ${{ steps.tests-bdd.outcome }}
+        echo Bootstrap tests result: ${{ steps.tests-bootstrap.outcome }}
+        exit 1
+
+    - name: Check html tests are passed
+      if: ${{ steps.tests-html-func.outcome != 'success' || steps.tests-examples.outcome != 'success' }}
+      run: |
+        echo HTML tests result: ${{ steps.tests-html-func.outcome }}
+        echo Example tests result: ${{ steps.tests-examples.outcome }}
+        exit 1
+
+#    - name: Check angular tests are passed
+#      if: ${{ steps.tests-angular-common.outcome != 'success' }}
+# for full angular should be
+#      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}
+#        echo Angular Complex tests result: ${{ steps.tests-angular-complex.outcome }}
+#        echo Angular Unit tests result: ${{ steps.tests-angular-unit.outcome }}
+#      run: |
+#        echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
+#        exit 1
+
+    - name: Check performance tests are passed
+      if: ${{ steps.tests-html-perf.outcome != 'success' || steps.tests-perf.outcome != 'success' }}
+      run: |
+        echo HTML Performance tests result: ${{ steps.tests-html-perf.outcome }}
+        echo Performance tests result: ${{ steps.tests-perf.outcome }}
+        exit 1

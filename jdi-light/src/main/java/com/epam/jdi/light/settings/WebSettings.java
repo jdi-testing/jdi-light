@@ -11,6 +11,7 @@ import com.epam.jdi.light.logger.ILogger;
 import com.epam.jdi.tools.PropReader;
 import com.epam.jdi.tools.PropertyReader;
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
@@ -142,6 +143,94 @@ public class WebSettings {
     }
 
     public static boolean initialized = false;
+    public static JAction INIT_FUNC = WebSettings::jdiSetup;
+    public static void jdiSetup() {
+        Properties properties = getProperties(COMMON.testPropertiesPath);
+        if (properties.isEmpty()) {
+            LOGS.writeToAllure = !getProperties("allure.properties").isEmpty();
+            COMMON.strategy.action.execute();
+            return;
+        }
+        fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
+        COMMON.strategy.action.execute();
+        if (DRIVER.name.equalsIgnoreCase(DEFAULT_DRIVER)) {
+            fillAction(p -> DRIVER.name = p,
+                    isNotBlank(getProperty("driver")) ? "driver" : "browser");
+        }
+        fillAction(p -> DRIVER.version = p, "driver.version");
+        fillAction(p -> DRIVER.path = p, "drivers.folder");
+        fillAction(p -> DRIVER.path = p, "drivers.path");
+        fillAction(p -> {
+            if (parseBoolean(p))
+                DRIVER.getFunc = name -> getDriverFromName(name, RUN_DRIVERS);
+        }, "single.thread");
+        fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
+        fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
+        fillAction(WebSettings::setDomain,
+                isNotBlank(getProperty("site.url")) ? "site.url" : "domain");
+        fillAction(p -> SCREEN.path = p, "screens.folder");
+        fillAction(p -> SCREEN.tool = p, "screenshot.tool");
+        if (SCREEN.tool.equals("robot")) {
+            SCREEN.allowRobot = true;
+        }
+        fillAction(p -> SCREEN.allowRobot = parseBoolean(p), "allow.robot");
+        fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
+        fillAction(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
+        fillAction(p -> LOGS.screenStrategy = getActionStrategy(p), "screenshot.strategy");
+        fillAction(p -> LOGS.htmlCodeStrategy = getActionStrategy(p), "html.code.strategy");
+        fillAction(p -> LOGS.requestsStrategy = getActionStrategy(p), "requests.strategy");
+        fillAction(p -> COMMON.killBrowser = p, "browser.kill");
+        fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
+        fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
+        fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
+        fillAction(p -> DRIVER.gitHubTokenName = p, "gitHubTokenName");
+        fillAction(p -> DRIVER.gitHubTokenSecret = p, "gitHubTokenSecret");
+        fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
+        fillAction(SoftAssert::setAssertType, "assert.type");
+        fillAction(p -> ELEMENT.clickType = getEnumValueByName(ElementArea.class, p, CENTER), "click.type");
+        fillAction(p -> ELEMENT.getTextType = getEnumValueByName(TextTypes.class, p, SMART_TEXT), "text.type");
+        fillAction(p -> ELEMENT.setTextType = getEnumValueByName(SetTextTypes.class, p, CLEAR_SEND_KEYS), "set.text.type");
+        // RemoteWebDriver properties
+        fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
+        fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
+        if (hasProperty("driver.remote.run")) {
+            fillAction(p -> DRIVER.remoteRun = parseBoolean(p), "driver.remote.run");
+        } else {
+            DRIVER.remoteRun = hasProperty("driver.remote.url") && DRIVER.remoteRun == null;
+        }
+        fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
+        logger.setLogLevel(LOGS.logLevel);
+        if (hasProperty("allure")) {
+            fillAction(p -> LOGS.writeToAllure = onOff(p), "allure");
+        } else {
+            fillAction(p -> LOGS.writeToAllure = onOff(p), "allure.steps");
+        }
+        fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locator");
+        fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
+        fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
+        fillAction(p -> ELEMENT.highlight = getHighlightStrategy(p), "element.highlight");
+        fillAction(p -> {
+            if (parseBoolean(p)) {
+                DRIVER.capabilities.common.put("arguments", "--headless");
+            }
+        }, "headless");
+
+        loadCapabilities("chrome.capabilities.path", "chrome.properties",
+            p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
+        loadCapabilities("ff.capabilities.path","ff.properties",
+            p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
+        loadCapabilities("ie.capabilities.path","ie.properties",
+            p -> p.forEach((key,value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
+        loadCapabilities("edge.capabilities.path","edge.properties",
+            p -> p.forEach((key,value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
+        loadCapabilities("opera.capabilities.path","opera.properties",
+            p -> p.forEach((key,value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
+        loadCapabilities("safari.capabilities.path","safari.properties",
+            p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
+        loadCapabilities("common.capabilities.path","common.properties",
+            p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
+        initialized = true;
+    }
 
     public static synchronized void init() {
         CHECK_MULTI_THREAD.execute();
@@ -150,87 +239,7 @@ public class WebSettings {
         locker.lock();
         logger.trace("init()");
         try {
-            Properties properties = getProperties(COMMON.testPropertiesPath);
-            if (properties.isEmpty()) {
-                LOGS.writeToAllure = !getProperties("allure.properties").isEmpty();
-                COMMON.strategy.action.execute();
-                return;
-            }
-            fillAction(p -> COMMON.strategy = getStrategy(p), "strategy");
-            COMMON.strategy.action.execute();
-            if (DRIVER.name.equalsIgnoreCase(DEFAULT_DRIVER)) {
-                fillAction(p -> DRIVER.name = p,
-                        isNotBlank(getProperty("driver")) ? "driver" : "browser");
-            }
-            fillAction(p -> DRIVER.version = p, "driver.version");
-            fillAction(p -> DRIVER.path = p, "drivers.folder");
-            fillAction(p -> DRIVER.path = p, "drivers.path");
-            fillAction(p -> {
-                if (parseBoolean(p))
-                    DRIVER.getFunc = name -> getDriverFromName(name, RUN_DRIVERS);
-            }, "single.thread");
-            fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
-            fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
-            fillAction(WebSettings::setDomain,
-                    isNotBlank(getProperty("site.url")) ? "site.url" : "domain");
-            fillAction(p -> SCREEN.path = p, "screens.folder");
-            fillAction(p -> SCREEN.tool = p, "screenshot.tool");
-            if (SCREEN.tool.equals("robot")) {
-                SCREEN.allowRobot = true;
-            }
-            fillAction(p -> SCREEN.allowRobot = parseBoolean(p), "allow.robot");
-            fillAction(p -> ELEMENT.startIndex = parseInt(p), "list.start.index");
-            fillAction(p -> LOGS.logInfoDetails = getInfoDetailsLevel(p), "log.info.details");
-            fillAction(p -> LOGS.screenStrategy = getActionStrategy(p), "screenshot.strategy");
-            fillAction(p -> LOGS.htmlCodeStrategy = getActionStrategy(p), "html.code.strategy");
-            fillAction(p -> LOGS.requestsStrategy = getActionStrategy(p), "requests.strategy");
-            fillAction(p -> COMMON.killBrowser = p, "browser.kill");
-            fillAction(WebSettings::setSearchStrategy, "element.search.strategy");
-            fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
-            fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
-            fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
-            fillAction(SoftAssert::setAssertType, "assert.type");
-            fillAction(p -> ELEMENT.clickType = getEnumValueByName(ElementArea.class, p, CENTER), "click.type");
-            fillAction(p -> ELEMENT.getTextType = getEnumValueByName(TextTypes.class, p, SMART_TEXT), "text.type");
-            fillAction(p -> ELEMENT.setTextType = getEnumValueByName(SetTextTypes.class, p, CLEAR_SEND_KEYS), "set.text.type");
-            // RemoteWebDriver properties
-            fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
-            fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
-            if (hasProperty("driver.remote.run")) {
-                fillAction(p -> DRIVER.remoteRun = parseBoolean(p), "driver.remote.run");
-            } else {
-                DRIVER.remoteRun = hasProperty("driver.remote.url") && DRIVER.remoteRun == null;
-            }
-            fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
-            logger.setLogLevel(LOGS.logLevel);
-            if (hasProperty("allure")) {
-                fillAction(p -> LOGS.writeToAllure = onOff(p), "allure");
-            } else {
-                fillAction(p -> LOGS.writeToAllure = onOff(p), "allure.steps");
-
-            }
-            fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locator");
-            fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
-            fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
-            fillAction(p -> ELEMENT.highlight = getHighlightStrategy(p), "element.highlight");
-            fillAction(p -> DRIVER.capabilities.common.put("headless", p), "headless");
-
-            loadCapabilities("chrome.capabilities.path", "chrome.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
-            loadCapabilities("ff.capabilities.path","ff.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
-            loadCapabilities("ie.capabilities.path","ie.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
-            loadCapabilities("edge.capabilities.path","edge.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
-            loadCapabilities("opera.capabilities.path","opera.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
-            loadCapabilities("safari.capabilities.path","safari.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
-            loadCapabilities("common.capabilities.path","common.properties",
-                p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
-
-            initialized = true;
+            INIT_FUNC.execute();
         } catch (Throwable ex) {
             throw exception(ex, "Failed to init test.properties");
         } finally {
@@ -282,15 +291,23 @@ public class WebSettings {
         String path = "";
         try {
             path = System.getProperty(property, getProperty(property));
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+            logger.trace("Error on read property %s. %s", property, ignore);
+        }
         if (isEmpty(path))
             path = defaultPath;
         Properties properties = new PropReader(path).getProperties();
-        if (properties.isEmpty())
+        if (properties.isEmpty()) {
+            logger.trace("There is no properties in %s", property);
+            File p = new File("."+path);
+            logger.trace("Abs prop path %s, Properties file exists? = %s", p.getAbsolutePath(), p.exists());
             return;
+        }
         try {
             setCapabilities.execute(properties);
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+            logger.trace("Error set properties %s. %s", property, ignore);
+        }
     }
 
     private static void setSearchStrategy(String p) {
@@ -347,7 +364,7 @@ public class WebSettings {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(propertyFile));
-            System.out.println("Property file found: " + propertyFile.getAbsolutePath());
+            logger.info("Property file found: %s", propertyFile.getAbsolutePath());
         } catch (IOException ex) {
             throw exception("Couldn't load properties for CI Server" + path);
         }
