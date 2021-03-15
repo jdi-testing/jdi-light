@@ -31,6 +31,7 @@ import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
+import io.github.com.pages.navigation.TabFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
@@ -284,6 +285,33 @@ public class StaticSite {
 
     @Url("/material-ui-feedback-snackbar--consecutive-snackbars")
     public static WebPage feedbackSnackbarConsecutivePage;
+
+    // navigation
+    // tabs
+
+    @Url("/material-ui-navigation-tabs--default")
+    public static WebPage defaultTabPage;
+
+    @Url("/material-ui-navigation-tabs--disabled-tab-example")
+    public static WebPage disabledTabPage;
+
+    @Url("/material-ui-navigation-tabs--scrollable-tab-example")
+    public static WebPage scrollableTabPage;
+
+    @Url("/material-ui-navigation-tabs--vertical-tab-example")
+    public static WebPage verticalTabPage;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame simpleTabFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame disabledTabFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame scrollableTabFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame verticalTabFrame;
 
     // utils
     // transition
