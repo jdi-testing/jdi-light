@@ -38,6 +38,7 @@ import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.inputs.DateTimePickersFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
@@ -60,6 +61,19 @@ public class StaticSite {
     @Url("/material-ui-inputs-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
 
+    //date and time pickers
+    @Frame("storybook-preview-iframe")
+    public static DateTimePickersFrame dateTimePickersFrame;
+
+    @Url("/material-ui-inputs-date-time--date-picker-inline")
+    public static WebPage datePickerInlinePage;
+
+    @Url("/material-ui-inputs-date-time--date-picker-dialog")
+    public static WebPage datePickerDialogPage;
+
+    @Url("/material-ui-inputs-date-time--time-picker")
+    public static WebPage timePickerPage;
+
     //simple transfer list
     @Frame("storybook-preview-iframe")
     public static SimpleTransferListFrame simpleTransferListFrame;
@@ -73,7 +87,6 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-transfer-list--enhanced-transfer-list-view")
     public static WebPage inputEnhancedTransferListPage;
-
 
     // button
     @Frame("storybook-preview-iframe")
