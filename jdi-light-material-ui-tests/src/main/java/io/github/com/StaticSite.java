@@ -175,20 +175,6 @@ public class StaticSite {
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
 
-    // data display
-    // lists
-    @Frame("storybook-preview-iframe")
-    public static ListsFrame listsFrame;
-
-    @Url("/material-ui-lists--simple-list")
-    public static WebPage dataDisplayListsSimpleListPage;
-
-    @Url("/material-ui-lists--checkbox-list")
-    public static WebPage dataDisplayCheckboxListPage;
-
-    @Url("material-ui-lists--pinned-subheader-list")
-    public static WebPage dataPinnedSubheaderListPage;
-
     // paper
     @Frame("storybook-preview-iframe")
     public static PaperFrame paperFrame;
@@ -259,6 +245,19 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-tooltip--interactive")
     public static WebPage displayDataTooltipInteractivePage;
+
+    // lists
+    @Frame("storybook-preview-iframe")
+    public static ListsFrame listsFrame;
+
+    @Url("/material-ui-data-display-lists--simple-list")
+    public static WebPage dataDisplayListsSimpleListPage;
+
+    @Url("/material-ui-data-display-lists--checkbox-list")
+    public static WebPage dataDisplayCheckboxListPage;
+
+    @Url("/material-ui-data-display-lists--pinned-subheader-list")
+    public static WebPage dataPinnedSubheaderListPage;
 
     // feedback
     // backdrop
