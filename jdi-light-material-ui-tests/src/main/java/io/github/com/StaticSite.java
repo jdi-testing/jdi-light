@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.datadisplay.ListsFrame;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.displaydata.BadgeFrame;
@@ -244,6 +245,19 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-tooltip--interactive")
     public static WebPage displayDataTooltipInteractivePage;
+
+    // lists
+    @Frame("storybook-preview-iframe")
+    public static ListsFrame listsFrame;
+
+    @Url("/material-ui-data-display-lists--simple-list")
+    public static WebPage dataDisplayListsSimpleListPage;
+
+    @Url("/material-ui-data-display-lists--checkbox-list")
+    public static WebPage dataDisplayCheckboxListPage;
+
+    @Url("/material-ui-data-display-lists--pinned-subheader-list")
+    public static WebPage dataPinnedSubheaderListPage;
 
     // feedback
     // backdrop
