@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.hasValue;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.usersTable;

@@ -1,6 +1,6 @@
 package org.mytests.tests.example;
 
-import com.epam.jdi.light.elements.complex.table.Single;
+import com.epam.jdi.light.elements.complex.table.matchers.ValueMatcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mytests.tests.TestsInit;
@@ -9,8 +9,8 @@ import org.mytests.uiobjects.example.entities.MarvelUserInfo;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.hasValue;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -97,7 +97,7 @@ public class DataTableTests extends TestsInit {
     }
     @Test
     void rowTableMatcherSingleTest() {
-        users.has().rowThat(Single.hasValue("Sergey Ivan"), inColumn("User"));
+        users.has().rowThat(ValueMatcher.hasValue("Sergey Ivan"), inColumn("User"));
     }
     @Test
     void rowTableMatcherTest() {

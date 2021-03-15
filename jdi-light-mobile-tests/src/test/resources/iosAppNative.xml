@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JDI Light Mobile iOS Native Apps Tests" thread-count="1">
+    <test name="EPAM ios app tests">
+        <classes>
+            <class name="epamiostestapp.tests.ContextMenuTest"/>
+            <class name="epamiostestapp.tests.EditMenuTest"/>
+            <class name="epamiostestapp.tests.IosButtonTest"/>
+            <class name="epamiostestapp.tests.LabelsTest"/>
+            <class name="epamiostestapp.tests.NavigationBarTests"/>
+            <class name="epamiostestapp.tests.SegmentedControlTest"/>
+            <class name="epamiostestapp.tests.SwitchTest"/>
+            <class name="epamiostestapp.tests.TabBarTest"/>
+            <class name="epamiostestapp.tests.ToolBarTest"/>
+        </classes>
+    </test>
+</suite>

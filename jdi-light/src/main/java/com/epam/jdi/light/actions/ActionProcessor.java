@@ -31,6 +31,7 @@ public class ActionProcessor {
     protected void debugPointcut() {  }
 
     public static Safe<List<ActionObject>> jStack = new Safe<>(new ArrayList<>());
+    public static Safe<Boolean> isTop = new Safe<>(true);
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
@@ -43,7 +44,7 @@ public class ActionProcessor {
         failedMethods.clear();
         try {
             BEFORE_JDI_ACTION.execute(jInfo);
-            Object result = jInfo.topLevel()
+            Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
             logger.trace("<>@AO: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
