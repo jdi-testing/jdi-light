@@ -27,11 +27,11 @@ public class BasicTests implements TestsInit {
     }
 
     @Test
-    public void tableParamsTest() {
+    public void aTableParamsTest() {
         assertEquals(dataProducts.size(), 4);
         assertEquals(dataProducts.count(), 5);
         assertEquals(dataProducts.header(), asList("Name", "Type", "Cost", "Weight"));
-        String value = dataProducts.getValue();
+        String value = dataProducts.print();
         assertEquals(value,
         "||X||Name|Type|Cost|Weight||" + LINE_BREAK +
             "||"+i(0)+"||Chair|furniture|3.5|2||" + LINE_BREAK +
@@ -40,6 +40,7 @@ public class BasicTests implements TestsInit {
             "||"+i(3)+"||Kitchen|kitchen|400|||" + LINE_BREAK +
             "||"+i(4)+"||Robot|robo||||" + LINE_BREAK);
     }
+
     @Test
     public void basicByIndexTest() {
         assertThat(dataProducts.webRow(ELEMENT.startIndex).get(ELEMENT.startIndex+3).getText(), is("2"));
@@ -50,25 +51,25 @@ public class BasicTests implements TestsInit {
         assertThat(dataProducts.line(ELEMENT.startIndex).name.getText(), is("Chair"));
         assertThat(dataProducts.line(ELEMENT.startIndex + 4).name.getText(), is("Robot"));
 
-        assertThat(dataProducts.dataRow(ELEMENT.startIndex).name, is("Chair"));
-        assertThat(dataProducts.dataRow(ELEMENT.startIndex + 4).name, is("Robot"));
+        assertThat(dataProducts.data(ELEMENT.startIndex).name, is("Chair"));
+        assertThat(dataProducts.data(ELEMENT.startIndex + 4).name, is("Robot"));
 
         assertThat(dataProducts.cell(ELEMENT.startIndex, ELEMENT.startIndex), is("Chair"));
         assertThat(dataProducts.cell("Type", ELEMENT.startIndex + 1), is("furniture"));
-        assertThat(dataProducts.cell(ELEMENT.startIndex + 2, "Sofa"), is("2"));
-        assertThat(dataProducts.cell("Type", "Kitchen"), is("kitchen"));
+        assertThat(dataProducts.cell(ELEMENT.startIndex + 2, "3"), is("2"));
+        assertThat(dataProducts.cell("Type", "4"), is("kitchen"));
     }
     @Test
     public void basicByNameTest() {
-        assertThat(dataProducts.webRow("Chair").get(ELEMENT.startIndex + 3).getText(), is("2"));
-        assertThat(dataProducts.webRow("Robot").get(ELEMENT.startIndex).getText(), is("Robot"));
+        assertThat(dataProducts.webRow("3").get(ELEMENT.startIndex + 3).getText(), is("2"));
+        assertThat(dataProducts.webRow("5").get(ELEMENT.startIndex).getText(), is("Robot"));
         assertThat(dataProducts.webColumn("Name").get(ELEMENT.startIndex + 4).getText(), is("Robot"));
         assertThat(dataProducts.webColumn("Weight").get(ELEMENT.startIndex + 1).getText(), is("3.5"));
 
-        assertThat(dataProducts.line("Chair").cost.getText(), is("3.5"));
-        assertThat(dataProducts.line("Kitchen").cost.getText(), is("400"));
+        assertThat(dataProducts.line("1").cost.getText(), is("3.5"));
+        assertThat(dataProducts.line("4").cost.getText(), is("400"));
 
-        assertThat(dataProducts.dataRow("Chair").type, is("furniture"));
-        assertThat(dataProducts.dataRow("Robot").type, is("robo"));
+        assertThat(dataProducts.data("3").type, is("furniture"));
+        assertThat(dataProducts.data("5").type, is("robo"));
     }
 }

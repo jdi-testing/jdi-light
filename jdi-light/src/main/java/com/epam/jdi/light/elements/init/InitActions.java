@@ -40,7 +40,8 @@ import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.StringUtils.format;
+import static com.epam.jdi.tools.StringUtils.toKebabCase;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -97,7 +98,7 @@ public class InitActions {
         try {
             if (isInterface(info.instance.getClass(), ISetup.class))
                 return true;
-            Object value = info.field.get(info.parent);
+            Object value = getValueField(info.field, info.parent);
             if (value == null) return false;
             return isInterface(value.getClass(), ISetup.class);
         } catch (Exception ex) {return false; }
@@ -173,11 +174,15 @@ public class InitActions {
             }
             })),
         $("Visual Check", aRule(VisualCheck.class, (e, a) ->  {
-            if (a.value())
+            if (a.value()) {
                 e.base().params.update("visualCheck", "");
-            else
-                if (e.base().params.keys().contains("visualCheck"))
+                e.base().searchVisible();
+            }
+            else {
+                if (e.base().params.keys().contains("visualCheck")) {
                     e.base().params.removeByKey("visualCheck");
+                }
+            }
         }))
     );
 

@@ -1,6 +1,5 @@
 package com.epam.jdi.light.logger;
 
-import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
 
 /**
@@ -9,10 +8,6 @@ import com.epam.jdi.tools.func.JFunc;
  */
 public interface ILogger {
     <T> T logOff(JFunc<T> action);
-    void logOff(JAction action);
-    void logOff();
-    void logOn();
-    void dropLogOff();
     void trace(String msg, Object... args);
     void debug(String msg, Object... args);
     void info(String msg, Object... args);

@@ -10,9 +10,8 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.elements.base.JDIBase.executeShouldBe;
 import static java.lang.String.format;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -115,8 +114,15 @@ public interface ICoreElement extends IBaseElement {
     }
     default ICoreElement shouldBe(Condition... conditions) {
         for (Condition condition : conditions) {
-            jdiAssert(condition.execute(this), is(true));
+            executeShouldBe(condition.getName(this), condition, this);
         }
+        return this;
+    }
+    default ICoreElement waitFor(Condition... conditions) {
+        return shouldBe(conditions);
+    }
+    default ICoreElement waitFor(int timeInSec, Condition... conditions) {
+        base().waitAction(timeInSec, e -> shouldBe(conditions));
         return this;
     }
     default ICoreElement should(Condition... condition) { return shouldBe(condition);}

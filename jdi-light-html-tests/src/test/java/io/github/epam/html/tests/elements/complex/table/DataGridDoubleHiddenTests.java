@@ -109,7 +109,9 @@ public class DataGridDoubleHiddenTests implements TestsInit {
 
     @Test
     public void allDataFilterTest() {
-        dataFurnitureDoubleHidden.has().row(d -> d.name.contains("Tab"));
+        List<Furniture> filteredData = dataFurnitureDoubleHidden.dataList(d -> d.name.contains("Tab"));
+        assertEquals(filteredData.size(), 1);
+        assertEquals(filteredData.get(0), TABLE);
     }
 
     @Test
@@ -128,38 +130,28 @@ public class DataGridDoubleHiddenTests implements TestsInit {
 
     @Test
     public void rowDataMatcherTest() {
-        dataFurnitureDoubleHidden.has()
-            .exact(1).row(TABLE);
+        dataFurnitureDoubleHidden.has().row(TABLE);
     }
-
     @Test
     public void rowsAllTest() {
-        dataFurnitureDoubleHidden.has()
-            .all().rows(r -> r.name.length() >= 4);
+        dataFurnitureDoubleHidden.has().all().rows(r -> r.name.length() >= 4);
     }
-
     @Test
     public void noRowsTest() {
-        dataFurnitureDoubleHidden.has()
-            .no().rows(r -> isBlank(r.name));
+        dataFurnitureDoubleHidden.has().no().rows(r -> isBlank(r.name));
     }
-
     @Test
     public void atLeastTest() {
         dataFurnitureDoubleHidden.has()
             .atLeast(3).rows(r -> r.type.contains("furniture"));
     }
-
     @Test
     public void exactMatcherTest() {
-        dataFurnitureDoubleHidden.has()
-            .exact(2).rows(r -> r.cost.contains("3.5"));
+        dataFurnitureDoubleHidden.has().exact(2).rows(r -> r.cost.contains("3.5"));
     }
-
     @Test
     public void rowDataExactMatcherTest() {
-        dataFurnitureDoubleHidden.has()
-            .exact(1).row(TABLE);
+        dataFurnitureDoubleHidden.has().exact(1).row(TABLE);
     }
 
     @Test
