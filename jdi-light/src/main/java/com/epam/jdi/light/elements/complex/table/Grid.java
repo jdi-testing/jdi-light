@@ -19,8 +19,10 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.Timer.getByCondition;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -36,7 +38,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     protected String rowTemplate = "//tbody//tr[%s]/td";
     protected String headerLocator = "th";
     protected String footerLocator = "tfoot td";
-    protected List<String> header = null;
+    protected List<String> header = new ArrayList<>();
     protected int size = -1;
     protected int count = -1;
     protected List<Integer> columnsMapping;
@@ -55,20 +57,25 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
             try {
                 locatorsValidated = true;
                 validateLocators(core);
-            } catch (Exception ex) {
+                logger.debug(getName() + ": Validation success");
+            } catch (Throwable ex) {
                 locatorsValidated = false;
             }
         }
         return core;
     }
     protected void validateLocators(UIElement core) {
-        if (headerLocator.equals("th")) {
-            if (core.finds("th").size() == 0) {
-                headerLocator = core.find("thead td").isExist()
-                        ? "thead td" : "//tr[1]//td";
+        if (headerLocator.equals("th") && core.finds("th").isEmpty()) {
+            if (core.finds("thead td").isNotEmpty()) {
+                headerLocator = "thead td";
+            } else {
+                if (core.finds("//tr[1]//td").isNotEmpty()) {
+                    headerLocator = "//tr[1]//td";
+                }
             }
         }
     }
+
     @Override
     public List<String> header() {
         return ObjectUtils.isNotEmpty(header)
@@ -107,20 +114,20 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     @Override
     public UIElement webCell(int colNum, int rowNum) {
         return core().find(MessageFormat.format(cellTemplate, colNum, rowNum))
-            .setName(getName() + " webCell");
+            .setName(format("%s cell(%s,%s)", getName(), colNum, rowNum));
     }
     @Override
     public WebList webColumn(int colNum) {
         int index = getColumnIndex(colNum);
-        validateColumnIndex(index) ;
+        validateColumnIndex(index);
         return core().finds(columnTemplate, index)
-            .setName(getName() + " webColumn");
+            .setName(format("%s column:%s", getName(), index));
     }
     @Override
     public WebList webRow(int rowNum) {
         validateRowIndex(rowNum);
         return core().finds(rowTemplate, rowNum)
-            .setName(getName() + " webRow");
+            .setName(format("%s row:%s", getName(), rowNum));
     }
     @Override
     public WebList headerUI() {
@@ -183,9 +190,12 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         if (rowNum < 1)
             throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
     }
-    protected void validateColumns() {
+    protected synchronized void validateColumns() {
+        if (columnsValidated)
+            return;
         try {
             WebList header = headerUI();
+            logger.debug("Start column validation");
             List<WebElement> visibleHeader = header.getAll();
             List<WebElement> fullHeader = header.getWebElements();
             if (visibleHeader.size() < fullHeader.size()) {
@@ -195,11 +205,15 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
                 for (int i = 0; i < fullHeader.size(); i++) {
                     String fullValue = fullHeader.get(i).getText();
                     if (fullValue.equals(visibleValue)) {
+                        logger.debug("Column '%s' is %d (text is '%s')", visibleValue, i+1, fullValue);
                         columnsMapping.add(i + 1);
                         if (j < visibleHeader.size())
                             visibleValue = visibleHeader.get(j++).getText();
                     }
                 }
+                logger.debug("Columns mapping is %s", columnsMapping.toString());
+            } else {
+                logger.debug("Columns mapping is not required");
             }
             columnsValidated = true;
         } catch (Exception ex) {

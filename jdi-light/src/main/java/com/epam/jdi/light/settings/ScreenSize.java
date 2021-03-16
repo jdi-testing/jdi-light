@@ -12,12 +12,12 @@ public class ScreenSize {
     public int width, height;
     public boolean maximize;
 
-    public ScreenSize(int height, int width) {
-        setHeightWidth(height, width);
+    public ScreenSize(int width, int height) {
+        setWidthHeight(width, height);
     }
-    public void setHeightWidth(int height, int width) {
-        this.height = height;
+    public void setWidthHeight(int width, int height) {
         this.width = width;
+        this.height = height;
         maximize = false;
 
     }
@@ -31,7 +31,7 @@ public class ScreenSize {
         List<String> groups = matches(property, "([0-9]+)[^0-9]*([0-9]+)");
         if (groups.size() == 2) {
             try {
-                setHeightWidth(parseInt(groups.get(0)), parseInt(groups.get(1)));
+                setWidthHeight(parseInt(groups.get(0)), parseInt(groups.get(1)));
             } catch (Exception ex) {
                 throw exception("Can't parse property browser.size value (%s). Allowed format: 1024x768 or MAXIMIZE", property);
             }

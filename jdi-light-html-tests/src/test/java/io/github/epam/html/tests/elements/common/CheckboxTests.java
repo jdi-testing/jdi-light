@@ -61,7 +61,7 @@ public class CheckboxTests implements TestsInit {
     public void shouldValidationTest() {
         acceptConditions.shouldBe(displayed, and(selected));
         acceptConditions.click();
-        acceptConditions.shouldBe(not(selected), and(not(visible)));
+        acceptConditions.shouldBe(not(selected), and(not(hidden)));
     }
 
     @Test
