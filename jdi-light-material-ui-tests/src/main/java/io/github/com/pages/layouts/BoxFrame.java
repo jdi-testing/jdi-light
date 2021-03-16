@@ -15,4 +15,6 @@ public class BoxFrame extends Section {
     @UI("//button[contains(@class,'Mui-disabled')]")
     public Box disabledBox;
 
+    @UI(".MuiBox-root[1]")
+    public Box rootContainedBox;
 }

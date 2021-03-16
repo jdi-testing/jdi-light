@@ -15,8 +15,11 @@ public class Box  extends UIBaseElement<BoxAssert> {
         return new BoxAssert().set(this);
     }
 
-    public String getValue() {
+    public String getText() {
         return core().getText();
     }
 
+    public boolean hasAttr(String attr, String value){
+        return core().getAttribute(attr).equals(value);
+    }
 }

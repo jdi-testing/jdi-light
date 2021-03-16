@@ -24,7 +24,13 @@ public class BoxAssert  extends UIAssert<BoxAssert, Box> {
 
     @JDIAction("Assert that '{name}' text is '{0}'")
     public BoxAssert text(Matcher<String> condition) {
-        jdiAssert(element().getValue(), condition);
+        jdiAssert(element().getText(), condition);
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has attribute '{attr}' with value '{value}'")
+    public BoxAssert attr(String attr, String value){
+        jdiAssert(element().hasAttr(attr, value), Matchers.is(true));
         return this;
     }
 }

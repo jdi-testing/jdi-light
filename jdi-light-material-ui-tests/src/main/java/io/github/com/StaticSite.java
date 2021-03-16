@@ -422,7 +422,7 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static BoxFrame boxFrame;
 
-    @Url("/material-ui-box--default")
+    @Url("/material-ui-layout-box--default")
     public static WebPage defaultBoxPage;
 
     // login page
