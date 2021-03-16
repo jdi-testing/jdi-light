@@ -38,6 +38,16 @@ public class Card extends UIBaseElement<CardAssert> implements ISetup {
         return this.find(cardContent).children();
     }
 
+    @JDIAction("Is background image displayed")
+    public boolean isBackgroundImageDisplayed() {
+        return this.find(cardBackground).isDisplayed();
+    }
+
+    @JDIAction("Click on background")
+    public void clickOnBackground() {
+        this.find(cardBackground).click();
+    }
+
     @Override
     public CardAssert is() {
         return new CardAssert().set(this);

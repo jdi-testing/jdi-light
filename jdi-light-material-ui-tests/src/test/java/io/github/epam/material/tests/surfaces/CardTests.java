@@ -18,7 +18,9 @@ public class CardTests extends TestsInit {
         cardFrame.card.getCardButtons().get(1).is().enabled();
         cardFrame.card.getCardHeaders().get(1).is().text(EXPECTED_CARD_TITLE);
         cardFrame.card.getCardHeaders().get(2).is().text(EXPECTED_CARD_SUB_HEADER);
+        cardFrame.card.is().backgroundImageDisplayed();
         cardFrame.card.is().backgroundClickable();
+        cardFrame.card.clickOnBackground();
         cardFrame.card.getInnerCardContent().get(1).is().text(EXPECTED_CARD_CONTENT);
     }
 }

@@ -15,4 +15,10 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' background displayed")
+    public CardAssert backgroundImageDisplayed() {
+        jdiAssert(element().isBackgroundImageDisplayed(), Matchers.is(true));
+        return this;
+    }
+
 }
