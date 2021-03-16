@@ -34,6 +34,7 @@ import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.layouts.BoxFrame;
 import io.github.com.pages.navigation.BottomNavigationFrame;
 import io.github.com.pages.layouts.HiddenFrame;
 import io.github.com.pages.navigation.LinkFrame;
@@ -416,6 +417,13 @@ public class StaticSite {
 
     @Url("/material-ui-layout-hidden--default-hidden")
     public static WebPage defaultHiddenPage;
+
+    // box
+    @Frame("storybook-preview-iframe")
+    public static BoxFrame boxFrame;
+
+    @Url("/material-ui-layout-box--default")
+    public static WebPage defaultBoxPage;
 
     // login page
     @UI("#login-form")
