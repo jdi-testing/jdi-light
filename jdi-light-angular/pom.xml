@@ -7,11 +7,11 @@
     <artifactId>jdi-light-angular</artifactId>
     <packaging>jar</packaging>
     <name>JDI Angular</name>
-    <version>1.3.3</version>
+    <version>1.3.11</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
-        <aspectj.version>1.9.5</aspectj.version>
+        <aspectj.version>1.9.6</aspectj.version>
         <aspectj.maven>1.12.6</aspectj.maven>
         <java.version>1.8</java.version>
         <allure.testng>2.13.1</allure.testng>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.3.3</version>
+            <version>1.3.11</version>
         </dependency>
     </dependencies>
 

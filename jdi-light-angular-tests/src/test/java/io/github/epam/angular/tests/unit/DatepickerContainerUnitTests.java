@@ -27,8 +27,14 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
+        skipForFirefox();
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
+        container = new DatepickerContainer();
+    }
+
+    private void reInit(){
+        refresh();
         container = new DatepickerContainer();
     }
 
@@ -41,12 +47,14 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void hiddenTest() {
+        reInit();
         basicDatepicker.show();
         assertTrue(container.isHidden());
     }
 
     @Test
     public void monthTest() {
+        reInit();
         basicDatepicker.show();
         basicDatepicker.expand();
         assertEquals(container.selectedMonth(), LocalDate.now().getMonth());
@@ -54,6 +62,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void startMonthTest() {
+        reInit();
         startDateDatepicker.show();
         startDateDatepicker.expand();
         assertEquals(container.startMonth(), Month.JANUARY);
@@ -61,6 +70,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void startMonthWithLocaleTest() {
+        reInit();
         startDateDatepicker.show();
         startDateDatepicker.expand();
         assertEquals(container.startMonth(Locale.US), Month.JANUARY);
@@ -68,6 +78,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void selectedMonthWithLocaleTest() {
+        reInit();
         differentLocaleDatepicker.show();
         differentLocaleDatepicker.switchLocale();
         differentLocaleDatepicker.expand();
@@ -76,6 +87,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void yearTest() {
+        reInit();
         basicDatepicker.show();
         basicDatepicker.expand();
         assertEquals(container.selectedYear(), Year.now());
@@ -90,6 +102,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void todayDayTest() {
+        reInit();
         basicDatepicker.show();
         basicDatepicker.expand();
         assertEquals(container.todayDay(), LocalDate.now().getDayOfMonth());
@@ -97,6 +110,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void startDayTest() {
+        reInit();
         startDateDatepicker.show();
         startDateDatepicker.expand();
         container.selectActiveMonth();
@@ -105,6 +119,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void startDayWithLocaleTest() {
+        reInit();
         startDateDatepicker.show();
         startDateDatepicker.expand();
         container.selectActiveMonth(Locale.US);
@@ -113,6 +128,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void startDayWithDifferentLocaleTest() {
+        reInit();
         differentLocaleDatepicker.show();
         differentLocaleDatepicker.expand();
         assertEquals(container.activeDay(), LocalDate.now().getDayOfMonth());
@@ -120,6 +136,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void dayInPreviousMonthTest() {
+        reInit();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int previousMonth = currentMonth == 1 ? 12 : currentMonth - 1;
         basicDatepicker.show();
@@ -132,6 +149,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void dayInNextMonthTest() {
+        reInit();
         int currentMonth = LocalDate.now().getMonth().getValue();
         int nextMonth = currentMonth == 12 ? 1 : currentMonth + 1;
         basicDatepicker.show();
@@ -180,7 +198,6 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void selectDateWithDifferentLocaleTest() {
-        refresh();
         differentLocaleDatepicker.show();
         differentLocaleDatepicker.expand();
         container.select(LocalDate.of(2017, 6, 14), Locale.JAPAN);
@@ -217,7 +234,6 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void selectDateWithDifferentLocaleValueTest() {
-        refresh();
         differentLocaleDatepicker.show();
         differentLocaleDatepicker.expand();
         container.select("4/23/2019", Locale.JAPAN);
@@ -319,7 +335,6 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void differentLocaleTest() {
-        refresh();
         differentLocaleDatepicker.show();
         differentLocaleDatepicker.expand();
         assertTrue(container.isSelectedLocale(Locale.JAPAN));

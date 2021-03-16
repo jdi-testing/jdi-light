@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.elements.complex.table.matchers.ValueMatcher;
 import org.openqa.selenium.support.ui.Quotes;
 
 /**
@@ -7,26 +8,14 @@ import org.openqa.selenium.support.ui.Quotes;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class Single {
-    public static Single hasValue(String value) {
-        return new Single("/td[%s]//*/text()[normalize-space(.) = "+ Quotes.escape(value)+"]",
+    @Deprecated
+    public static ValueMatcher hasValue(String value) {
+        return new ValueMatcher("/td[%s]//*/text()[normalize-space(.) = "+ Quotes.escape(value)+"]",
                  "has '"+value +"'");
     }
-    public static Single containsValue(String value) {
-        return new Single("/td[%s]//*/text()[contains(normalize-space(.),"+ Quotes.escape(value)+")]",
+    @Deprecated
+    public static ValueMatcher containsValue(String value) {
+        return new ValueMatcher("/td[%s]//*/text()[contains(normalize-space(.),"+ Quotes.escape(value)+")]",
                 "contains '"+value +"'");
-    }
-
-    private String locator;
-    private String name;
-    Single(String locator, String name) {
-        this.locator = locator;
-        this.name = name;
-    }
-    public TableMatcher toTableMatcher(Column column) {
-        return new TableMatcher(locator, column, name);
-    }
-    @Override
-    public String toString() {
-        return name;
     }
 }

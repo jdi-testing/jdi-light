@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Row;
-import com.epam.jdi.light.elements.complex.table.TableMatcher;
+import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.LinqUtils;
@@ -20,8 +20,9 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.asserts.generic.table.DataTableAssert.CompareType.*;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
+import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.TABLE_MATCHER;
 import static com.epam.jdi.tools.LinqUtils.isSorted;
+import static java.lang.String.format;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -144,6 +145,7 @@ public class DataTableAssert<L extends PageObject, D>
     public class Compare implements JAssert {
         public int count;
         public String name;
+        public String printText;
         DataTableAssert<L, D> dtAssert;
         CompareType compareType;
         public JDIBase base() { return DataTableAssert.this.base(); }
@@ -151,12 +153,14 @@ public class DataTableAssert<L extends PageObject, D>
         private Compare(DataTableAssert<L, D> dtAssert) {
             this.dtAssert = dtAssert;
             this.compareType = ALL;
+            this.printText = "all rows";
             this.name = dtAssert.name;
         }
         private Compare(int count, DataTableAssert<L, D> dtAssert, CompareType compareType) {
             this.count = count;
             this.dtAssert = dtAssert;
             this.compareType = compareType;
+            this.printText = format("has %s %s rows that", compareType.text, count);
             this.name = dtAssert.name;
         }
 
@@ -197,7 +201,7 @@ public class DataTableAssert<L extends PageObject, D>
          * @param matchers to compare
          */
         @JDIAction("Assert that '{name}' {printText} has {0}")
-        public DataTableAssert<L, D> rows(TableMatcher... matchers) {
+        public DataTableAssert<L, D> rows(ColumnMatcher... matchers) {
             jdiAssert(TABLE_MATCHER.execute(table(), matchers).size(),
                     greaterThan(table().header().size()*count-1));
             return dtAssert;
@@ -208,7 +212,7 @@ public class DataTableAssert<L extends PageObject, D>
         public DataTableAssert<L, D> row(D data) {
             return rows(data);
         }
-        public DataTableAssert<L, D> row(TableMatcher... matchers) {
+        public DataTableAssert<L, D> row(ColumnMatcher... matchers) {
             return rows(matchers);
         }
     }

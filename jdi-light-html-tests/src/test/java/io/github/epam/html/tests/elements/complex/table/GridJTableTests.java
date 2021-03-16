@@ -143,7 +143,7 @@ public class GridJTableTests implements TestsInit {
     @Test
     public void rowDataMatcherTest() {
         List<Furniture> rows = productsJTable.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
+        assertThat(rows, hasItem(TABLE));
     }
 
     @Test

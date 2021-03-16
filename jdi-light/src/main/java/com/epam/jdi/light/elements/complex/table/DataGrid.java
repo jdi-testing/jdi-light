@@ -24,7 +24,6 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.util.Arrays.asList;
 
 /**
@@ -91,14 +90,16 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
     public D rowAsData(WebList row) {
         return lineClass != null
             ? lineToData(rowAsLine(row))
-            : new Line(header(), row).asData(dataClass);
+            : new Line(header(), row, row.getName()).asData(dataClass);
     }
     public L rowAsLine(WebList row) {
-        return new Line(header(), row).asLine(lineClass);
+        return new Line(header(), row, row.getName()).asLine(lineClass);
     }
     public List<D> elements(int minAmount) {
         return allData();
     }
+    public List<D> dataEqualsTo(D data) { return dataMatches(d -> d == data); }
+    public List<D> dataMatches(JFunc1<D, Boolean> matcher) { return filter(matcher); }
     public D get(String value) {
         return data(value);
     }
