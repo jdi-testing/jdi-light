@@ -54,7 +54,7 @@ jobs:
         env
         id
 
-# Allure upload is not stable
+# Allure download is not stable, so using local archive
 #        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
     - name: Install Allure
       run: |
