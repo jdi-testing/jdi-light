@@ -28,6 +28,7 @@ import io.github.com.pages.feedback.CircularProgressFrame;
 import io.github.com.pages.feedback.LinearProgressFrame;
 import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.RadioButtonFrame;
 import io.github.com.pages.inputs.GroupCheckBoxFrame;
 import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
@@ -97,6 +98,13 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-button--disabled")
     public static WebPage inputButtonDisabledPage;
+
+    // radio
+    @Frame("storybook-preview-iframe")
+    public static RadioButtonFrame radioButtonFrame;
+
+    @Url("/material-ui-inputs-radio--default")
+    public static WebPage radioDefaultPage;
 
     // floating action button
     @Frame("storybook-preview-iframe")
