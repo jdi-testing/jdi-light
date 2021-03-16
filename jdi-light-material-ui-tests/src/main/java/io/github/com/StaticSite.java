@@ -34,6 +34,7 @@ import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.navigation.BottomNavigationFrame;
 import io.github.com.pages.layouts.HiddenFrame;
 import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
@@ -400,6 +401,13 @@ public class StaticSite {
 
     @Url("/material-ui-navigation-link--underline-always")
     public static WebPage underlineAlwaysLinkPage;
+  
+    // bottom navigation
+    @Frame("storybook-preview-iframe")
+    public static BottomNavigationFrame bottomNavigationFrame;
+
+    @Url("/material-ui-navigation-bottom-navigation--default")
+    public static WebPage bottomNavigationPage;
 
     // layouts
     // hidden
