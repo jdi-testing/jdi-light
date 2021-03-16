@@ -21,7 +21,7 @@ import static com.epam.jdi.light.driver.get.DriverTypes.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class DriverInfos {
-    public static DriverInfo CHROME_INFO = new DriverInfo()
+    public static final DriverInfo CHROME_INFO = new DriverInfo()
         .set(d -> {
             d.downloadType = CHROME;
             d.initCapabilities = new ChromeOptions();
@@ -31,7 +31,7 @@ public class DriverInfos {
             d.getDriver = c -> new ChromeDriver((ChromeOptions) c);
         }
     );
-    public static DriverInfo FIREFOX_INFO = new DriverInfo()
+    public static final DriverInfo FIREFOX_INFO = new DriverInfo()
         .set(d -> {
             d.downloadType = FIREFOX;
             d.initCapabilities = new FirefoxOptions();
@@ -41,7 +41,7 @@ public class DriverInfos {
             d.getDriver = c -> new FirefoxDriver((FirefoxOptions) c);
         }
     );
-    public static DriverInfo IE_INFO = new DriverInfo()
+    public static final DriverInfo IE_INFO = new DriverInfo()
         .set(d -> {
             d.downloadType = IE;
             d.initCapabilities = new InternetExplorerOptions();

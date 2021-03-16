@@ -4,6 +4,7 @@ import com.epam.jdi.light.angular.elements.complex.BottomSheet;
 import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.angular.elements.complex.Ripple;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
 import io.github.com.pages.sections.*;
 
@@ -12,6 +13,7 @@ public class AngularPage extends WebPage {
     public static Icon basicIcon;
     public static Icon svgIcon;
     public static Ripple rippleContainer;
+    @UI("#bottom-sheet")
     public static BottomSheet bottomSheet;
     public static Dialog dialog;
     public static RadioButtonSection radioButtonSection;
