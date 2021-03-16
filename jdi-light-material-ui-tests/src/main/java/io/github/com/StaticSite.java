@@ -43,6 +43,7 @@ import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.utils.PopperFrame;
+import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.inputs.DateTimePickersFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
@@ -207,6 +208,13 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-paper--default")
     public static WebPage surfacePaperDefaultPage;
+
+    // card
+    @Frame("storybook-preview-iframe")
+    public static CardFrame cardFrame;
+
+    @Url("/material-ui-surfaces-card--card-with-clickable-area")
+    public static WebPage surfaceCardPage;
 
     // inputs
     // switch
