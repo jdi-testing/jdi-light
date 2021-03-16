@@ -1,4 +1,4 @@
-package org.jdiai.tools;
+package org.jdiai.jswraper.interfaces;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface GetValue {
+public @interface SetValue {
     String value();
 }

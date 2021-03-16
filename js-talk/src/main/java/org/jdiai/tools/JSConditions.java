@@ -4,17 +4,17 @@ import java.util.function.Function;
 
 import static java.lang.String.format;
 
-public class SearchConditions {
-    public static final Function<Condition, String> textEquals =
+public class JSConditions {
+    public static final Function<FilterCondition, String> textEquals =
         c -> format("%s === '%s'", c.textType.value, c.value);
-    public static final Function<Condition, String> textContains =
+    public static final Function<FilterCondition, String> textContains =
         c -> format("%s.toLowerCase().includes('%s'.toLowerCase())", c.textType.value, c.value);
-    public static final Function<Condition, String> hasAttribute =
+    public static final Function<FilterCondition, String> hasAttribute =
         c -> "hasAttribute('" + c.attrName + "')";
-    public static final Function<Condition, String> hasAttributeValue =
+    public static final Function<FilterCondition, String> hasAttributeValue =
         c -> format("getAttribute('%s').equals('%s')", c.attrName, c.value);
-    public static final Function<Condition, String> hasTag =
+    public static final Function<FilterCondition, String> hasTag =
         c -> "tag === " + c.value;
-    public static final Function<Condition, String> hasClass =
+    public static final Function<FilterCondition, String> hasClass =
         c -> "hasClass('" + c.value + "')";
 }

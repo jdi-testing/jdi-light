@@ -1,5 +1,6 @@
 package org.jdiai;
 
+import org.jdiai.jsbuilder.QueryLogger;
 import org.jdiai.jsdriver.JSDriver;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterSuite;
@@ -9,7 +10,8 @@ import static java.util.Arrays.stream;
 import static org.jdiai.DriverManager.*;
 import static org.jdiai.LocatorUtils.defineLocator;
 import static org.jdiai.Pages.openSite;
-import static org.jdiai.jsbuilder.JSBuilder.LOG_QUERY;
+import static org.jdiai.jsbuilder.QueryLogger.ALL;
+import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 
 public interface TestInit {
     default JSDriver js(String locator) {
@@ -32,7 +34,7 @@ public interface TestInit {
         killDrivers();
         initDriver();
         openSite();
-        LOG_QUERY = true;
+        LOG_QUERY = ALL;
     }
 
     @AfterSuite(alwaysRun = true)

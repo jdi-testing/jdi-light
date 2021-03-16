@@ -6,7 +6,8 @@ import org.testng.annotations.BeforeSuite;
 import static org.jdiai.DriverManager.initDriver;
 import static org.jdiai.DriverManager.killDrivers;
 import static org.jdiai.Pages.openSite;
-import static org.jdiai.jsbuilder.JSBuilder.LOG_QUERY;
+import static org.jdiai.jsbuilder.QueryLogger.ALL;
+import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 
 public interface TestInit {
     default String[] withParent(String locator) {
@@ -21,7 +22,7 @@ public interface TestInit {
         killDrivers();
         initDriver();
         openSite();
-        LOG_QUERY = true;
+        LOG_QUERY = ALL;
     }
 
     @AfterSuite(alwaysRun = true)

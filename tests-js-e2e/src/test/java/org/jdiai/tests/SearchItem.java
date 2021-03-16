@@ -2,7 +2,7 @@ package org.jdiai.tests;
 
 import com.epam.jdi.tools.DataClass;
 import org.jdiai.annotations.UI;
-import org.jdiai.tools.GetValue;
+import org.jdiai.jswraper.interfaces.GetValue;
 import org.openqa.selenium.support.FindBy;
 
 public class SearchItem extends DataClass<SearchItem> {

@@ -2,16 +2,16 @@ package org.jdiai.tools;
 
 import java.util.function.Function;
 
-public class Condition {
-    protected final Function<Condition, String> condition;
+public class FilterCondition {
+    protected final Function<FilterCondition, String> condition;
     public String value;
     public String attrName;
     public GetTextTypes textType;
 
-    public Condition(Function<Condition, String> condition) {
+    public FilterCondition(Function<FilterCondition, String> condition) {
         this.condition = condition;
     }
-    public Condition addTextType(GetTextTypes textType) {
+    public FilterCondition addTextType(GetTextTypes textType) {
         this.textType = textType;
         return this;
     }

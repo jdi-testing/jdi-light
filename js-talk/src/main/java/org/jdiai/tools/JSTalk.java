@@ -33,13 +33,13 @@ public class JSTalk {
         }
     }
     public static JS $(By... locators) {
-        return new JS(driver(), locators);
+        return new JS(JSTalk::driver, locators);
     }
     public static JS $(String locator) {
-        return new JS(driver(), defineLocator(locator));
+        return new JS(JSTalk::driver, defineLocator(locator));
     }
     public static JS $(String... locators) {
-        return new JS(driver(), locatorsToBy(locators));
+        return new JS(JSTalk::driver, locatorsToBy(locators));
     }
-    public static JSSmart jsDriver() { return new JSSmart(driver()); }
+    public static JSSmart jsDriver() { return new JSSmart(JSTalk::driver); }
 }

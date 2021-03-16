@@ -25,7 +25,7 @@ public class HttpExecutor {
     }
     public static Object execute(RemoteWebDriver driver, String script) {
         Command command = new Command(driver.getSessionId(), EXECUTE_SCRIPT,
-                ImmutableMap.of("script", script, "args", new Object[]{}));
+            ImmutableMap.of("script", script, "args", new Object[]{}));
         Response response;
         try {
             response = driver.getCommandExecutor().execute(command);

@@ -32,7 +32,7 @@ public class DriverManager {
 
     public static WebDriver chromeDriver() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        // options.addArguments("--headless");
         return new ChromeDriver(options);
     }
 

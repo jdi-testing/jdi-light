@@ -156,12 +156,12 @@ public class JSSmartTests implements TestInit {
     }
     private JSSmart userName() {
         JSSmart userName = $("#user-name");
-        userName.setEntity(TextHtml.class);
+        userName.setupEntity(TextHtml.class);
         return userName;
     }
     private JSSmart userNameInfo() {
         JSSmart userName = $("#user-name");
-        userName.setEntity(TextInfo.class);
+        userName.setupEntity(TextInfo.class);
         return userName;
     }
     @Test
@@ -186,12 +186,12 @@ public class JSSmartTests implements TestInit {
     }
     private JSSmart header() {
         JSSmart userName = $("#furniture-double-hidden th");
-        userName.setEntity(Header.class);
+        userName.setupEntity(Header.class);
         return userName;
     }
     private JSSmart headerRaw() {
         JSSmart userName = $("#furniture-double-hidden th");
-        userName.setEntity(HeaderRaw.class);
+        userName.setupEntity(HeaderRaw.class);
         return userName;
     }
     @Test

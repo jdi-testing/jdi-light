@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.newList;
@@ -38,6 +39,9 @@ public class JSElement {
         return jsGet(script).asString();
     }
 
+    public JSElement(Supplier<WebDriver> driver, List<By> locators) {
+        this.driver = new JSDriver(driver, locators);
+    }
     public JSElement(WebDriver driver, List<By> locators) {
         this.driver = new JSDriver(driver, locators);
     }
@@ -103,6 +107,9 @@ public class JSElement {
         JsonObject json =  driver.getOne("{ keys: [...getComputedStyle(element)], " +
             "values: [...getComputedStyle(element)].map(style=> getComputedStyle(element).getPropertyValue(style)) }").asJson();
         return new Json(json.get("keys"), json.get("values"));
+    }
+    public String pseudo(String name, String value) {
+        return getValue("getComputedStyle(element, " + name + ").getPropertyValue(" + value + ")) }");
     }
 
     public List<String> getStylesList(String style) {

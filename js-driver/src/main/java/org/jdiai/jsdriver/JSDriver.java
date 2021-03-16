@@ -8,31 +8,45 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.LinqUtils.*;
 import static org.jdiai.jsbuilder.ListSearch.CHAIN;
 import static org.jdiai.jsbuilder.ListSearch.MULTI;
 
 public class JSDriver {
-    private final WebDriver driver;
+    private final Supplier<WebDriver> driver;
     public final List<By> locators;
     private IJSBuilder builder;
     public ListSearch strategy = CHAIN;
     public String context = "document";
 
-    private static IJSBuilder defaultBuilder(WebDriver driver) {
+    private static IJSBuilder defaultBuilder(Supplier<WebDriver> driver) {
         return new JSBuilder(driver, new BuilderActions());
     }
-    public JSDriver(WebDriver driver, By... locators) {
+
+    public JSDriver(Supplier<WebDriver> driver, By... locators) {
         this(driver, newList(locators), defaultBuilder(driver));
     }
-    public JSDriver(WebDriver driver, List<By> locators) {
+    public JSDriver(WebDriver driver, By... locators) {
+        this(() -> driver, locators);
+    }
+    public JSDriver(Supplier<WebDriver> driver, List<By> locators) {
         this(driver, locators, defaultBuilder(driver));
     }
-    public JSDriver(WebDriver driver, List<By> locators, IBuilderActions actions) {
+    public JSDriver(WebDriver driver, List<By> locators) {
+        this(() -> driver, locators);
+    }
+    public JSDriver(Supplier<WebDriver> driver, List<By> locators, IBuilderActions actions) {
         this(driver, locators, new JSBuilder(driver, actions));
     }
+    public JSDriver(WebDriver driver, List<By> locators, IBuilderActions actions) {
+        this(() -> driver, locators, actions);
+    }
     public JSDriver(WebDriver driver, List<By> locators, IJSBuilder builder) {
+        this(() -> driver, locators, builder);
+    }
+    public JSDriver(Supplier<WebDriver> driver, List<By> locators, IJSBuilder builder) {
         if (driver == null)
             throw new JSException("JSDriver init failed: WebDriver == null");
         this.driver = driver;
@@ -40,6 +54,10 @@ public class JSDriver {
         this.builder = builder;
     }
 
+    public JSDriver updateBuilderActions(IBuilderActions actions) {
+        this.builder.updateActions(actions);
+        return this;
+    }
     public JSDriver setBuilder(IJSBuilder builder) {
         this.builder = builder.copy();
         return this;
@@ -163,11 +181,11 @@ public class JSDriver {
         return this;
     }
     public WebDriver driver() {
-        return this.driver;
+        return this.driver.get();
     }
     public IJSBuilder builder() {
         if (builder == null)
-            builder = new JSBuilder(driver());
+            builder = new JSBuilder(driver);
         return builder;
     }
     public List<By> locators() {

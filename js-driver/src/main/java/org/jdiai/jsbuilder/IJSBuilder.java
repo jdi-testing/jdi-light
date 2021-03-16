@@ -26,8 +26,9 @@ public interface IJSBuilder {
     String rawQuery();
     String getQuery();
     IJSBuilder setTemplate(String replaceTo);
-    IJSBuilder logQuery();
+    IJSBuilder logQuery(int queryLevel);
     void cleanup();
     void updateFromBuilder(IJSBuilder builder);
     IJSBuilder copy();
+    IJSBuilder updateActions(IBuilderActions builderActions);
 }

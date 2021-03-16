@@ -20,7 +20,7 @@ import static java.util.Arrays.asList;
 import static org.jdiai.Pages.PERFORMANCE_PAGE;
 import static org.jdiai.states.States.loggedInAt;
 import static org.jdiai.tests.benchmarks.PerfStatistic.testScenario;
-import static org.jdiai.tools.Conditions.textEquals;
+import static org.jdiai.tools.FilterConditions.textEquals;
 import static org.jdiai.tools.JSTalk.$;
 import static org.jdiai.tools.JSTalk.driver;
 

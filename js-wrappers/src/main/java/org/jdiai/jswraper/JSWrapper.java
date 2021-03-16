@@ -1,7 +1,6 @@
 package org.jdiai.jswraper;
 
 import com.epam.jdi.tools.Safe;
-import org.jdiai.jsbuilder.JSBuilder;
 import org.jdiai.jsbuilder.SmartBuilderActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,12 +23,12 @@ public class JSWrapper {
     }
     public static <T> JSEntity<T> $(Class<T> cl, String locator) {
         JSEntity<T> entity = new JSEntity<T>(driver(), NAME_TO_LOCATOR.execute(locator)).initClass(cl);
-        entity.driver.setBuilder(new JSBuilder(driver(), new SmartBuilderActions()));
+        entity.driver.updateBuilderActions(new SmartBuilderActions());
         return entity;
     }
     public static <T> JSEntity<T> $(Class<T> cl, String... locators) {
         JSEntity<T> entity = new JSEntity<T>(driver(), locatorsToBy(locators)).initClass(cl);
-        entity.driver.setBuilder(new JSBuilder(driver(), new SmartBuilderActions()));
+        entity.driver.updateBuilderActions(new SmartBuilderActions());
         return entity;
     }
     public static JSElement element(String locator) {
@@ -52,8 +51,8 @@ public class JSWrapper {
     }
 
     public static WebDriver chromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "/Users/romaniovlev/Downloads/chromedriver");
-        // System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
+        // System.setProperty("webdriver.chrome.driver", "/Users/romaniovlev/Downloads/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
         return new ChromeDriver();
     }
     public static WebDriver firefoxDriver() {
