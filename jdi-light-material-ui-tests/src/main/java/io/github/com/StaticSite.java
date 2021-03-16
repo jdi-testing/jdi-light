@@ -204,18 +204,17 @@ public class StaticSite {
     public static WebPage groupCheckBoxPage;
 
     // Display data
-
     //icons
     @Frame("storybook-preview-iframe")
     public static IconsFrame iconsFrame;
 
-    @Url("/material-ui-icons--simple-icons")
+    @Url("/material-ui-data-display-icons--simple-icons")
     public static WebPage simpleIconsPage;
 
-    @Url("/material-ui-icons--color-icons")
+    @Url("/material-ui-data-display-icons--color-icons")
     public static WebPage colorIconsPage;
 
-    @Url("/material-ui-icons--size-icons")
+    @Url("/material-ui-data-display-icons--size-icons")
     public static WebPage sizeIconsPage;
 
     // material icon

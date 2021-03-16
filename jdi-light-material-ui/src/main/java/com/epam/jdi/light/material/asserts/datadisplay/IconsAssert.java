@@ -16,5 +16,11 @@ public class IconsAssert extends UIAssert<IconsAssert, Icons> {
         jdiAssert(isDisplayed, Matchers.is(true));
         return this;
     }
+
+    @JDIAction("Assert that {name} has class {className}")
+    public IconsAssert hasClass(String className){
+        jdiAssert(element().hasClass(className), Matchers.is(true));
+        return this;
+    }
 }
 

@@ -11,6 +11,11 @@ public class Icons extends UIBaseElement<IconsAssert> {
         return core().isDisplayed();
     }
 
+    @JDIAction("Has class '{0}'")
+    public boolean hasClass(String className) {
+        return core().hasClass(className);
+    }
+
     @Override
     public IconsAssert is() {
         return new IconsAssert().set(this);

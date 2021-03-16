@@ -14,9 +14,9 @@ public class IconsFrame extends Section {
     @UI("//div[contains(@class, 'MuiGrid-grid-xs-8')][2]/*[name()='svg'][1]")
     public Icons oulined1;
 
-    @UI("//*[name()='svg'][1]")
+    @UI(".MuiSvgIcon-root[1]")
     public Icons svg1;
 
-    @UI("//*[name()='svg'][2]")
+    @UI(".MuiSvgIcon-root[2]")
     public Icons svg2;
 }

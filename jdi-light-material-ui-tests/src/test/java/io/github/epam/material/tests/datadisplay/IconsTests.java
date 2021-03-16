@@ -22,6 +22,7 @@ public class IconsTests  extends TestsInit {
 
         iconsFrame.svg1.is().displayed();
         iconsFrame.svg2.is().displayed();
+        iconsFrame.svg2.is().hasClass("MuiSvgIcon-colorPrimary");
     }
 
     @Test
@@ -29,6 +30,7 @@ public class IconsTests  extends TestsInit {
         sizeIconsPage.open();
 
         iconsFrame.svg1.is().displayed();
+        iconsFrame.svg1.is().hasClass("MuiSvgIcon-fontSizeSmall");
         iconsFrame.svg2.is().displayed();
     }
 }
