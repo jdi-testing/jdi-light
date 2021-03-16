@@ -14,6 +14,7 @@ import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.map.MultiMap;
 import com.epam.jdi.tools.pairs.Pair;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -25,6 +26,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.ReflectionUtils.create;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
 import static java.util.Arrays.asList;
 
@@ -39,7 +41,7 @@ public class Line implements IList<String>, IBaseElement {
     protected int startIndex = ELEMENT.startIndex;
 
     public Line(List<String> list, List<String> headers, JDIBase base) {
-        if (list == null || headers == null || list.size() == 0 || headers.size() == 0
+        if (list == null || headers == null || ObjectUtils.isEmpty(list) || ObjectUtils.isEmpty(headers)
                 || list.size() != headers.size())
             throw exception("Failed to init Line[list: %s; headers: %s;]",
                 list == null ? "null" : list.toString(), headers == null ? "null" : headers.toString());
@@ -48,16 +50,17 @@ public class Line implements IList<String>, IBaseElement {
         this.data = new MultiMap<>(headers, list).ignoreKeyCase();
         this.elements = new WebList(base);
     }
-    public Line(List<String> headers, List<WebElement> elements) {
-        this(headers, new WebList(elements));
+    public Line(List<String> headers, List<WebElement> elements, String name) {
+        this(headers, new WebList(elements, name), name);
     }
-    public Line(List<String> headers, WebList elements) {
+    public Line(List<String> headers, WebList elements, String name) {
         if (headers == null) {
             throw exception("Failed to create Line. Header has null value");
         }
         if (elements == null) {
             throw exception("Failed to create Line. Elements has null value");
         }
+        elements.setName(name);
         this.elements = elements;
         this.headers = headers;
         List<String> values = elements.values();
@@ -184,7 +187,7 @@ public class Line implements IList<String>, IBaseElement {
                         f -> ELEMENT.namesEqual.execute(getElementName(f), header));
                 if (field == null) continue;
                 try {
-                    IBaseElement ui = ((IBaseElement)field.get(instance));
+                    IBaseElement ui = (IBaseElement) getValueField(field, instance);
                     UIElement listElement = elements.get(i++);
                     WebElement element = ui.base().hasLocator()
                         ? listElement.findElement(ui.base().getLocator())

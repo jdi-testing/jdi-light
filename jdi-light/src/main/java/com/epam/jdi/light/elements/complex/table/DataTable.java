@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.table.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.LinqUtils;
@@ -27,7 +28,8 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
 import static java.util.Arrays.asList;
 
 /**
@@ -112,7 +114,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
      * @return D refers to user data object
      */
     @JDIAction("Get row '{0}' for '{name}' table")
-    public D dataRow(Enum rowName) {
+    public D dataRow(Enum<?> rowName) {
         hasDataClass();
         return dataRow(getEnumValue(rowName));
     }
@@ -123,7 +125,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
      * @return L refers to table line object
      */
     @JDIAction("Get row '{0}' for '{name}' table")
-    public L line(Enum rowName) {
+    public L line(Enum<?> rowName) {
         hasLineClass();
         return line(getEnumValue(rowName));
     }
@@ -134,7 +136,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
      * @return D refers to user data object
      */
     @JDIAction("Get first '{name}' table row that match criteria")
-    public D dataRow(TableMatcher... matchers) {
+    public D dataRow(ColumnMatcher... matchers) {
         hasDataClass();
         return row(matchers).asData(dataClass);
     }
@@ -145,7 +147,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
      * @return L refers to table line object
      */
     @JDIAction("Get first '{name}' table row that match criteria")
-    public L line(TableMatcher... matchers) {
+    public L line(ColumnMatcher... matchers) {
         hasLineClass();
         return row(matchers).asLine(lineClass);
     }
@@ -234,7 +236,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
      * @return List
      */
     @JDIAction("Get all '{name}' table rows that match criteria")
-    public List<D> dataRows(TableMatcher... matchers) {
+    public List<D> dataRows(ColumnMatcher... matchers) {
         hasDataClass();
         if (matchers.length == 0) return allData();
         return LinqUtils.map(rows(matchers), r -> r.asData(dataClass));
@@ -246,7 +248,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
      * @return List
      */
     @JDIAction("Get all '{name}' table rows that match criteria")
-    public List<L> lines(TableMatcher... matchers) {
+    public List<L> lines(ColumnMatcher... matchers) {
         hasLineClass();
         return LinqUtils.map(rows(matchers), l -> l.asLine(lineClass));
     }
@@ -403,7 +405,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
                     f -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(f.getName())));
                 if (field != null)
                     try {
-                        Object fieldObj = field.get(rows.get(i));
+                        Object fieldObj = getValueField(field, rows.get(i));
                         String val = isInterface(field.getType(), HasValue.class)
                             ? ((HasValue)fieldObj).getValue()
                             : fieldObj.toString();

@@ -18,7 +18,6 @@ public class WindowsAndFramesTests extends StaticTestsInit {
 
     @BeforeMethod
     public void before() {
-        getWindows();
         shouldBeLoggedIn();
         homePage.shouldBeOpened();
     }

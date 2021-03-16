@@ -14,7 +14,7 @@ import static io.github.com.pages.sections.DatepickerSection.minMaxDatepicker;
 public class MinMaxDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.open();
+        angularPage.shouldBeOpened();
         minMaxDatepicker.show();
     }
 

@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class AnnotationRule<A extends Annotation> {
-    public Class<?> annotation;
+    public Class<? extends Annotation> annotation;
     public JAction3<IBaseElement, A, Field> action;
     public AnnotationRule(Class<A> annotation, JAction2<IBaseElement, A> action) {
         this.annotation = annotation;
@@ -22,10 +22,10 @@ public class AnnotationRule<A extends Annotation> {
         this.annotation = annotation;
         this.action = action;
     }
-    public static <A extends Annotation> AnnotationRule aRule(Class<A> cl, JAction2<IBaseElement, A> action) {
+    public static <A extends Annotation> AnnotationRule<A> aRule(Class<A> cl, JAction2<IBaseElement, A> action) {
         return new AnnotationRule<>(cl, action);
     }
-    public static <A extends Annotation> AnnotationRule aRule(Class<A> cl, JAction3<IBaseElement, A, Field> action) {
+    public static <A extends Annotation> AnnotationRule<A> aRule(Class<A> cl, JAction3<IBaseElement, A, Field> action) {
         return new AnnotationRule<>(cl, action);
     }
 
