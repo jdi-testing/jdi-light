@@ -2,7 +2,6 @@ package io.github.com.pages.utils;
 
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.annotations.JDIPopper;
 import com.epam.jdi.light.material.elements.inputs.Button;
 import com.epam.jdi.light.material.elements.utils.Popper;
 
@@ -23,33 +22,21 @@ public class PopperFrame extends Section {
     @UI("//span[text()='bottom']")
     public Button bottomButton;
 
-    @JDIPopper(root = "#root",
-        tooltip = "//div[./div[text()='The content of the Popper.']]",
-        popper = ".makeStyles-paper-1")
+    @UI("#simple-popper")
     public Popper simplePopper;
 
-    @JDIPopper(root = "#root",
-        tooltip = "//div[./div[text()='The content of the Popper.']]",
-        popper = ".makeStyles-paper-1")
+    @UI("#transitions-popper")
     public Popper transitionsPopper;
 
-    @JDIPopper(root = "#root",
-        tooltip = "//div[./div/p[text()='The content of the Popper.']]",
-        popper = ".MuiTypography-body1")
+    @UI("//div[@role = 'tooltip']")
     public Popper topPopper;
 
-    @JDIPopper(root = "#root",
-        tooltip = "//div[./div/p[text()='The content of the Popper.']]",
-        popper = ".MuiTypography-body1")
+    @UI("//div[@role = 'tooltip']")
     public Popper leftPopper;
 
-    @JDIPopper(root = "#root",
-        tooltip = "//div[./div/p[text()='The content of the Popper.']]",
-        popper = ".MuiTypography-body1")
+    @UI("//div[@role = 'tooltip']")
     public Popper rightPopper;
 
-    @JDIPopper(root = "#root",
-        tooltip = "//div[./div/p[text()='The content of the Popper.']]",
-        popper = ".MuiTypography-body1")
+    @UI("//div[@role = 'tooltip']")
     public Popper bottomPopper;
 }

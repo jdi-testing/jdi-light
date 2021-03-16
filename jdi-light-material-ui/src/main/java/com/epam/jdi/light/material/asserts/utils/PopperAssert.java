@@ -10,7 +10,7 @@ import org.hamcrest.Matchers;
 
 public class PopperAssert extends UIAssert<PopperAssert, Popper> {
 
-    @JDIAction("Assert that is popper displayed")
+    @JDIAction("Assert that popper is displayed")
     public PopperAssert popperDisplayed() {
         jdiAssert(element().isPopperDisplayed(), Matchers.is(true));
         return this;

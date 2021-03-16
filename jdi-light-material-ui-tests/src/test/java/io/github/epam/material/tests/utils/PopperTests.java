@@ -11,22 +11,24 @@ import org.testng.annotations.Test;
 
 public class PopperTests extends TestsInit {
 
+    private final static String POPPER_TEXT = "The content of the Popper.";
+
     @Test
     public void simplePopperTest() {
         utilsSimplePopperPage.open();
         popperFrame.togglePopperButton.click();
         popperFrame.simplePopper.is().popperDisplayed();
         popperFrame.simplePopper.is().popperPosition(Position.BOTTOM);
-        popperFrame.simplePopper.is().popperTextCorrect("The content of the Popper.");
+        popperFrame.simplePopper.is().popperTextCorrect(POPPER_TEXT);
     }
 
     @Test
-    public void transactionPopperTest() {
+    public void transitionPopperTest() {
         utilsTransitionsPopperPage.open();
         popperFrame.togglePopperButton.click();
         popperFrame.transitionsPopper.is().popperDisplayed();
-        popperFrame.simplePopper.is().popperPosition(Position.BOTTOM);
-        popperFrame.transitionsPopper.is().popperTextCorrect("The content of the Popper.");
+        popperFrame.transitionsPopper.is().popperPosition(Position.BOTTOM);
+        popperFrame.transitionsPopper.is().popperTextCorrect(POPPER_TEXT);
     }
 
     @Test
@@ -36,22 +38,22 @@ public class PopperTests extends TestsInit {
         popperFrame.bottomButton.click();
         popperFrame.bottomPopper.is().popperDisplayed();
         popperFrame.bottomPopper.is().popperPosition(Position.BOTTOM);
-        popperFrame.bottomPopper.is().popperTextCorrect("The content of the Popper.");
+        popperFrame.bottomPopper.is().popperTextCorrect(POPPER_TEXT);
 
         popperFrame.leftButton.click();
         popperFrame.leftPopper.is().popperDisplayed();
         popperFrame.leftPopper.is().popperPosition(Position.LEFT);
-        popperFrame.leftPopper.is().popperTextCorrect("The content of the Popper.");
+        popperFrame.leftPopper.is().popperTextCorrect(POPPER_TEXT);
 
         popperFrame.rightButton.click();
         popperFrame.rightPopper.is().popperDisplayed();
         popperFrame.rightPopper.is().popperPosition(Position.RIGHT);
-        popperFrame.rightPopper.is().popperTextCorrect("The content of the Popper.");
+        popperFrame.rightPopper.is().popperTextCorrect(POPPER_TEXT);
 
         popperFrame.topButton.click();
         popperFrame.topPopper.is().popperDisplayed();
         popperFrame.topPopper.is().popperPosition(Position.TOP);
-        popperFrame.topPopper.is().popperTextCorrect("The content of the Popper.");
+        popperFrame.topPopper.is().popperTextCorrect(POPPER_TEXT);
 
     }
 }
