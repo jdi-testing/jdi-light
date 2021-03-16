@@ -42,6 +42,7 @@ import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.inputs.DateTimePickersFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
@@ -262,6 +263,20 @@ public class StaticSite {
     // typography
     @Frame("storybook-preview-iframe")
     public static TypographyFrame typographyFrame;
+    // utils
+    // popper
+    @Frame("storybook-preview-iframe")
+    public static PopperFrame popperFrame;
+
+    @Url("/material-ui-utils-popper--simple")
+    public static WebPage utilsSimplePopperPage;
+
+    @Url("/material-ui-utils-popper--transitions")
+    public static WebPage utilsTransitionsPopperPage;
+
+    @Url("/material-ui-utils-popper--positioned")
+    public static WebPage utilsPositionedPoppersPage;
+
 
     @Url("/material-ui-data-display-typography--typography-view")
     public static WebPage dataDisplayTypographyPage;
