@@ -11,7 +11,6 @@
 ## 1.3.11 (03.03.2021)
 * Switch to Lightsaber 2.1.13
 * Fix print column in a table matchers
-* Switch to Lightsaber 2.1.13
 * Move Table Matchers to com.epam.jdi.light.elements.complex.table.matchers and rename TableMatcher > ColumnMatcher; Single > ValueMatcher
 * Make constructors public and fields protected
 * Add TableMatchersSettings
