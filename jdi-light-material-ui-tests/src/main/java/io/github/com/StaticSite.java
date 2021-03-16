@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.datadisplay.IconsFrame;
 import io.github.com.pages.datadisplay.ListsFrame;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
@@ -227,6 +228,19 @@ public class StaticSite {
     public static WebPage groupCheckBoxPage;
 
     // Display data
+    //icons
+    @Frame("storybook-preview-iframe")
+    public static IconsFrame iconsFrame;
+
+    @Url("/material-ui-data-display-icons--simple-icons")
+    public static WebPage simpleIconsPage;
+
+    @Url("/material-ui-data-display-icons--color-icons")
+    public static WebPage colorIconsPage;
+
+    @Url("/material-ui-data-display-icons--size-icons")
+    public static WebPage sizeIconsPage;
+
     // material icon
     @Frame("storybook-preview-iframe")
     public static MaterialIconFrame materialIconFrame;
