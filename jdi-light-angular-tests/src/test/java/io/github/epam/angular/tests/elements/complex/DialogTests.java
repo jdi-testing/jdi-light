@@ -13,7 +13,7 @@ public class DialogTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
         dialog.show();
     }
 

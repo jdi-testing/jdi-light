@@ -4,11 +4,9 @@ import com.epam.jdi.tools.FixedQueue;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
+import org.apache.logging.log4j.*;
 
 import java.util.Properties;
 
@@ -22,7 +20,6 @@ import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.format;
 import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.apache.logging.log4j.core.config.Configurator.setLevel;
 import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
 
@@ -35,6 +32,9 @@ public class JDILogger implements ILogger {
     private static Marker jdiMarker = MarkerManager.getMarker("JDI");
     public static int debugBufferSize = 0;
     public Safe<FixedQueue<String>> debugLog = new Safe<>(() -> new FixedQueue<>(debugBufferSize));
+    private String name;
+    public static JFunc1<String, Logger> GET_LOGGER = LogManager::getLogger;
+    private Logger logger;
 
     public static JDILogger instance(String name) {
         if (!loggers.has(name))
@@ -46,11 +46,11 @@ public class JDILogger implements ILogger {
         this("JDI");
     }
     public JDILogger(String name) {
-        logger = getLogger(name);
+        logger = GET_LOGGER.execute(name);
         this.name = name;
         setLogLevel(initialLogLevel());
     }
-    public JDILogger(Class clazz) {
+    public JDILogger(Class<?> clazz) {
         this(clazz.getSimpleName());
     }
 
@@ -61,9 +61,9 @@ public class JDILogger implements ILogger {
     }
     private LogLevels initialLogLevel() {
         Properties properties = getProperties(COMMON.testPropertiesPath);
-        String logLevel = properties.getProperty("log.level");
-        return isNotBlank(logLevel)
-            ? parseLogLevel(logLevel)
+        String logLevelProp = properties.getProperty("log.level");
+        return isNotBlank(logLevelProp)
+            ? parseLogLevel(logLevelProp)
             : INFO;
     }
     public void setLogLevel(LogLevels level) {
@@ -111,8 +111,6 @@ public class JDILogger implements ILogger {
             logLevel.set(tempLevel);
         }
     }
-    private String name;
-    private Logger logger;
     private String getRecord(String record, Object... args) {
         String prefix = MULTI_THREAD ? "[" + currentThread().getId() + "] " : "";
         return format(prefix + record, args);

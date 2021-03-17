@@ -42,14 +42,16 @@ public class ChipsUnitTests extends TestsInit {
 
     @Test
     public void stackedChipsHasTextTest() {
+        // The first click is on last element to prevent additional scrolls
+        stackedChipsList.clickChipsByTextValue(WARN);
+        Assert.assertTrue(stackedChipsList.chipsHasText(WARN));
         stackedChipsList.clickChipsByTextValue(NONE);
         Assert.assertTrue(stackedChipsList.chipsHasText(NONE));
         stackedChipsList.clickChipsByTextValue(PRIMARY);
         Assert.assertTrue(stackedChipsList.chipsHasText(PRIMARY));
         stackedChipsList.clickChipsByTextValue(ACCENT);
         Assert.assertTrue(stackedChipsList.chipsHasText(ACCENT));
-        stackedChipsList.clickChipsByTextValue(WARN);
-        Assert.assertTrue(stackedChipsList.chipsHasText(WARN));
+
     }
 
     @Test

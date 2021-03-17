@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.logging.LogEntry;
@@ -20,6 +21,7 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
@@ -32,6 +34,7 @@ import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
+import static com.epam.jdi.light.logger.AllureLogger.attachScreenshot;
 import static com.epam.jdi.light.logger.AllureLogger.logDataToAllure;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
@@ -209,6 +212,7 @@ public class WebPage extends DriverBase implements PageObject {
         CacheValue.reset();
         driver().navigate().to(url);
         getWindows();
+        isTop.set(true);
         setCurrentPage(this);
     }
     public void open(Object... params) {
@@ -235,7 +239,7 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
     public void checkOpened() {
         if (noRunDrivers())
-            throw exception("Page '%s' is not opened: Driver is not run", toString());
+            throw exception("Page '%s' is not opened: Driver is not run: ", toString());
         String result = Switch(checkUrlType).get(
             Value(NONE, ""),
             Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
@@ -252,9 +256,18 @@ public class WebPage extends DriverBase implements PageObject {
         );
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
-        setCurrentPage(this);
         if (VISUAL_PAGE_STRATEGY == CHECK_PAGE)
             visualWindowCheck();
+        isTop.set(true);
+        setCurrentPage(this);
+    }
+    public void checkIsNotChanged() {
+        if (noRunDrivers())
+            throw exception("Driver is not run: ", toString());
+        boolean result = new Timer(TIMEOUTS.page.get() * 1000L).getResult(() -> !isOpened());
+        if (!result) {
+            throw exception("New page opened: %s", getUrl());
+        }
     }
     public boolean isOnPage(String url) {
         switch (checkUrlType) {
@@ -297,8 +310,10 @@ public class WebPage extends DriverBase implements PageObject {
             Value(CONTAINS, t -> title().contains()),
             Else(false)
         );
-        if (result)
+        if (result) {
+            isTop.set(true);
             setCurrentPage(this);
+        }
         return result;
     }
 
@@ -448,11 +463,24 @@ public class WebPage extends DriverBase implements PageObject {
     public static long yOffset() {
         return jsExecute("return window.pageYOffset;");
     }
+    public void windowScreenshotToAllure() {
+        try {
+            attachScreenshot(getName(), windowScreenshot());
+        } catch (Exception ignore) { }
+    }
+    @JDIAction(level = DEBUG)
+    public static String windowScreenshot(String path) {
+        try {
+            File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            File imageFile = new File(path);
+            copyFile(screenshot, imageFile);
+            return path;
+        } catch (Exception ex) { throw exception(ex, "Can't take screenshot"); }
+    }
     @JDIAction(level = DEBUG)
     public static String windowScreenshot() {
         try {
             File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-            //show();
             String path = mergePath(getPath(), getCurrentPage()+".png");
             File imageFile = new File(path);
             copyFile(screenshot, imageFile);
@@ -466,7 +494,6 @@ public class WebPage extends DriverBase implements PageObject {
         String path;
         try {
             screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-            //show();
             path = mergePath(getPath(), name);
             imageFile = new File(path);
         } catch (Exception ex) { throw exception(ex, "Can't take windowScreenshot"); }

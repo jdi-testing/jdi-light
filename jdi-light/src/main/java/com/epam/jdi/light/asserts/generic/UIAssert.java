@@ -139,7 +139,7 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
      * Match passed value with the element class
      * @param attrName to compare attr(String attrName)
      */
-    @JDIAction("Assert that '{name}' has css class {0}")
+    @JDIAction("Assert that '{name}' has css class '{0}'")
     public A attr(String attrName) {
         jdiAssert(format(element().hasAttribute(attrName) ? "has attribute '%s'" : "has no attribute '%s'", attrName) , Matchers.is("has attribute '"+attrName+"'"));
         return (A) this;
