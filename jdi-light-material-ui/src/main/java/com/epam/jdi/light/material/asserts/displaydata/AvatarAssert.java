@@ -27,7 +27,7 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> {
                     .wait(() -> element().find(".MuiSvgIcon-root").isDisplayed());
             jdiAssert(isDisplayed, Matchers.is(true));
         } catch (AssertionError e){
-            new AssertionError("Img not found");
+            new AssertionError("Svg not found");
         }
         return this;
     }
