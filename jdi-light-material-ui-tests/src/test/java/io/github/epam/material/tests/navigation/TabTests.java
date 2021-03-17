@@ -3,7 +3,15 @@ package io.github.epam.material.tests.navigation;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
+import static io.github.com.StaticSite.defaultTabPage;
+import static io.github.com.StaticSite.disabledTabFrame;
+import static io.github.com.StaticSite.disabledTabPage;
+import static io.github.com.StaticSite.scrollableTabFrame;
+import static io.github.com.StaticSite.scrollableTabPage;
+import static io.github.com.StaticSite.simpleTabFrame;
+import static io.github.com.StaticSite.verticalTabFrame;
+import static io.github.com.StaticSite.verticalTabPage;
+
 
 public class TabTests extends TestsInit {
 
@@ -59,8 +67,8 @@ public class TabTests extends TestsInit {
         verticalTabFrame.tabs.is().forwardScrollButtonEnabled();
         verticalTabFrame.tabs.is().backScrollButtonEnabled();
         verticalTabFrame.tabs.scrollForward();
-        scrollableTabFrame.tabs.is().forwardScrollButtonDisabled();
-        scrollableTabFrame.tabs.is().backScrollButtonEnabled();
+        verticalTabFrame.tabs.is().forwardScrollButtonDisabled();
+        verticalTabFrame.tabs.is().backScrollButtonEnabled();
         verticalTabFrame.tabs.scrollBack();
         verticalTabFrame.tabs.is().forwardScrollButtonEnabled();
         verticalTabFrame.tabs.is().backScrollButtonEnabled();
