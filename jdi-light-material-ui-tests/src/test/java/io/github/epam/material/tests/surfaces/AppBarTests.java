@@ -18,6 +18,6 @@ public class AppBarTests extends TestsInit {
         appBarFrame.appBar.clickOnButtonByIndex(1);
         appBarFrame.appBar.is().enabled(2);
         appBarFrame.appBar.clickOnButtonByIndex(2);
-        appBarFrame.appTitle.is().assertTitle(TITLE);
+        appBarFrame.appBar.is().assertTitle(TITLE);
     }
 }
