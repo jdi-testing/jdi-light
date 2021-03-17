@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.inputs.TextField;
 import org.hamcrest.Matcher;
+import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -17,8 +18,8 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
     }
 
     @JDIAction("Assert that '{name}' text is '{0}'")
-    public TextFieldAssert text(Matcher<String> condition) {
-        jdiAssert(element().getValue(), condition);
+    public TextFieldAssert text(String text) {
+        jdiAssert(element().getValue(), Matchers.is(text));
         return this;
     }
 

@@ -3,7 +3,6 @@ package io.github.epam.angular.tests.elements.common;
 import com.epam.jdi.light.angular.elements.common.Tooltip;
 import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.tools.func.JAction;
-import io.github.com.pages.AngularPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -11,6 +10,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.TooltipSection.*;
 import static io.github.epam.angular.tests.BaseValidationsUtils.duration;
@@ -23,7 +23,7 @@ public class TooltipTests extends TestsInit {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
         if (tooltip.isDisplayed())
-            AngularPage.refresh();
+            refresh();
     }
 
     @Test
@@ -41,6 +41,8 @@ public class TooltipTests extends TestsInit {
         position.put("below", Tooltip.Position.BELOW);
         position.put("left", Tooltip.Position.LEFT);
         position.put("right", Tooltip.Position.RIGHT);
+
+        positionTooltipButton.show();
 
         position.forEach(
                 (k, v) -> {

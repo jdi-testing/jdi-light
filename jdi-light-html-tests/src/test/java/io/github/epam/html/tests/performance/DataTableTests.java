@@ -21,9 +21,10 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class DataTableTests implements TestsInit {
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         performancePage.shouldBeOpened();
@@ -73,6 +74,7 @@ public class DataTableTests implements TestsInit {
         //long n3 = getDuration(() -> table.jsColumn(3)); // 100
         //long n = getDuration(() -> table.getValue()); // 1500
 
+        assertTrue(table.isExist(), "Table is exits on the page");
         List<String> row = notMoreThan(1000, () -> table.jsRow(ELEMENT.startIndex + 394));
         notMoreThan(100, () -> table.jsRow("Aileen Rodriguez"));
         String aileenText = "Aileen Rodriguez;0845 46 46;mattis.velit.justo@Maurismolestie.com;Portico e San Benedetto";

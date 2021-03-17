@@ -18,7 +18,7 @@ public class MaterialSelectorUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.open();
+        angularPage.shouldBeOpened();
     }
 
     @Test
@@ -26,6 +26,8 @@ public class MaterialSelectorUnitTests extends TestsInit {
         basicMatSelect.show();
         basicMatSelect.expand();
         assertTrue(basicMatSelect.isExpanded());
+        basicMatSelect.collapse();
+        assertTrue(basicMatSelect.isCollapsed());
     }
 
     @Test
@@ -59,7 +61,8 @@ public class MaterialSelectorUnitTests extends TestsInit {
         assertEquals(multipleSelect.selected(), multiOptions[0] + ", " + multiOptions[1] + ", " + multiOptions[2]);
     }
 
-    @Test
+    @Test(enabled = false)
+    // duplicated. Page should be reload for this test, skip to increase performance
     public void multipleSelectByIndexesTest() {
         multipleSelect.show();
         int[] multiSelect = new int[] {2, 4, 6};
