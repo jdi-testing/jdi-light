@@ -44,6 +44,7 @@ import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.navigation.TabFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.inputs.DateTimePickersFrame;
@@ -210,6 +211,13 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-paper--default")
     public static WebPage surfacePaperDefaultPage;
+
+    // app bar
+    @Frame("storybook-preview-iframe")
+    public static AppBarFrame appBarFrame;
+
+    @Url("/material-ui-surfaces-app-bar--simple-app-bar")
+    public static WebPage surfaceSimpleAppBarPage;
 
     // card
     @Frame("storybook-preview-iframe")
