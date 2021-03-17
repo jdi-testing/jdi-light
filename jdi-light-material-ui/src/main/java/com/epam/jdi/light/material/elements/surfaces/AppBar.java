@@ -16,18 +16,18 @@ public class AppBar extends UIBaseElement<AppBarAssert> implements ISetup {
     String buttons;
     String appTitle;
 
-    private UIElement appBarElement(int index) {
+    private UIElement getButtonByIndex(int index) {
         return this.finds(buttons).get(index);
     }
 
     @JDIAction("Is '{name}' enabled by index")
-    public boolean isMenuButtonEnabled(int index) {
-        return appBarElement(index).isEnabled();
+    public boolean isButtonEnabled(int index) {
+        return getButtonByIndex(index).isEnabled();
     }
 
     @JDIAction("Click on '{name}' by index")
-    public void clickOnElementByIndex(int index) {
-        appBarElement(index).click();
+    public void clickOnButtonByIndex(int index) {
+        getButtonByIndex(index).click();
     }
 
     private String getTitle() {
@@ -50,7 +50,7 @@ public class AppBar extends UIBaseElement<AppBarAssert> implements ISetup {
             return;
         JDIAppBar j = field.getAnnotation(JDIAppBar.class);
 
-        buttons = j.buttons();
+        buttons = j.menuButton();
         appTitle = j.appTitle();
     }
 }

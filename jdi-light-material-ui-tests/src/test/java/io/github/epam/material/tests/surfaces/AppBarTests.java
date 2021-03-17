@@ -14,10 +14,10 @@ public class AppBarTests extends TestsInit {
     public void appBarTests() {
         appBarPage.shouldBeOpened();
 
-        appBarFrame.appBarElement.is().enabled(1);
-        appBarFrame.appBarElement.clickOnElementByIndex(1);
-        appBarFrame.appBarElement.is().enabled(2);
-        appBarFrame.appBarElement.clickOnElementByIndex(2);
+        appBarFrame.appBar.is().enabled(1);
+        appBarFrame.appBar.clickOnButtonByIndex(1);
+        appBarFrame.appBar.is().enabled(2);
+        appBarFrame.appBar.clickOnButtonByIndex(2);
         appBarFrame.appTitle.is().assertTitle(TITLE);
     }
 }

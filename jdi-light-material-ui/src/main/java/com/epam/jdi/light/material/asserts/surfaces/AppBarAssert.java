@@ -17,7 +17,7 @@ public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
 
     @JDIAction("Assert '{name}'")
     public AppBarAssert enabled(int index) {
-        jdiAssert(element().isMenuButtonEnabled(index), Matchers.is(true));
+        jdiAssert(element().isButtonEnabled(index), Matchers.is(true));
         return this;
     }
 }
