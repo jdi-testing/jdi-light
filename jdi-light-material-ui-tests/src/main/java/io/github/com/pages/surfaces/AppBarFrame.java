@@ -8,7 +8,7 @@ public class AppBarFrame extends Section {
     @UI(".MuiIconButton-label")
     public AppBar menu;
 
-    @UI("//h6")
+    @UI(".MuiTypography-root")
     public AppBar news;
 
     @UI(".MuiButton-label")
