@@ -44,6 +44,8 @@ import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.navigation.TabFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.PaperFrame;
+import io.github.com.pages.utils.ModalFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.surfaces.CardFrame;
@@ -51,7 +53,6 @@ import io.github.com.pages.inputs.DateTimePickersFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
-import io.github.com.pages.surfaces.PaperFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light")
 public class StaticSite {
@@ -269,6 +270,15 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-material-icons--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
+
+    @Frame("storybook-preview-iframe")
+    public static ModalFrame modalFrame;
+
+    @Url("/material-ui-utils-modal--transitions-modal")
+    public static WebPage transitionsModalPage;
+
+    @Url("/material-ui-utils-modal--server-modal")
+    public static WebPage serverSideModalPage;
 
     // typography
     @Frame("storybook-preview-iframe")
@@ -507,6 +517,7 @@ public class StaticSite {
     public static WebPage defaultContainerPage;
 
     // login page
+
     @UI("#login-form")
     public static Form<User> loginForm;
 
