@@ -41,10 +41,12 @@ import io.github.com.pages.layouts.HiddenFrame;
 import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerFrame;
+import io.github.com.pages.navigation.TabFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 import io.github.com.pages.utils.ModalFrame;
+import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.inputs.DateTimePickersFrame;
@@ -210,6 +212,13 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-paper--default")
     public static WebPage surfacePaperDefaultPage;
+
+    // app bar
+    @Frame("storybook-preview-iframe")
+    public static AppBarFrame appBarFrame;
+
+    @Url("/material-ui-surfaces-app-bar--simple-app-bar")
+    public static WebPage surfaceSimpleAppBarPage;
 
     // card
     @Frame("storybook-preview-iframe")
@@ -393,6 +402,33 @@ public class StaticSite {
     @Url("/material-ui-feedback-snackbar--consecutive-snackbars")
     public static WebPage feedbackSnackbarConsecutivePage;
 
+    // navigation
+    // tabs
+
+    @Url("/material-ui-navigation-tabs--default")
+    public static WebPage defaultTabPage;
+
+    @Url("/material-ui-navigation-tabs--disabled-tab-example")
+    public static WebPage disabledTabPage;
+
+    @Url("/material-ui-navigation-tabs--scrollable-tab-example")
+    public static WebPage scrollableTabPage;
+
+    @Url("/material-ui-navigation-tabs--vertical-tab-example")
+    public static WebPage verticalTabPage;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame simpleTabFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame disabledTabFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame scrollableTabFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame verticalTabFrame;
+
     // utils
     // transition
     @Frame("storybook-preview-iframe")
@@ -475,7 +511,7 @@ public class StaticSite {
 
     @Url("/material-ui-layout-box--default")
     public static WebPage defaultBoxPage;
-  
+
     // container
     @Frame("storybook-preview-iframe")
     public static ContainerFrame containerFrame;
