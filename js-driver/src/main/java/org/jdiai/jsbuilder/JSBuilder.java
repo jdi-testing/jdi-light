@@ -12,12 +12,15 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
+import static org.jdiai.jsbuilder.QueryLogger.logger;
 import static org.jdiai.jsbuilder.RetryFunctions.DEFAULT_LIST_SCRIPT_EXECUTE;
 import static org.jdiai.jsbuilder.RetryFunctions.DEFAULT_SCRIPT_EXECUTE;
 
@@ -26,52 +29,61 @@ public class JSBuilder implements IJSBuilder {
     protected String query = "";
     protected String ctxCode = "";
     protected String replaceValue;
-    protected JavascriptExecutor js;
-    public static boolean LOG_QUERY = false;
+    protected Supplier<JavascriptExecutor> js;
     public static JFunc1<String, String> PROCESS_RESULT =
         result -> result.length() > 200  ? result.substring(0, 195) + "..." : result;
-    public boolean logQuery = LOG_QUERY;
-    public static JAction1<String> logger = System.out::println;
+    public Integer logQuery = null;
     protected MapArray<String, String> useFunctions = new MapArray<>();
     protected IBuilderActions builderActions;
 
     public JSBuilder() { }
-    public JSBuilder(WebDriver driver) {
+    public JSBuilder(Supplier<WebDriver> driver) {
         this(driver, null);
     }
-    public JSBuilder(WebDriver driver, IBuilderActions builderActions) {
-        this.js = (JavascriptExecutor) driver;
+    public JSBuilder(Supplier<WebDriver> driver, IBuilderActions builderActions) {
+        this.js = () -> (JavascriptExecutor) driver.get();
         this.builderActions = builderActions != null
             ? builderActions
             : new BuilderActions();
         this.builderActions.setBuilder(this);
     }
 
+    public IJSBuilder updateActions(IBuilderActions builderActions) {
+        this.builderActions = builderActions;
+        this.builderActions.setBuilder(this);
+        return this;
+    }
     public IJSBuilder registerFunction(String name, String function) {
         useFunctions.update(name, function);
         return this;
     }
-    public IJSBuilder logQuery() {
-        this.logQuery = true;
+    public IJSBuilder logQuery(int LogLevel) {
+        this.logQuery = LogLevel;
         return this;
     }
     public IJSBuilder setTemplate(String replaceTo) {
         this.replaceValue = replaceTo;
         return this;
     }
+    public boolean logScript() {
+        return (logQuery != null ? logQuery : LOG_QUERY) > 0;
+    }
+    public boolean logResult() {
+        return (logQuery != null ? logQuery : LOG_QUERY ) == 2;
+    }
     public static JFunc2<Object, String, Object> EXECUTE_SCRIPT = DEFAULT_SCRIPT_EXECUTE;
     public Object executeQuery() {
         String jsScript = getQuery();
-        if (logQuery) {
+        if (logScript()) {
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         }
         Object result;
         try {
-            result = EXECUTE_SCRIPT.execute(js, jsScript);
+            result = EXECUTE_SCRIPT.execute(js.get(), jsScript);
         } finally {
             cleanup();
         }
-        if (result != null && logQuery)
+        if (result != null && logResult())
             logger.execute(">>> " + PROCESS_RESULT.execute(result.toString()));
         return result;
     }
@@ -80,15 +92,15 @@ public class JSBuilder implements IJSBuilder {
     public static void switchOffStringify() { smartStringify = false; }
     public List<String> executeAsList() {
         String jsScript = getQuery();
-        if (logQuery)
+        if (logScript())
             logger.execute("Execute query:" + LINE_BREAK + jsScript);
         List<String> result;
         try {
-            result = EXECUTE_LIST_SCRIPT.execute(js, jsScript);
+            result = EXECUTE_LIST_SCRIPT.execute(js.get(), jsScript);
         } finally {
             cleanup();
         }
-        if (result != null && logQuery)
+        if (result != null && logResult())
             logger.execute(">>> " + PROCESS_RESULT.execute(result.toString()));
         return result;
     }

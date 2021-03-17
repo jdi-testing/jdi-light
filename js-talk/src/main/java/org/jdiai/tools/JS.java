@@ -9,9 +9,11 @@ import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import com.google.gson.JsonObject;
 import org.jdiai.annotations.UI;
+import org.jdiai.asserts.Condition;
 import org.jdiai.interfaces.HasLocators;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.HasParent;
+import org.jdiai.jsdriver.JSDriverUtils;
 import org.jdiai.jsdriver.JSException;
 import org.jdiai.jsproducer.Json;
 import org.jdiai.jswraper.JSSmart;
@@ -29,6 +31,7 @@ import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.copyList;
@@ -43,11 +46,12 @@ import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.jsbuilder.GetTypes.dataType;
+import static org.jdiai.jsbuilder.QueryLogger.logger;
 import static org.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static org.jdiai.jsdriver.JSDriverUtils.selector;
-import static org.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
-import static org.jdiai.jswraper.JSWrappersUtils.defineLocator;
-import static org.jdiai.tools.Conditions.textEquals;
+import static org.jdiai.jsdriver.JSException.THROW_EXCEPTION;
+import static org.jdiai.jswraper.JSWrappersUtils.*;
+import static org.jdiai.tools.FilterConditions.textEquals;
 import static org.jdiai.tools.GetTextTypes.INNER_TEXT;
 import static org.jdiai.tools.JSTalkUtils.findByToBy;
 import static org.jdiai.tools.JSTalkUtils.uiToBy;
@@ -61,39 +65,58 @@ import static org.openqa.selenium.OutputType.*;
 public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public static String JDI_STORAGE = "src/test/jdi";
     public final JSSmart js;
-    private final WebDriver driver;
+    private final Supplier<WebDriver> driver;
     private final List<By> locators;
     private final Safe<Actions> actions;
     private String name = "";
     private Object parent = null;
 
-    public JS(WebDriver driver, List<By> locators) {
+    public JS(Supplier<WebDriver> driver, List<By> locators) {
         this.locators = locators;
         this.driver = driver;
         this.js = new JSSmart(driver, locators);
         this.js.multiSearch();
-        this.actions = new Safe<>(() -> new Actions(driver));
+        this.actions = new Safe<>(() -> new Actions(driver()));
+    }
+    public JS(WebDriver driver, List<By> locators) {
+        this(() -> driver, locators);
+    }
+    public JS(Supplier<WebDriver> driver, By... locators) {
+        this(driver, newList(locators));
     }
     public JS(WebDriver driver, By... locators) {
-        this(driver, newList(locators));
+        this(() -> driver, locators);
     }
 
     public JS(JS parent, By locator) {
-        this(parent.driver, locator, parent, true);
+        this(parent::driver, locator, parent, true);
     }
-    public JS(WebDriver driver, By locator, Object parent) {
+    public JS(Supplier<WebDriver> driver, By locator, Object parent) {
         this(driver, locator, parent, true);
     }
-    public JS(JS parent, By locator, boolean useParentLocators) {
-        this(parent.driver, locator, parent, useParentLocators);
+    public JS(WebDriver driver, By locator, Object parent) {
+        this(() -> driver, locator, parent);
     }
-    public JS(WebDriver driver, By locator, Object parent, boolean useParentLocators) {
+    public JS(JS parent, By locator, boolean useParentLocators) {
+        this(parent::driver, locator, parent, useParentLocators);
+    }
+    public JS(Supplier<WebDriver> driver, By locator, Object parent, boolean useParentLocators) {
         this(driver, locatorsFromParent(locator, parent, useParentLocators));
         this.parent = parent;
         if (isClass(parent.getClass(), JS.class)) {
             this.js.updateDriver(((JS) parent).js.jsDriver());
         }
     }
+    public JS(WebDriver driver, By locator, Object parent, boolean useParentLocators) {
+        this(() -> driver, locator, parent, useParentLocators);
+    }
+    public WebDriver driver() {
+        return this.driver.get();
+    }
+    public JavascriptExecutor js() {
+        return (JavascriptExecutor) driver();
+    }
+
     private static List<By> locatorsFromParent(By locator, Object parent, boolean useParentLocators) {
         List<By> locators = new ArrayList<>();
         if (useParentLocators && parent != null && isInterface(parent.getClass(), HasLocators.class)) {
@@ -130,7 +153,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         js.getAttribute(action);
     }
     public WebElement we() {
-        SearchContext ctx = driver;
+        SearchContext ctx = driver();
         for (By locator : locators) {
             ctx = ctx.findElement(locator);
         }
@@ -142,7 +165,8 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public void actions(JFunc2<Actions, WebElement, Actions> action) {
         action.execute(actions.get(), this).build().perform();
     }
-    public String getName() { return name; }
+    public String getName() {
+        return isNotBlank(name) ? name : print(locators(), JSDriverUtils::getByLocator); }
     public JS setName(String name) {
         this.name = name;
         return this;
@@ -214,7 +238,6 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         set("value+='" + charToString(value) + "'");
     }
     public void input(CharSequence... value) {
-        String text = value.length == 1 ? value[0].toString() : "";
         set("value='" + charToString(value) + "'");
     }
     public void slide(String value) {
@@ -484,7 +507,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     protected String objectMap;
     public JS setObjectMapping(String objectMap, Class<?> cl) {
         this.objectMap = objectMap;
-        this.js.setEntity(cl);
+        this.js.setupEntity(cl);
         return this;
     }
     public JsonObject getJSObject(String json) {
@@ -494,7 +517,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         return js.getEntity(objectMap);
     }
     public <T> T getEntity(String objectMap, Class<?> cl) {
-        js.setEntity(cl);
+        js.setupEntity(cl);
         return js.getEntity(objectMap);
     }
 
@@ -539,17 +562,6 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
             result.add(format("'%s': %s", field.getName(), getValueType(field, element)));
         }
     };
-    public static String getValueType(Field field, String element) {
-        String value = field.isAnnotationPresent(GetValue.class)
-            ? field.getAnnotation(GetValue.class).value()
-            : "innerText";
-        if (value.contains("styles.")) {
-            return value.replace("styles", "getComputedStyle(" +  element + ")");
-        } else if (value.contains("{element}")) {
-            return value.replace("{element}", element);
-        }
-        return element + "." + value;
-    }
 
     public <T> List<T> getEntityList(Class<T> cl) {
         Field[] allFields = cl.getDeclaredFields();
@@ -561,14 +573,14 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         return getEntityList(objectMapper, cl);
     }
     public <T> List<T> getEntityList(String objectMap, Class<?> cl) {
-        js.setEntity(cl);
+        js.setupEntity(cl);
         return js.getEntityList(objectMap);
     }
 
-    public JS findFirst(String by, Condition condition) {
+    public JS findFirst(String by, FilterCondition condition) {
         return findFirst(defineLocator(by), condition.addTextType(getTextType).getScript());
     }
-    public JS findFirst(By by, Condition condition) {
+    public JS findFirst(By by, FilterCondition condition) {
         return findFirst(by, condition.addTextType(getTextType).getScript());
     }
     public JS findFirst(String by, String condition) {
@@ -589,7 +601,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public JS get(String value) {
         return findFirst(textEquals(value));
     }
-    public JS findFirst(Condition condition) {
+    public JS findFirst(FilterCondition condition) {
         return findFirst(condition.addTextType(getTextType).getScript());
     }
     public JS findFirst(String condition) {
@@ -638,6 +650,10 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public String bgColor() {
         return js.bgColor();
     }
+    public String pseudo(String name, String value) {
+        return js.pseudo(name, value);
+    }
+    public boolean focused() { return getElement("element === document.activeElement").equalsIgnoreCase("true"); }
 
     public List<By> locators() { return locators; }
     protected MapArray<String, String> images;
@@ -723,5 +739,17 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         int y = rect.top + (rect.bottom - rect.top) / 2;
         return new Point(x, y);
     }
-
+    public JS shouldBe(Condition... conditions) {
+        for (Condition condition : conditions) {
+            String message = "Assert that " + condition.getName().replace("%element%", "'" + getName() + "'").replace(" %no%", "");
+            logger.execute(message);
+            boolean result = condition.execute(this);
+            if (!result)
+                THROW_EXCEPTION.accept(message + " failed");
+        }
+        return this;
+    }
+    public JS should(Condition... conditions) {
+        return shouldBe(conditions);
+    }
 }

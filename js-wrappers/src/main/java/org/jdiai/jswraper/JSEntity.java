@@ -44,7 +44,7 @@ public class JSEntity<T> extends JSElement {
         return driver.getOne(objectMap).asObject(cl);
     }
     public T getEntity() {
-        return getEntity(CLASS_TO_MAP.execute(cl));
+        return getEntity(GET_ENTITY_MAP.execute(cl));
     }
     public T getEntity(List<String> attributes) {
         return driver.getOne(attributesToJson(attributes)).asObject(cl);
@@ -57,13 +57,14 @@ public class JSEntity<T> extends JSElement {
         return driver.getList(objectMap).asObject(cl);
     }
     public List<T> getEntityList() {
-        return getEntityList(CLASS_TO_MAP.execute(cl));
+        return getEntityList(GET_ENTITY_MAP.execute(cl));
     }
-    public static JFunc1<Class<?>, String> CLASS_TO_MAP = cl -> {
+    public static JFunc1<Class<?>, String> GET_ENTITY_MAP = cl -> {
         List<String> mapList = map(cl.getDeclaredFields(),
             field -> format("'%s': %s", field.getName(), getValueType(field, "element")));
         return  "{ " + print(mapList, ", ") + " }";
     };
+
     public List<T> getEntityList(List<String> attributes) {
         return driver.getList(attributesToJson(attributes)).asObject(cl);
     }

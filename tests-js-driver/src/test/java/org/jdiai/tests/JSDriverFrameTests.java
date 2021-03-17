@@ -1,7 +1,6 @@
 package org.jdiai.tests;
 
 import org.jdiai.TestInit;
-import org.jdiai.jsbuilder.JSBuilder;
 import org.jdiai.jsbuilder.SmartBuilderActions;
 import org.jdiai.jsdriver.JSDriver;
 import org.jdiai.locators.By;
@@ -28,13 +27,13 @@ public class JSDriverFrameTests implements TestInit {
 
     @Test
     public void frameTest() {
-        JSDriver frameImage = js("frame:#first_frame", "img").setBuilder(new JSBuilder(driver(), new SmartBuilderActions()));
+        JSDriver frameImage = js("frame:#first_frame", "img").updateBuilderActions(new SmartBuilderActions());
         assertEquals(frameImage.getOne("element.tagName").asString(), "IMG");
         assertTrue(frameImage.getOne("element.src").asString().contains("wolverin.jpg"));
     }
     @Test
     public void frameInFrameTest() {
-        JSDriver frameImage = js("frame:#jdi-frame-site", "frame:#first_frame", "img").setBuilder(new JSBuilder(driver(), new SmartBuilderActions()));
+        JSDriver frameImage = js("frame:#jdi-frame-site", "frame:#first_frame", "img").updateBuilderActions(new SmartBuilderActions());
         assertEquals(frameImage.getOne("element.tagName").asString(), "IMG");
         assertTrue(frameImage.getOne("element.src").asString().contains("wolverin.jpg"));
     }

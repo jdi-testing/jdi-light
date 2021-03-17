@@ -30,8 +30,8 @@ public class JSWrappersUtils {
 
     public static String getValueType(Field field, String element) {
         String value = field.isAnnotationPresent(GetValue.class)
-                ? field.getAnnotation(GetValue.class).value()
-                : "innerText";
+            ? field.getAnnotation(GetValue.class).value()
+            : "innerText";
         if (value.contains("styles.")) {
             return value.replace("styles", "getComputedStyle(" +  element + ")");
         } else if (value.contains("{element}")) {
@@ -39,4 +39,5 @@ public class JSWrappersUtils {
         }
         return element + "." + value;
     }
+
 }

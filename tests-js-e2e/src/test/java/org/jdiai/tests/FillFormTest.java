@@ -4,9 +4,12 @@ import org.jdiai.TestInit;
 import org.jdiai.entities.User;
 import org.jdiai.locators.By;
 import org.jdiai.testng.TestNGListener;
+import org.jdiai.tools.JS;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import static org.jdiai.asserts.Conditions.have;
+import static org.jdiai.asserts.Conditions.text;
 import static org.jdiai.entities.User.Triss;
 import static org.jdiai.states.States.atHomePage;
 import static org.jdiai.states.States.logout;
@@ -30,6 +33,23 @@ public class FillFormTest implements TestInit {
         String descriptionInLog = $(".descr-res").getText();
         assertEquals(lastNameInLog, "Last Name: " + Triss.lastName);
         assertEquals(descriptionInLog, "Description: " + Triss.description);
+    }
+
+    JS userIcon = $("#user-icon");
+    JS submitButton = $(By.text("Submit"));
+    JS lastNameInLog = $(".lname-res");
+    JS descriptionInLog = $(".descr-res");
+    @Test
+    public void loginPOTest() {
+        logout();
+        atHomePage();
+        userIcon.click();
+        loginAs(User.Roman);
+        openPage("/contacts.html");
+        fillContacts(Triss);
+        submitButton.click();
+        lastNameInLog.should(have(text("Last Name: " + Triss.lastName)));
+        descriptionInLog.should(have(text("Description: " + Triss.description)));
     }
 
     private void loginAs(User user) {
