@@ -10,6 +10,10 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.datadisplay.IconsFrame;
+import io.github.com.pages.datadisplay.ListsFrame;
+import io.github.com.pages.inputs.EnhancedTransferListFrame;
+import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.displaydata.TypographyFrame;
@@ -21,17 +25,29 @@ import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
-import io.github.com.pages.feedback.CircularFrame;
+import io.github.com.pages.feedback.CircularProgressFrame;
+import io.github.com.pages.feedback.LinearProgressFrame;
 import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.RadioButtonFrame;
+import io.github.com.pages.inputs.GroupCheckBoxFrame;
 import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.layouts.BoxFrame;
+import io.github.com.pages.navigation.BottomNavigationFrame;
+import io.github.com.pages.layouts.HiddenFrame;
+import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
+import io.github.com.pages.layout.ContainerFrame;
+import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 import io.github.com.pages.utils.ModalFrame;
+import io.github.com.pages.utils.PopperFrame;
+import io.github.com.pages.surfaces.CardFrame;
+import io.github.com.pages.inputs.DateTimePickersFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
@@ -53,6 +69,33 @@ public class StaticSite {
     @Url("/material-ui-inputs-switch--disabled-and-checked")
     public static WebPage inputSwitchDisabledAndCheckedPage;
 
+    //date and time pickers
+    @Frame("storybook-preview-iframe")
+    public static DateTimePickersFrame dateTimePickersFrame;
+
+    @Url("/material-ui-inputs-date-time--date-picker-inline")
+    public static WebPage datePickerInlinePage;
+
+    @Url("/material-ui-inputs-date-time--date-picker-dialog")
+    public static WebPage datePickerDialogPage;
+
+    @Url("/material-ui-inputs-date-time--time-picker")
+    public static WebPage timePickerPage;
+
+    //simple transfer list
+    @Frame("storybook-preview-iframe")
+    public static SimpleTransferListFrame simpleTransferListFrame;
+
+    @Url("/material-ui-inputs-transfer-list--simple-transfer-list-view")
+    public static WebPage inputSimpleTransferListPage;
+
+    //enhanced transfer list
+    @Frame("storybook-preview-iframe")
+    public static EnhancedTransferListFrame enhancedTransferListFrame;
+
+    @Url("/material-ui-inputs-transfer-list--enhanced-transfer-list-view")
+    public static WebPage inputEnhancedTransferListPage;
+
     // button
     @Frame("storybook-preview-iframe")
     public static ButtonFrame buttonFrame;
@@ -62,6 +105,13 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-button--disabled")
     public static WebPage inputButtonDisabledPage;
+
+    // radio
+    @Frame("storybook-preview-iframe")
+    public static RadioButtonFrame radioButtonFrame;
+
+    @Url("/material-ui-inputs-radio--default")
+    public static WebPage radioDefaultPage;
 
     // floating action button
     @Frame("storybook-preview-iframe")
@@ -118,22 +168,6 @@ public class StaticSite {
     @Url("/material-ui-inputs-button-group--split-button")
     public static WebPage inputButtonGroupSplitPage;
 
-    // circular
-    @Url("/material-ui-feedback-progress--circular-indeterminate")
-    public static WebPage circularIndeterminatePage;
-
-    @Url("/material-ui-feedback-progress--circular-determinate")
-    public static WebPage circularDeterminatePage;
-
-    @Url("/material-ui-feedback-progress--circular-integration")
-    public static WebPage circularIntegrationPage;
-
-    @Url("/material-ui-feedback-progress--circular-with-value-label")
-    public static WebPage circularWithValueLabel;
-
-    @Frame("storybook-preview-iframe")
-    public static CircularFrame circularFrame;
-
     @Frame("storybook-preview-iframe")
     public static SelectFrame selectFrame;
 
@@ -150,13 +184,13 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static SliderFrame sliderFrame;
 
-    @Url("/material-ui-sliders--default-and-disabled-sliders")
+    @Url("/material-ui-inputs-sliders--default-and-disabled-sliders")
     public static WebPage inputSliderDefaultAnfDisabledPage;
 
-    @Url("/material-ui-sliders--range-slider")
+    @Url("/material-ui-inputs-sliders--range-slider")
     public static WebPage inputSliderRangePage;
 
-    @Url("/material-ui-sliders--vertical-slider")
+    @Url("/material-ui-inputs-sliders--vertical-slider")
     public static WebPage inputSliderVerticalPage;
 
     // surfaces
@@ -177,6 +211,13 @@ public class StaticSite {
     @Url("/material-ui-surfaces-paper--default")
     public static WebPage surfacePaperDefaultPage;
 
+    // card
+    @Frame("storybook-preview-iframe")
+    public static CardFrame cardFrame;
+
+    @Url("/material-ui-surfaces-card--card-with-clickable-area")
+    public static WebPage surfaceCardPage;
+
     // inputs
     // switch
     @Frame("storybook-preview-iframe")
@@ -191,7 +232,26 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
+    @Frame("storybook-preview-iframe")
+    public static GroupCheckBoxFrame groupCheckBoxFrame;
+
+    @Url("/material-ui-inputs-checkbox--group")
+    public static WebPage groupCheckBoxPage;
+
     // Display data
+    //icons
+    @Frame("storybook-preview-iframe")
+    public static IconsFrame iconsFrame;
+
+    @Url("/material-ui-data-display-icons--simple-icons")
+    public static WebPage simpleIconsPage;
+
+    @Url("/material-ui-data-display-icons--color-icons")
+    public static WebPage colorIconsPage;
+
+    @Url("/material-ui-data-display-icons--size-icons")
+    public static WebPage sizeIconsPage;
+
     // material icon
     @Frame("storybook-preview-iframe")
     public static MaterialIconFrame materialIconFrame;
@@ -217,6 +277,20 @@ public class StaticSite {
     // typography
     @Frame("storybook-preview-iframe")
     public static TypographyFrame typographyFrame;
+    // utils
+    // popper
+    @Frame("storybook-preview-iframe")
+    public static PopperFrame popperFrame;
+
+    @Url("/material-ui-utils-popper--simple")
+    public static WebPage utilsSimplePopperPage;
+
+    @Url("/material-ui-utils-popper--transitions")
+    public static WebPage utilsTransitionsPopperPage;
+
+    @Url("/material-ui-utils-popper--positioned")
+    public static WebPage utilsPositionedPoppersPage;
+
 
     @Url("/material-ui-data-display-typography--typography-view")
     public static WebPage dataDisplayTypographyPage;
@@ -247,6 +321,19 @@ public class StaticSite {
     @Url("/material-ui-data-display-tooltip--interactive")
     public static WebPage displayDataTooltipInteractivePage;
 
+    // lists
+    @Frame("storybook-preview-iframe")
+    public static ListsFrame listsFrame;
+
+    @Url("/material-ui-data-display-lists--simple-list")
+    public static WebPage dataDisplayListsSimpleListPage;
+
+    @Url("/material-ui-data-display-lists--checkbox-list")
+    public static WebPage dataDisplayCheckboxListPage;
+
+    @Url("/material-ui-data-display-lists--pinned-subheader-list")
+    public static WebPage dataPinnedSubheaderListPage;
+
     // feedback
     // backdrop
     @Frame("storybook-preview-iframe")
@@ -254,6 +341,44 @@ public class StaticSite {
 
     @Url("/material-ui-feedback-backdrop--default-backdrop")
     public static WebPage feedbackBackdropDefaultPage;
+
+    // circular
+    @Url("/material-ui-feedback-progress--circular-indeterminate")
+    public static WebPage circularIndeterminatePage;
+
+    @Url("/material-ui-feedback-progress--circular-determinate")
+    public static WebPage circularDeterminatePage;
+
+    @Url("/material-ui-feedback-progress--circular-integration")
+    public static WebPage circularIntegrationPage;
+
+    @Url("/material-ui-feedback-progress--circular-with-value-label")
+    public static WebPage circularWithValueLabel;
+
+    @Frame("storybook-preview-iframe")
+    public static CircularProgressFrame circularProgressFrame;
+
+    // linear
+    @Frame("storybook-preview-iframe")
+    public static LinearProgressFrame linearProgressFrame;
+
+    @Url("/material-ui-feedback-progress--linear-indeterminate")
+    public static WebPage linearIndeterminatePage;
+
+    @Url("/material-ui-feedback-progress--linear-determinate")
+    public static WebPage linearDeterminatePage;
+
+    @Url("/material-ui-feedback-progress--linear-buffer")
+    public static WebPage linearBufferPage;
+
+    @Url("/material-ui-feedback-progress--linear-with-value-label")
+    public static WebPage linearWithLabelPage;
+
+    @Url("/material-ui-feedback-progress--customized-progress-bars")
+    public static WebPage customisedProgressPage;
+
+    @Url("/material-ui-feedback-progress--delaying-appearance")
+    public static WebPage delayingAppearancePage;
 
     // snackbar
     @Frame("storybook-preview-iframe")
@@ -292,6 +417,71 @@ public class StaticSite {
 
     @Url("/material-ui-utils-popover--hover")
     public static WebPage utilsPopoverHoverPage;
+
+    // navigation
+    // stepper
+    @Frame("storybook-preview-iframe")
+    public static StepperFrame stepperFrame;
+
+    @Url("/material-ui-navigation-stepper--horizontal-linear-stepper")
+    public static WebPage navigationStepperHorizontalLinearStepperPage;
+
+    @Url("/material-ui-navigation-stepper--stepper-with-optional-step")
+    public static WebPage navigationStepperWithOptionalStepPage;
+
+    @Url("/material-ui-navigation-stepper--nonlinear-stepper")
+    public static WebPage navigationStepperNonlinearStepperPage;
+
+    // links
+    @Frame("storybook-preview-iframe")
+    public static LinkFrame linkFrame;
+
+    @Url("/material-ui-navigation-link--default")
+    public static WebPage defaultLinkPage;
+
+    @Url("/material-ui-navigation-link--secondary")
+    public static WebPage secondaryLinkPage;
+
+    @Url("/material-ui-navigation-link--text-primary")
+    public static WebPage textPrimaryLinkPage;
+
+    @Url("/material-ui-navigation-link--text-secondary")
+    public static WebPage textSecondaryLinkPage;
+
+    @Url("/material-ui-navigation-link--error")
+    public static WebPage errorLinkPage;
+
+    @Url("/material-ui-navigation-link--underline-always")
+    public static WebPage underlineAlwaysLinkPage;
+
+    // bottom navigation
+    @Frame("storybook-preview-iframe")
+    public static BottomNavigationFrame bottomNavigationFrame;
+
+    @Url("/material-ui-navigation-bottom-navigation--default")
+    public static WebPage bottomNavigationPage;
+
+    // layouts
+    // hidden
+    @Frame("storybook-preview-iframe")
+    public static HiddenFrame hiddenFrame;
+
+    @Url("/material-ui-layout-hidden--default-hidden")
+    public static WebPage defaultHiddenPage;
+
+    // box
+    @Frame("storybook-preview-iframe")
+    public static BoxFrame boxFrame;
+
+    @Url("/material-ui-layout-box--default")
+    public static WebPage defaultBoxPage;
+  
+    // container
+    @Frame("storybook-preview-iframe")
+    public static ContainerFrame containerFrame;
+
+    @Url("/material-ui-layout-container--default")
+    public static WebPage defaultContainerPage;
 
     // login page
 
