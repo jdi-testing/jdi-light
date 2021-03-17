@@ -35,8 +35,8 @@ public class AppBar extends UIBaseElement<AppBarAssert> implements ISetup {
     }
 
     @JDIAction("Verify '{name}'")
-    public boolean verifyTitle(String actualTitle) {
-        return getTitle().equals(actualTitle);
+    public boolean verifyTitle(String expectedTitle) {
+        return getTitle().equals(expectedTitle);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class AppBar extends UIBaseElement<AppBarAssert> implements ISetup {
             return;
         JDIAppBar j = field.getAnnotation(JDIAppBar.class);
 
-        buttons = j.menuButton();
+        buttons = j.buttons();
         appTitle = j.appTitle();
     }
 }

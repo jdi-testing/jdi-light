@@ -10,13 +10,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
 
     @JDIAction("Assert '{name}'")
-    public AppBarAssert assertTitle(String actualTitle) {
-        jdiAssert(element().verifyTitle(actualTitle), Matchers.is(true));
+    public AppBarAssert assertTitle(String expectedTitle) {
+        jdiAssert(element().verifyTitle(expectedTitle), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert '{name}'")
-    public AppBarAssert enabled(int index) {
+    public AppBarAssert buttonByIndexEnabled(int index) {
         jdiAssert(element().isButtonEnabled(index), Matchers.is(true));
         return this;
     }

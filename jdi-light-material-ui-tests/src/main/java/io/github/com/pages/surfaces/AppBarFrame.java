@@ -6,6 +6,6 @@ import com.epam.jdi.light.material.elements.surfaces.AppBar;
 
 public class AppBarFrame extends Section {
 
-    @JDIAppBar(menuButton = ".MuiButtonBase-root", appTitle = ".makeStyles-title-3")
+    @JDIAppBar(buttons = ".MuiButtonBase-root", appTitle = ".makeStyles-title-3")
     public AppBar appBar;
 }

@@ -12,11 +12,11 @@ public class AppBarTests extends TestsInit {
 
     @Test
     public void appBarTests() {
-        appBarPage.shouldBeOpened();
+        appBarPage.open();
 
-        appBarFrame.appBar.is().enabled(1);
+        appBarFrame.appBar.is().buttonByIndexEnabled(1);
         appBarFrame.appBar.clickOnButtonByIndex(1);
-        appBarFrame.appBar.is().enabled(2);
+        appBarFrame.appBar.is().buttonByIndexEnabled(2);
         appBarFrame.appBar.clickOnButtonByIndex(2);
         appBarFrame.appBar.is().assertTitle(TITLE);
     }
