@@ -11,7 +11,6 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.displaydata.AvatarFrame;
-import io.github.com.pages.displaydata.IconFrame;
 import io.github.com.pages.datadisplay.IconsFrame;
 import io.github.com.pages.datadisplay.ListsFrame;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;

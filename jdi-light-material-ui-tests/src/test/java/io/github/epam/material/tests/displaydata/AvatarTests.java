@@ -11,6 +11,8 @@ public class AvatarTests extends TestsInit {
         dataDisplayNoImageAvatarPage.open();
 
         dataDisplayAvatarFrame.noImage.is().displayed();
+        dataDisplayAvatarFrame.noImage.is().hasClass("MuiAvatar-circle");
+        dataDisplayAvatarFrame.noImage.is().hasClass("MuiAvatar-colorDefault");
     }
 
     @Test
@@ -18,6 +20,9 @@ public class AvatarTests extends TestsInit {
         dataDisplayCircleAvatarPage.open();
 
         dataDisplayAvatarFrame.circle.is().displayed();
+        dataDisplayAvatarFrame.circle.is().hasClass("MuiAvatar-circle");
+        dataDisplayAvatarFrame.circle.is().displayedImg();
+        dataDisplayAvatarFrame.circle.is().hasImg("MuiAvatar-img");
     }
 
     @Test
@@ -25,6 +30,9 @@ public class AvatarTests extends TestsInit {
         dataDisplaySquareAvatarPage.open();
 
         dataDisplayAvatarFrame.square.is().displayed();
+        dataDisplayAvatarFrame.square.is().hasClass("MuiAvatar-square");
+        dataDisplayAvatarFrame.square.is().displayedImg();
+        dataDisplayAvatarFrame.square.is().hasImg("MuiAvatar-img");
     }
 
     @Test
@@ -32,6 +40,9 @@ public class AvatarTests extends TestsInit {
         dataDisplayRoundedAvatarPage.open();
 
         dataDisplayAvatarFrame.rounded.is().displayed();
+        dataDisplayAvatarFrame.rounded.hasClass("MuiAvatar-rounded");
+        dataDisplayAvatarFrame.rounded.is().displayedImg();
+        dataDisplayAvatarFrame.rounded.is().hasImg("MuiAvatar-img");
     }
 
     @Test
@@ -39,6 +50,9 @@ public class AvatarTests extends TestsInit {
         dataDisplayFallbackAltAvatarPage.open();
 
         dataDisplayAvatarFrame.fallbackAlt.is().displayed();
+        dataDisplayAvatarFrame.fallbackAlt.is().hasClass("MuiAvatar-circle");
+        dataDisplayAvatarFrame.fallbackAlt.is().hasClass("MuiAvatar-colorDefault");
+        dataDisplayAvatarFrame.fallbackAlt.is().text("L");
     }
 
     @Test
@@ -46,6 +60,9 @@ public class AvatarTests extends TestsInit {
         dataDisplayLetterAvatarPage.open();
 
         dataDisplayAvatarFrame.letter.is().displayed();
+        dataDisplayAvatarFrame.letter.is().hasClass("MuiAvatar-circle");
+        dataDisplayAvatarFrame.fallbackAlt.is().hasClass("MuiAvatar-colorDefault");
+        dataDisplayAvatarFrame.fallbackAlt.is().text("A");
     }
 
     @Test
@@ -53,5 +70,9 @@ public class AvatarTests extends TestsInit {
         dataDisplayIconAvatarPage.open();
 
         dataDisplayAvatarFrame.icon.is().displayed();
+        dataDisplayAvatarFrame.icon.is().hasClass("MuiAvatar-circle");
+        dataDisplayAvatarFrame.icon.is().hasClass("MuiAvatar-colorDefault");
+        dataDisplayAvatarFrame.icon.is().displayedSvg();
+        dataDisplayAvatarFrame.icon.is().hasSvg("MuiSvgIcon-root");
     }
 }
