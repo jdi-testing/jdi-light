@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.datadisplay.IconsFrame;
 import io.github.com.pages.datadisplay.ListsFrame;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
@@ -34,13 +35,18 @@ import io.github.com.pages.inputs.CheckboxFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.layouts.BoxFrame;
 import io.github.com.pages.navigation.BottomNavigationFrame;
 import io.github.com.pages.layouts.HiddenFrame;
 import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
+import io.github.com.pages.layout.ContainerFrame;
+import io.github.com.pages.navigation.TabFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
+import io.github.com.pages.utils.PopperFrame;
+import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.inputs.DateTimePickersFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
@@ -213,6 +219,13 @@ public class StaticSite {
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage surfaceSimpleAppBarPage;
 
+    // card
+    @Frame("storybook-preview-iframe")
+    public static CardFrame cardFrame;
+
+    @Url("/material-ui-surfaces-card--card-with-clickable-area")
+    public static WebPage surfaceCardPage;
+
     // inputs
     // switch
     @Frame("storybook-preview-iframe")
@@ -234,6 +247,19 @@ public class StaticSite {
     public static WebPage groupCheckBoxPage;
 
     // Display data
+    //icons
+    @Frame("storybook-preview-iframe")
+    public static IconsFrame iconsFrame;
+
+    @Url("/material-ui-data-display-icons--simple-icons")
+    public static WebPage simpleIconsPage;
+
+    @Url("/material-ui-data-display-icons--color-icons")
+    public static WebPage colorIconsPage;
+
+    @Url("/material-ui-data-display-icons--size-icons")
+    public static WebPage sizeIconsPage;
+
     // material icon
     @Frame("storybook-preview-iframe")
     public static MaterialIconFrame materialIconFrame;
@@ -247,6 +273,20 @@ public class StaticSite {
     // typography
     @Frame("storybook-preview-iframe")
     public static TypographyFrame typographyFrame;
+    // utils
+    // popper
+    @Frame("storybook-preview-iframe")
+    public static PopperFrame popperFrame;
+
+    @Url("/material-ui-utils-popper--simple")
+    public static WebPage utilsSimplePopperPage;
+
+    @Url("/material-ui-utils-popper--transitions")
+    public static WebPage utilsTransitionsPopperPage;
+
+    @Url("/material-ui-utils-popper--positioned")
+    public static WebPage utilsPositionedPoppersPage;
+
 
     @Url("/material-ui-data-display-typography--typography-view")
     public static WebPage dataDisplayTypographyPage;
@@ -349,6 +389,33 @@ public class StaticSite {
     @Url("/material-ui-feedback-snackbar--consecutive-snackbars")
     public static WebPage feedbackSnackbarConsecutivePage;
 
+    // navigation
+    // tabs
+
+    @Url("/material-ui-navigation-tabs--default")
+    public static WebPage defaultTabPage;
+
+    @Url("/material-ui-navigation-tabs--disabled-tab-example")
+    public static WebPage disabledTabPage;
+
+    @Url("/material-ui-navigation-tabs--scrollable-tab-example")
+    public static WebPage scrollableTabPage;
+
+    @Url("/material-ui-navigation-tabs--vertical-tab-example")
+    public static WebPage verticalTabPage;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame simpleTabFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame disabledTabFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame scrollableTabFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static TabFrame verticalTabFrame;
+
     // utils
     // transition
     @Frame("storybook-preview-iframe")
@@ -409,7 +476,7 @@ public class StaticSite {
 
     @Url("/material-ui-navigation-link--underline-always")
     public static WebPage underlineAlwaysLinkPage;
-  
+
     // bottom navigation
     @Frame("storybook-preview-iframe")
     public static BottomNavigationFrame bottomNavigationFrame;
@@ -424,6 +491,20 @@ public class StaticSite {
 
     @Url("/material-ui-layout-hidden--default-hidden")
     public static WebPage defaultHiddenPage;
+
+    // box
+    @Frame("storybook-preview-iframe")
+    public static BoxFrame boxFrame;
+
+    @Url("/material-ui-layout-box--default")
+    public static WebPage defaultBoxPage;
+
+    // container
+    @Frame("storybook-preview-iframe")
+    public static ContainerFrame containerFrame;
+
+    @Url("/material-ui-layout-container--default")
+    public static WebPage defaultContainerPage;
 
     // login page
     @UI("#login-form")
