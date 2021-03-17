@@ -55,7 +55,7 @@ import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light")
+@JSite("http://localhost:6006/?path=/story") //https://jdi-testing.github.io/jdi-light
 public class StaticSite {
 
     // inputs
@@ -219,10 +219,6 @@ public class StaticSite {
 
     @Url("/material-ui-surfaces-paper--default")
     public static WebPage surfacePaperDefaultPage;
-
-    // app bar
-    @Frame("storybook-preview-iframe")
-    public static AppBarFrame appBarFrame;
 
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage surfaceSimpleAppBarPage;

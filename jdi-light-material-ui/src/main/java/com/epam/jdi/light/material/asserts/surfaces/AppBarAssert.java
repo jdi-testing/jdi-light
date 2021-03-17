@@ -18,4 +18,12 @@ public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
     @JDIAction("Assert '{name}'")
     public AppBarAssert buttonByIndexEnabled(int index) {
         jdiAssert(element().isButtonEnabled(index), Matchers.is(true));
+        return this;
+    }
 
+    @JDIAction("Assert '{name}'")
+    public AppBarAssert assertButtonText(int index, String expectedTitle) {
+        jdiAssert(element().verifyTitleButtonTextByIndex(index, expectedTitle), Matchers.is(true));
+        return this;
+    }
+}

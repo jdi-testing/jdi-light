@@ -2,10 +2,10 @@ package com.epam.jdi.light.material.elements.surfaces;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIAppBar;
 import com.epam.jdi.light.material.asserts.surfaces.AppBarAssert;
+import com.epam.jdi.light.material.elements.inputs.Button;
 
 import java.lang.reflect.Field;
 
@@ -13,11 +13,23 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 
 public class AppBar extends UIBaseElement<AppBarAssert> implements ISetup {
 
+    String root;
     String buttons;
-    String appTitle;
+    String barTitle;
 
-    private UIElement getButtonByIndex(int index) {
-        return this.finds(buttons).get(index);
+    @JDIAction("Get '{name}'")
+    public String getButtonByIndexText(int index) {
+        return this.finds(buttons).get(index).getText();
+    }
+
+    @JDIAction("Get '{name}'")
+    public Button getButtonByIndex(int index) {
+        return new Button(this.find(root).finds(buttons).get(index));
+    }
+
+    @JDIAction("Is '{name}' get text by index")
+    public boolean verifyTitleButtonTextByIndex(int index, String expectedTitle) {
+        return getButtonByIndexText(index).equals(expectedTitle);
     }
 
     @JDIAction("Is '{name}' enabled by index")
@@ -30,8 +42,9 @@ public class AppBar extends UIBaseElement<AppBarAssert> implements ISetup {
         getButtonByIndex(index).click();
     }
 
-    private String getTitle() {
-        return this.find(appTitle).getText();
+    @JDIAction("Get '{name}'")
+    public String getTitle() {
+        return this.find(barTitle).getText();
     }
 
     @JDIAction("Verify '{name}'")
@@ -50,7 +63,8 @@ public class AppBar extends UIBaseElement<AppBarAssert> implements ISetup {
             return;
         JDIAppBar j = field.getAnnotation(JDIAppBar.class);
 
+        root = j.root();
         buttons = j.buttons();
-        appTitle = j.appTitle();
+        barTitle = j.barTitle();
     }
 }

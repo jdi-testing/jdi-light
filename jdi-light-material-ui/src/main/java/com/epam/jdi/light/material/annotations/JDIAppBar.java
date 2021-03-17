@@ -11,6 +11,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDIAppBar {
 
+    @MarkupLocator String root() default "#root";
     @MarkupLocator String buttons() default "";
-    @MarkupLocator String appTitle() default "";
+    @MarkupLocator String barTitle() default "";
 }

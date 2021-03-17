@@ -9,6 +9,7 @@ import static io.github.com.StaticSite.appBarPage;
 public class AppBarTests extends TestsInit {
 
     private static final String TITLE = "News";
+    private static final String BUTTON_TITLE = "LOGIN";
 
     @Test
     public void appBarTests() {
@@ -19,5 +20,6 @@ public class AppBarTests extends TestsInit {
         appBarFrame.appBar.is().buttonByIndexEnabled(2);
         appBarFrame.appBar.clickOnButtonByIndex(2);
         appBarFrame.appBar.is().assertTitle(TITLE);
+        appBarFrame.appBar.is().assertButtonText(2, BUTTON_TITLE);
     }
 }
