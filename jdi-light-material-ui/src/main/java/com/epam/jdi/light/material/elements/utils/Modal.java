@@ -17,11 +17,13 @@ public class Modal extends UIBaseElement<ModalAssert> implements HasClick, ISetu
     String modalDescription;
     String root;
 
-    private String getModalTitle() {
+    @JDIAction("Get '{name}'")
+    public String getModalTitle() {
         return this.find(modalTitle).getText();
     }
 
-    private String getModalDescription() {
+    @JDIAction("Get '{name}'")
+    public String getModalDescription() {
         return this.find(modalDescription).getText();
     }
 

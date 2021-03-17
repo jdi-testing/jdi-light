@@ -265,9 +265,6 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static ModalFrame modalFrame;
 
-    @Url("/material-ui-utils-modal--simple-modal")
-    public static WebPage simpleModalPage;
-
     @Url("/material-ui-utils-modal--transitions-modal")
     public static WebPage transitionsModalPage;
 
