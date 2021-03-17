@@ -13,5 +13,4 @@ public @interface JDIModal {
     @MarkupLocator String root() default "";
     @MarkupLocator String modalTitle() default "";
     @MarkupLocator String modalDescription() default "";
-    @MarkupLocator String additionalModal() default "";
 }

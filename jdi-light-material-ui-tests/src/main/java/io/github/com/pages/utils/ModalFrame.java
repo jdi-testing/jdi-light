@@ -8,29 +8,11 @@ import com.epam.jdi.light.material.elements.utils.Modal;
 
 public class ModalFrame extends Section {
 
-    @JDIModal(modalTitle = "#simple-modal-title")
-    public Modal simpleModalTitle;
+    @JDIModal(modalTitle = "#transition-modal-title", modalDescription = "#transition-modal-description")
+    public Modal transitionModal;
 
-    @JDIModal(modalDescription = "#simple-modal-description")
-    public Modal simpleModalDescription;
-
-    @UI("body > div:nth-child(9) > div.makeStyles-paper-1 > div > button")
-    public Button innerButton;
-
-    @JDIModal(additionalModal = "body > div:nth-child(10) > div.makeStyles-paper-1")
-    public Modal additionalModal;
-
-    @JDIModal(modalTitle = "#transition-modal-title")
-    public Modal transitionModalTitle;
-
-    @JDIModal(modalDescription = "#transition-modal-description")
-    public Modal transitionModalDescription;
-
-    @JDIModal(modalTitle = "#server-modal-title")
-    public Modal serverModalTitle;
-
-    @JDIModal(modalDescription = "#server-modal-description")
-    public Modal serverModalDescription;
+    @JDIModal(modalTitle = "#server-modal-title", modalDescription = "#server-modal-description")
+    public Modal serverModal;
 
     @UI("#root > div > button")
     public Button buttonModal;

@@ -10,20 +10,15 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ModalAssert extends UIAssert<ModalAssert, Modal> {
 
     @JDIAction("Assert '{name}")
-    public ModalAssert verifyingTitle(String actualTitle) {
-        jdiAssert(element().verifyModalTitle(actualTitle), Matchers.is(true));
+    public ModalAssert titleEquals(String expectedTitle) {
+        jdiAssert(element().verifyModalTitle(expectedTitle), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert '{name}")
-    public ModalAssert verifyingDescription(String actualDescription) {
-        jdiAssert(element().verifyModalDescription(actualDescription), Matchers.is(true));
+    public ModalAssert descriptionEquals(String expectedDescription) {
+        jdiAssert(element().verifyModalDescription(expectedDescription), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert '{name} is opened")
-    public ModalAssert verifyingAdditionalModalDisplayed() {
-        jdiAssert(element().verifyAdditionalModalOpened(), Matchers.is(true));
-        return this;
-    }
 }

@@ -16,7 +16,6 @@ public class Modal extends UIBaseElement<ModalAssert> implements HasClick, ISetu
     String modalTitle;
     String modalDescription;
     String root;
-    String additionalModal;
 
     private String getModalTitle() {
         return this.find(modalTitle).getText();
@@ -26,19 +25,14 @@ public class Modal extends UIBaseElement<ModalAssert> implements HasClick, ISetu
         return this.find(modalDescription).getText();
     }
 
-    @JDIAction("Verify '{name}' displayed")
-    public boolean verifyAdditionalModalOpened() {
-        return this.find(additionalModal).isDisplayed();
+    @JDIAction("Verify '{name}'")
+    public boolean verifyModalTitle(String expectedTitle) {
+        return getModalTitle().equals(expectedTitle);
     }
 
     @JDIAction("Verify '{name}'")
-    public boolean verifyModalTitle(String actualTitle) {
-        return getModalTitle().equals(actualTitle);
-    }
-
-    @JDIAction("Verify '{name}'")
-    public boolean verifyModalDescription(String actualDescription) {
-        return getModalDescription().equals(actualDescription);
+    public boolean verifyModalDescription(String expectedTitle) {
+        return getModalDescription().equals(expectedTitle);
     }
 
     @Override
@@ -54,7 +48,6 @@ public class Modal extends UIBaseElement<ModalAssert> implements HasClick, ISetu
         root = j.root();
         modalTitle = j.modalTitle();
         modalDescription = j.modalDescription();
-        additionalModal = j.additionalModal();
     }
 
 
