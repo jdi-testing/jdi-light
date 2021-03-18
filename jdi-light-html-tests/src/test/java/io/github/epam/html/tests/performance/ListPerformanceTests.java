@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.PropertyReader.getProperty;
 import static io.github.com.StaticSite.performancePage;
 import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.html.tests.performance.PerfStatistic.*;
@@ -21,26 +23,26 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.lang.String.format;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThan;
 
 public class ListPerformanceTests implements TestsInit {
     final String value = "Yen Stevenson";
     final int index = 385;
-    final int repeat = 1;
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         performancePage.open();
     }
 
-    @Test(invocationCount = repeat)
+    @Test
     public void getValuesFastTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList());
         }, () -> firstRow.getValuesFast(), 1, 1, 10);
     }
-    @Test(invocationCount = repeat)
+    @Test
     public void getValuesValueFastTest() {
         List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
         elements.stream().map(WebElement::getText).collect(Collectors.toList());
@@ -48,38 +50,38 @@ public class ListPerformanceTests implements TestsInit {
 
         testScenario(() -> elements.stream().filter(
             el -> el.getText().equals(value)).findFirst().get().getText(),
-            () -> firstRow.getFast(value).getText(), 100, 100, 10);
+            () -> firstRow.getFast(value).getText(), 100, 80, 10);
     }
-    @Test(invocationCount = repeat)
+    @Test
     public void getValueFastTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().filter(el -> el.getText().equals(value)).findFirst().get().getText();
-        }, () -> firstTemplate.getFast(value).getText(), 45, 45, 10);
+        }, () -> firstTemplate.getFast(value).getText(), 100, 45, 10);
     }
-    @Test(invocationCount = repeat)
+    @Test
     public void getIndexFastTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.get(index).getText();
-        }, () -> firstXpath.getFast(index + ELEMENT.startIndex).getText(), 0.8, 0.8, 100);
+        }, () -> firstXpath.getFast(index + ELEMENT.startIndex).getText(), 1.5, 0.8, 100);
     }
 
-    @Test(invocationCount = repeat)
+    @Test
     public void getValuesTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList()).toString();
         }, () -> "[" + firstRowNoValidation.getValue().replace(",", ", ") + "]", 0.7, 235, 10);
     }
-    @Test(invocationCount = repeat)
+    @Test
     public void getValuesVisibleTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList()).toString();
-        }, () -> "[" + firstRow.getValue().replace(",", ", ") + "]", 0.2, 235, 10);
+        }, () -> "[" + firstRow.getValue().replace(",", ", ") + "]", 0.5, 235, 10);
     }
-    @Test(invocationCount = repeat)
+    @Test
     public void getValuesValueTest() {
         List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
         elements.stream().map(WebElement::getText).collect(Collectors.toList());
@@ -87,21 +89,21 @@ public class ListPerformanceTests implements TestsInit {
 
         testScenario(() -> elements.stream().filter(
             el -> el.getText().equals(value)).findFirst().get().getText(),
-            () -> firstRow.get(value).getText(), 65, 70, 10);
+            () -> firstRow.get(value).getText(), 65, 50, 10);
     }
-    @Test(invocationCount = repeat)
+    @Test
     public void getValueTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().filter(el -> el.getText().equals(value)).findFirst().get().getText();
-        }, () -> firstTemplate.get(value).getText(), 8, 40, 10);
+        }, () -> firstTemplate.get(value).getText(), 80, 40, 10);
     }
-    @Test(invocationCount = repeat)
+    @Test
     public void getIndexTest() {
         testScenario(() -> {
             List<WebElement> elements = WebDriverFactory.getDriver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.get(index).getText();
-        }, () -> firstXpath.get(index + ELEMENT.startIndex).getText(), 0.6, 0.6, 100);
+        }, () -> firstXpath.get(index + ELEMENT.startIndex).getText(), 1, 0.6, 100);
     }
 
 
@@ -124,17 +126,17 @@ public class ListPerformanceTests implements TestsInit {
             double ratio = (double) seleniumTime / jdiTime;
             if (i == 0)
                 firstResult = ratio;
-            System.out.println("Ratio: " + ratio);
+            logger.info("Ratio: " + ratio);
             if (ratio > max)
                 max = ratio;
             assertThat(seleniumResult, equalTo(jdiResult));
         }
         double avSelenium = getAverage("Selenium");
         double avJdi = getAverage("Jdi");
-        System.out.println("Average Selenium: " + avSelenium + " ms");
-        System.out.println("Average Jdi: " + avJdi + " ms");
+        logger.info("Average Selenium: %f ms", avSelenium);
+        logger.info("Average Jdi: %f ms", avJdi);
         double ratio = avSelenium/avJdi;
-        System.out.println("Average ratio: " + ratio + " ms");
+        logger.info("Average ratio: %f", ratio);
         String goodBad = avSelenium/avJdi > 1 ? "better" : "worse";
         String goodBadMax = max > 1 ? "better" : "worse";
         if (ratio < 1) {
@@ -146,8 +148,13 @@ public class ListPerformanceTests implements TestsInit {
         String toLog = Math.abs(ratio - 1) < 0.1
             ? "First time result: " + firstResult + ". JDI has the same result in average as Selenium with max better in " + max + "times"
             : format("First time result: " + firstResult + ". JDI in average is %s than Selenium in %s times with maximum %s in %s times", goodBad, ratio, goodBadMax, max);
-        System.out.println(toLog);
-        assertThat(format("Expected ratio: %s; but Actual: %s", expectedRatio, avJdi*expectedRatio), avSelenium, greaterThan(avJdi*expectedRatio*0.8));
-        assertThat(format("Expected result: %s; but Actual: %s", expectedFirst, firstResult), firstResult, greaterThan(expectedFirst*0.8));
+        logger.info(toLog);
+        boolean validatePerformance = Boolean.parseBoolean(getProperty("validate.performance"));
+        if (validatePerformance) {
+            assertThat(format("Expected ratio: %s; but Actual: %s", expectedRatio, avJdi * expectedRatio),
+                avSelenium, lessThan(avJdi * expectedRatio * 2));
+            assertThat(format("Expected result: %s; but Actual: %s", expectedFirst, firstResult),
+                firstResult, lessThan(expectedFirst * 2));
+        }
     }
 }

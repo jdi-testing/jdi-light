@@ -18,10 +18,11 @@ import static org.testng.Assert.fail;
 
 public class ChecklistTests implements TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
+        weather.show();
         weather.check(text);
     }
     String text = "Hot option";

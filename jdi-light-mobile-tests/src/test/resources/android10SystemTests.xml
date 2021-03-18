@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JDI Light Mobile Android System Tests" thread-count="1">
+    <test name="Android system tests">
+        <classes>
+            <class name="android10NonApplicationTests.ActivityTests" />
+            <class name="android10NonApplicationTests.ClipBoardTests" />
+            <class name="android10NonApplicationTests.MobileDeviceTests" />
+            <class name="android10NonApplicationTests.MobileFileManagerTests" />
+            <class name="android10NonApplicationTests.ToggleButtonTests" />
+            <class name="android10NonApplicationTests.ToggleAirplaneModeTests" />
+            <class name="android10NonApplicationTests.ToggleWiFiTests" />
+        </classes>
+    </test>
+</suite>

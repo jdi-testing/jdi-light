@@ -25,7 +25,7 @@ public class SimpleTablePage extends WebPage {
 
     public static Grid products;
     @UI("#products")
-    public static DataTable<FurnLine, Furniture> dataProducts;
+    public static DataGrid<FurnLine, Furniture> dataProducts;
 
     @UI("#products-2")
     public static Grid productsJTable;

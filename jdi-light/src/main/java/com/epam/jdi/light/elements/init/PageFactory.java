@@ -95,7 +95,7 @@ public class PageFactory {
     public static void setupFieldUsingRules(SiteInfo info) {
         logger.trace("setupFieldUsingRules");
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) -> r.condition.execute(info));
-        if (setupRules.size() == 0)
+        if (setupRules.isEmpty())
             return;
         String ruleName = "UNDEFINED";
         logger.trace("SETUP_RULES.count="+setupRules.size());
@@ -199,10 +199,9 @@ public class PageFactory {
     }
     //endregion
 
-    public static List<Class<?>> STOP_INIT_CLASSES = asList(
-        Object.class, WebPage.class, PageObject.class, UIElement.class,
-            UIBaseElement.class, UIListBase.class,
-            DataList.class, JList.class, WebList.class);
+    public static List<Class<?>> STOP_INIT_CLASSES = newList(
+        Object.class, WebPage.class, PageObject.class, UIElement.class, UIBaseElement.class, UIListBase.class,
+        DataList.class, JList.class, WebList.class);
 
     public static void initElements(SiteInfo info) {
         List<Field> poFields = recursion(info.instance.getClass(),

@@ -94,16 +94,22 @@ public class DriverInfo extends DataClass<DriverInfo> {
             try {
                 if (isBlank(DRIVER.path) && DRIVER.version.equals(LATEST.value)) {
                     logger.info("Failed to download driver (%s %s) of latest version:" +
-                            "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
-                    try {
-                        downloadDriver(downloadType, getDriverPlatform(), getBelowVersion());
-                        return getDriver.execute(getCapabilities());
-                    } catch (Throwable ex2) { throw exception(ex2, "Failed to download driver"); }
+                        "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
+                    return tryToDownloadDriver();
                 }
                 throw exception(safeException(ex));
             } catch (Throwable ex2) {
                 throw exception(ex2, "Failed to setup local driver");
             }
+        }
+    }
+
+    private WebDriver tryToDownloadDriver() {
+        try {
+            downloadDriver(downloadType, getDriverPlatform(), getBelowVersion());
+            return getDriver.execute(getCapabilities());
+        } catch (Throwable ex) {
+            throw exception(ex, "Failed to download driver");
         }
     }
     public static String getBelowVersion() {
