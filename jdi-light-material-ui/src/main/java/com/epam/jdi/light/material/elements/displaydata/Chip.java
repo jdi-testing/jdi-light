@@ -15,6 +15,11 @@ public class Chip extends UIBaseElement<ChipAssert> implements ISetup {
     private String chipRoot;
     private String chipIcon;
 
+    @JDIAction("Click {name}")
+    public void click(int index){
+        this.getChipLabel(index).click();
+    }
+
     @JDIAction("Get chip label with index {0}")
     public UIElement getChipLabel(int index){
         return this.finds(chipLabel).get(index);

@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
 import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 public class ChipTests extends TestsInit {
     @Test
@@ -14,6 +15,7 @@ public class ChipTests extends TestsInit {
         basicCheck();
         disabledCheck(); // first variant of class value
         clickableCheck(3);
+        clickableLinkCheck(7);
     }
 
     @Test
@@ -23,6 +25,7 @@ public class ChipTests extends TestsInit {
         basicCheck();
         disabledCheck(); // second variant of class value
         clickableCheck(3);
+        clickableLinkCheck(7);
     }
 
     @Test
@@ -43,6 +46,7 @@ public class ChipTests extends TestsInit {
 
         basicCheck();
         clickableCheck(2);
+        clickableLinkCheck(6);
     }
 
     @Test
@@ -51,6 +55,7 @@ public class ChipTests extends TestsInit {
 
         basicCheck();
         clickableCheck(2);
+        clickableLinkCheck(6);
     }
 
     public void basicCheck(){
@@ -68,5 +73,12 @@ public class ChipTests extends TestsInit {
         chipFrame.chips.is().displayed(index);
         chipFrame.chips.is().clickable(index);
         chipFrame.chips.is().text(index, hasToString("Clickable"));
+    }
+
+    public void clickableLinkCheck(int index){
+        chipFrame.chips.is().displayed(index);
+        chipFrame.chips.is().text(index, equalToIgnoringCase("Clickable Link"));
+        chipFrame.chips.click(index);
+        chipFrame.chips.is().urlContains("viewMode=story#chip");
     }
 }
