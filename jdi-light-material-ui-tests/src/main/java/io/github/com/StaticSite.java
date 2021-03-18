@@ -45,6 +45,7 @@ import io.github.com.pages.navigation.TabFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
+import io.github.com.pages.utils.PortalFrame;
 import io.github.com.pages.utils.ModalFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.utils.PopperFrame;
@@ -437,7 +438,6 @@ public class StaticSite {
     @Url("/material-ui-utils-transitions--collapse-transition")
     public static WebPage utilsTransitionCollapsePage;
 
-    // utils
     // popover
     @Frame("storybook-preview-iframe")
     public static PopoverClickFrame popoverClickFrame;
@@ -450,6 +450,13 @@ public class StaticSite {
 
     @Url("/material-ui-utils-popover--hover")
     public static WebPage utilsPopoverHoverPage;
+
+    // portal
+    @Frame("storybook-preview-iframe")
+    public static PortalFrame portalFrame;
+
+    @Url("/material-ui-utils-portal--default")
+    public static WebPage defaultPortalPage;
 
     // navigation
     // stepper
@@ -517,7 +524,6 @@ public class StaticSite {
     public static WebPage defaultContainerPage;
 
     // login page
-
     @UI("#login-form")
     public static Form<User> loginForm;
 
