@@ -18,6 +18,11 @@ import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.inputs.FabFrame;
+import io.github.com.pages.displaydata.MaterialIconFrame;
+import io.github.com.pages.displaydata.TooltipFrame;
+import io.github.com.pages.displaydata.InsetDividerFrame;
+import io.github.com.pages.displaydata.VerticalDividerFrame;
+import io.github.com.pages.feedback.DialogFrame;
 import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
@@ -41,6 +46,7 @@ import io.github.com.pages.navigation.TabFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.PaperFrame;
+import io.github.com.pages.utils.PortalFrame;
 import io.github.com.pages.utils.ModalFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.utils.PopperFrame;
@@ -236,6 +242,17 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
+
+    // feedback
+    // dialog
+    @Frame("storybook-preview-iframe")
+    public static DialogFrame dialogFrame;
+
+    @Url("/material-ui-feedback-dialog--dialog-alert")
+    public static WebPage alertDialogPage;
+
+    @Url("/material-ui-feedback-dialog--dialog-confirm")
+    public static WebPage confirmDialogPage;
 
     @Frame("storybook-preview-iframe")
     public static GroupCheckBoxFrame groupCheckBoxFrame;
@@ -452,7 +469,6 @@ public class StaticSite {
     @Url("/material-ui-utils-transitions--collapse-transition")
     public static WebPage utilsTransitionCollapsePage;
 
-    // utils
     // popover
     @Frame("storybook-preview-iframe")
     public static PopoverClickFrame popoverClickFrame;
@@ -465,6 +481,13 @@ public class StaticSite {
 
     @Url("/material-ui-utils-popover--hover")
     public static WebPage utilsPopoverHoverPage;
+
+    // portal
+    @Frame("storybook-preview-iframe")
+    public static PortalFrame portalFrame;
+
+    @Url("/material-ui-utils-portal--default")
+    public static WebPage defaultPortalPage;
 
     // navigation
     // stepper
@@ -532,7 +555,6 @@ public class StaticSite {
     public static WebPage defaultContainerPage;
 
     // login page
-
     @UI("#login-form")
     public static Form<User> loginForm;
 
