@@ -18,28 +18,13 @@ public class AppBar extends UIBaseElement<AppBarAssert> implements ISetup {
     String barTitle;
 
     @JDIAction("Get '{name}'")
-    public String getButtonByIndexText(int index) {
-        return this.finds(buttons).get(index).getText();
+    public Button getButtonByText(String buttonTitle) {
+        return new Button(this.find(root).finds(buttons).get(buttonTitle));
     }
 
     @JDIAction("Get '{name}'")
     public Button getButtonByIndex(int index) {
         return new Button(this.find(root).finds(buttons).get(index));
-    }
-
-    @JDIAction("Is '{name}' get text by index")
-    public boolean verifyTitleButtonTextByIndex(int index, String expectedTitle) {
-        return getButtonByIndexText(index).equals(expectedTitle);
-    }
-
-    @JDIAction("Is '{name}' enabled by index")
-    public boolean isButtonEnabled(int index) {
-        return getButtonByIndex(index).isEnabled();
-    }
-
-    @JDIAction("Click on '{name}' by index")
-    public void clickOnButtonByIndex(int index) {
-        getButtonByIndex(index).click();
     }
 
     @JDIAction("Get '{name}'")
