@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
+import io.github.com.pages.displaydata.AvatarFrame;
 import io.github.com.pages.displaydata.*;
 import io.github.com.pages.datadisplay.IconsFrame;
 import io.github.com.pages.datadisplay.ListsFrame;
@@ -229,8 +230,9 @@ public class StaticSite {
     @Url("/material-ui-surfaces-card--card-with-clickable-area")
     public static WebPage surfaceCardPage;
 
-    // inputs
-    // switch
+
+    // data display
+    // divider
     @Frame("storybook-preview-iframe")
     public static InsetDividerFrame insetDividerFrame;
 
@@ -255,6 +257,29 @@ public class StaticSite {
     public static WebPage confirmDialogPage;
 
     @Frame("storybook-preview-iframe")
+    public static AvatarFrame dataDisplayAvatarFrame;
+
+    @Url("/material-ui-data-display-avatar--no-image")
+    public static WebPage dataDisplayNoImageAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--circle")
+    public static WebPage dataDisplayCircleAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--square")
+    public static WebPage dataDisplaySquareAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--rounded")
+    public static WebPage dataDisplayRoundedAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--fallback-alt")
+    public static WebPage dataDisplayFallbackAltAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--letter")
+    public static WebPage dataDisplayLetterAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--icon")
+    public static WebPage dataDisplayIconAvatarPage;
+
     public static GroupCheckBoxFrame groupCheckBoxFrame;
 
     @Url("/material-ui-inputs-checkbox--group")
