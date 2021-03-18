@@ -137,7 +137,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         return $$(column, format("%s column:%s", getName(), colIndex));
     }
     default int getColIndexByName(String colName) {
-        int index = firstIndex(header(), h -> ELEMENT.namesEqual.execute(h, colName));;
+        int index = firstIndex(header(), h -> ELEMENT.namesEqual.execute(h, colName));
         if (index == -1) {
             throw exception("Column '%s' was not found", colName);
         }
