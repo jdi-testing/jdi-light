@@ -10,7 +10,7 @@ import org.hamcrest.Matchers;
 
 public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
 
-    @JDIAction("Assert that dialog title text is correct")
+    @JDIAction("Assert that dialog is displayed")
     public DialogAssert dialogDisplayed() {
         jdiAssert(element().isDialogDisplayed(), Matchers.is(true));
         return this;
