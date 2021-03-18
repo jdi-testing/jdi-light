@@ -38,6 +38,7 @@ import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.layouts.BoxFrame;
 import io.github.com.pages.navigation.BottomNavigationFrame;
 import io.github.com.pages.layouts.HiddenFrame;
+import io.github.com.pages.navigation.DrawerFrame;
 import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerFrame;
@@ -464,6 +465,28 @@ public class StaticSite {
 
     @Url("/material-ui-navigation-stepper--nonlinear-stepper")
     public static WebPage navigationStepperNonlinearStepperPage;
+
+    // drawer
+    @Frame("storybook-preview-iframe")
+    public static DrawerFrame drawerFrame;
+
+    @Url("/material-ui-navigation-drawer--temporary-drawer")
+    public static WebPage navigationDrawerTemporaryPage;
+
+    @Url("/material-ui-navigation-drawer--responsive-drawer")
+    public static WebPage navigationDrawerResponsivePage;
+
+    @Url("/material-ui-navigation-drawer--persistent-drawer-left")
+    public static WebPage navigationDrawerPersistentLeftPage;
+
+    @Url("/material-ui-navigation-drawer--persistent-drawer-right")
+    public static WebPage navigationDrawerPersistentRightPage;
+
+    @Url("/material-ui-navigation-drawer--mini-drawer")
+    public static WebPage navigationDrawerMiniPage;
+
+    @Url("/material-ui-navigation-drawer--permanent-drawer-left")
+    public static WebPage navigationDrawerPermanentLeftPage;
 
     // links
     @Frame("storybook-preview-iframe")
