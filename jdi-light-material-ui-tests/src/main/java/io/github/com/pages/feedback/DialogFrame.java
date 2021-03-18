@@ -8,7 +8,8 @@ import com.epam.jdi.light.material.elements.inputs.Button;
 
 public class DialogFrame extends Section {
 
-    @JDIDialog(root = "#root")
+    @JDIDialog(root = "#root", dialogCloseButton = "//*[text()='close']",
+    dialogOkButton = "//*[text()='ok']", dialogCancelButton = "//*[text()='Cancel']")
     public Dialog dialog;
 
     @UI(".MuiButton-label")

@@ -13,8 +13,8 @@ public @interface JDIDialog {
 
   @MarkupLocator String root() default "";
   @MarkupLocator String dialogTitle() default "h2";
-  @MarkupLocator String dialogCloseButton() default "//*[text()='close']";
-  @MarkupLocator String dialogOkButton() default "//*[text()='ok']";
-  @MarkupLocator String dialogCancelButton() default "//*[text()='Cancel']";
+  @MarkupLocator String dialogCloseButton() default "";
+  @MarkupLocator String dialogOkButton() default "";
+  @MarkupLocator String dialogCancelButton() default "";
 
 }

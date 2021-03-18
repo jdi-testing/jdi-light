@@ -2,10 +2,12 @@ package com.epam.jdi.light.material.elements.feedback;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIDialog;
 import com.epam.jdi.light.material.asserts.feedback.DialogAssert;
+import com.epam.jdi.light.material.elements.inputs.Button;
 
 import java.lang.reflect.Field;
 
@@ -17,26 +19,27 @@ public class Dialog extends UIBaseElement<DialogAssert> implements ISetup {
     private String dialogCloseButton;
     private String dialogOkButton;
 
-    public void clickCloseButton(){
-        this.find(dialogCloseButton).click();
+    @JDIAction("Get Close button")
+    public Button getCloseButton(){
+        return new Button(this.find(dialogCloseButton));
     }
 
-    public void clickCancelButton(){
-        this.find(dialogCancelButton).click();
+    @JDIAction("Get Cancel button")
+    public Button getCancelButton(){
+        return new Button(this.find(dialogCancelButton));
     }
 
-    public void clickOkButton(){
-        this.find(dialogOkButton).click();
+    @JDIAction("Get OK button")
+    public Button getOkButton(){
+        return new Button(this.find(dialogOkButton));
     }
 
-    private String getDialogTitle(){
+    @JDIAction("Get Title text")
+    public String getTitle(){
         return this.find(dialogTitle).getText();
     }
 
-    public boolean isTitleCorrect(String title){
-        return title.equals(getDialogTitle());
-    }
-
+    @JDIAction("Check that dialog is displayed")
     public boolean isDialogDisplayed(){
         return this.find(root).isDisplayed();
     }

@@ -15,11 +15,11 @@ public class DialogTests extends TestsInit {
         dialogFrame.button.click();
         dialogFrame.dialog.is().dialogDisplayed();
         dialogFrame.dialog.is().titleDisplayed("Alert dialog question?");
-        dialogFrame.dialog.clickOkButton();
+        dialogFrame.dialog.getOkButton().click();
         dialogFrame.button.click();
         dialogFrame.dialog.is().dialogDisplayed();
         dialogFrame.dialog.is().titleDisplayed("Alert dialog question?");
-        dialogFrame.dialog.clickCloseButton();
+        dialogFrame.dialog.getCloseButton().click();
     }
 
     @Test
@@ -28,7 +28,7 @@ public class DialogTests extends TestsInit {
         dialogFrame.confirmButton.click();
         dialogFrame.dialog.is().dialogDisplayed();
         dialogFrame.dialog.is().titleDisplayed("Dialog with confirmation");
-        dialogFrame.dialog.clickCancelButton();
+        dialogFrame.dialog.getCancelButton().click();
     }
 
 }
