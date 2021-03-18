@@ -9,7 +9,7 @@ public class Button extends UIBaseElement<ButtonAssert> {
 
     Button() {}
 
-    Button(UIElement element) {
+    public Button(UIElement element) {
         core().setCore(element);
     }
 
