@@ -8,10 +8,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.any;
-import static com.epam.jdi.tools.LinqUtils.*;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.SimpleTablePage.furniture;
+import static io.github.com.pages.SimpleTablePage.dataFurniture;
 import static io.github.epam.html.tests.elements.complex.table.TableDataProvider.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -29,40 +27,40 @@ public class DataGridTHTests implements TestsInit {
 
     @Test
     public void webCellsTest() {
-        assertEquals(furniture.webCells().size(), 20);
+        assertEquals(dataFurniture.webCells().size(), 20);
     }
     @Test
     public void sizeTest() {
-        assertEquals(furniture.size(), 4);
+        assertEquals(dataFurniture.size(), 4);
     }
     @Test
     public void countTest() {
-        assertEquals(furniture.count(), 5);
+        assertEquals(dataFurniture.count(), 5);
     }
     @Test
     public void columnsTest() {
-        List<Line> columns = furniture.columns();
+        List<Line> columns = dataFurniture.columns();
         assertEquals(columns.size(), 4);
         assertEquals(columns.get(0).size(), 5);
     }
     @Test
     public void rowsTest() {
-        List<Line> rows = furniture.rows();
+        List<Line> rows = dataFurniture.rows();
         assertEquals(rows.size(), 5);
         assertEquals(rows.get(0).size(), 4);
     }
     @Test
     public void headerTest() {
-        assertEquals(furniture.header(), asList("Name", "Type", "Cost *", "Weight"));
+        assertEquals(dataFurniture.header(), asList("Name", "Type", "Cost", "Weight"));
     }
     @Test
     public void rowHeaderTest() {
-        assertEquals(furniture.rowHeader(), asList("1", "2", "3", "4", "5"));
+        assertEquals(dataFurniture.rowHeader(), asList("1", "2", "3", "4", "5"));
     }
 
     @Test
     public void valueTest() {
-        String value = furniture.getValue();
+        String value = dataFurniture.getValue();
         assertEquals(value,
         "Name Type Cost * Weight\n" +
             "Chair furniture 3.5 2\n" +
@@ -74,112 +72,91 @@ public class DataGridTHTests implements TestsInit {
     @Test
     public void iterationTest() {
         int i = 0;
-        for (Line row : furniture) {
-            assertThat(row.get("Name"), is(NAME_COLUMN[i++]));
+        for (Furniture furniture : dataFurniture) {
+            assertThat(furniture.name, is(NAME_COLUMN[i++]));
         }
     }
 
-
     @Test
     public void dataRowTestIndex() {
-        assertEquals(furniture.row(1).asData(Furniture.class), CHAIR);
-        assertEquals(furniture.row(2).asData(Furniture.class), TABLE);
-        assertEquals(furniture.row(3).asData(Furniture.class), SOFA);
-    }
-
-    @Test
-    public void dataRowNameTest() {
-        assertThat(furniture.row("1").asData(Furniture.class), is(CHAIR));
-        assertThat(furniture.row("2").asData(Furniture.class), is(TABLE));
-        assertThat(furniture.row("3").asData(Furniture.class), is(SOFA));
+        dataFurniture.has().row(CHAIR);
+        dataFurniture.has().row(TABLE);
+        dataFurniture.has().row(SOFA);
     }
 
     @Test
     public void dataColumnTestIndex() {
-        assertThat(furniture.column(2), hasItems(TYPE_COLUMN));
-        assertThat(furniture.column(3), hasItems(COST_COLUMN));
-        assertThat(furniture.column(4), hasItems(WEIGHT_COLUMN));
+        assertThat(dataFurniture.column(2), hasItems(TYPE_COLUMN));
+        assertThat(dataFurniture.column(3), hasItems(COST_COLUMN));
+        assertThat(dataFurniture.column(4), hasItems(WEIGHT_COLUMN));
     }
 
     @Test
     public void dataColumnNameTest() {
-        assertThat(furniture.column("Type"), hasItems(TYPE_COLUMN));
-        assertThat(furniture.column("Cost"), hasItems(COST_COLUMN));
-        assertThat(furniture.column("Weight"), hasItems(WEIGHT_COLUMN));
+        assertThat(dataFurniture.column("Type"), hasItems(TYPE_COLUMN));
+        assertThat(dataFurniture.column("Cost"), hasItems(COST_COLUMN));
+        assertThat(dataFurniture.column("Weight"), hasItems(WEIGHT_COLUMN));
 
-        assertThat(furniture.column("TYPE"), hasItems(TYPE_COLUMN));
-        assertThat(furniture.column("COST *"), hasItems(COST_COLUMN));
-        assertThat(furniture.column("WEIGHT "), hasItems(WEIGHT_COLUMN));
-    }
-
-    @Test
-    public void dataFilterTest() {
-        List<Furniture> rows = furniture.rowsAs(Furniture.class);
-        assertThat(rows, hasItem(TABLE));
+        assertThat(dataFurniture.column("TYPE"), hasItems(TYPE_COLUMN));
+        assertThat(dataFurniture.column("COST *"), hasItems(COST_COLUMN));
+        assertThat(dataFurniture.column("WEIGHT "), hasItems(WEIGHT_COLUMN));
     }
 
     @Test
     public void allDataFilterTest() {
-        List<Furniture> rows = furniture.rowsAs(Furniture.class);
-        List<Furniture> filteredData = filter(rows, d -> d.name.contains("Tab"));
+        List<Furniture> filteredData = dataFurniture.dataList(d -> d.name.contains("Tab"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), TABLE);
     }
 
     @Test
     public void commonMatchersTest() {
-        furniture.is().displayed();
-        furniture.has().size(5);
-        furniture.assertThat().size(greaterThan(3));
-        furniture.is().notEmpty().size(lessThanOrEqualTo(7));
+        dataFurniture.is().displayed();
+        dataFurniture.has().size(5);
+        dataFurniture.assertThat().size(greaterThan(3));
+        dataFurniture.is().notEmpty().size(lessThanOrEqualTo(7));
     }
 
     // Compare Matchers
     @Test
     public void rowMatcherTest() {
-        List<Furniture> rows = furniture.rowsAs(Furniture.class);
-        assertThat(first(rows, r -> r.name.contains("Tab")), not(nullValue()));
+        dataFurniture.has().row(r -> r.name.contains("Tab"));
     }
 
     @Test
     public void rowDataMatcherTest() {
-        List<Furniture> rows = furniture.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
+        dataFurniture.has().row(TABLE);
     }
 
     @Test
     public void rowsAllTest() {
-        List<Furniture> rows = furniture.rowsAs(Furniture.class);
-        assertThat(all(rows, r -> r.name.length() >= 4), is(true));
+        dataFurniture.has().all().rows(r -> r.name.length() >= 4);
     }
 
     @Test
     public void noRowsTest() {
-        List<Furniture> rows = furniture.rowsAs(Furniture.class);
-        assertThat(any(rows, r -> isBlank(r.name)), is(false));
+        dataFurniture.has().no().rows(r -> isBlank(r.name));
     }
 
     @Test
     public void atLeastTest() {
-        List<Furniture> rows = furniture.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.type.contains("furniture")), hasSize(greaterThanOrEqualTo(3)));
+        dataFurniture.has()
+            .atLeast(3).rows(r -> r.type.contains("furniture"));
     }
 
     @Test
     public void exactMatcherTest() {
-        List<Furniture> rows = furniture.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.cost.contains("3.5")), hasSize(2));
+        dataFurniture.has().exact(2).rows(r -> r.cost.contains("3.5"));
     }
 
     @Test
     public void rowDataExactMatcherTest() {
-        List<Furniture> rows = furniture.rowsAs(Furniture.class);
-        assertThat(filter(rows, r -> r.equals(TABLE)), hasSize(1));
+        dataFurniture.has().exact(1).row(TABLE);
     }
 
     @Test
     public void tableChainTest() {
-        furniture.assertThat()
+        dataFurniture.assertThat()
             .displayed().size(5).size(greaterThan(3)).notEmpty();
     }
 }

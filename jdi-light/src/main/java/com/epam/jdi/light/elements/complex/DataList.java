@@ -34,7 +34,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
     public D getData(String name) {
         return asEntity(get(name), dataType);
     }
-    public D getData(Enum name) {
+    public D getData(Enum<?> name) {
         return getData(getEnumValue(name));
     }
     public D getData(int index) {

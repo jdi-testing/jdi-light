@@ -7,7 +7,7 @@
     <artifactId>jdi-light-applitools-tests</artifactId>
     <name>Tests: JDI Light Applitools Eyes</name>
     <packaging>jar</packaging>
-    <version>1.3.3</version>
+    <version>1.3.11</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -16,8 +16,8 @@
         <applitools.version>3.157.10</applitools.version>
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
-        <aspectj.version>1.9.5</aspectj.version>
-        <allure.testng>2.13.2</allure.testng>
+        <aspectj.version>1.9.6</aspectj.version>
+        <allure.testng>2.13.8</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
     </properties>
@@ -33,12 +33,12 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.3.3</version>
+            <version>1.3.11</version>
         </dependency>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-eyes</artifactId>
-            <version>1.3.3</version>
+            <version>1.3.11</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>

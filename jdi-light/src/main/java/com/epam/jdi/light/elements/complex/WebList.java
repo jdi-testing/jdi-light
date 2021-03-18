@@ -108,6 +108,10 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public WebList(MapArray<String, UIElement> map) {
         this.map.set(map);
     }
+    public WebList(List<WebElement> elements, String name) {
+        this(elements);
+        setName(name);
+    }
     public WebList(List<String> header, List<UIElement> elements) {
         this(new MapArray<>(header, elements));
     }
@@ -547,7 +551,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             }
         }
         refresh();
-        // elements = noValidation(() -> elements(0));
         elements = elements(0);
         if (elements == null || elements.isEmpty())
             return new ArrayList<>();
@@ -683,6 +686,6 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @Override
     public WebList finds(By locator) {
         List<WebElement> els = elements(1).selectMany(el -> el.finds(locator).webElements());
-        return $$(els, context + ">" + locator);
+        return $$(els, getName() + ">" + locator);
     }
 }
