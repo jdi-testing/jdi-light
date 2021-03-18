@@ -13,17 +13,17 @@ public class PortalTests extends TestsInit {
     public void portalTest(){
         defaultPortalPage.open();
 
-        portalFrame.button.is().text(hasToString("Mount children"));
+        portalFrame.button.is().text("Mount children");
         portalFrame.field1.is().text(hasToString("It looks like I will render here."));
         portalFrame.field2.is().text(emptyString());
 
         portalFrame.button.click();
-        portalFrame.button.is().text(hasToString("Unmount children"));
+        portalFrame.button.is().text("Unmount children");
         portalFrame.field1.is().text(hasToString("It looks like I will render here."));
         portalFrame.field2.is().text(hasToString("But I actually render here!"));
 
         portalFrame.button.click();
-        portalFrame.button.is().text(hasToString("Mount children"));
+        portalFrame.button.is().text("Mount children");
         portalFrame.field1.is().text(hasToString("It looks like I will render here."));
         portalFrame.field2.is().text(emptyString());
     }

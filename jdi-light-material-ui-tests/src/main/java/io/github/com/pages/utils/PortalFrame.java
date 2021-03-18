@@ -10,9 +10,9 @@ public class PortalFrame extends Section {
     public Button button;
 
     // TODO update with public Label or etc.
-    @UI("//div[@class='makeStyles-alert-1'][1]")
+    @UI("//button/following::div[1]")
     public Portal field1;
 
-    @UI("//div[@class='makeStyles-alert-1'][2]")
+    @UI("//button/following::div[2]")
     public Portal field2;
 }
