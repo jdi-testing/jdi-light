@@ -10,20 +10,21 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
-
 import io.github.com.pages.surfaces.AppBarFrame;
+import io.github.com.pages.displaydata.AvatarFrame;
+import io.github.com.pages.displaydata.*;
 import io.github.com.pages.datadisplay.IconsFrame;
 import io.github.com.pages.datadisplay.ListsFrame;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
-import io.github.com.pages.displaydata.TypographyFrame;
 import io.github.com.pages.inputs.FabFrame;
 import io.github.com.pages.displaydata.MaterialIconFrame;
 import io.github.com.pages.displaydata.TooltipFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
+import io.github.com.pages.feedback.DialogFrame;
 import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
@@ -46,6 +47,9 @@ import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.navigation.TabFrame;
 import io.github.com.pages.navigation.StepperFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.PaperFrame;
+import io.github.com.pages.utils.PortalFrame;
+import io.github.com.pages.utils.ModalFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.surfaces.CardFrame;
@@ -53,7 +57,6 @@ import io.github.com.pages.inputs.DateTimePickersFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.TransitionFrame;
-import io.github.com.pages.surfaces.PaperFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light")
 public class StaticSite {
@@ -230,8 +233,9 @@ public class StaticSite {
     @Url("/material-ui-surfaces-card--card-with-clickable-area")
     public static WebPage surfaceCardPage;
 
-    // inputs
-    // switch
+
+    // data display
+    // divider
     @Frame("storybook-preview-iframe")
     public static InsetDividerFrame insetDividerFrame;
 
@@ -244,7 +248,41 @@ public class StaticSite {
     @Url("/material-ui-data-display-dividers--vertical-dividers-view")
     public static WebPage dataDisplayVerticalDividerPage;
 
+    // feedback
+    // dialog
     @Frame("storybook-preview-iframe")
+    public static DialogFrame dialogFrame;
+
+    @Url("/material-ui-feedback-dialog--dialog-alert")
+    public static WebPage alertDialogPage;
+
+    @Url("/material-ui-feedback-dialog--dialog-confirm")
+    public static WebPage confirmDialogPage;
+
+    @Frame("storybook-preview-iframe")
+    public static AvatarFrame dataDisplayAvatarFrame;
+
+    @Url("/material-ui-data-display-avatar--no-image")
+    public static WebPage dataDisplayNoImageAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--circle")
+    public static WebPage dataDisplayCircleAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--square")
+    public static WebPage dataDisplaySquareAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--rounded")
+    public static WebPage dataDisplayRoundedAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--fallback-alt")
+    public static WebPage dataDisplayFallbackAltAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--letter")
+    public static WebPage dataDisplayLetterAvatarPage;
+
+    @Url("/material-ui-data-display-avatar--icon")
+    public static WebPage dataDisplayIconAvatarPage;
+
     public static GroupCheckBoxFrame groupCheckBoxFrame;
 
     @Url("/material-ui-inputs-checkbox--group")
@@ -273,6 +311,15 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-material-icons--secondary")
     public static WebPage displayDataLargeMaterialIconPage;
+
+    @Frame("storybook-preview-iframe")
+    public static ModalFrame modalFrame;
+
+    @Url("/material-ui-utils-modal--transitions-modal")
+    public static WebPage transitionsModalPage;
+
+    @Url("/material-ui-utils-modal--server-modal")
+    public static WebPage serverSideModalPage;
 
     // typography
     @Frame("storybook-preview-iframe")
@@ -320,6 +367,25 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-tooltip--interactive")
     public static WebPage displayDataTooltipInteractivePage;
+
+    // chip
+    @Frame("storybook-preview-iframe")
+    public static ChipFrame chipFrame;
+
+    @Url("/material-ui-data-display-chips--default-chip")
+    public static WebPage displayDataDefaultChipPage;
+
+    @Url("/material-ui-data-display-chips--outlined-chip")
+    public static WebPage displayDataOutlinedChipPage;
+
+    @Url("/material-ui-data-display-chips--chip-array")
+    public static WebPage displayDataArrayChipPage;
+
+    @Url("/material-ui-data-display-chips--small-default-chip")
+    public static WebPage displayDataSmallDefaultChipPage;
+
+    @Url("/material-ui-data-display-chips--small-outlined-chip")
+    public static WebPage displayDataSmallOutlinedChipPage;
 
     // lists
     @Frame("storybook-preview-iframe")
@@ -431,7 +497,6 @@ public class StaticSite {
     @Url("/material-ui-utils-transitions--collapse-transition")
     public static WebPage utilsTransitionCollapsePage;
 
-    // utils
     // popover
     @Frame("storybook-preview-iframe")
     public static PopoverClickFrame popoverClickFrame;
@@ -444,6 +509,13 @@ public class StaticSite {
 
     @Url("/material-ui-utils-popover--hover")
     public static WebPage utilsPopoverHoverPage;
+
+    // portal
+    @Frame("storybook-preview-iframe")
+    public static PortalFrame portalFrame;
+
+    @Url("/material-ui-utils-portal--default")
+    public static WebPage defaultPortalPage;
 
     // navigation
     // stepper
