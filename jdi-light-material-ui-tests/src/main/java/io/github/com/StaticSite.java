@@ -16,6 +16,33 @@ import io.github.com.pages.displaydata.*;
 import io.github.com.pages.feedback.*;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.ContainerFrame;
+import io.github.com.pages.displaydata.*;
+import io.github.com.pages.inputs.ButtonGroupFrame;
+import io.github.com.pages.inputs.FabFrame;
+import io.github.com.pages.displaydata.AvatarFrame;
+import io.github.com.pages.datadisplay.IconsFrame;
+import io.github.com.pages.datadisplay.ListsFrame;
+import io.github.com.pages.inputs.EnhancedTransferListFrame;
+import io.github.com.pages.inputs.SimpleTransferListFrame;
+import io.github.com.pages.displaydata.BadgeFrame;
+import io.github.com.pages.displaydata.MaterialIconFrame;
+import io.github.com.pages.displaydata.TooltipFrame;
+import io.github.com.pages.displaydata.InsetDividerFrame;
+import io.github.com.pages.displaydata.VerticalDividerFrame;
+import io.github.com.pages.feedback.DialogFrame;
+import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
+import io.github.com.pages.feedback.SimpleSnackbarFrame;
+import io.github.com.pages.feedback.BackdropFrame;
+import io.github.com.pages.feedback.CircularProgressFrame;
+import io.github.com.pages.feedback.LinearProgressFrame;
+import io.github.com.pages.inputs.SelectFrame;
+import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.RadioButtonFrame;
+import io.github.com.pages.inputs.GroupCheckBoxFrame;
+import io.github.com.pages.inputs.CheckboxFrame;
+import io.github.com.pages.inputs.SplitButtonGroupFrame;
+import io.github.com.pages.inputs.SliderFrame;
+import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.layouts.BoxFrame;
 import io.github.com.pages.layouts.HiddenFrame;
 import io.github.com.pages.navigation.BottomNavigationFrame;
@@ -337,6 +364,28 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-tooltip--interactive")
     public static WebPage displayDataTooltipInteractivePage;
+
+    // table
+    @Frame("storybook-preview-iframe")
+    public static TableFrame tableFrame;
+
+    @Url("/material-ui-data-display-table--simple")
+    public static WebPage displayDataSimpleTablePage;
+
+    @Url("/material-ui-data-display-table--dense")
+    public static WebPage displayDataDenseTablePage;
+
+    @Url("/material-ui-data-display-table--sticky-header")
+    public static WebPage displayDataStickyHeaderTablePage;
+
+    @Url("/material-ui-data-display-table--table-with-pagination")
+    public static WebPage displayDataTableWithPaginationPage;
+
+    @Url("/material-ui-data-display-table--sorting-table")
+    public static WebPage displayDataSortingTablePage;
+
+    @Url("/material-ui-data-display-table--spanning-table")
+    public static WebPage displayDataSpanningTablePage;
 
     // chip
     @Frame("storybook-preview-iframe")
