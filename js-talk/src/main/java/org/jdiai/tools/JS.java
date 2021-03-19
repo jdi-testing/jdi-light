@@ -43,6 +43,7 @@ import static com.epam.jdi.tools.StringUtils.toKebabCase;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.jsbuilder.GetTypes.dataType;
@@ -313,7 +314,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public Json cssStyles(String... style) {
         return js.getStyles(style);
     }
-    public Json allCssStyles(String... style) {
+    public Json allCssStyles() {
         return js.getAllStyles();
     }
 
@@ -490,7 +491,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         Timer.sleep((sec+1) * 1000L);
         return stopRecordingAndSave(imageType);
     }
-    // TODO Experimental record video for any element
+    // Experimental record video for any element
     public StreamToImageVideo recordVideo(int sec) {
         js.jsExecute("await import(`https://html2canvas.hertzen.com/dist/html2canvas.min.js`)");
         getElement(Whammy.script);
@@ -677,9 +678,9 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public Direction getDirectionTo(JS element) {
         ClientRect destinationCoordinates = element.getClientRect();
         ClientRect elementCoordinates = getClientRect();
-        Direction direction = new Direction(getCenter(elementCoordinates) , getCenter(destinationCoordinates));
+        Direction direction = new Direction(getCenter(elementCoordinates), getCenter(destinationCoordinates));
         if (relations == null) {
-            new MapArray<>(element.getFullName(), direction);
+            relations = new MapArray<>(element.getFullName(), direction);
         } else {
             relations.update(element.getName(), direction);
         }
@@ -708,11 +709,11 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     }
     public List<String> validateRelations() {
         MapArray<String, Direction> storedRelations = readRelations(this);
-        if (storedRelations.size() == 0) {
+        if (isEmpty(storedRelations)) {
             return newList("No relations found in: " + RELATIONS_STORAGE);
         }
         List<String> failures = new ArrayList<>();
-        if (relations == null || relations.size() == 0) {
+        if (isEmpty(relations)) {
             return newList("No element relations found: use getRelativePosition(...) first and save element relations");
         }
         MapArray<String, Direction> newRelations = new MapArray<>();
@@ -750,6 +751,9 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
         return this;
     }
     public JS should(Condition... conditions) {
+        return shouldBe(conditions);
+    }
+    public JS waitFor(Condition... conditions) {
         return shouldBe(conditions);
     }
 }
