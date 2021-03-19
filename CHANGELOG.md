@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.10 (planed July 2020)
+* Support [Angular materials](https://material.angular.io/components/categories) elements
+* All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
+
+##1.3.5-6 (09.02.2021)
 ## 1.3.15 (planed March 2021)
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
@@ -11,7 +16,6 @@
 ## 1.3.11 (03.03.2021)
 * Switch to Lightsaber 2.1.13
 * Fix print column in a table matchers
-* Switch to Lightsaber 2.1.13
 * Move Table Matchers to com.epam.jdi.light.elements.complex.table.matchers and rename TableMatcher > ColumnMatcher; Single > ValueMatcher
 * Make constructors public and fields protected
 * Add TableMatchersSettings
