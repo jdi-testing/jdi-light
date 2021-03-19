@@ -4,22 +4,23 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.appBarFrame;
-import static io.github.com.StaticSite.surfaceSimpleAppBarPage;
-import static org.hamcrest.Matchers.hasToString;
+import static io.github.com.StaticSite.appBarPage;
 
 public class AppBarTests extends TestsInit {
+
+    private static final String TITLE = "News";
+    private static final String BUTTON_TITLE = "LOGIN";
+
     @Test
-    public void appBarTest(){
-        surfaceSimpleAppBarPage.open();
+    public void appBarTests() {
+        appBarPage.open();
 
-        appBarFrame.menu.is().displayed();
-        appBarFrame.menu.click();
-
-        appBarFrame.news.is().displayed();
-        appBarFrame.news.is().text(hasToString("News"));
-
-        appBarFrame.login.is().displayed();
-        appBarFrame.login.click();
-        appBarFrame.login.is().text(hasToString("LOGIN"));
+        appBarFrame.appBar.getButtonByIndex(1).is().enabled();
+        appBarFrame.appBar.getButtonByIndex(1).click();
+        appBarFrame.appBar.getButtonByIndex(2).is().enabled();
+        appBarFrame.appBar.getButtonByIndex(2).click();
+        appBarFrame.appBar.is().assertTitle(TITLE);
+        appBarFrame.appBar.getButtonByText(BUTTON_TITLE).is().enabled();
+        appBarFrame.appBar.getButtonByText(BUTTON_TITLE).click();
     }
 }

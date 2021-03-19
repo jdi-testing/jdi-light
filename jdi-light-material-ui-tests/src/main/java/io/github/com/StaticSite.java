@@ -10,51 +10,53 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
-import io.github.com.pages.displaydata.*;
-import io.github.com.pages.inputs.ButtonGroupFrame;
-import io.github.com.pages.inputs.FabFrame;
-import io.github.com.pages.displaydata.AvatarFrame;
 import io.github.com.pages.datadisplay.IconsFrame;
 import io.github.com.pages.datadisplay.ListsFrame;
-import io.github.com.pages.inputs.EnhancedTransferListFrame;
-import io.github.com.pages.inputs.SimpleTransferListFrame;
+import io.github.com.pages.displaydata.AvatarFrame;
 import io.github.com.pages.displaydata.BadgeFrame;
-import io.github.com.pages.displaydata.MaterialIconFrame;
-import io.github.com.pages.displaydata.TooltipFrame;
+import io.github.com.pages.displaydata.ChipFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
+import io.github.com.pages.displaydata.MaterialIconFrame;
+import io.github.com.pages.displaydata.TableFrame;
+import io.github.com.pages.displaydata.TooltipFrame;
+import io.github.com.pages.displaydata.TypographyFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
-import io.github.com.pages.feedback.DialogFrame;
-import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
-import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.feedback.CircularProgressFrame;
+import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
+import io.github.com.pages.feedback.DialogFrame;
 import io.github.com.pages.feedback.LinearProgressFrame;
-import io.github.com.pages.inputs.SelectFrame;
+import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.inputs.ButtonFrame;
-import io.github.com.pages.inputs.RadioButtonFrame;
-import io.github.com.pages.inputs.GroupCheckBoxFrame;
+import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.inputs.CheckboxFrame;
-import io.github.com.pages.inputs.SplitButtonGroupFrame;
+import io.github.com.pages.inputs.DateTimePickersFrame;
+import io.github.com.pages.inputs.EnhancedTransferListFrame;
+import io.github.com.pages.inputs.FabFrame;
+import io.github.com.pages.inputs.GroupCheckBoxFrame;
+import io.github.com.pages.inputs.RadioButtonFrame;
+import io.github.com.pages.inputs.SelectFrame;
+import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.inputs.SliderFrame;
+import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchFrame;
-import io.github.com.pages.layouts.BoxFrame;
-import io.github.com.pages.navigation.BottomNavigationFrame;
-import io.github.com.pages.layouts.HiddenFrame;
-import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerFrame;
-import io.github.com.pages.navigation.TabFrame;
+import io.github.com.pages.layouts.BoxFrame;
+import io.github.com.pages.layouts.HiddenFrame;
+import io.github.com.pages.navigation.BottomNavigationFrame;
+import io.github.com.pages.navigation.LinkFrame;
 import io.github.com.pages.navigation.StepperFrame;
+import io.github.com.pages.navigation.TabFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
-import io.github.com.pages.surfaces.PaperFrame;
-import io.github.com.pages.utils.PortalFrame;
-import io.github.com.pages.utils.ModalFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
-import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.surfaces.CardFrame;
-import io.github.com.pages.inputs.DateTimePickersFrame;
+import io.github.com.pages.surfaces.PaperFrame;
+import io.github.com.pages.utils.ModalFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
+import io.github.com.pages.utils.PopperFrame;
+import io.github.com.pages.utils.PortalFrame;
 import io.github.com.pages.utils.TransitionFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light")
@@ -209,16 +211,18 @@ public class StaticSite {
     @Url("/material-ui-surfaces-accordion--disabled")
     public static WebPage surfaceAccordionDisabledPage;
 
+    @Url("/material-ui-surfaces-app-bar--simple-app-bar")
+    public static WebPage appBarPage;
+
+    @Frame("storybook-preview-iframe")
+    public static AppBarFrame appBarFrame;
+
     // paper
     @Frame("storybook-preview-iframe")
     public static PaperFrame paperFrame;
 
     @Url("/material-ui-surfaces-paper--default")
     public static WebPage surfacePaperDefaultPage;
-
-    // app bar
-    @Frame("storybook-preview-iframe")
-    public static AppBarFrame appBarFrame;
 
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage surfaceSimpleAppBarPage;
