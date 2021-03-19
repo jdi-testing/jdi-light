@@ -19,6 +19,7 @@ public class WindowsAndFramesTests implements TestsInit {
     public void before() {
         homePage.shouldBeOpened();
     }
+
     @Test
     public void windowsTest() {
         githubLink.click();
@@ -43,6 +44,7 @@ public class WindowsAndFramesTests implements TestsInit {
     public void frameTest() {
         iframe.epamLogo.click();
     }
+
     @Test
     public void frameByLocatorTest() {
         iframe.epamLogoFrame.click();

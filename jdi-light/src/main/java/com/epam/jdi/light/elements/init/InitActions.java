@@ -98,7 +98,7 @@ public class InitActions {
         try {
             if (isInterface(info.instance.getClass(), ISetup.class))
                 return true;
-            Object value = info.field.get(info.parent);
+            Object value = getValueField(info.field, info.parent);
             if (value == null) return false;
             return isInterface(value.getClass(), ISetup.class);
         } catch (Exception ex) {return false; }

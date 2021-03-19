@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
+import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.safeException;
 
@@ -32,7 +33,7 @@ public class AngularActions {
         failedMethods.clear();
         try {
             BEFORE_JDI_ACTION.execute(jInfo);
-            Object result = jInfo.topLevel()
+            Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
             logger.trace("<>@AA: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));

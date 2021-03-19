@@ -73,7 +73,7 @@ public class WebDriverFactory {
                 useDriver(driverName, () -> DRIVER.types.get(driverName).getDriver());
             if (!DRIVERS.has(driverName))
                 throw exception("Can't get driver '%s'. Please use drivers from JDISettings.DRIVER.types list. " +
-                        "Or add your own driver with WebDriverFactory.useDriver(name,() -> WebDriver) method.");
+                    "Or add your own driver with WebDriverFactory.useDriver(name,() -> WebDriver) method.");
             WebDriver driver = getValidDriver(driverName);
             driver = DRIVER.setup.execute(driver);
             registerNewDriver(driverName, driver, drivers);
@@ -249,7 +249,6 @@ public class WebDriverFactory {
 
     private static void closeDriver(WebDriver driver) {
         try {
-            driver.close();
             driver.quit();
         } catch (Exception ignore) { }
     }
