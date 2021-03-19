@@ -11,7 +11,7 @@ public class TableTests extends TestsInit {
     public void simpleTableTests() {
         displayDataSimpleTablePage.open();
 
-        checkHeader();
+        checkColumnHeaders();
 
         simpleCheck();
     }
@@ -20,7 +20,7 @@ public class TableTests extends TestsInit {
     public void denseTableTests(){
         displayDataDenseTablePage.open();
 
-        checkHeader();
+        checkColumnHeaders();
 
         simpleCheck();
     }
@@ -29,7 +29,7 @@ public class TableTests extends TestsInit {
     public void stickyHeaderTests(){
         displayDataStickyHeaderTablePage.open();
 
-        checkHeader();
+        checkColumnHeaders();
 
         simpleCheck();
     }
@@ -38,23 +38,27 @@ public class TableTests extends TestsInit {
     public void tableWithPaginationTests(){
         displayDataTableWithPaginationPage.open();
 
-        checkHeader();
+        checkColumnHeaders();
 
         simpleCheck();
 
         tableFrame.next.click();
 
-        checkHeader();
+        checkColumnHeaders();
 
         tableFrame.table.is().textRow(1,1,hasToString("Row 6"));
         tableFrame.table.is().textRow(1,4,hasToString("value " + tableFrame.table.getTextOfColumn1(1)));
         tableFrame.table.is().textRow(2,1,hasToString("Row 7"));
         tableFrame.table.is().textRow(2,3,hasToString("value 7"));
 
+        tableFrame.previous.click();
+
+        simpleCheck();
+
         tableFrame.pages.click();
         tableFrame.page10.click();
 
-        checkHeader();
+        checkColumnHeaders();
 
         simpleCheck();
 
@@ -83,18 +87,22 @@ public class TableTests extends TestsInit {
     public void spanningTableTest(){
         displayDataSpanningTablePage.open();
 
-        checkHeader();
+        checkColumnHeaders();
 
         simpleCheck();
 
         tableFrame.table.is().checkSubtotal(5);
     }
 
-    private void checkHeader(){
+    private void checkColumnHeaders(){
         tableFrame.table.is().headerDisplayed(1);
         tableFrame.table.is().textHeader(1, hasToString("Sample Table"));
         tableFrame.table.is().headerDisplayed(2);
         tableFrame.table.is().textHeader(2, hasToString("Column 1"));
+        tableFrame.table.is().headerDisplayed(3);
+        tableFrame.table.is().textHeader(3, hasToString("Column 2"));
+        tableFrame.table.is().headerDisplayed(4);
+        tableFrame.table.is().textHeader(4, hasToString("Column 3"));
     }
 
     private void simpleCheck(){

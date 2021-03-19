@@ -10,8 +10,11 @@ public class TableFrame extends Section {
     @JDITable
     public Table table;
 
-    @UI(".MuiIconButton-label[2]")
+    @UI("//button[@title='Next page']")
     public Button next;
+
+    @UI("//button[@title='Previous page']")
+    public Button previous;
 
     @UI(".MuiSelect-root")
     public Button pages;

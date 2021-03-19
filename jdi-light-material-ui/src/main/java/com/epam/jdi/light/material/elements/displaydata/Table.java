@@ -18,7 +18,7 @@ public class Table extends UIBaseElement<TableAssert> implements ISetup {
         return this.finds(rowColumn).get(id);
     }
 
-    public UIElement getRowColumn(int idRow, int idColumn){
+    public UIElement getCell(int idRow, int idColumn){
         return this.finds(rowColumn).get(idRow * columnNumber + idColumn);
     }
 

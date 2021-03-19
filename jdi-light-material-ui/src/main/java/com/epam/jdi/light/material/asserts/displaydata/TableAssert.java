@@ -26,19 +26,19 @@ public class TableAssert  extends UIAssert<TableAssert, Table> {
 
     @JDIAction("Assert that table row {index} text is '{condition}'")
     public TableAssert textRow(final int idRow, final int idColumn, Matcher<String> condition) {
-        jdiAssert(element().getRowColumn(idRow, idColumn).getText(), condition);
+        jdiAssert(element().getCell(idRow, idColumn).getText(), condition);
         return this;
     }
 
     @JDIAction("Assert that row {index} column 1 item < row {index + 1} column 1")
     public TableAssert increaseValue(final int index){
-        jdiAssert(Integer.parseInt(element().getRowColumn(index, 2).getText()), Matchers.is(Matchers.lessThanOrEqualTo(Integer.parseInt(element().getRowColumn(index + 1, 2).getText()))));
+        jdiAssert(Integer.parseInt(element().getCell(index, 2).getText()), Matchers.is(Matchers.lessThanOrEqualTo(Integer.parseInt(element().getCell(index + 1, 2).getText()))));
         return this;
     }
 
     @JDIAction("Assert that row {index} column 1 item < row {index + 1} column 1")
     public TableAssert decreaseValue(final int index){
-        jdiAssert(Integer.parseInt(element().getRowColumn(index + 1, 2).getText()), Matchers.is(Matchers.lessThanOrEqualTo(Integer.parseInt(element().getRowColumn(index, 2).getText()))));
+        jdiAssert(Integer.parseInt(element().getCell(index + 1, 2).getText()), Matchers.is(Matchers.lessThanOrEqualTo(Integer.parseInt(element().getCell(index, 2).getText()))));
         return this;
     }
 
@@ -46,9 +46,9 @@ public class TableAssert  extends UIAssert<TableAssert, Table> {
     public TableAssert checkSubtotal(final int rowsNumber){
         int sum = 0;
         for (int i = 1; i <= rowsNumber; i++){
-            sum += Integer.parseInt(element().getRowColumn(i, 2).getText());
+            sum += Integer.parseInt(element().getCell(i, 2).getText());
         }
-        jdiAssert(Integer.parseInt(element().getRowColumn(rowsNumber + 1, 2).getText()), Matchers.equalTo(sum));
+        jdiAssert(Integer.parseInt(element().getCell(rowsNumber + 1, 2).getText()), Matchers.equalTo(sum));
         return this;
     }
 }
