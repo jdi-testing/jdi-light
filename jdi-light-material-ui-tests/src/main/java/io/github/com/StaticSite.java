@@ -10,15 +10,15 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
-import io.github.com.pages.displaydata.AvatarFrame;
 import io.github.com.pages.displaydata.*;
+import io.github.com.pages.inputs.ButtonGroupFrame;
+import io.github.com.pages.inputs.FabFrame;
+import io.github.com.pages.displaydata.AvatarFrame;
 import io.github.com.pages.datadisplay.IconsFrame;
 import io.github.com.pages.datadisplay.ListsFrame;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.displaydata.BadgeFrame;
-import io.github.com.pages.inputs.ButtonGroupFrame;
-import io.github.com.pages.inputs.FabFrame;
 import io.github.com.pages.displaydata.MaterialIconFrame;
 import io.github.com.pages.displaydata.TooltipFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
@@ -364,6 +364,28 @@ public class StaticSite {
 
     @Url("/material-ui-data-display-tooltip--interactive")
     public static WebPage displayDataTooltipInteractivePage;
+
+    // table
+    @Frame("storybook-preview-iframe")
+    public static TableFrame tableFrame;
+
+    @Url("/material-ui-data-display-table--simple")
+    public static WebPage displayDataSimpleTablePage;
+
+    @Url("/material-ui-data-display-table--dense")
+    public static WebPage displayDataDenseTablePage;
+
+    @Url("/material-ui-data-display-table--sticky-header")
+    public static WebPage displayDataStickyHeaderTablePage;
+
+    @Url("/material-ui-data-display-table--table-with-pagination")
+    public static WebPage displayDataTableWithPaginationPage;
+
+    @Url("/material-ui-data-display-table--sorting-table")
+    public static WebPage displayDataSortingTablePage;
+
+    @Url("/material-ui-data-display-table--spanning-table")
+    public static WebPage displayDataSpanningTablePage;
 
     // chip
     @Frame("storybook-preview-iframe")
