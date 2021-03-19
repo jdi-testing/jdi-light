@@ -3,7 +3,13 @@ package io.github.epam.material.tests.displaydata;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
+import static io.github.com.StaticSite.tableFrame;
+import static io.github.com.StaticSite.displayDataSimpleTablePage;
+import static io.github.com.StaticSite.displayDataDenseTablePage;
+import static io.github.com.StaticSite.displayDataStickyHeaderTablePage;
+import static io.github.com.StaticSite.displayDataTableWithPaginationPage;
+import static io.github.com.StaticSite.displayDataSortingTablePage;
+import static io.github.com.StaticSite.displayDataSpanningTablePage;
 import static org.hamcrest.Matchers.hasToString;
 
 public class TableTests extends TestsInit {
