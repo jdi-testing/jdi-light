@@ -1,7 +1,6 @@
 package org.jdiai.tests;
 
 import org.jdiai.TestInit;
-import org.jdiai.WebPage;
 import org.jdiai.site.HomePage;
 import org.jdiai.site.JDISite;
 import org.jdiai.testng.TestNGListener;
@@ -9,7 +8,6 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.jdiai.JSTalk.loginAs;
-import static org.jdiai.JSTalk.openPage;
 import static org.jdiai.asserts.Conditions.have;
 import static org.jdiai.asserts.Conditions.text;
 import static org.jdiai.entities.Contacts.Triss;
