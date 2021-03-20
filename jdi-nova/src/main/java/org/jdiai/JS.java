@@ -64,13 +64,16 @@ import static org.openqa.selenium.OutputType.*;
 
 public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore {
     public static String JDI_STORAGE = "src/test/jdi";
-    public final JSSmart js;
-    private final Supplier<WebDriver> driver;
-    private final Safe<Actions> actions;
+    public JSSmart js;
+    private Supplier<WebDriver> driver;
+    private Safe<Actions> actions;
     private String name = "";
     private Object parent = null;
     private JSImages imagesData;
+    public int renderTimeout = 5000;
+    protected String objectMap;
 
+    public JS() { }
     public JS(Supplier<WebDriver> driver, List<By> locators) {
         this.driver = driver;
         this.js = new JSSmart(driver, locators);
@@ -116,6 +119,16 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return (JavascriptExecutor) driver();
     }
     public JS core() { return this; }
+    public void setCore(JS core) {
+        this.js = core.js;
+        this.driver = core.driver;
+        this.actions = core.actions;
+        this.name = core.name;
+        this.parent = core.parent;
+        this.imagesData = core.imagesData;
+        this.renderTimeout = core.renderTimeout;
+        this.objectMap = core.objectMap;
+    }
 
     private static List<By> locatorsFromParent(By locator, Object parent, boolean useParentLocators) {
         List<By> locators = new ArrayList<>();
@@ -468,7 +481,6 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         if (!value.equals("start recording"))
             throw new JSException(value);
     }
-    public int renderTimeout = 5000;
     public StreamToImageVideo stopRecordingAndSave(ImageTypes imageType) {
         js.jsExecute("window.jdiRecorder.stop();");
         String stream = "";
@@ -503,7 +515,6 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return new StreamToImageVideo(stream, VIDEO_WEBM);
     }
 
-    protected String objectMap;
     public JS setObjectMapping(String objectMap, Class<?> cl) {
         this.objectMap = objectMap;
         this.js.setupEntity(cl);
