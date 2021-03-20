@@ -135,8 +135,10 @@ public class JSDriver {
             return buildOne();
         }
         builder().oneToList(context, firstLocator());
-        for (By locator : listCopy(locators(), 1, -1)) {
-            builder.listToList(locator);
+        if (locators().size() > 2) {
+            for (By locator : listCopy(locators(), 1, -1)) {
+                builder().listToList(locator);
+            }
         }
         builder().listToOne(lastLocator());
         return builder();
@@ -160,6 +162,9 @@ public class JSDriver {
         return new JSListProducer(buildListChain().getResultList(collector).executeAsList());
     }
     public IJSBuilder buildListMultiSearch() {
+        if (locators().isEmpty()) {
+            return builder();
+        }
         if (locators().size() == 1) {
             return buildList();
         }

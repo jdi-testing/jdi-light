@@ -13,8 +13,8 @@ public class GetTypes {
         "xpath({0}, ''{1}'')",
         "xpathList({0}, ''{1}'')");
     public static GetData ID = new GetData(
-        "{0}.getElementById(''{1}'')",
-        "[...{0}.getElementById(''{1}'')]");
+        "document.getElementById(''{1}'')",
+        "[document.getElementById(''{1}'')]");
     public static GetData CLASS = new GetData(
         "{0}.getElementsByClassName(''{1}'')[0]",
         "{0}.getElementsByClassName(''{1}'')");

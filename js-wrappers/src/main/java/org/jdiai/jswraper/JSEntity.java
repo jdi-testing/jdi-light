@@ -59,6 +59,7 @@ public class JSEntity<T> extends JSElement {
     public List<T> getEntityList() {
         return getEntityList(GET_ENTITY_MAP.execute(cl));
     }
+
     public static JFunc1<Class<?>, String> GET_ENTITY_MAP = cl -> {
         List<String> mapList = map(cl.getDeclaredFields(),
             field -> format("'%s': %s", field.getName(), getValueType(field, "element")));

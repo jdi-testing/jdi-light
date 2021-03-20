@@ -41,5 +41,24 @@ public class JSTalk {
     public static JS $(String... locators) {
         return new JS(JSTalk::driver, locatorsToBy(locators));
     }
+    public static void loginAs(String formLocator, Object user) {
+        $(formLocator).loginAs(user);
+    }
+    public static void loginAs(Object user) {
+        new JS(JSTalk::driver).loginAs(user);
+    }
+    public static void submitForm(String formLocator, Object user) {
+        $(formLocator).submit(user);
+    }
+    public static void submitForm(Object user) {
+        new JS(JSTalk::driver).submit(user);
+    }
+    public static void fillForm(String formLocator, Object user) {
+        $(formLocator).fill(user);
+    }
+    public static void fillForm(Object user) {
+        new JS(JSTalk::driver).fill(user);
+    }
+
     public static JSSmart jsDriver() { return new JSSmart(JSTalk::driver); }
 }

@@ -54,11 +54,11 @@ jobs:
         run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-wrappers
 
       - name: JS Talk Tests
-        id: js-talk-tests
+        id: jdi-nova-tests
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
         continue-on-error: true
-        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-talk -Drun.performance=false --fail-at-end
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-jdi-nova -Drun.performance=false --fail-at-end
 
       - name: JS E2E Tests
         id: js-e2e-tests
@@ -68,12 +68,12 @@ jobs:
         run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-e2e
 
       - name: Check Tests passed
-        if: ${{ steps.js-driver-tests.outcome != 'success' || steps.js-wrappers-tests.outcome != 'success' || steps.js-talk-tests.outcome != 'success' || steps.js-e2e-tests.outcome != 'success' }}
+        if: ${{ steps.js-driver-tests.outcome != 'success' || steps.js-wrappers-tests.outcome != 'success' || steps.jdi-nova-tests.outcome != 'success' || steps.js-e2e-tests.outcome != 'success' }}
         run: |
           echo Tests failed:
           echo JS Driver Tests: ${{ steps.js-driver-tests.outcome }}
           echo JS Wrappers Tests: ${{ steps.js-wrappers-tests.outcome }}
-          echo JS Talk Tests: ${{ steps.js-talk-tests.outcome }}
+          echo JS Talk Tests: ${{ steps.jdi-nova-tests.outcome }}
           echo JS E2E Tests: ${{ steps.js-e2e-tests.outcome }}
           exit 1
 
