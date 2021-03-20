@@ -1,6 +1,6 @@
 package org.jdiai;
 
-import static org.jdiai.tools.JSTalk.DOMAIN;
+import static org.jdiai.JSTalk.DOMAIN;
 
 public class Pages {
     // public static final String DOMAIN = "http://localhost:8000";

@@ -1,7 +1,7 @@
 package org.jdiai.visual;
 
 import com.epam.jdi.tools.func.JFunc1;
-import org.jdiai.tools.JS;
+import org.jdiai.JS;
 
 public class OfElement {
     private JS base;

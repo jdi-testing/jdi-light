@@ -1,6 +1,6 @@
 package org.jdiai.interfaces;
 
-public interface HasName<T> {
+public interface HasName {
     String getName();
-    T setName(String name);
+    void setName(String name);
 }

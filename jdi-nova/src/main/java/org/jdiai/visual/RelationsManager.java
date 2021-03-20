@@ -3,8 +3,8 @@ package org.jdiai.visual;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.Gson;
+import org.jdiai.JS;
 import org.jdiai.jsdriver.JSException;
-import org.jdiai.tools.JS;
 
 import java.io.File;
 import java.io.FileReader;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import static java.lang.Math.abs;
-import static org.jdiai.tools.JS.JDI_STORAGE;
+import static org.jdiai.JS.JDI_STORAGE;
 
 public class RelationsManager {
     public static String RELATIONS_STORAGE = JDI_STORAGE + "/relations.json";

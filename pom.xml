@@ -18,7 +18,8 @@
         <module>tests-js-driver</module>
         <module>tests-js-wrappers</module>
         <module>tests-jdi-nova</module>
-        <module>tests-js-e2e</module>
+        <module>tests-e2e-no-page-objects</module>
+        <module>tests-e2e-page-objects</module>
     </modules>
 
 </project>
