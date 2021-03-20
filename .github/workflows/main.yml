@@ -74,9 +74,8 @@ jobs:
         continue-on-error: true
         run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-e2e-page-objects
 
-
       - name: Check Tests passed
-        if: ${{ steps.js-driver-tests.outcome != 'success' || steps.js-wrappers-tests.outcome != 'success' || steps.jdi-nova-tests.outcome != 'success' || steps.js-e2e-tests.outcome != 'success' }}
+        if: ${{ steps.js-driver-tests.outcome != 'success' || steps.js-wrappers-tests.outcome != 'success' || steps.jdi-nova-tests.outcome != 'success' || steps.e2e-tests-no-po.outcome != 'success' || steps.e2e-tests-po.outcome != 'success' }}
         run: |
           echo Tests failed:
           echo JS Driver Tests: ${{ steps.js-driver-tests.outcome }}

@@ -62,7 +62,7 @@ import static org.jdiai.visual.ImageTypes.VIDEO_WEBM;
 import static org.jdiai.visual.RelationsManager.*;
 import static org.openqa.selenium.OutputType.*;
 
-public class JS implements WebElement, HasLocators, HasName, HasParent {
+public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore {
     public static String JDI_STORAGE = "src/test/jdi";
     public final JSSmart js;
     private final Supplier<WebDriver> driver;
@@ -115,6 +115,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent {
     public JavascriptExecutor js() {
         return (JavascriptExecutor) driver();
     }
+    public JS core() { return this; }
 
     private static List<By> locatorsFromParent(By locator, Object parent, boolean useParentLocators) {
         List<By> locators = new ArrayList<>();
