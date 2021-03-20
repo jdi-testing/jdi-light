@@ -18,4 +18,8 @@ public class TestIDLocators {
 
     public static JFunc1<String, By> SMART_LOCATOR = DATA_TEST_ID;
 
+    public static JFunc1<String, By> getSmartLocator() {
+        return SMART_LOCATOR;
+    }
+
 }

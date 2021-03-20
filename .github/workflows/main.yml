@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 1.8
+      - name: Set up JDK 1.9
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 1.9
 
       - name: Build with Maven
         id: build
@@ -60,12 +60,20 @@ jobs:
         continue-on-error: true
         run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-jdi-nova -Drun.performance=false --fail-at-end
 
-      - name: JS E2E Tests
-        id: js-e2e-tests
+      - name: E2E Without Page objects
+        id: e2e-tests-no-po
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
         continue-on-error: true
-        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-e2e
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-e2e-no-page-objects
+
+      - name: E2E With Page objects
+        id: e2e-tests-po
+        if: steps.allure-setup.outcome == 'success'
+        timeout-minutes: 10
+        continue-on-error: true
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-e2e-page-objects
+
 
       - name: Check Tests passed
         if: ${{ steps.js-driver-tests.outcome != 'success' || steps.js-wrappers-tests.outcome != 'success' || steps.jdi-nova-tests.outcome != 'success' || steps.js-e2e-tests.outcome != 'success' }}
@@ -74,7 +82,8 @@ jobs:
           echo JS Driver Tests: ${{ steps.js-driver-tests.outcome }}
           echo JS Wrappers Tests: ${{ steps.js-wrappers-tests.outcome }}
           echo JS Talk Tests: ${{ steps.jdi-nova-tests.outcome }}
-          echo JS E2E Tests: ${{ steps.js-e2e-tests.outcome }}
+          echo E2E Without Page objects: ${{ steps.e2e-tests-no-po.outcome }}
+          echo E2E With Page objects: ${{ steps.e2e-tests-po.outcome }}
           exit 1
 
       - name: Allure Report action from marketplace

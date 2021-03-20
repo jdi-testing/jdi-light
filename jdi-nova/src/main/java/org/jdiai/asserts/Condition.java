@@ -2,7 +2,7 @@ package org.jdiai.asserts;
 
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
-import org.jdiai.tools.JS;
+import org.jdiai.JS;
 
 public interface Condition extends JFunc1<JS, Boolean> {
     MapArray<Integer, String> NAMES = new MapArray<>();

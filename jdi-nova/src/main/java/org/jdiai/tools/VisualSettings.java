@@ -3,6 +3,7 @@ package org.jdiai.tools;
 import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
+import org.jdiai.JS;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.jsdriver.JSException;
 import org.jdiai.visual.ImageTypes;
@@ -13,7 +14,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.Math.*;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.jdiai.tools.JS.JDI_STORAGE;
+import static org.jdiai.JS.JDI_STORAGE;
 import static org.jdiai.visual.ImageTypes.JPG;
 
 public class VisualSettings {
@@ -23,7 +24,7 @@ public class VisualSettings {
         String name = "";
         if (js.parent() != null) {
             name += isInterface(js.parent().getClass(), HasName.class)
-                ? ((HasName<?>)js.parent()).getName()
+                ? ((HasName)js.parent()).getName()
                 : js.parent().getClass().getSimpleName();
             name += "_";
         }
@@ -49,8 +50,8 @@ public class VisualSettings {
     };
     public static JAction2<String, JS> VISUAL_VALIDATION = (tag, js) -> {
         try {
-            if (js.images.has(tag)) {
-                File baseLineImage = new File(js.images.get(tag));
+            if (js.imagesData().images.has(tag)) {
+                File baseLineImage = new File(js.imagesData().images.get(tag));
                 File newImage = makePhoto(tag + "-new", js);
                 COMPARE_IMAGES.execute(newImage, baseLineImage);
             } else {
@@ -62,8 +63,8 @@ public class VisualSettings {
     protected static File makePhoto(String tag, JS js) {
         js.show();
         File imageFile = js.makeScreenshot().asFile(getScreenshotName(tag, js));
-        js.images.update(tag, imageFile.getPath());
-        js.imageFile = imageFile;
+        js.imagesData().images.update(tag, imageFile.getPath());
+        js.imagesData().imageFile = imageFile;
         return imageFile;
     }
     protected static String getScreenshotName(String tag, JS js) {
