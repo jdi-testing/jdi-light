@@ -2,7 +2,6 @@ package org.jdiai.tools;
 
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
@@ -37,9 +36,7 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.copyList;
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static com.epam.jdi.tools.StringUtils.toKebabCase;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
@@ -56,11 +53,11 @@ import static org.jdiai.tools.FilterConditions.textEquals;
 import static org.jdiai.tools.GetTextTypes.INNER_TEXT;
 import static org.jdiai.tools.JSTalkUtils.findByToBy;
 import static org.jdiai.tools.JSTalkUtils.uiToBy;
+import static org.jdiai.tools.TestIDLocators.SMART_LOCATOR;
 import static org.jdiai.tools.VisualSettings.*;
 import static org.jdiai.visual.Direction.VECTOR_SIMILARITY;
 import static org.jdiai.visual.ImageTypes.VIDEO_WEBM;
 import static org.jdiai.visual.RelationsManager.*;
-import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.OutputType.*;
 
 public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
@@ -517,16 +514,22 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public <T> T getEntity() {
         return js.getEntity(objectMap);
     }
+    public void setEntity() {
+        js.setEntity(objectMap);
+    }
     public <T> T getEntity(String objectMap, Class<?> cl) {
         js.setupEntity(cl);
         return js.getEntity(objectMap);
+    }
+    public void setEntity(String objectMap) {
+        js.setEntity(objectMap);
     }
 
     public JS find(String by) {
         return find(NAME_TO_LOCATOR.execute(by));
     }
     public JS find(By by) {
-        return new JS(this.driver, by, this, false);
+        return new JS(this, by);
     }
     public JS children() { return find("*"); }
     public JS ancestor() { return find("/.."); }
@@ -543,39 +546,94 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent {
     public <T> List<T> getEntityList() {
         return js.getEntityList(objectMap);
     }
-    public static JFunc1<String, By> SMART_LOCATOR = fieldName ->
-        cssSelector("[data-testid='" + toKebabCase(fieldName) + "']");
+    public void setEntityList() {
+        js.setEntity(objectMap);
+    }
 
-    public static JAction2<Field, List<String>> FIELD_TO_MAP = (field, result) -> {
-        By locator = null;
-        if (field.isAnnotationPresent(FindBy.class)) {
-            FindBy findBy = field.getAnnotation(FindBy.class);
-            locator = findByToBy(findBy);
-        } else if (field.isAnnotationPresent(UI.class)) {
-            UI findBy = field.getAnnotation(UI.class);
-            locator = uiToBy(findBy);
-            if (locator == null) {
-                locator = SMART_LOCATOR.execute(field.getName());
-            }
-        }
+    public static JFunc1<Field, String> GET_COMPLEX_VALUE = (field)-> {
+        By locator = getFieldLocator(field);
         if (locator != null) {
             String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
-            result.add(format("'%s': %s", field.getName(), getValueType(field, element)));
+            return format("'%s': %s", field.getName(), getValueType(field, element));
         }
+        return null;
     };
+    public static JFunc2<Field, Object, String> SET_COMPLEX_VALUE = (field, value)-> {
+        By locator = getFieldLocator(field);
+        if (locator == null) {
+            return null;
+        }
+        String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
+        return setValueType(field, element, value);
+    };
+    protected static By getFieldLocator(Field field) {
+        if (field.isAnnotationPresent(FindBy.class)) {
+            FindBy findBy = field.getAnnotation(FindBy.class);
+            return findByToBy(findBy);
+        }
+        if (!field.isAnnotationPresent(UI.class)) {
+            return null;
+        }
+        UI findBy = field.getAnnotation(UI.class);
+        By locator = uiToBy(findBy);
+        return locator != null
+            ? locator
+            : SMART_LOCATOR.execute(field.getName());
+    }
 
     public <T> List<T> getEntityList(Class<T> cl) {
         Field[] allFields = cl.getDeclaredFields();
         List<String> mapList = new ArrayList<>();
         for (Field field : allFields) {
-            FIELD_TO_MAP.execute(field, mapList);
+            String value = GET_COMPLEX_VALUE.execute(field);
+            if (value != null) {
+                mapList.add(value);
+            }
         }
         String objectMapper = "{ " + print(mapList, ", ") + " }";
         return getEntityList(objectMapper, cl);
     }
+    public void fill(Object obj) {
+        setEntity(obj);
+    }
+    public void submit(Object obj, String locator) {
+        setEntity(obj);
+        find(locator).click();
+    }
+    public void submit(Object obj) {
+        submit(obj, SUBMIT_LOCATOR);
+    }
+    public void loginAs(Object obj, String locator) {
+        submit(obj, locator);
+    }
+    public void loginAs(Object obj) {
+        submit(obj);
+    }
+
+    public static String SUBMIT_LOCATOR = "[type=submit]";
+
+    public void setEntity(Object obj) {
+        Field[] allFields = obj.getClass().getDeclaredFields();
+        List<String> mapList = new ArrayList<>();
+        for (Field field : allFields) {
+            Object fieldValue = getValueField(field, obj);
+            if (fieldValue == null) {
+                continue;
+            }
+            String value = SET_COMPLEX_VALUE.execute(field, fieldValue);
+            if (value != null) {
+                mapList.add(value);
+            }
+        }
+        setEntity(print(mapList, ";\n") + ";\nreturn ''");
+    }
+
     public <T> List<T> getEntityList(String objectMap, Class<?> cl) {
         js.setupEntity(cl);
         return js.getEntityList(objectMap);
+    }
+    public void setEntityList(String objectMap) {
+        js.setEntity(objectMap);
     }
 
     public JS findFirst(String by, FilterCondition condition) {

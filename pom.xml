@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.epam.jdi.tools</groupId>
-    <artifactId>js-driver-framework</artifactId>
+    <artifactId>jdi-nova-framework</artifactId>
 	<version>1.0.0</version>
     <name>JS WebDriver</name>
     <packaging>pom</packaging>
@@ -14,10 +14,10 @@
     <modules>
         <module>js-driver</module>
         <module>js-wrappers</module>
-        <module>js-talk</module>
+        <module>jdi-nova</module>
         <module>tests-js-driver</module>
         <module>tests-js-wrappers</module>
-        <module>tests-js-talk</module>
+        <module>tests-jdi-nova</module>
         <module>tests-js-e2e</module>
     </modules>
 

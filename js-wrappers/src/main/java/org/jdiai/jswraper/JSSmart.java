@@ -73,17 +73,21 @@ public class JSSmart extends JSElement {
         return this;
     }
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
+
     public <T> T getEntity(String objectMap) {
         return (T) driver.getOne(objectMap).asObject(entity);
+    }
+    public void setEntity(String objectMap) {
+        driver.getOne(objectMap).asString();
     }
     public <T> T getEntity() {
         return getEntity(GET_ENTITY_MAP.execute(entity));
     }
-    public <T> T setEntity() {
-        return getEntity(GET_ENTITY_MAP.execute(entity));
-    }
     public <T> T getEntity(List<String> attributes) {
         return (T) driver.getOne(attributesToJson(attributes)).asObject(entity);
+    }
+    public void setEntity(List<String> attributes) {
+        setEntity(attributesToJson(attributes));
     }
     public <T> T getEntityFromAttr(String... attributes) {
         return getEntity(newList(attributes));

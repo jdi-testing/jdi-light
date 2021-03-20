@@ -1,7 +1,6 @@
 package org.jdiai.asserts;
 
 import org.jdiai.tools.JS;
-import org.openqa.selenium.WebElement;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;

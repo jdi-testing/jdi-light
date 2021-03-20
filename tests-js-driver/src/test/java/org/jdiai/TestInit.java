@@ -1,6 +1,5 @@
 package org.jdiai;
 
-import org.jdiai.jsbuilder.QueryLogger;
 import org.jdiai.jsdriver.JSDriver;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterSuite;
