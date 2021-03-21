@@ -6,7 +6,7 @@
     <artifactId>tests-js-wrappers</artifactId>
     <name>Tests: JDI JS Wrappers</name>
     <groupId>org.jdiai</groupId>
-    <version>1.0.0</version>
+    <version>0.9.0</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>org.jdiai</groupId>
             <artifactId>js-wrappers</artifactId>
-            <version>1.0.0</version>
+            <version>0.9.0</version>
         </dependency>
 
         <dependency>

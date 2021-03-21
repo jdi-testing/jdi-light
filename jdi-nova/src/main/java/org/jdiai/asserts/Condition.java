@@ -17,8 +17,8 @@ public interface Condition extends JFunc1<JS, Boolean> {
     }
     default String getName(JS element) {
         return getName().replace(" %not%", "")
-                .replace(" %no%", "")
-                .replace("%element%", "'"+element.getName()+"'");
+            .replace(" %no%", "")
+            .replace("%element%", "'"+element.getName()+"'");
     }
     @Override
     default Boolean execute(JS element) {

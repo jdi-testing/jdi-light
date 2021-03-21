@@ -3,6 +3,7 @@ package org.jdiai.tests;
 import com.epam.jdi.tools.DataClass;
 import com.google.gson.JsonObject;
 import org.jdiai.TestInit;
+import org.jdiai.entities.SearchItem;
 import org.jdiai.entities.User;
 import org.jdiai.states.States;
 import org.jdiai.testng.TestNGListener;
