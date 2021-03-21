@@ -1,6 +1,5 @@
 package org.jdiai.page.objects;
 
-import org.jdiai.DataList;
 import org.jdiai.WebPage;
 import org.jdiai.annotations.Title;
 import org.jdiai.annotations.UI;
@@ -16,11 +15,11 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.create;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.jdiai.JSTalk.driver;
+import static org.jdiai.page.objects.Rules.CREATE_RULES;
 import static org.jdiai.tools.JSTalkUtils.findByToBy;
 import static org.jdiai.tools.JSTalkUtils.uiToBy;
 import static org.jdiai.tools.TestIDLocators.getSmartLocator;
@@ -68,12 +67,7 @@ public class PageFactoryUtils {
         }
         return null;
     }
-    static <T> T createInstance(Class<T> cs) {
-        if (cs == null)
-            throw new JSException("Can't init class. Class Type is null.");
-        if (cs.isInterface()) {
-            return (T) new DataList();
-        }
+    static <T> T createPageObject(Class<T> cs) {
         try {
             Constructor<?>[] constructors = cs.getDeclaredConstructors();
             Constructor<?> constructor = first(constructors, c -> c.getParameterCount() == 0);
@@ -88,14 +82,43 @@ public class PageFactoryUtils {
                 try {
                     cnst.setAccessible(true);
                     return (T) cnst.newInstance(driver());
-                } catch (Exception ignore) {
-                }
+                } catch (Exception ignore) { }
             }
         } catch (Exception ex) {
             throw new JSException(ex, format("%s has no appropriate constructors", cs.getSimpleName()));
         }
         throw new JSException(format("%s has no appropriate constructors", cs.getSimpleName()));
     }
+
+    static <T> T createInstance(Class<?> fieldClass) {
+        if (fieldClass == null)
+            throw new JSException("Can't init class. Class Type is null.");
+        if (fieldClass.isInterface()) {
+            CreateRule rule = CREATE_RULES.firstValue(r -> r.condition.execute(fieldClass));
+            if (rule != null) {
+                return (T) rule.createAction.execute(fieldClass);
+            }
+            throw new JSException("Failed to find create rule for " + fieldClass.getSimpleName());
+        }
+        return createWithConstructor(fieldClass);
+    }
+    static <T> T createWithConstructor(Class<?> fieldClass) {
+        Constructor<?>[] constructors = fieldClass.getDeclaredConstructors();
+        Constructor<?> constructor = first(constructors, c -> c.getParameterCount() == 0);
+        if (constructor == null) {
+            throw new JSException(format("%s has no empty constructors", fieldClass.getSimpleName()));
+        }
+        return initWithEmptyConstructor(constructor, fieldClass);
+    }
+    static <T> T initWithEmptyConstructor(Constructor<?> constructor, Class<?> fieldClass) {
+        try {
+            constructor.setAccessible(true);
+            return (T) constructor.newInstance();
+        } catch (Exception ex) {
+            throw new JSException(ex, format("%s failed to init using empty constructors", fieldClass.getSimpleName()));
+        }
+    }
+
     public static void setFieldValue(Field field, Object page, Object instance) {
         try {
             field.set(page, instance);

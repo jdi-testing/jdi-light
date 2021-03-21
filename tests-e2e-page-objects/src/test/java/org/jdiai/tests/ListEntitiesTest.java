@@ -4,7 +4,6 @@ import com.epam.jdi.tools.DataClass;
 import org.jdiai.TestInit;
 import org.jdiai.entities.LoginUser;
 import org.jdiai.entities.SearchItem;
-import org.jdiai.states.States;
 import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -14,8 +13,8 @@ import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static org.jdiai.JSTalk.loginAs;
-import static org.jdiai.entities.User.Roman;
-import static org.jdiai.site.JDISite.*;
+import static org.jdiai.site.JDISite.homePage;
+import static org.jdiai.site.JDISite.searchPage;
 import static org.jdiai.states.States.atHomePage;
 import static org.jdiai.states.States.logout;
 import static org.jdiai.test.data.TestData.SearchResults;

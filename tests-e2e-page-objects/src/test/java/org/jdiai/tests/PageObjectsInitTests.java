@@ -56,7 +56,7 @@ public class PageObjectsInitTests implements TestInit {
     }
 
     @Test
-    public void testss() {
+    public void elementInSectionTest() {
         logout();
         atHomePage();
         homePage().userIcon.click();

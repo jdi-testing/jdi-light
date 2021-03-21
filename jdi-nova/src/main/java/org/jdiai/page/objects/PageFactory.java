@@ -1,35 +1,29 @@
 package org.jdiai.page.objects;
 
-import com.epam.jdi.tools.DataClass;
-import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
-import org.jdiai.interfaces.HasCore;
-import org.jdiai.JS;
 import org.jdiai.JSTalk;
 import org.jdiai.WebPage;
 import org.jdiai.annotations.Site;
-import org.jdiai.interfaces.ISetup;
+import org.jdiai.interfaces.HasCore;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.epam.jdi.tools.LinqUtils.any;
 import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.reflect.Modifier.isStatic;
-import static java.util.Map.of;
 import static org.jdiai.JSTalk.DOMAIN;
-import static org.jdiai.page.objects.PageFactoryUtils.createInstance;
 import static org.jdiai.page.objects.PageFactoryUtils.setFieldValue;
+import static org.jdiai.page.objects.Rules.SETUP_RULES;
 
 public class PageFactory {
     public static JFunc1<Class<?>, Object> CREATE_PAGE =
-        PageFactoryUtils::createInstance;
+        PageFactoryUtils::createPageObject;
     public static JFunc2<Class<?>, Field, Object> CREATE_WEB_PAGE =
         PageFactoryUtils::createWebPage;
     public static JFunc1<Field, Boolean> JS_FIELDS =
@@ -45,12 +39,6 @@ public class PageFactory {
         PageFactoryUtils::getFieldName;
     public static JFunc1<Field, By> GET_LOCATOR =
         PageFactoryUtils::getLocatorFromField;
-    public static Map<String, JAction2<Field, JS>> SETUP_RULES =
-        new HashMap<>(of("Name", (field, instance) -> {
-            String name = GET_NAME.execute(field);
-            instance.setName(name);
-        }));
-
 
     public static void openSite(Class<?> cl) {
         if (cl.isAnnotationPresent(Site.class)) {
@@ -73,35 +61,17 @@ public class PageFactory {
         initPageElements(page);
         return (T) page;
     }
+
     public static void initPageElements(Object page) {
         List<Field> jsFields = filter(page.getClass().getDeclaredFields(), FIELDS_FILTER);
         for (Field field : jsFields) {
-            Object fieldValue = getValueField(field, page);
-            Object instance = fieldValue != null
-                ? fieldValue
-                : createInstance(field.getType());
-            if (isInterface(instance.getClass(), HasCore.class)) {
-                JS core = initJSElement(fieldValue, field, page);
-                ((HasCore) instance).setCore(core);
+            InitInfo info = new InitInfo(page, field);
+            List<SetupRule> rules = SETUP_RULES.filter(
+                rule -> rule.condition.execute(info)).values();
+            for (SetupRule rule : rules) {
+                rule.action.execute(info);
             }
-            boolean hasJSElements = IS_UI_OBJECT.execute(field);
-            if (hasJSElements) {
-                initPageElements(instance);
-            }
-            if (isInterface(instance.getClass(), ISetup.class)) {
-                ((ISetup)instance).setup(field);
-            }
-            setFieldValue(field, page, instance);
+            setFieldValue(field, page, info.instance);
         }
-    }
-
-    private static JS initJSElement(Object fieldValue, Field field, Object parent) {
-        JS instance = fieldValue != null
-            ? (JS) fieldValue
-            : new JS(JSTalk::driver, GET_LOCATOR.execute(field), parent);
-        for (Map.Entry<String, JAction2<Field, JS>> entry : SETUP_RULES.entrySet()) {
-            entry.getValue().execute(field, instance);
-        }
-        return instance;
     }
 }
