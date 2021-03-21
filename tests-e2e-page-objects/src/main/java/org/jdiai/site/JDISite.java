@@ -8,4 +8,5 @@ public class JDISite {
     public static HomePage homePage;
     @Url("/contacts.html")
     public static ContactPage contactPage;
+    public static SeleniumHomePage seleniumHomePage;
 }

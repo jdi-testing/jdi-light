@@ -105,8 +105,8 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public JS(Supplier<WebDriver> driver, By locator, Object parent, boolean useParentLocators) {
         this(driver, locatorsFromParent(locator, parent, useParentLocators));
         this.parent = parent;
-        if (isClass(parent.getClass(), JS.class)) {
-            this.js.updateDriver(((JS) parent).js.jsDriver());
+        if (parent != null && isClass(parent.getClass(), HasCore.class)) {
+            this.js.updateDriver(((HasCore) parent).core().js.jsDriver());
         }
     }
     public JS(WebDriver driver, By locator, Object parent, boolean useParentLocators) {
@@ -716,6 +716,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
     public boolean focused() { return getElement("element === document.activeElement").equalsIgnoreCase("true"); }
 
+    @Override
     public List<By> locators() { return js.jsDriver().locators(); }
     public JSImages imagesData() {
         if (imagesData == null) {

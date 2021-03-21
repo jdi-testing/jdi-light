@@ -11,4 +11,7 @@ public class ContactPage extends WebPage {
     public JS descriptionInLog;
     public JS contactForm;
 
+    @UI("#contact-form")
+    public ContactForm contacts;
+
 }
