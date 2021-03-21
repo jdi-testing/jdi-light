@@ -1,13 +1,15 @@
 package org.jdiai.page.objects;
 
+import com.epam.jdi.tools.DataClass;
 import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
-import org.jdiai.HasCore;
+import org.jdiai.interfaces.HasCore;
 import org.jdiai.JS;
 import org.jdiai.JSTalk;
 import org.jdiai.WebPage;
 import org.jdiai.annotations.Site;
+import org.jdiai.interfaces.ISetup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -31,10 +33,11 @@ public class PageFactory {
     public static JFunc2<Class<?>, Field, Object> CREATE_WEB_PAGE =
         PageFactoryUtils::createWebPage;
     public static JFunc1<Field, Boolean> JS_FIELDS =
-            f -> isInterface(f.getType(), WebElement.class) || isClass(f, HasCore.class);
+        f -> isInterface(f.getType(), WebElement.class) || isClass(f, HasCore.class)
+            || isInterface(f.getType(), List.class);
     public static JFunc1<Field, Boolean> IS_UI_OBJECT = f -> any(f.getType().getDeclaredFields(), JS_FIELDS);
     public static JFunc1<Field, Boolean> FIELDS_FILTER =
-            f -> JS_FIELDS.execute(f) || IS_UI_OBJECT.execute(f);
+        f -> JS_FIELDS.execute(f) || IS_UI_OBJECT.execute(f);
     public static JFunc1<Field, Boolean> PAGES_FILTER =
         f -> isStatic(f.getModifiers()) && (isClass(f.getType(), WebPage.class)
             || IS_UI_OBJECT.execute(f));
@@ -77,12 +80,16 @@ public class PageFactory {
             Object instance = fieldValue != null
                 ? fieldValue
                 : createInstance(field.getType());
-            if (isInterface(field.getType(), HasCore.class)) {
+            if (isInterface(instance.getClass(), HasCore.class)) {
                 JS core = initJSElement(fieldValue, field, page);
                 ((HasCore) instance).setCore(core);
             }
-            if (IS_UI_OBJECT.execute(field)) {
+            boolean hasJSElements = IS_UI_OBJECT.execute(field);
+            if (hasJSElements) {
                 initPageElements(instance);
+            }
+            if (isInterface(instance.getClass(), ISetup.class)) {
+                ((ISetup)instance).setup(field);
             }
             setFieldValue(field, page, instance);
         }

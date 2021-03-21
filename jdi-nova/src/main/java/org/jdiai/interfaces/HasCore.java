@@ -1,6 +1,6 @@
-package org.jdiai;
+package org.jdiai.interfaces;
 
-import org.jdiai.interfaces.HasLocators;
+import org.jdiai.JS;
 import org.openqa.selenium.By;
 
 import java.util.List;

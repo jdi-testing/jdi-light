@@ -1,5 +1,6 @@
 package org.jdiai.page.objects;
 
+import org.jdiai.DataList;
 import org.jdiai.WebPage;
 import org.jdiai.annotations.Title;
 import org.jdiai.annotations.UI;
@@ -15,6 +16,7 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.create;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
@@ -67,9 +69,12 @@ public class PageFactoryUtils {
         return null;
     }
     static <T> T createInstance(Class<T> cs) {
+        if (cs == null)
+            throw new JSException("Can't init class. Class Type is null.");
+        if (cs.isInterface()) {
+            return (T) new DataList();
+        }
         try {
-            if (cs == null)
-                throw new JSException("Can't init class. Class Type is null.");
             Constructor<?>[] constructors = cs.getDeclaredConstructors();
             Constructor<?> constructor = first(constructors, c -> c.getParameterCount() == 0);
             if (constructor != null) {

@@ -9,6 +9,7 @@ import com.epam.jdi.tools.pairs.Pair;
 import com.google.gson.JsonObject;
 import org.jdiai.annotations.UI;
 import org.jdiai.asserts.Condition;
+import org.jdiai.interfaces.HasCore;
 import org.jdiai.interfaces.HasLocators;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.HasParent;
@@ -523,6 +524,10 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public JsonObject getJSObject(String json) {
         return js.getJson(json);
     }
+
+    public <T> T getEntity(Class<T> cl) {
+        return getEntity(GET_OBJECT_MAP.execute(cl), cl);
+    }
     public <T> T getEntity() {
         return js.getEntity(objectMap);
     }
@@ -582,8 +587,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
         return setValueType(field, element, value);
     };
-
-    public <T> List<T> getEntityList(Class<T> cl) {
+    public static JFunc1<Class<?>, String> GET_OBJECT_MAP = cl -> {
         Field[] allFields = cl.getDeclaredFields();
         List<String> mapList = new ArrayList<>();
         for (Field field : allFields) {
@@ -592,8 +596,10 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
                 mapList.add(value);
             }
         }
-        String objectMapper = "{ " + print(mapList, ", ") + " }";
-        return getEntityList(objectMapper, cl);
+        return "{ " + print(mapList, ", ") + " }";
+    };
+    public <T> List<T> getEntityList(Class<T> cl) {
+        return getEntityList(GET_OBJECT_MAP.execute(cl), cl);
     }
     public void fill(Object obj) {
         setEntity(obj);
@@ -669,9 +675,11 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return listToOne("element = elements.find(e => e && e."+ condition + ");\n");
     }
     public JS findFirst(By by, String condition) {
-        return listToOne("element = elements.find(e => { const fel = " +
+        String script = "element = elements.find(e => { const fel = " +
             MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+"; " +
-            "return fel && fel."+ condition + "; });\n");
+            "return fel && fel."+ condition + "; });\n";
+
+        return listToOne(script);
     }
     private JS listToOne(String script) {
         JS result = new JS(driver);

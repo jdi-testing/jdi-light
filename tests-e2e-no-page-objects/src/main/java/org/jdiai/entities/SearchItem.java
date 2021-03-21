@@ -1,4 +1,4 @@
-package org.jdiai.tests;
+package org.jdiai.entities;
 
 import com.epam.jdi.tools.DataClass;
 import org.jdiai.annotations.UI;
@@ -6,9 +6,9 @@ import org.jdiai.jswraper.interfaces.GetValue;
 import org.openqa.selenium.support.FindBy;
 
 public class SearchItem extends DataClass<SearchItem> {
-    @UI(tag = "h3") String title;
-    @FindBy(tagName = "p") String description;
-    @UI("a") @GetValue("href") String link;
+    @UI(tag = "h3") public String title;
+    @FindBy(tagName = "p") public String description;
+    @UI("a") @GetValue("href") public String link;
 
     @Override
     public String toString () {
