@@ -1,6 +1,5 @@
 package org.jdiai.tests;
 
-import com.epam.jdi.tools.DataClass;
 import org.jdiai.TestInit;
 import org.jdiai.entities.LoginUser;
 import org.jdiai.entities.SearchItem;
@@ -37,6 +36,6 @@ public class ListEntitiesTest implements TestInit {
     public void entitiesListTest() {
         List<SearchItem> results = searchPage.searchResults;
         assertEquals(results.get(2).title, "JDI TEST SITE");
-        assertEquals(print(results, DataClass::toString), SearchResults);
+        assertEquals(print(results, SearchItem::toString), SearchResults);
     }
 }
