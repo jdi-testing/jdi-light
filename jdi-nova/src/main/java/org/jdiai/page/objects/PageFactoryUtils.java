@@ -8,10 +8,17 @@ import org.jdiai.jsdriver.JSException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.util.List;
 
+import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.create;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
+import static org.jdiai.JSTalk.driver;
 import static org.jdiai.tools.JSTalkUtils.findByToBy;
 import static org.jdiai.tools.JSTalkUtils.uiToBy;
 import static org.jdiai.tools.TestIDLocators.getSmartLocator;
@@ -59,12 +66,30 @@ public class PageFactoryUtils {
         }
         return null;
     }
-    public static Object createPage(Class<?> cl) {
+    static <T> T createInstance(Class<T> cs) {
         try {
-            return create(cl);
+            if (cs == null)
+                throw new JSException("Can't init class. Class Type is null.");
+            Constructor<?>[] constructors = cs.getDeclaredConstructors();
+            Constructor<?> constructor = first(constructors, c -> c.getParameterCount() == 0);
+            if (constructor != null) {
+                constructor.setAccessible(true);
+                return (T) constructor.newInstance();
+            }
+            List<Constructor<?>> listConst = filter(constructors, c -> c.getParameterCount() == 1);
+            if (isEmpty(listConst))
+                throw new JSException(format("%s has no constructor with %s params", cs.getSimpleName(), 1));
+            for (Constructor<?> cnst : listConst) {
+                try {
+                    cnst.setAccessible(true);
+                    return (T) cnst.newInstance(driver());
+                } catch (Exception ignore) {
+                }
+            }
         } catch (Exception ex) {
-            throw new JSException(ex, "Failed to init page: " + cl.getSimpleName());
+            throw new JSException(ex, format("%s has no appropriate constructors", cs.getSimpleName()));
         }
+        throw new JSException(format("%s has no appropriate constructors", cs.getSimpleName()));
     }
     public static void setFieldValue(Field field, Object page, Object instance) {
         try {

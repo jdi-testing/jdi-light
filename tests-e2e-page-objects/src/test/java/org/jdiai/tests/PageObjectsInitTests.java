@@ -14,6 +14,7 @@ import static org.jdiai.entities.Contacts.Triss;
 import static org.jdiai.entities.LoginUser.Roman;
 import static org.jdiai.page.objects.PageFactory.initElements;
 import static org.jdiai.site.JDISite.contactPage;
+import static org.jdiai.site.JDISite.seleniumHomePage;
 import static org.jdiai.states.States.atHomePage;
 import static org.jdiai.states.States.logout;
 
@@ -36,15 +37,41 @@ public class PageObjectsInitTests implements TestInit {
     public void loginPOInInitTest() {
         loginScenario(homePage());
     }
+
     @Test
     public void loginPOFromSiteTest() {
         loginScenario(JDISite.homePage);
     }
 
-    public void loginScenario(HomePage homePage) {
+    @Test
+    public void seleniumTest() {
         logout();
         atHomePage();
-        homePage.userIcon.click();
+        seleniumHomePage.userIcon.click();
+        loginAs(Roman);
+        contactPage.open();
+        contactPage.contactForm.submit(Triss);
+        contactPage.lastNameInLog.should(have(text("Last Name: " + Triss.lastName)));
+        contactPage.descriptionInLog.should(have(text("Description: " + Triss.description)));
+    }
+
+    @Test
+    public void testss() {
+        logout();
+        atHomePage();
+        homePage().userIcon.click();
+        loginAs(Roman);
+        contactPage.open();
+        contactPage.contactForm.fill(Triss);
+        contactPage.contacts.submitButton.click();
+        contactPage.lastNameInLog.should(have(text("Last Name: " + Triss.lastName)));
+        contactPage.descriptionInLog.should(have(text("Description: " + Triss.description)));
+    }
+
+    public void loginScenario(HomePage page) {
+        logout();
+        atHomePage();
+        page.userIcon.click();
         loginAs(Roman);
         contactPage.open();
         contactPage.contactForm.submit(Triss);
