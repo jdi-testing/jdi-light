@@ -11,12 +11,14 @@ public class Lists extends UIBaseElement<ListsAssert> {
         core().click();
     }
 
+    @JDIAction("Check '{name}'")
     public void check() {
         if (isUnchecked()) {
             toggle();
         }
     }
 
+    @JDIAction("Uncheck '{name}'")
     public void uncheck() {
         if (isChecked()) {
             toggle();

@@ -2,7 +2,7 @@ package com.epam.jdi.light.material.asserts.datadisplay;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.datadispay.Typography;
+import com.epam.jdi.light.material.elements.datadisplay.Typography;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 

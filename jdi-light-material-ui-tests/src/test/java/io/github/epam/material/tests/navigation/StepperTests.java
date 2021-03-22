@@ -13,40 +13,40 @@ public class StepperTests extends TestsInit {
     public void mainStepperTest() {
         navigationStepperHorizontalLinearStepperPage.open();
         stepperFrame.stepper.is().stepperDisplayed();
-        stepperFrame.stepper.is().stepTitleDisplayed("You are on Step #1");
-        stepperFrame.stepper.clickNextButton();
-        stepperFrame.stepper.is().stepTitleDisplayed("You are on Step #2");
-        stepperFrame.stepper.clickNextButton();
-        stepperFrame.stepper.is().stepTitleDisplayed("You are on Step #3");
-        stepperFrame.stepper.clickFinishButton();
-        stepperFrame.stepper.is().stepTitleDisplayed("All steps completed");
-        stepperFrame.stepper.clickResetButton();
-        stepperFrame.stepper.is().stepTitleDisplayed("You are on Step #1");
-        stepperFrame.stepper.clickNextButton();
-        stepperFrame.stepper.clickBackButton();
-        stepperFrame.stepper.is().stepTitleDisplayed("You are on Step #1");
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("You are on Step #1");
+        stepperFrame.stepperNextButton.clickNextButton();
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("You are on Step #2");
+        stepperFrame.stepperNextButton.clickNextButton();
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("You are on Step #3");
+        stepperFrame.stepperFinishButton.clickFinishButton();
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("All steps completed");
+        stepperFrame.stepperResetButton.clickResetButton();
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("You are on Step #1");
+        stepperFrame.stepperNextButton.clickNextButton();
+        stepperFrame.stepperBackButton.clickBackButton();
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("You are on Step #1");
     }
 
     @Test
     public void skipButtonStepperTest() {
         navigationStepperWithOptionalStepPage.open();
         stepperFrame.stepper.is().stepperDisplayed();
-        stepperFrame.stepper.is().stepTitleDisplayed("You are on Step #1");
-        stepperFrame.stepper.clickNextButton();
-        stepperFrame.stepper.clickSkipButton();
-        stepperFrame.stepper.is().stepTitleDisplayed("You are on Step #3");
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("You are on Step #1");
+        stepperFrame.stepperNextButton.clickNextButton();
+        stepperFrame.stepperSkipButton.clickSkipButton();
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("You are on Step #3");
     }
 
     @Test
     public void completeButtonStepperTest() {
         navigationStepperNonlinearStepperPage.open();
         stepperFrame.stepper.is().stepperDisplayed();
-        stepperFrame.stepper.is().stepTitleDisplayed("You are on Step #1");
-        stepperFrame.stepper.clickCompleteStepButton();
-        stepperFrame.stepper.is().stepTitleDisplayed("You are on Step #2");
-        stepperFrame.stepper.clickCompleteStepButton();
-        stepperFrame.stepper.is().stepTitleDisplayed("You are on Step #3");
-        stepperFrame.stepper.clickFinishButton();
-        stepperFrame.stepper.is().stepTitleDisplayed("All steps completed - you're finished");
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("You are on Step #1");
+        stepperFrame.stepperCompleteButton.clickCompleteStepButton();
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("You are on Step #2");
+        stepperFrame.stepperCompleteButton.clickCompleteStepButton();
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("You are on Step #3");
+        stepperFrame.stepperFinishButton.clickFinishButton();
+        stepperFrame.stepperTitle.is().stepTitleDisplayed("All steps completed - you're finished");
     }
 }

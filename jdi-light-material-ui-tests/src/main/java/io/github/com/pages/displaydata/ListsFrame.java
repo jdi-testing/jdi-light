@@ -1,4 +1,4 @@
-package io.github.com.pages.datadisplay;
+package io.github.com.pages.displaydata;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;

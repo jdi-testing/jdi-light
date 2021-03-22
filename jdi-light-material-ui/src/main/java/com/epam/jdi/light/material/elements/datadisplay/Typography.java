@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.elements.datadispay;
+package com.epam.jdi.light.material.elements.datadisplay;
 
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.datadisplay.TypographyAssert;

@@ -8,4 +8,25 @@ public class StepperFrame extends Section {
 
     @JDIStepper(root = "#root")
     public Stepper stepper;
+
+    @JDIStepper(stepperTitle = ".MuiTypography-root.MuiTypography-body1")
+    public Stepper stepperTitle;
+
+    @JDIStepper(stepperNextButton = "//*[text()='Next']/..")
+    public Stepper stepperNextButton;
+
+    @JDIStepper(stepperBackButton = "//*[text()='Back']/..")
+    public Stepper stepperBackButton;
+
+    @JDIStepper(stepperFinishButton = "//*[text()='Finish']/..")
+    public Stepper stepperFinishButton;
+
+    @JDIStepper(stepperResetButton = "//*[text()='Reset']/..")
+    public Stepper stepperResetButton;
+
+    @JDIStepper(stepperSkipButton = "//*[text()='Skip']/..")
+    public Stepper stepperSkipButton;
+
+    @JDIStepper(stepperCompleteStepButton = "//*[text()='Complete Step']/..")
+    public Stepper stepperCompleteButton;
 }

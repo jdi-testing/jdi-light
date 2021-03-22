@@ -13,11 +13,11 @@ import java.lang.annotation.Target;
 public @interface JDIStepper {
 
     @MarkupLocator String root() default "";
-    @MarkupLocator String stepperTitle() default ".MuiTypography-root.MuiTypography-body1";
-    @MarkupLocator String stepperNextButton() default "//*[text()='Next']/..";
-    @MarkupLocator String stepperBackButton() default "//*[text()='Back']/..";
-    @MarkupLocator String stepperFinishButton() default "//*[text()='Finish']/..";
-    @MarkupLocator String stepperResetButton() default "//*[text()='Reset']/..";
-    @MarkupLocator String stepperSkipButton() default "//*[text()='Skip']/..";
-    @MarkupLocator String stepperCompleteStepButton() default "//*[text()='Complete Step']/..";
+    @MarkupLocator String stepperTitle() default "";
+    @MarkupLocator String stepperNextButton() default "";
+    @MarkupLocator String stepperBackButton() default "";
+    @MarkupLocator String stepperFinishButton() default "";
+    @MarkupLocator String stepperResetButton() default "";
+    @MarkupLocator String stepperSkipButton() default "";
+    @MarkupLocator String stepperCompleteStepButton() default "";
 }
