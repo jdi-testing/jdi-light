@@ -42,6 +42,8 @@ import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layouts.ContainerFrame;
+import io.github.com.pages.navigation.BreadcrumbsFrame;
+import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layouts.BoxFrame;
 import io.github.com.pages.layouts.HiddenFrame;
 import io.github.com.pages.navigation.BottomNavigationFrame;
@@ -541,6 +543,28 @@ public class StaticSite {
     public static WebPage defaultPortalPage;
 
     // navigation
+    // breadcrumbs
+    @Frame("storybook-preview-iframe")
+    public static BreadcrumbsFrame breadcrumbsFrame;
+
+    @Url("/material-ui-navigation-breadcrumbs--simple")
+    public static WebPage simpleBreadcrumbsPage;
+
+    @Url("/material-ui-navigation-breadcrumbs--custom-separator")
+    public static WebPage customSeparatorBreadcrumbsPage;
+
+    @Url("/material-ui-navigation-breadcrumbs--with-icons")
+    public static WebPage withIconsBreadcrumbsPage;
+
+    @Url("/material-ui-navigation-breadcrumbs--collapsed")
+    public static WebPage collapsedBreadcrumbsPage;
+
+    @Url("/material-ui-navigation-breadcrumbs--router-integration")
+    public static WebPage routerIntegrationBreadcrumbsPage;
+
+    @Url("/material-ui-navigation-breadcrumbs--customized")
+    public static WebPage customizedBreadcrumbsPage;
+
     // stepper
     @Frame("storybook-preview-iframe")
     public static StepperFrame stepperFrame;
