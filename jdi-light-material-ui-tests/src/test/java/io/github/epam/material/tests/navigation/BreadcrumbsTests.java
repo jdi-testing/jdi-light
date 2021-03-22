@@ -27,6 +27,8 @@ public class BreadcrumbsTests extends TestsInit {
 
         breadcrumbsFrame.breadcrumb.getSeparatorByIndex(1).is().text("›");
         breadcrumbsFrame.breadcrumb.getSeparatorByIndex(2).is().text("›");
+        breadcrumbsFrame.breadcrumb.getSeparatorByIndex(3).is().text("-");
+        breadcrumbsFrame.breadcrumb.getSeparatorByIndex(4).is().text("-");
     }
 
     @Test
@@ -49,6 +51,7 @@ public class BreadcrumbsTests extends TestsInit {
         breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Belts");
         breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).click();
 
+        breadcrumbsFrame.collapsedButton.is().displayed();
         breadcrumbsFrame.collapsedButton.click();
 
         breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
