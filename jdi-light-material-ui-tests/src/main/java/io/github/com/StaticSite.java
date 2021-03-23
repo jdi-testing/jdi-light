@@ -608,8 +608,6 @@ public class StaticSite {
 
     // layouts
     // grid
-    @Frame("storybook-preview-iframe")
-    public static GridFrame gridFrame;
 
     @Url("/material-ui-layout-grid--grid-view")
     public static WebPage defaultGridPage;

@@ -7,11 +7,11 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 public class GridFrame extends Section {
 
     @UI(".MuiGrid-root[1]")
-    public UIElement rootGrid;
+    public static UIElement rootGrid;
 
     @UI(".MuiButton-root[1]")
-    public UIElement firstButton;
+    public static UIElement firstButton;
 
     @UI(".MuiButton-root[2]")
-    public UIElement secondButton;
+    public static UIElement secondButton;
 }
