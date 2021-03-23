@@ -17,3 +17,4 @@ downloads/
 .project
 .classpath
 test-output/
+/package-lock.json
