@@ -43,6 +43,7 @@ import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layouts.BoxFrame;
+import io.github.com.pages.layouts.GridFrame;
 import io.github.com.pages.layouts.HiddenFrame;
 import io.github.com.pages.navigation.BottomNavigationFrame;
 import io.github.com.pages.navigation.LinkFrame;
@@ -604,6 +605,14 @@ public class StaticSite {
 
     @Url("/material-ui-layout-container--default")
     public static WebPage defaultContainerPage;
+
+    // layouts
+    // grid
+    @Frame("storybook-preview-iframe")
+    public static GridFrame gridFrame;
+
+    @Url("/material-ui-layout-grid--grid-view")
+    public static WebPage defaultGridPage;
 
     // login page
     @UI("#login-form")
