@@ -31,9 +31,9 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
   }
 
   private void reflectionSetValue(int thumbIndex, String newThumbStyle,
-                                  String newStyle, String trackStyle,int value, int left, int width) {
+                                  String newStyle, int value, int left, int width) {
 
-    if (isSwitch(trackStyle, thumbIndex, value, left, width)) {
+    if (isSwitch(thumbIndex, value, left, width)) {
       LocalLeft = left;
       int right = left + width;
 
@@ -70,8 +70,6 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     input().setAttribute("value",left + "," + width);
   }
 
-
-
   @JDIAction(value = "Set value '{value}' for '{name}'")
   public void setValue(int thumbIndex, int value) {
     String thumbStyle = thumb(thumbIndex).getAttribute(style);
@@ -86,12 +84,11 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     int width = Integer.parseInt(styles[1]);
     String newStyle = setNewStyle(trackStyle, thumbIndex, value, left, width);
 
-    reflectionSetValue(thumbIndex, newThumbStyle, newStyle, trackStyle,value, left, width);
+    reflectionSetValue(thumbIndex, newThumbStyle, newStyle, value, left, width);
 
   }
 
-
-  private boolean isSwitch(String style, int thumbIndex, int value, int left, int width) {
+  private boolean isSwitch(int thumbIndex, int value, int left, int width) {
     switch (thumbIndex) {
       case 1: return  (value > width + left);
       case 2: return (value < left);
@@ -101,28 +98,28 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
   }
 
   private String setNewStyle(String style, int thumbIndex, int value, int left, int width) {
-
+  LocalLeft = left;
     switch (thumbIndex) {
       case 1:
         if (value > left) {
           if (value > width + left) {
-            left = width + left;
+            LocalLeft = width + left;
             width = value - left;
           } else {
             width -= value - left;
-            left = value;
+            LocalLeft = value;
           }
 
         } else {
           width += left - value;
-          left = value;
+          LocalLeft = value;
         }
         break;
       case 2:
         width += value - width - left;
         if (width < 0) {
           width = left - value;
-          left = value;
+          LocalLeft = value;
         }
         break;
     }
