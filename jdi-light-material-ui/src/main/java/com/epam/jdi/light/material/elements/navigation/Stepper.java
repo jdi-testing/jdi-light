@@ -4,6 +4,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIStepper;
 import com.epam.jdi.light.material.asserts.navigation.StepperAssert;
@@ -14,42 +15,16 @@ import java.lang.reflect.Field;
 public class Stepper extends UIBaseElement<StepperAssert> implements ISetup {
 
     private String root;
-    private String stepperNextButton;
-    private String stepperBackButton;
-    private String stepperFinishButton;
-    private String stepperResetButton;
-    private String stepperSkipButton;
-    private String stepperCompleteStepButton;
+    private String stepperButton;
     private String stepperTitle;
 
-    @JDIAction("Click on '{name}'")
-    public void clickNextButton(){
-        this.find(stepperNextButton).click();
+    private UIElement getButtonByIndex(int index) {
+        return this.finds(stepperButton).get(index);
     }
 
     @JDIAction("Click on '{name}'")
-    public void clickBackButton(){
-        this.find(stepperBackButton).click();
-    }
-
-    @JDIAction("Click on '{name}'")
-    public void clickFinishButton(){
-        this.find(stepperFinishButton).click();
-    }
-
-    @JDIAction("Click on '{name}'")
-    public void clickResetButton(){
-        this.find(stepperResetButton).click();
-    }
-
-    @JDIAction("Click on '{name}'")
-    public void clickSkipButton(){
-        this.find(stepperSkipButton).click();
-    }
-
-    @JDIAction("Click on '{name}'")
-    public void clickCompleteStepButton(){
-        this.find(stepperCompleteStepButton).click();
+    public void clickOnButtonByIndex(int index){
+        getButtonByIndex(index).click();
     }
 
     @JDIAction("Get '{name}'")
@@ -80,11 +55,6 @@ public class Stepper extends UIBaseElement<StepperAssert> implements ISetup {
 
         root = j.root();
         stepperTitle = j.stepperTitle();
-        stepperNextButton = j.stepperNextButton();
-        stepperBackButton = j.stepperBackButton();
-        stepperFinishButton = j.stepperFinishButton();
-        stepperResetButton = j.stepperResetButton();
-        stepperSkipButton = j.stepperSkipButton();
-        stepperCompleteStepButton = j.stepperCompleteStepButton();
+        stepperButton = j.stepperNextButton();
     }
 }

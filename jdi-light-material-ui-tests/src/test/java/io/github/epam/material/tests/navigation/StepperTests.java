@@ -15,16 +15,16 @@ public class StepperTests extends TestsInit {
 
         stepperFrame.stepper.is().stepperDisplayed();
         stepperFrame.stepperTitle.is().text("You are on Step #1");
-        stepperFrame.stepperNextButton.clickNextButton();
+        stepperFrame.stepperButton.clickOnButtonByIndex(1);
         stepperFrame.stepperTitle.is().text("You are on Step #2");
-        stepperFrame.stepperNextButton.clickNextButton();
+        stepperFrame.stepperButton.clickOnButtonByIndex(2);
         stepperFrame.stepperTitle.is().text("You are on Step #3");
-        stepperFrame.stepperFinishButton.clickFinishButton();
+        stepperFrame.stepperButton.clickOnButtonByIndex(2);
         stepperFrame.stepperTitle.is().text("All steps completed");
-        stepperFrame.stepperResetButton.clickResetButton();
+        stepperFrame.stepperButton.clickOnButtonByIndex(1);
         stepperFrame.stepperTitle.is().text("You are on Step #1");
-        stepperFrame.stepperNextButton.clickNextButton();
-        stepperFrame.stepperBackButton.clickBackButton();
+        stepperFrame.stepperButton.clickOnButtonByIndex(1);
+        stepperFrame.stepperButton.clickOnButtonByIndex(1);
         stepperFrame.stepperTitle.is().text("You are on Step #1");
     }
 
@@ -34,8 +34,8 @@ public class StepperTests extends TestsInit {
 
         stepperFrame.stepper.is().stepperDisplayed();
         stepperFrame.stepperTitle.is().text("You are on Step #1");
-        stepperFrame.stepperNextButton.clickNextButton();
-        stepperFrame.stepperSkipButton.clickSkipButton();
+        stepperFrame.stepperButton.clickOnButtonByIndex(1);
+        stepperFrame.stepperButton.clickOnButtonByIndex(2);
         stepperFrame.stepperTitle.is().text("You are on Step #3");
     }
 
@@ -45,11 +45,12 @@ public class StepperTests extends TestsInit {
 
         stepperFrame.stepper.is().stepperDisplayed();
         stepperFrame.stepperTitle.is().text("You are on Step #1");
-        stepperFrame.stepperCompleteButton.clickCompleteStepButton();
+        stepperFrame.stepperButton.clickOnButtonByIndex(2);
         stepperFrame.stepperTitle.is().text("You are on Step #2");
-        stepperFrame.stepperCompleteButton.clickCompleteStepButton();
+        stepperFrame.stepperButton.clickOnButtonByIndex(2);
         stepperFrame.stepperTitle.is().text("You are on Step #3");
-        stepperFrame.stepperFinishButton.clickFinishButton();
+        stepperFrame.stepperButton.clickOnButtonByIndex(3);
+        stepperFrame.stepperButton.clickOnButtonByIndex(3);
         stepperFrame.stepperTitle.is().text("All steps completed - you're finished");
     }
 }

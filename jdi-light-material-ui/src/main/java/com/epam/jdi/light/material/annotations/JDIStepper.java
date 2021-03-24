@@ -15,9 +15,4 @@ public @interface JDIStepper {
     @MarkupLocator String root() default "";
     @MarkupLocator String stepperTitle() default "";
     @MarkupLocator String stepperNextButton() default "";
-    @MarkupLocator String stepperBackButton() default "";
-    @MarkupLocator String stepperFinishButton() default "";
-    @MarkupLocator String stepperResetButton() default "";
-    @MarkupLocator String stepperSkipButton() default "";
-    @MarkupLocator String stepperCompleteStepButton() default "";
 }
