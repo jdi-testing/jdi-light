@@ -14,7 +14,8 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
   private final static String areaValueNow = "aria-valuenow";
   private final static String style = "style";
   private final static String ariaValueText = "aria-valuetext";
-  private int LocalLeft; //local variable for substitution instead of parameter reflectionSetValue to Avoid reassigning parameters
+  private int iOiginalValue; //auxiliary variable to keep original integer values;
+  private int Localvariable; //local variable for substitution instead of parameter reflectionSetValue to Avoid reassigning parameters
 
   public UIElement track() {
     return core().find(By.cssSelector(".MuiSlider-track"));
@@ -32,10 +33,10 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
   private void reflectionSetValue(int thumbIndex, String newThumbStyle,
                                   String newStyle, int value, int left, int width) {
-
-    LocalLeft = left;
-    if (isSwitch(thumbIndex, value, left, width)) {
-      int right = left + width;
+    iOiginalValue = left;
+    Localvariable = left;
+    if (isSwitch(thumbIndex, value, Localvariable, width)) {
+      int right = Localvariable + width;
 
       if (thumbIndex == 1) {
         String rightStyle =  thumb(2).getAttribute("style");
@@ -43,30 +44,30 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
         setAttributes(2, value, newThumbStyle);
 
         setAttributes(1, right, rightStyle);
-        LocalLeft = right;
+        Localvariable = right;
         width = value;
       } else {
         String leftStyle =  thumb(1).getAttribute("style");
 
         setAttributes(1, value, newThumbStyle);
 
-        setAttributes(2, LocalLeft, leftStyle);
-        LocalLeft = width;
+        setAttributes(2, Localvariable, leftStyle);
+        Localvariable = width;
         width = value;
       }
 
     } else {
       setAttributes(thumbIndex, value, newThumbStyle);
       if (thumbIndex == 1) {
-        width += left;
-        LocalLeft = value;
+        width += Localvariable;
+        Localvariable = value;
       } else {
         width = value;
       }
     }
 
     track().setAttribute(style, newStyle);
-    input().setAttribute("value",left + "," + width);
+    input().setAttribute("value", Localvariable + "," + width);
   }
 
   @JDIAction(value = "Set value '{value}' for '{name}'")
@@ -97,30 +98,31 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
   }
 
   private String setNewStyle(String style, int thumbIndex, int value, int left, int width) {
-  LocalLeft = left;
+   iOiginalValue = left;
+    Localvariable = left;
     switch (thumbIndex) {
       case 1:
-        if (value > left) {
-          if (value > width + left) {
-            LocalLeft = width + left;
-            width = value - left;
+        if (value > Localvariable) {
+          if (value > width + Localvariable) {
+            Localvariable = width + Localvariable;
+            width = value - Localvariable;
           } else {
-            width -= value - left;
-            LocalLeft = value;
+            width -= value - Localvariable;
+            Localvariable = value;
           }
 
         } else {
-          width += left - value;
-          LocalLeft = value;
+          width += Localvariable - value;
+          Localvariable = value;
         }
         break;
       case 2:
-        width += value - width - left;
+        width += value - width - Localvariable;
         if (width < 0) {
-          width = left - value;
-          LocalLeft = value;
+          width = Localvariable - value;
+          Localvariable = value;
         }
-        break;
+      default: break;
     }
     style = style.replaceAll("[-?0-9]+", "");
     int start = style.indexOf(" ");
