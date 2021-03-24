@@ -96,6 +96,7 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     switch (thumbIndex) {
       case 1: return  (value > width + left);
       case 2: return (value < left);
+      default: break;
     }
     return false;
   }
