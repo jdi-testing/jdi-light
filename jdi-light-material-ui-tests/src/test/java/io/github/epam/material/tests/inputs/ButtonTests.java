@@ -17,4 +17,11 @@ public class ButtonTests extends TestsInit {
         buttonFrame.button.click();
         buttonFrame.button.has().text("BUTTON");
     }
+
+    @Test
+    public void disabledButton() {
+        inputButtonDisabledPage.shouldBeOpened();
+
+        buttonFrame.button.is().disabled();
+    }
 }
