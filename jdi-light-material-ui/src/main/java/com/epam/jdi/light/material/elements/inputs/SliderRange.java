@@ -50,7 +50,6 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
         setAttributes(1, value, newThumbStyle);
 
-        //setAttributes(2, left, leftStyle);
         setAttributes(2, LocalLeft, leftStyle);
         LocalLeft = width;
         width = value;
