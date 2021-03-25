@@ -96,6 +96,7 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     switch (thumbIndex) {
       case 1: return  (value > width + LocalVariableLeft);
       case 2: return (value < LocalVariableLeft);
+      default: break;
     }
     return false;
   }
@@ -177,6 +178,3 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     return new SliderRangeAssert().set(this);
   }
 }
-
-
-
