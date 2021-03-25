@@ -17,6 +17,7 @@ public class GridAssert extends UIAssert<GridAssert, Grid> {
     }
 
     @JDIAction("Assert that '{name}' is displayed")
+    @Override
     public GridAssert displayed() {
         boolean isDisplayed = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDisplayed());
