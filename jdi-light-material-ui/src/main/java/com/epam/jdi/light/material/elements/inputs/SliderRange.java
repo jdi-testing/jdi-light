@@ -11,7 +11,6 @@ import static com.epam.jdi.light.material.elements.inputs.Slider.getInteger;
 
 public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
-  private int LocalVariableLeft;
   private final static String areaValueNow = "aria-valuenow";
   private final static String style = "style";
   private final static String ariaValueText = "aria-valuetext";
@@ -33,9 +32,10 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
   private void reflectionSetValue(int thumbIndex, String newThumbStyle,
                                   String newStyle, int value, int parameterLeft, int width) {
 
-    LocalVariableLeft = parameterLeft;
-    if (isSwitch(thumbIndex, value, LocalVariableLeft, width)) {
-      int right = LocalVariableLeft + width;
+    int localwidth = width;
+    int LocalLeft = parameterLeft;
+    if (isSwitch(thumbIndex, value, LocalLeft, width)) {
+      int right = LocalLeft + width;
 
       if (thumbIndex == 1) {
         String rightStyle =  thumb(2).getAttribute("style");
@@ -43,31 +43,31 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
         setAttributes(2, value, newThumbStyle);
 
         setAttributes(1, right, rightStyle);
-        LocalVariableLeft = right;
-        width = value;
+        LocalLeft = right;
+        localwidth = value;
       } else {
         String leftStyle =  thumb(1).getAttribute("style");
 
         setAttributes(1, value, newThumbStyle);
 
-        setAttributes(2, LocalVariableLeft, leftStyle);
-        LocalVariableLeft = width;
-        width = value;
+        setAttributes(2, LocalLeft, leftStyle);
+        LocalLeft = width;
+        localwidth = value;
       }
 
     } else {
       setAttributes(thumbIndex, value, newThumbStyle);
       if (thumbIndex == 1) {
-        width += LocalVariableLeft;
-        LocalVariableLeft = value;
+        localwidth += LocalLeft;
+        LocalLeft = value;
       } else {
-        width = value;
+        localwidth = value;
       }
 
     }
 
     track().setAttribute(style, newStyle);
-    input().setAttribute("value",LocalVariableLeft + "," + width);
+    input().setAttribute("value",LocalLeft + "," + width);
   }
 
 
@@ -91,47 +91,47 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
   }
 
 
-  private boolean isSwitch(int thumbIndex, int value, int left, int width) {
-    LocalVariableLeft = left;
+  private boolean isSwitch(int thumbIndex, int value, int parameterLeft, int width) {
+    int LocalLeft = parameterLeft;
+
     switch (thumbIndex) {
-      case 1: return  (value > width + LocalVariableLeft);
-      case 2: return (value < LocalVariableLeft);
+      case 1: return  (value > width + LocalLeft);
+      case 2: return (value < LocalLeft);
       default: break;
     }
     return false;
   }
 
   private String setNewStyle(String style, int thumbIndex, int value, int parameterLeft, int width) {
-
-    LocalVariableLeft = parameterLeft;
+    int LocalLeft = parameterLeft;
     switch (thumbIndex) {
       case 1:
-        if (value > LocalVariableLeft) {
-          if (value > width + LocalVariableLeft) {
-            LocalVariableLeft = width + LocalVariableLeft;
-            width = value - LocalVariableLeft;
+        if (value > LocalLeft) {
+          if (value > width + LocalLeft) {
+            LocalLeft = width + LocalLeft;
+            width = value - LocalLeft;
           } else {
-            width -= value - LocalVariableLeft;
-            LocalVariableLeft = value;
+            width -= value - LocalLeft;
+            LocalLeft = value;
           }
 
         } else {
-          width += LocalVariableLeft - value;
-          LocalVariableLeft = value;
+          width += LocalLeft - value;
+          LocalLeft = value;
         }
         break;
       case 2:
-        width += value - width - LocalVariableLeft;
+        width += value - width - LocalLeft;
         if (width < 0) {
-          width = LocalVariableLeft - value;
-          LocalVariableLeft = value;
+          width = LocalLeft - value;
+          LocalLeft = value;
         }
-        break;
+      default: break;
     }
     style = style.replaceAll("[-?0-9]+", "");
     int start = style.indexOf(" ");
     int end = style.lastIndexOf(" ");
-    return style.substring(0,start + 1) + LocalVariableLeft + style.substring(start + 1, end + 1) + width +
+    return style.substring(0,start + 1) + LocalLeft + style.substring(start + 1, end + 1) + width +
         style.substring(end + 1);
   }
 
