@@ -104,26 +104,27 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
   private String setNewStyle(String style, int thumbIndex, int value, int Left, int width) {
     int LocalLeft = Left;
+    int LocalWidth = width;
     switch (thumbIndex) {
       case 1:
         if (value > LocalLeft) {
           if (value > width + LocalLeft) {
             LocalLeft = width + LocalLeft;
-            width = value - LocalLeft;
+            LocalWidthLocalWidth = value - LocalLeft;
           } else {
-            width -= value - LocalLeft;
+            LocalWidth -= value - LocalLeft;
             LocalLeft = value;
           }
 
         } else {
-          width += LocalLeft - value;
+          LocalWidth += LocalLeft - value;
           LocalLeft = value;
         }
         break;
       case 2:
-        width += value - width - LocalLeft;
-        if (width < 0) {
-          width = LocalLeft - value;
+        LocalWidth += value - width - LocalLeft;
+        if (LocalWidth < 0) {
+          LocalWidth = LocalLeft - value;
           LocalLeft = value;
         }
       default: break;
@@ -131,7 +132,7 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     style = style.replaceAll("[-?0-9]+", "");
     int start = style.indexOf(" ");
     int end = style.lastIndexOf(" ");
-    return style.substring(0,start + 1) + LocalLeft + style.substring(start + 1, end + 1) + width +
+    return style.substring(0,start + 1) + LocalLeft + style.substring(start + 1, end + 1) + LocalWidth +
         style.substring(end + 1);
   }
 
