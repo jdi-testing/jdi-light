@@ -30,10 +30,10 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
   }
 
   private void reflectionSetValue(int thumbIndex, String newThumbStyle,
-                                  String newStyle, int value, int parameterLeft, int width) {
+                                  String newStyle, int value, int Left, int width) {
 
     int localwidth = width;
-    int LocalLeft = parameterLeft;
+    int LocalLeft = Left;
     if (isSwitch(thumbIndex, value, LocalLeft, width)) {
       int right = LocalLeft + width;
 
@@ -91,8 +91,8 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
   }
 
 
-  private boolean isSwitch(int thumbIndex, int value, int parameterLeft, int width) {
-    int LocalLeft = parameterLeft;
+  private boolean isSwitch(int thumbIndex, int value, int Left, int width) {
+    int LocalLeft = Left;
 
     switch (thumbIndex) {
       case 1: return  (value > width + LocalLeft);
@@ -102,8 +102,8 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     return false;
   }
 
-  private String setNewStyle(String style, int thumbIndex, int value, int parameterLeft, int width) {
-    int LocalLeft = parameterLeft;
+  private String setNewStyle(String style, int thumbIndex, int value, int Left, int width) {
+    int LocalLeft = Left;
     switch (thumbIndex) {
       case 1:
         if (value > LocalLeft) {
