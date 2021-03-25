@@ -101,7 +101,6 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     }
     return false;
   }
-
   private String setNewStyle(String style, int thumbIndex, int value, int parameterLeft, int width) {
     String localStyle = style;
     int LocalLeft = parameterLeft;
@@ -132,8 +131,8 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     localStyle = localStyle.replaceAll("[-?0-9]+", "");
     int start = localStyle.indexOf(" ");
     int end = localStyle.lastIndexOf(" ");
-    return style.substring(0,start + 1) + LocalLeft + localStyle.substring(start + 1, end + 1) + width +
-        style.substring(end + 1);
+    return localStyle.substring(0,start + 1) + LocalLeft + localStyle.substring(start + 1, end + 1) + width +
+            localStyle.substring(end + 1);
   }
 
   public UIElement thumb(int index) {
