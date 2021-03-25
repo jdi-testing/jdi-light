@@ -6,6 +6,7 @@ import com.epam.jdi.light.material.asserts.layout.GridAssert;
 
 public class Grid extends UIBaseElement<GridAssert> {
 
+    @JDIAction("Is {name} has attribute")
     public boolean hasAttr(String attr, String value){
         return core().getAttribute(attr).equals(value);
     }

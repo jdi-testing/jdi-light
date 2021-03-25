@@ -2,9 +2,7 @@ package io.github.epam.material.tests.layout;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
-
 import static io.github.com.StaticSite.*;
-
 
 public class GridTests extends TestsInit {
 
@@ -17,6 +15,5 @@ public class GridTests extends TestsInit {
         gridFrame.firstButton.click();
         gridFrame.secondButton.click();
     }
-
 
 }
