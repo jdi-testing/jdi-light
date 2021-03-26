@@ -1,4 +1,4 @@
-package io.github.com.pages.layouts;
+package io.github.com.pages.layout;
 
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;

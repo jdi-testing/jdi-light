@@ -43,7 +43,7 @@ import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layouts.BoxFrame;
-import io.github.com.pages.layouts.GridFrame;
+import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.layouts.HiddenFrame;
 import io.github.com.pages.navigation.BottomNavigationFrame;
 import io.github.com.pages.navigation.LinkFrame;
