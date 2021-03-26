@@ -33,9 +33,9 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
                                   String newStyle, int value, int Left, int width) {
 
     int localwidth = width;
-    int LocalLeft = Left;
-    if (isSwitch(thumbIndex, value, LocalLeft, width)) {
-      int right = LocalLeft + width;
+    int localLeft = Left;
+    if (isSwitch(thumbIndex, value, localLeft, width)) {
+      int right = localLeft + width;
 
       if (thumbIndex == 1) {
         String rightStyle =  thumb(2).getAttribute("style");
@@ -43,23 +43,23 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
         setAttributes(2, value, newThumbStyle);
 
         setAttributes(1, right, rightStyle);
-        LocalLeft = right;
+        localLeft = right;
         localwidth = value;
       } else {
         String leftStyle =  thumb(1).getAttribute("style");
 
         setAttributes(1, value, newThumbStyle);
 
-        setAttributes(2, LocalLeft, leftStyle);
-        LocalLeft = width;
+        setAttributes(2, localLeft, leftStyle);
+        localLeft = width;
         localwidth = value;
       }
 
     } else {
       setAttributes(thumbIndex, value, newThumbStyle);
       if (thumbIndex == 1) {
-        localwidth += LocalLeft;
-        LocalLeft = value;
+        localwidth += localLeft;
+        localLeft = value;
       } else {
         localwidth = value;
       }
@@ -67,7 +67,7 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     }
 
     track().setAttribute(style, newStyle);
-    input().setAttribute("value",LocalLeft + "," + width);
+    input().setAttribute("value",localLeft + "," + width);
   }
 
 
@@ -92,46 +92,46 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
 
   private boolean isSwitch(int thumbIndex, int value, int Left, int width) {
-    int LocalLeft = Left;
+    int localLeft = Left;
 
     switch (thumbIndex) {
-      case 1: return  (value > width + LocalLeft);
-      case 2: return (value < LocalLeft);
+      case 1: return  (value > width + localLeft);
+      case 2: return (value < localLeft);
       default: break;
     }
     return false;
   }
-  private String setNewStyle(String style, int thumbIndex, int value, int parameterLeft, int width) {
+  private String setNewStyle(String style, int thumbIndex, int value, int Left, int width) {
     String localStyle = style;
-    int LocalLeft = parameterLeft;
+    int localLeft = Left;
     switch (thumbIndex) {
       case 1:
-        if (value > LocalLeft) {
-          if (value > width + LocalLeft) {
-            LocalLeft = width + LocalLeft;
-            width = value - LocalLeft;
+        if (value > localLeft) {
+          if (value > width + localLeft) {
+            localLeft = width + localLeft;
+            width = value - localLeft;
           } else {
-            width -= value - LocalLeft;
-            LocalLeft = value;
+            width -= value - localLeft;
+            localLeft = value;
           }
 
         } else {
-          width += LocalLeft - value;
-          LocalLeft = value;
+          width += localLeft - value;
+          localLeft = value;
         }
         break;
       case 2:
-        width += value - width - LocalLeft;
+        width += value - width - localLeft;
         if (width < 0) {
-          width = LocalLeft - value;
-          LocalLeft = value;
+          width = localLeft - value;
+          localLeft = value;
         }
       default: break;
     }
     localStyle = localStyle.replaceAll("[-?0-9]+", "");
     int start = localStyle.indexOf(" ");
     int end = localStyle.lastIndexOf(" ");
-    return localStyle.substring(0,start + 1) + LocalLeft + localStyle.substring(start + 1, end + 1) + width +
+    return localStyle.substring(0,start + 1) + localLeft + localStyle.substring(start + 1, end + 1) + width +
             localStyle.substring(end + 1);
   }
 
