@@ -17,6 +17,4 @@ public class ClickAwayListenerFrame extends Section {
 
     @UI("(//div[contains(@class, 'makeStyles-dropdown')])")
     public UIElement text;
-
-
 }
