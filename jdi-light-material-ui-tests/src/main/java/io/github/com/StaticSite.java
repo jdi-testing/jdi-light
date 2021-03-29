@@ -53,12 +53,7 @@ import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.surfaces.PaperFrame;
-import io.github.com.pages.utils.ModalFrame;
-import io.github.com.pages.utils.PopoverClickFrame;
-import io.github.com.pages.utils.PopoverHoverFrame;
-import io.github.com.pages.utils.PopperFrame;
-import io.github.com.pages.utils.PortalFrame;
-import io.github.com.pages.utils.TransitionFrame;
+import io.github.com.pages.utils.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light")
 public class StaticSite {
@@ -511,6 +506,16 @@ public class StaticSite {
     public static TabFrame verticalTabFrame;
 
     // utils
+    // Click away listener
+    @Frame("storybook-preview-iframe")
+    public static ClickAwayListenerFrame clickAwayListenerFrame;
+
+    @Url("/material-ui-utils-click-away-listener--default")
+    public static WebPage utilsClickAwayListenerDefaultPage;
+
+    @Url("/material-ui-utils-click-away-listener--portal-example")
+    public static WebPage utilsClickAwayListenerPortalExamplePage;
+
     // transition
     @Frame("storybook-preview-iframe")
     public static TransitionFrame transitionFrame;
