@@ -1,9 +1,9 @@
 package io.github.com;
 
+
+import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
@@ -15,15 +15,15 @@ public class MaterialNavigator {
         driver.navigate().to(url);
     }
 
-
     public static void openSection(String firstSection) {
         openMainMaterialPage();
-        driver.findElement(By.xpath("//div[@class='MuiList-root']//span[text()='"+firstSection+"']")).click();
+        driver.findElement(By.xpath(String.format("//div[@class='MuiList-root']//span[text()='%s']", firstSection))).click();
     }
 
     public static void openSection(String firstSection, String secondSection) {
         openMainMaterialPage();
-        driver.findElement(By.xpath("//div[@class='MuiListItemText-root']//span[text()='"+firstSection+"']")).click();
-        new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='MuiListItemText-root']//span[text()='"+secondSection+"']"))).click();
+        driver.findElement(By.xpath(String.format("//div[@class='MuiListItemText-root']//span[text()='%s']", firstSection))).click();
+        new Timer(2000L)
+                .wait(() -> driver.findElement(By.xpath(String.format("//div[@class='MuiListItemText-root']//span[text()='%s']", secondSection))).click());
     }
 }
