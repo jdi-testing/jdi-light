@@ -80,22 +80,6 @@ public class BreadcrumbsTests extends TestsInit {
         breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Trash");
     }
 
-    @Test(expectedExceptions = {RuntimeException.class},
-            expectedExceptionsMessageRegExp = ".*(Expected at least 3 elements but failed).*")
-    public void routerIntegrationBreadcrumbsIconClickTest() {
-        routerIntegrationBreadcrumbsPage.open();
-
-        breadcrumbsFrame.breadcrumb.getButtonByText("Important").click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Inbox");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).is().text("Important");
-
-        breadcrumbsFrame.breadcrumb.getIconByIndex(1).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Inbox");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).is().notVisible();
-    }
-
     @Test
     public void customizedBreadcrumbsTest(){
         customizedBreadcrumbsPage.open();

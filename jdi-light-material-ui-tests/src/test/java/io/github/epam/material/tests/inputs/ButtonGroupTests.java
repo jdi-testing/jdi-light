@@ -27,16 +27,6 @@ public class ButtonGroupTests extends TestsInit {
         buttonGroupFrame.buttonGroup.getButtonByIndex(1).has().text("ONE");
     }
 
-    @Test(expectedExceptions = {RuntimeException.class},
-            expectedExceptionsMessageRegExp = ".*(Can't perform click. Element is disabled)")
-    public void disabledButtonGroupTest() {
-        inputButtonGroupDisabledPage.open();
-
-        buttonGroupFrame.buttonGroup.getButtonByIndex(1).is().disabled();
-        buttonGroupFrame.buttonGroup.getButtonByText("Two").is().disabled();
-        buttonGroupFrame.buttonGroup.getButtonByText("Two").click();
-    }
-
     @Test
     public void splitButtonGroupTest() {
         inputButtonGroupSplitPage.open();

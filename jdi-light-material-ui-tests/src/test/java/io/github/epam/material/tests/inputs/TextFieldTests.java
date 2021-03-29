@@ -37,15 +37,6 @@ public class TextFieldTests extends TestsInit {
         textFieldFrame.textField.is().empty();
     }
 
-    @Test(expectedExceptions = {RuntimeException.class},
-            expectedExceptionsMessageRegExp = ".*(Element is not currently interactable and may not be manipulated).*")
-    public void disabledTextFieldTest() {
-        inputTextFieldDisabledPage.open();
-
-        textFieldFrame.textField.is().disabled();
-        textFieldFrame.textField.setValue(DEFAULT_VALUE);
-    }
-
     @Test
     public void timeTextFieldTest() {
         inputTextFieldTimePage.open();
