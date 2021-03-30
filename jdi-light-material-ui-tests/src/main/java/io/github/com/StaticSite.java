@@ -61,7 +61,7 @@ import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.utils.PortalFrame;
 import io.github.com.pages.utils.TransitionFrame;
 
-@JSite("http://localhost:6006/?path=/story")
+@JSite("https://jdi-testing.github.io/jdi-light")
 public class StaticSite {
 
     // inputs

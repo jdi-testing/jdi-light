@@ -38,6 +38,13 @@ public class TextFieldTests extends TestsInit {
     }
 
     @Test
+    public void disabledTextFieldTest() {
+        inputTextFieldDisabledPage.open();
+
+        textFieldFrame.textField.is().disabled();
+    }
+
+    @Test
     public void timeTextFieldTest() {
         inputTextFieldTimePage.open();
 

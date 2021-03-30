@@ -18,4 +18,11 @@ public class FabTests extends TestsInit {
         fabFrame.fab.is().enabled();
     }
 
+    @Test
+    public void disabledFabTest() {
+        inputFabDisabledPage.open();
+
+        fabFrame.fab.is().disabled();
+    }
+
 }

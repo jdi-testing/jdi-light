@@ -81,6 +81,21 @@ public class BreadcrumbsTests extends TestsInit {
     }
 
     @Test
+    public void routerIntegrationBreadcrumbsIconClickTest() {
+        routerIntegrationBreadcrumbsPage.open();
+
+        breadcrumbsFrame.breadcrumb.getButtonByText("Important").click();
+        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
+        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Inbox");
+        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).is().text("Important");
+
+        breadcrumbsFrame.breadcrumb.getIconByIndex(1).click();
+        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
+        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Inbox");
+        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).is().notVisible();
+    }
+
+    @Test
     public void customizedBreadcrumbsTest(){
         customizedBreadcrumbsPage.open();
 

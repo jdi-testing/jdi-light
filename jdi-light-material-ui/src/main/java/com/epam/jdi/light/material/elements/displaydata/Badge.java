@@ -31,12 +31,12 @@ public class Badge extends UIBaseElement<BadgeAssert> {
         return core().find(BADGE_CONTENT_CLASS).hasClass(BADGE_INVISIBLE_CLASS);
     }
 
-    @JDIAction("Is '{name}' exist")
+    @JDIAction("Is '{name}' dot")
     public boolean isDot() {
         return core().find(BADGE_CONTENT_CLASS).hasClass(BADGE_DOT_CLASS);
     }
 
-    @JDIAction("Is '{name}' exist")
+    @JDIAction("Is '{name}' has '{0}' alignment")
     public boolean hasAlignment(String alignment) {
         return core().find(BADGE_CONTENT_CLASS).hasClass(String.format(BADGE_ALIGNMENT_PATTERN, alignment.replaceAll("\\s+", "")));
     }

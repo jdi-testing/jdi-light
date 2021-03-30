@@ -43,4 +43,11 @@ public class RadioButtonTests extends TestsInit {
         radioButtonFrame.thirdRadioButton.is().unchecked();
         radioButtonFrame.disabledRadioButton.is().unchecked();
     }
+
+    @Test
+    public void disabledRadioButtonTest() {
+        radioDefaultPage.open();
+
+        radioButtonFrame.disabledRadioButton.is().disabled();
+    }
 }

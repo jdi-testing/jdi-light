@@ -29,4 +29,12 @@ public class BoxTests extends TestsInit {
         boxFrame.outlinedBox.click();
         boxFrame.outlinedBox.is().text(hasToString("BUTTON"));
     }
+
+    @Test
+    public void disabledBoxTest() {
+        defaultBoxPage.open();
+
+        boxFrame.disabledBox.is().text(hasToString("BUTTON"));
+        boxFrame.disabledBox.is().disabled();
+    }
 }

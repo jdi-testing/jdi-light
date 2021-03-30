@@ -28,6 +28,14 @@ public class ButtonGroupTests extends TestsInit {
     }
 
     @Test
+    public void disabledButtonGroupTest() {
+        inputButtonGroupDisabledPage.open();
+
+        buttonGroupFrame.buttonGroup.getButtonByIndex(1).is().disabled();
+        buttonGroupFrame.buttonGroup.getButtonByText("Two").is().disabled();
+    }
+
+    @Test
     public void splitButtonGroupTest() {
         inputButtonGroupSplitPage.open();
 
