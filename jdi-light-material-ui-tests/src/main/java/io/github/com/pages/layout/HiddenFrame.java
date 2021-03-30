@@ -1,8 +1,8 @@
-package io.github.com.pages.layouts;
+package io.github.com.pages.layout;
 
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.layouts.Hidden;
+import com.epam.jdi.light.material.elements.layout.Hidden;
 
 public class HiddenFrame extends Section {
     @UI(".MuiTypography-root")
