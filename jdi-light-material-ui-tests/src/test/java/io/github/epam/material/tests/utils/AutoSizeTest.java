@@ -13,7 +13,7 @@ public class AutoSizeTest extends TestsInit {
     private static final String FOUR_LINES = "1\n2\n3\n4";
 
     @Test
-    public void defaultAreaHeightIncreasesTest(){
+    public void defaultAreaHeightIncreasesTest() {
         textAreaAutoSizeDefaultPage.open();
         initialHeight = textFieldFrame.textAreaAutoSize.getSize().height;
         textFieldFrame.textAreaAutoSize.setValue(FOUR_LINES);
@@ -21,7 +21,7 @@ public class AutoSizeTest extends TestsInit {
     }
 
     @Test
-    public void defaultAreaHeightDecreasesTest(){
+    public void defaultAreaHeightDecreasesTest() {
         textAreaAutoSizeDefaultPage.open();
         textFieldFrame.textAreaAutoSize.addNewLine(FOUR_LINES);
         initialHeight = textFieldFrame.textAreaAutoSize.getSize().height;
