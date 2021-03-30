@@ -35,7 +35,7 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     int localWidth = width;
     int localLeft = left;
     if (isSwitch(thumbIndex, value, localLeft, width)) {
-      int right = localLeft + width;
+      int right = localLeft + localWidth;
 
       if (thumbIndex == 1) {
         String rightStyle =  thumb(2).getAttribute("style");
