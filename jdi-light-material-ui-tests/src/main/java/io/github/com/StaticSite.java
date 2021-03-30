@@ -150,6 +150,16 @@ public class StaticSite {
     @Url("/material-ui-inputs-text-field--time")
     public static WebPage inputTextFieldTimePage;
 
+    //text area Autosize
+    @Url("/material-ui-utils-textarea-autosize--default")
+    public static WebPage textAreaAutoSizeDefaultPage;
+
+    @Url("/material-ui-utils-textarea-autosize--max-height")
+    public static WebPage textAreaAutoSizeMaxHeightPage;
+
+    @Url("/material-ui-utils-textarea-autosize--min-height")
+    public static WebPage textAreaAutoSizeMinHeightPage;
+
     //checkbox
     @Frame("storybook-preview-iframe")
     public static CheckboxFrame checkboxFrame;
