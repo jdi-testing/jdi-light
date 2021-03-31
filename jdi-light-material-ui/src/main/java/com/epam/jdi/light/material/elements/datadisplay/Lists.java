@@ -36,13 +36,11 @@ public class Lists extends UIBaseElement<ListsAssert> {
     }
 
     @JDIAction("Is '{name} disabled")
-    @Override
     public boolean isDisabled() {
         return core().hasClass("Mui-disabled");
     }
 
     @JDIAction("Is '{name} enabled")
-    @Override
     public boolean isEnabled() {
         return !isDisabled();
     }

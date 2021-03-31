@@ -80,8 +80,7 @@ public class BreadcrumbsTests extends TestsInit {
         breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Trash");
     }
 
-    @Test(expectedExceptions = {RuntimeException.class},
-            expectedExceptionsMessageRegExp = ".*(Expected at least 3 elements but failed).*")
+    @Test
     public void routerIntegrationBreadcrumbsIconClickTest() {
         routerIntegrationBreadcrumbsPage.open();
 

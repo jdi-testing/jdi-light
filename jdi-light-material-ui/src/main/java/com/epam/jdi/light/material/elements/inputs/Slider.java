@@ -109,10 +109,10 @@ public class Slider extends UIBaseElement<SliderAssert> {
   }
 
   private String setNewStyle(String style, int value) {
-    style = style.replaceAll("[-?0-9]+", "");
-    int perInx = style.indexOf("%");
-    return style.substring(0, perInx) + 0 + style.substring(perInx, style.length()-2)
-        + value + style.substring(style.length()-2);
+    String styleLocal = style.replaceAll("[-?0-9]+", "");
+    int perInx = styleLocal.indexOf("%");
+    return styleLocal.substring(0, perInx) + 0 + styleLocal.substring(perInx, styleLocal.length() - 2)
+            + value + styleLocal.substring(styleLocal.length() - 2);
   }
 
   @Override
@@ -120,4 +120,3 @@ public class Slider extends UIBaseElement<SliderAssert> {
     return new SliderAssert().set(this);
   }
 }
-
