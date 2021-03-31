@@ -4,11 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
 import static io.github.com.MaterialNavigator.openSection;
-import static io.github.com.StaticSite.buttonFrame;
-import static io.github.com.StaticSite.inputButtonDefaultPage;
-import static io.github.com.StaticSite.inputButtonDisabledPage;
-import static io.github.com.pages.inputs.ButtonFrame.checkField;
-import static io.github.com.pages.inputs.ButtonFrame.containedButton;
+import static io.github.com.pages.inputs.ButtonFrame.*;
 
 public class ButtonTests extends TestsInit {
 
@@ -18,24 +14,49 @@ public class ButtonTests extends TestsInit {
 
         containedButton.getDefaultContainedButton().click();
         containedButton.getDefaultContainedButton().is().text("DEFAULT");
-        checkField.is().text("Last click: Default");
+        checkContainedField.is().text("Last click: Default");
 
         containedButton.getPrimaryContainedButton().click();
         containedButton.getPrimaryContainedButton().is().text("PRIMARY");
-        checkField.is().text("Last click: Primary");
+        checkContainedField.is().text("Last click: Primary");
 
         containedButton.getSecondaryContainedButton().click();
         containedButton.getSecondaryContainedButton().is().text("SECONDARY");
-        checkField.is().text("Last click: Secondary");
+        checkContainedField.is().text("Last click: Secondary");
 
         containedButton.getDisabledContainedButton().is().text("DISABLED");
         containedButton.getDisabledContainedButton().is().attr("disabled");
-        containedButton.getDisabledContainedButton().hasClass("Mui-disabled");
+        containedButton.getDisabledContainedButton().is().disabled();
 
         containedButton.getLinkContainedButton().click();
         containedButton.getLinkContainedButton().is().text("LINK");
-        checkField.is().text("Last click: Link");
+        checkContainedField.is().text("Last click: Link");
         containedButton.getLinkContainedButton().is().notVisible();
     }
 
+    @Test
+    public void textButtonTest() {
+        openSection("Buttons");
+
+        textButton.getDefaultTextButton().click();
+        textButton.getDefaultTextButton().is().text("DEFAULT");
+        checkTextField.is().text("Last click: Default");
+
+        textButton.getPrimaryTextButton().click();
+        textButton.getPrimaryTextButton().is().text("PRIMARY");
+        checkTextField.is().text("Last click: Primary");
+
+        textButton.getSecondaryTextButton().click();
+        textButton.getSecondaryTextButton().is().text("SECONDARY");
+        checkTextField.is().text("Last click: Secondary");
+
+        textButton.getDisabledTextButton().is().text("DISABLED");
+        textButton.getDisabledTextButton().is().attr("disabled");
+        textButton.getDisabledTextButton().hasClass("Mui-disabled");
+
+        textButton.getLinkTextButton().click();
+        textButton.getLinkTextButton().is().text("LINK");
+        checkTextField.is().text("Last click: Link");
+        textButton.getLinkTextButton().is().notVisible();
+    }
 }
