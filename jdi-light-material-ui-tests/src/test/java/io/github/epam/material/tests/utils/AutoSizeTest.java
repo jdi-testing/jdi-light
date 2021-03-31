@@ -64,7 +64,7 @@ public class AutoSizeTest extends TestsInit {
     }
 
     @Test
-    public void maxAreaReducesWhenClearLinesTest() {
+    public void maxAreaHeightDecreasesWhenClearLinesTest() {
         textAreaAutoSizeMaxHeightPage.open();
         initialHeight = textFieldFrame.textAreaAutoSize.getSize().height;
         textFieldFrame.textAreaAutoSize.setValue("");
