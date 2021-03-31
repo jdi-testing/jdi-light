@@ -11,12 +11,14 @@ public class Lists extends UIBaseElement<ListsAssert> {
         core().click();
     }
 
+    @JDIAction("Check '{name}'")
     public void check() {
         if (isUnchecked()) {
             toggle();
         }
     }
 
+    @JDIAction("Uncheck '{name}'")
     public void uncheck() {
         if (isChecked()) {
             toggle();
@@ -34,13 +36,11 @@ public class Lists extends UIBaseElement<ListsAssert> {
     }
 
     @JDIAction("Is '{name} disabled")
-    @Override
     public boolean isDisabled() {
         return core().hasClass("Mui-disabled");
     }
 
     @JDIAction("Is '{name} enabled")
-    @Override
     public boolean isEnabled() {
         return !isDisabled();
     }

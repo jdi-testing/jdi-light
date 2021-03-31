@@ -1,4 +1,4 @@
-package io.github.epam.material.tests.layouts;
+package io.github.epam.material.tests.layout;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
@@ -30,13 +30,11 @@ public class BoxTests extends TestsInit {
         boxFrame.outlinedBox.is().text(hasToString("BUTTON"));
     }
 
-    @Test(expectedExceptions = {RuntimeException.class},
-            expectedExceptionsMessageRegExp = ".*(Can't perform click. Element is disabled)")
+    @Test
     public void disabledBoxTest() {
         defaultBoxPage.open();
 
         boxFrame.disabledBox.is().text(hasToString("BUTTON"));
         boxFrame.disabledBox.is().disabled();
-        boxFrame.disabledBox.click();
     }
 }

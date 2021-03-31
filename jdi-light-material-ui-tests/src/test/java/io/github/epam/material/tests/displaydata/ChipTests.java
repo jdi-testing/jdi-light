@@ -13,7 +13,7 @@ public class ChipTests extends TestsInit {
         displayDataDefaultChipPage.open();
 
         basicCheck();
-        disabledCheck(); // first variant of class value
+        disabledCheck();// first variant of class value
         clickableCheck(3);
         clickableLinkCheck(7);
     }

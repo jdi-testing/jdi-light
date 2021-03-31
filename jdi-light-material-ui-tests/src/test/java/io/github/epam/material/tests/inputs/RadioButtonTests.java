@@ -44,11 +44,10 @@ public class RadioButtonTests extends TestsInit {
         radioButtonFrame.disabledRadioButton.is().unchecked();
     }
 
-    @Test(expectedExceptions = {RuntimeException.class},
-            expectedExceptionsMessageRegExp = "(element click intercepted).*")
+    @Test
     public void disabledRadioButtonTest() {
         radioDefaultPage.open();
 
-        radioButtonFrame.disabledRadioButton.toggle();
+        radioButtonFrame.disabledRadioButton.is().disabled();
     }
 }
