@@ -12,6 +12,6 @@ public class StepperFrame extends Section {
     @JDIStepper(stepperTitle = ".MuiTypography-root.MuiTypography-body1")
     public Stepper stepperTitle;
 
-    @JDIStepper(stepperNextButton = "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-text']")
+    @JDIStepper(stepperButtonByIndex = "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-text']")
     public Stepper stepperButton;
 }

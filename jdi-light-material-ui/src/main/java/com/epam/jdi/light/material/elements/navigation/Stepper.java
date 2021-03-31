@@ -55,6 +55,6 @@ public class Stepper extends UIBaseElement<StepperAssert> implements ISetup {
 
         root = j.root();
         stepperTitle = j.stepperTitle();
-        stepperButton = j.stepperNextButton();
+        stepperButton = j.stepperButtonByIndex();
     }
 }

@@ -19,7 +19,7 @@ public class ButtonTests extends TestsInit {
     }
 
     @Test
-    public void disabledButton() {
+    public void disabledButtonTest() {
         inputButtonDisabledPage.shouldBeOpened();
 
         buttonFrame.button.is().disabled();
