@@ -61,7 +61,7 @@ import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.utils.PortalFrame;
 import io.github.com.pages.utils.TransitionFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light")
+@JSite("https://jdi-testing.github.io/jdi-light/material/")
 public class StaticSite {
 
     // inputs
