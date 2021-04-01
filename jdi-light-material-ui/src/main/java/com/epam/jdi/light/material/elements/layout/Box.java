@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.elements.layouts;
+package com.epam.jdi.light.material.elements.layout;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;

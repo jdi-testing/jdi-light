@@ -1,6 +1,6 @@
-package io.github.epam.material.tests.layouts;
+package io.github.epam.material.tests.layout;
 
-import com.epam.jdi.light.material.elements.layouts.Hidden;
+import com.epam.jdi.light.material.elements.layout.Hidden;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
