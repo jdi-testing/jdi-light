@@ -2,7 +2,7 @@ package com.epam.jdi.light.material.elements.datadisplay;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.material.asserts.datadisplay.ListsAssert;
+import com.epam.jdi.light.material.asserts.displaydata.ListsAssert;
 
 public class Lists extends UIBaseElement<ListsAssert> {
 
