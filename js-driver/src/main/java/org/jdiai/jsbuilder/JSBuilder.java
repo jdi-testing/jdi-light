@@ -139,8 +139,10 @@ public class JSBuilder implements IJSBuilder {
         return addJSCode("element.dispatchEvent(new Event('" + event + "', { " + options + " }));\n");
     }
     protected String getCollector(String collectResult) {
+        if (collectResult == null) {
+            return "";
+        }
         if (smartStringify) {
-            if (collectResult.contains(""))
             if (collectResult.trim().contains("return {") && collectResult.trim().contains("}")) {
                 return collectResult.replace("return {", "return JSON.stringify({")
                     .replace("}", "})");

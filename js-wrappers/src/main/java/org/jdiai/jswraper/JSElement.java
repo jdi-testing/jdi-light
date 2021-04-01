@@ -128,7 +128,7 @@ public class JSElement {
 
     // region protected
     protected String attributesToJson(List<String> attributes) {
-        return  "{ " + print(map(attributes, el -> "'" + el + "': element." + el), ", ") + " }";
+        return  "{ " + print(map(attributes, attr -> "'" + attr + "': element." + attr), ", ") + " }";
     }
     // endregion
 }
