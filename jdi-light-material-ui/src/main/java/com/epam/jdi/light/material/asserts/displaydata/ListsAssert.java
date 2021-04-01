@@ -2,7 +2,7 @@ package com.epam.jdi.light.material.asserts.displaydata;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.datadisplay.Lists;
+import com.epam.jdi.light.material.elements.displaydata.Lists;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
