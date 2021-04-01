@@ -30,14 +30,14 @@ public class ComplexButtonAssert extends UIAssert<ComplexButtonAssert, ComplexBu
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' has attribute")
     @Override
     public ComplexButtonAssert attr(String attrName) {
         jdiAssert(element().hasAttribute(attrName), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' is not visible")
     @Override
     public ComplexButtonAssert notVisible() {
         jdiAssert(element().isNotVisible(), Matchers.is(true));

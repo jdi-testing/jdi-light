@@ -24,23 +24,23 @@ public class IconButton extends UIBaseElement<IconButtonAssert> implements ISetu
     String shoppingCardIcon;
 
 
-    @JDIAction("Get delete button")
+    @JDIAction("Get delete enabled button")
     public IconButton getDeleteEnabledButton() {
         return new IconButton(core().find(deleteEnabledButton));
     }
 
-    @JDIAction("Get delete icon")
+    @JDIAction("Get delete enabled icon")
     public IconButton getDeleteEnabledIcon() {
         return new IconButton(core().find(deleteEnabledIcon));
     }
 
-    @JDIAction("Get send button")
+    @JDIAction("Get delete disabled button")
     public IconButton getDeleteDisabledButton() {
         return new IconButton(core().find(deleteDisabledButton));
     }
 
 
-    @JDIAction("Get send icon")
+    @JDIAction("Get delete disabled icon")
     public IconButton getDeleteDisabledIcon() {
         return new IconButton(core().find(deleteDisabledIcon));
     }

@@ -30,14 +30,14 @@ public class CustomizedButtonAssert extends UIAssert<CustomizedButtonAssert, Cus
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' has attribute")
     @Override
     public CustomizedButtonAssert attr(String attrName) {
         jdiAssert(element().hasAttribute(attrName), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' is not visible")
     @Override
     public CustomizedButtonAssert notVisible() {
         jdiAssert(element().isNotVisible(), Matchers.is(true));

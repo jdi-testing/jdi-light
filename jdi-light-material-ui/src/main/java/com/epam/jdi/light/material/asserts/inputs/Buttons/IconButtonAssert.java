@@ -31,14 +31,14 @@ public class IconButtonAssert extends UIAssert<IconButtonAssert, IconButton> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' has attribute")
     @Override
     public IconButtonAssert attr(String attrName) {
         jdiAssert(element().hasAttribute(attrName), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' not visible")
     @Override
     public IconButtonAssert notVisible() {
         jdiAssert(element().isNotVisible(), Matchers.is(true));

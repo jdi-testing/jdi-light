@@ -30,14 +30,14 @@ public class TextButtonAssert extends UIAssert<TextButtonAssert, TextButton> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' has attribute")
     @Override
     public TextButtonAssert attr(String attrName) {
         jdiAssert(element().hasAttribute(attrName), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' is not visible")
     @Override
     public TextButtonAssert notVisible() {
         jdiAssert(element().isNotVisible(), Matchers.is(true));
