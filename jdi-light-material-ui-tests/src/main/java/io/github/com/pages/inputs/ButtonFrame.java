@@ -3,9 +3,11 @@ package io.github.com.pages.inputs;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.annotations.JDIContainedButtons;
+import com.epam.jdi.light.material.annotations.JDIIconButtons;
 import com.epam.jdi.light.material.annotations.JDIIconLabelButtons;
 import com.epam.jdi.light.material.annotations.JDITextButtons;
 import com.epam.jdi.light.material.elements.inputs.Button;
+import com.epam.jdi.light.material.elements.inputs.Buttons.IconButton;
 import com.epam.jdi.light.material.elements.inputs.Buttons.IconLabelButton;
 import com.epam.jdi.light.material.elements.inputs.Buttons.TextButton;
 
@@ -19,6 +21,9 @@ public class ButtonFrame extends WebPage {
 
     @UI("p#labeledLastClick")
     public static IconLabelButton checkIconLabelField;
+
+    @UI("p#iconLastClick")
+    public static IconButton checkIconField;
 
     @JDIContainedButtons(
             defaultButton = "//span[text()='Default']/parent::button[contains(@class,'MuiButton-contained')]",
@@ -53,4 +58,16 @@ public class ButtonFrame extends WebPage {
             saveAllIcon = "//span[text()='Save all']/child::span[contains(@class,'MuiButton-iconSizeLarge')]"
     )
     public static IconLabelButton iconLabelButton;
+
+    @JDIIconButtons(
+            deleteEnabledButton = "//button[contains(@class,'MuiIconButton-root')][1]",
+            deleteEnabledIcon = "//button[contains(@class,'MuiIconButton-root')][1]/child::span[1]",
+            deleteDisabledButton = "//button[contains(@class,'MuiIconButton-root')][2]",
+            deleteDisabledIcon = "//button[contains(@class,'MuiIconButton-root')][1]/following::span[1]",
+            alarmButton = "//button[contains(@aria-label,'add an alarm')]",
+            alarmIcon = "//button[contains(@aria-label,'add an alarm')]/child::span[1]",
+            shoppingCardButton = "//button[contains(@aria-label,'add to shopping cart')]",
+            shoppingCardIcon = "//button[contains(@aria-label,'add to shopping cart')][1]/child::span[1]"
+    )
+    public static IconButton iconButton;
 }

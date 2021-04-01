@@ -94,4 +94,25 @@ public class ButtonTests extends TestsInit {
         checkIconLabelField.is().text("Last click: Save all");
         iconLabelButton.getSaveAllIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
     }
+
+    @Test
+    public void iconButtonTest() {
+        openSection("Buttons");
+
+        iconButton.getDeleteEnabledButton().click();
+        checkIconField.is().text("Last click: Delete enabled");
+        iconButton.getDeleteEnabledIcon().is().hasSvg("MuiSvgIcon-root");
+
+        iconButton.getDeleteDisabledButton().is().attr("disabled");
+        iconButton.getDeleteEnabledButton().hasClass("Mui-disabled");
+        iconButton.getDeleteDisabledIcon().is().hasSvg("MuiSvgIcon-root");
+
+        iconButton.getAlarmButton().click();
+        checkIconField.is().text("Last click: Alarm");
+        iconButton.getAlarmIcon().is().hasSvg("MuiSvgIcon-root");
+
+        iconButton.getShoppingCardButton().click();
+        checkIconField.is().text("Last click: Shopping cart");
+        iconButton.getShoppingCardIcon().is().hasSvg("MuiSvgIcon-root");
+    }
 }
