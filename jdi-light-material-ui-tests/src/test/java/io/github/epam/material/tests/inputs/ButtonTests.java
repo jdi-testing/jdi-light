@@ -59,4 +59,39 @@ public class ButtonTests extends TestsInit {
         checkTextField.is().text("Last click: Link");
         textButton.getLinkTextButton().is().notVisible();
     }
+
+    @Test
+    public void iconLabelButtonTest() {
+        openSection("Buttons");
+
+        iconLabelButton.getDeleteIconLabelButton().click();
+        iconLabelButton.getDeleteIconLabelButton().is().text("DELETE");
+        checkIconLabelField.is().text("Last click: Delete");
+        iconLabelButton.getDeleteIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
+
+        iconLabelButton.getSendIconLabelButton().click();
+        iconLabelButton.getSendIconLabelButton().is().text("SEND\nSEND");
+        checkIconLabelField.is().text("Last click: Sendsend");
+        iconLabelButton.getSendIconLabelIcon().is().displayedSpanIcon();
+
+        iconLabelButton.getUploadIconLabelButton().click();
+        iconLabelButton.getUploadIconLabelButton().is().text("UPLOAD");
+        checkIconLabelField.is().text("Last click: Upload");
+        iconLabelButton.getUploadIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
+
+        iconLabelButton.getTalkIconLabelButton().is().attr("disabled");
+        iconLabelButton.getTalkIconLabelButton().is().text("TALK");
+        iconLabelButton.getTalkIconLabelButton().hasClass("Mui-disabled");
+        iconLabelButton.getTalkIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
+
+        iconLabelButton.getSaveIconLabelButton().click();
+        iconLabelButton.getSaveIconLabelButton().is().text("SAVE");
+        checkIconLabelField.is().text("Last click: Save");
+        iconLabelButton.getSaveIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
+
+        iconLabelButton.getSaveAllIconLabelButton().click();
+        iconLabelButton.getSaveAllIconLabelButton().is().text("SAVE ALL");
+        checkIconLabelField.is().text("Last click: Save all");
+        iconLabelButton.getSaveAllIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
+    }
 }
