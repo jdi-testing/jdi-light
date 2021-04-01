@@ -115,4 +115,22 @@ public class ButtonTests extends TestsInit {
         checkIconField.is().text("Last click: Shopping cart");
         iconButton.getShoppingCardIcon().is().hasSvg("MuiSvgIcon-root");
     }
+
+    @Test
+    public void customizedButtonTest() {
+        openSection("Buttons");
+
+        customizedButton.getCustomCSSButton().click();
+        customizedButton.getCustomCSSButton().is().text("CUSTOM CSS");
+        checkCustomizedField.is().text("Last click: Custom CSS");
+
+        customizedButton.getThemeProviderButton().click();
+        customizedButton.getThemeProviderButton().is().text("THEME PROVIDER");
+        checkCustomizedField.is().text("Last click: Theme Provider");
+
+        customizedButton.getBootstrapButton().click();
+        customizedButton.getBootstrapButton().is().text("Bootstrap");
+        checkCustomizedField.is().text("Last click: Bootstrap");
+
+    }
 }

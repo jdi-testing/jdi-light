@@ -2,11 +2,9 @@ package io.github.com.pages.inputs;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.annotations.JDIContainedButtons;
-import com.epam.jdi.light.material.annotations.JDIIconButtons;
-import com.epam.jdi.light.material.annotations.JDIIconLabelButtons;
-import com.epam.jdi.light.material.annotations.JDITextButtons;
+import com.epam.jdi.light.material.annotations.*;
 import com.epam.jdi.light.material.elements.inputs.Button;
+import com.epam.jdi.light.material.elements.inputs.Buttons.CustomizedButton;
 import com.epam.jdi.light.material.elements.inputs.Buttons.IconButton;
 import com.epam.jdi.light.material.elements.inputs.Buttons.IconLabelButton;
 import com.epam.jdi.light.material.elements.inputs.Buttons.TextButton;
@@ -24,6 +22,9 @@ public class ButtonFrame extends WebPage {
 
     @UI("p#iconLastClick")
     public static IconButton checkIconField;
+
+    @UI("p#customizedLastClick")
+    public static CustomizedButton checkCustomizedField;
 
     @JDIContainedButtons(
             defaultButton = "//span[text()='Default']/parent::button[contains(@class,'MuiButton-contained')]",
@@ -70,4 +71,11 @@ public class ButtonFrame extends WebPage {
             shoppingCardIcon = "//button[contains(@aria-label,'add to shopping cart')][1]/child::span[1]"
     )
     public static IconButton iconButton;
+
+    @JDICustomizedButtons(
+            customCSSButton = "//span[text()='Custom CSS']/parent::button[contains(@class,'MuiButton-contained')]",
+            themeProviderButton = "//span[text()='Theme Provider']/parent::button[contains(@class,'MuiButton-contained')]",
+            bootstrapButton = "//span[text()='Bootstrap']/parent::button[contains(@class,'MuiButton-contained')]"
+    )
+    public static CustomizedButton customizedButton;
 }
