@@ -13,11 +13,6 @@ public class Paper extends UIBaseElement<PaperAssert> {
         return core().getText();
     }
 
-    @JDIAction("Get inner element of '{name}'")
-    public UIElement getInnerElement() {
-        return this.find(By.cssSelector("*"));
-    }
-
     @Override
     public PaperAssert is() {
         return new PaperAssert().set(this);

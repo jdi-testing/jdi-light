@@ -1,4 +1,4 @@
-package io.github.epam.material.tests.datadisplay;
+package io.github.epam.material.tests.displaydata;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;

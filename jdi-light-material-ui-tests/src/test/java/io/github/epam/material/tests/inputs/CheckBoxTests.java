@@ -11,7 +11,7 @@ public class CheckBoxTests extends TestsInit {
 
     @Test
     public void primaryCheckBoxTest() {
-        primaryCheckBoxPage.shouldBeOpened();
+        primaryCheckBoxPage.open();
         checkboxFrame.checkbox.is().enabled();
         checkboxFrame.checkbox.check();
         checkboxFrame.checkbox.is().checked();
@@ -21,7 +21,7 @@ public class CheckBoxTests extends TestsInit {
 
     @Test
     public void disabledCheckboxTest() {
-        inputCheckboxDisabled.shouldBeOpened();
+        inputCheckboxDisabled.open();
         checkboxFrame.checkbox.is().disabled();
     }
 

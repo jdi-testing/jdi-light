@@ -1,4 +1,4 @@
-package io.github.epam.material.tests.datadisplay;
+package io.github.epam.material.tests.displaydata;
 import static org.hamcrest.Matchers.hasToString;
 
 import io.github.epam.TestsInit;

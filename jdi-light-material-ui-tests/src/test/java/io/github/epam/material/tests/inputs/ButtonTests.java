@@ -24,5 +24,4 @@ public class ButtonTests extends TestsInit {
 
         buttonFrame.button.is().disabled();
     }
-
 }
