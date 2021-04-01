@@ -4,10 +4,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.annotations.*;
 import com.epam.jdi.light.material.elements.inputs.Button;
-import com.epam.jdi.light.material.elements.inputs.Buttons.CustomizedButton;
-import com.epam.jdi.light.material.elements.inputs.Buttons.IconButton;
-import com.epam.jdi.light.material.elements.inputs.Buttons.IconLabelButton;
-import com.epam.jdi.light.material.elements.inputs.Buttons.TextButton;
+import com.epam.jdi.light.material.elements.inputs.Buttons.*;
 
 public class ButtonFrame extends WebPage {
 
@@ -25,6 +22,9 @@ public class ButtonFrame extends WebPage {
 
     @UI("p#customizedLastClick")
     public static CustomizedButton checkCustomizedField;
+
+    @UI("p#complexLastClick")
+    public static ComplexButton checkComplexField;
 
     @JDIContainedButtons(
             defaultButton = "//span[text()='Default']/parent::button[contains(@class,'MuiButton-contained')]",
@@ -78,4 +78,11 @@ public class ButtonFrame extends WebPage {
             bootstrapButton = "//span[text()='Bootstrap']/parent::button[contains(@class,'MuiButton-contained')]"
     )
     public static CustomizedButton customizedButton;
+
+    @JDIComplexButtons(
+            breakfastButton = "//span[text()='Breakfast']",
+            burgersButton = "//span[text()='Burgers']",
+            cameraButton = "//span[text()='Camera']"
+    )
+    public static ComplexButton complexButton;
 }

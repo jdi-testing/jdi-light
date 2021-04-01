@@ -133,4 +133,21 @@ public class ButtonTests extends TestsInit {
         checkCustomizedField.is().text("Last click: Bootstrap");
 
     }
+
+    @Test
+    public void complexButtonTest() {
+        openSection("Buttons");
+
+        complexButton.getBreakfastButton().click();
+        complexButton.getBreakfastButton().is().text("Breakfast");
+        checkComplexField.is().text("Last click: Breakfast");
+
+        complexButton.getBurgersButton().click();
+        complexButton.getBurgersButton().is().text("Burgers");
+        checkComplexField.is().text("Last click: Burgers");
+
+        complexButton.getCameraButton().click();
+        complexButton.getCameraButton().is().text("Camera");
+        checkComplexField.is().text("Last click: Camera");
+    }
 }
