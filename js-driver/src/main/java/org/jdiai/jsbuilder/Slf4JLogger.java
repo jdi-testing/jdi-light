@@ -1,7 +1,5 @@
 package org.jdiai.jsbuilder;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static java.lang.String.format;
@@ -9,34 +7,34 @@ import static org.apache.logging.log4j.Level.*;
 import static org.apache.logging.log4j.Level.ERROR;
 import static org.apache.logging.log4j.LogManager.*;
 
-public class JSLogger implements ILogger {
+public class Slf4JLogger implements ILogger {
     private final String name;
     private final Logger slf4j;
 
-    public JSLogger(String name) {
+    public Slf4JLogger(String name) {
         this.name = name;
         slf4j = getLogger(name);
     }
     public void trace(String msg, Object... args) {
-        if (slf4j.getLevel().isLessSpecificThan(TRACE)) {
+        if (!slf4j.getLevel().isLessSpecificThan(TRACE)) {
             return;
         }
         slf4j.trace(format(msg, args));
     }
     public void debug(String msg, Object... args) {
-        if (slf4j.getLevel().isLessSpecificThan(DEBUG)) {
+        if (!slf4j.getLevel().isLessSpecificThan(DEBUG)) {
             return;
         }
         slf4j.debug(format(msg, args));
     }
     public void info(String msg, Object... args) {
-        if (slf4j.getLevel().isLessSpecificThan(INFO)) {
+        if (!slf4j.getLevel().isLessSpecificThan(INFO)) {
             return;
         }
         slf4j.info(format(msg, args));
     }
     public void error(String msg, Object... args) {
-        if (slf4j.getLevel().isLessSpecificThan(ERROR)) {
+        if (!slf4j.getLevel().isLessSpecificThan(ERROR)) {
             return;
         }
         slf4j.error(format(msg, args));

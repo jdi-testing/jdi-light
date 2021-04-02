@@ -680,7 +680,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public JS findFirst(By by, String condition) {
         String script = "element = elements.find(e => { const fel = " +
             MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+"; " +
-            "return fel && fel."+ condition + "; });\n";
+            "return fel && " + condition.replace("element", "fel") + "; });\n";
         return listToOne(script);
     }
     private JS listToOne(String script) {

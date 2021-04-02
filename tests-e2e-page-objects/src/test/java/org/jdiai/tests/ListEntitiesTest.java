@@ -42,7 +42,7 @@ public class ListEntitiesTest implements TestInit {
     @Test
     public void entitiesDataTest() {
         DataList<SearchItem> results = searchPage.searchData;
-        assertEquals(results.get("JDI TEST SITE").link, "JDI TEST SITE");
+        assertEquals(results.get("JDI TEST SITE").link, "https://jdi-testing.github.io/jdi-light/");
         assertEquals(print(results, SearchItem::toString), SearchResults);
     }
 }

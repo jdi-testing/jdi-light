@@ -182,7 +182,7 @@ public class JSBuilder implements IJSBuilder {
         return beforeScript() + query;
     }
     public String getQuery() {
-        String script = getScript();
+        String script = getScript().replace("\nreturn ''", "");
         if (!script.contains("%s"))
             return script;
         if (replaceValue != null)
