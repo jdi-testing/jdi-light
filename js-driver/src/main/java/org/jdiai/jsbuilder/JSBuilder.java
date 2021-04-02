@@ -74,7 +74,7 @@ public class JSBuilder implements IJSBuilder {
     public Object executeQuery() {
         String jsScript = getQuery();
         if (logScript()) {
-            logger.execute("Execute query:" + LINE_BREAK + jsScript);
+            logger.info("Execute query:" + LINE_BREAK + jsScript);
         }
         Object result;
         try {
@@ -83,7 +83,7 @@ public class JSBuilder implements IJSBuilder {
             cleanup();
         }
         if (result != null && logResult())
-            logger.execute(">>> " + PROCESS_RESULT.execute(result.toString()));
+            logger.info(">>> " + PROCESS_RESULT.execute(result.toString()));
         return result;
     }
     public static JFunc2<Object, String, List<String>> EXECUTE_LIST_SCRIPT = DEFAULT_LIST_SCRIPT_EXECUTE;
@@ -92,7 +92,7 @@ public class JSBuilder implements IJSBuilder {
     public List<String> executeAsList() {
         String jsScript = getQuery();
         if (logScript())
-            logger.execute("Execute query:" + LINE_BREAK + jsScript);
+            logger.info("Execute query:" + LINE_BREAK + jsScript);
         List<String> result;
         try {
             result = EXECUTE_LIST_SCRIPT.execute(js.get(), jsScript);
@@ -100,7 +100,7 @@ public class JSBuilder implements IJSBuilder {
             cleanup();
         }
         if (result != null && logResult())
-            logger.execute(">>> " + PROCESS_RESULT.execute(result.toString()));
+            logger.info(">>> " + PROCESS_RESULT.execute(result.toString()));
         return result;
     }
     public String getQuery(String result) {

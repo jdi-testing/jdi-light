@@ -52,7 +52,7 @@ import static org.jdiai.jsbuilder.GetTypes.dataType;
 import static org.jdiai.jsbuilder.QueryLogger.logger;
 import static org.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static org.jdiai.jsdriver.JSDriverUtils.selector;
-import static org.jdiai.jsdriver.JSException.THROW_EXCEPTION;
+import static org.jdiai.jsdriver.JSException.THROW_ASSERT;
 import static org.jdiai.jswraper.JSWrappersUtils.*;
 import static org.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 import static org.jdiai.tools.FilterConditions.textEquals;
@@ -818,10 +818,11 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public JS shouldBe(Condition... conditions) {
         for (Condition condition : conditions) {
             String message = "Assert that " + condition.getName().replace("%element%", "'" + getName() + "'").replace(" %no%", "");
-            logger.execute(message);
+            logger.info(message);
             boolean result = condition.execute(this);
-            if (!result)
-                THROW_EXCEPTION.accept(message + " failed");
+            if (!result) {
+                THROW_ASSERT.accept(message + " failed");
+            }
         }
         return this;
     }
