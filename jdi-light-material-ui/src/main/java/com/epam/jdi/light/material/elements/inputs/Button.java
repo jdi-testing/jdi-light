@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.material.annotations.JDIContainedButtons;
+import com.epam.jdi.light.material.annotations.JDIButtons;
 import com.epam.jdi.light.material.asserts.inputs.ButtonAssert;
 
 import java.lang.reflect.Field;
@@ -14,36 +14,53 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 public class Button extends UIBaseElement<ButtonAssert> implements ISetup {
     Button() {}
 
-    String defaultContainedButton;
-    String primaryContainedButton;
-    String secondaryContainedButton;
-    String disabledContainedButton;
-    String linkContainedButton;
+    String containedButton;
+    String textButton;
+    String iconLabelButton;
+    String iconLabelIcon;
+    String iconLabelSpanIcon;
+    String iconButton;
+    String customizedButton;
+    String complexButton;
 
-
-    @JDIAction("Get default button")
-    public Button getDefaultContainedButton() {
-        return new Button(core().find(defaultContainedButton));
+    @JDIAction("Get contained button by index")
+    public Button getContainedButtonByIndex(int index) {
+        return new Button(core().finds(containedButton).get(index));
     }
 
-    @JDIAction("Get primary button")
-    public Button getPrimaryContainedButton() {
-        return new Button(core().find(primaryContainedButton));
+    @JDIAction("Get text button by index")
+    public Button getTextButtonByIndex(int index) {
+        return new Button(core().finds(textButton).get(index));
     }
 
-    @JDIAction("Get secondary button")
-    public Button getSecondaryContainedButton() {
-        return new Button(core().find(secondaryContainedButton));
+    @JDIAction("Get icon label button by index")
+    public Button getIconLabelButtonByIndex(int index) {
+        return new Button(core().finds(iconLabelButton).get(index));
     }
 
-    @JDIAction("Get disabled button")
-    public Button getDisabledContainedButton() {
-        return new Button(core().find(disabledContainedButton));
+    @JDIAction("Get icon label icon by index")
+    public Button getIconLabelIconByIndex(int index) {
+        return new Button(core().finds(iconLabelIcon).get(index));
     }
 
-    @JDIAction("Get link button")
-    public Button getLinkContainedButton() {
-        return new Button(core().find(linkContainedButton));
+    @JDIAction("Get icon label span icon")
+    public Button getIconLabelSpanIcon() {
+        return new Button(core().find(iconLabelSpanIcon));
+    }
+
+    @JDIAction("Get icon button by index")
+    public Button getIconButtonByIndex(int index) {
+        return new Button(core().finds(iconButton).get(index));
+    }
+
+    @JDIAction("Get customized button by index")
+    public Button getCustomizedButtonByIndex(int index) {
+        return new Button(core().finds(customizedButton).get(index));
+    }
+
+    @JDIAction("Get complex button by index")
+    public Button getComplexButtonByIndex(int index) {
+        return new Button(core().finds(complexButton).get(index));
     }
 
     public Button(UIElement element) {
@@ -82,13 +99,16 @@ public class Button extends UIBaseElement<ButtonAssert> implements ISetup {
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIContainedButtons.class, Button.class))
+        if (!fieldHasAnnotation(field, JDIButtons.class, Button.class))
             return;
-        JDIContainedButtons containedButtons = field.getAnnotation(JDIContainedButtons.class);
-        defaultContainedButton = containedButtons.defaultButton();
-        primaryContainedButton = containedButtons.primaryButton();
-        secondaryContainedButton = containedButtons.secondaryButton();
-        disabledContainedButton = containedButtons.disabledButton();
-        linkContainedButton = containedButtons.linkButton();
+        JDIButtons buttons = field.getAnnotation(JDIButtons.class);
+        containedButton = buttons.containedButton();
+        textButton = buttons.textButton();
+        iconLabelButton = buttons.iconLabelButton();
+        iconLabelIcon = buttons.iconLabelIcon();
+        iconLabelSpanIcon = buttons.iconLabelSpanIcon();
+        iconButton = buttons.iconButton();
+        customizedButton = buttons.customizedButton();
+        complexButton = buttons.complexButton();
     }
 }

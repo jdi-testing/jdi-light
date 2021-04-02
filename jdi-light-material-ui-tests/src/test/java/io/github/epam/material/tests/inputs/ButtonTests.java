@@ -12,124 +12,124 @@ public class ButtonTests extends TestsInit {
     public void defaultButtonTest() {
         openSection("Buttons");
 
-        containedButton.getDefaultContainedButton().click();
-        containedButton.getDefaultContainedButton().is().text("DEFAULT");
+        button.getContainedButtonByIndex(1).click();
+        button.getContainedButtonByIndex(1).is().text("DEFAULT");
         checkContainedField.is().text("Last click: Default");
 
-        containedButton.getPrimaryContainedButton().click();
-        containedButton.getPrimaryContainedButton().is().text("PRIMARY");
+        button.getContainedButtonByIndex(2).click();
+        button.getContainedButtonByIndex(2).is().text("PRIMARY");
         checkContainedField.is().text("Last click: Primary");
 
-        containedButton.getSecondaryContainedButton().click();
-        containedButton.getSecondaryContainedButton().is().text("SECONDARY");
+        button.getContainedButtonByIndex(3).click();
+        button.getContainedButtonByIndex(3).is().text("SECONDARY");
         checkContainedField.is().text("Last click: Secondary");
 
-        containedButton.getDisabledContainedButton().is().text("DISABLED");
-        containedButton.getDisabledContainedButton().is().attr("disabled");
-        containedButton.getDisabledContainedButton().is().disabled();
+        button.getContainedButtonByIndex(4).is().text("DISABLED");
+        button.getContainedButtonByIndex(4).is().attr("disabled");
+        button.getContainedButtonByIndex(4).is().disabled();
 
-        containedButton.getLinkContainedButton().click();
-        containedButton.getLinkContainedButton().is().text("LINK");
+        button.getContainedButtonByIndex(5).click();
+        button.getContainedButtonByIndex(5).is().text("LINK");
         checkContainedField.is().text("Last click: Link");
-        containedButton.getLinkContainedButton().is().notVisible();
+        button.getContainedButtonByIndex(5).is().notVisible();
     }
 
     @Test
     public void textButtonTest() {
         openSection("Buttons");
 
-        textButton.getDefaultTextButton().click();
-        textButton.getDefaultTextButton().is().text("DEFAULT");
+        button.getTextButtonByIndex(1).click();
+        button.getTextButtonByIndex(1).is().text("DEFAULT");
         checkTextField.is().text("Last click: Default");
 
-        textButton.getPrimaryTextButton().click();
-        textButton.getPrimaryTextButton().is().text("PRIMARY");
+        button.getTextButtonByIndex(2).click();
+        button.getTextButtonByIndex(2).is().text("PRIMARY");
         checkTextField.is().text("Last click: Primary");
 
-        textButton.getSecondaryTextButton().click();
-        textButton.getSecondaryTextButton().is().text("SECONDARY");
+        button.getTextButtonByIndex(3).click();
+        button.getTextButtonByIndex(3).is().text("SECONDARY");
         checkTextField.is().text("Last click: Secondary");
 
-        textButton.getDisabledTextButton().is().text("DISABLED");
-        textButton.getDisabledTextButton().is().attr("disabled");
-        textButton.getDisabledTextButton().hasClass("Mui-disabled");
+        button.getTextButtonByIndex(4).is().text("DISABLED");
+        button.getTextButtonByIndex(4).is().attr("disabled");
+        button.getTextButtonByIndex(4).hasClass("Mui-disabled");
 
-        textButton.getLinkTextButton().click();
-        textButton.getLinkTextButton().is().text("LINK");
+        button.getTextButtonByIndex(5).click();
+        button.getTextButtonByIndex(5).is().text("LINK");
         checkTextField.is().text("Last click: Link");
-        textButton.getLinkTextButton().is().notVisible();
+        button.getTextButtonByIndex(5).is().notVisible();
     }
 
     @Test
     public void iconLabelButtonTest() {
         openSection("Buttons");
 
-        iconLabelButton.getDeleteIconLabelButton().click();
-        iconLabelButton.getDeleteIconLabelButton().is().text("DELETE");
+        button.getIconLabelButtonByIndex(1).click();
+        button.getIconLabelButtonByIndex(1).is().text("DELETE");
         checkIconLabelField.is().text("Last click: Delete");
-        iconLabelButton.getDeleteIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
+        button.getIconLabelIconByIndex(1).is().hasSvg("MuiSvgIcon-root");
 
-        iconLabelButton.getSendIconLabelButton().click();
-        iconLabelButton.getSendIconLabelButton().is().text("SEND\nSEND");
+        button.getIconLabelButtonByIndex(2).click();
+        button.getIconLabelButtonByIndex(2).is().text("SEND\nSEND");
         checkIconLabelField.is().text("Last click: Sendsend");
-        iconLabelButton.getSendIconLabelIcon().is().displayedSpanIcon();
+        button.getIconLabelSpanIcon().is().displayedSpanIcon();
 
-        iconLabelButton.getUploadIconLabelButton().click();
-        iconLabelButton.getUploadIconLabelButton().is().text("UPLOAD");
+        button.getIconLabelButtonByIndex(3).click();
+        button.getIconLabelButtonByIndex(3).is().text("UPLOAD");
         checkIconLabelField.is().text("Last click: Upload");
-        iconLabelButton.getUploadIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
+        button.getIconLabelIconByIndex(2).is().hasSvg("MuiSvgIcon-root");
 
-        iconLabelButton.getTalkIconLabelButton().is().attr("disabled");
-        iconLabelButton.getTalkIconLabelButton().is().text("TALK");
-        iconLabelButton.getTalkIconLabelButton().hasClass("Mui-disabled");
-        iconLabelButton.getTalkIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
+        button.getIconLabelButtonByIndex(4).is().attr("disabled");
+        button.getIconLabelButtonByIndex(4).is().text("TALK");
+        button.getIconLabelButtonByIndex(4).hasClass("Mui-disabled");
+        button.getIconLabelIconByIndex(3).is().hasSvg("MuiSvgIcon-root");
 
-        iconLabelButton.getSaveIconLabelButton().click();
-        iconLabelButton.getSaveIconLabelButton().is().text("SAVE");
+        button.getIconLabelButtonByIndex(5).click();
+        button.getIconLabelButtonByIndex(5).is().text("SAVE");
         checkIconLabelField.is().text("Last click: Save");
-        iconLabelButton.getSaveIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
+        button.getIconLabelIconByIndex(4).is().hasSvg("MuiSvgIcon-root");
 
-        iconLabelButton.getSaveAllIconLabelButton().click();
-        iconLabelButton.getSaveAllIconLabelButton().is().text("SAVE ALL");
+        button.getIconLabelButtonByIndex(6).click();
+        button.getIconLabelButtonByIndex(6).is().text("SAVE ALL");
         checkIconLabelField.is().text("Last click: Save all");
-        iconLabelButton.getSaveAllIconLabelIcon().is().hasSvg("MuiSvgIcon-root");
+        button.getIconLabelIconByIndex(5).is().hasSvg("MuiSvgIcon-root");
     }
 
     @Test
     public void iconButtonTest() {
         openSection("Buttons");
 
-        iconButton.getDeleteEnabledButton().click();
+        button.getIconButtonByIndex(1).click();
         checkIconField.is().text("Last click: Delete enabled");
-        iconButton.getDeleteEnabledIcon().is().hasSvg("MuiSvgIcon-root");
+        button.getIconButtonByIndex(1).is().hasSvg("MuiSvgIcon-root");
 
-        iconButton.getDeleteDisabledButton().is().attr("disabled");
-        iconButton.getDeleteEnabledButton().hasClass("Mui-disabled");
-        iconButton.getDeleteDisabledIcon().is().hasSvg("MuiSvgIcon-root");
+        button.getIconButtonByIndex(2).is().attr("disabled");
+        button.getIconButtonByIndex(2).hasClass("Mui-disabled");
+        button.getIconButtonByIndex(2).is().hasSvg("MuiSvgIcon-root");
 
-        iconButton.getAlarmButton().click();
+        button.getIconButtonByIndex(3).click();
         checkIconField.is().text("Last click: Alarm");
-        iconButton.getAlarmIcon().is().hasSvg("MuiSvgIcon-root");
+        button.getIconButtonByIndex(3).is().hasSvg("MuiSvgIcon-root");
 
-        iconButton.getShoppingCardButton().click();
+        button.getIconButtonByIndex(4).click();
         checkIconField.is().text("Last click: Shopping cart");
-        iconButton.getShoppingCardIcon().is().hasSvg("MuiSvgIcon-root");
+        button.getIconButtonByIndex(4).is().hasSvg("MuiSvgIcon-root");
     }
 
     @Test
     public void customizedButtonTest() {
         openSection("Buttons");
 
-        customizedButton.getCustomCSSButton().click();
-        customizedButton.getCustomCSSButton().is().text("CUSTOM CSS");
+        button.getCustomizedButtonByIndex(1).click();
+        button.getCustomizedButtonByIndex(1).is().text("CUSTOM CSS");
         checkCustomizedField.is().text("Last click: Custom CSS");
 
-        customizedButton.getThemeProviderButton().click();
-        customizedButton.getThemeProviderButton().is().text("THEME PROVIDER");
+        button.getCustomizedButtonByIndex(2).click();
+        button.getCustomizedButtonByIndex(2).is().text("THEME PROVIDER");
         checkCustomizedField.is().text("Last click: Theme Provider");
 
-        customizedButton.getBootstrapButton().click();
-        customizedButton.getBootstrapButton().is().text("Bootstrap");
+        button.getCustomizedButtonByIndex(3).click();
+        button.getCustomizedButtonByIndex(3).is().text("Bootstrap");
         checkCustomizedField.is().text("Last click: Bootstrap");
 
     }
@@ -138,16 +138,16 @@ public class ButtonTests extends TestsInit {
     public void complexButtonTest() {
         openSection("Buttons");
 
-        complexButton.getBreakfastButton().click();
-        complexButton.getBreakfastButton().is().text("Breakfast");
+        button.getComplexButtonByIndex(1).click();
+        button.getComplexButtonByIndex(1).is().text("Breakfast");
         checkComplexField.is().text("Last click: Breakfast");
 
-        complexButton.getBurgersButton().click();
-        complexButton.getBurgersButton().is().text("Burgers");
+        button.getComplexButtonByIndex(2).click();
+        button.getComplexButtonByIndex(2).is().text("Burgers");
         checkComplexField.is().text("Last click: Burgers");
 
-        complexButton.getCameraButton().click();
-        complexButton.getCameraButton().is().text("Camera");
+        button.getComplexButtonByIndex(3).click();
+        button.getComplexButtonByIndex(3).is().text("Camera");
         checkComplexField.is().text("Last click: Camera");
     }
 }

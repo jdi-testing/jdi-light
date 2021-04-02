@@ -3,7 +3,7 @@ package com.epam.jdi.light.material.asserts.inputs;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.inputs.Button;
-import com.epam.jdi.light.material.elements.inputs.Buttons.TextButton;
+import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -44,4 +44,21 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
         return this;
     }
 
+    @JDIAction("Assert that {name} child contains svg")
+    public ButtonAssert hasSvg(String className){
+        jdiAssert(element().find("//*[name()='svg']").hasClass(className), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name}'s child svg is visible")
+    public ButtonAssert displayedSpanIcon() {
+        try {
+            boolean isDisplayed = new Timer(base().getTimeout() * 1000L)
+                    .wait(() -> element().find("material-icons MuiIcon-root").isDisplayed());
+            jdiAssert(isDisplayed, Matchers.is(true));
+        } catch (AssertionError e){
+            new AssertionError("Svg not found");
+        }
+        return this;
+    }
 }
