@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.annotations.*;
 import com.epam.jdi.light.material.elements.inputs.Button;
 
-public class ButtonFrame extends WebPage {
+public class ButtonPage extends WebPage {
 
     @UI("p#simpleLastClick")
     public static Button checkContainedField;
