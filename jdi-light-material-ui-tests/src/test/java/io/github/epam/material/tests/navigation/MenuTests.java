@@ -12,8 +12,10 @@ public class MenuTests extends TestsInit {
     public void simpleMenuTest() {
         simpleMenuPage.open();
 
+        menuFrame.menu.has().text("OPEN MENU");
         menuFrame.menu.click();
         menuFrame.menuList.is().displayed();
+        menuFrame.menuListFirstButton.has().text("Profile");
         menuFrame.menuListFirstButton.click();
         menuFrame.menu.is().displayed();
     }
@@ -22,8 +24,10 @@ public class MenuTests extends TestsInit {
     public void scrollMenuTest() {
         scrollMenuPage.open();
 
+        menuFrame.menu.has().text("OPEN MENU");
         menuFrame.menu.click();
         menuFrame.scrollMenuList.is().displayed();
+        menuFrame.menuListFirstButton.has().text("Profile");
         menuFrame.menuListLastButton.scrollToElement();
         menuFrame.menuListLastButton.is().displayed();
         menuFrame.menuListLastButton.click();
@@ -34,9 +38,12 @@ public class MenuTests extends TestsInit {
     public void selectedVerticalPositioningTest() {
         selectedVerticalPositioningPage.open();
 
+        menuFrame.menu.has().text("Selected Menu\nMy account");
         menuFrame.menu.click();
         menuFrame.scrollMenuList.is().displayed();
+        menuFrame.menuListFirstButton.has().text("Profile");
         menuFrame.menuListFirstButton.click();
+        menuFrame.menuSelectedField.has().text("Profile");
         menuFrame.menu.is().displayed();
     }
 
@@ -44,9 +51,12 @@ public class MenuTests extends TestsInit {
     public void selectedNoVerticalPositioningTest() {
         selectedNoVerticalPositioningPage.open();
 
+        menuFrame.menu.has().text("Selected Menu\nMy account");
         menuFrame.menu.click();
         menuFrame.scrollMenuList.is().displayed();
+        menuFrame.menuListFirstButton.has().text("Profile");
         menuFrame.menuListFirstButton.click();
+        menuFrame.menuSelectedField.has().text("Profile");
         menuFrame.menu.is().displayed();
     }
 
@@ -54,8 +64,10 @@ public class MenuTests extends TestsInit {
     public void positioningMenuTest() {
         positioningMenuPage.open();
 
+        menuFrame.menu.has().text("TOGGLE MENU GROW");
         menuFrame.menu.click();
         menuFrame.paddingMenuList.is().displayed();
+        menuFrame.menuListFirstButton.has().text("Profile");
         menuFrame.menuListFirstButton.click();
         menuFrame.menu.is().displayed();
     }
@@ -64,6 +76,10 @@ public class MenuTests extends TestsInit {
     public void contextMenuTest() {
         contextMenuPage.open();
 
+        menuFrame.contextMenu.is().displayed();
+        menuFrame.contextMenu.rightClick();
+        menuFrame.menuListFirstButton.has().text("Copy");
+        menuFrame.menuListFirstButton.click();
         menuFrame.contextMenu.is().displayed();
     }
 
@@ -74,6 +90,7 @@ public class MenuTests extends TestsInit {
         menuFrame.menu.click();
         menuFrame.paddingMenuList.is().displayed();
         menuFrame.menuIcon.is().displayedSvg();
+        menuFrame.menuListFirstButton.has().text("Text with send icon");
         menuFrame.menuListFirstButton.click();
         menuFrame.menu.is().displayed();
     }

@@ -3,6 +3,7 @@ package com.epam.jdi.light.material.asserts.navigation;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.asserts.displaydata.AvatarAssert;
+import com.epam.jdi.light.material.asserts.inputs.ButtonAssert;
 import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 import com.epam.jdi.light.material.elements.navigation.Menu;
 import com.epam.jdi.tools.Timer;
@@ -29,6 +30,12 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
         } catch (AssertionError e){
             new AssertionError("Svg not found");
         }
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' text is '{0}'")
+    public MenuAssert text(String text) {
+        jdiAssert(element().getText(), Matchers.is(text));
         return this;
     }
 }

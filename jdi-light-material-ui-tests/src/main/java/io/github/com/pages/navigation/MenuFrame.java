@@ -28,4 +28,7 @@ public class MenuFrame extends Section {
 
     @UI(".MuiListItemIcon-root > svg")
     public Menu menuIcon;
+
+    @UI("p.MuiTypography-displayBlock")
+    public Menu menuSelectedField;
 }
