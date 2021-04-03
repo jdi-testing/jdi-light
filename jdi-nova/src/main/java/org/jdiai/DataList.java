@@ -4,17 +4,18 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
+import org.jdiai.annotations.ListLabel;
 import org.jdiai.interfaces.HasCore;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.ISetup;
 import org.jdiai.jsdriver.JSException;
-import org.jdiai.tools.FilterCondition;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.function.Function;
 
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -31,33 +32,33 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     public T get(String value) {
         Field labelField = getLabelField();
         By labelLocator = getLocatorFromField(labelField);
-        FilterCondition condition = getCondition(labelField, value);
-        return core().findFirst(labelLocator, condition).getEntity();
+        Function<JS, String> condition = getCondition(labelField, value);
+        return core().findFirst(labelLocator, condition).getEntity(dataClass);
     }
-    private FilterCondition getCondition(Field labelField, String value) {
-        FilterCondition condition = new FilterCondition(
-            c -> getValueType(labelField, "element"));
-        condition.value = value;
-        return condition;
+    private Function<JS, String> getCondition(Field labelField, String value) {
+        return el -> getValueType(labelField, "element") + " === '" + value + "'";
     }
     private Field getLabelField() {
+        if (labelName != null) {
+            try {
+                return dataClass.getField(labelName);
+            } catch (Exception ex) {
+                throw new JSException("Failed to get labelField: " + labelName);
+            }
+        }
         Field[] allFields = dataClass.getDeclaredFields();
-        Field labelField = Arrays.stream(allFields).filter(
-            f -> f.getName().equalsIgnoreCase(labelName)).findFirst().orElse(null);
-        if (labelField != null) {
-            return labelField;
+        if (allFields.length == 0) {
+            throw new JSException("Section should gave at least one field");
         }
-        return Arrays.stream(allFields).filter(
-            f -> isClass(f.getType(), String.class))
-            .findFirst().orElseGet(() -> allFields[0]);
-    }
-    private static Field getLabelField(Field labelField, Field[] allFields) {
-        if (labelField != null) {
-            return labelField;
+        Field labelField = LinqUtils.first(allFields,
+            f -> f.isAnnotationPresent(ListLabel.class));
+        if (labelField == null) {
+            labelField = Arrays.stream(allFields).filter(
+                f -> isClass(f.getType(), String.class))
+                .findFirst().orElseGet(() -> allFields[0]);
         }
-        return Arrays.stream(allFields).filter(
-            f -> isClass(f.getType(), String.class))
-            .findFirst().orElseGet(() -> allFields[0]);
+        labelName = labelField.getName();
+        return labelField;
     }
 
     public T get(Enum<?> name) { return get(getEnumValue(name)); }

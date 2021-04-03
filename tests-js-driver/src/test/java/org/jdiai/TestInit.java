@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeSuite;
 import static java.util.Arrays.stream;
 import static org.jdiai.DriverManager.*;
 import static org.jdiai.LocatorUtils.defineLocator;
-import static org.jdiai.Pages.openSite;
 import static org.jdiai.jsbuilder.QueryLogger.ALL;
 import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 
@@ -32,7 +31,6 @@ public interface TestInit {
     default void setUp() {
         killDrivers();
         initDriver();
-        openSite();
         LOG_QUERY = ALL;
     }
 

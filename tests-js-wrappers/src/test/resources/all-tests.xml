@@ -2,9 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JSDriver Tests" parallel="methods" thread-count="4">
     <test name="Tests">
-        <packages>
-            <package name="org.jdiai.tests.*"/>
-        </packages>
+        <classes>
+            <class name="org.jdiai.tests.FilterTests"/>
+            <class name="org.jdiai.tests.JSElementTests"/>
+            <class name="org.jdiai.tests.JSJsonTests"/>
+            <class name="org.jdiai.tests.JSObjectTests"/>
+            <class name="org.jdiai.tests.JSSmartTests"/>
+        </classes>
     </test>
     <listeners>
         <listener class-name="org.jdiai.testng.TestNGListener" />

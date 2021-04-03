@@ -5,12 +5,12 @@ import org.jdiai.site.JDISite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static org.jdiai.DriverManager.initDriver;
-import static org.jdiai.DriverManager.killDrivers;
 import static org.jdiai.jsbuilder.QueryLogger.ALL;
 import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
+import static org.jdiai.jswraper.DriverManager.CHROME_OPTIONS;
+import static org.jdiai.jswraper.DriverManager.killDrivers;
 import static org.jdiai.page.objects.PageFactory.initElements;
-import static org.jdiai.page.objects.PageFactory.openSite;
+import static org.jdiai.page.objects.PageFactory.initSite;
 import static org.jdiai.tools.TestIDLocators.ID_LOCATOR;
 import static org.jdiai.tools.TestIDLocators.SMART_LOCATOR;
 
@@ -21,9 +21,9 @@ public interface TestInit {
     default void setUp() {
         killDrivers();
         SMART_LOCATOR = ID_LOCATOR;
-        initDriver();
-        openSite(JDISite.class);
+        CHROME_OPTIONS = cap -> cap.addArguments("--headless");
         LOG_QUERY = ALL;
+        initSite(JDISite.class);
     }
 
     @AfterSuite(alwaysRun = true)

@@ -1,8 +1,8 @@
 package org.jdiai;
 
 import com.epam.jdi.tools.Safe;
+import org.jdiai.jswraper.DriverManager;
 import org.jdiai.jswraper.JSSmart;
-import org.jdiai.jswraper.JSWrapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -11,7 +11,7 @@ import static org.jdiai.jswraper.JSWrappersUtils.defineLocator;
 import static org.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 
 public class JSTalk {
-    public static Safe<WebDriver> DRIVER = new Safe<>(JSWrapper::chromeDriver);
+    public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::chromeDriver);
     public static String DOMAIN;
 
     public static WebDriver driver() {
@@ -22,7 +22,9 @@ public class JSTalk {
         openSite();
     }
     public static void openSite() {
-        openPage(DOMAIN);
+        if (driver().getCurrentUrl().equals("data:,")) {
+            openPage(DOMAIN);
+        }
     }
     public static void openPage(String url) {
         if (isEmpty(DOMAIN) || url.contains("//")) {

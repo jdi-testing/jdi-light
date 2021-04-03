@@ -31,13 +31,13 @@ public class PerfStatistic {
             T jdiResult = jdiAction.execute();
             long jsTime = t.timePassedInMSec();
             jsStats.add(jsTime);
-            System.out.println("Ratio: "+(double)seleniumTime/jsTime);
+            System.out.println("Ratio: " + df2((double)seleniumTime/jsTime));
             assertEquals(seleniumResult, jdiResult);
         }
         double avSelenium = getAverage(seleniumStats);
         double avJdi = getAverage(jsStats);
-        System.out.println("Average Selenium: " + avSelenium);
-        System.out.println("Average JS: " + avJdi);
+        System.out.println("Average Selenium: " + df2(avSelenium));
+        System.out.println("Average JS: " + df2(avJdi));
         String avRatio = df2(avSelenium/avJdi);
         System.out.println("Average Ratio: " + avRatio);
         String min = df2(min(seleniumStats, jsStats));

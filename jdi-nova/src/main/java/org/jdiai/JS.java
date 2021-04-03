@@ -19,7 +19,6 @@ import org.jdiai.jsproducer.Json;
 import org.jdiai.jswraper.JSSmart;
 import org.jdiai.scripts.Whammy;
 import org.jdiai.tools.ClientRect;
-import org.jdiai.tools.FilterCondition;
 import org.jdiai.tools.GetTextTypes;
 import org.jdiai.tools.JSImages;
 import org.jdiai.visual.Direction;
@@ -35,6 +34,7 @@ import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -52,7 +52,7 @@ import static org.jdiai.jsbuilder.GetTypes.dataType;
 import static org.jdiai.jsbuilder.QueryLogger.logger;
 import static org.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static org.jdiai.jsdriver.JSDriverUtils.selector;
-import static org.jdiai.jsdriver.JSException.THROW_EXCEPTION;
+import static org.jdiai.jsdriver.JSException.THROW_ASSERT;
 import static org.jdiai.jswraper.JSWrappersUtils.*;
 import static org.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 import static org.jdiai.tools.FilterConditions.textEquals;
@@ -339,11 +339,11 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public boolean isEnabled() {
         return isNotBlank(getAttribute("enabled"));
     }
-    public JS setGetTextType(GetTextTypes getTextType) { this.getTextType = getTextType; return this; }
+    public JS setTextType(GetTextTypes textType) { this.textType = textType; return this; }
 
-    protected GetTextTypes getTextType = INNER_TEXT;
+    public GetTextTypes textType = INNER_TEXT;
     public String getText() {
-        return getText(getTextType);
+        return getText(textType);
     }
     public String getText(GetTextTypes textType) {
         return getJSResult(textType.value);
@@ -555,7 +555,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return js.getAttributeList(getTextType.value);
     }
     public List<String> values() {
-        return values(getTextType);
+        return values(textType);
     }
     public List<JsonObject> getObjectList(String json) {
         return js.getJsonList(json);
@@ -644,11 +644,11 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         js.setEntity(objectMap);
     }
 
-    public JS findFirst(String by, FilterCondition condition) {
-        return findFirst(defineLocator(by), condition.addTextType(getTextType).getScript());
+    public JS findFirst(String by, Function<JS, String> condition) {
+        return findFirst(defineLocator(by), condition.apply(this));
     }
-    public JS findFirst(By by, FilterCondition condition) {
-        return findFirst(by, condition.addTextType(getTextType).getScript());
+    public JS findFirst(By by, Function<JS, String> condition) {
+        return findFirst(by, condition.apply(this));
     }
     public JS findFirst(String by, String condition) {
         return findFirst(defineLocator(by), condition);
@@ -665,11 +665,14 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
             ")[" + index + "];\n");
     }
 
-    public JS get(String value) {
-        return findFirst(textEquals(value));
+    public JS get(Function<JS, String> filter) {
+        return findFirst(filter);
     }
-    public JS findFirst(FilterCondition condition) {
-        return findFirst(condition.addTextType(getTextType).getScript());
+    public JS get(String value) {
+        return get(textEquals(value));
+    }
+    public JS findFirst(Function<JS, String> condition) {
+        return findFirst(condition.apply(this));
     }
     public JS findFirst(String condition) {
         return listToOne("element = elements.find(e => e && e."+ condition + ");\n");
@@ -677,8 +680,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public JS findFirst(By by, String condition) {
         String script = "element = elements.find(e => { const fel = " +
             MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+"; " +
-            "return fel && fel."+ condition + "; });\n";
-
+            "return fel && " + condition.replace("element", "fel") + "; });\n";
         return listToOne(script);
     }
     private JS listToOne(String script) {
@@ -816,10 +818,11 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public JS shouldBe(Condition... conditions) {
         for (Condition condition : conditions) {
             String message = "Assert that " + condition.getName().replace("%element%", "'" + getName() + "'").replace(" %no%", "");
-            logger.execute(message);
+            logger.info(message);
             boolean result = condition.execute(this);
-            if (!result)
-                THROW_EXCEPTION.accept(message + " failed");
+            if (!result) {
+                THROW_ASSERT.accept(message + " failed");
+            }
         }
         return this;
     }
