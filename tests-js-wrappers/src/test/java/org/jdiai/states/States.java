@@ -13,15 +13,21 @@ public class States {
         driver().navigate().refresh();
     }
     public static void login() {
-        driver().manage().addCookie(new Cookie("authUser", "true"));
+        try {
+            driver().manage().addCookie(new Cookie("authUser", "true"));
+        } catch (Exception ex) {
+            System.out.println("EXCEPTION: " + ex.getMessage());
+            throw ex;
+        }
         driver().navigate().refresh();
     }
     public static void atHomePage() {
         openPage(HOME_PAGE);
     }
     public static void loggedInAt(String url) {
-        if (!isLoggedIn())
+        if (!isLoggedIn()) {
             login();
+        }
         openPage(url);
     }
     public static boolean isLoggedIn() {

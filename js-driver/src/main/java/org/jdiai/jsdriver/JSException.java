@@ -19,7 +19,7 @@ public class JSException extends RuntimeException {
         if (exMsg == null) {
             exMsg = ex.getCause().getMessage();
         }
-        return message + "Exception: " + exMsg;
+        return message + "\nException: " + exMsg;
     }
     private static String logException(String message) {
         logger.error(message);

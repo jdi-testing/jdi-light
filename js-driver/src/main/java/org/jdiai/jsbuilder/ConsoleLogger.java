@@ -1,7 +1,6 @@
 package org.jdiai.jsbuilder;
 
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
 
 import static com.epam.jdi.tools.Timer.nowTimeShort;
 import static java.lang.String.format;
@@ -19,24 +18,33 @@ public class ConsoleLogger implements ILogger {
         if (!LOG_LEVEL.isLessSpecificThan(TRACE)) {
             return;
         }
-        System.out.printf(format("[TRACE] %s %s ", nowTimeShort(), msg) + "%n", args);
+        printMessage(TRACE, msg, args);
     }
     public void debug(String msg, Object... args) {
         if (!LOG_LEVEL.isLessSpecificThan(DEBUG)) {
             return;
         }
-        System.out.printf(format("[DEBUG] %s %s ", nowTimeShort(), msg) + "%n", args);
+        printMessage(DEBUG, msg, args);
     }
     public void info(String msg, Object... args) {
         if (!LOG_LEVEL.isLessSpecificThan(INFO)) {
             return;
         }
-        System.out.printf(format("[INFO] %s %s ", nowTimeShort(), msg) + "%n", args);
+        printMessage(INFO, msg, args);
     }
     public void error(String msg, Object... args) {
         if (!LOG_LEVEL.isLessSpecificThan(ERROR)) {
             return;
         }
-        System.out.printf(format("[ERROR] %s %s ", nowTimeShort(), msg) + "%n", args);
+        printMessage(ERROR, msg, args);
+    }
+    private void printMessage(Level logLevel, String msg, Object... args) {
+        String message = args.length == 0
+            ? msg : format(msg, args);
+        long threadId = Thread.currentThread().getId();
+        String logInfo = threadId == 1
+            ? logLevel.toString()
+            : logLevel.toString() + ":" + threadId;
+        System.out.printf("[%s] %s %s %n", logInfo, nowTimeShort(), message);
     }
 }

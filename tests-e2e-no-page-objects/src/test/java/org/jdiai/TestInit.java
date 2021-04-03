@@ -3,11 +3,10 @@ package org.jdiai;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static org.jdiai.DriverManager.initDriver;
-import static org.jdiai.DriverManager.killDrivers;
 import static org.jdiai.JSTalk.openSite;
 import static org.jdiai.jsbuilder.QueryLogger.ALL;
 import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
+import static org.jdiai.jswraper.DriverManager.*;
 import static org.jdiai.tools.TestIDLocators.ID_LOCATOR;
 import static org.jdiai.tools.TestIDLocators.SMART_LOCATOR;
 
@@ -17,9 +16,9 @@ public interface TestInit {
     default void setUp() {
         killDrivers();
         SMART_LOCATOR = ID_LOCATOR;
-        initDriver();
-        openSite("https://jdi-testing.github.io/jdi-light");
+        CHROME_OPTIONS = cap -> cap.addArguments("--headless");
         LOG_QUERY = ALL;
+        openSite("https://jdi-testing.github.io/jdi-light");
     }
 
     @AfterSuite(alwaysRun = true)

@@ -1,17 +1,22 @@
-package org.jdiai;
+package org.jdiai.jswraper;
 
-import com.epam.jdi.tools.Safe;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.util.function.Consumer;
+
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static java.lang.Runtime.getRuntime;
-import static org.jdiai.JSTalk.DRIVER;
-import static org.jdiai.Pages.HOME_PAGE;
 
 public class DriverManager {
+    public static Consumer<WebDriver> DRIVER_SETUP = driver -> {
+        driver.manage().window().maximize();
+    };
+    public static Consumer<MutableCapabilities> COMMON_OPTIONS = cap -> { };
+    public static Consumer<ChromeOptions> CHROME_OPTIONS = co -> { };
     public static void downloadDriver() {
         WebDriverManager wdm = chromedriver();
         wdm.arch64();
@@ -20,20 +25,14 @@ public class DriverManager {
         wdm.setup();
     }
 
-    public static void initDriver() {
-        downloadDriver();
-        DRIVER = new Safe<>(() -> {
-            WebDriver driver = chromeDriver();
-            driver.get(HOME_PAGE);
-            driver.manage().window().maximize();
-            return driver;
-        });
-    }
-
     public static WebDriver chromeDriver() {
+        downloadDriver();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        return new ChromeDriver(options);
+        COMMON_OPTIONS.accept(options);
+        CHROME_OPTIONS.accept(options);
+        WebDriver driver = new ChromeDriver(options);
+        DRIVER_SETUP.accept(driver);
+        return driver;
     }
 
     public static void killDrivers() {

@@ -1,6 +1,7 @@
 package org.jdiai;
 
 import com.epam.jdi.tools.Safe;
+import org.jdiai.jswraper.DriverManager;
 import org.jdiai.jswraper.JSSmart;
 import org.jdiai.jswraper.JSWrapper;
 import org.openqa.selenium.By;
@@ -11,7 +12,7 @@ import static org.jdiai.jswraper.JSWrappersUtils.defineLocator;
 import static org.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 
 public class JSTalk {
-    public static Safe<WebDriver> DRIVER = new Safe<>(JSWrapper::chromeDriver);
+    public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::chromeDriver);
     public static String DOMAIN;
 
     public static WebDriver driver() {

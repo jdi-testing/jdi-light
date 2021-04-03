@@ -22,6 +22,7 @@ import static org.testng.AssertJUnit.assertEquals;
 
 @Listeners(TestNGListener.class)
 public class ListEntitiesTest implements TestInit {
+
     @BeforeMethod
     public void before() {
         logout();

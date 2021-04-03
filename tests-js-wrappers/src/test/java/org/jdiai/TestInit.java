@@ -3,11 +3,11 @@ package org.jdiai;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static org.jdiai.DriverManager.initDriver;
-import static org.jdiai.DriverManager.killDrivers;
 import static org.jdiai.Pages.openSite;
 import static org.jdiai.jsbuilder.QueryLogger.ALL;
 import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
+import static org.jdiai.jswraper.DriverManager.CHROME_OPTIONS;
+import static org.jdiai.jswraper.DriverManager.killDrivers;
 
 public interface TestInit {
     default String[] withParent(String locator) {
@@ -20,7 +20,7 @@ public interface TestInit {
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
         killDrivers();
-        initDriver();
+        CHROME_OPTIONS = cap -> cap.addArguments("--headless");
         openSite();
         LOG_QUERY = ALL;
     }
