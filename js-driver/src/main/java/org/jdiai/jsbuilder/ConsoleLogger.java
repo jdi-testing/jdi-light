@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Level;
 import static com.epam.jdi.tools.Timer.nowTimeShort;
 import static java.lang.String.format;
 import static org.apache.logging.log4j.Level.*;
-import static org.apache.logging.log4j.LogManager.getLogger;
 
 public class ConsoleLogger implements ILogger {
     private final String name;

@@ -3,7 +3,6 @@ package org.jdiai;
 import com.epam.jdi.tools.Safe;
 import org.jdiai.jswraper.DriverManager;
 import org.jdiai.jswraper.JSSmart;
-import org.jdiai.jswraper.JSWrapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -23,7 +22,9 @@ public class JSTalk {
         openSite();
     }
     public static void openSite() {
-        openPage(DOMAIN);
+        if (driver().getCurrentUrl().equals("data:,")) {
+            openPage(DOMAIN);
+        }
     }
     public static void openPage(String url) {
         if (isEmpty(DOMAIN) || url.contains("//")) {

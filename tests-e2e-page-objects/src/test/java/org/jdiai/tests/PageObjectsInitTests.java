@@ -4,14 +4,9 @@ import org.jdiai.TestInit;
 import org.jdiai.site.HomePage;
 import org.jdiai.site.JDISite;
 import org.jdiai.testng.TestNGListener;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static org.jdiai.JSTalk.driver;
 import static org.jdiai.JSTalk.loginAs;
 import static org.jdiai.asserts.Conditions.have;
 import static org.jdiai.asserts.Conditions.text;

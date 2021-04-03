@@ -10,7 +10,7 @@ import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 import static org.jdiai.jswraper.DriverManager.CHROME_OPTIONS;
 import static org.jdiai.jswraper.DriverManager.killDrivers;
 import static org.jdiai.page.objects.PageFactory.initElements;
-import static org.jdiai.page.objects.PageFactory.openSite;
+import static org.jdiai.page.objects.PageFactory.initSite;
 import static org.jdiai.tools.TestIDLocators.ID_LOCATOR;
 import static org.jdiai.tools.TestIDLocators.SMART_LOCATOR;
 
@@ -23,7 +23,7 @@ public interface TestInit {
         SMART_LOCATOR = ID_LOCATOR;
         CHROME_OPTIONS = cap -> cap.addArguments("--headless");
         LOG_QUERY = ALL;
-        openSite(JDISite.class);
+        initSite(JDISite.class);
     }
 
     @AfterSuite(alwaysRun = true)

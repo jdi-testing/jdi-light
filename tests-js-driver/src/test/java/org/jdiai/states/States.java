@@ -3,16 +3,17 @@ package org.jdiai.states;
 import org.openqa.selenium.Cookie;
 
 import static org.jdiai.DriverManager.driver;
-import static org.jdiai.Pages.HOME_PAGE;
-import static org.jdiai.Pages.openPage;
+import static org.jdiai.Pages.*;
 
 public class States {
 
     public static void logout() {
+        openSite();
         driver().manage().deleteAllCookies();
         driver().navigate().refresh();
     }
     public static void login() {
+        openSite();
         driver().manage().addCookie(new Cookie("authUser", "true"));
         driver().navigate().refresh();
     }
@@ -25,6 +26,7 @@ public class States {
         openPage(url);
     }
     public static boolean isLoggedIn() {
+        openSite();
         return driver().manage().getCookieNamed("authUser") != null;
     }
 

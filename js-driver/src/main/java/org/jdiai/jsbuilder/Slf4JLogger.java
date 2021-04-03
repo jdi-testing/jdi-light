@@ -4,8 +4,7 @@ import org.apache.logging.log4j.Logger;
 
 import static java.lang.String.format;
 import static org.apache.logging.log4j.Level.*;
-import static org.apache.logging.log4j.Level.ERROR;
-import static org.apache.logging.log4j.LogManager.*;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 public class Slf4JLogger implements ILogger {
     private final String name;

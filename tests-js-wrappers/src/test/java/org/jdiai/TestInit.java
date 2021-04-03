@@ -3,7 +3,6 @@ package org.jdiai;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static org.jdiai.Pages.openSite;
 import static org.jdiai.jsbuilder.QueryLogger.ALL;
 import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 import static org.jdiai.jswraper.DriverManager.CHROME_OPTIONS;
@@ -21,7 +20,6 @@ public interface TestInit {
     default void setUp() {
         killDrivers();
         CHROME_OPTIONS = cap -> cap.addArguments("--headless");
-        openSite();
         LOG_QUERY = ALL;
     }
 

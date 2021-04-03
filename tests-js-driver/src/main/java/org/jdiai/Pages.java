@@ -10,7 +10,9 @@ public class Pages {
     public static String USERS_PAGE = DOMAIN + "/user-table.html";
 
     public static void openSite() {
-        openPage(DOMAIN);
+        if (driver().getCurrentUrl().equals("data:,")) {
+            openPage(DOMAIN);
+        }
     }
     public static void openPage(String url) {
         if (isEmpty(DOMAIN) || url.contains("//")) {

@@ -49,7 +49,7 @@ public class PageFactory {
     public static JFunc1<Field, By> GET_LOCATOR =
         PageFactoryUtils::getLocatorFromField;
 
-    public static void openSite(Class<?> cl) {
+    public static void initSite(Class<?> cl) {
         if (cl.isAnnotationPresent(Site.class)) {
             DOMAIN = cl.getAnnotation(Site.class).value();
         }
@@ -57,10 +57,13 @@ public class PageFactory {
         for (Field field : pages) {
             Class<?> fieldClass = field.getType();
             Object page = isClass(fieldClass, WebPage.class)
-                ? CREATE_WEB_PAGE.execute(fieldClass, field)
-                : initElements(fieldClass);
+                    ? CREATE_WEB_PAGE.execute(fieldClass, field)
+                    : initElements(fieldClass);
             setFieldValue(field, null, page);
         }
+    }
+    public static void openSite(Class<?> cl) {
+        initSite(cl);
         if (DOMAIN != null) {
             JSTalk.openSite();
         }

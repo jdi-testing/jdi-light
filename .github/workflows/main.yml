@@ -53,7 +53,7 @@ jobs:
         continue-on-error: true
         run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-wrappers
 
-      - name: JS Talk Tests
+      - name: JS Nova Tests
         id: jdi-nova-tests
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
@@ -80,7 +80,7 @@ jobs:
           echo Tests failed:
           echo JS Driver Tests: ${{ steps.js-driver-tests.outcome }}
           echo JS Wrappers Tests: ${{ steps.js-wrappers-tests.outcome }}
-          echo JS Talk Tests: ${{ steps.jdi-nova-tests.outcome }}
+          echo JS Nova Tests: ${{ steps.jdi-nova-tests.outcome }}
           echo E2E Without Page objects: ${{ steps.e2e-tests-no-po.outcome }}
           echo E2E With Page objects: ${{ steps.e2e-tests-po.outcome }}
           exit 1
