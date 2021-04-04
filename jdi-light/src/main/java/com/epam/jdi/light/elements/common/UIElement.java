@@ -5,6 +5,7 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -44,6 +45,7 @@ import static com.epam.jdi.light.settings.JDISettings.SCREEN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.JsonUtils.getInt;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.create;
@@ -875,6 +877,13 @@ public class UIElement extends JDIBase
     }
     public void pasteText(String text, long timeToWaitMSec) {
         Keyboard.pasteText(text, timeToWaitMSec);
+    }
+
+    public UIElement inFrame(By... bys) {
+        return setup(base -> base.setFrames(asList(bys)));
+    }
+    public UIElement inFrame(String... bys) {
+        return setup(base -> base.setFrames(map(bys, WebDriverByUtils::defineLocator)));
     }
 
     public IsAssert is() {
