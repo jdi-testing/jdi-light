@@ -4,7 +4,7 @@
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
-## 1.3.12 (03.06.2021)
+## 1.3.12 (04.04.2021)
 * update log names
 * add description for First capital and As Is options for smart locators
 
