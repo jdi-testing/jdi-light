@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JDI Light Mobile iOS Native Apps Tests" thread-count="1">
+
+    <test name="Calendars app tests">
+        <classes>
+            <class name="nativeapp_ios.tests.CalendarAppTests"/>
+        </classes>
+    </test>
+    <test name="Reminders app tests">
+        <classes>
+            <class name="nativeapp_ios.tests.RemindersAppTests"/>
+        </classes>
+    </test>
+    <test name="Contacts app tests">
+        <classes>
+            <class name="nativeapp_ios.tests.ContactsAppTests"/>
+        </classes>
+    </test>
+    <test name="Messages app tests">
+        <classes>
+            <class name="nativeapp_ios.tests.MessagesAppTests"/>
+        </classes>
+    </test>
+    <test name="Settings app tests">
+        <classes>
+            <class name="nativeapp_ios.tests.SettingsAppTests"/>
+        </classes>
+    </test>
+    <test name="Photos app tests">
+        <classes>
+            <class name="nativeapp_ios.tests.PhotosAppTests"/>
+        </classes>
+    </test>
+</suite>

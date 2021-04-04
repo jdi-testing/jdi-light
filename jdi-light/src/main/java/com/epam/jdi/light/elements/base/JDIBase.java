@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.init.rules.AnnotationRule;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
@@ -14,17 +15,16 @@ import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.SearchStrategies.*;
@@ -41,9 +41,10 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.util.Collections.singletonList;
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -60,7 +61,6 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     protected Safe<Integer> timeout = new Safe<>(() -> -1);
     protected Safe<Integer> waitAfterTimeout = new Safe<>(() -> -1);
     protected String waitAfterMethod = "";
-    private Safe<Actions> actions = new Safe<>(() -> new Actions(driver()));
     public ElementArea clickAreaType = ELEMENT.clickType;
     public TextTypes textType = ELEMENT.getTextType;
     public SetTextTypes setTextType = ELEMENT.setTextType;
@@ -150,7 +150,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return setSearchRule("Element in view", ELEMENT_IN_VIEW);
     }
     public JDIBase addSearchRule(String name, JFunc1<WebElement, Boolean> rule) {
-        searchRules.add(name, rule);
+        searchRules.update(name, rule);
         return this;
     }
     public JDIBase setSearchRule(String name, JFunc1<WebElement, Boolean> rule) {
@@ -170,7 +170,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
 
     public JDIBase setLocator(@MarkupLocator String locator) {
-        return setLocator(defineLocator(locator));
+        return setLocator(NAME_TO_LOCATOR.execute(locator));
     }
     public JDIBase setLocator(@MarkupLocator By locator) {
         if (locator != null) {
@@ -194,13 +194,15 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
 
     public IBaseElement waitAfter(int timeout, String methodName) {
         waitAfterTimeout = new Safe<>(() -> timeout > 0 ? timeout : 1);
-        if (isNotBlank(methodName))
+        if (isNotBlank(methodName)) {
             waitAfterMethod = methodName;
+        }
         return this;
     }
     public Pair<String, Integer> waitAfter() {
         return new Pair<>(waitAfterMethod, waitAfterTimeout.get());
     }
+    @Override
     public void setTimeout(int sec) {
         timeout = new Safe<>(() -> sec);
     }
@@ -213,12 +215,14 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         int t = timeout.get();
         return t > -1 ?  t: TIMEOUTS.element.get();
     }
-    public Timer timer() { return new Timer(getTimeout()*1000); }
+    public Timer timer() { return new Timer(getTimeout() * 1000L); }
 
     @Override
     public JDIBase setName(String name) {
         this.name = name;
-        this.varName = name;
+        if (isBlank(this.varName)) {
+            this.varName = name;
+        }
         this.failElement = name;
         return this;
     }
@@ -251,9 +255,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         this.strictSearch = strictSearch;
     }
     @JDebug
-    public WebElement getSmart() {
+    public List<WebElement> getSmartList() {
         try {
-            WebElement element = SMART_SEARCH.execute(this);
+            List<WebElement> element = SMART_SEARCH.execute(this);
             if (element != null)
                 return element;
             throw exception("");
@@ -261,21 +265,25 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             throw exception(ex, FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
         }
     }
+    @JDebug
+    public WebElement getSmart() {
+        return filterWebListToWebElement(base(), getSmartList());
+    }
     // Get all webElements
     @JDebug
     public List<WebElement> getWebElements(Object... args) {
         List<WebElement> elements = getAllWebElements(args);
-        if (elements.size() > 0) {
+        if (isNotEmpty(elements)) {
             beforeSearch(elements.get(0));
         }
         return elements;
     }
     @JDebug
     private List<WebElement> getAllWebElements(Object... args) {
-        getDefaultContext(driver());
+        DEFAULT_CONTEXT.execute(driver());
         if (webElements.hasValue()) {
             List<WebElement> elements = map(webElements.get(), JdiSettings::purify);
-            if (elements.size() > 0) {
+            if (isNotEmpty(elements.size())) {
                 try {
                     elements.get(0).getTagName();
                     return elements;
@@ -285,7 +293,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             }
         }
         if (locator.isNull())
-            return singletonList(getSmart());
+            return getSmartList();
         return getAllElementsInContext(this, args);
     }
     @JDebug
@@ -325,8 +333,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
             els -> els.size() >= minAmount);
         if (result == null)
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
-        List<WebElement> l = filterElements(this, result);
-        return l;
+        return filterElements(this, result);
     }
     @JDebug
     protected List<WebElement> tryGetList() {
@@ -351,6 +358,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public WebList list(Object... args) {
         return $$(getAll(args), getName());
+    }
+    public void waitAction(int sec, JAction1<IBaseElement> action) {
+        waitAction(sec, action, IBaseElement.class);
     }
     public <TE extends IBaseElement> void waitAction(int sec, JAction1<TE> action, Class<TE> type) {
         waitFunc(sec, j -> { action.execute(j); return this; }, type);
@@ -416,7 +426,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         }
     }
     public static String printWebElement(WebElement element) {
-        String asString = element.toString().replaceAll("css selector", "css");
+        String asString = element.toString().replace("css selector", "css");
         String result = asString.startsWith("WebElement->")
                 ? "" : "WebElement->";
         if (asString.contains(")]")) {
@@ -428,7 +438,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public String printWebElement() {
         if (webElement.hasValue())
             return printWebElement(webElement.get());
-        if (webElements.hasValue() && webElements.get().size() > 0)
+        if (isNotEmpty(webElements) && webElements.hasValue())
             return printWebElement(webElements.get().get(0)) + "[" + webElements.get().size() + "]";
         return "";
     }
@@ -438,32 +448,27 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         if (isBlank(element.varName))
             return element.context;
         return Switch(LOGS.logLevel).get(
-                Case(l -> l == STEP,
-                    l -> msgFormat(PRINT_ELEMENT_STEP, element)),
-                Case(l -> l == INFO,
-                    l -> msgFormat(PRINT_ELEMENT_INFO, element)),
-                Case(l -> l == ERROR,
-                    l -> msgFormat(PRINT_ERROR_STEP, element)),
-                Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
+            Case(l -> l == STEP,
+                l -> msgFormat(PRINT_ELEMENT_STEP, element)),
+            Case(l -> l == INFO,
+                l -> msgFormat(PRINT_ELEMENT_INFO, element)),
+            Case(l -> l == ERROR,
+                l -> msgFormat(PRINT_ERROR_STEP, element)),
+            Default(l -> msgFormat(PRINT_ELEMENT_DEBUG, element))
         );
     };
 
-    public void actions(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(actions.get(), get()).build().perform();
-    }
-    public void actions(JFunc1<Actions, Actions> action) {
-        action.execute(actions.get()).build().perform();
-    }
-    public void actionsWithElement(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(actions.get().moveToElement(get()), get()).build().perform();
-    }
-    public void actionsWithElement(JFunc1<Actions, Actions> action) {
-        action.execute(actions.get().moveToElement(get())).build().perform();
-    }
-
+    @Override
     public void offCache() {
         webElement.useCache(false);
         webElements.useCache(false);
     }
+    @Override
     public boolean isUseCache() { return webElement.isUseCache() || webElements.isUseCache(); }
+    public static MapArray<Integer, String> NAMES = new MapArray<>();
+
+    @JDIAction("Assert that %s")
+    public static void executeShouldBe(String name, Condition condition, ICoreElement element) {
+        jdiAssert(condition.execute(element), is(true), name);
+    }
 }

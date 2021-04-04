@@ -7,6 +7,7 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
@@ -20,7 +21,7 @@ import static com.epam.jdi.light.driver.get.DriverVersion.LATEST;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 import static com.epam.jdi.light.driver.get.Platform.X32;
 import static com.epam.jdi.light.driver.get.Platform.X64;
-import static com.epam.jdi.light.driver.get.RemoteDriver.getRemoteURL;
+import static com.epam.jdi.light.driver.get.RemoteDriverInfo.getRemoteURL;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.safeException;
@@ -41,7 +42,11 @@ public class DriverInfo extends DataClass<DriverInfo> {
     public JFunc<String> path;
     public String properties;
     public JFunc1<Capabilities, WebDriver> getDriver;
-    public JFunc1<Capabilities, WebDriver> getRemoteDriver;
+    public JFunc1<Capabilities, RemoteWebDriver> getRemoteDriver = caps -> {
+        RemoteWebDriver driver = new RemoteWebDriver(new URL(getRemoteURL()), caps);
+        driver.setFileDetector(new LocalFileDetector());
+        return driver;
+    };
 
     public boolean isLocal() {
         return !DRIVER.remoteRun;
@@ -57,13 +62,8 @@ public class DriverInfo extends DataClass<DriverInfo> {
         try {
             logger.debug("setupRemote()");
             Capabilities caps = getCapabilities();
-            if (getRemoteDriver != null) {
-                logger.debug("getRemoteDriver.execute(caps: %s)", caps);
-                return getRemoteDriver.execute(caps);
-            } else {
-                logger.debug("new RemoteWebDriver(url:%s, caps: %s)", getRemoteURL(), caps);
-                return new RemoteWebDriver(new URL(getRemoteURL()), caps);
-            }
+            logger.debug("getRemoteDriver.execute(caps: %s)", caps);
+            return getRemoteDriver.execute(caps);
         } catch (Throwable ex) {
             throw exception(ex, "Failed to setup remote "+ downloadType.name+" driver");
         }
@@ -94,16 +94,22 @@ public class DriverInfo extends DataClass<DriverInfo> {
             try {
                 if (isBlank(DRIVER.path) && DRIVER.version.equals(LATEST.value)) {
                     logger.info("Failed to download driver (%s %s) of latest version:" +
-                            "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
-                    try {
-                        downloadDriver(downloadType, getDriverPlatform(), getBelowVersion());
-                        return getDriver.execute(getCapabilities());
-                    } catch (Throwable ex2) { throw exception(ex2, "Failed to download driver"); }
+                        "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
+                    return tryToDownloadDriver();
                 }
                 throw exception(safeException(ex));
             } catch (Throwable ex2) {
                 throw exception(ex2, "Failed to setup local driver");
             }
+        }
+    }
+
+    private WebDriver tryToDownloadDriver() {
+        try {
+            downloadDriver(downloadType, getDriverPlatform(), getBelowVersion());
+            return getDriver.execute(getCapabilities());
+        } catch (Throwable ex) {
+            throw exception(ex, "Failed to download driver");
         }
     }
     public static String getBelowVersion() {

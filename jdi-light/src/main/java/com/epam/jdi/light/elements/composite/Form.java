@@ -9,8 +9,10 @@ import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
+import com.epam.jdi.light.elements.pageobjects.annotations.MapToField;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction4;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc3;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -43,6 +45,14 @@ public class Form<T> extends Section {
 
     public static JFunc3<Field, Object, Object, String> GET_ACTION = (field, element, parent)
         -> ((HasValue) element).getValue().trim();
+
+    public static JFunc1<Field, String> MAP_FORM = (field)
+        -> { if (hasAnnotation(field, MapToField.class))
+                 return field.getAnnotation(MapToField.class).value();
+             if (field.getType().isAnnotationPresent(MapToField.class))
+                 return field.getType().getAnnotation(MapToField.class).value();
+             return getElementName(field);
+            };
 
     @JDebug
     public void fillAction(Field field, Object element, Object parent, String setValue) {
@@ -99,9 +109,8 @@ public class Form<T> extends Section {
             return;
         }
         for (Pair<String, String> pair : map) {
-            Field setField = null;
             try {
-                setField = first(allFields, f -> ELEMENT.namesEqual.execute(pair.key, getElementName(f)));
+                Field setField = first(allFields, f -> ELEMENT.namesEqual.execute(pair.key, MAP_FORM.execute(f)));
                 if (setField == null)
                     continue;
                 fillAction(setField, getValueField(setField, pageObject), pageObject, pair.value);

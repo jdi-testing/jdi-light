@@ -76,12 +76,13 @@ public class EntitiesCollection {
     public static void addElement(Object jdi) {
         if (isInterface(jdi.getClass(), ICoreElement.class)) {
             ICoreElement element = (ICoreElement) jdi;
-            if (ELEMENTS.get().has(element.getName()))
-                ELEMENTS.get().get(element.getName()).add(jdi);
+            String name = element.getName();
+            if (ELEMENTS.get().has(name))
+                ELEMENTS.get().get(name).add(jdi);
             else {
                 List<Object> newList = new ArrayList<>();
                 newList.add(element);
-                ELEMENTS.get().add(element.getName(), newList);
+                ELEMENTS.get().add(name, newList);
             }
         }
     }
@@ -145,7 +146,7 @@ public class EntitiesCollection {
                     return element;
                 }
             }
-            return ELEMENTS.get().get(0);
+            return ELEMENTS.get().get(name).get(0);
         }
         if (jsonElements == null)
             readElementsFromJson();

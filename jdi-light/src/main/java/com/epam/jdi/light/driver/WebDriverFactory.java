@@ -21,6 +21,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.safeException;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.Thread.currentThread;
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -61,7 +62,7 @@ public class WebDriverFactory {
     }
     private static WebDriver registerNewDriver(String driverName, WebDriver driver, MapArray<String, WebDriver> drivers) {
         logger.trace("registerNewDriver >> " + driver);
-        drivers.add(driverName, driver);
+        drivers.update(driverName, driver);
         return driver;
     }
     private static WebDriver registerNewDriver(String driverName, MapArray<String, WebDriver> drivers) {
@@ -72,7 +73,7 @@ public class WebDriverFactory {
                 useDriver(driverName, () -> DRIVER.types.get(driverName).getDriver());
             if (!DRIVERS.has(driverName))
                 throw exception("Can't get driver '%s'. Please use drivers from JDISettings.DRIVER.types list. " +
-                        "Or add your own driver with WebDriverFactory.useDriver(name,() -> WebDriver) method.");
+                    "Or add your own driver with WebDriverFactory.useDriver(name,() -> WebDriver) method.");
             WebDriver driver = getValidDriver(driverName);
             driver = DRIVER.setup.execute(driver);
             registerNewDriver(driverName, driver, drivers);
@@ -87,7 +88,7 @@ public class WebDriverFactory {
         boolean goodDriver = false;
         WebDriver driver = null;
         Timer timer = new Timer(10);
-        while (!goodDriver && !timer.timeoutPassed()) {
+        while (!goodDriver && timer.isRunning()) {
             try {
                 if (driver != null) {
                     driver.quit();
@@ -135,12 +136,12 @@ public class WebDriverFactory {
     }
     public static void waitMultiThread() {
         MULTI_THREAD = true;
-        Timer timer = new Timer(TIMEOUTS.page.get() * 1000);
-        while (GETTING_DRIVER && !timer.timeoutPassed()) { }
+        Timer timer = new Timer(TIMEOUTS.page.get() * 1000L);
+        while (GETTING_DRIVER && timer.isRunning()) { }
     }
 
     public static WebDriver getDriverFromName(String driverName, MapArray<String, WebDriver> drivers) {
-        WebDriver driver = drivers.size() > 0 && drivers.has(driverName)
+        WebDriver driver = isNotEmpty(drivers) && drivers.has(driverName)
             ? drivers.get(driverName)
             : registerNewDriver(driverName, drivers);
         logger.trace("DRIVER >> " + (driver == null ? "NULL" : driver.toString()));
@@ -150,7 +151,7 @@ public class WebDriverFactory {
         logger.trace("getMultiThreadDriver");
         MapArray<String, WebDriver> drivers = THREAD_RUN_DRIVERS.get();
         WebDriver driver = null;
-        if (drivers.size() > 0 && drivers.has(driverName)) {
+        if (isNotEmpty(drivers) && drivers.has(driverName)) {
             driver = drivers.get(driverName);
         } else {
             try {
@@ -190,15 +191,15 @@ public class WebDriverFactory {
     }
 
     public static <T> T jsExecute(String script, Object... args) {
-        return (T)getJSExecutor().executeScript(script, args);
+        return (T) getJSExecutor().executeScript(script, args);
     }
 
     public static WebDriver getDriver() {
+        String driverName = isNotBlank(DRIVER.name) ? DRIVER.name : CHROME.name;
         try {
-            String driverName = isNotBlank(DRIVER.name) ? DRIVER.name : CHROME.name;
             return getDriver(driverName);
         } catch (Exception ex) {
-            throw exception(ex, "Can't get WebDriver");
+            throw exception(ex, "Can't get WebDriver: " + driverName);
         }
     }
 
@@ -248,7 +249,6 @@ public class WebDriverFactory {
 
     private static void closeDriver(WebDriver driver) {
         try {
-            driver.close();
             driver.quit();
         } catch (Exception ignore) { }
     }

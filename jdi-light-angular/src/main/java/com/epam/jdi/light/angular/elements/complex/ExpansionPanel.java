@@ -13,6 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
+
 /**
  * To see an example of ExpansionPanel web element please visit https://material.angular.io/components/expansion/overview.
  */
@@ -41,18 +43,23 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
         accordionDateInput = new Datepicker();
     }
 
-    @JDIAction("Expand '{name}' panel by index '{0}'")
+    @JDIAction(value = "Expand '{name}' panel by index '{0}'", timeout = 1)
     public void expand(final int indexNumber) {
         List<UIElement> expansionIndicator = getExpansionIndicatorLocator();
         List<UIElement> icons = getIconsLocator();
-        if (!expansionIndicator.isEmpty() && isCollapsed(indexNumber)) {
+        boolean isCollapsed = isCollapsed(indexNumber);
+        if (!expansionIndicator.isEmpty() && isCollapsed) {
             expansionIndicator.get(indexNumber).click();
-        } else if (!icons.isEmpty() && isCollapsed(indexNumber)) {
+        } else if (!icons.isEmpty() && isCollapsed) {
             icons.get(indexNumber).click();
         }
+        else {
+            logger.debug("Do nothing to expand. Is panel collapsed: %s", isCollapsed(indexNumber));
+        }
+        waitFor().expanded(indexNumber);
     }
 
-    @JDIAction("Collapse '{name}' panel by index '{0}'")
+    @JDIAction(value = "Collapse '{name}' panel by index '{0}'", timeout = 1)
     public void collapse(final int indexNumber) {
         List<UIElement> expansionIndicator = getExpansionIndicatorLocator();
         List<UIElement> icons = getIconsLocator();
@@ -61,6 +68,10 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
         } else if (!icons.isEmpty() && isExpanded(indexNumber)) {
             icons.get(indexNumber).click();
         }
+        else {
+            logger.debug("Do nothing to collapse. Is panel expanded: %s", isExpanded(indexNumber));
+        }
+        waitFor().collapsed(indexNumber);
     }
 
     @JDIAction("Is '{name}' '{0}' panel expanded")

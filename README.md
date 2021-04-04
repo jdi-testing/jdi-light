@@ -23,7 +23,7 @@ Increase test [performance examples](https://github.com/jdi-testing/jdi-light/tr
 
 ## Introduction
 
-JDI – is the test Framework for UI test automation that helps to makes your tests fast and sustainable and provide obvious and predictable test run result
+JDI Light – is the test Framework for UI test automation that helps to makes your tests fast and sustainable and provide obvious and predictable test run result
 
 ## Highlights
 - Has simple integration with any Selenium based project that allows to increase projects stability, add user actions logs and enrich standard WebElements capabilities with new features in minutes (TBD add Guide)
@@ -71,5 +71,3 @@ Skype: roman.iovlev
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light?ref=badge_large)
-
-Test message - remove me
