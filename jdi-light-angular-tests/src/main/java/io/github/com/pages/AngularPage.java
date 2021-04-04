@@ -34,6 +34,8 @@ import io.github.com.pages.sections.StepperSection;
 import io.github.com.pages.sections.TabGroupSection;
 import io.github.com.pages.sections.ToolbarSection;
 import io.github.com.pages.sections.TooltipSection;
+import io.github.com.pages.sections.TableSection;
+import io.github.com.pages.sections.MaterialTreeSection;
 
 public class AngularPage extends WebPage {
 
@@ -60,9 +62,11 @@ public class AngularPage extends WebPage {
     public static MenuSection menuSection;
     public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
+    public static TableSection tableSection;
     public static SliderSection sliderSection;
     public static CardSection cardSection;
     public static TooltipSection tooltipSection;
+    public static MaterialTreeSection materialTreeSection;
     public static DatepickerSection datepickerSection;
     public static FormFieldsSection formFieldsSection;
     public static SideNavSection sidenavSection;
