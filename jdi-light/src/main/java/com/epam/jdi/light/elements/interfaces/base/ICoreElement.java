@@ -125,5 +125,5 @@ public interface ICoreElement extends IBaseElement {
         base().waitAction(timeInSec, e -> shouldBe(conditions));
         return this;
     }
-    default ICoreElement should(Condition... condition) { return shouldBe(condition);}
+    default ICoreElement should(Condition... conditions) { return shouldBe(conditions);}
 }
