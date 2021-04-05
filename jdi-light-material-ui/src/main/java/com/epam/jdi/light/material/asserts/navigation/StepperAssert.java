@@ -10,7 +10,7 @@ import org.hamcrest.Matchers;
 public class StepperAssert extends UIAssert<StepperAssert, Stepper> {
 
     @JDIAction("Assert that step title is correct")
-    public StepperAssert stepTitleDisplayed(String title) {
+    public StepperAssert text(String title) {
         jdiAssert(element().isTitleCorrect(title), Matchers.is(true));
         return this;
     }
