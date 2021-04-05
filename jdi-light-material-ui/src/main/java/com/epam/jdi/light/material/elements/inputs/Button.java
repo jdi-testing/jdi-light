@@ -12,8 +12,6 @@ import java.lang.reflect.Field;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 public class Button extends UIBaseElement<ButtonAssert> implements ISetup {
-    Button() {}
-
     String containedButton;
     String textButton;
     String iconLabelButton;
@@ -22,6 +20,8 @@ public class Button extends UIBaseElement<ButtonAssert> implements ISetup {
     String iconButton;
     String customizedButton;
     String complexButton;
+
+    Button() {}
 
     @JDIAction("Get contained button by index")
     public Button getContainedButtonByIndex(int index) {
