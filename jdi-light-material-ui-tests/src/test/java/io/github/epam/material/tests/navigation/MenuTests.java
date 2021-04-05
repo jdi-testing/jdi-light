@@ -87,9 +87,10 @@ public class MenuTests extends TestsInit {
     public void menuWithIconsTest() {
         menuWithIconsPage.open();
 
+        menuFrame.menu.is().displayedSvg();
         menuFrame.menu.click();
         menuFrame.paddingMenuList.is().displayed();
-        menuFrame.menuIcon.is().displayedSvg();
+        menuFrame.menuListFirstButton.is().displayedSvg();
         menuFrame.menuListFirstButton.has().text("Text with send icon");
         menuFrame.menuListFirstButton.click();
         menuFrame.menu.is().displayed();

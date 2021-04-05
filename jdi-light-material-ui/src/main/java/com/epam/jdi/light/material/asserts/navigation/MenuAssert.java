@@ -25,7 +25,7 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
     public MenuAssert displayedSvg() {
         try {
             boolean isDisplayed = new Timer(base().getTimeout() * 1000L)
-                    .wait(() -> element().find(".MuiListItemIcon-root").isDisplayed());
+                    .wait(() -> element().find(".MuiSvgIcon-root").isDisplayed());
             jdiAssert(isDisplayed, Matchers.is(true));
         } catch (AssertionError e){
             new AssertionError("Svg not found");
