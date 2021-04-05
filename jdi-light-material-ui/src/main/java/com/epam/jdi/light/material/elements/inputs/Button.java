@@ -23,44 +23,20 @@ public class Button extends UIBaseElement<ButtonAssert> implements ISetup {
 
     Button() {}
 
-    @JDIAction("Get contained button by index")
-    public Button getContainedButtonByIndex(int index) {
-        return new Button(core().finds(containedButton).get(index));
-    }
-
-    @JDIAction("Get text button by index")
-    public Button getTextButtonByIndex(int index) {
-        return new Button(core().finds(textButton).get(index));
-    }
-
-    @JDIAction("Get icon label button by index")
-    public Button getIconLabelButtonByIndex(int index) {
-        return new Button(core().finds(iconLabelButton).get(index));
-    }
-
-    @JDIAction("Get icon label icon by index")
-    public Button getIconLabelIconByIndex(int index) {
-        return new Button(core().finds(iconLabelIcon).get(index));
-    }
-
-    @JDIAction("Get icon label span icon")
-    public Button getIconLabelSpanIcon() {
-        return new Button(core().find(iconLabelSpanIcon));
-    }
-
-    @JDIAction("Get icon button by index")
-    public Button getIconButtonByIndex(int index) {
-        return new Button(core().finds(iconButton).get(index));
-    }
-
-    @JDIAction("Get customized button by index")
-    public Button getCustomizedButtonByIndex(int index) {
-        return new Button(core().finds(customizedButton).get(index));
-    }
-
-    @JDIAction("Get complex button by index")
-    public Button getComplexButtonByIndex(int index) {
-        return new Button(core().finds(complexButton).get(index));
+    @JDIAction("Get buttons by index")
+    public Button getButtonByGroupIndex(String group, int index) {
+        switch (group) {
+            case "contained": return new Button(core().finds(containedButton).get(index));
+            case "text": return new Button(core().finds(textButton).get(index));
+            case "iconLabelButton": return new Button(core().finds(iconLabelButton).get(index));
+            case "iconLabelIcon": return new Button(core().finds(iconLabelIcon).get(index));
+            case "iconLabelSpanIcon": return new Button(core().find(iconLabelSpanIcon));
+            case "iconButton": return new Button(core().finds(iconButton).get(index));
+            case "customizedButton": return new Button(core().finds(customizedButton).get(index));
+            case "complexButton": return new Button(core().finds(complexButton).get(index));
+            default:
+                throw new IllegalStateException("Unexpected value: " + group);
+        }
     }
 
     public Button(UIElement element) {
