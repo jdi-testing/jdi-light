@@ -24,7 +24,7 @@ public class Button extends UIBaseElement<ButtonAssert> implements ISetup {
     Button() {
     }
 
-    @JDIAction("Get buttons by index")
+    @JDIAction("Get buttons by group and index")
     public Button getButtonByGroupIndex(String group, int index) {
         String currentButton;
         switch (group) {
