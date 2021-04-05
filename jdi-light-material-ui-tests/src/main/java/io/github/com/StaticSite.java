@@ -30,13 +30,9 @@ import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.ContainerFrame;
-import io.github.com.pages.layout.GridFrame;
+import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.HiddenFrame;
-import io.github.com.pages.navigation.BottomNavigationFrame;
-import io.github.com.pages.navigation.BreadcrumbsFrame;
-import io.github.com.pages.navigation.LinkFrame;
-import io.github.com.pages.navigation.StepperFrame;
-import io.github.com.pages.navigation.TabFrame;
+import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardFrame;
@@ -586,6 +582,31 @@ public class StaticSite {
 
     @Url("/material-ui-navigation-bottom-navigation--default")
     public static WebPage bottomNavigationPage;
+
+    // menu
+    @Frame("storybook-preview-iframe")
+    public static MenuFrame menuFrame;
+
+    @Url("/material-ui-navigation-menu--simple-menu")
+    public static WebPage simpleMenuPage;
+
+    @Url("/material-ui-navigation-menu--scroll-menu")
+    public static WebPage scrollMenuPage;
+
+    @Url("/material-ui-navigation-menu--selected-with-vertical-positioning")
+    public static WebPage selectedVerticalPositioningPage;
+
+    @Url("/material-ui-navigation-menu--selected-no-vertical-positioning")
+    public static WebPage selectedNoVerticalPositioningPage;
+
+    @Url("/material-ui-navigation-menu--menu-list-with-positioning")
+    public static WebPage positioningMenuPage;
+
+    @Url("/material-ui-navigation-menu--context-menu")
+    public static WebPage contextMenuPage;
+
+    @Url("/material-ui-navigation-menu--menu-with-icons")
+    public static WebPage menuWithIconsPage;
 
     // layouts
     // hidden
