@@ -1,12 +1,13 @@
 package org.mytests.uiobjects.example.knection;
 
 import com.epam.jdi.tools.DataClass;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction1;
 
 import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
 
 public class Workspace extends DataClass<Workspace> {
     public String category, name, projectCode, apiId, therapeuticArea, processes,
@@ -22,8 +23,8 @@ public class Workspace extends DataClass<Workspace> {
         try {
         Field[] otherFields = ws.getClass().getDeclaredFields();
         for (Field f : getClass().getDeclaredFields()) {
-            Field fOther = LinqUtils.first(otherFields, fo -> fo.getName().equals(f.getName()));
-            fOther.set(ws, f.get(this));
+            Field fOther = first(otherFields, fo -> fo.getName().equals(f.getName()));
+            fOther.set(ws, getValueField(f, this));
         }
         } catch(Exception ex) { throw exception("Can't copy class"); }
         return ws;
