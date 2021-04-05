@@ -49,7 +49,7 @@ public class DateTimePickersTests extends TestsInit {
     public void timePicker() {
         openSection("Date / Time");
 
-        pickers.getPickerLabel(2).has().text("Time picker");
+        pickers.getPickerLabel(3).has().text("Time picker");
         String currentTime = pickers.getPickerField(3).getText();
         pickers.getPickerBtn(3).click();
         dateTimePopUpCancelButton.toggle();
