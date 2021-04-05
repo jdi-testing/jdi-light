@@ -18,13 +18,10 @@ public class ButtonTests extends TestsInit {
         buttonFrame.button.has().text("BUTTON");
     }
 
-    @Test(expectedExceptions = {RuntimeException.class},
-            expectedExceptionsMessageRegExp = ".*(Can't perform click. Element is disabled)")
+    @Test
     public void disabledButtonTest() {
         inputButtonDisabledPage.shouldBeOpened();
 
         buttonFrame.button.is().disabled();
-        buttonFrame.button.click();
     }
-
 }

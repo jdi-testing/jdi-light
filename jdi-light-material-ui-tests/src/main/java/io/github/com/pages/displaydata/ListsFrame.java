@@ -1,9 +1,9 @@
-package io.github.com.pages.datadisplay;
+package io.github.com.pages.displaydata;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
-import com.epam.jdi.light.material.elements.datadisplay.Lists;
+import com.epam.jdi.light.material.elements.displaydata.Lists;
 
 public class ListsFrame extends UIElement {
     @UI("//*[contains(text(),'List item 1')]")

@@ -10,12 +10,12 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
-import io.github.com.pages.datadisplay.IconsFrame;
-import io.github.com.pages.datadisplay.ListsFrame;
 import io.github.com.pages.displaydata.AvatarFrame;
 import io.github.com.pages.displaydata.BadgeFrame;
 import io.github.com.pages.displaydata.ChipFrame;
+import io.github.com.pages.displaydata.IconsFrame;
 import io.github.com.pages.displaydata.InsetDividerFrame;
+import io.github.com.pages.displaydata.ListsFrame;
 import io.github.com.pages.displaydata.MaterialIconFrame;
 import io.github.com.pages.displaydata.TableFrame;
 import io.github.com.pages.displaydata.TooltipFrame;
@@ -45,6 +45,7 @@ import io.github.com.pages.navigation.*;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layouts.BoxFrame;
 import io.github.com.pages.layouts.HiddenFrame;
+import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardFrame;
@@ -648,6 +649,13 @@ public class StaticSite {
 
     @Url("/material-ui-layout-container--default")
     public static WebPage defaultContainerPage;
+
+    // grid
+    @Frame("storybook-preview-iframe")
+    public static GridFrame gridFrame;
+
+    @Url("/material-ui-layout-grid--grid-view")
+    public static WebPage defaultGridPage;
 
     // login page
     @UI("#login-form")
