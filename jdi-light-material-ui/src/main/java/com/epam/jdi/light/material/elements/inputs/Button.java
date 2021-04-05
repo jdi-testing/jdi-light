@@ -21,22 +21,41 @@ public class Button extends UIBaseElement<ButtonAssert> implements ISetup {
     String customizedButton;
     String complexButton;
 
-    Button() {}
+    Button() {
+    }
 
     @JDIAction("Get buttons by index")
     public Button getButtonByGroupIndex(String group, int index) {
+        String currentButton;
         switch (group) {
-            case "contained": return new Button(core().finds(containedButton).get(index));
-            case "text": return new Button(core().finds(textButton).get(index));
-            case "iconLabelButton": return new Button(core().finds(iconLabelButton).get(index));
-            case "iconLabelIcon": return new Button(core().finds(iconLabelIcon).get(index));
-            case "iconLabelSpanIcon": return new Button(core().find(iconLabelSpanIcon));
-            case "iconButton": return new Button(core().finds(iconButton).get(index));
-            case "customizedButton": return new Button(core().finds(customizedButton).get(index));
-            case "complexButton": return new Button(core().finds(complexButton).get(index));
+            case "contained":
+                currentButton = containedButton;
+                break;
+            case "text":
+                currentButton = textButton;
+                break;
+            case "iconLabelButton":
+                currentButton = iconLabelButton;
+                break;
+            case "iconLabelIcon":
+                currentButton = iconLabelIcon;
+                break;
+            case "iconLabelSpanIcon":
+                currentButton = iconLabelSpanIcon;
+                break;
+            case "iconButton":
+                currentButton = iconButton;
+                break;
+            case "customizedButton":
+                currentButton = customizedButton;
+                break;
+            case "complexButton":
+                currentButton = complexButton;
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + group);
         }
+        return new Button(core().finds(currentButton).get(index));
     }
 
     public Button(UIElement element) {
