@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.complex.list;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import io.github.com.custom.Result;
 import io.github.com.custom.SearchResult;
@@ -130,10 +129,6 @@ public class ElementsGoogleTests implements TestsInit {
 
     @Test
     public void validateFilterTests() {
-        searchPage.search.assertThat().displayed();
-        searchPage.search.assertThat().size(equalTo(8));
-        searchPage.search.waitFor().all().elements(UIElement::isDisplayed);
-
         DataList<SearchResult, Result> jobs = searchPage.search;
 
         jobs.assertThat().value(containsString(

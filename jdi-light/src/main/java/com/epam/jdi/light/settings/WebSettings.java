@@ -33,6 +33,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
 import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.SearchStrategies.*;
+import static com.epam.jdi.light.common.SearchTypes.*;
 import static com.epam.jdi.light.common.SetTextTypes.CLEAR_SEND_KEYS;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.common.UseSmartSearch.*;
@@ -74,8 +75,6 @@ public class WebSettings {
 
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
-    public static boolean STRICT_SEARCH = true;
-    public static boolean FAST_SEARCH = true;
 
     public static String getDomain() {
         if (isBlank(DRIVER.domain)) {
@@ -319,39 +318,40 @@ public class WebSettings {
         if (p.equals("soft"))
             p = "any, multiple";
         if (p.equals("strict"))
-            p = "visible, single";
-        if (p.split(",").length == 2) {
-            List<String> params = map(asList(p.split(",")), a -> ELEMENT.simplifyString.execute(a));
-            if (params.contains("visible") || params.contains("displayed")) {
-                onlyVisible();
-                FAST_SEARCH = false;
-            }
-            if (params.contains("any") || params.contains("all"))
-                noValidation();
-            if (params.contains("enabled")) {
-                visibleEnabled();
-                FAST_SEARCH = false;
-            }
-            if (params.contains("inview")) {
-                inView();
-                FAST_SEARCH = false;
-            }
-            if (params.contains("single"))
-                STRICT_SEARCH = true;
-            if (params.contains("multiple"))
-                STRICT_SEARCH = false;
-            if (params.contains("fast"))
-                FAST_SEARCH = true;
+            p = "visible, smart";
+        if (p.split(",").length != 2) return;
+        List<String> params = map(asList(p.split(",")), a -> ELEMENT.simplifyString.execute(a));
+        if (params.contains("visible") || params.contains("displayed")) {
+            onlyVisible();
+        }
+        if (params.contains("any") || params.contains("all")) {
+            noValidation();
+        }
+        if (params.contains("enabled")) {
+            visibleEnabled();
+        }
+        if (params.contains("inview")) {
+            inView();
+        }
+        if (params.contains("single")) {
+            ELEMENT.searchType = Single;
+        } else if (params.contains("first") || params.contains("multiple")) {
+            ELEMENT.searchType = First;
+        } else if (params.contains("smart")) {
+            ELEMENT.searchType = Smart;
         }
     }
 
     private static PageLoadStrategy getPageLoadStrategy(String strategy) {
         switch (strategy.toLowerCase()) {
-            case "normal": return NORMAL;
-            case "none": return PageLoadStrategy.NONE;
-            case "eager": return EAGER;
+            case "none":
+                return PageLoadStrategy.NONE;
+            case "eager":
+                return EAGER;
+            case "normal":
+            default:
+                return NORMAL;
         }
-        return NORMAL;
     }
 
     public static Properties getProperties(String path) {

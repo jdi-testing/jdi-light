@@ -21,12 +21,6 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
     implements HasLabel, SetValue, HasClick, HasCheck, CanBeSelected {
 
     @Override
-    public void init() {
-        super.init();
-        base().noValidation();
-    }
-
-    @Override
     public Label label() {
         Label label = safeGetLabel();
         if (label != null) {

@@ -8,7 +8,6 @@ import com.epam.jdi.light.elements.interfaces.base.JDIElement;
 import com.epam.jdi.tools.func.JAction2;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
-import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -21,12 +20,15 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.LABEL;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.filter;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JdiSettings {
@@ -41,11 +43,11 @@ public class JdiSettings {
     };
 
     public static final String FAILED_TO_FIND_ELEMENT_MESSAGE
-            = "Can't find Element '%s' during %s seconds";
+        = "Can't find Element '%s' during %s seconds";
     public static final String FIND_TO_MUCH_ELEMENTS_MESSAGE
-            = "Found %s elements instead of one for Element '%s' during %s seconds";
+        = "Found %s elements instead of one for Element '%s' during %s seconds";
     public static final String SEARCH_RULE_VALIDATION_FAILED
-            = "Search rules failed for element. Please check base().searchRules() for element or in global settings(JDISettings.ELEMENT.searchRule)";
+        = "Search rules failed for element. Please check base().searchRules() for element or in global settings(JDISettings.ELEMENT.searchRule)";
 
     private static WebElement getWithArgs(JDIBase b, Object[] args) {
         logger.trace("getWithArgs");
@@ -70,26 +72,55 @@ public class JdiSettings {
     public static WebElement filterWebListToWebElement(JDIBase base, List<WebElement> els) {
         if (els.isEmpty())
             throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, base.toString(), base.getTimeout());
-        if (FAST_SEARCH && els.size() == 1)
-            return els.get(0);
+        switch (base.searchType) {
+            case Smart:
+                return smartSearch(base, els);
+            case Single:
+                return singleSearch(base, els);
+            case First :
+                return firstSearch(base, els);
+            default:
+                throw exception("Unknown search type");
+        }
+    }
+    private static WebElement smartSearch(JDIBase base, List<WebElement> els) {
         List<WebElement> filtered = filterElements(base, els);
-        if (filtered.size() == 1)
+        return filtered.size() == 1
+            ? filtered.get(0)
+            : els.get(0);
+    }
+    private static WebElement singleSearch(JDIBase base, List<WebElement> els) {
+        List<WebElement> filtered = filterElements(base, els);
+        if (isEmpty(filtered)) {
+            throw exception("Expected one element but found %s (filters: %s)",
+                filtered.size(), print(base.searchRules().keys()));        }
+        if (filtered.size() == 1) {
             return filtered.get(0);
-        if ((base.strictSearch == null && STRICT_SEARCH) || (base.strictSearch != null && base.strictSearch))
-            throw exception(FIND_TO_MUCH_ELEMENTS_MESSAGE, els.size(), base.toString(), base.getTimeout());
-        return (filtered.size() > 1 ? filtered : els).get(0);
+        }
+        throw exception("Expected one element but found %s (filters: %s)",
+            filtered.size(), print(base.searchRules().keys()));
+    }
+    private static WebElement firstSearch(JDIBase base, List<WebElement> els) {
+        List<WebElement> filtered = filterElements(base, els);
+        if (isEmpty(filtered)) {
+            throw exception("Expected at least one element but found %s (filters: %s)",
+                filtered.size(), print(base.searchRules().keys()));
+        }
+        return filtered.get(0);
     }
 
     @JDebug
     public static List<WebElement> filterElements(JDIBase base, List<WebElement> elements) {
-        if (ObjectUtils.isEmpty(elements))
+        if (isEmpty(elements)) {
             return new ArrayList<>();
+        }
         List<WebElement> result = elements;
-        for (JFunc1<WebElement, Boolean> rule : base.searchRules().values())
+        for (JFunc1<WebElement, Boolean> rule : base.searchRules().values()) {
             result = filter(result, rule::execute);
-        if (ObjectUtils.isEmpty(result) && base.textType == LABEL)
-            return elements;
-        return result;
+        }
+        return isEmpty(result) && base.textType == LABEL
+            ? elements
+            : result;
     }
     public static WebElement purify(WebElement element) {
         return isInterface(element.getClass(), IBaseElement.class)

@@ -1,9 +1,6 @@
 package com.epam.jdi.light.settings;
 
-import com.epam.jdi.light.common.ElementArea;
-import com.epam.jdi.light.common.SetTextTypes;
-import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.common.UseSmartSearch;
+import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
@@ -20,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
+import static com.epam.jdi.light.common.SearchTypes.Smart;
 import static com.epam.jdi.light.common.UseSmartSearch.UI_AND_ELEMENTS;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
@@ -33,6 +31,7 @@ public class ElementSettings {
     public TextTypes getTextType;
     public SetTextTypes setTextType;
     public int startIndex = 1;
+    public SearchTypes searchType = Smart;
     public Pair<String, JFunc1<WebElement, Boolean>> searchRule;
     public JFunc1<Field, String> name = field -> splitCamelCase(field.getName());
     public String smartTemplate = "[data-testid='%s']";
