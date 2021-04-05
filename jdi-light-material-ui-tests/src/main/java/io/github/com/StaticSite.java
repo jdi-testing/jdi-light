@@ -29,7 +29,7 @@ import io.github.com.pages.feedback.LinearProgressFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.inputs.ButtonFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
-import io.github.com.pages.inputs.CheckboxFrame;
+import io.github.com.pages.inputs.CheckboxPage;
 import io.github.com.pages.inputs.DateTimePickersFrame;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.FabFrame;
@@ -61,7 +61,7 @@ import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.utils.PortalFrame;
 import io.github.com.pages.utils.TransitionFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light")
+@JSite("https://jdi-testing.github.io/jdi-light/material")
 public class StaticSite {
 
     // inputs
@@ -152,14 +152,17 @@ public class StaticSite {
     public static WebPage inputTextFieldTimePage;
 
     //checkbox
-    @Frame("storybook-preview-iframe")
-    public static CheckboxFrame checkboxFrame;
+//    @Frame("storybook-preview-iframe")
+//    public static CheckboxFrame checkboxFrame;
 
-    @Url("/material-ui-inputs-checkbox--disabled")
-    public static WebPage inputCheckboxDisabled;
+    @Url("/checkboxes")
+    public static CheckboxPage checkboxPage;
 
-    @Url("/material-ui-inputs-checkbox--primary")
-    public static WebPage primaryCheckBoxPage;
+//    @Url("/material-ui-inputs-checkbox--disabled")
+//    public static WebPage inputCheckboxDisabled;
+//
+//    @Url("/material-ui-inputs-checkbox--primary")
+//    public static WebPage primaryCheckBoxPage;
 
     // button group
     @Frame("storybook-preview-iframe")
