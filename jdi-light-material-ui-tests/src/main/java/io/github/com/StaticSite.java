@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.inputs.Picker;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
@@ -28,7 +27,20 @@ import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.DialogFrame;
 import io.github.com.pages.feedback.LinearProgressFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
-import io.github.com.pages.inputs.*;
+import io.github.com.pages.inputs.ButtonFrame;
+import io.github.com.pages.inputs.ButtonGroupFrame;
+import io.github.com.pages.inputs.CheckboxFrame;
+import io.github.com.pages.inputs.DateTimePickersFrame;
+import io.github.com.pages.inputs.EnhancedTransferListFrame;
+import io.github.com.pages.inputs.FabFrame;
+import io.github.com.pages.inputs.GroupCheckBoxFrame;
+import io.github.com.pages.inputs.RadioButtonFrame;
+import io.github.com.pages.inputs.SelectFrame;
+import io.github.com.pages.inputs.SimpleTransferListFrame;
+import io.github.com.pages.inputs.SliderFrame;
+import io.github.com.pages.inputs.SplitButtonGroupFrame;
+import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layout.GridFrame;
@@ -67,10 +79,6 @@ public class StaticSite {
     public static WebPage inputSwitchDisabledAndCheckedPage;
 
     //date and time pickers
-
-    @Frame("storybook-preview-iframe")
-    public static PickersFrame pickersFrame;
-
     @Frame("storybook-preview-iframe")
     public static DateTimePickersFrame dateTimePickersFrame;
 

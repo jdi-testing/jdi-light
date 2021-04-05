@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDIPicker {
-    @MarkupLocator String pickerField() default ".MuiInputBase-input";
+    @MarkupLocator String pickerInput() default "//input[@class]";
 
-    @MarkupLocator String pickerRoot() default ".MuiChip-root";
+    @MarkupLocator String pickerLabel() default "//label[@class]";
 
-    @MarkupLocator String pickerCalendarButton() default "//button[@class]";
+    @MarkupLocator String pickerButton() default "//button[@class]";
 }

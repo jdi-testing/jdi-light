@@ -1,26 +1,24 @@
 package io.github.com.pages.inputs;
 
-import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.annotations.JDIPicker;
 import com.epam.jdi.light.material.elements.inputs.DateTimePickers;
 
-public class DateTimePickersFrame  extends Section {
-    @UI(".MuiSvgIcon-root")
-    public DateTimePickers dateTimePickersIcon;
+public class DateTimePickersFrame extends WebPage {
+    @JDIPicker
+    public static DateTimePickers pickers;
 
     @UI("//p[contains(text(),'10')]")
-    public DateTimePickers dateTen;
-
-    @UI("//span[contains(text(),'10')]")
-    public DateTimePickers timeTen;
-
-    @UI(".MuiInputBase-input")
-    public DateTimePickers dateTimePickersInput;
-
-    @UI("//span[contains(text(),'OK')]")
-    public DateTimePickers dateTimePickersOkButton;
+    public static DateTimePickers dateTenBtn;
 
     @UI("//span[contains(text(),'Cancel')]")
-    public DateTimePickers dateTimePickersCancelButton;
+    public static DateTimePickers dateTimePopUpCancelButton;
+
+    @UI("//span[contains(text(),'OK')]")
+    public static DateTimePickers dateTimePopUpOkButton;
+
+    @UI("//span[contains(text(),'10')]")
+    public static DateTimePickers timeTen;
 
 }
