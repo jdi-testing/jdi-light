@@ -27,25 +27,13 @@ import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
 import io.github.com.pages.feedback.DialogFrame;
 import io.github.com.pages.feedback.LinearProgressFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
-import io.github.com.pages.inputs.ButtonFrame;
-import io.github.com.pages.inputs.ButtonGroupFrame;
-import io.github.com.pages.inputs.CheckboxFrame;
-import io.github.com.pages.inputs.DateTimePickersFrame;
-import io.github.com.pages.inputs.EnhancedTransferListFrame;
-import io.github.com.pages.inputs.FabFrame;
-import io.github.com.pages.inputs.GroupCheckBoxFrame;
-import io.github.com.pages.inputs.RadioButtonFrame;
-import io.github.com.pages.inputs.SelectFrame;
-import io.github.com.pages.inputs.SimpleTransferListFrame;
-import io.github.com.pages.inputs.SliderFrame;
-import io.github.com.pages.inputs.SplitButtonGroupFrame;
-import io.github.com.pages.inputs.SwitchFrame;
-import io.github.com.pages.inputs.TextFieldFrame;
-import io.github.com.pages.navigation.*;
+import io.github.com.pages.inputs.*;
+import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.layout.GridFrame;
+import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardFrame;
@@ -57,7 +45,7 @@ import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.utils.PortalFrame;
 import io.github.com.pages.utils.TransitionFrame;
 
-@JSite("https://jdi-testing.github.io/jdi-light")
+@JSite("https://jdi-testing.github.io/jdi-light/material/")
 public class StaticSite {
 
     // inputs
@@ -101,15 +89,8 @@ public class StaticSite {
     @Url("/material-ui-inputs-transfer-list--enhanced-transfer-list-view")
     public static WebPage inputEnhancedTransferListPage;
 
-    // button
-    @Frame("storybook-preview-iframe")
-    public static ButtonFrame buttonFrame;
 
-    @Url("/material-ui-inputs-button--default")
-    public static WebPage inputButtonDefaultPage;
-
-    @Url("/material-ui-inputs-button--disabled")
-    public static WebPage inputButtonDisabledPage;
+    public static ButtonPage buttonPage;
 
     // radio
     @Frame("storybook-preview-iframe")
