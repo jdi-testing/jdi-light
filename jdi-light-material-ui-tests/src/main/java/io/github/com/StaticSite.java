@@ -30,7 +30,6 @@ import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.ContainerFrame;
-import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.navigation.*;
@@ -42,7 +41,7 @@ import io.github.com.pages.utils.ModalFrame;
 import io.github.com.pages.utils.PopoverClickFrame;
 import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.PopperFrame;
-import io.github.com.pages.utils.PortalFrame;
+import io.github.com.pages.utils.PortalPage;
 import io.github.com.pages.utils.TransitionFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
@@ -514,7 +513,7 @@ public class StaticSite {
 
     // portal
     @Frame("storybook-preview-iframe")
-    public static PortalFrame portalFrame;
+    public static PortalPage portalPage;
 
     @Url("/material-ui-utils-portal--default")
     public static WebPage defaultPortalPage;
