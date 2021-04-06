@@ -1,7 +1,7 @@
 package io.github.epam.material.tests.utils;
 
+import com.epam.jdi.tools.pairs.Pair;
 import io.github.epam.TestsInit;
-import javafx.util.Pair;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -38,13 +38,13 @@ public class ClickAwayListenerTests extends TestsInit {
         for (Pair<Integer, Integer> point : points) {
             clickAwayListenerFrame.openMenuButton.click();
             clickAwayListenerFrame.text.is().displayed();
-            clickAwayListenerFrame.text.click(point.getKey(), point.getValue());
+            clickAwayListenerFrame.clickAroundTextPopup(point.key, point.value);
             clickAwayListenerFrame.text.is().hidden();
         }
         //failed check for fixing bug
-//        clickAwayListenerFrame.openMenuButton.click();
-//        clickAwayListenerFrame.openMenuButton.click(clickAwayListenerFrame.openMenuButton.getSize().width + 1,0);
-//        clickAwayListenerFrame.text.is().hidden();
+        clickAwayListenerFrame.openMenuButton.click();
+        clickAwayListenerFrame.clickAroundButton(clickAwayListenerFrame.openMenuButton.getSize().width + 1,0);
+        clickAwayListenerFrame.text.is().hidden();
     }
     //for checking borders of a text field
     private void initPoints() {
