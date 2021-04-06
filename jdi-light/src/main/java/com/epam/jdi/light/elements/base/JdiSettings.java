@@ -60,10 +60,12 @@ public class JdiSettings {
             if (webElement != null)
                 return webElement;
         }
-        if (b.locator.isNull() && b.parent == null)
+        if (b.locator.isNull() && b.parent == null) {
             return b.getSmart();
-        if (b.locator.argsCount() != args.length)
+        }
+        if (b.locator.argsCount() != args.length) {
             return getUIElementFromArgs(b, args);
+        }
         List<WebElement> els = getAllElementsInContext(b, args);
         return filterWebListToWebElement(b, els);
     }

@@ -14,7 +14,6 @@ import static com.epam.jdi.light.common.SearchStrategies.ANY_ELEMENT;
 import static com.epam.jdi.light.common.SearchStrategies.VISIBLE_ELEMENT;
 import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
-import static com.epam.jdi.light.settings.WebSettings.STRICT_SEARCH;
 import static com.epam.jdi.tools.LinqUtils.list;
 
 public enum Strategies {
@@ -25,7 +24,6 @@ public enum Strategies {
         ELEMENT.getTextType = TextTypes.SMART_TEXT;
         ELEMENT.setTextType = SetTextTypes.SET_TEXT;
         ELEMENT.searchRule = Pair.$("Visible", VISIBLE_ELEMENT);
-        STRICT_SEARCH = true;
         COMMON.killBrowser = "afterAndBefore";
         ELEMENT.beforeSearch = UIElement::show;
     }),
@@ -36,7 +34,6 @@ public enum Strategies {
         ELEMENT.getTextType = TextTypes.SMART_TEXT;
         ELEMENT.setTextType = SetTextTypes.CLEAR_SEND_KEYS;
         ELEMENT.searchRule = Pair.$("Visible", VISIBLE_ELEMENT);
-        STRICT_SEARCH = true;
         ELEMENT.beforeSearch = el -> {};
     }),
     SELENIUM(() -> {
