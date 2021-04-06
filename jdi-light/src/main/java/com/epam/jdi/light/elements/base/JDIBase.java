@@ -64,6 +64,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public ElementArea clickAreaType = ELEMENT.clickType;
     public TextTypes textType = ELEMENT.getTextType;
     public SetTextTypes setTextType = ELEMENT.setTextType;
+    public SearchTypes searchType = ELEMENT.searchType;
 
     public JDIBase() {
         searchRules.update(ELEMENT.searchRule);
