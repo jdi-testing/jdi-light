@@ -6,6 +6,10 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.surfaces.AccordionAssert;
 import org.openqa.selenium.By;
 
+/**
+ * To see an example of Accordion web element please visit
+ * https://jdi-testing.github.io/jdi-light/material/accordion_surface
+ */
 public class Accordion extends UIBaseElement<AccordionAssert> {
 
     @JDIAction("Get summary text for '{name}'")
