@@ -13,13 +13,13 @@ public class DividerTests extends TestsInit {
     @Test
     public void insetDividerTest() {
         dataDisplayInsetDividerPage.open();
-        insetDividerFrame.divider.isInset();
+        insetDividerFrame.divider.is().inset();
     }
 
     @Test
     public void verticalDividerTest() {
         dataDisplayVerticalDividerPage.open();
-        verticalDividerFrame.divider.isVertical();
+        verticalDividerFrame.divider.is().vertical();
     }
 
 }
