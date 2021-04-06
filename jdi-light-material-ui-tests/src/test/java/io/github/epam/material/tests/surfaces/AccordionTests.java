@@ -23,7 +23,7 @@ public class AccordionTests extends TestsInit {
 
         for (Accordion accordionItem : accordionList
         ) {
-            if (accordionItem.summary().text().equals("Disabled Accordion")) {
+            if (accordionItem.summary().text().contains("Disabled Accordion")) {
                 accordionItem.click();
                 accordionItem.is().collapsed();
 
@@ -37,5 +37,6 @@ public class AccordionTests extends TestsInit {
             }
         }
     }
+    
 
 }
