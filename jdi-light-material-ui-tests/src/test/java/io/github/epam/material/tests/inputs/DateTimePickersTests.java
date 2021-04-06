@@ -4,7 +4,11 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
 import static io.github.com.MaterialNavigator.openSection;
-import static io.github.com.pages.inputs.DateTimePickersFrame.*;
+import static io.github.com.pages.inputs.DateTimePickersFrame.timeTen;
+import static io.github.com.pages.inputs.DateTimePickersFrame.dateTimePopUpOkButton;
+import static io.github.com.pages.inputs.DateTimePickersFrame.dateTimePopUpCancelButton;
+import static io.github.com.pages.inputs.DateTimePickersFrame.dateTenBtn;
+import static io.github.com.pages.inputs.DateTimePickersFrame.pickers;
 import static org.hamcrest.Matchers.*;
 
 public class DateTimePickersTests extends TestsInit {
