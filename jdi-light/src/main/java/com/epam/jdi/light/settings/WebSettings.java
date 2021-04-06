@@ -33,6 +33,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
 import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.SearchStrategies.*;
+import static com.epam.jdi.light.common.SearchTypes.*;
 import static com.epam.jdi.light.common.SetTextTypes.CLEAR_SEND_KEYS;
 import static com.epam.jdi.light.common.TextTypes.SMART_TEXT;
 import static com.epam.jdi.light.common.UseSmartSearch.*;
@@ -71,6 +72,10 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
  */
 public class WebSettings {
     public static ILogger logger = instance("JDI");
+
+    public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
+    public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
+
     public static String getDomain() {
         if (isBlank(DRIVER.domain)) {
             init();
@@ -80,13 +85,11 @@ public class WebSettings {
     public static void setDomain(String domain) {
         DRIVER.domain = domain;
     }
-    public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
-    public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
-    public static boolean STRICT_SEARCH = true;
     public static boolean hasDomain() {
         init();
         return DRIVER.domain != null && DRIVER.domain.contains("://");
     }
+
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
@@ -316,32 +319,40 @@ public class WebSettings {
         if (localP.equals("soft"))
             localP = "any, multiple";
         if (localP.equals("strict"))
-            localP = "visible, single";
-        if (localP.split(",").length == 2) {
-            List<String> params = map(asList(localP.split(",")), a -> ELEMENT.simplifyString.execute(a));
-            if (params.contains("visible") || params.contains("displayed"))
-                onlyVisible();
-            if (params.contains("any") || params.contains("all"))
-                noValidation();
-            if (params.contains("enabled"))
-                visibleEnabled();
-            if (params.contains("inview"))
-                inView();
-            if (params.contains("single"))
-                STRICT_SEARCH = true;
-            if (params.contains("multiple"))
-                STRICT_SEARCH = false;
+            localP = "visible, smart";
+        if (localP.split(",").length != 2) return;
+        List<String> params = map(asList(localP.split(",")), a -> ELEMENT.simplifyString.execute(a));
+        if (params.contains("visible") || params.contains("displayed")) {
+            onlyVisible();
+        }
+        if (params.contains("any") || params.contains("all")) {
+            noValidation();
+        }
+        if (params.contains("enabled")) {
+            visibleEnabled();
+        }
+        if (params.contains("inview")) {
+            inView();
+        }
+        if (params.contains("single")) {
+            ELEMENT.searchType = Single;
+        } else if (params.contains("first") || params.contains("multiple")) {
+            ELEMENT.searchType = First;
+        } else if (params.contains("smart")) {
+            ELEMENT.searchType = Smart;
         }
     }
 
     private static PageLoadStrategy getPageLoadStrategy(String strategy) {
         switch (strategy.toLowerCase()) {
-            case "normal": return NORMAL;
-            case "none": return PageLoadStrategy.NONE;
-            case "eager": return EAGER;
-            default: break;
+            case "none":
+                return PageLoadStrategy.NONE;
+            case "eager":
+                return EAGER;
+            case "normal":
+            default:
+                return NORMAL;
         }
-        return NORMAL;
     }
 
     public static Properties getProperties(String path) {
