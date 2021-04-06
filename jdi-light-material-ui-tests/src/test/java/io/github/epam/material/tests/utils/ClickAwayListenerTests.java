@@ -28,18 +28,18 @@ public class ClickAwayListenerTests extends TestsInit {
 
     private void textFieldTest() {
         clickAwayListenerFrame.openMenuButton.click();
-        clickAwayListenerFrame.text.is().displayed();
+        clickAwayListenerFrame.textArea.is().displayed();
         //initializing all border points of a text field
         initPoints();
         //hiding text field by clicking on 'open menu dropdown' button
         clickAwayListenerFrame.openMenuButton.click();
-        clickAwayListenerFrame.text.is().hidden();
+        clickAwayListenerFrame.textArea.is().hidden();
         //checking all border points of a text field
         for (Pair<Integer, Integer> point : points) {
             clickAwayListenerFrame.openMenuButton.click();
-            clickAwayListenerFrame.text.is().displayed();
+            clickAwayListenerFrame.textArea.is().displayed();
             clickAwayListenerFrame.clickAroundTextPopup(point.key, point.value);
-            clickAwayListenerFrame.text.is().hidden();
+            clickAwayListenerFrame.textArea.is().hidden();
         }
         //failed check for fixing bug
 //        clickAwayListenerFrame.openMenuButton.click();
@@ -53,15 +53,15 @@ public class ClickAwayListenerTests extends TestsInit {
             addPoint(-1, 0);
             addPoint(-1, -1);
             addPoint(0, -1);
-            addPoint(clickAwayListenerFrame.text.getSize().width, -1);
-            addPoint(clickAwayListenerFrame.text.getSize().width + 1, -1);
-            addPoint(clickAwayListenerFrame.text.getSize().width + 1, 0);
-            addPoint(clickAwayListenerFrame.text.getSize().width + 1, clickAwayListenerFrame.text.getSize().height);
-            addPoint(clickAwayListenerFrame.text.getSize().width + 1, clickAwayListenerFrame.text.getSize().height + 1);
-            addPoint(clickAwayListenerFrame.text.getSize().width, clickAwayListenerFrame.text.getSize().height + 1);
-            addPoint(0, clickAwayListenerFrame.text.getSize().height + 1);
-            addPoint(-1, clickAwayListenerFrame.text.getSize().height + 1);
-            addPoint(-1, clickAwayListenerFrame.text.getSize().height);
+            addPoint(clickAwayListenerFrame.textArea.getSize().width, -1);
+            addPoint(clickAwayListenerFrame.textArea.getSize().width + 1, -1);
+            addPoint(clickAwayListenerFrame.textArea.getSize().width + 1, 0);
+            addPoint(clickAwayListenerFrame.textArea.getSize().width + 1, clickAwayListenerFrame.textArea.getSize().height);
+            addPoint(clickAwayListenerFrame.textArea.getSize().width + 1, clickAwayListenerFrame.textArea.getSize().height + 1);
+            addPoint(clickAwayListenerFrame.textArea.getSize().width, clickAwayListenerFrame.textArea.getSize().height + 1);
+            addPoint(0, clickAwayListenerFrame.textArea.getSize().height + 1);
+            addPoint(-1, clickAwayListenerFrame.textArea.getSize().height + 1);
+            addPoint(-1, clickAwayListenerFrame.textArea.getSize().height);
         }
     }
 

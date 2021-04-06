@@ -10,10 +10,10 @@ public class ClickAwayListenerFrame extends Section {
     public Button openMenuButton;
 
     @UI("(//div[contains(@class, 'makeStyles-dropdown')])")
-    public TextArea text;
+    public TextArea textArea;
 
     public void clickAroundTextPopup(int x, int y) {
-        text.core().click(x, y);
+        textArea.core().click(x, y);
     }
 
     public void clickAroundButton(int x, int y) {
