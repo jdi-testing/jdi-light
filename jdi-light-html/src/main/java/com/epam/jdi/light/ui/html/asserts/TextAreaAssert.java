@@ -63,10 +63,4 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
     public TextAreaAssert lines(List<String> lines) {
         return lines(containsInAnyOrder(lines.toArray()));
     }
-
-    @JDIAction("Assert that '{name}' has  size: {0}")
-    public TextAreaAssert height(Matcher<Integer> condition) {
-        jdiAssert(element().getSize().height, condition);
-        return this;
-    }
 }

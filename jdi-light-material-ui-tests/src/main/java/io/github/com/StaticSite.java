@@ -44,6 +44,7 @@ import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.utils.PortalFrame;
 import io.github.com.pages.utils.TransitionFrame;
+import io.github.com.pages.utils.TextAreaAutoSizeFrame;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
 public class StaticSite {
@@ -112,6 +113,9 @@ public class StaticSite {
     // text field
     @Frame("storybook-preview-iframe")
     public static TextFieldFrame textFieldFrame;
+
+    @Frame("storybook-preview-iframe")
+    public static TextAreaAutoSizeFrame textAreaAutoSizeFrame;
 
     @Url("/material-ui-inputs-text-field--standard")
     public static WebPage inputTextFieldStandardPage;
