@@ -19,13 +19,14 @@ import static org.testng.Assert.assertEquals;
 
 public class TextFieldTests implements TestsInit {
 
+    final String symbols = "`!@#//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
+    String text = "TextField";
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         yourName.setText(text);
     }
-    String text = "TextField";
 
     @Test
     public void getTextTest() {
@@ -93,8 +94,6 @@ public class TextFieldTests implements TestsInit {
     public void assertValidationTest() {
         yourName.assertThat().text(is(text));
     }
-
-    final String symbols = "`!@#//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
 
     @Test
     public void inputSymbolsTest() {

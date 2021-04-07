@@ -16,13 +16,14 @@ import static org.testng.Assert.fail;
 
 public class ChecklistTests implements TestsInit {
 
+    String text = "1";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         bsPage.shouldBeOpened();
         checkNumbers.check(text);
     }
-    String text = "1";
 
     @Test
     public void getValueTest() {

@@ -19,13 +19,13 @@ import static org.testng.Assert.assertEquals;
 
 public class MultiSelectorTests implements TestsInit {
 
+    String text = "Steam";
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         ages.check(text);
     }
-    String text = "Steam";
 
     @Test
     public void getValueTest() {

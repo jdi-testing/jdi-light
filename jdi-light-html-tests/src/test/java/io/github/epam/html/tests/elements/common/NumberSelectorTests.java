@@ -18,13 +18,13 @@ import static org.testng.Assert.assertEquals;
 
 public class NumberSelectorTests implements TestsInit {
 
+    String number = "2.1";
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         height.setNumber(number);
     }
-    String number = "2.1";
 
     @Test
     public void getLabelTextTest() {
