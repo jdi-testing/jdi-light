@@ -40,7 +40,7 @@ public class CheckboxTests extends TestsInit {
     }
 
     @Test
-    public void BasicCheckboxTest() {
+    public void basicCheckboxTest() {
         openSection("Checkboxes");
         checkboxPage.shouldBeOpened();
         String section = "Basic";

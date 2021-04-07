@@ -152,17 +152,8 @@ public class StaticSite {
     public static WebPage inputTextFieldTimePage;
 
     //checkbox
-//    @Frame("storybook-preview-iframe")
-//    public static CheckboxFrame checkboxFrame;
-
     @Url("/checkboxes")
     public static CheckboxPage checkboxPage;
-
-//    @Url("/material-ui-inputs-checkbox--disabled")
-//    public static WebPage inputCheckboxDisabled;
-//
-//    @Url("/material-ui-inputs-checkbox--primary")
-//    public static WebPage primaryCheckBoxPage;
 
     // button group
     @Frame("storybook-preview-iframe")
