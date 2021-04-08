@@ -35,6 +35,9 @@ import static java.lang.String.format;
 public class JDIEyes {
     public static EyesConfig EYES_CONFIG = new EyesConfig();
     public static Safe<Eyes> eyes = new Safe<>(JDIEyes::defaultEyes);
+    static Safe<String> TEST_NAME = new Safe<>(() -> "Before tests");
+    static Safe<Boolean> NEW_TEST = new Safe<>(() -> true);
+    static List<Eyes> eyesList = new ArrayList<>();
 
     private static Eyes defaultEyes() {
         Eyes eyes = new Eyes();
@@ -77,9 +80,6 @@ public class JDIEyes {
         visualTestInit();
         return EYES_CONFIG.pageStrategy(CHECK_NEW_PAGE).actionStrategy(IS_DISPLAYED);
     }
-    static Safe<String> TEST_NAME = new Safe<>(() -> "Before tests");
-    static Safe<Boolean> NEW_TEST = new Safe<>(() -> true);
-    static List<Eyes> eyesList = new ArrayList<>();
     public static void openEyes() {
         Eyes eyes = JDIEyes.eyes.get();
         if (!eyesList.contains(eyes))
