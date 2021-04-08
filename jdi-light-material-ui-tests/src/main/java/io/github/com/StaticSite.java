@@ -30,7 +30,6 @@ import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.ContainerFrame;
-import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.navigation.*;
@@ -44,7 +43,7 @@ import io.github.com.pages.utils.PopoverHoverFrame;
 import io.github.com.pages.utils.PopperFrame;
 import io.github.com.pages.utils.PortalFrame;
 import io.github.com.pages.utils.TransitionFrame;
-import io.github.com.pages.utils.TextAreaAutoSizeFrame;
+import io.github.com.pages.utils.TextAreaAutoSizePage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
 public class StaticSite {
@@ -114,8 +113,8 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static TextFieldFrame textFieldFrame;
 
-    @Frame("storybook-preview-iframe")
-    public static TextAreaAutoSizeFrame textAreaAutoSizeFrame;
+    @Url("/textarea_autosize")
+    public static TextAreaAutoSizePage textAreaAutoSizePage;
 
     @Url("/material-ui-inputs-text-field--standard")
     public static WebPage inputTextFieldStandardPage;
@@ -131,16 +130,6 @@ public class StaticSite {
 
     @Url("/material-ui-inputs-text-field--time")
     public static WebPage inputTextFieldTimePage;
-
-    //text area Autosize
-    @Url("/material-ui-utils-textarea-autosize--default")
-    public static WebPage textAreaAutoSizeDefaultPage;
-
-    @Url("/material-ui-utils-textarea-autosize--max-height")
-    public static WebPage textAreaAutoSizeMaxHeightPage;
-
-    @Url("/material-ui-utils-textarea-autosize--min-height")
-    public static WebPage textAreaAutoSizeMinHeightPage;
 
     //checkbox
     @Frame("storybook-preview-iframe")

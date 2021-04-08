@@ -1,91 +1,100 @@
 package io.github.epam.material.tests.utils;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
+import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.pages.utils.TextAreaAutoSizePage.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+/**
+ * To see an example of text field auto size functionality visit
+ * https://material.io/components/text-fields#input-types
+ */
 public class AutoSizeTest extends TestsInit {
 
     private int initialHeight;
+
+    private static final String ONE_LINE = "1";
+    private static final String THREE_LINES = "1\n2\n3";
     private static final String FOUR_LINES = "1\n2\n3\n4";
 
-    @Test
-    public void defaultAreaHeightIncreasesTest() {
-        textAreaAutoSizeDefaultPage.open();
-        initialHeight = textAreaAutoSizeFrame.textAreaAutoSize.getSize().height;
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue(FOUR_LINES);
-        textAreaAutoSizeFrame.textAreaAutoSize.has().height(greaterThan(initialHeight));
+    @BeforeMethod
+    public void openSectionToTest() {
+        openSection("Textarea Autosize");
     }
 
     @Test
-    public void defaultAreaHeightDecreasesTest() {
-        textAreaAutoSizeDefaultPage.open();
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue(FOUR_LINES);
-        initialHeight = textAreaAutoSizeFrame.textAreaAutoSize.getSize().height;
-        textAreaAutoSizeFrame.textAreaAutoSize.clear();
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue("1\n");
-        textAreaAutoSizeFrame.textAreaAutoSize.has().height(lessThan(initialHeight));
+    public void emptyAreaHeightIncreasesTest() {
+        initialHeight = emptyTextArea.getSize().height;
+        emptyTextArea.setLines(FOUR_LINES);
+        assertThat(emptyTextArea.getSize().height, greaterThan(initialHeight));
+    }
+
+    @Test
+    public void emptyAreaHeightDecreasesTest() {
+        emptyTextArea.setLines(FOUR_LINES);
+        initialHeight = emptyTextArea.getSize().height;
+        emptyTextArea.clear();
+        emptyTextArea.setLines(ONE_LINE);
+        assertThat(emptyTextArea.getSize().height, lessThan(initialHeight));
     }
 
     @DataProvider(name = "zeroToThree")
     public Object[][] zeroToThree() {
         return new Object[][]{
                 {""},
-                {"1\n"},
-                {"1\n2\n3"}
+                {ONE_LINE},
+                {THREE_LINES}
         };
     }
 
     @Test(dataProvider = "zeroToThree")
-    public void minAreaDoesNotIncreaseBefore4thLineTest(String line) {
-        textAreaAutoSizeMinHeightPage.open();
-        initialHeight = textAreaAutoSizeFrame.textAreaAutoSize.getSize().height;
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue(line);
-        textAreaAutoSizeFrame.textAreaAutoSize.has().height(anyOf(equalTo(initialHeight), equalTo(initialHeight + 1)));
+    public void minAreaDoesNotIncreaseBefore4thLineTest(String lines) {
+        initialHeight = minArea.getSize().height;
+        minArea.setLines(lines);
+        assertThat(minArea.getSize().height, anyOf(equalTo(initialHeight), lessThan(initialHeight + 2)));
     }
 
     @Test
     public void minAreaIncreasesAfter3dLineTest() {
-        textAreaAutoSizeMinHeightPage.open();
-        initialHeight = textAreaAutoSizeFrame.textAreaAutoSize.getSize().height;
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue(FOUR_LINES);
-        textAreaAutoSizeFrame.textAreaAutoSize.has().height(greaterThan(initialHeight));
+        initialHeight = minArea.getSize().height;
+        minArea.setLines(FOUR_LINES);
+        assertThat(minArea.getSize().height, greaterThan(initialHeight));
     }
 
     @Test
     public void maxAreaDoesNotIncreaseAfter4LinesTest() {
-        textAreaAutoSizeMaxHeightPage.open();
-        initialHeight = textAreaAutoSizeFrame.textAreaAutoSize.getSize().height;
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue(FOUR_LINES);
-        textAreaAutoSizeFrame.textAreaAutoSize.has().height(equalTo(initialHeight));
+        initialHeight = maxArea.getSize().height;
+        maxArea.setLines(FOUR_LINES);
+        assertThat(maxArea.getSize().height, equalTo(initialHeight));
     }
 
     @Test
     public void maxAreaHeightDecreasesWhenClearLinesTest() {
-        textAreaAutoSizeMaxHeightPage.open();
-        initialHeight = textAreaAutoSizeFrame.textAreaAutoSize.getSize().height;
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue("");
-        textAreaAutoSizeFrame.textAreaAutoSize.has().height(lessThan(initialHeight));
+        initialHeight = maxArea.getSize().height;
+        maxArea.clear();
+        maxArea.setLines(ONE_LINE);
+        assertThat(maxArea.getSize().height, lessThan(initialHeight));
     }
 
     @Test
     public void maxAreaIncreasesTill4LinesTest() {
-        textAreaAutoSizeMaxHeightPage.open();
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue("");
-        initialHeight = textAreaAutoSizeFrame.textAreaAutoSize.getSize().height;
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue("1\n2\n3");
-        textAreaAutoSizeFrame.textAreaAutoSize.has().height(greaterThan(initialHeight));
+        maxArea.clear();
+        maxArea.setLines(ONE_LINE);
+        initialHeight = maxArea.getSize().height;
+        maxArea.setLines(THREE_LINES);
+        assertThat(maxArea.getSize().height, greaterThan(initialHeight));
     }
 
     @Test
     public void maxAreaDoesNotChangeAfter4LinesTest() {
-        textAreaAutoSizeMaxHeightPage.open();
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue("1\n2\n3\n4");
-        initialHeight = textAreaAutoSizeFrame.textAreaAutoSize.getSize().height;
-        textAreaAutoSizeFrame.textAreaAutoSize.setValue("1\n2\n3\n4\n5");
-        textAreaAutoSizeFrame.textAreaAutoSize.has().height(equalTo(initialHeight));
+        maxArea.setLines(FOUR_LINES);
+        initialHeight = maxArea.getSize().height;
+        maxArea.setLines(FOUR_LINES + ONE_LINE);
+        assertThat(maxArea.getSize().height, equalTo(initialHeight));
     }
 }
