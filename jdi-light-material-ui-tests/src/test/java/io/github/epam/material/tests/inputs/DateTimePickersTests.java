@@ -17,6 +17,7 @@ public class DateTimePickersTests extends TestsInit {
 
     @Test
     public void pickDateViaInlineDropdownTest() {
+        inlineDatePicker.iCore().label().has().text("Date picker inline");
         inlineDatePicker.select("12");
         inlineDatePicker.has().text(containsString("/12/"));
     }
@@ -45,8 +46,9 @@ public class DateTimePickersTests extends TestsInit {
 
     @Test
     public void pickDateViaDialogTextFieldTest(){
-        inlineDatePicker.value().setText("10/10/2021");
-        inlineDatePicker.has().text("10/10/2021");
+        dialogPicker.iCore().label().has().text("Date picker dialog");
+        dialogPicker.value().setText("10/10/2021");
+        dialogPicker.has().text("10/10/2021");
     }
 
     @Test
@@ -60,6 +62,7 @@ public class DateTimePickersTests extends TestsInit {
 
     @Test
     public void pickTimeViaTimeTextFieldTest(){
+        timePicker.iCore().label().has().text("Time picker");
         timePicker.value().setText("05:14 AM");
         timePicker.has().text("05:14 AM");
     }
@@ -75,6 +78,7 @@ public class DateTimePickersTests extends TestsInit {
 
     @Test
     public void pickDateViaBirthdayPickerTextField(){
+        birthdayPicker.iCore().label().has().text("Birthday");
         birthdayPicker.has().text("2017-05-24");
         birthdayPicker.value().setText("2021-04-05");
         birthdayPicker.has().text("2021-04-05");
@@ -82,6 +86,7 @@ public class DateTimePickersTests extends TestsInit {
 
     @Test
     public void pickAppointmentViaAppointmentPickerTextField(){
+        appointmentPicker.iCore().label().has().text("Next appointment");
         appointmentPicker.has().text("2017-05-24T10:30");
         appointmentPicker.value().setText("2021-11-12T11:12");
         appointmentPicker.has().text("2021-11-12T11:12");
@@ -89,6 +94,7 @@ public class DateTimePickersTests extends TestsInit {
 
     @Test
     public void pickTimeViaAlarmPickerTextField(){
+        alarmPicker.iCore().label().has().text("Alarm clock");
         alarmPicker.has().text("07:30");
         alarmPicker.value().setText("08:00");
         alarmPicker.has().text("08:00");
