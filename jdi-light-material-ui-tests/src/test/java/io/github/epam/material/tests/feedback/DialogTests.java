@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- * To see an example of Badge web element please visit https://material-ui.com/components/dialogs/
+ * To see an example of Dialog web element please visit https://material-ui.com/components/dialogs/
  */
 
 public class DialogTests extends TestsInit {
