@@ -4,12 +4,6 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.material.elements.surfaces.Accordion;
 
-
-/**
- * To see an example of Accordion web element please visit
- * https://jdi-testing.github.io/jdi-light/material/accordion_surface
- */
-
 public class AccordionPage extends WebPage {
 
     @JDropdown(
