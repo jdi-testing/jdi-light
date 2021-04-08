@@ -30,11 +30,10 @@ import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.ContainerFrame;
-import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.navigation.*;
-import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.surfaces.PaperFrame;
@@ -182,7 +181,7 @@ public class StaticSite {
     // surfaces
     // accordion
     @Frame("storybook-preview-iframe")
-    public static AccordionFrame accordionFrame;
+    public static AccordionPage accordionPage;
 
     @Url("/material-ui-surfaces-accordion--default")
     public static WebPage surfaceAccordionPage;
