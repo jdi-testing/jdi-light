@@ -9,14 +9,13 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 public class HomePage {
+    @UI("form #name") public UIElement userNameUI;
+    @UI("#login-button") public WebElement enterUI;
+    @FindBy(css="form #name") public WebElement userName;
+    @FindBy(id = "login-button") public WebElement enter;
+    public WebElement password = $("form #password");
+    public UIElement passwordUI = $("form #password");
     public HomePage() {
         initElements(this);
     }
-    @FindBy(css="form #name") public WebElement userName;
-    public WebElement password = $("form #password");
-    @FindBy(id = "login-button") public WebElement enter;
-
-    @UI("form #name") public UIElement userNameUI;
-    public UIElement passwordUI = $("form #password");
-    @UI("#login-button") public WebElement enterUI;
 }
