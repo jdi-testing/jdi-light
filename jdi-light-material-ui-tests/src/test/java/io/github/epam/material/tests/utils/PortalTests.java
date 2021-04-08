@@ -7,6 +7,12 @@ import org.testng.annotations.Test;
 import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.pages.utils.PortalPage.*;
 
+/**
+ * To see an example of Portal web element please visit
+ * https://material-ui.com/components/portal/.
+ */
+
+
 public class PortalTests extends TestsInit {
 
     @BeforeMethod
