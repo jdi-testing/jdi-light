@@ -1,27 +1,33 @@
 package io.github.epam.material.tests.navigation;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static io.github.com.StaticSite.bottomNavigationFrame;
-import static io.github.com.StaticSite.bottomNavigationPage;
-import static org.hamcrest.Matchers.hasToString;
+import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.pages.navigation.BottomNavigationPage.*;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class BottomNavigationTests extends TestsInit {
+
+    @BeforeMethod
+    public void before(){
+        openSection("Button Navigation");
+    }
     @Test
     public void defaultBottomNavigationTest(){
-        bottomNavigationPage.open();
+        favorites.is().enabled();
+        assertTrue(favorites.core().text().contains("Favorites"));
+        assertFalse(favorites.isSelected());
+        favorites.core().click();
+        favorites.is().selected();
 
-        bottomNavigationFrame.recents.is().enabled();
-        bottomNavigationFrame.recents.toggle();
-        bottomNavigationFrame.recents.is().text(hasToString("Recents"));
+    }
+    @Test
+    public void currentPositionBottomNavigationTest(){
+        assertFalse(currentPosition.getText().contains("Favorites"));
+        favorites.core().click();
+        assertTrue(currentPosition.getText().contains("Favorites"));
 
-        bottomNavigationFrame.favorites.is().enabled();
-        bottomNavigationFrame.favorites.toggle();
-        bottomNavigationFrame.favorites.is().text(hasToString("Favorites"));
-
-        bottomNavigationFrame.nearby.is().enabled();
-        bottomNavigationFrame.nearby.toggle();
-        bottomNavigationFrame.nearby.is().text(hasToString("Nearby"));
     }
 }

@@ -4,11 +4,16 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.navigation.BottomNavigationAssert;
 
+/**
+ * To see an example of Accordion web element please visit
+ * https://jdi-testing.github.io/jdi-light/material/button_navigation
+ */
+
 public class BottomNavigation extends UIBaseElement<BottomNavigationAssert> {
 
-    @JDIAction("Toggle '{name}'")
-    public void toggle() {
-        core().click();
+    @JDIAction("Is '{name} selected")
+    public boolean isSelected(){
+        return core().hasClass("Mui-selected");
     }
 
     @JDIAction("Is '{name} disabled")
@@ -21,10 +26,6 @@ public class BottomNavigation extends UIBaseElement<BottomNavigationAssert> {
     @Override
     public boolean isEnabled() {
         return !isDisabled();
-    }
-
-    public String getValue() {
-        return core().getText();
     }
 
     @Override

@@ -576,11 +576,8 @@ public class StaticSite {
     public static WebPage underlineAlwaysLinkPage;
 
     // bottom navigation
-    @Frame("storybook-preview-iframe")
-    public static BottomNavigationFrame bottomNavigationFrame;
-
-    @Url("/material-ui-navigation-bottom-navigation--default")
-    public static WebPage bottomNavigationPage;
+   @Frame("storybook-preview-iframe")
+   public static BottomNavigationPage bottomNavigationPage;
 
     // menu
     @Frame("storybook-preview-iframe")
