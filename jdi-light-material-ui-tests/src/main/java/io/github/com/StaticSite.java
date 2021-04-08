@@ -183,12 +183,6 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static AccordionPage accordionPage;
 
-    @Url("/material-ui-surfaces-accordion--default")
-    public static WebPage surfaceAccordionPage;
-
-    @Url("/material-ui-surfaces-accordion--disabled")
-    public static WebPage surfaceAccordionDisabledPage;
-
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage appBarPage;
 
