@@ -1,102 +1,96 @@
 package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.MaterialNavigator.openSection;
-import static io.github.com.pages.inputs.DateTimePickersFrame.timeTen;
-import static io.github.com.pages.inputs.DateTimePickersFrame.dateTimePopUpOkButton;
-import static io.github.com.pages.inputs.DateTimePickersFrame.dateTimePopUpCancelButton;
-import static io.github.com.pages.inputs.DateTimePickersFrame.dateTenBtn;
-import static io.github.com.pages.inputs.DateTimePickersFrame.pickers;
-import static org.hamcrest.Matchers.*;
+import static io.github.com.pages.inputs.DateTimePickersPage.*;
+import static org.hamcrest.Matchers.containsString;
 
 public class DateTimePickersTests extends TestsInit {
 
-    @Test
-    public void datePickerInline() {
+    @BeforeMethod
+    public void chooseSection() {
         openSection("Date / Time");
-
-        pickers.getPickerLabel(1).has().text("Date picker inline");
-        pickers.getPickerBtn(1).click();
-        dateTenBtn.is().visible();
-        dateTenBtn.toggle();
-        pickers.is().containigText(1, containsString("/10/"));
-
-        pickers.getPickerField(1).setText("10/10/2021");
-        pickers.is().containigText(1, hasToString("10/10/2021"));
     }
 
     @Test
-    public void datePickerDialog() {
-        openSection("Date / Time");
-
-        pickers.getPickerLabel(2).has().text("Date picker dialog");
-        String currentDate = pickers.getPickerField(2).getValue();
-        pickers.getPickerBtn(2).click();
-        dateTimePopUpCancelButton.toggle();
-        pickers.is().containigText(2, hasToString(currentDate));
-
-        pickers.getPickerBtn(2).is().visible();
-        pickers.getPickerBtn(2).click();
-        dateTenBtn.is().visible();
-        dateTenBtn.toggle();
-        dateTimePopUpOkButton.toggle();
-        pickers.is().containigText(2, containsString("/10/"));
-
-        pickers.getPickerField(2).setText("10/10/2021");
-        pickers.is().containigText(2, equalTo("10/10/2021"));
-
+    public void pickDateViaInlineDropdownTest() {
+        inlineDatePicker.select("12");
+        inlineDatePicker.has().text(containsString("/12/"));
     }
 
     @Test
-    public void timePicker() {
-        openSection("Date / Time");
-
-        pickers.getPickerLabel(3).has().text("Time picker");
-        String currentTime = pickers.getPickerField(3).getText();
-        pickers.getPickerBtn(3).click();
-        dateTimePopUpCancelButton.toggle();
-        pickers.is().containigText(3, equalTo(currentTime));
-
-        pickers.getPickerBtn(3).is().visible();
-        pickers.getPickerBtn(3).click();
-        timeTen.is().visible();
-        timeTen.toogleXY();
-        dateTimePopUpOkButton.toggle();
-        pickers.is().containigText(3, containsString("10:"));
-        pickers.getPickerField(3).setText("10:10");
-        pickers.is().containigText(3, equalTo("10:10"));
+    public void pickDateViaInlineTextFieldTest() {
+        inlineDatePicker.value().setText("10/10/2021");
+        inlineDatePicker.has().text("10/10/2021");
     }
 
     @Test
-    public void datePickerBirthday() {
-        openSection("Date / Time");
-
-        pickers.getPickerLabel(4).has().text("Birthday");
-        pickers.is().containigText(4, equalTo("2017-05-24"));
-        pickers.getPickerField(4).setValue("04/05/2021");
-        pickers.is().containigText(4, equalTo("2021-04-05"));
+    public void pickDateViaDialogPopUpTest(){
+        dialogPicker.expand();
+        dialogPicker.select("12");
+        dialogPicker.command("ENTER");
+        dialogPicker.has().text(containsString("/12/"));
     }
 
     @Test
-    public void datePickerNextAppointment() {
-        openSection("Date / Time");
-
-        pickers.getPickerLabel(5).has().text("Next appointment");
-        pickers.is().containigText(5, equalTo("2017-05-24T10:30"));
-        pickers.getPickerField(5).setText("2020-11-11T11:11");
-        pickers.is().containigText(5, equalTo("2020-11-11T11:11"));
+    public void escapeDatePickingViaDialogPopUpTest(){
+        dialogPicker.expand();
+        dialogPicker.select("12");
+        dialogPicker.command("ESCAPE");
+        dialogPicker.has().text("08/18/2014");
     }
 
     @Test
-    public void datePickerAlarmClock() {
-        openSection("Date / Time");
-
-        pickers.getPickerLabel(6).has().text("Alarm clock");
-        pickers.is().containigText(6, equalTo("07:30"));
-        pickers.getPickerField(6).setText("08:00");
-        pickers.is().containigText(6, equalTo("08:00"));
+    public void pickDateViaDialogTextFieldTest(){
+        inlineDatePicker.value().setText("10/10/2021");
+        inlineDatePicker.has().text("10/10/2021");
     }
 
+    @Test
+    public void pickTimeViaTimePopUpTest(){
+        timePicker.expand();
+        timePicker.list().get("5").click(1, 1);
+        timePicker.list().get("15").click(3, 3);
+        timePicker.command("ENTER");
+        timePicker.has().text("05:14 PM");
+    }
+
+    @Test
+    public void pickTimeViaTimeTextFieldTest(){
+        timePicker.value().setText("05:14 AM");
+        timePicker.has().text("05:14 AM");
+    }
+
+    @Test
+    public void escapeTimePickingUsingTimePopUpTest(){
+        timePicker.expand();
+        timePicker.list().get("5").click(1, 1);
+        timePicker.list().get("15").click(3, 3);
+        timePicker.command("ESCAPE");
+        timePicker.has().text("09:11 PM");
+    }
+
+    @Test
+    public void pickDateViaBirthdayPickerTextField(){
+        birthdayPicker.has().text("2017-05-24");
+        birthdayPicker.value().setText("2021-04-05");
+        birthdayPicker.has().text("2021-04-05");
+    }
+
+    @Test
+    public void pickAppointmentViaAppointmentPickerTextField(){
+        appointmentPicker.has().text("2017-05-24T10:30");
+        appointmentPicker.value().setText("2021-11-12T11:12");
+        appointmentPicker.has().text("2021-11-12T11:12");
+    }
+
+    @Test
+    public void pickTimeViaAlarmPickerTextField(){
+        alarmPicker.has().text("07:30");
+        alarmPicker.value().setText("08:00");
+        alarmPicker.has().text("08:00");
+    }
 }
