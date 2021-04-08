@@ -1,30 +1,37 @@
 package io.github.epam.material.tests.utils;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.MaterialNavigator.openSection;
-import static io.github.com.StaticSite.portalPage;
-import static org.hamcrest.Matchers.emptyString;
-import static org.hamcrest.Matchers.hasToString;
+import static io.github.com.pages.utils.PortalPage.*;
 
 public class PortalTests extends TestsInit {
-    @Test
-    public void portalTest(){
+
+    @BeforeMethod
+    public void openSectionToTest() {
         openSection("Portal");
+        insureInitialState();
+    }
 
-        portalPage.button.has().text("Mount children");
-        portalPage.field1.has().text(hasToString("It looks like I will render here."));
-        portalPage.field2.has().text(emptyString());
+    @Test
+    public void checkStateAfterBtnClick() {
+        button.click();
+        button.has().text("Unmount children");
+        field1.has().text("It looks like I will render here.");
+        field2.has().text("But I actually render here!");
+    }
 
-        portalPage.button.click();
-        portalPage.button.has().text("Unmount children");
-        portalPage.field1.has().text(hasToString("It looks like I will render here."));
-        portalPage.field2.has().text(hasToString("But I actually render here!"));
+    @Test
+    public void checkStateAfterDoubleClick() {
+        button.doubleClick();
+        insureInitialState();
+    }
 
-        portalPage.button.click();
-        portalPage.button.has().text("Mount children");
-        portalPage.field1.has().text(hasToString("It looks like I will render here."));
-        portalPage.field2.has().text(emptyString());
+    public void insureInitialState() {
+        button.has().text("Mount children");
+        field1.has().text("It looks like I will render here.");
+        field2.has().text("");
     }
 }

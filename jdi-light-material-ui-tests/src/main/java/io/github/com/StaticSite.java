@@ -512,7 +512,7 @@ public class StaticSite {
     public static WebPage utilsPopoverHoverPage;
 
     // portal
-    @Frame("storybook-preview-iframe")
+    @Url("portal")
     public static PortalPage portalPage;
 
     @Url("/material-ui-utils-portal--default")
