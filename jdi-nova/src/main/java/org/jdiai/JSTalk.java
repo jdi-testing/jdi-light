@@ -5,6 +5,7 @@ import org.jdiai.jswraper.DriverManager;
 import org.jdiai.jswraper.JSSmart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.jdiai.jswraper.JSWrappersUtils.defineLocator;
@@ -64,6 +65,7 @@ public class JSTalk {
     public static void fillForm(Object user) {
         new JS(JSTalk::driver).fill(user);
     }
+    public static DragAndDrop drag(JS dragElement) { return new DragAndDrop(dragElement);}
 
     public static JSSmart jsDriver() { return new JSSmart(JSTalk::driver); }
 }

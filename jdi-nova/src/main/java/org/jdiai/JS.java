@@ -285,26 +285,26 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public String attr(String attrName) {
         return getAttribute(attrName);
     }
-    public List<String> classes() {
+    public List<String> allClasses() {
         String cl = attr("class");
         return cl.length() > 0
                 ? newList(cl.split(" "))
                 : new ArrayList<>();
     }
     public boolean hasClass(String className) {
-        return classes().contains(className);
+        return allClasses().contains(className);
     }
     public boolean hasAttribute(String attrName) {
         return isNotBlank(attr(attrName));
     }
 
-    public Json getAllAttributes() {
+    public Json allAttributes() {
         return js.getMap("return '{'+[...element.attributes].map((attr)=> `'${attr.name}'='${attr.value}'`).join()+'}'");
         //return js.getMap("return [...element.attributes].reduce((map,attr)=> { map.set('attr.name','attr.value'); return map; }, new Map())");
     }
     public String printHtml() {
         return MessageFormat.format("<{0} {1}>{2}</{0}>", getTagName().toLowerCase(),
-            print(getAllAttributes(), el -> format("%s='%s'", el.key, el.value), " "),
+            print(allAttributes(), el -> format("%s='%s'", el.key, el.value), " "),
             getJSResult("innerHTML"));
     }
     public void show() {
