@@ -4,7 +4,6 @@ import org.openqa.selenium.Cookie;
 
 import static org.jdiai.JSTalk.*;
 import static org.jdiai.Pages.HOME_PAGE;
-import static org.openqa.selenium.WebDriver.Options;
 
 public class States {
     public static void logout() {

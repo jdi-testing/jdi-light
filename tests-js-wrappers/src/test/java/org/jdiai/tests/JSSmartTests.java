@@ -19,7 +19,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.jdiai.Pages.DOMAIN;
 import static org.jdiai.Pages.SIMPLE_PAGE;
-import static org.jdiai.jswraper.JSWrapper.$;
+import static org.jdiai.jswraper.JSWrapper.$w;
 import static org.jdiai.states.States.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -34,7 +34,7 @@ public class JSSmartTests implements TestInit {
 
     @Test
     public void entityFromJsonTest() {
-        TextInfo jsObject = $(TextInfo.class, "#user-name").getEntity(
+        TextInfo jsObject = $w(TextInfo.class, "#user-name").getEntity(
         "{ 'tag': element.tagName, 'iText': element.innerText, " +
             "'text': element.textContent, 'iHtml': element.innerHTML }");
 
@@ -45,7 +45,7 @@ public class JSSmartTests implements TestInit {
     }
     @Test
     public void entityFromJsonLocatorListTest() {
-        TextInfo jsObject = $(TextInfo.class, withParent("#user-name")).getEntity(
+        TextInfo jsObject = $w(TextInfo.class, withParent("#user-name")).getEntity(
         "{ 'tag': element.tagName, 'iText': element.innerText, " +
             "'text': element.textContent, 'iHtml': element.innerHTML }");
 
@@ -56,7 +56,7 @@ public class JSSmartTests implements TestInit {
     }
     @Test
     public void entityFromAttributesTest() {
-        TextHtml jsObject = $(TextHtml.class, "#user-name")
+        TextHtml jsObject = $w(TextHtml.class, "#user-name")
             .getEntity(asList("tagName", "innerText", "textContent", "innerHTML"));
 
         assertEquals(jsObject.tagName, "SPAN");
@@ -66,7 +66,7 @@ public class JSSmartTests implements TestInit {
     }
     @Test
     public void entityFromAttributesLocatorListTest() {
-        TextHtml jsObject = $(TextHtml.class, withParent("#user-name"))
+        TextHtml jsObject = $w(TextHtml.class, withParent("#user-name"))
             .getEntity(asList("tagName", "innerText", "textContent", "innerHTML"));
 
         assertEquals(jsObject.tagName, "SPAN");
@@ -84,7 +84,7 @@ public class JSSmartTests implements TestInit {
     @Test
     public void multiEntitiesTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Header> headers = $(Header.class, "#furniture-double-hidden th")
+        List<Header> headers = $w(Header.class, "#furniture-double-hidden th")
             .getEntityList("{ 'text': element.innerText, 'visibility': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
         assertEquals(headers.get(0), expectedHeader());
@@ -92,7 +92,7 @@ public class JSSmartTests implements TestInit {
     @Test
     public void multiEntitiesLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Header> headers = $(Header.class, "#furniture-double-hidden", "th")
+        List<Header> headers = $w(Header.class, "#furniture-double-hidden", "th")
             .getEntityList("{ 'text': element.innerText, 'visibility': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
         assertEquals(headers.get(0), expectedHeader());
@@ -100,7 +100,7 @@ public class JSSmartTests implements TestInit {
     @Test
     public void multiEntitiesByAttrTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<HeaderRaw> headers = $(HeaderRaw.class, "#furniture-double-hidden th")
+        List<HeaderRaw> headers = $w(HeaderRaw.class, "#furniture-double-hidden th")
             .getEntityList(asList("innerText", "className", "tagName"));
         assertEquals(headers.size(), 4);
         assertEquals(headers.get(0), expectedHeaderRaw());
@@ -108,7 +108,7 @@ public class JSSmartTests implements TestInit {
     @Test
     public void multiEntitiesByAttrLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<HeaderRaw> headers = $(HeaderRaw.class, "#furniture-double-hidden", "th")
+        List<HeaderRaw> headers = $w(HeaderRaw.class, "#furniture-double-hidden", "th")
             .getEntityList(asList("innerText", "className", "tagName"));
         assertEquals(headers.size(), 4);
 
@@ -118,7 +118,7 @@ public class JSSmartTests implements TestInit {
 
     @Test
     public void jsonTest() {
-        JsonObject json = $("#user-icon")
+        JsonObject json = $w("#user-icon")
             .getJson("{ 'id': element.id, 'source': element.src, 'tag': element.tagName }");
         assertEquals(json.get("id").getAsString(), "user-icon");
         assertEquals(json.get("source").getAsString(), DOMAIN + "/images/icons/user-icon.jpg");
@@ -126,7 +126,7 @@ public class JSSmartTests implements TestInit {
     }
     @Test
     public void jsonLocatorListTest() {
-        JsonObject json = $(withParent("#user-icon"))
+        JsonObject json = $w(withParent("#user-icon"))
             .getJson("{ 'id': element.id, 'source': element.src, 'tag': element.tagName }");
         assertEquals(json.get("id").getAsString(), "user-icon");
         assertEquals(json.get("source").getAsString(), DOMAIN + "/images/icons/user-icon.jpg");
@@ -135,7 +135,7 @@ public class JSSmartTests implements TestInit {
     @Test
     public void jsonMultiTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<JsonObject> headers = $("#furniture-double-hidden th")
+        List<JsonObject> headers = $w("#furniture-double-hidden th")
             .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
 
@@ -146,7 +146,7 @@ public class JSSmartTests implements TestInit {
     @Test
     public void jsonMultiLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<JsonObject> headers = $("#furniture-double-hidden", "th")
+        List<JsonObject> headers = $w("#furniture-double-hidden", "th")
             .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
 
@@ -155,12 +155,12 @@ public class JSSmartTests implements TestInit {
         assertEquals(headers.get(0).get("tag").getAsString(), "TH");
     }
     private JSSmart userName() {
-        JSSmart userName = $("#user-name");
+        JSSmart userName = $w("#user-name");
         userName.setupEntity(TextHtml.class);
         return userName;
     }
     private JSSmart userNameInfo() {
-        JSSmart userName = $("#user-name");
+        JSSmart userName = $w("#user-name");
         userName.setupEntity(TextInfo.class);
         return userName;
     }
@@ -185,12 +185,12 @@ public class JSSmartTests implements TestInit {
         assertEquals(jsObject.innerHTML, "Roman Iovlev");
     }
     private JSSmart header() {
-        JSSmart userName = $("#furniture-double-hidden th");
+        JSSmart userName = $w("#furniture-double-hidden th");
         userName.setupEntity(Header.class);
         return userName;
     }
     private JSSmart headerRaw() {
-        JSSmart userName = $("#furniture-double-hidden th");
+        JSSmart userName = $w("#furniture-double-hidden th");
         userName.setupEntity(HeaderRaw.class);
         return userName;
     }
@@ -211,46 +211,46 @@ public class JSSmartTests implements TestInit {
 
     @Test
     public void doActionTest() {
-        $(TextInfo.class, "#user-name").doAction("click()");
-        $(TextInfo.class, "#name").doAction("value='Roman'");
-        $(TextInfo.class, "#password").doAction("value='Jdi1234'");
-        $(TextInfo.class, "#login-button").doAction("click()");
+        $w(TextInfo.class, "#user-name").doAction("click()");
+        $w(TextInfo.class, "#name").doAction("value='Roman'");
+        $w(TextInfo.class, "#password").doAction("value='Jdi1234'");
+        $w(TextInfo.class, "#login-button").doAction("click()");
     }
     @Test
     public void doActionLocatorListTest() {
-        $(TextInfo.class, withParent("#user-name")).doAction("click()");
-        $(TextInfo.class, inForm("#name")).doAction("value='Roman'");
-        $(TextInfo.class, inForm("#password")).doAction("value='Jdi1234'");
-        $(TextInfo.class, inForm("#login-button")).doAction("click()");
+        $w(TextInfo.class, withParent("#user-name")).doAction("click()");
+        $w(TextInfo.class, inForm("#name")).doAction("value='Roman'");
+        $w(TextInfo.class, inForm("#password")).doAction("value='Jdi1234'");
+        $w(TextInfo.class, inForm("#login-button")).doAction("click()");
     }
     @Test
     public void attributeTest() {
-        assertEquals($(TextInfo.class, "#user-icon").getAttribute("tagName"), "IMG");
+        assertEquals($w(TextInfo.class, "#user-icon").getAttribute("tagName"), "IMG");
 
-        JSElement userName = $(TextInfo.class, "#user-name");
+        JSElement userName = $w(TextInfo.class, "#user-name");
         assertEquals(userName.getAttribute("innerText"), "Roman Iovlev");
         assertEquals(userName.getAttribute("textContent"), "Roman Iovlev");
         assertEquals(userName.getAttribute("innerHTML"), "Roman Iovlev");
     }
     @Test
     public void attributeLocatorListTest() {
-        assertEquals($(TextInfo.class, withParent("#user-icon")).getAttribute("tagName"), "IMG");
+        assertEquals($w(TextInfo.class, withParent("#user-icon")).getAttribute("tagName"), "IMG");
 
-        JSElement userName = $(TextInfo.class, withParent("#user-name"));
+        JSElement userName = $w(TextInfo.class, withParent("#user-name"));
         assertEquals(userName.getAttribute("innerText"), "Roman Iovlev");
         assertEquals(userName.getAttribute("textContent"), "Roman Iovlev");
         assertEquals(userName.getAttribute("innerHTML"), "Roman Iovlev");
     }
     @Test
     public void valueTest() {
-        boolean isVisible = $(TextInfo.class, "#user-icon").getValue(
+        boolean isVisible = $w(TextInfo.class, "#user-icon").getValue(
             "element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
     @Test
     public void valueLocatorListTest() {
-        boolean isVisible = $(TextInfo.class, withParent("#user-icon")).getValue(
+        boolean isVisible = $w(TextInfo.class, withParent("#user-icon")).getValue(
             "element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
@@ -258,27 +258,27 @@ public class JSSmartTests implements TestInit {
     @Test
     public void attributeListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<String> headers = $(TextInfo.class, "#products th").getAttributeList("innerText");
+        List<String> headers = $w(TextInfo.class, "#products th").getAttributeList("innerText");
         assertEquals(headers.size(), 4);
         assertEquals(headers.toString(), "[Name, Type, Cost, Weight]");
     }
     @Test
     public void attributesListLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<String> headers = $(TextInfo.class, "#products", "th").getAttributeList("innerText");
+        List<String> headers = $w(TextInfo.class, "#products", "th").getAttributeList("innerText");
         assertEquals(headers.size(), 4);
         assertEquals(headers.toString(), "[Name, Type, Cost, Weight]");
     }
     @Test
     public void attributesTest() {
-        Json attributes = $(TextInfo.class, "#user-icon").getAttributes("id", "src", "tagName");
+        Json attributes = $w(TextInfo.class, "#user-icon").getAttributes("id", "src", "tagName");
         assertEquals(attributes.get("id"), "user-icon");
         assertEquals(attributes.get("src"), DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(attributes.get("tagName"), "IMG");
     }
     @Test
     public void attributesLocatorListTest() {
-        Json attributes = $(TextInfo.class, withParent("#user-icon")).getAttributes("id", "src", "tagName");
+        Json attributes = $w(TextInfo.class, withParent("#user-icon")).getAttributes("id", "src", "tagName");
         assertEquals(attributes.get("id"), "user-icon");
         assertEquals(attributes.get("src"), DOMAIN + "/images/icons/user-icon.jpg");
         assertEquals(attributes.get("tagName"), "IMG");
@@ -286,7 +286,7 @@ public class JSSmartTests implements TestInit {
     @Test
     public void multiAttributesTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Json> headers = $(TextInfo.class, "#furniture-double-hidden th").getMultiAttributes("innerText", "className ", "tagName");
+        List<Json> headers = $w(TextInfo.class, "#furniture-double-hidden th").getMultiAttributes("innerText", "className ", "tagName");
         assertEquals(headers.size(), 4);
 
         assertEquals(headers.get(0).get("innerText"), "Name");
@@ -296,7 +296,7 @@ public class JSSmartTests implements TestInit {
     @Test
     public void multiAttributesLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Json> headers = $(TextInfo.class, "#furniture-double-hidden", "th").getMultiAttributes("innerText", "className", "tagName");
+        List<Json> headers = $w(TextInfo.class, "#furniture-double-hidden", "th").getMultiAttributes("innerText", "className", "tagName");
         assertEquals(headers.size(), 4);
 
         assertEquals(headers.get(0).get("innerText"), "Name");
@@ -306,39 +306,39 @@ public class JSSmartTests implements TestInit {
 
     @Test
     public void styleTest() {
-        String visibility = $(TextInfo.class, "#user-name").getStyle("visibility");
+        String visibility = $w(TextInfo.class, "#user-name").getStyle("visibility");
         assertEquals(visibility, "hidden");
 
         login();
-        visibility = $(TextInfo.class, "#user-name").getStyle("visibility");
+        visibility = $w(TextInfo.class, "#user-name").getStyle("visibility");
         assertEquals(visibility, "visible");
     }
     @Test
     public void allStylesTest() {
-        Json styles = $(TextInfo.class, "#user-name").getAllStyles();
+        Json styles = $w(TextInfo.class, "#user-name").getAllStyles();
         assertTrue(styles.size() > 10);
         String visibility = styles.get("visibility");
         assertEquals(visibility, "hidden");
     }
     @Test
     public void styleLocatorListTest() {
-        String visibility = $(TextInfo.class, withParent("#user-name")).getStyle("visibility");
+        String visibility = $w(TextInfo.class, withParent("#user-name")).getStyle("visibility");
         assertEquals(visibility, "hidden");
 
         login();
-        visibility = $(TextInfo.class, withParent("#user-name")).getStyle("visibility");
+        visibility = $w(TextInfo.class, withParent("#user-name")).getStyle("visibility");
         assertEquals(visibility, "visible");
     }
     @Test
     public void stylesTest() {
-        Json styles = $(TextInfo.class, "#user-icon").getStyles("color", "display", "fontSize");
+        Json styles = $w(TextInfo.class, "#user-icon").getStyles("color", "display", "fontSize");
         assertEquals(styles.get("color"), "rgb(204, 204, 204)");
         assertEquals(styles.get("display"), "block");
         assertEquals(styles.get("fontSize"), "15px");
     }
     @Test
     public void stylesLocatorListTest() {
-        Json styles = $(TextInfo.class, withParent("#user-icon")).getStyles("color", "display", "fontSize");
+        Json styles = $w(TextInfo.class, withParent("#user-icon")).getStyles("color", "display", "fontSize");
         assertEquals(styles.get("color"), "rgb(204, 204, 204)");
         assertEquals(styles.get("display"), "block");
         assertEquals(styles.get("fontSize"), "15px");
@@ -346,21 +346,21 @@ public class JSSmartTests implements TestInit {
     @Test
     public void stylesListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<String> visibility = $(TextInfo.class, "#furniture-double-hidden th").getStylesList("visibility");
+        List<String> visibility = $w(TextInfo.class, "#furniture-double-hidden th").getStylesList("visibility");
         assertEquals(visibility.size(), 4);
         assertEquals(visibility.get(0), "visible");
     }
     @Test
     public void stylesListLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<String> visibility = $(TextInfo.class, "#furniture-double-hidden", "th").getStylesList("visibility");
+        List<String> visibility = $w(TextInfo.class, "#furniture-double-hidden", "th").getStylesList("visibility");
         assertEquals(visibility.size(), 4);
         assertEquals(visibility.get(0), "visible");
     }
     @Test
     public void multiStylesTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Json> visibility = $(TextInfo.class, "#furniture-double-hidden th").getMultiStyles("visibility", "display");
+        List<Json> visibility = $w(TextInfo.class, "#furniture-double-hidden th").getMultiStyles("visibility", "display");
         assertEquals(visibility.size(), 4);
 
         assertEquals(visibility.get(0).get("visibility"), "visible");
@@ -369,7 +369,7 @@ public class JSSmartTests implements TestInit {
     @Test
     public void multiStylesLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Json> visibility = $(TextInfo.class, "#furniture-double-hidden", "th").getMultiStyles("visibility", "display");
+        List<Json> visibility = $w(TextInfo.class, "#furniture-double-hidden", "th").getMultiStyles("visibility", "display");
         assertEquals(visibility.size(), 4);
 
         assertEquals(visibility.get(0).get("visibility"), "visible");

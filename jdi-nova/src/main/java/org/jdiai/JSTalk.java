@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.jdiai.jswraper.JSWrappersUtils.defineLocator;
+import static org.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static org.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 
 public class JSTalk {
@@ -41,7 +41,7 @@ public class JSTalk {
         return new JS(JSTalk::driver, locators);
     }
     public static JS $(String locator) {
-        return new JS(JSTalk::driver, defineLocator(locator));
+        return new JS(JSTalk::driver, NAME_TO_LOCATOR.execute(locator));
     }
     public static JS $(String... locators) {
         return new JS(JSTalk::driver, locatorsToBy(locators));
@@ -64,6 +64,7 @@ public class JSTalk {
     public static void fillForm(Object user) {
         new JS(JSTalk::driver).fill(user);
     }
+    public static DragAndDrop drag(JS dragElement) { return new DragAndDrop(dragElement);}
 
     public static JSSmart jsDriver() { return new JSSmart(JSTalk::driver); }
 }

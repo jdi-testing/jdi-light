@@ -285,26 +285,26 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public String attr(String attrName) {
         return getAttribute(attrName);
     }
-    public List<String> classes() {
+    public List<String> allClasses() {
         String cl = attr("class");
         return cl.length() > 0
                 ? newList(cl.split(" "))
                 : new ArrayList<>();
     }
     public boolean hasClass(String className) {
-        return classes().contains(className);
+        return allClasses().contains(className);
     }
     public boolean hasAttribute(String attrName) {
         return isNotBlank(attr(attrName));
     }
 
-    public Json getAllAttributes() {
+    public Json allAttributes() {
         return js.getMap("return '{'+[...element.attributes].map((attr)=> `'${attr.name}'='${attr.value}'`).join()+'}'");
         //return js.getMap("return [...element.attributes].reduce((map,attr)=> { map.set('attr.name','attr.value'); return map; }, new Map())");
     }
     public String printHtml() {
         return MessageFormat.format("<{0} {1}>{2}</{0}>", getTagName().toLowerCase(),
-            print(getAllAttributes(), el -> format("%s='%s'", el.key, el.value), " "),
+            print(allAttributes(), el -> format("%s='%s'", el.key, el.value), " "),
             getJSResult("innerHTML"));
     }
     public void show() {
@@ -645,19 +645,19 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public JS findFirst(String by, Function<JS, String> condition) {
-        return findFirst(defineLocator(by), condition.apply(this));
+        return findFirst(NAME_TO_LOCATOR.execute(by), condition.apply(this));
     }
     public JS findFirst(By by, Function<JS, String> condition) {
         return findFirst(by, condition.apply(this));
     }
     public JS findFirst(String by, String condition) {
-        return findFirst(defineLocator(by), condition);
+        return findFirst(NAME_TO_LOCATOR.execute(by), condition);
     }
     public JS get(int index) {
         return listToOne("element = elements[" + index + "];\n");
     }
     public JS get(String by, int index) {
-        return get(defineLocator(by), index);
+        return get(NAME_TO_LOCATOR.execute(by), index);
     }
     public JS get(By by, int index) {
         return listToOne("element = elements.filter(e => "+
@@ -757,7 +757,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         if (relations == null) {
             relations = new MapArray<>(element.getFullName(), direction);
         } else {
-            relations.update(element.getName(), direction);
+            relations.update(element.getFullName(), direction);
         }
         return direction;
     }
@@ -774,7 +774,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public void clearRelations() {
         relations = null;
     }
-    public MapArray<String, Direction> getRelativePosition(JS... elements) {
+    public MapArray<String, Direction> getRelativePositions(JS... elements) {
         relations = new MapArray<>();
         for (JS element : elements) {
             relations.update(element.getName(), getDirectionTo(element));
@@ -810,6 +810,9 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return failures;
     }
 
+    public Point getCenter() {
+        return getCenter(getClientRect());
+    }
     protected Point getCenter(ClientRect rect) {
         int x = rect.left + (rect.right - rect.left) / 2;
         int y = rect.top + (rect.bottom - rect.top) / 2;
@@ -817,7 +820,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
     public JS shouldBe(Condition... conditions) {
         for (Condition condition : conditions) {
-            String message = "Assert that " + condition.getName().replace("%element%", "'" + getName() + "'").replace(" %no%", "");
+            String message = "Assert that " + condition.getName(this);
             logger.info(message);
             boolean result = condition.execute(this);
             if (!result) {
