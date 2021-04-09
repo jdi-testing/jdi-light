@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
-import static org.jdiai.JSTalk.loginAs;
+import static org.jdiai.JDI.loginAs;
 import static org.jdiai.site.JDISite.homePage;
 import static org.jdiai.site.JDISite.searchPage;
 import static org.jdiai.states.States.atHomePage;

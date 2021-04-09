@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
-import static org.jdiai.JSTalk.$;
+import static org.jdiai.JDI.$;
 import static org.jdiai.entities.User.Roman;
 import static org.jdiai.tests.TestData.SearchResults;
 import static org.jdiai.tests.TestData.SearchResultsJson;

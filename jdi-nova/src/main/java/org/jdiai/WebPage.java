@@ -2,7 +2,7 @@ package org.jdiai;
 
 import org.jdiai.interfaces.HasName;
 
-import static org.jdiai.JSTalk.openPage;
+import static org.jdiai.JDI.openPage;
 import static org.jdiai.page.objects.PageFactory.initPageElements;
 
 public class WebPage implements HasName {

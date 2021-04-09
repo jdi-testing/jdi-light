@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static org.jdiai.JSTalk.$;
+import static org.jdiai.JDI.$;
 import static org.jdiai.Pages.CONTACTS_PAGE;
 import static org.jdiai.asserts.Conditions.*;
 import static org.jdiai.states.States.loggedInAt;

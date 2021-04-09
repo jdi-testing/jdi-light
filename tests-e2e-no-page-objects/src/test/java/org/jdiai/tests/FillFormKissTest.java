@@ -7,8 +7,8 @@ import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static org.jdiai.JSTalk.$;
-import static org.jdiai.JSTalk.openPage;
+import static org.jdiai.JDI.$;
+import static org.jdiai.JDI.openPage;
 import static org.jdiai.entities.User.Triss;
 import static org.jdiai.states.States.atHomePage;
 import static org.jdiai.states.States.logout;

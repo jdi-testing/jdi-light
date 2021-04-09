@@ -6,7 +6,7 @@ import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static org.jdiai.JSTalk.*;
+import static org.jdiai.JDI.*;
 import static org.jdiai.asserts.Conditions.have;
 import static org.jdiai.asserts.Conditions.text;
 import static org.jdiai.entities.Contacts.Triss;

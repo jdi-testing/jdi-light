@@ -18,7 +18,7 @@ import static com.epam.jdi.tools.ReflectionUtils.create;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
-import static org.jdiai.JSTalk.driver;
+import static org.jdiai.JDI.driver;
 import static org.jdiai.page.objects.Rules.CREATE_RULES;
 import static org.jdiai.tools.JSTalkUtils.findByToBy;
 import static org.jdiai.tools.JSTalkUtils.uiToBy;

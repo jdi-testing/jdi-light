@@ -2,7 +2,7 @@ package org.jdiai.page.objects;
 
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.jdiai.JSTalk;
+import org.jdiai.JDI;
 import org.jdiai.WebPage;
 import org.jdiai.annotations.Site;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static org.jdiai.JSTalk.DOMAIN;
+import static org.jdiai.JDI.DOMAIN;
 import static org.jdiai.jsbuilder.QueryLogger.logger;
 import static org.jdiai.page.objects.PageFactoryRules.*;
 import static org.jdiai.page.objects.PageFactoryUtils.setFieldValue;
@@ -54,7 +54,7 @@ public class PageFactory {
     public static void openSite(Class<?> cl) {
         initSite(cl);
         if (DOMAIN != null) {
-            JSTalk.openSite();
+            JDI.openSite();
         }
     }
 }
