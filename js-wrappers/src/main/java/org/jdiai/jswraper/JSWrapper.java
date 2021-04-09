@@ -13,18 +13,18 @@ public class JSWrapper {
         return DRIVER.get();
     }
 
-    public static JSSmart $(String locator) {
+    public static JSSmart $w(String locator) {
         return new JSSmart(driver(), NAME_TO_LOCATOR.execute(locator));
     }
-    public static JSSmart $(String... locators) {
+    public static JSSmart $w(String... locators) {
         return new JSSmart(driver(), locatorsToBy(locators));
     }
-    public static <T> JSEntity<T> $(Class<T> cl, String locator) {
+    public static <T> JSEntity<T> $w(Class<T> cl, String locator) {
         JSEntity<T> entity = new JSEntity<T>(driver(), NAME_TO_LOCATOR.execute(locator)).initClass(cl);
         entity.driver.updateBuilderActions(new SmartBuilderActions());
         return entity;
     }
-    public static <T> JSEntity<T> $(Class<T> cl, String... locators) {
+    public static <T> JSEntity<T> $w(Class<T> cl, String... locators) {
         JSEntity<T> entity = new JSEntity<T>(driver(), locatorsToBy(locators)).initClass(cl);
         entity.driver.updateBuilderActions(new SmartBuilderActions());
         return entity;

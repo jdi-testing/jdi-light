@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import static java.lang.String.format;
-import static org.jdiai.jswraper.JSWrappersUtils.defineLocator;
+import static org.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static org.openqa.selenium.support.How.*;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 
@@ -18,7 +18,7 @@ public final class JSTalkUtils {
      public static By uiToBy(UI locator) {
          if (locator == null) return null;
          if (!locator.value().isEmpty()) {
-             return defineLocator(locator.value());
+             return NAME_TO_LOCATOR.execute(locator.value());
          }
          if (!locator.id().isEmpty())
              return By.id(locator.id());

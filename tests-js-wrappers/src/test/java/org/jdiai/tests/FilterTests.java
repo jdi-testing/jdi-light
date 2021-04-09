@@ -2,6 +2,7 @@ package org.jdiai.tests;
 
 import org.jdiai.TestInit;
 import org.jdiai.entities.ElementInfo;
+import org.jdiai.jswraper.JSWrapper;
 import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -10,7 +11,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static org.jdiai.Pages.SIMPLE_PAGE;
-import static org.jdiai.jswraper.JSWrapper.$;
 import static org.jdiai.jswraper.JSWrapper.element;
 import static org.jdiai.states.States.loggedInAt;
 import static org.testng.Assert.assertEquals;
@@ -27,7 +27,7 @@ public class FilterTests implements TestInit {
     public void oneTest() {
         List<String> header = element("#furniture-double-hidden th").getAttributeList("textContent");
         assertEquals(header.size(), 6);
-        List<String> filteredHeader = $("#furniture-double-hidden th").getAttributeList("textContent");
+        List<String> filteredHeader = JSWrapper.$w("#furniture-double-hidden th").getAttributeList("textContent");
         assertEquals(filteredHeader.size(), 4);
     }
 
@@ -36,7 +36,7 @@ public class FilterTests implements TestInit {
         List<String> visibility = element("#furniture-double-hidden th").getStylesList("visibility");
         assertEquals(visibility.size(), 6);
         assertEquals(visibility.get(0), "hidden");
-        List<String> filteredVisibility = $("#furniture-double-hidden th").getStylesList("visibility");
+        List<String> filteredVisibility = JSWrapper.$w("#furniture-double-hidden th").getStylesList("visibility");
         assertEquals(filteredVisibility.size(), 4);
         assertEquals(filteredVisibility.get(0), "visible");
     }
@@ -55,7 +55,7 @@ public class FilterTests implements TestInit {
             .getEntityList(json);
         assertEquals(info.size(), 6);
         assertEquals(info.toString(), INFO);
-        List<ElementInfo> filteredInfo = $(ElementInfo.class, "#furniture-double-hidden th")
+        List<ElementInfo> filteredInfo = JSWrapper.$w(ElementInfo.class, "#furniture-double-hidden th")
             .getEntityList(json);
         assertEquals(filteredInfo.size(), 4);
         assertEquals(filteredInfo.toString(), FILTERED_INFO);
@@ -67,7 +67,7 @@ public class FilterTests implements TestInit {
             .getEntityList();
         assertEquals(info.size(), 6);
         assertEquals(info.toString(), INFO);
-        List<ElementInfo> filteredInfo = $(ElementInfo.class, "#furniture-double-hidden th")
+        List<ElementInfo> filteredInfo = JSWrapper.$w(ElementInfo.class, "#furniture-double-hidden th")
             .getEntityList();
         assertEquals(filteredInfo.size(), 4);
         assertEquals(filteredInfo.toString(), FILTERED_INFO);

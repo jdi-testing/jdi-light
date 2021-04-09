@@ -25,7 +25,7 @@ import static org.jdiai.tests.benchmarks.PerfStatistic.testScenario;
 import static org.jdiai.tools.FilterConditions.textEquals;
 
 @Listeners(TestNGListener.class)
-public class JSTests implements TestInit {
+public class BenchmarkTests implements TestInit {
     final String atTop = "Zachary Hendrix";
     final String atBottom = "Yen Stevenson";
     final int index = 385;

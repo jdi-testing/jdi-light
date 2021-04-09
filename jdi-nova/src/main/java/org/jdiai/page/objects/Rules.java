@@ -14,7 +14,8 @@ import java.util.List;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.jdiai.page.objects.CreateRule.cRule;
-import static org.jdiai.page.objects.PageFactory.*;
+import static org.jdiai.page.objects.PageFactory.initPageElements;
+import static org.jdiai.page.objects.PageFactoryRules.*;
 import static org.jdiai.page.objects.SetupRule.sRule;
 
 public class Rules {
