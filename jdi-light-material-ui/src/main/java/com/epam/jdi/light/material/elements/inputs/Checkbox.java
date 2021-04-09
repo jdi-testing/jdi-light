@@ -4,17 +4,9 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.annotations.JDICheckbox;
 import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
-import org.openqa.selenium.By;
-
-import java.lang.reflect.Field;
-
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasCheck,
     HasAssert<CheckboxAssert>{
