@@ -34,7 +34,7 @@ public class CheckboxTests extends TestsInit {
     private void textTestLogic(Text text, String expectedText) {
         text.is().text(expectedText);
     }
-    //
+
     private void groupTestLogic(Checkbox firstCheckbox, Checkbox secondCheckbox) {
         firstCheckbox.check();
         firstCheckbox.is().checked();
