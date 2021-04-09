@@ -58,10 +58,10 @@ public class JDI {
     public static void submitForm(Object user) {
         new JS(JDI::driver).submit(user);
     }
-    public static void fillForm(String formLocator, Object user) {
+    public static void fillFormWith(String formLocator, Object user) {
         $(formLocator).fill(user);
     }
-    public static void fillForm(Object user) {
+    public static void fillFormWith(Object user) {
         new JS(JDI::driver).fill(user);
     }
     public static DragAndDrop drag(JS dragElement) { return new DragAndDrop(dragElement);}

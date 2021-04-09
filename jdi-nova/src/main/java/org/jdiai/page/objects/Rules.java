@@ -2,8 +2,8 @@ package org.jdiai.page.objects;
 
 import com.epam.jdi.tools.map.MapArray;
 import org.jdiai.DataList;
-import org.jdiai.JS;
 import org.jdiai.JDI;
+import org.jdiai.JS;
 import org.jdiai.interfaces.HasCore;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.ISetup;
