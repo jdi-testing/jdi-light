@@ -8,19 +8,6 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class BottomNavigationAssert extends UIAssert<BottomNavigationAssert, BottomNavigation> {
-    @JDIAction("Assert that '{name}' is enabled")
-    @Override
-    public BottomNavigationAssert enabled() {
-        jdiAssert(element().isEnabled(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is disabled")
-    @Override
-    public BottomNavigationAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true));
-        return this;
-    }
 
     @JDIAction("Assert that '{name}' is disabled")
     public BottomNavigationAssert selected() {

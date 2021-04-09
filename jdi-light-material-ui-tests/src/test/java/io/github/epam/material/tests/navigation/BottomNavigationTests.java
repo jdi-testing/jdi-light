@@ -14,20 +14,19 @@ public class BottomNavigationTests extends TestsInit {
     public void before(){
         openSection("Button Navigation");
     }
+    //TODO change Section name to Bottom Navigation (from Button Navigation)
+    //TODO change Title name to Bottom Navigation (from Buttom Navigation)
+
     @Test
     public void defaultBottomNavigationTest(){
+
         favorites.is().enabled();
         assertTrue(favorites.core().text().contains("Favorites"));
         assertFalse(favorites.isSelected());
         favorites.core().click();
+        assertTrue(currentPosition.getText().contains("Favorites"));
         favorites.is().selected();
 
     }
-    @Test
-    public void currentPositionBottomNavigationTest(){
-        assertFalse(currentPosition.getText().contains("Favorites"));
-        favorites.core().click();
-        assertTrue(currentPosition.getText().contains("Favorites"));
 
-    }
 }
