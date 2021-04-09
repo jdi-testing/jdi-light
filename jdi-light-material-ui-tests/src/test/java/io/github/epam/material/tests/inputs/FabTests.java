@@ -24,5 +24,4 @@ public class FabTests extends TestsInit {
 
         fabFrame.fab.is().disabled();
     }
-
 }
