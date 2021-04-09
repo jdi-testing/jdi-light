@@ -19,13 +19,13 @@ import static org.testng.Assert.assertEquals;
  */
 
 public class ColorPickerTests implements TestsInit {
+    String color = "#ffd7a6";
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    String color = "#ffd7a6";
 
     @Test
     public void getLabelTextTest() {

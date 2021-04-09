@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
 public class RadioLabelTests implements TestsInit {
+    String text = "5";
 
     @BeforeMethod
     public void before() {
@@ -21,7 +22,6 @@ public class RadioLabelTests implements TestsInit {
         metalAndColorsPage.shouldBeOpened();
         odds.select(text);
     }
-    String text = "5";
 
     @Test
     public void getValueTest() {

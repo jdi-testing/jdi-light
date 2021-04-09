@@ -27,9 +27,12 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 
 public class ActionObject {
+    private int elementTimeout = -1;
+    public String stepUId = "";
     private JoinPoint jp;
     private ProceedingJoinPoint pjp;
     private String processor;
+    private CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
 
     private ActionObject(String name) {
         this.processor = name;
@@ -42,7 +45,6 @@ public class ActionObject {
         this(name);
         this.pjp = joinPoint;
     }
-    private int elementTimeout = -1;
     private int elementTimeout() {
         if (elementTimeout > -1)
             return elementTimeout;
@@ -62,7 +64,6 @@ public class ActionObject {
     public ProceedingJoinPoint pjp() {
         return pjp;
     }
-    public String stepUId = "";
     public boolean topLevel() {
         return aroundCount() == 1;
     }
@@ -113,7 +114,6 @@ public class ActionObject {
         }
     }
     public int timeout() { return timeout.get(); }
-    private CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
     private int getTimeout() {
         JDIAction ja = jp() != null
             ? jdiAnnotation()

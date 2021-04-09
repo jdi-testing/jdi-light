@@ -25,13 +25,13 @@ import static org.testng.Assert.fail;
  */
 
 public class DropdownEx5Tests implements TestsInit {
+    String text = "Colors";
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
         colors5.select(text);
     }
-    String text = "Colors";
 
     @Test
     public void getValueTest() {

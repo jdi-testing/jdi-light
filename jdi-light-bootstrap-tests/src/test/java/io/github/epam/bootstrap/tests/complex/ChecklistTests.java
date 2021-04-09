@@ -15,7 +15,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 public class ChecklistTests implements TestsInit {
-
     String text = "1";
 
     @BeforeMethod

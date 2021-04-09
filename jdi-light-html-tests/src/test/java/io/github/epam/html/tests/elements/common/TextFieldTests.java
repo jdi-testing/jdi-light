@@ -19,8 +19,9 @@ import static org.testng.Assert.assertEquals;
 
 public class TextFieldTests implements TestsInit {
 
-    final String symbols = "`!@#//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
+     final String symbols = "`!@#//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
     String text = "TextField";
+
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();

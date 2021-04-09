@@ -14,6 +14,8 @@ import static com.epam.jdi.tools.StringUtils.format;
 import static com.epam.jdi.tools.pairs.Pair.$;
 
 public class PerfStatistic {
+    private static PerfStatistic instance;
+
     private PerfStatistic() {
         stats = new ArrayListValuedHashMap<>();
     }
@@ -25,7 +27,6 @@ public class PerfStatistic {
         return toLong(instance.stats.values());
     }
 
-    private static PerfStatistic instance;
     private static PerfStatistic Statistic() {
         if (instance == null)
             instance = new PerfStatistic();
