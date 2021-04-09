@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static io.github.com.MaterialNavigator.openSection;
@@ -8,172 +9,144 @@ import static io.github.com.pages.inputs.ButtonPage.*;
 
 public class ButtonTests extends TestsInit {
 
+    @BeforeTest
+    public void before() {
+        openSection("Buttons");
+    }
+
     @Test
     public void defaultButtonTest() {
-        openSection("Buttons");
 
-        button.getButtonByGroupIndex("contained",1).click();
-        button.getButtonByGroupIndex("contained",1).is().text("DEFAULT");
-        button.getButtonByGroupIndex("contained",1).is().hasClass("MuiButton-contained");
-        checkContainedField.is().text("Last click: Default");
+        containedButtons.get(1).click();
+        containedButtons.get(1).is().text("DEFAULT");
+        containedButtons.get(6).is().text("Last click: Default");
 
-        button.getButtonByGroupIndex("contained",2).click();
-        button.getButtonByGroupIndex("contained",2).is().hasClass("MuiButton-contained");
-        button.getButtonByGroupIndex("contained",2).is().text("PRIMARY");
-        button.getButtonByGroupIndex("contained",2).is().hasClass("MuiButton-containedPrimary");
-        checkContainedField.is().text("Last click: Primary");
 
-        button.getButtonByGroupIndex("contained",3).click();
-        button.getButtonByGroupIndex("contained",3).is().hasClass("MuiButton-contained");
-        button.getButtonByGroupIndex("contained",3).is().text("SECONDARY");
-        button.getButtonByGroupIndex("contained",3).is().hasClass("MuiButton-containedSecondary");
-        checkContainedField.is().text("Last click: Secondary");
+        containedButtons.get(2).click();
+        containedButtons.get(2).is().text("PRIMARY");
+        containedButtons.get(6).is().text("Last click: Primary");
 
-        button.getButtonByGroupIndex("contained",4).is().text("DISABLED");
-        button.getButtonByGroupIndex("contained",4).is().hasClass("MuiButton-contained");
-        button.getButtonByGroupIndex("contained",4).is().hasClass("Mui-disabled");
-        button.getButtonByGroupIndex("contained",4).is().attr("disabled");
-        button.getButtonByGroupIndex("contained",4).is().disabled();
+        containedButtons.get(3).click();
+        containedButtons.get(3).is().text("SECONDARY");
+        containedButtons.get(6).is().text("Last click: Secondary");
 
-        button.getButtonByGroupIndex("contained",5).click();
-        button.getButtonByGroupIndex("contained",5).is().hasClass("MuiButton-contained");
-        button.getButtonByGroupIndex("contained",5).is().text("LINK");
-        button.getButtonByGroupIndex("contained",5).is().hasClass("MuiButton-containedPrimary");
-        checkContainedField.is().text("Last click: Link");
-        button.getButtonByGroupIndex("contained",5).is().notVisible();
+        containedButtons.get(4).is().text("DISABLED");
+        containedButtons.get(4).is().attr("disabled");
+        containedButtons.get(4).is().disabled();
+
+        containedButtons.get(5).click();
+        containedButtons.get(5).is().text("LINK");
+        containedButtons.get(6).is().text("Last click: Link");
+        containedButtons.get(5).is().notVisible();
     }
 
     @Test
     public void textButtonTest() {
-        openSection("Buttons");
 
-        button.getButtonByGroupIndex("text",1).click();
-        button.getButtonByGroupIndex("text",1).is().hasClass("MuiButton-text");
-        button.getButtonByGroupIndex("text",1).is().text("DEFAULT");
-        checkTextField.is().text("Last click: Default");
+        textButtons.get(1).click();
+        textButtons.get(1).is().text("DEFAULT");
+        textButtons.get(6).is().text("Last click: Default");
 
-        button.getButtonByGroupIndex("text",2).click();
-        button.getButtonByGroupIndex("text",2).is().hasClass("MuiButton-text");
-        button.getButtonByGroupIndex("text",2).is().text("PRIMARY");
-        button.getButtonByGroupIndex("text",2).is().hasClass("MuiButton-textPrimary");
-        checkTextField.is().text("Last click: Primary");
+        textButtons.get(2).click();
+        textButtons.get(2).is().text("PRIMARY");
+        textButtons.get(6).is().text("Last click: Primary");
 
-        button.getButtonByGroupIndex("text",3).click();
-        button.getButtonByGroupIndex("text",3).is().hasClass("MuiButton-text");
-        button.getButtonByGroupIndex("text",3).is().text("SECONDARY");
-        button.getButtonByGroupIndex("text",3).is().hasClass("MuiButton-textSecondary");
-        checkTextField.is().text("Last click: Secondary");
+        textButtons.get(3).click();
+        textButtons.get(3).is().text("SECONDARY");
+        textButtons.get(6).is().text("Last click: Secondary");
 
-        button.getButtonByGroupIndex("text",4).is().text("DISABLED");
-        button.getButtonByGroupIndex("text",4).is().hasClass("MuiButton-text");
-        button.getButtonByGroupIndex("text",4).is().attr("disabled");
-        button.getButtonByGroupIndex("text",4).is().hasClass("Mui-disabled");
+        textButtons.get(4).is().text("DISABLED");
+        textButtons.get(4).is().attr("disabled");
+        textButtons.get(4).is().disabled();
 
-        button.getButtonByGroupIndex("text",5).click();
-        button.getButtonByGroupIndex("text",5).is().hasClass("MuiButton-text");
-        button.getButtonByGroupIndex("text",5).is().text("LINK");
-        button.getButtonByGroupIndex("text",5).is().hasClass("MuiButton-textPrimary");
-        checkTextField.is().text("Last click: Link");
-        button.getButtonByGroupIndex("text",5).is().notVisible();
+        textButtons.get(5).click();
+        textButtons.get(5).is().text("LINK");
+        textButtons.get(6).is().text("Last click: Link");
+        textButtons.get(5).is().notVisible();
     }
 
     @Test
     public void iconLabelButtonTest() {
-        openSection("Buttons");
 
-        button.getButtonByGroupIndex("iconLabelButton",1).click();
-        button.getButtonByGroupIndex("iconLabelButton",1).is().text("DELETE");
-        button.getButtonByGroupIndex("iconLabelButton",1).is().hasClass("MuiButton-containedSecondary");
-        checkIconLabelField.is().text("Last click: Delete");
-        button.getButtonByGroupIndex("iconLabelIcon",1).is().hasSvg("MuiSvgIcon-root");
+        iconLabelButtons.get(1).click();
+        iconLabelButtons.get(1).is().text("DELETE");
+        iconLabelButtons.get(7).is().text("Last click: Delete");
+        iconLabelIcons.get(1).is().displayed();
 
-        button.getButtonByGroupIndex("iconLabelButton",2).click();
-        button.getButtonByGroupIndex("iconLabelButton",2).is().text("SEND\nSEND");
-        button.getButtonByGroupIndex("iconLabelButton",2).is().hasClass("MuiButton-containedPrimary");
-        checkIconLabelField.is().text("Last click: Sendsend");
-        button.getButtonByGroupIndex("iconLabelSpanIcon",2).is().displayedSpanIcon();
+        iconLabelButtons.get(2).click();
+        iconLabelButtons.get(2).is().text("SEND\nSEND");
+        iconLabelButtons.get(7).is().text("Last click: Sendsend");
+        iconLabelIcons.get(2).is().displayed();
 
-        button.getButtonByGroupIndex("iconLabelButton",3).click();
-        button.getButtonByGroupIndex("iconLabelButton",3).is().text("UPLOAD");
-        checkIconLabelField.is().text("Last click: Upload");
-        button.getButtonByGroupIndex("iconLabelIcon",2).is().hasSvg("MuiSvgIcon-root");
+        iconLabelButtons.get(3).click();
+        iconLabelButtons.get(3).is().text("UPLOAD");
+        iconLabelButtons.get(7).is().text("Last click: Upload");
+        iconLabelIcons.get(3).is().displayed();
 
-        button.getButtonByGroupIndex("iconLabelButton",4).is().attr("disabled");
-        button.getButtonByGroupIndex("iconLabelButton",4).is().text("TALK");
-        button.getButtonByGroupIndex("iconLabelButton",4).is().hasClass("Mui-disabled");
-        button.getButtonByGroupIndex("iconLabelIcon",3).is().hasSvg("MuiSvgIcon-root");
+        iconLabelButtons.get(4).is().attr("disabled");
+        iconLabelButtons.get(4).is().text("TALK");
+        iconLabelIcons.get(4).is().displayed();
 
-        button.getButtonByGroupIndex("iconLabelButton",5).click();
-        button.getButtonByGroupIndex("iconLabelButton",5).is().text("SAVE");
-        button.getButtonByGroupIndex("iconLabelButton",5).is().hasClass("MuiButton-sizeSmall");
-        checkIconLabelField.is().text("Last click: Save");
-        button.getButtonByGroupIndex("iconLabelIcon",4).is().hasSvg("MuiSvgIcon-root");
+        iconLabelButtons.get(5).click();
+        iconLabelButtons.get(5).is().text("SAVE");
+        iconLabelButtons.get(7).is().text("Last click: Save");
+        iconLabelIcons.get(5).is().displayed();
 
-        button.getButtonByGroupIndex("iconLabelButton",6).click();
-        button.getButtonByGroupIndex("iconLabelButton",6).is().text("SAVE ALL");
-        button.getButtonByGroupIndex("iconLabelButton",6).is().hasClass("MuiButton-sizeLarge");
-        checkIconLabelField.is().text("Last click: Save all");
-        button.getButtonByGroupIndex("iconLabelIcon",5).is().hasSvg("MuiSvgIcon-root");
+        iconLabelButtons.get(6).click();
+        iconLabelButtons.get(6).is().text("SAVE ALL");
+        iconLabelButtons.get(7).is().text("Last click: Save all");
+        iconLabelIcons.get(6).is().displayed();
     }
 
     @Test
     public void iconButtonTest() {
-        openSection("Buttons");
 
-        button.getButtonByGroupIndex("iconButton",1).click();
-        checkIconField.is().text("Last click: Delete enabled");
-        button.getButtonByGroupIndex("iconButton",1).is().hasSvg("MuiSvgIcon-root");
+        iconButtons.get(1).click();
+        iconButtons.get(5).is().text("Last click: Delete enabled");
+        iconButtonIcons.get(1).is().displayed();
 
-        button.getButtonByGroupIndex("iconButton",2).is().attr("disabled");
-        button.getButtonByGroupIndex("iconButton",2).is().hasClass("Mui-disabled");
-        button.getButtonByGroupIndex("iconButton",2).is().hasSvg("MuiSvgIcon-root");
+        iconButtons.get(2).is().attr("disabled");
+        iconButtons.get(2).is().disabled();
+        iconButtonIcons.get(2).is().displayed();
 
-        button.getButtonByGroupIndex("iconButton",3).click();
-        button.getButtonByGroupIndex("iconButton",3).is().hasClass("MuiIconButton-colorSecondary");
-        checkIconField.is().text("Last click: Alarm");
-        button.getButtonByGroupIndex("iconButton",3).is().hasSvg("MuiSvgIcon-root");
+        iconButtons.get(3).click();
+        iconButtons.get(5).is().text("Last click: Alarm");
+        iconButtonIcons.get(3).is().displayed();
 
-        button.getButtonByGroupIndex("iconButton",4).click();
-        button.getButtonByGroupIndex("iconButton",4).is().hasClass("MuiIconButton-colorPrimary");
-        checkIconField.is().text("Last click: Shopping cart");
-        button.getButtonByGroupIndex("iconButton",4).is().hasSvg("MuiSvgIcon-root");
+        iconButtons.get(4).click();
+        iconButtons.get(5).is().text("Last click: Shopping cart");
+        iconButtonIcons.get(4).is().displayed();
     }
 
     @Test
     public void customizedButtonTest() {
-        openSection("Buttons");
 
-        button.getButtonByGroupIndex("customizedButton",1).click();
-        button.getButtonByGroupIndex("customizedButton",1).is().hasClass("MuiButton-containedPrimary");
-        button.getButtonByGroupIndex("customizedButton",1).is().text("CUSTOM CSS");
-        checkCustomizedField.is().text("Last click: Custom CSS");
+        customizedButtons.get(1).click();
+        customizedButtons.get(1).is().text("CUSTOM CSS");
+        customizedButtons.get(4).is().text("Last click: Custom CSS");
 
-        button.getButtonByGroupIndex("customizedButton",2).click();
-        button.getButtonByGroupIndex("customizedButton",2).is().hasClass("MuiButton-containedPrimary");
-        button.getButtonByGroupIndex("customizedButton",2).is().text("THEME PROVIDER");
-        checkCustomizedField.is().text("Last click: Theme Provider");
+        customizedButtons.get(2).click();
+        customizedButtons.get(2).is().text("THEME PROVIDER");
+        customizedButtons.get(4).is().text("Last click: Theme Provider");
 
-        button.getButtonByGroupIndex("customizedButton",3).click();
-        button.getButtonByGroupIndex("customizedButton",3).is().hasClass("MuiButton-containedPrimary");
-        button.getButtonByGroupIndex("customizedButton",3).is().text("Bootstrap");
-        checkCustomizedField.is().text("Last click: Bootstrap");
-
+        customizedButtons.get(3).click();
+        customizedButtons.get(3).is().text("Bootstrap");
+        customizedButtons.get(4).is().text("Last click: Bootstrap");
     }
 
     @Test
     public void complexButtonTest() {
-        openSection("Buttons");
 
-        button.getButtonByGroupIndex("complexButton",1).click();
-        button.getButtonByGroupIndex("complexButton",1).is().text("Breakfast");
-        checkComplexField.is().text("Last click: Breakfast");
+        complexButtons.get(1).click();
+        complexButtons.get(1).is().text("Breakfast");
+        complexButtons.get(4).is().text("Last click: Breakfast");
 
-        button.getButtonByGroupIndex("complexButton",2).click();
-        button.getButtonByGroupIndex("complexButton",2).is().text("Burgers");
-        checkComplexField.is().text("Last click: Burgers");
+        complexButtons.get(2).click();
+        complexButtons.get(2).is().text("Burgers");
+        complexButtons.get(4).is().text("Last click: Burgers");
 
-        button.getButtonByGroupIndex("complexButton",3).click();
-        button.getButtonByGroupIndex("complexButton",3).is().text("Camera");
-        checkComplexField.is().text("Last click: Camera");
+        complexButtons.get(3).click();
+        complexButtons.get(3).is().text("Camera");
+        complexButtons.get(4).is().text("Last click: Camera");
     }
 }
