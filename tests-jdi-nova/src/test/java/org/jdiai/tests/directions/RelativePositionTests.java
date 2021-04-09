@@ -49,6 +49,13 @@ public class RelativePositionTests implements TestInit {
     }
 
     @Test
+    public void leftRightTest() {
+        passportNumber.shouldBe(onLeftOf(passportSeria));
+        passportNumber.shouldBe(onRightOf(passport));
+        passport.shouldBe(onLeftOf(passportSeria));
+    }
+
+    @Test
     public void sameLineHorizontallyTest() {
         passportNumber.shouldBe(onTheSameLine(passportSeria));
         passport.shouldBe(onTheSameLine(passportNumber));

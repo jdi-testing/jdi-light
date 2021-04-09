@@ -28,7 +28,7 @@ public abstract class Conditions {
     public static Condition readonly = attribute("readonly");
 
     public static Condition onTopOf(JS element) {
-        return condition("%element% is %not% on Top of '" + element.getFullName() + "'",
+        return condition("%element% is %not% on the Top of '" + element.getFullName() + "'",
             el -> HIGHER.execute(element.getDirectionTo(el)));
     }
     public static Condition below(JS element) {
@@ -36,27 +36,27 @@ public abstract class Conditions {
             el -> LOWER.execute(element.getDirectionTo(el)));
     }
     public static Condition onLeftOf(JS element) {
-        return condition("%element% is %not% Left of '" + element.getFullName() + "'",
+        return condition("%element% is %not% on the Left of '" + element.getFullName() + "'",
             el -> LEFT.execute(element.getDirectionTo(el)));
     }
     public static Condition onRightOf(JS element) {
-        return condition("%element% is %not% Right of '" + element.getFullName() + "'",
+        return condition("%element% is %not% on the Right of '" + element.getFullName() + "'",
             el -> RIGHT.execute(element.getDirectionTo(el)));
     }
     public static Condition onTopLeftOf(JS element) {
-        return condition("%element% is %not% Top Left of '" + element.getFullName() + "'",
+        return condition("%element% is %not% on the Top-Left of '" + element.getFullName() + "'",
             el -> TOP_LEFT.execute(element.getDirectionTo(el)));
     }
     public static Condition onTopRightOf(JS element) {
-        return condition("%element% is %not% Top Right of '" + element.getFullName() + "'",
+        return condition("%element% is %not% on the Top-Right of '" + element.getFullName() + "'",
             el -> TOP_RIGHT.execute(element.getDirectionTo(el)));
     }
     public static Condition onBottomLeftOf(JS element) {
-        return condition("%element% is %not% Bottom Left of '" + element.getFullName() + "'",
+        return condition("%element% is %not% on the Bottom-Left of '" + element.getFullName() + "'",
             el -> BOTTOM_LEFT.execute(element.getDirectionTo(el)));
     }
     public static Condition onBottomRightOf(JS element) {
-        return condition("%element% is %not% Bottom Right of '" + element.getFullName() + "'",
+        return condition("%element% is %not% on the Bottom-Right of '" + element.getFullName() + "'",
             el -> BOTTOM_RIGHT.execute(element.getDirectionTo(el)));
     }
     public static Condition onTheSameLine(JS element) {
