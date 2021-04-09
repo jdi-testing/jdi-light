@@ -49,9 +49,9 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.jsbuilder.GetTypes.dataType;
+import static org.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
 import static org.jdiai.jsbuilder.QueryLogger.logger;
-import static org.jdiai.jsdriver.JSDriverUtils.getByLocator;
-import static org.jdiai.jsdriver.JSDriverUtils.selector;
+import static org.jdiai.jsdriver.JSDriverUtils.*;
 import static org.jdiai.jsdriver.JSException.THROW_ASSERT;
 import static org.jdiai.jswraper.JSWrappersUtils.*;
 import static org.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
@@ -206,9 +206,15 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
     public void select() { click(); }
     public void select(String value) {
-        js.jsDriver().builder().setTemplate(value);
-        click();
+        if (js.jsDriver().locators().get(js.jsDriver().locators().size()-1).toString().contains("%s")) {
+            js.jsDriver().builder().setTemplate(value);
+            click();
+        } else {
+            find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
+        }
     }
+    public static String SELECT_FIND_TEXT_LOCATOR = ".//*[text()='%s']";
+
     public void select(String... names) {
         for (String name : names)
             select(name);
@@ -217,12 +223,14 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         select(getEnumValue(name));
     }
     public void check() {
-        if (isDeselected())
+        if (isDeselected()) {
             click();
+        }
     }
     public void uncheck() {
-        if (isSelected())
+        if (isSelected()) {
             click();
+        }
     }
     public void rightClick() {
         actionsWithElement(Actions::contextClick);
@@ -277,6 +285,9 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
 
     public String getAttribute(String attrName) {
         return getJSResult("getAttribute('" + attrName + "')");
+    }
+    public String getProperty(String property) {
+        return getJSResult(property);
     }
 
     public Json getJson(String valueFunc) {
@@ -526,7 +537,11 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public <T> T getEntity(Class<T> cl) {
-        return getEntity(GET_OBJECT_MAP.execute(cl), cl);
+        String objectMap = GET_OBJECT_MAP.execute(cl);
+        if (objectMap.contains("': xpath(")) {
+            js.jsDriver().builder().registerFunction("xpath", XPATH_FUNC);
+        }
+        return getEntity(objectMap, cl);
     }
     public <T> T getEntity() {
         return js.getEntity(objectMap);

@@ -25,8 +25,9 @@ public final class JSDriverUtils {
             throw new JSException("Failed to build selector. Locator is null");
         }
         String selector = locator.replace("'", "\"");
-        if (getByType(by).equals("xpath"))
+        if (getByType(by).equals("xpath")) {
             builder.registerFunction("xpath", XPATH_FUNC);
+        }
         return selector;
     }
     public static String selectorAll(By by, IJSBuilder builder) {
