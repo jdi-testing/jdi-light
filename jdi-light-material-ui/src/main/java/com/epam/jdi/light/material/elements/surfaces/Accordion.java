@@ -14,10 +14,5 @@ public class Accordion extends Dropdown {
     public boolean isDisabled() {
         return value().hasClass("Mui-disabled");
     }
-
-    @JDIAction("Is '{name} enabled")
-    @Override
-    public boolean isEnabled() {
-        return !isDisabled();
-    }
+    
 }
