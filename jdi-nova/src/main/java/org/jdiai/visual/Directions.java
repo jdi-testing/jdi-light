@@ -4,8 +4,6 @@ import com.epam.jdi.tools.func.JFunc1;
 import org.jdiai.jsdriver.JSException;
 
 import static com.google.common.collect.Range.closed;
-import static java.lang.Math.max;
-import static java.lang.Math.min;
 
 public class Directions {
     public static int MAIN_ACCURACY = 90;
@@ -36,22 +34,19 @@ public class Directions {
             throw new JSException("Angle should be in range [0, 360]; Accuracy in [0, 180], but Angle=%s; Accuracy=%s",
                     angle, accuracy);
         }
-        return d -> d.angle() >= max(normalizeAngle(angle - accuracy), 0)
-            && d.angle() <= min(normalizeAngle(angle + accuracy), 360);
+        int lower = angle - accuracy;
+        int upper = angle + accuracy;
+        if (lower >= 0 && upper <= 360) {
+            return d -> d.angle() >= lower && d.angle() <= upper;
+        }
+        int min = lower < 0 ? 360 + lower : lower;
+        int max = upper > 360 ? upper - 360 : upper;
+        return d -> (d.angle() <= max && d.angle() >= 0) || (d.angle() <= 360 && d.angle() >= min);
     }
-    private static int normalizeAngle(int angle) {
-        if (angle >= 0 && angle <= 360) {
-            return angle;
-        }
-        if (angle < 0 && angle > -360) {
-            return 360 - angle;
-        }
-        if (angle > 360 && angle < 720) {
-            return angle - 360;
-        }
-        throw new JSException("Angle should be in [-360, 720] range, but " + angle);
+    public static JFunc1<Direction, Boolean> ANGLE(int angle, int accuracy) {
+        return DIRECTION(angle, accuracy);
     }
     public static JFunc1<Direction, Boolean> ANGLE(int angle) {
-        return DIRECTION(angle, ANGLE_ACCURACY);
+        return ANGLE(angle, ANGLE_ACCURACY);
     }
 }
