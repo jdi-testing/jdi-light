@@ -23,18 +23,6 @@ public class FillFormTalkTest implements TestInit {
     JS descriptionInLog = $(".descr-res");
 
     @Test
-    public void simpleSearchTest() {
-        openPage("https://jdi-testing.github.io/jdi-light");
-        $("#user-icon").click();
-        loginAs(Roman);
-        $(".sidebar-menu li").select("Service", "User Table");
-        MarvelHero spiderMan = $("#user-table tr").get(2).getEntity(MarvelHero.class);
-        assertEquals(spiderMan.number, 2);
-        assertEquals(spiderMan.heroName, "Spider Man");
-        assertEquals(spiderMan.img, "https://jdi-testing.github.io/jdi-light/images/spider-man.jpg");
-    }
-
-    @Test
     public void loginPOTest() {
         logout();
         atHomePage();
@@ -65,8 +53,10 @@ public class FillFormTalkTest implements TestInit {
         userIcon.click();
         $("#login-form").loginAs(Roman);
         validateUrl("/index.html");
-        $(".sidebar-menu li").select("Contact form");
+        $(".sidebar-menu").select("Contact form");
         validateUrl("/contacts.html");
+        $(".sidebar-menu").select("Service", "User Table");
+        validateUrl("/user-table.html");
         $("//*[@class='sidebar-menu']/li//*[text()='%s']").select("Home");
         validateUrl("/index.html");
         $(".sidebar-menu", ".//li//*[text()='%s']").select("Contact form");

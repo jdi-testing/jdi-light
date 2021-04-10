@@ -46,7 +46,14 @@ public class JSBuilder implements IJSBuilder {
             : new BuilderActions();
         this.builderActions.setBuilder(this);
     }
-
+    protected String elementName = "element";
+    public IJSBuilder setElementName(String elementName) {
+        this.elementName = elementName;
+        return this;
+    }
+    public String getElementName() {
+        return elementName;
+    }
     public IJSBuilder updateActions(IBuilderActions builderActions) {
         this.builderActions = builderActions;
         this.builderActions.setBuilder(this);
@@ -125,6 +132,9 @@ public class JSBuilder implements IJSBuilder {
     }
     public IJSBuilder listToList(By locator) {
         return addJSCode(builderActions.listToList(locator));
+    }
+    public IJSBuilder doAction(String collectResult) {
+        return addJSCode(builderActions.doAction(collectResult));
     }
     public IJSBuilder getResult(String collectResult) {
         return addJSCode(builderActions.getResult(getCollector(collectResult)));

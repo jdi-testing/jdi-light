@@ -46,8 +46,8 @@ public class PageFactory {
         for (Field field : pages) {
             Class<?> fieldClass = field.getType();
             Object page = isClass(fieldClass, WebPage.class)
-                    ? CREATE_WEB_PAGE.execute(fieldClass, field)
-                    : initElements(fieldClass);
+                ? CREATE_WEB_PAGE.execute(fieldClass, field)
+                : initElements(fieldClass);
             setFieldValue(field, null, page);
         }
     }

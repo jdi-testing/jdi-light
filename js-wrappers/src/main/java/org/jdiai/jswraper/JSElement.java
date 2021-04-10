@@ -50,7 +50,7 @@ public class JSElement {
     }
 
     public void doAction(String action) {
-        driver.getOne("element." + action);
+        driver.doAction("element." + action);
     }
 
     // region Attributes

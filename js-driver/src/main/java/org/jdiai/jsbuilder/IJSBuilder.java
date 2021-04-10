@@ -13,8 +13,9 @@ public interface IJSBuilder {
     IJSBuilder oneToList(String ctx, By locator);
     IJSBuilder listToList(By locator);
 
-    IJSBuilder getResult(String collector);
-    IJSBuilder getResultList(String collector);
+    IJSBuilder doAction(String collectResult);
+    IJSBuilder getResult(String collectResult);
+    IJSBuilder getResultList(String collectResult);
 
     IJSBuilder trigger(String event);
     IJSBuilder trigger(String event, String options);
@@ -31,4 +32,6 @@ public interface IJSBuilder {
     void updateFromBuilder(IJSBuilder builder);
     IJSBuilder copy();
     IJSBuilder updateActions(IBuilderActions builderActions);
+    IJSBuilder setElementName(String elementName);
+    String getElementName();
 }

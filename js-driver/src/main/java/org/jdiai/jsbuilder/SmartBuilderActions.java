@@ -16,7 +16,7 @@ public class SmartBuilderActions implements IBuilderActions {
         this.builder = builder;
     }
     public String oneToOne(String ctx, By locator) {
-        return builder.registerVariable("element") + format(ONE_TO_ONE, MessageFormat.format(dataType(locator).get + iFrame(locator), ctx, selector(locator, builder)));
+        return builder.registerVariable(builder.getElementName()) + format(ONE_TO_ONE, MessageFormat.format(dataType(locator).get + iFrame(locator), ctx, selector(locator, builder)));
     }
     private String iFrame(By locator) {
         return isIFrame(locator) ? ".contentWindow.document" : "";
@@ -29,7 +29,7 @@ public class SmartBuilderActions implements IBuilderActions {
         return builder.registerVariable("elements") + format(ONE_TO_LIST, MessageFormat.format(dataType(locator).getAll, ctx, selectorAll(locator, builder)));
     }
     public String listToOne(By locator) {
-        builder.registerVariables("found", "i", "element", "first");
+        builder.registerVariables("found", "i", builder.getElementName(), "first");
         builder.registerFunction("filter", FILTER_FUNC);
         return format(LIST_TO_ONE, MessageFormat.format(dataType(locator).get + iFrame(locator), "elements[i]", selector(locator, builder)));
     }
@@ -39,7 +39,10 @@ public class SmartBuilderActions implements IBuilderActions {
         GetData data = dataType(locator);
         builder.registerVariables("list", "first");
         builder.registerFunction("filter", FILTER_FUNC);
-        return format(LIST_TO_LIST, MessageFormat.format(data.getAll, "element", selectorAll(locator, builder)));
+        return format(LIST_TO_LIST, MessageFormat.format(data.getAll, builder.getElementName(), selectorAll(locator, builder)));
+    }
+    public String doAction(String collector) {
+        return addBeforeReturn(collector) + collector;
     }
     public String getResult(String collector) {
         return addBeforeReturn(collector) +
@@ -51,6 +54,6 @@ public class SmartBuilderActions implements IBuilderActions {
     }
     private String addBeforeReturn(String collector) {
         return collector.contains("styles.")
-            ? "const styles = getComputedStyle(element);\n" : "";
+            ? "const styles = getComputedStyle(" + builder.getElementName() + ");\n" : "";
     }
 }
