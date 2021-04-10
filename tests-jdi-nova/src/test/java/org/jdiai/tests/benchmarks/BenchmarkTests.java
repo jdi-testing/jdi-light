@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
-import static org.jdiai.JSTalk.$;
-import static org.jdiai.JSTalk.driver;
+import static org.jdiai.JDI.$;
+import static org.jdiai.JDI.driver;
 import static org.jdiai.Pages.PERFORMANCE_PAGE;
 import static org.jdiai.states.States.loggedInAt;
 import static org.jdiai.tests.benchmarks.PerfStatistic.testScenario;

@@ -46,7 +46,14 @@ public class JSBuilder implements IJSBuilder {
             : new BuilderActions();
         this.builderActions.setBuilder(this);
     }
-
+    protected String elementName = "element";
+    public IJSBuilder setElementName(String elementName) {
+        this.elementName = elementName;
+        return this;
+    }
+    public String getElementName() {
+        return elementName;
+    }
     public IJSBuilder updateActions(IBuilderActions builderActions) {
         this.builderActions = builderActions;
         this.builderActions.setBuilder(this);
@@ -126,6 +133,9 @@ public class JSBuilder implements IJSBuilder {
     public IJSBuilder listToList(By locator) {
         return addJSCode(builderActions.listToList(locator));
     }
+    public IJSBuilder doAction(String collectResult) {
+        return addJSCode(builderActions.doAction(collectResult));
+    }
     public IJSBuilder getResult(String collectResult) {
         return addJSCode(builderActions.getResult(getCollector(collectResult)));
     }
@@ -183,10 +193,12 @@ public class JSBuilder implements IJSBuilder {
     }
     public String getQuery() {
         String script = getScript().replace("\nreturn ''", "");
-        if (!script.contains("%s"))
+        if (!script.contains("%s")) {
             return script;
-        if (replaceValue != null)
+        }
+        if (replaceValue != null) {
             return format(script, replaceValue);
+        }
         throw new JSException("Failed to execute js script for template without replaceValue. Use setTemplate(...) method for builder to set replaceValue");
     }
     protected String getScript() {

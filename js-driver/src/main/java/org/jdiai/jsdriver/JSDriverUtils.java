@@ -5,10 +5,17 @@ import org.jdiai.jsbuilder.IJSBuilder;
 import org.jdiai.locators.ByFrame;
 import org.openqa.selenium.By;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.epam.jdi.tools.LinqUtils.first;
+import static com.epam.jdi.tools.LinqUtils.select;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static java.lang.String.format;
 import static org.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
 import static org.jdiai.jsbuilder.JSTemplates.XPATH_LIST_FUNC;
 
@@ -25,8 +32,9 @@ public final class JSDriverUtils {
             throw new JSException("Failed to build selector. Locator is null");
         }
         String selector = locator.replace("'", "\"");
-        if (getByType(by).equals("xpath"))
+        if (getByType(by).equals("xpath")) {
             builder.registerFunction("xpath", XPATH_FUNC);
+        }
         return selector;
     }
     public static String selectorAll(By by, IJSBuilder builder) {
@@ -66,5 +74,35 @@ public final class JSDriverUtils {
             return byReplace.has(result) ? byReplace.get(result) : result;
         }
         throw new RuntimeException("Can't get By name for: " + by);
+    }
+    public static Function<String, By> getByFunc(By by) {
+        return first(getMapByTypes(), key -> by.toString().contains(key));
+    }
+    private static String getBadLocatorMsg(String byLocator, Object... args) {
+        return "Bad locator template '" + byLocator + "'. Args: " + print(select(args, Object::toString), ", ", "'%s'") + ".";
+    }
+    public static By fillByTemplate(By by, Object... args) {
+        String byLocator = getByLocator(by);
+        if (!byLocator.contains("%"))
+            throw new RuntimeException(getBadLocatorMsg(byLocator, args));
+        try {
+            byLocator = format(byLocator, args);
+        } catch (Exception ex) {
+            throw new RuntimeException(getBadLocatorMsg(byLocator, args));
+        }
+        return getByFunc(by).apply(byLocator);
+    }
+
+    private static Map<String, Function<String, By>> getMapByTypes() {
+        Map<String, Function<String, By>> map = new HashMap<>();
+        map.put("By.cssSelector", By::cssSelector);
+        map.put("By.className", By::className);
+        map.put("By.id", By::id);
+        map.put("By.linkText", By::linkText);
+        map.put("By.name", By::name);
+        map.put("By.partialLinkText", By::partialLinkText);
+        map.put("By.tagName", By::tagName);
+        map.put("By.xpath", By::xpath);
+        return map;
     }
 }

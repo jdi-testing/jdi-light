@@ -6,13 +6,14 @@ import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static org.jdiai.JSTalk.*;
+import static org.jdiai.JDI.*;
 import static org.jdiai.asserts.Conditions.have;
 import static org.jdiai.asserts.Conditions.text;
 import static org.jdiai.entities.Contacts.Triss;
 import static org.jdiai.entities.LoginUser.Roman;
 import static org.jdiai.states.States.atHomePage;
 import static org.jdiai.states.States.logout;
+import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)
 public class FillFormTalkTest implements TestInit {
@@ -44,4 +45,23 @@ public class FillFormTalkTest implements TestInit {
         descriptionInLog.should(have(text("Description: " + Triss.description)));
     }
 
+    @Test
+    public void selectTest() {
+        logout();
+        atHomePage();
+        userIcon.click();
+        $("#login-form").loginAs(Roman);
+        validateUrl("/index.html");
+        $(".sidebar-menu").select("Contact form");
+        validateUrl("/contacts.html");
+        $(".sidebar-menu").select("Service", "User Table");
+        validateUrl("/user-table.html");
+        $("//*[@class='sidebar-menu']/li//*[text()='%s']").select("Home");
+        validateUrl("/index.html");
+        $(".sidebar-menu", ".//li//*[text()='%s']").select("Contact form");
+        validateUrl("/contacts.html");
+    }
+    private void validateUrl(String uri) {
+        assertEquals(driver().getCurrentUrl(), "https://jdi-testing.github.io/jdi-light" + uri);
+    }
 }

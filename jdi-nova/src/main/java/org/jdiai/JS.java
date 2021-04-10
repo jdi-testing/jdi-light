@@ -1,5 +1,6 @@
 package org.jdiai;
 
+import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
@@ -13,6 +14,8 @@ import org.jdiai.interfaces.HasCore;
 import org.jdiai.interfaces.HasLocators;
 import org.jdiai.interfaces.HasName;
 import org.jdiai.interfaces.HasParent;
+import org.jdiai.jsbuilder.IJSBuilder;
+import org.jdiai.jsdriver.JSDriver;
 import org.jdiai.jsdriver.JSDriverUtils;
 import org.jdiai.jsdriver.JSException;
 import org.jdiai.jsproducer.Json;
@@ -38,8 +41,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.copyList;
-import static com.epam.jdi.tools.LinqUtils.newList;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static java.lang.Math.max;
@@ -49,9 +51,9 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.jsbuilder.GetTypes.dataType;
+import static org.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
 import static org.jdiai.jsbuilder.QueryLogger.logger;
-import static org.jdiai.jsdriver.JSDriverUtils.getByLocator;
-import static org.jdiai.jsdriver.JSDriverUtils.selector;
+import static org.jdiai.jsdriver.JSDriverUtils.*;
 import static org.jdiai.jsdriver.JSException.THROW_ASSERT;
 import static org.jdiai.jswraper.JSWrappersUtils.*;
 import static org.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
@@ -164,7 +166,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         doAction("selectedIndex = [...element.options].findIndex(option => option.text === '" + value + "')");
     }
     public void doAction(String action) {
-        js.getAttribute(action);
+        js.doAction(action);
     }
     public WebElement we() {
         SearchContext ctx = driver();
@@ -206,23 +208,72 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
     public void select() { click(); }
     public void select(String value) {
-        js.jsDriver().builder().setTemplate(value);
-        click();
+        if (locators().get(locators().size() - 1).toString().contains("%s")) {
+            js.jsDriver().builder().setTemplate(value);
+            click();
+        } else {
+            find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
+        }
     }
-    public void select(String... names) {
-        for (String name : names)
-            select(name);
+    public static String SELECT_FIND_TEXT_LOCATOR = ".//*[text()='%s']";
+    public String selectFindTextLocator = SELECT_FIND_TEXT_LOCATOR;
+    protected String selectFindTextLocator() {
+        return selectFindTextLocator;
+    }
+    public JS setFindTextLocator(String locator) {
+        selectFindTextLocator = locator;
+        return this;
+    }
+    public void select(String... values) {
+        if (locators().size() == 0) {
+            return;
+        }
+        By locator = LinqUtils.last(locators());
+        IJSBuilder builder = getByLocator(locator).contains("%s")
+            ? getTemplateScriptForSelect(locator, values)
+            : getScriptForSelect(locator, values);
+        builder.executeQuery();
+    }
+    private IJSBuilder getTemplateScriptForSelect(By locator, String... values) {
+        IJSBuilder builder;
+        String ctx;
+        if (locators().size() == 1) {
+            builder = js.jsDriver().builder();
+            ctx = "document";
+        } else {
+            builder = new JSDriver(js.jsDriver().driver(), listCopyUntil(locators(), locators().size() - 1))
+                .buildOne();
+            ctx = "element";
+        }
+        builder.registerVariable("option");
+        builder.setElementName("option");
+        for (String value : values) {
+            By by = fillByTemplate(locator, value);
+            builder.oneToOne(ctx, by).doAction("option.click();\n");
+        }
+        return builder;
+    }
+    private IJSBuilder getScriptForSelect(By locator, String... values) {
+        IJSBuilder builder = js.jsDriver().buildOne();
+        builder.registerVariable("option");
+        builder.setElementName("option");
+        for (String value : values) {
+            By by = defineLocator(format(selectFindTextLocator(), value));
+            builder.oneToOne("element", by).doAction("option.click();\n");
+        }
+        return builder;
     }
     public <TEnum extends Enum<?>> void select(TEnum name) {
         select(getEnumValue(name));
     }
+    public void check(boolean condition) {
+        doAction("checked=" + condition + ";");
+    }
     public void check() {
-        if (isDeselected())
-            click();
+        check(true);
     }
     public void uncheck() {
-        if (isSelected())
-            click();
+        check(false);
     }
     public void rightClick() {
         actionsWithElement(Actions::contextClick);
@@ -278,6 +329,9 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public String getAttribute(String attrName) {
         return getJSResult("getAttribute('" + attrName + "')");
     }
+    public String getProperty(String property) {
+        return getJSResult(property);
+    }
 
     public Json getJson(String valueFunc) {
         return js.getMap(valueFunc);
@@ -331,7 +385,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public boolean isSelected() {
-        return isNotBlank(getAttribute("selected"));
+        return getProperty("checked").equals("true");
     }
     public boolean isDeselected() {
         return !isSelected();
@@ -526,7 +580,11 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public <T> T getEntity(Class<T> cl) {
-        return getEntity(GET_OBJECT_MAP.execute(cl), cl);
+        String objectMap = GET_OBJECT_MAP.execute(cl);
+        if (objectMap.contains("': xpath(")) {
+            js.jsDriver().builder().registerFunction("xpath", XPATH_FUNC);
+        }
+        return getEntity(objectMap, cl);
     }
     public <T> T getEntity() {
         return js.getEntity(objectMap);

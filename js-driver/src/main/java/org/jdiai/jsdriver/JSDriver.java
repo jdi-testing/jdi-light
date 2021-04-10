@@ -81,6 +81,9 @@ public class JSDriver {
             default: return buildOneChain();
         }
     }
+    public JSProducer doAction(String collector) {
+        return new JSProducer(buildOne().doAction(collector).executeQuery());
+    }
     public JSProducer getOne(String collector) {
         return new JSProducer(buildOne().getResult(collector).executeQuery());
     }
