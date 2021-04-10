@@ -47,6 +47,7 @@ import static com.epam.jdi.tools.ReflectionUtils.*;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -208,9 +209,16 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
     public void select() { click(); }
     public void select(String value) {
-        if (locators().get(locators().size() - 1).toString().contains("%s")) {
-            js.jsDriver().builder().setTemplate(value);
-            click();
+        if (locators().size() == 0) {
+            return;
+        }
+        By lastLocator = last(locators());
+        if (lastLocator.toString().contains("%s")) {
+            List<By> locators = locators().size() == 1
+                ? new ArrayList<>()
+                : locators().subList(0, locators().size() - 2);
+            locators.add(fillByTemplate(lastLocator, value));
+            new JS(driver, locators).click();
         } else {
             find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
         }
@@ -228,7 +236,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         if (locators().size() == 0) {
             return;
         }
-        By locator = LinqUtils.last(locators());
+        By locator = last(locators());
         IJSBuilder builder = getByLocator(locator).contains("%s")
             ? getTemplateScriptForSelect(locator, values)
             : getScriptForSelect(locator, values);

@@ -26,7 +26,6 @@ public interface IJSBuilder {
     String registerVariable(String variable);
     String rawQuery();
     String getQuery();
-    IJSBuilder setTemplate(String replaceTo);
     IJSBuilder logQuery(int queryLevel);
     void cleanup();
     void updateFromBuilder(IJSBuilder builder);
