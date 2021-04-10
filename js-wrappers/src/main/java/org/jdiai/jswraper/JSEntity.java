@@ -14,6 +14,7 @@ import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 import static java.lang.String.format;
+import static org.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
 import static org.jdiai.jswraper.JSWrappersUtils.getValueType;
 
 public class JSEntity<T> extends JSElement {
@@ -41,7 +42,7 @@ public class JSEntity<T> extends JSElement {
 
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public T getEntity(String objectMap) {
-        return driver.getOne(objectMap).asObject(cl);
+        return driver.getOne(validateXpath(objectMap)).asObject(cl);
     }
     public T getEntity() {
         return getEntity(GET_ENTITY_MAP.execute(cl));
@@ -54,7 +55,7 @@ public class JSEntity<T> extends JSElement {
     }
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public List<T> getEntityList(String objectMap) {
-        return driver.getList(objectMap).asObject(cl);
+        return driver.getList(validateXpath(objectMap)).asObject(cl);
     }
     public List<T> getEntityList() {
         return getEntityList(GET_ENTITY_MAP.execute(cl));
@@ -71,5 +72,12 @@ public class JSEntity<T> extends JSElement {
     }
     public List<T> getEntityListFromAttr(String... attributes) {
         return getEntityList(newList(attributes));
+    }
+
+    private String validateXpath(String objectMap) {
+        if (objectMap.contains("': xpath(")) {
+            driver.builder().registerFunction("xpath", XPATH_FUNC);
+        }
+        return objectMap;
     }
 }

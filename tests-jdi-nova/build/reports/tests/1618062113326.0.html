@@ -1,0 +1,104 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>Home Page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/uui-all.css">
+    <link rel="stylesheet" href="css/custom-styles.css">
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css">
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/uui-core.min.js" type="text/javascript"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+    <!-- IE9- support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/lib/html5shiv.js"></script>
+    <script src="js/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+     <div class="uui-header dark-gray">        <nav role="navigation">            <div class="sidebar-toggle-box blue" style="display: none;">                <div data-toggle="tooltip" data-placement="right" title="Toggle Navigation" class="sidebar-tooltip">                    <span class="fa fa-reorder"></span>                </div>            </div>            <div class="epam-logo">				<a href="/jdi-light/index.html">					<span>Information<br>Framework</span>					<img src="images/Logo_Epam_Color.svg" alt="ALT" id="epam-logo" width="86">				</a>            </div>			<ul class="uui-navigation nav navbar-nav m-l8">                <li>                    <a href="index.html">Home</a>                </li>                <li>                    <a href="contacts.html">Contact form</a>                </li>                <li class="dropdown">                    <a class="dropdown-toggle" data-toggle="dropdown"> Service                        <span class="caret"></span>                    </a>                    <ul class="dropdown-menu" role="menu">                        <li><a href="support.html">Support</a></li>                        <li><a href="dates.html">Dates</a></li>                        <li><a href="search.html">Search</a></li>                        <li><a href="complex-table.html">Complex Table </a></li>                        <li><a href="simple-table.html">Simple Table </a></li>                        <li><a href="user-table.html">User Table </a></li>                        <li><a href="table-pages.html">Table with pages</a></li>                        <li><a href="different-elements.html">Different elements</a></li>						<li><a href="performance.html">Performance</a></li>                    </ul>                </li>                <li>                    <a href="metals-colors.html">Metals &amp; Colors</a>                </li>            </ul>            <ul class="uui-navigation navbar-nav navbar-right">                <li class="dropdown uui-profile-menu open">                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">                        <div class="profile-photo">                            <!--i class="fa fa-user"></i-->                            <img src="images/icons/user-icon.jpg" alt="" id="user-icon">                            <span ui="label" id="user-name">Roman Iovlev</span>                        </div>                        <span class="caret"></span>                    </a>                    <div class="dropdown-menu dropdown-menu-login" role="menu">                        <form class="form-horizontal login hidden" id="login-form">                            <div class="form-horizontal-pad">                                <div class="form-group form-group10">                                    <label for="name" class="col-sm-3">Login</label>                                    <div class="col-sm-9">                                        <input id="name" type="text" class="uui-form-element">                                    </div>                                </div>                                <div class="form-group form-group10">                                    <label for="password" class="col-sm-3">Password</label>                                    <div class="col-sm-9">                                        <input id="password" type="password" class="uui-form-element">                                    </div>                                </div>                                <span class="login-txt hidden">* Login Faild</span>                            </div>                            <button type="submit" class="uui-button dark-blue btn-login" id="login-button"><i class="fa fa-sign-in"></i><span>Enter</span></button>                        </form>                        <div class="logout">                            <button type="submit" class="uui-button dark-blue btn-login"><i class="fa fa-sign-out"></i><span>Logout</span></button>                        </div>                    </div>                </li>            </ul>            <div class="search">                <span class="icon-search"></span>                <div class="search-active hidden">                    <span class="search-title">Search this Site</span>                    <span class="icon-search active" onclick="window.open('search.html','_self')"></span>                    <div class="search-field">                        <input type="text">                    </div>                </div>            </div>        </nav>    </div>
+</header>
+<div class="wrapper">
+    <div name="navigation-sidebar" class="uui-side-bar mCustomScrollbar _mCS_1 mCS_no_scrollbar" style="max-height: inherit; display: block;"><div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">	<div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0" style="max-height: inherit;">	    <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">        <ul class="sidebar-menu left">            <li ui="label" index="1" class="active">                <a href="index.html">                    <span>Home</span>                </a>            </li>            <li ui="label" index="2">                <a href="contacts.html">                    <span>Contact form</span>                </a>            </li>            <li class="menu-title" index="3">                <a ui="label">                    <span>Service</span>                    <div class="fa fa-caret-down arrow"></div>                </a>                <ul class="sub hide-menu">                    <li ui="label" index="1"><a href="support.html"><p>                        <span>Support</span>                    </p></a></li>                    <li ui="label" index="2"><a href="dates.html">                        <span>Dates</span>                    </a></li>                    <li ui="label" index="3"><a href="complex-table.html">                        <span>Complex Table </span>                    </a></li>                    <li ui="label" index="4"><a href="simple-table.html">                        <span>Simple Table</span>                    </a></li>                    <li ui="label" index="5"><a href="search.html">                        <span>Search</span>                    </a></li>                    <li ui="label" index="6"><a href="user-table.html">                        <span>User Table</span>                    </a></li>                    <li ui="label" index="7"><a href="table-pages.html">                        <span>Table with pages</span>                    </a></li>                    <li ui="label" index="8"><a href="different-elements.html">                        <span>Different elements</span>                    </a></li>                    <li ui="label" index="9"><a href="performance.html">                        <span>Performance</span>                    </a></li>                </ul>            </li>            <li ui="label" index="4">                <a href="metals-colors.html">                    <span>Metals &amp; Colors</span>                </a>            </li>            <li class="menu-title" index="5">                <a ui="label">                    <span>Elements packs</span>                    <div class="fa fa-caret-down arrow"></div>                </a>                <ul class="sub hide-menu">                    <li ui="label" index="1"><a href="html5.html">                        <span>HTML 5</span>                    </a></li>                    <li ui="label" index="2"><a href="mobile-html5.html">                        <span>Mobile and HTML 5</span>                    </a></li>                    <li ui="label" index="3"><a href="bootstrap-new.html">                        <span>Bootstrap</span>                    </a></li>                    <li ui="label" index="4"><a href="bootstrap_form.html">                        <span>Bootstrap form</span>                    </a></li>                    <li ui="label" index="5"><a href="bootstrap_forms.html">                        <span>Bootstrap forms</span>                    </a></li>                    <li ui="label" index="6"><a href="react-ant.html">                        <span>React Ant</span>                    </a></li>                    <li ui="label" index="7"><a href="angular.html">                        <span>Angular</span>                    </a></li>                    <li ui="label" index="8"><a href="material">                                            <span>Material UI</span>                                        </a></li>                </ul>            </li>        </ul>    </div>    <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;">        <div class="mCSB_draggerContainer">            <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 0px; top: 0px; height: 0px;" oncontextmenu="return false;">                <div class="mCSB_dragger_bar" style="line-height: 0px;"></div>            </div>            <div class="mCSB_draggerRail"></div>        </div>    </div></div></div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position:absolute;" oncontextmenu="return false;"><div class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+    <div class="uui-main-container">
+        <main>
+            <div class="pattern-top"></div>
+            <div class="main-content">
+                <h3 class="main-title text-center" name="main-title" ui="title">EPAM framework Wishes…</h3>
+
+                <p class="main-txt text-center" name="jdi-text" ui="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+				<h3 class="text-center"><a ui="link" href="https://github.com/epam/JDI" target="_blank">JDI Github</a></h3>
+                <iframe id="frame" scrolling="no" src="https://jdi-testing.github.io/jdi-light/frame-button.html">
+				  <p>Your browser does not support iframes.</p>
+				</iframe>
+				<div id="frames">
+                    <iframe id="first_frame" scrolling="no" src="https://jdi-testing.github.io/jdi-light/images/wolverin.jpg">
+					  <p>Your browser does not support iframes.</p>
+					</iframe>
+                    <iframe id="second_frame" scrolling="no" src="https://jdi-testing.github.io/jdi-light/frame-spiderman.html">
+					  <p>Your browser does not support iframes.</p>
+					</iframe>
+				</div>
+				<iframe id="jdi-frame-site" scrolling="no" src="https://jdi-testing.github.io/jdi-light/index.html">
+				  <p>Your browser does not support iframes.</p>
+				</iframe>
+                <div class="row clerafix benefits">
+                    <div class="col-sm-3">
+                        <div class="benefit">
+                            <div class="benefit-icon">
+                                <span class="icons-benefit icon-practise"></span>
+                            </div>
+                            <span class="benefit-txt">To include good practices<br>and ideas from successful<br>EPAM project</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="benefit">
+                            <div class="benefit-icon">
+                                <span class="icons-benefit icon-custom"></span>
+                            </div>
+                            <span class="benefit-txt">To be flexible and<br>customizable </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="benefit">
+                            <div class="benefit-icon">
+                                <span class="icons-benefit icon-multi"></span>
+                            </div>
+                            <span class="benefit-txt">To be multiplatform </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="benefit">
+                            <div class="benefit-icon">
+                                <span class="icons-benefit icon-base"></span>
+                            </div>
+                            <span class="benefit-txt">Already have good base<br>(about 20 internal and<br>some external projects),<br>wish to get more…</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<footer>
+    <div class="footer-bg">        <div class="footer-content overflow">            <div>Powered by EPAM System</div>            <ul class="footer-menu">				<li><a href="support.html" title="Tip title">About</a></li>                <li>|</li>                <li><a href="">Report a bug</a></li>            </ul>        </div>    </div>
+</footer>
+
+    <script language="JavaScript">
+        UUI.Vertical_Menu.init({"open": true});
+    </script>
+    <script>
+		includeSideBar();
+		activateTopElement(1);
+	</script>
+
+</body></html>

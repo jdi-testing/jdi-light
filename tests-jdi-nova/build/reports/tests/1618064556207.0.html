@@ -1,0 +1,193 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>User Table</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/uui-all.css">
+    <link rel="stylesheet" href="css/custom-styles.css">
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/components/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" href="css/lib/components/datepicker3.css">
+    <link rel="stylesheet" href="css/lib/components/bootstrap-timepicker.css">
+    <link rel="stylesheet" href="css/lib/components/bootstrap-select.min.css">
+    <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css">
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/uui-core.min.js" type="text/javascript"></script>
+    <script src="js/lib/components/bootstrap-datepicker.js"></script>
+    <script src="js/lib/components/bootstrap-timepicker.min.js"></script>
+    <script src="js/lib/components/bootstrap-select.min.js"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+    <!-- IE9- support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/lib/html5shiv.js"></script>
+    <script src="js/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+     <div class="uui-header dark-gray">        <nav role="navigation">            <div class="sidebar-toggle-box blue" style="display: none;">                <div data-toggle="tooltip" data-placement="right" title="Toggle Navigation" class="sidebar-tooltip">                    <span class="fa fa-reorder"></span>                </div>            </div>            <div class="epam-logo">				<a href="/jdi-light/index.html">					<span>Information<br>Framework</span>					<img src="images/Logo_Epam_Color.svg" alt="ALT" id="epam-logo" width="86">				</a>            </div>			<ul class="uui-navigation nav navbar-nav m-l8">                <li>                    <a href="index.html">Home</a>                </li>                <li>                    <a href="contacts.html">Contact form</a>                </li>                <li class="dropdown">                    <a class="dropdown-toggle" data-toggle="dropdown"> Service                        <span class="caret"></span>                    </a>                    <ul class="dropdown-menu" role="menu">                        <li><a href="support.html">Support</a></li>                        <li><a href="dates.html">Dates</a></li>                        <li><a href="search.html">Search</a></li>                        <li><a href="complex-table.html">Complex Table </a></li>                        <li><a href="simple-table.html">Simple Table </a></li>                        <li><a href="user-table.html">User Table </a></li>                        <li><a href="table-pages.html">Table with pages</a></li>                        <li><a href="different-elements.html">Different elements</a></li>						<li><a href="performance.html">Performance</a></li>                    </ul>                </li>                <li>                    <a href="metals-colors.html">Metals &amp; Colors</a>                </li>            </ul>            <ul class="uui-navigation navbar-nav navbar-right">                <li class="dropdown uui-profile-menu">                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">                        <div class="profile-photo">                            <!--i class="fa fa-user"></i-->                            <img src="images/icons/user-icon.jpg" alt="" id="user-icon">                            <span ui="label" id="user-name">Roman Iovlev</span>                        </div>                        <span class="caret"></span>                    </a>                    <div class="dropdown-menu dropdown-menu-login" role="menu">                        <form class="form-horizontal login hidden" id="login-form">                            <div class="form-horizontal-pad">                                <div class="form-group form-group10">                                    <label for="name" class="col-sm-3">Login</label>                                    <div class="col-sm-9">                                        <input id="name" type="text" class="uui-form-element">                                    </div>                                </div>                                <div class="form-group form-group10">                                    <label for="password" class="col-sm-3">Password</label>                                    <div class="col-sm-9">                                        <input id="password" type="password" class="uui-form-element">                                    </div>                                </div>                                <span class="login-txt hidden">* Login Faild</span>                            </div>                            <button type="submit" class="uui-button dark-blue btn-login" id="login-button"><i class="fa fa-sign-in"></i><span>Enter</span></button>                        </form>                        <div class="logout">                            <button type="submit" class="uui-button dark-blue btn-login"><i class="fa fa-sign-out"></i><span>Logout</span></button>                        </div>                    </div>                </li>            </ul>            <div class="search">                <span class="icon-search"></span>                <div class="search-active hidden">                    <span class="search-title">Search this Site</span>                    <span class="icon-search active" onclick="window.open('search.html','_self')"></span>                    <div class="search-field">                        <input type="text">                    </div>                </div>            </div>        </nav>    </div>
+</header>
+<div class="wrapper">
+    <div name="navigation-sidebar" class="uui-side-bar mCustomScrollbar _mCS_1 mCS_no_scrollbar" style="max-height: inherit; display: block;"><div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">	<div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0" style="max-height: inherit;">	    <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">        <ul class="sidebar-menu left">            <li ui="label" index="1">                <a href="index.html">                    <span>Home</span>                </a>            </li>            <li ui="label" index="2">                <a href="contacts.html">                    <span>Contact form</span>                </a>            </li>            <li class="menu-title active" index="3">                <a ui="label">                    <span>Service</span>                    <div class="fa fa-caret-down arrow"></div>                </a>                <ul class="sub">                    <li ui="label" index="1"><a href="support.html"><p>                        <span>Support</span>                    </p></a></li>                    <li ui="label" index="2"><a href="dates.html">                        <span>Dates</span>                    </a></li>                    <li ui="label" index="3"><a href="complex-table.html">                        <span>Complex Table </span>                    </a></li>                    <li ui="label" index="4"><a href="simple-table.html">                        <span>Simple Table</span>                    </a></li>                    <li ui="label" index="5" class="active"><a href="search.html">                        <span>Search</span>                    </a></li>                    <li ui="label" index="6"><a href="user-table.html">                        <span>User Table</span>                    </a></li>                    <li ui="label" index="7"><a href="table-pages.html">                        <span>Table with pages</span>                    </a></li>                    <li ui="label" index="8"><a href="different-elements.html">                        <span>Different elements</span>                    </a></li>                    <li ui="label" index="9"><a href="performance.html">                        <span>Performance</span>                    </a></li>                </ul>            </li>            <li ui="label" index="4">                <a href="metals-colors.html">                    <span>Metals &amp; Colors</span>                </a>            </li>            <li class="menu-title" index="5">                <a ui="label">                    <span>Elements packs</span>                    <div class="fa fa-caret-down arrow"></div>                </a>                <ul class="sub hide-menu">                    <li ui="label" index="1"><a href="html5.html">                        <span>HTML 5</span>                    </a></li>                    <li ui="label" index="2"><a href="mobile-html5.html">                        <span>Mobile and HTML 5</span>                    </a></li>                    <li ui="label" index="3"><a href="bootstrap-new.html">                        <span>Bootstrap</span>                    </a></li>                    <li ui="label" index="4"><a href="bootstrap_form.html">                        <span>Bootstrap form</span>                    </a></li>                    <li ui="label" index="5"><a href="bootstrap_forms.html">                        <span>Bootstrap forms</span>                    </a></li>                    <li ui="label" index="6"><a href="react-ant.html">                        <span>React Ant</span>                    </a></li>                    <li ui="label" index="7"><a href="angular.html">                        <span>Angular</span>                    </a></li>                    <li ui="label" index="8"><a href="material">                                            <span>Material UI</span>                                        </a></li>                </ul>            </li>        </ul>    </div>    <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;">        <div class="mCSB_draggerContainer">            <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 0px; top: 0px; height: 0px;" oncontextmenu="return false;">                <div class="mCSB_dragger_bar" style="line-height: 0px;"></div>            </div>            <div class="mCSB_draggerRail"></div>        </div>    </div></div></div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position:absolute;" oncontextmenu="return false;"><div class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+    <div class="uui-main-container page-inside">
+        <main>
+            <div class="pattern-top"></div>
+            <div class="main-content">
+                <div class="main-content-hg">
+                    <div class="support-title"><i class="fa fa-comments-o"></i>Users</div>
+					<table id="user-table" ui="table">
+						<thead>
+						  <tr>
+							<th width="20">Number</th>
+							<th width="120">Type</th>
+							<th width="120">User</th>
+							<th>Description</th>
+						  </tr>
+						</thead>
+					  <tbody>
+						  <tr>
+							<td>1</td>
+							<td>
+							  <select>
+								<option>Admin</option>
+								<option>User</option>
+								<option>Manager</option>
+							  </select>
+							</td>
+							<td><a href="">Roman</a></td>
+							<td>
+							  <img src="images/wolverin.jpg">
+							  <div class="user-descr">
+								<span>Wolverine</span><br>
+								  <input type="checkbox" id="roman" checked="">
+								  <label for="roman">Vip</label>
+							  </div>
+							</td>
+						  </tr>
+						  <tr>
+							<td>2</td>
+							<td>
+							  <select>
+								<option>Admin</option>
+								<option selected="">User</option>
+								<option>Manager</option>
+							  </select>
+							</td>
+							<td><a href="">Sergey Ivan</a></td>
+							<td>
+							  <img src="images/spider-man.jpg">
+							  <div class="user-descr">
+								<span>Spider Man</span><br>
+								  <input type="checkbox" id="ivan">
+								  <label for="ivan">Vip</label>
+							  </div>
+							</td>
+						  </tr>
+						  <tr>
+							<td>3</td>
+							<td>
+							  <select>
+								<option>Admin</option>
+								<option>User</option>
+								<option selected="">Manager</option>
+							  </select>
+							</td>
+							<td><a href="">Vladzimir</a></td>
+							<td>
+							  <img src="images/punisher.jpg">
+							  <div class="user-descr">
+								<span>Punisher</span><br>
+								  <input type="checkbox" id="vlad" checked="">
+								  <label for="vlad">Vip</label>
+							  </div>
+							</td>
+						  </tr>
+						  <tr>
+							<td>4</td>
+							<td>
+							  <select>
+								<option>Admin</option>
+								<option selected="">User</option>
+								<option>Manager</option>
+							  </select>
+							</td>
+							<td><a href="">Helen Bennett</a></td>
+							<td>
+							  <img src="images/captain-america.jpg">
+							  <div class="user-descr">
+								<span>Captain America <br>some description</span><br>
+								  <input type="checkbox" id="helen">
+								  <label for="helen">Vip</label>
+							  </div>
+							</td>
+						  </tr>
+						  <tr>
+							<td>5</td>
+							<td>
+							  <select>
+								<option>Admin</option>
+								<option selected="">User</option>
+								<option>Manager</option>
+							  </select>
+							</td>
+							<td><a href="">Yoshi Tannamuri</a></td>
+							<td>
+							  <img src="images/cyclope.jpg">
+							  <div class="user-descr">
+								<span>Cyclope <br>some description</span><br>
+								  <input type="checkbox" id="yoshi">
+								  <label for="yoshi">Vip</label>
+							  </div>
+							</td>
+						  </tr>
+						  <tr>
+							<td>6</td>
+							<td>
+							  <select>
+								<option>Admin</option>
+								<option selected="">User</option>
+								<option>Manager</option>
+							  </select>
+							</td>
+							<td><a href="">Giovanni Rovelli</a></td>
+							<td>
+							  <img src="images/hulk.jpg">
+							  <div class="user-descr">
+								<span>Hulk<br>some description</span><br>
+								  <input type="checkbox" id="gio">
+								  <label for="gio">Vip</label>
+							  </div>
+							</td>
+						  </tr>
+					  </tbody>
+					</table>
+                </div>
+                <ul class="uui-pagination"><li class="prev"><a href="simple-table.html"><i class="fa fa-long-arrow-left"></i></a></li><li class="first"><a href="support.html">First</a></li><li><a href="support.html">1</a></li><li><a href="dates.html">2</a></li><li><a href="complex-table.html">3</a></li><li><a href="simple-table.html">4</a></li><li class="active"><a href="search.html">5</a></li><li><a href="user-table.html">6</a></li><li><a href="table-pages.html">7</a></li><li><a href="different-elements.html">8</a></li><li><a href="performance.html">9</a></li><li class="last"><a href="performance.html">Last</a></li> <li class="next"><a href="user-table.html"><i class="fa fa-long-arrow-right"></i></a></li> </ul>
+        </div></main>
+    </div>
+    <div name="log-sidebar" class="uui-side-bar right-fix-panel mCustomScrollbar _mCS_2 mCS_no_scrollbar"><div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0" style="max-height: inherit;"><div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">        <section class="uui-info-panel-horizontal">            <div class="info-panel-header">                Log            </div>            <div class="info-panel-body info-panel-body-log">                <div class="info-panel-section">                    <ul class="panel-body-list logs">                    </ul>                </div>            </div>        </section>        <section class="uui-info-panel-horizontal">            <div class="info-panel-header">                Result            </div>            <div class="info-panel-body info-panel-body-result">                <div class="info-panel-section">                    <ul class="panel-body-list results">                    </ul>                </div>            </div>        </section>    </div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 0px; top: 0px; height: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 0px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-light mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position:absolute;" oncontextmenu="return false;"><div class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+</div>
+<footer>
+    <div class="footer-bg">        <div class="footer-content overflow">            <div>Powered by EPAM System</div>            <ul class="footer-menu">				<li><a href="support.html" title="Tip title">About</a></li>                <li>|</li>                <li><a href="">Report a bug</a></li>            </ul>        </div>    </div>
+</footer>
+
+<script language="JavaScript">
+    UUI.Vertical_Menu.init({"open":true});
+</script>
+<script>
+    $('.selectpicker').selectpicker();
+</script>
+<script>
+		includeSideBar();
+		activateTopElement(3,5);
+		includePagination();
+	</script>
+
+
+</body></html>
