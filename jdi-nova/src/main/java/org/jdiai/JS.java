@@ -1,6 +1,5 @@
 package org.jdiai;
 
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
@@ -47,7 +46,6 @@ import static com.epam.jdi.tools.ReflectionUtils.*;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
