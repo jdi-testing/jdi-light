@@ -1,6 +1,5 @@
 package org.jdiai.jsdriver;
 
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.map.MapArray;
 import org.jdiai.jsbuilder.IJSBuilder;
 import org.jdiai.locators.ByFrame;
@@ -12,7 +11,6 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;

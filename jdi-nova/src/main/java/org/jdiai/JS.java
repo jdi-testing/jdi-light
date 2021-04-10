@@ -42,8 +42,6 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.LinqUtils.copyList;
-import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static java.lang.Math.max;

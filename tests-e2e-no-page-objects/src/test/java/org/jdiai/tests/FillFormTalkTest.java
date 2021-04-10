@@ -2,7 +2,6 @@ package org.jdiai.tests;
 
 import org.jdiai.JS;
 import org.jdiai.TestInit;
-import org.jdiai.entities.MarvelHero;
 import org.jdiai.testng.TestNGListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
