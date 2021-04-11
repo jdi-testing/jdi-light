@@ -883,27 +883,6 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         int y = rect.top + (rect.bottom - rect.top) / 2;
         return new Point(x, y);
     }
-    public JS shouldBe(Object entity) {
-        return should(be(entity));
-    }
-    public JS shouldBe(List<Object> entities) {
-        return should(be(entities));
-    }
-    public JS shouldBe(Object... entities) {
-        return should(be(entities));
-    }
-    public JS shouldHave(List<Object> entities) {
-        return should(be(entities));
-    }
-    public JS shouldHave(Object... entities) {
-        return should(have(entities));
-    }
-    public JS shouldHaveAll(List<Object> entities) {
-        return should(have(entities));
-    }
-    public JS shouldHaveAll(Object... entities) {
-        return should(haveAll(entities));
-    }
     public JS shouldBe(Condition... conditions) {
         for (Condition condition : conditions) {
             String message = "Assert that " + condition.getName(this);

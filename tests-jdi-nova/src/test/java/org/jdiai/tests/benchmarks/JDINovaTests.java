@@ -9,6 +9,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.jdiai.JDI.*;
+import static org.jdiai.asserts.Conditions.be;
+import static org.jdiai.asserts.Conditions.haveAll;
 import static org.jdiai.jsbuilder.QueryLogger.ALL;
 import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 
@@ -26,7 +28,7 @@ public class JDINovaTests {
         $("#user-icon").click();
         loginAs(DefaultUser);
         $(".sidebar-menu").select("Service", "User Table");
-        $("#user-table tr").get(2).shouldBe(SPIDER_MAN);
+        $("#user-table tr").get(2).should(be(SPIDER_MAN));
     }
 
     @Test(enabled = false)
@@ -35,8 +37,8 @@ public class JDINovaTests {
         $("#user-icon").click();
         loginAs(DefaultUser);
         $(".sidebar-menu").select("Service", "User Table");
-        $("#user-table tbody tr").shouldHaveAll(
-            SPIDER_MAN, WOLVERINE, CAPITAN_AMERICA, HULK, CYCLOPE, PUNISHER);
+        $("#user-table tbody tr").should(haveAll(
+            SPIDER_MAN, WOLVERINE, CAPITAN_AMERICA, HULK, CYCLOPE, PUNISHER));
     }
     @Test(enabled = false)
     public void simpleAllOrderedSearchTest() {
@@ -44,15 +46,13 @@ public class JDINovaTests {
         $("#user-icon").click();
         loginAs(DefaultUser);
         $(".sidebar-menu").select("Service", "User Table");
-        $("#user-table tbody tr").shouldBe(
-            WOLVERINE, SPIDER_MAN, PUNISHER, CAPITAN_AMERICA, CYCLOPE, HULK);
+        $("#user-table tbody tr").should(be(
+            WOLVERINE, SPIDER_MAN, PUNISHER, CAPITAN_AMERICA, CYCLOPE, HULK));
     }
 
     public static class User {
-        @UI("#name")
-        String name = "Roman";
-        @UI("#password")
-        String password = "Jdi1234";
+        @UI("#name") String name = "Roman";
+        @UI("#password") String password = "Jdi1234";
     }
     public static MarvelHero WOLVERINE = new MarvelHero().set(h -> {
         h.number = 1;
