@@ -32,12 +32,12 @@ public class SelenideTests {
         menu.find(byText("User Table")).click();
 
         ElementsCollection userTableRow = $("#user-table tr", 2).findAll("td");
-        userTableRow.get(0).shouldHave(text("2"));
-        userTableRow.get(1).find("option[selected]").shouldHave(text("User"));
-        userTableRow.get(2).find("a").shouldHave(text("Sergey Ivan"));
-        userTableRow.get(3).find("span").shouldHave(text("Spider Man"));
+        userTableRow.get(0).shouldHave(text(SPIDER_MAN.number+""));
+        userTableRow.get(1).find("option[selected]").shouldHave(text(SPIDER_MAN.type));
+        userTableRow.get(2).find("a").shouldHave(text(SPIDER_MAN.name));
+        userTableRow.get(3).find("span").shouldHave(text(SPIDER_MAN.heroName));
         userTableRow.get(3).find("img")
-            .shouldHave(attribute("src", "https://jdi-testing.github.io/jdi-light/images/spider-man.jpg"));
+            .shouldHave(attribute("src", SPIDER_MAN.img));
     }
 
     @Test(enabled = false)
