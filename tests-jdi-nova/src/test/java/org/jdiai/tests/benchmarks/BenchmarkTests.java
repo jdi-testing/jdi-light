@@ -157,7 +157,7 @@ public class BenchmarkTests implements TestInit {
         heavyTestsCount) + "\n";
     }
 
-    @Test
+    @Test(invocationCount = repeat)
     public void scenarioJdiSeleniumTest() {
         totalResult += "scenarioJdiSeleniumTest: " + testScenario(
             () -> logout(),
@@ -168,26 +168,22 @@ public class BenchmarkTests implements TestInit {
             heavyTestsCount*2) + "\n";
     }
 
-    @Test
+    @Test(invocationCount = repeat)
     public void scenarioJdiSelenideTest() {
         Configuration.headless = true;
         totalResult += "scenarioJdiSelenideTest: " + testScenario(
-            () -> { logout();
-                Selenide.clearBrowserCookies();
-            },
+            () -> { logout(); Selenide.clearBrowserCookies(); },
             "Selenide",
             () -> { try { new SelenideTests().simpleSearchTest(); return true; } catch (Exception ex) { return false; } },
             "JDI Nova",
             () -> { try { new JDINovaTests().simpleSearchTest(); return true; } catch (Exception ex) { return false; } },
             heavyTestsCount) + "\n";
     }
-    @Test
+    @Test(invocationCount = repeat)
     public void scenarioAllJdiSelenideTest() {
         Configuration.headless = true;
         totalResult += "scenarioAllJdiSelenideTest: " + testScenario(
-            () -> { logout();
-                Selenide.clearBrowserCookies();
-            },
+            () -> { logout(); Selenide.clearBrowserCookies(); },
             "Selenide",
             () -> { try { new SelenideTests().simpleAllSearchTest(); return true; } catch (Exception ex) { return false; } },
             "JDI Nova",

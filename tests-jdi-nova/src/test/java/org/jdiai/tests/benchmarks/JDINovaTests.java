@@ -4,6 +4,7 @@ import com.epam.jdi.tools.DataClass;
 import org.jdiai.annotations.UI;
 import org.jdiai.jswraper.interfaces.GetValue;
 import org.jdiai.testng.TestNGListener;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -14,10 +15,13 @@ import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 @Listeners(TestNGListener.class)
 public class JDINovaTests {
     public User DefaultUser = new User();
-
-    @Test
-    public void simpleSearchTest() {
+    @BeforeMethod
+    public void before() {
         LOG_QUERY = ALL;
+    }
+
+    @Test(enabled = false)
+    public void simpleSearchTest() {
         openPage("https://jdi-testing.github.io/jdi-light");
         $("#user-icon").click();
         loginAs(DefaultUser);
@@ -25,9 +29,8 @@ public class JDINovaTests {
         $("#user-table tr").get(2).shouldBe(SPIDER_MAN);
     }
 
-    @Test
+    @Test(enabled = false)
     public void simpleAllSearchTest() {
-        LOG_QUERY = ALL;
         openPage("https://jdi-testing.github.io/jdi-light");
         $("#user-icon").click();
         loginAs(DefaultUser);
@@ -35,9 +38,8 @@ public class JDINovaTests {
         $("#user-table tbody tr").shouldHaveAll(
             SPIDER_MAN, WOLVERINE, CAPITAN_AMERICA, HULK, CYCLOPE, PUNISHER);
     }
-    @Test
+    @Test(enabled = false)
     public void simpleAllOrderedSearchTest() {
-        LOG_QUERY = ALL;
         openPage("https://jdi-testing.github.io/jdi-light");
         $("#user-icon").click();
         loginAs(DefaultUser);

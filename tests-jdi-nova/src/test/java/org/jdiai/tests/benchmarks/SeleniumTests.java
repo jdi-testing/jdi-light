@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 @Listeners(TestNGListener.class)
 public class SeleniumTests {
 
-    @Test
+    @Test(enabled = false)
     public void simpleSearchTest() {
         driver().navigate().to("https://jdi-testing.github.io/jdi-light");
         driver().findElement(By.cssSelector("#user-icon")).click();

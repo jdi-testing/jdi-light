@@ -19,7 +19,7 @@ import static org.jdiai.tests.benchmarks.test.data.HeroesData.*;
 @Listeners(TestNGListener.class)
 public class SelenideTests {
 
-    @Test
+    @Test(enabled = false)
     public void simpleSearchTest() {
         open("https://jdi-testing.github.io/jdi-light");
         $("#user-icon").click();
@@ -40,7 +40,7 @@ public class SelenideTests {
             .shouldHave(attribute("src", "https://jdi-testing.github.io/jdi-light/images/spider-man.jpg"));
     }
 
-    @Test
+    @Test(enabled = false)
     public void simpleAllSearchTest() {
         open("https://jdi-testing.github.io/jdi-light");
         $("#user-icon").click();

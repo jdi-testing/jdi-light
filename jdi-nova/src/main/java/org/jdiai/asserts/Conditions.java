@@ -8,6 +8,8 @@ import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -178,34 +180,6 @@ public abstract class Conditions {
     public static <T> Condition haveAll(T... entities) {
         return haveCondition(true, false, asList(entities));
     }
-    private static <T> Condition haveCondition(boolean checkSize, boolean sameOrder, List<T> entities) {
-        if (entities == null || entities.size() == 0) {
-            throw new JSException("Should have validation require at least one element");
-        }
-        return condition("%element% have %no% [" + print(asList(entities), Object::toString) + "]",
-            el -> {
-                List<T> list = el.getEntityList((Class<T>) entities.get(0).getClass());
-                if (checkSize && list.size() != entities.size()) {
-                    logger.error("Expected size: %s, but found: %s", entities.size(), list.size());
-                    return false;
-                }
-                List<T> listOfFails = new ArrayList<>();
-                int i = 0;
-                for (T entity : entities) {
-                    if (sameOrder && !entity.equals(list.get(i++)) || !sameOrder && !list.contains(entity)) {
-                        listOfFails.add(entity);
-                    }
-                }
-                if (isNotEmpty(listOfFails)) {
-                    logger.error("Failed to find following entities: \n%s\nActual values:\n%s",
-                        print(listOfFails, Object::toString, "\n"),
-                        print(list, Object::toString, "\n")
-                    );
-                    return false;
-                }
-                return true;
-            });
-    }
     public static Condition size(int size) {
         return condition("%element% have size '" + size + "'",
                 el -> el.size() == size);
@@ -218,7 +192,6 @@ public abstract class Conditions {
         return condition("%element% contains %no% text='" + text + "'",
             el -> el.getText().contains(text));
     }
-
     public static Condition cssClass(String cssClass) {
         return condition("%element% has %no% css class '" + cssClass + "'",
             el -> isNotBlank(el.cssStyle(cssClass)));
@@ -270,5 +243,35 @@ public abstract class Conditions {
     }
     public static Condition waitFor(Condition condition) {
         return condition;
+    }
+
+    private static <T> Condition haveCondition(boolean checkSize, boolean sameOrder, List<T> entities) {
+        if (isEmpty(entities)) {
+            throw new JSException("Should have validation require at least one element");
+        }
+        return condition("%element% have %no% [" + print(singletonList(entities), Object::toString) + "]",
+                el -> compareTwoLists(el, checkSize, sameOrder, entities));
+    }
+    private static <T> boolean compareTwoLists(JS el, boolean checkSize, boolean sameOrder, List<T> entities) {
+        List<T> list = el.getEntityList((Class<T>) entities.get(0).getClass());
+        if (checkSize && list.size() != entities.size()) {
+            logger.error("Expected size: %s, but found: %s", entities.size(), list.size());
+            return false;
+        }
+        List<T> listOfFails = new ArrayList<>();
+        int i = 0;
+        for (T entity : entities) {
+            if (sameOrder && !entity.equals(list.get(i++)) || !sameOrder && !list.contains(entity)) {
+                listOfFails.add(entity);
+            }
+        }
+        if (isNotEmpty(listOfFails)) {
+            logger.error("Failed to find following entities: \n%s\nActual values:\n%s",
+                print(listOfFails, Object::toString, "\n"),
+                print(list, Object::toString, "\n")
+            );
+            return false;
+        }
+        return true;
     }
 }
