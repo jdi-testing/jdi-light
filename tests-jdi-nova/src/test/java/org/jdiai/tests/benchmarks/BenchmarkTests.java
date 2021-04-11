@@ -1,11 +1,12 @@
 package org.jdiai.tests.benchmarks;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.google.gson.JsonObject;
 import org.jdiai.TestInit;
 import org.jdiai.jsproducer.Json;
 import org.jdiai.testng.TestNGListener;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -21,6 +22,7 @@ import static org.jdiai.JDI.$;
 import static org.jdiai.JDI.driver;
 import static org.jdiai.Pages.PERFORMANCE_PAGE;
 import static org.jdiai.states.States.loggedInAt;
+import static org.jdiai.states.States.logout;
 import static org.jdiai.tests.benchmarks.PerfStatistic.testScenario;
 import static org.jdiai.tools.FilterConditions.textEquals;
 
@@ -41,7 +43,6 @@ public class BenchmarkTests implements TestInit {
 
     @Test(invocationCount = repeat)
     public void getText() {
-        ((JavascriptExecutor)driver()).executeScript("");
         totalResult += "getText: " + testScenario(
             () -> driver().findElement(By.cssSelector("#users-table tr>th")).getText(),
             () -> $("#users-table tr>th").getText(),
@@ -154,6 +155,40 @@ public class BenchmarkTests implements TestInit {
             return row.findElement(By.xpath(".//td[3]")).getText();
         }, () -> $("#users-table tr").findFirst("td", textEquals(atBottom)).find(".//td[3]").getText(),
         heavyTestsCount) + "\n";
+    }
+
+    @Test(invocationCount = repeat)
+    public void scenarioJdiSeleniumTest() {
+        totalResult += "scenarioJdiSeleniumTest: " + testScenario(
+            () -> logout(),
+            "Selenium",
+            () -> { try { new SeleniumTests().simpleSearchTest(); return true; } catch (Exception ex) { return false; } },
+            "JDI Nova",
+            () -> { try { new JDINovaTests().simpleSearchTest(); return true; } catch (Exception ex) { return false; } },
+            heavyTestsCount*2) + "\n";
+    }
+
+    @Test(invocationCount = repeat)
+    public void scenarioJdiSelenideTest() {
+        Configuration.headless = true;
+        totalResult += "scenarioJdiSelenideTest: " + testScenario(
+            () -> { logout(); Selenide.clearBrowserCookies(); },
+            "Selenide",
+            () -> { try { new SelenideTests().simpleSearchTest(); return true; } catch (Exception ex) { return false; } },
+            "JDI Nova",
+            () -> { try { new JDINovaTests().simpleSearchTest(); return true; } catch (Exception ex) { return false; } },
+            heavyTestsCount) + "\n";
+    }
+    @Test(invocationCount = repeat)
+    public void scenarioAllJdiSelenideTest() {
+        Configuration.headless = true;
+        totalResult += "scenarioAllJdiSelenideTest: " + testScenario(
+            () -> { logout(); Selenide.clearBrowserCookies(); },
+            "Selenide",
+            () -> { try { new SelenideTests().simpleAllSearchTest(); return true; } catch (Exception ex) { return false; } },
+            "JDI Nova",
+            () -> { try { new JDINovaTests().simpleAllOrderedSearchTest(); return true; } catch (Exception ex) { return false; } },
+            heavyTestsCount) + "\n";
     }
 
     @AfterClass

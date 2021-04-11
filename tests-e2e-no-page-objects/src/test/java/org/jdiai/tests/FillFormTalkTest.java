@@ -56,7 +56,7 @@ public class FillFormTalkTest implements TestInit {
         validateUrl("/contacts.html");
         $(".sidebar-menu").select("Service", "User Table");
         validateUrl("/user-table.html");
-        $("//*[@class='sidebar-menu']/li//*[text()='%s']").select("Home");
+        $("//*[contains(@class, 'sidebar-menu')]/li//*[text()='%s']").select("Home");
         validateUrl("/index.html");
         $(".sidebar-menu", ".//li//*[text()='%s']").select("Contact form");
         validateUrl("/contacts.html");

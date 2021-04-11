@@ -11,6 +11,7 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.newList;
+import static org.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
 import static org.jdiai.jswraper.JSEntity.GET_ENTITY_MAP;
 
 public class JSSmart extends JSElement {
@@ -75,10 +76,10 @@ public class JSSmart extends JSElement {
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
 
     public <T> T getEntity(String objectMap) {
-        return (T) driver.getOne(objectMap).asObject(entity);
+        return (T) driver.getOne(validateXpath(objectMap)).asObject(entity);
     }
     public void setEntity(String objectMap) {
-        driver.getOne(objectMap).asString();
+        driver.getOne(validateXpath(objectMap)).asString();
     }
     public <T> T getEntity() {
         return getEntity(GET_ENTITY_MAP.execute(entity));
@@ -94,7 +95,7 @@ public class JSSmart extends JSElement {
     }
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public <T> List<T> getEntityList(String objectMap) {
-        return map(driver.getList(objectMap).asObject(entity), el -> (T) el);
+        return map(driver.getList(validateXpath(objectMap)).asObject(entity), el -> (T) el);
     }
     public <T> List<T> getEntityList() {
         return getEntityList(GET_ENTITY_MAP.execute(entity));
@@ -106,4 +107,10 @@ public class JSSmart extends JSElement {
         return getEntityList(newList(attributes));
     }
 
+    private String validateXpath(String objectMap) {
+        if (objectMap.contains("': xpath(")) {
+            driver.builder().registerFunction("xpath", XPATH_FUNC);
+        }
+        return objectMap;
+    }
 }

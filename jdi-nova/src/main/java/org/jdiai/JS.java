@@ -49,8 +49,8 @@ import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.jdiai.asserts.Conditions.*;
 import static org.jdiai.jsbuilder.GetTypes.dataType;
-import static org.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
 import static org.jdiai.jsbuilder.QueryLogger.logger;
 import static org.jdiai.jsdriver.JSDriverUtils.*;
 import static org.jdiai.jsdriver.JSException.THROW_ASSERT;
@@ -207,7 +207,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
     public void select() { click(); }
     public void select(String value) {
-        if (locators().size() == 0) {
+        if (isEmpty(locators())) {
             return;
         }
         By lastLocator = last(locators());
@@ -231,13 +231,13 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return this;
     }
     public void select(String... values) {
-        if (locators().size() == 0) {
+        if (isEmpty(locators())) {
             return;
         }
         By locator = last(locators());
         IJSBuilder builder = getByLocator(locator).contains("%s")
             ? getTemplateScriptForSelect(locator, values)
-            : getScriptForSelect(locator, values);
+            : getScriptForSelect(values);
         builder.executeQuery();
     }
     private IJSBuilder getTemplateScriptForSelect(By locator, String... values) {
@@ -259,7 +259,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         }
         return builder;
     }
-    private IJSBuilder getScriptForSelect(By locator, String... values) {
+    private IJSBuilder getScriptForSelect(String... values) {
         IJSBuilder builder = js.jsDriver().buildOne();
         builder.registerVariable("option");
         builder.setElementName("option");
@@ -311,6 +311,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         set("value='" + charToString(value) + "'");
     }
     public void slide(String value) {
+        // TODO
         //Actions a = new Actions(DRIVER.get());
         //a.dragAndDropBy(DRIVER.get().findElement(By.xpath("[aria-labelledby='range-slider'][data-index='0']")),20, 0)
         //  .build().perform();
@@ -586,11 +587,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public <T> T getEntity(Class<T> cl) {
-        String objectMap = GET_OBJECT_MAP.execute(cl);
-        if (objectMap.contains("': xpath(")) {
-            js.jsDriver().builder().registerFunction("xpath", XPATH_FUNC);
-        }
-        return getEntity(objectMap, cl);
+        return getEntity(GET_OBJECT_MAP.execute(cl), cl);
     }
     public <T> T getEntity() {
         return js.getEntity(objectMap);
@@ -620,6 +617,9 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
     public List<String> values() {
         return values(textType);
+    }
+    public int size() {
+        return js.getAttributeList("tagName").size();
     }
     public List<JsonObject> getObjectList(String json) {
         return js.getJsonList(json);
@@ -684,7 +684,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
 
     public static String SUBMIT_LOCATOR = "[type=submit]";
 
-    public void setEntity(Object obj) {
+    public JS setEntity(Object obj) {
         Field[] allFields = obj.getClass().getDeclaredFields();
         List<String> mapList = new ArrayList<>();
         for (Field field : allFields) {
@@ -698,6 +698,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
             }
         }
         setEntity(print(mapList, ";\n") + ";\nreturn ''");
+        return this;
     }
 
     public <T> List<T> getEntityList(String objectMap, Class<?> cl) {
