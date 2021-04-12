@@ -1,6 +1,6 @@
 package nativeapp.android.apidemos.views;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.composite.ios.app.Menu;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
@@ -23,6 +23,6 @@ public class PopupPage {
     public static Button shareItem;
 
     @MobileFindBy(className = "android.widget.LinearLayout")
-    public static UIElement screen;
+    public static uiElement screen;
 
 }

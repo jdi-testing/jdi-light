@@ -3,8 +3,7 @@ package com.epam.jdi.light.angular.elements.complex;
 import com.epam.jdi.light.angular.asserts.ButtonToggleAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import org.openqa.selenium.By;
 
 /**
@@ -29,13 +28,13 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
     }
 
     @JDIAction("Get '{name}' tabs")
-    private WebList getButtonToggleItems() {
+    private webList getButtonToggleItems() {
         return this.finds(".mat-button-toggle");
     }
 
     @JDIAction("Is '{name}' selected '{0}'")
     public boolean isButtonToggleSelected(String value) {
-        UIElement element = getButtonToggleByTagValue(value);
+        com.epam.jdi.light.elements.common.uiElement element = getButtonToggleByTagValue(value);
         if (isButtonToggleDisabled(value)) {
             throw new UnsupportedOperationException(String.format("button toggle is disabled %s", value));
         }
@@ -43,13 +42,13 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
     }
 
     private boolean isButtonToggleDisabled(String value) {
-        UIElement element = getButtonToggleByTagValue(value);
+        com.epam.jdi.light.elements.common.uiElement element = getButtonToggleByTagValue(value);
         return element.hasAttribute("disabled");
     }
 
-    private UIElement getButtonToggleByTagValue(String value) {
-        UIElement element = null;
-        for (UIElement e : getButtonToggleItems()) {
+    private com.epam.jdi.light.elements.common.uiElement getButtonToggleByTagValue(String value) {
+        com.epam.jdi.light.elements.common.uiElement element = null;
+        for (com.epam.jdi.light.elements.common.uiElement e : getButtonToggleItems()) {
             if (e.attr("value").equals(value)) {
                 element = e;
             }

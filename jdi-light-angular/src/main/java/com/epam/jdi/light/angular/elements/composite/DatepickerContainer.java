@@ -2,8 +2,8 @@ package com.epam.jdi.light.angular.elements.composite;
 
 import com.epam.jdi.light.angular.entities.DatepickerNavigation;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.composite.Section;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
@@ -35,7 +35,7 @@ public class DatepickerContainer extends Section {
      */
     @JDIAction("Collapse '{name}' calendar")
     public void collapse() {
-        UIElement calendarPanel = getCalendar();
+        com.epam.jdi.light.elements.common.uiElement calendarPanel = getCalendar();
         if (calendarPanel.isDisplayed()) {
             getCalendar().core().click(getOutsidePoint().getX(), getOutsidePoint().getY());
         }
@@ -231,7 +231,7 @@ public class DatepickerContainer extends Section {
     public boolean disabled(final String... navigationElements) {
         int disabledElementsCount = 0;
         for (String element : navigationElements) {
-            UIElement uiElement = new UIElement(By.xpath(element));
+            com.epam.jdi.light.elements.common.uiElement uiElement = new uiElement(By.xpath(element));
             if (uiElement.hasAttribute("disabled") || uiElement.attr("aria-disabled").contains("true")) {
                 disabledElementsCount++;
             }
@@ -247,7 +247,7 @@ public class DatepickerContainer extends Section {
 
     @JDIAction("Get '{name}' '{0}' week day numbers")
     public String[] getWeekDayNumbers(final DatepickerNavigation weekName) {
-        WebList webList = getColumn(weekName.ordinal());
+        webList webList = getColumn(weekName.ordinal());
         String[] list = new String[webList.size()];
         webList.stream().map(e -> String.format(CELL.getName().replace("%s", " %s "), e.getValue()))
                 .collect(Collectors.toList()).toArray(list);
@@ -264,78 +264,78 @@ public class DatepickerContainer extends Section {
         return isLocale;
     }
 
-    protected UIElement getCalendar() {
-        return new UIElement(By.xpath(calendar));
+    protected com.epam.jdi.light.elements.common.uiElement getCalendar() {
+        return new uiElement(By.xpath(calendar));
     }
 
-    protected UIElement getChosenMonthAndYear() {
-        return new UIElement(By.xpath(CHOOSE_MONTH_AND_YEAR.getName()));
+    protected com.epam.jdi.light.elements.common.uiElement getChosenMonthAndYear() {
+        return new uiElement(By.xpath(CHOOSE_MONTH_AND_YEAR.getName()));
     }
 
-    protected UIElement getChosenDate() {
-        return new UIElement(By.xpath(CHOOSE_DATE.getName()));
+    protected com.epam.jdi.light.elements.common.uiElement getChosenDate() {
+        return new uiElement(By.xpath(CHOOSE_DATE.getName()));
     }
 
-    protected UIElement getSelectedMonth() {
-        return new WebList(By.xpath(selectedMonthLocator)).get(1);
+    protected com.epam.jdi.light.elements.common.uiElement getSelectedMonth() {
+        return new webList(By.xpath(selectedMonthLocator)).get(1);
     }
 
-    protected UIElement getTodayDay() {
-        return new UIElement(By.cssSelector(todayDayLocator));
+    protected com.epam.jdi.light.elements.common.uiElement getTodayDay() {
+        return new uiElement(By.cssSelector(todayDayLocator));
     }
 
-    protected UIElement getSelectedDay() {
-        return new UIElement(By.cssSelector(selectedDayLocator));
+    protected com.epam.jdi.light.elements.common.uiElement getSelectedDay() {
+        return new uiElement(By.cssSelector(selectedDayLocator));
     }
 
-    protected UIElement getActiveDay() {
-        return new UIElement(By.cssSelector(activeDayLocator));
+    protected com.epam.jdi.light.elements.common.uiElement getActiveDay() {
+        return new uiElement(By.cssSelector(activeDayLocator));
     }
 
-    protected UIElement getMonth(final String month, final Locale locale) {
+    protected com.epam.jdi.light.elements.common.uiElement getMonth(final String month, final Locale locale) {
         String monthShort = Month.valueOf(month).getDisplayName(TextStyle.SHORT, locale).toUpperCase();
-        return new UIElement(By.xpath(String.format(CELL.getName(), monthShort)));
+        return new uiElement(By.xpath(String.format(CELL.getName(), monthShort)));
     }
 
-    protected UIElement getMonth(final int month, final Locale locale) {
+    protected com.epam.jdi.light.elements.common.uiElement getMonth(final int month, final Locale locale) {
         String monthShort = Month.of(month).getDisplayName(TextStyle.SHORT, locale).toUpperCase();
-        return new UIElement(By.xpath(String.format(value, monthShort)));
+        return new uiElement(By.xpath(String.format(value, monthShort)));
     }
 
-    protected UIElement getDay(final String day) {
-        return new UIElement(By.xpath(String.format(value.replace("%s", " %s "), day)));
+    protected com.epam.jdi.light.elements.common.uiElement getDay(final String day) {
+        return new uiElement(By.xpath(String.format(value.replace("%s", " %s "), day)));
     }
 
-    protected UIElement getDay(final int day) {
-        return new UIElement(By.xpath(String.format(value.replace("%s", " %s "), day)));
+    protected com.epam.jdi.light.elements.common.uiElement getDay(final int day) {
+        return new uiElement(By.xpath(String.format(value.replace("%s", " %s "), day)));
     }
 
-    protected UIElement getYear(final int year) {
-        return new UIElement(By.xpath(String.format(value, year)));
+    protected com.epam.jdi.light.elements.common.uiElement getYear(final int year) {
+        return new uiElement(By.xpath(String.format(value, year)));
     }
 
-    protected UIElement getPreviousMonth() {
-        return new UIElement(By.xpath(PREVIOUS_MONTH.getName()));
+    protected com.epam.jdi.light.elements.common.uiElement getPreviousMonth() {
+        return new uiElement(By.xpath(PREVIOUS_MONTH.getName()));
     }
 
-    protected UIElement getNextMoth() {
-        return new UIElement(By.xpath(NEXT_MONTH.getName()));
+    protected com.epam.jdi.light.elements.common.uiElement getNextMoth() {
+        return new uiElement(By.xpath(NEXT_MONTH.getName()));
     }
 
-    protected UIElement getPreviousTwentyYears() {
-        return new UIElement(By.xpath(PREVIOUS_TWENTY_YEARS.getName()));
+    protected com.epam.jdi.light.elements.common.uiElement getPreviousTwentyYears() {
+        return new uiElement(By.xpath(PREVIOUS_TWENTY_YEARS.getName()));
     }
 
-    protected UIElement getNextTwentyYears() {
-        return new UIElement(By.xpath(NEXT_TWENTY_YEARS.getName()));
+    protected com.epam.jdi.light.elements.common.uiElement getNextTwentyYears() {
+        return new uiElement(By.xpath(NEXT_TWENTY_YEARS.getName()));
     }
 
-    protected WebList getColumn(final int columnNumber) {
-        return new WebList(By.xpath(String.format(columnLocator, columnNumber)));
+    protected webList getColumn(final int columnNumber) {
+        return new webList(By.xpath(String.format(columnLocator, columnNumber)));
     }
 
     protected Point getOutsidePoint() {
-        UIElement uiElement = getCalendar();
+        com.epam.jdi.light.elements.common.uiElement uiElement = getCalendar();
         return new Point(uiElement.core().getRect().getWidth() + 2, uiElement.core().getRect().getHeight() + 2);
     }
 
@@ -395,7 +395,7 @@ public class DatepickerContainer extends Section {
     }
 
     private LocalDate getLocalDate(final Locale locale) {
-        UIElement monthAndYear = getChosenMonthAndYear();
+        com.epam.jdi.light.elements.common.uiElement monthAndYear = getChosenMonthAndYear();
         String trimMonth = monthAndYear.text().trim();
         String selectedMonth = trimMonth.substring(0, trimMonth.indexOf(SPACE_CHARACTER_ASCII_CODE)).replace(".", "");
         Month month = Arrays.stream(Month.values())

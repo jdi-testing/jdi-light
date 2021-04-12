@@ -3,8 +3,7 @@ package com.epam.jdi.light.ui.html.elements.complex;
 import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.tools.HasStartIndex;
 import com.epam.jdi.tools.LinqUtils;
@@ -28,8 +27,8 @@ public class DataListOptions extends UIListBase<DropdownAssert>
     protected int startIndex = ELEMENT.startIndex;
 
     @Override
-    public WebList list() {
-        WebList list = $$("#"+ core().attr("list")+" option")
+    public webList list() {
+        webList list = $$("#"+ core().attr("list")+" option")
             .setup(e -> e.noValidation().setName(getName() + "list"))
             .setUIElementName(VALUE);
         list.setStartIndex(startIndex);
@@ -56,7 +55,7 @@ public class DataListOptions extends UIListBase<DropdownAssert>
      **/
     @JDIAction("Select '{0}' for '{name}'") @Override
     public void select(int index) {
-        setText(LinqUtils.map(list().elements(index), UIElement::getTextForce).get(index - startIndex));
+        setText(LinqUtils.map(list().elements(index), com.epam.jdi.light.elements.common.uiElement::getTextForce).get(index - startIndex));
     }
     /**
     *
@@ -74,7 +73,7 @@ public class DataListOptions extends UIListBase<DropdownAssert>
      **/
     @JDIAction("Get all '{name}' enabled options") @Override
     public List<String> listEnabled() {
-        return ifSelect(list(), UIElement::isEnabled, UIElement::getText);
+        return ifSelect(list(), com.epam.jdi.light.elements.common.uiElement::isEnabled, com.epam.jdi.light.elements.common.uiElement::getText);
     }
 
     /**
@@ -84,7 +83,7 @@ public class DataListOptions extends UIListBase<DropdownAssert>
      **/
     @JDIAction("Get all '{name}' disabled options") @Override
     public List<String> listDisabled() {
-        return ifSelect(list(), UIElement::isDisabled, UIElement::getText);
+        return ifSelect(list(), com.epam.jdi.light.elements.common.uiElement::isDisabled, com.epam.jdi.light.elements.common.uiElement::getText);
     }
 
     @JDIAction("Check that '{name}' is enabled") @Override

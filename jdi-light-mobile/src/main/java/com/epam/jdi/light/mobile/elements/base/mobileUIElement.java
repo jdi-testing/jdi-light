@@ -2,7 +2,7 @@ package com.epam.jdi.light.mobile.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.mobile.elements.common.app.android.Label;
 import com.epam.jdi.light.mobile.elements.complex.MobileWebList;
@@ -34,42 +34,42 @@ import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class MobileUIElement extends UIElement implements HasTouchActions {
+public class mobileUIElement extends uiElement implements HasTouchActions {
 
     //region Constructors
-    public MobileUIElement() {
+    public mobileUIElement() {
     }
 
-    public MobileUIElement(WebElement el) {
+    public mobileUIElement(WebElement el) {
         setWebElement(el);
     }
 
-    public MobileUIElement(List<WebElement> els) {
+    public mobileUIElement(List<WebElement> els) {
         setWebElements(els);
     }
 
-    public MobileUIElement(@MarkupLocator By locator) {
+    public mobileUIElement(@MarkupLocator By locator) {
         setLocator(locator);
     }
 
-    public MobileUIElement(JDIBase base) {
+    public mobileUIElement(JDIBase base) {
         super(base);
     }
 
-    public MobileUIElement(JDIBase base, String locator, String name, Object parent) {
+    public mobileUIElement(JDIBase base, String locator, String name, Object parent) {
         super(base);
         setLocator(locator);
         setName(name);
         setParent(parent);
     }
 
-    public MobileUIElement(JDIBase base, By locator, String name) {
+    public mobileUIElement(JDIBase base, By locator, String name) {
         super(base);
         setLocator(locator);
         setName(name);
     }
 
-    public MobileUIElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
+    public mobileUIElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
         super(base);
         setWebElement(el);
         setGetFunc(func);
@@ -77,52 +77,52 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     //endregion
 
     //region Core
-    public MobileUIElement core() {
+    public mobileUIElement core() {
         return this;
     }
 
     @Override
-    public MobileUIElement setup(JAction1<JDIBase> setup) {
-        return setup(MobileUIElement.class, setup);
+    public mobileUIElement setup(JAction1<JDIBase> setup) {
+        return setup(mobileUIElement.class, setup);
     }
 
     @Override
-    public MobileUIElement setCore(JDIBase base) {
+    public mobileUIElement setCore(JDIBase base) {
         super.setCore(base);
         return this;
     }
 
     @Override
-    public MobileUIElement setName(String name) {
+    public mobileUIElement setName(String name) {
         super.setName(name);
         return this;
     }
 
     @Override
-    public MobileUIElement waitSec(int timeout) {
+    public mobileUIElement waitSec(int timeout) {
         super.waitSec(timeout);
         return this;
     }
 
     @Override
-    public MobileUIElement noWait() {
+    public mobileUIElement noWait() {
         super.noWait();
         return this;
     }
 
     @Override
-    public MobileUIElement find(@MarkupLocator String by) {
+    public mobileUIElement find(@MarkupLocator String by) {
         return $(by, this);
     }
 
     @Override
-    public UIElement findFirst(@MarkupLocator String by) {
-        UIElement element = $(by, this);
+    public uiElement findFirst(@MarkupLocator String by) {
+        uiElement element = $(by, this);
         element.strictSearch(false);
         return element;
     }
 
-    public static JFunc1<MobileUIElement, String> SMART_GET_TEXT = ui -> {
+    public static JFunc1<mobileUIElement, String> SMART_GET_TEXT = ui -> {
         String text = ui.text(TEXT);
         if (isNotBlank(text))
             return text;
@@ -132,7 +132,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         text = ui.text(VALUE);
         return isNotBlank(text) ? text : "";
     };
-    public static JFunc1<MobileUIElement, String> SMART_LIST_TEXT = ui -> {
+    public static JFunc1<mobileUIElement, String> SMART_LIST_TEXT = ui -> {
         String text = ui.text(TEXT);
         if (isNotBlank(text))
             return text;
@@ -141,7 +141,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
             return text;
         String id = ui.attr("id");
         if (isNotBlank(id)) {
-            MobileUIElement label = MobileUIFactory.$(By.cssSelector("[for=" + id + "]"));
+            mobileUIElement label = MobileUIFactory.$(By.cssSelector("[for=" + id + "]"));
             label.waitSec(0);
             try {
                 text = label.getText();
@@ -152,7 +152,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     };
 
     @Override
-    public MobileUIElement find(@MarkupLocator By by) {
+    public mobileUIElement find(@MarkupLocator By by) {
         return $(by, this);
     }
 
@@ -165,7 +165,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     }
 
     @Override
-    public MobileUIElement firstChild() {
+    public mobileUIElement firstChild() {
         return this.find("*");
     }
 

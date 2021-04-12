@@ -1,6 +1,6 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -14,11 +14,11 @@ import io.github.com.entities.UserInfo;
 
 public class PerformancePage extends WebPage {
 	@UI("#users-table tr>td:first-child")
-	public static WebList firstRow;
+	public static webList firstRow;
 	@UI("#users-table tr>td:first-child")  @GetAny
-	public static WebList firstRowNoValidation;
-	@UI("//*[@id='users-table']//tr/td[1][text()='%s']") public static WebList firstTemplate;
-	@UI("//*[@id='users-table']//tr/td[1]") public static WebList firstXpath;
+	public static webList firstRowNoValidation;
+	@UI("//*[@id='users-table']//tr/td[1][text()='%s']") public static webList firstTemplate;
+	@UI("//*[@id='users-table']//tr/td[1]") public static webList firstXpath;
 
 	public static Table usersTable;
 	@UI("#users-table") public static Table usersTableUI;

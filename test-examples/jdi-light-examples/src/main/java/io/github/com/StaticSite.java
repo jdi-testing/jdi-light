@@ -1,7 +1,7 @@
 package io.github.com;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -32,10 +32,10 @@ public class StaticSite {
 	public static SearchPage searchPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
-	@Css("[ui=label]") public static WebList navigationL;
-	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList navigationS;
+	@Css("[ui=label]") public static webList navigationL;
+	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static webList navigationS;
 	// TODO fix slow @UI("[ui=label][*'%s']") public static WebList navigationS;
-	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static UIElement menu;
+	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static uiElement menu;
 	// TODO fix slow @UI("[ui=label][*'%s']") public static UIElement menu;
 
 	@Css("header") public static Header header;
@@ -43,9 +43,9 @@ public class StaticSite {
 
 	@Frame("#jdi-frame-site") public static HomePageFrame iframe;
 	@Frame("#first_frame") @UI("img")
-	public static UIElement wolverinFrame;
+	public static uiElement wolverinFrame;
 	@Frame({"#second_frame", "#frame_in_frame"}) @UI("img")
-	public static UIElement spidermanElement;
+	public static uiElement spidermanElement;
 	@Frame({"#second_frame", "#frame_in_frame"})
 	public static FrameSpiderman frameSpiderman;
 

@@ -1,6 +1,6 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
@@ -23,7 +23,7 @@ public class SearchPage extends BaseSelPage {
 	@UI(".box") public JList<SearchResult> jsearch2;
 	@UI(".box") public static JList<SearchResult> jsearchS;
 	@UI(".wrong-locator") public static JList<SearchResult> jEmptySearch;
-	@UI(".box h3") public static JList<UIElement> jsearchTitle;
+	@UI(".box h3") public static JList<uiElement> jsearchTitle;
 	@UI("//*[@class='box']/h3[text()=\"%s\"]")
 	public JList<SearchResult> jsearchT2;
 }

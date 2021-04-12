@@ -1,6 +1,6 @@
 package com.epam.jdi.light.common;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
@@ -75,7 +75,7 @@ public final class UIUtils {
     public static JFunc2<Object, String, IClickable> GET_BUTTON = (obj, buttonName) -> {
         List<Field> fields = getFields(obj, IsButton.class);
         if (fields.size() == 0)
-            fields = getFieldsExact(obj, WebElement.class, UIElement.class);
+            fields = getFieldsExact(obj, WebElement.class, uiElement.class);
         if (fields.size() > 1) {
             fields = filter(fields, f ->
                 isInterfaceAnd(getValueField(f, obj).getClass(), IClickable.class, INamed.class));
@@ -118,7 +118,7 @@ public final class UIUtils {
             throw exception(ex, "Can't get entity from '" + getName(obj) + "' for class: " + entityClass);
         }
     }
-    public static <T extends IBaseElement> T initT(UIElement el, IBaseElement parent, Class<?> initClass) {
+    public static <T extends IBaseElement> T initT(uiElement el, IBaseElement parent, Class<?> initClass) {
         try {
             if (initClass == null)
                 throw exception("Can't init List of UI Elements. Class Type is null");

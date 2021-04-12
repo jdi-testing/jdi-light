@@ -3,7 +3,7 @@ package com.epam.jdi.bdd;
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.asserts.generic.*;
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.tools.map.MapArray;
@@ -24,7 +24,7 @@ public final class BDDUtils {
                 r -> r.getCells().get(0), r -> r.getCells().get(1));
     }
 
-    public static UIElement core(String name) {
+    public static uiElement core(String name) {
         return getUI(name).core();
     }
 

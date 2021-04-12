@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.init.DropClass;
 import com.epam.jdi.light.elements.init.InClass;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
+import com.epam.jdi.light.mobile.elements.base.mobileUIElement;
 import com.epam.jdi.light.mobile.elements.complex.MobileWebList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -22,14 +22,14 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 
 public class MobileJDITalk {
-    public static MobileUIElement element(@MarkupLocator String locator) {
-        MobileUIElement element = locator.matches("[A-Z].*")
-                ? new MobileUIElement()
+    public static mobileUIElement element(@MarkupLocator String locator) {
+        mobileUIElement element = locator.matches("[A-Z].*")
+                ? new mobileUIElement()
                 : element(defineLocator(locator));
         return element.setName(locator);
     }
-    public static MobileUIElement element(@MarkupLocator By byLocator) {
-        return new MobileUIElement(byLocator);
+    public static mobileUIElement element(@MarkupLocator By byLocator) {
+        return new mobileUIElement(byLocator);
     }
 
     public static MobileWebList list(@MarkupLocator String locator) {

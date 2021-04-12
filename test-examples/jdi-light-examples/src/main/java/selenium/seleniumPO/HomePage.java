@@ -1,6 +1,6 @@
 package selenium.seleniumPO;
 
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -38,6 +38,6 @@ public class HomePage {
     @FindBy(css = ".profile-photo [ui=label]") WebElement userName;
 
     // TODO fix performance
-    @UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList leftNavigation;
+    @UI("//*[@ui='label']//*[contains(text(),'%s')]") public static webList leftNavigation;
     //@UI("[ui=label][*'%s']") public static WebList leftNavigation;
 }

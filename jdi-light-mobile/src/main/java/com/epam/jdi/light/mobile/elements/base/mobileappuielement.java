@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.JdiSettings;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
@@ -29,28 +29,28 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static java.util.Collections.singletonList;
 
-public class MobileAppUIElement extends MobileUIElement {
+public class mobileappuielement extends mobileUIElement {
 
     //region Constructors
-    public MobileAppUIElement() { }
-    public MobileAppUIElement(WebElement el) { setWebElement(el); }
-    public MobileAppUIElement(List<WebElement> els) { setWebElements(els); }
-    public MobileAppUIElement(@MarkupLocator By locator) { setLocator(locator); }
-    public MobileAppUIElement(JDIBase base) {
+    public mobileappuielement() { }
+    public mobileappuielement(WebElement el) { setWebElement(el); }
+    public mobileappuielement(List<WebElement> els) { setWebElements(els); }
+    public mobileappuielement(@MarkupLocator By locator) { setLocator(locator); }
+    public mobileappuielement(JDIBase base) {
         super(base);
     }
-    public MobileAppUIElement(JDIBase base, String locator, String name, Object parent) {
+    public mobileappuielement(JDIBase base, String locator, String name, Object parent) {
         super(base);
         setLocator(locator);
         setName(name);
         setParent(parent);
     }
-    public MobileAppUIElement(JDIBase base, By locator, String name) {
+    public mobileappuielement(JDIBase base, By locator, String name) {
         super(base);
         setLocator(locator);
         setName(name);
     }
-    public MobileAppUIElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
+    public mobileappuielement(JDIBase base, WebElement el, JFunc<WebElement> func) {
         super(base);
         setWebElement(el);
         setGetFunc(func);
@@ -58,27 +58,27 @@ public class MobileAppUIElement extends MobileUIElement {
     //endregion
 
     //region Core
-    public MobileAppUIElement core() { return this; }
-    public MobileAppUIElement setup(JAction1<JDIBase> setup) {
-        return setup(MobileAppUIElement.class, setup);
+    public mobileappuielement core() { return this; }
+    public mobileappuielement setup(JAction1<JDIBase> setup) {
+        return setup(mobileappuielement.class, setup);
     }
     @Override
-    public MobileAppUIElement setCore(JDIBase base) {
+    public mobileappuielement setCore(JDIBase base) {
         super.setCore(base);
         return this;
     }
     @Override
-    public MobileAppUIElement setName(String name) {
+    public mobileappuielement setName(String name) {
         super.setName(name);
         return this;
     }
     @Override
-    public MobileAppUIElement waitSec(int timeout) {
+    public mobileappuielement waitSec(int timeout) {
         super.waitSec(timeout);
         return this;
     }
     @Override
-    public MobileAppUIElement noWait() {
+    public mobileappuielement noWait() {
         super.noWait();
         return this;
     }
@@ -178,7 +178,7 @@ public class MobileAppUIElement extends MobileUIElement {
     }
 
     WebElement beforeSearch(WebElement el) {
-        (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new UIElement(el));
+        (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new uiElement(el));
         return el;
     }
 }

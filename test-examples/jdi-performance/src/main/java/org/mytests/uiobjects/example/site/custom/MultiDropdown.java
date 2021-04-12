@@ -5,7 +5,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import org.openqa.selenium.By;
@@ -30,14 +29,14 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
     By value = By.cssSelector("button");
     By valuesContainer = By.tagName("ul");
 
-    UIElement root() { return $(By.xpath(".."),this).setName("root"); }
-    UIElement expander() { return root().find(expandArrow).setName("expandArrow"); }
-    UIElement valuesList() { return root().find(valuesContainer).setName("valuesContainer"); }
-    UIElement value(String name) {
+    com.epam.jdi.light.elements.common.uiElement root() { return $(By.xpath(".."),this).setName("root"); }
+    com.epam.jdi.light.elements.common.uiElement expander() { return root().find(expandArrow).setName("expandArrow"); }
+    com.epam.jdi.light.elements.common.uiElement valuesList() { return root().find(valuesContainer).setName("valuesContainer"); }
+    com.epam.jdi.light.elements.common.uiElement value(String name) {
         return root().find(fillByTemplate(valueTemplate, name)).setName("valueTemplate");
     }
-    UIElement valueText() { return root().find(value).setName("value"); }
-    List<UIElement> allValues() {
+    com.epam.jdi.light.elements.common.uiElement valueText() { return root().find(value).setName("value"); }
+    List<com.epam.jdi.light.elements.common.uiElement> allValues() {
         return root().finds(values);
     }
 
@@ -55,7 +54,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
     public void select(String... names) {
         expand();
         for (String name : names) {
-            UIElement value = value(name);
+            com.epam.jdi.light.elements.common.uiElement value = value(name);
             if (value.isEnabled())
                 value.click();
         }
@@ -69,7 +68,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
     public void select(int... indexes) {
         expand();
         for (int i = 1; i <= indexes.length; i++) {
-            UIElement value = $$(values, this).setName(getName()).get(indexes[i]);
+            com.epam.jdi.light.elements.common.uiElement value = $$(values, this).setName(getName()).get(indexes[i]);
             if (value.isEnabled())
                 value.click();
         }
@@ -89,7 +88,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
         expand();
         List<String> listNames = map(names, String::trim);
         for (String name : values()) {
-            UIElement value = value(name);
+            com.epam.jdi.light.elements.common.uiElement value = value(name);
             boolean valueSelected = value.find("input").setup(JDIBase::noValidation)
                 .isSelected();
             if (valueSelected && !listNames.contains(name.trim())
@@ -108,7 +107,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
         expand();
         List<String> listNames = asList(names);
         for (String name : values()) {
-            UIElement value = value(name);
+            com.epam.jdi.light.elements.common.uiElement value = value(name);
             if (value.isDisabled()) continue;
             if (value.isSelected() && listNames.contains(value.getText().trim())
                     || !value.isSelected() && !listNames.contains(value.getText().trim()))
@@ -132,7 +131,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
         expand();
         List<Integer> listIndexes = toList(indexes);
         for (int i = 1; i <= values().size(); i++) {
-            UIElement value = allValues().get(i-1);
+            com.epam.jdi.light.elements.common.uiElement value = allValues().get(i-1);
             if (value.isDisabled()) continue;
             if (value.isSelected() && !listIndexes.contains(i)
                     || !value.isSelected() && listIndexes.contains(i))
@@ -149,7 +148,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
         expand();
         List<Integer> listIndexes = toList(indexes);
         for (int i = 1; i <= values().size(); i++) {
-            UIElement value = allValues().get(i-1);
+            com.epam.jdi.light.elements.common.uiElement value = allValues().get(i-1);
             if (value.isDisabled()) continue;
             if (value.isSelected() && listIndexes.contains(i)
                 || !value.isSelected() && !listIndexes.contains(i))
@@ -163,7 +162,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
      */
     @JDIAction("Get '{name}' checked values")
     public List<String> checked() {
-        return ifSelect(allValues(), UIElement::isSelected, UIElement::getText);
+        return ifSelect(allValues(), com.epam.jdi.light.elements.common.uiElement::isSelected, com.epam.jdi.light.elements.common.uiElement::getText);
     }
 
     /**
@@ -190,7 +189,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
      */
     @JDIAction("Get '{name}' list values")
     public List<String> values() {
-        return map(allValues(), UIElement::getText);
+        return map(allValues(), com.epam.jdi.light.elements.common.uiElement::getText);
     }
 
     /**
@@ -208,7 +207,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
      */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
-        return ifSelect(allValues(), UIElement::isEnabled, UIElement::getText);
+        return ifSelect(allValues(), com.epam.jdi.light.elements.common.uiElement::isEnabled, com.epam.jdi.light.elements.common.uiElement::getText);
     }
 
     /**
@@ -217,7 +216,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
      */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {
-        return ifSelect(allValues(), UIElement::isDisabled, UIElement::getText);
+        return ifSelect(allValues(), com.epam.jdi.light.elements.common.uiElement::isDisabled, com.epam.jdi.light.elements.common.uiElement::getText);
     }
 
     @Override

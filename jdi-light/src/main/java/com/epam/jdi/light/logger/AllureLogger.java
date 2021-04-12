@@ -2,7 +2,7 @@ package com.epam.jdi.light.logger;
 
 import com.epam.jdi.light.actions.ActionObject;
 import com.epam.jdi.light.elements.common.Alerts;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
@@ -79,7 +79,7 @@ public class AllureLogger {
     public static void attachScreenshotStep(String stepName, WebElement element) {
         String detailsUUID = startStep(stepName);
         try {
-            UIElement uiElement = isInterface(element.getClass(), ICoreElement.class)
+            uiElement uiElement = isInterface(element.getClass(), ICoreElement.class)
                     ? ((ICoreElement)element).core()
                     : $(element);
             File elementScreen = uiElement.makePhoto();
@@ -130,7 +130,7 @@ public class AllureLogger {
     public static void attachElementHtmlStep(String stepName, WebElement element) {
         String detailsUUID = startStep(stepName);
         try {
-            UIElement uiElement = isInterface(element.getClass(), ICoreElement.class)
+            uiElement uiElement = isInterface(element.getClass(), ICoreElement.class)
                     ? ((ICoreElement)element).core()
                     : $(element);
             String html = uiElement.printHtml();

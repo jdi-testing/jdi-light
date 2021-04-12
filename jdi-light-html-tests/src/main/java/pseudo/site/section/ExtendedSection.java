@@ -1,8 +1,7 @@
 package pseudo.site.section;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
@@ -46,19 +45,19 @@ public class ExtendedSection extends ExtendSection {
     public List<WebElement> listWebElementPublicXPath;
 
     @FindBy(id = "uielementPackage")
-    UIElement uielementPackage;
+    com.epam.jdi.light.elements.common.uiElement uielementPackage;
     @FindBy(id = "uielementPublic")
-    public UIElement uielementPublic;
+    public com.epam.jdi.light.elements.common.uiElement uielementPublic;
     @FindBy(id = "uielementPrivate")
-    private UIElement uielementPrivate;
+    private com.epam.jdi.light.elements.common.uiElement uielementPrivate;
     @UI(".uielementPackageUI")
-    UIElement uielementPackageUI;
+    com.epam.jdi.light.elements.common.uiElement uielementPackageUI;
     @UI(".uielementPublicUI")
-    public UIElement uielementPublicUI;
+    public com.epam.jdi.light.elements.common.uiElement uielementPublicUI;
     @Css(".uielementPackageCss")
-    UIElement uielementPackageCss;
+    com.epam.jdi.light.elements.common.uiElement uielementPackageCss;
     @XPath("//*[@class='uielementPublicXPath']")
-    public UIElement uielementPublicXPath;
+    public com.epam.jdi.light.elements.common.uiElement uielementPublicXPath;
 
     @FindBy(id = "buttonPackage")
     Button buttonPackage;
@@ -71,24 +70,24 @@ public class ExtendedSection extends ExtendSection {
     @UI(".buttonPublicUI")
     public Button buttonPublicUI;
     @Css(".buttonPackageCss")
-    UIElement buttonPackageCss;
+    com.epam.jdi.light.elements.common.uiElement buttonPackageCss;
     @XPath("//*[@class='buttonPublicXPath']")
-    public UIElement buttonPublicXPath;
+    public com.epam.jdi.light.elements.common.uiElement buttonPublicXPath;
 
     @FindBy(id = "listUIElementPackage")
-    List<UIElement> listUIElementPackage;
+    List<com.epam.jdi.light.elements.common.uiElement> listUIElementPackage;
     @FindBy(id = "listUIElementPublic")
-    public List<UIElement> listUIElementPublic;
+    public List<com.epam.jdi.light.elements.common.uiElement> listUIElementPublic;
     @FindBy(id = "listUIElementPrivate")
-    private List<UIElement> listUIElementPrivate;
+    private List<com.epam.jdi.light.elements.common.uiElement> listUIElementPrivate;
     @UI(".listUIElementPackageUI")
-    List<UIElement> listUIElementPackageUI;
+    List<com.epam.jdi.light.elements.common.uiElement> listUIElementPackageUI;
     @UI(".listUIElementPublicUI")
-    public List<UIElement> listUIElementPublicUI;
+    public List<com.epam.jdi.light.elements.common.uiElement> listUIElementPublicUI;
     @Css(".listUIElementPackageCss")
-    List<UIElement> listUIElementPackageCss;
+    List<com.epam.jdi.light.elements.common.uiElement> listUIElementPackageCss;
     @XPath("//*[@class='listUIElementPublicXPath']")
-    public List<UIElement> listUIElementPublicXPath;
+    public List<com.epam.jdi.light.elements.common.uiElement> listUIElementPublicXPath;
 
     @FindBy(id = "listButtonPackage")
     List<Button> listButtonPackage;
@@ -106,19 +105,19 @@ public class ExtendedSection extends ExtendSection {
     public List<Button> listButtonPublicXPath;
 
     @FindBy(id = "webListPackage")
-    WebList webListPackage;
+    webList webListPackage;
     @FindBy(id = "webListPublic")
-    public WebList webListPublic;
+    public webList webListPublic;
     @FindBy(id = "webListPrivate")
-    private WebList webListPrivate;
+    private webList webListPrivate;
     @UI(".webListPackageUI")
-    WebList webListPackageUI;
+    webList webListPackageUI;
     @UI(".webListPublicUI")
-    public WebList webListPublicUI;
+    public webList webListPublicUI;
     @Css(".webListPackageCss")
-    WebList webListPackageCss;
+    webList webListPackageCss;
     @XPath("//*[@class='webListPublicXPath']")
-    public WebList webListPublicXPath;
+    public webList webListPublicXPath;
 
     @FindBy(id = "uilistQuestionPackage")
     DataList<CustomSection, ?> uilistQuestionPackage;
@@ -211,27 +210,27 @@ public class ExtendedSection extends ExtendSection {
         this.listWebElementPackageUI = listWebElementPackageUI;
     }
 
-    public UIElement getUielementPackage() {
+    public com.epam.jdi.light.elements.common.uiElement getUielementPackage() {
         return uielementPackage;
     }
 
-    public void setUielementPackage(UIElement uielementPackage) {
+    public void setUielementPackage(com.epam.jdi.light.elements.common.uiElement uielementPackage) {
         this.uielementPackage = uielementPackage;
     }
 
-    public UIElement getUielementPrivate() {
+    public com.epam.jdi.light.elements.common.uiElement getUielementPrivate() {
         return uielementPrivate;
     }
 
-    public void setUielementPrivate(UIElement uielementPrivate) {
+    public void setUielementPrivate(com.epam.jdi.light.elements.common.uiElement uielementPrivate) {
         this.uielementPrivate = uielementPrivate;
     }
 
-    public UIElement getUielementPackageUI() {
+    public com.epam.jdi.light.elements.common.uiElement getUielementPackageUI() {
         return uielementPackageUI;
     }
 
-    public void setUielementPackageUI(UIElement uielementPackageUI) {
+    public void setUielementPackageUI(com.epam.jdi.light.elements.common.uiElement uielementPackageUI) {
         this.uielementPackageUI = uielementPackageUI;
     }
 
@@ -259,28 +258,28 @@ public class ExtendedSection extends ExtendSection {
         this.buttonPackageUI = buttonPackageUI;
     }
 
-    public List<UIElement> getListUIElementPackage() {
+    public List<com.epam.jdi.light.elements.common.uiElement> getListUIElementPackage() {
         return listUIElementPackage;
     }
 
-    public void setListUIElementPackage(List<UIElement> listUIElementPackage) {
+    public void setListUIElementPackage(List<com.epam.jdi.light.elements.common.uiElement> listUIElementPackage) {
         this.listUIElementPackage = listUIElementPackage;
     }
 
-    public List<UIElement> getListUIElementPrivate() {
+    public List<com.epam.jdi.light.elements.common.uiElement> getListUIElementPrivate() {
         return listUIElementPrivate;
     }
 
-    public void setListUIElementPrivate(List<UIElement> listUIElementPrivate) {
+    public void setListUIElementPrivate(List<com.epam.jdi.light.elements.common.uiElement> listUIElementPrivate) {
         this.listUIElementPrivate = listUIElementPrivate;
     }
 
 
-    public List<UIElement> getListUIElementPackageUI() {
+    public List<com.epam.jdi.light.elements.common.uiElement> getListUIElementPackageUI() {
         return listUIElementPackageUI;
     }
 
-    public void setListUIElementPackageUI(List<UIElement> listUIElementPackageUI) {
+    public void setListUIElementPackageUI(List<com.epam.jdi.light.elements.common.uiElement> listUIElementPackageUI) {
         this.listUIElementPackageUI = listUIElementPackageUI;
     }
 
@@ -308,27 +307,27 @@ public class ExtendedSection extends ExtendSection {
         this.listButtonPackageUI = listButtonPackageUI;
     }
 
-    public WebList getWebListPackage() {
+    public webList getWebListPackage() {
         return webListPackage;
     }
 
-    public void setWebListPackage(WebList webListPackage) {
+    public void setWebListPackage(webList webListPackage) {
         this.webListPackage = webListPackage;
     }
 
-    public WebList getWebListPrivate() {
+    public webList getWebListPrivate() {
         return webListPrivate;
     }
 
-    public void setWebListPrivate(WebList webListPrivate) {
+    public void setWebListPrivate(webList webListPrivate) {
         this.webListPrivate = webListPrivate;
     }
 
-    public WebList getWebListPackageUI() {
+    public webList getWebListPackageUI() {
         return webListPackageUI;
     }
 
-    public void setWebListPackageUI(WebList webListPackageUI) {
+    public void setWebListPackageUI(webList webListPackageUI) {
         this.webListPackageUI = webListPackageUI;
     }
 
@@ -421,15 +420,15 @@ public class ExtendedSection extends ExtendSection {
         return listWebElementPackageCss;
     }
 
-    public UIElement getUielementPackageCss() {
+    public com.epam.jdi.light.elements.common.uiElement getUielementPackageCss() {
         return uielementPackageCss;
     }
 
-    public UIElement getButtonPackageCss() {
+    public com.epam.jdi.light.elements.common.uiElement getButtonPackageCss() {
         return buttonPackageCss;
     }
 
-    public List<UIElement> getListUIElementPackageCss() {
+    public List<com.epam.jdi.light.elements.common.uiElement> getListUIElementPackageCss() {
         return listUIElementPackageCss;
     }
 
@@ -437,7 +436,7 @@ public class ExtendedSection extends ExtendSection {
         return listButtonPackageCss;
     }
 
-    public WebList getWebListPackageCss() {
+    public webList getWebListPackageCss() {
         return webListPackageCss;
     }
 

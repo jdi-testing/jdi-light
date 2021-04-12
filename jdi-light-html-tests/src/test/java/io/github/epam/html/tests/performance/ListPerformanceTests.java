@@ -108,7 +108,7 @@ public class ListPerformanceTests implements TestsInit {
 
 
     private <T> void testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, double expectedFirst, double expectedRatio, int count) {
-        StartStatistic();
+        startStatistic();
         double max = 0;
         double firstResult = 0;
         for (int i = 0; i < count; i++) {

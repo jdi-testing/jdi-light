@@ -6,8 +6,8 @@ import com.epam.jdi.light.angular.entities.DatepickerNavigation;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import org.openqa.selenium.By;
@@ -372,7 +372,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     @JDIAction(value = "Is '{name}' has first input & change events '{0}'")
     public boolean isFirstInputChangeEvents(final List<String> firstInputChangeEvents) {
-        WebList allEvents = exampleEvents();
+        webList allEvents = exampleEvents();
         String firstInputEvent = allEvents.get(1).text();
         String firstChangeEvent = allEvents.get(2).text();
         List<String> actualInputChangeEvents = new ArrayList<>(Arrays.asList(firstInputEvent, firstChangeEvent));
@@ -382,7 +382,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     @JDIAction(value = "Is '{name}' has last input & change events '{0}'")
     public boolean isLastInputChangeEvents(final List<String> lastInputChangeEvents) {
-        WebList allEvents = exampleEvents();
+        webList allEvents = exampleEvents();
         String lastInputEvent = allEvents.get(allEvents.size() - 1).text();
         String lastChangeEvent = allEvents.get(allEvents.size()).text();
         List<String> actualInputChangeEvents = new ArrayList<>(Arrays.asList(lastInputEvent, lastChangeEvent));
@@ -392,14 +392,14 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     @JDIAction(value = "Is '{name}' has last change event '{0}'")
     public boolean isLastChangeEvent(final String lastChangeEvent) {
-        WebList allEvents = exampleEvents();
+        webList allEvents = exampleEvents();
         String changeEvent = allEvents.get(allEvents.size()).text();
         return changeEvent.contains(lastChangeEvent);
     }
 
     @JDIAction(value = "Is '{name}' has last input event '{0}'")
     public boolean isLastInputEvent(final String lastInputEvent) {
-        WebList allEvents = exampleEvents();
+        webList allEvents = exampleEvents();
         String inputEvent = allEvents.get(allEvents.size() - 1).text();
         return inputEvent.contains(lastInputEvent);
     }
@@ -409,46 +409,46 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         return new DatepickerAssert().set(this);
     }
 
-    protected UIElement datepicker() {
-        return new UIElement(By.xpath(String.format(DATEPICKER.getName(),
+    protected com.epam.jdi.light.elements.common.uiElement datepicker() {
+        return new uiElement(By.xpath(String.format(DATEPICKER.getName(),
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement input() {
-        return new UIElement(By.xpath(String.format(inputLocator,
+    protected com.epam.jdi.light.elements.common.uiElement input() {
+        return new uiElement(By.xpath(String.format(inputLocator,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement toggle() {
-        return new UIElement(By.xpath(String.format(TOGGLE.getName(),
+    protected com.epam.jdi.light.elements.common.uiElement toggle() {
+        return new uiElement(By.xpath(String.format(TOGGLE.getName(),
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement toggleButton() {
-        return new UIElement(By.xpath(String.format(toggleButton,
+    protected com.epam.jdi.light.elements.common.uiElement toggleButton() {
+        return new uiElement(By.xpath(String.format(toggleButton,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement openButton() {
+    protected com.epam.jdi.light.elements.common.uiElement openButton() {
         String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
-        return new UIElement(By.xpath(String.format(openButton, replaceExpression)));
+        return new uiElement(By.xpath(String.format(openButton, replaceExpression)));
     }
 
-    protected WebList exampleEvents() {
+    protected webList exampleEvents() {
         String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
-        return new WebList(By.xpath(String.format(exampleEvents, replaceExpression)));
+        return new webList(By.xpath(String.format(exampleEvents, replaceExpression)));
     }
 
-    protected UIElement switchLocaleButton() {
+    protected com.epam.jdi.light.elements.common.uiElement switchLocaleButton() {
         String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
-        return new UIElement(By.xpath(String.format(switchLocaleButton, replaceExpression)));
+        return new uiElement(By.xpath(String.format(switchLocaleButton, replaceExpression)));
     }
 
     protected Point getOutsidePoint() {

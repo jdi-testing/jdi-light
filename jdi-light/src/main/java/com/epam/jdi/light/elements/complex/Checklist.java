@@ -3,7 +3,6 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.complex.ChecklistAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 
 import java.util.List;
@@ -23,8 +22,8 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     protected int startIndex = ELEMENT.startIndex;
 
     @Override
-    public WebList list() {
-        WebList list = super.list().setUIElementName(LABEL);
+    public webList list() {
+        webList list = super.list().setUIElementName(LABEL);
         list.setStartIndex(getStartIndex());
         return list;
     }
@@ -85,7 +84,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     }
 
 
-    protected boolean selected(UIElement value) {
+    protected boolean selected(com.epam.jdi.light.elements.common.uiElement value) {
         return value.isSelected();
     }
     /**
@@ -160,7 +159,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @JDIAction("Get '{name}' checked options")
     public List<String> checked() {
-        return ifSelect(list(), UIElement::isSelected, UIElement::labelText);
+        return ifSelect(list(), com.epam.jdi.light.elements.common.uiElement::isSelected, com.epam.jdi.light.elements.common.uiElement::labelText);
     }
 
     /**
@@ -179,7 +178,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     @Override
     @JDIAction("Get '{name}' selected option")
     public String selected() {
-        return print(list().ifSelect(UIElement::isSelected, UIElement::labelText));
+        return print(list().ifSelect(com.epam.jdi.light.elements.common.uiElement::isSelected, com.epam.jdi.light.elements.common.uiElement::labelText));
     }
 
     /**
@@ -193,11 +192,11 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     }
     @Override
     public List<String> listEnabled() {
-        return list().ifSelect(UIElement::isEnabled, UIElement::labelText);
+        return list().ifSelect(com.epam.jdi.light.elements.common.uiElement::isEnabled, com.epam.jdi.light.elements.common.uiElement::labelText);
     }
     @Override
     public List<String> listDisabled() {
-        return list().ifSelect(UIElement::isDisabled, UIElement::labelText);
+        return list().ifSelect(com.epam.jdi.light.elements.common.uiElement::isDisabled, com.epam.jdi.light.elements.common.uiElement::labelText);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Table;
@@ -21,29 +21,29 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 
 public class JDITalk {
-    public static JFunc1<String, UIElement> NAME_TO_ELEMENT = s -> {
-        UIElement element = s.matches("[A-Z].*")
-                ? new UIElement()
+    public static JFunc1<String, uiElement> NAME_TO_ELEMENT = s -> {
+        uiElement element = s.matches("[A-Z].*")
+                ? new uiElement()
                 : element(NAME_TO_LOCATOR.execute(s));
             return element.setName(s);
         };
-    public static UIElement element(@MarkupLocator String locator) {
+    public static uiElement element(@MarkupLocator String locator) {
         return NAME_TO_ELEMENT.execute(locator);
     }
-    public static UIElement element(@MarkupLocator By byLocator) {
-        return new UIElement(byLocator);
+    public static uiElement element(@MarkupLocator By byLocator) {
+        return new uiElement(byLocator);
     }
 
-    public static WebList list(@MarkupLocator String locator) {
-        return new WebList().setCore(NAME_TO_ELEMENT.execute(locator)).setName(locator);
+    public static webList list(@MarkupLocator String locator) {
+        return new webList().setCore(NAME_TO_ELEMENT.execute(locator)).setName(locator);
     }
-    public static WebList list(@MarkupLocator By byLocator) {
-        return new WebList(byLocator);
+    public static webList list(@MarkupLocator By byLocator) {
+        return new webList(byLocator);
     }
-    public static WebList list(List<WebElement> els, String name) {
-        return new WebList(els).setup(e->e.setName(name));
+    public static webList list(List<WebElement> els, String name) {
+        return new webList(els).setup(e->e.setName(name));
     }
-    public static WebList list(List<WebElement> els) {
+    public static webList list(List<WebElement> els) {
         return list(els, "Elements list");
     }
 

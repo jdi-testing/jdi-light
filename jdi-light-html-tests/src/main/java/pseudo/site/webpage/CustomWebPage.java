@@ -1,8 +1,8 @@
 package pseudo.site.webpage;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
@@ -49,19 +49,19 @@ public class CustomWebPage extends WebPage {
     public List<WebElement> listWebElementPublicXPath;
 
     @FindBy(id = "uielementPackage")
-    UIElement uielementPackage;
+    uiElement uielementPackage;
     @FindBy(id = "uielementPublic")
-    public UIElement uielementPublic;
+    public uiElement uielementPublic;
     @FindBy(id = "uielementPrivate")
-    private UIElement uielementPrivate;
+    private uiElement uielementPrivate;
     @UI(".uielementPackageUI")
-    UIElement uielementPackageUI;
+    uiElement uielementPackageUI;
     @UI(".uielementPublicUI")
-    public UIElement uielementPublicUI;
+    public uiElement uielementPublicUI;
     @Css(".uielementPackageCss")
-    UIElement uielementPackageCss;
+    uiElement uielementPackageCss;
     @XPath("//*[@class='uielementPublicXPath']")
-    public UIElement uielementPublicXPath;
+    public uiElement uielementPublicXPath;
 
     @FindBy(id = "buttonPackage")
     Button buttonPackage;
@@ -74,24 +74,24 @@ public class CustomWebPage extends WebPage {
     @UI(".buttonPublicUI")
     public Button buttonPublicUI;
     @Css(".buttonPackageCss")
-    UIElement buttonPackageCss;
+    uiElement buttonPackageCss;
     @XPath("//*[@class='buttonPublicXPath']")
-    public UIElement buttonPublicXPath;
+    public uiElement buttonPublicXPath;
 
     @FindBy(id = "listUIElementPackage")
-    List<UIElement> listUIElementPackage;
+    List<uiElement> listUIElementPackage;
     @FindBy(id = "listUIElementPublic")
-    public List<UIElement> listUIElementPublic;
+    public List<uiElement> listUIElementPublic;
     @FindBy(id = "listUIElementPrivate")
-    private List<UIElement> listUIElementPrivate;
+    private List<uiElement> listUIElementPrivate;
     @UI(".listUIElementPackageUI")
-    List<UIElement> listUIElementPackageUI;
+    List<uiElement> listUIElementPackageUI;
     @UI(".listUIElementPublicUI")
-    public List<UIElement> listUIElementPublicUI;
+    public List<uiElement> listUIElementPublicUI;
     @Css(".listUIElementPackageCss")
-    List<UIElement> listUIElementPackageCss;
+    List<uiElement> listUIElementPackageCss;
     @XPath("//*[@class='listUIElementPublicXPath']")
-    public List<UIElement> listUIElementPublicXPath;
+    public List<uiElement> listUIElementPublicXPath;
 
     @FindBy(id = "listButtonPackage")
     List<Button> listButtonPackage;
@@ -109,19 +109,19 @@ public class CustomWebPage extends WebPage {
     public List<Button> listButtonPublicXPath;
 
     @FindBy(id = "webListPackage")
-    WebList webListPackage;
+    webList webListPackage;
     @FindBy(id = "webListPublic")
-    public WebList webListPublic;
+    public webList webListPublic;
     @FindBy(id = "webListPrivate")
-    private WebList webListPrivate;
+    private webList webListPrivate;
     @UI(".webListPackageUI")
-    WebList webListPackageUI;
+    webList webListPackageUI;
     @UI(".webListPublicUI")
-    public WebList webListPublicUI;
+    public webList webListPublicUI;
     @Css(".webListPackageCss")
-    WebList webListPackageCss;
+    webList webListPackageCss;
     @XPath("//*[@class='webListPublicXPath']")
-    public WebList webListPublicXPath;
+    public webList webListPublicXPath;
 
     @FindBy(id = "uilistQuestionPackage")
     DataList<CustomSection, ?> uilistQuestionPackage;
@@ -213,28 +213,28 @@ public class CustomWebPage extends WebPage {
         this.listWebElementPackageUI = listWebElementPackageUI;
     }
 
-    public UIElement getUielementPackage() {
+    public uiElement getUielementPackage() {
         return uielementPackage;
     }
 
-    public void setUielementPackage(UIElement uielementPackage) {
+    public void setUielementPackage(uiElement uielementPackage) {
         this.uielementPackage = uielementPackage;
     }
 
-    public UIElement getUielementPrivate() {
+    public uiElement getUielementPrivate() {
         return uielementPrivate;
     }
 
-    public void setUielementPrivate(UIElement uielementPrivate) {
+    public void setUielementPrivate(uiElement uielementPrivate) {
         this.uielementPrivate = uielementPrivate;
     }
 
 
-    public UIElement getUielementPackageUI() {
+    public uiElement getUielementPackageUI() {
         return uielementPackageUI;
     }
 
-    public void setUielementPackageUI(UIElement uielementPackageUI) {
+    public void setUielementPackageUI(uiElement uielementPackageUI) {
         this.uielementPackageUI = uielementPackageUI;
     }
 
@@ -262,27 +262,27 @@ public class CustomWebPage extends WebPage {
         this.buttonPackageUI = buttonPackageUI;
     }
 
-    public List<UIElement> getListUIElementPackage() {
+    public List<uiElement> getListUIElementPackage() {
         return listUIElementPackage;
     }
 
-    public void setListUIElementPackage(List<UIElement> listUIElementPackage) {
+    public void setListUIElementPackage(List<uiElement> listUIElementPackage) {
         this.listUIElementPackage = listUIElementPackage;
     }
 
-    public List<UIElement> getListUIElementPrivate() {
+    public List<uiElement> getListUIElementPrivate() {
         return listUIElementPrivate;
     }
 
-    public void setListUIElementPrivate(List<UIElement> listUIElementPrivate) {
+    public void setListUIElementPrivate(List<uiElement> listUIElementPrivate) {
         this.listUIElementPrivate = listUIElementPrivate;
     }
 
-    public List<UIElement> getListUIElementPackageUI() {
+    public List<uiElement> getListUIElementPackageUI() {
         return listUIElementPackageUI;
     }
 
-    public void setListUIElementPackageUI(List<UIElement> listUIElementPackageUI) {
+    public void setListUIElementPackageUI(List<uiElement> listUIElementPackageUI) {
         this.listUIElementPackageUI = listUIElementPackageUI;
     }
 
@@ -310,28 +310,28 @@ public class CustomWebPage extends WebPage {
         this.listButtonPackageUI = listButtonPackageUI;
     }
 
-    public WebList getWebListPackage() {
+    public webList getWebListPackage() {
         return webListPackage;
     }
 
-    public void setWebListPackage(WebList webListPackage) {
+    public void setWebListPackage(webList webListPackage) {
         this.webListPackage = webListPackage;
     }
 
-    public WebList getWebListPrivate() {
+    public webList getWebListPrivate() {
         return webListPrivate;
     }
 
-    public void setWebListPrivate(WebList webListPrivate) {
+    public void setWebListPrivate(webList webListPrivate) {
         this.webListPrivate = webListPrivate;
     }
 
 
-    public WebList getWebListPackageUI() {
+    public webList getWebListPackageUI() {
         return webListPackageUI;
     }
 
-    public void setWebListPackageUI(WebList webListPackageUI) {
+    public void setWebListPackageUI(webList webListPackageUI) {
         this.webListPackageUI = webListPackageUI;
     }
 
@@ -415,15 +415,15 @@ public class CustomWebPage extends WebPage {
         return listWebElementPackageCss;
     }
 
-    public UIElement getUielementPackageCss() {
+    public uiElement getUielementPackageCss() {
         return uielementPackageCss;
     }
 
-    public UIElement getButtonPackageCss() {
+    public uiElement getButtonPackageCss() {
         return buttonPackageCss;
     }
 
-    public List<UIElement> getListUIElementPackageCss() {
+    public List<uiElement> getListUIElementPackageCss() {
         return listUIElementPackageCss;
     }
 
@@ -431,7 +431,7 @@ public class CustomWebPage extends WebPage {
         return listButtonPackageCss;
     }
 
-    public WebList getWebListPackageCss() {
+    public webList getWebListPackageCss() {
         return webListPackageCss;
     }
 

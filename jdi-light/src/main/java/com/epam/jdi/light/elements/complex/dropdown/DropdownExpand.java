@@ -4,10 +4,9 @@ import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 
@@ -29,26 +28,26 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     public String expandLocator = ".caret";
     protected int startIndex = ELEMENT.startIndex;
 
-    public UIElement expander() {
+    public com.epam.jdi.light.elements.common.uiElement expander() {
         return linked(expandLocator, "expand");
     }
 
     public String valueLocator = "input span:not(.caret),button span:not(.caret)";
 
     @Override
-    public UIElement value() {
+    public com.epam.jdi.light.elements.common.uiElement value() {
         return linked(valueLocator, "value");
     }
 
     @Override
-    public UIElement iCore() {
+    public com.epam.jdi.light.elements.common.uiElement iCore() {
         return value();
     }
 
     public String listLocator = "li";
 
     @Override
-    public WebList list() {
+    public webList list() {
         return linkedList(listLocator, "list").setUIElementName(INNER);
     }
 
@@ -61,7 +60,7 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
         try {
-            return list().noWait(WebList::isDisplayed, WebList.class);
+            return list().noWait(webList::isDisplayed, webList.class);
         } catch (Exception ex) {
             return false;
         }
@@ -122,7 +121,7 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
 
     @Override
     public int size() {
-        WebList list = list();
+        webList list = list();
         return list.noValidation(list::size);
     }
 

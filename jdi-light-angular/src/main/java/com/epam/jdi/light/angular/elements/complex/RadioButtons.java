@@ -3,8 +3,7 @@ package com.epam.jdi.light.angular.elements.complex;
 import com.epam.jdi.light.angular.asserts.RadioButtonsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 
 /**
  * To see an example of RadioButtons web element please visit https://material.angular.io/components/radio/overview.
@@ -22,9 +21,9 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
         return getRadioButtonByTagValue(value).attr("class").contains("mat-radio-checked");
     }
 
-    private UIElement getRadioButtonByTagValue(String value) {
-        UIElement element = null;
-        for (UIElement e : getRadioButtons()) {
+    private com.epam.jdi.light.elements.common.uiElement getRadioButtonByTagValue(String value) {
+        com.epam.jdi.light.elements.common.uiElement element = null;
+        for (com.epam.jdi.light.elements.common.uiElement e : getRadioButtons()) {
             if (e.find("input").attr("value").equalsIgnoreCase(value)) {
                 element = e;
             }
@@ -37,7 +36,7 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
         return new RadioButtonsAssert().set(this);
     }
 
-    private WebList getRadioButtons() {
+    private webList getRadioButtons() {
         return this.finds(".mat-radio-button");
     }
 }

@@ -4,7 +4,6 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
 import java.util.List;
@@ -22,11 +21,11 @@ public class Tabs extends UIListBase<UISelectAssert<?,?>> {
     public void select(int index) { list().select(index);  }
 
     @JDIAction(level = DEBUG)
-    public UIElement get(String value) { return list().get(value);}
+    public com.epam.jdi.light.elements.common.uiElement get(String value) { return list().get(value);}
     @JDIAction(level = DEBUG)
-    public <TEnum extends Enum<?>> UIElement get(TEnum value) { return list().get(value);}
+    public <TEnum extends Enum<?>> com.epam.jdi.light.elements.common.uiElement get(TEnum value) { return list().get(value);}
     @JDIAction(level = DEBUG)
-    public UIElement get(int index) { return list().get(index);  }
+    public com.epam.jdi.light.elements.common.uiElement get(int index) { return list().get(index);  }
 
     @JDIAction("Get selected value")
     public String selected() { return list().selected(); }

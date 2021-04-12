@@ -1,7 +1,7 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
@@ -64,13 +64,13 @@ public class InitActions {
     }
 
     public static MapArray<Class<?>, Class<?>> INTERFACES = map(
-        $(WebElement.class, UIElement.class),
+        $(WebElement.class, uiElement.class),
         $(IsDropdown.class, Dropdown.class),
         $(IsCombobox.class, Combobox.class),
         $(IsChecklist.class, Checklist.class)
     );
     public static MapArray<String, InitRule> INIT_RULES = map(
-        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList().indexFromZero())),
+        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new webList().indexFromZero())),
         $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
             info -> new DataList<>())),
         $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),

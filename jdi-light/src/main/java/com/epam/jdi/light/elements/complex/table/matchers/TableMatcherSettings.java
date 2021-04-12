@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.complex.table.matchers;
 
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.complex.table.BaseTable;
 import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.support.ui.Quotes;
@@ -17,7 +17,7 @@ public class TableMatcherSettings {
     public static String CONTAINS_VALUE_TEMPLATE = "/td[%s][contains(normalize-space(.),{0})]";
     public static String SINGLE_CONTAINS_VALUE_TEMPLATE = "/td[%s]//*/text()[contains(normalize-space(.),{0})]";
     public static boolean escapeQuotes = true;
-    public static JFunc2<BaseTable<?, ?>, ColumnMatcher[], WebList> TABLE_MATCHER = (table, matchers) -> {
+    public static JFunc2<BaseTable<?, ?>, ColumnMatcher[], webList> TABLE_MATCHER = (table, matchers) -> {
         String locator = format("./%s/ancestor::*/td", print(map(matchers, m ->
                 m.getLocator(table)),"/ancestor::*"));
         return $$(locator, table).setName("Matcher: " + print(asList(matchers), Object::toString));

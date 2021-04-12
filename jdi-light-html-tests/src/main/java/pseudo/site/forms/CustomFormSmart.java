@@ -1,7 +1,6 @@
 package pseudo.site.forms;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
@@ -18,13 +17,13 @@ public class CustomFormSmart extends Form<User> {
     public List<WebElement> fbPublicWebElementList;
     private List<WebElement> fbPrivateWebElementList;
 
-    UIElement fbUIElement;
-    public UIElement fbPublicUIElement;
-    private UIElement fbPrivateUIElement;
+    com.epam.jdi.light.elements.common.uiElement fbUIElement;
+    public com.epam.jdi.light.elements.common.uiElement fbPublicUIElement;
+    private com.epam.jdi.light.elements.common.uiElement fbPrivateUIElement;
 
-    List<UIElement> fbUIElementList;
-    public List<UIElement> fbPublicUIElementList;
-    private List<UIElement> fbPrivateUIElementList;
+    List<com.epam.jdi.light.elements.common.uiElement> fbUIElementList;
+    public List<com.epam.jdi.light.elements.common.uiElement> fbPublicUIElementList;
+    private List<com.epam.jdi.light.elements.common.uiElement> fbPrivateUIElementList;
 
     Button fbButton;
     public Button fbPublicButton;
@@ -34,9 +33,9 @@ public class CustomFormSmart extends Form<User> {
     public List<Button> fbPublicButtonList;
     private List<Button> fbPrivateButtonList;
 
-    WebList fbWebList;
-    public WebList fbPublicWebList;
-    private WebList fbPrivateWebList;
+    webList fbWebList;
+    public webList fbPublicWebList;
+    private webList fbPrivateWebList;
 
     public WebElement getFbWebElement() {
         return fbWebElement;
@@ -62,27 +61,27 @@ public class CustomFormSmart extends Form<User> {
         return fbPrivateWebElementList;
     }
 
-    public UIElement getFbUIElement() {
+    public com.epam.jdi.light.elements.common.uiElement getFbUIElement() {
         return fbUIElement;
     }
 
-    public UIElement getFbPublicUIElement() {
+    public com.epam.jdi.light.elements.common.uiElement getFbPublicUIElement() {
         return fbPublicUIElement;
     }
 
-    public UIElement getFbPrivateUIElement() {
+    public com.epam.jdi.light.elements.common.uiElement getFbPrivateUIElement() {
         return fbPrivateUIElement;
     }
 
-    public List<UIElement> getFbUIElementList() {
+    public List<com.epam.jdi.light.elements.common.uiElement> getFbUIElementList() {
         return fbUIElementList;
     }
 
-    public List<UIElement> getFbPublicUIElementList() {
+    public List<com.epam.jdi.light.elements.common.uiElement> getFbPublicUIElementList() {
         return fbPublicUIElementList;
     }
 
-    public List<UIElement> getFbPrivateUIElementList() {
+    public List<com.epam.jdi.light.elements.common.uiElement> getFbPrivateUIElementList() {
         return fbPrivateUIElementList;
     }
 
@@ -110,15 +109,15 @@ public class CustomFormSmart extends Form<User> {
         return fbPrivateButtonList;
     }
 
-    public WebList getFbWebList() {
+    public webList getFbWebList() {
         return fbWebList;
     }
 
-    public WebList getFbPublicWebList() {
+    public webList getFbPublicWebList() {
         return fbPublicWebList;
     }
 
-    public WebList getFbPrivateWebList() {
+    public webList getFbPrivateWebList() {
         return fbPrivateWebList;
     }
 }

@@ -1,10 +1,9 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.ui.html.elements.annotations.*;
 import com.epam.jdi.light.ui.html.elements.enums.MenuBehaviour;
 import com.epam.jdi.tools.func.JAction1;
@@ -34,8 +33,8 @@ public class Menu2D extends Selector implements ISetup {
     protected String separator = ">";
     protected String printFormat = "%s[%s]";
     protected String printSeparator = ";";
-    protected JAction1<UIElement> pathAction = UIElement::click;
-    protected JAction1<UIElement> lastAction = UIElement::click;
+    protected JAction1<com.epam.jdi.light.elements.common.uiElement> pathAction = com.epam.jdi.light.elements.common.uiElement::click;
+    protected JAction1<com.epam.jdi.light.elements.common.uiElement> lastAction = com.epam.jdi.light.elements.common.uiElement::click;
     protected boolean inheritLocators = true;
 
     public Menu2D() { }
@@ -50,20 +49,20 @@ public class Menu2D extends Selector implements ISetup {
         this.printFormat = printFormat;
         this.printSeparator = printSeparator;
     }
-    protected void setActions(JAction1<UIElement> pathAction, JAction1<UIElement> lastAction) {
+    protected void setActions(JAction1<com.epam.jdi.light.elements.common.uiElement> pathAction, JAction1<com.epam.jdi.light.elements.common.uiElement> lastAction) {
         this.pathAction = pathAction;
         this.lastAction = lastAction;
     }
     protected void setActions(MenuBehaviour behaviour) {
         switch (behaviour) {
             case HOVER:
-                setActions(UIElement::hover, UIElement::hover);
+                setActions(com.epam.jdi.light.elements.common.uiElement::hover, com.epam.jdi.light.elements.common.uiElement::hover);
                 break;
             case HOVER_AND_CLICK:
-                setActions(UIElement::hover, UIElement::click);
+                setActions(com.epam.jdi.light.elements.common.uiElement::hover, com.epam.jdi.light.elements.common.uiElement::click);
                 break;
             case SELECT:
-                setActions(UIElement::click, UIElement::click);
+                setActions(com.epam.jdi.light.elements.common.uiElement::click, com.epam.jdi.light.elements.common.uiElement::click);
                 break;
         }
     }
@@ -71,12 +70,12 @@ public class Menu2D extends Selector implements ISetup {
         inheritLocators = false;
     }
 
-    public UIElement get(String value) {
+    public com.epam.jdi.light.elements.common.uiElement get(String value) {
         String[] values = split(value);
         return get(values);
     }
 
-    public UIElement get(String... items) {
+    public com.epam.jdi.light.elements.common.uiElement get(String... items) {
         if (items.length == 0)
             throw exception("Failed to get '%s' element for no values");
         List<String> values = map(items, String::trim);
@@ -88,9 +87,9 @@ public class Menu2D extends Selector implements ISetup {
             : getElementByLocator(values, locators.iterator());
     }
 
-    protected UIElement getElementByLocator(List<String> values, Iterator<String> iterator) {
+    protected com.epam.jdi.light.elements.common.uiElement getElementByLocator(List<String> values, Iterator<String> iterator) {
         Object parent = base().parent;
-        UIElement element;
+        com.epam.jdi.light.elements.common.uiElement element;
         for (int i = 0; i < values.size(); i++) {
             String value = values.get(i);
             element = webListFromIterator(iterator, parent)
@@ -107,8 +106,8 @@ public class Menu2D extends Selector implements ISetup {
         }
         throw exception("Failed to get [%s] values", print(values));
     }
-    private WebList webListFromIterator(Iterator<String> iterator, Object parent) {
-        WebList list = iterator == null
+    private webList webListFromIterator(Iterator<String> iterator, Object parent) {
+        webList list = iterator == null
             ? $$(base().getLocator(), parent)
             : $$(iterator.next(), parent);
         list.setName(getName());
@@ -142,12 +141,12 @@ public class Menu2D extends Selector implements ISetup {
         return values;
     }
 
-    public UIElement get(int index) {
+    public com.epam.jdi.light.elements.common.uiElement get(int index) {
         preOpen(asList(index));
         return list().get(index);
     }
 
-    public UIElement get(int... indexes) {
+    public com.epam.jdi.light.elements.common.uiElement get(int... indexes) {
         if (indexes.length == 0)
             throw exception("Failed to get '%s' element for no values");
         preOpen(asList(indexes));
@@ -158,10 +157,10 @@ public class Menu2D extends Selector implements ISetup {
             : getElementByLocator(indexes, locators.iterator());
     }
 
-    protected UIElement getElementByLocator(int[] indexes, Iterator<String> iterator) {
+    protected com.epam.jdi.light.elements.common.uiElement getElementByLocator(int[] indexes, Iterator<String> iterator) {
         Object parent = base().parent;
         for (int i = 0; i < indexes.length; i++) {
-            UIElement element;
+            com.epam.jdi.light.elements.common.uiElement element;
             if (iterator != null) {
                 String locator = iterator.next();
                 element = $$(locator, parent).setName(getName()).get(indexes[i]);
@@ -211,9 +210,9 @@ public class Menu2D extends Selector implements ISetup {
     protected String printValues(Object parent, int index) {
         if (index == locators.size())
             return "";
-        WebList list = $$(locators.get(index), parent).setName(getName()).noValidation();
+        webList list = $$(locators.get(index), parent).setName(getName()).noValidation();
         List<String> result = new ArrayList<>();
-        for (UIElement element : list) {
+        for (com.epam.jdi.light.elements.common.uiElement element : list) {
             String value = element.getText();
             String subValues = printValues(inheritParent(element), index + 1);
             result.add(isBlank(subValues)
@@ -233,14 +232,14 @@ public class Menu2D extends Selector implements ISetup {
         if (index == locators.size())
             return new ArrayList<>();
         List<String> result = new ArrayList<>();
-        WebList list = $$(locators.get(index), parent).setName(getName()).noValidation();
-        for (UIElement element : list) {
+        webList list = $$(locators.get(index), parent).setName(getName()).noValidation();
+        for (com.epam.jdi.light.elements.common.uiElement element : list) {
             result.add(element.getText());
             result.addAll(getValues(inheritParent(element), index + 1));
         }
         return result;
     }
-    private Object inheritParent(UIElement element) {
+    private Object inheritParent(com.epam.jdi.light.elements.common.uiElement element) {
         return inheritLocators ? element : base().parent;
     }
 
@@ -281,7 +280,7 @@ public class Menu2D extends Selector implements ISetup {
     }
 
     @Override
-    public WebList list() {
+    public webList list() {
         By locator = locators.isEmpty()
             ? base().getLocator()
             : NAME_TO_LOCATOR.execute(locators.get(0));

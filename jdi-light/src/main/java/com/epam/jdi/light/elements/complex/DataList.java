@@ -2,7 +2,6 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.pairs.Pair;
@@ -95,7 +94,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
     public int getIndex(String name) {
         int i = list().getStartIndex();
         if (list().map.hasValue() && list().isActualMap()) {
-            for (Pair<String, UIElement> pair : list().map.get().pairs) {
+            for (Pair<String, com.epam.jdi.light.elements.common.uiElement> pair : list().map.get().pairs) {
                 if (ELEMENT.namesEqual.execute(pair.key, name)) {
                     if (list().isActual(pair.value))
                         return i;
@@ -104,7 +103,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
                 i++;
             }
         }
-        for (UIElement element : list().elements(1)) {
+        for (com.epam.jdi.light.elements.common.uiElement element : list().elements(1)) {
             String title = elementTitle(element);
             if (ELEMENT.namesEqual.execute(title, name))
                 return i;

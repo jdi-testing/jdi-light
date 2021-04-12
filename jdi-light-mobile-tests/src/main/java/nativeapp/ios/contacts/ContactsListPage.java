@@ -1,6 +1,6 @@
 package nativeapp.ios.contacts;
 
-import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
+import com.epam.jdi.light.mobile.elements.base.mobileappuielement;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.common.app.ios.SystemButton;
 import com.epam.jdi.light.mobile.elements.composite.ios.app.SearchBar;
@@ -9,7 +9,7 @@ import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 public class ContactsListPage {
 
     @MobileFindBy(accessibilityId = "ContactsListView")
-    public static MobileAppUIElement contactsListView;
+    public static mobileappuielement contactsListView;
 
     @MobileFindBy(accessibilityId = "Groups")
     public static SystemButton groupsButton;
@@ -18,7 +18,7 @@ public class ContactsListPage {
     public static Button addButton;
 
     @MobileFindBy(xpath = "//XCUIElementTypeCell[contains(@name, 'Higgins')]")
-    public static MobileAppUIElement manNameCard;
+    public static mobileappuielement manNameCard;
 
     @MobileFindBy(xpath = "//XCUIElementTypeSearchField[@name='Search']")
     public static SearchBar contactsSearchBar;

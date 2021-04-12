@@ -1,6 +1,6 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
@@ -22,7 +22,7 @@ public class SearchPage extends BaseSelPage {
 
 	@Css(".box") public JList<SearchResult> jsearch2;
 	@Css(".box") public static JList<SearchResult> jsearchS;
-	@Css(".box h3") public static JList<UIElement> jsearchTitle;
+	@Css(".box h3") public static JList<uiElement> jsearchTitle;
 	@XPath("//*[@class='box']/h3[text()=\"%s\"]")
 	public JList<SearchResult> jsearchT2;
 }

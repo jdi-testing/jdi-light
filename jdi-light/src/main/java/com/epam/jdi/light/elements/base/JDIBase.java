@@ -1,8 +1,8 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.*;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.init.rules.AnnotationRule;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
@@ -56,7 +56,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public CacheValue<WebElement> webElement = new CacheValue<>();
     public CacheValue<List<WebElement>> webElements = new CacheValue<>();
     public MapArray<String, JFunc1<WebElement, Boolean>> searchRules = new MapArray<>();
-    public JAction1<UIElement> beforeSearch = null;
+    public JAction1<uiElement> beforeSearch = null;
     protected JFunc<WebElement> getElementFunc = null;
     protected Safe<Integer> timeout = new Safe<>(() -> -1);
     protected Safe<Integer> waitAfterTimeout = new Safe<>(() -> -1);
@@ -104,7 +104,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return searchRules;
     }
     WebElement beforeSearch(WebElement el) {
-        (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new UIElement(el));
+        (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new uiElement(el));
         return el;
     }
     public void setup(SiteInfo info) {
@@ -126,8 +126,8 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         }
     }
 
-    public JDIBase doBefore(JAction1<UIElement> action) { beforeSearch = action; return this; }
-    public JDIBase showBefore() { beforeSearch = UIElement::show; return this; }
+    public JDIBase doBefore(JAction1<uiElement> action) { beforeSearch = action; return this; }
+    public JDIBase showBefore() { beforeSearch = uiElement::show; return this; }
     public JDIBase noValidation() {
         return setSearchRule("Any", ANY_ELEMENT);
     }
@@ -357,7 +357,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 return elements;
         }
     }
-    public WebList list(Object... args) {
+    public webList list(Object... args) {
         return $$(getAll(args), getName());
     }
     public void waitAction(int sec, JAction1<IBaseElement> action) {

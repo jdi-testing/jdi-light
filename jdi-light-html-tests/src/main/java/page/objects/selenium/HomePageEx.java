@@ -1,6 +1,6 @@
 package page.objects.selenium;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +13,7 @@ public class HomePageEx extends PageBase {
     @FindBy(css="form #name") public WebElement userName;
     public WebElement password = $("form #password");
 
-    @UI("form #name") public UIElement userNameUI;
-    public UIElement passwordUI = $("form #password");
-    @UI("#login-button") public UIElement enterUI;
+    @UI("form #name") public uiElement userNameUI;
+    public uiElement passwordUI = $("form #password");
+    @UI("#login-button") public uiElement enterUI;
 }

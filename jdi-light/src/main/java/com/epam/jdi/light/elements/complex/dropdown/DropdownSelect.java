@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.tools.func.JFunc1;
 
@@ -24,8 +24,8 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
     protected Selector selector() {
         return new Selector().setCore(Selector.class, base());
     }
-    public WebList list() {
-        WebList list = selector().list();
+    public webList list() {
+        webList list = selector().list();
         list.setStartIndex(getStartIndex());
         return list;
     }

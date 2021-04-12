@@ -1,7 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.JDebug;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
@@ -251,7 +251,7 @@ public class JdiSettings {
                 SearchContext searchContext = getContext(base);
                 List<WebElement> elements = uiSearch(searchContext, base.getLocator());
                 for (WebElement element : elements) {
-                    String name = new UIElement(base, element).getText();
+                    String name = new uiElement(base, element).getText();
                     if (ELEMENT.namesEqual.execute(name, value))
                         return element;
                 }

@@ -2,9 +2,8 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -20,8 +19,8 @@ public abstract class UIListBase<A extends UISelectAssert<?,?>> extends UIBaseEl
         implements ISelector, SetValue {
     protected int startIndex = ELEMENT.startIndex;
 
-    public WebList list() {
-        WebList webList = new WebList(base()).setup(JDIBase::searchVisible);
+    public webList list() {
+        webList webList = new webList(base()).setup(JDIBase::searchVisible);
         webList.setStartIndex(getStartIndex());
         return webList;
     }
@@ -31,18 +30,18 @@ public abstract class UIListBase<A extends UISelectAssert<?,?>> extends UIBaseEl
     public void setStartIndex(int index) {
         startIndex = index;
     }
-    public UIElement first() { return list().first(); }
-    public UIElement last() {
+    public com.epam.jdi.light.elements.common.uiElement first() { return list().first(); }
+    public com.epam.jdi.light.elements.common.uiElement last() {
         return list().last();
     }
-    public UIElement get(String value) { return list().get(value); }
-    public UIElement get(int index) { return list().get(index); }
+    public com.epam.jdi.light.elements.common.uiElement get(String value) { return list().get(value); }
+    public com.epam.jdi.light.elements.common.uiElement get(int index) { return list().get(index); }
     @JDIAction("Check that '{name}' is displayed") @Override
     public boolean isDisplayed() { return list().isDisplayed(); }
     @JDIAction("Check that '{name}' is visible by user") @Override
-    public boolean isVisible() { return isDisplayed() && list().hasAny(UIElement::isVisible); }
+    public boolean isVisible() { return isDisplayed() && list().hasAny(com.epam.jdi.light.elements.common.uiElement::isVisible); }
     @JDIAction("Check that '{name}' is not visible by user") @Override
-    public boolean isNotVisible() { return isHidden() || list().all(UIElement::isNotVisible); }
+    public boolean isNotVisible() { return isHidden() || list().all(com.epam.jdi.light.elements.common.uiElement::isNotVisible); }
     @Override
     public boolean isEnabled() { return list().isEnabled(); }
     @JDIAction(level = DEBUG) @Override

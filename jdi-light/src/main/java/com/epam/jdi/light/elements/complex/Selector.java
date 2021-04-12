@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIMSelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import org.apache.commons.lang3.ArrayUtils;
@@ -38,8 +38,8 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
     protected Select asSelect() {
         return core().asSelect();
     }
-    public WebList list() {
-        WebList list = $$(asSelect().getOptions(), getName());
+    public webList list() {
+        webList list = $$(asSelect().getOptions(), getName());
         list.setStartIndex(getStartIndex());
         return list;
     }
@@ -151,7 +151,7 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
     @JDIAction("Is '{0}' selected")
     public boolean selected(String value) {
         return core().locator.isTemplate()
-            ? new UIElement(base().get(value)).isSelected()
+            ? new uiElement(base().get(value)).isSelected()
             : selected().trim().equalsIgnoreCase(value.trim());
     }
 

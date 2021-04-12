@@ -2,7 +2,6 @@ package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.angular.elements.common.Tooltip;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -16,7 +15,7 @@ public class TooltipSection extends Section {
 
     /* Tooltip with a custom position */
     @UI("//tooltip-position-example//mat-select")
-    public static UIElement positionTooltipSelector;
+    public static com.epam.jdi.light.elements.common.uiElement positionTooltipSelector;
 
     @UI("//tooltip-position-example/button")
     public static Button positionTooltipButton;
@@ -61,7 +60,7 @@ public class TooltipSection extends Section {
 
     /* Tooltip that demonstrates auto-hiding */
     @UI("//tooltip-auto-hide-example/div")
-    public static UIElement autoHideTooltipContainer;
+    public static com.epam.jdi.light.elements.common.uiElement autoHideTooltipContainer;
 
     @UI("//tooltip-auto-hide-example//button")
     public static Button autoHideTooltipButton;

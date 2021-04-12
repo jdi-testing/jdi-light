@@ -2,9 +2,8 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.table.IGridAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.WebElement;
@@ -46,13 +45,13 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     protected boolean locatorsValidated = false;
     protected int startIndex = ELEMENT.startIndex;
 
-    public WebList webCells() {
+    public webList webCells() {
         return core().finds(allCellsLocator)
             .setName(getName() + " webCells");
     }
     @Override
-    public UIElement core() {
-        UIElement core = super.core();
+    public com.epam.jdi.light.elements.common.uiElement core() {
+        com.epam.jdi.light.elements.common.uiElement core = super.core();
         if (hasRunDrivers() && !locatorsValidated) {
             try {
                 locatorsValidated = true;
@@ -64,7 +63,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         }
         return core;
     }
-    protected void validateLocators(UIElement core) {
+    protected void validateLocators(com.epam.jdi.light.elements.common.uiElement core) {
         if (headerLocator.equals("th") && core.finds("th").isEmpty()) {
             if (core.finds("thead td").isNotEmpty()) {
                 headerLocator = "thead td";
@@ -112,30 +111,30 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     }
 
     @Override
-    public UIElement webCell(int colNum, int rowNum) {
+    public com.epam.jdi.light.elements.common.uiElement webCell(int colNum, int rowNum) {
         return core().find(MessageFormat.format(cellTemplate, colNum, rowNum))
             .setName(format("%s cell(%s,%s)", getName(), colNum, rowNum));
     }
     @Override
-    public WebList webColumn(int colNum) {
+    public webList webColumn(int colNum) {
         int index = getColumnIndex(colNum);
         validateColumnIndex(index);
         return core().finds(columnTemplate, index)
             .setName(format("%s column:%s", getName(), index));
     }
     @Override
-    public WebList webRow(int rowNum) {
+    public webList webRow(int rowNum) {
         validateRowIndex(rowNum);
         return core().finds(rowTemplate, rowNum)
             .setName(format("%s row:%s", getName(), rowNum));
     }
     @Override
-    public WebList headerUI() {
+    public webList headerUI() {
         return core().finds(headerLocator)
             .setName(getName() + " headerUI");
     }
     @Override
-    public WebList footerUI() {
+    public webList footerUI() {
         return core().finds(footerLocator)
             .setName(getName() + " footerUI");
     }
@@ -194,7 +193,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         if (columnsValidated)
             return;
         try {
-            WebList header = headerUI();
+            webList header = headerUI();
             logger.debug("Start column validation");
             List<WebElement> visibleHeader = header.getAll();
             List<WebElement> fullHeader = header.getWebElements();

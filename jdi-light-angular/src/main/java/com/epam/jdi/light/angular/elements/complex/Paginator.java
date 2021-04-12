@@ -4,7 +4,7 @@ import com.epam.jdi.light.angular.asserts.PaginatorAssert;
 import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,39 +15,39 @@ import java.util.stream.Collectors;
 
 public class Paginator extends UIBaseElement<PaginatorAssert> {
 
-    protected UIElement label;
+    protected com.epam.jdi.light.elements.common.uiElement label;
     protected String labelLocator = ".mat-paginator-page-size-label";
 
-    protected UIElement select;
+    protected com.epam.jdi.light.elements.common.uiElement select;
     protected String selectLocator = ".mat-select";
 
     protected MaterialSelectorContainer container;
 
-    protected UIElement range;
+    protected com.epam.jdi.light.elements.common.uiElement range;
     protected String rangeLocator = ".mat-paginator-range-label";
 
-    protected UIElement previous;
+    protected com.epam.jdi.light.elements.common.uiElement previous;
     protected String previousLocator = ".mat-paginator-navigation-previous";
 
-    protected UIElement next;
+    protected com.epam.jdi.light.elements.common.uiElement next;
     protected String nextLocator = ".mat-paginator-navigation-next";
 
     public Paginator() {
-        label = new UIElement();
+        label = new uiElement();
         label.setLocator(labelLocator);
 
-        select = new UIElement();
+        select = new uiElement();
         select.setLocator(selectLocator);
 
         container = new MaterialSelectorContainer();
 
-        range = new UIElement();
+        range = new uiElement();
         range.setLocator(rangeLocator);
 
-        previous = new UIElement();
+        previous = new uiElement();
         previous.setLocator(previousLocator);
 
-        next = new UIElement();
+        next = new uiElement();
         next.setLocator(nextLocator);
     }
 

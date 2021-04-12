@@ -7,11 +7,11 @@ import com.epam.jdi.light.mobile.interfaces.IMobileCoreElement;
 public abstract class MobileBaseElement<A extends UIAssert<?,?>> extends UIBaseElement<A>
         implements IMobileCoreElement {
 
-    protected MobileUIElement mobileElement;
+    protected mobileUIElement mobileElement;
     @Override
-    public MobileUIElement core() {
+    public mobileUIElement core() {
         if (mobileElement == null)
-            mobileElement = new MobileUIElement();
+            mobileElement = new mobileUIElement();
         return mobileElement;
     }
 }

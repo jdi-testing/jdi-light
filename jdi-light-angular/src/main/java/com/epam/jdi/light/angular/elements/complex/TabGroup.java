@@ -3,8 +3,7 @@ package com.epam.jdi.light.angular.elements.complex;
 import com.epam.jdi.light.angular.asserts.TabGroupAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 
 import java.util.List;
@@ -70,15 +69,15 @@ public class TabGroup extends UIBaseElement<TabGroupAssert> implements IsText {
         return new TabGroupAssert().set(this);
     }
 
-    private WebList getTabs() {
+    private webList getTabs() {
         return this.finds("[role='tab']");
     }
 
-    private UIElement getTabByNumber(int tabNumber) {
+    private com.epam.jdi.light.elements.common.uiElement getTabByNumber(int tabNumber) {
         return getTabs().get(tabNumber);
     }
 
-    private UIElement getTabByText(String text) {
+    private com.epam.jdi.light.elements.common.uiElement getTabByText(String text) {
         return getTabs().get(text);
     }
 
@@ -86,7 +85,7 @@ public class TabGroup extends UIBaseElement<TabGroupAssert> implements IsText {
         return getTabs().values();
     }
 
-    private WebList getTabPanelContent() {
+    private webList getTabPanelContent() {
         return this.finds("[role='tabpanel']");
     }
 
@@ -94,11 +93,11 @@ public class TabGroup extends UIBaseElement<TabGroupAssert> implements IsText {
         return getTabPanelContent().values();
     }
 
-    private WebList getTabsLinks() {
+    private webList getTabsLinks() {
         return this.finds("a");
     }
 
-    private UIElement getTabLinkByTitle(String linkText) {
+    private com.epam.jdi.light.elements.common.uiElement getTabLinkByTitle(String linkText) {
         return getTabsLinks().get(linkText);
     }
 

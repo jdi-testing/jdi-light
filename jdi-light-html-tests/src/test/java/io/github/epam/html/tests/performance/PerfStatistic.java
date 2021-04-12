@@ -26,16 +26,16 @@ public class PerfStatistic {
     }
 
     private static PerfStatistic instance;
-    private static PerfStatistic Statistic() {
+    private static PerfStatistic statistic() {
         if (instance == null)
             instance = new PerfStatistic();
         return instance;
     }
 
     public static void addStatistic(String action, Long time) {
-        Statistic().stats.put(action, time);
+        statistic().stats.put(action, time);
     }
-    public static void StartStatistic() {
+    public static void startStatistic() {
         instance = new PerfStatistic();
     }
 
@@ -43,11 +43,11 @@ public class PerfStatistic {
         return toLong(instance.stats.get(action)).average().orElse(-1);
     }
     public static Long maxTime() {
-        return Statistic().values().max().orElse(-1);
+        return statistic().values().max().orElse(-1);
     }
     public static Pair<String, Long> maxAction() {
         Pair<String, Long> maxAction = null;
-        for (Entry<String, Collection<Long>> stat : Statistic().stats.asMap().entrySet()) {
+        for (Entry<String, Collection<Long>> stat : statistic().stats.asMap().entrySet()) {
             Long max = toLong(stat.getValue()).max().orElse(-1);
             if (maxAction == null || max > maxAction.value)
                 maxAction = $(stat.getKey(), max);
@@ -55,11 +55,11 @@ public class PerfStatistic {
         return maxAction;
     }
     public static Long minTime() {
-        return Statistic().values().min().orElse(-1);
+        return statistic().values().min().orElse(-1);
     }
     public static Pair<String, Long> minAction() {
         Pair<String, Long> minAction = null;
-        for (Entry<String, Collection<Long>> stat : Statistic().stats.asMap().entrySet()) {
+        for (Entry<String, Collection<Long>> stat : statistic().stats.asMap().entrySet()) {
             Long min = toLong(stat.getValue()).min().orElse(-1);
             if (minAction == null || min < minAction.value)
                 minAction = $(stat.getKey(), min);
@@ -67,14 +67,14 @@ public class PerfStatistic {
         return minAction;
     }
     public static Double averageTime() {
-        return Statistic().values().average().orElse(-1);
+        return statistic().values().average().orElse(-1);
     }
     public static void printStatistic() {
-        for (Entry<String, Collection<Long>> stat : Statistic().stats.asMap().entrySet())
+        for (Entry<String, Collection<Long>> stat : statistic().stats.asMap().entrySet())
             System.out.println(format("%s:[%s]", stat.getKey(),
                     print(select(stat.getValue(), v -> v+""))));
     }
     public static int actionsCount() {
-        return Statistic().stats.size();
+        return statistic().stats.size();
     }
 }

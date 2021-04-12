@@ -3,9 +3,8 @@ package jdisite.custom;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.JList;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
@@ -18,13 +17,13 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class MultiSelect extends UIListBase<UISelectAssert<?, ?>> implements HasLabel {
     @UI(".caret")
-    UIElement expander;
+    com.epam.jdi.light.elements.common.uiElement expander;
     @UI("ul")
-    UIElement valuesList;
+    com.epam.jdi.light.elements.common.uiElement valuesList;
     @UI("button")
-    UIElement valueText;
+    com.epam.jdi.light.elements.common.uiElement valueText;
     @UI("li")
-    WebList allValues;
+    webList allValues;
     @UI("//a[label[text()='%s']]//input")
     JList<Checkbox> checkboxes;
 

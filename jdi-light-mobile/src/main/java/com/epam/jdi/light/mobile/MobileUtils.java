@@ -1,10 +1,10 @@
 package com.epam.jdi.light.mobile;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
-import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
+import com.epam.jdi.light.mobile.elements.base.mobileappuielement;
 import com.epam.jdi.light.mobile.elements.common.app.ios.MenuItem;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import com.epam.jdi.tools.func.JFunc2;
@@ -61,7 +61,7 @@ public class MobileUtils {
     public static final JFunc2<Object, String, HasTouchActions> GET_BUTTON = (obj, buttonName) -> {
         List<Field> fields = getFields(obj, IsButton.class);
         if (fields.isEmpty())
-            fields = getFieldsExact(obj, MobileAppUIElement.class, UIElement.class);
+            fields = getFieldsExact(obj, mobileappuielement.class, uiElement.class);
         if (!fields.isEmpty()) {
             fields = filter(fields, f ->
                     isInterfaceAnd(getValueField(f, obj).getClass(), HasTouchActions.class, INamed.class));
@@ -94,7 +94,7 @@ public class MobileUtils {
     public static JFunc2<Object, String, HasTouchActions> GET_APP_MENU_ITEM = (obj, buttonName) -> {
         List<Field> fields = getFields(obj, MenuItem.class);
         if (fields.isEmpty())
-            fields = getFieldsExact(obj, MobileAppUIElement.class, UIElement.class);
+            fields = getFieldsExact(obj, mobileappuielement.class, uiElement.class);
         if (!fields.isEmpty()) {
             fields = filter(fields, f ->
                     isInterfaceAnd(getValueField(f, obj).getClass(), HasTouchActions.class, INamed.class));

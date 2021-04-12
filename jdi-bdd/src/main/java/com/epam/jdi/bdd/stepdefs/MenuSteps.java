@@ -1,7 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.elements.complex.Menu;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -14,7 +14,7 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class MenuSteps {
-    public static WebList menu(String name) {
+    public static webList menu(String name) {
        return getList(name, Menu.class);
     }
 

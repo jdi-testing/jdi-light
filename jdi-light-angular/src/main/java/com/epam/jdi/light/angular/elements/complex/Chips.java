@@ -3,8 +3,8 @@ package com.epam.jdi.light.angular.elements.complex;
 import com.epam.jdi.light.angular.asserts.ChipsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
@@ -41,9 +41,9 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
     }
 
     @JDIAction("Get '{name}' chips by text '{0}'")
-    public UIElement getChipsByText(String value) {
-        UIElement element = null;
-        for (UIElement e : getChips()) {
+    public com.epam.jdi.light.elements.common.uiElement getChipsByText(String value) {
+        com.epam.jdi.light.elements.common.uiElement element = null;
+        for (com.epam.jdi.light.elements.common.uiElement e : getChips()) {
             if (e.getText().equalsIgnoreCase(value)) {
                 element = e;
             }
@@ -74,7 +74,7 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
 
     @JDIAction("Select value '{0}' for '{name}'")
     public void select(String value) {
-        WebList options = getOptions(this.matOptions);
+        webList options = getOptions(this.matOptions);
         options.get(value).click();
     }
 
@@ -112,34 +112,34 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
         return new ChipsAssert().set(this);
     }
 
-    protected UIElement getBackdropField() {
-        return new UIElement(By.cssSelector(backdropField));
+    protected com.epam.jdi.light.elements.common.uiElement getBackdropField() {
+        return new uiElement(By.cssSelector(backdropField));
     }
 
     protected Point getPointOutsideField() {
-        UIElement uiElement = getBackdropField();
+        com.epam.jdi.light.elements.common.uiElement uiElement = getBackdropField();
         return new Point(uiElement.core().getRect().
                 getWidth() + 3, uiElement.core().getRect().getHeight() + 3);
     }
 
-    private WebList getChips() {
+    private webList getChips() {
         return this.finds("mat-chip");
     }
 
-    private WebList getOptions(String css) {
-        return new WebList(By.cssSelector(css));
+    private webList getOptions(String css) {
+        return new webList(By.cssSelector(css));
     }
 
-    private WebList getItems() {
+    private webList getItems() {
         click();
-        WebList options = getOptions(matOptions);
+        webList options = getOptions(matOptions);
         click();
         return options;
     }
 
     private List<String> getValues() {
         List<String> values = new ArrayList<>();
-        WebList options = getOptions(this.matOptions);
+        webList options = getOptions(this.matOptions);
         options.forEach(option -> values.add(option.getValue()));
         return values;
     }

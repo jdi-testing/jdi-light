@@ -1,6 +1,6 @@
 package nativeapp.android.apidemos.views;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 
@@ -19,6 +19,6 @@ public class GalleryPage {
     public static Button photoThree;
 
     @MobileFindBy(id = "io.appium.android.apis:id/layout2")
-    public static UIElement galleryLayout;
+    public static uiElement galleryLayout;
 
 }

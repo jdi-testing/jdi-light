@@ -1,9 +1,9 @@
 package io.github.com;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.Menu;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
@@ -42,16 +42,16 @@ public class StaticSite {
 	public static SearchPage searchPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
-	@Css("[ui=label]") public static WebList navigationL;
-	@Css("[ui=label]") public static UIElement navigationElement;
+	@Css("[ui=label]") public static webList navigationL;
+	@Css("[ui=label]") public static uiElement navigationElement;
 	@WaitAfterAction
-	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList navigationS;
+	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static webList navigationS;
 	//TODO
 	//@UI("[ui=label][*'%s']") public static WebList navigationS;
 	@UI(".sidebar-menu [ui=label]") public static Menu leftMenu;
 	//TODO
 	//@UI(".sidebar-menu span<[*'%s']<<") public static Menu leftMenu;
-	@UI("//*[@class='sidebar-menu']//span/..//*[text()='%s']/../..") public static WebList leftMenuList;
+	@UI("//*[@class='sidebar-menu']//span/..//*[text()='%s']/../..") public static webList leftMenuList;
 	//TODO
 	//@UI(".sidebar-menu span<[*'%s']<<") public static WebList leftMenuList;
 	@UI(".sidebar-menu span") public static JList<MenuItem> menu;

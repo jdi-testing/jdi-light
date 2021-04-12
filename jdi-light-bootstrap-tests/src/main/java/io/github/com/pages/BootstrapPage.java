@@ -1,8 +1,8 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.complex.Checklist;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -22,7 +22,7 @@ import io.github.com.sections.DismissAlert;
 import io.github.com.sections.Slide;
 
 public class BootstrapPage extends WebPage {
-    public static UIElement inputGroupWrap, inputGroupNowrap;
+    public static uiElement inputGroupWrap, inputGroupNowrap;
     public static Badge badge;
     public static Button redButton, doubleButton, disabledButton, increaseProgress,
         decreaseProgress, resetProgress;
@@ -60,6 +60,6 @@ public class BootstrapPage extends WebPage {
     public static Loading spinnerRotate;
 
     public static Carousel<Slide, SlideInfo> carousel;
-    @UI("#list-example>a") public static WebList scrollSpy;
+    @UI("#list-example>a") public static webList scrollSpy;
 
 }

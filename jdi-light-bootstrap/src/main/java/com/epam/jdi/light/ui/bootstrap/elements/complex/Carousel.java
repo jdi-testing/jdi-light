@@ -3,10 +3,9 @@ package com.epam.jdi.light.ui.bootstrap.elements.complex;
 import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
@@ -35,12 +34,13 @@ public class Carousel<T extends ICoreElement, D> extends UIBaseElement<TextAsser
 	protected String indicatorsLocator = "li[data-slide-to]";
 
 	@UI(".carousel-item") @GetAny public DataList<T, D> slides;
-	@UI(".carousel-item") @VisualCheck UIElement activeSlide;
+	@UI(".carousel-item") @VisualCheck
+    com.epam.jdi.light.elements.common.uiElement activeSlide;
 
 	public T activeSlide() {
 		return toT(activeSlide);
 	}
-	protected T toT(UIElement el) {
+	protected T toT(com.epam.jdi.light.elements.common.uiElement el) {
 		return initT(el, this, slides.initClass);
 	}
 	public D activeSlideData() {
@@ -55,7 +55,7 @@ public class Carousel<T extends ICoreElement, D> extends UIBaseElement<TextAsser
 	public void previous() {
 		linked(prevLocator, "previous").click();
 	}
-	private WebList indicators() {
+	private webList indicators() {
 		return linkedList(indicatorsLocator, "indicators");
 	}
 	@JDIAction("Open slide '{0}'")

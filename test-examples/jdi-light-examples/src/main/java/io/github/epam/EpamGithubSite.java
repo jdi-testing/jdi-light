@@ -1,6 +1,6 @@
 package io.github.epam;
 
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
@@ -26,7 +26,7 @@ public class EpamGithubSite {
 	@Url("/complex-table.html") @Title("Complex Table")
 	public static WebPage complextablePage;
 	@Css("[ui=label]") public static List<WebElement> navigation;
-	@Css("[ui=label]") public static WebList navigationL;
+	@Css("[ui=label]") public static webList navigationL;
 
 	@Css("header") public static Header header;
 	@Css("footer") public static Footer footer;

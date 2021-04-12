@@ -1,8 +1,8 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.Form;
@@ -20,53 +20,53 @@ import java.util.List;
  */
 public class UIFactory {
     @Deprecated
-    public static UIElement element(@MarkupLocator String locator) {
+    public static uiElement element(@MarkupLocator String locator) {
         return JDITalk.element(locator);
     }
     @Deprecated
-    public static UIElement element(@MarkupLocator By byLocator) {
+    public static uiElement element(@MarkupLocator By byLocator) {
         return JDITalk.element(byLocator);
     }
-    public static UIElement $(@MarkupLocator String locator) {
+    public static uiElement $(@MarkupLocator String locator) {
         return JDITalk.element(locator);
     }
-    public static UIElement $(@MarkupLocator String locator, Object parent) {
+    public static uiElement $(@MarkupLocator String locator, Object parent) {
         return JDITalk.element(locator).setup(j->j.setParent(parent));
     }
-    public static UIElement $(@MarkupLocator By locator) {
+    public static uiElement $(@MarkupLocator By locator) {
         return JDITalk.element(locator);
     }
-    public static UIElement $(WebElement webElement) {
-        return new UIElement(webElement);
+    public static uiElement $(WebElement webElement) {
+        return new uiElement(webElement);
     }
-    public static UIElement $(@MarkupLocator By locator, Object parent) {
+    public static uiElement $(@MarkupLocator By locator, Object parent) {
         return JDITalk.element(locator).setup(j->j.setParent(parent));
     }
     @Deprecated
-    public static WebList list(@MarkupLocator String locator) {
+    public static webList list(@MarkupLocator String locator) {
         return JDITalk.list(locator);
     }
     @Deprecated
-    public static WebList list(@MarkupLocator By byLocator) {
+    public static webList list(@MarkupLocator By byLocator) {
         return JDITalk.list(byLocator);
     }
     @Deprecated
-    public static WebList list(List<WebElement> els, String name) {
+    public static webList list(List<WebElement> els, String name) {
         return JDITalk.list(els, name);
     }
-    public static WebList $$(@MarkupLocator String locator) {
+    public static webList $$(@MarkupLocator String locator) {
         return JDITalk.list(locator);
     }
-    public static WebList $$(@MarkupLocator String locator, Object parent) {
+    public static webList $$(@MarkupLocator String locator, Object parent) {
         return JDITalk.list(locator).setup(j->j.setParent(parent));
     }
-    public static WebList $$(@MarkupLocator By locator) {
+    public static webList $$(@MarkupLocator By locator) {
         return JDITalk.list(locator);
     }
-    public static WebList $$(@MarkupLocator By locator, Object parent) {
+    public static webList $$(@MarkupLocator By locator, Object parent) {
         return JDITalk.list(locator).setup(j->j.setParent(parent));
     }
-    public static WebList $$(List<WebElement> els, String name) {
+    public static webList $$(List<WebElement> els, String name) {
         return JDITalk.list(els, name);
     }
 

@@ -1,6 +1,6 @@
 package page.objects.jdi;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -14,7 +14,7 @@ public class HomePageWebEx extends WebPageBase {
     @FindBy(css="form #name") public WebElement userName;
     public WebElement password = $("form #password");
 
-    @UI("form #name") public UIElement userNameUI;
-    public UIElement loginButton,
+    @UI("form #name") public uiElement userNameUI;
+    public uiElement loginButton,
             passwordUI = $("form #password");
 }

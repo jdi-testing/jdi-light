@@ -2,9 +2,9 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.complex.IList;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
@@ -36,7 +36,7 @@ import static java.util.Arrays.asList;
  */
 public class Line implements IList<String>, IBaseElement {
     private JFunc<MultiMap<String, String>> dataMap;
-    private WebList elements;
+    private webList elements;
     private List<String> headers;
     protected int startIndex = ELEMENT.startIndex;
 
@@ -48,12 +48,12 @@ public class Line implements IList<String>, IBaseElement {
         this.list = new ArrayList<>(list);
         this.headers = new ArrayList<>(headers);
         this.data = new MultiMap<>(headers, list).ignoreKeyCase();
-        this.elements = new WebList(base);
+        this.elements = new webList(base);
     }
     public Line(List<String> headers, List<WebElement> elements, String name) {
-        this(headers, new WebList(elements, name), name);
+        this(headers, new webList(elements, name), name);
     }
-    public Line(List<String> headers, WebList elements, String name) {
+    public Line(List<String> headers, webList elements, String name) {
         if (headers == null) {
             throw exception("Failed to create Line. Header has null value");
         }
@@ -99,26 +99,26 @@ public class Line implements IList<String>, IBaseElement {
     public List<String> elements(int minAmount) {
         return getData(minAmount).values();
     }
-    public MultiMap<String, UIElement> uiMap() {
+    public MultiMap<String, uiElement> uiMap() {
         return new MultiMap<>(headers, elements.indexFromZero()).ignoreKeyCase();
     }
-    public WebList uiElements() {
+    public webList uiElements() {
         return elements;
     }
     public void saveCellsImages() {
         String unique = Timer.nowMSecs();
-        List<UIElement> result = new ArrayList<>();
+        List<uiElement> result = new ArrayList<>();
         int i = 0;
-        for (UIElement element : elements) {
+        for (uiElement element : elements) {
             element.show();
             element.varName = headers.get(i++)+unique;
             element.makePhoto();
             result.add(element);
         }
-        elements = new WebList(headers, result);
+        elements = new webList(headers, result);
     }
     public boolean visualCompareTo(Line line) {
-        for (Pair<String, UIElement> cell : uiMap())
+        for (Pair<String, uiElement> cell : uiMap())
             try {
                 cell.value.visualValidation(line.uiMap().get(cell.key));
             } catch (Exception ex) { return false; }
@@ -188,7 +188,7 @@ public class Line implements IList<String>, IBaseElement {
                 if (field == null) continue;
                 try {
                     IBaseElement ui = (IBaseElement) getValueField(field, instance);
-                    UIElement listElement = elements.get(i++);
+                    uiElement listElement = elements.get(i++);
                     WebElement element = ui.base().hasLocator()
                         ? listElement.findElement(ui.base().getLocator())
                         : listElement.getWebElement();

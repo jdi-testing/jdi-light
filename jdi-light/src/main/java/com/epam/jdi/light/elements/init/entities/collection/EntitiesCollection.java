@@ -1,8 +1,8 @@
 package com.epam.jdi.light.elements.init.entities.collection;
 
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
@@ -86,13 +86,13 @@ public class EntitiesCollection {
             }
         }
     }
-    public static <T extends UIListBase> WebList getList(String name, Class<T> type) {
+    public static <T extends UIListBase> webList getList(String name, Class<T> type) {
         Object element = getElement(name);
         if (element != null) {
             if (isClass(element.getClass(), type))
                 return ((T) element).list();
-            if (isClass(element.getClass(), WebList.class))
-                return (WebList) element;
+            if (isClass(element.getClass(), webList.class))
+                return (webList) element;
         }
         throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
@@ -152,7 +152,7 @@ public class EntitiesCollection {
             readElementsFromJson();
         return jsonElements.keys().contains(name)
             ? $(jsonElements.get(name))
-            : new UIElement().setName(name);
+            : new uiElement().setName(name);
     }
 
     static Object getElementInSection(String name, String section) {

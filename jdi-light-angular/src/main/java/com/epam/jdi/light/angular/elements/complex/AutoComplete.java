@@ -3,8 +3,7 @@ package com.epam.jdi.light.angular.elements.complex;
 import com.epam.jdi.light.angular.asserts.AutoCompleteAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
@@ -61,7 +60,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Select value {0} for '{name}'")
     public void select(String value) {
-        WebList options = getOptions(optionsCss);
+        webList options = getOptions(optionsCss);
         options.get(value).click();
     }
 
@@ -75,13 +74,13 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     @JDIAction("Get display value for '{name}'")
     public String displayValue() {
         String displayValueXpath = displayValueCss + "[" + getAutocompleteUniqueAttribute() + "]";
-        WebList labels = getOptions(displayValueXpath);
+        webList labels = getOptions(displayValueXpath);
         return (!labels.isEmpty()) ? labels.get(1).getText() : "";
     }
 
     public Boolean isOptionHighlighted(String value) {
-        WebList values = getOptions(optionsCss);
-        UIElement element = values.get(value);
+        webList values = getOptions(optionsCss);
+        com.epam.jdi.light.elements.common.uiElement element = values.get(value);
         String selected = element.core().getAttribute("class");
         return selected.contains("mat-active");
     }
@@ -113,16 +112,16 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return text();
     }
 
-    private WebList items() {
+    private webList items() {
         click();
-        WebList options = getOptions(optionsCss);
+        webList options = getOptions(optionsCss);
         click();
         return options;
     }
 
-    private WebList items(String inputValue) {
+    private webList items(String inputValue) {
         input(inputValue);
-        WebList options = getOptions(optionsCss);
+        webList options = getOptions(optionsCss);
         click();
         return options;
     }
@@ -141,19 +140,19 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     private List<String> getValues() {
         List<String> values = new ArrayList<>();
-        WebList options = getOptions(optionsCss);
+        webList options = getOptions(optionsCss);
         options.forEach(option -> values.add(option.getValue()));
         return values;
     }
 
-    private HashMap<UIElement, List<WebElement>> groupsAndOptions() {
-        WebList groups = getOptions(optionsGroupsCss);
-        HashMap<UIElement, List<WebElement>> groupsAndOptions = new HashMap<>();
+    private HashMap<com.epam.jdi.light.elements.common.uiElement, List<WebElement>> groupsAndOptions() {
+        webList groups = getOptions(optionsGroupsCss);
+        HashMap<com.epam.jdi.light.elements.common.uiElement, List<WebElement>> groupsAndOptions = new HashMap<>();
         if (groups.isEmpty()) {
             return null;
         }
         groups.forEach(group -> {
-            WebList curOptions = getOptions(optionsGroupsAndValuesCss + ">" + optionsCss);
+            webList curOptions = getOptions(optionsGroupsAndValuesCss + ">" + optionsCss);
             groupsAndOptions.put(group, curOptions.getWebElements());
         });
         return groupsAndOptions;
@@ -161,7 +160,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Get groups for '{name}'")
     public List<String> groups() {
-        WebList groupsList = getOptions(optionsGroupsCss);
+        webList groupsList = getOptions(optionsGroupsCss);
         if (groupsList.isEmpty()) {
             String emptyArray[] = {""};
             return Arrays.asList(emptyArray);
@@ -175,7 +174,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Get groups and options for '{name}'")
     public HashMap<String, List<String>> groupsAndOptionsValues() {
-        HashMap<UIElement, List<WebElement>> groupsAndOptionsMap = groupsAndOptions();
+        HashMap<com.epam.jdi.light.elements.common.uiElement, List<WebElement>> groupsAndOptionsMap = groupsAndOptions();
         HashMap<String, List<String>> groupsAndOptionsValues = new HashMap<>();
         if (groupsAndOptionsMap == null) {
             String emptyArray[] = {""};
@@ -192,12 +191,12 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return groupsAndOptionsValues;
     }
 
-    private WebList getOptions() {
-        return new WebList(By.cssSelector(optionsCss));
+    private webList getOptions() {
+        return new webList(By.cssSelector(optionsCss));
     }
 
-    private WebList getOptions(String css) {
-        return new WebList(By.cssSelector(css));
+    private webList getOptions(String css) {
+        return new webList(By.cssSelector(css));
     }
 
     private String getAutocompleteUniqueAttribute() {

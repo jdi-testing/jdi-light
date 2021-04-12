@@ -3,24 +3,24 @@ package com.epam.jdi.light.angular.elements.complex;
 import com.epam.jdi.light.angular.asserts.SnackbarAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 
 /**
  * To see an example of Snackbar web element please visit https://material.angular.io/components/snack-bar/overview.
  */
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> {
-    protected UIElement message;
+    protected com.epam.jdi.light.elements.common.uiElement message;
     protected String messageLocator = "./span";
 
-    protected UIElement action;
+    protected com.epam.jdi.light.elements.common.uiElement action;
     protected String actionLocator = ".//button";
 
     public Snackbar() {
-        message = new UIElement();
+        message = new uiElement();
         message.core().setLocator(messageLocator);
 
-        action = new UIElement();
+        action = new uiElement();
         action.core().setLocator(actionLocator);
     }
 

@@ -4,7 +4,7 @@ import com.epam.jdi.light.angular.asserts.RippleAssert;
 import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
@@ -225,7 +225,7 @@ public class Ripple extends UIBaseElement<RippleAssert> {
 
     @JDIAction(level = DEBUG, timeout = 0)
     public void clearRadius() {
-        UIElement radiusInput = getRadiusInput();
+        com.epam.jdi.light.elements.common.uiElement radiusInput = getRadiusInput();
         if (!radiusInput.getValue().isEmpty()) {
             radiusInput.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
             radiusInput.click(getOutsidePoint().getX(), getOutsidePoint().getY());
@@ -234,7 +234,7 @@ public class Ripple extends UIBaseElement<RippleAssert> {
 
     @JDIAction(level = DEBUG, timeout = 0)
     public void clearColor() {
-        UIElement colorInput = getColorInput();
+        com.epam.jdi.light.elements.common.uiElement colorInput = getColorInput();
         if (!colorInput.getValue().isEmpty()) {
             colorInput.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
             colorInput.click(getOutsidePoint().getX(), getOutsidePoint().getY());
@@ -246,42 +246,42 @@ public class Ripple extends UIBaseElement<RippleAssert> {
         return new RippleAssert().set(this);
     }
 
-    protected UIElement container() {
-        return new UIElement(By.xpath(String.format(containerLocator, core().locator.printLocator()
+    protected com.epam.jdi.light.elements.common.uiElement container() {
+        return new uiElement(By.xpath(String.format(containerLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement getRipple() {
-        return new UIElement(By.xpath(String.format(rippleLocator, core().locator.printLocator()
+    protected com.epam.jdi.light.elements.common.uiElement getRipple() {
+        return new uiElement(By.xpath(String.format(rippleLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement centeredCheckbox() {
-        return new UIElement(By.xpath(String.format(centeredCheckboxLocator,
+    protected com.epam.jdi.light.elements.common.uiElement centeredCheckbox() {
+        return new uiElement(By.xpath(String.format(centeredCheckboxLocator,
                                                     core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement disabledCheckbox() {
-        return new UIElement(By.xpath(String.format(disabledCheckboxLocator,
+    protected com.epam.jdi.light.elements.common.uiElement disabledCheckbox() {
+        return new uiElement(By.xpath(String.format(disabledCheckboxLocator,
                                                     core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement unboundedCheckbox() {
-        return new UIElement(By.xpath(String.format(unboundedCheckboxLocator,
+    protected com.epam.jdi.light.elements.common.uiElement unboundedCheckbox() {
+        return new uiElement(By.xpath(String.format(unboundedCheckboxLocator,
                                                     core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement getRadiusInput() {
-        return new UIElement(By.xpath(String.format(radiusLocator,
+    protected com.epam.jdi.light.elements.common.uiElement getRadiusInput() {
+        return new uiElement(By.xpath(String.format(radiusLocator,
                                                     core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement getColorInput() {
-        return new UIElement(By.xpath(String.format(colorLocator,
+    protected com.epam.jdi.light.elements.common.uiElement getColorInput() {
+        return new uiElement(By.xpath(String.format(colorLocator,
                                                     core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }

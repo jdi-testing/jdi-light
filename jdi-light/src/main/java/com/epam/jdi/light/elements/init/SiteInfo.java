@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.tools.DataClass;
@@ -42,7 +42,7 @@ public class SiteInfo extends DataClass<SiteInfo> {
             : "";
     }
     public Object instance;
-    public UIElement core() {
+    public uiElement core() {
         return ((ICoreElement) instance).core();
     }
     public IBaseElement base() {

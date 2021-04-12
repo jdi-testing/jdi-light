@@ -1,11 +1,11 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 public class DropClass {
-    UIElement dragElement;
+    uiElement dragElement;
 
     public DropClass(String locator) {
         this.dragElement = $(locator);

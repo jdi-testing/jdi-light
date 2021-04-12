@@ -1,6 +1,6 @@
 package selenium.site;
 
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
@@ -22,7 +22,7 @@ public class SiteJdi {
     @FindBy(css = ".profile-photo [ui=label]") public static WebElement userName;
 
     @FindBy(css = ".sidebar-menu [ui=label]")
-    public static WebList navigation;
+    public static webList navigation;
 
     @Step("Login")
     public static void login(User user) {

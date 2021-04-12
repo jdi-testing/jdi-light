@@ -1,6 +1,6 @@
 package page.objects.selenium;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +16,7 @@ public class HomePage {
     public WebElement password = $("form #password");
     @FindBy(id = "login-button") public WebElement enter;
 
-    @UI("form #name") public UIElement userNameUI;
-    public UIElement passwordUI = $("form #password");
+    @UI("form #name") public uiElement userNameUI;
+    public uiElement passwordUI = $("form #password");
     @UI("#login-button") public WebElement enterUI;
 }

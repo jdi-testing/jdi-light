@@ -3,7 +3,6 @@ package com.epam.jdi.light.angular.elements.common;
 import com.epam.jdi.light.angular.asserts.SliderAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import org.openqa.selenium.Keys;
@@ -51,9 +50,9 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
     public void setupValue(double value) {
         core().setAttribute("aria-valuenow", value + "");
 
-        UIElement sliderTrackBackground = core().find(".mat-slider-track-background");
-        UIElement sliderTrackFill = core().find(".mat-slider-track-fill");
-        UIElement sliderThumbContainer = core().find(".mat-slider-thumb-container");
+        com.epam.jdi.light.elements.common.uiElement sliderTrackBackground = core().find(".mat-slider-track-background");
+        com.epam.jdi.light.elements.common.uiElement sliderTrackFill = core().find(".mat-slider-track-fill");
+        com.epam.jdi.light.elements.common.uiElement sliderThumbContainer = core().find(".mat-slider-thumb-container");
 
         reflectSliderChangeOnUI(value, sliderTrackBackground, sliderTrackFill, sliderThumbContainer);
     }
@@ -61,14 +60,14 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
     public void setValue(String value) {
         core().setAttribute("aria-valuenow", value);
 
-        UIElement sliderTrackBackground = core().find(".mat-slider-track-background");
-        UIElement sliderTrackFill = core().find(".mat-slider-track-fill");
-        UIElement sliderThumbContainer = core().find(".mat-slider-thumb-container");
+        com.epam.jdi.light.elements.common.uiElement sliderTrackBackground = core().find(".mat-slider-track-background");
+        com.epam.jdi.light.elements.common.uiElement sliderTrackFill = core().find(".mat-slider-track-fill");
+        com.epam.jdi.light.elements.common.uiElement sliderThumbContainer = core().find(".mat-slider-thumb-container");
 
         reflectSliderChangeOnUI(Double.parseDouble(value), sliderTrackBackground, sliderTrackFill, sliderThumbContainer);
     }
 
-    private void reflectSliderChangeOnUI(double value, UIElement sliderTrackBackground, UIElement sliderTrackFill, UIElement sliderThumbContainer) {
+    private void reflectSliderChangeOnUI(double value, com.epam.jdi.light.elements.common.uiElement sliderTrackBackground, com.epam.jdi.light.elements.common.uiElement sliderTrackFill, com.epam.jdi.light.elements.common.uiElement sliderThumbContainer) {
         double max = max();
         String currentTrackBackground = sliderTrackBackground.attr("style");
         String currentTrackFill = sliderTrackFill.attr("style");
@@ -100,7 +99,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
         core().find(".mat-slider-thumb").dragAndDropTo(xOffset, 0);
     }
 
-    private Double getStepInPixels(UIElement uiElement) {
+    private Double getStepInPixels(com.epam.jdi.light.elements.common.uiElement uiElement) {
         return core().getSize().width / 100.0;
     }
 

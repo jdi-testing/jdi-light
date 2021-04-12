@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
-import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
+import com.epam.jdi.light.mobile.elements.base.mobileappuielement;
 import com.epam.jdi.light.mobile.elements.common.app.ITextField;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
@@ -17,7 +17,7 @@ public class TextField extends MobileAppBaseElement<TextAssert>
 
     public void setValue(String value) {
         core().tap();
-        MobileAppUIElement continueButton =
+        mobileappuielement continueButton =
                 $("//XCUIElementTypeOther[@name='UIContinuousPathIntroductionView']" +
                         "//XCUIElementTypeButton[@name='Continue']");
         if (continueButton.isDisplayed()) {

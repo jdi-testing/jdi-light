@@ -1,6 +1,5 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -23,7 +22,7 @@ public class Header extends Section {
 	public static Button userName;
 	public static Image epamLogo;
 
-	@UI(".search-field input") static UIElement searchInput;
+	@UI(".search-field input") static com.epam.jdi.light.elements.common.uiElement searchInput;
 	@UI(".icon-search") static WebElement searchIcon;
 	@UI(".icon-search.active") static WebElement doSearch;
 

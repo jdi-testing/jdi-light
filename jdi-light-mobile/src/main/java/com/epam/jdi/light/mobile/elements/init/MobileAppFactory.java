@@ -3,8 +3,8 @@ package com.epam.jdi.light.mobile.elements.init;
 import com.epam.jdi.light.elements.init.UIFactory;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
-import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
-import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
+import com.epam.jdi.light.mobile.elements.base.mobileappuielement;
+import com.epam.jdi.light.mobile.elements.base.mobileUIElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -19,42 +19,42 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class MobileAppFactory extends UIFactory {
 
-    public static MobileAppUIElement element(@MarkupLocator String locator) {
+    public static mobileappuielement element(@MarkupLocator String locator) {
         return locator.matches("[A-Z].*]")
-                ? new MobileAppUIElement().setName(locator)
+                ? new mobileappuielement().setName(locator)
                 : element(defineLocator(locator));
     }
 
-    public static MobileAppUIElement element(@MarkupLocator By byLocator) {
-        return new MobileAppUIElement(byLocator);
+    public static mobileappuielement element(@MarkupLocator By byLocator) {
+        return new mobileappuielement(byLocator);
     }
 
-    public static MobileAppUIElement $(@MarkupLocator String locator) {
+    public static mobileappuielement $(@MarkupLocator String locator) {
         return element(locator);
     }
 
-    public static MobileAppUIElement $(@MarkupLocator String locator, Object parent) {
+    public static mobileappuielement $(@MarkupLocator String locator, Object parent) {
         return element(locator).setup(j -> j.setParent(parent));
     }
 
-    public static MobileAppUIElement $(@MarkupLocator By locator) {
+    public static mobileappuielement $(@MarkupLocator By locator) {
         return element(locator);
     }
 
-    public static MobileAppUIElement $(WebElement webElement) {
-        return new MobileAppUIElement(webElement);
+    public static mobileappuielement $(WebElement webElement) {
+        return new mobileappuielement(webElement);
     }
 
-    public static MobileAppUIElement $(@MarkupLocator By locator, Object parent) {
+    public static mobileappuielement $(@MarkupLocator By locator, Object parent) {
         return element(locator).setup(j -> j.setParent(parent));
     }
 
-    public static MobileAppUIElement $(MobileAppBaseElement appBaseElement, String valueToFilter) {
+    public static mobileappuielement $(MobileAppBaseElement appBaseElement, String valueToFilter) {
         new WebDriverWait(getDriver(), 2).until(ExpectedConditions
                 .presenceOfAllElementsLocatedBy(appBaseElement.core().getLocator()));
-        List<MobileAppUIElement> originalElementList = appBaseElement.core().getWebElements()
-                .stream().map(MobileAppUIElement::new).collect(Collectors.toList());
-        MobileAppUIElement element = originalElementList.stream()
+        List<mobileappuielement> originalElementList = appBaseElement.core().getWebElements()
+                .stream().map(mobileappuielement::new).collect(Collectors.toList());
+        mobileappuielement element = originalElementList.stream()
                 .filter(item -> item.getText().contains(valueToFilter))
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException(
@@ -62,11 +62,11 @@ public class MobileAppFactory extends UIFactory {
         return element;
     }
 
-    public static int sizeOfList(MobileUIElement appBaseElement) {
+    public static int sizeOfList(mobileUIElement appBaseElement) {
         new WebDriverWait(getDriver(), 2).until(ExpectedConditions
                 .presenceOfAllElementsLocatedBy(appBaseElement.core().getLocator()));
-        List<MobileAppUIElement> originalElementList = appBaseElement.core().getWebElements()
-                .stream().map(MobileAppUIElement::new).collect(Collectors.toList());
+        List<mobileappuielement> originalElementList = appBaseElement.core().getWebElements()
+                .stream().map(mobileappuielement::new).collect(Collectors.toList());
 
         return originalElementList.size();
     }

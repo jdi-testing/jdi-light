@@ -4,7 +4,7 @@ import com.epam.jdi.light.angular.asserts.MaterialSelectorAssert;
 import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.common.uiElement;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import org.openqa.selenium.By;
@@ -209,8 +209,8 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      *
      * @return UIElement with hint text
      */
-    public UIElement hint() {
-        return new UIElement(By.xpath(String.format(hintLocator,
+    public com.epam.jdi.light.elements.common.uiElement hint() {
+        return new uiElement(By.xpath(String.format(hintLocator,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
@@ -220,8 +220,8 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      *
      * @return UIElement with error text
      */
-    public UIElement error() {
-        return new UIElement(By.xpath(String.format(errorLocator,
+    public com.epam.jdi.light.elements.common.uiElement error() {
+        return new uiElement(By.xpath(String.format(errorLocator,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
@@ -231,8 +231,8 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
         return new MaterialSelectorAssert().set(this);
     }
 
-    protected UIElement toggle() {
-        return new UIElement(By.xpath(String.format(toggle,
+    protected com.epam.jdi.light.elements.common.uiElement toggle() {
+        return new uiElement(By.xpath(String.format(toggle,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }

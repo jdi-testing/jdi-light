@@ -4,11 +4,11 @@ import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
-import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
+import com.epam.jdi.light.mobile.elements.base.mobileUIElement;
 
 public class Text extends MobileBaseElement<TextAssert> implements HasValue, IsText {
     @Override
-    public MobileUIElement core() {
+    public mobileUIElement core() {
         return super.core();
     }
 

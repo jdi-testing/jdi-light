@@ -4,8 +4,8 @@ import com.epam.jdi.light.angular.asserts.ExpansionPanelAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.complex.webList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -45,8 +45,8 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
 
     @JDIAction(value = "Expand '{name}' panel by index '{0}'", timeout = 1)
     public void expand(final int indexNumber) {
-        List<UIElement> expansionIndicator = getExpansionIndicatorLocator();
-        List<UIElement> icons = getIconsLocator();
+        List<com.epam.jdi.light.elements.common.uiElement> expansionIndicator = getExpansionIndicatorLocator();
+        List<com.epam.jdi.light.elements.common.uiElement> icons = getIconsLocator();
         boolean isCollapsed = isCollapsed(indexNumber);
         if (!expansionIndicator.isEmpty() && isCollapsed) {
             expansionIndicator.get(indexNumber).click();
@@ -61,8 +61,8 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
 
     @JDIAction(value = "Collapse '{name}' panel by index '{0}'", timeout = 1)
     public void collapse(final int indexNumber) {
-        List<UIElement> expansionIndicator = getExpansionIndicatorLocator();
-        List<UIElement> icons = getIconsLocator();
+        List<com.epam.jdi.light.elements.common.uiElement> expansionIndicator = getExpansionIndicatorLocator();
+        List<com.epam.jdi.light.elements.common.uiElement> icons = getIconsLocator();
         if (!expansionIndicator.isEmpty() && isExpanded(indexNumber)) {
             expansionIndicator.get(indexNumber).click();
         } else if (!icons.isEmpty() && isExpanded(indexNumber)) {
@@ -81,10 +81,10 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
 
     @JDIAction("Is '{name}' '{0}' panel collapsed")
     public boolean isCollapsed(final int indexNumber) {
-        UIElement expansionHeader = getHeadersLocator().get(indexNumber);
+        com.epam.jdi.light.elements.common.uiElement expansionHeader = getHeadersLocator().get(indexNumber);
         expansionHeader.waitFor();
         boolean isHeaderExpanded = expansionHeader.attr("aria-expanded").contains("false");
-        UIElement expansionContent = getContentsLocator().get(indexNumber);
+        com.epam.jdi.light.elements.common.uiElement expansionContent = getContentsLocator().get(indexNumber);
         expansionContent.waitFor();
         boolean isContentHidden = expansionContent.attr("style").contains("visibility: hidden");
         return isHeaderExpanded && isContentHidden;
@@ -148,63 +148,63 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
         return new ExpansionPanelAssert().set(this);
     }
 
-    protected List<UIElement> getHeadersLocator() {
-        return new WebList(By.xpath(String.format(headersLocator, core().locator.printLocator()
+    protected List<com.epam.jdi.light.elements.common.uiElement> getHeadersLocator() {
+        return new webList(By.xpath(String.format(headersLocator, core().locator.printLocator()
             .replace(smartSharp, "") .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected List<UIElement> getContentsLocator() {
-        return new WebList(By.xpath(String.format(contentsLocator, this.core().locator.printLocator()
+    protected List<com.epam.jdi.light.elements.common.uiElement> getContentsLocator() {
+        return new webList(By.xpath(String.format(contentsLocator, this.core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected List<UIElement> getContentBodiesLocator() {
-        return new WebList(By.xpath(String.format(contentBodiesLocator, this.core().locator
+    protected List<com.epam.jdi.light.elements.common.uiElement> getContentBodiesLocator() {
+        return new webList(By.xpath(String.format(contentBodiesLocator, this.core().locator
             .printLocator().replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected UIElement getInputLocator(final String placeholder) {
-        return new UIElement(By.xpath(String.format(inputLocator, this.core().locator.printLocator()
+    protected com.epam.jdi.light.elements.common.uiElement getInputLocator(final String placeholder) {
+        return new uiElement(By.xpath(String.format(inputLocator, this.core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""), placeholder)));
     }
 
-    protected UIElement getNextButtonLocator(final String tittle) {
-        return new UIElement(By.xpath(String.format(nextButtonLocator, this.core().locator
+    protected com.epam.jdi.light.elements.common.uiElement getNextButtonLocator(final String tittle) {
+        return new uiElement(By.xpath(String.format(nextButtonLocator, this.core().locator
             .printLocator().replace(smartSharp, "").replace(cssSharp, "").replace("'", ""), tittle)));
     }
 
-    protected UIElement getPreviousButtonLocator(final String tittle) {
-        return new UIElement(By.xpath(String.format(previousButtonLocator,
+    protected com.epam.jdi.light.elements.common.uiElement getPreviousButtonLocator(final String tittle) {
+        return new uiElement(By.xpath(String.format(previousButtonLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""), tittle)));
     }
 
-    protected UIElement getEndButtonLocator(final String tittle) {
-        return new UIElement(By.xpath(String.format(endButtonLocator,
+    protected com.epam.jdi.light.elements.common.uiElement getEndButtonLocator(final String tittle) {
+        return new uiElement(By.xpath(String.format(endButtonLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""), tittle)));
     }
 
-    protected List<UIElement> getTitlesLocator() {
-        return new WebList(By.xpath(String.format(titlesLocator,
+    protected List<com.epam.jdi.light.elements.common.uiElement> getTitlesLocator() {
+        return new webList(By.xpath(String.format(titlesLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected List<UIElement> getIconsLocator() {
-        return new WebList(By.xpath(String.format(iconsLocator,
+    protected List<com.epam.jdi.light.elements.common.uiElement> getIconsLocator() {
+        return new webList(By.xpath(String.format(iconsLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected List<UIElement> getDescriptionsLocator() {
-        return new WebList(By.xpath(String.format(descriptionsLocator,
+    protected List<com.epam.jdi.light.elements.common.uiElement> getDescriptionsLocator() {
+        return new webList(By.xpath(String.format(descriptionsLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected List<UIElement> getExpansionIndicatorLocator() {
-        return new WebList(By.xpath(String.format(expansionIndicatorLocator,
+    protected List<com.epam.jdi.light.elements.common.uiElement> getExpansionIndicatorLocator() {
+        return new webList(By.xpath(String.format(expansionIndicatorLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }
