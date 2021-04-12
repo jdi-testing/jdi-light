@@ -3,116 +3,95 @@ package io.github.epam.material.tests.navigation;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.breadcrumbsFrame;
 import static io.github.com.StaticSite.simpleBreadcrumbsPage;
-import static io.github.com.StaticSite.customizedBreadcrumbsPage;
-import static io.github.com.StaticSite.customSeparatorBreadcrumbsPage;
-import static io.github.com.StaticSite.withIconsBreadcrumbsPage;
-import static io.github.com.StaticSite.collapsedBreadcrumbsPage;
 import static io.github.com.StaticSite.routerIntegrationBreadcrumbsPage;
+import static org.testng.Assert.assertTrue;
+import static io.github.com.pages.navigation.BreadcrumbsPage.*;
+
 
 public class BreadcrumbsTests extends TestsInit {
     @Test
     public void simpleBreadcrumbsTest(){
         simpleBreadcrumbsPage.open();
 
-        commonCheck();
+       simpleBreadcrumb.getBreadcrumbByIndex(1).is().text("Material-UI");
+       simpleBreadcrumb.getBreadcrumbByIndex(1).click();
+       simpleBreadcrumb.getBreadcrumbByIndex(2).is().text("Core");
+       simpleBreadcrumb.getBreadcrumbByIndex(2).click();
+       simpleBreadcrumb.getBreadcrumbByIndex(3).is().text("Breadcrumb");
+       simpleBreadcrumb.getBreadcrumbByIndex(3).click();
     }
 
     @Test
     public void customSeparatorBreadcrumbsTest(){
-        customSeparatorBreadcrumbsPage.open();
+        simpleBreadcrumbsPage.open();
 
-        commonCheck();
-
-        breadcrumbsFrame.breadcrumb.getSeparatorByIndex(1).is().text("›");
-        breadcrumbsFrame.breadcrumb.getSeparatorByIndex(2).is().text("›");
-        breadcrumbsFrame.breadcrumb.getSeparatorByIndex(3).is().text("-");
-        breadcrumbsFrame.breadcrumb.getSeparatorByIndex(4).is().text("-");
+        simpleBreadcrumb.getSeparatorByIndex(5).is().text("›");
+        simpleBreadcrumb.getSeparatorByIndex(7).is().text("-");
     }
 
     @Test
-    public void withIconsBreadcrumbsTest(){
-        withIconsBreadcrumbsPage.open();
+    public void withIconsBreadcrumbsTest() {
+        simpleBreadcrumbsPage.open();
 
-        commonCheck();
-
-        breadcrumbsFrame.breadcrumb.getIconByIndex(1).is().displayed();
-        breadcrumbsFrame.breadcrumb.getIconByIndex(2).is().displayed();
-        breadcrumbsFrame.breadcrumb.getIconByIndex(3).is().displayed();
+        simpleBreadcrumb.getIconByIndex(1).is().displayed();
+        simpleBreadcrumb.getIconByIndex(2).is().displayed();
+        simpleBreadcrumb.getIconByIndex(3).is().displayed();
     }
 
     @Test
     public void collapsedBreadcrumbsTest(){
-        collapsedBreadcrumbsPage.open();
+        simpleBreadcrumbsPage.open();
 
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Belts");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).click();
+        simpleBreadcrumb.getBreadcrumbByIndex(16).is().displayed();
+        simpleBreadcrumb.getBreadcrumbByIndex(16).is().text("Home");
+        simpleBreadcrumb.getBreadcrumbByIndex(17).is().text("Belts");
 
-        breadcrumbsFrame.collapsedButton.is().displayed();
-        breadcrumbsFrame.collapsedButton.click();
+        collapsedButton.is().displayed();
+        collapsedButton.click();
 
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Catalog");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).is().text("Accessories");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(4).is().text("New Collection");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(4).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(5).is().text("Belts");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(5).click();
+        simpleBreadcrumb.getBreadcrumbByIndex(17).is().text("Catalog");
 
-        breadcrumbsFrame.collapsedButton.is().notVisible();
+        collapsedButton.is().notVisible();
+    }
+
+    @Test
+    public void customizedBreadcrumbsTest(){
+        simpleBreadcrumbsPage.open();
+
+        simpleBreadcrumb.getBreadcrumbByIndex(18).is().text("Home");
+        simpleBreadcrumb.getBreadcrumbByIndex(18).click();
+        simpleBreadcrumb.getBreadcrumbByIndex(19).is().text("Catalog");
+        simpleBreadcrumb.getBreadcrumbByIndex(19).click();
+        simpleBreadcrumb.getBreadcrumbByIndex(20).is().text("Accessories");
+        simpleBreadcrumb.getBreadcrumbByIndex(20).click();
     }
 
     @Test
     public void routerIntegrationBreadcrumbsTest(){
         routerIntegrationBreadcrumbsPage.open();
 
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Inbox");
+        routerBreadcrumb.getBreadcrumbByIndex(1).is().text("Home");
+        routerBreadcrumb.getBreadcrumbByIndex(2).is().text("Inbox");
 
-        breadcrumbsFrame.breadcrumb.getButtonByText("Trash").click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Trash");
+        routerBreadcrumb.getButtonByText("Trash").click();
+        routerBreadcrumb.getBreadcrumbByIndex(1).is().text("Home");
+        routerBreadcrumb.getBreadcrumbByIndex(2).is().text("Trash");
     }
 
     @Test
     public void routerIntegrationBreadcrumbsIconClickTest() {
         routerIntegrationBreadcrumbsPage.open();
 
-        breadcrumbsFrame.breadcrumb.getButtonByText("Important").click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Inbox");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).is().text("Important");
+        routerBreadcrumb.getButtonByText("Important").click();
+        routerBreadcrumb.getBreadcrumbByIndex(1).is().text("Home");
+        routerBreadcrumb.getBreadcrumbByIndex(2).is().text("Inbox");
+        routerBreadcrumb.getBreadcrumbByIndex(3).is().text("Important");
 
-        breadcrumbsFrame.breadcrumb.getIconByIndex(1).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Inbox");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).is().notVisible();
+        routerBreadcrumb.getButtonByText("Inbox").click();
+        routerBreadcrumb.getBreadcrumbByIndex(1).is().text("Home");
+        routerBreadcrumb.getBreadcrumbByIndex(2).is().text("Inbox");
+        assertTrue(breadcrumbsSectionImportant.isHidden());
     }
 
-    @Test
-    public void customizedBreadcrumbsTest(){
-        customizedBreadcrumbsPage.open();
-
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Home");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Catalog");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).is().text("Accessories");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).click();
-    }
-
-    private void commonCheck(){
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).is().text("Material-UI");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(1).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).is().text("Core");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(2).click();
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).is().text("Breadcrumb");
-        breadcrumbsFrame.breadcrumb.getBreadcrumbByIndex(3).click();
-    }
 }

@@ -482,25 +482,13 @@ public class StaticSite {
     // navigation
     // breadcrumbs
     @Frame("storybook-preview-iframe")
-    public static BreadcrumbsFrame breadcrumbsFrame;
+    public static BreadcrumbsPage breadcrumbsPage;
 
-    @Url("/material-ui-navigation-breadcrumbs--simple")
+    @Url("/simple_breadcrumbs")
     public static WebPage simpleBreadcrumbsPage;
 
-    @Url("/material-ui-navigation-breadcrumbs--custom-separator")
-    public static WebPage customSeparatorBreadcrumbsPage;
-
-    @Url("/material-ui-navigation-breadcrumbs--with-icons")
-    public static WebPage withIconsBreadcrumbsPage;
-
-    @Url("/material-ui-navigation-breadcrumbs--collapsed")
-    public static WebPage collapsedBreadcrumbsPage;
-
-    @Url("/material-ui-navigation-breadcrumbs--router-integration")
+    @Url("/router_breadcrumbs")
     public static WebPage routerIntegrationBreadcrumbsPage;
-
-    @Url("/material-ui-navigation-breadcrumbs--customized")
-    public static WebPage customizedBreadcrumbsPage;
 
     // stepper
     @Frame("storybook-preview-iframe")
