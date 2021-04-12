@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.*;
  * To see an example of text field auto size functionality visit
  * https://material-ui.com/components/textarea-autosize/
  */
-public class AutoSizeTest extends TestsInit {
+public class TextAreaAutoSizeTests extends TestsInit {
 
     private int initialHeight;
 
