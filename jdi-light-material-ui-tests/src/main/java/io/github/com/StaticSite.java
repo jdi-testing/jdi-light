@@ -10,28 +10,13 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
-import io.github.com.pages.displaydata.AvatarFrame;
-import io.github.com.pages.displaydata.BadgeFrame;
-import io.github.com.pages.displaydata.ChipFrame;
-import io.github.com.pages.displaydata.IconsFrame;
-import io.github.com.pages.displaydata.InsetDividerFrame;
-import io.github.com.pages.displaydata.ListsFrame;
-import io.github.com.pages.displaydata.MaterialIconFrame;
-import io.github.com.pages.displaydata.TableFrame;
-import io.github.com.pages.displaydata.TooltipFrame;
-import io.github.com.pages.displaydata.TypographyFrame;
-import io.github.com.pages.displaydata.VerticalDividerFrame;
-import io.github.com.pages.feedback.BackdropFrame;
-import io.github.com.pages.feedback.CircularProgressFrame;
-import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
-import io.github.com.pages.feedback.DialogPage;
-import io.github.com.pages.feedback.LinearProgressFrame;
-import io.github.com.pages.feedback.SimpleSnackbarFrame;
+import io.github.com.pages.displaydata.*;
+import io.github.com.pages.feedback.*;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.ContainerFrame;
-import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.layout.GridFrame;
+import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
@@ -97,6 +82,9 @@ public class StaticSite {
     // text field
     @Frame("storybook-preview-iframe")
     public static TextFieldFrame textFieldFrame;
+
+    @Url("/textarea_autosize")
+    public static TextAreaAutoSizePage textAreaAutoSizePage;
 
     @Url("/material-ui-inputs-text-field--standard")
     public static WebPage inputTextFieldStandardPage;
@@ -461,16 +449,6 @@ public class StaticSite {
     public static TabFrame verticalTabFrame;
 
     // utils
-    // Click away listener
-    @Frame("storybook-preview-iframe")
-    public static ClickAwayListenerFrame clickAwayListenerFrame;
-
-    @Url("/material-ui-utils-click-away-listener--default")
-    public static WebPage utilsClickAwayListenerDefaultPage;
-
-    @Url("/material-ui-utils-click-away-listener--portal-example")
-    public static WebPage utilsClickAwayListenerPortalExamplePage;
-
     // transition
     @Frame("storybook-preview-iframe")
     public static TransitionFrame transitionFrame;
