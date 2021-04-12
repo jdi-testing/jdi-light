@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 
 /**
+ * To see an example of Accordion web element please visit
  * https://material-ui.com/components/accordion/#accordion
  */
 public class Accordion extends Dropdown {
@@ -13,5 +14,4 @@ public class Accordion extends Dropdown {
     public boolean isDisabled() {
         return value().hasClass("Mui-disabled");
     }
-
 }
