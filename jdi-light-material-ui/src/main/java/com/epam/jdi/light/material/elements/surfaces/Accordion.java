@@ -14,5 +14,4 @@ public class Accordion extends Dropdown {
     public boolean isDisabled() {
         return value().hasClass("Mui-disabled");
     }
-    
 }
