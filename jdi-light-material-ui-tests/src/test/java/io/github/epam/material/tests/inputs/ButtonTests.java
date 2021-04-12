@@ -7,6 +7,10 @@ import org.testng.annotations.Test;
 import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.pages.inputs.ButtonPage.*;
 
+/**
+ * To see an example of Button web element please visit https://material-ui.com/components/buttons/
+ */
+
 public class ButtonTests extends TestsInit {
 
     @BeforeTest
@@ -20,7 +24,6 @@ public class ButtonTests extends TestsInit {
         containedButtons.get(1).click();
         containedButtons.get(1).is().text("DEFAULT");
         containedButtons.get(6).is().text("Last click: Default");
-
 
         containedButtons.get(2).click();
         containedButtons.get(2).is().text("PRIMARY");

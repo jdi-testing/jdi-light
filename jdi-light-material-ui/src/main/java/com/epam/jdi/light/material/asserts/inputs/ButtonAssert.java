@@ -44,10 +44,4 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
         jdiAssert(element().isNotVisible(), Matchers.is(true));
         return this;
     }
-
-    @JDIAction("Assert that {name} has {className}")
-    public ButtonAssert hasClass(String className){
-        jdiAssert(element().hasClass(className), Matchers.is(true));
-        return this;
-    }
 }
