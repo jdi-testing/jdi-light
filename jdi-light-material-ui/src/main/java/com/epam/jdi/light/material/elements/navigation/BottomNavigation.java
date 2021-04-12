@@ -5,8 +5,8 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.navigation.BottomNavigationAssert;
 
 /**
- * To see an example of Accordion web element please visit
- * https://jdi-testing.github.io/jdi-light/material/button_navigation
+ * To see an example of Bottom Navigation web element please visit
+ * https://material-ui.com/ru/components/bottom-navigation/
  */
 
 public class BottomNavigation extends UIBaseElement<BottomNavigationAssert> {
