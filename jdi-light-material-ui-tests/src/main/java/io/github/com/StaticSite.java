@@ -33,7 +33,7 @@ import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.navigation.*;
-import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.surfaces.PaperFrame;
@@ -176,13 +176,7 @@ public class StaticSite {
     // surfaces
     // accordion
     @Frame("storybook-preview-iframe")
-    public static AccordionFrame accordionFrame;
-
-    @Url("/material-ui-surfaces-accordion--default")
-    public static WebPage surfaceAccordionPage;
-
-    @Url("/material-ui-surfaces-accordion--disabled")
-    public static WebPage surfaceAccordionDisabledPage;
+    public static AccordionPage accordionPage;
 
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage appBarPage;
