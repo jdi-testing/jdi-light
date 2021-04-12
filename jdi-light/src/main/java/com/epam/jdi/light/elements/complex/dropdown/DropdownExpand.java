@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 
@@ -48,7 +48,7 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     public String listLocator = "li";
 
     @Override
-    public webList list() {
+    public WebList list() {
         return linkedList(listLocator, "list").setUIElementName(INNER);
     }
 
@@ -61,7 +61,7 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
         try {
-            return list().noWait(webList::isDisplayed, webList.class);
+            return list().noWait(WebList::isDisplayed, WebList.class);
         } catch (Exception ex) {
             return false;
         }
@@ -122,7 +122,7 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
 
     @Override
     public int size() {
-        webList list = list();
+        WebList list = list();
         return list.noValidation(list::size);
     }
 

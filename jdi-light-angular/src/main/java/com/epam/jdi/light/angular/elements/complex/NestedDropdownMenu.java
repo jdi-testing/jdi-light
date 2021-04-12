@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.By;
 
@@ -118,13 +118,13 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return list.get(list.size() - 1);
     }
 
-    protected webList lastOpenedOptionsElements() {
+    protected WebList lastOpenedOptionsElements() {
         expand();
-        return new webList(By.xpath(LAST_OPENED_MENU_OPTIONS_XPATH));
+        return new WebList(By.xpath(LAST_OPENED_MENU_OPTIONS_XPATH));
     }
 
-    protected webList lastOpenedOptionsElementsForMenuWithIcons() {
+    protected WebList lastOpenedOptionsElementsForMenuWithIcons() {
         expand();
-        return new webList(By.xpath(LAST_OPENED_MENU_OPTIONS_XPATH_FOR_MENU_WITH_ICONS));
+        return new WebList(By.xpath(LAST_OPENED_MENU_OPTIONS_XPATH_FOR_MENU_WITH_ICONS));
     }
 }

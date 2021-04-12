@@ -1,7 +1,7 @@
 package pseudo.site.forms;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
@@ -68,15 +68,15 @@ public class CustomForm extends Form<User> {
     @XPath("//*[@class='xpathPublicButtonList-class']") public List<Button> xpathPublicButtonList;
 
     @FindBy(css = ".fbWebList-class")
-    webList fbWebList;
-    @FindBy(css = ".fbPublicWebList-class") public webList fbPublicWebList;
-    @FindBy(css = ".fbPrivateWebList-class") private webList fbPrivateWebList;
+    WebList fbWebList;
+    @FindBy(css = ".fbPublicWebList-class") public WebList fbPublicWebList;
+    @FindBy(css = ".fbPrivateWebList-class") private WebList fbPrivateWebList;
     @UI(".uiWebList-class")
-    webList uiWebList;
-    @UI(".uiPublicWebList-class") public webList uiPublicWebList;
+    WebList uiWebList;
+    @UI(".uiPublicWebList-class") public WebList uiPublicWebList;
     @Css("#cssWebList-id")
-    webList cssWebList;
-    @XPath("//*[@id='xpathPublicWebList-id']") public webList xpathPublicWebList;
+    WebList cssWebList;
+    @XPath("//*[@id='xpathPublicWebList-id']") public WebList xpathPublicWebList;
 
     @JDropdown(root = "div[ui=dropList]", value = "input", list = "li", expand = ".expand")
     Dropdown dropList;
@@ -203,23 +203,23 @@ public class CustomForm extends Form<User> {
         return uiPublicButtonList;
     }
 
-    public webList getFbWebList() {
+    public WebList getFbWebList() {
         return fbWebList;
     }
 
-    public webList getFbPublicWebList() {
+    public WebList getFbPublicWebList() {
         return fbPublicWebList;
     }
 
-    public webList getFbPrivateWebList() {
+    public WebList getFbPrivateWebList() {
         return fbPrivateWebList;
     }
 
-    public webList getUiWebList() {
+    public WebList getUiWebList() {
         return uiWebList;
     }
 
-    public webList getUiPublicWebList() {
+    public WebList getUiPublicWebList() {
         return uiPublicWebList;
     }
 
@@ -283,11 +283,11 @@ public class CustomForm extends Form<User> {
         return xpathPublicButtonList;
     }
 
-    public webList getCssWebList() {
+    public WebList getCssWebList() {
         return cssWebList;
     }
 
-    public webList getXpathPublicWebList() {
+    public WebList getXpathPublicWebList() {
         return xpathPublicWebList;
     }
 }

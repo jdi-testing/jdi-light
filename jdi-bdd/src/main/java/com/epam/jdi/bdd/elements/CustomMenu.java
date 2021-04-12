@@ -1,11 +1,11 @@
 package com.epam.jdi.bdd.elements;
 
 import com.epam.jdi.light.elements.complex.Menu;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 
 public class CustomMenu extends Menu {
     @Override
-    public webList list() {
+    public WebList list() {
         return super.list().setUIElementName(ui -> ui.findFirst("span").getText());
     }
 }

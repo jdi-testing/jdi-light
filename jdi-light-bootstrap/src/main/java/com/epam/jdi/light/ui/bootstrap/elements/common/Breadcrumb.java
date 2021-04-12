@@ -2,7 +2,7 @@ package com.epam.jdi.light.ui.bootstrap.elements.common;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
@@ -13,9 +13,9 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
  * Email: olga_ivanova@epam.com
  */
 
-public class Breadcrumb extends UIListBase<UISelectAssert<UISelectAssert<?,?>, webList>> {
+public class Breadcrumb extends UIListBase<UISelectAssert<UISelectAssert<?,?>, WebList>> {
     @Override
-    public webList list() {
+    public WebList list() {
         return $$(".breadcrumb-item", this).setName(getName() + " breadcrumb");
     }
     public String selected() {

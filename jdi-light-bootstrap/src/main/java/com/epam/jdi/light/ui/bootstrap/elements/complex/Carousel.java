@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
@@ -56,7 +56,7 @@ public class Carousel<T extends ICoreElement, D> extends UIBaseElement<TextAsser
 	public void previous() {
 		linked(prevLocator, "previous").click();
 	}
-	private webList indicators() {
+	private WebList indicators() {
 		return linkedList(indicatorsLocator, "indicators");
 	}
 	@JDIAction("Open slide '{0}'")

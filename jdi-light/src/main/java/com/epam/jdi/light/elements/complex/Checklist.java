@@ -23,8 +23,8 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     protected int startIndex = ELEMENT.startIndex;
 
     @Override
-    public webList list() {
-        webList list = super.list().setUIElementName(LABEL);
+    public WebList list() {
+        WebList list = super.list().setUIElementName(LABEL);
         list.setStartIndex(getStartIndex());
         return list;
     }

@@ -2,7 +2,7 @@ package pseudo.site.section;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
@@ -106,19 +106,19 @@ public class ExtendedSection extends ExtendSection {
     public List<Button> listButtonPublicXPath;
 
     @FindBy(id = "webListPackage")
-    webList webListPackage;
+    WebList webListPackage;
     @FindBy(id = "webListPublic")
-    public webList webListPublic;
+    public WebList webListPublic;
     @FindBy(id = "webListPrivate")
-    private webList webListPrivate;
+    private WebList webListPrivate;
     @UI(".webListPackageUI")
-    webList webListPackageUI;
+    WebList webListPackageUI;
     @UI(".webListPublicUI")
-    public webList webListPublicUI;
+    public WebList webListPublicUI;
     @Css(".webListPackageCss")
-    webList webListPackageCss;
+    WebList webListPackageCss;
     @XPath("//*[@class='webListPublicXPath']")
-    public webList webListPublicXPath;
+    public WebList webListPublicXPath;
 
     @FindBy(id = "uilistQuestionPackage")
     DataList<CustomSection, ?> uilistQuestionPackage;
@@ -308,27 +308,27 @@ public class ExtendedSection extends ExtendSection {
         this.listButtonPackageUI = listButtonPackageUI;
     }
 
-    public webList getWebListPackage() {
+    public WebList getWebListPackage() {
         return webListPackage;
     }
 
-    public void setWebListPackage(webList webListPackage) {
+    public void setWebListPackage(WebList webListPackage) {
         this.webListPackage = webListPackage;
     }
 
-    public webList getWebListPrivate() {
+    public WebList getWebListPrivate() {
         return webListPrivate;
     }
 
-    public void setWebListPrivate(webList webListPrivate) {
+    public void setWebListPrivate(WebList webListPrivate) {
         this.webListPrivate = webListPrivate;
     }
 
-    public webList getWebListPackageUI() {
+    public WebList getWebListPackageUI() {
         return webListPackageUI;
     }
 
-    public void setWebListPackageUI(webList webListPackageUI) {
+    public void setWebListPackageUI(WebList webListPackageUI) {
         this.webListPackageUI = webListPackageUI;
     }
 
@@ -437,7 +437,7 @@ public class ExtendedSection extends ExtendSection {
         return listButtonPackageCss;
     }
 
-    public webList getWebListPackageCss() {
+    public WebList getWebListPackageCss() {
         return webListPackageCss;
     }
 

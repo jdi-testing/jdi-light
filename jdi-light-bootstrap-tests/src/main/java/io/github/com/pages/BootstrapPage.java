@@ -2,7 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Checklist;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -60,6 +60,6 @@ public class BootstrapPage extends WebPage {
     public static Loading spinnerRotate;
 
     public static Carousel<Slide, SlideInfo> carousel;
-    @UI("#list-example>a") public static webList scrollSpy;
+    @UI("#list-example>a") public static WebList scrollSpy;
 
 }

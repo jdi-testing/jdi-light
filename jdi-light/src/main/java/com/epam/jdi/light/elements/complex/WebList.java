@@ -57,13 +57,13 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class webList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList,
-        HasAssert<UISelectAssert<UISelectAssert<?,?>, webList>> {
+public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISelector, HasUIList,
+        HasAssert<UISelectAssert<UISelectAssert<?,?>, WebList>> {
     protected int startIndex = ELEMENT.startIndex;
     public int getStartIndex() {
         return startIndex;
     }
-    public webList indexFromZero() {
+    public WebList indexFromZero() {
         setStartIndex(0);
         return this;
     }
@@ -71,12 +71,12 @@ public class webList extends JDIBase implements IList<UIElement>, SetValue, ISel
         startIndex = index;
     }
     @Override
-    public webList list() { return this; }
+    public WebList list() { return this; }
     public UIElement core() {
         return new UIElement(base());
     }
-    public webList setup(JAction1<JDIBase> setup) {
-        return setup(webList.class, setup);
+    public WebList setup(JAction1<JDIBase> setup) {
+        return setup(WebList.class, setup);
     }
     @JDebug
     public List<WebElement> webElements() {
@@ -89,47 +89,47 @@ public class webList extends JDIBase implements IList<UIElement>, SetValue, ISel
         return elements(1).webElements();
     }
     @Override
-    public webList setCore(JDIBase base) {
+    public WebList setCore(JDIBase base) {
         super.setCore(base);
         return this;
     }
-    public webList() {
+    public WebList() {
         webElements.useCache(true);
         webElement.useCache(true);
         textType = SMART_LIST;
     }
-    public webList(@MarkupLocator By locator) { this(); setLocator(locator);}
-    public webList(List<WebElement> elements) {
+    public WebList(@MarkupLocator By locator) { this(); setLocator(locator);}
+    public WebList(List<WebElement> elements) {
         this(); setWebElements(elements);
     }
-    public static webList newList(List<UIElement> elements) {
-        return new webList(LinqUtils.map(elements, JDIBase::get));
+    public static WebList newList(List<UIElement> elements) {
+        return new WebList(LinqUtils.map(elements, JDIBase::get));
     }
-    public webList(MapArray<String, UIElement> map) {
+    public WebList(MapArray<String, UIElement> map) {
         this.map.set(map);
     }
-    public webList(List<WebElement> elements, String name) {
+    public WebList(List<WebElement> elements, String name) {
         this(elements);
         setName(name);
     }
-    public webList(List<String> header, List<UIElement> elements) {
+    public WebList(List<String> header, List<UIElement> elements) {
         this(new MapArray<>(header, elements));
     }
-    public webList(JDIBase base) {
+    public WebList(JDIBase base) {
         super(base);
     }
-    public webList(JDIBase base, String locator, String name, Object parent) {
+    public WebList(JDIBase base, String locator, String name, Object parent) {
         super(base);
         setLocator(locator);
         setName(name);
         setParent(parent);
     }
-    public webList noValidation() {
+    public WebList noValidation() {
         super.noValidation();
         return this;
     }
     @Override
-    public webList setName(String name) {
+    public WebList setName(String name) {
         super.setName(name);
         return this;
     }
@@ -143,8 +143,8 @@ public class webList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
 
     @JDIAction(level = DEBUG)
-    public webList elements(int minAmount) {
-        return new webList(uiElements(minAmount));
+    public WebList elements(int minAmount) {
+        return new WebList(uiElements(minAmount));
     }
     protected List<WebElement> uiElements(int minAmount) {
         if (minAmount < 0)
@@ -250,11 +250,11 @@ public class webList extends JDIBase implements IList<UIElement>, SetValue, ISel
     private JFunc1<UIElement, String> UIELEMENT_NAME;
     private boolean nameIndex = false;
 
-    public webList setUIElementName(JFunc1<UIElement, String> func) {
+    public WebList setUIElementName(JFunc1<UIElement, String> func) {
         UIELEMENT_NAME = func;
         return this;
     }
-    public webList setUIElementName(TextTypes type) {
+    public WebList setUIElementName(TextTypes type) {
         if (type.equals(INDEX)) {
             nameIndex = true;
             return this;
@@ -537,7 +537,7 @@ public class webList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         List<String> values;
-        webList elements;
+        WebList elements;
         if (isUseCache()) {
             if (map.hasValue() && map.get().size() > 0 && isActualMap())
                 return map.get().keys();
@@ -624,18 +624,18 @@ public class webList extends JDIBase implements IList<UIElement>, SetValue, ISel
     public void show() {
         first().show();
     }
-    public UISelectAssert<UISelectAssert<?,?>, webList> is() {
+    public UISelectAssert<UISelectAssert<?,?>, WebList> is() {
         refresh();
-        UISelectAssert<UISelectAssert<?,?>, webList> is = new UISelectAssert<>();
+        UISelectAssert<UISelectAssert<?,?>, WebList> is = new UISelectAssert<>();
         is.set(this);
         return is;
     }
     @JDIAction("Assert that {name} list meet condition")
-    public UISelectAssert<UISelectAssert<?,?>, webList> is(Matcher<? super List<UIElement>> condition) {
+    public UISelectAssert<UISelectAssert<?,?>, WebList> is(Matcher<? super List<UIElement>> condition) {
         MatcherAssert.assertThat(this, condition);
         return is();
     }
-    public UISelectAssert<UISelectAssert<?,?>, webList> assertThat(Matcher<? super List<UIElement>> condition) {
+    public UISelectAssert<UISelectAssert<?,?>, WebList> assertThat(Matcher<? super List<UIElement>> condition) {
         return is(condition);
     }
     //endregion
@@ -684,7 +684,7 @@ public class webList extends JDIBase implements IList<UIElement>, SetValue, ISel
         map.useCache(false);
     }
     @Override
-    public webList finds(By locator) {
+    public WebList finds(By locator) {
         List<WebElement> els = elements(1).selectMany(el -> el.finds(locator).webElements());
         return $$(els, getName() + ">" + locator);
     }

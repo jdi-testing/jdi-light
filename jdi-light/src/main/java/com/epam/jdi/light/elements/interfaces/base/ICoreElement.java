@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.interfaces.base;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.Condition;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.*;
@@ -64,15 +64,15 @@ public interface ICoreElement extends IBaseElement {
     default UIElement find(@MarkupLocator By by) {
         return iCore().find(by);
     }
-    default webList finds(@MarkupLocator String by) {
+    default WebList finds(@MarkupLocator String by) {
         return iCore().finds(by);
     }
-    default webList finds(@MarkupLocator String by, Object... args) {
+    default WebList finds(@MarkupLocator String by, Object... args) {
         return finds(format(by, args));
     }
-    default webList finds(@MarkupLocator By by) { return iCore().finds(by); }
+    default WebList finds(@MarkupLocator By by) { return iCore().finds(by); }
     default UIElement firstChild() { return iCore().firstChild(); }
-    default webList children() { return iCore().children(); }
+    default WebList children() { return iCore().children(); }
     default String getTagName() {
         return iCore().getTagName();
     }

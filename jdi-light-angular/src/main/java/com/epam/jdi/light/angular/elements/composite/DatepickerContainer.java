@@ -3,7 +3,7 @@ package com.epam.jdi.light.angular.elements.composite;
 import com.epam.jdi.light.angular.entities.DatepickerNavigation;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
@@ -247,7 +247,7 @@ public class DatepickerContainer extends Section {
 
     @JDIAction("Get '{name}' '{0}' week day numbers")
     public String[] getWeekDayNumbers(final DatepickerNavigation weekName) {
-        webList webList = getColumn(weekName.ordinal());
+        WebList webList = getColumn(weekName.ordinal());
         String[] list = new String[webList.size()];
         webList.stream().map(e -> String.format(CELL.getName().replace("%s", " %s "), e.getValue()))
                 .collect(Collectors.toList()).toArray(list);
@@ -277,7 +277,7 @@ public class DatepickerContainer extends Section {
     }
 
     protected UIElement getSelectedMonth() {
-        return new webList(By.xpath(selectedMonthLocator)).get(1);
+        return new WebList(By.xpath(selectedMonthLocator)).get(1);
     }
 
     protected UIElement getTodayDay() {
@@ -330,8 +330,8 @@ public class DatepickerContainer extends Section {
         return new UIElement(By.xpath(NEXT_TWENTY_YEARS.getName()));
     }
 
-    protected webList getColumn(final int columnNumber) {
-        return new webList(By.xpath(String.format(columnLocator, columnNumber)));
+    protected WebList getColumn(final int columnNumber) {
+        return new WebList(By.xpath(String.format(columnLocator, columnNumber)));
     }
 
     protected Point getOutsidePoint() {

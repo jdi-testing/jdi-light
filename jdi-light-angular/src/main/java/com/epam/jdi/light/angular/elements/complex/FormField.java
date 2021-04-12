@@ -5,7 +5,7 @@ import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -54,15 +54,15 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         return new UIElement(element);
     }
 
-    public webList getInputs() {
+    public WebList getInputs() {
         return getContainer().finds(By.xpath(matFormFieldPrefix + containerAttribute + "]//input"));
     }
 
-    public webList getDropdowns() {
+    public WebList getDropdowns() {
         return getContainer().finds(By.xpath(matFormFieldPrefix + containerAttribute + "]//mat-select"));
     }
 
-    public webList getTextAreas() {
+    public WebList getTextAreas() {
         return getContainer().finds(By.xpath(matFormFieldPrefix + containerAttribute + "]//textarea"));
     }
 
@@ -218,7 +218,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         return type;
     }
 
-    private webList getFormFields() {
+    private WebList getFormFields() {
         return getContainer().finds(By.xpath(matFormFieldPrefix + containerAttribute + "]"));
     }
 

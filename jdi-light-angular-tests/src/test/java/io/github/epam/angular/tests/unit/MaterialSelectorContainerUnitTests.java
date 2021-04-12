@@ -1,7 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
@@ -32,12 +32,12 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
 
     @Test
     public void listSizeTest() {
-        assertEquals(container.list().size(), new webList(By.cssSelector("mat-option span")).size());
+        assertEquals(container.list().size(), new WebList(By.cssSelector("mat-option span")).size());
     }
 
     @Test
     public void listHtmlTest() {
-        webList webList = new webList(By.cssSelector("mat-option span"));
+        WebList webList = new WebList(By.cssSelector("mat-option span"));
         for (int i = 1; i <= container.list().size(); i++) {
             assertEquals(container.list().get(i).printHtml(), webList.get(i).printHtml());
         }

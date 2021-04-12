@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.Form;
@@ -43,30 +43,30 @@ public class UIFactory {
         return JDITalk.element(locator).setup(j->j.setParent(parent));
     }
     @Deprecated
-    public static webList list(@MarkupLocator String locator) {
+    public static WebList list(@MarkupLocator String locator) {
         return JDITalk.list(locator);
     }
     @Deprecated
-    public static webList list(@MarkupLocator By byLocator) {
+    public static WebList list(@MarkupLocator By byLocator) {
         return JDITalk.list(byLocator);
     }
     @Deprecated
-    public static webList list(List<WebElement> els, String name) {
+    public static WebList list(List<WebElement> els, String name) {
         return JDITalk.list(els, name);
     }
-    public static webList $$(@MarkupLocator String locator) {
+    public static WebList $$(@MarkupLocator String locator) {
         return JDITalk.list(locator);
     }
-    public static webList $$(@MarkupLocator String locator, Object parent) {
+    public static WebList $$(@MarkupLocator String locator, Object parent) {
         return JDITalk.list(locator).setup(j->j.setParent(parent));
     }
-    public static webList $$(@MarkupLocator By locator) {
+    public static WebList $$(@MarkupLocator By locator) {
         return JDITalk.list(locator);
     }
-    public static webList $$(@MarkupLocator By locator, Object parent) {
+    public static WebList $$(@MarkupLocator By locator, Object parent) {
         return JDITalk.list(locator).setup(j->j.setParent(parent));
     }
-    public static webList $$(List<WebElement> els, String name) {
+    public static WebList $$(List<WebElement> els, String name) {
         return JDITalk.list(els, name);
     }
 

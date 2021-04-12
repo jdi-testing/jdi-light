@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.table.IDataGridAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
@@ -63,15 +63,15 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         return IDataGrid.super.count();
     }
     @Override
-    public webList webRow(int rowNum) {
+    public WebList webRow(int rowNum) {
         return IDataGrid.super.webRow(rowNum);
     }
     @Override
-    public webList webColumn(int colNum) {
+    public WebList webColumn(int colNum) {
         return IDataGrid.super.webColumn(colNum);
     }
     @Override
-    public webList webColumn(String colName) {
+    public WebList webColumn(String colName) {
         return IDataGrid.super.webColumn(colName);
     }
     @Override
@@ -83,16 +83,16 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         return IDataGrid.super.header();
     }
     @Override
-    public webList footerUI() {
+    public WebList footerUI() {
         return IDataGrid.super.footerUI();
     }
 
-    public D rowAsData(webList row) {
+    public D rowAsData(WebList row) {
         return lineClass != null
             ? lineToData(rowAsLine(row))
             : new Line(header(), row, row.getName()).asData(dataClass);
     }
-    public L rowAsLine(webList row) {
+    public L rowAsLine(WebList row) {
         return new Line(header(), row, row.getName()).asLine(lineClass);
     }
     public List<D> elements(int minAmount) {
@@ -104,7 +104,7 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         return data(value);
     }
     @Override
-    public webList webCells() {
+    public WebList webCells() {
         return grid().webCells();
     }
     @Override
@@ -112,8 +112,8 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         grid().clear();
     }
     @Override
-    public webList headerUI() {
-        webList headerUI = grid().headerUI();
+    public WebList headerUI() {
+        WebList headerUI = grid().headerUI();
         return headerUI.size() == grid().size
             ? headerUI
             : tryFilterHeader(headerUI);
@@ -153,7 +153,7 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
             throw exception(ex, "Can't get DataTable %s data or entity class", getName());
         }
     }
-    protected webList tryFilterHeader(webList headerUI) {
+    protected WebList tryFilterHeader(WebList headerUI) {
         if (headerUI.size() < grid().size) {
             throw exception("Header has size less than expected - %s. Please verify header locator or override headerUI() method", grid().size);
         }
@@ -171,7 +171,7 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         }
         if (elements.size() != grid().size)
             throw exception("Header has size more than expected - %s. Please verify header locator or override headerUI() method", grid().size);
-        return new webList(elements);
+        return new WebList(elements);
     }
 
     protected D lineToData(L line) {

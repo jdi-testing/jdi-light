@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.annotations.*;
 import com.epam.jdi.light.ui.html.elements.enums.MenuBehaviour;
 import com.epam.jdi.tools.func.JAction1;
@@ -107,8 +107,8 @@ public class Menu2D extends Selector implements ISetup {
         }
         throw exception("Failed to get [%s] values", print(values));
     }
-    private webList webListFromIterator(Iterator<String> iterator, Object parent) {
-        webList list = iterator == null
+    private WebList webListFromIterator(Iterator<String> iterator, Object parent) {
+        WebList list = iterator == null
             ? $$(base().getLocator(), parent)
             : $$(iterator.next(), parent);
         list.setName(getName());
@@ -211,7 +211,7 @@ public class Menu2D extends Selector implements ISetup {
     protected String printValues(Object parent, int index) {
         if (index == locators.size())
             return "";
-        webList list = $$(locators.get(index), parent).setName(getName()).noValidation();
+        WebList list = $$(locators.get(index), parent).setName(getName()).noValidation();
         List<String> result = new ArrayList<>();
         for (UIElement element : list) {
             String value = element.getText();
@@ -233,7 +233,7 @@ public class Menu2D extends Selector implements ISetup {
         if (index == locators.size())
             return new ArrayList<>();
         List<String> result = new ArrayList<>();
-        webList list = $$(locators.get(index), parent).setName(getName()).noValidation();
+        WebList list = $$(locators.get(index), parent).setName(getName()).noValidation();
         for (UIElement element : list) {
             result.add(element.getText());
             result.addAll(getValues(inheritParent(element), index + 1));
@@ -281,7 +281,7 @@ public class Menu2D extends Selector implements ISetup {
     }
 
     @Override
-    public webList list() {
+    public WebList list() {
         By locator = locators.isEmpty()
             ? base().getLocator()
             : NAME_TO_LOCATOR.execute(locators.get(0));

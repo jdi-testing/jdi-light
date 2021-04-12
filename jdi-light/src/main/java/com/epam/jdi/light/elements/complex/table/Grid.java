@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.table.IGridAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.WebElement;
@@ -46,7 +46,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     protected boolean locatorsValidated = false;
     protected int startIndex = ELEMENT.startIndex;
 
-    public webList webCells() {
+    public WebList webCells() {
         return core().finds(allCellsLocator)
             .setName(getName() + " webCells");
     }
@@ -117,25 +117,25 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
             .setName(format("%s cell(%s,%s)", getName(), colNum, rowNum));
     }
     @Override
-    public webList webColumn(int colNum) {
+    public WebList webColumn(int colNum) {
         int index = getColumnIndex(colNum);
         validateColumnIndex(index);
         return core().finds(columnTemplate, index)
             .setName(format("%s column:%s", getName(), index));
     }
     @Override
-    public webList webRow(int rowNum) {
+    public WebList webRow(int rowNum) {
         validateRowIndex(rowNum);
         return core().finds(rowTemplate, rowNum)
             .setName(format("%s row:%s", getName(), rowNum));
     }
     @Override
-    public webList headerUI() {
+    public WebList headerUI() {
         return core().finds(headerLocator)
             .setName(getName() + " headerUI");
     }
     @Override
-    public webList footerUI() {
+    public WebList footerUI() {
         return core().finds(footerLocator)
             .setName(getName() + " footerUI");
     }
@@ -194,7 +194,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         if (columnsValidated)
             return;
         try {
-            webList header = headerUI();
+            WebList header = headerUI();
             logger.debug("Start column validation");
             List<WebElement> visibleHeader = header.getAll();
             List<WebElement> fullHeader = header.getWebElements();

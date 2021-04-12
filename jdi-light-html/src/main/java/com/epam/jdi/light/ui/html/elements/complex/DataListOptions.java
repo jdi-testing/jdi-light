@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.tools.HasStartIndex;
 import com.epam.jdi.tools.LinqUtils;
@@ -28,8 +28,8 @@ public class DataListOptions extends UIListBase<DropdownAssert>
     protected int startIndex = ELEMENT.startIndex;
 
     @Override
-    public webList list() {
-        webList list = $$("#"+ core().attr("list")+" option")
+    public WebList list() {
+        WebList list = $$("#"+ core().attr("list")+" option")
             .setup(e -> e.noValidation().setName(getName() + "list"))
             .setUIElementName(VALUE);
         list.setStartIndex(startIndex);

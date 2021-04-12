@@ -4,7 +4,7 @@ import com.epam.jdi.light.angular.asserts.ChipsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
@@ -74,7 +74,7 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
 
     @JDIAction("Select value '{0}' for '{name}'")
     public void select(String value) {
-        webList options = getOptions(this.matOptions);
+        WebList options = getOptions(this.matOptions);
         options.get(value).click();
     }
 
@@ -122,24 +122,24 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
                 getWidth() + 3, uiElement.core().getRect().getHeight() + 3);
     }
 
-    private webList getChips() {
+    private WebList getChips() {
         return this.finds("mat-chip");
     }
 
-    private webList getOptions(String css) {
-        return new webList(By.cssSelector(css));
+    private WebList getOptions(String css) {
+        return new WebList(By.cssSelector(css));
     }
 
-    private webList getItems() {
+    private WebList getItems() {
         click();
-        webList options = getOptions(matOptions);
+        WebList options = getOptions(matOptions);
         click();
         return options;
     }
 
     private List<String> getValues() {
         List<String> values = new ArrayList<>();
-        webList options = getOptions(this.matOptions);
+        WebList options = getOptions(this.matOptions);
         options.forEach(option -> values.add(option.getValue()));
         return values;
     }

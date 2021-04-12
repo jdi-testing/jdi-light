@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -149,17 +149,17 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
     }
 
     protected List<UIElement> getHeadersLocator() {
-        return new webList(By.xpath(String.format(headersLocator, core().locator.printLocator()
+        return new WebList(By.xpath(String.format(headersLocator, core().locator.printLocator()
             .replace(smartSharp, "") .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getContentsLocator() {
-        return new webList(By.xpath(String.format(contentsLocator, this.core().locator.printLocator()
+        return new WebList(By.xpath(String.format(contentsLocator, this.core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getContentBodiesLocator() {
-        return new webList(By.xpath(String.format(contentBodiesLocator, this.core().locator
+        return new WebList(By.xpath(String.format(contentBodiesLocator, this.core().locator
             .printLocator().replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
@@ -186,25 +186,25 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
     }
 
     protected List<UIElement> getTitlesLocator() {
-        return new webList(By.xpath(String.format(titlesLocator,
+        return new WebList(By.xpath(String.format(titlesLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getIconsLocator() {
-        return new webList(By.xpath(String.format(iconsLocator,
+        return new WebList(By.xpath(String.format(iconsLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getDescriptionsLocator() {
-        return new webList(By.xpath(String.format(descriptionsLocator,
+        return new WebList(By.xpath(String.format(descriptionsLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getExpansionIndicatorLocator() {
-        return new webList(By.xpath(String.format(expansionIndicatorLocator,
+        return new WebList(By.xpath(String.format(expansionIndicatorLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }

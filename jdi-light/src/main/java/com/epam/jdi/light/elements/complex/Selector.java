@@ -38,8 +38,8 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
     protected Select asSelect() {
         return core().asSelect();
     }
-    public webList list() {
-        webList list = $$(asSelect().getOptions(), getName());
+    public WebList list() {
+        WebList list = $$(asSelect().getOptions(), getName());
         list.setStartIndex(getStartIndex());
         return list;
     }

@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
 import org.openqa.selenium.By;
@@ -44,7 +44,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      *
      * @return WebList element
      */
-    public webList list() {
+    public WebList list() {
         return ms().list();
     }
 
@@ -118,7 +118,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     @JDIAction("Get '{name}' groups")
     public List<String> groups() {
         List<String> groups = new ArrayList<>();
-        webList webList = new webList(By.cssSelector(String.format(groupsAndOptionsList,
+        WebList webList = new WebList(By.cssSelector(String.format(groupsAndOptionsList,
             core().locator.printLocator().replace(smartSharp, "") .replace(cssSharp, "").replace("'", ""))));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {
@@ -135,7 +135,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     @JDIAction("Get '{name}' groups and options")
     public Map<String, List<String>> groupsAndOptions() {
         Map<String, List<String>> map = new LinkedHashMap<>();
-        webList webList = new webList(By.cssSelector(String.format(groupsAndOptionsList,
+        WebList webList = new WebList(By.cssSelector(String.format(groupsAndOptionsList,
            core().locator.printLocator() .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {

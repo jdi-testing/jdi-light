@@ -1,7 +1,7 @@
 package pseudo.site.forms;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.WebElement;
@@ -34,9 +34,9 @@ public class CustomFormSmart extends Form<User> {
     public List<Button> fbPublicButtonList;
     private List<Button> fbPrivateButtonList;
 
-    webList fbWebList;
-    public webList fbPublicWebList;
-    private webList fbPrivateWebList;
+    WebList fbWebList;
+    public WebList fbPublicWebList;
+    private WebList fbPrivateWebList;
 
     public WebElement getFbWebElement() {
         return fbWebElement;
@@ -110,15 +110,15 @@ public class CustomFormSmart extends Form<User> {
         return fbPrivateButtonList;
     }
 
-    public webList getFbWebList() {
+    public WebList getFbWebList() {
         return fbWebList;
     }
 
-    public webList getFbPublicWebList() {
+    public WebList getFbPublicWebList() {
         return fbPublicWebList;
     }
 
-    public webList getFbPrivateWebList() {
+    public WebList getFbPrivateWebList() {
         return fbPrivateWebList;
     }
 }

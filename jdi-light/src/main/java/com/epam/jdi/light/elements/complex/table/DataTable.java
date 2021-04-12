@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.complex.table;
 import com.epam.jdi.light.asserts.generic.table.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.IList;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
@@ -377,7 +377,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         return row(matchers).asLine(lineClass);
     }
     public <C extends HasValue> List<C> columnValues(String columnName, Class<C> cl) {
-        webList column = webColumn(columnName);
+        WebList column = webColumn(columnName);
         List<C> result = column.map(el -> el.asEntity(cl));
         return result;
     }

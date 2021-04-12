@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Table;
@@ -34,16 +34,16 @@ public class JDITalk {
         return new UIElement(byLocator);
     }
 
-    public static webList list(@MarkupLocator String locator) {
-        return new webList().setCore(NAME_TO_ELEMENT.execute(locator)).setName(locator);
+    public static WebList list(@MarkupLocator String locator) {
+        return new WebList().setCore(NAME_TO_ELEMENT.execute(locator)).setName(locator);
     }
-    public static webList list(@MarkupLocator By byLocator) {
-        return new webList(byLocator);
+    public static WebList list(@MarkupLocator By byLocator) {
+        return new WebList(byLocator);
     }
-    public static webList list(List<WebElement> els, String name) {
-        return new webList(els).setup(e->e.setName(name));
+    public static WebList list(List<WebElement> els, String name) {
+        return new WebList(els).setup(e->e.setName(name));
     }
-    public static webList list(List<WebElement> els) {
+    public static WebList list(List<WebElement> els) {
         return list(els, "Elements list");
     }
 

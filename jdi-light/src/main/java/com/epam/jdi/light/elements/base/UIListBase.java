@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -20,8 +20,8 @@ public abstract class UIListBase<A extends UISelectAssert<?,?>> extends UIBaseEl
         implements ISelector, SetValue {
     protected int startIndex = ELEMENT.startIndex;
 
-    public webList list() {
-        webList webList = new webList(base()).setup(JDIBase::searchVisible);
+    public WebList list() {
+        WebList webList = new WebList(base()).setup(JDIBase::searchVisible);
         webList.setStartIndex(getStartIndex());
         return webList;
     }

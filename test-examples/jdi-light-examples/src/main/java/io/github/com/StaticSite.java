@@ -1,7 +1,7 @@
 package io.github.com;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
@@ -32,8 +32,8 @@ public class StaticSite {
 	public static SearchPage searchPage;
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
-	@Css("[ui=label]") public static webList navigationL;
-	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static webList navigationS;
+	@Css("[ui=label]") public static WebList navigationL;
+	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList navigationS;
 	// TODO fix slow @UI("[ui=label][*'%s']") public static WebList navigationS;
 	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static UIElement menu;
 	// TODO fix slow @UI("[ui=label][*'%s']") public static UIElement menu;

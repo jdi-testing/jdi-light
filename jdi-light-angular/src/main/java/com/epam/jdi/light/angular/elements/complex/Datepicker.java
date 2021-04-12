@@ -7,7 +7,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import org.openqa.selenium.By;
@@ -372,7 +372,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     @JDIAction(value = "Is '{name}' has first input & change events '{0}'")
     public boolean isFirstInputChangeEvents(final List<String> firstInputChangeEvents) {
-        webList allEvents = exampleEvents();
+        WebList allEvents = exampleEvents();
         String firstInputEvent = allEvents.get(1).text();
         String firstChangeEvent = allEvents.get(2).text();
         List<String> actualInputChangeEvents = new ArrayList<>(Arrays.asList(firstInputEvent, firstChangeEvent));
@@ -382,7 +382,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     @JDIAction(value = "Is '{name}' has last input & change events '{0}'")
     public boolean isLastInputChangeEvents(final List<String> lastInputChangeEvents) {
-        webList allEvents = exampleEvents();
+        WebList allEvents = exampleEvents();
         String lastInputEvent = allEvents.get(allEvents.size() - 1).text();
         String lastChangeEvent = allEvents.get(allEvents.size()).text();
         List<String> actualInputChangeEvents = new ArrayList<>(Arrays.asList(lastInputEvent, lastChangeEvent));
@@ -392,14 +392,14 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     @JDIAction(value = "Is '{name}' has last change event '{0}'")
     public boolean isLastChangeEvent(final String lastChangeEvent) {
-        webList allEvents = exampleEvents();
+        WebList allEvents = exampleEvents();
         String changeEvent = allEvents.get(allEvents.size()).text();
         return changeEvent.contains(lastChangeEvent);
     }
 
     @JDIAction(value = "Is '{name}' has last input event '{0}'")
     public boolean isLastInputEvent(final String lastInputEvent) {
-        webList allEvents = exampleEvents();
+        WebList allEvents = exampleEvents();
         String inputEvent = allEvents.get(allEvents.size() - 1).text();
         return inputEvent.contains(lastInputEvent);
     }
@@ -439,10 +439,10 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         return new UIElement(By.xpath(String.format(openButton, replaceExpression)));
     }
 
-    protected webList exampleEvents() {
+    protected WebList exampleEvents() {
         String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
-        return new webList(By.xpath(String.format(exampleEvents, replaceExpression)));
+        return new WebList(By.xpath(String.format(exampleEvents, replaceExpression)));
     }
 
     protected UIElement switchLocaleButton() {

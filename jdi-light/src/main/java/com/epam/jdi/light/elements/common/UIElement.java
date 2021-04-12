@@ -8,7 +8,7 @@ import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
@@ -773,14 +773,14 @@ public class UIElement extends JDIBase
     public UIElement find(@MarkupLocator By by) {
         return $(by, this);
     }
-    public webList finds(@MarkupLocator String by) {
+    public WebList finds(@MarkupLocator String by) {
         return $$(by, this);
     }
-    public webList finds(@MarkupLocator By by) {
+    public WebList finds(@MarkupLocator By by) {
         return $$(by, this);
     }
     public UIElement firstChild() { return find("*"); }
-    public webList children() { return finds("*"); }
+    public WebList children() { return finds("*"); }
     public UIElement findUp() {
         return find("./..");
     }

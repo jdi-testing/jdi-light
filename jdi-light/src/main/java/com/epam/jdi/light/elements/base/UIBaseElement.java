@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
@@ -30,8 +30,8 @@ public abstract class UIBaseElement<A extends UIAssert<?,?>> implements ICoreEle
             el.setParent(base().parent);
         return el;
     }
-    protected webList linkedList(@MarkupLocator String locator, String name) {
-        webList list = new webList(base(), locator, getName() + " " + name, this);
+    protected WebList linkedList(@MarkupLocator String locator, String name) {
+        WebList list = new WebList(base(), locator, getName() + " " + name, this);
         list.searchVisible();
         if (thisParent)
             list.setParent(base().parent);

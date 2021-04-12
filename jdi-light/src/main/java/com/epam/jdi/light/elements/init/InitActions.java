@@ -70,7 +70,7 @@ public class InitActions {
         $(IsChecklist.class, Checklist.class)
     );
     public static MapArray<String, InitRule> INIT_RULES = map(
-        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new webList().indexFromZero())),
+        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList().indexFromZero())),
         $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
             info -> new DataList<>())),
         $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),

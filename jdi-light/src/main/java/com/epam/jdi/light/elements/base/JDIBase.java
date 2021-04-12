@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.common.*;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.init.SiteInfo;
 import com.epam.jdi.light.elements.init.rules.AnnotationRule;
 import com.epam.jdi.light.elements.interfaces.base.HasCache;
@@ -357,7 +357,7 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
                 return elements;
         }
     }
-    public webList list(Object... args) {
+    public WebList list(Object... args) {
         return $$(getAll(args), getName());
     }
     public void waitAction(int sec, JAction1<IBaseElement> action) {

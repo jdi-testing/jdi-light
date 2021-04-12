@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.LinqUtils;
@@ -16,8 +16,8 @@ import java.util.List;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public interface IDataGrid<L extends PageObject, D> extends HasGrid, ICoreElement, IList<D> {
-    D rowAsData(webList row);
-    L rowAsLine(webList row);
+    D rowAsData(WebList row);
+    L rowAsLine(WebList row);
 
     default boolean isEmpty() { return grid().isEmpty(); }
     default int count() { return grid().count(); }
@@ -31,13 +31,13 @@ public interface IDataGrid<L extends PageObject, D> extends HasGrid, ICoreElemen
     default UIElement webCell(int colNum, int rowNum) {
         return grid().webCell(colNum, rowNum);
     }
-    default webList webRow(int rowNum) {
+    default WebList webRow(int rowNum) {
         return grid().webRow(rowNum);
     }
-    default webList footerUI() {
+    default WebList footerUI() {
         return grid().footerUI();
     }
-    default webList webColumn(int colNum) {
+    default WebList webColumn(int colNum) {
         return grid().webColumn(colNum);
     }
     // region Rows
@@ -53,7 +53,7 @@ public interface IDataGrid<L extends PageObject, D> extends HasGrid, ICoreElemen
     default List<D> allData() {
         return LinqUtils.map(grid().rows(), row -> rowAsData(row.uiElements()));
     }
-    default webList webColumn(String colName) {
+    default WebList webColumn(String colName) {
         return grid().webColumn(colName);
     }
     // endregion

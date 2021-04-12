@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Row;
 import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
@@ -71,7 +71,7 @@ public class DataTableAssert<L extends PageObject, D>
     }
     @JDIAction("Assert that '{name}' is sorted by ascending")
     public DataTableAssert<L, D> sortedByAsc(String columnName, JFunc1<UIElement, Object> getValue) {
-        webList column = table().webColumn(columnName);
+        WebList column = table().webColumn(columnName);
         for (int i = 1; i < column.size(); i++)
             if (!isSorted(getValue.execute(column.get(i-1)), getValue.execute(column.get(i)), true, false))
                 jdiAssert("Table is not by ascending at "+i+" row", Matchers.is(""));
@@ -79,7 +79,7 @@ public class DataTableAssert<L extends PageObject, D>
     }
     @JDIAction("Assert that '{name}' is sorted by descending")
     public DataTableAssert<L, D> sortedByDesc(String columnName, JFunc1<UIElement, Object> getValue) {
-        webList column = table().webColumn(columnName);
+        WebList column = table().webColumn(columnName);
         for (int i = 1; i < column.size(); i++)
             if (!isSorted(getValue.execute(column.get(i-1)), getValue.execute(column.get(i)), false, false))
                 jdiAssert("Table is not by descending at "+i+" row", Matchers.is(""));

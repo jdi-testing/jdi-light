@@ -4,7 +4,7 @@ import com.epam.jdi.light.angular.asserts.ButtonToggleAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import org.openqa.selenium.By;
 
 /**
@@ -29,7 +29,7 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
     }
 
     @JDIAction("Get '{name}' tabs")
-    private webList getButtonToggleItems() {
+    private WebList getButtonToggleItems() {
         return this.finds(".mat-button-toggle");
     }
 

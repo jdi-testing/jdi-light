@@ -4,7 +4,7 @@ import com.epam.jdi.light.angular.asserts.AutoCompleteAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
@@ -61,7 +61,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Select value {0} for '{name}'")
     public void select(String value) {
-        webList options = getOptions(optionsCss);
+        WebList options = getOptions(optionsCss);
         options.get(value).click();
     }
 
@@ -75,12 +75,12 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     @JDIAction("Get display value for '{name}'")
     public String displayValue() {
         String displayValueXpath = displayValueCss + "[" + getAutocompleteUniqueAttribute() + "]";
-        webList labels = getOptions(displayValueXpath);
+        WebList labels = getOptions(displayValueXpath);
         return (!labels.isEmpty()) ? labels.get(1).getText() : "";
     }
 
     public Boolean isOptionHighlighted(String value) {
-        webList values = getOptions(optionsCss);
+        WebList values = getOptions(optionsCss);
         UIElement element = values.get(value);
         String selected = element.core().getAttribute("class");
         return selected.contains("mat-active");
@@ -113,16 +113,16 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return text();
     }
 
-    private webList items() {
+    private WebList items() {
         click();
-        webList options = getOptions(optionsCss);
+        WebList options = getOptions(optionsCss);
         click();
         return options;
     }
 
-    private webList items(String inputValue) {
+    private WebList items(String inputValue) {
         input(inputValue);
-        webList options = getOptions(optionsCss);
+        WebList options = getOptions(optionsCss);
         click();
         return options;
     }
@@ -141,19 +141,19 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     private List<String> getValues() {
         List<String> values = new ArrayList<>();
-        webList options = getOptions(optionsCss);
+        WebList options = getOptions(optionsCss);
         options.forEach(option -> values.add(option.getValue()));
         return values;
     }
 
     private HashMap<UIElement, List<WebElement>> groupsAndOptions() {
-        webList groups = getOptions(optionsGroupsCss);
+        WebList groups = getOptions(optionsGroupsCss);
         HashMap<UIElement, List<WebElement>> groupsAndOptions = new HashMap<>();
         if (groups.isEmpty()) {
             return null;
         }
         groups.forEach(group -> {
-            webList curOptions = getOptions(optionsGroupsAndValuesCss + ">" + optionsCss);
+            WebList curOptions = getOptions(optionsGroupsAndValuesCss + ">" + optionsCss);
             groupsAndOptions.put(group, curOptions.getWebElements());
         });
         return groupsAndOptions;
@@ -161,7 +161,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Get groups for '{name}'")
     public List<String> groups() {
-        webList groupsList = getOptions(optionsGroupsCss);
+        WebList groupsList = getOptions(optionsGroupsCss);
         if (groupsList.isEmpty()) {
             String emptyArray[] = {""};
             return Arrays.asList(emptyArray);
@@ -192,12 +192,12 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return groupsAndOptionsValues;
     }
 
-    private webList getOptions() {
-        return new webList(By.cssSelector(optionsCss));
+    private WebList getOptions() {
+        return new WebList(By.cssSelector(optionsCss));
     }
 
-    private webList getOptions(String css) {
-        return new webList(By.cssSelector(css));
+    private WebList getOptions(String css) {
+        return new WebList(By.cssSelector(css));
     }
 
     private String getAutocompleteUniqueAttribute() {

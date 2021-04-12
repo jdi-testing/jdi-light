@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.complex.dropdown;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 
 import java.util.List;
 
@@ -20,8 +20,8 @@ public class Dropdown extends DropdownExpand {
     }
 
     @Override
-    public webList list() {
-        webList list = setupDone ? super.list() : ds().list();
+    public WebList list() {
+        WebList list = setupDone ? super.list() : ds().list();
         list.setStartIndex(getStartIndex());
         return list;
     }

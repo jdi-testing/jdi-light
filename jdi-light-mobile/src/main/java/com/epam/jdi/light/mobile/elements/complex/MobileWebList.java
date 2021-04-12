@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.ISelector;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
@@ -771,7 +771,7 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
     }
 
     @Override
-    public webList list() {
+    public WebList list() {
         return null;
     }
 

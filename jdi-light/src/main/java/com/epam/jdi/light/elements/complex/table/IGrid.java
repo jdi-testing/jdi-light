@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.tools.LinqUtils;
@@ -26,7 +26,7 @@ import static java.lang.String.format;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public interface IGrid<T> extends HasValue, IsText, IList<T> {
-    webList webCells();
+    WebList webCells();
 
     default boolean isEmpty() { return count() == 0; }
     default boolean isNotEmpty() { return count() > 0; }
@@ -40,8 +40,8 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         return output;
     }
 
-    default webList headerUI() { return webRow(1); }
-    default webList footerUI() { return null; }
+    default WebList headerUI() { return webRow(1); }
+    default WebList footerUI() { return null; }
 
     default List<String> header() {
         return headerUI().values();
@@ -57,7 +57,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     default int count() { return rows().size(); }
 
     // region Rows
-    default webList webRow(int rowNum) {
+    default WebList webRow(int rowNum) {
         if (rowNum < 0) {
             throw exception("Failed to find webRow. Index should be >= 0");
         }
@@ -81,10 +81,10 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         }
         return index + 1;
     }
-    default webList webRow(String rowName) {
+    default WebList webRow(String rowName) {
         return webRow(getRowIndexByName(rowName));
     }
-    default webList webRow(Enum<?> rowName) {
+    default WebList webRow(Enum<?> rowName) {
         return webRow(getEnumValue(rowName));
     }
 
@@ -127,7 +127,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     // endregion
 
     // region Columns
-    default webList webColumn(int colNum) {
+    default WebList webColumn(int colNum) {
         List<WebElement> column = new ArrayList<>();
         int size = size();
         int colIndex = colNum - 1;
@@ -143,10 +143,10 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
         }
         return index + 1;
     }
-    default webList webColumn(String colName) {
+    default WebList webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
     }
-    default webList webColumn(Enum<?> colName) {
+    default WebList webColumn(Enum<?> colName) {
         return webColumn(getEnumValue(colName));
     }
 

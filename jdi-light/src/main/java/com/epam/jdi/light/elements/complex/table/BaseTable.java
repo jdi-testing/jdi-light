@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.interfaces.base.HasRefresh;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
-import static com.epam.jdi.light.elements.complex.webList.newList;
+import static com.epam.jdi.light.elements.complex.WebList.newList;
 import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.TABLE_MATCHER;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -72,9 +72,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public JFunc1<String, String> SIMPLIFY = ELEMENT.simplifyString;
     protected boolean locatorsValidated = false;
 
-    protected CacheAll<MapArray<String, webList>> rows
+    protected CacheAll<MapArray<String, WebList>> rows
             = new CacheAll<>(MapArray::new);
-    protected CacheAll<MapArray<String, webList>> columns
+    protected CacheAll<MapArray<String, WebList>> columns
             = new CacheAll<>(MapArray::new);
     protected CacheAll<MapArray<String, MapArray<String, UIElement>>> cells
             = new CacheAll<>(MapArray::new);
@@ -151,8 +151,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         this.header.setFinal(header);
     }
 
-    public webList headerUI() {
-        webList header = core().finds(headerLocator).setName(getName() + " header");
+    public WebList headerUI() {
+        WebList header = core().finds(headerLocator).setName(getName() + " header");
         if (header.isEmpty()) {
             header = getRowByIndex(getRowHeaderIndex());
             if (header.isNotEmpty()) {
@@ -165,8 +165,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         }
         return header.setName(getName() + " header");
     }
-    public webList footerUI() {
-        webList footer = core().finds(this.footer).setName(getName() + " footer");
+    public WebList footerUI() {
+        WebList footer = core().finds(this.footer).setName(getName() + " footer");
         if (footer.isEmpty()) {
             footer = getRowByIndex(getRowHeaderIndex());
             if (footer.isEmpty()) {
@@ -218,7 +218,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int getTableSize() {
         if (header.hasValue())
             return header.get().size();
-        webList header = headerUI().noValidation();
+        WebList header = headerUI().noValidation();
         return header.size();
     }
     // Amount of columns
@@ -226,12 +226,12 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public int size() { return size.get(); }
 
     @JDebug
-    public webList webRow(int rowNum) {
+    public WebList webRow(int rowNum) {
         validateRowIndex(rowNum);
         if (rows.get().has(rowNum+""))
             return rows.get().get(rowNum+"");
-        webList result = cells.isGotAll()
-            ? new webList(select(cells.get(), c -> c.value.get(rowNum+"")))
+        WebList result = cells.isGotAll()
+            ? new WebList(select(cells.get(), c -> c.value.get(rowNum+"")))
             : getRow(rowNum);
         rows.get().update(rowNum+"", result);
         return result;
@@ -248,23 +248,23 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
                 cells.clear();
         }
     }
-    public webList webRow(int columnIndex, String rowName) {
+    public WebList webRow(int columnIndex, String rowName) {
         return webColumn(columnIndex).get(jsRowIndexByName(rowName)).finds(fromCellToRow);
     }
     @JDebug
-    public webList webRow(String rowName) {
+    public WebList webRow(String rowName) {
         return webRow(getRowHeaderIndex(), rowName);
     }
     @JDebug
-    public webList webRow(Enum<?> rowName) {
+    public WebList webRow(Enum<?> rowName) {
         return webRow(getEnumValue(rowName));
     }
     @JDebug
-    public webList webColumn(int colNum) {
+    public WebList webColumn(int colNum) {
         validateColumnIndex(colNum) ;
         if (columns.get().has(colNum+""))
             return columns.get().get(colNum+"");
-        webList result = cells.isGotAll()
+        WebList result = cells.isGotAll()
             ? newList(cells.get().get(colNum + "").values())
             : getColumn(colNum);
         columns.get().update(colNum + "", result);
@@ -313,10 +313,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             throw exception("Table has %s columns (but requested index is %s)", size(), colNum);
     }
     @JDebug
-    public webList webColumn(String colName) {
+    public WebList webColumn(String colName) {
         return webColumn(getColIndexByName(colName));
     }
-    public webList webColumn(Enum<?> colName) {
+    public WebList webColumn(Enum<?> colName) {
         return webRow(getEnumValue(colName));
     }
     protected int getColIndexByName(String colName) {
@@ -352,37 +352,37 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         cells.get().update(colNum + "", new MapArray<>(rowNum + "", cell));
         return cell;
     }
-    protected MapArray<String, webList> getRows() {
+    protected MapArray<String, WebList> getRows() {
         if (rows.isGotAll()) return rows.get();
-        MapArray<String, webList> result = new MapArray<>();
+        MapArray<String, WebList> result = new MapArray<>();
         int count = count() + getStartIndex();
         for (int i = getStartIndex(); i < count; i++)
             result.add(i+"", webRow(i));
         rows.gotAll();
         return rows.set(result);
     }
-    protected webList getRowByIndex(int rowNum) {
-        webList row = core().finds(fillByTemplate(rowLocator, rowNum + getShiftRowIndex()));
+    protected WebList getRowByIndex(int rowNum) {
+        WebList row = core().finds(fillByTemplate(rowLocator, rowNum + getShiftRowIndex()));
         row.searchVisible();
         return row;
     }
 
     @JDebug
-    public webList getRow(int rowNum) {
-        webList row = getRowByIndex(getRowIndex(rowNum));
+    public WebList getRow(int rowNum) {
+        WebList row = getRowByIndex(getRowIndex(rowNum));
         return shiftColumnIndex > getStartIndex() || !columnsMapping.get().isEmpty()
             ? getMappedRow(row)
             : row;
     }
-    protected webList getMappedRow(webList row) {
+    protected WebList getMappedRow(WebList row) {
         List<WebElement> result = new ArrayList<>();
         for (int i = getStartIndex(); i < header().size() + getStartIndex(); i++)
             result.add(row.get(getColumnIndex(i)));
-        return new webList(result);
+        return new WebList(result);
     }
-    protected MapArray<String, webList> getColumns() {
+    protected MapArray<String, WebList> getColumns() {
         if (columns.isGotAll()) return columns.get();
-        MapArray<String, webList> result = new MapArray<>();
+        MapArray<String, WebList> result = new MapArray<>();
         int size = size() + getStartIndex();
         for (int i = getStartIndex(); i < size; i++)
             result.add(i +"", webColumn(i));
@@ -398,7 +398,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return getColumnIndex(index) + getShiftColumnIndex();
     }
     @JDebug
-    public webList getColumn(int colNum) {
+    public WebList getColumn(int colNum) {
         int colIndex = getColumnLocatorIndex(colNum);
         return core().finds(fillByTemplate(columnLocator, colIndex)).noValidation();
     }
@@ -424,18 +424,18 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
     protected boolean headerIsRow() {
         List<String> firstRow = new ArrayList<>();
-        try { firstRow = getRowByIndex(getRowHeaderIndex()).noWait(webList::values, webList.class); }
+        try { firstRow = getRowByIndex(getRowHeaderIndex()).noWait(WebList::values, WebList.class); }
         catch (Exception ignore) { }
         return firstRow.isEmpty() || any(header(), firstRow::contains);
     }
     protected boolean headerSameAsFirstRow() {
         List<String> firstRow = new ArrayList<>();
-        try { firstRow = getRowByIndex(getRowHeaderIndex()).noWait(webList::values, webList.class); }
+        try { firstRow = getRowByIndex(getRowHeaderIndex()).noWait(WebList::values, WebList.class); }
         catch (Exception ignore) { }
         return !firstRow.isEmpty() && any(header(), firstRow::contains);
     }
     @JDebug
-    public webList filter() {
+    public WebList filter() {
         return core().finds(filterLocator).setName(getName()+" filter");
     }
     public UIElement filterBy(String filterName) {
@@ -457,7 +457,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (ObjectUtils.isEmpty(header())) {
             throw exception(getName() + " table has empty header");
         }
-        webList lines = TABLE_MATCHER.execute(this, matchers);
+        WebList lines = TABLE_MATCHER.execute(this, matchers);
         if (lines == null || lines.isEmpty())
             return null;
         List<String> result = new ArrayList<>();
@@ -552,10 +552,10 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
      */
     @JDIAction("Get all '{name}' rows")
     public List<Line> rowsImages() {
-        MapArray<String, webList> rows = getRows();
+        MapArray<String, WebList> rows = getRows();
         return map(rows, this::toLineSaveImages);
     }
-    private Line toLineSaveImages(Pair<String, webList> row) {
+    private Line toLineSaveImages(Pair<String, WebList> row) {
         Line line = new Line(header(), row.value, getName() + " line[" + row.key + "]");
         line.saveCellsImages();
         return line;

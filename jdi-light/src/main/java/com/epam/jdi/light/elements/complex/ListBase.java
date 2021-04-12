@@ -36,12 +36,12 @@ import static com.epam.jdi.tools.ReflectionUtils.*;
 abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
     protected int startIndex = ELEMENT.startIndex;
-    protected webList list;
+    protected WebList list;
     public Class<?> initClass = UIElement.class;
 
     ListBase() {}
-    ListBase(By locator) { list = new webList(locator); }
-    ListBase(List<WebElement> elements) { list = new webList(elements); }
+    ListBase(By locator) { list = new WebList(locator); }
+    ListBase(List<WebElement> elements) { list = new WebList(elements); }
 
     public int getStartIndex() {
         return startIndex;
@@ -49,8 +49,8 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     public void setStartIndex(int index) {
         startIndex = index;
     }
-    public webList list() {
-        webList list = new webList(core())
+    public WebList list() {
+        WebList list = new WebList(core())
                 .setUIElementName(this::elementTitle).setName(getName());
         list.setStartIndex(getStartIndex());
         return list;

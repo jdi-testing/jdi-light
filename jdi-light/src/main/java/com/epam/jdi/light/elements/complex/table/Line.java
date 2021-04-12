@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
-import com.epam.jdi.light.elements.complex.webList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.PrintUtils;
@@ -36,7 +36,7 @@ import static java.util.Arrays.asList;
  */
 public class Line implements IList<String>, IBaseElement {
     private JFunc<MultiMap<String, String>> dataMap;
-    private webList elements;
+    private WebList elements;
     private List<String> headers;
     protected int startIndex = ELEMENT.startIndex;
 
@@ -48,12 +48,12 @@ public class Line implements IList<String>, IBaseElement {
         this.list = new ArrayList<>(list);
         this.headers = new ArrayList<>(headers);
         this.data = new MultiMap<>(headers, list).ignoreKeyCase();
-        this.elements = new webList(base);
+        this.elements = new WebList(base);
     }
     public Line(List<String> headers, List<WebElement> elements, String name) {
-        this(headers, new webList(elements, name), name);
+        this(headers, new WebList(elements, name), name);
     }
-    public Line(List<String> headers, webList elements, String name) {
+    public Line(List<String> headers, WebList elements, String name) {
         if (headers == null) {
             throw exception("Failed to create Line. Header has null value");
         }
@@ -102,7 +102,7 @@ public class Line implements IList<String>, IBaseElement {
     public MultiMap<String, UIElement> uiMap() {
         return new MultiMap<>(headers, elements.indexFromZero()).ignoreKeyCase();
     }
-    public webList uiElements() {
+    public WebList uiElements() {
         return elements;
     }
     public void saveCellsImages() {
@@ -115,7 +115,7 @@ public class Line implements IList<String>, IBaseElement {
             element.makePhoto();
             result.add(element);
         }
-        elements = new webList(headers, result);
+        elements = new WebList(headers, result);
     }
     public boolean visualCompareTo(Line line) {
         for (Pair<String, UIElement> cell : uiMap())
