@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.composite;
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDebug;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
@@ -80,7 +80,7 @@ public class Form<T> extends Section {
         this.filter = filter;
     }
 
-    private String elementLocator(com.epam.jdi.light.elements.common.uiElement element) {
+    private String elementLocator(UIElement element) {
         try {
             return element.locator.toString();
         } catch (Exception ex) {
@@ -96,9 +96,9 @@ public class Form<T> extends Section {
         List<Field> allFields = allFields();
         if (allFields.size() == 0) {
             for (Pair<String, String> pair : map) {
-                com.epam.jdi.light.elements.common.uiElement element = new uiElement();
+                UIElement element = new UIElement();
                 try {
-                    element = new uiElement().setup(e -> e
+                    element = new UIElement().setup(e -> e
                             .setName(pair.key)
                             .setParent(this));
                     fillAction(null, element, pageObject, pair.value);

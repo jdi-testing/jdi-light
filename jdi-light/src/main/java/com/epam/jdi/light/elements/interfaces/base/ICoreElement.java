@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.Condition;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.map.MapArray;
@@ -18,8 +18,8 @@ import static java.lang.String.format;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public interface ICoreElement extends IBaseElement {
-    uiElement core();
-    default uiElement iCore() { return core(); }
+    UIElement core();
+    default UIElement iCore() { return core(); }
     default <T> T with(Class<T> cl) {
         return core().with(cl);
     }
@@ -55,13 +55,13 @@ public interface ICoreElement extends IBaseElement {
     default boolean hasAttribute(String attrName) { return iCore().hasAttribute(attrName); }
     default String printHtml() { return iCore().printHtml(); }
     default List<String> classes() {return iCore().classes(); }
-    default uiElement find(@MarkupLocator String by) {
+    default UIElement find(@MarkupLocator String by) {
         return iCore().find(by);
     }
-    default uiElement find(@MarkupLocator String by, Object... args) {
+    default UIElement find(@MarkupLocator String by, Object... args) {
         return find(format(by, args));
     }
-    default uiElement find(@MarkupLocator By by) {
+    default UIElement find(@MarkupLocator By by) {
         return iCore().find(by);
     }
     default webList finds(@MarkupLocator String by) {
@@ -71,7 +71,7 @@ public interface ICoreElement extends IBaseElement {
         return finds(format(by, args));
     }
     default webList finds(@MarkupLocator By by) { return iCore().finds(by); }
-    default uiElement firstChild() { return iCore().firstChild(); }
+    default UIElement firstChild() { return iCore().firstChild(); }
     default webList children() { return iCore().children(); }
     default String getTagName() {
         return iCore().getTagName();
@@ -79,7 +79,7 @@ public interface ICoreElement extends IBaseElement {
     default void visualValidation(String tag) {
         iCore().visualValidation(tag);
     }
-    default void visualValidation(uiElement element) {
+    default void visualValidation(UIElement element) {
         iCore().visualValidation(element);
     }
     default void dragAndDropTo(WebElement element) {

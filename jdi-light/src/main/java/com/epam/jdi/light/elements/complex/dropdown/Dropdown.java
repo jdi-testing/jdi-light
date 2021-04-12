@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.complex.dropdown;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class Dropdown extends DropdownExpand {
         return new DropdownSelect().setCore(DropdownSelect.class, base());
     }
     @Override
-    public com.epam.jdi.light.elements.common.uiElement iCore() {
+    public UIElement iCore() {
         return setupDone ? value() : ds().core();
     }
 

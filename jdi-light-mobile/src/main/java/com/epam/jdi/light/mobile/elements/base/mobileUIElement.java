@@ -2,7 +2,7 @@ package com.epam.jdi.light.mobile.elements.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.light.mobile.elements.common.app.android.Label;
 import com.epam.jdi.light.mobile.elements.complex.MobileWebList;
@@ -34,7 +34,7 @@ import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class mobileUIElement extends uiElement implements HasTouchActions {
+public class mobileUIElement extends UIElement implements HasTouchActions {
 
     //region Constructors
     public mobileUIElement() {
@@ -116,8 +116,8 @@ public class mobileUIElement extends uiElement implements HasTouchActions {
     }
 
     @Override
-    public uiElement findFirst(@MarkupLocator String by) {
-        uiElement element = $(by, this);
+    public UIElement findFirst(@MarkupLocator String by) {
+        UIElement element = $(by, this);
         element.strictSearch(false);
         return element;
     }

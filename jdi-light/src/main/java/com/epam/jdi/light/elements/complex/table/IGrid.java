@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
@@ -182,7 +182,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     // endregion
 
     // region Cells
-    default uiElement webCell(int colNum, int rowNum) {
+    default UIElement webCell(int colNum, int rowNum) {
         return $(webCells().get((rowNum-1)*size() + colNum + 1));
     }
     default String cell(int colNum, int rowNum) {

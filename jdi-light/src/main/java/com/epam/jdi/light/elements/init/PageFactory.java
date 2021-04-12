@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.webList;
@@ -200,7 +200,7 @@ public class PageFactory {
     //endregion
 
     public static List<Class<?>> STOP_INIT_CLASSES = newList(
-        Object.class, WebPage.class, PageObject.class, uiElement.class, UIBaseElement.class, UIListBase.class,
+        Object.class, WebPage.class, PageObject.class, UIElement.class, UIBaseElement.class, UIListBase.class,
         DataList.class, JList.class, webList.class);
 
     public static void initElements(SiteInfo info) {

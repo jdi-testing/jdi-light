@@ -1,6 +1,6 @@
 package page.objects.jdi;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
@@ -16,7 +16,7 @@ public class HomePageWeb extends WebPage {
     public WebElement password = $("form #password");
     @FindBy(id = "login-button") public WebElement enter;
 
-    @UI("form #name") public uiElement userNameUI;
-    public uiElement loginButton,
+    @UI("form #name") public UIElement userNameUI;
+    public UIElement loginButton,
         passwordUI = $("form #password");
 }

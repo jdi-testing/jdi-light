@@ -2,7 +2,7 @@ package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.DialogAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -73,31 +73,31 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         return !isOpened();
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement getOkButton() {
-        return new uiElement(By.cssSelector(okButton));
+    protected UIElement getOkButton() {
+        return new UIElement(By.cssSelector(okButton));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement getAnswerFormField() {
-        return new uiElement(By.cssSelector(answerFormField));
+    protected UIElement getAnswerFormField() {
+        return new UIElement(By.cssSelector(answerFormField));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement getNoThanksButton() {
-        return new uiElement(By.cssSelector(noThanksButton));
+    protected UIElement getNoThanksButton() {
+        return new UIElement(By.cssSelector(noThanksButton));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement getNameFormField() {
-        return new uiElement(By.cssSelector(nameFormField));
+    protected UIElement getNameFormField() {
+        return new UIElement(By.cssSelector(nameFormField));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement getDialogContainer() {
-        return new uiElement(By.cssSelector(dialogContainer));
+    protected UIElement getDialogContainer() {
+        return new UIElement(By.cssSelector(dialogContainer));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement getAnswerLabel() {
-        return new uiElement(By.cssSelector(answerLabel));
+    protected UIElement getAnswerLabel() {
+        return new UIElement(By.cssSelector(answerLabel));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement getGreetingLabel() {
-        return new uiElement(By.cssSelector(greetingLabel));
+    protected UIElement getGreetingLabel() {
+        return new UIElement(By.cssSelector(greetingLabel));
     }
 }

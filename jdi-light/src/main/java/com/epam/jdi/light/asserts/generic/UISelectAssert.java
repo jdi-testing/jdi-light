@@ -3,7 +3,7 @@ package com.epam.jdi.light.asserts.generic;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
@@ -181,12 +181,12 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
         }
 
         @JDIAction("Assert that '{name}' has {type} '{count}' elements that meet expected condition")
-        public UISelectAssert<A,E> elements(JFunc1<uiElement, Boolean> condition) {
+        public UISelectAssert<A,E> elements(JFunc1<UIElement, Boolean> condition) {
             jdiAssert(element().list().filter(condition), hasSize(count));
             return dtAssert;
         }
         @JDIAction("Assert that '{name}' has {type} '{count}' '{0}'")
-        public UISelectAssert<A,E> elements(uiElement data) {
+        public UISelectAssert<A,E> elements(UIElement data) {
             return elements(d -> d.equals(data));
         }
     }

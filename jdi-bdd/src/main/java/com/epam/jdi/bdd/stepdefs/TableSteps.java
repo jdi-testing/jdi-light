@@ -1,7 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -139,7 +139,7 @@ public class TableSteps {
         return cell(name, cellPair).is();
     }
 
-    private uiElement cell(String name, String cellPair) {
+    private UIElement cell(String name, String cellPair) {
         int x, y;
         try {
             String[] xy = cellPair.split(",");

@@ -1,6 +1,6 @@
 package com.epam.jdi.light.mobile.elements.base;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.func.JFunc1;
 
 import static com.epam.jdi.light.mobile.elements.base.mobileUIElement.SMART_GET_TEXT;
@@ -12,7 +12,7 @@ public enum MobileTextTypes {
     TEXT(ui -> ui.get().getText()),
     VALUE(ui -> ui.attr("value")),
     INNER(ui -> ui.jsExecute("innerText")),
-    LABEL(uiElement::labelText),
+    LABEL(UIElement::labelText),
     INDEX();
 
     public JFunc1<mobileUIElement, String> func;

@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
@@ -11,9 +12,9 @@ public class Header extends Section {
 	@Css(".logout") public static WebElement logout;
 	@Css("#epam-logo") public static WebElement epamLogo;
 	public static WebElement userIcon;
-	@XPath("//*[@ui='label']") public static com.epam.jdi.light.elements.common.uiElement userName;
+	@XPath("//*[@ui='label']") public static UIElement userName;
 
-	@Css(".search-field input") static com.epam.jdi.light.elements.common.uiElement searchInput;
+	@Css(".search-field input") static UIElement searchInput;
 	@Css(".icon-search") static WebElement searchIcon;
 	@Css(".icon-search.active") static WebElement doSearch;
 

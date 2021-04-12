@@ -4,6 +4,7 @@ import com.epam.jdi.light.angular.asserts.CheckboxAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
@@ -62,7 +63,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
         if (core().label().isDisplayed()) {
             return core().label();
         }
-        com.epam.jdi.light.elements.common.uiElement input = core().find("input[type=checkbox]");
+        UIElement input = core().find("input[type=checkbox]");
         if (input.label().isDisplayed()) {
             return input.label();
         }

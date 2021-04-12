@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
@@ -28,7 +28,7 @@ public interface IDataGrid<L extends PageObject, D> extends HasGrid, ICoreElemen
         return grid().size();
     }
 
-    default uiElement webCell(int colNum, int rowNum) {
+    default UIElement webCell(int colNum, int rowNum) {
         return grid().webCell(colNum, rowNum);
     }
     default webList webRow(int rowNum) {

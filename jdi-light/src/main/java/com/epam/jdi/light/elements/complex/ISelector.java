@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
@@ -79,7 +79,7 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     default boolean isEmpty() { return size() == 0; }
     default boolean isNotEmpty() { return size() > 0; }
     default List<Label> labels() {
-        return map(list(), uiElement::label);
+        return map(list(), UIElement::label);
     }
 
 }

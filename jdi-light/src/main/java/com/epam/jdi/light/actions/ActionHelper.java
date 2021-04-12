@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
@@ -488,7 +488,7 @@ public class ActionHelper {
     static MapArray<String, Object> core(JoinPoint jp) {
         Object instance = getJpInstance(jp);
         if (instance != null && isInterface(instance.getClass(), ICoreElement.class)) {
-            uiElement el = ((ICoreElement) instance).core();
+            UIElement el = ((ICoreElement) instance).core();
             return getAllFields(el);
         }
         return new MapArray<>();

@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.asserts.complex.ChecklistAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 
 import java.util.List;
@@ -84,7 +85,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     }
 
 
-    protected boolean selected(com.epam.jdi.light.elements.common.uiElement value) {
+    protected boolean selected(UIElement value) {
         return value.isSelected();
     }
     /**
@@ -159,7 +160,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @JDIAction("Get '{name}' checked options")
     public List<String> checked() {
-        return ifSelect(list(), com.epam.jdi.light.elements.common.uiElement::isSelected, com.epam.jdi.light.elements.common.uiElement::labelText);
+        return ifSelect(list(), UIElement::isSelected, UIElement::labelText);
     }
 
     /**
@@ -178,7 +179,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     @Override
     @JDIAction("Get '{name}' selected option")
     public String selected() {
-        return print(list().ifSelect(com.epam.jdi.light.elements.common.uiElement::isSelected, com.epam.jdi.light.elements.common.uiElement::labelText));
+        return print(list().ifSelect(UIElement::isSelected, UIElement::labelText));
     }
 
     /**
@@ -192,11 +193,11 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     }
     @Override
     public List<String> listEnabled() {
-        return list().ifSelect(com.epam.jdi.light.elements.common.uiElement::isEnabled, com.epam.jdi.light.elements.common.uiElement::labelText);
+        return list().ifSelect(UIElement::isEnabled, UIElement::labelText);
     }
     @Override
     public List<String> listDisabled() {
-        return list().ifSelect(com.epam.jdi.light.elements.common.uiElement::isDisabled, com.epam.jdi.light.elements.common.uiElement::labelText);
+        return list().ifSelect(UIElement::isDisabled, UIElement::labelText);
     }
 
     @Override

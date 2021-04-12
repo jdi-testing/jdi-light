@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
@@ -36,7 +37,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         extends UIBaseElement<A> implements IList<T>, ISetup, ISelector {
     protected int startIndex = ELEMENT.startIndex;
     protected webList list;
-    public Class<?> initClass = com.epam.jdi.light.elements.common.uiElement.class;
+    public Class<?> initClass = UIElement.class;
 
     ListBase() {}
     ListBase(By locator) { list = new webList(locator); }
@@ -217,7 +218,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     @Override
     public List<String> values() {
         List<T> elements = LinqUtils.map(list().uiElements(0), el -> {
-            com.epam.jdi.light.elements.common.uiElement ui = $(el);
+            UIElement ui = $(el);
             list().map.get().update(elementTitle(ui), ui);
             return toT(ui);
         });
@@ -260,11 +261,11 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         try {
             Class<?> initClass = (Class<?>) types[0];
             if (initClass == WebElement.class)
-                initClass = com.epam.jdi.light.elements.common.uiElement.class;
+                initClass = UIElement.class;
             this.initClass = initClass;
         } catch (Exception ex) { throw  exception(ex, "Can't init WebList. WebList elements should extend UIElement"); }
     }
-    protected T toT(com.epam.jdi.light.elements.common.uiElement el) {
+    protected T toT(UIElement el) {
         return initT(el, this, initClass);
     }
 
@@ -278,14 +279,14 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
                 : null;
     };
     protected String titleFieldName = null;
-    protected String elementTitle(com.epam.jdi.light.elements.common.uiElement el) {
+    protected String elementTitle(UIElement el) {
         if (titleFieldName == null)
             titleFieldName = GET_TITLE_FIELD_NAME.execute(initClass.getFields());
         return titleFieldName == null
                 ? ELEMENT.listLabel.execute(el)
                 : getElementTitle(el, titleFieldName);
     }
-    protected String getElementTitle(com.epam.jdi.light.elements.common.uiElement el, String titleField) {
+    protected String getElementTitle(UIElement el, String titleField) {
         T element = toT(el);
         Field field = null;
         try {

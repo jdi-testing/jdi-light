@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.webList;
@@ -28,19 +29,19 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     public String expandLocator = ".caret";
     protected int startIndex = ELEMENT.startIndex;
 
-    public com.epam.jdi.light.elements.common.uiElement expander() {
+    public UIElement expander() {
         return linked(expandLocator, "expand");
     }
 
     public String valueLocator = "input span:not(.caret),button span:not(.caret)";
 
     @Override
-    public com.epam.jdi.light.elements.common.uiElement value() {
+    public UIElement value() {
         return linked(valueLocator, "value");
     }
 
     @Override
-    public com.epam.jdi.light.elements.common.uiElement iCore() {
+    public UIElement iCore() {
         return value();
     }
 

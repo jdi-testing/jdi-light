@@ -1,6 +1,6 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Checklist;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -22,7 +22,7 @@ import io.github.com.sections.DismissAlert;
 import io.github.com.sections.Slide;
 
 public class BootstrapPage extends WebPage {
-    public static uiElement inputGroupWrap, inputGroupNowrap;
+    public static UIElement inputGroupWrap, inputGroupNowrap;
     public static Badge badge;
     public static Button redButton, doubleButton, disabledButton, increaseProgress,
         decreaseProgress, resetProgress;

@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.JdiSettings;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
@@ -178,7 +178,7 @@ public class mobileappuielement extends mobileUIElement {
     }
 
     WebElement beforeSearch(WebElement el) {
-        (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new uiElement(el));
+        (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new UIElement(el));
         return el;
     }
 }

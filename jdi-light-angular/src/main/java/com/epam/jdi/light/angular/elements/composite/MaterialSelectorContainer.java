@@ -1,7 +1,7 @@
 package com.epam.jdi.light.angular.elements.composite;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.composite.Section;
 import org.openqa.selenium.By;
@@ -202,12 +202,12 @@ public class MaterialSelectorContainer extends Section {
         getBackdropSelectPanel().core().click(getPointOutsidePanel().getX(), getPointOutsidePanel().getY());
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement getBackdropSelectPanel() {
-        return new uiElement(By.cssSelector(backdropSelectPanel));
+    protected UIElement getBackdropSelectPanel() {
+        return new UIElement(By.cssSelector(backdropSelectPanel));
     }
 
     protected Point getPointOutsidePanel() {
-        com.epam.jdi.light.elements.common.uiElement uiElement = getBackdropSelectPanel();
+        UIElement uiElement = getBackdropSelectPanel();
         return new Point(uiElement.core().getRect().getWidth() + 2, uiElement.core().getRect().getHeight() + 2);
     }
 }

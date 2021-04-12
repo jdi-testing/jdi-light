@@ -6,7 +6,7 @@ import com.epam.jdi.light.angular.entities.DatepickerNavigation;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
@@ -409,34 +409,34 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         return new DatepickerAssert().set(this);
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement datepicker() {
-        return new uiElement(By.xpath(String.format(DATEPICKER.getName(),
+    protected UIElement datepicker() {
+        return new UIElement(By.xpath(String.format(DATEPICKER.getName(),
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement input() {
-        return new uiElement(By.xpath(String.format(inputLocator,
+    protected UIElement input() {
+        return new UIElement(By.xpath(String.format(inputLocator,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement toggle() {
-        return new uiElement(By.xpath(String.format(TOGGLE.getName(),
+    protected UIElement toggle() {
+        return new UIElement(By.xpath(String.format(TOGGLE.getName(),
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement toggleButton() {
-        return new uiElement(By.xpath(String.format(toggleButton,
+    protected UIElement toggleButton() {
+        return new UIElement(By.xpath(String.format(toggleButton,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement openButton() {
+    protected UIElement openButton() {
         String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
-        return new uiElement(By.xpath(String.format(openButton, replaceExpression)));
+        return new UIElement(By.xpath(String.format(openButton, replaceExpression)));
     }
 
     protected webList exampleEvents() {
@@ -445,10 +445,10 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
         return new webList(By.xpath(String.format(exampleEvents, replaceExpression)));
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement switchLocaleButton() {
+    protected UIElement switchLocaleButton() {
         String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
-        return new uiElement(By.xpath(String.format(switchLocaleButton, replaceExpression)));
+        return new UIElement(By.xpath(String.format(switchLocaleButton, replaceExpression)));
     }
 
     protected Point getOutsidePoint() {

@@ -1,5 +1,6 @@
 package pseudo.site.forms;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.Form;
@@ -32,23 +33,23 @@ public class CustomForm extends Form<User> {
     @XPath("//*[@class='xpathPublicWebElementList-class']") public List<WebElement> xpathPublicWebElementList;
 
     @FindBy(css = "#fbUIElement-id")
-    com.epam.jdi.light.elements.common.uiElement fbUIElement;
-    @FindBy(css = "#fbPublicUIElement-id") public com.epam.jdi.light.elements.common.uiElement fbPublicUIElement;
-    @FindBy(css = "#fbPrivateUIElement-id") private com.epam.jdi.light.elements.common.uiElement fbPrivateUIElement;
+    UIElement fbUIElement;
+    @FindBy(css = "#fbPublicUIElement-id") public UIElement fbPublicUIElement;
+    @FindBy(css = "#fbPrivateUIElement-id") private UIElement fbPrivateUIElement;
     @UI("#uiUIElement-id")
-    com.epam.jdi.light.elements.common.uiElement uiUIElement;
-    @UI("#uiPublicUIElement-id") public com.epam.jdi.light.elements.common.uiElement uiPublicUIElement;
+    UIElement uiUIElement;
+    @UI("#uiPublicUIElement-id") public UIElement uiPublicUIElement;
     @Css("#cssUIElement-id")
-    com.epam.jdi.light.elements.common.uiElement cssUIElement;
+    UIElement cssUIElement;
     @XPath("//*[@id='xpathPublicUIElement-id']") public WebElement xpathPublicUIElement;
 
-    @FindBy(css = ".fbUIElementList-class") List<com.epam.jdi.light.elements.common.uiElement> fbUIElementList;
-    @FindBy(css = ".fbPublicUIElementList-class") public List<com.epam.jdi.light.elements.common.uiElement> fbPublicUIElementList;
-    @FindBy(css = ".fbPrivateUIElementList-class") private List<com.epam.jdi.light.elements.common.uiElement> fbPrivateUIElementList;
-    @UI(".uiUIElementList-class") List<com.epam.jdi.light.elements.common.uiElement> uiUIElementList;
-    @UI(".uiPublicUIElementList-class") public List<com.epam.jdi.light.elements.common.uiElement> uiPublicUIElementList;
-    @Css(".cssUIElementList-class") List<com.epam.jdi.light.elements.common.uiElement> cssUIElementList;
-    @XPath("//*[@class='xpathPublicUIElementList-class']") public List<com.epam.jdi.light.elements.common.uiElement> xpathPublicUIElementList;
+    @FindBy(css = ".fbUIElementList-class") List<UIElement> fbUIElementList;
+    @FindBy(css = ".fbPublicUIElementList-class") public List<UIElement> fbPublicUIElementList;
+    @FindBy(css = ".fbPrivateUIElementList-class") private List<UIElement> fbPrivateUIElementList;
+    @UI(".uiUIElementList-class") List<UIElement> uiUIElementList;
+    @UI(".uiPublicUIElementList-class") public List<UIElement> uiPublicUIElementList;
+    @Css(".cssUIElementList-class") List<UIElement> cssUIElementList;
+    @XPath("//*[@class='xpathPublicUIElementList-class']") public List<UIElement> xpathPublicUIElementList;
 
     @FindBy(css = "#fbButton-id") Button fbButton;
     @FindBy(css = "#fbPublicButton-id") public Button fbPublicButton;
@@ -122,43 +123,43 @@ public class CustomForm extends Form<User> {
         return uiPublicWebElementList;
     }
 
-    public com.epam.jdi.light.elements.common.uiElement getFbUIElement() {
+    public UIElement getFbUIElement() {
         return fbUIElement;
     }
 
-    public com.epam.jdi.light.elements.common.uiElement getFbPublicUIElement() {
+    public UIElement getFbPublicUIElement() {
         return fbPublicUIElement;
     }
 
-    public com.epam.jdi.light.elements.common.uiElement getFbPrivateUIElement() {
+    public UIElement getFbPrivateUIElement() {
         return fbPrivateUIElement;
     }
 
-    public com.epam.jdi.light.elements.common.uiElement getUiUIElement() {
+    public UIElement getUiUIElement() {
         return uiUIElement;
     }
 
-    public com.epam.jdi.light.elements.common.uiElement getUiPublicUIElement() {
+    public UIElement getUiPublicUIElement() {
         return uiPublicUIElement;
     }
 
-    public List<com.epam.jdi.light.elements.common.uiElement> getFbUIElementList() {
+    public List<UIElement> getFbUIElementList() {
         return fbUIElementList;
     }
 
-    public List<com.epam.jdi.light.elements.common.uiElement> getFbPublicUIElementList() {
+    public List<UIElement> getFbPublicUIElementList() {
         return fbPublicUIElementList;
     }
 
-    public List<com.epam.jdi.light.elements.common.uiElement> getFbPrivateUIElementList() {
+    public List<UIElement> getFbPrivateUIElementList() {
         return fbPrivateUIElementList;
     }
 
-    public List<com.epam.jdi.light.elements.common.uiElement> getUiUIElementList() {
+    public List<UIElement> getUiUIElementList() {
         return uiUIElementList;
     }
 
-    public List<com.epam.jdi.light.elements.common.uiElement> getUiPublicUIElementList() {
+    public List<UIElement> getUiPublicUIElementList() {
         return uiPublicUIElementList;
     }
 
@@ -250,7 +251,7 @@ public class CustomForm extends Form<User> {
         return xpathPublicWebElementList;
     }
 
-    public com.epam.jdi.light.elements.common.uiElement getCssUIElement() {
+    public UIElement getCssUIElement() {
         return cssUIElement;
     }
 
@@ -258,11 +259,11 @@ public class CustomForm extends Form<User> {
         return xpathPublicUIElement;
     }
 
-    public List<com.epam.jdi.light.elements.common.uiElement> getCssUIElementList() {
+    public List<UIElement> getCssUIElementList() {
         return cssUIElementList;
     }
 
-    public List<com.epam.jdi.light.elements.common.uiElement> getXpathPublicUIElementList() {
+    public List<UIElement> getXpathPublicUIElementList() {
         return xpathPublicUIElementList;
     }
 

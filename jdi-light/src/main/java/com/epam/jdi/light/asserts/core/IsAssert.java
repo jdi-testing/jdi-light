@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.SelectedAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -16,7 +16,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class IsAssert extends UIAssert<IsAssert, uiElement>
+public class IsAssert extends UIAssert<IsAssert, UIElement>
         implements SelectedAssert<IsAssert>, ITextAssert<IsAssert> {
     @JDIAction("Assert that '{name}' text {0}")
     public IsAssert text(Matcher<String> condition) {

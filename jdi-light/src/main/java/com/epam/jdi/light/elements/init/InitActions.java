@@ -1,7 +1,7 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
@@ -64,7 +64,7 @@ public class InitActions {
     }
 
     public static MapArray<Class<?>, Class<?>> INTERFACES = map(
-        $(WebElement.class, uiElement.class),
+        $(WebElement.class, UIElement.class),
         $(IsDropdown.class, Dropdown.class),
         $(IsCombobox.class, Combobox.class),
         $(IsChecklist.class, Checklist.class)

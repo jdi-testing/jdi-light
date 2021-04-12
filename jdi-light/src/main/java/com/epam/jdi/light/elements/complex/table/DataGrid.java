@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.table.IDataGridAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasInit;
@@ -46,7 +47,7 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         grid = new Safe<>(() -> element);
     }
     @Override
-    public com.epam.jdi.light.elements.common.uiElement core() {
+    public UIElement core() {
         return grid().core();
     }
     @Override
@@ -74,7 +75,7 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         return IDataGrid.super.webColumn(colName);
     }
     @Override
-    public com.epam.jdi.light.elements.common.uiElement webCell(int colNum, int rowNum) {
+    public UIElement webCell(int colNum, int rowNum) {
         return IDataGrid.super.webCell(colNum, rowNum);
     }
     @Override

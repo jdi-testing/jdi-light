@@ -1,7 +1,7 @@
 package com.epam.jdi.light.elements.init.entities.collection;
 
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
@@ -152,7 +152,7 @@ public class EntitiesCollection {
             readElementsFromJson();
         return jsonElements.keys().contains(name)
             ? $(jsonElements.get(name))
-            : new uiElement().setName(name);
+            : new UIElement().setName(name);
     }
 
     static Object getElementInSection(String name, String section) {

@@ -3,6 +3,7 @@ package jdisite.custom;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
@@ -17,11 +18,11 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class MultiSelect extends UIListBase<UISelectAssert<?, ?>> implements HasLabel {
     @UI(".caret")
-    com.epam.jdi.light.elements.common.uiElement expander;
+    UIElement expander;
     @UI("ul")
-    com.epam.jdi.light.elements.common.uiElement valuesList;
+    UIElement valuesList;
     @UI("button")
-    com.epam.jdi.light.elements.common.uiElement valueText;
+    UIElement valueText;
     @UI("li")
     webList allValues;
     @UI("//a[label[text()='%s']]//input")

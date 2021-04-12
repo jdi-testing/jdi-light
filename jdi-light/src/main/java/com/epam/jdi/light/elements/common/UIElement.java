@@ -63,60 +63,60 @@ import static org.openqa.selenium.Keys.BACK_SPACE;
  * Created by Roman Iovlev on 14.02.2018
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class uiElement extends JDIBase
+public class UIElement extends JDIBase
         implements WebElement, SetValue, HasAssert<IsAssert>,
         HasClick, IsText, HasLabel, HasPlaceholder, IsInput, HasCheck, CanBeSelected {
     //region Constructors
-    public uiElement() { }
-    public uiElement(WebElement el) { setWebElement(el); }
-    public uiElement(List<WebElement> els) { setWebElements(els); }
-    public uiElement(@MarkupLocator By locator) { setLocator(locator); }
-    public uiElement(JDIBase base) {
+    public UIElement() { }
+    public UIElement(WebElement el) { setWebElement(el); }
+    public UIElement(List<WebElement> els) { setWebElements(els); }
+    public UIElement(@MarkupLocator By locator) { setLocator(locator); }
+    public UIElement(JDIBase base) {
         super(base);
     }
-    public uiElement(JDIBase base, String locator, String name, Object parent) {
+    public UIElement(JDIBase base, String locator, String name, Object parent) {
         super(base);
         setLocator(locator);
         setName(name);
         setParent(parent);
     }
-    public uiElement(JDIBase base, By locator, String name) {
+    public UIElement(JDIBase base, By locator, String name) {
         super(base);
         setLocator(locator);
         setName(name);
     }
-    public uiElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
+    public UIElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
         this(base, el);
         setGetFunc(func);
     }
-    public uiElement(JDIBase base, WebElement el) {
+    public UIElement(JDIBase base, WebElement el) {
         super(base);
         setWebElement(el);
     }
     //endregion
 
     //region Core
-    public uiElement core() { return this; }
-    public uiElement setup(JAction1<JDIBase> setup) {
-        return setup(uiElement.class, setup);
+    public UIElement core() { return this; }
+    public UIElement setup(JAction1<JDIBase> setup) {
+        return setup(UIElement.class, setup);
     }
     @Override
-    public uiElement setCore(JDIBase base) {
+    public UIElement setCore(JDIBase base) {
         super.setCore(base);
         return this;
     }
     @Override
-    public uiElement setName(String name) {
+    public UIElement setName(String name) {
         super.setName(name);
         return this;
     }
     @Override
-    public uiElement waitSec(int timeout) {
+    public UIElement waitSec(int timeout) {
         super.waitSec(timeout);
         return this;
     }
     @Override
-    public uiElement noWait() {
+    public UIElement noWait() {
         super.noWait();
         return this;
     }
@@ -700,7 +700,7 @@ public class uiElement extends JDIBase
     }
 
     @JDIAction("Visual compare '{0}'")
-    public void visualValidation(uiElement element) {
+    public void visualValidation(UIElement element) {
         compareImageFiles(getImageFile(), element.getImageFile());
     }
     /** Click on element if not selected */
@@ -735,7 +735,7 @@ public class uiElement extends JDIBase
     public String text(TextTypes type) {
         return timer().getResult(() -> noWait(() -> type.func.execute(this)));
     }
-    public static JFunc1<uiElement, String> SMART_GET_TEXT = ui -> {
+    public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
         String text = ui.text(TEXT);
         if (isNotBlank(text))
             return text;
@@ -745,7 +745,7 @@ public class uiElement extends JDIBase
         text = ui.text(VALUE);
         return isNotBlank(text) ? text : "";
     };
-    public static JFunc1<uiElement, String> SMART_LIST_TEXT = ui -> {
+    public static JFunc1<UIElement, String> SMART_LIST_TEXT = ui -> {
         String text = ui.text(TEXT);
         if (isNotBlank(text))
             return text;
@@ -754,7 +754,7 @@ public class uiElement extends JDIBase
             return text;
         String id = ui.attr("id");
         if (isNotBlank(id)) {
-            uiElement label = $(By.cssSelector("[for=" + id + "]"));
+            UIElement label = $(By.cssSelector("[for=" + id + "]"));
             label.waitSec(0);
             try {
                 text = label.getText();
@@ -762,15 +762,15 @@ public class uiElement extends JDIBase
         }
         return isNotBlank(text) ? text : ui.text(VALUE);
     };
-    public uiElement find(@MarkupLocator String by) {
+    public UIElement find(@MarkupLocator String by) {
         return $(by, this);
     }
-    public uiElement findFirst(@MarkupLocator String by) {
-        uiElement element = $(by, this);
+    public UIElement findFirst(@MarkupLocator String by) {
+        UIElement element = $(by, this);
         element.strictSearch(false);
         return element;
     }
-    public uiElement find(@MarkupLocator By by) {
+    public UIElement find(@MarkupLocator By by) {
         return $(by, this);
     }
     public webList finds(@MarkupLocator String by) {
@@ -779,9 +779,9 @@ public class uiElement extends JDIBase
     public webList finds(@MarkupLocator By by) {
         return $$(by, this);
     }
-    public uiElement firstChild() { return find("*"); }
+    public UIElement firstChild() { return find("*"); }
     public webList children() { return finds("*"); }
-    public uiElement findUp() {
+    public UIElement findUp() {
         return find("./..");
     }
     //endregion
@@ -830,7 +830,7 @@ public class uiElement extends JDIBase
         }
     }
     @Override
-    public uiElement noValidation() {
+    public UIElement noValidation() {
         super.noValidation();
         return this;
     }
@@ -851,7 +851,7 @@ public class uiElement extends JDIBase
             "return false;                            ", getWebElement(), x, y);
     }
     //endregion
-    public boolean wait(JFunc1<uiElement, Boolean> condition) {
+    public boolean wait(JFunc1<UIElement, Boolean> condition) {
         return timer().wait(() -> condition.execute(this));
     }
 
@@ -879,10 +879,10 @@ public class uiElement extends JDIBase
         Keyboard.pasteText(text, timeToWaitMSec);
     }
 
-    public uiElement inFrame(By... bys) {
+    public UIElement inFrame(By... bys) {
         return setup(base -> base.setFrames(asList(bys)));
     }
-    public uiElement inFrame(String... bys) {
+    public UIElement inFrame(String... bys) {
         return setup(base -> base.setFrames(map(bys, WebDriverByUtils::defineLocator)));
     }
 

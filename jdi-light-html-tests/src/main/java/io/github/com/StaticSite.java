@@ -1,6 +1,6 @@
 package io.github.com;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.webList;
@@ -43,7 +43,7 @@ public class StaticSite {
 
 	@Css("[ui=label]") public static List<WebElement> navigation;
 	@Css("[ui=label]") public static webList navigationL;
-	@Css("[ui=label]") public static uiElement navigationElement;
+	@Css("[ui=label]") public static UIElement navigationElement;
 	@WaitAfterAction
 	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static webList navigationS;
 	//TODO

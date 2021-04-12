@@ -5,7 +5,7 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.JDILocator;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.ISelector;
@@ -343,7 +343,7 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
         return this;
     }
 
-    public static MobileWebList newList(List<uiElement> elements) {
+    public static MobileWebList newList(List<UIElement> elements) {
         return new MobileWebList(LinqUtils.map(elements, JDIBase::get));
     }
 
@@ -407,7 +407,7 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
 
     @JDIAction("Check all '{name}' unchecked options")
     public void checkAll() {
-        for (uiElement checkbox : elements(1)) {
+        for (UIElement checkbox : elements(1)) {
             if (checkbox.isEnabled() && !selected(checkbox)) {
                 checkbox.click();
             }
@@ -416,7 +416,7 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
 
     @JDIAction("Uncheck all '{name}' checked options")
     public void uncheckAll() {
-        for (uiElement checkbox : elements(1)) {
+        for (UIElement checkbox : elements(1)) {
             if (checkbox.isEnabled() && selected(checkbox)) {
                 checkbox.click();
             }
@@ -426,7 +426,7 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
     @JDIAction("Check only '{0}' in '{name}' list")
     public void check(String... names) {
         List<String> listNames = asList(names);
-        for (uiElement value : elements(names.length)) {
+        for (UIElement value : elements(names.length)) {
             if (value.isDisabled()) continue;
             if (selected(value) && !listNames.contains(value.labelText().trim())
                     || !selected(value) && listNames.contains(value.labelText().trim()))
@@ -437,7 +437,7 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
     @JDIAction("Uncheck '{0}' checkboxes in '{name}' checklist")
     public void uncheck(String... names) {
         List<String> listNames = asList(names);
-        for (uiElement value : elements(names.length)) {
+        for (UIElement value : elements(names.length)) {
             if (value.isDisabled()) continue;
             if (selected(value) && listNames.contains(value.labelText().trim())
                     || !selected(value) && !listNames.contains(value.labelText().trim()))
@@ -451,7 +451,7 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
         int max = max(Ints.asList(indexes));
         List<mobileUIElement> elements = elements(max - getStartIndex() + 1);
         int i = getStartIndex();
-        for (uiElement element : elements) {
+        for (UIElement element : elements) {
             if (element.isDisabled()) continue;
             if (selected(element) && !listIndexes.contains(i)
                     || !selected(element) && listIndexes.contains(i))
@@ -466,7 +466,7 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
         int max = max(Ints.asList(indexes));
         List<mobileUIElement> elements = elements(max - getStartIndex() + 1);
         int i = getStartIndex();
-        for (uiElement element : elements) {
+        for (UIElement element : elements) {
             if (element.isDisabled()) continue;
             if (selected(element) && listIndexes.contains(i)
                     || !selected(element) && !listIndexes.contains(i))
@@ -483,7 +483,7 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
         uncheck(getEnumValues(values));
     }
 
-    protected boolean selected(uiElement value) {
+    protected boolean selected(UIElement value) {
         return value.isSelected();
     }
 
@@ -662,13 +662,13 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
     @Override
     @JDIAction("Get list of enabled values for '{name}'")
     public List<String> listEnabled() {
-        return noValidation(() -> ifSelect(uiElement::isEnabled, this::getElementName));
+        return noValidation(() -> ifSelect(UIElement::isEnabled, this::getElementName));
     }
 
     @Override
     @JDIAction("Get list of disabled values for '{name}'")
     public List<String> listDisabled() {
-        return noValidation(() -> ifSelect(uiElement::isDisabled, this::getElementName));
+        return noValidation(() -> ifSelect(UIElement::isDisabled, this::getElementName));
     }
 
     @Override
@@ -706,7 +706,7 @@ public class MobileWebList extends JDIBase implements IList<mobileUIElement>, Se
     @Override
     @JDIAction(level = DEBUG)
     public void highlight() {
-        foreach(uiElement::highlight);
+        foreach(UIElement::highlight);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.epam.jdi.light.angular.asserts.NestedDropdownMenuAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.By;
@@ -64,12 +65,12 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
     public List<String> valuesForNestedMenu() {
         List<String> list = new ArrayList();
         list.add(lastOpenedOptionsElements().values().toString());
-        for (com.epam.jdi.light.elements.common.uiElement uiElement : lastOpenedOptionsElements()) {
+        for (UIElement uiElement : lastOpenedOptionsElements()) {
             if (uiElement.hasClass("mat-menu-item-submenu-trigger")) {
                 uiElement.click(ElementArea.JS);
                 list.add(lastOpenedOptionsElements().values().toString());
             }
-            for (com.epam.jdi.light.elements.common.uiElement uiElement1 : lastOpenedOptionsElements()) {
+            for (UIElement uiElement1 : lastOpenedOptionsElements()) {
                 if (uiElement1.hasClass("mat-menu-item-submenu-trigger")) {
                     uiElement1.click(ElementArea.JS);
                     list.add(lastOpenedOptionsElements().values().toString());
@@ -88,14 +89,14 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
     }
 
     public void selectForMenuWithIcons(String value) {
-        com.epam.jdi.light.elements.common.uiElement optionToClick = lastOpenedOptionsElementsForMenuWithIcons().get(value);
+        UIElement optionToClick = lastOpenedOptionsElementsForMenuWithIcons().get(value);
         optionToClick.click(ElementArea.JS);
         close();
     }
 
     @JDIAction("Check {name} option '{0}' is disabled")
     public boolean isDisabledMenuWithIconsOption(String value) {
-        com.epam.jdi.light.elements.common.uiElement optionToClick = lastOpenedOptionsElements().get("voicemail" + value);
+        UIElement optionToClick = lastOpenedOptionsElements().get("voicemail" + value);
         return Boolean.parseBoolean(optionToClick.attr("aria-disabled"));
     }
 
@@ -104,10 +105,10 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
         return Boolean.parseBoolean(select(values).attr("aria-disabled"));
     }
 
-    public com.epam.jdi.light.elements.common.uiElement select(String... values) {
-        List<com.epam.jdi.light.elements.common.uiElement> list = new ArrayList();
+    public UIElement select(String... values) {
+        List<UIElement> list = new ArrayList();
         for (String value : values) {
-            com.epam.jdi.light.elements.common.uiElement optionToClick = lastOpenedOptionsElements().get(value);
+            UIElement optionToClick = lastOpenedOptionsElements().get(value);
             list.add(optionToClick);
             if (optionToClick.isEnabled()) {
                 optionToClick.click(ElementArea.JS);

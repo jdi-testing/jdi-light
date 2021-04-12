@@ -1,6 +1,6 @@
 package com.epam.jdi.light.common;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
@@ -35,6 +35,6 @@ public class SearchStrategies {
     }
     public static void inView() {
         ELEMENT.searchRule = Pair.$("Element in view", ELEMENT_IN_VIEW);
-        ELEMENT.beforeSearch = uiElement::show;
+        ELEMENT.beforeSearch = UIElement::show;
     }
 }

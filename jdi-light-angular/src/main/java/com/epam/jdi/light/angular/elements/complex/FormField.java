@@ -4,7 +4,7 @@ import com.epam.jdi.light.angular.asserts.FormFieldsAssert;
 import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.By;
@@ -39,7 +39,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         return curAttr[0];
     }
 
-    private com.epam.jdi.light.elements.common.uiElement getContainer() {
+    private UIElement getContainer() {
         containerAttribute = getContainerAttribute();
         WebElement element = null;
         try {
@@ -51,7 +51,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
                 logger.error(exception.toString());
             }
         }
-        return new uiElement(element);
+        return new UIElement(element);
     }
 
     public webList getInputs() {
@@ -116,35 +116,35 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
 
     @JDIAction("Get label for input in '{name}' with index {0}")
     public String inputLabel(int index) {
-        com.epam.jdi.light.elements.common.uiElement label = getInputs().get(index).
+        UIElement label = getInputs().get(index).
             find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-label"));
         return label.getText();
     }
 
     @JDIAction("Get label for text area in '{name}' with index {0}")
     public String textAreaLabel(int index) {
-        com.epam.jdi.light.elements.common.uiElement label = getTextAreas().get(index).
+        UIElement label = getTextAreas().get(index).
             find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-label"));
         return label.getText();
     }
 
     @JDIAction("Get label for dropdown in '{name}' with index {0}")
     public String dropdownLabel(int index) {
-        com.epam.jdi.light.elements.common.uiElement label = getDropdowns().get(index).
+        UIElement label = getDropdowns().get(index).
             find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-label"));
         return label.getText();
     }
 
     @JDIAction("Get hint for input in '{name}' with index {0}")
     public String inputHint(int index) {
-        com.epam.jdi.light.elements.common.uiElement hint = getInputs().get(index).
+        UIElement hint = getInputs().get(index).
             find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-hint"));
         return hint.getText();
     }
 
     @JDIAction("Get hint for '{name}' with index {0}")
     public String hint(int index) {
-        com.epam.jdi.light.elements.common.uiElement hint = getFormFields().get(index).find(By.cssSelector("mat-hint"));
+        UIElement hint = getFormFields().get(index).find(By.cssSelector("mat-hint"));
         return hint.getText();
     }
 
@@ -153,26 +153,26 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         String placeholder = "placeholder";
         String type = getType(index);
         WebElement element = getFormFields().get(index).find(By.xpath("//" + type));
-        com.epam.jdi.light.elements.common.uiElement actualElement = new uiElement(element);
+        UIElement actualElement = new UIElement(element);
         return (actualElement.hasAttribute(placeholder)) ? actualElement.getAttribute(placeholder) : "";
     }
 
     @JDIAction("Get label for '{name}' with index {0}")
     public String label(int index) {
-        com.epam.jdi.light.elements.common.uiElement label = getFormFields().get(index).find(By.xpath("//mat-label"));
+        UIElement label = getFormFields().get(index).find(By.xpath("//mat-label"));
         return label.getText();
     }
 
     @JDIAction("Get error for input in '{name}' with index {0}")
     public String inputError(int index) {
-        com.epam.jdi.light.elements.common.uiElement error = getInputs().get(index).
+        UIElement error = getInputs().get(index).
             find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-error"));
         return error.getText();
     }
 
     @JDIAction("Get error for '{name}' with index {0}")
     public String error(int index) {
-        com.epam.jdi.light.elements.common.uiElement error = getFormFields().get(index).find(By.xpath("//mat-error"));
+        UIElement error = getFormFields().get(index).find(By.xpath("//mat-error"));
         return error.getText();
     }
 
@@ -226,7 +226,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
     public void set(int index, String value) {
         String type = getType(index);
         WebElement element = getFormFields().get(index).find(By.xpath("//" + type));
-        com.epam.jdi.light.elements.common.uiElement actualElement = new uiElement(element);
+        UIElement actualElement = new UIElement(element);
         switch (type) {
             case "input":
                 actualElement.input(value);
@@ -249,7 +249,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
         String value = "";
         String type = getType(index);
         WebElement element = getFormFields().get(index).find(By.xpath("//" + type));
-        com.epam.jdi.light.elements.common.uiElement actualElement = new uiElement(element);
+        UIElement actualElement = new UIElement(element);
         switch (type) {
             case "input":
                 value = actualElement.text(VALUE);
@@ -270,7 +270,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
     public void clear(int index) {
         String type = getType(index);
         WebElement element = getFormFields().get(index).find(By.xpath("//" + type));
-        com.epam.jdi.light.elements.common.uiElement actualElement = new uiElement(element);
+        UIElement actualElement = new UIElement(element);
         actualElement.sendKeys(Keys.CONTROL + "a");
         actualElement.sendKeys(Keys.DELETE);
         focusOut();
@@ -279,14 +279,14 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
     @JDIAction("Click icon in '{name}' with index {0}")
     public void clickIcon(int index) {
         WebElement element = getFormFields().get(index).find(By.xpath("//mat-icon"));
-        com.epam.jdi.light.elements.common.uiElement actualElement = new uiElement(element);
+        UIElement actualElement = new UIElement(element);
         actualElement.click();
     }
 
     @JDIAction("Get icon text in '{name}' with index {0}")
     public String icon(int index) {
         WebElement element = getFormFields().get(index).find(By.xpath("//mat-icon"));
-        com.epam.jdi.light.elements.common.uiElement actualElement = new uiElement(element);
+        UIElement actualElement = new UIElement(element);
         return actualElement.getText();
     }
 
@@ -294,7 +294,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
     public String font(int index) {
         String type = getType(index);
         WebElement element = getFormFields().get(index).find(By.xpath("//" + type));
-        com.epam.jdi.light.elements.common.uiElement actualElement = new uiElement(element);
+        UIElement actualElement = new UIElement(element);
         return actualElement.getCssValue("font");
     }
 
@@ -302,7 +302,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
     public String color(int index) {
         String type = getType(index);
         WebElement element = getFormFields().get(index).find(By.xpath("//" + type));
-        com.epam.jdi.light.elements.common.uiElement actualElement = new uiElement(element);
+        UIElement actualElement = new UIElement(element);
         return actualElement.getCssValue("color");
     }
 

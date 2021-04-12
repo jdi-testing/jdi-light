@@ -4,7 +4,7 @@ import com.epam.jdi.light.angular.asserts.NativeSelectorAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
@@ -180,8 +180,8 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      *
      * @return UIElement with hint text
      */
-    public com.epam.jdi.light.elements.common.uiElement hint() {
-        return new uiElement(By.xpath(String.format(hintLocator, core().locator.printLocator()
+    public UIElement hint() {
+        return new UIElement(By.xpath(String.format(hintLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
@@ -190,8 +190,8 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      *
      * @return UIElement with error text
      */
-    public com.epam.jdi.light.elements.common.uiElement error() {
-        return new uiElement(By.xpath(String.format(errorLocator, core().locator.printLocator()
+    public UIElement error() {
+        return new UIElement(By.xpath(String.format(errorLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 }

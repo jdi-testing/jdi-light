@@ -3,6 +3,7 @@ package com.epam.jdi.light.angular.elements.complex;
 import com.epam.jdi.light.angular.asserts.TabGroupAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 
@@ -73,11 +74,11 @@ public class TabGroup extends UIBaseElement<TabGroupAssert> implements IsText {
         return this.finds("[role='tab']");
     }
 
-    private com.epam.jdi.light.elements.common.uiElement getTabByNumber(int tabNumber) {
+    private UIElement getTabByNumber(int tabNumber) {
         return getTabs().get(tabNumber);
     }
 
-    private com.epam.jdi.light.elements.common.uiElement getTabByText(String text) {
+    private UIElement getTabByText(String text) {
         return getTabs().get(text);
     }
 
@@ -97,7 +98,7 @@ public class TabGroup extends UIBaseElement<TabGroupAssert> implements IsText {
         return this.finds("a");
     }
 
-    private com.epam.jdi.light.elements.common.uiElement getTabLinkByTitle(String linkText) {
+    private UIElement getTabLinkByTitle(String linkText) {
         return getTabsLinks().get(linkText);
     }
 

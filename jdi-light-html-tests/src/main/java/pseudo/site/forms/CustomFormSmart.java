@@ -1,5 +1,6 @@
 package pseudo.site.forms;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -17,13 +18,13 @@ public class CustomFormSmart extends Form<User> {
     public List<WebElement> fbPublicWebElementList;
     private List<WebElement> fbPrivateWebElementList;
 
-    com.epam.jdi.light.elements.common.uiElement fbUIElement;
-    public com.epam.jdi.light.elements.common.uiElement fbPublicUIElement;
-    private com.epam.jdi.light.elements.common.uiElement fbPrivateUIElement;
+    UIElement fbUIElement;
+    public UIElement fbPublicUIElement;
+    private UIElement fbPrivateUIElement;
 
-    List<com.epam.jdi.light.elements.common.uiElement> fbUIElementList;
-    public List<com.epam.jdi.light.elements.common.uiElement> fbPublicUIElementList;
-    private List<com.epam.jdi.light.elements.common.uiElement> fbPrivateUIElementList;
+    List<UIElement> fbUIElementList;
+    public List<UIElement> fbPublicUIElementList;
+    private List<UIElement> fbPrivateUIElementList;
 
     Button fbButton;
     public Button fbPublicButton;
@@ -61,27 +62,27 @@ public class CustomFormSmart extends Form<User> {
         return fbPrivateWebElementList;
     }
 
-    public com.epam.jdi.light.elements.common.uiElement getFbUIElement() {
+    public UIElement getFbUIElement() {
         return fbUIElement;
     }
 
-    public com.epam.jdi.light.elements.common.uiElement getFbPublicUIElement() {
+    public UIElement getFbPublicUIElement() {
         return fbPublicUIElement;
     }
 
-    public com.epam.jdi.light.elements.common.uiElement getFbPrivateUIElement() {
+    public UIElement getFbPrivateUIElement() {
         return fbPrivateUIElement;
     }
 
-    public List<com.epam.jdi.light.elements.common.uiElement> getFbUIElementList() {
+    public List<UIElement> getFbUIElementList() {
         return fbUIElementList;
     }
 
-    public List<com.epam.jdi.light.elements.common.uiElement> getFbPublicUIElementList() {
+    public List<UIElement> getFbPublicUIElementList() {
         return fbPublicUIElementList;
     }
 
-    public List<com.epam.jdi.light.elements.common.uiElement> getFbPrivateUIElementList() {
+    public List<UIElement> getFbPrivateUIElementList() {
         return fbPrivateUIElementList;
     }
 

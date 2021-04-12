@@ -1,6 +1,7 @@
 package io.github.epam.angular.unit.tests.with.mocks;
 
 import com.epam.jdi.light.angular.elements.common.Checkbox;
+import com.epam.jdi.light.elements.common.UIElement;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -20,7 +21,7 @@ public class CheckboxTest {
     private Checkbox checkbox;
 
     @Mock
-    private com.epam.jdi.light.elements.common.uiElement uiElement;
+    private UIElement uiElement;
 
     @BeforeClass
     public void setup() {

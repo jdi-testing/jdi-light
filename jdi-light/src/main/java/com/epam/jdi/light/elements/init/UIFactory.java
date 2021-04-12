@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
@@ -20,26 +20,26 @@ import java.util.List;
  */
 public class UIFactory {
     @Deprecated
-    public static uiElement element(@MarkupLocator String locator) {
+    public static UIElement element(@MarkupLocator String locator) {
         return JDITalk.element(locator);
     }
     @Deprecated
-    public static uiElement element(@MarkupLocator By byLocator) {
+    public static UIElement element(@MarkupLocator By byLocator) {
         return JDITalk.element(byLocator);
     }
-    public static uiElement $(@MarkupLocator String locator) {
+    public static UIElement $(@MarkupLocator String locator) {
         return JDITalk.element(locator);
     }
-    public static uiElement $(@MarkupLocator String locator, Object parent) {
+    public static UIElement $(@MarkupLocator String locator, Object parent) {
         return JDITalk.element(locator).setup(j->j.setParent(parent));
     }
-    public static uiElement $(@MarkupLocator By locator) {
+    public static UIElement $(@MarkupLocator By locator) {
         return JDITalk.element(locator);
     }
-    public static uiElement $(WebElement webElement) {
-        return new uiElement(webElement);
+    public static UIElement $(WebElement webElement) {
+        return new UIElement(webElement);
     }
-    public static uiElement $(@MarkupLocator By locator, Object parent) {
+    public static UIElement $(@MarkupLocator By locator, Object parent) {
         return JDITalk.element(locator).setup(j->j.setParent(parent));
     }
     @Deprecated

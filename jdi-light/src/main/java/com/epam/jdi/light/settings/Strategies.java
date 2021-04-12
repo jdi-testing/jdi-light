@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.SetTextTypes;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.JdiSettings;
 import com.epam.jdi.light.elements.base.SeleniumSettings;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.pairs.Pair;
@@ -25,7 +25,7 @@ public enum Strategies {
         ELEMENT.setTextType = SetTextTypes.SET_TEXT;
         ELEMENT.searchRule = Pair.$("Visible", VISIBLE_ELEMENT);
         COMMON.killBrowser = "afterAndBefore";
-        ELEMENT.beforeSearch = uiElement::show;
+        ELEMENT.beforeSearch = UIElement::show;
     }),
     JDI(() -> {
         ELEMENT.clickType = ElementArea.CENTER;

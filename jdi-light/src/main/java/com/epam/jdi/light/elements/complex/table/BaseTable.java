@@ -5,7 +5,7 @@ import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IHasSize;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.webList;
@@ -76,7 +76,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             = new CacheAll<>(MapArray::new);
     protected CacheAll<MapArray<String, webList>> columns
             = new CacheAll<>(MapArray::new);
-    protected CacheAll<MapArray<String, MapArray<String, com.epam.jdi.light.elements.common.uiElement>>> cells
+    protected CacheAll<MapArray<String, MapArray<String, UIElement>>> cells
             = new CacheAll<>(MapArray::new);
     protected CacheAll<MapArray<String, MapArray<String, String>>> cellsValues
             = new CacheAll<>(MapArray::new);
@@ -95,8 +95,8 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
 
     @Override
-    public com.epam.jdi.light.elements.common.uiElement core() {
-        com.epam.jdi.light.elements.common.uiElement core = super.core();
+    public UIElement core() {
+        UIElement core = super.core();
         if (hasRunDrivers() && !locatorsValidated) {
             try {
                 locatorsValidated = true;
@@ -107,7 +107,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         }
         return core;
     }
-    protected void validateLocators(com.epam.jdi.light.elements.common.uiElement core) {
+    protected void validateLocators(UIElement core) {
         if (getByLocator(headerLocator).equals("th") && core.finds("th").isEmpty()) {
             if (core.finds("thead td").isNotEmpty()) {
                 headerLocator = By.cssSelector("thead td");
@@ -337,7 +337,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(name))) + getStartIndex();
     }
     @JDebug
-    public com.epam.jdi.light.elements.common.uiElement webCell(int colNum, int rowNum) {
+    public UIElement webCell(int colNum, int rowNum) {
         validateColumnIndex(colNum);
         validateRowIndex(rowNum);
         if (cells.isGotAll())
@@ -348,7 +348,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             return columns.get().get(colNum + "").get(rowNum);
         if (cells.get().has(colNum + "") && cells.get().get(colNum + "").has(rowNum + ""))
             return cells.get().get(colNum+"").get(rowNum+"");
-        com.epam.jdi.light.elements.common.uiElement cell = getCell(colNum, rowNum);
+        UIElement cell = getCell(colNum, rowNum);
         cells.get().update(colNum + "", new MapArray<>(rowNum + "", cell));
         return cell;
     }
@@ -403,7 +403,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         return core().finds(fillByTemplate(columnLocator, colIndex)).noValidation();
     }
     @JDebug
-    public com.epam.jdi.light.elements.common.uiElement getCell(int colNum, int rowNum) {
+    public UIElement getCell(int colNum, int rowNum) {
         int colIndex = getColumnLocatorIndex(colNum);
         int rowIndex = getRowLocatorIndex(rowNum);
         return core().find(fillByMsgTemplate(cellLocator, colIndex, rowIndex));
@@ -438,11 +438,11 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     public webList filter() {
         return core().finds(filterLocator).setName(getName()+" filter");
     }
-    public com.epam.jdi.light.elements.common.uiElement filterBy(String filterName) {
+    public UIElement filterBy(String filterName) {
         return searchBy(filterName);
     }
     @JDIAction("Filter {name} by column {0}")
-    public com.epam.jdi.light.elements.common.uiElement searchBy(String filterName) {
+    public UIElement searchBy(String filterName) {
         int index = header().indexOf(filterName);
         return filter().get(index + getStartIndex());
     }
@@ -792,7 +792,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
                     cells.get().update(i+"", new MapArray<>());
                 while (k < listOfCells.size()) {
                     for (int i = getStartIndex(); i < size; i++)
-                        cells.get().get(i+"").update(j+"", new uiElement(listOfCells.get(k++)));
+                        cells.get().get(i+"").update(j+"", new UIElement(listOfCells.get(k++)));
                     j++;
                 }
                 cells.gotAll();

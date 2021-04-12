@@ -3,6 +3,7 @@ package com.epam.jdi.light.angular.elements.common;
 import com.epam.jdi.light.angular.asserts.BadgeAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 
 /**
  * To see an example of Badge web element please visit https://material.angular.io/components/badge/overview.
@@ -11,7 +12,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 public class Badge extends UIBaseElement<BadgeAssert> {
 
     @JDIAction("Get '{name}' badge")
-    public com.epam.jdi.light.elements.common.uiElement badge() {
+    public UIElement badge() {
         return this.find(".mat-badge-content");
     }
 

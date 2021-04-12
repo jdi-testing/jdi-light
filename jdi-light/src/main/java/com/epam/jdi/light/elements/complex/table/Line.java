@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
@@ -99,7 +99,7 @@ public class Line implements IList<String>, IBaseElement {
     public List<String> elements(int minAmount) {
         return getData(minAmount).values();
     }
-    public MultiMap<String, uiElement> uiMap() {
+    public MultiMap<String, UIElement> uiMap() {
         return new MultiMap<>(headers, elements.indexFromZero()).ignoreKeyCase();
     }
     public webList uiElements() {
@@ -107,9 +107,9 @@ public class Line implements IList<String>, IBaseElement {
     }
     public void saveCellsImages() {
         String unique = Timer.nowMSecs();
-        List<uiElement> result = new ArrayList<>();
+        List<UIElement> result = new ArrayList<>();
         int i = 0;
-        for (uiElement element : elements) {
+        for (UIElement element : elements) {
             element.show();
             element.varName = headers.get(i++)+unique;
             element.makePhoto();
@@ -118,7 +118,7 @@ public class Line implements IList<String>, IBaseElement {
         elements = new webList(headers, result);
     }
     public boolean visualCompareTo(Line line) {
-        for (Pair<String, uiElement> cell : uiMap())
+        for (Pair<String, UIElement> cell : uiMap())
             try {
                 cell.value.visualValidation(line.uiMap().get(cell.key));
             } catch (Exception ex) { return false; }
@@ -188,7 +188,7 @@ public class Line implements IList<String>, IBaseElement {
                 if (field == null) continue;
                 try {
                     IBaseElement ui = (IBaseElement) getValueField(field, instance);
-                    uiElement listElement = elements.get(i++);
+                    UIElement listElement = elements.get(i++);
                     WebElement element = ui.base().hasLocator()
                         ? listElement.findElement(ui.base().getLocator())
                         : listElement.getWebElement();

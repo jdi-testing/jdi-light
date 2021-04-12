@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
@@ -21,17 +21,17 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getPage;
 
 public class JDITalk {
-    public static JFunc1<String, uiElement> NAME_TO_ELEMENT = s -> {
-        uiElement element = s.matches("[A-Z].*")
-                ? new uiElement()
+    public static JFunc1<String, UIElement> NAME_TO_ELEMENT = s -> {
+        UIElement element = s.matches("[A-Z].*")
+                ? new UIElement()
                 : element(NAME_TO_LOCATOR.execute(s));
             return element.setName(s);
         };
-    public static uiElement element(@MarkupLocator String locator) {
+    public static UIElement element(@MarkupLocator String locator) {
         return NAME_TO_ELEMENT.execute(locator);
     }
-    public static uiElement element(@MarkupLocator By byLocator) {
-        return new uiElement(byLocator);
+    public static UIElement element(@MarkupLocator By byLocator) {
+        return new UIElement(byLocator);
     }
 
     public static webList list(@MarkupLocator String locator) {

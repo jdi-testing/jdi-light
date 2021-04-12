@@ -3,7 +3,7 @@ package com.epam.jdi.light.angular.elements.complex;
 import com.epam.jdi.light.angular.asserts.ChipsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
@@ -41,9 +41,9 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
     }
 
     @JDIAction("Get '{name}' chips by text '{0}'")
-    public com.epam.jdi.light.elements.common.uiElement getChipsByText(String value) {
-        com.epam.jdi.light.elements.common.uiElement element = null;
-        for (com.epam.jdi.light.elements.common.uiElement e : getChips()) {
+    public UIElement getChipsByText(String value) {
+        UIElement element = null;
+        for (UIElement e : getChips()) {
             if (e.getText().equalsIgnoreCase(value)) {
                 element = e;
             }
@@ -112,12 +112,12 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
         return new ChipsAssert().set(this);
     }
 
-    protected com.epam.jdi.light.elements.common.uiElement getBackdropField() {
-        return new uiElement(By.cssSelector(backdropField));
+    protected UIElement getBackdropField() {
+        return new UIElement(By.cssSelector(backdropField));
     }
 
     protected Point getPointOutsideField() {
-        com.epam.jdi.light.elements.common.uiElement uiElement = getBackdropField();
+        UIElement uiElement = getBackdropField();
         return new Point(uiElement.core().getRect().
                 getWidth() + 3, uiElement.core().getRect().getHeight() + 3);
     }

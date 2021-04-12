@@ -3,7 +3,7 @@ package com.epam.jdi.light.asserts.generic.table;
 import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Row;
@@ -70,7 +70,7 @@ public class DataTableAssert<L extends PageObject, D>
         return this;
     }
     @JDIAction("Assert that '{name}' is sorted by ascending")
-    public DataTableAssert<L, D> sortedByAsc(String columnName, JFunc1<uiElement, Object> getValue) {
+    public DataTableAssert<L, D> sortedByAsc(String columnName, JFunc1<UIElement, Object> getValue) {
         webList column = table().webColumn(columnName);
         for (int i = 1; i < column.size(); i++)
             if (!isSorted(getValue.execute(column.get(i-1)), getValue.execute(column.get(i)), true, false))
@@ -78,7 +78,7 @@ public class DataTableAssert<L extends PageObject, D>
         return this;
     }
     @JDIAction("Assert that '{name}' is sorted by descending")
-    public DataTableAssert<L, D> sortedByDesc(String columnName, JFunc1<uiElement, Object> getValue) {
+    public DataTableAssert<L, D> sortedByDesc(String columnName, JFunc1<UIElement, Object> getValue) {
         webList column = table().webColumn(columnName);
         for (int i = 1; i < column.size(); i++)
             if (!isSorted(getValue.execute(column.get(i-1)), getValue.execute(column.get(i)), false, false))

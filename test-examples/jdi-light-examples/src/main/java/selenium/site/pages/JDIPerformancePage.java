@@ -1,6 +1,6 @@
 package selenium.site.pages;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -12,5 +12,5 @@ public class JDIPerformancePage extends WebPage {
 
     public static Selector userNames;
 
-    public static uiElement textareaPerformance;
+    public static UIElement textareaPerformance;
 }

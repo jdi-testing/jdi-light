@@ -3,6 +3,7 @@ package com.epam.jdi.light.angular.elements.complex;
 import com.epam.jdi.light.angular.asserts.AutoCompleteAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
@@ -80,7 +81,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     public Boolean isOptionHighlighted(String value) {
         webList values = getOptions(optionsCss);
-        com.epam.jdi.light.elements.common.uiElement element = values.get(value);
+        UIElement element = values.get(value);
         String selected = element.core().getAttribute("class");
         return selected.contains("mat-active");
     }
@@ -145,9 +146,9 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return values;
     }
 
-    private HashMap<com.epam.jdi.light.elements.common.uiElement, List<WebElement>> groupsAndOptions() {
+    private HashMap<UIElement, List<WebElement>> groupsAndOptions() {
         webList groups = getOptions(optionsGroupsCss);
-        HashMap<com.epam.jdi.light.elements.common.uiElement, List<WebElement>> groupsAndOptions = new HashMap<>();
+        HashMap<UIElement, List<WebElement>> groupsAndOptions = new HashMap<>();
         if (groups.isEmpty()) {
             return null;
         }
@@ -174,7 +175,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Get groups and options for '{name}'")
     public HashMap<String, List<String>> groupsAndOptionsValues() {
-        HashMap<com.epam.jdi.light.elements.common.uiElement, List<WebElement>> groupsAndOptionsMap = groupsAndOptions();
+        HashMap<UIElement, List<WebElement>> groupsAndOptionsMap = groupsAndOptions();
         HashMap<String, List<String>> groupsAndOptionsValues = new HashMap<>();
         if (groupsAndOptionsMap == null) {
             String emptyArray[] = {""};

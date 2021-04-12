@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.table.IGridAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.webList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
@@ -50,8 +51,8 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
             .setName(getName() + " webCells");
     }
     @Override
-    public com.epam.jdi.light.elements.common.uiElement core() {
-        com.epam.jdi.light.elements.common.uiElement core = super.core();
+    public UIElement core() {
+        UIElement core = super.core();
         if (hasRunDrivers() && !locatorsValidated) {
             try {
                 locatorsValidated = true;
@@ -63,7 +64,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
         }
         return core;
     }
-    protected void validateLocators(com.epam.jdi.light.elements.common.uiElement core) {
+    protected void validateLocators(UIElement core) {
         if (headerLocator.equals("th") && core.finds("th").isEmpty()) {
             if (core.finds("thead td").isNotEmpty()) {
                 headerLocator = "thead td";
@@ -111,7 +112,7 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     }
 
     @Override
-    public com.epam.jdi.light.elements.common.uiElement webCell(int colNum, int rowNum) {
+    public UIElement webCell(int colNum, int rowNum) {
         return core().find(MessageFormat.format(cellTemplate, colNum, rowNum))
             .setName(format("%s cell(%s,%s)", getName(), colNum, rowNum));
     }

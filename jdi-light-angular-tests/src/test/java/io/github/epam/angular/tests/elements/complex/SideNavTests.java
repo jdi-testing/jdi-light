@@ -1,6 +1,6 @@
 package io.github.epam.angular.tests.elements.complex;
 
-import com.epam.jdi.light.elements.common.uiElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -49,8 +49,8 @@ public class SideNavTests extends TestsInit {
     @Test
     public void verifyImplicitMainContentWithTwoSideNavTest() {
         implicitMainContent.show();
-        uiElement startSideNav = implicitMainContent.getSideNav("start");
-        uiElement endSideNav = implicitMainContent.getSideNav("end");
+        UIElement startSideNav = implicitMainContent.getSideNav("start");
+        UIElement endSideNav = implicitMainContent.getSideNav("end");
 
         startSideNav.has().attr(MODE, SIDE);
         startSideNav.has().attr(STYLE, STYLE_VISIBLE);

@@ -3,6 +3,7 @@ package com.epam.jdi.light.angular.elements.common;
 import com.epam.jdi.light.angular.asserts.ProgressBarAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,7 +46,7 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
 
     @JDIAction("Get '{name}' progress buffer value ")
     public double bufferValue() throws Exception {
-        com.epam.jdi.light.elements.common.uiElement bufferStyleClass = core().find(".mat-progress-bar-buffer");
+        UIElement bufferStyleClass = core().find(".mat-progress-bar-buffer");
         String styleString = bufferStyleClass.attr("style");
         Pattern bufferValuePattern = Pattern.compile("\\((.*?)\\)");
         Matcher matcher = bufferValuePattern.matcher(styleString);

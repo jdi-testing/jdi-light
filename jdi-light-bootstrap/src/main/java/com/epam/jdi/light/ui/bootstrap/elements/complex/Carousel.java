@@ -3,6 +3,7 @@ package com.epam.jdi.light.ui.bootstrap.elements.complex;
 import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.DataList;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.webList;
@@ -35,12 +36,12 @@ public class Carousel<T extends ICoreElement, D> extends UIBaseElement<TextAsser
 
 	@UI(".carousel-item") @GetAny public DataList<T, D> slides;
 	@UI(".carousel-item") @VisualCheck
-    com.epam.jdi.light.elements.common.uiElement activeSlide;
+    UIElement activeSlide;
 
 	public T activeSlide() {
 		return toT(activeSlide);
 	}
-	protected T toT(com.epam.jdi.light.elements.common.uiElement el) {
+	protected T toT(UIElement el) {
 		return initT(el, this, slides.initClass);
 	}
 	public D activeSlideData() {

@@ -3,6 +3,7 @@ package com.epam.jdi.light.angular.elements.complex;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.webList;
 
 /**
@@ -12,20 +13,20 @@ import com.epam.jdi.light.elements.complex.webList;
 public class SideNav extends UIBaseElement<UIAssert<?, SideNav>> {
 
     @JDIAction("Get '{name}' side nav")
-    public com.epam.jdi.light.elements.common.uiElement getSideNav() {
+    public UIElement getSideNav() {
         return this.find(".mat-sidenav");
     }
 
     @JDIAction("Get '{name}' side nav content")
-    public com.epam.jdi.light.elements.common.uiElement getContent() {
+    public UIElement getContent() {
         return this.find(".mat-sidenav-content");
     }
 
     /*for several side navs*/
     @JDIAction("Get '{name}' side nav  by '{0}' position value")
-    public com.epam.jdi.light.elements.common.uiElement getSideNav(String position) {
-        com.epam.jdi.light.elements.common.uiElement element = null;
-        for (com.epam.jdi.light.elements.common.uiElement e : getSideNavItems()) {
+    public UIElement getSideNav(String position) {
+        UIElement element = null;
+        for (UIElement e : getSideNavItems()) {
             if (e.attr("position").equalsIgnoreCase(position)) {
                 element = e;
             }
@@ -34,7 +35,7 @@ public class SideNav extends UIBaseElement<UIAssert<?, SideNav>> {
     }
 
     @JDIAction("Get '{name}' side nav content")
-    public com.epam.jdi.light.elements.common.uiElement getEvents() {
+    public UIElement getEvents() {
         return getContent().find(".example-events");
     }
 
@@ -55,12 +56,12 @@ public class SideNav extends UIBaseElement<UIAssert<?, SideNav>> {
 
     /*mat-drawer*/
     @JDIAction("Get '{name}' mat drawer")
-    public com.epam.jdi.light.elements.common.uiElement getMatDrawer() {
+    public UIElement getMatDrawer() {
         return this.find(".mat-drawer");
     }
 
     @JDIAction("Get '{name}' mat drawer content content")
-    public com.epam.jdi.light.elements.common.uiElement getMatDrawerContent() {
+    public UIElement getMatDrawerContent() {
         return this.find(".mat-drawer-content");
     }
 }
