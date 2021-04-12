@@ -57,17 +57,8 @@ public class StaticSite {
     public static WebPage inputSwitchDisabledAndCheckedPage;
 
     //date and time pickers
-    @Frame("storybook-preview-iframe")
-    public static DateTimePickersFrame dateTimePickersFrame;
-
-    @Url("/material-ui-inputs-date-time--date-picker-inline")
-    public static WebPage datePickerInlinePage;
-
-    @Url("/material-ui-inputs-date-time--date-picker-dialog")
-    public static WebPage datePickerDialogPage;
-
-    @Url("/material-ui-inputs-date-time--time-picker")
-    public static WebPage timePickerPage;
+    @Url("date_picker")
+    public static DateTimePickersPage dateTimePickersPage;
 
     //simple transfer list
     @Frame("storybook-preview-iframe")
