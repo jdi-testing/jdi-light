@@ -18,24 +18,20 @@ public class PortalTests extends TestsInit {
     @BeforeMethod
     public void openSectionToTest() {
         openSection("Portal");
-        insureInitialState();
     }
 
     @Test
     public void checkStateAfterBtnClick() {
+        button.has().text("Mount children");
+        field1.has().text("It looks like I will render here.");
+        field2.has().text("");
+
         button.click();
         button.has().text("Unmount children");
         field1.has().text("It looks like I will render here.");
         field2.has().text("But I actually render here!");
-    }
 
-    @Test
-    public void checkStateAfterDoubleClick() {
-        button.doubleClick();
-        insureInitialState();
-    }
-
-    public void insureInitialState() {
+        button.click();
         button.has().text("Mount children");
         field1.has().text("It looks like I will render here.");
         field2.has().text("");
