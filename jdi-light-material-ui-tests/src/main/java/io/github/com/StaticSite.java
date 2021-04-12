@@ -477,14 +477,8 @@ public class StaticSite {
 
     // utils
     // Click away listener
-    @Frame("storybook-preview-iframe")
-    public static ClickAwayListenerFrame clickAwayListenerFrame;
-
-    @Url("/material-ui-utils-click-away-listener--default")
-    public static WebPage utilsClickAwayListenerDefaultPage;
-
-    @Url("/material-ui-utils-click-away-listener--portal-example")
-    public static WebPage utilsClickAwayListenerPortalExamplePage;
+    @Url("/click_away_listener")
+    public static ClickAwayListenerPage clickAwayListenerPage;
 
     // transition
     @Frame("storybook-preview-iframe")
