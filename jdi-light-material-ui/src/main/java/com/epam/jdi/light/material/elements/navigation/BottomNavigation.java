@@ -4,27 +4,16 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.navigation.BottomNavigationAssert;
 
+/**
+ * To see an example of Bottom Navigation web element please visit
+ * https://material-ui.com/ru/components/bottom-navigation/
+ */
+
 public class BottomNavigation extends UIBaseElement<BottomNavigationAssert> {
 
-    @JDIAction("Toggle '{name}'")
-    public void toggle() {
-        core().click();
-    }
-
-    @JDIAction("Is '{name} disabled")
-    @Override
-    public boolean isDisabled() {
-        return core().hasClass("Mui-disabled");
-    }
-
-    @JDIAction("Is '{name} enabled")
-    @Override
-    public boolean isEnabled() {
-        return !isDisabled();
-    }
-
-    public String getValue() {
-        return core().getText();
+    @JDIAction("Is '{name} selected")
+    public boolean isSelected(){
+        return core().hasClass("Mui-selected");
     }
 
     @Override
