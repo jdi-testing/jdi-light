@@ -24,12 +24,13 @@ import io.github.com.pages.displaydata.VerticalDividerFrame;
 import io.github.com.pages.feedback.BackdropFrame;
 import io.github.com.pages.feedback.CircularProgressFrame;
 import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
-import io.github.com.pages.feedback.DialogFrame;
+import io.github.com.pages.feedback.DialogPage;
 import io.github.com.pages.feedback.LinearProgressFrame;
 import io.github.com.pages.feedback.SimpleSnackbarFrame;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.ContainerFrame;
+import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.navigation.*;
@@ -37,13 +38,7 @@ import io.github.com.pages.surfaces.AccordionFrame;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.surfaces.PaperFrame;
-import io.github.com.pages.utils.ModalFrame;
-import io.github.com.pages.utils.PopoverClickFrame;
-import io.github.com.pages.utils.PopoverHoverFrame;
-import io.github.com.pages.utils.PopperFrame;
-import io.github.com.pages.utils.PortalFrame;
-import io.github.com.pages.utils.TransitionFrame;
-import io.github.com.pages.utils.TextAreaAutoSizePage;
+import io.github.com.pages.utils.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
 public class StaticSite {
@@ -233,14 +228,7 @@ public class StaticSite {
 
     // feedback
     // dialog
-    @Frame("storybook-preview-iframe")
-    public static DialogFrame dialogFrame;
-
-    @Url("/material-ui-feedback-dialog--dialog-alert")
-    public static WebPage alertDialogPage;
-
-    @Url("/material-ui-feedback-dialog--dialog-confirm")
-    public static WebPage confirmDialogPage;
+    public static DialogPage dialogPage;
 
     @Frame("storybook-preview-iframe")
     public static AvatarFrame dataDisplayAvatarFrame;
