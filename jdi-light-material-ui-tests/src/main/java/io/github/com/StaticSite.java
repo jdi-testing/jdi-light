@@ -538,7 +538,7 @@ public class StaticSite {
     public static WebPage underlineAlwaysLinkPage;
 
     // bottom navigation
-   @Frame("storybook-preview-iframe")
+   @Url("/button_navigation")
    public static BottomNavigationPage bottomNavigationPage;
 
     // menu
