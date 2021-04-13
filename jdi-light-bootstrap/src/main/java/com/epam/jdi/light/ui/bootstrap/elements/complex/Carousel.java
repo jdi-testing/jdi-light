@@ -35,8 +35,7 @@ public class Carousel<T extends ICoreElement, D> extends UIBaseElement<TextAsser
 	protected String indicatorsLocator = "li[data-slide-to]";
 
 	@UI(".carousel-item") @GetAny public DataList<T, D> slides;
-	@UI(".carousel-item") @VisualCheck
-    UIElement activeSlide;
+	@UI(".carousel-item") @VisualCheck UIElement activeSlide;
 
 	public T activeSlide() {
 		return toT(activeSlide);
