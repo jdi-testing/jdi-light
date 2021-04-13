@@ -472,6 +472,17 @@ public class StaticSite {
     @Url("/material-ui-utils-popover--hover")
     public static WebPage utilsPopoverHoverPage;
 
+    // utils
+    // Click away listener
+    @Frame("storybook-preview-iframe")
+    public static ClickAwayListenerFrame clickAwayListenerFrame;
+
+    @Url("/material-ui-utils-click-away-listener--default")
+    public static WebPage utilsClickAwayListenerDefaultPage;
+
+    @Url("/material-ui-utils-click-away-listener--portal-example")
+    public static WebPage utilsClickAwayListenerPortalExamplePage;
+
     // portal
     @Frame("storybook-preview-iframe")
     public static PortalFrame portalFrame;
