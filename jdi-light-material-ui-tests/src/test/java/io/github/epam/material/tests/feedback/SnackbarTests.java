@@ -11,6 +11,10 @@ import java.util.Map;
 import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.pages.feedback.SnackbarPage.*;
 
+/**
+ * To see an example of Snackbar web element please visit https://material-ui.com/components/snackbars/
+ */
+
 public class SnackbarTests extends TestsInit {
 
     private static Timer timer = new Timer(2000L);
