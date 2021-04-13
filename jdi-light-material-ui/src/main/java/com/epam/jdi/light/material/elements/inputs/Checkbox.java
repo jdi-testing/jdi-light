@@ -1,28 +1,20 @@
 package com.epam.jdi.light.material.elements.inputs;
 
-import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.HasCheck;
-import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
 
-public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasCheck,
-    HasAssert<CheckboxAssert>{
-
-    public UIElement getCheckBoxes() {
-        return this.core();
-    }
+public class Checkbox extends UIBaseElement<CheckboxAssert>{
 
     @JDIAction("Is '{name}' checked")
     public boolean isChecked() {
-        return getCheckBoxes().hasClass("Mui-checked");
+        return this.core().hasClass("Mui-checked");
     }
 
     @JDIAction("'{name}' has {className} class")
+    @Override
     public boolean hasClass(String className) {
-        return this.getCheckBoxes().hasClass(className);
+        return this.core().hasClass(className);
     }
 
     @JDIAction("Is '{name}' not selected")
@@ -33,27 +25,30 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
     @JDIAction("Check '{name}'")
     public void check() {
         if (isNotChecked()) {
-            getCheckBoxes().click();
+            this.core().click();
         }
     }
 
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
         if(isChecked()) {
-            getCheckBoxes().click();
+            this.core().click();
         }
     }
 
     @JDIAction("Is '{name}' disabled")
+    @Override
     public boolean isDisabled() {
-        return getCheckBoxes().hasClass("Mui-disabled");
+        return this.core().hasClass("Mui-disabled");
     }
 
     @JDIAction("Is '{name}' enabled")
+    @Override
     public boolean isEnabled() {
         return !isDisabled();
     }
 
+    @Override
     public CheckboxAssert is() {
         return new CheckboxAssert().set(this);
     }
