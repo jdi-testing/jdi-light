@@ -456,6 +456,10 @@ public class StaticSite {
     public static TabFrame verticalTabFrame;
 
     // utils
+    // Click away listener
+    @Url("/click_away_listener")
+    public static ClickAwayListenerPage clickAwayListenerPage;
+
     // transition
     @Frame("storybook-preview-iframe")
     public static TransitionFrame transitionFrame;
