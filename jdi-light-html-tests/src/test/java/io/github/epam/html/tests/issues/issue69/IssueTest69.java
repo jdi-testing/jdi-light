@@ -56,6 +56,7 @@ public class IssueTest69 {
             case "paragraphsList"   : return paragraphsList;
             case "templateData"     : return templateData;
             case "paragraphsData"   : return paragraphsData;
+            default: break;
         }
         return new ArrayList<>();
     }
