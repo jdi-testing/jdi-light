@@ -10,28 +10,12 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
-import io.github.com.pages.displaydata.AvatarFrame;
-import io.github.com.pages.displaydata.BadgeFrame;
-import io.github.com.pages.displaydata.ChipFrame;
-import io.github.com.pages.displaydata.IconsFrame;
-import io.github.com.pages.displaydata.InsetDividerFrame;
-import io.github.com.pages.displaydata.ListsFrame;
-import io.github.com.pages.displaydata.MaterialIconFrame;
-import io.github.com.pages.displaydata.TableFrame;
-import io.github.com.pages.displaydata.TooltipFrame;
-import io.github.com.pages.displaydata.TypographyFrame;
-import io.github.com.pages.displaydata.VerticalDividerFrame;
-import io.github.com.pages.feedback.BackdropFrame;
-import io.github.com.pages.feedback.CircularProgressFrame;
-import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
-import io.github.com.pages.feedback.DialogFrame;
-import io.github.com.pages.feedback.LinearProgressFrame;
-import io.github.com.pages.feedback.SimpleSnackbarFrame;
+import io.github.com.pages.displaydata.*;
+import io.github.com.pages.feedback.*;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.inputs.CheckboxPage;
-import io.github.com.pages.inputs.DateTimePickersFrame;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.FabFrame;
 import io.github.com.pages.inputs.GroupCheckBoxFrame;
@@ -44,19 +28,14 @@ import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.navigation.BreadcrumbsFrame;
 import io.github.com.pages.layout.ContainerFrame;
-import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.layout.GridFrame;
+import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.navigation.*;
-import io.github.com.pages.surfaces.AccordionFrame;
+import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardFrame;
 import io.github.com.pages.surfaces.PaperFrame;
-import io.github.com.pages.utils.ModalFrame;
-import io.github.com.pages.utils.PopoverClickFrame;
-import io.github.com.pages.utils.PopoverHoverFrame;
-import io.github.com.pages.utils.PopperFrame;
-import io.github.com.pages.utils.PortalFrame;
-import io.github.com.pages.utils.TransitionFrame;
+import io.github.com.pages.utils.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
 public class StaticSite {
@@ -76,17 +55,8 @@ public class StaticSite {
     public static WebPage inputSwitchDisabledAndCheckedPage;
 
     //date and time pickers
-    @Frame("storybook-preview-iframe")
-    public static DateTimePickersFrame dateTimePickersFrame;
-
-    @Url("/material-ui-inputs-date-time--date-picker-inline")
-    public static WebPage datePickerInlinePage;
-
-    @Url("/material-ui-inputs-date-time--date-picker-dialog")
-    public static WebPage datePickerDialogPage;
-
-    @Url("/material-ui-inputs-date-time--time-picker")
-    public static WebPage timePickerPage;
+    @Url("date_picker")
+    public static DateTimePickersPage dateTimePickersPage;
 
     //simple transfer list
     @Frame("storybook-preview-iframe")
@@ -125,6 +95,9 @@ public class StaticSite {
     // text field
     @Frame("storybook-preview-iframe")
     public static TextFieldFrame textFieldFrame;
+
+    @Url("/textarea_autosize")
+    public static TextAreaAutoSizePage textAreaAutoSizePage;
 
     @Url("/material-ui-inputs-text-field--standard")
     public static WebPage inputTextFieldStandardPage;
@@ -189,13 +162,7 @@ public class StaticSite {
     // surfaces
     // accordion
     @Frame("storybook-preview-iframe")
-    public static AccordionFrame accordionFrame;
-
-    @Url("/material-ui-surfaces-accordion--default")
-    public static WebPage surfaceAccordionPage;
-
-    @Url("/material-ui-surfaces-accordion--disabled")
-    public static WebPage surfaceAccordionDisabledPage;
+    public static AccordionPage accordionPage;
 
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage appBarPage;
@@ -237,14 +204,7 @@ public class StaticSite {
 
     // feedback
     // dialog
-    @Frame("storybook-preview-iframe")
-    public static DialogFrame dialogFrame;
-
-    @Url("/material-ui-feedback-dialog--dialog-alert")
-    public static WebPage alertDialogPage;
-
-    @Url("/material-ui-feedback-dialog--dialog-confirm")
-    public static WebPage confirmDialogPage;
+    public static DialogPage dialogPage;
 
     @Frame("storybook-preview-iframe")
     public static AvatarFrame dataDisplayAvatarFrame;
@@ -585,11 +545,8 @@ public class StaticSite {
     public static WebPage underlineAlwaysLinkPage;
 
     // bottom navigation
-    @Frame("storybook-preview-iframe")
-    public static BottomNavigationFrame bottomNavigationFrame;
-
-    @Url("/material-ui-navigation-bottom-navigation--default")
-    public static WebPage bottomNavigationPage;
+   @Frame("storybook-preview-iframe")
+   public static BottomNavigationPage bottomNavigationPage;
 
     // menu
     @Frame("storybook-preview-iframe")
