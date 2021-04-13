@@ -44,28 +44,4 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
         jdiAssert(element().isNotVisible(), Matchers.is(true));
         return this;
     }
-
-    @JDIAction("Assert that {name} child contains svg")
-    public ButtonAssert hasSvg(String className){
-        jdiAssert(element().find("//*[name()='svg']").hasClass(className), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that {name}'s child span icon is visible")
-    public ButtonAssert displayedSpanIcon() {
-        try {
-            boolean isDisplayed = new Timer(base().getTimeout() * 1000L)
-                    .wait(() -> element().find("material-icons MuiIcon-root").isDisplayed());
-            jdiAssert(isDisplayed, Matchers.is(true));
-        } catch (AssertionError e){
-            new AssertionError("Span not found");
-        }
-        return this;
-    }
-
-    @JDIAction("Assert that {name} has {className}")
-    public ButtonAssert hasClass(String className){
-        jdiAssert(element().hasClass(className), Matchers.is(true));
-        return this;
-    }
 }
