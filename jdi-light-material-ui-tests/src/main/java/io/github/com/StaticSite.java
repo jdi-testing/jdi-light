@@ -21,12 +21,7 @@ import io.github.com.pages.displaydata.TableFrame;
 import io.github.com.pages.displaydata.TooltipFrame;
 import io.github.com.pages.displaydata.TypographyFrame;
 import io.github.com.pages.displaydata.VerticalDividerFrame;
-import io.github.com.pages.feedback.BackdropFrame;
-import io.github.com.pages.feedback.CircularProgressFrame;
-import io.github.com.pages.feedback.ConsecutiveSnackbarFrame;
-import io.github.com.pages.feedback.DialogPage;
-import io.github.com.pages.feedback.LinearProgressFrame;
-import io.github.com.pages.feedback.SimpleSnackbarFrame;
+import io.github.com.pages.feedback.*;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.ContainerFrame;
@@ -437,16 +432,7 @@ public class StaticSite {
 
     // snackbar
     @Frame("storybook-preview-iframe")
-    public static SimpleSnackbarFrame simpleSnackbarFrame;
-
-    @Frame("storybook-preview-iframe")
-    public static ConsecutiveSnackbarFrame consecutiveSnackbarFrame;
-
-    @Url("/material-ui-feedback-snackbar--simple-snackbar")
-    public static WebPage feedbackSnackbarSimplePage;
-
-    @Url("/material-ui-feedback-snackbar--consecutive-snackbars")
-    public static WebPage feedbackSnackbarConsecutivePage;
+    public static SnackbarPage simpleSnackbarFrame;
 
     // navigation
     // tabs
