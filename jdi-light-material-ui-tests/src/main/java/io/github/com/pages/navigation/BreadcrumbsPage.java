@@ -7,6 +7,11 @@ import com.epam.jdi.light.material.elements.inputs.Button;
 
 import java.util.List;
 
+/**
+ * To see an example of Accordion web element please visit
+ * https://material-ui.com/ru/components/breadcrumbs/
+ */
+
 public class BreadcrumbsPage extends WebPage {
 
     @UI(".MuiBreadcrumbs-li")
@@ -29,4 +34,12 @@ public class BreadcrumbsPage extends WebPage {
 
     @UI("//span[text()='Inbox']")
     public static UIElement inboxDisplayBlock;
+
+    @UI("//h3[text()='Material UI']")
+    public static UIElement materialElement;
+
+    @UI("//h3[text()='Core']")
+    public static UIElement coreElement;
+
+
 }
