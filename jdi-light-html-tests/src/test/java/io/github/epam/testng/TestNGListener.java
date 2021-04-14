@@ -71,6 +71,7 @@ public class TestNGListener implements IInvokedMethodListener {
                 return "STARTED";
             case ITestResult.CREATED:
                 return "CREATED";
+            default: break;
         }
         return "FAILED";
     }
