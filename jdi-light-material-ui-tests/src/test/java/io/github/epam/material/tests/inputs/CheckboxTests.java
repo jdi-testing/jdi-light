@@ -15,7 +15,7 @@ import static io.github.com.MaterialNavigator.openSection;
 public class CheckboxTests extends TestsInit {
 
     @BeforeTest()
-    private void beforeTest() {
+    public void beforeTest() {
         openSection("Checkbox");
         checkboxPage.shouldBeOpened();
     }
