@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.surfaces;
 
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,6 +14,8 @@ import static org.testng.Assert.assertTrue;
  */
 
 public class AccordionTests extends TestsInit {
+
+    private static Timer timer = new Timer(1000L);
 
     @BeforeMethod
     public void before(){
@@ -30,8 +33,8 @@ public class AccordionTests extends TestsInit {
         enabledAccordion.expand();
         assertTrue(enabledAccordion.list().isDisplayed());
         enabledAccordion.close();
-        enabledAccordion.is().collapsed();
-        assertFalse(enabledAccordion.list().isDisplayed());
+        timer.wait(() -> enabledAccordion.is().collapsed());
+        timer.wait(() -> assertFalse(enabledAccordion.list().isDisplayed()));
     }
 
     @Test

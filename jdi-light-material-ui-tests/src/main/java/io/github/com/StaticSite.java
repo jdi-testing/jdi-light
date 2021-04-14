@@ -473,6 +473,17 @@ public class StaticSite {
     @Url("/material-ui-utils-popover--hover")
     public static WebPage utilsPopoverHoverPage;
 
+    // utils
+    // Click away listener
+    @Frame("storybook-preview-iframe")
+    public static ClickAwayListenerFrame clickAwayListenerFrame;
+
+    @Url("/material-ui-utils-click-away-listener--default")
+    public static WebPage utilsClickAwayListenerDefaultPage;
+
+    @Url("/material-ui-utils-click-away-listener--portal-example")
+    public static WebPage utilsClickAwayListenerPortalExamplePage;
+
     // portal
     @Url("portal")
     public static PortalPage portalPage;
@@ -539,7 +550,7 @@ public class StaticSite {
     public static WebPage underlineAlwaysLinkPage;
 
     // bottom navigation
-   @Frame("storybook-preview-iframe")
+   @Url("/button_navigation")
    public static BottomNavigationPage bottomNavigationPage;
 
     // menu
