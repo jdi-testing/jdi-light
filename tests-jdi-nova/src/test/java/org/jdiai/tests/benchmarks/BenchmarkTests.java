@@ -43,7 +43,7 @@ public class BenchmarkTests implements TestInit {
 
     @Test(invocationCount = repeat)
     public void getText() {
-        totalResult += "getText: " + testScenario(
+        totalResult += testScenario("getText: ",
             () -> driver().findElement(By.cssSelector("#users-table tr>th")).getText(),
             () -> $("#users-table tr>th").getText(),
         lightTestsCount) + "\n";
@@ -51,7 +51,7 @@ public class BenchmarkTests implements TestInit {
 
     @Test(invocationCount = repeat)
     public void multiLocator() {
-        totalResult += "multiLocator: " + testScenario(
+        totalResult += testScenario("multiLocator: ",
             () -> driver().findElement(By.cssSelector("#users-table"))
                 .findElement(By.xpath(".//tr[2]"))
                 .findElement(By.tagName("td")).getText(),
@@ -60,7 +60,7 @@ public class BenchmarkTests implements TestInit {
     }
     @Test(invocationCount = repeat)
     public void getAllAttributes() {
-        totalResult += "getAllAttributes: " + testScenario(() -> {
+        totalResult += testScenario("getAllAttributes: ", () -> {
             WebElement element = driver().findElement(By.cssSelector(".sidebar-tooltip"));
             String dt = element.getAttribute("data-toggle");
             String dp = element.getAttribute("data-placement");
@@ -73,7 +73,7 @@ public class BenchmarkTests implements TestInit {
     }
     @Test(invocationCount = repeat)
     public void getMultiData() {
-        totalResult += "getMultiData: " + testScenario(() -> {
+        totalResult += testScenario("getMultiData: ", () -> {
             WebElement element = driver().findElement(By.cssSelector("#users-table"));
             String id = element.getAttribute("id");
             String ui = element.getAttribute("ui");
@@ -91,7 +91,7 @@ public class BenchmarkTests implements TestInit {
     }
     @Test(invocationCount = repeat)
     public void multiElements() {
-        totalResult += "multiElements: " + testScenario(() -> {
+        totalResult += testScenario("multiElements: ", () -> {
             WebElement element = driver().findElement(By.xpath("//*[@id='users-table']//tr[2]"));
             List<String> result = new ArrayList<>();
             for (int i = 1; i <= 4; i++) {
@@ -108,7 +108,7 @@ public class BenchmarkTests implements TestInit {
     }
     @Test(invocationCount = repeat)
     public void listGetValuesTest() {
-        totalResult += "listGetValuesTest: " + testScenario(() -> {
+        totalResult += testScenario("listGetValuesTest: ", () -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList());
         }, () -> $("#users-table tr>td:first-child").values(),
@@ -116,7 +116,7 @@ public class BenchmarkTests implements TestInit {
     }
     @Test(invocationCount = repeat)
     public void getValueByIndexTest() {
-        totalResult += "getValueByIndexTest: " + testScenario(
+        totalResult += testScenario("getValueByIndexTest: ",
             () -> driver().findElements(By.cssSelector("#users-table tr"))
                 .get(index).findElement(By.xpath(".//td[3]")).getText(),
             () -> $("#users-table tr").get(index).find("td").get(2).getText(),
@@ -124,7 +124,7 @@ public class BenchmarkTests implements TestInit {
     }
     @Test(invocationCount = repeat)
     public void getValueByNameTopTest() {
-        totalResult += "getValueByNameTopTest: " + testScenario(() -> {
+        totalResult += testScenario("getValueByNameTopTest: ", () -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr"));
             WebElement row = elements.stream().filter(el -> {
                 WebElement td = null;
@@ -142,7 +142,7 @@ public class BenchmarkTests implements TestInit {
 
     @Test(invocationCount = repeat)
     public void getValueByNameBottomTest() {
-        totalResult += "getValueByNameBottomTest: " + testScenario(() -> {
+        totalResult += testScenario("getValueByNameBottomTest: ", () -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr"));
             WebElement row = elements.stream().filter(el -> {
                 WebElement td = null;
@@ -159,7 +159,7 @@ public class BenchmarkTests implements TestInit {
 
     @Test(invocationCount = repeat)
     public void scenarioJdiSeleniumTest() {
-        totalResult += "scenarioJdiSeleniumTest: " + testScenario(
+        totalResult += testScenario("scenarioJdiSeleniumTest: ",
             () -> logout(),
             "Selenium",
             () -> { try { new SeleniumTests().simpleSearchTest(); return true; } catch (Exception ex) { return false; } },
@@ -171,7 +171,7 @@ public class BenchmarkTests implements TestInit {
     @Test(invocationCount = repeat)
     public void scenarioJdiSelenideTest() {
         Configuration.headless = true;
-        totalResult += "scenarioJdiSelenideTest: " + testScenario(
+        totalResult += testScenario("scenarioJdiSelenideTest: ",
             () -> { logout(); Selenide.clearBrowserCookies(); },
             "Selenide",
             () -> { try { new SelenideTests().simpleSearchTest(); return true; } catch (Exception ex) { return false; } },
@@ -180,9 +180,20 @@ public class BenchmarkTests implements TestInit {
             heavyTestsCount) + "\n";
     }
     @Test(invocationCount = repeat)
+    public void scenarioAllJdiSeleniumTest() {
+        Configuration.headless = true;
+        totalResult += testScenario("scenarioAllJdiSeleniumTest: ",
+            () -> logout(),
+            "Selenium",
+            () -> { try { new SeleniumTests().simpleAllSearchTest(); return true; } catch (Exception ex) { return false; } },
+            "JDI Nova",
+            () -> { try { new JDINovaTests().simpleAllOrderedSearchTest(); return true; } catch (Exception ex) { return false; } },
+            heavyTestsCount) + "\n";
+    }
+    @Test(invocationCount = repeat)
     public void scenarioAllJdiSelenideTest() {
         Configuration.headless = true;
-        totalResult += "scenarioAllJdiSelenideTest: " + testScenario(
+        totalResult += testScenario("scenarioAllJdiSelenideTest: ",
             () -> { logout(); Selenide.clearBrowserCookies(); },
             "Selenide",
             () -> { try { new SelenideTests().simpleAllSearchTest(); return true; } catch (Exception ex) { return false; } },
@@ -195,11 +206,4 @@ public class BenchmarkTests implements TestInit {
     public void afterClass() {
         System.out.println(totalResult);
     }
-    // @Test(invocationCount = repeat)
-    // public void getIndexTest() {
-    //     testScenario(() -> {
-    //         List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr>td:first-child"));
-    //         return elements.get(index).getText();
-    //     }, () -> firstXpath.get(index+1).getText(), 100);
-    // }
 }

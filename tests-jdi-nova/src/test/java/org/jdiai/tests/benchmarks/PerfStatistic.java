@@ -16,10 +16,10 @@ import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
 
 public class PerfStatistic {
-    public static <T> String testScenario(JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
-        return testScenario(() -> {}, "Selenium", seleniumAction, "JDI Nova", jdiAction, count);
+    public static <T> String testScenario(String testName, JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
+        return testScenario(testName, () -> {}, "Selenium", seleniumAction, "JDI Nova", jdiAction, count);
     }
-    public static <T> String testScenario(JAction precondition, String framework1, JFunc<T> seleniumAction,
+    public static <T> String testScenario(String testName, JAction precondition, String framework1, JFunc<T> seleniumAction,
               String framework2, JFunc<T> jdiAction, int count) {
         List<Long> seleniumStats = new ArrayList<>();
         List<Long> jsStats = new ArrayList<>();
@@ -38,7 +38,7 @@ public class PerfStatistic {
             T jdiResult = jdiAction.execute();
             long jsTime = t.timePassedInMSec();
             jsStats.add(jsTime);
-            System.out.println("Ratio: " + df2((double)seleniumTime/jsTime));
+            System.out.println(testName + " Ratio: " + df2((double)seleniumTime/jsTime));
             assertEquals(seleniumResult, jdiResult);
         }
         double avSelenium = getAverage(seleniumStats);
