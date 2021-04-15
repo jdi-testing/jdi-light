@@ -17,6 +17,7 @@ import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.layout.HiddenFrame;
+import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
@@ -484,8 +485,8 @@ public class StaticSite {
     public static WebPage utilsClickAwayListenerPortalExamplePage;
 
     // portal
-    @Frame("storybook-preview-iframe")
-    public static PortalFrame portalFrame;
+    @Url("portal")
+    public static PortalPage portalPage;
 
     @Url("/material-ui-utils-portal--default")
     public static WebPage defaultPortalPage;
