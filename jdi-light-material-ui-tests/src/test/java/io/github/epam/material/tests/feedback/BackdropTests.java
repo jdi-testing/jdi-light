@@ -16,8 +16,8 @@ public class BackdropTests extends TestsInit {
 
         timer.wait(() -> backdrop.is().hidden());
         showBackdropButton.click();
-        backdrop.is().visible();
-        backdrop.hide();
+        timer.wait(() -> backdrop.is().visible());
+        backdrop.click();
         timer.wait(() -> backdrop.is().hidden());
     }
 }
