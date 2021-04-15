@@ -816,8 +816,8 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         COMPARE_IMAGES.execute(imagesData().imageFile, element.imagesData().imageFile);
     }
     public Direction getDirectionTo(JS element) {
-        ClientRect destinationCoordinates = element.getClientRect();
         ClientRect elementCoordinates = getClientRect();
+        ClientRect destinationCoordinates = element.getClientRect();
         Direction direction = new Direction(getCenter(elementCoordinates), getCenter(destinationCoordinates));
         if (relations == null) {
             relations = new MapArray<>(element.getFullName(), direction);
