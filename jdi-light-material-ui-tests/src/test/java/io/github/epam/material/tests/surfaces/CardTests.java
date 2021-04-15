@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.surfaces;
 
-import static io.github.com.StaticSite.cardFrame;
+import static io.github.com.StaticSite.cardPage;
 import static io.github.com.StaticSite.surfaceCardPage;
 
 import io.github.epam.TestsInit;
@@ -15,12 +15,12 @@ public class CardTests extends TestsInit {
     @Test
     public void defaultPaperTest() {
         surfaceCardPage.open();
-        cardFrame.card.getCardButtons().get(1).is().enabled();
-        cardFrame.card.getCardHeaders().get(1).is().text(EXPECTED_CARD_TITLE);
-        cardFrame.card.getCardHeaders().get(2).is().text(EXPECTED_CARD_SUB_HEADER);
-        cardFrame.card.is().backgroundImageDisplayed();
-        cardFrame.card.is().backgroundClickable();
-        cardFrame.card.clickOnBackground();
-        cardFrame.card.getInnerCardContent().get(1).is().text(EXPECTED_CARD_CONTENT);
+        cardPage.card.getCardButtons().get(1).is().enabled();
+        cardPage.card.getCardHeaders().get(1).is().text(EXPECTED_CARD_TITLE);
+        cardPage.card.getCardHeaders().get(2).is().text(EXPECTED_CARD_SUB_HEADER);
+        cardPage.card.is().backgroundImageDisplayed();
+        cardPage.card.is().backgroundClickable();
+        cardPage.card.clickOnBackground();
+        cardPage.card.getInnerCardContent().get(1).is().text(EXPECTED_CARD_CONTENT);
     }
 }
