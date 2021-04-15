@@ -14,9 +14,23 @@ import io.github.com.pages.displaydata.*;
 import io.github.com.pages.feedback.*;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.BoxFrame;
+import io.github.com.pages.inputs.ButtonGroupFrame;
+import io.github.com.pages.inputs.CheckboxPage;
+import io.github.com.pages.inputs.EnhancedTransferListFrame;
+import io.github.com.pages.inputs.FabFrame;
+import io.github.com.pages.inputs.GroupCheckBoxFrame;
+import io.github.com.pages.inputs.RadioButtonFrame;
+import io.github.com.pages.inputs.SelectFrame;
+import io.github.com.pages.inputs.SimpleTransferListFrame;
+import io.github.com.pages.inputs.SliderFrame;
+import io.github.com.pages.inputs.SplitButtonGroupFrame;
+import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.inputs.TextFieldFrame;
+import io.github.com.pages.navigation.BreadcrumbsFrame;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.layout.HiddenFrame;
+import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
@@ -102,14 +116,8 @@ public class StaticSite {
     public static WebPage inputTextFieldTimePage;
 
     //checkbox
-    @Frame("storybook-preview-iframe")
-    public static CheckboxFrame checkboxFrame;
-
-    @Url("/material-ui-inputs-checkbox--disabled")
-    public static WebPage inputCheckboxDisabled;
-
-    @Url("/material-ui-inputs-checkbox--primary")
-    public static WebPage primaryCheckBoxPage;
+    @Url("/checkboxes")
+    public static CheckboxPage checkboxPage;
 
     // button group
     @Frame("storybook-preview-iframe")
@@ -449,6 +457,10 @@ public class StaticSite {
     public static TabFrame verticalTabFrame;
 
     // utils
+    // Click away listener
+    @Url("/click_away_listener")
+    public static ClickAwayListenerPage clickAwayListenerPage;
+
     // transition
     @Frame("storybook-preview-iframe")
     public static TransitionFrame transitionFrame;
@@ -484,8 +496,8 @@ public class StaticSite {
     public static WebPage utilsClickAwayListenerPortalExamplePage;
 
     // portal
-    @Frame("storybook-preview-iframe")
-    public static PortalFrame portalFrame;
+    @Url("portal")
+    public static PortalPage portalPage;
 
     @Url("/material-ui-utils-portal--default")
     public static WebPage defaultPortalPage;
@@ -493,22 +505,14 @@ public class StaticSite {
     // navigation
     // breadcrumbs
     @Frame("storybook-preview-iframe")
-    public static BreadcrumbsFrame breadcrumbsFrame;
+    public static BreadcrumbsPage breadcrumbsPage;
 
-    @Url("/material-ui-navigation-breadcrumbs--simple")
+    @Url("/simple_breadcrumbs")
     public static WebPage simpleBreadcrumbsPage;
 
-    @Url("/material-ui-navigation-breadcrumbs--custom-separator")
-    public static WebPage customSeparatorBreadcrumbsPage;
-
-    @Url("/material-ui-navigation-breadcrumbs--with-icons")
-    public static WebPage withIconsBreadcrumbsPage;
-
-    @Url("/material-ui-navigation-breadcrumbs--collapsed")
-    public static WebPage collapsedBreadcrumbsPage;
-
-    @Url("/material-ui-navigation-breadcrumbs--router-integration")
+    @Url("/router_breadcrumbs")
     public static WebPage routerIntegrationBreadcrumbsPage;
+
 
     @Url("/material-ui-navigation-breadcrumbs--customized")
     public static WebPage customizedBreadcrumbsPage;
