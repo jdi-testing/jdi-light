@@ -1,0 +1,172 @@
+package io.github.epam.material.tests.navigation;
+
+import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.pages.navigation.DrawerPage.*;
+import static org.testng.Assert.*;
+import static org.hamcrest.Matchers.containsString;
+
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.tools.Timer;
+import io.github.epam.TestsInit;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class DrawerTests extends TestsInit {
+
+    private static Timer timer = new Timer(2000L);
+    private List<String> actualDrawerTexts = new ArrayList<>();
+    private List<String> expectedDrawerTexts = Arrays.asList("Inbox", "Starred", "Send email", "Drafts", "All mail", "Trash", "Spam");
+    private String firstPartOfTextContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    private String secondPartOfTextContent = "Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam.";
+
+    @Test(priority = 1)
+    public void temporaryDrawerTest() {
+
+        openSection("Drawer", "Temporary Drawer");
+        List<Button> buttons = Arrays.asList(leftButton, rightButton, topButton, bottomButton);
+        buttons.forEach(
+                button -> {
+                    button.click();
+                    drawer.is().displayed();
+                    drawerElementsIcon.forEach(
+                            icon -> icon.is().displayedSvg()
+                    );
+                    drawerElementsText.forEach(
+                            text -> actualDrawerTexts.add(text.getText())
+                    );
+                    assertEquals(actualDrawerTexts, expectedDrawerTexts);
+                    actualDrawerTexts.clear();
+                    drawerElementsText.get(1).click();
+                }
+        );
+    }
+
+    @Test(priority = 2)
+    public void swipeableDrawerTest() {
+
+        openSection("Drawer", "Swipeable Drawer");
+        List<Button> buttons = Arrays.asList(leftButton, rightButton, topButton, bottomButton);
+        buttons.forEach(
+                button -> {
+                    button.click();
+                    drawer.is().displayed();
+                    drawerElementsIcon.forEach(
+                            icon -> icon.is().displayedSvg()
+                    );
+                    drawerElementsText.forEach(
+                            text -> actualDrawerTexts.add(text.getText())
+                    );
+                    assertEquals(actualDrawerTexts, expectedDrawerTexts);
+                    actualDrawerTexts.clear();
+                    drawerElementsText.get(1).click();
+                }
+        );
+    }
+
+    @Test(priority = 3)
+    public void responsiveDrawerTest() {
+
+        openSection("Drawer", "Responsive Drawer");
+        drawer.is().displayed();
+        drawerElementsIcon.forEach(
+                icon -> icon.is().displayedSvg()
+        );
+        drawerElementsText.forEach(
+                text -> {
+                    text.click();
+                    actualDrawerTexts.add(text.getText());
+                }
+        );
+        assertEquals(actualDrawerTexts, expectedDrawerTexts);
+
+        drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
+        drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
+    }
+
+    @Test(priority = 4)
+    public void persistentDrawerTest() {
+
+        openSection("Drawer", "Persistent Drawer");
+        drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
+        drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
+
+        drawerSandwichMenuButton.click();
+        drawerElementsIcon.forEach(
+                icon -> icon.is().displayedSvg()
+        );
+        drawerElementsText.forEach(
+                text -> {
+                    text.click();
+                    actualDrawerTexts.add(text.getText());
+                }
+        );
+
+        drawerBackMenuButton.click();
+    }
+
+    @Test(priority = 5)
+    public void miniDrawerTest() {
+
+        openSection("Drawer", "Mini Drawer");
+        drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
+        drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
+
+        drawerSandwichMenuButton.click();
+        drawerElementsIcon.forEach(
+                icon -> icon.is().displayedSvg()
+        );
+        drawerElementsText.forEach(
+                text -> {
+                    text.click();
+                    actualDrawerTexts.add(text.getText());
+                }
+        );
+
+        drawerBackMenuButton.click();
+        timer.wait(() -> drawerElementsText.get(1).is().disappear());
+        drawerElementsIcon.forEach(
+                icon -> icon.is().displayedSvg()
+        );
+
+    }
+
+    @Test(priority = 6)
+    public void permanentDrawerTest() {
+
+        openSection("Drawer", "Permanent Drawer");
+        drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
+        drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
+
+        drawerElementsIcon.forEach(
+                icon -> icon.is().displayedSvg()
+        );
+        drawerElementsText.forEach(
+                text -> {
+                    text.click();
+                    actualDrawerTexts.add(text.getText());
+                }
+        );
+    }
+
+    @Test(priority = 7)
+    public void clippedDrawerTest() {
+
+        openSection("Drawer", "Clipped Drawer");
+        drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
+        drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
+
+        drawerElementsIcon.forEach(
+                icon -> icon.is().displayedSvg()
+        );
+        drawerElementsText.forEach(
+                text -> {
+                    text.click();
+                    actualDrawerTexts.add(text.getText());
+                }
+        );
+    }
+}
+

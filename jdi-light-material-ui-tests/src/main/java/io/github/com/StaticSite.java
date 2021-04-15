@@ -513,6 +513,9 @@ public class StaticSite {
     @Url("/material-ui-navigation-breadcrumbs--customized")
     public static WebPage customizedBreadcrumbsPage;
 
+    // drawer
+    public static DrawerPage drawerPage;
+
     // stepper
     @Frame("storybook-preview-iframe")
     public static StepperFrame stepperFrame;
