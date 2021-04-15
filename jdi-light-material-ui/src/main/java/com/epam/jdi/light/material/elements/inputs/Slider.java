@@ -53,6 +53,7 @@ public class Slider extends UIBaseElement<SliderAssert> {
 
   @JDIAction(value = "drag & drop to the value '{0}' of '{name}'")
   public void slideHorizontalTo(int value) {
+//    value = value * 100 / 74;
     int xOffset = getHorizontalShiftInPixels(value);
     thumb().dragAndDropTo(xOffset, 0);
   }

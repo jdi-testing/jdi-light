@@ -161,8 +161,12 @@ public class StaticSite {
     public static WebPage inputSelectSimplePage;
 
     //slider
-    @Frame("storybook-preview-iframe")
-    public static SliderFrame sliderFrame;
+
+    @Url("/sliders")
+    public static SlidersPage slidersPage;
+
+//    @Frame("storybook-preview-iframe")
+//    public static SliderPage sliderPage;
 
     @Url("/material-ui-inputs-sliders--default-and-disabled-sliders")
     public static WebPage inputSliderDefaultAnfDisabledPage;
