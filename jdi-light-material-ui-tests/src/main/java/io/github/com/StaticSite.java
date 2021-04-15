@@ -26,15 +26,13 @@ import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchFrame;
 import io.github.com.pages.inputs.TextFieldFrame;
-import io.github.com.pages.navigation.BreadcrumbsFrame;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.layout.HiddenFrame;
-import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
-import io.github.com.pages.surfaces.CardFrame;
+import io.github.com.pages.surfaces.CardPage;
 import io.github.com.pages.surfaces.PaperFrame;
 import io.github.com.pages.utils.*;
 
@@ -183,7 +181,7 @@ public class StaticSite {
 
     // card
     @Frame("storybook-preview-iframe")
-    public static CardFrame cardFrame;
+    public static CardPage cardPage;
 
     @Url("/material-ui-surfaces-card--card-with-clickable-area")
     public static WebPage surfaceCardPage;
@@ -483,11 +481,6 @@ public class StaticSite {
 
     @Url("/material-ui-utils-popover--hover")
     public static WebPage utilsPopoverHoverPage;
-
-    // utils
-    // Click away listener
-    @Frame("storybook-preview-iframe")
-    public static ClickAwayListenerFrame clickAwayListenerFrame;
 
     @Url("/material-ui-utils-click-away-listener--default")
     public static WebPage utilsClickAwayListenerDefaultPage;
