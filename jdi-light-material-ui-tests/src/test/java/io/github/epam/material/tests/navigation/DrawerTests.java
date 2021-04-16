@@ -31,6 +31,7 @@ public class DrawerTests extends TestsInit {
                 button -> {
                     button.click();
                     drawer.is().displayed();
+                    drawer.has().classValue(containsString(String.format("MuiDrawer-paperAnchor%s", button.getName().substring(0,button.getName().lastIndexOf(" ") + 1))));
                     drawerElementsIcon.forEach(
                             icon -> icon.is().displayedSvg()
                     );
@@ -53,6 +54,8 @@ public class DrawerTests extends TestsInit {
                 button -> {
                     button.click();
                     drawer.is().displayed();
+                    String currentButtonName = button.getName();
+                    drawer.has().classValue(containsString(String.format("MuiDrawer-paperAnchor%s", currentButtonName.substring(0,currentButtonName.lastIndexOf(" ") + 1))));
                     drawerElementsIcon.forEach(
                             icon -> icon.is().displayedSvg()
                     );
@@ -81,7 +84,7 @@ public class DrawerTests extends TestsInit {
                 }
         );
         assertEquals(actualDrawerTexts, expectedDrawerTexts);
-
+        actualDrawerTexts.clear();
         drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
         drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
     }
@@ -103,7 +106,8 @@ public class DrawerTests extends TestsInit {
                     actualDrawerTexts.add(text.getText());
                 }
         );
-
+        assertEquals(actualDrawerTexts, expectedDrawerTexts);
+        actualDrawerTexts.clear();
         drawerBackMenuButton.click();
     }
 
@@ -124,7 +128,8 @@ public class DrawerTests extends TestsInit {
                     actualDrawerTexts.add(text.getText());
                 }
         );
-
+        assertEquals(actualDrawerTexts, expectedDrawerTexts);
+        actualDrawerTexts.clear();
         drawerBackMenuButton.click();
         timer.wait(() -> drawerElementsText.get(1).is().disappear());
         drawerElementsIcon.forEach(
@@ -149,6 +154,8 @@ public class DrawerTests extends TestsInit {
                     actualDrawerTexts.add(text.getText());
                 }
         );
+        assertEquals(actualDrawerTexts, expectedDrawerTexts);
+        actualDrawerTexts.clear();
     }
 
     @Test(priority = 7)
@@ -167,6 +174,8 @@ public class DrawerTests extends TestsInit {
                     actualDrawerTexts.add(text.getText());
                 }
         );
+        assertEquals(actualDrawerTexts, expectedDrawerTexts);
+        actualDrawerTexts.clear();
     }
 }
 
