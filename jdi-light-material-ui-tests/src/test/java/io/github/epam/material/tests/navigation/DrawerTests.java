@@ -24,7 +24,6 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 1)
     public void temporaryDrawerTest() {
-
         openSection("Drawer", "Temporary Drawer");
         List<Button> buttons = Arrays.asList(leftButton, rightButton, topButton, bottomButton);
         buttons.forEach(
@@ -48,7 +47,6 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 2)
     public void swipeableDrawerTest() {
-
         openSection("Drawer", "Swipeable Drawer");
         List<Button> buttons = Arrays.asList(leftButton, rightButton, topButton, bottomButton);
         buttons.forEach(
@@ -72,7 +70,6 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 3)
     public void responsiveDrawerTest() {
-
         openSection("Drawer", "Responsive Drawer");
         drawer.is().displayed();
         drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
@@ -93,7 +90,6 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 4)
     public void persistentDrawerTest() {
-
         openSection("Drawer", "Persistent Drawer");
         drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
         drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
@@ -117,7 +113,6 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 5)
     public void miniDrawerTest() {
-
         openSection("Drawer", "Mini Drawer");
         drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
         drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
@@ -146,7 +141,6 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 6)
     public void permanentDrawerTest() {
-
         openSection("Drawer", "Permanent Drawer");
         drawer.is().displayed();
         drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
@@ -168,7 +162,6 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 7)
     public void clippedDrawerTest() {
-
         openSection("Drawer", "Clipped Drawer");
         drawer.is().displayed();
         drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));

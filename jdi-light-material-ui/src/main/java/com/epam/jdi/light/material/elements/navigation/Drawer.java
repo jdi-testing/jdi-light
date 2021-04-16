@@ -6,6 +6,7 @@ import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
 
 public class Drawer extends UIBaseElement<DrawerAssert> {
 
+    // This method uses in other tests. Can be deleted in future
     @JDIAction("Check if '{name}' is displayed")
     @Override
     public boolean isDisplayed() {

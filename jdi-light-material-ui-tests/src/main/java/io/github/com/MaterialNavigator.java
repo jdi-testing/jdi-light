@@ -15,8 +15,6 @@ public class MaterialNavigator {
     private static WebDriver driver = getDriver();
     private static String oneSectionLocator = "//div[contains(@class,'MuiListSubheader-root')]/following::span[text()='%s']";
     private static String twoSectionLocator = "//div[@class='MuiList-root']//span[contains(text(),'%s')]";
-    private static String sectionTitle = "//div[contains(@class,'MuiContainer-root')]//*[contains(text(),'%s')]";
-    private static Timer timer = new Timer(2000L);
 
     public static void openMainMaterialPage() {
         driver.navigate().to(url);
