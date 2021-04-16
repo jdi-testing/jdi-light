@@ -33,7 +33,6 @@ import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardFrame;
-import io.github.com.pages.surfaces.PaperFrame;
 import io.github.com.pages.utils.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
@@ -170,12 +169,7 @@ public class StaticSite {
     public static AppBarFrame appBarFrame;
 
     // paper
-    @Frame("storybook-preview-iframe")
-    public static PaperFrame paperFrame;
-
-    @Url("/material-ui-surfaces-paper--default")
-    public static WebPage surfacePaperDefaultPage;
-
+    
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage surfaceSimpleAppBarPage;
 
