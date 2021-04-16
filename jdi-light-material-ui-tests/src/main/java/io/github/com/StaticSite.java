@@ -29,7 +29,6 @@ import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.layout.HiddenFrame;
-import io.github.com.pages.layout.GridFrame;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
@@ -372,7 +371,7 @@ public class StaticSite {
     // feedback
     // backdrop
     @Frame("storybook-preview-iframe")
-    public static BackdropFrame backdropFrame;
+    public static BackdropPage backdropPage;
 
     @Url("/material-ui-feedback-backdrop--default-backdrop")
     public static WebPage feedbackBackdropDefaultPage;
@@ -485,8 +484,10 @@ public class StaticSite {
 
     // utils
     // Click away listener
+
     @Frame("storybook-preview-iframe")
     public static ClickAwayListenerPage clickAwayListenerFrame;
+
 
     @Url("/material-ui-utils-click-away-listener--default")
     public static WebPage utilsClickAwayListenerDefaultPage;
