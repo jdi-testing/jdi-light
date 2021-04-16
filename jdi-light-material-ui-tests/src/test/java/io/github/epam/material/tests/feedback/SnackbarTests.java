@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.Matchers.*;
 import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.pages.feedback.SnackbarPage.*;
 
@@ -18,15 +19,6 @@ import static io.github.com.pages.feedback.SnackbarPage.*;
 public class SnackbarTests extends TestsInit {
 
     private static Timer timer = new Timer(2000L);
-    private static Map<String, String> map  = new HashMap<String, String>() {{
-        put("topCenter", "TopCenter");
-        put("topRight", "TopRight");
-        put("bottomRight", "BottomRight");
-        put("bottomCenter", "BottomCenter");
-        put("bottomLeft", "BottomLeft");
-        put("topLeft", "TopLeft");
-    }};
-    private static String cssConstanValue = "MuiSnackbar-root MuiSnackbar-anchorOrigin";
 
     @BeforeMethod
     public void before() {
@@ -51,13 +43,13 @@ public class SnackbarTests extends TestsInit {
     public void customizedSnackbarTest() {
 
         customizedSnackbarPopUpTitles.get(1).is().text("This is an error message!");
-        customizedSnackbarPopUpStyles.get(1).has().classValue(String.format("MuiPaper-root MuiAlert-root MuiAlert-filled%s MuiPaper-elevation6", "Error"));
+        customizedSnackbarPopUpStyles.get(1).has().classValue(containsString("MuiAlert-filledError"));
         customizedSnackbarPopUpTitles.get(2).is().text("This is a warning message!");
-        customizedSnackbarPopUpStyles.get(2).has().classValue(String.format("MuiPaper-root MuiAlert-root MuiAlert-filled%s MuiPaper-elevation6", "Warning"));
+        customizedSnackbarPopUpStyles.get(2).has().classValue(containsString("MuiAlert-filledWarning"));
         customizedSnackbarPopUpTitles.get(3).is().text("This is an information message!");
-        customizedSnackbarPopUpStyles.get(3).has().classValue(String.format("MuiPaper-root MuiAlert-root MuiAlert-filled%s MuiPaper-elevation6", "Info"));
+        customizedSnackbarPopUpStyles.get(3).has().classValue(containsString("MuiAlert-filledInfo"));
         customizedSnackbarPopUpTitles.get(4).is().text("This is a success message!");
-        customizedSnackbarPopUpStyles.get(4).has().classValue(String.format("MuiPaper-root MuiAlert-root MuiAlert-filled%s MuiPaper-elevation6", "Success"));
+        customizedSnackbarPopUpStyles.get(4).has().classValue(containsString("MuiAlert-filledSuccess"));
 
         successSnackbarPopUp.is().notVisible();
         successSnackbarButton.click();
@@ -71,27 +63,27 @@ public class SnackbarTests extends TestsInit {
 
         positionedSnackbarButtons.get(1).click();
         snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(String.format("%s%s", cssConstanValue, map.get("topCenter")));
+        positionedSnackbarPopUp.has().classValue(containsString("TopCenter"));
 
         positionedSnackbarButtons.get(2).click();
         snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(String.format("%s%s", cssConstanValue, map.get("topRight")));
+        positionedSnackbarPopUp.has().classValue(containsString("TopRight"));
 
         positionedSnackbarButtons.get(3).click();
         snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(String.format("%s%s", cssConstanValue, map.get("bottomRight")));
+        positionedSnackbarPopUp.has().classValue(containsString("BottomRight"));
 
         positionedSnackbarButtons.get(4).click();
         snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(String.format("%s%s", cssConstanValue, map.get("bottomCenter")));
+        positionedSnackbarPopUp.has().classValue(containsString("BottomCenter"));
 
         positionedSnackbarButtons.get(5).click();
         snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(String.format("%s%s", cssConstanValue, map.get("bottomLeft")));
+        positionedSnackbarPopUp.has().classValue(containsString("BottomLeft"));
 
         positionedSnackbarButtons.get(6).click();
         snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(String.format("%s%s", cssConstanValue, map.get("topLeft")));
+        positionedSnackbarPopUp.has().classValue(containsString("TopLeft"));
     }
 
     @Test
@@ -123,6 +115,7 @@ public class SnackbarTests extends TestsInit {
         snackbarPopUpText.is().notVisible();
 
         otherButtons.get(1).click();
+        timer.wait(() -> closePopUpSnackbarButton.waitFor().displayed());
         closePopUpSnackbarButton.click();
         timer.wait(() -> snackbarPopUpText.is().disappear());
         snackbarPopUpText.is().notVisible();
@@ -137,6 +130,7 @@ public class SnackbarTests extends TestsInit {
         snackbarPopUpText.is().notVisible();
 
         otherButtons.get(2).click();
+        timer.wait(() -> closePopUpSnackbarButton.waitFor().visible());
         closePopUpSnackbarButton.click();
         timer.wait(() -> snackbarPopUpText.is().disappear());
         snackbarPopUpText.is().notVisible();

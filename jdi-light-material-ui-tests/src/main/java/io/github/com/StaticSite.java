@@ -410,7 +410,7 @@ public class StaticSite {
 
     // snackbar
     @Frame("storybook-preview-iframe")
-    public static SnackbarPage simpleSnackbarFrame;
+    public static SnackbarPage simpleSnackbarPage;
 
     // navigation
     // tabs

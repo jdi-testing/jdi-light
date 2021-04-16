@@ -6,6 +6,7 @@ import com.epam.jdi.light.material.asserts.feedback.SnackbarAssert;
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> {
 
+    // This method used by isExist method. Can be deleted in future
     String root;
 
     @JDIAction("Check if '{name}' is visible")
@@ -18,6 +19,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> {
         return core().find(root).isExist();
     }
 
+    // This method used by other tests. Can be deleted in future
     @Override
     public SnackbarAssert is() {
         return new SnackbarAssert().set(this);

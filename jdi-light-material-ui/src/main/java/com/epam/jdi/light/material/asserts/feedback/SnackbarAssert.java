@@ -9,6 +9,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
 
+    // This method used by other tests. Can be deleted in future
     @JDIAction("Assert that '{name}' is visible")
     public SnackbarAssert visible() {
         jdiAssert(element().isVisible(), Matchers.is(true));
