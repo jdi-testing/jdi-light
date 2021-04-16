@@ -74,6 +74,7 @@ public class DrawerTests extends TestsInit {
 
         openSection("Drawer", "Responsive Drawer");
         drawer.is().displayed();
+        drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
         drawerElementsIcon.forEach(
                 icon -> icon.is().displayedSvg()
         );
@@ -97,6 +98,8 @@ public class DrawerTests extends TestsInit {
         drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
 
         drawerSandwichMenuButton.click();
+        drawer.is().displayed();
+        drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
         drawerElementsIcon.forEach(
                 icon -> icon.is().displayedSvg()
         );
@@ -119,6 +122,8 @@ public class DrawerTests extends TestsInit {
         drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
 
         drawerSandwichMenuButton.click();
+        drawer.is().displayed();
+        drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
         drawerElementsIcon.forEach(
                 icon -> icon.is().displayedSvg()
         );
@@ -142,6 +147,8 @@ public class DrawerTests extends TestsInit {
     public void permanentDrawerTest() {
 
         openSection("Drawer", "Permanent Drawer");
+        drawer.is().displayed();
+        drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
         drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
         drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
 
@@ -162,6 +169,8 @@ public class DrawerTests extends TestsInit {
     public void clippedDrawerTest() {
 
         openSection("Drawer", "Clipped Drawer");
+        drawer.is().displayed();
+        drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
         drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
         drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
 
