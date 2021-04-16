@@ -31,7 +31,8 @@ public class DrawerTests extends TestsInit {
                 button -> {
                     button.click();
                     drawer.is().displayed();
-                    drawer.has().classValue(containsString(String.format("MuiDrawer-paperAnchor%s", button.getName().substring(0,button.getName().lastIndexOf(" ") + 1))));
+                    String currentButtonName = button.getName();
+                    drawer.has().classValue(containsString(String.format("MuiDrawer-paperAnchor%s", currentButtonName.substring(0,currentButtonName.lastIndexOf(" ") + 1))));
                     drawerElementsIcon.forEach(
                             icon -> icon.is().displayedSvg()
                     );
