@@ -30,9 +30,13 @@ public class HtmlElementsPage extends WebPage {
     // @UI("input[type=button].red") public static Button redButton;
     @UI("[value*='Disabled Button']") public static Button disabledButtonInput;
     // @UI("input[type=button][disabled]") public static Button disabledButtonInput;
-    public static Button blueButton, dblClickButton, rightClickButton;
+    public static Button blueButton;
+    public static Button dblClickButton;
+    public static Button rightClickButton;
     @WaitTimeout(4)
-    public static Button ghostButton, suspendButton, removeButton;
+    public static Button ghostButton;
+    public static Button suspendButton;
+    public static Button removeButton;
     @WaitTimeout(4) @UI("#ghost-button") public static Button ghostButtonUI;
     @WaitTimeout(4) @UI("#suspend-button") public static Button suspendButtonUI;
     @WaitTimeout(4) @UI("#remove-button") public static Button removeButtonUI;
@@ -73,7 +77,11 @@ public class HtmlElementsPage extends WebPage {
     public static ProgressBar progress;
     // @UI("#progress") public static ProgressBar progress;
 
-    public static DateTimeSelector birthDate, monthDate, partyTime, bookingTime, autumnWeek;
+    public static DateTimeSelector birthDate;
+    public static DateTimeSelector monthDate;
+    public static DateTimeSelector partyTime;
+    public static DateTimeSelector bookingTime;
+    public static DateTimeSelector autumnWeek;
     // @UI("#birth-date") public static DateTimeSelector birthDate;
     // @UI("#month-date") public static DateTimeSelector monthDate;
     // @UI("#party-date") public static DateTimeSelector partyTime;
@@ -97,7 +105,8 @@ public class HtmlElementsPage extends WebPage {
     public static MultiSelector ages;
     //@UI("#ages") public static MultiSelector ages;
     public static MultiSelector multiDropdown;
-    // @UI("#multi-dropdown") public static MultiSelector multiDropdown;
+    // @UI("#multi-dropdown") public static
+    // public static multiDropdown;
 
     public static DataListOptions iceCream;
     @UI("#ice-cream")

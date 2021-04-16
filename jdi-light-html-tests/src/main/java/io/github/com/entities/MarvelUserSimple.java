@@ -5,7 +5,10 @@ import com.epam.jdi.tools.DataClass;
 import java.util.Objects;
 
 public class MarvelUserSimple extends DataClass<MarvelUserSimple> {
-    public String number, type, user, description;
+    public String number;
+    public String type;
+    public String user;
+    public String description;
 
     @Override
     public boolean equals(Object o) {

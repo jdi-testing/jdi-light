@@ -75,7 +75,11 @@ public class HtmlElementsPage extends WebPage {
     public static ProgressBar progress;
     // @UI("#progress") public static ProgressBar progress;
 
-    public static DateTimeSelector birthDate, monthDate, partyTime, bookingTime, autumnWeek;
+    public static DateTimeSelector birthDate;
+    public static DateTimeSelector monthDate;
+    public static DateTimeSelector partyTime;
+    public static DateTimeSelector bookingTime;
+    public static DateTimeSelector autumnWeek;
     // @UI("#birth-date") public static DateTimeSelector birthDate;
     // @UI("#month-date") public static DateTimeSelector monthDate;
     // @UI("#party-date") public static DateTimeSelector partyTime;

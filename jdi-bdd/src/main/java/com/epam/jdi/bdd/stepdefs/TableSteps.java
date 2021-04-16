@@ -140,7 +140,8 @@ public class TableSteps {
     }
 
     private UIElement cell(String name, String cellPair) {
-        int x, y;
+        int x;
+        int y;
         try {
             String[] xy = cellPair.split(",");
             x = parseInt(xy[0].trim());

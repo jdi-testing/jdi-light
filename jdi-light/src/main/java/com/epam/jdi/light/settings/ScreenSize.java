@@ -9,7 +9,8 @@ import static com.epam.jdi.tools.RegExUtils.matches;
 import static java.lang.Integer.parseInt;
 
 public class ScreenSize {
-    public int width, height;
+    public int width;
+    public int height;
     public boolean maximize;
 
     public ScreenSize(int width, int height) {
