@@ -26,7 +26,7 @@ public class PerfStatistic {
         int executionCount = parseBoolean(getProperties("/../../target/classes/test.properties")
             .getProperty("run.performance")) ? count : 1;
         for (int i = 0; i < executionCount; i++) {
-            System.out.println("RUN №"+ i);
+            System.out.println("RUN#"+ i);
             precondition.execute();
             Timer t = new Timer();
             T seleniumResult = seleniumAction.execute();

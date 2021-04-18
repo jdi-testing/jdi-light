@@ -67,16 +67,23 @@ public class JSBuilder implements IJSBuilder {
         this.logQuery = LogLevel;
         return this;
     }
+    private int shouldLogQuery() {
+        return logQuery != null ? logQuery : LOG_QUERY;
+    }
     public boolean logScript() {
-        return (logQuery != null ? logQuery : LOG_QUERY) > 0;
+        return shouldLogQuery() > 0;
     }
     public boolean logResult() {
-        return (logQuery != null ? logQuery : LOG_QUERY ) == 2;
+        return shouldLogQuery() == 2;
     }
     public static JFunc2<Object, String, Object> EXECUTE_SCRIPT = DEFAULT_SCRIPT_EXECUTE;
     public Object executeQuery() {
         String jsScript = getQuery();
+        // TODO REMOVE
         System.out.println("SCRIPT: " + jsScript);
+        if (jsScript.contains(";element")) {
+            System.out.println("FOUND!!!");
+        }
         if (logScript()) {
             logger.info("Execute query:" + LINE_BREAK + jsScript);
         }
@@ -111,6 +118,7 @@ public class JSBuilder implements IJSBuilder {
         return getQuery() + "return " + result;
     }
     public IJSBuilder addJSCode(String code) {
+        // TODO REMOVE
         System.out.println("Query: " + query + "\nCode: " + code);
         query += code;
         return this;
