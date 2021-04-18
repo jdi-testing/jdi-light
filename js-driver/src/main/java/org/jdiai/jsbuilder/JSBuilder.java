@@ -80,7 +80,7 @@ public class JSBuilder implements IJSBuilder {
     public Object executeQuery() {
         String jsScript = getQuery();
         // TODO REMOVE
-        System.out.println("SCRIPT: " + jsScript);
+        System.out.println("[" + Thread.currentThread().getId() + "]SCRIPT: " + jsScript);
         if (jsScript.contains(";element")) {
             System.out.println("FOUND!!!");
         }
@@ -119,7 +119,7 @@ public class JSBuilder implements IJSBuilder {
     }
     public IJSBuilder addJSCode(String code) {
         // TODO REMOVE
-        System.out.println("Query: " + query + "\nCode: " + code);
+        System.out.println("[" + Thread.currentThread().getId() + "]Query: " + query + "\nCode: " + code);
         query += code;
         return this;
     }
