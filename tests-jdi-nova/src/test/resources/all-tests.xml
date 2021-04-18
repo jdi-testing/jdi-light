@@ -5,9 +5,6 @@
         <packages>
             <package name="org.jdiai.tests.*"/>
         </packages>
-        <!--classes>
-            <class name="org.jdiai.tests.directions.RelativePositionTests"/>
-        </classes-->
     </test>
     <listeners>
         <listener class-name="org.jdiai.testng.TestNGListener" />
