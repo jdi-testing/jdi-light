@@ -470,6 +470,10 @@ public class StaticSite {
     // utils
     // Click away listener
 
+    @Frame("storybook-preview-iframe")
+    public static ClickAwayListenerPage clickAwayListenerFrame;
+
+
     @Url("/material-ui-utils-click-away-listener--default")
     public static WebPage utilsClickAwayListenerDefaultPage;
 
@@ -493,6 +497,13 @@ public class StaticSite {
 
     @Url("/router_breadcrumbs")
     public static WebPage routerIntegrationBreadcrumbsPage;
+
+
+    @Url("/material-ui-navigation-breadcrumbs--customized")
+    public static WebPage customizedBreadcrumbsPage;
+
+    // drawer
+    public static DrawerPage drawerPage;
 
     // stepper
     @Frame("storybook-preview-iframe")
