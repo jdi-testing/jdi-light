@@ -48,7 +48,7 @@ public class CardTests extends TestsInit {
 
         complexCardHeartIconButton.click();
         hasClass = new Timer(1000L)
-                .wait(() -> complexCardHeartIcon.has().classValue(Matchers.not(expectedRedHeartClass)));
+                .wait(() -> complexCardHeartIcon.has().classValue(Matchers.not("jss")));
         jdiAssert(hasClass, Matchers.is(true));
 
         complexCardSliderDownButton.click();
