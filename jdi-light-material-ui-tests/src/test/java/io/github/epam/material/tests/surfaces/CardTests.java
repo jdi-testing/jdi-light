@@ -20,10 +20,8 @@ public class CardTests extends TestsInit {
     }
 
     private void textCheck(int index) {
-        String expectedPTagText = "Word of the Day";
-        String expectedH2TagText = "be•nev•o•lent";
-        jdiAssert(pTagTexts.get(index).text(), Matchers.is(expectedPTagText));
-        jdiAssert(h2TagTexts.get(index).text(), Matchers.is(expectedH2TagText));
+        jdiAssert(pTagTexts.get(index).text(), Matchers.is("Word of the Day"));
+        jdiAssert(h2TagTexts.get(index).text(), Matchers.is("be•nev•o•lent"));
     }
 
     @Test
@@ -34,30 +32,27 @@ public class CardTests extends TestsInit {
     @Test
     public void outlinedCardTest() {
         textCheck(2);
-        String expectedClassName = "MuiPaper-outlined";
-        jdiAssert(outlinedCard.hasClass(expectedClassName), Matchers.is(true));
+        jdiAssert(outlinedCard.hasClass("MuiPaper-outlined"), Matchers.is(true));
     }
 
     @Test
     public void complexCardTest() {
         String expectedText = "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.";
-        String expectedRedHearthClass = "jss";
         jdiAssert(pTagTexts.get(3).text(), Matchers.is(expectedText));
         complexCardImage.is().displayed();
 
-        complexCardHearthIconButton.click();
+        complexCardHeartIconButton.click();
         boolean hasClass = new Timer(1000L)
-                .wait(() -> complexCardHearthIcon.has().classValue(Matchers.containsString(expectedRedHearthClass)));
+                .wait(() -> complexCardHeartIcon.has().classValue(Matchers.containsString("jss")));
         jdiAssert(hasClass, Matchers.is(true));
 
-        complexCardHearthIconButton.click();
+        complexCardHeartIconButton.click();
         hasClass = new Timer(1000L)
-                .wait(() -> complexCardHearthIcon.has().classValue(Matchers.not(expectedRedHearthClass)));
+                .wait(() -> complexCardHeartIcon.has().classValue(Matchers.not(expectedRedHeartClass)));
         jdiAssert(hasClass, Matchers.is(true));
 
-        expectedText = "Method:";
         complexCardSliderDownButton.click();
         complexCardHiddenTextArea.is().displayed();
-        jdiAssert(complexCardHiddenText.text(), Matchers.is(expectedText));
+        jdiAssert(complexCardHiddenText.text(), Matchers.is("Method:"));
     }
 }

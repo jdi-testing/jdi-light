@@ -19,10 +19,10 @@ public class CardPage extends WebPage {
     public static List<Text> h2TagTexts;
 
     @UI("//div[@class='MuiCardActions-root']/button[1]")
-    public static Button complexCardHearthIconButton;
+    public static Button complexCardHeartIconButton;
 
     @UI("//div[@class='MuiCardActions-root']/button[1]/span[1]/*")
-    public static Icon complexCardHearthIcon;
+    public static Icon complexCardHeartIcon;
 
     @UI("//div[@class='MuiCardActions-root']/button[3]")
     public static Button complexCardSliderDownButton;
