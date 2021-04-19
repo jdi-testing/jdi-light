@@ -4,6 +4,7 @@ import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import org.apache.commons.lang3.ObjectUtils;
 import org.jdiai.jsdriver.JSException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,6 +17,7 @@ import java.util.function.Supplier;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 import static org.jdiai.jsbuilder.QueryLogger.logger;
@@ -65,15 +67,23 @@ public class JSBuilder implements IJSBuilder {
         this.logQuery = LogLevel;
         return this;
     }
+    private int shouldLogQuery() {
+        return logQuery != null ? logQuery : LOG_QUERY;
+    }
     public boolean logScript() {
-        return (logQuery != null ? logQuery : LOG_QUERY) > 0;
+        return shouldLogQuery() > 0;
     }
     public boolean logResult() {
-        return (logQuery != null ? logQuery : LOG_QUERY ) == 2;
+        return shouldLogQuery() == 2;
     }
     public static JFunc2<Object, String, Object> EXECUTE_SCRIPT = DEFAULT_SCRIPT_EXECUTE;
     public Object executeQuery() {
         String jsScript = getQuery();
+        // TODO REMOVE
+        System.out.println("[" + Thread.currentThread().getId() + "]SCRIPT: " + jsScript);
+        if (jsScript.contains(";element")) {
+            System.out.println("FOUND!!!");
+        }
         if (logScript()) {
             logger.info("Execute query:" + LINE_BREAK + jsScript);
         }
@@ -108,6 +118,8 @@ public class JSBuilder implements IJSBuilder {
         return getQuery() + "return " + result;
     }
     public IJSBuilder addJSCode(String code) {
+        // TODO REMOVE
+        System.out.println("[" + Thread.currentThread().getId() + "]Query: " + query + "\nCode: " + code);
         query += code;
         return this;
     }
@@ -193,7 +205,7 @@ public class JSBuilder implements IJSBuilder {
         throw new JSException("Failed to execute js script for template locator. Please replace %s before usage");
     }
     protected String getScript() {
-        if (variables.size() == 0 && useFunctions.size() == 0) {
+        if (ObjectUtils.isEmpty(variables) && ObjectUtils.isEmpty(useFunctions)) {
             return query;
         }
         String jsScript = print(useFunctions.values(), "");

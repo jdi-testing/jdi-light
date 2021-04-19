@@ -1,12 +1,24 @@
 package org.jdiai.tests.benchmarks;
 
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.jdiai.testng.TestNGListener;
+import org.jdiai.tests.benchmarks.test.data.MarvelHero;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$$;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.jdiai.JDI.driver;
+import static org.jdiai.tests.benchmarks.test.data.HeroesData.*;
+import static org.jdiai.tests.benchmarks.test.data.HeroesData.HULK;
 import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)
@@ -35,5 +47,39 @@ public class SeleniumTests {
         assertEquals(name, "Sergey Ivan");
         assertEquals(heroName, "Spider Man");
         assertThat(img).contains("spider-man.jpg");
+    }
+
+    @Test(enabled = false)
+    public void simpleAllSearchTest() {
+        driver().navigate().to("https://jdi-testing.github.io/jdi-light");
+        driver().findElement(By.cssSelector("#user-icon")).click();
+        driver().findElement(By.cssSelector("#name")).sendKeys("Roman");
+        driver().findElement(By.cssSelector("#password")).sendKeys("Jdi1234");
+        driver().findElement(By.cssSelector(".fa-sign-in")).click();
+
+        driver().findElement(By.xpath("//*[contains(@class, 'sidebar-menu')]//*[text()='Service']")).click();
+        driver().findElement(By.xpath("//*[contains(@class, 'sidebar-menu')]//*[text()='User Table']")).click();
+
+        List<MarvelHero> allHeroes = asList(WOLVERINE, SPIDER_MAN, PUNISHER, CAPITAN_AMERICA, CYCLOPE, HULK);
+        int i = 0;
+        List<WebElement> userTableRow = driver().findElements(By.cssSelector("#user-table tbody tr"));
+        for (WebElement element : userTableRow) {
+            validate(element.findElements(By.cssSelector("td")), allHeroes.get(i++));
+        }
+    }
+
+    private void validate(List<WebElement> row, MarvelHero expected) {
+        String numberText = row.get(0).getText();
+        int number = Integer.parseInt(numberText);
+        String type = row.get(1).findElement(By.cssSelector("option[selected]")).getText();
+        String name = row.get(2).findElement(By.tagName("a")).getText();
+        String heroName = row.get(3).findElement(By.tagName("span")).getText();
+        String img = row.get(3).findElement(By.tagName("img")).getAttribute("src");
+
+        assertEquals(number, expected.number);
+        assertEquals(type, expected.type);
+        assertEquals(name, expected.name);
+        assertEquals(heroName, expected.heroName);
+        assertThat(img).contains(expected.img);
     }
 }
