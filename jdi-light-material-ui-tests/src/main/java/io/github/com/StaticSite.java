@@ -290,19 +290,7 @@ public class StaticSite {
 
     // badge
     @Frame("storybook-preview-iframe")
-    public static BadgeFrame badgeFrame;
-
-    @Url("/material-ui-data-display-badge--primary")
-    public static WebPage dataDisplayBadgePrimaryPage;
-
-    @Url("/material-ui-data-display-badge--dot")
-    public static WebPage dataDisplayBadgeDotPage;
-
-    @Url("/material-ui-data-display-badge--invisible")
-    public static WebPage dataDisplayBadgeInvisiblePage;
-
-    @Url("/material-ui-data-display-badge--alignment")
-    public static WebPage dataDisplayBadgeAlignmentPage;
+    public static BadgePage badgeFrame;
 
     // tooltip
     @Frame("storybook-preview-iframe")
