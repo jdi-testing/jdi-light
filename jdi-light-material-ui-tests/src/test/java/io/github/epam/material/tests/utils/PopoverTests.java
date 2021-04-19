@@ -3,40 +3,27 @@ package io.github.epam.material.tests.utils;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.popoverClickFrame;
-import static io.github.com.StaticSite.popoverHoverFrame;
-import static io.github.com.StaticSite.utilsPopoverClickPage;
-import static io.github.com.StaticSite.utilsPopoverHoverPage;
+import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.pages.utils.PopoverPage.*;
 
 public class PopoverTests extends TestsInit {
 
-    private final String EXPECTED_TEXT = "Popover content";
-    private final String EXPECTED_TEXT_CAMEL_CASE = "PoPoVeR cOnTeNt";
-    private final String EXPECTED_TEXT_PART = "Popover";
-
     @Test
     public void clickPopoverTest() {
-        utilsPopoverClickPage.open();
+        openSection("Popover");
 
-        popoverClickFrame.popover.is().invisible();
-        popoverClickFrame.buttonToClick.core().click();
-
-        popoverClickFrame.popover.is().visible();
-        popoverClickFrame.popover.is().textEquals(EXPECTED_TEXT);
-        popoverClickFrame.popover.is().textEqualsIgnoreCase(EXPECTED_TEXT_CAMEL_CASE);
-        popoverClickFrame.popover.is().textContains(EXPECTED_TEXT_PART);
+        buttonToClick.is().text("CLICK TO OPEN POPOVER");
+        buttonToClick.click();
+        popoverContent.is().text("Popover content");
     }
 
     @Test
     public void hoverPopoverTest() {
-        utilsPopoverHoverPage.open();
+        openSection("Popover");
 
-        popoverClickFrame.popover.is().invisible();
-        popoverHoverFrame.labelToHover.hover();
-
-        popoverClickFrame.popover.is().visible();
-        popoverHoverFrame.popover.is().textEquals(EXPECTED_TEXT);
-        popoverHoverFrame.popover.is().textEqualsIgnoreCase(EXPECTED_TEXT_CAMEL_CASE);
-        popoverHoverFrame.popover.is().textContains(EXPECTED_TEXT_PART);
+        popoverHoverField.is().text("[Hover to open Popover]");
+        popoverHoverField.hover();
+        popoverHoverField.has().attr("aria-owns", "mouse-over-popover");
+        popoverContent.is().text("Popover content");
     }
 }

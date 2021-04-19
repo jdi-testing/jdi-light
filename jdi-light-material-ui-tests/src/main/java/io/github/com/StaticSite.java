@@ -456,16 +456,7 @@ public class StaticSite {
 
     // popover
     @Frame("storybook-preview-iframe")
-    public static PopoverClickFrame popoverClickFrame;
-
-    @Url("/material-ui-utils-popover--click")
-    public static WebPage utilsPopoverClickPage;
-
-    @Frame("storybook-preview-iframe")
-    public static PopoverHoverFrame popoverHoverFrame;
-
-    @Url("/material-ui-utils-popover--hover")
-    public static WebPage utilsPopoverHoverPage;
+    public static PopoverPage popoverClickFrame;
 
     // utils
     // Click away listener
