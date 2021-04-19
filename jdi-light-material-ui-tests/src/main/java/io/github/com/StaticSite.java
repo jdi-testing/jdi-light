@@ -416,16 +416,7 @@ public class StaticSite {
 
     // snackbar
     @Frame("storybook-preview-iframe")
-    public static SimpleSnackbarFrame simpleSnackbarFrame;
-
-    @Frame("storybook-preview-iframe")
-    public static ConsecutiveSnackbarFrame consecutiveSnackbarFrame;
-
-    @Url("/material-ui-feedback-snackbar--simple-snackbar")
-    public static WebPage feedbackSnackbarSimplePage;
-
-    @Url("/material-ui-feedback-snackbar--consecutive-snackbars")
-    public static WebPage feedbackSnackbarConsecutivePage;
+    public static SnackbarPage simpleSnackbarPage;
 
     // navigation
     // tabs
