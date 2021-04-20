@@ -33,7 +33,6 @@ import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardPage;
-import io.github.com.pages.surfaces.PaperFrame;
 import io.github.com.pages.utils.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
@@ -170,11 +169,6 @@ public class StaticSite {
     public static AppBarFrame appBarFrame;
 
     // paper
-    @Frame("storybook-preview-iframe")
-    public static PaperFrame paperFrame;
-
-    @Url("/material-ui-surfaces-paper--default")
-    public static WebPage surfacePaperDefaultPage;
 
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage surfaceSimpleAppBarPage;
@@ -366,7 +360,7 @@ public class StaticSite {
     // feedback
     // backdrop
     @Frame("storybook-preview-iframe")
-    public static BackdropFrame backdropFrame;
+    public static BackdropPage backdropPage;
 
     @Url("/material-ui-feedback-backdrop--default-backdrop")
     public static WebPage feedbackBackdropDefaultPage;
@@ -411,16 +405,7 @@ public class StaticSite {
 
     // snackbar
     @Frame("storybook-preview-iframe")
-    public static SimpleSnackbarFrame simpleSnackbarFrame;
-
-    @Frame("storybook-preview-iframe")
-    public static ConsecutiveSnackbarFrame consecutiveSnackbarFrame;
-
-    @Url("/material-ui-feedback-snackbar--simple-snackbar")
-    public static WebPage feedbackSnackbarSimplePage;
-
-    @Url("/material-ui-feedback-snackbar--consecutive-snackbars")
-    public static WebPage feedbackSnackbarConsecutivePage;
+    public static SnackbarPage simpleSnackbarPage;
 
     // navigation
     // tabs
@@ -477,6 +462,13 @@ public class StaticSite {
     @Url("/material-ui-utils-popover--hover")
     public static WebPage utilsPopoverHoverPage;
 
+    // utils
+    // Click away listener
+
+    @Frame("storybook-preview-iframe")
+    public static ClickAwayListenerPage clickAwayListenerFrame;
+
+
     @Url("/material-ui-utils-click-away-listener--default")
     public static WebPage utilsClickAwayListenerDefaultPage;
 
@@ -500,6 +492,13 @@ public class StaticSite {
 
     @Url("/router_breadcrumbs")
     public static WebPage routerIntegrationBreadcrumbsPage;
+
+
+    @Url("/material-ui-navigation-breadcrumbs--customized")
+    public static WebPage customizedBreadcrumbsPage;
+
+    // drawer
+    public static DrawerPage drawerPage;
 
     // stepper
     @Frame("storybook-preview-iframe")
