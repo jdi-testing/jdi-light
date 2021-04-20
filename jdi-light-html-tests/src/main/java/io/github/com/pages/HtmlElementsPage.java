@@ -83,9 +83,7 @@ public class HtmlElementsPage extends WebPage {
     public static NumberSelector height;
     // @UI("#height") public static NumberSelector height;
 
-    //endregion
-
-    //region Complex Elements
+     //region Complex Elements
     // TODO add Enum
 
     // @UI("#dress-code") public static Dropdown dressCode;
@@ -97,7 +95,8 @@ public class HtmlElementsPage extends WebPage {
     public static MultiSelector ages;
     //@UI("#ages") public static MultiSelector ages;
     public static MultiSelector multiDropdown;
-    // @UI("#multi-dropdown") public static MultiSelector multiDropdown;
+    // @UI("#multi-dropdown") public static
+    // public static multiDropdown;
 
     public static DataListOptions iceCream;
     @UI("#ice-cream")
