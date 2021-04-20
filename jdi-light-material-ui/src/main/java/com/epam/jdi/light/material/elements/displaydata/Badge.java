@@ -9,9 +9,4 @@ public class Badge extends UIBaseElement<BadgeAssert> {
     public BadgeAssert is() {
         return new BadgeAssert().set(this);
     }
-
-    @Override
-    public BadgeAssert has() {
-        return this.is();
-    }
 }

@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.displaydata;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.containsString;
@@ -10,9 +11,13 @@ import static org.hamcrest.Matchers.not;
 
 public class BadgeTests extends TestsInit {
 
+    @BeforeMethod
+    public void before() {
+        openSection("Badge");
+    }
+
     @Test
     public void simpleBadgeTest() {
-        openSection("Badge");
 
         badge.get(1).is().displayed();
         badge.get(1).is().displayedSvg();
@@ -27,7 +32,6 @@ public class BadgeTests extends TestsInit {
 
     @Test
     public void variousBadgeTest() {
-        openSection("Badge");
 
         badgeWithVariableCounter.is().displayed();
         badgeWithVariableCounter.is().displayedSvg();
@@ -46,7 +50,6 @@ public class BadgeTests extends TestsInit {
 
     @Test
     public void dotBadgeTest() {
-        openSection("Badge");
 
         dotBadge.is().displayed();
         dotBadge.is().displayedSvg();
@@ -58,7 +61,6 @@ public class BadgeTests extends TestsInit {
 
     @Test
     public void alignmentBadgeTest() {
-        openSection("Badge");
 
         badgeDifferentPosition.get(1).is().displayed();
         badgeDifferentPosition.get(1).is().displayedSvg();
