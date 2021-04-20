@@ -32,7 +32,7 @@ import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
-import io.github.com.pages.surfaces.CardFrame;
+import io.github.com.pages.surfaces.CardPage;
 import io.github.com.pages.utils.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
@@ -169,17 +169,12 @@ public class StaticSite {
     public static AppBarFrame appBarFrame;
 
     // paper
-    
+
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage surfaceSimpleAppBarPage;
 
-    // card
-    @Frame("storybook-preview-iframe")
-    public static CardFrame cardFrame;
-
-    @Url("/material-ui-surfaces-card--card-with-clickable-area")
-    public static WebPage surfaceCardPage;
-
+    @Url("/card_surface")
+    public static CardPage surfaceCardPage;
 
     // data display
     // divider
