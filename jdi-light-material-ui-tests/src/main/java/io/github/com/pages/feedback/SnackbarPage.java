@@ -51,7 +51,7 @@ public class SnackbarPage extends WebPage {
     @UI("//div[@class='MuiSnackbarContent-action']//span[text()='UNDO']")
     public static Button undoSnackbarButton;
 
-    @UI("//div[contains(@class,'MuiSnackbar-root')]//span[@class='MuiIconButton-label']/parent::button")
+    @UI("//button[@aria-label='close']")
     public static Button closePopUpSnackbarButton;
 
     @UI("//div[@class='MuiAlert-action']/button")
