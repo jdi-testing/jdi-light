@@ -33,6 +33,7 @@ import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardPage;
+import io.github.com.pages.surfaces.PaperPage;
 import io.github.com.pages.utils.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
@@ -169,6 +170,7 @@ public class StaticSite {
     public static AppBarFrame appBarFrame;
 
     // paper
+    public static PaperPage paperPage;
 
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage surfaceSimpleAppBarPage;
