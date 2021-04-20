@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.utils;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.MaterialNavigator.openSection;
@@ -8,9 +9,13 @@ import static io.github.com.pages.utils.PopoverPage.*;
 
 public class PopoverTests extends TestsInit {
 
+    @BeforeMethod
+    public void before() {
+        openSection("Popover");
+    }
+
     @Test
     public void clickPopoverTest() {
-        openSection("Popover");
 
         buttonToClick.is().text("CLICK TO OPEN POPOVER");
         buttonToClick.click();
@@ -19,7 +24,6 @@ public class PopoverTests extends TestsInit {
 
     @Test
     public void hoverPopoverTest() {
-        openSection("Popover");
 
         popoverHoverField.is().text("[Hover to open Popover]");
         popoverHoverField.hover();

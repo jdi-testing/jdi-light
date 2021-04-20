@@ -456,7 +456,7 @@ public class StaticSite {
 
     // popover
     @Frame("storybook-preview-iframe")
-    public static PopoverPage popoverClickFrame;
+    public static PopoverPage popoverPage;
 
     // utils
     // Click away listener
