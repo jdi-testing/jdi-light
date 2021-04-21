@@ -132,7 +132,7 @@ public class StaticSite {
     @Url("/material-ui-inputs-button-group--split-button")
     public static WebPage inputButtonGroupSplitPage;
 
-    public static SelectPage selectFrame;
+    public static SelectPage selectPage;
 
     //slider
     @Frame("storybook-preview-iframe")
