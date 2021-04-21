@@ -2,9 +2,7 @@ package com.epam.jdi.light.material.asserts.inputs;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.asserts.displaydata.AvatarAssert;
 import com.epam.jdi.light.material.elements.inputs.Button;
-import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
