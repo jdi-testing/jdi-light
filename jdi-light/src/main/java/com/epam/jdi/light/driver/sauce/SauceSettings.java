@@ -11,7 +11,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class SauceSettings extends DataClass<SauceSettings> {
     public static String username = getenv("SAUCE_USERNAME");
     public static String accessKey = getenv("SAUCE_ACCESS_KEY");
-    public static String seleniumVersion, name = "Jdi tests";
+    public static String seleniumVersion;
+    public static String name = "Jdi tests";
     public static String maxDuration = "3600";
     public static String commandTimeout = "600";
     public static String idleTimeout = "1000";
