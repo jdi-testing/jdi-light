@@ -33,7 +33,7 @@ import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
 import io.github.com.pages.surfaces.CardPage;
-import io.github.com.pages.surfaces.PaperFrame;
+import io.github.com.pages.surfaces.PaperPage;
 import io.github.com.pages.utils.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
@@ -170,11 +170,7 @@ public class StaticSite {
     public static AppBarFrame appBarFrame;
 
     // paper
-    @Frame("storybook-preview-iframe")
-    public static PaperFrame paperFrame;
-
-    @Url("/material-ui-surfaces-paper--default")
-    public static WebPage surfacePaperDefaultPage;
+    public static PaperPage paperPage;
 
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage surfaceSimpleAppBarPage;
@@ -264,19 +260,7 @@ public class StaticSite {
 
     // badge
     @Frame("storybook-preview-iframe")
-    public static BadgeFrame badgeFrame;
-
-    @Url("/material-ui-data-display-badge--primary")
-    public static WebPage dataDisplayBadgePrimaryPage;
-
-    @Url("/material-ui-data-display-badge--dot")
-    public static WebPage dataDisplayBadgeDotPage;
-
-    @Url("/material-ui-data-display-badge--invisible")
-    public static WebPage dataDisplayBadgeInvisiblePage;
-
-    @Url("/material-ui-data-display-badge--alignment")
-    public static WebPage dataDisplayBadgeAlignmentPage;
+    public static BadgePage badgeFrame;
 
     // tooltip
     @Frame("storybook-preview-iframe")
@@ -345,7 +329,7 @@ public class StaticSite {
     // feedback
     // backdrop
     @Frame("storybook-preview-iframe")
-    public static BackdropFrame backdropFrame;
+    public static BackdropPage backdropPage;
 
     @Url("/material-ui-feedback-backdrop--default-backdrop")
     public static WebPage feedbackBackdropDefaultPage;
@@ -390,16 +374,7 @@ public class StaticSite {
 
     // snackbar
     @Frame("storybook-preview-iframe")
-    public static SimpleSnackbarFrame simpleSnackbarFrame;
-
-    @Frame("storybook-preview-iframe")
-    public static ConsecutiveSnackbarFrame consecutiveSnackbarFrame;
-
-    @Url("/material-ui-feedback-snackbar--simple-snackbar")
-    public static WebPage feedbackSnackbarSimplePage;
-
-    @Url("/material-ui-feedback-snackbar--consecutive-snackbars")
-    public static WebPage feedbackSnackbarConsecutivePage;
+    public static SnackbarPage simpleSnackbarPage;
 
     // navigation
     // tabs
@@ -445,16 +420,14 @@ public class StaticSite {
 
     // popover
     @Frame("storybook-preview-iframe")
-    public static PopoverClickFrame popoverClickFrame;
+    public static PopoverPage popoverPage;
 
-    @Url("/material-ui-utils-popover--click")
-    public static WebPage utilsPopoverClickPage;
+    // utils
+    // Click away listener
 
     @Frame("storybook-preview-iframe")
-    public static PopoverHoverFrame popoverHoverFrame;
+    public static ClickAwayListenerPage clickAwayListenerFrame;
 
-    @Url("/material-ui-utils-popover--hover")
-    public static WebPage utilsPopoverHoverPage;
 
     @Url("/material-ui-utils-click-away-listener--default")
     public static WebPage utilsClickAwayListenerDefaultPage;
@@ -479,6 +452,13 @@ public class StaticSite {
 
     @Url("/router_breadcrumbs")
     public static WebPage routerIntegrationBreadcrumbsPage;
+
+
+    @Url("/material-ui-navigation-breadcrumbs--customized")
+    public static WebPage customizedBreadcrumbsPage;
+
+    // drawer
+    public static DrawerPage drawerPage;
 
     // stepper
     @Frame("storybook-preview-iframe")
