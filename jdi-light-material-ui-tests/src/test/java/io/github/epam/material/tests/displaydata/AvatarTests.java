@@ -9,8 +9,11 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static io.github.com.MaterialNavigator.openSection;
-import static io.github.com.pages.displaydata.AvatarPage.*;
+import static io.github.com.pages.displaydata.AvatarPage.onlineStatus;
+import static io.github.com.pages.displaydata.AvatarPage.avatarWithPhoto;
+import static io.github.com.pages.displaydata.AvatarPage.avatarWithoutPhoto;
+
+
 
 public class AvatarTests extends TestsInit {
     @BeforeTest
