@@ -14,6 +14,10 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * To see an example of Select web element please visit https://material-ui.com/components/selects/
+ */
+
 public class SelectTests extends TestsInit {
 
     private static Timer timer = new Timer(1000L);
