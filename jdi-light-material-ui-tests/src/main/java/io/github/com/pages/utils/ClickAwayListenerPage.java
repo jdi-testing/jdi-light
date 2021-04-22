@@ -17,7 +17,6 @@ public class ClickAwayListenerPage extends WebPage {
     public static TextArea text;
 
     public void clickAroundTextPopup(int x, int y) {
-        System.out.println(x + " " + y);
         text.core().click(x, y);
     }
 

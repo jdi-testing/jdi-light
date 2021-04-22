@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.utils;
 
-import com.epam.jdi.tools.pairs.Pair;
 import static io.github.com.pages.utils.ClickAwayListenerPage.text;
 import static io.github.com.pages.utils.ClickAwayListenerPage.exampleButton;
 import io.github.epam.TestsInit;
