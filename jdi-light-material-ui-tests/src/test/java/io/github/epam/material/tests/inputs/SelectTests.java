@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.containsString;
 import static io.github.com.pages.inputs.SelectPage.*;
 import static org.testng.AssertJUnit.assertTrue;
 
+import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
@@ -110,8 +111,15 @@ public class SelectTests extends TestsInit {
 
     @Test
     public void multipleSelect() {
+        int c = 8203;
+        String stringDividedCharacter = Character.toString((char)c);
         List<String> listOfMultipleSelect = Arrays.asList("Oliver", "Van", "April", "Ralph", "Omar", "Carlos", "Miriam",
                 "Bradley", "Virginia", "Kelly");
+
+        multipleSelectButton.click();
+        multipleSelectButton.click(ElementArea.TOP_LEFT);
+        multipleSelectButton.is().text(stringDividedCharacter);
+
         multipleSelectButton.click();
         selectList.multipleSelect(listOfMultipleSelect);
         multipleSelectButton.is().text(listOfMultipleSelect.toString().replace("[", "").replace("]", ""));
