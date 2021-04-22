@@ -1,5 +1,6 @@
 package io.github.com.pages.inputs;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -9,6 +10,7 @@ import com.epam.jdi.light.material.elements.inputs.Slider;
 //import com.epam.jdi.light.material.elements.inputs.TextField;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -54,8 +56,7 @@ public class SlidersPage extends WebPage {
   public static Slider inputSlider;
 
   @UI("//*[@id=\"input-slider\"]/following-sibling::div//input[contains(@class, \"MuiInputBase-input\")]")
-//  public static TextField inputSliderField;
-  public static DateTimePickers inputSliderField;
+  public static WebElement inputSliderField;
 
   @UI("//*[@id=\"vertical-slider\"]/following-sibling::div//span[contains(@class, \"MuiSlider-root\")]")
   public static Slider verticalSlider;

@@ -19,6 +19,9 @@ public class Slider extends UIBaseElement<SliderAssert> {
 
   @JDIAction(value = "Set value '{0}' for '{name}'")
   public void setValue(int value) {
+    if (this.isDisabled()){
+      return;
+    }
 
     String thumbStyle = thumb().getAttribute("style");
     int thumbStyleIndex = thumbStyle.lastIndexOf(" ");
