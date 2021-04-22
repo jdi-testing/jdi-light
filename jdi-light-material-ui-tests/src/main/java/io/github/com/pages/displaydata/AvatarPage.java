@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AvatarPage extends WebPage {
     @UI("//span[@class='MuiBadge-root']/span")
-    public static List<Image> onlineStatus;
+    public static List<UIElement> onlineStatus;
     @UI("//span[@class='MuiBadge-root']/following-sibling::div")
     public static List<UIElement> avatarWithoutPhoto;
     @UI("//span[@class='MuiBadge-root']/div")

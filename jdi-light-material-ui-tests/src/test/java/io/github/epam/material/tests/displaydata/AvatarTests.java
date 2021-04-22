@@ -25,20 +25,31 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void avatarTests() {
-        testLogic(avatarWithoutPhoto);
-        testLogic(avatarWithPhoto);
+        testLogic(avatarWithoutPhoto, true);
+        testLogic(avatarWithPhoto, false);
         onlineStatus.get(1).has().classValue(Matchers.containsString("MuiBadge-dot"));
+        onlineStatus.get(2).has().text("R");
         onlineStatus.get(2).has().classValue(Matchers.containsString("MuiBadge-anchorOriginBottomRightCircle"));
     }
 
-    private void testLogic(List<UIElement> elements) {
-        for (int i = 1; i < elements.size(); i++) {
+    private void testLogic(List<UIElement> elements, boolean noPhoto) {
+        for (int i = 1; i <= elements.size(); i++) {
             elements.get(i).isDisplayed();
             elements.get(i).hasImage();
-            if (i > 2)
-                elements.get(i).has().classValue(Matchers.containsString("MuiAvatar-square"));
-            else
+            if (i < 3) {
+                if (i == 1 && noPhoto)
+                    elements.get(i).has().text("L");
                 elements.get(i).has().classValue(Matchers.containsString("MuiAvatar-circle"));
+            }
+            if (i == 3) {
+                elements.get(i).has().text("A");
+                elements.get(i).has().classValue(Matchers.containsString("MuiAvatar-square"));
+                elements.get(i).has().classValue(Matchers.containsString("jss3"));
+            }
+            if (i == 4) {
+                elements.get(i).has().classValue(Matchers.containsString("MuiAvatar-rounded"));
+                elements.get(i).has().classValue(Matchers.containsString("jss4"));
+            }
         }
     }
 }
