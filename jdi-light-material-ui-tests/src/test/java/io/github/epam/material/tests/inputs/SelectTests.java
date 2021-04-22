@@ -112,19 +112,18 @@ public class SelectTests extends TestsInit {
 
     @Test
     public void multipleSelect() {
-        List<String> listOfMultipleSelectAllVal = Arrays.asList("Oliver", "Van", "April", "Ralph", "Omar", "Carlos", "Miriam",
+        List<String> listOfMultipleSelect = Arrays.asList("Oliver", "Van", "April", "Ralph", "Omar", "Carlos", "Miriam",
                 "Bradley", "Virginia", "Kelly");
-        List<String> listOfMultipleSelectTwoVal = Arrays.asList("Oliver", "Van");
 
         multipleSelectButton.click();
-        selectList.multipleSelect(listOfMultipleSelectTwoVal);
+        selectList.multipleSelect(listOfMultipleSelect.subList(0,2));
         multipleSelectButton.click(ElementArea.TOP_LEFT);
-        multipleSelectButton.is().text(listOfMultipleSelectTwoVal.toString().replace("[", "").replace("]", ""));
+        multipleSelectButton.is().text(listOfMultipleSelect.subList(0,2).toString().replace("[", "").replace("]", ""));
 
         WebPage.refresh();
         multipleSelectButton.click();
-        selectList.multipleSelect(listOfMultipleSelectAllVal);
-        multipleSelectButton.is().text(listOfMultipleSelectAllVal.toString().replace("[", "").replace("]", ""));
+        selectList.multipleSelect(listOfMultipleSelect);
+        multipleSelectButton.is().text(listOfMultipleSelect.toString().replace("[", "").replace("]", ""));
     }
 
     @Test
