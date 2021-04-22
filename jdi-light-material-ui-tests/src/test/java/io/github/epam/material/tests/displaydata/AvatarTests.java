@@ -42,12 +42,9 @@ public class AvatarTests extends TestsInit {
             if (i == 3) {
                 elements.get(i).has().text("A");
                 elements.get(i).has().classValue(Matchers.containsString("MuiAvatar-square"));
-                elements.get(i).has().classValue(Matchers.containsString("jss3"));
             }
-            if (i == 4) {
+            if (i == 4)
                 elements.get(i).has().classValue(Matchers.containsString("MuiAvatar-rounded"));
-                elements.get(i).has().classValue(Matchers.containsString("jss4"));
-            }
         }
     }
 }
