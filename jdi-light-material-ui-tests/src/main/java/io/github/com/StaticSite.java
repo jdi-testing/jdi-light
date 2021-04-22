@@ -24,7 +24,7 @@ import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
-import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layout.GridFrame;
@@ -41,17 +41,7 @@ public class StaticSite {
 
     // inputs
     // switch
-    @Frame("storybook-preview-iframe")
-    public static SwitchFrame switchFrame;
-
-    @Url("/material-ui-inputs-switch--default")
-    public static WebPage inputSwitchDefaultPage;
-
-    @Url("/material-ui-inputs-switch--disabled")
-    public static WebPage inputSwitchDisabledPage;
-
-    @Url("/material-ui-inputs-switch--disabled-and-checked")
-    public static WebPage inputSwitchDisabledAndCheckedPage;
+    public static SwitchPage switchPage;
 
     //date and time pickers
     @Url("date_picker")
