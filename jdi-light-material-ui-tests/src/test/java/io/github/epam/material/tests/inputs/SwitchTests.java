@@ -10,6 +10,10 @@ import static io.github.com.pages.inputs.SwitchPage.*;
 import static io.github.com.MaterialNavigator.openSection;
 import static org.hamcrest.Matchers.not;
 
+/**
+ * To see an example of Switch web element please visit https://material-ui.com/components/switches/
+ */
+
 public class SwitchTests extends TestsInit {
 
     private static Timer timer = new Timer(1000L);
