@@ -1,5 +1,6 @@
 package io.github.com.pages.inputs;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -22,13 +23,16 @@ public class SelectPage extends WebPage {
     public static Select selectList;
 
     @UI("li.MuiListItem-button")
-    public static List<Text> selectListItems;
+    public static List<UIElement> selectListItems;
 
     @UI("//button/span[@class='MuiButton-label']")
     public static Button openTheSelectButton;
 
     @UI("//div[@id='multiple-select']")
     public static Button multipleSelectButton;
+
+    @UI("//h2[text()='Native select']")
+    public static UIElement multipleSelectTitle;
 
     @UI("//select[@id='age-native-simple']")
     public static Dropdown ageNativeSimpleSelect;
