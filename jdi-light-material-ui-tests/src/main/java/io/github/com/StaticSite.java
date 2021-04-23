@@ -217,17 +217,8 @@ public class StaticSite {
 
     // Display data
     //icons
-    @Frame("storybook-preview-iframe")
-    public static IconsFrame iconsFrame;
-
-    @Url("/material-ui-data-display-icons--simple-icons")
-    public static WebPage simpleIconsPage;
-
-    @Url("/material-ui-data-display-icons--color-icons")
-    public static WebPage colorIconsPage;
-
-    @Url("/material-ui-data-display-icons--size-icons")
-    public static WebPage sizeIconsPage;
+    @Url("/icons")
+    public static IconsPage iconsPage;
 
     // material icon
     @Frame("storybook-preview-iframe")
