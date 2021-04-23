@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- * To see an example of Button web element please visit https://material-ui.com/components/material-icons/
+ * To see an example of Material icons web element please visit https://material-ui.com/components/material-icons/
  */
 
 public class MaterialIconTests extends TestsInit {
