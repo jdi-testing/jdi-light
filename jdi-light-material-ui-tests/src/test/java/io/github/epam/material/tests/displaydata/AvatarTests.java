@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeTest;
@@ -8,6 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.pages.displaydata.AvatarPage.onlineStatus;
 import static io.github.com.pages.displaydata.AvatarPage.avatarWithPhoto;
@@ -27,7 +29,9 @@ public class AvatarTests extends TestsInit {
     public void avatarTests() {
         basicAvatarChecks(avatarWithoutPhoto, true);
         basicAvatarChecks(avatarWithPhoto, false);
-        onlineStatus.get(1).has().classValue(Matchers.containsString("MuiBadge-dot"));
+        boolean containsDot = new Timer(1000L)
+                .wait(() -> onlineStatus.get(1).classes().contains("MuiBadge-dot"));
+        jdiAssert(containsDot, Matchers.is(true));
         onlineStatus.get(2).has().text("R");
         onlineStatus.get(2).has().classValue(Matchers.containsString("MuiBadge-anchorOriginBottomRightCircle"));
     }
