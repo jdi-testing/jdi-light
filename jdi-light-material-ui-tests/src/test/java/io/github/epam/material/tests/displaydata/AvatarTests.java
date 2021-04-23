@@ -32,7 +32,7 @@ public class AvatarTests extends TestsInit {
         basicAvatarChecks(avatarWithPhoto, false);
         boolean containsDot = new Timer(1000L)
                 .wait(() -> onlineStatus.get(1).classes().contains("MuiBadge-dot"));
-        Assert.assertEquals(containsDot, Matchers.is(true));
+        Assert.assertEquals(containsDot, true);
         onlineStatus.get(2).has().text("R");
         onlineStatus.get(2).has().classValue(Matchers.containsString("MuiBadge-anchorOriginBottomRightCircle"));
     }
