@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -31,7 +32,7 @@ public class AvatarTests extends TestsInit {
         basicAvatarChecks(avatarWithPhoto, false);
         boolean containsDot = new Timer(1000L)
                 .wait(() -> onlineStatus.get(1).classes().contains("MuiBadge-dot"));
-        jdiAssert(containsDot, Matchers.is(true));
+        Assert.assertEquals(containsDot, Matchers.is(true));
         onlineStatus.get(2).has().text("R");
         onlineStatus.get(2).has().classValue(Matchers.containsString("MuiBadge-anchorOriginBottomRightCircle"));
     }
