@@ -31,9 +31,6 @@ public class SelectPage extends WebPage {
     @UI("//div[@id='multiple-select']")
     public static Button multipleSelectButton;
 
-    @UI("//h2[text()='Native select']")
-    public static UIElement multipleSelectTitle;
-
     @UI("//select[@id='age-native-simple']")
     public static Dropdown ageNativeSimpleSelect;
 
