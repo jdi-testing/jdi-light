@@ -11,6 +11,9 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+/**
+ * To see an example of Card web element please visit https://material-ui.com/ru/components/cards/
+ */
 public class CardTests extends TestsInit {
 
     @BeforeTest

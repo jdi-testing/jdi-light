@@ -14,7 +14,9 @@ import static io.github.com.pages.displaydata.AvatarPage.avatarWithPhoto;
 import static io.github.com.pages.displaydata.AvatarPage.avatarWithoutPhoto;
 
 
-
+/**
+ * To see an example of Avatar web element please visit https://material-ui.com/ru/components/avatars/
+ */
 public class AvatarTests extends TestsInit {
     @BeforeTest
     public void beforeTest() {
