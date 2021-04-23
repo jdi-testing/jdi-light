@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.Assert;
+
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -14,7 +14,7 @@ import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.pages.displaydata.AvatarPage.onlineStatus;
 import static io.github.com.pages.displaydata.AvatarPage.avatarWithPhoto;
 import static io.github.com.pages.displaydata.AvatarPage.avatarWithoutPhoto;
-
+import static org.testng.Assert.assertEquals;
 
 /**
  * To see an example of Avatar web element please visit https://material-ui.com/ru/components/avatars/
@@ -31,7 +31,7 @@ public class AvatarTests extends TestsInit {
         basicAvatarChecks(avatarWithPhoto, false);
         boolean containsDot = new Timer(1000L)
                 .wait(() -> onlineStatus.get(1).classes().contains("MuiBadge-dot"));
-        Assert.assertEquals(containsDot, true);
+        assertEquals(containsDot, true);
         onlineStatus.get(2).has().text("R");
         onlineStatus.get(2).has().classValue(Matchers.containsString("MuiBadge-anchorOriginBottomRightCircle"));
     }
