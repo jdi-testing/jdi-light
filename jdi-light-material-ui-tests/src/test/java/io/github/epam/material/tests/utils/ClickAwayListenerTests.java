@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.utils;
 
-import com.epam.jdi.tools.pairs.Pair;
 import static io.github.com.pages.utils.ClickAwayListenerPage.text;
 import static io.github.com.pages.utils.ClickAwayListenerPage.exampleButton;
 import io.github.epam.TestsInit;
@@ -10,6 +9,9 @@ import org.testng.annotations.Test;
 import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.StaticSite.clickAwayListenerPage;
 
+/**
+ * To see an example of Click Away Listener web element please visit https://material-ui.com/ru/components/click-away-listener/
+ */
 public class ClickAwayListenerTests extends TestsInit {
 
     @BeforeTest

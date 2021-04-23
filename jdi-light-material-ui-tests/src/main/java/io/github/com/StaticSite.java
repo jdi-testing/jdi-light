@@ -176,29 +176,8 @@ public class StaticSite {
     // dialog
     public static DialogPage dialogPage;
 
-    @Frame("storybook-preview-iframe")
-    public static AvatarFrame dataDisplayAvatarFrame;
-
-    @Url("/material-ui-data-display-avatar--no-image")
-    public static WebPage dataDisplayNoImageAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--circle")
-    public static WebPage dataDisplayCircleAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--square")
-    public static WebPage dataDisplaySquareAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--rounded")
-    public static WebPage dataDisplayRoundedAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--fallback-alt")
-    public static WebPage dataDisplayFallbackAltAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--letter")
-    public static WebPage dataDisplayLetterAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--icon")
-    public static WebPage dataDisplayIconAvatarPage;
+    @Url("/avatar")
+    public static AvatarPage dataDisplayAvatarPage;
 
     public static GroupCheckBoxFrame groupCheckBoxFrame;
 
