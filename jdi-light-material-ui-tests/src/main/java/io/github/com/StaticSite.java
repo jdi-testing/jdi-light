@@ -199,14 +199,8 @@ public class StaticSite {
     public static WebPage sizeIconsPage;
 
     // material icon
-    @Frame("storybook-preview-iframe")
-    public static MaterialIconFrame materialIconFrame;
-
-    @Url("/material-ui-data-display-material-icons--default")
-    public static WebPage displayDataDefaultMaterialIconPage;
-
-    @Url("/material-ui-data-display-material-icons--secondary")
-    public static WebPage displayDataLargeMaterialIconPage;
+    @Url("/material_icons")
+    public static MaterialIconPage materialIconPage;
 
     @Frame("storybook-preview-iframe")
     public static ModalFrame modalFrame;
