@@ -56,14 +56,18 @@ public class Slider extends UIBaseElement<SliderAssert> {
 
   @JDIAction(value = "drag & drop to the value '{0}' of '{name}'")
   public void slideHorizontalTo(int value) {
-//    value = value * 100 / 74;
-    int xOffset = getHorizontalShiftInPixels(value);
-    thumb().dragAndDropTo(xOffset, 0);
+    double coreHorizontalWidth = core().getSize().width;
+    double trackHorizontalWidth = track().getSize().width;
+    double minValue = Double.parseDouble(thumb().getAttribute("aria-valuemin"));
+    double maxValue = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
+    double pixelsInUnit = coreHorizontalWidth / (maxValue - minValue);
+    double xOffset = (value - minValue) * pixelsInUnit - trackHorizontalWidth;
+    thumb().dragAndDropTo((int)Math.round(xOffset), 0);
   }
 
-  private int getHorizontalShiftInPixels(int value) {
-    return getScaleHorizontalWidth() * value - getTrackHorizontalWidth();
-  }
+//  private int getHorizontalShiftInPixels(int value) {
+//    return getScaleHorizontalWidth() * value - getTrackHorizontalWidth();
+//  }
 
   @JDIAction(value = "Move '{name}' carriage to right")
   public void moveRight() {
@@ -89,13 +93,13 @@ public class Slider extends UIBaseElement<SliderAssert> {
     return track().getSize().height;
   }
 
-  private int getTrackHorizontalWidth() {
-    return track().getSize().width;
-  }
-
-  private int getScaleHorizontalWidth() {
-    return core().getSize().width / 100;
-  }
+//  private int getTrackHorizontalWidth() {
+//    return track().getSize().width;
+//  }
+//
+//  private int getScaleHorizontalWidth() {
+//    return core().getSize().width / 100;
+//  }
 
   public UIElement track() {
     return core().find(By.cssSelector(".MuiSlider-track"));

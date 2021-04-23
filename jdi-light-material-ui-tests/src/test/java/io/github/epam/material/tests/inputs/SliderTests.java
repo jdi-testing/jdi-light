@@ -260,11 +260,11 @@ public class SliderTests extends TestsInit {
                 {continuousSlider, continuousSliderChecking, -3, 0},
                 {continuousSlider, continuousSliderChecking, 123, 100},
 
-                {discreteSlider, discreteSliderChecking, 0, 0},
+                {discreteSlider, discreteSliderChecking, 10, 10},
                 {discreteSlider, discreteSliderChecking, 40, 40},
                 {discreteSlider, discreteSliderChecking, 100, 100},
-                {discreteSlider, discreteSliderChecking, -10, 0},
-                {discreteSlider, discreteSliderChecking, 120, 100},
+                {discreteSlider, discreteSliderChecking, -10, 10},
+                {discreteSlider, discreteSliderChecking, 120, 110},
                 {discreteSlider, discreteSliderChecking, 44, 40},
                 {discreteSlider, discreteSliderChecking, 47, 50},
 
