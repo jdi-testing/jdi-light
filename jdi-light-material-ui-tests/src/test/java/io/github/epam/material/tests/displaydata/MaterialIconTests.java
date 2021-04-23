@@ -1,17 +1,15 @@
 package io.github.epam.material.tests.displaydata;
 
-import static io.github.com.StaticSite.materialIconPage;
 import static io.github.com.pages.displaydata.MaterialIconPage.*;
 import static io.github.com.MaterialNavigator.openSection;
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static org.testng.Assert.assertTrue;
 
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-/*
- * https://material-ui.com/components/material-icons
+/**
+ * To see an example of Button web element please visit https://material-ui.com/components/material-icons/
  */
 
 public class MaterialIconTests extends TestsInit {
@@ -19,7 +17,6 @@ public class MaterialIconTests extends TestsInit {
     @BeforeTest
     public void beforeTest() {
         openSection("Material Icons");
-        materialIconPage.isOpened();
     }
 
     private void lastClickTextIs(String text) {
@@ -32,11 +29,11 @@ public class MaterialIconTests extends TestsInit {
 
     @Test
     public void sizeAndColorTest() {
-        defaultAlarm.isDisplayed();
-        largeAlarm.isDisplayed();
-        secondaryAlarm.isDisplayed();
-        jdiAssert(largeAlarm.hasClass("MuiSvgIcon-fontSizeLarge"), Matchers.is(true));
-        jdiAssert(secondaryAlarm.hasClass("MuiSvgIcon-colorSecondary"), Matchers.is(true));
+        defaultAlarm.is().displayed();
+        largeAlarm.is().displayed();
+        secondaryAlarm.is().displayed();
+        assertTrue(largeAlarm.hasClass("MuiSvgIcon-fontSizeLarge"));
+        assertTrue(secondaryAlarm.hasClass("MuiSvgIcon-colorSecondary"));
     }
 
     @Test
