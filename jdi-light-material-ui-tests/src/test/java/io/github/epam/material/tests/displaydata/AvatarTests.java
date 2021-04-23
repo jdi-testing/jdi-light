@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.pages.displaydata.AvatarPage.onlineStatus;
 import static io.github.com.pages.displaydata.AvatarPage.avatarWithPhoto;
