@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -20,7 +21,7 @@ public class IconsTests extends TestsInit {
         openSection("Icons");
     }
 
-    private void lastClickHoverTextsIs(UIElement lastClick, UIElement lastHover, List<String> txt) {
+    private void lastClickHoverTextsIs(Text lastClick, Text lastHover, List<String> txt) {
         lastClick.is().text(String.format("Last click:%s", txt.get(0)));
         lastHover.is().text(String.format("Last hover:%s", txt.get(1)));
     }
