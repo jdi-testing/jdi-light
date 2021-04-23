@@ -20,7 +20,7 @@ import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.FabFrame;
 import io.github.com.pages.inputs.GroupCheckBoxFrame;
 import io.github.com.pages.inputs.RadioButtonFrame;
-import io.github.com.pages.inputs.SelectFrame;
+import io.github.com.pages.inputs.SelectPage;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
@@ -123,17 +123,7 @@ public class StaticSite {
     @Url("/material-ui-inputs-button-group--split-button")
     public static WebPage inputButtonGroupSplitPage;
 
-    @Frame("storybook-preview-iframe")
-    public static SelectFrame selectFrame;
-
-    @Url("/material-ui-inputs-select--disabled-select-view")
-    public static WebPage inputSelectDisabledPage;
-
-    @Url("/material-ui-inputs-select--multiple-select-view")
-    public static WebPage inputSelectMultiplePage;
-
-    @Url("/material-ui-inputs-select--simple-select-view")
-    public static WebPage inputSelectSimplePage;
+    public static SelectPage selectPage;
 
     //slider
     @Frame("storybook-preview-iframe")
