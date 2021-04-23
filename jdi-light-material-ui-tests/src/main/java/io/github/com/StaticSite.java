@@ -24,7 +24,7 @@ import io.github.com.pages.inputs.SelectPage;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
-import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerFrame;
 import io.github.com.pages.layout.GridFrame;
@@ -32,7 +32,8 @@ import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarFrame;
-import io.github.com.pages.surfaces.CardFrame;
+import io.github.com.pages.surfaces.CardPage;
+import io.github.com.pages.surfaces.PaperPage;
 import io.github.com.pages.utils.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
@@ -40,17 +41,7 @@ public class StaticSite {
 
     // inputs
     // switch
-    @Frame("storybook-preview-iframe")
-    public static SwitchFrame switchFrame;
-
-    @Url("/material-ui-inputs-switch--default")
-    public static WebPage inputSwitchDefaultPage;
-
-    @Url("/material-ui-inputs-switch--disabled")
-    public static WebPage inputSwitchDisabledPage;
-
-    @Url("/material-ui-inputs-switch--disabled-and-checked")
-    public static WebPage inputSwitchDisabledAndCheckedPage;
+    public static SwitchPage switchPage;
 
     //date and time pickers
     @Url("date_picker")
@@ -159,17 +150,13 @@ public class StaticSite {
     public static AppBarFrame appBarFrame;
 
     // paper
-    
+    public static PaperPage paperPage;
+
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage surfaceSimpleAppBarPage;
 
-    // card
-    @Frame("storybook-preview-iframe")
-    public static CardFrame cardFrame;
-
-    @Url("/material-ui-surfaces-card--card-with-clickable-area")
-    public static WebPage surfaceCardPage;
-
+    @Url("/card_surface")
+    public static CardPage surfaceCardPage;
 
     // data display
     // divider
@@ -189,29 +176,8 @@ public class StaticSite {
     // dialog
     public static DialogPage dialogPage;
 
-    @Frame("storybook-preview-iframe")
-    public static AvatarFrame dataDisplayAvatarFrame;
-
-    @Url("/material-ui-data-display-avatar--no-image")
-    public static WebPage dataDisplayNoImageAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--circle")
-    public static WebPage dataDisplayCircleAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--square")
-    public static WebPage dataDisplaySquareAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--rounded")
-    public static WebPage dataDisplayRoundedAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--fallback-alt")
-    public static WebPage dataDisplayFallbackAltAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--letter")
-    public static WebPage dataDisplayLetterAvatarPage;
-
-    @Url("/material-ui-data-display-avatar--icon")
-    public static WebPage dataDisplayIconAvatarPage;
+    @Url("/avatar")
+    public static AvatarPage dataDisplayAvatarPage;
 
     public static GroupCheckBoxFrame groupCheckBoxFrame;
 
@@ -274,19 +240,7 @@ public class StaticSite {
 
     // badge
     @Frame("storybook-preview-iframe")
-    public static BadgeFrame badgeFrame;
-
-    @Url("/material-ui-data-display-badge--primary")
-    public static WebPage dataDisplayBadgePrimaryPage;
-
-    @Url("/material-ui-data-display-badge--dot")
-    public static WebPage dataDisplayBadgeDotPage;
-
-    @Url("/material-ui-data-display-badge--invisible")
-    public static WebPage dataDisplayBadgeInvisiblePage;
-
-    @Url("/material-ui-data-display-badge--alignment")
-    public static WebPage dataDisplayBadgeAlignmentPage;
+    public static BadgePage badgeFrame;
 
     // tooltip
     @Frame("storybook-preview-iframe")
@@ -446,16 +400,7 @@ public class StaticSite {
 
     // popover
     @Frame("storybook-preview-iframe")
-    public static PopoverClickFrame popoverClickFrame;
-
-    @Url("/material-ui-utils-popover--click")
-    public static WebPage utilsPopoverClickPage;
-
-    @Frame("storybook-preview-iframe")
-    public static PopoverHoverFrame popoverHoverFrame;
-
-    @Url("/material-ui-utils-popover--hover")
-    public static WebPage utilsPopoverHoverPage;
+    public static PopoverPage popoverPage;
 
     // utils
     // Click away listener

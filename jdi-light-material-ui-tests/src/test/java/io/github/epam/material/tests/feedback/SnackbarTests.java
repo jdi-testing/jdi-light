@@ -130,7 +130,7 @@ public class SnackbarTests extends TestsInit {
         snackbarPopUpText.is().notVisible();
 
         otherButtons.get(2).click();
-        timer.wait(() -> closePopUpSnackbarButton.waitFor().visible());
+        timer.wait(() -> closePopUpSnackbarButton.waitFor().displayed());
         closePopUpSnackbarButton.click();
         timer.wait(() -> snackbarPopUpText.is().disappear());
         snackbarPopUpText.is().notVisible();
