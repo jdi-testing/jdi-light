@@ -8,14 +8,13 @@ import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
-import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.light.elements.pageobjects.annotations.MapToField;
-import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JAction4;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc3;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -46,13 +45,14 @@ public class Form<T> extends Section {
     public static JFunc3<Field, Object, Object, String> GET_ACTION = (field, element, parent)
         -> ((HasValue) element).getValue().trim();
 
-    public static JFunc1<Field, String> MAP_FORM = (field)
-        -> { if (hasAnnotation(field, MapToField.class))
-                 return field.getAnnotation(MapToField.class).value();
-             if (field.getType().isAnnotationPresent(MapToField.class))
-                 return field.getType().getAnnotation(MapToField.class).value();
-             return getElementName(field);
-            };
+    public static JFunc1<Field, String> MAP_FORM = field -> {
+        if (hasAnnotation(field, MapToField.class)) {
+            return field.getAnnotation(MapToField.class).value();
+        }
+        return field.getType().isAnnotationPresent(MapToField.class)
+            ? field.getType().getAnnotation(MapToField.class).value()
+            : getElementName(field);
+    };
 
     @JDebug
     public void fillAction(Field field, Object element, Object parent, String setValue) {
@@ -66,7 +66,10 @@ public class Form<T> extends Section {
     }
     private String getFieldName(Field field, Object element) {
         return field != null ? field.getName() :
-                (element != null ? element.toString() : "");
+                stringOrEmpty(element);
+    }
+    private String stringOrEmpty(Object element) {
+        return element != null ? element.toString() : "";
     }
 
     private FormFilters filter = ALL;
@@ -94,13 +97,13 @@ public class Form<T> extends Section {
     @JDebug
     public void fill(MapArray<String, String> map) {
         List<Field> allFields = allFields();
-        if (allFields.size() == 0) {
+        if (ObjectUtils.isEmpty(allFields)) {
             for (Pair<String, String> pair : map) {
                 UIElement element = new UIElement();
                 try {
                     element = new UIElement().setup(e -> e
-                            .setName(pair.key)
-                            .setParent(this));
+                        .setName(pair.key)
+                        .setParent(this));
                     fillAction(null, element, pageObject, pair.value);
                 } catch (Exception ex) {
                     throw exception(ex, "Failed to fill element '%s' (locator: %s) with value '%s'", pair.key, elementLocator(element), pair.value);
@@ -129,16 +132,7 @@ public class Form<T> extends Section {
         return allFields(pageObject);
     }
     public List<Field> allFields(Object obj) {
-        switch (getFilter()) {
-            case MANDATORY:
-                return LinqUtils.where(getFields(obj, SetValue.class),
-                        field -> hasAnnotation(field, Mandatory.class));
-            case OPTIONAL:
-                return LinqUtils.where(getFields(obj, SetValue.class),
-                        field -> !hasAnnotation(field, Mandatory.class));
-            default:
-                return getFieldsInterfaceOf(obj, SetValue.class);
-        }
+        return ELEMENT.getAllFormFields.execute(this, obj);
     }
 
     public Form<T> onlyMandatory() {
