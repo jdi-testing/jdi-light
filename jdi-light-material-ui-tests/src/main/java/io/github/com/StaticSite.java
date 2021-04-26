@@ -17,7 +17,6 @@ import io.github.com.pages.layout.BoxFrame;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.inputs.CheckboxPage;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
-import io.github.com.pages.inputs.FabFrame;
 import io.github.com.pages.inputs.GroupCheckBoxFrame;
 import io.github.com.pages.inputs.RadioButtonFrame;
 import io.github.com.pages.inputs.SelectPage;
@@ -72,14 +71,8 @@ public class StaticSite {
     public static WebPage radioDefaultPage;
 
     // floating action button
-    @Frame("storybook-preview-iframe")
-    public static FabFrame fabFrame;
-
-    @Url("/material-ui-inputs-floating-action-button--default")
-    public static WebPage inputFabDefaultPage;
-
-    @Url("/material-ui-inputs-floating-action-button--disabled")
-    public static WebPage inputFabDisabledPage;
+    @Url("/floating_action_button")
+    public static FabPage fabPage;
 
     // text field
     @Frame("storybook-preview-iframe")
