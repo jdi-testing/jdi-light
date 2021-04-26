@@ -203,8 +203,6 @@ public class StaticSite {
     public static WebPage serverSideModalPage;
 
     // typography
-    @Frame("storybook-preview-iframe")
-    public static TypographyFrame typographyFrame;
     // utils
     // popper
     @Frame("storybook-preview-iframe")
@@ -220,8 +218,7 @@ public class StaticSite {
     public static WebPage utilsPositionedPoppersPage;
 
 
-    @Url("/material-ui-data-display-typography--typography-view")
-    public static WebPage dataDisplayTypographyPage;
+    public static TypographyPage typographyPage;
 
     // badge
     @Frame("storybook-preview-iframe")
