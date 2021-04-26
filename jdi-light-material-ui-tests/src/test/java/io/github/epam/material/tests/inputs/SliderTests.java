@@ -3,6 +3,7 @@ package io.github.epam.material.tests.inputs;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.elements.inputs.Slider;
 import com.epam.jdi.light.material.elements.inputs.SliderRange;
+import static io.github.com.MaterialNavigator.openSection;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
@@ -11,20 +12,151 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Map;
-
-import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.pages.inputs.SlidersPage.*;
 
-import static io.github.com.StaticSite.*;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.in;
 
 public class SliderTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        slidersPage.open();
+        openSection("Slider");
+    }
+
+    @Test(dataProvider = "startValueData")
+    public void currentValueTest(SliderChecking sliderChecking, int ... value) {
+        sliderChecking.checkValue(value);
+    }
+
+    @Test(dataProvider = "isEnabledTestData")
+    public void isEnabledTest(Slider slider, boolean isEnabled) {
+        if (isEnabled){
+            slider.is().enabled();
+        } else {
+            slider.is().disabled();
+        }
+    }
+
+    @Test(dataProvider = "setValueTestData")
+    public void setValueTest(Slider slider, SliderChecking sliderChecking, int newValue, int expectedValue){
+        slider.setValue(newValue);
+        sliderChecking.checkValue(expectedValue);
+    }
+
+    @Test(dataProvider = "setInputSliderData")
+    public void setInputSliderTest(String input, int newValue, int expectedValue){
+        if (input.equals("slider")){
+            inputSlider.setValue(newValue);
+        } else {
+            inputSliderField.clear();
+            String stringValue = newValue + "";
+            inputSliderField.sendKeys(Keys.BACK_SPACE + "" + Keys.BACK_SPACE + stringValue + Keys.ENTER);
+        }
+        inputSliderChecking.checkValue(expectedValue);
+    }
+
+    @Test(dataProvider = "setValueRangeSliderData")
+    public void setValueRangeSliderTest(int firstIndex, int leftValue, int secondIndex, int rightValue) {
+        rangeSlider.setValue(firstIndex, leftValue);
+        rangeSlider.setValue(secondIndex, rightValue);
+        rangeSliderChecking.checkValue(Math.min(leftValue, rightValue), Math.max(leftValue, rightValue));
+    }
+
+    @Test(dataProvider = "rangeSliderOnOneValueData")
+    public void rangeSliderOnOneValueTest(int index, int newValue){
+        int sharedValue = 15;
+        rangeSlider.setValue(1, sharedValue);
+        rangeSlider.setValue(2, sharedValue);
+        rangeSlider.setValue(index, newValue);
+        rangeSliderChecking.checkValue(Math.min(newValue, sharedValue), Math.max(newValue, sharedValue));
+    }
+
+    @Test(dataProvider =  "outrangeValuesData")
+    public void outrangeValuesTest(Slider slider, SliderChecking sliderChecking, int newValue, int expectedValue) {
+        slider.setValue(newValue);
+        sliderChecking.checkValue(expectedValue);
+    }
+
+    @Test(dataProvider = "outrangeValuesRangeSliderData")
+    public void outrangeValuesRangeSliderTest(int firstIndex, int firstValue, int secondIndex, int secondValue, int firstExpectedValue, int secondExpectedValue){
+        rangeSlider.setValue(firstIndex, firstValue);
+        rangeSlider.setValue(secondIndex, secondValue);
+        rangeSliderChecking.checkValue(firstExpectedValue, secondExpectedValue);
+    }
+
+    @Test(dataProvider = "disabledSliderSetValuesData")
+    public void changeValuesDisabledSliderTest(Slider slider, SliderChecking sliderChecking, int newValue) {
+        int currentValue = slider.value();
+        slider.setValue(newValue);
+        sliderChecking.checkValue(currentValue);
+    }
+
+    @Test(dataProvider = "orientationData")
+    public void orientationTest(UIBaseElement slider, String expectedOrientation) {
+        if (slider instanceof Slider){
+            Slider thisSlider = (Slider)slider;
+            thisSlider.is().orientation(expectedOrientation);
+        } else {
+            SliderRange thisSlider = (SliderRange)slider;
+            thisSlider.is().orientation(expectedOrientation);
+        }
+    }
+
+    @Test(dataProvider = "slideHorizontalData")
+    public void slideHorizontalTest(Slider slider, SliderChecking sliderChecking, int newValue, int expectedValue) {
+        slider.slideHorizontalTo(newValue);
+        sliderChecking.checkValue(expectedValue);
+    }
+
+    @Test(dataProvider = "slideHorizontalRangeData")
+    public void slideHorizontalRangeTest(int index, int newValue, int expectedValue){
+        int notChangingValue = rangeSlider.value(index % 2 + 1);
+        rangeSlider.slideHorizontalTo(index, newValue);
+        rangeSliderChecking.checkValue(Math.min(notChangingValue, expectedValue), Math.max(notChangingValue, expectedValue));
+    }
+
+    @Test(dataProvider = "slideVerticalData")
+    public void slideVerticalTest(int newValue, int expectedValue) {
+        verticalSlider.slideVerticalTo(newValue);
+        verticalSliderChecking.checkValue(expectedValue);
+    }
+
+    @Test(dataProvider = "moveLeftTestData")
+    public void moveLeftTest(Slider slider, int expectedValue, SliderChecking sliderChecking, int startValue){
+        slider.moveLeft();
+        sliderChecking.checkValue(expectedValue);
+        slider.setValue(startValue);
+        slider.moveLeft();
+        sliderChecking.checkValue(startValue);
+    }
+
+    @Test(dataProvider = "moveRightTestData")
+    public void moveRightTest(Slider slider, int expectedValue, SliderChecking sliderChecking, int endValue){
+        slider.moveRight();
+        sliderChecking.checkValue(expectedValue);
+        slider.setValue(endValue);
+        slider.moveRight();
+        sliderChecking.checkValue(endValue);
+    }
+
+    @Test(dataProvider = "disabledMoveTestData", expectedExceptions = ElementClickInterceptedException.class)
+    public void disabledMoveTest(Slider slider, String direction){
+        if (direction.equals("left")){
+            slider.moveLeft();
+        } else {
+            slider.moveRight();
+        }
+    }
+
+    @Test(dataProvider = "moveRangeSlider")
+    public void moveRangeTest(int index, int startValue, int expectedValue, String direction){
+        int notChangingValue = rangeSlider.value(index % 2 + 1);
+        rangeSlider.setValue(index, startValue);
+        if (direction.equals("left")){
+            rangeSlider.moveLeft(index);
+        } else {
+            rangeSlider.moveRight(index);
+        }
+        rangeSliderChecking.checkValue(Math.min(notChangingValue, expectedValue), Math.max(notChangingValue, expectedValue));
     }
 
 
@@ -43,12 +175,6 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "startValueData")
-    public void currentValueTest(SliderChecking sliderChecking, int ... value) {
-        sliderChecking.check(value);
-    }
-
-
     @DataProvider
     private Object[][] isEnabledTestData() {
         return new Object[][]{
@@ -62,16 +188,6 @@ public class SliderTests extends TestsInit {
                 {verticalSlider, true}
         };
     }
-
-    @Test(dataProvider = "isEnabledTestData")
-    public void isEnabledTest(Slider slider, boolean isEnabled) {
-        if (isEnabled){
-            slider.is().enabled();
-        } else {
-            slider.is().disabled();
-        }
-    }
-
 
     @DataProvider
     private Object[][] setValueTestData() {
@@ -98,12 +214,6 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "setValueTestData")
-    public void setValueTest(Slider slider, SliderChecking sliderChecking, int newValue, int expectedValue){
-        slider.setValue(newValue);
-        sliderChecking.check(expectedValue);
-    }
-
     @DataProvider
     private Object[][] setInputSliderData(){
         return new Object[][]{
@@ -121,18 +231,6 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "setInputSliderData")
-    public void setInputSliderTest(String input, int newValue, int expectedValue){
-        if (input.equals("slider")){
-            inputSlider.setValue(newValue);
-        } else {
-            inputSliderField.clear();
-            String stringValue = newValue + "";
-            inputSliderField.sendKeys(Keys.BACK_SPACE + "" + Keys.BACK_SPACE + stringValue + Keys.ENTER);
-        }
-        inputSliderChecking.check(expectedValue);
-    }
-
     @DataProvider
     private Object[][] setValueRangeSliderData(){
         return new Object[][]{
@@ -143,13 +241,6 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "setValueRangeSliderData")
-    public void setValueRangeSliderTest(int firstIndex, int leftValue, int secondIndex, int rightValue) {
-        rangeSlider.setValue(firstIndex, leftValue);
-        rangeSlider.setValue(secondIndex, rightValue);
-        rangeSliderChecking.check(Math.min(leftValue, rightValue), Math.max(leftValue, rightValue));
-    }
-
     @DataProvider
     private Object[][] rangeSliderOnOneValueData(){
         return new Object[][] {
@@ -157,16 +248,6 @@ public class SliderTests extends TestsInit {
                 {2, 88}
         };
     }
-
-    @Test(dataProvider = "rangeSliderOnOneValueData")
-    public void rangeSliderOnOneValueTest(int index, int newValue){
-        int sharedValue = 15;
-        rangeSlider.setValue(1, sharedValue);
-        rangeSlider.setValue(2, sharedValue);
-        rangeSlider.setValue(index, newValue);
-        rangeSliderChecking.check(Math.min(newValue, sharedValue), Math.max(newValue, sharedValue));
-    }
-
 
     @DataProvider
     private Object[][] outrangeValuesData() {
@@ -188,12 +269,6 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider =  "outrangeValuesData")
-    public void outrangeValuesTest(Slider slider, SliderChecking sliderChecking, int newValue, int expectedValue) {
-        slider.setValue(newValue);
-        sliderChecking.check(expectedValue);
-    }
-
     @DataProvider
     private Object[][] outrangeValuesRangeSliderData(){
         return new Object[][]{
@@ -203,26 +278,12 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "outrangeValuesRangeSliderData")
-    public void outrangeValuesRangeSliderTest(int firstIndex, int firstValue, int secondIndex, int secondValue, int firstExpectedValue, int secondExpectedValue){
-        rangeSlider.setValue(firstIndex, firstValue);
-        rangeSlider.setValue(secondIndex, secondValue);
-        rangeSliderChecking.check(firstExpectedValue, secondExpectedValue);
-    }
-
     @DataProvider
     private Object[][] disabledSliderSetValuesData(){
         return new Object[][]{
                 {disabledContinuousSlider, disabledContinuousSliderChecking, 75},
                 {disabledDiscreteSlider, disabledDiscreteSliderChecking, 55}
         };
-    }
-
-    @Test(dataProvider = "disabledSliderSetValuesData")
-    public void changeValuesDisabledSliderTest(Slider slider, SliderChecking sliderChecking, int newValue) {
-        int currentValue = slider.value();
-        slider.setValue(newValue);
-        sliderChecking.check(currentValue);
     }
 
     @DataProvider
@@ -238,17 +299,6 @@ public class SliderTests extends TestsInit {
                 {verticalSlider, "vertical"},
                 {rangeSlider, "horizontal"}
         };
-    }
-
-    @Test(dataProvider = "orientationData")
-    public void orientationTest(UIBaseElement slider, String expectedOrientation) {
-        if (slider instanceof Slider){
-            Slider thisSlider = (Slider)slider;
-            thisSlider.is().orientation(expectedOrientation);
-        } else {
-            SliderRange thisSlider = (SliderRange)slider;
-            thisSlider.is().orientation(expectedOrientation);
-        }
     }
 
     @DataProvider
@@ -296,13 +346,6 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "slideHorizontalData")
-    public void slideHorizontalTest(Slider slider, SliderChecking sliderChecking, int newValue, int expectedValue) {
-        slider.slideHorizontalTo(newValue);
-        sliderChecking.check(expectedValue);
-    }
-
-
     @DataProvider
     private Object[][] slideHorizontalRangeData(){
         return new Object[][]{
@@ -317,13 +360,6 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "slideHorizontalRangeData")
-    public void slideHorizontalRangeTest(int index, int newValue, int expectedValue){
-        int notChangingValue = rangeSlider.value(index % 2 + 1);
-        rangeSlider.slideHorizontalTo(index, newValue);
-        rangeSliderChecking.check(Math.min(notChangingValue, expectedValue), Math.max(notChangingValue, expectedValue));
-    }
-
     @DataProvider
     private Object[][] slideVerticalData(){
         return new Object[][]{
@@ -333,12 +369,6 @@ public class SliderTests extends TestsInit {
                 {-3, 0},
                 {123, 100}
         };
-    }
-
-    @Test(dataProvider = "slideVerticalData")
-    public void slideVerticalTest(int newValue, int expectedValue) {
-        verticalSlider.slideVerticalTo(newValue);
-        verticalSliderChecking.check(expectedValue);
     }
 
     @DataProvider
@@ -353,16 +383,6 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "moveLeftTestData")
-    public void moveLeftTest(Slider slider, int expectedValue, SliderChecking sliderChecking, int startValue){
-        slider.moveLeft();
-        sliderChecking.check(expectedValue);
-        slider.setValue(startValue);
-        slider.moveLeft();
-        sliderChecking.check(startValue);
-    }
-
-
     @DataProvider
     private Object[][] moveRightTestData(){
         return new Object[][] {
@@ -375,15 +395,6 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "moveRightTestData")
-    public void moveRightTest(Slider slider, int expectedValue, SliderChecking sliderChecking, int endValue){
-        slider.moveRight();
-        sliderChecking.check(expectedValue);
-        slider.setValue(endValue);
-        slider.moveRight();
-        sliderChecking.check(endValue);
-    }
-
     @DataProvider
     private Object[][] disabledMoveTestData(){
         return new Object[][]{
@@ -392,15 +403,6 @@ public class SliderTests extends TestsInit {
                 {disabledDiscreteSlider, "left"},
                 {disabledDiscreteSlider, "right"}
         };
-    }
-
-    @Test(dataProvider = "disabledMoveTestData", expectedExceptions = ElementClickInterceptedException.class)
-    public void disabledMoveTest(Slider slider, String direction){
-        if (direction.equals("left")){
-            slider.moveLeft();
-        } else {
-            slider.moveRight();
-        }
     }
 
     @DataProvider
@@ -415,17 +417,6 @@ public class SliderTests extends TestsInit {
         };
     }
 
-    @Test(dataProvider = "moveRangeSlider")
-    public void moveRangeTest(int index, int startValue, int expectedValue, String direction){
-        int notChangingValue = rangeSlider.value(index % 2 + 1);
-        rangeSlider.setValue(index, startValue);
-        if (direction.equals("left")){
-            rangeSlider.moveLeft(index);
-        } else {
-            rangeSlider.moveRight(index);
-        }
-        rangeSliderChecking.check(Math.min(notChangingValue, expectedValue), Math.max(notChangingValue, expectedValue));
-    }
 
     SliderChecking continuousSliderChecking = (SliderChecking)(int ... expectedValue) -> {
         continuousSlider.is().value(expectedValue[0]);
@@ -446,7 +437,7 @@ public class SliderTests extends TestsInit {
 //        defaultDiscreteSliderWithRestrictionValue.is().text(containsString("Restricted values with value " + expectedValue[0]));
     };
 
-    SliderChecking verticalSliderChecking = (SliderChecking)(int ... expectedValue) -> {
+    SliderChecking verticalSliderChecking = (int ... expectedValue) -> {
         verticalSlider.is().value(expectedValue[0]);
 //        verticalSliderValue.is().text(containsString("Vertical Slider with value " + expectedValue[0]));
     };
@@ -472,6 +463,6 @@ public class SliderTests extends TestsInit {
 
 @FunctionalInterface
 interface SliderChecking {
-    void check(int ... expectedValueLeft);
+    void checkValue(int ... expectedValueLeft);
 }
 

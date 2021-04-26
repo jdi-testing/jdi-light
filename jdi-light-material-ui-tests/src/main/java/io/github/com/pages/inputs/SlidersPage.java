@@ -1,15 +1,10 @@
 package io.github.com.pages.inputs;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.inputs.DateTimePickers;
 import com.epam.jdi.light.material.elements.inputs.SliderRange;
 import com.epam.jdi.light.material.elements.inputs.Slider;
-//import com.epam.jdi.light.material.elements.inputs.TextField;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
