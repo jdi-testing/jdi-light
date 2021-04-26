@@ -19,7 +19,7 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void simpleRadioTest() {
-        simpleRadioButtons.select(1);
+        simpleRadioButtons.get(1).select();
 //        for (RadioButtons radio : simpleRadioButtons) {
 //            System.out.println(radio.text());
 //        }
