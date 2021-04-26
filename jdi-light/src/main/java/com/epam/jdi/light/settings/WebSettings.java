@@ -118,7 +118,7 @@ public class WebSettings {
             case UI_AND_ELEMENTS:
                 if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
                     return null;
-                break;
+            default: break;
         }
         String locatorName = ELEMENT.smartLocatorName.execute(el);
         By locator = ELEMENT.smartLocator.execute(el, locatorName);
@@ -338,6 +338,7 @@ public class WebSettings {
             case "normal": return NORMAL;
             case "none": return PageLoadStrategy.NONE;
             case "eager": return EAGER;
+            default: break;
         }
         return NORMAL;
     }
