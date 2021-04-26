@@ -85,7 +85,7 @@ public final class WebDriverUtils {
             case "chrome":
                 name = "chromedriver";
                 break;
-
+			default: break;
         }
         return name;
     }
