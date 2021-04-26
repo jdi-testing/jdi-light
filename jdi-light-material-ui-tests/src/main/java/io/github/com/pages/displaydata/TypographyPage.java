@@ -10,5 +10,4 @@ public class TypographyPage extends WebPage {
 
     @UI("//*[contains(@class,'MuiTypography-gutterBottom')]")
     public static List<Text> typographyTexts;
-
 }
