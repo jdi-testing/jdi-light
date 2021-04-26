@@ -1,53 +1,77 @@
 package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.radioDefaultPage;
-import static io.github.com.StaticSite.radioButtonFrame;
-import static org.hamcrest.Matchers.containsString;
+import static io.github.com.pages.inputs.RadioButtonPage.*;
+import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.radioButtonPage;
 
 
 public class RadioButtonTests extends TestsInit {
 
+    @BeforeTest()
+    public void beforeTest() {
+        openSection("Radio");
+        radioButtonPage.isOpened();
+    }
+
+    @Test
+    public void simpleRadioTest() {
+        simpleRadioButtons.select(1);
+//        for (RadioButtons radio : simpleRadioButtons) {
+//            System.out.println(radio.text());
+//        }
+    }
+
+    @Test
+    public void labelPlacementTest() {
+
+    }
+
+    @Test
+    public void showErrorTest() {
+
+    }
+
     @Test
     public void defaultRadioButtonTest() {
-        radioDefaultPage.open();
-
-        radioButtonFrame.firstRadioButton.is().enabled();
-        radioButtonFrame.secondRadioButton.is().enabled();
-        radioButtonFrame.thirdRadioButton.is().enabled();
-        radioButtonFrame.disabledRadioButton.is().disabled();
-
-        radioButtonFrame.firstRadioButton.is().unchecked();
-        radioButtonFrame.secondRadioButton.is().unchecked();
-        radioButtonFrame.thirdRadioButton.is().unchecked();
-        radioButtonFrame.disabledRadioButton.is().unchecked();
-
-        radioButtonFrame.firstRadioButton.toggle();
-        radioButtonFrame.firstRadioButton.is().checked();
-        radioButtonFrame.secondRadioButton.is().unchecked();
-        radioButtonFrame.thirdRadioButton.is().unchecked();
-        radioButtonFrame.disabledRadioButton.is().unchecked();
-        radioButtonFrame.textField.is().text(containsString("First"));
-
-        radioButtonFrame.secondRadioButton.toggle();
-        radioButtonFrame.firstRadioButton.is().unchecked();
-        radioButtonFrame.secondRadioButton.is().checked();
-        radioButtonFrame.thirdRadioButton.is().unchecked();
-        radioButtonFrame.disabledRadioButton.is().unchecked();
-        radioButtonFrame.textField.is().text(containsString("Second"));
-
-        radioButtonFrame.firstRadioButton.is().unchecked();
-        radioButtonFrame.secondRadioButton.is().checked();
-        radioButtonFrame.thirdRadioButton.is().unchecked();
-        radioButtonFrame.disabledRadioButton.is().unchecked();
+//
+//        radioButtonPage.firstRadioButton.is().enabled();
+//        radioButtonPage.secondRadioButton.is().enabled();
+//        radioButtonPage.thirdRadioButton.is().enabled();
+//        radioButtonPage.disabledRadioButton.is().disabled();
+//
+//        radioButtonPage.firstRadioButton.is().unchecked();
+//        radioButtonPage.secondRadioButton.is().unchecked();
+//        radioButtonPage.thirdRadioButton.is().unchecked();
+//        radioButtonPage.disabledRadioButton.is().unchecked();
+//
+//        radioButtonPage.firstRadioButton.toggle();
+//        radioButtonPage.firstRadioButton.is().checked();
+//        radioButtonPage.secondRadioButton.is().unchecked();
+//        radioButtonPage.thirdRadioButton.is().unchecked();
+//        radioButtonPage.disabledRadioButton.is().unchecked();
+//        radioButtonPage.textField.is().text(containsString("First"));
+//
+//        radioButtonPage.secondRadioButton.toggle();
+//        radioButtonPage.firstRadioButton.is().unchecked();
+//        radioButtonPage.secondRadioButton.is().checked();
+//        radioButtonPage.thirdRadioButton.is().unchecked();
+//        radioButtonPage.disabledRadioButton.is().unchecked();
+//        radioButtonPage.textField.is().text(containsString("Second"));
+//
+//        radioButtonPage.firstRadioButton.is().unchecked();
+//        radioButtonPage.secondRadioButton.is().checked();
+//        radioButtonPage.thirdRadioButton.is().unchecked();
+//        radioButtonPage.disabledRadioButton.is().unchecked();
     }
 
     @Test
     public void disabledRadioButtonTest() {
-        radioDefaultPage.open();
-
-        radioButtonFrame.disabledRadioButton.is().disabled();
+//        radioDefaultPage.open();
+//
+//        radioButtonPage.disabledRadioButton.is().disabled();
     }
 }

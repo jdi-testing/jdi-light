@@ -19,7 +19,7 @@ import io.github.com.pages.inputs.CheckboxPage;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
 import io.github.com.pages.inputs.FabFrame;
 import io.github.com.pages.inputs.GroupCheckBoxFrame;
-import io.github.com.pages.inputs.RadioButtonFrame;
+import io.github.com.pages.inputs.RadioButtonPage;
 import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.inputs.SliderFrame;
@@ -75,11 +75,8 @@ public class StaticSite {
     public static ButtonPage buttonPage;
 
     // radio
-    @Frame("storybook-preview-iframe")
-    public static RadioButtonFrame radioButtonFrame;
-
-    @Url("/material-ui-inputs-radio--default")
-    public static WebPage radioDefaultPage;
+    @Url("/radio")
+    public static RadioButtonPage radioButtonPage;
 
     // floating action button
     @Frame("storybook-preview-iframe")
