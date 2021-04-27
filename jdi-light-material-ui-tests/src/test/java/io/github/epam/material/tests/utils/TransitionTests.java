@@ -47,14 +47,14 @@ public class TransitionTests extends TestsInit {
         transitions.get(7).is().displayed();
     }
 
+    //I think that this test should be changed. it uses 7th and 8th
+    // transitions indexes only because slide transition becomes visible in html
+    //only after click on slide checkbox. so it confused when the same
+    // transitions index are in slideDisplayTest() and in zoomDisplayTest()
     @Test
     public void zoomDisplayTest() {
-        transitions.get(8).is().hidden();
-        transitions.get(9).is().hidden();
-
-
         checkboxes.get(5).click();
+        transitions.get(7).is().displayed();
         transitions.get(8).is().displayed();
-        transitions.get(9).is().displayed();
     }
 }
