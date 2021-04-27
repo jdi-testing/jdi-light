@@ -4,6 +4,8 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.elements.inputs.Slider;
 import com.epam.jdi.light.material.elements.inputs.SliderRange;
 import static io.github.com.MaterialNavigator.openSection;
+
+import io.github.com.pages.utils.SliderChecking;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
@@ -458,11 +460,5 @@ public class SliderTests extends TestsInit {
                 .value(2, expectedValues[1]);
 //        rangeSliderValue.is().text(containsString("Range Slider with selection from " + expectedValues[0] + " to " + expectedValues[1]));
     };
-}
-
-
-@FunctionalInterface
-interface SliderChecking {
-    void checkValue(int ... expectedValueLeft);
 }
 
