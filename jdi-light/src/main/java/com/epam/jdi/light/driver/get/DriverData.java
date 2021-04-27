@@ -264,6 +264,7 @@ public class DriverData {
                     java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
                     setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
                     break;
+                default: break;
             }
             return driver;
         } catch (Exception ex) {
