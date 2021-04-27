@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -45,25 +46,26 @@ public class FabTests extends TestsInit {
 
     @Test
     public void animatedButtonsTest() {
+        Timer timer = new Timer(2000L);
+
         scrollBtns.forEach(el -> el.is().displayed());
         lastClickTextsIs(animatedBtnsLastClick, "");
 
         scrollBtns.get(1).click();
         itemNameOne.is().text("Item One");
-        animatedBtn.waitFor().displayed();
-        animatedBtn.click();
+        addButton.click();
         lastClickTextsIs(animatedBtnsLastClick, " Add");
 
         scrollBtns.get(2).click();
         itemNameTwo.is().text("Item Two");
-        animatedBtn.waitFor().displayed();
-        animatedBtn.click();
+        timer.wait(() -> editButton.isDisplayed());
+        editButton.click();
         lastClickTextsIs(animatedBtnsLastClick, " Edit");
 
         scrollBtns.get(3).click();
         itemNameThree.is().text("Item Three");
-        animatedBtn.waitFor().displayed();
-        animatedBtn.click();
+        timer.wait(() -> expandButton.isDisplayed());
+        expandButton.click();
         lastClickTextsIs(animatedBtnsLastClick, " Expand");
     }
 }

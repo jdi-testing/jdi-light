@@ -27,8 +27,14 @@ public class FabPage extends WebPage {
     @UI("//div[contains(@class,'MuiTabs-scroller')]/descendant::button")
     public static List<Button> scrollBtns;
 
-    @UI("//h2[text()='Animated buttons']/following-sibling::div/div/button[1]")
-    public static Button animatedBtn;
+    @UI("//button[@aria-label='Add']")
+    public static Button addButton;
+
+    @UI("//button[@aria-label='Edit']")
+    public static Button editButton;
+
+    @UI("//button[@aria-label='Expand']")
+    public static Button expandButton;
 
     @UI("#action-tabpanel-0")
     public static UIElement itemNameOne;
