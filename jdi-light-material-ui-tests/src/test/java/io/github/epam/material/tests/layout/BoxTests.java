@@ -12,29 +12,27 @@ public class BoxTests extends TestsInit {
     public void containedBoxTest() {
         defaultBoxPage.open();
 
-        boxFrame.containedBox.is().enabled();
-        boxFrame.containedBox.click();
-        boxFrame.containedBox.is().text(hasToString("BUTTON"));
-
-        boxFrame.rootContainedBox.is().attr("element1", "[object Object]");
-        boxFrame.rootContainedBox.is().attr("element2", "[object Object]");
-        boxFrame.rootContainedBox.is().attr("element3", "[object Object]");
-        }
+        defaultBoxPage.containedBox.is().enabled();
+        defaultBoxPage.containedBox.click();
+        defaultBoxPage.containedBox.is().text(hasToString("FIRST BUTTON"));
+        defaultBoxPage.lastClickContent.is().text(hasToString("You clicked First button"));
+    }
 
     @Test
     public void outlinedBoxTest() {
         defaultBoxPage.open();
 
-        boxFrame.outlinedBox.is().enabled();
-        boxFrame.outlinedBox.click();
-        boxFrame.outlinedBox.is().text(hasToString("BUTTON"));
+        defaultBoxPage.outlinedBox.is().enabled();
+        defaultBoxPage.outlinedBox.click();
+        defaultBoxPage.outlinedBox.is().text(hasToString("SECOND BUTTON"));
+        defaultBoxPage.lastClickContent.is().text(hasToString("You clicked Second button"));
     }
 
     @Test
     public void disabledBoxTest() {
         defaultBoxPage.open();
 
-        boxFrame.disabledBox.is().text(hasToString("BUTTON"));
-        boxFrame.disabledBox.is().disabled();
+        defaultBoxPage.disabledBox.is().text(hasToString("THIRD BUTTON"));
+        defaultBoxPage.disabledBox.is().disabled();
     }
 }
