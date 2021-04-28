@@ -20,7 +20,7 @@ public class BoxTests extends TestsInit {
 
     @Test
     public void containedBoxTest() {
-        timer.wait(() -> defaultBoxPage.containedBox.is().enabled());
+        timer.wait(() -> defaultBoxPage.containedBox.isEnabled());
         defaultBoxPage.containedBox.is().enabled();
         defaultBoxPage.containedBox.click();
         defaultBoxPage.containedBox.is().text(hasToString("FIRST BUTTON"));
