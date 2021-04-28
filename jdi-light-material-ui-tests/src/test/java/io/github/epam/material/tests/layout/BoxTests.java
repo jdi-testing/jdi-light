@@ -24,7 +24,7 @@ public class BoxTests extends TestsInit {
         Timer timer = new Timer(1000L);
         timer.wait(() -> containedBox.isDisplayed());
         containedBox.click();
-        containedBox.is().text(hasToString("FIRST BUTTON"));
+        containedBox.is().text("FIRST BUTTON");
         lastClickContent.is().text(hasToString("You clicked First button"));
     }
 
@@ -32,14 +32,14 @@ public class BoxTests extends TestsInit {
     public void outlinedBoxTest() {
         outlinedBox.is().displayed();
         outlinedBox.click();
-        outlinedBox.is().text(hasToString("SECOND BUTTON"));
+        outlinedBox.is().text("SECOND BUTTON");
         lastClickContent.is().text(hasToString("You clicked Second button"));
     }
 
     @Test
     public void disabledBoxTest() {
         disabledBox.is().displayed();
-        disabledBox.is().text(hasToString("THIRD BUTTON"));
+        disabledBox.is().text("THIRD BUTTON");
         disabledBox.is().disabled();
     }
 }
