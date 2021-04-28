@@ -80,10 +80,12 @@ public class CoordinateConversionHelper {
      * The next two methods convert screen coordinates to viewport coordinates
      */
     public static Point getCoordinatesInViewport(int x, int y) {
+        int localX = x ;
+        int localY = y;
         Rectangle webviewRect = webview();
         prepareForConversion(webviewRect);
-        x -= webviewRect.x;
-        y -= webviewRect.y;
+        localX -= webviewRect.x;
+        localY -= webviewRect.y;
         return new Point((int) round(x / xRatio), (int) round(y / yRatio));
     }
     public static Point getCoordinatesInViewport(Point point) {

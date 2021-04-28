@@ -311,13 +311,14 @@ public class WebSettings {
     }
 
     private static void setSearchStrategy(String p) {
-        p = p.toLowerCase();
-        if (p.equals("soft"))
-            p = "any, multiple";
-        if (p.equals("strict"))
-            p = "visible, single";
-        if (p.split(",").length == 2) {
-            List<String> params = map(asList(p.split(",")), a -> ELEMENT.simplifyString.execute(a));
+        String localP = p;
+        localP = localP.toLowerCase();
+        if (localP.equals("soft"))
+            localP = "any, multiple";
+        if (localP.equals("strict"))
+            localP = "visible, single";
+        if (localP.split(",").length == 2) {
+            List<String> params = map(asList(localP.split(",")), a -> ELEMENT.simplifyString.execute(a));
             if (params.contains("visible") || params.contains("displayed"))
                 onlyVisible();
             if (params.contains("any") || params.contains("all"))
