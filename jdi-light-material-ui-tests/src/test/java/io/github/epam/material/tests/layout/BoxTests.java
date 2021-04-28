@@ -11,8 +11,6 @@ import static org.hamcrest.Matchers.hasToString;
 
 public class BoxTests extends TestsInit {
 
-    private static Timer timer = new Timer(1000L);
-
     @BeforeTest
     public void before() {
         openSection("Box");
@@ -20,6 +18,7 @@ public class BoxTests extends TestsInit {
 
     @Test
     public void containedBoxTest() {
+        Timer timer = new Timer(1000L);
         timer.wait(() -> defaultBoxPage.containedBox.isDisplayed());
         defaultBoxPage.containedBox.click();
         defaultBoxPage.containedBox.is().text(hasToString("FIRST BUTTON"));
