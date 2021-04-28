@@ -20,8 +20,7 @@ public class BoxTests extends TestsInit {
 
     @Test
     public void containedBoxTest() {
-        timer.wait(() -> defaultBoxPage.containedBox.isEnabled());
-        defaultBoxPage.containedBox.is().enabled();
+        timer.wait(() -> defaultBoxPage.containedBox.isDisplayed());
         defaultBoxPage.containedBox.click();
         defaultBoxPage.containedBox.is().text(hasToString("FIRST BUTTON"));
         defaultBoxPage.lastClickContent.is().text(hasToString("You clicked First button"));
@@ -29,7 +28,7 @@ public class BoxTests extends TestsInit {
 
     @Test
     public void outlinedBoxTest() {
-        defaultBoxPage.outlinedBox.is().enabled();
+        defaultBoxPage.outlinedBox.is().displayed();
         defaultBoxPage.outlinedBox.click();
         defaultBoxPage.outlinedBox.is().text(hasToString("SECOND BUTTON"));
         defaultBoxPage.lastClickContent.is().text(hasToString("You clicked Second button"));
@@ -37,6 +36,7 @@ public class BoxTests extends TestsInit {
 
     @Test
     public void disabledBoxTest() {
+        defaultBoxPage.disabledBox.is().displayed();
         defaultBoxPage.disabledBox.is().text(hasToString("THIRD BUTTON"));
         defaultBoxPage.disabledBox.is().disabled();
     }
