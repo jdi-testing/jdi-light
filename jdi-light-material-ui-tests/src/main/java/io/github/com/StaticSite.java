@@ -371,14 +371,8 @@ public class StaticSite {
     public static ClickAwayListenerPage clickAwayListenerPage;
 
     // transition
-    @Frame("storybook-preview-iframe")
-    public static TransitionFrame transitionFrame;
-
-    @Url("/material-ui-utils-transitions--fade-transition")
-    public static WebPage utilsTransitionFadePage;
-
-    @Url("/material-ui-utils-transitions--collapse-transition")
-    public static WebPage utilsTransitionCollapsePage;
+    @Url("/transitions")
+    public static TransitionPage transitionPage;
 
     // popover
     @Frame("storybook-preview-iframe")
