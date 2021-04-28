@@ -33,7 +33,7 @@ public class BoxTests extends TestsInit {
         outlinedBox.is().displayed();
         outlinedBox.click();
         outlinedBox.is().text("SECOND BUTTON");
-        lastClickContent.is().text(hasToString("You clicked Second button"));
+        lastClickContent.is().text("You clicked Second button");
     }
 
     @Test
