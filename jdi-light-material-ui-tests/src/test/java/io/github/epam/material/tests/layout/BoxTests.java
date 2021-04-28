@@ -25,7 +25,7 @@ public class BoxTests extends TestsInit {
         timer.wait(() -> containedBox.isDisplayed());
         containedBox.click();
         containedBox.is().text("FIRST BUTTON");
-        lastClickContent.is().text(hasToString("You clicked First button"));
+        lastClickContent.is().text("You clicked First button");
     }
 
     @Test
