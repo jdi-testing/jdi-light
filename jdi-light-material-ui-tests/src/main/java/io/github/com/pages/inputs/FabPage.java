@@ -9,22 +9,22 @@ import java.util.List;
 
 public class FabPage extends WebPage {
 
-    @UI("//h2[text()='Basic buttons']/following-sibling::div[@id='basicActionBtns']/button")
+    @UI("//div[@id='basicActionBtns']/button")
     public static List<Button> basicBtns;
 
-    @UI("//h2[text()='Basic buttons']/following-sibling::div/button[contains(@class,'MuiFab-primary')]")
+    @UI("//button[@aria-label='add']")
     public static Button addBtn;
 
-    @UI("//h2[text()='Basic buttons']/following-sibling::div/button[contains(@class,'MuiFab-secondary')]")
+    @UI("//button[@aria-label='edit']")
     public static Button editBtn;
 
-    @UI("//h2[text()='Basic buttons']/following-sibling::div/button[contains(@class,'MuiFab-extended')]")
+    @UI("//button[contains(@class,'MuiFab-extended')]")
     public static Button extendedBtn;
 
-    @UI("//h2[text()='Basic buttons']/following::button[contains(@class,'Mui-disabled')]")
+    @UI("//button[@aria-label='like']")
     public static Button disabledBtn;
 
-    @UI("//div[contains(@class,'MuiTabs-scroller')]/descendant::button")
+    @UI("//button[contains(@id,'action-tab')]")
     public static List<Button> scrollBtns;
 
     @UI("//button[@aria-label='Add']")

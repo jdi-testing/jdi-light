@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.inputs;
 
-import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
@@ -20,26 +19,22 @@ public class FabTests extends TestsInit {
         openSection("Floating Action Button");
     }
 
-    private void lastClickTextsIs(Text lastClick, String txt) {
-        lastClick.is().text(String.format("Last click:%s", txt));
-    }
-
     @Test
     public void basicButtonsTest() {
         basicBtns.forEach(el -> el.is().displayed());
-        lastClickTextsIs(basicBtnsLastClick, "");
+        basicBtnsLastClick.is().text("Last click:");
 
         addBtn.is().enabled();
         addBtn.click();
-        lastClickTextsIs(basicBtnsLastClick, " Add");
+        basicBtnsLastClick.is().text("Last click: Add");
 
         editBtn.is().enabled();
         editBtn.click();
-        lastClickTextsIs(basicBtnsLastClick, " Edit");
+        basicBtnsLastClick.is().text("Last click: Edit");
 
         extendedBtn.is().enabled();
         extendedBtn.click();
-        lastClickTextsIs(basicBtnsLastClick, " Navigate");
+        basicBtnsLastClick.is().text("Last click: Navigate");
 
         disabledBtn.is().disabled();
     }
@@ -49,23 +44,23 @@ public class FabTests extends TestsInit {
         Timer timer = new Timer(2000L);
 
         scrollBtns.forEach(el -> el.is().displayed());
-        lastClickTextsIs(animatedBtnsLastClick, "");
+        animatedBtnsLastClick.is().text("Last click:");
 
         scrollBtns.get(1).click();
         itemNameOne.is().text("Item One");
         addButton.click();
-        lastClickTextsIs(animatedBtnsLastClick, " Add");
+        animatedBtnsLastClick.is().text("Last click: Add");
 
         scrollBtns.get(2).click();
         itemNameTwo.is().text("Item Two");
         timer.wait(() -> editButton.isDisplayed());
         editButton.click();
-        lastClickTextsIs(animatedBtnsLastClick, " Edit");
+        animatedBtnsLastClick.is().text("Last click: Edit");
 
         scrollBtns.get(3).click();
         itemNameThree.is().text("Item Three");
         timer.wait(() -> expandButton.isDisplayed());
         expandButton.click();
-        lastClickTextsIs(animatedBtnsLastClick, " Expand");
+        animatedBtnsLastClick.is().text("Last click: Expand");
     }
 }
