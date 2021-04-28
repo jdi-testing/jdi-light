@@ -86,7 +86,7 @@ public class CoordinateConversionHelper {
         prepareForConversion(webviewRect);
         localX -= webviewRect.x;
         localY -= webviewRect.y;
-        return new Point((int) round(x / xRatio), (int) round(y / yRatio));
+        return new Point((int) round(localX / xRatio), (int) round(localY / yRatio));
     }
     public static Point getCoordinatesInViewport(Point point) {
         return getCoordinatesInViewport(point.x, point.y);
