@@ -371,6 +371,7 @@ public class StaticSite {
     public static ClickAwayListenerPage clickAwayListenerPage;
 
     // transition
+    @Url("/transitions")
     public static TransitionPage transitionPage;
 
     // popover

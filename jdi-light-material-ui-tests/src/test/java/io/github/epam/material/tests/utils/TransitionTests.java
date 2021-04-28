@@ -1,60 +1,84 @@
 package io.github.epam.material.tests.utils;
 
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static io.github.com.MaterialNavigator.openSection;
-import static io.github.com.pages.utils.TransitionPage.checkboxes;
-import static io.github.com.pages.utils.TransitionPage.displayedCollapseFadeTransitions;
-import static io.github.com.pages.utils.TransitionPage.transitions;
+import static io.github.com.StaticSite.transitionPage;
+import static io.github.com.pages.utils.TransitionPage.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 
 /**
- * To see an example of Button web element please visit https://material-ui.com/components/transitions/
+ * To see an example of Transitions web element please visit https://material-ui.com/components/transitions/
  */
 
 public class TransitionTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeTest
     public void before() {
         openSection("Transitions");
+        transitionPage.shouldBeOpened();
     }
 
     @Test
     public void collapseDisplayTest() {
-        checkboxes.get(1).click();
-        displayedCollapseFadeTransitions.get(1).is().displayed();
-        displayedCollapseFadeTransitions.get(2).is().displayed();
+        Timer timer = new Timer(2000L);
+
+        collapseFadeTransitions.get(1).has().classValue(not(containsString("MuiCollapse-entered")));
+        collapseFadeTransitions.get(2).has().classValue(not(containsString("MuiCollapse-entered")));
+
+        checkboxes.get(1).check();
+
+        timer.wait(() -> collapseFadeTransitions.get(1).hasClass(containsString("MuiCollapse-entered").toString()));
+        collapseFadeTransitions.get(1).has().classValue(containsString("MuiCollapse-entered"));
+        collapseFadeTransitions.get(2).has().classValue(containsString("MuiCollapse-entered"));
     }
 
     @Test
     public void fadeDisplayTest() {
-        checkboxes.get(2).click();
-        displayedCollapseFadeTransitions.get(3).is().hidden();
-        displayedCollapseFadeTransitions.get(4).is().hidden();
+        Timer timer = new Timer(2000L);
+        collapseFadeTransitions.get(3).has().classValue(not(containsString("MuiCollapse-entered")));
+        collapseFadeTransitions.get(4).has().classValue(not(containsString("MuiCollapse-entered")));
+
+        checkboxes.get(2).check();
+        timer.wait(() -> collapseFadeTransitions.get(3).hasClass(containsString("MuiCollapse-entered").toString()));
+        collapseFadeTransitions.get(3).has().classValue(containsString("MuiCollapse-entered"));
+        collapseFadeTransitions.get(4).has().classValue(containsString("MuiCollapse-entered"));
     }
 
     @Test
     public void growDisplayTest() {
-        checkboxes.get(3).click();
-        transitions.get(6).is().displayed();
-        transitions.get(5).is().displayed();
+        growSlideTransitions.get(1).is().hidden();
+        growSlideTransitions.get(2).is().hidden();
+
+        checkboxes.get(3).check();
+
+        growSlideTransitions.get(1).is().displayed();
+        growSlideTransitions.get(2).is().displayed();
     }
 
     @Test
     public void slideDisplayTest() {
-        checkboxes.get(4).click();
-        transitions.get(7).is().displayed();
+        growSlideTransitions.get(3).is().hidden();
+
+        checkboxes.get(4).check();
+
+        growSlideTransitions.get(3).is().displayed();
     }
 
-    //I think that this test should be changed. it uses 7th and 8th
-    // transitions indexes only because slide transition becomes visible in html
-    //only after click on slide checkbox. so it confused when the same
-    // transitions index are in slideDisplayTest() and in zoomDisplayTest()
     @Test
     public void zoomDisplayTest() {
-        checkboxes.get(5).click();
-        transitions.get(7).is().displayed();
-        transitions.get(8).is().displayed();
+        Timer timer = new Timer(2000L);
+        zoomTransitions.get(1).is().hidden();
+        zoomTransitions.get(2).is().hidden();
+
+        checkboxes.get(5).check();
+
+        zoomTransitions.get(1).is().displayed();
+        timer.wait(() -> zoomTransitions.get(2).isDisplayed());
+        zoomTransitions.get(2).is().displayed();
     }
 }

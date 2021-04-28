@@ -9,13 +9,15 @@ import java.util.List;
 
 public class TransitionPage extends WebPage {
 
-    @UI("//*[contains(@class,'MuiPaper-root')]")
-    public static List<UIElement> transitions;
+    @UI("//h2[text()='Grow']/following::div[contains(@class,'MuiPaper-root')]")
+    public static List<UIElement> growSlideTransitions;
 
-    @UI("//*[contains(@class,'MuiCollapse-entered')]")
-    public static List<UIElement> displayedCollapseFadeTransitions;
+    @UI("//h2[text()='Zoom']/following::div[contains(@class,'MuiPaper-root')]")
+    public static List<UIElement> zoomTransitions;
 
+    @UI("//h1[text()='Transitions']/following::div[contains(@class,'MuiCollapse-container')]")
+    public static List<UIElement> collapseFadeTransitions;
 
-    @UI("//*[contains(@class,'MuiSwitch-switchBase MuiSwitch-colorSecondary')]")
+    @UI("//span[@class='MuiSwitch-root']")
     public static List<Checkbox> checkboxes;
 }
