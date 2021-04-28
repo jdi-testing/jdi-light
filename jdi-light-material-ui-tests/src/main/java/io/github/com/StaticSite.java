@@ -13,7 +13,7 @@ import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.displaydata.*;
 import io.github.com.pages.feedback.*;
 import io.github.com.pages.inputs.*;
-import io.github.com.pages.layout.BoxFrame;
+import io.github.com.pages.layout.BoxPage;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.inputs.CheckboxPage;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
@@ -489,11 +489,8 @@ public class StaticSite {
     public static WebPage defaultHiddenPage;
 
     // box
-    @Frame("storybook-preview-iframe")
-    public static BoxFrame boxFrame;
-
-    @Url("/material-ui-layout-box--default")
-    public static WebPage defaultBoxPage;
+    @Url("/box_layout")
+    public static BoxPage defaultBoxPage;
 
     // container
     @Frame("storybook-preview-iframe")
