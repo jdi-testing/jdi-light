@@ -10,7 +10,6 @@ import static io.github.com.pages.layout.BoxPage.containedBox;
 import static io.github.com.pages.layout.BoxPage.disabledBox;
 import static io.github.com.pages.layout.BoxPage.lastClickContent;
 import static io.github.com.pages.layout.BoxPage.outlinedBox;
-import static org.hamcrest.Matchers.hasToString;
 
 public class BoxTests extends TestsInit {
 
