@@ -25,11 +25,9 @@ public class CoordinateConversionHelper {
     private static Function<WebDriver, Rectangle> TOOLBAR;
     private static Function<WebDriver, Rectangle> WEBVIEW;
     private static final String androidToolbarId = "com.android.chrome:id/toolbar";
-    private static final String iosToolbarXpath = "//XCUIElementTypeOther[@name='topBrowserBar']";
     private static final String iosToolbarAccessibilityId = "topBrowserBar";
     private static final String androidWebviewClassName = "android.webkit.WebView";
     private static final String iosBottomToolbarAccessibilityId = "BottomBrowserToolbar";
-    private static final String iosBottomToolbarXpath = "//XCUIElementTypeToolbar[@name='BottomBrowserToolbar']";
     private static double xRatio;
     private static double yRatio;
 
