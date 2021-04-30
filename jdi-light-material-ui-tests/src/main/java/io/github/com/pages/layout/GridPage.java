@@ -27,4 +27,16 @@ public class GridPage extends Section {
 
     @UI(".MuiPaper-root[4]")
     public static Button fourthButton;
+
+    @UI(".MuiInputBase-input[1]")
+    public static UIElement firstInput;
+
+    @UI(".MuiInputBase-input[2]")
+    public static UIElement secondInput;
+
+    @UI(".MuiInputBase-input[3]")
+    public static UIElement thirdInput;
+
+    @UI(".MuiInputBase-input[4]")
+    public static UIElement fourthInput;
 }
