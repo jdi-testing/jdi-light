@@ -48,14 +48,6 @@ public class CoordinateConversionHelper {
     }
 
     @JDIAction(timeout = 5)
-    private static Rectangle toolbar() {
-        String initialContext = MobileContextHolder.getContext();
-        MobileContextHolder.setContext("NATIVE_APP");
-        Rectangle toolbarRect = TOOLBAR.apply(getDriver());
-        MobileContextHolder.setContext(initialContext);
-        return toolbarRect;
-    }
-    @JDIAction(timeout = 5)
     private static Rectangle webview() {
         String initialContext = MobileContextHolder.getContext();
         MobileContextHolder.setContext("NATIVE_APP");
