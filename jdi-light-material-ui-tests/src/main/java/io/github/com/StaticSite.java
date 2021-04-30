@@ -26,7 +26,7 @@ import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerFrame;
-import io.github.com.pages.layout.GridFrame;
+import io.github.com.pages.layout.GridPage;
 import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
@@ -493,8 +493,8 @@ public class StaticSite {
     public static WebPage defaultContainerPage;
 
     // grid
-    @Frame("storybook-preview-iframe")
-    public static GridFrame gridFrame;
+    @Url("grid_layout")
+    public static GridPage gridPage;
 
     @Url("/material-ui-layout-grid--grid-view")
     public static WebPage defaultGridPage;
