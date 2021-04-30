@@ -41,17 +41,17 @@ public class GridTests extends TestsInit {
     @Test
     public void inputsTest() {
         firstInput.is().displayed();
-        firstInput.setValue("xs=11111");
-        assertEquals("xs=11111", firstInput.getValue());
+        firstInput.setValue("xs=1");
+        firstInput.is().text("xs=1");
         secondInput.is().displayed();
-        secondInput.setValue("xs=22222");
-        assertEquals("xs=22222", secondInput.getValue());
+        secondInput.setValue("xs=2");
+        secondInput.is().text("xs=2");
         thirdInput.is().displayed();
-        thirdInput.setValue("xs=33333");
-        assertEquals("xs=33333", thirdInput.getValue());
+        thirdInput.setValue("xs=3");
+        thirdInput.is().text("xs=3");
         fourthInput.is().displayed();
-        fourthInput.setValue("xs=44444");
-        assertEquals("xs=44444", fourthInput.getValue());
+        fourthInput.setValue("xs=4");
+        fourthInput.is().text("xs=4");
     }
 
 }

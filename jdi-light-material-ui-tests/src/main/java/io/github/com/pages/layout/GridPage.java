@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 
 public class GridPage extends Section {
 
@@ -29,14 +30,14 @@ public class GridPage extends Section {
     public static Button fourthButton;
 
     @UI(".MuiInputBase-input[1]")
-    public static UIElement firstInput;
+    public static TextField firstInput;
 
     @UI(".MuiInputBase-input[2]")
-    public static UIElement secondInput;
+    public static TextField secondInput;
 
     @UI(".MuiInputBase-input[3]")
-    public static UIElement thirdInput;
+    public static TextField thirdInput;
 
     @UI(".MuiInputBase-input[4]")
-    public static UIElement fourthInput;
+    public static TextField fourthInput;
 }
