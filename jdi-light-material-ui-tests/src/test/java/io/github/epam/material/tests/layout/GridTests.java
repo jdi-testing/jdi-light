@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.pages.layout.GridPage.*;
-import static org.testng.Assert.assertEquals;
 
 public class GridTests extends TestsInit {
 
