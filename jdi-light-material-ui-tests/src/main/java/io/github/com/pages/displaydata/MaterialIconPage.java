@@ -20,5 +20,4 @@ public class MaterialIconPage extends WebPage {
 
     @UI("#miconLastHover")
     public static UIElement lastHover;
-
 }

@@ -19,14 +19,6 @@ public class MaterialIconTests extends TestsInit {
         openSection("Material Icons");
     }
 
-    private void lastClickTextIs(String text) {
-        lastClick.is().text(String.format("Last click:%s", text));
-    }
-
-    private void lastHoverTextIs(String text) {
-        lastHover.is().text(String.format("Last hover:%s", text));
-    }
-
     @Test
     public void sizeAndColorTest() {
         defaultAlarm.is().displayed();
@@ -38,31 +30,31 @@ public class MaterialIconTests extends TestsInit {
 
     @Test
     public void defaultMaterialIconTest() {
-        lastClickTextIs("");
-        lastHoverTextIs("");
+        lastClick.is().text("Last click:");
+        lastHover.is().text("Last hover:");
 
         defaultAlarm.hover();
-        lastClickTextIs("");
-        lastHoverTextIs(" default");
+        lastClick.is().text("Last click:");
+        lastHover.is().text("Last hover: default");
 
         defaultAlarm.click();
-        lastClickTextIs(" default");
-        lastHoverTextIs(" default");
+        lastClick.is().text("Last click: default");
+        lastHover.is().text("Last hover: default");
 
         largeAlarm.hover();
-        lastClickTextIs(" default");
-        lastHoverTextIs(" large");
+        lastClick.is().text("Last click: default");
+        lastHover.is().text("Last hover: large");
 
         largeAlarm.click();
-        lastClickTextIs(" large");
-        lastHoverTextIs(" large");
+        lastClick.is().text("Last click: large");
+        lastHover.is().text("Last hover: large");
 
         secondaryAlarm.hover();
-        lastClickTextIs(" large");
-        lastHoverTextIs(" secondary");
+        lastClick.is().text("Last click: large");
+        lastHover.is().text("Last hover: secondary");
 
         secondaryAlarm.click();
-        lastClickTextIs(" secondary");
-        lastHoverTextIs(" secondary");
+        lastClick.is().text("Last click: secondary");
+        lastHover.is().text("Last hover: secondary");
     }
 }

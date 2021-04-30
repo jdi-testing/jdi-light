@@ -20,12 +20,7 @@ public class IconsTests extends TestsInit {
     public void beforeTest() {
         openSection("Icons");
     }
-
-    private void lastClickHoverTextsIs(Text lastClick, Text lastHover, List<String> txt) {
-        lastClick.is().text(String.format("Last click:%s", txt.get(0)));
-        lastHover.is().text(String.format("Last hover:%s", txt.get(1)));
-    }
-
+    
     @Test
     public void simpleIconsTest() {
         filled.forEach(el -> el.is().displayed());
@@ -34,7 +29,8 @@ public class IconsTests extends TestsInit {
         twoTone.forEach(el -> el.is().displayed());
         sharp.forEach(el -> el.is().displayed());
         edgeCase.forEach(el -> el.is().displayed());
-        lastClickHoverTextsIs(simpleLastClick, simpleLastHover, Arrays.asList("", ""));
+        simpleLastClick.is().text("Last click:");
+        simpleLastHover.is().text("Last hover:");
 
         Map<UIElement, List<List<String>>> allSimpleIcons = new LinkedHashMap<>();
         allSimpleIcons.put(filled.get(1), Arrays.asList(Arrays.asList("", " DeleteIcon"), Arrays.asList(" DeleteIcon", " DeleteIcon")));
@@ -54,9 +50,11 @@ public class IconsTests extends TestsInit {
         allSimpleIcons.forEach(
                 (k, v) -> {
                     k.hover();
-                    lastClickHoverTextsIs(simpleLastClick, simpleLastHover, v.get(0));
+                    simpleLastClick.is().text(String.format("Last click:%s", v.get(0).get(0)));
+                    simpleLastHover.is().text(String.format("Last hover:%s", v.get(0).get(1)));
                     k.click();
-                    lastClickHoverTextsIs(simpleLastClick, simpleLastHover, v.get(1));
+                    simpleLastClick.is().text(String.format("Last click:%s", v.get(1).get(0)));
+                    simpleLastHover.is().text(String.format("Last hover:%s", v.get(1).get(1)));
                 }
         );
     }
@@ -64,7 +62,8 @@ public class IconsTests extends TestsInit {
     @Test
     public void colorIconsTest() {
         color.forEach(el -> el.is().displayed());
-        lastClickHoverTextsIs(colorLastClick, colorLastHover, Arrays.asList("", ""));
+        colorLastClick.is().text("Last click:");
+        colorLastHover.is().text("Last hover:");
 
         Map<UIElement, List<List<String>>> allColorIcons = new LinkedHashMap<>();
         allColorIcons.put(color.get(1), Arrays.asList(Arrays.asList("", " default"), Arrays.asList(" default", " default")));
@@ -77,9 +76,11 @@ public class IconsTests extends TestsInit {
         allColorIcons.forEach(
                 (k, v) -> {
                     k.hover();
-                    lastClickHoverTextsIs(colorLastClick, colorLastHover, v.get(0));
+                    colorLastClick.is().text(String.format("Last click:%s", v.get(0).get(0)));
+                    colorLastHover.is().text(String.format("Last hover:%s", v.get(0).get(1)));
                     k.click();
-                    lastClickHoverTextsIs(colorLastClick, colorLastHover, v.get(1));
+                    colorLastClick.is().text(String.format("Last click:%s", v.get(1).get(0)));
+                    colorLastHover.is().text(String.format("Last hover:%s", v.get(1).get(1)));
                 }
         );
     }
@@ -87,7 +88,8 @@ public class IconsTests extends TestsInit {
     @Test
     public void sizeIconsTest() {
         size.forEach(el -> el.is().displayed());
-        lastClickHoverTextsIs(sizeLastClick, sizeLastHover, Arrays.asList("", ""));
+        sizeLastClick.is().text("Last click:");
+        sizeLastHover.is().text("Last hover:");
 
         Map<UIElement, List<List<String>>> allSizeIcons = new LinkedHashMap<>();
         allSizeIcons.put(size.get(1), Arrays.asList(Arrays.asList("", " small size"), Arrays.asList(" small size", " small size")));
@@ -98,9 +100,11 @@ public class IconsTests extends TestsInit {
         allSizeIcons.forEach(
                 (k, v) -> {
                     k.hover();
-                    lastClickHoverTextsIs(sizeLastClick, sizeLastHover, v.get(0));
+                    sizeLastClick.is().text(String.format("Last click:%s", v.get(0).get(0)));
+                    sizeLastHover.is().text(String.format("Last hover:%s", v.get(0).get(1)));
                     k.click();
-                    lastClickHoverTextsIs(sizeLastClick, sizeLastHover, v.get(1));
+                    sizeLastClick.is().text(String.format("Last click:%s", v.get(1).get(0)));
+                    sizeLastHover.is().text(String.format("Last hover:%s", v.get(1).get(1)));
                 }
         );
     }
