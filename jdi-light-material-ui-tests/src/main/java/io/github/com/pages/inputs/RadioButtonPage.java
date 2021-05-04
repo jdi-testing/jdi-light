@@ -13,8 +13,11 @@ public class RadioButtonPage extends WebPage {
     @UI("//h2[text()='Simple radio']/following-sibling::fieldset[1]/div/label/span/span/input")
     public static List<UIElement> simpleRadioButtons;
 
+    @UI("//h2[text()='Simple radio']/following-sibling::fieldset[1]/div/label/span[2]")
+    public static List<UIElement> simpleRadioTexts;
+
     @UI("//h2[text()='Simple radio']/following-sibling::fieldset[1]/p")
-    public static Text lastCheckboxText;
+    public static Text lastRadioText;
 
     @UI("//h2[text()='Label placement']/following-sibling::fieldset[1]/div/label/span/span/input")
     public static List<UIElement> labelPlacementButtons;

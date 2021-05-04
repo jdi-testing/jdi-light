@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -19,10 +20,25 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void simpleRadioTest() {
-        simpleRadioButtons.get(1).select();
-//        for (RadioButtons radio : simpleRadioButtons) {
-//            System.out.println(radio.text());
-//        }
+        for (int i = 1; i <= 4; i++) {
+            selectRadio(i, 1);
+        }
+    }
+
+    public void selectRadio(int x, int section) {
+        switch(section) {
+            case 1 :
+                System.out.println(simpleRadioButtons.get(x).base().searchRules.toString());
+                simpleRadioButtons.get(x).select();
+                lastRadioText.has().text(Matchers.containsString(simpleRadioTexts.get(x).text()));
+                break;
+            case 2 :
+                labelPlacementButtons.get(x).select();
+                break;
+            case 3:
+                showErrorButtons.select(x);
+                break;
+        }
     }
 
     @Test
