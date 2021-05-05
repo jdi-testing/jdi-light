@@ -9,11 +9,11 @@ import java.util.List;
 
 public class RadioButtonPage extends WebPage {
 
-    @UI("//fieldset[@id='simpleRadio']//label")
+    @UI("//fieldset[@id='simpleRadio']//span[contains(@Class,'MuiRadio-root')]")
     public static List<Button> simpleRadioButtons;
 
-    @UI("//fieldset[@id='simpleRadio']//span[@id='MuiButtonBase-root']")
-    public static List<Button> simpleRadioButtonsClass;
+    @UI("//fieldset[@id='simpleRadio']//span[contains(@Class,'MuiFormControlLabel-label')]")
+    public static List<Button> simpleRadioButtonsLabel;
 
     @UI("//p[@id='lastClickContent']")
     public static Text lastRadioText;
