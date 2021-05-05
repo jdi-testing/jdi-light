@@ -47,11 +47,11 @@ public class RadioButtonTests extends TestsInit {
     public void labelPlacementTest() {
         for (int i = 1; i <= 4; i++) {
             Button currentRadioButton = labelPlacementButtons.get(i);
-            Button buttonClass = labelPlacementButtonsClass.get(i);
+            Button currentButtonClass = labelPlacementButtonsClass.get(i);
             if (i != 4)
                 currentRadioButton.has().classValue(containsString(classes.get(i - 1)));
             currentRadioButton.click();
-            timer.wait(() -> buttonClass.has().classValue(containsString("Mui-checked")));
+            timer.wait(() -> currentButtonClass.has().classValue(containsString("Mui-checked")));
         }
     }
 
