@@ -410,17 +410,20 @@ public class StaticSite {
     public static DrawerPage drawerPage;
 
     // stepper
-    @Frame("storybook-preview-iframe")
-    public static StepperFrame stepperFrame;
 
-    @Url("/material-ui-navigation-stepper--horizontal-linear-stepper")
-    public static WebPage navigationStepperHorizontalLinearStepperPage;
+    public static StepperPage stepperPage;
 
-    @Url("/material-ui-navigation-stepper--stepper-with-optional-step")
-    public static WebPage navigationStepperWithOptionalStepPage;
-
-    @Url("/material-ui-navigation-stepper--nonlinear-stepper")
-    public static WebPage navigationStepperNonlinearStepperPage;
+//    @Frame("storybook-preview-iframe")
+//    public static StepperFrame stepperFrame;
+//
+//    @Url("/material-ui-navigation-stepper--horizontal-linear-stepper")
+//    public static WebPage navigationStepperHorizontalLinearStepperPage;
+//
+//    @Url("/material-ui-navigation-stepper--stepper-with-optional-step")
+//    public static WebPage navigationStepperWithOptionalStepPage;
+//
+//    @Url("/material-ui-navigation-stepper--nonlinear-stepper")
+//    public static WebPage navigationStepperNonlinearStepperPage;
 
     // links
     @Frame("storybook-preview-iframe")
