@@ -2,6 +2,8 @@ package io.github.epam.material.tests.navigation;
 
 import static io.github.com.MaterialNavigator.openSection;
 
+import com.epam.jdi.tools.Timer;
+
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -72,19 +74,21 @@ public class StepperTests extends TestsInit {
 
     @Test
     public void verticalStepperTest(){
-        verticalStepperTitle.is().text("You are on Step 0");
-        verticalStepperButton.clickOnButtonByIndex(2);
-        verticalStepperTitle.is().text("You are on Step 1");
-        verticalStepperButton.clickOnButtonByIndex(1);
-        verticalStepperTitle.is().text("You are on Step 0");
-        verticalStepperButton.clickOnButtonByIndex(2);
-        verticalStepperTitle.is().text("You are on Step 1");
-        verticalStepperButton.clickOnButtonByIndex(2);
-        verticalStepperTitle.is().text("You are on Step 2");
-        verticalStepperButton.clickOnButtonByIndex(2);
-        verticalStepperTitle.is().text("All steps completed - you're finished");
-        verticalStepperButton.clickOnButtonByIndex(1);
-        verticalStepperTitle.is().text("You are on Step 0");
+        Timer timer = new Timer(10000L);
+
+        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 0"));
+        timer.wait(() ->verticalStepperButton.clickOnButtonByIndex(2));
+        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 1"));
+        timer.wait(() ->verticalStepperButton.clickOnButtonByIndex(1));
+        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 0"));
+        timer.wait(() ->verticalStepperButton.clickOnButtonByIndex(2));
+        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 1"));
+        timer.wait(() ->verticalStepperButton.clickOnButtonByIndex(2));
+        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 2"));
+        timer.wait(() ->verticalStepperButton.clickOnButtonByIndex(2));
+        timer.wait(() ->verticalStepperTitle.is().text("All steps completed - you're finished"));
+        timer.wait(() ->verticalStepperButton.clickOnButtonByIndex(1));
+        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 0"));
     }
 
     @Test

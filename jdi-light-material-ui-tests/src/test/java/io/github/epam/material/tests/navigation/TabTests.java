@@ -3,6 +3,8 @@ package io.github.epam.material.tests.navigation;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
+import java.util.Timer;
+
 import static io.github.com.StaticSite.defaultTabPage;
 import static io.github.com.StaticSite.disabledTabFrame;
 import static io.github.com.StaticSite.disabledTabPage;
@@ -59,6 +61,8 @@ public class TabTests extends TestsInit {
 
     @Test
     public void verticalTabTest() {
+        Timer timer = new Timer(String.valueOf(2000));
+
         verticalTabPage.open();
 
         verticalTabFrame.tabs.is().forwardScrollButtonEnabled();
