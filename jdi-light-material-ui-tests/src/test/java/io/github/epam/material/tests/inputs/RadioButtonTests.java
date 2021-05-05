@@ -32,13 +32,14 @@ public class RadioButtonTests extends TestsInit {
         for (int i = 1; i <= 4; i++) {
             Button button = simpleRadioButtons.get(i);
             Button buttonClass = simpleRadioButtonsClass.get(i);
-            button.click();
-            if (i != 4)
+            if (i != 4) {
+                button.click();
                 timer.wait(() -> buttonClass.has().classValue(Matchers.containsString("Mui-checked")));
+                lastRadioText.has().text(Matchers.containsString(button.text()));
+            }
             else
                 timer.wait(() -> buttonClass.has().classValue(Matchers.containsString("Mui-disabled")));
             button.has().text(labels.get(i - 1));
-            lastRadioText.has().text(Matchers.containsString(button.text()));
         }
     }
 
