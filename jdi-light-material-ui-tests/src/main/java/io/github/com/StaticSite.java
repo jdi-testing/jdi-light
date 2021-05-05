@@ -13,21 +13,20 @@ import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.displaydata.*;
 import io.github.com.pages.feedback.*;
 import io.github.com.pages.inputs.*;
-import io.github.com.pages.layout.BoxFrame;
+import io.github.com.pages.layout.BoxPage;
 import io.github.com.pages.inputs.ButtonGroupFrame;
 import io.github.com.pages.inputs.CheckboxPage;
 import io.github.com.pages.inputs.EnhancedTransferListFrame;
-import io.github.com.pages.inputs.FabFrame;
 import io.github.com.pages.inputs.GroupCheckBoxFrame;
+import io.github.com.pages.inputs.SelectPage;
 import io.github.com.pages.inputs.RadioButtonPage;
-import io.github.com.pages.inputs.SelectFrame;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
 import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
-import io.github.com.pages.inputs.SwitchFrame;
+import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerFrame;
-import io.github.com.pages.layout.GridFrame;
+import io.github.com.pages.layout.GridPage;
 import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
@@ -41,17 +40,7 @@ public class StaticSite {
 
     // inputs
     // switch
-    @Frame("storybook-preview-iframe")
-    public static SwitchFrame switchFrame;
-
-    @Url("/material-ui-inputs-switch--default")
-    public static WebPage inputSwitchDefaultPage;
-
-    @Url("/material-ui-inputs-switch--disabled")
-    public static WebPage inputSwitchDisabledPage;
-
-    @Url("/material-ui-inputs-switch--disabled-and-checked")
-    public static WebPage inputSwitchDisabledAndCheckedPage;
+    public static SwitchPage switchPage;
 
     //date and time pickers
     @Url("date_picker")
@@ -79,14 +68,8 @@ public class StaticSite {
     public static RadioButtonPage radioButtonPage;
 
     // floating action button
-    @Frame("storybook-preview-iframe")
-    public static FabFrame fabFrame;
-
-    @Url("/material-ui-inputs-floating-action-button--default")
-    public static WebPage inputFabDefaultPage;
-
-    @Url("/material-ui-inputs-floating-action-button--disabled")
-    public static WebPage inputFabDisabledPage;
+    @Url("/floating_action_button")
+    public static FabPage fabPage;
 
     // text field
     @Frame("storybook-preview-iframe")
@@ -130,17 +113,7 @@ public class StaticSite {
     @Url("/material-ui-inputs-button-group--split-button")
     public static WebPage inputButtonGroupSplitPage;
 
-    @Frame("storybook-preview-iframe")
-    public static SelectFrame selectFrame;
-
-    @Url("/material-ui-inputs-select--disabled-select-view")
-    public static WebPage inputSelectDisabledPage;
-
-    @Url("/material-ui-inputs-select--multiple-select-view")
-    public static WebPage inputSelectMultiplePage;
-
-    @Url("/material-ui-inputs-select--simple-select-view")
-    public static WebPage inputSelectSimplePage;
+    public static SelectPage selectPage;
 
     //slider
     @Frame("storybook-preview-iframe")
@@ -203,27 +176,12 @@ public class StaticSite {
 
     // Display data
     //icons
-    @Frame("storybook-preview-iframe")
-    public static IconsFrame iconsFrame;
-
-    @Url("/material-ui-data-display-icons--simple-icons")
-    public static WebPage simpleIconsPage;
-
-    @Url("/material-ui-data-display-icons--color-icons")
-    public static WebPage colorIconsPage;
-
-    @Url("/material-ui-data-display-icons--size-icons")
-    public static WebPage sizeIconsPage;
+    @Url("/icons")
+    public static IconsPage iconsPage;
 
     // material icon
-    @Frame("storybook-preview-iframe")
-    public static MaterialIconFrame materialIconFrame;
-
-    @Url("/material-ui-data-display-material-icons--default")
-    public static WebPage displayDataDefaultMaterialIconPage;
-
-    @Url("/material-ui-data-display-material-icons--secondary")
-    public static WebPage displayDataLargeMaterialIconPage;
+    @Url("/material_icons")
+    public static MaterialIconPage materialIconPage;
 
     @Frame("storybook-preview-iframe")
     public static ModalFrame modalFrame;
@@ -235,8 +193,6 @@ public class StaticSite {
     public static WebPage serverSideModalPage;
 
     // typography
-    @Frame("storybook-preview-iframe")
-    public static TypographyFrame typographyFrame;
     // utils
     // popper
     @Frame("storybook-preview-iframe")
@@ -252,8 +208,7 @@ public class StaticSite {
     public static WebPage utilsPositionedPoppersPage;
 
 
-    @Url("/material-ui-data-display-typography--typography-view")
-    public static WebPage dataDisplayTypographyPage;
+    public static TypographyPage typographyPage;
 
     // badge
     @Frame("storybook-preview-iframe")
@@ -406,14 +361,8 @@ public class StaticSite {
     public static ClickAwayListenerPage clickAwayListenerPage;
 
     // transition
-    @Frame("storybook-preview-iframe")
-    public static TransitionFrame transitionFrame;
-
-    @Url("/material-ui-utils-transitions--fade-transition")
-    public static WebPage utilsTransitionFadePage;
-
-    @Url("/material-ui-utils-transitions--collapse-transition")
-    public static WebPage utilsTransitionCollapsePage;
+    @Url("/transitions")
+    public static TransitionPage transitionPage;
 
     // popover
     @Frame("storybook-preview-iframe")
@@ -530,11 +479,8 @@ public class StaticSite {
     public static WebPage defaultHiddenPage;
 
     // box
-    @Frame("storybook-preview-iframe")
-    public static BoxFrame boxFrame;
-
-    @Url("/material-ui-layout-box--default")
-    public static WebPage defaultBoxPage;
+    @Url("/box_layout")
+    public static BoxPage defaultBoxPage;
 
     // container
     @Frame("storybook-preview-iframe")
@@ -544,8 +490,8 @@ public class StaticSite {
     public static WebPage defaultContainerPage;
 
     // grid
-    @Frame("storybook-preview-iframe")
-    public static GridFrame gridFrame;
+    @Url("grid_layout")
+    public static GridPage gridPage;
 
     @Url("/material-ui-layout-grid--grid-view")
     public static WebPage defaultGridPage;

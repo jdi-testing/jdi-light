@@ -1,40 +1,44 @@
 package io.github.epam.material.tests.layout;
 
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static org.hamcrest.Matchers.hasToString;
+import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.pages.layout.BoxPage.containedBox;
+import static io.github.com.pages.layout.BoxPage.disabledBox;
+import static io.github.com.pages.layout.BoxPage.lastClickContent;
+import static io.github.com.pages.layout.BoxPage.outlinedBox;
 
 public class BoxTests extends TestsInit {
 
+    @BeforeTest
+    public void before() {
+        openSection("Box");
+    }
+
     @Test
     public void containedBoxTest() {
-        defaultBoxPage.open();
-
-        boxFrame.containedBox.is().enabled();
-        boxFrame.containedBox.click();
-        boxFrame.containedBox.is().text(hasToString("BUTTON"));
-
-        boxFrame.rootContainedBox.is().attr("element1", "[object Object]");
-        boxFrame.rootContainedBox.is().attr("element2", "[object Object]");
-        boxFrame.rootContainedBox.is().attr("element3", "[object Object]");
-        }
+        Timer timer = new Timer(1000L);
+        timer.wait(() -> containedBox.isDisplayed());
+        containedBox.click();
+        containedBox.is().text("FIRST BUTTON");
+        lastClickContent.is().text("You clicked First button");
+    }
 
     @Test
     public void outlinedBoxTest() {
-        defaultBoxPage.open();
-
-        boxFrame.outlinedBox.is().enabled();
-        boxFrame.outlinedBox.click();
-        boxFrame.outlinedBox.is().text(hasToString("BUTTON"));
+        outlinedBox.is().displayed();
+        outlinedBox.click();
+        outlinedBox.is().text("SECOND BUTTON");
+        lastClickContent.is().text("You clicked Second button");
     }
 
     @Test
     public void disabledBoxTest() {
-        defaultBoxPage.open();
-
-        boxFrame.disabledBox.is().text(hasToString("BUTTON"));
-        boxFrame.disabledBox.is().disabled();
+        disabledBox.is().displayed();
+        disabledBox.is().text("THIRD BUTTON");
+        disabledBox.is().disabled();
     }
 }
