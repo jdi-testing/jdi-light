@@ -14,9 +14,10 @@ import static io.github.com.StaticSite.radioButtonPage;
 
 
 public class RadioButtonTests extends TestsInit {
-    static ArrayList<String> labels = new ArrayList() {{add("First"); add("Second"); add("Third"); add("Disabled");}};
-    static ArrayList<String> classes = new ArrayList() {{add("Top"); add("Start"); add("Bottom");}};
-    static ArrayList<String> messages = new ArrayList() {{add("You got it!"); add("Sorry, wrong answer!");}};
+    static private ArrayList<String> labels = new ArrayList() {{add("First"); add("Second"); add("Third"); add("Disabled");}};
+    static private ArrayList<String> classes = new ArrayList() {{add("Top"); add("Start"); add("Bottom");}};
+    static private ArrayList<String> messages = new ArrayList() {{add("You got it!"); add("Sorry, wrong answer!");}};
+    static private Timer timer = new Timer(5000L);
 
     @BeforeTest()
     public void beforeTest() {
@@ -50,7 +51,7 @@ public class RadioButtonTests extends TestsInit {
             case 1 :
                 simpleRadioButtons.get(x).select();
                 if (x != 4)
-                    new Timer(5000L).wait(() -> simpleRadioButtonsClass.get(x).has().classValue(Matchers.containsString("Mui-checked")));
+                    timer.wait(() -> simpleRadioButtonsClass.get(x).has().classValue(Matchers.containsString("Mui-checked")));
                 simpleRadioButtons.get(x).has().text(labels.get(x - 1));
                 lastRadioText.has().text(Matchers.containsString(simpleRadioButtons.get(x).text()));
                 break;
@@ -58,12 +59,12 @@ public class RadioButtonTests extends TestsInit {
                 if (x != 4)
                     labelPlacementButtons.get(x).has().classValue(Matchers.containsString(classes.get(x - 1)));
                 labelPlacementButtons.get(x).select();
-                new Timer(5000L).wait(() -> labelPlacementButtonsClass.get(x).has().classValue(Matchers.containsString("Mui-checked")));
+                timer.wait(() -> labelPlacementButtonsClass.get(x).has().classValue(Matchers.containsString("Mui-checked")));
                 break;
             case 3:
                 showErrorButtons.get(x).select();
                 checkAnswer.click();
-                new Timer(5000L).wait(() -> errorText.is().text(messages.get(x - 1)));
+                timer.wait(() -> errorText.is().text(messages.get(x - 1)));
                 break;
             default:
                 break;
