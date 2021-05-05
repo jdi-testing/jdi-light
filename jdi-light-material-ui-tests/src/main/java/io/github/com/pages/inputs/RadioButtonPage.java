@@ -9,27 +9,28 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import java.util.List;
 
 public class RadioButtonPage extends WebPage {
-    @UI("//h2[text()='Simple radio']/following-sibling::fieldset[1]/div/label")
-    public static List<UIElement> simpleRadioButtons;
 
-    @UI("//h2[text()='Simple radio']/following-sibling::fieldset[1]/div/label/span[1]")
-    public static List<UIElement> simpleRadioButtonsClass;
+    @UI("//fieldset[@id='simpleRadio']//label")
+    public static List<Button> simpleRadioButtons;
 
-    @UI("//h2[text()='Simple radio']/following-sibling::fieldset[1]/p")
+    @UI("//fieldset[@id='simpleRadio']//span[@id='MuiButtonBase-root']")
+    public static List<Button> simpleRadioButtonsClass;
+
+    @UI("//p[@id='lastClickContent']")
     public static Text lastRadioText;
 
     @UI("//h2[text()='Label placement']/following-sibling::fieldset[1]/div/label")
-    public static List<UIElement> labelPlacementButtons;
+    public static List<Button> labelPlacementButtons;
 
     @UI("//h2[text()='Label placement']/following-sibling::fieldset[1]/div/label/span[1]")
-    public static List<UIElement> labelPlacementButtonsClass;
+    public static List<Button> labelPlacementButtonsClass;
 
     @UI("//h2[text()='Show error']/following-sibling::form/fieldset/div/label")
-    public static List<UIElement> showErrorButtons;
+    public static List<Button> showErrorButtons;
 
     @UI("//h2[text()='Show error']/following-sibling::form/fieldset/p")
     public static Text errorText;
 
-    @UI("//h2[text()='Show error']/following-sibling::form/fieldset/button")
+    @UI("//h2[text()='Show error']/following::button")
     public static Button checkAnswer;
 }
