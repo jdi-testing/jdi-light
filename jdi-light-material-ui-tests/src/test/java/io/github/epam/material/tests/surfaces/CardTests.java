@@ -23,8 +23,8 @@ public class CardTests extends TestsInit {
     }
 
     private void textCheck(int index) {
-        jdiAssert(pTagTexts.get(index).text(), Matchers.is("Word of the Day"));
-        jdiAssert(h2TagTexts.get(index).text(), Matchers.is("be•nev•o•lent"));
+        pTagTexts.get(index).has().text(Matchers.is("Word of the Day"));
+        h2TagTexts.get(index).has().text(Matchers.is("be•nev•o•lent"));
     }
 
     @Test
@@ -35,27 +35,25 @@ public class CardTests extends TestsInit {
     @Test
     public void outlinedCardTest() {
         textCheck(2);
-        jdiAssert(outlinedCard.hasClass("MuiPaper-outlined"), Matchers.is(true));
+        outlinedCard.has().classValue(Matchers.containsString("MuiPaper-outlined"));
     }
 
     @Test
     public void complexCardTest() {
         String expectedText = "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.";
-        jdiAssert(pTagTexts.get(3).text(), Matchers.is(expectedText));
+        pTagTexts.get(3).has().text(Matchers.is(expectedText));
         complexCardImage.is().displayed();
 
         complexCardHeartIconButton.click();
-        boolean hasClass = new Timer(1000L)
+        new Timer(1000L)
                 .wait(() -> complexCardHeartIcon.has().classValue(Matchers.containsString("jss")));
-        jdiAssert(hasClass, Matchers.is(true));
 
         complexCardHeartIconButton.click();
-        hasClass = new Timer(1000L)
+        new Timer(1000L)
                 .wait(() -> complexCardHeartIcon.has().classValue(Matchers.not("jss")));
-        jdiAssert(hasClass, Matchers.is(true));
 
         complexCardSliderDownButton.click();
         complexCardHiddenTextArea.is().displayed();
-        jdiAssert(complexCardHiddenText.text(), Matchers.is("Method:"));
+        complexCardHiddenText.has().text(Matchers.containsString("Method:"));
     }
 }
