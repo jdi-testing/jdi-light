@@ -14,7 +14,9 @@ import static io.github.com.pages.inputs.RadioButtonPage.*;
 import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.StaticSite.radioButtonPage;
 
-
+/**
+ * To see an example of Radio Button web element please visit https://material-ui.com/components/radio-buttons/
+ */
 public class RadioButtonTests extends TestsInit {
     static private final List<String> labels = Arrays.asList("First", "Second", "Third", "Disabled");
     static private final List<String> classes = Arrays.asList("Top", "Start", "Bottom");
