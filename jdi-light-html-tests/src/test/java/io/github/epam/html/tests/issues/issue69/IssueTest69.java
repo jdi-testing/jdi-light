@@ -69,6 +69,7 @@ public class IssueTest69 {
                 { "paragraphsList"},
                 { "templateData"  },
                 { "paragraphsData"}
+                default: break;
         };
     }
     // endregion
