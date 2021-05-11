@@ -3,15 +3,14 @@ package io.github.epam.material.tests.layout;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.containerFrame;
-import static io.github.com.StaticSite.defaultContainerPage;
+import static io.github.com.StaticSite.containerPage;
 
 public class ContainerTests extends TestsInit {
     @Test
     public void defaultContainerTest(){
-        defaultContainerPage.open();
-
-        containerFrame.container.is().displayed();
-        containerFrame.container.is().hasStyle("background-color: rgb(207, 232, 252)");
+        containerPage.open();
+        containerPage.container.is().displayed();
+        containerPage.container.is().text("Example text");
+        containerPage.container.is().attr("style", "background-color: rgb(207, 232, 252); height: 100vh;");
     }
 }
