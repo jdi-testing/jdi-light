@@ -11,14 +11,12 @@ import com.epam.jdi.light.ui.html.elements.common.TextField;
 import java.util.ArrayList;
 
 public class StepperPage extends WebPage {
-
     //Simple Linear Stepper
     @UI("//*[@id='simpleStepper']//following-sibling::div//*[@class='MuiTypography-root MuiTypography-body1']")
     public static Text simpleLinearStepperTitle;
 
     @UI("//*[@id='simpleStepper']//following-sibling::div//button[contains(@class, 'MuiButtonBase-root')]")
     public static WebList simpleLinearStepperButton;
-
 
     //Non-linear Stepper
     @UI("//*[@id='nonLinearStepper']//following-sibling::div//*[@class='MuiTypography-root MuiTypography-body1']")
@@ -27,16 +25,12 @@ public class StepperPage extends WebPage {
     @UI("//*[@id='nonLinearStepper']//following-sibling::div//button[contains(@class, 'MuiButtonBase-root')]")
     public static WebList nonlinearStepperButton;
 
-
     //Vertical Stepper
-//    @JDIStepper(stepperTitle = "//*[@id='activeVerticalStep']")
     @UI("(//*[text()='Vertical stepper']/following-sibling::div//p)[1]")
     public static Text verticalStepperTitle;
 
     @UI("//*[text()='Vertical stepper']/following-sibling::div//button[contains(@class, MuiButtonBase-root)]")
     public static WebList verticalStepperButton;
-
-
 
     //Mobile Text Stepper
     @UI("(//*[text()='Mobile text stepper']/following-sibling::div//*[contains(@class, 'MuiMobileStepper-root')])[1]")
@@ -45,14 +39,12 @@ public class StepperPage extends WebPage {
     @UI("//*[text()='Mobile text stepper']/following-sibling::div//button")
     public static WebList mobileTextStepperButton;
 
-
     //Mobile Dots Stepper
     @UI("//*[@id='activeDotStep']")
     public static Text mobileDotsStepperTitle;
 
     @UI("//*[text()='Mobile dots stepper']/following-sibling::div//button")
     public static WebList mobileDotsStepperButton;
-
 
     //Mobile Progress Stepper
     @UI("//*[@id='activeProgressStep']")
