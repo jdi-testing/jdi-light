@@ -1,13 +1,12 @@
 package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.util.*;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.iconsPage;
 import static io.github.com.pages.displaydata.IconsPage.*;
 
 /**
@@ -18,7 +17,7 @@ public class IconsTests extends TestsInit {
 
     @BeforeTest
     public void beforeTest() {
-        openSection("Icons");
+        iconsPage.open();
     }
     
     @Test

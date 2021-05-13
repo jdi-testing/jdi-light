@@ -11,7 +11,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static io.github.com.pages.inputs.RadioButtonPage.*;
-import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.StaticSite.radioButtonPage;
 
 /**
@@ -25,7 +24,7 @@ public class RadioButtonTests extends TestsInit {
 
     @BeforeTest()
     public void beforeTest() {
-        openSection("Radio");
+        radioButtonPage.open();
         radioButtonPage.isOpened();
     }
 

@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.StaticSite.textAreaAutoSizePage;
 import static io.github.com.pages.utils.TextAreaAutoSizePage.*;
 import static org.hamcrest.MatcherAssert.assertThat;

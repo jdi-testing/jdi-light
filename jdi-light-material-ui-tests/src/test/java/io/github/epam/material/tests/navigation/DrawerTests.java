@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.navigation;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.*;
 import static io.github.com.pages.navigation.DrawerPage.*;
 import static org.testng.Assert.*;
 import static org.hamcrest.Matchers.containsString;
@@ -24,7 +24,7 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 1)
     public void temporaryDrawerTest() {
-        openSection("Drawer", "Temporary Drawer");
+        temporaryDrawerPage.open();
         List<Button> buttons = Arrays.asList(leftButton, rightButton, topButton, bottomButton);
         buttons.forEach(
                 button -> {
@@ -47,7 +47,7 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 2)
     public void swipeableDrawerTest() {
-        openSection("Drawer", "Swipeable Drawer");
+        swipeableDrawerPage.open();
         List<Button> buttons = Arrays.asList(leftButton, rightButton, topButton, bottomButton);
         buttons.forEach(
                 button -> {
@@ -70,7 +70,7 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 3)
     public void responsiveDrawerTest() {
-        openSection("Drawer", "Responsive Drawer");
+        responsiveDrawerPage.open();
         drawer.is().displayed();
         drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
         drawerElementsIcon.forEach(
@@ -90,7 +90,7 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 4)
     public void persistentDrawerTest() {
-        openSection("Drawer", "Persistent Drawer");
+        persistentDrawerPage.open();
         drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
         drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
 
@@ -113,7 +113,7 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 5)
     public void miniDrawerTest() {
-        openSection("Drawer", "Mini Drawer");
+        miniDrawerPage.open();
         drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
         drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
 
@@ -141,7 +141,7 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 6)
     public void permanentDrawerTest() {
-        openSection("Drawer", "Permanent Drawer");
+        permanentDrawerPage.open();
         drawer.is().displayed();
         drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
         drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
@@ -162,7 +162,7 @@ public class DrawerTests extends TestsInit {
 
     @Test(priority = 7)
     public void clippedDrawerTest() {
-        openSection("Drawer", "Clipped Drawer");
+        clippedDrawerPage.open();
         drawer.is().displayed();
         drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
         drawerContent.get(1).is().text(containsString(firstPartOfTextContent));

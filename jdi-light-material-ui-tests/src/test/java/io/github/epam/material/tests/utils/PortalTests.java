@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.portalPage;
 import static io.github.com.pages.utils.PortalPage.*;
 
 /**
@@ -17,7 +17,7 @@ public class PortalTests extends TestsInit {
 
     @BeforeMethod
     public void openSectionToTest() {
-        openSection("Portal");
+        portalPage.open();
     }
 
     @Test

@@ -1,9 +1,7 @@
 package io.github.epam.material.tests.surfaces;
 
-import static io.github.com.MaterialNavigator.openSection;
-import static io.github.com.StaticSite.surfaceCardPage;
+import static io.github.com.StaticSite.cardPage;
 import static io.github.com.pages.surfaces.CardPage.*;
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
@@ -18,8 +16,8 @@ public class CardTests extends TestsInit {
 
     @BeforeTest
     public void beforeTest() {
-        openSection("Card");
-        surfaceCardPage.isOpened();
+        cardPage.open();
+        cardPage.isOpened();
     }
 
     private void textCheck(int index) {

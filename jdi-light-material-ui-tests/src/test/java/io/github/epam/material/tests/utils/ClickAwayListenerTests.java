@@ -6,7 +6,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.StaticSite.clickAwayListenerPage;
 
 /**
@@ -16,7 +15,7 @@ public class ClickAwayListenerTests extends TestsInit {
 
     @BeforeTest
     public void beforeTest() {
-        openSection("Click Away Listener");
+        clickAwayListenerPage.open();
         clickAwayListenerPage.shouldBeOpened();
     }
 

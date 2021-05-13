@@ -40,6 +40,7 @@ public class StaticSite {
 
     // inputs
     // switch
+    @Url("/basic_switches")
     public static SwitchPage switchPage;
 
     //date and time pickers
@@ -60,7 +61,7 @@ public class StaticSite {
     @Url("/material-ui-inputs-transfer-list--enhanced-transfer-list-view")
     public static WebPage inputEnhancedTransferListPage;
 
-
+    @Url("/buttons")
     public static ButtonPage buttonPage;
 
     // radio
@@ -113,6 +114,7 @@ public class StaticSite {
     @Url("/material-ui-inputs-button-group--split-button")
     public static WebPage inputButtonGroupSplitPage;
 
+    @Url("/selects")
     public static SelectPage selectPage;
 
     //slider
@@ -130,7 +132,7 @@ public class StaticSite {
 
     // surfaces
     // accordion
-    @Frame("storybook-preview-iframe")
+    @Url("/accordion_surface")
     public static AccordionPage accordionPage;
 
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
@@ -140,13 +142,14 @@ public class StaticSite {
     public static AppBarFrame appBarFrame;
 
     // paper
+    @Url("/paper_surface")
     public static PaperPage paperPage;
 
     @Url("/material-ui-surfaces-app-bar--simple-app-bar")
     public static WebPage surfaceSimpleAppBarPage;
 
     @Url("/card_surface")
-    public static CardPage surfaceCardPage;
+    public static CardPage cardPage;
 
     // data display
     // divider
@@ -164,10 +167,11 @@ public class StaticSite {
 
     // feedback
     // dialog
+    @Url("/dialog")
     public static DialogPage dialogPage;
 
     @Url("/avatar")
-    public static AvatarPage dataDisplayAvatarPage;
+    public static AvatarPage avatarPage;
 
     public static GroupCheckBoxFrame groupCheckBoxFrame;
 
@@ -207,12 +211,12 @@ public class StaticSite {
     @Url("/material-ui-utils-popper--positioned")
     public static WebPage utilsPositionedPoppersPage;
 
-
+    @Url("/typography")
     public static TypographyPage typographyPage;
 
     // badge
-    @Frame("storybook-preview-iframe")
-    public static BadgePage badgeFrame;
+    @Url("/badge")
+    public static BadgePage badgePage;
 
     // tooltip
     @Frame("storybook-preview-iframe")
@@ -280,7 +284,7 @@ public class StaticSite {
 
     // feedback
     // backdrop
-    @Frame("storybook-preview-iframe")
+    @Url("/backdrop")
     public static BackdropPage backdropPage;
 
     @Url("/material-ui-feedback-backdrop--default-backdrop")
@@ -325,8 +329,8 @@ public class StaticSite {
     public static WebPage delayingAppearancePage;
 
     // snackbar
-    @Frame("storybook-preview-iframe")
-    public static SnackbarPage simpleSnackbarPage;
+    @Url("/snackbar")
+    public static SnackbarPage snackbarPage;
 
     // navigation
     // tabs
@@ -365,7 +369,7 @@ public class StaticSite {
     public static TransitionPage transitionPage;
 
     // popover
-    @Frame("storybook-preview-iframe")
+    @Url("/popover")
     public static PopoverPage popoverPage;
 
     // utils
@@ -404,7 +408,26 @@ public class StaticSite {
     public static WebPage customizedBreadcrumbsPage;
 
     // drawer
-    public static DrawerPage drawerPage;
+    @Url("/temporary_drawer")
+    public static DrawerPage temporaryDrawerPage;
+
+    @Url("/swipeable_drawer")
+    public static DrawerPage swipeableDrawerPage;
+
+    @Url("/responsive_drawer")
+    public static DrawerPage responsiveDrawerPage;
+
+    @Url("/persistent_drawer")
+    public static DrawerPage persistentDrawerPage;
+
+    @Url("/mini_drawer")
+    public static DrawerPage miniDrawerPage;
+
+    @Url("/permanent_drawer")
+    public static DrawerPage permanentDrawerPage;
+
+    @Url("/clipped_drawer")
+    public static DrawerPage clippedDrawerPage;
 
     // stepper
     @Frame("storybook-preview-iframe")
@@ -480,7 +503,7 @@ public class StaticSite {
 
     // box
     @Url("/box_layout")
-    public static BoxPage defaultBoxPage;
+    public static BoxPage boxPage;
 
     // container
     @Frame("storybook-preview-iframe")
