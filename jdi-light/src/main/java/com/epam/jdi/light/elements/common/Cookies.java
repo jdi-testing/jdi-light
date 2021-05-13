@@ -53,7 +53,7 @@ public class Cookies {
      * @param cookies Specify collection of the cookies
      *               Add cookies in browser
      */
-    @JDIAction("Add cookie '{0}'")
+    @JDIAction("Add cookies '{0}'")
     public static void addCookies(Collection<Cookie> cookies) {
         if (cookies == null)
             return;
@@ -63,7 +63,7 @@ public class Cookies {
      * @param cookies Specify collection of the cookies
      *               Add cookies in browser
      */
-    @JDIAction("Add cookie '{0}'")
+    @JDIAction("Set cookies '{0}'")
     public static void setCookies(Collection<Cookie> cookies) {
         clearAllCookies();
         addCookies(cookies);
@@ -78,14 +78,14 @@ public class Cookies {
     /**
      * Clear browsers cache
      */
-    @JDIAction("Delete all cookies")
+    @JDIAction("Delete cookie {0}")
     public static void deleteCookie(Cookie cookie) {
         manage().deleteCookie(cookie);
     }
     /**
      * Clear browsers cache
      */
-    @JDIAction("Delete all cookies")
+    @JDIAction("Delete cookie by name '{0}'")
     public static void deleteCookie(String name) {
         manage().deleteCookieNamed(name);
     }
