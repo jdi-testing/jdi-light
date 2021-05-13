@@ -135,8 +135,21 @@ public class StaticSite {
     @Url("/accordion_surface")
     public static AccordionPage accordionPage;
 
-    @Url("/material-ui-surfaces-app-bar--simple-app-bar")
-    public static AppBarPage appBarPage;
+    // appbar
+    @Url("/appbar_surface")
+    public static AppBarPage simpleAppBarPage;
+
+    @Url("/appbar_bottom")
+    public static WebPage bottomAppBarPage;
+
+    @Url("/appbar_scroll_hide")
+    public static WebPage hideAppBarPage;
+
+    @Url("/appbar_elevate")
+    public static WebPage elevateAppBarPage;
+
+    @Url("/appbar_back_to_top")
+    public static WebPage backToTopPage;
 
     // paper
     @Url("/paper_surface")

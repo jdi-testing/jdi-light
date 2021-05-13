@@ -12,34 +12,34 @@ public class AppBarPage extends WebPage {
     @UI("//span[text()='App Bar']")
     public static UIElement appBar;
 
-    @UI("//*[text()='Simple App bar']/following-sibling::div[1]//button[1]")
+    @UI("//*[text()='App Bar with menu']/preceding::button[@aria-label='menu']")
     public static UIElement simpleMenu;
 
-    @UI("//*[text()='App Bar with menu']/following-sibling::div[1]//button[contains(@Class, 'MuiIconButton-edgeStart')]")
+    @UI("//*[text()='Prominent App Bar']/preceding::button[@aria-label='menu'][1]")
     public static UIElement appBarMenu;
 
-    @UI("//*[text()='Prominent App Bar']/following-sibling::div[1]//button[1]")
+    @UI("//*[text()='Prominent App Bar']/following::button[@aria-label='open drawer']")
     public static UIElement prominentMenu;
 
-    @UI("//*[text()='Simple App bar']/following-sibling::div[1]//h6")
+    @UI("//*[text()='Simple App bar']/following::h6[1]")
     public static Text simpleText;
 
-    @UI("//*[text()='App Bar with menu']/following-sibling::div[1]//h6")
+    @UI("//*[text()='App Bar with menu']/following::h6")
     public static Text appBarText;
 
-    @UI("//*[text()='Prominent App Bar']/following-sibling::div[1]//h5")
+    @UI("//*[text()='Prominent App Bar']/following::h5")
     public static Text prominentText;
 
-    @UI("//*[text()='Simple App bar']/following-sibling::div[1]//button[2]")
+    @UI("//*[text()='Simple App bar']/following::button[2]")
     public static Button simpleButton;
 
-    @UI("//*[text()='App Bar with menu']/following-sibling::div[1]//div/div/button")
+    @UI("//*[text()='Simple App bar']/following::button[4]")
     public static UIElement appBarIcon;
 
-    @UI("//*[text()='Prominent App Bar']/following-sibling::div[1]//button[2]")
+    @UI("//*[text()='Simple App bar']/following::button[6]")
     public static UIElement prominentSearch;
 
-    @UI("//*[text()='Prominent App Bar']/following-sibling::div[1]//button[3]")
+    @UI("//*[text()='Simple App bar']/following::button[7]")
     public static UIElement prominentSecondMenu;
 
     @UI("[role='menuitem']")

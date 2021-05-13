@@ -2,11 +2,15 @@ package io.github.epam.material.tests.surfaces;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.simpleAppBarPage;
+import static io.github.com.StaticSite.hideAppBarPage;
+import static io.github.com.StaticSite.elevateAppBarPage;
+import static io.github.com.StaticSite.backToTopPage;
+import static io.github.com.StaticSite.bottomAppBarPage;
 import static io.github.com.pages.surfaces.AppBarPage.*;
+import static  org.hamcrest.Matchers.containsString;
 
 /**
  * To see an example of App Bar web element please visit https://material-ui.com/components/app-bar/
@@ -16,29 +20,36 @@ public class AppBarTests extends TestsInit {
 
     @Test
     public void simpleAppBarTest() {
-        openSection("App Bar", "Simple App Bars");
-        simpleMenu.is().enabled();
-        appBarMenu.is().enabled();
-        prominentMenu.is().enabled();
+        simpleAppBarPage.open();
+        simpleAppBarPage.shouldBeOpened();
+        simpleMenu.is().displayed();
+        appBarMenu.is().displayed();
+        prominentMenu.is().displayed();
         simpleText.has().text("News");
         appBarText.has().text("Photos");
         prominentText.has().text("Material-UI");
-        simpleButton.is().enabled();
-        appBarIcon.is().enabled();
-        prominentSearch.is().enabled();
-        prominentSecondMenu.is().enabled();
+        simpleButton.is().displayed();
+        appBarIcon.is().displayed();
+        prominentSearch.is().displayed();
+        prominentSecondMenu.is().displayed();
 
         logoutSwitchButton.click();
-        appBarIcon.is().notVisible();
+        timer.wait(() -> appBarIcon.is().notVisible());
         logoutSwitchButton.click();
-        appBarIcon.is().displayed();
+        timer.wait(() -> appBarIcon.is().displayed());
         appBarIcon.click();
-        appBarIconOptions.get(1).is().displayed();
+        timer.wait(() -> appBarIconOptions.get(1).is().displayed());
+        appBarIconOptions.get(1).click();
+        timer.wait(() -> {
+            appBarIconOptions.get(1).is().notVisible();
+            appBarIcon.is().visible();
+        });
     }
 
     @Test
     public void bottomAppBarTest() {
-        openSection("App Bar", "Bottom App Bar");
+        bottomAppBarPage.open();
+        bottomAppBarPage.shouldBeOpened();
         bottomButton.is().displayed();
         bottomMenuButton.is().displayed();
         bottomSearchButton.is().displayed();
@@ -47,7 +58,8 @@ public class AppBarTests extends TestsInit {
 
     @Test
     public void hideAppBarTest() {
-        openSection("App Bar", "Hide App Bar");
+        hideAppBarPage.open();
+        hideAppBarPage.shouldBeOpened();
         topAppBar.is().displayed();
         appBar.core().jsExecute("scrollIntoView()");
         timer.wait(() -> topAppBar.is().hidden());
@@ -55,19 +67,21 @@ public class AppBarTests extends TestsInit {
 
     @Test
     public void elevateAppBarTest() {
-        openSection("App Bar", "Elevate App Bar");
-        elevateAppBar.has().classValue(Matchers.containsString("MuiPaper-elevation0"));
+        elevateAppBarPage.open();
+        elevateAppBarPage.shouldBeOpened();
+        elevateAppBar.has().classValue(containsString("MuiPaper-elevation0"));
         appBar.core().jsExecute("scrollIntoView()");
-        elevateAppBar.has().classValue(Matchers.containsString("MuiPaper-elevation4"));
+        timer.wait(() -> elevateAppBar.has().classValue(containsString("MuiPaper-elevation4")));
     }
 
     @Test
     public void backToTopTest() {
-        openSection("App Bar", "Back to top");
+        backToTopPage.open();
+        backToTopPage.shouldBeOpened();
         scrollBackText.is().visible();
         scrollBackToTopButton.is().hidden();
         appBar.core().jsExecute("scrollIntoView()");
-        scrollBackText.is().notVisible();
+        timer.wait(() -> scrollBackText.is().notVisible());
         scrollBackToTopButton.click();
         timer.wait(() -> {
             scrollBackToTopButton.is().hidden();
