@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.layout;
 
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -19,7 +20,8 @@ public class ContainerTests extends TestsInit {
 
     @Test
     public void defaultContainerTest(){
-        container.is().displayed();
+        Timer timer = new Timer(1000L);
+        timer.wait(() -> container.isDisplayed());
         container.is().text("Example text");
         container.is().attr("style", "background-color: rgb(207, 232, 252); height: 100vh;");
     }
