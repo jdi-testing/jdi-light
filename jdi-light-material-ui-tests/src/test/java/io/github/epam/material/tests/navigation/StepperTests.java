@@ -1,20 +1,19 @@
 package io.github.epam.material.tests.navigation;
 
-import static io.github.com.MaterialNavigator.openSection;
-
 import com.epam.jdi.tools.Timer;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static io.github.com.StaticSite.stepperPage;
 import static io.github.com.pages.navigation.StepperPage.*;
 
 
 public class StepperTests extends TestsInit {
     @BeforeMethod
     public void chooseSection() {
-        openSection("Stepper");
+        stepperPage.open();
     }
 
     @Test

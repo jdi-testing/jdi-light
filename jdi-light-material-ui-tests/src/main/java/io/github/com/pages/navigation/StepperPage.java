@@ -3,12 +3,7 @@ package io.github.com.pages.navigation;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.annotations.JDIStepper;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
-
-import java.util.ArrayList;
 
 public class StepperPage extends WebPage {
     @UI("//*[@id='simpleStepper']//following-sibling::div//*[@class='MuiTypography-root MuiTypography-body1']")

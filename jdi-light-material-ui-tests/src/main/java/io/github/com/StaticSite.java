@@ -411,19 +411,9 @@ public class StaticSite {
 
     // stepper
 
+    @Url("/steppers")
     public static StepperPage stepperPage;
 
-//    @Frame("storybook-preview-iframe")
-//    public static StepperFrame stepperFrame;
-//
-//    @Url("/material-ui-navigation-stepper--horizontal-linear-stepper")
-//    public static WebPage navigationStepperHorizontalLinearStepperPage;
-//
-//    @Url("/material-ui-navigation-stepper--stepper-with-optional-step")
-//    public static WebPage navigationStepperWithOptionalStepPage;
-//
-//    @Url("/material-ui-navigation-stepper--nonlinear-stepper")
-//    public static WebPage navigationStepperNonlinearStepperPage;
 
     // links
     @Frame("storybook-preview-iframe")
