@@ -24,15 +24,10 @@ import static org.mytests.uiobjects.example.site.pages.UsersPage.users;
 import static org.mytests.uiobjects.example.site.pages.UsersPage.usersSetup;
 
 public class DataTableTests extends TestsInit {
-    private boolean firstTime = true;
     @BeforeEach
     void before() {
         shouldBeLoggedIn();
         usersPage.shouldBeOpened();
-        if (firstTime) {
-            usersPage.open();
-            firstTime = false;
-        }
     }
 
     @Test

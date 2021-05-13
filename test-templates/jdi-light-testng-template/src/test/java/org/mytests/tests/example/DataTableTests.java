@@ -24,14 +24,10 @@ import static org.mytests.uiobjects.example.site.pages.UsersPage.usersSetup;
 import static org.testng.Assert.assertEquals;
 
 public class DataTableTests implements TestsInit {
-    private boolean firstTime = true;
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        if (firstTime) {
-            usersPage.open();
-            firstTime = false;
-        }
+        usersPage.shouldBeOpened();
     }
 
     @Test

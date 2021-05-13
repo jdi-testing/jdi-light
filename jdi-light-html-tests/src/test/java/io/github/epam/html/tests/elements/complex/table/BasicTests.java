@@ -23,7 +23,7 @@ public class BasicTests implements TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        tablePage.open();
+        tablePage.shouldBeOpened();
     }
 
     @Test

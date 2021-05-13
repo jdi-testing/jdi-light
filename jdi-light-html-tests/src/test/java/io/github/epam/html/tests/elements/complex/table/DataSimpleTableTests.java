@@ -26,22 +26,12 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.testng.Assert.assertEquals;
 
 public class DataSimpleTableTests implements TestsInit {
-    private boolean firstTime = true;
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         usersPage.shouldBeOpened();
-        if (firstTime) {
-            usersPage.open();
-            firstTime = false;
-        }
     }
 
-    @Test
-    public void screenshotTest() {
-        // TODO
-        //usersData.core().makePhoto();
-    }
     @Test
     public void tableParamsTest() {
         WebPage.windowScreenshot();
