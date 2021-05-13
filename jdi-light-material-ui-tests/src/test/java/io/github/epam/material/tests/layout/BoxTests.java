@@ -1,11 +1,10 @@
 package io.github.epam.material.tests.layout;
 
-import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.boxPage;
 import static io.github.com.pages.layout.BoxPage.containedBox;
 import static io.github.com.pages.layout.BoxPage.disabledBox;
 import static io.github.com.pages.layout.BoxPage.lastClickContent;
@@ -15,13 +14,11 @@ public class BoxTests extends TestsInit {
 
     @BeforeTest
     public void before() {
-        openSection("Box");
+        boxPage.open();
     }
 
     @Test
     public void containedBoxTest() {
-        Timer timer = new Timer(1000L);
-        timer.wait(() -> containedBox.isDisplayed());
         containedBox.click();
         containedBox.is().text("FIRST BUTTON");
         lastClickContent.is().text("You clicked First button");

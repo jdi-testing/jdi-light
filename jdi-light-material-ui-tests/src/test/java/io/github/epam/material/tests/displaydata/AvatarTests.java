@@ -1,7 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 
@@ -10,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.avatarPage;
 import static io.github.com.pages.displaydata.AvatarPage.onlineStatus;
 import static io.github.com.pages.displaydata.AvatarPage.avatarWithPhoto;
 import static io.github.com.pages.displaydata.AvatarPage.avatarWithoutPhoto;
@@ -18,16 +17,16 @@ import static io.github.com.pages.displaydata.AvatarPage.avatarWithoutPhoto;
 /**
  * To see an example of Avatar web element please visit https://material-ui.com/ru/components/avatars/
  */
+
 public class AvatarTests extends TestsInit {
+
     @BeforeTest
     public void beforeTest() {
-        openSection("Avatar");
+        avatarPage.open();
     }
 
     @Test
     public void avatarTests() {
-        Timer timer = new Timer(1000L);
-        timer.wait(() -> onlineStatus.get(1).is().displayed());
         basicAvatarChecks(avatarWithoutPhoto, true);
         basicAvatarChecks(avatarWithPhoto, false);
         onlineStatus.get(1).has().classValue(Matchers.containsString("MuiBadge-dot"));

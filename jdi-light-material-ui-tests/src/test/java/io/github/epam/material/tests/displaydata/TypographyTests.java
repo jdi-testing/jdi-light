@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.typographyPage;
 import static io.github.com.pages.displaydata.TypographyPage.typographyTexts;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
@@ -22,7 +22,7 @@ public class TypographyTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        openSection("Typography");
+        typographyPage.open();
     }
 
     @Test

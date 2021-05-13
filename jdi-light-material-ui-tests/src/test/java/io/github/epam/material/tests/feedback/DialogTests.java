@@ -1,13 +1,12 @@
 package io.github.epam.material.tests.feedback;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.dialogPage;
 import static io.github.com.pages.feedback.DialogPage.*;
 import static org.hamcrest.Matchers.containsString;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -27,7 +26,7 @@ public class DialogTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        openSection("Dialog");
+        dialogPage.open();
     }
 
 

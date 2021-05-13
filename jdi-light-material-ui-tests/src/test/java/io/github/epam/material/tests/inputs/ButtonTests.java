@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.buttonPage;
 import static io.github.com.pages.inputs.ButtonPage.*;
 
 /**
@@ -15,7 +15,7 @@ public class ButtonTests extends TestsInit {
 
     @BeforeTest
     public void before() {
-        openSection("Buttons");
+        buttonPage.open();
     }
 
     @Test

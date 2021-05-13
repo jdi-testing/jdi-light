@@ -4,14 +4,14 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.popoverPage;
 import static io.github.com.pages.utils.PopoverPage.*;
 
 public class PopoverTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        openSection("Popover");
+        popoverPage.open();
     }
 
     @Test

@@ -5,7 +5,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.StaticSite.transitionPage;
 import static io.github.com.pages.utils.TransitionPage.*;
 import static org.hamcrest.Matchers.containsString;
@@ -19,7 +18,7 @@ public class TransitionTests extends TestsInit {
 
     @BeforeTest
     public void before() {
-        openSection("Transitions");
+        transitionPage.open();
         transitionPage.shouldBeOpened();
     }
 
