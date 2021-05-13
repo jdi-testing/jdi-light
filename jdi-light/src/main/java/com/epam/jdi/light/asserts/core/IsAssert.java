@@ -60,7 +60,7 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
      * Match passed value with the element tag
      * @param condition to compare
      */
-    @JDIAction("Assert that '{name}' tag {0}")
+    @JDIAction("Assert that '{name}' tag is '{0}'")
     public IsAssert tag(Matcher<String> condition) {
         jdiAssert(element().getTagName(), condition);
         return this;
@@ -72,12 +72,12 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
      * Match passed value with the element class
      * @param condition to compare
      */
-    @JDIAction("Assert that '{name}' css class {0}")
+    @JDIAction("Assert that '{name}' css class is '{0}'")
     public IsAssert cssClasses(Matcher<? super List<String>> condition) {
         jdiAssert(element().classes(), condition);
         return this;
     }
-    @JDIAction("Assert that '{name}' css class {0}")
+    @JDIAction("Assert that '{name}' css class is '{0}'")
     public IsAssert classValue(Matcher<String> condition) {
         jdiAssert(element().attr("class"), condition);
         return this;

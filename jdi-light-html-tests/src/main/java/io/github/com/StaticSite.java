@@ -51,7 +51,7 @@ public class StaticSite {
 	@UI(".sidebar-menu [ui=label]") public static Menu leftMenu;
 	//TODO
 	//@UI(".sidebar-menu span<[*'%s']<<") public static Menu leftMenu;
-	@UI("//*[@class='sidebar-menu']//span/..//*[text()='%s']/../..") public static WebList leftMenuList;
+	@UI("//*[contains(@class,'sidebar-menu')]//span/..//*[text()='%s']/../..") public static WebList leftMenuList;
 	//TODO
 	//@UI(".sidebar-menu span<[*'%s']<<") public static WebList leftMenuList;
 	@UI(".sidebar-menu span") public static JList<MenuItem> menu;

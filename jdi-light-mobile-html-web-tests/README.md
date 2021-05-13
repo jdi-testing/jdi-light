@@ -1,113 +1,76 @@
-#How to launch HTML Web tests on Android emulator or iOS simulator
-### Requirements for Android
-Required tools for Android: Android Studio, Appium, Maven.<br>
+# JDI Mobile Example
 
-1. Download **chrome driver** For more details
-   visit: https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/web/chromedriver.md <br>
-It is recommended to use the version of **chrome driver** >= 87. 
-The version of Chrome browser in the Android emulator must be the same. Then go to **src/test/resources** of
-module **jdi-light-mobile-html-web-tests**.
+## How to launch web tests on Android emulator  
 
-1. Set following settings in **test.properties** file: <br>
-```   
-   driver=android
-   remote.type=appium
-   appium.capabilities.path=android.properties
-   driver.remote.run=true
-``` 
-   If your version of appium has its own URL (not http://0.0.0.0:4723), specify it in the **driver.remote.url**
-   property<br>
-    1. Set following settings in **android.properties** file:<br>
-``` 
-platformName=Android
-deviceName=emulator-5554
-chromedriverExecutable={ABSOLUTE_PATH_TO_CHROMEDRIVER}\\chromedriver.exe
-``` 
-Here **deviceName** and **platformName** must be the same as Desired Capabilities in Inspector Session window that was
-started from Appium (see future steps). **chromedriverExecutable** should be an absolute path to chromedriver file (version must be equal to the Chrome browser version on your device at least the number before the first dot)<br>
-
-    1. Set following settings in **chrome.properties** file: <br>
-**w3c=false**;
+Stable environment: Java 8, Maven 3.6.3, JDI-Light 1.3.11, TestNG 7.4.0, Aspectj 1.9.*, Appium 1.20.2, Android 10 <br/>
 
 1. Launch Android emulator and wait until home screen is ready.
+1. Launch Appium and find out the listening URL in the console (usually http://0.0.0.0:4723)
+1. Set following settings in **test/resources/test.properties** file:
+```
+   driver=android 
+   remote.type=appium
+# should be URL form prev. step and remove leading # if any
+   driver.remote.url=http://0.0.0.0:4724/wd/hub 
+```
+4. Set following settings in **test/resources/android.properties** file
+```
+# Section 'There we can find Device UID and name' and remove leading # if any
+   deviceName={GET_UID_FROM_YOUR_ANDROID_VIRTUAL_DEVICE} 
+```
 
-1. Launch Appium from console or using UI. For command line it is just<br>
-   `appium`
+
+More information about JDI-Light in [Documentation](https://jdi-docs.github.io/jdi-light/?java#introduction)
    
-1. Wait for Appium server ready and then open new Inspector Session window and set Desired Capabilities as described in
-   2.1
+## External tools installation (for novice)
+
+### Android emulator installation
+The easiest way to use Android Emulator is via Android Studio, but it's also possible to install Android SDK only (https://developer.android.com/studio/releases/sdk-tools)
+We describe a way via Android Studio.
+
+1. Download and install Android Studio (https://developer.android.com/studio). Note: in case of error with HAXM installation just ignore it.
+1. Run Android Studio
+1. Run AVD Manager (Configure -> AVD Manager) (or via Tools -> AVD Manager for an open project)
+1. Create a virtual device with any available parameters (for example, Pixel_3a_API_30_x86)
+1. Run virtual device via button in Actions column ![Virtual device run](./docs/run_and_power_up.png "Run device")
+1. Power up your device via Power button (is highlighted on a previous screen)
+1. Open Chrome, confirm all agreements to get empty Chrome window with search field
+1. Open About Chrome  and find Chrome version (chromedriver and Chrome version should be equal, so copy it. Needed after Appium installation)<br/>
+   ![Ready Chrome](./docs/empty_chrome.png "Empty Chrome")
    
-1. 1 Go to module **jdi-light-html-tests**<br>
-   2 Run maven script: `mvn clean package -U -DskipTests` to make .jar package of tests for future dependency.
+Ready!
 
-Note: Before reloading module **jdi-light-mobile-html-web-tests** should be reloaded module **jdi-light**. 
+### Install Appium
 
-### Requirement for iOS</h3>
-Required tools for iOS: Xcode, Appium, Maven.<br>
-In general settings absolutely the same as for Android but you need to use **ios.properties** instead of **android.properties** 
-and in **test.properties** change two fields which use android to iOS:
+1. Install Appium 
+   * For Windows usually we need to install **npm** (https://nodejs.org/en/) and run `npm install -g appium`
+   * All information is on official site https://appium.io/docs/en/about-appium/getting-started/?lang=en
+   * After installation make sure that you can run appium in terminal:
+     * (for Windows) add appium directory to PATH environment variable. If you used 'npm install ...' command for installation appium will be in C:\Users\\{USER_NAME}\AppData\Roaming\npm 
+     * (for Windows) if you see error message like 'File cannot be loaded because the execution of scripts is disabled on this system. Please see "get-help about_signing" for more details' open new PowerShell terminal 'as Administrator' and run this command `Set-ExecutionPolicy -ExecutionPolicy Unrestricted`
+1. Download chromedriver for Chrome with version equal to Chrome version on your device (The number before the first '.' should be equal!). More information https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/web/chromedriver.md
+   * Download correct version from https://chromedriver.chromium.org/downloads 
+   * Put it to npm modules. For Windows example path is: `c:\Users\{USER_NAME}\AppData\Roaming\npm\node_modules\appium\node_modules\appium-chromedriver\chromedriver\win\`
+1. (For Windows) Several environment variables are needed to work with emulator (**!Note** Restart Appium after this step if it's running (Ctrl+C can be used to stop Appium)):
+   * JAVA_HOME - path to JDK installation folder (NOT bin folder inside!). Example 'c:\Program Files\Java\jdk1.8.0_281\'   
+   * ANDROID_HOME - path to Android SDK, can be found in Android Studio in Menu `File -> Settings... -> Android SDK`. Example `c:\Users\{USER_NAME}\AppData\Local\Android\Sdk\`
+   * ANDROID_SDK_ROOT - the same value as ANDROID_HOME
+   * ANDROID_TOOLS - ANDROID_HOME\tools <br/>
+   ![Android SDK](./docs/sdk_path.png "Android SDK path location")
+     
+     
+### There we can find Device UID and name
 
-1. Set following settings in **test.properties** file: <br>
-``` 
-   driver=ios;
-   remote.type=appium;
-   appium.capabilities.path=ios.properties; 
-   driver.remote.run=true;
-``` 
-   
-1. Set following settings in **ios.properties** file:<br>
-```    
-    platformName=ios; 
-    automationName=XCUITest;
-    platformVersion=14.2;
-    deviceName=iPhone 11; 
-    browserName=Safari;
-```     
-    
-### Debugging and test running for iOS and Android
-Go to module **jdi-light-mobile-html-web-tests**
+1. Device name is visible in Android Virtual Device Manager in a list
+1. UID is available in Extended controls (...) -> Help -> About
+![Device UID and name](./docs/android_name_uid.png "Device UID and name")
 
-#####Test Run
 
-Run maven script from the module root:
-
-- `mvn clean test site -U -Dtest=TestClassToRunName.java#testMethodToRun` <br>
-or just execute script: `mvn clean test site -U`<br>
-
-- `mvn clean test site -Dsuite.xml.file=src/test/resources/demoRun.xml` 
-<br>(for running tests which already exist in xml-file; use 'site' for Allure Report) 
-   
-##### Debug 
-Debug from maven run (with breakpoints in IDE) could be performed like example below:<br>
-
-1. Create maven configuration with script:<br>
-`mvn clean test -Dtest=TestClassToRunName.java#testMethodToRun -U -Dmaven.surefire.debug -DforkCount=0 -DreuseForks=false`
-
-1. Run this configuration in IDE using debug mode.
-
-### How to edit source code of tests in src/test and debug classes directly:
-#####Dirty way
-
-1. In **pom.xml** comment or delete **test-jar** dependency: **jdi-light-html-tests** with  **test-jar** type
- 
-1. Go to module **jdi-light-html-tests** and copy all from **src/test/java**<br>
-But **TestsInit.java** interface must be excluded
-
-1. Go to module **jdi-light-mobile-html-web-tests** <br>
-Note: Do not delete old **TestsInit.java** interface in **src/test/java**<br>
-    1. But delete all from **src/test/java** except **TestsInit.java**
-
-1. Paste all from 2. to **src/test/java**, but do not replace **TestsInit.java**
-
-1. Run tests or debug like described before
-
-### How to edit source code of tests with no option to debug test classes directly:
-#####Clean way
-
-1. Go to module **jdi-light-html-tests**
-
-1. Edit or develop source code of tests in **src/test** folder
-
-1. When finish - repeat step 6.2 from **Requirements for Android** section
-
-1. Go to module **jdi-light-mobile-html-web-tests** and rerun maven script to apply changes: `mvn clean install -U -DskipTests`
+### Run jdi-mobile-report-portal-demo tests
+1. Launch the created virtual device
+1. Run 'appium' in console
+1. Open the tests project in IDEA. (Optional)
+1. Run the following maven command
+```
+mvn test -Dreport.portal.user=<user_name> -Dreport.portal.password=<user_password> -Dmobile.device.udid=<your_emulator_id> -Dmobile.cloud.type='EPAM' -Dmobile.platform.name=<Android_or_iOS> -Dmobile.platform.version=<platform_version> -Dmobile.device.name=<your_device_name> -Dmobile.device.orientation=portrait -Drp.uuid=<rp_uuid> -Drp.project=jdi -Drp.enable=false -Drp.attributes=env:dev-gcp;type:mobile -f pom.xml
+```
