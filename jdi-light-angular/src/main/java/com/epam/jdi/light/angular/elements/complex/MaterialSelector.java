@@ -1,11 +1,10 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.MaterialSelectorAssert;
-import com.epam.jdi.light.angular.elements.composite.CdkOverlayContainer;
+import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import org.openqa.selenium.By;
@@ -15,25 +14,30 @@ import java.util.Map;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
+/**
+ * To see an example of MaterialSelector web element please visit https://material.angular.io/components/select/overview.
+ */
+
 public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> implements HasLabel {
+    public String toggle = "//*[@id='%s']//div[contains(@class,'mat-select-arrow')][not(contains(@class, 'wrapper'))]";
     public String hintLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";
     public String errorLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-error";
     public String smart = "smart: ";
     public String smartSharp = "smart: #";
     public String cssSharp = "css='#";
-    protected CdkOverlayContainer cdkOverlayContainer;
+    protected MaterialSelectorContainer cdkOverlayContainer;
     protected DropdownExpand dropdown;
 
     public MaterialSelector() {
-        cdkOverlayContainer = new CdkOverlayContainer();
+        cdkOverlayContainer = new MaterialSelectorContainer();
         dropdown = new DropdownExpand();
         dropdown.setCore(DropdownExpand.class, base());
     }
 
     protected void setupLocators() {
-        dropdown.expandLocator = this.uiElement.locator.printLocator().replace(smart, "").replace(cssSharp, "")
+        dropdown.expandLocator = this.core().locator.printLocator().replace(smart, "").replace(cssSharp, "")
                 .replace("'", "");
-        dropdown.valueLocator = this.uiElement.locator.printLocator().replace(smart, "").replace(cssSharp, "")
+        dropdown.valueLocator = this.core().locator.printLocator().replace(smart, "").replace(cssSharp, "")
                 .replace("'", "");
         dropdown.listLocator = "mat-option span";
     }
@@ -41,7 +45,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     @JDIAction(level = DEBUG, timeout = 0)
     public void expand() {
         setupLocators();
-        dropdown.expand();
+        toggle().click();
     }
 
     @JDIAction(level = DEBUG, timeout = 0)
@@ -55,12 +59,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
         setupLocators();
-        cdkOverlayContainer.waitFor();
-        try {
-            return cdkOverlayContainer.list().noWait(WebList::isDisplayed, WebList.class);
-        } catch (Exception ex) {
-            return false;
-        }
+        return this.hasAttribute("aria-owns");
     }
 
     @JDIAction(value = "Is '{name}' collapsed", level = DEBUG, timeout = 0)
@@ -212,7 +211,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     public UIElement hint() {
         return new UIElement(By.xpath(String.format(hintLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                    this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
@@ -223,12 +222,18 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     public UIElement error() {
         return new UIElement(By.xpath(String.format(errorLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
+                                                    this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     @Override
     public MaterialSelectorAssert is() {
         return new MaterialSelectorAssert().set(this);
+    }
+
+    protected UIElement toggle() {
+        return new UIElement(By.xpath(String.format(toggle,
+                                                    this.core().locator.printLocator().replace(smartSharp, "")
+                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 }

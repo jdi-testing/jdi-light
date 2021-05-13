@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
+import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.LinqUtils.map;
@@ -93,18 +93,26 @@ public class Menu2D extends Selector implements ISetup {
         UIElement element;
         for (int i = 0; i < values.size(); i++) {
             String value = values.get(i);
-            element = (iterator == null
-                ? $$(base().getLocator(), parent)
-                : $$(iterator.next(), parent))
+            element = webListFromIterator(iterator, parent)
                 .get(value);
-            if (i < values.size() - 1)
+            if (i < values.size() - 1) {
                 pathAction.execute(element);
-            else
+            }
+            else {
                 return element;
-            if (inheritLocators)
+            }
+            if (inheritLocators) {
                 parent = element;
+            }
         }
         throw exception("Failed to get [%s] values", print(values));
+    }
+    private WebList webListFromIterator(Iterator<String> iterator, Object parent) {
+        WebList list = iterator == null
+            ? $$(base().getLocator(), parent)
+            : $$(iterator.next(), parent);
+        list.setName(getName());
+        return list;
     }
 
     /**
@@ -156,9 +164,9 @@ public class Menu2D extends Selector implements ISetup {
             UIElement element;
             if (iterator != null) {
                 String locator = iterator.next();
-                element = $$(locator, parent).get(indexes[i]);
+                element = $$(locator, parent).setName(getName()).get(indexes[i]);
             } else {
-               element = $$(base().getLocator(), parent).get(indexes[i]);
+               element = $$(base().getLocator(), parent).setName(getName()).get(indexes[i]);
             }
             if (i < indexes.length - 1)
                 pathAction.execute(element);
@@ -203,7 +211,7 @@ public class Menu2D extends Selector implements ISetup {
     protected String printValues(Object parent, int index) {
         if (index == locators.size())
             return "";
-        WebList list = $$(locators.get(index), parent).noValidation();
+        WebList list = $$(locators.get(index), parent).setName(getName()).noValidation();
         List<String> result = new ArrayList<>();
         for (UIElement element : list) {
             String value = element.getText();
@@ -225,7 +233,7 @@ public class Menu2D extends Selector implements ISetup {
         if (index == locators.size())
             return new ArrayList<>();
         List<String> result = new ArrayList<>();
-        WebList list = $$(locators.get(index), parent).noValidation();
+        WebList list = $$(locators.get(index), parent).setName(getName()).noValidation();
         for (UIElement element : list) {
             result.add(element.getText());
             result.addAll(getValues(inheritParent(element), index + 1));
@@ -276,7 +284,7 @@ public class Menu2D extends Selector implements ISetup {
     public WebList list() {
         By locator = locators.isEmpty()
             ? base().getLocator()
-            : defineLocator(locators.get(0));
-        return $$(locator, base().parent);
+            : NAME_TO_LOCATOR.execute(locators.get(0));
+        return $$(locator, base().parent).setName(getName());
     }
 }

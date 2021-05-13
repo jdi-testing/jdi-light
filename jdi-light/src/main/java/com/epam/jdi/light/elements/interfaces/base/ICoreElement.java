@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.Condition;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
@@ -9,6 +10,9 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 
+import static com.epam.jdi.light.elements.base.JDIBase.executeShouldBe;
+import static java.lang.String.format;
+
 /**
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
@@ -16,6 +20,9 @@ import java.util.List;
 public interface ICoreElement extends IBaseElement {
     UIElement core();
     default UIElement iCore() { return core(); }
+    default <T> T with(Class<T> cl) {
+        return core().with(cl);
+    }
 
     @JDIAction("Hover to '{name}'")
     default void hover() { iCore().hover(); }
@@ -51,11 +58,17 @@ public interface ICoreElement extends IBaseElement {
     default UIElement find(@MarkupLocator String by) {
         return iCore().find(by);
     }
+    default UIElement find(@MarkupLocator String by, Object... args) {
+        return find(format(by, args));
+    }
     default UIElement find(@MarkupLocator By by) {
         return iCore().find(by);
     }
     default WebList finds(@MarkupLocator String by) {
         return iCore().finds(by);
+    }
+    default WebList finds(@MarkupLocator String by, Object... args) {
+        return finds(format(by, args));
     }
     default WebList finds(@MarkupLocator By by) { return iCore().finds(by); }
     default UIElement firstChild() { return iCore().firstChild(); }
@@ -81,6 +94,9 @@ public interface ICoreElement extends IBaseElement {
     default void doubleClick() {
         iCore().doubleClick();
     }
+    default String pseudo(String elementName, String propertyName) {
+        return iCore().pseudo(elementName, propertyName);
+    }
     default void press(Keys key) {
         iCore().press(key);
     }
@@ -96,4 +112,18 @@ public interface ICoreElement extends IBaseElement {
     default void pasteText(String text, long timeToWaitMSec) {
         iCore().pasteText(text, timeToWaitMSec);
     }
+    default ICoreElement shouldBe(Condition... conditions) {
+        for (Condition condition : conditions) {
+            executeShouldBe(condition.getName(this), condition, this);
+        }
+        return this;
+    }
+    default ICoreElement waitFor(Condition... conditions) {
+        return shouldBe(conditions);
+    }
+    default ICoreElement waitFor(int timeInSec, Condition... conditions) {
+        base().waitAction(timeInSec, e -> shouldBe(conditions));
+        return this;
+    }
+    default ICoreElement should(Condition... conditions) { return shouldBe(conditions);}
 }

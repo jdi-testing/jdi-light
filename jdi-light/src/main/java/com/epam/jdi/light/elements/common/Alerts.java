@@ -13,7 +13,6 @@ import static org.hamcrest.Matchers.is;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class Alerts {
-
     /**
      * Accept alert
      */
@@ -43,7 +42,7 @@ public class Alerts {
      * Validate alert by matching passed value with alert text
      * @param text to compare
      */
-    @JDIAction
+    @JDIAction(isAssert = true)
     public static void validateAndAcceptAlert(Matcher<String> text) {
         assertThat(getAlertText(), text);
         acceptAlert();
@@ -51,7 +50,8 @@ public class Alerts {
     public static void validateAndAcceptAlert(String text) {
         validateAndAcceptAlert(is(text));
     }
-    @JDIAction
+
+    @JDIAction(isAssert = true)
     public static void validateAlert(Matcher<String> text) {
         assertThat(getAlertText(), text);
     }

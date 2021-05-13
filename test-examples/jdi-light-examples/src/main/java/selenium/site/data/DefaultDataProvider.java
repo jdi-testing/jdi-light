@@ -2,7 +2,7 @@ package selenium.site.data;
 
 public class DefaultDataProvider {
     public static ContactInfo ROMAN_CONTACT = new ContactInfo().set(c -> {
-        c.name = "Roman";
+        c.firstName = "Roman";
         c.lastName = "Full Contact";
         c.position = "ChiefQA";
         c.passportNumber = 4321;

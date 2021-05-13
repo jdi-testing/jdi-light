@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.searchPage;
 import static io.github.com.pages.Header.epamLogo;
 import static io.github.com.pages.Header.search;
@@ -42,8 +43,8 @@ public class ElementsGoogleTests extends StaticTestsInit {
     public void validateEntities2Tests() {
         DataList<SearchResult, ?> jobs = searchPage.search2;
 
-        assertEquals(jobs.get(1).name.getText(),"JDI SKYPE");
-        assertEquals(jobs.get(2).name.getText(),"JDI OWNER CONTACT");
+        assertEquals(jobs.get(ELEMENT.startIndex).name.getText(),"JDI SKYPE");
+        assertEquals(jobs.get(ELEMENT.startIndex + 1).name.getText(),"JDI OWNER CONTACT");
         try {
             jobs.is().empty();
             Assert.fail("List should not be empty");

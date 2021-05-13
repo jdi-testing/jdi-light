@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.multiDropdown;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -32,21 +33,21 @@ public class MultiDropdownTests implements TestsInit {
 
     @Test
     public void selectTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
         multiDropdown.check("Electro", "Metalic");
         assertEquals(multiDropdown.checked(), asList("Electro", "Metalic"));
     }
 
     @Test
     public void selectEnumTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
         multiDropdown.check(Wood, Steam);
         assertEquals(multiDropdown.checked(), asList("Steam", "Wood"));
     }
     @Test
     public void selectNumTest() {
-        if (isFireFox()) return;
-        multiDropdown.check(1, 5);
+        skipForFirefox();
+        multiDropdown.check(ELEMENT.startIndex, ELEMENT.startIndex + 4);
         assertEquals(multiDropdown.checked(), asList("Electro", "Wood"));
     }
     @Test
@@ -56,7 +57,7 @@ public class MultiDropdownTests implements TestsInit {
 
     @Test
     public void disabledTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
         multiDropdown.select("Disabled");
         assertEquals(multiDropdown.selected(), "Steam");
     }

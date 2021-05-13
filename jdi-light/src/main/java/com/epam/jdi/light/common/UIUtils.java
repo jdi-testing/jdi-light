@@ -12,6 +12,7 @@ import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.map.MultiMap;
 import com.epam.jdi.tools.pairs.Pair;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -23,10 +24,12 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -42,30 +45,32 @@ public final class UIUtils {
             f -> getValueField(f, obj) != null);
         List<Field> withOrder = filter(notNullFields, f -> f.getAnnotation(Order.class) != null);
         List<Field> ordered = new ArrayList<>();
-        if (withOrder.size() > 0) {
+        if (isEmpty(withOrder)) {
             MultiMap<Integer, Field> orderMap = new MultiMap<>(withOrder,
                 k -> k.getAnnotation(Order.class).value(), v -> v).ignoreKeyCase();
-            orderMap.pairs.sort((d1, d2) -> d2.key - d1.key);
-            for (Pair<Integer, Field> pairs : orderMap.pairs)
+            orderMap.getPairs().sort((d1, d2) -> d2.key - d1.key);
+            for (Pair<Integer, Field> pairs : orderMap.getPairs())
                 ordered.add(pairs.value);
             ordered.addAll(filter(notNullFields, f -> f.getAnnotation(Order.class) == null));
         } else ordered = notNullFields;
         return new MapArray<>(ordered, UIUtils::getElementName,
             field -> {
                 Object value = getValueField(field, obj);
-                if (isClassOr(value.getClass(), String.class, Integer.class, Boolean.class))
+                if (isClassOr(value.getClass(), String.class, Integer.class, Boolean.class)) {
                     return value.toString();
-                if (isClass(value.getClass(), Enum.class))
-                    return getEnumValue((Enum) value);
-                return null;
+                }
+                return isClass(value.getClass(), Enum.class)
+                    ? getEnumValue((Enum<?>) value)
+                    : null;
             });
     }
     public static String getElementName(Field field) {
-        if (hasAnnotation(field, Name.class))
+        if (hasAnnotation(field, Name.class)) {
             return field.getAnnotation(Name.class).value();
-        if (field.getType().isAnnotationPresent(Name.class))
-            return field.getType().getAnnotation(Name.class).value();
-        return splitCamelCase(field.getName());
+        }
+        return field.getType().isAnnotationPresent(Name.class)
+            ? field.getType().getAnnotation(Name.class).value()
+            : ELEMENT.name.execute(field);
     }
 
     public static JFunc2<Object, String, IClickable> GET_DEFAULT_BUTTON =
@@ -73,15 +78,16 @@ public final class UIUtils {
 
     public static JFunc2<Object, String, IClickable> GET_BUTTON = (obj, buttonName) -> {
         List<Field> fields = getFields(obj, IsButton.class);
-        if (fields.size() == 0)
+        if (isEmpty(fields)) {
             fields = getFieldsExact(obj, WebElement.class, UIElement.class);
+        }
         if (fields.size() > 1) {
             fields = filter(fields, f ->
                 isInterfaceAnd(getValueField(f, obj).getClass(), IClickable.class, INamed.class));
-            if (fields.size() >= 1) {
+            if (ObjectUtils.isNotEmpty(fields)) {
                 Collection<IClickable> buttons = select(fields,
                     f -> (IClickable) getValueField(f, obj));
-                IClickable button = first(buttons, b -> namesEqual(toButton(((INamed) b).getName()), toButton(buttonName)));
+                IClickable button = first(buttons, b -> ELEMENT.namesEqual.execute(toButton(((INamed) b).getName()), toButton(buttonName)));
                 if (button != null)
                     return button;
             }
@@ -105,9 +111,10 @@ public final class UIUtils {
             List<Field> dataFields = getFields(data, String.class);
             foreach(getFields(obj, HasValue.class), item -> {
                 Field field = first(dataFields, f ->
-                        namesEqual(f.getName(), item.getName()));
-                if (field == null)
+                    ELEMENT.namesEqual.execute(getElementName(f), getElementName(item)));
+                if (field == null) {
                     return;
+                }
                 try {
                     setPrimitiveField(field, data, ((HasValue) getValueField(item, obj)).getValue());
                 } catch (Exception ignore) { }
@@ -137,7 +144,7 @@ public final class UIUtils {
         } catch (Exception ex) { throw exception(ex, "Can't init new element for list"); }
     }
 
-    private static String getName(Object obj) {
+    public static String getName(Object obj) {
         return isInterface(obj.getClass(), INamed.class)
             ? ((INamed)obj).getName()
             : obj.getClass().getSimpleName();

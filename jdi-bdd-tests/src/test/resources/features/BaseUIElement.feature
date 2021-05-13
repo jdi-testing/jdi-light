@@ -17,12 +17,12 @@ Feature: BaseUIElement
 	
   Scenario: labelText 
 	Given I open "Html5 Page" 
-	Then the "Name" label text equals to "Your name:"
+	Then the "Your Name" label text equals to "Your name:"
 
   Scenario: sendKeys 
 	Given I open "Html5 Page" 
-	When I send keys "simple 1234" to "Name"
-	Then the "Name" text matches to "\w{6} \d{4}"
+	When I send keys "simple 1234" to "Your Name"
+	Then the "Your Name" text matches to "\w{6} \d{4}"
 	
   Scenario: check 
 	Given I open "Html5 Page" 
@@ -36,32 +36,32 @@ Feature: BaseUIElement
 	
   Scenario: clear 
 	Given I open "Html5 Page"
-    When clear "Name"
-	When send keys "simple text" to "Name" 
-	Then the "Name" text equals to "simple text"
-	When I clear "Name"
-	Then the "Name" text equals to ""
+    When clear "Your Name"
+	When send keys "simple text" to "Your Name"
+	Then the "Your Name" text equals to "simple text"
+	When I clear "Your Name"
+	Then the "Your Name" text equals to ""
 
   Scenario: css
 	Given I open "Html5 Page"
-	Then the "Name" css "font-size" equals to "14px"
+	Then the "Your Name" css "font-size" equals to "14px"
 
   Scenario: input 
 	Given I open "Html5 Page"
-    When clear "Name"
-    When send keys "simple text" to "Name"
-	Then the "Name" text equals to "simple text"
-	When input "Input text" in "Name" 
-	Then the "Name" text equals to "Input text"
+    When clear "Your Name"
+    When send keys "simple text" to "Your Name"
+	Then the "Your Name" text equals to "simple text"
+	When input "Input text" in "Your Name"
+	Then the "Your Name" text equals to "Input text"
 	
   Scenario: placeholder 
 	Given I open "Html5 Page" 
-	Then the "Name" placeholder equals to "Input name"
+	Then the "Your Name" placeholder equals to "Input name"
 	
   Scenario: getValue 
 	Given I open "Html5 Page" 
-	When input "simple text" in "Name"
-	Then the "Name" text equals to "simple text"
+	When input "simple text" in "Your Name"
+	Then the "Your Name" text equals to "simple text"
 	
   Scenario: getText 
 	Given I open "Html5 Page" 	
@@ -73,30 +73,32 @@ Feature: BaseUIElement
 	
   Scenario: isEnabled
 	Given I open "Html5 Page" 	
-	Then the "Name" is enabled
+	Then the "Your Name" is enabled
 	
   Scenario: isDisabled
 	Given I open "Html5 Page" 	
 	Then the "Disabled Button" is disabled
-	
+
+  @ignore_for_firefox
   Scenario: isHidden
 	Given I open "Html5 Page" 	
 	Then the "Logout" is hidden
 
-  Scenario: isHidden
+  @ignore_for_firefox
+  Scenario: doesntNotAppear
 	Given I open "Html5 Page"
 	Then the "Logout" does not appear
 
   Scenario: isDisplayed
 	Given I open "Html5 Page" 	
-	Then the "Name" is displayed
+	Then the "Your Name" is displayed
 	
   Scenario: setText 
 	Given I open "Html5 Page" 
-	When input "simple text" in "Name"
-	Then the "Name" text equals to "simple text"
-	When set text "Input text" in "Name" 
-	Then the "Name" text equals to "Input text"
+	When input "simple text" in "Your Name"
+	Then the "Your Name" text equals to "simple text"
+	When set text "Input text" in "Your Name"
+	Then the "Your Name" text equals to "Input text"
 
   Scenario: select
     Given I open "Html5 Page"

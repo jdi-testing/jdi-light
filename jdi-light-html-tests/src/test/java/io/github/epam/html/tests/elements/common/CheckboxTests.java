@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.base.Conditions.*;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.acceptConditions;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -55,6 +56,12 @@ public class CheckboxTests implements TestsInit {
         acceptConditions.is().selected();
         acceptConditions.click();
         acceptConditions.is().deselected().and().enabled().and().displayed();
+    }
+    @Test
+    public void shouldValidationTest() {
+        acceptConditions.shouldBe(displayed, and(selected));
+        acceptConditions.click();
+        acceptConditions.shouldBe(not(selected), and(not(hidden)));
     }
 
     @Test

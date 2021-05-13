@@ -6,44 +6,55 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.CheckboxSection.*;
+import static io.github.epam.angular.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class CheckboxTests extends TestsInit {
-
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        angularPage.open();
+        disabledCheckbox.show();
     }
 
     @Test
-    public void basicCheckboxTest() {
-        basicCheckbox.isDisplayed();
+    public void checkLabelValue() {
+        basicCheckbox.label().has().value("Check me!");
+        resultCheckbox.label().has().value("I'm a checkbox");
+    }
+
+    @Test
+    public void basicCheckboxValidation() {
+        basicCheckbox.is().displayed().and().enabled().and().deselected();
+    }
+
+    @Test
+    public void checkBasicCheckbox() {
         basicCheckbox.check();
-        basicCheckbox.isSelected();
-        basicCheckbox.uncheck();
-        basicCheckbox.is().deselected();
+        basicCheckbox.is().selected();
+    }
+
+    @Test
+    public void baseValidationTest() {
+        baseValidation(basicCheckbox);
+    }
+
+    @Test
+    public void indeterminateTest() {
+        indeterminateCheckbox.click();
+        resultCheckbox.is().indeterminate();
+    }
+
+    @Test
+    public void disabledOption() {
+        disabledCheckbox.click();
+        resultCheckbox.is().disabled();
     }
 
     @Test
     public void configurableCheckboxTest() {
-        configurableCheckedCheckbox.show();
-        configurableCheckedCheckbox.check();
-        configurableResultCheckbox.isSelected();
-        configurableCheckedCheckbox.uncheck();
-        configurableResultCheckbox.is().deselected();
-
-        configurableIndeterminateCheckbox.check();
-        configurableResultCheckbox.has().cssClass("mat-checkbox-indeterminate");
-
-        configurableCheckboxAlignBeforeRadioButton.click();
-        configurableResultCheckbox.has().cssClass("mat-checkbox-label-before");
-
-        configurableCheckboxAlignAfterRadioButton.click();
-        // TODO FIX TEST
-        //configurableResultCheckbox.has().cssClass("mat-checkbox-label-after");
-
-        configurableDisabledCheckbox.click();
-        configurableResultCheckbox.is().disabled();
+        indeterminateCheckbox.check();
+        alignBeforeRadioButton.click();
+        resultCheckbox.is().indeterminate().and().cssClass("mat-checkbox-label-before");
     }
 }

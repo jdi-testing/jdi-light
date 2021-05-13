@@ -8,43 +8,53 @@ package io.github.epam.testng;
 import com.epam.jdi.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
+import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
+import static com.epam.jdi.light.logger.AllureLogger.screenshotStep;
 import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.LinqUtils.last;
 import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
     private Safe<Long> start = new Safe<>(0L);
+
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
         if (m.isTestMethod()) {
-            Method testMethod = m.getTestMethod().getConstructorOrMethod().getMethod();
-            if (testMethod.isAnnotationPresent(Test.class)) {
-                TEST_NAME.set(tr.getTestClass().getRealClass().getSimpleName()+"."+testMethod.getName());
+            ITestNGMethod testMethod = m.getTestMethod();
+            if (testMethod.getConstructorOrMethod().getMethod().isAnnotationPresent(Test.class)) {
+                String testName = last(testMethod.getTestClass().getName().split("\\.")) +
+                        "." + testMethod.getMethodName();
+                TEST_NAME.set(testName);
                 start.set(currentTimeMillis());
-                logger.step("== Test '%s' START ==", TEST_NAME.get());
+                logger.step("== Test '%s' START ==", testName);
             }
         }
     }
 
     @Override
-    public void afterInvocation(IInvokedMethod method, ITestResult r) {
+    public void afterInvocation(IInvokedMethod method, ITestResult tr) {
         if (method.isTestMethod()) {
-            String result = getTestResult(r);
+            String result = getTestResult(tr);
             logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
-                    new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
-            if (result.equals("FAILED")) {
-                takeScreen();
-                logger.step("ERROR: " + r.getThrowable().getMessage());
+                    new SimpleDateFormat("mm:ss.SS")
+                            .format(new Date(currentTimeMillis() - start.get())));
+            if ("FAILED".equals(result)) {
+                try {
+                    screenshotStep("On Fail Screenshot");
+                } catch (RuntimeException ignored) { }
+                if (tr.getThrowable() != null) {
+                    logger.step("ERROR: " + tr.getThrowable().getMessage());
+                } else {
+                    logger.step("UNKNOWN ERROR");
+                }
             }
-            logger.step("");
         }
     }
 
@@ -54,10 +64,14 @@ public class TestNGListener implements IInvokedMethodListener {
                 return "PASSED";
             case ITestResult.SKIP:
                 return "SKIPPED";
-            default:
+            case ITestResult.FAILURE:
+            case ITestResult.SUCCESS_PERCENTAGE_FAILURE:
                 return "FAILED";
+            case ITestResult.STARTED:
+                return "STARTED";
+            case ITestResult.CREATED:
+                return "CREATED";
         }
+        return "FAILED";
     }
-
-
 }

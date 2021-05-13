@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
+import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
@@ -23,7 +24,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.useDriver;
 import static com.epam.jdi.light.elements.init.InitActions.*;
@@ -32,8 +32,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.init;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
@@ -55,6 +54,7 @@ public class PageFactory {
         init();
         SiteInfo info = new SiteInfo(driverName)
             .set(s->s.parentClass = site);
+        DRIVER.siteName = site.getSimpleName();
         initialize(site, info);
     }
     private static void initialize(Class<?> site, SiteInfo info) {
@@ -86,28 +86,31 @@ public class PageFactory {
     }
 
     public static void initJdiField(SiteInfo info) {
-        logger.debug("initJdiField");
+        logger.trace("initJdiField");
         if (info.type().isInterface())
             initUsingRules(info);
         else
             initWithConstructor(info);
     }
     public static void setupFieldUsingRules(SiteInfo info) {
-        logger.debug("setupFieldUsingRules");
+        logger.trace("setupFieldUsingRules");
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) -> r.condition.execute(info));
-        if (setupRules.size() == 0)
+        if (setupRules.isEmpty())
             return;
         String ruleName = "UNDEFINED";
-        logger.debug("SETUP_RULES.count="+setupRules.size());
+        logger.trace("SETUP_RULES.count="+setupRules.size());
         try {
             for(Pair<String, SetupRule> rule : setupRules) {
                 ruleName = rule.key;
-                logger.debug("Use setupRule '%s'", ruleName);
+                logger.trace("Use setupRule '%s'", ruleName);
                 rule.value.action.execute(info);
             }
         } catch (Throwable ex) {
             throw exception(ex, "Setup rule '%s' failed. Can't setup field '%s' on page '%s'",
                     ruleName, info.name(), info.parentName());
+        }
+        if (isInterface(info.instance.getClass(), HasInit.class)) {
+            ((HasInit) info.instance).init();
         }
     }
     // endregion
@@ -140,38 +143,37 @@ public class PageFactory {
         }
     }
     private static <T> T initUsingRules(SiteInfo info) {
-        logger.debug("initUsingRules");
+        logger.trace("initUsingRules");
         Pair<String, InitRule> firstRule = INIT_RULES.first((k,r) ->
                 r.condition.execute(info.field));
         if (firstRule != null) {
-            logger.debug("Use initRule: " + firstRule.key);
+            logger.trace("Use initRule: " + firstRule.key);
             try {
-                return (T)(info.instance = firstRule.value.func.execute(info));
+                return (T) (info.instance = firstRule.value.func.execute(info));
             } catch (Exception ex) {
                 throw exception(ex, "Init rule '%s' failed. Can't init field '%s' on page '%s'",
                         firstRule.key, info.name(), info.parentName());
             }
         }
         else {
-            logger.debug("No initRules found");
             throw exception("No init rules found for '%s' (you can add appropriate rule in InitActions.INIT_RULES)" + LINE_BREAK +
-                            "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
-                            "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
+                        "Maybe you can solve you problem by adding WebSettings.init() in your @BeforeSuite setUp() method" + LINE_BREAK +
+                        "or by adding corresponded mapping in InitActions.INTERFACES using add(...) method",
                     info.name());
         }
     }
     private static void initWithConstructor(SiteInfo info) {
         try {
-            logger.debug("initWithConstructor");
+            logger.trace("initWithConstructor");
             info.instance = create(info.type());
-            logger.debug("new %s() success", info.type().getSimpleName());
+            logger.trace("new %s() success", info.type().getSimpleName());
         } catch (Throwable exception) {
             try {
                 String msg = safeException(exception);
-                if (msg.contains("has no empty constructors")
-                    || msg.contains("Can't init class. Class Type is null"))
+                if (msg.contains("has no empty constructors") || msg.contains("Can't init class. Class Type is null")) {
                     info.instance = create(info.type(), getDriver(info.driverName));
-                    throw exception(msg);
+                }
+                throw exception(msg);
             } catch (Throwable ex) {
                 throw exception(ex, "Can't create field '%s' instance of type '%s'. Try new %s() to get more details",
                         info.name(), info.type(), info.type());
@@ -197,10 +199,9 @@ public class PageFactory {
     }
     //endregion
 
-    public static List<Class<?>> STOP_INIT_CLASSES = asList(
-        Object.class, WebPage.class, PageObject.class, UIElement.class,
-            UIBaseElement.class, UIListBase.class,
-            DataList.class, JList.class, WebList.class);
+    public static List<Class<?>> STOP_INIT_CLASSES = newList(
+        Object.class, WebPage.class, PageObject.class, UIElement.class, UIBaseElement.class, UIListBase.class,
+        DataList.class, JList.class, WebList.class);
 
     public static void initElements(SiteInfo info) {
         List<Field> poFields = recursion(info.instance.getClass(),
@@ -251,7 +252,7 @@ public class PageFactory {
             webPage.getClass().getAnnotation(Url.class),
             webPage.getClass().getAnnotation(Title.class));
         webPage.setName(pageName);
-        PAGES.update(pageName, webPage);
+        PAGES.get().update(pageName, webPage);
         initElements(driver, page);
         return page;
     }

@@ -6,7 +6,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
 import static io.github.com.pages.HtmlElementsPage.dressCode3;
@@ -47,7 +48,7 @@ public class DropdownITests implements TestsInit {
     }
     @Test
     public void selectNumTest() {
-        dressCode3.select(1);
+        dressCode3.select(ELEMENT.startIndex);
         assertEquals(dressCode3.getValue(), "Fancy");
     }
     @Test
@@ -73,9 +74,10 @@ public class DropdownITests implements TestsInit {
     public void sizeTest() {
         assertEquals(dressCode3.size(), 4);
     }
+
     @Test
     public void disabledTest() {
-        if (isFireFox()) return;
+        skipForFirefox();
         disabledDropdown.select("Pirate");
         assertEquals(disabledDropdown.getValue(), "Disabled");
     }
@@ -123,6 +125,7 @@ public class DropdownITests implements TestsInit {
             .disabled(hasItems("Disabled"))
             .disabled(not(hasItems("Fancy", "Pirate", "Casual")));
     }
+
     @Test
     public void assertValidationTest() {
         dressCode3.assertThat().values(contains("Fancy", "Casual", "Disabled", "Pirate"));

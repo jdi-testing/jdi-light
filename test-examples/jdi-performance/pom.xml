@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-performance</artifactId>
-    <version>1.2.16</version>
+    <version>1.3.13</version>
     <name>Examples: JDI Performance</name>
 
     <properties>
@@ -14,8 +14,8 @@
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
-        <aspectj.version>1.9.5</aspectj.version>
-        <allure.testng>2.13.1</allure.testng>
+        <aspectj.version>1.9.6</aspectj.version>
+        <allure.testng>2.13.8</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
     </properties>
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.16</version>
+            <version>1.3.13</version>
         </dependency>
 
         <!--Allure-->
@@ -73,7 +73,7 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <testFailureIgnore>true</testFailureIgnore>
+                    <!-- testFailureIgnore>true</testFailureIgnore -->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>

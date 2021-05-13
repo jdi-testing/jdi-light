@@ -11,8 +11,8 @@ import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.getDomain;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.openqa.selenium.support.How.*;
 
@@ -37,7 +37,7 @@ public class WebAnnotationsUtil {
             return field.getAnnotation(Name.class).value();
         if (field.getType().isAnnotationPresent(Name.class))
             return field.getType().getAnnotation(Name.class).value();
-        return splitCamelCase(field.getName());
+        return ELEMENT.name.execute(field);
     }
 
     public static void setDomain(Class<?> siteClass) {
@@ -59,7 +59,7 @@ public class WebAnnotationsUtil {
         if (frames == null) return null;
         List<By> result = new ArrayList<>();
         for (String frame : frames.value())
-            result.add(defineLocator(frame));
+            result.add(NAME_TO_LOCATOR.execute(frame));
         return result;
     }
 
@@ -132,23 +132,23 @@ public class WebAnnotationsUtil {
         return null;
     }
 
-    public static By findByToBy(Css locator){
+    public static By findByToBy(Css locator) {
         if (locator == null) return null;
         return By.cssSelector(locator.value());
     }
-    public static By findByToBy(XPath locator){
+    public static By findByToBy(XPath locator) {
         if (locator == null) return null;
         return By.xpath(locator.value());
     }
-    public static By findByToBy(UI locator){
+    public static By findByToBy(UI locator) {
         if (locator == null) return null;
-        return defineLocator(locator.value());
+        return NAME_TO_LOCATOR.execute(locator.value());
     }
-    public static By findByToBy(ByText locator){
+    public static By findByToBy(ByText locator) {
         if (locator == null) return null;
         return byText(locator.value());
     }
-    public static By findByToBy(WithText locator){
+    public static By findByToBy(WithText locator) {
         if (locator == null) return null;
         return withText(locator.value());
     }

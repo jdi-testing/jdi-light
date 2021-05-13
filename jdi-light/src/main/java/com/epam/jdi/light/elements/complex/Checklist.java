@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 import java.util.List;
 
 import static com.epam.jdi.light.common.TextTypes.LABEL;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.EnumUtils.getEnumValues;
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
@@ -19,9 +20,13 @@ import static com.epam.jdi.tools.PrintUtils.print;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklist {
+    protected int startIndex = ELEMENT.startIndex;
+
     @Override
     public WebList list() {
-        return super.list().setUIElementName(LABEL);
+        WebList list = super.list().setUIElementName(LABEL);
+        list.setStartIndex(getStartIndex());
+        return list;
     }
     public Checklist() {
         base().setLocator("input[type=checkbox]");
@@ -199,5 +204,10 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public ChecklistAssert is() {
         return new ChecklistAssert().set(this);
     }
-
+    public int getStartIndex() {
+        return startIndex;
+    }
+    public void setStartIndex(int index) {
+        startIndex = index;
+    }
 }

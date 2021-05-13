@@ -1,12 +1,10 @@
 package com.epam.jdi.light.common;
 
-import java.lang.reflect.InvocationTargetException;
+import com.epam.jdi.light.settings.WebSettings;
 
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman_Iovlev on 3/19/2018.
@@ -14,19 +12,22 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class Exceptions {
     public static RuntimeException exception(String msg, Object... args) {
         String message = args.length == 0 ? msg : format(msg, args);
+        WebSettings.logger.debug("ERROR: " + message);
         return new RuntimeException(LINE_BREAK + message);
     }
+
     public static RuntimeException exception(Throwable ex, String msg, Object... args) {
         String message = args.length == 0 ? msg : format(msg, args);
-        if (isClass(AssertionError.class, ex.getClass()))
+        String exMsg = ex.getMessage();
+        if (exMsg == null)
+            exMsg = ex.getCause().getMessage();
+        WebSettings.logger.debug("ERROR: " + message + ". Exception: " + exMsg);
+        final Class<?> exceptionClass = ex.getClass();
+        if (isClass(AssertionError.class, exceptionClass))
             throw new AssertionError(message, ex);
-        else
-            return new RuntimeException(message, ex);
-    }
-    public static String safeException(Throwable ex) {
-        String msg = ex.getMessage();
-        if (isBlank(msg) && isClass(ex.getClass(), InvocationTargetException.class))
-            msg = ((InvocationTargetException) ex).getTargetException().getMessage();
-        return isNotBlank(msg) ? msg : ex.toString();
+        else if (isClass(exceptionClass, UnsupportedOperationException.class)) {
+            return new UnsupportedOperationException(message, ex);
+        }
+        return new RuntimeException(message, ex);
     }
 }

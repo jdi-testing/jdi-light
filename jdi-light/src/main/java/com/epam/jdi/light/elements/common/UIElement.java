@@ -5,6 +5,7 @@ import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -12,9 +13,11 @@ import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
+import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc;
 import com.epam.jdi.tools.func.JFunc1;
+import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
@@ -36,19 +39,23 @@ import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
 import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.logger.AllureLogger.attachScreenshot;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.SCREEN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.JsonUtils.getInt;
+import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.create;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static java.lang.Math.abs;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.Keys.BACK_SPACE;
 
@@ -79,9 +86,12 @@ public class UIElement extends JDIBase
         setName(name);
     }
     public UIElement(JDIBase base, WebElement el, JFunc<WebElement> func) {
+        this(base, el);
+        setGetFunc(func);
+    }
+    public UIElement(JDIBase base, WebElement el) {
         super(base);
         setWebElement(el);
-        setGetFunc(func);
     }
     //endregion
 
@@ -136,6 +146,7 @@ public class UIElement extends JDIBase
         } else {
             el.sendKeys(value);
         }
+        waitAfterAction();
     }
     @Override
     public void clear() { get().clear();}
@@ -179,6 +190,11 @@ public class UIElement extends JDIBase
 
     @JDIAction("Get '{name}' text") @Override
     public String getText() {
+        return text(textType);
+    }
+    @JDIAction("Get '{name}' text")
+    public String getTextForce() {
+        noValidation();
         return text(textType);
     }
 
@@ -235,9 +251,9 @@ public class UIElement extends JDIBase
     }
 
     @JDIAction(level = DEBUG)
-    public WebElement findElement(@MarkupLocator By locator) { return $(locator, this).getWebElement(); }
+    public WebElement findElement(@MarkupLocator By locator) { return getWebElement().findElement(locator); }
     @JDIAction(level = DEBUG)
-    public List<WebElement> findElements(@MarkupLocator By locator) { return $(locator, this).getWebElements(); }
+    public List<WebElement> findElements(@MarkupLocator By locator) { return getWebElement().findElements(locator); }
 
     /** Get screen screen shot */
     @JDIAction(level = DEBUG)
@@ -287,12 +303,13 @@ public class UIElement extends JDIBase
     @JDIAction("Input '{0}' in '{name}'")
     public void input(String value) {
         setTextType.action.execute(this, value);
+        waitAfterAction();
     }
     /**
      * Focus
      */
     @JDIAction(level = DEBUG) @Override
-    public void focus(){ sendKeys(""); }
+    public void focus() { sendKeys(""); }
     /**
      * Set the text in the attribute "value"
      * @param value
@@ -335,6 +352,7 @@ public class UIElement extends JDIBase
                 break;
             case SMART_CLICK:
                 show();
+                logger.debug("Click Smart");
                 ElementArea clArea = timer().getResultByCondition(
                     this::getElementClickableArea, Objects::nonNull);
                 if (clArea == null || clArea == CENTER) {
@@ -345,11 +363,18 @@ public class UIElement extends JDIBase
                     }
                 } else click(clArea);
         }
+        waitAfterAction();
     }
-    private RuntimeException getNotClickableException() {
+    protected void waitAfterAction() {
+        int timeout = waitAfter().value;
+        if (isBlank(waitAfterMethod) && timeout > 0) {
+            Timer.sleep(timeout * 1000L);
+        }
+    }
+    protected RuntimeException getNotClickableException() {
         return exception("%s is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong", getName());
     }
-    private ElementArea getElementClickableArea() {
+    protected ElementArea getElementClickableArea() {
         return Switch().get(
             Case(t -> isClickable(), t-> CENTER),
             Case(t -> isClickable(1, 1), t-> TOP_LEFT),
@@ -368,11 +393,15 @@ public class UIElement extends JDIBase
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
         get(value).click();
+        waitAfterAction();
     }
     @JDIAction("Select '{name}' element")
     public void select() { click(); }
     @JDIAction("Select '{0}' in '{name}'")
-    public void select(int index) { getWebElements().get(index).click(); }
+    public void select(int index) {
+        getWebElements().get(index).click();
+        waitAfterAction();
+    }
     /**
      * Select items by the values
      * @param names
@@ -447,13 +476,19 @@ public class UIElement extends JDIBase
         return !isVisible();
     }
 
+    /**
+     * Check the element is displayed
+     * @return boolean
+     */
+    @JDIAction(value = "Check that '{name}' is displayed", timeout = 0, level = DEBUG)
+    public boolean isNotDisplayed() {
+        return !displayed();
+    }
     @JDIAction(value = "Check that '{name}' is exist on the page", timeout = 0)
     public boolean isExist() {
-        return noWait(() -> {
-            try {
-                getWebElement(); return true;
-            } catch (Exception ignore) { return false; }
-        });
+        try {
+            return getWebElements().size() > 0;
+        } catch (Exception ignore) { return false; }
     }
     @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)
     public boolean isNotExist() {
@@ -496,6 +531,10 @@ public class UIElement extends JDIBase
     @JDIAction(value = "Get '{name}' placeholder", level = DEBUG) @Override
     public String placeholder() { return getAttribute("placeholder"); }
 
+    public String pseudo(String elementName, String propertyName) {
+        return js().executeScript("return window.getComputedStyle(arguments[0], arguments[1])" +
+                ".getPropertyValue(arguments[2]);", getWebElement(), elementName, propertyName).toString();
+    }
     /**
      * Get the element attribute "innerHTML" value
      * @return String
@@ -517,6 +556,29 @@ public class UIElement extends JDIBase
         }
     }
 
+    private Actions getActions() {
+        return new Actions(driver());
+    }
+    private WebElement showElement() {
+        show();
+        return getWebElement();
+    }
+    public void actions(JFunc2<Actions, WebElement, Actions> action) {
+        WebElement webElement = showElement();
+        action.execute(getActions(), webElement).build().perform();
+    }
+    public void actions(JFunc1<Actions, Actions> action) {
+        show();
+        action.execute(getActions()).build().perform();
+    }
+    public void actionsWithElement(JFunc2<Actions, WebElement, Actions> action) {
+        WebElement webElement = showElement();
+        action.execute(getActions().moveToElement(webElement), webElement).build().perform();
+    }
+    public void actionsWithElement(JFunc1<Actions, Actions> action) {
+        WebElement webElement = showElement();
+        action.execute(getActions().moveToElement(webElement)).build().perform();
+    }
     /**
      * Scroll view to element and make a border around with specified color
      * @param color
@@ -539,6 +601,7 @@ public class UIElement extends JDIBase
     @JDIAction("DoubleClick on '{name}'") @Override
     public void doubleClick() {
         actionsWithElement((a,e) -> a.doubleClick(e));
+        waitAfterAction();
     }
     /**
      * Right click on the element
@@ -546,6 +609,7 @@ public class UIElement extends JDIBase
     @JDIAction("RightClick on '{name}'") @Override
     public void rightClick() {
         actionsWithElement((a,e) -> a.contextClick(e));
+        waitAfterAction();
     }
 
     /**
@@ -575,14 +639,19 @@ public class UIElement extends JDIBase
         actions((a,e) -> a.dragAndDropBy(e, x, y));
     }
 
+    public void makePhotoToAllure() {
+        try {
+            attachScreenshot(getName(), makePhoto(getName()).getAbsolutePath());
+        } catch (Exception ignore) { }
+    }
     public File makePhoto() {
-        return makePhoto("");
+        return makePhoto(getName());
     }
     /**
      * Get element's screen shot with red border
      * @return String
      */
-    private String imageFilePath;
+    protected String imageFilePath;
 
     public boolean hasImage() {
         return imageFilePath != null;
@@ -590,8 +659,8 @@ public class UIElement extends JDIBase
     public File getImageFile() {
         return hasImage() ? new File(imageFilePath) : null;
     }
-    private String getScreenshotName(String tag) {
-        return varName + tag + SCREEN.fileSuffix;
+    protected String getScreenshotName(String tag) {
+        return tag + "." + SCREEN.fileSuffix;
     }
 
     @JDIAction(level = DEBUG)
@@ -604,7 +673,7 @@ public class UIElement extends JDIBase
             getScreenshotName(tag));
         return getImageFile();
     }
-    private int multiply(int value) {
+    protected int multiply(int value) {
         return (int)Math.round(value*zoomLevel());
     }
     @JDIAction("Visual compare '{0}'")
@@ -621,7 +690,7 @@ public class UIElement extends JDIBase
             }
         } catch (Exception ex) {throw exception(ex, "Can't compare files"); }
     }
-    private void compareImageFiles(File image1, File image2) {
+    protected void compareImageFiles(File image1, File image2) {
         long actual = image1.length();
         long expected = image2.length();
         String result = abs(actual - expected) < 100
@@ -651,7 +720,7 @@ public class UIElement extends JDIBase
     public Label label() {
         return new Label().setup(Label.class, j->j
             .setLocator(By.cssSelector("[for="+ core().attr("id")+"]"))
-            .setName(getName() + " label"));
+            .setName(getName() + " label").setTypeName("Label"));
     }
 
     /**
@@ -712,6 +781,9 @@ public class UIElement extends JDIBase
     }
     public UIElement firstChild() { return find("*"); }
     public WebList children() { return finds("*"); }
+    public UIElement findUp() {
+        return find("./..");
+    }
     //endregion
 
     //region Aliases
@@ -757,25 +829,38 @@ public class UIElement extends JDIBase
             return false;
         }
     }
+    @Override
+    public UIElement noValidation() {
+        super.noValidation();
+        return this;
+    }
 
     public boolean isClickable() {
         return isClickable(getRect().getWidth()/2, getRect().getHeight()/2-1);
     }
     public boolean isClickable(int x, int y) {
         return (Boolean) js().executeScript("var elem = arguments[0],    " +
-                "  rect = elem.getBoundingClientRect(),    " +
-                "  cx = rect.left + arguments[1],        " +
-                "  cy = rect.top + arguments[2],        " +
-                "  e = document.elementFromPoint(cx, cy); " +
-                "for (; e; e = e.parentElement) {         " +
-                "  if (e === elem)                        " +
-                "    return true;                         " +
-                "}                                        " +
-                "return false;                            ", getWebElement(), x, y);
+            "  rect = elem.getBoundingClientRect(),    " +
+            "  cx = rect.left + arguments[1],        " +
+            "  cy = rect.top + arguments[2],        " +
+            "  e = document.elementFromPoint(cx, cy); " +
+            "for (; e; e = e.parentElement) {         " +
+            "  if (e === elem)                        " +
+            "    return true;                         " +
+            "}                                        " +
+            "return false;                            ", getWebElement(), x, y);
     }
     //endregion
     public boolean wait(JFunc1<UIElement, Boolean> condition) {
         return timer().wait(() -> condition.execute(this));
+    }
+
+    public <T> T with(Class<T> cl) {
+        try {
+            return create(cl, this);
+        } catch (Throwable ex) {
+            throw exception(ex, "Can't create instantiate class. %s class should have constructor with UIElement parameter in order to use with method", cl.getSimpleName());
+        }
     }
 
     public void press(Keys key) {
@@ -792,6 +877,13 @@ public class UIElement extends JDIBase
     }
     public void pasteText(String text, long timeToWaitMSec) {
         Keyboard.pasteText(text, timeToWaitMSec);
+    }
+
+    public UIElement inFrame(By... bys) {
+        return setup(base -> base.setFrames(asList(bys)));
+    }
+    public UIElement inFrame(String... bys) {
+        return setup(base -> base.setFrames(map(bys, WebDriverByUtils::defineLocator)));
     }
 
     public IsAssert is() {

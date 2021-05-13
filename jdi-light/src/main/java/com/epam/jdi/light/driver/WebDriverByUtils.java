@@ -2,6 +2,7 @@ package com.epam.jdi.light.driver;
 
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.tools.func.JFunc;
+import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -82,7 +83,7 @@ public final class WebDriverByUtils {
             {"tagName", "tag"},
             {"className", "class"}
     });
-    public static String getByName(By by) {
+    public static String getByType(By by) {
         Matcher m = Pattern.compile("By\\.(?<locator>[a-zA-Z]+):.*").matcher(by.toString());
         if (m.find()) {
             String result = m.group("locator");
@@ -92,7 +93,7 @@ public final class WebDriverByUtils {
     }
 
     public static By correctXPaths(By byValue) {
-        return byValue.toString().contains("By.xpath: //")
+        return byValue.toString().contains("By.xpath: //") || byValue.toString().contains("By.xpath: (//")
                 ? getByFunc(byValue).apply(getByLocator(byValue)
                 .replaceFirst("/", "./"))
                 : byValue;
@@ -107,14 +108,14 @@ public final class WebDriverByUtils {
     private static String shortBy(By by, JFunc<String> noLocator) {
         return (by == null
                 ? noLocator.execute()
-                : format("%s='%s'", getByName(by), getByLocator(by))).replaceAll("%s", "{{VALUE}}");
+                : format("%s='%s'", getByType(by), getByLocator(by))).replaceAll("%s", "{{VALUE}}");
     }
     public static By getByFromString(String stringLocator) {
         if (stringLocator == null || stringLocator.equals(""))
             throw new RuntimeException("Can't get By locator from string empty or null string");
         String[] split = stringLocator.split("(^=)*=.*");
         if (split.length == 1)
-            return defineLocator(split[0]);
+            return NAME_TO_LOCATOR.execute(split[0]);
         switch (split[0]) {
             case "css": return By.cssSelector(split[1]);
             case "xpath": return By.xpath(split[1]);
@@ -154,7 +155,7 @@ public final class WebDriverByUtils {
     }
     private static List<WebElement> getEls(Object step, SearchContext ctx, List<WebElement> els) {
         if (isClass(step.getClass(), By.class)) {
-            String byName = getByName((By) step);
+            String byName = getByType((By) step);
             if (byName.equals("id") || (byName.equals("css") && getByLocator((By) step).matches("^#[a-zA-Z-]+$"))) {
                 return getDriver().findElements((By) step);
             } else {
@@ -169,7 +170,7 @@ public final class WebDriverByUtils {
     }
     public static List<Object> searchBy(By by) {
         try {
-            if (!getByName(by).equals("css"))
+            if (!getByType(by).equals("css"))
                 return singletonList(by);
             String locator = getByLocator(by);
             List<By> result = replaceUp(locator);
@@ -177,6 +178,7 @@ public final class WebDriverByUtils {
             return valueOrDefault(replaceChildren(result), one(by));
         } catch (Exception ex) { throw new RuntimeException("Search By failed"); }
     }
+    public static JFunc1<String, By> NAME_TO_LOCATOR = WebDriverByUtils::defineLocator;
     public static By defineLocator(String locator) {
         String by = locator.contains("*root*")
             ? locator.replaceAll("\\*root\\*", "")
@@ -228,7 +230,7 @@ public final class WebDriverByUtils {
     private static List<By> replaceText(List<By> bys) {
         List<By> result = new ArrayList<>();
         for (By by : bys)
-            if (getByName(by).equals("css"))
+            if (getByType(by).equals("css"))
                 result.addAll(replaceText(getByLocator(by)));
             else result.add(by);
         return result;
@@ -255,7 +257,7 @@ public final class WebDriverByUtils {
     private static List<Object> replaceChildren(List<By> bys) {
         List<Object> result = new ArrayList<>();
         for (By by : bys)
-            if (getByName(by).equals("css"))
+            if (getByType(by).equals("css"))
                 result.addAll(replaceChildren(getByLocator(by)));
             else result.add(by);
         return result;

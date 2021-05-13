@@ -7,9 +7,9 @@ import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.logger.AllureLogger;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.logging.LogEntry;
@@ -17,18 +17,17 @@ import org.openqa.selenium.logging.LogEntry;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
-import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
 import static com.epam.jdi.light.elements.common.WindowsManager.checkNewWindowIsOpened;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
@@ -36,6 +35,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
 import static com.epam.jdi.light.logger.AllureLogger.attachScreenshot;
+import static com.epam.jdi.light.logger.AllureLogger.logDataToAllure;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.logger.Strategy.NEW_PAGE;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -46,7 +46,6 @@ import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
 import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -64,8 +63,6 @@ public class WebPage extends DriverBase implements PageObject {
     public String checkUrl;
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = NONE;
-
-    public static PageChecks CHECK_AFTER_OPEN = PageChecks.NONE;
 
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this)
@@ -129,11 +126,23 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public static void openSite() {
         init();
-        new WebPage(getDomain()).open();
+        String domain = getDomain();
+        if (isBlank(domain)) {
+            throw exception("No Domain Found. Add browser=MY_SITE_DOMAIN in test.properties or JDISettings.DRIVER.domain");
+        }
+        WebPage site = new WebPage();
+        if(isNotBlank(DRIVER.siteName)) {
+            site.setName(DRIVER.siteName);
+        }
+        site.open(domain);
     }
     public static void openSite(Class<?> site) {
         initSite(site);
-        WebPage page = new WebPage(getDomain());
+        String domain = getDomain();
+        if (isBlank(domain)) {
+            throw exception("No Domain Found. Use test.properties or JDISettings.DRIVER.domain");
+        }
+        WebPage page = new WebPage(domain);
         page.setName(site.getSimpleName());
         page.open();
     }
@@ -183,11 +192,11 @@ public class WebPage extends DriverBase implements PageObject {
     }
 
     public StringCheckType url() {
-        return new StringCheckType(driver()::getCurrentUrl, checkUrl, "url");
+        return new StringCheckType(WebPage::getUrl, checkUrl, "url");
     }
 
     public StringCheckType title() {
-        return new StringCheckType(driver()::getTitle, title, "title");
+        return new StringCheckType(WebPage::getTitle, title, "title");
     }
 
     /**
@@ -196,10 +205,14 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(value = "Open '{name}'(url={0})", timeout = 0)
     private void open(String url) {
+        if (isBlank(url)) {
+            throw exception("Failed to open page with empty url");
+        }
         init();
         CacheValue.reset();
         driver().navigate().to(url);
         getWindows();
+        isTop.set(true);
         setCurrentPage(this);
     }
     public void open(Object... params) {
@@ -226,7 +239,7 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
     public void checkOpened() {
         if (noRunDrivers())
-            throw exception("Page '%s' is not opened: Driver is not run", toString());
+            throw exception("Page '%s' is not opened: Driver is not run: ", toString());
         String result = Switch(checkUrlType).get(
             Value(NONE, ""),
             Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
@@ -234,7 +247,7 @@ public class WebPage extends DriverBase implements PageObject {
             Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
-            throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getCurrentUrl(), checkUrl));
+            throw exception("Page '%s' is not opened: %s", getName(), format(result, getUrl(), checkUrl));
         result = Switch(checkTitleType).get(
             Value(NONE, ""),
             Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
@@ -243,9 +256,18 @@ public class WebPage extends DriverBase implements PageObject {
         );
         if (isNotBlank(result))
             throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
-        setCurrentPage(this);
         if (VISUAL_PAGE_STRATEGY == CHECK_PAGE)
             visualWindowCheck();
+        isTop.set(true);
+        setCurrentPage(this);
+    }
+    public void checkIsNotChanged() {
+        if (noRunDrivers())
+            throw exception("Driver is not run: ", toString());
+        boolean result = new Timer(TIMEOUTS.page.get() * 1000L).getResult(() -> !isOpened());
+        if (!result) {
+            throw exception("New page opened: %s", getUrl());
+        }
     }
     public boolean isOnPage(String url) {
         switch (checkUrlType) {
@@ -274,22 +296,24 @@ public class WebPage extends DriverBase implements PageObject {
         if (noRunDrivers())
             return false;
         boolean result = Switch(checkUrlType).get(
-                Value(NONE, t -> true),
-                Value(EQUALS, t -> url().check()),
-                Value(MATCH, t -> url().match()),
-                Value(CONTAINS, t -> url().contains()),
-                Else(false)
+            Value(NONE, t -> true),
+            Value(EQUALS, t -> url().check()),
+            Value(MATCH, t -> url().match()),
+            Value(CONTAINS, t -> url().contains()),
+            Else(false)
         );
         if (!result) return false;
         result = Switch(checkTitleType).get(
-                Value(NONE, t -> true),
-                Value(EQUALS, t -> title().check()),
-                Value(MATCH, t -> title().match()),
-                Value(CONTAINS, t -> title().contains()),
-                Else(false)
+            Value(NONE, t -> true),
+            Value(EQUALS, t -> title().check()),
+            Value(MATCH, t -> title().match()),
+            Value(CONTAINS, t -> title().contains()),
+            Else(false)
         );
-        if (result)
+        if (result) {
+            isTop.set(true);
             setCurrentPage(this);
+        }
         return result;
     }
 
@@ -313,9 +337,10 @@ public class WebPage extends DriverBase implements PageObject {
     /**
      * Reload current page
      */
-    @JDIAction("Reload current page")
+    @JDIAction(value = "Reload current page", isAssert = true)
     public static void refresh() {
         getDriver().navigate().refresh();
+        logger.info("Page url: " + getUrl());
     }
     public static void reload() { refresh(); }
 
@@ -325,6 +350,7 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction("Go back to previous page")
     public static void back() {
         getDriver().navigate().back();
+        logger.info("Page url: " + getUrl());
     }
 
     /**
@@ -333,6 +359,7 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction("Go forward to next page")
     public static void forward() {
         getDriver().navigate().forward();
+        logger.info("Page url: " + getUrl());
     }
 
     /**
@@ -436,11 +463,24 @@ public class WebPage extends DriverBase implements PageObject {
     public static long yOffset() {
         return jsExecute("return window.pageYOffset;");
     }
+    public void windowScreenshotToAllure() {
+        try {
+            attachScreenshot(getName(), windowScreenshot());
+        } catch (Exception ignore) { }
+    }
+    @JDIAction(level = DEBUG)
+    public static String windowScreenshot(String path) {
+        try {
+            File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            File imageFile = new File(path);
+            copyFile(screenshot, imageFile);
+            return path;
+        } catch (Exception ex) { throw exception(ex, "Can't take screenshot"); }
+    }
     @JDIAction(level = DEBUG)
     public static String windowScreenshot() {
         try {
             File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-            //show();
             String path = mergePath(getPath(), getCurrentPage()+".png");
             File imageFile = new File(path);
             copyFile(screenshot, imageFile);
@@ -454,7 +494,6 @@ public class WebPage extends DriverBase implements PageObject {
         String path;
         try {
             screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-            //show();
             path = mergePath(getPath(), name);
             imageFile = new File(path);
         } catch (Exception ex) { throw exception(ex, "Can't take windowScreenshot"); }
@@ -476,6 +515,11 @@ public class WebPage extends DriverBase implements PageObject {
                 l -> msgFormat(PRINT_PAGE_INFO, this)),
             Default(msgFormat(PRINT_PAGE_DEBUG, this))
         );
+    }
+    public String details() {
+        return format("url=%s, title='%s', checkUrl='%s'%s, checkTitle='%s'",
+            url, title, checkUrlType,
+            isNotBlank(checkUrl) ? ("[checkUrl=" + checkUrl+ "]") : "", checkTitleType);
     }
 
     public static class StringCheckType {
@@ -522,24 +566,12 @@ public class WebPage extends DriverBase implements PageObject {
         if (VISUAL_PAGE_STRATEGY == CHECK_NEW_PAGE) {
             visualWindowCheck();
         }
-        if (LOGS.screenStrategy.contains(NEW_PAGE)) {
-            String screenName = takeScreen(page.getName());
-            String detailsUUID = AllureLogger.startStep(page.getName());
-            if (isNotBlank(screenName)) {
-                try {
-                    attachScreenshot(screenName);
-                } catch (IOException ex) {
-                    throw exception(ex, "");
-                }
-            }
-            getLifecycle().stopStep(detailsUUID);
-
-        }
+        logDataToAllure(NEW_PAGE, page.getName(), false);
         logger.toLog("Page '" + page.getName() + "' opened");
         TIMEOUTS.element.set(TIMEOUTS.page.get());
     }
 
-    public static void beforeThisPage(WebPage page) {
+    public static void beforeEachPage(WebPage page) {
         if (PAGE.checkPageOpen != PageChecks.NONE) {
             page.checkOpened();
         }

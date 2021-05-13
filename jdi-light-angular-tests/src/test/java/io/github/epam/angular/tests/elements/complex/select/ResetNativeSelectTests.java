@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.resetNativeSelect;
 import static org.hamcrest.Matchers.*;
 
@@ -21,7 +22,7 @@ public class ResetNativeSelectTests extends TestsSelectBase {
 
     @Test
     public void checkResetOptionCanBeSelectedById() {
-        resetNativeSelect.select(1);
+        resetNativeSelect.select(ELEMENT.startIndex);
         resetNativeSelect.is().selected(matchesPattern("\\W*"));
     }
 

@@ -3,6 +3,7 @@ package com.epam.jdi.light.asserts.generic;
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JFunc1;
 import org.hamcrest.Matcher;
@@ -17,7 +18,7 @@ import static com.epam.jdi.tools.StringUtils.format;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAssert<E>
+public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends BaseAssert<E>
     implements CommonAssert<A> {
     /**
      * Check that the element is displayed
@@ -108,12 +109,12 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
         return css(css, Matchers.is(value));
     }
 
-    @JDIAction("Assert that '{name}' css class {0}")
+    @JDIAction("Assert that '{name}' css class is '{0}'")
     public A cssClasses(Matcher<? super List<String>> condition) {
         jdiAssert(element().classes(), condition);
         return (A) this;
     }
-    @JDIAction("Assert that '{name}' css class {0}")
+    @JDIAction("Assert that '{name}' css class is '{0}'")
     public A classValue(Matcher<String> condition) {
         jdiAssert(element().core().attr("class"), condition);
         return (A) this;
@@ -125,7 +126,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
         return cssClasses(Matchers.hasItem(className));
     }
 
-    @JDIAction("Assert that '{name}' tag {0}")
+    @JDIAction("Assert that '{name}' tag is '{0}'")
     public A tag(Matcher<String> condition) {
         jdiAssert(element().getTagName(), condition);
         return (A) this;
@@ -138,7 +139,7 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
      * Match passed value with the element class
      * @param attrName to compare attr(String attrName)
      */
-    @JDIAction("Assert that '{name}' has css class {0}")
+    @JDIAction("Assert that '{name}' has css class '{0}'")
     public A attr(String attrName) {
         jdiAssert(format(element().hasAttribute(attrName) ? "has attribute '%s'" : "has no attribute '%s'", attrName) , Matchers.is("has attribute '"+attrName+"'"));
         return (A) this;
@@ -168,10 +169,10 @@ public class UIAssert<A extends UIAssert, E extends ICoreElement> extends BaseAs
         return t.execute((A) this);
     }
 
-    public A set(E element) {
-        this.element = element;
-        name = element.getName();
-        failElement = format("%s(%s)", name, element.core().printFullLocator());
+    public A set(E original) {
+        this.element = new Safe<>(() -> original);
+        name = original.getName();
+        failElement = format("%s(%s)", name, original.core().printFullLocator());
         return (A) this;
     }
 

@@ -19,6 +19,10 @@ import java.util.stream.Stream;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 
+/**
+ * To see an example of NativeSelector web element please visit https://material.angular.io/components/select/overview.
+ */
+
 public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implements HasLabel {
     public String groupsAndOptionsList = "#%s optgroup";
     public String hintLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";
@@ -115,9 +119,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     public List<String> groups() {
         List<String> groups = new ArrayList<>();
         WebList webList = new WebList(By.cssSelector(String.format(groupsAndOptionsList,
-                                                                   this.uiElement.locator.printLocator()
-                                                                           .replace(smartSharp, "")
-                                                                           .replace(cssSharp, "").replace("'", ""))));
+            core().locator.printLocator().replace(smartSharp, "") .replace(cssSharp, "").replace("'", ""))));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {
             groups.add(String.valueOf(webList.attrs("label").get(i)));
@@ -134,9 +136,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     public Map<String, List<String>> groupsAndOptions() {
         Map<String, List<String>> map = new LinkedHashMap<>();
         WebList webList = new WebList(By.cssSelector(String.format(groupsAndOptionsList,
-                                                                   this.uiElement.locator.printLocator()
-                                                                           .replace(smartSharp, "")
-                                                                           .replace(cssSharp, "").replace("'", ""))));
+           core().locator.printLocator() .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {
             String stringGroupsAndOptions = webList.values().get(i);
@@ -181,9 +181,8 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      * @return UIElement with hint text
      */
     public UIElement hint() {
-        return new UIElement(By.xpath(String.format(hintLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""))));
+        return new UIElement(By.xpath(String.format(hintLocator, core().locator.printLocator()
+            .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
     /**
@@ -192,8 +191,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      * @return UIElement with error text
      */
     public UIElement error() {
-        return new UIElement(By.xpath(String.format(errorLocator,
-                                                    this.uiElement.locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""))));
+        return new UIElement(By.xpath(String.format(errorLocator, core().locator.printLocator()
+            .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 }

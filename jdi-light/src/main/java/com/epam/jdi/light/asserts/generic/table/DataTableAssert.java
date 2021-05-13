@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.complex.table.Row;
-import com.epam.jdi.light.elements.complex.table.TableMatcher;
+import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.tools.LinqUtils;
@@ -20,10 +20,11 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.asserts.generic.table.DataTableAssert.CompareType.*;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.TABLE_MATCHER;
+import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.TABLE_MATCHER;
 import static com.epam.jdi.tools.LinqUtils.isSorted;
 import static java.lang.String.format;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasSize;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -37,12 +38,13 @@ public class DataTableAssert<L extends PageObject, D>
      * @param condition to compare
      * @return DataTableAssert
      */
-    @JDIAction("Assert that '{name}' has rows that meet expected condition")
+    @JDIAction("Assert that '{name}' has at least one row that meet expected condition")
     public DataTableAssert<L, D> row(JFunc1<D,Boolean> condition) {
-        jdiAssert(table().dataRow(condition), not(nullValue()));
+        jdiAssert(table().dataRow(condition) != null ? "has row" : "has no rows",
+            Matchers.is("has row"));
         return this;
     }
-    @JDIAction("Assert that '{name}' has rows that meet expected condition")
+    @JDIAction("Assert that '{name}' has at least one that meet expected condition")
     public DataTableAssert<L, D> value(JFunc1<D,Boolean> condition, Row row) {
         jdiAssert(condition.execute(table().dataRow(row.getIndex(table().header()))), Matchers.is(true));
         return this;
@@ -141,7 +143,6 @@ public class DataTableAssert<L extends PageObject, D>
     }
 
     public class Compare implements JAssert {
-
         public int count;
         public String name;
         public String printText;
@@ -200,7 +201,7 @@ public class DataTableAssert<L extends PageObject, D>
          * @param matchers to compare
          */
         @JDIAction("Assert that '{name}' {printText} has {0}")
-        public DataTableAssert<L, D> rows(TableMatcher... matchers) {
+        public DataTableAssert<L, D> rows(ColumnMatcher... matchers) {
             jdiAssert(TABLE_MATCHER.execute(table(), matchers).size(),
                     greaterThan(table().header().size()*count-1));
             return dtAssert;
@@ -211,7 +212,7 @@ public class DataTableAssert<L extends PageObject, D>
         public DataTableAssert<L, D> row(D data) {
             return rows(data);
         }
-        public DataTableAssert<L, D> row(TableMatcher... matchers) {
+        public DataTableAssert<L, D> row(ColumnMatcher... matchers) {
             return rows(matchers);
         }
     }

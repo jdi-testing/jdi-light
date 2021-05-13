@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.checksGroup;
 import static io.github.com.pages.HtmlElementsPage.weather;
@@ -17,10 +18,11 @@ import static org.testng.Assert.fail;
 
 public class ChecklistTests implements TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
+        weather.show();
         weather.check(text);
     }
     String text = "Hot option";
@@ -102,36 +104,36 @@ public class ChecklistTests implements TestsInit {
 
     @Test
     public void checkNumTest() {
-        weather.check(4);
+        weather.check(ELEMENT.startIndex + 3);
         assertEquals(weather.checked(), asList("Sunny"));
     }
     @Test
     public void checkNumTwoTest() {
-        weather.check(1, 4);
+        weather.check(ELEMENT.startIndex, ELEMENT.startIndex + 3);
         assertEquals(weather.checked(), asList("Hot option", "Sunny"));
     }
     @Test
     public void uncheckNumTest() {
         weather.checkAll();
-        weather.uncheck(1);
+        weather.uncheck(ELEMENT.startIndex);
         weather.is().checked(hasSize(3));
         weather.is().checked(hasItems("Cold", "Rainy day", "Sunny"));
     }
     @Test
     public void uncheckNumTwoTest() {
         weather.checkAll();
-        weather.uncheck(1, 4);
+        weather.uncheck(ELEMENT.startIndex, ELEMENT.startIndex + 3);
         weather.is().checked(hasSize(2));
         weather.is().checked(hasItems("Cold", "Rainy day"));
     }
     @Test
     public void selectNumTest() {
-        weather.select(4);
+        weather.select(ELEMENT.startIndex + 3);
         assertEquals(weather.checked(), asList("Hot option", "Sunny"));
     }
     @Test
     public void selectNumTwoTest() {
-        weather.select(1, 4);
+        weather.select(ELEMENT.startIndex, ELEMENT.startIndex + 3);
         assertEquals(weather.checked(), asList("Sunny"));
     }
 

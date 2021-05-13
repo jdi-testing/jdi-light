@@ -1,9 +1,11 @@
 package io.github.epam.html.tests.elements.complex;
 
 import io.github.epam.TestsInit;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.MetalAndColorsPage.odds;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -34,7 +36,7 @@ public class RadioLabelTests implements TestsInit {
 
     @Test
     public void selectNumTest() {
-        odds.select(1);
+        odds.select(ELEMENT.startIndex);
         assertEquals(odds.getValue(), "1");
     }
     @Test
@@ -58,4 +60,11 @@ public class RadioLabelTests implements TestsInit {
         odds.assertThat().values(contains("1", "3", "5", "7"));
     }
 
+    // TODO this is not a test but points to improve
+    @Test(enabled = false)
+    public void problems() {
+        odds.list();
+        odds.core().finds(By.xpath("../")).get(1).getTagName();
+        odds.core().findElements(By.xpath("../"));
+    }
 }

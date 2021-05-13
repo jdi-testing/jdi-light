@@ -11,7 +11,7 @@ import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.entities.Contacts;
 
 public class ContactFormUI extends Form<Contacts> {
-	@UI("#name") TextField name;
+	@UI("#first-name") TextField firstName;
 	@UI("#last-name") TextField lastName;
 	@UI("#position") TextField position;
 	@UI("#passport-number") TextField passportNumber;

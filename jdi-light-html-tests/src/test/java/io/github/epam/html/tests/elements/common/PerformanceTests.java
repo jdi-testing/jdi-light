@@ -5,8 +5,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.durationImmediately;
@@ -24,11 +24,12 @@ import static org.testng.Assert.fail;
 
 public class PerformanceTests implements TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         refresh();
+        redButton.waitFor().displayed();
     }
 
     //#region With Smart Locator
@@ -116,7 +117,7 @@ public class PerformanceTests implements TestsInit {
     public void isNotAppearRemoveFailedButtonTest() {
         try {
             durationMoreThan(1, () ->
-                    removeButton.is().notAppear());
+                removeButton.is().notAppear());
             fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
         } catch (AssertionError ex) {
             assertThat(safeException(ex), containsString("but: was \"displayed\""));

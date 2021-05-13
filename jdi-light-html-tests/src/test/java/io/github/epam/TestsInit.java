@@ -3,17 +3,23 @@ package io.github.epam;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
+import io.github.epam.testng.TestNGListener;
+import org.testng.ITestResult;
+import org.testng.SkipException;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
+import static com.epam.jdi.light.elements.composite.WebPage.reload;
 import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static io.github.com.StaticSite.homePage;
 
+@Listeners(TestNGListener.class)
 public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
@@ -21,7 +27,6 @@ public interface TestsInit {
         killAllSeleniumDrivers();
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
-        homePage.open();
         logger.toLog("Run Tests");
     }
 
@@ -31,6 +36,21 @@ public interface TestsInit {
     }
 
     default boolean isFireFox() {
-        return DRIVER.name.toLowerCase().equals("firefox");
+        String ffName = "firefox";
+        logger.info("Browser %s is used. isFirefox=%s", DRIVER.name, ffName.equalsIgnoreCase(DRIVER.name));
+        return ffName.equalsIgnoreCase(DRIVER.name);
+    }
+
+    default void skipForFirefox() {
+        if (isFireFox()) {
+            throw new SkipException("Test is skipped for Firefox browser");
+        }
+    }
+
+    @AfterMethod
+    default void refreshPageOnFailure(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            reload();
+        }
     }
 }

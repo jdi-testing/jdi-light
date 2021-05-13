@@ -8,6 +8,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.Timer.nowTimeShort;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -16,10 +17,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class SoftAssert {
     private static Safe<List<String>> listOfErrors = new Safe<>(new ArrayList<>());
-    private static boolean IS_SOFT_ASSERT = false;
+    private static Safe<Boolean> IS_SOFT_ASSERT = new Safe<>(() -> false);
 
     public static void setAssertType(String type) {
-        IS_SOFT_ASSERT = type.equalsIgnoreCase("soft");
+        IS_SOFT_ASSERT.set(type.equalsIgnoreCase("soft"));
         clearResults();
     }
     public static void assertSoft() {
@@ -32,22 +33,30 @@ public class SoftAssert {
         try {
             assertThat(actual, matcher);
         } catch (Throwable error) {
-            if (IS_SOFT_ASSERT) {
+            if (IS_SOFT_ASSERT.get()) {
                 addError(error);
             } else
                 throw new AssertionError(error);
         }
     }
-    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
+    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher, String errorMsg) {
         try {
             assertThat(actual, matcher);
             logger.debug(">>> " + actual);
         } catch (Throwable error) {
-            if (IS_SOFT_ASSERT) {
-                addError(error);
+            String errorMessage = nowTimeShort() + " " + getErrorMsg(errorMsg, error);
+            AssertionError failError = new AssertionError(errorMessage);
+            if (IS_SOFT_ASSERT.get()) {
+                addError(failError);
             } else
-                throw new AssertionError(error);
+                throw failError;
         }
+    }
+    private static String getErrorMsg(String errorMsg, Throwable error) {
+        return errorMsg != null ? errorMsg : error.getMessage();
+    }
+    public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
+        jdiAssert(actual, matcher, null);
     }
     private static void addError(Throwable error) {
         listOfErrors.get().add(error.getMessage().replace("java.lang.AssertionError: ", ""));
@@ -61,11 +70,12 @@ public class SoftAssert {
     public static void assertResults() {
         List<String> errors = new ArrayList<>(listOfErrors.get());
         clearResults();
-        if (!errors.isEmpty())
+        if (!errors.isEmpty()) {
             throw new AssertionError(print(errors));
+        }
     }
 
-    public static void clearResults(){
+    public static void clearResults() {
         listOfErrors.get().clear();
     }
 }

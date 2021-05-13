@@ -1,7 +1,7 @@
 package io.github.epam.html.tests.elements.complex.table;
 
 import com.epam.jdi.light.elements.complex.table.Line;
-import com.epam.jdi.light.elements.complex.table.Single;
+import com.epam.jdi.light.elements.complex.table.matchers.ValueMatcher;
 import io.github.com.entities.MarvelUserInfo;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -10,12 +10,14 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.hasValue;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.users;
 import static io.github.com.pages.UsersPage.usersSetup;
+import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN;
 import static java.util.Arrays.asList;
@@ -35,11 +37,20 @@ public class DataTableTests implements TestsInit {
             firstTime = false;
         }
     }
+
+    @Test
+    public void iterationTest() {
+        String text = "";
+        for(MarvelUserInfo user : users) {
+            text += user.number;
+        }
+        assertEquals(text, "123456");
+    }
     @Test
     public void visualTableChecks() {
         List<Line> rows = users.rowsImages();
         users.assertThat()
-            .rowsVisualValidation("User", rows);
+            .rowsLooksCorrect("User", rows);
     }
 
     @Test
@@ -61,16 +72,16 @@ public class DataTableTests implements TestsInit {
         String value = users.getValue();
         assertEquals(value,
         "||X||Number|Type|User|Description||" + LINE_BREAK +
-            "||1||1|Admin|Roman|Wolverine:VIP||" + LINE_BREAK +
-            "||2||2|User|Sergey Ivan|Spider Man:Dude||" + LINE_BREAK +
-            "||3||3|Manager|Vladzimir|Punisher:VIP||" + LINE_BREAK +
-            "||4||4|User|Helen Bennett|Captain America\\nsome description:Dude||" + LINE_BREAK +
-            "||5||5|User|Yoshi Tannamuri|Cyclope\\nsome description:Dude||" + LINE_BREAK +
-            "||6||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||" + LINE_BREAK);
+            "||"+i(0)+"||1|Admin|Roman|Wolverine:VIP||" + LINE_BREAK +
+            "||"+i(1)+"||2|User|Sergey Ivan|Spider Man:Dude||" + LINE_BREAK +
+            "||"+i(2)+"||3|Manager|Vladzimir|Punisher:VIP||" + LINE_BREAK +
+            "||"+i(3)+"||4|User|Helen Bennett|Captain America\\nsome description:Dude||" + LINE_BREAK +
+            "||"+i(4)+"||5|User|Yoshi Tannamuri|Cyclope\\nsome description:Dude||" + LINE_BREAK +
+            "||"+i(5)+"||6|User|Giovanni Rovelli|Hulk\\nsome description:Dude||" + LINE_BREAK);
     }
     @Test
     public void dataColumnTestIndex() {
-        assertEquals(users.dataRow(2), SPIDER_MAN);
+        assertEquals(users.dataRow(ELEMENT.startIndex + 1), SPIDER_MAN);
     }
     @Test
     public void dataColumnNameTest() {
@@ -104,7 +115,7 @@ public class DataTableTests implements TestsInit {
     }
     @Test
     public void rowTableMatcherSingleTest() {
-        users.has().rowThat(Single.hasValue("Sergey Ivan"), inColumn("User"));
+        users.has().rowThat(ValueMatcher.hasValue("Sergey Ivan"), inColumn("User"));
     }
     @Test
     public void rowTableMatcherTest() {

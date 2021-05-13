@@ -8,6 +8,7 @@ import com.epam.jdi.tools.pairs.Pair;
 import org.aspectj.lang.JoinPoint;
 
 import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
+import static com.epam.jdi.light.actions.ActionHelper.getJpInstance;
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
 /**
@@ -22,21 +23,21 @@ public class ActionOverride {
         OVERRIDE_ACTIONS_LIST.add(condition, func);
     }
     public static void overrideFunction(String actionName, JFunc1<Object, Object> func) {
-        OVERRIDE_ACTIONS_LIST.add(jp -> jp.getSignature().getName().equals(actionName), func);
+        OVERRIDE_ACTIONS_LIST.add(jp -> jp.getSignature().getName().equalsIgnoreCase(actionName), func);
     }
     public static void overrideFunction(String typeName, String actionName, JFunc1<Object, Object> func) {
-        OVERRIDE_ACTIONS_LIST.add(jp -> getJpTypeName(jp).equals(typeName)
-                && jp.getSignature().getName().equals(actionName), func);
+        OVERRIDE_ACTIONS_LIST.add(jp -> getJpTypeName(jp).equalsIgnoreCase(typeName)
+                && jp.getSignature().getName().equalsIgnoreCase(actionName), func);
     }
     private static String getJpTypeName(JoinPoint jp) {
-        Object obj = jp.getThis();
+        Object obj = getJpInstance(jp);
         if (obj == null) {
             return getJpClass(jp).getSimpleName();
         }
-        String typeName = ((DriverBase) jp.getThis()).typeName;
+        String typeName = ((DriverBase) getJpInstance(jp)).typeName;
         return isNotBlank(typeName)
             ? typeName
-            : jp.getThis().getClass().getSimpleName();
+            : getJpInstance(jp).getClass().getSimpleName();
     }
     public static void overrideAction(JFunc1<JoinPoint, Boolean> condition, JAction1<Object> action) {
         overrideFunction(condition, jdi -> {

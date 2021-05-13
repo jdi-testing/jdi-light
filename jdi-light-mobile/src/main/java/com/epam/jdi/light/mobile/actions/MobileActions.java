@@ -7,6 +7,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
+import static com.epam.jdi.light.actions.ActionProcessor.isTop;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 
 /**
  * Created by Roman Iovlev on 20.03.2019
@@ -20,19 +23,28 @@ public class MobileActions {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        ActionObject jInfo = new ActionObject(jp);
+        String classMethod = "";
         try {
-            failedMethods.clear();
+            classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
+            logger.trace("<>@MA: " + classMethod);
+        } catch (Exception ignore) { }
+        ActionObject jInfo = newInfo(jp, "AO");
+        failedMethods.clear();
+        try {
             BEFORE_JDI_ACTION.execute(jInfo);
-            Object result = jInfo.topLevel()
+            Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
-            return AFTER_JDI_ACTION.execute(jInfo, result);
+            logger.trace("<>@MA: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
+            AFTER_JDI_ACTION.execute(jInfo, result);
+            return result;
         } catch (Throwable ex) {
+            logger.debug("<>@MA exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
-            jInfo.clear();
+            if (jInfo != null)
+                jInfo.clear();
         }
     }
 }

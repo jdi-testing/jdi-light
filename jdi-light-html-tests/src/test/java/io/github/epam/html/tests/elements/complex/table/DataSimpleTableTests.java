@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements.complex.table;
 
-import com.epam.jdi.light.elements.complex.table.Single;
+import com.epam.jdi.light.elements.complex.table.matchers.ValueMatcher;
 import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.com.entities.MarvelUserSimple;
 import io.github.epam.TestsInit;
@@ -10,11 +10,13 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.containsValue;
-import static com.epam.jdi.light.elements.complex.table.TableMatcher.hasValue;
+import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.containsValue;
+import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.hasValue;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.usersPage;
 import static io.github.com.pages.UsersPage.emptyTable;
 import static io.github.com.pages.UsersPage.usersData;
+import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.MarvelHeroes.SPIDER_MAN_SIMPLE;
 import static java.util.Arrays.asList;
@@ -59,22 +61,23 @@ public class DataSimpleTableTests implements TestsInit {
     public void valueTest() {
         String value = usersData.getValue().replaceAll("\r", "");
         assertEquals(value,
-        "||X||Number|Type|User|Description||\n" +
-            "||1||1|Admin\\n User\\n Manager|Roman|Wolverine\\nVip||\n" +
-            "||2||2|Admin\\n User\\n Manager|Sergey Ivan|Spider Man\\nVip||\n" +
-            "||3||3|Admin\\n User\\n Manager|Vladzimir|Punisher\\nVip||\n" +
-            "||4||4|Admin\\n User\\n Manager|Helen Bennett|Captain America\\nsome description\\nVip||\n" +
-            "||5||5|Admin\\n User\\n Manager|Yoshi Tannamuri|Cyclope\\nsome description\\nVip||\n" +
-            "||6||6|Admin\\n User\\n Manager|Giovanni Rovelli|Hulk\\nsome description\\nVip||\n");
+            "||X||Number|Type|User|Description||\n" +
+            "||"+i(0)+"||1|Admin\\n User\\n Manager|Roman|Wolverine\\nVip||\n" +
+            "||"+i(1)+"||2|Admin\\n User\\n Manager|Sergey Ivan|Spider Man\\nVip||\n" +
+            "||"+i(2)+"||3|Admin\\n User\\n Manager|Vladzimir|Punisher\\nVip||\n" +
+            "||"+i(3)+"||4|Admin\\n User\\n Manager|Helen Bennett|Captain America\\nsome description\\nVip||\n" +
+            "||"+i(4)+"||5|Admin\\n User\\n Manager|Yoshi Tannamuri|Cyclope\\nsome description\\nVip||\n" +
+            "||"+i(5)+"||6|Admin\\n User\\n Manager|Giovanni Rovelli|Hulk\\nsome description\\nVip||\n");
     }
     @Test
     public void dataColumnTestIndex() {
-        assertEquals(usersData.dataRow(2), SPIDER_MAN_SIMPLE);
+        assertEquals(usersData.dataRow(ELEMENT.startIndex + 1), SPIDER_MAN_SIMPLE);
     }
     @Test
     public void dataFilterTest() {
         assertEquals(usersData.dataRow(d -> d.user.contains("Ivan")), SPIDER_MAN_SIMPLE);
     }
+
     @Test
     public void allDataFilterTest() {
         List<MarvelUserSimple> filteredData = usersData.dataRows(d -> d.user.contains("Ivan"));
@@ -103,7 +106,7 @@ public class DataSimpleTableTests implements TestsInit {
     }
     @Test
     public void rowTableMatcherSingleTest() {
-        usersData.has().rowThat(Single.hasValue("Sergey Ivan"), inColumn("User"));
+        usersData.has().rowThat(ValueMatcher.hasValue("Sergey Ivan"), inColumn("User"));
     }
     @Test
     public void rowTableMatcherTest() {

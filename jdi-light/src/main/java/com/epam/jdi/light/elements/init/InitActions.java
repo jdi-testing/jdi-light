@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
 import com.epam.jdi.light.elements.base.DriverBase;
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
@@ -21,11 +20,10 @@ import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
+import com.epam.jdi.tools.HasStartIndex;
 import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -42,7 +40,8 @@ import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.*;
+import static com.epam.jdi.tools.StringUtils.format;
+import static com.epam.jdi.tools.StringUtils.toKebabCase;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -90,7 +89,7 @@ public class InitActions {
             PageFactory::initElements)),
         $("VisualCheck", sRule(
             info -> VISUAL_ACTION_STRATEGY == IS_DISPLAYED && isInterface(info.instance.getClass(), ICoreElement.class),
-            i-> ((ICoreElement)i.instance).core().params.update("visualCheck",""))),
+            i-> i.core().params.update("visualCheck",""))),
         $("List", sRule(info -> info.type() == List.class && isInterface(info.type(), HasUIList.class),
             i -> ((HasUIList)i.instance).list().indexFromZero()))
     );
@@ -99,7 +98,7 @@ public class InitActions {
         try {
             if (isInterface(info.instance.getClass(), ISetup.class))
                 return true;
-            Object value = info.field.get(info.parent);
+            Object value = getValueField(info.field, info.parent);
             if (value == null) return false;
             return isInterface(value.getClass(), ISetup.class);
         } catch (Exception ex) {return false; }
@@ -127,17 +126,20 @@ public class InitActions {
         $("SetTextAs", aRule(SetTextAs.class, (e,a)-> e.base().setTextType = a.value())),
         $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
 
-        $("WaitTimeout", aRule(WaitTimeout.class, (e,a)-> e.waitSec(a.value()))),
-        $("NoWait", aRule(NoWait.class, (e,a)-> e.waitSec(0))),
+        $("WaitTimeout", aRule(WaitTimeout.class, (e,a)-> e.setTimeout(a.value()))),
+        $("WaitAfterAction", aRule(WaitAfterAction.class,
+            (e,a)-> e.base().waitAfter(a.value(), a.method()))),
+        $("NoWait", aRule(NoWait.class, (e,a)-> e.setTimeout(0))),
         $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
         $("GetAny", aRule(GetAny.class, (e, a)-> e.base().noValidation())),
         $("GetVisible", aRule(GetVisible.class, (e, a)-> e.base().searchVisible())),
-        $("GetVisibleEnabled", aRule(GetVisibleEnabled.class, (e, a)-> e.base().visibleEnabled())),
+        $("GetVisibleEnabled", aRule(GetVisibleEnabled.class,
+            (e, a)-> e.base().visibleEnabled())),
         $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.base().inView())),
         $("PageName", aRule(PageName.class, (e, a)-> e.base().setPage(a.value()))),
         $("StartIndex", aRule(StartIndex.class, (e, a)-> {
-            if (isInterface(e.getClass(), HasUIList.class))
-                ((HasUIList)e).list().startIndex(a.value());
+            if (isInterface(e.getClass(), HasStartIndex.class))
+                ((HasStartIndex)e).setStartIndex(a.value());
         })),
         $("CloseAfterSelect", aRule(CloseAfterSelect.class, (e, a)-> {
             if (isClass(e.getClass(), DropdownExpand.class))
@@ -147,7 +149,7 @@ public class InitActions {
             e.base().setLocator("#" + toKebabCase(e.getName()));
             e.base().locator.isRoot = true;
         })),
-        $("Smart Text", aRule(SText.class, (e, a) -> e.base().setLocator(asTextLocator(splitCamelCase(e.getName()))))),
+        $("Smart Text", aRule(SText.class, (e, a) -> e.base().setLocator(asTextLocator(e.getName())))),
         $("Smart Name", aRule(SName.class, (e, a) -> e.base().setLocator(format("[name='%s']", toKebabCase(e.getName()))))),
         $("Smart", aRule(Smart.class, (e, a) -> e.base().setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName()))))),
         $("Smart Class", aRule(SClass.class, (e, a) -> e.base().setLocator(format(".%s", toKebabCase(e.getName()))))),
@@ -172,34 +174,23 @@ public class InitActions {
             }
             })),
         $("Visual Check", aRule(VisualCheck.class, (e, a) ->  {
-            if (a.value())
+            if (a.value()) {
                 e.base().params.update("visualCheck", "");
-            else
-                if (e.base().params.keys().contains("visualCheck"))
+                e.base().searchVisible();
+            }
+            else {
+                if (e.base().params.keys().contains("visualCheck")) {
                     e.base().params.removeByKey("visualCheck");
+                }
+            }
         }))
     );
 
     public static IBaseElement elementSetup(SiteInfo info) {
-        IBaseElement jdi = (IBaseElement) info.instance;
-        defaultSetup(info, jdi.base());
-        Object parent = jdi.base().parent;
-        if (parent != null && isClass(parent.getClass(), IBaseElement.class)) {
-            JDIBase parentBase = ((IBaseElement)parent).base();
-            jdi.base().searchRules = parentBase.searchRules.copy();
-        }
-        if (info.field != null) {
-            for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
-                try {
-                    Class<? extends Annotation> annotation = aRule.value.annotation;
-                    if (hasAnnotation(info.field, annotation))
-                        aRule.value.action.execute(jdi, info.field.getAnnotation(annotation), info.field);
-                } catch (Exception ex) {
-                    throw exception(ex, "Setup element '%s' with Annotation '%s' failed", info.name(), aRule.key);
-                }
-            }
-        }
-        info.instance = jdi;
+        if (!isInterface(info.instance.getClass(), IBaseElement.class))
+            throw exception("Setup element '%s' failed. Not a base element", info.name());
+        IBaseElement jdi = ((IBaseElement) info.instance);
+        jdi.base().setup(info);
         return jdi;
     }
     public static boolean isJDIField(Field field) {

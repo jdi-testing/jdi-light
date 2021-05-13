@@ -6,8 +6,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.dropdownMenuSplit;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;
@@ -42,7 +43,7 @@ public class DropdownMenuSplitTests implements TestsInit {
     }
     @Test
     public void selectNumTest() {
-        dropdownMenuSplit.select(1);
+        dropdownMenuSplit.select(ELEMENT.startIndex);
         validateAndAcceptAlert("Stone clicked");
     }
     @Test
@@ -58,7 +59,7 @@ public class DropdownMenuSplitTests implements TestsInit {
             dropdownMenuSplit.select("Unknown");
             fail("You have selected dropdownMenuSplit that does not exist in dropdown - something went wrong");
         } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("Can't get 'Unknown'. No elements with this name found"));
+            assertThat(safeException(ex), containsString("Failed to get 'Unknown' in list 'Dropdown Menu Split list'. No elements with this name found"));
         }
     }
 

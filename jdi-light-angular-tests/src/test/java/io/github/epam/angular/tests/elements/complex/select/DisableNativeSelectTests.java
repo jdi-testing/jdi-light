@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.disableNativeSelect;
 
 public class DisableNativeSelectTests extends TestsSelectBase {
@@ -30,7 +31,7 @@ public class DisableNativeSelectTests extends TestsSelectBase {
     public void checkEnabledOptionCanBeSelectedByIndex() {
         pickDisableSelectCheckboxAsUnchecked();
         disableNativeSelect.waitFor().displayed();
-        disableNativeSelect.select(2);
+        disableNativeSelect.select(ELEMENT.startIndex + 1);
         disableNativeSelect.is().selected(VOLVO);
     }
 

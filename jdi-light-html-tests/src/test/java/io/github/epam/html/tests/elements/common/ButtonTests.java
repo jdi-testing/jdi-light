@@ -6,11 +6,12 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.Exceptions.safeException;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
+import static com.epam.jdi.light.elements.base.Conditions.*;
 import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static com.epam.jdi.light.elements.common.Keyboard.press;
+import static com.epam.jdi.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.*;
@@ -107,7 +108,25 @@ public class ButtonTests implements TestsInit {
         durationMoreThan(3, () -> suspendButton.click());
         Alerts.validateAndAcceptAlert(is("Suspend button"));
     }
+    @Test
+    public void suspendShouldButtonTest() {
+        WebPage.reload();
+        suspendButton.waitFor(hidden);
+        durationMoreThan(3, () -> suspendButton.waitFor(displayed));
+    }
+    @Test
+    public void ghostShouldButtonTest() {
+        WebPage.reload();
+        ghostButton.waitFor(displayed);
+        durationMoreThan(3, () -> ghostButton.waitFor(hidden));
+    }
 
+    @Test
+    public void ghostNotVisibleButtonTest() {
+        WebPage.reload();
+        ghostButton.waitFor(displayed);
+        durationMoreThan(3, () -> ghostButton.waitFor(not(visible)));
+    }
     //if test fails then run `mvn clean install` in module JDI Light
     @Test
     public void vanishButtonTest() {
