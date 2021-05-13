@@ -9,9 +9,6 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import java.util.List;
 
 public class AppBarPage extends WebPage {
-    @UI("//span[text()='App Bar']")
-    public static UIElement appBar;
-
     @UI("//*[text()='App Bar with menu']/preceding::button[@aria-label='menu']")
     public static UIElement simpleMenu;
 

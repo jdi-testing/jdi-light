@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.surfaces;
 
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
@@ -22,23 +23,23 @@ public class AppBarTests extends TestsInit {
     public void simpleAppBarTest() {
         simpleAppBarPage.open();
         simpleAppBarPage.shouldBeOpened();
-        simpleMenu.is().displayed();
-        appBarMenu.is().displayed();
-        prominentMenu.is().displayed();
+        simpleMenu.isDisplayed();
+        appBarMenu.isDisplayed();
+        prominentMenu.isDisplayed();
         simpleText.has().text("News");
         appBarText.has().text("Photos");
         prominentText.has().text("Material-UI");
-        simpleButton.is().displayed();
-        appBarIcon.is().displayed();
-        prominentSearch.is().displayed();
-        prominentSecondMenu.is().displayed();
+        simpleButton.isDisplayed();
+        appBarIcon.isDisplayed();
+        prominentSearch.isDisplayed();
+        prominentSecondMenu.isDisplayed();
 
         logoutSwitchButton.click();
         timer.wait(() -> appBarIcon.is().notVisible());
         logoutSwitchButton.click();
-        timer.wait(() -> appBarIcon.is().displayed());
+        timer.wait(() -> appBarIcon.isDisplayed());
         appBarIcon.click();
-        timer.wait(() -> appBarIconOptions.get(1).is().displayed());
+        timer.wait(() -> appBarIconOptions.get(1).isDisplayed());
         appBarIconOptions.get(1).click();
         timer.wait(() -> {
             appBarIconOptions.get(1).is().notVisible();
@@ -50,18 +51,19 @@ public class AppBarTests extends TestsInit {
     public void bottomAppBarTest() {
         bottomAppBarPage.open();
         bottomAppBarPage.shouldBeOpened();
-        bottomButton.is().displayed();
-        bottomMenuButton.is().displayed();
-        bottomSearchButton.is().displayed();
-        bottomSecondMenuButton.is().displayed();
+        bottomButton.isDisplayed();
+        bottomMenuButton.isDisplayed();
+        bottomSearchButton.isDisplayed();
+        bottomSecondMenuButton.isDisplayed();
+
     }
 
     @Test
     public void hideAppBarTest() {
         hideAppBarPage.open();
         hideAppBarPage.shouldBeOpened();
-        topAppBar.is().displayed();
-        appBar.core().jsExecute("scrollIntoView()");
+        topAppBar.isDisplayed();
+        WebPage.scrollToBottom();
         timer.wait(() -> topAppBar.is().hidden());
     }
 
@@ -70,7 +72,7 @@ public class AppBarTests extends TestsInit {
         elevateAppBarPage.open();
         elevateAppBarPage.shouldBeOpened();
         elevateAppBar.has().classValue(containsString("MuiPaper-elevation0"));
-        appBar.core().jsExecute("scrollIntoView()");
+        WebPage.scrollToBottom();
         timer.wait(() -> elevateAppBar.has().classValue(containsString("MuiPaper-elevation4")));
     }
 
@@ -80,7 +82,7 @@ public class AppBarTests extends TestsInit {
         backToTopPage.shouldBeOpened();
         scrollBackText.is().visible();
         scrollBackToTopButton.is().hidden();
-        appBar.core().jsExecute("scrollIntoView()");
+        WebPage.scrollToBottom();
         timer.wait(() -> scrollBackText.is().notVisible());
         scrollBackToTopButton.click();
         timer.wait(() -> {
