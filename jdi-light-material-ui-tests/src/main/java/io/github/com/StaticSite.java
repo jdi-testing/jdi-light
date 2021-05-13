@@ -30,7 +30,7 @@ import io.github.com.pages.layout.GridPage;
 import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
-import io.github.com.pages.surfaces.AppBarFrame;
+import io.github.com.pages.surfaces.AppBarPage;
 import io.github.com.pages.surfaces.CardPage;
 import io.github.com.pages.surfaces.PaperPage;
 import io.github.com.pages.utils.*;
@@ -135,11 +135,22 @@ public class StaticSite {
     @Url("/accordion_surface")
     public static AccordionPage accordionPage;
 
-    @Url("/material-ui-surfaces-app-bar--simple-app-bar")
-    public static WebPage appBarPage;
+    // appbar
 
-    @Frame("storybook-preview-iframe")
-    public static AppBarFrame appBarFrame;
+    @Url("/appbar_surface")
+    public static AppBarPage simpleAppBarPage;
+
+    @Url("/appbar_bottom")
+    public static WebPage bottomAppBarPage;
+
+    @Url("/appbar_scroll_hide")
+    public static WebPage hideAppBarPage;
+
+    @Url("/appbar_elevate")
+    public static WebPage elevateAppBarPage;
+
+    @Url("/appbar_back_to_top")
+    public static WebPage backToTopPage;
 
     // paper
     @Url("/paper_surface")
