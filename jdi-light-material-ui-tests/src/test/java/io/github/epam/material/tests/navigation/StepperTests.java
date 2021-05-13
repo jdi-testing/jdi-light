@@ -9,6 +9,9 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.stepperPage;
 import static io.github.com.pages.navigation.StepperPage.*;
 
+/**
+ * To see an example of Steppers please visit https://material-ui.com/components/steppers/
+ */
 
 public class StepperTests extends TestsInit {
     @BeforeMethod
