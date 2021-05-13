@@ -25,7 +25,7 @@ import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldFrame;
-import io.github.com.pages.layout.ContainerFrame;
+import io.github.com.pages.layout.ContainerPage;
 import io.github.com.pages.layout.GridPage;
 import io.github.com.pages.layout.HiddenFrame;
 import io.github.com.pages.navigation.*;
@@ -506,8 +506,8 @@ public class StaticSite {
     public static BoxPage boxPage;
 
     // container
-    @Frame("storybook-preview-iframe")
-    public static ContainerFrame containerFrame;
+    @Url("/container_layout")
+    public static ContainerPage containerPage;
 
     @Url("/material-ui-layout-container--default")
     public static WebPage defaultContainerPage;
