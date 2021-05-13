@@ -6,7 +6,8 @@ import java.util.Properties;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 
 public class PropertyValidationUtils {
-    public static final String LINK_TO_EXAMPLES = " See examples: https://jdi-docs.github.io/jdi-light/#driver-settings" +
+    public static final String LINK_TO_EXAMPLES =
+            " See examples: https://jdi-docs.github.io/jdi-light/#driver-settings" +
             LINE_BREAK + "https://jdi-docs.github.io/jdi-light/#jdi-settings";
 
     public static void validateProperties(Properties properties) {

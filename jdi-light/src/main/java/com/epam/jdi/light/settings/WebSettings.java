@@ -89,6 +89,7 @@ public class WebSettings {
         init();
         return DRIVER.domain != null && DRIVER.domain.contains("://");
     }
+
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static Safe<String> TEST_NAME = new Safe<>((String) null);

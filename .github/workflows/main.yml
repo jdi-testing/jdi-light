@@ -17,6 +17,7 @@ env:
     BDD_TESTS: "jdi-bdd-tests"
     BOOTSTRAP_TESTS: "jdi-light-bootstrap-tests"
     HTML_TESTS: "jdi-light-html-tests"
+    PROP_TESTS: "jdi-light-properties-tests"
 #    ANGULAR_TESTS: "jdi-light-angular-tests"
 #    ANGULAR_TESTS_WITH_MOCKS: "jdi-light-angular-tests-with-mocks"
     EXAMPLES: "jdi-light-examples"
@@ -92,6 +93,8 @@ jobs:
         echo arguments=$FIREFOX_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
         echo arguments=$FIREFOX_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${PROP_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${PROP_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
 
     - name: Compile jdi code
       id: jdi-compile
@@ -205,6 +208,19 @@ jobs:
     - name: Kill Chrome
       run: pkill -f "chrome"
 
+    - name: Run tests - Properties tests
+      id: tests-prop
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 20 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PROP_TESTS --fail-at-end
+
+    - name: Check Chrome
+      run: ps -aux | grep chrome
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
     - name: Run tests - Performance
       id: tests-perf
       if: steps.jdi-compile.outcome == 'success'
@@ -260,4 +276,10 @@ jobs:
       run: |
         echo HTML Performance tests result: ${{ steps.tests-html-perf.outcome }}
         echo Performance tests result: ${{ steps.tests-perf.outcome }}
+        exit 1
+
+    - name: Check properties tests are passed
+      if: ${{ steps.tests-prop.outcome != 'success' }}
+      run: |
+        echo HTML Properties tests result: ${{ steps.tests-prop.outcome }}
         exit 1
