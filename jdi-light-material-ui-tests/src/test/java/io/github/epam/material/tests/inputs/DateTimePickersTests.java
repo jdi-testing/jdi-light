@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.dateTimePickersPage;
 import static io.github.com.pages.inputs.DateTimePickersPage.*;
 import static org.hamcrest.Matchers.containsString;
 
@@ -17,7 +17,7 @@ public class DateTimePickersTests extends TestsInit {
 
     @BeforeMethod
     public void chooseSection() {
-        openSection("Date / Time");
+        dateTimePickersPage.open();
     }
 
     @Test

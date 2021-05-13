@@ -1,7 +1,7 @@
 package io.github.epam.material.tests.displaydata;
 
+import static io.github.com.StaticSite.materialIconPage;
 import static io.github.com.pages.displaydata.MaterialIconPage.*;
-import static io.github.com.MaterialNavigator.openSection;
 import static org.testng.Assert.assertTrue;
 
 import io.github.epam.TestsInit;
@@ -16,7 +16,7 @@ public class MaterialIconTests extends TestsInit {
 
     @BeforeTest
     public void beforeTest() {
-        openSection("Material Icons");
+        materialIconPage.open();
     }
 
     @Test

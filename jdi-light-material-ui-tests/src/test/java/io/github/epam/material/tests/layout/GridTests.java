@@ -1,20 +1,17 @@
 package io.github.epam.material.tests.layout;
 
-import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.gridPage;
 import static io.github.com.pages.layout.GridPage.*;
 
 public class GridTests extends TestsInit {
 
     @BeforeTest
     public void before() {
-        openSection("Grid");
-        Timer timer = new Timer(1000L);
-        timer.wait(() -> complexGrid.isDisplayed());
+        gridPage.open();
     }
 
     @Test

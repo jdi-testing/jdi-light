@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.inputs;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.selectPage;
 import static org.hamcrest.Matchers.containsString;
 import static io.github.com.pages.inputs.SelectPage.*;
 import static org.testng.AssertJUnit.assertTrue;
@@ -26,12 +26,11 @@ public class SelectTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        openSection("Select");
+        selectPage.open();
     }
 
     @Test
     public void simpleSelectTest() {
-        timer.wait(() -> simpleSelectExpand.waitFor().visible());
         simpleSelectExpand.click();
         selectList.selectItemByText("Henry");
         simpleSelectField.get(1).is().attr("value", "Henry");

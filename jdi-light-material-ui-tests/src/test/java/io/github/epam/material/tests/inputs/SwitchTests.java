@@ -5,9 +5,9 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import static io.github.com.StaticSite.switchPage;
 import static org.hamcrest.Matchers.containsString;
 import static io.github.com.pages.inputs.SwitchPage.*;
-import static io.github.com.MaterialNavigator.openSection;
 import static org.hamcrest.Matchers.not;
 
 /**
@@ -20,13 +20,12 @@ public class SwitchTests extends TestsInit {
 
     @BeforeTest
     public void before() {
-        openSection("Switch");
+        switchPage.open();
     }
 
     @Test
     public void basicSwitchesTest() {
 
-        timer.wait(() -> switches.get(1).is().displayed());
         switches.get(1).is().classValue(containsString("MuiSwitch-colorSecondary"));
         switches.get(1).is().classValue(containsString("Mui-checked"));
         switches.get(1).click();

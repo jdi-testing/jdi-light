@@ -5,7 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static io.github.com.MaterialNavigator.openSection;
+import static io.github.com.StaticSite.fabPage;
 import static io.github.com.pages.inputs.FabPage.*;
 
 /**
@@ -16,7 +16,7 @@ public class FabTests extends TestsInit {
 
     @BeforeTest
     public void beforeTest() {
-        openSection("Floating Action Button");
+        fabPage.open();
     }
 
     @Test

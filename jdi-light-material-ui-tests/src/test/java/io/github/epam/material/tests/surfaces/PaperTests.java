@@ -1,9 +1,11 @@
 package io.github.epam.material.tests.surfaces;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import static io.github.com.StaticSite.paperPage;
 import static io.github.com.pages.surfaces.PaperPage.paper;
-import static io.github.com.MaterialNavigator.openSection;
 
 public class PaperTests extends TestsInit {
 
@@ -14,9 +16,14 @@ public class PaperTests extends TestsInit {
     private final String OUTLINED_SQUARE_PAPER = "Outlined square paper";
     private final String YOU_CLICKED = "You clicked: %s";
 
+    @BeforeTest
+    public void beforeTest() {
+        paperPage.open();
+        paperPage.shouldBeOpened();
+    }
+
     @Test
     public void defaultPaperTest() {
-        openSection("Paper");
 
         paper.get(1).is().text(WITH_ZERO_ELEVATION);
         paper.get(1).click();

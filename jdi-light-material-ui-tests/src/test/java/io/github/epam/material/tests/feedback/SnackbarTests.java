@@ -5,11 +5,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import static io.github.com.StaticSite.snackbarPage;
 import static org.hamcrest.Matchers.*;
-import static io.github.com.MaterialNavigator.openSection;
 import static io.github.com.pages.feedback.SnackbarPage.*;
 
 /**
@@ -22,7 +19,7 @@ public class SnackbarTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        openSection("Snackbar");
+        snackbarPage.open();
     }
 
     @Test
