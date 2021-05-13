@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.surfaces;
 
-import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
