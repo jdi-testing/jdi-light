@@ -29,21 +29,20 @@ public class AppBarTests extends TestsInit {
         simpleText.has().text("News");
         appBarText.has().text("Photos");
         prominentText.has().text("Material-UI");
-        simpleButton.isDisplayed();
-        appBarIcon.isDisplayed();
-        prominentSearch.isDisplayed();
-        prominentSecondMenu.isDisplayed();
-
+        simpleButton.is().displayed();
+        appBarIcon.is().displayed();
+        prominentSearch.is().displayed();
+        prominentSecondMenu.is().displayed();
         logoutSwitchButton.click();
-        timer.wait(() -> appBarIcon.is().notVisible());
+        timer.wait(() -> appBarIcon.isNotVisible());
         logoutSwitchButton.click();
         timer.wait(() -> appBarIcon.isDisplayed());
         appBarIcon.click();
         timer.wait(() -> appBarIconOptions.get(1).isDisplayed());
         appBarIconOptions.get(1).click();
         timer.wait(() -> {
-            appBarIconOptions.get(1).is().notVisible();
-            appBarIcon.is().visible();
+            appBarIconOptions.get(1).isNotVisible();
+            appBarIcon.isVisible();
         });
     }
 
@@ -51,10 +50,10 @@ public class AppBarTests extends TestsInit {
     public void bottomAppBarTest() {
         bottomAppBarPage.open();
         bottomAppBarPage.shouldBeOpened();
-        bottomButton.isDisplayed();
-        bottomMenuButton.isDisplayed();
-        bottomSearchButton.isDisplayed();
-        bottomSecondMenuButton.isDisplayed();
+        bottomButton.is().displayed();
+        bottomMenuButton.is().displayed();
+        bottomSearchButton.is().displayed();
+        bottomSecondMenuButton.is().displayed();
 
     }
 
@@ -62,9 +61,9 @@ public class AppBarTests extends TestsInit {
     public void hideAppBarTest() {
         hideAppBarPage.open();
         hideAppBarPage.shouldBeOpened();
-        topAppBar.isDisplayed();
-        WebPage.scrollToBottom();
-        timer.wait(() -> topAppBar.is().hidden());
+        topAppBar.is().displayed();
+        scrollToBottom();
+        timer.wait(() -> topAppBar.isHidden());
     }
 
     @Test
@@ -72,7 +71,7 @@ public class AppBarTests extends TestsInit {
         elevateAppBarPage.open();
         elevateAppBarPage.shouldBeOpened();
         elevateAppBar.has().classValue(containsString("MuiPaper-elevation0"));
-        WebPage.scrollToBottom();
+        scrollToBottom();
         timer.wait(() -> elevateAppBar.has().classValue(containsString("MuiPaper-elevation4")));
     }
 
@@ -82,12 +81,12 @@ public class AppBarTests extends TestsInit {
         backToTopPage.shouldBeOpened();
         scrollBackText.is().visible();
         scrollBackToTopButton.is().hidden();
-        WebPage.scrollToBottom();
-        timer.wait(() -> scrollBackText.is().notVisible());
+        scrollToBottom();
+        timer.wait(() -> scrollBackText.isNotVisible());
         scrollBackToTopButton.click();
         timer.wait(() -> {
-            scrollBackToTopButton.is().hidden();
-            scrollBackText.is().visible();
+            scrollBackToTopButton.isHidden();
+            scrollBackText.isVisible();
         });
     }
 }

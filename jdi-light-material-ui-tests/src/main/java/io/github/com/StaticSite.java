@@ -136,6 +136,7 @@ public class StaticSite {
     public static AccordionPage accordionPage;
 
     // appbar
+
     @Url("/appbar_surface")
     public static AppBarPage simpleAppBarPage;
 
