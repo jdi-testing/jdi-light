@@ -5,6 +5,6 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
 public class ContainerPage extends WebPage {
-    @UI("//*[@id='__next']//div[contains(@class, 'MuiTypography-body1')]")
-    public UIElement container;
+    @UI("//div[contains(@Class, 'MuiTypography-body1')]")
+    public static UIElement container;
 }
