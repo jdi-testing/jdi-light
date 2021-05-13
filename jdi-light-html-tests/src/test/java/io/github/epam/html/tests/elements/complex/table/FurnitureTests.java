@@ -30,7 +30,7 @@ public class FurnitureTests implements TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        tablePage.open();
+        tablePage.shouldBeOpened();
     }
 
     @Test
