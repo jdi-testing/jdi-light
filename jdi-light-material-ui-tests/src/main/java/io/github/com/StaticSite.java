@@ -27,7 +27,7 @@ import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerPage;
 import io.github.com.pages.layout.GridPage;
-import io.github.com.pages.layout.HiddenFrame;
+import io.github.com.pages.layout.HiddenPage;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarPage;
@@ -499,8 +499,8 @@ public class StaticSite {
 
     // layouts
     // hidden
-    @Frame("storybook-preview-iframe")
-    public static HiddenFrame hiddenFrame;
+    @Url("/hidden_layout")
+    public static HiddenPage hiddenPage;
 
     @Url("/material-ui-layout-hidden--default-hidden")
     public static WebPage defaultHiddenPage;
