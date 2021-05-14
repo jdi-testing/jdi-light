@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30" status="warn">
+
+  <Properties>
+    <Property name="logFileName">jdiEvents</Property>
+    <Property name="baseDir">./target/.logs</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="consoleAppender" target="SYSTEM_OUT" ignoreExceptions="false">
+      <PatternLayout pattern="%d{mm:ss.SS} [%c:%p]: %m%n"/>
+    </Console>
+
+    <RollingFile name="fileAppender" fileName="${baseDir}/${logFileName}.log">
+      <FilePattern>${baseDir}/${logFileName}_%d{yyyy-MM-dd__HH-mm}_%i.log</FilePattern>
+      <PatternLayout>
+        <Pattern>%d{mm:ss.SS} [%p]: %m%n"</Pattern>
+      </PatternLayout>
+
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="10" modulate="true"/>
+        <SizeBasedTriggeringPolicy size="250 MB"/>
+      </Policies>
+
+      <DefaultRolloverStrategy min="1" max="5" fileIndex="max">
+        <Delete basePath="${baseDir}" maxDepth="5">
+          <IfFileName glob="${logFileName}_*.log"/>
+          <testMode>false</testMode>
+          <IfAccumulatedFileCount exceeds="2"/>
+        </Delete>
+      </DefaultRolloverStrategy>
+    </RollingFile>
+  </Appenders>
+
+
+  <Loggers>
+    <!-- Every configuration must have a root logger. If one is not configured the default root LoggerConfig is ERROR with Console appender attached. -->
+    <Root level="INFO">
+      <AppenderRef ref="fileAppender"/>
+      <AppenderRef ref="consoleAppender"/>
+    </Root>
+
+    <!-- additivity means, that parent-logger (in every case the root-logger) will also get the chance to log this stuff -->
+    <Logger name="JDI" additivity="FALSE" level="INFO">
+      <AppenderRef ref="fileAppender"/>
+      <AppenderRef ref="consoleAppender"/>
+    </Logger>
+
+  </Loggers>
+</Configuration>
