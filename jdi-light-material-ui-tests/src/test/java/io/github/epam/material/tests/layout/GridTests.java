@@ -24,30 +24,17 @@ public class GridTests extends TestsInit {
 
     @Test
     public void buttonsTest() {
-        firstButton.is().displayed();
-        secondButton.is().displayed();
-        thirdButton.is().displayed();
-        fourthButton.is().displayed();
-        firstButton.click();
-        secondButton.click();
-        thirdButton.click();
-        fourthButton.click();
+        listButton.forEach(button -> button.is().displayed());
+        listButton.forEach(button -> button.click());
     }
 
     @Test
     public void inputsTest() {
-        firstInput.is().displayed();
-        firstInput.setValue("xs=1");
-        firstInput.is().text("xs=1");
-        secondInput.is().displayed();
-        secondInput.setValue("xs=2");
-        secondInput.is().text("xs=2");
-        thirdInput.is().displayed();
-        thirdInput.setValue("xs=3");
-        thirdInput.is().text("xs=3");
-        fourthInput.is().displayed();
-        fourthInput.setValue("xs=4");
-        fourthInput.is().text("xs=4");
+        listInput.forEach(input-> {
+            input.is().displayed();
+            input.setValue("xs=5");
+            input.is().text("xs=5");
+        });
     }
 
 }

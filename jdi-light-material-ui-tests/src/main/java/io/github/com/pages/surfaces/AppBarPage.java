@@ -12,13 +12,13 @@ public class AppBarPage extends WebPage {
     @UI("//*[text()='App Bar with menu']/preceding::button[@aria-label='menu']")
     public static UIElement simpleMenu;
 
-    @UI("//*[text()='Prominent App Bar']/preceding::button[@aria-label='menu'][1]")
+    @UI("//*[text()='App Bar with menu']/following::button[@aria-label='menu']")
     public static UIElement appBarMenu;
 
     @UI("//*[text()='Prominent App Bar']/following::button[@aria-label='open drawer']")
     public static UIElement prominentMenu;
 
-    @UI("//*[text()='Simple App bar']/following::h6[1]")
+    @UI("//*[text()='App Bar with menu']/preceding::h6")
     public static Text simpleText;
 
     @UI("//*[text()='App Bar with menu']/following::h6")
@@ -27,16 +27,16 @@ public class AppBarPage extends WebPage {
     @UI("//*[text()='Prominent App Bar']/following::h5")
     public static Text prominentText;
 
-    @UI("//*[text()='Simple App bar']/following::button[2]")
+    @UI("//*[text()='Simple App bar']/following::button[contains(@class,'MuiButton-text')]")
     public static Button simpleButton;
 
-    @UI("//*[text()='Simple App bar']/following::button[4]")
+    @UI("//*[text()='App Bar with menu']/following::button[@aria-label='account of current user']")
     public static UIElement appBarIcon;
 
-    @UI("//*[text()='Simple App bar']/following::button[6]")
+    @UI("//*[text()='Prominent App Bar']/following::button[@aria-label='search']")
     public static UIElement prominentSearch;
 
-    @UI("//*[text()='Simple App bar']/following::button[7]")
+    @UI("//*[text()='Simple App bar']/following::button[@aria-label='display more actions']")
     public static UIElement prominentSecondMenu;
 
     @UI("[role='menuitem']")
@@ -63,9 +63,6 @@ public class AppBarPage extends WebPage {
     @UI(".MuiIconButton-edgeStart")
     public static Button bottomMenuButton;
 
-    @UI("//div/button[3]")
-    public static Button bottomSearchButton;
-
-    @UI(".MuiIconButton-edgeEnd")
-    public static Button bottomSecondMenuButton;
+    @UI("//button[@aria-label='add']/following::button")
+    public static List<Button> bottomButtons;
 }

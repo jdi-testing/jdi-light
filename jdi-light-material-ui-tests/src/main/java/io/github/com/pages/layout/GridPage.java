@@ -7,38 +7,22 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 
+import java.util.List;
+
 public class GridPage extends WebPage {
 
     @UI(".MuiContainer-root")
     public static UIElement rootGrid;
 
-    @UI("#basicGrid")
+    @UI("//h2[text()='Complex grid']/preceding::div[contains(@class,'MuiGrid-spacing')]")
     public static UIElement basicGrid;
 
-    @UI("//div[@id='complexGrid']")
+    @UI("//h2[text()='Complex grid']/following::div[contains(@class,'MuiPaper-rounded')]/div[contains(@class,'MuiGrid-spacing')]")
     public static UIElement complexGrid;
 
-    @UI(".MuiPaper-root[1]")
-    public static Button firstButton;
+    @UI("//div[contains(@class,'MuiPaper-rounded')]")
+    public static List<Button> listButton;
 
-    @UI(".MuiPaper-root[2]")
-    public static Button secondButton;
-
-    @UI(".MuiPaper-root[3]")
-    public static Button thirdButton;
-
-    @UI(".MuiPaper-root[4]")
-    public static Button fourthButton;
-
-    @UI(".MuiInputBase-input[1]")
-    public static TextField firstInput;
-
-    @UI(".MuiInputBase-input[2]")
-    public static TextField secondInput;
-
-    @UI(".MuiInputBase-input[3]")
-    public static TextField thirdInput;
-
-    @UI(".MuiInputBase-input[4]")
-    public static TextField fourthInput;
+    @UI("//input[contains(@class,'MuiInput-input')]")
+    public static List<TextField> listInput;
 }

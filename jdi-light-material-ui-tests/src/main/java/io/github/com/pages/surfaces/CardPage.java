@@ -9,30 +9,30 @@ import java.util.List;
 
 public class CardPage extends WebPage {
 
-    @UI("//h2[text()='Outlined Card']/following-sibling::div[1]")
+    @UI("//h2[text()='Outlined Card']/following-sibling::div[contains(@class,'MuiPaper-outlined')]")
     public static UIElement outlinedCard;
 
     @UI("//div[@class='MuiCardContent-root']/p[1]")
     public static List<Text> pTagTexts;
 
-    @UI("//div[@class='MuiCardContent-root']/h2[1]")
+    @UI("//div[@class='MuiCardContent-root']/h2")
     public static List<Text> h2TagTexts;
 
-    @UI("//div[@class='MuiCardActions-root']/button[1]")
+    @UI("//div[@class='MuiCardActions-root']/button[@aria-label='add to favorites']")
     public static Button complexCardHeartIconButton;
 
-    @UI("//div[@class='MuiCardActions-root']/button[1]/span[1]/*")
+    @UI("//div[@class='MuiCardActions-root']/button[@aria-label='add to favorites']/span/*")
     public static Icon complexCardHeartIcon;
 
-    @UI("//div[@class='MuiCardActions-root']/button[3]")
+    @UI("//div[@class='MuiCardActions-root']/button[@aria-label='show more']")
     public static Button complexCardSliderDownButton;
 
-    @UI("//div[@class='MuiCardActions-root']/preceding-sibling::div[2]")
+    @UI("//div[@class='MuiCardActions-root']/preceding-sibling::div[@title='Paella dish']")
     public static Image complexCardImage;
 
-    @UI("//div[@class='MuiCardActions-root']/following-sibling::div[1]")
+    @UI("//div[@class='MuiCardActions-root']/following-sibling::div")
     public static TextArea complexCardHiddenTextArea;
 
-    @UI("//div[@class='MuiCardActions-root']/following-sibling::div[1]/div/div/div/p[1]")
-    public static Text complexCardHiddenText;
+    @UI("//div[@class='MuiCardContent-root']/p[contains(@class,'MuiTypography-paragraph')]")
+    public static List<Text> complexCardHiddenText;
 }

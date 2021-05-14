@@ -4,16 +4,12 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
+import java.util.List;
+
 public class MaterialIconPage extends WebPage {
 
-    @UI("#defaultAccessAlarm")
-    public static UIElement defaultAlarm;
-
-    @UI("#largeAccessAlarm")
-    public static UIElement largeAlarm;
-
-    @UI("#secondaryAccessAlarm")
-    public static UIElement secondaryAlarm;
+    @UI("//h2[text()='Access Alarm']/following::*[name()='svg']")
+    public static List<UIElement> iconsList;
 
     @UI("#miconLastClick")
     public static UIElement lastClick;

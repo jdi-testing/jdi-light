@@ -10,27 +10,27 @@ import java.util.List;
 
 public class CheckboxPage extends WebPage {
 
-    @UI("//h2[text()='Basic checkboxes']/following-sibling::div[1]/span")
+    @UI("//h2[text()='Basic checkboxes']/following-sibling::div/span")
     public List<Checkbox> basicCheckbox;
 
-    @UI("//h2[text()='Checkbox with FormControlLabel']/following-sibling::div[1]/label/span[1]")
+    @UI("//h2[text()='Checkboxes with FormGroup']/preceding::div/label/span[contains(@class,'MuiCheckbox-root')]")
     public List<Checkbox> formControlLabelCheckbox;
 
-    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div[1]/fieldset/div/label/span[1]")
+    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//span[contains(@class,'MuiCheckbox-root')]")
     public List<Checkbox> formGroupCheckbox;
 
-    @UI("//h2[text()='Label placement']/following-sibling::fieldset/div/label/span[1]")
+    @UI("//h2[text()='Label placement']/following::span[contains(@class,'MuiCheckbox-root')]")
     public List<Checkbox> labelPlacementCheckbox;
 
-    @UI("//h2[text()='Checkbox with FormControlLabel']/following-sibling::div[1]/label/span[2]")
+    @UI("//h2[text()='Checkboxes with FormGroup']/preceding::div/label/span[contains(@class,'MuiFormControlLabel-label')]")
     public List<Text> formControlLabelText;
 
-    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div[1]/fieldset/div/label/span[2]")
+    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//span[contains(@class,'MuiFormControlLabel-label')]")
     public List<Text> formGroupText;
 
-    @UI("//h2[text()='Label placement']/following-sibling::fieldset/div/label/span[2]")
+    @UI("//h2[text()='Label placement']/following::div//span[contains(@class,'MuiFormControlLabel-label')]")
     public List<Text> labelPlacementText;
 
-    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div[1]/fieldset/legend")
+    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//legend")
     public List<Text> errorMessage;
 }
