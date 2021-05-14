@@ -1,4 +1,4 @@
-package com.jditest;
+package com.jdiai;
 
 import com.epam.jdi.tools.Safe;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static java.lang.Runtime.getRuntime;
-import static com.jditest.Pages.HOME_PAGE;
+import static com.jdiai.Pages.HOME_PAGE;
 
 public class DriverManager {
     public static Safe<WebDriver> DRIVER = new Safe<>(ChromeDriver::new);

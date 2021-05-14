@@ -5,14 +5,14 @@
 
     <artifactId>jdi-nova</artifactId>
     <name>JDI Nova</name>
-    <groupId>com.jditest</groupId>
+    <groupId>com.jdiai</groupId>
     <version>0.9.1</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
     <dependencies>
         <dependency>
-            <groupId>com.jditest</groupId>
+            <groupId>com.jdiai</groupId>
             <artifactId>js-wrappers</artifactId>
             <version>0.9.1</version>
         </dependency>

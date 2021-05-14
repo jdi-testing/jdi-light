@@ -1,17 +1,17 @@
-package com.jditest.tests;
+package com.jdiai.tests;
 
-import com.jditest.TestInit;
-import com.jditest.entities.User;
-import com.jditest.locators.By;
-import com.jditest.testng.TestNGListener;
+import com.jdiai.TestInit;
+import com.jdiai.entities.User;
+import com.jdiai.locators.By;
+import com.jdiai.testng.TestNGListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.jditest.JDI.$;
-import static com.jditest.JDI.openPage;
-import static com.jditest.entities.User.Triss;
-import static com.jditest.states.States.atHomePage;
-import static com.jditest.states.States.logout;
+import static com.jdiai.JDI.$;
+import static com.jdiai.JDI.openPage;
+import static com.jdiai.entities.User.Triss;
+import static com.jdiai.states.States.atHomePage;
+import static com.jdiai.states.States.logout;
 import static org.testng.AssertJUnit.assertEquals;
 
 @Listeners(TestNGListener.class)

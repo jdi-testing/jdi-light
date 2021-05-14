@@ -1,4 +1,4 @@
-package com.jditest.entities;
+package com.jdiai.entities;
 
 import com.epam.jdi.tools.DataClass;
 

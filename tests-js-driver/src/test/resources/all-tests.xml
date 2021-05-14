@@ -3,11 +3,11 @@
 <suite name="JSDriver Tests" parallel="methods" thread-count="4">
     <test name="Tests">
         <packages>
-            <package name="com.jditest.tests.*"/>
+            <package name="com.jdiai.tests.*"/>
         </packages>
     </test>
     <listeners>
-        <listener class-name="com.jditest.testng.TestNGListener" />
-        <listener class-name="com.jditest.testng.RetryListener" />
+        <listener class-name="com.jdiai.testng.TestNGListener" />
+        <listener class-name="com.jdiai.testng.RetryListener" />
     </listeners>
 </suite>

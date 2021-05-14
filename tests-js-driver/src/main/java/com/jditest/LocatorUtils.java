@@ -1,6 +1,6 @@
-package com.jditest;
+package com.jdiai;
 
-import com.jditest.locators.ByFrame;
+import com.jdiai.locators.ByFrame;
 import org.openqa.selenium.By;
 
 public class LocatorUtils {

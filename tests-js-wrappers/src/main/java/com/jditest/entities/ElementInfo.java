@@ -1,7 +1,7 @@
-package com.jditest.entities;
+package com.jdiai.entities;
 
 import com.epam.jdi.tools.DataClass;
-import com.jditest.jswraper.interfaces.GetValue;
+import com.jdiai.jswraper.interfaces.GetValue;
 
 public class ElementInfo extends DataClass<ElementInfo> {
     @GetValue("tagName")

@@ -5,7 +5,7 @@
 
     <artifactId>tests-js-wrappers</artifactId>
     <name>Tests: JDI JS Wrappers</name>
-    <groupId>com.jditest</groupId>
+    <groupId>com.jdiai</groupId>
     <version>0.9.1</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
@@ -17,7 +17,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.jditest</groupId>
+            <groupId>com.jdiai</groupId>
             <artifactId>js-wrappers</artifactId>
             <version>0.9.1</version>
         </dependency>

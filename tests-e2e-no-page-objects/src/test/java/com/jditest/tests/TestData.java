@@ -1,4 +1,4 @@
-package com.jditest.tests;
+package com.jdiai.tests;
 
 public class TestData {
     public static final String SearchResultsJson =

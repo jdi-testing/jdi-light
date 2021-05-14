@@ -1,16 +1,16 @@
-package com.jditest;
+package com.jdiai;
 
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static com.jditest.JDI.openSite;
-import static com.jditest.LoggerTypes.SLF4J;
-import static com.jditest.jsbuilder.QueryLogger.ALL;
-import static com.jditest.jsbuilder.QueryLogger.LOG_QUERY;
-import static com.jditest.jswraper.DriverManager.CHROME_OPTIONS;
-import static com.jditest.jswraper.DriverManager.killDrivers;
-import static com.jditest.tools.TestIDLocators.ID_LOCATOR;
-import static com.jditest.tools.TestIDLocators.SMART_LOCATOR;
+import static com.jdiai.JDI.openSite;
+import static com.jdiai.LoggerTypes.SLF4J;
+import static com.jdiai.jsbuilder.QueryLogger.ALL;
+import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
+import static com.jdiai.jswraper.DriverManager.CHROME_OPTIONS;
+import static com.jdiai.jswraper.DriverManager.killDrivers;
+import static com.jdiai.tools.TestIDLocators.ID_LOCATOR;
+import static com.jdiai.tools.TestIDLocators.SMART_LOCATOR;
 
 public interface TestInit {
 

@@ -1,18 +1,18 @@
-package com.jditest.tests;
+package com.jdiai.tests;
 
-import com.jditest.JS;
-import com.jditest.TestInit;
-import com.jditest.testng.TestNGListener;
+import com.jdiai.JS;
+import com.jdiai.TestInit;
+import com.jdiai.testng.TestNGListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.jditest.JDI.*;
-import static com.jditest.asserts.Conditions.have;
-import static com.jditest.asserts.Conditions.text;
-import static com.jditest.entities.Contacts.Triss;
-import static com.jditest.entities.LoginUser.Roman;
-import static com.jditest.states.States.atHomePage;
-import static com.jditest.states.States.logout;
+import static com.jdiai.JDI.*;
+import static com.jdiai.asserts.Conditions.have;
+import static com.jdiai.asserts.Conditions.text;
+import static com.jdiai.entities.Contacts.Triss;
+import static com.jdiai.entities.LoginUser.Roman;
+import static com.jdiai.states.States.atHomePage;
+import static com.jdiai.states.States.logout;
 import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)

@@ -3,15 +3,15 @@
 <suite name="JSDriver Tests" parallel="methods" thread-count="4">
     <test name="Tests">
         <classes>
-            <class name="com.jditest.tests.FilterTests"/>
-            <class name="com.jditest.tests.JSElementTests"/>
-            <class name="com.jditest.tests.JSJsonTests"/>
-            <class name="com.jditest.tests.JSObjectTests"/>
-            <class name="com.jditest.tests.JSSmartTests"/>
+            <class name="com.jdiai.tests.FilterTests"/>
+            <class name="com.jdiai.tests.JSElementTests"/>
+            <class name="com.jdiai.tests.JSJsonTests"/>
+            <class name="com.jdiai.tests.JSObjectTests"/>
+            <class name="com.jdiai.tests.JSSmartTests"/>
         </classes>
     </test>
     <listeners>
-        <listener class-name="com.jditest.testng.TestNGListener" />
-        <listener class-name="com.jditest.testng.RetryListener" />
+        <listener class-name="com.jdiai.testng.TestNGListener" />
+        <listener class-name="com.jdiai.testng.RetryListener" />
     </listeners>
 </suite>
