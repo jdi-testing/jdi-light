@@ -1,12 +1,11 @@
 package io.github.epam.material.tests.utils;
 
-import static io.github.com.pages.utils.ClickAwayListenerPage.text;
-import static io.github.com.pages.utils.ClickAwayListenerPage.exampleButton;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.clickAwayListenerPage;
+import static io.github.com.pages.utils.ClickAwayListenerPage.*;
 
 /**
  * To see an example of Click Away Listener web element please visit https://material-ui.com/ru/components/click-away-listener/
@@ -30,19 +29,34 @@ public class ClickAwayListenerTests extends TestsInit {
     }
 
     private void textFieldTest(int buttonId) {
-        clickAwayListenerPage.clickButton(buttonId);
+        clickButton(buttonId);
         text.is().displayed();
-        //hiding text field by clicking on 'open menu dropdown' button
-        clickAwayListenerPage.clickButton(buttonId);
-        //checking point outside textfield
+        clickButton(buttonId);
         text.is().hidden();
-        clickAwayListenerPage.clickButton(buttonId);
+        clickButton(buttonId);
         text.is().displayed();
-        clickAwayListenerPage.clickAroundTextPopup(text.getSize().width + 1, -1);
+        clickAroundTextPopup(text.getSize().width + 1, -1);
         text.is().hidden();
-        //check for a fixed bug
-        clickAwayListenerPage.clickButton(buttonId);
-        clickAwayListenerPage.clickAroundButton(exampleButton.getSize().width + 1,0, buttonId);
+        clickButton(buttonId);
+        clickAroundButton(exampleButton.getSize().width + 1,0, buttonId);
         text.is().hidden();
+    }
+
+    public void clickAroundTextPopup(int x, int y) {
+        text.core().click(x, y);
+    }
+
+    public void clickAroundButton(int x, int y, int buttonId) {
+        if (buttonId == 1)
+            exampleButton.core().click(x, y);
+        else if (buttonId == 2)
+            portalButton.core().click(x, y);
+    }
+
+    public void clickButton(int buttonId) {
+        if (buttonId == 1)
+            exampleButton.click();
+        else if (buttonId == 2)
+            portalButton.click();
     }
 }

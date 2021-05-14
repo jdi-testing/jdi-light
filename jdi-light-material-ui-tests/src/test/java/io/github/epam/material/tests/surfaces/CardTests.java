@@ -52,6 +52,6 @@ public class CardTests extends TestsInit {
 
         complexCardSliderDownButton.click();
         complexCardHiddenTextArea.is().displayed();
-        complexCardHiddenText.has().text(Matchers.containsString("Method:"));
+        complexCardHiddenText.get(1).has().text(Matchers.containsString("Method:"));
     }
 }

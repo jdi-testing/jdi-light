@@ -51,9 +51,7 @@ public class AppBarTests extends TestsInit {
         bottomAppBarPage.shouldBeOpened();
         bottomButton.is().displayed();
         bottomMenuButton.is().displayed();
-        bottomSearchButton.is().displayed();
-        bottomSecondMenuButton.is().displayed();
-
+        bottomButtons.forEach(button -> button.is().displayed());
     }
 
     @Test

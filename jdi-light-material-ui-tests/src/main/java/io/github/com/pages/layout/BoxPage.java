@@ -15,6 +15,6 @@ public class BoxPage extends WebPage {
     @UI("//button[contains(@class,'Mui-disabled')]")
     public static Button disabledBox;
 
-    @UI("#lastClickContent")
+    @UI("//p")
     public static Text lastClickContent;
 }

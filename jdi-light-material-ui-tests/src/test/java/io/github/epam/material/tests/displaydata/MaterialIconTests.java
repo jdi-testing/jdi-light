@@ -21,11 +21,11 @@ public class MaterialIconTests extends TestsInit {
 
     @Test
     public void sizeAndColorTest() {
-        defaultAlarm.is().displayed();
-        largeAlarm.is().displayed();
-        secondaryAlarm.is().displayed();
-        assertTrue(largeAlarm.hasClass("MuiSvgIcon-fontSizeLarge"));
-        assertTrue(secondaryAlarm.hasClass("MuiSvgIcon-colorSecondary"));
+        iconsList.get(1).is().displayed();
+        iconsList.get(2).is().displayed();
+        iconsList.get(3).is().displayed();
+        assertTrue(iconsList.get(2).hasClass("MuiSvgIcon-fontSizeLarge"));
+        assertTrue(iconsList.get(3).hasClass("MuiSvgIcon-colorSecondary"));
     }
 
     @Test
@@ -33,27 +33,27 @@ public class MaterialIconTests extends TestsInit {
         lastClick.is().text("Last click:");
         lastHover.is().text("Last hover:");
 
-        defaultAlarm.hover();
+        iconsList.get(1).hover();
         lastClick.is().text("Last click:");
         lastHover.is().text("Last hover: default");
 
-        defaultAlarm.click();
+        iconsList.get(1).click();
         lastClick.is().text("Last click: default");
         lastHover.is().text("Last hover: default");
 
-        largeAlarm.hover();
+        iconsList.get(2).hover();
         lastClick.is().text("Last click: default");
         lastHover.is().text("Last hover: large");
 
-        largeAlarm.click();
+        iconsList.get(2).click();
         lastClick.is().text("Last click: large");
         lastHover.is().text("Last hover: large");
 
-        secondaryAlarm.hover();
+        iconsList.get(3).hover();
         lastClick.is().text("Last click: large");
         lastHover.is().text("Last hover: secondary");
 
-        secondaryAlarm.click();
+        iconsList.get(3).click();
         lastClick.is().text("Last click: secondary");
         lastHover.is().text("Last hover: secondary");
     }

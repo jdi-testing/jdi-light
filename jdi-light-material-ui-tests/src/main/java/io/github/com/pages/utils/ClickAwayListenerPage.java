@@ -7,30 +7,12 @@ import com.epam.jdi.light.ui.html.elements.common.TextArea;
 
 public class ClickAwayListenerPage extends WebPage {
 
-    @UI("//h2[text()='Example']/following-sibling::div[1]/div/button")
+    @UI("//h2[text()='Portal']/preceding::button")
     public static Button exampleButton;
 
-    @UI("//h2[text()='Portal']/following-sibling::div[1]/div/button")
+    @UI("//h2[text()='Portal']/following::button")
     public static Button portalButton;
 
     @UI("//div[text()='Click me, I will stay visible until you click outside.']")
     public static TextArea text;
-
-    public void clickAroundTextPopup(int x, int y) {
-        text.core().click(x, y);
-    }
-
-    public void clickAroundButton(int x, int y, int buttonId) {
-        if (buttonId == 1)
-            exampleButton.core().click(x, y);
-        else if (buttonId == 2)
-            portalButton.core().click(x, y);
-    }
-
-    public void clickButton(int buttonId) {
-        if (buttonId == 1)
-            exampleButton.click();
-        else if (buttonId == 2)
-            portalButton.click();
-    }
 }
