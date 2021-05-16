@@ -34,11 +34,14 @@ public class JDI {
     public static Object jsExecute(String script, Object... params) {
         return ((JavascriptExecutor) driver()).executeScript(script, params);
     }
-    public static String getTitle() { return (String) jsExecute("document.title;"); }
-    public static String getUrl() { return (String) jsExecute("document.URL;"); }
-    public static String getDomain() { return (String) jsExecute("document.domain;"); }
+    public static Object jsEvaluate(String script, Object... params) {
+        return jsExecute("return " + script, params);
+    }
+    public static String getTitle() { return (String) jsEvaluate("document.title;"); }
+    public static String getUrl() { return (String) jsEvaluate("document.URL;"); }
+    public static String getDomain() { return (String) jsEvaluate("document.domain;"); }
     public static double zoomLevel() {
-        return getDouble(jsExecute("window.devicePixelRatio;"));
+        return getDouble(jsEvaluate("window.devicePixelRatio;"));
     }
     private static boolean initialized = false;
     private static void init() {
