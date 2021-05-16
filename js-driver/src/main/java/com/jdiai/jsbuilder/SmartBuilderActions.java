@@ -22,8 +22,9 @@ public class SmartBuilderActions implements IBuilderActions {
         return isIFrame(locator) ? ".contentWindow.document" : "";
     }
     public String oneToList(String ctx, By locator) {
-        if (isIFrame(locator))
+        if (isIFrame(locator)) {
             return oneToOne(ctx, locator);
+        }
         builder.registerVariable("list");
         builder.registerFunction("filter", FILTER_FUNC);
         return builder.registerVariable("elements") + format(ONE_TO_LIST, MessageFormat.format(dataType(locator).getAll, ctx, selectorAll(locator, builder)));

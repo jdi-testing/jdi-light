@@ -1,6 +1,8 @@
 package com.jdiai;
 
 import com.epam.jdi.tools.Safe;
+import com.jdiai.asserts.Condition;
+import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.jsbuilder.ConsoleLogger;
 import com.jdiai.jsbuilder.Slf4JLogger;
 import com.jdiai.jswraper.DriverManager;
@@ -10,7 +12,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import static com.epam.jdi.tools.JsonUtils.getDouble;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.QueryLogger.LOGGER_NAME;
@@ -18,10 +19,14 @@ import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 import static com.jdiai.page.objects.PageFactory.initSite;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class JDI {
     public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::chromeDriver);
-    public static String DOMAIN;
+    public static String domain;
+    public static int timeout = 10;
+    public static ConditionTypes conditions = new ConditionTypes();
 
     public static WebDriver driver() {
         return DRIVER.get();
@@ -29,11 +34,11 @@ public class JDI {
     public static Object jsExecute(String script, Object... params) {
         return ((JavascriptExecutor) driver()).executeScript(script, params);
     }
-    public static String getTitle() { return (String) jsExecute("document.title"); }
-    public static String getUrl() { return (String) jsExecute("document.URL"); }
-    public static String getDomain() { return (String) jsExecute("document.domain"); }
+    public static String getTitle() { return (String) jsExecute("document.title;"); }
+    public static String getUrl() { return (String) jsExecute("document.URL;"); }
+    public static String getDomain() { return (String) jsExecute("document.domain;"); }
     public static double zoomLevel() {
-        return getDouble(jsExecute("return window.devicePixelRatio;"));
+        return getDouble(jsExecute("window.devicePixelRatio;"));
     }
     private static boolean initialized = false;
     private static void init() {
@@ -42,39 +47,42 @@ public class JDI {
         }
         switch (LOGGER_TYPE) {
             case CONSOLE:
-                logger = new ConsoleLogger(LOGGER_NAME + ": " + CONSOLE);
+                logger = new ConsoleLogger(getLoggerName(CONSOLE));
                 break;
             case SLF4J:
-                logger = new Slf4JLogger(LOGGER_NAME + ": " + SLF4J);
+                logger = new Slf4JLogger(getLoggerName(SLF4J));
                 break;
             default:
-                logger = new ConsoleLogger(LOGGER_NAME + ": " + CONSOLE);
+                logger = new ConsoleLogger(getLoggerName(CONSOLE));
                 break;
         }
         initialized = true;
     }
+    private static String getLoggerName(String name) {
+        return format("%s(%s)", LOGGER_NAME, name);
+    }
     public static void openSite(String url) {
-        DOMAIN = url;
+        domain = url;
         openSite();
     }
     public static void openSite() {
         init();
         if (driver().getCurrentUrl().equals("data:,")) {
-            openPage(DOMAIN);
+            openPage(domain);
         }
     }
     public static String LOGGER_TYPE = "console";
     public static void openSite(Class<?> cl) {
         init();
         initSite(cl);
-        if (DOMAIN != null) {
+        if (domain != null) {
             JDI.openSite();
         }
     }
     public static void openPage(String url) {
         init();
-        String fullUrl = isNotEmpty(DOMAIN) && !url.contains("//")
-            ? DOMAIN + url
+        String fullUrl = isNotEmpty(domain) && !url.contains("//")
+            ? domain + url
             : url;
         logger.info("Open page '" + fullUrl + "'");
         driver().get(fullUrl);
@@ -110,6 +118,9 @@ public class JDI {
         new JS(JDI::driver).fill(user);
     }
     public static DragAndDrop drag(JS dragElement) { return new DragAndDrop(dragElement);}
+    public static void waitFor(JS element, Condition... conditions) {
+        element.waitFor(conditions);
+    }
 
     public static JSSmart jsDriver() { return new JSSmart(JDI::driver); }
 }
