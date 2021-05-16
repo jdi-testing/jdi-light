@@ -4,16 +4,14 @@ import com.jdiai.JDI;
 import com.jdiai.JS;
 import com.jdiai.TestInit;
 import com.jdiai.testng.TestNGListener;
-import com.jdiai.utils.TimeValidations;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.jdiai.JDI.$;
 import static com.jdiai.JDI.openPage;
 import static com.jdiai.asserts.Conditions.*;
-import static com.jdiai.asserts.Conditions.disappear;
-import static com.jdiai.states.States.*;
-import static com.jdiai.utils.TimeValidations.*;
+import static com.jdiai.states.States.login;
+import static com.jdiai.utils.TimeValidations.durationMoreThan;
 
 @Listeners(TestNGListener.class)
 public class WaitForTests implements TestInit {

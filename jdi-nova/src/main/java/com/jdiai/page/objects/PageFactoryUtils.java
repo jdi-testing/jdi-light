@@ -16,13 +16,13 @@ import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.ReflectionUtils.create;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
-import static java.lang.String.format;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static com.jdiai.JDI.driver;
 import static com.jdiai.page.objects.Rules.CREATE_RULES;
 import static com.jdiai.tools.JSTalkUtils.findByToBy;
 import static com.jdiai.tools.JSTalkUtils.uiToBy;
 import static com.jdiai.tools.TestIDLocators.getSmartLocator;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class PageFactoryUtils {
     public static String getFieldName(Field field) {

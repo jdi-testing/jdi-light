@@ -15,9 +15,9 @@ import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static java.lang.String.format;
 import static com.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
 import static com.jdiai.jsbuilder.JSTemplates.XPATH_LIST_FUNC;
+import static java.lang.String.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

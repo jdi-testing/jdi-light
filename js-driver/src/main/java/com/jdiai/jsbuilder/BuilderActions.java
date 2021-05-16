@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 
 import java.text.MessageFormat;
 
-import static java.lang.String.format;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.JSTemplates.*;
 import static com.jdiai.jsdriver.JSDriverUtils.selector;
 import static com.jdiai.jsdriver.JSDriverUtils.selectorAll;
+import static java.lang.String.format;
 
 public class BuilderActions implements IBuilderActions {
     private IJSBuilder builder;

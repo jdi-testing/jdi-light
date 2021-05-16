@@ -14,10 +14,10 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static java.util.Arrays.asList;
 import static com.jdiai.Pages.DOMAIN;
 import static com.jdiai.states.States.atHomePage;
 import static com.jdiai.states.States.logout;
+import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)

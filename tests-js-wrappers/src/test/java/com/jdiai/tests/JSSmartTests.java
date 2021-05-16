@@ -16,11 +16,11 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static com.jdiai.Pages.DOMAIN;
 import static com.jdiai.Pages.SIMPLE_PAGE;
 import static com.jdiai.jswraper.JSWrapper.$w;
 import static com.jdiai.states.States.*;
+import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 

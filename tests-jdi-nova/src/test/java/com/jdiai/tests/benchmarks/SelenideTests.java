@@ -13,8 +13,8 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static java.util.Arrays.asList;
 import static com.jdiai.tests.benchmarks.test.data.HeroesData.*;
+import static java.util.Arrays.asList;
 
 @Listeners(TestNGListener.class)
 public class SelenideTests {

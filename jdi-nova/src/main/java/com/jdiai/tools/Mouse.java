@@ -6,10 +6,10 @@ import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.tools.Timer.sleep;
-import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
-import static java.awt.event.InputEvent.BUTTON2_DOWN_MASK;
 import static com.jdiai.JDI.zoomLevel;
 import static com.jdiai.tools.Keyboard.getRobot;
+import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
+import static java.awt.event.InputEvent.BUTTON2_DOWN_MASK;
 
 /**
  * Created by Roman Iovlev on 06.05.2021

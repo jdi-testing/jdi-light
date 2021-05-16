@@ -1,7 +1,7 @@
 package com.jdiai;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static com.jdiai.DriverManager.driver;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class Pages {
     public static final String DOMAIN = "https://jdi-testing.github.io/jdi-light";

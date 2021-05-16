@@ -12,8 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-import static java.lang.Math.abs;
 import static com.jdiai.JS.JDI_STORAGE;
+import static java.lang.Math.abs;
 
 public class RelationsManager {
     public static String RELATIONS_STORAGE = JDI_STORAGE + "/relations.json";

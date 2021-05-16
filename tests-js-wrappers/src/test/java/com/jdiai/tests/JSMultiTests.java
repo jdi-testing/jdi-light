@@ -12,10 +12,10 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.ifSelect;
 import static com.epam.jdi.tools.LinqUtils.map;
-import static java.util.Arrays.asList;
 import static com.jdiai.Pages.USERS_PAGE;
 import static com.jdiai.jswraper.JSWrapper.element;
 import static com.jdiai.states.States.loggedInAt;
+import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)

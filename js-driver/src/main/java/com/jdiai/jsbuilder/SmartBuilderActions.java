@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 
 import java.text.MessageFormat;
 
-import static java.lang.String.format;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.JSSmartTemplates.*;
 import static com.jdiai.jsbuilder.JSTemplates.ONE_TO_ONE;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
+import static java.lang.String.format;
 
 public class SmartBuilderActions implements IBuilderActions {
     private IJSBuilder builder;

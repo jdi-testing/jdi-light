@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.jdiai.jsbuilder.QueryLogger.logger;
+import static com.jdiai.visual.Directions.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static com.jdiai.jsbuilder.QueryLogger.logger;
-import static com.jdiai.visual.Directions.*;
 
 public abstract class Conditions {
     public static Condition visible = condition("%element% is %not% visible",  el -> {

@@ -2,8 +2,8 @@ package com.jdiai.jsdriver;
 
 import java.util.function.Consumer;
 
-import static java.lang.String.format;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
+import static java.lang.String.format;
 
 public class JSException extends RuntimeException {
     public static Consumer<String> THROW_ASSERT = msg -> { throw new AssertionError(msg); };
