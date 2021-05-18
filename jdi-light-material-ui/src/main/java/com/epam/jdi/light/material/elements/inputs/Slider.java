@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import static java.lang.Integer.min;
 import static java.lang.Integer.parseInt;
 
 public class Slider extends UIBaseElement<SliderAssert> {
@@ -22,14 +23,18 @@ public class Slider extends UIBaseElement<SliderAssert> {
     if (this.isDisabled()){
       return;
     }
+    double minVal = Double.parseDouble(thumb().getAttribute("aria-valuemin"));
+    double maxVal = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
+    double percentsInUnit = 100.0 / (maxVal - minVal);
+    int newStyleValue = (int) Math.round((value - minVal) * percentsInUnit);
 
     String thumbStyle = thumb().getAttribute("style");
     int thumbStyleIndex = thumbStyle.lastIndexOf(" ");
-    String newThumbStyle = thumbStyle.substring(0, thumbStyleIndex+ 1) + value + "%;";
+    String newThumbStyle = thumbStyle.substring(0, thumbStyleIndex+ 1) + newStyleValue + "%;";
 
     String trackStyle = track().getAttribute("style");
 
-    trackStyle = setNewStyle(trackStyle, value);
+    trackStyle = setNewStyle(trackStyle, newStyleValue);
 
     thumb().setAttribute("aria-valuenow", String.valueOf(value));
     thumb().setAttribute("style", newThumbStyle);
@@ -50,24 +55,26 @@ public class Slider extends UIBaseElement<SliderAssert> {
 
   @JDIAction(value = "drag & drop based on percentage length of '{name}'")
   public void slideVerticalTo(int value) {
-    int yOffset = getVerticalShiftInPixels(value);
-    thumb().dragAndDropTo(0, yOffset);
+    double coreHeight = core().getSize().height;
+    double trackHeight = track().getSize().height;
+    double minValue = Double.parseDouble(thumb().getAttribute("aria-valuemin"));
+    double maxValue = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
+    double pixelsInUnit = coreHeight / (maxValue - minValue);
+    double yOffset = (value - minValue) * pixelsInUnit - trackHeight;
+//    int yOffset = getVerticalShiftInPixels(value);
+    thumb().dragAndDropTo(0, -(int)Math.round(yOffset));
   }
 
   @JDIAction(value = "drag & drop to the value '{0}' of '{name}'")
   public void slideHorizontalTo(int value) {
-    double coreHorizontalWidth = core().getSize().width;
-    double trackHorizontalWidth = track().getSize().width;
+    double coreWidth = core().getSize().width;
+    double trackWidth = track().getSize().width;
     double minValue = Double.parseDouble(thumb().getAttribute("aria-valuemin"));
     double maxValue = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
-    double pixelsInUnit = coreHorizontalWidth / (maxValue - minValue);
-    double xOffset = (value - minValue) * pixelsInUnit - trackHorizontalWidth;
+    double pixelsInUnit = coreWidth / (maxValue - minValue);
+    double xOffset = (value - minValue) * pixelsInUnit - trackWidth;
     thumb().dragAndDropTo((int)Math.round(xOffset), 0);
   }
-
-//  private int getHorizontalShiftInPixels(int value) {
-//    return getScaleHorizontalWidth() * value - getTrackHorizontalWidth();
-//  }
 
   @JDIAction(value = "Move '{name}' carriage to right")
   public void moveRight() {
@@ -80,26 +87,6 @@ public class Slider extends UIBaseElement<SliderAssert> {
     thumb().click();
     thumb().sendKeys(Keys.ARROW_LEFT);
   }
-
-  private int getVerticalShiftInPixels(int value) {
-    return getTrackVerticalHeight() - getScaleVerticalHeight() * value;
-  }
-
-  private int getScaleVerticalHeight() {
-    return core().getSize().height / 100;
-  }
-
-  private int getTrackVerticalHeight() {
-    return track().getSize().height;
-  }
-
-//  private int getTrackHorizontalWidth() {
-//    return track().getSize().width;
-//  }
-//
-//  private int getScaleHorizontalWidth() {
-//    return core().getSize().width / 100;
-//  }
 
   public UIElement track() {
     return core().find(By.cssSelector(".MuiSlider-track"));
