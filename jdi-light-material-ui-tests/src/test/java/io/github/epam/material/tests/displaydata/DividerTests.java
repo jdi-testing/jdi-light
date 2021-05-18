@@ -7,7 +7,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
 /**
- * To see an example of Button web element please visit https://material-ui.com/components/dividers/
+ * To see an example of Divider web element please visit https://material-ui.com/components/dividers/
  */
 
 public class DividerTests extends TestsInit {
