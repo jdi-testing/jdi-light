@@ -164,17 +164,11 @@ public class StaticSite {
 
     // data display
     // divider
-    @Frame("storybook-preview-iframe")
-    public static InsetDividerFrame insetDividerFrame;
+    @Url("/inset_divider")
+    public static InsetDividerPage insetDividerPage;
 
-    @Url("/material-ui-data-display-dividers--inset-dividers-view")
-    public static WebPage dataDisplayInsetDividerPage;
-
-    @Frame("storybook-preview-iframe")
-    public static VerticalDividerFrame verticalDividerFrame;
-
-    @Url("/material-ui-data-display-dividers--vertical-dividers-view")
-    public static WebPage dataDisplayVerticalDividerPage;
+    @Url("/vertical_divider")
+    public static VerticalDividerPage verticalDividerPage;
 
     // feedback
     // dialog
