@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
-import static io.github.com.StaticSite.insetDividerPage;
+import static io.github.com.StaticSite.insetDividersPage;
 import static io.github.com.StaticSite.verticalDividerPage;
 
 import io.github.epam.TestsInit;
@@ -10,14 +10,16 @@ public class DividerTests extends TestsInit {
 
     @Test
     public void insetDividerTest() {
-        insetDividerPage.open();
-        insetDividerPage.divider.is().inset();
+        insetDividersPage.open();
+        insetDividersPage.insetDivider.forEach(
+                d -> d.is().inset()
+        );
     }
 
     @Test
     public void verticalDividerTest() {
         verticalDividerPage.open();
-        verticalDividerPage.divider.is().vertical();
+        verticalDividerPage.verticalDivider.is().vertical();
     }
 
 }

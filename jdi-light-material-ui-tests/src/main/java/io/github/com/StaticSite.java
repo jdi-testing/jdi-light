@@ -165,10 +165,10 @@ public class StaticSite {
     // data display
     // divider
     @Url("/inset_divider")
-    public static InsetDividerPage insetDividerPage;
+    public static DividersPage insetDividersPage;
 
     @Url("/vertical_divider")
-    public static VerticalDividerPage verticalDividerPage;
+    public static DividersPage verticalDividerPage;
 
     // feedback
     // dialog
