@@ -1,25 +1,30 @@
 package io.github.epam.material.tests.displaydata;
 
-import static io.github.com.StaticSite.dataDisplayInsetDividerPage;
-import static io.github.com.StaticSite.dataDisplayVerticalDividerPage;
-import static io.github.com.StaticSite.insetDividerFrame;
-import static io.github.com.StaticSite.verticalDividerFrame;
+import static io.github.com.StaticSite.insetDividersPage;
+import static io.github.com.StaticSite.verticalDividerPage;
+import static io.github.com.pages.displaydata.DividersPage.*;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
+
+/**
+ * To see an example of Divider web element please visit https://material-ui.com/components/dividers/
+ */
 
 public class DividerTests extends TestsInit {
 
     @Test
     public void insetDividerTest() {
-        dataDisplayInsetDividerPage.open();
-        insetDividerFrame.divider.is().inset();
+        insetDividersPage.open();
+        insetDivider.forEach(
+                d -> d.is().inset()
+        );
     }
 
     @Test
     public void verticalDividerTest() {
-        dataDisplayVerticalDividerPage.open();
-        verticalDividerFrame.divider.is().vertical();
+        verticalDividerPage.open();
+        verticalDivider.is().vertical();
     }
 
 }
