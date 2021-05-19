@@ -8,8 +8,8 @@ import java.util.List;
 
 public class DividersPage extends WebPage {
     @UI("(//li[contains(@class, 'MuiDivider-root')])")
-    public List<Divider> insetDivider;
+    public static List<Divider> insetDivider;
 
     @UI(".MuiDivider-root")
-    public Divider verticalDivider;
+    public static Divider verticalDivider;
 }
