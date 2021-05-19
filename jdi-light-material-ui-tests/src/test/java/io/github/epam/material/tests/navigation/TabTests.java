@@ -15,7 +15,9 @@ import static io.github.com.StaticSite.tabPage;
 import static io.github.com.pages.navigation.TabPage.*;
 import static org.hamcrest.Matchers.containsString;
 
-
+/**
+ * To see an example of Tab please visit https://material-ui.com/components/tabs/
+ */
 public class TabTests extends TestsInit {
     private List<List<Button>> tableLocators;
     private List<String> itemList = Arrays.asList("", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven");
