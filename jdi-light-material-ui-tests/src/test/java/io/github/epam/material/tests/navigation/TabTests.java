@@ -1,79 +1,145 @@
 package io.github.epam.material.tests.navigation;
 
+import com.epam.jdi.light.elements.common.WindowsManager;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Keys;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.defaultTabPage;
-import static io.github.com.StaticSite.disabledTabFrame;
-import static io.github.com.StaticSite.disabledTabPage;
-import static io.github.com.StaticSite.scrollableTabFrame;
-import static io.github.com.StaticSite.scrollableTabPage;
-import static io.github.com.StaticSite.simpleTabFrame;
-import static io.github.com.StaticSite.verticalTabFrame;
-import static io.github.com.StaticSite.verticalTabPage;
+import java.util.Arrays;
+import java.util.List;
+
+import static io.github.com.StaticSite.tabPage;
+import static io.github.com.pages.navigation.TabPage.*;
+import static org.hamcrest.Matchers.containsString;
 
 
 public class TabTests extends TestsInit {
+    private List<List<Button>> tableLocators;
+    private List<String> itemList = Arrays.asList("", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven");
+    private int tableIndex;
+    private Timer timer = new Timer(5000L);
 
-    private final int itemOne = 1;
-    private final int itemTwo = 2;
-    private final int itemThree = 3;
-    private final String itemThreeText = "Item Three";
+    public void scrollForward() {
+        timer.wait(() ->scrollButtons.get(2).click());
+    }
 
-    @Test
-    public void defaultTabTest() {
-        defaultTabPage.open();
+    public void scrollBackward() {
+        timer.wait(() -> scrollButtons.get(1).click());
+    }
 
-        simpleTabFrame.tabs.is().enabled(itemOne);
-        simpleTabFrame.tabs.is().selected(itemOne);
-        simpleTabFrame.tabs.selectTab(itemTwo);
-        simpleTabFrame.tabs.is().selected(itemTwo);
-        simpleTabFrame.tabs.selectTab(itemThreeText);
-        simpleTabFrame.tabs.is().selected(itemThreeText);
+    public void scrollUpward() {
+        scrollButtons.get(3).click();
+    }
+
+    public void scrollDownward() {
+        scrollButtons.get(4).click();
+    }
+
+    public void clickButton(int indexRow) {
+        tableLocators.get(tableIndex).get(indexRow).click();
+    }
+
+    public void checkDisabled(int indexRow) {
+        tableLocators.get(tableIndex).get(indexRow).has().classValue(containsString("Mui-disabled"));
+    }
+
+    public boolean isNotVisible(int indexRow) {
+        return tableLocators.get(tableIndex).get(indexRow).isNotVisible();
+    }
+
+    public Button getButton(int indexRow) {
+        return tableLocators.get(tableIndex).get(indexRow);
+    }
+
+    public void assertNotVisible(int indexRow) {
+        tableLocators.get(tableIndex).get(indexRow).is().notVisible();
+    }
+
+    public void assertVisible(int indexRow) {
+        timer.wait(() -> tableLocators.get(tableIndex).get(indexRow).is().visible());
+    }
+
+    public void checkLastItem(String name) {
+        lastItemText.get(tableIndex).has().text(containsString(name));
+    }
+
+    @BeforeTest()
+    public void beforeTest() {
+        tabPage.open();
+        tabPage.isOpened();
+        tableLocators = Arrays.asList(null, simpleTabs, scrollableTabs, preventScrollTabs, verticalTabs);
     }
 
     @Test
-    public void disabledTabTest() {
-        disabledTabPage.open();
-
-        disabledTabFrame.tabs.is().enabled(itemOne);
-        disabledTabFrame.tabs.is().disabled(itemTwo);
-        disabledTabFrame.tabs.is().enabled(itemThree).selected(itemThree);
-        disabledTabFrame.tabs.selectTab(itemOne);
-        disabledTabFrame.tabs.is().selected(itemOne);
+    public void simpleTabTest() {
+        tableIndex = 1;
+        for (int i = 1; i <= 5; i++) {
+            if (i != 4) {
+                clickButton(i);
+                checkLastItem(itemList.get(i));
+            }
+            else
+                checkDisabled(i);
+        }
     }
 
     @Test
-    public void scrollableTabTest() {
-        scrollableTabPage.open();
+    public void scrollableTabTest(){
+        tableIndex = 2;
+        for (int i = 11; i >= 1; i--) {
+            if (isNotVisible(i))
+                if (i > 6)
+                    scrollForward();
+                else
+                    scrollBackward();
+            clickButton(i);
+            checkLastItem(itemList.get(i));
+        }
+        for (int i = 1; i <= 11; i++) {
+            if (isNotVisible(i))
+                if (i > 6)
+                    scrollForward();
+                else
+                    scrollBackward();
+            clickButton(i);
+            checkLastItem(itemList.get(i));
+        }
+    }
 
-        scrollableTabFrame.tabs.is().forwardScrollButtonEnabled();
-        scrollableTabFrame.tabs.is().backScrollButtonDisabled();
-        scrollableTabFrame.tabs.scrollForward();
-        scrollableTabFrame.tabs.is().forwardScrollButtonDisabled();
-        scrollableTabFrame.tabs.is().backScrollButtonEnabled();
-        scrollableTabFrame.tabs.scrollBack();
-        scrollableTabFrame.tabs.is().forwardScrollButtonEnabled();
-        scrollableTabFrame.tabs.is().backScrollButtonDisabled();
+    @Test
+    public void preventScrollTest() {
+        tableIndex = 3;
+        WindowsManager.resizeWindow(1000, 800);
+        for (int i = 1; i <= 5; i++) {
+            clickButton(i);
+            checkLastItem(itemList.get(i));
+        }
+        assertNotVisible(6);
+        Button button = getButton(5);
+        button.click();
+        button.core().press(Keys.RIGHT);
+        assertVisible(6);
     }
 
     @Test
     public void verticalTabTest() {
-        verticalTabPage.open();
-
-        verticalTabFrame.tabs.is().forwardScrollButtonEnabled();
-        verticalTabFrame.tabs.is().backScrollButtonDisabled();
-        verticalTabFrame.tabs.scrollForward();
-        verticalTabFrame.tabs.is().forwardScrollButtonEnabled();
-        verticalTabFrame.tabs.is().backScrollButtonEnabled();
-        verticalTabFrame.tabs.scrollForward();
-        verticalTabFrame.tabs.is().forwardScrollButtonDisabled();
-        verticalTabFrame.tabs.is().backScrollButtonEnabled();
-        verticalTabFrame.tabs.scrollBack();
-        verticalTabFrame.tabs.is().forwardScrollButtonEnabled();
-        verticalTabFrame.tabs.is().backScrollButtonEnabled();
-        verticalTabFrame.tabs.scrollBack();
-        verticalTabFrame.tabs.is().forwardScrollButtonEnabled();
-        verticalTabFrame.tabs.is().backScrollButtonDisabled();
+        tableIndex = 4;
+        for (int i = 7; i >= 1; i--) {
+            if (isNotVisible(i))
+                if (i == 4 || i == 1)
+                    scrollUpward();
+            clickButton(i);
+            checkLastItem(itemList.get(i));
+        }
+        for (int i = 1; i <= 7; i++) {
+            if (isNotVisible(i))
+                if (i == 4 || i == 7)
+                    scrollDownward();
+            clickButton(i);
+            checkLastItem(itemList.get(i));
+        }
     }
 }

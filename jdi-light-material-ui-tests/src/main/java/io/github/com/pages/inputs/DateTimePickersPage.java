@@ -40,6 +40,6 @@ public class DateTimePickersPage extends WebPage {
     @JDropdown(root = "//*[@id = 'datetime-local-label']/parent::div", value = "//*[@id ='datetime-local']")
     public static Dropdown appointmentPicker;
 
-    @JDropdown(root = "//*[@id = 'time-label']/parent::div", value = "//*[@id ='time']")
+    @JDropdown(root = "//*[text()='Alarm clock']/..", value = "//*[@id ='time']")
     public static Dropdown alarmPicker;
 }

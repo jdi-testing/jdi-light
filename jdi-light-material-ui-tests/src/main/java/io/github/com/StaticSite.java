@@ -346,29 +346,8 @@ public class StaticSite {
     // navigation
     // tabs
 
-    @Url("/material-ui-navigation-tabs--default")
-    public static WebPage defaultTabPage;
-
-    @Url("/material-ui-navigation-tabs--disabled-tab-example")
-    public static WebPage disabledTabPage;
-
-    @Url("/material-ui-navigation-tabs--scrollable-tab-example")
-    public static WebPage scrollableTabPage;
-
-    @Url("/material-ui-navigation-tabs--vertical-tab-example")
-    public static WebPage verticalTabPage;
-
-    @Frame("storybook-preview-iframe")
-    public static TabFrame simpleTabFrame;
-
-    @Frame("storybook-preview-iframe")
-    public static TabFrame disabledTabFrame;
-
-    @Frame("storybook-preview-iframe")
-    public static TabFrame scrollableTabFrame;
-
-    @Frame("storybook-preview-iframe")
-    public static TabFrame verticalTabFrame;
+    @Url("/tabs")
+    public static TabPage tabPage;
 
     // utils
     // Click away listener
