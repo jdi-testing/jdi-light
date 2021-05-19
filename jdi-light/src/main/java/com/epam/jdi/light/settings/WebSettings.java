@@ -122,6 +122,7 @@ public class WebSettings {
                 if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
                     return null;
                 break;
+            default: break;
         }
         String locatorName = ELEMENT.smartLocatorName.execute(el);
         By locator = ELEMENT.smartLocator.execute(el, locatorName);
