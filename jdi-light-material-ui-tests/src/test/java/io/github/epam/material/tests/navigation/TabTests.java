@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.common.WindowsManager;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -26,7 +25,7 @@ public class TabTests extends TestsInit {
 
     public void clickButton(int indexRow) { tableLocators.get(tableIndex).get(indexRow).click(); }
 
-    public void checkLastItem(String name) {
+    public void checkLastItemText(String name) {
         lastItemText.get(tableIndex).has().text(containsString(name));
     }
 
@@ -41,23 +40,23 @@ public class TabTests extends TestsInit {
     public void simpleTabTest() {
         tableIndex = 1;
         clickButton(1);
-        checkLastItem(itemList.get(1));
+        checkLastItemText(itemList.get(1));
         tableLocators.get(tableIndex).get(4).has().classValue(containsString("Mui-disabled"));
         clickButton(5);
-        checkLastItem(itemList.get(5));
+        checkLastItemText(itemList.get(5));
     }
 
     @Test
     public void scrollableTabTest(){
         tableIndex = 2;
         clickButton(9);
-        checkLastItem(itemList.get(9));
+        checkLastItemText(itemList.get(9));
         timer.wait(() -> scrollButtons.get(2).click());
         clickButton(11);
-        checkLastItem(itemList.get(11));
+        checkLastItemText(itemList.get(11));
         timer.wait(() -> scrollButtons.get(1).click());
         clickButton(1);
-        checkLastItem(itemList.get(1));
+        checkLastItemText(itemList.get(1));
     }
 
     @Test
@@ -65,21 +64,21 @@ public class TabTests extends TestsInit {
         tableIndex = 3;
         WindowsManager.resizeWindow(1000, 800);
         clickButton(1);
-        checkLastItem(itemList.get(1));
+        checkLastItemText(itemList.get(1));
         clickButton(5);
-        checkLastItem(itemList.get(5));
+        checkLastItemText(itemList.get(5));
     }
 
     @Test
     public void verticalTabTest() {
         tableIndex = 4;
         clickButton(1);
-        checkLastItem(itemList.get(1));
+        checkLastItemText(itemList.get(1));
         scrollButtons.get(4).click();
         clickButton(4);
-        checkLastItem(itemList.get(4));
+        checkLastItemText(itemList.get(4));
         scrollButtons.get(4).click();
         clickButton(7);
-        checkLastItem(itemList.get(7));
+        checkLastItemText(itemList.get(7));
     }
 }
