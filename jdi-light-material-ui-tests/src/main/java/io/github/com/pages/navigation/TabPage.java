@@ -26,7 +26,4 @@ public class TabPage extends WebPage {
 
     @UI("//*[contains(@class, 'MuiTabs-scrollButtons')]")
     public static List<Button> scrollButtons;
-
-    @UI("//*[@aria-label='scrollable prevent tabs example']/..")
-    public static UIElement preventScrollTab;
 }
