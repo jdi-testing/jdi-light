@@ -161,6 +161,7 @@ public class StaticSite {
     public static WebPage inputSelectSimplePage;
 
     //slider
+    @Url("/sliders")
     public static SlidersPage slidersPage;
 
 
