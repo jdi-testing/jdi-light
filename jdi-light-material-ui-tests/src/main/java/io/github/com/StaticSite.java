@@ -118,17 +118,9 @@ public class StaticSite {
     public static SelectPage selectPage;
 
     //slider
-    @Frame("storybook-preview-iframe")
-    public static SliderFrame sliderFrame;
+    @Url("/sliders")
+    public static SlidersPage slidersPage;
 
-    @Url("/material-ui-inputs-sliders--default-and-disabled-sliders")
-    public static WebPage inputSliderDefaultAnfDisabledPage;
-
-    @Url("/material-ui-inputs-sliders--range-slider")
-    public static WebPage inputSliderRangePage;
-
-    @Url("/material-ui-inputs-sliders--vertical-slider")
-    public static WebPage inputSliderVerticalPage;
 
     // surfaces
     // accordion
