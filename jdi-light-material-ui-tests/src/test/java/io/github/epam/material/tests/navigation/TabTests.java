@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.navigation;
 
-import com.epam.jdi.light.elements.common.WindowsManager;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
@@ -62,11 +61,10 @@ public class TabTests extends TestsInit {
     @Test
     public void preventScrollTest() {
         tableIndex = 3;
-        WindowsManager.resizeWindow(1000, 800);
         clickButton(1);
         checkLastItemText(itemList.get(1));
-        clickButton(5);
-        checkLastItemText(itemList.get(5));
+        clickButton(7);
+        checkLastItemText(itemList.get(7));
     }
 
     @Test
