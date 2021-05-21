@@ -21,7 +21,6 @@ import io.github.com.pages.inputs.GroupCheckBoxFrame;
 import io.github.com.pages.inputs.SelectPage;
 import io.github.com.pages.inputs.RadioButtonPage;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
-import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldFrame;
