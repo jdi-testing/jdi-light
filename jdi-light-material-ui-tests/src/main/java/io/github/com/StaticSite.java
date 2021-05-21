@@ -21,7 +21,6 @@ import io.github.com.pages.inputs.GroupCheckBoxFrame;
 import io.github.com.pages.inputs.SelectPage;
 import io.github.com.pages.inputs.RadioButtonPage;
 import io.github.com.pages.inputs.SimpleTransferListFrame;
-import io.github.com.pages.inputs.SliderFrame;
 import io.github.com.pages.inputs.SplitButtonGroupFrame;
 import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldFrame;
@@ -118,17 +117,9 @@ public class StaticSite {
     public static SelectPage selectPage;
 
     //slider
-    @Frame("storybook-preview-iframe")
-    public static SliderFrame sliderFrame;
+    @Url("/sliders")
+    public static SlidersPage slidersPage;
 
-    @Url("/material-ui-inputs-sliders--default-and-disabled-sliders")
-    public static WebPage inputSliderDefaultAnfDisabledPage;
-
-    @Url("/material-ui-inputs-sliders--range-slider")
-    public static WebPage inputSliderRangePage;
-
-    @Url("/material-ui-inputs-sliders--vertical-slider")
-    public static WebPage inputSliderVerticalPage;
 
     // surfaces
     // accordion
@@ -164,17 +155,11 @@ public class StaticSite {
 
     // data display
     // divider
-    @Frame("storybook-preview-iframe")
-    public static InsetDividerFrame insetDividerFrame;
+    @Url("/inset_divider")
+    public static DividersPage insetDividersPage;
 
-    @Url("/material-ui-data-display-dividers--inset-dividers-view")
-    public static WebPage dataDisplayInsetDividerPage;
-
-    @Frame("storybook-preview-iframe")
-    public static VerticalDividerFrame verticalDividerFrame;
-
-    @Url("/material-ui-data-display-dividers--vertical-dividers-view")
-    public static WebPage dataDisplayVerticalDividerPage;
+    @Url("/vertical_divider")
+    public static DividersPage verticalDividerPage;
 
     // feedback
     // dialog
