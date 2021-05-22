@@ -32,6 +32,9 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     public T get(String value) {
         Field labelField = getLabelField();
         By labelLocator = getLocatorFromField(labelField);
+        if (labelLocator == null) {
+            return null;
+        }
         Function<JS, String> condition = getCondition(labelField, value);
         return core().findFirst(labelLocator, condition).getEntity(dataClass);
     }

@@ -5,11 +5,11 @@ import org.openqa.selenium.By;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static java.util.Arrays.stream;
 import static com.jdiai.DriverManager.*;
 import static com.jdiai.LocatorUtils.defineLocator;
 import static com.jdiai.jsbuilder.QueryLogger.ALL;
 import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
+import static java.util.Arrays.stream;
 
 public interface TestInit {
     default JSDriver js(String locator) {

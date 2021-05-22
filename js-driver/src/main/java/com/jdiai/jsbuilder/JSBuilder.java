@@ -4,8 +4,8 @@ import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import org.apache.commons.lang3.ObjectUtils;
 import com.jdiai.jsdriver.JSException;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -17,11 +17,11 @@ import java.util.function.Supplier;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_LIST_SCRIPT_EXECUTE;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_SCRIPT_EXECUTE;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JSBuilder implements IJSBuilder {
     protected List<String> variables = new ArrayList<>();
@@ -82,8 +82,9 @@ public class JSBuilder implements IJSBuilder {
             logger.info("Execute query:" + LINE_BREAK + jsScript);
         }
         Object result = getScriptResult(jsScript);
-        if (result != null && logResult())
+        if (result != null && logResult()) {
             logger.info(">>> " + PROCESS_RESULT.execute(result.toString()));
+        }
         return result;
     }
     private Object getScriptResult(String jsScript) {
@@ -98,24 +99,24 @@ public class JSBuilder implements IJSBuilder {
     public static void switchOffStringify() { smartStringify = false; }
     public List<String> executeAsList() {
         String jsScript = getQuery();
-        if (logScript())
+        if (logScript()) {
             logger.info("Execute query:" + LINE_BREAK + jsScript);
+        }
         List<String> result;
         try {
             result = EXECUTE_LIST_SCRIPT.execute(js.get(), jsScript);
         } finally {
             cleanup();
         }
-        if (result != null && logResult())
+        if (result != null && logResult()) {
             logger.info(">>> " + PROCESS_RESULT.execute(result.toString()));
+        }
         return result;
     }
     public String getQuery(String result) {
         return getQuery() + "return " + result;
     }
     public IJSBuilder addJSCode(String code) {
-        // TODO REMOVE
-        System.out.println("[" + Thread.currentThread().getId() + "]Query: " + query + "\nCode: " + code);
         query += code;
         return this;
     }

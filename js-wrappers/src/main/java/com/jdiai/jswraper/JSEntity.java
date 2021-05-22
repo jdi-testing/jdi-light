@@ -13,9 +13,9 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static java.lang.String.format;
 import static com.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
+import static java.lang.String.format;
 
 public class JSEntity<T> extends JSElement {
     protected Class<T> cl;

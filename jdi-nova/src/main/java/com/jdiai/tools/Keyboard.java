@@ -3,8 +3,8 @@ package com.jdiai.tools;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.ReflectionUtils;
 import com.epam.jdi.tools.Timer;
-import org.apache.commons.lang3.ArrayUtils;
 import com.jdiai.jsdriver.JSException;
+import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.Keys;
 
 import java.awt.*;

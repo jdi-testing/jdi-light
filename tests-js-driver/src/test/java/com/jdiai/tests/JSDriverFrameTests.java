@@ -9,10 +9,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static java.util.Arrays.asList;
 import static com.jdiai.DriverManager.driver;
 import static com.jdiai.states.States.atHomePage;
 import static com.jdiai.states.States.logout;
+import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 

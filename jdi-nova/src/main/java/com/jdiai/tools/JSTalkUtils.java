@@ -4,8 +4,8 @@ import com.jdiai.annotations.UI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
-import static java.lang.String.format;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
+import static java.lang.String.format;
 import static org.openqa.selenium.support.How.*;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 

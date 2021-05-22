@@ -6,9 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import static com.jdiai.Pages.HOME_PAGE;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static java.lang.Runtime.getRuntime;
-import static com.jdiai.Pages.HOME_PAGE;
 
 public class DriverManager {
     public static Safe<WebDriver> DRIVER = new Safe<>(ChromeDriver::new);

@@ -7,9 +7,9 @@ import org.openqa.selenium.Dimension;
 
 import java.util.Set;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static com.jdiai.JDI.*;
 import static com.jdiai.JDI.driver;
+import static com.jdiai.JDI.jsExecute;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 06.05.2021

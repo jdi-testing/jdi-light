@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Arrays.asList;
 import static com.jdiai.JDI.$;
 import static com.jdiai.JDI.driver;
 import static com.jdiai.Pages.PERFORMANCE_PAGE;
@@ -25,6 +24,7 @@ import static com.jdiai.states.States.loggedInAt;
 import static com.jdiai.states.States.logout;
 import static com.jdiai.tests.benchmarks.PerfStatistic.testScenario;
 import static com.jdiai.tools.FilterConditions.textEquals;
+import static java.util.Arrays.asList;
 
 @Listeners(TestNGListener.class)
 public class BenchmarkTests implements TestInit {

@@ -27,6 +27,7 @@ import com.jdiai.visual.Direction;
 import com.jdiai.visual.ImageTypes;
 import com.jdiai.visual.OfElement;
 import com.jdiai.visual.StreamToImageVideo;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -43,12 +44,8 @@ import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-import static java.lang.String.format;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
-import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static com.jdiai.JDI.conditions;
+import static com.jdiai.JDI.timeout;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
@@ -61,6 +58,12 @@ import static com.jdiai.tools.VisualSettings.*;
 import static com.jdiai.visual.Direction.VECTOR_SIMILARITY;
 import static com.jdiai.visual.ImageTypes.VIDEO_WEBM;
 import static com.jdiai.visual.RelationsManager.*;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.OutputType.*;
 
 public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore {
@@ -74,7 +77,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public int renderTimeout = 5000;
     protected String objectMap;
 
-    public JS() { }
+    public JS() { this(JDI::driver, new ArrayList<>()); }
     public JS(Supplier<WebDriver> driver, List<By> locators) {
         this.driver = driver;
         this.js = new JSSmart(driver, locators);
@@ -418,9 +421,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public boolean isDisplayed() {
-        return getElement("const styles = getComputedStyle(element);\n" +
-            "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
-                .equalsIgnoreCase("true");
+        return getElement(conditions.isDisplayed).equalsIgnoreCase("true");
     }
     public boolean isHidden() {
         return !isDisplayed();
@@ -631,8 +632,9 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public static JFunc1<Field, String> GET_COMPLEX_VALUE = field -> {
-        if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class))
+        if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class)) {
             return null;
+        }
         By locator = getLocatorFromField(field);
         if (locator != null) {
             String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
@@ -883,15 +885,43 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return new Point(x, y);
     }
     public JS shouldBe(Condition... conditions) {
-        for (Condition condition : conditions) {
-            String message = "Assert that " + condition.getName(this);
-            logger.info(message);
-            boolean result = condition.execute(this);
-            if (!result) {
-                THROW_ASSERT.accept(message + " failed");
+        if (ObjectUtils.isEmpty(conditions)) {
+            throw new JSException("Please specify at least 1 Condition");
+        }
+        Timer timer = new Timer(timeout * 1000L);
+        boolean foundAll = false;
+        while (!foundAll && timer.isRunning()) {
+            for (Condition condition : conditions) {
+                checkOutOfTime(timer, conditions);
+                String message = "Assert that " + condition.getName(this);
+                logger.info(message);
+                boolean result = condition.execute(this);
+                if (result) {
+                    foundAll = true;
+                } else {
+                    foundAll = false;
+                    break;
+                }
             }
         }
+        if (!foundAll) {
+            checkOutOfTime(timer, conditions);
+        }
         return this;
+    }
+    private void checkOutOfTime(Timer timer, Condition... conditions) {
+        if (!timer.isRunning()) {
+            THROW_ASSERT.accept(format("Failed to execute Assert in time (%s sec); '%s'",
+                    timeout * 1000L, getCombinedAssertionName(conditions)));
+        }
+    }
+    private String getCombinedAssertionName(Condition... conditions) {
+        return "Assert that " + printCondition(conditions);
+    }
+    private String printCondition(Condition... conditions) {
+        return conditions.length == 1
+            ? conditions[0].getName(this)
+            : print(map(conditions, c -> c.getName(this)), "; ");
     }
     public JS should(Condition... conditions) {
         return shouldBe(conditions);

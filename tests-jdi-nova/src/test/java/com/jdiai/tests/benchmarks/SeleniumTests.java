@@ -9,13 +9,10 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Selenide.$$;
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.jdiai.JDI.driver;
 import static com.jdiai.tests.benchmarks.test.data.HeroesData.*;
-import static com.jdiai.tests.benchmarks.test.data.HeroesData.HULK;
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)

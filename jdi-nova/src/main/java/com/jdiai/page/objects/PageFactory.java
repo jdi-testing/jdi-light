@@ -10,9 +10,10 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.jdiai.JDI.DOMAIN;
+import static com.jdiai.JDI.domain;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.page.objects.PageFactoryRules.*;
+import static com.jdiai.page.objects.PageFactoryUtils.getJSFields;
 import static com.jdiai.page.objects.PageFactoryUtils.setFieldValue;
 import static com.jdiai.page.objects.Rules.SETUP_RULES;
 
@@ -24,7 +25,7 @@ public class PageFactory {
     }
 
     public static void initPageElements(Object page) {
-        List<Field> jsFields = filter(page.getClass().getDeclaredFields(), FIELDS_FILTER);
+        List<Field> jsFields = filter(getJSFields(page.getClass()), FIELDS_FILTER);
         for (Field field : jsFields) {
             InitInfo info = new InitInfo(page, field);
             MapArray<String, SetupRule> rules = SETUP_RULES.filter(
@@ -39,7 +40,7 @@ public class PageFactory {
 
     public static void initSite(Class<?> cl) {
         if (cl.isAnnotationPresent(Site.class)) {
-            DOMAIN = cl.getAnnotation(Site.class).value();
+            domain = cl.getAnnotation(Site.class).value();
         }
         List<Field> pages = filter(cl.getDeclaredFields(), PAGES_FILTER);
         for (Field field : pages) {

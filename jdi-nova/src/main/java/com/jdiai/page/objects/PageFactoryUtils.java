@@ -1,28 +1,31 @@
 package com.jdiai.page.objects;
 
+import com.jdiai.JS;
+import com.jdiai.Section;
 import com.jdiai.WebPage;
 import com.jdiai.annotations.Title;
 import com.jdiai.annotations.UI;
 import com.jdiai.annotations.Url;
+import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsdriver.JSException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.ReflectionUtils.create;
+import static com.epam.jdi.tools.LinqUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
-import static java.lang.String.format;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static com.jdiai.JDI.driver;
 import static com.jdiai.page.objects.Rules.CREATE_RULES;
 import static com.jdiai.tools.JSTalkUtils.findByToBy;
 import static com.jdiai.tools.JSTalkUtils.uiToBy;
 import static com.jdiai.tools.TestIDLocators.getSmartLocator;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class PageFactoryUtils {
     public static String getFieldName(Field field) {
@@ -33,14 +36,17 @@ public class PageFactoryUtils {
             FindBy findBy = field.getAnnotation(FindBy.class);
             return findByToBy(findBy);
         }
-        By locator = null;
         if (field.isAnnotationPresent(UI.class)) {
-            UI findBy = field.getAnnotation(UI.class);
-            locator = uiToBy(findBy);
+            UI ui = field.getAnnotation(UI.class);
+            By locator = uiToBy(ui);
+            if (locator == null) {
+                locator = getSmartLocator().execute(field.getName());
+            }
+            return locator;
         }
-        return locator != null
-            ? locator
-            : getSmartLocator().execute(field.getName());
+        return !isClass(field, Section.class) && (isInterface(field, HasCore.class) || isInterface(field, WebElement.class))
+            ? getSmartLocator().execute(field.getName())
+            : null;
     }
     public static Object createWebPage(Class<?> cl, Field field) {
         try {
@@ -67,6 +73,21 @@ public class PageFactoryUtils {
         }
         return null;
     }
+    static List<Field> getJSFields(Class<?> pageClass) {
+        List<Field> fields = newList(pageClass.getDeclaredFields());
+        if (!isOneOfClasses(pageClass.getSuperclass(), Section.class, WebPage.class, JS.class, Object.class)) {
+            fields.addAll(getJSFields(pageClass.getSuperclass()));
+        }
+        return fields;
+    }
+    static boolean isOneOfClasses(Class<?> isClass, Class<?>... classes) {
+        for (Class<?> cl : classes) {
+            if (isClass.isAssignableFrom(cl)) {
+                return true;
+            }
+        }
+        return false;
+    }
     static <T> T createPageObject(Class<T> cs) {
         try {
             Constructor<?>[] constructors = cs.getDeclaredConstructors();
@@ -91,14 +112,15 @@ public class PageFactoryUtils {
     }
 
     static <T> T createInstance(Class<?> fieldClass) {
-        if (fieldClass == null)
+        if (fieldClass == null) {
             throw new JSException("Can't init class. Class Type is null.");
+        }
         if (fieldClass.isInterface()) {
             CreateRule rule = CREATE_RULES.firstValue(r -> r.condition.execute(fieldClass));
-            if (rule != null) {
-                return (T) rule.createAction.execute(fieldClass);
+            if (rule == null) {
+                throw new JSException("Failed to find create rule for " + fieldClass.getSimpleName());
             }
-            throw new JSException("Failed to find create rule for " + fieldClass.getSimpleName());
+            return (T) rule.createAction.execute(fieldClass);
         }
         return createWithConstructor(fieldClass);
     }

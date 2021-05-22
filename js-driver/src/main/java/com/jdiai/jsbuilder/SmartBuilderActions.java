@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 
 import java.text.MessageFormat;
 
-import static java.lang.String.format;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.JSSmartTemplates.*;
 import static com.jdiai.jsbuilder.JSTemplates.ONE_TO_ONE;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
+import static java.lang.String.format;
 
 public class SmartBuilderActions implements IBuilderActions {
     private IJSBuilder builder;
@@ -22,8 +22,9 @@ public class SmartBuilderActions implements IBuilderActions {
         return isIFrame(locator) ? ".contentWindow.document" : "";
     }
     public String oneToList(String ctx, By locator) {
-        if (isIFrame(locator))
+        if (isIFrame(locator)) {
             return oneToOne(ctx, locator);
+        }
         builder.registerVariable("list");
         builder.registerFunction("filter", FILTER_FUNC);
         return builder.registerVariable("elements") + format(ONE_TO_LIST, MessageFormat.format(dataType(locator).getAll, ctx, selectorAll(locator, builder)));
