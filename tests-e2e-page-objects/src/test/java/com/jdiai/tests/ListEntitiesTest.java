@@ -2,7 +2,6 @@ package com.jdiai.tests;
 
 import com.jdiai.DataList;
 import com.jdiai.TestInit;
-import com.jdiai.entities.LoginUser;
 import com.jdiai.entities.SearchItem;
 import com.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
@@ -12,7 +11,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.jdiai.JDI.loginAs;
+import static com.jdiai.entities.User.Roman;
 import static com.jdiai.site.JDISite.homePage;
 import static com.jdiai.site.JDISite.searchPage;
 import static com.jdiai.states.States.atHomePage;
@@ -28,7 +27,7 @@ public class ListEntitiesTest implements TestInit {
         logout();
         atHomePage();
         homePage.userIcon.click();
-        loginAs(LoginUser.Roman);
+        homePage.loginForm.loginAs(Roman);
         homePage.searchIcon.click();
         homePage.searchField.input("jdi");
         homePage.searchIcon.click();

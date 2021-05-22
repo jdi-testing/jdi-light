@@ -7,6 +7,7 @@ import com.jdiai.JS;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -25,7 +26,10 @@ public class Rules {
     );
     public static MapArray<String, SetupRule> SETUP_RULES = map(
         $("JSElement", sRule(HasCore.class, info -> {
-            JS core = new JS(JDI::driver, GET_LOCATOR.execute(info.field), info.parent);
+            By locator = GET_LOCATOR.execute(info.field);
+            JS core = locator != null
+                ? new JS(JDI::driver, locator, info.parent)
+                : new JS();
             ((HasCore) info.instance).setCore(core);
         })),
         $("Name", sRule(HasName.class,

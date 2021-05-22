@@ -77,7 +77,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     public int renderTimeout = 5000;
     protected String objectMap;
 
-    public JS() { }
+    public JS() { this(JDI::driver, new ArrayList<>()); }
     public JS(Supplier<WebDriver> driver, List<By> locators) {
         this.driver = driver;
         this.js = new JSSmart(driver, locators);
@@ -632,8 +632,9 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public static JFunc1<Field, String> GET_COMPLEX_VALUE = field -> {
-        if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class))
+        if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class)) {
             return null;
+        }
         By locator = getLocatorFromField(field);
         if (locator != null) {
             String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
