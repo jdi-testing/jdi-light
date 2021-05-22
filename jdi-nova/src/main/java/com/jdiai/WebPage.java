@@ -2,6 +2,7 @@ package com.jdiai;
 
 import com.jdiai.interfaces.HasName;
 
+import static com.jdiai.JDI.driver;
 import static com.jdiai.JDI.openPage;
 import static com.jdiai.page.objects.PageFactory.initPageElements;
 

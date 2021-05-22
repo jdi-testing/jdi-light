@@ -3,6 +3,7 @@ package com.jdiai;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import static com.jdiai.JDI.$;
 import static com.jdiai.JDI.openSite;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.QueryLogger.ALL;
