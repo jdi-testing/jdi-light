@@ -1,13 +1,10 @@
 package com.jdiai;
 
 import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.StringUtils;
-import com.epam.jdi.tools.func.JFunc1;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.jsbuilder.ConsoleLogger;
 import com.jdiai.jsbuilder.Slf4JLogger;
-import com.jdiai.jsdriver.JSDriverUtils;
 import com.jdiai.jswraper.DriverManager;
 import com.jdiai.jswraper.JSSmart;
 import org.openqa.selenium.By;
@@ -15,12 +12,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import static com.epam.jdi.tools.JsonUtils.getDouble;
-import static com.epam.jdi.tools.StringUtils.*;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.QueryLogger.LOGGER_NAME;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
-import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 import static com.jdiai.page.objects.PageFactory.initSite;
