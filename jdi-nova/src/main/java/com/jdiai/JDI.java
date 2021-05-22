@@ -37,12 +37,22 @@ public class JDI {
     public static Object jsEvaluate(String script, Object... params) {
         return jsExecute("return " + script, params);
     }
+    public static void refreshPage() {
+        driver().navigate().refresh();
+    }
+    public static void navigateBack() {
+        driver().navigate().back();
+    }
+    public static void navigateForward() {
+        driver().navigate().forward();
+    }
     public static String getTitle() { return (String) jsEvaluate("document.title;"); }
     public static String getUrl() { return (String) jsEvaluate("document.URL;"); }
     public static String getDomain() { return (String) jsEvaluate("document.domain;"); }
     public static double zoomLevel() {
         return getDouble(jsEvaluate("window.devicePixelRatio;"));
     }
+
     private static boolean initialized = false;
     private static void init() {
         if (initialized) {

@@ -27,24 +27,23 @@ public final class JSDriverUtils {
     private JSDriverUtils() { }
 
     public static String selector(By by, IJSBuilder builder) {
-        String locator = getByLocator(by);
-        if (locator == null) {
+        String selector = getByLocator(by);
+        if (selector == null) {
             throw new JSException("Failed to build selector. Locator is null");
         }
-        String selector = locator.replace("'", "\"");
         if (getByType(by).equals("xpath")) {
             builder.registerFunction("xpath", XPATH_FUNC);
         }
         return selector;
     }
     public static String selectorAll(By by, IJSBuilder builder) {
-        String locator = getByLocator(by);
-        if (locator == null) {
+        String selector = getByLocator(by);
+        if (selector == null) {
             throw new JSException("Failed to build selector. Locator is null");
         }
-        String selector = locator.replace("'", "\"");
-        if (getByType(by).equals("xpath"))
+        if (getByType(by).equals("xpath")) {
             builder.registerFunction("xpathList", XPATH_LIST_FUNC);
+        }
         return selector;
     }
 
@@ -57,7 +56,7 @@ public final class JSDriverUtils {
         if (isIFrame(by)) return ((ByFrame) by).locator;
         String byAsString = by.toString();
         int index = byAsString.indexOf(": ") + 2;
-        return byAsString.substring(index);
+        return byAsString.substring(index).replace("'", "\"");
     }
     private static final MapArray<String, String> byReplace = new MapArray<>(new Object[][] {
         {"cssSelector", "css"},

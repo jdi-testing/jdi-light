@@ -183,7 +183,10 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         action.execute(actions.get(), this).build().perform();
     }
     public String getName() {
-        return isNotBlank(name) ? name : print(locators(), JSDriverUtils::getByLocator); }
+        return isNotBlank(name)
+            ? name
+            : print(locators(), by -> JSDriverUtils.getByType(by) + ":" + JSDriverUtils.getByLocator(by), " > ");
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -890,11 +893,12 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         }
         Timer timer = new Timer(timeout * 1000L);
         boolean foundAll = false;
+        logger.info(getCombinedAssertionName(conditions));
         while (!foundAll && timer.isRunning()) {
             for (Condition condition : conditions) {
                 checkOutOfTime(timer, conditions);
                 String message = "Assert that " + condition.getName(this);
-                logger.info(message);
+                logger.debug(message);
                 boolean result = condition.execute(this);
                 if (result) {
                     foundAll = true;
@@ -912,7 +916,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     private void checkOutOfTime(Timer timer, Condition... conditions) {
         if (!timer.isRunning()) {
             THROW_ASSERT.accept(format("Failed to execute Assert in time (%s sec); '%s'",
-                    timeout * 1000L, getCombinedAssertionName(conditions)));
+                timeout, getCombinedAssertionName(conditions)));
         }
     }
     private String getCombinedAssertionName(Condition... conditions) {
