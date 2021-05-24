@@ -29,6 +29,7 @@ public class TableTests extends TestsInit {
         getCell(3, 1).click();
         getCell(5, 1).click();
         selectedRowCounter.has().text(containsString("7"));
+        scrollButtons.get(2).click();
         getCell(2, 1).click();
         selectedRowCounter.has().text(containsString("6"));
         getCell(1, 5).click();
