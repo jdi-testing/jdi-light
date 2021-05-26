@@ -225,26 +225,8 @@ public class StaticSite {
     public static WebPage displayDataTooltipInteractivePage;
 
     // table
-    @Frame("storybook-preview-iframe")
-    public static TableFrame tableFrame;
-
-    @Url("/material-ui-data-display-table--simple")
-    public static WebPage displayDataSimpleTablePage;
-
-    @Url("/material-ui-data-display-table--dense")
-    public static WebPage displayDataDenseTablePage;
-
-    @Url("/material-ui-data-display-table--sticky-header")
-    public static WebPage displayDataStickyHeaderTablePage;
-
-    @Url("/material-ui-data-display-table--table-with-pagination")
-    public static WebPage displayDataTableWithPaginationPage;
-
-    @Url("/material-ui-data-display-table--sorting-table")
-    public static WebPage displayDataSortingTablePage;
-
-    @Url("/material-ui-data-display-table--spanning-table")
-    public static WebPage displayDataSpanningTablePage;
+    @Url("simple_table")
+    public static TablePage tablePage;
 
     // chip
     @Frame("storybook-preview-iframe")
