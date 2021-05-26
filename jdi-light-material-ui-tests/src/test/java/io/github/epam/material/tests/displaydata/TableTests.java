@@ -11,7 +11,7 @@ import static io.github.com.pages.displaydata.TablePage.*;
 import static org.hamcrest.Matchers.*;
 
 public class TableTests extends TestsInit {
-    private Timer timer = new Timer(2000L);
+    private final Timer timer = new Timer(2000L);
     private Button getCell(int row, int coll) {
         return tableCells.get((row - 1) * 6 + coll);
     }
