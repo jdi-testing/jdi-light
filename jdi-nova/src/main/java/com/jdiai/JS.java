@@ -328,7 +328,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         //  .trigger("mousemove", { which: 1, pageX: 460 })
     }
     public void clear() {
-        doAction("clear()");
+        doAction("value = ''");
     }
 
     public String getTagName() {
@@ -339,7 +339,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public String getAttribute(String attrName) {
-        return getJSResult("getAttribute('" + attrName + "')");
+        return getJSResult("getAttribute('" + attrName + "') ?? ''");
     }
     public String getProperty(String property) {
         return getJSResult(property);
@@ -744,7 +744,12 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return findFirst(condition.apply(this));
     }
     public JS findFirst(String condition) {
-        return listToOne("element = elements.find(e => e && e." + condition + ");\n");
+        return listToOne("element = elements.find(e => e && " + handleCondition(condition) + ");\n");
+    }
+    private String handleCondition(String condition) {
+        return condition.contains("#element#")
+            ? condition.replace("#element#", "e")
+            : "e." + condition;
     }
     public JS findFirst(By by, String condition) {
         String script = "element = elements.find(e => { const fel = " +
