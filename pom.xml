@@ -72,5 +72,7 @@
         <module>test-templates/jdi-light-testng-template</module>
         <module>jdi-light-mobile-html-web-tests</module>
         <module>jdi-light-mobile-bootstrap-web-tests</module>
+        <module>jdi-light-mobile-flutter</module>
+        <module>jdi-light-mobile-flutter-tests</module>
     </modules>
 </project>
