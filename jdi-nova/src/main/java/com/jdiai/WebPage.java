@@ -1,11 +1,15 @@
 package com.jdiai;
 
 import com.jdiai.interfaces.HasName;
+import com.jdiai.interfaces.ISetup;
+
+import java.lang.reflect.Field;
 
 import static com.jdiai.JDI.openPage;
 import static com.jdiai.page.objects.PageFactory.initPageElements;
+import static com.jdiai.page.objects.PageFactoryUtils.*;
 
-public class WebPage implements HasName {
+public class WebPage implements HasName, ISetup {
     private String url;
     private String title;
     private String name;
@@ -16,10 +20,10 @@ public class WebPage implements HasName {
     public void open() {
         openPage(url);
     }
-    public WebPage setup(String url, String title) {
-        this.url = url;
-        this.title = title;
-        return this;
+    public void setup(Field field) {
+        Class<?> fieldClass = field.getType();
+        this.url = getPageUrl(fieldClass, field);
+        this.title = getPageTitle(fieldClass, field);
     }
 
     public String getName() {
