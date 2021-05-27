@@ -2,14 +2,12 @@ package com.jdiai.page.objects;
 
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import com.jdiai.WebPage;
 import com.jdiai.annotations.Site;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.filter;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.jdiai.JDI.domain;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.page.objects.PageFactoryRules.*;
@@ -48,10 +46,6 @@ public class PageFactory {
         List<Field> pages = filter(cl.getDeclaredFields(), PAGES_FILTER);
         for (Field field : pages) {
             createAndSetupField(null, field);
-            // Object page = isClass(fieldClass, WebPage.class)
-            //     ? CREATE_WEB_PAGE.execute(fieldClass, field)
-            //     : initElements(fieldClass);
-            // setFieldValue(field, null, page);
         }
     }
 }

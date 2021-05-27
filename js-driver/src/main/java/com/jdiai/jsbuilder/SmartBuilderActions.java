@@ -55,6 +55,6 @@ public class SmartBuilderActions implements IBuilderActions {
     }
     private String addBeforeReturn(String collector) {
         return collector.contains("styles.")
-            ? "const styles = getComputedStyle(" + builder.getElementName() + ");\n" : "";
+            ? "const styles = " + builder.getElementName() + " ? getComputedStyle(" + builder.getElementName() + ") : undefined;\n" : "";
     }
 }

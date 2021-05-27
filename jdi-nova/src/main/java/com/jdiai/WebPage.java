@@ -7,7 +7,8 @@ import java.lang.reflect.Field;
 
 import static com.jdiai.JDI.openPage;
 import static com.jdiai.page.objects.PageFactory.initPageElements;
-import static com.jdiai.page.objects.PageFactoryUtils.*;
+import static com.jdiai.page.objects.PageFactoryUtils.getPageTitle;
+import static com.jdiai.page.objects.PageFactoryUtils.getPageUrl;
 
 public class WebPage implements HasName, ISetup {
     private String url;
