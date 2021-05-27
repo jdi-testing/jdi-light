@@ -111,6 +111,11 @@ public class JSDriver {
             return (Long) buildList().addJSCode("return elements.length;").executeQuery();
         } catch (Exception ignore) { return -1; }
     }
+    public long indexOf(String condition) {
+        try {
+            return (Long) buildList().addJSCode("return elements.findIndex(e => e && e." + condition + ");\n").executeQuery();
+        } catch (Exception ignore) { return -1; }
+    }
 
     public IJSBuilder buildOneChain() {
         if (locators().isEmpty()) {
