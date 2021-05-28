@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import static nativeapp.android.apidemos.ApiDemosApp.flutterPage;
 import static nativeapp.android.apidemos.ApiDemosApp.materialUIView;
 import static nativeapp.android.apidemos.ApiDemosApp.settingsPage;
+import static nativeapp.android.apidemos.ApiDemosApp.textFieldsView;
 import static nativeapp.android.apidemos.pages.FlutterGalleryWelcomePage.back;
 import static nativeapp.android.apidemos.pages.FlutterGalleryWelcomePage.material;
 import static nativeapp.android.apidemos.views.MaterialUIView.appBar;
@@ -41,6 +42,7 @@ public class FlutterGalleryTests extends ApiDemosTestInit {
         materialUIView.pressButton(textFields);
 // here type text fields
 //
+        textFieldsView.typeText(textFieldsView.name,"Abracadabra");
         back.click();
         MobileScreen.scrollToTop();
     }

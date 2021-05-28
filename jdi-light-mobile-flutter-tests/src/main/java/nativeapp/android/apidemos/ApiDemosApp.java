@@ -11,4 +11,5 @@ public class ApiDemosApp {
     public static FlutterGalleryWelcomePage flutterPage;
     public static MaterialUIView materialUIView;
     public static SettingsPage settingsPage;
+    public static TextFieldsView textFieldsView;
 }
