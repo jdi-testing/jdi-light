@@ -6,7 +6,7 @@
 
     <version>1.3.13</version>
     <artifactId>jdi-light-mobile-flutter-tests</artifactId>
-    <name>Tests: JDI Mobile</name>
+    <name>Tests: JDI Mobile Flutter Tests</name>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
