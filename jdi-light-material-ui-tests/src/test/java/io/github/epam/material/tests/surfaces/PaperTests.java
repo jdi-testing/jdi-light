@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.surfaces;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -16,7 +17,7 @@ public class PaperTests extends TestsInit {
     private final String OUTLINED_SQUARE_PAPER = "Outlined square paper";
     private final String YOU_CLICKED = "You clicked: %s";
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest() {
         paperPage.open();
         paperPage.shouldBeOpened();

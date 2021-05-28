@@ -6,6 +6,7 @@ import static io.github.com.pages.surfaces.CardPage.*;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
  */
 public class CardTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest() {
         cardPage.open();
         cardPage.isOpened();

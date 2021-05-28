@@ -2,6 +2,7 @@ package io.github.epam.material.tests.feedback;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static io.github.com.StaticSite.backdropPage;
@@ -11,7 +12,7 @@ public class BackdropTests extends TestsInit {
 
     private static Timer timer = new Timer(1000L);
 
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         backdropPage.open();
     }

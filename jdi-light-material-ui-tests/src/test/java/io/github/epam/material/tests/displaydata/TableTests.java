@@ -3,6 +3,7 @@ package io.github.epam.material.tests.displaydata;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -16,7 +17,7 @@ public class TableTests extends TestsInit {
         return tableCells.get((row - 1) * 6 + coll);
     }
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest() {
         tablePage.open();
         tablePage.isOpened();

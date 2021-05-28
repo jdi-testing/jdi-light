@@ -5,6 +5,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -15,7 +16,7 @@ public class HiddenTests extends TestsInit {
 
     private static final int WIDTH_LABEL_LENGHT = 15;
 
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         hiddenPage.open();
     }

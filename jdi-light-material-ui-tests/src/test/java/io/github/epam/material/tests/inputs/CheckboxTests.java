@@ -5,6 +5,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -16,7 +17,7 @@ import static io.github.com.StaticSite.checkboxPage;
  */
 public class CheckboxTests extends TestsInit {
 
-    @BeforeTest()
+    @BeforeMethod()
     public void beforeTest() {
         checkboxPage.open();
         checkboxPage.shouldBeOpened();

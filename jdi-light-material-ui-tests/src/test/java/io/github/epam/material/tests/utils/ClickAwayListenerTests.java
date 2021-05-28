@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.utils;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -12,7 +13,7 @@ import static io.github.com.pages.utils.ClickAwayListenerPage.*;
  */
 public class ClickAwayListenerTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest() {
         clickAwayListenerPage.open();
         clickAwayListenerPage.shouldBeOpened();

@@ -3,6 +3,7 @@ package io.github.epam.material.tests.inputs;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -22,7 +23,7 @@ public class RadioButtonTests extends TestsInit {
     static private final List<String> messages = Arrays.asList("You got it!", "Sorry, wrong answer!");
     static private final Timer timer = new Timer(2000L);
 
-    @BeforeTest()
+    @BeforeMethod()
     public void beforeTest() {
         radioButtonPage.open();
         radioButtonPage.isOpened();

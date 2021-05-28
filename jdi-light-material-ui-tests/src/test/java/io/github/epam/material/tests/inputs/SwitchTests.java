@@ -2,6 +2,7 @@ package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -18,7 +19,7 @@ public class SwitchTests extends TestsInit {
 
     private static Timer timer = new Timer(1000L);
 
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         switchPage.open();
     }

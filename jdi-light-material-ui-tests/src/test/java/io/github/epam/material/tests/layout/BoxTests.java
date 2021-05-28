@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.layout;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -12,7 +13,7 @@ import static io.github.com.pages.layout.BoxPage.outlinedBox;
 
 public class BoxTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         boxPage.open();
     }
