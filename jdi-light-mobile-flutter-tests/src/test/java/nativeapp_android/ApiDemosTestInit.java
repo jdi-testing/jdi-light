@@ -34,7 +34,7 @@ public class ApiDemosTestInit {
     public void setUp() {
         final String FILE_NAME = "src/test/resources/flutter_gallery_Android.apk";
         initMobile(ApiDemosApp.class);
-        logger.toLog("Run Fondeadora App Tests");
+        logger.toLog("Run Flutter Gallery Tests");
         File file = new File(FILE_NAME);
         String path = file.getAbsolutePath(); //.replaceAll("\\\\", "\\\\\\\\");
         AppManager.installApp(path);

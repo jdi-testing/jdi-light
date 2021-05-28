@@ -1,7 +1,6 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
-import nativeapp.android.apidemos.views.MaterialUIView;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.Test;
 
@@ -9,7 +8,6 @@ import static nativeapp.android.apidemos.ApiDemosApp.flutterPage;
 import static nativeapp.android.apidemos.ApiDemosApp.materialUIView;
 import static nativeapp.android.apidemos.ApiDemosApp.settingsPage;
 import static nativeapp.android.apidemos.pages.FlutterGalleryWelcomePage.back;
-import static nativeapp.android.apidemos.pages.FlutterGalleryWelcomePage.cupertino;
 import static nativeapp.android.apidemos.pages.FlutterGalleryWelcomePage.material;
 import static nativeapp.android.apidemos.views.MaterialUIView.appBar;
 import static nativeapp.android.apidemos.views.MaterialUIView.textFields;
