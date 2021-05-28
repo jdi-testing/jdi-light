@@ -328,7 +328,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         //  .trigger("mousemove", { which: 1, pageX: 460 })
     }
     public void clear() {
-        doAction("clear()");
+        doAction("value = ''");
     }
 
     public String getTagName() {
@@ -339,7 +339,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public String getAttribute(String attrName) {
-        return getJSResult("getAttribute('" + attrName + "')");
+        return getJSResult("getAttribute('" + attrName + "') ?? ''");
     }
     public String getProperty(String property) {
         return getJSResult(property);
@@ -366,7 +366,6 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
 
     public Json allAttributes() {
         return js.getMap("return '{'+[...element.attributes].map((attr)=> `'${attr.name}'='${attr.value}'`).join()+'}'");
-        //return js.getMap("return [...element.attributes].reduce((map,attr)=> { map.set('attr.name','attr.value'); return map; }, new Map())");
     }
     public String printHtml() {
         return MessageFormat.format("<{0} {1}>{2}</{0}>", getTagName().toLowerCase(),
@@ -403,7 +402,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return !isSelected();
     }
     public boolean isEnabled() {
-        return isNotBlank(getAttribute("enabled"));
+        return hasAttribute("enabled");
     }
     public JS setTextType(GetTextTypes textType) { this.textType = textType; return this; }
 
@@ -543,8 +542,9 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
             "recorder.start();\n" +
             "window.jdiRecorder = recorder;\n" +
             "return 'start recording'");
-        if (!value.equals("start recording"))
+        if (!value.equals("start recording")) {
             throw new JSException(value);
+        }
     }
     public StreamToImageVideo stopRecordingAndSave(ImageTypes imageType) {
         js.jsExecute("window.jdiRecorder.stop();");
@@ -744,13 +744,21 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return findFirst(condition.apply(this));
     }
     public JS findFirst(String condition) {
-        return listToOne("element = elements.find(e => e && e."+ condition + ");\n");
+        return listToOne("element = elements.find(e => e && " + handleCondition(condition, "e") + ");\n");
+    }
+    private String handleCondition(String condition, String elementName) {
+        return condition.contains("#element#")
+            ? condition.replace("#element#", elementName)
+            : elementName + "." + condition;
     }
     public JS findFirst(By by, String condition) {
         String script = "element = elements.find(e => { const fel = " +
             MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+"; " +
-            "return fel && " + condition.replace("element", "fel") + "; });\n";
+            "return fel && " + handleCondition(condition, "fel") + "; });\n";
         return listToOne(script);
+    }
+    public long indexOf(Function<JS, String> condition) {
+        return js.jsDriver().indexOf(condition.apply(this));
     }
     private JS listToOne(String script) {
         JS result = new JS(driver);

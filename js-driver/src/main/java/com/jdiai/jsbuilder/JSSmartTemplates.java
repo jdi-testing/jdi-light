@@ -2,7 +2,7 @@ package com.jdiai.jsbuilder;
 
 public class JSSmartTemplates {
     public static String FILTER_FUNC =
-        "function filter(element)\n{\n" +
+        "filter = function(element)\n{\n" +
         "  return element != null && getComputedStyle(element).visibility === 'visible';\n" +
         "}\n";
     public static String ONE_TO_RESULT = "return %s;\n";

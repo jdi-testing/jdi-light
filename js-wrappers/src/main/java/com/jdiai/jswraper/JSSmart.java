@@ -30,7 +30,7 @@ public class JSSmart extends JSElement {
     }
 
     public String getAttribute(String attribute) {
-        return getValue("element." + attribute);
+        return getValue("element." + attribute + " ?? ''");
     }
     public Json getAttributes(List<String> attributes) {
         JsonObject json = driver.getOne(attributesToJson(attributes)).asJson();

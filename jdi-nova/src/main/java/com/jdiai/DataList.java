@@ -35,11 +35,11 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         if (labelLocator == null) {
             return null;
         }
-        Function<JS, String> condition = getCondition(labelField, value);
+        Function<JS, String> condition = getCondition(labelField, value, "#element#");
         return core().findFirst(labelLocator, condition).getEntity(dataClass);
     }
-    private Function<JS, String> getCondition(Field labelField, String value) {
-        return el -> getValueType(labelField, "element") + " === '" + value + "'";
+    private Function<JS, String> getCondition(Field labelField, String value, String elementName) {
+        return el -> getValueType(labelField, elementName) + " === '" + value + "'";
     }
     private Field getLabelField() {
         if (labelName != null) {

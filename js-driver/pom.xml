@@ -6,7 +6,7 @@
     <artifactId>js-driver</artifactId>
     <name>JDI JS Driver</name>
     <groupId>com.jdiai</groupId>
-    <version>0.9.3</version>
+    <version>0.9.4</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 

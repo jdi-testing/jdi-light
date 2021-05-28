@@ -1,7 +1,6 @@
 package com.jdiai.page.objects;
 
 import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
 import com.jdiai.Section;
 import com.jdiai.WebPage;
 import com.jdiai.interfaces.HasCore;
@@ -19,8 +18,6 @@ import static java.lang.reflect.Modifier.isStatic;
 public class PageFactoryRules {
     public static JFunc1<Class<?>, Object> CREATE_PAGE =
         PageFactoryUtils::createPageObject;
-    public static JFunc2<Class<?>, Field, Object> CREATE_WEB_PAGE =
-        PageFactoryUtils::createWebPage;
     public static JFunc1<Field, Boolean> JS_FIELD =
         f -> isInterface(f.getType(), WebElement.class) || isInterface(f.getType(), HasCore.class)
             || isInterface(f.getType(), List.class);

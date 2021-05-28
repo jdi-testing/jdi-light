@@ -1,5 +1,6 @@
 package com.jdiai.page.objects;
 
+import com.jdiai.JDI;
 import com.jdiai.JS;
 import com.jdiai.Section;
 import com.jdiai.WebPage;
@@ -9,6 +10,7 @@ import com.jdiai.annotations.Url;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsdriver.JSException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -17,7 +19,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.jdiai.JDI.driver;
 import static com.jdiai.page.objects.Rules.CREATE_RULES;
@@ -48,14 +51,7 @@ public class PageFactoryUtils {
             ? getSmartLocator().execute(field.getName())
             : null;
     }
-    public static Object createWebPage(Class<?> cl, Field field) {
-        try {
-            return ((WebPage) create(cl)).setup(getPageUrl(cl, field), getPageTitle(cl, field));
-        } catch (Exception ex) {
-            throw new JSException(ex, "Failed to createWebPage: " + cl.getSimpleName());
-        }
-    }
-    private static String getPageUrl(Class<?> cl, Field field) {
+    public static String getPageUrl(Class<?> cl, Field field) {
         if (field != null && field.isAnnotationPresent(Url.class)) {
             return field.getAnnotation(Url.class).value();
         }
@@ -64,7 +60,8 @@ public class PageFactoryUtils {
         }
         return null;
     }
-    private static String getPageTitle(Class<?> cl, Field field) {
+
+    public static String getPageTitle(Class<?> cl, Field field) {
         if (field != null && field.isAnnotationPresent(Title.class)) {
             return field.getAnnotation(Title.class).value();
         }
@@ -126,11 +123,25 @@ public class PageFactoryUtils {
     }
     static <T> T createWithConstructor(Class<?> fieldClass) {
         Constructor<?>[] constructors = fieldClass.getDeclaredConstructors();
-        Constructor<?> constructor = first(constructors, c -> c.getParameterCount() == 0);
-        if (constructor == null) {
+        List<Constructor<?>> filtered = filter(constructors, c -> c.getParameterCount() == 0
+            || c.getParameterCount() == 1 && isInterface((Class)c.getGenericParameterTypes()[0], WebDriver.class));
+        if (isEmpty(filtered)) {
             throw new JSException(format("%s has no empty constructors", fieldClass.getSimpleName()));
         }
-        return initWithEmptyConstructor(constructor, fieldClass);
+        Constructor<?> cs = filtered.size() == 1
+            ? filtered.get(0)
+            : first(constructors, c -> c.getParameterCount() == 0);
+        return cs.getParameterCount() == 0
+            ? initWithEmptyConstructor(cs, fieldClass)
+            : initWebDriverConstructor(cs, fieldClass);
+    }
+    static <T> T initWebDriverConstructor(Constructor<?> constructor, Class<?> fieldClass) {
+        try {
+            constructor.setAccessible(true);
+            return (T) constructor.newInstance(JDI.driver());
+        } catch (Exception ex) {
+            throw new JSException(ex, format("%s failed to init using empty constructors", fieldClass.getSimpleName()));
+        }
     }
     static <T> T initWithEmptyConstructor(Constructor<?> constructor, Class<?> fieldClass) {
         try {
