@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <version>1.3.13</version>
-    <artifactId>jdi-light-mobile-flutter</artifactId>
+    <artifactId>jdi-light-mobile-flutter-tests</artifactId>
     <name>Tests: JDI Mobile</name>
     <groupId>com.epam.jdi</groupId>
 
