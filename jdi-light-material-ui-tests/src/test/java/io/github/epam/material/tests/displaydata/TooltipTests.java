@@ -10,19 +10,9 @@ public class TooltipTests extends TestsInit {
     @Test
     public void defaultTooltipTest() {
         tooltipPage.open();
-
         tooltipPage.buttonWithTooltip.hover();
         tooltipPage.buttonWithTooltip.tooltip().is().visible();
-        tooltipPage.buttonWithTooltip.tooltip().has().text("Add");
-    }
-
-    @Test
-    public void interactiveTooltipTest() {
-        tooltipPage.open();
-
-        tooltipPage.buttonWithTooltip.hover();
-        tooltipPage.buttonWithTooltip.tooltip().is().visible();
-        tooltipPage.buttonWithTooltip.tooltip().is().interactive();
+        tooltipPage.buttonWithTooltip.tooltip().has().text("Delete");
     }
 
 }

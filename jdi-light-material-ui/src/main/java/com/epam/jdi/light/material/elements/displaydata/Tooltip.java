@@ -4,11 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.asserts.displaydata.TooltipAssert;
+import org.openqa.selenium.By;
 
 public class Tooltip extends UIBaseElement<TooltipAssert> {
 
-
-    public static final String TOOLTIP_PLACEHOLDER_LOCATOR = "//div[contains(@class, 'MuiTooltip-tooltip')]";
+    public static final By TOOLTIP_PLACEHOLDER_LOCATOR = By.xpath("//div[contains(@class,'MuiTooltip-tooltip')]");
 
     public Tooltip(ICoreElement element) {
         setCore(Tooltip.class, element.core());
@@ -16,7 +16,10 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
 
     @JDIAction("Get value of '{name}'")
     public String getValue() {
-        return core().find(TOOLTIP_PLACEHOLDER_LOCATOR).getText();
+//        return core().find(By.xpath("/ancestor::body//div[contains(@class,'MuiTooltip-tooltip')]")).getText();
+//        return core().find(By.xpath("//div[contains(@class,'MuiTooltip-tooltip')]")).getText();
+//        doesn't work and I don't know why
+        return core().driver().findElement(TOOLTIP_PLACEHOLDER_LOCATOR).getText();
     }
 
     @Override
