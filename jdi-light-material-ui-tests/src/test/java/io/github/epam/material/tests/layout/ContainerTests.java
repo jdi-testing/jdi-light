@@ -1,7 +1,7 @@
 package io.github.epam.material.tests.layout;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.containerPage;
@@ -12,13 +12,13 @@ import static io.github.com.pages.layout.ContainerPage.container;
  */
 
 public class ContainerTests extends TestsInit {
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         containerPage.open();
     }
 
     @Test
-    public void defaultContainerTest(){
+    public void defaultContainerTest() {
         container.is().displayed();
         container.is().text("Example text");
         container.is().attr("style", "background-color: rgb(207, 232, 252); height: 100vh;");

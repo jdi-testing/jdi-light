@@ -1,20 +1,20 @@
 package io.github.epam.material.tests.surfaces;
 
-import static io.github.com.StaticSite.cardPage;
-import static io.github.com.pages.surfaces.CardPage.*;
-
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static io.github.com.StaticSite.cardPage;
+import static io.github.com.pages.surfaces.CardPage.*;
 
 /**
  * To see an example of Card web element please visit https://material-ui.com/ru/components/cards/
  */
 public class CardTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest() {
         cardPage.open();
         cardPage.isOpened();

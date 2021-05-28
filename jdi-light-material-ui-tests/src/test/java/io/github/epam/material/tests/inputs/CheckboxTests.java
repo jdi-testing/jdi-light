@@ -5,7 +5,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -16,7 +16,7 @@ import static io.github.com.StaticSite.checkboxPage;
  */
 public class CheckboxTests extends TestsInit {
 
-    @BeforeTest()
+    @BeforeMethod()
     public void beforeTest() {
         checkboxPage.open();
         checkboxPage.shouldBeOpened();
@@ -77,7 +77,7 @@ public class CheckboxTests extends TestsInit {
 
     @Test
     public void formControlLabelTest() {
-        String[] expectedTexts = new String[] {"Secondary", "Primary", "Uncontrolled", "Disabled",
+        String[] expectedTexts = new String[]{"Secondary", "Primary", "Uncontrolled", "Disabled",
                 "Disabled", "Indeterminate", "Custom color", "Custom icon", "Custom size"};
         for (int i = 1; i < 3; i++) {
             checkboxTestLogic(
@@ -90,7 +90,7 @@ public class CheckboxTests extends TestsInit {
 
     @Test
     public void formGroupTest() {
-        String[] expectedTexts = new String[] {"Gilad Gray", "Jason Killian", "Antoine Llorca",
+        String[] expectedTexts = new String[]{"Gilad Gray", "Jason Killian", "Antoine Llorca",
                 "Gilad Gray", "Jason Killian", "Antoine Llorca"};
         for (int i = 1; i < 3; i++) {
             int secondCheckboxIndex = (i + 3) / 7 > 0 ? (i + 3) % 7 + 1 : (i + 3) % 7;
@@ -107,7 +107,7 @@ public class CheckboxTests extends TestsInit {
 
     @Test
     public void labelPlacementTest() {
-        String[] expectedText = new String[] {"Top", "Start", "Bottom", "End"};
+        String[] expectedText = new String[]{"Top", "Start", "Bottom", "End"};
         for (int i = 1; i < 2; i++) {
             checkboxTestLogic(checkboxPage.labelPlacementCheckbox.get(i), "MuiCheckbox-colorPrimary");
             textTestLogic(checkboxPage.labelPlacementText.get(i), expectedText[i - 1]);
