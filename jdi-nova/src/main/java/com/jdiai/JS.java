@@ -744,17 +744,17 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return findFirst(condition.apply(this));
     }
     public JS findFirst(String condition) {
-        return listToOne("element = elements.find(e => e && " + handleCondition(condition) + ");\n");
+        return listToOne("element = elements.find(e => e && " + handleCondition(condition, "e") + ");\n");
     }
-    private String handleCondition(String condition) {
+    private String handleCondition(String condition, String elementName) {
         return condition.contains("#element#")
-            ? condition.replace("#element#", "e")
-            : "e." + condition;
+            ? condition.replace("#element#", elementName)
+            : elementName + "." + condition;
     }
     public JS findFirst(By by, String condition) {
         String script = "element = elements.find(e => { const fel = " +
             MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+"; " +
-            "return fel && " + condition.replace("element", "fel") + "; });\n";
+            "return fel && " + handleCondition(condition, "fel") + "; });\n";
         return listToOne(script);
     }
     public long indexOf(Function<JS, String> condition) {
