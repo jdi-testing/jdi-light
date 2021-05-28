@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.jdiai.JDI.$;
 import static com.jdiai.entities.User.Roman;
 import static com.jdiai.site.JDISite.homePage;
 import static com.jdiai.site.JDISite.searchPage;

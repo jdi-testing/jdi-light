@@ -18,7 +18,7 @@ public class FilterConditions {
         return el -> "hasAttribute('" + attrName + "')";
     }
     public static Function<JS, String> hasAttribute(String attrName, String value) {
-        return el -> format("(#element#.getAttribute('%s') ?? '').equals('%s')", attrName, value);
+        return el -> format(".getAttribute('%s') === '%s'", attrName, value);
     }
     public static Function<JS, String> hasTag(String value) {
         return el -> "element.tag === " + value;

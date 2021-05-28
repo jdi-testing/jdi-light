@@ -402,7 +402,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return !isSelected();
     }
     public boolean isEnabled() {
-        return isNotBlank(getAttribute("enabled"));
+        return hasAttribute("enabled");
     }
     public JS setTextType(GetTextTypes textType) { this.textType = textType; return this; }
 
