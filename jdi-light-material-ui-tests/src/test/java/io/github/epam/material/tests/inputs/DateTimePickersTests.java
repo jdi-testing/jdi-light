@@ -36,7 +36,6 @@ public class DateTimePickersTests extends TestsInit {
     public void datePickerDialogTest() {
         dialogPicker.iCore().label().has().text("Date picker dialog");
         dialogPicker.expand();
-        dialogPicker.waitFor().is().displayed();
         dialogPicker.select("12");
         dialogPicker.command("ENTER");
         timer.wait(() -> dialogPicker.has().text(containsString("/12/")));
