@@ -215,14 +215,8 @@ public class StaticSite {
     public static BadgePage badgePage;
 
     // tooltip
-    @Frame("storybook-preview-iframe")
-    public static TooltipFrame tooltipFrame;
-
-    @Url("/material-ui-data-display-tooltip--default")
-    public static WebPage displayDataTooltipDefaultPage;
-
-    @Url("/material-ui-data-display-tooltip--interactive")
-    public static WebPage displayDataTooltipInteractivePage;
+    @Url("/tooltip")
+    public static TooltipPage tooltipPage;
 
     // table
     @Url("simple_table")
