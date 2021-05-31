@@ -1,12 +1,12 @@
 package io.github.epam.material.tests.displaydata;
 
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.materialIconPage;
 import static io.github.com.pages.displaydata.MaterialIconPage.*;
 import static org.testng.Assert.assertTrue;
-
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
 /**
  * To see an example of Material icons web element please visit https://material-ui.com/components/material-icons/
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 public class MaterialIconTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest() {
         materialIconPage.open();
     }

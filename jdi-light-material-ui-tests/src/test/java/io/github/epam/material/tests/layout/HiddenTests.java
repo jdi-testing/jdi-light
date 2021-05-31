@@ -5,7 +5,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.hiddenPage;
@@ -15,7 +15,7 @@ public class HiddenTests extends TestsInit {
 
     private static final int WIDTH_LABEL_LENGHT = 15;
 
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         hiddenPage.open();
     }
@@ -48,9 +48,9 @@ public class HiddenTests extends TestsInit {
         }
     }
 
-    private void setHalfScreenWidthSize(){
+    private void setHalfScreenWidthSize() {
         Dimension xy = WebDriverFactory.getDriver().manage().window().getSize();
-        Dimension xy2 = new Dimension(xy.width / 2, xy.height );
+        Dimension xy2 = new Dimension(xy.width / 2, xy.height);
         WebDriverFactory.getDriver().manage().window().setSize(xy2);
     }
 

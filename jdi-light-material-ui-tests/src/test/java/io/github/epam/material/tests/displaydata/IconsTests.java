@@ -2,9 +2,13 @@ package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static io.github.com.StaticSite.iconsPage;
 import static io.github.com.pages.displaydata.IconsPage.*;
@@ -15,11 +19,11 @@ import static io.github.com.pages.displaydata.IconsPage.*;
 
 public class IconsTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest() {
         iconsPage.open();
     }
-    
+
     @Test
     public void simpleIconsTest() {
         filled.forEach(el -> el.is().displayed());
