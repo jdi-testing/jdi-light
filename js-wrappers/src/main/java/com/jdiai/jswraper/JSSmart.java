@@ -29,8 +29,11 @@ public class JSSmart extends JSElement {
         this(() -> driver, locators);
     }
 
+    private String safeGet(String attribute) {
+        return "element ? (element." + attribute + " ?? '') : ''";
+    }
     public String getAttribute(String attribute) {
-        return getValue("element." + attribute + " ?? ''");
+        return getValue(safeGet(attribute));
     }
     public Json getAttributes(List<String> attributes) {
         JsonObject json = driver.getOne(attributesToJson(attributes)).asJson();
@@ -40,7 +43,7 @@ public class JSSmart extends JSElement {
         return getAttributes(newList(attributes));
     }
     public List<String> getAttributeList(String attribute) {
-        return driver.getList("element." + attribute).asString();
+        return driver.getList(safeGet(attribute)).asString();
     }
     public List<Json> getMultiAttributes(List<String> attributes) {
         List<JsonObject> objects = driver.getList(attributesToJson(attributes)).asJson();

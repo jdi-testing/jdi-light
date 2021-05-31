@@ -29,14 +29,20 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     private Class<T> dataClass;
     private String labelName;
 
-    public T get(String value) {
+    public JS getElement(String value) {
         Field labelField = getLabelField();
         By labelLocator = getLocatorFromField(labelField);
         if (labelLocator == null) {
             return null;
         }
         Function<JS, String> condition = getCondition(labelField, value, "#element#");
-        return core().findFirst(labelLocator, condition).getEntity(dataClass);
+        return core().findFirst(labelLocator, condition);
+    }
+    public T get(String value) {
+        return getElement(value).getEntity(dataClass);
+    }
+    public void select(String value) {
+        getElement(value).click();
     }
     private Function<JS, String> getCondition(Field labelField, String value, String elementName) {
         return el -> getValueType(labelField, elementName) + " === '" + value + "'";
@@ -65,6 +71,9 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     }
 
     public T get(Enum<?> name) { return get(getEnumValue(name)); }
+    public JS getElement(Enum<?> name) { return getElement(getEnumValue(name)); }
+    public void select(Enum<?> name) { select(getEnumValue(name)); }
+
     public T last() {
         return LinqUtils.last(getList(1));
     }
@@ -177,7 +186,13 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
 
     @Override
     public T get(int index) {
-        return core().get(index).getEntity(dataClass);
+        return getElement(index).getEntity(dataClass);
+    }
+    public JS getElement(int index) {
+        return core().get(index);
+    }
+    public void select(int index) {
+        getElement(index).click();
     }
     @Override
     public T set(int index, T element) {

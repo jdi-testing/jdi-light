@@ -31,6 +31,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -310,12 +311,13 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
         return value.length == 1 ? value[0].toString() : "";
     }
     public void sendKeys(CharSequence... value) {
-        set("value+='" + charToString(value) + "'");
+        set("value+='" + charToString(value) + "';\nelement.dispatchEvent(new Event('input'));");
     }
     public void input(CharSequence... value) {
-        set("value='" + charToString(value) + "'");
+        set("value='" + charToString(value) + "';\nelement.dispatchEvent(new Event('input'));");
     }
     public void slide(String value) {
+        throw new NotImplementedException();
         // TODO
         //Actions a = new Actions(DRIVER.get());
         //a.dragAndDropBy(DRIVER.get().findElement(By.xpath("[aria-labelledby='range-slider'][data-index='0']")),20, 0)
@@ -339,7 +341,7 @@ public class JS implements WebElement, HasLocators, HasName, HasParent, HasCore 
     }
 
     public String getAttribute(String attrName) {
-        return getJSResult("getAttribute('" + attrName + "') ?? ''");
+        return getJSResult("getAttribute('" + attrName + "')");
     }
     public String getProperty(String property) {
         return getJSResult(property);
