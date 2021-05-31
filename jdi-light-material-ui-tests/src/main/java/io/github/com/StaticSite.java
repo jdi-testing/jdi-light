@@ -223,23 +223,8 @@ public class StaticSite {
     public static TablePage tablePage;
 
     // chip
-    @Frame("storybook-preview-iframe")
-    public static ChipFrame chipFrame;
-
-    @Url("/material-ui-data-display-chips--default-chip")
-    public static WebPage displayDataDefaultChipPage;
-
-    @Url("/material-ui-data-display-chips--outlined-chip")
-    public static WebPage displayDataOutlinedChipPage;
-
-    @Url("/material-ui-data-display-chips--chip-array")
-    public static WebPage displayDataArrayChipPage;
-
-    @Url("/material-ui-data-display-chips--small-default-chip")
-    public static WebPage displayDataSmallDefaultChipPage;
-
-    @Url("/material-ui-data-display-chips--small-outlined-chip")
-    public static WebPage displayDataSmallOutlinedChipPage;
+    @Url("/chips")
+    public static ChipsPage chipsPage;
 
     // lists
     @Frame("storybook-preview-iframe")

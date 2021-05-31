@@ -1,84 +1,74 @@
 package io.github.epam.material.tests.displaydata;
 
+import com.epam.jdi.light.material.elements.displaydata.Chip;
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
+import static io.github.com.pages.displaydata.ChipsPage.*;
 import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 
+/**
+ * To see an example of Chips web element please visit
+ * https://material-ui.com/ru/components/chips/
+ */
+
 public class ChipTests extends TestsInit {
+    
+    @BeforeMethod
+    public void beforeTest() {
+        chipsPage.open();
+    }
+    
     @Test
     public void defaultChipTest(){
-        displayDataDefaultChipPage.open();
-
-        basicCheck();
-        disabledCheck();// first variant of class value
-        clickableCheck(3);
-        clickableLinkCheck(7);
+        basicCheck(defaultChips);
+        disabledCheck(defaultChips);// first variant of class value
+        clickableCheck(defaultChips,3);
+        clickableLinkCheck(defaultChips,7);
     }
 
     @Test
     public void outlinedChipTest(){
-        displayDataOutlinedChipPage.open();
-
-        basicCheck();
-        disabledCheck(); // second variant of class value
-        clickableCheck(3);
-        clickableLinkCheck(7);
+        basicCheck(outlinedChips);
+        disabledCheck(outlinedChips); // second variant of class value
+        clickableCheck(outlinedChips, 3);
+        clickableLinkCheck(outlinedChips, 7);
     }
 
     @Test
     public void chipArrayTest(){
-        displayDataArrayChipPage.open();
-
-        chipFrame.chips.is().displayed(1);
-        chipFrame.chips.is().text(1, hasToString("Angular"));
-        chipFrame.chips.is().displayed(2);
-        chipFrame.chips.is().text(2, hasToString("jQuery"));
-        chipFrame.chips.getChipIcon(1).click();
-        chipFrame.chips.is().text(1, hasToString("jQuery")); // "jQuery" became first element as "Angular" element was deleted
+        chipArrays.is().displayed(1);
+        chipArrays.is().text(1, hasToString("Angular"));
+        chipArrays.is().displayed(2);
+        chipArrays.is().text(2, hasToString("jQuery"));
+        chipArrays.getChipIcon(1).click();
+        chipArrays.is().text(1, hasToString("jQuery")); // "jQuery" became first element as "Angular" element was deleted
     }
 
-    @Test
-    public void smallDefaultChipTest(){
-        displayDataSmallDefaultChipPage.open();
-
-        basicCheck();
-        clickableCheck(2);
-        clickableLinkCheck(6);
+    public void basicCheck(Chip chips){
+        chips.is().displayed(1);
+        chips.is().text(1, hasToString("Basic"));
     }
 
-    @Test
-    public void smallOutlinedChipTest(){
-        displayDataSmallOutlinedChipPage.open();
-
-        basicCheck();
-        clickableCheck(2);
-        clickableLinkCheck(6);
+    public void disabledCheck(Chip chips){
+        chips.is().displayed(2);
+        chips.is().disabled(2);
+        chips.is().text(2, hasToString("Disabled"));
     }
 
-    public void basicCheck(){
-        chipFrame.chips.is().displayed(1);
-        chipFrame.chips.is().text(1, hasToString("Basic"));
+    public void clickableCheck(Chip chips, int index){
+        chips.is().displayed(index);
+        chips.is().clickable(index);
+        chips.is().text(index, hasToString("Clickable"));
     }
 
-    public void disabledCheck(){
-        chipFrame.chips.is().displayed(2);
-        chipFrame.chips.is().disabled(2);
-        chipFrame.chips.is().text(2, hasToString("Disabled"));
-    }
-
-    public void clickableCheck(int index){
-        chipFrame.chips.is().displayed(index);
-        chipFrame.chips.is().clickable(index);
-        chipFrame.chips.is().text(index, hasToString("Clickable"));
-    }
-
-    public void clickableLinkCheck(int index){
-        chipFrame.chips.is().displayed(index);
-        chipFrame.chips.is().text(index, equalToIgnoringCase("Clickable Link"));
-        chipFrame.chips.click(index);
-        chipFrame.chips.is().urlContains("viewMode=story#chip");
+    public void clickableLinkCheck(Chip chips, int index){
+        chips.is().displayed(index);
+        chips.is().text(index, equalToIgnoringCase("Clickable Link"));
+        chips.click(index);
+        chips.is().urlContains("#chip");
     }
 }
