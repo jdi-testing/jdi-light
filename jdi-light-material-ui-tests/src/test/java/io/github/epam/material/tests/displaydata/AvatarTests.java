@@ -3,16 +3,13 @@ package io.github.epam.material.tests.displaydata;
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 import static io.github.com.StaticSite.avatarPage;
-import static io.github.com.pages.displaydata.AvatarPage.onlineStatus;
-import static io.github.com.pages.displaydata.AvatarPage.avatarWithPhoto;
-import static io.github.com.pages.displaydata.AvatarPage.avatarWithoutPhoto;
+import static io.github.com.pages.displaydata.AvatarPage.*;
 
 /**
  * To see an example of Avatar web element please visit https://material-ui.com/ru/components/avatars/
@@ -20,7 +17,7 @@ import static io.github.com.pages.displaydata.AvatarPage.avatarWithoutPhoto;
 
 public class AvatarTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest() {
         avatarPage.open();
     }

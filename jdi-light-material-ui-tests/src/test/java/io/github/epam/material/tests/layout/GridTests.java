@@ -1,7 +1,7 @@
 package io.github.epam.material.tests.layout;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.gridPage;
@@ -9,7 +9,7 @@ import static io.github.com.pages.layout.GridPage.*;
 
 public class GridTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         gridPage.open();
     }
@@ -30,7 +30,7 @@ public class GridTests extends TestsInit {
 
     @Test
     public void inputsTest() {
-        listInput.forEach(input-> {
+        listInput.forEach(input -> {
             input.is().displayed();
             input.setValue("xs=5");
             input.is().text("xs=5");

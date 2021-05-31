@@ -2,12 +2,13 @@ package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.switchPage;
+import static io.github.com.pages.inputs.SwitchPage.formGroupTextForm;
+import static io.github.com.pages.inputs.SwitchPage.switches;
 import static org.hamcrest.Matchers.containsString;
-import static io.github.com.pages.inputs.SwitchPage.*;
 import static org.hamcrest.Matchers.not;
 
 /**
@@ -16,9 +17,9 @@ import static org.hamcrest.Matchers.not;
 
 public class SwitchTests extends TestsInit {
 
-    private static Timer timer = new Timer(1000L);
+    private static final Timer timer = new Timer(1000L);
 
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         switchPage.open();
     }

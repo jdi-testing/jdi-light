@@ -2,7 +2,7 @@ package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.fabPage;
@@ -14,7 +14,7 @@ import static io.github.com.pages.inputs.FabPage.*;
 
 public class FabTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest() {
         fabPage.open();
     }

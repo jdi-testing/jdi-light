@@ -2,7 +2,7 @@ package io.github.epam.material.tests.utils;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.transitionPage;
@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.not;
 
 public class TransitionTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         transitionPage.open();
         transitionPage.shouldBeOpened();

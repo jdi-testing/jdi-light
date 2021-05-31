@@ -3,15 +3,15 @@ package io.github.epam.material.tests.inputs;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
-import static io.github.com.pages.inputs.RadioButtonPage.*;
 import static io.github.com.StaticSite.radioButtonPage;
+import static io.github.com.pages.inputs.RadioButtonPage.*;
+import static org.hamcrest.Matchers.containsString;
 
 /**
  * To see an example of Radio Button web element please visit https://material-ui.com/components/radio-buttons/
@@ -22,7 +22,7 @@ public class RadioButtonTests extends TestsInit {
     static private final List<String> messages = Arrays.asList("You got it!", "Sorry, wrong answer!");
     static private final Timer timer = new Timer(2000L);
 
-    @BeforeTest()
+    @BeforeMethod()
     public void beforeTest() {
         radioButtonPage.open();
         radioButtonPage.isOpened();
@@ -37,8 +37,7 @@ public class RadioButtonTests extends TestsInit {
                 currentRadioButton.click();
                 timer.wait(() -> currentRadioButton.has().classValue(containsString("Mui-checked")));
                 lastRadioText.has().text(containsString(currentRadioButton.text()));
-            }
-            else
+            } else
                 timer.wait(() -> currentRadioButton.has().classValue(containsString("Mui-disabled")));
             currentRadioButtonLabel.has().text(labels.get(i - 1));
         }
