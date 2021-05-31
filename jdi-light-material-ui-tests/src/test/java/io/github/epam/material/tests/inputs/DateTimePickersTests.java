@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.inputs;
 
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,7 +15,7 @@ import static org.hamcrest.Matchers.containsString;
  */
 
 public class DateTimePickersTests extends TestsInit {
-
+    private Timer timer = new Timer(2000L);
     @BeforeMethod
     public void chooseSection() {
         dateTimePickersPage.open();
@@ -34,16 +35,15 @@ public class DateTimePickersTests extends TestsInit {
     @Test
     public void datePickerDialogTest() {
         dialogPicker.iCore().label().has().text("Date picker dialog");
-
         dialogPicker.expand();
         dialogPicker.select("12");
         dialogPicker.command("ENTER");
-        dialogPicker.has().text(containsString("/12/"));
+        timer.wait(() -> dialogPicker.has().text(containsString("/12/")));
 
         dialogPicker.expand();
         dialogPicker.select("11");
         dialogPicker.command("ESCAPE");
-        dialogPicker.has().text("08/12/2014");
+        timer.wait(() -> dialogPicker.has().text("08/12/2014"));
 
         dialogPicker.value().setText("10/10/2021");
         dialogPicker.has().text("10/10/2021");
@@ -57,16 +57,16 @@ public class DateTimePickersTests extends TestsInit {
         timePicker.list().get("5").click(0, 0);
         timePicker.list().get("30").click(15, 0);
         timePicker.command("ENTER");
-        timePicker.has().text("05:30 PM");
+        timer.wait(() -> timePicker.has().text("05:30 PM"));
 
         timePicker.expand();
-        timePicker.list().get("11").click(0, 0);
+        timer.wait(() -> timePicker.list().get("11").click(0, 0));
         timePicker.list().get("15").click(15, 0);
         timePicker.command("ESCAPE");
-        timePicker.has().text("05:30 PM");
+        timer.wait(() -> timePicker.has().text("05:30 PM"));
 
         timePicker.value().setText("05:35 AM");
-        timePicker.has().text("05:35 AM");
+        timePicker.has().text("05:35 AM" );
     }
 
     @Test
