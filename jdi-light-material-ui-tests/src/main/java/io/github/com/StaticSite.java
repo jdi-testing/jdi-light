@@ -183,30 +183,15 @@ public class StaticSite {
     @Url("/material_icons")
     public static MaterialIconPage materialIconPage;
 
-    @Frame("storybook-preview-iframe")
-    public static ModalFrame modalFrame;
+    @Url("/modal")
+    public static ModalPage modalPage;
 
-    @Url("/material-ui-utils-modal--transitions-modal")
-    public static WebPage transitionsModalPage;
-
-    @Url("/material-ui-utils-modal--server-modal")
-    public static WebPage serverSideModalPage;
-
-    // typography
     // utils
     // popper
-    @Frame("storybook-preview-iframe")
-    public static PopperFrame popperFrame;
+    @Url("/popper")
+    public static PopperPage popperPage;
 
-    @Url("/material-ui-utils-popper--simple")
-    public static WebPage utilsSimplePopperPage;
-
-    @Url("/material-ui-utils-popper--transitions")
-    public static WebPage utilsTransitionsPopperPage;
-
-    @Url("/material-ui-utils-popper--positioned")
-    public static WebPage utilsPositionedPoppersPage;
-
+    // typography
     @Url("/typography")
     public static TypographyPage typographyPage;
 
