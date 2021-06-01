@@ -27,11 +27,11 @@ import com.jdiai.visual.Direction;
 import com.jdiai.visual.ImageTypes;
 import com.jdiai.visual.OfElement;
 import com.jdiai.visual.StreamToImageVideo;
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.File;
 import java.lang.reflect.Field;
