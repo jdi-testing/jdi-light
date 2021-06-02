@@ -10,6 +10,7 @@ import static io.github.com.pages.utils.ClickAwayListenerPage.*;
 /**
  * To see an example of Click Away Listener web element please visit https://material-ui.com/ru/components/click-away-listener/
  */
+
 public class ClickAwayListenerTests extends TestsInit {
 
     @BeforeMethod
