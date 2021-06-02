@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.inputs;
 
-import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,8 +15,6 @@ import static org.hamcrest.Matchers.not;
  */
 
 public class SwitchTests extends TestsInit {
-
-    private static final Timer timer = new Timer(1000L);
 
     @BeforeMethod
     public void before() {
