@@ -12,8 +12,10 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.checkboxPage;
 
 /**
- * To see an example of Checkbox web element please visit https://material-ui.com/ru/components/checkboxes/
+ * To see an example of Checkbox web element please visit
+ * https://material-ui.com/ru/components/checkboxes/
  */
+
 public class CheckboxTests extends TestsInit {
 
     @BeforeMethod()

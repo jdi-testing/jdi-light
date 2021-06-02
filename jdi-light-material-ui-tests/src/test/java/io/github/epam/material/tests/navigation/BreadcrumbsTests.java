@@ -8,6 +8,10 @@ import static io.github.com.StaticSite.routerIntegrationBreadcrumbsPage;
 import static org.testng.Assert.assertTrue;
 import static io.github.com.pages.navigation.BreadcrumbsPage.*;
 
+/**
+ * To see an example of Breadcrumbs web element please visit
+ * https://material-ui.com/components/breadcrumbs/
+ */
 
 public class BreadcrumbsTests extends TestsInit {
 

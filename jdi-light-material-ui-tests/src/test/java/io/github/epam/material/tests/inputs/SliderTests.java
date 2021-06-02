@@ -9,7 +9,8 @@ import static io.github.com.StaticSite.slidersPage;
 import static io.github.com.pages.inputs.SlidersPage.*;
 
 /**
- * To see an example of Slider web element please visit https://material-ui.com/components/slider/
+ * To see an example of Slider web element please visit
+ * https://material-ui.com/components/slider/
  */
 
 public class SliderTests extends TestsInit {

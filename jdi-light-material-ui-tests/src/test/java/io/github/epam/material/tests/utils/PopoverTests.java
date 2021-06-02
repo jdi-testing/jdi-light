@@ -6,7 +6,10 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.popoverPage;
 import static io.github.com.pages.utils.PopoverPage.*;
-
+/**
+ * To see an example of Modal web element please visit
+ * https://material-ui.com/components/popover/
+ */
 public class PopoverTests extends TestsInit {
 
     @BeforeMethod

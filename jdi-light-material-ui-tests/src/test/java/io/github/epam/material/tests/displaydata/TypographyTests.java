@@ -15,7 +15,8 @@ import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
 /**
- * To see an example of Typography web element please visit https://material-ui.com/components/typography/
+ * To see an example of Typography web element please visit
+ * https://material-ui.com/components/typography/
  */
 
 public class TypographyTests extends TestsInit {

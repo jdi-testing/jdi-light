@@ -7,6 +7,10 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.modalPage;
 import static io.github.com.pages.utils.ModalPage.*;
 
+/**
+ * To see an example of Modal web element please visit
+ * https://material-ui.com/components/modal/
+ */
 public class ModalTests extends TestsInit {
     private static final String EXPECTED_TEXT = "Duis mollis, est non commodo luctus, nisi erat porttitor ligula.";
 

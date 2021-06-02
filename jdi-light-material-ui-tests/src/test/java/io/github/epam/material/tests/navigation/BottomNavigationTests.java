@@ -8,6 +8,11 @@ import static io.github.com.pages.navigation.BottomNavigationPage.*;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+/**
+ * To see an example of Bottom Navigation web element please visit
+ * https://material-ui.com/components/bottom-navigation/
+ */
+
 public class BottomNavigationTests extends TestsInit {
 
     @BeforeMethod

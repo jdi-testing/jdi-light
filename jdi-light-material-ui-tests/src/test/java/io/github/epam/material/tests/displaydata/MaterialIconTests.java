@@ -9,7 +9,8 @@ import static io.github.com.pages.displaydata.MaterialIconPage.*;
 import static org.testng.Assert.assertTrue;
 
 /**
- * To see an example of Material icons web element please visit https://material-ui.com/components/material-icons/
+ * To see an example of Material icons web element please visit
+ * https://material-ui.com/components/material-icons/
  */
 
 public class MaterialIconTests extends TestsInit {

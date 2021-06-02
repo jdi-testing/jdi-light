@@ -10,7 +10,8 @@ import static org.hamcrest.Matchers.*;
 import static io.github.com.pages.feedback.SnackbarPage.*;
 
 /**
- * To see an example of Snackbar web element please visit https://material-ui.com/components/snackbars/
+ * To see an example of Snackbar web element please visit
+ * https://material-ui.com/components/snackbars/
  */
 
 public class SnackbarTests extends TestsInit {

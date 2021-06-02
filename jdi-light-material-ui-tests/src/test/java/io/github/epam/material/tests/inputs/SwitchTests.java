@@ -11,7 +11,8 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 
 /**
- * To see an example of Switch web element please visit https://material-ui.com/components/switches/
+ * To see an example of Switch web element please visit
+ * https://material-ui.com/components/switches/
  */
 
 public class SwitchTests extends TestsInit {

@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * To see an example of Drawer web element please visit
+ * https://material-ui.com/components/drawers/
+ */
+
 public class DrawerTests extends TestsInit {
 
     private static Timer timer = new Timer(2000L);

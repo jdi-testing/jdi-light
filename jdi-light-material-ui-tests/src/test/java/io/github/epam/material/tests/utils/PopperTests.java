@@ -10,6 +10,10 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * To see an example of Modal web element please visit
+ * https://material-ui.com/components/popper/
+ */
 public class PopperTests extends TestsInit {
     private final static List<String> POPPER_TEXTS = Arrays.asList("", "TOP", "LEFT", "RIGHT", "BOTTOM");
     private final static List<String> TOOLTIP_CLASSES = Arrays.asList("", "top", "left", "right", "bottom");

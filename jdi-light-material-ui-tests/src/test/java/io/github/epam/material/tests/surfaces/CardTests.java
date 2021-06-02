@@ -10,8 +10,10 @@ import static io.github.com.StaticSite.cardPage;
 import static io.github.com.pages.surfaces.CardPage.*;
 
 /**
- * To see an example of Card web element please visit https://material-ui.com/ru/components/cards/
+ * To see an example of Card web element please visit
+ * https://material-ui.com/ru/components/cards/
  */
+
 public class CardTests extends TestsInit {
 
     @BeforeMethod

@@ -11,8 +11,6 @@ import static io.github.com.pages.utils.PortalPage.*;
  * To see an example of Portal web element please visit
  * https://material-ui.com/components/portal/.
  */
-
-
 public class PortalTests extends TestsInit {
 
     @BeforeMethod
