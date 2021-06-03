@@ -8,7 +8,8 @@ import static io.github.com.StaticSite.containerPage;
 import static io.github.com.pages.layout.ContainerPage.container;
 
 /**
- * To see an example of Container web element please visit https://material-ui.com/components/container/
+ * To see an example of Container web element please visit
+ * https://material-ui.com/components/container/
  */
 
 public class ContainerTests extends TestsInit {

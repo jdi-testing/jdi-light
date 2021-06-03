@@ -5,6 +5,11 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.tooltipPage;
 
+/**
+ * To see an example of Tooltip web element please visit
+ * https://material-ui.com/components/tooltips/
+ */
+
 public class TooltipTests extends TestsInit {
 
     @Test

@@ -10,6 +10,11 @@ import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.displaydata.TablePage.*;
 import static org.hamcrest.Matchers.containsString;
 
+/**
+ * To see an example of Tables web element please visit
+ * https://material-ui.com/components/tables/
+ */
+
 public class TableTests extends TestsInit {
     private final Timer timer = new Timer(2000L);
 

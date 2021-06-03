@@ -7,6 +7,11 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.gridPage;
 import static io.github.com.pages.layout.GridPage.*;
 
+/**
+ * To see an example of Grid web element please visit
+ * https://material-ui.com/components/grid/
+ */
+
 public class GridTests extends TestsInit {
 
     @BeforeMethod

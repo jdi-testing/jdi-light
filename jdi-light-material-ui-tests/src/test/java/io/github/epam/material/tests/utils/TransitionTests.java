@@ -11,7 +11,8 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 
 /**
- * To see an example of Transitions web element please visit https://material-ui.com/components/transitions/
+ * To see an example of Transitions web element please visit
+ * https://material-ui.com/components/transitions/
  */
 
 public class TransitionTests extends TestsInit {

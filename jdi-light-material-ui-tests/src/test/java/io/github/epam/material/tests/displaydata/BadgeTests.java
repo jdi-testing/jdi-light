@@ -9,6 +9,11 @@ import static org.hamcrest.Matchers.containsString;
 import static io.github.com.pages.displaydata.BadgePage.*;
 import static org.hamcrest.Matchers.not;
 
+/**
+ * To see an example of Chips web element please visit
+ * https://material-ui.com/ru/components/badges/
+ */
+
 public class BadgeTests extends TestsInit {
 
     @BeforeMethod

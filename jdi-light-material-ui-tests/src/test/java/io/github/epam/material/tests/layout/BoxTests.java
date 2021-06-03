@@ -7,6 +7,11 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.boxPage;
 import static io.github.com.pages.layout.BoxPage.*;
 
+/**
+ * To see an example of Box web element please visit
+ * https://material-ui.com/components/box/
+ */
+
 public class BoxTests extends TestsInit {
 
     @BeforeMethod

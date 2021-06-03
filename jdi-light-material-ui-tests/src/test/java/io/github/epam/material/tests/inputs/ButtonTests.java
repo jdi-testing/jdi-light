@@ -8,7 +8,8 @@ import static io.github.com.StaticSite.buttonPage;
 import static io.github.com.pages.inputs.ButtonPage.*;
 
 /**
- * To see an example of Button web element please visit https://material-ui.com/components/buttons/
+ * To see an example of Button web element please visit
+ * https://material-ui.com/components/buttons/
  */
 
 public class ButtonTests extends TestsInit {

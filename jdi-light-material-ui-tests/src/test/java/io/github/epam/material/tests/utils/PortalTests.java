@@ -12,7 +12,6 @@ import static io.github.com.pages.utils.PortalPage.*;
  * https://material-ui.com/components/portal/.
  */
 
-
 public class PortalTests extends TestsInit {
 
     @BeforeMethod

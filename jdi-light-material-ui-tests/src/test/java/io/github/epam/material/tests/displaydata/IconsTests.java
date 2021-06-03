@@ -14,7 +14,8 @@ import static io.github.com.StaticSite.iconsPage;
 import static io.github.com.pages.displaydata.IconsPage.*;
 
 /**
- * To see an example of Icons web element please visit https://material-ui.com/components/icons/
+ * To see an example of Icons web element please visit
+ * https://material-ui.com/components/icons/
  */
 
 public class IconsTests extends TestsInit {

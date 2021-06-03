@@ -9,7 +9,8 @@ import static io.github.com.StaticSite.fabPage;
 import static io.github.com.pages.inputs.FabPage.*;
 
 /**
- * To see an example of Floating Action Buttons web element please visit https://material-ui.com/components/floating-action-button/
+ * To see an example of Floating Action Buttons web element please visit
+ * https://material-ui.com/components/floating-action-button/
  */
 
 public class FabTests extends TestsInit {

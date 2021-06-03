@@ -11,6 +11,11 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.hiddenPage;
 import static io.github.com.pages.layout.HiddenPage.*;
 
+/**
+ * To see an example of Hidden web element please visit
+ * https://material-ui.com/components/hidden/
+ */
+
 public class HiddenTests extends TestsInit {
 
     private static final int WIDTH_LABEL_LENGHT = 15;

@@ -13,8 +13,10 @@ import static io.github.com.pages.surfaces.AppBarPage.*;
 import static  org.hamcrest.Matchers.containsString;
 
 /**
- * To see an example of App Bar web element please visit https://material-ui.com/components/app-bar/
+ * To see an example of App Bar web element please visit
+ * https://material-ui.com/components/app-bar/
  */
+
 public class AppBarTests extends TestsInit {
     private final Timer timer = new Timer(2000L);
 

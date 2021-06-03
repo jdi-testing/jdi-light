@@ -10,7 +10,8 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 /**
- * https://material-ui.com/components/accordion/#accordion
+ * To see an example of Accordion web element please visit
+ * https://material-ui.com/components/accordion
  */
 
 public class AccordionTests extends TestsInit {

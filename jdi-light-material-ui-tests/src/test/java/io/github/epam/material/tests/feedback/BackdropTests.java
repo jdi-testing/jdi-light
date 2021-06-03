@@ -9,6 +9,11 @@ import static io.github.com.StaticSite.backdropPage;
 import static io.github.com.pages.feedback.BackdropPage.backdrop;
 import static io.github.com.pages.feedback.BackdropPage.showBackdropButton;
 
+/**
+ * To see an example of Backdrop web element please visit
+ * https://material-ui.com/components/backdrop/
+ */
+
 public class BackdropTests extends TestsInit {
 
     private static final Timer timer = new Timer(1000L);

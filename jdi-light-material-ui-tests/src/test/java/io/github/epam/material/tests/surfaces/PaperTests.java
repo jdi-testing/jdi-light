@@ -7,6 +7,11 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.paperPage;
 import static io.github.com.pages.surfaces.PaperPage.paper;
 
+/**
+ * To see an example of Paper web element please visit
+ * https://material-ui.com/components/paper
+ */
+
 public class PaperTests extends TestsInit {
 
     private final String WITH_ZERO_ELEVATION = "Paper with elevation = 0";
