@@ -51,6 +51,18 @@ public class LinkAssert extends UIAssert<LinkAssert, Link> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is Typography body")
+    public LinkAssert typographyBody() {
+        jdiAssert(element().isTypographyBody(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is color Inherit")
+    public LinkAssert colorInherit() {
+        jdiAssert(element().isColorInherit(), Matchers.is(true));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' text is '{0}'")
     public LinkAssert text(Matcher<String> condition) {
         jdiAssert(element().getLinkText(), condition);

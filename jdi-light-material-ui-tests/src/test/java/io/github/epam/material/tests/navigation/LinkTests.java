@@ -1,68 +1,49 @@
 package io.github.epam.material.tests.navigation;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
+import static io.github.com.StaticSite.linkPage;
+import static io.github.com.pages.navigation.LinkPage.*;
 import static org.hamcrest.Matchers.hasToString;
 
 public class LinkTests extends TestsInit {
+
+    @BeforeMethod
+    public void before() {
+        linkPage.open();
+        linkPage.isOpened();
+    }
+
     @Test
     public void defaultLinkTest() {
-        defaultLinkPage.open();
-
-        linkFrame.link.is().underlineHover();
-        linkFrame.link.is().colorPrimary();
-        linkFrame.link.click();
-        linkFrame.link.is().text(hasToString("Link"));
+        link.is().underlineHover();
+        link.is().colorPrimary();
+        link.click();
+        link.is().text(hasToString("Link"));
     }
 
     @Test
-    public void secondaryLinkTest() {
-        secondaryLinkPage.open();
-
-        linkFrame.link.is().underlineHover();
-        linkFrame.link.is().colorSecondary();
-        linkFrame.link.click();
-        linkFrame.link.is().text(hasToString("Link"));
+    public void colorInheritLinkTest() {
+        inheritColorLink.is().underlineHover();
+        inheritColorLink.is().colorInherit();
+        inheritColorLink.click();
+        inheritColorLink.is().text(hasToString("color=\"inherit\""));
     }
 
     @Test
-    public void textPrimaryLinkTest() {
-        textPrimaryLinkPage.open();
-
-        linkFrame.link.is().underlineHover();
-        linkFrame.link.is().colorTextPrimary();
-        linkFrame.link.click();
-        linkFrame.link.is().text(hasToString("Link"));
-    }
-
-    @Test
-    public void textSecondaryLinkTest() {
-        textSecondaryLinkPage.open();
-
-        linkFrame.link.is().underlineHover();
-        linkFrame.link.is().colorTextSecondary();
-        linkFrame.link.click();
-        linkFrame.link.is().text(hasToString("Link"));
-    }
-
-    @Test
-    public void errorLinkTest() {
-        errorLinkPage.open();
-
-        linkFrame.link.is().underlineHover();
-        linkFrame.link.is().colorError();
-        linkFrame.link.click();
-        linkFrame.link.is().text(hasToString("Link"));
+    public void bodyLinkTest() {
+        bodyLink.is().underlineHover();
+        bodyLink.is().typographyBody();
+        bodyLink.click();
+        bodyLink.is().text(hasToString("variant=\"body2\""));
     }
 
     @Test
     public void underlineAlwaysLinkTest() {
-        underlineAlwaysLinkPage.open();
-
-        linkFrame.link.is().underlineAlways();
-        linkFrame.link.click();
-        linkFrame.link.is().text(hasToString("Link"));
+        underLinedLink.is().underlineAlways();
+        underLinedLink.click();
+        underLinedLink.is().text(hasToString("Underlined link4"));
     }
 }

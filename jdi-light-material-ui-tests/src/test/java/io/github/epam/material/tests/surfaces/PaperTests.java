@@ -19,7 +19,7 @@ public class PaperTests extends TestsInit {
     @BeforeMethod
     public void beforeTest() {
         paperPage.open();
-        paperPage.shouldBeOpened();
+        paperPage.isOpened();
     }
 
     @Test

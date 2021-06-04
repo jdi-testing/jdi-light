@@ -17,6 +17,7 @@ public class StepperTests extends TestsInit {
     @BeforeMethod
     public void chooseSection() {
         stepperPage.open();
+        stepperPage.isOpened();
     }
 
     @Test

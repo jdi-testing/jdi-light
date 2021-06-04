@@ -14,16 +14,6 @@ import io.github.com.pages.displaydata.*;
 import io.github.com.pages.feedback.*;
 import io.github.com.pages.inputs.*;
 import io.github.com.pages.layout.BoxPage;
-import io.github.com.pages.inputs.ButtonGroupFrame;
-import io.github.com.pages.inputs.CheckboxPage;
-import io.github.com.pages.inputs.EnhancedTransferListFrame;
-import io.github.com.pages.inputs.GroupCheckBoxFrame;
-import io.github.com.pages.inputs.SelectPage;
-import io.github.com.pages.inputs.RadioButtonPage;
-import io.github.com.pages.inputs.SimpleTransferListFrame;
-import io.github.com.pages.inputs.SplitButtonGroupFrame;
-import io.github.com.pages.inputs.SwitchPage;
-import io.github.com.pages.inputs.TextFieldFrame;
 import io.github.com.pages.layout.ContainerPage;
 import io.github.com.pages.layout.GridPage;
 import io.github.com.pages.layout.HiddenPage;
@@ -393,55 +383,19 @@ public class StaticSite {
 
 
     // links
-    @Frame("storybook-preview-iframe")
-    public static LinkFrame linkFrame;
-
-    @Url("/material-ui-navigation-link--default")
-    public static WebPage defaultLinkPage;
-
-    @Url("/material-ui-navigation-link--secondary")
-    public static WebPage secondaryLinkPage;
-
-    @Url("/material-ui-navigation-link--text-primary")
-    public static WebPage textPrimaryLinkPage;
-
-    @Url("/material-ui-navigation-link--text-secondary")
-    public static WebPage textSecondaryLinkPage;
-
-    @Url("/material-ui-navigation-link--error")
-    public static WebPage errorLinkPage;
-
-    @Url("/material-ui-navigation-link--underline-always")
-    public static WebPage underlineAlwaysLinkPage;
+    @Url("/link")
+    public static LinkPage linkPage;
 
     // bottom navigation
    @Url("/button_navigation")
    public static BottomNavigationPage bottomNavigationPage;
 
     // menu
-    @Frame("storybook-preview-iframe")
-    public static MenuFrame menuFrame;
-
-    @Url("/material-ui-navigation-menu--simple-menu")
+    @Url("/simple_menu")
     public static WebPage simpleMenuPage;
 
-    @Url("/material-ui-navigation-menu--scroll-menu")
-    public static WebPage scrollMenuPage;
-
-    @Url("/material-ui-navigation-menu--selected-with-vertical-positioning")
-    public static WebPage selectedVerticalPositioningPage;
-
-    @Url("/material-ui-navigation-menu--selected-no-vertical-positioning")
-    public static WebPage selectedNoVerticalPositioningPage;
-
-    @Url("/material-ui-navigation-menu--menu-list-with-positioning")
-    public static WebPage positioningMenuPage;
-
-    @Url("/material-ui-navigation-menu--context-menu")
+    @Url("/context_menu")
     public static WebPage contextMenuPage;
-
-    @Url("/material-ui-navigation-menu--menu-with-icons")
-    public static WebPage menuWithIconsPage;
 
     // layouts
     // hidden

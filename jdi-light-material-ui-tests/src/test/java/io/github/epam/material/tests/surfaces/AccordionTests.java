@@ -20,6 +20,7 @@ public class AccordionTests extends TestsInit {
     @BeforeMethod
     public void before(){
         accordionPage.open();
+        accordionPage.isOpened();
     }
 
     @Test
