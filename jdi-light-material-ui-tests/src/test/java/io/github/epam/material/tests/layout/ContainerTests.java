@@ -16,6 +16,7 @@ public class ContainerTests extends TestsInit {
     @BeforeMethod
     public void before() {
         containerPage.open();
+        containerPage.isOpened();
     }
 
     @Test

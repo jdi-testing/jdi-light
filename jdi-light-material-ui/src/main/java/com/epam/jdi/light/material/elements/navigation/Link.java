@@ -40,6 +40,16 @@ public class Link extends UIBaseElement<LinkAssert> {
         return core().hasClass("MuiLink-underlineAlways");
     }
 
+    @JDIAction("Is '{name}' MuiTypography body 2")
+    public boolean isTypographyBody() {
+        return core().hasClass("MuiTypography-body2");
+    }
+
+    @JDIAction("Is '{name}' color inherit")
+    public boolean isColorInherit() {
+        return core().hasClass("MuiTypography-colorInherit");
+    }
+
     @JDIAction("Is '{name}' underline hover")
     public boolean isUnderlineHover() {
         return core().hasClass("MuiLink-underlineHover");

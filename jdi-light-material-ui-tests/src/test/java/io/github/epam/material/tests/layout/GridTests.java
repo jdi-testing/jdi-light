@@ -17,6 +17,7 @@ public class GridTests extends TestsInit {
     @BeforeMethod
     public void before() {
         gridPage.open();
+        gridPage.isOpened();
     }
 
     @Test

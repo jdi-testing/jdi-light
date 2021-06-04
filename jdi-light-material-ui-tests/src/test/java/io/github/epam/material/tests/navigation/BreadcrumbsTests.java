@@ -2,6 +2,7 @@ package io.github.epam.material.tests.navigation;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static io.github.com.StaticSite.simpleBreadcrumbsPage;
 import static io.github.com.StaticSite.routerIntegrationBreadcrumbsPage;
@@ -15,11 +16,16 @@ import static io.github.com.pages.navigation.BreadcrumbsPage.*;
 
 public class BreadcrumbsTests extends TestsInit {
 
+    @BeforeMethod
+    public void before() {
+        simpleBreadcrumbsPage.open();
+        simpleBreadcrumbsPage.isOpened();
+    }
+
     private static Timer timer = new Timer(3000L);
 
     @Test
     public void simpleBreadcrumbsTest() {
-        simpleBreadcrumbsPage.open();
         breadcrumbs.get(1).is().text("Material-UI");
         breadcrumbs.get(1).click();
         timer.wait(() -> materialElement.is().visible());
@@ -31,14 +37,12 @@ public class BreadcrumbsTests extends TestsInit {
 
     @Test
     public void customSeparatorBreadcrumbsTest() {
-        simpleBreadcrumbsPage.open();
         separators.get(5).is().text("›");
         separators.get(7).is().text("-");
     }
 
     @Test
     public void withIconsBreadcrumbsTest() {
-        simpleBreadcrumbsPage.open();
         icons.get(1).is().displayed();
         icons.get(2).is().displayed();
         icons.get(3).is().displayed();
@@ -46,7 +50,6 @@ public class BreadcrumbsTests extends TestsInit {
 
     @Test
     public void collapsedBreadcrumbsTest() {
-        simpleBreadcrumbsPage.open();
         breadcrumbs.get(16).is().displayed();
         breadcrumbs.get(16).is().text("Home");
         breadcrumbs.get(17).is().text("Belts");
@@ -58,7 +61,6 @@ public class BreadcrumbsTests extends TestsInit {
 
     @Test
     public void customizedBreadcrumbsTest() {
-        simpleBreadcrumbsPage.open();
         breadcrumbs.get(18).is().text("Home");
         breadcrumbs.get(18).click();
         breadcrumbs.get(19).is().text("Catalog");

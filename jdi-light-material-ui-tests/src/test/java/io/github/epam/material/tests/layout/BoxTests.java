@@ -17,6 +17,7 @@ public class BoxTests extends TestsInit {
     @BeforeMethod
     public void before() {
         boxPage.open();
+        boxPage.isOpened();
     }
 
     @Test

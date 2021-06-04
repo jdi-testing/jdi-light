@@ -23,6 +23,7 @@ public class HiddenTests extends TestsInit {
     @BeforeMethod
     public void before() {
         hiddenPage.open();
+        hiddenPage.isOpened();
     }
 
     @Test
