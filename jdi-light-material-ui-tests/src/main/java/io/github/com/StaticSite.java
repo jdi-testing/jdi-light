@@ -235,12 +235,8 @@ public class StaticSite {
     @Url("/material-ui-feedback-progress--circular-with-value-label")
     public static WebPage circularWithValueLabel;
 
-    @Frame("storybook-preview-iframe")
-    public static CircularProgressFrame circularProgressFrame;
-
-    // linear
-    @Frame("storybook-preview-iframe")
-    public static LinearProgressFrame linearProgressFrame;
+    @Url("/progress")
+    public static ProgressPage progressPage;
 
     @Url("/material-ui-feedback-progress--linear-indeterminate")
     public static WebPage linearIndeterminatePage;
