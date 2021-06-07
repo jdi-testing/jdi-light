@@ -1,6 +1,5 @@
 package com.jdiai.jsbuilder;
 
-import com.jdiai.locators.ByFrame;
 import org.openqa.selenium.By;
 
 import static com.jdiai.jsdriver.JSDriverUtils.getByType;
@@ -32,7 +31,6 @@ public class GetTypes {
             case "class": return CLASS;
             case "css": return CSS;
             case "xpath": return XPATH;
-            case "frame": return ((ByFrame)locator).type.equals("id") ? ID : CSS;
             default:
                 throw new IllegalStateException("Unexpected value: " + getByType(locator));
         }

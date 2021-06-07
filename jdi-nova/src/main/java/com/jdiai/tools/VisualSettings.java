@@ -31,7 +31,9 @@ public class VisualSettings {
         return name + js.getName();
     };
     public static JFunc2<String, JS, String> IMAGE_TEMPLATE =  (tag, js) -> {
-        String imageName = isNotBlank(tag) ? tag : DEFAULT_IMAGE_NAME.execute(js);
+        String imageName = isNotBlank(tag)
+            ? tag
+            : DEFAULT_IMAGE_NAME.execute(js);
         return IMAGE_STORAGE + imageName;
     };
     public static JFunc2<File, File, Boolean> COMPARE_IMAGES = (newImage, baselineImage) -> {
@@ -52,22 +54,11 @@ public class VisualSettings {
         try {
             if (js.imagesData().images.has(tag)) {
                 File baseLineImage = new File(js.imagesData().images.get(tag));
-                File newImage = makePhoto(tag + "-new", js);
+                File newImage = js.makeScreenshot(tag + "-new");
                 COMPARE_IMAGES.execute(newImage, baseLineImage);
             } else {
-                makePhoto(tag, js);
+                js.makeScreenshot(tag);
             }
         } catch (Exception ex) { throw new JSException(ex, "Can't compare files"); }
     };
-
-    protected static File makePhoto(String tag, JS js) {
-        js.show();
-        File imageFile = js.makeScreenshot().asFile(getScreenshotName(tag, js));
-        js.imagesData().images.update(tag, imageFile.getPath());
-        js.imagesData().imageFile = imageFile;
-        return imageFile;
-    }
-    protected static String getScreenshotName(String tag, JS js) {
-        return IMAGE_TEMPLATE.execute(tag, js);
-    }
 }

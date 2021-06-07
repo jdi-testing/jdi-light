@@ -31,26 +31,40 @@ public class JDI {
     public static WebDriver driver() {
         return DRIVER.get();
     }
+
     public static Object jsExecute(String script, Object... params) {
         return ((JavascriptExecutor) driver()).executeScript(script, params);
     }
+
     public static Object jsEvaluate(String script, Object... params) {
         return jsExecute("return " + script, params);
     }
     public static void refreshPage() {
         driver().navigate().refresh();
     }
+
     public static void navigateBack() {
         driver().navigate().back();
     }
+
     public static void navigateForward() {
         driver().navigate().forward();
     }
+
     public static String getTitle() { return (String) jsEvaluate("document.title;"); }
+
     public static String getUrl() { return (String) jsEvaluate("document.URL;"); }
+
     public static String getDomain() { return (String) jsEvaluate("document.domain;"); }
+
     public static double zoomLevel() {
         return getDouble(jsEvaluate("window.devicePixelRatio;"));
+    }
+
+    public static void screenShot() {
+        new WebPage()
+            .setName(getTitle())
+            .makeScreenshot();
     }
 
     private static boolean initialized = false;
@@ -74,17 +88,21 @@ public class JDI {
     private static String getLoggerName(String name) {
         return format("%s(%s)", LOGGER_NAME, name);
     }
+
     public static void openSite(String url) {
         domain = url;
         openSite();
     }
+
     public static void openSite() {
         init();
         if (driver().getCurrentUrl().equals("data:,")) {
             openPage(domain);
         }
     }
+
     public static String LOGGER_TYPE = "console";
+
     public static void openSite(Class<?> cl) {
         init();
         initSite(cl);
@@ -92,6 +110,7 @@ public class JDI {
             JDI.openSite();
         }
     }
+
     public static void openPage(String url) {
         init();
         String fullUrl = isNotEmpty(domain) && !url.contains("//")
@@ -100,37 +119,49 @@ public class JDI {
         logger.info("Open page '" + fullUrl + "'");
         driver().get(fullUrl);
     }
+
     public static JS $(By locator) {
         return new JS(JDI::driver, locator);
     }
+
     public static JS $(By... locators) {
         return new JS(JDI::driver, locators);
     }
+
     public static JS $(String locator) {
         return new JS(JDI::driver, NAME_TO_LOCATOR.execute(locator));
     }
+
     public static JS $(String... locators) {
         return new JS(JDI::driver, locatorsToBy(locators));
     }
+
     public static void loginAs(String formLocator, Object user) {
         $(formLocator).loginAs(user);
     }
+
     public static void loginAs(Object user) {
         new JS(JDI::driver).loginAs(user);
     }
+
     public static void submitForm(String formLocator, Object user) {
         $(formLocator).submit(user);
     }
+
     public static void submitForm(Object user) {
         new JS(JDI::driver).submit(user);
     }
+
     public static void fillFormWith(String formLocator, Object user) {
         $(formLocator).fill(user);
     }
+
     public static void fillFormWith(Object user) {
         new JS(JDI::driver).fill(user);
     }
+
     public static DragAndDrop drag(JS dragElement) { return new DragAndDrop(dragElement);}
+
     public static void waitFor(JS element, Condition... conditions) {
         element.waitFor(conditions);
     }
