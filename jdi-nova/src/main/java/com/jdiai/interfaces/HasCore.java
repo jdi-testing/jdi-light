@@ -1,12 +1,103 @@
 package com.jdiai.interfaces;
 
 import com.jdiai.JS;
+import com.jdiai.asserts.Condition;
+import com.jdiai.visual.ImageTypes;
+import com.jdiai.visual.StreamToImageVideo;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public interface HasCore extends HasLocators {
+import static com.jdiai.tools.VisualSettings.DEFAULT_IMAGE_TYPE;
+
+public interface HasCore<T> extends HasLocators {
     JS core();
     void setCore(JS core);
     default List<By> locators() { return core().locators(); }
+
+    default WebElement we() {
+        return core().we();
+    }
+
+    default String printHtml() {
+        return core().printHtml();
+    }
+
+    default void show() {
+        core().show();
+    }
+
+    default boolean isEnabled() {
+        return core().isEnabled();
+    }
+
+    default boolean isDisabled() {
+        return !isEnabled();
+    }
+
+    default boolean isDisplayed() {
+        return core().isDisplayed();
+    }
+
+    default boolean isHidden() {
+        return !isDisplayed();
+    }
+
+    default boolean isVisible() {
+        return core().isVisible();
+    }
+
+    default boolean isNotVisible() {
+        return !isVisible();
+    }
+
+    default boolean isInView() {
+        return core().isInView();
+    }
+
+    default boolean isOutOfView() {
+        return !isInView();
+    }
+
+    default boolean isExist() {
+        return core().isExist();
+    }
+
+    default boolean isClickable() {
+        return core().isClickable();
+    }
+
+    default boolean isNotExist() {
+        return !isExist();
+    }
+
+    default StreamToImageVideo makeScreenshot(ImageTypes imageType) {
+        return core().makeScreenshot(imageType);
+    }
+
+    default StreamToImageVideo makeScreenshot() {
+        return makeScreenshot(DEFAULT_IMAGE_TYPE);
+    }
+
+    default void highlight() {
+        core().highlight();
+    }
+
+    default T shouldBe(Condition... conditions) {
+        core().shouldBe(conditions);
+        return (T) this;
+    }
+
+    default T should(Condition... conditions) {
+        return shouldBe(conditions);
+    }
+
+    default T waitFor(Condition... conditions) {
+        return shouldBe(conditions);
+    }
+
+    default T shouldHave(Condition... conditions) {
+        return shouldBe(conditions);
+    }
 }

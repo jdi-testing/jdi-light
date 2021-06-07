@@ -17,32 +17,41 @@ import static java.awt.event.InputEvent.BUTTON2_DOWN_MASK;
  */
 public class Mouse {
     public static int startX = 100;
+
     public static int startY = 250;
+
     public static void mouseClick(int x, int y) {
         mouseClick(x, y, BUTTON1_DOWN_MASK);
     }
+
     public static void mouseClick(WebElement element) {
         Rectangle rect = element.getRect();
         mouseClick(rect.x + rect.width/2, rect.y + rect.height / 2);
     }
+
     public static void mouseClick(JS element) {
         Rectangle rect = element.core().getRect();
         mouseClick(rect.x + rect.width/2, rect.y + rect.height / 2);
     }
+
     public static void mouseRightClick(int x, int y) {
         mouseClick(x, y, BUTTON2_DOWN_MASK);
     }
+
     public static void mouseClickRight(WebElement element) {
         Rectangle rect = element.getRect();
         mouseRightClick(rect.x + rect.width/2, rect.y + rect.height / 2);
     }
-    public static void mouseClickRight(HasCore element) {
+
+    public static void mouseClickRight(HasCore<?> element) {
         Rectangle rect = element.core().getRect();
         mouseRightClick(rect.x + rect.width/2, rect.y + rect.height / 2);
     }
+
     private static int zoomFactor(int coordinate) {
         return (int)(Math.round(coordinate) * zoomLevel());
     }
+
     private static void mouseClick(int x, int y, int inputEvent) {
         getRobot().mouseMove(startX + zoomFactor(x), startY + zoomFactor(y));
         getRobot().mousePress(inputEvent);
@@ -52,6 +61,7 @@ public class Mouse {
     public static void mouseWheel(int wheelAmt) {
         mouseWheel(wheelAmt, 50);
     }
+
     public static void mouseWheel(int wheelAmt, int speed) {
         int count = Math.abs(wheelAmt);
         int step = wheelAmt > 0 ? 1 : -1;

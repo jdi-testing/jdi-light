@@ -67,7 +67,7 @@ import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.OutputType.*;
 
-public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasCore {
+public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasCore<JS> {
     public static String JDI_STORAGE = "src/test/jdi";
     public JSSmart js;
     private Supplier<WebDriver> driver;
@@ -173,6 +173,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
     public String filterElements(String valueFunc) {
         return js.firstValue(valueFunc);
     }
+
     public String getJSResult(String action) {
         return js.getAttribute(action);
     }
@@ -221,14 +222,14 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
     }
 
     public String getFullName() {
-        String name = "";
-        if (parent() != null) {
-            name += isInterface(parent().getClass(), HasName.class)
-                ? ((HasName)parent()).getName()
-                : parent().getClass().getSimpleName();
-            name += ".";
-        }
-        return name + getName();
+        return parent() != null
+            ? getParentName() + "." + getName()
+            : getName();
+    }
+    private String getParentName() {
+        return isInterface(parent().getClass(), HasName.class)
+            ? ((HasName<?>)parent()).getName()
+            : parent().getClass().getSimpleName();
     }
 
     public Object parent() {
@@ -413,8 +414,8 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
     public List<String> allClasses() {
         String cl = attr("class");
         return cl.length() > 0
-                ? newList(cl.split(" "))
-                : new ArrayList<>();
+            ? newList(cl.split(" "))
+            : new ArrayList<>();
     }
 
     public boolean hasClass(String className) {
@@ -436,7 +437,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
     }
 
     public void show() {
-        if (isDisplayed() && !isVisible()) {
+        if (isDisplayed() && !isInView()) {
             doAction("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
         }
     }
@@ -463,9 +464,11 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
     public boolean isSelected() {
         return getProperty("checked").equals("true");
     }
+
     public boolean isDeselected() {
         return !isSelected();
     }
+
     public boolean isEnabled() {
         return hasAttribute("enabled");
     }
@@ -492,27 +495,30 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
     public boolean isDisplayed() {
         return getElement(conditions.isDisplayed).equalsIgnoreCase("true");
     }
-    public boolean isHidden() {
-        return !isDisplayed();
-    }
+
     public boolean isVisible() {
-        if (isHidden())
+        if (isHidden()) {
             return false;
+        }
+        Dimension visibleRect = getSize();
+        if (visibleRect.height == 0 || visibleRect.width == 0) {
+            return false;
+        }
+        return isClickable(visibleRect.getWidth() / 2, visibleRect.getHeight() / 2 - 1);
+    }
+
+    public boolean isInView() {
+        if (isHidden()) {
+            return false;
+        }
         Dimension visibleRect = getSize();
         return visibleRect.height > 0 && visibleRect.width > 0;
     }
-    public boolean isNotVisible() {
-        return !isVisible();
-    }
+
     public boolean isExist() {
-        return js.jsDriver().getCount() > 0;
+        return js.jsDriver().getSize() > 0;
     }
-    public boolean isNotExist() {
-        return !isExist();
-    }
-    public boolean isDisabled() {
-        return !isEnabled();
-    }
+
     public Point getLocation() {
         ClientRect rect = getClientRect();
         int x, y;
@@ -728,7 +734,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
     }
 
     public int size() {
-        return js.getAttributeList("tagName").size();
+        return js.getSize();
     }
 
     public List<JsonObject> getObjectList(String json) {
@@ -910,7 +916,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
     public boolean isClickable() {
         Dimension dimension = getSize();
         if (dimension.getWidth() == 0) return false;
-        return isClickable(dimension.getWidth()/2, dimension.getHeight()/2-1);
+        return isClickable(dimension.getWidth() / 2, dimension.getHeight() / 2 - 1);
     }
 
     public boolean isClickable(int xOffset, int yOffset) {
@@ -1141,6 +1147,10 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
     }
 
     public JS waitFor(Condition... conditions) {
+        return shouldBe(conditions);
+    }
+
+    public JS shouldHave(Condition... conditions) {
         return shouldBe(conditions);
     }
 
