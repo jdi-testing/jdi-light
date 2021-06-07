@@ -225,9 +225,9 @@ public abstract class Conditions {
         return name;
     }
     public static Condition condition(String name, Condition condition) {
-        if (isBlank(condition.getName()))
-            return condition.setName(name);
-        return condition(name, condition::execute);
+        return isBlank(condition.getName())
+            ? condition.setName(name)
+            : condition(name, condition::execute);
     }
     public static Condition be(Condition condition) {
         return condition;

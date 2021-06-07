@@ -64,9 +64,12 @@ public final class JSDriverUtils {
         {"className", "class"}
     });
     public static String getByType(By by) {
-        if (isIFrame(by)) return "frame";
-        if (by == null)
+        if (isIFrame(by)) {
+            return ((ByFrame)by).type.equals("id") ? "id" : "css";
+        }
+        if (by == null) {
             return "";
+        }
         Matcher m = Pattern.compile("By\\.(?<locator>[a-zA-Z]+):.*").matcher(by.toString());
         if (m.find()) {
             String result = m.group("locator");

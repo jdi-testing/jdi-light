@@ -16,7 +16,8 @@ public class SmartBuilderActions implements IBuilderActions {
         this.builder = builder;
     }
     public String oneToOne(String ctx, By locator) {
-        return builder.registerVariable(builder.getElementName()) + format(ONE_TO_ONE, MessageFormat.format(dataType(locator).get + iFrame(locator), ctx, selector(locator, builder)));
+        return builder.registerVariable(builder.getElementName()) +
+            format(ONE_TO_ONE, MessageFormat.format(dataType(locator).get + iFrame(locator), ctx, selector(locator, builder)));
     }
     private String iFrame(By locator) {
         return isIFrame(locator) ? ".contentWindow.document" : "";
