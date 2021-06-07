@@ -24,7 +24,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 
-public class DataList<T> implements List<T>, ISetup, HasCore, HasName<DataList<T>> {
+public class DataList<T> implements List<T>, ISetup, HasCore<DataList<T>>, HasName<DataList<T>> {
     private JS core;
     private Class<T> dataClass;
     private String labelName;
@@ -153,11 +153,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName<DataList<T
     }
     @Override
     public int size() {
-        try {
-            return getList(0).size();
-        } catch (Exception ex) {
-            throw new JSException(ex, "Get size failed");
-        }
+        return core().size();
     }
     @Override
     public boolean isEmpty() { return size() == 0; }
@@ -253,8 +249,11 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName<DataList<T
         }
         return list;
     }
+
     public JS core() { return core; }
+
     public void setCore(JS core) { this.core = core; }
+
     public void setup(Field field) {
         Type[] types = getGenericTypes(field);
         if (types.length != 1)

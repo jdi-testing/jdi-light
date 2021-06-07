@@ -31,6 +31,10 @@ public abstract class Conditions {
 
     public static Condition hidden = not(displayed);
 
+    public static Condition inView = condition("%element% is %not% in view screen", JS::isInView);
+
+    public static Condition outOfView = not(inView);
+
     public static Condition appear = condition("%element% is %not% appear",  displayed);
 
     public static Condition disappear = not(appear);
@@ -252,6 +256,7 @@ public abstract class Conditions {
         return condition("%element% have %no% [" + print(singletonList(entities), Object::toString) + "]",
                 el -> compareTwoLists(el, checkSize, sameOrder, entities));
     }
+
     private static <T> boolean compareTwoLists(JS el, boolean checkSize, boolean sameOrder, List<T> entities) {
         List<T> list = el.getEntityList((Class<T>) entities.get(0).getClass());
         if (checkSize && list.size() != entities.size()) {

@@ -47,8 +47,9 @@ public class JSDriver {
         this(() -> driver, locators, builder);
     }
     public JSDriver(Supplier<WebDriver> driver, List<By> locators, IJSBuilder builder) {
-        if (driver == null)
+        if (driver == null) {
             throw new JSException("JSDriver init failed: WebDriver == null");
+        }
         this.driver = driver;
         this.locators = copyList(locators);
         this.builder = builder;
@@ -106,15 +107,21 @@ public class JSDriver {
     public JSProducer getFirst(String collector) {
         return new JSProducer(buildList().getResult(collector).executeQuery());
     }
-    public long getCount() {
+
+    public int getSize() {
         try {
-            return (Long) buildList().addJSCode("return elements.length;").executeQuery();
-        } catch (Exception ignore) { return -1; }
+            return ((Long) buildList().addJSCode("return elements?.length ?? '';").executeQuery()).intValue();
+        } catch (Exception ignore) {
+            return -1;
+        }
     }
+
     public long indexOf(String condition) {
         try {
             return (Long) buildList().addJSCode("return elements.findIndex(e => e && e." + condition + ");\n").executeQuery();
-        } catch (Exception ignore) { return -1; }
+        } catch (Exception ignore) {
+            return -1;
+        }
     }
 
     public IJSBuilder buildOneChain() {

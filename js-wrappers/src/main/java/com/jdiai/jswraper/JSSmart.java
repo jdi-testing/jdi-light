@@ -45,6 +45,9 @@ public class JSSmart extends JSElement {
     public List<String> getAttributeList(String attribute) {
         return driver.getList(safeGet(attribute)).asString();
     }
+    public int getSize() {
+        return driver.getSize();
+    }
     public List<Json> getMultiAttributes(List<String> attributes) {
         List<JsonObject> objects = driver.getList(attributesToJson(attributes)).asJson();
         return map(objects, json -> new Json(attributes, v -> json.get(v).getAsString()));

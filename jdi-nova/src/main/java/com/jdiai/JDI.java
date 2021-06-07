@@ -61,13 +61,14 @@ public class JDI {
         return getDouble(jsEvaluate("window.devicePixelRatio;"));
     }
 
-    public static void screenShot() {
+    public static void makeScreenshot() {
         new WebPage()
             .setName(getTitle())
             .makeScreenshot();
     }
 
     private static boolean initialized = false;
+
     private static void init() {
         if (initialized) {
             return;
