@@ -43,12 +43,18 @@ public class DriverManager {
             throw new JSException("Driver type can't be null");
         }
         switch (driverType) {
-            case CHROME: chromeDriver();
-            case FIREFOX: firefoxDriver();
-            case IE: ieDriver();
-            case IE_EDGE: ieEdgeDriver();
-            case SAFARI: safariDriver();
-            case OPERA: operaDriver();
+            case CHROME:
+                return chromeDriver();
+            case FIREFOX:
+                return firefoxDriver();
+            case IE:
+                return ieDriver();
+            case IE_EDGE:
+                return ieEdgeDriver();
+            case SAFARI:
+                return safariDriver();
+            case OPERA:
+                return operaDriver();
             default:
                 throw new JSException("Unknown driver type %s", driverType);
         }

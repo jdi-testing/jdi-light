@@ -9,7 +9,7 @@ import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 
 public class JSWrapper {
-    public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::chromeDriver);
+    public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::getDriver);
     public static WebDriver driver() {
         return DRIVER.get();
     }

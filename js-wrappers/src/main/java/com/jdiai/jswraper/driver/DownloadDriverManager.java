@@ -19,7 +19,7 @@ public class DownloadDriverManager {
 
     static boolean hasVersion(String version) {
         char c = version.charAt(0);
-        return (c >= '0' && c <= '9');
+        return c >= '0' && c <= '9';
     }
 
     public static String downloadDriver(DriverTypes driverType, Platform platform, String version) {
