@@ -11,11 +11,13 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.jdiai.asserts.Conditions.size;
 import static com.jdiai.entities.User.Roman;
 import static com.jdiai.site.JDISite.homePage;
 import static com.jdiai.site.JDISite.searchPage;
 import static com.jdiai.states.States.atHomePage;
 import static com.jdiai.states.States.logout;
+import static com.jdiai.test.data.TestData.AllSearchResults;
 import static com.jdiai.test.data.TestData.SearchResults;
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -39,10 +41,34 @@ public class ListEntitiesTest implements TestInit {
         assertEquals(results.get(2).title, "JDI TEST SITE");
         assertEquals(print(results, SearchItem::toString), SearchResults);
     }
+
     @Test
     public void entitiesDataTest() {
         DataList<SearchItem> results = searchPage.searchData;
         assertEquals(results.get("JDI TEST SITE").link, "https://jdi-testing.github.io/jdi-light/");
         assertEquals(print(results, SearchItem::toString), SearchResults);
     }
+
+    @Test
+    public void waitForSizeDataTest() {
+        DataList<SearchItem> results = searchPage.searchData;
+        assertEquals(print(results, SearchItem::toString), SearchResults);
+        results.waitFor(size(s -> s > 6));
+        assertEquals(print(results, SearchItem::toString), AllSearchResults);
+    }
+
+    @Test
+    public void waitByValueDataTest() {
+        DataList<SearchItem> results = searchPage.searchData;
+        assertEquals(results.get("JDI FACEBOOK GROUP").link, "https://www.facebook.com/groups/jdi.framework/");
+        assertEquals(print(results, SearchItem::toString), AllSearchResults);
+    }
+
+    @Test
+    public void waitByIndexDataTest() {
+        DataList<SearchItem> results = searchPage.searchData;
+        assertEquals(results.get(6).link, "https://www.facebook.com/groups/jdi.framework/");
+        assertEquals(print(results, SearchItem::toString), AllSearchResults);
+    }
+
 }

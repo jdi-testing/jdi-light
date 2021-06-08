@@ -1,10 +1,11 @@
 package com.jdiai.asserts;
 
-import com.jdiai.JS;
+import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsdriver.JSException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
@@ -25,13 +26,13 @@ public abstract class Conditions {
         return el.isVisible();
     });
 
-    public static Condition displayed = condition("%element% is %not% displayed", JS::isDisplayed);
+    public static Condition displayed = condition("%element% is %not% displayed", HasCore::isDisplayed);
 
-    public static Condition exist = condition("%element% is exist on page", JS::isExist);
+    public static Condition exist = condition("%element% is exist on page", HasCore::isExist);
 
     public static Condition hidden = not(displayed);
 
-    public static Condition inView = condition("%element% is %not% in view screen", JS::isInView);
+    public static Condition inView = condition("%element% is %not% in view screen", HasCore::isInView);
 
     public static Condition outOfView = not(inView);
 
@@ -41,65 +42,65 @@ public abstract class Conditions {
 
     public static Condition readonly = attribute("readonly");
 
-    public static Condition onTopOf(JS element) {
-        return condition("%element% is %not% on the Top of '" + element.getFullName() + "'",
-            el -> HIGHER.execute(element.getDirectionTo(el)));
+    public static Condition onTopOf(HasCore element) {
+        return condition("%element% is %not% on the Top of '" + element.core().getFullName() + "'",
+            el -> HIGHER.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition below(JS element) {
-        return condition("%element% is %not% Below '" + element.getFullName() + "'",
-            el -> LOWER.execute(element.getDirectionTo(el)));
+    public static Condition below(HasCore element) {
+        return condition("%element% is %not% Below '" + element.core().getFullName() + "'",
+            el -> LOWER.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onLeftOf(JS element) {
-        return condition("%element% is %not% on the Left of '" + element.getFullName() + "'",
-            el -> LEFT.execute(element.getDirectionTo(el)));
+    public static Condition onLeftOf(HasCore element) {
+        return condition("%element% is %not% on the Left of '" + element.core().getFullName() + "'",
+            el -> LEFT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onRightOf(JS element) {
-        return condition("%element% is %not% on the Right of '" + element.getFullName() + "'",
-            el -> RIGHT.execute(element.getDirectionTo(el)));
+    public static Condition onRightOf(HasCore element) {
+        return condition("%element% is %not% on the Right of '" + element.core().getFullName() + "'",
+            el -> RIGHT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onTopLeftOf(JS element) {
-        return condition("%element% is %not% on the Top-Left of '" + element.getFullName() + "'",
-            el -> TOP_LEFT.execute(element.getDirectionTo(el)));
+    public static Condition onTopLeftOf(HasCore element) {
+        return condition("%element% is %not% on the Top-Left of '" + element.core().getFullName() + "'",
+            el -> TOP_LEFT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onTopRightOf(JS element) {
-        return condition("%element% is %not% on the Top-Right of '" + element.getFullName() + "'",
-            el -> TOP_RIGHT.execute(element.getDirectionTo(el)));
+    public static Condition onTopRightOf(HasCore element) {
+        return condition("%element% is %not% on the Top-Right of '" + element.core().getFullName() + "'",
+            el -> TOP_RIGHT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onBottomLeftOf(JS element) {
-        return condition("%element% is %not% on the Bottom-Left of '" + element.getFullName() + "'",
-            el -> BOTTOM_LEFT.execute(element.getDirectionTo(el)));
+    public static Condition onBottomLeftOf(HasCore element) {
+        return condition("%element% is %not% on the Bottom-Left of '" + element.core().getFullName() + "'",
+            el -> BOTTOM_LEFT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onBottomRightOf(JS element) {
-        return condition("%element% is %not% on the Bottom-Right of '" + element.getFullName() + "'",
-            el -> BOTTOM_RIGHT.execute(element.getDirectionTo(el)));
+    public static Condition onBottomRightOf(HasCore element) {
+        return condition("%element% is %not% on the Bottom-Right of '" + element.core().getFullName() + "'",
+            el -> BOTTOM_RIGHT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onTheSameLine(JS element) {
-        return condition("%element% is %not% on the same line '" + element.getFullName() + "'",
-            el -> SAME_HORIZONTAL.execute(element.getDirectionTo(el)));
+    public static <T> Condition onTheSameLine(HasCore element) {
+        return condition("%element% is %not% on the same line '" + element.core().getFullName() + "'",
+            el -> SAME_HORIZONTAL.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onTheSameVertical(JS element) {
-        return condition("%element% is %not% on the same vertical line '" + element.getFullName() + "'",
-            el -> SAME_VERTICAL.execute(element.getDirectionTo(el)));
+    public static Condition onTheSameVertical(HasCore element) {
+        return condition("%element% is %not% on the same vertical line '" + element.core().getFullName() + "'",
+            el -> SAME_VERTICAL.execute(element.core().getDirectionTo(el.core())));
     }
 
     public static Condition attribute(String attributeName) {
         return condition("%element% has %no% '" + attributeName + "' attribute",
-            el -> el.hasAttribute(attributeName));
+            el -> el.core().hasAttribute(attributeName));
     }
 
     public static Condition attribute(String attributeName, String value) {
         return condition("%element% has %no% '" + attributeName + "=" + value + "' attribute",
-            el -> el.attr(attributeName).equals(value));
+            el -> el.core().attr(attributeName).equals(value));
     }
 
     public static Condition containsAttribute(String attributeName, String value) {
         return condition("%element% has %no% '" + attributeName + " that contains " + value + "' attribute",
-            el -> el.attr(attributeName).contains(value));
+            el -> el.core().attr(attributeName).contains(value));
     }
 
     public static Condition matchAttribute(String attributeName, String regEx) {
         return condition("%element% has %no% '" + attributeName + " matches " + regEx + "' attribute",
-            el -> el.attr(attributeName).matches(regEx));
+            el -> el.core().attr(attributeName).matches(regEx));
     }
 
     public static Condition href(String href) {
@@ -123,11 +124,11 @@ public abstract class Conditions {
     }
 
     public static Condition pseudo(String pseudoName, String propertyName, String expectedValue) {
-        return el -> el.pseudo(pseudoName, propertyName).equals(expectedValue);
+        return el -> el.core().pseudo(pseudoName, propertyName).equals(expectedValue);
     }
 
     public static Condition pseudo(String pseudoElementName, String expectedValue) {
-        return el -> el.pseudo(pseudoElementName, "content").equals(expectedValue);
+        return el -> el.core().pseudo(pseudoElementName, "content").equals(expectedValue);
     }
 
     public static Condition exactValue(String value) {
@@ -144,14 +145,14 @@ public abstract class Conditions {
 
     public static Condition clazz(String className) {
         return condition("%element% has %no% 'class=" + className + "' attribute",
-                el -> el.hasClass(className));
+                el -> el.core().hasClass(className));
     }
 
     public static Condition id(String id) {
         return attribute("id", id);
     }
 
-    public static Condition empty = condition("%element% is %not% empty", el -> el.getText().equals(""));
+    public static Condition empty = condition("%element% is %not% empty", el -> el.core().getText().equals(""));
 
     public static Condition matchesText(String text) {
         return matchText(text);
@@ -159,12 +160,12 @@ public abstract class Conditions {
 
     public static Condition matchText(String regex) {
         return condition("%element% text %not% matches '" + regex + "'",
-            el -> el.getText().matches(regex));
+            el -> el.core().getText().matches(regex));
     }
 
     public static Condition be(Object entity) {
         return condition("%element% is %no% '" + entity.toString() + "'",
-            el -> el.getEntity(entity.getClass()).equals(entity));
+            el -> el.core().getEntity(entity.getClass()).equals(entity));
     }
     public static <T> Condition be(List<T> entities) {
         return haveCondition(true, true, entities);
@@ -185,33 +186,37 @@ public abstract class Conditions {
         return haveCondition(true, false, asList(entities));
     }
     public static Condition size(int size) {
-        return condition("%element% have size '" + size + "'",
-                el -> el.size() == size);
+        return condition("%element% have '" + size + "' elements",
+                el -> el.core().size() == size);
+    }
+    public static Condition size(Function<Integer, Boolean> sizeFunc) {
+        return condition("%element% have expected amount of elements",
+                el -> sizeFunc.apply(el.core().size()));
     }
     public static Condition text(String text) {
         return condition("%element% has %no% text='" + text + "'",
-            el -> el.getText().equals(text));
+            el -> el.core().getText().equals(text));
     }
     public static Condition containsText(String text) {
         return condition("%element% contains %no% text='" + text + "'",
-            el -> el.getText().contains(text));
+            el -> el.core().getText().contains(text));
     }
     public static Condition cssClass(String cssClass) {
         return condition("%element% has %no% css class '" + cssClass + "'",
-            el -> isNotBlank(el.cssStyle(cssClass)));
+            el -> isNotBlank(el.core().cssStyle(cssClass)));
     }
     public static Condition cssValue(String name, String value) {
         return condition("%element% has %no% style '" + name + "=" + value + "'",
-            el -> el.cssStyle(name).equals(value));
+            el -> el.core().cssStyle(name).equals(value));
     }
 
-    public static Condition focused = condition("%element% is %not% in focus", JS::focused);
+    public static Condition focused = condition("%element% is %not% in focus", el -> el.core().focused());
 
-    public static Condition enabled = condition("%element% is %not% enabled", JS::isEnabled);
+    public static Condition enabled = condition("%element% is %not% enabled", HasCore::isEnabled);
 
     public static Condition disabled = not(enabled);
 
-    public static Condition selected = condition("%element% is %not% selected", JS::isSelected);
+    public static Condition selected = condition("%element% is %not% selected", el -> el.core().isSelected());
 
     public static Condition checked = selected;
 
@@ -254,11 +259,14 @@ public abstract class Conditions {
             throw new JSException("Should have validation require at least one element");
         }
         return condition("%element% have %no% [" + print(singletonList(entities), Object::toString) + "]",
-                el -> compareTwoLists(el, checkSize, sameOrder, entities));
+                el -> compareTwoLists(el.core(), checkSize, sameOrder, entities));
     }
 
-    private static <T> boolean compareTwoLists(JS el, boolean checkSize, boolean sameOrder, List<T> entities) {
-        List<T> list = el.getEntityList((Class<T>) entities.get(0).getClass());
+    private static <T> boolean compareTwoLists(HasCore el, boolean checkSize, boolean sameOrder, List<T> entities) {
+        Class<T> cl = (Class<T>) entities.get(0).getClass();
+        List<T> list = cl.isAssignableFrom(String.class)
+            ? (List<T>) el.core().values()
+            : el.core().getEntityList((Class<T>) entities.get(0).getClass());
         if (checkSize && list.size() != entities.size()) {
             logger.error("Expected size: %s, but found: %s", entities.size(), list.size());
             return false;

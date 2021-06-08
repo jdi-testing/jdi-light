@@ -30,7 +30,7 @@ public class JSSmart extends JSElement {
     }
 
     private String safeGet(String attribute) {
-        return "element ? (element." + attribute + " ?? '') : ''";
+        return "element?." + attribute + " ?? ''";
     }
     public String getAttribute(String attribute) {
         return getValue(safeGet(attribute));

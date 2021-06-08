@@ -43,7 +43,7 @@ public class Mouse {
         mouseRightClick(rect.x + rect.width/2, rect.y + rect.height / 2);
     }
 
-    public static void mouseClickRight(HasCore<?> element) {
+    public static void mouseClickRight(HasCore element) {
         Rectangle rect = element.core().getRect();
         mouseRightClick(rect.x + rect.width/2, rect.y + rect.height / 2);
     }

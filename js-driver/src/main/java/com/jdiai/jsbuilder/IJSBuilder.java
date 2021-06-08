@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IJSBuilder {
     IJSBuilder addJSCode(String code);
-    IJSBuilder addContextCode(String code) ;
+    IJSBuilder setSearchScript(String code) ;
 
     IJSBuilder oneToOne(String ctx, By locator);
     IJSBuilder listToOne(By locator);

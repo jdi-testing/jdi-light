@@ -11,7 +11,7 @@ import static com.jdiai.page.objects.PageFactory.initPageElements;
 import static com.jdiai.page.objects.PageFactoryUtils.getPageTitle;
 import static com.jdiai.page.objects.PageFactoryUtils.getPageUrl;
 
-public class WebPage implements HasName<WebPage>, ISetup {
+public class WebPage implements HasName, ISetup {
     private String url;
     private String title;
     private String name;
