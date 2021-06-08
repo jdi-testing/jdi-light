@@ -5,7 +5,7 @@ import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 
-public interface Condition extends JFunc1<HasCore<?>, Boolean>, HasName<Condition> {
+public interface Condition extends JFunc1<HasCore, Boolean>, HasName {
     MapArray<Integer, String> NAMES = new MapArray<>();
 
     default Condition setName(String name) {
@@ -18,14 +18,14 @@ public interface Condition extends JFunc1<HasCore<?>, Boolean>, HasName<Conditio
         return NAMES.has(hash) ? NAMES.get(hash) : "";
     }
 
-    default <T> String getName(HasName<T> element) {
+    default String getName(HasName element) {
         return getName().replace(" %not%", "")
             .replace(" %no%", "")
             .replace("%element%", "'" + element.getName() + "'");
     }
 
     @Override
-    default Boolean execute(HasCore<?> element) {
+    default Boolean execute(HasCore element) {
         try {
             return invoke(element);
         } catch (Exception ex) {

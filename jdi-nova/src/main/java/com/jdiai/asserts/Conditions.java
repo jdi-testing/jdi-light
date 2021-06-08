@@ -42,43 +42,43 @@ public abstract class Conditions {
 
     public static Condition readonly = attribute("readonly");
 
-    public static Condition onTopOf(HasCore<?> element) {
+    public static Condition onTopOf(HasCore element) {
         return condition("%element% is %not% on the Top of '" + element.core().getFullName() + "'",
             el -> HIGHER.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition below(HasCore<?> element) {
+    public static Condition below(HasCore element) {
         return condition("%element% is %not% Below '" + element.core().getFullName() + "'",
             el -> LOWER.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onLeftOf(HasCore<?> element) {
+    public static Condition onLeftOf(HasCore element) {
         return condition("%element% is %not% on the Left of '" + element.core().getFullName() + "'",
             el -> LEFT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onRightOf(HasCore<?> element) {
+    public static Condition onRightOf(HasCore element) {
         return condition("%element% is %not% on the Right of '" + element.core().getFullName() + "'",
             el -> RIGHT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onTopLeftOf(HasCore<?> element) {
+    public static Condition onTopLeftOf(HasCore element) {
         return condition("%element% is %not% on the Top-Left of '" + element.core().getFullName() + "'",
             el -> TOP_LEFT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onTopRightOf(HasCore<?> element) {
+    public static Condition onTopRightOf(HasCore element) {
         return condition("%element% is %not% on the Top-Right of '" + element.core().getFullName() + "'",
             el -> TOP_RIGHT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onBottomLeftOf(HasCore<?> element) {
+    public static Condition onBottomLeftOf(HasCore element) {
         return condition("%element% is %not% on the Bottom-Left of '" + element.core().getFullName() + "'",
             el -> BOTTOM_LEFT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onBottomRightOf(HasCore<?> element) {
+    public static Condition onBottomRightOf(HasCore element) {
         return condition("%element% is %not% on the Bottom-Right of '" + element.core().getFullName() + "'",
             el -> BOTTOM_RIGHT.execute(element.core().getDirectionTo(el.core())));
     }
-    public static <T> Condition onTheSameLine(HasCore<T> element) {
+    public static <T> Condition onTheSameLine(HasCore element) {
         return condition("%element% is %not% on the same line '" + element.core().getFullName() + "'",
             el -> SAME_HORIZONTAL.execute(element.core().getDirectionTo(el.core())));
     }
-    public static Condition onTheSameVertical(HasCore<?> element) {
+    public static Condition onTheSameVertical(HasCore element) {
         return condition("%element% is %not% on the same vertical line '" + element.core().getFullName() + "'",
             el -> SAME_VERTICAL.execute(element.core().getDirectionTo(el.core())));
     }
@@ -262,7 +262,7 @@ public abstract class Conditions {
                 el -> compareTwoLists(el.core(), checkSize, sameOrder, entities));
     }
 
-    private static <T> boolean compareTwoLists(HasCore<?> el, boolean checkSize, boolean sameOrder, List<T> entities) {
+    private static <T> boolean compareTwoLists(HasCore el, boolean checkSize, boolean sameOrder, List<T> entities) {
         Class<T> cl = (Class<T>) entities.get(0).getClass();
         List<T> list = cl.isAssignableFrom(String.class)
             ? (List<T>) el.core().values()

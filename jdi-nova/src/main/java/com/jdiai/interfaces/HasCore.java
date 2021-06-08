@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.jdiai.tools.VisualSettings.DEFAULT_IMAGE_TYPE;
 
-public interface HasCore<T> extends HasName<T>, HasLocators, ShouldValidations<HasCore<T>> {
+public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore> {
     JS core();
     void setCore(JS core);
     default List<By> locators() { return core().locators(); }
@@ -87,10 +87,10 @@ public interface HasCore<T> extends HasName<T>, HasLocators, ShouldValidations<H
     default String getName() {
         return core().getName();
     }
-    default T setName(String name) {
+    default HasCore setName(String name) {
         core().setName(name);
         try {
-            return (T) this;
+            return this;
         } catch (Exception ignore) {
             return null;
         }

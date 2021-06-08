@@ -15,7 +15,7 @@ import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class ShouldUtils {
-    public static <T extends HasCore<?>> T handleShouldBe(T core, Condition... conditions) {
+    public static <T extends HasCore> T handleShouldBe(T core, Condition... conditions) {
         if (isEmpty(conditions)) {
             throw new JSException("Please specify at least 1 Condition");
         }
@@ -28,17 +28,17 @@ public class ShouldUtils {
         return core;
     }
 
-    private static String getCombinedAssertionName(HasCore<?> core, Condition... conditions) {
+    private static String getCombinedAssertionName(HasCore core, Condition... conditions) {
         return "Assert that " + printCondition(core, conditions);
     }
 
-    private static String printCondition(HasName<?> core, Condition... conditions) {
+    private static String printCondition(HasName core, Condition... conditions) {
         return conditions.length == 1
             ? conditions[0].getName(core)
             : print(map(conditions, c -> c.getName(core)), "; ");
     }
 
-    private static boolean checkConditions(HasCore<?> core, Condition[] conditions, Timer timer) {
+    private static boolean checkConditions(HasCore core, Condition[] conditions, Timer timer) {
         try {
             boolean foundAll = false;
             while (!foundAll && timer.isRunning()) {
@@ -61,18 +61,18 @@ public class ShouldUtils {
             throw new JSException(ex, ">> Assert failed");
         }
     }
-    //private JFunc2<HasCore<?>, Exception, Boolean> ignoreFailure = null;
-    //private JFunc2<HasCore<?>, Exception, Boolean> getIgnoreFailureFunc() {
+    //private JFunc2<HasCore, Exception, Boolean> ignoreFailure = null;
+    //private JFunc2<HasCore, Exception, Boolean> getIgnoreFailureFunc() {
     //    return ignoreFailure != null
     //            ? ignoreFailure
     //            : IGNORE_FAILURE;
     //}
-    //public static <T> HasCore<T> ignoreFailure(JFunc2<JS, Exception, Boolean> ignoreFailureFunc) {
+    //public static <T> HasCore ignoreFailure(JFunc2<JS, Exception, Boolean> ignoreFailureFunc) {
     //    ignoreFailure = ignoreFailureFunc;
     //    return this;
     //}
 
-    private static void checkOutOfTime(HasCore<?> core, Timer timer, Condition... conditions) {
+    private static void checkOutOfTime(HasCore core, Timer timer, Condition... conditions) {
         if (timer.isRunning()) {
             return;
         }

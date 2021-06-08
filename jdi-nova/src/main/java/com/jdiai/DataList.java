@@ -25,7 +25,7 @@ import static com.jdiai.asserts.Conditions.have;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 
-public class DataList<T> implements List<T>, ISetup, HasCore<DataList<T>>, HasName<DataList<T>> {
+public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     private JS core;
     private Class<T> dataClass;
     private String labelName;

@@ -4,7 +4,7 @@ import com.jdiai.interfaces.HasCore;
 
 import static com.jdiai.asserts.ShouldUtils.handleShouldBe;
 
-public interface ShouldValidations<T extends HasCore<?>> {
+public interface ShouldValidations<T extends HasCore> {
     default T shouldBe(Condition... conditions) {
         return handleShouldBe((T) this, conditions);
     }

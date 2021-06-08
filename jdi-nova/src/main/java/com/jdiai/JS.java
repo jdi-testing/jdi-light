@@ -62,7 +62,7 @@ import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.OutputType.*;
 
-public class JS implements WebElement, HasLocators, HasParent, HasCore<JS> {
+public class JS implements WebElement, HasLocators, HasParent, HasCore {
     public static String JDI_STORAGE = "src/test/jdi";
     public JSSmart js;
     private Supplier<WebDriver> driver;
@@ -116,7 +116,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore<JS> {
         this(driver, locatorsFromParent(locator, parent, useParentLocators));
         this.parent = parent;
         if (parent != null && isClass(parent.getClass(), HasCore.class)) {
-            this.js.updateDriver(((HasCore<?>) parent).core().js.jsDriver());
+            this.js.updateDriver(((HasCore) parent).core().js.jsDriver());
         }
     }
 
@@ -223,7 +223,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore<JS> {
     }
     private String getParentName() {
         return isInterface(parent().getClass(), HasName.class)
-            ? ((HasName<?>)parent()).getName()
+            ? ((HasName)parent()).getName()
             : parent().getClass().getSimpleName();
     }
 
@@ -979,7 +979,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore<JS> {
         Rectangle destinationCoordinates = element.getRect();
         Direction direction = new Direction(getCenter(elementCoordinates), getCenter(destinationCoordinates));
         if (isInterface(element.getClass(), HasCore.class)) {
-            JS core = ((HasCore<?>)element).core();
+            JS core = ((HasCore)element).core();
             if (relations == null) {
                 relations = new MapArray<>(core.getFullName(), direction);
             } else {
