@@ -8,7 +8,6 @@ import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import com.google.gson.JsonObject;
 import com.jdiai.annotations.UI;
-import com.jdiai.asserts.Condition;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasLocators;
 import com.jdiai.interfaces.HasName;
@@ -28,7 +27,6 @@ import com.jdiai.visual.ImageTypes;
 import com.jdiai.visual.OfElement;
 import com.jdiai.visual.StreamToImageVideo;
 import org.apache.commons.lang3.NotImplementedException;
-import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -46,11 +44,8 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.jdiai.JDI.conditions;
-import static com.jdiai.JDI.timeout;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
-import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
-import static com.jdiai.jsdriver.JSException.THROW_ASSERT;
 import static com.jdiai.jswraper.JSWrappersUtils.*;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 import static com.jdiai.tools.FilterConditions.textEquals;
@@ -67,7 +62,7 @@ import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.OutputType.*;
 
-public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasCore<JS> {
+public class JS implements WebElement, HasLocators, HasParent, HasCore<JS> {
     public static String JDI_STORAGE = "src/test/jdi";
     public JSSmart js;
     private Supplier<WebDriver> driver;
@@ -121,7 +116,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
         this(driver, locatorsFromParent(locator, parent, useParentLocators));
         this.parent = parent;
         if (parent != null && isClass(parent.getClass(), HasCore.class)) {
-            this.js.updateDriver(((HasCore) parent).core().js.jsDriver());
+            this.js.updateDriver(((HasCore<?>) parent).core().js.jsDriver());
         }
     }
 
@@ -979,14 +974,17 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
         COMPARE_IMAGES.execute(imagesData().imageFile, element.imagesData().imageFile);
     }
 
-    public Direction getDirectionTo(JS element) {
-        ClientRect elementCoordinates = getClientRect();
-        ClientRect destinationCoordinates = element.getClientRect();
+    public Direction getDirectionTo(WebElement element) {
+        Rectangle elementCoordinates = getRect();
+        Rectangle destinationCoordinates = element.getRect();
         Direction direction = new Direction(getCenter(elementCoordinates), getCenter(destinationCoordinates));
-        if (relations == null) {
-            relations = new MapArray<>(element.getFullName(), direction);
-        } else {
-            relations.update(element.getFullName(), direction);
+        if (isInterface(element.getClass(), HasCore.class)) {
+            JS core = ((HasCore<?>)element).core();
+            if (relations == null) {
+                relations = new MapArray<>(core.getFullName(), direction);
+            } else {
+                relations.update(core.getFullName(), direction);
+            }
         }
         return direction;
     }
@@ -1059,99 +1057,12 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
     }
 
     public Point getCenter() {
-        return getCenter(getClientRect());
+        return getCenter(getRect());
     }
 
-    protected Point getCenter(ClientRect rect) {
-        int x = rect.left + (rect.right - rect.left) / 2;
-        int y = rect.top + (rect.bottom - rect.top) / 2;
+    protected Point getCenter(Rectangle rect) {
+        int x = rect.x + rect.width / 2;
+        int y = rect.y + rect.height / 2;
         return new Point(x, y);
     }
-
-    public JS shouldBe(Condition... conditions) {
-        if (ObjectUtils.isEmpty(conditions)) {
-            throw new JSException("Please specify at least 1 Condition");
-        }
-        Timer timer = new Timer(timeout * 1000L);
-        logger.info(getCombinedAssertionName(conditions));
-        boolean foundAll = checkConditions(conditions, timer);
-        if (!foundAll) {
-            checkOutOfTime(timer, conditions);
-        }
-        return this;
-    }
-
-    public static JFunc2<JS, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;
-
-    private JFunc2<JS, Exception, Boolean> ignoreFailure = null;
-
-    private JFunc2<JS, Exception, Boolean> getIgnoreFailureFunc() {
-        return ignoreFailure != null
-            ? ignoreFailure
-            : IGNORE_FAILURE;
-    }
-
-    public JS ignoreFailure(JFunc2<JS, Exception, Boolean> ignoreFailureFunc) {
-        ignoreFailure = ignoreFailureFunc;
-        return this;
-    }
-
-    private boolean checkConditions(Condition[] conditions, Timer timer) {
-        try {
-            boolean foundAll = false;
-            while (!foundAll && timer.isRunning()) {
-                for (Condition condition : conditions) {
-                    checkOutOfTime(timer, conditions);
-                    String message = "Assert that " + condition.getName(this);
-                    logger.debug(message);
-                    boolean result = condition.execute(this);
-                    if (result) {
-                        foundAll = true;
-                    } else {
-                        foundAll = false;
-                        break;
-                    }
-                }
-            }
-            return foundAll;
-        } catch (Exception ex) {
-            boolean ignoreFail = getIgnoreFailureFunc().execute(this, ex);
-            if (timer.isRunning() && ignoreFail) {
-                checkConditions(conditions, timer);
-            }
-            throw new JSException(ex, ">> Assert failed");
-        }
-    }
-
-
-    private void checkOutOfTime(Timer timer, Condition... conditions) {
-        if (timer.isRunning()) {
-            return;
-        }
-        THROW_ASSERT.accept(format("Failed to execute Assert in time (%s sec); '%s'",
-            timeout, getCombinedAssertionName(conditions)));
-    }
-
-    private String getCombinedAssertionName(Condition... conditions) {
-        return "Assert that " + printCondition(conditions);
-    }
-
-    private String printCondition(Condition... conditions) {
-        return conditions.length == 1
-            ? conditions[0].getName(this)
-            : print(map(conditions, c -> c.getName(this)), "; ");
-    }
-
-    public JS should(Condition... conditions) {
-        return shouldBe(conditions);
-    }
-
-    public JS waitFor(Condition... conditions) {
-        return shouldBe(conditions);
-    }
-
-    public JS shouldHave(Condition... conditions) {
-        return shouldBe(conditions);
-    }
-
 }

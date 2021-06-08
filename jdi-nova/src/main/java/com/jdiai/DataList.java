@@ -72,7 +72,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore<DataList<T>>, HasNa
 
     @Override
     public T get(int index) {
-        core().shouldHave(Conditions.size(s -> s > index));
+        shouldHave(Conditions.size(s -> s > index));
         return getElement(index).getEntity(dataClass);
     }
 

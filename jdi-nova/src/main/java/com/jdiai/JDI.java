@@ -1,6 +1,7 @@
 package com.jdiai;
 
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.func.JFunc2;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.jsbuilder.ConsoleLogger;
@@ -34,6 +35,8 @@ public class JDI {
     public static WebDriver driver() {
         return DRIVER.get();
     }
+
+    public static JFunc2<Object, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;
 
     public static Object jsExecute(String script, Object... params) {
         return ((JavascriptExecutor) driver()).executeScript(script, params);

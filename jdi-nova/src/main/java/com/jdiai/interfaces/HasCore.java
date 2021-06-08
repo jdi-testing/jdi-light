@@ -1,7 +1,7 @@
 package com.jdiai.interfaces;
 
 import com.jdiai.JS;
-import com.jdiai.asserts.Condition;
+import com.jdiai.asserts.ShouldValidations;
 import com.jdiai.visual.ImageTypes;
 import com.jdiai.visual.StreamToImageVideo;
 import org.openqa.selenium.By;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.jdiai.tools.VisualSettings.DEFAULT_IMAGE_TYPE;
 
-public interface HasCore<T> extends HasLocators {
+public interface HasCore<T> extends HasName<T>, HasLocators, ShouldValidations<HasCore<T>> {
     JS core();
     void setCore(JS core);
     default List<By> locators() { return core().locators(); }
@@ -84,20 +84,15 @@ public interface HasCore<T> extends HasLocators {
         core().highlight();
     }
 
-    default T shouldBe(Condition... conditions) {
-        core().shouldBe(conditions);
-        return (T) this;
+    default String getName() {
+        return core().getName();
     }
-
-    default T should(Condition... conditions) {
-        return shouldBe(conditions);
-    }
-
-    default T waitFor(Condition... conditions) {
-        return shouldBe(conditions);
-    }
-
-    default T shouldHave(Condition... conditions) {
-        return shouldBe(conditions);
+    default T setName(String name) {
+        core().setName(name);
+        try {
+            return (T) this;
+        } catch (Exception ignore) {
+            return null;
+        }
     }
 }
