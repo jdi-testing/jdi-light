@@ -15,14 +15,13 @@ import static io.github.com.pages.navigation.BreadcrumbsPage.*;
  */
 
 public class BreadcrumbsTests extends TestsInit {
+    private static Timer timer = new Timer(3000L);
 
     @BeforeMethod
     public void before() {
         simpleBreadcrumbsPage.open();
         simpleBreadcrumbsPage.isOpened();
     }
-
-    private static Timer timer = new Timer(3000L);
 
     @Test
     public void simpleBreadcrumbsTest() {
