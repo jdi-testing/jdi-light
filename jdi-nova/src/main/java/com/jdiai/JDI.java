@@ -5,8 +5,8 @@ import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.jsbuilder.ConsoleLogger;
 import com.jdiai.jsbuilder.Slf4JLogger;
-import com.jdiai.jswraper.DriverManager;
 import com.jdiai.jswraper.JSSmart;
+import com.jdiai.jswraper.driver.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -23,9 +23,12 @@ import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class JDI {
-    public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::chromeDriver);
+    public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::getDriver);
+
     public static String domain;
+
     public static int timeout = 10;
+
     public static ConditionTypes conditions = new ConditionTypes();
 
     public static WebDriver driver() {
@@ -39,6 +42,7 @@ public class JDI {
     public static Object jsEvaluate(String script, Object... params) {
         return jsExecute("return " + script, params);
     }
+
     public static void refreshPage() {
         driver().navigate().refresh();
     }

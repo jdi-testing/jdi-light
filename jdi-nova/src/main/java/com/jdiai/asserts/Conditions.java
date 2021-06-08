@@ -5,6 +5,7 @@ import com.jdiai.jsdriver.JSException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
@@ -185,8 +186,12 @@ public abstract class Conditions {
         return haveCondition(true, false, asList(entities));
     }
     public static Condition size(int size) {
-        return condition("%element% have size '" + size + "'",
+        return condition("%element% have '" + size + "' elements",
                 el -> el.size() == size);
+    }
+    public static Condition size(Function<Integer, Boolean> sizeFunc) {
+        return condition("%element% have expected amount of elements",
+                el -> sizeFunc.apply(el.size()));
     }
     public static Condition text(String text) {
         return condition("%element% has %no% text='" + text + "'",
@@ -258,7 +263,10 @@ public abstract class Conditions {
     }
 
     private static <T> boolean compareTwoLists(JS el, boolean checkSize, boolean sameOrder, List<T> entities) {
-        List<T> list = el.getEntityList((Class<T>) entities.get(0).getClass());
+        Class<T> cl = (Class<T>) entities.get(0).getClass();
+        List<T> list = cl.isAssignableFrom(String.class)
+            ? (List<T>) el.values()
+            : el.getEntityList((Class<T>) entities.get(0).getClass());
         if (checkSize && list.size() != entities.size()) {
             logger.error("Expected size: %s, but found: %s", entities.size(), list.size());
             return false;

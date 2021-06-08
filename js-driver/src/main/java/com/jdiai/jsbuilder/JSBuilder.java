@@ -21,12 +21,13 @@ import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_LIST_SCRIPT_EXECUTE;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_SCRIPT_EXECUTE;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JSBuilder implements IJSBuilder {
     protected List<String> variables = new ArrayList<>();
     protected String query = "";
-    protected String ctxCode = "";
+    protected String searchScript = "";
     protected Supplier<JavascriptExecutor> js;
     public static JFunc1<String, String> PROCESS_RESULT =
         result -> result.length() > 200  ? result.substring(0, 195) + "..." : result;
@@ -120,8 +121,8 @@ public class JSBuilder implements IJSBuilder {
         query += code;
         return this;
     }
-    public IJSBuilder addContextCode(String code) {
-        ctxCode += code;
+    public IJSBuilder setSearchScript(String code) {
+        searchScript += code;
         return this;
     }
     public IJSBuilder oneToOne(String ctx, By locator) {
@@ -179,17 +180,21 @@ public class JSBuilder implements IJSBuilder {
     // region private
     public void registerVariables(String... vars) {
         for (String variable : vars) {
-            if (!variables.contains(variable))
+            if (!variables.contains(variable)) {
                 variables.add(variable);
+            }
         }
     }
     public String registerVariable(String variable) {
-        if (!variables.contains(variable))
+        if (!variables.contains(variable)) {
             variables.add(variable);
+        }
         return variable + " = ";
     }
     private String beforeScript() {
-        return isNotBlank(ctxCode) ? ctxCode + "\n": "";
+        return isNotBlank(searchScript)
+            ? searchScript + "\n"
+            : "";
     }
     public String rawQuery() {
         return beforeScript() + query;
@@ -212,14 +217,16 @@ public class JSBuilder implements IJSBuilder {
         return jsScript + "let " + letVariables + rawQuery();
     }
     public void cleanup() {
-        useFunctions.clear();
+        if (isBlank(searchScript)) {
+            useFunctions.clear();
+            variables = new ArrayList<>();
+        }
         query = "";
-        variables = new ArrayList<>();
-        ctxCode = "";
     }
     public void updateFromBuilder(IJSBuilder builder) {
-        if (!isClass(builder.getClass(), JSBuilder.class))
+        if (!isClass(builder.getClass(), JSBuilder.class)) {
             return;
+        }
         JSBuilder jsBuilder = (JSBuilder) builder;
         for (Pair<String, String> pair : jsBuilder.useFunctions) {
             if (!useFunctions.has(pair.key)) {
@@ -235,7 +242,7 @@ public class JSBuilder implements IJSBuilder {
     public JSBuilder copy() {
         JSBuilder result = new JSBuilder();
         result.builderActions = builderActions;
-        result.ctxCode = ctxCode;
+        result.searchScript = searchScript;
         result.js = js;
         result.useFunctions = useFunctions;
         result.logQuery = logQuery;

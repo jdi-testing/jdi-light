@@ -5,6 +5,7 @@ import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction1;
 import com.epam.jdi.tools.func.JFunc1;
 import com.jdiai.annotations.ListLabel;
+import com.jdiai.asserts.Conditions;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
@@ -19,8 +20,8 @@ import java.util.function.Function;
 
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.jdiai.asserts.Conditions.have;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 
@@ -39,6 +40,19 @@ public class DataList<T> implements List<T>, ISetup, HasCore<DataList<T>>, HasNa
         return core().findFirst(labelLocator, condition);
     }
 
+    private JS getLabelElement() {
+        Field labelField = getLabelField();
+        By labelLocator = getLocatorFromField(labelField);
+        if (labelLocator == null) {
+            throw new JSException("Failed to get labelElement");
+        }
+        return core().find(labelLocator);
+    }
+    private void haveLabelElement(String value) {
+        Function<JS, String> condition = getCondition(getLabelField(), value, "#element#");
+        getLabelElement().findFirst(condition).shouldHave(have(value));
+    }
+
     public JS getElement(Enum<?> name) {
         return getElement(getEnumValue(name));
     }
@@ -48,6 +62,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore<DataList<T>>, HasNa
     }
 
     public T get(String value) {
+        haveLabelElement(value);
         return getElement(value).getEntity(dataClass);
     }
 
@@ -57,13 +72,14 @@ public class DataList<T> implements List<T>, ISetup, HasCore<DataList<T>>, HasNa
 
     @Override
     public T get(int index) {
+        core().shouldHave(Conditions.size(s -> s > index));
         return getElement(index).getEntity(dataClass);
     }
 
     public void select(String value) {
-        getElement(value).click();
+        haveLabelElement(value);
+        getLabelElement().get(value).click();
     }
-
 
     public void select(Enum<?> name) {
         select(getEnumValue(name));
@@ -71,6 +87,19 @@ public class DataList<T> implements List<T>, ISetup, HasCore<DataList<T>>, HasNa
 
     public void select(int index) {
         getElement(index).click();
+    }
+
+    public void select(T element) {
+        select(getLabelFieldValue(element));
+    }
+
+    private String getLabelFieldValue(T element) {
+        try {
+            Field labelField = getLabelField();
+            return getValueField(labelField, element).toString();
+        } catch (Exception ignore) {
+            throw new JSException("Failed to get labelField");
+        }
     }
 
     private Function<JS, String> getCondition(Field labelField, String value, String elementName) {

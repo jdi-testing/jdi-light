@@ -2,6 +2,7 @@ package com.jdiai.jswraper;
 
 import com.epam.jdi.tools.Safe;
 import com.jdiai.jsbuilder.SmartBuilderActions;
+import com.jdiai.jswraper.driver.DriverManager;
 import org.openqa.selenium.WebDriver;
 
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;

@@ -898,7 +898,7 @@ public class JS implements WebElement, HasLocators, HasName<JS>, HasParent, HasC
 
     private JS listToOne(String script) {
         JS result = new JS(driver);
-        result.js.jsDriver().builder().addContextCode(js.jsDriver().buildList().rawQuery() + script);
+        result.js.jsDriver().builder().setSearchScript(js.jsDriver().buildList().rawQuery() + script);
         result.js.jsDriver().elementCtx();
         result.js.jsDriver().builder().updateFromBuilder(js.jsDriver().builder());
         js.jsDriver().builder().cleanup();
