@@ -11,6 +11,7 @@ import static io.github.com.pages.inputs.FabPage.*;
 /**
  * To see an example of Floating Action Buttons web element please visit
  * https://material-ui.com/components/floating-action-button/
+ * Floating Action Button
  */
 
 public class FabTests extends TestsInit {
