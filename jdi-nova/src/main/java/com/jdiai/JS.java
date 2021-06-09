@@ -178,11 +178,17 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public void setOption(String option) {
-        doAction("option.value = " + option);
+        if (option == null) {
+            return;
+        }
+        doAction("option.value = " + option + ";\nelement.dispatchEvent(new Event('change'));");
     }
 
-    public void selectByName(String value) {
-        doAction("selectedIndex = [...element.options].findIndex(option => option.text === '" + value + "')");
+    public void selectByName(String name) {
+        if (name == null) {
+            return;
+        }
+        doAction("selectedIndex = [...element.options].findIndex(option => option.text === '" + name + "');\nelement.dispatchEvent(new Event('change'));");
     }
 
     public void doAction(String action) {
@@ -242,7 +248,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     public void select() { click(); }
 
     public void select(String value) {
-        if (isEmpty(locators())) {
+        if (value == null || isEmpty(locators())) {
             return;
         }
         By lastLocator = last(locators());
@@ -271,7 +277,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public void select(String... values) {
-        if (isEmpty(locators())) {
+        if (isEmpty(values) || isEmpty(locators())) {
             return;
         }
         By locator = last(locators());
@@ -357,10 +363,16 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public void sendKeys(CharSequence... value) {
+        if (value == null) {
+            return;
+        }
         set("value+='" + charToString(value) + "';\nelement.dispatchEvent(new Event('input'));");
     }
 
     public void input(CharSequence... value) {
+        if (value == null) {
+            return;
+        }
         set("value='" + charToString(value) + "';\nelement.dispatchEvent(new Event('input'));");
     }
 
