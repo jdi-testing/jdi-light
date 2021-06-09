@@ -10,7 +10,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.JDI.IGNORE_FAILURE;
 import static com.jdiai.JDI.timeout;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
-import static com.jdiai.jsdriver.JSException.THROW_ASSERT;
+import static com.jdiai.jsdriver.JSException.throwAssert;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
@@ -58,7 +58,7 @@ public class ShouldUtils {
             if (timer.isRunning() && ignoreFail) {
                 checkConditions(core, conditions, timer);
             }
-            throw new JSException(ex, ">> Assert failed");
+            throw throwAssert(ex, ">> Assert failed");
         }
     }
     //private JFunc2<HasCore, Exception, Boolean> ignoreFailure = null;
@@ -76,7 +76,7 @@ public class ShouldUtils {
         if (timer.isRunning()) {
             return;
         }
-        THROW_ASSERT.accept(format("Failed to execute Assert in time (%s sec); '%s'",
+        throw throwAssert(format("Failed to execute Assert in time (%s sec); '%s'",
             timeout, getCombinedAssertionName(core, conditions)));
     }
 }

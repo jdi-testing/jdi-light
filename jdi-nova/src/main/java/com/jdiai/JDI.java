@@ -17,6 +17,7 @@ import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.QueryLogger.LOGGER_NAME;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
+import static com.jdiai.jsdriver.JSException.assertContains;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 import static com.jdiai.page.objects.PageFactory.initSite;
@@ -58,9 +59,21 @@ public class JDI {
         driver().navigate().forward();
     }
 
-    public static String getTitle() { return (String) jsEvaluate("document.title;"); }
 
-    public static String getUrl() { return (String) jsEvaluate("document.URL;"); }
+    public static String getUrl() {
+        return (String) jsEvaluate("document.URL;");
+    }
+
+    public static void urlShouldBe(String url) {
+        assertContains(getUrl(), url);
+    }
+    public static String getTitle() {
+        return (String) jsEvaluate("document.title;");
+    }
+
+    public static void titleShouldContains(String title) {
+        assertContains(getTitle(), title);
+    }
 
     public static String getDomain() { return (String) jsEvaluate("document.domain;"); }
 
@@ -85,7 +98,7 @@ public class JDI {
                 logger = new ConsoleLogger(getLoggerName(CONSOLE));
                 break;
             case SLF4J:
-                logger = new Slf4JLogger(getLoggerName(SLF4J));
+                logger = new Slf4JLogger(LOGGER_NAME);
                 break;
             default:
                 logger = new ConsoleLogger(getLoggerName(CONSOLE));

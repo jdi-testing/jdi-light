@@ -2,6 +2,7 @@ package com.jdiai.jsbuilder;
 
 import org.apache.logging.log4j.Logger;
 
+import static java.lang.String.format;
 import static org.apache.logging.log4j.Level.*;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -17,24 +18,24 @@ public class Slf4JLogger implements ILogger {
         if (!slf4j.getLevel().isLessSpecificThan(TRACE)) {
             return;
         }
-        slf4j.trace(msg, args);
+        slf4j.trace(format(msg, args));
     }
     public void debug(String msg, Object... args) {
         if (!slf4j.getLevel().isLessSpecificThan(DEBUG)) {
             return;
         }
-        slf4j.debug(msg, args);
+        slf4j.debug(format(msg, args));
     }
     public void info(String msg, Object... args) {
         if (!slf4j.getLevel().isLessSpecificThan(INFO)) {
             return;
         }
-        slf4j.info(msg, args);
+        slf4j.info(format(msg, args));
     }
     public void error(String msg, Object... args) {
         if (!slf4j.getLevel().isLessSpecificThan(ERROR)) {
             return;
         }
-        slf4j.error(msg, args);
+        slf4j.error(format(msg, args));
     }
 }

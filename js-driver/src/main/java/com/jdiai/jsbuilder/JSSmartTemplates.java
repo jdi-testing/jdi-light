@@ -37,7 +37,7 @@ public class JSSmartTemplates {
         "    list.push(element);\n" +
         "  }\n" +
         "}\n" +
-        "elements = list.length === 0 ? elements[0] : Array.from(list);\n";
+        "elements = Array.from(list.length === 0 ? elements[0] : list);\n";
     public static String ONE_TO_ONE = "%s;\n";
     public static String LIST_TO_ONE =
         "found = false;\ni = 0;\nfirst = null;\n" +
