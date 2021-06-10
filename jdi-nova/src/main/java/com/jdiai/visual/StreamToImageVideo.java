@@ -29,6 +29,7 @@ public class StreamToImageVideo {
         File file;
         try {
             file = new File(path);
+            file.getParentFile().mkdirs();
             osf = new FileOutputStream(file);
             osf.write(asByteStream());
             osf.flush();

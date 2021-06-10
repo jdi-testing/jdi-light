@@ -12,6 +12,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
+
 import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
@@ -81,10 +83,12 @@ public class JDI {
         return getDouble(jsEvaluate("window.devicePixelRatio;"));
     }
 
-    public static void makeScreenshot() {
-        new WebPage()
-            .setName(getTitle())
-            .makeScreenshot();
+    public static File makeScreenshot(String name) {
+        return new WebPage().setName(name).makeScreenshot();
+    }
+
+    public static File makeScreenshot() {
+        return new WebPage().setName(getTitle()).makeScreenshot();
     }
 
     private static boolean initialized = false;

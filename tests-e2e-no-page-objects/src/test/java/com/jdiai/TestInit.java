@@ -7,7 +7,6 @@ import static com.jdiai.JDI.openSite;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.QueryLogger.ALL;
 import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
-import static com.jdiai.jswraper.driver.DriverManager.DRIVER_OPTIONS;
 import static com.jdiai.jswraper.driver.DriverManager.killDrivers;
 import static com.jdiai.tools.TestIDLocators.ID_LOCATOR;
 import static com.jdiai.tools.TestIDLocators.SMART_LOCATOR;
@@ -18,7 +17,7 @@ public interface TestInit {
     default void setUp() {
         killDrivers();
         SMART_LOCATOR = ID_LOCATOR;
-        DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
+        // DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
         JDI.LOGGER_TYPE = SLF4J;
         LOG_QUERY = ALL;
         openSite("https://jdi-testing.github.io/jdi-light");

@@ -34,6 +34,7 @@ public class PageFactoryUtils {
     public static String getFieldName(Field field) {
         return splitCamelCase(field.getName());
     }
+
     public static By getLocatorFromField(Field field) {
         if (field.isAnnotationPresent(FindBy.class)) {
             FindBy findBy = field.getAnnotation(FindBy.class);
@@ -51,6 +52,7 @@ public class PageFactoryUtils {
             ? getSmartLocator().execute(field.getName())
             : null;
     }
+
     public static String getPageUrl(Class<?> cl, Field field) {
         if (field != null && field.isAnnotationPresent(Url.class)) {
             return field.getAnnotation(Url.class).value();

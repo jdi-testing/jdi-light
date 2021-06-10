@@ -3,6 +3,7 @@ package com.jdiai;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
 
+import java.io.File;
 import java.lang.reflect.Field;
 
 import static com.jdiai.JDI.$;
@@ -38,8 +39,8 @@ public class WebPage implements HasName, ISetup {
         return this;
     }
 
-    public void makeScreenshot() {
-        $("document")
+    public File makeScreenshot() {
+        return $("body")
             .setName(getName())
             .makeScreenshot(getName());
     }
