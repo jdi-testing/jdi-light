@@ -63,7 +63,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.OutputType.*;
 
 public class JS implements WebElement, HasLocators, HasParent, HasCore {
-    public static String JDI_STORAGE = "src/test/jdi";
+    public static String JDI_STORAGE = "src/test/resources/jdi";
     public JSSmart js;
     private Supplier<WebDriver> driver;
     private Safe<Actions> actions;
