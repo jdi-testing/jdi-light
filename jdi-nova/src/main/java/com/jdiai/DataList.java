@@ -27,8 +27,8 @@ import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 
 public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     private JS core;
-    private Class<T> dataClass;
-    private String labelName;
+    protected Class<T> dataClass;
+    protected String labelName;
 
     public JS getElement(String value) {
         Field labelField = getLabelField();
@@ -290,7 +290,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         try {
             dataClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
         } catch (Exception ex) {
-            throw new JSException(ex, "Can't get DataTable '%s' data or entity class", getName());
+            throw new JSException(ex, "Can't get DataList '%s' data class", getName());
         }
     }
 
