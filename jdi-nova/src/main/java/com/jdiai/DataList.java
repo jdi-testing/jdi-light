@@ -46,7 +46,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         if (labelLocator == null) {
             throw new JSException("Failed to get labelElement");
         }
-        return core().find(labelLocator);
+        return core().find(labelLocator).setName(getName() + " " + labelField.getName());
     }
     private void haveLabelElement(String value) {
         Function<JS, String> condition = getCondition(getLabelField(), value, "#element#");

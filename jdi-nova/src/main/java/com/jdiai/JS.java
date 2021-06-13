@@ -8,6 +8,7 @@ import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import com.google.gson.JsonObject;
 import com.jdiai.annotations.UI;
+import com.jdiai.asserts.DisplayedTypes;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasLocators;
 import com.jdiai.interfaces.HasName;
@@ -443,10 +444,11 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
             getJSResult("innerHTML"));
     }
 
-    public void show() {
+    public JS show() {
         if (isDisplayed() && !isInView()) {
             doAction("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
         }
+        return this;
     }
 
     public void highlight(String color) {
@@ -504,14 +506,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public boolean isVisible() {
-        if (isHidden()) {
-            return false;
-        }
-        Dimension visibleRect = getSize();
-        if (visibleRect.height == 0 || visibleRect.width == 0) {
-            return false;
-        }
-        return isClickable(visibleRect.getWidth() / 2, visibleRect.getHeight() / 2 - 1);
+        return getElement(DisplayedTypes.isVisible).equalsIgnoreCase("true");
     }
 
     public boolean isInView() {
@@ -621,9 +616,9 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
 
     public StreamToImageVideo makeScreenshot(ImageTypes imageType) {
         String stream = getElement("if (element.toDataURL) { return element."+canvas2Image(imageType)+"; }\n"
-            + "try { return "+element2Image(imageType)+"; } catch {\n"
+            + "try { return " + element2Image(imageType) + "; } catch {\n"
             + "return await import(`https://html2canvas.hertzen.com/dist/html2canvas.min.js`).then("
-            + "() => "+element2Image(imageType)+") }"
+            + "() => " + element2Image(imageType) + ") }"
         );
         return new StreamToImageVideo(stream, imageType);
     }

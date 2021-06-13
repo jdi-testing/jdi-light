@@ -126,6 +126,17 @@ public class JDI {
         }
     }
 
+    public static void reopenSite() {
+        init();
+        if (DRIVER.hasValue()) {
+            driver().quit();
+        }
+        DRIVER.reset();
+        if (driver().getCurrentUrl().equals("data:,")) {
+            openPage(domain);
+        }
+    }
+
     public static String LOGGER_TYPE = "console";
 
     public static void openSite(Class<?> cl) {
