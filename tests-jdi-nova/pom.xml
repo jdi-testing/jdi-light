@@ -6,7 +6,7 @@
     <artifactId>tests-jdi-nova</artifactId>
     <name>Tests: JDI Nova</name>
     <groupId>com.jdiai</groupId>
-    <version>0.9.7</version>
+    <version>0.9.8</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.jdiai</groupId>
             <artifactId>jdi-nova</artifactId>
-            <version>0.9.7</version>
+            <version>0.9.8</version>
         </dependency>
 
         <dependency>

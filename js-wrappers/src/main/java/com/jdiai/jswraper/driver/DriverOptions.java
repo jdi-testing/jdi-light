@@ -15,13 +15,13 @@ public class DriverOptions {
 
     public Consumer<ChromeOptions> chrome = co -> { };
 
-    public Consumer<FirefoxOptions> firefox = co -> { };
+    public Consumer<FirefoxOptions> firefox = fo -> { };
 
-    public Consumer<InternetExplorerOptions> ie = co -> { };
+    public Consumer<InternetExplorerOptions> ie = io -> { };
 
-    public Consumer<EdgeOptions> ieEdge = co -> { };
+    public Consumer<EdgeOptions> ieEdge = eo -> { };
 
-    public Consumer<OperaOptions> opera = co -> { };
+    public Consumer<OperaOptions> opera = oo -> { };
 
-    public Consumer<SafariOptions> safari = co -> { };
+    public Consumer<SafariOptions> safari = so -> { };
 }

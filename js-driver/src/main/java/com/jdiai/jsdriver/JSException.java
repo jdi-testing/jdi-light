@@ -23,21 +23,21 @@ public class JSException extends RuntimeException {
 
     public static void assertEquals(Object actual, Object expected) {
         logger.info("Assert that '%s' equals to '%s'", actual, expected);
-        if (actual == null && expected != null || actual != null && actual.equals(expected)) {
+        if (actual == null && expected != null || actual != null && !actual.equals(expected)) {
             throw throwAssert("Expected: '%s'\nbut found\nActual: '%s'", expected, actual);
         }
     }
 
     public static void assertContains(String actual, String expected) {
         logger.info("Assert that '%s' contains '%s'", actual, expected);
-        if (actual == null && expected != null || actual != null && actual.contains(expected)) {
-            throw throwAssert("Expected that '%s'\ncontains\nActual: '%s'\nbut failed", expected, actual);
+        if (actual == null || expected == null || !actual.contains(expected)) {
+            throw throwAssert("Expected that '%s'\ncontains\n'%s'but failed", actual, expected);
         }
     }
     public static void assertContainsIgnoreCase(String actual, String expected) {
         logger.info("Assert that '%s' contains ignore case '%s'", actual, expected);
-        if (actual == null && expected != null || actual != null && actual.toLowerCase().contains(expected.toLowerCase())) {
-            throw throwAssert("Expected that '%s'\ncontains\nActual: '%s'\nbut failed", expected, actual);
+        if (actual == null || expected == null || !actual.toLowerCase().contains(expected.toLowerCase())) {
+            throw throwAssert("Expected that '%s'\ncontains ignore-case\n'%s'but failed", actual, expected);
         }
     }
 

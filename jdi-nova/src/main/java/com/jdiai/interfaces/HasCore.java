@@ -24,8 +24,8 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
         return core().printHtml();
     }
 
-    default void show() {
-        core().show();
+    default JS show() {
+        return core().show();
     }
 
     default boolean isEnabled() {

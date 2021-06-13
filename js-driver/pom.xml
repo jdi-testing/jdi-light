@@ -6,7 +6,7 @@
     <artifactId>js-driver</artifactId>
     <name>JDI JS Driver</name>
     <groupId>com.jdiai</groupId>
-    <version>0.9.7</version>
+    <version>0.9.8</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
@@ -17,9 +17,9 @@
             <version>3.141.59</version>
         </dependency>
         <dependency>
-            <groupId>com.epam.jdi.tools</groupId>
+            <groupId>com.jdiai.tools</groupId>
             <artifactId>jdi-light-saber</artifactId>
-            <version>2.1.13</version>
+            <version>3.0.1</version>
         </dependency>
 
         <dependency>

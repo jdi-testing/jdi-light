@@ -22,8 +22,7 @@ public abstract class Conditions {
         if (el.isHidden()) {
             return false;
         }
-        el.show();
-        return el.isVisible();
+        return el.show().isVisible();
     });
 
     public static Condition displayed = condition("%element% is %not% displayed", HasCore::isDisplayed);
@@ -220,6 +219,9 @@ public abstract class Conditions {
 
     public static Condition checked = selected;
 
+    public static Condition no(Condition condition) {
+        return not(condition);
+    }
     public static Condition not(Condition condition) {
         return condition(getNotName(condition), el -> !condition.execute(el));
     }
