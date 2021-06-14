@@ -2,6 +2,7 @@ package com.jdiai.interfaces;
 
 import com.jdiai.JS;
 import com.jdiai.asserts.ShouldValidations;
+import com.jdiai.visual.Direction;
 import com.jdiai.visual.ImageTypes;
 import com.jdiai.visual.StreamToImageVideo;
 import org.openqa.selenium.By;
@@ -80,6 +81,25 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
         return makeScreenshot(DEFAULT_IMAGE_TYPE);
     }
 
+    default boolean hasAttribute(String attrName) {
+        return core().hasAttribute(attrName);
+    }
+
+    default String attr(String attrName) {
+        return core().attr(attrName);
+    }
+
+    default String getText() {
+        return core().getText();
+    }
+
+    default boolean hasClass(String className) {
+        return core().hasClass(className);
+    }
+
+    default Direction getDirectionTo(WebElement element) {
+        return core().getDirectionTo(element);
+    }
     default void highlight() {
         core().highlight();
     }
@@ -87,6 +107,7 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
     default String getName() {
         return core().getName();
     }
+
     default HasCore setName(String name) {
         core().setName(name);
         try {

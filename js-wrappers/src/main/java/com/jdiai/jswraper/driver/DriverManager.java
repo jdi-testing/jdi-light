@@ -27,7 +27,7 @@ import static java.lang.Runtime.getRuntime;
 import static java.lang.System.getProperty;
 
 public class DriverManager {
-    public static DriverTypes USE_DRIVER = CHROME;
+    static DriverTypes USE_DRIVER = CHROME;
 
     public static Consumer<WebDriver> DRIVER_SETUP = driver -> driver.manage().window().maximize();
 
@@ -35,9 +35,14 @@ public class DriverManager {
 
     public static DownloadDriverSettings DOWNLOAD_SETTINGS = new DownloadDriverSettings();
 
+    public static void useDriver(DriverTypes driver) {
+        USE_DRIVER = driver;
+    }
+
     public static WebDriver getDriver() {
         return getDriver(USE_DRIVER);
     }
+
     public static WebDriver getDriver(DriverTypes driverType) {
         if(driverType == null) {
             throw new JSException("Driver type can't be null");
