@@ -14,6 +14,7 @@ public class Pages {
             openPage(DOMAIN);
         }
     }
+
     public static void openPage(String url) {
         if (isEmpty(DOMAIN) || url.contains("//")) {
             driver().get(url);

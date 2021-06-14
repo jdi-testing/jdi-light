@@ -8,7 +8,9 @@ import com.jdiai.jsbuilder.ConsoleLogger;
 import com.jdiai.jsbuilder.Slf4JLogger;
 import com.jdiai.jswraper.JSSmart;
 import com.jdiai.jswraper.driver.DriverManager;
+import com.jdiai.jswraper.driver.DriverTypes;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -22,6 +24,8 @@ import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jsdriver.JSException.assertContains;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
+import static com.jdiai.jswraper.driver.DriverManager.DRIVER_OPTIONS;
+import static com.jdiai.jswraper.driver.DriverManager.useDriver;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
@@ -69,6 +73,7 @@ public class JDI {
     public static void urlShouldBe(String url) {
         assertContains(getUrl(), url);
     }
+
     public static String getTitle() {
         return (String) jsEvaluate("document.title;");
     }
@@ -114,6 +119,15 @@ public class JDI {
         return format("%s(%s)", LOGGER_NAME, name);
     }
 
+    public static void openIn(DriverTypes driver) {
+        useDriver(driver);
+        openSite();
+    }
+    public static void openIn(DriverTypes driver, String url) {
+        useDriver(driver);
+        openSite(url);
+    }
+
     public static void openSite(String url) {
         domain = url;
         openSite();
@@ -125,6 +139,19 @@ public class JDI {
             openPage(domain);
         }
     }
+    public static void openSite(int width, int height) {
+        openSite();
+        driver().manage().window().setSize(new Dimension(width, height));
+    }
+
+    public static void openSiteHeadless() {
+        DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
+        openSite();
+    }
+    public static void openSiteHeadless(int width, int height) {
+        openSiteHeadless();
+        driver().manage().window().setSize(new Dimension(width, height));
+    }
 
     public static void reopenSite() {
         init();
@@ -135,6 +162,11 @@ public class JDI {
         if (driver().getCurrentUrl().equals("data:,")) {
             openPage(domain);
         }
+    }
+
+    public static void reopenSite(int width, int height) {
+        reopenSite();
+        driver().manage().window().setSize(new Dimension(width, height));
     }
 
     public static String LOGGER_TYPE = "console";

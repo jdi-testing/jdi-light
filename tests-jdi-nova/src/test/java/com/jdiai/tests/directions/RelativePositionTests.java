@@ -30,22 +30,22 @@ public class RelativePositionTests implements TestInit {
 
     @Test
     public void onTopOfTest() {
-        lastName.shouldBe(onTopOf(passportNumber));
+        lastName.shouldBe(above(passportNumber));
         passportNumber.shouldBe(below(lastName));
         passportNumber.shouldBe(below(firstName));
         passportNumber.shouldBe(below(position));
 
         gender.shouldBe(below(lastName));
-        passportNumber.shouldBe(onTopOf(gender));
-        passportNumber.shouldBe(onTopOf(weather));
+        passportNumber.shouldBe(above(gender));
+        passportNumber.shouldBe(above(weather));
     }
 
     @Test
     public void belowTest() {
         gender.shouldBe(below(lastName));
-        passportNumber.shouldBe(onTopOf(gender));
-        passportNumber.shouldBe(onTopOf(weather));
-        firstName.shouldBe(onTopOf(weather));
+        passportNumber.shouldBe(above(gender));
+        passportNumber.shouldBe(above(weather));
+        firstName.shouldBe(above(weather));
     }
 
     @Test
@@ -57,16 +57,16 @@ public class RelativePositionTests implements TestInit {
 
     @Test
     public void sameLineHorizontallyTest() {
-        passportNumber.shouldBe(onTheSameLine(passportSeria));
-        passport.shouldBe(onTheSameLine(passportNumber));
-        firstName.shouldBe(onTheSameLine(lastName));
-        weather.shouldBe(onTheSameLine(gender));
+        passportNumber.shouldBe(onSameLine(passportSeria));
+        passport.shouldBe(onSameLine(passportNumber));
+        firstName.shouldBe(onSameLine(lastName));
+        weather.shouldBe(onSameLine(gender));
     }
 
     @Test
     public void sameLineVerticallyTest() {
-        firstName.shouldBe(onTheSameVertical(gender));
-        weather.shouldBe(onTheSameVertical(position));
+        firstName.shouldBe(onSameVerticalLine(gender));
+        weather.shouldBe(onSameVerticalLine(position));
     }
 
     @Test

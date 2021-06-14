@@ -41,65 +41,65 @@ public abstract class Conditions {
 
     public static Condition readonly = attribute("readonly");
 
-    public static Condition onTopOf(HasCore element) {
+    public static Condition above(HasCore element) {
         return condition("%element% is %not% on the Top of '" + element.core().getFullName() + "'",
-            el -> HIGHER.execute(element.core().getDirectionTo(el.core())));
+            el -> HIGHER.execute(element.getDirectionTo(el.core())));
     }
     public static Condition below(HasCore element) {
         return condition("%element% is %not% Below '" + element.core().getFullName() + "'",
-            el -> LOWER.execute(element.core().getDirectionTo(el.core())));
+            el -> LOWER.execute(element.getDirectionTo(el.core())));
     }
     public static Condition onLeftOf(HasCore element) {
         return condition("%element% is %not% on the Left of '" + element.core().getFullName() + "'",
-            el -> LEFT.execute(element.core().getDirectionTo(el.core())));
+            el -> LEFT.execute(element.getDirectionTo(el.core())));
     }
     public static Condition onRightOf(HasCore element) {
         return condition("%element% is %not% on the Right of '" + element.core().getFullName() + "'",
-            el -> RIGHT.execute(element.core().getDirectionTo(el.core())));
+            el -> RIGHT.execute(element.getDirectionTo(el.core())));
     }
     public static Condition onTopLeftOf(HasCore element) {
         return condition("%element% is %not% on the Top-Left of '" + element.core().getFullName() + "'",
-            el -> TOP_LEFT.execute(element.core().getDirectionTo(el.core())));
+            el -> TOP_LEFT.execute(element.getDirectionTo(el.core())));
     }
     public static Condition onTopRightOf(HasCore element) {
         return condition("%element% is %not% on the Top-Right of '" + element.core().getFullName() + "'",
-            el -> TOP_RIGHT.execute(element.core().getDirectionTo(el.core())));
+            el -> TOP_RIGHT.execute(element.getDirectionTo(el.core())));
     }
     public static Condition onBottomLeftOf(HasCore element) {
         return condition("%element% is %not% on the Bottom-Left of '" + element.core().getFullName() + "'",
-            el -> BOTTOM_LEFT.execute(element.core().getDirectionTo(el.core())));
+            el -> BOTTOM_LEFT.execute(element.getDirectionTo(el.core())));
     }
     public static Condition onBottomRightOf(HasCore element) {
         return condition("%element% is %not% on the Bottom-Right of '" + element.core().getFullName() + "'",
-            el -> BOTTOM_RIGHT.execute(element.core().getDirectionTo(el.core())));
+            el -> BOTTOM_RIGHT.execute(element.getDirectionTo(el.core())));
     }
-    public static <T> Condition onTheSameLine(HasCore element) {
+    public static Condition onSameLine(HasCore element) {
         return condition("%element% is %not% on the same line '" + element.core().getFullName() + "'",
-            el -> SAME_HORIZONTAL.execute(element.core().getDirectionTo(el.core())));
+            el -> SAME_HORIZONTAL.execute(element.getDirectionTo(el.core())));
     }
-    public static Condition onTheSameVertical(HasCore element) {
+    public static Condition onSameVerticalLine(HasCore element) {
         return condition("%element% is %not% on the same vertical line '" + element.core().getFullName() + "'",
-            el -> SAME_VERTICAL.execute(element.core().getDirectionTo(el.core())));
+            el -> SAME_VERTICAL.execute(element.getDirectionTo(el.core())));
     }
 
     public static Condition attribute(String attributeName) {
         return condition("%element% has %no% '" + attributeName + "' attribute",
-            el -> el.core().hasAttribute(attributeName));
+            el -> el.hasAttribute(attributeName));
     }
 
     public static Condition attribute(String attributeName, String value) {
         return condition("%element% has %no% '" + attributeName + "=" + value + "' attribute",
-            el -> el.core().attr(attributeName).equals(value));
+            el -> el.attr(attributeName).equals(value));
     }
 
     public static Condition containsAttribute(String attributeName, String value) {
         return condition("%element% has %no% '" + attributeName + " that contains " + value + "' attribute",
-            el -> el.core().attr(attributeName).contains(value));
+            el -> el.attr(attributeName).contains(value));
     }
 
     public static Condition matchAttribute(String attributeName, String regEx) {
         return condition("%element% has %no% '" + attributeName + " matches " + regEx + "' attribute",
-            el -> el.core().attr(attributeName).matches(regEx));
+            el -> el.attr(attributeName).matches(regEx));
     }
 
     public static Condition href(String href) {
@@ -144,14 +144,14 @@ public abstract class Conditions {
 
     public static Condition clazz(String className) {
         return condition("%element% has %no% 'class=" + className + "' attribute",
-                el -> el.core().hasClass(className));
+                el -> el.hasClass(className));
     }
 
     public static Condition id(String id) {
         return attribute("id", id);
     }
 
-    public static Condition empty = condition("%element% is %not% empty", el -> el.core().getText().equals(""));
+    public static Condition empty = condition("%element% is %not% empty", el -> el.getText().equals(""));
 
     public static Condition matchesText(String text) {
         return matchText(text);
@@ -159,7 +159,7 @@ public abstract class Conditions {
 
     public static Condition matchText(String regex) {
         return condition("%element% text %not% matches '" + regex + "'",
-            el -> el.core().getText().matches(regex));
+            el -> el.getText().matches(regex));
     }
 
     public static Condition be(Object entity) {
@@ -194,11 +194,11 @@ public abstract class Conditions {
     }
     public static Condition text(String text) {
         return condition("%element% has %no% text='" + text + "'",
-            el -> el.core().getText().equals(text));
+            el -> el.getText().equals(text));
     }
     public static Condition containsText(String text) {
         return condition("%element% contains %no% text='" + text + "'",
-            el -> el.core().getText().contains(text));
+            el -> el.getText().contains(text));
     }
     public static Condition cssClass(String cssClass) {
         return condition("%element% has %no% css class '" + cssClass + "'",
