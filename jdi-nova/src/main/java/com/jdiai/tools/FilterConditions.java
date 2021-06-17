@@ -17,12 +17,19 @@ public class FilterConditions {
     public static Function<JS, String> hasAttribute(String attrName) {
         return el -> "hasAttribute('" + attrName + "')";
     }
+
     public static Function<JS, String> hasAttribute(String attrName, String value) {
         return el -> format(".getAttribute('%s') === '%s'", attrName, value);
     }
+
     public static Function<JS, String> hasTag(String value) {
         return el -> "element.tag === " + value;
     }
+
+    public static Function<JS, String> containsTag(String value) {
+        return el -> "element.tag.includes('" + value + "')";
+    }
+
     public static Function<JS, String> hasClass(String value) {
         return el -> "classList.contains('" + value + "')";
     }
