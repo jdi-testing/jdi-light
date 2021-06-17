@@ -66,11 +66,11 @@ import static org.openqa.selenium.OutputType.*;
 public class JS implements WebElement, HasLocators, HasParent, HasCore {
     public static String JDI_STORAGE = "src/test/resources/jdi";
     public JSSmart js;
-    private Supplier<WebDriver> driver;
-    private Safe<Actions> actions;
-    private String name = "";
-    private Object parent = null;
-    private JSImages imagesData;
+    protected Supplier<WebDriver> driver;
+    protected Safe<Actions> actions;
+    protected String name = "";
+    protected Object parent = null;
+    protected JSImages imagesData;
     public int renderTimeout = 5000;
     protected String objectMap;
 
@@ -189,7 +189,10 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         if (name == null) {
             return;
         }
-        doAction("selectedIndex = [...element.options].findIndex(option => option.text === '" + name + "');\nelement.dispatchEvent(new Event('change'));");
+        doAction("dispatchEvent(new Event('change'));\n" +
+            "element.selectedIndex = [...element.options]" +
+            ".findIndex(option => option.text === '" + name + "');\n" +
+            "element.dispatchEvent(new Event('change'));");
     }
 
     public void doAction(String action) {
@@ -237,13 +240,23 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     public Object parent() {
         return this.parent;
     }
+    public JS setParent(Object parent) {
+        this.parent = parent;
+        return this;
+    }
 
     public void click() {
         doAction("click()");
     }
+    public void clickCenter() {
+        doAction("let rect = element.getBoundingClientRect();" +
+            "let x = rect.x + rect.width / 2;" +
+            "let y = rect.y + rect.height / 2;" +
+            "document.elementFromPoint(x, y).click();");
+    }
 
     public void click(int x, int y) {
-        js.jsExecute("document.elementFromPoint(" + x + ", " + y + ").click()");
+        js.jsExecute("document.elementFromPoint(" + x + ", " + y + ").click();");
     }
 
     public void select() { click(); }
@@ -567,8 +580,8 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public ClientRect getClientRect() {
-        return new ClientRect(js.getJson("let cl = element.getBoundingClientRect();\n" +
-            "return { x: cl.x, y: cl.y, top: cl.top, bottom: cl.bottom, left: cl.left, right: cl.right, " +
+        return new ClientRect(js.getJson("let rect = element.getBoundingClientRect();\n" +
+            "return { x: rect.x, y: rect.y, top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right, " +
             "wWidth: window.innerWidth, wHeight: window.innerHeight };"));
     }
 
