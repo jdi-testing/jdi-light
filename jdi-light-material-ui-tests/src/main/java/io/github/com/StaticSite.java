@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.displaydata.Lists;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
@@ -40,7 +41,8 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static SimpleTransferListFrame simpleTransferListFrame;
 
-    @Url("/material-ui-inputs-transfer-list--simple-transfer-list-view")
+    //@Url("/material-ui-inputs-transfer-list--simple-transfer-list-view")
+    @Url("/simple_transfer_list")
     public static WebPage inputSimpleTransferListPage;
 
     //enhanced transfer list
@@ -205,7 +207,9 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static ListsFrame listsFrame;
 
-    @Url("/material-ui-data-display-lists--simple-list")
+
+    //@Url("/material-ui-data-display-lists--simple-list")
+    @Url("/simple_list")
     public static WebPage dataDisplayListsSimpleListPage;
 
     @Url("/material-ui-data-display-lists--checkbox-list")
@@ -352,10 +356,12 @@ public class StaticSite {
 
     // menu
     @Url("/simple_menu")
-    public static WebPage simpleMenuPage;
+    public static MenuPage simpleMenuPage;
+    //public static WebPage simpleMenuPage;
 
     @Url("/context_menu")
-    public static WebPage contextMenuPage;
+    public static MenuPage contextMenuPage;
+    //public static WebPage contextMenuPage;
 
     // layouts
     // hidden
