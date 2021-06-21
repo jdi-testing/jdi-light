@@ -5,7 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
-import static io.github.com.pages.navigation.MenuPage.*;
+import static io.github.com.pages.navigation.SimpleMenuPage.*;
+import static io.github.com.pages.navigation.ContextMenuPage.*;
 
 
 public class MenuTests extends TestsInit {
@@ -52,8 +53,8 @@ public class MenuTests extends TestsInit {
     public void contextMenuTest() {
         contextMenuPage.open();
         contextMenu.rightClick();
-        menuListFirstButton.has().text("Copy");
-        menuListFirstButton.click();
+        menuContextListFirstButton.has().text("Copy");
+        menuContextListFirstButton.click();
         contextMenu.is().displayed();
     }
 

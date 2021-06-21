@@ -352,10 +352,10 @@ public class StaticSite {
 
     // menu
     @Url("/simple_menu")
-    public static WebPage simpleMenuPage;
+    public static SimpleMenuPage simpleMenuPage;
 
     @Url("/context_menu")
-    public static WebPage contextMenuPage;
+    public static ContextMenuPage contextMenuPage;
 
     // layouts
     // hidden
