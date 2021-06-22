@@ -1,7 +1,6 @@
 package com.jdiai.page.objects;
 
 import com.epam.jdi.tools.func.JFunc1;
-import com.jdiai.CoreElement;
 import com.jdiai.Section;
 import com.jdiai.WebPage;
 import com.jdiai.interfaces.HasCore;
