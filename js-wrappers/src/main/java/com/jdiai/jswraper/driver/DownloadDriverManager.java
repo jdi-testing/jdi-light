@@ -1,6 +1,6 @@
 package com.jdiai.jswraper.driver;
 
-import com.epam.jdi.tools.func.JFunc3;
+import com.epam.jdi.tools.func.JFunc2;
 import com.jdiai.jsdriver.JSException;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -8,21 +8,26 @@ import java.util.List;
 
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jswraper.driver.DriverManager.DOWNLOAD_SETTINGS;
+import static com.jdiai.jswraper.driver.DriverManager.REMOTE_DRIVER_VERSIONS;
 import static com.jdiai.jswraper.driver.DriverVersion.PENULT;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class DownloadDriverManager {
     static WebDriverManager wdm;
 
     static boolean hasVersion(String version) {
+        if (isBlank(version)) {
+            return false;
+        }
         char c = version.charAt(0);
         return c >= '0' && c <= '9';
     }
 
-    public static String downloadDriver(DriverTypes driverType, Platform platform, String version) {
+    public static String downloadDriver(DriverTypes driverType, Platform platform) {
         try {
             String driverName = driverType.toString();
             switch (driverType) {
@@ -48,6 +53,7 @@ public class DownloadDriverManager {
                     break;
             }
             driverName += " " + platform;
+            String version = REMOTE_DRIVER_VERSIONS.get(driverType);
             if (hasVersion(version)) {
                 wdm = wdm.browserVersion(version);
                 driverName += " " + version;
@@ -62,7 +68,6 @@ public class DownloadDriverManager {
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
-            DOWNLOAD_SETTINGS.driverDownloaded = true;
             DOWNLOAD_SETTINGS.downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
             DOWNLOAD_SETTINGS.driverPath = wdm.getDownloadedDriverPath();
             return wdm.getDownloadedDriverPath();
@@ -71,7 +76,7 @@ public class DownloadDriverManager {
         }
     }
 
-    public static JFunc3<DriverTypes, Platform, String, String> DOWNLOAD_DRIVER_FUNC =
+    public static JFunc2<DriverTypes, Platform, String> DOWNLOAD_DRIVER_FUNC =
             DownloadDriverManager::downloadDriver;
 
     public static String getBelowVersion() {

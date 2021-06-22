@@ -1,7 +1,5 @@
 package com.jdiai.jswraper.driver;
 
-import com.jdiai.jsdriver.JSException;
-
 /**
  * Created by Roman Iovlev on 08.06.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
@@ -15,6 +13,7 @@ public enum DriverTypes {
     SAFARI("safari");
 
     public final String name;
+
     public static DriverTypes getByName(String name) {
         switch (name.toLowerCase().replaceAll("[^a-z\\s]", "")) {
             case "chrome":
@@ -32,12 +31,11 @@ public enum DriverTypes {
             case "safari":
                 return SAFARI;
             default:
-                throw new JSException("Unknown driver: " + name);
+                return CHROME;
         }
     }
 
     DriverTypes(String name) {
         this.name = name;
     }
-
 }
