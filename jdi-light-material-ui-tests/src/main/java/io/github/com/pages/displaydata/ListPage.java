@@ -1,11 +1,17 @@
 package io.github.com.pages.displaydata;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.material.elements.displaydata.Lists;
 
-public class ListsFrame extends UIElement {
+public class ListPage extends WebPage {
+    @UI("//*[contains(text(),'sticky 0')]")
+    public Lists stickyZero;
+
+    @UI("//*[contains(text(),'sticky 1')]")
+    public Lists stickyOne;
+
     @UI("//*[contains(text(),'List item 1')]")
     public Lists firstListItem;
 
@@ -17,10 +23,4 @@ public class ListsFrame extends UIElement {
 
     @XPath("//*[contains(text(),'Line item 1')]/../../div[contains(@class, 'MuiListItemIcon-root')]/span")
     public Lists checkboxLineItemFirst;
-
-    @UI("//*[contains(text(),'sticky 0')]")
-    public Lists stickyZero;
-
-    @UI("//*[contains(text(),'sticky 1')]")
-    public Lists stickyOne;
 }

@@ -4,10 +4,7 @@ import static org.hamcrest.Matchers.hasToString;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.dataDisplayListsSimpleListPage;
-import static io.github.com.StaticSite.dataDisplayCheckboxListPage;
-import static io.github.com.StaticSite.dataPinnedSubheaderListPage;
-import static io.github.com.StaticSite.listsFrame;
+import static io.github.com.StaticSite.ListPage;
 
 public class ListsTests extends TestsInit{
 
@@ -37,13 +34,12 @@ public class ListsTests extends TestsInit{
     }
 
     @Test
-    public void pinnedSubheaderList() {
-        dataPinnedSubheaderListPage.open();
+    public void pinnedSubHeaderList() {
+        ListPage.open();
 
-        listsFrame.stickyZero.is().enabled();
-        listsFrame.stickyZero.is().text(hasToString("I'm sticky 0"));
-        listsFrame.stickyOne.is().enabled();
-        listsFrame.stickyOne.is().text(hasToString("I'm sticky 1"));
+        ListPage.stickyZero.is().enabled();
+        ListPage.stickyZero.is().text(hasToString("I'm sticky 0"));
+        ListPage.stickyOne.is().enabled();
+        ListPage.stickyOne.is().text(hasToString("I'm sticky 1"));
     }
-
 }

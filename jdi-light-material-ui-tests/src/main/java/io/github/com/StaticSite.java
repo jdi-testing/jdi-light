@@ -202,17 +202,9 @@ public class StaticSite {
     public static ChipsPage chipsPage;
 
     // lists
-    @Frame("storybook-preview-iframe")
-    public static ListsFrame listsFrame;
 
-    @Url("/material-ui-data-display-lists--simple-list")
-    public static WebPage dataDisplayListsSimpleListPage;
-
-    @Url("/material-ui-data-display-lists--checkbox-list")
-    public static WebPage dataDisplayCheckboxListPage;
-
-    @Url("/material-ui-data-display-lists--pinned-subheader-list")
-    public static WebPage dataPinnedSubheaderListPage;
+    @Url("/simple_list")
+    public static ListPage ListPage;
 
     // feedback
     // backdrop
