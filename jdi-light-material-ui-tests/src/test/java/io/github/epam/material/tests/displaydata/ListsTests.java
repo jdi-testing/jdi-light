@@ -4,46 +4,44 @@ import static org.hamcrest.Matchers.hasToString;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.dataDisplayListsSimpleListPage;
-import static io.github.com.StaticSite.dataDisplayCheckboxListPage;
-import static io.github.com.StaticSite.dataPinnedSubheaderListPage;
-import static io.github.com.StaticSite.listsFrame;
+import static io.github.com.StaticSite.dataDisplayListPage;
 
 public class ListsTests extends TestsInit{
 
     @Test
     public void simpleList() {
-        dataDisplayListsSimpleListPage.open();
+        dataDisplayListPage.open();
 
-        listsFrame.firstListItem.is().enabled();
-        listsFrame.firstListItem.is().text(hasToString("List item 1"));
-        listsFrame.secondListItem.is().enabled();
-        listsFrame.secondListItem.is().text(hasToString("List item 2"));
+        dataDisplayListPage.firstListItem.is().enabled();
+        dataDisplayListPage.firstListItem.is().text(hasToString("List item 1"));
+        dataDisplayListPage.secondListItem.is().enabled();
+        dataDisplayListPage.secondListItem.is().text(hasToString("List item 2"));
+
     }
 
     @Test
     public void checkboxList() {
-        dataDisplayCheckboxListPage.open();
+        dataDisplayListPage.open();
 
-        listsFrame.lineItemFirst.is().enabled();
-        listsFrame.lineItemFirst.is().text(hasToString("Line item 1"));
-        listsFrame.checkboxLineItemFirst.is().checked();
+        dataDisplayListPage.lineItemFirst.is().enabled();
+        dataDisplayListPage.lineItemFirst.is().text(hasToString("Line item 1"));
+        dataDisplayListPage.checkboxLineItemFirst.is().checked();
 
-        listsFrame.checkboxLineItemFirst.uncheck();
-        listsFrame.checkboxLineItemFirst.is().unchecked();
+        dataDisplayListPage.checkboxLineItemFirst.uncheck();
+        dataDisplayListPage.checkboxLineItemFirst.is().unchecked();
 
-        listsFrame.checkboxLineItemFirst.check();
-        listsFrame.checkboxLineItemFirst.is().checked();
+        dataDisplayListPage.checkboxLineItemFirst.check();
+        dataDisplayListPage.checkboxLineItemFirst.is().checked();
     }
 
     @Test
     public void pinnedSubheaderList() {
-        dataPinnedSubheaderListPage.open();
+        dataDisplayListPage.open();
 
-        listsFrame.stickyZero.is().enabled();
-        listsFrame.stickyZero.is().text(hasToString("I'm sticky 0"));
-        listsFrame.stickyOne.is().enabled();
-        listsFrame.stickyOne.is().text(hasToString("I'm sticky 1"));
+        dataDisplayListPage.stickyZero.is().enabled();
+        dataDisplayListPage.stickyZero.is().text(hasToString("I'm sticky 0"));
+        dataDisplayListPage.stickyOne.is().enabled();
+        dataDisplayListPage.stickyOne.is().text(hasToString("I'm sticky 1"));
     }
 
 }

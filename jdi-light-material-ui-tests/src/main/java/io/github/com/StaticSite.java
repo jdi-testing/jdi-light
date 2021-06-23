@@ -38,19 +38,12 @@ public class StaticSite {
     public static DateTimePickersPage dateTimePickersPage;
 
     //simple transfer list
-    @Frame("storybook-preview-iframe")
-    public static SimpleTransferListFrame simpleTransferListFrame;
-
-    //@Url("/material-ui-inputs-transfer-list--simple-transfer-list-view")
     @Url("/simple_transfer_list")
-    public static WebPage inputSimpleTransferListPage;
+    public static SimpleTransferListPage inputSimpleTransferListPage;
 
     //enhanced transfer list
-    @Frame("storybook-preview-iframe")
-    public static EnhancedTransferListFrame enhancedTransferListFrame;
-
-    @Url("/material-ui-inputs-transfer-list--enhanced-transfer-list-view")
-    public static WebPage inputEnhancedTransferListPage;
+    @Url("/enhanced_transfer_list")
+    public static EnhancedTransferListPage inputEnhancedTransferListPage;
 
     @Url("/buttons")
     public static ButtonPage buttonPage;
@@ -204,19 +197,8 @@ public class StaticSite {
     public static ChipsPage chipsPage;
 
     // lists
-    @Frame("storybook-preview-iframe")
-    public static ListsFrame listsFrame;
-
-
-    //@Url("/material-ui-data-display-lists--simple-list")
     @Url("/simple_list")
-    public static WebPage dataDisplayListsSimpleListPage;
-
-    @Url("/material-ui-data-display-lists--checkbox-list")
-    public static WebPage dataDisplayCheckboxListPage;
-
-    @Url("/material-ui-data-display-lists--pinned-subheader-list")
-    public static WebPage dataPinnedSubheaderListPage;
+    public static ListsPage dataDisplayListPage;
 
     // feedback
     // backdrop
@@ -357,11 +339,9 @@ public class StaticSite {
     // menu
     @Url("/simple_menu")
     public static MenuPage simpleMenuPage;
-    //public static WebPage simpleMenuPage;
 
     @Url("/context_menu")
     public static MenuPage contextMenuPage;
-    //public static WebPage contextMenuPage;
 
     // layouts
     // hidden
