@@ -1,10 +1,12 @@
 package io.github.com.pages.navigation;
 
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.navigation.Menu;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
-public class MenuPage extends WebPage {
+public class SimpleMenuPage extends WebPage {
     @UI("span.MuiButton-label")
     public static Menu menu;
 
@@ -32,8 +34,6 @@ public class MenuPage extends WebPage {
     @UI("li.MuiListItem-button:last-child")
     public static Menu menuListLastButton;
 
-    @UI("//*/p[starts-with(@class, 'MuiTypography')]")
-    public static Menu contextMenu;
 
     @UI("p.MuiTypography-displayBlock")
     public static Menu menuSelectedField;

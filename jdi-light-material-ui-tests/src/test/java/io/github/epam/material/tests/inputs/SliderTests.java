@@ -126,9 +126,11 @@ public class SliderTests extends TestsInit {
     }
 
     @Test
-    public void verticalSliderTest(){
+    public void
+    verticalSliderTest(){
         verticalSlider.is().enabled();
         verticalSlider.is().orientation("vertical");
+
         verticalSlider.is().value(30);
         verticalSlider.setValue(40);
         verticalSlider.is().value(40);
