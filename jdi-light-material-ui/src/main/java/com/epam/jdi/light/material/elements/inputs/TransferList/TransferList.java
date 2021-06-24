@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.table.CacheAll;
-import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.material.annotations.JDITransferList;
 import com.epam.jdi.light.material.asserts.inputs.TransferListAssert;
 
