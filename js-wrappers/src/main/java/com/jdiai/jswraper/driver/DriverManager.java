@@ -2,6 +2,7 @@ package com.jdiai.jswraper.driver;
 
 import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.jsdriver.JSException;
+import com.jdiai.jswraper.driver.download.DownloadDriverSettings;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,22 +13,20 @@ import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.safari.SafariOptions;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.jdiai.jswraper.driver.DriverTypes.*;
-import static com.jdiai.jswraper.driver.GetDriverUtilities.*;
-import static com.jdiai.jswraper.driver.RunModes.*;
+import static com.jdiai.jswraper.driver.GetDriverUtilities.getLocalDriver;
+import static com.jdiai.jswraper.driver.RunModes.LOCAL_DOWNLOAD;
 import static java.lang.Runtime.getRuntime;
 
 public class DriverManager {
     static DriverTypes BROWSER = CHROME;
-
+    static Supplier<WebDriver> CUSTOM_DRIVER = null;
     public static RunModes RUN_MODE = LOCAL_DOWNLOAD;
-
-    public static RemoteRunSettings REMOTE_RUN_SETTINGS = new RemoteRunSettings();
-
-    public static SelenoidSettings SELENOID_SETTINGS = new SelenoidSettings();
-
+    public static Consumer<WebDriver> DRIVER_SETUP = driver -> driver.manage().window().maximize();
+    public static DriverOptions DRIVER_OPTIONS = new DriverOptions();
     public static MapArray<DriverTypes, String> REMOTE_DRIVER_VERSIONS = new MapArray<>(
         $(CHROME, "latest"),
         $(FIREFOX, "latest"),
@@ -37,20 +36,18 @@ public class DriverManager {
         $(OPERA, "latest")
     );
 
-    public static String DRIVER_PATH = "C:/Selenium";
-
-    public static Consumer<WebDriver> DRIVER_SETUP = driver -> driver.manage().window().maximize();
-
-    public static DriverOptions DRIVER_OPTIONS = new DriverOptions();
-
-    public static DownloadDriverSettings DOWNLOAD_SETTINGS = new DownloadDriverSettings();
-
     public static void useDriver(DriverTypes driver) {
         BROWSER = driver;
     }
 
+    public static void useDriver(Supplier<WebDriver> driver) {
+        CUSTOM_DRIVER = driver;
+    }
+
     public static WebDriver getDriver() {
-        return getDriver(BROWSER);
+        return CUSTOM_DRIVER != null
+            ? CUSTOM_DRIVER.get()
+            : getDriver(BROWSER);
     }
 
     public static WebDriver getDriver(DriverTypes driverType) {
@@ -76,19 +73,20 @@ public class DriverManager {
     }
 
     public static WebDriver getDriver(DriverTypes browser, MutableCapabilities options) {
-        if (RUN_MODE == null || RUN_MODE.equals(LOCAL_DOWNLOAD)) {
-            return downloadAndGetLocalDriver(browser, options);
+        if (RUN_MODE == null) {
+            new DownloadDriverSettings().downloadDriver(browser);
+            return getLocalDriver(browser, options);
         }
-        if (RUN_MODE.equals(LOCAL_BY_PATH)) {
-            return getLocalDriverByPath(browser, options);
+        if (RUN_MODE.remote) {
+            return RUN_MODE.remoteSettings.getRemoteDriver(browser, options);
         }
-        if (RUN_MODE.equals(REMOTE)) {
-            return getRemoteDriver(browser, options);
+        switch (RUN_MODE.type) {
+            case "localdownload":
+                RUN_MODE.downloadSettings.downloadDriver(browser);
+            case "localbypath":
+                RUN_MODE.driverPath.setSystemProperty(browser);
         }
-        if (RUN_MODE.equals(SELENOID)) {
-            return getSelenoidRemote(browser, options);
-        }
-        return downloadAndGetLocalDriver(browser, options);
+        return getLocalDriver(browser, options);
     }
 
     public static WebDriver chromeDriver() {

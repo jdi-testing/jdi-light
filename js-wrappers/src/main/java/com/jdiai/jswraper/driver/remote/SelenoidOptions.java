@@ -1,12 +1,20 @@
-package com.jdiai.jswraper.driver;
+package com.jdiai.jswraper.driver.remote;
 
 // https://github.com/aerokube/selenoid/blob/master/docs/special-capabilities.adoc
+
+import org.openqa.selenium.MutableCapabilities;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SelenoidSettings {
+public class SelenoidOptions extends RemoteRunOptions {
+    public SelenoidOptions() {
+        super();
+    }
+    public SelenoidOptions(String url) {
+        super(url);
+    }
     public Map<String, Object> customSettings;
 
     public boolean enableVNC;
@@ -32,6 +40,12 @@ public class SelenoidSettings {
     public List<String> labels;
     public String skin;
     public String s3KeyPattern;
+
+    @Override
+    public void setOptions(MutableCapabilities options) {
+        super.setOptions(options);
+        options.setCapability("selenoid:options", getSelenoidOptions());
+    }
 
     public Map<String, Object> getSelenoidOptions() {
         if (customSettings != null) {

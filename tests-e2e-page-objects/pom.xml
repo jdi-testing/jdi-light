@@ -6,7 +6,7 @@
     <artifactId>tests-e2e-page-objects</artifactId>
     <name>Tests: JDI E2E with Page Objects</name>
     <groupId>com.jdiai</groupId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.jdiai</groupId>
             <artifactId>jdi-nova</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
 
         <dependency>

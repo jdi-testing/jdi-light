@@ -10,10 +10,9 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.filter;
 import static com.jdiai.JDI.domain;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
-import static com.jdiai.page.objects.PageFactoryRules.*;
+import static com.jdiai.page.objects.JDIPageFactory.*;
 import static com.jdiai.page.objects.PageFactoryUtils.getJSFields;
 import static com.jdiai.page.objects.PageFactoryUtils.setFieldValue;
-import static com.jdiai.page.objects.Rules.SETUP_RULES;
 
 public class PageFactory {
     public static <T> T initElements(Class<T> cl) {

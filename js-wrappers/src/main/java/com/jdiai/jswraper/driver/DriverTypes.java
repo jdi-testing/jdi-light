@@ -31,7 +31,7 @@ public enum DriverTypes {
             case "safari":
                 return SAFARI;
             default:
-                return CHROME;
+                return null;
         }
     }
 
