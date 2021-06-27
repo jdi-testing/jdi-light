@@ -52,7 +52,7 @@ public class FillFormTalkTest implements TestInit {
         userIcon.click();
         $("#login-form").loginAs(Roman);
         validateUrl("/index.html");
-        $(".sidebar-menu").select("Contact form");
+        $(".sidebar-menu").selectSubList("Contact form");
         validateUrl("/contacts.html");
         $(".sidebar-menu").select("Service", "User Table");
         validateUrl("/user-table.html");

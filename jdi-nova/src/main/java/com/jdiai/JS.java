@@ -19,6 +19,7 @@ import com.jdiai.jsdriver.JSDriverUtils;
 import com.jdiai.jsdriver.JSException;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.jswraper.JSSmart;
+import com.jdiai.jswraper.exceptions.JDINovaException;
 import com.jdiai.scripts.Whammy;
 import com.jdiai.tools.ClientRect;
 import com.jdiai.tools.GetTextTypes;
@@ -209,6 +210,9 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public WebElement we() {
+        if (isEmpty(locators())) {
+            throw new JDINovaException("Failed to use we() because element has no locators");
+        }
         SearchContext ctx = driver();
         for (By locator : locators()) {
             ctx = ctx.findElement(locator);
@@ -284,6 +288,21 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
             new JS(driver, locators).click();
         } else {
             findFirst(textEquals(value)).click();
+        }
+    }
+    public void selectSubList(String value) {
+        if (value == null || isEmpty(locators())) {
+            return;
+        }
+        By lastLocator = last(locators());
+        if (lastLocator.toString().contains("%s")) {
+            List<By> locators = locators().size() == 1
+                    ? new ArrayList<>()
+                    : locators().subList(0, locators().size() - 2);
+            locators.add(fillByTemplate(lastLocator, value));
+            new JS(driver, locators).click();
+        } else {
+            find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
         }
     }
 
