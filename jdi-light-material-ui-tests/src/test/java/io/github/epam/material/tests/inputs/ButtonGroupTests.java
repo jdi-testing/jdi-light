@@ -1,51 +1,63 @@
 package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.buttonGroupFrame;
-import static io.github.com.StaticSite.inputButtonGroupDefaultPage;
-import static io.github.com.StaticSite.inputButtonGroupDisabledPage;
-import static io.github.com.StaticSite.inputButtonGroupSplitPage;
-import static io.github.com.StaticSite.splitButtonGroupFrame;
-
+import static io.github.com.StaticSite.buttonGroupPage;
 public class ButtonGroupTests extends TestsInit {
 
+    @BeforeMethod
+    public void before(){
+
+        buttonGroupPage.open();
+        buttonGroupPage.isOpened();
+    }
+
     @Test
-    public void defaultButtonGroupTest() {
-        inputButtonGroupDefaultPage.open();
+    public void basicButtonGroupTest() {
 
-        buttonGroupFrame.buttonGroup.getButtonByIndex(1).click();
-        buttonGroupFrame.buttonGroup.getButtonByIndex(2).click();
-        buttonGroupFrame.buttonGroup.getButtonByIndex(3).click();
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).click();
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(2).click();
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(3).click();
 
-        buttonGroupFrame.buttonGroup.getButtonByText("Three").click();
-        buttonGroupFrame.buttonGroup.getButtonByText("Two").click();
-        buttonGroupFrame.buttonGroup.getButtonByText("One").click();
+        buttonGroupPage.basicButtonGroup.getButtonByText("Three").click();
+        buttonGroupPage.basicButtonGroup.getButtonByText("Two").click();
+        buttonGroupPage.basicButtonGroup.getButtonByText("One").click();
 
-        buttonGroupFrame.buttonGroup.getButtonByIndex(1).is().enabled();
-        buttonGroupFrame.buttonGroup.getButtonByIndex(1).has().text("ONE");
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).is().enabled();
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).has().text("ONE");
+    }
+
+    @Test
+    public void verticalButtonGroupTest() {
+
+        buttonGroupPage.verticalButtonGroup.getButtonByIndex(2).click();
+        buttonGroupPage.verticalButtonGroup.getButtonByIndex(3).click();
+
+        buttonGroupPage.verticalButtonGroup.getButtonByText("Two").click();
+        buttonGroupPage.verticalButtonGroup.getButtonByText("One").click();
+
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).is().enabled();
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).has().text("ONE");
     }
 
     @Test
     public void disabledButtonGroupTest() {
-        inputButtonGroupDisabledPage.open();
 
-        buttonGroupFrame.buttonGroup.getButtonByIndex(1).is().disabled();
-        buttonGroupFrame.buttonGroup.getButtonByText("Two").is().disabled();
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).is().disabled();
+        buttonGroupPage.basicButtonGroup.getButtonByText("Two").is().disabled();
     }
 
     @Test
     public void splitButtonGroupTest() {
-        inputButtonGroupSplitPage.open();
 
-        splitButtonGroupFrame.buttonGroup.getMainButton().click();
-        splitButtonGroupFrame.buttonGroup.getMainButton()
+        buttonGroupPage.splitButtonGroup.getMainButton().click();
+        buttonGroupPage.splitButtonGroup.getMainButton()
                 .has().text("SQUASH AND MERGE");
-        splitButtonGroupFrame.buttonGroup.select("Update project");
-        splitButtonGroupFrame.buttonGroup.getMainButton()
+        buttonGroupPage.splitButtonGroup.select("Update project");
+        buttonGroupPage.splitButtonGroup.getMainButton()
                 .has().text("UPDATE PROJECT");
-
-
+        
     }
 }
