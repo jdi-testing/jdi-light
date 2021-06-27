@@ -294,16 +294,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         if (value == null || isEmpty(locators())) {
             return;
         }
-        By lastLocator = last(locators());
-        if (lastLocator.toString().contains("%s")) {
-            List<By> locators = locators().size() == 1
-                    ? new ArrayList<>()
-                    : locators().subList(0, locators().size() - 2);
-            locators.add(fillByTemplate(lastLocator, value));
-            new JS(driver, locators).click();
-        } else {
-            find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
-        }
+        find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
     }
 
     public static String SELECT_FIND_TEXT_LOCATOR = ".//*[text()='%s']";
