@@ -8,7 +8,7 @@ import static java.lang.String.format;
 
 public class FilterConditions {
     public static Function<JS, String> textEquals(String value) {
-        return el -> format("%s === '%s'", el.textType.value, value);
+        return el -> format("%s === '%s'", el.textType.value.trim(), value.trim());
     }
     public static Function<JS, String> textContains(String value) {
         return el -> format("%s.toLowerCase().includes('%s'.toLowerCase())",

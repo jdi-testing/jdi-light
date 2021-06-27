@@ -43,7 +43,8 @@ import java.util.function.Supplier;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.jdiai.JDI.conditions;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
@@ -81,7 +82,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     public JS(Supplier<WebDriver> driver, List<By> locators) {
         this.driver = driver;
         this.js = new JSSmart(driver, locators);
-        this.js.multiSearch();
+        // this.js.multiSearch();
         this.actions = new Safe<>(() -> new Actions(driver()));
     }
 
@@ -116,7 +117,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     public JS(Supplier<WebDriver> driver, By locator, Object parent, boolean useParentLocators) {
         this(driver, locatorsFromParent(locator, parent, useParentLocators));
         this.parent = parent;
-        if (parent != null && isClass(parent.getClass(), HasCore.class)) {
+        if (parent != null && isInterface(parent.getClass(), HasCore.class)) {
             this.js.updateDriver(((HasCore) parent).core().js.jsDriver());
         }
     }
@@ -195,6 +196,14 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
             "element.dispatchEvent(new Event('change'));");
     }
 
+    public boolean selectedByValueOption(String value) {
+        return core().getJSResult("selectedOptions[0].value").trim().equals(value);
+    }
+
+    public boolean selectedOption(String value) {
+        return core().getJSResult("selectedOptions[0].innerText").trim().equals(value);
+    }
+
     public void doAction(String action) {
         js.doAction(action);
     }
@@ -240,6 +249,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     public Object parent() {
         return this.parent;
     }
+
     public JS setParent(Object parent) {
         this.parent = parent;
         return this;
@@ -273,7 +283,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
             locators.add(fillByTemplate(lastLocator, value));
             new JS(driver, locators).click();
         } else {
-            find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
+            findFirst(textEquals(value)).click();
         }
     }
 
@@ -430,6 +440,19 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
 
     public String attr(String attrName) {
         return getAttribute(attrName);
+    }
+
+    public List<String> getAttributesAsList(String attr) {
+        return js.getAttributeList(attr);
+    }
+    public List<String> attrList(String attr) {
+        return getAttributesAsList(attr);
+    }
+    public List<Json> getAttributesAsList(String... attr) {
+        return js.getMultiAttributes(attr);
+    }
+    public List<Json> attrList(String... attr) {
+        return getAttributesAsList(attr);
     }
 
     public List<String> allClasses() {
@@ -730,6 +753,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     public JS find(String by) {
         return find(NAME_TO_LOCATOR.execute(by));
     }
+
     public JS find(By by) {
         return new JS(this, by);
     }

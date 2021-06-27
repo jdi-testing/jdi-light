@@ -17,8 +17,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static com.jdiai.jswraper.driver.DriverManager.BROWSER;
-import static com.jdiai.jswraper.driver.DriverManager.RUN_MODE;
+import static com.jdiai.jswraper.driver.JDIDriver.RUN_MODE;
 import static com.jdiai.jswraper.driver.OsTypes.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -51,7 +50,7 @@ public class GetDriverUtilities {
                     return new ChromeDriver((ChromeOptions) options);
             }
         } catch (Exception ex) {
-            throw new JDINovaException(ex, "Failed to run local driver '%s'", BROWSER);
+            throw new JDINovaException(ex, "Failed to run local driver '%s'", browser.name);
         }
     }
 

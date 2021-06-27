@@ -1,6 +1,5 @@
 package com.jdiai.jswraper.driver;
 
-import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.jsdriver.JSException;
 import com.jdiai.jswraper.driver.download.DownloadDriverSettings;
 import org.openqa.selenium.MutableCapabilities;
@@ -12,29 +11,16 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.safari.SafariOptions;
 
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.jdiai.jswraper.driver.DriverTypes.*;
 import static com.jdiai.jswraper.driver.GetDriverUtilities.getLocalDriver;
-import static com.jdiai.jswraper.driver.RunModes.LOCAL_DOWNLOAD;
+import static com.jdiai.jswraper.driver.JDIDriver.*;
 import static java.lang.Runtime.getRuntime;
 
 public class DriverManager {
     static DriverTypes BROWSER = CHROME;
     static Supplier<WebDriver> CUSTOM_DRIVER = null;
-    public static RunModes RUN_MODE = LOCAL_DOWNLOAD;
-    public static Consumer<WebDriver> DRIVER_SETUP = driver -> driver.manage().window().maximize();
-    public static DriverOptions DRIVER_OPTIONS = new DriverOptions();
-    public static MapArray<DriverTypes, String> REMOTE_DRIVER_VERSIONS = new MapArray<>(
-        $(CHROME, "latest"),
-        $(FIREFOX, "latest"),
-        $(IE, "latest"),
-        $(IE_EDGE, "latest"),
-        $(SAFARI, "latest"),
-        $(OPERA, "latest")
-    );
 
     public static void useDriver(DriverTypes driver) {
         BROWSER = driver;

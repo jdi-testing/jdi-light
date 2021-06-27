@@ -9,11 +9,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.List;
 
 import static com.jdiai.jsbuilder.QueryLogger.logger;
-import static com.jdiai.jswraper.driver.DriverManager.REMOTE_DRIVER_VERSIONS;
-import static com.jdiai.jswraper.driver.DriverManager.RUN_MODE;
 import static com.jdiai.jswraper.driver.DriverVersion.PENULT;
 import static com.jdiai.jswraper.driver.GetDriverUtilities.getOs;
 import static com.jdiai.jswraper.driver.GetDriverUtilities.hasVersion;
+import static com.jdiai.jswraper.driver.JDIDriver.REMOTE_DRIVER_VERSIONS;
+import static com.jdiai.jswraper.driver.JDIDriver.RUN_MODE;
 import static com.jdiai.jswraper.driver.OsTypes.WIN;
 import static com.jdiai.jswraper.driver.Platform.X32;
 import static com.jdiai.jswraper.driver.Platform.X64;
