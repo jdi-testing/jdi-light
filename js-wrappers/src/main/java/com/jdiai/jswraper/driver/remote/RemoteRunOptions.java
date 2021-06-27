@@ -8,8 +8,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URI;
 
-import static com.jdiai.jswraper.driver.DriverManager.REMOTE_DRIVER_VERSIONS;
 import static com.jdiai.jswraper.driver.GetDriverUtilities.hasVersion;
+import static com.jdiai.jswraper.driver.JDIDriver.REMOTE_DRIVER_VERSIONS;
 
 public class RemoteRunOptions implements RemoteSettings {
     public RemoteRunOptions() {

@@ -2,8 +2,6 @@ package com.jdiai;
 
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc1;
 import com.jdiai.annotations.ListLabel;
 import com.jdiai.asserts.Conditions;
 import com.jdiai.interfaces.HasCore;
@@ -16,6 +14,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -46,6 +45,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         if (labelLocator == null) {
             throw new JSException("Failed to get labelElement");
         }
+        core().js.jsDriver().multiSearch();
         return core().find(labelLocator).setName(getName() + " " + labelField.getName());
     }
     private void haveLabelElement(String value) {
@@ -134,37 +134,37 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     public T first() {
         return get(0);
     }
-    public List<T> where(JFunc1<T, Boolean> condition) {
+    public List<T> where(Function<T, Boolean> condition) {
         return LinqUtils.where(getList(0), condition);
     }
-    public List<T> filter(JFunc1<T, Boolean> condition) {
+    public List<T> filter(Function<T, Boolean> condition) {
         return where(condition);
     }
-    public <R> List<R> select(JFunc1<T, R> transform) {
-        return LinqUtils.select(getList(0), transform::execute);
+    public <R> List<R> select(Function<T, R> transform) {
+        return LinqUtils.select(getList(0), transform);
     }
-    public <R> List<R> map(JFunc1<T, R> transform) {
+    public <R> List<R> map(Function<T, R> transform) {
         return select(transform);
     }
-    public T first(JFunc1<T, Boolean> condition) {
-        return LinqUtils.first(getList(1), condition);
+    public T first(Function<T, Boolean> condition) {
+        return LinqUtils.first(getList(condition), condition);
     }
-    public T last(JFunc1<T, Boolean> condition) {
-        return LinqUtils.last(getList(1), condition);
+    public T last(Function<T, Boolean> condition) {
+        return LinqUtils.last(getList(condition), condition);
     }
-    public void ifDo(JFunc1<T, Boolean> condition, JAction1<T> action) {
+    public void ifDo(Function<T, Boolean> condition, Consumer<T> action) {
         LinqUtils.ifDo(getList(1), condition, action);
     }
-    public <R> List<R> ifSelect(JFunc1<T, Boolean> condition, JFunc1<T, R> transform) {
+    public <R> List<R> ifSelect(Function<T, Boolean> condition, Function<T, R> transform) {
         return LinqUtils.ifSelect(getList(1), condition, transform);
     }
-    public void foreach(JAction1<T> action) {
+    public void foreach(Consumer<T> action) {
         LinqUtils.foreach(getList(1), action);
     }
-    public boolean hasAny(JFunc1<T, Boolean> condition) {
+    public boolean hasAny(Function<T, Boolean> condition) {
         return any(getList(0), condition);
     }
-    public boolean all(JFunc1<T, Boolean> condition) {
+    public boolean all(Function<T, Boolean> condition) {
         return LinqUtils.all(getList(0), condition);
     }
     public List<T> slice(int from, int to) {
@@ -177,7 +177,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         return listCopyUntil(getList(to - 1), to);
     }
     public void refresh() { clear(); }
-    public <R> List<R> selectMany(JFunc1<T, List<R>> func) {
+    public <R> List<R> selectMany(Function<T, List<R>> func) {
         return LinqUtils.selectMany(getList(0), func);
     }
     @Override
@@ -267,6 +267,19 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         return slice(fromIndex, toIndex);
     }
 
+    public List<T> getList(Function<T, Boolean> condition) {
+        List<T> list;
+        Timer timer = new Timer();
+        do {
+            list = core().getEntityList(dataClass);
+        } while (!any(list, condition) && timer.isRunning());
+        return any(list, condition) ? list : new ArrayList<>();
+    }
+
+    public List<T> getAll() {
+        return getList(0);
+    }
+
     public List<T> getList(int minAmount) {
         List<T> list;
         Timer timer = new Timer();
@@ -274,7 +287,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
             list = core().getEntityList(dataClass);
         } while (list.size() < minAmount && timer.isRunning());
         if (list.size() < minAmount) {
-            throw new JSException("Failed to get list '%s' in %s seconds", getName(), new DecimalFormat("#.##").format(timer.timePassedInMSec() / 1000));
+            throw new JSException("Failed to get list '%s' with minimum '%s' elements in %s seconds", getName(), minAmount, new DecimalFormat("#.##").format(timer.timePassedInMSec() / 1000));
         }
         return list;
     }
