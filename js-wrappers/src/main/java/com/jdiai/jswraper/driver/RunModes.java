@@ -7,7 +7,7 @@ import com.jdiai.jswraper.driver.remote.RemoteRunOptions;
 import com.jdiai.jswraper.driver.remote.RemoteSettings;
 import com.jdiai.jswraper.driver.remote.SelenoidOptions;
 
-import java.util.function.Function;
+import java.util.function.Consumer;
 
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
@@ -40,8 +40,9 @@ public class RunModes {
 
     public static RunModes LOCAL_DOWNLOAD = new RunModes("localdownload", new DownloadDriverSettings());
 
-    public static RunModes LOCAL_DOWNLOAD(Function<DownloadDriverSettings, DownloadDriverSettings> settings) {
-        DownloadDriverSettings options = settings.apply(new DownloadDriverSettings());
+    public static RunModes LOCAL_DOWNLOAD(Consumer<DownloadDriverSettings> settings) {
+        DownloadDriverSettings options = new DownloadDriverSettings();
+        settings.accept(options);
         return new RunModes("localdownload", options);
     }
 
@@ -58,8 +59,9 @@ public class RunModes {
         return new RunModes("remote", options);
     }
 
-    public static RunModes REMOTE(Function<RemoteRunOptions, RemoteRunOptions> settings) {
-        RemoteRunOptions options = settings.apply(new RemoteRunOptions());
+    public static RunModes REMOTE(Consumer<RemoteRunOptions> settings) {
+        RemoteRunOptions options = new RemoteRunOptions();
+        settings.accept(options);
         return new RunModes("remote", options);
     }
 
@@ -72,9 +74,9 @@ public class RunModes {
         return new RunModes("browserstack", options);
     }
 
-    public static RunModes BROWSER_STACK(String userName, String accessKey,
-             Function<BrowserStackOptions, BrowserStackOptions> settings) {
-        BrowserStackOptions options = settings.apply(new BrowserStackOptions(userName, accessKey));
+    public static RunModes BROWSER_STACK(String userName, String accessKey, Consumer<BrowserStackOptions> settings) {
+        BrowserStackOptions options = new BrowserStackOptions(userName, accessKey);
+        settings.accept(options);
         return new RunModes("browserstack", options);
     }
 
@@ -85,8 +87,9 @@ public class RunModes {
         return new RunModes("selenoid", options);
     }
 
-    public static RunModes SELENOID(Function<SelenoidOptions, SelenoidOptions> settings) {
-        SelenoidOptions options = settings.apply(new SelenoidOptions());
+    public static RunModes SELENOID(Consumer<SelenoidOptions> settings) {
+        SelenoidOptions options = new SelenoidOptions();
+        settings.accept(options);
         return new RunModes("selenoid", options);
     }
 
