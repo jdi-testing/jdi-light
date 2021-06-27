@@ -83,8 +83,10 @@ public class DriverManager {
         switch (RUN_MODE.type) {
             case "localdownload":
                 RUN_MODE.downloadSettings.downloadDriver(browser);
+                break;
             case "localbypath":
                 RUN_MODE.driverPath.setSystemProperty(browser);
+                break;
         }
         return getLocalDriver(browser, options);
     }
