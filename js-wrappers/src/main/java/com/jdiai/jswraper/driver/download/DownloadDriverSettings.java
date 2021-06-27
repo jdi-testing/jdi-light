@@ -1,33 +1,41 @@
-package com.jdiai.jswraper.driver;
+package com.jdiai.jswraper.driver.download;
 
-import com.epam.jdi.tools.func.JFunc2;
 import com.jdiai.jsdriver.JSException;
+import com.jdiai.jswraper.driver.DriverTypes;
+import com.jdiai.jswraper.driver.OsTypes;
+import com.jdiai.jswraper.driver.Platform;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.util.List;
 
 import static com.jdiai.jsbuilder.QueryLogger.logger;
-import static com.jdiai.jswraper.driver.DriverManager.DOWNLOAD_SETTINGS;
 import static com.jdiai.jswraper.driver.DriverManager.REMOTE_DRIVER_VERSIONS;
+import static com.jdiai.jswraper.driver.DriverManager.RUN_MODE;
 import static com.jdiai.jswraper.driver.DriverVersion.PENULT;
+import static com.jdiai.jswraper.driver.GetDriverUtilities.getOs;
+import static com.jdiai.jswraper.driver.GetDriverUtilities.hasVersion;
+import static com.jdiai.jswraper.driver.OsTypes.WIN;
+import static com.jdiai.jswraper.driver.Platform.X32;
+import static com.jdiai.jswraper.driver.Platform.X64;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static java.lang.System.getProperty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class DownloadDriverManager {
-    static WebDriverManager wdm;
+public class DownloadDriverSettings {
+    public String gitHubTokenName;
+    public String gitHubTokenSecret;
+    public String downloadedDriverInfo;
+    public String driverPath;
+    public OsTypes os;
+    public Platform platform;
 
-    static boolean hasVersion(String version) {
-        if (isBlank(version)) {
-            return false;
+    public String downloadDriver(DriverTypes driverType) {
+        if (platform == null) {
+            platform = getDriverPlatform();
         }
-        char c = version.charAt(0);
-        return c >= '0' && c <= '9';
-    }
-
-    public static String downloadDriver(DriverTypes driverType, Platform platform) {
+        WebDriverManager wdm;
         try {
             String driverName = driverType.toString();
             switch (driverType) {
@@ -60,26 +68,22 @@ public class DownloadDriverManager {
             }
             if (version.equalsIgnoreCase(PENULT.value)) {
                 wdm.setup();
-                wdm.browserVersion(getBelowVersion());
+                wdm.browserVersion(getBelowVersion(wdm));
             }
-            if (isNotBlank(DOWNLOAD_SETTINGS.gitHubTokenName) && isNotBlank(DOWNLOAD_SETTINGS.gitHubTokenSecret)) {
-                wdm.gitHubTokenName(DOWNLOAD_SETTINGS.gitHubTokenName);
-                wdm.gitHubTokenSecret(DOWNLOAD_SETTINGS.gitHubTokenSecret);
+            if (isNotBlank(gitHubTokenName) && isNotBlank(gitHubTokenSecret)) {
+                wdm.gitHubTokenName(gitHubTokenName);
+                wdm.gitHubTokenSecret(gitHubTokenSecret);
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
-            DOWNLOAD_SETTINGS.downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
-            DOWNLOAD_SETTINGS.driverPath = wdm.getDownloadedDriverPath();
+            downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
+            driverPath = wdm.getDownloadedDriverPath();
             return wdm.getDownloadedDriverPath();
         } catch (Exception ex) {
             throw new JSException(ex, "Can't download latest driver for " + driverType);
         }
     }
-
-    public static JFunc2<DriverTypes, Platform, String> DOWNLOAD_DRIVER_FUNC =
-            DownloadDriverManager::downloadDriver;
-
-    public static String getBelowVersion() {
+    protected String getBelowVersion(WebDriverManager wdm) {
         String currentMajor = wdm.getDownloadedDriverVersion().split("\\.")[0];
         List<String> allVersions = wdm.getDriverVersions();
         for (int i = allVersions.size()-1; i>=0; i--) {
@@ -87,5 +91,18 @@ public class DownloadDriverManager {
                 return allVersions.get(i);
         }
         throw new JSException("Can't find version below current(" + wdm.getDownloadedDriverVersion()+")");
+    }
+
+    private static Platform getDriverPlatform() {
+        if (RUN_MODE.downloadSettings.platform != null) {
+            return RUN_MODE.downloadSettings.platform;
+        }
+        if (getOs() == WIN || getProperty("os.arch").contains("32")) {
+            return X32;
+        }
+        if (getProperty("os.arch").contains("64")) {
+            return X64;
+        }
+        throw new JSException("Unknown driver platform: %s. Only X32 or X64 allowed. Please specify exact platform in JDISettings.DRIVER.platform", getProperty("os.arch"));
     }
 }

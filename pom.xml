@@ -7,7 +7,7 @@
 
 	<groupId>com.epam.jdi.tools</groupId>
     <artifactId>jdi-nova-framework</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
     <name>JS WebDriver</name>
     <packaging>pom</packaging>
 

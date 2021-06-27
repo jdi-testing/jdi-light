@@ -135,9 +135,7 @@ public class JDI {
 
     public static void openSite() {
         init();
-        if (driver().getCurrentUrl().equals("data:,")) {
-            openPage(domain);
-        }
+        openPage(domain);
     }
     public static void openSite(int width, int height) {
         openSite();
@@ -159,9 +157,7 @@ public class JDI {
             driver().quit();
         }
         DRIVER.reset();
-        if (driver().getCurrentUrl().equals("data:,")) {
-            openPage(domain);
-        }
+        openPage(domain);
     }
 
     public static void reopenSite(int width, int height) {

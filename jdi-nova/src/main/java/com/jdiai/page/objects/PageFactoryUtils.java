@@ -23,7 +23,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.jdiai.JDI.driver;
-import static com.jdiai.page.objects.Rules.CREATE_RULES;
+import static com.jdiai.page.objects.JDIPageFactory.CREATE_RULES;
 import static com.jdiai.tools.JSTalkUtils.findByToBy;
 import static com.jdiai.tools.JSTalkUtils.uiToBy;
 import static com.jdiai.tools.TestIDLocators.getSmartLocator;
