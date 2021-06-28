@@ -38,8 +38,8 @@ public class ButtonGroupTests extends TestsInit {
         buttonGroupPage.verticalButtonGroup.getButtonByText("Two").click();
         buttonGroupPage.verticalButtonGroup.getButtonByText("One").click();
 
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).is().enabled();
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).has().text("ONE");
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(2).is().enabled();
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(2).has().text("TWO");
     }
 
     @Test
@@ -58,6 +58,6 @@ public class ButtonGroupTests extends TestsInit {
         buttonGroupPage.splitButtonGroup.select("Update project");
         buttonGroupPage.splitButtonGroup.getMainButton()
                 .has().text("UPDATE PROJECT");
-        
+
     }
 }
