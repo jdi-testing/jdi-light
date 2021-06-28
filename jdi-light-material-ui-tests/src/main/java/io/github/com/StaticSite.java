@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
@@ -59,10 +60,13 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static TextFieldFrame textFieldFrame;
 
+    @XPath("//*[@id=\"formProps\"]/div[1]/div[7]")
+    public static TextFieldFrame standardTextFieldFrame;
+
     @Url("/textarea_autosize")
     public static TextAreaAutoSizePage textAreaAutoSizePage;
 
-    @Url("/material-ui-inputs-text-field--standard")
+    @Url("/text_field")
     public static WebPage inputTextFieldStandardPage;
 
     @Url("/material-ui-inputs-text-field--field-with-default")
@@ -82,10 +86,10 @@ public class StaticSite {
     public static CheckboxPage checkboxPage;
 
     // button group
-    @Frame("storybook-preview-iframe")
-    public static ButtonGroupFrame buttonGroupFrame;
+    @Url("/button_groups")
+    public static ButtonGroupPage buttonGroupPage;
 
-    @Frame("storybook-preview-iframe")
+    @XPath("//*[@id=\"__next\"]/div/div/div[2]/div/div/div/div[3]/div")
     public static SplitButtonGroupFrame splitButtonGroupFrame;
 
     @Url("/material-ui-inputs-button-group--default")
@@ -94,7 +98,7 @@ public class StaticSite {
     @Url("/material-ui-inputs-button-group--disabled")
     public static WebPage inputButtonGroupDisabledPage;
 
-    @Url("/material-ui-inputs-button-group--split-button")
+    @Url("/button_groups")
     public static WebPage inputButtonGroupSplitPage;
 
     @Url("/selects")
