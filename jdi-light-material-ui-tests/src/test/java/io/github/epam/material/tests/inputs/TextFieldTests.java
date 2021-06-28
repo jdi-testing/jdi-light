@@ -9,6 +9,7 @@ import static io.github.com.StaticSite.inputTextFieldFilledWithDefaultPage;
 import static io.github.com.StaticSite.inputTextFieldStandardPage;
 import static io.github.com.StaticSite.inputTextFieldTimePage;
 import static io.github.com.StaticSite.textFieldFrame;
+import static io.github.com.StaticSite.standardTextFieldFrame;
 
 public class TextFieldTests extends TestsInit {
 
@@ -18,9 +19,9 @@ public class TextFieldTests extends TestsInit {
     public void standardTextFieldTest() {
         inputTextFieldStandardPage.open();
 
-        textFieldFrame.textField.is().enabled();
-        textFieldFrame.textField.setValue(DEFAULT_VALUE);
-        textFieldFrame.textField.has().text(DEFAULT_VALUE);
+        standardTextFieldFrame.textField.is().enabled();
+        standardTextFieldFrame.textField.setValue(DEFAULT_VALUE);
+        standardTextFieldFrame.textField.has().text(DEFAULT_VALUE);
     }
 
     @Test
