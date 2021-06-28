@@ -143,11 +143,6 @@ public class StaticSite {
     @Url("/avatar")
     public static AvatarPage avatarPage;
 
-    public static GroupCheckBoxFrame groupCheckBoxFrame;
-
-    @Url("/material-ui-inputs-checkbox--group")
-    public static WebPage groupCheckBoxPage;
-
     // Display data
     //icons
     @Url("/icons")
