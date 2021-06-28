@@ -6,7 +6,6 @@ import com.epam.jdi.light.material.elements.inputs.TextField;
 
 public class TextFieldFrame extends Section {
 
-    @UI(".MuiTextField-root")
+    @UI(".MuiInputBase-root")
     public TextField textField;
-
 }
