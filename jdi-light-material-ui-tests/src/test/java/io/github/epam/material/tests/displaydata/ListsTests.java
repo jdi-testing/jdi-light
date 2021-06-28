@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.ListPage;
 
 public class ListsTests extends TestsInit{
-/*
+
     @Test
     public void simpleList() {
         dataDisplayListsSimpleListPage.open();
@@ -32,7 +32,7 @@ public class ListsTests extends TestsInit{
         listsFrame.checkboxLineItemFirst.check();
         listsFrame.checkboxLineItemFirst.is().checked();
     }
-*/
+
     @Test
     public void pinnedSubHeaderList() {
         ListPage.open();
