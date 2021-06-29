@@ -8,7 +8,7 @@ import static io.github.com.StaticSite.ListPage;
 
 public class ListsTests extends TestsInit{
 
-    @Test
+    /*@Test
     public void simpleList() {
         dataDisplayListsSimpleListPage.open();
 
@@ -31,7 +31,7 @@ public class ListsTests extends TestsInit{
 
         listsFrame.checkboxLineItemFirst.check();
         listsFrame.checkboxLineItemFirst.is().checked();
-    }
+    }*/
 
     @Test
     public void pinnedSubHeaderList() {
