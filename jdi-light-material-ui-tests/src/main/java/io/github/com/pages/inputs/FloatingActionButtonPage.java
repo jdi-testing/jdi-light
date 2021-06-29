@@ -7,47 +7,47 @@ import com.epam.jdi.light.ui.html.elements.common.*;
 
 import java.util.List;
 
-public class FabPage extends WebPage {
+public class FloatingActionButtonPage extends WebPage {
 
     @UI("//div[@id='basicActionBtns']/button")
-    public static List<Button> basicBtns;
+    public static List<Button> buttonsBasic;
 
     @UI("//button[@aria-label='add']")
-    public static Button addBtn;
+    public static Button buttonAdd;
 
     @UI("//button[@aria-label='edit']")
-    public static Button editBtn;
+    public static Button buttonEdit;
 
     @UI("//button[contains(@class,'MuiFab-extended')]")
-    public static Button extendedBtn;
+    public static Button buttonNavigate;
 
     @UI("//button[@aria-label='like']")
-    public static Button disabledBtn;
+    public static Button buttonLike;
 
     @UI("//button[contains(@id,'action-tab')]")
-    public static List<Button> scrollBtns;
+    public static List<Button> tabSections;
 
     @UI("//button[@aria-label='Add']")
-    public static Button addButton;
+    public static Button buttonAnimatedAdd;
 
     @UI("//button[@aria-label='Edit']")
-    public static Button editButton;
+    public static Button buttonAnimatedEdit;
 
     @UI("//button[@aria-label='Expand']")
-    public static Button expandButton;
+    public static Button buttonExpand;
 
     @UI("#action-tabpanel-0")
-    public static UIElement itemNameOne;
+    public static UIElement tabItemOne;
 
     @UI("#action-tabpanel-1")
-    public static UIElement itemNameTwo;
+    public static UIElement tabItemTwo;
 
     @UI("#action-tabpanel-2")
-    public static UIElement itemNameThree;
+    public static UIElement tabItemThree;
 
     @UI("#basicActionBtnsLastClick")
-    public static Text basicBtnsLastClick;
+    public static Text labelLastClick;
 
     @UI("#animatedActionBtnsLastClick")
-    public static Text animatedBtnsLastClick;
+    public static Text labelAnimatedLastClick;
 }

@@ -53,7 +53,7 @@ public class StaticSite {
 
     // floating action button
     @Url("/floating_action_button")
-    public static FabPage fabPage;
+    public static FloatingActionButtonPage floatingActionButtonPage;
 
     // text field
     @Frame("storybook-preview-iframe")
