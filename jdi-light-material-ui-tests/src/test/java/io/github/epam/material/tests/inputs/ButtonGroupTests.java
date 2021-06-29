@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.buttonGroupPage;
-import static io.github.com.StaticSite.splitButtonGroupFrame;
 
 public class ButtonGroupTests extends TestsInit {
 
@@ -13,7 +12,7 @@ public class ButtonGroupTests extends TestsInit {
     public void before(){
 
         buttonGroupPage.open();
-        //buttonGroupPage.isOpened();
+        buttonGroupPage.isOpened();
     }
 
     @Test
@@ -53,20 +52,11 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void splitButtonGroupTest() {
-
-        /*buttonGroupPage.splitButtonGroup.getMainButton().click();
+        buttonGroupPage.splitButtonGroup.getMainButton().click();
         buttonGroupPage.splitButtonGroup.getMainButton()
                 .has().text("SQUASH AND MERGE");
         buttonGroupPage.splitButtonGroup.select("Create a merge commit");
         buttonGroupPage.splitButtonGroup.getMainButton()
-                .has().text("CREATE A MERGE COMMIT");*/
-
-        splitButtonGroupFrame.buttonGroup.getMainButton().click();
-        splitButtonGroupFrame.buttonGroup.getMainButton()
-                .has().text("SQUASH AND MERGE");
-        splitButtonGroupFrame.buttonGroup.select("Create a merge commit");
-        splitButtonGroupFrame.buttonGroup.getMainButton()
                 .has().text("CREATE A MERGE COMMIT");
-
     }
 }
