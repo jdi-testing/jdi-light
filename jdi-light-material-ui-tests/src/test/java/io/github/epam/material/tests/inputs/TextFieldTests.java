@@ -1,55 +1,56 @@
 package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.inputTextFieldDisabledPage;
-import static io.github.com.StaticSite.inputTextFieldFilledPage;
-import static io.github.com.StaticSite.inputTextFieldFilledWithDefaultPage;
-import static io.github.com.StaticSite.inputTextFieldStandardPage;
-import static io.github.com.StaticSite.inputTextFieldTimePage;
-import static io.github.com.StaticSite.textFieldFrame;
-import static io.github.com.StaticSite.standardTextFieldFrame;
+import static io.github.com.StaticSite.*;
 
 public class TextFieldTests extends TestsInit {
 
     public static final String DEFAULT_VALUE = "Default value";
 
+    @BeforeMethod
+    public void before(){
+
+        textFieldPage.open();
+        textFieldPage.isOpened();
+    }
+
     @Test
     public void standardTextFieldTest() {
-        inputTextFieldStandardPage.open();
 
-        standardTextFieldFrame.textField.is().enabled();
-        standardTextFieldFrame.textField.setValue(DEFAULT_VALUE);
-        standardTextFieldFrame.textField.has().text(DEFAULT_VALUE);
+        textFieldPage.standartTextField.is().enabled();
+        textFieldPage.standartTextField.setValue(DEFAULT_VALUE);
+        textFieldPage.standartTextField.has().text(DEFAULT_VALUE);
     }
 
     @Test
     public void filledWithDefaultTextFieldTest() {
-        inputTextFieldFilledWithDefaultPage.open();
+        //inputTextFieldFilledWithDefaultPage.open();
 
-        textFieldFrame.textField.has().text(DEFAULT_VALUE);
+        //textFieldFrame.textField.has().text(DEFAULT_VALUE);
     }
 
     @Test
     public void emptyTextFieldTest() {
-        inputTextFieldFilledPage.open();
+        //inputTextFieldFilledPage.open();
 
-        textFieldFrame.textField.is().empty();
+        //textFieldFrame.textField.is().empty();
     }
 
     @Test
     public void disabledTextFieldTest() {
-        inputTextFieldDisabledPage.open();
+        //inputTextFieldDisabledPage.open();
 
-        textFieldFrame.textField.is().disabled();
+        //textFieldFrame.textField.is().disabled();
     }
 
     @Test
     public void timeTextFieldTest() {
-        inputTextFieldTimePage.open();
+        //inputTextFieldTimePage.open();
 
-        textFieldFrame.textField.setValue("16:00PM");
+        /*textFieldFrame.textField.setValue("16:00PM");
         textFieldFrame.textField.has().text("16:00");
         textFieldFrame.textField.setValue("06:00A");
         textFieldFrame.textField.has().text("06:00");
@@ -58,7 +59,7 @@ public class TextFieldTests extends TestsInit {
         textFieldFrame.textField.setValue("17:75");
         textFieldFrame.textField.has().text("17:07");
         textFieldFrame.textField.setValue("17:x5");
-        textFieldFrame.textField.has().text("17:05");
+        textFieldFrame.textField.has().text("17:05");*/
     }
 
 }
