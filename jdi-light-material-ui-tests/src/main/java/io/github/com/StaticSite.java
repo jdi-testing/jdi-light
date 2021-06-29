@@ -57,17 +57,11 @@ public class StaticSite {
     public static FabPage fabPage;
 
     // text field
-    @Frame("storybook-preview-iframe")
-    public static TextFieldFrame textFieldFrame;
-
-    @XPath("//*[@id=\"formProps\"]/div[1]/div[7]")
-    public static TextFieldFrame standardTextFieldFrame;
+    @Url("/text_field")
+    public static TextFieldPage textFieldPage;
 
     @Url("/textarea_autosize")
     public static TextAreaAutoSizePage textAreaAutoSizePage;
-
-    @Url("/text_field")
-    public static WebPage inputTextFieldStandardPage;
 
     @Url("/material-ui-inputs-text-field--field-with-default")
     public static WebPage inputTextFieldFilledWithDefaultPage;
@@ -88,9 +82,6 @@ public class StaticSite {
     // button group
     @Url("/button_groups")
     public static ButtonGroupPage buttonGroupPage;
-
-    @XPath("//*[@id=\"__next\"]/div/div/div[2]/div/div/div/div[3]/div")
-    public static SplitButtonGroupFrame splitButtonGroupFrame;
 
     @Url("/material-ui-inputs-button-group--default")
     public static WebPage inputButtonGroupDefaultPage;
