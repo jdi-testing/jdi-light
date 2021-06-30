@@ -15,6 +15,7 @@ public class RemoteRunOptions implements RemoteSettings {
     public RemoteRunOptions() {
         this("http://localhost:4444/wd/hub");
     }
+
     public RemoteRunOptions(String url) {
         this.url = url;
     }

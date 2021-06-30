@@ -184,13 +184,22 @@ public abstract class Conditions {
     public static <T> Condition haveAll(T... entities) {
         return haveCondition(true, false, asList(entities));
     }
+
+    public static Condition noItems() {
+        return condition("%element% has no item",
+                el -> el.core().size() == 0);
+    }
+    public static Condition someItems() {
+        return condition("%element% is not empty",
+                el -> el.core().size() > 0);
+    }
     public static Condition size(int size) {
-        return condition("%element% have '" + size + "' elements",
+        return condition("%element% has '" + size + "' elements",
                 el -> el.core().size() == size);
     }
     public static Condition size(Function<Integer, Boolean> sizeFunc) {
-        return condition("%element% have expected amount of elements",
-                el -> sizeFunc.apply(el.core().size()));
+        return condition("%element% has expected amount of elements",
+            el -> sizeFunc.apply(el.core().size()));
     }
     public static Condition text(String text) {
         return condition("%element% has %no% text='" + text + "'",

@@ -51,8 +51,8 @@ public class JSWrappersUtils {
                 return null;
             }
             action = isBooleanTrue(field, value)
-                ? "click()"
-                : "value='" + value.toString() + "'";
+                ? "click();"
+                : "value='" + value.toString() + "';";
         }
         return setStringAction(element, action);
     }

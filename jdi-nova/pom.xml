@@ -6,7 +6,7 @@
     <artifactId>jdi-nova</artifactId>
     <name>JDI Nova</name>
     <groupId>com.jdiai</groupId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>com.jdiai</groupId>
             <artifactId>js-wrappers</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
     </dependencies>
 

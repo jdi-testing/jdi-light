@@ -260,7 +260,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public void click() {
-        doAction("click()");
+        doAction("click();");
     }
     public void clickCenter() {
         doAction("let rect = element.getBoundingClientRect();" +
@@ -936,7 +936,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
 
     public JS findFirst(By by, String condition) {
         String script = "element = elements.find(e => { const fel = " +
-            MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+"; " +
+            MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder())) + "; " +
             "return fel && " + handleCondition(condition, "fel") + "; });\n";
         return listToOne(script);
     }
