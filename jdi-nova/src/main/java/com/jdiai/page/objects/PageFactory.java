@@ -22,8 +22,9 @@ public class PageFactory {
     }
 
     public static void initPageElements(Object page) {
-        List<Field> jsFields = filter(getJSFields(page.getClass()), FIELDS_FILTER);
-        for (Field field : jsFields) {
+        List<Field> jsFields = getJSFields(page.getClass());
+        List<Field> filteredFields = filter(jsFields, FIELDS_FILTER);
+        for (Field field : filteredFields) {
             createAndSetupField(page, field);
         }
     }
@@ -42,7 +43,8 @@ public class PageFactory {
         if (cl.isAnnotationPresent(Site.class)) {
             domain = cl.getAnnotation(Site.class).value();
         }
-        List<Field> pages = filter(cl.getDeclaredFields(), PAGES_FILTER);
+        Field[] allFields = cl.getDeclaredFields();
+        List<Field> pages = filter(allFields, PAGES_FILTER);
         for (Field field : pages) {
             createAndSetupField(null, field);
         }

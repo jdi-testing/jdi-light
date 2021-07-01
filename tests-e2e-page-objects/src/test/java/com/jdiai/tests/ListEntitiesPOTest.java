@@ -22,7 +22,7 @@ import static com.jdiai.test.data.TestData.SearchResults;
 import static org.testng.AssertJUnit.assertEquals;
 
 @Listeners(TestNGListener.class)
-public class ListEntitiesTest implements TestInit {
+public class ListEntitiesPOTest implements TestInit {
 
     @BeforeMethod
     public void before() {

@@ -1,5 +1,6 @@
 package com.jdiai.page.objects;
 
+import com.epam.jdi.tools.ReflectionUtils;
 import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.*;
 import com.jdiai.annotations.UI;
@@ -26,6 +27,7 @@ import static com.jdiai.tools.JSTalkUtils.findByToBy;
 import static com.jdiai.tools.JSTalkUtils.uiToBy;
 import static com.jdiai.tools.TestIDLocators.getSmartLocator;
 import static java.lang.reflect.Modifier.isStatic;
+import static java.util.Arrays.asList;
 
 public class JDIPageFactory {
     public static Function<Class<?>, Object> CREATE_PAGE =
@@ -36,11 +38,13 @@ public class JDIPageFactory {
             || isInterface(f.getType(), List.class);
 
     public static Function<Field, Boolean> IS_UI_OBJECT = field -> {
-        if (field.getName().equals("core")) {
+        if (field.getName().equals("core") || field.getType().isAssignableFrom(JS.class)) {
             return false;
         }
-        return any(field.getType().getDeclaredFields(),
-            f -> !f.getName().equals("core") && JS_FIELD.apply(f));
+        List<Field> fields = // field.getType().getDeclaredFields()
+        ReflectionUtils.recursion(field.getType(), t -> t != null && !t.equals(Object.class), s -> asList(s.getDeclaredFields()));
+        return any(fields, f ->
+                !f.getName().equals("core") && JS_FIELD.apply(f));
     };
 
     public static Function<Field, Boolean> FIELDS_FILTER =
@@ -74,6 +78,7 @@ public class JDIPageFactory {
     );
 
     public static boolean useSmartLocatorsWithoutUI = false;
+
     public static Function<Field, By> LOCATOR_FROM_FIELD = field -> {
         if (field.isAnnotationPresent(FindBy.class)) {
             FindBy findBy = field.getAnnotation(FindBy.class);
