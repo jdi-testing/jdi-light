@@ -45,11 +45,13 @@ public class Keyboard {
     public static void commands(String... commands) {
         for (String keyGroup : commands) {
             String[] keys = keyGroup.split("\\+");
-            for (String key : keys)
+            for (String key : keys) {
                 getRobot().keyPress(getKeyCode(key));
+            }
             ArrayUtils.reverse(keys);
-            for (String key : keys)
+            for (String key : keys) {
                 getRobot().keyRelease(getKeyCode(key));
+            }
         }
     }
     public static void command(String sequence) {
@@ -57,15 +59,24 @@ public class Keyboard {
     }
     private static int getKeyCode(String key) {
         List<Field> keys = getKeys();
-        String keyName = key.replaceAll(" ", "").replaceAll("_", "");
+        String keyName = key.replace(" ", "").replace("_", "");
         Field keyField = first(keys, f -> getKeyName(f).equalsIgnoreCase(keyName));
-        if (keyField != null)
+        if (keyField != null) {
             return (int) ReflectionUtils.getValueField(keyField, null);
+        }
         throw exception("Unknown key '%s'", key);
     }
     private static String getKeyName(Field field) {
         int underscore = field.getName().indexOf('_');
-        return field.getName().substring(underscore + 1).toLowerCase().replaceAll(" ", "").replaceAll("_", "");
+        String key = field.getName().substring(underscore + 1).toLowerCase().replaceAll(" ", "").replaceAll("_", "");
+        switch (key) {
+            case "control":
+                return "ctrl";
+            case "escape":
+                return "esc";
+            default:
+                return key;
+        }
     }
     private static List<Field> getKeys() {
         return LinqUtils.filter(KeyEvent.class.getDeclaredFields(),

@@ -22,6 +22,6 @@ public class MultipleInputsTests implements TestsInit {
         multipleInputs.setName("Roman", "Iovlev");
         multipleInputs.has().text("Roman;Iovlev");
         multipleInputs.clear();
-        multipleInputs.is().empty();
+        multipleInputs.is().displayed();
     }
 }

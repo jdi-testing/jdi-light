@@ -262,7 +262,7 @@ public class WebSettings {
                 DRIVER.capabilities.common = sauceCapabilities();
                 return SAUCE_LABS;
             case "browserstack": return browserstack();
-            case "selenoid": return SELENIDE_LOCAL;
+            case "selenoid": return SELENOID_LOCAL;
             default: return SELENIUM_LOCAL_HOST;
         }
     }
@@ -425,6 +425,15 @@ public class WebSettings {
             case "jdismart": return JDI_SMART;
             case "selenium": return SELENIUM;
             default: return JDI;
+        }
+    }
+    public static void waitAction(int timeout, JAction action) {
+        int oldTimeout = TIMEOUTS.element.get();
+        TIMEOUTS.element.set(timeout);
+        try {
+            action.execute();
+        } finally {
+            TIMEOUTS.element.set(oldTimeout);
         }
     }
 }
