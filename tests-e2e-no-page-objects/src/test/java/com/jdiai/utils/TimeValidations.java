@@ -30,12 +30,12 @@ public class TimeValidations {
     }
     public static long getDuration(JAction action) {
         long start = currentTimeMillis();
-        action.apply();
+        action.execute();
         return currentTimeMillis() - start;
     }
     private static <T> Pair<Long, T> getDuration(JFunc<T> action) {
         long start = currentTimeMillis();
-        T result = action.apply();
+        T result = action.execute();
         return $(currentTimeMillis() - start, result);
     }
     private static void validateDuration(long min, long max, JAction action) {
