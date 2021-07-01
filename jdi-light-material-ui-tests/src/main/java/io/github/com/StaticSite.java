@@ -56,8 +56,8 @@ public class StaticSite {
     public static FloatingActionButtonPage floatingActionButtonPage;
 
     // text field
-    @Frame("storybook-preview-iframe")
-    public static TextFieldFrame textFieldFrame;
+    @Url("/text_field")
+    public static TextFieldPage textFieldPage;
 
     @Url("/textarea_autosize")
     public static TextAreaAutoSizePage textAreaAutoSizePage;

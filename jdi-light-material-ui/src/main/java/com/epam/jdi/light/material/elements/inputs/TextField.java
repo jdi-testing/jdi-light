@@ -2,33 +2,57 @@ package com.epam.jdi.light.material.elements.inputs;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
+import org.openqa.selenium.Keys;
 
 import static com.epam.jdi.light.common.TextTypes.VALUE;
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
+import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 
 public class TextField extends UIBaseElement<TextFieldAssert> {
 
-    private static final String MUI_INPUT_INPUT = ".MuiInput-input, .MuiFilledInput-input";
+    public TextField(){}
+
+    public TextField(UIElement element) {
+        core().setCore(element);
+    }
 
     @JDIAction("Set '{0}' value in '{name}'")
     public void setValue(String value) {
-        core().find(MUI_INPUT_INPUT).input(value);
+        core().input(value);
+    }
+
+    @JDIAction("Clear the existing data Set '{0}' value in '{name}'")
+    public void clearAndSetValue(String value) {
+        core().clear();
+        core().input(value);
     }
 
     @JDIAction("Get value of '{name}'")
     public String getValue() {
-        return core().find(MUI_INPUT_INPUT).text(VALUE);
+        return core().text(VALUE);
     }
 
     @JDIAction("Is '{name} disabled")
     @Override
     public boolean isDisabled() {
-        return core().find(MUI_INPUT_INPUT).hasClass("Mui-disabled");
+        return core().hasClass("Mui-disabled");
+    }
+
+    @JDIAction("Is '{name} read-only")
+    public boolean isReadOnly() {
+        return core().hasAttribute("readonly");
+    }
+
+    @JDIAction("Get text of '{name}")
+    public String getText() {
+        return core().getText();
     }
 
     @JDIAction("Clear '{name}'")
     public void clear() {
-        core().find(MUI_INPUT_INPUT).clear();
+        core().clear();
     }
 
     @Override
