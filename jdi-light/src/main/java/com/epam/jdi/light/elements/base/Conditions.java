@@ -87,7 +87,7 @@ public abstract class Conditions {
     }
     public static Condition clazz(String className) {
         return condition("%element% has %no% 'class=" + className + "' attribute",
-                el -> el.hasClass(className));
+            el -> el.hasClass(className));
     }
 
     public static Condition id(String id) {
