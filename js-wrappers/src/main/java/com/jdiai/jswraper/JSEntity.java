@@ -1,6 +1,5 @@
 package com.jdiai.jswraper;
 
-import com.epam.jdi.tools.func.JFunc1;
 import com.jdiai.jsdriver.JSException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.function.Function;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.newList;
@@ -45,7 +45,7 @@ public class JSEntity<T> extends JSElement {
         return driver.getOne(validateXpath(objectMap)).asObject(cl);
     }
     public T getEntity() {
-        return getEntity(GET_ENTITY_MAP.execute(cl));
+        return getEntity(GET_ENTITY_MAP.apply(cl));
     }
     public T getEntity(List<String> attributes) {
         return driver.getOne(attributesToJson(attributes)).asObject(cl);
@@ -58,10 +58,10 @@ public class JSEntity<T> extends JSElement {
         return driver.getList(validateXpath(objectMap)).asObject(cl);
     }
     public List<T> getEntityList() {
-        return getEntityList(GET_ENTITY_MAP.execute(cl));
+        return getEntityList(GET_ENTITY_MAP.apply(cl));
     }
 
-    public static JFunc1<Class<?>, String> GET_ENTITY_MAP = cl -> {
+    public static Function<Class<?>, String> GET_ENTITY_MAP = cl -> {
         List<String> mapList = map(cl.getDeclaredFields(),
             field -> format("'%s': %s", field.getName(), getValueType(field, "element")));
         return  "{ " + print(mapList, ", ") + " }";

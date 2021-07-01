@@ -61,16 +61,6 @@ public class ShouldUtils {
             throw throwAssert(ex, ">> Assert failed");
         }
     }
-    //private JFunc2<HasCore, Exception, Boolean> ignoreFailure = null;
-    //private JFunc2<HasCore, Exception, Boolean> getIgnoreFailureFunc() {
-    //    return ignoreFailure != null
-    //            ? ignoreFailure
-    //            : IGNORE_FAILURE;
-    //}
-    //public static <T> HasCore ignoreFailure(JFunc2<JS, Exception, Boolean> ignoreFailureFunc) {
-    //    ignoreFailure = ignoreFailureFunc;
-    //    return this;
-    //}
 
     private static void checkOutOfTime(HasCore core, Timer timer, Condition... conditions) {
         if (timer.isRunning()) {

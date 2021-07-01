@@ -2,8 +2,6 @@ package com.jdiai;
 
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import com.google.gson.JsonObject;
@@ -38,6 +36,7 @@ import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -220,12 +219,12 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         return (WebElement) ctx;
     }
 
-    public void actionsWithElement(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(actions.get().moveToElement(this), this).build().perform();
+    public void actionsWithElement(BiFunction<Actions, WebElement, Actions> action) {
+        action.apply(actions.get().moveToElement(this), this).build().perform();
     }
 
-    public void actions(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(actions.get(), this).build().perform();
+    public void actions(BiFunction<Actions, WebElement, Actions> action) {
+        action.apply(actions.get(), this).build().perform();
     }
 
     public String getName() {
@@ -798,7 +797,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         js.setEntity(objectMap);
     }
 
-    public static JFunc1<Field, String> GET_COMPLEX_VALUE = field -> {
+    public static Function<Field, String> GET_COMPLEX_VALUE = field -> {
         if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class)) {
             return null;
         }
@@ -810,7 +809,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         return null;
     };
 
-    public static JFunc2<Field, Object, String> SET_COMPLEX_VALUE = (field, value)-> {
+    public static BiFunction<Field, Object, String> SET_COMPLEX_VALUE = (field, value)-> {
         if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class))
             return null;
         By locator = getLocatorFromField(field);
@@ -821,11 +820,11 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         return setValueType(field, element, value);
     };
 
-    public static JFunc1<Class<?>, String> GET_OBJECT_MAP = cl -> {
+    public static Function<Class<?>, String> GET_OBJECT_MAP = cl -> {
         Field[] allFields = cl.getDeclaredFields();
         List<String> mapList = new ArrayList<>();
         for (Field field : allFields) {
-            String value = GET_COMPLEX_VALUE.execute(field);
+            String value = GET_COMPLEX_VALUE.apply(field);
             if (value != null) {
                 mapList.add(value);
             }
@@ -1047,12 +1046,12 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         return COMPARE_POSITIONS.execute(getDirectionTo(element), expected);
     }
 
-    public OfElement isOn(JFunc1<Direction, Boolean> expected) {
+    public OfElement isOn(Function<Direction, Boolean> expected) {
         return new OfElement(expected, this);
     }
 
-    public boolean relativePosition(JS element, JFunc1<Direction, Boolean> expected) {
-        return expected.execute(getDirectionTo(element));
+    public boolean relativePosition(JS element, Function<Direction, Boolean> expected) {
+        return expected.apply(getDirectionTo(element));
     }
 
     public MapArray<String, Direction> relations;

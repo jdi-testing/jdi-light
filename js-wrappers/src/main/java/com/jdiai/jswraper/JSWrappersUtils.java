@@ -1,12 +1,12 @@
 package com.jdiai.jswraper;
 
-import com.epam.jdi.tools.func.JFunc1;
 import com.jdiai.jswraper.interfaces.GetValue;
 import com.jdiai.jswraper.interfaces.SetValue;
 import com.jdiai.locators.ByFrame;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 
 import static java.lang.Boolean.TYPE;
@@ -14,7 +14,7 @@ import static java.util.Arrays.stream;
 import static java.util.regex.Pattern.compile;
 
 public class JSWrappersUtils {
-    public static JFunc1<String, By> NAME_TO_LOCATOR = JSWrappersUtils::defineLocator;
+    public static Function<String, By> NAME_TO_LOCATOR = JSWrappersUtils::defineLocator;
 
     public static By defineLocator(String locator) {
         Matcher matcher = compile("^#([a-zA-Z][a-zA-Z0-9]*([-_:][a-zA-Z0-9]+)*)$").matcher(locator);
