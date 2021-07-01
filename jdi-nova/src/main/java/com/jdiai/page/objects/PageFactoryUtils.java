@@ -5,29 +5,21 @@ import com.jdiai.JS;
 import com.jdiai.Section;
 import com.jdiai.WebPage;
 import com.jdiai.annotations.Title;
-import com.jdiai.annotations.UI;
 import com.jdiai.annotations.Url;
-import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsdriver.JSException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.jdiai.JDI.driver;
 import static com.jdiai.page.objects.JDIPageFactory.CREATE_RULES;
 import static com.jdiai.page.objects.JDIPageFactory.LOCATOR_FROM_FIELD;
-import static com.jdiai.tools.JSTalkUtils.findByToBy;
-import static com.jdiai.tools.JSTalkUtils.uiToBy;
-import static com.jdiai.tools.TestIDLocators.getSmartLocator;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
