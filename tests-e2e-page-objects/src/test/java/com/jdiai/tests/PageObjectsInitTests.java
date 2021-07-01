@@ -1,6 +1,7 @@
 package com.jdiai.tests;
 
 import com.jdiai.TestInit;
+import com.jdiai.site.HomeBasePage;
 import com.jdiai.site.HomePage;
 import com.jdiai.site.JDISite;
 import com.jdiai.testng.TestNGListener;
@@ -21,6 +22,7 @@ import static com.jdiai.states.States.logout;
 @Listeners(TestNGListener.class)
 public class PageObjectsInitTests implements TestInit {
     HomePage homePage = initElements(HomePage.class);
+    HomeBasePage homeBasePage = initElements(HomeBasePage.class);
 
     @Test
     public void loginPOInClassTest() {
@@ -41,6 +43,27 @@ public class PageObjectsInitTests implements TestInit {
     @Test
     public void loginPOFromSiteTest() {
         loginScenario(JDISite.homePage);
+    }
+
+    @Test
+    public void loginPOBaseInClassTest() {
+        loginScenario(homeBasePage);
+    }
+
+    @Test
+    public void loginPOBaseInTest() {
+        HomeBasePage homePage = initElements(HomeBasePage.class);
+        loginScenario(homePage);
+    }
+
+    @Test
+    public void loginPOBaseInInitTest() {
+        loginScenario(homeBasePage());
+    }
+
+    @Test
+    public void loginPOBaseFromSiteTest() {
+        loginScenario(JDISite.homeBasePage);
     }
 
     @Test
@@ -79,4 +102,14 @@ public class PageObjectsInitTests implements TestInit {
         contactPage.descriptionInLog.should(have(text("Description: " + Triss.description)));
     }
 
+    public void loginScenario(HomeBasePage page) {
+        logout();
+        atHomePage();
+        page.userIcon.click();
+        loginAs(Roman);
+        contactPage.open();
+        contactPage.contactForm.submit(Triss);
+        contactPage.lastNameInLog.should(have(text("Last Name: " + Triss.lastName)));
+        contactPage.descriptionInLog.should(have(text("Description: " + Triss.description)));
+    }
 }

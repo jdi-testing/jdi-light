@@ -5,28 +5,21 @@ import com.jdiai.JS;
 import com.jdiai.Section;
 import com.jdiai.WebPage;
 import com.jdiai.annotations.Title;
-import com.jdiai.annotations.UI;
 import com.jdiai.annotations.Url;
-import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsdriver.JSException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.jdiai.JDI.driver;
 import static com.jdiai.page.objects.JDIPageFactory.CREATE_RULES;
-import static com.jdiai.tools.JSTalkUtils.findByToBy;
-import static com.jdiai.tools.JSTalkUtils.uiToBy;
-import static com.jdiai.tools.TestIDLocators.getSmartLocator;
+import static com.jdiai.page.objects.JDIPageFactory.LOCATOR_FROM_FIELD;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
@@ -36,21 +29,7 @@ public class PageFactoryUtils {
     }
 
     public static By getLocatorFromField(Field field) {
-        if (field.isAnnotationPresent(FindBy.class)) {
-            FindBy findBy = field.getAnnotation(FindBy.class);
-            return findByToBy(findBy);
-        }
-        if (field.isAnnotationPresent(UI.class)) {
-            UI ui = field.getAnnotation(UI.class);
-            By locator = uiToBy(ui);
-            if (locator == null) {
-                locator = getSmartLocator().execute(field.getName());
-            }
-            return locator;
-        }
-        return !isClass(field, Section.class) && (isInterface(field, HasCore.class) || isInterface(field, WebElement.class))
-            ? getSmartLocator().execute(field.getName())
-            : null;
+        return LOCATOR_FROM_FIELD.apply(field);
     }
 
     public static String getPageUrl(Class<?> cl, Field field) {
@@ -115,11 +94,11 @@ public class PageFactoryUtils {
             throw new JSException("Can't init class. Class Type is null.");
         }
         if (fieldClass.isInterface()) {
-            CreateRule rule = CREATE_RULES.firstValue(r -> r.condition.execute(fieldClass));
+            CreateRule rule = CREATE_RULES.firstValue(r -> r.condition.apply(fieldClass));
             if (rule == null) {
                 throw new JSException("Failed to find create rule for " + fieldClass.getSimpleName());
             }
-            return (T) rule.createAction.execute(fieldClass);
+            return (T) rule.createAction.apply(fieldClass);
         }
         return createWithConstructor(fieldClass);
     }

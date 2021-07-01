@@ -1,7 +1,5 @@
 package com.jdiai.jsbuilder;
 
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import com.jdiai.jsdriver.JSException;
@@ -12,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -26,19 +26,30 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JSBuilder implements IJSBuilder {
     protected List<String> variables = new ArrayList<>();
+
     protected String query = "";
+
     protected String searchScript = "";
+
     protected Supplier<JavascriptExecutor> js;
-    public static JFunc1<String, String> PROCESS_RESULT =
-        result -> result.length() > 200  ? result.substring(0, 195) + "..." : result;
+
+    public static Function<String, String> PROCESS_RESULT =
+        result -> result.length() > 200
+            ? result.substring(0, 195) + "..."
+            : result;
+
     public Integer logQuery = null;
+
     protected MapArray<String, String> useFunctions = new MapArray<>();
+
     protected IBuilderActions builderActions;
 
     public JSBuilder() { }
+
     public JSBuilder(Supplier<WebDriver> driver) {
         this(driver, null);
     }
+
     public JSBuilder(Supplier<WebDriver> driver, IBuilderActions builderActions) {
         this.js = () -> (JavascriptExecutor) driver.get();
         this.builderActions = builderActions != null
@@ -46,37 +57,48 @@ public class JSBuilder implements IJSBuilder {
             : new BuilderActions();
         this.builderActions.setBuilder(this);
     }
+
     protected String elementName = "element";
+
     public IJSBuilder setElementName(String elementName) {
         this.elementName = elementName;
         return this;
     }
+
     public String getElementName() {
         return elementName;
     }
+
     public IJSBuilder updateActions(IBuilderActions builderActions) {
         this.builderActions = builderActions;
         this.builderActions.setBuilder(this);
         return this;
     }
+
     public IJSBuilder registerFunction(String name, String function) {
         useFunctions.update(name, function);
         return this;
     }
+
     public IJSBuilder logQuery(int LogLevel) {
         this.logQuery = LogLevel;
         return this;
     }
+
     private int shouldLogQuery() {
         return logQuery != null ? logQuery : LOG_QUERY;
     }
+
     public boolean logScript() {
         return shouldLogQuery() > 0;
     }
+
     public boolean logResult() {
         return shouldLogQuery() == 2;
     }
-    public static JFunc2<Object, String, Object> EXECUTE_SCRIPT = DEFAULT_SCRIPT_EXECUTE;
+
+    public static BiFunction<Object, String, Object> EXECUTE_SCRIPT = DEFAULT_SCRIPT_EXECUTE;
+
     public Object executeQuery() {
         String jsScript = getQuery();
         if (logScript()) {
@@ -84,20 +106,25 @@ public class JSBuilder implements IJSBuilder {
         }
         Object result = getScriptResult(jsScript);
         if (result != null && logResult()) {
-            logger.info(">>> " + PROCESS_RESULT.execute(result.toString()));
+            logger.info(">>> " + PROCESS_RESULT.apply(result.toString()));
         }
         return result;
     }
+
     private Object getScriptResult(String jsScript) {
         try {
-            return EXECUTE_SCRIPT.execute(js.get(), jsScript);
+            return EXECUTE_SCRIPT.apply(js.get(), jsScript);
         } finally {
             cleanup();
         }
     }
-    public static JFunc2<Object, String, List<String>> EXECUTE_LIST_SCRIPT = DEFAULT_LIST_SCRIPT_EXECUTE;
+
+    public static BiFunction<Object, String, List<String>> EXECUTE_LIST_SCRIPT = DEFAULT_LIST_SCRIPT_EXECUTE;
+
     private static boolean smartStringify = true;
+
     public static void switchOffStringify() { smartStringify = false; }
+
     public List<String> executeAsList() {
         String jsScript = getQuery();
         if (logScript()) {
@@ -105,53 +132,66 @@ public class JSBuilder implements IJSBuilder {
         }
         List<String> result;
         try {
-            result = EXECUTE_LIST_SCRIPT.execute(js.get(), jsScript);
+            result = EXECUTE_LIST_SCRIPT.apply(js.get(), jsScript);
         } finally {
             cleanup();
         }
         if (result != null && logResult()) {
-            logger.info(">>> " + PROCESS_RESULT.execute(result.toString()));
+            logger.info(">>> " + PROCESS_RESULT.apply(result.toString()));
         }
         return result;
     }
+
     public String getQuery(String result) {
         return getQuery() + "return " + result;
     }
+
     public IJSBuilder addJSCode(String code) {
         query += code;
         return this;
     }
+
     public IJSBuilder setSearchScript(String code) {
         searchScript += code;
         return this;
     }
+
     public IJSBuilder oneToOne(String ctx, By locator) {
         return addJSCode(builderActions.oneToOne(ctx, locator));
     }
+
     public IJSBuilder listToOne(By locator) {
         return addJSCode(builderActions.listToOne(locator));
     }
+
     public IJSBuilder oneToList(String ctx, By locator) {
         return addJSCode(builderActions.oneToList(ctx, locator));
     }
+
     public IJSBuilder listToList(By locator) {
         return addJSCode(builderActions.listToList(locator));
     }
+
     public IJSBuilder doAction(String collectResult) {
         return addJSCode(builderActions.doAction(collectResult));
     }
+
     public IJSBuilder getResult(String collectResult) {
         return addJSCode(builderActions.getResult(getCollector(collectResult)));
     }
+
     public IJSBuilder getResultList(String collectResult) {
         return addJSCode(builderActions.getResultList(getCollector(collectResult)));
     }
+
     public IJSBuilder trigger(String event) {
         return trigger(event,"'bubbles': true");
     }
+
     public IJSBuilder trigger(String event, String options) {
         return addJSCode("element.dispatchEvent(new Event('" + event + "', { " + options + " }));\n");
     }
+
     protected String getCollector(String collectResult) {
         if (collectResult == null) {
             return "";

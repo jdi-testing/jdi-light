@@ -1,14 +1,15 @@
 package com.jdiai.visual;
 
-import com.epam.jdi.tools.func.JFunc2;
 import org.openqa.selenium.Point;
+
+import java.util.function.BiFunction;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static java.lang.String.format;
 
 public class Direction {
-    public static JFunc2<Direction, Direction, Boolean> VECTOR_SIMILARITY =
+    public static BiFunction<Direction, Direction, Boolean> VECTOR_SIMILARITY =
             (v1, v2) -> v1.angle == v2.angle && v1.length == v2.length;
 
     private int angle;
@@ -34,7 +35,7 @@ public class Direction {
     public int angle() { return angle; }
     public double length() { return length; }
     public boolean isSimilarTo(Direction vector) {
-        return VECTOR_SIMILARITY.execute(this, vector);
+        return VECTOR_SIMILARITY.apply(this, vector);
     }
     @Override
     public String toString() {

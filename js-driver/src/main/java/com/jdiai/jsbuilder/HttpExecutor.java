@@ -15,14 +15,15 @@ import static org.openqa.selenium.remote.ErrorCodes.JAVASCRIPT_ERROR;
 import static org.openqa.selenium.remote.ErrorCodes.SUCCESS;
 
 public class HttpExecutor {
-
     static final String FAILED_TO_EXECUTE_SCRIPT = "Failed to execute script:\n";
+
     public static Object execute(WebDriver driver, String script) {
         if (!(driver instanceof RemoteWebDriver)) {
             throw new JSException("Failed to execute jsScript: Selenium execute script work only with RemoteWebDriver");
         }
         return execute((RemoteWebDriver) driver, script);
     }
+
     public static Object execute(RemoteWebDriver driver, String script) {
         Command command = new Command(driver.getSessionId(), EXECUTE_SCRIPT,
             ImmutableMap.of("script", script, "args", new Object[]{}));

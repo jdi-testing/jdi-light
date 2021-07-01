@@ -1,11 +1,12 @@
 package com.jdiai.asserts;
 
-import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 
-public interface Condition extends JFunc1<HasCore, Boolean>, HasName {
+import java.util.function.Function;
+
+public interface Condition extends Function<HasCore, Boolean>, HasName {
     MapArray<Integer, String> NAMES = new MapArray<>();
 
     default Condition setName(String name) {
@@ -24,10 +25,9 @@ public interface Condition extends JFunc1<HasCore, Boolean>, HasName {
             .replace("%element%", "'" + element.getName() + "'");
     }
 
-    @Override
     default Boolean execute(HasCore element) {
         try {
-            return invoke(element);
+            return apply(element);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

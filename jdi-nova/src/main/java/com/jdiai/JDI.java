@@ -1,7 +1,6 @@
 package com.jdiai;
 
 import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JFunc2;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.jsbuilder.ConsoleLogger;
@@ -15,6 +14,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
+import java.util.function.BiFunction;
 
 import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.jdiai.LoggerTypes.CONSOLE;
@@ -43,7 +43,7 @@ public class JDI {
         return DRIVER.get();
     }
 
-    public static JFunc2<Object, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;
+    public static BiFunction<Object, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;
 
     public static Object jsExecute(String script, Object... params) {
         return ((JavascriptExecutor) driver()).executeScript(script, params);
@@ -193,7 +193,7 @@ public class JDI {
     }
 
     public static JS $(String locator) {
-        return new JS(JDI::driver, NAME_TO_LOCATOR.execute(locator));
+        return new JS(JDI::driver, NAME_TO_LOCATOR.apply(locator));
     }
 
     public static JS $(String... locators) {

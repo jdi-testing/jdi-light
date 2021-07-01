@@ -88,7 +88,7 @@ public class JSSmart extends JSElement {
         driver.getOne(validateXpath(objectMap)).asString();
     }
     public <T> T getEntity() {
-        return getEntity(GET_ENTITY_MAP.execute(entity));
+        return getEntity(GET_ENTITY_MAP.apply(entity));
     }
     public <T> T getEntity(List<String> attributes) {
         return (T) driver.getOne(attributesToJson(attributes)).asObject(entity);
@@ -104,7 +104,7 @@ public class JSSmart extends JSElement {
         return map(driver.getList(validateXpath(objectMap)).asObject(entity), el -> (T) el);
     }
     public <T> List<T> getEntityList() {
-        return getEntityList(GET_ENTITY_MAP.execute(entity));
+        return getEntityList(GET_ENTITY_MAP.apply(entity));
     }
     public <T> List<T> getEntityList(List<String> attributes) {
         return map(driver.getList(attributesToJson(attributes)).asObject(entity), el -> (T) el);

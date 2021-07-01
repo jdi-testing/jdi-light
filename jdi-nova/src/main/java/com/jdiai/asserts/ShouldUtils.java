@@ -46,7 +46,7 @@ public class ShouldUtils {
                     checkOutOfTime(core, timer, conditions);
                     String message = "Assert that " + condition.getName(core);
                     logger.debug(message);
-                    foundAll = condition.execute(core);
+                    foundAll = condition.apply(core);
                     if (!foundAll) {
                         break;
                     }
@@ -54,23 +54,13 @@ public class ShouldUtils {
             }
             return foundAll;
         } catch (Exception ex) {
-            boolean ignoreFail = IGNORE_FAILURE.execute(core, ex);
+            boolean ignoreFail = IGNORE_FAILURE.apply(core, ex);
             if (timer.isRunning() && ignoreFail) {
                 checkConditions(core, conditions, timer);
             }
             throw throwAssert(ex, ">> Assert failed");
         }
     }
-    //private JFunc2<HasCore, Exception, Boolean> ignoreFailure = null;
-    //private JFunc2<HasCore, Exception, Boolean> getIgnoreFailureFunc() {
-    //    return ignoreFailure != null
-    //            ? ignoreFailure
-    //            : IGNORE_FAILURE;
-    //}
-    //public static <T> HasCore ignoreFailure(JFunc2<JS, Exception, Boolean> ignoreFailureFunc) {
-    //    ignoreFailure = ignoreFailureFunc;
-    //    return this;
-    //}
 
     private static void checkOutOfTime(HasCore core, Timer timer, Condition... conditions) {
         if (timer.isRunning()) {

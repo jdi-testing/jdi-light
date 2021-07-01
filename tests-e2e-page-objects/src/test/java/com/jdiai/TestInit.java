@@ -1,5 +1,6 @@
 package com.jdiai;
 
+import com.jdiai.site.HomeBasePage;
 import com.jdiai.site.HomePage;
 import com.jdiai.site.JDISite;
 import org.testng.annotations.AfterSuite;
@@ -15,7 +16,13 @@ import static com.jdiai.tools.TestIDLocators.ID_LOCATOR;
 import static com.jdiai.tools.TestIDLocators.SMART_LOCATOR;
 
 public interface TestInit {
-    default HomePage homePage() { return initElements(HomePage.class); }
+    default HomePage homePage() {
+        return initElements(HomePage.class);
+    }
+
+    default HomeBasePage homeBasePage() {
+        return initElements(HomeBasePage.class);
+    }
 
     @BeforeSuite(alwaysRun = true)
     default void setUp() {

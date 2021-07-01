@@ -2,8 +2,6 @@ package com.jdiai;
 
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import com.google.gson.JsonObject;
@@ -38,6 +36,7 @@ import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -220,12 +219,12 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         return (WebElement) ctx;
     }
 
-    public void actionsWithElement(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(actions.get().moveToElement(this), this).build().perform();
+    public void actionsWithElement(BiFunction<Actions, WebElement, Actions> action) {
+        action.apply(actions.get().moveToElement(this), this).build().perform();
     }
 
-    public void actions(JFunc2<Actions, WebElement, Actions> action) {
-        action.execute(actions.get(), this).build().perform();
+    public void actions(BiFunction<Actions, WebElement, Actions> action) {
+        action.apply(actions.get(), this).build().perform();
     }
 
     public String getName() {
@@ -260,7 +259,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public void click() {
-        doAction("click()");
+        doAction("click();");
     }
     public void clickCenter() {
         doAction("let rect = element.getBoundingClientRect();" +
@@ -631,7 +630,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
             return (X) screen.asByteStream();
         }
         if (outputType == FILE) {
-            return (X) screen.asFile(IMAGE_TEMPLATE.execute("", this));
+            return (X) screen.asFile(IMAGE_TEMPLATE.apply("", this));
         }
         throw new JSException("Failed to get screenshot - unknown type: " + outputType);
     }
@@ -657,7 +656,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     protected String getScreenshotName(String tag) {
-        return IMAGE_TEMPLATE.execute(tag, this);
+        return IMAGE_TEMPLATE.apply(tag, this);
     }
 
     public StreamToImageVideo makeScreenshot(ImageTypes imageType) {
@@ -741,7 +740,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public <T> T getEntity(Class<T> cl) {
-        return getEntity(GET_OBJECT_MAP.execute(cl), cl);
+        return getEntity(GET_OBJECT_MAP.apply(cl), cl);
     }
 
     public <T> T getEntity() {
@@ -761,7 +760,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS find(String by) {
-        return find(NAME_TO_LOCATOR.execute(by));
+        return find(NAME_TO_LOCATOR.apply(by));
     }
 
     public JS find(By by) {
@@ -798,7 +797,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         js.setEntity(objectMap);
     }
 
-    public static JFunc1<Field, String> GET_COMPLEX_VALUE = field -> {
+    public static Function<Field, String> GET_COMPLEX_VALUE = field -> {
         if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class)) {
             return null;
         }
@@ -810,7 +809,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         return null;
     };
 
-    public static JFunc2<Field, Object, String> SET_COMPLEX_VALUE = (field, value)-> {
+    public static BiFunction<Field, Object, String> SET_COMPLEX_VALUE = (field, value)-> {
         if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class))
             return null;
         By locator = getLocatorFromField(field);
@@ -821,11 +820,11 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         return setValueType(field, element, value);
     };
 
-    public static JFunc1<Class<?>, String> GET_OBJECT_MAP = cl -> {
+    public static Function<Class<?>, String> GET_OBJECT_MAP = cl -> {
         Field[] allFields = cl.getDeclaredFields();
         List<String> mapList = new ArrayList<>();
         for (Field field : allFields) {
-            String value = GET_COMPLEX_VALUE.execute(field);
+            String value = GET_COMPLEX_VALUE.apply(field);
             if (value != null) {
                 mapList.add(value);
             }
@@ -834,7 +833,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     };
 
     public <T> List<T> getEntityList(Class<T> cl) {
-        return getEntityList(GET_OBJECT_MAP.execute(cl), cl);
+        return getEntityList(GET_OBJECT_MAP.apply(cl), cl);
     }
 
     public void fill(Object obj) {
@@ -868,7 +867,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
             if (fieldValue == null) {
                 continue;
             }
-            String value = SET_COMPLEX_VALUE.execute(field, fieldValue);
+            String value = SET_COMPLEX_VALUE.apply(field, fieldValue);
             if (value != null) {
                 mapList.add(value);
             }
@@ -887,7 +886,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS findFirst(String by, Function<JS, String> condition) {
-        return findFirst(NAME_TO_LOCATOR.execute(by), condition.apply(this));
+        return findFirst(NAME_TO_LOCATOR.apply(by), condition.apply(this));
     }
 
     public JS findFirst(By by, Function<JS, String> condition) {
@@ -895,7 +894,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS findFirst(String by, String condition) {
-        return findFirst(NAME_TO_LOCATOR.execute(by), condition);
+        return findFirst(NAME_TO_LOCATOR.apply(by), condition);
     }
 
     public JS get(int index) {
@@ -903,7 +902,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS get(String by, int index) {
-        return get(NAME_TO_LOCATOR.execute(by), index);
+        return get(NAME_TO_LOCATOR.apply(by), index);
     }
 
     public JS get(By by, int index) {
@@ -936,7 +935,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
 
     public JS findFirst(By by, String condition) {
         String script = "element = elements.find(e => { const fel = " +
-            MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+"; " +
+            MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder())) + "; " +
             "return fel && " + handleCondition(condition, "fel") + "; });\n";
         return listToOne(script);
     }
@@ -1021,11 +1020,11 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public void visualValidation(String tag) {
-        VISUAL_VALIDATION.execute(tag, this);
+        VISUAL_VALIDATION.accept(tag, this);
     }
 
     public void visualCompareWith(JS element) {
-        COMPARE_IMAGES.execute(imagesData().imageFile, element.imagesData().imageFile);
+        COMPARE_IMAGES.apply(imagesData().imageFile, element.imagesData().imageFile);
     }
 
     public Direction getDirectionTo(WebElement element) {
@@ -1044,15 +1043,15 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public boolean relativePosition(JS element, Direction expected) {
-        return COMPARE_POSITIONS.execute(getDirectionTo(element), expected);
+        return COMPARE_POSITIONS.apply(getDirectionTo(element), expected);
     }
 
-    public OfElement isOn(JFunc1<Direction, Boolean> expected) {
+    public OfElement isOn(Function<Direction, Boolean> expected) {
         return new OfElement(expected, this);
     }
 
-    public boolean relativePosition(JS element, JFunc1<Direction, Boolean> expected) {
-        return expected.execute(getDirectionTo(element));
+    public boolean relativePosition(JS element, Function<Direction, Boolean> expected) {
+        return expected.apply(getDirectionTo(element));
     }
 
     public MapArray<String, Direction> relations;
@@ -1071,7 +1070,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     private boolean similar(Pair<String, Direction> relation, Direction expectedRelation) {
-        return VECTOR_SIMILARITY.execute(relation.value, expectedRelation);
+        return VECTOR_SIMILARITY.apply(relation.value, expectedRelation);
     }
 
     public List<String> validateRelations() {

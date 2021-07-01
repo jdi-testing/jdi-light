@@ -18,7 +18,7 @@ public final class JSTalkUtils {
      public static By uiToBy(UI locator) {
          if (locator == null) return null;
          if (!locator.value().isEmpty()) {
-             return NAME_TO_LOCATOR.execute(locator.value());
+             return NAME_TO_LOCATOR.apply(locator.value());
          }
          if (!locator.id().isEmpty())
              return By.id(locator.id());

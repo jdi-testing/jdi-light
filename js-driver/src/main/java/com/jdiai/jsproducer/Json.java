@@ -1,12 +1,12 @@
 package com.jdiai.jsproducer;
 
-import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.*;
+import java.util.function.Function;
 
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -38,50 +38,51 @@ public class Json extends MapArray<String, String> {
         }
     }
 
-    public Json(Collection<String> collection, JFunc1<String, String> value) {
-        this(collection, k -> k, value::execute);
+    public Json(Collection<String> collection, Function<String, String> value) {
+        this(collection, k -> k, value::apply);
     }
-    public <T> Json(Collection<T> collection, JFunc1<T, String> keyFunc, JFunc1<T, String> valueFunc) {
+    public <T> Json(Collection<T> collection, Function<T, String> keyFunc, Function<T, String> valueFunc) {
         this(collection, keyFunc, valueFunc, false);
     }
-    public <T> Json(Collection<T> collection, JFunc1<T, String> keyFunc, JFunc1<T, String> valueFunc, boolean ignoreNotUnique) {
+    public <T> Json(Collection<T> collection, Function<T, String> keyFunc, Function<T, String> valueFunc, boolean ignoreNotUnique) {
         this();
         try {
             for (T t : collection) {
-                if (ignoreNotUnique)
-                    addNew(keyFunc.invoke(t), valueFunc.invoke(t));
-                else
-                    add(keyFunc.invoke(t), valueFunc.invoke(t));
+                if (ignoreNotUnique) {
+                    addNew(keyFunc.apply(t), valueFunc.apply(t));
+                } else {
+                    add(keyFunc.apply(t), valueFunc.apply(t));
+                }
             }
         } catch (Exception ex) {
             throw new RuntimeException(format("Can't create MapArray. Exception: %s", ex.getMessage()));
         }
     }
 
-    public Json(String[] array, JFunc1<String, String> value) {
+    public Json(String[] array, Function<String, String> value) {
         this(newList(array), value);
     }
-    public <T> Json(T[] array, JFunc1<T, String> key, JFunc1<T, String> value) {
+    public <T> Json(T[] array, Function<T, String> key, Function<T, String> value) {
         this(array, key, value, false);
     }
-    public <T> Json(T[] array, JFunc1<T, String> key, JFunc1<T, String> value, boolean ignoreNotUnique) {
+    public <T> Json(T[] array, Function<T, String> key, Function<T, String> value, boolean ignoreNotUnique) {
         this(newList(array), key, value, ignoreNotUnique);
     }
 
-    public Json(int count, JFunc1<Integer, String> keyFunc, JFunc1<Integer, String> value) {
+    public Json(int count, Function<Integer, String> keyFunc, Function<Integer, String> value) {
         this();
         try {
             for (int i = 0; i < count; i++)
-                add(keyFunc.invoke(i), value.invoke(i));
+                add(keyFunc.apply(i), value.apply(i));
         } catch (Exception ex) {
             throw new RuntimeException(format("Can't create MapArray. Exception: %s", ex.getMessage()));
         }
     }
-    public Json(int count, JFunc1<Integer, Pair<String, String>> pairFunc) {
+    public Json(int count, Function<Integer, Pair<String, String>> pairFunc) {
         this();
         try {
             for (int i = 0; i < count; i++) {
-                Pair<String, String> pair = pairFunc.invoke(i);
+                Pair<String, String> pair = pairFunc.apply(i);
                 add(pair.key, pair.value);
             }
         } catch (Exception ex) {

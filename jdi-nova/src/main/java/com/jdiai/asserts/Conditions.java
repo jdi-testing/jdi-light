@@ -43,43 +43,43 @@ public abstract class Conditions {
 
     public static Condition above(HasCore element) {
         return condition("%element% is %not% on the Top of '" + element.core().getFullName() + "'",
-            el -> HIGHER.execute(element.getDirectionTo(el.core())));
+            el -> HIGHER.apply(element.getDirectionTo(el.core())));
     }
     public static Condition below(HasCore element) {
         return condition("%element% is %not% Below '" + element.core().getFullName() + "'",
-            el -> LOWER.execute(element.getDirectionTo(el.core())));
+            el -> LOWER.apply(element.getDirectionTo(el.core())));
     }
     public static Condition onLeftOf(HasCore element) {
         return condition("%element% is %not% on the Left of '" + element.core().getFullName() + "'",
-            el -> LEFT.execute(element.getDirectionTo(el.core())));
+            el -> LEFT.apply(element.getDirectionTo(el.core())));
     }
     public static Condition onRightOf(HasCore element) {
         return condition("%element% is %not% on the Right of '" + element.core().getFullName() + "'",
-            el -> RIGHT.execute(element.getDirectionTo(el.core())));
+            el -> RIGHT.apply(element.getDirectionTo(el.core())));
     }
     public static Condition onTopLeftOf(HasCore element) {
         return condition("%element% is %not% on the Top-Left of '" + element.core().getFullName() + "'",
-            el -> TOP_LEFT.execute(element.getDirectionTo(el.core())));
+            el -> TOP_LEFT.apply(element.getDirectionTo(el.core())));
     }
     public static Condition onTopRightOf(HasCore element) {
         return condition("%element% is %not% on the Top-Right of '" + element.core().getFullName() + "'",
-            el -> TOP_RIGHT.execute(element.getDirectionTo(el.core())));
+            el -> TOP_RIGHT.apply(element.getDirectionTo(el.core())));
     }
     public static Condition onBottomLeftOf(HasCore element) {
         return condition("%element% is %not% on the Bottom-Left of '" + element.core().getFullName() + "'",
-            el -> BOTTOM_LEFT.execute(element.getDirectionTo(el.core())));
+            el -> BOTTOM_LEFT.apply(element.getDirectionTo(el.core())));
     }
     public static Condition onBottomRightOf(HasCore element) {
         return condition("%element% is %not% on the Bottom-Right of '" + element.core().getFullName() + "'",
-            el -> BOTTOM_RIGHT.execute(element.getDirectionTo(el.core())));
+            el -> BOTTOM_RIGHT.apply(element.getDirectionTo(el.core())));
     }
     public static Condition onSameLine(HasCore element) {
         return condition("%element% is %not% on the same line '" + element.core().getFullName() + "'",
-            el -> SAME_HORIZONTAL.execute(element.getDirectionTo(el.core())));
+            el -> SAME_HORIZONTAL.apply(element.getDirectionTo(el.core())));
     }
     public static Condition onSameVerticalLine(HasCore element) {
         return condition("%element% is %not% on the same vertical line '" + element.core().getFullName() + "'",
-            el -> SAME_VERTICAL.execute(element.getDirectionTo(el.core())));
+            el -> SAME_VERTICAL.apply(element.getDirectionTo(el.core())));
     }
 
     public static Condition attribute(String attributeName) {
@@ -184,13 +184,22 @@ public abstract class Conditions {
     public static <T> Condition haveAll(T... entities) {
         return haveCondition(true, false, asList(entities));
     }
+
+    public static Condition noItems() {
+        return condition("%element% has no item",
+                el -> el.core().size() == 0);
+    }
+    public static Condition someItems() {
+        return condition("%element% is not empty",
+                el -> el.core().size() > 0);
+    }
     public static Condition size(int size) {
-        return condition("%element% have '" + size + "' elements",
+        return condition("%element% has '" + size + "' elements",
                 el -> el.core().size() == size);
     }
     public static Condition size(Function<Integer, Boolean> sizeFunc) {
-        return condition("%element% have expected amount of elements",
-                el -> sizeFunc.apply(el.core().size()));
+        return condition("%element% has expected amount of elements",
+            el -> sizeFunc.apply(el.core().size()));
     }
     public static Condition text(String text) {
         return condition("%element% has %no% text='" + text + "'",
@@ -223,7 +232,7 @@ public abstract class Conditions {
         return not(condition);
     }
     public static Condition not(Condition condition) {
-        return condition(getNotName(condition), el -> !condition.execute(el));
+        return condition(getNotName(condition), el -> !condition.apply(el));
     }
     private static String getNotName(Condition condition) {
         String name = condition.getName();
@@ -261,7 +270,7 @@ public abstract class Conditions {
             throw new JSException("Should have validation require at least one element");
         }
         return condition("%element% have %no% [" + print(singletonList(entities), Object::toString) + "]",
-                el -> compareTwoLists(el.core(), checkSize, sameOrder, entities));
+            el -> compareTwoLists(el.core(), checkSize, sameOrder, entities));
     }
 
     private static <T> boolean compareTwoLists(HasCore el, boolean checkSize, boolean sameOrder, List<T> entities) {
