@@ -187,8 +187,9 @@ public class InitActions {
     );
 
     public static IBaseElement elementSetup(SiteInfo info) {
-        if (!isInterface(info.instance.getClass(), IBaseElement.class))
+        if (!isInterface(info.instance.getClass(), IBaseElement.class)) {
             throw exception("Setup element '%s' failed. Not a base element", info.name());
+        }
         IBaseElement jdi = ((IBaseElement) info.instance);
         jdi.base().setup(info);
         return jdi;

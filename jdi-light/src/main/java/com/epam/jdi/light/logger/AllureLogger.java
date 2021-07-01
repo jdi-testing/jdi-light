@@ -131,8 +131,8 @@ public class AllureLogger {
         String detailsUUID = startStep(stepName);
         try {
             UIElement uiElement = isInterface(element.getClass(), ICoreElement.class)
-                    ? ((ICoreElement)element).core()
-                    : $(element);
+                ? ((ICoreElement)element).core()
+                : $(element);
             String html = uiElement.printHtml();
             attachText("HTML Code", "text/html", html);
         } catch (Exception ex) {
@@ -280,8 +280,8 @@ public class AllureLogger {
         try {
             Timer.sleep(200);
             return SCREEN.tool.equalsIgnoreCase("robot") || isAssert
-                    ? takeRobotScreenshot(screenName)
-                    : takeScreen(screenName);
+                ? takeRobotScreenshot(screenName)
+                : takeScreen(screenName);
         } catch (Exception ignore) { return ""; }
     }
     public static String getHtmlErrors() {

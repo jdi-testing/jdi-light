@@ -12,7 +12,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  */
 public class RemoteDriverInfo {
     public static final String SELENIUM_LOCAL_HOST = "http://localhost:4444/wd/hub";
-    public static final String SELENIDE_LOCAL = "http://localhost:4444/wd/hub";
+    public static final String SELENOID_LOCAL = "http://localhost:4444/wd/hub";
     public static String SAUCE_LABS = "http://ondemand.eu-central-1.saucelabs.com/wd/hub";
     public static String browserstack() {
         return browserstack(getenv("USERNAME"), getenv("ACCESS_KEY"));

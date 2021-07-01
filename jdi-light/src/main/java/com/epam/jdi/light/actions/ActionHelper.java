@@ -65,6 +65,7 @@ import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.currentThread;
 import static java.util.Arrays.asList;
 import static java.util.Collections.reverse;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.*;
 
 /**
@@ -448,8 +449,9 @@ public class ActionHelper {
     static String getDefaultName(JoinPoint jp, MethodSignature method) {
         MapArray<String, Object> args = methodArgs(jp, method);
         String methodName = splitCamelCase(getMethodName(jp));
-        if (args.size() == 0)
+        if (isEmpty(args)) {
             return methodName;
+        }
         String argsAsString = argsToString(args);
         return format("%s%s", methodName, argsAsString);
     }
