@@ -16,7 +16,7 @@ import static com.jdiai.page.objects.PageFactoryUtils.setFieldValue;
 
 public class PageFactory {
     public static <T> T initElements(Class<T> cl) {
-        Object page = CREATE_PAGE.execute(cl);
+        Object page = CREATE_PAGE.apply(cl);
         initPageElements(page);
         return (T) page;
     }
@@ -30,7 +30,7 @@ public class PageFactory {
     private static void createAndSetupField(Object page, Field field) {
         InitInfo info = new InitInfo(page, field);
         MapArray<String, SetupRule> rules = SETUP_RULES.filter(
-                rule -> rule.condition.execute(info));
+            rule -> rule.condition.execute(info));
         for (Pair<String, SetupRule> rule : rules) {
             logger.debug("Setup rule '%s' for field %s", rule.key, field.getName());
             rule.value.action.execute(info);

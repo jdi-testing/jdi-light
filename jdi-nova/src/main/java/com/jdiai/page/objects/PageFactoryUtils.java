@@ -24,6 +24,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.jdiai.JDI.driver;
 import static com.jdiai.page.objects.JDIPageFactory.CREATE_RULES;
+import static com.jdiai.page.objects.JDIPageFactory.LOCATOR_FROM_FIELD;
 import static com.jdiai.tools.JSTalkUtils.findByToBy;
 import static com.jdiai.tools.JSTalkUtils.uiToBy;
 import static com.jdiai.tools.TestIDLocators.getSmartLocator;
@@ -36,21 +37,7 @@ public class PageFactoryUtils {
     }
 
     public static By getLocatorFromField(Field field) {
-        if (field.isAnnotationPresent(FindBy.class)) {
-            FindBy findBy = field.getAnnotation(FindBy.class);
-            return findByToBy(findBy);
-        }
-        if (field.isAnnotationPresent(UI.class)) {
-            UI ui = field.getAnnotation(UI.class);
-            By locator = uiToBy(ui);
-            if (locator == null) {
-                locator = getSmartLocator().execute(field.getName());
-            }
-            return locator;
-        }
-        return !isClass(field, Section.class) && (isInterface(field, HasCore.class) || isInterface(field, WebElement.class))
-            ? getSmartLocator().execute(field.getName())
-            : null;
+        return LOCATOR_FROM_FIELD.apply(field);
     }
 
     public static String getPageUrl(Class<?> cl, Field field) {
