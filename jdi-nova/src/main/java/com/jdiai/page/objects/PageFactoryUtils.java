@@ -94,11 +94,11 @@ public class PageFactoryUtils {
             throw new JSException("Can't init class. Class Type is null.");
         }
         if (fieldClass.isInterface()) {
-            CreateRule rule = CREATE_RULES.firstValue(r -> r.condition.execute(fieldClass));
+            CreateRule rule = CREATE_RULES.firstValue(r -> r.condition.apply(fieldClass));
             if (rule == null) {
                 throw new JSException("Failed to find create rule for " + fieldClass.getSimpleName());
             }
-            return (T) rule.createAction.execute(fieldClass);
+            return (T) rule.createAction.apply(fieldClass);
         }
         return createWithConstructor(fieldClass);
     }

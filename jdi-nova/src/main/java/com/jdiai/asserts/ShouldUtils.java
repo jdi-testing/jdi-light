@@ -46,7 +46,7 @@ public class ShouldUtils {
                     checkOutOfTime(core, timer, conditions);
                     String message = "Assert that " + condition.getName(core);
                     logger.debug(message);
-                    foundAll = condition.execute(core);
+                    foundAll = condition.apply(core);
                     if (!foundAll) {
                         break;
                     }
@@ -54,7 +54,7 @@ public class ShouldUtils {
             }
             return foundAll;
         } catch (Exception ex) {
-            boolean ignoreFail = IGNORE_FAILURE.execute(core, ex);
+            boolean ignoreFail = IGNORE_FAILURE.apply(core, ex);
             if (timer.isRunning() && ignoreFail) {
                 checkConditions(core, conditions, timer);
             }

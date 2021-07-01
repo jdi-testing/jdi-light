@@ -25,10 +25,9 @@ public interface Condition extends Function<HasCore, Boolean>, HasName {
             .replace("%element%", "'" + element.getName() + "'");
     }
 
-    @Override
     default Boolean execute(HasCore element) {
         try {
-            return invoke(element);
+            return apply(element);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

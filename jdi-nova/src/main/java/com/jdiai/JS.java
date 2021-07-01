@@ -630,7 +630,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
             return (X) screen.asByteStream();
         }
         if (outputType == FILE) {
-            return (X) screen.asFile(IMAGE_TEMPLATE.execute("", this));
+            return (X) screen.asFile(IMAGE_TEMPLATE.apply("", this));
         }
         throw new JSException("Failed to get screenshot - unknown type: " + outputType);
     }
@@ -656,7 +656,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     protected String getScreenshotName(String tag) {
-        return IMAGE_TEMPLATE.execute(tag, this);
+        return IMAGE_TEMPLATE.apply(tag, this);
     }
 
     public StreamToImageVideo makeScreenshot(ImageTypes imageType) {
@@ -740,7 +740,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public <T> T getEntity(Class<T> cl) {
-        return getEntity(GET_OBJECT_MAP.execute(cl), cl);
+        return getEntity(GET_OBJECT_MAP.apply(cl), cl);
     }
 
     public <T> T getEntity() {
@@ -760,7 +760,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS find(String by) {
-        return find(NAME_TO_LOCATOR.execute(by));
+        return find(NAME_TO_LOCATOR.apply(by));
     }
 
     public JS find(By by) {
@@ -833,7 +833,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     };
 
     public <T> List<T> getEntityList(Class<T> cl) {
-        return getEntityList(GET_OBJECT_MAP.execute(cl), cl);
+        return getEntityList(GET_OBJECT_MAP.apply(cl), cl);
     }
 
     public void fill(Object obj) {
@@ -867,7 +867,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
             if (fieldValue == null) {
                 continue;
             }
-            String value = SET_COMPLEX_VALUE.execute(field, fieldValue);
+            String value = SET_COMPLEX_VALUE.apply(field, fieldValue);
             if (value != null) {
                 mapList.add(value);
             }
@@ -886,7 +886,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS findFirst(String by, Function<JS, String> condition) {
-        return findFirst(NAME_TO_LOCATOR.execute(by), condition.apply(this));
+        return findFirst(NAME_TO_LOCATOR.apply(by), condition.apply(this));
     }
 
     public JS findFirst(By by, Function<JS, String> condition) {
@@ -894,7 +894,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS findFirst(String by, String condition) {
-        return findFirst(NAME_TO_LOCATOR.execute(by), condition);
+        return findFirst(NAME_TO_LOCATOR.apply(by), condition);
     }
 
     public JS get(int index) {
@@ -902,7 +902,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS get(String by, int index) {
-        return get(NAME_TO_LOCATOR.execute(by), index);
+        return get(NAME_TO_LOCATOR.apply(by), index);
     }
 
     public JS get(By by, int index) {
@@ -1020,11 +1020,11 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public void visualValidation(String tag) {
-        VISUAL_VALIDATION.execute(tag, this);
+        VISUAL_VALIDATION.accept(tag, this);
     }
 
     public void visualCompareWith(JS element) {
-        COMPARE_IMAGES.execute(imagesData().imageFile, element.imagesData().imageFile);
+        COMPARE_IMAGES.apply(imagesData().imageFile, element.imagesData().imageFile);
     }
 
     public Direction getDirectionTo(WebElement element) {
@@ -1043,7 +1043,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public boolean relativePosition(JS element, Direction expected) {
-        return COMPARE_POSITIONS.execute(getDirectionTo(element), expected);
+        return COMPARE_POSITIONS.apply(getDirectionTo(element), expected);
     }
 
     public OfElement isOn(Function<Direction, Boolean> expected) {
@@ -1070,7 +1070,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     private boolean similar(Pair<String, Direction> relation, Direction expectedRelation) {
-        return VECTOR_SIMILARITY.execute(relation.value, expectedRelation);
+        return VECTOR_SIMILARITY.apply(relation.value, expectedRelation);
     }
 
     public List<String> validateRelations() {

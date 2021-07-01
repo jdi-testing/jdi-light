@@ -31,10 +31,10 @@ public class PageFactory {
     private static void createAndSetupField(Object page, Field field) {
         InitInfo info = new InitInfo(page, field);
         MapArray<String, SetupRule> rules = SETUP_RULES.filter(
-            rule -> rule.condition.execute(info));
+            rule -> rule.condition.apply(info));
         for (Pair<String, SetupRule> rule : rules) {
             logger.debug("Setup rule '%s' for field %s", rule.key, field.getName());
-            rule.value.action.execute(info);
+            rule.value.action.accept(info);
         }
         setFieldValue(field, page, info.instance);
     }

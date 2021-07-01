@@ -39,7 +39,7 @@ public class Json extends MapArray<String, String> {
     }
 
     public Json(Collection<String> collection, Function<String, String> value) {
-        this(collection, k -> k, value::execute);
+        this(collection, k -> k, value::apply);
     }
     public <T> Json(Collection<T> collection, Function<T, String> keyFunc, Function<T, String> valueFunc) {
         this(collection, keyFunc, valueFunc, false);

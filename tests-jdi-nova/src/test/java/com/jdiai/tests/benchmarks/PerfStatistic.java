@@ -27,15 +27,15 @@ public class PerfStatistic {
             .getProperty("run.performance")) ? count : 1;
         for (int i = 0; i < executionCount; i++) {
             System.out.println("RUN#"+ i);
-            precondition.execute();
+            precondition.apply();
             Timer t = new Timer();
-            T seleniumResult = seleniumAction.execute();
+            T seleniumResult = seleniumAction.apply();
             long seleniumTime = t.timePassedInMSec();
             seleniumStats.add(seleniumTime);
 
-            precondition.execute();
+            precondition.apply();
             t = new Timer();
-            T jdiResult = jdiAction.execute();
+            T jdiResult = jdiAction.apply();
             long jsTime = t.timePassedInMSec();
             jsStats.add(jsTime);
             System.out.println(testName + " Ratio: " + df2((double)seleniumTime/jsTime));
