@@ -9,7 +9,7 @@ public class ContactPage extends WebPage {
     public JS lastNameInLog;
     @UI(".descr-res")
     public JS descriptionInLog;
-    public JS contactForm;
+    @UI public JS contactForm;
 
     @UI("#contact-form")
     public ContactForm contacts;

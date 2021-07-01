@@ -15,13 +15,15 @@ import static com.jdiai.tools.TestIDLocators.ID_LOCATOR;
 import static com.jdiai.tools.TestIDLocators.SMART_LOCATOR;
 
 public interface TestInit {
-    default HomePage homePage() { return initElements(HomePage.class); }
+    default HomePage homePage() {
+        return initElements(HomePage.class);
+    }
 
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
         killDrivers();
         SMART_LOCATOR = ID_LOCATOR;
-        DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
+        // DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
         LOG_QUERY = ALL;
         initSite(JDISite.class);
     }
