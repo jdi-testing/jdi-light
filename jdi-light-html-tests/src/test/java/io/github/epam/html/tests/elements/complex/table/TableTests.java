@@ -21,15 +21,10 @@ import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
 public class TableTests implements TestsInit {
-    private boolean firstTime = true;
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         usersPage.shouldBeOpened();
-        if (firstTime) {
-            usersPage.open();
-            firstTime = false;
-        }
     }
 
     @Test

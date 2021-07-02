@@ -67,10 +67,11 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         } catch (Exception ex) { return false; }
     }
 
-    @JDIAction(level = DEBUG)
+    @JDIAction(value="Get min '{0}' elements", level = DEBUG)
     public List<T> elements(int minAmount) {
-        if (actualMapValue() && values.get().size() >= minAmount)
+        if (actualMapValue() && values.get().size() >= minAmount) {
             return values.get();
+        }
         return LinqUtils.map(list().elements(minAmount), this::toT);
     }
 

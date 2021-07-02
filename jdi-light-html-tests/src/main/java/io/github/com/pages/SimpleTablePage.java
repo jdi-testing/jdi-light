@@ -10,7 +10,7 @@ import io.github.com.entities.Furniture;
 import io.github.com.sections.FurnLine;
 
 public class SimpleTablePage extends WebPage {
-
+    @UI("#simple-table")
     public static Grid simpleTable;
     public static DataTable<?, Furniture> productsTable;
 

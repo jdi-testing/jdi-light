@@ -11,7 +11,8 @@ import io.github.com.custom.SearchResult;
 import java.util.List;
 
 public class SearchPage extends BaseSelPage {
-	@UI(".box") public DataList<SearchResult, Result> search;
+	@UI(".box") @WaitTimeout(3)
+	public DataList<SearchResult, Result> search;
 	@UI(".box") @WaitTimeout(3)
 	public DataList<SearchResult, ?> search2;
 	@UI(".box") public static List<SearchResult> search3;
