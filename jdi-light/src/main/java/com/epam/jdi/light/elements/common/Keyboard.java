@@ -89,7 +89,10 @@ public class Keyboard {
 
     private static String getKeyName(Field field) {
         int underscore = field.getName().indexOf('_');
-        String key = field.getName().substring(underscore + 1).toLowerCase().replace(" ", "").replaceAll("_", "");
+        String key = field.getName().substring(underscore + 1)
+            .toLowerCase()
+            .replace(" ", "")
+            .replace("_", "");
         switch (key) {
             case "control":
                 return "ctrl";
