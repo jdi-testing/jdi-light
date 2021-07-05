@@ -42,4 +42,5 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
         jdiAssert(element().isReadOnly(), Matchers.is(true));
         return this;
     }
+
 }

@@ -4,8 +4,12 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
 
+import java.util.NoSuchElementException;
+
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
@@ -65,4 +69,8 @@ public class TextField extends UIBaseElement<TextFieldAssert> {
         return this.is();
     }
 
+    @JDIAction("Click to focus on '{name}' textfield")
+    public void click() {
+        core().click();
+    }
 }

@@ -1,15 +1,11 @@
 package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Random;
 
-import static io.github.com.StaticSite.inputTextFieldDisabledPage;
-import static io.github.com.StaticSite.inputTextFieldFilledPage;
-import static io.github.com.StaticSite.inputTextFieldFilledWithDefaultPage;
-import static io.github.com.StaticSite.inputTextFieldStandardPage;
-import static io.github.com.StaticSite.inputTextFieldTimePage;
 import static io.github.com.StaticSite.textFieldPage;
 
 public class TextFieldTests extends TestsInit {
@@ -144,7 +140,42 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void selectTest() {
-        //TBD
+        textFieldPage.open();
+
+        textFieldPage.selectElementField.click();
+        textFieldPage.selectElement.selectItemByText(CurrencyItems.USD.currencyItems);
+        Assert.assertEquals(textFieldPage.selectElementField.getText(), CurrencyItems.USD.currencyItems);
+        textFieldPage.selectElementField.click();
+        textFieldPage.selectElement.selectItemByText(CurrencyItems.EUR.currencyItems);
+        Assert.assertEquals(textFieldPage.selectElementField.getText(), CurrencyItems.EUR.currencyItems);
+        textFieldPage.selectElementField.click();
+        textFieldPage.selectElement.selectItemByText(CurrencyItems.BTC.currencyItems);
+        Assert.assertEquals(textFieldPage.selectElementField.getText(), CurrencyItems.BTC.currencyItems);
+        textFieldPage.selectElementField.click();
+        textFieldPage.selectElement.selectItemByText(CurrencyItems.JPY.currencyItems);
+        Assert.assertEquals(textFieldPage.selectElementField.getText(), CurrencyItems.JPY.currencyItems);
+
+        textFieldPage.selectNativeSelect.select(CurrencyItems.USD.currencyItems);
+        Assert.assertEquals(textFieldPage.selectNativeSelect.getText(), CurrencyItems.USD.currencyItems);
+        textFieldPage.selectNativeSelect.select(CurrencyItems.EUR.currencyItems);
+        Assert.assertEquals(textFieldPage.selectNativeSelect.getText(), CurrencyItems.EUR.currencyItems);
+        textFieldPage.selectNativeSelect.select(CurrencyItems.BTC.currencyItems);
+        Assert.assertEquals(textFieldPage.selectNativeSelect.getText(), CurrencyItems.BTC.currencyItems);
+        textFieldPage.selectNativeSelect.select(CurrencyItems.JPY.currencyItems);
+        Assert.assertEquals(textFieldPage.selectNativeSelect.getText(), CurrencyItems.JPY.currencyItems);
+    }
+
+    private enum CurrencyItems{
+        USD("$"),
+        EUR("€"),
+        BTC("฿"),
+        JPY("¥");
+
+        public final String currencyItems;
+
+        CurrencyItems(String currencyItems) {
+            this.currencyItems = currencyItems;
+        }
     }
 
     private static String generateRandomString() {
