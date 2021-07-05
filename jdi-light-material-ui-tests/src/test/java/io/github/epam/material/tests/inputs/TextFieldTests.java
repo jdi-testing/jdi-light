@@ -1,20 +1,31 @@
 package io.github.epam.material.tests.inputs;
 
+import com.epam.jdi.light.material.elements.utils.enums.CurrencyItems;
+import io.github.com.StaticSite;
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Random;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.material.elements.utils.StringUtils.generateRandomString;
 import static io.github.com.StaticSite.textFieldPage;
 
 public class TextFieldTests extends TestsInit {
 
     public static final String DEFAULT_VALUE = "Default Value";
 
+    @BeforeMethod
+    public void openTextFieldsPage(){
+        textFieldPage.open();
+        jdiAssert(textFieldPage.isOnPage(textFieldPage.url), Matchers.is(true));
+    }
+
     @Test
     public void formPropsTextFieldTest() {
-        textFieldPage.open();
 
         Random random = new Random();
         int intNumber = random.nextInt();
@@ -65,7 +76,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void validateTextFieldTest() {
-        textFieldPage.open();
 
         String randomString = generateRandomString();
         textFieldPage.textFieldFilledError.is().enabled();
@@ -84,7 +94,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void multilineTextFieldTest() {
-        textFieldPage.open();
 
         String randomString = generateRandomString();
         textFieldPage.textFieldMultiLine.is().enabled();
@@ -110,7 +119,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void inputAdornmentsTest() {
-        textFieldPage.open();
 
         String randomString = generateRandomString();
         textFieldPage.textFieldNormal.is().enabled();
@@ -140,55 +148,14 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void selectTest() {
-        textFieldPage.open();
 
-        textFieldPage.selectElementField.click();
-        textFieldPage.selectElement.selectItemByText(CurrencyItems.USD.currencyItems);
-        Assert.assertEquals(textFieldPage.selectElementField.getText(), CurrencyItems.USD.currencyItems);
-        textFieldPage.selectElementField.click();
-        textFieldPage.selectElement.selectItemByText(CurrencyItems.EUR.currencyItems);
-        Assert.assertEquals(textFieldPage.selectElementField.getText(), CurrencyItems.EUR.currencyItems);
-        textFieldPage.selectElementField.click();
-        textFieldPage.selectElement.selectItemByText(CurrencyItems.BTC.currencyItems);
-        Assert.assertEquals(textFieldPage.selectElementField.getText(), CurrencyItems.BTC.currencyItems);
-        textFieldPage.selectElementField.click();
-        textFieldPage.selectElement.selectItemByText(CurrencyItems.JPY.currencyItems);
-        Assert.assertEquals(textFieldPage.selectElementField.getText(), CurrencyItems.JPY.currencyItems);
+        for(CurrencyItems currency : CurrencyItems.values()){
+            textFieldPage.selectElementField.click();
+            textFieldPage.selectElement.selectItemByText(currency.currencyItemText);
+            jdiAssert(textFieldPage.selectElementField.getText().equals(currency.currencyItemText), Matchers.is(true));
 
-        textFieldPage.selectNativeSelect.select(CurrencyItems.USD.currencyItems);
-        Assert.assertEquals(textFieldPage.selectNativeSelect.getText(), CurrencyItems.USD.currencyItems);
-        textFieldPage.selectNativeSelect.select(CurrencyItems.EUR.currencyItems);
-        Assert.assertEquals(textFieldPage.selectNativeSelect.getText(), CurrencyItems.EUR.currencyItems);
-        textFieldPage.selectNativeSelect.select(CurrencyItems.BTC.currencyItems);
-        Assert.assertEquals(textFieldPage.selectNativeSelect.getText(), CurrencyItems.BTC.currencyItems);
-        textFieldPage.selectNativeSelect.select(CurrencyItems.JPY.currencyItems);
-        Assert.assertEquals(textFieldPage.selectNativeSelect.getText(), CurrencyItems.JPY.currencyItems);
-    }
-
-    private enum CurrencyItems{
-        USD("$"),
-        EUR("€"),
-        BTC("฿"),
-        JPY("¥");
-
-        public final String currencyItems;
-
-        CurrencyItems(String currencyItems) {
-            this.currencyItems = currencyItems;
+            textFieldPage.selectNativeSelect.select(currency.currencyItemText);
+            textFieldPage.selectNativeSelect.has().text(currency.currencyItemText);
         }
-    }
-
-    private static String generateRandomString() {
-        final String symbols =
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$&@?<>~!%#";
-
-        Random r = new Random();
-        char[] password = new char[r.nextBoolean()?12:13];
-        for(int i=0; i<password.length; i++) {
-            char ch = symbols.charAt(r.nextInt(symbols.length()));
-            password[i] = ch;
-        }
-
-        return new String(password);
     }
 }
