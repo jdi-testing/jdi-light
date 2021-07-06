@@ -221,4 +221,10 @@ public class JSDriver {
     public void invoke(String action) {
         getOne("element." + action).asString();
     }
+
+    public void setScriptInElementContext(JSDriver otherDriver, String script) {
+        builder().setSearchScript(otherDriver.buildList().rawQuery() + script);
+        elementCtx();
+        builder().updateFromBuilder(otherDriver.builder());
+    }
 }

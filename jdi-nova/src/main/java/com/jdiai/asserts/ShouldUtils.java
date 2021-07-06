@@ -56,7 +56,7 @@ public class ShouldUtils {
         } catch (Exception ex) {
             boolean ignoreFail = IGNORE_FAILURE.apply(core, ex);
             if (timer.isRunning() && ignoreFail) {
-                checkConditions(core, conditions, timer);
+                return checkConditions(core, conditions, timer);
             }
             throw throwAssert(ex, ">> Assert failed");
         }
