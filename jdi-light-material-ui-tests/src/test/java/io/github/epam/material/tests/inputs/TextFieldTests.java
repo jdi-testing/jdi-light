@@ -21,7 +21,7 @@ public class TextFieldTests extends TestsInit {
     @BeforeMethod
     public void openTextFieldsPage(){
         textFieldPage.open();
-        jdiAssert(textFieldPage.isOnPage(textFieldPage.url), Matchers.is(true));
+        textFieldPage.isOpened();
     }
 
     @Test
