@@ -1,10 +1,8 @@
 package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.light.material.elements.utils.enums.CurrencyItems;
-import io.github.com.StaticSite;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
