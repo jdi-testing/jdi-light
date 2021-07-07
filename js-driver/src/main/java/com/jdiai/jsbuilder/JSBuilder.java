@@ -248,7 +248,7 @@ public class JSBuilder implements IJSBuilder {
     }
     protected String getScript() {
         if (ObjectUtils.isEmpty(variables) && ObjectUtils.isEmpty(useFunctions)) {
-            return query;
+            return rawQuery();
         }
         String jsScript = print(useFunctions.values(), "");
         String letVariables = variables.size() > 1

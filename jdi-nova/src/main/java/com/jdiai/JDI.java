@@ -1,9 +1,11 @@
 package com.jdiai;
 
+import com.epam.jdi.tools.ILogger;
 import com.epam.jdi.tools.Safe;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.jsbuilder.ConsoleLogger;
+import com.jdiai.jsbuilder.QueryLogger;
 import com.jdiai.jsbuilder.Slf4JLogger;
 import com.jdiai.jswraper.JSSmart;
 import com.jdiai.jswraper.driver.DriverManager;
@@ -20,7 +22,6 @@ import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.QueryLogger.LOGGER_NAME;
-import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jsdriver.JSException.assertContains;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
@@ -34,6 +35,7 @@ public class JDI {
     public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::getDriver);
 
     public static String domain;
+    public static ILogger logger;
 
     public static int timeout = 10;
 
@@ -113,6 +115,7 @@ public class JDI {
                 logger = new ConsoleLogger(getLoggerName(CONSOLE));
                 break;
         }
+        QueryLogger.logger = logger;
         initialized = true;
     }
     private static String getLoggerName(String name) {

@@ -22,6 +22,7 @@ import com.jdiai.scripts.Whammy;
 import com.jdiai.tools.ClientRect;
 import com.jdiai.tools.GetTextTypes;
 import com.jdiai.tools.JSImages;
+import com.jdiai.tools.Keyboard;
 import com.jdiai.visual.Direction;
 import com.jdiai.visual.ImageTypes;
 import com.jdiai.visual.OfElement;
@@ -52,6 +53,7 @@ import static com.jdiai.jswraper.JSWrappersUtils.*;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 import static com.jdiai.tools.FilterConditions.textEquals;
 import static com.jdiai.tools.GetTextTypes.INNER_TEXT;
+import static com.jdiai.tools.Keyboard.pasteText;
 import static com.jdiai.tools.VisualSettings.*;
 import static com.jdiai.visual.Direction.VECTOR_SIMILARITY;
 import static com.jdiai.visual.ImageTypes.VIDEO_WEBM;
@@ -898,7 +900,8 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS get(int index) {
-        return listToOne("element = elements[" + index + "];\n");
+        return listToOne("element = elements[" + index + "];\n")
+            .setName(format("%s[%s]",getName(), index));
     }
 
     public JS get(String by, int index) {
@@ -906,9 +909,11 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS get(By by, int index) {
-        return listToOne("element = elements.filter(e => "+
-            MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+
-            ")[" + index + "];\n");
+        String script = "element = elements.filter(e => "+
+                MessageFormat.format(dataType(by).get, "e", selector(by, js.jsDriver().builder()))+
+                ")[" + index + "];\n";
+        return listToOne(script)
+            .setName(format("%s[%s]",getName(), index));
     }
 
     public JS get(Function<JS, String> filter) {
@@ -916,7 +921,8 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
     }
 
     public JS get(String value) {
-        return get(textEquals(value));
+        return get(textEquals(value))
+            .setName(format("%s[%s]",getName(), value));
     }
 
     public JS findFirst(Function<JS, String> condition) {
@@ -946,9 +952,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
 
     private JS listToOne(String script) {
         JS result = new JS(driver);
-        result.js.jsDriver().builder().setSearchScript(js.jsDriver().buildList().rawQuery() + script);
-        result.js.jsDriver().elementCtx();
-        result.js.jsDriver().builder().updateFromBuilder(js.jsDriver().builder());
+        result.js.jsDriver().setScriptInElementContext(js.jsDriver(), script);
         js.jsDriver().builder().cleanup();
         return result;
     }
@@ -965,6 +969,17 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         Dimension dimension = getSize();
         if (dimension.getWidth() == 0) return false;
         return isClickable(dimension.getWidth() / 2, dimension.getHeight() / 2 - 1);
+    }
+    public void uploadFile(String filePath) {
+        we().click();
+        String pathToPaste = new File(filePath).getAbsolutePath();
+        pasteText(pathToPaste);
+    }
+    public void press(Keys key) {
+        Keyboard.press(key);
+    }
+    public void keyboardCommands(String... commands) {
+        Keyboard.commands(commands);
     }
 
     public boolean isClickable(int xOffset, int yOffset) {
