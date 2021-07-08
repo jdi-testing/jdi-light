@@ -22,6 +22,9 @@ public class TextFieldTests extends TestsInit {
         textFieldPage.isOpened();
     }
 
+
+
+
     @Test
     public void formPropsTextFieldTest() {
 
