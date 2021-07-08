@@ -3,7 +3,7 @@ package com.jdiai.visual;
 import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.Gson;
 import com.jdiai.JS;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 
 import java.io.File;
 import java.io.FileReader;
@@ -30,7 +30,7 @@ public class RelationsManager {
                 storage.getParentFile().mkdirs();
                 storage.createNewFile();
             } catch (IOException ex) {
-                throw new JSException(ex, "Failed to create relations storage: " + RELATIONS_STORAGE);
+                throw new JDINovaException(ex, "Failed to create relations storage: " + RELATIONS_STORAGE);
             }
         }
         return storage;
@@ -42,7 +42,7 @@ public class RelationsManager {
         try {
             new Gson().toJson(relations, new FileWriter(getRelationsStorage()));
         } catch (IOException ex) {
-            throw new JSException(ex, "Failed to store relations: " + relations);
+            throw new JDINovaException(ex, "Failed to store relations: " + relations);
         }
     }
     public static MapArray<String, Direction> readRelations(JS element) {
@@ -53,7 +53,7 @@ public class RelationsManager {
         try {
              allRelations = new Gson().fromJson(new FileReader(getRelationsStorage()), Map.class);
         } catch (IOException ex) {
-            throw new JSException(ex, "Failed to read relations storage: " + RELATIONS_STORAGE);
+            throw new JDINovaException(ex, "Failed to read relations storage: " + RELATIONS_STORAGE);
         }
         return allRelations != null
             ? (MapArray<String, Direction>) allRelations.get(name)

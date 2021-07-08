@@ -29,7 +29,7 @@ public final class JSDriverUtils {
     public static String selector(By by, IJSBuilder builder) {
         String selector = getByLocator(by);
         if (selector == null) {
-            throw new JSException("Failed to build selector. Locator is null");
+            throw new JDINovaException("Failed to build selector. Locator is null");
         }
         if (getByType(by).equals("xpath")) {
             builder.registerFunction("xpath", XPATH_FUNC);
@@ -39,7 +39,7 @@ public final class JSDriverUtils {
     public static String selectorAll(By by, IJSBuilder builder) {
         String selector = getByLocator(by);
         if (selector == null) {
-            throw new JSException("Failed to build selector. Locator is null");
+            throw new JDINovaException("Failed to build selector. Locator is null");
         }
         if (getByType(by).equals("xpath")) {
             builder.registerFunction("xpathList", XPATH_LIST_FUNC);

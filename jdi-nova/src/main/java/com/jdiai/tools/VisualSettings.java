@@ -2,7 +2,7 @@ package com.jdiai.tools;
 
 import com.jdiai.JS;
 import com.jdiai.interfaces.HasName;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.visual.ImageTypes;
 
 import java.io.File;
@@ -61,6 +61,6 @@ public class VisualSettings {
             } else {
                 js.makeScreenshot(tag);
             }
-        } catch (Exception ex) { throw new JSException(ex, "Can't compare files"); }
+        } catch (Exception ex) { throw new JDINovaException(ex, "Can't compare files"); }
     };
 }

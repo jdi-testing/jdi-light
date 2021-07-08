@@ -2,7 +2,7 @@ package com.jdiai.tools;
 
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.map.MapArray;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.Dimension;
 
 import java.util.Set;
@@ -43,7 +43,7 @@ public class WindowsManager {
     public static void checkNewWindowIsOpened() {
         boolean isNewWindow = newWindowIsOpened();
         if (!isNewWindow)
-            throw new JSException("New window is not opened");
+            throw new JDINovaException("New window is not opened");
         switchToNewWindow();
     }
     public static void setWindowName(String value) {
@@ -67,7 +67,7 @@ public class WindowsManager {
             last = window;
         if (!isBlank(last))
             driver().switchTo().window(last);
-        else throw new JSException("No windows found");
+        else throw new JDINovaException("No windows found");
     }
 
     /**
@@ -90,10 +90,10 @@ public class WindowsManager {
      */
     public static void switchToWindow(int index) {
         if (index < 0)
-            throw new JSException("Window's index starts from 1. You try to use '%s' that less than 1.", index);
+            throw new JDINovaException("Window's index starts from 1. You try to use '%s' that less than 1.", index);
         int counter = 0;
         if (getWindows().size() < index + 1)
-            throw new JSException(index + " is too much. Only "+getWindows().size()+" windows found");
+            throw new JDINovaException(index + " is too much. Only "+getWindows().size()+" windows found");
         for (String window : getWindows()) {
             counter++;
             if (counter == index) {
@@ -109,7 +109,7 @@ public class WindowsManager {
      */
     public static void switchToWindow(String value) {
         if (!windowHandlesMap.get().has(value))
-            throw new JSException("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
+            throw new JDINovaException("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
         driver().switchTo().window(windowHandlesMap.get().get(value));
     }
 

@@ -1,6 +1,6 @@
 package com.jdiai.jswraper.driver;
 
-import com.jdiai.jswraper.exceptions.JDINovaException;
+import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

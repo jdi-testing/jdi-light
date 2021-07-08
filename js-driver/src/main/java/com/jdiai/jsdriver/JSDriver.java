@@ -48,7 +48,7 @@ public class JSDriver {
     }
     public JSDriver(Supplier<WebDriver> driver, List<By> locators, IJSBuilder builder) {
         if (driver == null) {
-            throw new JSException("JSDriver init failed: WebDriver == null");
+            throw new JDINovaException("JSDriver init failed: WebDriver == null");
         }
         this.driver = driver;
         this.locators = copyList(locators);

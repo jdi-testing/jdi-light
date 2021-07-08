@@ -7,7 +7,7 @@ import com.jdiai.asserts.Conditions;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
@@ -43,7 +43,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         Field labelField = getLabelField();
         By labelLocator = getLocatorFromField(labelField);
         if (labelLocator == null) {
-            throw new JSException("Failed to get labelElement");
+            throw new JDINovaException("Failed to get labelElement");
         }
         core().js.jsDriver().multiSearch();
         return core().find(labelLocator).setName(getName() + " " + labelField.getName());
@@ -98,7 +98,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
             Field labelField = getLabelField();
             return getValueField(labelField, element).toString();
         } catch (Exception ignore) {
-            throw new JSException("Failed to get labelField");
+            throw new JDINovaException("Failed to get labelField");
         }
     }
 
@@ -110,12 +110,12 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
             try {
                 return dataClass.getField(labelName);
             } catch (Exception ex) {
-                throw new JSException("Failed to get labelField: " + labelName);
+                throw new JDINovaException("Failed to get labelField: " + labelName);
             }
         }
         Field[] allFields = dataClass.getDeclaredFields();
         if (allFields.length == 0) {
-            throw new JSException("Section should gave at least one field");
+            throw new JDINovaException("Section should gave at least one field");
         }
         Field labelField = LinqUtils.first(allFields,
             f -> f.isAnnotationPresent(ListLabel.class));
@@ -287,7 +287,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
             list = core().getEntityList(dataClass);
         } while (list.size() < minAmount && timer.isRunning());
         if (list.size() < minAmount) {
-            throw new JSException("Failed to get list '%s' with minimum '%s' elements in %s seconds", getName(), minAmount, new DecimalFormat("#.##").format(timer.timePassedInMSec() / 1000));
+            throw new JDINovaException("Failed to get list '%s' with minimum '%s' elements in %s seconds", getName(), minAmount, new DecimalFormat("#.##").format(timer.timePassedInMSec() / 1000));
         }
         return list;
     }
@@ -303,7 +303,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         try {
             dataClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
         } catch (Exception ex) {
-            throw new JSException(ex, "Can't get DataList '%s' data class", getName());
+            throw new JDINovaException(ex, "Can't get DataList '%s' data class", getName());
         }
     }
 

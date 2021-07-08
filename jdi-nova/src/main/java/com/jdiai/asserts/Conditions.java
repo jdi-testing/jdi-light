@@ -1,7 +1,7 @@
 package com.jdiai.asserts;
 
 import com.jdiai.interfaces.HasCore;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -267,7 +267,7 @@ public abstract class Conditions {
 
     private static <T> Condition haveCondition(boolean checkSize, boolean sameOrder, List<T> entities) {
         if (isEmpty(entities)) {
-            throw new JSException("Should have validation require at least one element");
+            throw new JDINovaException("Should have validation require at least one element");
         }
         return condition("%element% have %no% [" + print(singletonList(entities), Object::toString) + "]",
             el -> compareTwoLists(el.core(), checkSize, sameOrder, entities));

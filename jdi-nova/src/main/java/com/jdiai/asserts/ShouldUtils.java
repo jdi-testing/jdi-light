@@ -3,21 +3,21 @@ package com.jdiai.asserts;
 import com.epam.jdi.tools.Timer;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.JDI.IGNORE_FAILURE;
 import static com.jdiai.JDI.timeout;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
-import static com.jdiai.jsdriver.JSException.throwAssert;
+import static com.jdiai.jsdriver.JDINovaException.throwAssert;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class ShouldUtils {
     public static <T extends HasCore> T handleShouldBe(T core, Condition... conditions) {
         if (isEmpty(conditions)) {
-            throw new JSException("Please specify at least 1 Condition");
+            throw new JDINovaException("Please specify at least 1 Condition");
         }
         Timer timer = new Timer(timeout * 1000L);
         logger.info(getCombinedAssertionName(core, conditions));

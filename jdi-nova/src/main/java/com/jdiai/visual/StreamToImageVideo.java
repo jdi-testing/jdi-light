@@ -1,6 +1,6 @@
 package com.jdiai.visual;
 
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,7 +20,7 @@ public class StreamToImageVideo {
         try {
             return Base64.getDecoder().decode(base64);
         } catch (Exception ex) {
-            throw new JSException(ex, "Failed to decode screenshot base64 stream: " + base64);
+            throw new JDINovaException(ex, "Failed to decode screenshot base64 stream: " + base64);
         }
     }
     public File asFile(String fileName) {
@@ -35,7 +35,7 @@ public class StreamToImageVideo {
             osf.flush();
             return file;
         } catch (Exception ex) {
-            throw new JSException(ex, "Failed to save screenshot to file: " + path);
+            throw new JDINovaException(ex, "Failed to save screenshot to file: " + path);
         } finally {
             try {
                 if (osf != null) {

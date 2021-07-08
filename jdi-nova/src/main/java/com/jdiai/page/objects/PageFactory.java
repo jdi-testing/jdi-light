@@ -8,7 +8,7 @@ import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
 import com.jdiai.jsbuilder.QueryLogger;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -72,8 +72,8 @@ public class PageFactory {
             $("Setup", sRule(ISetup.class, info -> ((ISetup)info.instance).setup(info.field)))
         ));
         pageFactory.logger = QueryLogger.logger;
-        pageFactory.exceptionFunc = JSException::new;
-        pageFactory.reThrowException = JSException::new;
+        pageFactory.exceptionFunc = JDINovaException::new;
+        pageFactory.reThrowException = JDINovaException::new;
         return pageFactory;
     }
 }

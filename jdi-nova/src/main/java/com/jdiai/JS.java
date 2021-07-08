@@ -12,12 +12,11 @@ import com.jdiai.interfaces.HasLocators;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.HasParent;
 import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsdriver.JSDriver;
 import com.jdiai.jsdriver.JSDriverUtils;
-import com.jdiai.jsdriver.JSException;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.jswraper.JSSmart;
-import com.jdiai.jswraper.exceptions.JDINovaException;
 import com.jdiai.scripts.Whammy;
 import com.jdiai.tools.ClientRect;
 import com.jdiai.tools.GetTextTypes;
@@ -634,7 +633,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
         if (outputType == FILE) {
             return (X) screen.asFile(IMAGE_TEMPLATE.apply("", this));
         }
-        throw new JSException("Failed to get screenshot - unknown type: " + outputType);
+        throw new JDINovaException("Failed to get screenshot - unknown type: " + outputType);
     }
 
     private String canvas2Image(ImageTypes imageType) {
@@ -689,7 +688,7 @@ public class JS implements WebElement, HasLocators, HasParent, HasCore {
             "window.jdiRecorder = recorder;\n" +
             "return 'start recording'");
         if (!value.equals("start recording")) {
-            throw new JSException(value);
+            throw new JDINovaException(value);
         }
     }
 

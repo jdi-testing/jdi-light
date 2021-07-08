@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static java.lang.String.format;
 
-public class JSException extends RuntimeException {
+public class JDINovaException extends RuntimeException {
     public static Consumer<String> THROW_ASSERT = msg -> { throw new AssertionError(msg); };
 
     public static RuntimeException throwAssert(String message) {
@@ -21,31 +21,31 @@ public class JSException extends RuntimeException {
         return throwAssert(format(msg, args));
     }
 
-    public static void assertEquals(Object actual, Object expected) {
-        logger.info("Assert that '%s' equals to '%s'", actual, expected);
+    public static void assertEquals(String name, Object actual, Object expected) {
+        logger.info("Assert that '%s' equals to '%s'", name, expected);
         if (actual == null && expected != null || actual != null && !actual.equals(expected)) {
             throw throwAssert("Expected: '%s'\nbut found\nActual: '%s'", expected, actual);
         }
     }
 
-    public static void assertContains(String actual, String expected) {
-        logger.info("Assert that '%s' contains '%s'", actual, expected);
+    public static void assertContains(String name, String actual, String expected) {
+        logger.info("Assert that '%s' contains '%s'", name, expected);
         if (actual == null || expected == null || !actual.contains(expected)) {
-            throw throwAssert("Expected that '%s'\ncontains\n'%s'but failed", actual, expected);
+            throw throwAssert("Expected that '%s'\ncontains '%s'\nbut failed", actual, expected);
         }
     }
-    public static void assertContainsIgnoreCase(String actual, String expected) {
-        logger.info("Assert that '%s' contains ignore case '%s'", actual, expected);
+    public static void assertContainsIgnoreCase(String name, String actual, String expected) {
+        logger.info("Assert that '%s' contains ignore case '%s'", name, expected);
         if (actual == null || expected == null || !actual.toLowerCase().contains(expected.toLowerCase())) {
-            throw throwAssert("Expected that '%s'\ncontains ignore-case\n'%s'but failed", actual, expected);
+            throw throwAssert("Expected that '%s'\ncontains ignore-case '%s'\nbut failed", actual, expected);
         }
     }
 
-    public JSException(String message) { super(logException(message)); }
+    public JDINovaException(String message) { super(logException(message)); }
 
-    public JSException(String message, Object... args) { this(format(message, args)); }
+    public JDINovaException(String message, Object... args) { this(format(message, args)); }
 
-    public JSException(Throwable ex, String msg, Object... args) {
+    public JDINovaException(Throwable ex, String msg, Object... args) {
         this(getExceptionMessage(ex, msg, args));
     }
 
