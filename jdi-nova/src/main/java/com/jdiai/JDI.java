@@ -22,7 +22,8 @@ import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.QueryLogger.LOGGER_NAME;
-import static com.jdiai.jsdriver.JSException.assertContains;
+import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
+import static com.jdiai.jsdriver.JDINovaException.assertContains;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 import static com.jdiai.jswraper.driver.DriverManager.useDriver;
@@ -40,6 +41,10 @@ public class JDI {
     public static int timeout = 10;
 
     public static ConditionTypes conditions = new ConditionTypes();
+
+    public static void logJSRequests(int logQueriesLevel) {
+        LOG_QUERY = logQueriesLevel;
+    }
 
     public static WebDriver driver() {
         return DRIVER.get();
@@ -67,13 +72,12 @@ public class JDI {
         driver().navigate().forward();
     }
 
-
     public static String getUrl() {
         return (String) jsEvaluate("document.URL;");
     }
 
     public static void urlShouldBe(String url) {
-        assertContains(getUrl(), url);
+        assertContains("Url", getUrl(), url);
     }
 
     public static String getTitle() {
@@ -81,7 +85,7 @@ public class JDI {
     }
 
     public static void titleShouldContains(String title) {
-        assertContains(getTitle(), title);
+        assertContains("Title", getTitle(), title);
     }
 
     public static String getDomain() { return (String) jsEvaluate("document.domain;"); }
@@ -191,12 +195,20 @@ public class JDI {
         return new JS(JDI::driver, locator);
     }
 
+    public static JS $(Object parent, By locator) {
+        return new JS(JDI::driver, locator, parent);
+    }
+
     public static JS $(By... locators) {
         return new JS(JDI::driver, locators);
     }
 
     public static JS $(String locator) {
         return new JS(JDI::driver, NAME_TO_LOCATOR.apply(locator));
+    }
+
+    public static JS $(Object parent, String locator) {
+        return new JS(JDI::driver, NAME_TO_LOCATOR.apply(locator), parent);
     }
 
     public static JS $(String... locators) {

@@ -3,7 +3,7 @@ package com.jdiai.tools;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.ReflectionUtils;
 import com.epam.jdi.tools.Timer;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.Keys;
 
@@ -30,7 +30,7 @@ public class Keyboard {
             try {
                 robot = new Robot();
             } catch (Exception ex) {
-                throw new JSException(ex, "Can't instantiate Robot");
+                throw new JDINovaException(ex, "Can't instantiate Robot");
             }
         }
         return robot;
@@ -57,7 +57,7 @@ public class Keyboard {
                     break;
             }
         } catch (Exception ex) {
-            throw new JSException(ex, "Past text '%s' failed with exception", text);
+            throw new JDINovaException(ex, "Past text '%s' failed with exception", text);
         }
     }
 
@@ -88,7 +88,7 @@ public class Keyboard {
         if (keyField != null) {
             return (int) ReflectionUtils.getValueField(keyField, null);
         }
-        throw new JSException("Unknown key '%s'", key);
+        throw new JDINovaException("Unknown key '%s'", key);
     }
 
     private static String getKeyName(Field field) {
@@ -126,7 +126,7 @@ public class Keyboard {
         String keyName = key.name().replace(" ", "").replace("_", "");
         Field keyField = first(keys, f -> getKeyName(f).equalsIgnoreCase(keyName));
         if (keyField == null) {
-            throw new JSException("Unknown key '%s'", key);
+            throw new JDINovaException("Unknown key '%s'", key);
         }
         int keyCode = (int) ReflectionUtils.getValueField(keyField, null);
         press(keyCode);

@@ -1,6 +1,6 @@
 package com.jdiai.jswraper.driver;
 
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jswraper.driver.download.DownloadDriverSettings;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
@@ -38,7 +38,7 @@ public class DriverManager {
 
     public static WebDriver getDriver(DriverTypes driverType) {
         if(driverType == null) {
-            throw new JSException("Driver type can't be null");
+            throw new JDINovaException("Driver type can't be null");
         }
         switch (driverType) {
             case CHROME:
@@ -54,7 +54,7 @@ public class DriverManager {
             case OPERA:
                 return operaDriver();
             default:
-                throw new JSException("Unknown driver type %s", driverType);
+                throw new JDINovaException("Unknown driver type %s", driverType);
         }
     }
 

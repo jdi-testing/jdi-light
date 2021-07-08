@@ -1,6 +1,6 @@
 package com.jdiai.jswraper.driver.download;
 
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jswraper.driver.DriverTypes;
 import com.jdiai.jswraper.driver.OsTypes;
 import com.jdiai.jswraper.driver.Platform;
@@ -50,7 +50,7 @@ public class DownloadDriverSettings {
                 case OPERA:
                     wdm = operadriver(); break;
                 default:
-                    throw new JSException("%s driver not supported for download", driverType);
+                    throw new JDINovaException("%s driver not supported for download", driverType);
             }
             switch (platform) {
                 case X32:
@@ -80,7 +80,7 @@ public class DownloadDriverSettings {
             driverPath = wdm.getDownloadedDriverPath();
             return wdm.getDownloadedDriverPath();
         } catch (Exception ex) {
-            throw new JSException(ex, "Can't download latest driver for " + driverType);
+            throw new JDINovaException(ex, "Can't download latest driver for " + driverType);
         }
     }
     protected String getBelowVersion(WebDriverManager wdm) {
@@ -90,7 +90,7 @@ public class DownloadDriverSettings {
             if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
                 return allVersions.get(i);
         }
-        throw new JSException("Can't find version below current(" + wdm.getDownloadedDriverVersion()+")");
+        throw new JDINovaException("Can't find version below current(" + wdm.getDownloadedDriverVersion()+")");
     }
 
     private static Platform getDriverPlatform() {
@@ -103,6 +103,6 @@ public class DownloadDriverSettings {
         if (getProperty("os.arch").contains("64")) {
             return X64;
         }
-        throw new JSException("Unknown driver platform: %s. Only X32 or X64 allowed. Please specify exact platform in JDISettings.DRIVER.platform", getProperty("os.arch"));
+        throw new JDINovaException("Unknown driver platform: %s. Only X32 or X64 allowed. Please specify exact platform in JDISettings.DRIVER.platform", getProperty("os.arch"));
     }
 }

@@ -1,6 +1,6 @@
 package com.jdiai.visual;
 
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 
 import java.util.function.Function;
 
@@ -32,7 +32,7 @@ public class Directions {
 
     public static Function<Direction, Boolean> DIRECTION(int angle, int accuracy) {
         if (angle < 0 || angle > 360 || accuracy < 0 || accuracy > 180) {
-            throw new JSException("Angle should be in range [0, 360]; Accuracy in [0, 180], but Angle=%s; Accuracy=%s",
+            throw new JDINovaException("Angle should be in range [0, 360]; Accuracy in [0, 180], but Angle=%s; Accuracy=%s",
                     angle, accuracy);
         }
         int lower = angle - accuracy;

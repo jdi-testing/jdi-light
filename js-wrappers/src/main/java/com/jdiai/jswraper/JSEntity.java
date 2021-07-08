@@ -1,6 +1,6 @@
 package com.jdiai.jswraper;
 
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -37,7 +37,7 @@ public class JSEntity<T> extends JSElement {
         if (types.length != 1) return;
         try {
             this.cl = (Class<T>) types[0];
-        } catch (Exception ex) { throw new JSException(ex, "Can't init JSObject class."); }
+        } catch (Exception ex) { throw new JDINovaException(ex, "Can't init JSObject class."); }
     }
 
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class

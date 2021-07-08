@@ -1,7 +1,7 @@
 package com.jdiai.jswraper.driver.remote;
 
+import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jswraper.driver.DriverTypes;
-import com.jdiai.jswraper.exceptions.JDINovaException;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;

@@ -5,7 +5,7 @@ import com.jdiai.JS;
 import com.jdiai.annotations.Title;
 import com.jdiai.annotations.Url;
 import com.jdiai.interfaces.HasCore;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -65,7 +65,7 @@ public class PageFactoryUtils {
         List<Constructor<?>> filtered = filter(constructors, c -> c.getParameterCount() == 0
             || c.getParameterCount() == 1 && isInterface((Class<?>)c.getGenericParameterTypes()[0], WebDriver.class));
         if (isEmpty(filtered)) {
-            throw new JSException(format("%s has no empty constructors", fieldClass.getSimpleName()));
+            throw new JDINovaException(format("%s has no empty constructors", fieldClass.getSimpleName()));
         }
         Constructor<?> cs = filtered.size() == 1
             ? filtered.get(0)
@@ -80,7 +80,7 @@ public class PageFactoryUtils {
             constructor.setAccessible(true);
             return (T) constructor.newInstance(JDI.driver());
         } catch (Exception ex) {
-            throw new JSException(ex, format("%s failed to init using empty constructors", fieldClass.getSimpleName()));
+            throw new JDINovaException(ex, format("%s failed to init using empty constructors", fieldClass.getSimpleName()));
         }
     }
     static <T> T initWithEmptyConstructor(Constructor<?> constructor, Class<?> fieldClass) {
@@ -88,7 +88,7 @@ public class PageFactoryUtils {
             constructor.setAccessible(true);
             return (T) constructor.newInstance();
         } catch (Exception ex) {
-            throw new JSException(ex, format("%s failed to init using empty constructors", fieldClass.getSimpleName()));
+            throw new JDINovaException(ex, format("%s failed to init using empty constructors", fieldClass.getSimpleName()));
         }
     }
 

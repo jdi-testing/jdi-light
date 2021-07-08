@@ -1,7 +1,7 @@
 package com.jdiai.jsbuilder;
 
 import com.google.common.collect.ImmutableMap;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Command;
@@ -19,7 +19,7 @@ public class HttpExecutor {
 
     public static Object execute(WebDriver driver, String script) {
         if (!(driver instanceof RemoteWebDriver)) {
-            throw new JSException("Failed to execute jsScript: Selenium execute script work only with RemoteWebDriver");
+            throw new JDINovaException("Failed to execute jsScript: Selenium execute script work only with RemoteWebDriver");
         }
         return execute((RemoteWebDriver) driver, script);
     }
@@ -31,18 +31,18 @@ public class HttpExecutor {
         try {
             response = driver.getCommandExecutor().execute(command);
         } catch (IOException ex) {
-            throw new JSException(ex, FAILED_TO_EXECUTE_SCRIPT + script);
+            throw new JDINovaException(ex, FAILED_TO_EXECUTE_SCRIPT + script);
         }
         if (response == null || response.getStatus() == null) {
-            throw new JSException(FAILED_TO_EXECUTE_SCRIPT + script);
+            throw new JDINovaException(FAILED_TO_EXECUTE_SCRIPT + script);
         }
         if (response.getStatus() == SUCCESS) {
             return response.getValue();
         }
         if (response.getStatus() != JAVASCRIPT_ERROR || !(response.getValue() instanceof JavascriptException)) {
-            throw new JSException(FAILED_TO_EXECUTE_SCRIPT + script);
+            throw new JDINovaException(FAILED_TO_EXECUTE_SCRIPT + script);
         }
         JavascriptException jsException = (JavascriptException) response.getValue();
-        throw new JSException(jsException, FAILED_TO_EXECUTE_SCRIPT + script);
+        throw new JDINovaException(jsException, FAILED_TO_EXECUTE_SCRIPT + script);
     }
 }

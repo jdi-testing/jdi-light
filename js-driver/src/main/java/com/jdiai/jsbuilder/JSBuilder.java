@@ -2,7 +2,7 @@ package com.jdiai.jsbuilder;
 
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import com.jdiai.jsdriver.JSException;
+import com.jdiai.jsdriver.JDINovaException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -244,7 +244,7 @@ public class JSBuilder implements IJSBuilder {
         if (!script.contains("%s")) {
             return script;
         }
-        throw new JSException("Failed to execute js script for template locator. Please replace %s before usage");
+        throw new JDINovaException("Failed to execute js script for template locator. Please replace %s before usage");
     }
     protected String getScript() {
         if (ObjectUtils.isEmpty(variables) && ObjectUtils.isEmpty(useFunctions)) {
