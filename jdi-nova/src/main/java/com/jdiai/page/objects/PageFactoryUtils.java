@@ -5,12 +5,14 @@ import com.jdiai.JS;
 import com.jdiai.annotations.Title;
 import com.jdiai.annotations.Url;
 import com.jdiai.interfaces.HasCore;
+import com.jdiai.interfaces.HasLocators;
 import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.*;
@@ -47,9 +49,18 @@ public class PageFactoryUtils {
     }
     static void setupCoreElement(InitInfo info) {
         By locator = LOCATOR_FROM_FIELD.apply(info.field);
-        JS core = locator != null
-                ? new JS(JDI::driver, locator, info.parent)
-                : new JS();
+        JS core;
+        if (locator != null) {
+            core = new JS(JDI::driver, locator, info.parent);
+        } else {
+            List<By> locators = new ArrayList<>();
+            if (info.parent != null && isInterface(info.parent.getClass(), HasLocators.class)) {
+                locators = ((HasLocators) info.parent).locators();
+            }
+            core = isEmpty(locators)
+                ? new JS()
+                : new JS(JDI::driver, locators);
+        }
         ((HasCore) info.instance).setCore(core);
     }
     static boolean isUIObject(Field field) {

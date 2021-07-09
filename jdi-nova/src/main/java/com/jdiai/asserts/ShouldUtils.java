@@ -21,9 +21,9 @@ public class ShouldUtils {
         }
         Timer timer = new Timer(timeout * 1000L);
         logger.info(getCombinedAssertionName(core, conditions));
-        boolean foundAll = checkConditions(core, conditions, timer);
-        if (!foundAll) {
-            checkOutOfTime(core, timer, conditions);
+        AR actualResult = checkConditions(core, conditions, timer);
+        if (!actualResult.result) {
+            checkOutOfTime(core, timer, actualResult, conditions);
         }
         return core;
     }
@@ -38,35 +38,35 @@ public class ShouldUtils {
             : print(map(conditions, c -> c.getName(core)), "; ");
     }
 
-    private static boolean checkConditions(HasCore core, Condition[] conditions, Timer timer) {
+    private static AR checkConditions(HasCore core, Condition[] conditions, Timer timer) {
+        AR actualResult = new AR("", false);
         try {
-            boolean foundAll = false;
-            while (!foundAll && timer.isRunning()) {
+            while (!actualResult.getResult() && timer.isRunning()) {
                 for (Condition condition : conditions) {
-                    checkOutOfTime(core, timer, conditions);
+                    checkOutOfTime(core, timer, actualResult, conditions);
                     String message = "Assert that " + condition.getName(core);
                     logger.debug(message);
-                    foundAll = condition.apply(core);
-                    if (!foundAll) {
+                    actualResult = condition.apply(core);
+                    if (!actualResult.result) {
                         break;
                     }
                 }
             }
-            return foundAll;
+            return actualResult;
         } catch (Exception ex) {
             boolean ignoreFail = IGNORE_FAILURE.apply(core, ex);
             if (timer.isRunning() && ignoreFail) {
                 return checkConditions(core, conditions, timer);
             }
-            throw throwAssert(ex, ">> Assert failed");
+            throw throwAssert(ex, ">> Assert failed\nActual result: " + actualResult.getActualValue());
         }
     }
 
-    private static void checkOutOfTime(HasCore core, Timer timer, Condition... conditions) {
+    private static void checkOutOfTime(HasCore core, Timer timer, AR actualResult, Condition... conditions) {
         if (timer.isRunning()) {
             return;
         }
-        throw throwAssert(format("Failed to execute Assert in time (%s sec); '%s'",
-            timeout, getCombinedAssertionName(core, conditions)));
+        throw throwAssert(format("Failed to execute Assert in time (%s sec);\n'%s'\nAcutal result:%s",
+            timeout, getCombinedAssertionName(core, conditions), actualResult.getActualValue()));
     }
 }

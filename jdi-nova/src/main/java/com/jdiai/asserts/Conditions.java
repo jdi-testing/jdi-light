@@ -35,7 +35,7 @@ public abstract class Conditions {
 
     public static Condition outOfView = not(inView);
 
-    public static Condition appear = condition("%element% is %not% appear",  displayed);
+    public static Condition appear = conditionAR("%element% is %not% appear",  displayed);
 
     public static Condition disappear = not(appear);
 
@@ -244,10 +244,13 @@ public abstract class Conditions {
         }
         return name;
     }
-    public static Condition condition(String name, Condition condition) {
+    public static Condition condition(String name, Function<HasCore, Boolean> condition) {
+        return conditionAR(name, el -> new AR(condition.apply(el)));
+    }
+    public static Condition conditionAR(String name, Condition condition) {
         return isBlank(condition.getName())
             ? condition.setName(name)
-            : condition(name, condition::execute);
+            : conditionAR(name, condition::execute);
     }
     public static Condition be(Condition condition) {
         return condition;
