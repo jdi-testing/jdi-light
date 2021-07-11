@@ -18,6 +18,7 @@ import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.jdiai.page.objects.JDIPageFactory.LOCATOR_FROM_FIELD;
 import static com.jdiai.page.objects.PageFactory.getFactory;
+import static com.jdiai.tools.JSUtils.getLocators;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
@@ -47,13 +48,17 @@ public class PageFactoryUtils {
     }
     static void setupCoreElement(InitInfo info) {
         By locator = LOCATOR_FROM_FIELD.apply(info.field);
-        JS core = locator != null
-                ? new JS(JDI::driver, locator, info.parent)
-                : new JS();
+        JS core;
+        List<By> locators = getLocators(info.parent);
+        core = JDI.initJSFunc.get();
+        if (locator != null) {
+            locators.add(locator);
+        }
+        core.setLocators(locators);
         ((HasCore) info.instance).setCore(core);
     }
     static boolean isUIObject(Field field) {
-        if (field.getName().equals("core") || field.getType().isAssignableFrom(JS.class)) {
+        if (field.getName().equals("core") || isInterface(field.getType(), JS.class)) {
             return false;
         }
         List<Field> fields = getFieldsDeep(field);

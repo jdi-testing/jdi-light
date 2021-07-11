@@ -8,6 +8,7 @@ import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
 import com.jdiai.jsdriver.JDINovaException;
+import com.jdiai.jswraper.JSSmart;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
@@ -39,18 +40,18 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         return core().findFirst(labelLocator, condition);
     }
 
-    private JS getLabelElement() {
+    private HasCore getLabelElement() {
         Field labelField = getLabelField();
         By labelLocator = getLocatorFromField(labelField);
         if (labelLocator == null) {
             throw new JDINovaException("Failed to get labelElement");
         }
-        core().js.jsDriver().multiSearch();
+        core().jsDriver().multiSearch();
         return core().find(labelLocator).setName(getName() + " " + labelField.getName());
     }
     private void haveLabelElement(String value) {
         Function<JS, String> condition = getCondition(getLabelField(), value, "#element#");
-        getLabelElement().findFirst(condition).shouldHave(have(value));
+        getLabelElement().core().findFirst(condition).shouldHave(have(value));
     }
 
     public JS getElement(Enum<?> name) {
@@ -78,7 +79,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
 
     public void select(String value) {
         haveLabelElement(value);
-        getLabelElement().get(value).click();
+        getLabelElement().core().get(value).click();
     }
 
     public void select(Enum<?> name) {
@@ -298,8 +299,9 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
 
     public void setup(Field field) {
         Type[] types = getGenericTypes(field);
-        if (types.length != 1)
+        if (types.length != 1) {
             return;
+        }
         try {
             dataClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
         } catch (Exception ex) {
@@ -314,5 +316,9 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     public DataList<T> setName(String name) {
         core().setName(name);
         return this;
+    }
+
+    public JSSmart jsDriver() {
+        return core().jsDriver();
     }
 }

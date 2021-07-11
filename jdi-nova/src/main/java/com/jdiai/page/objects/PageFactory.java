@@ -1,7 +1,7 @@
 package com.jdiai.page.objects;
 
+import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.DataList;
-import com.jdiai.JS;
 import com.jdiai.WebPage;
 import com.jdiai.annotations.Site;
 import com.jdiai.interfaces.HasCore;
@@ -18,13 +18,13 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.jdiai.JDI.domain;
+import static com.jdiai.JDI.initJSFunc;
 import static com.jdiai.page.objects.CreateRule.cRule;
 import static com.jdiai.page.objects.SetupRule.sRule;
 import static java.lang.reflect.Modifier.isStatic;
-import static java.util.Arrays.asList;
 
 public class PageFactory {
-    private static PagesFactory pageFactory = null;
+    public static PagesFactory pageFactory = null;
 
     public static void initSite(Class<?> cl) {
         PagesFactory pageFactory = getFactory();
@@ -56,21 +56,26 @@ public class PageFactory {
             || isInterface(f.getType(), HasCore.class)
             || isInterface(f.getType(), List.class);
         pageFactory.isUIObjectField = PageFactoryUtils::isUIObject;
+        pageFactory.fieldsFilter = f -> !f.getName().equals("core") &&
+            (pageFactory.isUIElementField.apply(f) || pageFactory.isUIObjectField.apply(f));
         pageFactory.filterPages = f -> isStatic(f.getModifiers()) && (
             isClass(f.getType(), WebPage.class)
             || pageFactory.isUIObjectField.apply(f)
             || pageFactory.isUIElementField.apply(f)
         );
         pageFactory.createRules = map(
-            $("WebElement", cRule(WebElement.class, cl -> new JS())),
+            $("WebElement", cRule(WebElement.class, cl -> initJSFunc.get())),
             $("List", cRule(List.class, cl -> new DataList<>()))
         );
-        pageFactory.setupRules.addAll(asList(
+        pageFactory.setupRules = new MapArray<>(
             $("JSElement", sRule(HasCore.class, PageFactoryUtils::setupCoreElement)),
-            $("Name", sRule(HasName.class,
-                    info -> ((HasName) info.instance).setName(pageFactory.getNameFunc.apply(info.field)))),
+            $("Name", sRule(HasName.class, info ->
+                ((HasName) info.instance).setName(pageFactory.getNameFunc.apply(info.field)))),
+            $("UI Object", sRule(
+                info -> pageFactory.isUIObjectField.apply(info.field),
+                info -> pageFactory.initElements(info.instance))),
             $("Setup", sRule(ISetup.class, info -> ((ISetup)info.instance).setup(info.field)))
-        ));
+        );
         pageFactory.logger = QueryLogger.logger;
         pageFactory.exceptionFunc = JDINovaException::new;
         pageFactory.reThrowException = JDINovaException::new;

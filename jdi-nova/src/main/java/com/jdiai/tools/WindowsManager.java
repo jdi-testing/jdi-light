@@ -17,13 +17,17 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  */
 public class WindowsManager {
     private static Safe<Set<String>> windowHandles = new Safe<>();
+
     private static Safe<MapArray<String, String>> windowHandlesMap = new Safe<>(MapArray::new);
+
     private static Safe<Boolean> newWindow = new Safe<>(() -> false);
 
     public static Set<String> getWindows() {
         Set<String> wHandles = driver().getWindowHandles();
-        if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size())
+        if (windowHandles.get() != null &&
+            windowHandles.get().size() < wHandles.size()) {
             newWindow.set(true);
+        }
         windowHandles.set(wHandles);
         return wHandles;
     }
@@ -34,7 +38,8 @@ public class WindowsManager {
      */
     public static boolean newWindowIsOpened() {
         getWindows();
-        if (newWindow.get()) {
+        boolean hasNewWindow = newWindow.get();
+        if (hasNewWindow) {
             newWindow.set(false);
             return true;
         }
@@ -42,8 +47,9 @@ public class WindowsManager {
     }
     public static void checkNewWindowIsOpened() {
         boolean isNewWindow = newWindowIsOpened();
-        if (!isNewWindow)
+        if (!isNewWindow) {
             throw new JDINovaException("New window is not opened");
+        }
         switchToNewWindow();
     }
     public static void setWindowName(String value) {
@@ -63,10 +69,12 @@ public class WindowsManager {
      */
     public static void switchToNewWindow() {
         String last = "";
-        for (String window : getWindows())
+        for (String window : getWindows()) {
             last = window;
-        if (!isBlank(last))
+        }
+        if (!isBlank(last)) {
             driver().switchTo().window(last);
+        }
         else throw new JDINovaException("No windows found");
     }
 
@@ -75,6 +83,7 @@ public class WindowsManager {
      */
     public static void openNewTab() {
         jsExecute("window.open()");
+        switchToNewWindow();
     }
 
     /**
@@ -89,11 +98,13 @@ public class WindowsManager {
      * @param index
      */
     public static void switchToWindow(int index) {
-        if (index < 0)
+        if (index < 0) {
             throw new JDINovaException("Window's index starts from 1. You try to use '%s' that less than 1.", index);
+        }
         int counter = 0;
-        if (getWindows().size() < index + 1)
-            throw new JDINovaException(index + " is too much. Only "+getWindows().size()+" windows found");
+        if (getWindows().size() < index + 1) {
+            throw new JDINovaException(index + " is too much. Only " + getWindows().size() + " windows found");
+        }
         for (String window : getWindows()) {
             counter++;
             if (counter == index) {
@@ -108,8 +119,9 @@ public class WindowsManager {
      * @param value
      */
     public static void switchToWindow(String value) {
-        if (!windowHandlesMap.get().has(value))
+        if (!windowHandlesMap.get().has(value)) {
             throw new JDINovaException("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
+        }
         driver().switchTo().window(windowHandlesMap.get().get(value));
     }
 

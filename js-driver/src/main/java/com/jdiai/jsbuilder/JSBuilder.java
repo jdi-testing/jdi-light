@@ -1,5 +1,6 @@
 package com.jdiai.jsbuilder;
 
+import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import com.jdiai.jsdriver.JDINovaException;
@@ -98,13 +99,15 @@ public class JSBuilder implements IJSBuilder {
     }
 
     public static BiFunction<Object, String, Object> EXECUTE_SCRIPT = DEFAULT_SCRIPT_EXECUTE;
-
+    public static Safe<String> lastScriptExecution = new Safe<>();
     public Object executeQuery() {
+        lastScriptExecution.reset();
         String jsScript = getQuery();
         if (logScript()) {
             logger.info("Execute query:" + LINE_BREAK + jsScript);
         }
         Object result = getScriptResult(jsScript);
+        lastScriptExecution.set(jsScript + "\n" + result);
         if (result != null && logResult()) {
             logger.info(">>> " + PROCESS_RESULT.apply(result.toString()));
         }
