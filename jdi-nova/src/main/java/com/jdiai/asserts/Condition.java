@@ -6,7 +6,7 @@ import com.jdiai.interfaces.HasName;
 
 import java.util.function.Function;
 
-public interface Condition extends Function<HasCore, AR>, HasName {
+public interface Condition extends Function<HasCore, Boolean>, HasName {
     MapArray<Integer, String> NAMES = new MapArray<>();
 
     default Condition setName(String name) {
@@ -25,7 +25,7 @@ public interface Condition extends Function<HasCore, AR>, HasName {
             .replace("%element%", "'" + element.getName() + "'");
     }
 
-    default AR execute(HasCore element) {
+    default Boolean execute(HasCore element) {
         try {
             return apply(element);
         } catch (Exception ex) {

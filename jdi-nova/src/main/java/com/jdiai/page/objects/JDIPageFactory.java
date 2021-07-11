@@ -12,8 +12,8 @@ import java.util.function.Function;
 
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static com.jdiai.tools.JSTalkUtils.findByToBy;
-import static com.jdiai.tools.JSTalkUtils.uiToBy;
+import static com.jdiai.tools.JSUtils.findByToBy;
+import static com.jdiai.tools.JSUtils.uiToBy;
 import static com.jdiai.tools.TestIDLocators.SMART_LOCATOR;
 
 public class JDIPageFactory {

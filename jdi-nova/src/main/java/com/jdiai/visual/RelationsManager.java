@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import static com.jdiai.JS.JDI_STORAGE;
+import static com.jdiai.JDI.JDI_STORAGE;
 import static java.lang.Math.abs;
 
 public class RelationsManager {

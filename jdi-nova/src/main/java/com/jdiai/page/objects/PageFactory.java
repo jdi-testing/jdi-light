@@ -2,7 +2,6 @@ package com.jdiai.page.objects;
 
 import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.DataList;
-import com.jdiai.JS;
 import com.jdiai.WebPage;
 import com.jdiai.annotations.Site;
 import com.jdiai.interfaces.HasCore;
@@ -19,6 +18,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.jdiai.JDI.domain;
+import static com.jdiai.JDI.initJSFunc;
 import static com.jdiai.page.objects.CreateRule.cRule;
 import static com.jdiai.page.objects.SetupRule.sRule;
 import static java.lang.reflect.Modifier.isStatic;
@@ -56,16 +56,15 @@ public class PageFactory {
             || isInterface(f.getType(), HasCore.class)
             || isInterface(f.getType(), List.class);
         pageFactory.isUIObjectField = PageFactoryUtils::isUIObject;
-        pageFactory.fieldsFilter =
-            f -> !f.getName().equals("core") &&
-                (pageFactory.isUIElementField.apply(f) || pageFactory.isUIObjectField.apply(f));
+        pageFactory.fieldsFilter = f -> !f.getName().equals("core") &&
+            (pageFactory.isUIElementField.apply(f) || pageFactory.isUIObjectField.apply(f));
         pageFactory.filterPages = f -> isStatic(f.getModifiers()) && (
             isClass(f.getType(), WebPage.class)
             || pageFactory.isUIObjectField.apply(f)
             || pageFactory.isUIElementField.apply(f)
         );
         pageFactory.createRules = map(
-            $("WebElement", cRule(WebElement.class, cl -> new JS())),
+            $("WebElement", cRule(WebElement.class, cl -> initJSFunc.get())),
             $("List", cRule(List.class, cl -> new DataList<>()))
         );
         pageFactory.setupRules = new MapArray<>(

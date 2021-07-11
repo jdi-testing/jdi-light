@@ -9,6 +9,8 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.JDI.IGNORE_FAILURE;
 import static com.jdiai.JDI.timeout;
+import static com.jdiai.JDIStatistic.shouldValidations;
+import static com.jdiai.jsbuilder.JSBuilder.lastScriptExecution;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jsdriver.JDINovaException.throwAssert;
 import static java.lang.String.format;
@@ -19,11 +21,12 @@ public class ShouldUtils {
         if (isEmpty(conditions)) {
             throw new JDINovaException("Please specify at least 1 Condition");
         }
+        shouldValidations ++;
         Timer timer = new Timer(timeout * 1000L);
         logger.info(getCombinedAssertionName(core, conditions));
-        AR actualResult = checkConditions(core, conditions, timer);
-        if (!actualResult.result) {
-            checkOutOfTime(core, timer, actualResult, conditions);
+        boolean foundAll = checkConditions(core, conditions, timer);
+        if (!foundAll) {
+            checkOutOfTime(core, timer, conditions);
         }
         return core;
     }
@@ -38,35 +41,35 @@ public class ShouldUtils {
             : print(map(conditions, c -> c.getName(core)), "; ");
     }
 
-    private static AR checkConditions(HasCore core, Condition[] conditions, Timer timer) {
-        AR actualResult = new AR("", false);
+    private static boolean checkConditions(HasCore core, Condition[] conditions, Timer timer) {
         try {
-            while (!actualResult.getResult() && timer.isRunning()) {
+            boolean foundAll = false;
+            while (!foundAll && timer.isRunning()) {
                 for (Condition condition : conditions) {
-                    checkOutOfTime(core, timer, actualResult, conditions);
+                    checkOutOfTime(core, timer, conditions);
                     String message = "Assert that " + condition.getName(core);
                     logger.debug(message);
-                    actualResult = condition.apply(core);
-                    if (!actualResult.result) {
+                    foundAll = condition.apply(core);
+                    if (!foundAll) {
                         break;
                     }
                 }
             }
-            return actualResult;
+            return foundAll;
         } catch (Exception ex) {
             boolean ignoreFail = IGNORE_FAILURE.apply(core, ex);
             if (timer.isRunning() && ignoreFail) {
                 return checkConditions(core, conditions, timer);
             }
-            throw throwAssert(ex, ">> Assert failed\nActual result: " + actualResult.getActualValue());
+            throw throwAssert(ex, ">> Assert failed\nActual result: " + lastScriptExecution.get());
         }
     }
 
-    private static void checkOutOfTime(HasCore core, Timer timer, AR actualResult, Condition... conditions) {
+    private static void checkOutOfTime(HasCore core, Timer timer, Condition... conditions) {
         if (timer.isRunning()) {
             return;
         }
         throw throwAssert(format("Failed to execute Assert in time (%s sec);\n'%s'\nAcutal result:%s",
-            timeout, getCombinedAssertionName(core, conditions), actualResult.getActualValue()));
+            timeout, getCombinedAssertionName(core, conditions), lastScriptExecution.get()));
     }
 }

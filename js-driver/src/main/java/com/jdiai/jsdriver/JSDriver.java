@@ -16,7 +16,7 @@ import static com.jdiai.jsbuilder.ListSearch.MULTI;
 
 public class JSDriver {
     private final Supplier<WebDriver> driver;
-    public final List<By> locators;
+    public List<By> locators;
     private IJSBuilder builder;
     public ListSearch strategy = CHAIN;
     public String context = "document";

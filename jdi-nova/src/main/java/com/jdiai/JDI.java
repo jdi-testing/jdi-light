@@ -17,8 +17,10 @@ import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.JsonUtils.getDouble;
+import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.QueryLogger.LOGGER_NAME;
@@ -29,11 +31,14 @@ import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 import static com.jdiai.jswraper.driver.DriverManager.useDriver;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
+import static com.jdiai.tools.JSUtils.getLocators;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class JDI {
     public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::getDriver);
+    public static String JDI_STORAGE = "src/test/resources/jdi";
 
     public static String domain;
     public static ILogger logger;
@@ -41,6 +46,8 @@ public class JDI {
     public static int timeout = 10;
 
     public static ConditionTypes conditions = new ConditionTypes();
+
+    public static Supplier<JS> initJSFunc = () -> new JSLight(JDI::driver);
 
     public static void logJSRequests(int logQueriesLevel) {
         LOG_QUERY = logQueriesLevel;
@@ -167,6 +174,11 @@ public class JDI {
         openPage(domain);
     }
 
+    public static void reopenSite(Class<?> cl) {
+        initSite(cl);
+        reopenSite();
+    }
+
     public static void reopenSite(int width, int height) {
         reopenSite();
         driver().manage().window().setSize(new Dimension(width, height));
@@ -192,27 +204,27 @@ public class JDI {
     }
 
     public static JS $(By locator) {
-        return new JS(JDI::driver, locator);
+        return initJSFunc.get().setLocators(newList(locator));
     }
 
     public static JS $(Object parent, By locator) {
-        return new JS(JDI::driver, locator, parent);
+        return initJSFunc.get().setLocators(getLocators(locator, parent));
     }
 
     public static JS $(By... locators) {
-        return new JS(JDI::driver, locators);
+        return initJSFunc.get().setLocators(asList(locators));
     }
 
     public static JS $(String locator) {
-        return new JS(JDI::driver, NAME_TO_LOCATOR.apply(locator));
+        return $(NAME_TO_LOCATOR.apply(locator));
     }
 
     public static JS $(Object parent, String locator) {
-        return new JS(JDI::driver, NAME_TO_LOCATOR.apply(locator), parent);
+        return $(parent, NAME_TO_LOCATOR.apply(locator));
     }
 
     public static JS $(String... locators) {
-        return new JS(JDI::driver, locatorsToBy(locators));
+        return $(locatorsToBy(locators));
     }
 
     public static void loginAs(String formLocator, Object user) {
@@ -220,7 +232,7 @@ public class JDI {
     }
 
     public static void loginAs(Object user) {
-        new JS(JDI::driver).loginAs(user);
+        initJSFunc.get().loginAs(user);
     }
 
     public static void submitForm(String formLocator, Object user) {
@@ -228,7 +240,7 @@ public class JDI {
     }
 
     public static void submitForm(Object user) {
-        new JS(JDI::driver).submit(user);
+        initJSFunc.get().submit(user);
     }
 
     public static void fillFormWith(String formLocator, Object user) {
@@ -236,7 +248,7 @@ public class JDI {
     }
 
     public static void fillFormWith(Object user) {
-        new JS(JDI::driver).fill(user);
+        initJSFunc.get().fill(user);
     }
 
     public static DragAndDrop drag(JS dragElement) { return new DragAndDrop(dragElement);}

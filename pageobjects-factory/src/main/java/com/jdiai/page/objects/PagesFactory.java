@@ -7,6 +7,7 @@ import com.epam.jdi.tools.pairs.Pair;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -45,13 +46,19 @@ public class PagesFactory {
 
     public PagesFactory() { }
 
+    protected List<Class<?>> initialized = new ArrayList<>();
+
     public void initSite(Class<?> cl) {
         initSiteFunc.accept(cl);
+        if (initialized.contains(cl)) {
+            return;
+        }
         Field[] allFields = cl.getDeclaredFields();
         List<Field> pages = filter(allFields, filterPages);
         for (Field field : pages) {
             createAndSetupField(null, field);
         }
+        initialized.add(cl);
     }
 
     public <T> T initElements(Class<T> cl) {

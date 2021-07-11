@@ -41,7 +41,7 @@ public class WebPage implements HasName, ISetup {
 
     public File makeScreenshot() {
         return $("body")
-            .setName(getName())
+            .setName(getName()).core()
             .makeScreenshot(getName());
     }
 }
