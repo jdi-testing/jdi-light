@@ -16,10 +16,7 @@ import com.jdiai.jsdriver.JSDriverUtils;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.jswraper.JSSmart;
 import com.jdiai.scripts.Whammy;
-import com.jdiai.tools.ClientRect;
-import com.jdiai.tools.GetTextTypes;
-import com.jdiai.tools.JSImages;
-import com.jdiai.tools.Keyboard;
+import com.jdiai.tools.*;
 import com.jdiai.visual.Direction;
 import com.jdiai.visual.ImageTypes;
 import com.jdiai.visual.OfElement;
@@ -96,31 +93,19 @@ public class JSLight implements JS {
     }
 
     public JSLight(JSLight parent, By locator) {
-        this(parent::driver, locator, parent, true);
-    }
-
-    public JSLight(Supplier<WebDriver> driver, By locator, Object parent) {
-        this(driver, locator, parent, true);
+        this(parent::driver, locator, parent);
     }
 
     public JSLight(WebDriver driver, By locator, Object parent) {
         this(() -> driver, locator, parent);
     }
 
-    public JSLight(JSLight parent, By locator, boolean useParentLocators) {
-        this(parent::driver, locator, parent, useParentLocators);
-    }
-
-    public JSLight(Supplier<WebDriver> driver, By locator, Object parent, boolean useParentLocators) {
-        this(driver, locatorsFromParent(locator, parent, useParentLocators));
+    public JSLight(Supplier<WebDriver> driver, By locator, Object parent) {
+        this(driver, JSUtils.getLocators(locator, parent));
         this.parent = parent;
         if (parent != null && isInterface(parent.getClass(), HasCore.class)) {
             this.js.updateDriver(((HasCore) parent).core().jsDriver().jsDriver());
         }
-    }
-
-    public JSLight(WebDriver driver, By locator, Object parent, boolean useParentLocators) {
-        this(() -> driver, locator, parent, useParentLocators);
     }
 
     public WebDriver driver() {
@@ -156,18 +141,6 @@ public class JSLight implements JS {
     //         } catch (Exception ignore) { }
     //     }
     // }
-
-    private static List<By> locatorsFromParent(By locator, Object parent, boolean useParentLocators) {
-        List<By> locators = new ArrayList<>();
-        if (useParentLocators && parent != null && isInterface(parent.getClass(), HasLocators.class)) {
-            List<By> pLocators = ((HasLocators) parent).locators();
-            if (isNotEmpty(pLocators)) {
-                locators.addAll(copyList(pLocators));
-            }
-        }
-        locators.add(locator);
-        return locators;
-    }
 
     @Override
     public String getElement(String valueFunc) {
