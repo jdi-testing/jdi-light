@@ -8,30 +8,30 @@ import static io.github.com.StaticSite.ListPage;
 
 public class ListsTests extends TestsInit{
 
-    /*@Test
+    @Test
     public void simpleList() {
-        dataDisplayListsSimpleListPage.open();
+        ListPage.open();
 
-        listsFrame.firstListItem.is().enabled();
-        listsFrame.firstListItem.is().text(hasToString("List item 1"));
-        listsFrame.secondListItem.is().enabled();
-        listsFrame.secondListItem.is().text(hasToString("List item 2"));
+        ListPage.firstListItem.is().enabled();
+        ListPage.firstListItem.is().text(hasToString("List item 1"));
+        ListPage.secondListItem.is().enabled();
+        ListPage.secondListItem.is().text(hasToString("List item 2"));
     }
 
     @Test
     public void checkboxList() {
-        dataDisplayCheckboxListPage.open();
+        ListPage.open();
 
-        listsFrame.lineItemFirst.is().enabled();
-        listsFrame.lineItemFirst.is().text(hasToString("Line item 1"));
-        listsFrame.checkboxLineItemFirst.is().checked();
+        ListPage.lineItemFirst.is().enabled();
+        ListPage.lineItemFirst.is().text(hasToString("Line item 1"));
+        ListPage.checkboxLineItemFirst.is().checked();
 
-        listsFrame.checkboxLineItemFirst.uncheck();
-        listsFrame.checkboxLineItemFirst.is().unchecked();
+        ListPage.checkboxLineItemFirst.uncheck();
+        ListPage.checkboxLineItemFirst.is().unchecked();
 
-        listsFrame.checkboxLineItemFirst.check();
-        listsFrame.checkboxLineItemFirst.is().checked();
-    }*/
+        ListPage.checkboxLineItemFirst.check();
+        ListPage.checkboxLineItemFirst.is().checked();
+    }
 
     @Test
     public void pinnedSubHeaderList() {
