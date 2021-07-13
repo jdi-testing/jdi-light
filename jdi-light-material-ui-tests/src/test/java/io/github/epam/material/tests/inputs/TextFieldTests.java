@@ -24,12 +24,6 @@ public class TextFieldTests extends TestsInit {
     }
 
     @Test
-    public void standardTextFieldTest() {
-        textFieldPage.standartTextField.is().enabled();
-        textFieldPage.standartTextField.setValue(DEFAULT_VALUE);
-        textFieldPage.standartTextField.has().text(DEFAULT_VALUE);
-    }
-
     public void formPropsTextFieldTest() {
 
         Random random = new Random();

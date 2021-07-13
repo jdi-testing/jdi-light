@@ -8,6 +8,6 @@ public class SimpleTransferListPage extends WebPage {
 
     @JDITransferList(root = "#root", moveAllLeftButton = "button[aria-label='move all left']",
             moveAllRightButton = "button[aria-label='move all right']")
-    public SimpleTransferList simpleTransferList;
+    public static SimpleTransferList simpleTransferList;
 
 }
