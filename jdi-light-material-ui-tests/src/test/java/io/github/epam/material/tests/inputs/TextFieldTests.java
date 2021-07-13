@@ -12,6 +12,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.material.elements.utils.StringUtils.generateRandomString;
 import static io.github.com.StaticSite.textFieldPage;
 
+
 public class TextFieldTests extends TestsInit {
 
     public static final String DEFAULT_VALUE = "Default Value";
@@ -22,10 +23,13 @@ public class TextFieldTests extends TestsInit {
         textFieldPage.isOpened();
     }
 
-
-
-
     @Test
+    public void standardTextFieldTest() {
+        textFieldPage.standartTextField.is().enabled();
+        textFieldPage.standartTextField.setValue(DEFAULT_VALUE);
+        textFieldPage.standartTextField.has().text(DEFAULT_VALUE);
+    }
+
     public void formPropsTextFieldTest() {
 
         Random random = new Random();
@@ -149,7 +153,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void selectTest() {
-
         for(CurrencyItems currency : CurrencyItems.values()){
             textFieldPage.selectElementField.click();
             textFieldPage.selectElement.selectItemByText(currency.currencyItemText);

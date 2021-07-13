@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
@@ -62,31 +63,13 @@ public class StaticSite {
     @Url("/textarea_autosize")
     public static TextAreaAutoSizePage textAreaAutoSizePage;
 
-    @Url("/material-ui-inputs-text-field--standard")
-    public static WebPage inputTextFieldStandardPage;
-
-    @Url("/material-ui-inputs-text-field--field-with-default")
-    public static WebPage inputTextFieldFilledWithDefaultPage;
-
-    @Url("/material-ui-inputs-text-field--filled")
-    public static WebPage inputTextFieldFilledPage;
-
-    @Url("/material-ui-inputs-text-field--disabled")
-    public static WebPage inputTextFieldDisabledPage;
-
-    @Url("/material-ui-inputs-text-field--time")
-    public static WebPage inputTextFieldTimePage;
-
     //checkbox
     @Url("/checkboxes")
     public static CheckboxPage checkboxPage;
 
     // button group
-    @Frame("storybook-preview-iframe")
-    public static ButtonGroupFrame buttonGroupFrame;
-
-    @Frame("storybook-preview-iframe")
-    public static SplitButtonGroupFrame splitButtonGroupFrame;
+    @Url("/button_groups")
+    public static ButtonGroupPage buttonGroupPage;
 
     @Url("/material-ui-inputs-button-group--default")
     public static WebPage inputButtonGroupDefaultPage;
@@ -94,7 +77,7 @@ public class StaticSite {
     @Url("/material-ui-inputs-button-group--disabled")
     public static WebPage inputButtonGroupDisabledPage;
 
-    @Url("/material-ui-inputs-button-group--split-button")
+    @Url("/button_groups")
     public static WebPage inputButtonGroupSplitPage;
 
     @Url("/selects")
