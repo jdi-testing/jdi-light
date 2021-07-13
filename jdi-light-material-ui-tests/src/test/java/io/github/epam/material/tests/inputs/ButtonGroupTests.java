@@ -4,7 +4,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.buttonGroupPage;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.inputs.ButtonGroupPage.*;
 
 public class ButtonGroupTests extends TestsInit {
 
@@ -18,45 +19,45 @@ public class ButtonGroupTests extends TestsInit {
     @Test
     public void basicButtonGroupTest() {
 
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).click();
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(2).click();
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(3).click();
+        basicButtonGroup.getButtonByIndex(1).click();
+        basicButtonGroup.getButtonByIndex(2).click();
+        basicButtonGroup.getButtonByIndex(3).click();
 
-        buttonGroupPage.basicButtonGroup.getButtonByText("Three").click();
-        buttonGroupPage.basicButtonGroup.getButtonByText("Two").click();
-        buttonGroupPage.basicButtonGroup.getButtonByText("One").click();
+        basicButtonGroup.getButtonByText("Three").click();
+        basicButtonGroup.getButtonByText("Two").click();
+        basicButtonGroup.getButtonByText("One").click();
 
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).is().enabled();
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).has().text("ONE");
+        basicButtonGroup.getButtonByIndex(1).is().enabled();
+        basicButtonGroup.getButtonByIndex(1).has().text("ONE");
     }
 
     @Test
     public void verticalButtonGroupTest() {
 
-        buttonGroupPage.verticalButtonGroup.getButtonByIndex(2).click();
-        buttonGroupPage.verticalButtonGroup.getButtonByIndex(3).click();
+        verticalButtonGroup.getButtonByIndex(2).click();
+        verticalButtonGroup.getButtonByIndex(3).click();
 
-        buttonGroupPage.verticalButtonGroup.getButtonByText("Two").click();
-        buttonGroupPage.verticalButtonGroup.getButtonByText("One").click();
+        verticalButtonGroup.getButtonByText("Two").click();
+        verticalButtonGroup.getButtonByText("One").click();
 
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(2).is().enabled();
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(2).has().text("TWO");
+        basicButtonGroup.getButtonByIndex(2).is().enabled();
+        basicButtonGroup.getButtonByIndex(2).has().text("TWO");
     }
 
-    /*@Test
+    @Test
     public void disabledButtonGroupTest() {
 
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).is().disabled();
-        buttonGroupPage.basicButtonGroup.getButtonByText("Two").is().disabled();
-    }*/
+        basicButtonGroup.getButtonByIndex(1).is().disabled();
+        basicButtonGroup.getButtonByText("Two").is().disabled();
+    }
 
     @Test
     public void splitButtonGroupTest() {
-        buttonGroupPage.splitButtonGroup.getMainButton().click();
-        buttonGroupPage.splitButtonGroup.getMainButton()
+        splitButtonGroup.getMainButton().click();
+        splitButtonGroup.getMainButton()
                 .has().text("SQUASH AND MERGE");
-        buttonGroupPage.splitButtonGroup.select("Create a merge commit");
-        buttonGroupPage.splitButtonGroup.getMainButton()
+        splitButtonGroup.select("Create a merge commit");
+        splitButtonGroup.getMainButton()
                 .has().text("CREATE A MERGE COMMIT");
     }
 }

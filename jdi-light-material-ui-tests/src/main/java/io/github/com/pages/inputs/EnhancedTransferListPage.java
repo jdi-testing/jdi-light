@@ -7,6 +7,6 @@ public class EnhancedTransferListPage extends WebPage {
 
     @JDITransferList(root = "#root", allItemsLeftCheckbox = "(//span[./input[@aria-label='all items selected']])[1]",
         allItemsRightCheckbox = "(//span[./input[@aria-label='all items selected']])[2]")
-    public EnhancedTransferList enhancedTransferList;
+    public static EnhancedTransferList enhancedTransferList;
 
 }

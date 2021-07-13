@@ -1,7 +1,8 @@
 package io.github.epam.material.tests.inputs;
 
-import static io.github.com.StaticSite.enhancedTransferListPage;
-import static io.github.com.StaticSite.simpleTransferListPage;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.inputs.SimpleTransferListPage.*;
+import static io.github.com.pages.inputs.EnhancedTransferListPage.*;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
@@ -11,52 +12,52 @@ public class TransferListTests extends TestsInit {
     @Test
     public void simpleTransferListTest() {
         simpleTransferListPage.open();
-        simpleTransferListPage.simpleTransferList.is().isMoveRightButtonDisable();
-        simpleTransferListPage.simpleTransferList.is().isMoveLeftButtonDisable();
+        simpleTransferList.is().isMoveRightButtonDisable();
+        simpleTransferList.is().isMoveLeftButtonDisable();
 
-        simpleTransferListPage.simpleTransferList.check("List item 1");
-        simpleTransferListPage.simpleTransferList.is().checked("List item 1");
+        simpleTransferList.check("List item 1");
+        simpleTransferList.is().checked("List item 1");
 
-        simpleTransferListPage.simpleTransferList.is().isMoveRightButtonEnable();
-        simpleTransferListPage.simpleTransferList.moveItemsRight();
-        simpleTransferListPage.simpleTransferList.is().itemsMovedRight("List item 1");
+        simpleTransferList.is().isMoveRightButtonEnable();
+        simpleTransferList.moveItemsRight();
+        simpleTransferList.is().itemsMovedRight("List item 1");
 
-        simpleTransferListPage.simpleTransferList.check("List item 5");
-        simpleTransferListPage.simpleTransferList.check("List item 6");
-        simpleTransferListPage.simpleTransferList.is().checked("List item 5");
-        simpleTransferListPage.simpleTransferList.is().checked("List item 6");
-        simpleTransferListPage.simpleTransferList.is().isMoveLeftButtonEnable();
-        simpleTransferListPage.simpleTransferList.moveItemsLeft();
-        simpleTransferListPage.simpleTransferList.is().itemsMovedLeft("List item 5", "List item 6");
+        simpleTransferList.check("List item 5");
+        simpleTransferList.check("List item 6");
+        simpleTransferList.is().checked("List item 5");
+        simpleTransferList.is().checked("List item 6");
+        simpleTransferList.is().isMoveLeftButtonEnable();
+        simpleTransferList.moveItemsLeft();
+        simpleTransferList.is().itemsMovedLeft("List item 5", "List item 6");
 
-        simpleTransferListPage.simpleTransferList.moveAllElementsRight();
-        simpleTransferListPage.simpleTransferList.is().itemsMovedRight("List item 1", "List item 2",
+        simpleTransferList.moveAllElementsRight();
+        simpleTransferList.is().itemsMovedRight("List item 1", "List item 2",
             "List item 3", "List item 4", "List item 5", "List item 6", "List item 7", "List item 8");
 
-        simpleTransferListPage.simpleTransferList.moveAllElementsLeft();
-        simpleTransferListPage.simpleTransferList.is().itemsMovedLeft("List item 1", "List item 2",
+        simpleTransferList.moveAllElementsLeft();
+        simpleTransferList.is().itemsMovedLeft("List item 1", "List item 2",
           "List item 3", "List item 4", "List item 5", "List item 6", "List item 7", "List item 8");
     }
 
     @Test
     public void enhancedTransferListTest() {
         enhancedTransferListPage.open();
-        enhancedTransferListPage.enhancedTransferList.is().isMoveRightButtonDisable();
-        enhancedTransferListPage.enhancedTransferList.is().isMoveLeftButtonDisable();
+        enhancedTransferList.is().isMoveRightButtonDisable();
+        enhancedTransferList.is().isMoveLeftButtonDisable();
 
-        enhancedTransferListPage.enhancedTransferList.check("List item 1");
-        enhancedTransferListPage.enhancedTransferList.is().checked("List item 1");
-        enhancedTransferListPage.enhancedTransferList.is().isMoveRightButtonEnable();
+        enhancedTransferList.check("List item 1");
+        enhancedTransferList.is().checked("List item 1");
+        enhancedTransferList.is().isMoveRightButtonEnable();
 
-        enhancedTransferListPage.enhancedTransferList.uncheck("List item 1");
-        enhancedTransferListPage.enhancedTransferList.is().unchecked("List item 1");
+        enhancedTransferList.uncheck("List item 1");
+        enhancedTransferList.is().unchecked("List item 1");
 
-        enhancedTransferListPage.enhancedTransferList.moveAllElementsRight();
-        enhancedTransferListPage.enhancedTransferList.is().itemsMovedRight("List item 1", "List item 2",
+        enhancedTransferList.moveAllElementsRight();
+        enhancedTransferList.is().itemsMovedRight("List item 1", "List item 2",
             "List item 3", "List item 4", "List item 5", "List item 6", "List item 7", "List item 8");
 
-        enhancedTransferListPage.enhancedTransferList.moveAllElementsLeft();
-        enhancedTransferListPage.enhancedTransferList.is().itemsMovedLeft("List item 1", "List item 2",
+        enhancedTransferList.moveAllElementsLeft();
+        enhancedTransferList.is().itemsMovedLeft("List item 1", "List item 2",
             "List item 3", "List item 4", "List item 5", "List item 6", "List item 7", "List item 8");
     }
 
