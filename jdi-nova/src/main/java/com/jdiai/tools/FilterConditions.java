@@ -8,7 +8,7 @@ import static java.lang.String.format;
 
 public class FilterConditions {
     public static Function<JS, String> textEquals(String value) {
-        return el -> format("%s === '%s'", el.textType().trim(), value.trim());
+        return el -> format("%s === '%s'", el.textType().trim(), value);
     }
     public static Function<JS, String> textContains(String value) {
         return el -> format("%s.toLowerCase().includes('%s'.toLowerCase())",
@@ -20,6 +20,13 @@ public class FilterConditions {
 
     public static Function<JS, String> hasAttribute(String attrName, String value) {
         return el -> format(".getAttribute('%s') === '%s'", attrName, value);
+    }
+
+    public static Function<JS, String> hasProperty(String propName, String value) {
+        final String expectedValue = value.contains(" ")
+            ? "'" + value + "'"
+            : value;
+        return el -> format("%s === %s", propName, expectedValue);
     }
 
     public static Function<JS, String> hasTag(String value) {
