@@ -8,7 +8,6 @@ import com.google.gson.JsonObject;
 import com.jdiai.annotations.UI;
 import com.jdiai.asserts.DisplayedTypes;
 import com.jdiai.interfaces.HasCore;
-import com.jdiai.interfaces.HasLocators;
 import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsdriver.JSDriver;

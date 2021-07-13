@@ -89,17 +89,17 @@ public abstract class Conditions {
 
     public static Condition attribute(String attributeName, String value) {
         return condition("%element% has %no% '" + attributeName + "=" + value + "' attribute",
-            el -> el.attr(attributeName).equals(value));
+            el -> el.attr(attributeName).trim().equals(value));
     }
 
     public static Condition containsAttribute(String attributeName, String value) {
         return condition("%element% has %no% '" + attributeName + " that contains " + value + "' attribute",
-            el -> el.attr(attributeName).contains(value));
+            el -> el.attr(attributeName).trim().contains(value));
     }
 
     public static Condition matchAttribute(String attributeName, String regEx) {
         return condition("%element% has %no% '" + attributeName + " matches " + regEx + "' attribute",
-            el -> el.attr(attributeName).matches(regEx));
+            el -> el.attr(attributeName).trim().matches(regEx));
     }
 
     public static Condition href(String href) {
@@ -123,11 +123,11 @@ public abstract class Conditions {
     }
 
     public static Condition pseudo(String pseudoName, String propertyName, String expectedValue) {
-        return el -> el.core().pseudo(pseudoName, propertyName).equals(expectedValue);
+        return el -> el.core().pseudo(pseudoName, propertyName).trim().equals(expectedValue);
     }
 
     public static Condition pseudo(String pseudoElementName, String expectedValue) {
-        return el -> el.core().pseudo(pseudoElementName, "content").equals(expectedValue);
+        return el -> el.core().pseudo(pseudoElementName, "content").trim().equals(expectedValue);
     }
 
     public static Condition exactValue(String value) {
@@ -151,7 +151,7 @@ public abstract class Conditions {
         return attribute("id", id);
     }
 
-    public static Condition empty = condition("%element% is %not% empty", el -> el.getText().equals(""));
+    public static Condition empty = condition("%element% is %not% empty", el -> el.getText().trim().equals(""));
 
     public static Condition matchesText(String text) {
         return matchText(text);
@@ -159,7 +159,7 @@ public abstract class Conditions {
 
     public static Condition matchText(String regex) {
         return condition("%element% text %not% matches '" + regex + "'",
-            el -> el.getText().matches(regex));
+            el -> el.getText().trim().matches(regex));
     }
 
     public static Condition be(Object entity) {
@@ -201,9 +201,13 @@ public abstract class Conditions {
         return condition("%element% has expected amount of elements",
             el -> sizeFunc.apply(el.core().size()));
     }
+    public static Condition exactText(String text) {
+        return condition("%element% has %no% text='" + text + "'",
+                el -> el.getText().equals(text));
+    }
     public static Condition text(String text) {
         return condition("%element% has %no% text='" + text + "'",
-            el -> el.getText().equals(text));
+            el -> el.getText().trim().equals(text));
     }
     public static Condition containsText(String text) {
         return condition("%element% contains %no% text='" + text + "'",
