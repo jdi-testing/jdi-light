@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.buttonGroupPage;
+
 public class ButtonGroupTests extends TestsInit {
 
     @BeforeMethod
@@ -38,26 +39,24 @@ public class ButtonGroupTests extends TestsInit {
         buttonGroupPage.verticalButtonGroup.getButtonByText("Two").click();
         buttonGroupPage.verticalButtonGroup.getButtonByText("One").click();
 
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).is().enabled();
-        buttonGroupPage.basicButtonGroup.getButtonByIndex(1).has().text("ONE");
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(2).is().enabled();
+        buttonGroupPage.basicButtonGroup.getButtonByIndex(2).has().text("TWO");
     }
 
-    @Test
+    /*@Test
     public void disabledButtonGroupTest() {
 
         buttonGroupPage.basicButtonGroup.getButtonByIndex(1).is().disabled();
         buttonGroupPage.basicButtonGroup.getButtonByText("Two").is().disabled();
-    }
+    }*/
 
     @Test
     public void splitButtonGroupTest() {
-
         buttonGroupPage.splitButtonGroup.getMainButton().click();
         buttonGroupPage.splitButtonGroup.getMainButton()
                 .has().text("SQUASH AND MERGE");
-        buttonGroupPage.splitButtonGroup.select("Update project");
+        buttonGroupPage.splitButtonGroup.select("Create a merge commit");
         buttonGroupPage.splitButtonGroup.getMainButton()
-                .has().text("UPDATE PROJECT");
-        
+                .has().text("CREATE A MERGE COMMIT");
     }
 }

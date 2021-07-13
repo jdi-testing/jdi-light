@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
@@ -53,40 +54,32 @@ public class StaticSite {
 
     // floating action button
     @Url("/floating_action_button")
-    public static FabPage fabPage;
+    public static FloatingActionButtonPage floatingActionButtonPage;
 
     // text field
-    @Frame("storybook-preview-iframe")
-    public static TextFieldFrame textFieldFrame;
+    @Url("/text_field")
+    public static TextFieldPage textFieldPage;
 
     @Url("/textarea_autosize")
     public static TextAreaAutoSizePage textAreaAutoSizePage;
-
-    @Url("/material-ui-inputs-text-field--standard")
-    public static WebPage inputTextFieldStandardPage;
-
-    @Url("/material-ui-inputs-text-field--field-with-default")
-    public static WebPage inputTextFieldFilledWithDefaultPage;
-
-    @Url("/material-ui-inputs-text-field--filled")
-    public static WebPage inputTextFieldFilledPage;
-
-    @Url("/material-ui-inputs-text-field--disabled")
-    public static WebPage inputTextFieldDisabledPage;
-
-    @Url("/material-ui-inputs-text-field--time")
-    public static WebPage inputTextFieldTimePage;
 
     //checkbox
     @Url("/checkboxes")
     public static CheckboxPage checkboxPage;
 
     // button group
-
     @Url("/button_groups")
     public static ButtonGroupPage buttonGroupPage;
 
-    //select
+    @Url("/material-ui-inputs-button-group--default")
+    public static WebPage inputButtonGroupDefaultPage;
+
+    @Url("/material-ui-inputs-button-group--disabled")
+    public static WebPage inputButtonGroupDisabledPage;
+
+    @Url("/button_groups")
+    public static WebPage inputButtonGroupSplitPage;
+
     @Url("/selects")
     public static SelectPage selectPage;
 
@@ -142,11 +135,6 @@ public class StaticSite {
 
     @Url("/avatar")
     public static AvatarPage avatarPage;
-
-    public static GroupCheckBoxFrame groupCheckBoxFrame;
-
-    @Url("/material-ui-inputs-checkbox--group")
-    public static WebPage groupCheckBoxPage;
 
     // Display data
     //icons

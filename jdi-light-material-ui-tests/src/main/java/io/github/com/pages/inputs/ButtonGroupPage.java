@@ -13,6 +13,7 @@ public class ButtonGroupPage extends WebPage {
     @UI("//*[@id=\"__next\"]/div/div/div[2]/div/div/div/div[2]/div")
     public ButtonGroup verticalButtonGroup;
 
+    @UI("//*[@id=\"__next\"]/div/div/div[2]/div/div/div/div[3]/div")
     @JDIButtonGroup(
             root = "#root",
             mainButton = ".MuiButton-root[1]",

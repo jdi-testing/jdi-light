@@ -37,4 +37,10 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is read-only")
+    public TextFieldAssert readOnly() {
+        jdiAssert(element().isReadOnly(), Matchers.is(true));
+        return this;
+    }
+
 }

@@ -8,7 +8,6 @@ import static io.github.com.StaticSite.*;
 import static io.github.com.pages.navigation.SimpleMenuPage.*;
 import static io.github.com.pages.navigation.ContextMenuPage.*;
 
-
 public class MenuTests extends TestsInit {
 
     @BeforeMethod
@@ -53,9 +52,9 @@ public class MenuTests extends TestsInit {
     public void contextMenuTest() {
         contextMenuPage.open();
         contextMenu.rightClick();
-        menuContextListFirstButton.has().text("Copy");
-        menuContextListFirstButton.click();
-        contextMenu.is().displayed();
+        menuContextListLastButton.has().text("Email");
+        menuContextListLastButton.click();
+        contextMenu.isDisplayed();
     }
 
     @Test
