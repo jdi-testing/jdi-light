@@ -54,7 +54,7 @@ public class StaticSite {
 
     // floating action button
     @Url("/floating_action_button")
-    public static FabPage fabPage;
+    public static FloatingActionButtonPage floatingActionButtonPage;
 
     // text field
     @Url("/text_field")
@@ -135,11 +135,6 @@ public class StaticSite {
 
     @Url("/avatar")
     public static AvatarPage avatarPage;
-
-    public static GroupCheckBoxFrame groupCheckBoxFrame;
-
-    @Url("/material-ui-inputs-checkbox--group")
-    public static WebPage groupCheckBoxPage;
 
     // Display data
     //icons
