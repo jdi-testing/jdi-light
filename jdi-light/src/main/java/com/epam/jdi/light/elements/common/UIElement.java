@@ -285,14 +285,11 @@ public class UIElement extends JDIBase
             "if (!rect) return false;\n" +
             "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight);\n" +
             "const windowWidth = Math.min(window.innerWidth || document.documentElement.clientWidth);\n" +
-            "const ratio = arguments[1];\n" +
-            "const reduceHeight = ratio*windowHeight;\n" +
-            "const reduceWidth = ratio*windowWidth\n" +
-            "if (rect.top < reduceHeight) return false;\n" +
-            "if (rect.left < reduceWidth) return false;\n" +
-            "if (rect.bottom > windowHeight-reduceHeight) return false;\n" +
-            "if (rect.right > windowWidth-reduceWidth) return false;\n" +
-            "return true;", getWebElement(), 0.05);
+            "if (rect.top < 0) return false;\n" +
+            "if (rect.left < 0) return false;\n" +
+            "if (rect.bottom > windowHeight) return false;\n" +
+            "if (rect.right > windowWidth) return false;\n" +
+            "return true;", getWebElement());
         return (boolean)isInView;
     }
 
