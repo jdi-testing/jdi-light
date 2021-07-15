@@ -23,4 +23,10 @@ public class ListPage extends WebPage {
 
     @XPath("//*[contains(text(),'Line item 1')]/../../div[contains(@class, 'MuiListItemIcon-root')]/span")
     public Lists checkboxLineItemFirst;
+
+    @UI("//*[contains(text(), 'Inbox')]")
+    public Lists inputSelectedListItem;
+
+    @UI("//*[contains(text(), 'Trash')]")
+    public Lists trashSelectedListItem;
 }
