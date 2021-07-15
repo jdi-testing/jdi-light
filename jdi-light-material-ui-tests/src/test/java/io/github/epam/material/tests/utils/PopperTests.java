@@ -31,8 +31,6 @@ public class PopperTests extends TestsInit {
             buttons.get(i).click();
             buttons.get(i).has().text(POPPER_TEXTS.get(i));
             tooltip.has().attr("x-placement", TOOLTIP_CLASSES.get(i));
-            buttons.get(i).click();
-            tooltip.is().notVisible();
         }
     }
 }
