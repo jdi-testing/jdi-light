@@ -69,11 +69,13 @@ public class WebDriverFactory {
         Lock locker = new ReentrantLock();
         locker.lock();
         try {
-            if (!DRIVERS.has(driverName) && DRIVER.types.has(driverName))
+            if (!DRIVERS.has(driverName) && DRIVER.types.has(driverName)) {
                 useDriver(driverName, () -> DRIVER.types.get(driverName).getDriver());
-            if (!DRIVERS.has(driverName))
+            }
+            if (!DRIVERS.has(driverName)) {
                 throw exception("Can't get driver '%s'. Please use drivers from JDISettings.DRIVER.types list. " +
-                    "Or add your own driver with WebDriverFactory.useDriver(name,() -> WebDriver) method.");
+                        "Or add your own driver with WebDriverFactory.useDriver(name,() -> WebDriver) method.");
+            }
             WebDriver driver = getValidDriver(driverName);
             driver = DRIVER.setup.execute(driver);
             registerNewDriver(driverName, driver, drivers);
@@ -100,6 +102,9 @@ public class WebDriverFactory {
             } catch (Throwable ignore) {
                 logger.trace("getValidDriver: Get driver failed");
             }
+        }
+        if (!goodDriver) {
+            throw exception("Failed to get valid driver '%s'", driverName);
         }
         return driver;
     }
