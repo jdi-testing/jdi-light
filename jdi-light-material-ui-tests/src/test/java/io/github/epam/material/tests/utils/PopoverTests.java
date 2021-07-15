@@ -25,7 +25,6 @@ public class PopoverTests extends TestsInit {
         buttonToClick.is().text("CLICK TO OPEN POPOVER");
         buttonToClick.click();
         popoverContent.is().text("Popover content");
-
         popoverHoverField.doubleClick();
         popoverContent.is().notVisible();
     }
