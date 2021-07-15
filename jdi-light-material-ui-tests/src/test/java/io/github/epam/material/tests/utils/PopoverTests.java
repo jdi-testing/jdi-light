@@ -25,6 +25,9 @@ public class PopoverTests extends TestsInit {
         buttonToClick.is().text("CLICK TO OPEN POPOVER");
         buttonToClick.click();
         popoverContent.is().text("Popover content");
+
+        popoverHoverField.doubleClick();
+        popoverContent.is().notVisible();
     }
 
     @Test
@@ -34,5 +37,7 @@ public class PopoverTests extends TestsInit {
         popoverHoverField.hover();
         popoverHoverField.has().attr("aria-owns", "mouse-over-popover");
         popoverContent.is().text("Popover content");
+        buttonToClick.hover();
+        popoverContent.is().notVisible();
     }
 }
