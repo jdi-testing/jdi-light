@@ -278,8 +278,9 @@ public class UIElement extends JDIBase
      */
     @JDIAction(value = "Check that '{name}' is visible by user", timeout = 0)
     public boolean isVisible() {
-        if (isHidden())
+        if (isHidden()) {
             return false;
+        }
         Object isInView = js().executeScript(
             "const rect = arguments[0].getBoundingClientRect();\n" +
             "if (!rect) return false;\n" +

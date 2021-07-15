@@ -11,6 +11,7 @@ import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import org.apache.commons.lang3.ObjectUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 
@@ -490,16 +491,19 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         }
         if (header.hasValue()) return;
         List<Field> entityFields = new ArrayList<>();
-        if (lineClass != null)
+        if (lineClass != null) {
             entityFields.addAll(getFieldsExact(lineClass, f -> isInterface(f, HasValue.class)));
-        if (dataClass != null)
+        }
+        if (dataClass != null) {
             entityFields.addAll(asList(dataClass.getDeclaredFields()));
-        if (entityFields.size() > 0) {
+        }
+        if (ObjectUtils.isNotEmpty(entityFields)) {
             List<String> headers = LinqUtils.map(entityFields, field1 -> ELEMENT.name.execute(field1))
                 .stream().distinct().collect(Collectors.toList());
-            header.setFinal(headers);
-            if (!size.hasValue())
-                size.setFinal(headers.size());
+            header.set(headers);
+            if (!size.hasValue()) {
+                size.set(headers.size());
+            }
         }
     }
 
