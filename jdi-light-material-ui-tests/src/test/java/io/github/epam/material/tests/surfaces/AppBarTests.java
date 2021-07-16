@@ -1,7 +1,10 @@
 package io.github.epam.material.tests.surfaces;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Dimension;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.simpleAppBarPage;
@@ -19,6 +22,11 @@ import static  org.hamcrest.Matchers.containsString;
 
 public class AppBarTests extends TestsInit {
     private final Timer timer = new Timer(2000L);
+
+    @BeforeMethod
+    private void setWindowSize(){
+        WebDriverFactory.getDriver().manage().window().setSize(new Dimension(1920, 1080));
+    }
 
     @Test
     public void simpleAppBarTest() {
