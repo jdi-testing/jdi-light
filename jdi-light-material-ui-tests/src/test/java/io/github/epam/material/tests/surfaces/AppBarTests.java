@@ -34,9 +34,9 @@ public class AppBarTests extends TestsInit {
         appBarIcon.is().displayed();
         prominentSearch.is().displayed();
         prominentSecondMenu.is().displayed();
-        logoutSwitchButton.click();
+        logoutSwitch.uncheck();
         timer.wait(() -> appBarIcon.isNotVisible());
-        logoutSwitchButton.click();
+        logoutSwitch.check();
         timer.wait(() -> appBarIcon.isDisplayed());
         appBarIcon.click();
         timer.wait(() -> appBarIconOptions.get(1).isDisplayed());
