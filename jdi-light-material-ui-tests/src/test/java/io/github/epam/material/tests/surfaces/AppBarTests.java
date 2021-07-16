@@ -24,7 +24,7 @@ public class AppBarTests extends TestsInit {
     private final Timer timer = new Timer(2000L);
 
     @BeforeMethod
-    private void setWindowSize(){
+    public void setWindowSize(){
         WebDriverFactory.getDriver().manage().window().setSize(new Dimension(1920, 1080));
     }
 
