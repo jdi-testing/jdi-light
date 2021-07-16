@@ -22,6 +22,7 @@ public class BoxTests extends TestsInit {
 
     @Test
     public void containedBoxTest() {
+        containedBox.is().displayed();
         containedBox.click();
         containedBox.is().text("FIRST BUTTON");
         lastClickContent.is().text("You clicked First button");
@@ -40,5 +41,8 @@ public class BoxTests extends TestsInit {
         disabledBox.is().displayed();
         disabledBox.is().text("THIRD BUTTON");
         disabledBox.is().disabled();
+        disabledBox.core().click(0, 0);
+        lastClickContent.is().text("You clicked Third button");
+
     }
 }
