@@ -1,4 +1,5 @@
 package io.github.epam.material.tests.displaydata;
+
 import static org.hamcrest.Matchers.hasToString;
 
 import io.github.com.pages.displaydata.ListPage;
@@ -46,10 +47,20 @@ public class ListsTests extends TestsInit {
     }
 
     @Test
-    public void selectedList(){
+    public void selectedList() {
         ListPage.inputSelectedListItem.is().enabled();
         ListPage.inputSelectedListItem.is().text((hasToString("Inbox")));
         ListPage.trashSelectedListItem.is().enabled();
         ListPage.trashSelectedListItem.is().text((hasToString("Trash")));
+    }
+
+    @Test
+    public void secondaryTextList() {
+        ListPage.enableSecondaryTextCheckbox.get(2).isNotChecked();
+        ListPage.enableSecondaryTextCheckbox.get(2).check();
+        ListPage.enableSecondaryTextCheckbox.get(2).isChecked();
+        ListPage.secondaryLineListItems.get(1).is().text(hasToString("Secondary text"));
+        ListPage.enableSecondaryTextCheckbox.get(2).uncheck();
+        ListPage.secondaryLineListItems.get(1).is().notVisible();
     }
 }
