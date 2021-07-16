@@ -35,6 +35,12 @@ public class TransitionTests extends TestsInit {
         timer.wait(() -> collapseFadeTransitions.get(1).hasClass(containsString("MuiCollapse-entered").toString()));
         collapseFadeTransitions.get(1).has().classValue(containsString("MuiCollapse-entered"));
         collapseFadeTransitions.get(2).has().classValue(containsString("MuiCollapse-entered"));
+
+        checkboxes.get(1).uncheck();
+
+        timer.wait(() -> collapseFadeTransitions.get(1).hasClass(containsString("MuiCollapse-hidden").toString()));
+        collapseFadeTransitions.get(1).has().classValue(not(containsString("MuiCollapse-entered")));
+        collapseFadeTransitions.get(2).has().classValue(not(containsString("MuiCollapse-entered")));
     }
 
     @Test
@@ -47,6 +53,11 @@ public class TransitionTests extends TestsInit {
         timer.wait(() -> collapseFadeTransitions.get(3).hasClass(containsString("MuiCollapse-entered").toString()));
         collapseFadeTransitions.get(3).has().classValue(containsString("MuiCollapse-entered"));
         collapseFadeTransitions.get(4).has().classValue(containsString("MuiCollapse-entered"));
+
+        checkboxes.get(2).uncheck();
+        timer.wait(() -> collapseFadeTransitions.get(3).hasClass(containsString("MuiCollapse-hidden").toString()));
+        collapseFadeTransitions.get(3).has().classValue(not(containsString("MuiCollapse-entered")));
+        collapseFadeTransitions.get(4).has().classValue(not(containsString("MuiCollapse-entered")));
     }
 
     @Test
@@ -58,6 +69,11 @@ public class TransitionTests extends TestsInit {
 
         growSlideTransitions.get(1).is().displayed();
         growSlideTransitions.get(2).is().displayed();
+
+        checkboxes.get(3).uncheck();
+
+        growSlideTransitions.get(1).is().hidden();
+        growSlideTransitions.get(2).is().hidden();
     }
 
     @Test
@@ -67,6 +83,10 @@ public class TransitionTests extends TestsInit {
         checkboxes.get(4).check();
 
         growSlideTransitions.get(3).is().displayed();
+
+        checkboxes.get(4).uncheck();
+
+        growSlideTransitions.get(3).is().hidden();
     }
 
     @Test
@@ -80,5 +100,11 @@ public class TransitionTests extends TestsInit {
         zoomTransitions.get(1).is().displayed();
         timer.wait(() -> zoomTransitions.get(2).isDisplayed());
         zoomTransitions.get(2).is().displayed();
+
+        checkboxes.get(5).uncheck();
+
+        zoomTransitions.get(1).is().hidden();
+        timer.wait(() -> zoomTransitions.get(2).isHidden());
+        zoomTransitions.get(2).is().hidden();
     }
 }
