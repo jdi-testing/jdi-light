@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.containsString;
 
 public class TabTests extends TestsInit {
     private List<List<Button>> tableLocators;
-    private List<String> itemList = Arrays.asList("", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven");
+    private List<String> itemList = Arrays.asList("", "Item One", "Item Two", "Item Three", "Item Four", "Item Five", "Item Six", "Item Seven", "Item Eight", "Item Nine", "Item Ten", "Item Eleven");
     private int tableIndex;
     private Timer timer = new Timer(5000L);
 
