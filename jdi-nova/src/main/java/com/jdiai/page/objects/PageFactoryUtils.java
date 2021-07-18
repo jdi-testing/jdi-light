@@ -16,6 +16,7 @@ import java.util.List;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.jdiai.JDI.*;
 import static com.jdiai.page.objects.JDIPageFactory.LOCATOR_FROM_FIELD;
 import static com.jdiai.page.objects.PageFactory.getFactory;
 import static com.jdiai.tools.JSUtils.getLocators;
@@ -50,11 +51,10 @@ public class PageFactoryUtils {
         By locator = LOCATOR_FROM_FIELD.apply(info.field);
         JS core;
         List<By> locators = getLocators(info.parent);
-        core = JDI.initJSFunc.get();
         if (locator != null) {
             locators.add(locator);
         }
-        core.setLocators(locators);
+        core = initJSFunc.execute(null, null, locators);
         ((HasCore) info.instance).setCore(core);
     }
     static boolean isUIObject(Field field) {
@@ -83,7 +83,7 @@ public class PageFactoryUtils {
     static <T> T initWebDriverConstructor(Constructor<?> constructor, Class<?> fieldClass) {
         try {
             constructor.setAccessible(true);
-            return (T) constructor.newInstance(JDI.driver());
+            return (T) constructor.newInstance(driver());
         } catch (Exception ex) {
             throw new JDINovaException(ex, format("%s failed to init using empty constructors", fieldClass.getSimpleName()));
         }

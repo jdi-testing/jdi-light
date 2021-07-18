@@ -64,7 +64,7 @@ public class PageFactory {
             || pageFactory.isUIElementField.apply(f)
         );
         pageFactory.createRules = map(
-            $("WebElement", cRule(WebElement.class, cl -> initJSFunc.get())),
+            $("WebElement", cRule(WebElement.class, cl -> initJSFunc.execute(null, null, null))),
             $("List", cRule(List.class, cl -> new DataList<>()))
         );
         pageFactory.setupRules = new MapArray<>(
