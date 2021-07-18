@@ -10,19 +10,25 @@ public class JSTemplates {
         "  }\n" +
         "  return xList;\n" +
         "}\n";
+
     public static String XPATH_FUNC =
         "xpath = function(ctx, locator) {\n" +
         "  return document.evaluate(locator, ctx, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n" +
         "}\n";
-    public static String ONE_TO_RESULT = "return %s;";
+
+    public static String ONE_TO_RESULT = "return %s;\n";
+
     public static String LIST_TO_RESULT =
         "let result = [];\n" +
         "for(let element of elements) {\n" +
         "  result.push(%s);\n" +
         "}\n" +
         "return result;";
+
     public static String ONE_TO_LIST = "Array.from(%s);\n";
+
     public static String ONE_TO_ONE = "%s;\n";
+
     public static String LIST_TO_ONE =
         "found = false;\ni = 0;\n" +
         "while (!found && i < elements.length) {\n" +
@@ -30,6 +36,7 @@ public class JSTemplates {
         "  if (element !== null) { found = true; }\n" +
         "  i++;\n" +
         "}\n";
+
     public static String LIST_TO_LIST =
         "list = [];\n" +
         "for(let element of elements) {\n" +
