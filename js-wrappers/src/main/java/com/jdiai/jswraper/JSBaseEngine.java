@@ -25,7 +25,7 @@ public class JSBaseEngine extends JSElement implements JSEngine {
     }
 
     public JSBaseEngine(Supplier<WebDriver> driver, List<By> locators) {
-        this(driver, locators, new JSBuilder());
+        this(driver, locators, new JSBuilder(driver));
     }
 
     public JSBaseEngine(WebDriver driver, List<By> locators) {

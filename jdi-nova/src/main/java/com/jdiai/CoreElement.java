@@ -2,7 +2,7 @@ package com.jdiai;
 
 import com.jdiai.interfaces.HasCore;
 
-import static com.jdiai.JDI.*;
+import static com.jdiai.JDI.initJSFunc;
 
 public class CoreElement implements HasCore {
     private JS core;

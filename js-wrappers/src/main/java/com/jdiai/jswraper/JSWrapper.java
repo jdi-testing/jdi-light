@@ -16,11 +16,11 @@ public class JSWrapper {
     }
 
     public static JSEngine $w(String locator) {
-        return new JSBaseEngine(driver(), NAME_TO_LOCATOR.apply(locator));
+        return new JSWithFilters(driver(), NAME_TO_LOCATOR.apply(locator));
     }
 
     public static JSEngine $w(String... locators) {
-        return new JSBaseEngine(driver(), locatorsToBy(locators));
+        return new JSWithFilters(driver(), locatorsToBy(locators));
     }
 
     public static <T> JSEntity<T> $w(Class<T> cl, String locator) {

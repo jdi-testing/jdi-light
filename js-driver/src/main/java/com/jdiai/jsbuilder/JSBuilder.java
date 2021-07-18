@@ -38,8 +38,6 @@ public class JSBuilder implements IJSBuilder {
     protected MapArray<String, String> useFunctions = new MapArray<>();
     protected IBuilderActions builderActions;
 
-    public JSBuilder() { }
-
     public JSBuilder(Supplier<WebDriver> driver) {
         this(driver, null);
     }
@@ -276,8 +274,7 @@ public class JSBuilder implements IJSBuilder {
         }
     }
     public JSBuilder copy() {
-        JSBuilder result = new JSBuilder();
-        result.builderActions = builderActions;
+        JSBuilder result = new JSBuilder(null, builderActions);
         result.searchScript = searchScript;
         result.js = js;
         result.useFunctions = useFunctions;

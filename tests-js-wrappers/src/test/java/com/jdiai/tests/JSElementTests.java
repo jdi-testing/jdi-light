@@ -61,7 +61,6 @@ public class JSElementTests implements TestInit {
     @Test
     public void valueTest() {
         boolean isVisible = element("#user-icon").getValue(
-    "const styles = getComputedStyle(element);\n" +
             "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
                 .equalsIgnoreCase("true");
         assertTrue(isVisible);
@@ -69,7 +68,6 @@ public class JSElementTests implements TestInit {
     @Test
     public void valueLocatorListTest() {
         boolean isVisible = element(withParent("#user-icon")).getValue(
-    "const styles = getComputedStyle(element);\n" +
             "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
                 .equalsIgnoreCase("true");
         assertTrue(isVisible);
