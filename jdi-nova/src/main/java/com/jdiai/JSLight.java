@@ -5,8 +5,6 @@ import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
 import com.google.gson.JsonObject;
-import com.jdiai.annotations.UI;
-import com.jdiai.asserts.DisplayedTypes;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.jsdriver.JDINovaException;
@@ -23,7 +21,6 @@ import com.jdiai.visual.StreamToImageVideo;
 import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -41,8 +38,8 @@ import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.jdiai.JDI.*;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
-import static com.jdiai.jswraper.JSWrappersUtils.*;
-import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
+import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
+import static com.jdiai.jswraper.JSWrappersUtils.defineLocator;
 import static com.jdiai.tools.FilterConditions.textEquals;
 import static com.jdiai.tools.GetTextTypes.INNER_TEXT;
 import static com.jdiai.tools.Keyboard.pasteText;
@@ -71,34 +68,27 @@ public class JSLight implements JS {
     public JSLight() {
         this(JDI::driver, new ArrayList<>());
     }
-
     public JSLight(Supplier<WebDriver> driver, List<By> locators) {
         this.driver = driver;
         this.engine = initEngine.apply(driver, locators);
         // this.js.multiSearch();
         this.actions = new Safe<>(() -> new Actions(driver()));
     }
-
     public JSLight(WebDriver driver, List<By> locators) {
         this(() -> driver, locators);
     }
-
     public JSLight(Supplier<WebDriver> driver, By... locators) {
         this(driver, newList(locators));
     }
-
     public JSLight(WebDriver driver, By... locators) {
         this(() -> driver, locators);
     }
-
-    public JSLight(JSLight parent, By locator) {
-        this(parent::driver, locator, parent);
+    public JSLight(Object parent, By locator) {
+        this(JDI::driver, locator, parent);
     }
-
     public JSLight(WebDriver driver, By locator, Object parent) {
         this(() -> driver, locator, parent);
     }
-
     public JSLight(Supplier<WebDriver> driver, By locator, Object parent) {
         this(driver, JSUtils.getLocators(locator, parent));
         this.parent = parent;
@@ -141,10 +131,16 @@ public class JSLight implements JS {
     //     }
     // }
 
+    /**
+     * @param valueFunc = element !== null
+     *        valueFunc = element !== null && styles.visibility === 'visible'
+     *        ...
+     * @return value
+     */
     public String getElement(String valueFunc) {
         return engine().getValue(valueFunc);
     }
-    
+
     public List<String> getList(String valueFunc) {
         return engine().getValues(valueFunc);
     }
@@ -153,6 +149,12 @@ public class JSLight implements JS {
         return engine().firstValue(valueFunc);
     }
 
+    /**
+     * @param action = getAttribute('value')
+     *        action = innerText;
+     *        ...
+     * @return value
+     */
     public String getJSResult(String action) {
         return engine().getAttribute(action);
     }
@@ -178,12 +180,12 @@ public class JSLight implements JS {
             "element.dispatchEvent(new Event('change'));");
     }
 
-    public boolean selectedByValueOption(String value) {
-        return core().getJSResult("selectedOptions[0].value").trim().equals(value);
+    public String selectedValueOption() {
+        return core().getJSResult("selectedOptions[0].value").trim();
     }
 
-    public boolean selectedOption(String value) {
-        return core().getJSResult("selectedOptions[0].innerText").trim().equals(value);
+    public String selectedOption() {
+        return core().getJSResult("selectedOptions[0].innerText").trim();
     }
 
     public void doAction(String action) {
@@ -227,7 +229,7 @@ public class JSLight implements JS {
             : print(locators(), by -> JSDriverUtils.getByType(by) + ":" + JSDriverUtils.getByLocator(by), " > ");
     }
 
-    public JSLight setName(String name) {
+    public JS setName(String name) {
         this.name = name;
         return this;
     }
@@ -251,7 +253,6 @@ public class JSLight implements JS {
             "let y = rect.y + rect.height / 2;" +
             "document.elementFromPoint(x, y).click();");
     }
-
     
     public void click(int x, int y) {
         engine().jsExecute("document.elementFromPoint(" + x + ", " + y + ").click();");
@@ -269,7 +270,7 @@ public class JSLight implements JS {
                 ? new ArrayList<>()
                 : locators().subList(0, locators().size() - 2);
             locators.add(fillByTemplate(lastLocator, value));
-            new JSLight(driver, locators).click();
+            initJSFunc.execute(null, null, locators).click();
         } else {
             findFirst(textEquals(value)).click();
         }
@@ -375,7 +376,8 @@ public class JSLight implements JS {
     }
 
     public void submit() {
-        doAction("submit()");
+        click();
+        // AFTER_SUBMIT_CHECK;
     }
 
     protected String charToString(CharSequence... value) {
@@ -386,14 +388,14 @@ public class JSLight implements JS {
         if (value == null) {
             return;
         }
-        set("value+='" + charToString(value) + "';\nelement.dispatchEvent(new Event('input'));");
+        we().sendKeys(value);
     }
 
     public void input(CharSequence... value) {
         if (value == null) {
             return;
         }
-        set("value='" + charToString(value) + "';\nelement.dispatchEvent(new Event('input'));");
+        set("setAttribute('value', '');\nelement.value='" + charToString(value) + "';\nelement.dispatchEvent(new Event('input'));");
     }
 
     public void slide(String value) {
@@ -411,7 +413,7 @@ public class JSLight implements JS {
     }
 
     public void clear() {
-        doAction("value = ''");
+        doAction("setAttribute('value', '');\nelement.value='';");
     }
 
     public String getTagName() {
@@ -446,12 +448,12 @@ public class JSLight implements JS {
         return getAttributesAsList(attr);
     }
 
-    public List<Json> getAttributesAsList(String... attr) {
-        return engine().getMultiAttributes(attr);
+    public List<Json> getAttributesAsList(String... attributes) {
+        return engine().getMultiAttributes(attributes);
     }
 
-    public List<Json> attrList(String... attr) {
-        return getAttributesAsList(attr);
+    public List<Json> attrList(String... attributes) {
+        return getAttributesAsList(attributes);
     }
 
     public List<String> allClasses() {
@@ -499,8 +501,8 @@ public class JSLight implements JS {
         return engine().getStyle(style);
     }
     
-    public Json cssStyles(String... style) {
-        return engine().getStyles(style);
+    public Json cssStyles(String... styles) {
+        return engine().getStyles(styles);
     }
     
     public Json allCssStyles() {
@@ -508,7 +510,7 @@ public class JSLight implements JS {
     }
 
     public boolean isSelected() {
-        return getProperty("checked").equals("true");
+        return getProperty("checked").equals("true") || getProperty("selected").equals("true");
     }
 
     public boolean isDeselected() {
@@ -546,7 +548,7 @@ public class JSLight implements JS {
     }
 
     public boolean isVisible() {
-        return getElement(DisplayedTypes.isVisible).equalsIgnoreCase("true");
+        return getElement(conditions.isVisible).equalsIgnoreCase("true");
     }
 
     public boolean isInView() {
@@ -564,8 +566,9 @@ public class JSLight implements JS {
     public Point getLocation() {
         ClientRect rect = getClientRect();
         int x, y;
-        if (inVision(rect))
+        if (inVision(rect)) {
             return new Point(-1, -1);
+        }
         int left = max(rect.left, 0);
         int top = max(rect.top, 0);
         x = left + getWidth(rect) / 2;
@@ -756,7 +759,7 @@ public class JSLight implements JS {
     }
 
     public JS find(By by) {
-        return new JSLight(this, by);
+        return initJSFunc.execute(this, by, null);
     }
     
     public JS children() {
@@ -792,41 +795,6 @@ public class JSLight implements JS {
         engine().setMap(objectMap);
     }
 
-    public static Function<Field, String> GET_COMPLEX_VALUE = field -> {
-        if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class)) {
-            return null;
-        }
-        By locator = getLocatorFromField(field);
-        if (locator != null) {
-            String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
-            return format("'%s': %s", field.getName(), getValueType(field, element));
-        }
-        return null;
-    };
-
-    public static BiFunction<Field, Object, String> SET_COMPLEX_VALUE = (field, value)-> {
-        if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class))
-            return null;
-        By locator = getLocatorFromField(field);
-        if (locator == null) {
-            return null;
-        }
-        String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
-        return setValueType(field, element, value);
-    };
-
-    public static Function<Class<?>, String> GET_OBJECT_MAP = cl -> {
-        Field[] allFields = cl.getDeclaredFields();
-        List<String> mapList = new ArrayList<>();
-        for (Field field : allFields) {
-            String value = GET_COMPLEX_VALUE.apply(field);
-            if (value != null) {
-                mapList.add(value);
-            }
-        }
-        return "{ " + print(mapList, ", ") + " }";
-    };
-
     public <T> List<T> getEntityList(Class<T> cl) {
         return getEntityList(GET_OBJECT_MAP.apply(cl), cl);
     }
@@ -851,8 +819,6 @@ public class JSLight implements JS {
     public void loginAs(Object obj) {
         submit(obj);
     }
-
-    public static String SUBMIT_LOCATOR = "[type=submit]";
     
     public JS setEntity(Object obj) {
         Field[] allFields = obj.getClass().getDeclaredFields();
@@ -893,8 +859,9 @@ public class JSLight implements JS {
     }
     
     public JS get(int index) {
-        return listToOne("element = elements[" + index + "];\n")
-            .setName(format("%s[%s]",getName(), index));
+        JS js = listToOne("element = elements[" + index + "];\n");
+        js.setName(format("%s[%s]",getName(), index));
+        return js;
     }
     
     public JS get(String by, int index) {
@@ -909,20 +876,21 @@ public class JSLight implements JS {
             .setName(format("%s[%s]",getName(), index)).core();
     }
     
-    public JSLight get(Function<JS, String> filter) {
+    public JS get(Function<JS, String> filter) {
         return findFirst(filter);
     }
     
-    public JSLight get(String value) {
-        return get(textEquals(value))
-            .setName(format("%s[%s]",getName(), value));
+    public JS get(String value) {
+        JS js = get(textEquals(value));
+        js.setName(format("%s[%s]",getName(), value));
+        return js;
     }
     
-    public JSLight findFirst(Function<JS, String> condition) {
+    public JS findFirst(Function<JS, String> condition) {
         return findFirst(condition.apply(this));
     }
     
-    public JSLight findFirst(String condition) {
+    public JS findFirst(String condition) {
         return listToOne("element = elements.find(e => e && " + handleCondition(condition, "e") + ");\n");
     }
 
@@ -943,8 +911,8 @@ public class JSLight implements JS {
         return engine().jsDriver().indexOf(condition.apply(this));
     }
 
-    protected JSLight listToOne(String script) {
-        JSLight result = new JSLight(driver);
+    protected JS listToOne(String script) {
+        JS result = initJSFunc.execute(null, null, null);
         result.engine().jsDriver().setScriptInElementContext(engine().jsDriver(), script);
         engine().jsDriver().builder().cleanup();
         return result;

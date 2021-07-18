@@ -4,6 +4,7 @@ public class DisplayedTypes {
     public static final String isDisplayed =
         "element !== null && styles.visibility === 'visible' && styles.display !== 'none' " +
         "&& !element.hasAttribute('hidden')";
+
     public static final String isVisible =
         "if (!element) { return false; }\n" +
         "const rect = element.getBoundingClientRect();\n" +

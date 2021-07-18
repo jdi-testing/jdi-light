@@ -1,5 +1,7 @@
 package com.jdiai.jswraper;
 
+import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsbuilder.JSBuilder;
 import com.jdiai.jsproducer.Json;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,8 +17,15 @@ public class JSBaseEngine extends JSElement implements JSEngine {
     protected Class<?> entity;
     protected String objectMap;
 
-    public JSBaseEngine(Supplier<WebDriver> driver, List<By> locators) {
+    public JSBaseEngine(Supplier<WebDriver> driver, List<By> locators, IJSBuilder builder) {
         super(driver, locators);
+        if (builder != null) {
+            jsDriver().setBuilder(builder);
+        }
+    }
+
+    public JSBaseEngine(Supplier<WebDriver> driver, List<By> locators) {
+        this(driver, locators, new JSBuilder());
     }
 
     public JSBaseEngine(WebDriver driver, List<By> locators) {
