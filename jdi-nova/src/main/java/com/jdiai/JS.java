@@ -146,8 +146,6 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
 
     <T> T getEntity();
 
-    void setEntity();
-
     <T> T getEntity(String objectMap, Class<?> cl);
 
     void setEntity(String objectMap);
@@ -269,7 +267,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     }
     default JS setLocators(List<By> locators) {
         if (isNotEmpty(locators)) {
-            jsDriver().jsDriver().locators = locators;
+            engine().jsDriver().locators = locators;
         }
         return this;
     }

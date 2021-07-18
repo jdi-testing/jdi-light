@@ -8,7 +8,7 @@ import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
 import com.jdiai.jsdriver.JDINovaException;
-import com.jdiai.jswraper.JSSmart;
+import com.jdiai.jswraper.JSEngine;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
@@ -46,7 +46,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         if (labelLocator == null) {
             throw new JDINovaException("Failed to get labelElement");
         }
-        core().jsDriver().multiSearch();
+        core().engine().multiSearch();
         return core().find(labelLocator).setName(getName() + " " + labelField.getName());
     }
     private void haveLabelElement(String value) {
@@ -318,7 +318,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         return this;
     }
 
-    public JSSmart jsDriver() {
-        return core().jsDriver();
+    public JSEngine engine() {
+        return core().engine();
     }
 }

@@ -64,7 +64,7 @@ public class JSElement {
     public String getAttribute(String attribute) {
         return getValue(safeGet(attribute));
     }
-    
+
     public String getValue(String valueFunc) {
         return driver.getOne(valueFunc).asString();
     }
@@ -90,7 +90,7 @@ public class JSElement {
         return driver.getList(json).asJson();
     }
 
-    public Json getMap(String valueFunc) {
+    public Json getAsMap(String valueFunc) {
         return driver.getOne(valueFunc).asMap();
     }
 
@@ -173,7 +173,6 @@ public class JSElement {
     public List<Json> getMultiStyles(String... styles) {
         return getMultiStyles(newList(styles));
     }
-
 
     public Json getObject(List<String> attributes) {
         return getObject(attributesToJson(attributes));

@@ -1,7 +1,7 @@
 package com.jdiai.tests;
 
 import com.jdiai.TestInit;
-import com.jdiai.jsbuilder.SmartBuilderActions;
+import com.jdiai.jsbuilder.FilterBuilderActions;
 import com.jdiai.jsdriver.JSDriver;
 import com.jdiai.locators.By;
 import com.jdiai.testng.TestNGListener;
@@ -27,19 +27,19 @@ public class JSDriverFrameTests implements TestInit {
 
     @Test
     public void frameTest() {
-        JSDriver frameImage = js("frame:#first_frame", "img").updateBuilderActions(new SmartBuilderActions());
+        JSDriver frameImage = js("frame:#first_frame", "img").updateBuilderActions(new FilterBuilderActions());
         assertEquals(frameImage.getOne("element.tagName").asString(), "IMG");
         assertTrue(frameImage.getOne("element.src").asString().contains("wolverin.jpg"));
     }
     @Test
     public void frameInFrameTest() {
-        JSDriver frameImage = js("frame:#jdi-frame-site", "frame:#first_frame", "img").updateBuilderActions(new SmartBuilderActions());
+        JSDriver frameImage = js("frame:#jdi-frame-site", "frame:#first_frame", "img").updateBuilderActions(new FilterBuilderActions());
         assertEquals(frameImage.getOne("element.tagName").asString(), "IMG");
         assertTrue(frameImage.getOne("element.src").asString().contains("wolverin.jpg"));
     }
     @Test
     public void byFrameTest() {
-        JSDriver frameImage = new JSDriver(driver(), asList(By.frame("first_frame"), By.tag("img")), new SmartBuilderActions());
+        JSDriver frameImage = new JSDriver(driver(), asList(By.frame("first_frame"), By.tag("img")), new FilterBuilderActions());
         assertEquals(frameImage.getOne("element.tagName").asString(), "IMG");
         assertTrue(frameImage.getOne("element.src").asString().contains("wolverin.jpg"));
     }

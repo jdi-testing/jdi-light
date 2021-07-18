@@ -7,7 +7,8 @@ import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.jsbuilder.ConsoleLogger;
 import com.jdiai.jsbuilder.QueryLogger;
 import com.jdiai.jsbuilder.Slf4JLogger;
-import com.jdiai.jswraper.JSSmart;
+import com.jdiai.jswraper.JSBaseEngine;
+import com.jdiai.jswraper.JSEngine;
 import com.jdiai.jswraper.driver.DriverManager;
 import com.jdiai.jswraper.driver.DriverTypes;
 import org.openqa.selenium.By;
@@ -16,6 +17,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
@@ -39,15 +42,15 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 public class JDI {
     public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::getDriver);
     public static String JDI_STORAGE = "src/test/resources/jdi";
-
     public static String domain;
     public static ILogger logger;
-
     public static int timeout = 10;
-
     public static ConditionTypes conditions = new ConditionTypes();
-
     public static Supplier<JS> initJSFunc = () -> new JSLight(JDI::driver);
+    public static BiFunction<Supplier<WebDriver>, List<By>, JSEngine> initEngine = JSBaseEngine::new;
+    public static BiFunction<Object, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;
+    public static String LOGGER_TYPE = "console";
+    private static boolean initialized = false;
 
     public static void logJSRequests(int logQueriesLevel) {
         LOG_QUERY = logQueriesLevel;
@@ -56,8 +59,6 @@ public class JDI {
     public static WebDriver driver() {
         return DRIVER.get();
     }
-
-    public static BiFunction<Object, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;
 
     public static Object jsExecute(String script, Object... params) {
         return ((JavascriptExecutor) driver()).executeScript(script, params);
@@ -109,8 +110,6 @@ public class JDI {
         return new WebPage().setName(getTitle()).makeScreenshot();
     }
 
-    private static boolean initialized = false;
-
     private static void init() {
         if (initialized) {
             return;
@@ -129,6 +128,7 @@ public class JDI {
         QueryLogger.logger = logger;
         initialized = true;
     }
+
     private static String getLoggerName(String name) {
         return format("%s(%s)", LOGGER_NAME, name);
     }
@@ -151,6 +151,7 @@ public class JDI {
         init();
         openPage(domain);
     }
+
     public static void openSite(int width, int height) {
         openSite();
         driver().manage().window().setSize(new Dimension(width, height));
@@ -183,8 +184,6 @@ public class JDI {
         reopenSite();
         driver().manage().window().setSize(new Dimension(width, height));
     }
-
-    public static String LOGGER_TYPE = "console";
 
     public static void openSite(Class<?> cl) {
         init();
@@ -257,5 +256,5 @@ public class JDI {
         element.waitFor(conditions);
     }
 
-    public static JSSmart jsDriver() { return new JSSmart(JDI::driver); }
+    public static JSEngine jsDriver() { return initEngine.apply(JDI::driver, new ArrayList<>()); }
 }

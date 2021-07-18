@@ -1,6 +1,6 @@
 package com.jdiai.jswraper;
 
-import com.jdiai.jsbuilder.SmartBuilderActions;
+import com.jdiai.jsproducer.Json;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -9,35 +9,34 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.newList;
-import static com.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
 import static com.jdiai.jswraper.JSEntity.GET_ENTITY_MAP;
 
-public class JSSmart extends JSElement {
-    public JSSmart(Supplier<WebDriver> driver, List<By> locators) {
+public class JSBaseEngine extends JSElement implements JSEngine {
+    protected Class<?> entity;
+    protected String objectMap;
+
+    public JSBaseEngine(Supplier<WebDriver> driver, List<By> locators) {
         super(driver, locators);
-        this.driver.updateBuilderActions(new SmartBuilderActions());
     }
 
-    public JSSmart(WebDriver driver, List<By> locators) {
+    public JSBaseEngine(WebDriver driver, List<By> locators) {
         this(() -> driver, locators);
     }
 
-    public JSSmart(Supplier<WebDriver> driver, By... locators) {
+    public JSBaseEngine(Supplier<WebDriver> driver, By... locators) {
         this(driver, newList(locators));
     }
 
-    public JSSmart(WebDriver driver, By... locators) {
+    public JSBaseEngine(WebDriver driver, By... locators) {
         this(() -> driver, locators);
     }
 
-    protected Class<?> entity;
-
-    public JSSmart setupEntity(Class<?> entity) {
+    public JSBaseEngine setupEntity(Class<?> entity) {
         this.entity = entity;
         return this;
     }
-    // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
 
+    // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public <T> T getEntity(String objectMap) {
         return (T) driver.getOne(validateXpath(objectMap)).asObject(entity);
     }
@@ -68,5 +67,19 @@ public class JSSmart extends JSElement {
 
     public <T> List<T> getEntityListFromAttr(String... attributes) {
         return getEntityList(newList(attributes));
+    }
+
+    public Json getAsMap() {
+        return driver.getOne(objectMap).asMap();
+    }
+
+    @Override
+    public Json getAsMap(String valueFunc) {
+        setMap(valueFunc);
+        return getAsMap();
+    }
+
+    public void setMap(String objectMap) {
+        this.objectMap = objectMap;
     }
 }

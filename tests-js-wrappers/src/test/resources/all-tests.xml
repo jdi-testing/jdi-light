@@ -7,7 +7,7 @@
             <class name="com.jdiai.tests.JSElementTests"/>
             <class name="com.jdiai.tests.JSJsonTests"/>
             <class name="com.jdiai.tests.JSObjectTests"/>
-            <class name="com.jdiai.tests.JSSmartTests"/>
+            <class name="com.jdiai.tests.JSWithFiltersTests"/>
         </classes>
     </test>
     <listeners>
