@@ -14,10 +14,7 @@ import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.displaydata.*;
 import io.github.com.pages.feedback.*;
 import io.github.com.pages.inputs.*;
-import io.github.com.pages.layout.BoxPage;
-import io.github.com.pages.layout.ContainerPage;
-import io.github.com.pages.layout.GridPage;
-import io.github.com.pages.layout.HiddenPage;
+import io.github.com.pages.layout.*;
 import io.github.com.pages.navigation.*;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarPage;
@@ -242,6 +239,10 @@ public class StaticSite {
     // popover
     @Url("/popover")
     public static PopoverPage popoverPage;
+
+    // useMediaQuery
+    @Url("/use_media_query")
+    public static UseMediaQueryPage useMediaQueryPage;
 
     // utils
     // Click away listener
