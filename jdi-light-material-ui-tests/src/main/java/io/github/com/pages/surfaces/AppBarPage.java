@@ -3,6 +3,7 @@ package io.github.com.pages.surfaces;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
@@ -42,8 +43,8 @@ public class AppBarPage extends WebPage {
     @UI("[role='menuitem']")
     public static List<Button> appBarIconOptions;
 
-    @UI("//*[@class='MuiSwitch-root']")
-    public static Button logoutSwitchButton;
+    @UI("//span[contains(@class,'MuiSwitch-switchBase')]")
+    public static Checkbox logoutSwitch;
 
     @UI(".MuiTypography-h6")
     public static UIElement topAppBar;

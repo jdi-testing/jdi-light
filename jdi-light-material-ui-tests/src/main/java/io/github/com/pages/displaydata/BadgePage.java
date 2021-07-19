@@ -3,6 +3,7 @@ package io.github.com.pages.displaydata;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
+import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import java.util.List;
@@ -33,6 +34,6 @@ public class BadgePage extends WebPage {
     @UI("//div[@class='MuiButtonGroup-root']/button")
     public static List<Button> badgeButton;
 
-    @UI("//span[@class='MuiIconButton-label']")
-    public static List<Button> badgeToggler;
+    @UI("//span[contains(@class,'MuiSwitch-switchBase')]")
+    public static List<Checkbox> badgeSwitch;
 }

@@ -47,7 +47,7 @@ public class BadgeTests extends TestsInit {
         badgeCounter.get(3).is().text("0");
         badgeCounter.get(3).has().classValue(containsString("MuiBadge-invisible"));
 
-        badgeToggler.get(1).click();
+        badgeSwitch.get(1).uncheck();
         badgeCounter.get(3).has().classValue(not(containsString("MuiBadge-invisible")));
         badgeButton.get(2).click();
         badgeCounter.get(3).is().text("1");
@@ -60,7 +60,7 @@ public class BadgeTests extends TestsInit {
         dotBadge.is().displayedSvg();
 
         dot.has().classValue(containsString("MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorSecondary"));
-        badgeToggler.get(2).click();
+        badgeSwitch.get(2).uncheck();
         dot.has().classValue(containsString("MuiBadge-invisible"));
     }
 
