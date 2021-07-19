@@ -6,8 +6,10 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static io.github.com.StaticSite.hiddenPage;
 import static io.github.com.pages.layout.HiddenPage.*;
 
@@ -24,21 +26,24 @@ public class HiddenTests extends TestsInit {
     public void before() {
         hiddenPage.open();
         hiddenPage.isOpened();
+        WebDriverFactory.getDriver().manage().window().maximize();
+
     }
 
-    @Test
-    public void defaultHiddenTest() {
+    @Test(dataProvider = "Screen Width Dividers")
+    public void hiddenTestWithScreenWidthDifferentScreenWidth(int divider) {
         currentWidth.is().displayed();
         xsDown.is().displayed();
         smDown.is().displayed();
         mdDown.is().displayed();
-
+        divideScreenWidthSize(divider);
         String width = getWidth(currentWidth);
         checkWidth(width);
+    }
 
-        setHalfScreenWidthSize();
-        width = getWidth(currentWidth);
-        checkWidth(width);
+    @DataProvider(name = "Screen Width Dividers")
+    public Object[][] screenWidthDividers() {
+        return new Object[][]{{1}, {2}, {3}};
     }
 
     private void checkWidth(String width) {
@@ -54,10 +59,15 @@ public class HiddenTests extends TestsInit {
         }
     }
 
-    private void setHalfScreenWidthSize() {
-        Dimension xy = WebDriverFactory.getDriver().manage().window().getSize();
-        Dimension xy2 = new Dimension(xy.width / 2, xy.height);
-        WebDriverFactory.getDriver().manage().window().setSize(xy2);
+    private void divideScreenWidthSize(int divider) {
+        Dimension lastScreenSize = WebDriverFactory.getDriver().manage().window().getSize();
+        try {
+            Dimension currentScreenSize = new Dimension(lastScreenSize.width / divider,
+                    lastScreenSize.height);
+            WebDriverFactory.getDriver().manage().window().setSize(currentScreenSize);
+        } catch (ArithmeticException e) {
+            throw exception("Wrong divider: " + divider);
+        }
     }
 
     private String getWidth(Text element) {
