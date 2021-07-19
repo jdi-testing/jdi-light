@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.material.elements.displaydata.Lists;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class ListPage extends WebPage {
     public Lists trashSelectedListItem;
 
     @UI ("//p[text()='Secondary text']")
-    public List<UIElement> secondaryLineListItems;
+    public List<Text> secondaryLineListItems;
 
     @UI("(//span[contains(@class,'MuiCheckbox-root')])")
     public List<Checkbox> enableSecondaryTextCheckbox;
