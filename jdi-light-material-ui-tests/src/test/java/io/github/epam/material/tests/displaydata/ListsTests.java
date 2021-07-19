@@ -1,6 +1,8 @@
 package io.github.epam.material.tests.displaydata;
+
 import static org.hamcrest.Matchers.hasToString;
 
+import io.github.com.pages.displaydata.ListPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -42,5 +44,23 @@ public class ListsTests extends TestsInit {
         ListPage.stickyZero.is().text(hasToString("I'm sticky 0"));
         ListPage.stickyOne.is().enabled();
         ListPage.stickyOne.is().text(hasToString("I'm sticky 1"));
+    }
+
+    @Test
+    public void selectedList() {
+        ListPage.inputSelectedListItem.is().enabled();
+        ListPage.inputSelectedListItem.is().text((hasToString("Inbox")));
+        ListPage.trashSelectedListItem.is().enabled();
+        ListPage.trashSelectedListItem.is().text((hasToString("Trash")));
+    }
+
+    @Test
+    public void secondaryTextList() {
+        ListPage.enableSecondaryTextCheckbox.get(2).isNotChecked();
+        ListPage.enableSecondaryTextCheckbox.get(2).check();
+        ListPage.enableSecondaryTextCheckbox.get(2).isChecked();
+        ListPage.secondaryLineListItems.get(1).is().text(hasToString("Secondary text"));
+        ListPage.enableSecondaryTextCheckbox.get(2).uncheck();
+        ListPage.secondaryLineListItems.get(1).is().notVisible();
     }
 }

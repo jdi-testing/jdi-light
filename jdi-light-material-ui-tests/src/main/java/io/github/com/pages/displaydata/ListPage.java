@@ -1,9 +1,14 @@
 package io.github.com.pages.displaydata;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.material.elements.displaydata.Lists;
+import com.epam.jdi.light.material.elements.inputs.Checkbox;
+import com.epam.jdi.light.ui.html.elements.common.Text;
+
+import java.util.List;
 
 public class ListPage extends WebPage {
     @UI("//*[contains(text(),'sticky 0')]")
@@ -23,4 +28,16 @@ public class ListPage extends WebPage {
 
     @XPath("//*[contains(text(),'Line item 1')]/../../div[contains(@class, 'MuiListItemIcon-root')]/span")
     public Lists checkboxLineItemFirst;
+
+    @UI("//*[contains(text(), 'Inbox')]")
+    public Lists inputSelectedListItem;
+
+    @UI("//*[contains(text(), 'Trash')]")
+    public Lists trashSelectedListItem;
+
+    @UI ("//p[text()='Secondary text']")
+    public List<Text> secondaryLineListItems;
+
+    @UI("(//span[contains(@class,'MuiCheckbox-root')])")
+    public List<Checkbox> enableSecondaryTextCheckbox;
 }

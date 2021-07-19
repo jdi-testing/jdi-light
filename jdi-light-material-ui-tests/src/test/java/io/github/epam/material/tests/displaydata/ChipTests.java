@@ -9,6 +9,7 @@ import static io.github.com.StaticSite.*;
 import static io.github.com.pages.displaydata.ChipsPage.*;
 import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.testng.Assert.assertTrue;
 
 /**
  * To see an example of Chips web element please visit
@@ -16,22 +17,22 @@ import static org.hamcrest.Matchers.equalToIgnoringCase;
  */
 
 public class ChipTests extends TestsInit {
-    
+
     @BeforeMethod
     public void beforeTest() {
         chipsPage.open();
     }
-    
+
     @Test
-    public void defaultChipTest(){
+    public void defaultChipTest() {
         basicCheck(defaultChips);
         disabledCheck(defaultChips);// first variant of class value
-        clickableCheck(defaultChips,3);
-        clickableLinkCheck(defaultChips,7);
+        clickableCheck(defaultChips, 3);
+        clickableLinkCheck(defaultChips, 7);
     }
 
     @Test
-    public void outlinedChipTest(){
+    public void outlinedChipTest() {
         basicCheck(outlinedChips);
         disabledCheck(outlinedChips); // second variant of class value
         clickableCheck(outlinedChips, 3);
@@ -39,7 +40,7 @@ public class ChipTests extends TestsInit {
     }
 
     @Test
-    public void chipArrayTest(){
+    public void chipArrayTest() {
         chipArrays.is().displayed(1);
         chipArrays.is().text(1, hasToString("Angular"));
         chipArrays.is().displayed(2);
@@ -48,24 +49,33 @@ public class ChipTests extends TestsInit {
         chipArrays.is().text(1, hasToString("jQuery")); // "jQuery" became first element as "Angular" element was deleted
     }
 
-    public void basicCheck(Chip chips){
+    @Test
+    public void deleteChipTest() {
+        defaultChips.is().displayed(4);
+        defaultChips.getChipIcon(4).click();
+        defaultChips.is().text(4, hasToString("Deletable"));
+        System.out.println("olololo"+lastDeleteInfo.getText());
+        assertTrue(lastDeleteInfo.getText().contains("deletable"));
+    }
+
+    public void basicCheck(Chip chips) {
         chips.is().displayed(1);
         chips.is().text(1, hasToString("Basic"));
     }
 
-    public void disabledCheck(Chip chips){
+    public void disabledCheck(Chip chips) {
         chips.is().displayed(2);
         chips.is().disabled(2);
         chips.is().text(2, hasToString("Disabled"));
     }
 
-    public void clickableCheck(Chip chips, int index){
+    public void clickableCheck(Chip chips, int index) {
         chips.is().displayed(index);
         chips.is().clickable(index);
         chips.is().text(index, hasToString("Clickable"));
     }
 
-    public void clickableLinkCheck(Chip chips, int index){
+    public void clickableLinkCheck(Chip chips, int index) {
         chips.is().displayed(index);
         chips.is().text(index, equalToIgnoringCase("Clickable Link"));
         chips.click(index);
