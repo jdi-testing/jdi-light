@@ -39,21 +39,21 @@ public class JSStable extends JSLight {
     }
 
     @Override
-    public void setOption(String option) {
+    public JS setOption(String option) {
         if (option == null) {
-            return;
+            return this;
         }
         should(exist);
-        doAction("option.value = " + option + ";\nelement.dispatchEvent(new Event('change'));");
+        return doAction("option.value = " + option + ";\nelement.dispatchEvent(new Event('change'));");
     }
 
     @Override
-    public void selectByName(String name) {
+    public JS selectByName(String name) {
         if (name == null) {
-            return;
+            return this;
         }
         should(exist);
-        doAction("dispatchEvent(new Event('change'));\n" +
+        return doAction("dispatchEvent(new Event('change'));\n" +
             "element.selectedIndex = [...element.options]" +
             ".findIndex(option => option.text === '" + name + "');\n" +
             "element.dispatchEvent(new Event('change'));");
@@ -78,51 +78,51 @@ public class JSStable extends JSLight {
     }
 
     @Override
-    public void clickCenter() {
+    public JS clickCenter() {
         should(exist);
-        super.clickCenter();
+        return super.clickCenter();
     }
 
     @Override
-    public void click(int x, int y) {
+    public JS click(int x, int y) {
         should(exist);
-        super.click(x, y);
+        return super.click(x, y);
     }
 
     @Override
-    public void select(String... values) {
+    public JS select(String... values) {
         should(exist);
-        super.select(values);
+        return super.select(values);
     }
 
     @Override
-    public void check(boolean value) {
+    public JS check(boolean value) {
         shouldBe(visible);
-        super.check(value);
+        return super.check(value);
     }
 
     @Override
-    public void rightClick() {
+    public JS rightClick() {
         shouldBe(visible);
-        super.rightClick();
+        return super.rightClick();
     }
 
     @Override
-    public void doubleClick() {
+    public JS doubleClick() {
         shouldBe(visible);
-        super.doubleClick();
+        return super.doubleClick();
     }
 
     @Override
-    public void hover() {
+    public JS hover() {
         shouldBe(visible);
-        super.hover();
+        return super.hover();
     }
 
     @Override
-    public void dragAndDropTo(int x, int y) {
+    public JS dragAndDropTo(int x, int y) {
         shouldBe(visible);
-        super.dragAndDropTo(x, y);
+        return super.dragAndDropTo(x, y);
     }
 
     @Override
@@ -135,12 +135,12 @@ public class JSStable extends JSLight {
     }
 
     @Override
-    public void input(CharSequence... value) {
+    public JS input(CharSequence... value) {
         if (value == null) {
-            return;
+            return this;
         }
         shouldBe(visible);
-        set("setAttribute('value', '');\nelement.value='" + charToString(value) + "';\nelement.dispatchEvent(new Event('input'));");
+        return set("setAttribute('value', '');\nelement.value='" + charToString(value) + "';\nelement.dispatchEvent(new Event('input'));");
     }
 
     @Override
@@ -258,9 +258,9 @@ public class JSStable extends JSLight {
     }
 
     @Override
-    public void uploadFile(String filePath) {
+    public JS uploadFile(String filePath) {
         shouldBe(visible);
-        super.uploadFile(filePath);
+        return super.uploadFile(filePath);
     }
 
     @Override
@@ -276,22 +276,22 @@ public class JSStable extends JSLight {
     }
 
     @Override
-    public void visualValidation() {
+    public JS visualValidation() {
         shouldBe(visible);
-        super.visualValidation();
+        return super.visualValidation();
     }
 
     @Override
-    public void visualValidation(String tag) {
+    public JS visualValidation(String tag) {
         shouldBe(visible);
-        super.visualValidation(tag);
+        return super.visualValidation(tag);
     }
 
     @Override
-    public void visualCompareWith(JS element) {
+    public JS visualCompareWith(JS element) {
         shouldBe(visible);
         element.shouldBe(visible);
-        super.visualCompareWith(element);
+        return super.visualCompareWith(element);
     }
 
     @Override

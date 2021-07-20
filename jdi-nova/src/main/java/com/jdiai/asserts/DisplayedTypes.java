@@ -1,10 +1,11 @@
 package com.jdiai.asserts;
 
 public class DisplayedTypes {
+    public static final String isExist = "element !== null";
     public static final String isDisplayed =
         "element !== null && styles.visibility === 'visible' && styles.display !== 'none' " +
         "&& !element.hasAttribute('hidden')";
-
+    public static final String isEnabled = isDisplayed + " && element.hasAttribute('enabled')";
     public static final String isVisible =
         "if (!element) { return false; }\n" +
         "const rect = element.getBoundingClientRect();\n" +

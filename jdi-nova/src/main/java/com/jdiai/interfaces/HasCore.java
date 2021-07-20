@@ -16,7 +16,7 @@ import static com.jdiai.tools.VisualSettings.DEFAULT_IMAGE_TYPE;
 public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore> {
     JS core();
 
-    void setCore(JS core);
+    JS setCore(JS core);
 
     default JS list() {
         JS core = core();

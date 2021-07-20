@@ -16,8 +16,9 @@ public class JSFilterTemplates {
 
     public static String GET_ELEMENT =
         "let start = Date.now();\n" +
-        "while (Date.now() - start < 10000) {\n" +
-        "    if (isVisible(document.getElementById('element-id'))) break;\n" +
+        "while (Date.now() - start < %s) {\n" +
+        "    %s" +
+        "    if (condition(element)) break;\n" +
         "}";
 
     public static String FILTER_FUNC =

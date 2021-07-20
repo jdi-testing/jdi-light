@@ -79,6 +79,13 @@ public class JSDriver {
     }
 
     public IJSBuilder buildOne() {
+        IJSBuilder builder = getOneBuilder();
+        // if (isNotBlank(condition)) {
+        //     getOneBuilder().addJSCode(String.format(GET_ELEMENT, timeout, condition);
+        // }
+        return builder;
+    }
+    protected IJSBuilder getOneBuilder() {
         if (locators().isEmpty()) {
             return builder();
         }
@@ -145,13 +152,13 @@ public class JSDriver {
         if (locators().size() == 1) {
             return buildOne();
         }
-        IJSBuilder builder =  builder();
+        IJSBuilder jsBuilder = builder();
         String ctx = context;
         for (By locator : locators()) {
-            builder.oneToOne(ctx, locator);
+            jsBuilder.oneToOne(ctx, locator);
             ctx = "element";
         }
-        return builder;
+        return jsBuilder;
     }
 
     public JSProducer getOneChain(String collector) {
@@ -227,8 +234,9 @@ public class JSDriver {
     }
 
     public IJSBuilder builder() {
-        if (builder == null)
+        if (builder == null) {
             builder = new JSBuilder(driver);
+        }
         return builder;
     }
 

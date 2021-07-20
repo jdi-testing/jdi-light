@@ -295,7 +295,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
 
     public JS core() { return core; }
 
-    public void setCore(JS core) { this.core = core; }
+    public JS setCore(JS core) { this.core = core; return core; }
 
     public void setup(Field field) {
         Type[] types = getGenericTypes(field);

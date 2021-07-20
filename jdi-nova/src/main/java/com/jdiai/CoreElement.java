@@ -11,6 +11,6 @@ public class CoreElement implements HasCore {
         return core != null ? core : initJSFunc.execute(null, null, null);
     }
 
-    public void setCore(JS core) { this.core = core; }
+    public JS setCore(JS core) { this.core = core; return core; }
 
 }

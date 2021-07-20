@@ -53,13 +53,17 @@ public class JDI {
     public static ConditionTypes conditions = new ConditionTypes();
     public static JFunc3<Object, By, List<By>, JS> initJSFunc = (parent, locator, locators) -> {
         if (locators != null) {
-            return new JSStable(JDI::driver, locators);
+            return new JSLight(JDI::driver, locators);
         }
         if (parent != null && locator != null) {
-            return new JSStable(parent, locator);
+            return new JSLight(parent, locator);
         }
-        return new JSStable(JDI::driver);
+        if (locator != null) {
+            return new JSLight(JDI::driver, locator);
+        }
+        return new JSLight(JDI::driver);
     };
+
     public static Supplier<IJSBuilder> initBuilder =
         () -> new JSBuilder(JDI::driver);
     public static BiFunction<Supplier<WebDriver>, List<By>, JSEngine> initEngine =
