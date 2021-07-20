@@ -46,7 +46,6 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void disabledButtonGroupTest() {
-
         basicButtonGroup.getButtonByIndex(1).is().disabled();
         basicButtonGroup.getButtonByText("Two").is().disabled();
     }
