@@ -1,6 +1,5 @@
 package io.github.com.pages.displaydata;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
@@ -35,9 +34,14 @@ public class ListPage extends WebPage {
     @UI("//*[contains(text(), 'Trash')]")
     public Lists trashSelectedListItem;
 
-    @UI ("//p[text()='Secondary text']")
+    @UI("//p[text()='Secondary text']")
     public List<Text> secondaryLineListItems;
 
     @UI("(//span[contains(@class,'MuiCheckbox-root')])")
     public List<Checkbox> enableSecondaryTextCheckbox;
+
+    @UI("//*[@class=\"MuiListItem-container\"]")
+    public List<Checkbox> switchList;
+
+
 }
