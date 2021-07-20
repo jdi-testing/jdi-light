@@ -65,7 +65,7 @@ public class JDI {
     };
 
     public static Supplier<IJSBuilder> initBuilder =
-        () -> new JSBuilder(JDI::driver);
+        () -> new JSBuilder(JDI::driver, new FilterBuilderActions());
     public static BiFunction<Supplier<WebDriver>, List<By>, JSEngine> initEngine =
         (driver, locators) -> new JSBaseEngine(driver, locators, initBuilder.get());
     public static BiFunction<Object, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;

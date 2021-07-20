@@ -759,7 +759,7 @@ public class JSLight implements JS {
     }
 
     public void setEntity(String objectMap) {
-        engine().setMap(objectMap);
+        engine().getAsMap(objectMap);
     }
 
     public JS find(String by) {
@@ -789,7 +789,6 @@ public class JSLight implements JS {
     public int size() {
         return engine().getSize();
     }
-
     
     public List<JsonObject> getObjectList(String json) {
         return engine().getJsonList(json);
@@ -799,8 +798,8 @@ public class JSLight implements JS {
         return engine().getEntityList(objectMap);
     }
     
-    public void setEntityList() {
-        engine().setMap(objectMap);
+    public void setEntity() {
+        engine().getAsMap(objectMap);
     }
 
     public <T> List<T> getEntityList(Class<T> cl) {

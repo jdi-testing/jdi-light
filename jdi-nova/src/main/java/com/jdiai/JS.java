@@ -99,7 +99,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     int size();
     List<JsonObject> getObjectList(String json);
     <T> List<T> getEntityList();
-    void setEntityList();
+    void setEntity();
     <T> List<T> getEntityList(Class<T> cl);
     JS fill(Object obj);
     JS submit(Object obj, String locator);
