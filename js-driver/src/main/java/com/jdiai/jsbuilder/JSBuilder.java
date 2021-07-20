@@ -26,26 +26,17 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JSBuilder implements IJSBuilder {
-    protected List<String> variables = new ArrayList<>();
-
-    protected String query = "";
-
-    protected String searchScript = "";
-
-    protected Supplier<JavascriptExecutor> js;
-
+    public Integer logQuery = null;
     public static Function<String, String> PROCESS_RESULT =
         result -> result.length() > 200
             ? result.substring(0, 195) + "..."
             : result;
-
-    public Integer logQuery = null;
-
+    protected List<String> variables = new ArrayList<>();
+    protected String query = "";
+    protected String searchScript = "";
+    protected Supplier<JavascriptExecutor> js;
     protected MapArray<String, String> useFunctions = new MapArray<>();
-
     protected IBuilderActions builderActions;
-
-    public JSBuilder() { }
 
     public JSBuilder(Supplier<WebDriver> driver) {
         this(driver, null);
@@ -283,8 +274,7 @@ public class JSBuilder implements IJSBuilder {
         }
     }
     public JSBuilder copy() {
-        JSBuilder result = new JSBuilder();
-        result.builderActions = builderActions;
+        JSBuilder result = new JSBuilder(null, builderActions);
         result.searchScript = searchScript;
         result.js = js;
         result.useFunctions = useFunctions;

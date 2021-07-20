@@ -2,7 +2,7 @@ package com.jdiai.interfaces;
 
 import com.jdiai.JS;
 import com.jdiai.asserts.ShouldValidations;
-import com.jdiai.jswraper.JSSmart;
+import com.jdiai.jswraper.JSEngine;
 import com.jdiai.visual.Direction;
 import com.jdiai.visual.ImageTypes;
 import com.jdiai.visual.StreamToImageVideo;
@@ -16,11 +16,11 @@ import static com.jdiai.tools.VisualSettings.DEFAULT_IMAGE_TYPE;
 public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore> {
     JS core();
 
-    void setCore(JS core);
+    JS setCore(JS core);
 
     default JS list() {
         JS core = core();
-        core.jsDriver().multiSearch();
+        core.engine().multiSearch();
         return core;
     }
 
@@ -126,7 +126,7 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
         }
     }
 
-    default JSSmart jsDriver() {
-        return core().jsDriver();
+    default JSEngine engine() {
+        return core().engine();
     }
 }

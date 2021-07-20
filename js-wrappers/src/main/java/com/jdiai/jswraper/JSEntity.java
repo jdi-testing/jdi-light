@@ -13,22 +13,25 @@ import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static com.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
 import static java.lang.String.format;
 
 public class JSEntity<T> extends JSElement {
     protected Class<T> cl;
+
     public JSEntity(WebDriver driver, List<By> locators) {
         super(driver, locators);
     }
+
     public JSEntity(WebDriver driver, By... locators) {
         super(driver, locators);
     }
+
     public JSEntity<T> initClass(Class<T> cl) {
         this.cl = cl;
         return this;
     }
+
     public void setup(Field field) {
         Type[] types;
         try {
@@ -44,12 +47,15 @@ public class JSEntity<T> extends JSElement {
     public T getEntity(String objectMap) {
         return driver.getOne(validateXpath(objectMap)).asObject(cl);
     }
+
     public T getEntity() {
         return getEntity(GET_ENTITY_MAP.apply(cl));
     }
+
     public T getEntity(List<String> attributes) {
         return driver.getOne(attributesToJson(attributes)).asObject(cl);
     }
+
     public T getEntityFromAttr(String... attributes) {
         return getEntity(newList(attributes));
     }
@@ -57,6 +63,7 @@ public class JSEntity<T> extends JSElement {
     public List<T> getEntityList(String objectMap) {
         return driver.getList(validateXpath(objectMap)).asObject(cl);
     }
+
     public List<T> getEntityList() {
         return getEntityList(GET_ENTITY_MAP.apply(cl));
     }
@@ -70,14 +77,8 @@ public class JSEntity<T> extends JSElement {
     public List<T> getEntityList(List<String> attributes) {
         return driver.getList(attributesToJson(attributes)).asObject(cl);
     }
+
     public List<T> getEntityListFromAttr(String... attributes) {
         return getEntityList(newList(attributes));
-    }
-
-    private String validateXpath(String objectMap) {
-        if (objectMap.contains("': xpath(")) {
-            driver.builder().registerFunction("xpath", XPATH_FUNC);
-        }
-        return objectMap;
     }
 }

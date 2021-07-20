@@ -8,7 +8,7 @@ import com.jdiai.entities.TextHtml;
 import com.jdiai.entities.TextInfo;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.jswraper.JSElement;
-import com.jdiai.jswraper.JSSmart;
+import com.jdiai.jswraper.JSEngine;
 import com.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -25,7 +25,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners(TestNGListener.class)
-public class JSSmartTests implements TestInit {
+public class JSWithFiltersTests implements TestInit {
     @BeforeMethod
     public void before() {
         logout();
@@ -154,13 +154,13 @@ public class JSSmartTests implements TestInit {
         assertEquals(headers.get(0).get("class").getAsString(), "");
         assertEquals(headers.get(0).get("tag").getAsString(), "TH");
     }
-    private JSSmart userName() {
-        JSSmart userName = $w("#user-name");
+    private JSEngine userName() {
+        JSEngine userName = $w("#user-name");
         userName.setupEntity(TextHtml.class);
         return userName;
     }
-    private JSSmart userNameInfo() {
-        JSSmart userName = $w("#user-name");
+    private JSEngine userNameInfo() {
+        JSEngine userName = $w("#user-name");
         userName.setupEntity(TextInfo.class);
         return userName;
     }
@@ -184,13 +184,13 @@ public class JSSmartTests implements TestInit {
         assertEquals(jsObject.textContent, "Roman Iovlev");
         assertEquals(jsObject.innerHTML, "Roman Iovlev");
     }
-    private JSSmart header() {
-        JSSmart userName = $w("#furniture-double-hidden th");
+    private JSEngine header() {
+        JSEngine userName = $w("#furniture-double-hidden th");
         userName.setupEntity(Header.class);
         return userName;
     }
-    private JSSmart headerRaw() {
-        JSSmart userName = $w("#furniture-double-hidden th");
+    private JSEngine headerRaw() {
+        JSEngine userName = $w("#furniture-double-hidden th");
         userName.setupEntity(HeaderRaw.class);
         return userName;
     }

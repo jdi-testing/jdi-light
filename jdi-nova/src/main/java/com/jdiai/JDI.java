@@ -2,52 +2,110 @@ package com.jdiai;
 
 import com.epam.jdi.tools.ILogger;
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.func.JFunc3;
+import com.jdiai.annotations.UI;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
-import com.jdiai.jsbuilder.ConsoleLogger;
-import com.jdiai.jsbuilder.QueryLogger;
-import com.jdiai.jsbuilder.Slf4JLogger;
-import com.jdiai.jswraper.JSSmart;
+import com.jdiai.jsbuilder.*;
+import com.jdiai.jswraper.JSBaseEngine;
+import com.jdiai.jswraper.JSEngine;
 import com.jdiai.jswraper.driver.DriverManager;
 import com.jdiai.jswraper.driver.DriverTypes;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 
 import java.io.File;
+import java.lang.reflect.Field;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.epam.jdi.tools.LinqUtils.newList;
+import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
+import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.QueryLogger.LOGGER_NAME;
 import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 import static com.jdiai.jsdriver.JDINovaException.assertContains;
-import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
-import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
+import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
+import static com.jdiai.jswraper.JSWrappersUtils.*;
 import static com.jdiai.jswraper.driver.DriverManager.useDriver;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
-import static com.jdiai.tools.JSUtils.getLocators;
+import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class JDI {
     public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::getDriver);
     public static String JDI_STORAGE = "src/test/resources/jdi";
-
     public static String domain;
     public static ILogger logger;
-
     public static int timeout = 10;
-
     public static ConditionTypes conditions = new ConditionTypes();
+    public static JFunc3<Object, By, List<By>, JS> initJSFunc = (parent, locator, locators) -> {
+        if (locators != null) {
+            return new JSLight(JDI::driver, locators);
+        }
+        if (parent != null && locator != null) {
+            return new JSLight(parent, locator);
+        }
+        if (locator != null) {
+            return new JSLight(JDI::driver, locator);
+        }
+        return new JSLight(JDI::driver);
+    };
 
-    public static Supplier<JS> initJSFunc = () -> new JSLight(JDI::driver);
+    public static Supplier<IJSBuilder> initBuilder =
+        () -> new JSBuilder(JDI::driver, new FilterBuilderActions());
+    public static BiFunction<Supplier<WebDriver>, List<By>, JSEngine> initEngine =
+        (driver, locators) -> new JSBaseEngine(driver, locators, initBuilder.get());
+    public static BiFunction<Object, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;
+    public static String LOGGER_TYPE = "console";
+    private static boolean initialized = false;
+    public static Function<Field, String> GET_COMPLEX_VALUE = field -> {
+        if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class)) {
+            return null;
+        }
+        By locator = getLocatorFromField(field);
+        if (locator != null) {
+            String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
+            return format("'%s': %s", field.getName(), getValueType(field, element));
+        }
+        return null;
+    };
+
+    public static BiFunction<Field, Object, String> SET_COMPLEX_VALUE = (field, value)-> {
+        if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class))
+            return null;
+        By locator = getLocatorFromField(field);
+        if (locator == null) {
+            return null;
+        }
+        String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
+        return setValueType(field, element, value);
+    };
+
+    public static Function<Class<?>, String> GET_OBJECT_MAP = cl -> {
+        Field[] allFields = cl.getDeclaredFields();
+        List<String> mapList = new ArrayList<>();
+        for (Field field : allFields) {
+            String value = GET_COMPLEX_VALUE.apply(field);
+            if (value != null) {
+                mapList.add(value);
+            }
+        }
+        return "{ " + print(mapList, ", ") + " }";
+    };
+    public static String SUBMIT_LOCATOR = "[type=submit]";
 
     public static void logJSRequests(int logQueriesLevel) {
         LOG_QUERY = logQueriesLevel;
@@ -56,8 +114,6 @@ public class JDI {
     public static WebDriver driver() {
         return DRIVER.get();
     }
-
-    public static BiFunction<Object, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;
 
     public static Object jsExecute(String script, Object... params) {
         return ((JavascriptExecutor) driver()).executeScript(script, params);
@@ -109,8 +165,6 @@ public class JDI {
         return new WebPage().setName(getTitle()).makeScreenshot();
     }
 
-    private static boolean initialized = false;
-
     private static void init() {
         if (initialized) {
             return;
@@ -129,6 +183,7 @@ public class JDI {
         QueryLogger.logger = logger;
         initialized = true;
     }
+
     private static String getLoggerName(String name) {
         return format("%s(%s)", LOGGER_NAME, name);
     }
@@ -151,6 +206,7 @@ public class JDI {
         init();
         openPage(domain);
     }
+
     public static void openSite(int width, int height) {
         openSite();
         driver().manage().window().setSize(new Dimension(width, height));
@@ -184,8 +240,6 @@ public class JDI {
         driver().manage().window().setSize(new Dimension(width, height));
     }
 
-    public static String LOGGER_TYPE = "console";
-
     public static void openSite(Class<?> cl) {
         init();
         initSite(cl);
@@ -204,15 +258,15 @@ public class JDI {
     }
 
     public static JS $(By locator) {
-        return initJSFunc.get().setLocators(newList(locator));
+        return initJSFunc.execute(null, locator, null);
     }
 
     public static JS $(Object parent, By locator) {
-        return initJSFunc.get().setLocators(getLocators(locator, parent));
+        return initJSFunc.execute(parent, locator, null);
     }
 
     public static JS $(By... locators) {
-        return initJSFunc.get().setLocators(asList(locators));
+        return initJSFunc.execute(null, null, newList(locators));
     }
 
     public static JS $(String locator) {
@@ -232,7 +286,7 @@ public class JDI {
     }
 
     public static void loginAs(Object user) {
-        initJSFunc.get().loginAs(user);
+        initJSFunc.execute(null, null, null).loginAs(user);
     }
 
     public static void submitForm(String formLocator, Object user) {
@@ -240,7 +294,7 @@ public class JDI {
     }
 
     public static void submitForm(Object user) {
-        initJSFunc.get().submit(user);
+        initJSFunc.execute(null, null, null).submit(user);
     }
 
     public static void fillFormWith(String formLocator, Object user) {
@@ -248,7 +302,7 @@ public class JDI {
     }
 
     public static void fillFormWith(Object user) {
-        initJSFunc.get().fill(user);
+        initJSFunc.execute(null, null, null).fill(user);
     }
 
     public static DragAndDrop drag(JS dragElement) { return new DragAndDrop(dragElement);}
@@ -257,5 +311,5 @@ public class JDI {
         element.waitFor(conditions);
     }
 
-    public static JSSmart jsDriver() { return new JSSmart(JDI::driver); }
+    public static JSEngine jsDriver() { return initEngine.apply(JDI::driver, new ArrayList<>()); }
 }

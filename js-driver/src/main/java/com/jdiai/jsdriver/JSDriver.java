@@ -28,24 +28,31 @@ public class JSDriver {
     public JSDriver(Supplier<WebDriver> driver, By... locators) {
         this(driver, newList(locators), defaultBuilder(driver));
     }
+
     public JSDriver(WebDriver driver, By... locators) {
         this(() -> driver, locators);
     }
+
     public JSDriver(Supplier<WebDriver> driver, List<By> locators) {
         this(driver, locators, defaultBuilder(driver));
     }
+
     public JSDriver(WebDriver driver, List<By> locators) {
         this(() -> driver, locators);
     }
+
     public JSDriver(Supplier<WebDriver> driver, List<By> locators, IBuilderActions actions) {
         this(driver, locators, new JSBuilder(driver, actions));
     }
+
     public JSDriver(WebDriver driver, List<By> locators, IBuilderActions actions) {
         this(() -> driver, locators, actions);
     }
+
     public JSDriver(WebDriver driver, List<By> locators, IJSBuilder builder) {
         this(() -> driver, locators, builder);
     }
+
     public JSDriver(Supplier<WebDriver> driver, List<By> locators, IJSBuilder builder) {
         if (driver == null) {
             throw new JDINovaException("JSDriver init failed: WebDriver == null");
@@ -59,10 +66,12 @@ public class JSDriver {
         this.builder.updateActions(actions);
         return this;
     }
+
     public JSDriver setBuilder(IJSBuilder builder) {
         this.builder = builder.copy();
         return this;
     }
+
     public JSDriver elementCtx() {
         builder().registerVariable("element");
         context = "element";
@@ -70,6 +79,13 @@ public class JSDriver {
     }
 
     public IJSBuilder buildOne() {
+        IJSBuilder builder = getOneBuilder();
+        // if (isNotBlank(condition)) {
+        //     getOneBuilder().addJSCode(String.format(GET_ELEMENT, timeout, condition);
+        // }
+        return builder;
+    }
+    protected IJSBuilder getOneBuilder() {
         if (locators().isEmpty()) {
             return builder();
         }
@@ -82,12 +98,15 @@ public class JSDriver {
             default: return buildOneChain();
         }
     }
+
     public JSProducer doAction(String collector) {
         return new JSProducer(buildOne().doAction(collector).executeQuery());
     }
+
     public JSProducer getOne(String collector) {
         return new JSProducer(buildOne().getResult(collector).executeQuery());
     }
+
     public IJSBuilder buildList() {
         if (locators().isEmpty()) {
             return builder();
@@ -101,9 +120,11 @@ public class JSDriver {
             default: return buildListChain();
         }
     }
+
     public JSListProducer getList(String collector) {
         return new JSListProducer(buildList().getResultList(collector).executeAsList());
     }
+
     public JSProducer getFirst(String collector) {
         return new JSProducer(buildList().getResult(collector).executeQuery());
     }
@@ -131,17 +152,19 @@ public class JSDriver {
         if (locators().size() == 1) {
             return buildOne();
         }
-        IJSBuilder builder =  builder();
+        IJSBuilder jsBuilder = builder();
         String ctx = context;
         for (By locator : locators()) {
-            builder.oneToOne(ctx, locator);
+            jsBuilder.oneToOne(ctx, locator);
             ctx = "element";
         }
-        return builder;
+        return jsBuilder;
     }
+
     public JSProducer getOneChain(String collector) {
         return new JSProducer(buildOneChain().getResult(collector).executeQuery());
     }
+
     public IJSBuilder buildOneMultiSearch() {
         if (locators().isEmpty()) {
             return builder();
@@ -158,9 +181,11 @@ public class JSDriver {
         builder().listToOne(lastLocator());
         return builder();
     }
+
     public JSProducer getOneMultiSearch(String collector) {
         return new JSProducer(buildOneMultiSearch().getResult(collector).executeQuery());
     }
+
     public IJSBuilder buildListChain() {
         if (locators().size() == 1) {
             return buildList();
@@ -173,9 +198,11 @@ public class JSDriver {
         builder().oneToList("element", lastLocator());
         return builder();
     }
+
     public JSListProducer getListChain(String collector) {
         return new JSListProducer(buildListChain().getResultList(collector).executeAsList());
     }
+
     public IJSBuilder buildListMultiSearch() {
         if (locators().isEmpty()) {
             return builder();
@@ -192,6 +219,7 @@ public class JSDriver {
         builder().listToList(lastLocator());
         return builder();
     }
+
     public JSListProducer getListMultiSearch(String collector) {
         return new JSListProducer(buildListMultiSearch().getResultList(collector).executeAsList());
     }
@@ -200,20 +228,26 @@ public class JSDriver {
         strategy = MULTI;
         return this;
     }
+
     public WebDriver driver() {
         return this.driver.get();
     }
+
     public IJSBuilder builder() {
-        if (builder == null)
+        if (builder == null) {
             builder = new JSBuilder(driver);
+        }
         return builder;
     }
+
     public List<By> locators() {
         return this.locators;
     }
+
     public By firstLocator() {
         return locators.get(0);
     }
+
     public By lastLocator() {
         return LinqUtils.last(locators);
     }
