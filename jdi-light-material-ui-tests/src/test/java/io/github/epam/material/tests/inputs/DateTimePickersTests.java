@@ -60,7 +60,7 @@ public class DateTimePickersTests extends TestsInit {
         timer.wait(() -> timePicker.has().text("05:30 PM"));
 
         timePicker.expand();
-        timer.wait(() -> timePicker.list().get("11").click(0, 0));
+        timePicker.list().get("11").click(0, 0);
         timePicker.list().get("15").click(15, 0);
         timePicker.command("ESCAPE");
         timer.wait(() -> timePicker.has().text("05:30 PM"));

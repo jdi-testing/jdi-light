@@ -28,7 +28,8 @@ public class DateTimePickersPage extends WebPage {
             expand = "//span[@class = 'MuiIconButton-label']")
     public static Dropdown dialogPicker;
 
-    @JDropdown(root = "//*[@id = 'time-picker-label']/parent::div", value = "//*[@id ='time-picker']",
+    @JDropdown(root = "//*[@id = 'time-picker-label']/parent::div",
+            value = "//*[@id ='time-picker']",
             list = "//*[@id = 'time-picker-label']/parent::div /ancestor::body //div[@class = 'MuiPickersClock-clock']" +
                     "//span",
             expand = "//span[@class = 'MuiIconButton-label']")
