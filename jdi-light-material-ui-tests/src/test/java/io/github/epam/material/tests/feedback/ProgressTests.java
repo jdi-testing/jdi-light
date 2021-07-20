@@ -18,11 +18,31 @@ public class ProgressTests extends TestsInit {
     }
 
     @Test
-    public void progressTest() {
-        circularDefault.is().indeterminate();
-        int valueNow = circularIndeterminate.getValueNow();
-        timer.wait(() ->circularIndeterminate.is().value(valueNow + 10));
-        circularDefault.is().indeterminate();
+    public void progressSimpleTest() {
+        timer.wait(() -> circularIndeterminate.isDisplayed());
+        circularDeterminate1.isDisplayed();
+        circularDeterminate2.isDisplayed();
+        circularDeterminate3.isDisplayed();
+        circularDeterminate4.isDisplayed();
+        circularDeterminate5.isDisplayed();
+        circularDeterminate6.isDisplayed();
+        circularDeterminate7.isDisplayed();
+        circularDeterminate8.isDisplayed();
+        circularDeterminate9.isDisplayed();
+        interactiveIntegrationCircularButton.isDisplayed();
+        linearIndeterminate.isDisplayed();
+        linearDeterminate.isDisplayed();
+        linearBuffer.isDisplayed();
+        linearWithLabel.isDisplayed();
+        delayingAppearance.isDisplayed();
+    }
+
+    @Test
+    public void circularProgressTest() {
+        circularIndeterminate.is().indeterminate();
+        int valueNow = circularDeterminate6.getValueNow();
+        timer.wait(() -> circularDeterminate6.is().value(valueNow + 10));
+        circularIndeterminate.is().indeterminate();
         interactiveIntegrationCircularButton.click();
         interactiveIntegrationCircularIndeterminate.is().indeterminate();
         startLoadingButton.click();
@@ -30,5 +50,16 @@ public class ProgressTests extends TestsInit {
         simulateLoadButton.click();
         simulateLoadCircularIndeterminate.is().indeterminate();
         timer.wait(() -> successMessage.is().displayed());
+    }
+
+    @Test
+    public void linearProgressTest() {
+        linearIndeterminate.is().indeterminate();
+        int valueNow1 = linearDeterminate.getValueNow();
+        timer.wait(() -> linearDeterminate.is().value(valueNow1 + 10));
+        int valueNow2 = linearBuffer.getValueNow();
+        timer.wait(() -> linearBuffer.is().value(valueNow2 + 10));
+        int valueNow3 = linearWithLabel.getValueNow();
+        timer.wait(() -> linearWithLabel.is().value(valueNow3 + 10));
     }
 }
