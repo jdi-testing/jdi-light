@@ -6,15 +6,18 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIButtonGroup;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
+import org.hamcrest.Matchers;
 
 import java.lang.reflect.Field;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 public class ButtonGroup extends UIBaseElement<ButtonGroupAssert> implements ISetup {
 
     private static final String BUTTON_PATTERN = "//button[contains(@class, 'MuiButton-root')]";
     private static final String BUTTON_WITH_TEXT_PATTERN = BUTTON_PATTERN.concat("[span[contains(text(), '%s')]]");
+    private static final String LIST_WITH_TEXT = "//li[contains(text(), '%s')]";
 
     String mainButton;
     String expand;
@@ -38,9 +41,8 @@ public class ButtonGroup extends UIBaseElement<ButtonGroupAssert> implements ISe
     @JDIAction("Select '{0}' item in '{name}'")
     public void select(String item) {
         core().find(expand).click();
-        UIElement element = core().find(list).finds("li")
-                .stream().filter(el -> item.equals(el.getText())).findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Item does not exist"));
+        UIElement element = core().find(String.format(LIST_WITH_TEXT, item));
+        jdiAssert(element.text(), Matchers.equalTo(item));
         element.click();
     }
 
