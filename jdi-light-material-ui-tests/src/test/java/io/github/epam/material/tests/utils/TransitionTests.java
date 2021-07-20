@@ -62,31 +62,33 @@ public class TransitionTests extends TestsInit {
 
     @Test
     public void growDisplayTest() {
+        Timer timer = new Timer(2000L);
         growSlideTransitions.get(1).is().hidden();
         growSlideTransitions.get(2).is().hidden();
 
         checkboxes.get(3).check();
 
-        growSlideTransitions.get(1).is().displayed();
-        growSlideTransitions.get(2).is().displayed();
+        timer.wait(() -> growSlideTransitions.get(1).is().displayed());
+        timer.wait(() -> growSlideTransitions.get(2).is().displayed());
 
         checkboxes.get(3).uncheck();
 
-        growSlideTransitions.get(1).is().hidden();
-        growSlideTransitions.get(2).is().hidden();
+        timer.wait(() -> growSlideTransitions.get(1).is().hidden());
+        timer.wait(() -> growSlideTransitions.get(2).is().hidden());
     }
 
     @Test
     public void slideDisplayTest() {
+        Timer timer = new Timer(2000L);
         growSlideTransitions.get(3).is().hidden();
 
         checkboxes.get(4).check();
 
-        growSlideTransitions.get(3).is().displayed();
+        timer.wait(() -> growSlideTransitions.get(3).is().displayed());
 
         checkboxes.get(4).uncheck();
 
-        growSlideTransitions.get(3).is().hidden();
+        timer.wait(() -> growSlideTransitions.get(3).is().hidden());
     }
 
     @Test
@@ -97,14 +99,12 @@ public class TransitionTests extends TestsInit {
 
         checkboxes.get(5).check();
 
-        zoomTransitions.get(1).is().displayed();
-        timer.wait(() -> zoomTransitions.get(2).isDisplayed());
-        zoomTransitions.get(2).is().displayed();
+        timer.wait(() -> zoomTransitions.get(1).is().displayed());
+        timer.wait(() -> zoomTransitions.get(2).is().displayed());
 
         checkboxes.get(5).uncheck();
 
-        zoomTransitions.get(1).is().hidden();
-        timer.wait(() -> zoomTransitions.get(2).isHidden());
-        zoomTransitions.get(2).is().hidden();
+        timer.wait(() -> zoomTransitions.get(1).is().hidden());
+        timer.wait(() -> zoomTransitions.get(2).is().hidden());
     }
 }
