@@ -4,6 +4,7 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -17,6 +18,11 @@ public class UseMediaQueryTests extends TestsInit {
     public void before() {
         useMediaQueryPage.open();
         useMediaQueryPage.shouldBeOpened();
+    }
+
+    @AfterMethod
+    public void after() {
+        WebDriverFactory.getDriver().manage().window().maximize();
     }
 
     @Test
