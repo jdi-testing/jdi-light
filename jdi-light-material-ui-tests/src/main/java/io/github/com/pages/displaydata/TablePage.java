@@ -26,10 +26,10 @@ public class TablePage extends WebPage {
     public static Table sortingSelectingTable;
 
     @UI("//div[contains(@class, 'MuiSelect-selectMenu')]")
-    public static UIElement rowsPerPageBtn;
+    public static Button rowsPerPageBtn;
 
     @UI("//li[contains(@class, 'MuiTablePagination-menuItem')]")
-    public static List<UIElement> rowsPerPageValues;
+    public static List<Button> rowsPerPageValues;
 
     @UI("//span[contains(@class, 'MuiSwitch-switchBase')]")
     public static Checkbox densePaddingSwitch;
@@ -61,5 +61,5 @@ public class TablePage extends WebPage {
     public static Table spanningTable;
 
     @UI(".ReactVirtualized__Table__Grid div[role='row'] div[role='gridcell']")
-    public static List<UIElement> virtualizedTable;
+    public static List<Text> virtualizedTable;
 }

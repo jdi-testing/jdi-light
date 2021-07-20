@@ -2,6 +2,7 @@ package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
@@ -140,7 +141,7 @@ public class TableTests extends TestsInit {
         return dataTableCells.get((row - 1) * 6 + coll);
     }
 
-    private UIElement getTableCell(List<UIElement> tableCells, int row, int col) {
+    private Text getTableCell(List<Text> tableCells, int row, int col) {
         return tableCells.get((row - 1) * 5 + col);
     }
 }
