@@ -145,6 +145,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     List<String> validateRelations();
     Point getCenter();
     String textType();
+    JS setParent(Object parent);
 
     default String getFullName() {
         if (parent() == null) {

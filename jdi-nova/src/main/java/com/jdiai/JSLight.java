@@ -42,6 +42,7 @@ import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static com.jdiai.jswraper.JSWrappersUtils.defineLocator;
 import static com.jdiai.tools.FilterConditions.textEquals;
 import static com.jdiai.tools.GetTextTypes.INNER_TEXT;
+import static com.jdiai.tools.JSUtils.getLocators;
 import static com.jdiai.tools.Keyboard.pasteText;
 import static com.jdiai.tools.VisualSettings.*;
 import static com.jdiai.visual.Direction.VECTOR_SIMILARITY;
@@ -84,13 +85,15 @@ public class JSLight implements JS {
         this(() -> driver, locators);
     }
     public JSLight(Object parent, By locator) {
-        this(JDI::driver, locator, parent);
+        this(JDI::driver, locator);
+        setParent(parent);
     }
     public JSLight(WebDriver driver, By locator, Object parent) {
-        this(() -> driver, locator, parent);
+        this(() -> driver, locator);
+        setParent(parent);
     }
     public JSLight(Supplier<WebDriver> driver, By locator, Object parent) {
-        this(driver, JSUtils.getLocators(locator, parent));
+        this(driver, getLocators(locator, parent));
         this.parent = parent;
         if (parent != null && isInterface(parent.getClass(), HasCore.class)) {
             this.engine().updateDriver(((HasCore) parent).core().engine().jsDriver());
@@ -243,7 +246,13 @@ public class JSLight implements JS {
     }
 
     public JS setParent(Object parent) {
+        List<By> locators = getLocators(parent);
+        locators.addAll(locators());
+        setLocators(locators);
         this.parent = parent;
+        if (parent != null && isInterface(parent.getClass(), HasCore.class)) {
+            this.engine().updateDriver(((HasCore) parent).core().engine().jsDriver());
+        }
         return this;
     }
 
@@ -275,7 +284,7 @@ public class JSLight implements JS {
                 ? new ArrayList<>()
                 : locators().subList(0, locators().size() - 2);
             locators.add(fillByTemplate(lastLocator, value));
-            initJSFunc.execute(null, null, locators).click();
+            initJSFunc.apply(null, locators).click();
         } else {
             findFirst(textEquals(value)).click();
         }
@@ -767,7 +776,8 @@ public class JSLight implements JS {
     }
 
     public JS find(By by) {
-        return initJSFunc.execute(this, by, null);
+        return initJSFunc.apply(by, null)
+                .setParent(this);
     }
     
     public JS children() {
@@ -921,7 +931,7 @@ public class JSLight implements JS {
     }
 
     protected JS listToOne(String script) {
-        JS result = initJSFunc.execute(null, null, null);
+        JS result = initJSFunc.apply(null, null);
         result.engine().jsDriver().setScriptInElementContext(engine().jsDriver(), script);
         engine().jsDriver().builder().cleanup();
         return result;

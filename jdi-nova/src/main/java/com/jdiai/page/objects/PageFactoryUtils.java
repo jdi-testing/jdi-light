@@ -54,7 +54,7 @@ public class PageFactoryUtils {
         if (locator != null) {
             locators.add(locator);
         }
-        core = initJSFunc.execute(null, null, locators);
+        core = initJSFunc.apply(null, locators);
         ((HasCore) info.instance).setCore(core);
     }
     static boolean isUIObject(Field field) {
