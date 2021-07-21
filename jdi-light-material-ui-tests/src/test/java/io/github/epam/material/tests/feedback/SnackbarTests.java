@@ -203,6 +203,7 @@ public class SnackbarTests extends TestsInit {
         otherButtons.get(10).click();
         timer.wait(() -> notisnackPopUpText.isVisible());
         notisnackPopUpText.is().text("I love snacks.");
+        timer.wait(() -> notisnackPopUpText.is().disappear());
         timer.wait(() -> notisnackPopUpText.waitFor().hidden());
         notisnackPopUpText.is().notVisible();
 
