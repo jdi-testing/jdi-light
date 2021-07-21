@@ -1,7 +1,8 @@
 package io.github.com.pages.inputs;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.annotations.JDIButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 
 
@@ -13,12 +14,12 @@ public class ButtonGroupPage extends WebPage {
     @UI("//*[@id=\"__next\"]/div/div/div[2]/div/div/div/div[2]/div")
     public static ButtonGroup verticalButtonGroup;
 
-    @UI("//*[@id=\"__next\"]/div/div/div[2]/div/div/div/div[3]/div")
-    @JDIButtonGroup(
-            root = "#root",
-            mainButton = ".MuiButton-root[1]",
-            expand = ".MuiButton-root[2]",
-            list = ".MuiPaper-root #split-button-menu")
-    public static ButtonGroup splitButtonGroup;
+    @JDropdown(
+            root = "//h2[contains(text(), 'Split button')]/following::div[1]",
+            value = "(//span[contains(@class, 'MuiButton-label')])[1]",
+            list = "//li[contains(@class, 'MuiListItem-root')]",
+            expand = "//button[contains(@aria-label, 'select merge strategy')]"
+    )
+    public static Dropdown splitButtonGroup;
 
 }

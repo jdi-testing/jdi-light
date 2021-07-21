@@ -52,11 +52,9 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void splitButtonGroupTest() {
-        splitButtonGroup.getMainButton().click();
-        splitButtonGroup.getMainButton()
-                .has().text("SQUASH AND MERGE");
+        splitButtonGroup.expand();
+        splitButtonGroup.has().text("SQUASH AND MERGE");
         splitButtonGroup.select("Create a merge commit");
-        splitButtonGroup.getMainButton()
-                .has().text("CREATE A MERGE COMMIT");
+        splitButtonGroup.has().text("CREATE A MERGE COMMIT");
     }
 }
