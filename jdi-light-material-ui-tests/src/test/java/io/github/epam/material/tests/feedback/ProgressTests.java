@@ -43,6 +43,10 @@ public class ProgressTests extends TestsInit {
         int valueNow = circularDeterminate6.getValueNow();
         timer.wait(() -> circularDeterminate6.is().value(valueNow + 10));
         circularIndeterminate.is().indeterminate();
+    }
+
+    @Test
+    public void circularProgressButtonsTest() {
         interactiveIntegrationCircularButton.click();
         interactiveIntegrationCircularIndeterminate.is().indeterminate();
         startLoadingButton.click();
