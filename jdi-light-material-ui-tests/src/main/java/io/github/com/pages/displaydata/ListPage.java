@@ -40,8 +40,6 @@ public class ListPage extends WebPage {
     @UI("(//span[contains(@class,'MuiCheckbox-root')])")
     public List<Checkbox> enableSecondaryTextCheckbox;
 
-    @UI("//*[@class=\"MuiListItem-container\"]")
+    @UI("//h2[contains(text(),'List with Switch')]/following-sibling::ul[1]/li")
     public List<Checkbox> switchList;
-
-
 }

@@ -66,6 +66,6 @@ public class ListsTests extends TestsInit {
 
     @Test
     public void switchList() {
-        assertTrue(ListPage.switchList.get(8).children().get(8).hasClass("MuiSwitch-root"));
+        assertTrue(ListPage.switchList.get(2).children().get(9).hasClass("MuiSwitch-switchBase"));
     }
 }
