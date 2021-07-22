@@ -118,7 +118,7 @@ public class SnackbarTests extends TestsInit {
         messageLengthContentButtons.get(3).click();
     }
 
-    @Test()
+    @Test
     public void consecutiveSnackbarsTest() {
 
         otherButtons.get(1).is().displayed();
