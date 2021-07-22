@@ -9,10 +9,49 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ProgressPage extends WebPage {
     @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[1]")
-    public static ProgressBar circularDefault;
+    public static ProgressBar circularIndeterminate;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[1]")
+    public static ProgressBar circularDeterminate1;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[2]")
+    public static ProgressBar circularDeterminate2;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[3]")
+    public static ProgressBar circularDeterminate3;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[4]")
+    public static ProgressBar circularDeterminate4;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[5]")
+    public static ProgressBar circularDeterminate5;
 
     @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[6]")
-    public static ProgressBar circularIndeterminate;
+    public static ProgressBar circularDeterminate6;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[7]")
+    public static ProgressBar circularDeterminate7;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[8]")
+    public static ProgressBar circularDeterminate8;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[9]")
+    public static ProgressBar circularDeterminate9;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[1]")
+    public static ProgressBar linearIndeterminate;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[2]")
+    public static ProgressBar linearDeterminate;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[3]")
+    public static ProgressBar linearBuffer;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[4]")
+    public static ProgressBar linearWithLabel;
+
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[5]")
+    public static ProgressBar delayingAppearance;
 
     @UI("//*[contains(@class, 'MuiFab-primary')]")
     public static Button interactiveIntegrationCircularButton;
@@ -35,6 +74,3 @@ public class ProgressPage extends WebPage {
     @UI("//p[text()='Success!']")
     public static Text successMessage;
 }
-
-
-
