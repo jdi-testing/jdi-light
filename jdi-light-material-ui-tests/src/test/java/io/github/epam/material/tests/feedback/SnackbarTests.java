@@ -21,6 +21,8 @@ public class SnackbarTests extends TestsInit {
     @BeforeMethod
     public void before() {
         snackbarPage.open();
+        snackbarPage.isOpened();
+
     }
 
     @Test
@@ -116,43 +118,46 @@ public class SnackbarTests extends TestsInit {
         messageLengthContentButtons.get(3).click();
     }
 
-    @Test
+    @Test()
     public void consecutiveSnackbarsTest() {
 
-        otherButtons.get(1).is().text("SHOW MESSAGE A");
+        otherButtons.get(1).is().displayed();
+        otherButtons.get(1).has().text("SHOW MESSAGE A");
         otherButtons.get(1).click();
 
-        timer.wait(() -> snackbarPopUpText.isVisible());
-        timer.wait(() -> undoSnackbarButton.isVisible());
-        snackbarPopUpText.is().text("Message A");
-        undoSnackbarButton.is().text("UNDO");
+        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().displayed());
+        snackbarPopUpText.has().text("Message A");
+
+        undoSnackbarButton.is().displayed();
         undoSnackbarButton.click();
-        timer.wait(() -> snackbarPopUpText.is().disappear());
-        snackbarPopUpText.is().notVisible();
+        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().notVisible());
 
         otherButtons.get(1).click();
-        timer.wait(() -> closePopUpSnackbarButton.waitFor().displayed());
-        closePopUpSnackbarButton.click();
-        timer.wait(() -> snackbarPopUpText.is().disappear());
-        snackbarPopUpText.is().notVisible();
+        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().displayed());
+        snackbarPopUpText.has().text("Message A");
 
-        otherButtons.get(2).is().text("SHOW MESSAGE B");
+        closePopUpSnackbarButton.base().timer().wait(() -> closePopUpSnackbarButton.is().displayed());
+        closePopUpSnackbarButton.click();
+        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().notVisible());
+
+        otherButtons.get(2).is().displayed();
+        otherButtons.get(2).has().text("SHOW MESSAGE B");
         otherButtons.get(2).click();
 
-        timer.wait(() -> snackbarPopUpText.isVisible());
-        timer.wait(() -> undoSnackbarButton.isVisible());
+        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().displayed());
+        snackbarPopUpText.has().text("Message B");
 
-        snackbarPopUpText.is().text("Message B");
-        undoSnackbarButton.is().text("UNDO");
+        undoSnackbarButton.is().displayed();
         undoSnackbarButton.click();
-        timer.wait(() -> snackbarPopUpText.is().disappear());
-        snackbarPopUpText.is().notVisible();
+        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().notVisible());
 
         otherButtons.get(2).click();
-        timer.wait(() -> closePopUpSnackbarButton.waitFor().displayed());
+        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().displayed());
+        snackbarPopUpText.has().text("Message B");
+
+        closePopUpSnackbarButton.base().timer().wait(() -> closePopUpSnackbarButton.is().displayed());
         closePopUpSnackbarButton.click();
-        timer.wait(() -> snackbarPopUpText.is().disappear());
-        snackbarPopUpText.is().notVisible();
+        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().notVisible());
     }
 
     @Test
@@ -197,8 +202,6 @@ public class SnackbarTests extends TestsInit {
 
     @Test
     public void complementaryProjectsSnackbarTest() {
-//TODO fix
-// Found 2 elements instead of one for Element 'SnackbarPage.notisnackPopUpText (xpath='//div[@id='notistack-snackbar']')' during 0 seconds
 
         otherButtons.get(10).click();
         timer.wait(() -> notisnackPopUpText.isVisible());
