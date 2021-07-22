@@ -2,12 +2,12 @@ package io.github.epam.material.tests.displaydata;
 
 import static org.hamcrest.Matchers.hasToString;
 
-import io.github.com.pages.displaydata.ListPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.ListPage;
+import static org.testng.Assert.assertTrue;
 
 public class ListsTests extends TestsInit {
 
@@ -62,5 +62,10 @@ public class ListsTests extends TestsInit {
         ListPage.secondaryLineListItems.get(1).is().text(hasToString("Secondary text"));
         ListPage.enableSecondaryTextCheckbox.get(2).uncheck();
         ListPage.secondaryLineListItems.get(1).is().notVisible();
+    }
+
+    @Test
+    public void switchList() {
+        assertTrue(ListPage.switchList.get(2).children().get(9).hasClass("MuiSwitch-switchBase"));
     }
 }
