@@ -5,7 +5,7 @@
     <artifactId>js-wrappers</artifactId>
     <name>JDI JS Wrappers</name>
     <groupId>com.jdiai</groupId>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +13,7 @@
         <dependency>
             <groupId>com.jdiai</groupId>
             <artifactId>js-driver</artifactId>
-            <version>1.0.9</version>
+            <version>1.0.10</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>

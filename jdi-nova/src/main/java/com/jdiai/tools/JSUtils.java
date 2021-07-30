@@ -26,26 +26,36 @@ public final class JSUtils {
          if (!locator.value().isEmpty()) {
              return NAME_TO_LOCATOR.apply(locator.value());
          }
-         if (!locator.id().isEmpty())
+         if (!locator.id().isEmpty()) {
              return By.id(locator.id());
-         if (!locator.clazz().isEmpty())
+         }
+         if (!locator.clazz().isEmpty()) {
              return By.className(locator.clazz());
-         if (!locator.xpath().isEmpty())
+         }
+         if (!locator.xpath().isEmpty()) {
              return By.xpath(locator.xpath());
-         if (!locator.css().isEmpty())
+         }
+         if (!locator.css().isEmpty()) {
              return By.cssSelector(locator.css());
-         if (!locator.text().isEmpty())
+         }
+         if (!locator.text().isEmpty()) {
              return By.xpath(format(".//*/text()[normalize-space(.) = %s]/parent::*", escape(locator.text())));
-         if (!locator.hasText().isEmpty())
+         }
+         if (!locator.hasText().isEmpty()) {
              return By.xpath(format(".//*/text()[contains(normalize-space(.), %s)]/parent::*", escape(locator.hasText())));
-         if (!locator.tag().isEmpty())
+         }
+         if (!locator.tag().isEmpty()) {
              return By.tagName(locator.tag());
-         if (!locator.label().isEmpty())
+         }
+         if (!locator.label().isEmpty()) {
              return By.cssSelector("[label=" + locator.label() + "]");
-         if (!locator.alt().isEmpty())
+         }
+         if (!locator.alt().isEmpty()) {
              return By.cssSelector("[alt=" + locator.alt() + "]");
-         if (!locator.hasValue().isEmpty())
+         }
+         if (!locator.hasValue().isEmpty()) {
              return By.cssSelector("[value=" + locator.hasValue() + "]");
+         }
          return null;
      }
 

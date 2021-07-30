@@ -2,7 +2,6 @@ package com.jdiai;
 
 import com.epam.jdi.tools.ILogger;
 import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JFunc3;
 import com.jdiai.annotations.UI;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
@@ -29,6 +28,7 @@ import java.util.function.Supplier;
 import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
@@ -51,12 +51,9 @@ public class JDI {
     public static ILogger logger;
     public static int timeout = 10;
     public static ConditionTypes conditions = new ConditionTypes();
-    public static JFunc3<Object, By, List<By>, JS> initJSFunc = (parent, locator, locators) -> {
+    public static BiFunction<By, List<By>, JS> initJSFunc = (locator, locators) -> {
         if (locators != null) {
             return new JSLight(JDI::driver, locators);
-        }
-        if (parent != null && locator != null) {
-            return new JSLight(parent, locator);
         }
         if (locator != null) {
             return new JSLight(JDI::driver, locator);
@@ -95,7 +92,7 @@ public class JDI {
     };
 
     public static Function<Class<?>, String> GET_OBJECT_MAP = cl -> {
-        Field[] allFields = cl.getDeclaredFields();
+        List<Field> allFields = getFieldsDeep(cl);
         List<String> mapList = new ArrayList<>();
         for (Field field : allFields) {
             String value = GET_COMPLEX_VALUE.apply(field);
@@ -258,23 +255,15 @@ public class JDI {
     }
 
     public static JS $(By locator) {
-        return initJSFunc.execute(null, locator, null);
-    }
-
-    public static JS $(Object parent, By locator) {
-        return initJSFunc.execute(parent, locator, null);
+        return initJSFunc.apply(locator, null);
     }
 
     public static JS $(By... locators) {
-        return initJSFunc.execute(null, null, newList(locators));
+        return initJSFunc.apply(null, newList(locators));
     }
 
     public static JS $(String locator) {
         return $(NAME_TO_LOCATOR.apply(locator));
-    }
-
-    public static JS $(Object parent, String locator) {
-        return $(parent, NAME_TO_LOCATOR.apply(locator));
     }
 
     public static JS $(String... locators) {
@@ -286,7 +275,7 @@ public class JDI {
     }
 
     public static void loginAs(Object user) {
-        initJSFunc.execute(null, null, null).loginAs(user);
+        initJSFunc.apply(null, null).loginAs(user);
     }
 
     public static void submitForm(String formLocator, Object user) {
@@ -294,7 +283,7 @@ public class JDI {
     }
 
     public static void submitForm(Object user) {
-        initJSFunc.execute(null, null, null).submit(user);
+        initJSFunc.apply(null, null).submit(user);
     }
 
     public static void fillFormWith(String formLocator, Object user) {
@@ -302,7 +291,7 @@ public class JDI {
     }
 
     public static void fillFormWith(Object user) {
-        initJSFunc.execute(null, null, null).fill(user);
+        initJSFunc.apply(null, null).fill(user);
     }
 
     public static DragAndDrop drag(JS dragElement) { return new DragAndDrop(dragElement);}
