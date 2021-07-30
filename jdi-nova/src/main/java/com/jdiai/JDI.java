@@ -1,7 +1,6 @@
 package com.jdiai;
 
 import com.epam.jdi.tools.ILogger;
-import com.epam.jdi.tools.ReflectionUtils;
 import com.epam.jdi.tools.Safe;
 import com.jdiai.annotations.UI;
 import com.jdiai.asserts.Condition;
@@ -29,7 +28,7 @@ import java.util.function.Supplier;
 import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
