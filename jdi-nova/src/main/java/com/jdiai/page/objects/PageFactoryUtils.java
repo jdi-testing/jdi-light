@@ -19,7 +19,6 @@ import static com.jdiai.JDI.driver;
 import static com.jdiai.JDI.initJSFunc;
 import static com.jdiai.page.objects.JDIPageFactory.LOCATOR_FROM_FIELD;
 import static com.jdiai.page.objects.PageFactory.getFactory;
-import static com.jdiai.tools.JSUtils.getLocators;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
@@ -49,12 +48,8 @@ public class PageFactoryUtils {
     }
     static void setupCoreElement(InitInfo info) {
         By locator = LOCATOR_FROM_FIELD.apply(info.field);
-        JS core;
-        List<By> locators = getLocators(info.parent);
-        if (locator != null) {
-            locators.add(locator);
-        }
-        core = initJSFunc.apply(null, locators);
+        JS core = initJSFunc.apply(locator, null);
+        core.setParent(info.parent);
         ((HasCore) info.instance).setCore(core);
     }
     static boolean isUIObject(Field field) {

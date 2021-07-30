@@ -1,6 +1,7 @@
 package com.jdiai;
 
 import com.epam.jdi.tools.ILogger;
+import com.epam.jdi.tools.ReflectionUtils;
 import com.epam.jdi.tools.Safe;
 import com.jdiai.annotations.UI;
 import com.jdiai.asserts.Condition;
@@ -28,6 +29,7 @@ import java.util.function.Supplier;
 import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
@@ -91,7 +93,7 @@ public class JDI {
     };
 
     public static Function<Class<?>, String> GET_OBJECT_MAP = cl -> {
-        Field[] allFields = cl.getDeclaredFields();
+        List<Field> allFields = getFieldsDeep(cl);
         List<String> mapList = new ArrayList<>();
         for (Field field : allFields) {
             String value = GET_COMPLEX_VALUE.apply(field);
