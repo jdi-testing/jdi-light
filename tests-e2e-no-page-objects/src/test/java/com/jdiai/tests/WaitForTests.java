@@ -2,21 +2,25 @@ package com.jdiai.tests;
 
 import com.jdiai.JDI;
 import com.jdiai.JS;
+import com.jdiai.JSStable;
 import com.jdiai.TestInit;
+import com.jdiai.asserts.DisplayedTypes;
 import com.jdiai.testng.TestNGListener;
+import com.jdiai.tools.Alerts;
+import org.openqa.selenium.By;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.jdiai.JDI.$;
-import static com.jdiai.JDI.openPage;
+import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.Conditions.*;
+import static com.jdiai.asserts.DisplayedTypes.*;
 import static com.jdiai.states.States.login;
 import static com.jdiai.utils.TimeValidations.durationMoreThan;
 
 @Listeners(TestNGListener.class)
 public class WaitForTests implements TestInit {
     @Test
-    public void loginTest() {
+    public void disappearTest() {
         login();
         openPage("/html5.html");
 
@@ -25,14 +29,38 @@ public class WaitForTests implements TestInit {
             $("#ghost-button").shouldBe(hidden);
         });
     }
+
     @Test
-    public void loginTestJDI() {
+    public void shouldBeVisibleTest() {
         login();
         openPage("/html5.html");
         JS suspendButton = $("#suspend-button");
-        durationMoreThan(3, () -> {
-            JDI.waitFor(suspendButton, become(visible));
-            suspendButton.shouldBe(visible);
-        });
+        durationMoreThan(3,
+            () -> suspendButton.shouldBe(visible));
+        suspendButton.click();
+        Alerts.validateAlertText("Suspend button");
     }
+
+    @Test
+    public void waitForTest() {
+        login();
+        openPage("/html5.html");
+        JS suspendButton = $("#suspend-button");
+        durationMoreThan(3,
+            () -> JDI.waitFor(suspendButton, become(visible)));
+        suspendButton.click();
+        Alerts.validateAlertText("Suspend button");
+    }
+
+    @Test
+    public void waitAndClickTest() {
+        login();
+        openPage("/html5.html");
+        JSStable suspendButton = new JSStable(JDI::driver, By.id("suspend-button"));
+        suspendButton.setCondition("displayed", isDisplayed);
+        durationMoreThan(3,
+            () -> suspendButton.click());
+        Alerts.validateAlertText("Suspend button");
+    }
+
 }

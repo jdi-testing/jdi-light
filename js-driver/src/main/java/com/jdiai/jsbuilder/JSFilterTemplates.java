@@ -1,25 +1,25 @@
 package com.jdiai.jsbuilder;
 
 public class JSFilterTemplates {
-    public static String ELEMENT_CONDITION =
-        "condition = function (el) {\n" +
-        "  if (!el) return false;\n" +
-        "  style = getComputedStyle(el);\n" +
-        "  if (style.visibility === 'hidden') return false;\n" +
-        "  if (style.display === 'none') return false;\n" +
-        "  if (style.opacity < 0.05) return false;\n" +
-        "  if (el.hasAttribute('hidden')) return false;\n" +
-        "  r = el.getBoundingClientRect();\n" +
-        "  if (r.width < 5 || r.height < 5) return false;\n" +
-        "  return true;\n" +
+    public static String WAIT_FOR_ELEMENT =
+        "findElement = function() {\n" +
+        "   {element}" +
+        "   return element;\n" +
+        "}\n" +
+        // "let element;\n" +
+        "start = Date.now();\n" +
+        // "let searchError;\n" +
+        "while (Date.now() - start < {timeout}) {\n" +
+        "   try { element = findElement(); } catch { }\n" +
+        "   if (!element) { searchError = 'Element not found'; continue; }\n" +
+        "   let conditionResult;\n" +
+        "   try { conditionResult = condition(element); } catch(ex) { }\n" +
+        "   if (conditionResult) { break; } else { searchError = 'Element found but does not meet condition %s'; }\n" +
+        "   element = undefined;\n" +
+        "}\n" +
+        "if (!element && searchError) {\n" +
+        "   throw searchError;\n" +
         "}\n";
-
-    public static String GET_ELEMENT =
-        "let start = Date.now();\n" +
-        "while (Date.now() - start < %s) {\n" +
-        "    %s" +
-        "    if (condition(element)) break;\n" +
-        "}";
 
     public static String FILTER_FUNC =
         "filter = function(element) {\n" +

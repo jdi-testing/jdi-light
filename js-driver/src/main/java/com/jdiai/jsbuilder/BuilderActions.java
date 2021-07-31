@@ -64,7 +64,11 @@ public class BuilderActions implements IBuilderActions {
     }
 
     protected String addBeforeReturn(String collector) {
+        return builder.condition() + addStyles(collector);
+    }
+    protected String addStyles(String collector) {
         return collector.contains("styles.")
-                ? "const styles = " + builder.getElementName() + " ? getComputedStyle(" + builder.getElementName() + ") : undefined;\n" : "";
+                ? "const styles = " + builder.getElementName() + " ? getComputedStyle(" + builder.getElementName() + ") : undefined;\n"
+                : "";
     }
 }

@@ -8,7 +8,7 @@ public class CoreElement implements HasCore {
     private JS core;
 
     public JS core() {
-        return core != null ? core : initJSFunc.apply(null, null);
+        return core != null ? core : initJSFunc.apply(null);
     }
 
     public JS setCore(JS core) { this.core = core; return core; }

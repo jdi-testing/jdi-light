@@ -23,15 +23,15 @@ public class RetryFunctions {
         return obj;
     };
 
-    public static BiFunction<Object, String, List<String>> DEFAULT_LIST_SCRIPT_EXECUTE =
-        (driver, jsScript) -> (List<String>) execute((WebDriver) driver, jsScript);
+    public static BiFunction<Object, String, List<Object>> DEFAULT_LIST_SCRIPT_EXECUTE =
+        (driver, jsScript) -> (List<Object>) execute((WebDriver) driver, jsScript);
 
-    public static BiFunction<Object, String, List<String>> LIST_RETRY_TIMEOUT = (driver, jsScript) -> {
+    public static BiFunction<Object, String, List<Object>> LIST_RETRY_TIMEOUT = (driver, jsScript) -> {
         Timer t = new Timer(1000);
-        List<String> obj = null;
+        List<Object> obj = null;
         while (obj == null && t.isRunning()) {
             try {
-                obj = (List<String>) execute((WebDriver) driver, jsScript);
+                obj = (List<Object>) execute((WebDriver) driver, jsScript);
             } catch (Exception ignore) { }
         }
         return obj;

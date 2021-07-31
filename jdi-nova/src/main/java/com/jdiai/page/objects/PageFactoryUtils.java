@@ -48,7 +48,7 @@ public class PageFactoryUtils {
     }
     static void setupCoreElement(InitInfo info) {
         By locator = LOCATOR_FROM_FIELD.apply(info.field);
-        JS core = initJSFunc.apply(locator, null);
+        JS core = initJSFunc.apply(newList(locator));
         core.setParent(info.parent);
         ((HasCore) info.instance).setCore(core);
     }

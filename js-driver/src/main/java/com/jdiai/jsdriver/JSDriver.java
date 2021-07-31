@@ -79,13 +79,6 @@ public class JSDriver {
     }
 
     public IJSBuilder buildOne() {
-        IJSBuilder builder = getOneBuilder();
-        // if (isNotBlank(condition)) {
-        //     getOneBuilder().addJSCode(String.format(GET_ELEMENT, timeout, condition);
-        // }
-        return builder;
-    }
-    protected IJSBuilder getOneBuilder() {
         if (locators().isEmpty()) {
             return builder();
         }

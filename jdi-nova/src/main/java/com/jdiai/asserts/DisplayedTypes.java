@@ -26,5 +26,13 @@ public class DisplayedTypes {
         "    return true;\n" +
         "  }\n" +
         "}\n" +
+        "cx = rect.left + rect.width - 2;\n" +
+        "cy = rect.top + 2;\n" +
+        "e = document.elementFromPoint(cx, cy);\n" +
+        "for (; e; e = e.parentElement) {\n" +
+        "  if (e === element) {\n" +
+        "    return true;\n" +
+        "  }\n" +
+        "}\n" +
         "return false;";
 }

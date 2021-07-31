@@ -287,7 +287,7 @@ public class JSLight implements JS {
                 ? new ArrayList<>()
                 : locators().subList(0, locators().size() - 2);
             locators.add(fillByTemplate(lastLocator, value));
-            initJSFunc.apply(null, locators).click();
+            initJSFunc.apply(locators).click();
         } else {
             findFirst(textEquals(value)).click();
         }
@@ -779,7 +779,7 @@ public class JSLight implements JS {
     }
 
     public JS find(By by) {
-        return initJSFunc.apply(by, null)
+        return initJSFunc.apply(newList(by))
                 .setParent(this);
     }
     
@@ -934,7 +934,7 @@ public class JSLight implements JS {
     }
 
     protected JS listToOne(String script) {
-        JS result = initJSFunc.apply(null, null);
+        JS result = initJSFunc.apply(null);
         result.engine().jsDriver().setScriptInElementContext(engine().jsDriver(), script);
         engine().jsDriver().builder().cleanup();
         return result;

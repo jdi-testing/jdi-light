@@ -10,6 +10,7 @@ import com.jdiai.jswraper.JSBaseEngine;
 import com.jdiai.jswraper.JSEngine;
 import com.jdiai.jswraper.driver.DriverManager;
 import com.jdiai.jswraper.driver.DriverTypes;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -41,6 +42,7 @@ import static com.jdiai.jswraper.driver.DriverManager.useDriver;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
+import static com.jdiai.tools.WindowsManager.getWindows;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
@@ -51,14 +53,14 @@ public class JDI {
     public static ILogger logger;
     public static int timeout = 10;
     public static ConditionTypes conditions = new ConditionTypes();
-    public static BiFunction<By, List<By>, JS> initJSFunc = (locator, locators) -> {
-        if (locators != null) {
-            return new JSLight(JDI::driver, locators);
+    public static Function<List<By>, JS> initJSFunc = locators -> {
+        if (ObjectUtils.isEmpty(locators)) {
+            return new JSLight(JDI::driver);
         }
-        if (locator != null) {
-            return new JSLight(JDI::driver, locator);
+        if (locators.size() == 1) {
+            return new JSLight(JDI::driver, locators.get(0));
         }
-        return new JSLight(JDI::driver);
+        return new JSLight(JDI::driver, locators);
     };
 
     public static Supplier<IJSBuilder> initBuilder =
@@ -252,14 +254,15 @@ public class JDI {
             : url;
         logger.info("Open page '" + fullUrl + "'");
         driver().get(fullUrl);
+        getWindows();
     }
 
     public static JS $(By locator) {
-        return initJSFunc.apply(locator, null);
+        return initJSFunc.apply(newList(locator));
     }
 
     public static JS $(By... locators) {
-        return initJSFunc.apply(null, newList(locators));
+        return initJSFunc.apply(newList(locators));
     }
 
     public static JS $(String locator) {
@@ -275,7 +278,7 @@ public class JDI {
     }
 
     public static void loginAs(Object user) {
-        initJSFunc.apply(null, null).loginAs(user);
+        initJSFunc.apply(null).loginAs(user);
     }
 
     public static void submitForm(String formLocator, Object user) {
@@ -283,7 +286,7 @@ public class JDI {
     }
 
     public static void submitForm(Object user) {
-        initJSFunc.apply(null, null).submit(user);
+        initJSFunc.apply(null).submit(user);
     }
 
     public static void fillFormWith(String formLocator, Object user) {
@@ -291,7 +294,7 @@ public class JDI {
     }
 
     public static void fillFormWith(Object user) {
-        initJSFunc.apply(null, null).fill(user);
+        initJSFunc.apply(null).fill(user);
     }
 
     public static DragAndDrop drag(JS dragElement) { return new DragAndDrop(dragElement);}

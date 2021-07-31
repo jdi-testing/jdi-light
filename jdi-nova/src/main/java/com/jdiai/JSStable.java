@@ -1,5 +1,6 @@
 package com.jdiai;
 
+import com.jdiai.asserts.DisplayedTypes;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.tools.GetTextTypes;
 import com.jdiai.visual.Direction;
@@ -11,31 +12,47 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import static com.jdiai.asserts.Conditions.*;
+import static com.jdiai.asserts.DisplayedTypes.*;
+import static com.jdiai.jsbuilder.JSFilterTemplates.WAIT_FOR_ELEMENT;
+import static java.lang.String.*;
 
 public class JSStable extends JSLight {
+    private void init() {
+        this.engine.jsDriver().builder().setTimeoutMs(() -> JDI.timeout * 1000L);
+        setCondition("visible", isVisible);
+    }
+    public JSStable setCondition(String name, String condition) {
+        this.engine.jsDriver().builder().setCondition(format(WAIT_FOR_ELEMENT, name));
+        this.engine.jsDriver().builder().registerFunction("condition", asCondition(condition));
+        return this;
+    }
+    protected String asCondition(String conditionScript) {
+        return "condition = function (el) {\n" + conditionScript + "\n}\n";
+    }
+
     public JSStable() {
-        super();
+        super();init();
     }
     public JSStable(Supplier<WebDriver> driver, List<By> locators) {
-        super(driver, locators);
+        super(driver, locators);init();
     }
     public JSStable(WebDriver driver, List<By> locators) {
-        super(driver, locators);
+        super(driver, locators);init();
     }
     public JSStable(Supplier<WebDriver> driver, By... locators) {
-        super(driver, locators);
+        super(driver, locators);init();
     }
     public JSStable(WebDriver driver, By... locators) {
-        super(driver, locators);
+        super(driver, locators);init();
     }
     public JSStable(Object parent, By locator) {
-        super(parent, locator);
+        super(parent, locator);init();
     }
     public JSStable(WebDriver driver, By locator, Object parent) {
-        super(driver, locator, parent);
+        super(driver, locator, parent);init();
     }
     public JSStable(Supplier<WebDriver> driver, By locator, Object parent) {
-        super(driver, locator, parent);
+        super(driver, locator, parent);init();
     }
 
     @Override
@@ -73,7 +90,7 @@ public class JSStable extends JSLight {
 
     @Override
     public void click() {
-        shouldBe(visible, enabled);
+        // shouldBe(visible, enabled);
         super.click();
     }
 
