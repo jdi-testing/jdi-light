@@ -29,7 +29,6 @@ import java.util.function.Function;
 import static com.jdiai.jsbuilder.JSFilterTemplates.CHECK_CONDITION;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     String getElement(String valueFunc);
@@ -175,17 +174,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
         return this;
     }
     default JS setFilter(String filter) {
-        IJSBuilder builder = engine().jsDriver().builder();
-        if (isBlank(filter)) {
-            builder.setFilter(null);
-            return this;
-        }
-        String filterBody = builder.actions().getResult(filter);
-        if (filterBody.endsWith("\n")) {
-            filterBody = filterBody.substring(0, filterBody.length() - 1);
-        }
-        filterBody = "  " + filterBody.replace("\n", "\n  ");
-        builder.setFilter("filter = function (element) {\n" + filterBody + "\n}\n");
+        engine().jsDriver().builder().setFilter(filter);
         return this;
     }
     String getFullName();

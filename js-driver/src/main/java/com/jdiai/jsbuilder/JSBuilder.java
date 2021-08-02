@@ -64,7 +64,16 @@ public class JSBuilder implements IJSBuilder {
 
 
     public IJSBuilder setFilter(String filter) {
-        this.filter = filter;
+        if (isBlank(filter)) {
+            this.filter = null;
+            return this;
+        }
+        String filterBody = actions().getResult(filter);
+        if (filterBody.endsWith("\n")) {
+            filterBody = filterBody.substring(0, filterBody.length() - 1);
+        }
+        filterBody = "  " + filterBody.replace("\n", "\n  ");
+        this.filter = "filter = function (element) {\n" + filterBody + "\n}\n";
         return this;
     }
     public JSBuilder setProcessResultFunc(Function<String, String> processResultFunc) {
