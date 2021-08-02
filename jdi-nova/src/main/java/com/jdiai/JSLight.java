@@ -382,7 +382,6 @@ public class JSLight implements JS {
                 .buildOne();
             ctx = "element";
         }
-        builder.registerVariable("option");
         builder.setElementName("option");
         for (String value : values) {
             By by = fillByTemplate(locator, value);
@@ -393,7 +392,6 @@ public class JSLight implements JS {
 
     protected IJSBuilder getScriptForSelect(String... values) {
         IJSBuilder builder = engine().jsDriver().buildOne();
-        builder.registerVariable("option");
         builder.setElementName("option");
         for (String value : values) {
             By by = defineLocator(format(selectFindTextLocator(), value));

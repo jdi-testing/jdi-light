@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -32,7 +31,6 @@ public class JSBuilder implements IJSBuilder {
         result -> result.length() > 200
             ? result.substring(0, 195) + "..."
             : result;
-    protected List<String> variables = new ArrayList<>();
     protected String query = "";
     protected String searchScript = "";
     protected Supplier<JavascriptExecutor> js;
@@ -261,28 +259,13 @@ public class JSBuilder implements IJSBuilder {
         }
         return collectResult;
     }
-
-    // region private
-    public void registerVariables(String... vars) {
-        for (String variable : vars) {
-            if (!variables.contains(variable)) {
-                variables.add(variable);
-            }
-        }
-    }
-    public String registerVariable(String variable) {
-        if (!variables.contains(variable)) {
-            variables.add(variable);
-        }
-        return variable + " = ";
-    }
     private String beforeScript() {
         return isNotBlank(searchScript)
             ? searchScript + "\n"
             : "";
     }
     public String getQuery() {
-        if (ObjectUtils.isEmpty(variables) && ObjectUtils.isEmpty(useFunctions)) {
+        if (ObjectUtils.isEmpty(useFunctions)) {
             return getScript();
         }
         String script = isNotEmpty(useFunctions) ? print(useFunctions.values(), "") : "";
@@ -298,7 +281,6 @@ public class JSBuilder implements IJSBuilder {
     public void cleanup() {
         if (isBlank(searchScript)) {
             useFunctions.clear();
-            variables = new ArrayList<>();
         }
         query = "";
     }
@@ -312,11 +294,6 @@ public class JSBuilder implements IJSBuilder {
                 useFunctions.add(pair);
             }
         }
-        for (String variable : jsBuilder.variables) {
-            if (!variables.contains(variable)) {
-                variables.add(variable);
-            }
-        }
     }
     public JSBuilder copy() {
         JSBuilder result = new JSBuilder(null, builderActions);
@@ -326,7 +303,6 @@ public class JSBuilder implements IJSBuilder {
         result.condition = condition;
         result.filter = filter;
         result.logQuery = logQuery;
-        result.variables = variables;
         return result;
     }
     // endregion

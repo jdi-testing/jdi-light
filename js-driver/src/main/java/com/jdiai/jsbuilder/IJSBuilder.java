@@ -27,8 +27,6 @@ public interface IJSBuilder {
     Object executeQuery();
     List<Object> executeAsList();
     IJSBuilder registerFunction(String name, String function);
-    void registerVariables(String... vars);
-    String registerVariable(String variable);
     String getQuery();
     String getScript();
     IJSBuilder logQuery(int queryLevel);

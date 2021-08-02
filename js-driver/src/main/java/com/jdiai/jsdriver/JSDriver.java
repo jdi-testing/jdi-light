@@ -73,7 +73,6 @@ public class JSDriver {
     }
 
     public JSDriver elementCtx() {
-        builder().registerVariable("element");
         context = "element";
         return this;
     }
