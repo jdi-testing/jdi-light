@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeSuite;
 import static com.jdiai.jsbuilder.QueryLogger.ALL;
 import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 import static com.jdiai.jswraper.driver.DriverManager.killDrivers;
+import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initElements;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static com.jdiai.tools.TestIDLocators.ID_LOCATOR;
@@ -27,7 +28,7 @@ public interface TestInit {
     default void setUp() {
         killDrivers();
         SMART_LOCATOR = ID_LOCATOR;
-        // DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
+        DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
         LOG_QUERY = ALL;
         initSite(JDISite.class);
     }
