@@ -1,6 +1,9 @@
 package com.jdiai;
 
-import com.jdiai.asserts.DisplayedTypes;
+import com.epam.jdi.tools.func.JAction;
+import com.jdiai.asserts.Condition;
+import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.tools.GetTextTypes;
 import com.jdiai.visual.Direction;
@@ -11,135 +14,150 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static com.epam.jdi.tools.LinqUtils.last;
 import static com.jdiai.asserts.Conditions.*;
-import static com.jdiai.asserts.DisplayedTypes.*;
-import static com.jdiai.jsbuilder.JSFilterTemplates.WAIT_FOR_ELEMENT;
-import static java.lang.String.*;
+import static com.jdiai.asserts.ElementFilters.isDisplayed;
+import static com.jdiai.asserts.ElementFilters.isVisible;
+import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class JSStable extends JSLight {
-    private void init() {
-        this.engine.jsDriver().builder().setTimeoutMs(() -> JDI.timeout * 1000L);
-        setCondition("visible", isVisible);
-    }
-    public JSStable setCondition(String name, String condition) {
-        this.engine.jsDriver().builder().setCondition(format(WAIT_FOR_ELEMENT, name));
-        this.engine.jsDriver().builder().registerFunction("condition", asCondition(condition));
-        return this;
-    }
-    protected String asCondition(String conditionScript) {
-        return "condition = function (el) {\n" + conditionScript + "\n}\n";
-    }
-
     public JSStable() {
-        super();init();
+        super();
     }
     public JSStable(Supplier<WebDriver> driver, List<By> locators) {
-        super(driver, locators);init();
+        super(driver, locators);
     }
     public JSStable(WebDriver driver, List<By> locators) {
-        super(driver, locators);init();
+        super(driver, locators);
     }
     public JSStable(Supplier<WebDriver> driver, By... locators) {
-        super(driver, locators);init();
+        super(driver, locators);
     }
     public JSStable(WebDriver driver, By... locators) {
-        super(driver, locators);init();
+        super(driver, locators);
     }
     public JSStable(Object parent, By locator) {
-        super(parent, locator);init();
+        super(parent, locator);
     }
     public JSStable(WebDriver driver, By locator, Object parent) {
-        super(driver, locator, parent);init();
+        super(driver, locator, parent);
     }
     public JSStable(Supplier<WebDriver> driver, By locator, Object parent) {
-        super(driver, locator, parent);init();
+        super(driver, locator, parent);
+    }
+
+    @Override
+    protected void init() {
+        setCondition("visible", isVisible);
+        setFilter(isDisplayed);
+    }
+
+    protected void stableAction(JAction action, Condition... conditions) {
+        try {
+            action.execute();
+        } catch (Exception ignore) {
+            waitForConditions(conditions);
+            action.execute();
+        }
+    }
+    protected <T> T stableFunction(Supplier<T> func, Condition... conditions) {
+        try {
+            return func.get();
+        } catch (Exception ignore) {
+            waitForConditions(conditions);
+            return func.get();
+        }
+    }
+
+    protected void waitForConditions(Condition... conditions) {
+        try {
+            shouldBe(exist);
+        } catch (Exception ex) {
+            throw new JDINovaException("Failed to find element: " + toString());
+        }
+        shouldBe(conditions);
     }
 
     @Override
     public JS setOption(String option) {
-        if (option == null) {
-            return this;
-        }
-        should(exist);
-        return doAction("option.value = " + option + ";\nelement.dispatchEvent(new Event('change'));");
+        return stableFunction(() -> super.setOption(option));
     }
 
     @Override
     public JS selectByName(String name) {
-        if (name == null) {
-            return this;
-        }
-        should(exist);
-        return doAction("dispatchEvent(new Event('change'));\n" +
-            "element.selectedIndex = [...element.options]" +
-            ".findIndex(option => option.text === '" + name + "');\n" +
-            "element.dispatchEvent(new Event('change'));");
+        return stableFunction(() -> super.selectByName(name));
     }
 
     @Override
     public String selectedValueOption() {
-        should(exist);
-        return super.selectedValueOption();
+        return stableFunction(super::selectedValueOption);
     }
 
     @Override
     public String selectedOption() {
-        should(exist);
-        return super.selectedOption();
+        return stableFunction(super::selectedOption);
     }
 
     @Override
     public void click() {
-        // shouldBe(visible, enabled);
-        super.click();
+        stableAction(super::click, visible, enabled);
     }
 
     @Override
     public JS clickCenter() {
-        should(exist);
-        return super.clickCenter();
+        stableAction(super::clickCenter, visible);
+        return this;
     }
 
     @Override
     public JS click(int x, int y) {
-        should(exist);
-        return super.click(x, y);
+        stableAction(() -> super.click(x, y), visible);
+        return this;
     }
 
     @Override
     public JS select(String... values) {
-        should(exist);
-        return super.select(values);
+        if (isEmpty(values) || isEmpty(locators())) {
+            throw new JDINovaException("Can't execute select for empty values or locators");
+        }
+        By locator = last(locators());
+        IJSBuilder builder = getByLocator(locator).contains("%s")
+            ? getTemplateScriptForSelect(locator, values)
+            : getScriptForSelect(values);
+
+        stableAction(builder::executeQuery);
+        return this;
     }
 
     @Override
     public JS check(boolean value) {
-        shouldBe(visible);
-        return super.check(value);
+        stableAction(() -> super.check(value), visible);
+        return this;
     }
 
     @Override
     public JS rightClick() {
-        shouldBe(visible);
-        return super.rightClick();
+        stableAction(super::rightClick, visible);
+        return this;
     }
 
     @Override
     public JS doubleClick() {
-        shouldBe(visible);
-        return super.doubleClick();
+        stableAction(super::doubleClick, visible);
+        return this;
     }
 
     @Override
     public JS hover() {
-        shouldBe(visible);
-        return super.hover();
+        stableAction(super::hover, visible);
+        return this;
     }
 
     @Override
     public JS dragAndDropTo(int x, int y) {
-        shouldBe(visible);
-        return super.dragAndDropTo(x, y);
+        stableAction(() -> super.dragAndDropTo(x, y), visible);
+        return this;
     }
 
     @Override
@@ -147,8 +165,7 @@ public class JSStable extends JSLight {
         if (value == null) {
             return;
         }
-        shouldBe(visible);
-        we().sendKeys(value);
+        stableAction(() -> super.sendKeys(value), visible);
     }
 
     @Override
@@ -156,38 +173,34 @@ public class JSStable extends JSLight {
         if (value == null) {
             return this;
         }
-        shouldBe(visible);
-        return set("setAttribute('value', '');\nelement.value='" + charToString(value) + "';\nelement.dispatchEvent(new Event('input'));");
+        stableAction(() -> super.set("setAttribute('value', '');\nelement.value='" + charToString(value) +
+            "';\nelement.dispatchEvent(new Event('input'));"), visible);
+        return this;
     }
 
     @Override
     public void clear() {
-        shouldBe(visible);
-        super.clear();
+        stableAction(super::clear, visible);
     }
 
     @Override
     public String getTagName() {
-        should(exist);
-        return super.getTagName();
+        return stableFunction(super::getTagName);
     }
 
     @Override
     public String getAttribute(String attrName) {
-        should(exist);
-        return super.getAttribute(attrName);
+        return stableFunction(() -> super.getAttribute(attrName));
     }
 
     @Override
     public String getProperty(String property) {
-        should(exist);
-        return super.getProperty(property);
+        return stableFunction(() -> super.getProperty(property));
     }
 
     @Override
     public List<String> getAttributesAsList(String attr) {
-        should(exist);
-        return super.getAttributesAsList(attr);
+        return stableFunction(() -> super.getAttributesAsList(attr));
     }
 
     @Override
@@ -252,8 +265,7 @@ public class JSStable extends JSLight {
 
     @Override
     public boolean isEnabled() {
-        should(exist);
-        return super.isEnabled();
+        return stableFunction(super::isEnabled);
     }
 
     @Override

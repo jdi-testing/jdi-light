@@ -39,11 +39,11 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
     }
 
     default boolean isEnabled() {
-        return core().isEnabled();
+        return !isDisabled();
     }
 
     default boolean isDisabled() {
-        return !isEnabled();
+        return core().isDisabled();
     }
 
     default boolean isDisplayed() {
@@ -74,8 +74,8 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
         return core().isExist();
     }
 
-    default boolean isClickable() {
-        return core().isClickable();
+    default boolean isNotCovered() {
+        return core().isNotCovered();
     }
 
     default boolean isNotExist() {

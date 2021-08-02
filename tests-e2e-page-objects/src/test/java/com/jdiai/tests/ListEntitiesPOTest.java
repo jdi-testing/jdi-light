@@ -38,6 +38,7 @@ public class ListEntitiesPOTest implements TestInit {
     @Test
     public void entitiesListTest() {
         List<SearchItem> results = searchPage.searchResults;
+        assertEquals(results.size(), 6);
         assertEquals(results.get(2).title, "JDI TEST SITE");
         assertEquals(print(results, SearchItem::toString), SearchResults);
     }
@@ -45,6 +46,7 @@ public class ListEntitiesPOTest implements TestInit {
     @Test
     public void entitiesDataTest() {
         DataList<SearchItem> results = searchPage.searchData;
+        assertEquals(results.size(), 6);
         assertEquals(results.get("JDI TEST SITE").link, "https://jdi-testing.github.io/jdi-light/");
         assertEquals(print(results, SearchItem::toString), SearchResults);
     }

@@ -38,7 +38,8 @@ public class JSBuilder implements IJSBuilder {
     protected Supplier<JavascriptExecutor> js;
     protected MapArray<String, String> useFunctions = new MapArray<>();
     protected String condition = null;
-    protected Supplier<Long> timeoutMs = null;
+    protected String conditionFunc = null;
+    protected String filter = null;
     protected IBuilderActions builderActions;
 
     public JSBuilder(Supplier<WebDriver> driver) {
@@ -56,8 +57,14 @@ public class JSBuilder implements IJSBuilder {
         this.condition = condition;
         return this;
     }
-    public JSBuilder setTimeoutMs(Supplier<Long> timeoutMs) {
-        this.timeoutMs = timeoutMs;
+    public JSBuilder setCondition(String condition, String conditionFunc) {
+        this.conditionFunc = actions().getResult(conditionFunc);
+        return setCondition(condition);
+    }
+
+
+    public IJSBuilder setFilter(String filter) {
+        this.filter = filter;
         return this;
     }
     public JSBuilder setProcessResultFunc(Function<String, String> processResultFunc) {
@@ -76,31 +83,33 @@ public class JSBuilder implements IJSBuilder {
         return elementName;
     }
 
+    public IBuilderActions actions() {
+        return builderActions;
+    }
     public IJSBuilder updateActions(IBuilderActions builderActions) {
         this.builderActions = builderActions;
         this.builderActions.setBuilder(this);
         return this;
     }
-
     public IJSBuilder registerFunction(String name, String function) {
         useFunctions.update(name, function);
         return this;
     }
     public String condition() {
-        if (condition == null) {
-            return "";
+        if (conditionFunc != null) {
+            registerFunction("condition", "condition = function(element) {\n" + conditionFunc + "\n}\n");
         }
-        if (condition.contains("{element}")) {
-        // if (condition.contains("element()")) {
-            // registerFunction("element","element = function() {\n" + query + "}\n");
-            String result = condition.replace("{element}", getScript());
-            query = "";
-            variables.clear();
-            if (result.contains("{timeout}") && timeoutMs != null) {
-                return result.replace("{timeout}", timeoutMs.get() + "");
-            }
+        return condition != null ? condition : "";
+    }
+    public boolean noFilter() {
+        return filter == null;
+    }
+    public boolean hasFilter() {
+        if (filter != null) {
+            registerFunction("filter", filter);
+            return true;
         }
-        return condition;
+        return false;
     }
 
     public IJSBuilder logQuery(int logLevel) {
@@ -263,28 +272,19 @@ public class JSBuilder implements IJSBuilder {
             ? searchScript + "\n"
             : "";
     }
-    public String rawQuery() {
-        return beforeScript() + query;
-    }
     public String getQuery() {
         if (ObjectUtils.isEmpty(variables) && ObjectUtils.isEmpty(useFunctions)) {
-            return rawQuery();
+            return getScript();
         }
         String script = isNotEmpty(useFunctions) ? print(useFunctions.values(), "") : "";
-        script += "let " + getScript().replace("\nreturn ''", "");
+        script += getScript().replace("\nreturn ''", "");
         if (!script.contains("%s")) {
             return script;
         }
         throw new JDINovaException("Failed to execute js script for template locator. Please replace %s before usage");
     }
-    protected String getScript() {
-        if (ObjectUtils.isEmpty(variables) && ObjectUtils.isEmpty(useFunctions)) {
-            return rawQuery();
-        }
-        String letVariables = variables.size() > 1
-            ? print(variables, ", ") + ";\n"
-            : "";
-        return letVariables + rawQuery();
+    public String getScript() {
+        return beforeScript() + query;
     }
     public void cleanup() {
         if (isBlank(searchScript)) {
@@ -314,6 +314,8 @@ public class JSBuilder implements IJSBuilder {
         result.searchScript = searchScript;
         result.js = js;
         result.useFunctions = useFunctions;
+        result.condition = condition;
+        result.filter = filter;
         result.logQuery = logQuery;
         result.variables = variables;
         return result;

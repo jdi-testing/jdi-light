@@ -9,7 +9,6 @@ import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsdriver.JSDriver;
-import com.jdiai.jsdriver.JSDriverUtils;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.jswraper.JSEngine;
 import com.jdiai.scripts.Whammy;
@@ -30,6 +29,7 @@ import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -39,6 +39,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.jdiai.JDI.*;
+import static com.jdiai.asserts.ElementFilters.isDisplayed;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
@@ -56,7 +57,9 @@ import static java.lang.Math.min;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.openqa.selenium.Keys.BACK_SPACE;
 import static org.openqa.selenium.OutputType.*;
 
 public class JSLight implements JS {
@@ -64,6 +67,7 @@ public class JSLight implements JS {
     protected Supplier<WebDriver> driver;
     protected Safe<Actions> actions;
     protected String name = "";
+    protected String varName = "";
     protected Object parent = null;
     protected JSImages imagesData;
     public int renderTimeout = 5000;
@@ -72,35 +76,45 @@ public class JSLight implements JS {
     public JSLight() {
         this(JDI::driver, new ArrayList<>());
     }
+
     public JSLight(Supplier<WebDriver> driver, List<By> locators) {
         this.driver = driver;
         this.engine = initEngine.apply(driver, locators);
         // this.js.multiSearch();
         this.actions = new Safe<>(() -> new Actions(driver()));
+        init();
     }
     public JSLight(WebDriver driver, List<By> locators) {
         this(() -> driver, locators);
     }
+
     public JSLight(Supplier<WebDriver> driver, By... locators) {
         this(driver, newList(locators));
     }
+
     public JSLight(WebDriver driver, By... locators) {
         this(() -> driver, locators);
     }
+
     public JSLight(Object parent, By locator) {
         this(JDI::driver, locator);
         setParent(parent);
     }
+
     public JSLight(WebDriver driver, By locator, Object parent) {
         this(() -> driver, locator);
         setParent(parent);
     }
+
     public JSLight(Supplier<WebDriver> driver, By locator, Object parent) {
         this(driver, getLocators(locator, parent));
         this.parent = parent;
         if (parent != null && isInterface(parent.getClass(), HasCore.class)) {
             this.engine().updateDriver(((HasCore) parent).core().engine().jsDriver());
         }
+    }
+
+    protected void init() {
     }
 
     public WebDriver driver() {
@@ -122,6 +136,7 @@ public class JSLight implements JS {
         this.driver = jsLight.driver;
         this.actions = jsLight.actions;
         this.name = jsLight.name;
+        this.varName = jsLight.varName;
         this.parent = jsLight.parent;
         this.imagesData = jsLight.imagesData;
         this.renderTimeout = jsLight.renderTimeout;
@@ -149,11 +164,22 @@ public class JSLight implements JS {
     }
 
     public List<String> getList(String valueFunc) {
-        return engine().getValues(valueFunc);
+        return useFilter(() -> engine().getValues(valueFunc));
+    }
+    public <T> T useFilter(Supplier<T> func) {
+        T result;
+        if (engine().jsDriver().builder().noFilter()) {
+            setFilter(isDisplayed);
+            result = func.get();
+            setFilter("");
+        } else {
+            result = func.get();
+        }
+        return result;
     }
     
     public String filterElements(String valueFunc) {
-        return engine().firstValue(valueFunc);
+        return useFilter(() -> engine().firstValue(valueFunc));
     }
 
     /**
@@ -236,12 +262,29 @@ public class JSLight implements JS {
     public String getName() {
         return isNotBlank(name)
             ? name
-            : print(locators(), by -> JSDriverUtils.getByType(by) + ":" + JSDriverUtils.getByLocator(by), " > ");
+            : printLocators();
+    }
+    protected String printLocators() {
+        String result = "";
+        boolean first = false;
+        for (By by : locators()) {
+            if (by != null) {
+                if (first) {
+                    result += " > ";
+                }
+                result += getByType(by) + ": '" + getByLocator(by) + "'";
+                first = true;
+            }
+        }
+        return result;
     }
 
     public JS setName(String name) {
         this.name = name;
         return this;
+    }
+    public void setVarName(Field field) {
+        this.varName = field.getName();
     }
 
     public Object parent() {
@@ -264,9 +307,9 @@ public class JSLight implements JS {
     }
     
     public JS clickCenter() {
-        return doAction("let rect = element.getBoundingClientRect();" +
-            "let x = rect.x + rect.width / 2;" +
-            "let y = rect.y + rect.height / 2;" +
+        return doAction("rect = element.getBoundingClientRect();" +
+            "x = rect.x + rect.width / 2;" +
+            "y = rect.y + rect.height / 2;" +
             "document.elementFromPoint(x, y).click();");
     }
     
@@ -318,7 +361,7 @@ public class JSLight implements JS {
     
     public JS select(String... values) {
         if (isEmpty(values) || isEmpty(locators())) {
-            return this;
+            throw new JDINovaException("Can't execute select for empty values or locators");
         }
         By locator = last(locators());
         IJSBuilder builder = getByLocator(locator).contains("%s")
@@ -408,7 +451,11 @@ public class JSLight implements JS {
         if (value == null) {
             return;
         }
-        we().sendKeys(value);
+        if (value.length == 1 && value[0].equals("\n")) {
+            we().sendKeys("\n " + BACK_SPACE);
+        } else {
+            we().sendKeys(value);
+        }
     }
 
     public JS input(CharSequence... value) {
@@ -536,8 +583,8 @@ public class JSLight implements JS {
         return !isSelected();
     }
 
-    public boolean isEnabled() {
-        return hasAttribute("enabled");
+    public boolean isDisabled() {
+        return hasAttribute("disabled");
     }
     
     public JS setTextType(GetTextTypes textType) {
@@ -629,7 +676,7 @@ public class JSLight implements JS {
     }
     
     public ClientRect getClientRect() {
-        return new ClientRect(engine().getJson("let rect = element.getBoundingClientRect();\n" +
+        return new ClientRect(engine().getJson("rect = element.getBoundingClientRect();\n" +
             "return { x: rect.x, y: rect.y, top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right, " +
             "wWidth: window.innerWidth, wHeight: window.innerHeight };"));
     }
@@ -690,13 +737,13 @@ public class JSLight implements JS {
     }
 
     public JS startRecording(ImageTypes imageType) {
-        String value = getElement("let blobs = [];\n" +
-            "const recorder = new MediaRecorder(element.captureStream(), { mimeType: '" + imageType.value + "' });\n" +
+        String value = getElement("blobs = [];\n" +
+            "recorder = new MediaRecorder(element.captureStream(), { mimeType: '" + imageType.value + "' });\n" +
             "recorder.ondataavailable = (e) => {\n" +
             "  if (e.data && e.data.size > 0) { blobs.push(e.data); }\n}\n" +
             "recorder.onstop = () => {\n" +
-            "  const blob = new Blob(blobs, { type: '" + imageType.value + "' });\n" +
-            "  let reader = new FileReader();\n" +
+            "  blob = new Blob(blobs, { type: '" + imageType.value + "' });\n" +
+            "  reader = new FileReader();\n" +
             "  reader.readAsDataURL(blob);\n" +
             "  reader.onloadend = () => window.jdiVideoBase64 = reader.result;\n" +
             "}\n" +
@@ -800,7 +847,7 @@ public class JSLight implements JS {
     }
     
     public int size() {
-        return engine().getSize();
+        return useFilter(() -> engine().getSize());
     }
     
     public List<JsonObject> getObjectList(String json) {
@@ -923,7 +970,7 @@ public class JSLight implements JS {
     }
     
     public JS findFirst(By by, String condition) {
-        String script = "element = elements.find(e => { const fel = " +
+        String script = "element = elements.find(e => { fel = " +
             MessageFormat.format(dataType(by).get, "e", selector(by, engine().jsDriver().builder())) + "; " +
             "return fel && " + handleCondition(condition, "fel") + "; });\n";
         return listToOne(script);
@@ -947,10 +994,10 @@ public class JSLight implements JS {
     // public WebList finds(@MarkupLocator By by) {
     //     return $$(by, this);
     // }
-    public boolean isClickable() {
+    public boolean isNotCovered() {
         Dimension dimension = getSize();
         if (dimension.getWidth() == 0) return false;
-        return isClickable(dimension.getWidth() / 2, dimension.getHeight() / 2 - 1);
+        return isNotCovered(dimension.getWidth() / 2, dimension.getHeight() / 2 - 1);
     }
     
     public JS uploadFile(String filePath) {
@@ -970,7 +1017,7 @@ public class JSLight implements JS {
         return this;
     }
     
-    public boolean isClickable(int xOffset, int yOffset) {
+    public boolean isNotCovered(int xOffset, int yOffset) {
         return getElement("rect = element.getBoundingClientRect();\n" +
             "cx = rect.left + " + xOffset + ";\n" +
             "cy = rect.top + " + yOffset + ";\n" +
@@ -1009,7 +1056,7 @@ public class JSLight implements JS {
     }
     
     public List<By> locators() {
-        return engine().jsDriver().locators();
+        return filter(engine().jsDriver().locators(), Objects::nonNull);
     }
 
     public JSImages imagesData() {
@@ -1142,5 +1189,22 @@ public class JSLight implements JS {
 
     public String textType() {
         return textType.value;
+    }
+
+    @Override
+    public String toString() {
+        if (isBlank(name)) {
+            return printLocators();
+        }
+        return format("%s(%s%s)", getName(), getFullName(), printLocators());
+    }
+
+    public String getFullName() {
+        if (parent() != null && isNotBlank(varName)) {
+            String parentName = parent().getClass().getSimpleName();
+            String prefix = isNotBlank(parentName) ? parentName + "." : "";
+            return prefix + varName + ": ";
+        }
+        return "";
     }
 }

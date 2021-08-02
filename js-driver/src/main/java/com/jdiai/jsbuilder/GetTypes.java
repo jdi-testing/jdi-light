@@ -1,5 +1,6 @@
 package com.jdiai.jsbuilder;
 
+import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.By;
 
 import static com.jdiai.jsdriver.JSDriverUtils.getByType;
@@ -24,6 +25,9 @@ public class GetTypes {
         "{0}.getElementsByTagName(''{1}'')[0]",
         "{0}.getElementsByTagName(''{1}'')");
     public static GetData dataType(By locator) {
+        if (locator == null) {
+            throw new JDINovaException("Get dataType failed: locator can't be null");
+        }
         switch (getByType(locator)) {
             case "id": return  ID;
             case "tag": return TAG;

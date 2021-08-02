@@ -51,4 +51,8 @@ public interface JSEngine {
     <T> List<T> getEntityList();
     <T> List<T> getEntityList(List<String> attributes);
     <T> List<T> getEntityListFromAttr(String... attributes);
+    default JSEngine noFilters() {
+        jsDriver().noFilters();
+        return this;
+    }
 }

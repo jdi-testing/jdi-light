@@ -14,7 +14,7 @@ public interface TestInit {
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
         killDrivers();
-        // DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
+        DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
         LOG_QUERY = ALL;
         domain = "https://jdi-testing.github.io/jdi-light";
     }

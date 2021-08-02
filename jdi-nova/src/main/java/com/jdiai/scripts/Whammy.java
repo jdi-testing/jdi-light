@@ -51,7 +51,7 @@ public class Whammy {
         "jdi.addFrame = function() { html2canvas(element).then((canvas) => { jdi.frames.push(canvas.toDataURL('image/webp')); })};\n" +
         "jdi.record = function() { setTimeout(() => { jdi.addFrame(); if (jdi.recording) { jdi.record(); } }, 1)};\n" +
         "jdi.compile = function() { \n" +
-        "let reader = new FileReader();\n" +
+        "reader = new FileReader();\n" +
         "reader.onloadend = () => jdi.videoBase64 = reader.result;\n" +
         "reader.readAsDataURL(jdi.Whammy.fromImageArray(jdi.frames,100));\n" +
         "}\n" +

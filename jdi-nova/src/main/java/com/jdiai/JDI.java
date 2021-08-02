@@ -48,11 +48,17 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class JDI {
     public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::getDriver);
+
     public static String JDI_STORAGE = "src/test/resources/jdi";
+
     public static String domain;
+
     public static ILogger logger;
+
     public static int timeout = 10;
+
     public static ConditionTypes conditions = new ConditionTypes();
+
     public static Function<List<By>, JS> initJSFunc = locators -> {
         if (ObjectUtils.isEmpty(locators)) {
             return new JSLight(JDI::driver);
@@ -63,13 +69,17 @@ public class JDI {
         return new JSLight(JDI::driver, locators);
     };
 
-    public static Supplier<IJSBuilder> initBuilder =
-        () -> new JSBuilder(JDI::driver, new FilterBuilderActions());
+    public static Function<Supplier<WebDriver>, IJSBuilder> initBuilder = JSBuilder::new;
+
     public static BiFunction<Supplier<WebDriver>, List<By>, JSEngine> initEngine =
-        (driver, locators) -> new JSBaseEngine(driver, locators, initBuilder.get());
+        (driver, locators) -> new JSBaseEngine(driver, locators, initBuilder.apply(driver));
+
     public static BiFunction<Object, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;
+
     public static String LOGGER_TYPE = "console";
+
     private static boolean initialized = false;
+
     public static Function<Field, String> GET_COMPLEX_VALUE = field -> {
         if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class)) {
             return null;

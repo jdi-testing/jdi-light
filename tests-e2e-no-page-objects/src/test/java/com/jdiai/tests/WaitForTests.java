@@ -4,16 +4,15 @@ import com.jdiai.JDI;
 import com.jdiai.JS;
 import com.jdiai.JSStable;
 import com.jdiai.TestInit;
-import com.jdiai.asserts.DisplayedTypes;
 import com.jdiai.testng.TestNGListener;
 import com.jdiai.tools.Alerts;
 import org.openqa.selenium.By;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.jdiai.JDI.*;
+import static com.jdiai.JDI.$;
+import static com.jdiai.JDI.openPage;
 import static com.jdiai.asserts.Conditions.*;
-import static com.jdiai.asserts.DisplayedTypes.*;
 import static com.jdiai.states.States.login;
 import static com.jdiai.utils.TimeValidations.durationMoreThan;
 
@@ -57,7 +56,6 @@ public class WaitForTests implements TestInit {
         login();
         openPage("/html5.html");
         JSStable suspendButton = new JSStable(JDI::driver, By.id("suspend-button"));
-        suspendButton.setCondition("displayed", isDisplayed);
         durationMoreThan(3,
             () -> suspendButton.click());
         Alerts.validateAlertText("Suspend button");

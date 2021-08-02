@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public interface IJSBuilder {
     IJSBuilder addJSCode(String code);
@@ -16,6 +15,8 @@ public interface IJSBuilder {
     IJSBuilder listToList(By locator);
 
     String condition();
+    boolean hasFilter();
+    boolean noFilter();
 
     IJSBuilder doAction(String collectResult);
     IJSBuilder getResult(String collectResult);
@@ -28,8 +29,8 @@ public interface IJSBuilder {
     IJSBuilder registerFunction(String name, String function);
     void registerVariables(String... vars);
     String registerVariable(String variable);
-    String rawQuery();
     String getQuery();
+    String getScript();
     IJSBuilder logQuery(int queryLevel);
     void cleanup();
     void updateFromBuilder(IJSBuilder builder);
@@ -37,7 +38,9 @@ public interface IJSBuilder {
     IJSBuilder updateActions(IBuilderActions builderActions);
     IJSBuilder setElementName(String elementName);
     IJSBuilder setCondition(String condition);
-    IJSBuilder setTimeoutMs(Supplier<Long> timeoutMs);
+    IJSBuilder setCondition(String condition, String conditionFunc);
+    IJSBuilder setFilter(String filter);
     JSBuilder setProcessResultFunc(Function<String, String> processResultFunc);
     String getElementName();
+    IBuilderActions actions();
 }

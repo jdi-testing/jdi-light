@@ -1,9 +1,9 @@
 package com.jdiai.asserts;
 
 public class ConditionTypes {
-    public String isExist = DisplayedTypes.isExist;
-    public String isEnabled = DisplayedTypes.isEnabled;
-    public String isDisplayed = DisplayedTypes.isDisplayed;
-    public String isVisible = DisplayedTypes.isVisible;
+    public String isExist = ElementFilters.isExist;
+    public String isEnabled = ElementFilters.isEnabled;
+    public String isDisplayed = ElementFilters.isDisplayed;
+    public String isVisible = ElementFilters.isVisible;
 
 }

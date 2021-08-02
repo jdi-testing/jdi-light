@@ -48,8 +48,9 @@ public class PageFactoryUtils {
     }
     static void setupCoreElement(InitInfo info) {
         By locator = LOCATOR_FROM_FIELD.apply(info.field);
-        JS core = initJSFunc.apply(newList(locator));
+        JS core = initJSFunc.apply(locator != null ? newList(locator) : null);
         core.setParent(info.parent);
+        core.setVarName(info.field);
         ((HasCore) info.instance).setCore(core);
     }
     static boolean isUIObject(Field field) {

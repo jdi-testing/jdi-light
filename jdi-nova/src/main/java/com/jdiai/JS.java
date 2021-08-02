@@ -4,8 +4,8 @@ import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasLocators;
-import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.HasParent;
+import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.tools.ClientRect;
 import com.jdiai.tools.GetTextTypes;
@@ -21,12 +21,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.jdiai.jsbuilder.JSFilterTemplates.CHECK_CONDITION;
+import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     String getElement(String valueFunc);
@@ -40,7 +43,26 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     String selectedOption();
     String getText();
     boolean isDisplayed();
-    boolean isEnabled();
+    default boolean isHidden() {
+        return !isDisplayed();
+    }
+    default boolean isEnabled() {
+        return !isDisabled();
+    }
+    boolean isDisabled();
+    boolean isVisible();
+    boolean isInView();
+    default boolean isNotVisible() {
+        return !isVisible();
+    }
+    default boolean isOutOfView() {
+        return !isInView();
+    }
+    boolean isExist();
+    boolean isNotCovered();
+    default boolean isNotExist() {
+        return !isExist();
+    }
     JS doAction(String action);
     JS actionsWithElement(BiFunction<Actions, WebElement, Actions> action);
     JS actions(BiFunction<Actions, WebElement, Actions> action);
@@ -124,7 +146,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     JS uploadFile(String filePath);
     JS press(Keys key);
     JS keyboardCommands(String... commands);
-    boolean isClickable(int xOffset, int yOffset);
+    boolean isNotCovered(int xOffset, int yOffset);
     String fontColor();
     String bgColor();
     String pseudo(String name, String value);
@@ -147,15 +169,26 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     String textType();
     JS setParent(Object parent);
 
-    default String getFullName() {
-        if (parent() == null) {
-            return getName();
-        }
-        String parentName = isInterface(parent().getClass(), HasName.class)
-            ? ((HasName)parent()).getName()
-            : parent().getClass().getSimpleName();
-        return parentName + "." + getName();
+    default JS setCondition(String name, String condition) {
+        IJSBuilder builder = engine().jsDriver().builder();
+        builder.setCondition(format(CHECK_CONDITION, name), condition);
+        return this;
     }
+    default JS setFilter(String filter) {
+        IJSBuilder builder = engine().jsDriver().builder();
+        if (isBlank(filter)) {
+            builder.setFilter(null);
+            return this;
+        }
+        String filterBody = builder.actions().getResult(filter);
+        if (filterBody.endsWith("\n")) {
+            filterBody = filterBody.substring(0, filterBody.length() - 1);
+        }
+        filterBody = "  " + filterBody.replace("\n", "\n  ");
+        builder.setFilter("filter = function (element) {\n" + filterBody + "\n}\n");
+        return this;
+    }
+    String getFullName();
 
     default JS setLocators(List<By> locators) {
         if (isNotEmpty(locators)) {
@@ -163,4 +196,5 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
         }
         return this;
     }
+    void setVarName(Field field);
 }

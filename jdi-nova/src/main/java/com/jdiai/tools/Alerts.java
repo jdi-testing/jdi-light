@@ -4,8 +4,6 @@ import com.jdiai.JDI;
 import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.Alert;
 
-import static com.jdiai.jsdriver.JDINovaException.throwAssert;
-
 /**
  * Created by Roman Iovlev on 06.05.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
@@ -40,6 +38,7 @@ public class Alerts {
         if (!alert().getText().equals(text)) {
             throw new JDINovaException("Alert " + text + " doesn't shown");
         }
+        dismissAlert();
     }
     /**
      * Is alert displayed

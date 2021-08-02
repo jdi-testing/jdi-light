@@ -1,6 +1,6 @@
 package com.jdiai.asserts;
 
-public class DisplayedTypes {
+public class ElementFilters {
     public static final String isExist = "element !== null";
 
     public static final String isDisplayed =
@@ -12,7 +12,7 @@ public class DisplayedTypes {
     // onmousemove = function(e){ console.log("mouse location:", e.clientX, e.clientY); }
     public static final String isVisible =
         "if (!element) { return false; }\n" +
-        "const rect = element.getBoundingClientRect();\n" +
+        "rect = element.getBoundingClientRect();\n" +
         "if (!styles || !rect || styles.visibility !== 'visible' || styles.display === 'none' || " +
         "element.hasAttribute('hidden') || styles.opacity < 0.05 || rect.width < 3 || rect.height < 3) {\n" +
         "  return false;\n" +

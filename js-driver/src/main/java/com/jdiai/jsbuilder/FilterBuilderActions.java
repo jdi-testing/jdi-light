@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import java.text.MessageFormat;
 
 import static com.jdiai.jsbuilder.GetTypes.dataType;
-import static com.jdiai.jsbuilder.JSFilterTemplates.*;
+import static com.jdiai.jsbuilder.JSOldFilterTemplates.*;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static java.lang.String.format;
 

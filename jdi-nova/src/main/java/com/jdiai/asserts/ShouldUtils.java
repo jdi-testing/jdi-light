@@ -3,7 +3,6 @@ package com.jdiai.asserts;
 import com.epam.jdi.tools.Timer;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
-import com.jdiai.jsdriver.JDINovaException;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
@@ -19,7 +18,7 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 public class ShouldUtils {
     public static <T extends HasCore> T handleShouldBe(T core, Condition... conditions) {
         if (isEmpty(conditions)) {
-            throw new JDINovaException("Please specify at least 1 Condition");
+            return core;
         }
         shouldValidations ++;
         Timer timer = new Timer(timeout * 1000L);

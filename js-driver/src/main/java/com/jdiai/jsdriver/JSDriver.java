@@ -99,6 +99,10 @@ public class JSDriver {
     public JSProducer getOne(String collector) {
         return new JSProducer(buildOne().getResult(collector).executeQuery());
     }
+    public JSDriver noFilters() {
+        builder().actions().noFilters();
+        return this;
+    }
 
     public IJSBuilder buildList() {
         if (locators().isEmpty()) {
@@ -124,7 +128,7 @@ public class JSDriver {
 
     public int getSize() {
         try {
-            return ((Long) buildList().addJSCode("return elements?.length ?? '';").executeQuery()).intValue();
+            return ((Long) buildList().getResult("return elements?.length ?? 0;").executeQuery()).intValue();
         } catch (Exception ignore) {
             return -1;
         }
@@ -250,7 +254,7 @@ public class JSDriver {
     }
 
     public void setScriptInElementContext(JSDriver otherDriver, String script) {
-        builder().setSearchScript(otherDriver.buildList().rawQuery() + script);
+        builder().setSearchScript(otherDriver.buildList().getScript() + script);
         elementCtx();
         builder().updateFromBuilder(otherDriver.builder());
     }
