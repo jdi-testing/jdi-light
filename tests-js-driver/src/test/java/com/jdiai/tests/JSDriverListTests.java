@@ -61,7 +61,7 @@ public class JSDriverListTests implements TestInit {
             js.getOne("element.id").asString();
             Assert.fail("Chain search should fail");
         } catch (Exception ex) {
-            assertTrue(ex.getMessage().contains("javascript error: Cannot read property 'querySelector' of null"));
+            assertTrue(ex.getMessage().contains("Failed to find element by XPath: .//*[*[span[contains(.,\"er\")]]]"));
         }
     }
 }

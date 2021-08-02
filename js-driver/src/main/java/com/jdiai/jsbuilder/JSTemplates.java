@@ -3,8 +3,8 @@ package com.jdiai.jsbuilder;
 public class JSTemplates {
     public static String XPATH_LIST_FUNC =
         "xpathList = function(ctx, locator) {\n" +
-        "  xpath = document.evaluate(locator, ctx, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n" +
-        "  xList = [];\n" +
+        "  let xpath = document.evaluate(locator, ctx, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n" +
+        "  let xList = [];\n" +
         "  for (let i = 0; i < xpath.snapshotLength; i++)\n  {\n" +
         "    xList.push(xpath.snapshotItem(i));\n" +
         "  }\n" +
@@ -13,7 +13,7 @@ public class JSTemplates {
 
     public static String XPATH_FUNC =
         "xpath = function(ctx, locator) {\n" +
-        "   result = document.evaluate(locator, ctx, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n" +
+        "   let result = document.evaluate(locator, ctx, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n" +
         "   if (!result) { throw 'Failed to find element by XPath: ' + locator; }\n" +
         "   return result;\n" +
         "}\n";

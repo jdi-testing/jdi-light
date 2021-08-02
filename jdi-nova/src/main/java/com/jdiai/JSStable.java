@@ -205,62 +205,53 @@ public class JSStable extends JSLight {
 
     @Override
     public List<Json> getAttributesAsList(String... attributes) {
-        should(exist);
-        return super.getAttributesAsList(attributes);
+        return stableFunction(() -> super.getAttributesAsList(attributes));
     }
 
     @Override
     public List<String> allClasses() {
-        should(exist);
-        return super.allClasses();
+        return stableFunction(super::allClasses);
     }
 
     @Override
     public boolean hasClass(String className) {
-        should(exist);
-        return super.hasClass(className);
+        return stableFunction(() -> super.hasClass(className));
     }
 
     @Override
     public boolean hasAttribute(String attrName) {
-        should(exist);
-        return super.hasClass(attrName);
+        return stableFunction(() -> super.hasAttribute(attrName));
     }
 
     @Override
     public Json allAttributes() {
-        should(exist);
-        return super.allAttributes();
+        return stableFunction(super::allAttributes);
     }
 
     @Override
     public JS show() {
-        should(exist);
-        return super.show();
+        stableAction(super::show);
+        return this;
     }
 
     @Override
     public String cssStyle(String style) {
-        should(exist);
-        return super.cssStyle(style);
+        return stableFunction(() -> super.cssStyle(style));
     }
 
     @Override
     public Json cssStyles(String... styles) {
-        should(exist);
-        return super.cssStyles(styles);
+        return stableFunction(() -> super.cssStyles(styles));
     }
 
     @Override
     public Json allCssStyles() {
-        should(exist);
-        return super.allCssStyles();
+        return stableFunction(super::allCssStyles);
     }
 
     @Override
     public boolean isSelected() {
-        should(exist);
-        return super.isSelected();
+        return stableFunction(super::isSelected);
     }
 
     @Override
@@ -270,14 +261,12 @@ public class JSStable extends JSLight {
 
     @Override
     public String getText() {
-        shouldBe(visible);
-        return super.getText();
+        return stableFunction(super::getText);
     }
 
     @Override
     public String getText(GetTextTypes textType) {
-        shouldBe(visible);
-        return super.getText(textType);
+        return stableFunction(() -> super.getText(textType));
     }
 
     @Override

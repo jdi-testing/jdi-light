@@ -33,8 +33,8 @@ public class BenchmarkTests implements TestInit {
     final int index = 385;
     final int repeat = 1;
     String totalResult = "";
-    final int lightTestsCount = 500;
-    final int heavyTestsCount = 30;
+    final int lightTestsCount = 200;
+    final int heavyTestsCount = 20;
 
     @BeforeMethod
     public void before() {
