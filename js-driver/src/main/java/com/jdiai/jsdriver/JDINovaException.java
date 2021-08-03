@@ -59,7 +59,7 @@ public class JDINovaException extends RuntimeException {
     }
 
     private static String logException(String message) {
-        logger.error(message);
+        logger.error("Test exception");
         return message;
     }
 }
