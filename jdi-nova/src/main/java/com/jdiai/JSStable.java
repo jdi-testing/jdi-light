@@ -49,7 +49,7 @@ public class JSStable extends JSLight {
 
     @Override
     protected void init() {
-        setCondition("visible", isVisible);
+        // setCondition("visible", isVisible);
         setFilter(isDisplayed);
     }
 

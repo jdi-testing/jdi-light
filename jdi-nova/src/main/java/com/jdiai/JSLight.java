@@ -143,15 +143,6 @@ public class JSLight implements JS {
         this.objectMap = jsLight.objectMap;
         return this;
     }
-    // public void setCore(JS core) {
-    //     List<Field> coreFields = getFieldsDeep(core);
-    //     for (Field field : coreFields) {
-    //         try {
-    //             Field thisField = getClass().getField(field.getName());
-    //             thisField.set(this, getValueField(field, core));
-    //         } catch (Exception ignore) { }
-    //     }
-    // }
 
     /**
      * @param valueFunc = element !== null

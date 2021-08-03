@@ -50,7 +50,7 @@ public class PerfStatistic {
         String min = df2(min(seleniumStats, jsStats));
         String max = df2(max(seleniumStats, jsStats));
         System.out.println("Min [" + min + "] and Max [" + max + "]");
-        return format(framework1 + "[average:%s];" + framework2 + "[average:%s];Ratio[average:%s;min:%s;max:%s]",
+        return testName + ">" + format(framework1 + "[average:%s];" + framework2 + "[average:%s];Ratio[average:%s;min:%s;max:%s]",
             df2(avSelenium), df2(avJdi), avRatio, min, max);
     }
     private static String df2(double value) {
