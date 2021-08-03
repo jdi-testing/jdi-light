@@ -18,7 +18,7 @@ public interface TestInit {
     default void setUp() {
         killDrivers();
         SMART_LOCATOR = ID_LOCATOR;
-        DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
+        // DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
         JDI.LOGGER_TYPE = SLF4J;
         LOG_QUERY = ALL;
         openSite("https://jdi-testing.github.io/jdi-light");

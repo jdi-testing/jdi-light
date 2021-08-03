@@ -61,12 +61,12 @@ public class JDI {
 
     public static Function<List<By>, JS> initJSFunc = locators -> {
         if (ObjectUtils.isEmpty(locators)) {
-            return new JSStable(JDI::driver);
+            return new JSLight(JDI::driver);
         }
         if (locators.size() == 1) {
-            return new JSStable(JDI::driver, locators.get(0));
+            return new JSLight(JDI::driver, locators.get(0));
         }
-        return new JSStable(JDI::driver, locators);
+        return new JSLight(JDI::driver, locators);
     };
 
     public static Function<Supplier<WebDriver>, IJSBuilder> initBuilder = JSBuilder::new;

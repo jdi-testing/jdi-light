@@ -1,5 +1,6 @@
 package com.jdiai.tests;
 
+import com.epam.jdi.tools.Timer;
 import com.jdiai.JDI;
 import com.jdiai.JS;
 import com.jdiai.JSStable;
@@ -56,8 +57,7 @@ public class WaitForTests implements TestInit {
         login();
         openPage("/html5.html");
         JSStable suspendButton = new JSStable(JDI::driver, By.id("suspend-button"));
-        durationMoreThan(3,
-            () -> suspendButton.click());
+        durationMoreThan(3, () -> suspendButton.click());
         Alerts.validateAlertText("Suspend button");
     }
 

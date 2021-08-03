@@ -39,7 +39,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.jdiai.JDI.*;
-import static com.jdiai.asserts.ElementFilters.isDisplayed;
+import static com.jdiai.asserts.ConditionTypes.isDisplayed;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;

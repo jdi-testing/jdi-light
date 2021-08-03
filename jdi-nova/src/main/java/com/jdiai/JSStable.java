@@ -16,8 +16,7 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.LinqUtils.last;
 import static com.jdiai.asserts.Conditions.*;
-import static com.jdiai.asserts.ElementFilters.isDisplayed;
-import static com.jdiai.asserts.ElementFilters.isVisible;
+import static com.jdiai.asserts.ConditionTypes.isDisplayed;
 import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
@@ -54,20 +53,12 @@ public class JSStable extends JSLight {
     }
 
     protected void stableAction(JAction action, Condition... conditions) {
-        try {
-            action.execute();
-        } catch (Exception ignore) {
-            waitForConditions(conditions);
-            action.execute();
-        }
+        waitForConditions(conditions);
+        action.execute();
     }
     protected <T> T stableFunction(Supplier<T> func, Condition... conditions) {
-        try {
-            return func.get();
-        } catch (Exception ignore) {
-            waitForConditions(conditions);
-            return func.get();
-        }
+        waitForConditions(conditions);
+        return func.get();
     }
 
     protected void waitForConditions(Condition... conditions) {

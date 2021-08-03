@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.JDI.$;
-import static com.jdiai.asserts.ElementFilters.isDisplayed;
+import static com.jdiai.asserts.ConditionTypes.*;
 import static com.jdiai.entities.User.Roman;
 import static com.jdiai.tests.TestData.SearchResults;
 import static com.jdiai.tests.TestData.SearchResultsJson;
