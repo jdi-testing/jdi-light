@@ -22,6 +22,7 @@ env:
     EXAMPLES: "jdi-light-examples"
     EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
     PERFORMANCE: "jdi-performance"
+    MATERIAL_UI: "jdi-light-material-ui-tests"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
     CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
@@ -92,6 +93,8 @@ jobs:
         echo arguments=$FIREFOX_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
         echo arguments=$FIREFOX_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${MATERIAL_UI}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${MATERIAL_UI}/src/test/resources/${FIREFOX_PROPERTIES}"
 
     - name: Compile jdi code
       id: jdi-compile
@@ -205,6 +208,19 @@ jobs:
     - name: Kill Chrome
       run: pkill -f "chrome"
 
+    - name: Run tests - Material UI
+      id: tests-material-ui
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 40 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$MATERIAL_UI --fail-at-end
+
+    - name: Check Chrome
+      run: ps -aux | grep chrome
+
+    - name: Kill Chrome
+      run: pkill -f "chrome"
+
     - name: Run tests - Performance
       id: tests-perf
       if: steps.jdi-compile.outcome == 'success'
@@ -243,6 +259,12 @@ jobs:
       run: |
         echo HTML tests result: ${{ steps.tests-html-func.outcome }}
         echo Example tests result: ${{ steps.tests-examples.outcome }}
+        exit 1
+
+    - name: Check Meterial-ui tests are passed
+      if: ${{ steps.tests-material-ui.outcome != 'success' }}
+      run: |
+        echo Material ui tests result: ${{ steps.tests-material-ui.outcome }}
         exit 1
 
 #    - name: Check angular tests are passed
