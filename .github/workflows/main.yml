@@ -213,13 +213,10 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 40 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$MATERIAL_UI --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$MATERIAL_UI --fail-at-end
 
     - name: Check Chrome
       run: ps -aux | grep chrome
-
-    - name: Kill Chrome
-      run: pkill -f "chrome"
 
     - name: Run tests - Performance
       id: tests-perf
