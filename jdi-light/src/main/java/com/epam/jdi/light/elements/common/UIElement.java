@@ -156,16 +156,12 @@ public class UIElement extends JDIBase
         get().clear();
         String stringAfterClear = get().getText();
 
-        if(stringBeforeClear.equals(stringAfterClear)) {
+        if (stringBeforeClear.equals(stringAfterClear)) {
             get().click();
-            if (getOs() == WIN){
-                get().sendKeys(Keys.CONTROL + "A");
-                get().sendKeys(Keys.BACK_SPACE);
-            } else {
-                get().sendKeys(Keys.COMMAND + "A");
-                get().sendKeys(Keys.DELETE);
-            }
-        }}
+            get().sendKeys(Keys.chord(Keys.COMMAND, "a"));
+            get().sendKeys(Keys.DELETE);
+        }
+    }
 
     /**
      * Get the element tag name
