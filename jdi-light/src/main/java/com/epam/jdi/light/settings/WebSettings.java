@@ -121,7 +121,7 @@ public class WebSettings {
             case UI_AND_ELEMENTS:
                 if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
                     return null;
-            default: break;
+                break;
         }
         String locatorName = ELEMENT.smartLocatorName.execute(el);
         By locator = ELEMENT.smartLocator.execute(el, locatorName);
@@ -314,14 +314,13 @@ public class WebSettings {
     }
 
     private static void setSearchStrategy(String p) {
-        String localP = p;
-        localP = localP.toLowerCase();
-        if (localP.equals("soft"))
-            localP = "any, multiple";
-        if (localP.equals("strict"))
-            localP = "visible, smart";
-        if (localP.split(",").length != 2) return;
-        List<String> params = map(asList(localP.split(",")), a -> ELEMENT.simplifyString.execute(a));
+        p = p.toLowerCase();
+        if (p.equals("soft"))
+            p = "any, multiple";
+        if (p.equals("strict"))
+            p = "visible, smart";
+        if (p.split(",").length != 2) return;
+        List<String> params = map(asList(p.split(",")), a -> ELEMENT.simplifyString.execute(a));
         if (params.contains("visible") || params.contains("displayed")) {
             onlyVisible();
         }
