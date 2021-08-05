@@ -35,8 +35,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.*;
-import static com.epam.jdi.light.driver.get.DriverData.getOs;
-import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
 import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -151,17 +149,7 @@ public class UIElement extends JDIBase
         waitAfterAction();
     }
     @Override
-    public void clear() {
-        String stringBeforeClear = get().getText();
-        get().clear();
-        String stringAfterClear = get().getText();
-
-        if (stringBeforeClear.equals(stringAfterClear)) {
-            get().click();
-            get().sendKeys(Keys.chord(Keys.COMMAND, "a"));
-            get().sendKeys(Keys.DELETE);
-        }
-    }
+    public void clear() { get().clear();}
 
     /**
      * Get the element tag name
