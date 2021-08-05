@@ -16,7 +16,6 @@
         <allure.testng>2.13.8</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
         <jdi.version>1.3.13</jdi.version>
     </properties>
 
@@ -116,24 +115,6 @@
     </reporting>
 
     <profiles>
-        <profile>
-            <id>unit</id>
-            <properties>
-                <suite-xml-file>src/test/resources/unit.xml</suite-xml-file>
-            </properties>
-        </profile>
-        <profile>
-            <id>common</id>
-            <properties>
-                <suite-xml-file>src/test/resources/common.xml</suite-xml-file>
-            </properties>
-        </profile>
-        <profile>
-            <id>complex</id>
-            <properties>
-                <suite-xml-file>src/test/resources/complex.xml</suite-xml-file>
-            </properties>
-        </profile>
         <profile>
             <id>functional</id>
             <properties>
