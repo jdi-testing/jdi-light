@@ -3,28 +3,30 @@
 
 name: JDI auto-tests debug material-ui
 env:
-    CHROME_PROPERTIES: "chrome.properties"
-    FIREFOX_PROPERTIES: "ff.properties"
-    WITH_PARAMS: "-ntp -Ddriver=chrome" # for Chrome: "-ntp -Ddriver=chrome"
-    UNIT: "-Punit"
-    COMMON: "-Pcommon"
-    COMPLEX: "-Pcomplex"
-    GROUP_ID: "com.epam.jdi"
-    NOPO_TESTS: "jdi-bdd-no-po-tests"
-    NOPO_TESTS_PROPERTY: "test-examples/jdi-bdd-no-po-tests"
-    BDD_TESTS: "jdi-bdd-tests"
-    BOOTSTRAP_TESTS: "jdi-light-bootstrap-tests"
-    HTML_TESTS: "jdi-light-html-tests"
-    ANGULAR_TESTS: "jdi-light-angular-tests"
-    ANGULAR_TESTS_WITH_MOCKS: "jdi-light-angular-tests-with-mocks"
-    EXAMPLES: "jdi-light-examples"
-    EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
-    PERFORMANCE: "jdi-performance"
-    MATERIAL_UI: "jdi-light-material-ui-tests"
-    PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
-    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
-    FIREFOX_ARGS: "-headless"
-    ALLURE_VERSION: "2.13.8"
+  CHROME_PROPERTIES: "chrome.properties"
+  FIREFOX_PROPERTIES: "ff.properties"
+  WITH_PARAMS: "-ntp -Ddriver=chrome" # for Chrome: "-ntp -Ddriver=chrome", for FF: "-ntp -Ddriver=firefox"
+  UNIT: "-Punit"
+  COMMON: "-Pcommon"
+  COMPLEX: "-Pcomplex"
+  PERF: "-Pperformance"
+  FUNC: "-Pfunctional"
+  GROUP_ID: "com.epam.jdi"
+  NOPO_TESTS: "jdi-bdd-no-po-tests"
+  NOPO_TESTS_PROPERTY: "test-examples/jdi-bdd-no-po-tests"
+  BDD_TESTS: "jdi-bdd-tests"
+  BOOTSTRAP_TESTS: "jdi-light-bootstrap-tests"
+  HTML_TESTS: "jdi-light-html-tests"
+  #    ANGULAR_TESTS: "jdi-light-angular-tests"
+  #    ANGULAR_TESTS_WITH_MOCKS: "jdi-light-angular-tests-with-mocks"
+  EXAMPLES: "jdi-light-examples"
+  EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
+  PERFORMANCE: "jdi-performance"
+  MATERIAL_UI: "jdi-light-material-ui-tests"
+  PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
+  CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
+  FIREFOX_ARGS: "-headless"
+  ALLURE_VERSION: "2.13.8"
 
 on:
   push:
@@ -39,6 +41,7 @@ jobs:
     name: Degug tests run on JDK
     runs-on: ubuntu-18.04
     strategy:
+      fail-fast: false
       matrix:
         java: [8, 9, 10, 11, 12, 13, 14]
 
