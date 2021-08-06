@@ -32,9 +32,10 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
+#  REMOVE changes for following 3 lines
+#  pull_request:
+#    branches:
+#      - master
   page_build:
   release:
     types: # This configuration does not affect the page_build event above
@@ -258,7 +259,7 @@ jobs:
         echo Example tests result: ${{ steps.tests-examples.outcome }}
         exit 1
 
-    - name: Check Meterial-ui tests are passed
+    - name: Check Material-ui tests are passed
       if: ${{ steps.tests-material-ui.outcome != 'success' }}
       run: |
         echo Material ui tests result: ${{ steps.tests-material-ui.outcome }}
