@@ -1,13 +1,10 @@
 package com.jdiai.tests;
 
-import com.epam.jdi.tools.Timer;
 import com.jdiai.JDI;
 import com.jdiai.JS;
-import com.jdiai.JSStable;
 import com.jdiai.TestInit;
 import com.jdiai.testng.TestNGListener;
 import com.jdiai.tools.Alerts;
-import org.openqa.selenium.By;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -56,7 +53,7 @@ public class WaitForTests implements TestInit {
     public void waitAndClickTest() {
         login();
         openPage("/html5.html");
-        JSStable suspendButton = new JSStable(JDI::driver, By.id("suspend-button"));
+        JS suspendButton = $("#suspend-button");
         durationMoreThan(3, () -> suspendButton.click());
         Alerts.validateAlertText("Suspend button");
     }

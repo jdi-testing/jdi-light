@@ -10,7 +10,6 @@ import com.jdiai.jswraper.JSBaseEngine;
 import com.jdiai.jswraper.JSEngine;
 import com.jdiai.jswraper.driver.DriverManager;
 import com.jdiai.jswraper.driver.DriverTypes;
-import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -57,17 +56,11 @@ public class JDI {
 
     public static int timeout = 10;
 
-    public static ConditionTypes conditions = new ConditionTypes();
+    public static ConditionTypes findConditions = new ConditionTypes();
 
-    public static Function<List<By>, JS> initJSFunc = locators -> {
-        if (ObjectUtils.isEmpty(locators)) {
-            return new JSLight(JDI::driver);
-        }
-        if (locators.size() == 1) {
-            return new JSLight(JDI::driver, locators.get(0));
-        }
-        return new JSLight(JDI::driver, locators);
-    };
+    public static Function<List<By>, JS> initJSFunc = locators -> new JSStable(JDI::driver, locators);
+
+    public static Function<List<By>, JS> initCoreFunc = initJSFunc;
 
     public static Function<Supplier<WebDriver>, IJSBuilder> initBuilder = JSBuilder::new;
 

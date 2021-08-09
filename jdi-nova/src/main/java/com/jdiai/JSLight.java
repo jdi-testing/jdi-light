@@ -39,7 +39,6 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.jdiai.JDI.*;
-import static com.jdiai.asserts.ConditionTypes.isDisplayed;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
@@ -80,10 +79,16 @@ public class JSLight implements JS {
     public JSLight(Supplier<WebDriver> driver, List<By> locators) {
         this.driver = driver;
         this.engine = initEngine.apply(driver, locators);
-        // this.js.multiSearch();
         this.actions = new Safe<>(() -> new Actions(driver()));
         init();
     }
+    // if (isEmpty(locators)) {
+    //     return new JSStable(JDI::driver);
+    // }
+    // if (locators.size() == 1) {
+    //     return new JSStable(JDI::driver, locators.get(0));
+    // }
+    // return new JSStable(JDI::driver, locators);
     public JSLight(WebDriver driver, List<By> locators) {
         this(() -> driver, locators);
     }
@@ -160,7 +165,7 @@ public class JSLight implements JS {
     public <T> T useFilter(Supplier<T> func) {
         T result;
         if (engine().jsDriver().builder().noFilter()) {
-            setFilter(isDisplayed);
+            setFilter(findConditions.isDisplayed);
             result = func.get();
             setFilter("");
         } else {
@@ -168,7 +173,7 @@ public class JSLight implements JS {
         }
         return result;
     }
-    
+
     public String filterElements(String valueFunc) {
         return useFilter(() -> engine().firstValue(valueFunc));
     }
@@ -193,7 +198,7 @@ public class JSLight implements JS {
         }
         return doAction("option.value = " + option + ";\nelement.dispatchEvent(new Event('change'));");
     }
-    
+
     public JS selectByName(String name) {
         if (name == null) {
             return this;
@@ -296,14 +301,14 @@ public class JSLight implements JS {
     public void click() {
         doAction("click();");
     }
-    
+
     public JS clickCenter() {
         return doAction("rect = element.getBoundingClientRect();" +
             "x = rect.x + rect.width / 2;" +
             "y = rect.y + rect.height / 2;" +
             "document.elementFromPoint(x, y).click();");
     }
-    
+
     public JS click(int x, int y) {
         engine().jsExecute("document.elementFromPoint(" + x + ", " + y + ").click();");
         return this;
@@ -327,7 +332,7 @@ public class JSLight implements JS {
         }
         return this;
     }
-    
+
     public JS selectSubList(String value) {
         if (value == null || isEmpty(locators())) {
             return this;
@@ -344,12 +349,12 @@ public class JSLight implements JS {
         return selectFindTextLocator;
     }
 
-    
+
     public JS setFindTextLocator(String locator) {
         selectFindTextLocator = locator;
         return this;
     }
-    
+
     public JS select(String... values) {
         if (isEmpty(values) || isEmpty(locators())) {
             throw new JDINovaException("Can't execute select for empty values or locators");
@@ -390,7 +395,7 @@ public class JSLight implements JS {
         }
         return builder;
     }
-    
+
     public <TEnum extends Enum<?>> void select(TEnum name) {
         select(getEnumValue(name));
     }
@@ -402,7 +407,7 @@ public class JSLight implements JS {
     public JS check() {
         return check(true);
     }
-    
+
     public JS uncheck() {
         return check(false);
     }
@@ -410,7 +415,7 @@ public class JSLight implements JS {
     public JS rightClick() {
         return actionsWithElement(Actions::contextClick);
     }
-    
+
     public JS doubleClick() {
         return actionsWithElement(Actions::doubleClick);
     }
@@ -418,11 +423,11 @@ public class JSLight implements JS {
     public JS hover() {
         return actions(Actions::moveToElement);
     }
-    
+
     public JS dragAndDropTo(WebElement to) {
         return dragAndDropTo(to.getLocation().x, to.getLocation().y);
     }
-    
+
     public JS dragAndDropTo(int x, int y) {
         return actions((a,e) -> a.dragAndDropBy(e, x, y));
     }
@@ -475,7 +480,7 @@ public class JSLight implements JS {
     public String getTagName() {
         return getJSResult("tagName").toLowerCase();
     }
-    
+
     public String tag() {
         return getTagName();
     }
@@ -543,7 +548,7 @@ public class JSLight implements JS {
         }
         return this;
     }
-    
+
     public JS highlight(String color) {
         return show().set("styles.border='3px dashed "+color+"'");
     }
@@ -555,11 +560,11 @@ public class JSLight implements JS {
     public String cssStyle(String style) {
         return engine().getStyle(style);
     }
-    
+
     public Json cssStyles(String... styles) {
         return engine().getStyles(styles);
     }
-    
+
     public Json allCssStyles() {
         return engine().getAllStyles();
     }
@@ -575,7 +580,7 @@ public class JSLight implements JS {
     public boolean isDisabled() {
         return hasAttribute("disabled");
     }
-    
+
     public JS setTextType(GetTextTypes textType) {
         this.textType = textType; return this;
     }
@@ -585,7 +590,7 @@ public class JSLight implements JS {
     public String getText() {
         return getText(textType);
     }
-    
+
     public String getText(GetTextTypes textType) {
         return getJSResult(textType.value);
     }
@@ -599,11 +604,11 @@ public class JSLight implements JS {
     }
 
     public boolean isDisplayed() {
-        return getElement(conditions.isDisplayed).equalsIgnoreCase("true");
+        return getElement(findConditions.isDisplayed).equalsIgnoreCase("true");
     }
 
     public boolean isVisible() {
-        return getElement(conditions.isVisible).equalsIgnoreCase("true");
+        return getElement(findConditions.isVisible).equalsIgnoreCase("true");
     }
 
     public boolean isInView() {
@@ -663,7 +668,7 @@ public class JSLight implements JS {
             ? new Rectangle(0, 0, 0, 0)
             : new Rectangle(rect.x, rect.y, getHeight(rect), getWidth(rect));
     }
-    
+
     public ClientRect getClientRect() {
         return new ClientRect(engine().getJson("rect = element.getBoundingClientRect();\n" +
             "return { x: rect.x, y: rect.y, top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right, " +
@@ -699,7 +704,7 @@ public class JSLight implements JS {
     public StreamToImageVideo makeScreenshot() {
         return makeScreenshot(DEFAULT_IMAGE_TYPE);
     }
-    
+
     public File makeScreenshot(String tag) {
         show();
         File imageFile = makeScreenshot().asFile(getScreenshotName(tag));
@@ -754,7 +759,7 @@ public class JSLight implements JS {
         }
         return new StreamToImageVideo(stream, imageType);
     }
-    
+
     public StreamToImageVideo stopRecordingAndSave() {
         return stopRecordingAndSave(VIDEO_WEBM);
     }
@@ -762,7 +767,7 @@ public class JSLight implements JS {
     public StreamToImageVideo recordCanvasVideo(int sec) {
         return recordCanvasVideo(VIDEO_WEBM, sec);
     }
-    
+
     public StreamToImageVideo recordCanvasVideo(ImageTypes imageType, int sec) {
         startRecording(imageType);
         Timer.sleep((sec+1) * 1000L);
@@ -782,13 +787,13 @@ public class JSLight implements JS {
         }
         return new StreamToImageVideo(stream, VIDEO_WEBM);
     }
-    
+
     public JS setObjectMapping(String objectMap, Class<?> cl) {
         this.objectMap = objectMap;
         this.engine().setupEntity(cl);
         return this;
     }
-    
+
     public JsonObject getJSObject(String json) {
         return engine().getJson(json);
     }
@@ -818,15 +823,15 @@ public class JSLight implements JS {
         return initJSFunc.apply(newList(by))
                 .setParent(this);
     }
-    
+
     public JS children() {
         return find("*");
     }
-    
+
     public JS ancestor() {
         return find("/..");
     }
-    
+
     public List<String> values(GetTextTypes getTextType) {
         return engine().getAttributeList(getTextType.value);
     }
@@ -834,19 +839,19 @@ public class JSLight implements JS {
     public List<String> values() {
         return values(textType);
     }
-    
+
     public int size() {
         return useFilter(() -> engine().getSize());
     }
-    
+
     public List<JsonObject> getObjectList(String json) {
         return engine().getJsonList(json);
     }
-    
+
     public <T> List<T> getEntityList() {
         return engine().getEntityList(objectMap);
     }
-    
+
     public void setEntity() {
         engine().getAsMap(objectMap);
     }
@@ -854,29 +859,29 @@ public class JSLight implements JS {
     public <T> List<T> getEntityList(Class<T> cl) {
         return getEntityList(GET_OBJECT_MAP.apply(cl), cl);
     }
-    
+
     public JS fill(Object obj) {
         return setEntity(obj);
     }
-    
+
     public JS submit(Object obj, String locator) {
         setEntity(obj);
         find(locator).click();
         return this;
     }
-    
+
     public JS submit(Object obj) {
         return submit(obj, SUBMIT_LOCATOR);
     }
-    
+
     public JS loginAs(Object obj, String locator) {
         return submit(obj, locator);
     }
-    
+
     public JS loginAs(Object obj) {
         return submit(obj);
     }
-    
+
     public JS setEntity(Object obj) {
         Field[] allFields = obj.getClass().getDeclaredFields();
         List<String> mapList = new ArrayList<>();
@@ -893,39 +898,39 @@ public class JSLight implements JS {
         setEntity(print(mapList, ";\n") + ";\nreturn ''");
         return this;
     }
-    
+
     public <T> List<T> getEntityList(String objectMap, Class<?> cl) {
         engine().setupEntity(cl);
         return engine().getEntityList(objectMap);
     }
-    
+
     public JS setEntityList(String objectMap) {
         engine().setMap(objectMap);
         return this;
     }
-    
+
     public JS findFirst(String by, Function<JS, String> condition) {
         return findFirst(NAME_TO_LOCATOR.apply(by), condition.apply(this));
     }
-    
+
     public JS findFirst(By by, Function<JS, String> condition) {
         return findFirst(by, condition.apply(this));
     }
-    
+
     public JS findFirst(String by, String condition) {
         return findFirst(NAME_TO_LOCATOR.apply(by), condition);
     }
-    
+
     public JS get(int index) {
         JS js = listToOne("element = elements[" + index + "];\n");
         js.setName(format("%s[%s]",getName(), index));
         return js;
     }
-    
+
     public JS get(String by, int index) {
         return get(NAME_TO_LOCATOR.apply(by), index);
     }
-    
+
     public JS get(By by, int index) {
         String script = "element = elements.filter(e => "+
                 MessageFormat.format(dataType(by).get, "e", selector(by, engine().jsDriver().builder()))+
@@ -933,21 +938,21 @@ public class JSLight implements JS {
         return listToOne(script)
             .setName(format("%s[%s]",getName(), index)).core();
     }
-    
+
     public JS get(Function<JS, String> filter) {
         return findFirst(filter);
     }
-    
+
     public JS get(String value) {
         JS js = get(textEquals(value));
         js.setName(format("%s[%s]",getName(), value));
         return js;
     }
-    
+
     public JS findFirst(Function<JS, String> condition) {
         return findFirst(condition.apply(this));
     }
-    
+
     public JS findFirst(String condition) {
         return listToOne("element = elements.find(e => e && " + handleCondition(condition, "e") + ");\n");
     }
@@ -957,14 +962,14 @@ public class JSLight implements JS {
             ? condition.replace("#element#", elementName)
             : elementName + "." + condition;
     }
-    
+
     public JS findFirst(By by, String condition) {
         String script = "element = elements.find(e => { fel = " +
             MessageFormat.format(dataType(by).get, "e", selector(by, engine().jsDriver().builder())) + "; " +
             "return fel && " + handleCondition(condition, "fel") + "; });\n";
         return listToOne(script);
     }
-    
+
     public long indexOf(Function<JS, String> condition) {
         return engine().jsDriver().indexOf(condition.apply(this));
     }
@@ -988,24 +993,24 @@ public class JSLight implements JS {
         if (dimension.getWidth() == 0) return false;
         return isNotCovered(dimension.getWidth() / 2, dimension.getHeight() / 2 - 1);
     }
-    
+
     public JS uploadFile(String filePath) {
         we().click();
         String pathToPaste = new File(filePath).getAbsolutePath();
         pasteText(pathToPaste);
         return this;
     }
-    
+
     public JS press(Keys key) {
         Keyboard.press(key);
         return this;
     }
-    
+
     public JS keyboardCommands(String... commands) {
         Keyboard.commands(commands);
         return this;
     }
-    
+
     public boolean isNotCovered(int xOffset, int yOffset) {
         return getElement("rect = element.getBoundingClientRect();\n" +
             "cx = rect.left + " + xOffset + ";\n" +
@@ -1017,33 +1022,33 @@ public class JSLight implements JS {
             "}\n" +
             "return false;").equals("true");
     }
-    
+
     public String fontColor() {
         return engine().color();
     }
-    
+
     public String bgColor() {
         return engine().bgColor();
     }
-    
+
     public String pseudo(String name, String value) {
         return engine().pseudo(name, value);
     }
-    
+
     public JS focus() {
         doAction("dispatchEvent(new Event('focus', { 'bubbles': true }));");
         return this;
     }
-    
+
     public JS blur() {
         doAction("dispatchEvent(new Event('blur', { 'bubbles': true }));");
         return this;
     }
-    
+
     public boolean focused() {
         return getElement("element === document.activeElement").equalsIgnoreCase("true");
     }
-    
+
     public List<By> locators() {
         return filter(engine().jsDriver().locators(), Objects::nonNull);
     }
@@ -1054,25 +1059,25 @@ public class JSLight implements JS {
         }
         return imagesData;
     }
-    
+
     public File getImageFile() {
         return getImageFile("");
     }
-    
+
     public File getImageFile(String tag) {
         return imagesData().images.has(tag) ? new File(imagesData().images.get(tag)) : null;
     }
-    
+
     public JS visualValidation() {
         visualValidation("");
         return this;
     }
-    
+
     public JS visualValidation(String tag) {
         VISUAL_VALIDATION.accept(tag, this);
         return this;
     }
-    
+
     public JS visualCompareWith(JS element) {
         COMPARE_IMAGES.apply(imagesData().imageFile, element.imagesData().imageFile);
         return this;
@@ -1100,7 +1105,7 @@ public class JSLight implements JS {
     public OfElement isOn(Function<Direction, Boolean> expected) {
         return new OfElement(expected, this);
     }
-    
+
     public boolean relativePosition(JS element, Function<Direction, Boolean> expected) {
         return expected.apply(getDirectionTo(element));
     }
@@ -1111,7 +1116,7 @@ public class JSLight implements JS {
         relations = null;
         return this;
     }
-    
+
     public MapArray<String, Direction> getRelativePositions(JS... elements) {
         relations = new MapArray<>();
         for (JS element : elements) {
@@ -1161,7 +1166,7 @@ public class JSLight implements JS {
             getFullName(), relation.key, relation.value.angle(), expectedRelation.angle(),
             relation.value.length(), expectedRelation.length()));
     }
-    
+
     public Point getCenter() {
         return getCenter(getRect());
     }
@@ -1171,7 +1176,7 @@ public class JSLight implements JS {
         int y = rect.y + rect.height / 2;
         return new Point(x, y);
     }
-    
+
     public JSEngine engine() {
         return engine;
     }

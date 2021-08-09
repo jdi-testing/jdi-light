@@ -34,7 +34,7 @@ public class BenchmarkTests implements TestInit {
     final int repeat = 1;
     String totalResult = "";
     final int lightTestsCount = 200;
-    final int heavyTestsCount = 20;
+    final int heavyTestsCount = 10;
 
     @BeforeMethod
     public void before() {

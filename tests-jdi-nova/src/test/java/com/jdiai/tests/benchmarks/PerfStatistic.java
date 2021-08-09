@@ -19,12 +19,21 @@ public class PerfStatistic {
     public static <T> String testScenario(String testName, JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
         return testScenario(testName, () -> {}, "Selenium", seleniumAction, "JDI Nova", jdiAction, count);
     }
+    private static Boolean runPerformance = null;
+
+    private static boolean runPerformance() {
+        if (runPerformance == null) {
+            runPerformance = parseBoolean(getProperties("/../../target/classes/test.properties")
+                    .getProperty("run.performance"));
+        }
+        return runPerformance;
+    }
+
     public static <T> String testScenario(String testName, JAction precondition, String framework1, JFunc<T> seleniumAction,
               String framework2, JFunc<T> jdiAction, int count) {
         List<Long> seleniumStats = new ArrayList<>();
         List<Long> jsStats = new ArrayList<>();
-        int executionCount = parseBoolean(getProperties("/../../target/classes/test.properties")
-            .getProperty("run.performance")) ? count : 1;
+        int executionCount = runPerformance() ? count : 1;
         for (int i = 0; i < executionCount; i++) {
             System.out.println("RUN#"+ i);
             precondition.execute();

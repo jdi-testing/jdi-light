@@ -1,9 +1,10 @@
 package com.jdiai.asserts;
 
-public class ConditionTypes {
-    public static String isExist = ElementFilters.isExist;
-    public static String isEnabled = ElementFilters.isEnabled;
-    public static String isDisplayed = ElementFilters.isDisplayed;
-    public static String isVisible = ElementFilters.isVisible;
+import com.epam.jdi.tools.DataClass;
 
+public class ConditionTypes extends DataClass<ConditionTypes> {
+    public String isExist = ElementFilters.isExist;
+    public String isEnabled = ElementFilters.isEnabled;
+    public String isDisplayed = ElementFilters.isDisplayed;
+    public String isVisible = ElementFilters.isVisible;
 }

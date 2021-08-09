@@ -21,8 +21,8 @@ import java.util.function.Function;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.jdiai.JDI.findConditions;
 import static com.jdiai.asserts.Conditions.have;
-import static com.jdiai.asserts.ConditionTypes.isDisplayed;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 
@@ -298,7 +298,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
 
     public JS setCore(JS core) {
         this.core = core;
-        this.core.setFilter(isDisplayed);
+        this.core.setFilter(findConditions.isDisplayed);
         return core;
     }
 
