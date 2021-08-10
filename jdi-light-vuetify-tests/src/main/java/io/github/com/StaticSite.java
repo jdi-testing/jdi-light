@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.tools.DataClass;
+import io.github.com.entities.User;
 import io.github.com.pages.VuetifyPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
@@ -24,9 +24,4 @@ public class StaticSite {
     public static Button logout;
     public static Button userIcon;
     public static Text userName;
-
-    public static class User extends DataClass<User> {
-        public String name = "Roman";
-        public String password = "Jdi1234";
-    }
 }

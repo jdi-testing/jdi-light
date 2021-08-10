@@ -6,7 +6,7 @@
 
     <artifactId>jdi-light-vuetify-tests</artifactId>
     <name>Tests: JDI Vuetify</name>
-    <version>${jdi.version}</version>
+    <version>1.3.13</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -116,18 +116,6 @@
     </reporting>
 
     <profiles>
-        <profile>
-            <id>common</id>
-            <properties>
-                <suite-xml-file>src/test/resources/common.xml</suite-xml-file>
-            </properties>
-        </profile>
-        <profile>
-            <id>complex</id>
-            <properties>
-                <suite-xml-file>src/test/resources/complex.xml</suite-xml-file>
-            </properties>
-        </profile>
         <profile>
             <id>general</id>
             <properties>
