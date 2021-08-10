@@ -61,6 +61,8 @@ You can ask your questions on StackOverflow with [![htmlelements](https://img.sh
 
 Get Help in active users Skype chat: https://join.skype.com/clvyVvnZvWqc
 
+Get Help in active users Slak chat: https://join.slack.com/t/jdi-family/shared_invite/zt-toag8fgg-ppPiW~lZDU9873JAiSwTJw
+
 ## Contacts:
 
 Mail: roman.iovlev.jdi@gmail.com
