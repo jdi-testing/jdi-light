@@ -327,9 +327,6 @@ public class StaticSite {
     @Url("/hidden_layout")
     public static HiddenPage hiddenPage;
 
-    @Url("/material-ui-layout-hidden--default-hidden")
-    public static WebPage defaultHiddenPage;
-
     // box
     @Url("/box_layout")
     public static BoxPage boxPage;
@@ -338,15 +335,9 @@ public class StaticSite {
     @Url("/container_layout")
     public static ContainerPage containerPage;
 
-    @Url("/material-ui-layout-container--default")
-    public static WebPage defaultContainerPage;
-
     // grid
     @Url("grid_layout")
     public static GridPage gridPage;
-
-    @Url("/material-ui-layout-grid--grid-view")
-    public static WebPage defaultGridPage;
 
     // login page
     @UI("#login-form")

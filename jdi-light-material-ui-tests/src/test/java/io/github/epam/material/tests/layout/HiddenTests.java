@@ -20,18 +20,16 @@ import static io.github.com.pages.layout.HiddenPage.*;
 
 public class HiddenTests extends TestsInit {
 
-    private static final int WIDTH_LABEL_LENGHT = 15;
+    private static final int WIDTH_LABEL_LENGTH = 15;
 
     @BeforeMethod
     public void before() {
         hiddenPage.open();
         hiddenPage.isOpened();
         WebDriverFactory.getDriver().manage().window().maximize();
-
     }
 
-    // Need to check the whole test: it may fail on screens with different sizes, for ex. on another os and etc.
-    @Test(enabled = false, dataProvider = "Screen Width Dividers")
+    @Test(dataProvider = "Screen Width Dividers")
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int divider) {
         currentWidth.is().displayed();
         xsDown.is().displayed();
@@ -73,6 +71,6 @@ public class HiddenTests extends TestsInit {
 
     private String getWidth(Text element) {
         String text = element.getText();
-        return text.substring(WIDTH_LABEL_LENGHT);
+        return text.substring(WIDTH_LABEL_LENGTH);
     }
 }
