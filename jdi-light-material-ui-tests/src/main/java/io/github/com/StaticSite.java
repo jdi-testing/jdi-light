@@ -184,38 +184,8 @@ public class StaticSite {
     public static WebPage feedbackBackdropDefaultPage;
 
     // circular
-    @Url("/material-ui-feedback-progress--circular-indeterminate")
-    public static WebPage circularIndeterminatePage;
-
-    @Url("/material-ui-feedback-progress--circular-determinate")
-    public static WebPage circularDeterminatePage;
-
-    @Url("/material-ui-feedback-progress--circular-integration")
-    public static WebPage circularIntegrationPage;
-
-    @Url("/material-ui-feedback-progress--circular-with-value-label")
-    public static WebPage circularWithValueLabel;
-
     @Url("/progress")
     public static ProgressPage progressPage;
-
-    @Url("/material-ui-feedback-progress--linear-indeterminate")
-    public static WebPage linearIndeterminatePage;
-
-    @Url("/material-ui-feedback-progress--linear-determinate")
-    public static WebPage linearDeterminatePage;
-
-    @Url("/material-ui-feedback-progress--linear-buffer")
-    public static WebPage linearBufferPage;
-
-    @Url("/material-ui-feedback-progress--linear-with-value-label")
-    public static WebPage linearWithLabelPage;
-
-    @Url("/material-ui-feedback-progress--customized-progress-bars")
-    public static WebPage customisedProgressPage;
-
-    @Url("/material-ui-feedback-progress--delaying-appearance")
-    public static WebPage delayingAppearancePage;
 
     // snackbar
     @Url("/snackbar")
