@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="WINDOWS-1251"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JDI-Light Vuetify Tests">
+    <test name="Vuetify Tests" thread-count="6">
+        <packages>
+            <package name="io.github.epam.vuetify.tests.*"/>
+        </packages>
+    </test>
+    <listeners>
+        <listener class-name="io.github.epam.testng.TestNGListener" />
+    </listeners>
+</suite>
