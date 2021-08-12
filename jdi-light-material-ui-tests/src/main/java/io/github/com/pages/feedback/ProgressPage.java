@@ -8,35 +8,32 @@ import com.epam.jdi.light.material.elements.inputs.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ProgressPage extends WebPage {
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[1]")
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-indeterminate')])[1]")
     public static ProgressBar circularIndeterminate;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[1]")
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[1]")
     public static ProgressBar circularDeterminate1;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[2]")
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[2]")
     public static ProgressBar circularDeterminate2;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[3]")
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[3]")
     public static ProgressBar circularDeterminate3;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[4]")
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[4]")
     public static ProgressBar circularDeterminate4;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[5]")
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[5]")
     public static ProgressBar circularDeterminate5;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[6]")
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[6]")
     public static ProgressBar circularDeterminate6;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[7]")
-    public static ProgressBar circularDeterminate7;
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-indeterminate')])[2]")
+    public static ProgressBar circularIndeterminate2;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[8]")
-    public static ProgressBar circularDeterminate8;
-
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-root')])[9]")
-    public static ProgressBar circularDeterminate9;
+    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-indeterminate')])[3]")
+    public static ProgressBar circularIndeterminate3;
 
     @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[1]")
     public static ProgressBar linearIndeterminate;

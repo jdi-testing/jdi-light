@@ -26,9 +26,8 @@ public class ProgressTests extends TestsInit {
         circularDeterminate4.isDisplayed();
         circularDeterminate5.isDisplayed();
         circularDeterminate6.isDisplayed();
-        circularDeterminate7.isDisplayed();
-        circularDeterminate8.isDisplayed();
-        circularDeterminate9.isDisplayed();
+        circularIndeterminate2.isDisplayed();
+        circularIndeterminate3.isDisplayed();
         interactiveIntegrationCircularButton.isDisplayed();
         linearIndeterminate.isDisplayed();
         linearDeterminate.isDisplayed();
@@ -40,9 +39,9 @@ public class ProgressTests extends TestsInit {
     @Test
     public void circularProgressTest() {
         circularIndeterminate.is().indeterminate();
-        int valueNow = circularDeterminate6.getValueNow();
-        timer.wait(() -> circularDeterminate6.is().value(valueNow + 10));
-        circularIndeterminate.is().indeterminate();
+        int valueNow = circularDeterminate5.getValueNow();
+        timer.wait(() -> circularDeterminate5.is().value(valueNow + 10));
+        circularDeterminate5.is().determinate();
     }
 
     @Test
@@ -59,6 +58,7 @@ public class ProgressTests extends TestsInit {
     @Test
     public void linearProgressTest() {
         linearIndeterminate.is().indeterminate();
+        linearBuffer.is().buffer();
         int valueNow1 = linearDeterminate.getValueNow();
         timer.wait(() -> linearDeterminate.is().value(valueNow1 + 10));
         int valueNow2 = linearBuffer.getValueNow();
