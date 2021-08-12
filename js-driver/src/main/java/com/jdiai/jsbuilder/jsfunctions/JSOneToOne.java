@@ -8,17 +8,17 @@ public class JSOneToOne {
         "if (!element) { throw 'Failed to find element' };\n";
 
     public static String PURE_STRICT_ONE_TO_ONE =
-        "elements = {{list}};\n" +
+        "elements = Array.from({{list}}).filter(e=>!!e);\n" +
         "element = elements.find(filter);\n";
 
     public static String STRICT_ONE_TO_ONE =
-        "elements = {{list}};\n" +
+        "elements = Array.from({{list}}).filter(e=>!!e);\n" +
         "if (elements.length === 0) { throw 'Failed to find element' }\n" +
         "element = elements.find(filter);\n" +
         "if (!element) { throw 'Failed to find element' };\n";
 
     public static String AGILE_ONE_TO_ONE =
-        "elements = {{list}};\n" +
+        "elements = Array.from({{list}}).filter(e=>!!e);\n" +
         "if (elements.length === 0) { throw 'Failed to find element' }\n" +
         "if (elements.length === 1) { element = elements[0]; }\n" +
         "else {\n" +

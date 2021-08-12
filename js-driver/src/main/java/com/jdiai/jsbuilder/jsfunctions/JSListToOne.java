@@ -3,23 +3,23 @@ package com.jdiai.jsbuilder.jsfunctions;
 public class JSListToOne {
     public static String PURE_LIST_TO_ONE =
         "if (elements.length === 0) { throw 'Failed to find element' }\n" +
-        "element = elements.find({{one}});\n";
+        "element = elements.map(e => {{one:e}})[0];\n";
 
     public static String LIST_TO_ONE =
         "if (elements.length === 0) { throw 'Failed to find element' }\n" +
-        "element = elements.find({{one}});\n" +
+        "element = elements.map(e => {{one:e}})[0];\n" +
         "if (!element) { throw 'Failed to find element' };\n";
 
     public static String FILTER_LIST_TO_ONE =
         "if (elements.length === 0) { throw 'Failed to find element' }\n" +
-        "element = elements.find(filter({{one}}));\n" +
+        "element = elements.map(e => filter({{one:e}}))[0];\n" +
         "if (!element) { throw 'Failed to find element' };\n";
 
     public static String AGILE_LIST_TO_ONE =
         "if (elements.length === 0) { throw 'Failed to find element' }\n" +
         "i = 0;\nfirst = null;\n" +
         "while (!found && i < elements.length) {\n" +
-        "  element = {{one}};\n" +
+        "  element = {{one:elements[i]}};\n" +
         "  if (!first && element) { first = element; }\n" +
         "  if (filter(element)) { break; }\n" +
         "  i++;\n" +

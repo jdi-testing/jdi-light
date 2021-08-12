@@ -3,7 +3,6 @@ package com.jdiai.jsbuilder;
 import org.openqa.selenium.By;
 
 public interface IBuilderActions {
-    void noFilters();
     void setBuilder(IJSBuilder builder);
     String oneToOne(String ctx, By locator);
     String oneToList(String ctx, By locator);

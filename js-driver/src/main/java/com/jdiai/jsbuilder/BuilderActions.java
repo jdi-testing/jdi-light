@@ -1,98 +1,46 @@
 package com.jdiai.jsbuilder;
 
+import com.jdiai.jsbuilder.jsfunctions.BuilderFunctions;
 import org.openqa.selenium.By;
-
-import java.text.MessageFormat;
-
-import static com.jdiai.jsbuilder.GetTypes.dataType;
-import static com.jdiai.jsdriver.JSDriverUtils.*;
-import static java.lang.String.format;
 
 public class BuilderActions implements IBuilderActions {
     protected IJSBuilder builder;
-    protected Boolean lastIsElement = null;
-    protected Boolean noFilters = false;
+    protected BuilderFunctions functions;
 
-    public void noFilters() {
-        noFilters = true;
-    }
     public void setBuilder(IJSBuilder builder) {
         this.builder = builder;
+        functions = new BuilderFunctions(builder);
     }
 
     public String oneToOne(String ctx, By locator) {
-        lastIsElement = true;
-        return builder.getElementName() + " = " + format(JSTemplates.ONE_TO_ONE, MessageFormat.format(dataType(locator).get + iFrame(locator), ctx, selector(locator, builder)));
-    }
-
-    protected String iFrame(By locator) {
-        return isIFrame(locator) ? ".contentWindow.document" : "";
+        return functions.oneToOne(ctx, locator);
     }
 
     public String oneToList(String ctx, By locator) {
-        lastIsElement = false;
-        if (isIFrame(locator)) {
-            return oneToOne(ctx, locator);
-        }
-        return "elements = " + format(JSTemplates.ONE_TO_LIST, MessageFormat.format(dataType(locator).getAll, ctx, selectorAll(locator, builder)));
+        return functions.oneToList(ctx, locator);
     }
 
     public String listToOne(By locator) {
-        lastIsElement = true;
-        boolean hasFilter = builder.hasFilter();
-        String script = hasFilter ? JSFilterTemplates.LIST_TO_ONE : JSTemplates.LIST_TO_ONE;
-        return format(script, MessageFormat.format(dataType(locator).get + iFrame(locator), "elements[i]", selector(locator, builder)));
+        return functions.listToOne(locator);
     }
 
     public String listToList(By locator) {
-        lastIsElement = false;
-        if (isIFrame(locator)) {
-            return listToOne(locator);
-        }
-        GetData data = dataType(locator);
-        return format(JSTemplates.LIST_TO_LIST, MessageFormat.format(data.getAll, builder.getElementName(), selectorAll(locator, builder)));
+        return functions.listToList(locator);
     }
 
     public String doAction(String collector) {
-        return addBeforeReturn(collector) + collector;
+        return functions.action(collector);
     }
 
-    private String processResult(String collector, String result) {
-        return collector.contains("return") ? collector : format(result, collector);
+    public String doListAction(String collector) {
+        return functions.listAction(collector);
     }
 
     public String getResult(String collector) {
-        return addBeforeReturn(collector) + processResult(collector, JSTemplates.ONE_TO_RESULT);
+        return functions.result(collector);
     }
 
     public String getResultList(String collector) {
-        return addBeforeReturn(collector) + processResult(collector, JSTemplates.LIST_TO_RESULT);
-    }
-
-    protected String addBeforeReturn(String collector) {
-        return validateElement() + addStyles(collector);
-    }
-    protected String validateElement() {
-        if (noFilters || lastIsElement == null) {
-            noFilters = false;
-            return "";
-        }
-        if (lastIsElement) {
-            lastIsElement = null;
-            return builder.condition();
-        } else {
-            if (builder.hasConditions()) {
-                lastIsElement = null;
-                return JSFilterTemplates.LIST_TO_LIST_STRICT;
-            }
-        }
-        lastIsElement = null;
-        return "";
-    }
-
-    protected String addStyles(String collector) {
-        return collector.contains("styles.")
-            ? "styles = " + builder.getElementName() + " ? getComputedStyle(" + builder.getElementName() + ") : undefined;\n"
-            : "";
+        return functions.listResult(collector);
     }
 }

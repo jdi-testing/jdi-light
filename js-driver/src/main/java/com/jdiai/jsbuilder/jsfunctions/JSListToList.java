@@ -4,7 +4,7 @@ public class JSListToList {
     public static String LIST_TO_LIST =
         "list = [];\n" +
         "for(let element of elements) {\n" +
-        "  subElements = Array.from({{list}});\n" +
+        "  subElements = Array.from({{list}}).filter(e=>!!e);\n" +
         "  if (subElements.length === 0) { continue; }\n" +
         "  for(let j = 0; j < subElements.length; j++) {\n" +
         "    list.push(subElements[j]);\n" +
@@ -15,7 +15,7 @@ public class JSListToList {
     public static String FILTER_LIST_TO_LIST =
         "list = [];\n" +
         "for(let element of elements) {\n" +
-        "  subElements = Array.from({{list}}).filter(filter);\n" +
+        "  subElements = Array.from({{list}}).filter(e=>!!e).filter(filter);\n" +
         "  if (subElements.length === 0) { continue; }\n" +
         "  for(let j = 0; j < subElements.length; j++) {\n" +
         "    list.push(subElements[j]);\n" +
@@ -24,12 +24,7 @@ public class JSListToList {
         "elements = Array.from(list);\n";
 
     public static String ONE_LIST_TO_LIST =
-        "list = [];\n" +
-        "for(let element of elements) {\n" +
-        "  subElement = {{one}};\n" +
-        "  if (subElement) { list.push(subElement); }\n" +
-        "}\n" +
-        "elements = Array.from(list);\n";
+        "elements = Array.from(elements.map(element => {{one}})).filter(e=>!!e);\n";
 
     public static String FILTER_ONE_LIST_TO_LIST =
         "list = [];\n" +
@@ -42,7 +37,7 @@ public class JSListToList {
     public static String AGILE_LIST_TO_LIST =
         "list = [];\n" +
         "for(let element of elements) {\n" +
-        "  subElements = Array.from({{list}});" +
+        "  subElements = Array.from({{list}}).filter(e=>!!e);" +
         "  if (subElements.length === 0) { continue; }\n" +
         "  filtered = subElements.filter(filter);\n" +
         "  if (filtered.length === 0 && subElements.length > 0) { filtered = subElements; }\n" +

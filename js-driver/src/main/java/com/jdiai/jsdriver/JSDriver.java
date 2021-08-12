@@ -7,18 +7,25 @@ import com.jdiai.jsproducer.JSProducer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.jdiai.jsbuilder.ListSearch.CHAIN;
 import static com.jdiai.jsbuilder.ListSearch.MULTI;
+import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
+import static com.jdiai.jsdriver.JSDriverUtils.getByType;
+import static java.util.regex.Pattern.compile;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class JSDriver {
     private final Supplier<WebDriver> driver;
-    public List<By> locators;
-    private IJSBuilder builder;
+    protected List<By> locators;
+    protected IJSBuilder builder;
     public ListSearch strategy = CHAIN;
     public String context = "document";
 
@@ -59,8 +66,28 @@ public class JSDriver {
             throw new JDINovaException("JSDriver init failed: WebDriver == null");
         }
         this.driver = driver;
-        this.locators = locators != null ? copyList(locators) : null;
+        setLocators(locators);
         this.builder = builder;
+    }
+    public JSDriver setLocators(List<By> locators) {
+        if (locators == null) {
+            this.locators = null;
+            return this;
+        }
+        List<By> result = new ArrayList<>();
+        Pattern idMatcher = compile("^#(?<id>[a-zA-Z][a-zA-Z0-9]*([-_:][a-zA-Z0-9]+)*)$");
+        for (By locator : locators) {
+            Matcher matcher = idMatcher.matcher(getByLocator(locator));
+            if (matcher.matches()) {
+                locator = By.id(matcher.group("id"));
+                result = new ArrayList<>();
+            } else if (getByType(locator).equals("id")) {
+                result = new ArrayList<>();
+            }
+            result.add(locator);
+        }
+        this.locators = result;
+        return this;
     }
 
     public JSDriver updateBuilderActions(IBuilderActions actions) {
@@ -98,10 +125,6 @@ public class JSDriver {
 
     public JSProducer getOne(String collector) {
         return new JSProducer(buildOne().getResult(collector).executeQuery());
-    }
-    public JSDriver noFilters() {
-        builder().actions().noFilters();
-        return this;
     }
 
     public IJSBuilder buildList() {

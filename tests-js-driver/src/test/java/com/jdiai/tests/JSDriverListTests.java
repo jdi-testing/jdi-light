@@ -48,6 +48,7 @@ public class JSDriverListTests implements TestInit {
         assertEquals(js.getList("element.id").asString().toString(), "[roman, vlad]");
     }
     @Test
+
     public void getOneMultiTest() {
         JSDriver js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
             .multiSearch();
@@ -61,7 +62,7 @@ public class JSDriverListTests implements TestInit {
             js.getOne("element.id").asString();
             Assert.fail("Chain search should fail");
         } catch (Exception ex) {
-            assertTrue(ex.getMessage().contains("Failed to find element by XPath: .//*[*[span[contains(.,\"er\")]]]"));
+            assertTrue(ex.getMessage().contains("Cannot read property 'querySelector' of null"));
         }
     }
 }

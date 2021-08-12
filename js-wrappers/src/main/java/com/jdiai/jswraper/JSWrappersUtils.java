@@ -21,12 +21,15 @@ public class JSWrappersUtils {
         if (matcher.matches()) {
             return By.id(matcher.group(1));
         }
-        if (locator.contains("//"))
+        if (locator.contains("//")) {
             return By.xpath(locator);
-        if (locator.contains("frame:#"))
+        }
+        if (locator.contains("frame:#")) {
             return ByFrame.id(locator.substring(7));
-        if (locator.contains("frame:"))
+        }
+        if (locator.contains("frame:")) {
             return ByFrame.css(locator.substring(6));
+        }
         return locator.contains("//")
             ? By.xpath(locator)
             : By.cssSelector(locator);
