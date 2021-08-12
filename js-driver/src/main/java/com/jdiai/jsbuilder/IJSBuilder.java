@@ -16,7 +16,8 @@ public interface IJSBuilder {
 
     String condition();
     boolean hasFilter();
-    boolean noFilter();
+    boolean hasConditions();
+    void removeConditions();
 
     IJSBuilder doAction(String collectResult);
     IJSBuilder getResult(String collectResult);
@@ -35,7 +36,6 @@ public interface IJSBuilder {
     IJSBuilder copy();
     IJSBuilder updateActions(IBuilderActions builderActions);
     IJSBuilder setElementName(String elementName);
-    IJSBuilder setCondition(String condition);
     IJSBuilder setCondition(String condition, String conditionFunc);
     IJSBuilder setFilter(String filter);
     JSBuilder setProcessResultFunc(Function<String, String> processResultFunc);

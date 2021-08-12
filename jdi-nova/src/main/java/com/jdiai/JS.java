@@ -168,9 +168,13 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     String textType();
     JS setParent(Object parent);
 
+    default JS removeConditions() {
+        engine().jsDriver().builder().removeConditions();
+        return this;
+    }
+
     default JS setCondition(String name, String condition) {
-        IJSBuilder builder = engine().jsDriver().builder();
-        builder.setCondition(format(CHECK_CONDITION, name), condition);
+        engine().jsDriver().builder().setCondition(format(CHECK_CONDITION, name), condition);
         return this;
     }
     default JS setFilter(String filter) {
@@ -186,4 +190,5 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
         return this;
     }
     void setVarName(Field field);
+    JS setBuilder(IJSBuilder builder);
 }

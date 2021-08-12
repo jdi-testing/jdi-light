@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.jdiai.jsbuilder.ListSearch.CHAIN;
 import static com.jdiai.jsbuilder.ListSearch.MULTI;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class JSDriver {
     private final Supplier<WebDriver> driver;
@@ -58,7 +59,7 @@ public class JSDriver {
             throw new JDINovaException("JSDriver init failed: WebDriver == null");
         }
         this.driver = driver;
-        this.locators = copyList(locators);
+        this.locators = locators != null ? copyList(locators) : null;
         this.builder = builder;
     }
 
@@ -78,7 +79,7 @@ public class JSDriver {
     }
 
     public IJSBuilder buildOne() {
-        if (locators().isEmpty()) {
+        if (isEmpty(locators())) {
             return builder();
         }
         if (locators().size() == 1) {
@@ -104,7 +105,7 @@ public class JSDriver {
     }
 
     public IJSBuilder buildList() {
-        if (locators().isEmpty()) {
+        if (isEmpty(locators())) {
             return builder();
         }
         if (locators().size() == 1) {

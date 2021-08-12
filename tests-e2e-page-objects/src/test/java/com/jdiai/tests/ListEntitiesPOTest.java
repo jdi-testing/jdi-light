@@ -1,7 +1,10 @@
 package com.jdiai.tests;
 
 import com.jdiai.DataList;
+import com.jdiai.JDI;
+import com.jdiai.JS;
 import com.jdiai.TestInit;
+import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.entities.SearchItem;
 import com.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
@@ -11,6 +14,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.Conditions.size;
 import static com.jdiai.entities.User.Roman;
 import static com.jdiai.site.JDISite.homePage;
@@ -32,7 +36,9 @@ public class ListEntitiesPOTest implements TestInit {
         homePage.loginForm.loginAs(Roman);
         homePage.searchIcon.click();
         homePage.searchField.input("jdi");
-        homePage.searchIcon.click();
+        JS e = homePage.searchIcon;
+        e.setFilter(findConditions.isDisplayed).engine().multiSearch();
+        e.click();
     }
 
     @Test

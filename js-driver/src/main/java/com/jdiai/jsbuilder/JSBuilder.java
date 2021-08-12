@@ -51,15 +51,12 @@ public class JSBuilder implements IJSBuilder {
             : new BuilderActions();
         this.builderActions.setBuilder(this);
     }
-    public JSBuilder setCondition(String condition) {
+
+    public JSBuilder setCondition(String condition, String conditionFunc) {
         this.condition = condition;
+        this.conditionFunc = actions().getResult(conditionFunc);
         return this;
     }
-    public JSBuilder setCondition(String condition, String conditionFunc) {
-        this.conditionFunc = actions().getResult(conditionFunc);
-        return setCondition(condition);
-    }
-
 
     public IJSBuilder setFilter(String filter) {
         if (isBlank(filter)) {
@@ -93,6 +90,7 @@ public class JSBuilder implements IJSBuilder {
     public IBuilderActions actions() {
         return builderActions;
     }
+
     public IJSBuilder updateActions(IBuilderActions builderActions) {
         this.builderActions = builderActions;
         this.builderActions.setBuilder(this);
@@ -108,12 +106,20 @@ public class JSBuilder implements IJSBuilder {
         }
         return condition != null ? condition : "";
     }
-    public boolean noFilter() {
-        return filter == null;
+    public void removeConditions() {
+        condition = null;
+        conditionFunc  = null;
     }
     public boolean hasFilter() {
         if (filter != null) {
             registerFunction("filter", filter);
+            return true;
+        }
+        return false;
+    }
+    public boolean hasConditions() {
+        if (condition != null) {
+            registerFunction("condition", "condition = function(element) {\n" + conditionFunc + "\n}\n");
             return true;
         }
         return false;

@@ -57,10 +57,11 @@ public class JDINovaException extends RuntimeException {
         }
         return message + "\nException: " + exMsg;
     }
-    public static boolean LOG_EXCEPTION = true;
+    public static boolean LOG_EXCEPTION = false;
+
     private static String logException(String message) {
         if (LOG_EXCEPTION) {
-            logger.error("Test exception");
+            logger.error(message);
         }
         return message;
     }

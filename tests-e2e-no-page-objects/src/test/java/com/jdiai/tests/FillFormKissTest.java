@@ -41,7 +41,7 @@ public class FillFormKissTest implements TestInit {
         $("#last-name").input(user.lastName);
         $("#passport").check(user.hasPassport);
         $("#gender").selectByName(user.gender);
-        $("#religion-options").input(user.religion);
+        $("#religion").input(user.religion);
         $("#description").input(user.description);
     }
 }

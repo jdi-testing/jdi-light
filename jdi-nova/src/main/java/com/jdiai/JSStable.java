@@ -55,16 +55,14 @@ public class JSStable extends JSLight {
     protected ConditionTypes elementConditions = findConditions;
 
     @Override
-    protected void init() {
-        setFilter(findConditions.isDisplayed);
-    }
+    protected void init() { }
 
     protected Timer startTimer() {
         return new Timer(timeout * 1000L);
     }
 
-    protected void stableAction(String actionName, JAction action, String filterName, String filter) {
-        setCondition(filterName, filter);
+    protected void stableAction(String actionName, JAction action, String cName, String condition) {
+        setCondition(cName, condition);
         try {
             action.execute();
         } catch (Throwable ex) {
@@ -85,14 +83,14 @@ public class JSStable extends JSLight {
             }
         }
         if (exception == null || exception.getMessage().contains("Failed to find element")) {
-            throw new JDINovaException("Failed to find element by locator:" + this);
+            throw new JDINovaException("Failed to find element by locator: " + this);
         } else {
             throw new JDINovaException(exception, "Failed to execute action '%s' for element '%s'", actionName, this);
         }
     }
 
-    protected <T> T stableFunction(String actionName, Supplier<T> func, String filterName, String filter) {
-        setCondition(filterName, filter);
+    protected <T> T stableFunction(String actionName, Supplier<T> func, String cName, String condition) {
+        setCondition(cName, condition);
         try {
             return func.get();
         } catch (Throwable ex) {
@@ -112,7 +110,7 @@ public class JSStable extends JSLight {
             }
         }
         if (exception == null || exception.getMessage().contains("Failed to find element")) {
-            throw new JDINovaException("Failed to find element by locator:" + this);
+            throw new JDINovaException("Failed to find element by locator: " + this);
         } else {
             throw new JDINovaException(exception, "Failed to execute action '%s' for element '%s'", actionName, this);
         }

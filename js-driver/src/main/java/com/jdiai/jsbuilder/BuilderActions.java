@@ -81,7 +81,7 @@ public class BuilderActions implements IBuilderActions {
             lastIsElement = null;
             return builder.condition();
         } else {
-            if (builder.hasFilter()) {
+            if (builder.hasConditions()) {
                 lastIsElement = null;
                 return JSFilterTemplates.LIST_TO_LIST_STRICT;
             }

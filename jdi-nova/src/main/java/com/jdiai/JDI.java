@@ -71,6 +71,8 @@ public class JDI {
 
     public static String LOGGER_TYPE = "console";
 
+    public static boolean LOG_ACTIONS = true;
+
     private static boolean initialized = false;
 
     public static Function<Field, String> GET_COMPLEX_VALUE = field -> {

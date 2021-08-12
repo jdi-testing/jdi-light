@@ -9,7 +9,7 @@ public class JSFilterTemplates {
     public static String LIST_TO_LIST_SOFT =
         "list = [];\n" +
         "for(let element of elements) {\n" +
-        "  if (filter(element)) {\n" +
+        "  if (condition(element)) {\n" +
         "    list.push(element);\n" +
         "  }\n" +
         "}\n" +
@@ -18,7 +18,7 @@ public class JSFilterTemplates {
     public static String LIST_TO_LIST_STRICT =
         "list = [];\n" +
         "for(let element of elements) {\n" +
-        "  if (filter(element)) {\n" +
+        "  if (condition(element)) {\n" +
         "    list.push(element);\n" +
         "  }\n" +
         "}\n" +
@@ -29,9 +29,15 @@ public class JSFilterTemplates {
         "while (!found && i < elements.length) {\n" +
         "  element = %s;\n" +
         "  if (!first && element) { first = element; }\n" +
-        "  if (filter(element)) { found = true; }\n" +
+        "  if (condition(element)) { found = true; }\n" +
         "  i++;\n" +
         "}\n" +
-        "if (!found && element) { element = first; }\n";
+        "if (!found && first) { element = first; }\n";
 
+    public static String ONE_TO_ONE =
+        "%s\n" +
+        "if (elements.length === 1) { element = elements[0]; }\n" +
+        "else {\n" +
+        LIST_TO_ONE +
+        "}";
 }

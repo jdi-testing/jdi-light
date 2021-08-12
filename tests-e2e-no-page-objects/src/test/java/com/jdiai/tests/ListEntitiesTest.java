@@ -15,7 +15,6 @@ import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.JDI.$;
-import static com.jdiai.JDI.findConditions;
 import static com.jdiai.entities.User.Roman;
 import static com.jdiai.tests.TestData.SearchResults;
 import static com.jdiai.tests.TestData.SearchResultsJson;
@@ -29,14 +28,14 @@ public class ListEntitiesTest implements TestInit {
         States.atHomePage();
         $("#user-icon").click();
         loginAs(Roman);
-        $(".icon-search.active").click();
-        $(".search-field input").input("jdi");
         $(".icon-search").click();
+        $(".search-field input").input("jdi");
+        $(".icon-search.active").click();
     }
 
     @Test
     public void jsonListTest() {
-        List<JsonObject> results = $("#search-results li").setFilter(findConditions.isDisplayed).getObjectList(
+        List<JsonObject> results = $("#search-results li").getObjectList(
         "{ 'title': element.querySelector('h3').innerText, " +
                 "'description': element.querySelector('p').innerText, " +
                 "'link': element.querySelector('a').href " +
@@ -50,7 +49,7 @@ public class ListEntitiesTest implements TestInit {
 
     @Test
     public void entitiesListTest() {
-        List<SearchItem> results = $("#search-results li").setFilter(findConditions.isDisplayed).getEntityList(SearchItem.class);
+        List<SearchItem> results = $("#search-results li").getEntityList(SearchItem.class);
         assertEquals(results.size(), 6);
         assertEquals(results.get(2).title, "JDI TEST SITE");
         assertEquals(print(results, DataClass::toString), SearchResults);
