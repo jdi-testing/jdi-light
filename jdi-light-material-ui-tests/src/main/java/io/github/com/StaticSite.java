@@ -266,18 +266,13 @@ public class StaticSite {
 
     // navigation
     // breadcrumbs
-    @Frame("storybook-preview-iframe")
-    public static BreadcrumbsPage breadcrumbsPage;
 
     @Url("/simple_breadcrumbs")
-    public static WebPage simpleBreadcrumbsPage;
+    public static SimpleBreadcrumbsPage simpleBreadcrumbsPage;
 
     @Url("/router_breadcrumbs")
-    public static WebPage routerIntegrationBreadcrumbsPage;
+    public static RouterBreadcrumbsPage routerBreadcrumbsPage;
 
-
-    @Url("/material-ui-navigation-breadcrumbs--customized")
-    public static WebPage customizedBreadcrumbsPage;
 
     // drawer
     @Url("/temporary_drawer")

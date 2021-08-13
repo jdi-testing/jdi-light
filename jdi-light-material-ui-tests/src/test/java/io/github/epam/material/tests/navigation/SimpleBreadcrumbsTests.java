@@ -4,17 +4,16 @@ import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.simpleBreadcrumbsPage;
-import static io.github.com.StaticSite.routerIntegrationBreadcrumbsPage;
-import static org.testng.Assert.assertTrue;
-import static io.github.com.pages.navigation.BreadcrumbsPage.*;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.*;
 
 /**
- * To see an example of Breadcrumbs web element please visit
+ * To see an example of a Breadcrumbs web element, please visit
  * https://material-ui.com/components/breadcrumbs/
  */
 
-public class BreadcrumbsTests extends TestsInit {
+public class SimpleBreadcrumbsTests extends TestsInit {
     private static Timer timer = new Timer(3000L);
 
     @BeforeMethod
@@ -31,7 +30,7 @@ public class BreadcrumbsTests extends TestsInit {
         breadcrumbs.get(2).is().text("Core");
         breadcrumbs.get(2).click();
         timer.wait(() -> materialElement.is().notVisible());
-        timer.wait(()->coreElement.is().visible());
+        timer.wait(() -> coreElement.is().visible());
     }
 
     @Test
@@ -66,28 +65,5 @@ public class BreadcrumbsTests extends TestsInit {
         breadcrumbs.get(19).click();
         breadcrumbs.get(20).is().text("Accessories");
         breadcrumbs.get(20).click();
-    }
-
-    @Test
-    public void routerIntegrationBreadcrumbsTest() {
-        routerIntegrationBreadcrumbsPage.open();
-        breadcrumbs.get(1).is().text("Home");
-        breadcrumbs.get(2).is().text("Inbox");
-        trashDisplayBlock.click();
-        breadcrumbs.get(1).is().text("Home");
-        breadcrumbs.get(2).is().text("Trash");
-    }
-
-    @Test
-    public void routerIntegrationBreadcrumbsIconClickTest() {
-        routerIntegrationBreadcrumbsPage.open();
-        importantDisplayBlock.click();
-        breadcrumbs.get(1).is().text("Home");
-        breadcrumbs.get(2).is().text("Inbox");
-        breadcrumbs.get(3).is().text("Important");
-        inboxDisplayBlock.click();
-        breadcrumbs.get(1).is().text("Home");
-        breadcrumbs.get(2).is().text("Inbox");
-        assertTrue(importantDisplayBlock.isHidden());
     }
 }
