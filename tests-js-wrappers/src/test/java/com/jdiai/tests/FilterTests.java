@@ -10,7 +10,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.jdiai.Pages.SIMPLE_PAGE;
-import static com.jdiai.jswraper.JSWrapper.*;
+import static com.jdiai.jswraper.JSWrapper.$wf;
+import static com.jdiai.jswraper.JSWrapper.element;
 import static com.jdiai.states.States.loggedInAt;
 import static org.testng.Assert.assertEquals;
 

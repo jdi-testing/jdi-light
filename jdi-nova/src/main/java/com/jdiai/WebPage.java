@@ -2,7 +2,6 @@ package com.jdiai;
 
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
-import com.jdiai.jsbuilder.jsfunctions.BuilderFunctions;
 
 import java.io.File;
 import java.lang.reflect.Field;

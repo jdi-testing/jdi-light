@@ -24,8 +24,6 @@ import static com.jdiai.jswraper.JSWrapper.$wf;
 import static com.jdiai.states.States.*;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 @Listeners(TestNGListener.class)
 public class JSWithFiltersTests implements TestInit {
