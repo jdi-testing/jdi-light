@@ -9,8 +9,6 @@ import com.epam.jdi.light.ui.html.elements.common.TextField;
 
 public class TextFieldPage extends WebPage {
 
-    @UI("//*[@id=\"formProps\"]/div[1]/div[7]")
-    public TextField standartTextField;
     /*=========
     From Props
      ==========*/
