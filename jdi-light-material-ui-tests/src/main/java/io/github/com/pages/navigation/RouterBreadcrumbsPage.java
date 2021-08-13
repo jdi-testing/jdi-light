@@ -3,7 +3,7 @@ package io.github.com.pages.navigation;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.inputs.Button;
+import com.epam.jdi.light.material.elements.navigation.Breadcrumb;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class RouterBreadcrumbsPage extends WebPage {
 
     @UI(".MuiBreadcrumbs-li")
-    public static List<UIElement> breadcrumbs;
+    public static List<Breadcrumb> breadcrumbs;
 
     @UI("//span[text()='Trash']")
     public static UIElement trashDisplayBlock;
