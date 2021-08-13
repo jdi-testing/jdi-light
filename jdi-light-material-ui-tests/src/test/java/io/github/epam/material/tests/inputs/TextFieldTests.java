@@ -47,7 +47,8 @@ public class TextFieldTests extends TestsInit {
         textFieldPage.textFieldPassword.has().text("");
 
         textFieldPage.textFieldReadOnly.is().enabled();
-        //textFieldPage.textFieldReadOnly.is().readOnly();
+        textFieldPage.textFieldReadOnly.has().text("Hello World");
+        textFieldPage.textFieldReadOnly.has().attr("readonly");
 
         textFieldPage.textFieldNumber.is().enabled();
         textFieldPage.textFieldNumber.setValue(String.valueOf(intNumber));
