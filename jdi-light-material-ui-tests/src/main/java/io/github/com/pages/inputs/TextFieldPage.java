@@ -5,12 +5,10 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.Select;
-import com.epam.jdi.light.material.elements.inputs.TextField;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 
 public class TextFieldPage extends WebPage {
 
-    @UI("//*[@id=\"formProps\"]/div[1]/div[7]")
-    public TextField standartTextField;
     /*=========
     From Props
      ==========*/

@@ -47,7 +47,8 @@ public class TextFieldTests extends TestsInit {
         textFieldPage.textFieldPassword.has().text("");
 
         textFieldPage.textFieldReadOnly.is().enabled();
-        textFieldPage.textFieldReadOnly.is().readOnly();
+        textFieldPage.textFieldReadOnly.has().text("Hello World");
+        textFieldPage.textFieldReadOnly.has().attr("readonly");
 
         textFieldPage.textFieldNumber.is().enabled();
         textFieldPage.textFieldNumber.setValue(String.valueOf(intNumber));
@@ -97,10 +98,11 @@ public class TextFieldTests extends TestsInit {
         String randomString = generateRandomString();
         textFieldPage.textFieldMultiLine.is().enabled();
         textFieldPage.textFieldMultiLine.has().text("EUR");
-        textFieldPage.textFieldMultiLine.clearAndSetValue(randomString);
+        textFieldPage.textFieldMultiLine.setText(randomString);
+
         textFieldPage.textFieldMultiLine.has().text(randomString);
         textFieldPage.textFieldMultiLine.clear();
-        textFieldPage.textFieldMultiLine.has().text("");
+        textFieldPage.textFieldMultiLine.has().text("EUR");
 
         textFieldPage.textFieldMultiLinePlaceHolder.is().enabled();
         textFieldPage.textFieldMultiLinePlaceHolder.setValue(randomString);
@@ -110,7 +112,7 @@ public class TextFieldTests extends TestsInit {
 
         textFieldPage.textFieldMultiLineStatic.is().enabled();
         textFieldPage.textFieldMultiLineStatic.has().text(DEFAULT_VALUE);
-        textFieldPage.textFieldMultiLineStatic.clearAndSetValue(randomString);
+        textFieldPage.textFieldMultiLineStatic.setText(randomString);
         textFieldPage.textFieldMultiLineStatic.has().text(randomString);
         textFieldPage.textFieldMultiLineStatic.clear();
         textFieldPage.textFieldMultiLineStatic.has().text("");
@@ -121,25 +123,25 @@ public class TextFieldTests extends TestsInit {
 
         String randomString = generateRandomString();
         textFieldPage.textFieldNormal.is().enabled();
-        textFieldPage.textFieldNormal.setValue(randomString);
+        textFieldPage.textFieldNormal.setText(randomString);
         textFieldPage.textFieldNormal.has().text(randomString);
         textFieldPage.textFieldNormal.clear();
         textFieldPage.textFieldNormal.has().text("");
 
         textFieldPage.textFieldWeight.is().enabled();
-        textFieldPage.textFieldWeight.setValue(randomString);
+        textFieldPage.textFieldWeight.setText(randomString);
         textFieldPage.textFieldWeight.has().text(randomString);
         textFieldPage.textFieldWeight.clear();
         textFieldPage.textFieldWeight.has().text("");
 
         textFieldPage.textFieldAdornmentPassword.is().enabled();
-        textFieldPage.textFieldAdornmentPassword.setValue(randomString);
+        textFieldPage.textFieldAdornmentPassword.setText(randomString);
         textFieldPage.textFieldAdornmentPassword.has().text(randomString);
         textFieldPage.textFieldAdornmentPassword.clear();
         textFieldPage.textFieldAdornmentPassword.has().text("");
 
         textFieldPage.textFieldAmount.is().enabled();
-        textFieldPage.textFieldAmount.setValue(randomString);
+        textFieldPage.textFieldAmount.setText(randomString);
         textFieldPage.textFieldAmount.has().text(randomString);
         textFieldPage.textFieldAmount.clear();
         textFieldPage.textFieldAmount.has().text("");
@@ -148,10 +150,10 @@ public class TextFieldTests extends TestsInit {
     @Test
     public void selectTest() {
         for(CurrencyItems currency : CurrencyItems.values()){
-            textFieldPage.selectElementField.click();
+            textFieldPage.selectElementField.core().click();
             textFieldPage.selectElement.selectItemByText(currency.currencyItemText);
-            jdiAssert(textFieldPage.selectElementField.getText().equals(currency.currencyItemText), Matchers.is(true));
-
+            jdiAssert(textFieldPage.selectElementField.core().getText().equals(currency.currencyItemText),
+                    Matchers.is(true));
             textFieldPage.selectNativeSelect.select(currency.currencyItemText);
             textFieldPage.selectNativeSelect.has().text(currency.currencyItemText);
         }
