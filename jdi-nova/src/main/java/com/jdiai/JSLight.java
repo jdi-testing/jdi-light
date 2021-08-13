@@ -894,7 +894,8 @@ public class JSLight implements JS {
                 mapList.add(value);
             }
         }
-        setEntity(print(mapList, ";\n") + ";\nreturn ''");
+        //setEntity(print(mapList, ";\n") + ";\nreturn ''");
+        setEntity(print(mapList, ";\n") + ";");
         return this;
     }
 

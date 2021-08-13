@@ -24,15 +24,10 @@ public class JSListToList {
         "elements = Array.from(list);\n";
 
     public static String ONE_LIST_TO_LIST =
-        "elements = Array.from(elements.map(element => {{one}})).filter(e=>!!e);\n";
+        "elements = Array.from(elements.map(e=>{{one:e}})).filter(e=>!!e);\n";
 
     public static String FILTER_ONE_LIST_TO_LIST =
-        "list = [];\n" +
-        "for(let element of elements) {\n" +
-        "  subElement = {{one}};\n" +
-        "  if (filter(subElement)) { list.push(subElement); }\n" +
-        "}\n" +
-        "elements = Array.from(list);\n";
+        "elements = Array.from(elements.map(e=>{{one:e}})).filter(e=>!!e).filter(filter);\n";
 
     public static String AGILE_LIST_TO_LIST =
         "list = [];\n" +

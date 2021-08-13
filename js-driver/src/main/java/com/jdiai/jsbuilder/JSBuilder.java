@@ -21,6 +21,7 @@ import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_LIST_SCRIPT_EXECUTE;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_SCRIPT_EXECUTE;
+import static org.apache.commons.lang3.ObjectUtils.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -106,10 +107,12 @@ public class JSBuilder implements IJSBuilder {
         }
         return condition != null ? condition : "";
     }
+
     public void removeConditions() {
         condition = null;
         conditionFunc  = null;
     }
+
     public boolean hasFilter() {
         if (filter != null) {
             registerFunction("filter", filter);
@@ -117,6 +120,7 @@ public class JSBuilder implements IJSBuilder {
         }
         return false;
     }
+
     public boolean hasConditions() {
         if (condition != null) {
             registerFunction("condition", "condition = function(element) {\n" + conditionFunc + "\n}\n");
@@ -271,11 +275,11 @@ public class JSBuilder implements IJSBuilder {
             : "";
     }
     public String getQuery() {
-        if (ObjectUtils.isEmpty(useFunctions)) {
+        if (isEmpty(useFunctions)) {
             return getScript();
         }
         String script = isNotEmpty(useFunctions) ? print(useFunctions.values(), "") : "";
-        script += getScript().replace("\nreturn ''", "");
+        script += getScript();// .replace("\nreturn ''", "");
         if (!script.contains("%s")) {
             return script;
         }

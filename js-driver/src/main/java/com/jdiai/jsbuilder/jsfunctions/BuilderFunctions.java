@@ -17,9 +17,13 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class BuilderFunctions extends DataClass<BuilderFunctions> {
     public final IJSBuilder builder;
     public String oneToOne;
+    public String oneToOneFilter;
     public String oneToList;
+    public String oneToListFilter;
     public String listToOne;
+    public String listToOneFilter;
     public String listToList;
+    public String listToListFilter;
     public String result;
     public String condition;
     public String listResult;
@@ -32,9 +36,13 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
     public BuilderFunctions(IJSBuilder builder) {
         this.builder = builder;
         this.oneToOne = JSOneToOne.PURE_ONE_TO_ONE;
+        this.oneToOneFilter = JSOneToOne.PURE_STRICT_ONE_TO_ONE;
         this.oneToList = JSOneToList.ONE_TO_LIST;
+        this.oneToListFilter = JSOneToList.FILTER_ONE_TO_LIST;
         this.listToOne = JSListToOne.PURE_LIST_TO_ONE;
+        this.listToOneFilter = JSListToOne.FILTER_LIST_TO_ONE;
         this.listToList = JSListToList.ONE_LIST_TO_LIST;
+        this.listToListFilter = JSListToList.FILTER_ONE_LIST_TO_LIST;
         this.result = JSResults.ONE_TO_RESULT;
         this.condition = JSResults.CONDITION;
         this.listResult = JSResults.LIST_TO_RESULT;
@@ -46,7 +54,7 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
 
     public String oneToOne(String ctx, By locator) {
         lastIsElement = true;
-        return getScript(oneToOne, ctx, locator);
+        return getScript(builder.hasFilter() ? oneToOneFilter : oneToOne, ctx, locator);
     }
 
     public String oneToList(String ctx, By locator) {
@@ -54,12 +62,12 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
             return oneToOne(ctx, locator);
         }
         lastIsElement = false;
-        return getScript(oneToList, ctx, locator);
+        return getScript(builder.hasFilter() ? oneToListFilter : oneToList, ctx, locator);
     }
 
     public String listToOne(By locator) {
         lastIsElement = true;
-        return getScript(listToOne, null, locator);
+        return getScript(builder.hasFilter() ? listToOneFilter : listToOne, null, locator);
     }
 
     public String listToList(By locator) {
@@ -67,7 +75,7 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
             return listToOne(locator);
         }
         lastIsElement = false;
-        return getScript(listToList, null, locator);
+        return getScript(builder.hasFilter() ? listToListFilter : listToList, null, locator);
     }
 
     public String result(String collector) {
@@ -114,25 +122,25 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
         return collector.contains("return") ? collector : format(result, collector);
     }
 
-    protected String getScript(String action, String ctx, By locator) {
-        if (isBlank(action)) {
-            throw new JDINovaBuilderException("Failed to build js expression. " + action + " can not be blank.");
+    protected String getScript(String script, String ctx, By locator) {
+        if (isBlank(script)) {
+            throw new JDINovaBuilderException("Failed to build js expression. " + script + " can not be blank.");
         }
-        if (action.contains("{{one}}")) {
-            return action.replace("{{one}}", getElement(ctx, locator));
+        if (script.contains("{{one}}")) {
+            return script.replace("{{one}}", getElement(ctx, locator));
         }
-        if (action.contains("{{list}}")) {
-            return action.replace("{{list}}", getElements(ctx, locator));
+        if (script.contains("{{list}}")) {
+            return script.replace("{{list}}", getElements(ctx, locator));
         }
-        Matcher matcher = compile("(.|\n)*\\{\\{one:(?<ctx>[a-zA-Z]+)}}(.|\n)*").matcher(action);
+        Matcher matcher = compile("(.|\n)*\\{\\{one:(?<ctx>[a-zA-Z]+)}}(.|\n)*").matcher(script);
         if (matcher.matches()) {
-            return action.replaceAll("\\{\\{one:[a-zA-Z]+}}", getElement(matcher.group("ctx"), locator));
+            return script.replaceAll("\\{\\{one:[a-zA-Z]+}}", getElement(matcher.group("ctx"), locator));
         }
-        matcher = compile("(.|\n)*\\{\\{list:(?<ctx>[a-zA-Z]+)}}(.|\n)*").matcher(action);
+        matcher = compile("(.|\n)*\\{\\{list:(?<ctx>[a-zA-Z]+)}}(.|\n)*").matcher(script);
         if (matcher.matches()) {
-            return action.replaceAll("\\{\\{list:[a-zA-Z]+}}", getElements(matcher.group("ctx"), locator));
+            return script.replaceAll("\\{\\{list:[a-zA-Z]+}}", getElements(matcher.group("ctx"), locator));
         }
-        throw new JDINovaBuilderException("Failed to build js expression. " + action + " should contains {{one}} or {{list}}");
+        throw new JDINovaBuilderException("Failed to build js expression. " + script + " should contains {{one}} or {{list}}");
     }
 
     protected String getElement(String ctx, By locator) {

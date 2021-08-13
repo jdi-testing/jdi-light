@@ -146,8 +146,8 @@ public class JSElement {
     }
 
     public Json getAllStyles() {
-        JsonObject json =  driver.getOne("{ keys: [...getComputedStyle(element)], " +
-            "values: [...getComputedStyle(element)].map(style=> getComputedStyle(element).getPropertyValue(style)) }").asJson();
+        JsonObject json =  driver.getOne("{ keys: [...styles], " +
+            "values: [...styles].map(style=>styles.getPropertyValue(style)) }").asJson();
         return new Json(json.get("keys"), json.get("values"));
     }
 

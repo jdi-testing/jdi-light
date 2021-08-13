@@ -2,6 +2,6 @@ package com.jdiai.entities;
 
 import com.epam.jdi.tools.DataClass;
 
-public class HeaderRaw extends DataClass<HeaderRaw> {
+public class RawHeader extends DataClass<RawHeader> {
     public String innerText, className, tagName;
 }
