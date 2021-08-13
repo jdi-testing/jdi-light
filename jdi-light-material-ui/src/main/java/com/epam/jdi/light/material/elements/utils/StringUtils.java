@@ -9,12 +9,12 @@ public class StringUtils {
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$&@?<>~!%#";
 
         Random r = new Random();
-        char[] password = new char[r.nextBoolean()?12:13];
-        for(int i=0; i<password.length; i++) {
+        char[] randomString = new char[r.nextBoolean()?12:13];
+        for(int i=0; i<randomString.length; i++) {
             char ch = symbols.charAt(r.nextInt(symbols.length()));
-            password[i] = ch;
+            randomString[i] = ch;
         }
 
-        return new String(password);
+        return new String(randomString);
     }
 }
