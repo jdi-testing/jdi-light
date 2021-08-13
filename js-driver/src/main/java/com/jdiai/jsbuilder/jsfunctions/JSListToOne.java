@@ -12,7 +12,7 @@ public class JSListToOne {
 
     public static String FILTER_LIST_TO_ONE =
         "if (elements.length === 0) { throw 'Failed to find element' }\n" +
-        "element = elements.map(e => filter({{one:e}}))[0];\n" +
+        "element = elements.map(e => filter({{one:e}}));\n" +
         "if (!element) { throw 'Failed to find element' };\n";
 
     public static String AGILE_LIST_TO_ONE =

@@ -118,8 +118,8 @@ public class JSDriver {
         }
     }
 
-    public JSProducer doAction(String collector) {
-        return new JSProducer(buildOne().doAction(collector).executeQuery());
+    public void doAction(String collector) {
+        buildOne().doAction(collector).executeQuery();
     }
 
     public JSProducer getOne(String collector) {

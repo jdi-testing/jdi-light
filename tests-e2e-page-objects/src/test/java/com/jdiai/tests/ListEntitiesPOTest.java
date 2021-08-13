@@ -21,7 +21,7 @@ import static com.jdiai.states.States.atHomePage;
 import static com.jdiai.states.States.logout;
 import static com.jdiai.test.data.TestData.AllSearchResults;
 import static com.jdiai.test.data.TestData.SearchResults;
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)
 public class ListEntitiesPOTest implements TestInit {

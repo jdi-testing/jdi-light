@@ -18,7 +18,7 @@ import static com.jdiai.JDI.$;
 import static com.jdiai.entities.User.Roman;
 import static com.jdiai.tests.TestData.SearchResults;
 import static com.jdiai.tests.TestData.SearchResultsJson;
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)
 public class ListEntitiesTest implements TestInit {

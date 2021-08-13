@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static com.jdiai.jsbuilder.JSFilterTemplates.CHECK_CONDITION;
-import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
 public interface JS extends WebElement, HasLocators, HasParent, HasCore {
@@ -174,7 +172,9 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     }
 
     default JS setCondition(String name, String condition) {
-        engine().jsDriver().builder().setCondition(format(CHECK_CONDITION, name), condition);
+        if (condition != null) {
+            engine().jsDriver().builder().setCondition(name, condition);
+        }
         return this;
     }
     default JS setFilter(String filter) {
@@ -185,7 +185,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
 
     default JS setLocators(List<By> locators) {
         if (isNotEmpty(locators)) {
-            engine().jsDriver().locators = locators;
+            engine().jsDriver().setLocators(locators);
         }
         return this;
     }

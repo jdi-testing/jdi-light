@@ -87,6 +87,13 @@ public class JSBaseEngine extends JSElement implements JSEngine {
         setMap(valueFunc);
         return getAsMap();
     }
+    public void setMultipleValues(String valueFunc) {
+        setMap(valueFunc);
+        setMultipleValues();
+    }
+    public void setMultipleValues() {
+        driver.doAction(objectMap);
+    }
 
     public void setMap(String objectMap) {
         this.objectMap = objectMap;

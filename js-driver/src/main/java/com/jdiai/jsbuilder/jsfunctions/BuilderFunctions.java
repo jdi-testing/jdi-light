@@ -6,6 +6,7 @@ import com.jdiai.jsdriver.JDINovaBuilderException;
 import org.openqa.selenium.By;
 
 import java.text.MessageFormat;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 
 import static com.jdiai.jsbuilder.GetTypes.dataType;
@@ -15,7 +16,7 @@ import static java.util.regex.Pattern.compile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class BuilderFunctions extends DataClass<BuilderFunctions> {
-    public final IJSBuilder builder;
+    public final Supplier<IJSBuilder> builder;
     public String oneToOne;
     public String oneToOneFilter;
     public String oneToList;
@@ -25,7 +26,7 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
     public String listToList;
     public String listToListFilter;
     public String result;
-    public String condition;
+    public String conditionTemplate;
     public String listResult;
     public String listConditionResult;
     public String action;
@@ -33,7 +34,7 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
     public String listConditionAction;
     public boolean lastIsElement;
 
-    public BuilderFunctions(IJSBuilder builder) {
+    public BuilderFunctions(Supplier<IJSBuilder> builder) {
         this.builder = builder;
         this.oneToOne = JSOneToOne.PURE_ONE_TO_ONE;
         this.oneToOneFilter = JSOneToOne.PURE_STRICT_ONE_TO_ONE;
@@ -44,7 +45,7 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
         this.listToList = JSListToList.ONE_LIST_TO_LIST;
         this.listToListFilter = JSListToList.FILTER_ONE_LIST_TO_LIST;
         this.result = JSResults.ONE_TO_RESULT;
-        this.condition = JSResults.CONDITION;
+        this.conditionTemplate = JSResults.CONDITION;
         this.listResult = JSResults.LIST_TO_RESULT;
         this.listConditionResult = JSResults.PURE_CONDITION_LIST_TO_RESULT;
         this.action = JSResults.ONE_TO_ACTION;
@@ -54,7 +55,7 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
 
     public String oneToOne(String ctx, By locator) {
         lastIsElement = true;
-        return getScript(builder.hasFilter() ? oneToOneFilter : oneToOne, ctx, locator);
+        return getScript(builder.get().hasFilter() ? oneToOneFilter : oneToOne, ctx, locator);
     }
 
     public String oneToList(String ctx, By locator) {
@@ -62,12 +63,12 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
             return oneToOne(ctx, locator);
         }
         lastIsElement = false;
-        return getScript(builder.hasFilter() ? oneToListFilter : oneToList, ctx, locator);
+        return getScript(builder.get().hasFilter() ? oneToListFilter : oneToList, ctx, locator);
     }
 
     public String listToOne(By locator) {
         lastIsElement = true;
-        return getScript(builder.hasFilter() ? listToOneFilter : listToOne, null, locator);
+        return getScript(builder.get().hasFilter() ? listToOneFilter : listToOne, null, locator);
     }
 
     public String listToList(By locator) {
@@ -75,42 +76,43 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
             return listToOne(locator);
         }
         lastIsElement = false;
-        return getScript(builder.hasFilter() ? listToListFilter : listToList, null, locator);
+        return getScript(builder.get().hasFilter() ? listToListFilter : listToList, null, locator);
     }
 
     public String result(String collector) {
         String prefix = addStyles(collector);
-        if (builder.hasConditions()) {
-            prefix += condition;
+        if (builder.get().hasConditions()) {
+            prefix += builder.get().condition();
         }
         return prefix + formatCollector(collector, result);
     }
 
     public String listResult(String collector) {
-        if (builder.hasConditions()) {
-            return addStyles(collector) + formatCollector(collector, listConditionResult);
+        String prefix = addStyles(collector);
+        if (builder.get().hasConditions()) {
+            return prefix + formatCollector(collector, listConditionResult);
         }
-        return addStyles(collector) + formatCollector(collector, listResult);
+        return prefix + formatCollector(collector, listResult);
     }
 
     public String action(String collector) {
         String prefix = addStyles(collector);
-        if (builder.hasConditions()) {
-            prefix += condition;
+        if (builder.get().hasConditions()) {
+            prefix += builder.get().condition();
         }
         return prefix + formatCollector(collector, action);
     }
 
     public String listAction(String collector) {
-        if (builder.hasConditions()) {
+        if (builder.get().hasConditions()) {
             return addStyles(collector) + formatCollector(collector, listConditionAction);
         }
         return addStyles(collector) + formatCollector(collector, listAction);
     }
 
-    protected String addStyles(String collector) {
+    public String addStyles(String collector) {
         return collector.contains("styles.")
-            ? "styles = " + builder.getElementName() + " ? getComputedStyle(" + builder.getElementName() + ") : undefined;\n"
+            ? "styles = " + builder.get().getElementName() + " ? getComputedStyle(" + builder.get().getElementName() + ") : undefined;\n"
             : "";
     }
 
@@ -147,13 +149,23 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
         if (ctx == null)  {
             ctx = "element";
         }
-        return MessageFormat.format(dataType(locator).get + iFrame(locator), ctx, selector(locator, builder));
+        try {
+            return MessageFormat.format(dataType(locator).get + iFrame(locator), ctx, selector(locator, builder.get()));
+        } catch (Throwable ex) {
+            builder.get().cleanup();
+            throw new JDINovaBuilderException(ex.getMessage());
+        }
     }
 
     protected String getElements(String ctx, By locator) {
         if (ctx == null)  {
             ctx = "element";
         }
-        return MessageFormat.format(dataType(locator).getAll + iFrame(locator), ctx, selectorAll(locator, builder));
+        try {
+            return MessageFormat.format(dataType(locator).getAll + iFrame(locator), ctx, selectorAll(locator, builder.get()));
+        } catch (Throwable ex) {
+            builder.get().cleanup();
+            throw new JDINovaBuilderException(ex.getMessage());
+        }
     }
 }

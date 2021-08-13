@@ -20,6 +20,7 @@ public interface IJSBuilder {
     void removeConditions();
 
     IJSBuilder doAction(String collectResult);
+    IJSBuilder doListAction(String collectResult);
     IJSBuilder getResult(String collectResult);
     IJSBuilder getResultList(String collectResult);
 

@@ -3,7 +3,7 @@ package com.jdiai.jsbuilder;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import com.jdiai.jsdriver.JDINovaException;
+import com.jdiai.jsdriver.JDINovaBuilderException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +20,7 @@ import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_LIST_SCRIPT_EXECUTE;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_SCRIPT_EXECUTE;
+import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -49,12 +50,15 @@ public class JSBuilder implements IJSBuilder {
         this.builderActions = builderActions != null
             ? builderActions
             : new BuilderActions();
-        this.builderActions.setBuilder(this);
+        this.builderActions.setBuilder(() -> this);
     }
 
     public JSBuilder setCondition(String condition, String conditionFunc) {
-        this.condition = condition;
-        this.conditionFunc = actions().getResult(conditionFunc);
+        String template = actions().conditionTemplate();
+        this.condition = template.contains("%s")
+            ? format(template, condition)
+            : template;
+        this.conditionFunc = conditionFunc;
         return this;
     }
 
@@ -93,7 +97,7 @@ public class JSBuilder implements IJSBuilder {
 
     public IJSBuilder updateActions(IBuilderActions builderActions) {
         this.builderActions = builderActions;
-        this.builderActions.setBuilder(this);
+        this.builderActions.setBuilder(() -> this);
         return this;
     }
     public IJSBuilder registerFunction(String name, String function) {
@@ -101,9 +105,6 @@ public class JSBuilder implements IJSBuilder {
         return this;
     }
     public String condition() {
-        if (conditionFunc != null) {
-            registerFunction("condition", "condition = function(element) {\n" + conditionFunc + "\n}\n");
-        }
         return condition != null ? condition : "";
     }
 
@@ -122,7 +123,7 @@ public class JSBuilder implements IJSBuilder {
 
     public boolean hasConditions() {
         if (condition != null) {
-            registerFunction("condition", "condition = function(element) {\n" + conditionFunc + "\n}\n");
+            registerFunction("condition", actions().conditionFunc(conditionFunc));
             return true;
         }
         return false;
@@ -227,6 +228,9 @@ public class JSBuilder implements IJSBuilder {
     public IJSBuilder doAction(String collectResult) {
         return addJSCode(builderActions.doAction(collectResult));
     }
+    public IJSBuilder doListAction(String collectResult) {
+        return addJSCode(builderActions.doListAction(collectResult));
+    }
 
     public IJSBuilder getResult(String collectResult) {
         return addJSCode(builderActions.getResult(getCollector(collectResult)));
@@ -282,7 +286,8 @@ public class JSBuilder implements IJSBuilder {
         if (!script.contains("%s")) {
             return script;
         }
-        throw new JDINovaException("Failed to execute js script for template locator. Please replace %s before usage");
+        cleanup();
+        throw new JDINovaBuilderException("Failed to execute js script for template locator. Please replace %s before usage");
     }
     public String getScript() {
         return beforeScript() + query;

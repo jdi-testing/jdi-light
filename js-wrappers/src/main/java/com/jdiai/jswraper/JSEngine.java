@@ -24,6 +24,8 @@ public interface JSEngine {
     void setMap(String objectMap);
     Json getAsMap();
     Json getAsMap(String valueFunc);
+    void setMultipleValues();
+    void setMultipleValues(String valueFunc);
     String firstValue(String valueFunc);
     List<String> getValues(String valueFunc);
     List<Json> getMultiAttributes(List<String> attributes);

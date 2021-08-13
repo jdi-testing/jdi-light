@@ -20,7 +20,6 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.Timer.sleep;
 import static com.jdiai.JDI.findConditions;
 import static com.jdiai.JDI.timeout;
-import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
@@ -118,22 +117,22 @@ public class JSStable extends JSLight {
 
     @Override
     public JS setOption(String option) {
-        return stableFunction("setOption(" + option + ")", () -> super.setOption(option), "exist", elementConditions.isExist);
+        return stableFunction("setOption(" + option + ")", () -> super.setOption(option), "exist", null);
     }
 
     @Override
     public JS selectByName(String name) {
-        return stableFunction("selectByName(" + name + ")", () -> super.selectByName(name), "exist", elementConditions.isExist);
+        return stableFunction("selectByName(" + name + ")", () -> super.selectByName(name), "exist", null);
     }
 
     @Override
     public String selectedValueOption() {
-        return stableFunction("selectedValueOption()", super::selectedValueOption, "exist", elementConditions.isExist);
+        return stableFunction("selectedValueOption()", super::selectedValueOption, "exist", null);
     }
 
     @Override
     public String selectedOption() {
-        return stableFunction("selectedOption()", super::selectedOption, "exist", elementConditions.isExist);
+        return stableFunction("selectedOption()", super::selectedOption, "exist", null);
     }
 
     @Override
@@ -158,9 +157,8 @@ public class JSStable extends JSLight {
         if (isEmpty(values) || isEmpty(locators())) {
             throw new JDINovaException("Can't execute select for empty values or locators");
         }
-        By locator = last(locators());
-        IJSBuilder builder = getByLocator(locator).contains("%s")
-            ? getTemplateScriptForSelect(locator, values)
+        IJSBuilder builder = last(locators()).toString().contains("%s")
+            ? getTemplateScriptForSelect(values)
             : getScriptForSelect(values);
 
         stableAction("select(" + print(values) + ")", builder::executeQuery, "visible", elementConditions.isVisible);
@@ -222,78 +220,78 @@ public class JSStable extends JSLight {
 
     @Override
     public String getTagName() {
-        return stableFunction("getTagName()", super::getTagName, "exist", elementConditions.isExist);
+        return stableFunction("getTagName()", super::getTagName, "exist", null);
     }
 
     @Override
     public String getAttribute(String attrName) {
-        return stableFunction("getAttribute(" + attrName + ")", () -> super.getAttribute(attrName), "exist", elementConditions.isExist);
+        return stableFunction("getAttribute(" + attrName + ")", () -> super.getAttribute(attrName), "exist", null);
     }
 
     @Override
     public String getProperty(String property) {
-        return stableFunction("getProperty(" + property + ")", () -> super.getProperty(property), "exist", elementConditions.isExist);
+        return stableFunction("getProperty(" + property + ")", () -> super.getProperty(property), "exist", null);
     }
 
     @Override
     public List<String> getAttributesAsList(String attr) {
-        return stableFunction("getAttributesAsList(" + attr + ")", () -> super.getAttributesAsList(attr), "exist", elementConditions.isExist);
+        return stableFunction("getAttributesAsList(" + attr + ")", () -> super.getAttributesAsList(attr), "exist", null);
     }
 
     @Override
     public List<Json> getAttributesAsList(String... attributes) {
-        return stableFunction("getAttributesAsList(" + print(attributes) + ")", () -> super.getAttributesAsList(attributes), "exist", elementConditions.isExist);
+        return stableFunction("getAttributesAsList(" + print(attributes) + ")", () -> super.getAttributesAsList(attributes), "exist", null);
     }
 
     @Override
     public List<String> allClasses() {
-        return stableFunction("allClasses()", super::allClasses, "exist", elementConditions.isExist);
+        return stableFunction("allClasses()", super::allClasses, "exist", null);
     }
 
     @Override
     public boolean hasClass(String className) {
-        return stableFunction("hasClass(" + className + ")", () -> super.hasClass(className), "exist", elementConditions.isExist);
+        return stableFunction("hasClass(" + className + ")", () -> super.hasClass(className), "exist", null);
     }
 
     @Override
     public boolean hasAttribute(String attrName) {
-        return stableFunction("hasAttribute(" + attrName + ")", () -> super.hasAttribute(attrName), "exist", elementConditions.isExist);
+        return stableFunction("hasAttribute(" + attrName + ")", () -> super.hasAttribute(attrName), "exist", null);
     }
 
     @Override
     public Json allAttributes() {
-        return stableFunction("allAttributes()", super::allAttributes, "exist", elementConditions.isExist);
+        return stableFunction("allAttributes()", super::allAttributes, "exist", null);
     }
 
     @Override
     public JS show() {
-        stableAction("show()", super::show, "exist", elementConditions.isExist);
+        stableAction("show()", super::show, "exist", null);
         return this;
     }
 
     @Override
     public String cssStyle(String style) {
-        return stableFunction("cssStyle(" + style + ")", () -> super.cssStyle(style), "exist", elementConditions.isExist);
+        return stableFunction("cssStyle(" + style + ")", () -> super.cssStyle(style), "exist", null);
     }
 
     @Override
     public Json cssStyles(String... styles) {
-        return stableFunction("cssStyles(" + print(styles) + ")", () -> super.cssStyles(styles), "exist", elementConditions.isExist);
+        return stableFunction("cssStyles(" + print(styles) + ")", () -> super.cssStyles(styles), "exist", null);
     }
 
     @Override
     public Json allCssStyles() {
-        return stableFunction("allCssStyles()", super::allCssStyles, "exist", elementConditions.isExist);
+        return stableFunction("allCssStyles()", super::allCssStyles, "exist", null);
     }
 
     @Override
     public boolean isSelected() {
-        return stableFunction("isSelected()", super::isSelected, "exist", elementConditions.isExist);
+        return stableFunction("isSelected()", super::isSelected, "exist", null);
     }
 
     @Override
     public boolean isEnabled() {
-        return stableFunction("isEnabled()", super::isEnabled, "exist", elementConditions.isExist);
+        return stableFunction("isEnabled()", super::isEnabled, "exist", null);
     }
 
     @Override
@@ -303,27 +301,27 @@ public class JSStable extends JSLight {
 
     @Override
     public String getText(GetTextTypes textType) {
-        return stableFunction("getText(" + textType + ")", () -> super.getText(textType), "exist", elementConditions.isExist);
+        return stableFunction("getText(" + textType + ")", () -> super.getText(textType), "exist", null);
     }
 
     @Override
     public String getCssValue(String style) {
-        return stableFunction("getCssValue(" + style + ")", () -> super.getCssValue(style), "exist", elementConditions.isExist);
+        return stableFunction("getCssValue(" + style + ")", () -> super.getCssValue(style), "exist", null);
     }
 
     @Override
     public JS uploadFile(String filePath) {
-        return stableFunction("uploadFile(" + filePath + ")", () -> super.uploadFile(filePath), "exist", elementConditions.isExist);
+        return stableFunction("uploadFile(" + filePath + ")", () -> super.uploadFile(filePath), "exist", null);
     }
 
     @Override
     public String fontColor() {
-        return stableFunction("fontColor()", super::fontColor, "exist", elementConditions.isExist);
+        return stableFunction("fontColor()", super::fontColor, "exist", null);
     }
 
     @Override
     public String bgColor() {
-        return stableFunction("bgColor()", super::bgColor, "exist", elementConditions.isExist);
+        return stableFunction("bgColor()", super::bgColor, "exist", null);
     }
 
     @Override

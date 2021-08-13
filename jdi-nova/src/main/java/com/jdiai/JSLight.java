@@ -357,39 +357,36 @@ public class JSLight implements JS {
         if (isEmpty(values) || isEmpty(locators())) {
             throw new JDINovaException("Can't execute select for empty values or locators");
         }
-        By locator = last(locators());
-        IJSBuilder builder = getByLocator(locator).contains("%s")
-            ? getTemplateScriptForSelect(locator, values)
+        IJSBuilder builder = last(locators()).toString().contains("%s")
+            ? getTemplateScriptForSelect(values)
             : getScriptForSelect(values);
         builder.executeQuery();
         return this;
     }
 
-    protected IJSBuilder getTemplateScriptForSelect(By locator, String... values) {
+    protected IJSBuilder getTemplateScriptForSelect(String... values) {
         IJSBuilder builder;
         String ctx;
         if (locators().size() == 1) {
             builder = engine().jsDriver().builder();
             ctx = "document";
         } else {
-            builder = new JSDriver(engine().jsDriver().driver(), listCopyUntil(locators(), locators().size() - 1))
+            builder = new JSDriver(engine().jsDriver().driver(), listCopyUntil(locators(), locators().size() - 2))
                 .buildOne();
             ctx = "element";
         }
-        builder.setElementName("option");
         for (String value : values) {
-            By by = fillByTemplate(locator, value);
-            builder.oneToOne(ctx, by).doAction("option.click();\n");
+            By by = defineLocator(format(selectFindTextLocator(), value));
+            builder.doAction(MessageFormat.format(dataType(by).get, ctx, selector(by, builder)) + ".click();\n");
         }
         return builder;
     }
 
     protected IJSBuilder getScriptForSelect(String... values) {
         IJSBuilder builder = engine().jsDriver().buildOne();
-        builder.setElementName("option");
         for (String value : values) {
             By by = defineLocator(format(selectFindTextLocator(), value));
-            builder.oneToOne("element", by).doAction("option.click();\n");
+            builder.doAction(MessageFormat.format(dataType(by).get, "element", selector(by, builder)) + ".click();\n");
         }
         return builder;
     }
@@ -810,7 +807,7 @@ public class JSLight implements JS {
     }
 
     public void setEntity(String objectMap) {
-        engine().getAsMap(objectMap);
+        engine().setMultipleValues(objectMap);
     }
 
     public JS find(String by) {
@@ -852,7 +849,7 @@ public class JSLight implements JS {
     }
 
     public void setEntity() {
-        engine().getAsMap(objectMap);
+        engine().setMultipleValues(objectMap);
     }
 
     public <T> List<T> getEntityList(Class<T> cl) {
@@ -895,7 +892,7 @@ public class JSLight implements JS {
             }
         }
         //setEntity(print(mapList, ";\n") + ";\nreturn ''");
-        setEntity(print(mapList, ";\n") + ";");
+        setEntity(print(mapList, "\n"));
         return this;
     }
 

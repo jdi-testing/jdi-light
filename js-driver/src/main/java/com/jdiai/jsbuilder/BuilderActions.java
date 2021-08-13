@@ -3,12 +3,12 @@ package com.jdiai.jsbuilder;
 import com.jdiai.jsbuilder.jsfunctions.BuilderFunctions;
 import org.openqa.selenium.By;
 
+import java.util.function.Supplier;
+
 public class BuilderActions implements IBuilderActions {
-    protected IJSBuilder builder;
     protected BuilderFunctions functions;
 
-    public void setBuilder(IJSBuilder builder) {
-        this.builder = builder;
+    public void setBuilder(Supplier<IJSBuilder> builder) {
         functions = new BuilderFunctions(builder);
     }
 
@@ -42,5 +42,15 @@ public class BuilderActions implements IBuilderActions {
 
     public String getResultList(String collector) {
         return functions.listResult(collector);
+    }
+
+    public String conditionTemplate() {
+        return functions.conditionTemplate;
+    }
+    public String conditionFunc(String func) {
+        return "condition = function(element) {\n" + functions.addStyles(func) + returnFunc(func) + "\n}\n";
+    }
+    protected String returnFunc(String func) {
+        return func.contains("return ") ? func : "return " + func;
     }
 }
