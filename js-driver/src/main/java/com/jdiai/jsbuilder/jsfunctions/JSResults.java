@@ -5,7 +5,7 @@ public class JSResults {
 
     public static String ONE_TO_ACTION = "%s";
 
-    public static String LIST_TO_ACTION = "elements.forEach(element => %s)";
+    public static String LIST_TO_ACTION = "elements.forEach(element => %s);";
 
     public static String LIST_TO_RESULT = "return elements.map(element => %s);";
 
@@ -22,16 +22,24 @@ public class JSResults {
         "return elements.filter(condition).map(element => %s);";
 
     public static String AGILE_LIST_TO_RESULT =
-        "filtered = []\n" +
+        "filtered = [];\n" +
         "try { filtered = elements.filter(condition); } catch { }\n" +
         "if (filtered.length == 0) { filtered = elements; }\n" +
-        "return filtered.filter(condition).map(element => %s);";
+        "return filtered.map(element => %s);";
+
+    public static String CONDITION_LIST_TO_ONE =
+        "filtered = [];\n" +
+        "try { filtered = elements.filter(condition); } catch { }\n" +
+        "if (filtered.length == 0) {\n" +
+        "  if (elements.length == 0) { throw 'Failed to find element' }\n" +
+        "  else { element = elements[0]; }\n" +
+        "} else { element = filtered[0]; }\n";
 
     public static String PURE_CONDITION_LIST_TO_ACTION =
         "elements.filter(condition).forEach(element => %s);";
 
     public static String AGILE_LIST_TO_ACTION =
-        "filtered = []\n" +
+        "filtered = [];\n" +
         "try { filtered = elements.filter(condition); } catch { }\n" +
         "if (filtered.length == 0) { filtered = elements; }\n" +
         "filtered.filter(condition).forEach(element => %s);";

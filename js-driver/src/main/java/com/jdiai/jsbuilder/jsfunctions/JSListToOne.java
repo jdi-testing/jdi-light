@@ -7,8 +7,9 @@ public class JSListToOne {
 
     public static String LIST_TO_ONE =
         "if (elements.length === 0) { throw 'Failed to find element' }\n" +
-        "element = elements.map(e => {{one:e}})[0];\n" +
-        "if (!element) { throw 'Failed to find element' };\n";
+        "elements = elements.map(e => {{one:e}}).filter(e=>!!e);" +
+        "if (elements.length === 0) { throw 'Failed to find element' };\n" +
+        "element = elements[0];\n";
 
     public static String FILTER_LIST_TO_ONE =
         "if (elements.length === 0) { throw 'Failed to find element' }\n" +

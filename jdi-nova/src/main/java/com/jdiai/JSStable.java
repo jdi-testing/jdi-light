@@ -4,6 +4,7 @@ import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction;
 import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsbuilder.JSBuilder;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.tools.GetTextTypes;

@@ -34,9 +34,7 @@ public class ListEntitiesPOTest implements TestInit {
         homePage.loginForm.loginAs(Roman);
         homePage.searchIcon.click();
         homePage.searchField.input("jdi");
-        JS e = homePage.searchIcon;
-        e.setFilter(findConditions.isDisplayed).engine().multiSearch();
-        e.click();
+        homePage.searchIcon.click();
     }
 
     @Test

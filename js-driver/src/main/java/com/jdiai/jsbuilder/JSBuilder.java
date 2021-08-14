@@ -3,6 +3,7 @@ package com.jdiai.jsbuilder;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.jsbuilder.jsfunctions.BuilderFunctions;
 import com.jdiai.jsdriver.JDINovaBuilderException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -39,10 +40,10 @@ public class JSBuilder implements IJSBuilder {
     protected String condition = null;
     protected String conditionFunc = null;
     protected String filter = null;
-    protected IBuilderActions builderActions;
+    public IBuilderActions builderActions;
 
     public JSBuilder(Supplier<WebDriver> driver) {
-        this(driver, null);
+        this(driver, new BuilderActions());
     }
 
     public JSBuilder(Supplier<WebDriver> driver, IBuilderActions builderActions) {
@@ -50,6 +51,12 @@ public class JSBuilder implements IJSBuilder {
         this.builderActions = builderActions != null
             ? builderActions
             : new BuilderActions();
+        this.builderActions.setBuilder(() -> this);
+    }
+
+    public JSBuilder(Supplier<WebDriver> driver, BuilderFunctions functions) {
+        this.js = () -> (JavascriptExecutor) driver.get();
+        this.builderActions = new BuilderActions(functions);
         this.builderActions.setBuilder(() -> this);
     }
 
@@ -228,6 +235,7 @@ public class JSBuilder implements IJSBuilder {
     public IJSBuilder doAction(String collectResult) {
         return addJSCode(builderActions.doAction(collectResult));
     }
+
     public IJSBuilder doListAction(String collectResult) {
         return addJSCode(builderActions.doListAction(collectResult));
     }
@@ -272,11 +280,13 @@ public class JSBuilder implements IJSBuilder {
         }
         return collectResult;
     }
+
     private String beforeScript() {
         return isNotBlank(searchScript)
             ? searchScript + "\n"
             : "";
     }
+
     public String getQuery() {
         if (isEmpty(useFunctions)) {
             return getScript();
@@ -289,15 +299,18 @@ public class JSBuilder implements IJSBuilder {
         cleanup();
         throw new JDINovaBuilderException("Failed to execute js script for template locator. Please replace %s before usage");
     }
+
     public String getScript() {
         return beforeScript() + query;
     }
+
     public void cleanup() {
         if (isBlank(searchScript)) {
             useFunctions.clear();
         }
         query = "";
     }
+
     public void updateFromBuilder(IJSBuilder builder) {
         if (!isClass(builder.getClass(), JSBuilder.class)) {
             return;
@@ -309,6 +322,7 @@ public class JSBuilder implements IJSBuilder {
             }
         }
     }
+
     public JSBuilder copy() {
         JSBuilder result = new JSBuilder(null, builderActions);
         result.searchScript = searchScript;

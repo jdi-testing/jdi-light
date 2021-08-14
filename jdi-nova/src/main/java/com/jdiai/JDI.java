@@ -6,6 +6,7 @@ import com.jdiai.annotations.UI;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.jsbuilder.*;
+import com.jdiai.jsbuilder.jsfunctions.*;
 import com.jdiai.jswraper.JSBaseEngine;
 import com.jdiai.jswraper.JSEngine;
 import com.jdiai.jswraper.driver.DriverManager;
@@ -62,7 +63,31 @@ public class JDI {
 
     public static Function<List<By>, JS> initCoreFunc = initJSFunc;
 
-    public static Function<Supplier<WebDriver>, IJSBuilder> initBuilder = JSBuilder::new;
+    public static Function<Supplier<WebDriver>, IJSBuilder> initBuilder = driver -> {
+        BuilderFunctions bf = new BuilderFunctions().set(f -> {
+            f.oneToOne = JSOneToOne.ONE_TO_ONE;
+            f.oneToOneFilter = JSOneToOne.STRICT_ONE_TO_ONE;
+
+            f.oneToList = JSOneToList.ONE_TO_LIST;
+            f.oneToListFilter = JSOneToList.FILTER_ONE_TO_LIST;
+
+            f.listToOne = JSListToOne.LIST_TO_ONE;
+            f.listToOneFilter = JSListToOne.FILTER_LIST_TO_ONE;
+
+            f.listToList = JSListToList.ONE_LIST_TO_LIST;
+            f.listToListFilter = JSListToList.FILTER_ONE_LIST_TO_LIST;
+
+            f.result = JSResults.ONE_TO_RESULT;
+            f.listResult = JSResults.LIST_TO_RESULT;
+            f.action = JSResults.ONE_TO_ACTION;
+            f.listAction = JSResults.LIST_TO_ACTION;
+
+            f.conditionTemplate = JSResults.CONDITION;
+            f.listConditionResult = JSResults.PURE_CONDITION_LIST_TO_RESULT;
+            f.listConditionAction = JSResults.PURE_CONDITION_LIST_TO_ACTION;
+        });
+        return new JSBuilder(driver, bf);
+    };
 
     public static BiFunction<Supplier<WebDriver>, List<By>, JSEngine> initEngine =
         (driver, locators) -> new JSBaseEngine(driver, locators, initBuilder.apply(driver));

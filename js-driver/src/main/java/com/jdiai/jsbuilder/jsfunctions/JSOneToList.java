@@ -3,7 +3,9 @@ package com.jdiai.jsbuilder.jsfunctions;
 public class JSOneToList {
     public static String ONE_TO_LIST = "elements = Array.from({{list}}).filter(e=>!!e);\n";
 
-    public static String FILTER_ONE_TO_LIST = "elements = Array.from({{list}}).filter(e=>!!e).filter(filter);\n";
+    public static String FILTER_ONE_TO_LIST =
+        "try { elements = Array.from({{list}}).filter(e=>!!e).filter(filter); }\n" +
+        "catch { throw 'Failed to find element' }\n";
 
     public static String AGILE_ONE_TO_LIST =
         "elements = Array.from({{list}}).filter(e=>!!e);\n" +

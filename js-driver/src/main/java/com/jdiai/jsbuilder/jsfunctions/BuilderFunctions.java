@@ -16,7 +16,7 @@ import static java.util.regex.Pattern.compile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class BuilderFunctions extends DataClass<BuilderFunctions> {
-    public final Supplier<IJSBuilder> builder;
+    public Supplier<IJSBuilder> builder;
     public String oneToOne;
     public String oneToOneFilter;
     public String oneToList;
@@ -34,8 +34,7 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
     public String listConditionAction;
     public boolean lastIsElement;
 
-    public BuilderFunctions(Supplier<IJSBuilder> builder) {
-        this.builder = builder;
+    public BuilderFunctions() {
         this.oneToOne = JSOneToOne.PURE_ONE_TO_ONE;
         this.oneToOneFilter = JSOneToOne.PURE_STRICT_ONE_TO_ONE;
         this.oneToList = JSOneToList.ONE_TO_LIST;
@@ -55,7 +54,11 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
 
     public String oneToOne(String ctx, By locator) {
         lastIsElement = true;
-        return getScript(builder.get().hasFilter() ? oneToOneFilter : oneToOne, ctx, locator);
+        return getScript(oneToOne, ctx, locator);
+    }
+    public String oneToOneFilter(String ctx, By locator) {
+        lastIsElement = true;
+        return getScript(oneToOneFilter, ctx, locator);
     }
 
     public String oneToList(String ctx, By locator) {
@@ -63,12 +66,23 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
             return oneToOne(ctx, locator);
         }
         lastIsElement = false;
-        return getScript(builder.get().hasFilter() ? oneToListFilter : oneToList, ctx, locator);
+        return getScript(oneToList, ctx, locator);
+    }
+    public String oneToListFilter(String ctx, By locator) {
+        if (isIFrame(locator)) {
+            return oneToOneFilter(ctx, locator);
+        }
+        lastIsElement = false;
+        return getScript(oneToListFilter, ctx, locator);
     }
 
     public String listToOne(By locator) {
         lastIsElement = true;
-        return getScript(builder.get().hasFilter() ? listToOneFilter : listToOne, null, locator);
+        return getScript(listToOne, null, locator);
+    }
+    public String listToOneFilter(By locator) {
+        lastIsElement = true;
+        return getScript(listToOneFilter, null, locator);
     }
 
     public String listToList(By locator) {
@@ -76,7 +90,14 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
             return listToOne(locator);
         }
         lastIsElement = false;
-        return getScript(builder.get().hasFilter() ? listToListFilter : listToList, null, locator);
+        return getScript(listToList, null, locator);
+    }
+    public String listToListFilter(By locator) {
+        if (isIFrame(locator)) {
+            return listToOneFilter(locator);
+        }
+        lastIsElement = false;
+        return getScript(listToListFilter, null, locator);
     }
 
     public String result(String collector) {

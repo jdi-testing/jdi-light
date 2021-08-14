@@ -27,7 +27,8 @@ public class JSListToList {
         "elements = Array.from(elements.map(e=>{{one:e}})).filter(e=>!!e);\n";
 
     public static String FILTER_ONE_LIST_TO_LIST =
-        "elements = Array.from(elements.map(e=>{{one:e}})).filter(e=>!!e).filter(filter);\n";
+        "try { elements = Array.from(elements.map(e=>{{one:e}})).filter(e=>!!e).filter(filter); }\n" +
+        "catch { throw 'Failed to find element' }";
 
     public static String AGILE_LIST_TO_LIST =
         "list = [];\n" +

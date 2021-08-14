@@ -8,8 +8,16 @@ import java.util.function.Supplier;
 public class BuilderActions implements IBuilderActions {
     protected BuilderFunctions functions;
 
+    public BuilderActions() { }
+    public BuilderActions(BuilderFunctions functions) {
+        this.functions = functions;
+    }
+
     public void setBuilder(Supplier<IJSBuilder> builder) {
-        functions = new BuilderFunctions(builder);
+        if (functions != null) {
+            functions.builder = builder;
+        }
+        functions = new BuilderFunctions().set(f -> f.builder = builder);
     }
 
     public String oneToOne(String ctx, By locator) {
