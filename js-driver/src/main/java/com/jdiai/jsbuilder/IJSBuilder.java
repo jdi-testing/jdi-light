@@ -10,14 +10,13 @@ public interface IJSBuilder {
     IJSBuilder setSearchScript(String code);
 
     IJSBuilder oneToOne(String ctx, By locator);
+    IJSBuilder oneToOneFilter(String ctx, By locator);
     IJSBuilder listToOne(By locator);
+    IJSBuilder listToOneFilter(By locator);
     IJSBuilder oneToList(String ctx, By locator);
+    IJSBuilder oneToListFilter(String ctx, By locator);
     IJSBuilder listToList(By locator);
-
-    String condition();
-    boolean hasFilter();
-    boolean hasConditions();
-    void removeConditions();
+    IJSBuilder listToListFilter(By locator);
 
     IJSBuilder doAction(String collectResult);
     IJSBuilder doListAction(String collectResult);
@@ -37,9 +36,7 @@ public interface IJSBuilder {
     IJSBuilder copy();
     IJSBuilder updateActions(IBuilderActions builderActions);
     IJSBuilder setElementName(String elementName);
-    IJSBuilder setCondition(String condition, String conditionFunc);
-    IJSBuilder setFilter(String filter);
     JSBuilder setProcessResultFunc(Function<String, String> processResultFunc);
     String getElementName();
-    IBuilderActions actions();
+    String preResult(String collector);
 }

@@ -3,6 +3,7 @@ package com.jdiai;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import static com.jdiai.JDI.*;
 import static com.jdiai.JDI.domain;
 import static com.jdiai.jsbuilder.QueryLogger.ALL;
 import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
@@ -15,7 +16,7 @@ public interface TestInit {
     default void setUp() {
         killDrivers();
         DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
-        LOG_QUERY = ALL;
+        logJSRequests(ALL);
         domain = "https://jdi-testing.github.io/jdi-light";
     }
 

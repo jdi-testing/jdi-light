@@ -166,21 +166,11 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     String textType();
     JS setParent(Object parent);
 
-    default JS removeConditions() {
-        engine().jsDriver().builder().removeConditions();
+    default JS setFilter(String filter) {
+        engine().jsDriver().setFilter(filter);
         return this;
     }
 
-    default JS setCondition(String name, String condition) {
-        if (condition != null) {
-            engine().jsDriver().builder().setCondition(name, condition);
-        }
-        return this;
-    }
-    default JS setFilter(String filter) {
-        engine().jsDriver().builder().setFilter(filter);
-        return this;
-    }
     String getFullName();
 
     default JS setLocators(List<By> locators) {

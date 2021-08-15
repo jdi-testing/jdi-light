@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.jdiai.jsbuilder.QueryLogger.logger;
+import static com.jdiai.JDI.logger;
 import static com.jdiai.visual.Directions.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -283,7 +283,7 @@ public abstract class Conditions {
             ? (List<T>) el.core().values()
             : el.core().getEntityList((Class<T>) entities.get(0).getClass());
         if (checkSize && list.size() != entities.size()) {
-            logger.error("Expected size: %s, but found: %s", entities.size(), list.size());
+            logger().error("Expected size: %s, but found: %s", entities.size(), list.size());
             return false;
         }
         List<T> listOfFails = new ArrayList<>();
@@ -294,7 +294,7 @@ public abstract class Conditions {
             }
         }
         if (isNotEmpty(listOfFails)) {
-            logger.error("Failed to find following entities: \n%s\nActual values:\n%s",
+            logger().error("Failed to find following entities: \n%s\nActual values:\n%s",
                 print(listOfFails, Object::toString, "\n"),
                 print(list, Object::toString, "\n")
             );

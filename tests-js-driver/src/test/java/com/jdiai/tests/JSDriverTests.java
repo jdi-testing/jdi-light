@@ -44,35 +44,36 @@ public class JSDriverTests implements TestInit {
 
         assertEquals(getStyle(js("#user-name"), "visibility"), "visible");
     }
+    
     @Test
     public void chainTest() {
-        assertEquals(js("#user-icon").getOneChain("element.tagName").asString(), "IMG");
-        assertEquals(js("#user-name").getOneChain("element.innerText").asString(), "Roman Iovlev");
-        assertEquals(js("#user-name").getOneChain("element.textContent").asString(), "Roman Iovlev");
-        assertEquals(js("#user-name").getOneChain("element.innerHTML").asString(), "Roman Iovlev");
+        assertEquals(js("#user-icon").getOne("element.tagName").asString(), "IMG");
+        assertEquals(js("#user-name").getOne("element.innerText").asString(), "Roman Iovlev");
+        assertEquals(js("#user-name").getOne("element.textContent").asString(), "Roman Iovlev");
+        assertEquals(js("#user-name").getOne("element.innerHTML").asString(), "Roman Iovlev");
         assertEquals(getStyle(js("#user-name"), "visibility"), "hidden");
 
 
-        js("#user-name").getOneChain("element.click()");
-        js("#name").getOneChain("element.value='Roman'");
-        js("#password").getOneChain("element.value='Jdi1234'");
-        js("#login-button").getOneChain("element.click()");
+        js("#user-name").getOne("element.click()");
+        js("#name").getOne("element.value='Roman'");
+        js("#password").getOne("element.value='Jdi1234'");
+        js("#login-button").getOne("element.click()");
 
         assertEquals(getStyle(js("#user-name"), "visibility"), "visible");
     }
     @Test
     public void multiTest() {
-        assertEquals(js("#user-icon").getOneMultiSearch("element.tagName").asString(), "IMG");
-        assertEquals(js("#user-name").getOneMultiSearch("element.innerText").asString(), "Roman Iovlev");
-        assertEquals(js("#user-name").getOneMultiSearch("element.textContent").asString(), "Roman Iovlev");
-        assertEquals(js("#user-name").getOneMultiSearch("element.innerHTML").asString(), "Roman Iovlev");
+        assertEquals(jsMulti("#user-icon").getOne("element.tagName").asString(), "IMG");
+        assertEquals(jsMulti("#user-name").getOne("element.innerText").asString(), "Roman Iovlev");
+        assertEquals(jsMulti("#user-name").getOne("element.textContent").asString(), "Roman Iovlev");
+        assertEquals(jsMulti("#user-name").getOne("element.innerHTML").asString(), "Roman Iovlev");
         assertEquals(getStyle(js("#user-name"), "visibility"), "hidden");
 
 
-        js("#user-name").getOneMultiSearch("element.click()");
-        js("#name").getOneMultiSearch("element.value='Roman'");
-        js("#password").getOneMultiSearch("element.value='Jdi1234'");
-        js("#login-button").getOneMultiSearch("element.click()");
+        jsMulti("#user-name").getOne("element.click()");
+        jsMulti("#name").getOne("element.value='Roman'");
+        jsMulti("#password").getOne("element.value='Jdi1234'");
+        jsMulti("#login-button").getOne("element.click()");
 
         assertEquals(getStyle(js("#user-name"), "visibility"), "visible");
     }
@@ -93,31 +94,31 @@ public class JSDriverTests implements TestInit {
     }
     @Test
     public void chainFewLocatorsTest() {
-        assertEquals(js(withParent("#user-icon")).getOneChain("element.tagName").asString(), "IMG");
-        assertEquals(js(withParent("#user-name")).getOneChain("element.innerText").asString(), "Roman Iovlev");
-        assertEquals(js(withParent("#user-name")).getOneChain("element.textContent").asString(), "Roman Iovlev");
-        assertEquals(js(withParent("#user-name")).getOneChain("element.innerHTML").asString(), "Roman Iovlev");
+        assertEquals(js(withParent("#user-icon")).getOne("element.tagName").asString(), "IMG");
+        assertEquals(js(withParent("#user-name")).getOne("element.innerText").asString(), "Roman Iovlev");
+        assertEquals(js(withParent("#user-name")).getOne("element.textContent").asString(), "Roman Iovlev");
+        assertEquals(js(withParent("#user-name")).getOne("element.innerHTML").asString(), "Roman Iovlev");
         assertEquals(getStyle(js("#user-name"), "visibility"), "hidden");
 
-        js(withParent("#user-name")).getOneChain("element.click()");
-        js(inForm("#name")).getOneChain("element.value='Roman'");
-        js(inForm("#password")).getOneChain("element.value='Jdi1234'");
-        js(inForm("#login-button")).getOneChain("element.click()");
+        js(withParent("#user-name")).getOne("element.click()");
+        js(inForm("#name")).getOne("element.value='Roman'");
+        js(inForm("#password")).getOne("element.value='Jdi1234'");
+        js(inForm("#login-button")).getOne("element.click()");
 
         assertEquals(getStyle(js(withParent("#user-name")), "visibility"), "visible");
     }
     @Test
     public void multiFewLocatorsTest() {
-        assertEquals(js(withParent("#user-icon")).getOneMultiSearch("element.tagName").asString(), "IMG");
-        assertEquals(js(withParent("#user-name")).getOneMultiSearch("element.innerText").asString(), "Roman Iovlev");
-        assertEquals(js(withParent("#user-name")).getOneMultiSearch("element.textContent").asString(), "Roman Iovlev");
-        assertEquals(js(withParent("#user-name")).getOneMultiSearch("element.innerHTML").asString(), "Roman Iovlev");
+        assertEquals(jsMulti(withParent("#user-icon")).getOne("element.tagName").asString(), "IMG");
+        assertEquals(jsMulti(withParent("#user-name")).getOne("element.innerText").asString(), "Roman Iovlev");
+        assertEquals(jsMulti(withParent("#user-name")).getOne("element.textContent").asString(), "Roman Iovlev");
+        assertEquals(jsMulti(withParent("#user-name")).getOne("element.innerHTML").asString(), "Roman Iovlev");
         assertEquals(getStyle(js("#user-name"), "visibility"), "hidden");
 
-        js(withParent("#user-name")).getOneMultiSearch("element.click()");
-        js(inForm("#name")).getOneMultiSearch("element.value='Roman'");
-        js(inForm("#password")).getOneMultiSearch("element.value='Jdi1234'");
-        js(inForm("#login-button")).getOneMultiSearch("element.click()");
+        jsMulti(withParent("#user-name")).getOne("element.click()");
+        jsMulti(inForm("#name")).getOne("element.value='Roman'");
+        jsMulti(inForm("#password")).getOne("element.value='Jdi1234'");
+        jsMulti(inForm("#login-button")).getOne("element.click()");
 
         assertEquals(getStyle(js(withParent("#user-name")), "visibility"), "visible");
     }

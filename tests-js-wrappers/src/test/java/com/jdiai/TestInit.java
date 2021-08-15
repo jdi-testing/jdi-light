@@ -20,7 +20,7 @@ public interface TestInit {
     default void setUp() {
         killDrivers();
         DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
-        LOG_QUERY = ALL;
+        LOG_QUERY.set(ALL);
     }
 
     @AfterSuite(alwaysRun = true)

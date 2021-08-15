@@ -20,7 +20,7 @@ public class JSWrapper {
     }
     public static JSBaseEngine $wf(String locator) {
         JSBaseEngine element = new JSBaseEngine(driver(), NAME_TO_LOCATOR.apply(locator));
-        element.jsDriver().builder().setFilter(displayedFilter);
+        element.jsDriver().setFilter(displayedFilter);
         return element;
     }
 
@@ -30,7 +30,7 @@ public class JSWrapper {
 
     public static JSBaseEngine $wf(String... locators) {
         JSBaseEngine element = new JSBaseEngine(driver(), locatorsToBy(locators));
-        element.jsDriver().builder().setFilter(displayedFilter);
+        element.jsDriver().setFilter(displayedFilter);
         return element;
     }
     public static <T> JSEntity<T> $w(Class<T> cl, String locator) {
@@ -38,7 +38,7 @@ public class JSWrapper {
     }
     public static <T> JSEntity<T> $wf(Class<T> cl, String locators) {
         JSEntity<T> entity = new JSEntity<T>(driver(), locatorsToBy(locators)).initClass(cl);
-        entity.jsDriver().builder().setFilter(displayedFilter);
+        entity.jsDriver().setFilter(displayedFilter);
         return entity;
     }
 
@@ -47,7 +47,7 @@ public class JSWrapper {
     }
     public static <T> JSEntity<T> $wf(Class<T> cl, String... locators) {
         JSEntity<T> entity = new JSEntity<T>(driver(), locatorsToBy(locators)).initClass(cl);
-        entity.jsDriver().builder().setFilter(displayedFilter);
+        entity.jsDriver().setFilter(displayedFilter);
         return entity;
     }
 

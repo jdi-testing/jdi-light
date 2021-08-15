@@ -19,7 +19,7 @@ public class JDINovaTests {
     public User DefaultUser = new User();
     @BeforeMethod
     public void before() {
-        LOG_QUERY = ALL;
+        logJSRequests(ALL);
     }
 
     @Test(enabled = false)

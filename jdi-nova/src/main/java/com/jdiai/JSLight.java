@@ -157,12 +157,12 @@ public class JSLight implements JS {
 
     protected  <T> T useCondition(Supplier<T> func) {
         T result;
-        if (engine().jsDriver().builder().hasConditions()) {
+        if (engine().jsDriver().hasFilter()) {
             result = func.get();
         } else {
-            setCondition("displayed", findConditions.isDisplayed);
+            setFilter(findConditions.isDisplayed);
             result = func.get();
-            removeConditions();
+            setFilter(null);
         }
         return result;
     }

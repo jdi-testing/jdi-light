@@ -23,17 +23,31 @@ public class BuilderActions implements IBuilderActions {
     public String oneToOne(String ctx, By locator) {
         return functions.oneToOne(ctx, locator);
     }
+    public String oneToOneFilter(String ctx, By locator) {
+        return functions.oneToOneFilter(ctx, locator);
+    }
 
     public String oneToList(String ctx, By locator) {
         return functions.oneToList(ctx, locator);
+    }
+
+    public String oneToListFilter(String ctx, By locator) {
+        return functions.oneToListFilter(ctx, locator);
     }
 
     public String listToOne(By locator) {
         return functions.listToOne(locator);
     }
 
+    public String listToOneFilter(By locator) {
+        return functions.listToOneFilter(locator);
+    }
+
     public String listToList(By locator) {
         return functions.listToList(locator);
+    }
+    public String listToListFilter(By locator) {
+        return functions.listToListFilter(locator);
     }
 
     public String doAction(String collector) {
@@ -44,21 +58,15 @@ public class BuilderActions implements IBuilderActions {
         return functions.listAction(collector);
     }
 
+    public String preResult(String collector) {
+        return functions.addStyles(collector);
+    }
+
     public String getResult(String collector) {
         return functions.result(collector);
     }
 
     public String getResultList(String collector) {
         return functions.listResult(collector);
-    }
-
-    public String conditionTemplate() {
-        return functions.conditionTemplate;
-    }
-    public String conditionFunc(String func) {
-        return "condition = function(element) {\n" + functions.addStyles(func) + returnFunc(func) + "\n}\n";
-    }
-    protected String returnFunc(String func) {
-        return func.contains("return ") ? func : "return " + func;
     }
 }

@@ -26,13 +26,9 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
     public String listToList;
     public String listToListFilter;
     public String result;
-    public String conditionTemplate;
     public String listResult;
-    public String listConditionResult;
     public String action;
     public String listAction;
-    public String listConditionAction;
-    public boolean lastIsElement;
 
     public BuilderFunctions() {
         this.oneToOne = JSOneToOne.PURE_ONE_TO_ONE;
@@ -44,20 +40,15 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
         this.listToList = JSListToList.ONE_LIST_TO_LIST;
         this.listToListFilter = JSListToList.FILTER_ONE_LIST_TO_LIST;
         this.result = JSResults.ONE_TO_RESULT;
-        this.conditionTemplate = JSResults.CONDITION;
         this.listResult = JSResults.LIST_TO_RESULT;
-        this.listConditionResult = JSResults.PURE_CONDITION_LIST_TO_RESULT;
         this.action = JSResults.ONE_TO_ACTION;
         this.listAction = JSResults.LIST_TO_ACTION;
-        this.listConditionAction = JSResults.PURE_CONDITION_LIST_TO_ACTION;
     }
 
     public String oneToOne(String ctx, By locator) {
-        lastIsElement = true;
         return getScript(oneToOne, ctx, locator);
     }
     public String oneToOneFilter(String ctx, By locator) {
-        lastIsElement = true;
         return getScript(oneToOneFilter, ctx, locator);
     }
 
@@ -65,23 +56,19 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
         if (isIFrame(locator)) {
             return oneToOne(ctx, locator);
         }
-        lastIsElement = false;
         return getScript(oneToList, ctx, locator);
     }
     public String oneToListFilter(String ctx, By locator) {
         if (isIFrame(locator)) {
             return oneToOneFilter(ctx, locator);
         }
-        lastIsElement = false;
         return getScript(oneToListFilter, ctx, locator);
     }
 
     public String listToOne(By locator) {
-        lastIsElement = true;
         return getScript(listToOne, null, locator);
     }
     public String listToOneFilter(By locator) {
-        lastIsElement = true;
         return getScript(listToOneFilter, null, locator);
     }
 
@@ -89,45 +76,28 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
         if (isIFrame(locator)) {
             return listToOne(locator);
         }
-        lastIsElement = false;
         return getScript(listToList, null, locator);
     }
     public String listToListFilter(By locator) {
         if (isIFrame(locator)) {
             return listToOneFilter(locator);
         }
-        lastIsElement = false;
         return getScript(listToListFilter, null, locator);
     }
 
     public String result(String collector) {
-        String prefix = addStyles(collector);
-        if (builder.get().hasConditions()) {
-            prefix += builder.get().condition();
-        }
-        return prefix + formatCollector(collector, result);
+        return addStyles(collector) + formatCollector(collector, result);
     }
 
     public String listResult(String collector) {
-        String prefix = addStyles(collector);
-        if (builder.get().hasConditions()) {
-            return prefix + formatCollector(collector, listConditionResult);
-        }
-        return prefix + formatCollector(collector, listResult);
+        return addStyles(collector) + formatCollector(collector, listResult);
     }
 
     public String action(String collector) {
-        String prefix = addStyles(collector);
-        if (builder.get().hasConditions()) {
-            prefix += builder.get().condition();
-        }
-        return prefix + formatCollector(collector, action);
+        return addStyles(collector) + formatCollector(collector, action);
     }
 
     public String listAction(String collector) {
-        if (builder.get().hasConditions()) {
-            return addStyles(collector) + formatCollector(collector, listConditionAction);
-        }
         return addStyles(collector) + formatCollector(collector, listAction);
     }
 
@@ -138,10 +108,6 @@ public class BuilderFunctions extends DataClass<BuilderFunctions> {
     }
 
     private String formatCollector(String collector, String result) {
-        return collector.contains("return") ? collector : format(result, collector);
-    }
-
-    protected String processResult(String collector, String result) {
         return collector.contains("return") ? collector : format(result, collector);
     }
 

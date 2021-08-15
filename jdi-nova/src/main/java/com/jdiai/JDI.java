@@ -33,8 +33,7 @@ import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
-import static com.jdiai.jsbuilder.QueryLogger.LOGGER_NAME;
-import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
+import static com.jdiai.jsbuilder.QueryLogger.*;
 import static com.jdiai.jsdriver.JDINovaException.assertContains;
 import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static com.jdiai.jswraper.JSWrappersUtils.*;
@@ -53,7 +52,12 @@ public class JDI {
 
     public static String domain;
 
-    public static ILogger logger;
+    public static ILogger logger() {
+        return logger;
+    }
+    public static void setLogger(ILogger newLogger) {
+        logger = newLogger;
+    }
 
     public static int timeout = 10;
 
@@ -81,10 +85,6 @@ public class JDI {
             f.listResult = JSResults.LIST_TO_RESULT;
             f.action = JSResults.ONE_TO_ACTION;
             f.listAction = JSResults.LIST_TO_ACTION;
-
-            f.conditionTemplate = JSResults.CONDITION;
-            f.listConditionResult = JSResults.PURE_CONDITION_LIST_TO_RESULT;
-            f.listConditionAction = JSResults.PURE_CONDITION_LIST_TO_ACTION;
         });
         return new JSBuilder(driver, bf);
     };
@@ -136,8 +136,22 @@ public class JDI {
     };
     public static String SUBMIT_LOCATOR = "[type=submit]";
 
+    private static Safe<Integer> savedLogLevel = new Safe<>(() -> null);
+
+    public static void loggerOff() {
+        savedLogLevel.set(LOG_QUERY.get());
+        logJSRequests(OFF);
+    }
+
     public static void logJSRequests(int logQueriesLevel) {
-        LOG_QUERY = logQueriesLevel;
+        LOG_QUERY.set(logQueriesLevel);
+    }
+
+    public static void loggerOn() {
+        Integer logLevel = savedLogLevel.get();
+        if (logLevel != null) {
+            logJSRequests(logLevel);
+        }
     }
 
     public static WebDriver driver() {
@@ -200,16 +214,15 @@ public class JDI {
         }
         switch (LOGGER_TYPE) {
             case CONSOLE:
-                logger = new ConsoleLogger(getLoggerName(CONSOLE));
+                setLogger(new ConsoleLogger(getLoggerName(CONSOLE)));
                 break;
             case SLF4J:
-                logger = new Slf4JLogger(LOGGER_NAME);
+                setLogger(new Slf4JLogger(LOGGER_NAME));
                 break;
             default:
-                logger = new ConsoleLogger(getLoggerName(CONSOLE));
+                setLogger(new ConsoleLogger(getLoggerName(CONSOLE)));
                 break;
         }
-        QueryLogger.logger = logger;
         initialized = true;
     }
 
@@ -282,7 +295,7 @@ public class JDI {
         String fullUrl = isNotEmpty(domain) && !url.contains("//")
             ? domain + url
             : url;
-        logger.info("Open page '" + fullUrl + "'");
+        logger().info("Open page '" + fullUrl + "'");
         driver().get(fullUrl);
         getWindows();
     }

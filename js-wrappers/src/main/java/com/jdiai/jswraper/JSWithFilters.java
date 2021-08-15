@@ -12,7 +12,7 @@ import static com.jdiai.jswraper.JSWrapper.displayedFilter;
 public class JSWithFilters extends JSBaseEngine {
     public JSWithFilters(Supplier<WebDriver> driver, List<By> locators) {
         super(driver, locators);
-        this.driver.builder().setFilter(displayedFilter);
+        this.driver.setFilter(displayedFilter);
     }
 
     public JSWithFilters(WebDriver driver, List<By> locators) {

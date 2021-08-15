@@ -47,7 +47,6 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         if (labelLocator == null) {
             throw new JDINovaException("Failed to get labelElement");
         }
-        core().engine().multiSearch();
         return core().find(labelLocator).setName(getName() + " " + labelField.getName());
     }
     private void haveLabelElement(String value) {

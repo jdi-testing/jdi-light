@@ -6,8 +6,7 @@ import com.jdiai.interfaces.HasName;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.jdiai.JDI.IGNORE_FAILURE;
-import static com.jdiai.JDI.timeout;
+import static com.jdiai.JDI.*;
 import static com.jdiai.JDIStatistic.shouldValidations;
 import static com.jdiai.jsbuilder.JSBuilder.lastScriptExecution;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
@@ -22,8 +21,14 @@ public class ShouldUtils {
         }
         shouldValidations ++;
         Timer timer = new Timer(timeout * 1000L);
-        logger.info(getCombinedAssertionName(core, conditions));
-        boolean foundAll = checkConditions(core, conditions, timer);
+        logger().info(getCombinedAssertionName(core, conditions));
+        boolean foundAll;
+        try {
+             foundAll = checkConditions(core, conditions, timer);
+        } finally {
+            loggerOn();
+        }
+        loggerOn();
         if (!foundAll) {
             checkOutOfTime(core, timer, conditions);
         }
@@ -46,8 +51,6 @@ public class ShouldUtils {
             while (!foundAll && timer.isRunning()) {
                 for (Condition condition : conditions) {
                     checkOutOfTime(core, timer, conditions);
-                    String message = "Assert that " + condition.getName(core);
-                    logger.debug(message);
                     foundAll = condition.apply(core);
                     if (!foundAll) {
                         break;
@@ -56,6 +59,7 @@ public class ShouldUtils {
             }
             return foundAll;
         } catch (Exception ex) {
+            loggerOff();
             boolean ignoreFail = IGNORE_FAILURE.apply(core, ex);
             if (timer.isRunning() && ignoreFail) {
                 return checkConditions(core, conditions, timer);

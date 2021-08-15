@@ -17,11 +17,9 @@ import java.util.function.Supplier;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
-import static com.jdiai.jsbuilder.QueryLogger.logger;
+import static com.jdiai.jsbuilder.QueryLogger.*;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_LIST_SCRIPT_EXECUTE;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_SCRIPT_EXECUTE;
-import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -37,9 +35,6 @@ public class JSBuilder implements IJSBuilder {
     protected String searchScript = "";
     protected Supplier<JavascriptExecutor> js;
     protected MapArray<String, String> useFunctions = new MapArray<>();
-    protected String condition = null;
-    protected String conditionFunc = null;
-    protected String filter = null;
     public IBuilderActions builderActions;
 
     public JSBuilder(Supplier<WebDriver> driver) {
@@ -60,28 +55,6 @@ public class JSBuilder implements IJSBuilder {
         this.builderActions.setBuilder(() -> this);
     }
 
-    public JSBuilder setCondition(String condition, String conditionFunc) {
-        String template = actions().conditionTemplate();
-        this.condition = template.contains("%s")
-            ? format(template, condition)
-            : template;
-        this.conditionFunc = conditionFunc;
-        return this;
-    }
-
-    public IJSBuilder setFilter(String filter) {
-        if (isBlank(filter)) {
-            this.filter = null;
-            return this;
-        }
-        String filterBody = actions().getResult(filter);
-        if (filterBody.endsWith("\n")) {
-            filterBody = filterBody.substring(0, filterBody.length() - 1);
-        }
-        filterBody = "  " + filterBody.replace("\n", "\n  ");
-        this.filter = "filter = function (element) {\n" + filterBody + "\n}\n";
-        return this;
-    }
     public JSBuilder setProcessResultFunc(Function<String, String> processResultFunc) {
         this.processResultFunc = processResultFunc;
         return this;
@@ -98,10 +71,6 @@ public class JSBuilder implements IJSBuilder {
         return elementName;
     }
 
-    public IBuilderActions actions() {
-        return builderActions;
-    }
-
     public IJSBuilder updateActions(IBuilderActions builderActions) {
         this.builderActions = builderActions;
         this.builderActions.setBuilder(() -> this);
@@ -111,30 +80,6 @@ public class JSBuilder implements IJSBuilder {
         useFunctions.update(name, function);
         return this;
     }
-    public String condition() {
-        return condition != null ? condition : "";
-    }
-
-    public void removeConditions() {
-        condition = null;
-        conditionFunc  = null;
-    }
-
-    public boolean hasFilter() {
-        if (filter != null) {
-            registerFunction("filter", filter);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean hasConditions() {
-        if (condition != null) {
-            registerFunction("condition", actions().conditionFunc(conditionFunc));
-            return true;
-        }
-        return false;
-    }
 
     public IJSBuilder logQuery(int logLevel) {
         this.logQuery = logLevel;
@@ -142,15 +87,15 @@ public class JSBuilder implements IJSBuilder {
     }
 
     private int shouldLogQuery() {
-        return logQuery != null ? logQuery : LOG_QUERY;
+        return logQuery != null ? logQuery : LOG_QUERY.get();
     }
 
     public boolean logScript() {
-        return shouldLogQuery() > 0;
+        return shouldLogQuery() == ALL;
     }
 
     public boolean logResult() {
-        return shouldLogQuery() == 2;
+        return shouldLogQuery() > OFF;
     }
 
     public static BiFunction<Object, String, Object> EXECUTE_SCRIPT = DEFAULT_SCRIPT_EXECUTE;
@@ -219,17 +164,29 @@ public class JSBuilder implements IJSBuilder {
     public IJSBuilder oneToOne(String ctx, By locator) {
         return addJSCode(builderActions.oneToOne(ctx, locator));
     }
+    public IJSBuilder oneToOneFilter(String ctx, By locator) {
+        return addJSCode(builderActions.oneToOneFilter(ctx, locator));
+    }
 
     public IJSBuilder listToOne(By locator) {
         return addJSCode(builderActions.listToOne(locator));
+    }
+    public IJSBuilder listToOneFilter(By locator) {
+        return addJSCode(builderActions.listToOneFilter(locator));
     }
 
     public IJSBuilder oneToList(String ctx, By locator) {
         return addJSCode(builderActions.oneToList(ctx, locator));
     }
+    public IJSBuilder oneToListFilter(String ctx, By locator) {
+        return addJSCode(builderActions.oneToListFilter(ctx, locator));
+    }
 
     public IJSBuilder listToList(By locator) {
         return addJSCode(builderActions.listToList(locator));
+    }
+    public IJSBuilder listToListFilter(By locator) {
+        return addJSCode(builderActions.listToListFilter(locator));
     }
 
     public IJSBuilder doAction(String collectResult) {
@@ -311,6 +268,10 @@ public class JSBuilder implements IJSBuilder {
         query = "";
     }
 
+    public String preResult(String collector) {
+        return builderActions.preResult(collector);
+    }
+
     public void updateFromBuilder(IJSBuilder builder) {
         if (!isClass(builder.getClass(), JSBuilder.class)) {
             return;
@@ -328,8 +289,6 @@ public class JSBuilder implements IJSBuilder {
         result.searchScript = searchScript;
         result.js = js;
         result.useFunctions = useFunctions;
-        result.condition = condition;
-        result.filter = filter;
         result.logQuery = logQuery;
         return result;
     }
