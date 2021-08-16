@@ -20,7 +20,7 @@ public class SliderTests extends TestsInit {
     }
 
     @Test
-    public void continuousSliderTest(){
+    public void continuousSliderTest() {
         disabledContinuousSlider.is().disabled();
         disabledContinuousSlider.is().orientation("horizontal");
         disabledContinuousSlider.is().value(30);
@@ -39,7 +39,7 @@ public class SliderTests extends TestsInit {
     }
 
     @Test
-    public void discreteSlideTest(){
+    public void discreteSlideTest() {
         disabledDiscreteSlider.is().disabled();
         disabledDiscreteSlider.is().orientation("horizontal");
         disabledDiscreteSlider.is().value(30);
@@ -58,7 +58,7 @@ public class SliderTests extends TestsInit {
     }
 
     @Test
-    public void sliderWithRestrictionsTest(){
+    public void sliderWithRestrictionsTest() {
         restrictedDiscreteSlider.is().enabled();
         restrictedDiscreteSlider.is().orientation("horizontal");
         restrictedDiscreteSlider.is().value(20);
@@ -73,7 +73,7 @@ public class SliderTests extends TestsInit {
     }
 
     @Test
-    public void labelSliderTest(){
+    public void labelSliderTest() {
         labelSlider.is().enabled();
         labelSlider.is().orientation("horizontal");
         labelSlider.is().value(80);
@@ -88,7 +88,7 @@ public class SliderTests extends TestsInit {
     }
 
     @Test
-    public void rangeSliderTest(){
+    public void rangeSliderTest() {
         rangeSlider.is().enabled();
         rangeSlider.is().orientation("horizontal");
         checkRangeSlider(20, 37);
@@ -107,7 +107,7 @@ public class SliderTests extends TestsInit {
     }
 
     @Test
-    public void inputSliderTest(){
+    public void inputSliderTest() {
         inputSlider.is().enabled();
         inputSlider.is().orientation("horizontal");
         inputSlider.is().value(30);
@@ -126,7 +126,7 @@ public class SliderTests extends TestsInit {
     }
 
     @Test
-    public void verticalSliderTest(){
+    public void verticalSliderTest() {
         verticalSlider.is().enabled();
         verticalSlider.is().orientation("vertical");
         verticalSlider.is().value(30);
@@ -140,7 +140,7 @@ public class SliderTests extends TestsInit {
         verticalSlider.is().value(80);
     }
 
-    private void checkRangeSlider(int left, int right){
+    private void checkRangeSlider(int left, int right) {
         rangeSlider.is()
                 .value(1, left)
                 .value(2, right);
