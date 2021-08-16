@@ -17,13 +17,13 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
     return this;
   }
 
-  @JDIAction("Assert that '{name}' volume {0}")
+  @JDIAction("Assert that '{name}' value is {0}")
   public SliderAssert value(Matcher<Integer> value) {
     jdiAssert(element().value(), value);
     return this;
   }
 
-  @JDIAction("Assert that orientation is '{name}'")
+  @JDIAction("Assert that orientation is '{0}'")
   public SliderAssert orientation(String orientation) {
     jdiAssert(element().orientation(), Matchers.is(orientation));
     return this;
@@ -32,7 +32,6 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
   public SliderAssert value(int value) {
     return value(Matchers.is(value));
   }
-
 }
 
 

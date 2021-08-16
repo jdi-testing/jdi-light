@@ -10,13 +10,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> {
 
-  @JDIAction("Assert that '{name}' volume {0}")
+  @JDIAction("Assert that '{name}' value {0}")
   public SliderRangeAssert value(Matcher<Integer> value, int index) {
     jdiAssert(element().value(index), value);
     return this;
   }
 
-  @JDIAction("Assert that orientation is '{name}'")
+  @JDIAction("Assert that orientation is '{0}'")
   public SliderRangeAssert orientation(String orientation) {
     jdiAssert(element().orientation(), Matchers.is(orientation));
     return this;
@@ -25,8 +25,6 @@ public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> 
   public SliderRangeAssert value(int index, int value) {
     return value(Matchers.is(value), index);
   }
-
-
 }
 
 
