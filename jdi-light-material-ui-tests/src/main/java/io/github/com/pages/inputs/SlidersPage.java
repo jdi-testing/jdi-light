@@ -63,6 +63,3 @@ public class SlidersPage extends WebPage {
   public static List<Slider> sliders;
 
 }
-
-
-
