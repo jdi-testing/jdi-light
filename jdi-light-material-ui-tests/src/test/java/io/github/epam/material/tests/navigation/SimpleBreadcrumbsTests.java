@@ -24,46 +24,46 @@ public class SimpleBreadcrumbsTests extends TestsInit {
 
     @Test
     public void simpleBreadcrumbsTest() {
-        breadcrumbs.get(1).is().text("Material-UI");
-        breadcrumbs.get(1).click();
+        simpleBreadcrumbs.get(1).is().text("Material-UI");
+        simpleBreadcrumbs.get(1).click();
         timer.wait(() -> materialElement.is().visible());
-        breadcrumbs.get(2).is().text("Core");
-        breadcrumbs.get(2).click();
+        simpleBreadcrumbs.get(2).is().text("Core");
+        simpleBreadcrumbs.get(2).click();
         timer.wait(() -> materialElement.is().notVisible());
         timer.wait(() -> coreElement.is().visible());
     }
 
     @Test
     public void customSeparatorBreadcrumbsTest() {
-        separators.get(5).is().text("›");
-        separators.get(7).is().text("-");
+        customSeparatorBreadcrumbs.get(1).getSeparators().get(1).is().text("›");
+        customSeparatorBreadcrumbs.get(2).getSeparators().get(1).is().text("-");
     }
 
     @Test
     public void withIconsBreadcrumbsTest() {
-        icons.get(1).is().displayed();
-        icons.get(2).is().displayed();
-        icons.get(3).is().displayed();
+        breadcrumbsWithIcons.getIcons().get(1).is().displayed();
+        breadcrumbsWithIcons.getIcons().get(2).is().displayed();
+        breadcrumbsWithIcons.getIcons().get(3).is().displayed();
     }
 
     @Test
     public void collapsedBreadcrumbsTest() {
-        breadcrumbs.get(16).is().displayed();
-        breadcrumbs.get(16).is().text("Home");
-        breadcrumbs.get(17).is().text("Belts");
+        collapsedBreadcrumbs.get(1).is().displayed();
+        collapsedBreadcrumbs.get(1).is().text("Home");
+        collapsedBreadcrumbs.get(2).is().text("Belts");
         collapsedButton.is().displayed();
         collapsedButton.click();
-        breadcrumbs.get(17).is().text("Catalog");
+        collapsedBreadcrumbs.get(2).is().text("Catalog");
         collapsedButton.is().notVisible();
     }
 
     @Test
     public void customizedBreadcrumbsTest() {
-        breadcrumbs.get(18).is().text("Home");
-        breadcrumbs.get(18).click();
-        breadcrumbs.get(19).is().text("Catalog");
-        breadcrumbs.get(19).click();
-        breadcrumbs.get(20).is().text("Accessories");
-        breadcrumbs.get(20).click();
+        customizedBreadcrumbs.get(1).is().text("Home");
+        customizedBreadcrumbs.get(1).click();
+        customizedBreadcrumbs.get(2).is().text("Catalog");
+        customizedBreadcrumbs.get(2).click();
+        customizedBreadcrumbs.get(3).is().text("Accessories");
+        customizedBreadcrumbs.get(3).click();
     }
 }

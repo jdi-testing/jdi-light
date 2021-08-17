@@ -1,11 +1,9 @@
 package io.github.com.pages.navigation;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.Button;
-import com.epam.jdi.light.material.elements.navigation.Breadcrumb;
-import com.epam.jdi.light.ui.html.elements.common.Icon;
+import com.epam.jdi.light.material.elements.navigation.Breadcrumbs;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.util.List;
@@ -17,14 +15,20 @@ import java.util.List;
 
 public class SimpleBreadcrumbsPage extends WebPage {
 
-    @UI(".MuiBreadcrumbs-li")
-    public static List<Breadcrumb> breadcrumbs;
+    @UI(".MuiBox-root>div>:nth-child(3)")
+    public static Breadcrumbs simpleBreadcrumbs;
 
-    @UI(".MuiBreadcrumbs-separator")
-    public static List<UIElement> separators;
+    @UI(".MuiBox-root>div>:nth-child(5)>nav")
+    public static Breadcrumbs breadcrumbsWithIcons;
 
-    @UI(".MuiBreadcrumbs-li .MuiSvgIcon-root")
-    public static List<Icon> icons;
+    @UI(".MuiBox-root>div>:nth-child(7)>nav")
+    public static List<Breadcrumbs> customSeparatorBreadcrumbs;
+
+    @UI(".MuiBox-root>div>:nth-child(9)")
+    public static Breadcrumbs collapsedBreadcrumbs;
+
+    @UI(".MuiBox-root>div>:nth-child(11)")
+    public static Breadcrumbs customizedBreadcrumbs;
 
     @UI(".MuiSvgIcon-root.jss6")
     public static Button collapsedButton;

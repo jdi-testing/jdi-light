@@ -22,24 +22,23 @@ public class RouterBreadcrumbsTests extends TestsInit {
 
     @Test
     public void routerIntegrationBreadcrumbsTest() {
-        routerBreadcrumbsPage.open();
-        breadcrumbs.get(1).is().text("Home");
-        breadcrumbs.get(2).is().text("Inbox");
+        routerBreadcrumbs.list().get(1).is().text("Home");
+        routerBreadcrumbs.list().get(2).is().text("Inbox");
         trashDisplayBlock.click();
-        breadcrumbs.get(1).is().text("Home");
-        breadcrumbs.get(2).is().text("Trash");
+        routerBreadcrumbs.list().get(1).is().text("Home");
+        routerBreadcrumbs.list().get(2).is().text("Trash");
     }
 
     @Test
     public void routerIntegrationBreadcrumbsIconClickTest() {
         routerBreadcrumbsPage.open();
         importantDisplayBlock.click();
-        breadcrumbs.get(1).is().text("Home");
-        breadcrumbs.get(2).is().text("Inbox");
-        breadcrumbs.get(3).is().text("Important");
+        routerBreadcrumbs.get(1).is().text("Home");
+        routerBreadcrumbs.get(2).is().text("Inbox");
+        routerBreadcrumbs.get(3).is().text("Important");
         inboxDisplayBlock.click();
-        breadcrumbs.get(1).is().text("Home");
-        breadcrumbs.get(2).is().text("Inbox");
+        routerBreadcrumbs.get(1).is().text("Home");
+        routerBreadcrumbs.get(2).is().text("Inbox");
         importantDisplayBlock.is().hidden();
     }
 }
