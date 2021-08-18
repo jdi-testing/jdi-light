@@ -6,33 +6,41 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIChip;
 import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
+import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 
 public class Chip extends UIBaseElement<ChipAssert> implements ISetup {
-    private String chipLabel;
-    private String chipRoot;
-    private String chipIcon;
+
+    protected By chipLabel;
+    protected By chipIcon;
+    protected By chipDelete;
 
     @JDIAction("Click {name}")
-    public void click(int index){
-        this.getChipLabel(index).click();
+    public void click() {
+        core().click();
     }
 
-    @JDIAction("Get chip label with index {0}")
-    public UIElement getChipLabel(int index){
-        return this.finds(chipLabel).get(index);
+
+    @JDIAction("Get chip {name} label")
+    public UIElement getChipLabel() {
+        return core().find(chipLabel);
     }
 
-    @JDIAction("Get chip root with index {0}")
-    public UIElement getChipRoot(int index){
-        return this.finds(chipRoot).get(index);
+    @JDIAction("Get chip {name} icon")
+    public UIElement getChipIcon() {
+        return core().find(chipIcon);
     }
 
-    @JDIAction("Get chip icon with index {0}")
-    public UIElement getChipIcon(int index){
-        return this.finds(chipIcon).get(index);
+    @JDIAction("Click delete chip {name}")
+    public void delete() {
+        core().find(chipDelete).click();
+    }
+
+    public boolean isDeletable() {
+        return core().hasClass("MuiChip-deletable");
     }
 
     @Override
@@ -45,9 +53,9 @@ public class Chip extends UIBaseElement<ChipAssert> implements ISetup {
         if (!fieldHasAnnotation(field, JDIChip.class, Chip.class))
             return;
         JDIChip j = field.getAnnotation(JDIChip.class);
-
-        chipLabel = j.chipLabel();
-        chipRoot = j.chipRoot();
-        chipIcon = j.chipIcon();
+        core().setLocator(NAME_TO_LOCATOR.execute(j.root()));
+        chipLabel = NAME_TO_LOCATOR.execute(j.label());
+        chipIcon = NAME_TO_LOCATOR.execute(j.icon());
+        chipDelete = NAME_TO_LOCATOR.execute(j.delete());
     }
 }
