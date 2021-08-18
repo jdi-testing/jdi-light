@@ -23,54 +23,46 @@ public class ProgressPage extends WebPage {
     @JDIProgressBar(root ="(//div[@aria-valuenow='100'])[1]")
     public static ProgressBar circularDeterminateWithValue100;
 
-    @JDIProgressBar(root ="(//h2[text()='Circular determinate']/following::div/div)[5]")
+    @JDIProgressBar(root ="(//div[@aria-valuenow='100']/following-sibling::div)[1]")
     public static ProgressBar circularDeterminateProgress;
 
-    @JDIProgressBar(root ="//h2[text()='Circular with label']/following::div[2]")
+    @JDIProgressBar(root ="(//h2[text()='Customized progress']/following::div)[3]")
     public static ProgressBar circularDeterminateProgressWithLabel;
 
-    //ToDo удалить c web-страницы
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-indeterminate')])[2]")
-    public static ProgressBar circularIndeterminate2;
+    @JDIProgressBar(root ="(//h2[text()='Customized progress']/following::div[@role='progressbar'])[1]")
+    public static ProgressBar circularIndeterminateCustomized;
 
-    //ToDo разбить на 2 элемента
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-indeterminate')])[3]")
-    public static ProgressBar circularIndeterminateCustomizedProgress;
+    @JDIProgressBar(root ="(//h2[text()='Customized progress']/following::div[@role='progressbar'])[3]")
+    public static ProgressBar circularDeterminateCustomized;
 
-    @JDIProgressBar(root ="//h2[text()='Linear indeterminate']/following::div[2]")
+    @JDIProgressBar(root ="(//h2[text()='Linear indeterminate']/following::div)[2]")
     public static ProgressBar linearIndeterminate;
 
-    @JDIProgressBar(root ="//h2[text()='Linear determinate']/following::div[2]")
+    @JDIProgressBar(root ="(//h2[text()='Linear determinate']/following::div)[2]")
     public static ProgressBar linearDeterminate;
 
-    @JDIProgressBar(root ="//h2[text()='Linear buffer']/following::div[2]")
+    @JDIProgressBar(root ="(//h2[text()='Linear buffer']/following::div)[2]")
     public static ProgressBar linearBuffer;
 
-    @JDIProgressBar(root ="//h2[text()='Linear with label']/following::div[4]")
+    @JDIProgressBar(root ="(//h2[text()='Linear with label']/following::div[@role='progressbar'])[1]")
     public static ProgressBar linearWithLabel;
 
-    //ToDo локатор указывает на Customized - уже есть, удалить
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[5]")
-    public static ProgressBar delayingAppearance;
-
-    @UI("//*[contains(@class, 'MuiFab-primary')]")
+    @UI("//button[@aria-label='save']")
     public static Button interactiveIntegrationCircularButton;
 
-    //ToDo элемент локатора быстро исчезает
-    @JDIProgressBar(root = "//*[contains(@class, 'MuiFab-primary')]/following-sibling::div")
+    @JDIProgressBar(root = "//button[@aria-label='save']/following-sibling::div")
     public static ProgressBar interactiveIntegrationCircularIndeterminate;
 
     @UI("//*[text()='Loading']/..")
     public static Button startLoadingButton;
 
-    @JDIProgressBar(root = "//h2[text()='Delaying appearance']/following::div[2]")
+    @JDIProgressBar(root = "//*[text()='Stop loading']/../../div/div")
     public static ProgressBar loadingCircularIndeterminate;
 
     @UI("//*[text()='Simulate a load']")
     public static Button simulateLoadButton;
 
-    //ToDo элемент локатора быстро исчезает
-    @JDIProgressBar(root = "//*[text()='Reset']/../../div[2]/div")
+    @JDIProgressBar(root = "//*[text()='Reset']/../preceding-sibling::div[1]/div")
     public static ProgressBar simulateLoadCircularIndeterminate;
 
     @UI("//p[text()='Success!']")

@@ -26,14 +26,13 @@ public class ProgressTests extends TestsInit {
         circularDeterminateWithValue100.isDisplayed();
         circularDeterminateProgress.isDisplayed();
         circularDeterminateProgressWithLabel.isDisplayed();
-        circularIndeterminate2.isDisplayed();
-        circularIndeterminateCustomizedProgress.isDisplayed();
+        circularIndeterminateCustomized.isDisplayed();
+        circularDeterminateCustomized.isDisplayed();
         interactiveIntegrationCircularButton.isDisplayed();
         linearIndeterminate.isDisplayed();
         linearDeterminate.isDisplayed();
         linearBuffer.isDisplayed();
         linearWithLabel.isDisplayed();
-        delayingAppearance.isDisplayed();
     }
 
     @Test
