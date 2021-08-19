@@ -54,7 +54,7 @@ public class FurnitureTests implements TestsInit {
     @Test
     public void previewTest() {
         String value = furnitureJ.preview();
-        assertEquals(value.replaceAll(" ", ""),
+        assertEquals(value.replace(" ", ""),
             "NameTypeCost*WeightChairfurniture3.52Tablefurniture3.53.5Sofafurniture22Kitchenkitchen400Robotrobo");
     }
 

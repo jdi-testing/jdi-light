@@ -13,6 +13,9 @@ import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.interfaces.base.HasRefresh;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.NoCache;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.LinqUtils;
@@ -35,6 +38,7 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.complex.WebList.newList;
 import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.TABLE_MATCHER;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -717,8 +721,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JTable.class, BaseTable.class))
+        if (!fieldHasAnnotation(field, JTable.class, BaseTable.class)) {
             return;
+        }
         JTable j = field.getAnnotation(JTable.class);
         String rowHeader = j.rowHeader();
         List<String> header = asList(j.header());
@@ -776,6 +781,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         }
         if (isNotBlank(rowHeader)) {
             rowHeaderName = rowHeader;
+        }
+        if (!hasAnnotation(field, NoCache.class)) {
+            offCache();
         }
     }
 

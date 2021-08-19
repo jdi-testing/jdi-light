@@ -42,7 +42,8 @@ public class SortingOverviewTests extends TestsInit {
     }
 
     @Test
-    public void sortingTableByThirdColumn() {
+    public void
+    sortingTableByThirdColumn() {
         sortingOverview.clickButtonByText(FAT);
         sortingOverview.clickButtonByText(FAT);
         sortingOverview.is().arrowButtonClicked();

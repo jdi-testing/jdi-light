@@ -49,7 +49,7 @@ public class TableTests implements TestsInit {
     @Test
     public void previewTest() {
         String value = usersTable.preview();
-        assertEquals(value.replaceAll(" ", ""),
+        assertEquals(value.replace(" ", ""),
             "NumberTypeUserDescription" +
             "1AdminUserManagerRomanWolverineVip" +
             "2AdminUserManagerSergeyIvanSpiderManVip" +
@@ -61,8 +61,8 @@ public class TableTests implements TestsInit {
 
     @Test
     public void valueTest() {
-        String value = usersTable.getValue().replaceAll("\r", "")
-            .replaceAll("\\\\n", "*").replaceAll("\\* ", "*");
+        String value = usersTable.getValue().replace("\r", "")
+            .replace("\n", "*").replace("\\* ", "*");
         assertEquals(value,
         "||X||Number|Type|User|Description||\n" +
             "||"+i(0)+"||1|Admin*User*Manager|Roman|Wolverine*Vip||\n" +

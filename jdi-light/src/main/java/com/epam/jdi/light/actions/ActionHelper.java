@@ -556,7 +556,7 @@ public class ActionHelper {
     //endregion
     public static void addFailedMethod(JoinPoint jp) {
         String[] s = jp.toString().split("\\.");
-        String result = format("%s.%s%s", s[s.length-2], s[s.length-1].replaceAll("\\)\\)", ""),
+        String result = format("%s.%s%s", s[s.length-2], s[s.length-1].replace("))", ""),
                 printArgs(getArgs(jp)));
         if (!failedMethods.contains(result))
             failedMethods.add(result);
@@ -572,7 +572,7 @@ public class ActionHelper {
         result = result.replace("java.lang.RuntimeException:", "").trim();
         Object[] args = jInfo.jp().getArgs();
         if (result.contains("{{VALUE}}") && args.length > 0) {
-            result = result.replaceAll("\\{\\{VALUE}}", args[0].toString());
+            result = result.replace("{{VALUE}}", args[0].toString());
         }
         if (jInfo.topLevel())
             result = "[" + nowTime("mm:ss.S") + "] " + result.replaceFirst("\n", "");

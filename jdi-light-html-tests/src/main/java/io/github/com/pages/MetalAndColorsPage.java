@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -12,6 +13,8 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import io.github.com.custom.CustomDropdown;
+
+import java.util.List;
 
 public class MetalAndColorsPage extends WebPage {
 	@Css(".uui-side-bar[name='log-sidebar']") public static LogSidebar logSidebar;
@@ -41,6 +44,9 @@ public class MetalAndColorsPage extends WebPage {
 
 	@UI("div[ui=dropdown]")
 	public static CustomDropdown colorsCustom;
+
+	@UI("div[ui=%s]")
+	public static JList<CustomDropdown> colorsList;
 
 	@JDropdown(root = "div[ui=combobox]", value = "input",
 		list = "li", expand = ".caret")
