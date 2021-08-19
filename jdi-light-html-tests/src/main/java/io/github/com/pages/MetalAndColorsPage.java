@@ -14,8 +14,6 @@ import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import io.github.com.custom.CustomDropdown;
 
-import java.util.List;
-
 public class MetalAndColorsPage extends WebPage {
 	@Css(".uui-side-bar[name='log-sidebar']") public static LogSidebar logSidebar;
 
