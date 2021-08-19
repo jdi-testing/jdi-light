@@ -1,26 +1,60 @@
 package io.github.com;
 
-import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.tools.DataClass;
-import io.github.com.pages.displaydata.*;
-import io.github.com.pages.feedback.*;
-import io.github.com.pages.inputs.*;
-import io.github.com.pages.layout.*;
-import io.github.com.pages.navigation.*;
+import io.github.com.pages.displaydata.AvatarPage;
+import io.github.com.pages.displaydata.BadgePage;
+import io.github.com.pages.displaydata.ChipsPage;
+import io.github.com.pages.displaydata.DividersPage;
+import io.github.com.pages.displaydata.IconsPage;
+import io.github.com.pages.displaydata.ListPage;
+import io.github.com.pages.displaydata.MaterialIconPage;
+import io.github.com.pages.displaydata.TablePage;
+import io.github.com.pages.displaydata.TooltipPage;
+import io.github.com.pages.displaydata.TypographyPage;
+import io.github.com.pages.feedback.BackdropPage;
+import io.github.com.pages.feedback.DialogPage;
+import io.github.com.pages.feedback.ProgressPage;
+import io.github.com.pages.feedback.SnackbarPage;
+import io.github.com.pages.inputs.ButtonGroupPage;
+import io.github.com.pages.inputs.ButtonPage;
+import io.github.com.pages.inputs.CheckboxPage;
+import io.github.com.pages.inputs.DateTimePickersPage;
+import io.github.com.pages.inputs.EnhancedTransferListPage;
+import io.github.com.pages.inputs.FloatingActionButtonPage;
+import io.github.com.pages.inputs.RadioButtonPage;
+import io.github.com.pages.inputs.SelectPage;
+import io.github.com.pages.inputs.SimpleTransferListPage;
+import io.github.com.pages.inputs.SlidersPage;
+import io.github.com.pages.inputs.SwitchPage;
+import io.github.com.pages.inputs.TextFieldPage;
+import io.github.com.pages.layout.BoxPage;
+import io.github.com.pages.layout.ContainerPage;
+import io.github.com.pages.layout.GridPage;
+import io.github.com.pages.layout.HiddenPage;
+import io.github.com.pages.navigation.BottomNavigationPage;
+import io.github.com.pages.navigation.ContextMenuPage;
+import io.github.com.pages.navigation.DrawerPage;
+import io.github.com.pages.navigation.LinkPage;
+import io.github.com.pages.navigation.RouterBreadcrumbsPage;
+import io.github.com.pages.navigation.SimpleBreadcrumbsPage;
+import io.github.com.pages.navigation.SimpleMenuPage;
+import io.github.com.pages.navigation.StepperPage;
+import io.github.com.pages.navigation.TabPage;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarPage;
 import io.github.com.pages.surfaces.CardPage;
 import io.github.com.pages.surfaces.PaperPage;
-import io.github.com.pages.utils.*;
+import io.github.com.pages.utils.ClickAwayListenerPage;
+import io.github.com.pages.utils.ModalPage;
+import io.github.com.pages.utils.PopoverPage;
+import io.github.com.pages.utils.PopperPage;
+import io.github.com.pages.utils.PortalPage;
+import io.github.com.pages.utils.TextAreaAutoSizePage;
+import io.github.com.pages.utils.TransitionPage;
+import io.github.com.pages.utils.UseMediaQueryPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
 public class StaticSite {
@@ -277,8 +311,8 @@ public class StaticSite {
     public static LinkPage linkPage;
 
     // bottom navigation
-   @Url("/button_navigation")
-   public static BottomNavigationPage bottomNavigationPage;
+    @Url("/button_navigation")
+    public static BottomNavigationPage bottomNavigationPage;
 
     // menu
     @Url("/simple_menu")
@@ -303,18 +337,4 @@ public class StaticSite {
     // grid
     @Url("grid_layout")
     public static GridPage gridPage;
-
-    // login page
-    @UI("#login-form")
-    public static Form<User> loginForm;
-
-    @Css(".logout")
-    public static Button logout;
-    public static Button userIcon;
-    public static Text userName;
-
-    public static class User extends DataClass<User> {
-        public String name = "Roman";
-        public String password = "Jdi1234";
-    }
 }
