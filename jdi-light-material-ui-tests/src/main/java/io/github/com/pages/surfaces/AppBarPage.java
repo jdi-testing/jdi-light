@@ -11,8 +11,6 @@ public class AppBarPage extends WebPage {
 
     @JAppBar(
             root = "(//header[contains(@class, 'MuiAppBar-root')])[1]",
-            navigationButton = ".MuiIconButton-edgeStart",
-            title = ".MuiTypography-root",
             actionItems = {"//*[text()='News']/following-sibling::button"}
     )
     public static AppBar simpleAppBar;
@@ -22,8 +20,6 @@ public class AppBarPage extends WebPage {
 
     @JAppBar(
             root = "(//header[contains(@class, 'MuiAppBar-root')])[2]",
-            navigationButton = ".MuiIconButton-edgeStart",
-            title = ".MuiTypography-root",
             overflowMenuButton = "//h6[contains(text(), 'Photos')]/following-sibling::div/button"
     )
     public static AppBar appBarMenu;
@@ -33,10 +29,7 @@ public class AppBarPage extends WebPage {
 
     @JAppBar(
             root = "(//header[contains(@class, 'MuiAppBar-root')])[3]",
-            navigationButton = ".MuiIconButton-edgeStart",
-            title = ".MuiTypography-h5",
-            actionItems = {"//h5/following-sibling::button[1]"},
-            overflowMenuButton = ".MuiIconButton-edgeEnd"
+            actionItems = {"//h5/following-sibling::button[1]"}
     )
     public static AppBar prominentMenu;
 

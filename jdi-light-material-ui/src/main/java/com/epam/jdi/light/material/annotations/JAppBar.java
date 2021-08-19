@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JAppBar {
-    @MarkupLocator String root() default "";
-    @MarkupLocator String navigationButton() default "";
-    @MarkupLocator String title() default "";
+    @MarkupLocator String root() default ".MuiAppBar-root";
+    @MarkupLocator String navigationButton() default ".MuiIconButton-edgeStart";
+    @MarkupLocator String title() default ".MuiTypography-root";
     @MarkupLocator String[] actionItems() default "";
-    @MarkupLocator String overflowMenuButton() default "";
+    @MarkupLocator String overflowMenuButton() default ".MuiIconButton-edgeEnd";
 }

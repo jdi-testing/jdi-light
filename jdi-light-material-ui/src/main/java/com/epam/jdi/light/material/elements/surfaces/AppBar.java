@@ -25,11 +25,10 @@ import static org.hamcrest.Matchers.containsString;
 
 public class AppBar extends Section implements ISetup {
 
-    protected String rootLocator = "";
-    protected By navigationButtonLocator = By.cssSelector(".MuiIconButton-edgeStart");
-    protected By titleLocator = By.xpath("//*[contains(@class, 'MuiTypography-root')]");
+    protected By navigationButtonLocator;
+    protected By titleLocator;
     protected List<By> actionItemsLocators = new ArrayList<>();
-    protected By overflowMenuButtonLocator = By.cssSelector(".MuiIconButton-edgeEnd");
+    protected By overflowMenuButtonLocator;
 
     @JDIAction(value = "Get '{name}' navigation button")
     public UIElement getNavigationButton() {
@@ -73,16 +72,14 @@ public class AppBar extends Section implements ISetup {
         JAppBar jAppBar = field.getAnnotation(JAppBar.class);
         if(isNotBlank(jAppBar.root())) {
             core().setLocator(NAME_TO_LOCATOR.execute(jAppBar.root()));
-            this.rootLocator = jAppBar.root();
             this.navigationButtonLocator = NAME_TO_LOCATOR.execute(jAppBar.navigationButton());
             this.titleLocator = NAME_TO_LOCATOR.execute(jAppBar.title());
-
+            this.overflowMenuButtonLocator = NAME_TO_LOCATOR.execute(jAppBar.overflowMenuButton());
             if(jAppBar.actionItems().length != 0) {
                 actionItemsLocators = new ArrayList<>();
                 Arrays.stream(jAppBar.actionItems())
                         .forEach(actionItem -> actionItemsLocators.add(NAME_TO_LOCATOR.execute(actionItem)));
             }
-            this.overflowMenuButtonLocator = NAME_TO_LOCATOR.execute(jAppBar.overflowMenuButton());
         }
     }
 }
