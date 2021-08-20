@@ -460,11 +460,13 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             throw exception(getName() + " table has empty header");
         }
         WebList lines = TABLE_MATCHER.execute(this, matchers);
-        if (lines == null || lines.isEmpty())
+        if (lines == null || lines.isEmpty()) {
             return null;
+        }
         List<String> result = new ArrayList<>();
-        for (int i = getStartIndex(); i < header().size() + getStartIndex(); i++)
+        for (int i = getStartIndex(); i < header().size() + getStartIndex(); i++) {
             result.add(lines.get(i).getText());
+        }
         return new Line(result, header(), base());
     }
 
@@ -803,29 +805,32 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         } catch (Exception ex) {throw exception(ex, "Can't get all cells"); }
         return (T) this;
     }
-    protected T getTable() {
-        if (!cells.isGotAll()) {
-            try {
-                List<WebElement> listOfCells = core().finds(allCellsLocator).getWebElements();
-                cells.set(new MapArray<>());
-                int k = 0;
-                int j = getStartIndex();
-                int size = size() + getStartIndex();
-                for (int i = getStartIndex(); i < size; i++)
-                    cells.get().update(i+"", new MapArray<>());
-                while (k < listOfCells.size()) {
-                    for (int i = getStartIndex(); i < size; i++)
-                        cells.get().get(i+"").update(j+"", new UIElement(listOfCells.get(k++)));
-                    j++;
+
+    protected MapArray<String, MapArray<String, UIElement>> cellsToMap() {
+        try {
+            MapArray<String, MapArray<String, UIElement>> result = new MapArray<>();
+            List<WebElement> listOfCells = core().finds(allCellsLocator).getWebElements();
+            int k = 0;
+            int j = getStartIndex();
+            int size = size() + getStartIndex();
+            for (int i = getStartIndex(); i < size; i++) {
+                result.add(i + "", new MapArray<>());
+            }
+            while (k < listOfCells.size()) {
+                for (int i = getStartIndex(); i < size; i++) {
+                    result.get(i + "").add(j + "", new UIElement(listOfCells.get(k++)));
                 }
-                cells.gotAll();
-            } catch (Exception ex) {throw exception(ex, "Can't get all cells"); }
-        }
-        return (T) this;
+                j++;
+            }
+            return result;
+        } catch (Exception ignore) { }
+        throw exception("Failed to get all cells");
     }
+
     public void clear() {
         refresh();
     }
+
     public void refresh() {
         rows.clear();
         columns.clear();

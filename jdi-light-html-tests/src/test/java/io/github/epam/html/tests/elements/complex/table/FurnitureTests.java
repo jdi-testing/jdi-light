@@ -35,10 +35,11 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void tableParamsTest() {
-        assertEquals(furnitureJ.header(), asList("Name", "Type", "Cost", "Weight"));
+        assertEquals(furnitureJ.header(), asList("Name", "Type", "Cost *", "Weight"));
         assertEquals(furnitureJ.size(), 4);
         assertEquals(furnitureJ.count(), 5);
     }
+
     @Test
     public void simpleTableParamsTest() {
         assertEquals(simpleTable.header(), asList("Drivers", "Selenium Custom", "JavaScript, Appium, WinAPI, Sikuli"));
@@ -62,7 +63,7 @@ public class FurnitureTests implements TestsInit {
     public void valueTest() {
         String value = furnitureJ.getValue();
         assertEquals(value,
-            "||X||Name|Type|Cost|Weight||" + LINE_BREAK +
+            "||X||Name|Type|Cost *|Weight||" + LINE_BREAK +
             "||"+i(0)+"||Chair|furniture|3.5|2||" + LINE_BREAK +
             "||"+i(1)+"||Table|furniture|3.5|3.5||" + LINE_BREAK +
             "||"+i(2)+"||Sofa|furniture|2|2||" + LINE_BREAK +
