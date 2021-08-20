@@ -7,19 +7,21 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.tools.DataClass;
 import io.github.com.pages.displaydata.*;
-import io.github.com.pages.feedback.*;
+import io.github.com.pages.feedback.BackdropPage;
+import io.github.com.pages.feedback.DialogPage;
+import io.github.com.pages.feedback.ProgressPage;
+import io.github.com.pages.feedback.SnackbarPage;
 import io.github.com.pages.inputs.*;
-import io.github.com.pages.layout.*;
+import io.github.com.pages.layout.BoxPage;
+import io.github.com.pages.layout.ContainerPage;
+import io.github.com.pages.layout.GridPage;
+import io.github.com.pages.layout.HiddenPage;
 import io.github.com.pages.navigation.*;
-import io.github.com.pages.surfaces.AccordionPage;
-import io.github.com.pages.surfaces.AppBarPage;
-import io.github.com.pages.surfaces.CardPage;
-import io.github.com.pages.surfaces.PaperPage;
+import io.github.com.pages.surfaces.*;
 import io.github.com.pages.utils.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
@@ -96,23 +98,20 @@ public class StaticSite {
     public static AppBarPage simpleAppBarPage;
 
     @Url("/appbar_bottom")
-    public static WebPage bottomAppBarPage;
+    public static BottomAppBarPage bottomAppBarPage;
 
     @Url("/appbar_scroll_hide")
-    public static WebPage hideAppBarPage;
+    public static HideAppBarPage hideAppBarPage;
 
     @Url("/appbar_elevate")
-    public static WebPage elevateAppBarPage;
+    public static ElevateAppBar elevateAppBarPage;
 
     @Url("/appbar_back_to_top")
-    public static WebPage backToTopPage;
+    public static BackToTopPage backToTopPage;
 
     // paper
     @Url("/paper_surface")
     public static PaperPage paperPage;
-
-    @Url("/material-ui-surfaces-app-bar--simple-app-bar")
-    public static WebPage surfaceSimpleAppBarPage;
 
     @Url("/card_surface")
     public static CardPage cardPage;
