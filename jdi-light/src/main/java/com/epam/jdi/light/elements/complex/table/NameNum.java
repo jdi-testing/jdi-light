@@ -22,25 +22,30 @@ public class NameNum extends DataClass<NameNum> {
     public boolean hasName() {
         return isNotBlank(name);
     }
+
     @Override
     public String toString() {
-        if (!hasName() && num > -1)
+        if (!hasName() && num > -1) {
             return num + "";
-        if (hasName() && num == -1)
+        }
+        if (hasName() && num == -1) {
             return name;
-        if (hasName() && num > -1)
+        }
+        if (hasName() && num > -1) {
             return format("%s(%s)", name, num);
+        }
         return "";
     }
-    public int getIndex(List<String> headers) {
+
+    public int getIndex(List<String> headers, int startIndex) {
         logger.debug("Find header with ");
         if (!hasName()) {
-            return num + 1;
+            return num;
         }
         int index = firstIndex(headers, h -> equalsIgnoreCase(h, name));
         if (index < 0) {
             throw exception("Failed to getIndex. Index should be >= 0");
         }
-        return index + 1;
+        return index + startIndex;
     }
 }

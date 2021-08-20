@@ -574,7 +574,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Filter '{name}' table rows that match criteria in column '{1}'")
     public List<Line> filterRows(Matcher<String> matcher, Column column) {
         return LinqUtils.filter(rows(),
-                line -> matcher.matches(line.get(column.getIndex(header()))));
+                line -> matcher.matches(line.get(column.getIndex(header(), getStartIndex()))));
     }
 
     /**
@@ -585,7 +585,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Filter '{name}' table rows that match criteria")
     public List<Line> filterRows(Pair<Matcher<String>, Column>... matchers) {
         return LinqUtils.filter(rows(), line ->
-                all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
+                all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header(), getStartIndex())))));
     }
 
     /**
@@ -597,7 +597,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get '{name}' table row that match criteria in column '{1}'")
     public Line row(Matcher<String> matcher, Column column) {
         return first(rows(),
-            line -> matcher.matches(line.get(column.getIndex(header()))));
+            line -> matcher.matches(line.get(column.getIndex(header(), getStartIndex()))));
     }
 
     /**
@@ -608,7 +608,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get '{name}' table row that match criteria")
     public Line row(Pair<Matcher<String>, Column>... matchers) {
         return first(rows(), line ->
-            all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header())))));
+            all(matchers, m -> m.key.matches(line.get(m.value.getIndex(header(), getStartIndex())))));
     }
     // Columns
     /**
