@@ -45,7 +45,11 @@ import io.github.com.pages.navigation.StepperPage;
 import io.github.com.pages.navigation.TabPage;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarPage;
+import io.github.com.pages.surfaces.BackToTopPage;
+import io.github.com.pages.surfaces.BottomAppBarPage;
 import io.github.com.pages.surfaces.CardPage;
+import io.github.com.pages.surfaces.ElevateAppBar;
+import io.github.com.pages.surfaces.HideAppBarPage;
 import io.github.com.pages.surfaces.PaperPage;
 import io.github.com.pages.utils.ClickAwayListenerPage;
 import io.github.com.pages.utils.ModalPage;
@@ -130,23 +134,20 @@ public class StaticSite {
     public static AppBarPage simpleAppBarPage;
 
     @Url("/appbar_bottom")
-    public static WebPage bottomAppBarPage;
+    public static BottomAppBarPage bottomAppBarPage;
 
     @Url("/appbar_scroll_hide")
-    public static WebPage hideAppBarPage;
+    public static HideAppBarPage hideAppBarPage;
 
     @Url("/appbar_elevate")
-    public static WebPage elevateAppBarPage;
+    public static ElevateAppBar elevateAppBarPage;
 
     @Url("/appbar_back_to_top")
-    public static WebPage backToTopPage;
+    public static BackToTopPage backToTopPage;
 
     // paper
     @Url("/paper_surface")
     public static PaperPage paperPage;
-
-    @Url("/material-ui-surfaces-app-bar--simple-app-bar")
-    public static WebPage surfaceSimpleAppBarPage;
 
     @Url("/card_surface")
     public static CardPage cardPage;
