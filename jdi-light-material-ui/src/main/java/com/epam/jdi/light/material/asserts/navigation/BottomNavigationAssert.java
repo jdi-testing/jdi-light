@@ -9,7 +9,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class BottomNavigationAssert extends UIAssert<BottomNavigationAssert, BottomNavigation> {
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' is selected")
     public BottomNavigationAssert selected() {
         jdiAssert(element().isSelected(), Matchers.is(true));
         return this;
