@@ -61,14 +61,14 @@ public class JSElementTests implements TestInit {
     @Test
     public void valueTest() {
         boolean isVisible = element("#user-icon").getValue(
-            "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "return element && styles.visibility === 'visible' && styles.display !== 'none'")
                 .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
     @Test
     public void valueLocatorListTest() {
         boolean isVisible = element(withParent("#user-icon")).getValue(
-            "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "return element && styles.visibility === 'visible' && styles.display !== 'none'")
                 .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }

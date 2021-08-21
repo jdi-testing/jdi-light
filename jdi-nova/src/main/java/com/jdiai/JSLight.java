@@ -129,7 +129,7 @@ public class JSLight implements JS {
             return this;
         }
         JSLight jsLight = (JSLight) core;
-        this.engine = jsLight.engine;
+        this.engine = jsLight.engine.copy();
         this.driver = jsLight.driver;
         this.actions = jsLight.actions;
         this.name = jsLight.name;
@@ -139,6 +139,19 @@ public class JSLight implements JS {
         this.renderTimeout = jsLight.renderTimeout;
         this.objectMap = jsLight.objectMap;
         return this;
+    }
+
+    public JSLight copy() {
+        JSLight js = new JSLight(driver, locators());
+        js.engine = this.engine.copy();
+        js.actions = this.actions;
+        js.name = this.name;
+        js.varName = this.varName;
+        js.parent = this.parent;
+        js.imagesData = this.imagesData;
+        js.renderTimeout = this.renderTimeout;
+        js.objectMap = this.objectMap;
+        return js;
     }
 
     /**
@@ -152,15 +165,15 @@ public class JSLight implements JS {
     }
 
     public List<String> getList(String valueFunc) {
-        return useCondition(() -> engine().getValues(valueFunc));
+        return useFilter(() -> engine().getValues(valueFunc));
     }
 
-    protected  <T> T useCondition(Supplier<T> func) {
+    protected  <T> T useFilter(Supplier<T> func) {
         T result;
         if (engine().jsDriver().hasFilter()) {
             result = func.get();
         } else {
-            setFilter(findConditions.isDisplayed);
+            setFilter(findFilters.isDisplayed);
             result = func.get();
             setFilter(null);
         }
@@ -168,7 +181,7 @@ public class JSLight implements JS {
     }
 
     public String filterElements(String valueFunc) {
-        return useCondition(() -> engine().firstValue(valueFunc));
+        return useFilter(() -> engine().firstValue(valueFunc));
     }
 
     /**
@@ -238,13 +251,13 @@ public class JSLight implements JS {
         return rawWe();
     }
 
-    public JS actionsWithElement(BiFunction<Actions, WebElement, Actions> action) {
-        action.apply(actions.get().moveToElement(this), this).build().perform();
+    public JS weElementActions(BiFunction<Actions, WebElement, Actions> action) {
+        action.apply(actions.get().moveToElement(we()), we()).build().perform();
         return this;
     }
 
-    public JS actions(BiFunction<Actions, WebElement, Actions> action) {
-        action.apply(actions.get(), this).build().perform();
+    public JS weActions(BiFunction<Actions, WebElement, Actions> action) {
+        action.apply(actions.get(), we()).build().perform();
         return this;
     }
 
@@ -327,6 +340,7 @@ public class JSLight implements JS {
         }
         return this;
     }
+
     public JSLight setBuilder(IJSBuilder builder) {
         engine().jsDriver().setBuilder(builder);
         return this;
@@ -339,8 +353,6 @@ public class JSLight implements JS {
         find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
         return this;
     }
-
-    public static String SELECT_FIND_TEXT_LOCATOR = ".//*[text()='%s']";
 
     public String selectFindTextLocator = SELECT_FIND_TEXT_LOCATOR;
 
@@ -395,8 +407,8 @@ public class JSLight implements JS {
         select(getEnumValue(name));
     }
 
-    public JS check(boolean condition) {
-        return doAction("checked=" + condition + ";");
+    public JS check(boolean value) {
+        return doAction("checked=" + value + ";");
     }
 
     public JS check() {
@@ -408,15 +420,15 @@ public class JSLight implements JS {
     }
 
     public JS rightClick() {
-        return actionsWithElement(Actions::contextClick);
+        return weElementActions(Actions::contextClick);
     }
 
     public JS doubleClick() {
-        return actionsWithElement(Actions::doubleClick);
+        return weElementActions(Actions::doubleClick);
     }
 
     public JS hover() {
-        return actions(Actions::moveToElement);
+        return weActions(Actions::moveToElement);
     }
 
     public JS dragAndDropTo(WebElement to) {
@@ -424,7 +436,7 @@ public class JSLight implements JS {
     }
 
     public JS dragAndDropTo(int x, int y) {
-        return actions((a,e) -> a.dragAndDropBy(e, x, y));
+        return weActions((a, e) -> a.dragAndDropBy(e, x, y));
     }
 
     public void submit() {
@@ -599,11 +611,15 @@ public class JSLight implements JS {
     }
 
     public boolean isDisplayed() {
-        return getElement(findConditions.isDisplayed).equalsIgnoreCase("true");
+        return getElement(findFilters.isDisplayed).equalsIgnoreCase("true");
     }
 
     public boolean isVisible() {
-        return getElement(findConditions.isVisible).equalsIgnoreCase("true");
+        if (isHidden()) {
+            return false;
+        }
+        show();
+        return getElement(findFilters.isVisible).equalsIgnoreCase("true");
     }
 
     public boolean isInView() {
@@ -837,11 +853,11 @@ public class JSLight implements JS {
     }
 
     public int size() {
-        return useCondition(() -> engine().getSize());
+        return useFilter(() -> engine().getSize());
     }
 
     public List<JsonObject> getObjectList(String json) {
-        return useCondition(() -> engine().getJsonList(json));
+        return useFilter(() -> engine().getJsonList(json));
     }
 
     public <T> List<T> getEntityList() {
@@ -853,7 +869,10 @@ public class JSLight implements JS {
     }
 
     public <T> List<T> getEntityList(Class<T> cl) {
-        return useCondition(() -> getEntityList(GET_OBJECT_MAP.apply(cl), cl));
+        if (objectMap == null) {
+            objectMap = GET_OBJECT_MAP.apply(cl);
+        }
+        return useFilter(() -> getEntityList(objectMap, cl));
     }
 
     public JS fill(Object obj) {
@@ -879,7 +898,7 @@ public class JSLight implements JS {
     }
 
     public JS setEntity(Object obj) {
-        Field[] allFields = obj.getClass().getDeclaredFields();
+        List<Field> allFields = getFieldsDeep(obj);
         List<String> mapList = new ArrayList<>();
         for (Field field : allFields) {
             Object fieldValue = getValueField(field, obj);
@@ -919,8 +938,9 @@ public class JSLight implements JS {
     }
 
     public JS get(int index) {
-        JS js = listToOne("element = elements[" + index + "];\n");
-        js.setName(format("%s[%s]",getName(), index));
+        JS js = copy();
+        js.engine().jsDriver().scriptBeforeResult("element = elements[" + index + "];\n");
+        js.setName(getName() + "[" + index + "]");
         return js;
     }
 
@@ -929,7 +949,7 @@ public class JSLight implements JS {
     }
 
     public JS get(By by, int index) {
-        String script = "element = elements.filter(e => "+
+        String script = "element = elements.filter(e =>e && "+
                 MessageFormat.format(dataType(by).get, "e", selector(by, engine().jsDriver().builder()))+
                 ")[" + index + "];\n";
         return listToOne(script)
@@ -950,16 +970,6 @@ public class JSLight implements JS {
         return findFirst(condition.apply(this));
     }
 
-    public JS findFirst(String condition) {
-        return listToOne("element = elements.find(e => e && " + handleCondition(condition, "e") + ");\n");
-    }
-
-    protected String handleCondition(String condition, String elementName) {
-        return condition.contains("#element#")
-            ? condition.replace("#element#", elementName)
-            : elementName + "." + condition;
-    }
-
     public JS findFirst(By by, String condition) {
         String script = "element = elements.find(e => { fel = " +
             MessageFormat.format(dataType(by).get, "e", selector(by, engine().jsDriver().builder())) + "; " +
@@ -969,6 +979,16 @@ public class JSLight implements JS {
 
     public long indexOf(Function<JS, String> condition) {
         return engine().jsDriver().indexOf(condition.apply(this));
+    }
+
+    public JS findFirst(String condition) {
+        return listToOne("element = elements.find(e => e && " + handleCondition(condition, "e") + ");\n");
+    }
+
+    protected String handleCondition(String condition, String elementName) {
+        return condition.contains("#element#")
+                ? condition.replace("#element#", elementName)
+                : elementName + "." + condition;
     }
 
     protected JS listToOne(String script) {

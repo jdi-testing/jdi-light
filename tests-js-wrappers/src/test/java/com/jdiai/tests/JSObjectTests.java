@@ -160,14 +160,14 @@ public class JSObjectTests implements TestInit {
     @Test
     public void valueTest() {
         boolean isVisible = element(TextInfo.class, "#user-icon").getValue(
-            "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "return element && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
     @Test
     public void valueLocatorListTest() {
         boolean isVisible = element(TextInfo.class, withParent("#user-icon")).getValue(
-            "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "return element && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }

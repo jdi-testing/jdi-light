@@ -40,6 +40,19 @@ public class JSBaseEngine extends JSElement implements JSEngine {
         this(() -> driver, locators);
     }
 
+    public JSEngine copy() {
+        JSEngine engine = new JSBaseEngine(() -> driver.driver(), driver.locators());
+        engine.setupEntity(entity);
+        engine.setMap(objectMap);
+        engine.jsDriver().setBuilder(jsDriver().builder());
+        engine.jsDriver().strategy = jsDriver().strategy;
+        engine.jsDriver().context = jsDriver().context;
+        engine.jsDriver().filter = jsDriver().filter;
+        engine.jsDriver().beforeResultScript = jsDriver().beforeResultScript;
+
+        return engine;
+    }
+
     public JSBaseEngine setupEntity(Class<?> entity) {
         this.entity = entity;
         return this;

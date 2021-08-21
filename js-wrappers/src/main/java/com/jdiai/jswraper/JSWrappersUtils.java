@@ -55,18 +55,19 @@ public class JSWrappersUtils {
             }
             action = isBooleanTrue(field, value)
                 ? "click();"
-                : "value='" + value.toString() + "';";
+                : "value='" + value + "';";
         }
         return setStringAction(element, action);
     }
     private static boolean isBooleanTrue(Field field, Object value) {
         return (field.getType().equals(Boolean.class) && (Boolean) value)
-                || (field.getType().equals(TYPE) && (boolean) value);
+            || (field.getType().equals(TYPE) && (boolean) value);
     }
+
     protected static String setStringAction(String element, String action) {
         boolean changed = false;
         if (action.contains("styles.")) {
-            action = action.replace("styles", "getComputedStyle(" +  element + ")");
+            // action = action.replace("styles", "getComputedStyle(" +  element + ")");
             changed = true;
         }
         if (action.contains("{element}")) {
@@ -78,5 +79,4 @@ public class JSWrappersUtils {
         }
         return action;
     }
-
 }

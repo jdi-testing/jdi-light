@@ -12,6 +12,7 @@ import java.util.function.Function;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
 import static java.lang.String.format;
@@ -69,7 +70,7 @@ public class JSEntity<T> extends JSElement {
     }
 
     public static Function<Class<?>, String> GET_ENTITY_MAP = cl -> {
-        List<String> mapList = map(cl.getDeclaredFields(),
+        List<String> mapList = map(getFieldsDeep(cl),
             field -> format("'%s': %s", field.getName(), getValueType(field, "element")));
         return  "{ " + print(mapList, ", ") + " }";
     };

@@ -1,6 +1,5 @@
 package com.jdiai;
 
-import com.jdiai.jsbuilder.ListSearch;
 import com.jdiai.jsdriver.JSDriver;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterSuite;

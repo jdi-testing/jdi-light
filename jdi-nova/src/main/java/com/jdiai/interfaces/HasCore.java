@@ -2,6 +2,7 @@ package com.jdiai.interfaces;
 
 import com.jdiai.JS;
 import com.jdiai.asserts.ShouldValidations;
+import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.jswraper.JSEngine;
 import com.jdiai.visual.Direction;
 import com.jdiai.visual.ImageTypes;
@@ -128,5 +129,8 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
 
     default JSEngine engine() {
         return core().engine();
+    }
+    default IJSBuilder builder() {
+        return engine().jsDriver().builder();
     }
 }

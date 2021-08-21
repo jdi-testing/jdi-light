@@ -4,17 +4,32 @@ import com.epam.jdi.tools.Timer;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 
+import java.util.function.Supplier;
+
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.JDI.*;
 import static com.jdiai.JDIStatistic.shouldValidations;
 import static com.jdiai.jsbuilder.JSBuilder.lastScriptExecution;
-import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jsdriver.JDINovaException.throwAssert;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class ShouldUtils {
+    public static <T> T waitForResult(Supplier<T> function) {
+        try {
+            return function.get();
+        } catch (Throwable ignore){
+            loggerOff();
+            try {
+                Timer timer = new Timer(timeout * 1000L);
+                return timer.getResult(function);
+            } finally {
+                loggerOn();
+            }
+        }
+    }
+
     public static <T extends HasCore> T handleShouldBe(T core, Condition... conditions) {
         if (isEmpty(conditions)) {
             return core;
@@ -28,7 +43,6 @@ public class ShouldUtils {
         } finally {
             loggerOn();
         }
-        loggerOn();
         if (!foundAll) {
             checkOutOfTime(core, timer, conditions);
         }

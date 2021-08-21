@@ -2,9 +2,7 @@ package com.jdiai;
 
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction;
-import com.jdiai.asserts.ConditionTypes;
 import com.jdiai.jsbuilder.IJSBuilder;
-import com.jdiai.jsbuilder.QueryLogger;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.tools.GetTextTypes;
@@ -20,11 +18,9 @@ import static com.epam.jdi.tools.LinqUtils.last;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.Timer.sleep;
 import static com.jdiai.JDI.*;
-import static com.jdiai.jsbuilder.QueryLogger.*;
+import static com.jdiai.asserts.Conditions.visible;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JSStable extends JSLight {
     public JSStable() {
@@ -52,30 +48,46 @@ public class JSStable extends JSLight {
         super(driver, locator, parent);
     }
 
-    protected ConditionTypes elementConditions = findConditions;
+    @Override
+    protected void init() {}
 
     @Override
-    protected void init() { }
+    public JSStable copy() {
+        JSStable js = new JSStable();
+        js.setCore(core());
+        return js;
+    }
 
     protected Timer startTimer() {
         return new Timer(timeout * 1000L);
     }
 
-    protected void stableAction(String actionName, JAction action, String condition) {
-        setFilter(condition);
+    protected void stableAction(String actionName, JAction action) {
+        setFilter(null);
         try {
             action.execute();
         } catch (Throwable ex) {
-            waitForAction(actionName, action);
+            waitForAction(actionName, action, startTimer());
+        }
+    }
+    
+    protected void stableFilterAction(String actionName, JAction action) {
+        Timer timer = startTimer();
+        try {
+            setFilter(findFilters.isDisplayed);
+            action.execute();
+        } catch (Throwable ex) {
+            shouldBe(visible);
+            waitForAction(actionName, action, timer);
         }
     }
 
-    protected void waitForAction(String actionName, JAction action) {
-        Timer timer = startTimer();
+    protected void waitForAction(String actionName, JAction action, Timer timer) {
         Throwable exception = null;
         while (timer.isRunning()) {
             sleep(100);
             try {
+                setFilter(findFilters.isDisplayed);
                 action.execute();
                 loggerOn();
                 return;
@@ -86,27 +98,37 @@ public class JSStable extends JSLight {
         }
         loggerOn();
         if (exception == null || exception.getMessage().contains("Failed to find element")) {
-            throw new JDINovaException("Failed to find element by locator: " + this);
+            throw new JDINovaException("Failed to find element by locator: %s (in %s seconds)", this, timer.timePassedInMSec() / 1000);
         } else {
-            throw new JDINovaException(exception, "Failed to execute action '%s' for element '%s'", actionName, this);
+            throw new JDINovaException(exception, "Failed to execute '%s' for element '%s' (in %s seconds)", actionName, this, timer.timePassedInMSec() / 1000);
         }
     }
-
-    protected <T> T stableFunction(String actionName, Supplier<T> func, String condition) {
-        setFilter(condition);
+    protected <T> T stableFunction(String actionName, Supplier<T> func) {
+        setFilter(null);
         try {
             return func.get();
         } catch (Throwable ex) {
-            return waitForResult(actionName, func);
+            return waitForResult(actionName, func, startTimer());
         }
     }
 
-    protected <T> T waitForResult(String actionName, Supplier<T> func) {
+    protected <T> T stableFilterFunction(String actionName, Supplier<T> func) {
         Timer timer = startTimer();
+        setFilter(findFilters.isDisplayed);
+        try {
+            return func.get();
+        } catch (Throwable ex) {
+            shouldBe(visible);
+            return waitForResult(actionName, func, timer);
+        }
+    }
+
+    protected <T> T waitForResult(String actionName, Supplier<T> func, Timer timer) {
         Throwable exception = null;
         while (timer.isRunning()) {
             sleep(100);
             try {
+                setFilter(findFilters.isDisplayed);
                 T result = func.get();
                 loggerOn();
                 return result;
@@ -117,46 +139,46 @@ public class JSStable extends JSLight {
         }
         loggerOn();
         if (exception == null || exception.getMessage().contains("Failed to find element")) {
-            throw new JDINovaException("Failed to find element by locator: " + this);
+            throw new JDINovaException("Failed to find element by locator: %s (in %s seconds)", this, timer.timePassedInMSec() / 1000);
         } else {
-            throw new JDINovaException(exception, "Failed to execute action '%s' for element '%s'", actionName, this);
+            throw new JDINovaException(exception, "Failed to execute '%s' for element '%s' (in %s seconds)", actionName, this, timer.timePassedInMSec() / 1000);
         }
     }
 
     @Override
     public JS setOption(String option) {
-        return stableFunction("setOption(" + option + ")", () -> super.setOption(option), null);
+        return stableFunction("setOption(" + option + ")", () -> super.setOption(option));
     }
 
     @Override
     public JS selectByName(String name) {
-        return stableFunction("selectByName(" + name + ")", () -> super.selectByName(name), null);
+        return stableFunction("selectByName(" + name + ")", () -> super.selectByName(name));
     }
 
     @Override
     public String selectedValueOption() {
-        return stableFunction("selectedValueOption()", super::selectedValueOption, null);
+        return stableFunction("selectedValueOption()", super::selectedValueOption);
     }
 
     @Override
     public String selectedOption() {
-        return stableFunction("selectedOption()", super::selectedOption, null);
+        return stableFunction("selectedOption()", super::selectedOption);
     }
 
     @Override
     public void click() {
-        stableAction("click()", super::click, elementConditions.isVisible);
+        stableFilterAction("click()", super::click);
     }
 
     @Override
     public JS clickCenter() {
-        stableAction("clickCenter()", super::clickCenter, elementConditions.isVisible);
+        stableFilterAction("clickCenter()", super::clickCenter);
         return this;
     }
 
     @Override
     public JS click(int x, int y) {
-        stableAction(format("click(%s,%s)", x, y) , () -> super.click(x, y), elementConditions.isVisible);
+        stableFilterAction(format("click(%s,%s)", x, y) , () -> super.click(x, y));
         return this;
     }
 
@@ -169,46 +191,19 @@ public class JSStable extends JSLight {
             ? getTemplateScriptForSelect(values)
             : getScriptForSelect(values);
 
-        stableAction("select(" + print(values) + ")", builder::executeQuery, elementConditions.isVisible);
+        stableFilterAction("select(" + print(values) + ")", builder::executeQuery);
         return this;
     }
 
     @Override
     public JS check(boolean value) {
-        stableAction("check(" + value + ")", () -> super.check(value), elementConditions.isVisible);
+        stableFilterAction("check(" + value + ")", () -> super.check(value));
         return this;
     }
 
     @Override
-    public JS rightClick() {
-        stableAction("rightClick()", super::rightClick, elementConditions.isVisible);
-        return this;
-    }
-
-    @Override
-    public JS doubleClick() {
-        stableAction("doubleClick()", super::doubleClick, elementConditions.isVisible);
-        return this;
-    }
-
-    @Override
-    public JS hover() {
-        stableAction("hover()", super::hover, elementConditions.isVisible);
-        return this;
-    }
-
-    @Override
-    public JS dragAndDropTo(int x, int y) {
-        stableAction(format("dragAndDropTo(%s,%s)", x, y), () -> super.dragAndDropTo(x, y), elementConditions.isVisible);
-        return this;
-    }
-
-    @Override
-    public void sendKeys(CharSequence... value) {
-        if (value == null) {
-            return;
-        }
-        stableAction("sendKeys(" + print(asList(value), Object::toString) + ")", () -> super.sendKeys(value), elementConditions.isVisible);
+    public WebElement we() {
+        return stableFunction("we()", super::rawWe);
     }
 
     @Override
@@ -216,157 +211,146 @@ public class JSStable extends JSLight {
         if (value == null) {
             return this;
         }
-        stableAction("input(" + value + ")", () -> super.set("setAttribute('value', '');\nelement.value='" + charToString(value) +
-            "';\nelement.dispatchEvent(new Event('input'));"), elementConditions.isVisible);
+        stableFilterAction("input(" + value + ")", 
+            () -> super.set("setAttribute('value', '');\nelement.value='" + charToString(value) +
+            "';\nelement.dispatchEvent(new Event('input'));"));
         return this;
     }
 
     @Override
     public void clear() {
-        stableAction("clear()", super::clear, elementConditions.isVisible);
+        stableFilterAction("clear()", super::clear);
     }
 
     @Override
     public String getTagName() {
-        return stableFunction("getTagName()", super::getTagName, null);
+        return stableFunction("getTagName()", super::getTagName);
     }
 
     @Override
     public String getAttribute(String attrName) {
-        return stableFunction("getAttribute(" + attrName + ")", () -> super.getAttribute(attrName), null);
+        return stableFunction("getAttribute(" + attrName + ")", () -> super.getAttribute(attrName));
     }
 
     @Override
     public String getProperty(String property) {
-        return stableFunction("getProperty(" + property + ")", () -> super.getProperty(property), null);
+        return stableFunction("getProperty(" + property + ")", () -> super.getProperty(property));
     }
 
     @Override
     public List<String> getAttributesAsList(String attr) {
-        return stableFunction("getAttributesAsList(" + attr + ")", () -> super.getAttributesAsList(attr), null);
+        return stableFunction("getAttributesAsList(" + attr + ")", () -> super.getAttributesAsList(attr));
     }
 
     @Override
     public List<Json> getAttributesAsList(String... attributes) {
-        return stableFunction("getAttributesAsList(" + print(attributes) + ")", () -> super.getAttributesAsList(attributes), null);
+        return stableFunction("getAttributesAsList(" + print(attributes) + ")", () -> super.getAttributesAsList(attributes));
     }
 
     @Override
     public List<String> allClasses() {
-        return stableFunction("allClasses()", super::allClasses, null);
+        return stableFunction("allClasses()", super::allClasses);
     }
 
     @Override
     public boolean hasClass(String className) {
-        return stableFunction("hasClass(" + className + ")", () -> super.hasClass(className), null);
+        return stableFunction("hasClass(" + className + ")", () -> super.hasClass(className));
     }
 
     @Override
     public boolean hasAttribute(String attrName) {
-        return stableFunction("hasAttribute(" + attrName + ")", () -> super.hasAttribute(attrName), null);
+        return stableFunction("hasAttribute(" + attrName + ")", () -> super.hasAttribute(attrName));
     }
 
     @Override
     public Json allAttributes() {
-        return stableFunction("allAttributes()", super::allAttributes, null);
+        return stableFunction("allAttributes()", super::allAttributes);
     }
 
     @Override
     public JS show() {
-        stableAction("show()", super::show, null);
+        stableAction("show()", super::show);
         return this;
     }
 
     @Override
     public String cssStyle(String style) {
-        return stableFunction("cssStyle(" + style + ")", () -> super.cssStyle(style), null);
+        return stableFunction("cssStyle(" + style + ")", () -> super.cssStyle(style));
     }
 
     @Override
     public Json cssStyles(String... styles) {
-        return stableFunction("cssStyles(" + print(styles) + ")", () -> super.cssStyles(styles), null);
+        return stableFunction("cssStyles(" + print(styles) + ")", () -> super.cssStyles(styles));
     }
 
     @Override
     public Json allCssStyles() {
-        return stableFunction("allCssStyles()", super::allCssStyles, null);
+        return stableFunction("allCssStyles()", super::allCssStyles);
     }
 
     @Override
     public boolean isSelected() {
-        return stableFunction("isSelected()", super::isSelected, null);
+        return stableFunction("isSelected()", super::isSelected);
     }
 
     @Override
     public boolean isEnabled() {
-        return stableFunction("isEnabled()", super::isEnabled, null);
+        return stableFunction("isEnabled()", super::isEnabled);
+    }
+
+    @Override
+    public boolean isDisplayed() {
+        return stableFunction("isDisplayed()", super::isDisplayed);
     }
 
     @Override
     public String getText() {
-        return stableFunction("getText()", super::getText, elementConditions.isVisible);
+        return stableFilterFunction("getText()", super::getText);
     }
 
     @Override
     public String getText(GetTextTypes textType) {
-        return stableFunction("getText(" + textType + ")", () -> super.getText(textType), null);
+        return stableFunction("getText(" + textType + ")", () -> super.getText(textType));
     }
 
     @Override
     public String getCssValue(String style) {
-        return stableFunction("getCssValue(" + style + ")", () -> super.getCssValue(style), null);
+        return stableFunction("getCssValue(" + style + ")", () -> super.getCssValue(style));
     }
 
     @Override
     public JS uploadFile(String filePath) {
-        return stableFunction("uploadFile(" + filePath + ")", () -> super.uploadFile(filePath), null);
+        return stableFunction("uploadFile(" + filePath + ")", () -> super.uploadFile(filePath));
     }
 
     @Override
     public String fontColor() {
-        return stableFunction("fontColor()", super::fontColor, null);
+        return stableFunction("fontColor()", super::fontColor);
     }
 
     @Override
     public String bgColor() {
-        return stableFunction("bgColor()", super::bgColor, null);
+        return stableFunction("bgColor()", super::bgColor);
     }
 
     @Override
     public JS visualValidation() {
-        return stableFunction("visualValidation()", super::visualValidation, elementConditions.isVisible);
+        return stableFilterFunction("visualValidation()", super::visualValidation);
     }
 
     @Override
     public JS visualValidation(String tag) {
-        return stableFunction("visualValidation(" + tag + ")", () -> super.visualValidation(tag), elementConditions.isVisible);
+        return stableFilterFunction("visualValidation(" + tag + ")", () -> super.visualValidation(tag));
     }
 
     @Override
     public JS visualCompareWith(JS element) {
-        return stableFunction("visualCompareWith(" + element + ")", () -> super.visualCompareWith(element), elementConditions.isVisible);
+        return stableFilterFunction("visualCompareWith(" + element + ")", () -> super.visualCompareWith(element));
     }
 
     @Override
     public Direction getDirectionTo(WebElement element) {
-        return stableFunction("getDirectionTo(" + element + ")", () -> super.getDirectionTo(element), elementConditions.isVisible);
+        return stableFilterFunction("getDirectionTo(" + element + ")", () -> super.getDirectionTo(element));
     }
 
-    public void setFilters(ConditionTypes filters) {
-        if (filters == null) {
-            return;
-        }
-        if (!isBlank(filters.isExist)) {
-            elementConditions.isExist = filters.isExist;
-        }
-        if (!isBlank(filters.isDisplayed)) {
-            elementConditions.isDisplayed = filters.isDisplayed;
-        }
-        if (!isBlank(filters.isEnabled)) {
-            elementConditions.isEnabled = filters.isEnabled;
-        }
-        if (!isBlank(filters.isVisible)) {
-            elementConditions.isVisible = filters.isVisible;
-        }
-    }
 }

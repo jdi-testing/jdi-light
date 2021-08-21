@@ -61,8 +61,8 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
         return !isExist();
     }
     JS doAction(String action);
-    JS actionsWithElement(BiFunction<Actions, WebElement, Actions> action);
-    JS actions(BiFunction<Actions, WebElement, Actions> action);
+    JS weElementActions(BiFunction<Actions, WebElement, Actions> action);
+    JS weActions(BiFunction<Actions, WebElement, Actions> action);
     JS clickCenter();
     JS click(int x, int y);
     JS select();
@@ -181,4 +181,5 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     }
     void setVarName(Field field);
     JS setBuilder(IJSBuilder builder);
+    JS copy();
 }

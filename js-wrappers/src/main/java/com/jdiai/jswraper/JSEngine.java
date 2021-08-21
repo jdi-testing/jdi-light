@@ -53,5 +53,6 @@ public interface JSEngine {
     <T> List<T> getEntityList();
     <T> List<T> getEntityList(List<String> attributes);
     <T> List<T> getEntityListFromAttr(String... attributes);
+    JSEngine copy();
 
 }

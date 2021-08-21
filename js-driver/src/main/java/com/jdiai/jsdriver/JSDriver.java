@@ -20,18 +20,17 @@ import static com.jdiai.jsdriver.JSDriverUtils.getByType;
 import static java.util.regex.Pattern.compile;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JSDriver {
     private final Supplier<WebDriver> driver;
     protected List<By> locators;
+    protected List<JSRule> rules;
     protected IJSBuilder builder;
     public ListSearch strategy = CHAIN;
     public String context = "document";
-    protected String filter = null;
-
-    private static IJSBuilder defaultBuilder(Supplier<WebDriver> driver) {
-        return new JSBuilder(driver, new BuilderActions());
-    }
+    public String filter = null;
+    public String beforeResultScript = "";
 
     public JSDriver(Supplier<WebDriver> driver, By... locators) {
         this(driver, newList(locators), defaultBuilder(driver));
@@ -66,9 +65,26 @@ public class JSDriver {
             throw new JDINovaException("JSDriver init failed: WebDriver == null");
         }
         this.driver = driver;
+        // this.rules = map(locators, JSRule::new);
         setLocators(locators);
         this.builder = builder;
     }
+
+    protected boolean hasBeforeScript() {
+        return isNotBlank(beforeResultScript);
+    }
+
+    protected boolean beforeOneToList() {
+        return hasBeforeScript() && beforeResultScript.contains("elements");
+    }
+    protected String beforeResultScript() {
+        return beforeResultScript;
+    }
+
+    private static IJSBuilder defaultBuilder(Supplier<WebDriver> driver) {
+        return new JSBuilder(driver, new BuilderActions());
+    }
+
     public JSDriver setLocators(List<By> locators) {
         if (locators == null) {
             this.locators = null;
@@ -76,12 +92,17 @@ public class JSDriver {
         }
         List<By> result = new ArrayList<>();
         Pattern idMatcher = compile("^#(?<id>[a-zA-Z][a-zA-Z0-9]*([-_:][a-zA-Z0-9]+)*)$");
+        Pattern csMatcher = compile("^.(?<class>[a-z][a-z0-9]*([-_:][a-z0-9]+)*)$");
         for (By locator : locators) {
             Matcher matcher = idMatcher.matcher(getByLocator(locator));
             if (matcher.matches()) {
                 locator = By.id(matcher.group("id"));
-                result = new ArrayList<>();
-            } else if (getByType(locator).equals("id")) {
+            }
+            matcher = csMatcher.matcher(getByLocator(locator));
+            if (matcher.matches()) {
+                locator = By.className(matcher.group("class"));
+            }
+            if (getByType(locator).equals("id")) {
                 result = new ArrayList<>();
             }
             result.add(locator);
@@ -121,12 +142,20 @@ public class JSDriver {
         }
     }
 
+    protected IJSBuilder getBuilder() {
+        if (!hasBeforeScript()) {
+            return buildOne();
+        }
+        return (beforeOneToList() ? buildList() : buildOne())
+            .addJSCode(beforeResultScript());
+    }
+
     public void doAction(String collector) {
-        buildOne().doAction(collector).executeQuery();
+        getBuilder().doAction(collector).executeQuery();
     }
 
     public JSProducer getOne(String collector) {
-        return new JSProducer(buildOne().getResult(collector).executeQuery());
+        return new JSProducer(getBuilder().getResult(collector).executeQuery());
     }
 
     public IJSBuilder buildList() {
@@ -146,7 +175,15 @@ public class JSDriver {
     }
 
     public JSListProducer getList(String collector) {
-        return new JSListProducer(buildList().getResultList(collector).executeAsList());
+        IJSBuilder builder = buildList();
+        if (hasBeforeScript()) {
+            builder.addJSCode(beforeResultScript());
+        }
+        return new JSListProducer(builder.getResultList(collector).executeAsList());
+    }
+    public JSDriver scriptBeforeResult(String script) {
+        beforeResultScript += script;
+        return this;
     }
 
     public JSProducer getFirst(String collector) {
@@ -155,7 +192,7 @@ public class JSDriver {
 
     public int getSize() {
         try {
-            return ((Long) buildList().getResult("return elements?.length ?? 0;").executeQuery()).intValue();
+            return ((Long) buildList().getResult("return elements.length;").executeQuery()).intValue();
         } catch (Exception ignore) {
             return -1;
         }
@@ -268,8 +305,10 @@ public class JSDriver {
     protected String getFilterBody(String filter) {
         String prefix = builder().preResult(filter);
         String filterBody = filter;
-        if (!filterBody.endsWith("\n")) {
+        if (filterBody.endsWith(";")) {
             filterBody += "\n";
+        } else if (!filterBody.endsWith("\n")) {
+            filterBody += ";\n";
         }
         filterBody = filterBody.replace("\n", "\n  ").trim();
         return prefix + "  " + returnFunc(filterBody);

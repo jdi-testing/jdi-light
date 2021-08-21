@@ -15,21 +15,19 @@ public class JSListToList {
     public static String FILTER_LIST_TO_LIST =
         "list = [];\n" +
         "for(let element of elements) {\n" +
-        "  subElements = Array.from({{list}}).filter(e=>!!e).filter(filter);\n" +
+        "  subElements = Array.from({{list}}).filter(e=>e && filter(e));\n" +
         "  if (subElements.length === 0) { continue; }\n" +
         "  for(let j = 0; j < subElements.length; j++) {\n" +
         "    list.push(subElements[j]);\n" +
         "  }\n" +
         "}\n" +
         "elements = Array.from(list);\n";
-
+    public static String PURE_ONE_LIST_TO_LIST =
+        "elements = Array.from(elements.map(e=>{{one:e}})).filter(e=>!!e);\n";
     public static String ONE_LIST_TO_LIST =
         "elements = Array.from(elements.map(e=>{{one:e}})).filter(e=>!!e);\n";
-
     public static String FILTER_ONE_LIST_TO_LIST =
-        "try { elements = Array.from(elements.map(e=>{{one:e}})).filter(e=>!!e).filter(filter); }\n" +
-        "catch { throw 'Failed to find element' }";
-
+        "elements = Array.from(elements.map(e=>{{one:e}})).filter(e=>e && filter(e));\n";
     public static String AGILE_LIST_TO_LIST =
         "list = [];\n" +
         "for(let element of elements) {\n" +

@@ -9,7 +9,7 @@ import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 
 public class JSWrapper {
     public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::getDriver);
-    public static String displayedFilter = "element !== null && styles.visibility === 'visible' && styles.display !== 'none' && !element.hasAttribute('hidden')";
+    public static String displayedFilter = "element && styles.visibility === 'visible' && styles.display !== 'none' && !element.hasAttribute('hidden')";
 
     public static WebDriver driver() {
         return DRIVER.get();

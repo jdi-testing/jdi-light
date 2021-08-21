@@ -7,6 +7,7 @@ public class JSResults {
 
     public static String LIST_TO_ACTION = "elements.forEach(element => %s);";
 
-    public static String LIST_TO_RESULT = "return elements.map(element => %s);";
+    public static String LIST_TO_RESULT =
+        "return elements.map(element => %s);";
 
 }

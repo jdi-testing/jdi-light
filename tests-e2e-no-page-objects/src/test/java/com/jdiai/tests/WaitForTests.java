@@ -53,8 +53,7 @@ public class WaitForTests implements TestInit {
     public void waitAndClickTest() {
         login();
         openPage("/html5.html");
-        JS suspendButton = $("#suspend-button");
-        durationMoreThan(3, () -> suspendButton.click());
+        durationMoreThan(3, () -> $("#suspend-button").click());
         Alerts.validateAlertText("Suspend button");
     }
 

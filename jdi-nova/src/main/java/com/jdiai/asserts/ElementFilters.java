@@ -4,7 +4,7 @@ public class ElementFilters {
     public final static String isExist = "element !== null";
 
     public final static String isDisplayed =
-        "element !== null && styles.visibility === 'visible' && styles.display !== 'none' " +
+        "element && styles.visibility === 'visible' && styles.display !== 'none' " +
         "&& !element.hasAttribute('hidden')";
 
     public final static String isEnabled = isDisplayed + " && !element.hasAttribute('disabled')";
@@ -17,7 +17,6 @@ public class ElementFilters {
         "element.hasAttribute('hidden') || styles.opacity < 0.05 || rect.width < 3 || rect.height < 3) {\n" +
         "  return false;\n" +
         "}\n" +
-        "element.scrollIntoView({behavior:'auto',block:'center',inline:'center'});\n" +
         "cx = rect.left + rect.width / 2;\n" +
         "cy = rect.top + rect.height / 2;\n" +
         "e = document.elementFromPoint(cx, cy);\n" +

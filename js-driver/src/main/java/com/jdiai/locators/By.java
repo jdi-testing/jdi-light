@@ -1,9 +1,16 @@
 package com.jdiai.locators;
 
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.pagefactory.ByAll;
+import org.openqa.selenium.support.pagefactory.ByChained;
+
+import java.util.List;
+
 import static java.lang.String.format;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 
-public class By {
+public class By extends org.openqa.selenium.By {
     public static org.openqa.selenium.By id(String id) {
         return org.openqa.selenium.By.id(id);
     }
@@ -16,6 +23,11 @@ public class By {
     public static org.openqa.selenium.By xpath(String xpath) {
         return org.openqa.selenium.By.xpath(xpath);
     }
+
+    public List<WebElement> findElements(SearchContext searchContext) {
+        return new ByChained().findElements(searchContext);
+    }
+
     public static org.openqa.selenium.By name(String name) {
         return org.openqa.selenium.By.name(name);
     }

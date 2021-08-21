@@ -245,14 +245,14 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void valueTest() {
         boolean isVisible = $w(TextInfo.class, "#user-icon").getValue(
-            "element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "element && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
     @Test
     public void valueLocatorListTest() {
         boolean isVisible = $w(TextInfo.class, withParent("#user-icon")).getValue(
-            "element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "element && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
@@ -327,7 +327,7 @@ public class JSWithFiltersTests implements TestInit {
             $wf(TextInfo.class, "#user-name").getAllStyles();
             fail("Should throw error");
         } catch (JDINovaException ex) {
-            assertTrue(ex.getMessage().contains("styles is not iterable"));
+            assertTrue(ex.getMessage().contains("Failed to execute 'getComputedStyle'"), ex.getMessage());
         }
     }
     @Test

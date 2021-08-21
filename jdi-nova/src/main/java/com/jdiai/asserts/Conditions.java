@@ -18,12 +18,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public abstract class Conditions {
-    public static Condition visible = condition("%element% is %not% visible",  el -> {
-        if (el.isHidden()) {
-            return false;
-        }
-        return el.show().isVisible();
-    });
+    public static Condition visible = condition("%element% is %not% visible", HasCore::isVisible);
 
     public static Condition displayed = condition("%element% is %not% displayed", HasCore::isDisplayed);
 
@@ -151,7 +146,7 @@ public abstract class Conditions {
         return attribute("id", id);
     }
 
-    public static Condition empty = condition("%element% is %not% empty", el -> el.getText().trim().equals(""));
+    public static Condition blank = condition("%element% is %not% blank", el -> isBlank(el.getText().trim()));
 
     public static Condition matchesText(String text) {
         return matchText(text);

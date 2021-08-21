@@ -12,7 +12,6 @@ import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.Conditions.be;
 import static com.jdiai.asserts.Conditions.haveAll;
 import static com.jdiai.jsbuilder.QueryLogger.ALL;
-import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 
 @Listeners(TestNGListener.class)
 public class JDINovaTests {

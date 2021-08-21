@@ -54,8 +54,10 @@ public class ListEntitiesPOTest implements TestInit {
     @Test
     public void waitForSizeDataTest() {
         DataList<SearchItem> results = searchPage.searchData;
+        assertEquals(results.size(), 6);
         assertEquals(print(results, SearchItem::toString), SearchResults);
         results.waitFor(size(s -> s > 6));
+        assertEquals(results.size(), 8);
         assertEquals(print(results, SearchItem::toString), AllSearchResults);
     }
 

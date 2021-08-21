@@ -23,7 +23,6 @@ import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_SCRIPT_EXECUTE;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JSBuilder implements IJSBuilder {
     public Integer logQuery = null;
@@ -108,7 +107,12 @@ public class JSBuilder implements IJSBuilder {
         if (logScript()) {
             logger.info("Execute query:" + LINE_BREAK + jsScript);
         }
-        Object result = getScriptResult(jsScript);
+        Object result;
+        try {
+            result = getScriptResult(jsScript);
+        } finally {
+            cleanup();
+        }
         lastScriptExecution.set(jsScript + "\n" + result);
         if (result != null && logResult()) {
             logger.info(">>> " + processResultFunc.apply(result.toString()));
@@ -239,9 +243,12 @@ public class JSBuilder implements IJSBuilder {
     }
 
     private String beforeScript() {
-        return isNotBlank(searchScript)
-            ? searchScript + "\n"
-            : "";
+        if (isBlank(searchScript)) {
+            return "";
+        }
+        return searchScript.endsWith("\n")
+            ? searchScript
+            : searchScript + "\n";
     }
 
     public String getQuery() {
@@ -249,7 +256,7 @@ public class JSBuilder implements IJSBuilder {
             return getScript();
         }
         String script = isNotEmpty(useFunctions) ? print(useFunctions.values(), "") : "";
-        script += getScript();// .replace("\nreturn ''", "");
+        script += getScript();
         if (!script.contains("%s")) {
             return script;
         }

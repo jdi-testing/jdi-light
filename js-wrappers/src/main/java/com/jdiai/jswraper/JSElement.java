@@ -62,7 +62,7 @@ public class JSElement {
 
     // region Attributes
     public String getAttribute(String attribute) {
-        return getValue(safeGet(attribute));
+        return getValue("element." + attribute);
     }
 
     public String getValue(String valueFunc) {
@@ -70,7 +70,7 @@ public class JSElement {
     }
 
     public List<String> getAttributeList(String attribute) {
-        return driver.getList(safeGet(attribute)).asString();
+        return driver.getList("element." + attribute).asString();
     }
 
     public Json getAttributes(String... attributes) {
@@ -182,10 +182,6 @@ public class JSElement {
     // endregion
 
     // region protected
-    protected String safeGet(String attribute) {
-        return "element?." + attribute + " ?? ''";
-    }
-
     protected String attributesToJson(List<String> attributes) {
         return  "{ " + print(map(attributes, attr -> "'" + attr + "': element." + attr), ", ") + " }";
     }

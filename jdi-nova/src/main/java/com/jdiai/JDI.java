@@ -5,7 +5,10 @@ import com.epam.jdi.tools.Safe;
 import com.jdiai.annotations.UI;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
-import com.jdiai.jsbuilder.*;
+import com.jdiai.jsbuilder.ConsoleLogger;
+import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsbuilder.JSBuilder;
+import com.jdiai.jsbuilder.Slf4JLogger;
 import com.jdiai.jsbuilder.jsfunctions.*;
 import com.jdiai.jswraper.JSBaseEngine;
 import com.jdiai.jswraper.JSEngine;
@@ -61,7 +64,9 @@ public class JDI {
 
     public static int timeout = 10;
 
-    public static ConditionTypes findConditions = new ConditionTypes();
+    public static ConditionTypes findFilters = new ConditionTypes();
+
+    public static String SELECT_FIND_TEXT_LOCATOR = ".//*[text()='%s']";
 
     public static Function<List<By>, JS> initJSFunc = locators -> new JSStable(JDI::driver, locators);
 
@@ -139,8 +144,10 @@ public class JDI {
     private static Safe<Integer> savedLogLevel = new Safe<>(() -> null);
 
     public static void loggerOff() {
-        savedLogLevel.set(LOG_QUERY.get());
-        logJSRequests(OFF);
+        if (savedLogLevel.get() == null) {
+            savedLogLevel.set(LOG_QUERY.get());
+            logJSRequests(OFF);
+        }
     }
 
     public static void logJSRequests(int logQueriesLevel) {
@@ -151,6 +158,7 @@ public class JDI {
         Integer logLevel = savedLogLevel.get();
         if (logLevel != null) {
             logJSRequests(logLevel);
+            savedLogLevel.set(null);
         }
     }
 
