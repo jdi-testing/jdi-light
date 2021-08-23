@@ -6,6 +6,7 @@ import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasLocators;
 import com.jdiai.interfaces.HasParent;
 import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsdriver.RuleType;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.tools.ClientRect;
 import com.jdiai.tools.GetTextTypes;
@@ -66,7 +67,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     JS clickCenter();
     JS click(int x, int y);
     JS select();
-    JS select(String value);
+    void select(String value);
     JS selectSubList(String value);
     JS setFindTextLocator(String locator);
     JS select(String... values);
@@ -110,7 +111,10 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     <T> T getEntity(String objectMap, Class<?> cl);
     void setEntity(String objectMap);
     JS find(String by);
+    JS findTemplate(String value);
     JS find(By by);
+    JS addJSCode(String script, String name);
+    JS addJSCode(String script, RuleType type, String name);
     JS children();
     JS ancestor();
     List<String> values(GetTextTypes getTextType);
@@ -142,7 +146,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     long indexOf(Function<JS, String> condition);
     JS uploadFile(String filePath);
     JS press(Keys key);
-    JS keyboardCommands(String... commands);
+    JS commands(String... commands);
     boolean isNotCovered(int xOffset, int yOffset);
     String fontColor();
     String bgColor();
@@ -167,7 +171,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     JS setParent(Object parent);
 
     default JS setFilter(String filter) {
-        engine().jsDriver().setFilter(filter);
+        jsDriver().setFilter(filter);
         return this;
     }
 
@@ -175,7 +179,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
 
     default JS setLocators(List<By> locators) {
         if (isNotEmpty(locators)) {
-            engine().jsDriver().setLocators(locators);
+            jsDriver().setLocators(locators);
         }
         return this;
     }

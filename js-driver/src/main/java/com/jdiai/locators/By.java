@@ -2,12 +2,11 @@ package com.jdiai.locators;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.pagefactory.ByAll;
 import org.openqa.selenium.support.pagefactory.ByChained;
 
 import java.util.List;
 
-import static java.lang.String.format;
+import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 
 public class By extends org.openqa.selenium.By {

@@ -4,7 +4,7 @@ import com.jdiai.JS;
 
 import java.util.function.Function;
 
-import static java.lang.String.format;
+import static com.jdiai.jsdriver.JSDriverUtils.format;
 
 public class FilterConditions {
     public static Function<JS, String> textEquals(String value) {

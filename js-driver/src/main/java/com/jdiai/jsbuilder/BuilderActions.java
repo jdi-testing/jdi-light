@@ -10,7 +10,6 @@ import java.util.regex.Matcher;
 
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
-import static java.lang.String.format;
 import static java.util.regex.Pattern.compile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -31,8 +30,16 @@ public class BuilderActions implements IBuilderActions {
         return getScript(functions.oneToOne, ctx, locator);
     }
 
-    public String oneToOneFilter(String ctx, By locator) {
-        return getScript(functions.oneToOneFilter, ctx, locator);
+    public String oneToOneFilter(String ctx, By locator, String filterName) {
+        return getScript(functions.oneToOneFilter.replace("{{filter}}", filterName),
+                ctx,
+                locator);
+    }
+    protected String processTry(String ctx,String script) {
+        String prefix = script.startsWith("try") && ctx.equals("document")
+            ? "let element;\n"
+            : "";
+        return prefix + script;
     }
 
     public String oneToList(String ctx, By locator) {
@@ -42,18 +49,23 @@ public class BuilderActions implements IBuilderActions {
         return getScript(functions.oneToList, ctx, locator);
     }
 
-    public String oneToListFilter(String ctx, By locator) {
+    public String oneToListFilter(String ctx, By locator, String filterName) {
         if (isIFrame(locator)) {
-            return oneToOneFilter(ctx, locator);
+            return oneToOneFilter(ctx, locator, filterName);
         }
-        return getScript(functions.oneToListFilter, ctx, locator);
+        return getScript(functions.oneToListFilter.replace("{{filter}}", filterName),
+                ctx,
+                locator);
     }
 
     public String listToOne(By locator) {
         return getScript(functions.listToOne, null, locator);
     }
-    public String listToOneFilter(By locator) {
-        return getScript(functions.listToOneFilter, null, locator);
+
+    public String listToOneFilter(By locator, String filterName) {
+        return getScript(functions.listToOneFilter.replace("{{filter}}", filterName),
+                null,
+                locator);
     }
 
     public String listToList(By locator) {
@@ -63,11 +75,13 @@ public class BuilderActions implements IBuilderActions {
         return getScript(functions.listToList, null, locator);
     }
 
-    public String listToListFilter(By locator) {
+    public String listToListFilter(By locator, String filterName) {
         if (isIFrame(locator)) {
-            return listToOneFilter(locator);
+            return listToOneFilter(locator, filterName);
         }
-        return getScript(functions.listToListFilter, null, locator);
+        return getScript(functions.listToListFilter.replace("{{filter}}", filterName),
+                null,
+                locator);
     }
 
     public String getResult(String collector) {
@@ -103,6 +117,7 @@ public class BuilderActions implements IBuilderActions {
         if (isBlank(script)) {
             throw new JDINovaBuilderException("Failed to build js expression. " + script + " can not be blank.");
         }
+        script = processTry(ctx, script);
         if (script.contains("{{one}}")) {
             return script.replace("{{one}}", getElement(ctx, locator));
         }

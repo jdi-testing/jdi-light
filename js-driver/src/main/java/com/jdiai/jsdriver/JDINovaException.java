@@ -3,7 +3,7 @@ package com.jdiai.jsdriver;
 import java.util.function.Consumer;
 
 import static com.jdiai.jsbuilder.QueryLogger.logger;
-import static java.lang.String.format;
+import static com.jdiai.jsdriver.JSDriverUtils.format;
 
 public class JDINovaException extends RuntimeException {
     public static Consumer<String> THROW_ASSERT = msg -> { throw new AssertionError(msg); };

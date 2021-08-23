@@ -10,13 +10,13 @@ public interface IJSBuilder {
     IJSBuilder setSearchScript(String code);
 
     IJSBuilder oneToOne(String ctx, By locator);
-    IJSBuilder oneToOneFilter(String ctx, By locator);
+    IJSBuilder oneToOneFilter(String ctx, By locator, String filterName);
     IJSBuilder listToOne(By locator);
-    IJSBuilder listToOneFilter(By locator);
+    IJSBuilder listToOneFilter(By locator, String filterName);
     IJSBuilder oneToList(String ctx, By locator);
-    IJSBuilder oneToListFilter(String ctx, By locator);
+    IJSBuilder oneToListFilter(String ctx, By locator, String filterName);
     IJSBuilder listToList(By locator);
-    IJSBuilder listToListFilter(By locator);
+    IJSBuilder listToListFilter(By locator, String filterName);
 
     IJSBuilder doAction(String collectResult);
     IJSBuilder doListAction(String collectResult);

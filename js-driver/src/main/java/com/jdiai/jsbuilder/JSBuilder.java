@@ -168,29 +168,29 @@ public class JSBuilder implements IJSBuilder {
     public IJSBuilder oneToOne(String ctx, By locator) {
         return addJSCode(builderActions.oneToOne(ctx, locator));
     }
-    public IJSBuilder oneToOneFilter(String ctx, By locator) {
-        return addJSCode(builderActions.oneToOneFilter(ctx, locator));
+    public IJSBuilder oneToOneFilter(String ctx, By locator, String filter) {
+        return addJSCode(builderActions.oneToOneFilter(ctx, locator, filter));
     }
 
     public IJSBuilder listToOne(By locator) {
         return addJSCode(builderActions.listToOne(locator));
     }
-    public IJSBuilder listToOneFilter(By locator) {
-        return addJSCode(builderActions.listToOneFilter(locator));
+    public IJSBuilder listToOneFilter(By locator, String filter) {
+        return addJSCode(builderActions.listToOneFilter(locator, filter));
     }
 
     public IJSBuilder oneToList(String ctx, By locator) {
         return addJSCode(builderActions.oneToList(ctx, locator));
     }
-    public IJSBuilder oneToListFilter(String ctx, By locator) {
-        return addJSCode(builderActions.oneToListFilter(ctx, locator));
+    public IJSBuilder oneToListFilter(String ctx, By locator, String filter) {
+        return addJSCode(builderActions.oneToListFilter(ctx, locator, filter));
     }
 
     public IJSBuilder listToList(By locator) {
         return addJSCode(builderActions.listToList(locator));
     }
-    public IJSBuilder listToListFilter(By locator) {
-        return addJSCode(builderActions.listToListFilter(locator));
+    public IJSBuilder listToListFilter(By locator, String filter) {
+        return addJSCode(builderActions.listToListFilter(locator, filter));
     }
 
     public IJSBuilder doAction(String collectResult) {

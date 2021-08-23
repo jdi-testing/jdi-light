@@ -2,6 +2,7 @@ package com.jdiai.jswraper;
 
 import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.jsbuilder.JSBuilder;
+import com.jdiai.jsdriver.JSDriver;
 import com.jdiai.jsproducer.Json;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.LinqUtils.newList;
+import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.jdiai.jswraper.JSEntity.GET_ENTITY_MAP;
 
 public class JSBaseEngine extends JSElement implements JSEngine {
@@ -40,17 +42,24 @@ public class JSBaseEngine extends JSElement implements JSEngine {
         this(() -> driver, locators);
     }
 
-    public JSEngine copy() {
-        JSEngine engine = new JSBaseEngine(() -> driver.driver(), driver.locators());
-        engine.setupEntity(entity);
-        engine.setMap(objectMap);
-        engine.jsDriver().setBuilder(jsDriver().builder());
-        engine.jsDriver().strategy = jsDriver().strategy;
-        engine.jsDriver().context = jsDriver().context;
-        engine.jsDriver().filter = jsDriver().filter;
-        engine.jsDriver().beforeResultScript = jsDriver().beforeResultScript;
+    public void copyDriver(JSDriver driver) {
+        this.driver = driver.copy();
+    }
 
+    public JSEngine copy() {
+        JSEngine engine = new JSBaseEngine(() -> this.driver.driver());
+        engine.copyFrom(this);
         return engine;
+    }
+
+    public void copyFrom(JSEngine engine) {
+        if (!isClass(engine.getClass(), JSBaseEngine.class)) {
+            return ;
+        }
+        JSBaseEngine jsEngine = (JSBaseEngine) engine;
+        this.setupEntity(jsEngine.entity);
+        this.setMap(jsEngine.objectMap);
+        this.copyDriver(jsEngine.driver);
     }
 
     public JSBaseEngine setupEntity(Class<?> entity) {
@@ -100,10 +109,12 @@ public class JSBaseEngine extends JSElement implements JSEngine {
         setMap(valueFunc);
         return getAsMap();
     }
+
     public void setMultipleValues(String valueFunc) {
         setMap(valueFunc);
         setMultipleValues();
     }
+
     public void setMultipleValues() {
         driver.doAction(objectMap);
     }

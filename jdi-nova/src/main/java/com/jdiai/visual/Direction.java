@@ -4,9 +4,9 @@ import org.openqa.selenium.Point;
 
 import java.util.function.BiFunction;
 
+import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
-import static java.lang.String.format;
 
 public class Direction {
     public static BiFunction<Direction, Direction, Boolean> VECTOR_SIMILARITY =

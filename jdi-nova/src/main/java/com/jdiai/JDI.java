@@ -38,6 +38,7 @@ import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.QueryLogger.*;
 import static com.jdiai.jsdriver.JDINovaException.assertContains;
+import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static com.jdiai.jswraper.JSWrappersUtils.*;
 import static com.jdiai.jswraper.driver.DriverManager.useDriver;
@@ -45,7 +46,6 @@ import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 import static com.jdiai.tools.WindowsManager.getWindows;
-import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class JDI {

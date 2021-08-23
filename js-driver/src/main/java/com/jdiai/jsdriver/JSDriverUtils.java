@@ -17,7 +17,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.jdiai.jsbuilder.jsfunctions.JSFunctions.XPATH_FUNC;
 import static com.jdiai.jsbuilder.jsfunctions.JSFunctions.XPATH_LIST_FUNC;
-import static java.lang.String.format;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -117,5 +117,12 @@ public final class JSDriverUtils {
         map.put("By.tagName", By::tagName);
         map.put("By.xpath", By::xpath);
         return map;
+    }
+
+    public static String format(String text, Object... args) {
+        if (isEmpty(args)) {
+            return text;
+        }
+        return String.format(text, args);
     }
 }

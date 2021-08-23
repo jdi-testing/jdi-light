@@ -27,11 +27,9 @@ import static com.jdiai.asserts.Conditions.displayed;
 import static com.jdiai.asserts.Conditions.have;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.jsfunctions.JSOneToOne.FIND_ONE;
-import static com.jdiai.jsdriver.JSDriverUtils.iFrame;
-import static com.jdiai.jsdriver.JSDriverUtils.selector;
+import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
-import static java.lang.String.format;
 
 public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     private JS core;
@@ -80,10 +78,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     }
 
     protected JS findOne(String value) {
-        JS js = core().copy();
-        js.engine().jsDriver().scriptBeforeResult(findOneScript(value));
-        js.setName(getName() + "[" + value + "]");
-        return js;
+        return core().addJSCode(findOneScript(value), "[" + value + "]");
     }
 
     protected String findOneScript(String value) {

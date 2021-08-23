@@ -13,7 +13,7 @@ public class JSListToOne {
 
     public static String FILTER_LIST_TO_ONE =
         "if (elements.length === 0) { throw 'Failed to find element' }\n" +
-        "element = elements.map(e => filter({{one:e}}));\n" +
+        "element = elements.map(e => {{filter}}({{one:e}}));\n" +
         "if (!element) { throw 'Failed to find element' };\n";
 
     public static String AGILE_LIST_TO_ONE =
@@ -22,7 +22,7 @@ public class JSListToOne {
         "while (!found && i < elements.length) {\n" +
         "  element = {{one:elements[i]}};\n" +
         "  if (!first && element) { first = element; }\n" +
-        "  if (filter(element)) { break; }\n" +
+        "  if ({{filter}}(element)) { break; }\n" +
         "  i++;\n" +
         "}\n" +
         "if (!element && first) { element = first; }\n" +

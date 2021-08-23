@@ -2,6 +2,7 @@ package com.jdiai.jswraper;
 
 import com.google.gson.JsonObject;
 import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsdriver.JSDriver;
 import com.jdiai.jsproducer.JSProducer;
 import com.jdiai.jsproducer.Json;
@@ -33,11 +34,14 @@ public class JSElement {
     }
 
     public JSDriver jsDriver() {
-        return driver;
+        if (driver != null) {
+            return driver;
+        }
+        throw new JDINovaException("JSDriver not initialized");
     }
 
     public void updateDriver(JSDriver driver) {
-        this.driver.context = driver.context;
+        this.driver.copy().context = driver.context;
         this.driver.strategy = driver.strategy;
         this.driver.setBuilder(driver.builder());
     }

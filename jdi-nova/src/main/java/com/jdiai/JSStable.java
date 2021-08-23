@@ -19,7 +19,7 @@ import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.Timer.sleep;
 import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.Conditions.visible;
-import static java.lang.String.format;
+import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class JSStable extends JSLight {
@@ -54,7 +54,7 @@ public class JSStable extends JSLight {
     @Override
     public JSStable copy() {
         JSStable js = new JSStable();
-        js.setCore(core());
+        js.copyFrom(core());
         return js;
     }
 
@@ -139,7 +139,7 @@ public class JSStable extends JSLight {
         }
         loggerOn();
         if (exception == null || exception.getMessage().contains("Failed to find element")) {
-            throw new JDINovaException("Failed to find element by locator: %s (in %s seconds)", this, timer.timePassedInMSec() / 1000);
+            throw new JDINovaException("Failed to find element: %s (in %s seconds)", this, timer.timePassedInMSec() / 1000);
         } else {
             throw new JDINovaException(exception, "Failed to execute '%s' for element '%s' (in %s seconds)", actionName, this, timer.timePassedInMSec() / 1000);
         }

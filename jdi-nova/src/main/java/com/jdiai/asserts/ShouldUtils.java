@@ -12,7 +12,7 @@ import static com.jdiai.JDI.*;
 import static com.jdiai.JDIStatistic.shouldValidations;
 import static com.jdiai.jsbuilder.JSBuilder.lastScriptExecution;
 import static com.jdiai.jsdriver.JDINovaException.throwAssert;
-import static java.lang.String.format;
+import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class ShouldUtils {

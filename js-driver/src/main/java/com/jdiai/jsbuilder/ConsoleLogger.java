@@ -4,7 +4,7 @@ import com.epam.jdi.tools.ILogger;
 import org.apache.logging.log4j.Level;
 
 import static com.epam.jdi.tools.Timer.nowTimeShort;
-import static java.lang.String.format;
+import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static org.apache.logging.log4j.Level.*;
 
 public class ConsoleLogger implements ILogger {
@@ -39,12 +39,10 @@ public class ConsoleLogger implements ILogger {
         printMessage(ERROR, msg, args);
     }
     private void printMessage(Level logLevel, String msg, Object... args) {
-        String message = args.length == 0
-            ? msg : format(msg, args);
         long threadId = Thread.currentThread().getId();
         String logInfo = threadId == 1
             ? logLevel.toString()
             : logLevel.toString() + ":" + threadId;
-        System.out.printf("[%s] %s %s %n", logInfo, nowTimeShort(), message);
+        System.out.printf("[%s] %s %s %n", logInfo, nowTimeShort(), format(msg, args));
     }
 }
