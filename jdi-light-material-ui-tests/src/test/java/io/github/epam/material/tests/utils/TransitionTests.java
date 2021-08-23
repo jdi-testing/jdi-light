@@ -45,7 +45,7 @@ public class TransitionTests extends TestsInit {
     public void fadeDisplayTest() {
         Timer timer = new Timer(2000L);
         collapseFadeTransitions.get(3).is().transitionExited(FADE);
-        collapseFadeTransitions.get(4).is().transitionExited(FADE);;
+        collapseFadeTransitions.get(4).is().transitionExited(FADE);
 
         checkboxes.get(2).check();
 
