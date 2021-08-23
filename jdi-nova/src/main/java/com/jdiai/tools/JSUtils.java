@@ -25,37 +25,37 @@ public final class JSUtils {
          if (locator == null) {
              return null;
          }
-         if (locator.value() != null && !locator.value().isEmpty()) {
+         if (isNotEmpty(locator.value())) {
              return NAME_TO_LOCATOR.apply(locator.value());
          }
-         if (locator.id() != null && !locator.id().isEmpty()) {
+         if (isNotEmpty(locator.id())) {
              return By.id(locator.id());
          }
-         if (locator.clazz() != null && !locator.clazz().isEmpty()) {
+         if (isNotEmpty(locator.clazz())) {
              return By.className(locator.clazz());
          }
-         if (locator.xpath() != null && !locator.xpath().isEmpty()) {
+         if (isNotEmpty(locator.xpath())) {
              return By.xpath(locator.xpath());
          }
-         if (locator.css() != null && !locator.css().isEmpty()) {
+         if (isNotEmpty(locator.css())) {
              return By.cssSelector(locator.css());
          }
-         if (locator.text() != null && !locator.text().isEmpty()) {
+         if (isNotEmpty(locator.text())) {
              return By.xpath(format(".//*/text()[normalize-space(.) = %s]/parent::*", escape(locator.text())));
          }
-         if (locator.hasText() != null && !locator.hasText().isEmpty()) {
+         if (isNotEmpty(locator.hasText())) {
              return By.xpath(format(".//*/text()[contains(normalize-space(.), %s)]/parent::*", escape(locator.hasText())));
          }
-         if (locator.tag() != null && !locator.tag().isEmpty()) {
+         if (isNotEmpty(locator.tag())) {
              return By.tagName(locator.tag());
          }
-         if (locator.label() != null && !locator.label().isEmpty()) {
+         if (isNotEmpty(locator.label())) {
              return By.cssSelector("[label=" + locator.label() + "]");
          }
-         if (locator.alt() != null && !locator.alt().isEmpty()) {
+         if (isNotEmpty(locator.alt())) {
              return By.cssSelector("[alt=" + locator.alt() + "]");
          }
-         if (locator.hasValue() != null && !locator.hasValue().isEmpty()) {
+         if (isNotEmpty(locator.hasValue())) {
              return By.cssSelector("[value=" + locator.hasValue() + "]");
          }
          return null;
@@ -65,28 +65,28 @@ public final class JSUtils {
          if (locator == null) {
              return null;
          }
-         if (locator.id() != null && !locator.id().isEmpty()) {
+         if (isNotEmpty(locator.id())) {
              return By.id(locator.id());
          }
-         if (locator.className() != null && !locator.className().isEmpty()) {
+         if (isNotEmpty(locator.className())) {
              return By.className(locator.className());
          }
-         if (locator.xpath() != null && !locator.xpath().isEmpty()) {
+         if (isNotEmpty(locator.xpath())) {
              return By.xpath(locator.xpath());
          }
-         if (locator.css() != null && !locator.css().isEmpty()) {
+         if (isNotEmpty(locator.css())) {
              return By.cssSelector(locator.css());
          }
-         if (locator.linkText() != null && !locator.linkText().isEmpty()) {
+         if (isNotEmpty(locator.linkText())) {
              return By.linkText(locator.linkText());
          }
-         if (locator.name() != null && !locator.name().isEmpty()) {
+         if (isNotEmpty(locator.name())) {
              return By.name(locator.name());
          }
-         if (locator.partialLinkText() != null && !locator.partialLinkText().isEmpty()) {
+         if (isNotEmpty(locator.partialLinkText())) {
              return By.partialLinkText(locator.partialLinkText());
          }
-         if (locator.tagName() != null && !locator.tagName().isEmpty()) {
+         if (isNotEmpty(locator.tagName())) {
              return By.tagName(locator.tagName());
          }
          if (locator.how() != UNSET) {
