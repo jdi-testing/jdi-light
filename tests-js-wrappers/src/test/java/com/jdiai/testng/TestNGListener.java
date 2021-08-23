@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.epam.jdi.tools.LinqUtils.last;
-import static com.jdiai.jsdriver.JSDriverUtils.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.jswraper.JSWrapper.driver;
 import static java.lang.System.currentTimeMillis;
 

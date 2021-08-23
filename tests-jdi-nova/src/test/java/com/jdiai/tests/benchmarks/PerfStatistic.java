@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.LongStream;
 
 import static com.epam.jdi.tools.PropertyReader.getProperties;
-import static com.jdiai.jsdriver.JSDriverUtils.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.lang.Boolean.parseBoolean;
 import static org.testng.Assert.assertEquals;
 

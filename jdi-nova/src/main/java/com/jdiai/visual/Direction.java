@@ -4,7 +4,7 @@ import org.openqa.selenium.Point;
 
 import java.util.function.BiFunction;
 
-import static com.jdiai.jsdriver.JSDriverUtils.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.copyList;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static com.jdiai.jsdriver.JSDriverUtils.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.openqa.selenium.support.How.*;

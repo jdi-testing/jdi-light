@@ -2,6 +2,7 @@ package com.jdiai;
 
 import com.epam.jdi.tools.ILogger;
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.StringUtils;
 import com.jdiai.annotations.UI;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
@@ -33,12 +34,12 @@ import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.QueryLogger.*;
 import static com.jdiai.jsdriver.JDINovaException.assertContains;
-import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static com.jdiai.jswraper.JSWrappersUtils.*;
 import static com.jdiai.jswraper.driver.DriverManager.useDriver;
@@ -112,7 +113,7 @@ public class JDI {
         By locator = getLocatorFromField(field);
         if (locator != null) {
             String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
-            return format("'%s': %s", field.getName(), getValueType(field, element));
+            return StringUtils.format("'%s': %s", field.getName(), getValueType(field, element));
         }
         return null;
     };

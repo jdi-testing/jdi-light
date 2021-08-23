@@ -3,7 +3,7 @@ package com.jdiai.jsbuilder;
 import com.epam.jdi.tools.ILogger;
 import org.apache.logging.log4j.Logger;
 
-import static com.jdiai.jsdriver.JSDriverUtils.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static org.apache.logging.log4j.Level.*;
 import static org.apache.logging.log4j.LogManager.getLogger;
 

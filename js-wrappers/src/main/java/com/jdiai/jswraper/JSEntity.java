@@ -14,7 +14,7 @@ import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static com.jdiai.jsdriver.JSDriverUtils.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
 
 public class JSEntity<T> extends JSElement {

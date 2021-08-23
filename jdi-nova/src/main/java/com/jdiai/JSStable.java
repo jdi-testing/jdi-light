@@ -16,10 +16,10 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.LinqUtils.last;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.epam.jdi.tools.Timer.sleep;
 import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.Conditions.visible;
-import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class JSStable extends JSLight {

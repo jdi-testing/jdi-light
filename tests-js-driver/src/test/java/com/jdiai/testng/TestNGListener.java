@@ -16,8 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.epam.jdi.tools.LinqUtils.last;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.DriverManager.driver;
-import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {

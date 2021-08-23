@@ -1,5 +1,6 @@
 package com.jdiai.jsdriver;
 
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.locators.ByFrame;
@@ -99,7 +100,7 @@ public final class JSDriverUtils {
         if (!byLocator.contains("%"))
             throw new RuntimeException(getBadLocatorMsg(byLocator, args));
         try {
-            byLocator = format(byLocator, args);
+            byLocator = StringUtils.format(byLocator, args);
         } catch (Exception ex) {
             throw new RuntimeException(getBadLocatorMsg(byLocator, args));
         }
@@ -117,12 +118,5 @@ public final class JSDriverUtils {
         map.put("By.tagName", By::tagName);
         map.put("By.xpath", By::xpath);
         return map;
-    }
-
-    public static String format(String text, Object... args) {
-        if (isEmpty(args)) {
-            return text;
-        }
-        return String.format(text, args);
     }
 }

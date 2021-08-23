@@ -8,8 +8,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.util.List;
 
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
-import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static com.jdiai.jswraper.driver.DriverVersion.PENULT;
 import static com.jdiai.jswraper.driver.GetDriverUtilities.getOs;
 import static com.jdiai.jswraper.driver.GetDriverUtilities.hasVersion;

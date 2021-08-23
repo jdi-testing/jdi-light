@@ -8,11 +8,11 @@ import java.util.function.Supplier;
 
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.JDI.*;
 import static com.jdiai.JDIStatistic.shouldValidations;
 import static com.jdiai.jsbuilder.JSBuilder.lastScriptExecution;
 import static com.jdiai.jsdriver.JDINovaException.throwAssert;
-import static com.jdiai.jsdriver.JSDriverUtils.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class ShouldUtils {

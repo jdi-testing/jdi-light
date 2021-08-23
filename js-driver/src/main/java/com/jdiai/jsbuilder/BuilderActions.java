@@ -1,5 +1,6 @@
 package com.jdiai.jsbuilder;
 
+import com.epam.jdi.tools.StringUtils;
 import com.jdiai.jsbuilder.jsfunctions.BuilderFunctions;
 import com.jdiai.jsdriver.JDINovaBuilderException;
 import org.openqa.selenium.By;
@@ -110,7 +111,7 @@ public class BuilderActions implements IBuilderActions {
     }
 
     private String formatCollector(String collector, String result) {
-        return collector.contains("return") ? collector : format(result, collector);
+        return collector.contains("return") ? collector : StringUtils.format(result, collector);
     }
 
     protected String getScript(String script, String ctx, By locator) {

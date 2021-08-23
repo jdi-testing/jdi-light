@@ -1,6 +1,7 @@
 package com.jdiai;
 
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -152,7 +153,7 @@ public class JSLight implements JS {
         if (value == null || isEmpty(locators())) {
             return this;
         }
-        find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
+        find(StringUtils.format(SELECT_FIND_TEXT_LOCATOR, value)).click();
         return this;
     }
 
@@ -190,7 +191,7 @@ public class JSLight implements JS {
             ctx = "element";
         }
         for (String value : values) {
-            By by = defineLocator(format(selectFindTextLocator(), value));
+            By by = defineLocator(StringUtils.format(selectFindTextLocator(), value));
             builder.doAction(MessageFormat.format(dataType(by).get, ctx, selector(by, builder)) + ".click();\n");
         }
         return builder;
@@ -199,7 +200,7 @@ public class JSLight implements JS {
     protected IJSBuilder getScriptForSelect(String... values) {
         IJSBuilder builder = jsDriver().buildOne();
         for (String value : values) {
-            By by = defineLocator(format(selectFindTextLocator(), value));
+            By by = defineLocator(StringUtils.format(selectFindTextLocator(), value));
             builder.doAction(MessageFormat.format(dataType(by).get, "element", selector(by, builder)) + ".click();\n");
         }
         return builder;
@@ -347,7 +348,7 @@ public class JSLight implements JS {
 
     public String printHtml() {
         return MessageFormat.format("<{0} {1}>{2}</{0}>", getTagName().toLowerCase(),
-            print(allAttributes(), el -> format("%s='%s'", el.key, el.value), " "),
+            print(allAttributes(), el -> StringUtils.format("%s='%s'", el.key, el.value), " "),
             getJSResult("innerHTML"));
     }
 
@@ -782,7 +783,7 @@ public class JSLight implements JS {
 
     public JS get(String value) {
         JS js = get(textEquals(value));
-        js.setName(format("%s[%s]",getName(), value));
+        js.setName(StringUtils.format("%s[%s]",getName(), value));
         return js;
     }
 
@@ -991,7 +992,7 @@ public class JSLight implements JS {
         if (similar(relation, expectedRelation)) {
             return;
         }
-        failures.add(format("Elements '%s' and '%s' are misplaced: angle: %s => %s; length: %s => %s",
+        failures.add(StringUtils.format("Elements '%s' and '%s' are misplaced: angle: %s => %s; length: %s => %s",
             getFullName(), relation.key, relation.value.angle(), expectedRelation.angle(),
             relation.value.length(), expectedRelation.length()));
     }
@@ -1019,7 +1020,7 @@ public class JSLight implements JS {
         if (isBlank(name)) {
             return printLocators();
         }
-        return format("%s(%s%s)", getName(), getFullName(), printLocators());
+        return StringUtils.format("%s(%s%s)", getName(), getFullName(), printLocators());
     }
 
     public String getFullName() {
