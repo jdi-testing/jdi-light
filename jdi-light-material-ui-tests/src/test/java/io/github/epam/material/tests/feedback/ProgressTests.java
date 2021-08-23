@@ -20,28 +20,27 @@ public class ProgressTests extends TestsInit {
     @Test
     public void progressSimpleTest() {
         timer.wait(() -> circularIndeterminate.isDisplayed());
-        circularDeterminate1.isDisplayed();
-        circularDeterminate2.isDisplayed();
-        circularDeterminate3.isDisplayed();
-        circularDeterminate4.isDisplayed();
-        circularDeterminate5.isDisplayed();
-        circularDeterminate6.isDisplayed();
-        circularIndeterminate2.isDisplayed();
-        circularIndeterminate3.isDisplayed();
+        circularDeterminateWithValue25.isDisplayed();
+        circularDeterminateWithValue50.isDisplayed();
+        circularDeterminateWithValue75.isDisplayed();
+        circularDeterminateWithValue100.isDisplayed();
+        circularDeterminateProgress.isDisplayed();
+        circularDeterminateProgressWithLabel.isDisplayed();
+        circularIndeterminateCustomized.isDisplayed();
+        circularDeterminateCustomized.isDisplayed();
         interactiveIntegrationCircularButton.isDisplayed();
         linearIndeterminate.isDisplayed();
         linearDeterminate.isDisplayed();
         linearBuffer.isDisplayed();
         linearWithLabel.isDisplayed();
-        delayingAppearance.isDisplayed();
     }
 
     @Test
     public void circularProgressTest() {
         circularIndeterminate.is().indeterminate();
-        int valueNow = circularDeterminate5.getValueNow();
-        timer.wait(() -> circularDeterminate5.is().value(valueNow + 10));
-        circularDeterminate5.is().determinate();
+        int valueNow = circularDeterminateProgress.getValueNow();
+        timer.wait(() -> circularDeterminateProgress.is().value(valueNow + 10));
+        circularDeterminateProgress.is().determinate();
     }
 
     @Test
