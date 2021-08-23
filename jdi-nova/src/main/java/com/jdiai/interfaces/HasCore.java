@@ -2,6 +2,8 @@ package com.jdiai.interfaces;
 
 import com.jdiai.JS;
 import com.jdiai.asserts.ShouldValidations;
+import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsdriver.JSDriver;
 import com.jdiai.jswraper.JSEngine;
 import com.jdiai.visual.Direction;
 import com.jdiai.visual.ImageTypes;
@@ -39,11 +41,11 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
     }
 
     default boolean isEnabled() {
-        return core().isEnabled();
+        return !isDisabled();
     }
 
     default boolean isDisabled() {
-        return !isEnabled();
+        return core().isDisabled();
     }
 
     default boolean isDisplayed() {
@@ -74,8 +76,8 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
         return core().isExist();
     }
 
-    default boolean isClickable() {
-        return core().isClickable();
+    default boolean isNotCovered() {
+        return core().isNotCovered();
     }
 
     default boolean isNotExist() {
@@ -128,5 +130,13 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
 
     default JSEngine engine() {
         return core().engine();
+    }
+    
+    default IJSBuilder builder() {
+        return jsDriver().builder();
+    }
+    
+    default JSDriver jsDriver() {
+        return engine().jsDriver();
     }
 }

@@ -60,6 +60,8 @@ public class FillFormTalkTest implements TestInit {
         validateUrl("/index.html");
         $(".sidebar-menu", ".//li//*[text()='%s']").select("Contact form");
         validateUrl("/contacts.html");
+        $(".sidebar-menu", ".//li//*[text()='%s']").select("Service", "User Table");
+        validateUrl("/user-table.html");
     }
     private void validateUrl(String uri) {
         assertEquals(driver().getCurrentUrl(), "https://jdi-testing.github.io/jdi-light" + uri);

@@ -10,7 +10,7 @@ import java.util.function.Function;
 
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 
 public class Json extends MapArray<String, String> {
     public Json(List<String> keys, JsonObject json) {

@@ -11,10 +11,10 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.JDI.JDI_STORAGE;
 import static com.jdiai.visual.ImageTypes.JPG;
 import static java.lang.Math.*;
-import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class VisualSettings {

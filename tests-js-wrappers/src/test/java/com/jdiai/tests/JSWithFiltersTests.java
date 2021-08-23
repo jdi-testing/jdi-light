@@ -3,9 +3,10 @@ package com.jdiai.tests;
 import com.google.gson.JsonObject;
 import com.jdiai.TestInit;
 import com.jdiai.entities.Header;
-import com.jdiai.entities.HeaderRaw;
+import com.jdiai.entities.RawHeader;
 import com.jdiai.entities.TextHtml;
 import com.jdiai.entities.TextInfo;
+import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.jswraper.JSElement;
 import com.jdiai.jswraper.JSEngine;
@@ -19,10 +20,10 @@ import java.util.List;
 import static com.jdiai.Pages.DOMAIN;
 import static com.jdiai.Pages.SIMPLE_PAGE;
 import static com.jdiai.jswraper.JSWrapper.$w;
+import static com.jdiai.jswraper.JSWrapper.$wf;
 import static com.jdiai.states.States.*;
 import static java.util.Arrays.asList;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 @Listeners(TestNGListener.class)
 public class JSWithFiltersTests implements TestInit {
@@ -77,14 +78,14 @@ public class JSWithFiltersTests implements TestInit {
     private Header expectedHeader() {
         return new Header().set(h-> { h.text = "Name"; h.visibility = ""; h.tag = "TH"; });
     }
-    private HeaderRaw expectedHeaderRaw() {
-        return new HeaderRaw().set(h-> { h.innerText = "Name"; h.className = ""; h.tagName = "TH"; });
+    private RawHeader expectedHeaderRaw() {
+        return new RawHeader().set(h-> { h.innerText = "Name"; h.className = ""; h.tagName = "TH"; });
     }
 
     @Test
     public void multiEntitiesTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Header> headers = $w(Header.class, "#furniture-double-hidden th")
+        List<Header> headers = $wf(Header.class, "#furniture-double-hidden th")
             .getEntityList("{ 'text': element.innerText, 'visibility': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
         assertEquals(headers.get(0), expectedHeader());
@@ -92,7 +93,7 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void multiEntitiesLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Header> headers = $w(Header.class, "#furniture-double-hidden", "th")
+        List<Header> headers = $wf(Header.class, "#furniture-double-hidden", "th")
             .getEntityList("{ 'text': element.innerText, 'visibility': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
         assertEquals(headers.get(0), expectedHeader());
@@ -100,7 +101,7 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void multiEntitiesByAttrTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<HeaderRaw> headers = $w(HeaderRaw.class, "#furniture-double-hidden th")
+        List<RawHeader> headers = $wf(RawHeader.class, "#furniture-double-hidden th")
             .getEntityList(asList("innerText", "className", "tagName"));
         assertEquals(headers.size(), 4);
         assertEquals(headers.get(0), expectedHeaderRaw());
@@ -108,7 +109,7 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void multiEntitiesByAttrLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<HeaderRaw> headers = $w(HeaderRaw.class, "#furniture-double-hidden", "th")
+        List<RawHeader> headers = $wf(RawHeader.class, "#furniture-double-hidden", "th")
             .getEntityList(asList("innerText", "className", "tagName"));
         assertEquals(headers.size(), 4);
 
@@ -135,7 +136,7 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void jsonMultiTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<JsonObject> headers = $w("#furniture-double-hidden th")
+        List<JsonObject> headers = $wf("#furniture-double-hidden th")
             .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
 
@@ -146,7 +147,7 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void jsonMultiLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<JsonObject> headers = $w("#furniture-double-hidden", "th")
+        List<JsonObject> headers = $wf("#furniture-double-hidden", "th")
             .getJsonList("{ 'text': element.innerText, 'class': element.className, 'tag': element.tagName }");
         assertEquals(headers.size(), 4);
 
@@ -185,13 +186,13 @@ public class JSWithFiltersTests implements TestInit {
         assertEquals(jsObject.innerHTML, "Roman Iovlev");
     }
     private JSEngine header() {
-        JSEngine userName = $w("#furniture-double-hidden th");
+        JSEngine userName = $wf("#furniture-double-hidden th");
         userName.setupEntity(Header.class);
         return userName;
     }
-    private JSEngine headerRaw() {
-        JSEngine userName = $w("#furniture-double-hidden th");
-        userName.setupEntity(HeaderRaw.class);
+    private JSEngine rawHeader() {
+        JSEngine userName = $wf("#furniture-double-hidden th");
+        userName.setupEntity(RawHeader.class);
         return userName;
     }
     @Test
@@ -204,7 +205,7 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void smartMultiEntitiesByAttrTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<HeaderRaw> headers = headerRaw().getEntityList(asList("innerText", "className", "tagName"));
+        List<RawHeader> headers = rawHeader().getEntityList(asList("innerText", "className", "tagName"));
         assertEquals(headers.size(), 4);
         assertEquals(headers.get(0), expectedHeaderRaw());
     }
@@ -244,14 +245,14 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void valueTest() {
         boolean isVisible = $w(TextInfo.class, "#user-icon").getValue(
-            "element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "element && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
     @Test
     public void valueLocatorListTest() {
         boolean isVisible = $w(TextInfo.class, withParent("#user-icon")).getValue(
-            "element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "element && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
@@ -286,7 +287,7 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void multiAttributesTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Json> headers = $w(TextInfo.class, "#furniture-double-hidden th").getMultiAttributes("innerText", "className ", "tagName");
+        List<Json> headers = $wf(TextInfo.class, "#furniture-double-hidden th").getMultiAttributes("innerText", "className ", "tagName");
         assertEquals(headers.size(), 4);
 
         assertEquals(headers.get(0).get("innerText"), "Name");
@@ -296,7 +297,7 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void multiAttributesLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Json> headers = $w(TextInfo.class, "#furniture-double-hidden", "th").getMultiAttributes("innerText", "className", "tagName");
+        List<Json> headers = $wf(TextInfo.class, "#furniture-double-hidden", "th").getMultiAttributes("innerText", "className", "tagName");
         assertEquals(headers.size(), 4);
 
         assertEquals(headers.get(0).get("innerText"), "Name");
@@ -319,6 +320,15 @@ public class JSWithFiltersTests implements TestInit {
         assertTrue(styles.size() > 10);
         String visibility = styles.get("visibility");
         assertEquals(visibility, "hidden");
+    }
+    @Test
+    public void allStylesFilteredTest() {
+        try {
+            $wf(TextInfo.class, "#user-name").getAllStyles();
+            fail("Should throw error");
+        } catch (JDINovaException ex) {
+            assertTrue(ex.getMessage().contains("Failed to execute 'getComputedStyle'"), ex.getMessage());
+        }
     }
     @Test
     public void styleLocatorListTest() {
@@ -346,21 +356,21 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void stylesListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<String> visibility = $w(TextInfo.class, "#furniture-double-hidden th").getStylesList("visibility");
+        List<String> visibility = $wf(TextInfo.class, "#furniture-double-hidden th").getStylesList("visibility");
         assertEquals(visibility.size(), 4);
         assertEquals(visibility.get(0), "visible");
     }
     @Test
     public void stylesListLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<String> visibility = $w(TextInfo.class, "#furniture-double-hidden", "th").getStylesList("visibility");
+        List<String> visibility = $wf(TextInfo.class, "#furniture-double-hidden", "th").getStylesList("visibility");
         assertEquals(visibility.size(), 4);
         assertEquals(visibility.get(0), "visible");
     }
     @Test
     public void multiStylesTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Json> visibility = $w(TextInfo.class, "#furniture-double-hidden th").getMultiStyles("visibility", "display");
+        List<Json> visibility = $wf(TextInfo.class, "#furniture-double-hidden th").getMultiStyles("visibility", "display");
         assertEquals(visibility.size(), 4);
 
         assertEquals(visibility.get(0).get("visibility"), "visible");
@@ -369,7 +379,7 @@ public class JSWithFiltersTests implements TestInit {
     @Test
     public void multiStylesLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<Json> visibility = $w(TextInfo.class, "#furniture-double-hidden", "th").getMultiStyles("visibility", "display");
+        List<Json> visibility = $wf(TextInfo.class, "#furniture-double-hidden", "th").getMultiStyles("visibility", "display");
         assertEquals(visibility.size(), 4);
 
         assertEquals(visibility.get(0).get("visibility"), "visible");

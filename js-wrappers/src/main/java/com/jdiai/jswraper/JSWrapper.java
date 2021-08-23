@@ -1,7 +1,6 @@
 package com.jdiai.jswraper;
 
 import com.epam.jdi.tools.Safe;
-import com.jdiai.jsbuilder.FilterBuilderActions;
 import com.jdiai.jswraper.driver.DriverManager;
 import org.openqa.selenium.WebDriver;
 
@@ -10,28 +9,45 @@ import static com.jdiai.jswraper.JSWrappersUtils.locatorsToBy;
 
 public class JSWrapper {
     public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::getDriver);
-    
+    public static String displayedFilter = "element && styles.visibility === 'visible' && styles.display !== 'none' && !element.hasAttribute('hidden')";
+
     public static WebDriver driver() {
         return DRIVER.get();
     }
 
-    public static JSEngine $w(String locator) {
-        return new JSWithFilters(driver(), NAME_TO_LOCATOR.apply(locator));
+    public static JSBaseEngine $w(String locator) {
+        return new JSBaseEngine(driver(), NAME_TO_LOCATOR.apply(locator));
+    }
+    public static JSBaseEngine $wf(String locator) {
+        JSBaseEngine element = new JSBaseEngine(driver(), NAME_TO_LOCATOR.apply(locator));
+        element.jsDriver().setFilter(displayedFilter);
+        return element;
     }
 
-    public static JSEngine $w(String... locators) {
-        return new JSWithFilters(driver(), locatorsToBy(locators));
+    public static JSBaseEngine $w(String... locators) {
+        return new JSBaseEngine(driver(), locatorsToBy(locators));
     }
 
+    public static JSBaseEngine $wf(String... locators) {
+        JSBaseEngine element = new JSBaseEngine(driver(), locatorsToBy(locators));
+        element.jsDriver().setFilter(displayedFilter);
+        return element;
+    }
     public static <T> JSEntity<T> $w(Class<T> cl, String locator) {
-        JSEntity<T> entity = new JSEntity<T>(driver(), NAME_TO_LOCATOR.apply(locator)).initClass(cl);
-        entity.driver.updateBuilderActions(new FilterBuilderActions());
+        return new JSEntity<T>(driver(), NAME_TO_LOCATOR.apply(locator)).initClass(cl);
+    }
+    public static <T> JSEntity<T> $wf(Class<T> cl, String locators) {
+        JSEntity<T> entity = new JSEntity<T>(driver(), locatorsToBy(locators)).initClass(cl);
+        entity.jsDriver().setFilter(displayedFilter);
         return entity;
     }
 
     public static <T> JSEntity<T> $w(Class<T> cl, String... locators) {
+        return new JSEntity<T>(driver(), locatorsToBy(locators)).initClass(cl);
+    }
+    public static <T> JSEntity<T> $wf(Class<T> cl, String... locators) {
         JSEntity<T> entity = new JSEntity<T>(driver(), locatorsToBy(locators)).initClass(cl);
-        entity.driver.updateBuilderActions(new FilterBuilderActions());
+        entity.jsDriver().setFilter(displayedFilter);
         return entity;
     }
 

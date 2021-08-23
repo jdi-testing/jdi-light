@@ -2,6 +2,7 @@ package com.jdiai.jswraper;
 
 import com.google.gson.JsonObject;
 import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsdriver.JSDriver;
 import com.jdiai.jsproducer.JSProducer;
 import com.jdiai.jsproducer.Json;
@@ -33,11 +34,14 @@ public class JSElement {
     }
 
     public JSDriver jsDriver() {
-        return driver;
+        if (driver != null) {
+            return driver;
+        }
+        throw new JDINovaException("JSDriver not initialized");
     }
 
     public void updateDriver(JSDriver driver) {
-        this.driver.context = driver.context;
+        this.driver.copy().context = driver.context;
         this.driver.strategy = driver.strategy;
         this.driver.setBuilder(driver.builder());
     }
@@ -62,7 +66,7 @@ public class JSElement {
 
     // region Attributes
     public String getAttribute(String attribute) {
-        return getValue(safeGet(attribute));
+        return getValue("element." + attribute);
     }
 
     public String getValue(String valueFunc) {
@@ -70,7 +74,7 @@ public class JSElement {
     }
 
     public List<String> getAttributeList(String attribute) {
-        return driver.getList(safeGet(attribute)).asString();
+        return driver.getList("element." + attribute).asString();
     }
 
     public Json getAttributes(String... attributes) {
@@ -146,8 +150,8 @@ public class JSElement {
     }
 
     public Json getAllStyles() {
-        JsonObject json =  driver.getOne("{ keys: [...getComputedStyle(element)], " +
-            "values: [...getComputedStyle(element)].map(style=> getComputedStyle(element).getPropertyValue(style)) }").asJson();
+        JsonObject json =  driver.getOne("{ keys: [...styles], " +
+            "values: [...styles].map(style=>styles.getPropertyValue(style)) }").asJson();
         return new Json(json.get("keys"), json.get("values"));
     }
 
@@ -182,10 +186,6 @@ public class JSElement {
     // endregion
 
     // region protected
-    protected String safeGet(String attribute) {
-        return "element?." + attribute + " ?? ''";
-    }
-
     protected String attributesToJson(List<String> attributes) {
         return  "{ " + print(map(attributes, attr -> "'" + attr + "': element." + attr), ", ") + " }";
     }

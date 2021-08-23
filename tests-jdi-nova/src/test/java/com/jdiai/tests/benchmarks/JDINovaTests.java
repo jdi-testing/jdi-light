@@ -12,14 +12,13 @@ import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.Conditions.be;
 import static com.jdiai.asserts.Conditions.haveAll;
 import static com.jdiai.jsbuilder.QueryLogger.ALL;
-import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
 
 @Listeners(TestNGListener.class)
 public class JDINovaTests {
     public User DefaultUser = new User();
     @BeforeMethod
     public void before() {
-        LOG_QUERY = ALL;
+        logJSRequests(ALL);
     }
 
     @Test(enabled = false)

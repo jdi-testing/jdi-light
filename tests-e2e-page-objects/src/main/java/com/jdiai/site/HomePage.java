@@ -9,6 +9,6 @@ import com.jdiai.custom.LoginRegisterForm;
 public class HomePage {
     @UI("#user-icon") public JS userIcon;
     @UI(".search-field input") public JS searchField;
-    @UI(".icon-search.active") public JS searchIcon;
+    @UI(".icon-search") public JS searchIcon;
     public LoginRegisterForm loginForm;
 }

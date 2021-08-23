@@ -9,6 +9,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.jdiai.JDI.loginAs;
+import static com.jdiai.JDI.urlShouldBe;
 import static com.jdiai.asserts.Conditions.have;
 import static com.jdiai.asserts.Conditions.text;
 import static com.jdiai.entities.Contacts.Triss;
@@ -73,6 +74,7 @@ public class PageObjectsInitTests implements TestInit {
         seleniumHomePage.userIcon.click();
         loginAs(Roman);
         contactPage.open();
+        urlShouldBe("/contacts.html");
         contactPage.contactForm.submit(Triss);
         contactPage.lastNameInLog.should(have(text("Last Name: " + Triss.lastName)));
         contactPage.descriptionInLog.should(have(text("Description: " + Triss.description)));
@@ -85,6 +87,7 @@ public class PageObjectsInitTests implements TestInit {
         homePage().userIcon.click();
         loginAs(Roman);
         contactPage.open();
+        urlShouldBe("/contacts.html");
         contactPage.contactForm.fill(Triss);
         contactPage.contacts.submitButton.click();
         contactPage.lastNameInLog.should(have(text("Last Name: " + Triss.lastName)));
@@ -97,6 +100,7 @@ public class PageObjectsInitTests implements TestInit {
         page.userIcon.click();
         loginAs(Roman);
         contactPage.open();
+        urlShouldBe("/contacts.html");
         contactPage.contactForm.submit(Triss);
         contactPage.lastNameInLog.should(have(text("Last Name: " + Triss.lastName)));
         contactPage.descriptionInLog.should(have(text("Description: " + Triss.description)));
@@ -108,6 +112,7 @@ public class PageObjectsInitTests implements TestInit {
         page.userIcon.click();
         loginAs(Roman);
         contactPage.open();
+        urlShouldBe("/contacts.html");
         contactPage.contactForm.submit(Triss);
         contactPage.lastNameInLog.should(have(text("Last Name: " + Triss.lastName)));
         contactPage.descriptionInLog.should(have(text("Description: " + Triss.description)));

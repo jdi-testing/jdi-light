@@ -8,12 +8,13 @@ import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
 import com.jdiai.jsdriver.JDINovaException;
-import com.jdiai.jswraper.JSEngine;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -21,7 +22,14 @@ import java.util.function.Function;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.JDI.findFilters;
+import static com.jdiai.asserts.Conditions.displayed;
 import static com.jdiai.asserts.Conditions.have;
+import static com.jdiai.jsbuilder.GetTypes.dataType;
+import static com.jdiai.jsbuilder.jsfunctions.JSOneToOne.FIND_ONE;
+import static com.jdiai.jsdriver.JSDriverUtils.iFrame;
+import static com.jdiai.jsdriver.JSDriverUtils.selector;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 
@@ -46,7 +54,6 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         if (labelLocator == null) {
             throw new JDINovaException("Failed to get labelElement");
         }
-        core().engine().multiSearch();
         return core().find(labelLocator).setName(getName() + " " + labelField.getName());
     }
     private void haveLabelElement(String value) {
@@ -63,8 +70,25 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     }
 
     public T get(String value) {
-        haveLabelElement(value);
-        return getElement(value).getEntity(dataClass);
+        JS item = findOne(value);
+        try {
+            return item.getEntity(dataClass);
+        } catch (Throwable ex) {
+            item.shouldBe(displayed);
+            return item.getEntity(dataClass);
+        }
+    }
+
+    protected JS findOne(String value) {
+        return core().addJSCode(findOneScript(value), "[" + value + "]");
+    }
+
+    protected String findOneScript(String value) {
+        Field labelField = getLabelField();
+        By locator = getLocatorFromField(getLabelField());
+        String element = MessageFormat.format(dataType(locator).get + iFrame(locator), "element", selector(locator, builder()));
+        String condition = format("%s === '%s'", getValueType(labelField, element), value);
+        return format(FIND_ONE, condition);
     }
 
     public T get(Enum<?> name) {
@@ -73,8 +97,14 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
 
     @Override
     public T get(int index) {
-        shouldHave(Conditions.size(s -> s > index));
-        return getElement(index).getEntity(dataClass);
+        JS item = core().get(index);
+        try {
+            return item.getEntity(dataClass);
+        } catch (Throwable ex) {
+            shouldHave(Conditions.size(s -> s > index));
+            item.show();
+            return item.getEntity(dataClass);
+        }
     }
 
     public void select(String value) {
@@ -114,16 +144,16 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
                 throw new JDINovaException("Failed to get labelField: " + labelName);
             }
         }
-        Field[] allFields = dataClass.getDeclaredFields();
-        if (allFields.length == 0) {
+        List<Field> allFields = getFieldsDeep(dataClass);
+        if (ObjectUtils.isEmpty(allFields)) {
             throw new JDINovaException("Section should gave at least one field");
         }
         Field labelField = LinqUtils.first(allFields,
             f -> f.isAnnotationPresent(ListLabel.class));
         if (labelField == null) {
-            labelField = Arrays.stream(allFields).filter(
+            labelField = allFields.stream().filter(
                 f -> isClass(f.getType(), String.class))
-                .findFirst().orElseGet(() -> allFields[0]);
+                .findFirst().orElseGet(() -> allFields.get(0));
         }
         labelName = labelField.getName();
         return labelField;
@@ -282,11 +312,18 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     }
 
     public List<T> getList(int minAmount) {
-        List<T> list;
+        List<T> list = new ArrayList<>();
         Timer timer = new Timer();
+        Exception error = null;
         do {
-            list = core().getEntityList(dataClass);
-        } while (list.size() < minAmount && timer.isRunning());
+            error = null;
+            try {
+                list = core().getEntityList(dataClass);
+            } catch (Exception ex) {
+                error = ex;
+                System.out.println(error.getMessage());
+            }
+        } while ((error != null || list.size() < minAmount) && timer.isRunning());
         if (list.size() < minAmount) {
             throw new JDINovaException("Failed to get list '%s' with minimum '%s' elements in %s seconds", getName(), minAmount, new DecimalFormat("#.##").format(timer.timePassedInMSec() / 1000));
         }
@@ -295,7 +332,11 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
 
     public JS core() { return core; }
 
-    public JS setCore(JS core) { this.core = core; return core; }
+    public JS setCore(JS core) {
+        this.core = core;
+        this.core.setFilter(findFilters.isDisplayed);
+        return core;
+    }
 
     public void setup(Field field) {
         Type[] types = getGenericTypes(field);
@@ -318,7 +359,4 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         return this;
     }
 
-    public JSEngine engine() {
-        return core().engine();
-    }
 }

@@ -10,8 +10,8 @@ import java.util.List;
 
 import static com.epam.jdi.tools.LinqUtils.copyList;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
-import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.openqa.selenium.support.How.*;
 import static org.openqa.selenium.support.ui.Quotes.escape;
@@ -22,38 +22,40 @@ import static org.openqa.selenium.support.ui.Quotes.escape;
  */
 public final class JSUtils {
      public static By uiToBy(UI locator) {
-         if (locator == null) return null;
-         if (!locator.value().isEmpty()) {
+         if (locator == null) {
+             return null;
+         }
+         if (isNotEmpty(locator.value())) {
              return NAME_TO_LOCATOR.apply(locator.value());
          }
-         if (!locator.id().isEmpty()) {
+         if (isNotEmpty(locator.id())) {
              return By.id(locator.id());
          }
-         if (!locator.clazz().isEmpty()) {
+         if (isNotEmpty(locator.clazz())) {
              return By.className(locator.clazz());
          }
-         if (!locator.xpath().isEmpty()) {
+         if (isNotEmpty(locator.xpath())) {
              return By.xpath(locator.xpath());
          }
-         if (!locator.css().isEmpty()) {
+         if (isNotEmpty(locator.css())) {
              return By.cssSelector(locator.css());
          }
-         if (!locator.text().isEmpty()) {
+         if (isNotEmpty(locator.text())) {
              return By.xpath(format(".//*/text()[normalize-space(.) = %s]/parent::*", escape(locator.text())));
          }
-         if (!locator.hasText().isEmpty()) {
+         if (isNotEmpty(locator.hasText())) {
              return By.xpath(format(".//*/text()[contains(normalize-space(.), %s)]/parent::*", escape(locator.hasText())));
          }
-         if (!locator.tag().isEmpty()) {
+         if (isNotEmpty(locator.tag())) {
              return By.tagName(locator.tag());
          }
-         if (!locator.label().isEmpty()) {
+         if (isNotEmpty(locator.label())) {
              return By.cssSelector("[label=" + locator.label() + "]");
          }
-         if (!locator.alt().isEmpty()) {
+         if (isNotEmpty(locator.alt())) {
              return By.cssSelector("[alt=" + locator.alt() + "]");
          }
-         if (!locator.hasValue().isEmpty()) {
+         if (isNotEmpty(locator.hasValue())) {
              return By.cssSelector("[value=" + locator.hasValue() + "]");
          }
          return null;
@@ -63,28 +65,28 @@ public final class JSUtils {
          if (locator == null) {
              return null;
          }
-         if (!locator.id().isEmpty()) {
+         if (isNotEmpty(locator.id())) {
              return By.id(locator.id());
          }
-         if (!locator.className().isEmpty()) {
+         if (isNotEmpty(locator.className())) {
              return By.className(locator.className());
          }
-         if (!locator.xpath().isEmpty()) {
+         if (isNotEmpty(locator.xpath())) {
              return By.xpath(locator.xpath());
          }
-         if (!locator.css().isEmpty()) {
+         if (isNotEmpty(locator.css())) {
              return By.cssSelector(locator.css());
          }
-         if (!locator.linkText().isEmpty()) {
+         if (isNotEmpty(locator.linkText())) {
              return By.linkText(locator.linkText());
          }
-         if (!locator.name().isEmpty()) {
+         if (isNotEmpty(locator.name())) {
              return By.name(locator.name());
          }
-         if (!locator.partialLinkText().isEmpty()) {
+         if (isNotEmpty(locator.partialLinkText())) {
              return By.partialLinkText(locator.partialLinkText());
          }
-         if (!locator.tagName().isEmpty()) {
+         if (isNotEmpty(locator.tagName())) {
              return By.tagName(locator.tagName());
          }
          if (locator.how() != UNSET) {
@@ -93,6 +95,9 @@ public final class JSUtils {
          return null;
      }
      private static By getHowLocator(FindBy locator) {
+         if (locator == null) {
+             return By.cssSelector("");
+         }
          if (locator.how() == ID) {
              return By.id(locator.using());
          }

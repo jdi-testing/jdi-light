@@ -2,7 +2,7 @@ package com.jdiai.tests;
 
 import com.jdiai.TestInit;
 import com.jdiai.entities.Header;
-import com.jdiai.entities.HeaderRaw;
+import com.jdiai.entities.RawHeader;
 import com.jdiai.entities.TextHtml;
 import com.jdiai.entities.TextInfo;
 import com.jdiai.jsproducer.Json;
@@ -101,27 +101,27 @@ public class JSObjectTests implements TestInit {
     @Test
     public void multiEntitiesByAttrTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<HeaderRaw> headers = element(HeaderRaw.class, "#furniture-double-hidden th")
+        List<RawHeader> headers = element(RawHeader.class, "#furniture-double-hidden th")
             .getEntityList(asList("innerText", "className", "tagName"));
         assertEquals(headers.size(), 6);
         assertEquals(headers.get(4).innerText, "");
         assertEquals(headers.get(4).className, "hidden");
         assertEquals(headers.get(4).tagName, "TH");
 
-        HeaderRaw expected = new HeaderRaw().set(h-> { h.innerText = "Name"; h.className = ""; h.tagName = "TH"; });
+        RawHeader expected = new RawHeader().set(h-> { h.innerText = "Name"; h.className = ""; h.tagName = "TH"; });
         assertEquals(headers.get(1), expected);
     }
     @Test
     public void multiEntitiesByAttrLocatorListTest() {
         loggedInAt(SIMPLE_PAGE);
-        List<HeaderRaw> headers = element(HeaderRaw.class, "#furniture-double-hidden", "th")
+        List<RawHeader> headers = element(RawHeader.class, "#furniture-double-hidden", "th")
             .getEntityList(asList("innerText", "className", "tagName"));
         assertEquals(headers.size(), 6);
         assertEquals(headers.get(4).innerText, "");
         assertEquals(headers.get(4).className, "hidden");
         assertEquals(headers.get(4).tagName, "TH");
 
-        HeaderRaw expected = new HeaderRaw().set(h-> { h.innerText = "Name"; h.className = ""; h.tagName = "TH"; });
+        RawHeader expected = new RawHeader().set(h-> { h.innerText = "Name"; h.className = ""; h.tagName = "TH"; });
         assertEquals(headers.get(1), expected);
     }
 
@@ -160,14 +160,14 @@ public class JSObjectTests implements TestInit {
     @Test
     public void valueTest() {
         boolean isVisible = element(TextInfo.class, "#user-icon").getValue(
-            "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "return element && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }
     @Test
     public void valueLocatorListTest() {
         boolean isVisible = element(TextInfo.class, withParent("#user-icon")).getValue(
-            "return element !== null && styles.visibility === 'visible' && styles.display !== 'none'")
+            "return element && styles.visibility === 'visible' && styles.display !== 'none'")
             .equalsIgnoreCase("true");
         assertTrue(isVisible);
     }

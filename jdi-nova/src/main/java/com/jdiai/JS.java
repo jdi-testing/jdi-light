@@ -4,8 +4,9 @@ import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasLocators;
-import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.HasParent;
+import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsdriver.RuleType;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.tools.ClientRect;
 import com.jdiai.tools.GetTextTypes;
@@ -21,11 +22,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
 public interface JS extends WebElement, HasLocators, HasParent, HasCore {
@@ -40,14 +41,33 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     String selectedOption();
     String getText();
     boolean isDisplayed();
-    boolean isEnabled();
+    default boolean isHidden() {
+        return !isDisplayed();
+    }
+    default boolean isEnabled() {
+        return !isDisabled();
+    }
+    boolean isDisabled();
+    boolean isVisible();
+    boolean isInView();
+    default boolean isNotVisible() {
+        return !isVisible();
+    }
+    default boolean isOutOfView() {
+        return !isInView();
+    }
+    boolean isExist();
+    boolean isNotCovered();
+    default boolean isNotExist() {
+        return !isExist();
+    }
     JS doAction(String action);
-    JS actionsWithElement(BiFunction<Actions, WebElement, Actions> action);
-    JS actions(BiFunction<Actions, WebElement, Actions> action);
+    JS weElementActions(BiFunction<Actions, WebElement, Actions> action);
+    JS weActions(BiFunction<Actions, WebElement, Actions> action);
     JS clickCenter();
     JS click(int x, int y);
     JS select();
-    JS select(String value);
+    void select(String value);
     JS selectSubList(String value);
     JS setFindTextLocator(String locator);
     JS select(String... values);
@@ -91,7 +111,10 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     <T> T getEntity(String objectMap, Class<?> cl);
     void setEntity(String objectMap);
     JS find(String by);
+    JS findTemplate(String value);
     JS find(By by);
+    JS addJSCode(String script, String name);
+    JS addJSCode(String script, RuleType type, String name);
     JS children();
     JS ancestor();
     List<String> values(GetTextTypes getTextType);
@@ -123,8 +146,8 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     long indexOf(Function<JS, String> condition);
     JS uploadFile(String filePath);
     JS press(Keys key);
-    JS keyboardCommands(String... commands);
-    boolean isClickable(int xOffset, int yOffset);
+    JS commands(String... commands);
+    boolean isNotCovered(int xOffset, int yOffset);
     String fontColor();
     String bgColor();
     String pseudo(String name, String value);
@@ -147,20 +170,20 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     String textType();
     JS setParent(Object parent);
 
-    default String getFullName() {
-        if (parent() == null) {
-            return getName();
-        }
-        String parentName = isInterface(parent().getClass(), HasName.class)
-            ? ((HasName)parent()).getName()
-            : parent().getClass().getSimpleName();
-        return parentName + "." + getName();
+    default JS setFilter(String filter) {
+        jsDriver().setFilter(filter);
+        return this;
     }
+
+    String getFullName();
 
     default JS setLocators(List<By> locators) {
         if (isNotEmpty(locators)) {
-            engine().jsDriver().locators = locators;
+            jsDriver().setLocators(locators);
         }
         return this;
     }
+    void setVarName(Field field);
+    JS setBuilder(IJSBuilder builder);
+    JS copy();
 }

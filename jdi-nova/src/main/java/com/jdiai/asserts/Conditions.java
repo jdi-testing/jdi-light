@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static com.epam.jdi.tools.PrintUtils.print;
-import static com.jdiai.jsbuilder.QueryLogger.logger;
+import static com.jdiai.JDI.logger;
 import static com.jdiai.visual.Directions.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -18,12 +18,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public abstract class Conditions {
-    public static Condition visible = condition("%element% is %not% visible",  el -> {
-        if (el.isHidden()) {
-            return false;
-        }
-        return el.show().isVisible();
-    });
+    public static Condition visible = condition("%element% is %not% visible", HasCore::isVisible);
 
     public static Condition displayed = condition("%element% is %not% displayed", HasCore::isDisplayed);
 
@@ -151,7 +146,7 @@ public abstract class Conditions {
         return attribute("id", id);
     }
 
-    public static Condition empty = condition("%element% is %not% empty", el -> el.getText().trim().equals(""));
+    public static Condition blank = condition("%element% is %not% blank", el -> isBlank(el.getText().trim()));
 
     public static Condition matchesText(String text) {
         return matchText(text);
@@ -283,7 +278,7 @@ public abstract class Conditions {
             ? (List<T>) el.core().values()
             : el.core().getEntityList((Class<T>) entities.get(0).getClass());
         if (checkSize && list.size() != entities.size()) {
-            logger.error("Expected size: %s, but found: %s", entities.size(), list.size());
+            logger().error("Expected size: %s, but found: %s", entities.size(), list.size());
             return false;
         }
         List<T> listOfFails = new ArrayList<>();
@@ -294,7 +289,7 @@ public abstract class Conditions {
             }
         }
         if (isNotEmpty(listOfFails)) {
-            logger.error("Failed to find following entities: \n%s\nActual values:\n%s",
+            logger().error("Failed to find following entities: \n%s\nActual values:\n%s",
                 print(listOfFails, Object::toString, "\n"),
                 print(list, Object::toString, "\n")
             );

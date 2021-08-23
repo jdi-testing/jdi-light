@@ -40,11 +40,11 @@ public class TimeValidations {
     }
     private static void validateDuration(long min, long max, JAction action) {
         long passedTime = getDuration(action);
-        assertTrue(passedTime > min && passedTime < max);
+        assertTrue(passedTime > min && passedTime < max, min + "<" + passedTime + "<" + max);
     }
     private static <T> T validateDuration(long min, long max, JFunc<T> func) {
         Pair<Long, T> result = getDuration(func);
-        assertTrue(result.key > min && result.key < max);
+        assertTrue(result.key > min && result.key < max, min + "<" + result.key + "<" + max);
         return result.value;
     }
 }

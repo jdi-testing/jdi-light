@@ -2,10 +2,15 @@ package com.jdiai;
 
 import com.epam.jdi.tools.ILogger;
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.StringUtils;
 import com.jdiai.annotations.UI;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
-import com.jdiai.jsbuilder.*;
+import com.jdiai.jsbuilder.ConsoleLogger;
+import com.jdiai.jsbuilder.IJSBuilder;
+import com.jdiai.jsbuilder.JSBuilder;
+import com.jdiai.jsbuilder.Slf4JLogger;
+import com.jdiai.jsbuilder.jsfunctions.*;
 import com.jdiai.jswraper.JSBaseEngine;
 import com.jdiai.jswraper.JSEngine;
 import com.jdiai.jswraper.driver.DriverManager;
@@ -29,11 +34,11 @@ import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
-import static com.jdiai.jsbuilder.QueryLogger.LOGGER_NAME;
-import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
+import static com.jdiai.jsbuilder.QueryLogger.*;
 import static com.jdiai.jsdriver.JDINovaException.assertContains;
 import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static com.jdiai.jswraper.JSWrappersUtils.*;
@@ -41,33 +46,66 @@ import static com.jdiai.jswraper.driver.DriverManager.useDriver;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
-import static java.lang.String.format;
+import static com.jdiai.tools.WindowsManager.getWindows;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class JDI {
     public static Safe<WebDriver> DRIVER = new Safe<>(DriverManager::getDriver);
+
     public static String JDI_STORAGE = "src/test/resources/jdi";
+
     public static String domain;
-    public static ILogger logger;
+
+    public static ILogger logger() {
+        return logger;
+    }
+    public static void setLogger(ILogger newLogger) {
+        logger = newLogger;
+    }
+
     public static int timeout = 10;
-    public static ConditionTypes conditions = new ConditionTypes();
-    public static BiFunction<By, List<By>, JS> initJSFunc = (locator, locators) -> {
-        if (locators != null) {
-            return new JSLight(JDI::driver, locators);
-        }
-        if (locator != null) {
-            return new JSLight(JDI::driver, locator);
-        }
-        return new JSLight(JDI::driver);
+
+    public static ConditionTypes findFilters = new ConditionTypes();
+
+    public static String SELECT_FIND_TEXT_LOCATOR = ".//*[text()='%s']";
+
+    public static Function<List<By>, JS> initJSFunc = locators -> new JSStable(JDI::driver, locators);
+
+    public static Function<List<By>, JS> initCoreFunc = initJSFunc;
+
+    public static Function<Supplier<WebDriver>, IJSBuilder> initBuilder = driver -> {
+        BuilderFunctions bf = new BuilderFunctions().set(f -> {
+            f.oneToOne = JSOneToOne.ONE_TO_ONE;
+            f.oneToOneFilter = JSOneToOne.STRICT_ONE_TO_ONE;
+
+            f.oneToList = JSOneToList.ONE_TO_LIST;
+            f.oneToListFilter = JSOneToList.FILTER_ONE_TO_LIST;
+
+            f.listToOne = JSListToOne.LIST_TO_ONE;
+            f.listToOneFilter = JSListToOne.FILTER_LIST_TO_ONE;
+
+            f.listToList = JSListToList.ONE_LIST_TO_LIST;
+            f.listToListFilter = JSListToList.FILTER_ONE_LIST_TO_LIST;
+
+            f.result = JSResults.ONE_TO_RESULT;
+            f.listResult = JSResults.LIST_TO_RESULT;
+            f.action = JSResults.ONE_TO_ACTION;
+            f.listAction = JSResults.LIST_TO_ACTION;
+        });
+        return new JSBuilder(driver, bf);
     };
 
-    public static Supplier<IJSBuilder> initBuilder =
-        () -> new JSBuilder(JDI::driver, new FilterBuilderActions());
     public static BiFunction<Supplier<WebDriver>, List<By>, JSEngine> initEngine =
-        (driver, locators) -> new JSBaseEngine(driver, locators, initBuilder.get());
+        (driver, locators) -> new JSBaseEngine(driver, locators, initBuilder.apply(driver));
+
     public static BiFunction<Object, Exception, Boolean> IGNORE_FAILURE = (js, e) -> true;
+
     public static String LOGGER_TYPE = "console";
+
+    public static boolean LOG_ACTIONS = true;
+
     private static boolean initialized = false;
+
     public static Function<Field, String> GET_COMPLEX_VALUE = field -> {
         if (!field.isAnnotationPresent(FindBy.class) && !field.isAnnotationPresent(UI.class)) {
             return null;
@@ -75,7 +113,7 @@ public class JDI {
         By locator = getLocatorFromField(field);
         if (locator != null) {
             String element = MessageFormat.format(dataType(locator).get, "element", getByLocator(locator));
-            return format("'%s': %s", field.getName(), getValueType(field, element));
+            return StringUtils.format("'%s': %s", field.getName(), getValueType(field, element));
         }
         return null;
     };
@@ -104,8 +142,25 @@ public class JDI {
     };
     public static String SUBMIT_LOCATOR = "[type=submit]";
 
+    private static Safe<Integer> savedLogLevel = new Safe<>(() -> null);
+
+    public static void loggerOff() {
+        if (savedLogLevel.get() == null) {
+            savedLogLevel.set(LOG_QUERY.get());
+            logJSRequests(OFF);
+        }
+    }
+
     public static void logJSRequests(int logQueriesLevel) {
-        LOG_QUERY = logQueriesLevel;
+        LOG_QUERY.set(logQueriesLevel);
+    }
+
+    public static void loggerOn() {
+        Integer logLevel = savedLogLevel.get();
+        if (logLevel != null) {
+            logJSRequests(logLevel);
+            savedLogLevel.set(null);
+        }
     }
 
     public static WebDriver driver() {
@@ -168,16 +223,15 @@ public class JDI {
         }
         switch (LOGGER_TYPE) {
             case CONSOLE:
-                logger = new ConsoleLogger(getLoggerName(CONSOLE));
+                setLogger(new ConsoleLogger(getLoggerName(CONSOLE)));
                 break;
             case SLF4J:
-                logger = new Slf4JLogger(LOGGER_NAME);
+                setLogger(new Slf4JLogger(LOGGER_NAME));
                 break;
             default:
-                logger = new ConsoleLogger(getLoggerName(CONSOLE));
+                setLogger(new ConsoleLogger(getLoggerName(CONSOLE)));
                 break;
         }
-        QueryLogger.logger = logger;
         initialized = true;
     }
 
@@ -250,16 +304,17 @@ public class JDI {
         String fullUrl = isNotEmpty(domain) && !url.contains("//")
             ? domain + url
             : url;
-        logger.info("Open page '" + fullUrl + "'");
+        logger().info("Open page '" + fullUrl + "'");
         driver().get(fullUrl);
+        getWindows();
     }
 
     public static JS $(By locator) {
-        return initJSFunc.apply(locator, null);
+        return initJSFunc.apply(newList(locator));
     }
 
     public static JS $(By... locators) {
-        return initJSFunc.apply(null, newList(locators));
+        return initJSFunc.apply(newList(locators));
     }
 
     public static JS $(String locator) {
@@ -275,7 +330,7 @@ public class JDI {
     }
 
     public static void loginAs(Object user) {
-        initJSFunc.apply(null, null).loginAs(user);
+        initJSFunc.apply(null).loginAs(user);
     }
 
     public static void submitForm(String formLocator, Object user) {
@@ -283,7 +338,7 @@ public class JDI {
     }
 
     public static void submitForm(Object user) {
-        initJSFunc.apply(null, null).submit(user);
+        initJSFunc.apply(null).submit(user);
     }
 
     public static void fillFormWith(String formLocator, Object user) {
@@ -291,7 +346,7 @@ public class JDI {
     }
 
     public static void fillFormWith(Object user) {
-        initJSFunc.apply(null, null).fill(user);
+        initJSFunc.apply(null).fill(user);
     }
 
     public static DragAndDrop drag(JS dragElement) { return new DragAndDrop(dragElement);}

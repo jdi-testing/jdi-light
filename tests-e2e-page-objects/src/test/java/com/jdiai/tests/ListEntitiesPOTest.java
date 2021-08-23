@@ -19,7 +19,7 @@ import static com.jdiai.states.States.atHomePage;
 import static com.jdiai.states.States.logout;
 import static com.jdiai.test.data.TestData.AllSearchResults;
 import static com.jdiai.test.data.TestData.SearchResults;
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)
 public class ListEntitiesPOTest implements TestInit {
@@ -38,6 +38,7 @@ public class ListEntitiesPOTest implements TestInit {
     @Test
     public void entitiesListTest() {
         List<SearchItem> results = searchPage.searchResults;
+        assertEquals(results.size(), 6);
         assertEquals(results.get(2).title, "JDI TEST SITE");
         assertEquals(print(results, SearchItem::toString), SearchResults);
     }
@@ -45,6 +46,7 @@ public class ListEntitiesPOTest implements TestInit {
     @Test
     public void entitiesDataTest() {
         DataList<SearchItem> results = searchPage.searchData;
+        assertEquals(results.size(), 6);
         assertEquals(results.get("JDI TEST SITE").link, "https://jdi-testing.github.io/jdi-light/");
         assertEquals(print(results, SearchItem::toString), SearchResults);
     }
@@ -52,8 +54,10 @@ public class ListEntitiesPOTest implements TestInit {
     @Test
     public void waitForSizeDataTest() {
         DataList<SearchItem> results = searchPage.searchData;
+        assertEquals(results.size(), 6);
         assertEquals(print(results, SearchItem::toString), SearchResults);
         results.waitFor(size(s -> s > 6));
+        assertEquals(results.size(), 8);
         assertEquals(print(results, SearchItem::toString), AllSearchResults);
     }
 

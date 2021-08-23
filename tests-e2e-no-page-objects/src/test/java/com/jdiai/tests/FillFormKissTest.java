@@ -12,7 +12,7 @@ import static com.jdiai.JDI.openPage;
 import static com.jdiai.entities.User.Triss;
 import static com.jdiai.states.States.atHomePage;
 import static com.jdiai.states.States.logout;
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)
 public class FillFormKissTest implements TestInit {
@@ -41,7 +41,7 @@ public class FillFormKissTest implements TestInit {
         $("#last-name").input(user.lastName);
         $("#passport").check(user.hasPassport);
         $("#gender").selectByName(user.gender);
-        $("#religion-options").input(user.religion);
+        $("#religion").input(user.religion);
         $("#description").input(user.description);
     }
 }

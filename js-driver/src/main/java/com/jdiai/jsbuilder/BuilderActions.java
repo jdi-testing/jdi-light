@@ -1,70 +1,166 @@
 package com.jdiai.jsbuilder;
 
+import com.epam.jdi.tools.StringUtils;
+import com.jdiai.jsbuilder.jsfunctions.BuilderFunctions;
+import com.jdiai.jsdriver.JDINovaBuilderException;
 import org.openqa.selenium.By;
 
 import java.text.MessageFormat;
+import java.util.function.Supplier;
+import java.util.regex.Matcher;
 
 import static com.jdiai.jsbuilder.GetTypes.dataType;
-import static com.jdiai.jsbuilder.JSTemplates.*;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
-import static java.lang.String.format;
+import static java.util.regex.Pattern.compile;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class BuilderActions implements IBuilderActions {
-    protected IJSBuilder builder;
+    protected BuilderFunctions functions;
+    public Supplier<IJSBuilder> builder;
 
-    public void setBuilder(IJSBuilder builder) {
+    public BuilderActions() { this(new BuilderFunctions()); }
+    public BuilderActions(BuilderFunctions functions) {
+        this.functions = functions;
+    }
+
+    public void setBuilder(Supplier<IJSBuilder> builder) {
         this.builder = builder;
     }
 
     public String oneToOne(String ctx, By locator) {
-        return builder.registerVariable(builder.getElementName()) +
-                format(ONE_TO_ONE, MessageFormat.format(dataType(locator).get + iFrame(locator), ctx, selector(locator, builder)));
+        return getScript(functions.oneToOne, ctx, locator);
     }
 
-    protected String iFrame(By locator) {
-        return isIFrame(locator) ? ".contentWindow.document" : "";
+    public String oneToOneFilter(String ctx, By locator, String filterName) {
+        return getScript(functions.oneToOneFilter.replace("{{filter}}", filterName),
+                ctx,
+                locator);
+    }
+    protected String processTry(String ctx,String script) {
+        String prefix = script.startsWith("try") && ctx.equals("document")
+            ? "let element;\n"
+            : "";
+        return prefix + script;
     }
 
     public String oneToList(String ctx, By locator) {
         if (isIFrame(locator)) {
             return oneToOne(ctx, locator);
         }
-        builder.registerVariable("list");
-        return builder.registerVariable("elements") + format(ONE_TO_LIST, MessageFormat.format(dataType(locator).getAll, ctx, selectorAll(locator, builder)));
+        return getScript(functions.oneToList, ctx, locator);
+    }
+
+    public String oneToListFilter(String ctx, By locator, String filterName) {
+        if (isIFrame(locator)) {
+            return oneToOneFilter(ctx, locator, filterName);
+        }
+        return getScript(functions.oneToListFilter.replace("{{filter}}", filterName),
+                ctx,
+                locator);
     }
 
     public String listToOne(By locator) {
-        builder.registerVariables("found", "i", builder.getElementName(), "first");
-        return format(LIST_TO_ONE, MessageFormat.format(dataType(locator).get + iFrame(locator), "elements[i]", selector(locator, builder)));
+        return getScript(functions.listToOne, null, locator);
+    }
+
+    public String listToOneFilter(By locator, String filterName) {
+        return getScript(functions.listToOneFilter.replace("{{filter}}", filterName),
+                null,
+                locator);
     }
 
     public String listToList(By locator) {
         if (isIFrame(locator)) {
             return listToOne(locator);
         }
-        GetData data = dataType(locator);
-        builder.registerVariables("list", "first");
-        return format(LIST_TO_LIST, MessageFormat.format(data.getAll, builder.getElementName(), selectorAll(locator, builder)));
+        return getScript(functions.listToList, null, locator);
     }
 
-    public String doAction(String collector) {
-        return addBeforeReturn(collector) + collector;
-    }
-
-    private String processResult(String collector, String result) {
-        return collector.contains("return") ? collector : format(result, collector);
+    public String listToListFilter(By locator, String filterName) {
+        if (isIFrame(locator)) {
+            return listToOneFilter(locator, filterName);
+        }
+        return getScript(functions.listToListFilter.replace("{{filter}}", filterName),
+                null,
+                locator);
     }
 
     public String getResult(String collector) {
-        return addBeforeReturn(collector) + processResult(collector, ONE_TO_RESULT);
+        return preResult(collector) + formatCollector(collector, functions.result);
     }
 
     public String getResultList(String collector) {
-        return addBeforeReturn(collector) + processResult(collector, LIST_TO_RESULT);
+        if (collector.contains("styles")) {
+            collector = collector.replace("styles", "getComputedStyle(element)");
+        }
+        return preResult(collector) + formatCollector(collector, functions.listResult);
     }
 
-    protected String addBeforeReturn(String collector) {
+    public String doAction(String collector) {
+        return preResult(collector) + formatCollector(collector, functions.action);
+    }
+
+    public String doListAction(String collector) {
+        return preResult(collector) + formatCollector(collector, functions.listAction);
+    }
+
+    protected String addStyles(String collector) {
         return collector.contains("styles.")
-                ? "const styles = " + builder.getElementName() + " ? getComputedStyle(" + builder.getElementName() + ") : undefined;\n" : "";
+            ? "styles = getComputedStyle(" + builder.get().getElementName() + ");\n"
+            : "";
+    }
+
+    private String formatCollector(String collector, String result) {
+        return collector.contains("return") ? collector : StringUtils.format(result, collector);
+    }
+
+    protected String getScript(String script, String ctx, By locator) {
+        if (isBlank(script)) {
+            throw new JDINovaBuilderException("Failed to build js expression. " + script + " can not be blank.");
+        }
+        script = processTry(ctx, script);
+        if (script.contains("{{one}}")) {
+            return script.replace("{{one}}", getElement(ctx, locator));
+        }
+        if (script.contains("{{list}}")) {
+            return script.replace("{{list}}", getElements(ctx, locator));
+        }
+        Matcher matcher = compile("(.|\n)*\\{\\{one:(?<ctx>[a-zA-Z]+)}}(.|\n)*").matcher(script);
+        if (matcher.matches()) {
+            return script.replaceAll("\\{\\{one:[a-zA-Z]+}}", getElement(matcher.group("ctx"), locator));
+        }
+        matcher = compile("(.|\n)*\\{\\{list:(?<ctx>[a-zA-Z]+)}}(.|\n)*").matcher(script);
+        if (matcher.matches()) {
+            return script.replaceAll("\\{\\{list:[a-zA-Z]+}}", getElements(matcher.group("ctx"), locator));
+        }
+        throw new JDINovaBuilderException("Failed to build js expression. " + script + " should contains {{one}} or {{list}}");
+    }
+
+    protected String getElement(String ctx, By locator) {
+        if (ctx == null)  {
+            ctx = "element";
+        }
+        try {
+            return MessageFormat.format(dataType(locator).get + iFrame(locator), ctx, selector(locator, builder.get()));
+        } catch (Throwable ex) {
+            builder.get().cleanup();
+            throw new JDINovaBuilderException(ex.getMessage());
+        }
+    }
+
+    protected String getElements(String ctx, By locator) {
+        if (ctx == null)  {
+            ctx = "element";
+        }
+        try {
+            return MessageFormat.format(dataType(locator).getAll + iFrame(locator), ctx, selectorAll(locator, builder.get()));
+        } catch (Throwable ex) {
+            builder.get().cleanup();
+            throw new JDINovaBuilderException(ex.getMessage());
+        }
+    }
+
+    public String preResult(String collector) {
+        return addStyles(collector);
     }
 }

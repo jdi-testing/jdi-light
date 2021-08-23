@@ -1,5 +1,6 @@
 package com.jdiai.jsdriver;
 
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.locators.ByFrame;
@@ -15,9 +16,9 @@ import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.LinqUtils.select;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
-import static com.jdiai.jsbuilder.JSTemplates.XPATH_LIST_FUNC;
-import static java.lang.String.format;
+import static com.jdiai.jsbuilder.jsfunctions.JSFunctions.XPATH_FUNC;
+import static com.jdiai.jsbuilder.jsfunctions.JSFunctions.XPATH_LIST_FUNC;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -48,12 +49,23 @@ public final class JSDriverUtils {
     }
 
     public static boolean isIFrame(By by) {
-        if (by == null) return false;
+        if (by == null) {
+            return false;
+        }
         return isClass(by.getClass(), ByFrame.class);
     }
+
+    public static String iFrame(By locator) {
+        return isIFrame(locator) ? ".contentWindow.document" : "";
+    }
+
     public static String getByLocator(By by) {
-        if (by == null) return null;
-        if (isIFrame(by)) return ((ByFrame) by).locator;
+        if (by == null) {
+            return null;
+        }
+        if (isIFrame(by)) {
+            return ((ByFrame) by).locator;
+        }
         String byAsString = by.toString();
         int index = byAsString.indexOf(": ") + 2;
         return byAsString.substring(index).replace("'", "\"");
@@ -88,7 +100,7 @@ public final class JSDriverUtils {
         if (!byLocator.contains("%"))
             throw new RuntimeException(getBadLocatorMsg(byLocator, args));
         try {
-            byLocator = format(byLocator, args);
+            byLocator = StringUtils.format(byLocator, args);
         } catch (Exception ex) {
             throw new RuntimeException(getBadLocatorMsg(byLocator, args));
         }

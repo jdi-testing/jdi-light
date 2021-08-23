@@ -29,7 +29,7 @@ public class JSDriverListTests implements TestInit {
     @Test
     public void chain3Test() {
         assertEquals(js("#user-table", ".//tr//*[*[span[contains(.,'er')]]]", "[checked]")
-            .getListChain("element.id").asString().toString(),"[roman]");
+            .getList("element.id").asString().toString(),"[roman]");
     }
     @Test
     public void list3Test() {
@@ -38,8 +38,8 @@ public class JSDriverListTests implements TestInit {
     }
     @Test
     public void multi3Test() {
-        assertEquals(js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
-            .getListMultiSearch("element.id").asString().toString(),"[roman, vlad]");
+        assertEquals(jsMulti("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
+            .getList("element.id").asString().toString(),"[roman, vlad]");
     }
     @Test
     public void multiListTest() {
@@ -48,9 +48,9 @@ public class JSDriverListTests implements TestInit {
         assertEquals(js.getList("element.id").asString().toString(), "[roman, vlad]");
     }
     @Test
+
     public void getOneMultiTest() {
-        JSDriver js = js("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]")
-            .multiSearch();
+        JSDriver js = jsMulti("#user-table tr", ".//*[*[span[contains(.,'er')]]]", "[checked]");
         assertEquals(js.getOne("element.id").asString(), "roman");
     }
 
@@ -61,7 +61,7 @@ public class JSDriverListTests implements TestInit {
             js.getOne("element.id").asString();
             Assert.fail("Chain search should fail");
         } catch (Exception ex) {
-            assertTrue(ex.getMessage().contains("javascript error: Cannot read property 'querySelector' of null"));
+            assertTrue(ex.getMessage().contains("Cannot read property 'querySelector' of null"));
         }
     }
 }

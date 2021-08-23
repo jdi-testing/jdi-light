@@ -3,13 +3,12 @@ package com.jdiai.jsbuilder;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
-import com.jdiai.jsdriver.JDINovaException;
-import org.apache.commons.lang3.ObjectUtils;
+import com.jdiai.jsbuilder.jsfunctions.BuilderFunctions;
+import com.jdiai.jsdriver.JDINovaBuilderException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -18,28 +17,27 @@ import java.util.function.Supplier;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.jdiai.jsbuilder.QueryLogger.LOG_QUERY;
-import static com.jdiai.jsbuilder.QueryLogger.logger;
+import static com.jdiai.jsbuilder.QueryLogger.*;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_LIST_SCRIPT_EXECUTE;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_SCRIPT_EXECUTE;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JSBuilder implements IJSBuilder {
     public Integer logQuery = null;
-    public static Function<String, String> PROCESS_RESULT =
+    public Function<String, String> processResultFunc =
         result -> result.length() > 200
             ? result.substring(0, 195) + "..."
             : result;
-    protected List<String> variables = new ArrayList<>();
     protected String query = "";
     protected String searchScript = "";
     protected Supplier<JavascriptExecutor> js;
     protected MapArray<String, String> useFunctions = new MapArray<>();
-    protected IBuilderActions builderActions;
+    public IBuilderActions builderActions;
 
     public JSBuilder(Supplier<WebDriver> driver) {
-        this(driver, null);
+        this(driver, new BuilderActions());
     }
 
     public JSBuilder(Supplier<WebDriver> driver, IBuilderActions builderActions) {
@@ -47,7 +45,18 @@ public class JSBuilder implements IJSBuilder {
         this.builderActions = builderActions != null
             ? builderActions
             : new BuilderActions();
-        this.builderActions.setBuilder(this);
+        this.builderActions.setBuilder(() -> this);
+    }
+
+    public JSBuilder(Supplier<WebDriver> driver, BuilderFunctions functions) {
+        this.js = () -> (JavascriptExecutor) driver.get();
+        this.builderActions = new BuilderActions(functions);
+        this.builderActions.setBuilder(() -> this);
+    }
+
+    public JSBuilder setProcessResultFunc(Function<String, String> processResultFunc) {
+        this.processResultFunc = processResultFunc;
+        return this;
     }
 
     protected String elementName = "element";
@@ -63,44 +72,50 @@ public class JSBuilder implements IJSBuilder {
 
     public IJSBuilder updateActions(IBuilderActions builderActions) {
         this.builderActions = builderActions;
-        this.builderActions.setBuilder(this);
+        this.builderActions.setBuilder(() -> this);
         return this;
     }
-
     public IJSBuilder registerFunction(String name, String function) {
         useFunctions.update(name, function);
         return this;
     }
 
-    public IJSBuilder logQuery(int LogLevel) {
-        this.logQuery = LogLevel;
+    public IJSBuilder logQuery(int logLevel) {
+        this.logQuery = logLevel;
         return this;
     }
 
     private int shouldLogQuery() {
-        return logQuery != null ? logQuery : LOG_QUERY;
+        return logQuery != null ? logQuery : LOG_QUERY.get();
     }
 
     public boolean logScript() {
-        return shouldLogQuery() > 0;
+        return shouldLogQuery() == ALL;
     }
 
     public boolean logResult() {
-        return shouldLogQuery() == 2;
+        return shouldLogQuery() > OFF;
     }
 
     public static BiFunction<Object, String, Object> EXECUTE_SCRIPT = DEFAULT_SCRIPT_EXECUTE;
+
     public static Safe<String> lastScriptExecution = new Safe<>();
+
     public Object executeQuery() {
         lastScriptExecution.reset();
         String jsScript = getQuery();
         if (logScript()) {
             logger.info("Execute query:" + LINE_BREAK + jsScript);
         }
-        Object result = getScriptResult(jsScript);
+        Object result;
+        try {
+            result = getScriptResult(jsScript);
+        } finally {
+            cleanup();
+        }
         lastScriptExecution.set(jsScript + "\n" + result);
         if (result != null && logResult()) {
-            logger.info(">>> " + PROCESS_RESULT.apply(result.toString()));
+            logger.info(">>> " + processResultFunc.apply(result.toString()));
         }
         return result;
     }
@@ -113,25 +128,25 @@ public class JSBuilder implements IJSBuilder {
         }
     }
 
-    public static BiFunction<Object, String, List<String>> EXECUTE_LIST_SCRIPT = DEFAULT_LIST_SCRIPT_EXECUTE;
+    public static BiFunction<Object, String, List<Object>> EXECUTE_LIST_SCRIPT = DEFAULT_LIST_SCRIPT_EXECUTE;
 
     private static boolean smartStringify = true;
 
     public static void switchOffStringify() { smartStringify = false; }
 
-    public List<String> executeAsList() {
+    public List<Object> executeAsList() {
         String jsScript = getQuery();
         if (logScript()) {
             logger.info("Execute query:" + LINE_BREAK + jsScript);
         }
-        List<String> result;
+        List<Object> result;
         try {
             result = EXECUTE_LIST_SCRIPT.apply(js.get(), jsScript);
         } finally {
             cleanup();
         }
         if (result != null && logResult()) {
-            logger.info(">>> " + PROCESS_RESULT.apply(result.toString()));
+            logger.info(">>> " + processResultFunc.apply(result.toString()));
         }
         return result;
     }
@@ -153,21 +168,37 @@ public class JSBuilder implements IJSBuilder {
     public IJSBuilder oneToOne(String ctx, By locator) {
         return addJSCode(builderActions.oneToOne(ctx, locator));
     }
+    public IJSBuilder oneToOneFilter(String ctx, By locator, String filter) {
+        return addJSCode(builderActions.oneToOneFilter(ctx, locator, filter));
+    }
 
     public IJSBuilder listToOne(By locator) {
         return addJSCode(builderActions.listToOne(locator));
+    }
+    public IJSBuilder listToOneFilter(By locator, String filter) {
+        return addJSCode(builderActions.listToOneFilter(locator, filter));
     }
 
     public IJSBuilder oneToList(String ctx, By locator) {
         return addJSCode(builderActions.oneToList(ctx, locator));
     }
+    public IJSBuilder oneToListFilter(String ctx, By locator, String filter) {
+        return addJSCode(builderActions.oneToListFilter(ctx, locator, filter));
+    }
 
     public IJSBuilder listToList(By locator) {
         return addJSCode(builderActions.listToList(locator));
     }
+    public IJSBuilder listToListFilter(By locator, String filter) {
+        return addJSCode(builderActions.listToListFilter(locator, filter));
+    }
 
     public IJSBuilder doAction(String collectResult) {
         return addJSCode(builderActions.doAction(collectResult));
+    }
+
+    public IJSBuilder doListAction(String collectResult) {
+        return addJSCode(builderActions.doListAction(collectResult));
     }
 
     public IJSBuilder getResult(String collectResult) {
@@ -211,52 +242,43 @@ public class JSBuilder implements IJSBuilder {
         return collectResult;
     }
 
-    // region private
-    public void registerVariables(String... vars) {
-        for (String variable : vars) {
-            if (!variables.contains(variable)) {
-                variables.add(variable);
-            }
-        }
-    }
-    public String registerVariable(String variable) {
-        if (!variables.contains(variable)) {
-            variables.add(variable);
-        }
-        return variable + " = ";
-    }
     private String beforeScript() {
-        return isNotBlank(searchScript)
-            ? searchScript + "\n"
-            : "";
+        if (isBlank(searchScript)) {
+            return "";
+        }
+        return searchScript.endsWith("\n")
+            ? searchScript
+            : searchScript + "\n";
     }
-    public String rawQuery() {
-        return beforeScript() + query;
-    }
+
     public String getQuery() {
-        String script = getScript().replace("\nreturn ''", "");
+        if (isEmpty(useFunctions)) {
+            return getScript();
+        }
+        String script = isNotEmpty(useFunctions) ? print(useFunctions.values(), "") : "";
+        script += getScript();
         if (!script.contains("%s")) {
             return script;
         }
-        throw new JDINovaException("Failed to execute js script for template locator. Please replace %s before usage");
+        cleanup();
+        throw new JDINovaBuilderException("Failed to execute js script for template locator. Please replace %s before usage");
     }
-    protected String getScript() {
-        if (ObjectUtils.isEmpty(variables) && ObjectUtils.isEmpty(useFunctions)) {
-            return rawQuery();
-        }
-        String jsScript = print(useFunctions.values(), "");
-        String letVariables = variables.size() > 1
-            ? print(variables, ", ") + ";\n"
-            : "";
-        return jsScript + "let " + letVariables + rawQuery();
+
+    public String getScript() {
+        return beforeScript() + query;
     }
+
     public void cleanup() {
         if (isBlank(searchScript)) {
             useFunctions.clear();
-            variables = new ArrayList<>();
         }
         query = "";
     }
+
+    public String preResult(String collector) {
+        return builderActions.preResult(collector);
+    }
+
     public void updateFromBuilder(IJSBuilder builder) {
         if (!isClass(builder.getClass(), JSBuilder.class)) {
             return;
@@ -267,19 +289,14 @@ public class JSBuilder implements IJSBuilder {
                 useFunctions.add(pair);
             }
         }
-        for (String variable : jsBuilder.variables) {
-            if (!variables.contains(variable)) {
-                variables.add(variable);
-            }
-        }
     }
+
     public JSBuilder copy() {
         JSBuilder result = new JSBuilder(null, builderActions);
         result.searchScript = searchScript;
         result.js = js;
         result.useFunctions = useFunctions;
         result.logQuery = logQuery;
-        result.variables = variables;
         return result;
     }
     // endregion

@@ -18,7 +18,7 @@ import static com.jdiai.JDI.$;
 import static com.jdiai.entities.User.Roman;
 import static com.jdiai.tests.TestData.SearchResults;
 import static com.jdiai.tests.TestData.SearchResultsJson;
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)
 public class ListEntitiesTest implements TestInit {
@@ -28,9 +28,9 @@ public class ListEntitiesTest implements TestInit {
         States.atHomePage();
         $("#user-icon").click();
         loginAs(Roman);
-        $(".icon-search.active").click();
-        $(".search-field input").input("jdi");
         $(".icon-search").click();
+        $(".search-field input").input("jdi");
+        $(".icon-search.active").click();
     }
 
     @Test
@@ -40,6 +40,7 @@ public class ListEntitiesTest implements TestInit {
                 "'description': element.querySelector('p').innerText, " +
                 "'link': element.querySelector('a').href " +
                 "}");
+        assertEquals(results.size(), 6);
         assertEquals(results.get(2).get("title").toString(), "\"JDI TEST SITE\"");
         assertEquals(print(results,
             jo -> "{ "+ jo.get("title") + jo.get("description") + jo.get("link") + " }"),
@@ -49,6 +50,7 @@ public class ListEntitiesTest implements TestInit {
     @Test
     public void entitiesListTest() {
         List<SearchItem> results = $("#search-results li").getEntityList(SearchItem.class);
+        assertEquals(results.size(), 6);
         assertEquals(results.get(2).title, "JDI TEST SITE");
         assertEquals(print(results, DataClass::toString), SearchResults);
     }

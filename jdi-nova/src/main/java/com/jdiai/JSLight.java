@@ -1,6 +1,7 @@
 package com.jdiai;
 
 import com.epam.jdi.tools.Safe;
+import com.epam.jdi.tools.StringUtils;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
@@ -9,7 +10,7 @@ import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsdriver.JSDriver;
-import com.jdiai.jsdriver.JSDriverUtils;
+import com.jdiai.jsdriver.RuleType;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.jswraper.JSEngine;
 import com.jdiai.scripts.Whammy;
@@ -30,6 +31,7 @@ import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -53,10 +55,11 @@ import static com.jdiai.visual.ImageTypes.VIDEO_WEBM;
 import static com.jdiai.visual.RelationsManager.*;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
-import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.openqa.selenium.Keys.BACK_SPACE;
 import static org.openqa.selenium.OutputType.*;
 
 public class JSLight implements JS {
@@ -64,6 +67,7 @@ public class JSLight implements JS {
     protected Supplier<WebDriver> driver;
     protected Safe<Actions> actions;
     protected String name = "";
+    protected String varName = "";
     protected Object parent = null;
     protected JSImages imagesData;
     public int renderTimeout = 5000;
@@ -72,204 +76,54 @@ public class JSLight implements JS {
     public JSLight() {
         this(JDI::driver, new ArrayList<>());
     }
+
     public JSLight(Supplier<WebDriver> driver, List<By> locators) {
         this.driver = driver;
         this.engine = initEngine.apply(driver, locators);
-        // this.js.multiSearch();
         this.actions = new Safe<>(() -> new Actions(driver()));
+        init();
     }
     public JSLight(WebDriver driver, List<By> locators) {
         this(() -> driver, locators);
     }
+
     public JSLight(Supplier<WebDriver> driver, By... locators) {
         this(driver, newList(locators));
     }
+
     public JSLight(WebDriver driver, By... locators) {
         this(() -> driver, locators);
     }
+
     public JSLight(Object parent, By locator) {
         this(JDI::driver, locator);
         setParent(parent);
     }
+
     public JSLight(WebDriver driver, By locator, Object parent) {
         this(() -> driver, locator);
         setParent(parent);
     }
+
     public JSLight(Supplier<WebDriver> driver, By locator, Object parent) {
         this(driver, getLocators(locator, parent));
         this.parent = parent;
         if (parent != null && isInterface(parent.getClass(), HasCore.class)) {
-            this.engine().updateDriver(((HasCore) parent).core().engine().jsDriver());
+            this.engine().copyFrom(((HasCore) parent).core().engine());
         }
-    }
-
-    public WebDriver driver() {
-        return this.driver.get();
-    }
-
-    public JavascriptExecutor js() {
-        return (JavascriptExecutor) driver();
-    }
-
-    public JS core() { return this; }
-
-    public JS setCore(JS core) {
-        if (!isClass(core.getClass(), JSLight.class)) {
-            return this;
-        }
-        JSLight jsLight = (JSLight) core;
-        this.engine = jsLight.engine;
-        this.driver = jsLight.driver;
-        this.actions = jsLight.actions;
-        this.name = jsLight.name;
-        this.parent = jsLight.parent;
-        this.imagesData = jsLight.imagesData;
-        this.renderTimeout = jsLight.renderTimeout;
-        this.objectMap = jsLight.objectMap;
-        return this;
-    }
-    // public void setCore(JS core) {
-    //     List<Field> coreFields = getFieldsDeep(core);
-    //     for (Field field : coreFields) {
-    //         try {
-    //             Field thisField = getClass().getField(field.getName());
-    //             thisField.set(this, getValueField(field, core));
-    //         } catch (Exception ignore) { }
-    //     }
-    // }
-
-    /**
-     * @param valueFunc = element !== null
-     *        valueFunc = element !== null && styles.visibility === 'visible'
-     *        ...
-     * @return value
-     */
-    public String getElement(String valueFunc) {
-        return engine().getValue(valueFunc);
-    }
-
-    public List<String> getList(String valueFunc) {
-        return engine().getValues(valueFunc);
-    }
-    
-    public String filterElements(String valueFunc) {
-        return engine().firstValue(valueFunc);
-    }
-
-    /**
-     * @param action = getAttribute('value')
-     *        action = innerText;
-     *        ...
-     * @return value
-     */
-    public String getJSResult(String action) {
-        return engine().getAttribute(action);
-    }
-
-    public JS set(String action) {
-        return doAction(action);
-    }
-
-    public JS setOption(String option) {
-        if (option == null) {
-            return this;
-        }
-        return doAction("option.value = " + option + ";\nelement.dispatchEvent(new Event('change'));");
-    }
-    
-    public JS selectByName(String name) {
-        if (name == null) {
-            return this;
-        }
-        return doAction("dispatchEvent(new Event('change'));\n" +
-            "element.selectedIndex = [...element.options]" +
-            ".findIndex(option => option.text === '" + name + "');\n" +
-            "element.dispatchEvent(new Event('change'));");
-    }
-
-    public String selectedValueOption() {
-        return core().getJSResult("selectedOptions[0].value").trim();
-    }
-
-    public String selectedOption() {
-        return core().getJSResult("selectedOptions[0].innerText").trim();
-    }
-
-    public JS doAction(String action) {
-        engine().doAction(action);
-        return this;
-    }
-
-    public WebElement rawWe() {
-        if (isEmpty(locators())) {
-            throw new JDINovaException("Failed to use we() because element has no locators");
-        }
-        SearchContext ctx = driver();
-        for (By locator : locators()) {
-            ctx = ctx.findElement(locator);
-        }
-        return (WebElement) ctx;
-    }
-
-    public WebElement we() {
-        Timer timer = new Timer(timeout);
-        while (timer.isRunning()) {
-            try {
-                WebElement element = rawWe();
-                element.getTagName();
-                return element;
-            } catch (Exception ignore) { }
-        }
-        return rawWe();
-    }
-
-    public JS actionsWithElement(BiFunction<Actions, WebElement, Actions> action) {
-        action.apply(actions.get().moveToElement(this), this).build().perform();
-        return this;
-    }
-
-    public JS actions(BiFunction<Actions, WebElement, Actions> action) {
-        action.apply(actions.get(), this).build().perform();
-        return this;
-    }
-
-    public String getName() {
-        return isNotBlank(name)
-            ? name
-            : print(locators(), by -> JSDriverUtils.getByType(by) + ":" + JSDriverUtils.getByLocator(by), " > ");
-    }
-
-    public JS setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public Object parent() {
-        return this.parent;
-    }
-
-    public JS setParent(Object parent) {
-        List<By> locators = getLocators(parent);
-        locators.addAll(locators());
-        setLocators(locators);
-        this.parent = parent;
-        if (parent != null && isInterface(parent.getClass(), HasCore.class)) {
-            this.engine().updateDriver(((HasCore) parent).core().engine().jsDriver());
-        }
-        return this;
     }
 
     public void click() {
         doAction("click();");
     }
-    
+
     public JS clickCenter() {
-        return doAction("let rect = element.getBoundingClientRect();" +
-            "let x = rect.x + rect.width / 2;" +
-            "let y = rect.y + rect.height / 2;" +
+        return doAction("rect = element.getBoundingClientRect();" +
+            "x = rect.x + rect.width / 2;" +
+            "y = rect.y + rect.height / 2;" +
             "document.elementFromPoint(x, y).click();");
     }
-    
+
     public JS click(int x, int y) {
         engine().jsExecute("document.elementFromPoint(" + x + ", " + y + ").click();");
         return this;
@@ -277,32 +131,31 @@ public class JSLight implements JS {
 
     public JS select() { click(); return this; }
 
-    public JS select(String value) {
+    public void select(String value) {
         if (value == null || isEmpty(locators())) {
-            return this;
+            return ;
         }
         By lastLocator = last(locators());
         if (lastLocator.toString().contains("%s")) {
-            List<By> locators = locators().size() == 1
-                ? new ArrayList<>()
-                : locators().subList(0, locators().size() - 2);
-            locators.add(fillByTemplate(lastLocator, value));
-            initJSFunc.apply(null, locators).click();
+            findTemplate(value).click();
         } else {
             findFirst(textEquals(value)).click();
         }
+        return ;
+    }
+
+    public JSLight setBuilder(IJSBuilder builder) {
+        jsDriver().setBuilder(builder);
         return this;
     }
-    
+
     public JS selectSubList(String value) {
         if (value == null || isEmpty(locators())) {
             return this;
         }
-        find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
+        find(StringUtils.format(SELECT_FIND_TEXT_LOCATOR, value)).click();
         return this;
     }
-
-    public static String SELECT_FIND_TEXT_LOCATOR = ".//*[text()='%s']";
 
     public String selectFindTextLocator = SELECT_FIND_TEXT_LOCATOR;
 
@@ -310,89 +163,83 @@ public class JSLight implements JS {
         return selectFindTextLocator;
     }
 
-    
     public JS setFindTextLocator(String locator) {
         selectFindTextLocator = locator;
         return this;
     }
-    
+
     public JS select(String... values) {
         if (isEmpty(values) || isEmpty(locators())) {
-            return this;
+            throw new JDINovaException("Can't execute select for empty values or locators");
         }
-        By locator = last(locators());
-        IJSBuilder builder = getByLocator(locator).contains("%s")
-            ? getTemplateScriptForSelect(locator, values)
+        IJSBuilder builder = last(locators()).toString().contains("%s")
+            ? getTemplateScriptForSelect(values)
             : getScriptForSelect(values);
         builder.executeQuery();
         return this;
     }
 
-    protected IJSBuilder getTemplateScriptForSelect(By locator, String... values) {
+    protected IJSBuilder getTemplateScriptForSelect(String... values) {
         IJSBuilder builder;
         String ctx;
         if (locators().size() == 1) {
-            builder = engine().jsDriver().builder();
+            builder = jsDriver().builder();
             ctx = "document";
         } else {
-            builder = new JSDriver(engine().jsDriver().driver(), listCopyUntil(locators(), locators().size() - 1))
+            builder = new JSDriver(driver(), listCopyUntil(locators(), locators().size() - 2))
                 .buildOne();
             ctx = "element";
         }
-        builder.registerVariable("option");
-        builder.setElementName("option");
         for (String value : values) {
-            By by = fillByTemplate(locator, value);
-            builder.oneToOne(ctx, by).doAction("option.click();\n");
+            By by = defineLocator(StringUtils.format(selectFindTextLocator(), value));
+            builder.doAction(MessageFormat.format(dataType(by).get, ctx, selector(by, builder)) + ".click();\n");
         }
         return builder;
     }
 
     protected IJSBuilder getScriptForSelect(String... values) {
-        IJSBuilder builder = engine().jsDriver().buildOne();
-        builder.registerVariable("option");
-        builder.setElementName("option");
+        IJSBuilder builder = jsDriver().buildOne();
         for (String value : values) {
-            By by = defineLocator(format(selectFindTextLocator(), value));
-            builder.oneToOne("element", by).doAction("option.click();\n");
+            By by = defineLocator(StringUtils.format(selectFindTextLocator(), value));
+            builder.doAction(MessageFormat.format(dataType(by).get, "element", selector(by, builder)) + ".click();\n");
         }
         return builder;
     }
-    
+
     public <TEnum extends Enum<?>> void select(TEnum name) {
         select(getEnumValue(name));
     }
 
-    public JS check(boolean condition) {
-        return doAction("checked=" + condition + ";");
+    public JS check(boolean value) {
+        return doAction("checked=" + value + ";");
     }
 
     public JS check() {
         return check(true);
     }
-    
+
     public JS uncheck() {
         return check(false);
     }
 
     public JS rightClick() {
-        return actionsWithElement(Actions::contextClick);
+        return weElementActions(Actions::contextClick);
     }
-    
+
     public JS doubleClick() {
-        return actionsWithElement(Actions::doubleClick);
+        return weElementActions(Actions::doubleClick);
     }
 
     public JS hover() {
-        return actions(Actions::moveToElement);
+        return weActions(Actions::moveToElement);
     }
-    
+
     public JS dragAndDropTo(WebElement to) {
         return dragAndDropTo(to.getLocation().x, to.getLocation().y);
     }
-    
+
     public JS dragAndDropTo(int x, int y) {
-        return actions((a,e) -> a.dragAndDropBy(e, x, y));
+        return weActions((a, e) -> a.dragAndDropBy(e, x, y));
     }
 
     public void submit() {
@@ -408,7 +255,11 @@ public class JSLight implements JS {
         if (value == null) {
             return;
         }
-        we().sendKeys(value);
+        if (value.length == 1 && value[0].equals("\n")) {
+            we().sendKeys("\n " + BACK_SPACE);
+        } else {
+            we().sendKeys(value);
+        }
     }
 
     public JS input(CharSequence... value) {
@@ -439,7 +290,7 @@ public class JSLight implements JS {
     public String getTagName() {
         return getJSResult("tagName").toLowerCase();
     }
-    
+
     public String tag() {
         return getTagName();
     }
@@ -497,7 +348,7 @@ public class JSLight implements JS {
 
     public String printHtml() {
         return MessageFormat.format("<{0} {1}>{2}</{0}>", getTagName().toLowerCase(),
-            print(allAttributes(), el -> format("%s='%s'", el.key, el.value), " "),
+            print(allAttributes(), el -> StringUtils.format("%s='%s'", el.key, el.value), " "),
             getJSResult("innerHTML"));
     }
 
@@ -507,7 +358,7 @@ public class JSLight implements JS {
         }
         return this;
     }
-    
+
     public JS highlight(String color) {
         return show().set("styles.border='3px dashed "+color+"'");
     }
@@ -519,11 +370,11 @@ public class JSLight implements JS {
     public String cssStyle(String style) {
         return engine().getStyle(style);
     }
-    
+
     public Json cssStyles(String... styles) {
         return engine().getStyles(styles);
     }
-    
+
     public Json allCssStyles() {
         return engine().getAllStyles();
     }
@@ -536,10 +387,10 @@ public class JSLight implements JS {
         return !isSelected();
     }
 
-    public boolean isEnabled() {
-        return hasAttribute("enabled");
+    public boolean isDisabled() {
+        return hasAttribute("disabled");
     }
-    
+
     public JS setTextType(GetTextTypes textType) {
         this.textType = textType; return this;
     }
@@ -549,7 +400,7 @@ public class JSLight implements JS {
     public String getText() {
         return getText(textType);
     }
-    
+
     public String getText(GetTextTypes textType) {
         return getJSResult(textType.value);
     }
@@ -563,11 +414,15 @@ public class JSLight implements JS {
     }
 
     public boolean isDisplayed() {
-        return getElement(conditions.isDisplayed).equalsIgnoreCase("true");
+        return getElement(findFilters.isDisplayed).equalsIgnoreCase("true");
     }
 
     public boolean isVisible() {
-        return getElement(conditions.isVisible).equalsIgnoreCase("true");
+        if (isHidden()) {
+            return false;
+        }
+        show();
+        return getElement(findFilters.isVisible).equalsIgnoreCase("true");
     }
 
     public boolean isInView() {
@@ -579,7 +434,7 @@ public class JSLight implements JS {
     }
 
     public boolean isExist() {
-        return engine().jsDriver().getSize() > 0;
+        return jsDriver().getSize() > 0;
     }
 
     public Point getLocation() {
@@ -627,9 +482,9 @@ public class JSLight implements JS {
             ? new Rectangle(0, 0, 0, 0)
             : new Rectangle(rect.x, rect.y, getHeight(rect), getWidth(rect));
     }
-    
+
     public ClientRect getClientRect() {
-        return new ClientRect(engine().getJson("let rect = element.getBoundingClientRect();\n" +
+        return new ClientRect(engine().getJson("rect = element.getBoundingClientRect();\n" +
             "return { x: rect.x, y: rect.y, top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right, " +
             "wWidth: window.innerWidth, wHeight: window.innerHeight };"));
     }
@@ -663,7 +518,7 @@ public class JSLight implements JS {
     public StreamToImageVideo makeScreenshot() {
         return makeScreenshot(DEFAULT_IMAGE_TYPE);
     }
-    
+
     public File makeScreenshot(String tag) {
         show();
         File imageFile = makeScreenshot().asFile(getScreenshotName(tag));
@@ -690,13 +545,13 @@ public class JSLight implements JS {
     }
 
     public JS startRecording(ImageTypes imageType) {
-        String value = getElement("let blobs = [];\n" +
-            "const recorder = new MediaRecorder(element.captureStream(), { mimeType: '" + imageType.value + "' });\n" +
+        String value = getElement("blobs = [];\n" +
+            "recorder = new MediaRecorder(element.captureStream(), { mimeType: '" + imageType.value + "' });\n" +
             "recorder.ondataavailable = (e) => {\n" +
             "  if (e.data && e.data.size > 0) { blobs.push(e.data); }\n}\n" +
             "recorder.onstop = () => {\n" +
-            "  const blob = new Blob(blobs, { type: '" + imageType.value + "' });\n" +
-            "  let reader = new FileReader();\n" +
+            "  blob = new Blob(blobs, { type: '" + imageType.value + "' });\n" +
+            "  reader = new FileReader();\n" +
             "  reader.readAsDataURL(blob);\n" +
             "  reader.onloadend = () => window.jdiVideoBase64 = reader.result;\n" +
             "}\n" +
@@ -718,7 +573,7 @@ public class JSLight implements JS {
         }
         return new StreamToImageVideo(stream, imageType);
     }
-    
+
     public StreamToImageVideo stopRecordingAndSave() {
         return stopRecordingAndSave(VIDEO_WEBM);
     }
@@ -726,7 +581,7 @@ public class JSLight implements JS {
     public StreamToImageVideo recordCanvasVideo(int sec) {
         return recordCanvasVideo(VIDEO_WEBM, sec);
     }
-    
+
     public StreamToImageVideo recordCanvasVideo(ImageTypes imageType, int sec) {
         startRecording(imageType);
         Timer.sleep((sec+1) * 1000L);
@@ -746,13 +601,13 @@ public class JSLight implements JS {
         }
         return new StreamToImageVideo(stream, VIDEO_WEBM);
     }
-    
+
     public JS setObjectMapping(String objectMap, Class<?> cl) {
         this.objectMap = objectMap;
         this.engine().setupEntity(cl);
         return this;
     }
-    
+
     public JsonObject getJSObject(String json) {
         return engine().getJson(json);
     }
@@ -771,26 +626,21 @@ public class JSLight implements JS {
     }
 
     public void setEntity(String objectMap) {
-        engine().getAsMap(objectMap);
+        engine().setMultipleValues(objectMap);
     }
 
     public JS find(String by) {
         return find(NAME_TO_LOCATOR.apply(by));
     }
 
-    public JS find(By by) {
-        return initJSFunc.apply(by, null)
-                .setParent(this);
-    }
-    
     public JS children() {
         return find("*");
     }
-    
+
     public JS ancestor() {
         return find("/..");
     }
-    
+
     public List<String> values(GetTextTypes getTextType) {
         return engine().getAttributeList(getTextType.value);
     }
@@ -798,51 +648,84 @@ public class JSLight implements JS {
     public List<String> values() {
         return values(textType);
     }
-    
+
     public int size() {
-        return engine().getSize();
+        return useFilter(() -> engine().getSize());
     }
-    
+
     public List<JsonObject> getObjectList(String json) {
-        return engine().getJsonList(json);
+        return useFilter(() -> engine().getJsonList(json));
     }
-    
+
     public <T> List<T> getEntityList() {
         return engine().getEntityList(objectMap);
     }
-    
+
     public void setEntity() {
-        engine().getAsMap(objectMap);
+        engine().setMultipleValues(objectMap);
     }
 
     public <T> List<T> getEntityList(Class<T> cl) {
-        return getEntityList(GET_OBJECT_MAP.apply(cl), cl);
+        if (objectMap == null) {
+            objectMap = GET_OBJECT_MAP.apply(cl);
+        }
+        return useFilter(() -> getEntityList(objectMap, cl));
     }
-    
+
     public JS fill(Object obj) {
         return setEntity(obj);
     }
-    
+
     public JS submit(Object obj, String locator) {
         setEntity(obj);
         find(locator).click();
         return this;
     }
-    
+
     public JS submit(Object obj) {
         return submit(obj, SUBMIT_LOCATOR);
     }
-    
+
     public JS loginAs(Object obj, String locator) {
         return submit(obj, locator);
     }
-    
+
     public JS loginAs(Object obj) {
         return submit(obj);
     }
-    
+
     public JS setEntity(Object obj) {
-        Field[] allFields = obj.getClass().getDeclaredFields();
+        engine().setMultipleValues(print(getMapList(obj), "\n"));
+        return this;
+    }
+
+    public JS findTemplate(String value) {
+        JS result = copy();
+        result.jsDriver().replaceLastLocator(value);
+        result.setName(getName() + "(" + value + ")");
+        return result;
+    }
+
+    public JS find(By by) {
+        JS result = copy();
+        result.jsDriver().addRule(by);
+        result.setName(getName() + "(" + getByLocator(by) + ")");
+        return result;
+    }
+
+    public JS addJSCode(String script, String name) {
+        return addJSCode(script, RuleType.List, name);
+    }
+
+    public JS addJSCode(String script, RuleType type, String name) {
+        JS result = copy();
+        result.jsDriver().addRule(script, type);
+        result.setName(getName() + name);
+        return result;
+    }
+
+    protected List<String> getMapList(Object obj) {
+        List<Field> allFields = getFieldsDeep(obj);
         List<String> mapList = new ArrayList<>();
         for (Field field : allFields) {
             Object fieldValue = getValueField(field, obj);
@@ -854,66 +737,73 @@ public class JSLight implements JS {
                 mapList.add(value);
             }
         }
-        setEntity(print(mapList, ";\n") + ";\nreturn ''");
-        return this;
+        return mapList;
     }
-    
+
     public <T> List<T> getEntityList(String objectMap, Class<?> cl) {
         engine().setupEntity(cl);
         return engine().getEntityList(objectMap);
     }
-    
+
     public JS setEntityList(String objectMap) {
         engine().setMap(objectMap);
         return this;
     }
-    
+
     public JS findFirst(String by, Function<JS, String> condition) {
         return findFirst(NAME_TO_LOCATOR.apply(by), condition.apply(this));
     }
-    
+
     public JS findFirst(By by, Function<JS, String> condition) {
         return findFirst(by, condition.apply(this));
     }
-    
+
     public JS findFirst(String by, String condition) {
         return findFirst(NAME_TO_LOCATOR.apply(by), condition);
     }
-    
+
     public JS get(int index) {
-        JS js = listToOne("element = elements[" + index + "];\n");
-        js.setName(format("%s[%s]",getName(), index));
-        return js;
+        return addJSCode("element = elements[" + index + "];\n", "[" + index + "]");
     }
-    
+
     public JS get(String by, int index) {
         return get(NAME_TO_LOCATOR.apply(by), index);
     }
-    
+
     public JS get(By by, int index) {
-        String script = "element = elements.filter(e => "+
-                MessageFormat.format(dataType(by).get, "e", selector(by, engine().jsDriver().builder()))+
+        String script = "element = elements.filter(e =>e && "+
+                MessageFormat.format(dataType(by).get, "e", selector(by, jsDriver().builder()))+
                 ")[" + index + "];\n";
-        return listToOne(script)
-            .setName(format("%s[%s]",getName(), index)).core();
+        return addJSCode(script, "[" + index + "]");
     }
-    
+
     public JS get(Function<JS, String> filter) {
         return findFirst(filter);
     }
-    
+
     public JS get(String value) {
         JS js = get(textEquals(value));
-        js.setName(format("%s[%s]",getName(), value));
+        js.setName(StringUtils.format("%s[%s]",getName(), value));
         return js;
     }
-    
+
     public JS findFirst(Function<JS, String> condition) {
         return findFirst(condition.apply(this));
     }
-    
+
+    public JS findFirst(By by, String condition) {
+        String script = "element = elements.find(e => { fel = " +
+            MessageFormat.format(dataType(by).get, "e", selector(by, builder())) + "; " +
+            "return fel && " + handleCondition(condition, "fel") + "; });\n";
+        return addJSCode(script, ".first");
+    }
+
+    public long indexOf(Function<JS, String> condition) {
+        return jsDriver().indexOf(condition.apply(this));
+    }
+
     public JS findFirst(String condition) {
-        return listToOne("element = elements.find(e => e && " + handleCondition(condition, "e") + ");\n");
+        return addJSCode("element = elements.find(e => e && " + handleCondition(condition, "e") + ");\n", ".first");
     }
 
     protected String handleCondition(String condition, String elementName) {
@@ -921,56 +811,33 @@ public class JSLight implements JS {
             ? condition.replace("#element#", elementName)
             : elementName + "." + condition;
     }
-    
-    public JS findFirst(By by, String condition) {
-        String script = "element = elements.find(e => { const fel = " +
-            MessageFormat.format(dataType(by).get, "e", selector(by, engine().jsDriver().builder())) + "; " +
-            "return fel && " + handleCondition(condition, "fel") + "; });\n";
-        return listToOne(script);
-    }
-    
-    public long indexOf(Function<JS, String> condition) {
-        return engine().jsDriver().indexOf(condition.apply(this));
-    }
 
-    protected JS listToOne(String script) {
-        JS result = initJSFunc.apply(null, null);
-        result.engine().jsDriver().setScriptInElementContext(engine().jsDriver(), script);
-        engine().jsDriver().builder().cleanup();
-        return result;
-    }
-
-    // TODO
-    // public WebList finds(@MarkupLocator String by) {
-    //     return $$(by, this);
-    // }
-    // public WebList finds(@MarkupLocator By by) {
-    //     return $$(by, this);
-    // }
-    public boolean isClickable() {
+    public boolean isNotCovered() {
         Dimension dimension = getSize();
-        if (dimension.getWidth() == 0) return false;
-        return isClickable(dimension.getWidth() / 2, dimension.getHeight() / 2 - 1);
+        if (dimension.getWidth() == 0) {
+            return false;
+        }
+        return isNotCovered(dimension.getWidth() / 2, dimension.getHeight() / 2 - 1);
     }
-    
+
     public JS uploadFile(String filePath) {
         we().click();
         String pathToPaste = new File(filePath).getAbsolutePath();
         pasteText(pathToPaste);
         return this;
     }
-    
+
     public JS press(Keys key) {
         Keyboard.press(key);
         return this;
     }
-    
-    public JS keyboardCommands(String... commands) {
+
+    public JS commands(String... commands) {
         Keyboard.commands(commands);
         return this;
     }
-    
-    public boolean isClickable(int xOffset, int yOffset) {
+
+    public boolean isNotCovered(int xOffset, int yOffset) {
         return getElement("rect = element.getBoundingClientRect();\n" +
             "cx = rect.left + " + xOffset + ";\n" +
             "cy = rect.top + " + yOffset + ";\n" +
@@ -981,35 +848,39 @@ public class JSLight implements JS {
             "}\n" +
             "return false;").equals("true");
     }
-    
+
     public String fontColor() {
         return engine().color();
     }
-    
+
     public String bgColor() {
         return engine().bgColor();
     }
-    
+
     public String pseudo(String name, String value) {
         return engine().pseudo(name, value);
     }
-    
+
     public JS focus() {
         doAction("dispatchEvent(new Event('focus', { 'bubbles': true }));");
         return this;
     }
-    
+
     public JS blur() {
         doAction("dispatchEvent(new Event('blur', { 'bubbles': true }));");
         return this;
     }
-    
+
     public boolean focused() {
         return getElement("element === document.activeElement").equalsIgnoreCase("true");
     }
-    
+
     public List<By> locators() {
-        return engine().jsDriver().locators();
+        List<By> locators = jsDriver().locators();
+        if (locators == null) {
+            return new ArrayList<>();
+        }
+        return filter(locators, Objects::nonNull);
     }
 
     public JSImages imagesData() {
@@ -1018,25 +889,25 @@ public class JSLight implements JS {
         }
         return imagesData;
     }
-    
+
     public File getImageFile() {
         return getImageFile("");
     }
-    
+
     public File getImageFile(String tag) {
         return imagesData().images.has(tag) ? new File(imagesData().images.get(tag)) : null;
     }
-    
+
     public JS visualValidation() {
         visualValidation("");
         return this;
     }
-    
+
     public JS visualValidation(String tag) {
         VISUAL_VALIDATION.accept(tag, this);
         return this;
     }
-    
+
     public JS visualCompareWith(JS element) {
         COMPARE_IMAGES.apply(imagesData().imageFile, element.imagesData().imageFile);
         return this;
@@ -1064,7 +935,7 @@ public class JSLight implements JS {
     public OfElement isOn(Function<Direction, Boolean> expected) {
         return new OfElement(expected, this);
     }
-    
+
     public boolean relativePosition(JS element, Function<Direction, Boolean> expected) {
         return expected.apply(getDirectionTo(element));
     }
@@ -1075,7 +946,7 @@ public class JSLight implements JS {
         relations = null;
         return this;
     }
-    
+
     public MapArray<String, Direction> getRelativePositions(JS... elements) {
         relations = new MapArray<>();
         for (JS element : elements) {
@@ -1121,11 +992,11 @@ public class JSLight implements JS {
         if (similar(relation, expectedRelation)) {
             return;
         }
-        failures.add(format("Elements '%s' and '%s' are misplaced: angle: %s => %s; length: %s => %s",
+        failures.add(StringUtils.format("Elements '%s' and '%s' are misplaced: angle: %s => %s; length: %s => %s",
             getFullName(), relation.key, relation.value.angle(), expectedRelation.angle(),
             relation.value.length(), expectedRelation.length()));
     }
-    
+
     public Point getCenter() {
         return getCenter(getRect());
     }
@@ -1135,12 +1006,222 @@ public class JSLight implements JS {
         int y = rect.y + rect.height / 2;
         return new Point(x, y);
     }
-    
+
     public JSEngine engine() {
         return engine;
     }
 
     public String textType() {
         return textType.value;
+    }
+
+    @Override
+    public String toString() {
+        if (isBlank(name)) {
+            return printLocators();
+        }
+        return StringUtils.format("%s(%s%s)", getName(), getFullName(), printLocators());
+    }
+
+    public String getFullName() {
+        if (parent() != null && isNotBlank(varName)) {
+            String parentName = parent().getClass().getSimpleName();
+            String prefix = isNotBlank(parentName) ? parentName + "." : "";
+            return prefix + varName + ": ";
+        }
+        return "";
+    }
+
+    protected void init() { }
+
+    public WebDriver driver() {
+        return this.driver.get();
+    }
+
+    public JavascriptExecutor js() {
+        return (JavascriptExecutor) driver();
+    }
+
+    public JS core() { return this; }
+
+    public JS setCore(JS core) {
+        if (!isClass(core.getClass(), JSLight.class)) {
+            return this;
+        }
+        JSLight jsLight = (JSLight) core;
+        copyFrom(jsLight);
+        return this;
+    }
+
+    public JSLight copy() {
+        return new JSLight(driver).copyFrom(this);
+    }
+
+    public <T> T copyFrom(JS js) {
+        if (!isClass(js.getClass(), JSLight.class)) {
+            return (T) this;
+        }
+        JSLight jsLight = (JSLight) js;
+        this.engine.copyFrom(jsLight.engine);
+        this.actions = jsLight.actions;
+        this.name = jsLight.name;
+        this.varName = jsLight.varName;
+        this.parent = jsLight.parent;
+        this.imagesData = jsLight.imagesData;
+        this.renderTimeout = jsLight.renderTimeout;
+        this.objectMap = jsLight.objectMap;
+        return (T) this;
+    }
+
+    /**
+     * @param valueFunc = element !== null
+     *        valueFunc = element !== null && styles.visibility === 'visible'
+     *        ...
+     * @return value
+     */
+    public String getElement(String valueFunc) {
+        return engine().getValue(valueFunc);
+    }
+
+    public List<String> getList(String valueFunc) {
+        return useFilter(() -> engine().getValues(valueFunc));
+    }
+
+    protected  <T> T useFilter(Supplier<T> func) {
+        T result;
+        if (jsDriver().hasFilter()) {
+            result = func.get();
+        } else {
+            setFilter(findFilters.isDisplayed);
+            result = func.get();
+            setFilter(null);
+        }
+        return result;
+    }
+
+    public String filterElements(String valueFunc) {
+        return useFilter(() -> engine().firstValue(valueFunc));
+    }
+
+    /**
+     * @param action = getAttribute('value')
+     *        action = innerText;
+     *        ...
+     * @return value
+     */
+    public String getJSResult(String action) {
+        return engine().getAttribute(action);
+    }
+
+    public JS set(String action) {
+        return doAction(action);
+    }
+
+    public JS setOption(String option) {
+        if (option == null) {
+            return this;
+        }
+        return doAction("option.value = " + option + ";\nelement.dispatchEvent(new Event('change'));");
+    }
+
+    public JS selectByName(String name) {
+        if (name == null) {
+            return this;
+        }
+        return doAction("dispatchEvent(new Event('change'));\n" +
+                "element.selectedIndex = [...element.options]" +
+                ".findIndex(option => option.text === '" + name + "');\n" +
+                "element.dispatchEvent(new Event('change'));");
+    }
+
+    public String selectedValueOption() {
+        return core().getJSResult("selectedOptions[0].value").trim();
+    }
+
+    public String selectedOption() {
+        return core().getJSResult("selectedOptions[0].innerText").trim();
+    }
+
+    public JS doAction(String action) {
+        engine().doAction(action);
+        return this;
+    }
+
+    public WebElement rawWe() {
+        if (isEmpty(locators())) {
+            throw new JDINovaException("Failed to use we() because element has no locators");
+        }
+        SearchContext ctx = driver();
+        for (By locator : locators()) {
+            ctx = ctx.findElement(locator);
+        }
+        return (WebElement) ctx;
+    }
+
+    public WebElement we() {
+        Timer timer = new Timer(timeout);
+        while (timer.isRunning()) {
+            try {
+                WebElement element = rawWe();
+                element.getTagName();
+                return element;
+            } catch (Exception ignore) { }
+        }
+        return rawWe();
+    }
+
+    public JS weElementActions(BiFunction<Actions, WebElement, Actions> action) {
+        action.apply(actions.get().moveToElement(we()), we()).build().perform();
+        return this;
+    }
+
+    public JS weActions(BiFunction<Actions, WebElement, Actions> action) {
+        action.apply(actions.get(), we()).build().perform();
+        return this;
+    }
+
+    public String getName() {
+        return isNotBlank(name)
+                ? name
+                : printLocators();
+    }
+
+    protected String printLocators() {
+        String result = "";
+        boolean first = false;
+        for (By by : locators()) {
+            if (by != null) {
+                if (first) {
+                    result += " > ";
+                }
+                result += getByType(by) + ":'" + getByLocator(by) + "'";
+                first = true;
+            }
+        }
+        return result;
+    }
+
+    public JS setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setVarName(Field field) {
+        this.varName = field.getName();
+    }
+
+    public Object parent() {
+        return this.parent;
+    }
+
+    public JS setParent(Object parent) {
+        // List<By> locators = getLocators(parent);
+        // locators.addAll(locators());
+        // setLocators(locators);
+        this.parent = parent;
+        if (parent != null && isInterface(parent.getClass(), HasCore.class)) {
+            this.engine().copyFrom(((HasCore) parent).engine());
+        }
+        return this;
     }
 }
