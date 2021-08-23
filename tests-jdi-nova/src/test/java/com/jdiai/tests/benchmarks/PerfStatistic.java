@@ -3,6 +3,7 @@ package com.jdiai.tests.benchmarks;
 import com.epam.jdi.tools.Timer;
 import com.epam.jdi.tools.func.JAction;
 import com.epam.jdi.tools.func.JFunc;
+import com.jdiai.tests.benchmarks.test.data.Statistic;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import static java.lang.Boolean.parseBoolean;
 import static org.testng.Assert.assertEquals;
 
 public class PerfStatistic {
-    public static <T> String testScenario(String testName, JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
+    public static <T> Statistic testScenario(String testName, JFunc<T> seleniumAction, JFunc<T> jdiAction, int count) {
         return testScenario(testName, () -> {}, "Selenium", seleniumAction, "JDI Nova", jdiAction, count);
     }
     private static Boolean runPerformance = null;
@@ -29,7 +30,7 @@ public class PerfStatistic {
         return runPerformance;
     }
 
-    public static <T> String testScenario(String testName, JAction precondition, String framework1, JFunc<T> seleniumAction,
+    public static <T> Statistic testScenario(String testName, JAction precondition, String framework1, JFunc<T> seleniumAction,
               String framework2, JFunc<T> jdiAction, int count) {
         List<Long> seleniumStats = new ArrayList<>();
         List<Long> jsStats = new ArrayList<>();
@@ -50,17 +51,24 @@ public class PerfStatistic {
             System.out.println(testName + " Ratio: " + df2((double)seleniumTime/jsTime));
             assertEquals(seleniumResult, jdiResult);
         }
-        double avSelenium = getAverage(seleniumStats);
+        double avFramework = getAverage(seleniumStats);
         double avJdi = getAverage(jsStats);
-        System.out.println("Average " + framework1 + ": " + df2(avSelenium));
+        System.out.println("Average " + framework1 + ": " + df2(avFramework));
         System.out.println("Average " + framework2 + ": " + df2(avJdi));
-        String avRatio = df2(avSelenium/avJdi);
+        String avRatio = df2(avFramework/avJdi);
         System.out.println("Average Ratio: " + avRatio);
         String min = df2(min(seleniumStats, jsStats));
         String max = df2(max(seleniumStats, jsStats));
         System.out.println("Min [" + min + "] and Max [" + max + "]");
-        return testName + ">" + format(framework1 + "[average:%s];" + framework2 + "[average:%s];Ratio[average:%s;min:%s;max:%s]",
-            df2(avSelenium), df2(avJdi), avRatio, min, max);
+
+        return new Statistic().set(s -> {
+            s.scenario = testName;
+            s.framework1 = framework1;
+            s.stat1 = df2(avFramework);
+            s.stat2 = df2(avJdi);
+            s.ratio = avRatio;
+            s.additionalInfo = format("[%s; %s]", min, max);
+        });
     }
     private static String df2(double value) {
         return new DecimalFormat("#.##").format(value);
