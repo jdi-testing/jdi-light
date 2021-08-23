@@ -1,16 +1,16 @@
 package com.jdiai.asserts;
 
 public class ElementFilters {
-    public final static String isExist = "element !== null";
+    public static final String isExist = "element !== null";
 
-    public final static String isDisplayed =
+    public static final String isDisplayed =
         "element && styles.visibility === 'visible' && styles.display !== 'none' " +
         "&& !element.hasAttribute('hidden')";
 
-    public final static String isEnabled = isDisplayed + " && !element.hasAttribute('disabled')";
+    public static final String isEnabled = isDisplayed + " && !element.hasAttribute('disabled')";
 
     // onmousemove = function(e){ console.log("mouse location:", e.clientX, e.clientY); }
-    public final static String isVisible =
+    public static final String isVisible =
         "if (!element) { return false; }\n" +
         "rect = element.getBoundingClientRect();\n" +
         "if (!styles || !rect || styles.visibility !== 'visible' || styles.display === 'none' || " +
