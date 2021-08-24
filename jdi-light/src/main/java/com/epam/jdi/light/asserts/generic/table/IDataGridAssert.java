@@ -145,7 +145,7 @@ public class IDataGridAssert<D, T extends IDataGrid<?, D>, A extends IDataGridAs
     }
     @JDIAction("Assert that '{name}' has at least one that meet expected condition")
     public IDataGridAssert<D, T, A> value(JFunc1<D,Boolean> condition, Row row) {
-        D actual = dataGrid().data(row.getIndex(dataGrid().header()));
+        D actual = dataGrid().data(row.getIndex(dataGrid().header(), dataGrid().getStartIndex()));
         jdiAssert(condition.execute(actual), Matchers.is(true));
         return this;
     }

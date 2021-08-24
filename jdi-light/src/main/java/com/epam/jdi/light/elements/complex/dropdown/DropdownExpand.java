@@ -129,8 +129,9 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     protected boolean setupDone = false;
 
     public IsDropdown setup(String root, String value, String list, String expand) {
-        if (isNotBlank(root))
+        if (isNotBlank(root)) {
             base().setLocator(root);
+        }
         else if (isNotBlank(value)) {
             base().setLocator(value);
             thisParent = true;
@@ -138,8 +139,8 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
         if (isNotBlank(value)) {
             valueLocator = value;
             expandLocator = isNotBlank(expand)
-                    ? expand
-                    : value;
+                ? expand
+                : value;
         } else if (isNotBlank(expand))
             expandLocator = expand;
         if (isNotBlank(list))
@@ -149,8 +150,9 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     }
 
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDropdown.class, IsDropdown.class))
+        if (!fieldHasAnnotation(field, JDropdown.class, IsDropdown.class)) {
             return;
+        }
         JDropdown j = field.getAnnotation(JDropdown.class);
         setup(j.root(), j.value(), j.list(), j.expand());
         autoClose = j.autoClose();

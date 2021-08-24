@@ -203,11 +203,8 @@ public class WebSettings {
         }
         fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
         logger.setLogLevel(LOGS.logLevel);
-        if (hasProperty("allure")) {
-            fillAction(p -> LOGS.writeToAllure = onOff(p), "allure");
-        } else {
-            fillAction(p -> LOGS.writeToAllure = onOff(p), "allure.steps");
-        }
+        fillAction(p -> LOGS.writeToAllure = onOff(p),
+            hasProperty("allure") ? "allure" : "allure.steps");
         fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locator");
         fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
         fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
