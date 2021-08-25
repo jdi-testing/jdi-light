@@ -215,9 +215,6 @@ public class StaticSite {
     @Url("/backdrop")
     public static BackdropPage backdropPage;
 
-    @Url("/material-ui-feedback-backdrop--default-backdrop")
-    public static WebPage feedbackBackdropDefaultPage;
-
     // circular
     @Url("/progress")
     public static ProgressPage progressPage;
@@ -263,11 +260,8 @@ public class StaticSite {
     public static WebPage utilsClickAwayListenerPortalExamplePage;
 
     // portal
-    @Url("portal")
+    @Url("/portal")
     public static PortalPage portalPage;
-
-    @Url("/material-ui-utils-portal--default")
-    public static WebPage defaultPortalPage;
 
     // navigation
     // breadcrumbs
