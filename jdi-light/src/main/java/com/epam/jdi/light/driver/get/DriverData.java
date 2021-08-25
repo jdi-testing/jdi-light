@@ -34,7 +34,7 @@ import static com.epam.jdi.tools.ReflectionUtils.stringToPrimitive;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static java.awt.Toolkit.getDefaultToolkit;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;

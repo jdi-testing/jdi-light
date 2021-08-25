@@ -3,7 +3,7 @@ package com.epam.jdi.light.ui.html.elements.complex.vue;
 import java.util.List;
 
 import static com.epam.jdi.tools.PrintUtils.print;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 
 public class ChartData {
     public List<String> labels;

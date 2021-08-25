@@ -9,7 +9,7 @@ import static com.epam.jdi.light.driver.get.DriverVersion.PENULT;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**

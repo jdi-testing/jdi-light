@@ -2,7 +2,7 @@ package io.github.com.entities;
 
 import com.epam.jdi.tools.DataClass;
 
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 
 public class SlideInfo extends DataClass<SlideInfo> {
     public String title, image, text, src;

@@ -13,7 +13,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static org.apache.commons.lang3.StringUtils.*;
 
 /**

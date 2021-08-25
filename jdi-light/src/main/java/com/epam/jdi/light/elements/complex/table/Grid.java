@@ -22,7 +22,7 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.toList;
 import static com.epam.jdi.tools.Timer.getByCondition;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 

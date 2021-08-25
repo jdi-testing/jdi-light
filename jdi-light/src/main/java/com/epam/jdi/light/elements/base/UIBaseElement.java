@@ -15,26 +15,32 @@ import com.epam.jdi.tools.Safe;
  */
 public abstract class UIBaseElement<A extends UIAssert<?,?>> implements ICoreElement, HasAssert<A>, HasInit {
     private Safe<UIElement> uiElement = new Safe<>(UIElement::new);
+
     public JDIBase base() { return core().base(); }
+
     public UIElement core() {
         return uiElement.get();
     }
+
     public void init() {
         UIElement element = new UIElement(uiElement.get().base());
         uiElement = new Safe<>(() -> element);
     }
     protected boolean thisParent = false;
+
     protected UIElement linked(@MarkupLocator String locator, String name) {
         UIElement el = new UIElement(base(), locator, getName() + " " + name, this);
-        if (thisParent)
+        if (thisParent) {
             el.setParent(base().parent);
+        }
         return el;
     }
     protected WebList linkedList(@MarkupLocator String locator, String name) {
         WebList list = new WebList(base(), locator, getName() + " " + name, this);
         list.searchVisible();
-        if (thisParent)
+        if (thisParent) {
             list.setParent(base().parent);
+        }
         return list;
     }
 

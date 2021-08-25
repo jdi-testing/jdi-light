@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.Quotes;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PrintUtils.print;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.util.Arrays.asList;
 
 public class TableMatcherSettings {

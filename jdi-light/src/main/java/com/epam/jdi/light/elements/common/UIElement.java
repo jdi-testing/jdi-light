@@ -52,7 +52,7 @@ import static com.epam.jdi.tools.ReflectionUtils.create;
 import static com.epam.jdi.tools.switcher.SwitchActions.Case;
 import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
 import static java.lang.Math.abs;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;

@@ -32,7 +32,7 @@ import static com.epam.jdi.tools.LinqUtils.first;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 29.03.2018

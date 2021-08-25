@@ -19,7 +19,7 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.LinqUtils.firstIndex;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 24.09.2020

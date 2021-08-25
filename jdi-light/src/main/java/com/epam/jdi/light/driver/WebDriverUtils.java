@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Runtime.getRuntime;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.epam.jdi.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.ChipsSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
@@ -45,7 +46,7 @@ public class ChipsTests extends TestsInit {
         basicChipsRow.clickChipsByTextValue(PRIMARYFISH);
         basicChipsRow.clickChipsByTextValue(ACCENTFISH);
 
-        basicSelectedValue.has().text(String.format("You clicked: %s", ACCENTFISH));
+        basicSelectedValue.has().text(format("You clicked: %s", ACCENTFISH));
     }
 
     @Test
@@ -58,7 +59,7 @@ public class ChipsTests extends TestsInit {
         stackedChipsList.clickChipsByTextValue(ACCENT);
         stackedChipsList.clickChipsByTextValue(WARN);
 
-        stackedSelectedValue.has().text(String.format("You clicked: %s", WARN));
+        stackedSelectedValue.has().text(format("You clicked: %s", WARN));
     }
 
     @Test

@@ -30,6 +30,7 @@ public abstract class DriverBase implements JDIElement {
     public String typeName = "";
     public String failElement = "";
     public Object parent;
+    public Object siteName;
     protected String context;
     private String pageName;
 

@@ -24,6 +24,7 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
     protected Selector selector() {
         return new Selector().setCore(Selector.class, base());
     }
+
     public WebList list() {
         WebList list = selector().list();
         list.setStartIndex(getStartIndex());
@@ -52,15 +53,19 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
     public String selected() {
         return selector().selected();
     }
+
     public boolean wait(JFunc1<IsDropdown, Boolean> condition) {
         return base().timer().wait(() -> condition.execute(this));
     }
+
     @Override
     public boolean selected(String option) {
         return selector().selected(option);
     }
+
     @Override
     public List<String> values() { return selector().values(); }
+
     @Override
     public List<String> values(TextTypes type) { return selector().values(); }
 
@@ -70,9 +75,11 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
     }
 
     public boolean isExpanded() { throw exception("isExpanded can not be used with this element"); }
+
     public int getStartIndex() {
         return startIndex;
     }
+
     public void setStartIndex(int index) {
         startIndex = index;
     }

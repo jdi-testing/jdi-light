@@ -1,16 +1,19 @@
 package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.tools.Safe;
 import com.epam.jdi.tools.map.MapArray;
 import org.openqa.selenium.Dimension;
 
+import java.util.List;
 import java.util.Set;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -24,10 +27,26 @@ public class WindowsManager {
 
     public static Set<String> getWindows() {
         Set<String> wHandles = getDriver().getWindowHandles();
-        if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size())
+        if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size()) {
             newWindow.set(true);
+        }
         windowHandles.set(wHandles);
         return wHandles;
+    }
+
+    public static void openSiteTab(Class<?> site) {
+        String name = site.isAnnotationPresent(Name.class)
+            ? site.getAnnotation(Name.class).value()
+            : site.getSimpleName();
+        if (isEmpty(windowHandlesMap.get())) {
+            setWindowName(name);
+            return;
+        }
+        if (windowHandlesMap.get().has(name)) {
+            switchToWindow(name);
+        } else {
+            openNewTab(name);
+        }
     }
 
     /**
@@ -54,6 +73,9 @@ public class WindowsManager {
         windowHandlesMap.get().update(value, getDriver().getWindowHandle());
     }
 
+    public static List<String> registeredWindows() {
+        return windowHandlesMap.get().keys();
+    }
     /**
      * Get windows count
      * @return int count
@@ -69,10 +91,12 @@ public class WindowsManager {
     @JDIAction("Switch to new window")
     public static void switchToNewWindow() {
         String last = "";
-        for (String window : getWindows())
+        for (String window : getWindows()) {
             last = window;
-        if (!isBlank(last))
+        }
+        if (!isBlank(last)) {
             getDriver().switchTo().window(last);
+        }
         else throw exception("No windows found");
     }
 
@@ -82,6 +106,17 @@ public class WindowsManager {
     @JDIAction("Open new tab")
     public static void openNewTab() {
         jsExecute("window.open()");
+        switchToNewWindow();
+    }
+
+    /**
+     * Open new tab
+     */
+    @JDIAction("Open new tab '{0}'")
+    public static void openNewTab(String name) {
+        jsExecute("window.open()");
+        switchToNewWindow();
+        setWindowName(name);
     }
 
     /**

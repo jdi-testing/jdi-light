@@ -18,7 +18,7 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.asserts.generic.table.IDataGridAssert.CompareType.*;
 import static com.epam.jdi.tools.LinqUtils.isSorted;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static org.hamcrest.Matchers.*;
 
 /**

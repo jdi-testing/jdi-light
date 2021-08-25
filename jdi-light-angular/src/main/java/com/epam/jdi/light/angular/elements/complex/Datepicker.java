@@ -429,8 +429,8 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
 
     protected UIElement toggleButton() {
         return new UIElement(By.xpath(String.format(toggleButton,
-                                                    this.core().locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""))));
+            this.core().locator.printLocator().replace(smartSharp, "")
+                .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement openButton() {

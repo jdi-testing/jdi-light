@@ -29,8 +29,7 @@ import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
 import static com.epam.jdi.light.driver.ScreenshotMaker.getPath;
 import static com.epam.jdi.light.driver.WebDriverFactory.*;
-import static com.epam.jdi.light.elements.common.WindowsManager.checkNewWindowIsOpened;
-import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
+import static com.epam.jdi.light.elements.common.WindowsManager.*;
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getUrlFromUri;
@@ -44,9 +43,9 @@ import static com.epam.jdi.tools.JsonUtils.getDouble;
 import static com.epam.jdi.tools.LinqUtils.map;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PrintUtils.print;
+import static com.epam.jdi.tools.StringUtils.format;
 import static com.epam.jdi.tools.StringUtils.msgFormat;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
-import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -56,13 +55,20 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebPage extends DriverBase implements PageObject {
-
     public String url = "";
     public String title = "";
 
     public String checkUrl;
     public CheckTypes checkUrlType = CONTAINS;
     public CheckTypes checkTitleType = NONE;
+
+    public WebPage() {
+        initElements(this);
+    }
+    public WebPage(String url) {
+        setUrl(url, url, CONTAINS);
+    }
+    public WebPage(String url, String title) { this(url); this.title = title; }
 
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this)
@@ -84,22 +90,17 @@ public class WebPage extends DriverBase implements PageObject {
         }
     }
 
-    public WebPage() {
-        initElements(this);
-    }
-    public WebPage(String url) {
-        setUrl(url, url, CONTAINS);
-    }
-    public WebPage(String url, String title) { this(url); this.title = title; }
     public static void openUrl(String url, String pageName) {
         WebPage page = new WebPage(url);
         page.setName(isNotBlank(pageName) ? pageName : "");
         page.open();
     }
+
     public static void openUrl(String url) {
         init();
-        if (!hasDomain() && url.contains("://"))
+        if (!hasDomain() && url.contains("://")) {
             DRIVER.domain = url;
+        }
         new WebPage(url).open();
     }
     public static void checkUrl(String url) {
@@ -144,6 +145,9 @@ public class WebPage extends DriverBase implements PageObject {
         }
         WebPage page = new WebPage(domain);
         page.setName(site.getSimpleName());
+        if (PAGE.useMultiTabsSite) {
+            openSiteTab(site);
+        }
         page.open();
     }
     /**
@@ -215,14 +219,17 @@ public class WebPage extends DriverBase implements PageObject {
         isTop.set(true);
         setCurrentPage(this);
     }
+    
     public void open(Object... params) {
         open(getUrlWithParams(params));
     }
+    
     private String getUrlWithParams(Object... params) {
-        if (params == null || params.length == 0)
+        if (params == null || params.length == 0) {
             return url;
+        }
         if (url.contains("%s")) {
-            return String.format(url, params);
+            return format(url, params);
         }
         return url.contains("{0}")
             ? MessageFormat.format(url, params)

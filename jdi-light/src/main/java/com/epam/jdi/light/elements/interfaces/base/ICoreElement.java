@@ -11,7 +11,7 @@ import org.openqa.selenium.*;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.base.JDIBase.executeShouldBe;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -27,7 +27,7 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.tools.ReflectionUtils.getFields;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 
 public class ElementSettings {
     public JAction1<UIElement> beforeSearch;

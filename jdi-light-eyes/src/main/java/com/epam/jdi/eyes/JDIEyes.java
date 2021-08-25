@@ -30,7 +30,7 @@ import static com.epam.jdi.light.common.VisualCheckAction.ON_VISUAL_ACTION;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 
 public class JDIEyes {
     public static EyesConfig EYES_CONFIG = new EyesConfig();

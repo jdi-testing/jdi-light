@@ -26,7 +26,7 @@ import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.LinqUtils.safeException;
 import static java.lang.Integer.parseInt;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 import static org.apache.commons.lang3.StringUtils.isBlank;

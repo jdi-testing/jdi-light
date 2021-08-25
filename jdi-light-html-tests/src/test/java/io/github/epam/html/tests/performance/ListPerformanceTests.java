@@ -20,7 +20,7 @@ import static io.github.com.StaticSite.performancePage;
 import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.html.tests.performance.PerfStatistic.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;

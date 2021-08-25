@@ -60,7 +60,7 @@ import static com.epam.jdi.tools.PropertyReader.hasProperty;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.openqa.selenium.PageLoadStrategy.EAGER;

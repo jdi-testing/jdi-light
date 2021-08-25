@@ -44,6 +44,7 @@ import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.hamcrest.Matchers.in;
 import static org.hamcrest.Matchers.is;
 
 /**
@@ -100,28 +101,34 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public DriverBase setParent(Object parent) {
         return super.setParent(parent);
     }
+
     protected MapArray<String, JFunc1<WebElement, Boolean>> searchRules() {
         return searchRules;
     }
+
     WebElement beforeSearch(WebElement el) {
         (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new UIElement(el));
         return el;
     }
+
     public void setup(SiteInfo info) {
         defaultSetup(info, this);
+        siteName = DRIVER.siteName;
         if (parent != null && isClass(parent.getClass(), IBaseElement.class)) {
             JDIBase parentBase = ((IBaseElement)parent).base();
             searchRules = parentBase.searchRules.copy();
         }
-        if (info.field != null) {
-            for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
-                try {
-                    Class<? extends Annotation> annotation = aRule.value.annotation;
-                    if (hasAnnotation(info.field, annotation))
-                        aRule.value.action.execute(this, info.field.getAnnotation(annotation), info.field);
-                } catch (Exception ex) {
-                    throw exception(ex, "Setup element '%s' with Annotation '%s' failed", info.name(), aRule.key);
+        if (info.field == null) {
+            return;
+        }
+        for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
+            try {
+                Class<? extends Annotation> annotation = aRule.value.annotation;
+                if (hasAnnotation(info.field, annotation)) {
+                    aRule.value.action.execute(this, info.field.getAnnotation(annotation), info.field);
                 }
+            } catch (Exception ex) {
+                throw exception(ex, "Setup element '%s' with Annotation '%s' failed", info.name(), aRule.key);
             }
         }
     }

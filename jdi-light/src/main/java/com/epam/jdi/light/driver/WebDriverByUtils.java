@@ -24,7 +24,7 @@ import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.PrintUtils.print;
 import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.util.Collections.singletonList;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
@@ -185,10 +185,12 @@ public final class WebDriverByUtils {
             return valueOrDefault(replaceChildren(result), one(by));
         } catch (Exception ex) { throw new RuntimeException("Search By failed"); }
     }
+    
     public static JFunc1<String, By> NAME_TO_LOCATOR = WebDriverByUtils::defineLocator;
+
     public static By defineLocator(String locator) {
         String by = locator.contains("*root*")
-            ? locator.replace("\\*root\\*", "")
+            ? locator.replace("*root*", "")
             : locator;
         if (isBlank(by)) {
             return By.cssSelector("");

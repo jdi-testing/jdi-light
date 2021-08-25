@@ -60,7 +60,7 @@ import static com.epam.jdi.tools.map.MapArray.map;
 import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static io.qameta.allure.aspects.StepsAspects.getLifecycle;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.currentThread;
 import static java.util.Arrays.asList;

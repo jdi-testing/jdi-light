@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.init.rules.InitRule;
 import com.epam.jdi.light.elements.init.rules.SetupRule;
 import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
+import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.func.JFunc;
@@ -36,7 +37,7 @@ import static com.epam.jdi.tools.LinqUtils.*;
 import static com.epam.jdi.tools.ReflectionUtils.*;
 import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.epam.jdi.tools.StringUtils.splitCamelCase;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.asList;
 
@@ -53,10 +54,19 @@ public class PageFactory {
     public static void initSite(Class<?> site, String driverName) {
         init();
         SiteInfo info = new SiteInfo(driverName)
-            .set(s->s.parentClass = site);
-        DRIVER.siteName = site.getSimpleName();
+            .set(s -> s.siteName = site.getSimpleName());
+        DRIVER.siteName = getSiteName(site);
         initialize(site, info);
     }
+    protected static String getSiteName(Class<?> site) {
+        if (site == null) {
+            return "";
+        }
+        return site.isAnnotationPresent(Name.class)
+            ? site.getAnnotation(Name.class).value()
+            : site.getSimpleName();
+    }
+
     private static void initialize(Class<?> site, SiteInfo info) {
         setDomain(site);
         for (Field pageField : getSiteFields(site)) {
@@ -78,19 +88,22 @@ public class PageFactory {
     }
     private static Object getElementInstance(SiteInfo info) {
         info.instance = getValueField(info.field, info.parent);
-        if (info.instance == null)
+        if (info.instance == null) {
             initJdiField(info);
-        if (info.instance != null)
+        }
+        if (info.instance != null) {
             setupFieldUsingRules(info);
+        }
         return info.instance;
     }
 
     public static void initJdiField(SiteInfo info) {
         logger.trace("initJdiField");
-        if (info.type().isInterface())
+        if (info.type().isInterface()) {
             initUsingRules(info);
-        else
+        } else {
             initWithConstructor(info);
+        }
     }
     public static void setupFieldUsingRules(SiteInfo info) {
         logger.trace("setupFieldUsingRules");
@@ -211,14 +224,16 @@ public class PageFactory {
         List<Field> fields = filter(poFields, f -> isJDIField(f) || isPageObject(f.getType()));
         SiteInfo pageInfo = new SiteInfo(info);
         pageInfo.parent = info.instance;
-        for (Field field : fields)
+        for (Field field : fields) {
             setField(field, pageInfo, info);
+        }
     }
 
     private static void initPage(Object page) {
         SiteInfo info = new SiteInfo(DRIVER.name, page);
-        if (isClass(page.getClass(), WebPage.class))
+        if (isClass(page.getClass(), WebPage.class)) {
             initWebPage((WebPage) page);
+        }
         initElements(info);
     }
 

@@ -8,7 +8,7 @@ import static com.epam.jdi.light.settings.JDISettings.COMMON;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.epam.jdi.tools.PathUtils.path;
 import static com.epam.jdi.tools.Timer.nowTime;
-import static java.lang.String.format;
+import static com.epam.jdi.tools.StringUtils.format;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ScreenSettings {

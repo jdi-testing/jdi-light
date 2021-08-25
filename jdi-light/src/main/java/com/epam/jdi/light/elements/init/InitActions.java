@@ -105,10 +105,12 @@ public class InitActions {
     }
 
     public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
-        if (jdi.parent == null)
+        if (jdi.parent == null) {
             jdi.setParent(info.parent);
-        if (!jdi.name.matches("[A-Z].*"))
+        }
+        if (!jdi.name.matches("[A-Z].*")) {
             jdi.setName(info);
+        }
         jdi.driverName = isBlank(info.driverName) ? DRIVER.name : info.driverName;
         return jdi;
     }
