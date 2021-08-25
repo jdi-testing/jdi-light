@@ -14,7 +14,6 @@ import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static io.github.com.pages.Header.userIcon;
 
 public class MultiSiteExample {
-
     @Test(enabled = false)
     public void loginTest() {
         initSite(GoogleDuckSite.class);
@@ -38,4 +37,5 @@ public class MultiSiteExample {
         GoogleDuckSite.searchButton.input("Something");
         GoogleDuckSite.results.shouldBe(displayed);
     }
+
 }
