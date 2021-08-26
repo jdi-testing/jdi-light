@@ -1,6 +1,6 @@
 package com.jdiai.jsbuilder.jsfunctions;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class BuilderFunctions extends DataClass<BuilderFunctions> {
     public String oneToOne, oneToOneFilter, oneToList, oneToListFilter, listToOne,

@@ -1,6 +1,6 @@
 package com.jdiai.asserts;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class ConditionTypes extends DataClass<ConditionTypes> {
     public String isExist = ElementFilters.isExist;

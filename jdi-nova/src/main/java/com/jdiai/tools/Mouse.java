@@ -5,16 +5,17 @@ import com.jdiai.interfaces.HasCore;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 
-import static com.epam.jdi.tools.Timer.sleep;
 import static com.jdiai.JDI.zoomLevel;
 import static com.jdiai.tools.Keyboard.getRobot;
+import static com.jdiai.tools.Timer.sleep;
 import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
 import static java.awt.event.InputEvent.BUTTON2_DOWN_MASK;
 
 /**
- * Created by Roman Iovlev on 06.05.2021
+ * Created by Roman Iovlev on 25.08.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
+
 public class Mouse {
     public static int startX = 100;
 

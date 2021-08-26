@@ -10,10 +10,10 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.LinqUtils.newList;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.jdiai.jswraper.JSEntity.GET_ENTITY_MAP;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.LinqUtils.newList;
+import static com.jdiai.tools.ReflectionUtils.isClass;
 
 public class JSBaseEngine extends JSElement implements JSEngine {
     protected Class<?> entity;
@@ -43,23 +43,23 @@ public class JSBaseEngine extends JSElement implements JSEngine {
     }
 
     public void copyDriver(JSDriver driver) {
-        this.driver = driver.copy();
+        this.jsDriver = driver.copy();
     }
 
     public JSEngine copy() {
-        JSEngine engine = new JSBaseEngine(() -> this.driver.driver());
-        engine.copyFrom(this);
+        JSEngine engine = new JSBaseEngine(() -> this.jsDriver.driver());
+        engine.updateFrom(this);
         return engine;
     }
 
-    public void copyFrom(JSEngine engine) {
+    public void updateFrom(JSEngine engine) {
         if (!isClass(engine.getClass(), JSBaseEngine.class)) {
             return ;
         }
         JSBaseEngine jsEngine = (JSBaseEngine) engine;
         this.setupEntity(jsEngine.entity);
         this.setMap(jsEngine.objectMap);
-        this.copyDriver(jsEngine.driver);
+        this.jsDriver.copyFrom(jsEngine.jsDriver);
     }
 
     public JSBaseEngine setupEntity(Class<?> entity) {
@@ -69,7 +69,7 @@ public class JSBaseEngine extends JSElement implements JSEngine {
 
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public <T> T getEntity(String objectMap) {
-        return (T) driver.getOne(validateXpath(objectMap)).asObject(entity);
+        return (T) jsDriver.getOne(validateXpath(objectMap)).asObject(entity);
     }
 
     public <T> T getEntity() {
@@ -77,7 +77,7 @@ public class JSBaseEngine extends JSElement implements JSEngine {
     }
 
     public <T> T getEntity(List<String> attributes) {
-        return (T) driver.getOne(attributesToJson(attributes)).asObject(entity);
+        return (T) jsDriver.getOne(attributesToJson(attributes)).asObject(entity);
     }
 
     public <T> T getEntityFromAttr(String... attributes) {
@@ -85,7 +85,7 @@ public class JSBaseEngine extends JSElement implements JSEngine {
     }
 
     public <T> List<T> getEntityList(String objectMap) {
-        return map(driver.getList(validateXpath(objectMap)).asObject(entity), el -> (T) el);
+        return map(jsDriver.getList(validateXpath(objectMap)).asObject(entity), el -> (T) el);
     }
 
     public <T> List<T> getEntityList() {
@@ -93,7 +93,7 @@ public class JSBaseEngine extends JSElement implements JSEngine {
     }
 
     public <T> List<T> getEntityList(List<String> attributes) {
-        return map(driver.getList(attributesToJson(attributes)).asObject(entity), el -> (T) el);
+        return map(jsDriver.getList(attributesToJson(attributes)).asObject(entity), el -> (T) el);
     }
 
     public <T> List<T> getEntityListFromAttr(String... attributes) {
@@ -101,7 +101,7 @@ public class JSBaseEngine extends JSElement implements JSEngine {
     }
 
     public Json getAsMap() {
-        return driver.getOne(objectMap).asMap();
+        return jsDriver.getOne(objectMap).asMap();
     }
 
     @Override
@@ -116,7 +116,7 @@ public class JSBaseEngine extends JSElement implements JSEngine {
     }
 
     public void setMultipleValues() {
-        driver.doAction(objectMap);
+        jsDriver.doAction(objectMap);
     }
 
     public void setMap(String objectMap) {

@@ -1,9 +1,9 @@
 package com.jdiai.jsdriver;
 
-import com.epam.jdi.tools.StringUtils;
-import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.locators.ByFrame;
+import com.jdiai.tools.StringUtils;
+import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.By;
 
 import java.util.HashMap;
@@ -12,18 +12,18 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.LinqUtils.select;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.jdiai.jsbuilder.jsfunctions.JSFunctions.XPATH_FUNC;
 import static com.jdiai.jsbuilder.jsfunctions.JSFunctions.XPATH_LIST_FUNC;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
+import static com.jdiai.tools.LinqUtils.first;
+import static com.jdiai.tools.LinqUtils.select;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.ReflectionUtils.isClass;
 
 /**
- * Created by Roman Iovlev on 26.09.2019
+ * Created by Roman Iovlev on 25.08.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
+
 public final class JSDriverUtils {
     private JSDriverUtils() { }
 

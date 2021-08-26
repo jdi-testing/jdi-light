@@ -1,14 +1,16 @@
 package com.jdiai.asserts;
 
 import com.jdiai.interfaces.HasCore;
+import com.jdiai.interfaces.HasLabel;
 import com.jdiai.jsdriver.JDINovaException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.JDI.logger;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.visual.Directions.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -34,44 +36,103 @@ public abstract class Conditions {
 
     public static Condition disappear = not(appear);
 
+
+    public static Condition blank = condition("%element% is %not% blank", el -> isBlank(el.getText().trim()));
+
+    public static Condition exactText(String text) {
+        return condition("%element% has %no% text='" + text + "'",
+                el -> el.getText().equals(text));
+    }
+
+    public static Condition text(String text) {
+        return condition("%element% has %no% text='" + text + "'",
+                el -> el.getText().trim().equals(text));
+    }
+
+    public static Condition containsText(String text) {
+        return condition("%element% contains %no% text='" + text + "'",
+                el -> el.getText().contains(text));
+    }
+
+    public static Condition matchesText(String text) {
+        return matchText(text);
+    }
+
+    public static Condition matchText(String regex) {
+        return condition("%element% text %not% matches '" + regex + "'",
+                el -> el.getText().trim().matches(regex));
+    }
+
+    public static Condition haveLabel(String label) {
+        return condition("%element% have %no% label '" + label + "'",
+            el ->  {
+                if (isClass(el.getClass(), HasLabel.class)) {
+                    return ((HasLabel) el).hasLabel(label);
+                }
+                throw new JDINovaException("Condition hasLabel applicable only for elements that implements HasLabel interface");
+            });
+    }
+
+    public static Condition haveLabels(String... labels) {
+        if (isEmpty(labels)) {
+            throw new JDINovaException("Should have validation require at least one element");
+        }
+        return condition("%element% have %no% labels [" + print(labels) + "]",
+            el ->  {
+                if (isClass(el.getClass(), HasLabel.class)) {
+                    return compareTwoLists(true, false, asList(labels), ((HasLabel) el).getAllLabels());
+                }
+                throw new JDINovaException("Condition haveLabels applicable only for elements that implements HasLabel interface");
+            });
+    }
+
     public static Condition readonly = attribute("readonly");
 
     public static Condition above(HasCore element) {
         return condition("%element% is %not% on the Top of '" + element.core().getFullName() + "'",
-            el -> HIGHER.apply(element.getDirectionTo(el.core())));
+            el -> el.core().isAbove(element));
     }
+
     public static Condition below(HasCore element) {
         return condition("%element% is %not% Below '" + element.core().getFullName() + "'",
-            el -> LOWER.apply(element.getDirectionTo(el.core())));
+            el -> el.core().isBelow(element));
     }
+
     public static Condition onLeftOf(HasCore element) {
         return condition("%element% is %not% on the Left of '" + element.core().getFullName() + "'",
-            el -> LEFT.apply(element.getDirectionTo(el.core())));
+            el -> el.core().isOnLeftOf(element));
     }
+
     public static Condition onRightOf(HasCore element) {
         return condition("%element% is %not% on the Right of '" + element.core().getFullName() + "'",
-            el -> RIGHT.apply(element.getDirectionTo(el.core())));
+            el -> el.core().isOnRightOf(element));
     }
+
     public static Condition onTopLeftOf(HasCore element) {
         return condition("%element% is %not% on the Top-Left of '" + element.core().getFullName() + "'",
             el -> TOP_LEFT.apply(element.getDirectionTo(el.core())));
     }
+
     public static Condition onTopRightOf(HasCore element) {
         return condition("%element% is %not% on the Top-Right of '" + element.core().getFullName() + "'",
             el -> TOP_RIGHT.apply(element.getDirectionTo(el.core())));
     }
+
     public static Condition onBottomLeftOf(HasCore element) {
         return condition("%element% is %not% on the Bottom-Left of '" + element.core().getFullName() + "'",
             el -> BOTTOM_LEFT.apply(element.getDirectionTo(el.core())));
     }
+
     public static Condition onBottomRightOf(HasCore element) {
         return condition("%element% is %not% on the Bottom-Right of '" + element.core().getFullName() + "'",
             el -> BOTTOM_RIGHT.apply(element.getDirectionTo(el.core())));
     }
+
     public static Condition onSameLine(HasCore element) {
         return condition("%element% is %not% on the same line '" + element.core().getFullName() + "'",
             el -> SAME_HORIZONTAL.apply(element.getDirectionTo(el.core())));
     }
+
     public static Condition onSameVerticalLine(HasCore element) {
         return condition("%element% is %not% on the same vertical line '" + element.core().getFullName() + "'",
             el -> SAME_VERTICAL.apply(element.getDirectionTo(el.core())));
@@ -100,9 +161,11 @@ public abstract class Conditions {
     public static Condition href(String href) {
         return attribute("href", href);
     }
+
     public static Condition containsHref(String href) {
         return containsAttribute("href", href);
     }
+
     public static Condition matchHref(String href) {
         return matchAttribute("href", href);
     }
@@ -110,9 +173,11 @@ public abstract class Conditions {
     public static Condition value(String value) {
         return attribute("value", value);
     }
+
     public static Condition containsValue(String value) {
         return containsAttribute("value", value);
     }
+
     public static Condition matchValue(String value) {
         return matchAttribute("value", value);
     }
@@ -146,17 +211,6 @@ public abstract class Conditions {
         return attribute("id", id);
     }
 
-    public static Condition blank = condition("%element% is %not% blank", el -> isBlank(el.getText().trim()));
-
-    public static Condition matchesText(String text) {
-        return matchText(text);
-    }
-
-    public static Condition matchText(String regex) {
-        return condition("%element% text %not% matches '" + regex + "'",
-            el -> el.getText().trim().matches(regex));
-    }
-
     public static Condition be(Object entity) {
         return condition("%element% is %no% '" + entity.toString() + "'",
             el -> el.core().getEntity(entity.getClass()).equals(entity));
@@ -170,12 +224,15 @@ public abstract class Conditions {
     public static <T> Condition have(List<T> entities) {
         return haveCondition(false, false, entities);
     }
+
     public static <T> Condition have(T... entities) {
         return haveCondition(false, false, asList(entities));
     }
+
     public static <T> Condition haveAll(List<T> entities) {
         return haveCondition(true, false, entities);
     }
+
     public static <T> Condition haveAll(T... entities) {
         return haveCondition(true, false, asList(entities));
     }
@@ -196,22 +253,12 @@ public abstract class Conditions {
         return condition("%element% has expected amount of elements",
             el -> sizeFunc.apply(el.core().size()));
     }
-    public static Condition exactText(String text) {
-        return condition("%element% has %no% text='" + text + "'",
-                el -> el.getText().equals(text));
-    }
-    public static Condition text(String text) {
-        return condition("%element% has %no% text='" + text + "'",
-            el -> el.getText().trim().equals(text));
-    }
-    public static Condition containsText(String text) {
-        return condition("%element% contains %no% text='" + text + "'",
-            el -> el.getText().contains(text));
-    }
+
     public static Condition cssClass(String cssClass) {
         return condition("%element% has %no% css class '" + cssClass + "'",
             el -> isNotBlank(el.core().cssStyle(cssClass)));
     }
+
     public static Condition cssValue(String name, String value) {
         return condition("%element% has %no% style '" + name + "=" + value + "'",
             el -> el.core().cssStyle(name).equals(value));
@@ -230,9 +277,11 @@ public abstract class Conditions {
     public static Condition no(Condition condition) {
         return not(condition);
     }
+
     public static Condition not(Condition condition) {
         return condition(getNotName(condition), el -> !condition.apply(el));
     }
+
     private static String getNotName(Condition condition) {
         String name = condition.getName();
         if (name.contains("%not%")) {
@@ -272,29 +321,33 @@ public abstract class Conditions {
             el -> compareTwoLists(el.core(), checkSize, sameOrder, entities));
     }
 
-    private static <T> boolean compareTwoLists(HasCore el, boolean checkSize, boolean sameOrder, List<T> entities) {
-        Class<T> cl = (Class<T>) entities.get(0).getClass();
-        List<T> list = cl.isAssignableFrom(String.class)
-            ? (List<T>) el.core().values()
-            : el.core().getEntityList((Class<T>) entities.get(0).getClass());
-        if (checkSize && list.size() != entities.size()) {
-            logger().error("Expected size: %s, but found: %s", entities.size(), list.size());
+    private static <T> boolean compareTwoLists(boolean checkSize, boolean sameOrder, List<T> actual, List<T> expected) {
+        if (checkSize && actual.size() != expected.size()) {
+            logger().error("Expected size: %s, but found: %s", expected.size(), actual.size());
             return false;
         }
         List<T> listOfFails = new ArrayList<>();
         int i = 0;
-        for (T entity : entities) {
-            if (sameOrder && !entity.equals(list.get(i++)) || !sameOrder && !list.contains(entity)) {
+        for (T entity : expected) {
+            if (sameOrder && !entity.equals(actual.get(i++)) || !sameOrder && !actual.contains(entity)) {
                 listOfFails.add(entity);
             }
         }
         if (isNotEmpty(listOfFails)) {
             logger().error("Failed to find following entities: \n%s\nActual values:\n%s",
-                print(listOfFails, Object::toString, "\n"),
-                print(list, Object::toString, "\n")
+                    print(listOfFails, Object::toString, "\n"),
+                    print(actual, Object::toString, "\n")
             );
             return false;
         }
         return true;
+    }
+
+    private static <T> boolean compareTwoLists(HasCore el, boolean checkSize, boolean sameOrder, List<T> expected) {
+        Class<T> cl = (Class<T>) expected.get(0).getClass();
+        List<T> actual = cl.isAssignableFrom(String.class)
+            ? (List<T>) el.core().values()
+            : el.core().getEntityList((Class<T>) expected.get(0).getClass());
+        return compareTwoLists(checkSize, sameOrder, actual, expected);
     }
 }

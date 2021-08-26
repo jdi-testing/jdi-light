@@ -1,16 +1,15 @@
 package com.jdiai;
 
-import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasLocators;
 import com.jdiai.interfaces.HasParent;
-import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.jsdriver.RuleType;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.tools.ClientRect;
 import com.jdiai.tools.GetTextTypes;
 import com.jdiai.tools.JSImages;
+import com.jdiai.tools.map.MapArray;
 import com.jdiai.visual.Direction;
 import com.jdiai.visual.ImageTypes;
 import com.jdiai.visual.OfElement;
@@ -27,14 +26,11 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
-
 public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     String getElement(String valueFunc);
     List<String> getList(String valueFunc);
     String filterElements(String valueFunc);
     String getJSResult(String action);
-    JS set(String action);
     JS setOption(String option);
     JS selectByName(String name);
     String selectedValueOption();
@@ -61,7 +57,6 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     default boolean isNotExist() {
         return !isExist();
     }
-    JS doAction(String action);
     JS weElementActions(BiFunction<Actions, WebElement, Actions> action);
     JS weActions(BiFunction<Actions, WebElement, Actions> action);
     JS clickCenter();
@@ -111,8 +106,10 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     <T> T getEntity(String objectMap, Class<?> cl);
     void setEntity(String objectMap);
     JS find(String by);
+    JS find(String by, RuleType previous);
     JS findTemplate(String value);
     JS find(By by);
+    JS find(By by, RuleType previous);
     JS addJSCode(String script, String name);
     JS addJSCode(String script, RuleType type, String name);
     JS children();
@@ -168,22 +165,13 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     List<String> validateRelations();
     Point getCenter();
     String textType();
+
     JS setParent(Object parent);
 
-    default JS setFilter(String filter) {
-        jsDriver().setFilter(filter);
-        return this;
-    }
+    JS setFilter(String filter);
 
     String getFullName();
 
-    default JS setLocators(List<By> locators) {
-        if (isNotEmpty(locators)) {
-            jsDriver().setLocators(locators);
-        }
-        return this;
-    }
     void setVarName(Field field);
-    JS setBuilder(IJSBuilder builder);
     JS copy();
 }

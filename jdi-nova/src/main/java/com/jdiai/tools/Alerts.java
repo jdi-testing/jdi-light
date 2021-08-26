@@ -5,9 +5,10 @@ import com.jdiai.jsdriver.JDINovaException;
 import org.openqa.selenium.Alert;
 
 /**
- * Created by Roman Iovlev on 06.05.2021
+ * Created by Roman Iovlev on 25.08.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
+
 public class Alerts {
     /**
      * Accept alert

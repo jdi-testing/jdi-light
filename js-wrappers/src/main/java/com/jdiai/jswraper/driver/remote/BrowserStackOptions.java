@@ -2,7 +2,7 @@ package com.jdiai.jswraper.driver.remote;
 
 import org.openqa.selenium.MutableCapabilities;
 
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 
 public class BrowserStackOptions extends RemoteRunOptions {
     public boolean local = false;

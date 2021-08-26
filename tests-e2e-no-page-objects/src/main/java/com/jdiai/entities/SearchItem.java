@@ -1,8 +1,8 @@
 package com.jdiai.entities;
 
-import com.epam.jdi.tools.DataClass;
 import com.jdiai.annotations.UI;
 import com.jdiai.jswraper.interfaces.GetValue;
+import com.jdiai.tools.DataClass;
 import org.openqa.selenium.support.FindBy;
 
 public class SearchItem extends DataClass<SearchItem> {

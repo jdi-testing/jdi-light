@@ -1,9 +1,10 @@
 package com.jdiai.jswraper.driver;
 
 /**
- * Created by Roman Iovlev on 08.06.2021
+ * Created by Roman Iovlev on 25.08.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
+
 public enum DriverTypes {
     CHROME("chrome"),
     FIREFOX("firefox"),

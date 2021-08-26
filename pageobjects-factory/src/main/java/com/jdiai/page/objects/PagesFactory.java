@@ -1,9 +1,9 @@
 package com.jdiai.page.objects;
 
-import com.epam.jdi.tools.ILogger;
-import com.epam.jdi.tools.func.JFunc3;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.ILogger;
+import com.jdiai.tools.func.JFunc3;
+import com.jdiai.tools.map.MapArray;
+import com.jdiai.tools.pairs.Pair;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
 import static com.jdiai.page.objects.SetupRule.sRule;
+import static com.jdiai.tools.LinqUtils.*;
+import static com.jdiai.tools.ReflectionUtils.getFieldsDeep;
+import static com.jdiai.tools.ReflectionUtils.getValueField;
+import static com.jdiai.tools.StringUtils.splitCamelCase;
 import static java.lang.String.format;
 import static java.lang.reflect.Modifier.isStatic;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;

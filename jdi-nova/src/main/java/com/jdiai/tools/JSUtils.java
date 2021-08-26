@@ -8,18 +8,19 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.copyList;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
+import static com.jdiai.tools.LinqUtils.copyList;
+import static com.jdiai.tools.ReflectionUtils.isInterface;
+import static com.jdiai.tools.StringUtils.format;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.openqa.selenium.support.How.*;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 
 /**
- * Created by Roman Iovlev on 26.09.2019
+ * Created by Roman Iovlev on 25.08.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
+
 public final class JSUtils {
      public static By uiToBy(UI locator) {
          if (locator == null) {

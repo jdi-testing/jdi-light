@@ -1,9 +1,9 @@
 package com.jdiai.visual;
 
-import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.Gson;
 import com.jdiai.JS;
 import com.jdiai.jsdriver.JDINovaException;
+import com.jdiai.tools.map.MapArray;
 
 import java.io.File;
 import java.io.FileReader;

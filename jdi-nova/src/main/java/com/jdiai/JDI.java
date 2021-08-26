@@ -1,8 +1,5 @@
 package com.jdiai;
 
-import com.epam.jdi.tools.ILogger;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.StringUtils;
 import com.jdiai.annotations.UI;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
@@ -15,6 +12,9 @@ import com.jdiai.jswraper.JSBaseEngine;
 import com.jdiai.jswraper.JSEngine;
 import com.jdiai.jswraper.driver.DriverManager;
 import com.jdiai.jswraper.driver.DriverTypes;
+import com.jdiai.tools.ILogger;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -30,11 +30,6 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static com.epam.jdi.tools.JsonUtils.getDouble;
-import static com.epam.jdi.tools.LinqUtils.newList;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
-import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
@@ -46,6 +41,11 @@ import static com.jdiai.jswraper.driver.DriverManager.useDriver;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
+import static com.jdiai.tools.JsonUtils.getDouble;
+import static com.jdiai.tools.LinqUtils.newList;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.ReflectionUtils.getFieldsDeep;
+import static com.jdiai.tools.StringUtils.format;
 import static com.jdiai.tools.WindowsManager.getWindows;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 

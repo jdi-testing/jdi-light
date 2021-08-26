@@ -3,7 +3,7 @@ package com.jdiai.page.objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.jdiai.tools.ReflectionUtils.isInterface;
 
 public class SetupRule {
     public static SetupRule sRule(Function<InitInfo, Boolean> condition, Consumer<InitInfo> action) {

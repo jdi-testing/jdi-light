@@ -1,9 +1,9 @@
 package com.jdiai.jsbuilder;
 
-import com.epam.jdi.tools.ILogger;
+import com.jdiai.tools.ILogger;
 import org.apache.logging.log4j.Logger;
 
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 import static org.apache.logging.log4j.Level.*;
 import static org.apache.logging.log4j.LogManager.getLogger;
 

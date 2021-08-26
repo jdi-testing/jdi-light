@@ -2,7 +2,7 @@ package com.jdiai.page.objects;
 
 import java.util.function.Function;
 
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.jdiai.tools.ReflectionUtils.isInterface;
 
 public class CreateRule {
     public static CreateRule cRule(Function<Class<?>, Boolean> condition, Function<Class<?>, Object> createAction) {

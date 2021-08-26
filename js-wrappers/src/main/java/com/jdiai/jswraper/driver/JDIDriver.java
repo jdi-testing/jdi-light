@@ -1,13 +1,13 @@
 package com.jdiai.jswraper.driver;
 
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.WebDriver;
 
 import java.util.function.Consumer;
 
-import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.jdiai.jswraper.driver.DriverTypes.*;
 import static com.jdiai.jswraper.driver.RunModes.LOCAL_DOWNLOAD;
+import static com.jdiai.tools.pairs.Pair.$;
 
 public class JDIDriver {
     public static RunModes RUN_MODE = LOCAL_DOWNLOAD;

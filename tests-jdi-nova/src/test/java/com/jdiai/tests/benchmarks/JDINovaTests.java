@@ -1,9 +1,9 @@
 package com.jdiai.tests.benchmarks;
 
-import com.epam.jdi.tools.DataClass;
 import com.jdiai.annotations.UI;
 import com.jdiai.jswraper.interfaces.GetValue;
 import com.jdiai.testng.TestNGListener;
+import com.jdiai.tools.DataClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

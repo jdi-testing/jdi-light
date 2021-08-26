@@ -8,7 +8,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jswraper.driver.DriverVersion.PENULT;
 import static com.jdiai.jswraper.driver.GetDriverUtilities.getOs;
@@ -18,6 +17,7 @@ import static com.jdiai.jswraper.driver.JDIDriver.RUN_MODE;
 import static com.jdiai.jswraper.driver.OsTypes.WIN;
 import static com.jdiai.jswraper.driver.Platform.X32;
 import static com.jdiai.jswraper.driver.Platform.X64;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
 import static java.lang.Integer.parseInt;
 import static java.lang.System.getProperty;

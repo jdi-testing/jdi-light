@@ -1,13 +1,17 @@
 package com.jdiai;
 
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.Timer;
 import com.jdiai.annotations.ListLabel;
 import com.jdiai.asserts.Conditions;
 import com.jdiai.interfaces.HasCore;
+import com.jdiai.interfaces.HasLabel;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
 import com.jdiai.jsdriver.JDINovaException;
+import com.jdiai.jsdriver.RuleType;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.Timer;
+import com.jdiai.tools.map.MapArray;
 import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.By;
 
@@ -19,10 +23,6 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.JDI.findFilters;
 import static com.jdiai.asserts.Conditions.displayed;
 import static com.jdiai.asserts.Conditions.have;
@@ -32,11 +32,23 @@ import static com.jdiai.jsdriver.JSDriverUtils.iFrame;
 import static com.jdiai.jsdriver.JSDriverUtils.selector;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
+import static com.jdiai.tools.EnumUtils.getEnumValue;
+import static com.jdiai.tools.LinqUtils.*;
+import static com.jdiai.tools.ReflectionUtils.*;
+import static com.jdiai.tools.StringUtils.format;
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
-public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
+public class DataList<T> implements List<T>, ISetup, HasCore, HasName, HasLabel {
     private JS core;
     protected Class<T> dataClass;
     protected String labelName;
+    protected Safe<MapArray<String, T>> cachedValues = new Safe<>(new MapArray<>());
+    protected boolean useCache = false;
+
+    public DataList<T> useCache() {
+        useCache = true;
+        return this;
+    }
 
     public JS getElement(String value) {
         Field labelField = getLabelField();
@@ -48,17 +60,19 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
         return core().findFirst(labelLocator, condition);
     }
 
-    private HasCore getLabelElement() {
+    protected HasCore getLabelElement() {
         Field labelField = getLabelField();
         By labelLocator = getLocatorFromField(labelField);
         if (labelLocator == null) {
             throw new JDINovaException("Failed to get labelElement");
         }
-        return core().find(labelLocator).setName(getName() + " " + labelField.getName());
+        return core().find(labelLocator, RuleType.List).setName(getName() + " " + labelField.getName());
     }
-    private void haveLabelElement(String value) {
+
+    public boolean hasLabel(String value) {
         Function<JS, String> condition = getCondition(getLabelField(), value, "#element#");
         getLabelElement().core().findFirst(condition).shouldHave(have(value));
+        return true;
     }
 
     public JS getElement(Enum<?> name) {
@@ -70,6 +84,9 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     }
 
     public T get(String value) {
+        if (useCache && cachedValues.get().keys().contains(value)) {
+            return cachedValues.get().get(value);
+        }
         JS item = findOne(value);
         try {
             return item.getEntity(dataClass);
@@ -102,13 +119,13 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
             return item.getEntity(dataClass);
         } catch (Throwable ex) {
             shouldHave(Conditions.size(s -> s > index));
-            item.show();
+            item.showIfNotInView();
             return item.getEntity(dataClass);
         }
     }
 
     public void select(String value) {
-        haveLabelElement(value);
+        hasLabel(value);
         getLabelElement().core().get(value).click();
     }
 
@@ -136,6 +153,7 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     private Function<JS, String> getCondition(Field labelField, String value, String elementName) {
         return el -> getValueType(labelField, elementName) + " === '" + value + "'";
     }
+
     private Field getLabelField() {
         if (labelName != null) {
             try {
@@ -308,7 +326,22 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName {
     }
 
     public List<T> getAll() {
-        return getList(0);
+        List<T> result = getList(0);
+        if (useCache) {
+            cachedValues.set(new MapArray<>(getAllLabels(result), result));
+        }
+        return result;
+    }
+
+    public List<String> getAllLabels() {
+        if (useCache && isNotEmpty(cachedValues.get().keys())) {
+            return cachedValues.get().keys();
+        }
+        return getAllLabels(getAll());
+    }
+
+    protected List<String> getAllLabels(List<T> data) {
+        return LinqUtils.map(data, this::getLabelFieldValue);
     }
 
     public List<T> getList(int minAmount) {

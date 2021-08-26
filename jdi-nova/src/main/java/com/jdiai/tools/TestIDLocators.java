@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 import java.util.function.Function;
 
-import static com.epam.jdi.tools.StringUtils.toKebabCase;
+import static com.jdiai.tools.StringUtils.toKebabCase;
 import static org.openqa.selenium.By.*;
 
 public class TestIDLocators {

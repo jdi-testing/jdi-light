@@ -9,13 +9,13 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.function.Function;
 
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.LinqUtils.newList;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
-import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.jswraper.JSWrappersUtils.getValueType;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.LinqUtils.newList;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.ReflectionUtils.getFieldsDeep;
+import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
+import static com.jdiai.tools.StringUtils.format;
 
 public class JSEntity<T> extends JSElement {
     protected Class<T> cl;
@@ -46,7 +46,7 @@ public class JSEntity<T> extends JSElement {
 
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public T getEntity(String objectMap) {
-        return driver.getOne(validateXpath(objectMap)).asObject(cl);
+        return jsDriver.getOne(validateXpath(objectMap)).asObject(cl);
     }
 
     public T getEntity() {
@@ -54,7 +54,7 @@ public class JSEntity<T> extends JSElement {
     }
 
     public T getEntity(List<String> attributes) {
-        return driver.getOne(attributesToJson(attributes)).asObject(cl);
+        return jsDriver.getOne(attributesToJson(attributes)).asObject(cl);
     }
 
     public T getEntityFromAttr(String... attributes) {
@@ -62,7 +62,7 @@ public class JSEntity<T> extends JSElement {
     }
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public List<T> getEntityList(String objectMap) {
-        return driver.getList(validateXpath(objectMap)).asObject(cl);
+        return jsDriver.getList(validateXpath(objectMap)).asObject(cl);
     }
 
     public List<T> getEntityList() {
@@ -76,7 +76,7 @@ public class JSEntity<T> extends JSElement {
     };
 
     public List<T> getEntityList(List<String> attributes) {
-        return driver.getList(attributesToJson(attributes)).asObject(cl);
+        return jsDriver.getList(attributesToJson(attributes)).asObject(cl);
     }
 
     public List<T> getEntityListFromAttr(String... attributes) {

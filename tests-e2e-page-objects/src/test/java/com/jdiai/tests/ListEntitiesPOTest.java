@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.asserts.Conditions.size;
 import static com.jdiai.entities.User.Roman;
 import static com.jdiai.site.JDISite.homePage;
@@ -19,6 +18,8 @@ import static com.jdiai.states.States.atHomePage;
 import static com.jdiai.states.States.logout;
 import static com.jdiai.test.data.TestData.AllSearchResults;
 import static com.jdiai.test.data.TestData.SearchResults;
+import static com.jdiai.tools.Alerts.validateAlertText;
+import static com.jdiai.tools.PrintUtils.print;
 import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)
@@ -75,4 +76,33 @@ public class ListEntitiesPOTest implements TestInit {
         assertEquals(print(results, SearchItem::toString), AllSearchResults);
     }
 
+    @Test
+    public void selectValue() {
+        DataList<SearchItem> results = searchPage.searchData;
+        results.select("JDI OWNER CONTACT");
+        validateAlertText("JDI Owner contact!");
+        validateAlertText("JDI Owner contact-");
+    }
+
+    @Test
+    public void waitSelectValue() {
+        DataList<SearchItem> results = searchPage.searchData;
+        results.select("JDI FACEBOOK GROUP");
+        validateAlertText("JDI Facebook Group!");
+        validateAlertText("JDI Facebook Group-");
+    }
+
+    @Test
+    public void selectIndex() {
+        DataList<SearchItem> results = searchPage.searchData;
+        results.select(1);
+        validateAlertText("JDI Owner contact-");
+    }
+
+    @Test
+    public void waitSelectIndex() {
+        DataList<SearchItem> results = searchPage.searchData;
+        results.select(6);
+        validateAlertText("JDI Facebook Group-");
+    }
 }

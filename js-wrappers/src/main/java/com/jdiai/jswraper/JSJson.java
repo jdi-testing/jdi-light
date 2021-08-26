@@ -16,10 +16,10 @@ public class JSJson extends JSElement {
 
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public JsonObject getJson(String json) {
-        return driver.getOne(json).asJson();
+        return jsDriver.getOne(json).asJson();
     }
     // Use json map like "{ 'tag': element.tagName, 'text': element.textContent... } with names equal to field names in class
     public List<JsonObject> getJsonList(String json) {
-        return driver.getList(json).asJson();
+        return jsDriver.getList(json).asJson();
     }
 }

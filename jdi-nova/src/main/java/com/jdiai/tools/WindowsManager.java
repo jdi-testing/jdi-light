@@ -1,20 +1,23 @@
 package com.jdiai.tools;
 
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.annotations.Name;
 import com.jdiai.jsdriver.JDINovaException;
+import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.Dimension;
 
+import java.util.List;
 import java.util.Set;
 
 import static com.jdiai.JDI.driver;
 import static com.jdiai.JDI.jsExecute;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
- * Created by Roman Iovlev on 06.05.2021
+ * Created by Roman Iovlev on 25.08.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
+
 public class WindowsManager {
     private static Safe<Set<String>> windowHandles = new Safe<>();
 
@@ -30,6 +33,21 @@ public class WindowsManager {
         }
         windowHandles.set(wHandles);
         return wHandles;
+    }
+
+    public static void openSiteTab(Class<?> site) {
+        String name = site.isAnnotationPresent(Name.class)
+            ? site.getAnnotation(Name.class).value()
+            : site.getSimpleName();
+        if (isEmpty(windowHandlesMap.get())) {
+            setWindowName(name);
+            return;
+        }
+        if (windowHandlesMap.get().has(name)) {
+            switchToWindow(name);
+        } else {
+            openNewTab(name);
+        }
     }
 
     /**
@@ -52,8 +70,13 @@ public class WindowsManager {
         }
         switchToNewWindow();
     }
+
     public static void setWindowName(String value) {
         windowHandlesMap.get().update(value, driver().getWindowHandle());
+    }
+
+    public static List<String> registeredWindows() {
+        return windowHandlesMap.get().keys();
     }
 
     /**
@@ -86,6 +109,15 @@ public class WindowsManager {
         switchToNewWindow();
     }
 
+
+    /**
+     * Open new tab
+     */
+    public static void openNewTab(String name) {
+        jsExecute("window.open()");
+        switchToNewWindow();
+        setWindowName(name);
+    }
     /**
      * Go back to original window
      */

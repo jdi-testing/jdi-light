@@ -9,9 +9,10 @@ import java.util.Set;
 import static com.jdiai.JDI.driver;
 
 /**
- * Created by Roman Iovlev on 06.05.2021
+ * Created by Roman Iovlev on 25.08.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
+
 public class Cookies {
 
     private static WebDriver.Options manage() {

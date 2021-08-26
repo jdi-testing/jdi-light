@@ -8,15 +8,16 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.epam.jdi.tools.LinqUtils.*;
 import static com.jdiai.jsbuilder.ListSearch.CHAIN;
 import static com.jdiai.jsbuilder.ListSearch.MULTI;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static com.jdiai.jsdriver.RuleType.Element;
+import static com.jdiai.tools.LinqUtils.*;
 import static java.util.regex.Pattern.compile;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
@@ -145,13 +146,11 @@ public class JSDriver {
                 ? RuleType.Element
                 : RuleType.List;
         }
-        if (nextRule.isScript()) {
-            if (nextRule.previous == RuleType.Element) {
-                return RuleType.Element;
-            }
-            if (nextRule.previous == RuleType.List) {
-                return RuleType.List;
-            }
+        if (nextRule.previous == RuleType.Element) {
+            return RuleType.Element;
+        }
+        if (nextRule.previous == RuleType.List) {
+            return RuleType.List;
         }
         return strategy == CHAIN
             ? RuleType.Element
@@ -165,29 +164,54 @@ public class JSDriver {
     static Pattern idMatcher = compile("^#(?<id>[a-zA-Z][a-zA-Z0-9]*([-_:][a-zA-Z0-9]+)*)$");
     static Pattern csMatcher = compile("^.(?<class>[a-z][a-z0-9]*([-_:][a-z0-9]+)*)$");
 
-    public JSDriver addRule(By locator) {
+    public JSDriver addLocator(By locator) {
         rules.add(new JSRule(locator));
         return this;
     }
-    public JSDriver addRule(String script) {
-        return addRule(script, null);
+
+    public JSDriver addLocator(By locator, RuleType ruleType) {
+        rules.add(new JSRule(locator, ruleType));
+        return this;
     }
 
-    public JSDriver addRule(String script, RuleType previous) {
+    public JSDriver addScript(String script) {
+        return addScript(script, null);
+    }
+
+    public JSDriver addScript(String script, RuleType previous) {
         rules.add(new JSRule(script, previous));
         return this;
     }
 
-    public void replaceLastLocator(String value) {
+    public void replaceLocator(By newLocator) {
+        modifyLocator(rule -> new JSRule(newLocator, rule.filter));
+    }
+    public void fillLocatorTemplate(String value) {
+        modifyLocator(rule -> new JSRule(fillByTemplate(rule.locator, value), rule.filter));
+    }
+
+    protected void modifyLocator(Function<JSRule, JSRule> func) {
+        int lastLocatorIndex = lastLocatorIndex();
         List<JSRule> result = new ArrayList<>();
-        for(JSRule rule : rules) {
-            if (rule.isLocator() && getByLocator(rule.locator).contains("%s")) {
-                result.add(new JSRule(fillByTemplate(rule.locator, value)));
+        for(int i = 0; i < rules.size(); i++) {
+            JSRule rule = rules.get(i);
+            if (i == lastLocatorIndex) {
+                result.add(func.apply(rule));
             } else {
                 result.add(rule);
             }
         }
         rules = result;
+    }
+
+    protected int lastLocatorIndex() {
+        int indexOfLastLocator = -1;
+        for(int i = 0; i < rules.size(); i++) {
+            if (rules.get(i).isLocator()) {
+                indexOfLastLocator = i;
+            }
+        }
+        return indexOfLastLocator;
     }
 
     public JSDriver setRules(List<JSRule> rules) {
@@ -253,18 +277,8 @@ public class JSDriver {
         return this;
     }
 
-    public JSDriver updateBuilderActions(IBuilderActions actions) {
-        this.builder().updateActions(actions);
-        return this;
-    }
-
     public JSDriver setBuilder(IJSBuilder builder) {
         this.builder = builder.copy();
-        return this;
-    }
-
-    public JSDriver elementCtx() {
-        context = "element";
         return this;
     }
 
@@ -327,11 +341,15 @@ public class JSDriver {
     }
 
     public JSDriver setFilter(String filter) {
-        if (isBlank(filter)) {
-            lastRule().filter = null;
+        JSRule lastRule = lastRule();
+        if (lastRule == null) {
             return this;
         }
-        lastRule().filter = getFilterBody(filter);
+        if (isBlank(filter)) {
+            lastRule.filter = null;
+            return this;
+        }
+        lastRule.filter = getFilterBody(filter);
         return this;
     }
 
@@ -352,7 +370,7 @@ public class JSDriver {
     }
 
     public boolean hasFilter() {
-        return rules.get(rules.size() - 1).filter != null;
+        return lastRule().filter != null;
     }
 
     protected String returnFunc(String func) {
@@ -361,16 +379,18 @@ public class JSDriver {
 
     public JSDriver copy() {
         JSDriver jsDriver = new JSDriver(this.driver);
-        jsDriver.copy(this);
+        jsDriver.copyFrom(this);
 
         return jsDriver;
     }
 
-    public JSDriver copy(JSDriver otherDriver) {
+    public JSDriver copyFrom(JSDriver otherDriver) {
         this.builder = otherDriver.builder.copy();
         this.strategy = otherDriver.strategy;
         this.context = otherDriver.context;
+        List<JSRule> tempRules = new ArrayList<>(this.rules);
         this.rules = new ArrayList<>(otherDriver.rules);
+        this.rules.addAll(tempRules);
 
         return this;
     }

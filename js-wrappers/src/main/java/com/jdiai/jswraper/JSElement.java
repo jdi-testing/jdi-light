@@ -13,41 +13,41 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.LinqUtils.newList;
-import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.jsbuilder.JSTemplates.XPATH_FUNC;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.LinqUtils.newList;
+import static com.jdiai.tools.PrintUtils.print;
 
 public class JSElement {
-    protected JSDriver driver;
+    protected JSDriver jsDriver;
 
     public JSElement(Supplier<WebDriver> driver, List<By> locators) {
-        this.driver = new JSDriver(driver, locators);
+        this.jsDriver = new JSDriver(driver, locators);
     }
 
     public JSElement(WebDriver driver, List<By> locators) {
-        this.driver = new JSDriver(driver, locators);
+        this.jsDriver = new JSDriver(driver, locators);
     }
 
     public JSElement(WebDriver driver, By... locators) {
-        this.driver = new JSDriver(driver, locators);
+        this.jsDriver = new JSDriver(driver, locators);
     }
 
     public JSDriver jsDriver() {
-        if (driver != null) {
-            return driver;
+        if (jsDriver != null) {
+            return jsDriver;
         }
         throw new JDINovaException("JSDriver not initialized");
     }
 
     public void updateDriver(JSDriver driver) {
-        this.driver.copy().context = driver.context;
-        this.driver.strategy = driver.strategy;
-        this.driver.setBuilder(driver.builder());
+        this.jsDriver.copy().context = driver.context;
+        this.jsDriver.strategy = driver.strategy;
+        this.jsDriver.setBuilder(driver.builder());
     }
 
     public void multiSearch() {
-        driver.multiSearch();
+        jsDriver.multiSearch();
     }
 
     public JSProducer jsGet(String script) {
@@ -61,7 +61,7 @@ public class JSElement {
     }
 
     public void doAction(String action) {
-        driver.doAction("element." + action);
+        jsDriver.doAction("element." + action);
     }
 
     // region Attributes
@@ -70,11 +70,11 @@ public class JSElement {
     }
 
     public String getValue(String valueFunc) {
-        return driver.getOne(valueFunc).asString();
+        return jsDriver.getOne(valueFunc).asString();
     }
 
     public List<String> getAttributeList(String attribute) {
-        return driver.getList("element." + attribute).asString();
+        return jsDriver.getList("element." + attribute).asString();
     }
 
     public Json getAttributes(String... attributes) {
@@ -82,37 +82,37 @@ public class JSElement {
     }
 
     public int getSize() {
-        return driver.getSize();
+        return jsDriver.getSize();
     }
 
     public Json getAttributes(List<String> attributes) {
-        JsonObject json = driver.getOne(attributesToJson(attributes)).asJson();
+        JsonObject json = jsDriver.getOne(attributesToJson(attributes)).asJson();
         return new Json(attributes, s -> json.get(s).getAsString());
     }
 
     public List<JsonObject> getJsonList(String json) {
-        return driver.getList(json).asJson();
+        return jsDriver.getList(json).asJson();
     }
 
     public Json getAsMap(String valueFunc) {
-        return driver.getOne(valueFunc).asMap();
+        return jsDriver.getOne(valueFunc).asMap();
     }
 
     public String firstValue(String valueFunc) {
-        return driver.getFirst(valueFunc).asString();
+        return jsDriver.getFirst(valueFunc).asString();
     }
 
     public List<String> getValues(String valueFunc) {
-        return driver.getList(valueFunc).asString();
+        return jsDriver.getList(valueFunc).asString();
     }
 
     public List<Json> getMultiAttributes(List<String> attributes) {
-        List<JsonObject> objects = driver.getList(attributesToJson(attributes)).asJson();
+        List<JsonObject> objects = jsDriver.getList(attributesToJson(attributes)).asJson();
         return map(objects, json -> new Json(attributes, v -> json.get(v).getAsString()));
     }
 
     public JsonObject getJson(String json) {
-        return driver.getOne(json).asJson();
+        return jsDriver.getOne(json).asJson();
     }
 
     public List<Json> getMultiAttributes(String... attributes) {
@@ -122,12 +122,12 @@ public class JSElement {
 
     // region Styles
     public String getStyle(String style) {
-        return driver.getOne("getComputedStyle(element)." + style).asString();
+        return jsDriver.getOne("getComputedStyle(element)." + style).asString();
     }
 
     public Json getStyles(List<String> styles) {
         String jsonObject = "{ " + print(map(styles, style -> "'" + style + "': getComputedStyle(element)." + style), ", ") + " }";
-        JsonObject json = driver.getOne(jsonObject).asJson();
+        JsonObject json = jsDriver.getOne(jsonObject).asJson();
         return new Json(styles, json);
     }
 
@@ -140,8 +140,8 @@ public class JSElement {
     }
 
     public String getColor(String name) {
-        driver.builder().addJSCode(NTC.script).executeQuery();
-        return driver.getOne("rgb = getComputedStyle(element)."+name+";\n" +
+        jsDriver.builder().addJSCode(NTC.script).executeQuery();
+        return jsDriver.getOne("rgb = getComputedStyle(element)."+name+";\n" +
             "return jdi.ntc.name(rgb)[1]").asString();
     }
 
@@ -150,7 +150,7 @@ public class JSElement {
     }
 
     public Json getAllStyles() {
-        JsonObject json =  driver.getOne("{ keys: [...styles], " +
+        JsonObject json =  jsDriver.getOne("{ keys: [...styles], " +
             "values: [...styles].map(style=>styles.getPropertyValue(style)) }").asJson();
         return new Json(json.get("keys"), json.get("values"));
     }
@@ -160,18 +160,18 @@ public class JSElement {
     }
 
     public List<String> getStylesList(String style) {
-        List<JsonObject> styles = driver.getList("{ 'style': getComputedStyle(element)." + style + " }").asJson();
+        List<JsonObject> styles = jsDriver.getList("{ 'style': getComputedStyle(element)." + style + " }").asJson();
         return map(styles, s -> s.get("style").getAsString());
     }
 
     public List<Json> getMultiStyles(List<String> styles) {
         String jsonObject = "{ " + print(map(styles, el -> "'" + el + "': getComputedStyle(element)." + el), ", ") + " }";
-        List<JsonObject> jsonList = driver.getList(jsonObject).asJson();
+        List<JsonObject> jsonList = jsDriver.getList(jsonObject).asJson();
         return map(jsonList, j -> new Json(styles, s -> j.get(s).getAsString()));
     }
 
     public Json getObject(String objectMap) {
-        return driver.getOne(validateXpath(objectMap)).asMap();
+        return jsDriver.getOne(validateXpath(objectMap)).asMap();
     }
 
     public List<Json> getMultiStyles(String... styles) {
@@ -192,7 +192,7 @@ public class JSElement {
 
     protected String validateXpath(String objectMap) {
         if (objectMap.contains("': xpath(")) {
-            driver.builder().registerFunction("xpath", XPATH_FUNC);
+            jsDriver.builder().registerFunction("xpath", XPATH_FUNC);
         }
         return objectMap;
     }

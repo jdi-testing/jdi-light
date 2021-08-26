@@ -12,14 +12,14 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.getFieldsDeep;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.JDI.driver;
 import static com.jdiai.JDI.initJSFunc;
 import static com.jdiai.page.objects.JDIPageFactory.LOCATOR_FROM_FIELD;
 import static com.jdiai.page.objects.PageFactory.getFactory;
+import static com.jdiai.tools.LinqUtils.*;
+import static com.jdiai.tools.ReflectionUtils.getFieldsDeep;
+import static com.jdiai.tools.ReflectionUtils.isInterface;
+import static com.jdiai.tools.StringUtils.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class PageFactoryUtils {
@@ -51,7 +51,7 @@ public class PageFactoryUtils {
         JS core = initJSFunc.apply(null);
         core.setParent(info.parent);
         if (locator != null) {
-            core.jsDriver().addRule(locator);
+            core.jsDriver().addLocator(locator);
         }
         core.setVarName(info.field);
         ((HasCore) info.instance).setCore(core);

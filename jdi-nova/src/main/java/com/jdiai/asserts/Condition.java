@@ -1,8 +1,8 @@
 package com.jdiai.asserts;
 
-import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
+import com.jdiai.tools.map.MapArray;
 
 import java.util.function.Function;
 

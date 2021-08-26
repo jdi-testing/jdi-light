@@ -1,8 +1,8 @@
 package com.jdiai.page.objects;
 
-import com.epam.jdi.tools.ILogger;
+import com.jdiai.tools.ILogger;
 
-import static com.epam.jdi.tools.Timer.nowTimeShort;
+import static com.jdiai.tools.Timer.nowTimeShort;
 import static java.lang.String.format;
 
 public class ConsoleLogger implements ILogger {

@@ -1,6 +1,6 @@
 package com.jdiai.tools;
 
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.map.MapArray;
 
 import java.io.File;
 

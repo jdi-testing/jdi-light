@@ -2,7 +2,7 @@ package com.jdiai.page.objects;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
+import static com.jdiai.tools.ReflectionUtils.getValueField;
 
 public class InitInfo {
     public Object parent;

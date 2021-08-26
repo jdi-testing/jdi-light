@@ -16,9 +16,9 @@ import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
 import static com.jdiai.jswraper.driver.JDIDriver.RUN_MODE;
 import static com.jdiai.jswraper.driver.OsTypes.*;
+import static com.jdiai.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class GetDriverUtilities {

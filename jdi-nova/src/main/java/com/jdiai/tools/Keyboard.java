@@ -1,8 +1,5 @@
 package com.jdiai.tools;
 
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.ReflectionUtils;
-import com.epam.jdi.tools.Timer;
 import com.jdiai.jsdriver.JDINovaException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.Keys;
@@ -14,14 +11,15 @@ import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.first;
 import static com.jdiai.jswraper.driver.GetDriverUtilities.getOs;
+import static com.jdiai.tools.LinqUtils.first;
 import static java.lang.reflect.Modifier.isStatic;
 
 /**
- * Created by Roman Iovlev on 06.05.2021
+ * Created by Roman Iovlev on 25.08.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
+
 public class Keyboard {
     static Robot robot;
 

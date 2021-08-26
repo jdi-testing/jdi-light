@@ -1,16 +1,16 @@
 package com.jdiai.jsproducer;
 
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.jdiai.tools.map.MapArray;
+import com.jdiai.tools.pairs.Pair;
 
 import java.util.*;
 import java.util.function.Function;
 
-import static com.epam.jdi.tools.LinqUtils.newList;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.LinqUtils.newList;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.StringUtils.format;
 
 public class Json extends MapArray<String, String> {
     public Json(List<String> keys, JsonObject json) {

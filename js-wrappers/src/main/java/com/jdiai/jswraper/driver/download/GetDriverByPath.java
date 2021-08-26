@@ -3,9 +3,9 @@ package com.jdiai.jswraper.driver.download;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jswraper.driver.DriverTypes;
 
-import static com.epam.jdi.tools.PathUtils.mergePath;
 import static com.jdiai.jswraper.driver.GetDriverUtilities.getOs;
 import static com.jdiai.jswraper.driver.OsTypes.WIN;
+import static com.jdiai.tools.PathUtils.mergePath;
 
 public class GetDriverByPath {
     private final String driverPath;

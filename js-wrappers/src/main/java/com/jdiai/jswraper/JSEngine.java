@@ -54,7 +54,6 @@ public interface JSEngine {
     <T> List<T> getEntityList(List<String> attributes);
     <T> List<T> getEntityListFromAttr(String... attributes);
     JSEngine copy();
-    void copyFrom(JSEngine engine);
-    void copyDriver(JSDriver driver);
+    void updateFrom(JSEngine engine);
 
 }

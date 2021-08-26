@@ -1,10 +1,10 @@
 package com.jdiai.jsbuilder;
 
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
 import com.jdiai.jsbuilder.jsfunctions.BuilderFunctions;
 import com.jdiai.jsdriver.JDINovaBuilderException;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.map.MapArray;
+import com.jdiai.tools.pairs.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,12 +14,12 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
 import static com.jdiai.jsbuilder.QueryLogger.*;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_LIST_SCRIPT_EXECUTE;
 import static com.jdiai.jsbuilder.RetryFunctions.DEFAULT_SCRIPT_EXECUTE;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.ReflectionUtils.isClass;
+import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
