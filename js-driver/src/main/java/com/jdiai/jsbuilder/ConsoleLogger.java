@@ -1,10 +1,10 @@
 package com.jdiai.jsbuilder;
 
-import com.epam.jdi.tools.ILogger;
+import com.jdiai.tools.ILogger;
 import org.apache.logging.log4j.Level;
 
-import static com.epam.jdi.tools.StringUtils.format;
-import static com.epam.jdi.tools.Timer.nowTimeShort;
+import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.Timer.nowTimeShort;
 import static org.apache.logging.log4j.Level.*;
 
 public class ConsoleLogger implements ILogger {

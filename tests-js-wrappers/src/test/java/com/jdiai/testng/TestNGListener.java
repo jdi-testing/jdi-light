@@ -1,11 +1,11 @@
 package com.jdiai.testng;
 
 /**
- * Created by Roman Iovlev on 14.02.2018
+ * Created by Roman Iovlev on 25.08.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.tools.Safe;
+import com.jdiai.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestNGMethod;
@@ -15,9 +15,9 @@ import org.testng.annotations.Test;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.epam.jdi.tools.LinqUtils.last;
-import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.jswraper.JSWrapper.driver;
+import static com.jdiai.tools.LinqUtils.last;
+import static com.jdiai.tools.StringUtils.format;
 import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {

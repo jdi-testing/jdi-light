@@ -9,7 +9,12 @@ public class JSRule {
     public String filter;
 
     public JSRule(By locator) {
-        this(locator, null);
+        this.locator = locator;
+    }
+
+    public JSRule(By locator, RuleType previous) {
+        this.locator = locator;
+        this.previous = previous;
     }
 
     public JSRule(By locator, String filter) {
@@ -18,7 +23,7 @@ public class JSRule {
     }
 
     public JSRule(String script) {
-        this(script, null);
+        this.script = script;
     }
 
     public JSRule(String script, RuleType previous) {

@@ -1,6 +1,6 @@
 package com.jdiai.jsbuilder;
 
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;

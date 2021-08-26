@@ -2,8 +2,8 @@ package com.jdiai.jsdriver;
 
 import java.util.function.Consumer;
 
-import static com.epam.jdi.tools.StringUtils.format;
 import static com.jdiai.jsbuilder.QueryLogger.logger;
+import static com.jdiai.tools.StringUtils.format;
 
 public class JDINovaException extends RuntimeException {
     public static Consumer<String> THROW_ASSERT = msg -> { throw new AssertionError(msg); };

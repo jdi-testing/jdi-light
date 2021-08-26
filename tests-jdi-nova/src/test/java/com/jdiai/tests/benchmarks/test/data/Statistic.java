@@ -1,6 +1,6 @@
 package com.jdiai.tests.benchmarks.test.data;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class Statistic extends DataClass<Statistic> {
     public String scenario;

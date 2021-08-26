@@ -1,7 +1,7 @@
 package com.jdiai.jsbuilder;
 
-import com.epam.jdi.tools.ILogger;
-import com.epam.jdi.tools.Safe;
+import com.jdiai.tools.ILogger;
+import com.jdiai.tools.Safe;
 
 public class QueryLogger {
     public static final int OFF = 0;

@@ -1,7 +1,7 @@
 package com.jdiai.entities;
 
-import com.epam.jdi.tools.DataClass;
 import com.jdiai.annotations.UI;
+import com.jdiai.tools.DataClass;
 
 public class Contacts extends DataClass<Contacts> {
     public static Contacts Triss = new Contacts().set(u -> {

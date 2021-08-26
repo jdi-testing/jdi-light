@@ -1,10 +1,10 @@
 package com.jdiai.utils;
 
-import com.epam.jdi.tools.func.JAction;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.func.JAction;
+import com.jdiai.tools.func.JFunc;
+import com.jdiai.tools.pairs.Pair;
 
-import static com.epam.jdi.tools.pairs.Pair.$;
+import static com.jdiai.tools.pairs.Pair.$;
 import static java.lang.System.currentTimeMillis;
 import static org.testng.Assert.assertTrue;
 

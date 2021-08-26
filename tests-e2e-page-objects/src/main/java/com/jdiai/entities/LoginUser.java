@@ -1,7 +1,7 @@
 package com.jdiai.entities;
 
-import com.epam.jdi.tools.DataClass;
 import com.jdiai.annotations.UI;
+import com.jdiai.tools.DataClass;
 
 public class LoginUser extends DataClass<LoginUser> {
     public static LoginUser Roman = new LoginUser().set(

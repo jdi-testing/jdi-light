@@ -17,6 +17,7 @@ public class ClientRect {
     private int roundUp(JsonObject json, String variable) {
         return (int) Math.round(json.get(variable).getAsDouble());
     }
+
     private int roundDown(JsonObject json, String variable) {
         return (int) json.get(variable).getAsDouble();
     }

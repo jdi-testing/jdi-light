@@ -1,6 +1,5 @@
 package com.jdiai.page.objects;
 
-import com.epam.jdi.tools.map.MapArray;
 import com.jdiai.DataList;
 import com.jdiai.WebPage;
 import com.jdiai.annotations.Site;
@@ -9,18 +8,19 @@ import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
 import com.jdiai.jsbuilder.QueryLogger;
 import com.jdiai.jsdriver.JDINovaException;
+import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
-import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.$;
 import static com.jdiai.JDI.domain;
 import static com.jdiai.JDI.initJSFunc;
 import static com.jdiai.page.objects.CreateRule.cRule;
 import static com.jdiai.page.objects.SetupRule.sRule;
+import static com.jdiai.tools.ReflectionUtils.isClass;
+import static com.jdiai.tools.ReflectionUtils.isInterface;
+import static com.jdiai.tools.map.MapArray.map;
+import static com.jdiai.tools.pairs.Pair.$;
 import static java.lang.reflect.Modifier.isStatic;
 
 public class PageFactory {
@@ -30,10 +30,12 @@ public class PageFactory {
         PagesFactory pageFactory = getFactory();
         pageFactory.initSite(cl);
     }
+
     public static <T> T initElements(Class<T> cl) {
         PagesFactory pageFactory = getFactory();
         return pageFactory.initElements(cl);
     }
+
     public static <T> T initPageElements(T pageObject) {
         PagesFactory pageFactory = getFactory();
         pageFactory.initElements(pageObject);

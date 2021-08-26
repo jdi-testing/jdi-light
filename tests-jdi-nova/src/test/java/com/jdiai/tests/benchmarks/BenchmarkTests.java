@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
-import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.JDI.$;
 import static com.jdiai.JDI.driver;
 import static com.jdiai.Pages.PERFORMANCE_PAGE;
@@ -27,6 +25,8 @@ import static com.jdiai.states.States.loggedInAt;
 import static com.jdiai.states.States.logout;
 import static com.jdiai.tests.benchmarks.PerfStatistic.testScenario;
 import static com.jdiai.tools.FilterConditions.textEquals;
+import static com.jdiai.tools.LinqUtils.ifSelect;
+import static com.jdiai.tools.PrintUtils.print;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.repeat;

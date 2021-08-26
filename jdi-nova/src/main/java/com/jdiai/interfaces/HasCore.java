@@ -8,14 +8,14 @@ import com.jdiai.jswraper.JSEngine;
 import com.jdiai.visual.Direction;
 import com.jdiai.visual.ImageTypes;
 import com.jdiai.visual.StreamToImageVideo;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.List;
 
 import static com.jdiai.tools.VisualSettings.DEFAULT_IMAGE_TYPE;
+import static com.jdiai.visual.Directions.*;
 
-public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore> {
+public interface HasCore extends WebElement, HasName, HasLocators, ShouldValidations<HasCore> {
     JS core();
 
     JS setCore(JS core);
@@ -34,6 +34,10 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
 
     default String printHtml() {
         return core().printHtml();
+    }
+
+    default JS showIfNotInView() {
+        return core().showIfNotInView();
     }
 
     default JS show() {
@@ -111,6 +115,23 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
     default Direction getDirectionTo(WebElement element) {
         return core().getDirectionTo(element);
     }
+
+    default boolean isAbove(WebElement element) {
+        return HIGHER.apply(core().getDirectionTo(element));
+    }
+
+    default boolean isBelow(WebElement element) {
+        return LOWER.apply(core().getDirectionTo(element));
+    }
+
+    default boolean isOnLeftOf(WebElement element) {
+        return LEFT.apply(core().getDirectionTo(element));
+    }
+
+    default boolean isOnRightOf(WebElement element) {
+        return RIGHT.apply(core().getDirectionTo(element));
+    }
+
     default void highlight() {
         core().highlight();
     }
@@ -138,5 +159,35 @@ public interface HasCore extends HasName, HasLocators, ShouldValidations<HasCore
     
     default JSDriver jsDriver() {
         return engine().jsDriver();
+    }
+    
+    // To be Compliant with WebElement
+    default void click() { core().click(); }
+    default void submit() { core().submit(); }
+    default void sendKeys(CharSequence... charSequences) { core().sendKeys(charSequences); }
+    default void clear() { core().clear(); }
+    default String getTagName() { return core().getTagName(); }
+    default String getAttribute(String s) { return core().getAttribute(s); }
+    default boolean isSelected() { return core().isSelected(); }
+    default List<WebElement> findElements(By by) {
+        return core().findElements(by);
+    }
+    default WebElement findElement(By by) {
+        return core().findElement(by);
+    }
+    default Point getLocation() {
+        return core().getLocation();
+    }
+    default Dimension getSize() {
+        return core().getSize();
+    }
+    default Rectangle getRect() {
+        return core().getRect();
+    }
+    default String getCssValue(String s) {
+        return core().getCssValue(s);
+    }
+    default <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
+        return core().getScreenshotAs(outputType);
     }
 }

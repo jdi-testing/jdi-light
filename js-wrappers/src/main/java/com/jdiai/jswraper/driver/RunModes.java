@@ -9,13 +9,14 @@ import com.jdiai.jswraper.driver.remote.SelenoidOptions;
 
 import java.util.function.Consumer;
 
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.PathUtils.path;
+import static com.jdiai.tools.PathUtils.mergePath;
+import static com.jdiai.tools.PathUtils.path;
 
 /**
- * Created by Roman Iovlev on 08.06.2021
+ * Created by Roman Iovlev on 25.08.2021
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
+
 public class RunModes {
     public RunModes(String runMode, RemoteSettings settings) {
         type = runMode;

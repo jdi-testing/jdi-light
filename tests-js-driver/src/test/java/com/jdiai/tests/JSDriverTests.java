@@ -1,22 +1,22 @@
 package com.jdiai.tests;
 
-import com.epam.jdi.tools.map.MapArray;
 import com.google.gson.JsonObject;
 import com.jdiai.TestInit;
 import com.jdiai.entities.Link;
 import com.jdiai.jsdriver.JSDriver;
 import com.jdiai.testng.TestNGListener;
+import com.jdiai.tools.map.MapArray;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.Pages.DOMAIN;
 import static com.jdiai.states.States.atHomePage;
 import static com.jdiai.states.States.logout;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
 

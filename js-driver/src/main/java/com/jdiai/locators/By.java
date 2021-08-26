@@ -6,7 +6,7 @@ import org.openqa.selenium.support.pagefactory.ByChained;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 
 public class By extends org.openqa.selenium.By {

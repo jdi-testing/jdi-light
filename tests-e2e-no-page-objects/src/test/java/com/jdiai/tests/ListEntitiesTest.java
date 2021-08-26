@@ -1,23 +1,23 @@
 package com.jdiai.tests;
 
-import com.epam.jdi.tools.DataClass;
 import com.google.gson.JsonObject;
 import com.jdiai.TestInit;
 import com.jdiai.entities.SearchItem;
 import com.jdiai.entities.User;
 import com.jdiai.states.States;
 import com.jdiai.testng.TestNGListener;
+import com.jdiai.tools.DataClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.PrintUtils.print;
 import static com.jdiai.JDI.$;
 import static com.jdiai.entities.User.Roman;
 import static com.jdiai.tests.TestData.SearchResults;
 import static com.jdiai.tests.TestData.SearchResultsJson;
+import static com.jdiai.tools.PrintUtils.print;
 import static org.testng.Assert.assertEquals;
 
 @Listeners(TestNGListener.class)

@@ -6,13 +6,13 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static com.epam.jdi.tools.LinqUtils.newList;
 import static com.jdiai.jswraper.JSWrapper.displayedFilter;
+import static com.jdiai.tools.LinqUtils.newList;
 
 public class JSWithFilters extends JSBaseEngine {
     public JSWithFilters(Supplier<WebDriver> driver, List<By> locators) {
         super(driver, locators);
-        this.driver.setFilter(displayedFilter);
+        this.jsDriver.setFilter(displayedFilter);
     }
 
     public JSWithFilters(WebDriver driver, List<By> locators) {

@@ -1,8 +1,8 @@
 package com.jdiai.jsbuilder;
 
-import com.epam.jdi.tools.StringUtils;
 import com.jdiai.jsbuilder.jsfunctions.BuilderFunctions;
 import com.jdiai.jsdriver.JDINovaBuilderException;
+import com.jdiai.tools.StringUtils;
 import org.openqa.selenium.By;
 
 import java.text.MessageFormat;

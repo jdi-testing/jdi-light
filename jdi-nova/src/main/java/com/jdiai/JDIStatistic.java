@@ -1,7 +1,7 @@
 package com.jdiai;
 
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.map.MapArray;
 
 public class JDIStatistic {
     public static int shouldValidations = 0;

@@ -12,10 +12,10 @@ public class Directions {
     public static int LINE_ACCURACY = 5;
     public static int ANGLE_ACCURACY = 5;
 
-    public static Function<Direction, Boolean> HIGHER = DIRECTION(90, MAIN_ACCURACY);
-    public static Function<Direction, Boolean> LOWER = DIRECTION(270, MAIN_ACCURACY);
-    public static Function<Direction, Boolean> LEFT = DIRECTION(180, MAIN_ACCURACY);
-    public static Function<Direction, Boolean> RIGHT = DIRECTION(0, MAIN_ACCURACY);
+    public static Function<Direction, Boolean> LOWER = DIRECTION(90, MAIN_ACCURACY);
+    public static Function<Direction, Boolean> HIGHER = DIRECTION(270, MAIN_ACCURACY);
+    public static Function<Direction, Boolean> RIGHT = DIRECTION(180, MAIN_ACCURACY);
+    public static Function<Direction, Boolean> LEFT = DIRECTION(0, MAIN_ACCURACY);
 
     public static Function<Direction, Boolean> TOP_RIGHT = DIRECTION(45, SECOND_ACCURACY);
     public static Function<Direction, Boolean> TOP_LEFT = DIRECTION(135, SECOND_ACCURACY);
@@ -26,6 +26,7 @@ public class Directions {
         d -> closed(180 - LINE_ACCURACY, 180 + LINE_ACCURACY).contains(d.angle())
             || closed(0, LINE_ACCURACY).contains(d.angle())
             || closed(360 - LINE_ACCURACY, 360).contains(d.angle());
+
     public static Function<Direction, Boolean> SAME_VERTICAL =
         d -> closed(90 - LINE_ACCURACY, 90 + LINE_ACCURACY).contains(d.angle())
             || closed(270 - LINE_ACCURACY, 270 + LINE_ACCURACY).contains(d.angle());

@@ -1,9 +1,9 @@
 package com.jdiai.tests.benchmarks;
 
-import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JAction;
-import com.epam.jdi.tools.func.JFunc;
 import com.jdiai.tests.benchmarks.test.data.Statistic;
+import com.jdiai.tools.Timer;
+import com.jdiai.tools.func.JAction;
+import com.jdiai.tools.func.JFunc;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.LongStream;
 
-import static com.epam.jdi.tools.PropertyReader.getProperties;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.PropertyReader.getProperties;
+import static com.jdiai.tools.StringUtils.format;
 import static java.lang.Boolean.parseBoolean;
 import static org.testng.Assert.assertEquals;
 
