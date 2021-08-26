@@ -42,7 +42,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
-    @JDIAction("Assert that chip {name} is deletable")
+    @JDIAction("Assert that chip {name} is not deletable")
     public ChipAssert notDeletable() {
         jdiAssert(element().isDeletable(), Matchers.is(false));
         return this;
