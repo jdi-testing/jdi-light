@@ -23,7 +23,7 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
 public class PagesFactory {
-    public Consumer<Class<?>> initSiteFunc = cl -> {};
+    public Consumer<Class<?>> initSiteFunc = cl -> { };
     public Function<Class<?>, Object> createPageFunc =
         PagesFactory::createWithConstructor;
     public Function<Field, Boolean> isUIElementField = f -> true;
@@ -55,8 +55,8 @@ public class PagesFactory {
         }
         Field[] allFields = cl.getDeclaredFields();
         List<Field> pages = filter(allFields, filterPages);
-        for (Field field : pages) {
-            createAndSetupField(null, field);
+        for (Field page : pages) {
+            createAndSetupField(null, page);
         }
         initialized.add(cl);
     }
@@ -70,6 +70,7 @@ public class PagesFactory {
     public void initElements(Object page) {
         List<Field> pageFields = getFieldsDeep(page.getClass());
         List<Field> filteredFields = filter(pageFields, fieldsFilter);
+
         for (Field field : filteredFields) {
             createAndSetupField(page, field);
         }
