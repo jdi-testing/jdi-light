@@ -3,26 +3,40 @@ package io.github.com.pages.navigation;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.inputs.Button;
+import com.epam.jdi.light.material.elements.navigation.Stepper;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class StepperPage extends WebPage {
-    @UI("//*[@id='simpleStepper']//following-sibling::div//*[@class='MuiTypography-root MuiTypography-body1']")
-    public static Text simpleLinearStepperTitle;
+    @UI("#simpleStepper")
+    public static Stepper simpleLinearStepper;
 
-    @UI("//*[@id='simpleStepper']//following-sibling::div//button[contains(@class, 'MuiButtonBase-root')]")
-    public static WebList simpleLinearStepperButton;
+    @UI("//div[@id='simpleStepper']/..//button[1]")
+    public static Button simpleLinearStepperBackButton;
 
-    @UI("//*[@id='nonLinearStepper']//following-sibling::div//*[@class='MuiTypography-root MuiTypography-body1']")
-    public static Text nonlinearStepperTitle;
+    @UI("//div[@id='simpleStepper']/..//button[2]")
+    public static Button simpleLinearStepperNextButton;
 
-    @UI("//*[@id='nonLinearStepper']//following-sibling::div//button[contains(@class, 'MuiButtonBase-root')]")
-    public static WebList nonlinearStepperButton;
+    @UI("#nonLinearStepper")
+    public static Stepper nonlinearStepper;
 
-    @UI("(//*[text()='Vertical stepper']/following-sibling::div//p)[1]")
-    public static Text verticalStepperTitle;
+    @UI("//p[@id='activeNonLinearStep']/..//button[1]")
+    public static Button nonlinearStepperBackButton;
 
-    @UI("//*[text()='Vertical stepper']/following-sibling::div//button[contains(@class, MuiButtonBase-root)]")
-    public static WebList verticalStepperButton;
+    @UI("//p[@id='activeNonLinearStep']/..//button[2]")
+    public static Button nonlinearStepperNextButton;
+
+    @UI("//p[@id='activeNonLinearStep']/..//button[3]")
+    public static Button nonlinearStepperCompleteStepButton;
+
+    @UI("//h2[text()='Vertical stepper']/following-sibling::div[1]/div")
+    public static Stepper verticalStepper;
+
+    @UI("//h2[text()='Vertical stepper']/following-sibling::div[1]//button[1]")
+    public static Button verticalStepperBackButton;
+
+    @UI("//h2[text()='Vertical stepper']/following-sibling::div[1]//button[2]")
+    public static Button verticalStepperNextButton;
 
     @UI("(//*[text()='Mobile text stepper']/following-sibling::div//*[contains(@class, 'MuiMobileStepper-root')])[1]")
     public static Text mobileTextStepperTitle;
