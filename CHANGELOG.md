@@ -1,15 +1,13 @@
 # Changelog
 
-## 1.3.10 (planed July 2020)
-* Support [Angular materials](https://material.angular.io/components/categories) elements
-* All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
-
-##1.3.5-6 (09.02.2021)
 ## 1.3.15 (planed March 2021)
 * Support [Angular materials](https://material.angular.io/components/categories) elements
 * All tasks [angular](https://github.com/jdi-testing/jdi-light/issues?q=is%3Aissue+label%3AAngular+)
 
-## 1.3.13 (04.22.2021)
+## 1.3.14 (19.08.2021)
+* TBD
+* 
+## 1.3.13 (22.04.2021)
 * Extend Form capability added
 
 ## 1.3.12 (04.04.2021)
