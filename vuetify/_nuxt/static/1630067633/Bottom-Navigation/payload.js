@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/bottom-navigation", {data:[{}],fetch:{},mutations:void 0});
