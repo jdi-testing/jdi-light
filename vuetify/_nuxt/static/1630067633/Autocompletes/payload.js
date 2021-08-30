@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/Autocompletes", {data:[{}],fetch:{},mutations:void 0});
