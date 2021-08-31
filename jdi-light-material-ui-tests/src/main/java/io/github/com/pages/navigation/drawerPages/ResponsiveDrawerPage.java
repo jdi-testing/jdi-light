@@ -1,14 +1,14 @@
-package io.github.com.pages.navigation;
+package io.github.com.pages.navigation.drawerPages;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.navigation.Drawer;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+
 import java.util.List;
 
-public class DrawerPage extends WebPage {
-
+public class ResponsiveDrawerPage extends WebPage {
     @UI("//*[text()='left']")
     public static Button leftButton;
 

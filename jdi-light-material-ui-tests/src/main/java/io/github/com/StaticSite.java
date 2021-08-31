@@ -1,6 +1,5 @@
 package io.github.com;
 
-import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
@@ -36,7 +35,7 @@ import io.github.com.pages.layout.GridPage;
 import io.github.com.pages.layout.HiddenPage;
 import io.github.com.pages.navigation.BottomNavigationPage;
 import io.github.com.pages.navigation.ContextMenuPage;
-import io.github.com.pages.navigation.DrawerPage;
+import io.github.com.pages.navigation.drawerPages.*;
 import io.github.com.pages.navigation.LinkPage;
 import io.github.com.pages.navigation.RouterBreadcrumbsPage;
 import io.github.com.pages.navigation.SimpleBreadcrumbsPage;
@@ -106,14 +105,16 @@ public class StaticSite {
     @Url("/button_groups")
     public static ButtonGroupPage buttonGroupPage;
 
-    @Url("/material-ui-inputs-button-group--default")
-    public static WebPage inputButtonGroupDefaultPage;
+//    Did not find this pages on Material-UI site
 
-    @Url("/material-ui-inputs-button-group--disabled")
-    public static WebPage inputButtonGroupDisabledPage;
-
-    @Url("/button_groups")
-    public static WebPage inputButtonGroupSplitPage;
+//    @Url("/material-ui-inputs-button-group--default")
+//    public static WebPage inputButtonGroupDefaultPage;
+//
+//    @Url("/material-ui-inputs-button-group--disabled")
+//    public static WebPage inputButtonGroupDisabledPage;
+//
+//    @Url("/button_groups")
+//    public static WebPage inputButtonGroupSplitPage;
 
     @Url("/selects")
     public static SelectPage selectPage;
@@ -252,12 +253,13 @@ public class StaticSite {
     @Frame("storybook-preview-iframe")
     public static ClickAwayListenerPage clickAwayListenerFrame;
 
+//    Did not find it
 
-    @Url("/material-ui-utils-click-away-listener--default")
-    public static WebPage utilsClickAwayListenerDefaultPage;
-
-    @Url("/material-ui-utils-click-away-listener--portal-example")
-    public static WebPage utilsClickAwayListenerPortalExamplePage;
+//    @Url("/material-ui-utils-click-away-listener--default")
+//    public static WebPage utilsClickAwayListenerDefaultPage;
+//
+//    @Url("/material-ui-utils-click-away-listener--portal-example")
+//    public static WebPage utilsClickAwayListenerPortalExamplePage;
 
     // portal
     @Url("/portal")
@@ -275,25 +277,25 @@ public class StaticSite {
 
     // drawer
     @Url("/temporary_drawer")
-    public static DrawerPage temporaryDrawerPage;
+    public static TemporaryDrawerPage temporaryDrawerPage;
 
     @Url("/swipeable_drawer")
-    public static DrawerPage swipeableDrawerPage;
+    public static SwipableDrawerPage swipeableDrawerPage;
 
     @Url("/responsive_drawer")
-    public static DrawerPage responsiveDrawerPage;
+    public static ResponsiveDrawerPage responsiveDrawerPage;
 
     @Url("/persistent_drawer")
-    public static DrawerPage persistentDrawerPage;
+    public static PersistentDrawerPage persistentDrawerPage;
 
     @Url("/mini_drawer")
-    public static DrawerPage miniDrawerPage;
+    public static MiniDrawerPage miniDrawerPage;
 
     @Url("/permanent_drawer")
-    public static DrawerPage permanentDrawerPage;
+    public static PermanentDrawerPage permanentDrawerPage;
 
     @Url("/clipped_drawer")
-    public static DrawerPage clippedDrawerPage;
+    public static SlippedDrawerPage clippedDrawerPage;
 
     // stepper
 

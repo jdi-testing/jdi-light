@@ -1,7 +1,6 @@
 package io.github.epam.material.tests.navigation;
 
 import static io.github.com.StaticSite.*;
-import static io.github.com.pages.navigation.DrawerPage.*;
 import static org.testng.Assert.*;
 import static org.hamcrest.Matchers.containsString;
 
@@ -30,22 +29,23 @@ public class DrawerTests extends TestsInit {
     @Test(priority = 1)
     public void temporaryDrawerTest() {
         temporaryDrawerPage.open();
-        List<Button> buttons = Arrays.asList(leftButton, rightButton, topButton, bottomButton);
+        List<Button> buttons = Arrays.asList(temporaryDrawerPage.leftButton, temporaryDrawerPage.rightButton,
+        temporaryDrawerPage.topButton, temporaryDrawerPage.bottomButton);
         buttons.forEach(
                 button -> {
                     button.click();
-                    drawer.is().displayed();
+                    temporaryDrawerPage.drawer.is().displayed();
                     String currentButtonName = button.getName();
-                    drawer.has().classValue(containsString(String.format("MuiDrawer-paperAnchor%s", currentButtonName.substring(0,currentButtonName.lastIndexOf(" ") + 1))));
-                    drawerElementsIcon.forEach(
+                    temporaryDrawerPage.drawer.has().classValue(containsString(String.format("MuiDrawer-paperAnchor%s", currentButtonName.substring(0,currentButtonName.lastIndexOf(" ") + 1))));
+                    temporaryDrawerPage.drawerElementsIcon.forEach(
                             icon -> icon.is().displayedSvg()
                     );
-                    drawerElementsText.forEach(
+                    temporaryDrawerPage.drawerElementsText.forEach(
                             text -> actualDrawerTexts.add(text.getText())
                     );
                     assertEquals(actualDrawerTexts, expectedDrawerTexts);
                     actualDrawerTexts.clear();
-                    drawerElementsText.get(1).click();
+                    temporaryDrawerPage.drawerElementsText.get(1).click();
                 }
         );
     }
@@ -53,22 +53,23 @@ public class DrawerTests extends TestsInit {
     @Test(priority = 2)
     public void swipeableDrawerTest() {
         swipeableDrawerPage.open();
-        List<Button> buttons = Arrays.asList(leftButton, rightButton, topButton, bottomButton);
+        List<Button> buttons = Arrays.asList(swipeableDrawerPage.leftButton, swipeableDrawerPage.rightButton,
+        swipeableDrawerPage.topButton, swipeableDrawerPage.bottomButton);
         buttons.forEach(
                 button -> {
                     button.click();
-                    drawer.is().displayed();
+                    swipeableDrawerPage.drawer.is().displayed();
                     String currentButtonName = button.getName();
-                    drawer.has().classValue(containsString(String.format("MuiDrawer-paperAnchor%s", currentButtonName.substring(0,currentButtonName.lastIndexOf(" ") + 1))));
-                    drawerElementsIcon.forEach(
+                    swipeableDrawerPage.drawer.has().classValue(containsString(String.format("MuiDrawer-paperAnchor%s", currentButtonName.substring(0,currentButtonName.lastIndexOf(" ") + 1))));
+                    swipeableDrawerPage.drawerElementsIcon.forEach(
                             icon -> icon.is().displayedSvg()
                     );
-                    drawerElementsText.forEach(
+                    swipeableDrawerPage.drawerElementsText.forEach(
                             text -> actualDrawerTexts.add(text.getText())
                     );
                     assertEquals(actualDrawerTexts, expectedDrawerTexts);
                     actualDrawerTexts.clear();
-                    drawerElementsText.get(1).click();
+                    swipeableDrawerPage.drawerElementsText.get(1).click();
                 }
         );
     }
@@ -76,12 +77,12 @@ public class DrawerTests extends TestsInit {
     @Test(priority = 3)
     public void responsiveDrawerTest() {
         responsiveDrawerPage.open();
-        drawer.is().displayed();
-        drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
-        drawerElementsIcon.forEach(
+        responsiveDrawerPage.drawer.is().displayed();
+        responsiveDrawerPage.drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
+        responsiveDrawerPage.drawerElementsIcon.forEach(
                 icon -> icon.is().displayedSvg()
         );
-        drawerElementsText.forEach(
+        responsiveDrawerPage.drawerElementsText.forEach(
                 text -> {
                     text.click();
                     actualDrawerTexts.add(text.getText());
@@ -89,23 +90,23 @@ public class DrawerTests extends TestsInit {
         );
         assertEquals(actualDrawerTexts, expectedDrawerTexts);
         actualDrawerTexts.clear();
-        drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
-        drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
+        responsiveDrawerPage.drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
+        responsiveDrawerPage.drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
     }
 
     @Test(priority = 4)
     public void persistentDrawerTest() {
         persistentDrawerPage.open();
-        drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
-        drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
+        persistentDrawerPage.drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
+        persistentDrawerPage.drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
 
-        drawerSandwichMenuButton.click();
-        drawer.is().displayed();
-        drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
-        drawerElementsIcon.forEach(
+        persistentDrawerPage.drawerSandwichMenuButton.click();
+        persistentDrawerPage.drawer.is().displayed();
+        persistentDrawerPage.drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
+        persistentDrawerPage.drawerElementsIcon.forEach(
                 icon -> icon.is().displayedSvg()
         );
-        drawerElementsText.forEach(
+        persistentDrawerPage.drawerElementsText.forEach(
                 text -> {
                     text.click();
                     actualDrawerTexts.add(text.getText());
@@ -113,22 +114,22 @@ public class DrawerTests extends TestsInit {
         );
         assertEquals(actualDrawerTexts, expectedDrawerTexts);
         actualDrawerTexts.clear();
-        drawerBackMenuButton.click();
+        persistentDrawerPage.drawerBackMenuButton.click();
     }
 
     @Test(priority = 5)
     public void miniDrawerTest() {
         miniDrawerPage.open();
-        drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
-        drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
+        miniDrawerPage.drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
+        miniDrawerPage.drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
 
-        drawerSandwichMenuButton.click();
-        drawer.is().displayed();
-        drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
-        drawerElementsIcon.forEach(
+        miniDrawerPage.drawerSandwichMenuButton.click();
+        miniDrawerPage.drawer.is().displayed();
+        miniDrawerPage.drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
+        miniDrawerPage.drawerElementsIcon.forEach(
                 icon -> icon.is().displayedSvg()
         );
-        drawerElementsText.forEach(
+        miniDrawerPage.drawerElementsText.forEach(
                 text -> {
                     text.click();
                     actualDrawerTexts.add(text.getText());
@@ -136,9 +137,9 @@ public class DrawerTests extends TestsInit {
         );
         assertEquals(actualDrawerTexts, expectedDrawerTexts);
         actualDrawerTexts.clear();
-        drawerBackMenuButton.click();
-        timer.wait(() -> drawerElementsText.get(1).is().disappear());
-        drawerElementsIcon.forEach(
+        miniDrawerPage.drawerBackMenuButton.click();
+        timer.wait(() -> miniDrawerPage.drawerElementsText.get(1).is().disappear());
+        miniDrawerPage.drawerElementsIcon.forEach(
                 icon -> icon.is().displayedSvg()
         );
 
@@ -147,15 +148,15 @@ public class DrawerTests extends TestsInit {
     @Test(priority = 6)
     public void permanentDrawerTest() {
         permanentDrawerPage.open();
-        drawer.is().displayed();
-        drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
-        drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
-        drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
+        permanentDrawerPage.drawer.is().displayed();
+        permanentDrawerPage.drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
+        permanentDrawerPage.drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
+        permanentDrawerPage.drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
 
-        drawerElementsIcon.forEach(
+        permanentDrawerPage.drawerElementsIcon.forEach(
                 icon -> icon.is().displayedSvg()
         );
-        drawerElementsText.forEach(
+        permanentDrawerPage.drawerElementsText.forEach(
                 text -> {
                     text.click();
                     actualDrawerTexts.add(text.getText());
@@ -168,15 +169,15 @@ public class DrawerTests extends TestsInit {
     @Test(priority = 7)
     public void clippedDrawerTest() {
         clippedDrawerPage.open();
-        drawer.is().displayed();
-        drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
-        drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
-        drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
+        clippedDrawerPage.drawer.is().displayed();
+        clippedDrawerPage.drawer.has().classValue(containsString("MuiDrawer-paperAnchorLeft"));
+        clippedDrawerPage.drawerContent.get(1).is().text(containsString(firstPartOfTextContent));
+        clippedDrawerPage.drawerContent.get(2).is().text(containsString(secondPartOfTextContent));
 
-        drawerElementsIcon.forEach(
+        clippedDrawerPage.drawerElementsIcon.forEach(
                 icon -> icon.is().displayedSvg()
         );
-        drawerElementsText.forEach(
+        clippedDrawerPage.drawerElementsText.forEach(
                 text -> {
                     text.click();
                     actualDrawerTexts.add(text.getText());
@@ -186,4 +187,3 @@ public class DrawerTests extends TestsInit {
         actualDrawerTexts.clear();
     }
 }
-

@@ -114,7 +114,7 @@ public class SelectTests extends TestsInit {
 
         multipleSelectButton.click();
         selectList.multipleSelect(listOfMultipleSelect.subList(0,2));
-        selectListItems.get(1).sendKeys(Keys.ESCAPE);
+        selectListItems.get(1).core().sendKeys(Keys.ESCAPE);
         multipleSelectButton.is().text(listOfMultipleSelect.subList(0,2).toString().replace("[", "").replace("]", ""));
 
         WebPage.refresh();

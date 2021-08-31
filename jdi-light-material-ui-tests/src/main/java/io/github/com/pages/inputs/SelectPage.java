@@ -3,7 +3,9 @@ package io.github.com.pages.inputs;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.displaydata.Lists;
 import com.epam.jdi.light.material.elements.inputs.Select;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
@@ -13,17 +15,20 @@ import java.util.List;
 
 public class SelectPage extends WebPage {
 
+    @JDropdown(root = "div.MuiInputBase-root", value = "//input", list = "li.MuiListItem-button", expand = "//div[@id='simple-select']")
+    public static Dropdown simpleSelect;
+
     @UI("//div[@id='simple-select']")
     public static Button simpleSelectExpand;
 
     @UI("//input")
     public static List<TextField> simpleSelectField;
 
-    @UI("//ul")
+    @UI(".MuiInput-input")
     public static Select selectList;
 
     @UI("li.MuiListItem-button")
-    public static List<UIElement> selectListItems;
+    public static List<Lists> selectListItems;
 
     @UI("//button/span[@class='MuiButton-label']")
     public static Button openTheSelectButton;
