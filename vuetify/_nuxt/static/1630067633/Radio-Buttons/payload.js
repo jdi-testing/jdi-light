@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/Radio-Buttons", {data:[{}],fetch:{},mutations:void 0});

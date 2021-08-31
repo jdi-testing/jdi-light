@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/Simple-Tables", {data:[{}],fetch:{},mutations:void 0});

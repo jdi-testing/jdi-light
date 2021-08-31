@@ -1145,37 +1145,6 @@ body::backdrop {
     z-index: 1;
     position: absolute;
   }
-  .MuiCheckbox-root {
-    color: rgba(0, 0, 0, 0.54);
-  }
-  .MuiCheckbox-colorPrimary.Mui-checked {
-    color: #3f51b5;
-  }
-  .MuiCheckbox-colorPrimary.Mui-disabled {
-    color: rgba(0, 0, 0, 0.26);
-  }
-  .MuiCheckbox-colorPrimary.Mui-checked:hover {
-    background-color: rgba(63, 81, 181, 0.04);
-  }
-@media (hover: none) {
-  .MuiCheckbox-colorPrimary.Mui-checked:hover {
-    background-color: transparent;
-  }
-}
-  .MuiCheckbox-colorSecondary.Mui-checked {
-    color: #f50057;
-  }
-  .MuiCheckbox-colorSecondary.Mui-disabled {
-    color: rgba(0, 0, 0, 0.26);
-  }
-  .MuiCheckbox-colorSecondary.Mui-checked:hover {
-    background-color: rgba(245, 0, 87, 0.04);
-  }
-@media (hover: none) {
-  .MuiCheckbox-colorSecondary.Mui-checked:hover {
-    background-color: transparent;
-  }
-}
   .MuiSwitch-root {
     width: 58px;
     height: 38px;
@@ -1293,6 +1262,163 @@ body::backdrop {
     transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     border-radius: 7px;
     background-color: #000;
+  }
+  .MuiFormControlLabel-root {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-left: -11px;
+    margin-right: 16px;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .MuiFormControlLabel-root.Mui-disabled {
+    cursor: default;
+  }
+  .MuiFormControlLabel-labelPlacementStart {
+    margin-left: 16px;
+    margin-right: -11px;
+    flex-direction: row-reverse;
+  }
+  .MuiFormControlLabel-labelPlacementTop {
+    margin-left: 16px;
+    flex-direction: column-reverse;
+  }
+  .MuiFormControlLabel-labelPlacementBottom {
+    margin-left: 16px;
+    flex-direction: column;
+  }
+  .MuiFormControlLabel-label.Mui-disabled {
+    color: rgba(0, 0, 0, 0.38);
+  }
+  .MuiCheckbox-root {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .MuiCheckbox-colorPrimary.Mui-checked {
+    color: #3f51b5;
+  }
+  .MuiCheckbox-colorPrimary.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+  }
+  .MuiCheckbox-colorPrimary.Mui-checked:hover {
+    background-color: rgba(63, 81, 181, 0.04);
+  }
+@media (hover: none) {
+  .MuiCheckbox-colorPrimary.Mui-checked:hover {
+    background-color: transparent;
+  }
+}
+  .MuiCheckbox-colorSecondary.Mui-checked {
+    color: #f50057;
+  }
+  .MuiCheckbox-colorSecondary.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+  }
+  .MuiCheckbox-colorSecondary.Mui-checked:hover {
+    background-color: rgba(245, 0, 87, 0.04);
+  }
+@media (hover: none) {
+  .MuiCheckbox-colorSecondary.Mui-checked:hover {
+    background-color: transparent;
+  }
+}
+  .MuiFormGroup-root {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .MuiFormGroup-row {
+    flex-direction: row;
+  }
+  .MuiListItemIcon-root {
+    color: rgba(0, 0, 0, 0.54);
+    display: inline-flex;
+    min-width: 56px;
+    flex-shrink: 0;
+  }
+  .MuiListItemIcon-alignItemsFlexStart {
+    margin-top: 8px;
+  }
+  .MuiListItemAvatar-root {
+    min-width: 56px;
+    flex-shrink: 0;
+  }
+  .MuiListItemAvatar-alignItemsFlexStart {
+    margin-top: 8px;
+  }
+  .MuiListItemSecondaryAction-root {
+    top: 50%;
+    right: 16px;
+    position: absolute;
+    transform: translateY(-50%);
+  }
+  .MuiAvatar-root {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    font-size: 1.25rem;
+    align-items: center;
+    flex-shrink: 0;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1;
+    user-select: none;
+    border-radius: 50%;
+    justify-content: center;
+  }
+  .MuiAvatar-colorDefault {
+    color: #fafafa;
+    background-color: #bdbdbd;
+  }
+  .MuiAvatar-rounded {
+    border-radius: 4px;
+  }
+  .MuiAvatar-square {
+    border-radius: 0;
+  }
+  .MuiAvatar-img {
+    color: transparent;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    text-align: center;
+    text-indent: 10000px;
+  }
+  .MuiAvatar-fallback {
+    width: 75%;
+    height: 75%;
+  }
+  .MuiDivider-root {
+    border: none;
+    height: 1px;
+    margin: 0;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+  .MuiDivider-absolute {
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+  }
+  .MuiDivider-inset {
+    margin-left: 72px;
+  }
+  .MuiDivider-light {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+  .MuiDivider-middle {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .MuiDivider-vertical {
+    width: 1px;
+    height: 100%;
+  }
+  .MuiDivider-flexItem {
+    height: auto;
+    align-self: stretch;
   }
   .jss7 {
     width: 100%;

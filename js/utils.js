@@ -468,7 +468,7 @@ function includeSideBar() {
 	var code = '<div name="navigation-sidebar" class="uui-side-bar mCustomScrollbar _mCS_1 mCS_no_scrollbar" style="max-height: inherit; display: block;">\
 	<div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0" style="max-height: inherit;">\
 	    <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">\
-        <ul class="sidebar-menu">\
+        <ul class="sidebar-menu left">\
             <li ui="label" index="1">\
                 <a href="index.html">\
                     <span>Home</span>\
@@ -547,8 +547,11 @@ function includeSideBar() {
                         <span>Angular</span>\
                     </a></li>\
                     <li ui="label" index="8"><a href="material">\
-                                            <span>Material UI</span>\
-                                        </a></li>\
+                        <span>Material UI</span>\
+                    </a></li>\
+                    <li ui="label" index="9"><a href="vuetify">\
+                        <span>Vuetify</span>\
+                    </a></li>\
                 </ul>\
             </li>\
         </ul>\
