@@ -12,18 +12,30 @@ public class TabPage extends WebPage {
     @UI("//button[contains(@aria-controls,'simple-tabpanel')]")
     public static List<Tabs> simpleTabs;
 
+    @UI("//div[starts-with(@id,'simple-tabpanel')]")
+    public static List<Text> simpleTabsContent;
+
     @UI("//button[contains(@aria-controls,'scrollable-auto-tab')]")
     public static List<Tabs> scrollableTabs;
+
+    @UI("//div[starts-with(@id,'scrollable-auto-tabpanel')]")
+    public static List<Text> scrollableTabsContent;
+
+    @UI("//div[@class='MuiTabs-root']//div[contains(@class, 'MuiTabs-scrollButtonsDesktop')]")
+    public static List<Button> buttonHorizontal;
 
     @UI("//button[contains(@aria-controls,'scrollable-prevent-tab')]")
     public static List<Tabs> preventScrollTabs;
 
+    @UI("//div[starts-with(@id,'scrollable-prevent-tabpanel')]")
+    public static List<Text> preventScrollTabsContent;
+
     @UI("//button[contains(@aria-controls,'vertical-tabpanel')]")
     public static List<Tabs> verticalTabs;
 
-    @UI("//p")
-    public static List<Text> lastItemText;
+    @UI("//div[starts-with(@id,'vertical-tabpanel')]")
+    public static List<Text> verticalTabsContent;
 
-    @UI("//*[contains(@class, 'MuiTabs-scrollButtons')]")
-    public static List<Button> scrollButtons;
+    @UI("//div[contains(@class, 'MuiTabScrollButton-vertical')]")
+    public static List<Button> buttonVertical;
 }

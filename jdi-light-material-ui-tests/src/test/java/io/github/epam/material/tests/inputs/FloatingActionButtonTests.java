@@ -62,18 +62,18 @@ public class FloatingActionButtonTests extends TestsInit {
         labelAnimatedLastClick.is().text("Last click:");
 
         tabSections.get(1).click();
-        tabItemOne.is().text("Item One");
+        tabPanelContent.get(1).is().text("Item One");
         buttonAnimatedAdd.click();
         labelAnimatedLastClick.is().text("Last click: Add");
 
         tabSections.get(2).click();
-        tabItemTwo.is().text("Item Two");
+        tabPanelContent.get(2).is().text("Item Two");
         timer.wait(() -> buttonAnimatedEdit.isDisplayed());
         buttonAnimatedEdit.click();
         labelAnimatedLastClick.is().text("Last click: Edit");
 
         tabSections.get(3).click();
-        tabItemThree.is().text("Item Three");
+        tabPanelContent.get(3).is().text("Item Three");
         timer.wait(() -> buttonExpand.isDisplayed());
         buttonExpand.click();
         labelAnimatedLastClick.is().text("Last click: Expand");

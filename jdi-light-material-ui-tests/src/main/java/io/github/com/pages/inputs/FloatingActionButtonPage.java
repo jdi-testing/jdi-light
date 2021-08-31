@@ -37,14 +37,8 @@ public class FloatingActionButtonPage extends WebPage {
     @UI("//button[@aria-label='Expand']")
     public static Button buttonExpand;
 
-    @UI("#action-tabpanel-0")
-    public static Tabs tabItemOne;
-
-    @UI("#action-tabpanel-1")
-    public static Tabs tabItemTwo;
-
-    @UI("#action-tabpanel-2")
-    public static Tabs tabItemThree;
+    @UI("//div[starts-with(@id,'action-tabpanel')]")
+    public static List<Text> tabPanelContent;
 
     @UI("#basicActionBtnsLastClick")
     public static Text labelLastClick;
