@@ -54,9 +54,16 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void splitButtonGroupTest() {
-        splitButtonGroup.expand();
-        splitButtonGroup.has().text("SQUASH AND MERGE");
-        splitButtonGroup.select("Create a merge commit");
-        splitButtonGroup.has().text("CREATE A MERGE COMMIT");
+        splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
+        splitButtonGroup.getButtonByText("Squash and merge").click();
+
+        splitButtonGroup.getButtonByIndex(2).click();
+        splitButtonDropdown.get(1).click();
+        splitButtonGroup.getButtonByIndex(1).has().text("CREATE A MERGE COMMIT");
+
+        splitButtonGroup.getButtonByIndex(2).click();
+        splitButtonDropdown.get(3).has().cssClass("Mui-disabled");
+        splitButtonDropdown.get(2).click();
+        splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
     }
 }
