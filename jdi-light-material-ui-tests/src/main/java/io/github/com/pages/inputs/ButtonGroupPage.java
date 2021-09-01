@@ -3,15 +3,18 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.annotations.JDIButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 
 
 public class ButtonGroupPage extends WebPage {
 
     @UI("//*[@id=\"__next\"]/div/div/div[2]/div/div/div/div[1]/div")
+    @JDIButtonGroup(list = ".MuiButtonGroup-groupedHorizontal")
     public static ButtonGroup basicButtonGroup;
 
     @UI("//*[@id=\"__next\"]/div/div/div[2]/div/div/div/div[2]/div")
+    @JDIButtonGroup(list = ".MuiButton-root")
     public static ButtonGroup verticalButtonGroup;
 
     @JDropdown(

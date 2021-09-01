@@ -2,6 +2,7 @@ package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.*;
@@ -45,6 +46,7 @@ public class ButtonGroupTests extends TestsInit {
     }
 
     @Test
+    @Ignore
     public void disabledButtonGroupTest() {
         basicButtonGroup.getButtonByIndex(1).is().disabled();
         basicButtonGroup.getButtonByText("Two").is().disabled();
