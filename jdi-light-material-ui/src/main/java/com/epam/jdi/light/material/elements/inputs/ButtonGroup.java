@@ -9,6 +9,7 @@ import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
 import org.hamcrest.Matchers;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -46,6 +47,11 @@ public class ButtonGroup extends UIBaseElement<ButtonGroupAssert> implements ISe
         element.click();
     }
 
+    @JDIAction("Get all buttons from group '{name}'")
+    public List<Button> getAllButtons() {
+        return core().finds(BUTTON_PATTERN).map(Button::new);
+    }
+
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDIButtonGroup.class, ButtonGroup.class))
@@ -54,5 +60,10 @@ public class ButtonGroup extends UIBaseElement<ButtonGroupAssert> implements ISe
         mainButton = j.mainButton();
         expand = j.expand();
         list = j.list();
+    }
+
+    @Override
+    public ButtonGroupAssert is() {
+        return new ButtonGroupAssert().set(this);
     }
 }
