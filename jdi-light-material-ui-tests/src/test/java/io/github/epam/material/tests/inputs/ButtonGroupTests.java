@@ -46,13 +46,6 @@ public class ButtonGroupTests extends TestsInit {
     }
 
     @Test
-    @Ignore
-    public void disabledButtonGroupTest() {
-        basicButtonGroup.getButtonByIndex(1).is().disabled();
-        basicButtonGroup.getButtonByText("Two").is().disabled();
-    }
-
-    @Test
     public void splitButtonGroupTest() {
         splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
         splitButtonGroup.getButtonByText("Squash and merge").click();
