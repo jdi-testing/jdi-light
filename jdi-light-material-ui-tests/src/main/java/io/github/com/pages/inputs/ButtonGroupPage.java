@@ -9,19 +9,19 @@ import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 
 public class ButtonGroupPage extends WebPage {
 
-    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[1]/div")
+    @UI("//div[@aria-label = 'outlined primary button group']")
     @JDIButtonGroup(list = ".MuiButtonGroup-groupedHorizontal")
     public static ButtonGroup basicButtonGroup;
 
-    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/div")
+    @UI("//div[@aria-label = 'vertical contained primary button group']")
     @JDIButtonGroup(list = ".MuiButton-root")
     public static ButtonGroup verticalButtonGroup;
 
-    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[3]/div")
+    @UI("//div[@aria-label = 'split button']")
     @JDIButtonGroup(list = ".MuiButtonBase-root")
     public static ButtonGroup splitButtonGroup;
 
-    @UI("//*[@id='split-button-menu']/li")
+    @UI("#split-button-menu")
     public static Menu splitButtonDropdown;
 
 }
