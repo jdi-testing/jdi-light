@@ -1,11 +1,10 @@
 package io.github.com.pages.inputs;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.annotations.JDIButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 
-import java.util.List;
 
 
 public class ButtonGroupPage extends WebPage {
@@ -23,6 +22,6 @@ public class ButtonGroupPage extends WebPage {
     public static ButtonGroup splitButtonGroup;
 
     @UI("//*[@id='split-button-menu']/li")
-    public static List<UIElement> splitButtonDropdown;
+    public static Menu splitButtonDropdown;
 
 }
