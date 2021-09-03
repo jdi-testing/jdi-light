@@ -5,9 +5,16 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.*;
+import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.COLLAPSE;
+import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.FADE;
+import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.GROW;
+import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.SLIDE;
+import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.ZOOM;
 import static io.github.com.StaticSite.transitionPage;
-import static io.github.com.pages.utils.TransitionPage.*;
+import static io.github.com.pages.utils.TransitionPage.checkboxes;
+import static io.github.com.pages.utils.TransitionPage.collapseFadeTransitions;
+import static io.github.com.pages.utils.TransitionPage.growSlideTransitions;
+import static io.github.com.pages.utils.TransitionPage.zoomTransitions;
 
 /**
  * To see an example of Transitions web element please visit
