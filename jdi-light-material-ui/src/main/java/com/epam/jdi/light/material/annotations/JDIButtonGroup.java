@@ -10,10 +10,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDIButtonGroup {
-
-    @MarkupLocator String root() default "";
-    @MarkupLocator String mainButton() default "";
-    @MarkupLocator String expand() default "";
     @MarkupLocator String list() default "";
 
 }
