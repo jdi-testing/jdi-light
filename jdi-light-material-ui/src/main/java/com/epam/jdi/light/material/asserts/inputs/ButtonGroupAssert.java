@@ -6,7 +6,6 @@ import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.MaterialButton;
 import org.hamcrest.Matchers;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;

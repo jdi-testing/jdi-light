@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIButtonGroup;
-import com.epam.jdi.light.material.asserts.inputs.ButtonAssert;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
 
 import java.lang.reflect.Field;
