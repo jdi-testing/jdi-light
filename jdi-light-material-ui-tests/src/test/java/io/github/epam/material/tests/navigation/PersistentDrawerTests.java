@@ -9,7 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.persistentDrawerPage;
-import static io.github.com.pages.navigation.PersistentDrawerPage.*;
+import static io.github.com.pages.navigation.PersistentDrawerPage.drawer;
+import static io.github.com.pages.navigation.PersistentDrawerPage.drawerBackMenuButton;
+import static io.github.com.pages.navigation.PersistentDrawerPage.drawerElementsIcon;
+import static io.github.com.pages.navigation.PersistentDrawerPage.drawerElementsText;
+import static io.github.com.pages.navigation.PersistentDrawerPage.drawerSandwichMenuButton;
+import static io.github.com.pages.navigation.ResponsiveDrawerPage.drawerContent;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 

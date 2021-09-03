@@ -10,7 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.temporaryDrawerPage;
-import static io.github.com.pages.navigation.TemporaryDrawerPage.*;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.bottomButton;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.drawer;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.drawerElementsIcon;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.drawerElementsText;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.leftButton;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.rightButton;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.topButton;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 

@@ -10,7 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.swipeableDrawerPage;
-import static io.github.com.pages.navigation.SwipeableDrawerPage.*;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.bottomButton;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.drawer;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.drawerElementsIcon;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.drawerElementsText;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.leftButton;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.rightButton;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.topButton;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 

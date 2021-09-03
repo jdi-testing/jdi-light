@@ -10,7 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.miniDrawerPage;
-import static io.github.com.pages.navigation.MiniDrawerPage.*;
+import static io.github.com.pages.navigation.MiniDrawerPage.drawer;
+import static io.github.com.pages.navigation.MiniDrawerPage.drawerBackMenuButton;
+import static io.github.com.pages.navigation.MiniDrawerPage.drawerContent;
+import static io.github.com.pages.navigation.MiniDrawerPage.drawerElementsIcon;
+import static io.github.com.pages.navigation.MiniDrawerPage.drawerElementsText;
+import static io.github.com.pages.navigation.MiniDrawerPage.drawerSandwichMenuButton;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 

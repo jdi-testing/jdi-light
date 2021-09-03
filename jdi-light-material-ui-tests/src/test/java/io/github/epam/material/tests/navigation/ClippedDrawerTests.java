@@ -9,7 +9,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.clippedDrawerPage;
-import static io.github.com.pages.navigation.ClippedDrawerPage.*;
+import static io.github.com.pages.navigation.ClippedDrawerPage.drawer;
+import static io.github.com.pages.navigation.ClippedDrawerPage.drawerContent;
+import static io.github.com.pages.navigation.ClippedDrawerPage.drawerElementsIcon;
+import static io.github.com.pages.navigation.ClippedDrawerPage.drawerElementsText;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.assertEquals;
 
