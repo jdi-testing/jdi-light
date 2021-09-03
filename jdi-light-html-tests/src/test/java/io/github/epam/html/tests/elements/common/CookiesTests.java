@@ -11,8 +11,11 @@ import java.net.URISyntaxException;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
