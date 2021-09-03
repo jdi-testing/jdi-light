@@ -5,7 +5,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.boxPage;
-import static io.github.com.pages.layout.BoxPage.*;
+import static io.github.com.pages.layout.BoxPage.containedBox;
+import static io.github.com.pages.layout.BoxPage.disabledBox;
+import static io.github.com.pages.layout.BoxPage.lastClickContent;
+import static io.github.com.pages.layout.BoxPage.outlinedBox;
 
 /**
  * To see an example of Box web element please visit

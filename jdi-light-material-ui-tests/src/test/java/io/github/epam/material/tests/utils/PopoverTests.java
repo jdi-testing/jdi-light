@@ -5,7 +5,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.popoverPage;
-import static io.github.com.pages.utils.PopoverPage.*;
+import static io.github.com.pages.utils.PopoverPage.buttonToClick;
+import static io.github.com.pages.utils.PopoverPage.popoverContent;
+import static io.github.com.pages.utils.PopoverPage.popoverHoverField;
 
 /**
  * To see an example of Modal web element please visit

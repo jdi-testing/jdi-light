@@ -2,11 +2,13 @@ package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.inputs.ButtonGroupPage.*;
+import static io.github.com.StaticSite.buttonGroupPage;
+import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonDropdown;
+import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.verticalButtonGroup;
 
 public class ButtonGroupTests extends TestsInit {
 

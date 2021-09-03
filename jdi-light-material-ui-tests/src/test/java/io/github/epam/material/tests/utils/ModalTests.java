@@ -5,7 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.modalPage;
-import static io.github.com.pages.utils.ModalPage.*;
+import static io.github.com.pages.utils.ModalPage.buttonModal;
+import static io.github.com.pages.utils.ModalPage.modalTexts;
 
 /**
  * To see an example of Modal web element please visit

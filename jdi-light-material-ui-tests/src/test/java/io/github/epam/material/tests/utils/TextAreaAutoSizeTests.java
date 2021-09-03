@@ -6,9 +6,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.textAreaAutoSizePage;
-import static io.github.com.pages.utils.TextAreaAutoSizePage.*;
+import static io.github.com.pages.utils.TextAreaAutoSizePage.emptyTextArea;
+import static io.github.com.pages.utils.TextAreaAutoSizePage.maxArea;
+import static io.github.com.pages.utils.TextAreaAutoSizePage.minArea;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThan;
 
 /**
  * To see an example of text field auto size functionality visit

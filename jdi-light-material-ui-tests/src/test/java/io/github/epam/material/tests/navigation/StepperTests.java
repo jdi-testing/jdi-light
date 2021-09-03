@@ -7,7 +7,18 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.stepperPage;
-import static io.github.com.pages.navigation.StepperPage.*;
+import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperButton;
+import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperTitle;
+import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperButton;
+import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperTitle;
+import static io.github.com.pages.navigation.StepperPage.mobileTextStepperButton;
+import static io.github.com.pages.navigation.StepperPage.mobileTextStepperTitle;
+import static io.github.com.pages.navigation.StepperPage.nonlinearStepperButton;
+import static io.github.com.pages.navigation.StepperPage.nonlinearStepperTitle;
+import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperButton;
+import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperTitle;
+import static io.github.com.pages.navigation.StepperPage.verticalStepperButton;
+import static io.github.com.pages.navigation.StepperPage.verticalStepperTitle;
 
 /**
  * To see an example of Steppers please visit
