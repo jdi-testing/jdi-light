@@ -2,7 +2,6 @@ package com.epam.jdi.light.material.asserts.inputs;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.inputs.Button;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import org.checkerframework.checker.units.qual.A;
 import org.hamcrest.Matchers;

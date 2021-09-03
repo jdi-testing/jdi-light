@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIButtonGroup;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.hamcrest.Matchers;
 
 import java.lang.reflect.Field;
@@ -24,20 +25,22 @@ public class ButtonGroup extends UIBaseElement<ButtonGroupAssert> implements ISe
     String expand;
     String list;
 
-    @JDIAction("Get Button with index '{0}'")
-    public Button getButtonByIndex(int index) {
-        return new Button(core().finds(BUTTON_PATTERN).get(index));
-    }
+//    Refactoring of three tests is required. Parameters should be removed
 
-    @JDIAction("Get Button with text '{0}'")
-    public Button getButtonByText(String text) {
-        return new Button(core().find(String.format(BUTTON_WITH_TEXT_PATTERN, text)));
-    }
-
-    @JDIAction("Get main button")
-    public Button getMainButton() {
-        return new Button(core().find(mainButton));
-    }
+//    @JDIAction("Get Button with index '{0}'")
+//    public Button getButtonByIndex(int index) {
+//        return new Button(core().finds(BUTTON_PATTERN).get(index));
+//    }
+//
+//    @JDIAction("Get Button with text '{0}'")
+//    public Button getButtonByText(String text) {
+//        return new Button(core().find(String.format(BUTTON_WITH_TEXT_PATTERN, text)));
+//    }
+//
+//    @JDIAction("Get main button")
+//    public Button getMainButton() {
+//        return new Button(core().find(mainButton));
+//    }
 
     @JDIAction("Select '{0}' item in '{name}'")
     public void select(String item) {
@@ -47,10 +50,12 @@ public class ButtonGroup extends UIBaseElement<ButtonGroupAssert> implements ISe
         element.click();
     }
 
-    @JDIAction("Get all buttons from group '{name}'")
-    public List<Button> getAllButtons() {
-        return core().finds(BUTTON_PATTERN).map(Button::new);
-    }
+//    @JDIAction("Get all buttons from group '{name}'")
+//    public List<Button> getAllButtons() {
+//        Put the variable which returns group of buttons instead of BUTTON_PATTERN variable which returns
+//        all the buttons from the page
+//        return core().finds(BUTTON_PATTERN).map(Button::new);
+//    }
 
     @Override
     public void setup(Field field) {
