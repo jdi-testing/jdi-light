@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.annotations.JDIProgressBar;
 import com.epam.jdi.light.material.elements.feedback.ProgressBar;
-import com.epam.jdi.light.material.elements.inputs.Button;
+import com.epam.jdi.light.material.elements.inputs.MaterialButton;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ProgressPage extends WebPage {
@@ -48,19 +48,19 @@ public class ProgressPage extends WebPage {
     public static ProgressBar linearWithLabel;
 
     @UI("//button[@aria-label='save']")
-    public static Button interactiveIntegrationCircularButton;
+    public static MaterialButton interactiveIntegrationCircularButton;
 
     @JDIProgressBar(root = "//button[@aria-label='save']/following-sibling::div")
     public static ProgressBar interactiveIntegrationCircularIndeterminate;
 
     @UI("//*[text()='Loading']/..")
-    public static Button startLoadingButton;
+    public static MaterialButton startLoadingButton;
 
     @JDIProgressBar(root = "//*[text()='Stop loading']/../../div/div")
     public static ProgressBar loadingCircularIndeterminate;
 
     @UI("//*[text()='Simulate a load']")
-    public static Button simulateLoadButton;
+    public static MaterialButton simulateLoadButton;
 
     @JDIProgressBar(root = "//*[text()='Reset']/../preceding-sibling::div[1]/div")
     public static ProgressBar simulateLoadCircularIndeterminate;
