@@ -5,7 +5,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.buttonPage;
-import static io.github.com.pages.inputs.ButtonPage.*;
+import static io.github.com.pages.inputs.ButtonPage.complexButtons;
+import static io.github.com.pages.inputs.ButtonPage.containedButtons;
+import static io.github.com.pages.inputs.ButtonPage.customizedButtons;
+import static io.github.com.pages.inputs.ButtonPage.iconButtonIcons;
+import static io.github.com.pages.inputs.ButtonPage.iconButtons;
+import static io.github.com.pages.inputs.ButtonPage.iconLabelButtons;
+import static io.github.com.pages.inputs.ButtonPage.iconLabelIcons;
+import static io.github.com.pages.inputs.ButtonPage.textButtons;
 
 /**
  * To see an example of Button web element please visit

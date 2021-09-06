@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.displaydata.Lists;
 import com.epam.jdi.light.material.elements.navigation.Breadcrumbs;
 
-import java.util.List;
 
 /**
  * To see an example of a Breadcrumbs web element, please visit

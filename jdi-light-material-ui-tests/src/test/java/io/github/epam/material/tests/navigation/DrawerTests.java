@@ -1,8 +1,14 @@
 package io.github.epam.material.tests.navigation;
 
-import static io.github.com.StaticSite.*;
-import static org.testng.Assert.*;
+import static io.github.com.StaticSite.clippedDrawerPage;
+import static io.github.com.StaticSite.miniDrawerPage;
+import static io.github.com.StaticSite.permanentDrawerPage;
+import static io.github.com.StaticSite.persistentDrawerPage;
+import static io.github.com.StaticSite.responsiveDrawerPage;
+import static io.github.com.StaticSite.swipeableDrawerPage;
+import static io.github.com.StaticSite.temporaryDrawerPage;
 import static org.hamcrest.Matchers.containsString;
+import static org.testng.Assert.assertEquals;
 
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.tools.Timer;

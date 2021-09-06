@@ -4,8 +4,11 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.inputs.ButtonGroupPage.*;
+import static io.github.com.StaticSite.buttonGroupPage;
+import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonDropdown;
+import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.verticalButtonGroup;
 
 public class ButtonGroupTests extends TestsInit {
 
@@ -45,16 +48,17 @@ public class ButtonGroupTests extends TestsInit {
     }
 
     @Test
-    public void disabledButtonGroupTest() {
-        basicButtonGroup.getButtonByIndex(1).is().disabled();
-        basicButtonGroup.getButtonByText("Two").is().disabled();
-    }
-
-    @Test
     public void splitButtonGroupTest() {
-        splitButtonGroup.expand();
-        splitButtonGroup.has().text("SQUASH AND MERGE");
-        splitButtonGroup.select("Create a merge commit");
-        splitButtonGroup.has().text("CREATE A MERGE COMMIT");
+        splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
+        splitButtonGroup.getButtonByText("Squash and merge").click();
+
+        splitButtonGroup.getButtonByIndex(2).click();
+        splitButtonDropdown.get(1).click();
+        splitButtonGroup.getButtonByIndex(1).has().text("CREATE A MERGE COMMIT");
+
+        splitButtonGroup.getButtonByIndex(2).click();
+        splitButtonDropdown.get(3).has().cssClass("Mui-disabled");
+        splitButtonDropdown.get(2).click();
+        splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
     }
 }

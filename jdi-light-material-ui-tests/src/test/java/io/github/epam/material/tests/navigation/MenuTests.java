@@ -4,9 +4,20 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.navigation.SimpleMenuPage.*;
-import static io.github.com.pages.navigation.ContextMenuPage.*;
+import static io.github.com.StaticSite.contextMenuPage;
+import static io.github.com.StaticSite.simpleMenuPage;
+import static io.github.com.pages.navigation.ContextMenuPage.contextMenu;
+import static io.github.com.pages.navigation.ContextMenuPage.menuContextListLastButton;
+import static io.github.com.pages.navigation.SimpleMenuPage.iconMenu;
+import static io.github.com.pages.navigation.SimpleMenuPage.menu;
+import static io.github.com.pages.navigation.SimpleMenuPage.menuList;
+import static io.github.com.pages.navigation.SimpleMenuPage.menuListFirstButton;
+import static io.github.com.pages.navigation.SimpleMenuPage.menuListLastButton;
+import static io.github.com.pages.navigation.SimpleMenuPage.menuSelectedField;
+import static io.github.com.pages.navigation.SimpleMenuPage.paddingMenuList;
+import static io.github.com.pages.navigation.SimpleMenuPage.scrollMenu;
+import static io.github.com.pages.navigation.SimpleMenuPage.scrollMenuList;
+import static io.github.com.pages.navigation.SimpleMenuPage.selelectedMenu;
 
 public class MenuTests extends TestsInit {
 
