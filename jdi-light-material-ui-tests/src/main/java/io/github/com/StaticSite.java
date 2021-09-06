@@ -106,15 +106,8 @@ public class StaticSite {
     @Url("/button_groups")
     public static ButtonGroupPage buttonGroupPage;
 
-    @Url("/material-ui-inputs-button-group--default")
-    public static WebPage inputButtonGroupDefaultPage;
 
-    @Url("/material-ui-inputs-button-group--disabled")
-    public static WebPage inputButtonGroupDisabledPage;
-
-    @Url("/button_groups")
-    public static WebPage inputButtonGroupSplitPage;
-
+    // selects
     @Url("/selects")
     public static SelectPage selectPage;
 
