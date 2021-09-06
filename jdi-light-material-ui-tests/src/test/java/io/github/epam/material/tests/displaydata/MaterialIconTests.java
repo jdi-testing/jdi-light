@@ -5,7 +5,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.materialIconPage;
-import static io.github.com.pages.displaydata.MaterialIconPage.*;
+import static io.github.com.pages.displaydata.MaterialIconPage.iconsList;
+import static io.github.com.pages.displaydata.MaterialIconPage.lastClick;
+import static io.github.com.pages.displaydata.MaterialIconPage.lastHover;
 import static org.testng.Assert.assertTrue;
 
 /**

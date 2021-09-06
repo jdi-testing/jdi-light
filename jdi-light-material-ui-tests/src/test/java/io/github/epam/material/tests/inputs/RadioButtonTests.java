@@ -10,7 +10,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.radioButtonPage;
-import static io.github.com.pages.inputs.RadioButtonPage.*;
+import static io.github.com.pages.inputs.RadioButtonPage.checkAnswer;
+import static io.github.com.pages.inputs.RadioButtonPage.errorText;
+import static io.github.com.pages.inputs.RadioButtonPage.labelPlacementButtons;
+import static io.github.com.pages.inputs.RadioButtonPage.labelPlacementButtonsClass;
+import static io.github.com.pages.inputs.RadioButtonPage.lastRadioText;
+import static io.github.com.pages.inputs.RadioButtonPage.showErrorButtons;
+import static io.github.com.pages.inputs.RadioButtonPage.simpleRadioButtons;
+import static io.github.com.pages.inputs.RadioButtonPage.simpleRadioButtonsLabel;
 import static org.hamcrest.Matchers.containsString;
 
 /**

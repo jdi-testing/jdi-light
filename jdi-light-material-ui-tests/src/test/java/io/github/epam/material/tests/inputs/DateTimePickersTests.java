@@ -6,7 +6,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.dateTimePickersPage;
-import static io.github.com.pages.inputs.DateTimePickersPage.*;
+import static io.github.com.pages.inputs.DateTimePickersPage.alarmPicker;
+import static io.github.com.pages.inputs.DateTimePickersPage.appointmentPicker;
+import static io.github.com.pages.inputs.DateTimePickersPage.birthdayPicker;
+import static io.github.com.pages.inputs.DateTimePickersPage.dialogPicker;
+import static io.github.com.pages.inputs.DateTimePickersPage.inlineDatePicker;
+import static io.github.com.pages.inputs.DateTimePickersPage.timePicker;
 import static org.hamcrest.Matchers.containsString;
 
 /**

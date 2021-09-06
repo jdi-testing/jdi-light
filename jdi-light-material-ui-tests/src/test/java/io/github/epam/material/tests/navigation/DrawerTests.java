@@ -1,9 +1,24 @@
 package io.github.epam.material.tests.navigation;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.navigation.DrawerPage.*;
-import static org.testng.Assert.*;
+import static io.github.com.StaticSite.clippedDrawerPage;
+import static io.github.com.StaticSite.miniDrawerPage;
+import static io.github.com.StaticSite.permanentDrawerPage;
+import static io.github.com.StaticSite.persistentDrawerPage;
+import static io.github.com.StaticSite.responsiveDrawerPage;
+import static io.github.com.StaticSite.swipeableDrawerPage;
+import static io.github.com.StaticSite.temporaryDrawerPage;
+import static io.github.com.pages.navigation.DrawerPage.bottomButton;
+import static io.github.com.pages.navigation.DrawerPage.drawer;
+import static io.github.com.pages.navigation.DrawerPage.drawerBackMenuButton;
+import static io.github.com.pages.navigation.DrawerPage.drawerContent;
+import static io.github.com.pages.navigation.DrawerPage.drawerElementsIcon;
+import static io.github.com.pages.navigation.DrawerPage.drawerElementsText;
+import static io.github.com.pages.navigation.DrawerPage.drawerSandwichMenuButton;
+import static io.github.com.pages.navigation.DrawerPage.leftButton;
+import static io.github.com.pages.navigation.DrawerPage.rightButton;
+import static io.github.com.pages.navigation.DrawerPage.topButton;
 import static org.hamcrest.Matchers.containsString;
+import static org.testng.Assert.assertEquals;
 
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.tools.Timer;

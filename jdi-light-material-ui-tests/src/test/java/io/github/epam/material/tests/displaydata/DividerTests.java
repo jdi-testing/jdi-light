@@ -2,7 +2,8 @@ package io.github.epam.material.tests.displaydata;
 
 import static io.github.com.StaticSite.insetDividersPage;
 import static io.github.com.StaticSite.verticalDividerPage;
-import static io.github.com.pages.displaydata.DividersPage.*;
+import static io.github.com.pages.displaydata.DividersPage.insetDivider;
+import static io.github.com.pages.displaydata.DividersPage.verticalDivider;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
