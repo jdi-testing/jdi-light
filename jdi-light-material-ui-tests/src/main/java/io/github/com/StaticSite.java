@@ -246,19 +246,6 @@ public class StaticSite {
     @Url("/use_media_query")
     public static UseMediaQueryPage useMediaQueryPage;
 
-    // utils
-    // Click away listener
-
-    @Frame("storybook-preview-iframe")
-    public static ClickAwayListenerPage clickAwayListenerFrame;
-
-
-    @Url("/material-ui-utils-click-away-listener--default")
-    public static WebPage utilsClickAwayListenerDefaultPage;
-
-    @Url("/material-ui-utils-click-away-listener--portal-example")
-    public static WebPage utilsClickAwayListenerPortalExamplePage;
-
     // portal
     @Url("/portal")
     public static PortalPage portalPage;
