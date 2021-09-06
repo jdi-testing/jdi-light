@@ -11,7 +11,12 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static io.github.com.StaticSite.hiddenPage;
-import static io.github.com.pages.layout.HiddenPage.*;
+import static io.github.com.pages.layout.HiddenPage.currentWidth;
+import static io.github.com.pages.layout.HiddenPage.lgDown;
+import static io.github.com.pages.layout.HiddenPage.mdDown;
+import static io.github.com.pages.layout.HiddenPage.smDown;
+import static io.github.com.pages.layout.HiddenPage.xlDown;
+import static io.github.com.pages.layout.HiddenPage.xsDown;
 
 /**
  * To see an example of Hidden web element please visit

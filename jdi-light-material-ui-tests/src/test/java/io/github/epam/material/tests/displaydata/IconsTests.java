@@ -11,7 +11,20 @@ import java.util.List;
 import java.util.Map;
 
 import static io.github.com.StaticSite.iconsPage;
-import static io.github.com.pages.displaydata.IconsPage.*;
+import static io.github.com.pages.displaydata.IconsPage.color;
+import static io.github.com.pages.displaydata.IconsPage.colorLastClick;
+import static io.github.com.pages.displaydata.IconsPage.colorLastHover;
+import static io.github.com.pages.displaydata.IconsPage.edgeCase;
+import static io.github.com.pages.displaydata.IconsPage.filled;
+import static io.github.com.pages.displaydata.IconsPage.outlined;
+import static io.github.com.pages.displaydata.IconsPage.rounded;
+import static io.github.com.pages.displaydata.IconsPage.sharp;
+import static io.github.com.pages.displaydata.IconsPage.simpleLastClick;
+import static io.github.com.pages.displaydata.IconsPage.simpleLastHover;
+import static io.github.com.pages.displaydata.IconsPage.size;
+import static io.github.com.pages.displaydata.IconsPage.sizeLastClick;
+import static io.github.com.pages.displaydata.IconsPage.sizeLastHover;
+import static io.github.com.pages.displaydata.IconsPage.twoTone;
 
 /**
  * To see an example of Icons web element please visit

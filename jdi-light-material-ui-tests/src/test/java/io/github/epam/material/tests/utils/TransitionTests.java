@@ -6,7 +6,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.transitionPage;
-import static io.github.com.pages.utils.TransitionPage.*;
+import static io.github.com.pages.utils.TransitionPage.checkboxes;
+import static io.github.com.pages.utils.TransitionPage.collapseFadeTransitions;
+import static io.github.com.pages.utils.TransitionPage.growSlideTransitions;
+import static io.github.com.pages.utils.TransitionPage.zoomTransitions;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 

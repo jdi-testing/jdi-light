@@ -6,7 +6,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.simpleBreadcrumbsPage;
-import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.*;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.breadcrumbsWithIcons;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.collapsedBreadcrumbs;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.collapsedButton;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.coreElement;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customSeparatorBreadcrumbs;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customizedBreadcrumbs;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.materialElement;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.simpleBreadcrumbs;
 
 /**
  * To see an example of a Breadcrumbs web element, please visit

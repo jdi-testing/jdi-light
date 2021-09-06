@@ -6,7 +6,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.slidersPage;
-import static io.github.com.pages.inputs.SlidersPage.*;
+import static io.github.com.pages.inputs.SlidersPage.continuousSlider;
+import static io.github.com.pages.inputs.SlidersPage.disabledContinuousSlider;
+import static io.github.com.pages.inputs.SlidersPage.disabledDiscreteSlider;
+import static io.github.com.pages.inputs.SlidersPage.discreteSlider;
+import static io.github.com.pages.inputs.SlidersPage.inputSlider;
+import static io.github.com.pages.inputs.SlidersPage.inputSliderField;
+import static io.github.com.pages.inputs.SlidersPage.labelSlider;
+import static io.github.com.pages.inputs.SlidersPage.rangeSlider;
+import static io.github.com.pages.inputs.SlidersPage.restrictedDiscreteSlider;
+import static io.github.com.pages.inputs.SlidersPage.verticalSlider;
 
 /**
  * To see an example of Slider web element please visit
