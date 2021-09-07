@@ -30,13 +30,4 @@ public class SwipableDrawerPage extends WebPage {
 
     @UI("//ul[contains(@class,'MuiList-padding')]//div[@class='MuiListItemIcon-root']")
     public static List<Drawer> drawerElementsIcon;
-
-    @UI("//p[contains(@class,'MuiTypography-root')]")
-    public static List<Text> drawerContent;
-
-    @UI("//button[@aria-label='open drawer']")
-    public static Button drawerSandwichMenuButton;
-
-    @UI("//div[contains(@class,'MuiDrawer-paper')]//button[contains(@class,'MuiButtonBase-root')]")
-    public static Button drawerBackMenuButton;
 }
