@@ -6,8 +6,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.inputs.SelectAssert;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 import java.util.NoSuchElementException;

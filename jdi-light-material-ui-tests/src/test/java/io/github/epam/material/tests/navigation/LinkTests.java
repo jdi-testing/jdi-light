@@ -5,7 +5,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.linkPage;
-import static io.github.com.pages.navigation.LinkPage.*;
+import static io.github.com.pages.navigation.LinkPage.bodyLink;
+import static io.github.com.pages.navigation.LinkPage.inheritColorLink;
+import static io.github.com.pages.navigation.LinkPage.link;
+import static io.github.com.pages.navigation.LinkPage.underLinedLink;
 import static org.hamcrest.Matchers.hasToString;
 
 public class LinkTests extends TestsInit {

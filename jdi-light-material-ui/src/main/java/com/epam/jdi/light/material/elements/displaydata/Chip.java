@@ -9,8 +9,9 @@ import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
+
+import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 
 public class Chip extends UIBaseElement<ChipAssert> implements ISetup {
 

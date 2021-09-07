@@ -5,8 +5,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.badgePage;
+import static io.github.com.pages.displaydata.BadgePage.badge;
+import static io.github.com.pages.displaydata.BadgePage.badgeButton;
+import static io.github.com.pages.displaydata.BadgePage.badgeCounter;
+import static io.github.com.pages.displaydata.BadgePage.badgeCounterWithDifferentPosition;
+import static io.github.com.pages.displaydata.BadgePage.badgeDifferentPosition;
+import static io.github.com.pages.displaydata.BadgePage.badgeSwitch;
+import static io.github.com.pages.displaydata.BadgePage.badgeWithVariableCounter;
+import static io.github.com.pages.displaydata.BadgePage.dotBadge;
+import static io.github.com.pages.displaydata.BadgePage.dot;
 import static org.hamcrest.Matchers.containsString;
-import static io.github.com.pages.displaydata.BadgePage.*;
 import static org.hamcrest.Matchers.not;
 
 /**

@@ -5,7 +5,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.clickAwayListenerPage;
-import static io.github.com.pages.utils.ClickAwayListenerPage.*;
+import static io.github.com.pages.utils.ClickAwayListenerPage.exampleButton;
+import static io.github.com.pages.utils.ClickAwayListenerPage.portalButton;
+import static io.github.com.pages.utils.ClickAwayListenerPage.text;
 
 /**
  * To see an example of Click Away Listener web element please visit https://material-ui.com/ru/components/click-away-listener/

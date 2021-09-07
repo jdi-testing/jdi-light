@@ -110,18 +110,8 @@ public class StaticSite {
     // button group
     @Url("/button_groups")
     public static ButtonGroupPage buttonGroupPage;
-
-//    Did not find this pages on Material-UI site
-
-//    @Url("/material-ui-inputs-button-group--default")
-//    public static WebPage inputButtonGroupDefaultPage;
-//
-//    @Url("/material-ui-inputs-button-group--disabled")
-//    public static WebPage inputButtonGroupDisabledPage;
-//
-//    @Url("/button_groups")
-//    public static WebPage inputButtonGroupSplitPage;
-
+  
+    // selects
     @Url("/selects")
     public static SelectPage selectPage;
 
@@ -253,20 +243,6 @@ public class StaticSite {
     @Url("/use_media_query")
     public static UseMediaQueryPage useMediaQueryPage;
 
-    // utils
-    // Click away listener
-
-    @Frame("storybook-preview-iframe")
-    public static ClickAwayListenerPage clickAwayListenerFrame;
-
-//    Did not find it
-
-//    @Url("/material-ui-utils-click-away-listener--default")
-//    public static WebPage utilsClickAwayListenerDefaultPage;
-//
-//    @Url("/material-ui-utils-click-away-listener--portal-example")
-//    public static WebPage utilsClickAwayListenerPortalExamplePage;
-
     // portal
     @Url("/portal")
     public static PortalPage portalPage;
@@ -279,7 +255,6 @@ public class StaticSite {
 
     @Url("/router_breadcrumbs")
     public static RouterBreadcrumbsPage routerBreadcrumbsPage;
-
 
     // drawer
     @Url("/temporary_drawer")
