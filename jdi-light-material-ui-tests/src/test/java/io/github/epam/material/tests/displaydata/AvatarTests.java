@@ -9,7 +9,9 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static io.github.com.StaticSite.avatarPage;
-import static io.github.com.pages.displaydata.AvatarPage.*;
+import static io.github.com.pages.displaydata.AvatarPage.avatarWithPhoto;
+import static io.github.com.pages.displaydata.AvatarPage.avatarWithoutPhoto;
+import static io.github.com.pages.displaydata.AvatarPage.onlineStatus;
 
 /**
  * To see an example of Avatar web element please visit https://material-ui.com/ru/components/avatars/

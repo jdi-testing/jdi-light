@@ -112,15 +112,8 @@ public class StaticSite {
     @Url("/button_groups")
     public static ButtonGroupPage buttonGroupPage;
 
-    @Url("/material-ui-inputs-button-group--default")
-    public static WebPage inputButtonGroupDefaultPage;
 
-    @Url("/material-ui-inputs-button-group--disabled")
-    public static WebPage inputButtonGroupDisabledPage;
-
-    @Url("/button_groups")
-    public static WebPage inputButtonGroupSplitPage;
-
+    // selects
     @Url("/selects")
     public static SelectPage selectPage;
 
@@ -221,9 +214,6 @@ public class StaticSite {
     @Url("/backdrop")
     public static BackdropPage backdropPage;
 
-    @Url("/material-ui-feedback-backdrop--default-backdrop")
-    public static WebPage feedbackBackdropDefaultPage;
-
     // circular
     @Url("/progress")
     public static ProgressPage progressPage;
@@ -255,25 +245,9 @@ public class StaticSite {
     @Url("/use_media_query")
     public static UseMediaQueryPage useMediaQueryPage;
 
-    // utils
-    // Click away listener
-
-    @Frame("storybook-preview-iframe")
-    public static ClickAwayListenerPage clickAwayListenerFrame;
-
-
-    @Url("/material-ui-utils-click-away-listener--default")
-    public static WebPage utilsClickAwayListenerDefaultPage;
-
-    @Url("/material-ui-utils-click-away-listener--portal-example")
-    public static WebPage utilsClickAwayListenerPortalExamplePage;
-
     // portal
-    @Url("portal")
+    @Url("/portal")
     public static PortalPage portalPage;
-
-    @Url("/material-ui-utils-portal--default")
-    public static WebPage defaultPortalPage;
 
     // navigation
     // breadcrumbs

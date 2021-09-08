@@ -10,7 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.tabPage;
-import static io.github.com.pages.navigation.TabPage.*;
+import static io.github.com.pages.navigation.TabPage.lastItemText;
+import static io.github.com.pages.navigation.TabPage.preventScrollTabs;
+import static io.github.com.pages.navigation.TabPage.scrollButtons;
+import static io.github.com.pages.navigation.TabPage.scrollableTabs;
+import static io.github.com.pages.navigation.TabPage.simpleTabs;
+import static io.github.com.pages.navigation.TabPage.verticalTabs;
 import static org.hamcrest.Matchers.containsString;
 
 /**

@@ -5,7 +5,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.gridPage;
-import static io.github.com.pages.layout.GridPage.*;
+import static io.github.com.pages.layout.GridPage.basicGrid;
+import static io.github.com.pages.layout.GridPage.complexGrid;
+import static io.github.com.pages.layout.GridPage.listButton;
+import static io.github.com.pages.layout.GridPage.listInput;
+import static io.github.com.pages.layout.GridPage.rootGrid;
 
 /**
  * To see an example of Grid web element please visit

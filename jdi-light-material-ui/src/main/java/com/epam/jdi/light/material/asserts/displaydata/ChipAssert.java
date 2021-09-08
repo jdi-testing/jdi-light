@@ -6,33 +6,51 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.material.elements.displaydata.Chip;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
-import org.hamcrest.Matcher;
-import static org.hamcrest.Matchers.containsString;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static org.hamcrest.Matchers.containsString;
 
 public class ChipAssert extends UIAssert<ChipAssert, Chip> {
-    @JDIAction("Assert that chip label with index {index} is displayed")
-    public ChipAssert displayed(final int index) {
-        jdiAssert(element().getChipLabel(index).isDisplayed(), Matchers.is(true));
+
+    @JDIAction("Assert that chip {name} label is displayed")
+    public ChipAssert displayed() {
+        jdiAssert(element().getChipLabel().isDisplayed(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that of chip label {index} text is '{0}'")
-    public ChipAssert text(final int index, Matcher<String> condition) {
-        jdiAssert(element().getChipLabel(index).getText(), condition);
+    @JDIAction("Assert that chip {name} label is not displayed")
+    public ChipAssert notDisplayed() {
+        jdiAssert(element().getChipLabel().isDisplayed(), Matchers.is(false));
         return this;
     }
 
-    @JDIAction("Assert that chip root with index {index} is disabled")
-    public ChipAssert disabled(final int index){
-        element().getChipRoot(index).is().classValue(containsString("Mui-disabled"));
+    @JDIAction("Assert that of chip label {name} text is '{0}'")
+    public ChipAssert text(String text) {
+        jdiAssert(element().getChipLabel().getText(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that chip root with index {index} is clickable")
-    public ChipAssert clickable(final int index){
-        jdiAssert(element().getChipLabel(index).isClickable(), Matchers.is(true));
+    @JDIAction("Assert that chip {name} root is disabled")
+    public ChipAssert disabled(){
+        element().has().classValue(containsString("Mui-disabled"));
+        return this;
+    }
+
+    @JDIAction("Assert that chip {name} is deletable")
+    public ChipAssert deletable() {
+        jdiAssert(element().isDeletable(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that chip {name} is not deletable")
+    public ChipAssert notDeletable() {
+        jdiAssert(element().isDeletable(), Matchers.is(false));
+        return this;
+    }
+
+    @JDIAction("Assert that chip {name} root is clickable")
+    public ChipAssert clickable() {
+        jdiAssert(element().getChipLabel().isClickable(), Matchers.is(true));
         return this;
     }
 
