@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.ui.html.elements.common.Icon;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -11,7 +11,20 @@ import java.util.List;
 import java.util.Map;
 
 import static io.github.com.StaticSite.iconsPage;
-import static io.github.com.pages.displaydata.IconsPage.*;
+import static io.github.com.pages.displaydata.IconsPage.color;
+import static io.github.com.pages.displaydata.IconsPage.colorLastClick;
+import static io.github.com.pages.displaydata.IconsPage.colorLastHover;
+import static io.github.com.pages.displaydata.IconsPage.edgeCase;
+import static io.github.com.pages.displaydata.IconsPage.filled;
+import static io.github.com.pages.displaydata.IconsPage.outlined;
+import static io.github.com.pages.displaydata.IconsPage.rounded;
+import static io.github.com.pages.displaydata.IconsPage.sharp;
+import static io.github.com.pages.displaydata.IconsPage.simpleLastClick;
+import static io.github.com.pages.displaydata.IconsPage.simpleLastHover;
+import static io.github.com.pages.displaydata.IconsPage.size;
+import static io.github.com.pages.displaydata.IconsPage.sizeLastClick;
+import static io.github.com.pages.displaydata.IconsPage.sizeLastHover;
+import static io.github.com.pages.displaydata.IconsPage.twoTone;
 
 /**
  * To see an example of Icons web element please visit
@@ -36,7 +49,7 @@ public class IconsTests extends TestsInit {
         simpleLastClick.is().text("Last click:");
         simpleLastHover.is().text("Last hover:");
 
-        Map<UIElement, List<List<String>>> allSimpleIcons = new LinkedHashMap<>();
+        Map<Icon, List<List<String>>> allSimpleIcons = new LinkedHashMap<>();
         allSimpleIcons.put(filled.get(1), Arrays.asList(Arrays.asList("", " DeleteIcon"), Arrays.asList(" DeleteIcon", " DeleteIcon")));
         allSimpleIcons.put(filled.get(2), Arrays.asList(Arrays.asList(" DeleteIcon", " DeleteForeverIcon"), Arrays.asList(" DeleteForeverIcon", " DeleteForeverIcon")));
         allSimpleIcons.put(outlined.get(1), Arrays.asList(Arrays.asList(" DeleteForeverIcon", " DeleteOutlinedIcon"), Arrays.asList(" DeleteOutlinedIcon", " DeleteOutlinedIcon")));
@@ -69,7 +82,7 @@ public class IconsTests extends TestsInit {
         colorLastClick.is().text("Last click:");
         colorLastHover.is().text("Last hover:");
 
-        Map<UIElement, List<List<String>>> allColorIcons = new LinkedHashMap<>();
+        Map<Icon, List<List<String>>> allColorIcons = new LinkedHashMap<>();
         allColorIcons.put(color.get(1), Arrays.asList(Arrays.asList("", " default"), Arrays.asList(" default", " default")));
         allColorIcons.put(color.get(2), Arrays.asList(Arrays.asList(" default", " primary"), Arrays.asList(" primary", " primary")));
         allColorIcons.put(color.get(3), Arrays.asList(Arrays.asList(" primary", " secondary"), Arrays.asList(" secondary", " secondary")));
@@ -95,7 +108,7 @@ public class IconsTests extends TestsInit {
         sizeLastClick.is().text("Last click:");
         sizeLastHover.is().text("Last hover:");
 
-        Map<UIElement, List<List<String>>> allSizeIcons = new LinkedHashMap<>();
+        Map<Icon, List<List<String>>> allSizeIcons = new LinkedHashMap<>();
         allSizeIcons.put(size.get(1), Arrays.asList(Arrays.asList("", " small size"), Arrays.asList(" small size", " small size")));
         allSizeIcons.put(size.get(2), Arrays.asList(Arrays.asList(" small size", " default size"), Arrays.asList(" default size", " default size")));
         allSizeIcons.put(size.get(3), Arrays.asList(Arrays.asList(" default size", " large size"), Arrays.asList(" large size", " large size")));

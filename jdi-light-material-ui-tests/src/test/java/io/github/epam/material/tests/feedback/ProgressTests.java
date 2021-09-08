@@ -6,7 +6,26 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.progressPage;
-import static io.github.com.pages.feedback.ProgressPage.*;
+import static io.github.com.pages.feedback.ProgressPage.circularDeterminateCustomized;
+import static io.github.com.pages.feedback.ProgressPage.circularDeterminateProgress;
+import static io.github.com.pages.feedback.ProgressPage.circularDeterminateProgressWithLabel;
+import static io.github.com.pages.feedback.ProgressPage.circularDeterminateWithValue100;
+import static io.github.com.pages.feedback.ProgressPage.circularDeterminateWithValue25;
+import static io.github.com.pages.feedback.ProgressPage.circularDeterminateWithValue50;
+import static io.github.com.pages.feedback.ProgressPage.circularDeterminateWithValue75;
+import static io.github.com.pages.feedback.ProgressPage.circularIndeterminate;
+import static io.github.com.pages.feedback.ProgressPage.circularIndeterminateCustomized;
+import static io.github.com.pages.feedback.ProgressPage.interactiveIntegrationCircularButton;
+import static io.github.com.pages.feedback.ProgressPage.interactiveIntegrationCircularIndeterminate;
+import static io.github.com.pages.feedback.ProgressPage.linearBuffer;
+import static io.github.com.pages.feedback.ProgressPage.linearDeterminate;
+import static io.github.com.pages.feedback.ProgressPage.linearIndeterminate;
+import static io.github.com.pages.feedback.ProgressPage.linearWithLabel;
+import static io.github.com.pages.feedback.ProgressPage.loadingCircularIndeterminate;
+import static io.github.com.pages.feedback.ProgressPage.simulateLoadButton;
+import static io.github.com.pages.feedback.ProgressPage.simulateLoadCircularIndeterminate;
+import static io.github.com.pages.feedback.ProgressPage.startLoadingButton;
+import static io.github.com.pages.feedback.ProgressPage.successMessage;
 
 public class ProgressTests extends TestsInit {
     private Timer timer = new Timer(5000L);
@@ -20,28 +39,27 @@ public class ProgressTests extends TestsInit {
     @Test
     public void progressSimpleTest() {
         timer.wait(() -> circularIndeterminate.isDisplayed());
-        circularDeterminate1.isDisplayed();
-        circularDeterminate2.isDisplayed();
-        circularDeterminate3.isDisplayed();
-        circularDeterminate4.isDisplayed();
-        circularDeterminate5.isDisplayed();
-        circularDeterminate6.isDisplayed();
-        circularIndeterminate2.isDisplayed();
-        circularIndeterminate3.isDisplayed();
+        circularDeterminateWithValue25.isDisplayed();
+        circularDeterminateWithValue50.isDisplayed();
+        circularDeterminateWithValue75.isDisplayed();
+        circularDeterminateWithValue100.isDisplayed();
+        circularDeterminateProgress.isDisplayed();
+        circularDeterminateProgressWithLabel.isDisplayed();
+        circularIndeterminateCustomized.isDisplayed();
+        circularDeterminateCustomized.isDisplayed();
         interactiveIntegrationCircularButton.isDisplayed();
         linearIndeterminate.isDisplayed();
         linearDeterminate.isDisplayed();
         linearBuffer.isDisplayed();
         linearWithLabel.isDisplayed();
-        delayingAppearance.isDisplayed();
     }
 
     @Test
     public void circularProgressTest() {
         circularIndeterminate.is().indeterminate();
-        int valueNow = circularDeterminate5.getValueNow();
-        timer.wait(() -> circularDeterminate5.is().value(valueNow + 10));
-        circularDeterminate5.is().determinate();
+        int valueNow = circularDeterminateProgress.getValueNow();
+        timer.wait(() -> circularDeterminateProgress.is().value(valueNow + 10));
+        circularDeterminateProgress.is().determinate();
     }
 
     @Test

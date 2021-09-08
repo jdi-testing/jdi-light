@@ -1,9 +1,9 @@
 package io.github.com.pages.inputs;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.*;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.util.List;
 
@@ -36,14 +36,14 @@ public class FloatingActionButtonPage extends WebPage {
     @UI("//button[@aria-label='Expand']")
     public static Button buttonExpand;
 
-    @UI("#action-tabpanel-0")
-    public static UIElement tabItemOne;
+    @UI("//div[text()='Item One']")
+    public static Text tabItemOne;
 
-    @UI("#action-tabpanel-1")
-    public static UIElement tabItemTwo;
+    @UI("//div[text()='Item Two']")
+    public static Text tabItemTwo;
 
-    @UI("#action-tabpanel-2")
-    public static UIElement tabItemThree;
+    @UI("//div[text()='Item Three']")
+    public static Text tabItemThree;
 
     @UI("#basicActionBtnsLastClick")
     public static Text labelLastClick;

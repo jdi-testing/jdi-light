@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import static java.lang.Integer.min;
 import static java.lang.Integer.parseInt;
 
 public class Slider extends UIBaseElement<SliderAssert> {

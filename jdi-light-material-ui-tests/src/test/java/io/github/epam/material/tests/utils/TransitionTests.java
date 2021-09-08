@@ -15,6 +15,12 @@ import static io.github.com.pages.utils.TransitionPage.checkboxes;
 import static io.github.com.pages.utils.TransitionPage.collapseFadeTransitions;
 import static io.github.com.pages.utils.TransitionPage.growSlideTransitions;
 import static io.github.com.pages.utils.TransitionPage.zoomTransitions;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
+import static io.github.com.pages.utils.TransitionPage.checkboxes;
+import static io.github.com.pages.utils.TransitionPage.collapseFadeTransitions;
+import static io.github.com.pages.utils.TransitionPage.growSlideTransitions;
+import static io.github.com.pages.utils.TransitionPage.zoomTransitions;
 
 /**
  * To see an example of Transitions web element please visit

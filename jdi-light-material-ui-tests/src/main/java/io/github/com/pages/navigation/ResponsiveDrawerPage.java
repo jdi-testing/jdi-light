@@ -5,21 +5,10 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.navigation.Drawer;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+
 import java.util.List;
 
-public class DrawerPage extends WebPage {
-
-    @UI("//*[text()='left']")
-    public static Button leftButton;
-
-    @UI("//*[text()='right']")
-    public static Button rightButton;
-
-    @UI("//*[text()='top']")
-    public static Button topButton;
-
-    @UI("//*[text()='bottom']")
-    public static Button bottomButton;
+public class ResponsiveDrawerPage extends WebPage {
 
     @UI("//div[contains(@class,'MuiPaper-root')]")
     public static Drawer drawer;
@@ -32,10 +21,4 @@ public class DrawerPage extends WebPage {
 
     @UI("//p[contains(@class,'MuiTypography-root')]")
     public static List<Text> drawerContent;
-
-    @UI("//button[@aria-label='open drawer']")
-    public static Button drawerSandwichMenuButton;
-
-    @UI("//div[contains(@class,'MuiDrawer-paper')]//button[contains(@class,'MuiButtonBase-root')]")
-    public static Button drawerBackMenuButton;
 }

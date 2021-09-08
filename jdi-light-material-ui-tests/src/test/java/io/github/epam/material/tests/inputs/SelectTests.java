@@ -1,8 +1,30 @@
 package io.github.epam.material.tests.inputs;
 
 import static io.github.com.StaticSite.selectPage;
+import static io.github.com.pages.inputs.SelectPage.ageNativeHelperSelect;
+import static io.github.com.pages.inputs.SelectPage.ageNativeLabelSelect;
+import static io.github.com.pages.inputs.SelectPage.ageNativeSimpleSelect;
+import static io.github.com.pages.inputs.SelectPage.controlledSelect;
+import static io.github.com.pages.inputs.SelectPage.disabledSelect;
+import static io.github.com.pages.inputs.SelectPage.disabledSelectExpand;
+import static io.github.com.pages.inputs.SelectPage.errorSelect;
+import static io.github.com.pages.inputs.SelectPage.filledSelect;
+import static io.github.com.pages.inputs.SelectPage.groupedNativeSelect;
+import static io.github.com.pages.inputs.SelectPage.groupedSelectButton;
+import static io.github.com.pages.inputs.SelectPage.helperLabels;
+import static io.github.com.pages.inputs.SelectPage.multipleSelectButton;
+import static io.github.com.pages.inputs.SelectPage.nativeSelectLabels;
+import static io.github.com.pages.inputs.SelectPage.openTheSelectButton;
+import static io.github.com.pages.inputs.SelectPage.outlinedSelect;
+import static io.github.com.pages.inputs.SelectPage.placeholderSelect;
+import static io.github.com.pages.inputs.SelectPage.requiredSelect;
+import static io.github.com.pages.inputs.SelectPage.selectList;
+import static io.github.com.pages.inputs.SelectPage.selectListItems;
+import static io.github.com.pages.inputs.SelectPage.simpleSelectExpand;
+import static io.github.com.pages.inputs.SelectPage.simpleSelectField;
+import static io.github.com.pages.inputs.SelectPage.uncontrolledSelect;
+import static io.github.com.pages.inputs.SelectPage.visuallyHiddenLabelSelect;
 import static org.hamcrest.Matchers.containsString;
-import static io.github.com.pages.inputs.SelectPage.*;
 import static org.testng.AssertJUnit.assertTrue;
 
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -114,7 +136,7 @@ public class SelectTests extends TestsInit {
 
         multipleSelectButton.click();
         selectList.multipleSelect(listOfMultipleSelect.subList(0,2));
-        selectListItems.get(1).sendKeys(Keys.ESCAPE);
+        selectListItems.get(1).core().sendKeys(Keys.ESCAPE);
         multipleSelectButton.is().text(listOfMultipleSelect.subList(0,2).toString().replace("[", "").replace("]", ""));
 
         WebPage.refresh();
