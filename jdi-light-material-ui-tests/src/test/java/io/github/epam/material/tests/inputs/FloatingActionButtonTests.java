@@ -6,20 +6,18 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.floatingActionButtonPage;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonsBasic;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonAdd;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonEdit;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonNavigate;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonLike;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.labelLastClick;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.tabSections;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.labelAnimatedLastClick;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.tabPanelContent;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonAnimatedAdd;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonAnimatedEdit;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonEdit;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonExpand;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonLike;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonNavigate;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonsBasic;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.labelAnimatedLastClick;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.labelLastClick;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.tabItemOne;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.tabItemThree;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.tabItemTwo;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.tabSections;
 
 /**
  * To see an example of Floating Action Buttons web element please visit
