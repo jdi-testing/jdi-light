@@ -1,6 +1,5 @@
 package io.github.com;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.Frame;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import io.github.com.pages.displaydata.AvatarPage;
@@ -34,20 +33,20 @@ import io.github.com.pages.layout.ContainerPage;
 import io.github.com.pages.layout.GridPage;
 import io.github.com.pages.layout.HiddenPage;
 import io.github.com.pages.navigation.BottomNavigationPage;
+import io.github.com.pages.navigation.ClippedDrawerPage;
 import io.github.com.pages.navigation.ContextMenuPage;
 import io.github.com.pages.navigation.LinkPage;
+import io.github.com.pages.navigation.MiniDrawerPage;
+import io.github.com.pages.navigation.PermanentDrawerPage;
+import io.github.com.pages.navigation.PersistentDrawerPage;
+import io.github.com.pages.navigation.ResponsiveDrawerPage;
 import io.github.com.pages.navigation.RouterBreadcrumbsPage;
 import io.github.com.pages.navigation.SimpleBreadcrumbsPage;
 import io.github.com.pages.navigation.SimpleMenuPage;
 import io.github.com.pages.navigation.StepperPage;
+import io.github.com.pages.navigation.SwipeableDrawerPage;
 import io.github.com.pages.navigation.TabPage;
-import io.github.com.pages.navigation.drawerPages.MiniDrawerPage;
-import io.github.com.pages.navigation.drawerPages.PermanentDrawerPage;
-import io.github.com.pages.navigation.drawerPages.PersistentDrawerPage;
-import io.github.com.pages.navigation.drawerPages.ResponsiveDrawerPage;
-import io.github.com.pages.navigation.drawerPages.SlippedDrawerPage;
-import io.github.com.pages.navigation.drawerPages.SwipableDrawerPage;
-import io.github.com.pages.navigation.drawerPages.TemporaryDrawerPage;
+import io.github.com.pages.navigation.TemporaryDrawerPage;
 import io.github.com.pages.surfaces.AccordionPage;
 import io.github.com.pages.surfaces.AppBarPage;
 import io.github.com.pages.surfaces.BackToTopPage;
@@ -110,7 +109,8 @@ public class StaticSite {
     // button group
     @Url("/button_groups")
     public static ButtonGroupPage buttonGroupPage;
-  
+
+
     // selects
     @Url("/selects")
     public static SelectPage selectPage;
@@ -256,12 +256,13 @@ public class StaticSite {
     @Url("/router_breadcrumbs")
     public static RouterBreadcrumbsPage routerBreadcrumbsPage;
 
+
     // drawer
     @Url("/temporary_drawer")
     public static TemporaryDrawerPage temporaryDrawerPage;
 
     @Url("/swipeable_drawer")
-    public static SwipableDrawerPage swipeableDrawerPage;
+    public static SwipeableDrawerPage swipeableDrawerPage;
 
     @Url("/responsive_drawer")
     public static ResponsiveDrawerPage responsiveDrawerPage;
@@ -276,7 +277,7 @@ public class StaticSite {
     public static PermanentDrawerPage permanentDrawerPage;
 
     @Url("/clipped_drawer")
-    public static SlippedDrawerPage clippedDrawerPage;
+    public static ClippedDrawerPage clippedDrawerPage;
 
     // stepper
 

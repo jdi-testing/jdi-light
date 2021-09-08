@@ -1,4 +1,4 @@
-package io.github.com.pages.navigation.drawerPages;
+package io.github.com.pages.navigation;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -8,7 +8,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.util.List;
 
-public class ResponsiveDrawerPage extends WebPage {
+public class PersistentDrawerPage extends WebPage {
 
     @UI("//div[contains(@class,'MuiPaper-root')]")
     public static Drawer drawer;
@@ -21,4 +21,10 @@ public class ResponsiveDrawerPage extends WebPage {
 
     @UI("//p[contains(@class,'MuiTypography-root')]")
     public static List<Text> drawerContent;
+
+    @UI("//button[@aria-label='open drawer']")
+    public static Button drawerSandwichMenuButton;
+
+    @UI("//div[contains(@class,'MuiDrawer-paper')]//button[contains(@class,'MuiButtonBase-root')]")
+    public static Button drawerBackMenuButton;
 }
