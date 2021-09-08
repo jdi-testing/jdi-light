@@ -14,7 +14,7 @@ public class Badge extends UIBaseElement<BadgeAssert> {
 
     @JDIAction("'{name}' has color '{0}'")
     public boolean color(String color) {
-        return getColor().equalsIgnoreCase(color);
+        return getColor(badge().css("background-color")).equalsIgnoreCase(color);
     }
 
     @Override
@@ -22,11 +22,8 @@ public class Badge extends UIBaseElement<BadgeAssert> {
         return new BadgeAssert().set(this);
     }
 
-    private String getColor() {
-        return getColor(badge().css("background-color"));
-    }
-
     private String getColor(String bgValue) {
+        //Should be overriden with current colors from your site
         switch (bgValue) {
             case "rgba(103, 58, 183, 1)":
                 return "violet";
