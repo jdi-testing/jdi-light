@@ -1,8 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
-import io.github.com.pages.displaydata.AvatarPage;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
