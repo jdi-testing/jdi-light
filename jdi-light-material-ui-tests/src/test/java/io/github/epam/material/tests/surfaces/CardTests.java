@@ -8,7 +8,9 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.cardPage;
 import static io.github.com.pages.surfaces.CardPage.complexCard;
+import static io.github.com.pages.surfaces.CardPage.complexCardCollapsibleContent;
 import static io.github.com.pages.surfaces.CardPage.outlinedCard;
+import static io.github.com.pages.surfaces.CardPage.simpleCard;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.containsStringIgnoringCase;
 
@@ -26,6 +28,12 @@ public class CardTests extends TestsInit {
     }
 
     @Test
+    public void simpleCardTestContent() {
+        simpleCard.getContent().is().text(containsString("Word of the Day"));
+        simpleCard.getContent().is().text(containsString("be•nev•o•lent"));
+    }
+
+    @Test
     public void outlinedCardTestContent() {
         outlinedCard.getContent().is().text(containsString("Word of the Day"));
         outlinedCard.getContent().is().text(containsString("be•nev•o•lent"));
@@ -35,17 +43,15 @@ public class CardTests extends TestsInit {
     @Test
     public void outlinedCardButtonsTest() {
         outlinedCard.is().assertNumberOfButtonsOnCard(1);
-        UIElement test = outlinedCard.getActionButtonByNumber(1);
-        test.is().text("LEARN MORE");
+        outlinedCard.getActionButtonByNumber(1).is().text("LEARN MORE");
     }
 
     @Test
     public void complexCardHeaderTest() {
         complexCard.getHeader().is().displayed();
-        complexCard.getHeaderTitle().is().text("Shrimp and Chorizo Paella");
-        complexCard.getHeaderSubheader().is().text("September 14, 2016");
+        complexCard.is().assertCardTitleText("Shrimp and Chorizo Paella");
+        complexCard.is().assertCardSubheaderText("September 14, 2016");
         complexCard.getHeaderAvatar().is().displayed();
-        complexCard.getHeaderAction().is().displayed();
         complexCard.getHeaderActionButtons().get(1).click();
     }
 
@@ -59,13 +65,26 @@ public class CardTests extends TestsInit {
     }
 
     @Test
-    public void complexCardButtonsTest() {
+    public void complexCardHeartButtonTest() {
         complexCard.is().assertNumberOfButtonsOnCard(3);
         UIElement heartButton = complexCard.getActionButtonByNumber(1);
         heartButton.click();
-        //heartButton.has().classValue(containsString("jss"));
-        /*new Timer(1000L)
-                .wait(() -> heartButton.has().classValue(containsString("jss")));*/
+        heartButton.has().classValue(containsString("jss"));
+    }
+
+    @Test
+    public void complexCardCollapseTest() {
+        final String collapsibleContentText = "Heat 1/2 cup of the broth in a pot until simmering," +
+                " add saffron and set aside for 10 minutes.";
+        complexCardCollapsibleContent().is().hidden();
+        complexCard.is().assertNumberOfButtonsOnCard(3);
+        UIElement collapseButton = complexCard.getActionButtonByNumber(3);
+        collapseButton.click();
+        collapseButton.has().classValue(containsString("jss"));
+        complexCardCollapsibleContent().is().displayed();
+        complexCardCollapsibleContent().has().text(containsString(collapsibleContentText));
+        collapseButton.click();
+        complexCardCollapsibleContent().is().hidden();
     }
 
     @Test
@@ -73,26 +92,5 @@ public class CardTests extends TestsInit {
         String expectedText = "This impressive paella is a perfect party dish and a fun meal to cook " +
                 "together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.";
         complexCard.getContent().is().text(containsString(expectedText));
-
     }
-
-
-    /*@Test
-    public void complexCardTest() {
-        String expectedText = "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.";
-        pTagTexts.get(3).has().text(Matchers.is(expectedText));
-        complexCardImage.is().displayed();
-
-        complexCardHeartIconButton.click();
-        new Timer(1000L)
-                .wait(() -> complexCardHeartIcon.has().classValue(Matchers.containsString("jss")));
-
-        complexCardHeartIconButton.click();
-        new Timer(1000L)
-                .wait(() -> complexCardHeartIcon.has().classValue(Matchers.not("jss")));
-
-        complexCardSliderDownButton.click();
-        complexCardHiddenTextArea.is().displayed();
-        complexCardHiddenText.get(1).has().text(Matchers.containsString("Method:"));
-    }*/
 }
