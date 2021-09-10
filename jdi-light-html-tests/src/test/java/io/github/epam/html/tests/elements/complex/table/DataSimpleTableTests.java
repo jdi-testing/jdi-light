@@ -53,13 +53,13 @@ public class DataSimpleTableTests implements TestsInit {
     @Test
     public void previewTest() {
         String value = usersData.preview();
-        assertEquals(value.replaceAll(" ", ""),
+        assertEquals(value.replace(" ", ""),
             "NumberTypeUserDescription1AdminUserManagerRomanWolverineVip2AdminUserManagerSergeyIvanSpiderManVip3AdminUserManagerVladzimirPunisherVip4AdminUserManagerHelenBennettCaptainAmericasomedescriptionVip5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
     }
 
     @Test
     public void valueTest() {
-        String value = usersData.getValue().replaceAll("\r", "");
+        String value = usersData.getValue().replace("\r", "");
         assertEquals(value,
             "||X||Number|Type|User|Description||\n" +
             "||"+i(0)+"||1|Admin\\n User\\n Manager|Roman|Wolverine\\nVip||\n" +

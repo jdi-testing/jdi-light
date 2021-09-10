@@ -175,8 +175,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     }
     public JDIBase setLocator(@MarkupLocator By locator) {
         if (locator != null) {
-            if (name.isEmpty())
+            if (name.isEmpty()) {
                 name = shortBy(locator, this);
+            }
             this.locator.add(locator, this);
         }
         return this;

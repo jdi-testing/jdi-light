@@ -35,7 +35,7 @@ public class ColumnMatcher {
         this.column = column;
         this.name = name;
     }
-    public String getLocator(BaseTable<?,?> table) { return format(locator, column.getIndex(table.header())); }
+    public String getLocator(BaseTable<?,?> table) { return format(locator, column.getIndex(table.header(), table.getStartIndex())); }
     @Override
     public String toString() {
         return name;
