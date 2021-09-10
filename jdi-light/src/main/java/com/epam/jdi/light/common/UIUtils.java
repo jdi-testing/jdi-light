@@ -126,16 +126,18 @@ public final class UIUtils {
     }
     public static <T extends IBaseElement> T initT(UIElement el, IBaseElement parent, Class<?> initClass) {
         try {
-            if (initClass == null)
+            if (initClass == null) {
                 throw exception("Can't init List of UI Elements. Class Type is null");
+            }
             SiteInfo info = new SiteInfo(parent.base().driverName).set(s -> {
                 s.cl = initClass;
                 s.name = el.getName();
                 s.parent = el.parent;
             });
             initJdiField(info);
-            if (info.instance != null)
+            if (info.instance != null) {
                 setupFieldUsingRules(info);
+            }
             T t = (T) info.instance;
             t.base().setCore(el);
             t.base().searchRules = parent.base().searchRules;

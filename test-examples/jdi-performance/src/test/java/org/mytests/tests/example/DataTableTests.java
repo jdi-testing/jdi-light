@@ -45,7 +45,7 @@ public class DataTableTests extends TestsInit {
     @Test
     public void previewTest() {
         String value = users.preview();
-        assertEquals(value.replaceAll(" ", ""),
+        assertEquals(value.replace(" ", ""),
             "NumberTypeUserDescription1AdminUserManagerRomanWolverineVip2AdminUserManagerSergeyIvanSpiderManVip3AdminUserManagerVladzimirPunisherVip4AdminUserManagerHelenBennettCaptainAmericasomedescriptionVip5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
     }
 

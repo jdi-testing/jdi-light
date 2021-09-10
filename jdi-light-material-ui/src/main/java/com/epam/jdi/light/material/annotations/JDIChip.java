@@ -11,9 +11,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDIChip {
-    @MarkupLocator String chipLabel() default ".MuiChip-label";
-    @MarkupLocator String chipRoot() default ".MuiChip-root";
-    @MarkupLocator String chipIcon() default "//*[name()='svg']";
+    @MarkupLocator String root() default ".MuiChip-root";
+    @MarkupLocator String label() default ".MuiChip-label";
+    @MarkupLocator String icon() default ".MuiAvatar-root";
+    @MarkupLocator String delete() default ".MuiChip-deleteIcon";
 }
 
 

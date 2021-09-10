@@ -46,7 +46,7 @@ public class DataTableAssert<L extends PageObject, D>
     }
     @JDIAction("Assert that '{name}' has at least one that meet expected condition")
     public DataTableAssert<L, D> value(JFunc1<D,Boolean> condition, Row row) {
-        jdiAssert(condition.execute(table().dataRow(row.getIndex(table().header()))), Matchers.is(true));
+        jdiAssert(condition.execute(table().dataRow(row.getIndex(table().header(), table().getStartIndex()))), Matchers.is(true));
         return this;
     }
     /**
@@ -60,7 +60,7 @@ public class DataTableAssert<L extends PageObject, D>
     }
     @JDIAction("Assert that '{name}' has {0}")
     public DataTableAssert<L, D> value(D expected, Row row) {
-        D actual = table().dataRow(row.getIndex(table().header()));
+        D actual = table().dataRow(row.getIndex(table().header(), table().getStartIndex()));
         jdiAssert(actual, Matchers.is(expected));
         return this;
     }

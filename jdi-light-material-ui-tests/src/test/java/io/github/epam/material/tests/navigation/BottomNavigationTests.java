@@ -4,7 +4,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bottomNavigationPage;
-import static io.github.com.pages.navigation.BottomNavigationPage.*;
+import static io.github.com.pages.navigation.BottomNavigationPage.currentPosition;
+import static io.github.com.pages.navigation.BottomNavigationPage.favorites;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 

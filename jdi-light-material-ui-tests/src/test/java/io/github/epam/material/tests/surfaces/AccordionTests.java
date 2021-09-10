@@ -5,7 +5,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static io.github.com.StaticSite.accordionPage;
-import static io.github.com.pages.surfaces.AccordionPage.*;
+import static io.github.com.pages.surfaces.AccordionPage.disabledAccordion;
+import static io.github.com.pages.surfaces.AccordionPage.enabledAccordion;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 

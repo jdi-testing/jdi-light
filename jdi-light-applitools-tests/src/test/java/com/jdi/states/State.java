@@ -20,8 +20,9 @@ public class State {
     }
     public static void loggedIn() {
         if (!userName.isDisplayed()) {
-            if (loginForm.isHidden())
+            if (loginForm.isHidden()) {
                 userIcon.click();
+            }
             loginForm.loginAs(DefaultData.ROMAN);
         }
     }

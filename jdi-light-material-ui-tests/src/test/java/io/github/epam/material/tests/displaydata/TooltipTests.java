@@ -5,7 +5,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.tooltipPage;
-import static io.github.com.pages.displaydata.TooltipPage.*;
+import static io.github.com.pages.displaydata.TooltipPage.addButtonWithTooltip;
+import static io.github.com.pages.displaydata.TooltipPage.buttonWithBootstrapTooltip;
+import static io.github.com.pages.displaydata.TooltipPage.buttonWithHtmlTooltip;
+import static io.github.com.pages.displaydata.TooltipPage.buttonWithLightTooltip;
+import static io.github.com.pages.displaydata.TooltipPage.clickButtonWithTooltip;
+import static io.github.com.pages.displaydata.TooltipPage.deleteButtonWithTooltip;
+import static io.github.com.pages.displaydata.TooltipPage.disabledButtonWithTooltip;
+import static io.github.com.pages.displaydata.TooltipPage.hoverButtonWithTooltip;
+import static io.github.com.pages.displaydata.TooltipPage.hoverOrTouchButtonWithTooltip;
 import static org.hamcrest.Matchers.containsString;
 
 /**

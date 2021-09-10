@@ -38,6 +38,7 @@ public class DropdownRootTests implements TestsInit {
     public void getValueTest() {
         assertEquals(colorsRoot.getValue(), text);
     }
+
     @Test
     public void selectStringTest() {
         colorsRoot.select("Red");

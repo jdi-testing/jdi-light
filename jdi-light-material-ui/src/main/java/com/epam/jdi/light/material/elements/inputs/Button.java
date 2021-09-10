@@ -4,8 +4,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.inputs.ButtonAssert;
+import com.epam.jdi.light.material.interfaces.displaydata.HasTooltip;
 
-public class Button extends UIBaseElement<ButtonAssert> {
+public class Button extends UIBaseElement<ButtonAssert> implements HasTooltip {
 
     Button() {
     }

@@ -8,52 +8,49 @@ import com.epam.jdi.light.material.elements.inputs.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ProgressPage extends WebPage {
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-indeterminate')])[1]")
+    @JDIProgressBar(root ="#circularIndeterminateProgress")
     public static ProgressBar circularIndeterminate;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[1]")
-    public static ProgressBar circularDeterminate1;
+    @JDIProgressBar(root ="(//div[@aria-valuenow='25'])[1]")
+    public static ProgressBar circularDeterminateWithValue25;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[2]")
-    public static ProgressBar circularDeterminate2;
+    @JDIProgressBar(root ="(//div[@aria-valuenow='50'])[1]")
+    public static ProgressBar circularDeterminateWithValue50;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[3]")
-    public static ProgressBar circularDeterminate3;
+    @JDIProgressBar(root ="(//div[@aria-valuenow='75'])[1]")
+    public static ProgressBar circularDeterminateWithValue75;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[4]")
-    public static ProgressBar circularDeterminate4;
+    @JDIProgressBar(root ="(//div[@aria-valuenow='100'])[1]")
+    public static ProgressBar circularDeterminateWithValue100;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[5]")
-    public static ProgressBar circularDeterminate5;
+    @JDIProgressBar(root ="(//div[@aria-valuenow='100']/following-sibling::div)[1]")
+    public static ProgressBar circularDeterminateProgress;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-determinate')])[6]")
-    public static ProgressBar circularDeterminate6;
+    @JDIProgressBar(root ="(//h2[text()='Customized progress']/following::div)[3]")
+    public static ProgressBar circularDeterminateProgressWithLabel;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-indeterminate')])[2]")
-    public static ProgressBar circularIndeterminate2;
+    @JDIProgressBar(root ="(//h2[text()='Customized progress']/following::div[@role='progressbar'])[1]")
+    public static ProgressBar circularIndeterminateCustomized;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiCircularProgress-indeterminate')])[3]")
-    public static ProgressBar circularIndeterminate3;
+    @JDIProgressBar(root ="(//h2[text()='Customized progress']/following::div[@role='progressbar'])[3]")
+    public static ProgressBar circularDeterminateCustomized;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[1]")
+    @JDIProgressBar(root ="(//h2[text()='Linear indeterminate']/following::div)[2]")
     public static ProgressBar linearIndeterminate;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[2]")
+    @JDIProgressBar(root ="(//h2[text()='Linear determinate']/following::div)[2]")
     public static ProgressBar linearDeterminate;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[3]")
+    @JDIProgressBar(root ="(//h2[text()='Linear buffer']/following::div)[2]")
     public static ProgressBar linearBuffer;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[4]")
+    @JDIProgressBar(root ="(//h2[text()='Linear with label']/following::div[@role='progressbar'])[1]")
     public static ProgressBar linearWithLabel;
 
-    @JDIProgressBar(root ="(//*[contains(@class, 'MuiLinearProgress-root')])[5]")
-    public static ProgressBar delayingAppearance;
-
-    @UI("//*[contains(@class, 'MuiFab-primary')]")
+    @UI("//button[@aria-label='save']")
     public static Button interactiveIntegrationCircularButton;
 
-    @JDIProgressBar(root = "//*[contains(@class, 'MuiFab-primary')]/following-sibling::div")
+    @JDIProgressBar(root = "//button[@aria-label='save']/following-sibling::div")
     public static ProgressBar interactiveIntegrationCircularIndeterminate;
 
     @UI("//*[text()='Loading']/..")
@@ -65,7 +62,7 @@ public class ProgressPage extends WebPage {
     @UI("//*[text()='Simulate a load']")
     public static Button simulateLoadButton;
 
-    @JDIProgressBar(root = "//*[text()='Reset']/../../div[2]/div")
+    @JDIProgressBar(root = "//*[text()='Reset']/../preceding-sibling::div[1]/div")
     public static ProgressBar simulateLoadCircularIndeterminate;
 
     @UI("//p[text()='Success!']")

@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.pageobjects.annotations.objects;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
@@ -10,8 +11,10 @@ import static com.epam.jdi.tools.ReflectionUtils.isInterface;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class FillFromAnnotationRules {
-
-    public static boolean fieldHasAnnotation(Field field, Class annotationClass, Class interfaceClass) {
+    public static boolean fieldHasAnnotation(Field field, Class<? extends Annotation> annotationClass, Class<?> interfaceClass) {
+        if (field == null) {
+            return false;
+        }
         boolean isAnnotation = hasAnnotation(field, annotationClass);
         return isAnnotation && isInterface(field, interfaceClass);
     }

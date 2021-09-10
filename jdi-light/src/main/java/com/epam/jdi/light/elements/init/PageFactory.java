@@ -95,8 +95,9 @@ public class PageFactory {
     public static void setupFieldUsingRules(SiteInfo info) {
         logger.trace("setupFieldUsingRules");
         MapArray<String, SetupRule> setupRules = SETUP_RULES.filter((k, r) -> r.condition.execute(info));
-        if (setupRules.isEmpty())
+        if (setupRules.isEmpty()) {
             return;
+        }
         String ruleName = "UNDEFINED";
         logger.trace("SETUP_RULES.count="+setupRules.size());
         try {
