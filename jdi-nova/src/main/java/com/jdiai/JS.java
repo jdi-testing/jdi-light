@@ -63,9 +63,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     JS click(int x, int y);
     JS select();
     void select(String value);
-    JS selectSubList(String value);
-    JS setFindTextLocator(String locator);
-    JS select(String... values);
+    void select(String... values);
     <TEnum extends Enum<?>> void select(TEnum name);
     JS check(boolean condition);
     JS check();
@@ -88,7 +86,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     Json allCssStyles();
     boolean isDeselected();
     JS setTextType(GetTextTypes textType);
-    String getText(GetTextTypes textType);
+    String getText(String textType);
     ClientRect getClientRect();
     File makeScreenshot(String tag);
     JS startRecording();
@@ -114,8 +112,8 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     JS addJSCode(String script, RuleType type, String name);
     JS children();
     JS ancestor();
-    List<String> values(GetTextTypes getTextType);
-    List<String> values();
+    List<String> allValues(String getTextType);
+    List<String> allValues();
     int size();
     List<JsonObject> getObjectList(String json);
     <T> List<T> getEntityList();
@@ -135,7 +133,6 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     JS get(int index);
     JS get(String by, int index);
     JS get(By by, int index);
-    JS get(Function<JS, String> filter);
     JS get(String value);
     JS findFirst(Function<JS, String> condition);
     JS findFirst(String condition);
@@ -169,9 +166,16 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     JS setParent(Object parent);
 
     JS setFilter(String filter);
-
+    JS setGetValueFunc(String getValueFunc);
     String getFullName();
+    int elementTimeout();
 
     void setVarName(Field field);
     JS copy();
+    default String scriptGetOne() {
+        return jsDriver().buildOne().getQuery();
+    }
+    default String scriptGetList() {
+        return jsDriver().buildList().getQuery();
+    }
 }

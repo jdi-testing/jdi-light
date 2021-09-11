@@ -3,9 +3,9 @@ package com.jdiai;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import static com.jdiai.JDI.logAll;
 import static com.jdiai.JDI.openSite;
 import static com.jdiai.LoggerTypes.SLF4J;
-import static com.jdiai.jsbuilder.QueryLogger.ALL;
 import static com.jdiai.jswraper.driver.DriverManager.killDrivers;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.tools.TestIDLocators.ID_LOCATOR;
@@ -19,7 +19,7 @@ public interface TestInit {
         SMART_LOCATOR = ID_LOCATOR;
         DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
         JDI.LOGGER_TYPE = SLF4J;
-        JDI.logJSRequests(ALL);
+        logAll();
         openSite("https://jdi-testing.github.io/jdi-light");
     }
 

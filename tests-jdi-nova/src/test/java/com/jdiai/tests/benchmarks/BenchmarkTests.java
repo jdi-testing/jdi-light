@@ -120,7 +120,7 @@ public class BenchmarkTests implements TestInit {
         stats.add(testScenario("listGetValuesTest", () -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList());
-        }, () -> $("#users-table tr>td:first-child").values(),
+        }, () -> $("#users-table tr>td:first-child").allValues(),
         heavyTestsCount));
     }
 

@@ -16,7 +16,9 @@ import java.util.List;
 import static com.jdiai.JDI.domain;
 import static com.jdiai.JDI.initJSFunc;
 import static com.jdiai.page.objects.CreateRule.cRule;
+import static com.jdiai.page.objects.JDIPageFactory.PO_ANNOTATIONS;
 import static com.jdiai.page.objects.SetupRule.sRule;
+import static com.jdiai.tools.LinqUtils.any;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.tools.ReflectionUtils.isInterface;
 import static com.jdiai.tools.map.MapArray.map;
@@ -73,6 +75,16 @@ public class PageFactory {
             $("JSElement", sRule(HasCore.class, PageFactoryUtils::setupCoreElement)),
             $("Name", sRule(HasName.class, info ->
                 ((HasName) info.instance).setName(pageFactory.getNameFunc.apply(info.field)))),
+            $("Annotations", sRule(
+                info -> isClass(info.instanceClass(), HasCore.class) && any(PO_ANNOTATIONS.values(), ar -> info.field.isAnnotationPresent(ar.annotation)),
+                info -> {
+                    HasCore core = (HasCore) info.instance;
+                    for (AnnotationRule ar : PO_ANNOTATIONS.values()) {
+                        if (info.field.isAnnotationPresent(ar.annotation)) {
+                            ar.action.execute(core, info.field.getAnnotation(ar.annotation), info.field);
+                        }
+                    }
+                })),
             $("UI Object", sRule(
                 info -> pageFactory.isUIObjectField.apply(info.field),
                 info -> pageFactory.initElements(info.instance))),

@@ -54,9 +54,6 @@ public class PageFactoryUtils {
             core.jsDriver().addLocator(locator);
         }
         core.setVarName(info.field);
-        if (info.field.getName().equals("lastNameInLog")) {
-            System.out.println("REMOVE");
-        }
         ((HasCore) info.instance).setCore(core);
     }
     static boolean isUIObject(Field field) {

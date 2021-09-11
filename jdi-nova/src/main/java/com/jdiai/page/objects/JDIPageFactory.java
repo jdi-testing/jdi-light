@@ -1,8 +1,11 @@
 package com.jdiai.page.objects;
 
 import com.jdiai.Section;
+import com.jdiai.annotations.Name;
 import com.jdiai.annotations.UI;
 import com.jdiai.interfaces.HasCore;
+import com.jdiai.jswraper.interfaces.GetValue;
+import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,11 +14,15 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.function.Function;
 
+import static com.jdiai.page.objects.AnnotationRule.aRule;
 import static com.jdiai.tools.JSUtils.findByToBy;
 import static com.jdiai.tools.JSUtils.uiToBy;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.tools.ReflectionUtils.isInterface;
 import static com.jdiai.tools.TestIDLocators.SMART_LOCATOR;
+import static com.jdiai.tools.map.MapArray.map;
+import static com.jdiai.tools.pairs.Pair.$;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class JDIPageFactory {
     public static boolean useSmartLocatorsWithoutUI = false;
@@ -53,4 +60,16 @@ public class JDIPageFactory {
     }
 
     public static Function<Field, By> LOCATOR_FROM_FIELD = JDIPageFactory::defaultLocatorFromField;
+
+    public static MapArray<String, AnnotationRule<?>> PO_ANNOTATIONS = map(
+        // $("UI", aRule(UI.class, (e, a)-> e.core().jsDriver().addLocator(uiToBy(a)))),
+        // $("FindBy", aRule(FindBy.class, (e, a)-> e.core().jsDriver().addLocator(findByToBy(a)))),
+        $("Name", aRule(Name.class, (e, a)-> e.core().setName(a.value()))),
+        $("GetValue", aRule(GetValue.class, (e, a)-> {
+            String getValue = isNotBlank(a.attr())
+                ? "getAttribute('" + a.attr() + "')"
+                : a.value();
+            e.core().setGetValueFunc(getValue);
+        }))
+    );
 }

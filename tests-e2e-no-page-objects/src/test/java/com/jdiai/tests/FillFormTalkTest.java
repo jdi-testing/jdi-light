@@ -52,9 +52,9 @@ public class FillFormTalkTest implements TestInit {
         userIcon.click();
         $("#login-form").loginAs(Roman);
         validateUrl("/index.html");
-        $(".sidebar-menu").selectSubList("Contact form");
+        $(".sidebar-menu li a").select("Contact form");
         validateUrl("/contacts.html");
-        $(".sidebar-menu").select("Service", "User Table");
+        $(".sidebar-menu li a").select("Service", "User Table");
         validateUrl("/user-table.html");
         $("//*[contains(@class, 'sidebar-menu')]/li//*[text()='%s']").select("Home");
         validateUrl("/index.html");
@@ -63,6 +63,44 @@ public class FillFormTalkTest implements TestInit {
         $(".sidebar-menu", ".//li//*[text()='%s']").select("Service", "User Table");
         validateUrl("/user-table.html");
     }
+
+    @Test
+    public void selectWithoutTemplateTest() {
+        logout();
+        atHomePage();
+        userIcon.click();
+        $("#login-form").loginAs(Roman);
+        validateUrl("/index.html");
+        $(".sidebar-menu li a").select("Contact form");
+        validateUrl("/contacts.html");
+        $(".sidebar-menu li a").select("Service", "User Table");
+        validateUrl("/user-table.html");
+        $(".sidebar-menu li a").select("Home");
+        validateUrl("/index.html");
+        $(".sidebar-menu li a").select("Contact form");
+        validateUrl("/contacts.html");
+        $(".sidebar-menu", "li a").select("Service", "User Table");
+        validateUrl("/user-table.html");
+    }
+
+    @Test
+    public void selectByAttributeTest() {
+        logout();
+        atHomePage();
+        userIcon.click();
+        $("#login-form").loginAs(Roman);
+        validateUrl("/index.html");
+        $(".sidebar-menu li a").setGetValueFunc("getAttribute('href')").select("contacts.html");
+        validateUrl("/contacts.html");
+        try {
+            GET_TEXT_DEFAULT = "getAttribute('href')";
+            $(".sidebar-menu li a").select("metals-colors.html");
+            validateUrl("/metals-colors.html");
+        } finally {
+            GET_TEXT_DEFAULT = "innerText";
+        }
+    }
+
     private void validateUrl(String uri) {
         assertEquals(driver().getCurrentUrl(), "https://jdi-testing.github.io/jdi-light" + uri);
     }

@@ -22,7 +22,6 @@ import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JSBuilder implements IJSBuilder {
     public Integer logQuery = null;
@@ -31,8 +30,13 @@ public class JSBuilder implements IJSBuilder {
             ? result.substring(0, 195) + "..."
             : result;
     protected String query = "";
-    protected String searchScript = "";
-    protected Supplier<JavascriptExecutor> js;
+    
+    private final Supplier<WebDriver> driver;
+    private Class<?> site;
+    
+    protected JavascriptExecutor js() {
+        return (JavascriptExecutor) driver.get();
+    }
     protected MapArray<String, String> useFunctions = new MapArray<>();
     public IBuilderActions builderActions;
 
@@ -41,7 +45,7 @@ public class JSBuilder implements IJSBuilder {
     }
 
     public JSBuilder(Supplier<WebDriver> driver, IBuilderActions builderActions) {
-        this.js = () -> (JavascriptExecutor) driver.get();
+        this.driver = driver;
         this.builderActions = builderActions != null
             ? builderActions
             : new BuilderActions();
@@ -49,9 +53,13 @@ public class JSBuilder implements IJSBuilder {
     }
 
     public JSBuilder(Supplier<WebDriver> driver, BuilderFunctions functions) {
-        this.js = () -> (JavascriptExecutor) driver.get();
+        this.driver = driver;
         this.builderActions = new BuilderActions(functions);
         this.builderActions.setBuilder(() -> this);
+    }
+
+    public WebDriver driver() {
+        return driver.get();
     }
 
     public JSBuilder setProcessResultFunc(Function<String, String> processResultFunc) {
@@ -108,11 +116,7 @@ public class JSBuilder implements IJSBuilder {
             logger.info("Execute query:" + LINE_BREAK + jsScript);
         }
         Object result;
-        try {
-            result = getScriptResult(jsScript);
-        } finally {
-            cleanup();
-        }
+        result = getScriptResult(jsScript);
         lastScriptExecution.set(jsScript + "\n" + result);
         if (result != null && logResult()) {
             logger.info(">>> " + processResultFunc.apply(result.toString()));
@@ -121,11 +125,7 @@ public class JSBuilder implements IJSBuilder {
     }
 
     private Object getScriptResult(String jsScript) {
-        try {
-            return EXECUTE_SCRIPT.apply(js.get(), jsScript);
-        } finally {
-            cleanup();
-        }
+        return EXECUTE_SCRIPT.apply(js(), jsScript);
     }
 
     public static BiFunction<Object, String, List<Object>> EXECUTE_LIST_SCRIPT = DEFAULT_LIST_SCRIPT_EXECUTE;
@@ -140,28 +140,15 @@ public class JSBuilder implements IJSBuilder {
             logger.info("Execute query:" + LINE_BREAK + jsScript);
         }
         List<Object> result;
-        try {
-            result = EXECUTE_LIST_SCRIPT.apply(js.get(), jsScript);
-        } finally {
-            cleanup();
-        }
+        result = EXECUTE_LIST_SCRIPT.apply(js(), jsScript);
         if (result != null && logResult()) {
             logger.info(">>> " + processResultFunc.apply(result.toString()));
         }
         return result;
     }
 
-    public String getQuery(String result) {
-        return getQuery() + "return " + result;
-    }
-
     public IJSBuilder addJSCode(String code) {
         query += code;
-        return this;
-    }
-
-    public IJSBuilder setSearchScript(String code) {
-        searchScript += code;
         return this;
     }
 
@@ -242,15 +229,6 @@ public class JSBuilder implements IJSBuilder {
         return collectResult;
     }
 
-    private String beforeScript() {
-        if (isBlank(searchScript)) {
-            return "";
-        }
-        return searchScript.endsWith("\n")
-            ? searchScript
-            : searchScript + "\n";
-    }
-
     public String getQuery() {
         if (isEmpty(useFunctions)) {
             return getScript();
@@ -260,18 +238,17 @@ public class JSBuilder implements IJSBuilder {
         if (!script.contains("%s")) {
             return script;
         }
-        cleanup();
         throw new JDINovaBuilderException("Failed to execute js script for template locator. Please replace %s before usage");
     }
 
-    public String getScript() {
-        return beforeScript() + query;
+    protected String getScript() {
+        String result = query;
+        cleanup();
+        return result;
     }
 
     public void cleanup() {
-        if (isBlank(searchScript)) {
-            useFunctions.clear();
-        }
+        useFunctions.clear();
         query = "";
     }
 
@@ -292,9 +269,7 @@ public class JSBuilder implements IJSBuilder {
     }
 
     public JSBuilder copy() {
-        JSBuilder result = new JSBuilder(null, builderActions);
-        result.searchScript = searchScript;
-        result.js = js;
+        JSBuilder result = new JSBuilder(driver, builderActions);
         result.useFunctions = useFunctions;
         result.logQuery = logQuery;
         return result;

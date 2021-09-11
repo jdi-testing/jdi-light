@@ -4,8 +4,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import static com.jdiai.JDI.domain;
-import static com.jdiai.JDI.logJSRequests;
-import static com.jdiai.jsbuilder.QueryLogger.ALL;
+import static com.jdiai.JDI.logAll;
 import static com.jdiai.jswraper.driver.DriverManager.killDrivers;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 
@@ -15,7 +14,7 @@ public interface TestInit {
     default void setUp() {
         killDrivers();
         DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
-        logJSRequests(ALL);
+        logAll();
         domain = "https://jdi-testing.github.io/jdi-light";
         // initJSFunc = l -> new JSLight(JDI::driver, l);
     }

@@ -4,6 +4,7 @@ import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
 import com.jdiai.tools.Timer;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static com.jdiai.JDI.*;
@@ -17,13 +18,25 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class ShouldUtils {
     public static <T> T waitForResult(Supplier<T> function) {
+        return waitForResult(function, result -> true, timeout);
+    }
+
+    public static <T> T waitForResult(Supplier<T> function, int timeout) {
+        return waitForResult(function, result -> true, timeout);
+    }
+
+    public static <T> T waitForResult(Supplier<T> function, Function<T, Boolean> conditionFunc) {
+        return waitForResult(function, conditionFunc, timeout);
+    }
+
+    public static <T> T waitForResult(Supplier<T> function, Function<T, Boolean> conditionFunc, int timeout) {
         try {
             return function.get();
         } catch (Throwable ignore){
             loggerOff();
             try {
                 Timer timer = new Timer(timeout * 1000L);
-                return timer.getResult(function);
+                return timer.getResultByCondition(function, conditionFunc);
             } finally {
                 loggerOn();
             }
@@ -35,7 +48,7 @@ public class ShouldUtils {
             return core;
         }
         shouldValidations ++;
-        Timer timer = new Timer(timeout * 1000L);
+        Timer timer = new Timer(core.core().elementTimeout() * 1000L);
         logger().info(getCombinedAssertionName(core, conditions));
         boolean foundAll;
         try {
@@ -87,6 +100,6 @@ public class ShouldUtils {
             return;
         }
         throw throwAssert(format("Failed to execute Assert in time (%s sec);\n'%s'\nAcutal result:%s",
-            timeout, getCombinedAssertionName(core, conditions), lastScriptExecution.get()));
+            core.core().elementTimeout(), getCombinedAssertionName(core, conditions), lastScriptExecution.get()));
     }
 }

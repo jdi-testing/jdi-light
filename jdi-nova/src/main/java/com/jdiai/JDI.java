@@ -32,6 +32,7 @@ import java.util.function.Supplier;
 
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
+import static com.jdiai.asserts.ShouldUtils.waitForResult;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.QueryLogger.*;
 import static com.jdiai.jsdriver.JDINovaException.assertContains;
@@ -41,12 +42,13 @@ import static com.jdiai.jswraper.driver.DriverManager.useDriver;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
+import static com.jdiai.tools.BrowserTabs.getWindowHandles;
+import static com.jdiai.tools.BrowserTabs.setTabNameNewPage;
 import static com.jdiai.tools.JsonUtils.getDouble;
 import static com.jdiai.tools.LinqUtils.newList;
 import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.ReflectionUtils.getFieldsDeep;
 import static com.jdiai.tools.StringUtils.format;
-import static com.jdiai.tools.WindowsManager.getWindows;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class JDI {
@@ -142,6 +144,8 @@ public class JDI {
     };
     public static String SUBMIT_LOCATOR = "[type=submit]";
 
+    public static String GET_TEXT_DEFAULT = "innerText";
+
     private static Safe<Integer> savedLogLevel = new Safe<>(() -> null);
 
     public static void loggerOff() {
@@ -151,6 +155,9 @@ public class JDI {
         }
     }
 
+    public static void logAll() {
+        logJSRequests(ALL);
+    }
     public static void logJSRequests(int logQueriesLevel) {
         LOG_QUERY.set(logQueriesLevel);
     }
@@ -192,7 +199,7 @@ public class JDI {
     }
 
     public static void urlShouldBe(String url) {
-        assertContains("Url", getUrl(), url);
+        waitForResult(() -> getUrl().contains(url));
     }
 
     public static String getTitle() {
@@ -296,6 +303,7 @@ public class JDI {
         initSite(cl);
         if (domain != null) {
             JDI.openSite();
+            setTabNameNewPage();
         }
     }
 
@@ -306,7 +314,7 @@ public class JDI {
             : url;
         logger().info("Open page '" + fullUrl + "'");
         driver().get(fullUrl);
-        getWindows();
+        getWindowHandles();
     }
 
     public static JS $(By locator) {
