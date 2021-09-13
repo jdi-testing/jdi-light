@@ -5,15 +5,20 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.badgePage;
-import static io.github.com.pages.displaydata.BadgePage.badge;
-import static io.github.com.pages.displaydata.BadgePage.badgeButton;
-import static io.github.com.pages.displaydata.BadgePage.badgeCounter;
 import static io.github.com.pages.displaydata.BadgePage.badgeCounterWithDifferentPosition;
 import static io.github.com.pages.displaydata.BadgePage.badgeDifferentPosition;
-import static io.github.com.pages.displaydata.BadgePage.badgeSwitch;
-import static io.github.com.pages.displaydata.BadgePage.badgeWithVariableCounter;
-import static io.github.com.pages.displaydata.BadgePage.dotBadge;
+import static io.github.com.pages.displaydata.BadgePage.buttonIncrease;
+import static io.github.com.pages.displaydata.BadgePage.buttonReduce;
 import static io.github.com.pages.displaydata.BadgePage.dot;
+import static io.github.com.pages.displaydata.BadgePage.dotBadge;
+import static io.github.com.pages.displaydata.BadgePage.errorBadge;
+import static io.github.com.pages.displaydata.BadgePage.errorBadgeCounter;
+import static io.github.com.pages.displaydata.BadgePage.primaryBadge;
+import static io.github.com.pages.displaydata.BadgePage.primaryBadgeCounter;
+import static io.github.com.pages.displaydata.BadgePage.switchShowBadge;
+import static io.github.com.pages.displaydata.BadgePage.switchShowZero;
+import static io.github.com.pages.displaydata.BadgePage.variousBadge;
+import static io.github.com.pages.displaydata.BadgePage.variousBadgeCounter;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 
