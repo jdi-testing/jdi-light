@@ -7,15 +7,11 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
-import io.github.com.pages.VuetifyPage;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
 
     public static User DEFAULT_USER = new User();
-
-    @Url("/vuetify.html")
-    public static VuetifyPage vuetifyPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;
