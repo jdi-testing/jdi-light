@@ -15,11 +15,9 @@ import java.util.function.Supplier;
 
 import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.Conditions.visible;
-import static com.jdiai.tools.LinqUtils.last;
 import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.StringUtils.format;
 import static com.jdiai.tools.Timer.sleep;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class JSStable extends JSLight {
     public JSStable() {

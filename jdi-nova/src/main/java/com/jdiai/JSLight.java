@@ -3,7 +3,6 @@ package com.jdiai;
 import com.google.gson.JsonObject;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsdriver.JDINovaException;
-import com.jdiai.jsdriver.JSDriverUtils;
 import com.jdiai.jsdriver.RuleType;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.jswraper.JSEngine;
@@ -52,7 +51,6 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.openqa.selenium.By.*;
 import static org.openqa.selenium.Keys.BACK_SPACE;
 import static org.openqa.selenium.OutputType.*;
 

@@ -26,7 +26,6 @@ import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JSDriver {
-    protected List<By> locators;
     protected List<JSRule> rules;
     protected IJSBuilder builder;
     public ListSearch strategy = CHAIN;
@@ -244,9 +243,10 @@ public class JSDriver {
 
     public JSDriver setLocators(List<By> locators) {
         if (locators == null) {
-            this.locators = null;
+            this.rules = new ArrayList<>();
             return this;
         }
+        this.rules = new ArrayList<>();
         List<By> result = new ArrayList<>();
         for (By locator : locators) {
             Matcher matcher = idMatcher.matcher(getByLocator(locator));
@@ -262,7 +262,9 @@ public class JSDriver {
             }
             result.add(locator);
         }
-        this.locators = result;
+        for (By locator : result) {
+            addLocator(locator);
+        }
         return this;
     }
 

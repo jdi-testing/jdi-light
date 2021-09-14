@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.jdiai</groupId>
             <artifactId>supreme-page-objects</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
     </dependencies>
 
