@@ -9,14 +9,14 @@ import java.util.List;
 public class BadgesPage extends WebPage {
 
     @UI("#simpleBadges .v-badge__badge")
-    List<Badge> simpleBadges;
+    public static List<Badge> simpleBadges;
 
     @UI("#customBadges .v-badge__badge")
-    List<Badge> customBadges;
+    public static List<Badge> customBadges;
 
     @UI("#dynamicBadge .v-badge__badge")
-    Badge dynamicBadge;
+    public static Badge dynamicBadge;
 
     @UI("#hoverBadge .v-badge__badge")
-    Badge hoverBadge;
+    public static Badge hoverBadge;
 }
