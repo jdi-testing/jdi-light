@@ -7,11 +7,12 @@ import com.jdiai.jsdriver.JDINovaException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
-import static com.jdiai.JDI.logger;
 import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.visual.Directions.*;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
@@ -323,8 +324,8 @@ public abstract class Conditions {
 
     private static <T> boolean compareTwoLists(boolean checkSize, boolean sameOrder, List<T> actual, List<T> expected) {
         if (checkSize && actual.size() != expected.size()) {
-            logger().error("Expected size: %s, but found: %s", expected.size(), actual.size());
-            return false;
+            String errorMessage = getSaveMessage(() -> format("Expected size: %s, but found: %s", expected.size(), actual.size()));
+            throw new JDINovaException(errorMessage);
         }
         List<T> listOfFails = new ArrayList<>();
         int i = 0;
@@ -334,13 +335,20 @@ public abstract class Conditions {
             }
         }
         if (isNotEmpty(listOfFails)) {
-            logger().error("Failed to find following entities: \n%s\nActual values:\n%s",
-                    print(listOfFails, Object::toString, "\n"),
-                    print(actual, Object::toString, "\n")
-            );
-            return false;
+            String errorMessage = getSaveMessage(() -> format("Failed to find following entities: \n%s\nActual values:\n%s",
+                print(listOfFails, Object::toString, "\n"),
+                print(actual, Object::toString, "\n")));
+            throw new JDINovaException(errorMessage);
         }
         return true;
+    }
+
+    private static String getSaveMessage(Supplier<String> func) {
+        try {
+            return func.get();
+        } catch (Throwable ex) {
+            return "Failed to get error message";
+        }
     }
 
     private static <T> boolean compareTwoLists(HasCore el, boolean checkSize, boolean sameOrder, List<T> expected) {

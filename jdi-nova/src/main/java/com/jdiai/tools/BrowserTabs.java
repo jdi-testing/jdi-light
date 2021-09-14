@@ -4,13 +4,13 @@ import com.jdiai.JDI;
 import com.jdiai.annotations.Name;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.tools.map.MapArray;
+import com.jdiai.tools.pairs.Pair;
 import org.openqa.selenium.Dimension;
 
 import java.util.List;
 import java.util.Set;
 
-import static com.jdiai.JDI.driver;
-import static com.jdiai.JDI.jsExecute;
+import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.ShouldUtils.waitForResult;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -58,7 +58,7 @@ public class BrowserTabs {
      */
     public static boolean newTabIsOpened(String url) {
         boolean newTabIsOpened = newTabIsOpened();
-        JDI.urlShouldBe(url);
+        urlShouldBe(url);
         return newTabIsOpened;
     }
 
@@ -88,12 +88,17 @@ public class BrowserTabs {
     }
 
     public static void setTabName(String value) {
-        windowHandlesMap.get().update(value, driver().getWindowHandle());
+        String handle = driver().getWindowHandle();
+        if (windowHandlesMap.get().values().contains(handle)) {
+            windowHandlesMap.get().removeAllValues(handle);
+        }
+        windowHandlesMap.get().update(value, handle);
     }
 
     public static void setTabNameNewPage() {
         String title = waitForResult(JDI::getTitle, t -> !t.equals("Index"));
         if (browserTabsCount() == 1 || !allBrowserTabs().contains(title)) {
+            windowHandlesMap.get().clear();
             setTabName(title);
         } else {
             String newTabName = title + "[2]";
@@ -107,6 +112,10 @@ public class BrowserTabs {
 
     public static List<String> allBrowserTabs() {
         return windowHandlesMap.get().keys();
+    }
+
+    public static List<String> allWindowHandles() {
+        return windowHandlesMap.get().values();
     }
 
     /**
@@ -145,8 +154,18 @@ public class BrowserTabs {
     public static void openNewTabPage(String url) {
         jsExecute("window.open()");
         switchToNewTab();
-        JDI.openPage(url);
+        openPage(url);
         setTabNameNewPage();
+    }
+
+    /**
+     * Open new tab
+     */
+    public static void openNewTabPage(String url, String name) {
+        jsExecute("window.open()");
+        switchToNewTab();
+        openPage(url);
+        setTabName(name);
     }
 
     /**
@@ -160,7 +179,7 @@ public class BrowserTabs {
     /**
      * Go back to original window
      */
-    public static void originalWindow() {
+    public static void switchToOriginalTab() {
         driver().switchTo().window(getWindowHandles().iterator().next());
     }
 
@@ -174,7 +193,7 @@ public class BrowserTabs {
         }
         int counter = 0;
         if (getWindowHandles().size() < index + 1) {
-            throw new JDINovaException(index + " is too much. Only " + getWindowHandles().size() + " windows found");
+            throw new JDINovaException(index + " is too much. Only " + getWindowHandles().size() + " tabs found");
         }
         for (String window : getWindowHandles()) {
             counter++;
@@ -191,7 +210,7 @@ public class BrowserTabs {
      */
     public static void switchToTab(String value) {
         if (!windowHandlesMap.get().has(value)) {
-            throw new JDINovaException("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
+            throw new JDINovaException("Browser tab '%s' not registered. Use setTabName(name) method to setup window name for current windowHandle", value);
         }
         driver().switchTo().window(windowHandlesMap.get().get(value));
     }
@@ -200,8 +219,10 @@ public class BrowserTabs {
      * Close current window
      */
     public static void closeTab() {
+        String wHandle = driver().getWindowHandle();
+        windowHandlesMap.get().removeAllValues(wHandle);
         driver().close();
-        originalWindow();
+        switchToOriginalTab();
     }
 
     /**
@@ -212,6 +233,54 @@ public class BrowserTabs {
         switchToTab(value);
         closeTab();
     }
+
+    /**
+     * Close the specified window
+     * @param value
+     */
+    public static void closeAllTabsBut(String value) {
+        for (Pair<String, String> tab : windowHandlesMap.get()) {
+            if (!tab.key.equals(value)) {
+                driver().switchTo().window(tab.value);
+                driver().close();
+            }
+        }
+        windowHandlesMap.set(new MapArray<>(value, driver().getWindowHandle()));
+    }
+
+    public static void closeAllTabsButFirst() {
+        String firstHandle = null;
+        for (String handle : driver().getWindowHandles()) {
+            if (firstHandle == null) {
+                firstHandle = handle;
+            } else {
+                driver().switchTo().window(handle);
+                driver().close();
+            }
+        }
+        if (firstHandle != null) {
+            String finalFirstHandle = firstHandle;
+            Pair<String, String> tab = windowHandlesMap.get().first(v -> v.equals(finalFirstHandle));
+            if (tab != null) {
+                windowHandlesMap.set(new MapArray<>(tab.key, firstHandle));
+            }
+        }
+    }
+
+    public static void closeAllTabsButThis() {
+        String current = driver().getWindowHandle();
+        for (String handle : driver().getWindowHandles()) {
+            if (!handle.equals(current)) {
+                driver().switchTo().window(handle);
+                driver().close();
+            }
+        }
+        Pair<String, String> tab = windowHandlesMap.get().first(v -> v.equals(current));
+        if (tab != null) {
+            windowHandlesMap.set(new MapArray<>(tab.key, current));
+        }
+    }
+
     /**
      * Resize window according to specified width and height
      * @param width - window width

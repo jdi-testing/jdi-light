@@ -21,25 +21,27 @@ public class ShouldUtils {
         return waitForResult(function, result -> true, timeout);
     }
 
-    public static <T> T waitForResult(Supplier<T> function, int timeout) {
-        return waitForResult(function, result -> true, timeout);
+    public static <T> T waitForResult(Supplier<T> function, int timeoutInSec) {
+        return waitForResult(function, result -> true, timeoutInSec);
     }
 
     public static <T> T waitForResult(Supplier<T> function, Function<T, Boolean> conditionFunc) {
         return waitForResult(function, conditionFunc, timeout);
     }
 
-    public static <T> T waitForResult(Supplier<T> function, Function<T, Boolean> conditionFunc, int timeout) {
+    public static <T> T waitForResult(Supplier<T> function, Function<T, Boolean> conditionFunc, int timeoutInSec) {
         try {
-            return function.get();
-        } catch (Throwable ignore){
-            loggerOff();
-            try {
-                Timer timer = new Timer(timeout * 1000L);
-                return timer.getResultByCondition(function, conditionFunc);
-            } finally {
-                loggerOn();
+            T result = function.get();
+            if (result != null && conditionFunc.apply(result)) {
+                return result;
             }
+        } catch (Throwable ignore) { }
+        loggerOff();
+        try {
+            Timer timer = new Timer(timeoutInSec * 1000L);
+            return timer.getResultByCondition(function, conditionFunc);
+        } finally {
+            loggerOn();
         }
     }
 
