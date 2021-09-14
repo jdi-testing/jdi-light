@@ -1,9 +1,8 @@
 package com.jdiai;
 
-import com.jdiai.jsbuilder.IJSBuilder;
+import com.google.gson.JsonObject;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsproducer.Json;
-import com.jdiai.tools.GetTextTypes;
 import com.jdiai.tools.Timer;
 import com.jdiai.tools.func.JAction;
 import com.jdiai.visual.Direction;
@@ -16,11 +15,9 @@ import java.util.function.Supplier;
 
 import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.Conditions.visible;
-import static com.jdiai.tools.LinqUtils.last;
 import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.StringUtils.format;
 import static com.jdiai.tools.Timer.sleep;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class JSStable extends JSLight {
     public JSStable() {
@@ -59,7 +56,7 @@ public class JSStable extends JSLight {
     }
 
     protected Timer startTimer() {
-        return new Timer(timeout * 1000L);
+        return new Timer(elementTimeout() * 1000L);
     }
 
     protected void stableAction(String actionName, JAction action) {
@@ -183,19 +180,6 @@ public class JSStable extends JSLight {
     }
 
     @Override
-    public JS select(String... values) {
-        if (isEmpty(values) || isEmpty(locators())) {
-            throw new JDINovaException("Can't execute select for empty values or locators");
-        }
-        IJSBuilder builder = last(locators()).toString().contains("%s")
-            ? getTemplateScriptForSelect(values)
-            : getScriptForSelect(values);
-
-        stableFilterAction("select(" + print(values) + ")", builder::executeQuery);
-        return this;
-    }
-
-    @Override
     public JS check(boolean value) {
         stableFilterAction("check(" + value + ")", () -> super.check(value));
         return this;
@@ -315,7 +299,7 @@ public class JSStable extends JSLight {
     }
 
     @Override
-    public String getText(GetTextTypes textType) {
+    public String getText(String textType) {
         return stableFunction("getText(" + textType + ")", () -> super.getText(textType));
     }
 
@@ -356,7 +340,36 @@ public class JSStable extends JSLight {
 
     @Override
     public Direction getDirectionTo(WebElement element) {
-        return stableFunction("getDirectionTo(" + element + ")", () -> super.getDirectionTo(element));
+        return stableFunction("getDirectionTo(" + element + ")",
+                () -> super.getDirectionTo(element));
+    }
+
+    @Override
+    public JsonObject getJSObject(String json) {
+        return stableFunction("getJSObject(" + json+ ")",
+                () -> super.getJSObject(json));
+    }
+
+    @Override
+    public <T> T getEntity(Class<T> cl) {
+        return stableFunction("getEntity(" + cl.getSimpleName()+ ")",
+                () -> super.getEntity(cl));
+    }
+
+    @Override
+    public <T> T getEntity() {
+        return stableFunction("getEntity()", super::getEntity);
+    }
+
+    @Override
+    public <T> T getEntity(String objectMap, Class<?> cl) {
+        return stableFunction("getEntity(" + cl.getSimpleName()+ ")",
+                () -> super.getEntity(objectMap, cl));
+    }
+
+    @Override
+    public void setEntity(String objectMap) {
+        stableAction("setEntity(objectMap)", () -> super.setEntity(objectMap));
     }
 
 }

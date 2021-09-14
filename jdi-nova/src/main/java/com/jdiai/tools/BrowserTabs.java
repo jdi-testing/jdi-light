@@ -1,5 +1,6 @@
 package com.jdiai.tools;
 
+import com.jdiai.JDI;
 import com.jdiai.annotations.Name;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.tools.map.MapArray;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 import static com.jdiai.JDI.driver;
 import static com.jdiai.JDI.jsExecute;
+import static com.jdiai.asserts.ShouldUtils.waitForResult;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -18,14 +20,14 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-public class WindowsManager {
+public class BrowserTabs {
     private static Safe<Set<String>> windowHandles = new Safe<>();
 
     private static Safe<MapArray<String, String>> windowHandlesMap = new Safe<>(MapArray::new);
 
     private static Safe<Boolean> newWindow = new Safe<>(() -> false);
 
-    public static Set<String> getWindows() {
+    public static Set<String> getWindowHandles() {
         Set<String> wHandles = driver().getWindowHandles();
         if (windowHandles.get() != null &&
             windowHandles.get().size() < wHandles.size()) {
@@ -40,11 +42,11 @@ public class WindowsManager {
             ? site.getAnnotation(Name.class).value()
             : site.getSimpleName();
         if (isEmpty(windowHandlesMap.get())) {
-            setWindowName(name);
+            setTabName(name);
             return;
         }
         if (windowHandlesMap.get().has(name)) {
-            switchToWindow(name);
+            switchToTab(name);
         } else {
             openNewTab(name);
         }
@@ -54,8 +56,14 @@ public class WindowsManager {
      * Check the new window is opened
      * @return boolean
      */
-    public static boolean newWindowIsOpened() {
-        getWindows();
+    public static boolean newTabIsOpened(String url) {
+        boolean newTabIsOpened = newTabIsOpened();
+        JDI.urlShouldBe(url);
+        return newTabIsOpened;
+    }
+
+    public static boolean newTabIsOpened() {
+        getWindowHandles();
         boolean hasNewWindow = newWindow.get();
         if (hasNewWindow) {
             newWindow.set(false);
@@ -63,19 +71,41 @@ public class WindowsManager {
         }
         return false;
     }
-    public static void checkNewWindowIsOpened() {
-        boolean isNewWindow = newWindowIsOpened();
+
+    public static void checkNewTabIsOpenedAndSwitch(String url) {
+        boolean isNewWindow = newTabIsOpened(url);
         if (!isNewWindow) {
             throw new JDINovaException("New window is not opened");
         }
-        switchToNewWindow();
+        switchToNewTab();
+    }
+    public static void checkNewTabIsOpenedAndSwitch() {
+        boolean isNewWindow = newTabIsOpened();
+        if (!isNewWindow) {
+            throw new JDINovaException("New window is not opened");
+        }
+        switchToNewTab();
     }
 
-    public static void setWindowName(String value) {
+    public static void setTabName(String value) {
         windowHandlesMap.get().update(value, driver().getWindowHandle());
     }
 
-    public static List<String> registeredWindows() {
+    public static void setTabNameNewPage() {
+        String title = waitForResult(JDI::getTitle, t -> !t.equals("Index"));
+        if (browserTabsCount() == 1 || !allBrowserTabs().contains(title)) {
+            setTabName(title);
+        } else {
+            String newTabName = title + "[2]";
+            int i = 3;
+            while (allBrowserTabs().contains(newTabName)) {
+                newTabName = title + "[" + i++ + "]";
+            }
+            setTabName(newTabName);
+        }
+    }
+
+    public static List<String> allBrowserTabs() {
         return windowHandlesMap.get().keys();
     }
 
@@ -83,16 +113,16 @@ public class WindowsManager {
      * Get windows count
      * @return int count
      */
-    public static int windowsCount() {
-        return getWindows().size();
+    public static int browserTabsCount() {
+        return getWindowHandles().size();
     }
 
     /**
      * Switch to new window
      */
-    public static void switchToNewWindow() {
+    public static void switchToNewTab() {
         String last = "";
-        for (String window : getWindows()) {
+        for (String window : getWindowHandles()) {
             last = window;
         }
         if (!isBlank(last)) {
@@ -106,38 +136,47 @@ public class WindowsManager {
      */
     public static void openNewTab() {
         jsExecute("window.open()");
-        switchToNewWindow();
+        switchToNewTab();
     }
 
+    /**
+     * Open new tab
+     */
+    public static void openNewTabPage(String url) {
+        jsExecute("window.open()");
+        switchToNewTab();
+        JDI.openPage(url);
+        setTabNameNewPage();
+    }
 
     /**
      * Open new tab
      */
     public static void openNewTab(String name) {
         jsExecute("window.open()");
-        switchToNewWindow();
-        setWindowName(name);
+        switchToNewTab();
+        setTabName(name);
     }
     /**
      * Go back to original window
      */
     public static void originalWindow() {
-        driver().switchTo().window(getWindows().iterator().next());
+        driver().switchTo().window(getWindowHandles().iterator().next());
     }
 
     /**
      * Switch to the specified window
      * @param index
      */
-    public static void switchToWindow(int index) {
+    public static void switchToTab(int index) {
         if (index < 0) {
             throw new JDINovaException("Window's index starts from 1. You try to use '%s' that less than 1.", index);
         }
         int counter = 0;
-        if (getWindows().size() < index + 1) {
-            throw new JDINovaException(index + " is too much. Only " + getWindows().size() + " windows found");
+        if (getWindowHandles().size() < index + 1) {
+            throw new JDINovaException(index + " is too much. Only " + getWindowHandles().size() + " windows found");
         }
-        for (String window : getWindows()) {
+        for (String window : getWindowHandles()) {
             counter++;
             if (counter == index) {
                 driver().switchTo().window(window);
@@ -150,7 +189,7 @@ public class WindowsManager {
      * Switch to the specified window
      * @param value
      */
-    public static void switchToWindow(String value) {
+    public static void switchToTab(String value) {
         if (!windowHandlesMap.get().has(value)) {
             throw new JDINovaException("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
         }
@@ -160,7 +199,7 @@ public class WindowsManager {
     /**
      * Close current window
      */
-    public static void closeWindow() {
+    public static void closeTab() {
         driver().close();
         originalWindow();
     }
@@ -169,9 +208,9 @@ public class WindowsManager {
      * Close the specified window
      * @param value
      */
-    public static void closeWindow(String value) {
-        switchToWindow(value);
-        closeWindow();
+    public static void closeTab(String value) {
+        switchToTab(value);
+        closeTab();
     }
     /**
      * Resize window according to specified width and height

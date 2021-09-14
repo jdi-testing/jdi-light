@@ -11,14 +11,13 @@ import org.testng.annotations.Test;
 import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.Conditions.be;
 import static com.jdiai.asserts.Conditions.haveAll;
-import static com.jdiai.jsbuilder.QueryLogger.ALL;
 
 @Listeners(TestNGListener.class)
 public class JDINovaTests {
     public User DefaultUser = new User();
     @BeforeMethod
     public void before() {
-        logJSRequests(ALL);
+        logAll();
     }
 
     @Test(enabled = false)
@@ -26,7 +25,7 @@ public class JDINovaTests {
         openPage("https://jdi-testing.github.io/jdi-light");
         $("#user-icon").click();
         loginAs(DefaultUser);
-        $(".sidebar-menu").select("Service", "User Table");
+        $(".sidebar-menu li a").select("Service", "User Table");
         $("#user-table tr").get(2).should(be(SPIDER_MAN));
     }
 
@@ -35,7 +34,7 @@ public class JDINovaTests {
         openPage("https://jdi-testing.github.io/jdi-light");
         $("#user-icon").click();
         loginAs(DefaultUser);
-        $(".sidebar-menu").select("Service", "User Table");
+        $(".sidebar-menu li a").select("Service", "User Table");
         $("#user-table tbody tr").should(haveAll(
             SPIDER_MAN, WOLVERINE, CAPITAN_AMERICA, HULK, CYCLOPE, PUNISHER));
     }
@@ -44,7 +43,7 @@ public class JDINovaTests {
         openPage("https://jdi-testing.github.io/jdi-light");
         $("#user-icon").click();
         loginAs(DefaultUser);
-        $(".sidebar-menu").select("Service", "User Table");
+        $(".sidebar-menu li a").select("Service", "User Table");
         $("#user-table tbody tr").should(be(
             WOLVERINE, SPIDER_MAN, PUNISHER, CAPITAN_AMERICA, CYCLOPE, HULK));
     }

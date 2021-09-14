@@ -64,12 +64,9 @@ public class JSWrappersUtils {
             || (field.getType().equals(TYPE) && (boolean) value);
     }
 
-    protected static String setStringAction(String element, String action) {
-        boolean changed = false;
-        if (action.contains("styles.")) {
-            // action = action.replace("styles", "getComputedStyle(" +  element + ")");
-            changed = true;
-        }
+    public static String setStringAction(String element, String action) {
+        boolean changed = action.contains("styles.");
+        // action = action.replace("styles", "getComputedStyle(" +  element + ")");
         if (action.contains("{element}")) {
             action = action.replace("{element}", element);
             changed = true;

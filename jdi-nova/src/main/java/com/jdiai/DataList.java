@@ -119,14 +119,14 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName, HasLabel 
             return item.getEntity(dataClass);
         } catch (Throwable ex) {
             shouldHave(Conditions.size(s -> s > index));
-            item.showIfNotInView();
+            item.show();
             return item.getEntity(dataClass);
         }
     }
 
     public void select(String value) {
-        hasLabel(value);
-        getLabelElement().core().get(value).click();
+        // hasLabel(value);
+        getLabelElement().core().select(value);
     }
 
     public void select(Enum<?> name) {

@@ -346,7 +346,7 @@ public abstract class Conditions {
     private static <T> boolean compareTwoLists(HasCore el, boolean checkSize, boolean sameOrder, List<T> expected) {
         Class<T> cl = (Class<T>) expected.get(0).getClass();
         List<T> actual = cl.isAssignableFrom(String.class)
-            ? (List<T>) el.core().values()
+            ? (List<T>) el.core().allValues()
             : el.core().getEntityList((Class<T>) expected.get(0).getClass());
         return compareTwoLists(checkSize, sameOrder, actual, expected);
     }

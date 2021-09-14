@@ -17,26 +17,22 @@ import static com.jdiai.jsbuilder.ListSearch.CHAIN;
 import static com.jdiai.jsbuilder.ListSearch.MULTI;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static com.jdiai.jsdriver.RuleType.Element;
-import static com.jdiai.tools.LinqUtils.*;
+import static com.jdiai.tools.LinqUtils.ifSelect;
+import static com.jdiai.tools.LinqUtils.map;
+import static java.util.Arrays.asList;
 import static java.util.regex.Pattern.compile;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JSDriver {
-    private final Supplier<WebDriver> driver;
-    protected List<By> locators;
     protected List<JSRule> rules;
     protected IJSBuilder builder;
     public ListSearch strategy = CHAIN;
     public String context = "document";
 
-    public JSDriver(Supplier<WebDriver> driver, IJSBuilder builder) {
-        this(driver, null, builder);
-    }
-
     public JSDriver(Supplier<WebDriver> driver, By... locators) {
-        this(driver, newList(locators), defaultBuilder(driver));
+        this(driver, asList(locators));
     }
 
     public JSDriver(WebDriver driver, By... locators) {
@@ -44,7 +40,7 @@ public class JSDriver {
     }
 
     public JSDriver(Supplier<WebDriver> driver, List<By> locators) {
-        this(driver, locators, defaultBuilder(driver));
+        this(locators, new JSBuilder(driver));
     }
 
     public JSDriver(WebDriver driver, List<By> locators) {
@@ -52,22 +48,14 @@ public class JSDriver {
     }
 
     public JSDriver(Supplier<WebDriver> driver, List<By> locators, IBuilderActions actions) {
-        this(driver, locators, new JSBuilder(driver, actions));
+        this(locators, new JSBuilder(driver, actions));
     }
 
     public JSDriver(WebDriver driver, List<By> locators, IBuilderActions actions) {
         this(() -> driver, locators, actions);
     }
 
-    public JSDriver(WebDriver driver, List<By> locators, IJSBuilder builder) {
-        this(() -> driver, locators, builder);
-    }
-
-    public JSDriver(Supplier<WebDriver> driver, List<By> locators, IJSBuilder builder) {
-        if (driver == null) {
-            throw new JDINovaException("JSDriver init failed: WebDriver == null");
-        }
-        this.driver = driver;
+    public JSDriver(List<By> locators, IJSBuilder builder) {
         this.rules = locators != null
             ? map(locators, JSRule::new)
             : new ArrayList<>();
@@ -255,9 +243,10 @@ public class JSDriver {
 
     public JSDriver setLocators(List<By> locators) {
         if (locators == null) {
-            this.locators = null;
+            this.rules = new ArrayList<>();
             return this;
         }
+        this.rules = new ArrayList<>();
         List<By> result = new ArrayList<>();
         for (By locator : locators) {
             Matcher matcher = idMatcher.matcher(getByLocator(locator));
@@ -273,7 +262,9 @@ public class JSDriver {
             }
             result.add(locator);
         }
-        this.locators = result;
+        for (By locator : result) {
+            addLocator(locator);
+        }
         return this;
     }
 
@@ -326,13 +317,10 @@ public class JSDriver {
     }
 
     public WebDriver driver() {
-        return this.driver.get();
+        return builder().driver();
     }
 
     public IJSBuilder builder() {
-        if (builder == null) {
-            builder = new JSBuilder(driver);
-        }
         return builder;
     }
 
@@ -378,7 +366,7 @@ public class JSDriver {
     }
 
     public JSDriver copy() {
-        JSDriver jsDriver = new JSDriver(this.driver);
+        JSDriver jsDriver = new JSDriver(driver());
         jsDriver.copyFrom(this);
 
         return jsDriver;

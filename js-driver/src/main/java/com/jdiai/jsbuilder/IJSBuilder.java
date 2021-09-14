@@ -1,13 +1,13 @@
 package com.jdiai.jsbuilder;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 import java.util.function.Function;
 
 public interface IJSBuilder {
     IJSBuilder addJSCode(String code);
-    IJSBuilder setSearchScript(String code);
 
     IJSBuilder oneToOne(String ctx, By locator);
     IJSBuilder oneToOneFilter(String ctx, By locator, String filterName);
@@ -29,7 +29,6 @@ public interface IJSBuilder {
     List<Object> executeAsList();
     IJSBuilder registerFunction(String name, String function);
     String getQuery();
-    String getScript();
     IJSBuilder logQuery(int queryLevel);
     void cleanup();
     void updateFromBuilder(IJSBuilder builder);
@@ -39,4 +38,5 @@ public interface IJSBuilder {
     JSBuilder setProcessResultFunc(Function<String, String> processResultFunc);
     String getElementName();
     String preResult(String collector);
+    WebDriver driver();
 }

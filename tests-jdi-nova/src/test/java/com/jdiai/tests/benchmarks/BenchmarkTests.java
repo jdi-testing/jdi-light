@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import com.google.gson.JsonObject;
 import com.jdiai.TestInit;
 import com.jdiai.jsproducer.Json;
+import com.jdiai.states.States;
 import com.jdiai.testng.TestNGListener;
 import com.jdiai.tests.benchmarks.test.data.Statistic;
 import org.openqa.selenium.By;
@@ -43,7 +44,7 @@ public class BenchmarkTests implements TestInit {
 
     @BeforeMethod
     public void before() {
-        loggedInAt(PERFORMANCE_PAGE);;
+        loggedInAt(PERFORMANCE_PAGE);
     }
 
     @Test(invocationCount = repeat)
@@ -120,7 +121,7 @@ public class BenchmarkTests implements TestInit {
         stats.add(testScenario("listGetValuesTest", () -> {
             List<WebElement> elements = driver().findElements(By.cssSelector("#users-table tr>td:first-child"));
             return elements.stream().map(WebElement::getText).collect(Collectors.toList());
-        }, () -> $("#users-table tr>td:first-child").values(),
+        }, () -> $("#users-table tr>td:first-child").allValues(),
         heavyTestsCount));
     }
 
@@ -144,7 +145,8 @@ public class BenchmarkTests implements TestInit {
                     td = el.findElement(By.cssSelector("td:first-child"));
                 } catch (Exception ex) { isExist = false; }
                 return isExist && td.getText().equals(atTop);
-            }).findFirst().get();
+            }).findFirst().orElse(null);
+            if (row == null) { return ""; }
             return row.findElement(By.xpath(".//td[3]")).getText();
         }, () -> $("#users-table tr").findFirst("td", textEquals(atTop)).find(".//td[3]").getText(),
         heavyTestsCount));
@@ -161,7 +163,8 @@ public class BenchmarkTests implements TestInit {
                     td = el.findElement(By.cssSelector("td:first-child"));
                 } catch (Exception ex) { isExist = false; }
                 return isExist && td.getText().equals(atBottom);
-            }).findFirst().get();
+            }).findFirst().orElse(null);
+            if (row == null) { return ""; }
             return row.findElement(By.xpath(".//td[3]")).getText();
         }, () -> $("#users-table tr").findFirst("td", textEquals(atBottom)).find(".//td[3]").getText(),
         heavyTestsCount));
@@ -170,12 +173,12 @@ public class BenchmarkTests implements TestInit {
     @Test(invocationCount = repeat)
     public void scenarioJdiSeleniumTest() {
         stats.add(testScenario("scenarioJdiSeleniumTest",
-            () -> logout(),
+            States::logout,
             "Selenium",
             () -> { try { new SeleniumTests().simpleSearchTest(); return true; } catch (Exception ex) { return false; } },
             "JDI Nova",
             () -> { try { new JDINovaTests().simpleSearchTest(); return true; } catch (Exception ex) { return false; } },
-            heavyTestsCount*2));
+            heavyTestsCount * 2));
     }
 
     @Test(invocationCount = repeat)
@@ -194,7 +197,7 @@ public class BenchmarkTests implements TestInit {
     public void scenarioAllJdiSeleniumTest() {
         Configuration.headless = true;
         stats.add(testScenario("scenarioAllJdiSeleniumTest",
-            () -> logout(),
+            States::logout,
             "Selenium",
             () -> { try { new SeleniumTests().simpleAllSearchTest(); return true; } catch (Exception ex) { return false; } },
             "JDI Nova",

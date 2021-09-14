@@ -2,9 +2,7 @@ package com.jdiai;
 
 import com.google.gson.JsonObject;
 import com.jdiai.interfaces.HasCore;
-import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.jsdriver.JDINovaException;
-import com.jdiai.jsdriver.JSDriver;
 import com.jdiai.jsdriver.RuleType;
 import com.jdiai.jsproducer.Json;
 import com.jdiai.jswraper.JSEngine;
@@ -34,9 +32,8 @@ import static com.jdiai.JDI.*;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
-import static com.jdiai.jswraper.JSWrappersUtils.defineLocator;
+import static com.jdiai.jswraper.JSWrappersUtils.setStringAction;
 import static com.jdiai.tools.EnumUtils.getEnumValue;
-import static com.jdiai.tools.FilterConditions.textEquals;
 import static com.jdiai.tools.GetTextTypes.INNER_TEXT;
 import static com.jdiai.tools.JSUtils.getLocators;
 import static com.jdiai.tools.Keyboard.pasteText;
@@ -110,6 +107,10 @@ public class JSLight implements JS {
         }
     }
 
+    public void click(int timeoutWait) {
+        setTimeout(timeoutWait);
+        click();
+    }
     public void click() {
         engine().doAction("click();");
     }
@@ -130,72 +131,27 @@ public class JSLight implements JS {
     public JS select() { click(); return this; }
 
     public void select(String value) {
-        if (value == null || isEmpty(locators())) {
-            return ;
+        if (value == null) {
+            throw new JDINovaException("get(null) failed. Value can't be null");
+        }
+        if (isEmpty(locators())) {
+            throw new JDINovaException("get(" + value + ") failed. Element should have locator");
         }
         By lastLocator = last(locators());
+        JS item;
         if (lastLocator.toString().contains("%s")) {
-            findTemplate(value).click();
+            item = findTemplate(value);
         } else {
-            findFirst(textEquals(value)).click();
+            item = findFirst(valueCondition(value));
         }
+        item.setName(getName() + "[" + value + "]");
+        item.click();
     }
 
-    public JS selectSubList(String value) {
-        if (value == null || isEmpty(locators())) {
-            return this;
-        }
-        find(format(SELECT_FIND_TEXT_LOCATOR, value)).click();
-        return this;
-    }
-
-    public String selectFindTextLocator = SELECT_FIND_TEXT_LOCATOR;
-
-    protected String selectFindTextLocator() {
-        return selectFindTextLocator;
-    }
-
-    public JS setFindTextLocator(String locator) {
-        selectFindTextLocator = locator;
-        return this;
-    }
-
-    public JS select(String... values) {
-        if (isEmpty(values) || isEmpty(locators())) {
-            throw new JDINovaException("Can't execute select for empty values or locators");
-        }
-        IJSBuilder builder = last(locators()).toString().contains("%s")
-            ? getTemplateScriptForSelect(values)
-            : getScriptForSelect(values);
-        builder.executeQuery();
-        return this;
-    }
-
-    protected IJSBuilder getTemplateScriptForSelect(String... values) {
-        IJSBuilder builder;
-        String ctx;
-        if (locators().size() == 1) {
-            builder = jsDriver().builder();
-            ctx = "document";
-        } else {
-            builder = new JSDriver(driver(), listCopyUntil(locators(), locators().size() - 2))
-                .buildOne();
-            ctx = "element";
-        }
+    public void select(String... values) {
         for (String value : values) {
-            By by = defineLocator(format(selectFindTextLocator(), value));
-            builder.doAction(MessageFormat.format(dataType(by).get, ctx, selector(by, builder)) + ".click();\n");
+            select(value);
         }
-        return builder;
-    }
-
-    protected IJSBuilder getScriptForSelect(String... values) {
-        IJSBuilder builder = jsDriver().buildOne();
-        for (String value : values) {
-            By by = defineLocator(format(selectFindTextLocator(), value));
-            builder.doAction(MessageFormat.format(dataType(by).get, "element", selector(by, builder)) + ".click();\n");
-        }
-        return builder;
     }
 
     public <TEnum extends Enum<?>> void select(TEnum name) {
@@ -357,7 +313,7 @@ public class JSLight implements JS {
     }
 
     public JS highlight(String color) {
-        showIfNotInView();
+        show();
         engine().doAction("styles.border='3px dashed "+color+"'");
         return this;
     }
@@ -394,14 +350,18 @@ public class JSLight implements JS {
         this.textType = textType; return this;
     }
 
-    public GetTextTypes textType = INNER_TEXT;
+    protected GetTextTypes textType = null;
 
-    public String getText() {
-        return getText(textType);
+    public String textType() {
+        return textType == null ? INNER_TEXT.value : textType.value;
     }
 
-    public String getText(GetTextTypes textType) {
-        return getJSResult(textType.value);
+    public String getText() {
+        return getText(textType());
+    }
+
+    public String getText(String textType) {
+        return getJSResult(textType);
     }
 
     public List<WebElement> findElements(By by) {
@@ -424,7 +384,7 @@ public class JSLight implements JS {
         if (isHidden()) {
             return false;
         }
-        showIfNotInView();
+        show();
         return getElement(findFilters.isVisible).equalsIgnoreCase("true");
     }
 
@@ -522,7 +482,7 @@ public class JSLight implements JS {
     }
 
     public File makeScreenshot(String tag) {
-        showIfNotInView();
+        show();
         File imageFile = makeScreenshot().asFile(getScreenshotName(tag));
         imagesData().images.update(tag, imageFile.getPath());
         imagesData().imageFile = imageFile;
@@ -639,12 +599,12 @@ public class JSLight implements JS {
         return find("/..");
     }
 
-    public List<String> values(GetTextTypes getTextType) {
-        return engine().getAttributeList(getTextType.value);
+    public List<String> allValues(String getTextType) {
+        return engine().getAttributeList(getTextType);
     }
 
-    public List<String> values() {
-        return values(textType);
+    public List<String> allValues() {
+        return allValues(textType());
     }
 
     public int size() {
@@ -779,14 +739,36 @@ public class JSLight implements JS {
         return addJSCode(script, "[" + index + "]");
     }
 
-    public JS get(Function<JS, String> filter) {
-        return findFirst(filter);
+    public JS get(String value) {
+        if (value == null) {
+            throw new JDINovaException("get(null) failed. Value can't be null");
+        }
+        if (isEmpty(locators())) {
+            throw new JDINovaException("get(" + value + ") failed. Element should have locator");
+        }
+        By lastLocator = last(locators());
+        if (lastLocator.toString().contains("%s")) {
+            return findTemplate(value);
+        } else {
+            JS js = findFirst(valueCondition(value));
+            js.setName(format("%s[%s]",getName(), value));
+            return js;
+        }
     }
 
-    public JS get(String value) {
-        JS js = get(textEquals(value));
-        js.setName(format("%s[%s]",getName(), value));
-        return js;
+    protected String valueCondition(String value) {
+        return format("%s === '%s'", setStringAction("#element#", valueFunc()), value);
+    }
+    protected String valueFunc;
+
+    protected String valueFunc() {
+        return valueFunc == null ? GET_TEXT_DEFAULT : valueFunc;
+    }
+
+    public JS setGetValueFunc(String getValueFunc) {
+        this.valueFunc = getValueFunc;
+
+        return this;
     }
 
     public long indexOf(Function<JS, String> condition) {
@@ -1028,10 +1010,6 @@ public class JSLight implements JS {
         return engine;
     }
 
-    public String textType() {
-        return textType.value;
-    }
-
     @Override
     public String toString() {
         if (isBlank(name)) {
@@ -1173,8 +1151,16 @@ public class JSLight implements JS {
         return (WebElement) ctx;
     }
 
+    protected int elementTimeout = -1;
+    public int elementTimeout() {
+        return elementTimeout < 0 ? timeout : elementTimeout;
+    }
+    public int setTimeout(int timeoutSec) {
+        return elementTimeout = timeoutSec;
+    }
+
     public WebElement we() {
-        Timer timer = new Timer(timeout);
+        Timer timer = new Timer(elementTimeout());
         while (timer.isRunning()) {
             try {
                 WebElement element = rawWe();
