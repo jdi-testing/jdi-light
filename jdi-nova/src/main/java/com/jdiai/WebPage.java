@@ -11,6 +11,7 @@ import static com.jdiai.JDI.openPage;
 import static com.jdiai.page.objects.PageFactory.initPageElements;
 import static com.jdiai.page.objects.PageFactoryUtils.getPageTitle;
 import static com.jdiai.page.objects.PageFactoryUtils.getPageUrl;
+import static com.jdiai.tools.BrowserTabs.openNewTabPage;
 
 public class WebPage implements HasName, ISetup {
     private String url;
@@ -37,6 +38,14 @@ public class WebPage implements HasName, ISetup {
     public WebPage setName(String name) {
         this.name = name;
         return this;
+    }
+
+    public void openAsNewTab() {
+        openAsNewTab(getName());
+    }
+
+    public void openAsNewTab(String tabName) {
+        openNewTabPage(url, tabName);
     }
 
     public File makeScreenshot() {

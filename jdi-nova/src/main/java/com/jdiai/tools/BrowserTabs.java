@@ -10,8 +10,7 @@ import org.openqa.selenium.Dimension;
 import java.util.List;
 import java.util.Set;
 
-import static com.jdiai.JDI.driver;
-import static com.jdiai.JDI.jsExecute;
+import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.ShouldUtils.waitForResult;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -59,7 +58,7 @@ public class BrowserTabs {
      */
     public static boolean newTabIsOpened(String url) {
         boolean newTabIsOpened = newTabIsOpened();
-        JDI.urlShouldBe(url);
+        urlShouldBe(url);
         return newTabIsOpened;
     }
 
@@ -152,21 +151,21 @@ public class BrowserTabs {
     /**
      * Open new tab
      */
-    public static void openNewTabPage(String url, String name) {
+    public static void openNewTabPage(String url) {
         jsExecute("window.open()");
         switchToNewTab();
-        JDI.openPage(url);
-        setTabName(name);
+        openPage(url);
+        setTabNameNewPage();
     }
 
     /**
      * Open new tab
      */
-    public static void openNewTabPage(String url) {
+    public static void openNewTabPage(String url, String name) {
         jsExecute("window.open()");
         switchToNewTab();
-        JDI.openPage(url);
-        setTabNameNewPage();
+        openPage(url);
+        setTabName(name);
     }
 
     /**
