@@ -43,7 +43,7 @@ import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 import static com.jdiai.tools.BrowserTabs.getWindowHandles;
-import static com.jdiai.tools.BrowserTabs.setTabNameNewPage;
+import static com.jdiai.tools.BrowserTabs.setTabName;
 import static com.jdiai.tools.JsonUtils.getDouble;
 import static com.jdiai.tools.LinqUtils.newList;
 import static com.jdiai.tools.PrintUtils.print;
@@ -303,7 +303,7 @@ public class JDI {
         initSite(cl);
         if (domain != null) {
             JDI.openSite();
-            setTabNameNewPage();
+            setTabName(cl.getSimpleName());
         }
     }
 
