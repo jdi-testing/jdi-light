@@ -20,6 +20,10 @@ public class CardPage extends WebPage {
         return complexCard.find(".MuiCardMedia-root");
     }
 
+    public static UIElement complexCardHeartButtonIcon() {
+        return complexCard.getActionButtonByNumber(1).find(".MuiSvgIcon-root");
+    }
+
     public static UIElement complexCardCollapsibleContent() {
         return complexCard.find(".MuiCollapse-container");
     }

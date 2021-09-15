@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.cardPage;
 import static io.github.com.pages.surfaces.CardPage.complexCard;
 import static io.github.com.pages.surfaces.CardPage.complexCardCollapsibleContent;
+import static io.github.com.pages.surfaces.CardPage.complexCardHeartButtonIcon;
 import static io.github.com.pages.surfaces.CardPage.outlinedCard;
 import static io.github.com.pages.surfaces.CardPage.simpleCard;
 import static org.hamcrest.Matchers.containsString;
@@ -67,9 +68,9 @@ public class CardTests extends TestsInit {
     @Test
     public void complexCardHeartButtonTest() {
         complexCard.is().assertNumberOfButtonsOnCard(3);
-        UIElement heartButton = complexCard.getActionButtonByNumber(1);
-        heartButton.click();
-        heartButton.has().classValue(containsString("jss"));
+        UIElement heartButtonIcon = complexCardHeartButtonIcon();
+        heartButtonIcon.click();
+        heartButtonIcon.has().classValue(containsString("jss"));
     }
 
     @Test
