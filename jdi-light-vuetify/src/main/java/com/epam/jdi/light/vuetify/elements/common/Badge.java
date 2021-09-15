@@ -17,7 +17,7 @@ public class Badge extends UIBaseElement<BadgeAssert> {
         return new BadgeAssert().set(this);
     }
 
-    @JDIAction("The digits from the '{name}' is '{0]'")
+    @JDIAction("The digits from the '{name}' is '{0}'")
     public Integer getDigits() {
         if (!this.core().getText().isEmpty()) {
             String text = this.core().getText().replaceAll("[^0-9]", "");
@@ -29,5 +29,10 @@ public class Badge extends UIBaseElement<BadgeAssert> {
         } else {
             return -1;
         }
+    }
+
+    @JDIAction("The '{name}' has text '{0}'")
+    public String getText() {
+        return this.core().text();
     }
 }

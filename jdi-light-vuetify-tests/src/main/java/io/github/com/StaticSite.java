@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
+import io.github.com.pages.BadgesPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -20,4 +21,7 @@ public class StaticSite {
     public static Button logout;
     public static Button userIcon;
     public static Text userName;
+
+    @Url("/badges")
+    public static BadgesPage badgesPage;
 }
