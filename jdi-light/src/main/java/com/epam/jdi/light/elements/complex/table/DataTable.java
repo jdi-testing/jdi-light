@@ -2,15 +2,18 @@ package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.table.DataTableAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
+import com.epam.jdi.light.elements.pageobjects.annotations.NoCache;
 import com.epam.jdi.tools.LinqUtils;
 import com.epam.jdi.tools.func.JFunc1;
 import com.epam.jdi.tools.map.MapArray;
 import com.epam.jdi.tools.pairs.Pair;
+import org.apache.commons.lang3.ObjectUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
@@ -47,12 +51,14 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         = new CacheAll<>(MapArray::new);
 
     protected void hasLineClass() {
-        if (lineClass == null || !isClass(lineClass, PageObject.class))
+        if (lineClass == null || !isClass(lineClass, PageObject.class)) {
             throw exception("In order to use this method you must specify LineClass that extends PageObject for '%s' DataTable<LineClass, ?>", getName());
+        }
     }
     protected void hasDataClass() {
-        if (dataClass == null)
+        if (dataClass == null) {
             throw exception("In order to use this method you must specify DataClass for '%s' DataTable<?, DataClass>", getName());
+        }
     }
     /**
      * Get table row by the row number
@@ -62,8 +68,9 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get row '{0}' for '{name}' table")
     public D dataRow(int rowNum) {
         hasDataClass();
-        if (datas.get().has(rowNum+""))
-            return datas.get().get(rowNum+"");
+        if (datas.get().has(rowNum+"")) {
+            return datas.get().get(rowNum + "");
+        }
         D data = lineClass != null
             ? lineToData(line(rowNum))
             : row(rowNum).asData(dataClass);
@@ -79,8 +86,9 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get row '{0}' for '{name}' table")
     public L line(int rowNum) {
         hasLineClass();
-        if (lines.get().has(rowNum+""))
-            return lines.get().get(rowNum+"");
+        if (lines.get().has(rowNum+"")) {
+            return lines.get().get(rowNum + "");
+        }
         L value = row(rowNum).asLine(lineClass);
         lines.get().update(rowNum + "", value);
         return value;
@@ -163,8 +171,9 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         int count = count() + getStartIndex();
         for (int i = getStartIndex(); i < count; i++) {
             D data = dataRow(i);
-            if (matcher.execute(data))
+            if (matcher.execute(data)) {
                 return data;
+            }
         }
         datas.gotAll();
         return null;
@@ -180,8 +189,9 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         hasLineClass();
         int count = count() + getStartIndex();
         for (int i = getStartIndex(); i < count; i++) {
-            if (matcher.execute(dataRow(i)))
+            if (matcher.execute(dataRow(i))) {
                 return line(i);
+            }
         }
         datas.gotAll();
         return null;
@@ -210,10 +220,12 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         List<D> result = new ArrayList<>();
         int count = count() + getStartIndex();
         for (int i = getStartIndex(); i < count; i++) {
-            if (matcher.execute(dataRow(i)))
+            if (matcher.execute(dataRow(i))) {
                 result.add(dataRow(i));
-            if (result.size() == amount)
+            }
+            if (result.size() == amount) {
                 return result;
+            }
         }
         return result;
     }
@@ -238,7 +250,9 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get all '{name}' table rows that match criteria")
     public List<D> dataRows(ColumnMatcher... matchers) {
         hasDataClass();
-        if (matchers.length == 0) return allData();
+        if (matchers.length == 0) {
+            return allData();
+        }
         return LinqUtils.map(rows(matchers), r -> r.asData(dataClass));
     }
 
@@ -259,14 +273,32 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get all '{name}' rows")
     public List<D> allData() {
         hasDataClass();
-        if (datas.isGotAll()) return datas.get().values();
+        if (datas.isGotAll()) {
+            return datas.get().values();
+        }
         MapArray<String, D> result = new MapArray<>();
         int count = count() + getStartIndex();
         logger.debug("Count: " + count);
-        for (int i = getStartIndex(); i < count; i++)
-            result.update(i+"", dataRow(i));
+        for (int i = getStartIndex(); i < count; i++) {
+            result.update(i + "", dataRow(i));
+        }
         datas.gotAll();
         return datas.set(result).values();
+    }
+
+    @JDIAction("Get all '{name}' rows")
+    protected List<D> allData(MapArray<String, MapArray<String, UIElement>> cells) {
+        hasDataClass();
+        List<D> result = new ArrayList<>();
+        int size = size() + getStartIndex();
+        for (int i = getStartIndex(); i < size; i++) {
+            Line row = new Line(cells.get(i).value, getName());
+            D data = lineClass != null
+                ? lineToData(row.asLine(lineClass))
+                : row.asData(dataClass);
+            result.add(data);
+        }
+        return result;
     }
 
     /**
@@ -279,10 +311,24 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
         if (lines.isGotAll()) return lines.get().values();
         MapArray<String, L> result = new MapArray<>();
         int count = count() + getStartIndex();
-        for (int i = getStartIndex(); i < count; i++)
-            result.add(i+"", line(i));
+        for (int i = getStartIndex(); i < count; i++) {
+            result.add(i + "", line(i));
+        }
         lines.gotAll();
         return lines.set(result).values();
+    }
+
+    @JDIAction("Get all '{name}' rows")
+    protected List<L> allLines(MapArray<String, MapArray<String, UIElement>> cells) {
+        hasLineClass();
+        List<L> result = new ArrayList<>();
+        int size = size() + getStartIndex();
+        for (int i = getStartIndex(); i < size; i++) {
+            Line row = new Line(cells.get(i).value, getName());
+            L line = row.asLine(lineClass);
+            result.add(line);
+        }
+        return result;
     }
 
     /**
@@ -389,13 +435,30 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @Override
     @JDIAction("Get '{name}' table value")
     public String getValue() {
-        if (dataClass == null && lineClass == null)
+        if (dataClass == null && lineClass == null) {
             super.getValue();
-        getTable();
+        }
+        MapArray<String, MapArray<String, UIElement>> allCells;
+        if (cells.isGotAll()) {
+            allCells = cells.get();
+        } else {
+            allCells = cellsToMap();
+            if (cells.isUseCache()) {
+                cells.set(allCells);
+                cells.gotAll();
+            }
+        }
         String value = "||X||" + print(header.get(), "|") + "||" + LINE_BREAK;
-        List<Object> rows = dataClass != null
-            ? LinqUtils.map(allData(), l -> l)
-            : LinqUtils.map(allLines(), l -> l);
+        List<Object> rows;
+        if (isUseCache()) {
+            rows = dataClass != null
+                ? LinqUtils.map(allData(), l -> l)
+                : LinqUtils.map(allLines(), l -> l);
+        } else {
+            rows = dataClass != null
+                ? LinqUtils.map(allData(allCells), l -> l)
+                : LinqUtils.map(allLines(allCells), l -> l);
+        }
         List<List<Field>> fields = LinqUtils.map(rows, d -> getFieldsExact(d.getClass()));
         int count = count();
         for (int i = 0; i < count; i++) {
@@ -435,14 +498,12 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
                     } catch (Exception ex) {
                         throw exception(ex, "Can't get lineField '%s' value", lineField.getName());
                     }
-                    String value = isInterface(lineField.getType(), HasValue.class)
-                        ? ((HasValue)lineFieldValue).getValue()
-                        : lineFieldValue.toString();
                     try {
+                        String value = isInterface(lineField.getType(), HasValue.class)
+                            ? ((HasValue)lineFieldValue).getValue()
+                            : lineFieldValue.toString();
                         setPrimitiveField(dataField, instance, value);
-                    } catch (Exception ex) {
-                        throw exception(ex, "Can't set table value '%s' to field '%s'", value, dataField.getName());
-                    }
+                    } catch (Exception ignore) { }
                 }
             }
         }
@@ -488,18 +549,23 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
             setupGenericFields(field);
         } catch (Exception ignore) { // ignore if can't setup
         }
-        if (header.hasValue()) return;
+        if (hasAnnotation(field, NoCache.class) || header.hasValue()) {
+            return;
+        }
         List<Field> entityFields = new ArrayList<>();
-        if (lineClass != null)
+        if (lineClass != null) {
             entityFields.addAll(getFieldsExact(lineClass, f -> isInterface(f, HasValue.class)));
-        if (dataClass != null)
+        }
+        if (dataClass != null) {
             entityFields.addAll(asList(dataClass.getDeclaredFields()));
-        if (entityFields.size() > 0) {
+        }
+        if (ObjectUtils.isNotEmpty(entityFields)) {
             List<String> headers = LinqUtils.map(entityFields, field1 -> ELEMENT.name.execute(field1))
                 .stream().distinct().collect(Collectors.toList());
-            header.setFinal(headers);
-            if (!size.hasValue())
-                size.setFinal(headers.size());
+            header.set(headers);
+            if (!size.hasValue()) {
+                size.set(headers.size());
+            }
         }
     }
 

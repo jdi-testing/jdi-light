@@ -15,8 +15,6 @@ import static java.lang.String.format;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public final class WebDriverUtils {
-
-
     private WebDriverUtils() {
     }
 

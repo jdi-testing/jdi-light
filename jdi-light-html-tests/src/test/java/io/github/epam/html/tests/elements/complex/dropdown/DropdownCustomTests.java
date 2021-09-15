@@ -37,6 +37,7 @@ public class DropdownCustomTests implements TestsInit {
     public void getValueTest() {
         assertEquals(colorsCustom.getValue(), text);
     }
+
     @Test
     public void selectStringTest() {
         colorsCustom.select("Red");

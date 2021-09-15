@@ -154,14 +154,17 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     }
 
     private MobileUIElement getByIndex(int index) {
-        if (index < getStartIndex())
+        if (index < getStartIndex()) {
             throw exception("Can't get element with index '%s'. Index should be %s or more", index, getStartIndex());
+        }
         int getIndex = index - getStartIndex();
         if (locator.isNull() && isUseCache()) {
-            if (map.hasValue() && map.get().size() > 0 && map.get().size() >= getIndex && isActualMap())
+            if (map.hasValue() && map.get().size() > 0 && map.get().size() >= getIndex && isActualMap()) {
                 return map.get().values().get(getIndex);
-            if (webElements.hasValue() && webElements.get().size() > 0 && webElements.get().size() >= getIndex && isActual(webElements.get().get(0)))
+            }
+            if (webElements.hasValue() && webElements.get().size() > 0 && webElements.get().size() >= getIndex && isActual(webElements.get().get(0))) {
                 return $(webElements.get().get(getIndex));
+            }
         }
         MobileUIElement element = locator.isTemplate()
                 ? tryGetByIndex(index)
@@ -269,8 +272,9 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
      */
     @Override
     public MobileUIElement get(int index) {
-        if (index < getStartIndex())
+        if (index < getStartIndex()) {
             throw exception("Can't get element with index '%s'. Index should be %s or more", index, getStartIndex());
+        }
         return getByIndex(index);
     }
 

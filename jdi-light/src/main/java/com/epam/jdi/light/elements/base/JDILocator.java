@@ -42,7 +42,9 @@ public class JDILocator {
     public List<By> getFrames() { return frames; }
     public By getLocator(Object... args) {
         this.args = args;
-        if (args.length == 0) return byLocator;
+        if (args.length == 0) {
+            return byLocator;
+        }
         return args.length == 1
             ? fillByTemplate(byLocator, args)
             : fillByMsgTemplate(byLocator, args);
@@ -60,8 +62,8 @@ public class JDILocator {
 
     public void add(By locator, JDIBase element) {
         byLocator = setRootLocator(locator)
-                ? trimRoot(locator)
-                : locator;
+            ? trimRoot(locator)
+            : locator;
         this.element = new Safe<>(() -> element);
     }
     public void add(List<By> frames, JDIBase element) {
@@ -100,7 +102,7 @@ public class JDILocator {
         return getByFunc(by).apply(byLocator);
     }
     public String printLocator() {
-        return toString().replaceAll("\\{\\{VALUE}}", "%s");
+        return toString().replace("{{VALUE}}", "%s");
     }
     @Override
     public String toString() {

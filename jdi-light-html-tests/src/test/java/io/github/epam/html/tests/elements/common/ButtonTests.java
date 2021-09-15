@@ -78,7 +78,6 @@ public class ButtonTests implements TestsInit {
 
         rightClickButton.rightClick();
         validateAndAcceptAlert("Right Click");
-        press("Escape");
     }
 
     @Test

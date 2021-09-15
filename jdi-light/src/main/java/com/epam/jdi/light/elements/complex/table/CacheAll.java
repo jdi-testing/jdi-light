@@ -12,13 +12,22 @@ public class CacheAll<T> extends CacheValue<T> {
     private Safe<Boolean> gotAll = new Safe<>(() -> false);
 
     public CacheAll() { }
+
     public CacheAll(JFunc<T> getRule) { setRule(getRule); }
+
     protected boolean isGotAll() {
-        if (!hasValue())
+        if (!hasValue()) {
             gotAll.set(false);
+        }
         return gotAll.get();
     }
-    public void gotAll() { gotAll.set(true); }
+
+    public void gotAll() {
+        if (isUseCache()) {
+            gotAll.set(true);
+        }
+    }
+
     @Override
     public void clear() { super.clear(); gotAll.set(false); }
 }

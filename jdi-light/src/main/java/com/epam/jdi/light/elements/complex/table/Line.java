@@ -53,6 +53,9 @@ public class Line implements IList<String>, IBaseElement {
     public Line(List<String> headers, List<WebElement> elements, String name) {
         this(headers, new WebList(elements, name), name);
     }
+    public Line(MapArray<String, UIElement> map, String name) {
+        this(map.keys(), LinqUtils.map(map.values(), JDIBase::getWebElement), name);
+    }
     public Line(List<String> headers, WebList elements, String name) {
         if (headers == null) {
             throw exception("Failed to create Line. Header has null value");

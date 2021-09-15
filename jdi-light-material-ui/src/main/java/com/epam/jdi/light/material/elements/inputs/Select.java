@@ -1,42 +1,79 @@
 package com.epam.jdi.light.material.elements.inputs;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
-
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
+import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules;
 import com.epam.jdi.light.material.asserts.inputs.SelectAssert;
-import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.Rectangle;
 
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.lang.reflect.Field;
 
-public class Select extends UIBaseElement<SelectAssert> {
+import static com.epam.jdi.light.common.TextTypes.INNER;
 
-    private String items = "li.MuiListItem-button";
-    private String itemByText = "//li[text() = '%s']";
+public class Select extends DropdownExpand {
+    private final String list = ".MuiPopover-root ul li";
+    private final String value = ".MuiSelect-nativeInput";
+    private final String expand = "*";
 
-    @JDIAction("Select item for '{name}' by text")
-    public void selectItemByText(String item) {
-        if (StringUtils.isBlank(itemByText)) {
-            core().finds(items).stream().filter(i -> item.equals(i.getText())).findFirst()
-                    .orElseThrow(IllegalArgumentException::new)
-                    .get().click();
-        } else {
-            try {
-                core().find(String.format(itemByText, item)).click();
-            } catch (NoSuchElementException e) {
-                throw exception("There is no item " + item);
-            }
+    @Override
+    public WebList list() {
+        WebList l = linkedList(listLocator, "list").setUIElementName(INNER);
+        l.setParent(null);
+        return l;
+    }
+
+    @JDIAction("Close '{name}'")
+    @Override
+    public void close() {
+        if (isExpanded()) {
+            Rectangle r = list().core().getRect();
+            core().click(r.getWidth() + 2, r.getHeight() + 2);
         }
     }
 
-    @JDIAction("Select items for '{name}'")
-    public void multipleSelect(List<String> items) {
-        items.forEach(this::selectItemByText);
+    @JDIAction("Select '{0}' in '{name}'")
+    public void select(String... value) {
+        expand();
+        list().select(value);
+        if (autoClose)
+            close();
+    }
+
+    @JDIAction("Get selected value")
+    @Override
+    public String selected() {
+        return text();
+    }
+
+    @Override
+    public String getText() {
+        return value().text(TextTypes.VALUE);
+    }
+
+    @Override
+    public String text() {
+        return core().text();
+    }
+
+    @Override
+    public void setup(Field field) {
+        if (!FillFromAnnotationRules.fieldHasAnnotation(field, JDropdown.class, IsDropdown.class))
+            return;
+        JDropdown j = field.getAnnotation(JDropdown.class);
+        String l = j.list().isEmpty() ? list : j.list();
+        String v = j.value().isEmpty() ? value : j.value();
+        String e = j.expand().isEmpty() ? expand : j.expand();
+        setup(j.root(), v, l, e);
+        autoClose = j.autoClose();
     }
 
     @Override
     public SelectAssert is() {
-        return new SelectAssert().set(this);
+        return (SelectAssert) new SelectAssert().set(this);
     }
+
 }
