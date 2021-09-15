@@ -3,6 +3,7 @@ package io.github.com.pages.inputs;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.Select;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
@@ -76,10 +77,7 @@ public class TextFieldPage extends WebPage {
     /*================
     Select
     ==================*/
-    @UI("//div[contains(@class, 'MuiSelect-selectMenu')]")
-    public TextField selectElementField;
-
-    @UI("//ul[contains(@class, 'MuiMenu-list')]")
+    @JDropdown(root = "//div[@id='outlined-select-currency']/..")
     public Select selectElement;
 
     @UI("//select[@id='outlined-select-currency-native']")

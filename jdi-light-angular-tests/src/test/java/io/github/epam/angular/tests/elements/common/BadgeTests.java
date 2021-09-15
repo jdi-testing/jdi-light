@@ -5,7 +5,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.BadgeSection.*;
+import static io.github.com.pages.sections.BadgeSection.buttonWithBadge;
+import static io.github.com.pages.sections.BadgeSection.iconWithBadge;
+import static io.github.com.pages.sections.BadgeSection.textWithBadge;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class BadgeTests extends TestsInit {

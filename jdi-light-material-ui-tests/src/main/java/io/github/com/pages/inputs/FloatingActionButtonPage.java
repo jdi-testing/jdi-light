@@ -1,9 +1,10 @@
 package io.github.com.pages.inputs;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.*;
+import com.epam.jdi.light.material.elements.navigation.Tabs;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class FloatingActionButtonPage extends WebPage {
     public static Button buttonLike;
 
     @UI("//button[contains(@id,'action-tab')]")
-    public static List<Button> tabSections;
+    public static List<Tabs> tabSections;
 
     @UI("//button[@aria-label='Add']")
     public static Button buttonAnimatedAdd;
@@ -36,14 +37,8 @@ public class FloatingActionButtonPage extends WebPage {
     @UI("//button[@aria-label='Expand']")
     public static Button buttonExpand;
 
-    @UI("#action-tabpanel-0")
-    public static UIElement tabItemOne;
-
-    @UI("#action-tabpanel-1")
-    public static UIElement tabItemTwo;
-
-    @UI("#action-tabpanel-2")
-    public static UIElement tabItemThree;
+    @UI("//div[starts-with(@id,'action-tabpanel')]")
+    public static List<Text> tabPanelContent;
 
     @UI("#basicActionBtnsLastClick")
     public static Text labelLastClick;

@@ -45,8 +45,9 @@ public class WindowsManager {
     @JDIAction("Check that new window is opened")
     public static void checkNewWindowIsOpened() {
         boolean isNewWindow = newWindowIsOpened();
-        if (!isNewWindow)
+        if (!isNewWindow) {
             throw exception("New window is not opened");
+        }
         switchToNewWindow();
     }
     public static void setWindowName(String value) {
@@ -97,11 +98,13 @@ public class WindowsManager {
      */
     @JDIAction("Switch to window '{index}'")
     public static void switchToWindow(int index) {
-        if (index < ELEMENT.startIndex)
+        if (index < ELEMENT.startIndex) {
             throw exception("Window's index starts from 1. You try to use '%s' that less than 1.", index);
+        }
         int counter = 0;
-        if (getWindows().size() < index - ELEMENT.startIndex + 1)
-            throw exception(index + " is too much. Only "+getWindows().size()+" windows found");
+        if (getWindows().size() < index - ELEMENT.startIndex + 1) {
+            throw exception(index + " is too much. Only " + getWindows().size() + " windows found");
+        }
         for (String window : getWindows()) {
             counter++;
             if (counter == index) {
@@ -117,8 +120,9 @@ public class WindowsManager {
      */
     @JDIAction("Switch to window '{0}'")
     public static void switchToWindow(String value) {
-        if (!windowHandlesMap.get().has(value))
+        if (!windowHandlesMap.get().has(value)) {
             throw exception("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
+        }
         getDriver().switchTo().window(windowHandlesMap.get().get(value));
     }
 

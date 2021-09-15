@@ -11,7 +11,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ProgressAssert extends UIAssert<ProgressAssert, ProgressBar> {
 
-    @JDIAction(value = "Get '{name}' value '{0}'")
+    @JDIAction("Assert that '{name}' has value '{0}'")
     public ProgressAssert value(Matcher<Integer> value) {
         jdiAssert(element().getValueNow(), value);
         return this;

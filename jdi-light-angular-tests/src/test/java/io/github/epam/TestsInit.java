@@ -20,7 +20,6 @@ public class TestsInit {
 
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        killAllSeleniumDrivers();
         openSite(StaticSite.class);
         logger.toLog("Run Tests");
     }

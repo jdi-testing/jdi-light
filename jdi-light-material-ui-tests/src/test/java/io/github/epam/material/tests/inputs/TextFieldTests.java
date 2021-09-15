@@ -2,13 +2,11 @@ package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.light.material.elements.utils.enums.CurrencyItems;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Random;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.material.elements.utils.StringUtils.generateRandomString;
 import static io.github.com.StaticSite.textFieldPage;
 
@@ -18,7 +16,7 @@ public class TextFieldTests extends TestsInit {
     public static final String DEFAULT_VALUE = "Default Value";
 
     @BeforeMethod
-    public void openTextFieldsPage(){
+    public void openTextFieldsPage() {
         textFieldPage.open();
         textFieldPage.isOpened();
     }
@@ -149,13 +147,11 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void selectTest() {
-        for(CurrencyItems currency : CurrencyItems.values()){
-            textFieldPage.selectElementField.core().click();
-            textFieldPage.selectElement.selectItemByText(currency.currencyItemText);
-            jdiAssert(textFieldPage.selectElementField.core().getText().equals(currency.currencyItemText),
-                    Matchers.is(true));
-            textFieldPage.selectNativeSelect.select(currency.currencyItemText);
-            textFieldPage.selectNativeSelect.has().text(currency.currencyItemText);
+        for (CurrencyItems currency : CurrencyItems.values()) {
+            textFieldPage.selectElement.select(currency.ordinal() + 1);
+            textFieldPage.selectElement.has().selected(currency);
+            textFieldPage.selectNativeSelect.select(currency);
+            textFieldPage.selectNativeSelect.has().selected(currency);
         }
     }
 }

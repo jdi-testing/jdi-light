@@ -1,8 +1,9 @@
 package io.github.epam.material.tests.inputs;
 
-import static io.github.com.StaticSite.*;
-import static io.github.com.pages.inputs.SimpleTransferListPage.*;
-import static io.github.com.pages.inputs.EnhancedTransferListPage.*;
+import static io.github.com.StaticSite.enhancedTransferListPage;
+import static io.github.com.StaticSite.simpleTransferListPage;
+import static io.github.com.pages.inputs.EnhancedTransferListPage.enhancedTransferList;
+import static io.github.com.pages.inputs.SimpleTransferListPage.simpleTransferList;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;

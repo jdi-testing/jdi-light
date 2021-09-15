@@ -1,11 +1,10 @@
 package io.github.com.pages.navigation;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.displaydata.Lists;
 import com.epam.jdi.light.material.elements.navigation.Breadcrumbs;
 
-import java.util.List;
 
 /**
  * To see an example of a Breadcrumbs web element, please visit
@@ -18,12 +17,12 @@ public class RouterBreadcrumbsPage extends WebPage {
     public static Breadcrumbs routerBreadcrumbs;
 
     @UI("//span[text()='Trash']")
-    public static UIElement trashDisplayBlock;
+    public static Lists trashDisplayBlock;
 
     @UI("//span[text()='Important']")
-    public static UIElement importantDisplayBlock;
+    public static Lists importantDisplayBlock;
 
     @UI("//span[text()='Inbox']")
-    public static UIElement inboxDisplayBlock;
+    public static Lists inboxDisplayBlock;
 
 }

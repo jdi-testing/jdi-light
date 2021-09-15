@@ -5,7 +5,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.routerBreadcrumbsPage;
-import static io.github.com.pages.navigation.RouterBreadcrumbsPage.*;
+import static io.github.com.pages.navigation.RouterBreadcrumbsPage.importantDisplayBlock;
+import static io.github.com.pages.navigation.RouterBreadcrumbsPage.inboxDisplayBlock;
+import static io.github.com.pages.navigation.RouterBreadcrumbsPage.routerBreadcrumbs;
+import static io.github.com.pages.navigation.RouterBreadcrumbsPage.trashDisplayBlock;
 
 /**
  * To see an example of a Breadcrumbs web element, please visit
@@ -24,7 +27,7 @@ public class RouterBreadcrumbsTests extends TestsInit {
     public void routerIntegrationBreadcrumbsTest() {
         routerBreadcrumbs.list().get(1).is().text("Home");
         routerBreadcrumbs.list().get(2).is().text("Inbox");
-        trashDisplayBlock.click();
+        trashDisplayBlock.core().click();
         routerBreadcrumbs.list().get(1).is().text("Home");
         routerBreadcrumbs.list().get(2).is().text("Trash");
     }
@@ -32,11 +35,11 @@ public class RouterBreadcrumbsTests extends TestsInit {
     @Test
     public void routerIntegrationBreadcrumbsIconClickTest() {
         routerBreadcrumbsPage.open();
-        importantDisplayBlock.click();
+        importantDisplayBlock.core().click();
         routerBreadcrumbs.get(1).is().text("Home");
         routerBreadcrumbs.get(2).is().text("Inbox");
         routerBreadcrumbs.get(3).is().text("Important");
-        inboxDisplayBlock.click();
+        inboxDisplayBlock.core().click();
         routerBreadcrumbs.get(1).is().text("Home");
         routerBreadcrumbs.get(2).is().text("Inbox");
         importantDisplayBlock.is().hidden();

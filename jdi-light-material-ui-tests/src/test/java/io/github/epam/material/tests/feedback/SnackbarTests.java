@@ -6,8 +6,23 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.snackbarPage;
-import static org.hamcrest.Matchers.*;
-import static io.github.com.pages.feedback.SnackbarPage.*;
+import static io.github.com.pages.feedback.SnackbarPage.closePopUpSnackbarButton;
+import static io.github.com.pages.feedback.SnackbarPage.closePopUpSuccessButton;
+import static io.github.com.pages.feedback.SnackbarPage.customizedSnackbarPopUpStyles;
+import static io.github.com.pages.feedback.SnackbarPage.customizedSnackbarPopUpTitles;
+import static io.github.com.pages.feedback.SnackbarPage.messageLengthContent;
+import static io.github.com.pages.feedback.SnackbarPage.messageLengthContentButtons;
+import static io.github.com.pages.feedback.SnackbarPage.notisnackPopUpText;
+import static io.github.com.pages.feedback.SnackbarPage.otherButtons;
+import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbarButtons;
+import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbarPopUp;
+import static io.github.com.pages.feedback.SnackbarPage.simpleSnackbarButton;
+import static io.github.com.pages.feedback.SnackbarPage.simpleSnackbarPopUp;
+import static io.github.com.pages.feedback.SnackbarPage.snackbarPopUpText;
+import static io.github.com.pages.feedback.SnackbarPage.successSnackbarButton;
+import static io.github.com.pages.feedback.SnackbarPage.successSnackbarPopUp;
+import static io.github.com.pages.feedback.SnackbarPage.undoSnackbarButton;
+import static org.hamcrest.Matchers.containsString;
 
 /**
  * To see an example of Snackbar web element please visit
