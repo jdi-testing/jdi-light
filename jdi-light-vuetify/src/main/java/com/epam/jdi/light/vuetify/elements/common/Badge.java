@@ -2,15 +2,9 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.BadgeAssert;
 
 public class Badge extends UIBaseElement<BadgeAssert> {
-
-    @JDIAction("Get '{name}' badge")
-    public UIElement badge() {
-        return this.find(".v-badge__badge");
-    }
 
     @Override
     public BadgeAssert is() {
