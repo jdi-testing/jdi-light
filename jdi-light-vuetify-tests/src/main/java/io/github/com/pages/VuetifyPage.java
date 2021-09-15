@@ -11,7 +11,9 @@ import static com.epam.jdi.light.settings.WebSettings.init;
 public abstract class VuetifyPage extends WebPage {
     @Override
     public void open(Object... params) {
-        new WebPage().open();
+        WebPage mainPage = new WebPage();
+        mainPage.setName("Main page");
+        mainPage.open();
         clickOnTheSidebar(this.url);
         initializePage(this);
     }
