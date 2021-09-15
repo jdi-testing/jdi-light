@@ -33,6 +33,6 @@ public class Badge extends UIBaseElement<BadgeAssert> {
 
     @JDIAction("The '{name}' has text '{0}'")
     public String getText() {
-        return this.core().text();
+        return badge().core().getText();
     }
 }

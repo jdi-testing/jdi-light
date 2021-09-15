@@ -62,6 +62,6 @@ public class BadgeTests extends TestsInit {
         hoverBadge.is().displayed();
         hoverBadge.has().newMessages();
         hoverBadge.has().numberOfNewMessages(9999);
-//        hoverBadge.has().text("9999+");
+        hoverBadge.has().text("9999+");
     }
 }

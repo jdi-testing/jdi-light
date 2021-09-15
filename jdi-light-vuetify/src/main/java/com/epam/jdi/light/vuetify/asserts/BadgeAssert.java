@@ -33,9 +33,9 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
         return this;
     }
 
-//    @JDIAction("Assert that text on the '{name}' is '{0}'")
-//    public BadgeAssert text(String text) {
-//        jdiAssert(element().getText(), Matchers.equalToIgnoringCase(text));
-//        return this;
-//    }
+    @JDIAction("Assert that text on the '{name}' is '{0}'")
+    public BadgeAssert text(String text) {
+        jdiAssert(element().getText(), Matchers.equalToIgnoringCase(text));
+        return this;
+    }
 }
