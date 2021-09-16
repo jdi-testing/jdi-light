@@ -12,7 +12,6 @@
     <properties>
         <driver>chrome</driver>
         <aspectj.version>1.9.6</aspectj.version>
-        <aspectj.maven>1.12.6</aspectj.maven>
         <java.version>1.8</java.version>
         <allure.testng>2.13.8</allure.testng>
         <allure.maven>2.10.0</allure.maven>
@@ -58,42 +57,6 @@
                     <generateBackupPoms>false</generateBackupPoms>
                     <rulesUri>file://${project.basedir}/../maven-version-rules.xml</rulesUri>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.nickwongdev</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <version>${aspectj.maven}</version>
-                <configuration>
-                    <showWeaveInfo>true</showWeaveInfo>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <Xlint>ignore</Xlint>
-                    <complianceLevel>${java.version}</complianceLevel>
-                    <encoding>UTF-8</encoding>
-                    <verbose>false</verbose>
-                    <outxml>true</outxml>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjrt</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjtools</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>
