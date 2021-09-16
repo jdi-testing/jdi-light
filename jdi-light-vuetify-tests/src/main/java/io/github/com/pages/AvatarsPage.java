@@ -2,11 +2,11 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
-import com.epam.jdi.light.vuetify.elements.complex.ProfileCard;
+import io.github.com.custom.ProfileCard;
 
 import java.util.List;
 
-import static com.epam.jdi.light.vuetify.elements.complex.data.ProfileCardLocator.PROFILE_CARD_LOCATOR;
+import static io.github.com.custom.ProfileCard.PROFILE_CARD_LOCATOR;
 
 public class AvatarsPage extends VuetifyPage {
 

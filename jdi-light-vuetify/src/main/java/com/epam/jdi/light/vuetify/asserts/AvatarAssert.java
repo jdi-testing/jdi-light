@@ -23,8 +23,7 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> {
 
     @JDIAction("Assert that {name} size is '{0}'px")
     public AvatarAssert size(String text) {
-        jdiAssert(element().properSize(), Matchers.is(String.format("height: %1$spx; min-width: %1$spx; width: %1$spx;",
-                text)));
+        jdiAssert(element().properSize(), Matchers.is(String.format("height: %1$spx; min-width: %1$spx; width: %1$spx;", text)));
         return this;
     }
 
