@@ -60,4 +60,12 @@ public class AlertsPage extends VuetifyPage {
     public static Alert successOutlinedAlert;
     @UI("#outlinedAlerts > div:nth-child(3)")
     public static Alert warningOutlinedAlert;
+
+    // prominent alerts
+    @UI("#prominentAlerts > .error")
+    public static CustomAlert prominentErrorAlert;
+    @UI("#prominentAlerts > div:nth-child(2)")
+    public static CustomAlert prominentSchoolAlert;
+    @UI("#prominentAlerts > .info--text")
+    public static CustomAlert prominentLockAlert;
 }

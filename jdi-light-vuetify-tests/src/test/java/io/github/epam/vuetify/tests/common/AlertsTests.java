@@ -1,6 +1,11 @@
 package io.github.epam.vuetify.tests.common;
 
+import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.vuetify.elements.common.Alert;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -17,6 +22,9 @@ import static io.github.com.pages.AlertsPage.firstIconAlert;
 import static io.github.com.pages.AlertsPage.indigoAlert;
 import static io.github.com.pages.AlertsPage.infoAlert;
 import static io.github.com.pages.AlertsPage.pinkAlert;
+import static io.github.com.pages.AlertsPage.prominentErrorAlert;
+import static io.github.com.pages.AlertsPage.prominentLockAlert;
+import static io.github.com.pages.AlertsPage.prominentSchoolAlert;
 import static io.github.com.pages.AlertsPage.purpleOutlinedAlert;
 import static io.github.com.pages.AlertsPage.redAlert;
 import static io.github.com.pages.AlertsPage.secondIconAlert;
@@ -24,7 +32,9 @@ import static io.github.com.pages.AlertsPage.successAlert;
 import static io.github.com.pages.AlertsPage.successOutlinedAlert;
 import static io.github.com.pages.AlertsPage.thirdIconAlert;
 import static io.github.com.pages.AlertsPage.warningAlert;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 
 
 public class AlertsTests extends TestsInit {
@@ -116,12 +126,47 @@ public class AlertsTests extends TestsInit {
 
         purpleOutlinedAlert.has().text(containsString("Maecenas ullamcorper, dui et placerat feugiat"));
         purpleOutlinedAlert.has().css("color", purpleRGBA);
-        purpleOutlinedAlert.has().css("border-bottom-color", purpleRGBA);
-        purpleOutlinedAlert.has().css("border-left-color", purpleRGBA);
-        purpleOutlinedAlert.has().css("border-right-color", purpleRGBA);
-        purpleOutlinedAlert.has().css("border-top-color", purpleRGBA);
+        checkBorderColor(purpleOutlinedAlert, purpleRGBA);
         purpleOutlinedAlert.has().css("background-color", whiteRGBA);
 
         successOutlinedAlert.has().text(containsString("Aenean commodo ligula"));
+    }
+
+    @Test
+    public void prominentAlertsHaveIconEffect() {
+        prominentErrorAlert.has().text(containsString("Nunc nonummy metus."));
+        prominentErrorAlert.getButton().click();
+        prominentErrorAlert.getIcon().has().cssClass("mdi-alert");
+        checkProminentIconEffect(prominentErrorAlert);
+
+        prominentSchoolAlert.has().text(containsString("egestas nec, vestibulum et"));
+        prominentSchoolAlert.getIcon().has().cssClass("mdi-school");
+        checkProminentIconEffect(prominentSchoolAlert);
+
+        prominentLockAlert.has().text(containsString("Donec quam felis, ultricies nec"));
+        prominentLockAlert.getIcon().has().cssClass("mdi-shield-lock-outline");
+        checkProminentIconEffect(prominentLockAlert);
+    }
+
+    private void checkBorderColor(HasAssert<? extends UIAssert<?, ?>> element, String color) {
+        element.has().css("border-bottom-color", color);
+        element.has().css("border-left-color", color);
+        element.has().css("border-right-color", color);
+        element.has().css("border-top-color", color);
+    }
+
+    private void checkProminentIconEffect(Alert element) {
+        String script = "return window.getComputedStyle(arguments[0].querySelector('i'), ':after')" +
+                ".getPropertyValue('%s');";
+
+        String opacity = ((JavascriptExecutor)element.core().driver()).executeScript(
+                String.format(script, "opacity"),
+                element.core().seleniumElement()).toString();
+        String height = ((JavascriptExecutor)element.core().driver()).executeScript(
+                String.format(script, "height"),
+                element.core().seleniumElement()).toString();
+
+        assertThat(opacity, equalTo("0.16"));
+        assertThat(height, equalTo("48px"));
     }
 }
