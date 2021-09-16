@@ -7,9 +7,11 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.ProfileCardAssert;
 import org.openqa.selenium.By;
 
+import static com.epam.jdi.light.vuetify.elements.complex.data.ProfileCardLocator.PROFILE_CARD_LOCATOR;
+
 public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
 
-    public String profileCardLocator = "//div[@id = 'profileCard']";
+    public String profileCardLocator = PROFILE_CARD_LOCATOR;
     public String backgroundImageLocator = profileCardLocator.concat("/div/div/div[contains(@class, 'v-image')]");
     public String avatarImageLocator = profileCardLocator.concat("//div[contains(@class, 'v-avatar')]//div[contains(@class, 'image--cover')]");
     public String nameTextFieldLocator = profileCardLocator.concat("//div[@class = 'v-list-item__title text-h6']");

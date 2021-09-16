@@ -46,15 +46,4 @@ public class AvatarTests extends TestsInit {
         slotAvatars.get(2).has().photo();
         slotAvatars.get(3).is().text("CJ");
     }
-
-    @Test
-    public void profileCardTests() {
-        profileCard.waitFor(displayed);
-        profileCard.is().displayed();
-        profileCard.has().properName("Marcus Obrien");
-        profileCard.has().properJobFunction("Network Engineer");
-        profileCard.waitUntilImagesAreDisplayed();
-        profileCard.has().avatarPhoto();
-        profileCard.has().backgroundPhoto();
-    }
 }

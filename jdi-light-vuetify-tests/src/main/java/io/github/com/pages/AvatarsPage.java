@@ -6,6 +6,8 @@ import com.epam.jdi.light.vuetify.elements.complex.ProfileCard;
 
 import java.util.List;
 
+import static com.epam.jdi.light.vuetify.elements.complex.data.ProfileCardLocator.PROFILE_CARD_LOCATOR;
+
 public class AvatarsPage extends VuetifyPage {
 
     @UI("//div[@id = 'avatarsWithSize']/div/div")
@@ -17,7 +19,7 @@ public class AvatarsPage extends VuetifyPage {
     @UI("//div[@id = 'slotAvatars']//div[contains(@class, 'v-avatar')]")
     public static List<Avatar> slotAvatars;
 
-    @UI("//div[@id = 'profileCard']")
+    @UI(PROFILE_CARD_LOCATOR)
     public static ProfileCard profileCard;
 
 }
