@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.vuetify.elements.common.Divider;
+import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -8,7 +9,7 @@ import static io.github.com.StaticSite.dividersPage;
 import static io.github.com.pages.DividersPage.horizontalDividers;
 import static io.github.com.pages.DividersPage.verticalDividers;
 
-public class DividersTests {
+public class DividersTests extends TestsInit {
 
     @BeforeSuite
     public void before() {
@@ -26,7 +27,7 @@ public class DividersTests {
     @Test
     public void verticalDividersTest() {
         verticalDividers.stream().map(Divider::is).forEach(e -> {
-                    e.horizontal();
+                    e.vertical();
                     e.darkTheme();
                 });
     }
