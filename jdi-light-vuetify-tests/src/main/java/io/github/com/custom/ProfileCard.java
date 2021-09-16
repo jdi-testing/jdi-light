@@ -10,9 +10,9 @@ public class ProfileCard extends Section {
 
     public static final String PROFILE_CARD_LOCATOR = "//div[@id = 'profileCard']";
     private static final String BACKGROUND_IMAGE_LOCATOR = PROFILE_CARD_LOCATOR + "/div/div/div[contains(@class, 'v-image')]";
-    private static final String AVATAR_IMAGE_LOCATOR = PROFILE_CARD_LOCATOR + "//div[contains(@class, 'v-avatar')]//div[contains(@class, 'image--cover')]";
+    private static final String AVATAR_IMAGE_LOCATOR = "//div[contains(@class, 'v-avatar')]//div[contains(@class, 'image--cover')]";
     private static final String NAME_AREA_LOCATOR = PROFILE_CARD_LOCATOR + "//div[@class = 'v-list-item__title text-h6']";
-    private static final String JOB_FUNCTION_AREA_LOCATOR = PROFILE_CARD_LOCATOR + "//div[@class = 'v-list-item__subtitle']";
+    private static final String JOB_FUNCTION_AREA_LOCATOR = "//div[@class = 'v-list-item__subtitle']";
 
     @JDIAction("Does profile card has avatar photo")
     public boolean hasAvatarPhoto() {
