@@ -61,9 +61,8 @@ public class DownloadDriverManager {
                 wdm.setup();
                 wdm.browserVersion(getBelowVersion());
             }
-            if (isNotBlank(DRIVER.gitHubTokenName) && isNotBlank(DRIVER.gitHubTokenSecret)) {
-                wdm.gitHubTokenName(DRIVER.gitHubTokenName);
-                wdm.gitHubTokenSecret(DRIVER.gitHubTokenSecret);
+            if (isNotBlank(DRIVER.gitHubTokenSecret)) {
+                wdm.gitHubToken(DRIVER.gitHubTokenSecret);
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
