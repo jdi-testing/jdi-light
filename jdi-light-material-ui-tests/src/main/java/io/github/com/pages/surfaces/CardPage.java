@@ -3,40 +3,28 @@ package io.github.com.pages.surfaces;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Icon;
-import com.epam.jdi.light.ui.html.elements.common.Image;
-import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.ui.html.elements.common.TextArea;
-
-import java.util.List;
+import com.epam.jdi.light.material.elements.surfaces.Card;
 
 public class CardPage extends WebPage {
 
-    @UI("//h2[text()='Outlined Card']/following-sibling::div[contains(@class,'MuiPaper-outlined')]")
-    public static UIElement outlinedCard;
+    @UI("#simpleCard")
+    public static Card simpleCard;
 
-    @UI("//div[@class='MuiCardContent-root']/p[1]")
-    public static List<Text> pTagTexts;
+    @UI("#outlinedCard")
+    public static Card outlinedCard;
 
-    @UI("//div[@class='MuiCardContent-root']/h2")
-    public static List<Text> h2TagTexts;
+    @UI("#complexInteraction")
+    public static Card complexCard;
 
-    @UI("//div[@class='MuiCardActions-root']/button[@aria-label='add to favorites']")
-    public static Button complexCardHeartIconButton;
+    public static UIElement complexCardImage() {
+        return complexCard.find(".MuiCardMedia-root");
+    }
 
-    @UI("//div[@class='MuiCardActions-root']/button[@aria-label='add to favorites']/span/*")
-    public static Icon complexCardHeartIcon;
+    public static UIElement complexCardHeartButtonIcon() {
+        return complexCard.getActionButtonByNumber(1).find(".MuiSvgIcon-root");
+    }
 
-    @UI("//div[@class='MuiCardActions-root']/button[@aria-label='show more']")
-    public static Button complexCardSliderDownButton;
-
-    @UI("//div[@class='MuiCardActions-root']/preceding-sibling::div[@title='Paella dish']")
-    public static Image complexCardImage;
-
-    @UI("//div[@class='MuiCardActions-root']/following-sibling::div")
-    public static TextArea complexCardHiddenTextArea;
-
-    @UI("//div[@class='MuiCardContent-root']/p[contains(@class,'MuiTypography-paragraph')]")
-    public static List<Text> complexCardHiddenText;
+    public static UIElement complexCardCollapsibleContent() {
+        return complexCard.find(".MuiCollapse-container");
+    }
 }
