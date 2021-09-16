@@ -3,11 +3,13 @@ package io.github.com;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
+import io.github.com.pages.DividersPage;
 
 import io.github.com.pages.AvatarsPage;
 
@@ -26,4 +28,8 @@ public class StaticSite {
 
     @Url("/avatars")
     public static AvatarsPage avatarsPage;
+  
+    @WaitAfterAction(3)
+    @Url("/dividers")
+    public static DividersPage dividersPage;
 }
