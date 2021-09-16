@@ -6,7 +6,18 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.floatingActionButtonPage;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.*;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonsBasic;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonAdd;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonEdit;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonNavigate;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonLike;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.labelLastClick;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.tabSections;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.labelAnimatedLastClick;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.tabPanelContent;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonAnimatedAdd;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonAnimatedEdit;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonExpand;
 
 /**
  * To see an example of Floating Action Buttons web element please visit
@@ -49,18 +60,18 @@ public class FloatingActionButtonTests extends TestsInit {
         labelAnimatedLastClick.is().text("Last click:");
 
         tabSections.get(1).click();
-        tabItemOne.is().text("Item One");
+        tabPanelContent.get(1).is().text("Item One");
         buttonAnimatedAdd.click();
         labelAnimatedLastClick.is().text("Last click: Add");
 
         tabSections.get(2).click();
-        tabItemTwo.is().text("Item Two");
+        tabPanelContent.get(2).is().text("Item Two");
         timer.wait(() -> buttonAnimatedEdit.isDisplayed());
         buttonAnimatedEdit.click();
         labelAnimatedLastClick.is().text("Last click: Edit");
 
         tabSections.get(3).click();
-        tabItemThree.is().text("Item Three");
+        tabPanelContent.get(3).is().text("Item Three");
         timer.wait(() -> buttonExpand.isDisplayed());
         buttonExpand.click();
         labelAnimatedLastClick.is().text("Last click: Expand");

@@ -7,7 +7,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.cardPage;
-import static io.github.com.pages.surfaces.CardPage.*;
+import static io.github.com.pages.surfaces.CardPage.complexCardHeartIcon;
+import static io.github.com.pages.surfaces.CardPage.complexCardHeartIconButton;
+import static io.github.com.pages.surfaces.CardPage.complexCardHiddenText;
+import static io.github.com.pages.surfaces.CardPage.complexCardHiddenTextArea;
+import static io.github.com.pages.surfaces.CardPage.complexCardImage;
+import static io.github.com.pages.surfaces.CardPage.complexCardSliderDownButton;
+import static io.github.com.pages.surfaces.CardPage.h2TagTexts;
+import static io.github.com.pages.surfaces.CardPage.outlinedCard;
+import static io.github.com.pages.surfaces.CardPage.pTagTexts;
 
 /**
  * To see an example of Card web element please visit

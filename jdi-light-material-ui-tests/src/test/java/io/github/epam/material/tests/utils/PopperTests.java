@@ -1,7 +1,8 @@
 package io.github.epam.material.tests.utils;
 
 import static io.github.com.StaticSite.popperPage;
-import static io.github.com.pages.utils.PopperPage.*;
+import static io.github.com.pages.utils.PopperPage.buttons;
+import static io.github.com.pages.utils.PopperPage.popper;
 
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.tools.Timer;

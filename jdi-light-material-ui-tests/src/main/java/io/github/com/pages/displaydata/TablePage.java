@@ -1,6 +1,5 @@
 package io.github.com.pages.displaydata;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;

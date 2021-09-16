@@ -5,7 +5,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.portalPage;
-import static io.github.com.pages.utils.PortalPage.*;
+import static io.github.com.pages.utils.PortalPage.button;
+import static io.github.com.pages.utils.PortalPage.field1;
+import static io.github.com.pages.utils.PortalPage.field2;
 
 /**
  * To see an example of Portal web element please visit

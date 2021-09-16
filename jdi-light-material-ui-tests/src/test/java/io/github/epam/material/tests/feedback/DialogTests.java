@@ -1,7 +1,31 @@
 package io.github.epam.material.tests.feedback;
 
 import static io.github.com.StaticSite.dialogPage;
-import static io.github.com.pages.feedback.DialogPage.*;
+import static io.github.com.pages.feedback.DialogPage.alertDialogButton;
+import static io.github.com.pages.feedback.DialogPage.alertDialogField;
+import static io.github.com.pages.feedback.DialogPage.confirmationDialogButton;
+import static io.github.com.pages.feedback.DialogPage.confirmationDialogCancelButton;
+import static io.github.com.pages.feedback.DialogPage.confirmationDialogField;
+import static io.github.com.pages.feedback.DialogPage.confirmationDialogOkButton;
+import static io.github.com.pages.feedback.DialogPage.dialogCallistoRingtone;
+import static io.github.com.pages.feedback.DialogPage.dialogCloseButton;
+import static io.github.com.pages.feedback.DialogPage.dialogContent;
+import static io.github.com.pages.feedback.DialogPage.dialogEmailInputForm;
+import static io.github.com.pages.feedback.DialogPage.dialogLunaRingtone;
+import static io.github.com.pages.feedback.DialogPage.dialogOkButton;
+import static io.github.com.pages.feedback.DialogPage.dialogScrollableContent;
+import static io.github.com.pages.feedback.DialogPage.dialogTitle;
+import static io.github.com.pages.feedback.DialogPage.formDialogButton;
+import static io.github.com.pages.feedback.DialogPage.formDialogField;
+import static io.github.com.pages.feedback.DialogPage.phoneRingtoneDialogTitle;
+import static io.github.com.pages.feedback.DialogPage.scrollBodyDialogButton;
+import static io.github.com.pages.feedback.DialogPage.scrollPaperDialogButton;
+import static io.github.com.pages.feedback.DialogPage.scrollableDialogCancelButton;
+import static io.github.com.pages.feedback.DialogPage.scrollableDialogField;
+import static io.github.com.pages.feedback.DialogPage.simpleDialogButton;
+import static io.github.com.pages.feedback.DialogPage.simpleDialogField;
+import static io.github.com.pages.feedback.DialogPage.simpleDialogListButton;
+import static io.github.com.pages.feedback.DialogPage.subscribeButton;
 import static org.hamcrest.Matchers.containsString;
 
 import com.epam.jdi.tools.Timer;

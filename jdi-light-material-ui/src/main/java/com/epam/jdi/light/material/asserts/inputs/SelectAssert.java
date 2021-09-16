@@ -1,9 +1,25 @@
 package com.epam.jdi.light.material.asserts.inputs;
 
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
-import com.epam.jdi.light.material.elements.inputs.Select;
+import com.epam.jdi.light.asserts.complex.DropdownAssert;
+import com.epam.jdi.light.common.JDIAction;
+import org.hamcrest.Matchers;
 
-public class SelectAssert extends UIAssert<SelectAssert, Select> {
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+public class SelectAssert extends DropdownAssert {
+    private final String disabled = "Mui-disabled";
+
+    @Override
+    @JDIAction("Assert that '{name}' is enabled")
+    public SelectAssert enabled() {
+        jdiAssert(element().core().hasClass(disabled), Matchers.is(false));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is disabled")
+    public SelectAssert disabled() {
+        jdiAssert(element().core().hasClass(disabled), Matchers.is(true));
+        return this;
+    }
 }

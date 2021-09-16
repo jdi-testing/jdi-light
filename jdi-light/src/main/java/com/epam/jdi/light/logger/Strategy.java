@@ -6,7 +6,7 @@ public enum Strategy {
     OFF, FAIL, ASSERT, NEW_PAGE;
 
     public static Strategy parseStrategy(String strategy) {
-        String strategyName = strategy.toLowerCase().replaceAll(" ", "").replaceAll("_", "");
+        String strategyName = strategy.toLowerCase().replace(" ", "").replace("_", "");
         switch (strategyName) {
             case "onfailure":
             case "onfail":

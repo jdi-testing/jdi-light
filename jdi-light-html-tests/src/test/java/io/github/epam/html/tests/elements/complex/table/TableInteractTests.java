@@ -73,7 +73,7 @@ public class TableInteractTests implements TestsInit {
     @Test
     public void previewTest() {
         String value = usersRow.preview();
-        assertEquals(value.replaceAll(" ", ""),
+        assertEquals(value.replace(" ", ""),
         "NumberTypeUserDescription" +
             "1AdminUserManagerRomanWolverineVip" +
             "2AdminUserManagerSergeyIvanSpiderManVip" +
