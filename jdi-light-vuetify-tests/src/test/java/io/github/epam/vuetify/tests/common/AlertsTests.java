@@ -2,13 +2,14 @@ package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Alert;
+import com.epam.jdi.light.vuetify.elements.enums.Colors;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.alertsPage;
 import static io.github.com.pages.AlertsPage.blueGreyAlert;
 import static io.github.com.pages.AlertsPage.denseErrorAlert;
@@ -18,9 +19,11 @@ import static io.github.com.pages.AlertsPage.denseWarningAlert;
 import static io.github.com.pages.AlertsPage.dismissibleAlert;
 import static io.github.com.pages.AlertsPage.dismissibleAlertResetButton;
 import static io.github.com.pages.AlertsPage.errorAlert;
+import static io.github.com.pages.AlertsPage.fireTextAlert;
 import static io.github.com.pages.AlertsPage.firstIconAlert;
 import static io.github.com.pages.AlertsPage.indigoAlert;
 import static io.github.com.pages.AlertsPage.infoAlert;
+import static io.github.com.pages.AlertsPage.infoTextAlert;
 import static io.github.com.pages.AlertsPage.pinkAlert;
 import static io.github.com.pages.AlertsPage.prominentErrorAlert;
 import static io.github.com.pages.AlertsPage.prominentLockAlert;
@@ -31,8 +34,12 @@ import static io.github.com.pages.AlertsPage.secondIconAlert;
 import static io.github.com.pages.AlertsPage.successAlert;
 import static io.github.com.pages.AlertsPage.successOutlinedAlert;
 import static io.github.com.pages.AlertsPage.thirdIconAlert;
+import static io.github.com.pages.AlertsPage.timeTextAlert;
+import static io.github.com.pages.AlertsPage.transitionAlert;
+import static io.github.com.pages.AlertsPage.transitionAlertToggleButton;
 import static io.github.com.pages.AlertsPage.warningAlert;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static io.github.com.pages.AlertsPage.warningOutlinedAlert;
+import static io.github.com.pages.AlertsPage.warningTextAlert;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -121,15 +128,19 @@ public class AlertsTests extends TestsInit {
 
     @Test
     public void outlinedAlertsHaveProperStyles() {
-        String purpleRGBA = "rgba(156, 39, 176, 1)";
-        String whiteRGBA = "rgba(0, 0, 0, 0)";
-
         purpleOutlinedAlert.has().text(containsString("Maecenas ullamcorper, dui et placerat feugiat"));
-        purpleOutlinedAlert.has().css("color", purpleRGBA);
-        checkBorderColor(purpleOutlinedAlert, purpleRGBA);
-        purpleOutlinedAlert.has().css("background-color", whiteRGBA);
+        purpleOutlinedAlert.has().css("color", Colors.PURPLE.value());
+        checkBorderColor(purpleOutlinedAlert, Colors.PURPLE.value());
+        purpleOutlinedAlert.has().css("background-color", Colors.TRANSPARENT.value());
 
         successOutlinedAlert.has().text(containsString("Aenean commodo ligula"));
+        successOutlinedAlert.has().css("color", Colors.GREEN.value());
+        checkBorderColor(successOutlinedAlert, Colors.GREEN.value());
+        checkBackgroundColorOpacity(successOutlinedAlert);
+
+        warningOutlinedAlert.has().text(containsString("Duis arcu tortor"));
+        warningOutlinedAlert.has().css("color", Colors.ORANGE_DARKEN_1.value());
+        checkBorderColor(warningOutlinedAlert, Colors.ORANGE_DARKEN_1.value());
     }
 
     @Test
@@ -148,6 +159,36 @@ public class AlertsTests extends TestsInit {
         checkProminentIconEffect(prominentLockAlert);
     }
 
+    @Test
+    public void textAlertsTextAndBackgroundColorsMatch() {
+        infoTextAlert.has().text(containsString("Sed mollis, eros et"));
+        infoTextAlert.has().css("color", Colors.BLUE.value());
+        checkBackgroundColorOpacity(infoTextAlert);
+
+        fireTextAlert.has().text(containsString("Nullam tincidunt adipiscing enim."));
+        fireTextAlert.has().css("color", Colors.DEEP_ORANGE.value());
+        checkBackgroundColorOpacity(fireTextAlert);
+
+        timeTextAlert.has().text(containsString("Nulla porta dolor."));
+        timeTextAlert.has().css("color", Colors.TEAL.value());
+        checkBackgroundColorOpacity(timeTextAlert);
+
+        warningTextAlert.has().text(containsString("Praesent blandit laoreet nibh."));
+        warningTextAlert.has().css("color", Colors.RED_ACCENT_2.value());
+        checkBackgroundColorOpacity(warningTextAlert);
+    }
+
+    @Test
+    public void transitionAlertTest() {
+        transitionAlert.is().displayed();
+
+        transitionAlertToggleButton.click();
+        transitionAlert.is().hidden();
+
+        transitionAlertToggleButton.click();
+        transitionAlert.isDisplayed();
+    }
+
     private void checkBorderColor(HasAssert<? extends UIAssert<?, ?>> element, String color) {
         element.has().css("border-bottom-color", color);
         element.has().css("border-left-color", color);
@@ -158,6 +199,8 @@ public class AlertsTests extends TestsInit {
     private void checkProminentIconEffect(Alert element) {
         String script = "return window.getComputedStyle(arguments[0].querySelector('i'), ':after')" +
                 ".getPropertyValue('%s');";
+        String expectedOpacity = "0.16";
+        String expectedHeight = "48px";
 
         String opacity = ((JavascriptExecutor)element.core().driver()).executeScript(
                 String.format(script, "opacity"),
@@ -166,7 +209,19 @@ public class AlertsTests extends TestsInit {
                 String.format(script, "height"),
                 element.core().seleniumElement()).toString();
 
-        assertThat(opacity, equalTo("0.16"));
-        assertThat(height, equalTo("48px"));
+        jdiAssert(opacity, equalTo(expectedOpacity));
+        jdiAssert(height, equalTo(expectedHeight));
+    }
+
+    private void checkBackgroundColorOpacity(Alert element) {
+        String script = "return window.getComputedStyle(arguments[0], ':before')" +
+                ".getPropertyValue('%s');";
+        String expectedOpacity = "0.12";
+
+        String opacity = ((JavascriptExecutor)element.core().driver()).executeScript(
+                String.format(script, "opacity"),
+                element.core().seleniumElement()).toString();
+
+        jdiAssert(opacity, equalTo(expectedOpacity));
     }
 }

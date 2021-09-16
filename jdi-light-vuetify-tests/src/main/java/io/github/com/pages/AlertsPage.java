@@ -68,4 +68,21 @@ public class AlertsPage extends VuetifyPage {
     public static CustomAlert prominentSchoolAlert;
     @UI("#prominentAlerts > .info--text")
     public static CustomAlert prominentLockAlert;
+
+    // text alerts
+    @UI("#textAlerts > div:nth-child(1)")
+    public static Alert infoTextAlert;
+    @UI("#textAlerts > div:nth-child(2)")
+    public static Alert fireTextAlert;
+    @UI("#textAlerts > div:nth-child(3)")
+    public static Alert timeTextAlert;
+    @UI("#textAlerts > div:nth-child(4)")
+    public static Alert warningTextAlert;
+
+    // transition alert
+    @UI("#transitionAlert > .v-alert")
+    public static Alert transitionAlert;
+    @UI("#transitionAlert > .text-center > button")
+    public static Button transitionAlertToggleButton;
+
 }
