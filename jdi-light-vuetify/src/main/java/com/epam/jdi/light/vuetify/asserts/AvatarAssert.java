@@ -8,8 +8,6 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> {
-    public AvatarAssert() {
-    }
 
     @JDIAction("Assert that {name} is displayed")
     public AvatarAssert displayed() {

@@ -6,9 +6,6 @@ import com.epam.jdi.light.vuetify.asserts.AvatarAssert;
 
 public class Avatar extends UIBaseElement<AvatarAssert> {
 
-    public Avatar() {
-    }
-
     @JDIAction("Get {name} photo")
     public String hasPhoto() {
         return core().firstChild().getTagName();
