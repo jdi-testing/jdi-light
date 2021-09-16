@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.alertsPage;
@@ -28,7 +28,7 @@ import static org.hamcrest.Matchers.containsString;
 
 
 public class AlertsTests extends TestsInit {
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         alertsPage.open();
         alertsPage.checkOpened();
