@@ -1,6 +1,5 @@
 package io.github.com.pages.navigation;
 
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.Button;
@@ -41,18 +40,27 @@ public class StepperPage extends WebPage {
     @UI("(//*[text()='Mobile text stepper']/following-sibling::div//*[contains(@class, 'MuiMobileStepper-root')])[1]")
     public static Text mobileTextStepperTitle;
 
-    @UI("//*[text()='Mobile text stepper']/following-sibling::div//button")
-    public static WebList mobileTextStepperButton;
+    @UI("//*[text()='Mobile text stepper']/following-sibling::div[1]//button[2]")
+    public static Button mobileTextStepperNextButton;
+
+    @UI("//*[text()='Mobile text stepper']/following-sibling::div[1]//button[1]")
+    public static Button mobileTextStepperBackButton;
 
     @UI("//*[@id='activeDotStep']")
     public static Text mobileDotsStepperTitle;
 
-    @UI("//*[text()='Mobile dots stepper']/following-sibling::div//button")
-    public static WebList mobileDotsStepperButton;
+    @UI("//*[text()='Mobile dots stepper']//following-sibling::div[1]//button[2]")
+    public static Button mobileDotsStepperNextButton;
+
+    @UI("//*[text()='Mobile dots stepper']//following-sibling::div[1]//button[1]")
+    public static Button mobileDotsStepperBackButton;
 
     @UI("//*[@id='activeProgressStep']")
     public static Text mobileProgressStepperTitle;
 
-    @UI("//*[text()='Mobile progress stepper']/following-sibling::div//button")
-    public static WebList mobileProgressStepperButton;
+    @UI("//*[text()='Mobile progress stepper']//following-sibling::div[1]//button[2]")
+    public static Button mobileProgressStepperNextButton;
+
+    @UI("//*[text()='Mobile progress stepper']//following-sibling::div[1]//button[1]")
+    public static Button mobileProgressStepperBackButton;
 }

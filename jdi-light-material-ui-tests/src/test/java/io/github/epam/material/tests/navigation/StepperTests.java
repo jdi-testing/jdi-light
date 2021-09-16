@@ -7,11 +7,14 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 import static io.github.com.StaticSite.stepperPage;
-import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperButton;
+import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperButton;
+import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.mobileTextStepperButton;
+import static io.github.com.pages.navigation.StepperPage.mobileTextStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.mobileTextStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.mobileTextStepperTitle;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepper;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepperCompleteStepButton;
@@ -129,55 +132,55 @@ public class StepperTests extends TestsInit {
     @Test
     public void mobileTextStepperTest() {
         mobileTextStepperTitle.is().text("BACK\n1 / 5\nNEXT");
-        mobileTextStepperButton.get(2).click();
+        mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n2 / 5\nNEXT");
-        mobileTextStepperButton.get(1).click();
+        mobileTextStepperBackButton.click();
         mobileTextStepperTitle.is().text("BACK\n1 / 5\nNEXT");
-        mobileTextStepperButton.get(2).click();
+        mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n2 / 5\nNEXT");
-        mobileTextStepperButton.get(2).click();
+        mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n3 / 5\nNEXT");
-        mobileTextStepperButton.get(2).click();
+        mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n4 / 5\nNEXT");
-        mobileTextStepperButton.get(2).click();
+        mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n5 / 5\nNEXT");
     }
 
     @Test
     public void mobileDotsTest() {
         mobileDotsStepperTitle.is().text("You are on Step 0");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 1");
-        mobileDotsStepperButton.get(1).click();
+        mobileDotsStepperBackButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 0");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 1");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 2");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 3");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 4");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 5");
     }
 
     @Test
     public void mobileProgressTest() {
         mobileProgressStepperTitle.is().text("You are on Step 0");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 1");
-        mobileProgressStepperButton.get(1).click();
+        mobileProgressStepperBackButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 0");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 1");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 2");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 3");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 4");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 5");
     }
 }
