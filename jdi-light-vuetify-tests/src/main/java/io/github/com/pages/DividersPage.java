@@ -6,7 +6,7 @@ import com.epam.jdi.light.vuetify.elements.common.Divider;
 
 import java.util.List;
 
-public class DividersPage extends WebPage {
+public class DividersPage extends VuetifyPage {
 
     @UI(".v-divider--inset")
     public static List<Divider> horizontalDividers;
