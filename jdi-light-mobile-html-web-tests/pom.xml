@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
-        <allure.testng>2.13.8</allure.testng>
+        <allure.testng>2.15.0</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.6</aspectj.version>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.14.3</version>
+            <version>7.4.0</version>
             <scope>test</scope>
         </dependency>
 
