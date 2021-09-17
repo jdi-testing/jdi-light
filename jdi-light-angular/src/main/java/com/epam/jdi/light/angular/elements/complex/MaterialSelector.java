@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * To see an example of MaterialSelector web element please visit https://material.angular.io/components/select/overview.

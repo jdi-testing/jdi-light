@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import org.openqa.selenium.By;
 
+import static com.jdiai.tools.StringUtils.format;
+
 /**
  * To see an example of ButtonToggle web element please visit https://material.angular.io/components/button-toggle/overview.
  */

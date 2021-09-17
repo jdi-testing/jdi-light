@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
+import static com.jdiai.tools.StringUtils.format;
 
 public class DatepickerContainer extends Section {
     public static final int YEAR_LENGTH = 4;

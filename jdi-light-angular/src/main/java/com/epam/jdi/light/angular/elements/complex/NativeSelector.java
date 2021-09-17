@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * To see an example of NativeSelector web element please visit https://material.angular.io/components/select/overview.

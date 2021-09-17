@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * To see an example of Ripple web element please visit https://material.angular.io/components/ripple/overview.

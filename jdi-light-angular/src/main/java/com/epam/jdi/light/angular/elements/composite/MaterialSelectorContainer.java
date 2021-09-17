@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.jdiai.tools.StringUtils.format;
+
 public class MaterialSelectorContainer extends Section {
     public String backdropSelectPanel = "div.mat-select-panel.mat-primary";
     public String groupsAndOptionsList = "div.mat-select-panel.mat-primary mat-optgroup";

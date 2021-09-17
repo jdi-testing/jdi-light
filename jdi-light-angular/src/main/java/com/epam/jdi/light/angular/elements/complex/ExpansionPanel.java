@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * To see an example of ExpansionPanel web element please visit https://material.angular.io/components/expansion/overview.

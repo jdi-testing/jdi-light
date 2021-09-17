@@ -26,6 +26,7 @@ import java.util.Locale;
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.DATEPICKER;
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.TOGGLE;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * To see an example of Datepicker web element please visit https://material.angular.io/components/datepicker/overview.

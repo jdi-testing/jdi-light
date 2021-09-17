@@ -8,6 +8,7 @@ import org.hamcrest.Matchers;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.jdiai.tools.StringUtils.format;
 
 public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
     @JDIAction("Assert that '{name}' has '{0}' label")
