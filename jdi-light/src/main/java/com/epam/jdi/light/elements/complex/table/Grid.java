@@ -21,8 +21,8 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.LinqUtils.toList;
-import static com.jdiai.tools.Timer.getByCondition;
 import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.Timer.getByCondition;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 

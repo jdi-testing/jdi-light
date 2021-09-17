@@ -6,11 +6,11 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jdiai.tools.LinqUtils;
 import com.jdiai.tools.Safe;
 import com.jdiai.tools.map.MapArray;
 import com.jdiai.tools.pairs.Pair;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;

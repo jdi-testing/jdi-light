@@ -44,7 +44,6 @@ import static com.jdiai.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.hamcrest.Matchers.in;
 import static org.hamcrest.Matchers.is;
 
 /**

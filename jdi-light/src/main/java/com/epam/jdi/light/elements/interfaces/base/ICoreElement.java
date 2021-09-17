@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.Condition;
+import com.epam.jdi.light.elements.common.Direction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
@@ -113,6 +114,9 @@ public interface ICoreElement extends IBaseElement {
     default void pasteText(String text, long timeToWaitMSec) {
         iCore().pasteText(text, timeToWaitMSec);
     }
+    default Direction getDirectionTo(WebElement element) {
+        return core().getDirectionTo(element);
+    }
     default boolean isAbove(WebElement element) {
         return HIGHER.apply(core().getDirectionTo(element));
     }
@@ -136,6 +140,9 @@ public interface ICoreElement extends IBaseElement {
     }
     default boolean isOnRightOf(ICoreElement element) {
         return RIGHT.apply(core().getDirectionTo(element));
+    }
+    default Direction getDirectionTo(ICoreElement element) {
+        return core().getDirectionTo(element);
     }
 
     default ICoreElement shouldBe(Condition... conditions) {

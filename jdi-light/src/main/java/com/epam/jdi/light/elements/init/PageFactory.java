@@ -35,9 +35,7 @@ import static com.epam.jdi.light.settings.WebSettings.init;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.LinqUtils.*;
 import static com.jdiai.tools.ReflectionUtils.*;
-import static com.jdiai.tools.StringUtils.LINE_BREAK;
-import static com.jdiai.tools.StringUtils.splitCamelCase;
-import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.*;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.asList;
 

@@ -6,14 +6,13 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.light.settings.JDISettings;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import static com.epam.jdi.light.common.ElementArea.JS;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
-import static com.epam.jdi.light.settings.JDISettings.*;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 
 /**

@@ -7,8 +7,8 @@ import com.jdiai.tools.func.JAction1;
 import java.io.IOException;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static java.lang.Runtime.getRuntime;
 import static com.jdiai.tools.StringUtils.format;
+import static java.lang.Runtime.getRuntime;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -32,8 +32,7 @@ public class DriverSettings {
     public Boolean remoteRun = null;
     public String downloadsFolder = mergePath(COMMON.testPath, "resources", "downloads");
     public String videoUrl;
-    public String gitHubTokenName;
-    public String gitHubTokenSecret;
+    public String gitHubToken;
 
     public JFunc1<WebDriver, WebDriver> setup = DriverData::driverSettings;
     public MapArray<String, DriverInfo> types = map(
