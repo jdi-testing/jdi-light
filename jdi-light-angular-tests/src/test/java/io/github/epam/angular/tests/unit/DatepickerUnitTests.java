@@ -20,6 +20,7 @@ import static io.github.epam.angular.tests.elements.complex.datepicker.TestsDate
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static com.jdiai.tools.StringUtils.format;
 
 public class DatepickerUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)

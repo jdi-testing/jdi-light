@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SideNavSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
