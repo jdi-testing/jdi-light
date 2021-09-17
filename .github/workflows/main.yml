@@ -131,6 +131,7 @@ jobs:
       run: ps -aux | grep chrome
 
     - name: Kill Chrome
+      continue-on-error: true
       run: pkill -f "chrome"
 
 #    - name: Run tests - Angular Unit tests
@@ -141,6 +142,7 @@ jobs:
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 #
 #    - name: Kill Chrome
+#     continue-on-error: true
 #      run: pkill -f "chrome"
 
 #    - name: Run tests - Angular Common tests
@@ -154,6 +156,7 @@ jobs:
 #      run: ps -aux | grep chrome
 #
 #    - name: Kill Chrome
+#     continue-on-error: true
 #      run: pkill -f "chrome"
 
 #    - name: Run tests - Angular Complex tests
@@ -164,6 +167,7 @@ jobs:
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 #
 #    - name: Kill Chrome
+#      continue-on-error: true
 #      run: pkill -f "chrome"
 
     - name: Run tests - HTML functional
@@ -177,6 +181,7 @@ jobs:
       run: ps -aux | grep chrome
 
     - name: Kill Chrome
+      continue-on-error: true
       run: pkill -f "chrome"
 
     - name: Run tests - HTML performace
@@ -190,6 +195,7 @@ jobs:
       run: ps -aux | grep chrome
 
     - name: Kill Chrome
+      continue-on-error: true
       run: pkill -f "chrome"
 
     - name: Run tests - Test Examples
@@ -203,6 +209,7 @@ jobs:
       run: ps -aux | grep chrome
 
     - name: Kill Chrome
+      continue-on-error: true
       run: pkill -f "chrome"
 
     - name: Run tests - Performance
