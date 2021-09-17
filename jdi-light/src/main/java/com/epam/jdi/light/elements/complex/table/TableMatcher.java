@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.complex.table;
 import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import org.openqa.selenium.support.ui.Quotes;
 
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -5,8 +5,8 @@ import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.PrintUtils;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.PrintUtils;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.firstIndex;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.EnumUtils.getEnumValue;
+import static com.jdiai.tools.LinqUtils.firstIndex;
+import static com.jdiai.tools.StringUtils.LINE_BREAK;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 24.09.2020

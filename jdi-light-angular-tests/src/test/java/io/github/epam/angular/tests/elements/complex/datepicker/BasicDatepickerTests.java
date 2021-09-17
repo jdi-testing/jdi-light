@@ -169,8 +169,8 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkEnabledMonthsAndYearsNavigation() {
-        String firstEnabledYearCell = String.format(CELL.getName(), 2016);
-        String lastEnabledYearCell = String.format(CELL.getName(), 2039);
+        String firstEnabledYearCell = format(CELL.getName(), 2016);
+        String lastEnabledYearCell = format(CELL.getName(), 2039);
         basicDatepicker.setDate(LocalDate.of(2020, 1, 1));
         basicDatepicker.openYearsView();
         basicDatepicker.has()

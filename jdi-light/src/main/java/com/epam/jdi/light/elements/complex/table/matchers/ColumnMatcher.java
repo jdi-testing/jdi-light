@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocato
 import java.text.MessageFormat;
 
 import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.*;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

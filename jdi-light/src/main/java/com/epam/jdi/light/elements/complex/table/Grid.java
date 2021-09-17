@@ -20,9 +20,9 @@ import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.toList;
-import static com.epam.jdi.tools.Timer.getByCondition;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.LinqUtils.toList;
+import static com.jdiai.tools.Timer.getByCondition;
+import static com.jdiai.tools.StringUtils.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 

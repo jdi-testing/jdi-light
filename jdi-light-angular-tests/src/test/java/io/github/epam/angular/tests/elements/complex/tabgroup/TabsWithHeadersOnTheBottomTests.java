@@ -22,7 +22,7 @@ public class TabsWithHeadersOnTheBottomTests extends TestsTabGroupBase {
     @Test
     public void verifyTabWithHeadersOnTheBottomPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
+        String stringForTest = format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.tabWithHeadersOnTheBottom.clickTab(tabNumberForTest);
         tabsSection.tabWithHeadersOnTheBottom.is().assertTabPanelContent(stringForTest);
     }

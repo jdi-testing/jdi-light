@@ -1,11 +1,11 @@
 package com.epam.jdi.light.logger;
 
-import com.epam.jdi.tools.FixedQueue;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JAction;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.FixedQueue;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.func.JAction;
+import com.jdiai.tools.func.JFunc;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.map.MapArray;
 import org.apache.logging.log4j.*;
 
 import java.util.Properties;
@@ -15,9 +15,9 @@ import static com.epam.jdi.light.driver.WebDriverFactory.MULTI_THREAD;
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
 import static com.epam.jdi.light.settings.WebSettings.getProperties;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.StringUtils.LINE_BREAK;
+import static com.jdiai.tools.StringUtils.format;
 import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.logging.log4j.core.config.Configurator.setLevel;

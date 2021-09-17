@@ -25,7 +25,7 @@ public class TabsWithDynamicallyChangingTabsTests extends TestsTabGroupBase {
         String tabForTest = "New";
         tabsSection.addNewTabButton.click();
         tabsSection.dynamicallyChangingTabs.clickTab(tabForTest);
-        String stringForTest = String.format("Contents for %s tab Delete Tab", tabForTest);
+        String stringForTest = format("Contents for %s tab Delete Tab", tabForTest);
         tabsSection.dynamicallyChangingTabs.is().assertTabPanelContent(stringForTest);
     }
 

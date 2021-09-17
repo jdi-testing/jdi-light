@@ -2,8 +2,8 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.Dimension;
 
 import java.util.List;

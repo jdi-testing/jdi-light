@@ -2,7 +2,7 @@ package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.common.PageChecks;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.tools.func.JAction1;
+import com.jdiai.tools.func.JAction1;
 
 public class PageSettings {
     public boolean useMultiTabsSite = true;

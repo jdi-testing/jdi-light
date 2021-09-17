@@ -2,15 +2,15 @@ package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.IListSelector;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.func.JFunc1;
 import org.hamcrest.Matchers;
 
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.LinqUtils.single;
+import static com.jdiai.tools.LinqUtils.first;
+import static com.jdiai.tools.LinqUtils.single;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 

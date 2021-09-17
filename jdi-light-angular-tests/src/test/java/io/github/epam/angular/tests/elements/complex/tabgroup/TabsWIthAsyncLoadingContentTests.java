@@ -20,7 +20,7 @@ public class TabsWIthAsyncLoadingContentTests extends TestsTabGroupBase {
     @Test
     public void verifyAsyncLoadingContentTabPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
+        String stringForTest = format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.tabsAsyncLoadingContent.clickTab(tabNumberForTest);
         tabsSection.tabsAsyncLoadingContent.is().assertTabPanelContent(stringForTest);
     }

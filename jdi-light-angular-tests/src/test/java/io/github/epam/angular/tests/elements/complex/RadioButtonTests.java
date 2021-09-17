@@ -40,7 +40,7 @@ public class RadioButtonTests extends TestsInit {
 
         seasonRadioGroup.click(SPRING);
         seasonRadioGroup.is().checked(SPRING);
-        yourFavoriteSeasonText.has().text(String.format("Your favorite season is: %s", SPRING));
+        yourFavoriteSeasonText.has().text(format("Your favorite season is: %s", SPRING));
 
         seasonRadioGroup.is().notChecked(WINTER);
         seasonRadioGroup.is().notChecked(SUMMER);

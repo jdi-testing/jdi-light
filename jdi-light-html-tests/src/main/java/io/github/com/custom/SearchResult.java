@@ -7,7 +7,7 @@ import com.epam.jdi.light.ui.html.elements.common.Link;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 
 public class SearchResult extends Section {
     @UI("h3") public Label name;

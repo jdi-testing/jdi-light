@@ -5,7 +5,7 @@ import com.epam.jdi.light.angular.elements.enums.ProgressBarColors;
 import com.epam.jdi.light.angular.elements.enums.ProgressBarModes;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 

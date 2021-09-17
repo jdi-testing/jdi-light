@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class FullName extends UIBaseElement<TextAssert> implements IsText {

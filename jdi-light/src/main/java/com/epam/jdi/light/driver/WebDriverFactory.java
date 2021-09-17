@@ -1,11 +1,11 @@
 package com.epam.jdi.light.driver;
 
 import com.epam.jdi.light.driver.get.DriverTypes;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.Timer;
+import com.jdiai.tools.func.JFunc;
+import com.jdiai.tools.map.MapArray;
+import com.jdiai.tools.pairs.Pair;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -18,8 +18,8 @@ import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.safeException;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.jdiai.tools.LinqUtils.safeException;
+import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;

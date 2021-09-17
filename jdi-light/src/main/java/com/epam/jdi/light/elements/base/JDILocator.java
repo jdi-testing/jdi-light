@@ -1,7 +1,7 @@
 package com.epam.jdi.light.elements.base;
 
 import com.epam.jdi.light.driver.WebDriverByUtils;
-import com.epam.jdi.tools.Safe;
+import com.jdiai.tools.Safe;
 import org.openqa.selenium.By;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import static com.epam.jdi.light.elements.base.JdiSettings.addTextToXPath;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.StringUtils.format;
 import static org.apache.commons.lang3.StringUtils.*;
 
 /**

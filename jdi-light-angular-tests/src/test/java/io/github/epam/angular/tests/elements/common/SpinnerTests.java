@@ -1,6 +1,6 @@
 package io.github.epam.angular.tests.elements.common;
 
-import com.epam.jdi.tools.func.JAction;
+import com.jdiai.tools.func.JAction;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

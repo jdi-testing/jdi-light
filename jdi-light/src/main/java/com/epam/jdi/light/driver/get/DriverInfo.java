@@ -1,8 +1,8 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.tools.DataClass;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.DataClass;
+import com.jdiai.tools.func.JFunc;
+import com.jdiai.tools.func.JFunc1;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
@@ -24,9 +24,9 @@ import static com.epam.jdi.light.driver.get.Platform.X64;
 import static com.epam.jdi.light.driver.get.RemoteDriverInfo.getRemoteURL;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 import static java.lang.Integer.parseInt;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 import static org.apache.commons.lang3.StringUtils.isBlank;

@@ -13,9 +13,9 @@ import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.hasValue;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.LinqUtils.safeException;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.LinqUtils.safeException;
+import static com.jdiai.tools.PrintUtils.print;
 import static java.lang.Integer.parseInt;
 import static org.hamcrest.Matchers.*;
 

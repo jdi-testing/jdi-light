@@ -1,6 +1,6 @@
 package com.epam.jdi.light.driver;
 
-import com.epam.jdi.tools.func.JFunc2;
+import com.jdiai.tools.func.JFunc2;
 import org.openqa.selenium.TakesScreenshot;
 
 import javax.imageio.ImageIO;
@@ -15,8 +15,8 @@ import static com.epam.jdi.light.settings.JDISettings.COMMON;
 import static com.epam.jdi.light.settings.JDISettings.SCREEN;
 import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.Timer.nowTime;
+import static com.jdiai.tools.PathUtils.mergePath;
+import static com.jdiai.tools.Timer.nowTime;
 import static java.awt.Toolkit.getDefaultToolkit;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;

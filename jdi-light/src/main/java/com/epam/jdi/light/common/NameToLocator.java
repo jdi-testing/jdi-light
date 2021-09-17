@@ -1,11 +1,11 @@
 package com.epam.jdi.light.common;
 
-import com.epam.jdi.tools.StringUtils;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.StringUtils;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.map.MapArray;
 
-import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.$;
+import static com.jdiai.tools.map.MapArray.map;
+import static com.jdiai.tools.pairs.Pair.$;
 
 public class NameToLocator {
     public static MapArray<String, JFunc1<String, String>> SMART_MAP_NAME_TO_LOCATOR = map(

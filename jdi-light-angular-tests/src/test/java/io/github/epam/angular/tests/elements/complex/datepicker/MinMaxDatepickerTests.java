@@ -51,8 +51,8 @@ public class MinMaxDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkDisabledMonthsAndYearsNavigation() {
-        String firstDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 2);
-        String secondDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 1);
+        String firstDisabledYearCell = format(CELL.getName(), MIN_YEAR - 2);
+        String secondDisabledYearCell = format(CELL.getName(), MIN_YEAR - 1);
         minMaxDatepicker.openYearsView();
         minMaxDatepicker.has().disabledNavigation(PREVIOUS_TWENTY_YEARS.getName(),
             NEXT_TWENTY_YEARS.getName(), firstDisabledYearCell, secondDisabledYearCell);

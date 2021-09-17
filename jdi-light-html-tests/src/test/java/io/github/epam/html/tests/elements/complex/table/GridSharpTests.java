@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.LinqUtils.any;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.jdiai.tools.LinqUtils.any;
+import static com.jdiai.tools.LinqUtils.*;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.SimpleTablePage.furnitureSharp;
 import static io.github.epam.html.tests.elements.complex.table.TableDataProvider.*;

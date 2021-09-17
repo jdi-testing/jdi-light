@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.StringUtils.inputStreamToList;
+import static com.jdiai.tools.StringUtils.inputStreamToList;
 
 public class LinuxProcessUtils {
 

@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-import com.epam.jdi.tools.Safe;
+import com.jdiai.tools.Safe;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

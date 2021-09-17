@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Level;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.LOGS;
-import static com.epam.jdi.tools.LinqUtils.first;
+import static com.jdiai.tools.LinqUtils.first;
 import static java.lang.Integer.MAX_VALUE;
 import static java.util.Arrays.asList;
 

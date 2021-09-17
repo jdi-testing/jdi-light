@@ -20,7 +20,7 @@ public class TabsBasicTests extends TestsTabGroupBase {
     @Test
     public void verifyTabPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
+        String stringForTest = format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.basicTab.clickTab(tabNumberForTest);
         tabsSection.basicTab.is().assertTabPanelContent(stringForTest);
     }

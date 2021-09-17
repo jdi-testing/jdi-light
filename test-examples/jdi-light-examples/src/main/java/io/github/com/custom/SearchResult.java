@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 
 public class SearchResult extends Section {
 @Title  @Css("h3") public UIElement name;

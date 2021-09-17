@@ -334,8 +334,8 @@ public class DatepickerUnitTests extends TestsInit {
 
     @Test
     public void checkDisabledYearsNavigationTest() {
-        String firstDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 2);
-        String secondDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 1);
+        String firstDisabledYearCell = format(CELL.getName(), MIN_YEAR - 2);
+        String secondDisabledYearCell = format(CELL.getName(), MIN_YEAR - 1);
         minMaxDatepicker.show();
         minMaxDatepicker.clear();
         minMaxDatepicker.openYearsView();

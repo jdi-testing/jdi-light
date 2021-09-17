@@ -21,7 +21,7 @@ public class TabsWithCustomizingThemesTests extends TestsTabGroupBase {
     @Test
     public void verifyCustomThemeTabPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
+        String stringForTest = format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.tabGroupThemeExample.clickTab(tabNumberForTest);
         tabsSection.tabGroupThemeExample.is().assertTabPanelContent(stringForTest);
     }

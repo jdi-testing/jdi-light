@@ -2,13 +2,13 @@ package com.epam.jdi.light.driver;
 
 import com.epam.jdi.light.common.LinuxProcessUtils;
 import com.epam.jdi.light.common.UnixProcessUtils;
-import com.epam.jdi.tools.func.JAction1;
+import com.jdiai.tools.func.JAction1;
 
 import java.io.IOException;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.Runtime.getRuntime;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

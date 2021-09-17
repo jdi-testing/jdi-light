@@ -12,7 +12,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.searchBy;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.jdiai.tools.ReflectionUtils.isClass;
 import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.navigationL;
 import static io.github.epam.enums.Navigation.Service;

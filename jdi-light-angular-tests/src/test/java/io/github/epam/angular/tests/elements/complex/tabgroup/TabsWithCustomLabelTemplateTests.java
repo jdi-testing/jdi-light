@@ -24,7 +24,7 @@ public class TabsWithCustomLabelTemplateTests extends TestsTabGroupBase {
     @Test
     public void verifyCustomLabelTemplateTabPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
+        String stringForTest = format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.tabWithCustomLabel.clickTab(tabNumberForTest);
         tabsSection.tabWithCustomLabel.is().assertTabPanelContent(stringForTest);
     }

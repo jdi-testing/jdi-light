@@ -210,7 +210,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @return UIElement with hint text
      */
     public UIElement hint() {
-        return new UIElement(By.xpath(String.format(hintLocator,
+        return new UIElement(By.xpath(format(hintLocator,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
@@ -221,7 +221,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @return UIElement with error text
      */
     public UIElement error() {
-        return new UIElement(By.xpath(String.format(errorLocator,
+        return new UIElement(By.xpath(format(errorLocator,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
@@ -232,7 +232,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     }
 
     protected UIElement toggle() {
-        return new UIElement(By.xpath(String.format(toggle,
+        return new UIElement(By.xpath(format(toggle,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }

@@ -20,8 +20,8 @@ import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
-import com.epam.jdi.tools.HasStartIndex;
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.HasStartIndex;
+import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -38,12 +38,12 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
 import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.format;
-import static com.epam.jdi.tools.StringUtils.toKebabCase;
-import static com.epam.jdi.tools.map.MapArray.map;
-import static com.epam.jdi.tools.pairs.Pair.$;
+import static com.jdiai.tools.LinqUtils.*;
+import static com.jdiai.tools.ReflectionUtils.*;
+import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.toKebabCase;
+import static com.jdiai.tools.map.MapArray.map;
+import static com.jdiai.tools.pairs.Pair.$;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**

@@ -37,7 +37,7 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
     public boolean isButtonToggleSelected(String value) {
         UIElement element = getButtonToggleByTagValue(value);
         if (isButtonToggleDisabled(value)) {
-            throw new UnsupportedOperationException(String.format("button toggle is disabled %s", value));
+            throw new UnsupportedOperationException(format("button toggle is disabled %s", value));
         }
         return element.attr("class").contains("checked");
     }

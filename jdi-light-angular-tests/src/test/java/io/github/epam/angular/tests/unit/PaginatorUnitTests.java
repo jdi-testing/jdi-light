@@ -82,7 +82,7 @@ public class PaginatorUnitTests extends TestsInit {
         paginator.select(100);
         paginator.select(STEP);
 
-        String expected = String.format("1 – %d of %s", STEP, TOTAL);
+        String expected = format("1 – %d of %s", STEP, TOTAL);
         assertEquals(paginator.range(), expected);
     }
 }

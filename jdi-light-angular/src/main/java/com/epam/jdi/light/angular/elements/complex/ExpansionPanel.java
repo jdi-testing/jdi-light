@@ -149,62 +149,62 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
     }
 
     protected List<UIElement> getHeadersLocator() {
-        return new WebList(By.xpath(String.format(headersLocator, core().locator.printLocator()
+        return new WebList(By.xpath(format(headersLocator, core().locator.printLocator()
             .replace(smartSharp, "") .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getContentsLocator() {
-        return new WebList(By.xpath(String.format(contentsLocator, this.core().locator.printLocator()
+        return new WebList(By.xpath(format(contentsLocator, this.core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getContentBodiesLocator() {
-        return new WebList(By.xpath(String.format(contentBodiesLocator, this.core().locator
+        return new WebList(By.xpath(format(contentBodiesLocator, this.core().locator
             .printLocator().replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getInputLocator(final String placeholder) {
-        return new UIElement(By.xpath(String.format(inputLocator, this.core().locator.printLocator()
+        return new UIElement(By.xpath(format(inputLocator, this.core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""), placeholder)));
     }
 
     protected UIElement getNextButtonLocator(final String tittle) {
-        return new UIElement(By.xpath(String.format(nextButtonLocator, this.core().locator
+        return new UIElement(By.xpath(format(nextButtonLocator, this.core().locator
             .printLocator().replace(smartSharp, "").replace(cssSharp, "").replace("'", ""), tittle)));
     }
 
     protected UIElement getPreviousButtonLocator(final String tittle) {
-        return new UIElement(By.xpath(String.format(previousButtonLocator,
+        return new UIElement(By.xpath(format(previousButtonLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""), tittle)));
     }
 
     protected UIElement getEndButtonLocator(final String tittle) {
-        return new UIElement(By.xpath(String.format(endButtonLocator,
+        return new UIElement(By.xpath(format(endButtonLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""), tittle)));
     }
 
     protected List<UIElement> getTitlesLocator() {
-        return new WebList(By.xpath(String.format(titlesLocator,
+        return new WebList(By.xpath(format(titlesLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getIconsLocator() {
-        return new WebList(By.xpath(String.format(iconsLocator,
+        return new WebList(By.xpath(format(iconsLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getDescriptionsLocator() {
-        return new WebList(By.xpath(String.format(descriptionsLocator,
+        return new WebList(By.xpath(format(descriptionsLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected List<UIElement> getExpansionIndicatorLocator() {
-        return new WebList(By.xpath(String.format(expansionIndicatorLocator,
+        return new WebList(By.xpath(format(expansionIndicatorLocator,
             this.core().locator.printLocator().replace(smartSharp, "")
                 .replace(cssSharp, "").replace("'", ""))));
     }

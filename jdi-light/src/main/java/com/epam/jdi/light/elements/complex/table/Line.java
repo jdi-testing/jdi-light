@@ -6,14 +6,14 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.map.MultiMap;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.PrintUtils;
+import com.jdiai.tools.Timer;
+import com.jdiai.tools.func.JFunc;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.map.MapArray;
+import com.jdiai.tools.map.MultiMap;
+import com.jdiai.tools.pairs.Pair;
 import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.WebElement;
 
@@ -25,9 +25,9 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.ReflectionUtils.create;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
-import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
+import static com.jdiai.tools.ReflectionUtils.create;
+import static com.jdiai.tools.ReflectionUtils.getValueField;
+import static com.jdiai.tools.StringUtils.setPrimitiveField;
 import static java.util.Arrays.asList;
 
 /**

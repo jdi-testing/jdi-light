@@ -10,9 +10,9 @@ import com.epam.jdi.light.elements.complex.table.Row;
 import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc2;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -21,8 +21,8 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.asserts.generic.table.DataTableAssert.CompareType.*;
 import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.TABLE_MATCHER;
-import static com.epam.jdi.tools.LinqUtils.isSorted;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.LinqUtils.isSorted;
+import static com.jdiai.tools.StringUtils.format;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 

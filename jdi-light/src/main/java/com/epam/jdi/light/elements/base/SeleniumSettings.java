@@ -1,6 +1,6 @@
 package com.epam.jdi.light.elements.base;
 
-import com.epam.jdi.tools.func.JFunc2;
+import com.jdiai.tools.func.JFunc2;
 import org.openqa.selenium.WebElement;
 
 public class SeleniumSettings {

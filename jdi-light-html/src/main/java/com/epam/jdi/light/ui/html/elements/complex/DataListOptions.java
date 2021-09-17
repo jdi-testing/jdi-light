@@ -6,8 +6,8 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.tools.HasStartIndex;
-import com.epam.jdi.tools.LinqUtils;
+import com.jdiai.tools.HasStartIndex;
+import com.jdiai.tools.LinqUtils;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
+import static com.jdiai.tools.LinqUtils.ifSelect;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

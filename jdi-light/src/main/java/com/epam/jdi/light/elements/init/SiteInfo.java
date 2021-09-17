@@ -3,11 +3,11 @@ package com.epam.jdi.light.elements.init;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

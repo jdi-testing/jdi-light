@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.jdiai.tools.LinqUtils.map;
 
 /**
  * To see an example of NativeSelector web element please visit https://material.angular.io/components/select/overview.
@@ -118,7 +118,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     @JDIAction("Get '{name}' groups")
     public List<String> groups() {
         List<String> groups = new ArrayList<>();
-        WebList webList = new WebList(By.cssSelector(String.format(groupsAndOptionsList,
+        WebList webList = new WebList(By.cssSelector(format(groupsAndOptionsList,
             core().locator.printLocator().replace(smartSharp, "") .replace(cssSharp, "").replace("'", ""))));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {
@@ -135,7 +135,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     @JDIAction("Get '{name}' groups and options")
     public Map<String, List<String>> groupsAndOptions() {
         Map<String, List<String>> map = new LinkedHashMap<>();
-        WebList webList = new WebList(By.cssSelector(String.format(groupsAndOptionsList,
+        WebList webList = new WebList(By.cssSelector(format(groupsAndOptionsList,
            core().locator.printLocator() .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {
@@ -181,7 +181,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      * @return UIElement with hint text
      */
     public UIElement hint() {
-        return new UIElement(By.xpath(String.format(hintLocator, core().locator.printLocator()
+        return new UIElement(By.xpath(format(hintLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
@@ -191,7 +191,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      * @return UIElement with error text
      */
     public UIElement error() {
-        return new UIElement(By.xpath(String.format(errorLocator, core().locator.printLocator()
+        return new UIElement(By.xpath(format(errorLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 }

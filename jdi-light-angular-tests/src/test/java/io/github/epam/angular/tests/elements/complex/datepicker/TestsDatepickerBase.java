@@ -9,7 +9,7 @@ import java.util.List;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.format;
 
 public class TestsDatepickerBase extends TestsInit {
     public static final String CHOOSE_A_DATE = "Choose a date";

@@ -15,8 +15,8 @@ import java.util.List;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.PAGES;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
+import static com.jdiai.tools.ReflectionUtils.isClass;
+import static com.jdiai.tools.StringUtils.splitCamelCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -80,18 +80,25 @@ public abstract class DriverBase implements JDIElement {
     public String getName() {
         return isBlank(name) ? getClass().getSimpleName() : name;
     }
+    public String getFullName() {
+        return isBlank(varName) ? getName() : varName;
+    }
     public void setPage(String page) {
         pageName = page;
     }
 
     public WebPage getPage() {
-        if (pageName != null)
+        if (pageName != null) {
             return PAGES.get().keys().contains(pageName)
                 ? PAGES.get().get(pageName)
                 : null;
-        if (parent == null) return null;
-        if (isClass(parent.getClass(), WebPage.class))
+        }
+        if (parent == null) {
+            return null;
+        }
+        if (isClass(parent.getClass(), WebPage.class)) {
             return (WebPage) parent;
+        }
         if (!isClass(parent.getClass(), DriverBase.class)) {
             String pageName = splitCamelCase(parent.getClass().getSimpleName());
             return PAGES.get().keys().contains(pageName)

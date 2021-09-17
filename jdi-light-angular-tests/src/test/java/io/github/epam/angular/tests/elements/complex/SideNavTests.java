@@ -167,7 +167,7 @@ public class SideNavTests extends TestsInit {
         toolbarToggle.click();
         for (int value : testValues) {
             responsiveContent.getSideNavLinks().get(value).click();
-            responsiveContent.getResponsiveResults().get(value).has().text(String.format("Selected Nav Item %d", value));
+            responsiveContent.getResponsiveResults().get(value).has().text(format("Selected Nav Item %d", value));
         }
     }
 }

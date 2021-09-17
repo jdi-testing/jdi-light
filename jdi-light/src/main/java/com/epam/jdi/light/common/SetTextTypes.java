@@ -1,7 +1,7 @@
 package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.tools.func.JAction2;
+import com.jdiai.tools.func.JAction2;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
