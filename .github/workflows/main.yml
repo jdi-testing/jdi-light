@@ -166,6 +166,12 @@ jobs:
 #    - name: Kill Chrome
 #      run: pkill -f "chrome"
 
+    - name: Create folder for logs
+      continue-on-error: true
+      run:  |
+        mkdir ./jdi-light-html-tests/target/.logs
+        ls -lah ./jdi-light-html-tests/target
+
     - name: Run tests - HTML functional
       id: tests-html-func
       if: steps.jdi-compile.outcome == 'success'
@@ -175,6 +181,11 @@ jobs:
 
     - name: Check Chrome
       run: ps -aux | grep chrome
+
+    - name: Create folder for logs
+      continue-on-error: true
+      run: |
+        ls -lah ./jdi-light-html-tests/target/.logs
 
 #    - name: Kill Chrome
 #      run: pkill -f "chrome"
