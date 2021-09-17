@@ -1,6 +1,6 @@
 package io.github.com.entities;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 import java.util.Objects;
 

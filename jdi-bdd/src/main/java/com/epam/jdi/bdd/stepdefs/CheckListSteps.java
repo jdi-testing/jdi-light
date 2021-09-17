@@ -7,7 +7,7 @@ import cucumber.api.java.en.When;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static com.epam.jdi.tools.LinqUtils.toIntArray;
+import static com.jdiai.tools.LinqUtils.toIntArray;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 

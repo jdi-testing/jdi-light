@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.complex.table.Column;
 import com.epam.jdi.light.elements.complex.table.Line;
 import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.complex.table.matchers.ValueMatcher;
-import com.epam.jdi.tools.LinqUtils;
+import com.jdiai.tools.LinqUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -17,8 +17,8 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.TABLE_MATCHER;
-import static com.epam.jdi.tools.LinqUtils.isSorted;
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.jdiai.tools.LinqUtils.isSorted;
+import static com.jdiai.tools.LinqUtils.map;
 import static org.hamcrest.Matchers.*;
 
 /**

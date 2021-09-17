@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.jdiai.tools.StringUtils.format;
+
 public class MaterialSelectorContainer extends Section {
     public String backdropSelectPanel = "div.mat-select-panel.mat-primary";
     public String groupsAndOptionsList = "div.mat-select-panel.mat-primary mat-optgroup";
@@ -189,7 +191,7 @@ public class MaterialSelectorContainer extends Section {
     @JDIAction("Check that rgba({0}, {1}, {2}, {3}) is the specified color")
     public boolean color(final int red, final int green, final int blue, final double a) {
         boolean hasColor = getBackdropSelectPanel().css("background-color")
-                .equalsIgnoreCase(String.format("rgba(%s, %s, %s, %s)", red, green, blue, a));
+                .equalsIgnoreCase(format("rgba(%s, %s, %s, %s)", red, green, blue, a));
         collapsePanel();
         return hasColor;
     }

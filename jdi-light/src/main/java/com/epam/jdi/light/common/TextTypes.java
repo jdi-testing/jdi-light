@@ -1,7 +1,7 @@
 package com.epam.jdi.light.common;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc1;
 
 import static com.epam.jdi.light.elements.common.UIElement.SMART_GET_TEXT;
 import static com.epam.jdi.light.elements.common.UIElement.SMART_LIST_TEXT;

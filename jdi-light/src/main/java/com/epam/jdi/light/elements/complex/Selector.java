@@ -20,10 +20,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.jdiai.tools.EnumUtils.getEnumValues;
+import static com.jdiai.tools.LinqUtils.ifSelect;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
 
 /**

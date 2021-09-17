@@ -21,8 +21,8 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.asEntity;
 import static com.epam.jdi.light.common.UIUtils.initT;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
+import static com.jdiai.tools.ReflectionUtils.isClass;
 
 /**
  * To see an example of Carousel web element please visit https://getbootstrap.com/docs/4.3/components/carousel/#example

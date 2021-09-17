@@ -45,8 +45,9 @@ public class WebAnnotationsUtil {
             COMMON.applicationName = siteClass.getSimpleName();
             if (siteClass.isAnnotationPresent(JSite.class)) {
                 String siteDomain = siteClass.getAnnotation(JSite.class).value();
-                if (!isBlank(siteDomain))
+                if (!isBlank(siteDomain)) {
                     WebSettings.setDomain(siteDomain);
+                }
             }
         }
     }

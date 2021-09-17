@@ -1,8 +1,8 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JFunc;
+import com.jdiai.tools.CacheValue;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.func.JFunc;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

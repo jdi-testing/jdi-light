@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
 import com.epam.jdi.light.mobile.elements.common.app.ios.MenuItem;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
-import com.epam.jdi.tools.func.JFunc2;
+import com.jdiai.tools.func.JFunc2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,9 +20,10 @@ import java.util.function.Function;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.elements.init.MobileAppFactory.$;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.namesEqual;
+import static com.jdiai.tools.LinqUtils.*;
+import static com.jdiai.tools.ReflectionUtils.*;
+import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.namesEqual;
 
 /**
  * This class introduces the wrappers around the driver methods.
@@ -55,7 +56,7 @@ public class MobileUtils {
 
 
     public static JFunc2<Object, String, HasTouchActions> GET_DEFAULT_BUTTON =
-            (obj, buttonName) -> $(By.xpath(String.format("//XCUIElementTypeButton[@name='%s']", buttonName)),
+            (obj, buttonName) -> $(By.xpath(format("//XCUIElementTypeButton[@name='%s']", buttonName)),
                     obj).setName(buttonName);
 
     public static final JFunc2<Object, String, HasTouchActions> GET_BUTTON = (obj, buttonName) -> {
@@ -88,7 +89,7 @@ public class MobileUtils {
     }
 
     public static JFunc2<Object, String, HasTouchActions> GET_DEFAULT_APP_MENU_ITEM =
-            (obj, menuItemName) -> $(By.xpath(String.format("//XCUIElementTypeMenuItem[@name='%s']", menuItemName)),
+            (obj, menuItemName) -> $(By.xpath(format("//XCUIElementTypeMenuItem[@name='%s']", menuItemName)),
                     obj).setName(menuItemName);
 
     public static JFunc2<Object, String, HasTouchActions> GET_APP_MENU_ITEM = (obj, buttonName) -> {

@@ -9,14 +9,14 @@ import com.epam.jdi.light.elements.interfaces.base.HasCache;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.CacheValue;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.Timer;
+import com.jdiai.tools.func.JAction1;
+import com.jdiai.tools.func.JFunc;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.map.MapArray;
+import com.jdiai.tools.pairs.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -37,10 +37,10 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.logger.LogLevels.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
 import static com.epam.jdi.light.settings.WebSettings.SMART_SEARCH;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.StringUtils.msgFormat;
-import static com.epam.jdi.tools.switcher.SwitchActions.*;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.ReflectionUtils.isClass;
+import static com.jdiai.tools.StringUtils.msgFormat;
+import static com.jdiai.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -100,28 +100,34 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public DriverBase setParent(Object parent) {
         return super.setParent(parent);
     }
+
     protected MapArray<String, JFunc1<WebElement, Boolean>> searchRules() {
         return searchRules;
     }
+
     WebElement beforeSearch(WebElement el) {
         (beforeSearch == null ? ELEMENT.beforeSearch : beforeSearch).execute(new UIElement(el));
         return el;
     }
+
     public void setup(SiteInfo info) {
         defaultSetup(info, this);
+        siteName = DRIVER.siteName;
         if (parent != null && isClass(parent.getClass(), IBaseElement.class)) {
             JDIBase parentBase = ((IBaseElement)parent).base();
             searchRules = parentBase.searchRules.copy();
         }
-        if (info.field != null) {
-            for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
-                try {
-                    Class<? extends Annotation> annotation = aRule.value.annotation;
-                    if (hasAnnotation(info.field, annotation))
-                        aRule.value.action.execute(this, info.field.getAnnotation(annotation), info.field);
-                } catch (Exception ex) {
-                    throw exception(ex, "Setup element '%s' with Annotation '%s' failed", info.name(), aRule.key);
+        if (info.field == null) {
+            return;
+        }
+        for (Pair<String, AnnotationRule> aRule : JDI_ANNOTATIONS) {
+            try {
+                Class<? extends Annotation> annotation = aRule.value.annotation;
+                if (hasAnnotation(info.field, annotation)) {
+                    aRule.value.action.execute(this, info.field.getAnnotation(annotation), info.field);
                 }
+            } catch (Exception ex) {
+                throw exception(ex, "Setup element '%s' with Annotation '%s' failed", info.name(), aRule.key);
             }
         }
     }

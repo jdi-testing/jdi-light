@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
 import static io.github.com.pages.HtmlElementsPage.dressCode;

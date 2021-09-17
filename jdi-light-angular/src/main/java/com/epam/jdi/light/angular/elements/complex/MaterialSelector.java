@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * To see an example of MaterialSelector web element please visit https://material.angular.io/components/select/overview.
@@ -210,7 +211,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @return UIElement with hint text
      */
     public UIElement hint() {
-        return new UIElement(By.xpath(String.format(hintLocator,
+        return new UIElement(By.xpath(format(hintLocator,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
@@ -221,7 +222,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      * @return UIElement with error text
      */
     public UIElement error() {
-        return new UIElement(By.xpath(String.format(errorLocator,
+        return new UIElement(By.xpath(format(errorLocator,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
@@ -232,7 +233,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     }
 
     protected UIElement toggle() {
-        return new UIElement(By.xpath(String.format(toggle,
+        return new UIElement(By.xpath(format(toggle,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }

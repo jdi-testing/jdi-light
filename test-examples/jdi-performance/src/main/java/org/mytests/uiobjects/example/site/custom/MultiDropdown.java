@@ -16,8 +16,8 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.jdiai.tools.EnumUtils.getEnumValues;
+import static com.jdiai.tools.LinqUtils.*;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 

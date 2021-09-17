@@ -3,6 +3,7 @@ package io.github.epam.angular.tests.elements.complex.tabgroup;
 import org.testng.annotations.Test;
 
 import static io.github.com.pages.AngularPage.tabsSection;
+import static com.jdiai.tools.StringUtils.format;
 
 public class TabsBasicTests extends TestsTabGroupBase {
 
@@ -20,7 +21,7 @@ public class TabsBasicTests extends TestsTabGroupBase {
     @Test
     public void verifyTabPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
+        String stringForTest = format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.basicTab.clickTab(tabNumberForTest);
         tabsSection.basicTab.is().assertTabPanelContent(stringForTest);
     }

@@ -1,7 +1,7 @@
 package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.asserts.core.SoftAssert;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 
 import java.util.List;

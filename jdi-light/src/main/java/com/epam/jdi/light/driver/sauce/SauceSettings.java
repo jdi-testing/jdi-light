@@ -1,6 +1,6 @@
 package com.epam.jdi.light.driver.sauce;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 import java.util.HashMap;
 import java.util.Map;

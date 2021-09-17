@@ -1,7 +1,7 @@
 package com.epam.jdi.light.common;
 
 
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc1;
 
 /**
  * Created by Roman Iovlev on 04.08.2018

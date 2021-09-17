@@ -1,13 +1,13 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.firstIndex;
-import static com.epam.jdi.tools.StringUtils.format;
+import static com.jdiai.tools.LinqUtils.firstIndex;
+import static com.jdiai.tools.StringUtils.format;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 

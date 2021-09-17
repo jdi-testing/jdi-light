@@ -11,7 +11,7 @@ import static com.epam.jdi.light.asserts.core.FileAssert.assertThatFile;
 import static com.epam.jdi.light.asserts.core.FileAssert.cleanupDownloads;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
-import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.jdiai.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;

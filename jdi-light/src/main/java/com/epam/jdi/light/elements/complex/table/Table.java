@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.table.TableAssert;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
-import com.epam.jdi.tools.LinqUtils;
+import com.jdiai.tools.LinqUtils;
 
 import java.util.List;
 

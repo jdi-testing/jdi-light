@@ -109,8 +109,8 @@ jobs:
     - name: Check Chrome
       run: ps -aux | grep chrome
 
-    - name: Kill Chrome
-      run: pkill -f "chrome"
+#    - name: Kill Chrome
+#      run: pkill -f "chrome"
 
 #####  Example for original allure data upload
 #    - name: 'Upload BDD results'
@@ -130,8 +130,8 @@ jobs:
     - name: Check Chrome
       run: ps -aux | grep chrome
 
-    - name: Kill Chrome
-      run: pkill -f "chrome"
+#    - name: Kill Chrome
+#      run: pkill -f "chrome"
 
 #    - name: Run tests - Angular Unit tests
 #      id: tests-angular-unit
@@ -176,8 +176,8 @@ jobs:
     - name: Check Chrome
       run: ps -aux | grep chrome
 
-    - name: Kill Chrome
-      run: pkill -f "chrome"
+#    - name: Kill Chrome
+#      run: pkill -f "chrome"
 
     - name: Run tests - HTML performace
       id: tests-html-perf
@@ -189,8 +189,8 @@ jobs:
     - name: Check Chrome
       run: ps -aux | grep chrome
 
-    - name: Kill Chrome
-      run: pkill -f "chrome"
+#    - name: Kill Chrome
+#      run: pkill -f "chrome"
 
     - name: Run tests - Test Examples
       id: tests-examples
@@ -202,8 +202,8 @@ jobs:
     - name: Check Chrome
       run: ps -aux | grep chrome
 
-    - name: Kill Chrome
-      run: pkill -f "chrome"
+#    - name: Kill Chrome
+#      run: pkill -f "chrome"
 
     - name: Run tests - Performance
       id: tests-perf

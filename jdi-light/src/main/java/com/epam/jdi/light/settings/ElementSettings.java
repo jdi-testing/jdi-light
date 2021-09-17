@@ -8,11 +8,11 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.Mandatory;
 import com.epam.jdi.light.logger.HighlightStrategy;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.func.JAction1;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc2;
+import com.jdiai.tools.pairs.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -25,9 +25,9 @@ import static com.epam.jdi.light.common.SearchTypes.Smart;
 import static com.epam.jdi.light.common.UseSmartSearch.UI_AND_ELEMENTS;
 import static com.epam.jdi.light.driver.WebDriverByUtils.defineLocator;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
-import static com.epam.jdi.tools.ReflectionUtils.getFields;
-import static com.epam.jdi.tools.StringUtils.splitCamelCase;
-import static java.lang.String.format;
+import static com.jdiai.tools.ReflectionUtils.getFields;
+import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.splitCamelCase;
 
 public class ElementSettings {
     public JAction1<UIElement> beforeSearch;
