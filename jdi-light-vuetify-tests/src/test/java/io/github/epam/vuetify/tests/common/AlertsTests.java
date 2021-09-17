@@ -69,19 +69,19 @@ public class AlertsTests extends TestsInit {
     @Test
     public void alertsWithPropsHaveProperCssProps() {
         redAlert.has().text("I'm an alert with a top border and red color");
-        redAlert.has().css("background-color", "rgba(229, 115, 115, 1)");
+        redAlert.has().css("background-color", Colors.RED_LIGHTEN_2.value());
         redAlert.has().cssClass("v-alert--border-top");
 
         blueGreyAlert.has().text("I'm an alert with a right border and blue-grey color");
-        blueGreyAlert.has().css("background-color", "rgba(96, 125, 139, 1)");
+        blueGreyAlert.has().css("background-color", Colors.BLUE_GREY.value());
         blueGreyAlert.has().cssClass("v-alert--border-right");
 
         pinkAlert.has().text("I'm an alert with a bottom border and pink color");
-        pinkAlert.has().css("background-color", "rgba(216, 27, 96, 1)");
+        pinkAlert.has().css("background-color", Colors.PINK_DARKEN_1.value());
         pinkAlert.has().cssClass("v-alert--border-bottom");
 
         indigoAlert.has().text("I'm an alert with a border left type info");
-        indigoAlert.has().css("background-color", "rgba(63, 81, 181, 1)");
+        indigoAlert.has().css("background-color", Colors.INDIGO.value());
         indigoAlert.has().cssClass("v-alert--border-left");
     }
 
