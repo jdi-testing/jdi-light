@@ -2,15 +2,18 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.CheckboxAssert;
 
-public class Checkbox extends UIBaseElement<CheckboxAssert> {
+import static com.epam.jdi.light.common.Exceptions.exception;
 
-    public String label = "//label";
+public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel {
 
-    public UIElement label() {
-        return linked(label, "label");
+    public String input = "div input";
+    public UIElement input() {
+        return linked(input, "input");
     }
 
     @Override
@@ -20,7 +23,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> {
 
     @JDIAction("Is '{name}' checked")
     public boolean isChecked() {
-        return label().core().attr("aria-checked").equals("true");
+        return input().core().attr("aria-checked").equals("true");
     }
 
     @JDIAction("Is '{name}' not selected")
@@ -52,6 +55,26 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> {
     @Override
     public boolean isEnabled() {
         return !isDisabled();
+    }
+
+    @Override
+    public Label label() {
+        Label label = safeGetLabel();
+        if (label != null) {
+            return label;
+        }
+        throw exception("Can't find label for element %s", this);
+    }
+    private Label safeGetLabel() {
+        if (core().label().isDisplayed()) {
+            return core().label();
+        }
+        UIElement input = core().find("input[type=checkbox]");
+        boolean hasLabelInput;
+        try {
+            hasLabelInput = input.label().isDisplayed();
+        } catch (Exception ignore) { hasLabelInput = false; }
+        return hasLabelInput ? input.label() : null;
     }
 
     @JDIAction("'{name}' has '{className}' class")

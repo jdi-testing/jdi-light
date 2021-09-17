@@ -7,7 +7,6 @@ import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
@@ -37,7 +36,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
     }
 
     @JDIAction("Assert that '{name}' is not checked")
-    public CheckboxAssert unChecked() {
+    public CheckboxAssert unchecked() {
         boolean isUnchecked = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isNotChecked());
         jdiAssert(isUnchecked, Matchers.is(true));
