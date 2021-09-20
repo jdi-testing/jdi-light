@@ -2,16 +2,18 @@ package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.Condition;
+import com.epam.jdi.light.elements.common.Direction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.*;
 
 import java.util.List;
 
 import static com.epam.jdi.light.elements.base.JDIBase.executeShouldBe;
-import static java.lang.String.format;
+import static com.epam.jdi.light.elements.common.Directions.*;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -112,6 +114,37 @@ public interface ICoreElement extends IBaseElement {
     default void pasteText(String text, long timeToWaitMSec) {
         iCore().pasteText(text, timeToWaitMSec);
     }
+    default Direction getDirectionTo(WebElement element) {
+        return core().getDirectionTo(element);
+    }
+    default boolean isAbove(WebElement element) {
+        return HIGHER.apply(core().getDirectionTo(element));
+    }
+    default boolean isBelow(WebElement element) {
+        return LOWER.apply(core().getDirectionTo(element));
+    }
+    default boolean isOnLeftOf(WebElement element) {
+        return LEFT.apply(core().getDirectionTo(element));
+    }
+    default boolean isOnRightOf(WebElement element) {
+        return RIGHT.apply(core().getDirectionTo(element));
+    }
+    default boolean isAbove(ICoreElement element) {
+        return HIGHER.apply(core().getDirectionTo(element));
+    }
+    default boolean isBelow(ICoreElement element) {
+        return LOWER.apply(core().getDirectionTo(element));
+    }
+    default boolean isOnLeftOf(ICoreElement element) {
+        return LEFT.apply(core().getDirectionTo(element));
+    }
+    default boolean isOnRightOf(ICoreElement element) {
+        return RIGHT.apply(core().getDirectionTo(element));
+    }
+    default Direction getDirectionTo(ICoreElement element) {
+        return core().getDirectionTo(element);
+    }
+
     default ICoreElement shouldBe(Condition... conditions) {
         for (Condition condition : conditions) {
             executeShouldBe(condition.getName(this), condition, this);

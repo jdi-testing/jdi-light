@@ -5,10 +5,10 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.interfaces.base.HasRefresh;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.JDIElement;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.func.JFunc1;
 
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.jdiai.tools.ReflectionUtils.isInterface;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -21,6 +21,7 @@ import static io.github.epam.angular.tests.elements.complex.datepicker.TestsDate
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static com.jdiai.tools.StringUtils.format;
 
 public class DatepickerContainerUnitTests extends TestsInit {
     private DatepickerContainer container;
@@ -270,8 +271,8 @@ public class DatepickerContainerUnitTests extends TestsInit {
 
     @Test
     public void disabledMonthsAndYearsNavigationTest() {
-        String firstDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 2);
-        String secondDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 1);
+        String firstDisabledYearCell = format(CELL.getName(), MIN_YEAR - 2);
+        String secondDisabledYearCell = format(CELL.getName(), MIN_YEAR - 1);
         minMaxDatepicker.show();
         minMaxDatepicker.expand();
         container.openYearsView();
@@ -282,7 +283,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
     @Test
     public void disabledSaturdayDaysTest() {
         String[] saturdays = new String[5];
-        Arrays.stream(new String[] {" 1 ", " 8 ", " 15 ", " 22 ", " 29 "}).map(d -> String.format(CELL.getName(), d))
+        Arrays.stream(new String[] {" 1 ", " 8 ", " 15 ", " 22 ", " 29 "}).map(d -> format(CELL.getName(), d))
                 .collect(Collectors.toList()).toArray(saturdays);
         filterDatepicker.show();
         filterDatepicker.setDate(LocalDate.of(2020, 8, 1));
@@ -293,7 +294,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
     @Test
     public void disabledSundayDaysTest() {
         String[] sundays = new String[4];
-        Arrays.stream(new String[] {" 5 ", " 12 ", " 19 ", " 26 "}).map(d -> String.format(CELL.getName(), d))
+        Arrays.stream(new String[] {" 5 ", " 12 ", " 19 ", " 26 "}).map(d -> format(CELL.getName(), d))
                 .collect(Collectors.toList()).toArray(sundays);
         filterDatepicker.show();
         filterDatepicker.setDate(LocalDate.of(2020, 7, 1));

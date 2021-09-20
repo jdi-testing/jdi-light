@@ -1,6 +1,6 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.tools.func.JFunc3;
+import com.jdiai.tools.func.JFunc3;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -8,8 +8,8 @@ import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;
 import static com.epam.jdi.light.driver.get.DriverVersion.PENULT;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
-import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -62,9 +62,8 @@ public class DownloadDriverManager {
                 wdm.setup();
                 wdm.browserVersion(getBelowVersion());
             }
-            if (isNotBlank(DRIVER.gitHubTokenName) && isNotBlank(DRIVER.gitHubTokenSecret)) {
-                wdm.gitHubTokenName(DRIVER.gitHubTokenName);
-                wdm.gitHubTokenSecret(DRIVER.gitHubTokenSecret);
+            if (isNotBlank(DRIVER.gitHubToken)) {
+                wdm.gitHubToken(DRIVER.gitHubToken);
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");

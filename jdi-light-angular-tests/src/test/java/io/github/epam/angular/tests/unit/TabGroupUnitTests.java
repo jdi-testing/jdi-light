@@ -11,6 +11,7 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.tabsSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertTrue;
+import static com.jdiai.tools.StringUtils.format;
 
 public class TabGroupUnitTests extends TestsInit {
 
@@ -56,7 +57,7 @@ public class TabGroupUnitTests extends TestsInit {
     @Test
     public void tabPanelContainsValueTest() {
         int tabNumberForTest = 2;
-        String stringForTest = String.format("Content %s", tabNumberForTest);
+        String stringForTest = format("Content %s", tabNumberForTest);
         tabsSection.basicTab.clickTab(tabNumberForTest);
         assertTrue(tabsSection.basicTab.tabPanelContainsValue(stringForTest));
     }

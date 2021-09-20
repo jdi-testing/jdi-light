@@ -8,13 +8,13 @@ import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.tools.HasStartIndex;
+import com.jdiai.tools.HasStartIndex;
 
 import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.jdiai.tools.EnumUtils.getEnumValue;
+import static com.jdiai.tools.LinqUtils.map;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

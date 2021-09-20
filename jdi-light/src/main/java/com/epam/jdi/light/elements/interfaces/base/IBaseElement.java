@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.base.JDIBase;
-import com.epam.jdi.tools.func.JAction1;
+import com.jdiai.tools.func.JAction1;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -28,6 +28,9 @@ public interface IBaseElement extends JDIElement, HasCache {
     }
     default String getName() {
         return base().getName();
+    }
+    default String getFullName() {
+        return base().getFullName();
     }
     default void offCache() {
         base().offCache();

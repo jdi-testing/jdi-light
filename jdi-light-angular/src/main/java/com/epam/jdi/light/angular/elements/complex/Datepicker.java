@@ -26,6 +26,7 @@ import java.util.Locale;
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.DATEPICKER;
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.TOGGLE;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * To see an example of Datepicker web element please visit https://material.angular.io/components/datepicker/overview.
@@ -410,45 +411,45 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
     }
 
     protected UIElement datepicker() {
-        return new UIElement(By.xpath(String.format(DATEPICKER.getName(),
+        return new UIElement(By.xpath(format(DATEPICKER.getName(),
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement input() {
-        return new UIElement(By.xpath(String.format(inputLocator,
+        return new UIElement(By.xpath(format(inputLocator,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement toggle() {
-        return new UIElement(By.xpath(String.format(TOGGLE.getName(),
+        return new UIElement(By.xpath(format(TOGGLE.getName(),
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement toggleButton() {
-        return new UIElement(By.xpath(String.format(toggleButton,
-                                                    this.core().locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""))));
+        return new UIElement(By.xpath(format(toggleButton,
+            this.core().locator.printLocator().replace(smartSharp, "")
+                .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement openButton() {
         String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
-        return new UIElement(By.xpath(String.format(openButton, replaceExpression)));
+        return new UIElement(By.xpath(format(openButton, replaceExpression)));
     }
 
     protected WebList exampleEvents() {
         String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
-        return new WebList(By.xpath(String.format(exampleEvents, replaceExpression)));
+        return new WebList(By.xpath(format(exampleEvents, replaceExpression)));
     }
 
     protected UIElement switchLocaleButton() {
         String replaceExpression = this.core().locator.printLocator().replace(smartSharp, "").replace(cssSharp, "")
                 .replace("'", "");
-        return new UIElement(By.xpath(String.format(switchLocaleButton, replaceExpression)));
+        return new UIElement(By.xpath(format(switchLocaleButton, replaceExpression)));
     }
 
     protected Point getOutsidePoint() {

@@ -3,7 +3,7 @@ package com.epam.jdi.light.asserts.core;
 import com.epam.jdi.light.asserts.generic.BaseAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.tools.Safe;
+import com.jdiai.tools.Safe;
 import org.hamcrest.Matcher;
 
 import java.io.File;
@@ -11,7 +11,7 @@ import java.io.File;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.jdiai.tools.PathUtils.mergePath;
 import static java.util.Objects.requireNonNull;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.hamcrest.MatcherAssert.assertThat;

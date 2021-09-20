@@ -8,9 +8,9 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.func.JFunc1;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
+import static com.jdiai.tools.ReflectionUtils.*;
+import static com.jdiai.tools.StringUtils.setPrimitiveField;
 import static java.util.Arrays.asList;
 
 /**

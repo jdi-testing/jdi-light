@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.interfaces.complex;
 import com.epam.jdi.light.asserts.complex.ChecklistAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.elements.complex.ISelector;
-import com.epam.jdi.tools.HasStartIndex;
+import com.jdiai.tools.HasStartIndex;
 
 import java.util.List;
 

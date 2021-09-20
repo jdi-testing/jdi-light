@@ -2,7 +2,7 @@ package io.github.com.entities;
 
 
 import com.epam.jdi.light.common.Order;
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class Contacts extends DataClass<Contacts> {
     public String firstName, lastName, acceptConditions, position, passportNumber;

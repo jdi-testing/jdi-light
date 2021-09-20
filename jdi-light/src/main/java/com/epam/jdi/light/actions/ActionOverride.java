@@ -1,10 +1,10 @@
 package com.epam.jdi.light.actions;
 
 import com.epam.jdi.light.elements.base.DriverBase;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.func.JAction1;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.map.MapArray;
+import com.jdiai.tools.pairs.Pair;
 import org.aspectj.lang.JoinPoint;
 
 import static com.epam.jdi.light.actions.ActionHelper.getJpClass;

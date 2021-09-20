@@ -1,8 +1,8 @@
 package com.epam.jdi.light.elements.common;
 
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.ReflectionUtils;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.ReflectionUtils;
+import com.jdiai.tools.Timer;
 import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.Keys;
 
@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
-import static com.epam.jdi.tools.LinqUtils.first;
+import static com.jdiai.tools.LinqUtils.first;
 import static java.lang.reflect.Modifier.isStatic;
 
 public class Keyboard {

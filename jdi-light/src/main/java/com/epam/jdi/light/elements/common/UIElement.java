@@ -13,12 +13,12 @@ import com.epam.jdi.light.elements.interfaces.base.*;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.Timer;
+import com.jdiai.tools.func.JAction1;
+import com.jdiai.tools.func.JFunc;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc2;
+import com.jdiai.tools.map.MapArray;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -43,16 +43,17 @@ import static com.epam.jdi.light.logger.AllureLogger.attachScreenshot;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.SCREEN;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.JsonUtils.getInt;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.LinqUtils.valueOrDefault;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.create;
-import static com.epam.jdi.tools.switcher.SwitchActions.Case;
-import static com.epam.jdi.tools.switcher.SwitchActions.Switch;
+import static com.jdiai.tools.EnumUtils.getEnumValue;
+import static com.jdiai.tools.JsonUtils.getInt;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.LinqUtils.valueOrDefault;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.ReflectionUtils.create;
+import static com.jdiai.tools.ReflectionUtils.isInterface;
+import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.switcher.SwitchActions.Case;
+import static com.jdiai.tools.switcher.SwitchActions.Switch;
 import static java.lang.Math.abs;
-import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -883,6 +884,37 @@ public class UIElement extends JDIBase
     }
     public UIElement inFrame(String... bys) {
         return setup(base -> base.setFrames(map(bys, WebDriverByUtils::defineLocator)));
+    }
+
+    public MapArray<String, Direction> relations;
+
+    public UIElement clearRelations() {
+        relations = null;
+        return this;
+    }
+
+    protected Point getCenter(Rectangle rect) {
+        int x = rect.x + rect.width / 2;
+        int y = rect.y + rect.height / 2;
+        return new Point(x, y);
+    }
+
+    public Direction getDirectionTo(ICoreElement element) {
+        return getDirectionTo(element.core().getWebElement());
+    }
+    public Direction getDirectionTo(WebElement element) {
+        Rectangle elementCoordinates = getRect();
+        Rectangle destinationCoordinates = element.getRect();
+        Direction direction = new Direction(getCenter(elementCoordinates), getCenter(destinationCoordinates));
+        if (isInterface(element.getClass(), ICoreElement.class)) {
+            ICoreElement core = ((ICoreElement)element).core();
+            if (relations == null) {
+                relations = new MapArray<>(core.getFullName(), direction);
+            } else {
+                relations.update(core.getFullName(), direction);
+            }
+        }
+        return direction;
     }
 
     public IsAssert is() {

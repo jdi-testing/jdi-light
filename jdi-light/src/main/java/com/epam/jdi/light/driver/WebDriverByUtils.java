@@ -1,9 +1,9 @@
 package com.epam.jdi.light.driver;
 
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.tools.func.JFunc;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.func.JFunc;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.map.MapArray;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -21,10 +21,10 @@ import java.util.regex.Pattern;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
-import static com.epam.jdi.tools.LinqUtils.*;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static java.lang.String.format;
+import static com.jdiai.tools.LinqUtils.*;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.ReflectionUtils.isClass;
+import static com.jdiai.tools.StringUtils.format;
 import static java.util.Collections.singletonList;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
@@ -128,7 +128,7 @@ public final class WebDriverByUtils {
             case "tag": return By.tagName(split[1]);
             case "link": return By.partialLinkText(split[1]);
             default: throw new RuntimeException(
-                String.format("Can't get By locator from string: %s. Bad suffix: %s. (available: css, xpath, class, id, name, link, tag)",
+                format("Can't get By locator from string: %s. Bad suffix: %s. (available: css, xpath, class, id, name, link, tag)",
                         stringLocator, split[0]));
         }
     }
@@ -185,10 +185,12 @@ public final class WebDriverByUtils {
             return valueOrDefault(replaceChildren(result), one(by));
         } catch (Exception ex) { throw new RuntimeException("Search By failed"); }
     }
+    
     public static JFunc1<String, By> NAME_TO_LOCATOR = WebDriverByUtils::defineLocator;
+
     public static By defineLocator(String locator) {
         String by = locator.contains("*root*")
-            ? locator.replace("\\*root\\*", "")
+            ? locator.replace("*root*", "")
             : locator;
         if (isBlank(by)) {
             return By.cssSelector("");

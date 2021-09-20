@@ -1,6 +1,6 @@
 package com.epam.jdi.light.common;
 
-import com.epam.jdi.tools.Safe;
+import com.jdiai.tools.Safe;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.WebSettings.logger;

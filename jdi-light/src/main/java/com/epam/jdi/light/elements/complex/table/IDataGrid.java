@@ -5,8 +5,8 @@ import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 
 import java.util.List;

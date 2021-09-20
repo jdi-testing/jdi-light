@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.complex.Selector;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.annotations.*;
 import com.epam.jdi.light.ui.html.elements.enums.MenuBehaviour;
-import com.epam.jdi.tools.func.JAction1;
+import com.jdiai.tools.func.JAction1;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
@@ -19,9 +19,9 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static java.lang.String.format;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.StringUtils.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 

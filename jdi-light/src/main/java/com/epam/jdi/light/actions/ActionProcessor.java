@@ -1,6 +1,6 @@
 package com.epam.jdi.light.actions;
 
-import com.epam.jdi.tools.Safe;
+import com.jdiai.tools.Safe;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,7 +14,7 @@ import java.util.List;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

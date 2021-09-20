@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.elements.common.Keyboard.getRobot;
 import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
-import static com.epam.jdi.tools.Timer.sleep;
+import static com.jdiai.tools.Timer.sleep;
 import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
 import static java.awt.event.InputEvent.BUTTON2_DOWN_MASK;
 

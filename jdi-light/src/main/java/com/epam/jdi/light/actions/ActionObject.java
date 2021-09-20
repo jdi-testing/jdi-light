@@ -7,10 +7,10 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.logger.LogLevels;
-import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.PrintUtils;
-import com.epam.jdi.tools.Safe;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.CacheValue;
+import com.jdiai.tools.PrintUtils;
+import com.jdiai.tools.Safe;
+import com.jdiai.tools.func.JFunc1;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -22,9 +22,9 @@ import java.util.List;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.ReflectionUtils.isClass;
+import static com.jdiai.tools.ReflectionUtils.isInterface;
 
 public class ActionObject {
     private JoinPoint jp;

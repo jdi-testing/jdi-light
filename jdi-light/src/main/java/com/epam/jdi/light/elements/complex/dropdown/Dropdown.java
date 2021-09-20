@@ -14,6 +14,7 @@ public class Dropdown extends DropdownExpand {
     protected DropdownSelect ds() {
         return new DropdownSelect().setCore(DropdownSelect.class, base());
     }
+
     @Override
     public UIElement iCore() {
         return setupDone ? value() : ds().core();
@@ -70,6 +71,7 @@ public class Dropdown extends DropdownExpand {
     public String getValue() {
         return getText();
     }
+
     @Override
     public void setValue(String value) {
         if (setupDone)

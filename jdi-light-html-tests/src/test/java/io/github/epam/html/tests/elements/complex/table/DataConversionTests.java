@@ -4,9 +4,9 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.ReflectionUtils.getValueField;
-import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
+import static com.jdiai.tools.LinqUtils.first;
+import static com.jdiai.tools.ReflectionUtils.getValueField;
+import static com.jdiai.tools.StringUtils.setPrimitiveField;
 import static org.testng.Assert.assertEquals;
 
 public class DataConversionTests {

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static io.github.com.pages.AngularPage.tabsSection;
+import static com.jdiai.tools.StringUtils.format;
 
 public class TabsWithNavBarTests extends TestsTabGroupBase {
 
@@ -35,7 +36,7 @@ public class TabsWithNavBarTests extends TestsTabGroupBase {
         tabsSection.addLinkButton.click();
         tabsSection.addLinkButton.click();
         int numberForTest = tabsSection.tabsNavBar.getTabLinksCount() - 1;
-        List<String> listForTest = Collections.singletonList(String.format("Link %s", numberForTest));
+        List<String> listForTest = Collections.singletonList(format("Link %s", numberForTest));
         tabsSection.tabsNavBar.is().assertTabsLinksTitles(listForTest);
     }
 

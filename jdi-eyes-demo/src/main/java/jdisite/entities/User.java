@@ -5,7 +5,7 @@ package jdisite.entities;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class User extends DataClass<User> {
     public String name, password;
