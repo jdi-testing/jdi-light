@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.github.com.StaticSite.checkboxesPage;
 import static io.github.com.StaticSite.vuetifyPage;
 import static io.github.com.pages.CheckboxesPage.colorsCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelArray;
