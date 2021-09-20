@@ -12,6 +12,7 @@ import io.github.com.entities.User;
 import io.github.com.pages.DividersPage;
 
 import io.github.com.pages.AvatarsPage;
+import io.github.com.pages.TabsPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -32,4 +33,7 @@ public class StaticSite {
     @WaitAfterAction(3)
     @Url("/dividers")
     public static DividersPage dividersPage;
+
+    @Url("/tabs")
+    public static TabsPage tabsPage;
 }
