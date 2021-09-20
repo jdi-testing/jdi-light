@@ -46,7 +46,7 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, 
 
     @JDIAction("Get dividers list from '{name}'")
     public WebList dividers() {
-        return $$(DIVIDERS_LOCATOR, this);
+        return $$(DIVIDERS_LOCATOR, this).setName(getName() + " dividers");
     }
 
     @JDIAction("Get items list from '{name}'")
@@ -61,6 +61,7 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, 
             initializeLocators(annotation);
         }
         this.setCore(Breadcrumbs.class, $(ROOT_LOCATOR));
+        this.setName(String.format("Breadcrumbs container %s", field.getName()));
     }
 
     private void initializeLocators(JDIBreadcrumbs annotation) {
