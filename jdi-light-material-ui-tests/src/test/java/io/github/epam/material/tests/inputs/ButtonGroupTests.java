@@ -4,6 +4,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static io.github.com.StaticSite.buttonGroupPage;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonDropdown;
@@ -32,6 +34,9 @@ public class ButtonGroupTests extends TestsInit {
 
         basicButtonGroup.getButtonByIndex(1).is().enabled();
         basicButtonGroup.getButtonByIndex(1).has().text("ONE");
+
+        basicButtonGroup.has().numberOfGroupedButtons(3);
+        basicButtonGroup.has().buttonsTextsInAnyOrder(Arrays.asList("THREE", "ONE", "TWO"));
     }
 
     @Test
