@@ -1,24 +1,30 @@
 package io.github.epam.material.tests.navigation;
 
-import com.epam.jdi.tools.Timer;
-
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static io.github.com.StaticSite.stepperPage;
-import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperButton;
+import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperButton;
+import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.mobileTextStepperButton;
+import static io.github.com.pages.navigation.StepperPage.mobileTextStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.mobileTextStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.mobileTextStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.nonlinearStepperButton;
-import static io.github.com.pages.navigation.StepperPage.nonlinearStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperButton;
-import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.verticalStepperButton;
-import static io.github.com.pages.navigation.StepperPage.verticalStepperTitle;
+import static io.github.com.pages.navigation.StepperPage.nonlinearStepper;
+import static io.github.com.pages.navigation.StepperPage.nonlinearStepperCompleteStepButton;
+import static io.github.com.pages.navigation.StepperPage.nonlinearStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.simpleLinearStepper;
+import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperBackButton;
+import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.verticalStepper;
+import static io.github.com.pages.navigation.StepperPage.verticalStepperNextButton;
+
 
 /**
  * To see an example of Steppers please visit
@@ -26,6 +32,8 @@ import static io.github.com.pages.navigation.StepperPage.verticalStepperTitle;
  */
 
 public class StepperTests extends TestsInit {
+    private final String[] steps = {"Step #1", "Step #2", "Step #3"};
+
     @BeforeMethod
     public void chooseSection() {
         stepperPage.open();
@@ -33,124 +41,147 @@ public class StepperTests extends TestsInit {
     }
 
     @Test
-    public void simpleLinearStepperTest(){
-        simpleLinearStepperTitle.is().text("You are on Step #1");
-        simpleLinearStepperButton.get(2).click();
-        simpleLinearStepperTitle.is().text("You are on Step #2");
-        simpleLinearStepperButton.get(1).click();
-        simpleLinearStepperTitle.is().text("You are on Step #1");
-        simpleLinearStepperButton.get(2).click();
-        simpleLinearStepperTitle.is().text("You are on Step #2");
-        simpleLinearStepperButton.get(2).click();
-        simpleLinearStepperTitle.is().text("You are on Step #3");
-        simpleLinearStepperButton.get(2).click();
-        simpleLinearStepperTitle.is().text("All steps completed");
-        simpleLinearStepperButton.get(1).click();
-        simpleLinearStepperTitle.is().text("You are on Step #1");
+    public void simpleLinearStepperTest() {
+        simpleLinearStepper.is().displayed().and().has().steps(Arrays.asList(steps));
+
+        simpleLinearStepper.steps().get(0).is().enabled().and().incomplete();
+        simpleLinearStepper.steps().get(1).is().disabled().and().incomplete();
+        simpleLinearStepper.steps().get(2).is().disabled().and().incomplete();
+
+        simpleLinearStepperNextButton.click();
+
+        simpleLinearStepper.steps().get(0).is().enabled().and().completed();
+        simpleLinearStepper.steps().get(1).is().enabled().and().incomplete();
+        simpleLinearStepper.steps().get(2).is().disabled().and().incomplete();
+
+        simpleLinearStepperNextButton.click();
+
+        simpleLinearStepper.steps().get(0).is().enabled().and().completed();
+        simpleLinearStepper.steps().get(1).is().enabled().and().completed();
+        simpleLinearStepper.steps().get(2).is().enabled().and().incomplete();
+
+        simpleLinearStepperBackButton.click();
+
+        simpleLinearStepper.steps().get(0).is().enabled().and().completed();
+        simpleLinearStepper.steps().get(1).is().enabled().and().incomplete();
+        simpleLinearStepper.steps().get(2).is().disabled().and().incomplete();
+
+        simpleLinearStepperNextButton.click();
+        simpleLinearStepperNextButton.click();
+
+        simpleLinearStepper.steps().get(0).is().enabled().and().completed();
+        simpleLinearStepper.steps().get(1).is().enabled().and().completed();
+        simpleLinearStepper.steps().get(2).is().enabled().and().completed();
     }
 
     @Test
     public void nonlinearStepperTest() {
-        nonlinearStepperTitle.is().text("You are on Step #1");
-        nonlinearStepperButton.get(4).click();
-        nonlinearStepperTitle.is().text("You are on Step #2");
-        nonlinearStepperButton.get(3).click();
-        nonlinearStepperTitle.is().text("You are on Step #1");
-        nonlinearStepperButton.get(4).click();
-        nonlinearStepperTitle.is().text("You are on Step #2");
-        nonlinearStepperButton.get(4).click();
-        nonlinearStepperTitle.is().text("You are on Step #3");
-        nonlinearStepperButton.get(4).click();
+        nonlinearStepper.is().displayed().and().has().steps(Arrays.asList(steps));
 
-        nonlinearStepperTitle.is().text("You are on Step #1");
-        nonlinearStepperButton.get(5).click();
-        nonlinearStepperTitle.is().text("You are on Step #2");
-        nonlinearStepperButton.get(5).click();
-        nonlinearStepperTitle.is().text("You are on Step #3");
-        nonlinearStepperButton.get(5).click();
-        nonlinearStepperTitle.is().text("All steps completed - you're finished");
-        nonlinearStepperButton.get(3).click();
+        nonlinearStepper.steps().get(0).is().enabled();
+        nonlinearStepper.steps().get(1).is().disabled();
+        nonlinearStepper.steps().get(2).is().disabled();
 
-        nonlinearStepperTitle.is().text("You are on Step #1");
-        nonlinearStepperButton.get(5).click();
-        nonlinearStepperTitle.is().text("You are on Step #2");
-        nonlinearStepperButton.get(4).click();
-        nonlinearStepperTitle.is().text("You are on Step #3");
-        nonlinearStepperButton.get(5).click();
-        nonlinearStepperTitle.is().text("You are on Step #2");
+        nonlinearStepperNextButton.click();
+        nonlinearStepper.steps().get(1).is().enabled();
+        nonlinearStepper.steps().get(2).is().disabled();
+
+        nonlinearStepperNextButton.click();
+        nonlinearStepper.steps().get(2).is().enabled();
+
+        nonlinearStepper.steps().get(1).click();
+        nonlinearStepper.steps().get(1).is().enabled();
+
+        nonlinearStepper.steps().get(0).click();
+        nonlinearStepper.steps().get(0).is().enabled().and().incomplete();
+        nonlinearStepper.steps().get(1).is().disabled();
+
+        nonlinearStepperCompleteStepButton.click();
+        nonlinearStepper.steps().get(0).is().enabled().and().completed();
+        nonlinearStepper.steps().get(1).is().enabled().and().incomplete();
     }
 
     @Test
-    public void verticalStepperTest(){
-        Timer timer = new Timer(10000L);
+    public void verticalStepperTest() {
+        String[] steps = {"Select campaign settings", "Create an ad group", "Create an ad"};
 
-        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 0"));
-        timer.wait(() ->verticalStepperButton.get(2).click());
-        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 1"));
-        timer.wait(() ->verticalStepperButton.get(1).click());
-        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 0"));
-        timer.wait(() ->verticalStepperButton.get(2).click());
-        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 1"));
-        timer.wait(() ->verticalStepperButton.get(2).click());
-        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 2"));
-        timer.wait(() ->verticalStepperButton.get(2).click());
-        timer.wait(() ->verticalStepperTitle.is().text("All steps completed - you're finished"));
-        timer.wait(() ->verticalStepperButton.get(1).click());
-        timer.wait(() ->verticalStepperTitle.is().text("You are on Step 0"));
+        verticalStepper.is().displayed().and().has().steps(Arrays.asList(steps));
+
+        verticalStepper.steps().get(0).is().enabled().and().incomplete();
+        verticalStepper.steps().get(1).is().disabled().and().incomplete();
+        verticalStepper.steps().get(2).is().disabled().and().incomplete();
+
+        verticalStepperNextButton.click();
+
+        verticalStepper.steps().get(0).is().enabled().and().completed();
+        verticalStepper.steps().get(1).is().enabled().and().incomplete();
+        verticalStepper.steps().get(2).is().disabled().and().incomplete();
+
+        verticalStepperNextButton.click();
+
+        verticalStepper.steps().get(0).is().enabled().and().completed();
+        verticalStepper.steps().get(1).is().enabled().and().completed();
+        verticalStepper.steps().get(2).is().enabled().and().incomplete();
+
+        verticalStepperNextButton.click();
+
+        verticalStepper.steps().get(0).is().enabled().and().completed();
+        verticalStepper.steps().get(1).is().enabled().and().completed();
+        verticalStepper.steps().get(2).is().enabled().and().completed();
     }
 
     @Test
-    public void mobileTextStepperTest(){
+    public void mobileTextStepperTest() {
         mobileTextStepperTitle.is().text("BACK\n1 / 5\nNEXT");
-        mobileTextStepperButton.get(2).click();
+        mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n2 / 5\nNEXT");
-        mobileTextStepperButton.get(1).click();
+        mobileTextStepperBackButton.click();
         mobileTextStepperTitle.is().text("BACK\n1 / 5\nNEXT");
-        mobileTextStepperButton.get(2).click();
+        mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n2 / 5\nNEXT");
-        mobileTextStepperButton.get(2).click();
+        mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n3 / 5\nNEXT");
-        mobileTextStepperButton.get(2).click();
+        mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n4 / 5\nNEXT");
-        mobileTextStepperButton.get(2).click();
+        mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n5 / 5\nNEXT");
     }
 
     @Test
-    public void mobileDotsTest(){
+    public void mobileDotsTest() {
         mobileDotsStepperTitle.is().text("You are on Step 0");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 1");
-        mobileDotsStepperButton.get(1).click();
+        mobileDotsStepperBackButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 0");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 1");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 2");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 3");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 4");
-        mobileDotsStepperButton.get(2).click();
+        mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 5");
     }
 
     @Test
-    public void mobileProgressTest(){
+    public void mobileProgressTest() {
         mobileProgressStepperTitle.is().text("You are on Step 0");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 1");
-        mobileProgressStepperButton.get(1).click();
+        mobileProgressStepperBackButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 0");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 1");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 2");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 3");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 4");
-        mobileProgressStepperButton.get(2).click();
+        mobileProgressStepperNextButton.click();
         mobileProgressStepperTitle.is().text("You are on Step 5");
     }
 }

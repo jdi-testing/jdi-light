@@ -6,7 +6,7 @@ public enum HighlightStrategy {
     OFF, FAIL, ASSERT, ACTION;
 
     public static HighlightStrategy parseStrategy(String strategy) {
-        String strategyName = strategy.toLowerCase().replaceAll(" ", "").replaceAll("_", "");
+        String strategyName = strategy.toLowerCase().replace(" ", "").replace("_", "");
         switch (strategyName) {
             case "onfailure":
             case "onfail":

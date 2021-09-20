@@ -29,6 +29,7 @@ import static com.epam.jdi.tools.ReflectionUtils.isClass;
 import static com.epam.jdi.tools.ReflectionUtils.isInterface;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JdiSettings {
@@ -200,7 +201,7 @@ public class JdiSettings {
         for (By frame : frames) {
             List<WebElement> els = uiSearch(ctx, getFrameLocator(frame, ctx));
             WebElement frameElement;
-            if (els.size() > 0) {
+            if (isNotEmpty(els)) {
                 frameElement = els.get(0);
             } else {
                 throw exception("Can't find frame by locator: '%s'", frame);

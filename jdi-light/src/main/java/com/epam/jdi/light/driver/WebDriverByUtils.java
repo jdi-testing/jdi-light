@@ -107,15 +107,18 @@ public final class WebDriverByUtils {
 
     private static String shortBy(By by, JFunc<String> noLocator) {
         return (by == null
-                ? noLocator.execute()
-                : format("%s='%s'", getByType(by), getByLocator(by))).replaceAll("%s", "{{VALUE}}");
+            ? noLocator.execute()
+            : format("%s='%s'", getByType(by), getByLocator(by))).replace("%s", "{{VALUE}}");
     }
+
     public static By getByFromString(String stringLocator) {
-        if (stringLocator == null || stringLocator.equals(""))
+        if (stringLocator == null || stringLocator.equals("")) {
             throw new RuntimeException("Can't get By locator from string empty or null string");
+        }
         String[] split = stringLocator.split("(^=)*=.*");
-        if (split.length == 1)
+        if (split.length == 1) {
             return NAME_TO_LOCATOR.execute(split[0]);
+        }
         switch (split[0]) {
             case "css": return By.cssSelector(split[1]);
             case "xpath": return By.xpath(split[1]);
@@ -125,8 +128,8 @@ public final class WebDriverByUtils {
             case "tag": return By.tagName(split[1]);
             case "link": return By.partialLinkText(split[1]);
             default: throw new RuntimeException(
-                    String.format("Can't get By locator from string: %s. Bad suffix: %s. (available: css, xpath, class, id, name, link, tag)",
-                            stringLocator, split[0]));
+                String.format("Can't get By locator from string: %s. Bad suffix: %s. (available: css, xpath, class, id, name, link, tag)",
+                        stringLocator, split[0]));
         }
     }
 
@@ -164,14 +167,18 @@ public final class WebDriverByUtils {
                     : selectMany(els, e -> e.findElements((By) step));
             }
         }
-        else if (isClass(step.getClass(), Integer.class) && els != null)
-            return singletonList(els.get((Integer) step - 1));
+        else {
+            if (isClass(step.getClass(), Integer.class) && els != null) {
+                return singletonList(els.get((Integer) step - 1));
+            }
+        }
         throw exception("Unknown locator part '%s'. Can't get element. Please correct locator");
     }
     public static List<Object> searchBy(By by) {
         try {
-            if (!getByType(by).equals("css"))
+            if (!getByType(by).equals("css")) {
                 return singletonList(by);
+            }
             String locator = getByLocator(by);
             List<By> result = replaceUp(locator);
             result = replaceText(result);
@@ -181,20 +188,23 @@ public final class WebDriverByUtils {
     public static JFunc1<String, By> NAME_TO_LOCATOR = WebDriverByUtils::defineLocator;
     public static By defineLocator(String locator) {
         String by = locator.contains("*root*")
-            ? locator.replaceAll("\\*root\\*", "")
+            ? locator.replace("\\*root\\*", "")
             : locator;
-        if (isBlank(by))
+        if (isBlank(by)) {
             return By.cssSelector("");
+        }
         if (by.length() == 1) {
             return By.cssSelector(locator);
         }
-        if (by.matches("\\*=.*"))
+        if (by.matches("\\*=.*")) {
             return withText(by.substring(2));
-        if (by.matches("=.*"))
+        }
+        if (by.matches("=.*")) {
             return byText(by.substring(1));
+        }
         return by.substring(0,2).contains("/") || by.contains("..") || by.charAt(0) == '('
-                ? By.xpath(locator)
-                : By.cssSelector(locator);
+            ? By.xpath(locator)
+            : By.cssSelector(locator);
     }
 
     private static List<Object> one(By by) {
@@ -211,8 +221,9 @@ public final class WebDriverByUtils {
             Matcher m = Pattern.compile("(?<up><+)").matcher(loc);
             while (m.find()) {
                 String[] locs = loc.split(m.group("up"));
-                if (locs.length > 0)
+                if (locs.length > 0) {
                     result.add(By.cssSelector(locs[0]));
+                }
                 result.add(getUpXpath(m.group("up")));
                 loc = locs.length == 2 ? locs[1] : "";
             }
@@ -229,10 +240,13 @@ public final class WebDriverByUtils {
 
     private static List<By> replaceText(List<By> bys) {
         List<By> result = new ArrayList<>();
-        for (By by : bys)
-            if (getByType(by).equals("css"))
+        for (By by : bys) {
+            if (getByType(by).equals("css")) {
                 result.addAll(replaceText(getByLocator(by)));
-            else result.add(by);
+            } else {
+                result.add(by);
+            }
+        }
         return result;
     }
 
@@ -242,24 +256,29 @@ public final class WebDriverByUtils {
         Matcher m = Pattern.compile("\\[(?<modifier>\\*?)'(?<text>[^']+)']").matcher(loc);
         while (m.find() && isNotEmpty(loc)) {
             String[] locs = loc.split("\\[\\*?'"+m.group("text")+"']");
-            if (locs.length > 0)
+            if (locs.length > 0) {
                 result.add(By.cssSelector(locs[0]));
+            }
             result.add(m.group("modifier").equals("")
                 ? By.xpath(".//*[text()='" + m.group("text") + "']")
                 : By.xpath(".//*[contains(text(),'" + m.group("text") + "')]"));
             loc = locs.length == 2 ?  locs[1] : "";
         }
-        if (isNotEmpty(loc))
+        if (isNotEmpty(loc)) {
             result.add(By.cssSelector(loc));
+        }
         return result;
     }
 
     private static List<Object> replaceChildren(List<By> bys) {
         List<Object> result = new ArrayList<>();
-        for (By by : bys)
-            if (getByType(by).equals("css"))
+        for (By by : bys) {
+            if (getByType(by).equals("css")) {
                 result.addAll(replaceChildren(getByLocator(by)));
-            else result.add(by);
+            } else {
+                result.add(by);
+            }
+        }
         return result;
     }
 
@@ -269,13 +288,15 @@ public final class WebDriverByUtils {
         Matcher m = Pattern.compile("\\[(?<num>\\d+)]").matcher(loc);
         while (m.find() && isNotEmpty(loc)) {
             String[] locs = loc.split("\\["+m.group("num")+"]");
-            if (locs.length > 0)
+            if (locs.length > 0) {
                 result.add(By.cssSelector(locs[0]));
+            }
             result.add(Integer.parseInt(m.group("num")));
             loc = locs.length == 2 ?  locs[1] : "";
         }
-        if (isNotEmpty(loc))
+        if (isNotEmpty(loc)) {
             result.add(By.cssSelector(loc));
+        }
         return result;
     }
     public static String asTextLocator(String text) {

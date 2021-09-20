@@ -49,7 +49,7 @@ public class TableTests implements TestsInit {
     @Test
     public void previewTest() {
         String value = usersTable.preview();
-        assertEquals(value.replaceAll(" ", ""),
+        assertEquals(value.replace(" ", ""),
             "NumberTypeUserDescription" +
             "1AdminUserManagerRomanWolverineVip" +
             "2AdminUserManagerSergeyIvanSpiderManVip" +
@@ -61,16 +61,16 @@ public class TableTests implements TestsInit {
 
     @Test
     public void valueTest() {
-        String value = usersTable.getValue().replaceAll("\r", "")
-            .replaceAll("\\\\n", "*").replaceAll("\\* ", "*");
+        String value = usersTable.getValue().replace("\r", "")
+            .replace("\n", "*").replace("\\n", "*").replace("* ", "*");
         assertEquals(value,
-        "||X||Number|Type|User|Description||\n" +
-            "||"+i(0)+"||1|Admin*User*Manager|Roman|Wolverine*Vip||\n" +
-            "||"+i(1)+"||2|Admin*User*Manager|Sergey Ivan|Spider Man*Vip||\n" +
-            "||"+i(2)+"||3|Admin*User*Manager|Vladzimir|Punisher*Vip||\n" +
-            "||"+i(3)+"||4|Admin*User*Manager|Helen Bennett|Captain America*some description*Vip||\n" +
-            "||"+i(4)+"||5|Admin*User*Manager|Yoshi Tannamuri|Cyclope*some description*Vip||\n" +
-            "||"+i(5)+"||6|Admin*User*Manager|Giovanni Rovelli|Hulk*some description*Vip||\n");
+        "||X||Number|Type|User|Description||*" +
+            "||"+i(0)+"||1|Admin*User*Manager|Roman|Wolverine*Vip||*" +
+            "||"+i(1)+"||2|Admin*User*Manager|Sergey Ivan|Spider Man*Vip||*" +
+            "||"+i(2)+"||3|Admin*User*Manager|Vladzimir|Punisher*Vip||*" +
+            "||"+i(3)+"||4|Admin*User*Manager|Helen Bennett|Captain America*some description*Vip||*" +
+            "||"+i(4)+"||5|Admin*User*Manager|Yoshi Tannamuri|Cyclope*some description*Vip||*" +
+            "||"+i(5)+"||6|Admin*User*Manager|Giovanni Rovelli|Hulk*some description*Vip||*");
     }
     public static String i(int index) {
         return index + ELEMENT.startIndex + "";

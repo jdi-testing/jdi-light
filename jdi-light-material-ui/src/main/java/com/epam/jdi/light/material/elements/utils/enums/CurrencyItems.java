@@ -6,9 +6,9 @@ public enum CurrencyItems {
   BTC("฿"),
   JPY("¥");
 
-  public final String currencyItemText;
+  public final String value;
 
   CurrencyItems(String currencyItemText) {
-    this.currencyItemText = currencyItemText;
+    this.value = currencyItemText;
   }
 }
