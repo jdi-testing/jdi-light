@@ -13,13 +13,9 @@ public class Badge extends UIBaseElement<BadgeAssert> {
 
     @JDIAction("The digits from the '{name}' is '{0}'")
     public Integer getDigits() {
-        if (!this.core().getText().isEmpty()) {
-            String text = this.core().getText().replaceAll("[^0-9]", "");
-            if(!text.isEmpty()) {
-                return Integer.valueOf(text);
-            } else {
-                return -1;
-            }
+        String text = this.core().getText().replaceAll("[^0-9]", "");
+        if(!text.isEmpty()) {
+            return Integer.valueOf(text);
         } else {
             return -1;
         }
