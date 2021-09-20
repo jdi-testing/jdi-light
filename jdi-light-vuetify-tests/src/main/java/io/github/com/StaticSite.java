@@ -76,8 +76,6 @@ import io.github.com.pages.TooltipsPage;
 import io.github.com.pages.TreeviewPage;
 import io.github.com.pages.VirtualScrollerPage;
 import io.github.com.pages.WindowsPage;
-import io.github.com.pages.AvatarsPage;
-import io.github.com.pages.ButtonsPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -303,6 +301,4 @@ public class StaticSite {
 
     @Url("/windows")
     public static WindowsPage windowsPage;
-    @Url("/buttons")
-    public static ButtonsPage buttonsPage;
 }
