@@ -13,6 +13,7 @@ import static io.github.com.pages.CheckboxesPage.colorsCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelArray;
 import static io.github.com.pages.CheckboxesPage.modelAsArrayCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelBooleanCheckboxes;
+import static io.github.com.pages.CheckboxesPage.statesCheckboxes;
 import static io.github.com.pages.VuetifyPage.checkboxes;
 
 public class CheckboxesTests extends TestsInit {
@@ -43,7 +44,7 @@ public class CheckboxesTests extends TestsInit {
     public void modelAsArrayCheckboxesTest() {
         List<String> labels = Arrays.asList("John", "Jacob");
         for (int i = 1; i <= labels.size(); i++) {
-            modelAsArrayCheckboxes.get(i).has().label(labels.get(i));
+            modelAsArrayCheckboxes.get(i).has().label(labels.get(i - 1));
         }
         modelAsArrayCheckboxes.get(1).is().checked();
         modelAsArrayCheckboxes.get(2).is().unchecked();
@@ -68,5 +69,16 @@ public class CheckboxesTests extends TestsInit {
             e.is().unchecked();
             e.assertThat().labelContains("false");
         });
+    }
+
+    @Test
+    public void statesCheckboxesTest() {
+        statesCheckboxes.get(1).is().checked();
+        statesCheckboxes.get(2).is().unchecked();
+        statesCheckboxes.get(3).is().indeterminate();
+        statesCheckboxes.get(4).is().checked();
+        statesCheckboxes.get(4).is().disabled();
+        statesCheckboxes.get(5).is().unchecked();
+        statesCheckboxes.get(5).is().disabled();
     }
 }

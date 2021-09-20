@@ -45,6 +45,8 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 
     @JDIAction("Assert that '{name}' has '{label}' label")
     public CheckboxAssert label(String label) {
+        new Timer(base().getTimeout() * 1000L)
+                .wait(() -> element().isDisplayed());
         jdiAssert(element().labelText(), equalToIgnoringCase(label));
         return this;
     }

@@ -8,12 +8,14 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.CheckboxAssert;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel {
 
     public String input = "div input";
     public UIElement input() {
-        return linked(input, "input");
+//        return linked(input, "input");
+        return $(input, this);
     }
 
     @Override
@@ -23,7 +25,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel 
 
     @JDIAction("Is '{name}' checked")
     public boolean isChecked() {
-        return input().core().attr("aria-checked").equals("true");
+        return input().attr("aria-checked").equalsIgnoreCase("true");
     }
 
     @JDIAction("Is '{name}' not selected")
