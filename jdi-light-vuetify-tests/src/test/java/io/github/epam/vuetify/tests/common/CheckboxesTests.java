@@ -7,21 +7,18 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.github.com.StaticSite.vuetifyPage;
+import static io.github.com.StaticSite.checkboxesPage;
 import static io.github.com.pages.CheckboxesPage.colorsCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelArray;
 import static io.github.com.pages.CheckboxesPage.modelAsArrayCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelBooleanCheckboxes;
 import static io.github.com.pages.CheckboxesPage.statesCheckboxes;
-import static io.github.com.pages.VuetifyPage.checkboxes;
 
 public class CheckboxesTests extends TestsInit {
 
     @BeforeSuite
     public void before() {
-        vuetifyPage.open();
-        vuetifyPage.expandFormInputAndControls();
-        checkboxes.click();
+        checkboxesPage.open();
     }
 
     @Test

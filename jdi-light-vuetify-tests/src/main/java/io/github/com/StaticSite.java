@@ -28,9 +28,6 @@ public class StaticSite {
     public static Button userIcon;
     public static Text userName;
 
-    @Url("")
-    public static VuetifyPage vuetifyPage;
-
     @Url("/avatars")
     public static AvatarsPage avatarsPage;
   
