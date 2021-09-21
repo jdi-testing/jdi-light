@@ -57,9 +57,7 @@ public class AvatarsTests extends TestsInit {
         profileCard.is().displayed();
         jdiAssert(profileCard.hasProperName("Marcus Obrien"), Matchers.is(true));
         jdiAssert(profileCard.hasProperJobFunction("Network Engineer"), Matchers.is(true));
-        profileCard.getAvatarImage().waitFor(displayed);
         jdiAssert(profileCard.hasAvatarPhoto(), Matchers.is(true));
-        profileCard.getBackgroundImage().waitFor(displayed);
         jdiAssert(profileCard.hasBackgroundPhoto(), Matchers.is(true));
     }
 }
