@@ -126,10 +126,9 @@ public class AppBarsTests extends TestsInit {
             scrollThresholdBar.has().heartButton();
             scrollThresholdBar.has().verticalDotsButton();
             scrollThresholdBar.has().headerHeight("128px");
-
-//            scrollThresholdBar.has().headerOpacity(1);
+            scrollThresholdBar.has().headerOpacity(1);
             scrollThresholdBar.scrollToBottom();
             scrollThresholdBar.has().headerHeight("56px");
-//            scrollThresholdBar.has().headerOpacity(0);
+            scrollThresholdBar.has().headerOpacity(0);
         }
 }
