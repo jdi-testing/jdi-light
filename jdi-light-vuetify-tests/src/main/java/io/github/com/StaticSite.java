@@ -1,13 +1,19 @@
 package io.github.com;
+
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
+import io.github.com.pages.AlertsPage;
 import io.github.com.pages.BadgesPage;
+import io.github.com.pages.DividersPage;
+
+import io.github.com.pages.AvatarsPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -22,6 +28,16 @@ public class StaticSite {
     public static Button userIcon;
     public static Text userName;
 
+    @Url("/alerts")
+    public static AlertsPage alertsPage;
+
+    @Url("/avatars")
+    public static AvatarsPage avatarsPage;
+  
     @Url("/badges")
     public static BadgesPage badgesPage;
+
+    @WaitAfterAction(3)
+    @Url("/dividers")
+    public static DividersPage dividersPage;
 }
