@@ -8,17 +8,17 @@ public class Avatar extends UIBaseElement<AvatarAssert> {
 
     @JDIAction("Get {name} photo")
     public String hasPhoto() {
-        return core().firstChild().getTagName();
+        return this.find("img").getTagName();
     }
 
     @JDIAction("Get {name} size")
     public String properSize() {
-        return core().getAttribute("style");
+        return this.core().getAttribute("style");
     }
 
     @JDIAction("Get {name} icon")
     public boolean hasIcon() {
-        return core().firstChild().hasClass("v-icon");
+        return this.find("i").getAttribute("class").contains("v-icon");
     }
 
     public AvatarAssert is() {

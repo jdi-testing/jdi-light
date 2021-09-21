@@ -9,12 +9,9 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.base.Conditions.displayed;
 import static io.github.com.StaticSite.avatarsPage;
-import static io.github.com.pages.AvatarsPage.avatarsWithSize;
-import static io.github.com.pages.AvatarsPage.profileCard;
-import static io.github.com.pages.AvatarsPage.slotAvatars;
-import static io.github.com.pages.AvatarsPage.tileAvatar;
+import static io.github.com.pages.AvatarsPage.*;
 
-public class AvatarTests extends TestsInit {
+public class AvatarsTests extends TestsInit {
 
     @BeforeMethod
     public void beforeTest() {
@@ -24,9 +21,9 @@ public class AvatarTests extends TestsInit {
     @Test
     public void avatarsWithSizeTests() {
         avatarsWithSize.get(1).waitFor(displayed);
-        for(Avatar avatar : avatarsWithSize) {
-            avatar.is().displayed();
-        }
+        avatarsWithSize.stream().map(Avatar::is).forEach(e -> {
+            e.is().displayed();
+        });
         avatarsWithSize.get(1).is().text("36");
         avatarsWithSize.get(2).is().text("48");
         avatarsWithSize.get(3).is().text("62");
@@ -46,9 +43,9 @@ public class AvatarTests extends TestsInit {
     @Test
     public void slotAvatarsTests() {
         slotAvatars.get(1).waitFor(displayed);
-        for(Avatar avatar : slotAvatars) {
-            avatar.is().displayed();
-        }
+        slotAvatars.stream().map(Avatar::is).forEach(e -> {
+            e.is().displayed();
+        });
         slotAvatars.get(1).has().icon();
         slotAvatars.get(2).has().photo();
         slotAvatars.get(3).is().text("CJ");
@@ -56,11 +53,13 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void profileCardTests() {
-        profileCard.waitUntilImagesAreDisplayed();
+        profileCard.waitFor(displayed);
         profileCard.is().displayed();
         jdiAssert(profileCard.hasProperName("Marcus Obrien"), Matchers.is(true));
         jdiAssert(profileCard.hasProperJobFunction("Network Engineer"), Matchers.is(true));
+        profileCard.getAvatarImage().waitFor(displayed);
         jdiAssert(profileCard.hasAvatarPhoto(), Matchers.is(true));
+        profileCard.getBackgroundImage().waitFor(displayed);
         jdiAssert(profileCard.hasBackgroundPhoto(), Matchers.is(true));
     }
 }
