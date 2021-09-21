@@ -14,7 +14,6 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel 
 
     public String input = "div input";
     public UIElement input() {
-//        return linked(input, "input");
         return $(input, this);
     }
 
