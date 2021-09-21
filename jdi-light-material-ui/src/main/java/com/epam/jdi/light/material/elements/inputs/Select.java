@@ -14,6 +14,11 @@ import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.common.TextTypes.INNER;
 
+/**
+ * To see an example of Select web element please visit
+ * https://mui.com/components/selects/
+ */
+
 public class Select extends DropdownExpand {
     private final String list = ".MuiPopover-root ul li";
     private final String value = ".MuiSelect-nativeInput";

@@ -5,6 +5,11 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.inputs.ButtonAssert;
 import com.epam.jdi.light.material.interfaces.displaydata.HasTooltip;
 
+/**
+ * To see an example of Button web element please visit
+ * https://mui.com/components/checkboxes/
+ */
+
 public class MaterialButton extends UIBaseElement<ButtonAssert> implements HasTooltip {
 
     MaterialButton() {

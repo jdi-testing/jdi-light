@@ -9,6 +9,11 @@ import org.openqa.selenium.Keys;
 
 import static com.epam.jdi.light.material.elements.inputs.Slider.getInteger;
 
+/**
+ * To see an example of Slider web element please visit
+ * https://mui.com/components/slider/
+ */
+
 public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
   private final static String areaValueNow = "aria-valuenow";

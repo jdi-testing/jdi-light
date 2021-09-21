@@ -4,6 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.utils.PopperAssert;
 
+/**
+ * To see an example of Popper web element please visit
+ * https://mui.com/components/popper/
+ */
+
 public class Popper extends UIBaseElement<PopperAssert> {
 
     @JDIAction("Popper is displayed")

@@ -4,6 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.navigation.MenuAssert;
 
+/**
+ * To see an example of Menu web element please visit
+ * https://mui.com/components/menus/
+ */
+
 public class Menu extends UIBaseElement<MenuAssert> {
 
     @JDIAction("Click '{name}'")

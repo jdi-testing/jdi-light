@@ -11,6 +11,11 @@ import java.util.NoSuchElementException;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
+/**
+ * To see an example of Progress web element please visit
+ * https://mui.com/components/progress/
+ */
+
 public class ProgressBar extends UIBaseElement<ProgressAssert> implements ISetup {
     public static final String BACKGROUND_COLOR = "background-color";
     private String root;

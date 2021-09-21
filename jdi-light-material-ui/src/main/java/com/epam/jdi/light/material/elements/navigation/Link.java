@@ -4,6 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.navigation.LinkAssert;
 
+/**
+ * To see an example of Links web element please visit
+ * https://mui.com/components/links/
+ */
+
 public class Link extends UIBaseElement<LinkAssert> {
     @JDIAction("Click '{name}'")
     public void click() {

@@ -4,6 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
 
+/**
+ * To see an example of Checkbox group List web element please visit
+ * https://mui.com/components/checkboxes/
+ */
+
 public class Checkbox extends UIBaseElement<CheckboxAssert>{
 
     @JDIAction("Is '{name}' checked")

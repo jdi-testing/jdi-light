@@ -13,6 +13,12 @@ import java.lang.reflect.Field;
 import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
+
+/**
+ * To see an example of Chip web element please visit
+ * https://mui.com/components/chips/
+ */
+
 public class Chip extends UIBaseElement<ChipAssert> implements ISetup {
 
     protected By chipLabel;

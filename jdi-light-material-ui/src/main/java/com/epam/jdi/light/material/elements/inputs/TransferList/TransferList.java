@@ -15,6 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * To see an example of Transfer List web element please visit
+ * https://mui.com/components/transfer-list/
+ */
+
 public abstract class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
 
   private String itemCheckbox;

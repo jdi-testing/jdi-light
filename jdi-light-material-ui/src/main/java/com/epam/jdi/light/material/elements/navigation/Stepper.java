@@ -10,6 +10,11 @@ import com.epam.jdi.light.material.asserts.navigation.StepperAssert;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * To see an example of Stepper web element please visit
+ * https://mui.com/components/steppers/
+ */
+
 public class Stepper extends UIBaseElement<StepperAssert> {
     private final String listLocator = ".MuiStep-root";
 

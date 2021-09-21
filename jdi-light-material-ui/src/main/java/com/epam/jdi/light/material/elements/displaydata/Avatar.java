@@ -4,6 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.displaydata.AvatarAssert;
 
+/**
+ * To see an example of Avatar web element please visit
+ * https://mui.com/components/avatars/
+ */
+
 public class Avatar extends UIBaseElement<AvatarAssert>  {
 
     @JDIAction("Get avatar {name} photo")

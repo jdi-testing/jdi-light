@@ -5,6 +5,12 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
 
+
+/**
+ * To see an example of Badge web element please visit
+ * https://mui.com/components/badges/
+ */
+
 public class Badge extends UIBaseElement<BadgeAssert> {
     //Exactly the same class named Badge is in the Angular module
     @JDIAction("Get '{name}' badge")

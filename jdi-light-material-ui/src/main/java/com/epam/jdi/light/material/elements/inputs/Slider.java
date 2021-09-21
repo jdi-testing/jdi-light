@@ -10,6 +10,11 @@ import org.openqa.selenium.WebElement;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * To see an example of Slider web element please visit
+ * https://mui.com/components/slider/
+ */
+
 public class Slider extends UIBaseElement<SliderAssert> {
 
   @JDIAction(value = "Get '{name}' value")

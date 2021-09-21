@@ -13,6 +13,11 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
+/**
+ * To see an example of Button group web element please visit
+ * https://mui.com/components/button-group/
+ */
+
 public class ButtonGroup extends UIBaseElement<ButtonGroupAssert> implements ISetup {
 
     private static String BUTTON_FIND_STRATEGY = "//button[contains(@class, 'MuiButton-root')]";

@@ -4,6 +4,12 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.displaydata.ListsAssert;
 
+
+/**
+ * To see an example of Lists web element please visit
+ * https://mui.com/components/lists/
+ */
+
 public class Lists extends UIBaseElement<ListsAssert> {
 
     @JDIAction("Toggle '{name}'")
