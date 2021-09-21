@@ -13,7 +13,6 @@ import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
 
 import io.github.com.pages.AvatarsPage;
-import io.github.com.pages.VuetifyPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
