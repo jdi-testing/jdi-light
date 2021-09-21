@@ -85,7 +85,7 @@ public class AppBar extends UIBaseElement<AppBarAssert> {
 //
     @JDIAction("{name} has icon")
     public boolean hasMenuButton() {
-        return getMenuButton().isVisible();
+        return getMenuButton().isClickable();
     }
 
     @JDIAction("{name} has icon")
@@ -143,6 +143,10 @@ public class AppBar extends UIBaseElement<AppBarAssert> {
 
     private WebElement getScrollingContainer() {
         return this.find(".overflow-y-auto").core().getFast();
+    }
+
+    public void scrollPageToBottom() {
+       jsExecute("window.scroll(0, document.body.scrollHeight)");
     }
 
     public void scrollToBottom() {

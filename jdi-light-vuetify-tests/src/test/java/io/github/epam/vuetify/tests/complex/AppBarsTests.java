@@ -113,4 +113,23 @@ public class AppBarsTests extends TestsInit {
             fadeImageBar.has().headerHeight("104px");
             fadeImageBar.has().headerOpacity(0);
         }
+
+        @Test
+        public void scrollThresholdBarTests() {
+            scrollThresholdBar.waitFor(displayed);
+            scrollThresholdBar.scrollPageToBottom();
+            scrollThresholdBar.is().displayed();
+            scrollThresholdBar.has().menuButton();
+            scrollThresholdBar.has().properTitleText("Title");
+            scrollThresholdBar.has().title();
+            scrollThresholdBar.has().searchButton();
+            scrollThresholdBar.has().heartButton();
+            scrollThresholdBar.has().verticalDotsButton();
+            scrollThresholdBar.has().headerHeight("128px");
+
+//            scrollThresholdBar.has().headerOpacity(1);
+            scrollThresholdBar.scrollToBottom();
+            scrollThresholdBar.has().headerHeight("56px");
+//            scrollThresholdBar.has().headerOpacity(0);
+        }
 }
