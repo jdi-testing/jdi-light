@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * To see an example of Ripple web element please visit https://material.angular.io/components/ripple/overview.
@@ -247,41 +248,41 @@ public class Ripple extends UIBaseElement<RippleAssert> {
     }
 
     protected UIElement container() {
-        return new UIElement(By.xpath(String.format(containerLocator, core().locator.printLocator()
+        return new UIElement(By.xpath(format(containerLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getRipple() {
-        return new UIElement(By.xpath(String.format(rippleLocator, core().locator.printLocator()
+        return new UIElement(By.xpath(format(rippleLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement centeredCheckbox() {
-        return new UIElement(By.xpath(String.format(centeredCheckboxLocator,
+        return new UIElement(By.xpath(format(centeredCheckboxLocator,
                                                     core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement disabledCheckbox() {
-        return new UIElement(By.xpath(String.format(disabledCheckboxLocator,
+        return new UIElement(By.xpath(format(disabledCheckboxLocator,
                                                     core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement unboundedCheckbox() {
-        return new UIElement(By.xpath(String.format(unboundedCheckboxLocator,
+        return new UIElement(By.xpath(format(unboundedCheckboxLocator,
                                                     core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getRadiusInput() {
-        return new UIElement(By.xpath(String.format(radiusLocator,
+        return new UIElement(By.xpath(format(radiusLocator,
                                                     core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getColorInput() {
-        return new UIElement(By.xpath(String.format(colorLocator,
+        return new UIElement(By.xpath(format(colorLocator,
                                                     core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
     }

@@ -3,6 +3,7 @@ package io.github.epam.angular.tests.elements.complex.tabgroup;
 import org.testng.annotations.Test;
 
 import static io.github.com.pages.AngularPage.tabsSection;
+import static com.jdiai.tools.StringUtils.format;
 
 public class TabsWithHeadersOnTheBottomTests extends TestsTabGroupBase {
 
@@ -22,7 +23,7 @@ public class TabsWithHeadersOnTheBottomTests extends TestsTabGroupBase {
     @Test
     public void verifyTabWithHeadersOnTheBottomPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
+        String stringForTest = format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.tabWithHeadersOnTheBottom.clickTab(tabNumberForTest);
         tabsSection.tabWithHeadersOnTheBottom.is().assertTabPanelContent(stringForTest);
     }

@@ -1,6 +1,6 @@
 package com.epam.jdi.light.ui.html.elements.complex.vue;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 import java.util.List;
 

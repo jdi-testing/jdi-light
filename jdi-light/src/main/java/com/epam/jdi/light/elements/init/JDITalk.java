@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

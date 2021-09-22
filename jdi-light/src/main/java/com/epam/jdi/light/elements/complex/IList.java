@@ -3,10 +3,10 @@ package com.epam.jdi.light.elements.complex;
 import com.epam.jdi.light.elements.interfaces.base.HasRefresh;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.tools.HasStartIndex;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.HasStartIndex;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.func.JAction1;
+import com.jdiai.tools.func.JFunc1;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.jdiai.tools.EnumUtils.getEnumValue;
+import static com.jdiai.tools.LinqUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

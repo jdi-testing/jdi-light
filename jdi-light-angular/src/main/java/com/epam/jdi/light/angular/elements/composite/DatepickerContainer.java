@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
+import static com.jdiai.tools.StringUtils.format;
 
 public class DatepickerContainer extends Section {
     public static final int YEAR_LENGTH = 4;
@@ -249,7 +250,7 @@ public class DatepickerContainer extends Section {
     public String[] getWeekDayNumbers(final DatepickerNavigation weekName) {
         WebList webList = getColumn(weekName.ordinal());
         String[] list = new String[webList.size()];
-        webList.stream().map(e -> String.format(CELL.getName().replace("%s", " %s "), e.getValue()))
+        webList.stream().map(e -> format(CELL.getName().replace("%s", " %s "), e.getValue()))
                 .collect(Collectors.toList()).toArray(list);
         return list;
     }
@@ -294,24 +295,24 @@ public class DatepickerContainer extends Section {
 
     protected UIElement getMonth(final String month, final Locale locale) {
         String monthShort = Month.valueOf(month).getDisplayName(TextStyle.SHORT, locale).toUpperCase();
-        return new UIElement(By.xpath(String.format(CELL.getName(), monthShort)));
+        return new UIElement(By.xpath(format(CELL.getName(), monthShort)));
     }
 
     protected UIElement getMonth(final int month, final Locale locale) {
         String monthShort = Month.of(month).getDisplayName(TextStyle.SHORT, locale).toUpperCase();
-        return new UIElement(By.xpath(String.format(value, monthShort)));
+        return new UIElement(By.xpath(format(value, monthShort)));
     }
 
     protected UIElement getDay(final String day) {
-        return new UIElement(By.xpath(String.format(value.replace("%s", " %s "), day)));
+        return new UIElement(By.xpath(format(value.replace("%s", " %s "), day)));
     }
 
     protected UIElement getDay(final int day) {
-        return new UIElement(By.xpath(String.format(value.replace("%s", " %s "), day)));
+        return new UIElement(By.xpath(format(value.replace("%s", " %s "), day)));
     }
 
     protected UIElement getYear(final int year) {
-        return new UIElement(By.xpath(String.format(value, year)));
+        return new UIElement(By.xpath(format(value, year)));
     }
 
     protected UIElement getPreviousMonth() {
@@ -331,7 +332,7 @@ public class DatepickerContainer extends Section {
     }
 
     protected WebList getColumn(final int columnNumber) {
-        return new WebList(By.xpath(String.format(columnLocator, columnNumber)));
+        return new WebList(By.xpath(format(columnLocator, columnNumber)));
     }
 
     protected Point getOutsidePoint() {

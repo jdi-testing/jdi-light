@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.epam.jdi.tools.StringUtils.inputStreamToList;
+import static com.jdiai.tools.StringUtils.inputStreamToList;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

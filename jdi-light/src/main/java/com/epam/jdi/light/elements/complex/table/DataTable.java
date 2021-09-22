@@ -9,10 +9,10 @@ import com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.elements.pageobjects.annotations.NoCache;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.map.MapArray;
+import com.jdiai.tools.pairs.Pair;
 import org.apache.commons.lang3.ObjectUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
@@ -29,11 +29,11 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static com.epam.jdi.tools.StringUtils.setPrimitiveField;
+import static com.jdiai.tools.EnumUtils.getEnumValue;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.ReflectionUtils.*;
+import static com.jdiai.tools.StringUtils.LINE_BREAK;
+import static com.jdiai.tools.StringUtils.setPrimitiveField;
 import static java.util.Arrays.asList;
 
 /**

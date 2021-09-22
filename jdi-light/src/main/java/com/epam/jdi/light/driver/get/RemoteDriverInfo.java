@@ -2,7 +2,7 @@ package com.epam.jdi.light.driver.get;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
-import static java.lang.String.format;
+import static com.jdiai.tools.StringUtils.format;
 import static java.lang.System.getenv;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 

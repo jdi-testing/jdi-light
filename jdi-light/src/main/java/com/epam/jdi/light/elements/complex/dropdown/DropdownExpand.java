@@ -138,15 +138,33 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
         }
         if (isNotBlank(value)) {
             valueLocator = value;
-            expandLocator = isNotBlank(expand)
-                ? expand
-                : value;
-        } else if (isNotBlank(expand))
+            expandLocator = isNotBlank(expand) ? expand : value;
+        } else if (isNotBlank(expand)) {
             expandLocator = expand;
-        if (isNotBlank(list))
+        }
+        if (isNotBlank(list)) {
             listLocator = list;
+        }
         setupDone = true;
         return this;
+    }
+
+    @JDIAction("Check that '{name}' is displayed")
+    public boolean isDisplayed() {
+        return value().isDisplayed();
+    }
+
+    @Override
+    public DropdownAssert is() {
+        return new DropdownAssert().set(this);
+    }
+
+    public int getStartIndex() {
+        return startIndex;
+    }
+
+    public void setStartIndex(int index) {
+        startIndex = index;
     }
 
     public void setup(Field field) {
@@ -156,20 +174,5 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
         JDropdown j = field.getAnnotation(JDropdown.class);
         setup(j.root(), j.value(), j.list(), j.expand());
         autoClose = j.autoClose();
-    }
-
-    @JDIAction("Check that '{name}' is displayed")
-    public boolean isDisplayed() {
-        return value().isDisplayed();
-    }
-    @Override
-    public DropdownAssert is() {
-        return new DropdownAssert().set(this);
-    }
-    public int getStartIndex() {
-        return startIndex;
-    }
-    public void setStartIndex(int index) {
-        startIndex = index;
     }
 }

@@ -2,7 +2,7 @@ package com.epam.jdi.light.settings;
 
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.logger.Strategy;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc1;
 import org.openqa.selenium.logging.LogEntry;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.INFO;
 import static com.epam.jdi.light.logger.Strategy.FAIL;
-import static com.epam.jdi.tools.LinqUtils.newList;
+import static com.jdiai.tools.LinqUtils.newList;
 
 public class LogSettings {
     public LogLevels logLevel = INFO;

@@ -1,7 +1,9 @@
 package com.epam.jdi.light.elements.base;
 
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import org.openqa.selenium.WebElement;
 
+import static com.epam.jdi.light.elements.common.Directions.*;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -144,6 +146,57 @@ public abstract class Conditions {
             condition("%element% is %not% selected", el -> el.core().isSelected());
 
     public static Condition checked = selected;
+
+
+    public static Condition above(ICoreElement element) {
+        return condition("%element% is %not% on the Top of '" + element.core().getFullName() + "'",
+                el -> el.core().isAbove(element));
+    }
+
+    public static Condition below(ICoreElement element) {
+        return condition("%element% is %not% Below '" + element.core().getFullName() + "'",
+                el -> el.core().isBelow(element));
+    }
+
+    public static Condition onLeftOf(ICoreElement element) {
+        return condition("%element% is %not% on the Left of '" + element.core().getFullName() + "'",
+                el -> el.core().isOnLeftOf(element));
+    }
+
+    public static Condition onRightOf(ICoreElement element) {
+        return condition("%element% is %not% on the Right of '" + element.core().getFullName() + "'",
+                el -> el.core().isOnRightOf(element));
+    }
+
+    public static Condition onTopLeftOf(ICoreElement element) {
+        return condition("%element% is %not% on the Top-Left of '" + element.core().getFullName() + "'",
+                el -> TOP_LEFT.apply(element.core().getDirectionTo(el)));
+    }
+
+    public static Condition onTopRightOf(ICoreElement element) {
+        return condition("%element% is %not% on the Top-Right of '" + element.core().getFullName() + "'",
+                el -> TOP_RIGHT.apply(element.core().getDirectionTo(el)));
+    }
+
+    public static Condition onBottomLeftOf(ICoreElement element) {
+        return condition("%element% is %not% on the Bottom-Left of '" + element.core().getFullName() + "'",
+                el -> BOTTOM_LEFT.apply(element.core().getDirectionTo(el)));
+    }
+
+    public static Condition onBottomRightOf(ICoreElement element) {
+        return condition("%element% is %not% on the Bottom-Right of '" + element.core().getFullName() + "'",
+                el -> BOTTOM_RIGHT.apply(element.core().getDirectionTo(el)));
+    }
+
+    public static Condition onSameLine(ICoreElement element) {
+        return condition("%element% is %not% on the same line '" + element.core().getFullName() + "'",
+                el -> SAME_HORIZONTAL.apply(element.core().getDirectionTo(el)));
+    }
+
+    public static Condition onSameVerticalLine(ICoreElement element) {
+        return condition("%element% is %not% on the same vertical line '" + element.core().getFullName() + "'",
+                el -> SAME_VERTICAL.apply(element.core().getDirectionTo(el)));
+    }
 
     public static Condition not(Condition condition) {
         return condition(getNotName(condition), el -> !condition.execute(el));

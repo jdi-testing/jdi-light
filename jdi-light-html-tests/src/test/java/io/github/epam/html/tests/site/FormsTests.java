@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.site;
 
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.map.MapArray;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 

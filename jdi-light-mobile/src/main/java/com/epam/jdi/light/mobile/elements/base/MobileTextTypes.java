@@ -1,7 +1,7 @@
 package com.epam.jdi.light.mobile.elements.base;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc1;
 
 import static com.epam.jdi.light.mobile.elements.base.MobileUIElement.SMART_GET_TEXT;
 import static com.epam.jdi.light.mobile.elements.base.MobileUIElement.SMART_LIST_TEXT;

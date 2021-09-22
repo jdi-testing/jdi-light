@@ -8,6 +8,7 @@ import java.util.TimeZone;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.pages.AngularPage.tabsSection;
+import static com.jdiai.tools.StringUtils.format;
 
 public class TabsWihLazilyLoadedContentTests extends TestsTabGroupBase {
 
@@ -30,7 +31,7 @@ public class TabsWihLazilyLoadedContentTests extends TestsTabGroupBase {
         SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("MMM d, yyyy, h:mm:ss aa");
         dateTimeInGMT.setTimeZone(TimeZone.getTimeZone("GMT+3"));
         String timeForTest = dateTimeInGMT.format(new Date());
-        String stringForTest = String.format("Content %s - Loaded: %s", tabNumberForTest, timeForTest);
+        String stringForTest = format("Content %s - Loaded: %s", tabNumberForTest, timeForTest);
         tabsSection.tabsWithLazyLoadedContent.is().assertTabPanelContent(stringForTest);
     }
 

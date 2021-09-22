@@ -1,7 +1,7 @@
 package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.elements.common.Keyboard;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 
 public class FileUpload extends Button {
     public void uploadFile(String filePath) {

@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc1;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;

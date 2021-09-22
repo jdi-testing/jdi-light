@@ -17,7 +17,7 @@ import static com.epam.jdi.light.mobile.driver.MobileDriverInfos.IOS_INFO;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.PropertyReader.fillAction;
+import static com.jdiai.tools.PropertyReader.fillAction;
 import static java.util.Arrays.asList;
 
 /**

@@ -1,6 +1,6 @@
 package io.github.epam.entities;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class User extends DataClass<User> {
     public String name = "Roman", firstName = "Roman", password = "Jdi1234", lastName,

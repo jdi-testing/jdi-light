@@ -1,14 +1,14 @@
 package com.epam.jdi.light.settings;
 
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc1;
 
 import java.io.File;
 
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.PathUtils.path;
-import static com.epam.jdi.tools.Timer.nowTime;
-import static java.lang.String.format;
+import static com.jdiai.tools.PathUtils.mergePath;
+import static com.jdiai.tools.PathUtils.path;
+import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.Timer.nowTime;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class ScreenSettings {

@@ -2,13 +2,13 @@ package com.epam.jdi.light.elements.complex.table.matchers;
 
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.BaseTable;
-import com.epam.jdi.tools.func.JFunc2;
+import com.jdiai.tools.func.JFunc2;
 import org.openqa.selenium.support.ui.Quotes;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static java.lang.String.format;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.StringUtils.format;
 import static java.util.Arrays.asList;
 
 public class TableMatcherSettings {

@@ -5,7 +5,7 @@ import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.elements.composite.WebPage.*;
-import static com.epam.jdi.tools.JsonUtils.getInt;
+import static com.jdiai.tools.JsonUtils.getInt;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 

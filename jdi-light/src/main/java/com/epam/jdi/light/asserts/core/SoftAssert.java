@@ -1,14 +1,14 @@
 package com.epam.jdi.light.asserts.core;
 
-import com.epam.jdi.tools.Safe;
+import com.jdiai.tools.Safe;
 import org.hamcrest.Matcher;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.Timer.nowTimeShort;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.Timer.nowTimeShort;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**

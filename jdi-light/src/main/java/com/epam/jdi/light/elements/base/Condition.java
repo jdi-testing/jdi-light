@@ -3,7 +3,7 @@ package com.epam.jdi.light.elements.base;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc1;
 
 import static com.epam.jdi.light.elements.base.JDIBase.NAMES;
 

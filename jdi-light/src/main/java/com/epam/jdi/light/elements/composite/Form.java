@@ -9,11 +9,11 @@ import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.pageobjects.annotations.MapToField;
-import com.epam.jdi.tools.func.JAction4;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc3;
-import com.epam.jdi.tools.map.MapArray;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.func.JAction4;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc3;
+import com.jdiai.tools.map.MapArray;
+import com.jdiai.tools.pairs.Pair;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.lang.reflect.Field;
@@ -28,11 +28,11 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotations
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.*;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
-import static java.lang.String.format;
+import static com.jdiai.tools.LinqUtils.first;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.ReflectionUtils.*;
+import static com.jdiai.tools.StringUtils.LINE_BREAK;
+import static com.jdiai.tools.StringUtils.format;
 
 /**
  * Created by Roman Iovlev on 29.03.2018

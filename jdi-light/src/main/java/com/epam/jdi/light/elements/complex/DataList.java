@@ -4,8 +4,8 @@ import com.epam.jdi.light.asserts.core.DataListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.pairs.Pair;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 
@@ -17,9 +17,9 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.asEntity;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
+import static com.jdiai.tools.EnumUtils.getEnumValue;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
 
 /**
  * Created by Roman Iovlev on 14.02.2018

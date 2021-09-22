@@ -20,6 +20,7 @@ import static io.github.epam.angular.tests.elements.complex.datepicker.TestsDate
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static com.jdiai.tools.StringUtils.format;
 
 public class DatepickerUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
@@ -334,8 +335,8 @@ public class DatepickerUnitTests extends TestsInit {
 
     @Test
     public void checkDisabledYearsNavigationTest() {
-        String firstDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 2);
-        String secondDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 1);
+        String firstDisabledYearCell = format(CELL.getName(), MIN_YEAR - 2);
+        String secondDisabledYearCell = format(CELL.getName(), MIN_YEAR - 1);
         minMaxDatepicker.show();
         minMaxDatepicker.clear();
         minMaxDatepicker.openYearsView();

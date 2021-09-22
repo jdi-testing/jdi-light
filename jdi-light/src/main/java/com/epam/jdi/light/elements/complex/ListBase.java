@@ -10,9 +10,9 @@ import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
-import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.LinqUtils;
-import com.epam.jdi.tools.func.JFunc1;
+import com.jdiai.tools.CacheValue;
+import com.jdiai.tools.LinqUtils;
+import com.jdiai.tools.func.JFunc1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -27,7 +27,7 @@ import static com.epam.jdi.light.elements.init.entities.collection.EntitiesColle
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.ReflectionUtils.*;
+import static com.jdiai.tools.ReflectionUtils.*;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
