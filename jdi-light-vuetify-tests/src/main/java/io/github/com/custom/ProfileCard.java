@@ -35,14 +35,14 @@ public class ProfileCard extends Section {
     @JDIAction("Does profile card has avatar photo")
     public boolean hasAvatarPhoto() {
         new Timer(base().getTimeout() * 1000L)
-                .wait(() -> getBackgroundImage().isDisplayed());
+                .wait(() -> this.getAvatarImage().isDisplayed());
         return getAvatarImage().getAttribute("style").contains("url");
     }
 
     @JDIAction("Does profile card has background photo")
     public boolean hasBackgroundPhoto() {
         new Timer(base().getTimeout() * 1000L)
-                .wait(() -> getBackgroundImage().isDisplayed());
+                .wait(() -> this.getBackgroundImage().isDisplayed());
         return getBackgroundImage().getAttribute("style").contains("url");
     }
 
