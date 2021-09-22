@@ -22,10 +22,10 @@ public class AutocompletesTests extends TestsInit {
 
     @Test
     public void denseAutocompletesTest() {
-//        outlinedDenseCombobox.waitFor(displayed);
-//        String[] valuesToCheck = new String[] {"fizz", "buzz"};
-//        outlinedDenseCombobox.core().click();
-//        outlinedDenseCombobox.check(valuesToCheck);
+        outlinedDenseCombobox.waitFor(displayed);
+        String[] valuesToCheck = new String[] {"fizz", "buzz"};
+        outlinedDenseCombobox.core().click();
+        outlinedDenseCombobox.check(valuesToCheck);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class AutocompletesTests extends TestsInit {
         filterName.sendKeys("Mary");
         filterStateDropdown.expand();
         String valueToSelect = "Florida";
-        filterStateDropdown.list().select(valueToSelect);
+        filterStateDropdown.select(valueToSelect);
         assertThat(filterStateDropdown.value().getText(), equalTo(valueToSelect));
     }
 }
