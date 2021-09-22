@@ -28,21 +28,12 @@ public class ProfileCard extends Avatar {
 
     @JDIAction("Does profile card has avatar photo")
     public boolean hasAvatarPhoto() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return getAvatarImage().getAttribute("style").contains("url");
+        return getAvatarImage().getAttribute("style").contains("background-position");
     }
 
     @JDIAction("Does profile card has background photo")
-    public boolean hasBackgroundPhoto() {        try {
-        Thread.sleep(1000);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
-        return getBackgroundImage().getAttribute("style").contains("url");
+    public boolean hasBackgroundPhoto() {
+        return getBackgroundImage().getAttribute("style").contains("background-position");
     }
 
     @JDIAction("Does profile card has proper text in 'name' text field")
