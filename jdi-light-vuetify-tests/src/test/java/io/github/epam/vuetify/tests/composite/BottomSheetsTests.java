@@ -9,10 +9,12 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.bottomSheetsPage;
+import static io.github.com.pages.BottomSheetsPage.bottomSheetPlayer;
 import static io.github.com.pages.BottomSheetsPage.insetBottomSheet;
 import static io.github.com.pages.BottomSheetsPage.insetBottomSheetButton;
 import static io.github.com.pages.BottomSheetsPage.persistentBottomSheet;
 import static io.github.com.pages.BottomSheetsPage.persistentBottomSheetButton;
+import static io.github.com.pages.BottomSheetsPage.playerBottomSheetButton;
 import static io.github.com.pages.BottomSheetsPage.vModelBottomSheet;
 import static io.github.com.pages.BottomSheetsPage.vModelBottomSheetButton;
 import static org.hamcrest.Matchers.containsString;
@@ -73,6 +75,24 @@ public class BottomSheetsTests extends TestsInit {
 
         persistentBottomSheet.close();
         persistentBottomSheet.is().hidden();
+    }
+
+    @Test
+    public void playerBottomSheetTest() {
+        bottomSheetPlayer.is().hidden();
+
+        playerBottomSheetButton.click();
+        bottomSheetPlayer.is().displayed();
+        bottomSheetPlayer.progressBar().is().displayed();
+        bottomSheetPlayer.songName().has().text("The Walker");
+        bottomSheetPlayer.songAuthor().has().text("Fitz & The Trantrums");
+        bottomSheetPlayer.arrowLeftButton().click();
+        bottomSheetPlayer.pauseButton().click();
+        bottomSheetPlayer.arrowRightButton().click();
+
+        bottomSheetPlayer.is().displayed();
+        clickOutsideOfSheet(bottomSheetPlayer);
+        bottomSheetPlayer.is().hidden();
     }
 
     @JDIAction("Assert that inset bottom sheet width is 70% of its parent")

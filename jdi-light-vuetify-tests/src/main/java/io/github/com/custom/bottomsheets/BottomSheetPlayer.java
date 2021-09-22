@@ -22,6 +22,7 @@ public class BottomSheetPlayer extends BottomSheet {
     @UI("//button[.//i[contains(@class, 'mdi-pause')]]")
     protected Button pauseButton;
 
+    @UI("//button[.//i[contains(@class, 'mdi-fast-forward')]]")
     protected Button arrowRightButton;
 
 
