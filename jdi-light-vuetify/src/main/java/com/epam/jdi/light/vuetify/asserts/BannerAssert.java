@@ -51,6 +51,8 @@ public class BannerAssert extends UIAssert<BannerAssert, Banner> {
 
     @JDIAction("Assert that banner has button")
     public BannerAssert button() {
+        new Timer(base().getTimeout() * 2000L)
+                .wait(() -> element().getButton().isDisplayed());
         jdiAssert(element().hasButton(), Matchers.is(true));
         return this;
     }
