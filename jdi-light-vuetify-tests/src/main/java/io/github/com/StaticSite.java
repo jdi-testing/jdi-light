@@ -9,13 +9,11 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
-import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.AlertsPage;
-import io.github.com.pages.BadgesPage;
-import io.github.com.pages.DividersPage;
-
 import io.github.com.pages.AvatarsPage;
+import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
+import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
@@ -37,17 +35,17 @@ public class StaticSite {
     @Url("/avatars")
     public static AvatarsPage avatarsPage;
 
-    @Url("/banners")
-    public static BannersPage bannersPage;
-
     @Url("/badges")
     public static BadgesPage badgesPage;
 
-    @WaitAfterAction(3)
-    @Url("/dividers")
-    public static DividersPage dividersPage;
+    @Url("/banners")
+    public static BannersPage bannersPage;
 
     @WaitAfterAction(3)
     @Url("/checkboxes")
     public static CheckboxesPage checkboxesPage;
+
+    @WaitAfterAction(3)
+    @Url("/dividers")
+    public static DividersPage dividersPage;
 }

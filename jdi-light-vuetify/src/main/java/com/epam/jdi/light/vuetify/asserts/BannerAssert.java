@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.complex.Banner;
+import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -12,7 +13,9 @@ public class BannerAssert extends UIAssert<BannerAssert, Banner> {
 
     @JDIAction("Assert that {name} is displayed")
     public BannerAssert displayed() {
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        boolean isDisplayed = new Timer(base().getTimeout() * 1000L)
+                .wait(() -> element().isDisplayed());
+        jdiAssert(isDisplayed, Matchers.is(true));
         return this;
     }
 
