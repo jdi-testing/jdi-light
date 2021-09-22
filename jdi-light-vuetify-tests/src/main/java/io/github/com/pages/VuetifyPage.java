@@ -1,8 +1,10 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.tools.CacheValue;
 import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.JavascriptExecutor;
@@ -35,6 +37,9 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
 
     protected String PAGE_LINK = "";
 
+    @UI("main")
+    public UIElement mainContainer;
+
     /**
      * Custom page object `open` code to support SPA provided by nuxt.
      * @param params are not supported in this particular implementation
@@ -66,7 +71,7 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
         // use the described way to navigate
         // we take a `$nuxt` object from the global scope and call the page router `push` method with the desired url.
         js().executeScript("$nuxt.$router.push({'path': arguments[0]})", PAGE_LINK);
-        Timer.waitCondition(() -> js().executeScript("return document.readyState").equals("complete"));
+        Timer.waitCondition(mainContainer::isDisplayed);
     }
 
     /**
@@ -83,7 +88,7 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, Url.class, VuetifyPage.class)) {
-            throw new RuntimeException("VuetifyPage does not have url annotation.");
+            throw new RuntimeException("VuetifyPage does not have an url annotation.");
         }
 
         PAGE_LINK = field.getAnnotation(Url.class).value().substring(1);
