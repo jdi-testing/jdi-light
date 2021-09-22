@@ -6,7 +6,7 @@ import com.epam.jdi.light.material.asserts.navigation.TabsAssert;
 
 /**
  * To see an example of Stepper web element please visit
- * https://mui.com/components/steppers/
+ * https://jdi-docs.github.io/jdi-light/#tabs
  */
 
 public class Tabs extends UIBaseElement<TabsAssert> implements IsButton {

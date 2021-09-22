@@ -8,7 +8,7 @@ import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
 
 /**
  * To see an example of Badge web element please visit
- * https://mui.com/components/badges/
+ * https://jdi-docs.github.io/jdi-light/#badge
  */
 
 public class Badge extends UIBaseElement<BadgeAssert> {

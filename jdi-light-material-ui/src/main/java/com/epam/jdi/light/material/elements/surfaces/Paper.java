@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 
 /**
  * To see an example of Paper web element please visit
- * https://mui.com/components/paper/
+ * https://jdi-docs.github.io/jdi-light/#paper
  */
 
 public class Paper extends UIBaseElement<TextAssert> implements IsText, HasClick {
