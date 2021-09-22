@@ -82,9 +82,11 @@ public class WebSettings {
         }
         return isNotBlank(DRIVER.domain) ? DRIVER.domain : "";
     }
+
     public static void setDomain(String domain) {
         DRIVER.domain = domain;
     }
+
     public static boolean hasDomain() {
         init();
         return DRIVER.domain != null && DRIVER.domain.contains("://");
@@ -93,15 +95,19 @@ public class WebSettings {
     public static String TEST_GROUP = "";
     // TODO multi properties example
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
+
     public static String useDriver(JFunc<WebDriver> driver) {
         return WebDriverFactory.useDriver(driver);
     }
+
     public static String useDriver(String driverName) {
         return WebDriverFactory.useDriver(driverName);
     }
+
     public static String useDriver(DriverTypes driverType) {
         return WebDriverFactory.useDriver(driverType);
     }
+
     public static String printSmartLocators(IBaseElement el) {
         try {
             return "smart: " + getByLocator(ELEMENT.smartLocator.execute(el, ELEMENT.smartLocatorName.execute(el)));
@@ -134,12 +140,15 @@ public class WebSettings {
             throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
         }
     }
+
     public static JFunc1<IBaseElement, List<WebElement>> SMART_SEARCH = WebSettings::defaultSmartSearch;
+
     private static void fillAction(JAction1<String> action, String name) {
         String prop = null;
         try {
             prop = getProperty(name);
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
+        }
         logger.trace("fillAction(%s=%s)", name, prop == null ? "null" : prop);
         if (isBlank(prop)) return;
         action.execute(prop);
@@ -147,6 +156,7 @@ public class WebSettings {
 
     public static boolean initialized = false;
     public static JAction INIT_FUNC = WebSettings::jdiSetup;
+
     public static void jdiSetup() {
         Properties properties = getProperties(COMMON.testPropertiesPath);
         if (properties.isEmpty()) {
@@ -194,6 +204,7 @@ public class WebSettings {
         fillAction(p -> ELEMENT.getTextType = getEnumValueByName(TextTypes.class, p, SMART_TEXT), "text.type");
         fillAction(p -> ELEMENT.setTextType = getEnumValueByName(SetTextTypes.class, p, CLEAR_SEND_KEYS), "set.text.type");
         // RemoteWebDriver properties
+        fillAction(p -> DRIVER.remoteType = RemoteType.byText(p), "remote.type");
         fillAction(p -> DRIVER.remoteUrl = getRemoteUrl(p), "remote.type");
         fillAction(p -> DRIVER.remoteUrl = p, "driver.remote.url");
         if (hasProperty("driver.remote.run")) {
@@ -204,7 +215,7 @@ public class WebSettings {
         fillAction(p -> LOGS.logLevel = parseLogLevel(p), "log.level");
         logger.setLogLevel(LOGS.logLevel);
         fillAction(p -> LOGS.writeToAllure = onOff(p),
-            hasProperty("allure") ? "allure" : "allure.steps");
+                hasProperty("allure") ? "allure" : "allure.steps");
         fillAction(p -> ELEMENT.smartTemplate = p.split(";")[0], "smart.locator");
         fillAction(p -> ELEMENT.smartName = getSmartSearchFunc(p), "smart.locator.to.name");
         fillAction(p -> ELEMENT.useSmartSearch = getSmartSearchUse(p), "smart.search");
@@ -216,19 +227,19 @@ public class WebSettings {
         }, "headless");
 
         loadCapabilities("chrome.capabilities.path", "chrome.properties",
-            p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
-        loadCapabilities("ff.capabilities.path","ff.properties",
-            p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
-        loadCapabilities("ie.capabilities.path","ie.properties",
-            p -> p.forEach((key,value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
-        loadCapabilities("edge.capabilities.path","edge.properties",
-            p -> p.forEach((key,value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
-        loadCapabilities("opera.capabilities.path","opera.properties",
-            p -> p.forEach((key,value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
-        loadCapabilities("safari.capabilities.path","safari.properties",
-            p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
-        loadCapabilities("common.capabilities.path","common.properties",
-            p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
+                p -> p.forEach((key, value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
+        loadCapabilities("ff.capabilities.path", "ff.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
+        loadCapabilities("ie.capabilities.path", "ie.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
+        loadCapabilities("edge.capabilities.path", "edge.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
+        loadCapabilities("opera.capabilities.path", "opera.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
+        loadCapabilities("safari.capabilities.path", "safari.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
+        loadCapabilities("common.capabilities.path", "common.properties",
+                p -> p.forEach((key, value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
         initialized = true;
     }
 
@@ -251,18 +262,23 @@ public class WebSettings {
     private static boolean onOff(String onOff) {
         return onOff.equals("true") || onOff.equals("on");
     }
+
     private static String getRemoteUrl(String prop) {
         String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
-        switch (value) {
-            case "sauce":
-            case "saucelabs":
+        switch (RemoteType.byText(value)) {
+            case SAUCE:
+            case SAUCE_LABS:
                 DRIVER.capabilities.common = sauceCapabilities();
                 return SAUCE_LABS;
-            case "browserstack": return browserstack();
-            case "selenoid": return SELENOID_LOCAL;
-            default: return SELENIUM_LOCAL_HOST;
+            case BROWSERSTACK:
+                return browserstack();
+            case SELENOID:
+                return SELENOID_LOCAL;
+            default:
+                return SELENIUM_LOCAL_HOST;
         }
     }
+
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
         if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
             throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
@@ -270,6 +286,7 @@ public class WebSettings {
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }
+
     private static UseSmartSearch getSmartSearchUse(String prop) {
         String value = prop.toLowerCase().trim().replaceAll("[^a-z]", "");
         switch (value) {
@@ -299,7 +316,7 @@ public class WebSettings {
         Properties properties = new PropReader(path).getProperties();
         if (properties.isEmpty()) {
             logger.trace("There is no properties in %s", property);
-            File p = new File("."+path);
+            File p = new File("." + path);
             logger.trace("Abs prop path %s, Properties file exists? = %s", p.getAbsolutePath(), p.exists());
             return;
         }
@@ -379,16 +396,24 @@ public class WebSettings {
         }
         return properties;
     }
+
     private static LogInfoDetails getInfoDetailsLevel(String option) {
         switch (option.toLowerCase()) {
-            case "none": return LogInfoDetails.NONE;
-            case "name": return LogInfoDetails.NAME;
-            case "locator": return LogInfoDetails.LOCATOR;
-            case "context": return LogInfoDetails.CONTEXT;
-            case "element": return LogInfoDetails.ELEMENT;
-            default: return LogInfoDetails.ELEMENT;
+            case "none":
+                return LogInfoDetails.NONE;
+            case "name":
+                return LogInfoDetails.NAME;
+            case "locator":
+                return LogInfoDetails.LOCATOR;
+            case "context":
+                return LogInfoDetails.CONTEXT;
+            case "element":
+                return LogInfoDetails.ELEMENT;
+            default:
+                return LogInfoDetails.ELEMENT;
         }
     }
+
     private static List<com.epam.jdi.light.logger.Strategy> getActionStrategy(String strategy) {
         if (isBlank(strategy))
             return asList(FAIL);
@@ -400,9 +425,11 @@ public class WebSettings {
         try {
             String[] split = strategy.split("\\|");
             strategies = map(split, s -> parseStrategy(s.trim()));
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+        }
         return strategies;
     }
+
     private static List<HighlightStrategy> getHighlightStrategy(String strategy) {
         if (isBlank(strategy) || strategy.trim().equalsIgnoreCase("off"))
             return new ArrayList<>();
@@ -412,18 +439,25 @@ public class WebSettings {
         try {
             String[] split = strategy.split("\\|");
             strategies = map(split, s -> HighlightStrategy.parseStrategy(s.trim()));
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+        }
         return strategies;
     }
+
     private static Strategies getStrategy(String prop) {
         String strategy = prop.trim().toLowerCase().replaceAll("[^a-z]", "");
         switch (strategy) {
-            case "jdi": return JDI;
-            case "jdismart": return JDI_SMART;
-            case "selenium": return SELENIUM;
-            default: return JDI;
+            case "jdi":
+                return JDI;
+            case "jdismart":
+                return JDI_SMART;
+            case "selenium":
+                return SELENIUM;
+            default:
+                return JDI;
         }
     }
+
     public static void waitAction(int timeout, JAction action) {
         int oldTimeout = TIMEOUTS.element.get();
         TIMEOUTS.element.set(timeout);

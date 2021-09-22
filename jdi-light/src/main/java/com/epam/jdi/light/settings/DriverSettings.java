@@ -28,6 +28,7 @@ public class DriverSettings {
     public ScreenSize screenSize = new ScreenSize();
     public String domain;
     public String siteName;
+    public RemoteType remoteType;
     public String remoteUrl;
     public Boolean remoteRun = null;
     public String downloadsFolder = mergePath(COMMON.testPath, "resources", "downloads");
