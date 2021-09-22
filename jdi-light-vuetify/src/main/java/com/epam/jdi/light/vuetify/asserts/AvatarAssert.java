@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
+import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -11,11 +12,8 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> {
 
     @JDIAction("Assert that {name} is displayed")
     public AvatarAssert displayed() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new Timer(base().getTimeout() * 1000L)
+                .wait(() -> element().isDisplayed());
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }

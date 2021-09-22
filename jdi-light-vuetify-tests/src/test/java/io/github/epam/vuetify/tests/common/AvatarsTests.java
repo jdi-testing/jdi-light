@@ -2,11 +2,9 @@ package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.avatarsPage;
 import static io.github.com.pages.AvatarsPage.*;
 
@@ -54,9 +52,9 @@ public class AvatarsTests extends TestsInit {
     public void profileCardTests() {
         profileCard.waitFor().is().displayed();
         profileCard.is().displayed();
-        jdiAssert(profileCard.hasProperName("Marcus Obrien"), Matchers.is(true));
-        jdiAssert(profileCard.hasProperJobFunction("Network Engineer"), Matchers.is(true));
-        jdiAssert(profileCard.hasAvatarPhoto(), Matchers.is(true));
-        jdiAssert(profileCard.hasBackgroundPhoto(), Matchers.is(true));
+        profileCard.has().properName("Marcus Obrien");
+        profileCard.has().properJobFunction("Network Engineer");
+        profileCard.has().avatarImage();
+        profileCard.has().backgroundImage();
     }
 }
