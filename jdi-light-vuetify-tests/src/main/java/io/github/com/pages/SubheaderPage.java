@@ -1,0 +1,24 @@
+package io.github.com.pages;
+
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.common.Subheader;
+
+import java.util.List;
+
+/**
+ * To see an example of Subheader web element please visit https://vuetifyjs.com/en/components/subheaders/
+ */
+public class SubheaderPage extends VuetifyPage {
+
+    @UI("#InsetSubheader .v-subheader")
+    public static Subheader insetSubheader;
+
+    @UI("#GridSubheader .v-subheader")
+    public static List<Subheader> gridSubheader;
+
+    @UI("#MenuSubheader .v-subheader")
+    public static Subheader menuSubheader;
+
+    @UI("#SocialMediaSubheader .v-subheader")
+    public static List<Subheader> socialMediaSubheader;
+}
