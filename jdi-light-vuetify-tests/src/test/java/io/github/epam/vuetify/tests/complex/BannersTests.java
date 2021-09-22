@@ -4,13 +4,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.base.Conditions.displayed;
 import static io.github.com.StaticSite.bannersPage;
-import static io.github.com.pages.BannersPage.actionsBanner;
-import static io.github.com.pages.BannersPage.eventsBanner;
-import static io.github.com.pages.BannersPage.iconBanner;
-import static io.github.com.pages.BannersPage.singleBanner;
-import static io.github.com.pages.BannersPage.twoLineBanner;
+import static io.github.com.pages.BannersPage.*;
 
 public class BannersTests extends TestsInit {
 
@@ -21,7 +16,7 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void singleBannerTests() {
-            singleBanner.waitFor(displayed);
+            singleBanner.waitFor().is().displayed();
             singleBanner.is().displayed();
             singleBanner.has().properTitle("My Document");
             singleBanner.has().properText("We can't save your edits");
@@ -34,7 +29,7 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void eventsBannerTests() {
-            eventsBanner.waitFor(displayed);
+            eventsBanner.waitFor().is().displayed();
             eventsBanner.is().displayed();
             eventsBanner.has().button();
             eventsBanner.has().icon();
@@ -45,7 +40,7 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void actionsBannerTests() {
-            actionsBanner.waitFor(displayed);
+            actionsBanner.waitFor().is().displayed();
             actionsBanner.is().displayed();
             actionsBanner.has().buttons();
             actionsBanner.has().checker();
@@ -58,7 +53,7 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void iconBannerTests() {
-            iconBanner.waitFor(displayed);
+            iconBanner.waitFor().is().displayed();
             iconBanner.is().displayed();
             iconBanner.has().buttons();
             iconBanner.has().icon();
@@ -67,7 +62,7 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void twoLineBannerTests() {
-            twoLineBanner.waitFor(displayed);
+            twoLineBanner.waitFor().is().displayed();
             twoLineBanner.is().displayed();
             twoLineBanner.has().buttons();
             twoLineBanner.is().properText("Lorem ipsum dolor sit amet, consectetur adipiscing elit");
