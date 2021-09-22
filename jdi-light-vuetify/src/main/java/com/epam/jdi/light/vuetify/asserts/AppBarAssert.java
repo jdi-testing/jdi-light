@@ -12,6 +12,11 @@ public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
 
     @JDIAction("Assert that {name} is displayed")
     public AppBarAssert displayed() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }
@@ -118,6 +123,12 @@ public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
             jdiAssert(tab.isClickable(), Matchers.is(true));
         }
         jdiAssert(element().hasTabs(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has proper title")
+    public AppBarAssert navigationMenu() {
+        jdiAssert(element().hasNavigationMenu(), Matchers.is(true));
         return this;
     }
 

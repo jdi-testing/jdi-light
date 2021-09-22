@@ -52,7 +52,7 @@ public class AppBar extends UIBaseElement<AppBarAssert> {
     }
 
     @JDIAction("Get '{name}' text field")
-    public UIElement getNavigationMenuContent() {
+    public UIElement getNavigationMenu() {
         return this.find(".v-navigation-drawer__content");
     }
 
@@ -121,6 +121,11 @@ public class AppBar extends UIBaseElement<AppBarAssert> {
     @JDIAction("{name} has icon")
     public boolean hasTabs() {
         return getTabs().size() > 1;
+    }
+
+    @JDIAction("{name} has navigation menu")
+    public boolean hasNavigationMenu() {
+        return getNavigationMenu().isDisplayed();
     }
 
 

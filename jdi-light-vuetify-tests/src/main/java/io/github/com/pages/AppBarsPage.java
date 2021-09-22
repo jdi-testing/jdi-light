@@ -27,7 +27,7 @@ public class AppBarsPage extends VuetifyPage {
     @UI("#scrollThresholdBar")
     public static AppBar scrollThresholdBar;
 
-    @UI("#TwoLineBanner")
+    @UI("#toggleNavigationDrawersBar")
     public static AppBar toggleNavigationDrawersBar;
 
     @UI("//div[@role = 'menu']")

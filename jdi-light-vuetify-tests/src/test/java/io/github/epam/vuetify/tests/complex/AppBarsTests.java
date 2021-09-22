@@ -4,9 +4,16 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.base.Conditions.displayed;
 import static io.github.com.StaticSite.appBarsPage;
-import static io.github.com.pages.AppBarsPage.*;
+import static io.github.com.pages.AppBarsPage.collapsibleBar;
+import static io.github.com.pages.AppBarsPage.denseBar;
+import static io.github.com.pages.AppBarsPage.elevateScrollBar;
+import static io.github.com.pages.AppBarsPage.fadeImageBar;
+import static io.github.com.pages.AppBarsPage.hidingScrollBar;
+import static io.github.com.pages.AppBarsPage.imageBar;
+import static io.github.com.pages.AppBarsPage.optionsMenu;
+import static io.github.com.pages.AppBarsPage.scrollThresholdBar;
+import static io.github.com.pages.AppBarsPage.toggleNavigationDrawersBar;
 
 public class AppBarsTests extends TestsInit {
 
@@ -17,7 +24,7 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void collapsibleBarTests() {
-            collapsibleBar.waitFor(displayed);
+            collapsibleBar.waitFor().is().displayed();
             collapsibleBar.is().displayed();
             collapsibleBar.has().menuButton();
             collapsibleBar.has().properTitleText("Collapsing Bar");
@@ -37,7 +44,7 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void denseBarTests() {
-            denseBar.waitFor(displayed);
+            denseBar.waitFor().is().displayed();
             denseBar.is().displayed();
             denseBar.has().menuButton();
             denseBar.has().properTitleText("Page title");
@@ -46,12 +53,17 @@ public class AppBarsTests extends TestsInit {
             denseBar.has().heartButton();
             denseBar.has().verticalDotsButton();
             denseBar.getVerticalDotsButton().click();
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             optionsMenu.is().displayed();
         }
 
         @Test
         public void elevateScrollBarTests() {
-            elevateScrollBar.waitFor(displayed);
+            elevateScrollBar.waitFor().is().displayed();
             elevateScrollBar.is().displayed();
             elevateScrollBar.has().menuButton();
             elevateScrollBar.has().properTitleText("Title");
@@ -67,7 +79,7 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void imageBarTests() {
-            imageBar.waitFor(displayed);
+            imageBar.waitFor().is().displayed();
             imageBar.is().displayed();
             imageBar.has().menuButton();
             imageBar.has().properTitleText("Title");
@@ -83,7 +95,7 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void hidingScrollBarTests() {
-            hidingScrollBar.waitFor(displayed);
+            hidingScrollBar.waitFor().is().displayed();
             hidingScrollBar.is().displayed();
             hidingScrollBar.has().menuButton();
             hidingScrollBar.has().properTitleText("Title");
@@ -98,7 +110,7 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void fadeImageBarTests() {
-            fadeImageBar.waitFor(displayed);
+            fadeImageBar.waitFor().is().displayed();
             fadeImageBar.is().displayed();
             fadeImageBar.has().menuButton();
             fadeImageBar.has().properTitleText("Title");
@@ -116,9 +128,9 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void scrollThresholdBarTests() {
-            scrollThresholdBar.waitFor(displayed);
-            scrollThresholdBar.scrollPageToBottom();
+            scrollThresholdBar.waitFor().is().displayed();
             scrollThresholdBar.is().displayed();
+            scrollThresholdBar.scrollPageToBottom();
             scrollThresholdBar.has().menuButton();
             scrollThresholdBar.has().properTitleText("Title");
             scrollThresholdBar.has().title();
@@ -130,5 +142,17 @@ public class AppBarsTests extends TestsInit {
             scrollThresholdBar.scrollToBottom();
             scrollThresholdBar.has().headerHeight("56px");
             scrollThresholdBar.has().headerOpacity(0);
+        }
+
+        @Test
+        public void toggleNavigationDrawersBarTests() {
+            toggleNavigationDrawersBar.waitFor().is().displayed();
+            toggleNavigationDrawersBar.scrollPageToBottom();
+            toggleNavigationDrawersBar.is().displayed();
+            toggleNavigationDrawersBar.has().menuButton();
+            toggleNavigationDrawersBar.has().properTitleText("Title");
+            toggleNavigationDrawersBar.has().title();
+            toggleNavigationDrawersBar.getMenuButton().click();
+            toggleNavigationDrawersBar.has().navigationMenu();
         }
 }
