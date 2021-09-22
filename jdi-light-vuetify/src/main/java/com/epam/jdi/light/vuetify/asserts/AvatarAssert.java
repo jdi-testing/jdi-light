@@ -11,6 +11,11 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> {
 
     @JDIAction("Assert that {name} is displayed")
     public AvatarAssert displayed() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }

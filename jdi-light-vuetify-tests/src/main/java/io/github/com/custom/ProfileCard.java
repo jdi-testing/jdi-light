@@ -1,16 +1,10 @@
 package io.github.com.custom;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.tools.Timer;
-import org.hamcrest.Matchers;
+import com.epam.jdi.light.vuetify.elements.common.Avatar;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.elements.init.JDITalk.element;
-
-public class ProfileCard extends Section {
+public class ProfileCard extends Avatar {
 
     @JDIAction("Get '{name}' 'checker' element with name")
     public UIElement getNameArea() {
@@ -34,15 +28,11 @@ public class ProfileCard extends Section {
 
     @JDIAction("Does profile card has avatar photo")
     public boolean hasAvatarPhoto() {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> this.getAvatarImage().isDisplayed());
         return getAvatarImage().getAttribute("style").contains("url");
     }
 
     @JDIAction("Does profile card has background photo")
     public boolean hasBackgroundPhoto() {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> this.getBackgroundImage().isDisplayed());
         return getBackgroundImage().getAttribute("style").contains("url");
     }
 
@@ -55,5 +45,4 @@ public class ProfileCard extends Section {
     public boolean hasProperJobFunction(String text) {
         return getJobFunctionArea().getText().equals(text);
     }
-
 }

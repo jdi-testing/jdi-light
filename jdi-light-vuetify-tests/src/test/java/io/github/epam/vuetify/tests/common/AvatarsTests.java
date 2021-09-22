@@ -7,7 +7,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.elements.base.Conditions.displayed;
 import static io.github.com.StaticSite.avatarsPage;
 import static io.github.com.pages.AvatarsPage.*;
 
@@ -20,7 +19,7 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void avatarsWithSizeTests() {
-        avatarsWithSize.get(1).waitFor(displayed);
+        avatarsWithSize.get(1).waitFor().is().displayed();
         avatarsWithSize.stream().map(Avatar::is).forEach(e -> {
             e.is().displayed();
         });
@@ -34,7 +33,7 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void tileAvatarTests() {
-        tileAvatar.waitFor(displayed);
+        tileAvatar.waitFor().is().displayed();
         tileAvatar.is().displayed();
         tileAvatar.has().icon();
         tileAvatar.has().size("48");
@@ -42,7 +41,7 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void slotAvatarsTests() {
-        slotAvatars.get(1).waitFor(displayed);
+        slotAvatars.get(1).waitFor().is().displayed();
         slotAvatars.stream().map(Avatar::is).forEach(e -> {
             e.is().displayed();
         });
@@ -53,7 +52,7 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void profileCardTests() {
-        profileCard.waitFor(displayed);
+        profileCard.waitFor().is().displayed();
         profileCard.is().displayed();
         jdiAssert(profileCard.hasProperName("Marcus Obrien"), Matchers.is(true));
         jdiAssert(profileCard.hasProperJobFunction("Network Engineer"), Matchers.is(true));
