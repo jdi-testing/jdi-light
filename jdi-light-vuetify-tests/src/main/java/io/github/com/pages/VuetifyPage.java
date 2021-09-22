@@ -37,8 +37,8 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
 
     protected String PAGE_LINK = "";
 
-    @UI("main")
-    public UIElement mainContainer;
+    @UI(".container > *")
+    public UIElement containerContent;
 
     /**
      * Custom page object `open` code to support SPA provided by nuxt.
@@ -71,7 +71,7 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
         // use the described way to navigate
         // we take a `$nuxt` object from the global scope and call the page router `push` method with the desired url.
         js().executeScript("$nuxt.$router.push({'path': arguments[0]})", PAGE_LINK);
-        Timer.waitCondition(mainContainer::isDisplayed);
+        new Timer(200).wait(() -> containerContent.list().all(UIElement::isDisplayed));
     }
 
     /**
