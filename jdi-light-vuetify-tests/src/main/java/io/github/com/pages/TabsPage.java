@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TabsPage extends VuetifyPage {
 
-    @UI("//div[@id = 'AlignTitleTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::div")
+    @UI("#AlignTitleTabs .v-tab")
     public static Tabs alignWithTitleTabs;
 
     @UI("//div[@id = 'CenterActiveTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::div")

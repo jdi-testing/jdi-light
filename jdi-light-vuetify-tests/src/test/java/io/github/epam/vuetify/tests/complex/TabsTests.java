@@ -69,16 +69,16 @@ public class TabsTests extends TestsInit {
         jdiAssert(customIconsTabsButtonBack.get(1).isClickable(),
                 Matchers.is(false));
 
-        customIconsTabsButtonNext.select(1);
-        customIconsTabsButtonNext.select(1);
-        customIconsTabsButtonNext.select(1);
+        do {
+            customIconsTabsButtonNext.select(1);
+        } while (customIconsTabsButtonNext.get(1).isClickable());
 
         jdiAssert(customIconsTabsButtonNext.get(1).isClickable(),
                 Matchers.is(false));
 
-        customIconsTabsButtonBack.select(1);
-        customIconsTabsButtonBack.select(1);
-        customIconsTabsButtonBack.select(1);
+        do {
+            customIconsTabsButtonBack.select(1);
+        } while (customIconsTabsButtonBack.get(1).isClickable());
 
         customIconsTabs.select(1);
         customIconsTabs.get(1).is().text("ITEM 1");
@@ -132,16 +132,16 @@ public class TabsTests extends TestsInit {
         jdiAssert(paginationTabsButtonBack.get(1).isClickable(),
                 Matchers.is(false));
 
-        paginationTabsButtonNext.select(1);
-        paginationTabsButtonNext.select(1);
-        paginationTabsButtonNext.select(1);
+        do {
+            paginationTabsButtonNext.select(1);
+        } while (paginationTabsButtonNext.get(1).isClickable());
 
         jdiAssert(paginationTabsButtonNext.get(1).isClickable(),
                 Matchers.is(false));
 
-        paginationTabsButtonBack.select(1);
-        paginationTabsButtonBack.select(1);
-        paginationTabsButtonBack.select(1);
+        do {
+            paginationTabsButtonBack.select(1);
+        } while (paginationTabsButtonBack.get(1).isClickable());
 
         paginationTabs.select(1);
         paginationTabs.get(1).is().text("ITEM 1");
