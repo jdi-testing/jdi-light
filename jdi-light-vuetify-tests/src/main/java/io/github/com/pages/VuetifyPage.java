@@ -59,8 +59,9 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
      * As far as nuxt is a vue.js based framework, we can use the same commands.
      */
     private void navigate() {
-        if (PAGE_LINK.isEmpty())
+        if (PAGE_LINK.isEmpty()) {
             throw new RuntimeException("VuetifyPage url has not been set.");
+        }
 
         // use the described way to navigate
         // we take a `$nuxt` object from the global scope and call the page router `push` method with the desired url.
