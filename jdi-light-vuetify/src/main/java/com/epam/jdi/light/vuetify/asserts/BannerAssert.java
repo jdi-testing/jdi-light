@@ -13,11 +13,8 @@ public class BannerAssert extends UIAssert<BannerAssert, Banner> {
 
     @JDIAction("Assert that {name} is displayed")
     public BannerAssert displayed() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new Timer(base().getTimeout() * 2000L)
+                .wait(() -> element().isDisplayed());
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }
