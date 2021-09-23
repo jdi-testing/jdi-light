@@ -26,7 +26,6 @@ public class BottomSheetsTests extends TestsInit {
     @BeforeClass
     public void before() {
         bottomSheetsPage.open();
-        bottomSheetsPage.checkOpened();
     }
 
     @Test
