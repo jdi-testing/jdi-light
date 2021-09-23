@@ -9,6 +9,14 @@ import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
+/**
+ * To see an example of App Bar web element please visit https://vuetifyjs.com/en/components/app-bars
+ *
+ * The v-app-bar component is pivotal to any graphical user interface (GUI),
+ * as it generally is the primary source of site navigation.
+ *
+ */
+
 public class AppBar extends UIBaseElement<AppBarAssert> {
 
     @JDIAction("Get '{name}' 'checker' element")

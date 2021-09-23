@@ -15,6 +15,7 @@ import static io.github.com.pages.AppBarsPage.optionsMenu;
 import static io.github.com.pages.AppBarsPage.scrollThresholdBar;
 import static io.github.com.pages.AppBarsPage.toggleNavigationDrawersBar;
 
+
 public class AppBarsTests extends TestsInit {
 
         @BeforeMethod
