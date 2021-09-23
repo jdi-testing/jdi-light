@@ -14,7 +14,6 @@ import com.epam.jdi.light.vuetify.asserts.BannerAssert;
  * It comes in 2 variations single-line and multi-line (implicit).
  * These can have icons which you can use with your message and actions."
  *
- * It is a type alias for a section
  */
 
 public class Banner extends UIBaseElement<BannerAssert> {
