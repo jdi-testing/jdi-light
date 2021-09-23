@@ -6,7 +6,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.avatarsPage;
-import static io.github.com.pages.AvatarsPage.*;
+import static io.github.com.pages.AvatarsPage.avatarsWithSize;
+import static io.github.com.pages.AvatarsPage.profileCard;
+import static io.github.com.pages.AvatarsPage.slotAvatars;
+import static io.github.com.pages.AvatarsPage.tileAvatar;
 
 public class AvatarsTests extends TestsInit {
 
@@ -17,10 +20,9 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void avatarsWithSizeTests() {
-        avatarsWithSize.get(1).waitFor().is().displayed();
-        avatarsWithSize.stream().map(Avatar::is).forEach(e -> {
-            e.is().displayed();
-        });
+        for(Avatar avatar: avatarsWithSize) {
+            avatar.is().displayed();
+        }
         avatarsWithSize.get(1).is().text("36");
         avatarsWithSize.get(2).is().text("48");
         avatarsWithSize.get(3).is().text("62");
@@ -31,18 +33,17 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void tileAvatarTests() {
-        tileAvatar.waitFor().is().displayed();
         tileAvatar.is().displayed();
+        tileAvatar.scrollIntoView();
         tileAvatar.has().icon();
         tileAvatar.has().size("48");
     }
 
     @Test
     public void slotAvatarsTests() {
-        slotAvatars.get(1).waitFor().is().displayed();
-        slotAvatars.stream().map(Avatar::is).forEach(e -> {
-            e.is().displayed();
-        });
+        for(Avatar avatar: slotAvatars) {
+            avatar.is().displayed();
+        }
         slotAvatars.get(1).has().icon();
         slotAvatars.get(2).has().photo();
         slotAvatars.get(3).is().text("CJ");
@@ -50,8 +51,8 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void profileCardTests() {
-        profileCard.waitFor().is().displayed();
         profileCard.is().displayed();
+        profileCard.scrollIntoView();
         profileCard.has().properName("Marcus Obrien");
         profileCard.has().properJobFunction("Network Engineer");
         profileCard.has().avatarImage();

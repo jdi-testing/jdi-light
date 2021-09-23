@@ -1,10 +1,8 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
 import io.github.com.custom.ProfileCard;
-
 import java.util.List;
 
 public class AvatarsPage extends VuetifyPage {
@@ -19,6 +17,5 @@ public class AvatarsPage extends VuetifyPage {
     public static List<Avatar> slotAvatars;
 
     @UI("#profileCard")
-    @WaitAfterAction(2)
     public static ProfileCard profileCard;
 }

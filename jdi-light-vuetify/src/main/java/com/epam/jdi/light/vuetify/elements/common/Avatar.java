@@ -1,5 +1,7 @@
 package com.epam.jdi.light.vuetify.elements.common;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.vuetify.asserts.AvatarAssert;
@@ -28,6 +30,10 @@ public class Avatar extends UIBaseElement<AvatarAssert> {
     @JDIAction("Get {name} icon")
     public boolean hasIcon() {
         return this.find("i").getAttribute("class").contains("v-icon");
+    }
+
+    public void scrollIntoView() {
+        jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
     }
 
     public AvatarAssert is() {

@@ -1,5 +1,7 @@
 package io.github.com.custom;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -36,11 +38,15 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
 
     @JDIAction("Does profile card has avatar image")
     public boolean hasAvatarImage() {
+        new Timer(base().getTimeout() * 1000L)
+            .wait(() -> finds(IMAGES_LINK).get(2).isDisplayed());
         return getAvatarImage().getAttribute("style").contains("url");
     }
 
     @JDIAction("Does profile card has background image")
     public boolean hasBackgroundImage() {
+        new Timer(base().getTimeout() * 1000L)
+            .wait(() -> finds(IMAGES_LINK).get(1).isDisplayed());
         return getBackgroundImage().getAttribute("style").contains("url");
     }
 
@@ -52,6 +58,12 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
     @JDIAction("Does profile card has proper text in 'job function' text field")
     public String hasProperJobFunction() {
         return getJobFunctionArea().getText();
+    }
+
+    public void scrollIntoView() {
+        new Timer(base().getTimeout() * 2000L)
+            .wait(() -> finds(IMAGES_LINK).isDisplayed());
+        jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
     }
 
     public ProfileCardAssert is() {
