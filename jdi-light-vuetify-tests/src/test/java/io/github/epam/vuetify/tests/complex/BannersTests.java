@@ -17,6 +17,7 @@ public class BannersTests extends TestsInit {
         @Test
         public void singleBannerTests() {
             singleBanner.waitFor().is().displayed();
+            singleBanner.scrollIntoView();
             singleBanner.is().displayed();
             singleBanner.has().properTitle("My Document");
             singleBanner.has().properText("We can't save your edits");
@@ -29,8 +30,8 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void eventsBannerTests() {
-            eventsBanner.waitFor().is().displayed();
             eventsBanner.is().displayed();
+            eventsBanner.scrollIntoView();
             eventsBanner.has().button();
             eventsBanner.has().icon();
             eventsBanner.getIcon().click();
@@ -40,8 +41,8 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void actionsBannerTests() {
-            actionsBanner.waitFor().is().displayed();
             actionsBanner.is().displayed();
+            actionsBanner.scrollIntoView();
             actionsBanner.has().buttons();
             actionsBanner.has().checker();
             actionsBanner.is().checkerChecked();
@@ -53,8 +54,8 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void iconBannerTests() {
-            iconBanner.waitFor().is().displayed();
             iconBanner.is().displayed();
+            iconBanner.scrollIntoView();
             iconBanner.has().buttons();
             iconBanner.has().icon();
             iconBanner.has().properText("Three line text string example with two actions");
@@ -62,8 +63,8 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void twoLineBannerTests() {
-            twoLineBanner.waitFor().is().displayed();
             twoLineBanner.is().displayed();
+            twoLineBanner.scrollIntoView();
             twoLineBanner.has().buttons();
             twoLineBanner.is().properText("Lorem ipsum dolor sit amet, consectetur adipiscing elit");
         }

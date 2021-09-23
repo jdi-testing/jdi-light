@@ -1,5 +1,7 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -70,7 +72,7 @@ public class Banner extends UIBaseElement<BannerAssert> {
 
     @JDIAction("{name} has button")
     public boolean hasButton() {
-        return getButton().isClickable();
+        return getButton().isDisplayed();
     }
 
     @JDIAction("{name} has icon")
@@ -90,6 +92,10 @@ public class Banner extends UIBaseElement<BannerAssert> {
 
     public void handleAlert() {
         this.core().driver().switchTo().alert().dismiss();
+    }
+
+    public void scrollIntoView() {
+        jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
     }
 
     public BannerAssert is() {
