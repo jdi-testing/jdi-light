@@ -6,6 +6,17 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.BannerAssert;
 
+/**
+ * To see an example of Banner web element please visit https://jdi-testing.github.io/jdi-light/vuetify/banners
+
+ *
+ * From vuetify docs: "The v-banner component is used as middle-interruptive message to user with 1-2 actions.
+ * It comes in 2 variations single-line and multi-line (implicit).
+ * These can have icons which you can use with your message and actions."
+ *
+ * It is a type alias for a section
+ */
+
 public class Banner extends UIBaseElement<BannerAssert> {
 
     @JDIAction("Get '{name}' 'checker' element")
