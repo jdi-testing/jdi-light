@@ -162,6 +162,10 @@ public class AppBar extends UIBaseElement<AppBarAssert> {
        jsExecute("window.scroll(0, document.body.scrollHeight)");
     }
 
+    public void scrollIntoView() {
+       jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
+    }
+
     public void scrollToBottom() {
        jsExecute("arguments[0].scroll(0, document.body.scrollHeight)", this.getScrollingContainer());
     }
