@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.complex.AppBar;
+import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -12,12 +13,9 @@ public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
 
     @JDIAction("Assert that {name} is displayed")
     public AppBarAssert displayed() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        new Timer(base().getTimeout() * 2000L)
+            .wait(() -> element().isDisplayed());
+        jdiAssert(element().isDisplayed(), Matchers.is(true));        jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }
 
@@ -35,6 +33,8 @@ public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
 
     @JDIAction("Assert that banner has 'checker' element")
     public AppBarAssert title() {
+        new Timer(base().getTimeout() * 2000L)
+            .wait(() -> element().getTitle().isDisplayed());
         jdiAssert(element().hasTitle(), Matchers.is(true));
         return this;
     }
@@ -83,6 +83,9 @@ public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
 
     @JDIAction("Assert that banner has proper title")
     public AppBarAssert headerShadowHidden(String text) {
+        new Timer(base().getTimeout() * 2000L)
+            .wait(() -> element().getHeader().isDisplayed());
+        jdiAssert(element().isDisplayed(), Matchers.is(true));
         jdiAssert(element().getHeaderStatus(), Matchers.containsString(text));
         return this;
     }
