@@ -77,6 +77,8 @@ public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
 
     @JDIAction("Assert that banner has 'checker' element")
     public AppBarAssert verticalDotsButton() {
+        new Timer(base().getTimeout() * 2000L)
+                .wait(() -> element().getVerticalDotsButton().isDisplayed());
         jdiAssert(element().hasVerticalDotsButton(), Matchers.is(true));
         return this;
     }
@@ -85,7 +87,6 @@ public class AppBarAssert extends UIAssert<AppBarAssert, AppBar> {
     public AppBarAssert headerShadowHidden(String text) {
         new Timer(base().getTimeout() * 2000L)
             .wait(() -> element().getHeader().isDisplayed());
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
         jdiAssert(element().getHeaderStatus(), Matchers.containsString(text));
         return this;
     }

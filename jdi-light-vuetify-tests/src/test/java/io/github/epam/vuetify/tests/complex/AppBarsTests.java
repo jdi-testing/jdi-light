@@ -1,9 +1,12 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.appBarsPage;
 import static io.github.com.pages.AppBarsPage.collapsibleBar;
 import static io.github.com.pages.AppBarsPage.denseBar;
@@ -25,7 +28,6 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void collapsibleBarTests() {
-            collapsibleBar.waitFor().is().displayed();
             collapsibleBar.is().displayed();
             collapsibleBar.scrollIntoView();
             collapsibleBar.has().menuButton();
@@ -46,7 +48,6 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void denseBarTests() {
-            denseBar.waitFor().is().displayed();
             denseBar.is().displayed();
             denseBar.scrollIntoView();
             denseBar.has().menuButton();
@@ -56,17 +57,15 @@ public class AppBarsTests extends TestsInit {
             denseBar.has().heartButton();
             denseBar.has().verticalDotsButton();
             denseBar.getVerticalDotsButton().click();
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            new Timer(optionsMenu.base().getTimeout() * 2000L)
+                    .wait(() -> optionsMenu.isDisplayed());
+            jdiAssert(optionsMenu.isDisplayed(), Matchers.is(true));
+
             optionsMenu.is().displayed();
         }
 
         @Test
         public void elevateScrollBarTests() {
-            elevateScrollBar.waitFor().is().displayed();
             elevateScrollBar.is().displayed();
             elevateScrollBar.scrollIntoView();
             elevateScrollBar.has().menuButton();
@@ -83,7 +82,6 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void imageBarTests() {
-            imageBar.waitFor().is().displayed();
             imageBar.is().displayed();
             imageBar.scrollIntoView();
             imageBar.has().menuButton();
@@ -100,7 +98,6 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void hidingScrollBarTests() {
-            hidingScrollBar.waitFor().is().displayed();
             hidingScrollBar.is().displayed();
             hidingScrollBar.scrollIntoView();
             hidingScrollBar.has().menuButton();
@@ -116,7 +113,6 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void fadeImageBarTests() {
-            fadeImageBar.waitFor().is().displayed();
             fadeImageBar.is().displayed();
             fadeImageBar.scrollIntoView();
             fadeImageBar.has().menuButton();
@@ -135,7 +131,6 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void scrollThresholdBarTests() {
-            scrollThresholdBar.waitFor().is().displayed();
             scrollThresholdBar.is().displayed();
             scrollThresholdBar.scrollIntoView();
             scrollThresholdBar.has().menuButton();
@@ -153,9 +148,8 @@ public class AppBarsTests extends TestsInit {
 
         @Test
         public void toggleNavigationDrawersBarTests() {
-            toggleNavigationDrawersBar.waitFor().is().displayed();
-            toggleNavigationDrawersBar.scrollIntoView();
             toggleNavigationDrawersBar.is().displayed();
+            toggleNavigationDrawersBar.scrollIntoView();
             toggleNavigationDrawersBar.has().menuButton();
             toggleNavigationDrawersBar.has().properTitleText("Title");
             toggleNavigationDrawersBar.has().title();
