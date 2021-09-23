@@ -5,9 +5,6 @@ import com.epam.jdi.light.vuetify.elements.common.Subheader;
 
 import java.util.List;
 
-/**
- * To see an example of Subheader web element please visit https://vuetifyjs.com/en/components/subheaders/
- */
 public class SubheaderPage extends VuetifyPage {
 
     @UI("#InsetSubheader .v-subheader")
