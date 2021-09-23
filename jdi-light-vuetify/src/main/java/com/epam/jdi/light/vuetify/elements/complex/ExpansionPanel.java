@@ -10,7 +10,7 @@ import com.epam.jdi.light.vuetify.asserts.ExpansionPanelAssert;
 
 /**
  * To see an example of Expansion Panels web element please visit
- * https://jdi-testing.github.io/jdi-light/vuetify/expansion-panels
+ * https://vuetifyjs.com/en/components/expansion-panels/
  */
 public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
 
