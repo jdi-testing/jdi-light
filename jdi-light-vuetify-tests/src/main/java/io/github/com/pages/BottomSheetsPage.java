@@ -3,6 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import io.github.com.custom.bottomsheets.BottomSheetPlayer;
+import io.github.com.custom.bottomsheets.ListBottomSheet;
 import io.github.com.custom.bottomsheets.TextBottomSheet;
 
 public class BottomSheetsPage extends VuetifyPage {
@@ -30,4 +31,10 @@ public class BottomSheetsPage extends VuetifyPage {
     public static Button playerBottomSheetButton;
     @UI("//div[contains(@class, 'v-dialog__content') and .//div[contains(text(), 'The Walker')]]")
     public static BottomSheetPlayer bottomSheetPlayer;
+
+    // list section
+    @UI("#open-in-list-bottom-sheet > button")
+    public static Button listBottomSheetButton;
+    @UI("//div[contains(@class, 'v-dialog__content') and .//div[contains(text(), 'Open')]]")
+    public static ListBottomSheet listBottomSheet;
 }
