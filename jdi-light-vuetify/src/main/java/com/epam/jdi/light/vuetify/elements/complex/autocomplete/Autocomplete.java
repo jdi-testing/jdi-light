@@ -23,11 +23,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements ISetup {
 
-    private static String combobox;
+    private String combobox;
     private static final String VALUE = "div input[type='hidden']";
     private static final String INPUT = "div input[type='text']";
     private static final String EXPAND = "div .v-input__append-inner";
-    private static String listItems;
+    private String listItems;
 
     @Override
     public void setup(Field field) {
