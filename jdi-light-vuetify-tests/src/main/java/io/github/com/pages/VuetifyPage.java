@@ -37,9 +37,6 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
 
     protected String PAGE_LINK = "";
 
-    @UI(".container > *")
-    public UIElement containerContent;
-
     /**
      * Custom page object `open` code to support SPA provided by nuxt.
      * @param params are not supported in this particular implementation
@@ -71,7 +68,6 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
         // use the described way to navigate
         // we take a `$nuxt` object from the global scope and call the page router `push` method with the desired url.
         js().executeScript("$nuxt.$router.push({'path': arguments[0]})", PAGE_LINK);
-        new Timer(200).wait(() -> containerContent.list().all(UIElement::isDisplayed));
     }
 
     /**
@@ -88,7 +84,7 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, Url.class, VuetifyPage.class)) {
-            throw new RuntimeException("VuetifyPage does not have an url annotation.");
+            throw new RuntimeException("VuetifyPage does not have an Url annotation.");
         }
 
         PAGE_LINK = field.getAnnotation(Url.class).value().substring(1);
