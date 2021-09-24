@@ -24,7 +24,7 @@ public class AlertsTests implements TestsInit {
         html5Page.open();
     }
 
-    @Test(groups = "one_thread")
+    @Test
     public void acceptAlertTest() {
         redButton.click();
         acceptAlert();
@@ -35,7 +35,7 @@ public class AlertsTests implements TestsInit {
         acceptAlert();
     }
 
-    @Test(groups = "one_thread")
+    @Test
     public void dismissAlertTest() {
         redButton.click();
         dismissAlert();
@@ -45,7 +45,7 @@ public class AlertsTests implements TestsInit {
         ghostButton.click();
         dismissAlert();
     }
-    @Test(groups = "one_thread")
+    @Test
     public void getAlertTextTest() {
         redButton.click();
         String text = getAlertText();
@@ -62,14 +62,14 @@ public class AlertsTests implements TestsInit {
         acceptAlert();
     }
 
-    @Test(groups = "one_thread")
+    @Test
     public void inputAndAcceptAlertTest() {
         refresh();
         ghostButton.click();
         inputAndAcceptAlert("Some text");
     }
 
-    @Test(groups = "one_thread")
+    @Test
     public void validateAlertTest() {
         redButton.click();
         validateAndAcceptAlert(is("Red button"));

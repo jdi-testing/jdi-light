@@ -16,11 +16,6 @@
             <class name="io.github.epam.html.tests.debug.DebugTests"/>
         </classes-->
     </test>
-    <groups>
-        <run>
-            <exclude name="one_thread" />
-        </run>
-    </groups>
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener" />
         <listener class-name="io.github.epam.testng.RetryListenerClass" />
