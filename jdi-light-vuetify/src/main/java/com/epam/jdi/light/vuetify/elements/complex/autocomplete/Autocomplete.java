@@ -145,9 +145,11 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     @JDIAction("Check that '{0}' from '{name}' is selected")
     public boolean isSelected(List<String> values) {
         for (int i = 0; i < values.size(); i++) {
-            return value().attr("value").contains(values.get(i));
+            if (!value().attr("value").contains(values.get(i))) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     @JDIAction("Check that '{name}' is disabled")
