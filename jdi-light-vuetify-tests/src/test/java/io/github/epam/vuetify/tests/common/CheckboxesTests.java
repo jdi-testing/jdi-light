@@ -13,6 +13,9 @@ import static io.github.com.pages.CheckboxesPage.modelArray;
 import static io.github.com.pages.CheckboxesPage.modelAsArrayCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelBooleanCheckboxes;
 import static io.github.com.pages.CheckboxesPage.statesCheckboxes;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 
 public class CheckboxesTests extends TestsInit {
 
@@ -23,6 +26,7 @@ public class CheckboxesTests extends TestsInit {
 
     @Test
     public void colorsCheckboxesTest() {
+        assertThat(colorsCheckboxes.size(), not(equalTo(0)));
         colorsCheckboxes.stream().forEach(e -> {
             e.is().checked();
             e.check();
