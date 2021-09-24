@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.pages.AngularPage.tabsSection;
 import static com.jdiai.tools.StringUtils.format;
 

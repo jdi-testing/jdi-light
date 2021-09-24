@@ -2,7 +2,7 @@
 
 ## How to launch web tests on Android emulator  
 
-Stable environment: Java 8, Maven 3.6.3, JDI-Light 1.3.11, TestNG 7.4.0, Aspectj 1.9.*, Appium 1.20.2, Android 10 <br/>
+Stable environment: Java 8, Maven 3.6.3, JDI-Light 1.3.11, TestNG 6.14.3, Aspectj 1.9.*, Appium 1.20.2, Android 10 <br/>
 
 1. Launch Android emulator and wait until home screen is ready.
 1. Launch Appium and find out the listening URL in the console (usually http://0.0.0.0:4723)

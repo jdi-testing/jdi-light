@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.PaginatorSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;

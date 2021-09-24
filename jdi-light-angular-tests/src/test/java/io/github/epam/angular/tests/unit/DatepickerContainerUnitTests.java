@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.*;
 import static io.github.epam.angular.tests.elements.complex.datepicker.TestsDatepickerBase.*;
