@@ -15,7 +15,7 @@
         <allure.maven>2.10.0</allure.maven>
         <allure.testng>2.15.0</allure.testng>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.6</aspectj.version>
+        <aspectj.version>1.9.7</aspectj.version>
     </properties>
 
     <dependencies>
@@ -31,19 +31,6 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.testng}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-lang3</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.4.0</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 

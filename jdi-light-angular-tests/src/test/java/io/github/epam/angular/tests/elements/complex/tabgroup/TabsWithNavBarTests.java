@@ -8,6 +8,7 @@ import java.util.List;
 
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.pages.AngularPage.tabsSection;
+import static com.jdiai.tools.StringUtils.format;
 
 public class TabsWithNavBarTests extends TestsTabGroupBase {
 

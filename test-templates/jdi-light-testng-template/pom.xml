@@ -13,7 +13,7 @@
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <aspectj.version>1.9.6</aspectj.version>
+        <aspectj.version>1.9.7</aspectj.version>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <allure.testng>2.15.0</allure.testng>
         <allure.maven>2.10.0</allure.maven>
@@ -34,12 +34,6 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.testng}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.4.0</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
