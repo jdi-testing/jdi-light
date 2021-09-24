@@ -1,13 +1,9 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.tools.CacheValue;
-import com.epam.jdi.tools.Timer;
-import org.openqa.selenium.JavascriptExecutor;
 
 import java.lang.reflect.Field;
 
