@@ -9,6 +9,10 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
+
+import io.github.com.pages.CardsPage;
+import io.github.com.pages.BreadcrumbsPage;
+import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.AlertsPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
@@ -61,3 +65,12 @@ public class StaticSite {
   
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
+
+    @WaitAfterAction(3)
+    @Url("/checkboxes")
+    public static CheckboxesPage checkboxesPage;
+
+    @Url("/cards")
+    public static CardsPage cardsPage;
+
+}
