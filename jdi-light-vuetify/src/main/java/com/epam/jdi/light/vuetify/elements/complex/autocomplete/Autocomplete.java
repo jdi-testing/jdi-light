@@ -7,11 +7,12 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
 import com.epam.jdi.light.vuetify.asserts.AutocompleteAssert;
+import com.epam.jdi.tools.Timer;
+import org.openqa.selenium.Keys;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.light.elements.base.Conditions.displayed;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -27,6 +28,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     private static final String VALUE = "div input[type='hidden']";
     private static final String INPUT = "div input[type='text']";
     private static final String EXPAND = "div .v-input__append-inner";
+    private static final String MASK = ".v-list-item__mask";
     private String listItems;
 
     @Override
@@ -55,19 +57,23 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     }
 
     public UIElement value() {
-        return $(VALUE, combobox);
+        return combobox().find(VALUE);
     }
 
     private UIElement input() {
-        return $(INPUT, combobox);
+        return combobox().find(INPUT);
     }
 
     private UIElement expander() {
-        return $(EXPAND, combobox);
+        return combobox().find(EXPAND);
     }
 
     public WebList listItems() {
         return $$(listItems);
+    }
+
+    private UIElement mask() {
+        return $(MASK);
     }
 
     @JDIAction("Check that '{name}' is expanded")
@@ -91,22 +97,19 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
 
     @JDIAction("Select '{0}' from '{name}'")
     public void select(String value) {
+        UIElement valueLocator = $("//div[text()='" + value + "']");
+        new Timer(base().getTimeout() * 1000L)
+                .wait(valueLocator::isDisplayed);
         if (!isSelected(value)) {
             $("//div[text()='" + value + "']").click();
         }
     }
 
     @JDIAction("Select '{0}' from '{name}'")
-    public void select(Integer index) {
-        if (!isSelected(listItems().get(index).getText())) {
-            listItems().get(index).click();
-        }
-    }
-
-    @JDIAction("Select '{0}' from '{name}'")
     public void select(List<String> values) {
         values.stream().forEach(e -> {
-            $("//div[text()='" + e + "']").waitFor(displayed);
+            new Timer(base().getTimeout() * 1000L)
+                    .wait(() -> $("//div[text()='" + e + "']").isDisplayed());
             if (!isSelected(e)) {
                 $("//div[text()='" + e + "']").click();
             }
@@ -121,16 +124,10 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     }
 
     @JDIAction("Unselect '{0}' from '{name}'")
-    public void unselect(Integer index) {
-        if (isSelected(listItems().get(index).getText())) {
-            listItems().get(index).click();
-        }
-    }
-
-    @JDIAction("Unselect '{0}' from '{name}'")
     public void unselect(List<String> values) {
         values.stream().forEach(e -> {
-            $("//div[text()='" + e + "']").waitFor(displayed);
+            new Timer(base().getTimeout() * 1000L)
+                    .wait(() -> $("//div[text()='" + e + "']").isDisplayed());
             if (isSelected(e)) {
                 $("//div[text()='" + e + "']").click();
             }
@@ -155,5 +152,19 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
         return input().hasAttribute("disabled");
+    }
+
+    @JDIAction("Type text in the '{name}'s' text field")
+    public void typeText(String value) {
+        input().sendKeys(value);
+        new Timer(base().getTimeout() * 1000L)
+                .wait(() -> mask().isNotEmpty());
+    }
+
+    @JDIAction("Clear text from the {name}'s text field")
+    public void clearTextField() {
+        input().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
+        new Timer(base().getTimeout() * 1000L)
+                .wait(() -> mask().isNotExist());
     }
 }

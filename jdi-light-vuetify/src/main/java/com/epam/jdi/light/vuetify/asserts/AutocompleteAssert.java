@@ -64,25 +64,24 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
 //    public AutocompleteAssert listContainsValues(List<String> values) {
 //        new Timer(base().getTimeout() * 1000L)
 //                .wait(() -> element().listItems().get(1).isDisplayed());
-////        element().list().get(1).waitFor(displayed);
 //        jdiAssert(element().listItems().stream().map(UIElement::getText).toArray(),
 //                Matchers.arrayContainingInAnyOrder(values.toArray()));
 //        return this;
 //    }
 
-//    @JDIAction("Assert that '{name}' is disabled")
-//    public AutocompleteAssert disabled() {
-//        new Timer(base().getTimeout() * 1000L)
-//                .wait(() -> element().isDisplayed());
-//        jdiAssert(element().isDisabled(), Matchers.is(true));
-//        return this;
-//    }
-//
-//    @JDIAction("Assert that '{name}' is expanded")
-//    public AutocompleteAssert active() {
-//        new Timer(base().getTimeout() * 1000L)
-//                .wait(() -> element().isDisplayed());
-//        jdiAssert(element().isDisabled(), Matchers.is(false));
-//        return this;
-//    }
+    @JDIAction("Assert that '{name}' is disabled")
+    public AutocompleteAssert disabled() {
+        new Timer(base().getTimeout() * 1000L)
+                .wait(() -> element().isDisplayed());
+        jdiAssert(element().isDisabled(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is expanded")
+    public AutocompleteAssert active() {
+        new Timer(base().getTimeout() * 1000L)
+                .wait(() -> element().isDisplayed());
+        jdiAssert(element().isDisabled(), Matchers.is(false));
+        return this;
+    }
 }
