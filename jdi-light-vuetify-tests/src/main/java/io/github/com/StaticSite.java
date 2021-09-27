@@ -13,6 +13,9 @@ import io.github.com.pages.AlertsPage;
 import io.github.com.pages.AppBarsPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
+import io.github.com.pages.BannersPage;
+import io.github.com.pages.BreadcrumbsPage;
+import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
@@ -43,6 +46,16 @@ public class StaticSite {
 
     @Url("/badges")
     public static BadgesPage badgesPage;
+
+    @Url("/breadcrumbs")
+    public static BreadcrumbsPage breadcrumbsPage;
+
+    @WaitAfterAction(3)
+    @Url("/checkboxes")
+    public static CheckboxesPage checkboxesPage;
+
+    @Url("/banners")
+    public static BannersPage bannersPage;
 
     @Url("/breadcrumbs")
     public static BreadcrumbsPage breadcrumbsPage;
