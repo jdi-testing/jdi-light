@@ -10,6 +10,10 @@ import com.epam.jdi.light.vuetify.asserts.CheckboxAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 
+/**
+ * To see an example of Checkbox web element please visit https://vuetifyjs.com/en/components/checkboxes/
+ */
+
 public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel {
 
     public String input = "div input";

@@ -13,8 +13,11 @@ import io.github.com.pages.AlertsPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
+import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
+import io.github.com.pages.SubheaderPage;
+
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -34,13 +37,16 @@ public class StaticSite {
 
     @Url("/avatars")
     public static AvatarsPage avatarsPage;
-
-    @Url("/badges")
+  
+     @Url("/badges")
     public static BadgesPage badgesPage;
 
     @Url("/banners")
     public static BannersPage bannersPage;
 
+    @Url("/breadcrumbs")
+    public static BreadcrumbsPage breadcrumbsPage;
+  
     @WaitAfterAction(3)
     @Url("/checkboxes")
     public static CheckboxesPage checkboxesPage;
@@ -48,4 +54,8 @@ public class StaticSite {
     @WaitAfterAction(3)
     @Url("/dividers")
     public static DividersPage dividersPage;
+
+    @Url("/subheaders")
+    public static SubheaderPage subheaderPage;
+
 }
