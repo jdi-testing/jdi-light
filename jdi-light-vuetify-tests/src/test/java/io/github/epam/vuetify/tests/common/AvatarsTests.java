@@ -14,7 +14,7 @@ import static io.github.com.pages.AvatarsPage.profileCard;
 import static io.github.com.pages.AvatarsPage.slotAvatars;
 import static io.github.com.pages.AvatarsPage.tileAvatar;
 
-public class AvatarTests extends TestsInit {
+public class AvatarsTests extends TestsInit {
 
     @BeforeMethod
     public void beforeTest() {
