@@ -4,6 +4,10 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.vuetify.asserts.BadgeAssert;
 
+/**
+ * To see an example of Badge web element please visit https://vuetifyjs.com/en/components/badges/
+ */
+
 public class Badge extends UIBaseElement<BadgeAssert> {
 
     @Override
