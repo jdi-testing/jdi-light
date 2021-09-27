@@ -16,7 +16,6 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void singleBannerTests() {
-            singleBanner.waitFor().is().displayed();
             singleBanner.is().displayed();
             singleBanner.has().properTitle("My Document");
             singleBanner.has().properText("We can't save your edits");
