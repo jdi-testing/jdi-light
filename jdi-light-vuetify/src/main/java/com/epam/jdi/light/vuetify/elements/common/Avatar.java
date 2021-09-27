@@ -4,7 +4,9 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.AvatarAssert;
+import com.epam.jdi.tools.Timer;
 
 /**
  * To see an example of Avatar web element please visit https://jdi-testing.github.io/jdi-light/vuetify/avatars
@@ -17,19 +19,32 @@ import com.epam.jdi.light.vuetify.asserts.AvatarAssert;
 
 public class Avatar extends UIBaseElement<AvatarAssert> {
 
+
+    @JDIAction("Get {name} photo")
+    public UIElement getPhoto() {
+        return this.find("img");
+    }
+
+    @JDIAction("Get {name} photo")
+    public UIElement getIcon() {
+        return this.find("i");
+    }
+
     @JDIAction("Get {name} photo")
     public String hasPhoto() {
-        return this.find("img").getTagName();
+        Timer.waitCondition(getPhoto()::isDisplayed);
+        return getPhoto().getTagName();
+    }
+
+    @JDIAction("Get {name} icon")
+    public boolean hasIcon() {
+        Timer.waitCondition(getIcon()::isDisplayed);
+        return getIcon().getAttribute("class").contains("v-icon");
     }
 
     @JDIAction("Get {name} size")
     public String properSize() {
         return this.core().getAttribute("style");
-    }
-
-    @JDIAction("Get {name} icon")
-    public boolean hasIcon() {
-        return this.find("i").getAttribute("class").contains("v-icon");
     }
 
     public void scrollIntoView() {

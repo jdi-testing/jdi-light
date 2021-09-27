@@ -24,45 +24,39 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
 
     @JDIAction("Get '{name}' background image element")
     public UIElement getBackgroundImage() {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> finds(IMAGES_LINK).get(1).isDisplayed());
         return this.finds(IMAGES_LINK).get(1);
     }
 
     @JDIAction("Get '{name}' avatar image element")
     public UIElement getAvatarImage() {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> finds(IMAGES_LINK).get(2).isDisplayed());
         return this.finds(IMAGES_LINK).get(2);
     }
 
     @JDIAction("Does profile card has avatar image")
     public boolean hasAvatarImage() {
-        new Timer(base().getTimeout() * 1000L)
-            .wait(() -> finds(IMAGES_LINK).get(2).isDisplayed());
+        Timer.waitCondition(getAvatarImage()::isDisplayed);
         return getAvatarImage().getAttribute("style").contains("url");
     }
 
     @JDIAction("Does profile card has background image")
     public boolean hasBackgroundImage() {
-        new Timer(base().getTimeout() * 1000L)
-            .wait(() -> finds(IMAGES_LINK).get(1).isDisplayed());
+        Timer.waitCondition(getBackgroundImage()::isDisplayed);
         return getBackgroundImage().getAttribute("style").contains("url");
     }
 
     @JDIAction("Does profile card has proper text in 'name' text field")
     public String hasProperName() {
+        Timer.waitCondition(getNameArea()::isDisplayed);
         return getNameArea().getText();
     }
 
     @JDIAction("Does profile card has proper text in 'job function' text field")
     public String hasProperJobFunction() {
+        Timer.waitCondition(getJobFunctionArea()::isDisplayed);
         return getJobFunctionArea().getText();
     }
 
     public void scrollIntoView() {
-        new Timer(base().getTimeout() * 2000L)
-            .wait(() -> finds(IMAGES_LINK).isDisplayed());
         jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
     }
 

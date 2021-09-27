@@ -12,8 +12,7 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> {
 
     @JDIAction("Assert that {name} is displayed")
     public AvatarAssert displayed() {
-        new Timer(base().getTimeout() * 2000L)
-                .wait(() -> element().isDisplayed());
+        Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }

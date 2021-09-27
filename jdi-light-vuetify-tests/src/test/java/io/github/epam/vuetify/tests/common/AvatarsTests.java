@@ -34,7 +34,6 @@ public class AvatarsTests extends TestsInit {
     @Test
     public void tileAvatarTests() {
         tileAvatar.is().displayed();
-        tileAvatar.scrollIntoView();
         tileAvatar.has().icon();
         tileAvatar.has().size("48");
     }
@@ -52,7 +51,6 @@ public class AvatarsTests extends TestsInit {
     @Test
     public void profileCardTests() {
         profileCard.is().displayed();
-        profileCard.scrollIntoView();
         profileCard.has().properName("Marcus Obrien");
         profileCard.has().properJobFunction("Network Engineer");
         profileCard.has().avatarImage();
