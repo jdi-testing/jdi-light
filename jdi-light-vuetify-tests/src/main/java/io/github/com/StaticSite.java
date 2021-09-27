@@ -10,12 +10,13 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
 import io.github.com.pages.BottomSheetsPage;
+import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.AlertsPage;
+import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.DividersPage;
-
-import io.github.com.pages.AvatarsPage;
+import io.github.com.pages.SubheaderPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -35,6 +36,9 @@ public class StaticSite {
 
     @Url("/avatars")
     public static AvatarsPage avatarsPage;
+
+    @Url("/breadcrumbs")
+    public static BreadcrumbsPage breadcrumbsPage;
   
     @Url("/badges")
     public static BadgesPage badgesPage;
@@ -43,9 +47,11 @@ public class StaticSite {
     @Url("/dividers")
     public static DividersPage dividersPage;
 
-
     @Url("/bottom-sheets")
     public static BottomSheetsPage bottomSheetsPage;
+
+    @Url("/subheaders")
+    public static SubheaderPage subheaderPage;
 
     @WaitAfterAction(3)
     @Url("/checkboxes")
