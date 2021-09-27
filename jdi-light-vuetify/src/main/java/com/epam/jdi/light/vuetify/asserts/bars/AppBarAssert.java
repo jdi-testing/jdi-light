@@ -64,14 +64,6 @@ public class AppBarAssert  extends BasicBarAssert<AppBar, AppBarAssert> {
     }
 
     @JDIAction("Assert that banner has 'checker' element")
-    public AppBarAssert title() {
-        new Timer(base().getTimeout() * 2000L)
-                .wait(() -> element().getTitle().isDisplayed());
-        jdiAssert(element().hasTitle(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that banner has 'checker' element")
     public AppBarAssert hiddenTitle() {
         jdiAssert(element().hasHiddenTitle(), Matchers.is(true));
         return this;

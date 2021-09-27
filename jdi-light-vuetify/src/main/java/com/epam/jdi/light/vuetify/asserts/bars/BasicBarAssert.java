@@ -25,6 +25,12 @@ public class BasicBarAssert<T extends BasicBar<?,?>, A extends BasicBarAssert<?,
     }
 
     @JDIAction("Assert that banner has 'checker' element")
+    public A title() {
+        jdiAssert(element().hasTitle(), Matchers.is(true));
+        return (A)this;
+    }
+
+    @JDIAction("Assert that banner has 'checker' element")
     public A properTitleText(String text) {
         jdiAssert(element().getTitle().getText(), Matchers.is(text));
         return (A)this;
