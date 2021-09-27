@@ -12,8 +12,7 @@ public class ProfileCardAssert extends UIAssert<ProfileCardAssert, ProfileCard> 
 
     @JDIAction("Assert that {name} is displayed")
     public ProfileCardAssert displayed() {
-        new Timer(base().getTimeout() * 2000L)
-                .wait(() -> element().isDisplayed());
+        Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }
