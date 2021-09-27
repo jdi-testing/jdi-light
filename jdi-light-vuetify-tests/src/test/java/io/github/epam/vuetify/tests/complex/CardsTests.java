@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
@@ -61,7 +62,9 @@ public class CardsTests extends TestsInit {
 
         loadingCard.secondTitle().has().text("Tonight's availability");
         loadingCard.chipsList().stream()
-                .peek(UIElement::isDisplayed)
+                .map(UIElement::is)
+                .peek(UIAssert::displayed)
+                .map(UIAssert::element)
                 .forEach(UIElement::click);
 
         loadingCard.progressBar().isHidden();
