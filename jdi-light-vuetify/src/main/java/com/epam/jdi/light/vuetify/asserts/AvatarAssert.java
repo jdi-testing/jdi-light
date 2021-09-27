@@ -40,4 +40,5 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> {
         jdiAssert(element().hasPhoto(), Matchers.is("img"));
         return this;
     }
+
 }
