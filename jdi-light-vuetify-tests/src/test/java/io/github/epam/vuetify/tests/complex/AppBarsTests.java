@@ -49,7 +49,6 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void denseBarTests() {
             denseBar.is().displayed();
-            denseBar.scrollIntoView();
             denseBar.has().menuButton();
             denseBar.has().properTitleText("Page title");
             denseBar.has().title();

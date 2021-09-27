@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.bars.BasicBarAssert;
+import com.epam.jdi.tools.Timer;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
@@ -42,31 +43,37 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
 
     @JDIAction("{name} has icon")
     public boolean hasMenuButton() {
+        Timer.waitCondition(this.getMenuButton()::isDisplayed);
         return getMenuButton().isClickable();
     }
 
     @JDIAction("{name} has icon")
     public boolean hasTitle() {
+        Timer.waitCondition(this.getTitle()::isDisplayed);
         return getTitle().isVisible();
     }
 
     @JDIAction("{name} has icon")
     public boolean hasHiddenTitle() {
+        Timer.waitCondition(this.getTitle()::isHidden);
         return getTitle().isHidden();
     }
 
     @JDIAction("{name} has icon")
     public boolean hasSearchButton() {
+        Timer.waitCondition(this.getSearchButton()::isDisplayed);
         return getSearchButton().isClickable();
     }
 
     @JDIAction("{name} has icon")
     public boolean hasHeartButton() {
+        Timer.waitCondition(this.getHeartButton()::isDisplayed);
         return getHeartButton().isClickable();
     }
 
     @JDIAction("{name} has icon")
     public boolean hasVerticalDotsButton() {
+        Timer.waitCondition(this.getVerticalDotsButton()::isDisplayed);
         return getVerticalDotsButton().isClickable();
     }
 

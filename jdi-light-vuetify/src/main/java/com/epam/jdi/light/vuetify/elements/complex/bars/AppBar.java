@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.bars.AppBarAssert;
+import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
@@ -55,16 +56,19 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
 
     @JDIAction("{name} has icon")
     public boolean hasChecker() {
+        Timer.waitCondition(this.getChecker()::isDisplayed);
         return getChecker().isClickable();
     }
 
     @JDIAction("{name} has icon")
     public boolean hasTabs() {
+        Timer.waitCondition(this.getTabs()::isDisplayed);
         return getTabs().size() > 1;
     }
 
     @JDIAction("{name} has navigation menu")
     public boolean hasNavigationMenu() {
+        Timer.waitCondition(this.getNavigationMenu()::isDisplayed);
         return getNavigationMenu().isDisplayed();
     }
 
