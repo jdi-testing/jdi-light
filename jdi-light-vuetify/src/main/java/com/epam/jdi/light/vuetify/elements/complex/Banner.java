@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.BannerAssert;
+import com.epam.jdi.tools.Timer;
 
 /**
  * To see an example of Banner web element please visit https://jdi-testing.github.io/jdi-light/vuetify/banners
@@ -57,6 +58,7 @@ public class Banner extends UIBaseElement<BannerAssert> {
 
     @JDIAction("{name} has 'checker' element")
     public boolean hasChecker() {
+        Timer.waitCondition(getChecker()::isDisplayed);
         return getChecker().isExist();
     }
 
@@ -67,16 +69,19 @@ public class Banner extends UIBaseElement<BannerAssert> {
 
     @JDIAction("{name} has title")
     public String hasTitle() {
+        Timer.waitCondition(getTitle()::isDisplayed);
         return getTitle().text();
     }
 
     @JDIAction("{name} has button")
     public boolean hasButton() {
+        Timer.waitCondition(getButton()::isDisplayed);
         return getButton().isDisplayed();
     }
 
     @JDIAction("{name} has icon")
     public boolean hasIcon() {
+        Timer.waitCondition(getIcon()::isDisplayed);
         return getIcon().isExist();
     }
 
@@ -87,6 +92,7 @@ public class Banner extends UIBaseElement<BannerAssert> {
 
     @JDIAction("{name} has buttons")
     public boolean hasButtons() {
+        Timer.waitCondition(getButtons()::isDisplayed);
         return getButtons().size()>1;
     }
 
