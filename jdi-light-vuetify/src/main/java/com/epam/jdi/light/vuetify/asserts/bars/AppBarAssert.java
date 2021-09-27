@@ -3,7 +3,6 @@ package com.epam.jdi.light.vuetify.asserts.bars;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.complex.bars.AppBar;
-import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -27,8 +26,6 @@ public class AppBarAssert  extends BasicBarAssert<AppBar, AppBarAssert> {
 
     @JDIAction("Assert that banner has proper title")
     public AppBarAssert headerShadowHidden(String text) {
-        new Timer(base().getTimeout() * 2000L)
-                .wait(() -> element().getHeader().isDisplayed());
         jdiAssert(element().getHeaderStatus(), Matchers.containsString(text));
         return this;
     }

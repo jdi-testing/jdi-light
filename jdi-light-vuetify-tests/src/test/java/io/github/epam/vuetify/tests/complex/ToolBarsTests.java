@@ -26,6 +26,8 @@ public class ToolBarsTests extends TestsInit {
         backgroundToolbar.has().menuButton();
         backgroundToolbar.has().properTitleText("Vuetify");
         backgroundToolbar.has().title();
+        backgroundToolbar.has().exportButton();
+        backgroundToolbar.has().backgroundImage();
     }
 
     @Test

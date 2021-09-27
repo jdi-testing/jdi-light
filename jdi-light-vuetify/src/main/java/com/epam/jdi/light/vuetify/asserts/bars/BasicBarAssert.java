@@ -18,37 +18,37 @@ public class BasicBarAssert<T extends BasicBar<?,?>, A extends BasicBarAssert<?,
         return (A)this;
     }
 
-    @JDIAction("Assert that banner has 'checker' element")
+    @JDIAction("Assert that {name} has 'menu' button")
     public A menuButton() {
         jdiAssert(element().hasMenuButton(), Matchers.is(true));
         return (A)this;
     }
 
-    @JDIAction("Assert that banner has 'checker' element")
+    @JDIAction("Assert that {name} has title")
     public A title() {
         jdiAssert(element().hasTitle(), Matchers.is(true));
         return (A)this;
     }
 
-    @JDIAction("Assert that banner has 'checker' element")
+    @JDIAction("Assert that {name} has proper text in title")
     public A properTitleText(String text) {
         jdiAssert(element().getTitle().getText(), Matchers.is(text));
         return (A)this;
     }
 
-    @JDIAction("Assert that banner has 'checker' element")
+    @JDIAction("Assert that {name} has 'search' button")
     public A searchButton() {
         jdiAssert(element().hasSearchButton(), Matchers.is(true));
         return (A)this;
     }
 
-    @JDIAction("Assert that banner has 'checker' element")
+    @JDIAction("Assert that {name} has 'heart' button")
     public A heartButton() {
         jdiAssert(element().hasHeartButton(), Matchers.is(true));
         return (A)this;
     }
 
-    @JDIAction("Assert that banner has 'checker' element")
+    @JDIAction("Assert that {name} has 'vertical dots' button")
     public A verticalDotsButton() {
         jdiAssert(element().hasVerticalDotsButton(), Matchers.is(true));
         return (A)this;
