@@ -1,4 +1,4 @@
-package com.epam.jdi.light.vuetify.elements.complex.autocomplete;
+package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;

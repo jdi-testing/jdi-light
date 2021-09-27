@@ -5,7 +5,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
-import com.epam.jdi.light.vuetify.elements.complex.autocomplete.Autocomplete;
+import com.epam.jdi.light.vuetify.elements.complex.Autocomplete;
 
 public class AutocompletesPage extends VuetifyPage {
     @JAutocomplete(combobox = "//div[contains(@class, 'col-12')][1]//div[@role='combobox']",
