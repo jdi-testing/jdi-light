@@ -5,7 +5,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bannersPage;
-import static io.github.com.pages.BannersPage.*;
+import static io.github.com.pages.BannersPage.actionsBanner;
+import static io.github.com.pages.BannersPage.eventsBanner;
+import static io.github.com.pages.BannersPage.iconBanner;
+import static io.github.com.pages.BannersPage.singleBanner;
+import static io.github.com.pages.BannersPage.twoLineBanner;
 
 public class BannersTests extends TestsInit {
 
