@@ -28,8 +28,8 @@ public class AppBarsTests extends TestsInit {
         public void collapsibleBarTests() {
             collapsibleBar.is().displayed();
             collapsibleBar.has().menuButton();
-            collapsibleBar.has().properTitleText("Collapsing Bar");
             collapsibleBar.has().title();
+            collapsibleBar.has().properTitleText("Collapsing Bar");
             collapsibleBar.scrollToBottom();
             collapsibleBar.has().hiddenTitle();
             collapsibleBar.scrollToTop();
@@ -47,8 +47,8 @@ public class AppBarsTests extends TestsInit {
         public void denseBarTests() {
             denseBar.is().displayed();
             denseBar.has().menuButton();
-            denseBar.has().properTitleText("Page title");
             denseBar.has().title();
+            denseBar.has().properTitleText("Page title");
             denseBar.has().searchButton();
             denseBar.has().heartButton();
             denseBar.has().verticalDotsButton();
@@ -61,8 +61,8 @@ public class AppBarsTests extends TestsInit {
         public void elevateScrollBarTests() {
             elevateScrollBar.is().displayed();
             elevateScrollBar.has().menuButton();
-            elevateScrollBar.has().properTitleText("Title");
             elevateScrollBar.has().title();
+            elevateScrollBar.has().properTitleText("Title");
             elevateScrollBar.has().searchButton();
             elevateScrollBar.has().heartButton();
             elevateScrollBar.has().verticalDotsButton();
@@ -76,8 +76,8 @@ public class AppBarsTests extends TestsInit {
         public void imageBarTests() {
             imageBar.is().displayed();
             imageBar.has().menuButton();
-            imageBar.has().properTitleText("Title");
             imageBar.has().title();
+            imageBar.has().properTitleText("Title");
             imageBar.has().searchButton();
             imageBar.has().heartButton();
             imageBar.has().verticalDotsButton();
@@ -91,8 +91,8 @@ public class AppBarsTests extends TestsInit {
         public void hidingScrollBarTests() {
             hidingScrollBar.is().displayed();
             hidingScrollBar.has().menuButton();
-            hidingScrollBar.has().properTitleText("Title");
             hidingScrollBar.has().title();
+            hidingScrollBar.has().properTitleText("Title");
             hidingScrollBar.has().searchButton();
             hidingScrollBar.has().heartButton();
             hidingScrollBar.has().verticalDotsButton();
@@ -105,8 +105,8 @@ public class AppBarsTests extends TestsInit {
         public void fadeImageBarTests() {
             fadeImageBar.is().displayed();
             fadeImageBar.has().menuButton();
-            fadeImageBar.has().properTitleText("Title");
             fadeImageBar.has().title();
+            fadeImageBar.has().properTitleText("Title");
             fadeImageBar.has().searchButton();
             fadeImageBar.has().heartButton();
             fadeImageBar.has().verticalDotsButton();
@@ -122,8 +122,8 @@ public class AppBarsTests extends TestsInit {
         public void scrollThresholdBarTests() {
             scrollThresholdBar.is().displayed();
             scrollThresholdBar.has().menuButton();
-            scrollThresholdBar.has().properTitleText("Title");
             scrollThresholdBar.has().title();
+            scrollThresholdBar.has().properTitleText("Title");
             scrollThresholdBar.has().searchButton();
             scrollThresholdBar.has().heartButton();
             scrollThresholdBar.has().verticalDotsButton();
@@ -138,8 +138,8 @@ public class AppBarsTests extends TestsInit {
         public void toggleNavigationDrawersBarTests() {
             toggleNavigationDrawersBar.is().displayed();
             toggleNavigationDrawersBar.has().menuButton();
-            toggleNavigationDrawersBar.has().properTitleText("Title");
             toggleNavigationDrawersBar.has().title();
+            toggleNavigationDrawersBar.has().properTitleText("Title");
             toggleNavigationDrawersBar.getMenuButton().click();
             toggleNavigationDrawersBar.has().navigationMenu();
         }
