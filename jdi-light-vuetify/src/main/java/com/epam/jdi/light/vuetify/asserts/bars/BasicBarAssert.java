@@ -13,6 +13,7 @@ public class BasicBarAssert<T extends BasicBar<?,?>, A extends BasicBarAssert<?,
     @JDIAction("Assert that {name} is displayed")
     public A displayed() {
         Timer.waitCondition(element()::isDisplayed);
+        element().scrollIntoView();
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return (A)this;
     }
@@ -43,8 +44,6 @@ public class BasicBarAssert<T extends BasicBar<?,?>, A extends BasicBarAssert<?,
 
     @JDIAction("Assert that banner has 'checker' element")
     public A verticalDotsButton() {
-        new Timer(base().getTimeout() * 2000L)
-                .wait(() -> element().getVerticalDotsButton().isDisplayed());
         jdiAssert(element().hasVerticalDotsButton(), Matchers.is(true));
         return (A)this;
     }

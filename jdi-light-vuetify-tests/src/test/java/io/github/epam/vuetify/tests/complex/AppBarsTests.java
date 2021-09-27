@@ -2,11 +2,9 @@ package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.appBarsPage;
 import static io.github.com.pages.AppBarsPage.collapsibleBar;
 import static io.github.com.pages.AppBarsPage.denseBar;
@@ -29,7 +27,6 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void collapsibleBarTests() {
             collapsibleBar.is().displayed();
-            collapsibleBar.scrollIntoView();
             collapsibleBar.has().menuButton();
             collapsibleBar.has().properTitleText("Collapsing Bar");
             collapsibleBar.has().title();
@@ -56,17 +53,13 @@ public class AppBarsTests extends TestsInit {
             denseBar.has().heartButton();
             denseBar.has().verticalDotsButton();
             denseBar.getVerticalDotsButton().click();
-            new Timer(optionsMenu.base().getTimeout() * 2000L)
-                    .wait(() -> optionsMenu.isDisplayed());
-            jdiAssert(optionsMenu.isDisplayed(), Matchers.is(true));
-
+            Timer.waitCondition(optionsMenu::isDisplayed);
             optionsMenu.is().displayed();
         }
 
         @Test
         public void elevateScrollBarTests() {
             elevateScrollBar.is().displayed();
-            elevateScrollBar.scrollIntoView();
             elevateScrollBar.has().menuButton();
             elevateScrollBar.has().properTitleText("Title");
             elevateScrollBar.has().title();
@@ -82,7 +75,6 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void imageBarTests() {
             imageBar.is().displayed();
-            imageBar.scrollIntoView();
             imageBar.has().menuButton();
             imageBar.has().properTitleText("Title");
             imageBar.has().title();
@@ -98,7 +90,6 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void hidingScrollBarTests() {
             hidingScrollBar.is().displayed();
-            hidingScrollBar.scrollIntoView();
             hidingScrollBar.has().menuButton();
             hidingScrollBar.has().properTitleText("Title");
             hidingScrollBar.has().title();
@@ -113,7 +104,6 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void fadeImageBarTests() {
             fadeImageBar.is().displayed();
-            fadeImageBar.scrollIntoView();
             fadeImageBar.has().menuButton();
             fadeImageBar.has().properTitleText("Title");
             fadeImageBar.has().title();
@@ -131,7 +121,6 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void scrollThresholdBarTests() {
             scrollThresholdBar.is().displayed();
-            scrollThresholdBar.scrollIntoView();
             scrollThresholdBar.has().menuButton();
             scrollThresholdBar.has().properTitleText("Title");
             scrollThresholdBar.has().title();
@@ -148,7 +137,6 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void toggleNavigationDrawersBarTests() {
             toggleNavigationDrawersBar.is().displayed();
-            toggleNavigationDrawersBar.scrollIntoView();
             toggleNavigationDrawersBar.has().menuButton();
             toggleNavigationDrawersBar.has().properTitleText("Title");
             toggleNavigationDrawersBar.has().title();
