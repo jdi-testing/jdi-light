@@ -1,11 +1,15 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import com.epam.jdi.tools.CacheValue;
-import org.openqa.selenium.JavascriptExecutor;
+
+import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.elements.common.WindowsManager.getWindows;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.WebSettings.init;
 
 /**
@@ -25,7 +29,10 @@ import static com.epam.jdi.light.settings.WebSettings.init;
  *     should extend this class.
  * </p>
  */
-public abstract class VuetifyPage extends WebPage {
+public abstract class VuetifyPage extends WebPage implements ISetup {
+
+    protected String PAGE_LINK = "";
+
     /**
      * Custom page object `open` code to support SPA provided by nuxt.
      * @param params are not supported in this particular implementation
@@ -50,14 +57,13 @@ public abstract class VuetifyPage extends WebPage {
      * As far as nuxt is a vue.js based framework, we can use the same commands.
      */
     private void navigate() {
-        // get the page link, i.e. @Url("/alerts") -> "/alerts"
-        // this code is written for a dev purpose and should be refactored to get this data from the annotation
-        // dear contributors, please fix this before a release
-        String pageLink = this.url.split("vuetify")[1];
+        if (PAGE_LINK.isEmpty()) {
+            throw new RuntimeException("VuetifyPage url has not been set.");
+        }
 
         // use the described way to navigate
         // we take a `$nuxt` object from the global scope and call the page router `push` method with the desired url.
-        ((JavascriptExecutor) this.driver()).executeScript("$nuxt.$router.push({'path': arguments[0]})", pageLink);
+        js().executeScript("$nuxt.$router.push({'path': arguments[0]})", PAGE_LINK);
     }
 
     /**
@@ -69,5 +75,14 @@ public abstract class VuetifyPage extends WebPage {
         getWindows();
         isTop.set(true);
         setCurrentPage(this);
+    }
+
+    @Override
+    public void setup(Field field) {
+        if (!fieldHasAnnotation(field, Url.class, VuetifyPage.class)) {
+            throw new RuntimeException("VuetifyPage does not have an Url annotation.");
+        }
+
+        PAGE_LINK = field.getAnnotation(Url.class).value().substring(1);
     }
 }
