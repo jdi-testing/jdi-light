@@ -17,7 +17,8 @@ import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
 import io.github.com.pages.SubheaderPage;
-
+import io.github.com.pages.AvatarsPage;
+import io.github.com.pages.TabsPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -55,7 +56,8 @@ public class StaticSite {
     @Url("/dividers")
     public static DividersPage dividersPage;
 
+    @Url("/tabs")
+    public static TabsPage tabsPage;
+  
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
-
-}
