@@ -60,15 +60,6 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
         return this;
     }
 
-//    @JDIAction("Assert that '{name}' contains '{0}'")
-//    public AutocompleteAssert listContainsValues(List<String> values) {
-//        new Timer(base().getTimeout() * 1000L)
-//                .wait(() -> element().listItems().get(1).isDisplayed());
-//        jdiAssert(element().listItems().stream().map(UIElement::getText).toArray(),
-//                Matchers.arrayContainingInAnyOrder(values.toArray()));
-//        return this;
-//    }
-
     @JDIAction("Assert that '{name}' is disabled")
     public AutocompleteAssert disabled() {
         new Timer(base().getTimeout() * 1000L)

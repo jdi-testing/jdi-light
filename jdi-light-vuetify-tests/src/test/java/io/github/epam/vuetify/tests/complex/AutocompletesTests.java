@@ -83,8 +83,6 @@ public class AutocompletesTests extends TestsInit {
         selectAutocomplete.expand();
         selectAutocomplete.is().expanded();
         selectAutocomplete.select(valuesToSelect);
-//        selectAutocomplete.close(); // element is not clickable at the point
-//        selectAutocomplete.is().closed();
         selectAutocomplete.is().selected(valuesToSelect);
     }
 
