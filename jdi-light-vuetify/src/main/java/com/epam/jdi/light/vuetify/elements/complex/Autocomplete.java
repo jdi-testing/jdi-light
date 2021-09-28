@@ -8,15 +8,11 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
 import com.epam.jdi.light.vuetify.asserts.AutocompleteAssert;
 import com.epam.jdi.tools.Timer;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -68,15 +64,15 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return combobox().find(INPUT);
     }
 
-    private WebElement inputForJS() {
-        WebElement comboboxEl;
-        if (combobox.startsWith("//")) {
-            comboboxEl = getDriver().findElement(By.xpath(combobox));
-        } else {
-            comboboxEl = getDriver().findElement(By.cssSelector(combobox));
-        }
-        return comboboxEl.findElement(By.cssSelector(INPUT));
-    }
+//    private WebElement inputForJS() {
+//        WebElement comboboxEl;
+//        if (combobox.startsWith("//")) {
+//            comboboxEl = getDriver().findElement(By.xpath(combobox));
+//        } else {
+//            comboboxEl = getDriver().findElement(By.cssSelector(combobox));
+//        }
+//        return comboboxEl.findElement(By.cssSelector(INPUT));
+//    }
 
     private UIElement expander() {
         return combobox().find(EXPAND);
