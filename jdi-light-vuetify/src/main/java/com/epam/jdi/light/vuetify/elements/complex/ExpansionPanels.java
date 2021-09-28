@@ -5,32 +5,27 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
 import com.epam.jdi.light.vuetify.asserts.ExpansionPanelAssert;
 
-import java.lang.reflect.Field;
 import java.util.List;
-
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 /**
  * To see an example of Expansion Panels web element please visit
  * https://vuetifyjs.com/en/components/expansion-panels/
  */
-public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?, ?>, WebList>> implements ISetup {
+public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?, ?>, WebList>> {
 
-    protected String ROOT_LOCATOR = ".v-expansion-panels";
-    protected String PANELS_LOCATOR = ".v-expansion-panel";
+    @UI(".v-expansion-panel")
+    private WebList panels;
 
     @Override
     public WebList list() {
-        return $$(PANELS_LOCATOR, this).setName(getName() + " expansion panels");
+        panels.refresh();
+        return panels;
     }
 
     @JDIAction("Get Panels from '{name}'")
@@ -43,22 +38,6 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
     public boolean isEnabled() {
         return panels().stream()
                 .allMatch(ExpansionPanel::isEnabled);
-    }
-
-    @Override
-    public void setup(Field field) {
-        if (fieldHasAnnotation(field, UI.class, ExpansionPanels.class)) {
-            UI annotation = field.getAnnotation(UI.class);
-            initializeLocators(annotation);
-        }
-        this.setCore(ExpansionPanels.class, $(ROOT_LOCATOR));
-        this.setName(String.format("Expansion panels container %s", field.getName()));
-    }
-
-    private void initializeLocators(UI annotation) {
-        if (!annotation.value().isEmpty()) {
-            ROOT_LOCATOR = annotation.value();
-        }
     }
 
     public static class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
