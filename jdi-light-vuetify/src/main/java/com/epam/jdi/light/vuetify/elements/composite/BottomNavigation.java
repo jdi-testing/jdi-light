@@ -23,7 +23,7 @@ public class BottomNavigation extends UIBaseElement<BottomNavigationAssert> {
 
     @JDIAction("Grt {name} class attribute")
     public String getStyleAttribute() {
-        return core().getAttribute("class");
+        return core().getAttribute("style");
     }
 
     @JDIAction("Get {name} transform")
@@ -60,7 +60,7 @@ public class BottomNavigation extends UIBaseElement<BottomNavigationAssert> {
         }
     }
 
-//    public BottomNavigationAssert is() {
-//        return new BottomNavigationAssert().set(this);
-//    }
+    public BottomNavigationAssert is() {
+        return new BottomNavigationAssert().set(this);
+    }
 }
