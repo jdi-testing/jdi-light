@@ -26,14 +26,19 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
         return this.find(".mdi-menu");
     }
 
-    @JDIAction("Get {name} 'checker' element's state")
-    public String getHeaderStyle() {
-        return getHeader().getAttribute("style");
+    @JDIAction("Get '{name}' 'checker' element")
+    public UIElement getMapImage() {
+        return this.find(".v-card--flat");
     }
 
-    @JDIAction("Get {name} 'checker' element's state")
-    public String getHeaderOpacity() {
-        return getHeader().firstChild().getAttribute("style");
+    @JDIAction("Get '{name}' 'checker' element")
+    public UIElement getGpsButton() {
+        return this.find(".mdi-crosshairs-gps");
+    }
+
+    @JDIAction("Get '{name}' 'checker' element")
+    public UIElement getInput() {
+        return this.find("input");
     }
 
     @JDIAction("Get '{name}' buttons")
@@ -56,6 +61,49 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     public boolean hasExportButton() {
         Timer.waitCondition(getExportButton()::isDisplayed);
         return getExportButton().isClickable();
+    }
+
+    @JDIAction("{name} has icon")
+    public boolean hasGpsButton() {
+        Timer.waitCondition(getGpsButton()::isClickable);
+        return getGpsButton().isClickable();
+    }
+
+    @JDIAction("{name} has icon")
+    public boolean hasInput() {
+        Timer.waitCondition(getInput()::isDisplayed);
+        return getInput().isVisible();
+    }
+
+    @JDIAction("{name} has icon")
+    public boolean hasMapImage() {
+        Timer.waitCondition(getMapImage()::isDisplayed);
+        return getMapImage().getAttribute("style").contains("url");
+    }
+
+        @JDIAction("{name} has icon")
+    public boolean isCollapsed() {
+        return getHeader().getAttribute("class").contains("collapsed");
+    }
+
+    @JDIAction("{name} has icon")
+    public boolean isDense() {
+        return getHeader().getAttribute("class").contains("dense");
+    }
+
+    @JDIAction("{name} has icon")
+    public boolean isExtended() {
+        return getHeader().getAttribute("class").contains("extended");
+    }
+
+    @JDIAction("{name} has icon")
+    public boolean getHeight(String height) {
+        return getHeader().getAttribute("style").equals(String.format("height: %spx;",height));
+    }
+
+    @JDIAction("{name} has icon")
+    public boolean isInputFocused() {
+        return this.find(".v-input").getAttribute("class").contains("is-focused");
     }
 
     @JDIAction("{name} has icon")
