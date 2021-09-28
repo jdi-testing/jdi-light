@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,7 +11,11 @@ import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 import static io.github.com.StaticSite.paginationPage;
-import static io.github.com.pages.PaginationPage.*;
+import static io.github.com.pages.PaginationPage.circlePagination;
+import static io.github.com.pages.PaginationPage.disabledPagination;
+import static io.github.com.pages.PaginationPage.iconsPagination;
+import static io.github.com.pages.PaginationPage.lengthPagination;
+import static io.github.com.pages.PaginationPage.totalVisiblePagination;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
