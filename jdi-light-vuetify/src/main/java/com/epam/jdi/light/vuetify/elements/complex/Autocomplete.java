@@ -8,11 +8,15 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
 import com.epam.jdi.light.vuetify.asserts.AutocompleteAssert;
 import com.epam.jdi.tools.Timer;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -64,6 +68,16 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return combobox().find(INPUT);
     }
 
+    private WebElement inputForJS() {
+        WebElement comboboxEl;
+        if (combobox.startsWith("//")) {
+            comboboxEl = getDriver().findElement(By.xpath(combobox));
+        } else {
+            comboboxEl = getDriver().findElement(By.cssSelector(combobox));
+        }
+        return comboboxEl.findElement(By.cssSelector(INPUT));
+    }
+
     private UIElement expander() {
         return combobox().find(EXPAND);
     }
@@ -101,7 +115,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         new Timer(base().getTimeout() * 1000L)
                 .wait(valueLocator::isDisplayed);
         if (!isSelected(value)) {
-            $("//div[text()='" + value + "']").click();
+            valueLocator.click();
         }
     }
 
@@ -154,16 +168,20 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return input().hasAttribute("disabled");
     }
 
-    @JDIAction("Type text in the '{name}'s' text field")
+    @JDIAction("Type text in the {name}'s text field")
     public void typeText(String value) {
         input().sendKeys(value);
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> mask().isNotEmpty());
     }
 
-    @JDIAction("Clear text from the {name}'s text field")
+    @JDIAction("Clear text in the {name}'s text field")
     public void clearTextField() {
-        input().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
+        input().doubleClick();
+        input().sendKeys(Keys.BACK_SPACE);
+//        input().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
+//        JavascriptExecutor js = (JavascriptExecutor)getDriver();
+//        js.executeScript("arguments[0].value = '';", inputForJS());
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> mask().isNotExist());
     }
