@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
  * To see an example of Pagination web element please visit
  * https://vuetifyjs.com/en/components/paginations/
  */
-public class Pagination extends UIBaseElement<PaginationAssert> implements ISelector {
+public class Pagination extends UIListBase<PaginationAssert> {
 
     private static final String CORE_CLASS_DISABLED = "v-pagination--disabled";
     private static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
