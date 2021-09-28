@@ -10,13 +10,19 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
 import io.github.com.pages.BottomSheetsPage;
+import io.github.com.pages.CardsPage;
 import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.AlertsPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
+import io.github.com.pages.BannersPage;
+import io.github.com.pages.BreadcrumbsPage;
+import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
 import io.github.com.pages.SubheaderPage;
+import io.github.com.pages.AvatarsPage;
+import io.github.com.pages.TabsPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -36,12 +42,19 @@ public class StaticSite {
 
     @Url("/avatars")
     public static AvatarsPage avatarsPage;
+  
+     @Url("/badges")
+    public static BadgesPage badgesPage;
+
+    @Url("/banners")
+    public static BannersPage bannersPage;
 
     @Url("/breadcrumbs")
     public static BreadcrumbsPage breadcrumbsPage;
   
-    @Url("/badges")
-    public static BadgesPage badgesPage;
+    @WaitAfterAction(3)
+    @Url("/checkboxes")
+    public static CheckboxesPage checkboxesPage;
 
     @WaitAfterAction(3)
     @Url("/dividers")
@@ -50,11 +63,17 @@ public class StaticSite {
     @Url("/bottom-sheets")
     public static BottomSheetsPage bottomSheetsPage;
 
+    @Url("/tabs")
+    public static TabsPage tabsPage;
+  
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
 
     @WaitAfterAction(3)
     @Url("/checkboxes")
     public static CheckboxesPage checkboxesPage;
+
+    @Url("/cards")
+    public static CardsPage cardsPage;
 
 }
