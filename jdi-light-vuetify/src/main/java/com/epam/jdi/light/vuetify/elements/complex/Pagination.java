@@ -9,7 +9,10 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
 import org.openqa.selenium.By;
 
-import java.util.*;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
 /**
