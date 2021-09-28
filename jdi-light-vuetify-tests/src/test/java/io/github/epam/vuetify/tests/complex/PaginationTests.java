@@ -57,15 +57,14 @@ public class PaginationTests extends TestsInit {
                 .has().size(4)
                 .enabled()
                 .started();
-
-        for (String page : circle) {
+        circle.forEach(page -> {
             circlePagination.select(page);
             circlePagination.has()
                     .selected(Integer.parseInt(page))
                     .selected(page)
                     .value(page)
                     .enabled(page);
-        }
+        });
         circlePagination
                 .is().ended()
                 .has().values(circle);
@@ -78,13 +77,12 @@ public class PaginationTests extends TestsInit {
                 .has().size(4)
                 .enabled()
                 .started();
-
-        for (Button button : iconsPagination.buttons()) {
+        iconsPagination.buttons().forEach(button -> {
             button.click();
             iconsPagination
                     .is().selected(button.getText())
                     .has().values(button.getText());
-        }
+        });
         iconsPagination
                 .has().values(icons)
                 .is().ended();
@@ -137,7 +135,10 @@ public class PaginationTests extends TestsInit {
 
         List<String> actualButtons = new ArrayList<>();
         ListIterator<String> it = totalVisiblePagination.listIterator();
-        it.forEachRemaining(actualButtons::add);
+        while (it.hasNext()) {
+            actualButtons.add(it.next());
+        }
+        totalVisiblePagination.is().ended();
         assertThat(actualButtons, equalTo(totalVisible));
         actualButtons.clear();
 
@@ -151,8 +152,7 @@ public class PaginationTests extends TestsInit {
                 .limit(sizeOfPreviousCheck)
                 .collect(Collectors.toList());
         assertThat(actualButtons, equalTo(expected));
-        totalVisiblePagination
-                .is().started();
+        totalVisiblePagination.is().started();
     }
 
 }
