@@ -64,16 +64,6 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return combobox().find(INPUT);
     }
 
-//    private WebElement inputForJS() {
-//        WebElement comboboxEl;
-//        if (combobox.startsWith("//")) {
-//            comboboxEl = getDriver().findElement(By.xpath(combobox));
-//        } else {
-//            comboboxEl = getDriver().findElement(By.cssSelector(combobox));
-//        }
-//        return comboboxEl.findElement(By.cssSelector(INPUT));
-//    }
-
     private UIElement expander() {
         return combobox().find(EXPAND);
     }
@@ -175,9 +165,6 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     public void clearTextField() {
         input().doubleClick();
         input().sendKeys(Keys.BACK_SPACE);
-//        input().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
-//        JavascriptExecutor js = (JavascriptExecutor)getDriver();
-//        js.executeScript("arguments[0].value = '';", inputForJS());
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> mask().isNotExist());
     }
