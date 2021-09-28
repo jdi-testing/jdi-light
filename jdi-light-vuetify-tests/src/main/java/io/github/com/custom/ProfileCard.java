@@ -1,57 +1,70 @@
 package io.github.com.custom;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.Conditions;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.composite.Section;
-import org.openqa.selenium.By;
+import com.epam.jdi.tools.Timer;
+import io.github.com.custom.asserts.ProfileCardAssert;
 
-public class ProfileCard extends Section {
+public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
 
-    public static final String PROFILE_CARD_LOCATOR = "//div[@id = 'profileCard']";
-    private static final String BACKGROUND_IMAGE_LOCATOR = PROFILE_CARD_LOCATOR + "/div/div/div[contains(@class, 'v-image')]";
-    private static final String AVATAR_IMAGE_LOCATOR = "//div[contains(@class, 'v-avatar')]//div[contains(@class, 'image--cover')]";
-    private static final String NAME_AREA_LOCATOR = PROFILE_CARD_LOCATOR + "//div[@class = 'v-list-item__title text-h6']";
-    private static final String JOB_FUNCTION_AREA_LOCATOR = "//div[@class = 'v-list-item__subtitle']";
+    private static final String IMAGES_LINK = ".v-image__image--cover";
 
-    @JDIAction("Does profile card has avatar photo")
-    public boolean hasAvatarPhoto() {
-        return avatarImage().getAttribute("style").contains("background-image");
+    @JDIAction("Get '{name}' 'checker' element with name")
+    public UIElement getNameArea() {
+        return this.find(".v-list-item__title");
     }
 
-    @JDIAction("Does profile card has background photo")
-    public boolean hasBackgroundPhoto() {
-        return backgroundImage().getAttribute("style").contains("background-image");
+    @JDIAction("Get '{name}' element with job function")
+    public UIElement getJobFunctionArea() {
+        return this.find(".v-list-item__subtitle");
+    }
+
+    @JDIAction("Get '{name}' background image element")
+    public UIElement getBackgroundImage() {
+        return this.finds(IMAGES_LINK).get(1);
+    }
+
+    @JDIAction("Get '{name}' avatar image element")
+    public UIElement getAvatarImage() {
+        return this.finds(IMAGES_LINK).get(2);
+    }
+
+    @JDIAction("Does profile card has avatar image")
+    public boolean hasAvatarImage() {
+        Timer.waitCondition(getAvatarImage()::isDisplayed);
+        return getAvatarImage().getAttribute("style").contains("url");
+    }
+
+    @JDIAction("Does profile card has background image")
+    public boolean hasBackgroundImage() {
+        Timer.waitCondition(getBackgroundImage()::isDisplayed);
+        return getBackgroundImage().getAttribute("style").contains("url");
     }
 
     @JDIAction("Does profile card has proper text in 'name' text field")
-    public boolean hasProperName(String text) {
-        return nameArea().getText().equals(text);
+    public String hasProperName() {
+        Timer.waitCondition(getNameArea()::isDisplayed);
+        return getNameArea().getText();
     }
 
     @JDIAction("Does profile card has proper text in 'job function' text field")
-    public boolean hasProperJobFunction(String text) {
-        return jobFunctionArea().getText().equals(text);
+    public String hasProperJobFunction() {
+        Timer.waitCondition(getJobFunctionArea()::isDisplayed);
+        return getJobFunctionArea().getText();
     }
 
-    public void waitUntilImagesAreDisplayed() {
-        backgroundImage().waitFor(Conditions.containsAttribute("style", "background-image"));
-        avatarImage().waitFor(Conditions.containsAttribute("style", "background-image"));
+    public void scrollIntoView() {
+        jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
     }
 
-    protected UIElement nameArea() {
-        return new UIElement(By.xpath(NAME_AREA_LOCATOR));
+    public ProfileCardAssert is() {
+        return new ProfileCardAssert().set(this);
     }
 
-    protected UIElement jobFunctionArea() {
-        return new UIElement(By.xpath(JOB_FUNCTION_AREA_LOCATOR));
-    }
-
-    protected UIElement backgroundImage() {
-        return new UIElement(By.xpath(BACKGROUND_IMAGE_LOCATOR));
-    }
-
-    protected UIElement avatarImage() {
-        return new UIElement(By.xpath(AVATAR_IMAGE_LOCATOR));
+    public ProfileCardAssert has() {
+        return this.is();
     }
 }
