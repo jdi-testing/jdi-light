@@ -2,9 +2,11 @@ package com.epam.jdi.light.vuetify.elements.complex.bars;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.bars.ToolBarAssert;
 import com.epam.jdi.tools.Timer;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * To see examples of Tool Bars web elements please visit https://vuetifyjs.com/en/components/toolbars
@@ -37,18 +39,28 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     }
 
     @JDIAction("Get '{name}' 'checker' element")
+    public UIElement getDeleteButton() {
+        return this.find(".mdi-delete");
+    }
+
+    @JDIAction("Get '{name}' 'checker' element")
+    public UIElement getCloseButton() {
+        return this.find(".mdi-close");
+    }
+
+    @JDIAction("Get '{name}' 'checker' element")
+    public UIElement getAppsButton() {
+        return this.find(".mdi-apps");
+    }
+
+    @JDIAction("Get '{name}' 'checker' element")
     public UIElement getInput() {
         return this.find("input");
     }
 
-    @JDIAction("Get '{name}' buttons")
-    public WebList getTabs() {
-        return this.finds(".v-tab");
-    }
-
-    @JDIAction("Get '{name}' text field")
-    public UIElement getNavigationMenu() {
-        return this.find(".v-navigation-drawer__content");
+    @JDIAction("Get '{name}' 'checker' element")
+    public UIElement getSelectOptionsField() {
+        return this.find(".v-select__selections");
     }
 
     @JDIAction("{name} has icon")
@@ -70,6 +82,24 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     }
 
     @JDIAction("{name} has icon")
+    public boolean hasDeleteButton() {
+        Timer.waitCondition(getDeleteButton()::isClickable);
+        return getDeleteButton().isClickable();
+    }
+
+    @JDIAction("{name} has icon")
+    public boolean hasCloseButton() {
+        Timer.waitCondition(getCloseButton()::isClickable);
+        return getCloseButton().isClickable();
+    }
+
+    @JDIAction("{name} has icon")
+    public boolean hasAppsButton() {
+        Timer.waitCondition(getAppsButton()::isClickable);
+        return getAppsButton().isClickable();
+    }
+
+    @JDIAction("{name} has icon")
     public boolean hasInput() {
         Timer.waitCondition(getInput()::isDisplayed);
         return getInput().isVisible();
@@ -81,7 +111,13 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
         return getMapImage().getAttribute("style").contains("url");
     }
 
-        @JDIAction("{name} has icon")
+    @JDIAction("{name} has icon")
+    public boolean hasSelectOptionsField() {
+        Timer.waitCondition(getSelectOptionsField()::isDisplayed);
+        return getSelectOptionsField().isDisplayed();
+    }
+
+    @JDIAction("{name} has icon")
     public boolean isCollapsed() {
         return getHeader().getAttribute("class").contains("collapsed");
     }
@@ -102,20 +138,22 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     }
 
     @JDIAction("{name} has icon")
+    public String getHeaderColor() {
+        return Arrays.stream(getHeader()
+                        .getAttribute("class")
+                        .split(" "))
+                        .map(String::new)
+                        .collect(Collectors.toList()).get(3);
+    }
+
+    @JDIAction("{name} has icon")
     public boolean isInputFocused() {
         return this.find(".v-input").getAttribute("class").contains("is-focused");
     }
 
     @JDIAction("{name} has icon")
-    public boolean hasTabs() {
-        Timer.waitCondition(this.getTabs()::isDisplayed);
-        return getTabs().size() > 1;
-    }
-
-    @JDIAction("{name} has navigation menu")
-    public boolean hasNavigationMenu() {
-        Timer.waitCondition(this.getNavigationMenu()::isDisplayed);
-        return getNavigationMenu().isDisplayed();
+    public String getSelectedOptions() {
+        return this.find("input[type=hidden]").getAttribute("value");
     }
 
     public ToolBarAssert is() {

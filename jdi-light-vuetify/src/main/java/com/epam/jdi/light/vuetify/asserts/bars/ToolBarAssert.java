@@ -27,8 +27,32 @@ public class ToolBarAssert extends BasicBarAssert<ToolBar, ToolBarAssert> {
     }
 
     @JDIAction("Assert that banner has proper title")
+    public ToolBarAssert deleteButton() {
+        jdiAssert(element().hasDeleteButton(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has proper title")
+    public ToolBarAssert closeButton() {
+        jdiAssert(element().hasCloseButton(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has proper title")
+    public ToolBarAssert appsButton() {
+        jdiAssert(element().hasAppsButton(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has proper title")
     public ToolBarAssert mapImage() {
         jdiAssert(element().hasMapImage(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has proper title")
+    public ToolBarAssert selectOptionsField() {
+        jdiAssert(element().hasSelectOptionsField(), Matchers.is(true));
         return this;
     }
 
@@ -71,6 +95,18 @@ public class ToolBarAssert extends BasicBarAssert<ToolBar, ToolBarAssert> {
     @JDIAction("Assert that banner has proper title")
     public ToolBarAssert inputNotFocused() {
         jdiAssert(element().isInputFocused(), Matchers.is(false));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has proper title")
+    public ToolBarAssert headerColor(String color) {
+        jdiAssert(element().getHeaderColor(), Matchers.is(color));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has proper title")
+    public ToolBarAssert selectedOptions(String options) {
+        jdiAssert(element().getSelectedOptions(), Matchers.is(options));
         return this;
     }
 

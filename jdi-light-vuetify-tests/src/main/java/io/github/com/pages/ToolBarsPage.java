@@ -27,7 +27,7 @@ public class ToolBarsPage extends VuetifyPage {
     @UI("#flexibleAndCardToolbar")
     public static ToolBar flexibleAndCardToolbar;
 
-    @UI("//div[@role = 'listbox']")
+    @UI("div[role=listbox]")
     public static Menu optionsMenu;
 }
 
