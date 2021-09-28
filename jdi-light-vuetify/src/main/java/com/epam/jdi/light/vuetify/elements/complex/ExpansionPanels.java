@@ -5,12 +5,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
-import com.epam.jdi.light.vuetify.annotations.JDIExpansionPanels;
 import com.epam.jdi.light.vuetify.asserts.ExpansionPanelAssert;
 
 import java.lang.reflect.Field;
@@ -24,7 +23,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * To see an example of Expansion Panels web element please visit
  * https://vuetifyjs.com/en/components/expansion-panels/
  */
-public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,?>, WebList>> implements ISetup {
+public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?, ?>, WebList>> implements ISetup {
 
     protected String ROOT_LOCATOR = ".v-expansion-panels";
     protected String PANELS_LOCATOR = ".v-expansion-panel";
@@ -40,32 +39,31 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
     }
 
     @Override
+    @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return panels().stream()
                 .allMatch(ExpansionPanel::isEnabled);
     }
 
-
-
     @Override
     public void setup(Field field) {
-        if (fieldHasAnnotation(field, JDIExpansionPanels.class, ExpansionPanels.class)) {
-            JDIExpansionPanels annotation = field.getAnnotation(JDIExpansionPanels.class);
+        if (fieldHasAnnotation(field, UI.class, ExpansionPanels.class)) {
+            UI annotation = field.getAnnotation(UI.class);
             initializeLocators(annotation);
         }
         this.setCore(ExpansionPanels.class, $(ROOT_LOCATOR));
         this.setName(String.format("Expansion panels container %s", field.getName()));
     }
 
-    private void initializeLocators(JDIExpansionPanels annotation) {
-        if (!annotation.root().isEmpty()) {
-            ROOT_LOCATOR = annotation.root();
+    private void initializeLocators(UI annotation) {
+        if (!annotation.value().isEmpty()) {
+            ROOT_LOCATOR = annotation.value();
         }
     }
 
     public static class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
 
-        protected final static String ICON_LOCATOR = ".v-expansion-panel-header__icon";
+        protected final static String ICON_LOCATOR = ".v-expansion-panel-header__icon .v-icon";
         protected final static String HEADER_LOCATOR = ".v-expansion-panel-header";
         protected final static String WRAPPER_LOCATOR = ".v-expansion-panel-content__wrap";
 
@@ -90,9 +88,30 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
             return core().find(WRAPPER_LOCATOR);
         }
 
+        @JDIAction("Open '{name}'")
+        public void open() {
+            if (isClosed()) {
+                getIcon().click();
+            }
+        }
+
+        @JDIAction("Close '{name}'")
+        public void close() {
+            if (isOpen()) {
+                getIcon().click();
+            }
+        }
+
         @Override
+        @JDIAction("Check that '{name}' is enabled")
         public boolean isEnabled() {
             return !core().hasClass(DISABLED_PANEL_CLASS);
+        }
+
+        @Override
+        @JDIAction("Check that '{name}' is disabled")
+        public boolean isDisabled() {
+            return !isEnabled();
         }
 
         @JDIAction("Check that '{name}' is open")
