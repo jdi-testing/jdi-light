@@ -1,6 +1,8 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 
 import java.util.List;
@@ -15,6 +17,9 @@ public class ChipsPage extends VuetifyPage {
 
     @UI("#DraggableChip > .v-chip")
     public static Chip draggableChip;
+
+    @UI("[role=switch]")
+    public static UIElement filterSwitch;
 
     @UI("#FilterChip > .v-chip")
     public static List<Chip> filterChips;
@@ -39,6 +44,9 @@ public class ChipsPage extends VuetifyPage {
 
     @UI("#CustomListChip > .v-chip")
     public static List<Chip> customListChips;
+
+    @UI("//span[text()[contains(.,'Next')]]")
+    public static Button customListNextButton;
 
     @UI("#ExpandableChip > .v-chip")
     public static Chip expandableChip;
