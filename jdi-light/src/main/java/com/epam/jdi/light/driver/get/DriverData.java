@@ -133,7 +133,11 @@ public class DriverData {
 
     public static void setupCapability(MutableCapabilities cap, String property, String value) {
         if(!property.equals(ARGUMENTS_PROPERTY)) {
-            cap.setCapability(property, stringToPrimitive(value));
+            if (property.toLowerCase().contains("version")) {
+                cap.setCapability(property, value);
+            } else {
+                cap.setCapability(property, stringToPrimitive(value));
+            }
         } else {
             if (isClass(cap.getClass(), ChromeOptions.class)) {
                 ((ChromeOptions) cap).addArguments(value.split(" "));

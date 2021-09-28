@@ -11,10 +11,9 @@ public class RetryListenerClass implements IAnnotationTransformer {
 
     @Override
     public void transform(ITestAnnotation testAnnotation, Class testClass, Constructor testConstructor, Method testMethod)	{
-        Class<? extends IRetryAnalyzer> retry = testAnnotation.getRetryAnalyzerClass();
+        IRetryAnalyzer retry = testAnnotation.getRetryAnalyzer();
         if (retry == null)	{
             testAnnotation.setRetryAnalyzer(RetryFailedTestCases.class);
         }
-
     }
 }
