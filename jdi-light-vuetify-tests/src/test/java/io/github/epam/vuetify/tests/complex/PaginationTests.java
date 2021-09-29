@@ -56,7 +56,6 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void circlePaginationTest() {
-        circlePagination.is().notEmpty();
         circlePagination.has().size(4);
         circlePagination.is().enabled();
         circlePagination.is().started();
@@ -74,7 +73,6 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void iconsPaginationTest() {
-        iconsPagination.is().notEmpty();
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
         iconsPagination.is().started();

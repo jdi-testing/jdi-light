@@ -11,13 +11,13 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
 
     @JDIAction("Assert that '{name}' is disabled")
     public PaginationAssert started() {
-        jdiAssert(element().isStart() && element().isEnabled(), Matchers.is(true), "Selected page in list is not first");
+        jdiAssert(element().isStart(), Matchers.is(true), "Selected page in list is not first");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is disabled")
     public PaginationAssert ended() {
-        jdiAssert(element().isEnd() && element().isEnabled(), Matchers.is(true), "Selected page in list is not last");
+        jdiAssert(element().isEnd(), Matchers.is(true), "Selected page in list is not last");
         return this;
     }
 
