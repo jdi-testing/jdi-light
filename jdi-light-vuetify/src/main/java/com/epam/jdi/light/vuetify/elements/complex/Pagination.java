@@ -112,8 +112,8 @@ public class Pagination extends UIListBase<PaginationAssert> {
 
     private class PaginationIterator implements ListIterator<String> {
 
-        Boolean next = size() > 0;
-        Boolean previous = size() > 0;
+        boolean next = size() > 0;
+        boolean previous = size() > 0;
 
         private OptionalInt getCurrentIndex() {
             if (!hasHiddenButtons()) {
@@ -122,6 +122,17 @@ public class Pagination extends UIListBase<PaginationAssert> {
                         .findFirst();
             }
             return OptionalInt.empty();
+        }
+
+        private int getFollowingIndex(boolean isThereFollowingElement, int indexShift) {
+            OptionalInt currentIndex = getCurrentIndex();
+            if (currentIndex.isPresent()) {
+                if (isThereFollowingElement) {
+                    return currentIndex.getAsInt();
+                }
+                return currentIndex.getAsInt() + indexShift;
+            }
+            return -1;
         }
 
         @Override
@@ -166,20 +177,12 @@ public class Pagination extends UIListBase<PaginationAssert> {
 
         @Override
         public int nextIndex() {
-            OptionalInt index = getCurrentIndex();
-            if (index.isPresent()) {
-                return index.getAsInt() + 1;
-            }
-            return -1;
+            return getFollowingIndex(next, 1);
         }
 
         @Override
         public int previousIndex() {
-            OptionalInt index = getCurrentIndex();
-            if (index.isPresent()) {
-                return index.getAsInt() - 1;
-            }
-            return -1;
+            return getFollowingIndex(previous, -1);
         }
 
         @Override
