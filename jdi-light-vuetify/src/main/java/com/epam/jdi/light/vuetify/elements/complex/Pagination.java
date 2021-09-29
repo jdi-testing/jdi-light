@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
 import org.openqa.selenium.By;
@@ -24,30 +23,27 @@ public class Pagination extends UIListBase<PaginationAssert> {
     private static final String CORE_CLASS_DISABLED = "v-pagination--disabled";
     private static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
 
-    @UI(".v-pagination__navigation[1]")
-    private Button leftNavigation;
-
-    @UI(".v-pagination__navigation[2]")
-    private Button rightNavigation;
-
-    @UI("button.v-pagination__item")
-    private WebList buttonsList;
-
-    @UI("button.v-pagination__item")
-    private List<Button> buttons;
-
     private int startIndex = 1;
 
-    @JDIAction("Get list of all buttons from {name}")
-    public List<Button> buttons() {
-        return buttons;
+    @JDIAction("Get left navigation button from '{name}'")
+    public Button leftNavigation() {
+        return new Button().setCore(Button.class, core().find(".v-pagination__navigation[1]"));
+    }
+
+    @JDIAction("Get right navigation button from '{name}'")
+    public Button rightNavigation() {
+        return new Button().setCore(Button.class, core().find(".v-pagination__navigation[2]"));
     }
 
     @Override
     @JDIAction("Get web list of all buttons from {name}")
     public WebList list() {
-        buttonsList.refresh();
-        return buttonsList;
+        return core().finds("button.v-pagination__item");
+    }
+
+    @JDIAction("Get list of all buttons from {name}")
+    public List<Button> buttons() {
+        return list().map(uiElement -> new Button().setCore(Button.class, uiElement));
     }
 
     @Override
@@ -116,8 +112,8 @@ public class Pagination extends UIListBase<PaginationAssert> {
 
     private class PaginationIterator implements ListIterator<String> {
 
-        boolean next = size() > 0;
-        boolean previous = size() > 0;
+        Boolean next = size() > 0;
+        Boolean previous = size() > 0;
 
         private OptionalInt getCurrentIndex() {
             if (!hasHiddenButtons()) {
@@ -135,15 +131,15 @@ public class Pagination extends UIListBase<PaginationAssert> {
 
         @Override
         public String next() {
-            if (!next && !rightNavigation.isEnabled()) {
+            if (!next && !rightNavigation().isEnabled()) {
                 throw new NoSuchElementException("Can't find next element");
-            } else if (next && !rightNavigation.isEnabled()) {
+            } else if (next && !rightNavigation().isEnabled()) {
                 next = false;
                 return selected();
             } else {
                 next = true;
                 String current = selected();
-                rightNavigation.click();
+                rightNavigation().click();
                 return current;
             }
         }
@@ -155,15 +151,15 @@ public class Pagination extends UIListBase<PaginationAssert> {
 
         @Override
         public String previous() {
-            if (!previous && !leftNavigation.isEnabled()) {
+            if (!previous && !leftNavigation().isEnabled()) {
                 throw new NoSuchElementException("Can't find previous element");
-            } else if (previous && !leftNavigation.isEnabled()) {
+            } else if (previous && !leftNavigation().isEnabled()) {
                 previous = false;
                 return selected();
             } else {
                 previous = true;
                 String current = selected();
-                leftNavigation.click();
+                leftNavigation().click();
                 return current;
             }
         }
