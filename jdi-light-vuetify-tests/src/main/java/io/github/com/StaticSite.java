@@ -69,10 +69,6 @@ public class StaticSite {
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
 
-    @WaitAfterAction(3)
-    @Url("/checkboxes")
-    public static CheckboxesPage checkboxesPage;
-
     @Url("/cards")
     public static CardsPage cardsPage;
 
