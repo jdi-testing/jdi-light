@@ -84,7 +84,7 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
         }
     }
 
-    public static class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
+    public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
 
         protected final static String ICON_LOCATOR = ".v-expansion-panel-header__icon .v-icon";
         protected final static String HEADER_LOCATOR = ".v-expansion-panel-header";
