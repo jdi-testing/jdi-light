@@ -17,11 +17,8 @@ import io.github.com.pages.AlertsPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
-import io.github.com.pages.BreadcrumbsPage;
-import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
 import io.github.com.pages.SubheaderPage;
-import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.TabsPage;
 import io.github.com.pages.ExpansionPanelsPage;
 
@@ -67,13 +64,8 @@ public class StaticSite {
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
 
-    @WaitAfterAction(3)
-    @Url("/checkboxes")
-    public static CheckboxesPage checkboxesPage;
-
     @Url("/cards")
     public static CardsPage cardsPage;
-
 
     @Url("/expansion-panels")
     public static ExpansionPanelsPage expansionPanelsPage;
