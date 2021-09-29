@@ -36,7 +36,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
     private int startIndex = 1;
 
     @Override
-    @JDIAction("Get web list of all buttons from {name}")
+    @JDIAction("Get web list of all buttons from '{name}'")
     public WebList list() {
         return $$(ITEMS_LOCATOR, this).setName(getName() + " pagination");
     }
@@ -52,19 +52,19 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
     }
 
     @Override
-    @JDIAction("Get start index from {name}")
+    @JDIAction("Get start index from '{name}'")
     public int getStartIndex() {
         return startIndex;
     }
 
     @Override
-    @JDIAction("Set start index '{0}' for {name}")
+    @JDIAction("Set start index '{0}' for '{name}'")
     public void setStartIndex(int i) {
         startIndex = i;
     }
 
     @Override
-    @JDIAction("Get selected button from {name}")
+    @JDIAction("Get selected button from '{name}'")
     public String selected() {
         return list().stream()
                 .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
@@ -74,34 +74,34 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
     }
 
     @Override
-    @JDIAction("Check if button from {name} by name '{0}' is selected")
+    @JDIAction("Check if button from '{name}' by name '{0}' is selected")
     public boolean selected(String option) {
         return list().get(option).hasClass(ITEM_CLASS_SELECTED);
     }
 
     @Override
-    @JDIAction("Check if button from {name} by index '{0}' is selected")
+    @JDIAction("Check if button from '{name}' by index '{0}' is selected")
     public boolean selected(int index) {
         return list().get(index).hasClass(ITEM_CLASS_SELECTED);
     }
 
     @Override
-    @JDIAction("Check if pagination {name} is enabled")
+    @JDIAction("Check if pagination '{name}' is enabled")
     public boolean isEnabled() {
         return !core().hasClass(CORE_CLASS_DISABLED);
     }
 
-    @JDIAction("Check if pagination {name} is on start")
+    @JDIAction("Check if pagination '{name}' is on start")
     public boolean isStart() {
         return list().first().hasClass(ITEM_CLASS_SELECTED);
     }
 
-    @JDIAction("Check if pagination {name} is on end")
+    @JDIAction("Check if pagination '{name}' is on end")
     public boolean isEnd() {
         return list().last().hasClass(ITEM_CLASS_SELECTED);
     }
 
-    @JDIAction("Check if pagination {name} is on end")
+    @JDIAction("Check if there are hidden buttons in '{name}'")
     public boolean hasHiddenButtons() {
         return core().finds(MORE_ITEMS_LOCATOR).size() > 0;
     }
@@ -175,17 +175,17 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
 
         @Override
         public String next() {
-            if (!next && !rightNavigation().isEnabled()) {
-                throw new NoSuchElementException("Can't find next element in " + getName());
-            } else if (next && !rightNavigation().isEnabled()) {
+            if (isEnd()) {
+                if (!next) {
+                    throw new NoSuchElementException("Can't find next element in " + getName());
+                }
                 next = false;
                 return selected();
-            } else {
-                next = true;
-                String current = selected();
-                rightNavigation().click();
-                return current;
             }
+            next = true;
+            String current = selected();
+            rightNavigation().click();
+            return current;
         }
 
         @Override
@@ -195,17 +195,17 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
 
         @Override
         public String previous() {
-            if (!previous && !leftNavigation().isEnabled()) {
-                throw new NoSuchElementException("Can't find previous element in " + getName());
-            } else if (previous && !leftNavigation().isEnabled()) {
+            if (isStart()) {
+                if (!previous) {
+                    throw new NoSuchElementException("Can't find previous element in " + getName());
+                }
                 previous = false;
                 return selected();
-            } else {
-                previous = true;
-                String current = selected();
-                leftNavigation().click();
-                return current;
             }
+            previous = true;
+            String current = selected();
+            leftNavigation().click();
+            return current;
         }
 
         @Override
