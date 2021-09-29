@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static io.github.com.StaticSite.paginationPage;
 import static io.github.com.pages.PaginationPage.circlePagination;
@@ -28,12 +29,10 @@ public class PaginationTests extends TestsInit {
     List<String> totalVisible;
 
     private List<String> initPages(int from, int to) {
-        List<String> pages = new ArrayList<>(to - from + 1);
-        for (int i = from; i <= to; i++) {
-            pages.add(Integer.toString(i));
-        }
-        System.out.println(pages);
-        return pages;
+        return IntStream.rangeClosed(from, to)
+                .boxed()
+                .map(Object::toString)
+                .collect(Collectors.toList());
     }
 
     @BeforeClass
