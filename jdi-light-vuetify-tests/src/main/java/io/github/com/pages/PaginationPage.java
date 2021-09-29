@@ -1,22 +1,28 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.annotations.JDIPagination;
 import com.epam.jdi.light.vuetify.elements.complex.Pagination;
 
 public class PaginationPage extends VuetifyPage {
 
-    @UI("#CirclePagination .v-pagination")
+    @JDIPagination(
+            root = "#CirclePagination .v-pagination",
+            items = ".v-pagination__item",
+            left = ".v-pagination__navigation[1]",
+            right = ".v-pagination__navigation[2]",
+            more = ".v-pagination__more"
+    )
     public static Pagination circlePagination;
 
-    @UI("#DisabledPagination .v-pagination")
+    @JDIPagination(root = "#DisabledPagination .v-pagination")
     public static Pagination disabledPagination;
 
-    @UI("#IconsPagination .v-pagination")
+    @JDIPagination(root = "#IconsPagination .v-pagination")
     public static Pagination iconsPagination;
 
-    @UI("#LengthPagination .v-pagination")
+    @JDIPagination(root = "#LengthPagination .v-pagination")
     public static Pagination lengthPagination;
 
-    @UI("#TotalVisiblePagination .v-pagination")
+    @JDIPagination(root = "#TotalVisiblePagination .v-pagination")
     public static Pagination totalVisiblePagination;
 }

@@ -3,47 +3,52 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.vuetify.annotations.JDIPagination;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
-import org.openqa.selenium.By;
 
-import java.util.List;
+import java.lang.reflect.Field;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+
 /**
  * To see an example of Pagination web element please visit
  * https://vuetifyjs.com/en/components/paginations/
  */
-public class Pagination extends UIListBase<PaginationAssert> {
+public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
 
-    private static final String CORE_CLASS_DISABLED = "v-pagination--disabled";
-    private static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
+    protected String CORE_CLASS_DISABLED = "v-pagination--disabled";
+    protected String ITEM_CLASS_SELECTED = "v-pagination__item--active";
+
+    protected String ROOT_LOCATOR = ".v-pagination";
+    protected String ITEMS_LOCATOR = ".v-pagination__item";
+    protected String LEFT_NAVIGATION_LOCATOR = ".v-pagination__navigation[1]";
+    protected String RIGHT_NAVIGATION_LOCATOR = ".v-pagination__navigation[2]";
+    protected String MORE_ITEMS_LOCATOR = ".v-pagination__more";
 
     private int startIndex = 1;
-
-    @JDIAction("Get left navigation button from '{name}'")
-    public Button leftNavigation() {
-        return new Button().setCore(Button.class, core().find(".v-pagination__navigation[1]"));
-    }
-
-    @JDIAction("Get right navigation button from '{name}'")
-    public Button rightNavigation() {
-        return new Button().setCore(Button.class, core().find(".v-pagination__navigation[2]"));
-    }
 
     @Override
     @JDIAction("Get web list of all buttons from {name}")
     public WebList list() {
-        return core().finds("button.v-pagination__item");
+        return $$(ITEMS_LOCATOR, this).setName(getName() + " pagination");
     }
 
-    @JDIAction("Get list of all buttons from {name}")
-    public List<Button> buttons() {
-        return list().map(uiElement -> new Button().setCore(Button.class, uiElement));
+    @JDIAction("Get left navigation button from '{name}'")
+    public UIElement leftNavigation() {
+        return core().find(LEFT_NAVIGATION_LOCATOR);
+    }
+
+    @JDIAction("Get right navigation button from '{name}'")
+    public UIElement rightNavigation() {
+        return core().find(RIGHT_NAVIGATION_LOCATOR);
     }
 
     @Override
@@ -98,12 +103,40 @@ public class Pagination extends UIListBase<PaginationAssert> {
 
     @JDIAction("Check if pagination {name} is on end")
     public boolean hasHiddenButtons() {
-        return core().finds(By.className("v-pagination__more")).size() > 0;
+        return core().finds(MORE_ITEMS_LOCATOR).size() > 0;
     }
 
     @Override
     public PaginationAssert is() {
         return new PaginationAssert().set(this);
+    }
+
+    @Override
+    public void setup(Field field) {
+        if (fieldHasAnnotation(field, JDIPagination.class, Pagination.class)) {
+            JDIPagination annotation = field.getAnnotation(JDIPagination.class);
+            initializeLocators(annotation);
+        }
+        this.setCore(Pagination.class, $(ROOT_LOCATOR));
+        this.setName(String.format("Pagination container %s", field.getName()));
+    }
+
+    private void initializeLocators(JDIPagination annotation) {
+        if (!annotation.root().isEmpty()) {
+            ROOT_LOCATOR = annotation.root();
+        }
+        if (!annotation.items().isEmpty()) {
+            ITEMS_LOCATOR = annotation.items();
+        }
+        if (!annotation.left().isEmpty()) {
+            LEFT_NAVIGATION_LOCATOR = annotation.left();
+        }
+        if (!annotation.right().isEmpty()) {
+            RIGHT_NAVIGATION_LOCATOR = annotation.right();
+        }
+        if (!annotation.more().isEmpty()) {
+            MORE_ITEMS_LOCATOR = annotation.more();
+        }
     }
 
     public ListIterator<String> listIterator() {
@@ -143,7 +176,7 @@ public class Pagination extends UIListBase<PaginationAssert> {
         @Override
         public String next() {
             if (!next && !rightNavigation().isEnabled()) {
-                throw new NoSuchElementException("Can't find next element");
+                throw new NoSuchElementException("Can't find next element in " + getName());
             } else if (next && !rightNavigation().isEnabled()) {
                 next = false;
                 return selected();
@@ -163,7 +196,7 @@ public class Pagination extends UIListBase<PaginationAssert> {
         @Override
         public String previous() {
             if (!previous && !leftNavigation().isEnabled()) {
-                throw new NoSuchElementException("Can't find previous element");
+                throw new NoSuchElementException("Can't find previous element in " + getName());
             } else if (previous && !leftNavigation().isEnabled()) {
                 previous = false;
                 return selected();

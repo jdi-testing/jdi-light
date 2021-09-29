@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -20,6 +20,8 @@ import static io.github.com.pages.PaginationPage.lengthPagination;
 import static io.github.com.pages.PaginationPage.totalVisiblePagination;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 public class PaginationTests extends TestsInit {
 
@@ -75,7 +77,7 @@ public class PaginationTests extends TestsInit {
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
         iconsPagination.is().started();
-        for (Button button : iconsPagination.buttons()) {
+        for (UIElement button : iconsPagination.list()) {
             button.click();
             iconsPagination.is().selected(button.getText());
             iconsPagination.has().values(button.getText());
@@ -88,6 +90,7 @@ public class PaginationTests extends TestsInit {
     public void disabledPaginationTest() {
         disabledPagination.has().size(3);
         disabledPagination.is().disabled();
+        assertThat(disabledPagination.selected(), is(nullValue()));
     }
 
     @Test
