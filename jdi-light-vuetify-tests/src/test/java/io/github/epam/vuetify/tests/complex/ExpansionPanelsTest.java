@@ -3,7 +3,6 @@ package io.github.epam.vuetify.tests.complex;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.elements.complex.ExpansionPanels;
-import io.github.com.StaticSite;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeSuite;
@@ -13,6 +12,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static io.github.com.StaticSite.expansionPanelsPage;
 import static io.github.com.pages.ExpansionPanelsPage.accordionExpansionPanels;
 import static io.github.com.pages.ExpansionPanelsPage.advancedExpansionPanels;
 import static io.github.com.pages.ExpansionPanelsPage.allButton;
@@ -40,8 +40,8 @@ public class ExpansionPanelsTest extends TestsInit {
 
     @BeforeSuite
     public void before() {
-        StaticSite.expansionPanelsPage.open();
-        StaticSite.expansionPanelsPage.checkOpened();
+        expansionPanelsPage.open();
+        expansionPanelsPage.checkOpened();
     }
 
     @DataProvider
@@ -61,12 +61,8 @@ public class ExpansionPanelsTest extends TestsInit {
             expansionPanel.open();
             expansionPanel.getHeader().has().text(header);
             expansionPanel.getWrapper().has().text(content);
-            expansionPanel.getIcon()
-                    .is().displayed()
-                    .has().cssClass("mdi-chevron-down");
-            expansionPanel
-                    .is().open()
-                    .is().displayed();
+            expansionPanel.getIcon().has().cssClass("mdi-chevron-down");
+            expansionPanel.is().open();
         });
         panels.select(1);
         panels.select(2);
@@ -172,9 +168,8 @@ public class ExpansionPanelsTest extends TestsInit {
             expansionPanel.getHeader().has().text("Item");
             expansionPanel.getWrapper().has().text(TEXT);
             expansionPanel.is().open();
-            expansionPanel.getIcon()
-                    .is().displayed()
-                    .has().cssClass("mdi-menu-down");
+            expansionPanel.getIcon().is().displayed();
+            expansionPanel.getIcon().has().cssClass("mdi-menu-down");
         });
     }
 
