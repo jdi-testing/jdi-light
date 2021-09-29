@@ -2,7 +2,8 @@ package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.vuetify.elements.complex.ExpansionPanels;
+import com.epam.jdi.light.vuetify.elements.complex.panels.ExpansionPanel;
+import com.epam.jdi.light.vuetify.elements.complex.panels.ExpansionPanels;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeSuite;
@@ -58,27 +59,27 @@ public class ExpansionPanelsTest extends TestsInit {
     public void simpleTestWithOnlyOneOpenPanelAtMoment(ExpansionPanels panels, int size, String header, String content) {
         panels.has().size(size);
         panels.panels().forEach(expansionPanel -> {
-            expansionPanel.open();
-            expansionPanel.getHeader().has().text(header);
-            expansionPanel.getWrapper().has().text(content);
-            expansionPanel.getIcon().has().cssClass("mdi-chevron-down");
-            expansionPanel.is().open();
+            expansionPanel.expand();
+            expansionPanel.header().has().text(header);
+            expansionPanel.wrapper().has().text(content);
+            expansionPanel.expander().has().cssClass("mdi-chevron-down");
+            expansionPanel.is().expanded();
         });
         panels.select(1);
         panels.select(2);
         panels.panels().get(0).is().closed();
-        panels.panels().get(1).is().open();
+        panels.panels().get(1).is().expanded();
     }
 
     @Test
     public void disabledExpansionPanelTest() {
         disabledExpansionPanels.has().size(3);
 
-        disabledExpansionPanels.panels().get(0).is().open();
-        disabledExpansionPanels.panels().get(1).is().open();
+        disabledExpansionPanels.panels().get(0).is().expanded();
+        disabledExpansionPanels.panels().get(1).is().expanded();
         disabledExpansionPanels.panels().get(2).is().closed();
         disabledExpansionPanels.select(3);
-        disabledExpansionPanels.panels().get(2).is().open();
+        disabledExpansionPanels.panels().get(2).is().expanded();
 
         disableCheckbox.check();
         disabledExpansionPanels.is().disabled();
@@ -90,72 +91,70 @@ public class ExpansionPanelsTest extends TestsInit {
     public void modelExpansionPanelTest(){
         modelExpansionPanels.has().size(5);
         modelExpansionPanels.panels().forEach(expansionPanel -> {
-            expansionPanel.getHeader().has().text(containsString("Header"));
-            expansionPanel.getWrapper().has().text(TEXT);
-            expansionPanel.is().open();
+            expansionPanel.header().has().text(containsString("Header"));
+            expansionPanel.wrapper().has().text(TEXT);
+            expansionPanel.is().expanded();
         });
         openPanelText.is().text("[ 0, 1, 2, 3, 4 ]");
-        modelExpansionPanels.panels().forEach(expansionPanel -> expansionPanel.is().open());
+        modelExpansionPanels.panels().forEach(expansionPanel -> expansionPanel.is().expanded());
         noneButton.click();
         openPanelText.is().text("[]");
         modelExpansionPanels.panels().forEach(expansionPanel -> expansionPanel.is().closed());
         allButton.click();
         openPanelText.is().text("[ 0, 1, 2, 3, 4 ]");
-        modelExpansionPanels.panels().forEach(expansionPanel -> expansionPanel.is().open());
+        modelExpansionPanels.panels().forEach(expansionPanel -> expansionPanel.is().expanded());
     }
 
     @Test
     public void readOnlyExpansionPanelTest() {
         readOnlyExpansionPanels.has().size(3);
-        List<ExpansionPanels.ExpansionPanel> panels = readOnlyExpansionPanels.panels();
-        panels.get(0).is().open();
-        panels.get(1).is().open();
+        List<ExpansionPanel> panels = readOnlyExpansionPanels.panels();
+        panels.get(0).is().expanded();
+        panels.get(1).is().expanded();
         panels.get(2).is().closed();
 
         readOnlyCheckbox.check();
-        panels.forEach(ExpansionPanels.ExpansionPanel::open);
-        panels.get(0).is().open();
-        panels.get(1).is().open();
+        panels.forEach(ExpansionPanel::expand);
+        panels.get(0).is().expanded();
+        panels.get(1).is().expanded();
         panels.get(2).is().closed();
 
         readOnlyCheckbox.check();
         panels.forEach(expansionPanel -> {
-            expansionPanel.open();
-            expansionPanel.is().open();
+            expansionPanel.expand();
+            expansionPanel.is().expanded();
         });
     }
 
     @Test
     public void advancedExpansionPanelTest() {
         advancedExpansionPanels.has().size(3);
-        List<ExpansionPanels.ExpansionPanel> panels = advancedExpansionPanels.panels();
+        List<ExpansionPanel> panels = advancedExpansionPanels.panels();
 
         String tripName = "My trip name";
-        panels.get(0)
-                .getWrapper()
+        ExpansionPanel tripPanel = panels.get(0);
+        tripPanel.wrapper()
                 .find("input")
                 .sendKeys(tripName);
-        panels.get(0).close();
-        panels.get(0)
-                .getHeader()
+        tripPanel.close();
+        tripPanel.header()
                 .find(".text--secondary span")
                 .has().text(equalTo(tripName));
 
         String countryName = "Ecuador";
-        panels.get(1)
-                .getWrapper()
+        ExpansionPanel countryPanel = panels.get(1);
+        countryPanel.wrapper()
                 .find(By.tagName("input"))
                 .sendKeys(countryName);
-        panels.get(1).close();
-        panels.get(1)
-                .getHeader()
+        countryPanel.close();
+        countryPanel.header()
                 .find(".text--secondary span")
                 .has().text(equalTo(countryName));
 
         List<String> listWhenClosedExpected = Arrays.asList("Start date: Not set", "End date: Not set");
-        panels.get(2).close();
-        WebList listWhenClosedActual = panels.get(2)
-                .getHeader()
+        ExpansionPanel timePanel = panels.get(2);
+        timePanel.close();
+        WebList listWhenClosedActual = timePanel.header()
                 .finds(".text--secondary div.col-6");
         listWhenClosedActual.has().size(listWhenClosedExpected.size());
         assertThat(listWhenClosedActual.map(UIElement::getText), equalTo(listWhenClosedExpected));
@@ -165,21 +164,21 @@ public class ExpansionPanelsTest extends TestsInit {
     public void customIconExpansionPanelTest() {
         customIconExpansionPanelsSameIcons.has().size(5);
         customIconExpansionPanelsSameIcons.panels().forEach(expansionPanel -> {
-            expansionPanel.getHeader().has().text("Item");
-            expansionPanel.getWrapper().has().text(TEXT);
-            expansionPanel.is().open();
-            expansionPanel.getIcon().is().displayed();
-            expansionPanel.getIcon().has().cssClass("mdi-menu-down");
+            expansionPanel.header().has().text("Item");
+            expansionPanel.wrapper().has().text(TEXT);
+            expansionPanel.is().expanded();
+            expansionPanel.expander().is().displayed();
+            expansionPanel.expander().has().cssClass("mdi-menu-down");
         });
     }
 
     @Test
     public void differentIconExpansionPanelTest() {
         customIconExpansionPanelsDifferentIcons.has().size(3);
-        List<ExpansionPanels.ExpansionPanel> panels = customIconExpansionPanelsDifferentIcons.panels();
-        panels.get(0).getIcon().has().cssClass("mdi-chevron-down");
-        panels.get(1).getIcon().has().cssClass("mdi-check");
-        panels.get(2).getIcon().has().cssClass("mdi-alert-circle");
+        List<ExpansionPanel> panels = customIconExpansionPanelsDifferentIcons.panels();
+        panels.get(0).expander().has().cssClass("mdi-chevron-down");
+        panels.get(1).expander().has().cssClass("mdi-check");
+        panels.get(2).expander().has().cssClass("mdi-alert-circle");
     }
 
 }

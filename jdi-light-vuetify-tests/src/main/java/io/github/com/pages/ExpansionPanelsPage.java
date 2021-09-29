@@ -4,23 +4,45 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
-import com.epam.jdi.light.vuetify.elements.complex.ExpansionPanels;
+import com.epam.jdi.light.vuetify.annotations.JDIExpansionPanels;
+import com.epam.jdi.light.vuetify.elements.complex.panels.ExpansionPanels;
 
 public class ExpansionPanelsPage extends VuetifyPage {
 
-    @UI("#AccordionExpansionPanel .v-expansion-panels")
+    //Default locators(except root):
+    @JDIExpansionPanels(
+            root = "#ModelExpansionPanel .v-expansion-panels",
+            panels = ".v-expansion-panel",
+            header = ".v-expansion-panel-header",
+            icon = ".v-expansion-panel-header__icon",
+            content = ".v-expansion-panel-content",
+            wrapper = ".v-expansion-panel-content__wrap"
+    )
+    public static ExpansionPanels modelExpansionPanels;
+
+    @JDIExpansionPanels(
+            root = "#AccordionExpansionPanel .v-expansion-panels",
+            icon = ".v-expansion-panel-header__icon .v-icon"
+            //We changed default locator for icon because tests of icons are required icon class from icon's section
+    )
     public static ExpansionPanels accordionExpansionPanels;
 
     @UI("#DisabledExpansionPanel .v-input")
     public static Checkbox disableCheckbox;
 
-    @UI("#DisabledExpansionPanel .v-expansion-panels")
+    @JDIExpansionPanels(root = "#DisabledExpansionPanel .v-expansion-panels")
     public static ExpansionPanels disabledExpansionPanels;
 
-    @UI("#FocusableExpansionPanel.v-expansion-panels")
+    @JDIExpansionPanels(
+            root = "#FocusableExpansionPanel.v-expansion-panels",
+            icon = ".v-expansion-panel-header__icon .v-icon"
+    )
     public static ExpansionPanels focusableExpansionPanels;
 
-    @UI("#InsetExpansionPanel .v-expansion-panels")
+    @JDIExpansionPanels(
+            root = "#InsetExpansionPanel .v-expansion-panels",
+            icon = ".v-expansion-panel-header__icon .v-icon"
+    )
     public static ExpansionPanels insetExpansionPanels;
 
     @UI("#ModelExpansionPanel button.v-btn:first-child")
@@ -32,25 +54,31 @@ public class ExpansionPanelsPage extends VuetifyPage {
     @UI("#ModelExpansionPanel button.v-btn:last-child")
     public static Button noneButton;
 
-    @UI("#ModelExpansionPanel .v-expansion-panels")
-    public static ExpansionPanels modelExpansionPanels;
-
-    @UI("#PopoutExpansionPanel .v-expansion-panels")
+    @JDIExpansionPanels(
+            root = "#PopoutExpansionPanel .v-expansion-panels",
+            icon = ".v-expansion-panel-header__icon .v-icon"
+    )
     public static ExpansionPanels popOutExpansionPanels;
 
     @UI("#ReadonlyExpansionPanel div.v-input")
     public static Checkbox readOnlyCheckbox;
 
-    @UI("#ReadonlyExpansionPanel .v-expansion-panels")
+    @JDIExpansionPanels(root = "#ReadonlyExpansionPanel .v-expansion-panels")
     public static ExpansionPanels readOnlyExpansionPanels;
 
-    @UI("#AdvancedExpansionPanel.v-expansion-panels")
+    @JDIExpansionPanels(root = "#AdvancedExpansionPanel.v-expansion-panels")
     public static ExpansionPanels advancedExpansionPanels;
 
-    @UI("#CustomIconExpansionPanel .v-expansion-panels:nth-child(1)")
+    @JDIExpansionPanels(
+            root = "#CustomIconExpansionPanel .v-expansion-panels:nth-child(1)",
+            icon = ".v-expansion-panel-header__icon .v-icon"
+    )
     public static ExpansionPanels customIconExpansionPanelsSameIcons;
 
-    @UI("#CustomIconExpansionPanel .v-expansion-panels:nth-child(2)")
+    @JDIExpansionPanels(
+            root = "#CustomIconExpansionPanel .v-expansion-panels:nth-child(2)",
+            icon = ".v-expansion-panel-header__icon .v-icon"
+    )
     public static ExpansionPanels customIconExpansionPanelsDifferentIcons;
 
 }
