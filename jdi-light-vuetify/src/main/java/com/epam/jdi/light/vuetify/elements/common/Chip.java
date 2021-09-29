@@ -4,6 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
+import org.openqa.selenium.interactions.Actions;
+
+import java.time.Duration;
+
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 /**
  * To see an example of Chip web element please visit https://vuetifyjs.com/en/components/chips/
@@ -32,9 +37,22 @@ public class Chip extends UIBaseElement<ChipAssert> {
         this.find(CLOSE_BUTTON).click();
     }
 
-    @JDIAction("Drag '{name}' and drop to '{0}'")
-    public void dragAndDrop(UIElement destination) {
-        this.dragAndDropTo(destination);
+    @JDIAction("Drag '{name}' and drop it to ({0}, {1})")
+    public void dragAndDropToElement(UIElement destination) {
+//        Actions actions = new Actions(getDriver());
+////        actions.dragAndDrop(this.find(TEXT).core().getWebElement(), destination.core().getWebElement());
+////        actions.build().perform();
+//        int x = destination.core().getWebElement().getLocation().x;
+//        int y = destination.core().getWebElement().getLocation().y;
+//        actions.moveToElement(this.core().getWebElement())
+//                .pause(Duration.ofSeconds(1))
+//                .clickAndHold(this.core().getWebElement())
+//                .pause(Duration.ofSeconds(1))
+//                .moveByOffset(x, y)
+//                .moveToElement(destination)
+//                .moveByOffset(x,y)
+//                .pause(Duration.ofSeconds(1))
+//                .release().build().perform();
     }
 
     @JDIAction("Check that '{name}' has filter")
@@ -52,12 +70,38 @@ public class Chip extends UIBaseElement<ChipAssert> {
         return this.find(IMAGE).isExist();
     }
 
+    @JDIAction("Get {name}'s height")
+    public String getHeight() {
+        return this.css("height");
+    }
+
     @JDIAction("Get {name}'s font size")
-    public String fontSize() {
+    public String getFontSize() {
         return this.css("font-size");
     }
 
-    @JDIAction("Expand '{name}'")
+    @JDIAction("Get {name}'s font color")
+    public String getFontColor() {
+        return this.css("color");
+    }
+
+    @JDIAction("Get {name}'s height")
+    public String getBackgroundColor() {
+        return this.css("background-color");
+    }
+
+    @JDIAction("Get {name}'s borderColor")
+    public String getBorderColor() {
+        return this.css("border-color");
+    }
+
+    @JDIAction("Get {name}'s borderColor")
+    public boolean hasVisibleBorder() {
+        return this.css("border-color") != this.css("background-color")
+                && !this.css("border-color").contains("transparent");
+    }
+
+    @JDIAction("Click on '{name}'")
     public void click() {
         this.core().click();
     }
