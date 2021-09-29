@@ -60,6 +60,7 @@ public class PaginationTests extends TestsInit {
         circlePagination.has().size(4);
         circlePagination.is().enabled();
         circlePagination.is().started();
+        circlePagination.has().values("1", "2", "3", "4");
         for (String page : circlePages) {
             circlePagination.select(page);
             circlePagination.has().selected(Integer.parseInt(page));
@@ -77,6 +78,7 @@ public class PaginationTests extends TestsInit {
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
         iconsPagination.is().started();
+        circlePagination.has().values("1", "2", "3", "4");
         for (UIElement button : iconsPagination.list()) {
             button.click();
             iconsPagination.is().selected(button.getText());
@@ -134,15 +136,13 @@ public class PaginationTests extends TestsInit {
         assertThat(actualButtonsFromStartToEnd, equalTo(totalVisiblePages));
 
         int indexStartInReverseOrder = 3;
+        List<String> expected = initPages(1, indexStartInReverseOrder);
         List<String> actualButtonsFromIndexStart = new ArrayList<>();
         totalVisiblePagination.select(indexStartInReverseOrder);
         while (it.hasPrevious()) {
             actualButtonsFromIndexStart.add(it.previous());
         }
         Collections.reverse(actualButtonsFromIndexStart);
-        List<String> expected = totalVisiblePages.stream()
-                .limit(indexStartInReverseOrder)
-                .collect(Collectors.toList());
         assertThat(actualButtonsFromIndexStart, equalTo(expected));
         totalVisiblePagination.is().started();
     }
