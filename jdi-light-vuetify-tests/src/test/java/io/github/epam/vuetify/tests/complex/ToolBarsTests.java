@@ -3,13 +3,21 @@ package io.github.epam.vuetify.tests.complex;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.DEEP_PURPLE_ACCENT_4;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREY_DARKEN_4;
 import static io.github.com.StaticSite.toolBarsPage;
-import static io.github.com.pages.ToolBarsPage.*;
+import static io.github.com.pages.ToolBarsPage.backgroundToolbar;
+import static io.github.com.pages.ToolBarsPage.collapseToolbar;
+import static io.github.com.pages.ToolBarsPage.contextActionToolbar;
+import static io.github.com.pages.ToolBarsPage.denseToolbar;
+import static io.github.com.pages.ToolBarsPage.extendedToolbar;
+import static io.github.com.pages.ToolBarsPage.flexibleAndCardToolbar;
+import static io.github.com.pages.ToolBarsPage.floatingWithSearchToolbar;
+import static io.github.com.pages.ToolBarsPage.options;
+import static io.github.com.pages.ToolBarsPage.optionsMenu;
 
 public class ToolBarsTests extends TestsInit {
 
@@ -47,7 +55,6 @@ public class ToolBarsTests extends TestsInit {
         denseToolbar.has().verticalDotsButton();
         denseToolbar.is().dense();
         denseToolbar.has().height("48");
-
     }
 
     @Test
@@ -87,18 +94,14 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.has().properTitleText("Photos");
         contextActionToolbar.has().verticalDotsButton();
         contextActionToolbar.has().selectOptionsField();
-        contextActionToolbar.has().headerColor("deep-purple");
+        contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
         contextActionToolbar.getSelectOptionsField().click();
         Timer.waitCondition(optionsMenu::isDisplayed);
         optionsMenu.is().displayed();
-        for (UIElement element : optionsMenu.finds("div[role=option]")) {
-            jdiAssert(element.isClickable(), Matchers.is(true));
-            jdiAssert(element.getAttribute("aria-selected"), Matchers.is("false"));
+        for (UIElement element : options) {
             element.click();
-            jdiAssert(element.getAttribute("aria-selected"), Matchers.is("true"));
-
         }
-        contextActionToolbar.has().headerColor("grey");
+        contextActionToolbar.has().headerColor(GREY_DARKEN_4.value());
         contextActionToolbar.has().deleteButton();
         contextActionToolbar.has().closeButton();
         contextActionToolbar.has().properTitleText("4 selected");
@@ -106,8 +109,9 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.has().selectedOptions("Foo,Bar,Fizz,Buzz");
         optionsMenu.is().hidden();
         contextActionToolbar.getCloseButton().click();
+        Timer.waitCondition(contextActionToolbar::isPurple);
+        contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
         contextActionToolbar.has().properTitleText("Photos");
-        contextActionToolbar.has().headerColor("deep-purple");
         contextActionToolbar.has().selectedOptions("");
         contextActionToolbar.getCloseButton().is().hidden();
         contextActionToolbar.getDeleteButton().is().hidden();

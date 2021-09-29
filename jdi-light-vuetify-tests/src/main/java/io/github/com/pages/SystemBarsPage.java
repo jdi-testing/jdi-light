@@ -5,28 +5,31 @@ import com.epam.jdi.light.vuetify.elements.complex.bars.SystemBar;
 
 public class SystemBarsPage extends VuetifyPage {
 
-    @UI("#collapsibleBar")
-    public static SystemBar collapsibleBar;
+    @UI("#system-bar-colored-primary")
+    public static SystemBar systemBarColoredPrimary;
 
-    @UI("#denseBar")
-    public static SystemBar denseBar;
+    @UI("#system-bar-colored-red")
+    public static SystemBar systemBarColoredRed;
 
-    @UI("#elevateScrollBar")
-    public static SystemBar elevateScrollBar;
+    @UI("#system-bar-colored-indigo")
+    public static SystemBar systemBarColoredIndigo;
 
-    @UI("#imageBar")
-    public static SystemBar imageBar;
+    @UI("#system-bar-lights-out-light")
+    public static SystemBar systemBarLightsOutLight;
 
-    @UI("#hidingScrollBar")
-    public static SystemBar hidingScrollBar;
+    @UI("#system-bar-lights-out-datk")
+    public static SystemBar systemBarLightsOutDark;
 
-    @UI("#fadeImageBar")
-    public static SystemBar fadeImageBar;
+    @UI("#system-bar-window")
+    public static SystemBar systemBarWindow;
 
-    @UI("#scrollThresholdBar")
-    public static SystemBar scrollThresholdBar;
+    @UI("#system-bar-absolute-position")
+    public static SystemBar systemBarAbsolutePosition;
 
-    @UI("#toggleNavigationDrawersBar")
-    public static SystemBar toggleNavigationDrawersBar;
+    @UI("#system-bar-app")
+    public static SystemBar systemBarApp;
+
+    @UI("#system-bar-high")
+    public static SystemBar systemBarHigh;
 
 }

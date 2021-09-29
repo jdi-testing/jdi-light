@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 /**
- * To see examples of App Bars web elements please visit https://vuetifyjs.com/en/components/app-bars
+ * To see examples of App Bar web elements please visit https://vuetifyjs.com/en/components/app-bars
  *
  * The v-app-bar component is pivotal to any graphical user interface (GUI),
  * as it generally is the primary source of site navigation.
@@ -19,7 +19,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 public class AppBar extends BasicBar<AppBar, AppBarAssert> {
 
-    @JDIAction("Get '{name}' title")
+    @JDIAction("Get '{name}' checker")
     public UIElement getChecker() {
         return this.find(".v-input__control");
     }
@@ -29,38 +29,38 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         return getChecker().find("input").getAttribute("aria-checked");
     }
 
-    @JDIAction("Get {name} 'checker' element's state")
+    @JDIAction("Get {name} header's state")
     public String getHeaderStatus() {
         return getHeader().getAttribute("class");
     }
 
-    @JDIAction("Get {name} 'checker' element's state")
+    @JDIAction("Get {name} header's style")
     public String getHeaderStyle() {
         return getHeader().getAttribute("style");
     }
 
-    @JDIAction("Get {name} 'checker' element's state")
+    @JDIAction("Get {name} header's opacity")
     public String getHeaderOpacity() {
         return getHeader().firstChild().getAttribute("style");
     }
 
-    @JDIAction("Get '{name}' buttons")
+    @JDIAction("Get '{name}' tabs")
     public WebList getTabs() {
         return this.finds(".v-tab");
     }
 
-    @JDIAction("Get '{name}' text field")
+    @JDIAction("Get '{name}' navigation menu")
     public UIElement getNavigationMenu() {
         return this.find(".v-navigation-drawer__content");
     }
 
-    @JDIAction("{name} has icon")
+    @JDIAction("{name} has checker")
     public boolean hasChecker() {
         Timer.waitCondition(this.getChecker()::isDisplayed);
         return getChecker().isClickable();
     }
 
-    @JDIAction("{name} has icon")
+    @JDIAction("{name} has tabs")
     public boolean hasTabs() {
         Timer.waitCondition(this.getTabs()::isDisplayed);
         return getTabs().size() > 1;

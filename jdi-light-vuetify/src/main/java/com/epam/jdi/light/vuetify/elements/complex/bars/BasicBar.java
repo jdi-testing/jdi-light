@@ -15,6 +15,11 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
         return this.find(".mdi-menu");
     }
 
+    @JDIAction("Get {name} 'text")
+    public String getText() {
+        return this.getText();
+    }
+
     @JDIAction("Get {name} title")
     public UIElement getTitle() {
         return this.find(".v-toolbar__title");

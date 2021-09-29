@@ -18,6 +18,12 @@ public class BasicBarAssert<T extends BasicBar<?,?>, A extends BasicBarAssert<?,
         return (A)this;
     }
 
+    @JDIAction("Assert that {name} has proper text")
+    public A text(String text) {
+        jdiAssert(element().getText(), Matchers.containsString(text));
+        return (A)this;
+    }
+
     @JDIAction("Assert that {name} has 'menu' button")
     public A menuButton() {
         jdiAssert(element().hasMenuButton(), Matchers.is(true));
