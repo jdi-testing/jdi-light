@@ -30,10 +30,12 @@ public class PaginationTests extends TestsInit {
     List<String> totalVisiblePages;
 
     private List<String> initPages(int from, int to) {
-        return IntStream.rangeClosed(from, to)
-                .boxed()
-                .map(Object::toString)
-                .collect(Collectors.toList());
+        return Collections.unmodifiableList(
+                IntStream.rangeClosed(from, to)
+                        .boxed()
+                        .map(Object::toString)
+                        .collect(Collectors.toList())
+        );
     }
 
     @BeforeClass
