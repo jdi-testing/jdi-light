@@ -19,6 +19,7 @@ import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
 import io.github.com.pages.DividersPage;
+import io.github.com.pages.FootersPage;
 import io.github.com.pages.SubheaderPage;
 import io.github.com.pages.TabsPage;
 
@@ -66,6 +67,9 @@ public class StaticSite {
 
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
+
+    @Url("/footers")
+    public static FootersPage footersPage;
 
     @Url("/cards")
     public static CardsPage cardsPage;
