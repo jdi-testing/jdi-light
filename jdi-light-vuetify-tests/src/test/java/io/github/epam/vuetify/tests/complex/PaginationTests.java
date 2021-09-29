@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -22,11 +23,11 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class PaginationTests extends TestsInit {
 
-    List<String> circle;
-    List<String> disabled;
-    List<String> icons;
-    List<String> length;
-    List<String> totalVisible;
+    List<String> circlePages;
+    List<String> disabledPages;
+    List<String> iconsPages;
+    List<String> lengthPages;
+    List<String> totalVisiblePages;
 
     private List<String> initPages(int from, int to) {
         return IntStream.rangeClosed(from, to)
@@ -42,115 +43,102 @@ public class PaginationTests extends TestsInit {
 
     @BeforeClass
     public void initData() {
-        circle = initPages(1, 4);
-        disabled = initPages(1, 3);
-        icons = initPages(1, 4);
-        length = initPages(1, 15);
-        totalVisible = initPages(1, 15);
+        circlePages = initPages(1, 4);
+        disabledPages = initPages(1, 3);
+        iconsPages = initPages(1, 4);
+        lengthPages = initPages(1, 15);
+        totalVisiblePages = initPages(1, 15);
     }
 
     @Test
     public void circlePaginationTest() {
-        circlePagination
-                .is().notEmpty()
-                .has().size(4)
-                .enabled()
-                .started();
-        circle.forEach(page -> {
+        circlePagination.is().notEmpty();
+        circlePagination.has().size(4);
+        circlePagination.is().enabled();
+        circlePagination.is().started();
+        for (String page : circlePages) {
             circlePagination.select(page);
-            circlePagination.has()
-                    .selected(Integer.parseInt(page))
-                    .selected(page)
-                    .value(page)
-                    .enabled(page);
-        });
-        circlePagination
-                .is().ended()
-                .has().values(circle);
+            circlePagination.has().selected(Integer.parseInt(page));
+            circlePagination.has().selected(page);
+            circlePagination.has().value(page);
+            circlePagination.has().enabled(page);
+        }
+        circlePagination.is().ended();
+        circlePagination.has().values(circlePages);
     }
 
     @Test
     public void iconsPaginationTest() {
-        iconsPagination
-                .is().notEmpty()
-                .has().size(4)
-                .enabled()
-                .started();
-        iconsPagination.buttons().forEach(button -> {
+        iconsPagination.is().notEmpty();
+        iconsPagination.has().size(4);
+        iconsPagination.is().enabled();
+        iconsPagination.is().started();
+        for (Button button : iconsPagination.buttons()) {
             button.click();
-            iconsPagination
-                    .is().selected(button.getText())
-                    .has().values(button.getText());
-        });
-        iconsPagination
-                .has().values(icons)
-                .is().ended();
+            iconsPagination.is().selected(button.getText());
+            iconsPagination.has().values(button.getText());
+        }
+        iconsPagination.has().values(iconsPages);
+        iconsPagination.is().ended();
     }
 
     @Test
     public void disabledPaginationTest() {
-        disabledPagination
-                .is().notEmpty()
-                .has().size(3)
-                .disabled();
+        disabledPagination.has().size(3);
+        disabledPagination.is().disabled();
     }
 
     @Test
     public void lengthPaginationTest() {
-        lengthPagination
-                .is().notEmpty()
-                .has().size(11)
-                .has().hiddenButtons()
-                .enabled()
-                .started();
+        lengthPagination.has().size(11);
+        lengthPagination.has().hiddenButtons();
+        lengthPagination.is().enabled();
+        lengthPagination.is().started();
 
         lengthPagination.select(2);
-        lengthPagination
-                .has().values("1", "2", "3", "4", "5", "6", "11", "12", "13", "14", "15")
-                .has().selected("2")
-                .has().selected(2);
+        lengthPagination.has().values("1", "2", "3", "4", "5", "6", "11", "12", "13", "14", "15");
+        lengthPagination.has().selected("2");
+        lengthPagination.has().selected(2);
+
         lengthPagination.select(7);
-        lengthPagination
-                .has().values("1", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15")
-                .has().selected("11")
-                .has().selected(7);
+        lengthPagination.has().values("1", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15");
+        lengthPagination.has().selected("11");
+        lengthPagination.has().selected(7);
+
         lengthPagination.select("15");
-        lengthPagination
-                .is().ended()
-                .has().values("1", "2", "3", "4", "5", "6", "11", "12", "13", "14", "15")
-                .has().selected("15")
-                .has().selected(11);
+        lengthPagination.is().ended();
+        lengthPagination.has().values("1", "2", "3", "4", "5", "6", "11", "12", "13", "14", "15");
+        lengthPagination.has().selected("15");
+        lengthPagination.has().selected(11);
     }
 
 
     @Test
     public void totalVisiblePaginationTest() {
-        totalVisiblePagination
-                .is().notEmpty()
-                .has().size(6)
-                .has().hiddenButtons()
-                .enabled()
-                .started();
+        totalVisiblePagination.has().size(6);
+        totalVisiblePagination.has().hiddenButtons();
+        totalVisiblePagination.is().enabled();
+        totalVisiblePagination.is().started();
 
-        List<String> actualButtons = new ArrayList<>();
+        List<String> actualButtonsFromStartToEnd = new ArrayList<>();
         ListIterator<String> it = totalVisiblePagination.listIterator();
         while (it.hasNext()) {
-            actualButtons.add(it.next());
+            actualButtonsFromStartToEnd.add(it.next());
         }
         totalVisiblePagination.is().ended();
-        assertThat(actualButtons, equalTo(totalVisible));
-        actualButtons.clear();
+        assertThat(actualButtonsFromStartToEnd, equalTo(totalVisiblePages));
 
-        int sizeOfPreviousCheck = 3;
-        totalVisiblePagination.select(sizeOfPreviousCheck);
+        int indexStartInReverseOrder = 3;
+        List<String> actualButtonsFromIndexStart = new ArrayList<>();
+        totalVisiblePagination.select(indexStartInReverseOrder);
         while (it.hasPrevious()) {
-            actualButtons.add(it.previous());
+            actualButtonsFromIndexStart.add(it.previous());
         }
-        Collections.reverse(actualButtons);
-        List<String> expected = totalVisible.stream()
-                .limit(sizeOfPreviousCheck)
+        Collections.reverse(actualButtonsFromIndexStart);
+        List<String> expected = totalVisiblePages.stream()
+                .limit(indexStartInReverseOrder)
                 .collect(Collectors.toList());
-        assertThat(actualButtons, equalTo(expected));
+        assertThat(actualButtonsFromIndexStart, equalTo(expected));
         totalVisiblePagination.is().started();
     }
 

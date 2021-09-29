@@ -17,7 +17,6 @@ import io.github.com.pages.AlertsPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
-import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.DividersPage;
 import io.github.com.pages.PaginationPage;
 import io.github.com.pages.SubheaderPage;
