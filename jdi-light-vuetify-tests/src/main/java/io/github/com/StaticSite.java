@@ -17,11 +17,8 @@ import io.github.com.pages.AlertsPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
-import io.github.com.pages.BreadcrumbsPage;
-import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
 import io.github.com.pages.SubheaderPage;
-import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.TabsPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
