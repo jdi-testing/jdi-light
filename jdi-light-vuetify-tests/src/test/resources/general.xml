@@ -2,9 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="JDI-Light Vuetify Tests">
     <test name="Vuetify Tests" thread-count="6">
-        <packages>
-            <package name="io.github.epam.vuetify.tests.*"/>
-        </packages>
+        <classes>
+            <class name="io.github.epam.vuetify.tests.complex.CardsTests"></class>
+        </classes>
     </test>
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener" />
