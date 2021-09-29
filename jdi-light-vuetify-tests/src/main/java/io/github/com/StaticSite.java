@@ -10,6 +10,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
 import io.github.com.pages.BottomSheetsPage;
+import io.github.com.pages.BottomNavigationPage;
 import io.github.com.pages.CardsPage;
 import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.CheckboxesPage;
@@ -39,7 +40,7 @@ public class StaticSite {
 
     @Url("/avatars")
     public static AvatarsPage avatarsPage;
-  
+
      @Url("/badges")
     public static BadgesPage badgesPage;
 
@@ -48,7 +49,7 @@ public class StaticSite {
 
     @Url("/breadcrumbs")
     public static BreadcrumbsPage breadcrumbsPage;
-  
+
     @WaitAfterAction(3)
     @Url("/checkboxes")
     public static CheckboxesPage checkboxesPage;
@@ -62,11 +63,13 @@ public class StaticSite {
 
     @Url("/tabs")
     public static TabsPage tabsPage;
-  
+
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
 
     @Url("/cards")
     public static CardsPage cardsPage;
 
+    @Url("/bottom-navigation")
+    public static BottomNavigationPage bottomNavigationPage;
 }
