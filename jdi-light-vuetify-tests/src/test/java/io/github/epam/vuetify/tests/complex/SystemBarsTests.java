@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLACK;
@@ -24,7 +24,7 @@ import static io.github.com.pages.SystemBarsPage.systemBarWindow;
 
 public class SystemBarsTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void beforeTest() {
         systemBarsPage.open();
     }

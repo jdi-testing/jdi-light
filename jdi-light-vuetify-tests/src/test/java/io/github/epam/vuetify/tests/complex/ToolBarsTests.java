@@ -3,6 +3,7 @@ package io.github.epam.vuetify.tests.complex;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -21,7 +22,7 @@ import static io.github.com.pages.ToolBarsPage.optionsMenu;
 
 public class ToolBarsTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void beforeTest() {
         toolBarsPage.open();
     }

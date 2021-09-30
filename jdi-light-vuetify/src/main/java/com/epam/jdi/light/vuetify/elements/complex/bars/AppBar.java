@@ -76,11 +76,11 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         return this.find(".overflow-y-auto").core().getFast();
     }
 
-    public void scrollToBottom() {
+    public void scrollBarToBottom() {
         jsExecute("arguments[0].scroll(0, document.body.scrollHeight)", this.getScrollingContainer());
     }
 
-    public void scrollToTop() {
+    public void scrollBarToTop() {
         jsExecute("arguments[0].scroll(document.body.scrollHeight, 0)", this.getScrollingContainer());
     }
 

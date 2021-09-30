@@ -2,7 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.appBarsPage;
@@ -19,7 +19,7 @@ import static io.github.com.pages.AppBarsPage.toggleNavigationDrawersBar;
 
 public class AppBarsTests extends TestsInit {
 
-        @BeforeMethod
+        @BeforeClass
         public void beforeTest() {
             appBarsPage.open();
         }
@@ -30,9 +30,9 @@ public class AppBarsTests extends TestsInit {
             collapsibleBar.has().menuButton();
             collapsibleBar.has().title();
             collapsibleBar.has().properTitleText("Collapsing Bar");
-            collapsibleBar.scrollToBottom();
+            collapsibleBar.scrollBarToBottom();
             collapsibleBar.has().hiddenTitle();
-            collapsibleBar.scrollToTop();
+            collapsibleBar.scrollBarToTop();
             collapsibleBar.has().title();
             collapsibleBar.has().checker();
             collapsibleBar.is().checkerChecked();
@@ -66,9 +66,9 @@ public class AppBarsTests extends TestsInit {
             elevateScrollBar.has().searchButton();
             elevateScrollBar.has().heartButton();
             elevateScrollBar.has().verticalDotsButton();
-            elevateScrollBar.scrollToBottom();
+            elevateScrollBar.scrollBarToBottom();
             elevateScrollBar.is().headerShadowVisible("v-app-bar--is-scrolled");
-            elevateScrollBar.scrollToTop();
+            elevateScrollBar.scrollBarToTop();
             elevateScrollBar.is().headerShadowHidden("hide-shadow");
         }
 
@@ -81,9 +81,9 @@ public class AppBarsTests extends TestsInit {
             imageBar.has().searchButton();
             imageBar.has().heartButton();
             imageBar.has().verticalDotsButton();
-            imageBar.scrollToBottom();
+            imageBar.scrollBarToBottom();
             imageBar.has().headerHeight("56px");
-            imageBar.scrollToTop();
+            imageBar.scrollBarToTop();
             imageBar.is().headerHeight("128px");
         }
 
@@ -97,7 +97,7 @@ public class AppBarsTests extends TestsInit {
             hidingScrollBar.has().heartButton();
             hidingScrollBar.has().verticalDotsButton();
             hidingScrollBar.is().headerVisible();
-            hidingScrollBar.scrollToBottom();
+            hidingScrollBar.scrollBarToBottom();
             hidingScrollBar.is().headerHidden();
         }
 
@@ -113,7 +113,7 @@ public class AppBarsTests extends TestsInit {
             fadeImageBar.has().tabs();
             fadeImageBar.has().headerHeight("224px");
             fadeImageBar.has().headerOpacity(1);
-            fadeImageBar.scrollToBottom();
+            fadeImageBar.scrollBarToBottom();
             fadeImageBar.has().headerHeight("104px");
             fadeImageBar.has().headerOpacity(0);
         }
@@ -129,7 +129,7 @@ public class AppBarsTests extends TestsInit {
             scrollThresholdBar.has().verticalDotsButton();
             scrollThresholdBar.has().headerHeight("128px");
             scrollThresholdBar.has().headerOpacity(1);
-            scrollThresholdBar.scrollToBottom();
+            scrollThresholdBar.scrollBarToBottom();
             scrollThresholdBar.has().headerHeight("56px");
             scrollThresholdBar.has().headerOpacity(0);
         }
