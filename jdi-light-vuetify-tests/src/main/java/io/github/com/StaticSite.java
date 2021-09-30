@@ -10,14 +10,18 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
 import io.github.com.pages.AlertsPage;
-import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.AutocompletesPage;
+import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
+import io.github.com.pages.BottomNavigationPage;
+import io.github.com.pages.BottomSheetsPage;
 import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.CardsPage;
 import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
+import io.github.com.pages.ExpansionPanelsPage;
+import io.github.com.pages.FootersPage;
 import io.github.com.pages.SubheaderPage;
 import io.github.com.pages.TabsPage;
 
@@ -57,6 +61,9 @@ public class StaticSite {
     @Url("/dividers")
     public static DividersPage dividersPage;
 
+    @Url("/bottom-sheets")
+    public static BottomSheetsPage bottomSheetsPage;
+
     @Url("/autocompletes")
     public static AutocompletesPage autocompletesPage;
 
@@ -66,7 +73,15 @@ public class StaticSite {
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
 
+    @Url("/footers")
+    public static FootersPage footersPage;
+
     @Url("/cards")
     public static CardsPage cardsPage;
 
+    @Url("/expansion-panels")
+    public static ExpansionPanelsPage expansionPanelsPage;
+
+    @Url("/bottom-navigation")
+    public static BottomNavigationPage bottomNavigationPage;
 }

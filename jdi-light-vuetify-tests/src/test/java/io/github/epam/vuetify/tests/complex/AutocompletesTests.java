@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -22,7 +23,7 @@ import static io.github.com.pages.AutocompletesPage.selectedApiName;
 
 public class AutocompletesTests extends TestsInit {
 
-    @BeforeSuite
+    @BeforeMethod
     public void before() {
         autocompletesPage.open();
     }
