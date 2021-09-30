@@ -1,16 +1,15 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.elements.complex.panels.ExpansionPanel;
 import com.epam.jdi.light.vuetify.elements.complex.panels.ExpansionPanels;
+import io.github.com.custom.panels.LocationExpansionPanel;
+import io.github.com.custom.panels.TripExpansionPanel;
+import io.github.com.custom.panels.TripTimeExpansionPanel;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.expansionPanelsPage;
@@ -29,13 +28,12 @@ import static io.github.com.pages.ExpansionPanelsPage.openPanelText;
 import static io.github.com.pages.ExpansionPanelsPage.popOutExpansionPanels;
 import static io.github.com.pages.ExpansionPanelsPage.readOnlyCheckbox;
 import static io.github.com.pages.ExpansionPanelsPage.readOnlyExpansionPanels;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ExpansionPanelsTest extends TestsInit {
 
-    private static final String TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " +
+    private static final String LOREM_IPSUM_TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " +
             "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, " +
             "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
@@ -48,10 +46,10 @@ public class ExpansionPanelsTest extends TestsInit {
     @DataProvider
     public static Object[][] simpleExpansionPanelsWithOnlyOneOpenPanelData() {
         return new Object[][]{
-                {accordionExpansionPanels, 5, "Item", TEXT},
-                {insetExpansionPanels, 5, "Item", TEXT},
-                {focusableExpansionPanels, 5, "Item", TEXT},
-                {popOutExpansionPanels, 5, "Item", TEXT}
+                {accordionExpansionPanels, 5, "Item", LOREM_IPSUM_TEXT},
+                {insetExpansionPanels, 5, "Item", LOREM_IPSUM_TEXT},
+                {focusableExpansionPanels, 5, "Item", LOREM_IPSUM_TEXT},
+                {popOutExpansionPanels, 5, "Item", LOREM_IPSUM_TEXT}
         };
     }
 
@@ -92,7 +90,7 @@ public class ExpansionPanelsTest extends TestsInit {
         modelExpansionPanels.has().size(5);
         modelExpansionPanels.panels().forEach(expansionPanel -> {
             expansionPanel.header().has().text(containsString("Header"));
-            expansionPanel.wrapper().has().text(TEXT);
+            expansionPanel.wrapper().has().text(LOREM_IPSUM_TEXT);
             expansionPanel.is().expanded();
         });
         openPanelText.is().text("[ 0, 1, 2, 3, 4 ]");
@@ -129,35 +127,20 @@ public class ExpansionPanelsTest extends TestsInit {
     @Test
     public void advancedExpansionPanelTest() {
         advancedExpansionPanels.has().size(3);
-        List<ExpansionPanel> panels = advancedExpansionPanels.panels();
 
         String tripName = "My trip name";
-        ExpansionPanel tripPanel = panels.get(0);
-        tripPanel.wrapper()
-                .find("input")
-                .sendKeys(tripName);
-        tripPanel.close();
-        tripPanel.header()
-                .find(".text--secondary span")
-                .has().text(equalTo(tripName));
+        TripExpansionPanel tripPanel = advancedExpansionPanels.tripPanel();
+        tripPanel.setTripName(tripName);
+        tripPanel.tripNameText().has().text(equalTo(tripName));
 
         String countryName = "Ecuador";
-        ExpansionPanel countryPanel = panels.get(1);
-        countryPanel.wrapper()
-                .find(By.tagName("input"))
-                .sendKeys(countryName);
-        countryPanel.close();
-        countryPanel.header()
-                .find(".text--secondary span")
-                .has().text(equalTo(countryName));
+        LocationExpansionPanel locationPanel = advancedExpansionPanels.locationPanel();
+        locationPanel.setLocationName(countryName);
+        locationPanel.tripLocationText().has().text(equalTo(countryName));
 
-        List<String> listWhenClosedExpected = Arrays.asList("Start date: Not set", "End date: Not set");
-        ExpansionPanel timePanel = panels.get(2);
-        timePanel.close();
-        WebList listWhenClosedActual = timePanel.header()
-                .finds(".text--secondary div.col-6");
-        listWhenClosedActual.has().size(listWhenClosedExpected.size());
-        assertThat(listWhenClosedActual.map(UIElement::getText), equalTo(listWhenClosedExpected));
+        TripTimeExpansionPanel timePanel = advancedExpansionPanels.tripTimePanel();
+        timePanel.startDateText().has().text(equalTo("Start date: Not set"));
+        timePanel.endDateText().has().text(equalTo("End date: Not set"));
     }
 
     @Test
@@ -165,7 +148,7 @@ public class ExpansionPanelsTest extends TestsInit {
         customIconExpansionPanelsSameIcons.has().size(5);
         customIconExpansionPanelsSameIcons.panels().forEach(expansionPanel -> {
             expansionPanel.header().has().text("Item");
-            expansionPanel.wrapper().has().text(TEXT);
+            expansionPanel.wrapper().has().text(LOREM_IPSUM_TEXT);
             expansionPanel.is().expanded();
             expansionPanel.expander().is().displayed();
             expansionPanel.expander().has().cssClass("mdi-menu-down");

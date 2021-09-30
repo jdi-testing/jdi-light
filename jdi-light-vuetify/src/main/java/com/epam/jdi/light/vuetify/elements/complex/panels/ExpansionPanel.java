@@ -15,8 +15,8 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
     protected String CONTENT_LOCATOR = ".v-expansion-panel-content";
     protected String WRAPPER_LOCATOR = ".v-expansion-panel-content__wrap";
 
-    //Access only as part of ExpansionPanels
-    ExpansionPanel() {}
+    //Access only as part of ExpansionPanels or if you want to create yours custom panel
+    protected ExpansionPanel() {}
 
     @JDIAction("Get icon from '{name}'")
     public UIElement expander() {

@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.annotations.JDIExpansionPanels;
 import com.epam.jdi.light.vuetify.elements.complex.panels.ExpansionPanels;
+import io.github.com.custom.panels.AdvancedExpansionPanels;
 
 public class ExpansionPanelsPage extends VuetifyPage {
 
@@ -67,7 +68,7 @@ public class ExpansionPanelsPage extends VuetifyPage {
     public static ExpansionPanels readOnlyExpansionPanels;
 
     @JDIExpansionPanels(root = "#AdvancedExpansionPanel.v-expansion-panels")
-    public static ExpansionPanels advancedExpansionPanels;
+    public static AdvancedExpansionPanels advancedExpansionPanels;
 
     @JDIExpansionPanels(
             root = "#CustomIconExpansionPanel .v-expansion-panels:nth-child(1)",
