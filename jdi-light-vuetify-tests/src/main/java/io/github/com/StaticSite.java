@@ -18,10 +18,14 @@ import io.github.com.pages.AlertsPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
+import io.github.com.pages.BreadcrumbsPage;
+import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
 import io.github.com.pages.FootersPage;
 import io.github.com.pages.SubheaderPage;
+import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.TabsPage;
+import io.github.com.pages.ExpansionPanelsPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -41,7 +45,7 @@ public class StaticSite {
 
     @Url("/avatars")
     public static AvatarsPage avatarsPage;
-
+  
      @Url("/badges")
     public static BadgesPage badgesPage;
 
@@ -50,7 +54,7 @@ public class StaticSite {
 
     @Url("/breadcrumbs")
     public static BreadcrumbsPage breadcrumbsPage;
-
+  
     @WaitAfterAction(3)
     @Url("/checkboxes")
     public static CheckboxesPage checkboxesPage;
@@ -64,7 +68,7 @@ public class StaticSite {
 
     @Url("/tabs")
     public static TabsPage tabsPage;
-
+  
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
 
@@ -73,6 +77,9 @@ public class StaticSite {
 
     @Url("/cards")
     public static CardsPage cardsPage;
+
+    @Url("/expansion-panels")
+    public static ExpansionPanelsPage expansionPanelsPage;
 
     @Url("/bottom-navigation")
     public static BottomNavigationPage bottomNavigationPage;
