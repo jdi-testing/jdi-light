@@ -15,6 +15,7 @@ import io.github.com.pages.AlertsPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.DividersPage;
+import io.github.com.pages.ListsPage;
 import io.github.com.pages.SubheaderPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
@@ -52,4 +53,7 @@ public class StaticSite {
     @WaitAfterAction(3)
     @Url("/checkboxes")
     public static CheckboxesPage checkboxesPage;
+
+    @Url("/lists")
+    public static ListsPage listsPage;
 }
