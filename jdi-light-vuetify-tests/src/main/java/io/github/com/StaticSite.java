@@ -14,10 +14,14 @@ import io.github.com.pages.AppBarsPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
+import io.github.com.pages.BottomNavigationPage;
+import io.github.com.pages.BottomSheetsPage;
 import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.CardsPage;
 import io.github.com.pages.CheckboxesPage;
 import io.github.com.pages.DividersPage;
+import io.github.com.pages.ExpansionPanelsPage;
+import io.github.com.pages.FootersPage;
 import io.github.com.pages.SubheaderPage;
 import io.github.com.pages.SystemBarsPage;
 import io.github.com.pages.TabsPage;
@@ -52,6 +56,12 @@ public class StaticSite {
     @Url("/banners")
     public static BannersPage bannersPage;
 
+    @Url("/bottom-navigation")
+    public static BottomNavigationPage bottomNavigationPage;
+
+    @Url("/bottom-sheets")
+    public static BottomSheetsPage bottomSheetsPage;
+
     @Url("/breadcrumbs")
     public static BreadcrumbsPage breadcrumbsPage;
 
@@ -66,29 +76,22 @@ public class StaticSite {
     @Url("/dividers")
     public static DividersPage dividersPage;
 
-    @Url("/bottom-sheets")
-    public static BottomSheetsPage bottomSheetsPage;
+    @Url("/expansion-panels")
+    public static ExpansionPanelsPage expansionPanelsPage;
 
-    @Url("/tabs")
-    public static TabsPage tabsPage;
+    @Url("/footers")
+    public static FootersPage footersPage;
 
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
 
     @Url("/system-bars")
     public static SystemBarsPage systemBarsPage;
-    @Url("/footers")
-    public static FootersPage footersPage;
 
     @Url("/tabs")
     public static TabsPage tabsPage;
 
     @Url("/toolbars")
     public static ToolBarsPage toolBarsPage;
-
-    @Url("/expansion-panels")
-    public static ExpansionPanelsPage expansionPanelsPage;
-
-    @Url("/bottom-navigation")
-    public static BottomNavigationPage bottomNavigationPage;
+  
 }
