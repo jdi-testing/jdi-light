@@ -23,6 +23,7 @@ import io.github.com.pages.FootersPage;
 import io.github.com.pages.PaginationPage;
 import io.github.com.pages.SubheaderPage;
 import io.github.com.pages.TabsPage;
+import io.github.com.pages.ExpansionPanelsPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -74,6 +75,9 @@ public class StaticSite {
 
     @Url("/cards")
     public static CardsPage cardsPage;
+
+    @Url("/expansion-panels")
+    public static ExpansionPanelsPage expansionPanelsPage;
 
     @Url("/bottom-navigation")
     public static BottomNavigationPage bottomNavigationPage;
