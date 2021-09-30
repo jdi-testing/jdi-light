@@ -5,9 +5,13 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.vuetify.asserts.RadiobuttonAssert;
+import com.epam.jdi.light.vuetify.asserts.RadioButtonAssert;
 
-public class Radiobutton extends UIBaseElement<RadiobuttonAssert> implements HasLabel {
+/**
+ * To see example of Radio buttons web element please visit https://vuetifyjs.com/en/components/radio-buttons/
+ */
+
+public class RadioButton extends UIBaseElement<RadioButtonAssert> implements HasLabel {
 
     @JDIAction("Is '{name}' selected")
     public boolean isChecked() {
@@ -47,7 +51,7 @@ public class Radiobutton extends UIBaseElement<RadiobuttonAssert> implements Has
     }
 
     @Override
-    public RadiobuttonAssert is() {
-        return new RadiobuttonAssert().set(this);
+    public RadioButtonAssert is() {
+        return new RadioButtonAssert().set(this);
     }
 }
