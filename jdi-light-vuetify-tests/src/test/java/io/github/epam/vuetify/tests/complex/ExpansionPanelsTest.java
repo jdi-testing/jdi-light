@@ -56,13 +56,13 @@ public class ExpansionPanelsTest extends TestsInit {
     @Test(dataProvider = "simpleExpansionPanelsWithOnlyOneOpenPanelData")
     public void simpleTestWithOnlyOneOpenPanelAtMoment(ExpansionPanels panels, int size, String header, String content) {
         panels.has().size(size);
-        panels.panels().forEach(expansionPanel -> {
+        for (ExpansionPanel expansionPanel : panels.panels()) {
             expansionPanel.expand();
             expansionPanel.header().has().text(header);
             expansionPanel.wrapper().has().text(content);
             expansionPanel.expander().has().cssClass("mdi-chevron-down");
             expansionPanel.is().expanded();
-        });
+        }
         panels.select(1);
         panels.select(2);
         panels.panels().get(0).is().closed();
@@ -88,11 +88,11 @@ public class ExpansionPanelsTest extends TestsInit {
     @Test
     public void modelExpansionPanelTest(){
         modelExpansionPanels.has().size(5);
-        modelExpansionPanels.panels().forEach(expansionPanel -> {
+        for (ExpansionPanel expansionPanel : modelExpansionPanels.panels()) {
             expansionPanel.header().has().text(containsString("Header"));
             expansionPanel.wrapper().has().text(LOREM_IPSUM_TEXT);
             expansionPanel.is().expanded();
-        });
+        }
         openPanelText.is().text("[ 0, 1, 2, 3, 4 ]");
         modelExpansionPanels.panels().forEach(expansionPanel -> expansionPanel.is().expanded());
         noneButton.click();
@@ -118,10 +118,10 @@ public class ExpansionPanelsTest extends TestsInit {
         panels.get(2).is().closed();
 
         readOnlyCheckbox.check();
-        panels.forEach(expansionPanel -> {
+        for (ExpansionPanel expansionPanel : panels) {
             expansionPanel.expand();
             expansionPanel.is().expanded();
-        });
+        }
     }
 
     @Test
@@ -146,13 +146,13 @@ public class ExpansionPanelsTest extends TestsInit {
     @Test
     public void customIconExpansionPanelTest() {
         customIconExpansionPanelsSameIcons.has().size(5);
-        customIconExpansionPanelsSameIcons.panels().forEach(expansionPanel -> {
+        for (ExpansionPanel expansionPanel : customIconExpansionPanelsSameIcons.panels()) {
             expansionPanel.header().has().text("Item");
             expansionPanel.wrapper().has().text(LOREM_IPSUM_TEXT);
             expansionPanel.is().expanded();
             expansionPanel.expander().is().displayed();
             expansionPanel.expander().has().cssClass("mdi-menu-down");
-        });
+        }
     }
 
     @Test
