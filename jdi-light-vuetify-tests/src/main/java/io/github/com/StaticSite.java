@@ -93,5 +93,5 @@ public class StaticSite {
 
     @Url("/toolbars")
     public static ToolBarsPage toolBarsPage;
-  
+
 }
