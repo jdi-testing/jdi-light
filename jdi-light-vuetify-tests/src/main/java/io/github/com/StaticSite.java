@@ -66,11 +66,19 @@ public class StaticSite {
     @Url("/dividers")
     public static DividersPage dividersPage;
 
+    @Url("/bottom-sheets")
+    public static BottomSheetsPage bottomSheetsPage;
+
+    @Url("/tabs")
+    public static TabsPage tabsPage;
+
     @Url("/subheaders")
     public static SubheaderPage subheaderPage;
 
     @Url("/system-bars")
     public static SystemBarsPage systemBarsPage;
+    @Url("/footers")
+    public static FootersPage footersPage;
 
     @Url("/tabs")
     public static TabsPage tabsPage;
@@ -78,4 +86,9 @@ public class StaticSite {
     @Url("/toolbars")
     public static ToolBarsPage toolBarsPage;
 
+    @Url("/expansion-panels")
+    public static ExpansionPanelsPage expansionPanelsPage;
+
+    @Url("/bottom-navigation")
+    public static BottomNavigationPage bottomNavigationPage;
 }
