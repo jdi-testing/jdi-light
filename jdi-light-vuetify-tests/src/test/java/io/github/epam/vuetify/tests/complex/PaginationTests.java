@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
@@ -125,24 +126,21 @@ public class PaginationTests extends TestsInit {
         totalVisiblePagination.is().enabled();
         totalVisiblePagination.is().started();
 
-        List<String> actualButtonsFromStartToEnd = new ArrayList<>();
-        ListIterator<String> it = totalVisiblePagination.listIterator();
-        while (it.hasNext()) {
-            actualButtonsFromStartToEnd.add(it.next());
-        }
+        totalVisiblePagination.select("15");
         totalVisiblePagination.is().ended();
-        assertThat(actualButtonsFromStartToEnd, equalTo(totalVisiblePages));
+        totalVisiblePagination.has().values("1", "2", "3", "13", "14", "15");
+        totalVisiblePagination.has().selected("15");
+        totalVisiblePagination.has().selected(6);
 
-        int indexStartInReverseOrder = 3;
-        List<String> expected = initPages(1, indexStartInReverseOrder);
-        List<String> actualButtonsFromIndexStart = new ArrayList<>();
-        totalVisiblePagination.select(indexStartInReverseOrder);
+        List<String> actualButtonsFromEndToStart = new ArrayList<>();
+        ListIterator<String> it = totalVisiblePagination.listIterator();
         while (it.hasPrevious()) {
-            actualButtonsFromIndexStart.add(it.previous());
+            actualButtonsFromEndToStart.add(it.previous());
         }
-        Collections.reverse(actualButtonsFromIndexStart);
-        assertThat(actualButtonsFromIndexStart, equalTo(expected));
         totalVisiblePagination.is().started();
+        assertThat(actualButtonsFromEndToStart, equalTo(Arrays.asList(
+            "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
+        )));
     }
 
 }
