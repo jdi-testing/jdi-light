@@ -3,6 +3,7 @@ package io.github.epam.material.tests.utils;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.textAreaAutoSizePage;
@@ -59,6 +60,7 @@ public class TextAreaAutoSizeTests extends TestsInit {
         };
     }
 
+//    @Ignore
     @Test(dataProvider = "zeroToThree")
     public void minAreaDoesNotIncreaseBefore4thLineTest(String lines) {
         initialHeight = minArea.getSize().height;
@@ -97,6 +99,7 @@ public class TextAreaAutoSizeTests extends TestsInit {
         assertThat(maxArea.getSize().height, greaterThan(initialHeight));
     }
 
+//    @Ignore
     @Test
     public void maxAreaDoesNotChangeAfter4LinesTest() {
         maxArea.setLines(FOUR_LINES);

@@ -3,6 +3,7 @@ package io.github.epam.material.tests.inputs;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.dateTimePickersPage;
@@ -55,6 +56,7 @@ public class DateTimePickersTests extends TestsInit {
         dialogPicker.has().text("10/10/2021");
     }
 
+    @Ignore
     @Test
     public void timePickerTest() {
         timePicker.iCore().label().has().text("Time picker");

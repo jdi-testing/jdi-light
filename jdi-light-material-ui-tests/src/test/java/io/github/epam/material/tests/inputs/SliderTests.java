@@ -3,6 +3,7 @@ package io.github.epam.material.tests.inputs;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.slidersPage;
@@ -116,6 +117,7 @@ public class SliderTests extends TestsInit {
         checkRangeSlider(10, 80);
     }
 
+    @Ignore
     @Test
     public void inputSliderTest() {
         inputSlider.is().enabled();

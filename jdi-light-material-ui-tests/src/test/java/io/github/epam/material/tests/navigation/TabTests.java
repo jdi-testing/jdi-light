@@ -3,6 +3,7 @@ package io.github.epam.material.tests.navigation;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -36,6 +37,7 @@ public class TabTests extends TestsInit {
         tabPage.isOpened();
     }
 
+//    @Ignore
     @Test
     public void simpleTabTest() {
         simpleTabs.get(1).show();
