@@ -7,11 +7,8 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static io.github.com.StaticSite.paginationPage;
 import static io.github.com.pages.PaginationPage.circlePagination;
@@ -26,41 +23,18 @@ import static org.hamcrest.Matchers.nullValue;
 
 public class PaginationTests extends TestsInit {
 
-    List<String> circlePages;
-    List<String> disabledPages;
-    List<String> iconsPages;
-    List<String> lengthPages;
-    List<String> totalVisiblePages;
-
-    private List<String> initPages(int from, int to) {
-        return Collections.unmodifiableList(
-                IntStream.rangeClosed(from, to)
-                        .boxed()
-                        .map(Object::toString)
-                        .collect(Collectors.toList())
-        );
-    }
-
     @BeforeClass
     public void before() {
         paginationPage.open();
     }
 
-    @BeforeClass
-    public void initData() {
-        circlePages = initPages(1, 4);
-        disabledPages = initPages(1, 3);
-        iconsPages = initPages(1, 4);
-        lengthPages = initPages(1, 15);
-        totalVisiblePages = initPages(1, 15);
-    }
-
     @Test
     public void circlePaginationTest() {
+        List<String> circlePages = Arrays.asList("1", "2", "3", "4");
         circlePagination.has().size(4);
         circlePagination.is().enabled();
         circlePagination.is().started();
-        circlePagination.has().values("1", "2", "3", "4");
+        circlePagination.has().values(circlePages);
         for (String page : circlePages) {
             circlePagination.select(page);
             circlePagination.has().selected(Integer.parseInt(page));
@@ -74,10 +48,11 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void iconsPaginationTest() {
+        List<String> iconsPages = Arrays.asList("1", "2", "3", "4");
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
         iconsPagination.is().started();
-        circlePagination.has().values("1", "2", "3", "4");
+        circlePagination.has().values(iconsPages);
         for (UIElement button : iconsPagination.list()) {
             button.click();
             iconsPagination.is().selected(button.getText());
@@ -89,8 +64,10 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void disabledPaginationTest() {
+        List<String> disabledPages = Arrays.asList("1", "2", "3");
         disabledPagination.has().size(3);
         disabledPagination.is().disabled();
+        disabledPagination.has().values(disabledPages);
         assertThat(disabledPagination.selected(), is(nullValue()));
     }
 
@@ -117,7 +94,6 @@ public class PaginationTests extends TestsInit {
         lengthPagination.has().selected("15");
         lengthPagination.has().selected(11);
     }
-
 
     @Test
     public void totalVisiblePaginationTest() {
