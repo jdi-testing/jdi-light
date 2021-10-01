@@ -51,6 +51,12 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is draggable")
+    public ChipAssert draggable() {
+        jdiAssert(element().isDraggable(), Matchers.is(true));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has filter")
     public ChipAssert filter() {
         jdiAssert(element().hasFilter(), Matchers.is(true));

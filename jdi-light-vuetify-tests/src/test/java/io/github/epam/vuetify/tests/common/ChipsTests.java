@@ -55,10 +55,11 @@ public class ChipsTests extends TestsInit {
 
     @Test
     public void draggableChipTest() {
-//        new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
-//                draggableChip.isDisplayed());
-//        draggableChipTitle.getText();
-//        draggableChip.dragAndDropToElement(draggableChipTitle);
+        new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
+                draggableChip.isDisplayed());
+        draggableChip.is().draggable();
+        draggableChipTitle.getText();
+        draggableChip.dragAndDropToElement(draggableChipTitle);
     }
 
     @Test

@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 

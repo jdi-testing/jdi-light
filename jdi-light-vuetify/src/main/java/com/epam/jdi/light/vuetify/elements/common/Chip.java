@@ -37,11 +37,16 @@ public class Chip extends UIBaseElement<ChipAssert> {
         this.find(CLOSE_BUTTON).click();
     }
 
+    @JDIAction("Check that '{name}' is draggable")
+    public boolean isDraggable() {
+        return this.attr("draggable").equals("true");
+    }
+
     @JDIAction("Drag '{name}' and drop it to ({0}, {1})")
     public void dragAndDropToElement(UIElement destination) {
+        new Actions(getDriver()).dragAndDrop(this.core().getWebElement(), destination.core().getWebElement())
+                .build().perform();
 //        Actions actions = new Actions(getDriver());
-////        actions.dragAndDrop(this.find(TEXT).core().getWebElement(), destination.core().getWebElement());
-////        actions.build().perform();
 //        int x = destination.core().getWebElement().getLocation().x;
 //        int y = destination.core().getWebElement().getLocation().y;
 //        actions.moveToElement(this.core().getWebElement())
@@ -97,7 +102,7 @@ public class Chip extends UIBaseElement<ChipAssert> {
 
     @JDIAction("Get {name}'s borderColor")
     public boolean hasVisibleBorder() {
-        return this.css("border-color") != this.css("background-color")
+        return !this.css("border-color").equals(this.css("background-color"))
                 && !this.css("border-color").contains("transparent");
     }
 
