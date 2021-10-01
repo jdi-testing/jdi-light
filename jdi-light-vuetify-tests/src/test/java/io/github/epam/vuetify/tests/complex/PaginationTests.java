@@ -26,6 +26,7 @@ public class PaginationTests extends TestsInit {
     @BeforeClass
     public void before() {
         paginationPage.open();
+        paginationPage.isOpened();
     }
 
     @Test
