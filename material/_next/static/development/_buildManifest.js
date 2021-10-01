@@ -1,1 +1,1 @@
-self.__BUILD_MANIFEST = {__rewrites:[],"/_error":["static\u002Fchunks\u002Fpages\u002F_error.js"],"/card_surface":["static\u002Fchunks\u002Fpages\u002Fcard_surface.js"],sortedPages:["\u002F_app","\u002F_error","\u002Fcard_surface"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
+self.__BUILD_MANIFEST = {__rewrites:[],"/_error":["static\u002Fchunks\u002Fpages\u002F_error.js"],"/avatar":["static\u002Fchunks\u002Fpages\u002Favatar.js"],sortedPages:["\u002F_app","\u002F_error","\u002Favatar"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
