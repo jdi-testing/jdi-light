@@ -13,7 +13,7 @@ import java.util.Date;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.last;
+import static com.jdiai.tools.LinqUtils.last;
 import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
