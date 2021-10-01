@@ -11,10 +11,109 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 public class Carousel extends UIBaseElement<CarouselAssert> {
 
-    @JDIAction("Get '{name}' 'checker' element")
-    public UIElement getChecker() {
-        return this.find(".v-input__control");
+    @JDIAction("Get '{name}' icon")
+    public WebList getDelimiters() {
+        return this.finds("div.v-carousel__controls i");
     }
+
+    @JDIAction("Get '{name}' icon")
+    public UIElement getNextButton() {
+        return this.find(".v-window__next button");
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public UIElement getPreviousButton() {
+        return this.find(".v-window__prev button");
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public UIElement getCurrentSlide() {
+        return this.find(".v-window-item");
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public String getCurrentSlideColor() {
+        return getCurrentSlide().find(".v-sheet").getCssValue("background-color");
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public String getCurrentSlideText() {
+        return getCurrentSlide().find(".text-h2").getText();
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public String getCurrentBackgroundImage() {
+        return getCurrentSlide().find(".v-image__image").getCssValue("background-image");
+    }
+
+    @JDIAction("Get '{name}' 'checker' element")
+    public UIElement getToggle() {
+        return this.find(".v-input--selection-controls__input");
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public boolean hasDelimitersIcons(String iconName) {
+        Timer.waitCondition(getDelimiters()::isDisplayed);
+        return getDelimiters().stream().allMatch(e -> e.getAttribute("class").contains(iconName));
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public boolean hasNextButtonVisible() {
+        return getNextButton().isDisplayed();
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public boolean hasPreviousButtonVisible() {
+        return getPreviousButton().isDisplayed();
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public boolean hasNextButtonHidden() {
+        return getNextButton().isHidden();
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public boolean hasPreviousButtonHidden() {
+        return getPreviousButton().isHidden();
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public int hasNumberOfDelimiters() {
+        return getDelimiters().size();
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public boolean hasToggle() {
+        Timer.waitCondition(getToggle()::isDisplayed);
+        return getToggle().isDisplayed();
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public boolean hasToggleChecked() {
+        return getToggle().find("input").getAttribute("aria-checked").equals("true");
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public boolean hasToggleUnchecked() {
+        return getToggle().find("input").getAttribute("aria-checked").equals("false");
+    }
+
+    public void waitUntilSlideAutomaticallyChangeTo(String text, String color) {
+        Timer.waitCondition(() -> this.getCurrentSlideText().equals(text));
+        Timer.waitCondition(() -> this.getCurrentSlideColor().equals(color));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     @JDIAction("Get '{name}' text")
     public String getText() {
@@ -36,10 +135,6 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
         return this.finds("button");
     }
 
-    @JDIAction("Get '{name}' icon")
-    public UIElement getIcon() {
-        return this.find("i");
-    }
 
     @JDIAction("Get '{name}' text field")
     public UIElement getTextField() {
@@ -48,13 +143,13 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
 
     @JDIAction("{name} has 'checker' element")
     public boolean hasChecker() {
-        Timer.waitCondition(getChecker()::isDisplayed);
-        return getChecker().isExist();
+        Timer.waitCondition(getToggle()::isDisplayed);
+        return getToggle().isExist();
     }
 
     @JDIAction("Get {name} 'checker' element's state")
     public String checkerState() {
-        return getChecker().find("input").getAttribute("aria-checked");
+        return getToggle().find("input").getAttribute("aria-checked");
     }
 
     @JDIAction("{name} has title")
@@ -71,8 +166,8 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
 
     @JDIAction("{name} has icon")
     public boolean hasIcon() {
-        Timer.waitCondition(getIcon()::isDisplayed);
-        return getIcon().isExist();
+        Timer.waitCondition(getDelimiters()::isDisplayed);
+        return getDelimiters().isExist();
     }
 
     @JDIAction("{name} has alert after clicking on icon")
@@ -84,10 +179,6 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
     public boolean hasButtons() {
         Timer.waitCondition(getButtons()::isDisplayed);
         return getButtons().size() > 1;
-    }
-
-    public void handleAlert() {
-        this.core().driver().switchTo().alert().dismiss();
     }
 
     public void scrollIntoView() {

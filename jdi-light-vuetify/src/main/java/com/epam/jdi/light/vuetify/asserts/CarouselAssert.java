@@ -2,7 +2,6 @@ package com.epam.jdi.light.vuetify.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.complex.Carousel;
 import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
@@ -20,73 +19,78 @@ public class CarouselAssert extends UIAssert<CarouselAssert, Carousel> {
     }
 
     @JDIAction("Assert that banner has 'checker' element")
-    public CarouselAssert checker() {
-        jdiAssert(element().hasChecker(), Matchers.is(true));
+    public CarouselAssert delimiterIcons(String iconName) {
+        jdiAssert(element().hasDelimitersIcons(iconName), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has 'checker' element")
+    public CarouselAssert numberOfDelimiters(int numberOfDelimiters) {
+        jdiAssert(element().hasNumberOfDelimiters(), Matchers.equalTo(numberOfDelimiters));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has 'checker' element")
+    public CarouselAssert nextButtonVisible() {
+        jdiAssert(element().hasNextButtonVisible(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has 'checker' element")
+    public CarouselAssert previousButtonVisible() {
+        jdiAssert(element().hasPreviousButtonVisible(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has 'checker' element")
+    public CarouselAssert nextButtonHidden() {
+        jdiAssert(element().hasNextButtonHidden(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has 'checker' element")
+    public CarouselAssert previousButtonHidden() {
+        jdiAssert(element().hasPreviousButtonHidden(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has 'checker' element")
+    public CarouselAssert currentSlideColor(String color) {
+        Timer.waitCondition(() -> element().getCurrentSlideColor().equals(color));
+        jdiAssert(element().getCurrentSlideColor(), Matchers.containsString(color));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has 'checker' element")
+    public CarouselAssert currentSlideText(String text) {
+        Timer.waitCondition(() -> element().getCurrentSlideText().equals(text));
+        jdiAssert(element().getCurrentSlideText(), Matchers.containsString(text));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has 'checker' element")
+    public CarouselAssert currentSlideImage(String imageContent) {
+        Timer.waitCondition(() -> element().getCurrentBackgroundImage().contains(imageContent));
+        jdiAssert(element().getCurrentBackgroundImage(), Matchers.containsString(imageContent));
         return this;
     }
 
     @JDIAction("Assert that banner's 'checker' element is checked")
-    public CarouselAssert checkerChecked() {
-        jdiAssert(element().checkerState(), Matchers.is("true"));
+    public CarouselAssert toggle() {
+        jdiAssert(element().hasToggle(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that banner's 'checker' element is unchecked")
-    public CarouselAssert checkerUnchecked() {
-        jdiAssert(element().checkerState(), Matchers.is("false"));
+    @JDIAction("Assert that banner's 'checker' element is checked")
+    public CarouselAssert toggleChecked() {
+        jdiAssert(element().hasToggleChecked(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that banner has proper title")
-    public CarouselAssert properTitle(String title) {
-        jdiAssert(element().hasTitle(), Matchers.is(title));
+    @JDIAction("Assert that banner's 'checker' element is checked")
+    public CarouselAssert toggleUnchecked() {
+        jdiAssert(element().hasToggleUnchecked(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that banner has proper title")
-    public CarouselAssert properText(String text) {
-        jdiAssert(element().getText(), Matchers.containsString(text));
-        return this;
-    }
-
-    @JDIAction("Assert that banner has button")
-    public CarouselAssert button() {
-        jdiAssert(element().hasButton(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that banner has icon")
-    public CarouselAssert icon() {
-        jdiAssert(element().hasIcon(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that banner has alert after clicking on icon")
-    public CarouselAssert alertOnIconClick(String text) {
-        jdiAssert(element().hasAlertOnIconClick(), Matchers.is(text));
-        return this;
-    }
-
-    @JDIAction("Assert that banner has buttons")
-    public CarouselAssert buttons() {
-        for (UIElement button : element().getButtons()) {
-            jdiAssert(button.getAttribute("type"), Matchers.is("button"));
-        }
-        jdiAssert(element().hasButtons(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that banner's buttons are hidden")
-    public CarouselAssert hiddenButtons() {
-        for(UIElement button: element().getButtons()) {
-            jdiAssert(button.isHidden(), Matchers.is(true));
-        }
-        return this;
-    }
-
-    @JDIAction("Assert that banner's text field is hidden")
-    public CarouselAssert hiddenTextField() {
-        jdiAssert(element().getTextField().isHidden(), Matchers.is(true));
-        return this;
-    }
 }
