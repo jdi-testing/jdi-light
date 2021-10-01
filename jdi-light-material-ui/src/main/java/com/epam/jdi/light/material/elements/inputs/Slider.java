@@ -65,7 +65,6 @@ public class Slider extends UIBaseElement<SliderAssert> {
     double maxValue = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
     double pixelsInUnit = coreHeight / (maxValue - minValue);
     double yOffset = (value - minValue) * pixelsInUnit - trackHeight;
-//    int yOffset = getVerticalShiftInPixels(value);
     thumb().dragAndDropTo(0, -(int)Math.round(yOffset));
   }
 
