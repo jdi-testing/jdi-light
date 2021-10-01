@@ -10,6 +10,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.entities.User;
 import io.github.com.pages.AlertsPage;
+import io.github.com.pages.AppBarsPage;
 import io.github.com.pages.AutocompletesPage;
 import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
@@ -23,7 +24,10 @@ import io.github.com.pages.DividersPage;
 import io.github.com.pages.ExpansionPanelsPage;
 import io.github.com.pages.FootersPage;
 import io.github.com.pages.SubheaderPage;
+import io.github.com.pages.SystemBarsPage;
 import io.github.com.pages.TabsPage;
+import io.github.com.pages.ToolBarsPage;
+
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -41,18 +45,30 @@ public class StaticSite {
     @Url("/alerts")
     public static AlertsPage alertsPage;
 
+    @Url("/app-bars")
+    public static AppBarsPage appBarsPage;
+
     @Url("/avatars")
     public static AvatarsPage avatarsPage;
-  
-     @Url("/badges")
+
+    @Url("/badges")
     public static BadgesPage badgesPage;
 
     @Url("/banners")
     public static BannersPage bannersPage;
 
+    @Url("/bottom-navigation")
+    public static BottomNavigationPage bottomNavigationPage;
+
+    @Url("/bottom-sheets")
+    public static BottomSheetsPage bottomSheetsPage;
+
     @Url("/breadcrumbs")
     public static BreadcrumbsPage breadcrumbsPage;
-  
+
+    @Url("/cards")
+    public static CardsPage cardsPage;
+
     @WaitAfterAction(3)
     @Url("/checkboxes")
     public static CheckboxesPage checkboxesPage;
@@ -61,27 +77,24 @@ public class StaticSite {
     @Url("/dividers")
     public static DividersPage dividersPage;
 
-    @Url("/bottom-sheets")
-    public static BottomSheetsPage bottomSheetsPage;
+    @Url("/expansion-panels")
+    public static ExpansionPanelsPage expansionPanelsPage;
+
+    @Url("/footers")
+    public static FootersPage footersPage;
+
+    @Url("/subheaders")
+    public static SubheaderPage subheaderPage;
+
+    @Url("/system-bars")
+    public static SystemBarsPage systemBarsPage;
 
     @Url("/autocompletes")
     public static AutocompletesPage autocompletesPage;
 
     @Url("/tabs")
     public static TabsPage tabsPage;
-  
-    @Url("/subheaders")
-    public static SubheaderPage subheaderPage;
 
-    @Url("/footers")
-    public static FootersPage footersPage;
-
-    @Url("/cards")
-    public static CardsPage cardsPage;
-
-    @Url("/expansion-panels")
-    public static ExpansionPanelsPage expansionPanelsPage;
-
-    @Url("/bottom-navigation")
-    public static BottomNavigationPage bottomNavigationPage;
+    @Url("/toolbars")
+    public static ToolBarsPage toolBarsPage;
 }

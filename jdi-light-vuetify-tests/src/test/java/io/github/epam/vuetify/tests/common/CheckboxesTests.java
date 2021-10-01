@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.not;
 
 public class CheckboxesTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         checkboxesPage.open();
     }

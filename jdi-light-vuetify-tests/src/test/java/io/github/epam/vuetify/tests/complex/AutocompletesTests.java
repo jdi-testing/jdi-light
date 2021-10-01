@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -22,7 +22,7 @@ import static io.github.com.pages.AutocompletesPage.selectedApiName;
 
 public class AutocompletesTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         autocompletesPage.open();
     }
@@ -58,10 +58,13 @@ public class AutocompletesTests extends TestsInit {
     public void filterAutocompletesTest() {
         String valueToSelect = "Florida";
         String valueToSelect2 = "Georgia";
+        String name = "Mary";
+
         filterStateAutocomplete.is().disabled();
+        filterEditButton.show();
         filterEditButton.click();
         filterStateAutocomplete.is().active();
-        filterName.sendKeys("Mary");
+        filterName.sendKeys(name);
         filterStateAutocomplete.expand();
         filterStateAutocomplete.is().expanded();
         filterStateAutocomplete.select(valueToSelect);

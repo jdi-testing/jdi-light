@@ -1,6 +1,7 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -13,6 +14,7 @@ import org.openqa.selenium.Keys;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -163,8 +165,11 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
 
     @JDIAction("Clear text in the {name}'s text field")
     public void clearTextField() {
-        input().doubleClick();
-        input().sendKeys(Keys.BACK_SPACE);
+        if (getOs().equals(OsTypes.MAC)) {
+            input().sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
+        } else {
+            input().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+        }
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> mask().isNotExist());
     }
