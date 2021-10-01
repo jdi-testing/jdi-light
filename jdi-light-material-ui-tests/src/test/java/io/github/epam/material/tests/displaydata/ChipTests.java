@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

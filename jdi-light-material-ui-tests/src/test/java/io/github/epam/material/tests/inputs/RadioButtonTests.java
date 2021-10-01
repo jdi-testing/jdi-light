@@ -1,7 +1,7 @@
 package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

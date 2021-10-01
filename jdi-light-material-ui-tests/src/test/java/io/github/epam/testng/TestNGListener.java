@@ -1,6 +1,6 @@
 package io.github.epam.testng;
 
-import com.epam.jdi.tools.Safe;
+import com.jdiai.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestNGMethod;
