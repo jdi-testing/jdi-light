@@ -2,7 +2,7 @@ package io.github.epam.material.tests.navigation;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -30,14 +30,15 @@ public class TabTests extends TestsInit {
             "Item Six", "Item Seven", "Item Eight", "Item Nine", "Item Ten", "Item Eleven");
     private Timer timer = new Timer(5000L);
 
-    @BeforeTest()
-    public void beforeTest() {
+    @BeforeClass
+    public void before() {
         tabPage.open();
         tabPage.isOpened();
     }
 
     @Test
     public void simpleTabTest() {
+        simpleTabs.get(1).show();
         simpleTabs.get(1).click();
         simpleTabsContent.get(1).is().text(itemList.get(1));
         simpleTabs.get(2).click();

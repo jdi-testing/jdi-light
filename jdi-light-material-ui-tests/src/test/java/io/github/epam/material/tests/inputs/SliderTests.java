@@ -23,6 +23,7 @@ import static io.github.com.pages.inputs.SlidersPage.verticalSlider;
  */
 
 public class SliderTests extends TestsInit {
+
     @BeforeMethod
     public void before() {
         slidersPage.open();
@@ -125,13 +126,13 @@ public class SliderTests extends TestsInit {
         inputSliderField.clear();
         String stringValue = "70";
         inputSliderField.sendKeys(Keys.BACK_SPACE + "" + Keys.BACK_SPACE + stringValue + Keys.ENTER);
-        inputSlider.is().value(70);
+        inputSlider.has().value(70);
         inputSlider.moveLeft();
-        inputSlider.is().value(69);
+        inputSlider.has().value(69);
         inputSlider.moveRight();
-        inputSlider.is().value(70);
+        inputSlider.has().value(70);
         inputSlider.slideHorizontalTo(10);
-        inputSlider.is().value(10);
+        inputSlider.has().value(10);
     }
 
     @Test
