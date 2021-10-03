@@ -93,12 +93,12 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
 
     @JDIAction("Check if pagination '{name}' is on start")
     public boolean isStart() {
-        return list().first().hasClass(ITEM_CLASS_SELECTED);
+        return leftNavigation().isDisabled();
     }
 
     @JDIAction("Check if pagination '{name}' is on end")
     public boolean isEnd() {
-        return list().last().hasClass(ITEM_CLASS_SELECTED);
+        return rightNavigation().isDisabled();
     }
 
     @JDIAction("Check if there are hidden buttons in '{name}'")
