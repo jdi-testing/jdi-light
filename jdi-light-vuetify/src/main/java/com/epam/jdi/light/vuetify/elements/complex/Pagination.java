@@ -101,9 +101,9 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
         return rightNavigation().isDisabled();
     }
 
-    @JDIAction("Check if there are hidden buttons in '{name}'")
-    public boolean hasHiddenButtons() {
-        return core().finds(MORE_ITEMS_LOCATOR).size() > 0;
+    @JDIAction("Get number of hidden buttons in '{name}'")
+    public int hiddenButtons() {
+        return core().finds(MORE_ITEMS_LOCATOR).size();
     }
 
     @Override
@@ -149,7 +149,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
         boolean previous = size() > 0;
 
         private OptionalInt getCurrentIndex() {
-            if (!hasHiddenButtons()) {
+            if (hiddenButtons() == 0) {
                 return IntStream.range(getStartIndex(), size() + getStartIndex())
                         .filter(buttonId -> list().get(buttonId).hasClass(ITEM_CLASS_SELECTED))
                         .findFirst();

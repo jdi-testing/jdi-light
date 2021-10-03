@@ -21,9 +21,9 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
-    public PaginationAssert hiddenButtons() {
-        jdiAssert(element().hasHiddenButtons(), Matchers.is(true), "There are no hidden button on pagination element");
+    @JDIAction("Assert that '{name}' has {0} hidden buttons")
+    public PaginationAssert hiddenButtons(int size) {
+        jdiAssert(element().hiddenButtons(), Matchers.equalTo(size), "There are " + size + " hidden button on pagination element");
         return this;
     }
 

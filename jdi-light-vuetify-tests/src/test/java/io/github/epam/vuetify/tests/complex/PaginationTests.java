@@ -33,6 +33,7 @@ public class PaginationTests extends TestsInit {
     public void circlePaginationTest() {
         List<String> circlePages = Arrays.asList("1", "2", "3", "4");
         circlePagination.has().size(4);
+        circlePagination.has().hiddenButtons(0);
         circlePagination.is().enabled();
         circlePagination.is().started();
         circlePagination.has().values(circlePages);
@@ -51,6 +52,7 @@ public class PaginationTests extends TestsInit {
     public void iconsPaginationTest() {
         List<String> iconsPages = Arrays.asList("1", "2", "3", "4");
         iconsPagination.has().size(4);
+        iconsPagination.has().hiddenButtons(0);
         iconsPagination.is().enabled();
         iconsPagination.is().started();
         circlePagination.has().values(iconsPages);
@@ -67,6 +69,7 @@ public class PaginationTests extends TestsInit {
     public void disabledPaginationTest() {
         List<String> disabledPages = Arrays.asList("1", "2", "3");
         disabledPagination.has().size(3);
+        iconsPagination.has().hiddenButtons(0);
         disabledPagination.is().disabled();
         disabledPagination.has().values(disabledPages);
         assertThat(disabledPagination.selected(), is(nullValue()));
@@ -75,7 +78,7 @@ public class PaginationTests extends TestsInit {
     @Test
     public void lengthPaginationTest() {
         lengthPagination.has().size(11);
-        lengthPagination.has().hiddenButtons();
+        lengthPagination.has().hiddenButtons(1);
         lengthPagination.is().enabled();
         lengthPagination.is().started();
 
@@ -99,7 +102,7 @@ public class PaginationTests extends TestsInit {
     @Test
     public void totalVisiblePaginationTest() {
         totalVisiblePagination.has().size(6);
-        totalVisiblePagination.has().hiddenButtons();
+        totalVisiblePagination.has().hiddenButtons(1);
         totalVisiblePagination.is().enabled();
         totalVisiblePagination.is().started();
 
