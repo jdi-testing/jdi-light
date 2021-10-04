@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -16,7 +16,7 @@ import static io.github.com.pages.CheckboxesPage.statesCheckboxes;
 
 public class CheckboxesTests extends TestsInit {
 
-    @BeforeSuite
+    @BeforeClass
     public void before() {
         checkboxesPage.open();
     }
