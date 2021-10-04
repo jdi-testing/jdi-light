@@ -29,5 +29,4 @@ public class CarouselsPage extends VuetifyPage {
 
     @UI("#CustomDelimitersCarousel .v-list-item")
     public static ProfileCard profileCard;
-
 }
