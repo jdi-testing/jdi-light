@@ -4,14 +4,20 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.common.ElementArea.TOP_LEFT;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.DEEP_PURPLE_ACCENT_4;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREEN;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREY_DARKEN_3;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.INDIGO;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE_DARKEN_1;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.PINK_DARKEN_2;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_LIGHTEN_1;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_LIGHTEN_2;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.YELLOW_DARKEN_2;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.YELLOW_DARKEN_4;
 import static io.github.com.StaticSite.carouselsPage;
 import static io.github.com.pages.CarouselsPage.customDelimitersCarousel;
@@ -68,23 +74,23 @@ public class CarouselsTests extends TestsInit {
         customTransitionCarousel.has().delimiterIcons("mdi-circle");
         customTransitionCarousel.has().nextButtonVisible();
         customTransitionCarousel.has().previousButtonVisible();
-        customTransitionCarousel.has().currentSlideImage("squirrel");
+        customTransitionCarousel.has().currentSlideBackgroundImage("squirrel");
         customTransitionCarousel.getNextButton().click();
-        customTransitionCarousel.has().currentSlideImage("sky");
+        customTransitionCarousel.has().currentSlideBackgroundImage("sky");
         customTransitionCarousel.getPreviousButton().click();
-        customTransitionCarousel.has().currentSlideImage("squirrel");
+        customTransitionCarousel.has().currentSlideBackgroundImage("squirrel");
         customTransitionCarousel.getDelimiters().get(4).click();
-        customTransitionCarousel.has().currentSlideImage("planet");
+        customTransitionCarousel.has().currentSlideBackgroundImage("planet");
         customTransitionCarousel.getNextButton().click();
-        customTransitionCarousel.has().currentSlideImage("squirrel");
+        customTransitionCarousel.has().currentSlideBackgroundImage("squirrel");
         customTransitionCarousel.getPreviousButton().click();
-        customTransitionCarousel.has().currentSlideImage("planet");
+        customTransitionCarousel.has().currentSlideBackgroundImage("planet");
         customTransitionCarousel.getDelimiters().get(3).click();
-        customTransitionCarousel.has().currentSlideImage("bird");
+        customTransitionCarousel.has().currentSlideBackgroundImage("bird");
     }
 
     @Test
-    public void cycleCarouselTests() {
+    public void carouselCycleTests() {
         cycleCarousel.is().displayed();
         cycleCarousel.has().previousButtonHidden();
         cycleCarousel.has().nextButtonHidden();
@@ -126,13 +132,13 @@ public class CarouselsTests extends TestsInit {
         hideControlsCarousel.has().delimiterIcons("mdi-circle");
         hideControlsCarousel.has().nextButtonHidden();
         hideControlsCarousel.has().previousButtonHidden();
-        hideControlsCarousel.has().currentSlideImage("squirrel");
+        hideControlsCarousel.has().currentSlideBackgroundImage("squirrel");
         hideControlsCarousel.getDelimiters().get(2).click();
-        hideControlsCarousel.has().currentSlideImage("sky");
+        hideControlsCarousel.has().currentSlideBackgroundImage("sky");
         hideControlsCarousel.getDelimiters().get(3).click();
-        hideControlsCarousel.has().currentSlideImage("bird");
+        hideControlsCarousel.has().currentSlideBackgroundImage("bird");
         hideControlsCarousel.getDelimiters().get(4).click();
-        hideControlsCarousel.has().currentSlideImage("planet");
+        hideControlsCarousel.has().currentSlideBackgroundImage("planet");
     }
 
     @Test
@@ -142,8 +148,10 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.has().nextButtonHidden();
         customizedArrowsCarousel.hover();
         customizedArrowsCarousel.has().previousButtonVisible();
-        customizedArrowsCarousel.has().nextButtonVisible();
-        //TODO: add checking of custom text
+        customizedArrowsCarousel.has().previousButtonText("PREVIOUS SLIDE");
+        customizedArrowsCarousel.has().previousButtonColor(GREEN.value());
+        customizedArrowsCarousel.has().nextButtonText("NEXT SLIDE");
+        customizedArrowsCarousel.has().nextButtonColor(BLUE.value());
         customizedArrowsCarousel.has().numberOfDelimiters(5);
         customizedArrowsCarousel.has().delimiterIcons("mdi-circle");
         customizedArrowsCarousel.getDelimiters().get(1).click();
@@ -170,16 +178,78 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.waitUntilSlideAutomaticallyChangeTo("Second Slide", ORANGE_DARKEN_1.value());
         customizedArrowsCarousel.has().currentSlideText("Second Slide");
         customizedArrowsCarousel.has().currentSlideColor(ORANGE_DARKEN_1.value());
-
     }
 
     @Test
     public void hideDelimitersCarouselTests() {
         hideDelimitersCarousel.is().displayed();
+        hideDelimitersCarousel.has().delimitersHidden();
+        hideDelimitersCarousel.has().nextButtonVisible();
+        hideDelimitersCarousel.has().previousButtonVisible();
+        hideDelimitersCarousel.has().currentSlideBackgroundImage("squirrel");
+        hideDelimitersCarousel.getNextButton().click();
+        hideDelimitersCarousel.has().currentSlideBackgroundImage("sky");
+        hideDelimitersCarousel.getNextButton().click();
+        hideDelimitersCarousel.has().currentSlideBackgroundImage("bird");
+        hideDelimitersCarousel.getNextButton().click();
+        hideDelimitersCarousel.has().currentSlideBackgroundImage("planet");
+        hideDelimitersCarousel.getNextButton().click();
+        hideDelimitersCarousel.has().currentSlideBackgroundImage("squirrel");
+        hideDelimitersCarousel.getPreviousButton().click();
+        hideDelimitersCarousel.has().currentSlideBackgroundImage("planet");
+        hideDelimitersCarousel.getPreviousButton().click();
+        hideDelimitersCarousel.has().currentSlideBackgroundImage("bird");
     }
 
     @Test
     public void modelCarouselTests() {
         modelCarousel.is().displayed();
+        modelCarousel.has().numberOfDelimiters(5);
+        modelCarousel.has().delimiterIcons("mdi-circle");
+        modelCarousel.has().minusButton();
+        modelCarousel.has().plusButton();
+        modelCarousel.has().slideCounter("0");
+        modelCarousel.has().currentSlideColor(BLUE_DARKEN_2.value());
+        modelCarousel.has().currentSlideText("Slide 1");
+        modelCarousel.getDelimiters().get(2).click();
+        modelCarousel.has().slideCounter("1");
+        modelCarousel.has().currentSlideText("Slide 2");
+        modelCarousel.has().currentSlideColor(GREY_DARKEN_3.value());
+        modelCarousel.getDelimiters().get(3).click();
+        modelCarousel.has().slideCounter("2");
+        modelCarousel.has().currentSlideText("Slide 3");
+        modelCarousel.has().currentSlideColor(YELLOW_DARKEN_2.value());
+        modelCarousel.getDelimiters().get(4).click();
+        modelCarousel.has().slideCounter("3");
+        modelCarousel.has().currentSlideText("Slide 4");
+        modelCarousel.has().currentSlideColor(RED.value());
+        modelCarousel.getDelimiters().get(5).click();
+        modelCarousel.has().slideCounter("4");
+        modelCarousel.has().currentSlideText("Slide 5");
+        modelCarousel.has().currentSlideColor(ORANGE.value());
+        modelCarousel.getNextButton().click();
+        modelCarousel.has().currentSlideColor(BLUE_DARKEN_2.value());
+        modelCarousel.has().currentSlideText("Slide 1");
+        modelCarousel.getNextButton().click();
+        modelCarousel.has().currentSlideText("Slide 2");
+        modelCarousel.has().currentSlideColor(GREY_DARKEN_3.value());
+        modelCarousel.getPreviousButton().click();
+        modelCarousel.has().currentSlideColor(BLUE_DARKEN_2.value());
+        modelCarousel.has().currentSlideText("Slide 1");
+        modelCarousel.getPreviousButton().click();
+        modelCarousel.has().currentSlideText("Slide 5");
+        modelCarousel.has().currentSlideColor(ORANGE.value());
+        modelCarousel.getPlusButton().click(TOP_LEFT);
+        modelCarousel.has().currentSlideColor(BLUE_DARKEN_2.value());
+        modelCarousel.has().currentSlideText("Slide 1");
+        modelCarousel.getPlusButton().click(TOP_LEFT);
+        modelCarousel.has().currentSlideText("Slide 2");
+        modelCarousel.has().currentSlideColor(GREY_DARKEN_3.value());
+        modelCarousel.getMinusButton().click(TOP_LEFT);
+        modelCarousel.has().currentSlideColor(BLUE_DARKEN_2.value());
+        modelCarousel.has().currentSlideText("Slide 1");
+        modelCarousel.getMinusButton().click(TOP_LEFT);
+        modelCarousel.has().currentSlideColor(BLUE_DARKEN_2.value());
+        modelCarousel.has().currentSlideText("Slide 1");
     }
 }
