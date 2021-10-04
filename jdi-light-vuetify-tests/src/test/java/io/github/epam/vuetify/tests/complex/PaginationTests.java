@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
 
 import static io.github.com.StaticSite.paginationPage;
 import static io.github.com.pages.PaginationPage.circlePagination;
@@ -32,8 +31,8 @@ public class PaginationTests extends TestsInit {
     @Test
     public void circlePaginationTest() {
         List<String> circlePages = Arrays.asList("1", "2", "3", "4");
-        circlePagination.has().size(4);
         circlePagination.has().hiddenButtons(0);
+        circlePagination.has().size(4);
         circlePagination.is().enabled();
         circlePagination.is().started();
         circlePagination.has().values(circlePages);
@@ -51,8 +50,8 @@ public class PaginationTests extends TestsInit {
     @Test
     public void iconsPaginationTest() {
         List<String> iconsPages = Arrays.asList("1", "2", "3", "4");
-        iconsPagination.has().size(4);
         iconsPagination.has().hiddenButtons(0);
+        iconsPagination.has().size(4);
         iconsPagination.is().enabled();
         iconsPagination.is().started();
         circlePagination.has().values(iconsPages);
@@ -68,8 +67,8 @@ public class PaginationTests extends TestsInit {
     @Test
     public void disabledPaginationTest() {
         List<String> disabledPages = Arrays.asList("1", "2", "3");
-        disabledPagination.has().size(3);
         iconsPagination.has().hiddenButtons(0);
+        disabledPagination.has().size(3);
         disabledPagination.is().disabled();
         disabledPagination.has().values(disabledPages);
         assertThat(disabledPagination.selected(), is(nullValue()));
@@ -77,45 +76,31 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void lengthPaginationTest() {
-        lengthPagination.has().size(11);
-        lengthPagination.has().hiddenButtons(1);
         lengthPagination.is().enabled();
         lengthPagination.is().started();
 
-        lengthPagination.select(2);
-        lengthPagination.has().values("1", "2", "3", "4", "5", "6", "11", "12", "13", "14", "15");
-        lengthPagination.has().selected("2");
-        lengthPagination.has().selected(2);
-
-        lengthPagination.select(7);
-        lengthPagination.has().values("1", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15");
-        lengthPagination.has().selected("11");
-        lengthPagination.has().selected(7);
-
-        lengthPagination.select("15");
+        List<String> actualButtonsFromStartToEnd = new ArrayList<>();
+        while (lengthPagination.hasNext()) {
+            actualButtonsFromStartToEnd.add(lengthPagination.next());
+        }
         lengthPagination.is().ended();
-        lengthPagination.has().values("1", "2", "3", "4", "5", "6", "11", "12", "13", "14", "15");
-        lengthPagination.has().selected("15");
-        lengthPagination.has().selected(11);
+        assertThat(actualButtonsFromStartToEnd, equalTo(Arrays.asList(
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"
+        )));
     }
 
     @Test
     public void totalVisiblePaginationTest() {
-        totalVisiblePagination.has().size(6);
-        totalVisiblePagination.has().hiddenButtons(1);
         totalVisiblePagination.is().enabled();
         totalVisiblePagination.is().started();
 
         totalVisiblePagination.select("15");
-        totalVisiblePagination.is().ended();
-        totalVisiblePagination.has().values("1", "2", "3", "13", "14", "15");
         totalVisiblePagination.has().selected("15");
-        totalVisiblePagination.has().selected(6);
+        totalVisiblePagination.is().ended();
 
         List<String> actualButtonsFromEndToStart = new ArrayList<>();
-        ListIterator<String> it = totalVisiblePagination.listIterator();
-        while (it.hasPrevious()) {
-            actualButtonsFromEndToStart.add(it.previous());
+        while (totalVisiblePagination.hasPrevious()) {
+            actualButtonsFromEndToStart.add(totalVisiblePagination.previous());
         }
         totalVisiblePagination.is().started();
         assertThat(actualButtonsFromEndToStart, equalTo(Arrays.asList(

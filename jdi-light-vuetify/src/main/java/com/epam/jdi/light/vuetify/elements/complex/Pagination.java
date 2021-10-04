@@ -9,10 +9,7 @@ import com.epam.jdi.light.vuetify.annotations.JDIPagination;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
 
 import java.lang.reflect.Field;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
-import java.util.OptionalInt;
-import java.util.stream.IntStream;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
@@ -34,6 +31,8 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
     protected String MORE_ITEMS_LOCATOR = ".v-pagination__more";
 
     private int startIndex = 1;
+    private Boolean next;
+    private Boolean previous;
 
     @Override
     @JDIAction("Get web list of all buttons from '{name}'")
@@ -111,6 +110,56 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
         return new PaginationAssert().set(this);
     }
 
+    private boolean getNext() {
+        if (next == null) {
+            next = size() > 0;
+        }
+        return next;
+    }
+
+    private boolean getPrevious() {
+        if (previous == null) {
+            previous = size() > 0;
+        }
+        return previous;
+    }
+
+    public boolean hasNext() {
+        return getNext();
+    }
+
+    public boolean hasPrevious() {
+        return getPrevious();
+    }
+
+    public String next() {
+        if (isEnd()) {
+            if (!next) {
+                throw new NoSuchElementException("Can't find next element in " + getName());
+            }
+            next = false;
+            return selected();
+        }
+        next = true;
+        String current = selected();
+        rightNavigation().click();
+        return current;
+    }
+
+    public String previous() {
+        if (isStart()) {
+            if (!previous) {
+                throw new NoSuchElementException("Can't find previous element in " + getName());
+            }
+            previous = false;
+            return selected();
+        }
+        previous = true;
+        String current = selected();
+        leftNavigation().click();
+        return current;
+    }
+
     @Override
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JDIPagination.class, Pagination.class)) {
@@ -136,101 +185,6 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
         }
         if (!annotation.more().isEmpty()) {
             MORE_ITEMS_LOCATOR = annotation.more();
-        }
-    }
-
-    public ListIterator<String> listIterator() {
-        return new PaginationIterator();
-    }
-
-    private class PaginationIterator implements ListIterator<String> {
-
-        boolean next = size() > 0;
-        boolean previous = size() > 0;
-
-        private OptionalInt getCurrentIndex() {
-            if (hiddenButtons() == 0) {
-                return IntStream.range(getStartIndex(), size() + getStartIndex())
-                        .filter(buttonId -> list().get(buttonId).hasClass(ITEM_CLASS_SELECTED))
-                        .findFirst();
-            }
-            return OptionalInt.empty();
-        }
-
-        private int getFollowingIndex(boolean isThereFollowingElement, int indexShift) {
-            OptionalInt currentIndex = getCurrentIndex();
-            if (currentIndex.isPresent()) {
-                if (isThereFollowingElement) {
-                    return currentIndex.getAsInt();
-                }
-                return currentIndex.getAsInt() + indexShift;
-            }
-            return -1;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return next;
-        }
-
-        @Override
-        public String next() {
-            if (isEnd()) {
-                if (!next) {
-                    throw new NoSuchElementException("Can't find next element in " + getName());
-                }
-                next = false;
-                return selected();
-            }
-            next = true;
-            String current = selected();
-            rightNavigation().click();
-            return current;
-        }
-
-        @Override
-        public boolean hasPrevious() {
-            return previous;
-        }
-
-        @Override
-        public String previous() {
-            if (isStart()) {
-                if (!previous) {
-                    throw new NoSuchElementException("Can't find previous element in " + getName());
-                }
-                previous = false;
-                return selected();
-            }
-            previous = true;
-            String current = selected();
-            leftNavigation().click();
-            return current;
-        }
-
-        @Override
-        public int nextIndex() {
-            return getFollowingIndex(next, 1);
-        }
-
-        @Override
-        public int previousIndex() {
-            return getFollowingIndex(previous, -1);
-        }
-
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void set(String button) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void add(String button) {
-            throw new UnsupportedOperationException();
         }
     }
 }
