@@ -85,12 +85,12 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
     }
 
     @Override
-    @JDIAction("Check if pagination '{name}' is enabled")
+    @JDIAction("Check if '{name}' is enabled")
     public boolean isEnabled() {
         return !core().hasClass(CORE_CLASS_DISABLED);
     }
 
-    @JDIAction("Check if pagination '{name}' is on start")
+    @JDIAction("Check if '{name}' is on start")
     public boolean isStart() {
         return leftNavigation().isDisabled();
     }
@@ -110,28 +110,23 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
         return new PaginationAssert().set(this);
     }
 
-    private boolean getNext() {
+    @JDIAction("Check if '{name}' has next page")
+    public boolean hasNext() {
         if (next == null) {
             next = size() > 0;
         }
         return next;
     }
 
-    private boolean getPrevious() {
+    @JDIAction("Check if '{name}' has previous page")
+    public boolean hasPrevious() {
         if (previous == null) {
             previous = size() > 0;
         }
         return previous;
     }
 
-    public boolean hasNext() {
-        return getNext();
-    }
-
-    public boolean hasPrevious() {
-        return getPrevious();
-    }
-
+    @JDIAction("Go to next page through next button in '{name}'")
     public String next() {
         if (isEnd()) {
             if (!next) {
@@ -146,6 +141,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
         return current;
     }
 
+    @JDIAction("Go to previous page through previous button in '{name}'")
     public String previous() {
         if (isStart()) {
             if (!previous) {
@@ -167,7 +163,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
             initializeLocators(annotation);
         }
         this.setCore(Pagination.class, $(ROOT_LOCATOR));
-        this.setName(String.format("Pagination container %s", field.getName()));
+        this.setName(String.format("Pagination %s", field.getName()));
     }
 
     private void initializeLocators(JDIPagination annotation) {
