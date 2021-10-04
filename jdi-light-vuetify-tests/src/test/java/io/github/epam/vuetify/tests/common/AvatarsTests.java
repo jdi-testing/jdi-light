@@ -2,7 +2,7 @@ package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.avatarsPage;
@@ -13,7 +13,7 @@ import static io.github.com.pages.AvatarsPage.tileAvatar;
 
 public class AvatarsTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void beforeTest() {
         avatarsPage.open();
     }
