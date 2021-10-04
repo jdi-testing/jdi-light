@@ -9,6 +9,12 @@ import com.epam.jdi.tools.Timer;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
+/**
+ * To see an example of Banner web element please visit https://jdi-testing.github.io/jdi-light/vuetify/carousels
+ *
+ * From vuetify docs: "The v-carousel component is used to display large numbers of visual content on a rotating timer."
+ */
+
 public class Carousel extends UIBaseElement<CarouselAssert> {
 
     @JDIAction("Get '{name}' delimiters")
