@@ -1,9 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.vuetify.elements.complex.Pagination;
 import io.github.epam.TestsInit;
-import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -29,43 +27,14 @@ public class PaginationTests extends TestsInit {
         paginationPage.isOpened();
     }
 
-    /**
-     * This method is required because at different sizes of the browser window
-     * some pagination's buttons disappear from the pagination element.
-     * All tests that using this method require all buttons to be visible.
-     */
-    private void skipIfPaginationHasHiddenButtons(Pagination pagination) {
-        int hiddenButtonsSize = pagination.hiddenButtons();
-        if (hiddenButtonsSize != 0) {
-            paginationPage.windowScreenshotToAllure();
-            throw new SkipException("Expected that " + pagination.getName() +
-                    " would not contain hidden buttons, but found '" +
-                    hiddenButtonsSize + "' hidden buttons");
-        }
-    }
-
-    /**
-     * This method is required because at different sizes of the browser window
-     * the selected button disappear from the pagination element.
-     * All tests that using this method require visible selected button.
-     */
-    private void skipIfPaginationSelectedButtonIsNotVisible(Pagination pagination) {
-        if (pagination.selected() == null) {
-            paginationPage.windowScreenshotToAllure();
-            throw new SkipException("Expected that " + pagination.getName() +
-                    " would have visible selected button, " +
-                    "but selected button not found");
-        }
-    }
-
     @Test
     public void circlePaginationTest() {
-        skipIfPaginationHasHiddenButtons(circlePagination);
         List<String> circlePages = Arrays.asList("1", "2", "3", "4");
         circlePagination.has().size(4);
         circlePagination.is().enabled();
         circlePagination.is().started();
         circlePagination.has().values(circlePages);
+
         for (String page : circlePages) {
             circlePagination.select(page);
             circlePagination.has().selected(page);
@@ -77,12 +46,12 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void iconsPaginationTest() {
-        skipIfPaginationHasHiddenButtons(iconsPagination);
         List<String> iconsPages = Arrays.asList("1", "2", "3", "4");
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
         iconsPagination.is().started();
         iconsPagination.has().values(iconsPages);
+
         for (UIElement button : iconsPagination.list()) {
             button.click();
             iconsPagination.has().selected(button.getText());
@@ -94,7 +63,6 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void disabledPaginationTest() {
-        skipIfPaginationHasHiddenButtons(disabledPagination);
         List<String> disabledPages = Arrays.asList("1", "2", "3");
         disabledPagination.has().size(3);
         disabledPagination.is().disabled();
@@ -109,13 +77,12 @@ public class PaginationTests extends TestsInit {
 
         List<String> actualButtonsFromStartToEnd = new ArrayList<>();
         while (lengthPagination.hasNext()) {
-            skipIfPaginationSelectedButtonIsNotVisible(lengthPagination);
             actualButtonsFromStartToEnd.add(lengthPagination.next());
         }
-        lengthPagination.is().ended();
         assertThat(actualButtonsFromStartToEnd, equalTo(Arrays.asList(
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"
         )));
+        lengthPagination.is().ended();
     }
 
     @Test
@@ -129,13 +96,12 @@ public class PaginationTests extends TestsInit {
 
         List<String> actualButtonsFromEndToStart = new ArrayList<>();
         while (totalVisiblePagination.hasPrevious()) {
-            skipIfPaginationSelectedButtonIsNotVisible(totalVisiblePagination);
             actualButtonsFromEndToStart.add(totalVisiblePagination.previous());
         }
-        totalVisiblePagination.is().started();
         assertThat(actualButtonsFromEndToStart, equalTo(Arrays.asList(
             "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
         )));
+        totalVisiblePagination.is().started();
     }
 
 }
