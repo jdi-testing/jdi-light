@@ -2,6 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
+import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -17,7 +18,6 @@ import static io.github.com.pages.PaginationPage.lengthPagination;
 import static io.github.com.pages.PaginationPage.totalVisiblePagination;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 
 public class PaginationTests extends TestsInit {
@@ -30,48 +30,58 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void circlePaginationTest() {
+        if (circlePagination.hiddenButtons() != 0) {
+            throw new SkipException("Expected that circle pagination would not contain hidden buttons, but found '"
+                    + circlePagination.hiddenButtons() + "' hidden buttons");
+        }
+
         List<String> circlePages = Arrays.asList("1", "2", "3", "4");
-        circlePagination.has().hiddenButtons(0);
         circlePagination.has().size(4);
         circlePagination.is().enabled();
         circlePagination.is().started();
         circlePagination.has().values(circlePages);
         for (String page : circlePages) {
             circlePagination.select(page);
-            circlePagination.has().selected(Integer.parseInt(page));
             circlePagination.has().selected(page);
+            circlePagination.has().selected(Integer.parseInt(page));
             circlePagination.has().value(page);
-            circlePagination.has().enabled(page);
         }
         circlePagination.is().ended();
-        circlePagination.has().values(circlePages);
     }
 
     @Test
     public void iconsPaginationTest() {
+        if (iconsPagination.hiddenButtons() != 0) {
+            throw new SkipException("Expected that icons pagination would not contain hidden buttons, but found '"
+                    + iconsPagination.hiddenButtons() + "' hidden buttons");
+        }
+
         List<String> iconsPages = Arrays.asList("1", "2", "3", "4");
-        iconsPagination.has().hiddenButtons(0);
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
         iconsPagination.is().started();
-        circlePagination.has().values(iconsPages);
+        iconsPagination.has().values(iconsPages);
         for (UIElement button : iconsPagination.list()) {
             button.click();
-            iconsPagination.is().selected(button.getText());
-            iconsPagination.has().values(button.getText());
+            iconsPagination.has().selected(button.getText());
+            iconsPagination.has().selected(Integer.parseInt(button.getText()));
+            iconsPagination.has().value(button.getText());
         }
-        iconsPagination.has().values(iconsPages);
         iconsPagination.is().ended();
     }
 
     @Test
     public void disabledPaginationTest() {
+        if (disabledPagination.hiddenButtons() != 0) {
+            throw new SkipException("Expected that disabled pagination would not contain hidden buttons, but found '"
+                    + disabledPagination.hiddenButtons() + "' hidden buttons");
+        }
+
         List<String> disabledPages = Arrays.asList("1", "2", "3");
-        iconsPagination.has().hiddenButtons(0);
         disabledPagination.has().size(3);
         disabledPagination.is().disabled();
         disabledPagination.has().values(disabledPages);
-        assertThat(disabledPagination.selected(), is(nullValue()));
+        disabledPagination.has().selected(nullValue(String.class));
     }
 
     @Test
