@@ -30,9 +30,9 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
     protected String RIGHT_NAVIGATION_LOCATOR = ".v-pagination__navigation[2]";
     protected String MORE_ITEMS_LOCATOR = ".v-pagination__more";
 
-    private int startIndex = 1;
-    private Boolean next;
-    private Boolean previous;
+    protected int startIndex = 1;
+    protected Boolean next;
+    protected Boolean previous;
 
     @Override
     @JDIAction("Get web list of all buttons from '{name}'")
