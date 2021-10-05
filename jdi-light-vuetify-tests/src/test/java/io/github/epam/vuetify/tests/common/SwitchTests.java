@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
+import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
@@ -16,14 +17,9 @@ public class SwitchTests extends TestsInit {
     }
 
     @Test
-    public void testDemo() {
-        System.out.println(colorSwitches.get(1).getInputColor());
-        colorSwitches.get(1).uncheck();
-        System.out.println(colorSwitches.get(1).getInputColor());
-    }
-
-    @Test
     public void colorTest() {
+        colorSwitches.forEach(Switch::isDisabled);
+
         colorSwitches.get(1).is().inputColor(Colors.RED.value());
         colorSwitches.get(1).uncheck();
         colorSwitches.get(1).is().inputColor("rgba(0, 0, 0, 0.87)");
@@ -40,6 +36,7 @@ public class SwitchTests extends TestsInit {
     @Test
     public void flatSwitch() {
         flatSwitches.forEach(s -> {
+            s.isDisabled();
             s.check();
             s.is().labelContains("true");
             s.uncheck();
@@ -50,6 +47,7 @@ public class SwitchTests extends TestsInit {
     @Test
     public void insertSwitch() {
         flatSwitches.forEach(s -> {
+            s.isDisabled();
             s.check();
             s.is().labelContains("true");
             s.uncheck();
@@ -59,6 +57,7 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void arraySwitch() {
+        modelAsArraySwitches.forEach(Switch::isDisabled);
         modelAsArraySwitches.get(1).is().checked();
         modelAsArraySwitches.get(2).is().unchecked();
         modelArray.is().text("[ \"John\" ]");
@@ -71,6 +70,7 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void statesSwitch() {
+        statesSwitches.forEach(Switch::isDisabled);
         statesSwitches.get(1).is().checked();
         statesSwitches.get(2).is().unchecked();
         statesSwitches.get(3).is().checked();
@@ -85,6 +85,7 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void labelSwitch() {
+        labelSwitches.forEach(Switch::isDisabled);
         labelSwitches.get(1).is().labelHTML();
     }
 }
