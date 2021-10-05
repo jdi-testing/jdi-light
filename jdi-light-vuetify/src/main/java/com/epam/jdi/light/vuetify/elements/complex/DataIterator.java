@@ -1,5 +1,6 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
+import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -15,7 +16,7 @@ import java.util.Map;
  * To see an example of Data Iterator web element please visit https://vuetifyjs.com/en/components/data-iterators/
  */
 
-public class DataIterator extends UIBaseElement<DataIteratorAssert> {
+public class DataIterator extends UIBaseElement<DataIteratorAssert> implements HasAssert<DataIteratorAssert> {
     private final String title_path = "div[class*='title']";
     private final String input_path = "div[class*='selection']";
     private final String list_item_path = "div[role = 'listitem']";
@@ -157,13 +158,13 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> {
     }
 
     @JDIAction("Select {name} columns quantity on page")
-    public void quantityColumnsOnPage(int index) {
+    public void numberColumnsOnPage(int index) {
         pageButtons().select(3);
         itemsPerPage().select(index);
     }
 
     @JDIAction("Select {name} columns quantity on page")
-    public void quantityColumnsOnPage(String value) {
+    public void numberColumnsOnPage(String value) {
         pageButtons().select(3);
         itemsPerPage().select(value);
     }
@@ -194,7 +195,7 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> {
     }
 
     @Override
-    public DataIteratorAssert is() {
+    public DataIteratorAssert has() {
         return new DataIteratorAssert().set(this);
     }
 }

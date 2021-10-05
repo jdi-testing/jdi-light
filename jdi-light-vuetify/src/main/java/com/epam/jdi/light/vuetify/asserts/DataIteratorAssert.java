@@ -15,26 +15,50 @@ public class DataIteratorAssert extends UIAssert<DataIteratorAssert, DataIterato
 
 
     @JDIAction("Assert that {name} column is expanded")
-    public DataIteratorAssert expanded(int colNum) {
+    public DataIteratorAssert columnExpanded(int colNum) {
         jdiAssert(element().columnIsExpanded(colNum), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that {name} column is closed")
-    public DataIteratorAssert closed(int colNum) {
+    public DataIteratorAssert columnClosed(int colNum) {
         jdiAssert(element().columnIsExpanded(colNum), Matchers.is(false));
         return this;
     }
 
     @JDIAction("Assert that {name} column is empty")
-    public DataIteratorAssert empty(int colNum) {
+    public DataIteratorAssert columnEmpty(int colNum) {
         jdiAssert(element().columnIsEmpty(colNum), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that {name} column is ton empty")
-    public DataIteratorAssert notEmpty(int colNum) {
+    @JDIAction("Assert that {name} column is not empty")
+    public DataIteratorAssert columnNotEmpty(int colNum) {
         jdiAssert(element().columnIsEmpty(colNum), Matchers.is(false));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} column has title")
+    public DataIteratorAssert columnTitle(int colNum, String requiredTitle) {
+        jdiAssert(element().getColumnTitle(colNum), Matchers.is(requiredTitle));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has footer")
+    public DataIteratorAssert footer(String requiredFooter) {
+        jdiAssert(element().getFooter(), Matchers.is(requiredFooter));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has header")
+    public DataIteratorAssert header(String requiredHeader) {
+        jdiAssert(element().getHeader(), Matchers.is(requiredHeader));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has required number of columns per page")
+    public DataIteratorAssert number(int value){
+        jdiAssert(element().getAllColumns().size(), Matchers.is(value));
         return this;
     }
 }
