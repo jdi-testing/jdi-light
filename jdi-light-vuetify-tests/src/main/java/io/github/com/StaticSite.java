@@ -20,6 +20,7 @@ import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
 import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.CheckboxesPage;
+import io.github.com.pages.DataIteratorsPage;
 import io.github.com.pages.DividersPage;
 import io.github.com.pages.FootersPage;
 import io.github.com.pages.SubheaderPage;
@@ -83,4 +84,7 @@ public class StaticSite {
 
     @Url("/bottom-navigation")
     public static BottomNavigationPage bottomNavigationPage;
+
+    @Url("/data-iterators")
+    public static DataIteratorsPage dataIteratorsPage;
 }
