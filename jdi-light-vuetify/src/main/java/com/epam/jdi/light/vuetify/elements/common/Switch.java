@@ -8,6 +8,10 @@ import com.epam.jdi.light.vuetify.asserts.SwitchAssert;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 
+/**
+ * To see example of Switches web element please visit https://vuetifyjs.com/en/components/switches/
+ */
+
 public class Switch extends UIBaseElement<SwitchAssert> {
 
     private UIElement input() {
