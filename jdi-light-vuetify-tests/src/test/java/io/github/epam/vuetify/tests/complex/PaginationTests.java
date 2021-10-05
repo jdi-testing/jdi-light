@@ -2,7 +2,6 @@ package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
-import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.jdi.tools.Timer.nowTimeShort;
 import static io.github.com.StaticSite.paginationPage;
 import static io.github.com.pages.PaginationPage.circlePagination;
 import static io.github.com.pages.PaginationPage.disabledPagination;
@@ -23,15 +21,6 @@ import static org.hamcrest.Matchers.nullValue;
 
 public class PaginationTests extends TestsInit {
 
-    private void skipIfBrowserWidthSmallerThanExpected(int expectedPageMinWidth) {
-        int actualPageWidth = paginationPage.driver().manage().window().getSize().width;
-        if (actualPageWidth < expectedPageMinWidth) {
-            throw new SkipException(nowTimeShort() + "\n" +
-                    "Expected width bigger than: " + expectedPageMinWidth + "\n" +
-                    "Actual width: " + actualPageWidth);
-        }
-    }
-
     @BeforeClass
     public void before() {
         paginationPage.open();
@@ -40,7 +29,6 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void circlePaginationTest() {
-        skipIfBrowserWidthSmallerThanExpected(570);
         List<String> circlePages = Arrays.asList("1", "2", "3", "4");
         circlePagination.has().size(4);
         circlePagination.is().enabled();
@@ -58,7 +46,6 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void iconsPaginationTest() {
-        skipIfBrowserWidthSmallerThanExpected(570);
         List<String> iconsPages = Arrays.asList("1", "2", "3", "4");
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
@@ -76,7 +63,6 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void disabledPaginationTest() {
-        skipIfBrowserWidthSmallerThanExpected(530);
         List<String> disabledPages = Arrays.asList("1", "2", "3");
         disabledPagination.has().size(3);
         disabledPagination.is().disabled();
@@ -86,7 +72,6 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void lengthPaginationTest() {
-        skipIfBrowserWidthSmallerThanExpected(800);
         lengthPagination.is().enabled();
         lengthPagination.is().started();
 
@@ -102,7 +87,6 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void totalVisiblePaginationTest() {
-        skipIfBrowserWidthSmallerThanExpected(615);
         totalVisiblePagination.is().enabled();
         totalVisiblePagination.is().started();
 
