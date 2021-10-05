@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.DEEP_PURPLE_ACCENT_4;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREY_DARKEN_4;
-import static io.github.com.StaticSite.toolBarsPage;
+import static io.github.com.StaticSite.toolbarsPage;
 import static io.github.com.pages.ToolBarsPage.backgroundToolbar;
 import static io.github.com.pages.ToolBarsPage.collapseToolbar;
 import static io.github.com.pages.ToolBarsPage.contextActionToolbar;
@@ -23,7 +23,7 @@ public class ToolBarsTests extends TestsInit {
 
     @BeforeClass
     public void beforeTest() {
-        toolBarsPage.open();
+        toolbarsPage.open();
     }
 
     @Test
