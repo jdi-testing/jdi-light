@@ -21,9 +21,28 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' contains '{0}'")
+    //For simple (not composite) label
+    @JDIAction("Assert that {name}'s label contains '{0}'")
     public ChipAssert containsText(String text) {
         jdiAssert(element().getText(), Matchers.containsString(text));
+        return this;
+    }
+
+    @JDIAction("Assert that {name}'s composite label contains '{0}'")
+    public ChipAssert compositeLabelContainsText(String text) {
+        jdiAssert(element().getFullTextFromCompositeLabel(), Matchers.containsString(text));
+        return this;
+    }
+
+    @JDIAction("Assert that bold text from {name}'s composite label contains '{0}'")
+    public ChipAssert compositeLabelBoldTextContains(String text) {
+        jdiAssert(element().getBoldTextFromCompositeLabel(), Matchers.containsString(text));
+        return this;
+    }
+
+    @JDIAction("Assert that regular text from {name}'s composite label contains '{0}'")
+    public ChipAssert compositeLabelRegularTextContains(String text) {
+        jdiAssert(element().getRegularTextFromCompositeLabel(), Matchers.containsString(text));
         return this;
     }
 
@@ -42,12 +61,6 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
     @JDIAction("Assert that '{name}' has filter")
     public ChipAssert visibleBorder() {
         jdiAssert(element().hasVisibleBorder(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has filter")
-    public ChipAssert notVisibleBorder() {
-        jdiAssert(element().hasVisibleBorder(), Matchers.is(false));
         return this;
     }
 

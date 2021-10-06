@@ -4,10 +4,10 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
+import com.epam.jdi.tools.Timer;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.interactions.Actions;
 
-import java.time.Duration;
+import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
@@ -17,7 +17,11 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class Chip extends UIBaseElement<ChipAssert> {
 
-    private static final String TEXT = ".v-chip__content";
+    private static final String TEXT1 = ".v-chip__content";
+    private static final String TEXT2 = "//span[@class='v-chip__content']/text()";
+    private static final String ALL_TEXTS_FROM_COMPOSITE_LABEL = "//span[@class='v-chip__content']/*[text()]";
+    private static final String BOLD_TEXT_FROM_COMPOSITE_LABEL = "//span[@class='v-chip__content']/strong";
+    private static final String REGULAR_TEXT_FROM_COMPOSITE_LABEL = "//span[@class='v-chip__content']/span";
     private static final String CLOSE_BUTTON = "span button[aria-label='Close']";
     private static final String FILTER = "span .v-chip__filter";
     private static final String ICON = "span .v-icon";
@@ -30,7 +34,31 @@ public class Chip extends UIBaseElement<ChipAssert> {
 
     @JDIAction("Get {name}'s text")
     public String getText() {
-        return this.find(TEXT).getText();
+        if (!this.find(TEXT1).getText().isEmpty()) {
+            return this.find(TEXT1).getText();
+        } else {
+            return this.find(TEXT2).getText();
+        }
+    }
+
+    @JDIAction("Get bold text from {name}'s composite label")
+    public String getBoldTextFromCompositeLabel() {
+        return this.find(BOLD_TEXT_FROM_COMPOSITE_LABEL).getText();
+    }
+
+    @JDIAction("Get bold text from {name}'s composite label")
+    public String getRegularTextFromCompositeLabel() {
+        return this.find(REGULAR_TEXT_FROM_COMPOSITE_LABEL).getText();
+    }
+
+    @JDIAction("Get all the text from {name}'s composite label")
+    public String getFullTextFromCompositeLabel() {
+        String result = "";
+        List<UIElement> labelParts = finds(ALL_TEXTS_FROM_COMPOSITE_LABEL);
+        for (int i = 1; i <= labelParts.size(); i++) {
+            result += labelParts.get(i).getText() + " ";
+        }
+        return result.trim();
     }
 
     @JDIAction("Close '{name}'")
@@ -91,7 +119,8 @@ public class Chip extends UIBaseElement<ChipAssert> {
 
     @JDIAction("Check that '{name}' has filter")
     public boolean hasImage() {
-        return this.find(IMAGE).isExist();
+        return new Timer(base().getTimeout() * 1000L)
+                .wait(() -> this.find(IMAGE).isExist());
     }
 
     @JDIAction("Get {name}'s height")
