@@ -9,8 +9,15 @@ public class SlideWindow extends Section {
     @UI("h1")
     private UIElement header;
 
+    @UI(".v-sheet")
+    private UIElement sheet;
+
     public UIElement header() {
         return header;
+    }
+
+    public UIElement sheet() {
+        return sheet;
     }
 
 }
