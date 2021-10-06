@@ -8,10 +8,9 @@ import com.epam.jdi.light.vuetify.asserts.DividerAssert;
  */
 
 public class Divider extends UIBaseElement<DividerAssert> {
+
     @Override
-    public DividerAssert is() {
-        return new DividerAssert().set(this);
-    }
+    public DividerAssert is() { return new DividerAssert().set(this); }
 
     public boolean isHorizontal(){
         return core().hasClass("v-divider--inset");
