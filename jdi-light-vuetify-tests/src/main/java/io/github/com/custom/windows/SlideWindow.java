@@ -7,6 +7,10 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 public class SlideWindow extends Section {
 
     @UI("h1")
-    public UIElement header;
+    private UIElement header;
+
+    public UIElement header() {
+        return header;
+    }
 
 }
