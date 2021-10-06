@@ -1,6 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.Windows;
@@ -50,7 +51,10 @@ public class WindowsPage extends VuetifyPage {
     @UI("#AccountCreationWindow .v-card__actions > button:last-of-type")
     public static Button accountNext;
 
-//    @UI("#OnboardingWindow .v-window")
-//    public static Windows<SlideWindow> onboardingWindows;
+    @UI("#OnboardingWindow .v-window")
+    public static Windows<Section> onboardingWindows;
+
+    @UI("#OnboardingWindow .v-item-group button")
+    public static WebList onboardingNavigation;
 
 }

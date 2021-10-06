@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.composite.Section;
 import io.github.com.custom.windows.AccountCreatedWindow;
 import io.github.com.custom.windows.PasswordCreationWindow;
 import io.github.com.custom.windows.SignUpWindow;
@@ -8,9 +9,26 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.*;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREY;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.TRANSPARENT;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.WHITE;
 import static io.github.com.StaticSite.windowsPage;
-import static io.github.com.pages.WindowsPage.*;
+import static io.github.com.pages.WindowsPage.accountBack;
+import static io.github.com.pages.WindowsPage.accountCreationWindows;
+import static io.github.com.pages.WindowsPage.accountNext;
+import static io.github.com.pages.WindowsPage.customizedArrowsWindows;
+import static io.github.com.pages.WindowsPage.nextSlide;
+import static io.github.com.pages.WindowsPage.onboardingNavigation;
+import static io.github.com.pages.WindowsPage.onboardingWindows;
+import static io.github.com.pages.WindowsPage.previousSlide;
+import static io.github.com.pages.WindowsPage.reverseBack;
+import static io.github.com.pages.WindowsPage.reverseNavigation;
+import static io.github.com.pages.WindowsPage.reverseWindows;
+import static io.github.com.pages.WindowsPage.verticalBack;
+import static io.github.com.pages.WindowsPage.verticalNavigation;
+import static io.github.com.pages.WindowsPage.verticalNext;
+import static io.github.com.pages.WindowsPage.verticalWindows;
+import static org.hamcrest.Matchers.containsString;
 
 public class WindowsTests extends TestsInit {
 
@@ -62,7 +80,6 @@ public class WindowsTests extends TestsInit {
         customizedArrowsWindows.getActive().header().has().text("Slide 1");
         customizedArrowsWindows.getActive().header().has().css("color", WHITE.value());
         customizedArrowsWindows.getActive().sheet().has().css("background-color", GREY.value());
-
         int i;
         for (i = 2; i <= 5; i++) {
             nextSlide.click();
@@ -75,6 +92,7 @@ public class WindowsTests extends TestsInit {
 
     @Test
     public void accountCreationWindowsTest() {
+        accountBack.isDisabled();
         SignUpWindow signUpWindow = accountCreationWindows.getActive(SignUpWindow.class);
         signUpWindow.email().has().value("john@vuetifyjs.com");
         signUpWindow.email().label().has().text("Email");
@@ -88,12 +106,25 @@ public class WindowsTests extends TestsInit {
         accountNext.click();
 
         AccountCreatedWindow accountCreatedWindow = accountCreationWindows.getActive(AccountCreatedWindow.class);
-        System.out.println(accountCreatedWindow.image().height());
+        accountCreatedWindow.image().has().attr("style", "height: 128px;");
+        accountCreatedWindow.image().find(".v-image__image")
+                .has().attr("style", containsString("background-image: url(\"https://cdn.vuetifyjs.com/images/logos/v.svg\");"));
         accountCreatedWindow.welcome().has().text("Welcome to Vuetify");
         accountCreatedWindow.caption().has().text("Thanks for signing up!");
-
-
+        accountNext.isDisabled();
     }
 
+    @Test
+    public void onboardingWindowsTest() {
+        for (UIElement nav : onboardingNavigation) {
+            nav.click();
+            Section section = onboardingWindows.getActive();
+            section.find(".v-sheet").has().css("background-color", TRANSPARENT.value());
+            section.find(".v-card__text")
+                    .has().css("color", WHITE.value())
+                    .has().text("Transparent themed, for background-imaged slides. " +
+                            "Background color black added for demonstration purposes.");
+        }
+    }
 
 }
