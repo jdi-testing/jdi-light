@@ -5,11 +5,8 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
 import com.epam.jdi.tools.Timer;
-import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.List;
-
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 /**
  * To see an example of Chip web element please visit https://vuetifyjs.com/en/components/chips/

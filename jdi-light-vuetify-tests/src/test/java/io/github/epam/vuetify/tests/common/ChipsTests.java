@@ -20,8 +20,6 @@ import static io.github.com.pages.ChipsPage.customListChip;
 import static io.github.com.pages.ChipsPage.customListItems;
 import static io.github.com.pages.ChipsPage.customListNextButton;
 import static io.github.com.pages.ChipsPage.customListSearchField;
-import static io.github.com.pages.ChipsPage.draggableChip;
-import static io.github.com.pages.ChipsPage.draggableChipTitle;
 import static io.github.com.pages.ChipsPage.expandableChip;
 import static io.github.com.pages.ChipsPage.expandableChipEmails;
 import static io.github.com.pages.ChipsPage.filterChips;
