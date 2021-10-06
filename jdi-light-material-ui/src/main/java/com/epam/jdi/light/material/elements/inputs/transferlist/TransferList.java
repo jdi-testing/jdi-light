@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.elements.inputs.TransferList;
+package com.epam.jdi.light.material.elements.inputs.transferlist;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
