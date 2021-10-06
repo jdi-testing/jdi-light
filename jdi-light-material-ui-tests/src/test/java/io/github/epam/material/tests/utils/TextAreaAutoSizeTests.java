@@ -3,7 +3,6 @@ package io.github.epam.material.tests.utils;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.textAreaAutoSizePage;

@@ -3,23 +3,22 @@ package io.github.epam.material.tests.navigation;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.tabPage;
-import static io.github.com.pages.navigation.TabPage.simpleTabs;
-import static io.github.com.pages.navigation.TabPage.simpleTabsContent;
-import static io.github.com.pages.navigation.TabPage.scrollableTabs;
-import static io.github.com.pages.navigation.TabPage.scrollableTabsContent;
 import static io.github.com.pages.navigation.TabPage.buttonHorizontal;
+import static io.github.com.pages.navigation.TabPage.buttonVertical;
 import static io.github.com.pages.navigation.TabPage.preventScrollTabs;
 import static io.github.com.pages.navigation.TabPage.preventScrollTabsContent;
+import static io.github.com.pages.navigation.TabPage.scrollableTabs;
+import static io.github.com.pages.navigation.TabPage.scrollableTabsContent;
+import static io.github.com.pages.navigation.TabPage.simpleTabs;
+import static io.github.com.pages.navigation.TabPage.simpleTabsContent;
 import static io.github.com.pages.navigation.TabPage.verticalTabs;
 import static io.github.com.pages.navigation.TabPage.verticalTabsContent;
-import static io.github.com.pages.navigation.TabPage.buttonVertical;
 
 /**
  * To see an example of Tab please visit
