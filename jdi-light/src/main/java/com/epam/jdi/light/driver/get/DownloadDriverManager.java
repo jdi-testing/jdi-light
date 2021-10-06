@@ -32,7 +32,7 @@ public class DownloadDriverManager {
     public static String downloadDriver(DriverTypes driverType, Platform platform, String version) {
         if (driverType == SAFARI) {
             if (isBlank(DRIVER.path)) {
-                DRIVER.path = "/usr/bin/";
+                DRIVER.path = "/usr/bin/safaridriver";
             }
             return DRIVER.path;
         }
