@@ -7,22 +7,22 @@ import java.util.List;
 
 public class IconsPage extends VuetifyPage {
 
-    @UI("#ColorIcon i")
+    @UI("#ColorIcon .v-icon")
     public static List<Icon> colorIcons;
 
-    @UI("#ClickIcon")
+    @UI("#ClickIcon .v-icon")
     public static Icon clickIcon;
 
-    @UI("#ButtonsIcon")
+    @UI("#ButtonsIcon .v-icon")
     public static List<Icon> buttonsIcons;
 
-    @UI("#FontAwesomeIcon")
+    @UI("#FontAwesomeIcon .v-icon")
     public static List<Icon> fontAwesomeIcons;
 
-    @UI("#MaterialDesignIcon")
+    @UI("#MaterialDesignIcon .v-icon")
     public static List<Icon> materialDesignIcons;
 
-    @UI("#MDISvgIcon")
+    @UI("#MDISvgIcon .v-icon")
     public static List<Icon> mdiSvgIcons;
 
 }

@@ -2,44 +2,60 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.vuetify.asserts.IconAssert;
-import com.epam.jdi.tools.Timer;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
-public class Icon extends UIBaseElement<IconAssert> {
+/**
+ * To see an example of Banner web element please visit https://jdi-testing.github.io/jdi-light/vuetify/icons
+ *
+ * From vuetify docs: "The v-icon component provides a large set of glyphs to provide context to various aspects
+ * of your application."
+ *
+ */
 
+public class Icon extends UIBaseElement<IconAssert> implements HasClick {
 
-    @JDIAction("Get {name} photo")
-    public UIElement getPhoto() {
-        return this.find("img");
+    @JDIAction("Get {name} type")
+    public String getType() throws Exception {
+        String iconClass = this.core().getAttribute("class");
+        if(iconClass.contains("mdi-")) {
+            return Arrays.stream(iconClass.split(" "))
+                    .filter(s -> s.startsWith("mdi-")).collect(Collectors.joining());
+        } else if(iconClass.contains("fa-")) {
+            return Arrays.stream(iconClass.split(" "))
+                    .filter(s -> s.startsWith("fa-")).collect(Collectors.joining());
+        } else if(iconClass.contains("material-icons")) {
+            return this.core().getText();
+        } else if (iconClass.contains("v-icon notranslate")){
+            return "svg icon";
+        } else throw new Exception("unknown type of icon");
     }
 
-    @JDIAction("Get {name} photo")
-    public UIElement getIcon() {
-        return this.find("i");
+    @JDIAction("Get {name} color")
+    public String getColor() {
+        return this.core().getCssValue("color");
     }
 
-    @JDIAction("Get {name} photo")
-    public String hasPhoto() {
-        Timer.waitCondition(getPhoto()::isDisplayed);
-        return getPhoto().getTagName();
+    @JDIAction("Get {name} color")
+    public String getHeight() {
+        return this.core().getCssValue("height");
     }
 
-    @JDIAction("Get {name} icon")
-    public boolean hasIcon() {
-        Timer.waitCondition(getIcon()::isDisplayed);
-        return getIcon().getAttribute("class").contains("v-icon");
+    @JDIAction("Get {name} color")
+    public String getWidth() {
+        return this.core().getCssValue("width");
     }
 
-    @JDIAction("Get {name} size")
-    public String properSize() {
-        return this.core().getAttribute("style");
+    @JDIAction("{name} has alert after clicking on it")
+    public String hasAlertOnIconClick() {
+        return this.core().driver().switchTo().alert().getText();
     }
 
-    public void scrollIntoView() {
-        jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
+    public void handleAlert() {
+        this.core().driver().switchTo().alert().dismiss();
     }
 
     public IconAssert is() {

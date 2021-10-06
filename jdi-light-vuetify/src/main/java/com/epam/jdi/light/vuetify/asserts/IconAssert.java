@@ -17,27 +17,39 @@ public class IconAssert extends UIAssert<IconAssert, Icon> {
         return this;
     }
 
-    @JDIAction("Assert that {name} text is '{0}'")
-    public IconAssert text(String text) {
-        jdiAssert(element().core().firstChild().getText(), Matchers.is(text));
+    @JDIAction("Assert that {name} is displayed")
+    public IconAssert clickable() {
+        jdiAssert(element().core().isClickable(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that {name} size is '{0}'px")
-    public IconAssert size(String text) {
-        jdiAssert(element().properSize(), Matchers.is(String.format("height: %1$spx; min-width: %1$spx; width: %1$spx;", text)));
+    @JDIAction("Assert that {name} has proper type")
+    public IconAssert type(String text) throws Exception {
+        jdiAssert(element().getType(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that {name} has an icon inside of it")
-    public IconAssert icon() {
-        jdiAssert(element().hasIcon(), Matchers.is(true));
+    @JDIAction("Assert that {name} has proper height")
+    public IconAssert height(String height) {
+        jdiAssert(element().getHeight(), Matchers.is(height));
         return this;
     }
 
-    @JDIAction("Assert that {name} has a photo")
-    public IconAssert photo() {
-        jdiAssert(element().hasPhoto(), Matchers.is("img"));
+    @JDIAction("Assert that {name} has proper width")
+    public IconAssert width(String width) {
+        jdiAssert(element().getWidth(), Matchers.is(width));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has proper color")
+    public IconAssert color(String color) {
+        jdiAssert(element().getColor(), Matchers.is(color));
+        return this;
+    }
+
+    @JDIAction("Assert that banner has alert after clicking on icon")
+    public IconAssert alertOnIconClick(String text) {
+        jdiAssert(element().hasAlertOnIconClick(), Matchers.is(text));
         return this;
     }
 }
