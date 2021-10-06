@@ -1,6 +1,7 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -20,6 +21,7 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<UIAssert<?,?>
         return core().find(".v-window-item--active");
     }
 
+    @JDIAction("Get active window from '{name}'")
     public T getActive() {
         if (itemClass != null) {
             return initT(active(), this, itemClass);
@@ -27,6 +29,7 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<UIAssert<?,?>
         throw new UnsupportedOperationException("Can't return active window, item class in diamond operator not found");
     }
 
+    @JDIAction("Get active window as '{0}' from '{name}'")
     public <U> U getActive(Class<U> clazz) {
         return clazz.cast(initT(active(), this, clazz));
     }
