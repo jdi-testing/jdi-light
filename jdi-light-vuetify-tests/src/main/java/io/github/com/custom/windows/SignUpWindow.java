@@ -11,5 +11,4 @@ public class SignUpWindow extends AccountWindow {
     public TextField email() {
         return email;
     }
-
 }

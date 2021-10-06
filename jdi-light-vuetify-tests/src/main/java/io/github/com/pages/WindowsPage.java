@@ -56,5 +56,4 @@ public class WindowsPage extends VuetifyPage {
 
     @UI("#OnboardingWindow .v-item-group button")
     public static WebList onboardingNavigation;
-
 }

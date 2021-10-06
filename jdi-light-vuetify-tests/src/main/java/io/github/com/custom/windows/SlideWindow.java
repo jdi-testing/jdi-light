@@ -19,5 +19,4 @@ public class SlideWindow extends Section {
     public UIElement sheet() {
         return sheet;
     }
-
 }

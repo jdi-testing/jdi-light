@@ -126,5 +126,4 @@ public class WindowsTests extends TestsInit {
                             "Background color black added for demonstration purposes.");
         }
     }
-
 }

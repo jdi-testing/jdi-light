@@ -18,5 +18,4 @@ public class PasswordCreationWindow extends AccountWindow {
     public TextField confirmPassword() {
         return confirmPassword;
     }
-
 }

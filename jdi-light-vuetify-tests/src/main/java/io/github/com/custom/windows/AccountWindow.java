@@ -12,5 +12,4 @@ public abstract class AccountWindow extends Section {
     public Text caption() {
         return caption;
     }
-
 }
