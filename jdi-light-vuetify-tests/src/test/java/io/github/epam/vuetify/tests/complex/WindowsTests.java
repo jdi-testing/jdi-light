@@ -23,6 +23,7 @@ import static io.github.com.pages.WindowsPage.onboardingWindows;
 import static io.github.com.pages.WindowsPage.previousSlide;
 import static io.github.com.pages.WindowsPage.reverseBack;
 import static io.github.com.pages.WindowsPage.reverseNavigation;
+import static io.github.com.pages.WindowsPage.reverseNext;
 import static io.github.com.pages.WindowsPage.reverseWindows;
 import static io.github.com.pages.WindowsPage.verticalBack;
 import static io.github.com.pages.WindowsPage.verticalNavigation;
@@ -48,12 +49,10 @@ public class WindowsTests extends TestsInit {
             reverseWindows.getActive().sheet().has().css("background-color", GREY.value());
             i++;
         }
-        for (i = 3; i >= 1; i--) {
-            reverseWindows.getActive().header().has().text("Slide " + i);
-            reverseWindows.getActive().header().has().css("color", WHITE.value());
-            reverseWindows.getActive().sheet().has().css("background-color", GREY.value());
-            reverseBack.click();
-        }
+        reverseNext.click();
+        reverseWindows.getActive().header().has().text("Slide 1");
+        reverseBack.click();
+        reverseWindows.getActive().header().has().text("Slide 3");
     }
 
     @Test
