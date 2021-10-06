@@ -13,6 +13,10 @@ import java.lang.reflect.Type;
 import static com.epam.jdi.light.common.UIUtils.initT;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 
+/**
+ * To see an example of Windows web element please visit
+ * https://vuetifyjs.com/en/components/windows/
+ */
 public class Windows<T extends ICoreElement> extends UIBaseElement<UIAssert<?,?>> implements ISetup {
 
     protected Class<T> itemClass;
