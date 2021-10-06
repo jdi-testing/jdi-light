@@ -1,43 +1,39 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.IHasSize;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.composite.Form;
-import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.light.vuetify.asserts.WindowsAssert;
-import com.epam.jdi.tools.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.UIUtils.initT;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 
-public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert> implements ISetup {
+public class Windows<T extends ICoreElement> extends UIBaseElement<UIAssert<?,?>> implements ISetup {
 
-    protected String ACTIVE_LOCATOR = ".v-window-item--active";
-    protected String HIDDEN_LOCATOR = "style=\"display: none;\"";
+    protected Class<T> itemClass;
 
-    protected String ITEMS_LOCATOR = ".v-window-item";
-
-    protected Class<?> itemClass;
-
-    public T getActive() {
-        return initT(core().find(ACTIVE_LOCATOR), this, itemClass);
+    private UIElement active() {
+        return core().find(".v-window-item--active");
     }
 
-    public <G> G getActive(Class<G> activeClass) {
-        return initT(core().find(ACTIVE_LOCATOR), this, activeClass);
+    public T getActive() {
+        if (itemClass != null) {
+            return initT(active(), this, itemClass);
+        }
+        throw new UnsupportedOperationException("Can't return active window, item class in diamond operator not found");
+    }
+
+    public <U> U getActive(Class<U> clazz) {
+        return clazz.cast(initT(active(), this, clazz));
     }
 
     @Override
     public void setup(Field field) {
-        itemClass = ReflectionUtils.getGenericType(field);
+        Type type = getGenericTypes(field)[0];
+        itemClass = type.toString().equals("?") ? null : (Class<T>) type;
     }
 }
