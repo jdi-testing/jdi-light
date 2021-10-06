@@ -60,7 +60,6 @@ public class TextAreaAutoSizeTests extends TestsInit {
         };
     }
 
-//    @Ignore
     @Test(dataProvider = "zeroToThree")
     public void minAreaDoesNotIncreaseBefore4thLineTest(String lines) {
         initialHeight = minArea.getSize().height;
@@ -99,7 +98,6 @@ public class TextAreaAutoSizeTests extends TestsInit {
         assertThat(maxArea.getSize().height, greaterThan(initialHeight));
     }
 
-//    @Ignore
     @Test
     public void maxAreaDoesNotChangeAfter4LinesTest() {
         maxArea.setLines(FOUR_LINES);

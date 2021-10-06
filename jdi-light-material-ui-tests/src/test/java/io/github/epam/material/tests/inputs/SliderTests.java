@@ -117,7 +117,6 @@ public class SliderTests extends TestsInit {
         checkRangeSlider(10, 80);
     }
 
-    @Ignore
     @Test
     public void inputSliderTest() {
         inputSlider.is().enabled();
@@ -129,12 +128,6 @@ public class SliderTests extends TestsInit {
         String stringValue = "70";
         inputSliderField.sendKeys(Keys.BACK_SPACE + "" + Keys.BACK_SPACE + stringValue + Keys.ENTER);
         inputSlider.has().value(70);
-        inputSlider.moveLeft();
-        inputSlider.has().value(69);
-        inputSlider.moveRight();
-        inputSlider.has().value(70);
-        inputSlider.slideHorizontalTo(10);
-        inputSlider.has().value(10);
     }
 
     @Test

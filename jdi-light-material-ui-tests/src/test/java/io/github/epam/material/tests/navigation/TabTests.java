@@ -37,7 +37,6 @@ public class TabTests extends TestsInit {
         tabPage.isOpened();
     }
 
-//    @Ignore
     @Test
     public void simpleTabTest() {
         simpleTabs.get(1).show();
