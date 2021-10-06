@@ -4,8 +4,10 @@ import com.epam.jdi.light.driver.get.DriverTypes;
 import com.jdiai.tools.Safe;
 import com.jdiai.tools.Timer;
 import com.jdiai.tools.func.JFunc;
+import com.jdiai.tools.func.JFunc2;
 import com.jdiai.tools.map.MapArray;
 import com.jdiai.tools.pairs.Pair;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -34,6 +36,8 @@ public class WebDriverFactory {
     public static final MapArray<String, WebDriver> RUN_DRIVERS = new MapArray<>();
     private static final Safe<MapArray<String, WebDriver>> THREAD_RUN_DRIVERS = new Safe<>(MapArray::new);
     public static boolean GETTING_DRIVER = false;
+    public static JFunc2<String, WebDriver, Boolean> VALIDATE_DRIVER =
+        (driverName, driver) -> driver.findElement(By.tagName("body")) != null;
 
     private WebDriverFactory() { }
 
@@ -48,8 +52,9 @@ public class WebDriverFactory {
             ? THREAD_RUN_DRIVERS.get()
             : RUN_DRIVERS;
         logger.trace("List size: " + list.size());
-        if (list.isNotEmpty())
+        if (list.isNotEmpty()) {
             logger.trace("Driver:" + list.keys());
+        }
         return list;
     }
     private static void setRunDrivers(MapArray<String, WebDriver> map) {
@@ -74,7 +79,7 @@ public class WebDriverFactory {
             }
             if (!DRIVERS.has(driverName)) {
                 throw exception("Can't get driver '%s'. Please use drivers from JDISettings.DRIVER.types list. " +
-                        "Or add your own driver with WebDriverFactory.useDriver(name,() -> WebDriver) method.");
+                    "Or add your own driver with WebDriverFactory.useDriver(name,() -> WebDriver) method.");
             }
             WebDriver driver = getValidDriver(driverName);
             driver = DRIVER.setup.execute(driver);
@@ -97,7 +102,7 @@ public class WebDriverFactory {
                 }
                 logger.trace("getValidDriver: Getting driver...");
                 driver = DRIVERS.get(driverName).execute();
-                goodDriver = isNotEmpty(driver);
+                goodDriver = VALIDATE_DRIVER.execute(driverName, driver);
                 logger.trace("getValidDriver: Get driver success");
             } catch (Throwable ignore) {
                 logger.trace("getValidDriver: Get driver failed");
@@ -108,6 +113,7 @@ public class WebDriverFactory {
         }
         return driver;
     }
+
     public static WebDriver getDriverByName(String driverName) {
         if (GETTING_DRIVER) {
             waitMultiThread();
@@ -234,15 +240,18 @@ public class WebDriverFactory {
             rDriver.removeByKey(driverName);
             setRunDrivers(rDriver);
         }
-        if (DRIVERS.has(driverName))
+        if (DRIVERS.has(driverName)) {
             getDriver();
+        }
     }
 
     public static void switchToDriver(String driverName) {
-        if (DRIVERS.has(driverName))
+        if (DRIVERS.has(driverName)) {
             DRIVER.name = driverName;
-        else
+        }
+        else {
             throw exception("Can't switch to WebDriver '%s'. This Driver name not registered", driverName);
+        }
     }
 
     public static void close() {

@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
-import static com.epam.jdi.light.driver.get.DownloadDriverManager.downloadDriver;
+import static com.epam.jdi.light.driver.get.DownloadDriverManager.DOWNLOAD_DRIVER_FUNC;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.DriverVersion.LATEST;
@@ -82,7 +82,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             boolean emptyDriverPath = isBlank(DRIVER.path);
             logger.trace("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
             String driverPath = emptyDriverPath
-                ? downloadDriver(downloadType, getDriverPlatform(), DRIVER.version)
+                ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
             logger.info("Use driver path: " + driverPath);
             logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
@@ -106,7 +106,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
 
     private WebDriver tryToDownloadDriver() {
         try {
-            downloadDriver(downloadType, getDriverPlatform(), getBelowVersion());
+            DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), getBelowVersion());
             return getDriver.execute(getCapabilities());
         } catch (Throwable ex) {
             throw exception(ex, "Failed to download driver");
