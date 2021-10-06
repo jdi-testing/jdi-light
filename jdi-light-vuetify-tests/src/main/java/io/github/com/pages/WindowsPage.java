@@ -20,9 +20,12 @@ public class WindowsPage extends VuetifyPage {
     public static Windows<SlideWindow> customizedArrowsWindows;
 
     @UI("#AccountCreationWindow .v-window")
-    public static Windows accountCreationWindows;
+    public static Windows<?> accountCreationWindows;
+
+    @UI("#AccountCreationWindow button[2]")
+    public static Button next2;
 
     @UI("#OnboardingWindow .v-window")
-    public static Windows onboardingWindows;
+    public static Windows<SlideWindow> onboardingWindows;
 
 }

@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
-import io.github.com.custom.windows.MySection;
+import io.github.com.custom.windows.SignUpWindow;
+import io.github.com.custom.windows.SlideWindow;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,17 +19,33 @@ public class WindowsTests extends TestsInit {
 
     @Test
     public void sameSectionTest() {
-        reverseWindows.getActive().header.has().text("Slide 1");
+        reverseWindows.getActive().header().has().text("Slide 1");
         next.click();
-        reverseWindows.getActive().header.has().text("Slide 2");
+        reverseWindows.getActive().header().has().text("Slide 2");
         next.click();
-        reverseWindows.getActive().header.has().text("Slide 3");
+        reverseWindows.getActive().has().text("Slide 3");
+        next.click();
+
+        reverseWindows.getActive(SlideWindow.class).has().text("Slide 1");
+        next.click();
+        reverseWindows.getActive(SlideWindow.class).has().text("Slide 2");
+        next.click();
+        reverseWindows.getActive(SlideWindow.class).has().text("Slide 3");
+    }
+
+    @Test
+    public void customizedArrowsWindowsTest() {
+        customizedArrowsWindows.getActive();
     }
 
     @Test
     public void baseTest() {
-        System.out.println(accountCreationWindows.getActive(MySection.class).getClass().getName());
-        accountCreationWindows.getActive(MySection.class);
+        accountCreationWindows.getActive(SignUpWindow.class).email().sendKeys("2");
+        System.out.println(accountCreationWindows.getActive(SignUpWindow.class).label().getValue());
+        accountCreationWindows.getActive(SignUpWindow.class).email().has().text("john@vuetifyjs.com2");
+        next2.click();
+        next2.click();
     }
+
 
 }
