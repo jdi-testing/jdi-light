@@ -2,29 +2,25 @@ package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.elements.base.Conditions.displayed;
 import static io.github.com.StaticSite.avatarsPage;
 import static io.github.com.pages.AvatarsPage.avatarsWithSize;
 import static io.github.com.pages.AvatarsPage.profileCard;
 import static io.github.com.pages.AvatarsPage.slotAvatars;
 import static io.github.com.pages.AvatarsPage.tileAvatar;
 
-public class AvatarTests extends TestsInit {
+public class AvatarsTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void beforeTest() {
         avatarsPage.open();
     }
 
     @Test
     public void avatarsWithSizeTests() {
-        avatarsWithSize.get(1).waitFor(displayed);
-        for(Avatar avatar : avatarsWithSize) {
+        for(Avatar avatar: avatarsWithSize) {
             avatar.is().displayed();
         }
         avatarsWithSize.get(1).is().text("36");
@@ -37,7 +33,6 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void tileAvatarTests() {
-        tileAvatar.waitFor(displayed);
         tileAvatar.is().displayed();
         tileAvatar.has().icon();
         tileAvatar.has().size("48");
@@ -45,8 +40,7 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void slotAvatarsTests() {
-        slotAvatars.get(1).waitFor(displayed);
-        for(Avatar avatar : slotAvatars) {
+        for(Avatar avatar: slotAvatars) {
             avatar.is().displayed();
         }
         slotAvatars.get(1).has().icon();
@@ -56,11 +50,10 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void profileCardTests() {
-        profileCard.waitUntilImagesAreDisplayed();
         profileCard.is().displayed();
-        jdiAssert(profileCard.hasProperName("Marcus Obrien"), Matchers.is(true));
-        jdiAssert(profileCard.hasProperJobFunction("Network Engineer"), Matchers.is(true));
-        jdiAssert(profileCard.hasAvatarPhoto(), Matchers.is(true));
-        jdiAssert(profileCard.hasBackgroundPhoto(), Matchers.is(true));
+        profileCard.has().properName("Marcus Obrien");
+        profileCard.has().properJobFunction("Network Engineer");
+        profileCard.has().avatarImage();
+        profileCard.has().backgroundImage();
     }
 }

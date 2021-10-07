@@ -5,17 +5,17 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.subheaderPage;
-import static io.github.com.pages.SubheaderPage.gridSubheader;
-import static io.github.com.pages.SubheaderPage.insetSubheader;
-import static io.github.com.pages.SubheaderPage.menuSubheader;
-import static io.github.com.pages.SubheaderPage.socialMediaSubheader;
+import static io.github.com.StaticSite.subheadersPage;
+import static io.github.com.pages.SubheadersPage.gridSubheader;
+import static io.github.com.pages.SubheadersPage.insetSubheader;
+import static io.github.com.pages.SubheadersPage.menuSubheader;
+import static io.github.com.pages.SubheadersPage.socialMediaSubheader;
 
 public class SubheaderTests extends TestsInit {
 
     @BeforeClass
     public void before() {
-        subheaderPage.open();
+        subheadersPage.open();
     }
 
     @Test
