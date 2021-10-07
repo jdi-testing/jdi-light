@@ -1,4 +1,4 @@
-package io.github.epam.vuetify.tests.common;
+package io.github.epam.vuetify.tests.complex;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.listsPage;
@@ -23,12 +23,12 @@ import static io.github.com.pages.ListsPage.twoLinesAndSubheaderList;
 import static io.github.com.pages.ListsPage.twoLinesAndSubheaderListSubheader;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class ListsTests extends TestsInit {
 
-    @BeforeSuite
+    @BeforeClass
     public static void setup() {
         listsPage.open();
     }

@@ -75,10 +75,4 @@ public class Lists extends UIListBase<UISelectAssert<?, ?>> {
         return list().get(elementIndex).attr("aria-expanded").equalsIgnoreCase("true")
                 || list().get(elementIndex).find("*[role='button']").attr("aria-expanded").equalsIgnoreCase("true");
     }
-
-    @Override
-    public UISelectAssert<?, ?> is() {
-        return new UISelectAssert<>().set(this);
-    }
-
 }

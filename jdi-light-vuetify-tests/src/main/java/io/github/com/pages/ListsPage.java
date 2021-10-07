@@ -44,7 +44,7 @@ public class ListsPage extends VuetifyPage {
     @UI("#ActionAndItemGroupsList .v-list-item")
     public static Lists actionAndItemGroupsList;
 
-    @UI("#ActionAndItemGroupsList .v-item-group div[role='option']")
+    @UI("#ActionAndItemGroupsList div[role='option']")
     public static List<Checkbox> actionAndItemGroupsListCheckbox;
 
     @UI("#ActionStackList .v-list-item")
@@ -62,6 +62,6 @@ public class ListsPage extends VuetifyPage {
     @UI("#SubheadingsAndDividersList .v-list-item")
     public static Lists subheadingsAndDividersList;
 
-    @UI("#SubheadingsAndDividersList .v-item-group div[role='option']")
+    @UI("#SubheadingsAndDividersList div[role='option']")
     public static List<Checkbox> subheadingsAndDividersListCheckbox;
 }
