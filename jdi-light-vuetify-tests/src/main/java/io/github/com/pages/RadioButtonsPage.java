@@ -22,5 +22,4 @@ public class RadioButtonsPage extends VuetifyPage {
 
     @UI("#MandatoryRadioButton > p ")
     public static Label mandatoryText;
-
 }

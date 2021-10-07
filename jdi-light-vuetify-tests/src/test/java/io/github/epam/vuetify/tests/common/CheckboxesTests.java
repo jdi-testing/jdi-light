@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -13,16 +13,20 @@ import static io.github.com.pages.CheckboxesPage.modelArray;
 import static io.github.com.pages.CheckboxesPage.modelAsArrayCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelBooleanCheckboxes;
 import static io.github.com.pages.CheckboxesPage.statesCheckboxes;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 
 public class CheckboxesTests extends TestsInit {
 
-    @BeforeSuite
+    @BeforeClass
     public void before() {
         checkboxesPage.open();
     }
 
     @Test
     public void colorsCheckboxesTest() {
+        assertThat(colorsCheckboxes.size(), not(equalTo(0)));
         colorsCheckboxes.stream().forEach(e -> {
             e.is().checked();
             e.check();
