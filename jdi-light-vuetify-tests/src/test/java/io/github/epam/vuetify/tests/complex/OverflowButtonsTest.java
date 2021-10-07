@@ -18,18 +18,29 @@ public class OverflowButtonsTest extends TestsInit {
 
     @Test
     public void demoTest() throws InterruptedException {
-//        Thread.sleep(2000);
+        Thread.sleep(2000);
 //        counterOverflowButton.expand();
 //        Thread.sleep(2000);
 //        counterOverflowButton.close();
 //        Thread.sleep(2000);
-
-        counterOverflowButton.expand();
+//
+//        counterOverflowButton.expand();
 //        System.out.println(counterOverflowButton.dropDownList().size());
 //
 //        for (UIElement element : counterOverflowButton.dropDownList()) {
 //            System.out.println(element.getText());
 //        }
+
+        counterOverflowButton.select(1);
+        System.out.println(counterOverflowButton.getCounterMessage());
+
+        counterOverflowButton.select(1);
+        System.out.println(counterOverflowButton.getMessage());
+
+        hintOverflowButton.select(1);
+        System.out.println(hintOverflowButton.getMessage());
+
+        Thread.sleep(2000);
     }
 
 }
