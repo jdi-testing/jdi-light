@@ -5,7 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.radiobuttonsPage;
+import static io.github.com.StaticSite.radioButtonsPage;
 import static io.github.com.pages.RadioButtonsPage.*;
 
 public class RadioButtonsTests extends TestsInit {
@@ -13,7 +13,7 @@ public class RadioButtonsTests extends TestsInit {
 
     @BeforeClass
     public void before() {
-        radiobuttonsPage.open();
+        radioButtonsPage.open();
     }
 
     @Test
