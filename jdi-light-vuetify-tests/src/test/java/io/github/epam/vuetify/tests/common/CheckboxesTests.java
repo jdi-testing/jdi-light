@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
+import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -7,12 +8,14 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static io.github.com.StaticSite.checkboxesPage;
 import static io.github.com.pages.CheckboxesPage.colorsCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelArray;
 import static io.github.com.pages.CheckboxesPage.modelAsArrayCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelBooleanCheckboxes;
 import static io.github.com.pages.CheckboxesPage.statesCheckboxes;
+import static io.github.com.pages.DividersPage.verticalDividers;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
@@ -26,8 +29,9 @@ public class CheckboxesTests extends TestsInit {
 
     @Test
     public void colorsCheckboxesTest() {
-        assertThat(colorsCheckboxes.size(), not(equalTo(0)));
-        colorsCheckboxes.stream().forEach(e -> {
+        new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
+                colorsCheckboxes.size() != 0);
+        colorsCheckboxes.forEach(e -> {
             e.is().checked();
             e.check();
             e.is().checked();
@@ -60,11 +64,11 @@ public class CheckboxesTests extends TestsInit {
     @Test
     public void modelBooleanTest() {
         modelBooleanCheckboxes.get(2).check();
-        modelBooleanCheckboxes.stream().forEach(e -> {
+        modelBooleanCheckboxes.forEach(e -> {
             e.is().checked();
             e.assertThat().labelContains("true");
         });
-        modelBooleanCheckboxes.stream().forEach(e -> {
+        modelBooleanCheckboxes.forEach(e -> {
             e.uncheck();
             e.is().unchecked();
             e.assertThat().labelContains("false");

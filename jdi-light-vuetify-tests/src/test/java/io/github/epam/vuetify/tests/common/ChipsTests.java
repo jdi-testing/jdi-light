@@ -3,7 +3,7 @@ package io.github.epam.vuetify.tests.common;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -32,7 +32,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ChipsTests extends TestsInit {
 
-    @BeforeSuite
+    @BeforeClass
     public void before() {
         chipsPage.open();
     }
