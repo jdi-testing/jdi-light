@@ -15,7 +15,8 @@ public class OverflowButtonsTest extends TestsInit {
     }
 
     @Test
-    public void baseFunctionalityTest() {
+    public void baseFunctionalityOverflowButtonTest() {
+        counterOverflowButton.is().enable();
         counterOverflowButton.is().placeholder("Overflow Btn w/ counter");
         counterOverflowButton.expand();
         counterOverflowButton.is().expanded();
@@ -28,41 +29,42 @@ public class OverflowButtonsTest extends TestsInit {
     }
 
     @Test
-    public void demoTest() throws InterruptedException {
-        Thread.sleep(2000);
-//        counterOverflowButton.expand();
-//        Thread.sleep(2000);
-//        counterOverflowButton.close();
-//        Thread.sleep(2000);
-//
-//        counterOverflowButton.expand();
-//        System.out.println(counterOverflowButton.dropDownList().size());
-//
-//        for (UIElement element : counterOverflowButton.dropDownList()) {
-//            System.out.println(element.getText());
-//        }
-//
-//        counterOverflowButton.select(1);
-//        System.out.println(counterOverflowButton.counterMessage());
-//
-//        counterOverflowButton.select(1);
-//        System.out.println(counterOverflowButton.message());
-//
-//        hintOverflowButton.select(1);
-//        System.out.println(hintOverflowButton.message());
-//
-//        Thread.sleep(2000);
-
-//        System.out.println(counterOverflowButton.isDisabled());
-//        System.out.println(disabledOverflowButton.isEnabled());
-
-//        System.out.println(loadingOverflowButton.hasProgressBar());
-//        System.out.println(counterOverflowButton.hasProgressBar());
-
-        editableOverflowButton.hover();
-        editableOverflowButton.setText("50");
-        Thread.sleep(2000);
+    public void counterOverflowButtonTest() {
+        counterOverflowButton.select("100%");
+        counterOverflowButton.is().counter("4");
+        counterOverflowButton.select(5);
+        counterOverflowButton.is().counter("2");
     }
 
+    @Test
+    public void disabledOverflowButton() {
+        disabledOverflowButton.is().disable();
+    }
 
+    @Test
+    public void editableOverflowButton() {
+        editableOverflowButton.isEditable();
+        editableOverflowButton.sendText("1");
+        editableOverflowButton.dropDownList().get(1).is().text("100%");
+        editableOverflowButton.clear();
+        editableOverflowButton.sendText("7");
+        editableOverflowButton.dropDownList().get(1).is().text("75%");
+    }
+
+    @Test
+    public void hintOverflowButton() {
+        hintOverflowButton.is().hint("Hint doesn't exist");
+        hintOverflowButton.expand();
+        hintOverflowButton.is().hint("Select font");
+    }
+
+    @Test
+    public void loadingOverflowButton() {
+        loadingOverflowButton.is().hasProgressBar();
+    }
+
+    @Test
+    public void readonlyOverflowButton() {
+        readonlyOverflowButton.is().readOnly();
+    }
 }

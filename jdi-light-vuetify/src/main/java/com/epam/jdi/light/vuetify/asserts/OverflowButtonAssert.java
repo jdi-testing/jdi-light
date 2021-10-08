@@ -27,9 +27,9 @@ public class OverflowButtonAssert extends UIAssert<OverflowButtonAssert, Overflo
         return this;
     }
 
-    @JDIAction("Assert that {name} message is '{0}'")
-    public OverflowButtonAssert message(String text) {
-        jdiAssert(element().message(), Matchers.is(text));
+    @JDIAction("Assert that {name} hint is '{0}'")
+    public OverflowButtonAssert hint(String text) {
+        jdiAssert(element().hint(), Matchers.is(text));
         return this;
     }
 
@@ -48,6 +48,18 @@ public class OverflowButtonAssert extends UIAssert<OverflowButtonAssert, Overflo
     @JDIAction("Assert that {name} is editable")
     public OverflowButtonAssert editable() {
         jdiAssert(element().isEditable(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} is enable")
+    public OverflowButtonAssert enable() {
+        jdiAssert(element().isEnabled(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} is disable")
+    public OverflowButtonAssert disable() {
+        jdiAssert(element().isDisabled(), Matchers.is(true));
         return this;
     }
 

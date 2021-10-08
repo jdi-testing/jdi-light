@@ -65,8 +65,13 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     }
 
     @JDIAction("Set '{0}' in '{name}' input text field")
-    public void setText(String text) {
+    public void sendText(String text) {
         core().find(inputLocator).sendKeys(text);
+    }
+
+    @JDIAction("Clear '{name}' text field")
+    public void clear() {
+        core().find(inputLocator).clear();
     }
 
     @JDIAction("Get '{name}' selected text")
@@ -77,10 +82,10 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
         return core().find(selectLocator).getText();
     }
 
-    @JDIAction("Get '{name}' message")
-    public String message() {
+    @JDIAction("Get '{name}' hint")
+    public String hint() {
         if (core().find(messageLocator).isNotExist()) {
-            return "Message doesn't exist";
+            return "Hint doesn't exist";
         }
         return core().find(messageLocator).getText();
     }
