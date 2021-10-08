@@ -11,8 +11,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDITreeView {
     @MarkupLocator String core() default "";
-    @MarkupLocator String node() default "";
     @MarkupLocator String root() default "";
-    @MarkupLocator String children() default "";
-    @MarkupLocator String leaf() default "";
+    @MarkupLocator String nodes() default "";
 }
