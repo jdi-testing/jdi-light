@@ -8,22 +8,20 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 
 public class TreeView extends UIBaseElement<UIAssert<?, ?>> implements ISetup {
 
     protected String CORE_LOCATOR = ".v-treeview OR .v-treeview-node";
 
-    protected String ROOT_LOCATOR = "./*[contains(@class, 'v-treeview-node__root')]";
-
-    protected String ROOT_NODES_LOCATOR = "./*[contains(@class, 'v-treeview-node')]";
+    protected String CORE_NODES_LOCATOR = "./*[contains(@class, 'v-treeview-node')]";
     protected String NODE_NODES_LOCATOR = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
+
+    protected String ROOT_LOCATOR = "./*[contains(@class, 'v-treeview-node__root')]";
 
     protected String TOGGLE_LOCATOR = ".v-treeview-node__toggle";
 
@@ -41,7 +39,7 @@ public class TreeView extends UIBaseElement<UIAssert<?, ?>> implements ISetup {
 
     public UIElement root() {
         if (isPseudoRoot()) {
-            throw new UnsupportedOperationException();
+            return null;
         }
         return core().find(ROOT_LOCATOR);
     }
@@ -52,18 +50,14 @@ public class TreeView extends UIBaseElement<UIAssert<?, ?>> implements ISetup {
             return WebList.newList(Collections.emptyList());
         }
         if (isPseudoRoot()) {
-            return core().finds(ROOT_NODES_LOCATOR);
+            return core().finds(CORE_NODES_LOCATOR);
         }
         expand();
         return core().finds(NODE_NODES_LOCATOR);
     }
 
     protected List<TreeView> nodes() {
-        return children().map(elem -> {
-            TreeView tree = new TreeView().setCore(TreeView.class, elem);
-            tree.setName("TreeView");
-            return tree;
-        });
+        return children().map(elem -> new TreeView().setCore(TreeView.class, elem));
     }
 
     public TreeView getNode(int index) {
@@ -71,7 +65,7 @@ public class TreeView extends UIBaseElement<UIAssert<?, ?>> implements ISetup {
     }
 
     public UIElement getRoot(int index) {
-        return nodes().get(index - 1).root();
+        return getNode(index).root();
     }
 
     public UIElement expander() {
@@ -105,15 +99,20 @@ public class TreeView extends UIBaseElement<UIAssert<?, ?>> implements ISetup {
     }
 
     private void initializeLocators(JDITreeView annotation) {
-        if (annotation.core().isEmpty()) {
-            throw new RuntimeException();
+        if (!annotation.core().isEmpty()) {
+            CORE_LOCATOR = annotation.core();
         }
-        CORE_LOCATOR = annotation.core();
-        if (!annotation.root().isEmpty()) {
-            ROOT_LOCATOR = annotation.root();
+        if (!annotation.coreNodes().isEmpty()) {
+            CORE_NODES_LOCATOR = annotation.coreNodes();
         }
         if (!annotation.nodes().isEmpty()) {
             NODE_NODES_LOCATOR = annotation.nodes();
+        }
+        if (!annotation.root().isEmpty()) {
+            ROOT_LOCATOR = annotation.root();
+        }
+        if (!annotation.toggle().isEmpty()) {
+            TOGGLE_LOCATOR = annotation.toggle();
         }
     }
 
