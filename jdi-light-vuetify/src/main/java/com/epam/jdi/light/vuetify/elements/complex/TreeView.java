@@ -5,37 +5,65 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.HasUIList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.List;
 
 import static com.epam.jdi.light.common.UIUtils.initT;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
 
-public class TreeView<T extends ICoreElement> extends UIBaseElement<UIAssert<?,?>> implements ISetup {
+public class TreeView<T extends ICoreElement> extends UIBaseElement<UIAssert<?,?>> implements ISetup, HasUIList {
+
+    protected String ROOT_NODE_CHILDREN_LOCATOR = ".v-treeview > .v-treeview-node";
+    protected String CHILDREN_LOCATOR = ".v-treeview-node > v-treeview-node__children > .v-treeview-node";
 
     protected String CORE_LOCATOR = ".v-treeview";
-    protected String NODE_LOCATOR = ".v-treeview-node";
-    protected String ROOT_LOCATOR = ":self > .v-treeview-node__root";
-    protected String CHILDREN_LOCATOR = ":self > v-treeview-node__children > .v-treeview-node";
+    protected String NODE_LOCATOR = ".v-treeview > .v-treeview-node";
+    protected String ROOT_LOCATOR = ".v-treeview-node > .v-treeview-node__root";
+
     protected String LEAF_LOCATOR = ".v-treeview-node--leaf";
     protected Class<T> clazz;
 
-    public UIElement self() {
+    public boolean isRootNode() {
+        return core().hasClass("v-treeview");
+    }
+
+    @Override
+    public WebList list() {
+        if (isRootNode()) {
+            core().finds(ROOT_NODE_CHILDREN_LOCATOR);
+        }
+        return core().finds(CHILDREN_LOCATOR);
+    }
+
+    public List<T> nodes() {
+        if (clazz != null) {
+            return list().map(elem -> initT(elem, this, clazz));
+        }
+        throw new UnsupportedOperationException();
+    }
+
+    public UIElement root() {
         return core().find(ROOT_LOCATOR);
     }
 
     public T getSelf() {
-        return initT(self(), this, clazz);
+        return initT(root(), this, clazz);
     }
 
     // "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class,'v-treeview-node')]"
-    public WebList getChildren() {
-        return core().finds(CHILDREN_LOCATOR);
+//    public WebList getChildren() {
+//        return core().finds(CHILDREN_LOCATOR);
+//    }
+
+    public List<T> getChildren() {
+        return null;
     }
 
     @Override
@@ -70,4 +98,5 @@ public class TreeView<T extends ICoreElement> extends UIBaseElement<UIAssert<?,?
             LEAF_LOCATOR = annotation.leaf();
         }
     }
+
 }
