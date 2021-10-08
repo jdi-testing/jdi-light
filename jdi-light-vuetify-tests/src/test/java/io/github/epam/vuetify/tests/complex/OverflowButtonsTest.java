@@ -1,11 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.badgesPage;
 import static io.github.com.StaticSite.overflowButtonsPage;
 import static io.github.com.pages.OverflowButtonsPage.*;
 
@@ -14,6 +12,19 @@ public class OverflowButtonsTest extends TestsInit {
     @BeforeClass
     public void before() {
         overflowButtonsPage.open();
+    }
+
+    @Test
+    public void baseFunctionalityTest() {
+        counterOverflowButton.is().placeholder("Overflow Btn w/ counter");
+        counterOverflowButton.expand();
+        counterOverflowButton.is().expanded();
+        counterOverflowButton.close();
+        counterOverflowButton.is().closed();
+        counterOverflowButton.select("50%");
+        counterOverflowButton.is().selected("50%");
+        counterOverflowButton.select(1);
+        counterOverflowButton.is().selected("100%");
     }
 
     @Test
@@ -30,17 +41,28 @@ public class OverflowButtonsTest extends TestsInit {
 //        for (UIElement element : counterOverflowButton.dropDownList()) {
 //            System.out.println(element.getText());
 //        }
+//
+//        counterOverflowButton.select(1);
+//        System.out.println(counterOverflowButton.counterMessage());
+//
+//        counterOverflowButton.select(1);
+//        System.out.println(counterOverflowButton.message());
+//
+//        hintOverflowButton.select(1);
+//        System.out.println(hintOverflowButton.message());
+//
+//        Thread.sleep(2000);
 
-        counterOverflowButton.select(1);
-        System.out.println(counterOverflowButton.getCounterMessage());
+//        System.out.println(counterOverflowButton.isDisabled());
+//        System.out.println(disabledOverflowButton.isEnabled());
 
-        counterOverflowButton.select(1);
-        System.out.println(counterOverflowButton.getMessage());
+//        System.out.println(loadingOverflowButton.hasProgressBar());
+//        System.out.println(counterOverflowButton.hasProgressBar());
 
-        hintOverflowButton.select(1);
-        System.out.println(hintOverflowButton.getMessage());
-
+        editableOverflowButton.hover();
+        editableOverflowButton.setText("50");
         Thread.sleep(2000);
     }
+
 
 }
