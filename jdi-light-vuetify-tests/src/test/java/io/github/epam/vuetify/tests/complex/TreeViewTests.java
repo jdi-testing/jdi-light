@@ -26,44 +26,44 @@ public class TreeViewTests extends TestsInit {
         assertThat(activatableTreeView.isPseudoRoot(), is(true));
         activatableTreeView.children().has().size(4);
 
-        TreeView<SimpleNode> app = activatableTreeView.nodes().get(0);
+        TreeView<SimpleNode> app = activatableTreeView.getNode(1);
         app.children().has().size(3);
         app.root().text.has().text("Applications :");
-        app.nodes().get(0).root().text.has().text("Calendar : app");
-        app.nodes().get(1).root().text.has().text("Chrome : app");
-        app.nodes().get(2).root().text.has().text("Webstorm : app");
+        app.getRoot(1).text.has().text("Calendar : app");
+        app.getRoot(2).text.has().text("Chrome : app");
+        app.getRoot(3).text.has().text("Webstorm : app");
 
-        TreeView<SimpleNode> doc = activatableTreeView.nodes().get(1);
+        TreeView<SimpleNode> doc = activatableTreeView.getNode(2);
         doc.root().text.has().text("Documents :");
         doc.children().has().size(2);
-        doc.nodes().get(0).root().text.has().text("vuetify :");
-        doc.nodes().get(1).root().text.has().text("material2 :");
+        doc.getRoot(1).text.has().text("vuetify :");
+        doc.getRoot(2).text.has().text("material2 :");
 
-        TreeView<SimpleNode> vue = doc.nodes().get(0);
+        TreeView<SimpleNode> vue = doc.getNode(1);
         vue.children().has().size(1);
-        vue.nodes().get(0).root().text.has().text("src :");
+        vue.getRoot(1).text.has().text("src :");
 
-        TreeView<SimpleNode> mat = doc.nodes().get(1);
+        TreeView<SimpleNode> mat = doc.getNode(1);
         mat.children().has().size(1);
-        mat.nodes().get(0).root().text.has().text("src :");
+        mat.getRoot(1).text.has().text("src :");
 
-        TreeView<SimpleNode> videos = activatableTreeView.nodes().get(3);
+        TreeView<SimpleNode> videos = activatableTreeView.getNode(4);
         videos.children().has().size(3);
         videos.root().text.has().text("Videos :");
-        videos.nodes().get(0).root().text.has().text("Tutorials :");
-        videos.nodes().get(1).root().text.has().text("Intro : mov");
-        assertThat(videos.nodes().get(1).isLeaf(), is(true));
-        videos.nodes().get(2).root().text.has().text("Conference introduction : avi");
-        assertThat(videos.nodes().get(2).isLeaf(), is(true));
+        videos.getRoot(1).text.has().text("Tutorials :");
+        videos.getRoot(2).text.has().text("Intro : mov");
+        assertThat(videos.getNode(2).isLeaf(), is(true));
+        videos.getRoot(3).text.has().text("Conference introduction : avi");
+        assertThat(videos.getNode(3).isLeaf(), is(true));
     }
 
     @Test
     public void selectableTreViewTest() {
         assertThat(selectableTreeView.isPseudoRoot(), is(true));
-        TreeView<CheckedNode> app = selectableTreeView.nodes().get(0);
-        app.nodes().get(0).root().checkbox.has().classValue(containsString("mdi-checkbox-blank-outline"));
-        app.nodes().get(0).root().checkbox.check();
-        app.nodes().get(0).root().checkbox.has().classValue(containsString("mdi-checkbox-marked"));
+        TreeView<CheckedNode> app = selectableTreeView.getNode(1);
+        app.getNode(1).root().checkbox.has().classValue(containsString("mdi-checkbox-blank-outline"));
+        app.getNode(1).root().checkbox.check();
+        app.getNode(1).root().checkbox.has().classValue(containsString("mdi-checkbox-marked"));
         app.root().checkbox.has().classValue(containsString("mdi-minus-box"));
     }
 }

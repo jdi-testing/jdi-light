@@ -55,7 +55,7 @@ public class TreeView<T extends ICoreElement> extends UIBaseElement<UIAssert<?, 
         return core().hasClass(LEAF_NODE_CLASS);
     }
 
-    public UIElement rootElement() {
+    protected UIElement rootElement() {
         if (isPseudoRoot()) {
             throw new UnsupportedOperationException();
         }
@@ -78,8 +78,16 @@ public class TreeView<T extends ICoreElement> extends UIBaseElement<UIAssert<?, 
         return core().finds(NODE_NODES_LOCATOR);
     }
 
-    public List<TreeView<T>> nodes() {
+    protected List<TreeView<T>> nodes() {
         return children().map(elem -> new TreeView<>(clazz, elem));
+    }
+
+    public TreeView<T> getNode(int index) {
+        return nodes().get(index - 1);
+    }
+
+    public T getRoot(int index) {
+        return nodes().get(index - 1).root();
     }
 
     public UIElement expander() {
