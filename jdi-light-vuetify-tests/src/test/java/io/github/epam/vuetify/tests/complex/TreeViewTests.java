@@ -27,28 +27,28 @@ public class TreeViewTests extends TestsInit {
         assertThat(activatableTreeView.isPseudoRoot(), is(true));
         activatableTreeView.children().has().size(4);
 
-        TreeView<UIElement> app = activatableTreeView.getNode(1);
+        TreeView app = activatableTreeView.getNode(1);
         app.children().has().size(3);
         app.root().has().text("Applications :");
         app.getRoot(1).has().text("Calendar : app");
         app.getRoot(2).has().text("Chrome : app");
         app.getRoot(3).has().text("Webstorm : app");
 
-        TreeView<UIElement> doc = activatableTreeView.getNode(2);
+        TreeView doc = activatableTreeView.getNode(2);
         doc.root().has().text("Documents :");
         doc.children().has().size(2);
         doc.getRoot(1).has().text("vuetify :");
         doc.getRoot(2).has().text("material2 :");
 
-        TreeView<UIElement> vue = doc.getNode(1);
+        TreeView vue = doc.getNode(1);
         vue.children().has().size(1);
         vue.getRoot(1).has().text("src :");
 
-        TreeView<UIElement> mat = doc.getNode(1);
+        TreeView mat = doc.getNode(1);
         mat.children().has().size(1);
         mat.getRoot(1).has().text("src :");
 
-        TreeView<UIElement> videos = activatableTreeView.getNode(4);
+        TreeView videos = activatableTreeView.getNode(4);
         videos.children().has().size(3);
 
         videos.root().has().text("Videos :");
@@ -62,10 +62,10 @@ public class TreeViewTests extends TestsInit {
     @Test
     public void selectableTreViewTest() {
         assertThat(selectableTreeView.isPseudoRoot(), is(true));
-        TreeView<CheckedNode> app = selectableTreeView.getNode(1);
-        app.getNode(1).root().checkbox.has().classValue(containsString("mdi-checkbox-blank-outline"));
-        app.getNode(1).root().checkbox.check();
-        app.getNode(1).root().checkbox.has().classValue(containsString("mdi-checkbox-marked"));
-        app.root().checkbox.has().classValue(containsString("mdi-minus-box"));
+        TreeView app = selectableTreeView.getNode(1);
+        app.getNode(1).root().find(".v-treeview-node__checkbox").has().classValue(containsString("mdi-checkbox-blank-outline"));
+        app.getNode(1).root().find(".v-treeview-node__checkbox").check();
+        app.getNode(1).root().find(".v-treeview-node__checkbox").has().classValue(containsString("mdi-checkbox-marked"));
+        app.root().find(".v-treeview-node__checkbox").has().classValue(containsString("mdi-minus-box"));
     }
 }

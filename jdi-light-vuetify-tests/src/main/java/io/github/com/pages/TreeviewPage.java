@@ -8,9 +8,9 @@ import io.github.com.custom.treeview.CheckedNode;
 public class TreeviewPage extends VuetifyPage {
 
     @JDITreeView(core = "#ActivatableTreeview")
-    public static TreeView<UIElement> activatableTreeView;
+    public static TreeView activatableTreeView;
 
     @JDITreeView(core = "#SelectableTreeview")
-    public static TreeView<CheckedNode> selectableTreeView;
+    public static TreeView selectableTreeView;
 
 }
