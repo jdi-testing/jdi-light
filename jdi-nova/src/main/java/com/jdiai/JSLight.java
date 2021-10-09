@@ -919,9 +919,9 @@ public class JSLight implements JS {
         if (isInterface(element.getClass(), HasCore.class)) {
             JS core = ((HasCore)element).core();
             if (relations == null) {
-                relations = new MapArray<>(core.getFullName(), direction);
+                relations = new MapArray<>(core.toString(), direction);
             } else {
-                relations.update(core.getFullName(), direction);
+                relations.update(core.toString(), direction);
             }
         }
         return direction;
@@ -992,7 +992,7 @@ public class JSLight implements JS {
             return;
         }
         failures.add(format("Elements '%s' and '%s' are misplaced: angle: %s => %s; length: %s => %s",
-            getFullName(), relation.key, relation.value.angle(), expectedRelation.angle(),
+            toString(), relation.key, relation.value.angle(), expectedRelation.angle(),
             relation.value.length(), expectedRelation.length()));
     }
 
@@ -1015,10 +1015,10 @@ public class JSLight implements JS {
         if (isBlank(name)) {
             return printLocators();
         }
-        return format("%s(%s%s)", getName(), getFullName(), printLocators());
+        return format("%s(%s%s)", getName(), getClassVarName(), printLocators());
     }
 
-    public String getFullName() {
+    public String getClassVarName() {
         if (parent() != null && isNotBlank(varName)) {
             String parentName = parent().getClass().getSimpleName();
             String prefix = isNotBlank(parentName) ? parentName + "." : "";

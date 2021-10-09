@@ -3,6 +3,7 @@ package com.jdiai;
 import com.jdiai.annotations.UI;
 import com.jdiai.asserts.Condition;
 import com.jdiai.asserts.ConditionTypes;
+import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsbuilder.ConsoleLogger;
 import com.jdiai.jsbuilder.IJSBuilder;
 import com.jdiai.jsbuilder.JSBuilder;
@@ -32,9 +33,12 @@ import java.util.function.Supplier;
 
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
+import static com.jdiai.asserts.Conditions.above;
+import static com.jdiai.asserts.Conditions.onLeftOf;
 import static com.jdiai.asserts.ShouldUtils.waitForResult;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.QueryLogger.*;
+import static com.jdiai.jsdriver.JDINovaException.THROW_ASSERT;
 import static com.jdiai.jsdriver.JDINovaException.assertContains;
 import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static com.jdiai.jswraper.JSWrappersUtils.*;
@@ -45,10 +49,12 @@ import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
 import static com.jdiai.tools.BrowserTabs.getWindowHandles;
 import static com.jdiai.tools.BrowserTabs.setTabName;
 import static com.jdiai.tools.JsonUtils.getDouble;
+import static com.jdiai.tools.LinqUtils.any;
 import static com.jdiai.tools.LinqUtils.newList;
 import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.ReflectionUtils.getFieldsDeep;
 import static com.jdiai.tools.StringUtils.format;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class JDI {
@@ -305,6 +311,72 @@ public class JDI {
             JDI.openSite();
             setTabName(cl.getSimpleName());
         }
+    }
+
+    public static void lineLayout(HasCore... elements) {
+        if (isEmpty(elements) || elements.length == 1) {
+            return;
+        }
+        for (int i = 1; i < elements.length; i++) {
+            elements[i-1].shouldBe(onLeftOf(elements[i]));
+        }
+    }
+
+    public static void complexLayout(HasCore[][] elements) {
+        if (isEmpty(elements)) {
+            return;
+        }
+        for (int i = 0; i < elements.length; i++) {
+            HasCore[] line = elements[i];
+            lineLayout(line);
+            if (i > 0) {
+                for (HasCore above : elements[i-1]) {
+                    for (HasCore below : elements[i]) {
+                        above.shouldBe(above(below));
+                    }
+                }
+            }
+        }
+    }
+
+
+    public static void gridLayout(HasCore[][] elements) {
+        if (isEmpty(elements)) {
+            return;
+        }
+        if (isNotGrid(elements)) {
+            THROW_ASSERT.accept("Layout is not grid (grid should have at least one line and all lines have same length)");
+        }
+        long amount = elements[0].length;
+        for (int i = 1; i < elements.length; i++) {
+            for (int j = 1; j < amount; j++) {
+                for (int k = 0; k < amount; k++) {
+                    HasCore above = elements[i-1][j];
+                    HasCore below = elements[i][k];
+                    if (above == null || below == null) {
+                        continue;
+                    }
+                    above.shouldBe(above(below));
+                }
+            }
+        }
+        for (int j = 1; j < amount; j++) {
+            for (int i = 1; i < elements.length; i++) {
+                for (HasCore[] element : elements) {
+                    HasCore left = element[j-1];
+                    HasCore right = elements[i][j];
+                    if (left == null || right == null) {
+                        continue;
+                    }
+                    left.shouldBe(onLeftOf(right));
+                }
+            }
+        }
+    }
+
+    private static boolean isNotGrid(HasCore[][] elements) {
+        int amount = elements[0].length;
+        return amount < 1 || any(elements, line -> line.length != amount);
     }
 
     public static void openPage(String url) {

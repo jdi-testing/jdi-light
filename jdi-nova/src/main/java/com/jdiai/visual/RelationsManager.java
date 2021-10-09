@@ -1,7 +1,7 @@
 package com.jdiai.visual;
 
 import com.google.gson.Gson;
-import com.jdiai.JS;
+import com.jdiai.interfaces.HasCore;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.tools.map.MapArray;
 
@@ -14,6 +14,7 @@ import java.util.function.BiFunction;
 
 import static com.jdiai.JDI.JDI_STORAGE;
 import static java.lang.Math.abs;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class RelationsManager {
     public static String RELATIONS_STORAGE = JDI_STORAGE + "/relations.json";
@@ -35,8 +36,13 @@ public class RelationsManager {
         }
         return storage;
     }
-    public static void storeRelations(JS element, MapArray<String, Direction> relations) {
-        storeRelations(element.getFullName(), relations);
+    public static void storeRelations(HasCore element, MapArray<String, Direction> relations) {
+        storeRelations(getRelationsName(element), relations);
+    }
+    private static String getRelationsName(HasCore element) {
+        return isNotBlank(element.core().getClassVarName())
+                ? element.core().getClassVarName()
+                : element.toString();
     }
     public static void storeRelations(String name, MapArray<String, Direction> relations) {
         try {
@@ -45,11 +51,11 @@ public class RelationsManager {
             throw new JDINovaException(ex, "Failed to store relations: " + relations);
         }
     }
-    public static MapArray<String, Direction> readRelations(JS element) {
-        return readRelations(element.getFullName());
+    public static MapArray<String, Direction> readRelations(HasCore element) {
+        return readRelations(getRelationsName(element));
     }
     public static MapArray<String, Direction> readRelations(String name) {
-        Map allRelations;
+        Map<?,?> allRelations;
         try {
              allRelations = new Gson().fromJson(new FileReader(getRelationsStorage()), Map.class);
         } catch (IOException ex) {
