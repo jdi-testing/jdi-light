@@ -362,8 +362,8 @@ public class JDI {
         }
         for (int j = 1; j < amount; j++) {
             for (int i = 1; i < elements.length; i++) {
-                for (int k = 0; k < elements.length; k++) {
-                    HasCore left = elements[k][j-1];
+                for (HasCore[] element : elements) {
+                    HasCore left = element[j-1];
                     HasCore right = elements[i][j];
                     if (left == null || right == null) {
                         continue;
@@ -375,11 +375,8 @@ public class JDI {
     }
 
     private static boolean isNotGrid(HasCore[][] elements) {
-        long amount = elements[0].length;
-        if (amount < 1) {
-            return true;
-        }
-        return any(elements, line -> line.length != amount);
+        int amount = elements[0].length;
+        return amount < 1 || any(elements, line -> line.length != amount);
     }
 
     public static void openPage(String url) {
