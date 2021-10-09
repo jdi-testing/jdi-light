@@ -25,8 +25,8 @@ import io.github.com.pages.ColorPickersPage;
 import io.github.com.pages.ComboboxPage;
 import io.github.com.pages.DataIteratorsPage;
 import io.github.com.pages.DataTablesPage;
-import io.github.com.pages.DatePickersPage;
 import io.github.com.pages.DatePickersMonthPage;
+import io.github.com.pages.DatePickersPage;
 import io.github.com.pages.DialogsPage;
 import io.github.com.pages.DividersPage;
 import io.github.com.pages.ExpansionPanelsPage;
@@ -76,7 +76,6 @@ import io.github.com.pages.TooltipsPage;
 import io.github.com.pages.TreeviewPage;
 import io.github.com.pages.VirtualScrollerPage;
 import io.github.com.pages.WindowsPage;
-
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -302,6 +301,4 @@ public class StaticSite {
 
     @Url("/windows")
     public static WindowsPage windowsPage;
-
-
 }
