@@ -167,7 +167,7 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
 
     JS setFilter(String filter);
     JS setGetValueFunc(String getValueFunc);
-    String getFullName();
+    String getClassVarName();
     int elementTimeout();
 
     void setVarName(Field field);

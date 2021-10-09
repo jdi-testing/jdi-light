@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static com.jdiai.tools.LinqUtils.all;
+import static com.jdiai.tools.LinqUtils.map;
 import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.visual.Directions.*;
@@ -90,52 +92,68 @@ public abstract class Conditions {
     public static Condition readonly = attribute("readonly");
 
     public static Condition above(HasCore element) {
-        return condition("%element% is %not% on the Top of '" + element.core().getFullName() + "'",
+        return condition("%element% is %not% on the Top of '" + element.toString() + "'",
             el -> el.core().isAbove(element));
+    }
+    public static Condition above(HasCore... elements) {
+        return condition("%element% are %not% on the Top of [" + print(map(elements, Object::toString)) + "]",
+            el -> all(elements, element -> el.core().isAbove(element)));
     }
 
     public static Condition below(HasCore element) {
-        return condition("%element% is %not% Below '" + element.core().getFullName() + "'",
+        return condition("%element% is %not% Below '" + element.toString() + "'",
             el -> el.core().isBelow(element));
+    }
+    public static Condition below(HasCore... elements) {
+        return condition("%element% are %not% on the Below of [" + print(map(elements, Object::toString)) + "]",
+            el -> all(elements, element -> el.core().isBelow(element)));
     }
 
     public static Condition onLeftOf(HasCore element) {
-        return condition("%element% is %not% on the Left of '" + element.core().getFullName() + "'",
+        return condition("%element% is %not% on the Left of '" + element.toString() + "'",
             el -> el.core().isOnLeftOf(element));
+    }
+    public static Condition onLeftOf(HasCore... elements) {
+        return condition("%element% are %not% on the Left of [" + print(map(elements, Object::toString)) + "]",
+            el -> all(elements, element -> el.core().isOnLeftOf(element)));
     }
 
     public static Condition onRightOf(HasCore element) {
-        return condition("%element% is %not% on the Right of '" + element.core().getFullName() + "'",
+        return condition("%element% is %not% on the Right of '" + element.toString() + "'",
             el -> el.core().isOnRightOf(element));
+    }
+    public static Condition onRightOf(HasCore... elements) {
+        return condition("%element% are %not% on the Right of [" + print(map(elements, Object::toString)) + "]",
+            el -> all(elements, element -> el.core().isOnRightOf(element)));
     }
 
     public static Condition onTopLeftOf(HasCore element) {
-        return condition("%element% is %not% on the Top-Left of '" + element.core().getFullName() + "'",
+        return condition("%element% is %not% on the Top-Left of '" + element.toString() + "'",
             el -> TOP_LEFT.apply(element.getDirectionTo(el.core())));
     }
 
     public static Condition onTopRightOf(HasCore element) {
-        return condition("%element% is %not% on the Top-Right of '" + element.core().getFullName() + "'",
+        return condition("%element% is %not% on the Top-Right of '" + element.toString() + "'",
             el -> TOP_RIGHT.apply(element.getDirectionTo(el.core())));
     }
 
     public static Condition onBottomLeftOf(HasCore element) {
-        return condition("%element% is %not% on the Bottom-Left of '" + element.core().getFullName() + "'",
+        return condition("%element% is %not% on the Bottom-Left of '" + element.toString() + "'",
             el -> BOTTOM_LEFT.apply(element.getDirectionTo(el.core())));
     }
 
     public static Condition onBottomRightOf(HasCore element) {
-        return condition("%element% is %not% on the Bottom-Right of '" + element.core().getFullName() + "'",
+        return condition("%element% is %not% on the Bottom-Right of '" + element.toString() + "'",
             el -> BOTTOM_RIGHT.apply(element.getDirectionTo(el.core())));
     }
 
     public static Condition onSameLine(HasCore element) {
-        return condition("%element% is %not% on the same line '" + element.core().getFullName() + "'",
+        return condition("%element% is %not% on the same line '" + element.toString() + "'",
             el -> SAME_HORIZONTAL.apply(element.getDirectionTo(el.core())));
     }
 
     public static Condition onSameVerticalLine(HasCore element) {
-        return condition("%element% is %not% on the same vertical line '" + element.core().getFullName() + "'",
+        return condition("%element% is %not% on the same vertical line '" + element.toString() + "'",
             el -> SAME_VERTICAL.apply(element.getDirectionTo(el.core())));
     }
 

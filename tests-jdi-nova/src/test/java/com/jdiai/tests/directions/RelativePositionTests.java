@@ -2,15 +2,18 @@ package com.jdiai.tests.directions;
 
 import com.jdiai.JS;
 import com.jdiai.TestInit;
+import com.jdiai.interfaces.HasCore;
 import com.jdiai.testng.TestNGListener;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.jdiai.JDI.$;
+import static com.jdiai.JDI.*;
 import static com.jdiai.Pages.CONTACTS_PAGE;
 import static com.jdiai.asserts.Conditions.*;
 import static com.jdiai.states.States.loggedInAt;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 @Listeners(TestNGListener.class)
 public class RelativePositionTests implements TestInit {
@@ -75,5 +78,97 @@ public class RelativePositionTests implements TestInit {
         position.shouldBe(onTopRightOf(passportNumber));
         gender.shouldBe(onBottomLeftOf(passportNumber));
         weather.shouldBe(onBottomRightOf(passportNumber));
+    }
+
+    @Test
+    public void lineLayoutTest() {
+        lineLayout(firstName, lastName, position);
+    }
+
+    @Test
+    public void lineLayoutFailTest() {
+        try {
+            timeout = 1;
+            lineLayout(lastName, firstName, position);
+            fail("lineLayout in wrong order should fail");
+        } catch (AssertionError ex) {
+            assertTrue(ex.getMessage().contains("Assert that 'id:'last-name'' is on the Left of 'id:'first-name''"));
+        } finally {
+            timeout = 10;
+        }
+    }
+
+    @Test
+    public void complexLayoutTest() {
+        complexLayout(new HasCore[][] {
+            { firstName, lastName, position },
+            { passportNumber, passportSeria },
+            { gender, weather }
+        });
+    }
+
+    @Test
+    public void gridLayoutTest() {
+        gridLayout(new HasCore[][] {
+            { firstName, lastName, position },
+            { null, passportNumber, passportSeria },
+            { gender, null, weather }
+        });
+
+        gridLayout(new HasCore[][] {
+            { firstName, lastName, position },
+            { passportNumber, null, passportSeria },
+            { gender, null, weather }
+        });
+
+        gridLayout(new HasCore[][] {
+            { firstName, lastName, position },
+            { passportNumber, passportSeria, null },
+            { gender, null, weather }
+        });
+    }
+
+    @Test
+    public void gridLayout2Test() {
+        gridLayout(new HasCore[][] {
+            { firstName, null, lastName, null, position },
+            { null, passportNumber, null, passportSeria, null },
+            { gender, null, null, null, weather }
+        });
+    }
+
+    @Test
+    public void gridLayoutFailTest() {
+        try {
+            timeout = 1;
+            gridLayout(new HasCore[][] {
+                { lastName, firstName, position },
+                { null, passportNumber, passportSeria },
+                { gender, null, weather }
+            });
+            fail("gridLayout in wrong order should fail");
+        } catch (AssertionError ex) {
+            assertTrue(ex.getMessage().contains("Assert that 'id:'last-name'' is on the Left of 'id:'passport-number''"));
+        } finally {
+            timeout = 10;
+        }
+    }
+
+
+    @Test
+    public void gridLayoutFail2Test() {
+        try {
+            timeout = 1;
+            gridLayout(new HasCore[][] {
+                { firstName, lastName, position },
+                { gender, null, weather },
+                { null, passportNumber, passportSeria },
+            });
+            fail("gridLayout in wrong order should fail");
+        } catch (AssertionError ex) {
+            assertTrue(ex.getMessage().contains("Assert that 'id:'weather'' is on the Top of 'id:'passport-number''"));
+        } finally {
+            timeout = 10;
+        }
     }
 }
