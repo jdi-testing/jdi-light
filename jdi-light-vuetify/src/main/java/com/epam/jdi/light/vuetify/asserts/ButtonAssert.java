@@ -21,4 +21,18 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
         jdiAssert(element().isDisabled(), Matchers.is(true));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' is displayed")
+    @Override
+    public ButtonAssert displayed() {
+        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is hidden")
+    @Override
+    public ButtonAssert hidden() {
+        jdiAssert(element().isHidden(), Matchers.is(true));
+        return this;
+    }
 }
