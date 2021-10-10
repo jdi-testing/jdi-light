@@ -1,4 +1,4 @@
-package io.github.epam.vuetify.tests.input;
+package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;

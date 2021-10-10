@@ -1,8 +1,8 @@
-package com.epam.jdi.light.vuetify.asserts.input;
+package com.epam.jdi.light.vuetify.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.input.Button;
+import com.epam.jdi.light.vuetify.elements.common.Button;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
