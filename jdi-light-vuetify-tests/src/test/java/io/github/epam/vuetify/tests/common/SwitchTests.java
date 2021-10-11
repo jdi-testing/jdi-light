@@ -22,15 +22,15 @@ public class SwitchTests extends TestsInit {
 
         colorSwitches.get(1).is().inputColor(Colors.RED.value());
         colorSwitches.get(1).uncheck();
-        colorSwitches.get(1).is().inputColor("rgba(0, 0, 0, 0.87)");
+        colorSwitches.get(1).is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
 
         colorSwitches.get(6).is().inputColor(Colors.ORANGE_DARKEN_3.value());
         colorSwitches.get(6).uncheck();
-        colorSwitches.get(6).is().inputColor("rgba(0, 0, 0, 0.87)");
+        colorSwitches.get(6).is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
 
         colorSwitches.get(12).is().inputColor(Colors.RED_ACCENT_2.value());
         colorSwitches.get(12).uncheck();
-        colorSwitches.get(12).is().inputColor("rgba(0, 0, 0, 0.87)");
+        colorSwitches.get(12).is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
     }
 
     @Test

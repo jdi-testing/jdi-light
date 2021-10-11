@@ -3,6 +3,9 @@ package com.epam.jdi.light.vuetify.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.SwitchAssert;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -12,7 +15,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
  * To see example of Switches web element please visit https://vuetifyjs.com/en/components/switches/
  */
 
-public class Switch extends UIBaseElement<SwitchAssert> {
+public class Switch extends UIBaseElement<SwitchAssert> implements HasClick {
 
     private UIElement input() {
         return $("input", this);
@@ -35,14 +38,14 @@ public class Switch extends UIBaseElement<SwitchAssert> {
     @JDIAction("Check '{name}'")
     public void check() {
         if (isNotChecked()) {
-            this.core().click();
+            this.click();
         }
     }
 
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
         if (isChecked()) {
-            this.core().click();
+            this.click();
         }
     }
 
@@ -72,7 +75,7 @@ public class Switch extends UIBaseElement<SwitchAssert> {
         if (!hasLabel()) {
             throw exception("Label doesn't exist", this);
         }
-        return label().getText();
+        return label().text();
     }
 
     @JDIAction("Get {name} label HTML element")
