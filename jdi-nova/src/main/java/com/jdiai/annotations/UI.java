@@ -21,6 +21,7 @@ public @interface UI {
     String hasText() default "";
 
     String id() default "";
+    String testId() default "";
     String name() default "";
     String clazz() default "";
     String label() default "";

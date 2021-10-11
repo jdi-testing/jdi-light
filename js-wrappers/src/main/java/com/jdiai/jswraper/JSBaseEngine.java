@@ -19,6 +19,10 @@ public class JSBaseEngine extends JSElement implements JSEngine {
     protected Class<?> entity;
     protected String objectMap;
 
+    public String getEntityName() {
+        return entity.getSimpleName();
+    }
+
     public JSBaseEngine(Supplier<WebDriver> driver, List<By> locators, IJSBuilder builder) {
         super(driver, locators);
         if (builder != null) {

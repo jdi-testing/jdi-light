@@ -12,6 +12,7 @@ import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static com.jdiai.tools.LinqUtils.copyList;
 import static com.jdiai.tools.ReflectionUtils.isInterface;
 import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.TestIDLocators.TEST_ID;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.openqa.selenium.support.How.*;
 import static org.openqa.selenium.support.ui.Quotes.escape;
@@ -28,6 +29,9 @@ public final class JSUtils {
          }
          if (isNotEmpty(locator.value())) {
              return NAME_TO_LOCATOR.apply(locator.value());
+         }
+         if (isNotEmpty(locator.testId())) {
+             return By.cssSelector(String.format("[%s='%s']", TEST_ID, locator.testId()));
          }
          if (isNotEmpty(locator.id())) {
              return By.id(locator.id());

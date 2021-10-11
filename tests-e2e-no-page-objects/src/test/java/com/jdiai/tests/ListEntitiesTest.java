@@ -37,9 +37,9 @@ public class ListEntitiesTest implements TestInit {
     public void jsonListTest() {
         List<JsonObject> results = $("#search-results li").getObjectList(
         "{ 'title': element.querySelector('h3').innerText, " +
-                "'description': element.querySelector('p').innerText, " +
-                "'link': element.querySelector('a').href " +
-                "}");
+            "'description': element.querySelector('p').innerText, " +
+            "'link': element.querySelector('a').href " +
+            "}");
         assertEquals(results.size(), 6);
         assertEquals(results.get(2).get("title").toString(), "\"JDI TEST SITE\"");
         assertEquals(print(results,

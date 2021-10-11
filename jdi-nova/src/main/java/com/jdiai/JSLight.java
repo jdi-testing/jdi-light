@@ -1088,8 +1088,11 @@ public class JSLight implements JS {
             result = func.get();
         } else {
             jsDriver().setFilter(defaultFilter);
-            result = func.get();
-            jsDriver().setFilter(null);
+            try {
+                result = func.get();
+            } finally {
+                jsDriver().setFilter(null);
+            }
         }
         return result;
     }

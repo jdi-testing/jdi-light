@@ -55,5 +55,6 @@ public interface JSEngine {
     <T> List<T> getEntityListFromAttr(String... attributes);
     JSEngine copy();
     void updateFrom(JSEngine engine);
+    String getEntityName();
 
 }

@@ -5,13 +5,13 @@ import com.jdiai.annotations.Name;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.tools.map.MapArray;
 import com.jdiai.tools.pairs.Pair;
-import org.openqa.selenium.Dimension;
 
 import java.util.List;
 import java.util.Set;
 
 import static com.jdiai.JDI.*;
 import static com.jdiai.asserts.ShouldUtils.waitForResult;
+import static com.jdiai.jswraper.driver.JDIDriver.setBrowserSize;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -287,6 +287,6 @@ public class BrowserTabs {
      * @param height - window height
      */
     public static void resizeWindow(int width, int height) {
-        driver().manage().window().setSize(new Dimension(width, height));
+        setBrowserSize(driver(), width, height);
     }
 }
