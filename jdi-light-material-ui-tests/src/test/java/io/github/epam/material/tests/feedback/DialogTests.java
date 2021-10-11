@@ -28,7 +28,7 @@ import static io.github.com.pages.feedback.DialogPage.simpleDialogListButton;
 import static io.github.com.pages.feedback.DialogPage.subscribeButton;
 import static org.hamcrest.Matchers.containsString;
 
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

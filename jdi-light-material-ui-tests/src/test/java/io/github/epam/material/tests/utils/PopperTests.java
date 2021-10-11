@@ -5,7 +5,7 @@ import static io.github.com.pages.utils.PopperPage.buttons;
 import static io.github.com.pages.utils.PopperPage.popper;
 
 import com.epam.jdi.light.material.elements.utils.enums.Position;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

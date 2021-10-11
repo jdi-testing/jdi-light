@@ -2,9 +2,7 @@ package com.epam.jdi.light.material.asserts.displaydata;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.material.elements.displaydata.Chip;
-import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -51,14 +49,6 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
     @JDIAction("Assert that chip {name} root is clickable")
     public ChipAssert clickable() {
         jdiAssert(element().getChipLabel().isClickable(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that URL contains {url}")
-    public ChipAssert urlContains(String url){
-        boolean urlContains = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> WebPage.verifyUrl(url));
-        jdiAssert(urlContains, Matchers.is(true));
         return this;
     }
 }

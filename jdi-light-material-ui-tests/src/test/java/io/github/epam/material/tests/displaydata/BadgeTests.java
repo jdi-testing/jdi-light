@@ -5,22 +5,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.badgePage;
-import static io.github.com.pages.displaydata.BadgePage.badgeCounterWithDifferentPosition;
 import static io.github.com.pages.displaydata.BadgePage.badgeDifferentPosition;
 import static io.github.com.pages.displaydata.BadgePage.buttonIncrease;
 import static io.github.com.pages.displaydata.BadgePage.buttonReduce;
-import static io.github.com.pages.displaydata.BadgePage.dot;
 import static io.github.com.pages.displaydata.BadgePage.dotBadge;
-import static io.github.com.pages.displaydata.BadgePage.errorBadge;
-import static io.github.com.pages.displaydata.BadgePage.errorBadgeCounter;
-import static io.github.com.pages.displaydata.BadgePage.primaryBadge;
-import static io.github.com.pages.displaydata.BadgePage.primaryBadgeCounter;
+import static io.github.com.pages.displaydata.BadgePage.errorColorBadge;
+import static io.github.com.pages.displaydata.BadgePage.primaryColorBadge;
+import static io.github.com.pages.displaydata.BadgePage.secondaryColorBadge;
 import static io.github.com.pages.displaydata.BadgePage.switchShowBadge;
 import static io.github.com.pages.displaydata.BadgePage.switchShowZero;
-import static io.github.com.pages.displaydata.BadgePage.variousBadge;
-import static io.github.com.pages.displaydata.BadgePage.variousBadgeCounter;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
 
 /**
  * To see an example of Chips web element please visit
@@ -36,49 +29,54 @@ public class BadgeTests extends TestsInit {
 
     @Test
     public void simpleBadgeTest() {
-        primaryBadge.is().displayed();
-        primaryBadge.is().displayedSvg();
-        primaryBadgeCounter.is().text("4");
-        primaryBadgeCounter.has().classValue(containsString("MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorPrimary"));
+        primaryColorBadge.is().displayed();
+        primaryColorBadge.is().displayedSvg();
+        primaryColorBadge.has().counterValue("4");
+        primaryColorBadge.has().iconVisibilityStatus("colorPrimary");
+        primaryColorBadge.has().iconPosition("TopRightRectangle");
 
-        errorBadge.is().displayed();
-        errorBadge.is().displayedSvg();
-        errorBadgeCounter.is().text("4");
-        errorBadgeCounter.has().classValue(containsString("MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorError"));
+        errorColorBadge.is().displayed();
+        errorColorBadge.is().displayedSvg();
+        errorColorBadge.has().counterValue("4");
+        errorColorBadge.has().iconVisibilityStatus("colorError");
+        errorColorBadge.has().iconPosition("TopRightRectangle");
     }
 
     @Test
     public void variousBadgeTest() {
-        variousBadge.is().displayed();
-        variousBadge.is().displayedSvg();
-        variousBadgeCounter.is().text("1");
-        variousBadgeCounter.has().classValue(containsString("MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorSecondary"));
-
+        secondaryColorBadge.is().displayed();
+        secondaryColorBadge.is().displayedSvg();
+        secondaryColorBadge.has().counterValue("1");
+        secondaryColorBadge.has().iconVisibilityStatus("colorSecondary");
+        secondaryColorBadge.has().iconPosition("TopRightRectangle");
         buttonReduce.click();
-        variousBadgeCounter.is().text("0");
-        variousBadgeCounter.has().classValue(containsString("MuiBadge-invisible"));
-
+        secondaryColorBadge.has().counterValue("0");
+        secondaryColorBadge.has().iconVisibilityStatus("invisible");
         switchShowZero.uncheck();
-        variousBadgeCounter.has().classValue(not(containsString("MuiBadge-invisible")));
+        secondaryColorBadge.has().iconVisibilityStatus("colorSecondary");
+        switchShowZero.check();
+        secondaryColorBadge.has().iconVisibilityStatus("invisible");
         buttonIncrease.click();
-        variousBadgeCounter.is().text("1");
+        secondaryColorBadge.has().counterValue("1");
+        secondaryColorBadge.has().iconVisibilityStatus("colorSecondary");
 
         int loop = 0;
         while (loop < 10) {
             buttonIncrease.click();
             loop++;
         }
-        variousBadgeCounter.is().text("10+");
+        secondaryColorBadge.has().counterValue("10+");
     }
 
     @Test
     public void dotBadgeTest() {
         dotBadge.is().displayed();
         dotBadge.is().displayedSvg();
-
-        dot.has().classValue(containsString("MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorSecondary"));
+        dotBadge.has().dot();
+        dotBadge.has().iconVisibilityStatus("colorSecondary");
+        dotBadge.has().iconPosition("TopRightRectangle");
         switchShowBadge.uncheck();
-        dot.has().classValue(containsString("MuiBadge-invisible"));
+        dotBadge.has().iconVisibilityStatus("invisible");
     }
 
     @Test
@@ -86,22 +84,26 @@ public class BadgeTests extends TestsInit {
 
         badgeDifferentPosition.get(1).is().displayed();
         badgeDifferentPosition.get(1).is().displayedSvg();
-        badgeCounterWithDifferentPosition.get(1).is().text("-1");
-        badgeCounterWithDifferentPosition.get(1).has().classValue(containsString("MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorPrimary"));
+        badgeDifferentPosition.get(1).has().counterValue("-1");
+        badgeDifferentPosition.get(1).has().iconVisibilityStatus("colorPrimary");
+        badgeDifferentPosition.get(1).has().iconPosition("TopRightRectangle");
 
         badgeDifferentPosition.get(2).is().displayed();
         badgeDifferentPosition.get(2).is().displayedSvg();
-        badgeCounterWithDifferentPosition.get(2).is().text("5");
-        badgeCounterWithDifferentPosition.get(2).has().classValue(containsString("MuiBadge-anchorOriginBottomRightRectangle MuiBadge-colorPrimary"));
+        badgeDifferentPosition.get(2).has().counterValue("5");
+        badgeDifferentPosition.get(2).has().iconVisibilityStatus("colorPrimary");
+        badgeDifferentPosition.get(2).has().iconPosition("BottomRightRectangle");
 
         badgeDifferentPosition.get(3).is().displayed();
         badgeDifferentPosition.get(3).is().displayedSvg();
-        badgeCounterWithDifferentPosition.get(3).is().text("6");
-        badgeCounterWithDifferentPosition.get(3).has().classValue(containsString("MuiBadge-anchorOriginBottomLeftRectangle MuiBadge-colorPrimary"));
+        badgeDifferentPosition.get(3).has().counterValue("6");
+        badgeDifferentPosition.get(3).has().iconVisibilityStatus("colorPrimary");
+        badgeDifferentPosition.get(3).has().iconPosition("BottomLeftRectangle");
 
         badgeDifferentPosition.get(4).is().displayed();
         badgeDifferentPosition.get(4).is().displayedSvg();
-        badgeCounterWithDifferentPosition.get(4).is().text("7");
-        badgeCounterWithDifferentPosition.get(4).has().classValue(containsString("MuiBadge-anchorOriginTopLeftRectangle MuiBadge-colorPrimary"));
+        badgeDifferentPosition.get(4).has().counterValue("7");
+        badgeDifferentPosition.get(4).has().iconVisibilityStatus("colorPrimary");
+        badgeDifferentPosition.get(4).has().iconPosition("TopLeftRectangle");
     }
 }

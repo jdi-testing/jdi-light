@@ -7,7 +7,7 @@
     <artifactId>jdi-light-material-ui</artifactId>
     <packaging>jar</packaging>
     <name>JDI Material UI</name>
-    <version>1.3.13</version>
+    <version>1.3.16</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -19,15 +19,8 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-light</artifactId>
-            <version>1.3.13</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.3.13</version>
-            <scope>compile</scope>
+            <version>1.3.16</version>
         </dependency>
     </dependencies>
 
