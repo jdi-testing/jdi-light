@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.pageobjects.annotations.GetAny;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.RangeSlider;
 
@@ -17,6 +18,7 @@ public class RangeSlidersPage extends VuetifyPage {
     @UI("#VerticalSlidersRangeSlider .v-slider")
     public static RangeSlider verticalSlidersRangeSlider;
 
+    @GetAny
     @UI("#ThumbLabelRangeSlider .v-slider")
     public static RangeSlider thumbLabelRangeSlider;
 }
