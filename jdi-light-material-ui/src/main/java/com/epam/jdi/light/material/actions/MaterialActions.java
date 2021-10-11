@@ -17,7 +17,7 @@ import static com.epam.jdi.light.actions.ActionHelper.newInfo;
 import static com.epam.jdi.light.actions.ActionHelper.stableAction;
 import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 
 
 @SuppressWarnings("unused")

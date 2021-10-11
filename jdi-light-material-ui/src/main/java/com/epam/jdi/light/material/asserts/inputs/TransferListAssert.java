@@ -5,7 +5,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.inputs.transferlist.TransferList;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import java.util.Arrays;

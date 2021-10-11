@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.elements.utils;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.utils.PopperAssert;
 
 /**
@@ -9,26 +10,15 @@ import com.epam.jdi.light.material.asserts.utils.PopperAssert;
  * https://mui.com/components/popper/
  */
 
-public class Popper extends UIBaseElement<PopperAssert> {
+public class Popper extends UIBaseElement<PopperAssert> implements IsText {
 
-    @JDIAction("Popper is displayed")
-    public boolean isPopperDisplayed(){
-       return core().isDisplayed();
-    }
-
-    @JDIAction("Popper is on the top")
-    public String getPopperPosition(){
-       return core().getAttribute("x-placement");
-    }
-
-    @JDIAction("Get popper text")
-    public String getPopperText(){
-       return core().getText();
+    @JDIAction("Check {name} position")
+    public String position() {
+        return core().attr("x-placement");
     }
 
     @Override
     public PopperAssert is() {
         return new PopperAssert().set(this);
     }
-
 }

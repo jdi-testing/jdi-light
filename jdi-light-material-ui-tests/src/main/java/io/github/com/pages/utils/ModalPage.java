@@ -8,7 +8,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import java.util.List;
 
 public class ModalPage extends WebPage {
-    @UI("[id='simple-modal-description']")
+    @UI("div.jss2 p")
     public static List<Text> modalTexts;
     @UI("button")
     public static List<MaterialButton> buttonModal;
