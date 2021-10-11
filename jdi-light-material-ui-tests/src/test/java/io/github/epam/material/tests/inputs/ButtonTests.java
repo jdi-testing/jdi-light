@@ -150,14 +150,14 @@ public class ButtonTests extends TestsInit {
 
         complexButtons.get(1).click();
         complexButtons.get(1).is().text("Breakfast");
-        complexButtons.get(4).is().text("Last click: Breakfast");
+        complexButtons.get(4).is().text("Last click:Breakfast");
 
         complexButtons.get(2).click();
         complexButtons.get(2).is().text("Burgers");
-        complexButtons.get(4).is().text("Last click: Burgers");
+        complexButtons.get(4).is().text("Last click:Burgers");
 
         complexButtons.get(3).click();
         complexButtons.get(3).is().text("Camera");
-        complexButtons.get(4).is().text("Last click: Camera");
+        complexButtons.get(4).is().text("Last click:Camera");
     }
 }

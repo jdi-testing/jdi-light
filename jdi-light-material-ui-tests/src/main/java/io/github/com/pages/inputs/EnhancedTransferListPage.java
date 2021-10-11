@@ -1,7 +1,7 @@
 package io.github.com.pages.inputs;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.material.annotations.JDITransferList;
-import com.epam.jdi.light.material.elements.inputs.TransferList.EnhancedTransferList;
+import com.epam.jdi.light.material.elements.inputs.transferlist.EnhancedTransferList;
 
 public class EnhancedTransferListPage extends WebPage {
 

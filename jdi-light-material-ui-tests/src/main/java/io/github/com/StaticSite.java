@@ -291,7 +291,7 @@ public class StaticSite {
     public static LinkPage linkPage;
 
     // bottom navigation
-    @Url("/button_navigation")
+    @Url("/bottom_navigation")
     public static BottomNavigationPage bottomNavigationPage;
 
     // menu
