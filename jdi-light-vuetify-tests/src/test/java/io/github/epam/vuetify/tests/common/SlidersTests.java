@@ -41,7 +41,7 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void colorSliderTest() {
-        new ArrayList<>(Arrays.asList(85, 0, 100)).forEach(value -> {
+        Arrays.asList(85, 0, 100).forEach(value -> {
             colorsSlider.get(1).slideHorizontalTo(value);
             colorsSlider.get(1).is().value(value);
         });
@@ -52,7 +52,7 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void trackColorSliderTest() {
-        new ArrayList<>(Arrays.asList(85, 0, 100)).forEach(value -> {
+        Arrays.asList(85, 0, 100).forEach(value -> {
             colorsSlider.get(2).slideHorizontalTo(value);
             colorsSlider.get(2).is().value(value);
         });
@@ -63,7 +63,7 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void thumbColorSliderTest() {
-        new ArrayList<>(Arrays.asList(85, 0, 100)).forEach(value -> {
+        Arrays.asList(85, 0, 100).forEach(value -> {
             colorsSlider.get(3).slideHorizontalTo(value);
             colorsSlider.get(3).is().value(value);
             colorsSlider.get(3).is().thumbLabelValue(value);
@@ -87,7 +87,7 @@ public class SlidersTests extends TestsInit {
         discreteSlider.is().value(0);
         discreteSlider.slideHorizontalTo(10);
         discreteSlider.is().value(10);
-        discreteSlider.slideHorizontalTo(15);
+        discreteSlider.slideHorizontalTo(14);
         discreteSlider.is().value(10);
         discreteSlider.slideHorizontalTo(16);
         discreteSlider.is().value(20);
@@ -130,7 +130,7 @@ public class SlidersTests extends TestsInit {
     public void stepSliderTest() {
         stepSlider.slideHorizontalTo(0);
         stepSlider.is().value(0);
-        stepSlider.slideHorizontalTo(25);
+        stepSlider.slideHorizontalTo(24);
         stepSlider.is().value(20);
         stepSlider.slideHorizontalTo(26);
         stepSlider.is().value(30);
@@ -142,7 +142,6 @@ public class SlidersTests extends TestsInit {
         thumbSlider.get(1).getThumb().click();
         thumbSlider.get(1).is().thumbLabelDisplayed();
         thumbSlider.get(1).is().thumbLabelValue(Integer.parseInt(thumbSlider.get(1).getValue()));
-
         thumbSlider.get(1).slideHorizontalTo(0);
         thumbSlider.get(1).is().thumbLabelValue(0);
     }
@@ -200,8 +199,8 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void verticalSlidersSliderTest() {
-        verticalSlidersSlider.isVertical();
-        new ArrayList<>(Arrays.asList(85, 0, 100)).forEach(value -> {
+        verticalSlidersSlider.is().vertical();
+        Arrays.asList(85, 0, 100).forEach(value -> {
             verticalSlidersSlider.slideVerticalTo(value);
             verticalSlidersSlider.is().value(value);
         });

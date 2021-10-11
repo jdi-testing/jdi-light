@@ -89,8 +89,7 @@ public class Slider extends UIBaseElement<SliderAssert> {
         double maxValue = Double.parseDouble(getThumbContainer().getAttribute("aria-valuemax"));
         double nowValue = Double.parseDouble(getThumbContainer().getAttribute("aria-valuenow"));
         double pixelsInUnit = trackWidth / (maxValue - minValue);
-        double nowWidth = (nowValue - minValue) * pixelsInUnit;
-        double xOffset = (value - minValue) * pixelsInUnit - nowWidth;
+        double xOffset = (value - nowValue) * pixelsInUnit;
         getThumbContainer().dragAndDropTo((int) Math.round(xOffset), 0);
     }
 
@@ -101,8 +100,7 @@ public class Slider extends UIBaseElement<SliderAssert> {
         double maxValue = Double.parseDouble(getThumbContainer().getAttribute("aria-valuemax"));
         double nowValue = Double.parseDouble(getThumbContainer().getAttribute("aria-valuenow"));
         double pixelsInUnit = trackHeight / (maxValue - minValue);
-        double nowHeight = (nowValue - minValue) * pixelsInUnit;
-        double yOffset = (value - minValue) * pixelsInUnit - nowHeight;
+        double yOffset = (value - nowValue) * pixelsInUnit;
         getThumb().dragAndDropTo(0, -(int) Math.round(yOffset));
     }
 

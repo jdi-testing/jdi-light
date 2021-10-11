@@ -64,13 +64,13 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         return this;
     }
 
-    @JDIAction("Assert that thumb label value {name} is displayed")
+    @JDIAction("Assert that thumb label {name} is displayed")
     public SliderAssert thumbLabelDisplayed() {
         jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that thumb label value {name} is not displayed")
+    @JDIAction("Assert that thumb label {name} is not displayed")
     public SliderAssert thumbLabelNotDisplayed() {
         jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(false));
         return this;
