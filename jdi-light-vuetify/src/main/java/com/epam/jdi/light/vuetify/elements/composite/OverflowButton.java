@@ -8,6 +8,10 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.vuetify.asserts.OverflowButtonAssert;
 
+/**
+ * To see example of Overflow Button web element please visit https://vuetifyjs.com/en/components/overflow-btns/
+ */
+
 public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implements HasPlaceholder {
 
     protected String expanderLocator = ".v-input__append-inner";
