@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.elements.utils;
+package io.github.epam.utils;
 
 import java.util.Random;
 
