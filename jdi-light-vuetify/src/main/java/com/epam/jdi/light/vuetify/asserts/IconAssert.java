@@ -23,27 +23,27 @@ public class IconAssert extends UIAssert<IconAssert, Icon> {
         return this;
     }
 
-    @JDIAction("Assert that {name} has proper type")
-    public IconAssert type(String text) throws Exception {
-        jdiAssert(element().getType(), Matchers.is(text));
+    @JDIAction("Assert that {name} has expected type")
+    public IconAssert type(String iconType) throws Exception {
+        jdiAssert(element().hasType(iconType), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that {name} has proper height")
+    @JDIAction("Assert that {name} has expected height")
     public IconAssert height(String height) {
-        jdiAssert(element().getHeight(), Matchers.is(height));
+        jdiAssert(element().hasHeight(height), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that {name} has proper width")
+    @JDIAction("Assert that {name} has expected width")
     public IconAssert width(String width) {
-        jdiAssert(element().getWidth(), Matchers.is(width));
+        jdiAssert(element().hasWidth(width), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that {name} has proper color")
+    @JDIAction("Assert that {name} has expected color")
     public IconAssert color(String color) {
-        jdiAssert(element().getColor(), Matchers.is(color));
+        jdiAssert(element().hasColor(color), Matchers.is(true));
         return this;
     }
 

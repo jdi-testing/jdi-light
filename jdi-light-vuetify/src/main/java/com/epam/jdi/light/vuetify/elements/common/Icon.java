@@ -9,17 +9,13 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Banner web element please visit https://jdi-testing.github.io/jdi-light/vuetify/icons
- *
- * From vuetify docs: "The v-icon component provides a large set of glyphs to provide context to various aspects
- * of your application."
- *
+ * To see an example of Icon web element please visit https://vuetifyjs.com/en/components/icons/
  */
 
-public class Icon extends UIBaseElement<IconAssert> implements HasClick {
+public class Icon extends UIBaseElement<IconAssert> implements HasClick  {
 
     @JDIAction("Get {name} type")
-    public String getType() throws Exception {
+    private String getType() throws Exception {
         String iconClass = this.core().getAttribute("class");
         if(iconClass.contains("mdi-")) {
             return Arrays.stream(iconClass.split(" "))
@@ -34,19 +30,24 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick {
         } else throw new Exception("unknown type of icon");
     }
 
-    @JDIAction("Get {name} color")
-    public String getColor() {
-        return this.core().getCssValue("color");
+    @JDIAction("{name} has expected color")
+    public boolean hasColor(String color) {
+        return this.core().getCssValue("color").equals(color);
     }
 
-    @JDIAction("Get {name} color")
-    public String getHeight() {
-        return this.core().getCssValue("height");
+    @JDIAction("{name} has expected height")
+    public boolean hasHeight(String height) {
+        return this.core().getCssValue("height").equals(height);
     }
 
-    @JDIAction("Get {name} color")
-    public String getWidth() {
-        return this.core().getCssValue("width");
+    @JDIAction("{name} has expected width")
+    public boolean hasWidth(String width) {
+        return this.core().getCssValue("width").equals(width);
+    }
+
+    @JDIAction("{name} has expected type")
+    public boolean hasType(String iconType) throws Exception {
+        return this.getType().equals(iconType);
     }
 
     @JDIAction("{name} has alert after clicking on it")
