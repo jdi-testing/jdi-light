@@ -77,7 +77,6 @@ import io.github.com.pages.TreeviewPage;
 import io.github.com.pages.VirtualScrollerPage;
 import io.github.com.pages.WindowsPage;
 
-
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
 
