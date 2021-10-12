@@ -17,7 +17,7 @@ import static io.github.com.pages.IconsPage.mdiSvgIcons;
 public class IconsTests extends TestsInit {
 
     @BeforeClass
-    public void beforeTest() {
+    public void before() {
         iconsPage.open();
     }
 
