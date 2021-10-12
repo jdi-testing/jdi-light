@@ -7,89 +7,37 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.CarouselAssert;
 import com.epam.jdi.tools.Timer;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.epam.jdi.light.common.ElementArea.TOP_LEFT;
 
 /**
- * To see an example of Banner web element please visit https://jdi-testing.github.io/jdi-light/vuetify/carousels
- *
- * From vuetify docs: "The v-carousel component is used to display large numbers of visual content on a rotating timer."
+ * To see an example of Banner web element please visit https://vuetifyjs.com/en/components/carousels/
  */
 
 public class Carousel extends UIBaseElement<CarouselAssert> {
 
     @JDIAction("Get '{name}' delimiters")
-    public WebList getDelimiters() {
+    private WebList getDelimiters() {
         return this.finds("div.v-carousel__controls i");
     }
 
     @JDIAction("Get '{name}' 'next' button")
-    public UIElement getNextButton() {
+    private UIElement getNextButton() {
         return this.find(".v-window__next button");
     }
 
     @JDIAction("Get '{name}' 'previous'")
-    public UIElement getPreviousButton() {
+    private UIElement getPreviousButton() {
         return this.find(".v-window__prev button");
     }
 
-    @JDIAction("Get '{name}' 'next' button text")
-    public String getNextButtonText() {
-        return this.getNextButton().getText();
-    }
-
-    @JDIAction("Get '{name}' 'previous' button text")
-    public String getPreviousButtonText() {
-        return this.getPreviousButton().getText();
-    }
-
-    @JDIAction("Get '{name}' 'next' button color")
-    public String getNextButtonColor() {
-        return this.getNextButton().getCssValue("background-color");
-    }
-
-    @JDIAction("Get '{name}' 'previous' button color")
-    public String getPreviousButtonColor() {
-        return this.getPreviousButton().getCssValue("background-color");
-    }
-
     @JDIAction("Get '{name}' current slide")
-    public UIElement getCurrentSlide() {
+    private UIElement getCurrentSlide() {
         return this.find(".v-window-item");
     }
 
-    @JDIAction("Get '{name}' current slide color")
-    public String getCurrentSlideColor() {
-        return getCurrentSlide().find(".v-sheet").getCssValue("background-color");
-    }
-
-    @JDIAction("Get '{name}' current slide text")
-    public String getCurrentSlideText() {
-        return getCurrentSlide().find(".text-h2").getText();
-    }
-
-    @JDIAction("Get '{name}' current slide background image")
-    public String getCurrentSlideBackgroundImage() {
-        return getCurrentSlide().find(".v-image__image").getCssValue("background-image");
-    }
-
     @JDIAction("Get '{name}' toggle button")
-    public UIElement getToggle() {
+    private UIElement getToggle() {
         return this.find(".v-input--selection-controls__input");
-    }
-
-    @JDIAction("Get '{name}' minus button")
-    public UIElement getMinusButton() {
-        return this.find("div.justify-space-around button.mdi-minus");
-    }
-
-    @JDIAction("Get '{name}' plus button")
-    public UIElement getPlusButton() {
-        return this.find("div.justify-space-around button.mdi-plus");
-    }
-
-    @JDIAction("Get '{name}' slide counter")
-    public String getSlideCounter() {
-        return this.find("div.justify-space-around").getText();
     }
 
     @JDIAction("'{name}' has delimiters icons")
@@ -118,6 +66,46 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
         return getPreviousButton().isHidden();
     }
 
+    @JDIAction("Get '{name}' 'next' button text")
+    public String nextButtonText() {
+        return this.getNextButton().getText();
+    }
+
+    @JDIAction("Get '{name}' 'previous' button text")
+    public String previousButtonText() {
+        return this.getPreviousButton().getText();
+    }
+
+    @JDIAction("Get '{name}' 'next' button color")
+    public String nextButtonColor() {
+        return this.getNextButton().getCssValue("background-color");
+    }
+
+    @JDIAction("Get '{name}' 'previous' button color")
+    public String previousButtonColor() {
+        return this.getPreviousButton().getCssValue("background-color");
+    }
+
+    @JDIAction("Get '{name}' current slide color")
+    public String currentSlideColor() {
+        return getCurrentSlide().find(".v-sheet").getCssValue("background-color");
+    }
+
+    @JDIAction("Get '{name}' current slide text")
+    public String currentSlideText() {
+        return getCurrentSlide().find(".text-h2").getText();
+    }
+
+    @JDIAction("Get '{name}' current slide background image")
+    public String currentSlideBackgroundImage() {
+        return getCurrentSlide().find(".v-image__image").getCssValue("background-image");
+    }
+
+    @JDIAction("Get '{name}' slide counter")
+    public String slideCounter() {
+        return this.find("div.justify-space-around").getText();
+    }
+
     @JDIAction("'{name}' has number of delimiters")
     public int hasNumberOfDelimiters() {
         return getDelimiters().size();
@@ -144,23 +132,48 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
         return getToggle().find("input").getAttribute("aria-checked").equals("false");
     }
 
-    @JDIAction("'{name}' has 'minus' button")
-    public boolean hasMinusButton() {
-        return getMinusButton().isDisplayed();
+    @JDIAction("Go to slide number {0}")
+    public void goToSlide(int slideNumber) {
+        getDelimiters().get(slideNumber).click();
     }
 
-    @JDIAction("'{name}' has 'plus' button")
-    public boolean hasPlusButton() {
-        return getPlusButton().isDisplayed();
+    @JDIAction("Click on 'next' button")
+    public void clickOnNextButton() {
+        getNextButton().click();
+    }
+
+    @JDIAction("Click on 'previous' button")
+    public void clickOnPreviousButton() {
+        getPreviousButton().click();
+    }
+
+    @JDIAction("Click on 'previous' button")
+    public void checkToggle() throws Exception {
+        if(hasToggleUnchecked()) {
+            getToggle().click();
+        } else throw new Exception("Toggle is already checked");
+    }
+
+    @JDIAction("Click on 'previous' button")
+    public void uncheckToggle() throws Exception {
+        if(hasToggleChecked()) {
+            getToggle().click();
+        } else throw new Exception("Toggle is already unchecked");
+    }
+
+    @JDIAction("Click on 'plus' button")
+    public void clickOnPlusButton() {
+        this.find("div.justify-space-around button.mdi-plus").click(TOP_LEFT);
+    }
+
+    @JDIAction("Click on 'minus' button")
+    public void clickOnMinusButton() {
+        this.find("div.justify-space-around button.mdi-minus").click(TOP_LEFT);
     }
 
     public void waitUntilSlideAutomaticallyChangeTo(String text, String color) {
-        Timer.waitCondition(() -> this.getCurrentSlideText().equals(text));
-        Timer.waitCondition(() -> this.getCurrentSlideColor().equals(color));
-    }
-
-    public void scrollIntoView() {
-        jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
+        Timer.waitCondition(() -> this.currentSlideText().equals(text));
+        Timer.waitCondition(() -> this.currentSlideColor().equals(color));
     }
 
     public CarouselAssert is() {

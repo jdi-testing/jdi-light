@@ -61,47 +61,47 @@ public class CarouselAssert extends UIAssert<CarouselAssert, Carousel> {
 
     @JDIAction("Assert that '{name}' 'next' button has proper text")
     public CarouselAssert nextButtonText(String text) {
-        jdiAssert(element().getNextButtonText(), Matchers.containsString(text));
+        jdiAssert(element().nextButtonText(), Matchers.containsString(text));
         return this;
     }
 
 
     @JDIAction("Assert that '{name}' 'previous' button has proper text")
     public CarouselAssert previousButtonText(String text) {
-        jdiAssert(element().getPreviousButtonText(), Matchers.containsString(text));
+        jdiAssert(element().previousButtonText(), Matchers.containsString(text));
         return this;
     }
 
     @JDIAction("Assert that '{name}' 'next' button has proper color")
     public CarouselAssert nextButtonColor(String color) {
-        jdiAssert(element().getNextButtonColor(), Matchers.containsString(color));
+        jdiAssert(element().nextButtonColor(), Matchers.containsString(color));
         return this;
     }
 
     @JDIAction("Assert that '{name}' 'previous' button has proper color")
     public CarouselAssert previousButtonColor(String color) {
-        jdiAssert(element().getPreviousButtonColor(), Matchers.containsString(color));
+        jdiAssert(element().previousButtonColor(), Matchers.containsString(color));
         return this;
     }
 
     @JDIAction("Assert that '{name}' current slide has proper color")
     public CarouselAssert currentSlideColor(String color) {
-        Timer.waitCondition(() -> element().getCurrentSlideColor().equals(color));
-        jdiAssert(element().getCurrentSlideColor(), Matchers.containsString(color));
+        Timer.waitCondition(() -> element().currentSlideColor().equals(color));
+        jdiAssert(element().currentSlideColor(), Matchers.containsString(color));
         return this;
     }
 
     @JDIAction("Assert that '{name}' current slide has proper text")
     public CarouselAssert currentSlideText(String text) {
-        Timer.waitCondition(() -> element().getCurrentSlideText().equals(text));
-        jdiAssert(element().getCurrentSlideText(), Matchers.containsString(text));
+        Timer.waitCondition(() -> element().currentSlideText().equals(text));
+        jdiAssert(element().currentSlideText(), Matchers.containsString(text));
         return this;
     }
 
     @JDIAction("Assert that '{name}' current slide has proper image")
     public CarouselAssert currentSlideBackgroundImage(String imageContent) {
-        Timer.waitCondition(() -> element().getCurrentSlideBackgroundImage().contains(imageContent));
-        jdiAssert(element().getCurrentSlideBackgroundImage(), Matchers.containsString(imageContent));
+        Timer.waitCondition(() -> element().currentSlideBackgroundImage().contains(imageContent));
+        jdiAssert(element().currentSlideBackgroundImage(), Matchers.containsString(imageContent));
         return this;
     }
 
@@ -123,21 +123,9 @@ public class CarouselAssert extends UIAssert<CarouselAssert, Carousel> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has 'minus' button")
-    public CarouselAssert minusButton() {
-        jdiAssert(element().hasMinusButton(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has 'plus' button")
-    public CarouselAssert plusButton() {
-        jdiAssert(element().hasPlusButton(), Matchers.is(true));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' has slide counter")
     public CarouselAssert slideCounter(String text) {
-        jdiAssert(element().getSlideCounter(), Matchers.containsString(text));
+        jdiAssert(element().slideCounter(), Matchers.containsString(text));
         return this;
     }
 }
