@@ -6,6 +6,10 @@ import com.epam.jdi.light.elements.complex.table.BaseTable;
 import com.epam.jdi.light.vuetify.asserts.SimpleTableAssert;
 import com.epam.jdi.light.vuetify.elements.enums.TableTestData;
 
+/**
+ * To see an example of Simple Table web element please visit https://vuetifyjs.com/en/components/simple-tables/
+ **/
+
 public class SimpleTable extends BaseTable<SimpleTable, SimpleTableAssert> {
 
     public SimpleTableAssert is() {
@@ -49,7 +53,7 @@ public class SimpleTable extends BaseTable<SimpleTable, SimpleTableAssert> {
     }
 
     @JDIAction("Check that {name} has fixed header")
-    public boolean hasFixedHeader(){
+    public boolean hasFixedHeader() {
         return core().attr("class").contains("--fixed-header");
     }
 
