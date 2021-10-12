@@ -22,7 +22,7 @@ import static io.github.com.pages.ToolBarsPage.optionsMenu;
 public class ToolBarsTests extends TestsInit {
 
     @BeforeClass
-    public void beforeTest() {
+    public void before() {
         toolbarsPage.open();
     }
 
@@ -105,8 +105,9 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.has().deleteButton();
         contextActionToolbar.has().closeButton();
         contextActionToolbar.has().properTitleText("4 selected");
-        contextActionToolbar.getVerticalDotsButton().click();
+        contextActionToolbar.clickOnVerticalDotsButton();
         contextActionToolbar.has().selectedOptions("Foo,Bar,Fizz,Buzz");
+        Timer.waitCondition(optionsMenu::isHidden);
         optionsMenu.is().hidden();
         contextActionToolbar.getCloseButton().click();
         Timer.waitCondition(contextActionToolbar::isPurple);

@@ -21,7 +21,7 @@ import static io.github.com.pages.NavigationDrawersPage.temporaryNavigationDrawe
 public class NavigationDrawersTests extends TestsInit {
 
     @BeforeClass
-    public void beforeTest() {
+    public void before() {
         navigationDrawersPage.open();
     }
 
@@ -29,19 +29,18 @@ public class NavigationDrawersTests extends TestsInit {
     public void bottomDrawerNavigationDrawerTests() {
         bottomDrawerNavigationAppBar.has().properTitleText("My files");
         bottomDrawerNavigationDrawer.is().closed();
-        //TODO need to refactor bars and other elements in terms of deleting excessive getters
-        bottomDrawerNavigationAppBar.getMenuButton().click();
+        bottomDrawerNavigationAppBar.clickOnMenuButton();
         bottomDrawerNavigationDrawer.is().opened();
         bottomDrawerNavigationDrawer.has().numberOfOptions(4);
         bottomDrawerNavigationDrawer.selectOption(1);
         bottomDrawerNavigationDrawer.is().closed();
-        bottomDrawerNavigationAppBar.getMenuButton().click();
+        bottomDrawerNavigationAppBar.clickOnMenuButton();
         bottomDrawerNavigationDrawer.has().optionSelected(1, true);
         bottomDrawerNavigationDrawer.has().optionSelected(2, false);
         bottomDrawerNavigationDrawer.has().optionSelected(3, false);
         bottomDrawerNavigationDrawer.has().optionSelected(4, false);
         bottomDrawerNavigationDrawer.selectOption(2);
-        bottomDrawerNavigationAppBar.getMenuButton().click();
+        bottomDrawerNavigationAppBar.clickOnMenuButton();
         bottomDrawerNavigationDrawer.has().optionSelected(1, false);
         bottomDrawerNavigationDrawer.has().optionSelected(2, true);
         bottomDrawerNavigationDrawer.has().optionSelected(3, false);

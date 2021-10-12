@@ -14,7 +14,7 @@ import static io.github.com.pages.BannersPage.twoLineBanner;
 public class BannersTests extends TestsInit {
 
         @BeforeClass
-        public void beforeTest() {
+        public void before() {
             bannersPage.open();
         }
 

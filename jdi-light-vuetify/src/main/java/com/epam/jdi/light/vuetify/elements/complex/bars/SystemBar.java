@@ -6,10 +6,6 @@ import com.epam.jdi.light.vuetify.asserts.bars.SystemBarAssert;
 
 /**
  * To see examples of System Bar web elements please visit https://vuetifyjs.com/en/components/system-bars
- *
- * The v-system-bar component can be used for displaying statuses to the user.
- * It looks like the Android system bar and can contain icons, spacers, and some text.
- *
  */
 
 public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> {
