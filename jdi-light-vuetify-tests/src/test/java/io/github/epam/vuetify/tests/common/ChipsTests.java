@@ -1,12 +1,12 @@
 package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.tools.Timer;
+import io.github.com.dataproviders.ChipsDataProviders;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
@@ -37,9 +37,8 @@ public class ChipsTests extends TestsInit {
         chipsPage.open();
     }
 
-    @Test
-    public void closableChipsTest() {
-        List<String> chipsLabels = Arrays.asList("Closable", "Remove", "Success", "Complete");
+    @Test(dataProvider = "closableChipsDataProvider", dataProviderClass = ChipsDataProviders.class)
+    public void closableChipsTest(List<String> chipsLabels) {
         new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
                 closableChips.size() != 0);
         for (int i = 1; i <= chipsLabels.size(); i++) {
@@ -52,18 +51,14 @@ public class ChipsTests extends TestsInit {
         closableChipsResetButton.click();
     }
 
-    @Test
-    public void coloredChipsTest() {
-        List<String> chipsLabels = Arrays.asList("Default", "Primary", "Secondary", "Red Chip", "Green Chip");
-        List<String> chipsBackgroundColors = Arrays.asList("rgba(224, 224, 224, 1)", "rgba(25, 118, 210, 1)",
-                "rgba(66, 66, 66, 1)", "rgba(244, 67, 54, 1)", "rgba(76, 175, 80, 1)");
+    @Test(dataProvider = "coloredChipsDataProvider", dataProviderClass = ChipsDataProviders.class)
+    public void coloredChipsTest(List<String> chipsLabels, List<String> chipsBackgroundColors) {
         new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
                 coloredChips.size() != 0);
         for (int i = 1; i <= chipsLabels.size(); i++) {
             coloredChips.get(i).is().containsText(chipsLabels.get(i - 1));
             coloredChips.get(i).has().backgroundColor(chipsBackgroundColors.get(i - 1));
         }
-
         for (int i = 2; i <= chipsLabels.size(); i++) {
             coloredChips.get(i).has().notIcon();
             coloredChips.get(i).has().notImage();
@@ -84,12 +79,8 @@ public class ChipsTests extends TestsInit {
         filterChips.forEach(e -> e.has().notFilter());
     }
 
-    @Test
-    public void outlinedChipsTest() {
-        List<String> borderColors = Arrays.asList("rgb(76, 175, 80)", "rgb(25, 118, 210)",
-                "rgb(98, 0, 234)", "rgb(40, 53, 147)");
-        List<String> fontColors = Arrays.asList("rgba(76, 175, 80, 1)", "rgba(25, 118, 210, 1)",
-                "rgba(98, 0, 234, 1)", "rgba(40, 53, 147, 1)");
+    @Test(dataProvider = "outlinedChipsDataProvider", dataProviderClass = ChipsDataProviders.class)
+    public void outlinedChipsTest(List<String> borderColors, List<String> fontColors) {
         new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
                 outlinedChips.get(1).isDisplayed());
         outlinedChips.forEach(e -> e.has().visibleBorder());
@@ -99,10 +90,8 @@ public class ChipsTests extends TestsInit {
         }
     }
 
-    @Test
-    public void sizesChipsTest() {
-        List<Integer> fontSizes = Arrays.asList(10, 12, 14, 16, 18);
-        List<Integer> heights = Arrays.asList(16, 24, 32, 54, 66);
+    @Test(dataProvider = "sizesChipsDataProvider", dataProviderClass = ChipsDataProviders.class)
+    public void sizesChipsTest(List<Integer> fontSizes, List<Integer> heights) {
         new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
                 sizesChips.size() != 0);
         for (int i = 1; i <= fontSizes.size(); i++) {
@@ -111,9 +100,8 @@ public class ChipsTests extends TestsInit {
         }
     }
 
-    @Test
-    public void actionChipsTest() {
-        List<String> alertMessages = Arrays.asList("Toggling lights...", "Turning on alarm...", "Toggling Blinds...");
+    @Test(dataProvider = "actionChipsDataProvider", dataProviderClass = ChipsDataProviders.class)
+    public void actionChipsTest(List<String> alertMessages) {
         new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
                 actionChips.size() != 0);
         for (int i = 1; i <= alertMessages.size(); i++) {
@@ -133,9 +121,8 @@ public class ChipsTests extends TestsInit {
         }
     }
 
-    @Test
-    public void customListChipTest() {
-        String text = "Nature";
+    @Test(dataProvider = "customListChipsDataProvider", dataProviderClass = ChipsDataProviders.class)
+    public void customListChipTest(String text) {
         customListSearchField.sendKeys(text);
         customListItems.get(1).click();
         new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
@@ -144,9 +131,8 @@ public class ChipsTests extends TestsInit {
         customListNextButton.click();
     }
 
-    @Test
-    public void expandableChipTest() {
-        List<String> emails = Arrays.asList("john@vuetifyjs.com", "john@gmail.com");
+    @Test(dataProvider = "expandableChipDataProvider", dataProviderClass = ChipsDataProviders.class)
+    public void expandableChipTest(List<String> emails) {
         expandableChip.has().image();
         expandableChip.click();
         for (int i = 1; i <= emails.size(); i++) {
@@ -154,13 +140,8 @@ public class ChipsTests extends TestsInit {
         }
     }
 
-    @Test
-    public void inSelectChipsTest() {
-        List<String> fullLabel = Arrays.asList("Programming (interest)", "Playing video games (interest)",
-                "Watching movies (interest)", "Sleeping (interest)");
-        List<String> boldText = Arrays.asList("Programming", "Playing video games",
-                "Watching movies", "Sleeping");
-        String regularText = "(interest)";
+    @Test(dataProvider = "inSelectChipsDataProvider", dataProviderClass = ChipsDataProviders.class)
+    public void inSelectChipsTest(List<String> fullLabel, List<String> boldText, String regularText) {
         for (int i = 1; i <= fullLabel.size(); i++) {
             inSelectsChips.get(i).assertThat().compositeLabelContainsText(fullLabel.get(i - 1));
             inSelectsChips.get(i).assertThat().compositeLabelBoldTextContains(boldText.get(i - 1));
