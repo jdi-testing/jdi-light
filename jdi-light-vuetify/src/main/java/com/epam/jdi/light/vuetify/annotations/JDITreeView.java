@@ -12,7 +12,9 @@ import java.lang.annotation.Target;
 public @interface JDITreeView {
     @MarkupLocator String core() default "";
     @MarkupLocator String coreNodes() default "";
-    @MarkupLocator String nodes() default "";
+    @MarkupLocator String nodeNodes() default "";
     @MarkupLocator String root() default "";
     @MarkupLocator String toggle() default "";
+    @MarkupLocator String checkbox() default "";
+    @MarkupLocator String content() default "";
 }
