@@ -1,29 +1,23 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.CanBeSelected;
-import com.epam.jdi.light.elements.complex.IMultiSelector;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
-import com.epam.jdi.light.vuetify.annotations.JDITreeView;
-import com.epam.jdi.light.vuetify.asserts.TreeViewAssert;
+import com.epam.jdi.light.vuetify.asserts.TreeViewDropDownAssert;
 
-import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.EnumUtils.getEnumValue;
 import static com.epam.jdi.tools.PrintUtils.print;
 
-public class TreeView extends UIListBase<TreeViewAssert>
-        implements ISetup, HasCheck, IMultiSelector, CanBeSelected, IClickable {
+public class TreeView extends Dropdown
+        implements ISetup, HasCheck, IMultiSelector, CanBeSelected, IClickable, IListSelector<TreeView> {
 
     protected String CORE_LOCATOR = ".v-treeview | .v-treeview-node";
     protected String NODES_IN_CORE_LOCATOR = "./*[contains(@class, 'v-treeview-node')]";
@@ -41,7 +35,13 @@ public class TreeView extends UIListBase<TreeViewAssert>
 
     @JDIAction("Check if '{name}' is a pseudo core node")
     public boolean isPseudoCore() {
+        Dropdown dropdown = new Dropdown();
         return core().hasClass(CORE_CLASS);
+    }
+
+    @Override
+    public int size() {
+        return elements(0).size();
     }
 
     @JDIAction("Check if '{name}' is a leaf")
@@ -187,19 +187,34 @@ public class TreeView extends UIListBase<TreeViewAssert>
     }
 
     @Override
-    @JDIAction("Get content from '{name}' by index '{0}'")
-    public UIElement get(int index) {
-        return list().get(index);
+    public void clear() {
+
+    }
+
+//    @Override
+//    @JDIAction("Get content from '{name}' by index '{0}'")
+//    public UIElement get(int index) {
+//        return list().get(index);
+//    }
+
+    @Override
+    public List<TreeView> elements(int minAmount) {
+        return nodes();
     }
 
     @Override
-    @JDIAction("Get content from '{name}' by string '{0}'")
-    public UIElement get(String value) {
-        return list().stream()
-                .filter(content -> content.getText().equals(value))
-                .findFirst()
-                .orElse(null);
+    public TreeView get(String value) {
+        return getNode(value);
     }
+//
+//    @Override
+//    @JDIAction("Get content from '{name}' by string '{0}'")
+//    public UIElement get(String value) {
+//        return list().stream()
+//                .filter(content -> content.getText().equals(value))
+//                .findFirst()
+//                .orElse(null);
+//    }
 
     @Override
     @JDIAction("Select node from '{name}' by string '{0}'")
@@ -289,41 +304,52 @@ public class TreeView extends UIListBase<TreeViewAssert>
     }
 
     @Override
-    public TreeViewAssert is() {
-        return new TreeViewAssert().set(this);
+    public TreeViewDropDownAssert is() {
+        return new TreeViewDropDownAssert();
+    }
+
+//    @Override
+//    public void setup(Field field) {
+//        if (fieldHasAnnotation(field, JDITreeView.class, TreeView.class)) {
+//            JDITreeView annotation = field.getAnnotation(JDITreeView.class);
+//            initializeLocators(annotation);
+//        }
+//        this.setCore(TreeView.class, $(CORE_LOCATOR));
+//        this.setName(String.format("TreeView %s", field.getName()));
+//    }
+//
+//    private void initializeLocators(JDITreeView annotation) {
+//        if (!annotation.core().isEmpty()) {
+//            CORE_LOCATOR = annotation.core();
+//        }
+//        super.setup(CORE_LOCATOR, null, null, null);
+//        if (!annotation.coreNodes().isEmpty()) {
+//            NODES_IN_CORE_LOCATOR = annotation.coreNodes();
+//        }
+//        if (!annotation.nodeNodes().isEmpty()) {
+//            NODES_IN_NODE_LOCATOR = annotation.nodeNodes();
+//        }
+//        if (!annotation.root().isEmpty()) {
+//            ROOT_IN_NODE_LOCATOR = annotation.root();
+//        }
+//        if (!annotation.toggle().isEmpty()) {
+//            TOGGLE_IN_ROOT_LOCATOR = annotation.toggle();
+//        }
+//        if (!annotation.checkbox().isEmpty()) {
+//            CHECKBOX_IN_ROOT_LOCATOR = annotation.checkbox();
+//        }
+//        if (!annotation.content().isEmpty()) {
+//            CONTENT_IN_ROOT_LOCATOR = annotation.content();
+//        }
+//    }
+
+    @Override
+    public int getStartIndex() {
+        return 1;
     }
 
     @Override
-    public void setup(Field field) {
-        if (fieldHasAnnotation(field, JDITreeView.class, TreeView.class)) {
-            JDITreeView annotation = field.getAnnotation(JDITreeView.class);
-            initializeLocators(annotation);
-        }
-        this.setCore(TreeView.class, $(CORE_LOCATOR));
-        this.setName(String.format("TreeView %s", field.getName()));
-    }
+    public void setStartIndex(int i) {
 
-    private void initializeLocators(JDITreeView annotation) {
-        if (!annotation.core().isEmpty()) {
-            CORE_LOCATOR = annotation.core();
-        }
-        if (!annotation.coreNodes().isEmpty()) {
-            NODES_IN_CORE_LOCATOR = annotation.coreNodes();
-        }
-        if (!annotation.nodeNodes().isEmpty()) {
-            NODES_IN_NODE_LOCATOR = annotation.nodeNodes();
-        }
-        if (!annotation.root().isEmpty()) {
-            ROOT_IN_NODE_LOCATOR = annotation.root();
-        }
-        if (!annotation.toggle().isEmpty()) {
-            TOGGLE_IN_ROOT_LOCATOR = annotation.toggle();
-        }
-        if (!annotation.checkbox().isEmpty()) {
-            CHECKBOX_IN_ROOT_LOCATOR = annotation.checkbox();
-        }
-        if (!annotation.content().isEmpty()) {
-            CONTENT_IN_ROOT_LOCATOR = annotation.content();
-        }
     }
 }
