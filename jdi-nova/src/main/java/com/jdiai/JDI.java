@@ -20,6 +20,7 @@ import com.jdiai.tools.StringUtils;
 import com.jdiai.tools.func.JAction2;
 import com.jdiai.tools.func.JAction3;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -47,6 +48,7 @@ import static com.jdiai.jsdriver.JDINovaException.assertContains;
 import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static com.jdiai.jswraper.JSWrappersUtils.*;
 import static com.jdiai.jswraper.driver.DriverManager.useDriver;
+import static com.jdiai.jswraper.driver.JDIDriver.*;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
@@ -60,6 +62,7 @@ import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.ReflectionUtils.getFieldsDeep;
 import static com.jdiai.tools.ReflectionUtils.isInterface;
 import static com.jdiai.tools.StringUtils.format;
+import static java.lang.Integer.parseInt;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
@@ -74,6 +77,7 @@ public class JDI {
     public static ILogger logger() {
         return logger;
     }
+
     public static void setLogger(ILogger newLogger) {
         logger = newLogger;
     }
@@ -82,7 +86,9 @@ public class JDI {
 
     public static ConditionTypes findFilters = new ConditionTypes();
 
-    public static String SELECT_FIND_TEXT_LOCATOR = ".//*[text()='%s']";
+    public static String browserSize = "1024x768";
+
+    public static String selectFindTextLocator = ".//*[text()='%s']";
 
     public static Function<List<By>, JS> initJSFunc = locators -> new JSStable(JDI::driver, locators);
 
@@ -114,6 +120,7 @@ public class JDI {
     public static void maximizeBrowser() {
         JDIDriver.maximizeBrowser(driver());
     }
+
     public static void setBrowserSize(int width, int height) {
         JDIDriver.setBrowserSize(driver(), width, height);
     }
@@ -329,6 +336,12 @@ public class JDI {
             default:
                 setLogger(new ConsoleLogger(getLoggerName(CONSOLE)));
                 break;
+        }
+        try {
+            String[] split = browserSize.split("x");
+            BROWSER_SIZE = new Dimension(parseInt(split[0]), parseInt(split[1]));
+        } catch (Exception ignore) {
+            logger().info("Failed setup browser size: " + browserSize);
         }
         initialized = true;
     }

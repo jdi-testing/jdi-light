@@ -14,13 +14,28 @@ import static java.awt.Toolkit.getDefaultToolkit;
 
 public class JDIDriver {
     public static RunModes RUN_MODE = LOCAL_DOWNLOAD;
+    public static Dimension BROWSER_SIZE = null;
 
-    public static Consumer<WebDriver> DRIVER_SETUP = JDIDriver::maximizeBrowser;
+    public static Consumer<WebDriver> DRIVER_SETUP = driver -> {
+        if (BROWSER_SIZE == null) {
+            maximizeBrowser(driver);
+        } else {
+            setBrowserSize(driver, BROWSER_SIZE.getWidth(), BROWSER_SIZE.getHeight());
+        }
+    };
 
     public static void maximizeBrowser(WebDriver driver) {
-        java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
-        int width = screenSize.getWidth() > 0 ? (int) screenSize.getWidth() : 1024;
-        int height = screenSize.getHeight() > 0 ? (int) screenSize.getHeight() : 768;
+        int width = 1024;
+        int height = 768;
+        try {
+            java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
+            if (screenSize.getWidth() > 0) {
+                width = (int) screenSize.getWidth();
+            }
+            if (screenSize.getHeight() > 0) {
+                height = (int) screenSize.getHeight();
+            }
+        } catch (Throwable ignore) { }
         setBrowserSize(driver, width, height);
     }
 
