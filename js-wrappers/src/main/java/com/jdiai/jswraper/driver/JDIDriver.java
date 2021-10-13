@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.function.Consumer;
 
+import static com.jdiai.jsbuilder.QueryLogger.logger;
 import static com.jdiai.jswraper.driver.DriverTypes.*;
 import static com.jdiai.jswraper.driver.RunModes.LOCAL_DOWNLOAD;
 import static com.jdiai.tools.pairs.Pair.$;
@@ -41,6 +42,7 @@ public class JDIDriver {
 
     public static void setBrowserSize(WebDriver driver, int width, int height) {
         driver.manage().window().setPosition(new Point(0, 0));
+        logger.info("Set browser size: " + width + "x" + height);
         driver.manage().window().setSize(new Dimension(width, height));
     }
 

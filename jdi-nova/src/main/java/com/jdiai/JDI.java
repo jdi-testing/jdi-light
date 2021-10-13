@@ -48,7 +48,7 @@ import static com.jdiai.jsdriver.JDINovaException.assertContains;
 import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static com.jdiai.jswraper.JSWrappersUtils.*;
 import static com.jdiai.jswraper.driver.DriverManager.useDriver;
-import static com.jdiai.jswraper.driver.JDIDriver.*;
+import static com.jdiai.jswraper.driver.JDIDriver.BROWSER_SIZE;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
@@ -86,7 +86,7 @@ public class JDI {
 
     public static ConditionTypes findFilters = new ConditionTypes();
 
-    public static String browserSize = "1024x768";
+    public static String browserSize = null;
 
     public static String selectFindTextLocator = ".//*[text()='%s']";
 
@@ -341,7 +341,7 @@ public class JDI {
             String[] split = browserSize.split("x");
             BROWSER_SIZE = new Dimension(parseInt(split[0]), parseInt(split[1]));
         } catch (Exception ignore) {
-            logger().info("Failed setup browser size: " + browserSize);
+            logger().info("Failed to setup browser size: " + browserSize);
         }
         initialized = true;
     }
