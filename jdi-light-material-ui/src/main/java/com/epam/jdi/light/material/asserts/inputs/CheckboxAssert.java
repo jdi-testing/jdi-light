@@ -33,8 +33,8 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 
     @JDIAction("Assert that '{name}' is not checked")
     public CheckboxAssert unChecked() {
-        Timer.waitCondition(element()::isNotChecked);
-        jdiAssert(element().isNotChecked(), Matchers.is(true));
+        Timer.waitCondition(() -> !element().isChecked());
+        jdiAssert(element().isChecked(), Matchers.is(false));
         return this;
     }
 
