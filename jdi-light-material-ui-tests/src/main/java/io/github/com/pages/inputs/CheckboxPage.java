@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CheckboxPage extends WebPage {
 
-    @UI("//h2[text()='Basic checkboxes']/following-sibling::div/span")
+    @UI("//h2[text()='Basic checkboxes']/following-sibling::div/span[contains(@class,'MuiCheckbox-root')]")
     public List<Checkbox> basicCheckbox;
 
     @UI("//h2[text()='Checkboxes with FormGroup']/preceding::div/label/span[contains(@class,'MuiCheckbox-root')]")

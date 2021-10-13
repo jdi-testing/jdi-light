@@ -56,15 +56,15 @@ public class CheckboxTests extends TestsInit {
     }
 
     private void hasError(Text errorMessage) {
-        boolean isUnchecked = new Timer(1000L)
-                .wait(() -> errorMessage.hasClass("Mui-error"));
+        boolean isUnchecked = errorMessage.hasClass("Mui-error");
+        Timer.waitCondition(() -> isUnchecked);
         jdiAssert(isUnchecked, Matchers.is(true));
         jdiAssert(errorMessage.text().contains("Pick two"), Matchers.is(true));
     }
 
     private void hasNoError(Text errorMessage) {
-        boolean isUnchecked = new Timer(1000L)
-                .wait(() -> errorMessage.hasClass("Mui-error"));
+        boolean isUnchecked = errorMessage.hasClass("Mui-error");
+        Timer.waitCondition(() -> isUnchecked);
         jdiAssert(isUnchecked, Matchers.is(false));
     }
 
