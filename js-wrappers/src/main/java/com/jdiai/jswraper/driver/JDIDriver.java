@@ -26,8 +26,8 @@ public class JDIDriver {
     };
 
     public static void maximizeBrowser(WebDriver driver) {
-        int width = 1024;
-        int height = 768;
+        int width = 1536;
+        int height = 864;
         try {
             java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
             if (screenSize.getWidth() > 0) {
