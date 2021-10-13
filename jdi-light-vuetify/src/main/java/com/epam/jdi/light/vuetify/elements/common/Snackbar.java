@@ -5,6 +5,10 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.SnackbarAssert;
 
+/**
+ * To see an example of Checkbox web element please visit https://vuetifyjs.com/en/components/snackbars/
+ */
+
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText {
 
     @Override
