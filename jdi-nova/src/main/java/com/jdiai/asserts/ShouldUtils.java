@@ -15,15 +15,20 @@ import static com.jdiai.JDI.*;
 import static com.jdiai.JDIEvents.*;
 import static com.jdiai.JDIStatistic.shouldValidations;
 import static com.jdiai.jsbuilder.JSBuilder.lastScriptExecution;
+import static com.jdiai.jsdriver.JDINovaException.THROW_ASSERT;
 import static com.jdiai.jsdriver.JDINovaException.throwAssert;
 import static com.jdiai.tools.LinqUtils.map;
 import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static com.jdiai.tools.StringUtils.format;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 public class ShouldUtils {
     public static boolean SOFT_ASSERTION_MODE = false;
     private static Safe<List<String>> failedAssertions = new Safe<>(ArrayList::new);
+    public static List<String> getAssertions() {
+        return failedAssertions.get();
+    }
 
     public static <T> T waitForResult(Supplier<T> function) {
         return waitForResult(function, result -> true, timeout);
@@ -77,7 +82,13 @@ public class ShouldUtils {
             if (SOFT_ASSERTION_MODE) {
                 failedAssertions.get().add(errorMsg);
             } else {
-                throw ex;
+                List<String> softAssertions = getAssertions();
+                if (softAssertions.size() > 0) {
+                    softAssertions.add(ex.getMessage());
+                    THROW_ASSERT.accept(print(softAssertions, LINE_BREAK));
+                } else {
+                    throw ex;
+                }
             }
         }
         return core;
