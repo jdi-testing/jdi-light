@@ -6,17 +6,14 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
+import com.epam.jdi.light.vuetify.annotations.JDITreeViewDropDown;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.elements.complex.TreeView;
 import com.epam.jdi.light.vuetify.elements.complex.TreeViewDropDown;
 
 public class TreeviewPage extends VuetifyPage {
 
-    @JDropdown(
-            root = "#ActivatableTreeview.v-treeview",
-            list = "./*[contains(@class, 'v-treeview-node')]",
-            expand = ".v-treeview-node__toggle"
-    )
+    @JDITreeViewDropDown(core = "#ActivatableTreeview.v-treeview")
     public static TreeViewDropDown activatableTreeView;
 
 
