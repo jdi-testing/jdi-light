@@ -1,8 +1,8 @@
 package io.github.com.pages.inputs;
 
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.inputs.DateTimePicker;
 
 /**
  * To see an example of Material Date and Time pickers
@@ -12,35 +12,21 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 
 public class DateTimePickersPage extends WebPage {
 
-    @JDropdown(
-            root = "//*[@id = 'date-picker-inline-label']/parent::div",
-            value = "//*[@id ='date-picker-inline']",
-            list = "//*[@id = 'date-picker-inline-label']/parent::div /ancestor::body " +
-                    "//div[@class = 'MuiPickersBasePicker-pickerView']//p",
-            expand = "//span[@class = 'MuiIconButton-label']")
-    public static Dropdown inlineDatePicker;
+    @UI("//*[@id = 'date-picker-inline-label']/parent::div")
+    public static DateTimePicker inlineDatePicker;
 
-    @JDropdown(
-            root = "//*[@id = 'date-picker-dialog-label']/parent::div",
-            value = "//*[@id ='date-picker-dialog']",
-            list = "//*[@id = 'date-picker-dialog-label']/parent::div /ancestor::body " +
-                    "//div[@class = 'MuiPickersBasePicker-pickerView']//p",
-            expand = "//span[@class = 'MuiIconButton-label']")
-    public static Dropdown dialogPicker;
+    @UI("//*[@id = 'date-picker-dialog-label']/parent::div")
+    public static DateTimePicker dialogPicker;
 
-    @JDropdown(root = "//*[@id = 'time-picker-label']/parent::div",
-            value = "//*[@id ='time-picker']",
-            list = "//*[@id = 'time-picker-label']/parent::div /ancestor::body //div[@class = 'MuiPickersClock-clock']" +
-                    "//span",
-            expand = "//span[@class = 'MuiIconButton-label']")
-    public static Dropdown timePicker;
+    @UI("//*[@id = 'time-picker-label']/parent::div")
+    public static DateTimePicker timePicker;
 
-    @JDropdown(root = "//*[@id = 'date-label']/parent::div", value = "//*[@id ='date']")
-    public static Dropdown birthdayPicker;
+    @UI("//*[@id = 'date-label']/parent::div")
+    public static DateTimePicker birthdayPicker;
 
-    @JDropdown(root = "//*[@id = 'datetime-local-label']/parent::div", value = "//*[@id ='datetime-local']")
-    public static Dropdown appointmentPicker;
+    @UI("//*[@id = 'datetime-local-label']/parent::div")
+    public static DateTimePicker appointmentPicker;
 
-    @JDropdown(root = "//*[text()='Alarm clock']/..", value = "//*[@id ='time']")
-    public static Dropdown alarmPicker;
+    @UI("//*[text()='Alarm clock']/..")
+    public static DateTimePicker alarmPicker;
 }
