@@ -100,7 +100,7 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
         }
         if (!Objects.equals(FULL_ICON_LOCATOR, EMPTY_ICON_LOCATOR)) {
             UIElement distinctiveElement = distinctiveElement(EMPTY_ICON_LOCATOR);
-            if (distinctiveElement == null && !FULL_ICON_LOCATOR.isEmpty() && distinctiveElement(FULL_ICON_LOCATOR) != null) {
+            if (distinctiveElement == null && FULL_ICON_LOCATOR != null && distinctiveElement(FULL_ICON_LOCATOR) != null) {
                 return (double) length();
             }
             if (distinctiveElement != null) {
