@@ -83,7 +83,6 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
     }
 
     protected Double rating(UIElement element) {
-        String ptr = element.getAttribute("aria-label");
         return Double.parseDouble(element.getAttribute("aria-label").replaceAll("^\\D*?(\\d+).*$", "$1")) - 1;
     }
 
