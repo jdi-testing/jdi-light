@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.stream.IntStream;
 
 import static io.github.com.StaticSite.ratingsPage;
+import static io.github.com.pages.RatingsPage.advancedUsageRating;
 import static io.github.com.pages.RatingsPage.cardRatingsRating;
 import static io.github.com.pages.RatingsPage.cardRatingsRatingCard;
 import static io.github.com.pages.RatingsPage.cardRatingsRatingSpan;
@@ -107,6 +108,11 @@ public class RatingTests extends TestsInit {
                     itemSlotRating.setValue(index);
                     itemSlotRating.is().color(index, color);
                 });
+    }
+
+    @Test
+    public void advancedUsageRatingTest() {
+        advancedUsageRating.is().readonly();
     }
 
     @Test

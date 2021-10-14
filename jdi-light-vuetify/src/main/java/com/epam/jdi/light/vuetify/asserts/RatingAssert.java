@@ -34,14 +34,20 @@ public class RatingAssert extends UIAssert<RatingAssert, Rating> {
     }
 
     @JDIAction("Assert that size of '{name}' is {0}")
-    public RatingAssert size(Integer size) {
+    public RatingAssert size(int size) {
         jdiAssert(element().size(), Matchers.is(size));
         return this;
     }
 
     @JDIAction("Assert that length of '{name}' is {0}")
-    public RatingAssert length(Integer length) {
+    public RatingAssert length(int length) {
         jdiAssert(element().length(), Matchers.is(length));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is readonly")
+    public RatingAssert readonly() {
+        jdiAssert(element().hasClass("v-rating--readonly"), Matchers.is(true));
         return this;
     }
 }
