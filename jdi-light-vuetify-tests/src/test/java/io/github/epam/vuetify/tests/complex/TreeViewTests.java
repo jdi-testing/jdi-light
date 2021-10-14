@@ -8,6 +8,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static io.github.com.StaticSite.treeviewPage;
 
@@ -85,7 +86,11 @@ public class TreeViewTests extends TestsInit {
 //                .has().checked("v-btn : ts", "v-card : ts", "v-window : ts");
 //    }
 //
+
+
+
 //    protected void checkTreeViewDefaultTextAndStructure(TreeView treeView) {
+//
 //        treeView.is().pseudo();
 //        treeView.has().values(equalTo(Arrays.asList(
 //                "Applications :" , "Documents :", "Downloads :", "Videos :"

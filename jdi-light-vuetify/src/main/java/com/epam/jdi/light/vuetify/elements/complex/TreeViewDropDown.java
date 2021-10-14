@@ -1,31 +1,32 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
-import com.epam.jdi.light.asserts.complex.DropdownAssert;
-import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.complex.CanBeSelected;
+import com.epam.jdi.light.elements.complex.IListSelector;
+import com.epam.jdi.light.elements.complex.IMultiSelector;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-import com.epam.jdi.light.elements.interfaces.base.IClickable;
-import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.vuetify.annotations.JDITreeViewDropDown;
 import com.epam.jdi.light.vuetify.asserts.TreeViewDropDownAssert;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static com.epam.jdi.tools.PrintUtils.print;
 
 public class TreeViewDropDown extends Dropdown
-        implements IMultiSelector, CanBeSelected, HasCheck {
-//        implements HasCheck
+        implements IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeViewDropDown> {
 
     protected String NODES_IN_CORE_LOCATOR = "./*[contains(@class, 'v-treeview-node')]";
     protected String NODES_IN_NODE_LOCATOR = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
@@ -39,8 +40,6 @@ public class TreeViewDropDown extends Dropdown
     protected String SELECTED_NODE_CLASS = "v-treeview-node--selected";
     protected String ACTIVE_NODE_CLASS = "v-treeview-node--active";
     protected String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
-
-
 
     @JDIAction("Check if '{name}' is a pseudo core node")
     public boolean isPseudoCore() {
@@ -100,13 +99,156 @@ public class TreeViewDropDown extends Dropdown
     }
 
     @Override
+    @JDIAction("Click on root in '{name}'")
+    public void click() {
+        root().click();
+    }
+
+    @JDIAction("Activate '{name}'")
+    public void activate() {
+        if (!isActive()) {
+            click();
+        }
+    }
+
+    @JDIAction("Deactivate '{name}'")
+    public void deactivate() {
+        if (isActive()) {
+            click();
+        }
+    }
+
+    @JDIAction("Select checkbox in '{name}'")
+    public void select() {
+        checkbox().click();
+    }
+
+    @Override
+    @JDIAction("Check checkbox in '{name}'")
+    public void check() {
+        if (!isSelected()) {
+            select();
+        }
+    }
+
+    @Override
+    @JDIAction("Uncheck checkbox in '{name}'")
+    public void uncheck() {
+        if (isSelected()) {
+            select();
+        }
+    }
+
+    @Override
+    public void select(String value) {
+        get(value).select();
+    }
+
+    @Override
+    public void select(int index) {
+        get(index).select();
+    }
+
+    @Override
+    public String selected() {
+        return print(checked());
+    }
+
+    @Override
+    public boolean selected(String option) {
+        return selected().equals(option);
+    }
+
+    @Override
+    public void select(String... values) {
+        Arrays.stream(values).forEach(this::select);
+    }
+
+    @Override
+    public <TEnum extends Enum<?>> void select(TEnum... values) {
+        Arrays.stream(values).forEach(this::select);
+    }
+
+    @Override
+    public void select(int... values) {
+        Arrays.stream(values).forEach(this::select);
+    }
+
+    @Override
+    public boolean selected(int index) {
+        return get(index).isSelected();
+    }
+
+    @Override
+    public <TEnum extends Enum<?>> void select(TEnum value) {
+        super.select(value);
+    }
+
+    @JDIAction("Get list of nodes from '{name}'")
+    public List<TreeViewDropDown> nodes() {
+        if (isLeaf()) {
+            return Collections.emptyList();
+        }
+        WebList nodes;
+        if (isPseudoCore()) {
+            nodes = core().finds(NODES_IN_CORE_LOCATOR);
+        } else {
+            expand();
+            nodes = core().finds(NODES_IN_NODE_LOCATOR);
+        }
+        return nodes.map(this::create);
+    }
+
+    protected TreeViewDropDown create(JDIBase base) {
+        TreeViewDropDown created = new TreeViewDropDown().setCore(TreeViewDropDown.class, base);
+        created.NODES_IN_CORE_LOCATOR = NODES_IN_CORE_LOCATOR;
+        created.NODES_IN_NODE_LOCATOR = NODES_IN_NODE_LOCATOR;
+        created.ROOT_IN_NODE_LOCATOR = ROOT_IN_NODE_LOCATOR;
+        created.TOGGLE_IN_ROOT_LOCATOR = TOGGLE_IN_ROOT_LOCATOR;
+        created.CHECKBOX_IN_ROOT_LOCATOR = CHECKBOX_IN_ROOT_LOCATOR;
+        created.CONTENT_IN_ROOT_LOCATOR = CONTENT_IN_ROOT_LOCATOR;
+        created.CORE_CLASS = CORE_CLASS;
+        created.LEAF_CLASS = LEAF_CLASS;
+        created.SELECTED_NODE_CLASS = SELECTED_NODE_CLASS;
+        created.ACTIVE_NODE_CLASS = ACTIVE_NODE_CLASS;
+        created.DISABLED_NODE_CLASS = DISABLED_NODE_CLASS;
+        return created;
+    }
+
+    @Override
     public WebList list() {
-        return core().finds(NODES_IN_CORE_LOCATOR);
+        return WebList.newList(nodes().stream()
+                .map(TreeViewDropDown::value)
+                .collect(Collectors.toList())
+        );
+    }
+
+    @Override
+    public List<TreeViewDropDown> elements(int minAmount) {
+        if (minAmount > size())
+            throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
+        return nodes();
+    }
+
+    @Override
+    public TreeViewDropDown get(String value) {
+        return nodes().stream()
+                .filter(node -> node.getText().equals(value))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public List<String> checked() {
-        return null;
+        return nodes().stream()
+                .filter(TreeViewDropDown::isSelected)
+                .map(DropdownExpand::getText)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void clear() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -182,32 +324,5 @@ public class TreeViewDropDown extends Dropdown
     public TreeViewDropDownAssert verify() {
         assertSoft();
         return is();
-    }
-
-    @JDIAction("Get list of nodes from '{name}'")
-    public List<TreeViewDropDown> nodes() {
-        if (isLeaf()) {
-            return Collections.emptyList();
-        }
-        WebList nodes;
-        if (isPseudoCore()) {
-            nodes = core().finds(NODES_IN_CORE_LOCATOR);
-        } else {
-            expand();
-            nodes = core().finds(NODES_IN_NODE_LOCATOR);
-        }
-        return nodes.map(elem -> new TreeViewDropDown().setCore(TreeViewDropDown.class, elem));
-    }
-
-    public TreeViewDropDown get(String value) {
-        return nodes().stream()
-                .filter(node -> node.value().getText().equals(value))
-                .findFirst()
-                .orElse(null);
-    }
-
-    @Override
-    public void click() {
-
     }
 }

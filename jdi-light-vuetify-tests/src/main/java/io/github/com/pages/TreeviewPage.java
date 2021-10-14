@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -15,7 +16,6 @@ public class TreeviewPage extends VuetifyPage {
 
     @JDITreeViewDropDown(core = "#ActivatableTreeview.v-treeview")
     public static TreeViewDropDown activatableTreeView;
-
 
 //    @JDITreeView(core = "#ActivatableTreeview.v-treeview")
 //    public static TreeView activatableTreeView;
