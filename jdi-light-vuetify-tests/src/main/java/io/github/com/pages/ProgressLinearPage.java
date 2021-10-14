@@ -44,7 +44,7 @@ public class ProgressLinearPage extends VuetifyPage {
     @UI("#ToolbarProgress .v-progress-linear")
     public static ProgressBar toolbarProgressBar;
 
-    @UI("//div[@id='ToolbarProgress']//ancestor::span[contains(text(), 'Start loading')]")
-    public static Button startLoading;
+    @UI("//span[contains(text(), 'Start loading')]")
+    public static Button startLoadingButton;
 
 }
