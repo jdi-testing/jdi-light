@@ -58,7 +58,7 @@ jobs:
         if: steps.allure-setup.outcome == 'success'
         timeout-minutes: 10
         continue-on-error: true
-        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-jdi-nova -Drun.performance=false --fail-at-end
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-jdi-nova -Drun.performance=true --fail-at-end
 
       - name: E2E Without Page objects
         id: e2e-tests-no-po

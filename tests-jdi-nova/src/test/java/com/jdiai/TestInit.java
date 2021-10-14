@@ -16,7 +16,6 @@ public interface TestInit {
         DRIVER_OPTIONS.chrome = cap -> cap.addArguments("--headless");
         logAll();
         domain = "https://jdi-testing.github.io/jdi-light";
-        // initJSFunc = l -> new JSLight(JDI::driver, l);
     }
 
     @AfterSuite(alwaysRun = true)

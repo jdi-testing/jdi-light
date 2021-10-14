@@ -30,6 +30,7 @@ import java.util.function.Supplier;
 
 import static com.jdiai.JDI.*;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
+import static com.jdiai.jsdriver.JDINovaException.THROW_ASSERT;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static com.jdiai.jswraper.JSWrappersUtils.NAME_TO_LOCATOR;
 import static com.jdiai.jswraper.JSWrappersUtils.setStringAction;
@@ -113,6 +114,10 @@ public class JSLight implements JS {
     }
     public void click() {
         engine().doAction("click();");
+    }
+    public JS clickJS() {
+        engine().doAction("click();");
+        return this;
     }
 
     public JS clickCenter() {
@@ -1088,8 +1093,11 @@ public class JSLight implements JS {
             result = func.get();
         } else {
             jsDriver().setFilter(defaultFilter);
-            result = func.get();
-            jsDriver().setFilter(null);
+            try {
+                result = func.get();
+            } finally {
+                jsDriver().setFilter(null);
+            }
         }
         return result;
     }
@@ -1146,9 +1154,22 @@ public class JSLight implements JS {
         }
         SearchContext ctx = driver();
         for (By locator : locators()) {
-            ctx = ctx.findElement(locator);
+            List<WebElement> elements = ctx.findElements(locator);
+            ctx = getContext(elements);
         }
         return (WebElement) ctx;
+    }
+
+    private SearchContext getContext(List<WebElement> elements) {
+        switch (elements.size()) {
+            case 0:
+                THROW_ASSERT.accept("Failed to find element (" + this + ")");
+            case 1:
+                return elements.get(0);
+            default:
+                WebElement visible = LinqUtils.first(elements, WebElement::isDisplayed);
+                return visible != null ? visible : elements.get(0);
+        }
     }
 
     protected int elementTimeout = -1;

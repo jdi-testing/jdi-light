@@ -17,8 +17,7 @@ import static com.jdiai.jsbuilder.ListSearch.CHAIN;
 import static com.jdiai.jsbuilder.ListSearch.MULTI;
 import static com.jdiai.jsdriver.JSDriverUtils.*;
 import static com.jdiai.jsdriver.RuleType.Element;
-import static com.jdiai.tools.LinqUtils.ifSelect;
-import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.LinqUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.regex.Pattern.compile;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
@@ -310,7 +309,7 @@ public class JSDriver {
             return -1;
         }
     }
-    
+
     public JSDriver multiSearch() {
         strategy = MULTI;
         return this;
@@ -326,6 +325,9 @@ public class JSDriver {
 
     public List<By> locators() {
         return ifSelect(rules, JSRule::isLocator, r -> r.locator);
+    }
+    public boolean hasJSRules() {
+        return any(rules, JSRule::isScript);
     }
 
     public JSDriver setFilter(String filter) {

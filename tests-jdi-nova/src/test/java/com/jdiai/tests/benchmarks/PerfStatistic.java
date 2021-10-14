@@ -14,6 +14,7 @@ import java.util.stream.LongStream;
 import static com.jdiai.tools.PropertyReader.getProperties;
 import static com.jdiai.tools.StringUtils.format;
 import static java.lang.Boolean.parseBoolean;
+import static java.util.Collections.sort;
 import static org.testng.Assert.assertEquals;
 
 public class PerfStatistic {
@@ -35,6 +36,7 @@ public class PerfStatistic {
         List<Long> seleniumStats = new ArrayList<>();
         List<Long> jsStats = new ArrayList<>();
         int executionCount = runPerformance() ? count : 1;
+        System.out.println("EXECUTION COUNT: " + executionCount);
         for (int i = 0; i < executionCount; i++) {
             System.out.println("RUN#"+ i);
             precondition.execute();
@@ -51,14 +53,16 @@ public class PerfStatistic {
             System.out.println(testName + " Ratio: " + df2((double)seleniumTime/jsTime));
             assertEquals(seleniumResult, jdiResult);
         }
+        sort(seleniumStats);
+        sort(jsStats);
         double avFramework = getAverage(seleniumStats);
         double avJdi = getAverage(jsStats);
         System.out.println("Average " + framework1 + ": " + df2(avFramework));
         System.out.println("Average " + framework2 + ": " + df2(avJdi));
         String avRatio = df2(avFramework/avJdi);
         System.out.println("Average Ratio: " + avRatio);
-        String min = df2(min(seleniumStats, jsStats));
-        String max = df2(max(seleniumStats, jsStats));
+        String min = df2(minAverage(seleniumStats, jsStats));
+        String max = df2(maxAverage(seleniumStats, jsStats));
         System.out.println("Min [" + min + "] and Max [" + max + "]");
 
         return new Statistic().set(s -> {
@@ -70,6 +74,7 @@ public class PerfStatistic {
             s.additionalInfo = format("[%s; %s]", min, max);
         });
     }
+
     private static String df2(double value) {
         return new DecimalFormat("#.##").format(value);
     }
@@ -77,36 +82,21 @@ public class PerfStatistic {
     private static double getAverage(Collection<Long> times) {
         return toLong(times).average().orElse(-1);
     }
-    private static double min(List<Long> selenium, List<Long> js) {
-        if (selenium.size() == 1) {
-            return (double) selenium.get(0) / js.get(0);
+
+    private static double minAverage(List<Long> stat1, List<Long> stat2) {
+        if (stat1.size() == 1 || stat1.size() == 2) {
+            return (double) stat1.get(0) / stat2.get(0);
         }
-        double min = Double.MAX_VALUE;
-        double prev = Double.MAX_VALUE;
-        for (int i = 0; i < js.size(); i++) {
-            double ratio = (double) selenium.get(i)/js.get(i);
-            if (min > ratio) {
-                prev = min;
-                min = ratio;
-            }
-        }
-        return prev == Double.MAX_VALUE ? min : prev;
+        return (double) stat1.get(0) / stat2.get(stat2.size() - 2);
     }
-    private static double max(List<Long> selenium, List<Long> js) {
-        if (selenium.size() == 1) {
-            return (double) selenium.get(0) / js.get(0);
+
+    private static double maxAverage(List<Long> stat1, List<Long> stat2) {
+        if (stat1.size() == 1 || stat1.size() == 2) {
+            return (double) stat1.get(0) / stat2.get(0);
         }
-        double max = -1;
-        double prev = -1;
-        for (int i = 0; i < js.size(); i++) {
-            double ratio = (double) selenium.get(i) / js.get(i);
-            if (max < ratio) {
-                prev = max;
-                max = ratio;
-            }
-        }
-        return prev == -1 ? max : prev;
+        return (double) stat1.get(stat1.size() - 2) / stat2.get(0);
     }
+
     private static LongStream toLong(Collection<Long> collection) {
         return collection.stream().mapToLong(a -> a);
     }

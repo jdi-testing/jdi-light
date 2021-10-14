@@ -125,7 +125,6 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName, HasLabel 
     }
 
     public void select(String value) {
-        // hasLabel(value);
         getLabelElement().core().select(value);
     }
 
@@ -347,14 +346,13 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName, HasLabel 
     public List<T> getList(int minAmount) {
         List<T> list = new ArrayList<>();
         Timer timer = new Timer();
-        Exception error = null;
+        Exception error;
         do {
             error = null;
             try {
                 list = core().getEntityList(dataClass);
             } catch (Exception ex) {
                 error = ex;
-                System.out.println(error.getMessage());
             }
         } while ((error != null || list.size() < minAmount) && timer.isRunning());
         if (list.size() < minAmount) {

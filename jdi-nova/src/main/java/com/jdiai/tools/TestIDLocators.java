@@ -19,4 +19,6 @@ public class TestIDLocators {
 
     public static Function<String, By> SMART_LOCATOR = DATA_TEST_ID;
 
+    public static String TEST_ID = "data-testid";
+
 }

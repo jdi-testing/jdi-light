@@ -13,9 +13,12 @@ import com.jdiai.jswraper.JSBaseEngine;
 import com.jdiai.jswraper.JSEngine;
 import com.jdiai.jswraper.driver.DriverManager;
 import com.jdiai.jswraper.driver.DriverTypes;
+import com.jdiai.jswraper.driver.JDIDriver;
 import com.jdiai.tools.ILogger;
 import com.jdiai.tools.Safe;
 import com.jdiai.tools.StringUtils;
+import com.jdiai.tools.func.JAction2;
+import com.jdiai.tools.func.JAction3;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -31,10 +34,12 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static com.jdiai.JDIEvents.*;
 import static com.jdiai.LoggerTypes.CONSOLE;
 import static com.jdiai.LoggerTypes.SLF4J;
 import static com.jdiai.asserts.Conditions.above;
 import static com.jdiai.asserts.Conditions.onLeftOf;
+import static com.jdiai.asserts.ShouldUtils.SOFT_ASSERTION_MODE;
 import static com.jdiai.asserts.ShouldUtils.waitForResult;
 import static com.jdiai.jsbuilder.GetTypes.dataType;
 import static com.jdiai.jsbuilder.QueryLogger.*;
@@ -43,9 +48,11 @@ import static com.jdiai.jsdriver.JDINovaException.assertContains;
 import static com.jdiai.jsdriver.JSDriverUtils.getByLocator;
 import static com.jdiai.jswraper.JSWrappersUtils.*;
 import static com.jdiai.jswraper.driver.DriverManager.useDriver;
+import static com.jdiai.jswraper.driver.JDIDriver.BROWSER_SIZE;
 import static com.jdiai.jswraper.driver.JDIDriver.DRIVER_OPTIONS;
 import static com.jdiai.page.objects.PageFactory.initSite;
 import static com.jdiai.page.objects.PageFactoryUtils.getLocatorFromField;
+import static com.jdiai.tools.Alerts.acceptAlert;
 import static com.jdiai.tools.BrowserTabs.getWindowHandles;
 import static com.jdiai.tools.BrowserTabs.setTabName;
 import static com.jdiai.tools.JsonUtils.getDouble;
@@ -53,8 +60,11 @@ import static com.jdiai.tools.LinqUtils.any;
 import static com.jdiai.tools.LinqUtils.newList;
 import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.ReflectionUtils.getFieldsDeep;
+import static com.jdiai.tools.ReflectionUtils.isInterface;
 import static com.jdiai.tools.StringUtils.format;
+import static java.lang.Integer.parseInt;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class JDI {
@@ -67,6 +77,7 @@ public class JDI {
     public static ILogger logger() {
         return logger;
     }
+
     public static void setLogger(ILogger newLogger) {
         logger = newLogger;
     }
@@ -75,11 +86,84 @@ public class JDI {
 
     public static ConditionTypes findFilters = new ConditionTypes();
 
-    public static String SELECT_FIND_TEXT_LOCATOR = ".//*[text()='%s']";
+    public static String browserSize = null;
+
+    public static String selectFindTextLocator = ".//*[text()='%s']";
 
     public static Function<List<By>, JS> initJSFunc = locators -> new JSStable(JDI::driver, locators);
 
     public static Function<List<By>, JS> initCoreFunc = initJSFunc;
+
+    public static JAction2<String, JS> beforeJSActions = (actionName, element) -> { };
+
+    public static JAction3<String, JS, Object> afterJSActions = (actionName, element, result) -> { };
+
+    public static void alwaysCloseNativeAlerts() {
+        registerActionListener(BEFORE_ACTION_EVENT, args -> {
+            acceptAlert();
+        });
+    }
+    public static void screenshotAfterFail() {
+        registerActionListener(AFTER_ACTION_FAIL_EVENT, args -> {
+            if (args.length > 3) {
+                JS element = (JS) args[2];
+                try {
+                    element.highlight();
+                } catch (Throwable ignore) { }
+                try {
+                    logger().info("Screenshot: " + makeScreenshot().getAbsolutePath());
+                } catch (Throwable ignore) { }
+            }
+        });
+    }
+
+    public static void maximizeBrowser() {
+        JDIDriver.maximizeBrowser(driver());
+    }
+
+    public static void setBrowserSize(int width, int height) {
+        JDIDriver.setBrowserSize(driver(), width, height);
+    }
+
+    public static void alwaysShowElement() {
+        registerActionListener(BEFORE_ACTION_EVENT, args -> {
+            if (args.length > 3) {
+                JS element = (JS) args[2];
+                String step = args[1].toString();
+                if (isInterface(element.getClass(), JS.class) &&  !step.contains("Show")) {
+                    element.showIfNotInView();
+                }
+            }
+        });
+    }
+
+    public static void logNovaActions() {
+        registerActionListener(BEFORE_ACTION_EVENT, args -> {
+            if (args.length > 2) {
+                String step = args[1].toString();
+                if (isNotBlank(step)) {
+                    logger().info(step);
+                } else {
+                    logger().debug(args[0].toString());
+                }
+            }
+        });
+
+        registerActionListener(AFTER_SUCCESS_ACTION_EVENT, args -> {
+            if (args.length > 4) {
+                String result = args[4].toString();
+                if (result != null) {
+                    String step = args[1].toString();
+                    String logMessage = ">>> " + result;
+                    if (isNotBlank(step)) {
+                        logger().info(logMessage);
+                    } else {
+                        logger().debug(logMessage);
+                    }
+                }
+            }
+        });
+    }
 
     public static Function<Supplier<WebDriver>, IJSBuilder> initBuilder = driver -> {
         BuilderFunctions bf = new BuilderFunctions().set(f -> {
@@ -230,6 +314,14 @@ public class JDI {
         return new WebPage().setName(getTitle()).makeScreenshot();
     }
 
+    public static void strictAssertions() {
+        SOFT_ASSERTION_MODE = false;
+    }
+
+    public static void softAssertions() {
+        SOFT_ASSERTION_MODE = true;
+    }
+
     private static void init() {
         if (initialized) {
             return;
@@ -244,6 +336,12 @@ public class JDI {
             default:
                 setLogger(new ConsoleLogger(getLoggerName(CONSOLE)));
                 break;
+        }
+        try {
+            String[] split = browserSize.split("x");
+            BROWSER_SIZE = new Dimension(parseInt(split[0]), parseInt(split[1]));
+        } catch (Exception ignore) {
+            logger().info("Failed to setup browser size: " + browserSize);
         }
         initialized = true;
     }
@@ -273,7 +371,7 @@ public class JDI {
 
     public static void openSite(int width, int height) {
         openSite();
-        driver().manage().window().setSize(new Dimension(width, height));
+        setBrowserSize(width, height);
     }
 
     public static void openSiteHeadless() {
@@ -282,7 +380,7 @@ public class JDI {
     }
     public static void openSiteHeadless(int width, int height) {
         openSiteHeadless();
-        driver().manage().window().setSize(new Dimension(width, height));
+        setBrowserSize(width, height);
     }
 
     public static void reopenSite() {
@@ -301,7 +399,7 @@ public class JDI {
 
     public static void reopenSite(int width, int height) {
         reopenSite();
-        driver().manage().window().setSize(new Dimension(width, height));
+        setBrowserSize(width, height);
     }
 
     public static void openSite(Class<?> cl) {
@@ -338,7 +436,6 @@ public class JDI {
             }
         }
     }
-
 
     public static void gridLayout(HasCore[][] elements) {
         if (isEmpty(elements)) {

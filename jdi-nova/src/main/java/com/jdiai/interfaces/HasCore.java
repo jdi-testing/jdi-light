@@ -152,15 +152,15 @@ public interface HasCore extends WebElement, HasName, HasLocators, ShouldValidat
     default JSEngine engine() {
         return core().engine();
     }
-    
+
     default IJSBuilder builder() {
         return jsDriver().builder();
     }
-    
+
     default JSDriver jsDriver() {
         return engine().jsDriver();
     }
-    
+
     // To be Compliant with WebElement
     default void click() { core().click(); }
     default void submit() { core().submit(); }
