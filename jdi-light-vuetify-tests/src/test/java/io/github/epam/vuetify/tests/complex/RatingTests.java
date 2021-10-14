@@ -1,6 +1,6 @@
-package io.github.epam.vuetify.tests.common;
+package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.vuetify.elements.common.Rating;
+import com.epam.jdi.light.vuetify.elements.complex.Rating;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -117,16 +117,15 @@ public class RatingTests extends TestsInit {
 
     @Test
     public void cardRatingsRatingTest() {
-        cardRatingsRatingSpan.is().text("(4.3)");
+        cardRatingsRatingSpan.click();
         cardRatingsRating.setValue(0.5);
-        cardRatingsRating.setValue(1);
-        cardRatingsRatingSpan.is().text("(1)");
+        cardRatingsRatingSpan.is().text("(0.5)");
 
         cardRatingsRating.hoverSetValue(2);
         cardRatingsRating.is().value(2);
-        cardRatingsRatingSpan.is().text("(1)");
+        cardRatingsRatingSpan.is().text("(0.5)");
 
         cardRatingsRatingCard.hover();
-        cardRatingsRating.is().value(1);
+        cardRatingsRating.is().value(0.5);
     }
 }

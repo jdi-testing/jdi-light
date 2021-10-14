@@ -1,4 +1,4 @@
-package com.epam.jdi.light.vuetify.elements.common;
+package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -8,7 +8,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.vuetify.annotations.JDIRating;
 import com.epam.jdi.light.vuetify.asserts.RatingAssert;
-import com.epam.jdi.light.vuetify.elements.complex.Breadcrumbs;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.interactions.Actions;
 
