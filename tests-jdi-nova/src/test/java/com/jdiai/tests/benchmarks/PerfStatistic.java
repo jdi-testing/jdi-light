@@ -36,6 +36,7 @@ public class PerfStatistic {
         List<Long> seleniumStats = new ArrayList<>();
         List<Long> jsStats = new ArrayList<>();
         int executionCount = runPerformance() ? count : 1;
+        System.out.println("EXECUTION COUNT: " + executionCount);
         for (int i = 0; i < executionCount; i++) {
             System.out.println("RUN#"+ i);
             precondition.execute();
@@ -60,8 +61,8 @@ public class PerfStatistic {
         System.out.println("Average " + framework2 + ": " + df2(avJdi));
         String avRatio = df2(avFramework/avJdi);
         System.out.println("Average Ratio: " + avRatio);
-        String min = df2((double) seleniumStats.get(0) / jsStats.get(jsStats.size() - 2));
-        String max = df2((double) seleniumStats.get(seleniumStats.size() - 2) / jsStats.get(0));
+        String min = df2(minAverage(seleniumStats, jsStats));
+        String max = df2(maxAverage(seleniumStats, jsStats));
         System.out.println("Min [" + min + "] and Max [" + max + "]");
 
         return new Statistic().set(s -> {
@@ -73,12 +74,27 @@ public class PerfStatistic {
             s.additionalInfo = format("[%s; %s]", min, max);
         });
     }
+
     private static String df2(double value) {
         return new DecimalFormat("#.##").format(value);
     }
 
     private static double getAverage(Collection<Long> times) {
         return toLong(times).average().orElse(-1);
+    }
+
+    private static double minAverage(List<Long> stat1, List<Long> stat2) {
+        if (stat1.size() == 1 || stat1.size() == 2) {
+            return (double) stat1.get(0) / stat2.get(0);
+        }
+        return (double) stat1.get(0) / stat2.get(stat2.size() - 2);
+    }
+
+    private static double maxAverage(List<Long> stat1, List<Long> stat2) {
+        if (stat1.size() == 1 || stat1.size() == 2) {
+            return (double) stat1.get(0) / stat2.get(0);
+        }
+        return (double) stat1.get(stat1.size() - 2) / stat2.get(0);
     }
 
     private static LongStream toLong(Collection<Long> collection) {
