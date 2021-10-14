@@ -15,10 +15,10 @@ import static com.epam.jdi.light.vuetify.elements.enums.Colors.PURPLE;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.TEAL;
 
-public class ProgressCircularsDataProvider {
+public class ProgressSpinnersDataProvider {
 
-    @DataProvider(name = "colorProgressCircularsTestsDataProvider")
-    public static Object[][] colorProgressCircularsTestsData() {
+    @DataProvider(name = "colorProgressSpinnersTestsDataProvider")
+    public static Object[][] colorProgressSpinnersTestsData() {
         return new Object[][] {
                 {1, BLUE_GREY.value(), "32px", "32px" },
                 {2, DEEP_ORANGE_LIGHTEN_2.value(), "32px", "32px" },
@@ -28,8 +28,8 @@ public class ProgressCircularsDataProvider {
         };
     }
 
-    @DataProvider(name = "indeterminateProgressCircularsTestsDataProvider")
-    public static Object[][] indeterminateProgressCircularsTestsData() {
+    @DataProvider(name = "indeterminateProgressSpinnersTestsDataProvider")
+    public static Object[][] indeterminateProgressSpinnersTestsData() {
         return new Object[][] {
                 {1, BLUE_DARKEN_2.value(), "32px", "32px" },
                 {2, RED.value(), "32px", "32px" },
@@ -39,8 +39,8 @@ public class ProgressCircularsDataProvider {
         };
     }
 
-    @DataProvider(name = "rotateProgressCircularsTestsDataProvider")
-    public static Object[][] rotateProgressCircularsTestsData() {
+    @DataProvider(name = "rotateProgressSpinnersTestsDataProvider")
+    public static Object[][] rotateProgressSpinnersTestsData() {
         return new Object[][] {
                 {1, TEAL.value(), "100px", "100px" },
                 {2, BLUE_DARKEN_2.value(), "100px", "100px" },
@@ -49,8 +49,8 @@ public class ProgressCircularsDataProvider {
         };
     }
 
-    @DataProvider(name = "sizeWidthProgressCircularsTestsDataProvider")
-    public static Object[][] sizeWidthProgressCircularsTestsData() {
+    @DataProvider(name = "sizeWidthProgressSpinnersTestsDataProvider")
+    public static Object[][] sizeWidthProgressSpinnersTestsData() {
         return new Object[][] {
                 {1, BLUE_DARKEN_2.value(), "50px", "50px" },
                 {2, RED.value(), "32px", "32px" },
