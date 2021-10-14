@@ -37,10 +37,15 @@ public class TreeView extends Dropdown
     protected String CONTENT_IN_ROOT_LOCATOR = ".v-treeview-node__content";
 
     protected String CORE_CLASS = "v-treeview";
-    protected String LEAF_CLASS = "v-treeview-node--leaf";
+    protected String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
+    protected String LEAF_NODE_CLASS = "v-treeview-node--leaf";
     protected String SELECTED_NODE_CLASS = "v-treeview-node--selected";
-    protected String ACTIVE_NODE_CLASS = "v-treeview-node--active";
     protected String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
+    protected String SHAPED_NODE_CLASS = "v-treeview-node--shaped";
+    protected String ROUNDED_NODE_CLASS = "v-treeview-node--rounded";
+    protected String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
+
+    protected TreeView treeViewPseudoCore;
 
     @JDIAction("Check if '{name}' is a pseudo core node")
     public boolean isPseudoCore() {
@@ -49,12 +54,27 @@ public class TreeView extends Dropdown
 
     @JDIAction("Check if '{name}' is a leaf")
     public boolean isLeaf() {
-        return core().hasClass(LEAF_CLASS);
+        return core().hasClass(LEAF_NODE_CLASS);
     }
 
     @JDIAction("Check if '{name}' is active")
     public boolean isActive() {
-        return root().hasClass(ACTIVE_NODE_CLASS);
+        return root().hasClass(ACTIVE_ROOT_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is hoverable")
+    public boolean isHoverable() {
+        return treeViewPseudoCore.core().hasClass(HOVERABLE_CORE_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is shaped")
+    public boolean isShaped() {
+        return core().hasClass(SHAPED_NODE_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is rounded")
+    public boolean isRounded() {
+        return core().hasClass(ROUNDED_NODE_CLASS);
     }
 
     @Override
@@ -102,6 +122,9 @@ public class TreeView extends Dropdown
     @Override
     @JDIAction("Get text from '{name}'")
     public String getText() {
+        if (isPseudoCore()) {
+            return getName();
+        }
         return value().getText();
     }
 
@@ -320,6 +343,7 @@ public class TreeView extends Dropdown
         created.TOGGLE_IN_ROOT_LOCATOR = TOGGLE_IN_ROOT_LOCATOR;
         created.CHECKBOX_IN_ROOT_LOCATOR = CHECKBOX_IN_ROOT_LOCATOR;
         created.CONTENT_IN_ROOT_LOCATOR = CONTENT_IN_ROOT_LOCATOR;
+        created.treeViewPseudoCore = treeViewPseudoCore;
         return created;
     }
 
@@ -330,6 +354,7 @@ public class TreeView extends Dropdown
             initializeLocators(annotation);
         }
         setName(String.format("TreeView %s", field.getName()));
+        treeViewPseudoCore = this;
         autoClose = false;
         setupDone = true;
         thisParent = true;
