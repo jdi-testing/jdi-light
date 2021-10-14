@@ -60,7 +60,7 @@ public class TreeView extends Dropdown
     @Override
     @JDIAction("Check if '{name}' is enabled")
     public boolean isEnabled() {
-        return !core().hasClass(DISABLED_NODE_CLASS);
+        return !core().hasClass(DISABLED_NODE_CLASS) && super.isEnabled();
     }
 
     @Override
@@ -72,14 +72,14 @@ public class TreeView extends Dropdown
     @Override
     @JDIAction("Check if '{name}' is expanded")
     public boolean isExpanded() {
+        if (isPseudoCore()) {
+            return true;
+        }
         return core().attr("aria-expanded").equalsIgnoreCase("true");
     }
 
     @JDIAction("Get root from '{name}'")
     public UIElement root() {
-        if (isPseudoCore()) {
-            return null;
-        }
         return core().find(ROOT_IN_NODE_LOCATOR).setName("root");
     }
 
@@ -275,7 +275,7 @@ public class TreeView extends Dropdown
                 .collect(Collectors.toList());
     }
 
-    public void walk(Consumer<TreeView> consumer) {
+    public void walk(Consumer<? super TreeView> consumer) {
         consumer.accept(this);
         nodes().forEach(treeView -> treeView.walk(consumer));
     }

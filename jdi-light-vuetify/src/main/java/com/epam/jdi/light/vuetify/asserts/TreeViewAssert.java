@@ -8,6 +8,7 @@ import org.hamcrest.Matchers;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -22,7 +23,7 @@ public class TreeViewAssert extends DropdownAssert {
     }
 
     @JDIAction("Assert that '{name}' is a pseudo core node")
-    public TreeViewAssert pseudo() {
+    public TreeViewAssert pseudoCore() {
         jdiAssert(element().isPseudoCore() ? "pseudo core" : "not a pseudo core", Matchers.is("pseudo core"));
         return this;
     }
@@ -85,6 +86,11 @@ public class TreeViewAssert extends DropdownAssert {
         return this;
     }
 
+    @JDIAction("Assert that every node is match consumer")
+    public TreeViewAssert recursive(Consumer<? super TreeView> assertion) {
+        element().walk(assertion);
+        return this;
+    }
 
     @Override
     public TreeViewAssert is() {
