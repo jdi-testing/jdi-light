@@ -17,9 +17,21 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return this;
     }
 
-    @JDIAction("Assert that {name} has expected color")
-    public ProgressBarAssert color(String color) {
-        jdiAssert(element().hasColor(color), Matchers.is(true));
+    @JDIAction("Assert that {name} is indeterminate")
+    public ProgressBarAssert indeterminate() {
+        jdiAssert(element().isIndeterminate(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has expected background color")
+    public ProgressBarAssert color(String backgroundColor) {
+        jdiAssert(element().hasColor(), Matchers.is(backgroundColor));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has expected bar color")
+    public ProgressBarAssert barColor(String barColor) {
+        jdiAssert(element().hasBarColor(), Matchers.is(barColor));
         return this;
     }
 
