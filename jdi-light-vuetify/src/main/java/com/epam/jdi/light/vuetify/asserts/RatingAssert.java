@@ -10,37 +10,38 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class RatingAssert extends UIAssert<RatingAssert, Rating> {
 
     @JDIAction("Assert that value of '{name}' is {0}")
-    public RatingAssert value(double rating){
+    public RatingAssert value(double rating) {
         jdiAssert(element().getValue(), Matchers.is(rating));
         return this;
     }
 
     @JDIAction("Assert that value of '{name}' is {0}")
-    public RatingAssert value(int rating){
-        jdiAssert(element().getValue(), Matchers.is((double)rating));
+    public RatingAssert value(int rating) {
+        jdiAssert(element().getValue(), Matchers.is((double) rating));
         return this;
     }
 
     @JDIAction("Assert that main color of '{name}' is {0}")
-    public RatingAssert color(String color){
+    public RatingAssert color(String color) {
         jdiAssert(element().color(), Matchers.containsString(color));
         return this;
     }
 
     @JDIAction("Assert that main color of '{name}' button index {0} is {1}")
-    public RatingAssert color(int index, String color){
+    public RatingAssert color(int index, String color) {
         jdiAssert(element().color(index), Matchers.containsString(color));
         return this;
     }
 
     @JDIAction("Assert that size of '{name}' is {0}")
-    public RatingAssert size(Integer size){
+    public RatingAssert size(Integer size) {
         jdiAssert(element().size(), Matchers.is(size));
         return this;
     }
 
-//    @Override
-//    public RatingAssert classValue(String value) {
-//        return super.classValue(value);
-//    }
+    @JDIAction("Assert that length of '{name}' is {0}")
+    public RatingAssert length(Integer length) {
+        jdiAssert(element().length(), Matchers.is(length));
+        return this;
+    }
 }

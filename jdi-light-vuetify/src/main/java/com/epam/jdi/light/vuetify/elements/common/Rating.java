@@ -18,18 +18,12 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**
  * To see an example of Rating web element please visit https://vuetifyjs.com/en/components/ratings
  */
 public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBaseElement {
 
-    //    protected String ROOT_LOCATOR = ".v-rating";
-//    protected String EMPTY_ICON_LOCATOR = ".mdi-star-outline";
-//    protected String FULL_ICON_LOCATOR = ".mdi-star";
-//    protected String HALF_ICON_LOCATOR = ".mdi-star-half-full";
-//    protected String BACKGROUND_COLOR_LOCATOR = ".grey--text";
     protected String ROOT_LOCATOR = ".v-rating";
     protected String EMPTY_ICON_LOCATOR = "";
     protected String FULL_ICON_LOCATOR = "";
@@ -37,7 +31,6 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
     protected String COLOR_LOCATOR = "";
     protected String BACKGROUND_COLOR_LOCATOR = "";
     protected String BACKGROUND_DARKEN_LOCATOR = "";
-    protected int START_INDEX = ELEMENT.startIndex;
     protected int DEFAULT_SIZE = 24;
 
     @JDIAction("Get {name} rating buttons")

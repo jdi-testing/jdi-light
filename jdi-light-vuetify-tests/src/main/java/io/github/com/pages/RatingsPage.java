@@ -4,8 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.annotations.JDIRating;
 import com.epam.jdi.light.vuetify.elements.common.Rating;
-
-import java.util.List;
+import com.epam.jdi.light.vuetify.elements.common.Slider;
 
 public class RatingsPage extends VuetifyPage {
 
@@ -107,4 +106,15 @@ public class RatingsPage extends VuetifyPage {
 
     @UI("#CardRatingsRating span")
     public static UIElement cardRatingsRatingSpan;
+
+    @JDIRating(root = "#LengthRating .v-rating",
+            emptyIcon = "mdi-star-outline",
+            fullIcon =  "mdi-star"
+    )
+    public static Rating lengthRating;
+
+
+    @UI("#LengthRating .v-slider")
+    public static Slider lengthRatingSlider;
+
 }
