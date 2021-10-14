@@ -104,12 +104,6 @@ public class StaticSite {
     @Url("/banners")
     public static BannersPage bannersPage;
 
-    @Url("/bottom-navigation")
-    public static BottomNavigationPage bottomNavigationPage;
-
-    @Url("/bottom-sheets")
-    public static BottomSheetsPage bottomSheetsPage;
-
     @Url("/breadcrumbs")
     public static BreadcrumbsPage breadcrumbsPage;
 
@@ -161,6 +155,18 @@ public class StaticSite {
     @Url("/dividers")
     public static DividersPage dividersPage;
 
+    @Url("/bottom-navigation")
+    public static BottomNavigationPage bottomNavigationPage;
+
+    @Url("/bottom-sheets")
+    public static BottomSheetsPage bottomSheetsPage;
+
+    @Url("/tabs")
+    public static TabsPage tabsPage;
+
+    @Url("/footers")
+    public static FootersPage footersPage;
+
     @Url("/expansion-panels")
     public static ExpansionPanelsPage expansionPanelsPage;
 
@@ -169,9 +175,6 @@ public class StaticSite {
 
     @Url("/floating-action-buttons")
     public static FloatingActionButtonsPage floatingActionButtonsPage;
-
-    @Url("/footers")
-    public static FootersPage footersPage;
 
     @Url("/forms")
     public static FormsPage formsPage;
@@ -271,9 +274,6 @@ public class StaticSite {
 
     @Url("/system-bars")
     public static SystemBarsPage systemBarsPage;
-
-    @Url("/tabs")
-    public static TabsPage tabsPage;
 
     @Url("/text-fields")
     public static TextFieldsPage textFieldsPage;
