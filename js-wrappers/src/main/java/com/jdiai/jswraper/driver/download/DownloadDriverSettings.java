@@ -24,8 +24,7 @@ import static java.lang.System.getProperty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class DownloadDriverSettings {
-    public String gitHubTokenName;
-    public String gitHubTokenSecret;
+    public String gitHubToken;
     public String downloadedDriverInfo;
     public String driverPath;
     public OsTypes os;
@@ -70,9 +69,8 @@ public class DownloadDriverSettings {
                 wdm.setup();
                 wdm.browserVersion(getBelowVersion(wdm));
             }
-            if (isNotBlank(gitHubTokenName) && isNotBlank(gitHubTokenSecret)) {
-                wdm.gitHubTokenName(gitHubTokenName);
-                wdm.gitHubTokenSecret(gitHubTokenSecret);
+            if (isNotBlank(gitHubToken)) {
+                wdm.gitHubToken(gitHubToken);
             }
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");

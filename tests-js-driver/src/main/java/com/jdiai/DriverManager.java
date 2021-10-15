@@ -19,8 +19,7 @@ public class DriverManager {
     public static void downloadDriver() {
         WebDriverManager wdm = chromedriver();
         wdm.arch64();
-        // wdm.gitHubTokenName("WDM_GITHUBTOKENNAME");
-        // wdm.gitHubTokenSecret("WDM_GITHUBTOKENSECRET");
+        // wdm.gitHubToken("WDM_GITHUBTOKEN");
         wdm.setup();
     }
 
