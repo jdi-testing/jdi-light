@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
@@ -30,6 +31,9 @@ public class TreeviewPage extends VuetifyPage {
 
     @UI("#LoadChildrenTreeview .v-card")
     public static Card card;
+
+    @UI("#LoadChildrenTreeview .d-flex .text-h6")
+    public static Text selectText;
 
     @JDITreeView(core = "#OpenAllTreeview.v-treeview")
     public static TreeView openAllTreeView;

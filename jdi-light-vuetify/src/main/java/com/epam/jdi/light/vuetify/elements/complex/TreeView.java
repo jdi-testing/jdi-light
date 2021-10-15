@@ -29,12 +29,13 @@ import static com.epam.jdi.tools.PrintUtils.print;
 public class TreeView extends Dropdown
         implements IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeView> {
 
-    protected String NODES_IN_CORE_LOCATOR = "./*[contains(@class, 'v-treeview-node')]";
+    protected String NODES_IN_CORE_LOCATOR = ".v-treeview > .v-treeview-node";
     protected String NODES_IN_NODE_LOCATOR = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
-    protected String ROOT_IN_NODE_LOCATOR = "./*[contains(@class, 'v-treeview-node__root')]";
+    protected String ROOT_IN_NODE_LOCATOR = ".v-treeview-node > .v-treeview-node__root";
     protected String TOGGLE_IN_ROOT_LOCATOR = ".v-treeview-node__toggle";
     protected String CHECKBOX_IN_ROOT_LOCATOR = ".v-treeview-node__checkbox";
     protected String CONTENT_IN_ROOT_LOCATOR = ".v-treeview-node__content";
+    protected String CORE_FROM_NODE_LOCATOR = "//ancestor::*[@class='v-treeview' or contains(@class,'v-treeview ')]";
 
     protected String CORE_CLASS = "v-treeview";
     protected String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
@@ -44,8 +45,9 @@ public class TreeView extends Dropdown
     protected String SHAPED_NODE_CLASS = "v-treeview-node--shaped";
     protected String ROUNDED_NODE_CLASS = "v-treeview-node--rounded";
     protected String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
-
-    protected TreeView treeViewPseudoCore;
+    protected String CHECKBOX_FULLY_MARKED_CLASS = "mdi-checkbox-marked";
+    protected String CHECKBOX_PARTLY_MARKED_CLASS = "mdi-minus-box";
+    protected String CHECKBOX_NOT_MARKED_CLASS = "mdi-checkbox-blank-outline";
 
     @JDIAction("Check if '{name}' is a pseudo core node")
     public boolean isPseudoCore() {
@@ -64,7 +66,10 @@ public class TreeView extends Dropdown
 
     @JDIAction("Check if '{name}' is hoverable")
     public boolean isHoverable() {
-        return treeViewPseudoCore.core().hasClass(HOVERABLE_CORE_CLASS);
+        if (isPseudoCore()) {
+            return core().hasClass(HOVERABLE_CORE_CLASS);
+        }
+        return pseudoCore().hasClass(HOVERABLE_CORE_CLASS);
     }
 
     @JDIAction("Check if '{name}' is shaped")
@@ -75,6 +80,21 @@ public class TreeView extends Dropdown
     @JDIAction("Check if '{name}' is rounded")
     public boolean isRounded() {
         return core().hasClass(ROUNDED_NODE_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is fully marked")
+    public boolean isFullyMarked() {
+        return checkbox().hasClass(CHECKBOX_FULLY_MARKED_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is partly marked")
+    public boolean isPartlyMarked() {
+        return checkbox().hasClass(CHECKBOX_PARTLY_MARKED_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is not marked")
+    public boolean isNotMarked() {
+        return checkbox().hasClass(CHECKBOX_NOT_MARKED_CLASS);
     }
 
     @Override
@@ -96,6 +116,11 @@ public class TreeView extends Dropdown
             return true;
         }
         return core().attr("aria-expanded").equalsIgnoreCase("true");
+    }
+
+    @JDIAction("Get main pseudo core TreeView from '{name}'")
+    public TreeView pseudoCore() {
+        return create(core().find(CORE_FROM_NODE_LOCATOR));
     }
 
     @JDIAction("Get root from '{name}'")
@@ -343,7 +368,9 @@ public class TreeView extends Dropdown
         created.TOGGLE_IN_ROOT_LOCATOR = TOGGLE_IN_ROOT_LOCATOR;
         created.CHECKBOX_IN_ROOT_LOCATOR = CHECKBOX_IN_ROOT_LOCATOR;
         created.CONTENT_IN_ROOT_LOCATOR = CONTENT_IN_ROOT_LOCATOR;
-        created.treeViewPseudoCore = treeViewPseudoCore;
+        created.CHECKBOX_FULLY_MARKED_CLASS = CHECKBOX_FULLY_MARKED_CLASS;
+        created.CHECKBOX_PARTLY_MARKED_CLASS = CHECKBOX_PARTLY_MARKED_CLASS;
+        created.CHECKBOX_NOT_MARKED_CLASS = CHECKBOX_NOT_MARKED_CLASS;
         return created;
     }
 
@@ -354,7 +381,6 @@ public class TreeView extends Dropdown
             initializeLocators(annotation);
         }
         setName(String.format("TreeView %s", field.getName()));
-        treeViewPseudoCore = this;
         autoClose = false;
         setupDone = true;
         thisParent = true;
@@ -381,6 +407,15 @@ public class TreeView extends Dropdown
         }
         if (!annotation.content().isEmpty()) {
             CONTENT_IN_ROOT_LOCATOR = annotation.content();
+        }
+        if (!annotation.full().isEmpty()) {
+            CHECKBOX_FULLY_MARKED_CLASS = annotation.full();
+        }
+        if (!annotation.part().isEmpty()) {
+            CHECKBOX_PARTLY_MARKED_CLASS = annotation.part();
+        }
+        if (!annotation.not().isEmpty()) {
+            CHECKBOX_NOT_MARKED_CLASS = annotation.not();
         }
     }
 

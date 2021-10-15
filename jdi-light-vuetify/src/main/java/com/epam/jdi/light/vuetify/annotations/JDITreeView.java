@@ -17,4 +17,7 @@ public @interface JDITreeView {
     @MarkupLocator String toggle() default "";
     @MarkupLocator String checkbox() default "";
     @MarkupLocator String content() default "";
+    @MarkupLocator String full() default "";
+    @MarkupLocator String part() default "";
+    @MarkupLocator String not() default "";
 }

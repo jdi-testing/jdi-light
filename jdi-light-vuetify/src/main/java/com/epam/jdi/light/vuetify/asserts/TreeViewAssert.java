@@ -28,39 +28,78 @@ public class TreeViewAssert extends DropdownAssert {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is a pseudo core node")
+    @JDIAction("Assert that '{name}' is a leaf")
     public TreeViewAssert leaf() {
         jdiAssert(element().isLeaf() ? "leaf" : "not a leaf", Matchers.is("leaf"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is active")
-    public TreeViewAssert active() {
-        jdiAssert(element().isActive() ? "active" : "not active", Matchers.is("active"));
+    @JDIAction("Assert that '{name}' is hoverable is '{0}'")
+    public TreeViewAssert hoverable(boolean status) {
+        jdiAssert(
+                element().isHoverable() ? "hoverable" : "not hoverable",
+                status ? Matchers.is("hoverable") : Matchers.is("not hoverable")
+        );
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not active")
-    public TreeViewAssert notActive() {
-        jdiAssert(element().isActive() ? "active" : "not active", Matchers.is("not active"));
+    @JDIAction("Assert that '{name}' is shaped is '{0}'")
+    public TreeViewAssert shaped(boolean status) {
+        jdiAssert(
+                element().isShaped() ? "shaped" : "not shaped",
+                status ? Matchers.is("shaped") : Matchers.is("not shaped")
+        );
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is selected")
-    public TreeViewAssert selected() {
-        jdiAssert(element().isSelected() ? "selected" : "not selected", Matchers.is("selected"));
+    @JDIAction("Assert that '{name}' is rounded is '{0}'")
+    public TreeViewAssert rounded(boolean status) {
+        jdiAssert(
+                element().isRounded() ? "rounded" : "not rounded",
+                status ? Matchers.is("rounded") : Matchers.is("not rounded")
+        );
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not selected")
-    public TreeViewAssert notSelected() {
-        jdiAssert(element().isSelected() ? "selected" : "not selected", Matchers.is("not selected"));
+    @JDIAction("Assert that '{name}' is active is '{0}'")
+    public TreeViewAssert active(boolean status) {
+        jdiAssert(
+                element().isActive() ? "active" : "not active",
+                status ? Matchers.is("active") : Matchers.is("not active")
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is selected is '{0}'")
+    public TreeViewAssert selected(boolean status) {
+        jdiAssert(
+                element().isSelected() ? "selected" : "not selected",
+                status ? Matchers.is("selected") : Matchers.is("not selected")
+        );
         return this;
     }
 
     @JDIAction("Assert that '{name}' has checkbox is '{0}'")
     public TreeViewAssert checkbox(boolean status) {
         jdiAssert(element().checkbox().isExist(), Matchers.is(status));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is fully marked")
+    public TreeViewAssert fullyMarked() {
+        jdiAssert(element().isFullyMarked() ? "fully marked" : "not fully marked", Matchers.is("fully marked"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is partly marked")
+    public TreeViewAssert isPartlyMarked() {
+        jdiAssert(element().isPartlyMarked() ? "partly marked" : "not partly marked", Matchers.is("partly marked"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not marked")
+    public TreeViewAssert notMarked() {
+        jdiAssert(element().isNotMarked() ? "not marked" : "fully or partly marked", Matchers.is("not marked"));
         return this;
     }
 
@@ -127,5 +166,10 @@ public class TreeViewAssert extends DropdownAssert {
     public TreeViewAssert verify() {
         assertSoft();
         return is();
+    }
+
+    @Override
+    public TreeViewAssert and() {
+        return this;
     }
 }
