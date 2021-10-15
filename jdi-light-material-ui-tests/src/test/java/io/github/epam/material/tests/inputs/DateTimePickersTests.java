@@ -3,7 +3,6 @@ package io.github.epam.material.tests.inputs;
 import io.github.epam.TestsInit;
 import static org.hamcrest.Matchers.containsString;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.dateTimePickersPage;
