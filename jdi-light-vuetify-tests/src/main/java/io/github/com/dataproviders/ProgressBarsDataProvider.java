@@ -63,7 +63,8 @@ public class ProgressBarsDataProvider {
         return new Object[][] {
                 {1, PINK.value()},
                 {2, LIME.value()},
-                {3, GREEN.value()}
+                {3, GREEN.value()},
+                {4, BLUE_DARKEN_2.value()}
         };
     }
 
@@ -100,9 +101,9 @@ public class ProgressBarsDataProvider {
     @DataProvider(name = "defaultProgressBarsTestsDataProvider")
     public static Object[][] defaultProgressBarsTestsData() {
         return new Object[][] {
-                {1, LIGHT_BLUE.value()},
-                {2, LIGHT_GREEN_DARKEN_4.value()},
-                {3, LIME.value()}
+                {1, AMBER.value()},
+                {2, BLUE_GREY.value()},
+                {3, BLUE_DARKEN_2.value()}
         };
     }
 
