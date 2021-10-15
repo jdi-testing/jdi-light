@@ -26,7 +26,7 @@ public class PerfStatistic {
     private static boolean runPerformance() {
         if (runPerformance == null) {
             runPerformance = parseBoolean(getProperties("/../../target/classes/test.properties")
-                    .getProperty("run.performance"));
+                .getProperty("run.performance"));
         }
         return runPerformance;
     }
@@ -36,7 +36,6 @@ public class PerfStatistic {
         List<Long> seleniumStats = new ArrayList<>();
         List<Long> jsStats = new ArrayList<>();
         int executionCount = runPerformance() ? count : 1;
-        System.out.println("EXECUTION COUNT: " + executionCount);
         for (int i = 0; i < executionCount; i++) {
             System.out.println("RUN#"+ i);
             precondition.execute();
