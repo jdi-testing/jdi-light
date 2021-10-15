@@ -1,9 +1,10 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
@@ -50,25 +51,39 @@ public class TreeviewPage extends VuetifyPage {
     @JDITreeView(core = "#SelectionTypeTreeview .v-treeview")
     public static TreeView selectionTypeTreeView;
 
+    @UI("#SelectionTypeTreeview .v-select__slot input[id^='input']")
+    public static UIElement selectionTypeId;
+
+    @UI("#SelectionTypeTreeview .v-select__slot .v-icon")
+    public static Button selectionTypeExpander;
+
     @UI("#SelectionTypeTreeview .pa-6 > *")
-    public static WebList selectionTypeList;
+    public static WebList selectionTypeResult;
 
     @JDITreeView(core = "#ShapedTreeview.v-treeview")
     public static TreeView shapedTreeView;
 
     @JDITreeView(core = "#AppendLableTreeview.v-treeview")
-    public static TreeView appendLableTreeView;
+    public static TreeView appendLabelTreeView;
 
     @JDITreeView(core = "#SearchFilterTreeview .v-treeview")
     public static TreeView searchFilterTreeView;
 
-    @UI("#SearchFilterTreeview .v-input[1]")
-    public static TextField searchLine;
+    @UI("#SearchFilterTreeview .v-input .v-text-field__slot input")
+    public static UIElement searchLine;
 
-    @UI("#SearchFilterTreeview .v-input[2]")
+    @UI("#SearchFilterTreeview .v-input .v-input__append-inner button")
+    public static UIElement clearSearchLineButton;
+
+    @UI("#SearchFilterTreeview .v-input .v-input--selection-controls__input")
     public static Checkbox caseSensitiveSearch;
 
-    @JDITreeView(core = "#SelectableIconsTreeview .v-treeview")
+    @JDITreeView(
+            core = "#SelectableIconsTreeview .v-treeview",
+            full = "mdi-bookmark",
+            part = "mdi-bookmark-minus",
+            not = "mdi-bookmark-outline"
+    )
     public static TreeView selectableIconsTreeView;
 
     @UI("#SelectableIconsTreeview .v-chip__content")

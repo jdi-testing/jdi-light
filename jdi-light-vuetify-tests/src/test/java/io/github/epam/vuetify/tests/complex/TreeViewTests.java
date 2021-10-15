@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.elements.complex.TreeView;
 import com.epam.jdi.light.vuetify.elements.enums.Colors;
 import io.github.epam.TestsInit;
@@ -7,19 +8,23 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.*;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLACK_TRANSPARENT_087;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE_DARKEN_1;
 import static io.github.com.StaticSite.treeviewPage;
 import static io.github.com.pages.TreeviewPage.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
-import static org.testng.AssertJUnit.assertTrue;
-import static org.testng.AssertJUnit.fail;
+import static org.hamcrest.Matchers.hasSize;
 
 public class TreeViewTests extends TestsInit {
 
@@ -30,6 +35,7 @@ public class TreeViewTests extends TestsInit {
     }
 
     Map<String, List<String>> expectedTreeStructure;
+    Map<String, List<String>> expectedFileTreeStructure;
 
     @BeforeClass
     public void initData() {
@@ -44,6 +50,12 @@ public class TreeViewTests extends TestsInit {
         expectedTreeStructure.put("/Downloads :", asList("October : pdf", "November : pdf", "Tutorial : html"));
         expectedTreeStructure.put("/Videos :", asList("Tutorials :", "Intro : mov", "Conference introduction : avi"));
         expectedTreeStructure.put("/Videos :/Tutorials :", asList("Basic layouts : mp4", "Advanced techniques : mp4", "All about app : dir"));
+
+        expectedFileTreeStructure = new LinkedHashMap<>();
+        expectedFileTreeStructure.put("/", asList(".git", "node_modules", "public", ".gitignore",
+                "babel.config.js", "package.json", "README.md", "vue.config.js", "yarn.lock"));
+        expectedFileTreeStructure.put("/public", asList("static", "favicon.ico", "index.html"));
+        expectedFileTreeStructure.put("/public/static", asList("logo.png"));
     }
 
     @Test
@@ -207,37 +219,145 @@ public class TreeViewTests extends TestsInit {
 
     @Test(dataProvider = "selectableTreeViewWithColor")
     public void selectableTreeViewTest(TreeView treeView, Colors color) {
-        treeView.has().structure(expectedTreeStructure);
         treeView.is().recursive(checkedTree -> {
-            if (!checkedTree.isPseudoCore()) {
-                checkedTree.has().checkbox(true);
-                checkedTree.is().notMarked();
-                checkedTree.check();
-                checkedTree.is().fullyMarked();
-                checkedTree.checkbox().has().css("color", color.value());
-                treeView.assertThat().recursive(tree -> {
-                    if (!tree.isPseudoCore()) {
-                        if (tree.isNotMarked()) {
-                            return;
-                        }
-                        if (tree.isLeaf() && tree.isPartlyMarked()) {
-                            fail("Leaf node can't be partly marked" + tree.getText());
-                        }
-                        if (tree.isFullyMarked()) {
-                            tree.nodes().forEach(node -> node.is().fullyMarked().and().selected(true));
-                        } else if (tree.isPartlyMarked()) {
-                            assertTrue("Can't find any marked children in marked node",
-                                    tree.nodes()
-                                    .stream()
-                                    .anyMatch(child -> child.isPartlyMarked() || child.isFullyMarked())
-                            );
-                        }
-                    }
-                });
-                checkedTree.uncheck();
-                checkedTree.is().notMarked();
+            if (checkedTree.isPseudoCore()) {
+                return;
             }
+            checkedTree.has().checkbox(true);
+            checkedTree.is().notMarked();
+            checkedTree.check();
+            checkedTree.is().fullyMarked();
+            checkedTree.checkbox().has().css("color", color.value());
+            checkedTree.uncheck();
+            checkedTree.is().notMarked();
+        });
+        treeView.has().structure(expectedTreeStructure);
+    }
+
+    @Test
+    public void selectionTypeTreeViewTest() {
+        selectionTypeTreeView.assertThat().recursive(treeView -> {
+            if (treeView.isPseudoCore()) {
+                return;
+            }
+            treeView.has().checkbox(true);
+            treeView.check();
+            treeView.is().fullyMarked();
+            List<String> checked = new ArrayList<>();
+            treeView.is().recursive(child -> {
+                if (child.isLeaf() && child.isFullyMarked()) {
+                    checked.add(child.getText());
+                }
+            });
+            assertThat(checked, equalTo(selectionTypeResult.values()));
+            treeView.uncheck();
+        });
+
+        String id = selectionTypeId.attr("id").split("-")[1];
+        selectionTypeExpander.click();
+        WebList values = $$("#list-" + id + " .v-list-item");
+        values.get("independent").click();
+
+        selectionTypeTreeView.assertThat().recursive(treeView -> {
+            if (treeView.isPseudoCore()) {
+                return;
+            }
+            treeView.check();
+            assertThat(selectionTypeResult.values(), hasSize(1));
+            treeView.has().text(selectionTypeResult.values().get(0));
+            treeView.uncheck();
+        });
+        List<String> checked = new ArrayList<>();
+        selectionTypeTreeView.assertThat().recursive(treeView -> {
+            if (treeView.isPseudoCore()) {
+                return;
+            }
+            treeView.check();
+            treeView.is().selected(true);
+            checked.add(treeView.getText());
+        });
+        assertThat(checked, equalTo(selectionTypeResult.values()));
+    }
+
+    @Test
+    public void appendLabelTreeViewTest() {
+        appendLabelTreeView.has().structure(expectedFileTreeStructure);
+        appendLabelTreeView.get(".git").value().find(".v-icon")
+                .has().classValue(containsString("mdi-folder"));
+        appendLabelTreeView.get("node_modules").value().find(".v-icon")
+                .has().classValue(containsString("mdi-folder"));
+        appendLabelTreeView.get("public").value().find(".v-icon")
+                .has().classValue(containsString("mdi-folder-open"));
+        appendLabelTreeView.get(".gitignore").value().find(".v-icon")
+                .has().classValue(containsString("mdi-file-document-outline"));
+        appendLabelTreeView.get("babel.config.js").value().find(".v-icon")
+                .has().classValue(containsString("mdi-nodejs"));
+        appendLabelTreeView.get("package.json").value().find(".v-icon")
+                .has().classValue(containsString("mdi-code-json"));
+        appendLabelTreeView.get("README.md").value().find(".v-icon")
+                .has().classValue(containsString("mdi-language-markdown"));
+        appendLabelTreeView.get("vue.config.js").value().find(".v-icon")
+                .has().classValue(containsString("mdi-nodejs"));
+        appendLabelTreeView.get("yarn.lock").value().find(".v-icon")
+                .has().classValue(containsString("mdi-file-document-outline"));
+        appendLabelTreeView.get(".git").value().find(".v-icon")
+                .has().classValue(containsString("mdi-folder"));
+
+        TreeView publicTree = appendLabelTreeView.get("public");
+        publicTree.get("static").value().find(".v-icon")
+                .has().classValue(containsString("mdi-folder"));
+        publicTree.get("favicon.ico").value().find(".v-icon")
+                .has().classValue(containsString("mdi-file-image"));
+        publicTree.get("index.html").value().find(".v-icon")
+                .has().classValue(containsString("mdi-language-html5"));
+
+        TreeView staticTree = publicTree.get("static");
+        staticTree.get("logo.png").value().find(".v-icon")
+                .has().classValue(containsString("mdi-file-image"));
+    }
+
+    @Test
+    public void searchAndFilterTreeViewTest() {
+        TreeView vuetifyTree = searchFilterTreeView.get(1);
+
+        searchLine.input("Core team");
+        vuetifyTree.get("Core team").has().values("John", "Kael", "Nekosaur", "Jacek", "Andrew");
+        clearSearchLineButton.click();
+
+        searchLine.input("K");
+        vuetifyTree.has().values("Core team", "Administrators");
+        vuetifyTree.get("Core team").has().values("Kael", "Nekosaur", "Jacek");
+        vuetifyTree.get("Administrators").has().values("Mike");
+        clearSearchLineButton.click();
+
+        caseSensitiveSearch.check();
+        vuetifyTree.has().values("Core team");
+        vuetifyTree.get("Core team").has().values("Kael");
+    }
+
+    @Test
+    public void selectableIconsTreeViewTest() {
+        selectableIconsTreeView.is().recursive(treeView -> {
+            System.out.println("Current " + treeView.getText());
+            if (treeView.isPseudoCore()) {
+                return;
+            }
+            treeView.is().notMarked();
+            treeView.expand();
+            treeView.select();
+//            treeView.is().fullyMarked();
+//            List<String> checked = new ArrayList<>();
+//            treeView.assertThat().recursive(tree -> {
+//                 if (!tree.isLeaf()) {
+//                     return;
+//                 }
+//                 tree.is().fullyMarked();
+//                 checked.add(tree.getText());
+//            });
+//            assertThat(checked, equalTo(chips.values()));
+            treeView.uncheck();
         });
     }
+
 
 }
