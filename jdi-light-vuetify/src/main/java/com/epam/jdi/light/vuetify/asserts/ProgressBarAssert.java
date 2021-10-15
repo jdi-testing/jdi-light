@@ -78,4 +78,5 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         jdiAssert(element().hasStream(), Matchers.is(true));
         return this;
     }
+
 }
