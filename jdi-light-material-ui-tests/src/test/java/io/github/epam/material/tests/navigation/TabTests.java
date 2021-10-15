@@ -46,8 +46,6 @@ public class TabTests extends TestsInit {
         simpleTabs.get(3).click();
         simpleTabsContent.get(3).is().text(itemList.get(3));
         simpleTabs.get(4).is().disabled();
-        simpleTabs.get(5).click();
-        simpleTabsContent.get(5).is().text(itemList.get(5));
     }
 
     @Test
