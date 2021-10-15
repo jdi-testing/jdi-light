@@ -5,7 +5,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import io.github.com.pages.displaydata.AvatarPage;
 import io.github.com.pages.displaydata.BadgePage;
 import io.github.com.pages.displaydata.ChipsPage;
-import io.github.com.pages.displaydata.DividersPage;
+import io.github.com.pages.displaydata.InsetDividerPage;
+import io.github.com.pages.displaydata.VerticalDividerPage;
 import io.github.com.pages.displaydata.IconsPage;
 import io.github.com.pages.displaydata.ListPage;
 import io.github.com.pages.displaydata.MaterialIconPage;
@@ -150,12 +151,12 @@ public class StaticSite {
     public static CardPage cardPage;
 
     // data display
-    // divider
+    // dividers
     @Url("/inset_divider")
-    public static DividersPage insetDividersPage;
+    public static InsetDividerPage insetDividerPage;
 
     @Url("/vertical_divider")
-    public static DividersPage verticalDividerPage;
+    public static VerticalDividerPage verticalDividerPage;
 
     // feedback
     // dialog
@@ -290,7 +291,7 @@ public class StaticSite {
     public static LinkPage linkPage;
 
     // bottom navigation
-    @Url("/button_navigation")
+    @Url("/bottom_navigation")
     public static BottomNavigationPage bottomNavigationPage;
 
     // menu

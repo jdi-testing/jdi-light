@@ -6,7 +6,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.avatarPage;
-import static io.github.com.pages.displaydata.AvatarPage.*;
+import static io.github.com.pages.displaydata.AvatarPage.avatarsWithIcon;
+import static io.github.com.pages.displaydata.AvatarPage.avatarsWithPhoto;
+import static io.github.com.pages.displaydata.AvatarPage.avatarsWithText;
 
 /**
  * To see an example of Avatar web element please visit https://material-ui.com/ru/components/avatars/

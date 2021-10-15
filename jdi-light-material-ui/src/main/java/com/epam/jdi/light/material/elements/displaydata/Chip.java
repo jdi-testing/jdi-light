@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.annotations.JDIChip;
 import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
 import org.openqa.selenium.By;
@@ -19,35 +20,29 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * https://mui.com/components/chips/
  */
 
-public class Chip extends UIBaseElement<ChipAssert> implements ISetup {
+public class Chip extends UIBaseElement<ChipAssert> implements ISetup, HasClick {
 
     protected By chipLabel;
     protected By chipIcon;
     protected By chipDelete;
 
-    @JDIAction("Click {name}")
-    public void click() {
-        core().click();
-    }
-
-
     @JDIAction("Get chip {name} label")
     public UIElement getChipLabel() {
-        return core().find(chipLabel);
+        return find(chipLabel);
     }
 
     @JDIAction("Get chip {name} icon")
     public UIElement getChipIcon() {
-        return core().find(chipIcon);
+        return find(chipIcon);
     }
 
     @JDIAction("Click delete chip {name}")
     public void delete() {
-        core().find(chipDelete).click();
+        find(chipDelete).click();
     }
 
     public boolean isDeletable() {
-        return core().hasClass("MuiChip-deletable");
+        return hasClass("MuiChip-deletable");
     }
 
     @Override

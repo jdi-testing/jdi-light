@@ -240,7 +240,7 @@ public class ChipTests extends TestsInit {
 
     @Test
     public void chipArrayTest() {
-
+        chipArrayAngular.show();
         chipArrayAngular.is().displayed();
         chipArrayAngular.has().text("Angular");
         chipArrayAngular.is().clickable();

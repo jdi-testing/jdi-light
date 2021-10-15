@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.elements.inputs.TransferList;
+package com.epam.jdi.light.material.elements.inputs.transferlist;
 
 public class EnhancedTransferList extends TransferList {
 

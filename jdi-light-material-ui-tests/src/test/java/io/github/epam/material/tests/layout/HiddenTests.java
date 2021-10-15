@@ -5,6 +5,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -31,6 +32,10 @@ public class HiddenTests extends TestsInit {
     public void before() {
         hiddenPage.open();
         hiddenPage.isOpened();
+    }
+
+    @AfterMethod
+    public void after() {
         WebDriverFactory.getDriver().manage().window().maximize();
     }
 

@@ -21,8 +21,6 @@ public class BottomNavigationTests extends TestsInit {
         bottomNavigationPage.open();
         bottomNavigationPage.isOpened();
     }
-    //TODO change Section name to Bottom Navigation (from Button Navigation)
-    //TODO change Title name to Bottom Navigation (from Buttom Navigation)
 
     @Test
     public void defaultBottomNavigationTest(){

@@ -13,6 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
 
 /**
@@ -37,7 +38,7 @@ public class TextAreaAutoSizeTests extends TestsInit {
     public void emptyAreaHeightIncreasesTest() {
         initialHeight = emptyTextArea.getSize().height;
         emptyTextArea.setLines(FOUR_LINES);
-        assertThat(emptyTextArea.getSize().height, greaterThan(initialHeight));
+        assertThat(emptyTextArea.getSize().height, greaterThanOrEqualTo(initialHeight));
     }
 
     @Test

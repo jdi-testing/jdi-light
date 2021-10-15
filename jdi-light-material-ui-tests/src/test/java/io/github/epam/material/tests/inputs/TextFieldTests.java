@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.util.Random;
 
-import static com.epam.jdi.light.material.elements.utils.StringUtils.generateRandomString;
+import static io.github.epam.utils.StringUtils.generateRandomString;
 import static io.github.com.StaticSite.textFieldPage;
 
 

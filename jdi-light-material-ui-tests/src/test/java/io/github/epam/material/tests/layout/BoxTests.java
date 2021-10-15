@@ -44,8 +44,8 @@ public class BoxTests extends TestsInit {
         disabledBox.is().displayed();
         disabledBox.is().text("THIRD BUTTON");
         disabledBox.is().disabled();
+        String lastClickContentText = lastClickContent.getText();
         disabledBox.core().click(0, 0);
-        lastClickContent.is().text("You clicked Third button");
-
+        lastClickContent.is().text(lastClickContentText);
     }
 }

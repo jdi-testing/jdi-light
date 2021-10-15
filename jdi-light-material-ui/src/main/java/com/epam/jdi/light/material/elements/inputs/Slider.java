@@ -17,7 +17,7 @@ import static java.lang.Integer.parseInt;
 
 public class Slider extends UIBaseElement<SliderAssert> {
 
-  @JDIAction(value = "Get '{name}' value")
+  @JDIAction(value = "Get {name}'s value")
   public int value() {
     return getInteger("aria-valuenow", thumb().core(), 0);
   }
@@ -65,7 +65,6 @@ public class Slider extends UIBaseElement<SliderAssert> {
     double maxValue = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
     double pixelsInUnit = coreHeight / (maxValue - minValue);
     double yOffset = (value - minValue) * pixelsInUnit - trackHeight;
-//    int yOffset = getVerticalShiftInPixels(value);
     thumb().dragAndDropTo(0, -(int)Math.round(yOffset));
   }
 
@@ -80,13 +79,13 @@ public class Slider extends UIBaseElement<SliderAssert> {
     thumb().dragAndDropTo((int)Math.round(xOffset), 0);
   }
 
-  @JDIAction(value = "Move '{name}' carriage to right")
+  @JDIAction(value = "Move {name}'s carriage to right")
   public void moveRight() {
     thumb().click();
     thumb().sendKeys(Keys.ARROW_RIGHT);
   }
 
-  @JDIAction(value = "Move '{name}' carriage to left")
+  @JDIAction(value = "Move {name}'s carriage to left")
   public void moveLeft() {
     thumb().click();
     thumb().sendKeys(Keys.ARROW_LEFT);

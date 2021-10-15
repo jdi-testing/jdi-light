@@ -9,59 +9,59 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 public class ChipsPage extends WebPage {
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[1]"
+            root = "//h2[text()='Chip']/following-sibling::div/div[contains(@class,'MuiChip-root')][1]"
     )
     public static Chip basicChip;
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[2]"
+            root = "//h2[text()='Chip']/following-sibling::div/div[contains(@class,'MuiChip-root')][2]"
     )
     public static Chip basicDisabledChip;
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[3]"
+            root = "//h2[text()='Chip']/following-sibling::div/div[contains(@class,'MuiChip-root')][3]"
     )
     public static Chip basicClickableChip;
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[4]"
+            root = "//h2[text()='Chip']/following-sibling::div/div[contains(@class,'MuiChip-root')][4]"
     )
     public static Chip deletableBasicChip;
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[5]",
+            root = "//h2[text()='Chip']/following-sibling::div/div[contains(@class,'MuiChip-root')][5]",
             icon = ".MuiChip-icon"
     )
     public static Chip clickableDeletableBasicChip;
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[6]"
+            root = "//h2[text()='Chip']/following-sibling::div/div[contains(@class,'MuiChip-root')][6]"
     )
     public static Chip customDeleteIconBasicChip;
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[7]"
+            root = "//h2[text()='Chip']/following-sibling::div/a[contains(@class,'MuiChip-root')]"
     )
     public static Chip clickableLinkBasicChip;
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[8]"
+            root = "//h2[text()='Chip']/following-sibling::div/div[contains(@class,'MuiChip-root')][7]"
     )
     public static Chip primaryClickableBasicChip;
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[9]",
+            root = "//h2[text()='Chip']/following-sibling::div/div[contains(@class,'MuiChip-root')][8]",
             icon = ".MuiChip-icon"
     )
     public static Chip primaryClickableWithFaceBasicChip;
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[10]"
+            root = "//h2[text()='Chip']/following-sibling::div/div[contains(@class,'MuiChip-root')][9]"
     )
     public static Chip deletablePrimaryBasicChip;
 
     @JDIChip(
-            root = "//h2[text() = 'Chip']/following-sibling::div[1]/*[11]",
+            root = "//h2[text()='Chip']/following-sibling::div/div[contains(@class,'MuiChip-root')][10]",
             icon = ".MuiChip-icon"
     )
     public static Chip deletableSecondaryBasicChip;
