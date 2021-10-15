@@ -13,10 +13,7 @@ import static io.github.com.pages.inputs.DateTimePickersPage.dialogPicker;
 import static io.github.com.pages.inputs.DateTimePickersPage.inlineDatePicker;
 import static io.github.com.pages.inputs.DateTimePickersPage.timePicker;
 
-/**
- * To see an example of Material Date and Time pickers
- * please visit https://material.io/components/date-pickers#usage.
- */
+
 
 public class DateTimePickersTests extends TestsInit {
 
@@ -28,7 +25,7 @@ public class DateTimePickersTests extends TestsInit {
     @Test
     public void datePickerInlineTest() {
         inlineDatePicker.has().title("Date picker inline");
-//
+
         inlineDatePicker.input("10/10/2022");
         inlineDatePicker.has().text("10/10/2022");
         inlineDatePicker.selectDate("22");

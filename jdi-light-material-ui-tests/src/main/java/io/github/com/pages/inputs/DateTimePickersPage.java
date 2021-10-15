@@ -4,12 +4,6 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.DateTimePicker;
 
-/**
- * To see an example of Material Date and Time pickers
- * please visit https://material.io/components/date-pickers#usage.
- */
-
-
 public class DateTimePickersPage extends WebPage {
 
     @UI("//*[@id = 'date-picker-inline-label']/parent::div")

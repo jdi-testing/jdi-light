@@ -7,6 +7,11 @@ import com.epam.jdi.light.elements.complex.WebList;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import com.epam.jdi.light.material.asserts.inputs.DateTimePickerAssert;
 
+/**
+ * To see an example of Material Date and Time pickers
+ * please visit https://material.io/components/date-pickers#usage.
+ */
+
 public class DateTimePicker extends UIBaseElement<DateTimePickerAssert> {
 
     @Override
