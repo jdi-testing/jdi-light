@@ -49,6 +49,8 @@ public class TreeView extends Dropdown
     protected String CHECKBOX_PARTLY_MARKED_CLASS = "mdi-minus-box";
     protected String CHECKBOX_NOT_MARKED_CLASS = "mdi-checkbox-blank-outline";
 
+    protected String delimiter = "/";
+
     @JDIAction("Check if '{name}' is a pseudo core node")
     public boolean isPseudoCore() {
         return core().hasClass(CORE_CLASS);
@@ -327,8 +329,6 @@ public class TreeView extends Dropdown
         consumer.accept(this);
         nodes().forEach(treeView -> treeView.walk(consumer));
     }
-
-    protected String delimiter = "/";
 
     @JDIAction("Get structure from '{name}'")
     public Map<String, List<String>> structure() {

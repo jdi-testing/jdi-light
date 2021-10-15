@@ -28,14 +28,14 @@ import static org.hamcrest.Matchers.hasSize;
 
 public class TreeViewTests extends TestsInit {
 
+    Map<String, List<String>> expectedTreeStructure;
+    Map<String, List<String>> expectedFileTreeStructure;
+
     @BeforeClass
     public void before() {
         treeviewPage.open();
         treeviewPage.checkOpened();
     }
-
-    Map<String, List<String>> expectedTreeStructure;
-    Map<String, List<String>> expectedFileTreeStructure;
 
     @BeforeClass
     public void initData() {
