@@ -338,23 +338,22 @@ public class TreeViewTests extends TestsInit {
     @Test
     public void selectableIconsTreeViewTest() {
         selectableIconsTreeView.is().recursive(treeView -> {
-            System.out.println("Current " + treeView.getText());
             if (treeView.isPseudoCore()) {
                 return;
             }
             treeView.is().notMarked();
             treeView.expand();
             treeView.select();
-//            treeView.is().fullyMarked();
-//            List<String> checked = new ArrayList<>();
-//            treeView.assertThat().recursive(tree -> {
-//                 if (!tree.isLeaf()) {
-//                     return;
-//                 }
-//                 tree.is().fullyMarked();
-//                 checked.add(tree.getText());
-//            });
-//            assertThat(checked, equalTo(chips.values()));
+            treeView.is().fullyMarked();
+            List<String> checked = new ArrayList<>();
+            treeView.assertThat().recursive(tree -> {
+                 if (!tree.isLeaf()) {
+                     return;
+                 }
+                 tree.is().fullyMarked();
+                 checked.add(tree.getText());
+            });
+            assertThat(checked, equalTo(chips.values()));
             treeView.uncheck();
         });
     }
