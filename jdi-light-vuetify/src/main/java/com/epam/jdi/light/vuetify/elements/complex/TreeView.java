@@ -29,9 +29,9 @@ import static com.epam.jdi.tools.PrintUtils.print;
 public class TreeView extends Dropdown
         implements IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeView> {
 
-    protected String NODES_IN_CORE_LOCATOR = ".v-treeview > .v-treeview-node";
+    protected String NODES_IN_CORE_LOCATOR = "./*[contains(@class, 'v-treeview-node')]";
     protected String NODES_IN_NODE_LOCATOR = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
-    protected String ROOT_IN_NODE_LOCATOR = ".v-treeview-node > .v-treeview-node__root";
+    protected String ROOT_IN_NODE_LOCATOR = "./*[contains(@class, 'v-treeview-node')]";
     protected String TOGGLE_IN_ROOT_LOCATOR = ".v-treeview-node__toggle";
     protected String CHECKBOX_IN_ROOT_LOCATOR = ".v-treeview-node__checkbox";
     protected String CONTENT_IN_ROOT_LOCATOR = ".v-treeview-node__content";
