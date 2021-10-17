@@ -11,7 +11,7 @@ public class OverlaysPage extends VuetifyPage {
     public static Overlay absoluteOverlay;
 
     @UI("#AbsoluteOverlay button")
-    public static UIElement absoluteOverlayButton;
+    public static Button absoluteOverlayButton;
 
     @UI("#OpacityOverlay .v-overlay")
     public static Overlay opacityOverlay;
@@ -24,5 +24,14 @@ public class OverlaysPage extends VuetifyPage {
 
     @UI("#ZIndexOverlay button")
     public static Button zIndexOverlayButton;
+
+    @UI("#AdvancedOverlay")
+    public static UIElement advancedOverlayCard;
+
+    @UI("#LoaderOverlay .v-overlay")
+    public static Overlay loaderOverlay;
+
+    @UI("#LoaderOverlay button")
+    public static Button loaderOverlayButton;
 
 }

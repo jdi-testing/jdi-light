@@ -39,18 +39,6 @@ public class OverlayAssert extends UIAssert<OverlayAssert, Overlay> {
         return this;
     }
 
-    @JDIAction("Check that '{name}' background-color is {0}")
-    public OverlayAssert backgroundColor(String backgroundColor) {
-        jdiAssert(element().backgroundColor(), Matchers.is(backgroundColor));
-        return this;
-    }
-
-    @JDIAction("Check that '{name}' border-color is {0}")
-    public OverlayAssert borderColor(String borderColor) {
-        jdiAssert(element().borderColor(), Matchers.is(borderColor));
-        return this;
-    }
-
     @JDIAction("Check that '{name}' zIndex is {0}")
     public OverlayAssert zIndex(int zIndex) {
         jdiAssert(element().zIndex(), Matchers.is(zIndex));

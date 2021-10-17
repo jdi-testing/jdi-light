@@ -1,17 +1,20 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.IClickable;
-import com.epam.jdi.tools.map.MapArray;
+import com.epam.jdi.light.vuetify.elements.common.Overlay;
 import io.github.epam.TestsInit;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.stream.IntStream;
-
 import static io.github.com.StaticSite.overlaysPage;
-import static io.github.com.pages.OverlaysPage.*;
+import static io.github.com.pages.OverlaysPage.absoluteOverlay;
+import static io.github.com.pages.OverlaysPage.absoluteOverlayButton;
+import static io.github.com.pages.OverlaysPage.advancedOverlayCard;
+import static io.github.com.pages.OverlaysPage.loaderOverlay;
+import static io.github.com.pages.OverlaysPage.loaderOverlayButton;
+import static io.github.com.pages.OverlaysPage.opacityOverlay;
+import static io.github.com.pages.OverlaysPage.opacityOverlayButton;
+import static io.github.com.pages.OverlaysPage.zIndexOverlay;
+import static io.github.com.pages.OverlaysPage.zIndexOverlayButton;
 
 public class OverlayTests extends TestsInit {
 
@@ -22,7 +25,7 @@ public class OverlayTests extends TestsInit {
     }
 
     @Test
-    public void absoluteOverlayTest(){
+    public void absoluteOverlayTest() {
         absoluteOverlay.is().absolute();
         absoluteOverlay.is().notActive();
         absoluteOverlay.is().opacity(0);
@@ -38,7 +41,7 @@ public class OverlayTests extends TestsInit {
     }
 
     @Test
-    public void opacityOverlayTest(){
+    public void opacityOverlayTest() {
         opacityOverlay.is().opacity(0);
         opacityOverlayButton.click();
         opacityOverlay.is().opacity(1);
@@ -47,19 +50,10 @@ public class OverlayTests extends TestsInit {
     }
 
     @Test
-    public void notAbsoluteOverlayTest(){
-        Assert.assertTrue(absoluteOverlayButton.isClickable());
-        Assert.assertTrue(opacityOverlayButton.core().isClickable());
-        zIndexOverlay.is().notAbsolute();
-        zIndexOverlayButton.click();
-        zIndexOverlay.is().active();
-        Assert.assertFalse(absoluteOverlayButton.isClickable());
-    }
-
-    @Test
-    public void zIndexOverlayTest(){
+    public void zIndexOverlayTest() {
         zIndexOverlay.is().zIndex(0);
         zIndexOverlay.is().opacity(0);
+        zIndexOverlay.is().notAbsolute();
 
         absoluteOverlay.is().zIndex(5);
         absoluteOverlayButton.click();
@@ -72,6 +66,29 @@ public class OverlayTests extends TestsInit {
         absoluteOverlay.is().notActive();
 
         zIndexOverlay.content().find("button").click();
-        absoluteOverlay.is().active();
+        zIndexOverlay.is().notActive();
+    }
+
+    @Test
+    public void advancedOverlayTest() {
+        advancedOverlayCard.finds(".v-overlay").is().empty();
+        advancedOverlayCard.hover();
+        advancedOverlayCard.finds(".v-overlay").is().notEmpty();
+        Overlay advancedOverlay = new Overlay(advancedOverlayCard.find(".v-overlay"));
+        advancedOverlay.is().active();
+        advancedOverlay.is().absolute();
+        advancedOverlay.is().contentExist();
+        zIndexOverlayButton.hover();
+        advancedOverlayCard.finds(".v-overlay").is().empty();
+    }
+
+    @Test
+    public void loaderOverlayTest() {
+        loaderOverlay.is().contentNotExist();
+        loaderOverlayButton.click();
+        loaderOverlay.is().active();
+        loaderOverlay.is().contentExist();
+        loaderOverlay.content().firstChild().is().cssClass("v-progress-circular");
+        loaderOverlay.is().contentNotExist();
     }
 }

@@ -3,25 +3,27 @@ package com.epam.jdi.light.vuetify.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.OverlayAssert;
-import com.epam.jdi.light.vuetify.asserts.SubheaderAssert;
-import com.epam.jdi.tools.map.MapArray;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+
 /**
  * To see an example of Subheader web element please visit https://vuetifyjs.com/en/components/overlays
  */
-public class Overlay extends UIBaseElement<OverlayAssert>  {
+public class Overlay extends UIBaseElement<OverlayAssert> {
 
     protected String SCRIM_LOCATOR = ".v-overlay__scrim";
     protected String CONTENT_LOCATOR = ".v-overlay__content";
     protected double DEFAULT_OPACITY = 0.46;
     protected int DEFAULT_Z_INDEX = 5;
+
+    Overlay() {
+    }
+
+    public Overlay(UIElement element) {
+        core().setCore(element);
+    }
 
     @JDIAction("Get content '{name}'")
     public UIElement content() {
@@ -38,7 +40,7 @@ public class Overlay extends UIBaseElement<OverlayAssert>  {
 
     @JDIAction("Get '{name}' z-index")
     public int zIndex() {
-        if(!core().getAttribute("style").replaceAll("^\\D*?(\\d+).*$", "$1").isEmpty())
+        if (!core().getAttribute("style").replaceAll("^\\D*?(\\d+).*$", "$1").isEmpty())
             return Integer.parseInt(core().getAttribute("style").replaceAll("^\\D*?(\\d+).*$", "$1"));
         else
             return DEFAULT_Z_INDEX;
@@ -50,16 +52,6 @@ public class Overlay extends UIBaseElement<OverlayAssert>  {
             return Double.parseDouble($(SCRIM_LOCATOR, core()).css("opacity"));
         else
             return DEFAULT_OPACITY;
-    }
-
-    @JDIAction("Get '{name}' background-color")
-    public String backgroundColor() {
-        return $(SCRIM_LOCATOR, core()).css("background-color");
-    }
-
-    @JDIAction("Get '{name}' border-color")
-    public String borderColor() {
-        return $(SCRIM_LOCATOR, core()).css("border-color");
     }
 
     @Override
