@@ -12,9 +12,7 @@ import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.asserts.TreeViewAssert;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,7 +170,7 @@ public class TreeView extends Dropdown
             return core().finds(NODES_IN_CORE_LOCATOR);
         }
         if (isLeaf()) {
-            return WebList.newList(new ArrayList<>());
+            return new WebList();
         }
         expand();
         return core().finds(NODES_IN_NODE_LOCATOR);
@@ -180,9 +178,6 @@ public class TreeView extends Dropdown
 
     @JDIAction("Get list of nodes from '{name}'")
     public List<TreeView> nodes() {
-        if (isLeaf()) {
-            return Collections.emptyList();
-        }
         return list().stream()
                 .map(this::create)
                 .collect(Collectors.toList());
@@ -300,24 +295,6 @@ public class TreeView extends Dropdown
                 .collect(Collectors.toList());
     }
 
-//    @Override
-//    @JDIAction(level = DEBUG, timeout = 0)
-//    public void expand() {
-//        if (!isExpanded()) {
-//            System.out.println("EXPAND " + getText());
-//            toggle();
-//        }
-//    }
-//
-//    @Override
-//    @JDIAction(level = DEBUG, timeout = 0)
-//    public void close() {
-//        if (isExpanded()) {
-//            System.out.println("CLOSE " + getText());
-//            toggle();
-//        }
-//    }
-
     @Override
     public List<TreeView> elements(int minAmount) {
         if (minAmount > size())
@@ -351,9 +328,9 @@ public class TreeView extends Dropdown
                 .collect(Collectors.toList());
     }
 
-    public void walk(Consumer<? super TreeView> consumer) {
-        consumer.accept(this);
-        nodes().forEach(treeView -> treeView.walk(consumer));
+    public void walk(Consumer<? super TreeView> visitor) {
+        visitor.accept(this);
+        nodes().forEach(treeView -> treeView.walk(visitor));
     }
 
     @JDIAction("Get structure from '{name}'")
