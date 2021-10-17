@@ -183,7 +183,9 @@ public class TreeView extends Dropdown
         if (isLeaf()) {
             return Collections.emptyList();
         }
-        return list().map(this::create);
+        return list().stream()
+                .map(this::create)
+                .collect(Collectors.toList());
     }
 
     @Override

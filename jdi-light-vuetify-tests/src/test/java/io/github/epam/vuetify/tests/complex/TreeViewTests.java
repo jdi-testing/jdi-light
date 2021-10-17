@@ -62,7 +62,7 @@ public class TreeViewTests extends TestsInit {
     public void activatableTreeViewTest() {
         activatableTreeView.is().pseudoCore();
         activatableTreeView.has().structure(expectedTreeStructure);
-        activatableTreeView.shouldBe().recursive(treeView -> {
+        activatableTreeView.walk(treeView -> {
             if (!treeView.isLeaf()) {
                 treeView.is().expanded();
             }
@@ -85,7 +85,7 @@ public class TreeViewTests extends TestsInit {
     public void colorTreeViewTest() {
         colorTreeView.is().pseudoCore();
         colorTreeView.has().structure(expectedTreeStructure);
-        colorTreeView.shouldBe().recursive(treeView -> {
+        colorTreeView.walk(treeView -> {
             if (!treeView.isLeaf() && !treeView.isPseudoCore()) {
                 String child = treeView.nodes()
                         .stream()
@@ -110,7 +110,7 @@ public class TreeViewTests extends TestsInit {
     @Test
     public void denseTreeViewTest() {
         denseTreeView.has().structure(expectedTreeStructure);
-        denseTreeView.shouldBe().recursive(treeView -> {
+        denseTreeView.walk(treeView -> {
             if (!treeView.isPseudoCore()) {
                 treeView.activate();
                 treeView.is().active(false);
@@ -127,7 +127,7 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void itemDisabledTreeViewTest() {
-        itemDisabledTreeView.assertThat().recursive(treeView -> {
+        itemDisabledTreeView.walk(treeView -> {
             if (!treeView.isPseudoCore()) {
                 treeView.has().checkbox(true);
                 treeView.is().selected(false);
@@ -135,16 +135,16 @@ public class TreeViewTests extends TestsInit {
         });
         itemDisabledTreeView.has().enabled(equalTo(asList("Documents :", "Downloads :", "Videos :")));
         itemDisabledTreeView.has().disabled(equalTo(asList("Applications :")));
-        itemDisabledTreeView.get("Applications :").is().recursive(treeView -> {
+        itemDisabledTreeView.get("Applications :").walk(treeView -> {
             treeView.is().disabled();
         });
-        itemDisabledTreeView.get("Documents :").get("vuetify :").get("src :").is().recursive(treeView -> {
+        itemDisabledTreeView.get("Documents :").get("vuetify :").get("src :").walk(treeView -> {
             treeView.is().disabled();
         });
         itemDisabledTreeView.get("Downloads :")
                 .has().disabled("October : pdf", "November : pdf", "Tutorial : html");
         itemDisabledTreeView.select("Documents :", "Downloads :");
-        itemDisabledTreeView.get("Documents :").get("material2 :").get("src :").is().recursive(treeView -> {
+        itemDisabledTreeView.get("Documents :").get("material2 :").get("src :").walk(treeView -> {
             treeView.is().selected(true);
         });
         itemDisabledTreeView.get("Documents :").get("vuetify :").get("src :")
@@ -173,7 +173,7 @@ public class TreeViewTests extends TestsInit {
 //        loadChildrenTreeView.get("Users").get(5).activate();
 //        loadChildrenTreeView.get("Users").get(6).activate();
 //        loadChildrenTreeView.get("Users").get(7).activate();
-        loadChildrenTreeView.is().recursive(treeView -> {
+        loadChildrenTreeView.walk(treeView -> {
             if (treeView.isLeaf()) {
 //                System.out.println(treeView.getText());
                 treeView.activate();
@@ -191,7 +191,7 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void openAllTreeViewTest() {
-        openAllTreeView.assertThat().recursive(treeView -> {
+        openAllTreeView.walk(treeView -> {
             if (!treeView.isLeaf()) {
                 treeView.is().expanded();
             }
@@ -201,7 +201,7 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void roundedTreeViewTest() {
-        roundedTreeView.assertThat().recursive(treeView -> {
+        roundedTreeView.walk(treeView -> {
             if (!treeView.isPseudoCore()) {
                 treeView.is().rounded(true);
             }
@@ -211,7 +211,7 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void shapedTreeViewTest() {
-        shapedTreeView.assertThat().recursive(treeView -> {
+        shapedTreeView.walk(treeView -> {
             if (!treeView.isPseudoCore()) {
                 treeView.is().shaped(true);
             }
@@ -246,7 +246,7 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void selectionTypeTreeViewTest() {
-        selectionTypeTreeView.assertThat().recursive(treeView -> {
+        selectionTypeTreeView.walk(treeView -> {
             if (treeView.isPseudoCore()) {
                 return;
             }
@@ -254,7 +254,7 @@ public class TreeViewTests extends TestsInit {
             treeView.check();
             treeView.is().fullyMarked();
             List<String> checked = new ArrayList<>();
-            treeView.is().recursive(child -> {
+            treeView.walk(child -> {
                 if (child.isLeaf() && child.isFullyMarked()) {
                     checked.add(child.getText());
                 }
@@ -268,7 +268,7 @@ public class TreeViewTests extends TestsInit {
         WebList values = $$("#list-" + id + " .v-list-item");
         values.get("independent").click();
 
-        selectionTypeTreeView.assertThat().recursive(treeView -> {
+        selectionTypeTreeView.walk(treeView -> {
             if (treeView.isPseudoCore()) {
                 return;
             }
@@ -278,7 +278,7 @@ public class TreeViewTests extends TestsInit {
             treeView.uncheck();
         });
         List<String> checked = new ArrayList<>();
-        selectionTypeTreeView.assertThat().recursive(treeView -> {
+        selectionTypeTreeView.walk(treeView -> {
             if (treeView.isPseudoCore()) {
                 return;
             }
@@ -347,7 +347,7 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void selectableIconsTreeViewTest() {
-        selectableIconsTreeView.is().recursive(treeView -> {
+        selectableIconsTreeView.walk(treeView -> {
             if (treeView.isPseudoCore()) {
                 return;
             }
@@ -362,7 +362,7 @@ public class TreeViewTests extends TestsInit {
             treeView.select();
             treeView.is().fullyMarked();
             List<String> checked = new ArrayList<>();
-            treeView.assertThat().recursive(tree -> {
+            treeView.walk(tree -> {
                  if (!tree.isLeaf()) {
                      return;
                  }

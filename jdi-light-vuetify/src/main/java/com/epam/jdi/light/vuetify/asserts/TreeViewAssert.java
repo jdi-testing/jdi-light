@@ -125,12 +125,6 @@ public class TreeViewAssert extends DropdownAssert {
         return this;
     }
 
-    @JDIAction("Assert that every node is match consumer")
-    public TreeViewAssert recursive(Consumer<? super TreeView> assertion) {
-        element().walk(assertion);
-        return this;
-    }
-
     @Override
     public TreeViewAssert is() {
         return this;
