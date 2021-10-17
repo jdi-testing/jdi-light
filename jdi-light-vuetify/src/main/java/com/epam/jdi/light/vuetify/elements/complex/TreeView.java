@@ -12,6 +12,7 @@ import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.asserts.TreeViewAssert;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -127,6 +128,9 @@ public class TreeView extends Dropdown
 
     @JDIAction("Get root from '{name}'")
     public UIElement root() {
+        if (isPseudoCore()) {
+            return null;
+        }
         return core().find(ROOT_IN_NODE_LOCATOR).setName("root");
     }
 
@@ -162,19 +166,21 @@ public class TreeView extends Dropdown
     }
 
     @Override
+    @JDIAction("Get list from '{name}'")
     public WebList list() {
         if (isPseudoCore()) {
             return core().finds(NODES_IN_CORE_LOCATOR);
         }
-        if (!isLeaf()) {
-            expand();
+        if (isLeaf()) {
+            return WebList.newList(new ArrayList<>());
         }
+        expand();
         return core().finds(NODES_IN_NODE_LOCATOR);
     }
 
     @JDIAction("Get list of nodes from '{name}'")
     public List<TreeView> nodes() {
-        if (isEmpty()) {
+        if (isLeaf()) {
             return Collections.emptyList();
         }
         return list().map(this::create);
@@ -291,6 +297,24 @@ public class TreeView extends Dropdown
                 .map(TreeView::getText)
                 .collect(Collectors.toList());
     }
+
+//    @Override
+//    @JDIAction(level = DEBUG, timeout = 0)
+//    public void expand() {
+//        if (!isExpanded()) {
+//            System.out.println("EXPAND " + getText());
+//            toggle();
+//        }
+//    }
+//
+//    @Override
+//    @JDIAction(level = DEBUG, timeout = 0)
+//    public void close() {
+//        if (isExpanded()) {
+//            System.out.println("CLOSE " + getText());
+//            toggle();
+//        }
+//    }
 
     @Override
     public List<TreeView> elements(int minAmount) {

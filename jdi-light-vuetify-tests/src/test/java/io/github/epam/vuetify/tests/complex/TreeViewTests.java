@@ -158,23 +158,33 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void loadChildrenTreeViewTest() {
-        loadChildrenTreeView.has().values(equalTo(asList("Users")));
+        loadChildrenTreeView.is().expanded();
+//        loadChildrenTreeView.has().values(equalTo(asList("Users")));
+        loadChildrenTreeView.get("Users").expand();
         loadChildrenTreeView.get("Users").has().values(equalTo(asList(
                 "Leanne Graham", "Ervin Howell", "Clementine Bauch", "Patricia Lebsack",
                 "Chelsey Dietrich", "Mrs. Dennis Schulist", "Kurtis Weissnat",
                 "Nicholas Runolfsdottir V", "Glenna Reichert", "Clementina DuBuque"
         )));
+//        loadChildrenTreeView.get("Users").get(1).activate();
+//        loadChildrenTreeView.get("Users").get(2).activate();
+//        loadChildrenTreeView.get("Users").get(3).activate();
+//        loadChildrenTreeView.get("Users").get(4).activate();
+//        loadChildrenTreeView.get("Users").get(5).activate();
+//        loadChildrenTreeView.get("Users").get(6).activate();
+//        loadChildrenTreeView.get("Users").get(7).activate();
         loadChildrenTreeView.is().recursive(treeView -> {
             if (treeView.isLeaf()) {
+//                System.out.println(treeView.getText());
                 treeView.activate();
                 treeView.is().active(true);
+                System.out.println(treeView.value().find(".v-icon").classes());
                 treeView.value().find(".v-icon").has().classValue(containsString("mdi-account"));
                 treeView.value().has().css("color", ORANGE_DARKEN_1.value());
                 card.content().find("h3").has().text(equalTo(treeView.getText()));
                 treeView.deactivate();
                 treeView.is().active(false);
-                selectText.is().displayed()
-                        .has().text("Select a User");
+
             }
         });
     }
@@ -219,7 +229,7 @@ public class TreeViewTests extends TestsInit {
 
     @Test(dataProvider = "selectableTreeViewWithColor")
     public void selectableTreeViewTest(TreeView treeView, Colors color) {
-        treeView.is().recursive(checkedTree -> {
+        treeView.walk(checkedTree -> {
             if (checkedTree.isPseudoCore()) {
                 return;
             }
@@ -341,6 +351,12 @@ public class TreeViewTests extends TestsInit {
             if (treeView.isPseudoCore()) {
                 return;
             }
+            if (treeView.isLeaf()) {
+                treeView.root().highlight();
+                return;
+            }
+            treeView.root().highlight();
+            System.out.println(treeView.getText());
             treeView.is().notMarked();
             treeView.expand();
             treeView.select();
@@ -355,6 +371,7 @@ public class TreeViewTests extends TestsInit {
             });
             assertThat(checked, equalTo(chips.values()));
             treeView.uncheck();
+            treeView.root().highlight();
         });
     }
 
