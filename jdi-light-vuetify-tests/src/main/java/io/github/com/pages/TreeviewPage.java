@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
@@ -31,10 +30,7 @@ public class TreeviewPage extends VuetifyPage {
     public static TreeView loadChildrenTreeView;
 
     @UI("#LoadChildrenTreeview .v-card")
-    public static Card card;
-
-    @UI("#LoadChildrenTreeview .d-flex .text-h6")
-    public static Text selectText;
+    public static Card userCard;
 
     @JDITreeView(core = "#OpenAllTreeview.v-treeview")
     public static TreeView openAllTreeView;
@@ -51,11 +47,11 @@ public class TreeviewPage extends VuetifyPage {
     @JDITreeView(core = "#SelectionTypeTreeview .v-treeview")
     public static TreeView selectionTypeTreeView;
 
-    @UI("#SelectionTypeTreeview .v-select__slot input[id^='input']")
+    @UI("#SelectionTypeTreeview .v-input__control input[id^='input']")
     public static UIElement selectionTypeId;
 
-    @UI("#SelectionTypeTreeview .v-select__slot .v-icon")
-    public static Button selectionTypeExpander;
+    @UI("#SelectionTypeTreeview .v-input__control .v-icon")
+    public static UIElement selectionTypeExpander;
 
     @UI("#SelectionTypeTreeview .pa-6 > *")
     public static WebList selectionTypeResult;
@@ -73,10 +69,10 @@ public class TreeviewPage extends VuetifyPage {
     public static UIElement searchLine;
 
     @UI("#SearchFilterTreeview .v-input .v-input__append-inner button")
-    public static UIElement clearSearchLineButton;
+    public static UIElement clearSearchButton;
 
     @UI("#SearchFilterTreeview .v-input .v-input--selection-controls__input")
-    public static Checkbox caseSensitiveSearch;
+    public static Checkbox caseSensitiveSearchCheckbox;
 
     @JDITreeView(
             core = "#SelectableIconsTreeview .v-treeview",
@@ -88,4 +84,7 @@ public class TreeviewPage extends VuetifyPage {
 
     @UI("#SelectableIconsTreeview .v-chip__content")
     public static WebList chips;
+
+    @UI("//*[contains(@id, 'SelectableIconsTreeview')]//span[contains(text(), 'Reset')]")
+    public static Button reset;
 }
