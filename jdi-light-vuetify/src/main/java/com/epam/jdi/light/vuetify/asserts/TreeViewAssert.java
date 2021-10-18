@@ -8,11 +8,10 @@ import org.hamcrest.Matchers;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.containsInAnyOrder;
+import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
 
 public class TreeViewAssert extends DropdownAssert {
@@ -103,25 +102,37 @@ public class TreeViewAssert extends DropdownAssert {
         return this;
     }
 
-    @JDIAction("Assert that {0} values checked in '{name}'")
+    @JDIAction("Assert that '{0}' values checked in '{name}'")
     public TreeViewAssert checked(Matcher<? super List<String>> values) {
         jdiAssert(element().checked(), values);
         return this;
     }
 
-    @JDIAction("Assert that '{0}' values checked in '{name}'")
+    @JDIAction("Assert that only '{0}' values checked in '{name}'")
     public TreeViewAssert checked(String... values) {
-        return checked(containsInAnyOrder(values));
+        return checked(equalTo(asList(values)));
     }
 
-    @JDIAction("Assert that '{0}' values checked in '{name}'")
+    @JDIAction("Assert that only '{0}' values checked in '{name}'")
     public TreeViewAssert checked(List<String> values) {
-        return checked(containsInAnyOrder(values.toArray()));
+        return checked(equalTo(values));
     }
 
-    @JDIAction("Assert structure of '{name}' is equal to '{0}'")
+    @JDIAction("Assert that structure of '{name}' is equal to '{0}'")
     public TreeViewAssert structure(Map<String, List<String>> structure) {
         jdiAssert(element().structure(), equalTo(structure));
+        return this;
+    }
+
+    @JDIAction("Assert that color of '{name}' is equal to '{0}'")
+    public TreeViewAssert color(String color) {
+        jdiAssert(element().value().css("color"), equalTo(color));
+        return this;
+    }
+
+    @JDIAction("Assert that color of '{name}' is equal to '{0}'")
+    public TreeViewAssert color(Enum<?> color) {
+        jdiAssert(element().value().css("color"), equalTo(color.toString()));
         return this;
     }
 

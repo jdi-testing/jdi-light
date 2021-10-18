@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.asserts.TreeViewAssert;
+import com.epam.jdi.tools.Timer;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -192,6 +193,24 @@ public class TreeView extends Dropdown
     }
 
     @Override
+    @JDIAction("Expand '{name}'")
+    public void expand() {
+        if (!isExpanded()) {
+            toggle();
+            Timer.waitCondition(this::isExpanded);
+        }
+    }
+
+    @Override
+    @JDIAction("Close '{name}'")
+    public void close() {
+        if (isExpanded()) {
+            toggle();
+            Timer.waitCondition(() -> !isExpanded());
+        }
+    }
+
+    @Override
     @JDIAction("Click on root from '{name}'")
     public void click() {
         root().click();
@@ -303,11 +322,18 @@ public class TreeView extends Dropdown
     }
 
     @Override
+    @JDIAction("Get node from '{name}' by string '{0}'")
     public TreeView get(String value) {
         return nodes().stream()
                 .filter(node -> node.getText().equals(value))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    @JDIAction("Get first node from '{name}'")
+    public TreeView first() {
+        return get(getStartIndex());
     }
 
     @Override
