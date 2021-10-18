@@ -130,32 +130,44 @@ public class TreeView extends Dropdown
         if (isPseudoCore()) {
             return null;
         }
-        return core().find(ROOT_IN_NODE_LOCATOR).setName("root");
+        return core().find(ROOT_IN_NODE_LOCATOR).setName("root " + getName());
     }
 
     @JDIAction("Get root expander from '{name}'")
     public UIElement expander() {
-        return root().find(TOGGLE_IN_ROOT_LOCATOR).setName("expander");
+        return root().find(TOGGLE_IN_ROOT_LOCATOR).setName("expander " + getName());
     }
 
     @JDIAction("Get root checkbox from '{name}'")
     public UIElement checkbox() {
-        return root().find(CHECKBOX_IN_ROOT_LOCATOR).setName("checkbox");
+        return root().find(CHECKBOX_IN_ROOT_LOCATOR).setName("checkbox " + getName());
     }
 
     @Override
-    @JDIAction("Get root content from '{name}'")
+    @JDIAction("Get root value from '{name}'")
     public UIElement value() {
-        return root().find(CONTENT_IN_ROOT_LOCATOR).setName("value");
+        return iCore().setName("value " + getName());
     }
 
     @Override
-    @JDIAction("Get text from '{name}'")
-    public String getText() {
+    @JDIAction("Get root value from '{name}'")
+    public UIElement iCore() {
+        return core().find(ROOT_IN_NODE_LOCATOR).find(CONTENT_IN_ROOT_LOCATOR);
+    }
+
+    @Override
+    @JDIAction("Get text value from '{name}'")
+    public String getValue() {
         if (isPseudoCore()) {
-            return getName();
+            return null;
         }
-        return value().getText();
+        return iCore().getText();
+    }
+
+    @Override
+    @JDIAction("Get text value from '{name}'")
+    public String getText() {
+        return getValue();
     }
 
     @Override
@@ -400,6 +412,7 @@ public class TreeView extends Dropdown
         created.CHECKBOX_FULLY_MARKED_CLASS = CHECKBOX_FULLY_MARKED_CLASS;
         created.CHECKBOX_PARTLY_MARKED_CLASS = CHECKBOX_PARTLY_MARKED_CLASS;
         created.CHECKBOX_NOT_MARKED_CLASS = CHECKBOX_NOT_MARKED_CLASS;
+        created.setName(String.format("TreeView %s", created.getValue()));
         return created;
     }
 
