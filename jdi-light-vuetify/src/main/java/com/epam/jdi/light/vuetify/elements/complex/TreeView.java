@@ -79,7 +79,7 @@ public class TreeView extends Dropdown
         if (isPseudoCore()) {
             return core().hasClass(HOVERABLE_CORE_CLASS);
         }
-        return pseudoCore().hasClass(HOVERABLE_CORE_CLASS);
+        return pseudoCore().isHoverable();
     }
 
     @JDIAction("Check if '{name}' is shaped")
