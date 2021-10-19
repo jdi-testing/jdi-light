@@ -27,7 +27,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static com.epam.jdi.tools.PrintUtils.print;
 
 /**
- * To see an example of Pagination web element please visit
+ * To see an example of TreeView web element please visit
  * https://vuetifyjs.com/en/components/treeview/
  */
 public class TreeView extends Dropdown
