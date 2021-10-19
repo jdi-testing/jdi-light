@@ -26,6 +26,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.tools.PrintUtils.print;
 
+/**
+ * To see an example of Pagination web element please visit
+ * https://vuetifyjs.com/en/components/treeview/
+ */
 public class TreeView extends Dropdown
         implements IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeView> {
 
