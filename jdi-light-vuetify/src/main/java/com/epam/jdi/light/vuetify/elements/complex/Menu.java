@@ -28,6 +28,21 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
                 .collect(Collectors.toList());
     }
 
+    @JDIAction("'{name}' has removed radius")
+    public boolean hasRemovedRadius() {
+        return core().getAttribute("class").contains("rounded-0");
+    }
+
+    @JDIAction("'{name}' has large radius")
+    public boolean hasLargeRadius() {
+        return core().getAttribute("class").contains("rounded-lg");
+    }
+
+    @JDIAction("'{name}' has custom radius")
+    public boolean hasCustomRadius() {
+        return core().getAttribute("class").contains("rounded-b-xl");
+    }
+
     public MenuAssert is() {
         return new MenuAssert().set(this);
     }

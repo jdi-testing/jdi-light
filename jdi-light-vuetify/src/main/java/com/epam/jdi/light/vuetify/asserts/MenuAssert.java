@@ -37,4 +37,21 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
         return this;
     }
 
+    @JDIAction("Assert that {name} has removed radius")
+    public MenuAssert removedRadius() {
+        jdiAssert(element().hasRemovedRadius(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has large radius")
+    public MenuAssert largeRadius() {
+        jdiAssert(element().hasLargeRadius(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has custom radius")
+    public MenuAssert customRadius() {
+        jdiAssert(element().hasCustomRadius(), Matchers.is(true));
+        return this;
+    }
 }
