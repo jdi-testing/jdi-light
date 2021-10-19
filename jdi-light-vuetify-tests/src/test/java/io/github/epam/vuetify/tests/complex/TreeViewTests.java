@@ -50,7 +50,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 public class TreeViewTests extends TestsInit {
@@ -112,36 +111,36 @@ public class TreeViewTests extends TestsInit {
         colorTreeView.has().structure(expectedBaseTreeStructure);
         colorTreeView.walk(treeView -> {
             if (!treeView.isLeaf() && !treeView.isPseudoCore()) {
-                String child = treeView.first().getText();
-                treeView.get(child).has().color(BLACK_TRANSPARENT_087);
-                treeView.get(child).activate();
-                treeView.get(child).has().color(ORANGE_DARKEN_1);
+                TreeView child = treeView.first();
+                child.has().color(BLACK_TRANSPARENT_087);
+                child.activate();
+                child.has().color(ORANGE_DARKEN_1);
                 treeView.close();
                 treeView.is().collapsed();
                 treeView.expand();
                 treeView.is().expanded();
-                treeView.get(child).deactivate();
-                treeView.get(child).has().color(BLACK_TRANSPARENT_087);
+                child = treeView.first();
+                child.deactivate();
+                child.has().color(BLACK_TRANSPARENT_087);
             }
         });
     }
 
     @Test
     public void denseTreeViewTest() {
-        denseTreeView.has().structure(expectedBaseTreeStructure);
         denseTreeView.walk(treeView -> {
             if (!treeView.isPseudoCore()) {
                 treeView.activate();
                 treeView.is().active(false);
-                treeView.has().checkbox(false);
             }
         });
     }
 
     @Test
     public void hoverableTreeViewTest() {
-        hoverableTreeView.is().hoverable(true);
-        hoverableTreeView.has().structure(expectedBaseTreeStructure);
+        hoverableTreeView.walk(treeView -> {
+            treeView.is().hoverable(true);
+        });
     }
 
     @Test
@@ -190,7 +189,6 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void openAllTreeViewTest() {
-        openAllTreeView.has().structure(expectedBaseTreeStructure);
         openAllTreeView.walk(treeView -> {
             if (!treeView.isLeaf()) {
                 treeView.is().expanded();
@@ -200,7 +198,6 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void roundedTreeViewTest() {
-        roundedTreeView.has().structure(expectedBaseTreeStructure);
         roundedTreeView.walk(treeView -> {
             if (!treeView.isPseudoCore()) {
                 treeView.is().rounded(true);
@@ -210,7 +207,6 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void shapedTreeViewTest() {
-        shapedTreeView.has().structure(expectedBaseTreeStructure);
         shapedTreeView.walk(treeView -> {
             if (!treeView.isPseudoCore()) {
                 treeView.is().shaped(true);
@@ -253,41 +249,30 @@ public class TreeViewTests extends TestsInit {
     @Test
     public void selectionTypeTreeViewTest() {
         selectionTypeTreeView.walk(treeView -> {
-            if (treeView.isPseudoCore()) {
-                return;
+            if (!treeView.isPseudoCore()) {
+                treeView.has().checkbox(true);
+                treeView.check();
+                treeView.is().fullyMarked();
+                List<String> checked = new ArrayList<>();
+                treeView.walk(child -> {
+                    if (child.isLeaf() && child.isFullyMarked()) {
+                        checked.add(child.getText());
+                    }
+                });
+                assertThat(checked, equalTo(selectionTypeResult.values()));
+                treeView.uncheck();
             }
-            treeView.has().checkbox(true);
-            treeView.check();
-            treeView.is().fullyMarked();
-            List<String> checked = new ArrayList<>();
-            treeView.walk(child -> {
-                if (child.isLeaf() && child.isFullyMarked()) {
-                    checked.add(child.getText());
-                }
-            });
-            assertThat(checked, equalTo(selectionTypeResult.values()));
-            treeView.uncheck();
         });
 
         selectInDropDownByIdAndExpander(selectionTypeId, selectionTypeExpander, "independent");
 
-        selectionTypeTreeView.walk(treeView -> {
-            if (treeView.isPseudoCore()) {
-                return;
-            }
-            treeView.check();
-            assertThat(selectionTypeResult.values(), hasSize(1));
-            treeView.has().text(selectionTypeResult.first().getText());
-            treeView.uncheck();
-        });
         List<String> checked = new ArrayList<>();
         selectionTypeTreeView.walk(treeView -> {
-            if (treeView.isPseudoCore()) {
-                return;
+            if (!treeView.isPseudoCore()) {
+                treeView.check();
+                treeView.is().selected(true);
+                checked.add(treeView.getText());
             }
-            treeView.check();
-            treeView.is().selected(true);
-            checked.add(treeView.getText());
         });
         assertThat(checked, equalTo(selectionTypeResult.values()));
     }
@@ -351,22 +336,19 @@ public class TreeViewTests extends TestsInit {
     @Test
     public void selectableIconsTreeViewTest() {
         selectableIconsTreeView.walk(treeView -> {
-            if (treeView.isPseudoCore()) {
-                return;
+            if (!treeView.isPseudoCore()) {
+                treeView.is().notMarked();
+                treeView.check();
+                List<String> checked = new ArrayList<>();
+                treeView.walk(childTree -> {
+                    childTree.is().fullyMarked();
+                    if (childTree.isLeaf()) {
+                        checked.add(childTree.getText());
+                    }
+                });
+                assertThat(checked, equalTo(chips.values()));
+                reset.click();
             }
-            treeView.is().notMarked();
-            treeView.is().selected(false);
-            treeView.check();
-            List<String> checked = new ArrayList<>();
-            treeView.walk(childTree -> {
-                childTree.is().fullyMarked();
-                childTree.is().selected(true);
-                if (childTree.isLeaf()) {
-                    checked.add(childTree.getText());
-                }
-            });
-            assertThat(checked, equalTo(chips.values()));
-            reset.click();
         });
     }
 }
