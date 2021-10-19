@@ -61,13 +61,13 @@ public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> {
 
     @JDIAction("Assert that '{name}' label is '{0}'")
     public ComboboxAssert label(String value) {
-        jdiAssert(element().label(), Matchers.is(value));
+        jdiAssert(element().label().getText(), Matchers.is(value));
         return this;
     }
 
     @JDIAction("Assert that '{name}' label is '{0}'")
     public ComboboxAssert message(String value) {
-        jdiAssert(element().message(), Matchers.is(value));
+        jdiAssert(element().message().getText(), Matchers.is(value));
         return this;
     }
 }
