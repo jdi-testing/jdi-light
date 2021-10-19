@@ -85,6 +85,6 @@ public class TreeviewPage extends VuetifyPage {
     @UI("#SelectableIconsTreeview .v-chip__content")
     public static WebList chips;
 
-    @UI("//*[contains(@id, 'SelectableIconsTreeview')]//span[contains(text(), 'Reset')]")
+    @UI("#SelectableIconsTreeview [*'Reset']")
     public static Button reset;
 }

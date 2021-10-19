@@ -35,11 +35,15 @@ public class TreeView extends Dropdown
 
     protected String NODES_IN_CORE_LOCATOR = "./*[contains(@class, 'v-treeview-node')]";
     protected String NODES_IN_NODE_LOCATOR = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
-    protected String ROOT_IN_NODE_LOCATOR = "./*[contains(@class, 'v-treeview-node')]";
+    protected String ROOT_IN_NODE_LOCATOR = "./*[contains(@class, 'v-treeview-node__root')]";
     protected String TOGGLE_IN_ROOT_LOCATOR = ".v-treeview-node__toggle";
     protected String CHECKBOX_IN_ROOT_LOCATOR = ".v-treeview-node__checkbox";
     protected String CONTENT_IN_ROOT_LOCATOR = ".v-treeview-node__content";
-    protected String CORE_FROM_NODE_LOCATOR = "//ancestor::*[@class='v-treeview' or contains(@class,'v-treeview ')]";
+    protected String CORE_FROM_NODE_LOCATOR = "//ancestor::*[" +
+            "@class='v-treeview' or " +
+            "starts-with(@class, 'v-treeview ') or " +
+            "contains(@class, ' v-treeview ') or " +
+            "substring(@class, string-length(@class) - string-length('v-treeview') + 1) = 'v-treeview']";
 
     protected String CORE_CLASS = "v-treeview";
     protected String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
