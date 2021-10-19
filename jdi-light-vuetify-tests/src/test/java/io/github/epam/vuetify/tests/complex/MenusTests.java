@@ -97,7 +97,7 @@ public class MenusTests extends TestsInit {
     }
 
     @Test
-    public void offsetXMenuMenuTests() {
+    public void offsetXMenuTests() {
         List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
         Timer.waitCondition(offsetXMenuButton::isDisplayed);
         offsetXMenuButton.show();
@@ -116,7 +116,7 @@ public class MenusTests extends TestsInit {
     }
 
     @Test
-    public void offsetYMenuMenuTests() {
+    public void offsetYMenuTests() {
         List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
         Timer.waitCondition(offsetYMenuButton::isDisplayed);
         offsetYMenuButton.show();
