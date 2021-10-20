@@ -31,6 +31,7 @@ import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldPage;
 import io.github.com.pages.layout.BoxPage;
 import io.github.com.pages.layout.ContainerPage;
+import io.github.com.pages.layout.GridListPage;
 import io.github.com.pages.layout.GridPage;
 import io.github.com.pages.layout.HiddenPage;
 import io.github.com.pages.navigation.BottomNavigationPage;
@@ -317,4 +318,7 @@ public class StaticSite {
     // grid
     @Url("grid_layout")
     public static GridPage gridPage;
+
+    @Url("/grid_list_layout")
+    public static GridListPage gridListPage;
 }
