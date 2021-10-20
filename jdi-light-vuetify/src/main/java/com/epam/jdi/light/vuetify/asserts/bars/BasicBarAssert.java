@@ -38,7 +38,7 @@ public class BasicBarAssert<T extends BasicBar<?,?>, A extends BasicBarAssert<?,
 
     @JDIAction("Assert that {name} has proper text in title")
     public A properTitleText(String text) {
-        jdiAssert(element().getTitle().getText(), Matchers.is(text));
+        jdiAssert(element().titleText(), Matchers.is(text));
         return (A)this;
     }
 

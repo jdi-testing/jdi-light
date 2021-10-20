@@ -14,7 +14,7 @@ import static io.github.com.pages.AvatarsPage.tileAvatar;
 public class AvatarsTests extends TestsInit {
 
     @BeforeClass
-    public void beforeTest() {
+    public void before() {
         avatarsPage.open();
     }
 
