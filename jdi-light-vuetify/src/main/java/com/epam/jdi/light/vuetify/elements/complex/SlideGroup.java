@@ -31,6 +31,7 @@ public class SlideGroup extends UIBaseElement<SlideGroupAssert> {
     public void clickOnSlideByIndex(int index) {
         getSlideByIndex(index).click();
     }
+
     @JDIAction("Click on 'next slides' button")
     public void clickOnNextButton() {
         find(".v-slide-group__next").click();

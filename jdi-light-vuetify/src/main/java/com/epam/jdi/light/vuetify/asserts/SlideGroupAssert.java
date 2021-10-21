@@ -35,4 +35,5 @@ public class SlideGroupAssert extends UIAssert<SlideGroupAssert, SlideGroup> {
         jdiAssert(element().slidesPosition(), Matchers.is(String.format("transform: translateX(%spx);", position)));
         return this;
     }
+
 }
