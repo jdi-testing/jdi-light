@@ -12,7 +12,6 @@ public class SlideGroupAssert extends UIAssert<SlideGroupAssert, SlideGroup> {
 
     @JDIAction("Assert that '{name}' is displayed")
     public SlideGroupAssert displayed() {
-        element().show();
         Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
