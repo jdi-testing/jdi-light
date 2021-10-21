@@ -17,30 +17,33 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+/**
+ * To see example of Combobox web element please visit https://vuetifyjs.com/en/components/combobox/
+ */
+
 public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
 
-    public String rootLocator = "";
-    private String listLocator = "";
-    private static final String VALUE_LOCATOR = "div input[type='hidden']";
-    private static final String INPUT_LOCATOR = "div input[type='text']";
-    private static final String EXPAND_LOCATOR = "div .v-input__append-inner";
-    private static final String LABEL_LOCATOR = ".v-label";
-    private static final String MESSAGE_LOCATOR = "//following::div[@class = 'v-messages__message']";
-    private static final String LIST_INPUT_ITEM = ".v-select__selection--comma";
+    protected String ROOT_LOCATOR = "div[role = 'combobox']";
+    protected String LIST_LOCATOR = ".v-list-item__title";
+    protected String VALUE_LOCATOR = "div input[type='hidden']";
+    protected String INPUT_LOCATOR = "div input[type='text']";
+    protected String EXPAND_LOCATOR = "div .v-input__append-inner";
+    protected String LABEL_LOCATOR = ".v-label";
+    protected String MESSAGE_LOCATOR = "//following::div[@class = 'v-messages__message']";
 
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDICombobox.class, Combobox.class)) return;
         JDICombobox j = field.getAnnotation(JDICombobox.class);
         setup(j.root(), j.listItems());
-        this.setCore(Combobox.class, $(rootLocator));
+        this.setCore(Combobox.class, $(ROOT_LOCATOR));
     }
 
     public Combobox setup(String comboboxLocator, String listItemsLocator) {
         if (isNotBlank(comboboxLocator))
-            rootLocator = comboboxLocator;
+            ROOT_LOCATOR = comboboxLocator;
         if (isNotBlank(listItemsLocator)) {
-            listLocator = listItemsLocator;
+            LIST_LOCATOR = listItemsLocator;
         }
         return this;
     }
@@ -50,8 +53,8 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
         return new ComboboxAssert().set(this);
     }
 
-    public UIElement value() {
-        return core().find(VALUE_LOCATOR);
+    public List<String> selectedValues() {
+        return Arrays.asList(core().find(VALUE_LOCATOR).attr("value").split(","));
     }
 
     private UIElement input() {
@@ -63,14 +66,8 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
     }
 
     public WebList listItems() {
-        return finds(listLocator);
+        return finds(LIST_LOCATOR);
     }
-
-    public WebList listInputItem() {
-        return core().finds(LIST_INPUT_ITEM);
-    }
-    //div[@id = 'AdvancedCustomOptionsCombobox']//div[@role = 'combobox']//*[contains(text(),'Foo')]
-    //div[@id = 'MultipleCombobox']//div[@role = 'combobox']//*[text()[normalize-space() = 'Programming']]
 
     public UIElement label() {
         return core().find(LABEL_LOCATOR);
@@ -103,22 +100,6 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
                 close();
             }
         }
-//        if (!isSelected(value)) {
-//            expand();
-//            listItems().stream()
-//                    .filter(e -> e.getText().equals(value))
-//                    .forEach(UIElement::click);
-//            if (isExpanded()) {
-//                close();
-//            }
-//        }
-        //-------------------------------------------
-//        expand();
-//        for (UIElement element : listItems()) {
-//            if (element.getText().equals(value))
-//                element.click();
-//        }
-        //-------------------------------------------
     }
 
 
@@ -133,10 +114,6 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
                 }
             }
         });
-        //-------------------------------------------
-//        expand();
-//        listItems().get(index).click();
-
     }
 
     @JDIAction("Unselect '{0}' from '{name}'")
@@ -148,17 +125,6 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
                 close();
             }
         }
-//        if (isSelected(value)) {
-//            expand();
-//            listItems().stream()
-//                    .filter(e -> e.getText().equals(value))
-//                    .forEach(UIElement::click);
-//            if (isExpanded()) {
-//                close();
-//            }
-//        }
-
-        //-------------------------------------
     }
 
     @JDIAction("Unselect '{0}' from '{name}'")
@@ -187,13 +153,12 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
 
     @JDIAction("Check that '{0}' from '{name}' is selected")
     public boolean isSelected(String value) {
-        return Arrays.asList(value().attr("value").split(",")).contains(value);
-//        return core().find("//*[text()[normalize-space() = '" + value + "']]").isExist();
+        return selectedValues().contains(value);
     }
 
     @JDIAction("Check that '{0}' from '{name}' is selected")
     public boolean isSelected(List<String> values) {
-        return Arrays.asList(value().attr("value").split(",")).containsAll(values);
+        return selectedValues().containsAll(values);
     }
 
     @JDIAction("Check that '{name}' is disabled")

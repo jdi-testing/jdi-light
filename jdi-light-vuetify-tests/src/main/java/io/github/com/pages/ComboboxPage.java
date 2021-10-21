@@ -1,6 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.vuetify.annotations.JDICombobox;
+import com.epam.jdi.light.vuetify.elements.complex.AdvancedCombobox;
 import com.epam.jdi.light.vuetify.elements.complex.Combobox;
 
 public class ComboboxPage extends VuetifyPage {
@@ -40,9 +41,9 @@ public class ComboboxPage extends VuetifyPage {
                     "//div[@class='v-list-item__title']")
     public static Combobox noDataWithChipsCombobox;
 
-//    @JDICombobox(
-//            root = "#AdvancedCustomOptionsCombobox div[role ='combobox']",
-//            listItems = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-autocomplete__content')]" +
-//                    "//span[@class='v-chip__content']")
-//    public static Combobox advancedCustomOptionsCombobox;
+    @JDICombobox(
+            root = "//div[@id = 'AdvancedCustomOptionsCombobox']//div[@role = 'combobox']",
+            listItems = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-autocomplete__content')]" +
+                    "//span[@class='v-chip__content']")
+    public static AdvancedCombobox advancedCustomOptionsCombobox;
 }

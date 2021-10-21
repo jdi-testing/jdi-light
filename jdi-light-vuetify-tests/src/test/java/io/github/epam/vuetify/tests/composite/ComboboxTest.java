@@ -29,7 +29,6 @@ public class ComboboxTest extends TestsInit {
         denseCombobox.select("Design");
         denseCombobox.select("Vue");
         denseCombobox.is().selected(testValueList);
-        denseCombobox.unselect("Vue");
         denseCombobox.unselect(testValueList);
         denseCombobox.is().notSelected(testValueList);
     }
@@ -60,16 +59,20 @@ public class ComboboxTest extends TestsInit {
         noDataWithChipsCombobox.is().notSelected(secondTestWord);
     }
 
-//    @Test
-//    public void advancedCustomOptionsCombobox() throws InterruptedException {
-//        advancedCustomOptionsCombobox.expand();
-//        advancedCustomOptionsCombobox.close();
-//        System.out.println(advancedCustomOptionsCombobox.listItems().size());
-//        for (UIElement element : advancedCustomOptionsCombobox.listItems()) {
-//            System.out.println(element.getText());
-//        }
-//        advancedCustomOptionsCombobox.select("Foo");
-//        System.out.println(advancedCustomOptionsCombobox.isSelected("Foo"));
-//        Thread.sleep(5000);
-//    }
+    @Test
+    public void advancedCustomOptionsCombobox() {
+        List<String> testValueList = Arrays.asList("Foo", "Bar");
+
+        advancedCustomOptionsCombobox.expand();
+        advancedCustomOptionsCombobox.is().expanded();
+        advancedCustomOptionsCombobox.close();
+        advancedCustomOptionsCombobox.is().closed();
+        advancedCustomOptionsCombobox.select("Bar");
+        advancedCustomOptionsCombobox.is().selected(testValueList);
+        advancedCustomOptionsCombobox.unselect(testValueList);
+        advancedCustomOptionsCombobox.is().notSelected(testValueList);
+        advancedCustomOptionsCombobox.sendKeys("JDI");
+        advancedCustomOptionsCombobox.is().selected("JDI");
+        advancedCustomOptionsCombobox.changeTextValue("JDI", "JDI Light");
+    }
 }
