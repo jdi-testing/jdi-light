@@ -145,24 +145,12 @@ public class TextArea extends com.epam.jdi.light.ui.html.elements.common.TextAre
     @Override
     @JDIAction("Set lines '{0}' in '{name}'")
     public void setLines(String... lines) {
-        int length = lines.length;
-        if (length == 0) {
-            return;
-        }
-        for (int i = 0; i < length-1; i++)
-            sendKeys(lines[i]+"\n");
-        sendKeys(lines[lines.length-1]);
+        sendKeys(String.join("\n", lines));
     }
 
     @JDIAction("Set lines '{0}' in '{name}'")
     public void setLines(List<String> lines) {
-        int length = lines.size();
-        if (length == 0) {
-            return;
-        }
-        for (int i = 0; i < length-1; i++)
-            sendKeys(lines.get(i)+"\n");
-        sendKeys(lines.get(lines.size()-1));
+        sendKeys(String.join("\n", lines));
     }
 
     @Override
