@@ -12,7 +12,8 @@ import com.epam.jdi.light.vuetify.asserts.ButtonAssert;
 
 public class Button extends UIBaseElement<ButtonAssert> implements HasClick {
 
-    Button() {}
+    Button() {
+    }
 
     public Button(UIElement element) {
         core().setCore(element);
@@ -37,5 +38,17 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasClick {
     @Override
     public boolean isDisabled() {
         return core().hasClass("v-btn--disabled");
+    }
+
+    @JDIAction("Check if {name} is displayed")
+    @Override
+    public boolean isDisplayed() {
+        return !core().getAttribute("style").contains("display: none");
+    }
+
+    @JDIAction("Check if {name} is hidden")
+    @Override
+    public boolean isHidden() {
+        return core().getAttribute("style").contains("display: none");
     }
 }
