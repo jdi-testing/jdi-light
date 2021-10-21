@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import com.epam.jdi.light.material.asserts.inputs.DateTimePickerAssert;
 
@@ -31,6 +32,14 @@ public class DateTimePicker extends UIBaseElement<DateTimePickerAssert> {
         return find("button[aria-label*='change']");
     }
 
+    private UIElement cancelButton() {
+        return $("//span[contains(text(), 'Cancel')]");
+    }
+
+    private UIElement okButton() {
+        return $("//span[contains(text(), 'OK')]");
+    }
+
     public WebList timer() {
         return $$("//div[@class = 'MuiPickersClock-clock']//span");
     }
@@ -50,12 +59,12 @@ public class DateTimePicker extends UIBaseElement<DateTimePickerAssert> {
 
     @JDIAction("Cancel changes in {name} and close")
     public void cancel() {
-        command("Esc");
+        cancelButton().click();
     }
 
     @JDIAction("Confirm changes in {name} and close")
     public void confirm() {
-        command("Enter");
+        okButton().click();
     }
 
     @JDIAction("Set text in {name} input field")
