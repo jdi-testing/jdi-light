@@ -1,7 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.vuetify.annotations.JDICombobox;
-import com.epam.jdi.light.vuetify.elements.complex.AdvancedCombobox;
+import io.github.com.custom.AdvancedCombobox;
 import com.epam.jdi.light.vuetify.elements.complex.Combobox;
 
 public class ComboboxPage extends VuetifyPage {

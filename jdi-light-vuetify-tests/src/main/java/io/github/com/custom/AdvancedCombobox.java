@@ -1,8 +1,9 @@
-package com.epam.jdi.light.vuetify.elements.complex;
+package io.github.com.custom;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.vuetify.elements.complex.Combobox;
 import org.openqa.selenium.Keys;
 
 import java.util.List;
