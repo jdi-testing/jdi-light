@@ -2,86 +2,90 @@ package com.epam.jdi.light.vuetify.asserts.bars;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.bars.AppBar;
-import com.epam.jdi.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class AppBarAssert  extends BasicBarAssert<AppBar, AppBarAssert> {
 
-    @JDIAction("Assert that {name} has tabs")
+    @JDIAction("Assert that '{name}' has tabs")
     public AppBarAssert clickableTabs() throws Exception {
-        jdiAssert(element().hasClickableTabs(), Matchers.is(true));
+        jdiAssert(element().hasClickableTabs() ? "has tabs" : "does not have tabs", Matchers.is("has tabs"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has navigation menu")
+    @JDIAction("Assert that '{name}' has navigation menu")
     public AppBarAssert navigationMenu() {
-        jdiAssert(element().hasNavigationMenu(), Matchers.is(true));
+        jdiAssert(element().hasNavigationMenu() ? "has navigation menu" : "does not have navigation menu",
+                Matchers.is("has navigation menu"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has visible header")
+    @JDIAction("Assert that '{name}' has visible header")
     public AppBarAssert visibleHeader() {
-        Timer.waitCondition(element()::hasVisibleHeader);
-        jdiAssert(element().hasVisibleHeader(), Matchers.is(true));
+        jdiAssert(element().hasVisibleHeader() ? "has visible header" : "does not have visible header",
+                Matchers.is("has visible header"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has hidden header")
+    @JDIAction("Assert that '{name}' has hidden header")
     public AppBarAssert hiddenHeader() {
-        Timer.waitCondition(element()::hasHiddenHeader);
-        jdiAssert(element().hasHiddenHeader(), Matchers.is(true));
+        jdiAssert(element().hasHiddenHeader() ? "has hidden header" : "has visible header",
+                Matchers.is("has hidden header"));
         return this;
     }
 
-    @JDIAction("Assert that {name} header's shadow is hidden")
+    @JDIAction("Assert that '{name}' header's shadow is hidden")
     public AppBarAssert hiddenHeaderShadow() {
-        Timer.waitCondition(element()::hasHiddenHeaderShadow);
-        jdiAssert(element().hasHiddenHeaderShadow(), Matchers.is(true));
+        jdiAssert(element().hasHiddenHeaderShadow() ? "header's shadow is hidden" : "header's shadow is visible",
+                Matchers.is("header's shadow is hidden"));
         return this;
     }
 
-    @JDIAction("Assert that {name} header's shadow is visible")
+    @JDIAction("Assert that '{name}' header's shadow is visible")
     public AppBarAssert visibleHeaderShadow() {
-        Timer.waitCondition(element()::hasVisibleHeaderShadow);
-        jdiAssert(element().hasVisibleHeaderShadow(), Matchers.is(true));
+        jdiAssert(element().hasVisibleHeaderShadow() ? "header's shadow is visible" : "header's shadow is hidden",
+                Matchers.is("header's shadow is visible"));
         return this;
     }
 
-    @JDIAction("Assert that {name} header has proper height")
+    @JDIAction("Assert that '{name}' header has expected height")
     public AppBarAssert headerHeight(String text) {
         jdiAssert(element().hasHeaderHeight(), Matchers.equalTo(text));
         return this;
     }
 
-    @JDIAction("Assert that {name} header has proper opacity")
+    @JDIAction("Assert that '{name}' header has expected opacity")
     public AppBarAssert headerOpacity(Integer opacity) {
         jdiAssert(element().hasHeaderOpacity(), Matchers.equalTo(opacity));
         return this;
     }
 
-    @JDIAction("Assert that {name} title is hidden")
+    @JDIAction("Assert that '{name}' title is hidden")
     public AppBarAssert hiddenTitle() {
-        jdiAssert(element().hasHiddenTitle(), Matchers.is(true));
+        jdiAssert(element().hasHiddenTitle() ? "has hidden title" : "has visible title",
+                Matchers.is("has hidden title"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has checker")
-    public AppBarAssert checker() {
-        jdiAssert(element().hasChecker(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' has checkbox")
+    public AppBarAssert checkbox() {
+        jdiAssert(element().hasCheckbox() ? "checkbox is displayed" : "checkbox is not displayed",
+                Matchers.is("checkbox is displayed"));
         return this;
     }
 
-    @JDIAction("Assert that {name} checker is checked")
-    public AppBarAssert checkerChecked() {
-        jdiAssert(element().checkerChecked(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' checkbox is checked")
+    public AppBarAssert checkboxChecked() {
+        jdiAssert(element().checkboxChecked() ? "checkbox is checked" : "checkbox is unchecked",
+                Matchers.is("checkbox is checked"));
         return this;
     }
 
-    @JDIAction("Assert that {name} checker is unchecked")
-    public AppBarAssert checkerUnchecked() {
-        jdiAssert(element().checkerUnchecked(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' checkbox is unchecked")
+    public AppBarAssert checkboxUnchecked() {
+        jdiAssert(element().checkboxUnchecked() ? "checkbox is unchecked" : "checkbox is checked",
+                Matchers.is("checkbox is unchecked"));
         return this;
     }
 }

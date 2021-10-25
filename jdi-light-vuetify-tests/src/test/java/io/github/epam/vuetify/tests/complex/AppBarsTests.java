@@ -24,7 +24,7 @@ public class AppBarsTests extends TestsInit {
         }
 
         @Test
-        public void collapsibleBarTests() throws Exception {
+        public void collapsibleBarTests() {
             collapsibleBar.is().displayed();
             collapsibleBar.has().menuButton();
             collapsibleBar.has().title();
@@ -33,12 +33,12 @@ public class AppBarsTests extends TestsInit {
             collapsibleBar.has().hiddenTitle();
             collapsibleBar.scrollBarToTop();
             collapsibleBar.has().title();
-            collapsibleBar.has().checker();
-            collapsibleBar.is().checkerChecked();
-            collapsibleBar.checkerUncheck();
-            collapsibleBar.is().checkerUnchecked();
+            collapsibleBar.has().checkbox();
+            collapsibleBar.is().checkboxChecked();
+            collapsibleBar.checkboxUncheck();
+            collapsibleBar.is().checkboxUnchecked();
             collapsibleBar.has().hiddenTitle();
-            collapsibleBar.checkerCheck();
+            collapsibleBar.checkboxCheck();
             collapsibleBar.has().title();
         }
 
