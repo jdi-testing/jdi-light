@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.AvatarAssert;
-import com.epam.jdi.tools.Timer;
 
 /**
  * To see an example of Avatar web element please visit https://vuetifyjs.com/en/components/avatars/
@@ -15,29 +14,27 @@ public class Avatar extends UIBaseElement<AvatarAssert> {
 
     @JDIAction("Get '{name}' photo")
     private UIElement getPhoto() {
-        return this.find("img");
+        return find("img");
     }
 
     @JDIAction("Get '{name}' icon")
     private UIElement getIcon() {
-        return this.find("i");
+        return find("i");
     }
 
     @JDIAction("'{name}' has photo")
-    public String hasPhoto() {
-        Timer.waitCondition(getPhoto()::isDisplayed);
-        return getPhoto().getTagName();
+    public boolean hasPhoto() {
+        return getPhoto().getTagName().equals("img");
     }
 
     @JDIAction("'{name}' has icon")
     public boolean hasIcon() {
-        Timer.waitCondition(getIcon()::isDisplayed);
-        return getIcon().getAttribute("class").contains("v-icon");
+        return getIcon().hasClass("v-icon");
     }
 
-    @JDIAction("Get {name} size")
+    @JDIAction("Get '{name}' size")
     public String hasSize() {
-        return this.core().getAttribute("style");
+        return core().getAttribute("style");
     }
 
     public AvatarAssert is() {
