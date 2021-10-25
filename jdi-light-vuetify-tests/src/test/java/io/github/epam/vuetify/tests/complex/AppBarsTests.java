@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -29,7 +28,7 @@ public class AppBarsTests extends TestsInit {
             collapsibleBar.is().displayed();
             collapsibleBar.has().menuButton();
             collapsibleBar.has().title();
-            collapsibleBar.has().properTitleText("Collapsing Bar");
+            collapsibleBar.has().textInTitle("Collapsing Bar");
             collapsibleBar.scrollBarToBottom();
             collapsibleBar.has().hiddenTitle();
             collapsibleBar.scrollBarToTop();
@@ -48,12 +47,11 @@ public class AppBarsTests extends TestsInit {
             denseBar.is().displayed();
             denseBar.has().menuButton();
             denseBar.has().title();
-            denseBar.has().properTitleText("Page title");
+            denseBar.has().textInTitle("Page title");
             denseBar.has().searchButton();
             denseBar.has().heartButton();
             denseBar.has().verticalDotsButton();
             denseBar.clickOnVerticalDotsButton();
-            Timer.waitCondition(optionsMenu::isDisplayed);
             optionsMenu.is().displayed();
         }
 
@@ -62,7 +60,7 @@ public class AppBarsTests extends TestsInit {
             elevateScrollBar.is().displayed();
             elevateScrollBar.has().menuButton();
             elevateScrollBar.has().title();
-            elevateScrollBar.has().properTitleText("Title");
+            elevateScrollBar.has().textInTitle("Title");
             elevateScrollBar.has().searchButton();
             elevateScrollBar.has().heartButton();
             elevateScrollBar.has().verticalDotsButton();
@@ -77,7 +75,7 @@ public class AppBarsTests extends TestsInit {
             imageBar.is().displayed();
             imageBar.has().menuButton();
             imageBar.has().title();
-            imageBar.has().properTitleText("Title");
+            imageBar.has().textInTitle("Title");
             imageBar.has().searchButton();
             imageBar.has().heartButton();
             imageBar.has().verticalDotsButton();
@@ -92,7 +90,7 @@ public class AppBarsTests extends TestsInit {
             hidingScrollBar.is().displayed();
             hidingScrollBar.has().menuButton();
             hidingScrollBar.has().title();
-            hidingScrollBar.has().properTitleText("Title");
+            hidingScrollBar.has().textInTitle("Title");
             hidingScrollBar.has().searchButton();
             hidingScrollBar.has().heartButton();
             hidingScrollBar.has().verticalDotsButton();
@@ -106,7 +104,7 @@ public class AppBarsTests extends TestsInit {
             fadeImageBar.is().displayed();
             fadeImageBar.has().menuButton();
             fadeImageBar.has().title();
-            fadeImageBar.has().properTitleText("Title");
+            fadeImageBar.has().textInTitle("Title");
             fadeImageBar.has().searchButton();
             fadeImageBar.has().heartButton();
             fadeImageBar.has().verticalDotsButton();
@@ -123,7 +121,7 @@ public class AppBarsTests extends TestsInit {
             scrollThresholdBar.is().displayed();
             scrollThresholdBar.has().menuButton();
             scrollThresholdBar.has().title();
-            scrollThresholdBar.has().properTitleText("Title");
+            scrollThresholdBar.has().textInTitle("Title");
             scrollThresholdBar.has().searchButton();
             scrollThresholdBar.has().heartButton();
             scrollThresholdBar.has().verticalDotsButton();
@@ -139,7 +137,7 @@ public class AppBarsTests extends TestsInit {
             toggleNavigationDrawersBar.is().displayed();
             toggleNavigationDrawersBar.has().menuButton();
             toggleNavigationDrawersBar.has().title();
-            toggleNavigationDrawersBar.has().properTitleText("Title");
+            toggleNavigationDrawersBar.has().textInTitle("Title");
             toggleNavigationDrawersBar.clickOnMenuButton();
             toggleNavigationDrawersBar.has().navigationMenu();
         }

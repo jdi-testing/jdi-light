@@ -30,7 +30,7 @@ public class ToolBarsTests extends TestsInit {
     public void backgroundToolbarTests() {
         backgroundToolbar.is().displayed();
         backgroundToolbar.has().menuButton();
-        backgroundToolbar.has().properTitleText("Vuetify");
+        backgroundToolbar.has().textInTitle("Vuetify");
         backgroundToolbar.has().title();
         backgroundToolbar.has().exportButton();
         backgroundToolbar.has().backgroundImage();
@@ -49,7 +49,7 @@ public class ToolBarsTests extends TestsInit {
         denseToolbar.is().displayed();
         denseToolbar.has().menuButton();
         denseToolbar.has().title();
-        denseToolbar.has().properTitleText("Title");
+        denseToolbar.has().textInTitle("Title");
         denseToolbar.has().searchButton();
         denseToolbar.has().heartButton();
         denseToolbar.has().verticalDotsButton();
@@ -62,7 +62,7 @@ public class ToolBarsTests extends TestsInit {
         extendedToolbar.is().displayed();
         extendedToolbar.has().menuButton();
         extendedToolbar.has().title();
-        extendedToolbar.has().properTitleText("Title");
+        extendedToolbar.has().textInTitle("Title");
         extendedToolbar.has().searchButton();
         extendedToolbar.has().heartButton();
         extendedToolbar.has().verticalDotsButton();
@@ -91,7 +91,7 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.is().displayed();
         contextActionToolbar.has().menuButton();
         contextActionToolbar.has().title();
-        contextActionToolbar.has().properTitleText("Photos");
+        contextActionToolbar.has().textInTitle("Photos");
         contextActionToolbar.has().verticalDotsButton();
         contextActionToolbar.has().selectOptionsField();
         contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
@@ -104,7 +104,7 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.has().headerColor(GREY_DARKEN_4.value());
         contextActionToolbar.has().deleteButton();
         contextActionToolbar.has().closeButton();
-        contextActionToolbar.has().properTitleText("4 selected");
+        contextActionToolbar.has().textInTitle("4 selected");
         contextActionToolbar.clickOnVerticalDotsButton();
         contextActionToolbar.has().selectedOptions("Foo,Bar,Fizz,Buzz");
         Timer.waitCondition(optionsMenu::isHidden);
@@ -112,7 +112,7 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.getCloseButton().click();
         Timer.waitCondition(contextActionToolbar::isPurple);
         contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
-        contextActionToolbar.has().properTitleText("Photos");
+        contextActionToolbar.has().textInTitle("Photos");
         contextActionToolbar.has().selectedOptions("");
         contextActionToolbar.getCloseButton().is().hidden();
         contextActionToolbar.getDeleteButton().is().hidden();
@@ -123,7 +123,7 @@ public class ToolBarsTests extends TestsInit {
         flexibleAndCardToolbar.is().displayed();
         flexibleAndCardToolbar.has().menuButton();
         flexibleAndCardToolbar.has().title();
-        flexibleAndCardToolbar.has().properTitleText("Title");
+        flexibleAndCardToolbar.has().textInTitle("Title");
         flexibleAndCardToolbar.has().searchButton();
         flexibleAndCardToolbar.has().verticalDotsButton();
         flexibleAndCardToolbar.has().appsButton();
