@@ -46,9 +46,9 @@ public class BannersTests extends TestsInit {
             actionsBanner.has().buttons(2);
             actionsBanner.has().visibleButtons();
             actionsBanner.has().checker();
-            actionsBanner.is().checkerChecked();
+            actionsBanner.has().checkerChecked();
             actionsBanner.checkerUnCheck();
-            actionsBanner.is().checkerUnchecked();
+            actionsBanner.has().checkerUnchecked();
             actionsBanner.has().hiddenButtons();
             actionsBanner.has().hiddenTextField();
         }
@@ -65,6 +65,6 @@ public class BannersTests extends TestsInit {
         public void twoLineBannerTests() {
             twoLineBanner.is().displayed();
             twoLineBanner.has().buttons(2);
-            twoLineBanner.is().text("Lorem ipsum dolor sit amet, consectetur adipiscing elit");
+            twoLineBanner.has().text("Lorem ipsum dolor sit amet, consectetur adipiscing elit");
         }
 }
