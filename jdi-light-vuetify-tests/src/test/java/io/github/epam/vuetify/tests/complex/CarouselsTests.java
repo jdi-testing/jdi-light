@@ -56,8 +56,8 @@ public class CarouselsTests extends TestsInit {
         customDelimitersCarousel.has().currentSlideColor(ORANGE_DARKEN_1.value());
         profileCard.is().displayed();
         profileCard.has().backgroundImage();
-        profileCard.has().properName("John Leider");
-        profileCard.has().properJobFunction("Author");
+        profileCard.has().name("John Leider");
+        profileCard.has().jobFunction("Author");
         customDelimitersCarousel.has().toggle();
         customDelimitersCarousel.has().toggleUnchecked();
         customDelimitersCarousel.checkToggle();

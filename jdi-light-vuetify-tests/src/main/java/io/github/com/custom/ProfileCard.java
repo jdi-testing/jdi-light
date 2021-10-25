@@ -12,23 +12,23 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
 
     private static final String IMAGES_LINK = ".v-image__image--cover";
 
-    @JDIAction("Does profile card has avatar image")
+    @JDIAction("'{name}' has avatar image")
     public boolean hasAvatarImage() {
         return finds(IMAGES_LINK).get(2).getAttribute("style").contains("url");
     }
 
-    @JDIAction("Does profile card has background image")
+    @JDIAction("'{name}' has background image")
     public boolean hasBackgroundImage() {
         return finds(IMAGES_LINK).get(1).getAttribute("style").contains("url");
     }
 
-    @JDIAction("Does profile card has proper text in 'name' text field")
-    public String hasProperName() {
+    @JDIAction("'{name}' has expected text in 'name' text field")
+    public String hasName() {
         return find(".v-list-item__title").getText();
     }
 
-    @JDIAction("Does profile card has proper text in 'job function' text field")
-    public String hasProperJobFunction() {
+    @JDIAction("'{name}' has expected text in 'job function' text field")
+    public String hasJobFunction() {
         return find(".v-list-item__subtitle").getText();
     }
 

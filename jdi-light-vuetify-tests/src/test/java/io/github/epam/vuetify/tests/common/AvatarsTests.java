@@ -51,8 +51,8 @@ public class AvatarsTests extends TestsInit {
     @Test
     public void profileCardTests() {
         profileCard.is().displayed();
-        profileCard.has().properName("Marcus Obrien");
-        profileCard.has().properJobFunction("Network Engineer");
+        profileCard.has().name("Marcus Obrien");
+        profileCard.has().jobFunction("Network Engineer");
         profileCard.has().avatarImage();
         profileCard.has().backgroundImage();
     }
