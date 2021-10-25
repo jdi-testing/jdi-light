@@ -11,7 +11,7 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
 
     @JDIAction("Get '{name}' 'menu' button")
     private Button getMenuButton() {
-        return new Button(find("//i[contains(@class, 'mdi-menu')]/ancestor::button"));
+        return findIconButton("mdi-menu");
     }
 
     @JDIAction("Get '{name}' title")
@@ -21,7 +21,7 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
 
     @JDIAction("Get '{name}' 'vertical dots' button")
     private Button getVerticalDotsButton() {
-        return new Button(find("//i[contains(@class, 'mdi-dots-vertical')]/ancestor::button"));
+        return findIconButton("mdi-dots-vertical");
     }
 
     @JDIAction("Get '{name}' header")
@@ -46,13 +46,13 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
 
     @JDIAction("'{name}' has 'search' button")
     public boolean hasSearchButton() {
-        Button searchButton = new Button(find("//i[contains(@class, 'mdi-magnify')]/ancestor::button"));
+        Button searchButton = findIconButton("mdi-magnify");
         return searchButton.isDisplayed();
     }
 
     @JDIAction("'{name}' has 'heart' button")
     public boolean hasHeartButton() {
-        Button heartButton = new Button(find("//i[contains(@class, 'mdi-heart')]/ancestor::button"));
+        Button heartButton = findIconButton("mdi-heart");
         return heartButton.isDisplayed();
     }
 
@@ -74,5 +74,9 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
     @JDIAction("Click on 'vertical dots' button")
     public void clickOnVerticalDotsButton() {
         getVerticalDotsButton().click();
+    }
+
+    protected Button findIconButton(String buttonLocator) {
+        return new Button(find(String.format("//i[contains(@class, '%s')]/ancestor::button", buttonLocator)));
     }
 }

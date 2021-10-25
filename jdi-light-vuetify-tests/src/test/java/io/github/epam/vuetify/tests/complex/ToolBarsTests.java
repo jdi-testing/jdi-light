@@ -73,16 +73,15 @@ public class ToolBarsTests extends TestsInit {
     @Test
     public void floatingWithSearchToolbarTests() {
         floatingWithSearchToolbar.is().displayed();
-        floatingWithSearchToolbar.has().searchButton();
+        floatingWithSearchToolbar.has().searchIcon();
         floatingWithSearchToolbar.has().verticalDotsButton();
         floatingWithSearchToolbar.has().gpsButton();
         floatingWithSearchToolbar.has().mapImage();
         floatingWithSearchToolbar.has().input();
         floatingWithSearchToolbar.is().inputNotFocused();
-        floatingWithSearchToolbar.getInput().select();
-        floatingWithSearchToolbar.getInput().sendKeys("Find something");
+        floatingWithSearchToolbar.sendTextToInputField("Find something");
         floatingWithSearchToolbar.is().inputFocused();
-        floatingWithSearchToolbar.getGpsButton().click();
+        floatingWithSearchToolbar.clickOnVerticalDotsButton();
         floatingWithSearchToolbar.is().inputNotFocused();
     }
 
@@ -95,8 +94,7 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.has().verticalDotsButton();
         contextActionToolbar.has().selectOptionsField();
         contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
-        contextActionToolbar.getSelectOptionsField().click();
-        Timer.waitCondition(optionsMenu::isDisplayed);
+        contextActionToolbar.clickOnSelectOptionsField();
         optionsMenu.is().displayed();
         for (UIElement element : options) {
             element.click();
@@ -109,13 +107,11 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.has().selectedOptions("Foo,Bar,Fizz,Buzz");
         Timer.waitCondition(optionsMenu::isHidden);
         optionsMenu.is().hidden();
-        contextActionToolbar.getCloseButton().click();
-        Timer.waitCondition(contextActionToolbar::isPurple);
+        contextActionToolbar.clickOnCloseButton();
         contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
         contextActionToolbar.has().textInTitle("Photos");
         contextActionToolbar.has().selectedOptions("");
-        contextActionToolbar.getCloseButton().is().hidden();
-        contextActionToolbar.getDeleteButton().is().hidden();
+        contextActionToolbar.has().hiddenButtons();
     }
 
     @Test
