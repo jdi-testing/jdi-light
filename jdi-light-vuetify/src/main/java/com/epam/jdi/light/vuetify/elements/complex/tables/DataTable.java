@@ -179,6 +179,7 @@ public class DataTable extends SimpleTable {
                 break;
             default:
                 System.out.println("Required category not found or not exist");
+                break;
         }
     }
 
