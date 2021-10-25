@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.utils;
 
+import com.epam.jdi.light.elements.common.WindowsManager;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,8 +27,8 @@ public class ModalTests extends TestsInit {
             buttonModal.get(modalCounter).click();
             modalTexts.get(modalCounter).has().text(EXPECTED_TEXT);
         }
-        for (int modalCounter = 3; modalCounter > 1; modalCounter--) {
-            buttonModal.get(modalCounter).core().click(-200, -100);
-        }
+//        for (int modalCounter = 3; modalCounter > 1; modalCounter--) {
+//            buttonModal.get(modalCounter).core().click(-200, -100);
+//        }
     }
 }
