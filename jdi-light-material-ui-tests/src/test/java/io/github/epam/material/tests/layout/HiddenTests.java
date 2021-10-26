@@ -43,9 +43,6 @@ public class HiddenTests extends TestsInit {
     @Test(dataProvider = "Screen Width Dividers")
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int divider) {
         currentWidth.is().displayed();
-        xsDown.is().displayed();
-        smDown.is().displayed();
-        mdDown.is().displayed();
         divideScreenWidthSize(divider);
         String width = getWidth(currentWidth);
         checkWidth(width);
