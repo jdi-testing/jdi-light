@@ -13,53 +13,53 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> implements Has
 
     @JDIAction("'{name}' has expected color")
     public String hasColor() {
-        return this.find(".v-progress-linear__background").getCssValue("background-color");
+        return find(".v-progress-linear__background").getCssValue("background-color");
     }
 
     @JDIAction("'{name}' has expected bar color")
     public String hasBarColor() {
         if(isIndeterminate()) {
-            return this.find("div.short").getCssValue("background-color");
-        } else return this.find(".v-progress-linear__determinate").getCssValue("background-color");
+            return find("div.short").getCssValue("background-color");
+        } else return find(".v-progress-linear__determinate").getCssValue("background-color");
     }
 
     @JDIAction("'{name}' is determinate")
     public boolean isDeterminate() {
-        return this.children().stream()
+        return children().stream()
                 .anyMatch(element-> element.getAttribute("class")
                 .contains("_determinate"));
     }
 
     @JDIAction("'{name}' is indeterminate")
     public boolean isIndeterminate() {
-        return this.children().stream()
+        return children().stream()
                 .anyMatch(element-> element.getAttribute("class")
                 .contains("indeterminate"));
     }
 
     @JDIAction("'{name}' is reactive")
     public boolean isReactive() {
-        return this.core().getAttribute("class").contains("reactive");
+        return core().getAttribute("class").contains("reactive");
     }
 
     @JDIAction("'{name}' is rounded")
     public boolean isRounded() {
-        return this.core().getAttribute("class").contains("rounded");
+        return core().getAttribute("class").contains("rounded");
     }
 
     @JDIAction("'{name}' is striped")
     public boolean isStriped() {
-        return this.core().getAttribute("class").contains("striped");
+        return core().getAttribute("class").contains("striped");
     }
 
     @JDIAction("'{name}' has expected value")
     public Double hasValue() {
-        return Double.valueOf(this.core().getAttribute("aria-valuenow"));
+        return Double.valueOf(core().getAttribute("aria-valuenow"));
     }
 
     @JDIAction("'{name}' has stream")
     public boolean hasStream() {
-        return this.children().stream()
+        return children().stream()
                 .anyMatch(element-> element.getAttribute("class")
                         .contains("stream"));
     }
@@ -69,6 +69,6 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> implements Has
     }
 
     public ProgressBarAssert has() {
-        return this.is();
+        return is();
     }
 }

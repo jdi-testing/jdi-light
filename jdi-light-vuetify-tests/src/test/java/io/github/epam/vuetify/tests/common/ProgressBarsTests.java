@@ -6,6 +6,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.stream.Collectors;
+
 import static com.epam.jdi.light.common.ElementArea.TOP_RIGHT;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.DEEP_PURPLE_ACCENT_4;
@@ -61,15 +63,17 @@ public class ProgressBarsTests extends TestsInit {
 
     @Test()
     public void queryProgressBarTests() {
+        Timer.waitCondition(queryProgressBar::isIndeterminate);
         queryProgressBar.is().displayed();
         queryProgressBar.is().reactive();
         queryProgressBar.has().color(BLUE_DARKEN_2.value());
-        queryProgressBar.is().hidden();
-        Timer.waitCondition(queryProgressBar::isHidden);
-        queryProgressBar.is().indeterminate();
         Timer.waitCondition(queryProgressBar::isDeterminate);
+        System.out.println(queryProgressBar.children().stream().map(e -> e.getAttribute("class")).collect(Collectors.toList()));
         queryProgressBar.is().determinate();
-
+        Timer.waitCondition(queryProgressBar::isHidden);
+        queryProgressBar.is().hidden();
+        Timer.waitCondition(queryProgressBar::isIndeterminate);
+        queryProgressBar.is().indeterminate();
     }
 
     @Test(dataProvider = "reversedProgressBarsTestsDataProvider",

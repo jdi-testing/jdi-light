@@ -10,59 +10,61 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> {
 
-    @JDIAction("Assert that {name} is displayed")
+    @JDIAction("Assert that '{name}' is displayed")
     public ProgressBarAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that {name} is indeterminate")
+    @JDIAction("Assert that '{name}' is indeterminate")
     public ProgressBarAssert indeterminate() {
-        Timer.waitCondition(element()::isIndeterminate);
-        jdiAssert(element().isIndeterminate(), Matchers.is(true));
+        jdiAssert(element().isIndeterminate() ? "is indeterminate" : "is not indeterminate",
+                Matchers.is("is indeterminate"));
         return this;
     }
 
-    @JDIAction("Assert that {name} is determinate")
+    @JDIAction("Assert that '{name}' is determinate")
     public ProgressBarAssert determinate() {
-        Timer.waitCondition(element()::isDeterminate);
-        jdiAssert(element().isDeterminate(), Matchers.is(true));
+        jdiAssert(element().isDeterminate() ? "is determinate" : "is not determinate",
+                Matchers.is("is determinate"));
         return this;
     }
 
-    @JDIAction("Assert that {name} is reactive")
+    @JDIAction("Assert that '{name}' is reactive")
     public ProgressBarAssert reactive() {
-        Timer.waitCondition(element()::isReactive);
-        jdiAssert(element().isReactive(), Matchers.is(true));
+        jdiAssert(element().isReactive() ? "is reactive" : "is not reactive",
+                Matchers.is("is reactive"));
         return this;
     }
 
-    @JDIAction("Assert that {name} is rounded")
+    @JDIAction("Assert that '{name}' is rounded")
     public ProgressBarAssert rounded() {
-        jdiAssert(element().isRounded(), Matchers.is(true));
+        jdiAssert(element().isRounded() ? "is rounded" : "is not rounded",
+                Matchers.is("is rounded"));
         return this;
     }
 
-    @JDIAction("Assert that {name} is striped")
+    @JDIAction("Assert that '{name}' is striped")
     public ProgressBarAssert striped() {
-        jdiAssert(element().isStriped(), Matchers.is(true));
+        jdiAssert(element().isStriped() ? "is striped" : "is not striped",
+                Matchers.is("is striped"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has expected color")
+    @JDIAction("Assert that '{name}' has expected color")
     public ProgressBarAssert color(String color) {
         jdiAssert(element().hasColor(), Matchers.is(color));
         return this;
     }
 
-    @JDIAction("Assert that {name} has expected bar color")
+    @JDIAction("Assert that '{name}' has expected bar color")
     public ProgressBarAssert barColor(String barColor) {
         jdiAssert(element().hasBarColor(), Matchers.is(barColor));
         return this;
     }
 
-    @JDIAction("Assert that {name} has expected value")
+    @JDIAction("Assert that '{name}' has expected value")
     public ProgressBarAssert value(Double value) {
         boolean hasExpectedValue = Math.abs((element().hasValue()) - value) < 0.5;
         Timer.waitCondition(() -> hasExpectedValue);
@@ -73,10 +75,10 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
         return this;
     }
 
-    @JDIAction("Assert that {name} has stream")
+    @JDIAction("Assert that '{name}' has stream")
     public ProgressBarAssert stream() {
-        jdiAssert(element().hasStream(), Matchers.is(true));
+        jdiAssert(element().hasStream() ? "has stream" : "does not have stream",
+                Matchers.is("has stream"));
         return this;
     }
-
 }
