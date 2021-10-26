@@ -42,7 +42,6 @@ public class SlideGroupTestsData {
             this.endIndex = endIndex;
         }
 
-
         public String getOrder() {
             return order;
         }
