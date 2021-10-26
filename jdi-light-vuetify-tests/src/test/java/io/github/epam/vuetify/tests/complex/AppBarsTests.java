@@ -34,9 +34,9 @@ public class AppBarsTests extends TestsInit {
             collapsibleBar.scrollBarToTop();
             collapsibleBar.has().title();
             collapsibleBar.has().checkbox();
-            collapsibleBar.is().checkboxChecked();
+            collapsibleBar.has().checkboxChecked();
             collapsibleBar.checkboxUncheck();
-            collapsibleBar.is().checkboxUnchecked();
+            collapsibleBar.has().checkboxUnchecked();
             collapsibleBar.has().hiddenTitle();
             collapsibleBar.checkboxCheck();
             collapsibleBar.has().title();
