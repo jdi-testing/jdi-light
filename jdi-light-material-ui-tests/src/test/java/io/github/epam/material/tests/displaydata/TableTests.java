@@ -108,13 +108,7 @@ public class TableTests extends TestsInit {
         scrollButtons.get(3).hover();
         scrollButtons.get(3).click();
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-
-        sortingSelectingTable.headerUI().get(2).check();
+        sortingSelectingTable.headerUI().select("Dessert (100g serving)");
         rowsPerPageBtn.click();
         rowsPerPageValues.get(2).click();
         rowsPerPageBtn.has().text("10");
