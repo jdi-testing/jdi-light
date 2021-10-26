@@ -10,24 +10,24 @@ import com.epam.jdi.light.vuetify.asserts.ProgressSpinnerAssert;
 
 public class ProgressSpinner extends UIBaseElement<ProgressSpinnerAssert> {
 
-    @JDIAction("{name} has {0} color")
+    @JDIAction("'{name}' has {0} color")
     public String hasColor() {
-        return this.find("svg").getCssValue("color");
+        return find("svg").getCssValue("color");
     }
 
-    @JDIAction("{name} has {0} height")
+    @JDIAction("'{name}' has {0} height")
     public String hasHeight() {
-        return this.core().getCssValue("height");
+        return core().getCssValue("height");
     }
 
-    @JDIAction("{name} has {0} width")
+    @JDIAction("'{name}' has {0} width")
     public String hasWidth() {
-        return this.core().getCssValue("width");
+        return core().getCssValue("width");
     }
 
-    @JDIAction("{name} is spinning")
+    @JDIAction("'{name}' is spinning")
     public boolean isSpinning() {
-       return this.core().getAttribute("class").contains("v-progress-circular--indeterminate");
+       return core().getAttribute("class").contains("v-progress-circular--indeterminate");
     }
 
     public ProgressSpinnerAssert is() {
@@ -35,7 +35,7 @@ public class ProgressSpinner extends UIBaseElement<ProgressSpinnerAssert> {
     }
 
     public ProgressSpinnerAssert has() {
-        return this.is();
+        return is();
     }
 
 }
