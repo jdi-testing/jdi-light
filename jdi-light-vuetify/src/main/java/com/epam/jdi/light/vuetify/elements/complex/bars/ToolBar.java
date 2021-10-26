@@ -59,7 +59,7 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
 
     @JDIAction("'{name}' has 'search' icon")
     public boolean hasSearchIcon() {
-        return find(".mdi-magnify").isDisplayed();
+        return castToIcon(find(".mdi-magnify")).isDisplayed();
     }
 
     @JDIAction("'{name}' has 'GPS' button")

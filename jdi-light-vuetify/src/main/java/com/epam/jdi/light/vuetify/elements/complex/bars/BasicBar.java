@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.bars.BasicBarAssert;
 import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert<?,?>> extends UIBaseElement<A> implements IsText {
 
@@ -78,5 +79,9 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
 
     protected Button findIconButton(String buttonLocator) {
         return new Button(find(String.format("//i[contains(@class, '%s')]/ancestor::button", buttonLocator)));
+    }
+
+    protected Icon castToIcon(UIElement element) {
+        return new Icon().setCore(Icon.class, element);
     }
 }
