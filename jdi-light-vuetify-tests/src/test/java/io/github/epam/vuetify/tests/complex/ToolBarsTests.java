@@ -41,7 +41,7 @@ public class ToolBarsTests extends TestsInit {
         collapseToolbar.is().displayed();
         collapseToolbar.has().searchButton();
         collapseToolbar.has().verticalDotsButton();
-        collapseToolbar.is().collapsed();
+        collapseToolbar.is().collapsedHeader();
     }
 
     @Test
@@ -53,8 +53,8 @@ public class ToolBarsTests extends TestsInit {
         denseToolbar.has().searchButton();
         denseToolbar.has().heartButton();
         denseToolbar.has().verticalDotsButton();
-        denseToolbar.is().dense();
-        denseToolbar.has().height("48");
+        denseToolbar.is().denseHeader();
+        denseToolbar.has().heightOfHeader("48");
     }
 
     @Test
@@ -66,8 +66,8 @@ public class ToolBarsTests extends TestsInit {
         extendedToolbar.has().searchButton();
         extendedToolbar.has().heartButton();
         extendedToolbar.has().verticalDotsButton();
-        extendedToolbar.is().extended();
-        extendedToolbar.has().height("112");
+        extendedToolbar.is().extendedHeader();
+        extendedToolbar.has().heightOfHeader("112");
     }
 
     @Test
@@ -77,12 +77,12 @@ public class ToolBarsTests extends TestsInit {
         floatingWithSearchToolbar.has().verticalDotsButton();
         floatingWithSearchToolbar.has().gpsButton();
         floatingWithSearchToolbar.has().mapImage();
-        floatingWithSearchToolbar.has().input();
-        floatingWithSearchToolbar.is().inputNotFocused();
+        floatingWithSearchToolbar.has().inputField();
+        floatingWithSearchToolbar.is().notFocusedInputField();
         floatingWithSearchToolbar.sendTextToInputField("Find something");
-        floatingWithSearchToolbar.is().inputFocused();
+        floatingWithSearchToolbar.is().focusedInputField();
         floatingWithSearchToolbar.clickOnVerticalDotsButton();
-        floatingWithSearchToolbar.is().inputNotFocused();
+        floatingWithSearchToolbar.is().notFocusedInputField();
     }
 
     @Test

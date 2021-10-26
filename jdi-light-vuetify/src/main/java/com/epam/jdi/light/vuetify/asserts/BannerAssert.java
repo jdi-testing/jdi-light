@@ -23,27 +23,27 @@ public class BannerAssert extends UIAssert<BannerAssert, Banner> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' 'checker' element is checked")
+    @JDIAction("Assert that '{name}'s 'checker' element is checked")
     public BannerAssert checkerChecked() {
         jdiAssert(element().hasCheckerChecked() ? "checker is checked" : "checker is not checked",
                 Matchers.is("checker is checked"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' 'checker' element is unchecked")
+    @JDIAction("Assert that '{name}'s 'checker' element is unchecked")
     public BannerAssert checkerUnchecked() {
         jdiAssert(element().hasCheckerUnchecked() ? "checker is not checked" : "checker is checked",
                 Matchers.is("checker is not checked"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected title")
+    @JDIAction("Assert that '{name}' has expected text in title")
     public BannerAssert title(String title) {
         jdiAssert(element().hasTitle(), Matchers.is(title));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected title")
+    @JDIAction("Assert that '{name}' has expected text")
     public BannerAssert text(String text) {
         jdiAssert(element().hasText(), Matchers.containsString(text));
         return this;

@@ -84,54 +84,54 @@ public class ToolBarAssert extends BasicBarAssert<ToolBar, ToolBarAssert> {
     }
 
     @JDIAction("Assert that '{name}' has input field")
-    public ToolBarAssert input() {
+    public ToolBarAssert inputField() {
         jdiAssert(element().hasInput() ? "input field is visible" : "input field is not visible",
                 Matchers.is("input field is visible"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' header is collapsed")
-    public ToolBarAssert collapsed() {
-        jdiAssert(element().isCollapsed() ? "header is collapsed" : "header is not collapsed",
+    @JDIAction("Assert that '{name}'s header is collapsed")
+    public ToolBarAssert collapsedHeader() {
+        jdiAssert(element().headerIsCollapsed() ? "header is collapsed" : "header is not collapsed",
                 Matchers.is("header is collapsed"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' header is dense")
-    public ToolBarAssert dense() {
-        jdiAssert(element().isDense() ? "header is dense" : "header is not dense",
+    @JDIAction("Assert that '{name}'s header is dense")
+    public ToolBarAssert denseHeader() {
+        jdiAssert(element().headerIsDense() ? "header is dense" : "header is not dense",
                 Matchers.is("header is dense"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' header is extended")
-    public ToolBarAssert extended() {
-        jdiAssert(element().isExtended() ? "header is extended" : "header is not extended",
+    @JDIAction("Assert that '{name}'s header is extended")
+    public ToolBarAssert extendedHeader() {
+        jdiAssert(element().headerIsExtended() ? "header is extended" : "header is not extended",
                 Matchers.is("header is extended"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' header has expected height")
-    public ToolBarAssert height(String height) {
+    @JDIAction("Assert that '{name}'s header has expected height")
+    public ToolBarAssert heightOfHeader(String height) {
         jdiAssert(element().hasHeaderHeight(height), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' input field is focused")
-    public ToolBarAssert inputFocused() {
-        jdiAssert(element().inputIsFocused() ? "input field is focused" : "input field is not focused",
+    @JDIAction("Assert that '{name}'s input field is focused")
+    public ToolBarAssert focusedInputField() {
+        jdiAssert(element().inputFieldIsFocused() ? "input field is focused" : "input field is not focused",
                 Matchers.is("input field is focused"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' input field is not focused")
-    public ToolBarAssert inputNotFocused() {
-        jdiAssert(!element().inputIsFocused() ? "input field is not focused" : "input field is focused",
+    @JDIAction("Assert that '{name}'s input field is not focused")
+    public ToolBarAssert notFocusedInputField() {
+        jdiAssert(!element().inputFieldIsFocused() ? "input field is not focused" : "input field is focused",
                 Matchers.is("input field is not focused"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' header has expected color")
+    @JDIAction("Assert that '{name}'s header has expected color")
     public ToolBarAssert headerColor(String color) {
         Timer.waitCondition(() -> element().hasHeaderColor().equals(color));
         jdiAssert(element().hasHeaderColor(), Matchers.is(color));

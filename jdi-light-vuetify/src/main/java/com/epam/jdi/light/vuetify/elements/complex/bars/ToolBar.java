@@ -11,22 +11,22 @@ import com.epam.jdi.light.vuetify.elements.common.Button;
 
 public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
 
-    @JDIAction("Get '{name}' 'close' button")
+    @JDIAction("Get '{name}'s 'close' button")
     private Button getCloseButton() {
         return findIconButton("mdi-close");
     }
 
-    @JDIAction("Get '{name}' 'delete' button")
+    @JDIAction("Get '{name}'s 'delete' button")
     private Button getDeleteButton() {
         return findIconButton("mdi-delete");
     }
 
-    @JDIAction("Get '{name}' input field")
+    @JDIAction("Get '{name}'s input field")
     private UIElement getInput() {
         return find("input");
     }
 
-    @JDIAction("Get '{name}' 'select options' field")
+    @JDIAction("Get '{name}'s 'select options' field")
     private UIElement getSelectOptionsField() {
         return find(".v-select__selections");
     }
@@ -36,7 +36,7 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
         return getHeader().getAttribute("style").equals(String.format("height: %spx;", height));
     }
 
-    @JDIAction("'{name}' header has color")
+    @JDIAction("'{name}'s header has color")
     public String hasHeaderColor() {
         return getHeader().getCssValue("background-color");
     }
@@ -104,23 +104,23 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
         return getCloseButton().isNotExist() && getDeleteButton().isNotExist();
     }
 
-    @JDIAction("'{name}' header is collapsed")
-    public boolean isCollapsed() {
+    @JDIAction("'{name}'s header is collapsed")
+    public boolean headerIsCollapsed() {
         return getHeader().getAttribute("class").contains("collapsed");
     }
 
-    @JDIAction("'{name}' header is dense")
-    public boolean isDense() {
+    @JDIAction("'{name}'s header is dense")
+    public boolean headerIsDense() {
         return getHeader().getAttribute("class").contains("dense");
     }
 
-    @JDIAction("'{name}' header is extended")
-    public boolean isExtended() {
+    @JDIAction("'{name}'s header is extended")
+    public boolean headerIsExtended() {
         return getHeader().getAttribute("class").contains("extended");
     }
 
-    @JDIAction("'{name}' input field is focused")
-    public boolean inputIsFocused() {
+    @JDIAction("'{name}'s input field is focused")
+    public boolean inputFieldIsFocused() {
         return find(".v-input").getAttribute("class").contains("is-focused");
     }
 

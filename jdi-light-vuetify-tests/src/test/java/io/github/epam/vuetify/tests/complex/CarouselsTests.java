@@ -36,7 +36,7 @@ public class CarouselsTests extends TestsInit {
     }
 
     @Test
-    public void customDelimitersCarouselTests() throws Exception {
+    public void customDelimitersCarouselTests() {
         customDelimitersCarousel.is().displayed();
         customDelimitersCarousel.has().numberOfDelimiters(5);
         customDelimitersCarousel.has().delimiterIcons("mdi-minus");
@@ -58,12 +58,12 @@ public class CarouselsTests extends TestsInit {
         profileCard.has().backgroundImage();
         profileCard.has().name("John Leider");
         profileCard.has().jobFunction("Author");
-        customDelimitersCarousel.has().toggle();
-        customDelimitersCarousel.has().toggleUnchecked();
-        customDelimitersCarousel.checkToggle();
-        customDelimitersCarousel.has().toggleChecked();
-        customDelimitersCarousel.uncheckToggle();
-        customDelimitersCarousel.has().toggleUnchecked();
+        customDelimitersCarousel.has().switchElement();
+        customDelimitersCarousel.has().uncheckedSwitch();
+        customDelimitersCarousel.checkSwitch();
+        customDelimitersCarousel.has().checkedSwitch();
+        customDelimitersCarousel.uncheckSwitch();
+        customDelimitersCarousel.has().uncheckedSwitch();
     }
 
     @Test
@@ -71,8 +71,8 @@ public class CarouselsTests extends TestsInit {
         customTransitionCarousel.is().displayed();
         customTransitionCarousel.has().numberOfDelimiters(4);
         customTransitionCarousel.has().delimiterIcons("mdi-circle");
-        customTransitionCarousel.has().nextButtonVisible();
-        customTransitionCarousel.has().previousButtonVisible();
+        customTransitionCarousel.has().visibleNextButton();
+        customTransitionCarousel.has().visiblePreviousButton();
         customTransitionCarousel.has().currentSlideBackgroundImage("squirrel");
         customTransitionCarousel.clickOnNextButton();
         customTransitionCarousel.has().currentSlideBackgroundImage("sky");
@@ -89,13 +89,13 @@ public class CarouselsTests extends TestsInit {
     }
 
     @Test
-    public void carouselCycleTests() {
+    public void cycleCarouselTests() {
         cycleCarousel.is().displayed();
-        cycleCarousel.has().previousButtonHidden();
-        cycleCarousel.has().nextButtonHidden();
+        cycleCarousel.has().hiddenNextButton();
+        cycleCarousel.has().hiddenPreviousButton();
         cycleCarousel.hover();
-        cycleCarousel.has().previousButtonVisible();
-        cycleCarousel.has().nextButtonVisible();
+        cycleCarousel.has().visiblePreviousButton();
+        cycleCarousel.has().visibleNextButton();
         cycleCarousel.has().numberOfDelimiters(5);
         cycleCarousel.has().delimiterIcons("mdi-circle");
         cycleCarousel.goToSlide(1);
@@ -129,8 +129,7 @@ public class CarouselsTests extends TestsInit {
         hideControlsCarousel.is().displayed();
         hideControlsCarousel.has().numberOfDelimiters(4);
         hideControlsCarousel.has().delimiterIcons("mdi-circle");
-        hideControlsCarousel.has().nextButtonHidden();
-        hideControlsCarousel.has().previousButtonHidden();
+        hideControlsCarousel.has().noControlButtons();
         hideControlsCarousel.has().currentSlideBackgroundImage("squirrel");
         hideControlsCarousel.goToSlide(2);
         hideControlsCarousel.has().currentSlideBackgroundImage("sky");
@@ -143,10 +142,10 @@ public class CarouselsTests extends TestsInit {
     @Test
     public void customizedArrowsCarouselTests() {
         customizedArrowsCarousel.is().displayed();
-        customizedArrowsCarousel.has().previousButtonHidden();
-        customizedArrowsCarousel.has().nextButtonHidden();
+        customizedArrowsCarousel.has().hiddenPreviousButton();
+        customizedArrowsCarousel.has().hiddenNextButton();
         customizedArrowsCarousel.hover();
-        customizedArrowsCarousel.has().previousButtonVisible();
+        customizedArrowsCarousel.has().visiblePreviousButton();
         customizedArrowsCarousel.has().previousButtonText("PREVIOUS SLIDE");
         customizedArrowsCarousel.has().previousButtonColor(GREEN.value());
         customizedArrowsCarousel.has().nextButtonText("NEXT SLIDE");
@@ -182,9 +181,9 @@ public class CarouselsTests extends TestsInit {
     @Test
     public void hideDelimitersCarouselTests() {
         hideDelimitersCarousel.is().displayed();
-        hideDelimitersCarousel.has().delimitersHidden();
-        hideDelimitersCarousel.has().nextButtonVisible();
-        hideDelimitersCarousel.has().previousButtonVisible();
+        hideDelimitersCarousel.has().hiddenDelimiters();
+        hideDelimitersCarousel.has().visibleNextButton();
+        hideDelimitersCarousel.has().visiblePreviousButton();
         hideDelimitersCarousel.has().currentSlideBackgroundImage("squirrel");
         hideDelimitersCarousel.clickOnNextButton();
         hideDelimitersCarousel.has().currentSlideBackgroundImage("sky");

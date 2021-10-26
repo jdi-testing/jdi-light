@@ -13,22 +13,22 @@ import com.epam.jdi.light.vuetify.elements.common.Switch;
 
 public class Banner extends UIBaseElement<BannerAssert> {
 
-    @JDIAction("Get '{name}' 'switch' element")
+    @JDIAction("Get '{name}'s 'switch' element")
     private Switch getChecker() {
         return castToSwitch(find(".v-input__control"));
     }
 
-    @JDIAction("Get '{name}' buttons")
+    @JDIAction("Get '{name}'s buttons")
     private WebList getButtons() {
         return this.finds("button");
     }
 
-    @JDIAction("Get '{name}' icon")
+    @JDIAction("Get '{name}'s icon")
     private UIElement getIcon() {
         return this.find("i");
     }
 
-    @JDIAction("Get '{name}' text field")
+    @JDIAction("Get '{name}'s text field's state")
     public boolean hasHiddenTextField() {
         return find(".v-banner__text").isHidden();
     }
@@ -38,7 +38,7 @@ public class Banner extends UIBaseElement<BannerAssert> {
         return find(".v-banner__text").getText();
     }
 
-    @JDIAction("'{name}' has title")
+    @JDIAction("'{name}' has text in title")
     public String hasTitle() {
         return find(".v-toolbar__title").getText();
     }
