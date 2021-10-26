@@ -32,7 +32,6 @@ public class HiddenTests extends TestsInit {
     public void before() {
         hiddenPage.open();
         hiddenPage.isOpened();
-        WebDriverFactory.getDriver().manage().window().maximize();
     }
 
     @AfterMethod
