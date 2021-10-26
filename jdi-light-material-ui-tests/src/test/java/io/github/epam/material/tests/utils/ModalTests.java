@@ -26,8 +26,5 @@ public class ModalTests extends TestsInit {
             buttonModal.get(modalCounter).click();
             modalTexts.get(modalCounter).has().text(EXPECTED_TEXT);
         }
-//        for (int modalCounter = 3; modalCounter > 1; modalCounter--) {
-//            buttonModal.get(modalCounter).core().click(-200, -100);
-//        }
     }
 }
