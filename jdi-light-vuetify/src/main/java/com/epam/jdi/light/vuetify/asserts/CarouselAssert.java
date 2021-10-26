@@ -77,7 +77,6 @@ public class CarouselAssert extends UIAssert<CarouselAssert, Carousel> {
         return this;
     }
 
-
     @JDIAction("Assert that '{name}'s 'previous' button has expected text")
     public CarouselAssert previousButtonText(String text) {
         jdiAssert(element().previousButtonText(), Matchers.containsString(text));
