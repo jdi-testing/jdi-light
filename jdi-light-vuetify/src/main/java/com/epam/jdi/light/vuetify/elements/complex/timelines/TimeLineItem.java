@@ -49,7 +49,7 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
         return find(DOT_LOCATOR).hasClass(LARGE_CLASS);
     }
 
-    public String dividerColor() {
+    public String dotColor() {
         return find(INNER_DOT_LOCATOR).css("background-color");
     }
 }
