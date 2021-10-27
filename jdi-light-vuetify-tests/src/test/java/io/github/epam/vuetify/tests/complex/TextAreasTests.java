@@ -25,6 +25,7 @@ import static io.github.com.pages.TextareasPage.prependOuterTextArea;
 import static io.github.com.pages.TextareasPage.signUpForm;
 import static io.github.com.pages.TextareasPage.threeRowsTextArea;
 import static io.github.com.pages.TextareasPage.twoRowsTextArea;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -111,21 +112,21 @@ public class TextAreasTests extends TestsInit {
     public void prependOuterIconTextAreaTest() {
         prependOuterTextArea.label().has().text("prepend-icon");
         prependOuterTextArea.prependOuter().is().displayed();
-        prependOuterTextArea.prependOuter().has().classValue("mdi-comment");
+        prependOuterTextArea.prependOuter().has().classValue(containsString("mdi-comment"));
     }
 
     @Test
     public void appendInnerIconTextAreaTest() {
         appendInnerTextArea.label().has().text("append-icon");
         appendInnerTextArea.appendInner().is().displayed();
-        appendInnerTextArea.appendInner().has().classValue("mdi-comment");
+        appendInnerTextArea.appendInner().has().classValue(containsString("mdi-comment"));
     }
 
     @Test
     public void prependInnerIconTextAreaTest() {
         prependInnerTextArea.label().has().text("prepend-inner-icon");
         prependInnerTextArea.prependInner().is().displayed();
-        prependInnerTextArea.prependInner().has().classValue("mdi-comment");
+        prependInnerTextArea.prependInner().has().classValue(containsString("mdi-comment"));
     }
 
     @Test
