@@ -2,13 +2,14 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.get.OsTypes;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
-import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.vuetify.asserts.TextFieldAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import org.openqa.selenium.Keys;
@@ -49,10 +50,10 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Get '{name}' text input field")
     public UIElement textInputField() {
-        WebList textInputField = finds(INPUT);
-        if (textInputField.isEmpty())
+        UIElement textInputField = find(INPUT);
+        if (textInputField.isNotExist())
             return find(TEXTAREA);
-        return textInputField.first();
+        return textInputField;
     }
 
     @Override
@@ -79,15 +80,14 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Get '{name}' message")
     public String getMessage() {
-        WebList message = finds(MESSAGE);
-        //Boolean isempty =  message.isEmpty();
-        return message.isEmpty() ? "" : message.first().getText();
+        UIElement message = find(MESSAGE);
+        return message.isNotExist() ? "" : message.getText();
     }
 
     @JDIAction("Get '{name}' counter")
     public String getCounter() {
-        WebList counter = finds(COUNTER);
-        return counter.isEmpty() ? "" : counter.first().getText();
+        UIElement counter = find(COUNTER);
+        return counter.isNotExist() ? "" : counter.getText();
     }
 
     @Override
@@ -98,7 +98,10 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Get '{name}' icon by locator")
     protected Icon getIconByLocator(String locator, int index) {
         WebList iconArea = finds(locator);
-        return iconArea.isEmpty() ? null : new Icon().setCore(Icon.class, iconArea.get(index).find("button"));
+        if(iconArea.isEmpty())
+            return null;
+        JDIBase core = iconArea.get(index).find("button").isExist() ? iconArea.get(index).find("button") : iconArea.get(index).find("i");
+        return iconArea.isEmpty() ? null : new Icon().setCore(Icon.class, core);
     }
 
     @JDIAction("Get '{name}' prepend outer icon")
@@ -153,8 +156,8 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @Override
     public String labelText() {
-        WebList label = finds(LABEL);
-        return label.isEmpty() ? "" : label.first().getText();
+        UIElement label = find(LABEL);
+        return label.isNotExist() ? "" : label.getText();
     }
 
     @Override

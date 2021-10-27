@@ -4,11 +4,11 @@ import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.TextFieldsTestsDataProvider;
 import org.hamcrest.Matchers;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.stream.IntStream;
-import org.openqa.selenium.Keys;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.textFieldsPage;
@@ -144,18 +144,14 @@ public class TextFieldsTests extends TestsInit {
     }
 
     @Test
-    public void iconsTextFieldTest() {
+    public void iconsTextFieldTest() throws Exception {
         String mdiMapMarker = "mdi-map-marker";
-        IntStream.of(0, 4, 8, 12).forEach(index -> {
-            try {
-                iconsTextField.get(1 + index).getPrependOuterIcon().is().type(mdiMapMarker);
-                iconsTextField.get(2 + index).getPrependInnerIcon().is().type(mdiMapMarker);
-                iconsTextField.get(3 + index).getAppendInnerIcon().is().type(mdiMapMarker);
-                iconsTextField.get(4 + index).getAppendOuterIcon().is().type(mdiMapMarker);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        for(int index = 0; index <= 12; index += 4){
+            iconsTextField.get(1 + index).getPrependOuterIcon().is().type(mdiMapMarker);
+            iconsTextField.get(2 + index).getPrependInnerIcon().is().type(mdiMapMarker);
+            iconsTextField.get(3 + index).getAppendInnerIcon().is().type(mdiMapMarker);
+            iconsTextField.get(4 + index).getAppendOuterIcon().is().type(mdiMapMarker);
+        }
     }
 
     @Test
@@ -245,11 +241,17 @@ public class TextFieldsTests extends TestsInit {
     public void customValidationTextFieldTest() {
         customValidationTextField.forEach(TextField::focus);
         customValidationTextField.forEach(textField -> {
-            textField.is().message();
             textField.core().click();
+            textField.is().message();
             textField.setText("Russia");
         });
         customValidationTextField.get(6).textInputField().sendKeys(Keys.ENTER);
+        customValidationTextField.get(1).is().noMessage();
+        customValidationTextField.get(2).is().noMessage();
+        customValidationTextField.get(3).is().noMessage();
+        customValidationTextField.get(4).is().noMessage();
+        customValidationTextField.get(5).is().noMessage();
+        customValidationTextField.get(6).is().noMessage();
         customValidationTextField.forEach(textField -> textField.is().noMessage());
     }
 
