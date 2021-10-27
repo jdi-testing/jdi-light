@@ -9,9 +9,9 @@ import static com.epam.jdi.light.common.UIUtils.initT;
 
 public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extends UIBaseElement<TimeLineAssert> {
 
-    protected String BODY_LOCATOR = ".v-timeline-item__body";
-    protected String DIVIDER_LOCATOR = ".v-timeline-item__divider";
-    protected String OPPOSITE_LOCATOR = ".v-timeline-item__opposite";
+    protected String BODY_LOCATOR;
+    protected String DIVIDER_LOCATOR;
+    protected String OPPOSITE_LOCATOR;
     protected String DOT_LOCATOR = ".v-timeline-item__dot";
     protected String INNER_DOT_LOCATOR = ".v-timeline-item__inner-dot";
 
@@ -20,6 +20,14 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
 
     protected Class<T> bodyClass;
     protected Class<U> dividerClass;
+
+    TimeLineItem(TimeLine<T, U> timeLine) {
+        bodyClass = timeLine.bodyClass;
+        dividerClass = timeLine.dividerClass;
+        BODY_LOCATOR = timeLine.BODY_LOCATOR;
+        DIVIDER_LOCATOR = timeLine.DIVIDER_LOCATOR;
+        OPPOSITE_LOCATOR = timeLine.OPPOSITE_LOCATOR;
+    }
 
     public T body() {
         return initT(find(BODY_LOCATOR), this, bodyClass);
