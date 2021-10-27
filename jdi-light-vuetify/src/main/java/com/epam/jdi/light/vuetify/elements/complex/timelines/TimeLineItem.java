@@ -3,11 +3,11 @@ package com.epam.jdi.light.vuetify.elements.complex.timelines;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import com.epam.jdi.light.vuetify.asserts.timelines.TimeLineAssert;
+import com.epam.jdi.light.vuetify.asserts.timelines.TimeLineItemAssert;
 
 import static com.epam.jdi.light.common.UIUtils.initT;
 
-public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extends UIBaseElement<TimeLineAssert> {
+public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extends UIBaseElement<TimeLineItemAssert> {
 
     protected String BODY_LOCATOR;
     protected String DIVIDER_LOCATOR;
@@ -51,5 +51,10 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
 
     public String dotColor() {
         return find(INNER_DOT_LOCATOR).css("background-color");
+    }
+
+    @Override
+    public TimeLineItemAssert is() {
+        return new TimeLineItemAssert().set(this);
     }
 }
