@@ -11,13 +11,13 @@ import static org.hamcrest.Matchers.equalTo;
 public class TimeLineItemAssert extends UIAssert<TimeLineItemAssert, TimeLineItem> {
 
     @JDIAction("Assert that {name} is small")
-    public TimeLineItemAssert small() {
+    public TimeLineItemAssert smallDot() {
         jdiAssert(element().isSmall() ? "small" : "large", Matchers.is("small"));
         return this;
     }
 
     @JDIAction("Assert that {name} is large")
-    public TimeLineItemAssert large() {
+    public TimeLineItemAssert largeDot() {
         jdiAssert(element().isLarge() ? "large" : "small", Matchers.is("large"));
         return this;
     }
