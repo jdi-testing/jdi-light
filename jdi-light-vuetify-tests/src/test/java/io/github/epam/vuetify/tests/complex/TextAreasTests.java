@@ -108,24 +108,24 @@ public class TextAreasTests extends TestsInit {
     }
 
     @Test
-    public void prependOuterIconTextAreaTest() throws Exception {
+    public void prependOuterIconTextAreaTest() {
         prependOuterTextArea.label().has().text("prepend-icon");
         prependOuterTextArea.prependOuter().is().displayed();
-        prependOuterTextArea.prependOuter().has().type("mdi-comment");
+        prependOuterTextArea.prependOuter().has().classValue("mdi-comment");
     }
 
     @Test
-    public void appendInnerIconTextAreaTest() throws Exception {
+    public void appendInnerIconTextAreaTest() {
         appendInnerTextArea.label().has().text("append-icon");
         appendInnerTextArea.appendInner().is().displayed();
-        appendInnerTextArea.appendInner().has().type("mdi-comment");
+        appendInnerTextArea.appendInner().has().classValue("mdi-comment");
     }
 
     @Test
-    public void prependInnerIconTextAreaTest() throws Exception {
+    public void prependInnerIconTextAreaTest() {
         prependInnerTextArea.label().has().text("prepend-inner-icon");
         prependInnerTextArea.prependInner().is().displayed();
-        prependInnerTextArea.prependInner().has().type("mdi-comment");
+        prependInnerTextArea.prependInner().has().classValue("mdi-comment");
     }
 
     @Test
