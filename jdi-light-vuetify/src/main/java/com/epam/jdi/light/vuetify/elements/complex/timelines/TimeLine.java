@@ -59,24 +59,19 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
 
     @JDIAction("Get list of items from '{name}'")
     public List<TimeLineItem<T, U>> items() {
-        return list().map(element -> createItem(element, bodyClass, dividerClass));
+        return list().map(this::createItem);
     }
 
     @JDIAction("Get item by index '{0}' from '{name}'")
     public TimeLineItem<T, U> item(int index) {
-        return createItem(list().get(index), bodyClass, dividerClass);
+        return createItem(list().get(index));
     }
 
-    @JDIAction("Get item by index '{0}' with '{1}' as body and '{2}' as divider from '{name}'")
-    public <C extends ICoreElement, D extends ICoreElement> TimeLineItem<C, D> item(int index, Class<C> bodyClass, Class<D> dividerClass) {
-        return createItem(list().get(index), bodyClass, dividerClass);
-    }
-
-    protected <C extends ICoreElement, D extends ICoreElement> TimeLineItem<C, D> createItem(UIElement root, Class<C> body, Class<D> divider) {
-        TimeLineItem<C, D> timeLineItem = new TimeLineItem<>();
+    protected TimeLineItem<T, U> createItem(UIElement root) {
+        TimeLineItem<T, U> timeLineItem = new TimeLineItem<>();
         timeLineItem.setCore(TimeLineItem.class, root);
-        timeLineItem.bodyClass = body;
-        timeLineItem.dividerClass = divider;
+        timeLineItem.bodyClass = bodyClass;
+        timeLineItem.dividerClass = dividerClass;
         timeLineItem.BODY_LOCATOR = BODY_LOCATOR;
         timeLineItem.DIVIDER_LOCATOR = DIVIDER_LOCATOR;
         timeLineItem.OPPOSITE_LOCATOR = OPPOSITE_LOCATOR;
