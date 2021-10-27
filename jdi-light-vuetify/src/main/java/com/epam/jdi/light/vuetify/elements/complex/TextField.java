@@ -9,7 +9,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
-import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.vuetify.asserts.TextFieldAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import org.openqa.selenium.Keys;
@@ -99,7 +98,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Get '{name}' icon by locator")
     protected Icon getIconByLocator(String locator, int index) {
         WebList iconArea = finds(locator);
-        if(iconArea.isEmpty())
+        if (iconArea.isEmpty())
             return null;
         JDIBase core = iconArea.get(index).find("button").isExist() ? iconArea.get(index).find("button") : iconArea.get(index).find("i");
         return iconArea.isEmpty() ? null : new Icon().setCore(Icon.class, core);

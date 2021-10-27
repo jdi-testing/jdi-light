@@ -8,8 +8,6 @@ import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.stream.IntStream;
-
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.textFieldsPage;
 import static io.github.com.pages.TextFieldsPage.clearableTextField;
@@ -146,7 +144,7 @@ public class TextFieldsTests extends TestsInit {
     @Test
     public void iconsTextFieldTest() throws Exception {
         String mdiMapMarker = "mdi-map-marker";
-        for(int index = 0; index <= 12; index += 4){
+        for (int index = 0; index <= 12; index += 4) {
             iconsTextField.get(1 + index).getPrependOuterIcon().is().type(mdiMapMarker);
             iconsTextField.get(2 + index).getPrependInnerIcon().is().type(mdiMapMarker);
             iconsTextField.get(3 + index).getAppendInnerIcon().is().type(mdiMapMarker);
