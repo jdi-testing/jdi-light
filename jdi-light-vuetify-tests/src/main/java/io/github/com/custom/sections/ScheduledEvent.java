@@ -9,13 +9,13 @@ import java.util.List;
 
 public class ScheduledEvent extends Section {
 
-    @UI(".col:nth-child(1)")
+    @UI(".col strong[1]")
     protected UIElement time;
 
-    @UI(".col:nth-child(2) strong")
+    @UI(".col strong[2]")
     protected UIElement event;
 
-    @UI(".col:nth-child(2) .text-caption")
+    @UI(".text-caption")
     protected UIElement caption;
 
     public UIElement time() {
