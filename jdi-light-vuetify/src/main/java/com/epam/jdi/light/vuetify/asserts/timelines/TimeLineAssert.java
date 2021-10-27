@@ -15,15 +15,33 @@ public class TimeLineAssert extends UISelectAssert<TimeLineAssert, TimeLine> {
         return this;
     }
 
+    @JDIAction("Assert that {name} is not align to top")
+    public TimeLineAssert notAlignTop() {
+        jdiAssert(element().isAlignTop() ? "align to top" : "not align to top", Matchers.is("not align to top"));
+        return this;
+    }
+
     @JDIAction("Assert that {name} is dense")
     public TimeLineAssert dense() {
         jdiAssert(element().isDense() ? "dense" : "not dense", Matchers.is("dense"));
         return this;
     }
 
+    @JDIAction("Assert that {name} is not dense")
+    public TimeLineAssert notDense() {
+        jdiAssert(element().isDense() ? "dense" : "not dense", Matchers.is("not dense"));
+        return this;
+    }
+
     @JDIAction("Assert that {name} is reversed")
     public TimeLineAssert reversed() {
         jdiAssert(element().isReversed() ? "reversed" : "not reversed", Matchers.is("reversed"));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} is not reversed")
+    public TimeLineAssert notReversed() {
+        jdiAssert(element().isReversed() ? "reversed" : "not reversed", Matchers.is("not reversed"));
         return this;
     }
 }
