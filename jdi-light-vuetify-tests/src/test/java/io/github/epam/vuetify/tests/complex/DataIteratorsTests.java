@@ -6,7 +6,7 @@ import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorExpandSin
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class DataIteratorsTests extends TestsInit {
@@ -18,7 +18,7 @@ public class DataIteratorsTests extends TestsInit {
     private final static String SANDWICH = "Ice cream sandwich";
     private final static String ECLAIR = "Eclair";
 
-    @BeforeSuite
+    @BeforeClass
     public static void setup() {
         dataIteratorsPage.open();
     }
