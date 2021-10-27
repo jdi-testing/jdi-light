@@ -1,5 +1,10 @@
 package io.github.epam.vuetify.tests.complex;
 
+import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.tabsPage;
 import static io.github.com.pages.TabsPage.alignWithTitleTabs;
@@ -28,14 +33,10 @@ import static io.github.com.pages.TabsPage.rightTabs;
 import static io.github.com.pages.TabsPage.tabItemsTabs;
 import static io.github.com.pages.TabsPage.verticalTabs;
 import static io.github.com.pages.TabsPage.verticalTabsIcon;
-import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
 
 public class TabsTests extends TestsInit {
 
-    @BeforeSuite
+    @BeforeClass
     public static void before() {
         tabsPage.open();
     }

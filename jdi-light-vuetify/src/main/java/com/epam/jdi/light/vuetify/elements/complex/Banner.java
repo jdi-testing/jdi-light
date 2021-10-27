@@ -1,7 +1,5 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -10,13 +8,7 @@ import com.epam.jdi.light.vuetify.asserts.BannerAssert;
 import com.epam.jdi.tools.Timer;
 
 /**
- * To see an example of Banner web element please visit https://jdi-testing.github.io/jdi-light/vuetify/banners
-
- *
- * From vuetify docs: "The v-banner component is used as middle-interruptive message to user with 1-2 actions.
- * It comes in 2 variations single-line and multi-line (implicit).
- * These can have icons which you can use with your message and actions."
- *
+ * To see an example of Banner web element please visit https://vuetifyjs.com/en/components/banners/
  */
 
 public class Banner extends UIBaseElement<BannerAssert> {
@@ -98,10 +90,6 @@ public class Banner extends UIBaseElement<BannerAssert> {
 
     public void handleAlert() {
         this.core().driver().switchTo().alert().dismiss();
-    }
-
-    public void scrollIntoView() {
-        jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
     }
 
     public BannerAssert is() {

@@ -6,7 +6,7 @@ import io.github.com.custom.panels.LocationExpansionPanel;
 import io.github.com.custom.panels.TripExpansionPanel;
 import io.github.com.custom.panels.TripTimeExpansionPanel;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -37,7 +37,7 @@ public class ExpansionPanelsTest extends TestsInit {
             "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, " +
             "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
-    @BeforeSuite
+    @BeforeClass
     public void before() {
         expansionPanelsPage.open();
         expansionPanelsPage.checkOpened();

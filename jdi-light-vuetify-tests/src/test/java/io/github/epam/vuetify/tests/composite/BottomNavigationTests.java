@@ -2,15 +2,24 @@ package io.github.epam.vuetify.tests.composite;
 
 import com.epam.jdi.light.vuetify.elements.enums.Colors;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bottomNavigationPage;
-import static io.github.com.pages.BottomNavigationPage.*;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationColor;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationGrow;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationHideOnScroll;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationHorizontal;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationScrollThreshold;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationShift;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationToggle;
+import static io.github.com.pages.BottomNavigationPage.hideAndScrollPanel;
+import static io.github.com.pages.BottomNavigationPage.scrollThresholdPanel;
+import static io.github.com.pages.BottomNavigationPage.toggleNavigationButton;
 
 public class BottomNavigationTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void beforeTest() {
         bottomNavigationPage.open();
     }

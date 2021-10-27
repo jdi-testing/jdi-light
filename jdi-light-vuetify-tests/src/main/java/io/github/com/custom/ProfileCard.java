@@ -1,12 +1,14 @@
 package io.github.com.custom;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.tools.Timer;
 import io.github.com.custom.asserts.ProfileCardAssert;
+
+/**
+ * To see an example of Profile card web element please visit https://vuetifyjs.com/en/components/avatars/#profile-card
+ */
 
 public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
 
@@ -54,10 +56,6 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
     public String hasProperJobFunction() {
         Timer.waitCondition(getJobFunctionArea()::isDisplayed);
         return getJobFunctionArea().getText();
-    }
-
-    public void scrollIntoView() {
-        jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
     }
 
     public ProfileCardAssert is() {

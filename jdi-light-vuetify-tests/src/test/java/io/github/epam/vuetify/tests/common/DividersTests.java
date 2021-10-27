@@ -3,7 +3,7 @@ package io.github.epam.vuetify.tests.common;
 import com.epam.jdi.light.vuetify.elements.common.Divider;
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
@@ -13,7 +13,7 @@ import static io.github.com.pages.DividersPage.verticalDividers;
 
 public class DividersTests extends TestsInit {
 
-    @BeforeSuite
+    @BeforeClass
     public void before() {
         dividersPage.open();
     }

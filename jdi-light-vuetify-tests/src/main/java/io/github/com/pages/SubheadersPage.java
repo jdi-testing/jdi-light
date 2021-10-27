@@ -5,7 +5,7 @@ import com.epam.jdi.light.vuetify.elements.common.Subheader;
 
 import java.util.List;
 
-public class SubheaderPage extends VuetifyPage {
+public class SubheadersPage extends VuetifyPage {
 
     @UI("#InsetSubheader .v-subheader")
     public static Subheader insetSubheader;
