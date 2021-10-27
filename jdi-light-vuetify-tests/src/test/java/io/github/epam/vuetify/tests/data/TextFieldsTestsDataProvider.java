@@ -19,8 +19,7 @@ public class TextFieldsTestsDataProvider {
         return new Object[][] {
                 {1, "purple"},
                 {2, "blue"},
-                {3, "teal"},
-                {4, "pink"}
+                {3, "teal"}
         };
     }
 }

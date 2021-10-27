@@ -91,6 +91,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @Override
+    @JDIAction("Get '{name}' placeholder")
     public String placeholder() {
         return textInputField().placeholder();
     }
@@ -177,7 +178,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @Override
     public void focus() {
-        textInputField().focus();
+        textInputField().click();
     }
 
     @Override
