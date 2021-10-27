@@ -8,6 +8,8 @@ import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.stream.Stream;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.textFieldsPage;
 import static io.github.com.pages.TextFieldsPage.clearableTextField;
@@ -66,22 +68,29 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void denseTextFieldTest() {
-        denseTextField.get(1).getSlot().is().css("background-color", "rgba(0, 0, 0, 0)");
-        denseTextField.get(2).is().peculiarity("filled");
-        denseTextField.get(2).getSlot().is().css("background-color", "rgba(0, 0, 0, 0.06)");
-        denseTextField.get(3).is().peculiarity("filled");
-        denseTextField.get(3).getSlot().is().css("background-color", "rgba(0, 0, 0, 0.06)");
-        denseTextField.get(3).is().peculiarity("placeholder");
+        Stream.of(new Object[][]{
+                {1, "rgba(0, 0, 0, 0)", 2, "filled"},
+                {2, "rgba(0, 0, 0, 0.06)", 3, "filled"},
+                {3, "rgba(0, 0, 0, 0.06)", 3, "placeholder"}
+        }).forEach(data -> {
+            denseTextField.get((int) data[0]).getSlot().is().css("background-color", (String) data[1]);
+            denseTextField.get((int) data[2]).is().peculiarity((String) data[3]);
+        });
+
+        Stream.of(new Object[][]{
+                {4, "solo"},
+                {5, "outlined"},
+                {6, "outlined"},
+                {6, "placeholder"}
+        }).forEach(data -> denseTextField.get((int) data[0]).is().peculiarity((String) data[1]));
+
         denseTextField.get(3).focus();
         denseTextField.get(3).is().placeholder("Dense & Rounded");
-        denseTextField.get(4).is().peculiarity("solo");
-        denseTextField.get(5).is().peculiarity("outlined");
-        denseTextField.get(6).is().peculiarity("outlined");
-        denseTextField.get(6).is().peculiarity("placeholder");
         denseTextField.get(6).focus();
         denseTextField.get(6).is().placeholder("Placeholder");
+
         denseTextField.forEach(textField -> {
-            textField.setText("text");
+            textField.clearAndSetText("text");
             textField.is().text("text");
         });
     }
@@ -244,12 +253,6 @@ public class TextFieldsTests extends TestsInit {
             textField.setText("Russia");
         });
         customValidationTextField.get(6).textInputField().sendKeys(Keys.ENTER);
-        customValidationTextField.get(1).is().noMessage();
-        customValidationTextField.get(2).is().noMessage();
-        customValidationTextField.get(3).is().noMessage();
-        customValidationTextField.get(4).is().noMessage();
-        customValidationTextField.get(5).is().noMessage();
-        customValidationTextField.get(6).is().noMessage();
         customValidationTextField.forEach(textField -> textField.is().noMessage());
     }
 
@@ -266,6 +269,4 @@ public class TextFieldsTests extends TestsInit {
         passwordInputTextField.get(1).getAppendInnerIcon().click();
         passwordInputTextField.get(1).is().textType("password");
     }
-
-
 }
