@@ -32,19 +32,19 @@ public class NavigationDrawersTests extends TestsInit {
         bottomDrawerNavigationAppBar.clickOnMenuButton();
         bottomDrawerNavigationDrawer.is().opened();
         bottomDrawerNavigationDrawer.has().numberOfOptions(4);
-        bottomDrawerNavigationDrawer.selectOption(1);
+        bottomDrawerNavigationDrawer.selectOptionByIndex(1);
         bottomDrawerNavigationDrawer.is().closed();
         bottomDrawerNavigationAppBar.clickOnMenuButton();
-        bottomDrawerNavigationDrawer.has().optionSelected(1, true);
-        bottomDrawerNavigationDrawer.has().optionSelected(2, false);
-        bottomDrawerNavigationDrawer.has().optionSelected(3, false);
-        bottomDrawerNavigationDrawer.has().optionSelected(4, false);
-        bottomDrawerNavigationDrawer.selectOption(2);
+        bottomDrawerNavigationDrawer.has().optionSelected(1);
+        bottomDrawerNavigationDrawer.has().optionNotSelected(2);
+        bottomDrawerNavigationDrawer.has().optionNotSelected(3);
+        bottomDrawerNavigationDrawer.has().optionNotSelected(4);
+        bottomDrawerNavigationDrawer.selectOptionByIndex(2);
         bottomDrawerNavigationAppBar.clickOnMenuButton();
-        bottomDrawerNavigationDrawer.has().optionSelected(1, false);
-        bottomDrawerNavigationDrawer.has().optionSelected(2, true);
-        bottomDrawerNavigationDrawer.has().optionSelected(3, false);
-        bottomDrawerNavigationDrawer.has().optionSelected(4, false);
+        bottomDrawerNavigationDrawer.has().optionSelected(2);
+        bottomDrawerNavigationDrawer.has().optionNotSelected(1);
+        bottomDrawerNavigationDrawer.has().optionNotSelected(3);
+        bottomDrawerNavigationDrawer.has().optionNotSelected(4);
     }
 
     @Test
@@ -54,10 +54,10 @@ public class NavigationDrawersTests extends TestsInit {
         expandOnHoverNavigationDrawer.hover();
         expandOnHoverNavigationDrawer.is().expanded();
         expandOnHoverNavigationDrawer.has().numberOfOptions(5);
-        expandOnHoverNavigationDrawer.is().optionClickable(2);
-        expandOnHoverNavigationDrawer.is().optionClickable(3);
-        expandOnHoverNavigationDrawer.is().optionClickable(4);
-        expandOnHoverNavigationDrawer.is().optionClickable(5);
+        expandOnHoverNavigationDrawer.has().optionClickable(2);
+        expandOnHoverNavigationDrawer.has().optionClickable(3);
+        expandOnHoverNavigationDrawer.has().optionClickable(4);
+        expandOnHoverNavigationDrawer.has().optionClickable(5);
     }
 
     @Test
@@ -65,9 +65,9 @@ public class NavigationDrawersTests extends TestsInit {
         imagesNavigationDrawer.is().displayed();
         imagesNavigationDrawer.has().backgroundImage();
         imagesNavigationDrawer.has().numberOfOptions(3);
-        imagesNavigationDrawer.is().optionClickable(1);
-        imagesNavigationDrawer.is().optionClickable(2);
-        imagesNavigationDrawer.is().optionClickable(3);
+        imagesNavigationDrawer.has().optionClickable(1);
+        imagesNavigationDrawer.has().optionClickable(2);
+        imagesNavigationDrawer.has().optionClickable(3);
     }
 
     @Test
@@ -77,9 +77,9 @@ public class NavigationDrawersTests extends TestsInit {
         miniVariantNavigationDrawer.click();
         miniVariantNavigationDrawer.is().expanded();
         miniVariantNavigationDrawer.has().numberOfOptions(4);
-        miniVariantNavigationDrawer.is().optionClickable(2);
-        miniVariantNavigationDrawer.is().optionClickable(3);
-        miniVariantNavigationDrawer.is().optionClickable(4);
+        miniVariantNavigationDrawer.has().optionClickable(2);
+        miniVariantNavigationDrawer.has().optionClickable(3);
+        miniVariantNavigationDrawer.has().optionClickable(4);
         miniVariantNavigationDrawer.collapse();
         miniVariantNavigationDrawer.is().collapsed();
     }
@@ -88,14 +88,14 @@ public class NavigationDrawersTests extends TestsInit {
     public void permanentAndFloatingNavigationDrawerTests() {
         permanentAndFloatingNavigationDrawer.is().displayed();
         permanentAndFloatingNavigationDrawer.has().numberOfOptions(2);
-        permanentAndFloatingNavigationDrawer.is().optionClickable(1);
-        permanentAndFloatingNavigationDrawer.is().optionClickable(2);
+        permanentAndFloatingNavigationDrawer.has().optionClickable(1);
+        permanentAndFloatingNavigationDrawer.has().optionClickable(2);
     }
 
     @Test
     public void rightNavigationDrawerTests() {
         rightNavigationDrawer.is().displayed();
-        rightNavigationDrawer.has().location("right");
+        rightNavigationDrawer.is().onTheRightSide();
         rightNavigationDrawer.has().numberOfOptions(4);
         rightNavigationDrawer.has().allOptionsVisible();
     }
@@ -107,8 +107,8 @@ public class NavigationDrawersTests extends TestsInit {
         temporaryNavigationDrawer.is().opened();
         temporaryNavigationDrawer.has().numberOfOptions(3);
         temporaryNavigationDrawer.has().allOptionsVisible();
-        temporaryNavigationDrawer.is().optionClickable(2);
-        temporaryNavigationDrawer.is().optionClickable(3);
+        temporaryNavigationDrawer.has().optionClickable(2);
+        temporaryNavigationDrawer.has().optionClickable(3);
         temporaryNavigationDrawerContainer.find(".v-overlay").click();
         temporaryNavigationDrawer.is().closed();
     }
@@ -118,9 +118,9 @@ public class NavigationDrawersTests extends TestsInit {
         coloredDrawerNavigationDrawer.is().displayed();
         coloredDrawerNavigationDrawer.has().backgroundColor(DEEP_PURPLE_ACCENT_4.value());
         coloredDrawerNavigationDrawer.has().numberOfOptions(3);
-        coloredDrawerNavigationDrawer.is().optionClickable(1);
-        coloredDrawerNavigationDrawer.is().optionClickable(2);
-        coloredDrawerNavigationDrawer.is().optionClickable(3);
+        coloredDrawerNavigationDrawer.has().optionClickable(1);
+        coloredDrawerNavigationDrawer.has().optionClickable(2);
+        coloredDrawerNavigationDrawer.has().optionClickable(3);
         coloredDrawerNavigationDrawer.has().button();
     }
 
@@ -128,8 +128,8 @@ public class NavigationDrawersTests extends TestsInit {
     public void combinedDrawerNavigationDrawerTests() {
         combinedDrawerNavigationDrawer.is().displayed();
         combinedDrawerNavigationDrawer.has().numberOfOptions(6);
-        combinedDrawerNavigationDrawer.is().optionClickable(4);
-        combinedDrawerNavigationDrawer.is().optionClickable(5);
-        combinedDrawerNavigationDrawer.is().optionClickable(6);
+        combinedDrawerNavigationDrawer.has().optionClickable(4);
+        combinedDrawerNavigationDrawer.has().optionClickable(5);
+        combinedDrawerNavigationDrawer.has().optionClickable(6);
     }
 }
