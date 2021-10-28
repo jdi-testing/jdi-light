@@ -9,21 +9,25 @@ import com.epam.jdi.light.vuetify.asserts.MenuAssert;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * To see an example of Menu web element please visit https://vuetifyjs.com/en/components/menus/
+ */
+
 public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
 
     @JDIAction("'{name}' has position")
     public String hasPosition() {
-        return String.format("top: %s; left: %s", this.core().getCssValue("top"), this.core().getCssValue("left"));
+        return String.format("top: %s; left: %s", core().getCssValue("top"), core().getCssValue("left"));
     }
 
     @JDIAction("'{name}' has number of options")
     public int hasNumberOfOptions() {
-        return this.finds(".v-list-item").size();
+        return finds(".v-list-item").size();
     }
 
     @JDIAction("'{name}' has titles of options")
     public List<String> hasOptionsTitles() {
-        return this.finds(".v-list-item__title").stream()
+        return finds(".v-list-item__title").stream()
                 .map(UIElement::getText)
                 .collect(Collectors.toList());
     }
@@ -48,6 +52,6 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
     }
 
     public MenuAssert has() {
-        return this.is();
+        return is();
     }
 }

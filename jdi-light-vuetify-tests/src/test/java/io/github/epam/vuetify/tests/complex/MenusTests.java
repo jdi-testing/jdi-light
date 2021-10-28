@@ -33,6 +33,8 @@ import static io.github.com.pages.MenusPage.slideYTransitionButton;
 
 public class MenusTests extends TestsInit {
 
+    List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
+
     @BeforeClass
     public void before() {
         menusPage.open();
@@ -41,7 +43,6 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void absoluteMenuTests() {
-        List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
         Timer.waitCondition(absoluteMenu::isDisplayed);
         absoluteMenu.is().displayed();
         absoluteMenu.show();
@@ -60,7 +61,6 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void absoluteWithoutActivatorMenuTests() {
-        List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
         Timer.waitCondition(absoluteWithoutActivatorMenu::isDisplayed);
         absoluteWithoutActivatorMenu.is().displayed();
         absoluteWithoutActivatorMenu.show();
@@ -76,7 +76,6 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void closeOnClickMenuTests() {
-        List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
         Timer.waitCondition(closeOnClickMenuSwitch::isDisplayed);
         closeOnClickMenuSwitch.uncheck();
         closeOnClickMenuButton.show();
@@ -98,7 +97,6 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void offsetXMenuTests() {
-        List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
         Timer.waitCondition(offsetXMenuButton::isDisplayed);
         offsetXMenuButton.show();
         offsetXMenuButton.click();
@@ -117,7 +115,6 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void offsetYMenuTests() {
-        List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
         Timer.waitCondition(offsetYMenuButton::isDisplayed);
         offsetYMenuButton.show();
         offsetYMenuButton.click();
@@ -136,7 +133,6 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void openOnHoverMenuTests() {
-        List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
         Timer.waitCondition(openOnHoverMenuButton::isDisplayed);
         openOnHoverMenuButton.show();
         openOnHoverMenuButton.hover();
@@ -194,7 +190,6 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void customTransitionsMenuTests() {
-        List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
         Timer.waitCondition(scaleTransitionButton::isDisplayed);
         scaleTransitionButton.show();
         scaleTransitionButton.click();
@@ -233,7 +228,6 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void useInComponentsMenuTests() {
-        List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
         Timer.waitCondition(complexComponent::isDisplayed);
         complexComponent.is().displayed();
         complexComponent.show();
