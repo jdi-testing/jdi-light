@@ -73,7 +73,7 @@ public class TimelinesTests extends TestsInit {
     public void denseTimeLineTest() {
         denseTimeLine.has().size(1);
         TimeLineItem<IconAlert, UIElement> singleItem = denseTimeLine.item(1);
-        singleItem.body().icon().has().classValue(containsString("mdi-information"));
+        singleItem.body().icon().is().type("mdi-information");
         singleItem.body().has().text(LOREM_IPSUM_TEXT);
         singleItem.body().has().css("background-color", BLUE.value());
         singleItem.has().dotColor(BLUE);
@@ -91,7 +91,7 @@ public class TimelinesTests extends TestsInit {
     public void iconDotsTimeLineTest(int index, String icon, String title, String text, Colors color) {
         TimeLineItem<ButtonCard, Icon> item = iconDotsTimeLine.item(index);
         item.has().dotColor(color);
-        item.divider().has().classValue(containsString(icon));
+        item.divider().has().type(icon);
         item.body().has().css("background-color", color.value());
         item.body().title().has().text(title);
         item.body().text().has().text(text);
@@ -115,7 +115,7 @@ public class TimelinesTests extends TestsInit {
         item.has().dotColor(color);
         item.body().title().has().css("background-color", color.value());
         item.body().has().title(title);
-        item.body().titleIcon().has().classValue(containsString(icon));
+        item.body().titleIcon().is().type(icon);
         if (small) {
             item.has().smallDot();
         }
