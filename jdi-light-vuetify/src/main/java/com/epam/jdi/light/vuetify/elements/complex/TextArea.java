@@ -171,9 +171,10 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
 
     @JDIAction("Add new line '{0}' in '{name}'")
     public void addNewLine(String line) {
+        String newLine = line;
         if (isNotEmpty())
-            line = "\n" + line;
-        sendKeys(line);
+            newLine = "\n" + line;
+        sendKeys(newLine);
     }
 
     @Override
