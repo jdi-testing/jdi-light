@@ -15,7 +15,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.*;
 import static io.github.com.StaticSite.timelinesPage;
 import static io.github.com.dataproviders.TimeLineDataProviders.LOREM_IPSUM_TEXT;
 import static io.github.com.pages.TimelinesPage.advancedTimeline;
@@ -149,5 +149,45 @@ public class TimelinesTests extends TestsInit {
     @Test
     public void advancedTimeLineTest() {
         advancedTimeline.has().size(8);
+        advancedTimeline.defaultItem(1).has().largeDot();
+        advancedTimeline.defaultItem(1).has().dotColor(ORANGE);
+        advancedTimeline.defaultItem(1).divider().has().text("JL");
+        advancedTimeline.defaultItem(1).body().find("input").label().has().text("Leave a comment...");
+        advancedTimeline.defaultItem(1).body().find("button").has().text("POST");
+        advancedTimeline.defaultItem(1).body().find("input").sendKeys("Nice order dude!");
+        advancedTimeline.defaultItem(1).body().find("button").click();
+        advancedTimeline.has().size(9);
+
+        advancedTimeline.item(2).has().smallDot();
+        advancedTimeline.item(2).has().dotColor(PINK);
+        advancedTimeline.item(2).body().message().has().text("Nice order dude!");
+
+        advancedTimeline.defaultItem(3).body().has().text("TODAY");
+
+        advancedTimeline.item(4).body().message()
+                .has().text("This order was archived.");
+        advancedTimeline.item(4).body().time().has().text("15:26 EDT");
+
+        advancedTimeline.item(5).has().dotColor(BLUE_DARKEN_2);
+        advancedTimeline.item(5).body().message()
+                .has().text("APP\nDigital Downloads fulfilled 1 item.");
+        advancedTimeline.item(5).body().time().has().text("15:25 EDT");
+
+        advancedTimeline.item(6).body().message()
+                .has().text("Order confirmation email was sent to John Leider (john@vuetifyjs.com).");
+        advancedTimeline.item(6).body().time().has().text("15:25 EDT");
+
+        advancedTimeline.defaultItem(7).body().find("button")
+                .is().enabled()
+                .has().text("RESEND EMAIL");
+
+        advancedTimeline.item(8).body().message()
+                .has().text("A $15.00 USD payment was processed on PayPal Express Checkout");
+        advancedTimeline.item(8).body().time().has().text("15:25 EDT");
+
+        advancedTimeline.item(9).body().message()
+                .has().text("John Leider placed this order on Online Store (checkout #1937432132572).");
+        advancedTimeline.item(9).body().time().has().text("15:25 EDT");
+
     }
 }

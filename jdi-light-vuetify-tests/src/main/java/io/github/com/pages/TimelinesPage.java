@@ -13,6 +13,7 @@ import io.github.com.custom.alerts.IconAlert;
 import io.github.com.custom.cards.ButtonCard;
 import io.github.com.custom.cards.RowsCard;
 import io.github.com.custom.sections.DecadeEvent;
+import io.github.com.custom.sections.OrderLine;
 import io.github.com.custom.sections.ScheduledEvent;
 
 public class TimelinesPage extends VuetifyPage {
@@ -77,5 +78,5 @@ public class TimelinesPage extends VuetifyPage {
     public static TimeLine<Card, UIElement> defaultTimeLine;
 
     @JDITimeLine(root = "#AdvancedTimeline .v-timeline")
-    public static TimeLine<UIElement, UIElement> advancedTimeline;
+    public static TimeLine<OrderLine, UIElement> advancedTimeline;
 }
