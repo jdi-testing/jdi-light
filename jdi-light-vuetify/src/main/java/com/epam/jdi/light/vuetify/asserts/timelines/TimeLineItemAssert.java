@@ -12,13 +12,13 @@ public class TimeLineItemAssert extends UIAssert<TimeLineItemAssert, TimeLineIte
 
     @JDIAction("Assert that {name} is small")
     public TimeLineItemAssert smallDot() {
-        jdiAssert(element().isSmall() ? "small" : "large", Matchers.is("small"));
+        jdiAssert(element().isSmall() ? "small" : "not small", Matchers.is("small"));
         return this;
     }
 
     @JDIAction("Assert that {name} is large")
     public TimeLineItemAssert largeDot() {
-        jdiAssert(element().isLarge() ? "large" : "small", Matchers.is("large"));
+        jdiAssert(element().isLarge() ? "large" : "not large", Matchers.is("large"));
         return this;
     }
 

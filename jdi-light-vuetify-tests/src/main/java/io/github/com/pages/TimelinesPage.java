@@ -43,13 +43,13 @@ public class TimelinesPage extends VuetifyPage {
             root = "#ReverseTimeline .v-timeline[1]",
             body = ".v-timeline-item__body .v-card"
     )
-    public static TimeLine<Card, UIElement> reverseMiddleTimeLine;
+    public static TimeLine<Card, UIElement> reverseTimeLine;
 
     @JDITimeLine(
             root = "#ReverseTimeline .v-timeline[2]",
             body = ".v-timeline-item__body .v-card"
     )
-    public static TimeLine<Card, UIElement> reverseSideTimeLine;
+    public static TimeLine<Card, UIElement> reverseDenseTimeLine;
 
     @JDITimeLine(
             root = "#SmallTimeline.v-timeline",
@@ -65,7 +65,7 @@ public class TimelinesPage extends VuetifyPage {
     public static TimeLine<Card, Avatar> iconTimeLine;
 
     @JDITimeLine(
-            root = "#IconTimeline.v-timeline",
+            root = "#OppositeTimeline.v-timeline",
             opposite = ".v-timeline-item__opposite span"
     )
     public static TimeLine<DecadeEvent, UIElement> oppositeTimeLine;
