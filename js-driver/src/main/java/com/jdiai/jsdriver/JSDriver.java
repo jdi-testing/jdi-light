@@ -173,6 +173,7 @@ public class JSDriver {
     public void replaceLocator(By newLocator) {
         modifyLocator(rule -> new JSRule(newLocator, rule.filter));
     }
+
     public void fillLocatorTemplate(String value) {
         modifyLocator(rule -> new JSRule(fillByTemplate(rule.locator, value), rule.filter));
     }

@@ -41,7 +41,7 @@ public class PageFactory {
 
     public static <T> T initPageElements(T pageObject) {
         PagesFactory pageFactory = getFactory();
-        pageFactory.initElements(pageObject);
+        pageFactory.initElements(new InitInfo(pageObject));
         return pageObject;
     }
 
@@ -86,7 +86,7 @@ public class PageFactory {
             pageFactory.setupRules.get("UI Object"));
         pageFactory.setupRules.add("Setup", sRule(
             ISetup.class,
-            info -> ((ISetup)info.instance).setup(info.field))
+            info -> ((ISetup)info.instance).setup(info))
         );
 
         pageFactory.annotations.add("Name", aRule(

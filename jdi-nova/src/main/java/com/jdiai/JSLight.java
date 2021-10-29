@@ -580,14 +580,15 @@ public class JSLight implements JS {
     }
 
     public <T> T getEntity(Class<T> cl) {
-        return getEntity(GET_OBJECT_MAP.apply(cl), cl);
+        engine().setupEntity(cl);
+        return engine().getEntity(GET_OBJECT_MAP.apply(cl));
     }
 
     public <T> T getEntity() {
         return engine().getEntity(objectMap);
     }
 
-    public <T> T getEntity(String objectMap, Class<?> cl) {
+    public <T> T getEntity(String objectMap, Class<T> cl) {
         engine().setupEntity(cl);
         return engine().getEntity(objectMap);
     }
@@ -613,7 +614,33 @@ public class JSLight implements JS {
     }
 
     public int size() {
-        return useFilter(() -> engine().getSize());
+        By lastLocator = last(locators());
+        return lastLocator.toString().contains("%s")
+            ? GET_SIZE_FROM_TEMPLATE.apply(lastLocator)
+            : useFilter(() -> engine().getSize());
+    }
+    public Function<By, Integer> GET_SIZE_FROM_TEMPLATE = this::getTemplateSize;
+
+    private int getTemplateSize(By lastLocator) {
+        JS result = copy();
+        String[] split = getByLocator(lastLocator).split("\\[");
+        String baseLocator = split[0];
+        if (split.length == 1) {
+            THROW_ASSERT.accept(format("Failed to get size for template locator(%s). Please remove %s from your locator", lastLocator));
+        }
+        if (split.length > 2) {
+            baseLocator = "";
+            for (int i = 0; i < split.length - 1; i++) {
+                baseLocator += split[i];
+            }
+        }
+        int length = baseLocator.length();
+        char lastChar = baseLocator.charAt(length - 1);
+        String newLocator = lastChar == ' ' || lastChar == '>'
+            ? baseLocator.substring(0, length - 1)
+            : baseLocator;
+        result.jsDriver().replaceLocator(By.cssSelector(newLocator));
+        return result.size();
     }
 
     public List<JsonObject> getObjectList(String json) {
@@ -1164,6 +1191,7 @@ public class JSLight implements JS {
         switch (elements.size()) {
             case 0:
                 THROW_ASSERT.accept("Failed to find element (" + this + ")");
+                return driver();
             case 1:
                 return elements.get(0);
             default:
@@ -1173,9 +1201,11 @@ public class JSLight implements JS {
     }
 
     protected int elementTimeout = -1;
+
     public int elementTimeout() {
         return elementTimeout < 0 ? timeout : elementTimeout;
     }
+
     public int setTimeout(int timeoutSec) {
         return elementTimeout = timeoutSec;
     }

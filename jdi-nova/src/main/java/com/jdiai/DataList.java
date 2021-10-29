@@ -8,6 +8,7 @@ import com.jdiai.interfaces.HasName;
 import com.jdiai.interfaces.ISetup;
 import com.jdiai.jsdriver.JDINovaException;
 import com.jdiai.jsdriver.RuleType;
+import com.jdiai.page.objects.InitInfo;
 import com.jdiai.tools.LinqUtils;
 import com.jdiai.tools.Safe;
 import com.jdiai.tools.Timer;
@@ -369,8 +370,9 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName, HasLabel 
         return core;
     }
 
-    public void setup(Field field) {
-        Type[] types = getGenericTypes(field);
+    @Override
+    public void setup(InitInfo info) {
+        Type[] types = info.genericTypes;
         if (types.length != 1) {
             return;
         }
@@ -380,6 +382,8 @@ public class DataList<T> implements List<T>, ISetup, HasCore, HasName, HasLabel 
             throw new JDINovaException(ex, "Can't get DataList '%s' data class", getName());
         }
     }
+
+    public void setup(Field field) { }
 
     public String getName() {
         return core().getName();

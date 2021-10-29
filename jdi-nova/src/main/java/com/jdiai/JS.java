@@ -81,7 +81,6 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     List<String> getAttributesAsList(String attr);
     Json allAttributes();
     JS highlight(String color);
-    String cssStyle(String style);
     Json cssStyles(String... style);
     Json allCssStyles();
     boolean isDeselected();
@@ -99,9 +98,8 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     StreamToImageVideo recordVideo(int sec);
     JS setObjectMapping(String objectMap, Class<?> cl);
     JsonObject getJSObject(String json);
-    <T> T getEntity(Class<T> cl);
     <T> T getEntity();
-    <T> T getEntity(String objectMap, Class<?> cl);
+    <T> T getEntity(String objectMap, Class<T> cl);
     void setEntity(String objectMap);
     JS find(String by);
     JS find(String by, RuleType previous);
@@ -113,12 +111,9 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     JS children();
     JS ancestor();
     List<String> allValues(String getTextType);
-    List<String> allValues();
-    int size();
     List<JsonObject> getObjectList(String json);
     <T> List<T> getEntityList();
     void setEntity();
-    <T> List<T> getEntityList(Class<T> cl);
     JS fill(Object obj);
     JS submit(Object obj, String locator);
     JS submit(Object obj);
@@ -144,8 +139,6 @@ public interface JS extends WebElement, HasLocators, HasParent, HasCore {
     boolean isNotCovered(int xOffset, int yOffset);
     String fontColor();
     String bgColor();
-    String pseudo(String name, String value);
-    boolean focused();
     JS focus();
     JS blur();
     JSImages imagesData();

@@ -190,4 +190,25 @@ public interface HasCore extends WebElement, HasName, HasLocators, ShouldValidat
     default <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
         return core().getScreenshotAs(outputType);
     }
+    default List<String> allValues() {
+        return core().allValues();
+    }
+    default <T> List<T> getEntityList(Class<T> cl) {
+        return core().getEntityList(cl);
+    }
+    default String cssStyle(String style) {
+        return core().cssStyle(style);
+    }
+    default int size() {
+        return core().size();
+    }
+    default String pseudo(String name, String value) {
+        return core().pseudo(name, value);
+    }
+    default <T> T getEntity(Class<T> cl) {
+        return core().getEntity(cl);
+    }
+    default boolean focused() {
+        return core().focused();
+    }
 }
