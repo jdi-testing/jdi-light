@@ -148,9 +148,8 @@ public class TextArea extends com.epam.jdi.light.ui.html.elements.common.TextAre
         sendKeys(String.join("\n", lines));
     }
 
-    @JDIAction("Set lines '{0}' in '{name}'")
     public void setLines(List<String> lines) {
-        sendKeys(String.join("\n", lines));
+        setLines(lines.toArray(new String[0]));
     }
 
     @Override
