@@ -226,7 +226,7 @@ public class JDI {
             long timeout = (Long) args[4];
             long timePassed = (Long) args[5];
             Throwable failException = (Throwable) args[6];
-            String failAssertMessage = args[7].toString();
+            String failAssertMessage = (String) args[7];
             listener.afterFailAction(actionName, step, element, result, timeout, timePassed, failException, failAssertMessage);
         });
     }
@@ -514,6 +514,9 @@ public class JDI {
         String fullUrl = isNotEmpty(domain) && !url.contains("//")
             ? domain + url
             : url;
+        if (isEmpty(domain) && url.contains("//")) {
+            domain = url;
+        }
         String openPageAction = "openPage()";
         String openPageStep = "Open page '" + fullUrl + "'";
         fireEvent(BEFORE_ACTION_EVENT, openPageAction, openPageStep, null);

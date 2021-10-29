@@ -105,7 +105,7 @@ public class JSBaseEngine extends JSElement implements JSEngine {
     }
 
     public Json getAsMap() {
-        return jsDriver.getOne(objectMap).asMap();
+        return jsDriver.getOne(validateXpath(objectMap)).asMap();
     }
 
     @Override

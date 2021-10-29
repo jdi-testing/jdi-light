@@ -91,11 +91,11 @@ public class JSElement {
     }
 
     public List<JsonObject> getJsonList(String json) {
-        return jsDriver.getList(json).asJson();
+        return jsDriver.getList(validateXpath(json)).asJson();
     }
 
     public Json getAsMap(String valueFunc) {
-        return jsDriver.getOne(valueFunc).asMap();
+        return jsDriver.getOne(validateXpath(valueFunc)).asMap();
     }
 
     public String firstValue(String valueFunc) {
@@ -112,7 +112,7 @@ public class JSElement {
     }
 
     public JsonObject getJson(String json) {
-        return jsDriver.getOne(json).asJson();
+        return jsDriver.getOne(validateXpath(json)).asJson();
     }
 
     public List<Json> getMultiAttributes(String... attributes) {

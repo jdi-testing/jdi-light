@@ -9,8 +9,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.jdiai.JDI.*;
-import static com.jdiai.asserts.Conditions.be;
-import static com.jdiai.asserts.Conditions.haveAll;
+import static com.jdiai.asserts.Conditions.*;
 
 @Listeners(TestNGListener.class)
 public class JDINovaTests {
@@ -45,7 +44,7 @@ public class JDINovaTests {
         $("#user-icon").click();
         loginAs(DefaultUser);
         $(".sidebar-menu li a").select("Service", "User Table");
-        $("#user-table tbody tr").should(be(
+        $("#user-table tbody tr").should(beOrdered(
             WOLVERINE, SPIDER_MAN, PUNISHER, CAPITAN_AMERICA, CYCLOPE, HULK));
     }
 

@@ -234,10 +234,10 @@ public abstract class Conditions {
         return condition("%element% is %no% '" + entity.toString() + "'",
             el -> el.getEntity(entity.getClass()).equals(entity));
     }
-    public static <T> Condition be(List<T> entities) {
+    public static <T> Condition beOrdered(List<T> entities) {
         return haveCondition(true, true, entities);
     }
-    public static <T> Condition be(T... entities) {
+    public static <T> Condition beOrdered(T... entities) {
         return haveCondition(true, true, asList(entities));
     }
     public static <T> Condition have(List<T> entities) {
