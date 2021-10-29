@@ -10,27 +10,14 @@ import io.github.com.custom.cards.ButtonCard;
 import io.github.com.custom.cards.RowsCard;
 import io.github.com.custom.sections.DecadeEvent;
 import io.github.com.custom.sections.ScheduledEvent;
+import io.github.com.dataproviders.TimeLineDataProviders;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.AMBER;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.AMBER_LIGHTEN_1;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.CYAN;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.CYAN_LIGHTEN_1;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREEN;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREEN_LIGHTEN_1;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.INDIGO;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PINK;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PURPLE_DARKEN_1;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PURPLE_LIGHTEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_LIGHTEN_1;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_LIGHTEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.TEAL_LIGHTEN_3;
 import static io.github.com.StaticSite.timelinesPage;
+import static io.github.com.dataproviders.TimeLineDataProviders.LOREM_IPSUM_TEXT;
 import static io.github.com.pages.TimelinesPage.advancedTimeline;
 import static io.github.com.pages.TimelinesPage.colorTimeLine;
 import static io.github.com.pages.TimelinesPage.defaultTimeLine;
@@ -46,21 +33,6 @@ import static io.github.com.pages.TimelinesPage.smallTimeLine;
 import static org.hamcrest.Matchers.containsString;
 
 public class TimelinesTests extends TestsInit {
-
-    private static String LOREM_IPSUM_TEXT = "Lorem ipsum dolor sit amet, no " +
-            "nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire " +
-            "principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, " +
-            "vix an salutandi sententiae.";
-
-    @DataProvider
-    public static Object[][] iconDotsTimeLineData() {
-        return new Object[][]{
-                {1, "mdi-star", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, RED_LIGHTEN_2},
-                {2, "mdi-book-variant", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, PURPLE_DARKEN_1},
-                {3, "mdi-airballoon", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, GREEN_LIGHTEN_1},
-                {4, "mdi-buffer", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, INDIGO}
-        };
-    }
 
     @BeforeClass
     public void before() {
@@ -81,17 +53,8 @@ public class TimelinesTests extends TestsInit {
         colorTimeLine.item(3).body().caption().is().notVisible();
     }
 
-    @DataProvider
-    public static Object[][] colorTimeLineData() {
-        return new Object[][]{
-                {1, "5pm", "New Icon", "Mobile App", PINK},
-                {2, "3-4pm", "Design Stand Up", "Hangouts", TEAL_LIGHTEN_3},
-                {3, "12pm", "Lunch break", null, PINK},
-                {4, "9-11am", "Finish Home Screen", "Web App", TEAL_LIGHTEN_3}
-        };
-    }
 
-    @Test(dataProvider = "colorTimeLineData")
+    @Test(dataProvider = "colorTimeLineData", dataProviderClass = TimeLineDataProviders.class)
     public void colorTimeLineDataTest(int index, String time, String event, String caption, Colors color) {
         TimeLineItem<ScheduledEvent, UIElement> item = colorTimeLine.item(index);
         item.body().time().has().text(time);
@@ -121,7 +84,7 @@ public class TimelinesTests extends TestsInit {
         denseTimeLine.item(2).body().has().text(LOREM_IPSUM_TEXT);
     }
 
-    @Test(dataProvider = "iconDotsTimeLineData")
+    @Test(dataProvider = "iconDotsTimeLineData", dataProviderClass = TimeLineDataProviders.class)
     public void iconDotsTimeLineTest(int index, String icon, String title, String text, Colors color) {
         TimeLineItem<ButtonCard, Icon> item = iconDotsTimeLine.item(index);
         item.has().dotColor(color);
@@ -143,18 +106,7 @@ public class TimelinesTests extends TestsInit {
         reverseDenseTimeLine.is().notReversed();
     }
 
-    @DataProvider
-    public static Object[][] smallTimeLineData() {
-        return new Object[][]{
-                {1, "Title 1", "mdi-magnify", PURPLE_LIGHTEN_2, false},
-                {2, "Title 2", "mdi-home-outline", AMBER_LIGHTEN_1, true},
-                {3, "Title 3", "mdi-email-outline", CYAN_LIGHTEN_1, false},
-                {4, "Title 4", "mdi-account-multiple-outline", RED_LIGHTEN_1, true},
-                {5, "Title 5", "mdi-phone-in-talk", GREEN_LIGHTEN_1, false}
-        };
-    }
-
-    @Test(dataProvider = "smallTimeLineData")
+    @Test(dataProvider = "smallTimeLineData", dataProviderClass = TimeLineDataProviders.class)
     public void smallTimeLineTest(int index, String title, String icon, Colors color, boolean small) {
         TimeLineItem<RowsCard, UIElement> item = smallTimeLine.item(index);
         item.has().dotColor(color);
@@ -176,18 +128,7 @@ public class TimelinesTests extends TestsInit {
         });
     }
 
-    @DataProvider
-    public static Object[][] oppositeTimeLineData() {
-        return new Object[][]{
-                {1, "1960", CYAN},
-                {2, "1970", GREEN},
-                {3, "1980", PINK},
-                {4, "1990", AMBER},
-                {5, "2000", ORANGE}
-        };
-    }
-
-    @Test(dataProvider = "oppositeTimeLineData")
+    @Test(dataProvider = "oppositeTimeLineData", dataProviderClass = TimeLineDataProviders.class)
     public void oppositeTimeLineTest(int index, String date, Colors color) {
         TimeLineItem<DecadeEvent, UIElement> item = oppositeTimeLine.item(index);
         item.has().dotColor(color);
