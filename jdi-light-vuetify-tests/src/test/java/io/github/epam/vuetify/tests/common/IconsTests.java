@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
-import io.github.epam.vuetify.tests.data.IconsTestsDataProvider;
+import io.github.com.dataproviders.IconsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -21,7 +21,7 @@ public class IconsTests extends TestsInit {
         iconsPage.open();
     }
 
-    @Test(dataProvider = "colorIconsTestsDataProvider", dataProviderClass = IconsTestsDataProvider.class)
+    @Test(dataProvider = "colorIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
     public void colorIconsTests(int number, String iconType, String color,
                                 String height, String width) throws Exception {
         colorIcons.get(number).is().displayed();
@@ -43,7 +43,7 @@ public class IconsTests extends TestsInit {
         clickIcon.handleAlert();
     }
 
-    @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsTestsDataProvider.class)
+    @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
     public void buttonsIconsTests(int number, String iconType, String color,
                                   String height, String width) throws Exception {
         buttonsIcons.get(number).is().displayed();
@@ -54,7 +54,7 @@ public class IconsTests extends TestsInit {
         buttonsIcons.get(number).has().width(width);
     }
 
-    @Test(dataProvider = "fontAwesomeIconsTestsDataProvider", dataProviderClass = IconsTestsDataProvider.class)
+    @Test(dataProvider = "fontAwesomeIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
     public void fontAwesomeIconsTests(int number, String iconType, String height, String width) throws Exception {
         fontAwesomeIcons.get(number).is().displayed();
         fontAwesomeIcons.get(number).has().type(iconType);
@@ -62,7 +62,7 @@ public class IconsTests extends TestsInit {
         fontAwesomeIcons.get(number).has().width(width);
     }
 
-    @Test(dataProvider = "materialDesignIconsTestsDataProvider", dataProviderClass = IconsTestsDataProvider.class)
+    @Test(dataProvider = "materialDesignIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
     public void materialDesignIconsTests(int number, String iconType, String height, String width) throws Exception {
         materialDesignIcons.get(number).is().displayed();
         materialDesignIcons.get(number).has().type(iconType);
@@ -70,7 +70,7 @@ public class IconsTests extends TestsInit {
         materialDesignIcons.get(number).has().width(width);
     }
 
-    @Test(dataProvider = "mdiSvgIconsTestsDataProvider", dataProviderClass = IconsTestsDataProvider.class)
+    @Test(dataProvider = "mdiSvgIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
     public void mdiSvgIconsTests(int number, String height, String width) throws Exception {
         mdiSvgIcons.get(number).is().displayed();
         mdiSvgIcons.get(number).has().type("svg icon");

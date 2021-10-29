@@ -1,4 +1,4 @@
-package io.github.epam.vuetify.tests.data;
+package io.github.com.dataproviders;
 
 import org.testng.annotations.DataProvider;
 
@@ -12,7 +12,7 @@ import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_LIGHTEN_2;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.TEAL_DARKEN_2;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.WHITE;
 
-public class IconsTestsDataProvider {
+public class IconsDataProvider {
 
     @DataProvider(name = "colorIconsTestsDataProvider")
     public static Object[][] colorIconsTestsData() {
