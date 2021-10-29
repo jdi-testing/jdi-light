@@ -15,7 +15,10 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.*;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.PINK;
 import static io.github.com.StaticSite.timelinesPage;
 import static io.github.com.dataproviders.TimeLineDataProviders.LOREM_IPSUM_TEXT;
 import static io.github.com.pages.TimelinesPage.advancedTimeline;
