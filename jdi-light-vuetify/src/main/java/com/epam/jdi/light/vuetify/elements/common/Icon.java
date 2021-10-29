@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.vuetify.asserts.IconAssert;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -14,9 +15,9 @@ import java.util.stream.Collectors;
 
 public class Icon extends UIBaseElement<IconAssert> implements HasClick  {
 
-    @JDIAction("Get {name} type")
-    private String getType() throws Exception {
-        String iconClass = this.core().getAttribute("class");
+    @JDIAction("Get '{name}' type")
+    private String getType() {
+        String iconClass = core().getAttribute("class");
         if(iconClass.contains("mdi-")) {
             return Arrays.stream(iconClass.split(" "))
                     .filter(s -> s.startsWith("mdi-")).collect(Collectors.joining());
@@ -24,39 +25,39 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick  {
             return Arrays.stream(iconClass.split(" "))
                     .filter(s -> s.startsWith("fa-")).collect(Collectors.joining());
         } else if(iconClass.contains("material-icons")) {
-            return this.core().getText();
+            return core().getText();
         } else if (iconClass.contains("v-icon notranslate")){
             return "svg icon";
-        } else throw new Exception("unknown type of icon");
+        } else return  null;
     }
 
-    @JDIAction("{name} has expected color")
-    public boolean hasColor(String color) {
-        return this.core().getCssValue("color").equals(color);
+    @JDIAction("'{name}' has color")
+    public String hasColor() {
+        return core().getCssValue("color");
     }
 
-    @JDIAction("{name} has expected height")
-    public boolean hasHeight(String height) {
-        return this.core().getCssValue("height").equals(height);
+    @JDIAction("'{name}' has height")
+    public String hasHeight() {
+        return core().getCssValue("height");
     }
 
-    @JDIAction("{name} has expected width")
-    public boolean hasWidth(String width) {
-        return this.core().getCssValue("width").equals(width);
+    @JDIAction("'{name}' has width")
+    public String hasWidth() {
+        return core().getCssValue("width");
     }
 
-    @JDIAction("{name} has expected type")
-    public boolean hasType(String iconType) throws Exception {
-        return this.getType().equals(iconType);
+    @JDIAction("'{name}' has type")
+    public String hasType() {
+        return Objects.requireNonNull(getType());
     }
 
-    @JDIAction("{name} has alert after clicking on it")
+    @JDIAction("'{name}' has alert after clicking on it")
     public String hasAlertOnIconClick() {
-        return this.core().driver().switchTo().alert().getText();
+        return core().driver().switchTo().alert().getText();
     }
 
     public void handleAlert() {
-        this.core().driver().switchTo().alert().dismiss();
+        core().driver().switchTo().alert().dismiss();
     }
 
     public IconAssert is() {
@@ -64,6 +65,6 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick  {
     }
 
     public IconAssert has() {
-        return this.is();
+        return is();
     }
 }
