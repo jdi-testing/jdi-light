@@ -227,7 +227,7 @@ public class JSStable extends JSLight {
             if (jsDriver().hasJSRules()) {
                 super.click();
             } else  {
-                we().click();
+                super.we().click();
             }
         });
     }
@@ -279,15 +279,15 @@ public class JSStable extends JSLight {
     }
     private void fixedSendKeys(CharSequence... value) {
         if (value.length == 1 && value[0].equals("\n")) {
-            we().sendKeys("\n " + BACK_SPACE);
+            super.we().sendKeys("\n " + BACK_SPACE);
         } else {
-            we().sendKeys(value);
+            super.we().sendKeys(value);
         }
     }
 
     @Override
     public void clear() {
-        stableFilterAction("clear()", "Clear '{name}' field" , () -> we().clear());
+        stableFilterAction("clear()", "Clear '{name}' field" , () -> super.we().clear());
     }
 
     @Override
