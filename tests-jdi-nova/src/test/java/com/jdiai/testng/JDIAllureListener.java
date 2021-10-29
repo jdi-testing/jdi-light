@@ -48,47 +48,5 @@ public class JDIAllureListener implements JDIEventsListener {
     }
 
     public void afterFailAction(String actionName, String step, HasCore element, Object result, long timeout, long timePassed, Throwable failException, String failAssertMessage) {
-
     }
-
-
-    // registerJDIListener(BEFORE_ACTION_EVENT, args -> {
-    //     if (!logToAllure.get()) {
-    //         return;
-    //     }
-    //     if (args.length < 2) {
-    //         return;
-    //     }
-    //     Object stepArg = args[1];
-    //     if (stepArg == null || !isClass(stepArg.getClass(), String.class)) {
-    //         return;
-    //     }
-    //     String step = (String) stepArg;
-    //     String stepToLog = args.length > 2
-    //         ? msgFormat(step, new MapArray<>("name", ((HasName) args[2]).getName()))
-    //         : step;
-    //     if (stepToLog.length() > 70) {
-    //         stepToLog = stepToLog.substring(0, 67) + "...";
-    //     }
-    //     logger.info(stepToLog);
-    //     startAllureStep(stepToLog);
-    //     if (args[0].equals("shouldBe()")) {
-    //         logToAllure.set(false);
-    //     }
-    // });
-    // registerJDIListener(AFTER_ACTION_EVENT,
-    //     args -> {
-    //     if (args[0].equals("shouldBe()")) {
-    //         logToAllure.set(true);
-    //         if (args.length > 2) {
-    //             Object result = args[2];
-    //             if (result != null) {
-    //                 addAttachment("Result", "text/plain", result.toString(), "html");
-    //             }
-    //         }
-    //     }
-    //     if (logToAllure.get()) {
-    //         passAllureStep();
-    //     }
-    // });
 }

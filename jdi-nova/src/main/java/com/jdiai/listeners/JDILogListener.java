@@ -33,7 +33,6 @@ public class JDILogListener implements JDIEventsListener {
     }
 
     public void afterAction(String actionName, String step, HasCore element, Object result, long timeout, long timePassed) {
-
     }
 
     public void afterSuccessAction(String actionName, String step, HasCore element, Object result, long timeout, long timePassed) {
@@ -51,6 +50,5 @@ public class JDILogListener implements JDIEventsListener {
     }
 
     public void afterFailAction(String actionName, String step, HasCore element, Object result, long timeout, long timePassed, Throwable failException, String failAssertMessage) {
-
     }
 }

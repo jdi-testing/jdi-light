@@ -139,7 +139,7 @@ public class JDI {
         });
     }
 
-    public static void logNovaActions() {
+    public static void logJDIActions() {
         addListener(new JDILogListener());
     }
 
