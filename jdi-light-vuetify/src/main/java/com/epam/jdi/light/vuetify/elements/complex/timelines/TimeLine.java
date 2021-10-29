@@ -59,17 +59,27 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
 
     @JDIAction("Get list of items from '{name}'")
     public List<TimeLineItem<T, U>> items() {
-        return list().map(this::createItem);
+        return list().map(elem -> createItem(elem, bodyClass, dividerClass));
     }
 
     @JDIAction("Get item by index '{0}' from '{name}'")
     public TimeLineItem<T, U> item(int index) {
-        return createItem(list().get(index));
+        return createItem(list().get(index), bodyClass, dividerClass);
     }
 
-    protected TimeLineItem<T, U> createItem(UIElement root) {
-        TimeLineItem<T, U> timeLineItem = new TimeLineItem<>(this);
+    @JDIAction("Get default item by index '{0}' from '{name}'")
+    public TimeLineItem<UIElement, UIElement> defaultItem(int index) {
+        return createItem(list().get(index), UIElement.class, UIElement.class);
+    }
+
+    protected <C extends ICoreElement, D extends ICoreElement> TimeLineItem<C, D> createItem(UIElement root, Class<C> body, Class<D> divider) {
+        TimeLineItem<C, D> timeLineItem = new TimeLineItem<>();
         timeLineItem.setCore(TimeLineItem.class, root);
+        timeLineItem.bodyClass = body;
+        timeLineItem.dividerClass = divider;
+        timeLineItem.BODY_LOCATOR = BODY_LOCATOR;
+        timeLineItem.DIVIDER_LOCATOR = DIVIDER_LOCATOR;
+        timeLineItem.OPPOSITE_LOCATOR = OPPOSITE_LOCATOR;
         return timeLineItem;
     }
 

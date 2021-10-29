@@ -21,13 +21,7 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
     protected Class<T> bodyClass;
     protected Class<U> dividerClass;
 
-    TimeLineItem(TimeLine<T, U> timeLine) {
-        bodyClass = timeLine.bodyClass;
-        dividerClass = timeLine.dividerClass;
-        BODY_LOCATOR = timeLine.BODY_LOCATOR;
-        DIVIDER_LOCATOR = timeLine.DIVIDER_LOCATOR;
-        OPPOSITE_LOCATOR = timeLine.OPPOSITE_LOCATOR;
-    }
+    TimeLineItem() {}
 
     public T body() {
         return initT(find(BODY_LOCATOR), this, bodyClass);
