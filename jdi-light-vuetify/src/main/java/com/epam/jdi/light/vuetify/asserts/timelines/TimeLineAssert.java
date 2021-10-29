@@ -9,37 +9,37 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class TimeLineAssert extends UISelectAssert<TimeLineAssert, TimeLine> {
 
-    @JDIAction("Assert that {name} is align to top")
+    @JDIAction("Assert that '{name}' is align to top")
     public TimeLineAssert alignTop() {
         jdiAssert(element().isAlignTop() ? "align to top" : "not align to top", Matchers.is("align to top"));
         return this;
     }
 
-    @JDIAction("Assert that {name} is not align to top")
+    @JDIAction("Assert that '{name}' is not align to top")
     public TimeLineAssert notAlignTop() {
         jdiAssert(element().isAlignTop() ? "align to top" : "not align to top", Matchers.is("not align to top"));
         return this;
     }
 
-    @JDIAction("Assert that {name} is dense")
+    @JDIAction("Assert that '{name}' is dense")
     public TimeLineAssert dense() {
         jdiAssert(element().isDense() ? "dense" : "not dense", Matchers.is("dense"));
         return this;
     }
 
-    @JDIAction("Assert that {name} is not dense")
+    @JDIAction("Assert that '{name}' is not dense")
     public TimeLineAssert notDense() {
         jdiAssert(element().isDense() ? "dense" : "not dense", Matchers.is("not dense"));
         return this;
     }
 
-    @JDIAction("Assert that {name} is reversed")
+    @JDIAction("Assert that '{name}' is reversed")
     public TimeLineAssert reversed() {
         jdiAssert(element().isReversed() ? "reversed" : "not reversed", Matchers.is("reversed"));
         return this;
     }
 
-    @JDIAction("Assert that {name} is not reversed")
+    @JDIAction("Assert that '{name}' is not reversed")
     public TimeLineAssert notReversed() {
         jdiAssert(element().isReversed() ? "reversed" : "not reversed", Matchers.is("not reversed"));
         return this;
