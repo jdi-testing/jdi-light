@@ -30,10 +30,10 @@ public class JSBuilder implements IJSBuilder {
             ? result.substring(0, 195) + "..."
             : result;
     protected String query = "";
-    
+
     private final Supplier<WebDriver> driver;
     private Class<?> site;
-    
+
     protected JavascriptExecutor js() {
         return (JavascriptExecutor) driver.get();
     }
@@ -107,7 +107,7 @@ public class JSBuilder implements IJSBuilder {
 
     public static BiFunction<Object, String, Object> EXECUTE_SCRIPT = DEFAULT_SCRIPT_EXECUTE;
 
-    public static Safe<String> lastScriptExecution = new Safe<>();
+    public static Safe<ScriptResult> lastScriptExecution = new Safe<>(() -> new ScriptResult("No JS executions", ""));
 
     public Object executeQuery() {
         lastScriptExecution.reset();
@@ -117,7 +117,7 @@ public class JSBuilder implements IJSBuilder {
         }
         Object result;
         result = getScriptResult(jsScript);
-        lastScriptExecution.set(jsScript + "\n" + result);
+        lastScriptExecution.set(new ScriptResult(jsScript, result));
         if (result != null && logResult()) {
             logger.info(">>> " + processResultFunc.apply(result.toString()));
         }
@@ -141,6 +141,7 @@ public class JSBuilder implements IJSBuilder {
         }
         List<Object> result;
         result = EXECUTE_LIST_SCRIPT.apply(js(), jsScript);
+        lastScriptExecution.set(new ScriptResult(jsScript, result));
         if (result != null && logResult()) {
             logger.info(">>> " + processResultFunc.apply(result.toString()));
         }

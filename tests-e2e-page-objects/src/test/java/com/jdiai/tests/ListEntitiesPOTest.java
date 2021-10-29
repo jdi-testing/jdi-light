@@ -53,6 +53,14 @@ public class ListEntitiesPOTest implements TestInit {
     }
 
     @Test
+    public void genericDataTest() {
+        DataList<SearchItem> results = searchPage.searchDataGeneric.searchData;
+        assertEquals(results.size(), 6);
+        assertEquals(results.get("JDI TEST SITE").link, "https://jdi-testing.github.io/jdi-light/");
+        assertEquals(print(results, SearchItem::toString), SearchResults);
+    }
+
+    @Test
     public void waitForSizeDataTest() {
         DataList<SearchItem> results = searchPage.searchData;
         assertEquals(results.size(), 6);

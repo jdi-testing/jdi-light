@@ -3,6 +3,7 @@ package com.jdiai.asserts;
 import com.jdiai.JS;
 import com.jdiai.interfaces.HasCore;
 import com.jdiai.interfaces.HasName;
+import com.jdiai.jsbuilder.ScriptResult;
 import com.jdiai.tools.Safe;
 import com.jdiai.tools.Timer;
 
@@ -12,11 +13,10 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static com.jdiai.JDI.*;
-import static com.jdiai.JDIEvents.*;
 import static com.jdiai.JDIStatistic.shouldValidations;
 import static com.jdiai.jsbuilder.JSBuilder.lastScriptExecution;
 import static com.jdiai.jsdriver.JDINovaException.THROW_ASSERT;
-import static com.jdiai.jsdriver.JDINovaException.throwAssert;
+import static com.jdiai.listeners.JDIEvents.*;
 import static com.jdiai.tools.LinqUtils.map;
 import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.StringUtils.LINE_BREAK;
@@ -63,33 +63,44 @@ public class ShouldUtils {
             return core;
         }
         shouldValidations ++;
+        String shouldBeAction = "shouldBe()";
+        long timeout = core.core().elementTimeout() * 1000L;
+        Timer timer = new Timer(timeout);
+        boolean foundAll;
+        String assertionToLog = getCombinedAssertionName(core, conditions);
         try {
-            Timer timer = new Timer(core.core().elementTimeout() * 1000L);
-            logger().info(getCombinedAssertionName(core, conditions));
-            boolean foundAll;
+            fireEvent(BEFORE_ACTION_EVENT, shouldBeAction, assertionToLog, core);
             try {
                 foundAll = checkConditions(core, conditions, timer);
             } finally {
                 loggerOn();
             }
             if (!foundAll) {
-                checkOutOfTime(core, timer, conditions);
+                throwOutOfTimeException(core, conditions);
             }
+            long timePassed = timer.timePassedInMSec();
+            ScriptResult lastResult = lastScriptExecution.get();
+            fireEvent(AFTER_SUCCESS_ACTION_EVENT, shouldBeAction, assertionToLog, core, lastResult.result, timeout, timePassed);
         } catch (Throwable ex) {
-            JS element = core.core();
-            String errorMsg = ex.getMessage();
-            fireEvent(SHOULD_ASSERT_FAILED_EVENT, element, element.elementTimeout(), errorMsg);
+            long timePassed = timer.timePassedInMSec();
+            ScriptResult lastResult = lastScriptExecution.get();
+            String failAssertMessage = ">> Assert failed\nJS Script executed:\n" + lastResult.jsScript + "\nActual result: " + lastResult.result;
+            fireEvent(AFTER_ACTION_FAIL_EVENT, shouldBeAction, assertionToLog, core, lastResult.result, timeout, timePassed, ex, failAssertMessage);
             if (SOFT_ASSERTION_MODE) {
-                failedAssertions.get().add(errorMsg);
+                failedAssertions.get().add(failAssertMessage);
             } else {
                 List<String> softAssertions = getAssertions();
                 if (softAssertions.size() > 0) {
-                    softAssertions.add(ex.getMessage());
+                    softAssertions.add(failAssertMessage);
                     THROW_ASSERT.accept(print(softAssertions, LINE_BREAK));
                 } else {
                     throw ex;
                 }
             }
+        } finally {
+            long timePassed = timer.timePassedInMSec();
+            ScriptResult lastResult = lastScriptExecution.get();
+            fireEvent(AFTER_ACTION_EVENT, shouldBeAction, assertionToLog, core, lastResult.result, timeout, timePassed);
         }
         return core;
     }
@@ -112,7 +123,7 @@ public class ShouldUtils {
                     checkOutOfTime(core, timer, conditions);
                     foundAll = condition.apply(core);
                     if (!foundAll) {
-                        break;
+                        return checkConditions(core, conditions, timer);
                     }
                 }
             }
@@ -123,17 +134,7 @@ public class ShouldUtils {
             if (timer.isRunning() && ignoreFail) {
                 return checkConditions(core, conditions, timer);
             }
-            JS element = core.core();
-            int timeout = element.elementTimeout();
-            String lastResult = lastScriptExecution.get();
-            String failAssertMessage = ">> Assert failed\nActual result: " + lastResult;
-            fireEvent(SHOULD_ASSERT_FAILED_EVENT, element, timeout, failAssertMessage, lastResult, ex.getMessage());
-            if (SOFT_ASSERTION_MODE) {
-                failedAssertions.get().add(failAssertMessage);
-                return false;
-            } else {
-                throw throwAssert(ex, failAssertMessage);
-            }
+            throw ex;
         }
     }
 
@@ -141,12 +142,15 @@ public class ShouldUtils {
         if (timer.isRunning()) {
             return;
         }
+        throwOutOfTimeException(core, conditions);
+    }
+
+    private static void throwOutOfTimeException(HasCore core, Condition... conditions) {
         JS element = core.core();
         int timeout = element.elementTimeout();
+        ScriptResult lastResult = lastScriptExecution.get();
         String failAssertName = getCombinedAssertionName(core, conditions);
-        String lastResult = lastScriptExecution.get();
-        fireEvent(SHOULD_OUT_OF_TIME_EVENT, element, timeout, failAssertName, lastResult);
-        throw throwAssert(format("Failed to execute Assert in time (%s sec);\n'%s'\nActual result:%s",
+        THROW_ASSERT.accept(format("Failed to execute Assert in time (%s sec);\n'%s'\nActual result:%s",
             timeout, failAssertName, lastResult));
     }
 }

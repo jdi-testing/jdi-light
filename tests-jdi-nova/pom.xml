@@ -6,7 +6,7 @@
     <artifactId>tests-jdi-nova</artifactId>
     <name>Tests: JDI Nova</name>
     <groupId>com.jdiai</groupId>
-    <version>1.1.5</version>
+    <version>1.1.6</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,13 +14,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <run.performance>true</run.performance>
+        <allure.testng>2.16.0</allure.testng>
+        <aspectj.version>1.9.7</aspectj.version>
+        <allure.maven>2.10.0</allure.maven>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.jdiai</groupId>
             <artifactId>jdi-nova</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
         </dependency>
 
         <dependency>
@@ -34,6 +37,12 @@
             <artifactId>testng</artifactId>
             <scope>test</scope>
             <version>7.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.testng}</version>
         </dependency>
 
         <dependency>
@@ -63,7 +72,28 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/all-tests.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>io.qameta.allure.testng.AllureTestNg</value>
+                        </property>
+                    </properties>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.maven}</version>
             </plugin>
         </plugins>
 
