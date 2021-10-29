@@ -7,6 +7,10 @@ import com.epam.jdi.light.vuetify.asserts.ImageAssert;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * To see an example of Image web element please visit https://vuetifyjs.com/en/components/images/
+ */
+
 public class Image extends UIBaseElement<ImageAssert> {
 
     @JDIAction("Get '{name}' image source path")
