@@ -23,7 +23,7 @@ public class IconsTests extends TestsInit {
 
     @Test(dataProvider = "colorIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
     public void colorIconsTests(int number, String iconType, String color,
-                                String height, String width) throws Exception {
+                                Integer height, Integer width) {
         colorIcons.get(number).is().displayed();
         colorIcons.get(number).has().type(iconType);
         colorIcons.get(number).has().color(color);
@@ -32,12 +32,12 @@ public class IconsTests extends TestsInit {
     }
 
     @Test
-    public void clickIconTests() throws Exception {
+    public void clickIconTests() {
         clickIcon.is().displayed();
         clickIcon.is().clickable();
         clickIcon.has().type("mdi-chevron-right");
-        clickIcon.has().height("36px");
-        clickIcon.has().width("36px");
+        clickIcon.has().height(36);
+        clickIcon.has().width(36);
         clickIcon.click();
         clickIcon.has().alertOnIconClick("You clicked next!");
         clickIcon.handleAlert();
@@ -45,7 +45,7 @@ public class IconsTests extends TestsInit {
 
     @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
     public void buttonsIconsTests(int number, String iconType, String color,
-                                  String height, String width) throws Exception {
+                                  Integer height, Integer width) {
         buttonsIcons.get(number).is().displayed();
         buttonsIcons.get(number).is().clickable();
         buttonsIcons.get(number).has().type(iconType);
@@ -55,7 +55,7 @@ public class IconsTests extends TestsInit {
     }
 
     @Test(dataProvider = "fontAwesomeIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
-    public void fontAwesomeIconsTests(int number, String iconType, String height, String width) throws Exception {
+    public void fontAwesomeIconsTests(int number, String iconType, Integer height, Integer width) {
         fontAwesomeIcons.get(number).is().displayed();
         fontAwesomeIcons.get(number).has().type(iconType);
         fontAwesomeIcons.get(number).has().height(height);
@@ -63,7 +63,7 @@ public class IconsTests extends TestsInit {
     }
 
     @Test(dataProvider = "materialDesignIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
-    public void materialDesignIconsTests(int number, String iconType, String height, String width) throws Exception {
+    public void materialDesignIconsTests(int number, String iconType, Integer height, Integer width) {
         materialDesignIcons.get(number).is().displayed();
         materialDesignIcons.get(number).has().type(iconType);
         materialDesignIcons.get(number).has().height(height);
@@ -71,7 +71,7 @@ public class IconsTests extends TestsInit {
     }
 
     @Test(dataProvider = "mdiSvgIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
-    public void mdiSvgIconsTests(int number, String height, String width) throws Exception {
+    public void mdiSvgIconsTests(int number, Integer height, Integer width) {
         mdiSvgIcons.get(number).is().displayed();
         mdiSvgIcons.get(number).has().type("svg icon");
         mdiSvgIcons.get(number).has().height(height);
