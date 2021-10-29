@@ -1,19 +1,24 @@
 package com.epam.jdi.light.vuetify.asserts;
 
+import com.epam.jdi.light.asserts.generic.ITextAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.TextArea;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import java.util.List;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 
-public class TextAreaAssert extends com.epam.jdi.light.ui.html.asserts.TextAreaAssert {
+public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implements ITextAssert<TextAreaAssert> {
 
-    @Override
-    public TextArea element() {
-        return (TextArea) super.element();
+    @JDIAction("Assert that '{name}' text {0}")
+    public TextAreaAssert text(Matcher<String> condition) {
+        jdiAssert(element().getText(), condition);
+        return this;
     }
 
     @JDIAction("Assert that '{name}' is filled")
@@ -57,75 +62,30 @@ public class TextAreaAssert extends com.epam.jdi.light.ui.html.asserts.TextAreaA
         return this;
     }
 
-    @Override
-    public TextAreaAssert colsCount(Matcher<Integer> condition) {
+    @JDIAction("Assert that '{name}' rows count {0}")
+    public TextAreaAssert rowsCount(Matcher<Integer> condition) {
+        jdiAssert(element().rows(), condition);
         return this;
     }
 
-    @Override
-    public TextAreaAssert colsCount(int colsCount) {
+    @JDIAction("Assert that '{name}' rows count equal to {0}")
+    public TextAreaAssert rowsCount(int rowsCount) {
+        return rowsCount(Matchers.is(rowsCount));
+    }
+
+    @JDIAction("Assert that '{name}' has lines {0}")
+    public TextAreaAssert lines(Matcher<? super List<String>> condition) {
+        jdiAssert(element().getLines(), condition);
         return this;
     }
 
-    @Override
-    public TextAreaAssert minlength(Matcher<Integer> condition) {
-        return this;
+    @JDIAction("Assert that '{name}' has lines: {0}")
+    public TextAreaAssert lines(String... lines) {
+        return lines(containsInAnyOrder(lines));
     }
 
-    @Override
-    public TextAreaAssert minlength(int minlength) {
-        return this;
-    }
-
-    @Override
-    public TextAreaAssert maxlength(Matcher<Integer> condition) {
-        return this;
-    }
-
-    @Override
-    public TextAreaAssert maxlength(int maxlength) {
-        return this;
-    }
-
-    @Override
-    public TextAreaAssert is() {
-        return this;
-    }
-
-    @Override
-    public TextAreaAssert assertThat() {
-        return is();
-    }
-
-    @Override
-    public TextAreaAssert has() {
-        return is();
-    }
-
-    @Override
-    public TextAreaAssert waitFor() {
-        return is();
-    }
-
-    @Override
-    public TextAreaAssert waitFor(int sec) {
-        this.waitSec(sec);
-        return is();
-    }
-
-    @Override
-    public TextAreaAssert shouldBe() {
-        return is();
-    }
-
-    @Override
-    public TextAreaAssert verify() {
-        assertSoft();
-        return is();
-    }
-
-    @Override
-    public TextAreaAssert and() {
-        return this;
+    @JDIAction("Assert that '{name}' has lines: {0}")
+    public TextAreaAssert lines(List<String> lines) {
+        return lines(containsInAnyOrder(lines.toArray()));
     }
 }
