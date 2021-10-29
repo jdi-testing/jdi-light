@@ -8,63 +8,70 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SystemBarAssert extends BasicBarAssert<SystemBar, SystemBarAssert> {
 
-    @JDIAction("Assert that {name} has proper background color")
+    @JDIAction("Assert that '{name}' has expected background color")
     public SystemBarAssert backgroundColor(String color) {
-        jdiAssert(element().getBackgroundColor(), Matchers.containsString(color));
+        jdiAssert(element().hasBackgroundColor(), Matchers.containsString(color));
         return this;
     }
 
-    @JDIAction("Assert that {name} has proper position")
+    @JDIAction("Assert that '{name}' has expected position")
     public SystemBarAssert position(String position) {
-        jdiAssert(element().getPosition(), Matchers.containsString(position));
+        jdiAssert(element().hasPosition(), Matchers.containsString(position));
         return this;
     }
 
-    @JDIAction("Assert that {name} has proper time")
+    @JDIAction("Assert that '{name}' has expected time")
     public SystemBarAssert time(String time) {
         jdiAssert(element().getTime(), Matchers.containsString(time));
         return this;
     }
 
-    @JDIAction("Assert that {name} has 'Wi-Fi' icon")
+    @JDIAction("Assert that '{name}' has 'Wi-Fi' icon")
     public SystemBarAssert wiFiIcon() {
-        jdiAssert(element().hasWiFiIcon(), Matchers.is(true));
+        jdiAssert(element().hasWiFiIcon() ? "icon is displayed" : "icon is not displayed",
+                Matchers.is("icon is displayed"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has 'signal' icon")
+    @JDIAction("Assert that '{name}' has 'signal' icon")
     public SystemBarAssert signalIcon() {
-        jdiAssert(element().hasSignalIcon(), Matchers.is(true));
+        jdiAssert(element().hasSignalIcon() ? "icon is displayed" : "icon is not displayed",
+                Matchers.is("icon is displayed"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has 'battery' icon")
+    @JDIAction("Assert that '{name}' has 'battery' icon")
     public SystemBarAssert batteryIcon() {
-        jdiAssert(element().hasBatteryIcon(), Matchers.is(true));
+        jdiAssert(element().hasBatteryIcon() ? "icon is displayed" : "icon is not displayed",
+                Matchers.is("icon is displayed"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has 'message' icon")
+    @JDIAction("Assert that '{name}' has 'message' icon")
     public SystemBarAssert messageIcon() {
-        jdiAssert(element().hasMessageIcon(), Matchers.is(true));
+        jdiAssert(element().hasMessageIcon() ? "icon is displayed" : "icon is not displayed",
+                Matchers.is("icon is displayed"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has 'minus' icon")
+    @JDIAction("Assert that '{name}' has 'minus' icon")
     public SystemBarAssert minusIcon() {
-        jdiAssert(element().hasMinusIcon(), Matchers.is(true));
+        jdiAssert(element().hasMinusIcon() ? "icon is displayed" : "icon is not displayed",
+                Matchers.is("icon is displayed"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has 'empty checkbox' icon")
+    @JDIAction("Assert that '{name}' has 'empty checkbox' icon")
     public SystemBarAssert emptyCheckboxIcon() {
-        jdiAssert(element().hasEmptyCheckboxIcon(), Matchers.is(true));
+        jdiAssert(element().hasEmptyCheckboxIcon() ? "icon is displayed" : "icon is not displayed",
+                Matchers.is("icon is displayed"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has 'close' icon")
+    @JDIAction("Assert that '{name}' has 'close' icon")
     public SystemBarAssert closeIcon() {
-        jdiAssert(element().hasCloseIcon(), Matchers.is(true));
+        jdiAssert(element().hasCloseIcon() ? "icon is displayed" : "icon is not displayed",
+                Matchers.is("icon is displayed"));
         return this;
     }
 }
