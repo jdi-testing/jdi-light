@@ -32,7 +32,7 @@ public class FormsTests extends TestsInit {
     }
 
     @Test
-    public void ValidationWithSubmitClearFormTest() {
+    public void validationWithSubmitClearFormTest() {
         validationWithSubmitClearForm.nameField.clearAndSetText("Batman");
         validationWithSubmitClearForm.emailField.clearAndSetText("dark_knight@gotaham.com");
         validationWithSubmitClearForm.itemField.select("Item 1");
@@ -44,7 +44,7 @@ public class FormsTests extends TestsInit {
     }
 
     @Test
-    public void VeeValidateForm() {
+    public void veeValidateForm() {
         veeValidateForm.nameField.clearAndSetText("Batman");
         veeValidateForm.phoneNumberField.clearAndSetText("7474747");
         veeValidateForm.emailField.clearAndSetText("dark_knight@gotaham.com");
@@ -57,7 +57,7 @@ public class FormsTests extends TestsInit {
     }
 
     @Test
-    public void VuelidateFormTest() {
+    public void vuelidateFormTest() {
         vuelidateForm.nameField.clearAndSetText("Batman");
         vuelidateForm.emailField.clearAndSetText("dark_knight@gotaham.com");
         vuelidateForm.itemField.select("Item 1");
