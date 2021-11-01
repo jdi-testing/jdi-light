@@ -22,10 +22,10 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
 
     protected String ROOT_LOCATOR = ".v-expansion-panels";
     protected String PANELS_LOCATOR = ".v-expansion-panel";
+
     protected String HEADER_LOCATOR = ".v-expansion-panel-header";
-    protected String ICON_LOCATOR = ".v-expansion-panel-header__icon";
+    protected String ICON_LOCATOR = ".v-expansion-panel-header__icon .v-icon";
     protected String CONTENT_LOCATOR = ".v-expansion-panel-content";
-    protected String WRAPPER_LOCATOR = ".v-expansion-panel-content__wrap";
 
     @Override
     public WebList list() {
@@ -70,9 +70,6 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
         if (!annotation.content().isEmpty()) {
             CONTENT_LOCATOR = annotation.content();
         }
-        if (!annotation.wrapper().isEmpty()) {
-            WRAPPER_LOCATOR = annotation.wrapper();
-        }
     }
 
     private ExpansionPanel createPanel(UIElement panelCore) {
@@ -80,7 +77,6 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
         panel.HEADER_LOCATOR = HEADER_LOCATOR;
         panel.ICON_LOCATOR = ICON_LOCATOR;
         panel.CONTENT_LOCATOR = CONTENT_LOCATOR;
-        panel.WRAPPER_LOCATOR = WRAPPER_LOCATOR;
         panel.setName(String.format("Expansion panel %s", panel.header().text()));
         return panel;
     }

@@ -11,7 +11,7 @@ public class TripExpansionPanel extends ExpansionPanel {
     }
 
     public void setTripName(String tripName) {
-        wrapper().find("input").sendKeys(tripName);
+        content().find("input").sendKeys(tripName);
     }
 
 }

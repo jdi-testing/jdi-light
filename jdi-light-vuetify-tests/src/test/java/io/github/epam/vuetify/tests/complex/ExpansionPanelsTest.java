@@ -45,7 +45,7 @@ public class ExpansionPanelsTest extends TestsInit {
         for (ExpansionPanel expansionPanel : panels.panels()) {
             expansionPanel.expand();
             expansionPanel.header().has().text(header);
-            expansionPanel.wrapper().has().text(content);
+            expansionPanel.content().has().text(content);
             expansionPanel.expander().has().cssClass("mdi-chevron-down");
             expansionPanel.is().expanded();
         }
@@ -76,7 +76,7 @@ public class ExpansionPanelsTest extends TestsInit {
         modelExpansionPanels.has().size(5);
         for (ExpansionPanel expansionPanel : modelExpansionPanels.panels()) {
             expansionPanel.header().has().text(containsString("Header"));
-            expansionPanel.wrapper().has().text(LOREM_IPSUM_TEXT);
+            expansionPanel.content().has().text(LOREM_IPSUM_TEXT);
             expansionPanel.is().expanded();
         }
         openPanelText.is().text("[ 0, 1, 2, 3, 4 ]");
@@ -134,7 +134,7 @@ public class ExpansionPanelsTest extends TestsInit {
         customIconExpansionPanelsSameIcons.has().size(5);
         for (ExpansionPanel expansionPanel : customIconExpansionPanelsSameIcons.panels()) {
             expansionPanel.header().has().text("Item");
-            expansionPanel.wrapper().has().text(LOREM_IPSUM_TEXT);
+            expansionPanel.content().has().text(LOREM_IPSUM_TEXT);
             expansionPanel.is().expanded();
             expansionPanel.expander().is().displayed();
             expansionPanel.expander().has().cssClass("mdi-menu-down");
