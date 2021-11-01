@@ -9,7 +9,6 @@ import com.epam.jdi.light.vuetify.annotations.JDIPagination;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
 
 import java.lang.reflect.Field;
-import java.util.NoSuchElementException;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -28,9 +27,6 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
 
     protected String CORE_CLASS_DISABLED = "v-pagination--disabled";
     protected String ITEM_CLASS_SELECTED = "v-pagination__item--active";
-
-    protected Boolean next;
-    protected Boolean previous;
 
     @Override
     @JDIAction("Get '{name}' list of all buttons ")
@@ -91,50 +87,24 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
         return new PaginationAssert().set(this);
     }
 
-    @JDIAction("Check if '{name}' has next page")
+    @JDIAction("Check that '{name}' has next page")
     public boolean hasNext() {
-        if (next == null) {
-            next = size() > 0;
-        }
-        return next;
+        return !isEnd();
     }
 
-    @JDIAction("Check if '{name}' has previous page")
+    @JDIAction("Check that '{name}' has previous page")
     public boolean hasPrevious() {
-        if (previous == null) {
-            previous = size() > 0;
-        }
-        return previous;
+        return !isStart();
     }
 
     @JDIAction("Go to next page through next button in '{name}'")
-    public String next() {
-        if (isEnd()) {
-            if (!next) {
-                throw new NoSuchElementException("Can't find next element in " + getName());
-            }
-            next = false;
-            return selected();
-        }
-        next = true;
-        String current = selected();
+    public void next() {
         rightNavigation().click();
-        return current;
     }
 
     @JDIAction("Go to previous page through previous button in '{name}'")
-    public String previous() {
-        if (isStart()) {
-            if (!previous) {
-                throw new NoSuchElementException("Can't find previous element in " + getName());
-            }
-            previous = false;
-            return selected();
-        }
-        previous = true;
-        String current = selected();
+    public void back() {
         leftNavigation().click();
-        return current;
     }
 
     @Override
