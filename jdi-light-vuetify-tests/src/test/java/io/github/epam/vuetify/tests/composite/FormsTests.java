@@ -19,46 +19,54 @@ public class FormsTests extends TestsInit {
         String textValue = "JDI Light";
         int characters = 9;
 
-        customRuleForm.slider.slideHorizontalTo(characters);
-        customRuleForm.slider.is().value(characters);
+        ruleForm.slider.slideHorizontalTo(characters);
+        ruleForm.checkbox.check();
+        ruleForm.validationTextField.clearAndSetText(textValue);
+        ruleForm.mainTextField.clearAndSetText(textValue);
+        ruleForm.is().validate();
 
-        customRuleForm.checkbox.check();
-        customRuleForm.checkbox.is().checked();
-
-        customRuleForm.validationTextFieldDemo.clearAndSetText(textValue);
-        customRuleForm.mainTextFieldDemo.clearAndSetText(textValue);
-        customRuleForm.is().validate();
+        ruleForm.mainTextField.clear();
+        ruleForm.checkbox.uncheck();
+        ruleForm.validationTextField.clear();
+        ruleForm.is().clear();
     }
 
     @Test
-    public void ValidationWithSubmitClearFormTest() throws InterruptedException {
-
+    public void ValidationWithSubmitClearFormTest() {
         validationWithSubmitClearForm.nameField.clearAndSetText("Batman");
-        validationWithSubmitClearForm.nameField.isText("Batman");
         validationWithSubmitClearForm.emailField.clearAndSetText("dark_knight@gotaham.com");
-        validationWithSubmitClearForm.emailField.isText("dark_knight@gotaham.com");
         validationWithSubmitClearForm.itemField.select("Item 1");
-        validationWithSubmitClearForm.itemField.is().selected("Item 1");
         validationWithSubmitClearForm.confirmingCheckBox.check();
         validationWithSubmitClearForm.is().validate();
 
         validationWithSubmitClearForm.resetFormButton.click();
-        validationWithSubmitClearForm.nameField.isText("");
-        validationWithSubmitClearForm.emailField.isText("");
-        validationWithSubmitClearForm.itemField.is().selected("Nothing selected");
-        Thread.sleep(2000);
+        validationWithSubmitClearForm.is().clear();
     }
 
     @Test
-    public void ValidationWithSubmitClearFormResetTest() {
-        validationWithSubmitClearForm.nameField.click();
-        validationWithSubmitClearForm.emailField.click();
-        validationWithSubmitClearForm.itemField.expand();
-        validationWithSubmitClearForm.confirmingCheckBox.check();
-        validationWithSubmitClearForm.confirmingCheckBox.uncheck();
+    public void VeeValidateForm() {
 
-        validationWithSubmitClearForm.nameField.message().is().visible();
-        validationWithSubmitClearForm.emailField.message().is().visible();
-        validationWithSubmitClearForm.itemField.is().hint("Hint doesn't exist");
+        veeValidateForm.nameField.clearAndSetText("Batman");
+        veeValidateForm.phoneNumberField.clearAndSetText("7474747");
+        veeValidateForm.emailField.clearAndSetText("dark_knight@gotaham.com");
+        veeValidateForm.itemField.select("Item 1");
+        veeValidateForm.optionCheckBox.check();
+        veeValidateForm.is().validate();
+
+        veeValidateForm.clearButton.click();
+        veeValidateForm.is().clear();
+    }
+
+    @Test
+    public void VuelidateFormTest() {
+
+        vuelidateForm.nameField.clearAndSetText("Batman");
+        vuelidateForm.emailField.clearAndSetText("dark_knight@gotaham.com");
+        vuelidateForm.itemField.select("Item 1");
+        vuelidateForm.optionCheckBox.check();
+        vuelidateForm.is().validate();
+
+        vuelidateForm.clearButton.click();
+        vuelidateForm.is().clear();
     }
 }
