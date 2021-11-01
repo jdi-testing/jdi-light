@@ -45,7 +45,6 @@ public class FormsTests extends TestsInit {
 
     @Test
     public void VeeValidateForm() {
-
         veeValidateForm.nameField.clearAndSetText("Batman");
         veeValidateForm.phoneNumberField.clearAndSetText("7474747");
         veeValidateForm.emailField.clearAndSetText("dark_knight@gotaham.com");
@@ -59,7 +58,6 @@ public class FormsTests extends TestsInit {
 
     @Test
     public void VuelidateFormTest() {
-
         vuelidateForm.nameField.clearAndSetText("Batman");
         vuelidateForm.emailField.clearAndSetText("dark_knight@gotaham.com");
         vuelidateForm.itemField.select("Item 1");

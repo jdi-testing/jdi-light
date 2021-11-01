@@ -65,8 +65,6 @@ public class VeeValidateForm extends Forms {
                 exceptionMessage.append(itemField.hint());
             }
         }
-
-        //Checkbox
         if (optionCheckBox.message().isVisible()) {
             exceptionMessage.append(optionCheckBox.message().getText()).append(" ");
         }

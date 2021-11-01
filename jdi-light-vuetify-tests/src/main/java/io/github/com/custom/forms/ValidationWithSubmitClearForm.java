@@ -11,8 +11,6 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 
 public class ValidationWithSubmitClearForm extends Forms {
 
-    //form[@id = 'ValidationWithSubmitClearForm']/div[contains(@class, 'v-text-field')]
-
     @UI("//div[contains(@class, 'v-text-field--is-booted')][1]")
     public TextField nameField;
 
