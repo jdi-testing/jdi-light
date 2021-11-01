@@ -81,5 +81,4 @@ public class ExpansionPanelsPage extends VuetifyPage {
             icon = ".v-expansion-panel-header__icon .v-icon"
     )
     public static ExpansionPanels customIconExpansionPanelsDifferentIcons;
-
 }
