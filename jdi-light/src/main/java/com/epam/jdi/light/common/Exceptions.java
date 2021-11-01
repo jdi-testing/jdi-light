@@ -27,6 +27,8 @@ public class Exceptions {
             throw new AssertionError(message, ex);
         else if (isClass(exceptionClass, UnsupportedOperationException.class)) {
             return new UnsupportedOperationException(message, ex);
+        } else if (isClass(IllegalArgumentException.class, exceptionClass)) {
+            return new IllegalArgumentException(message, ex);
         }
         return new RuntimeException(message, ex);
     }

@@ -84,7 +84,6 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
         list().check(names);
     }
 
-
     protected boolean selected(UIElement value) {
         return value.isSelected();
     }
@@ -169,6 +168,9 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      */
     @Override
     public void setValue(String value) {
+        if(value==null){
+            throw new IllegalArgumentException("Value should not be null");
+        }
         check(value.split(";"));
     }
 

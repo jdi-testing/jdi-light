@@ -211,6 +211,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     }
 
     public UIElement getUIElement(String value) {
+        if(value==null) {
+            throw new IllegalArgumentException("Value should not be null");
+        }
         UIElement element = locator.isTemplate()
             ? new UIElement(base(), getLocator(value), nameFromValue(value))
             : getNewElementByValue(value);

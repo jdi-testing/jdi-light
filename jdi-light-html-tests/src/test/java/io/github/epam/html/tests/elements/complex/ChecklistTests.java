@@ -182,4 +182,21 @@ public class ChecklistTests implements TestsInit {
         weather.is().checked(hasSize(4));
         weather.is().checked(hasItems("Hot option", "Cold", "Rainy day", "Sunny"));
     }
+
+    @Test(expectedExceptions = { IllegalArgumentException.class }, expectedExceptionsMessageRegExp = "(.*)Value should not be null")
+    public void passingNull_ToSetValue_ThrowsException() {
+        weather.setValue(null);
+    }
+
+    @Test(expectedExceptions = { IllegalArgumentException.class }, expectedExceptionsMessageRegExp = "(.*)Value should not be null")
+    public void passingNull_ToSelect_ThrowsException() {
+        String optionName = null;
+        weather.select(optionName);
+    }
+
+    @Test(expectedExceptions = { IllegalArgumentException.class }, expectedExceptionsMessageRegExp = "(.*)Value should not be null")
+    public void passingNull_ToGet_ThrowsException() {
+        String value = null;
+        weather.get(value);
+    }
 }

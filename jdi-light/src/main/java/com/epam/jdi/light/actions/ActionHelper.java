@@ -470,12 +470,15 @@ public class ActionHelper {
     }
     static Object[] getArgs(JoinPoint jp) {
         Object[] args = jp.getArgs();
-        if (args.length == 1 && args[0] == null)
-            return new Object[] {};
+        // Commented this condition because it causes an error
+        // for the methods with single parameter having null value
+        // And it is unclear why this was required in the first place.
+//        if (args.length == 1 && args[0] == null)
+//            return new Object[] {};
         Object[] result = new Object[args.length];
         for (int i = 0; i< args.length; i++)
             result[i] = Switch(args[i]).get(
-                Case(Objects::isNull, null),
+                Case(Objects::isNull, "null"),
                 Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
                 Case(arg -> isInterface(arg.getClass(), IBaseElement.class),
                     arg -> ((IBaseElement)arg).base().toString()),
@@ -625,6 +628,9 @@ public class ActionHelper {
                             ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
                     if (!condition(jInfo.jp())) continue;
                     return result;
+                } catch (IllegalArgumentException ex) {
+                    // Do not repeat in case method has invalid argument
+                    throw ex;
                 } catch (Throwable ex) {
                     exception = ex;
                     try {
