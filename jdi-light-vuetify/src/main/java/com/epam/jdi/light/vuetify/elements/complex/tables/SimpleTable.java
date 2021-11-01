@@ -1,4 +1,4 @@
-package com.epam.jdi.light.vuetify.elements.complex.Tables;
+package com.epam.jdi.light.vuetify.elements.complex.tables;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;

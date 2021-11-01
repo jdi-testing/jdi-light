@@ -4,9 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.AvatarAssert;
-import com.epam.jdi.tools.Timer;
-
-import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 /**
  * To see an example of Avatar web element please visit https://vuetifyjs.com/en/components/avatars/
@@ -15,35 +12,29 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 public class Avatar extends UIBaseElement<AvatarAssert> {
 
 
-    @JDIAction("Get {name} photo")
-    public UIElement getPhoto() {
-        return this.find("img");
+    @JDIAction("Get '{name}' photo")
+    private UIElement getPhoto() {
+        return find("img");
     }
 
-    @JDIAction("Get {name} photo")
-    public UIElement getIcon() {
-        return this.find("i");
+    @JDIAction("Get '{name}' icon")
+    private UIElement getIcon() {
+        return find("i");
     }
 
-    @JDIAction("Get {name} photo")
-    public String hasPhoto() {
-        Timer.waitCondition(getPhoto()::isDisplayed);
-        return getPhoto().getTagName();
+    @JDIAction("'{name}' has photo")
+    public boolean hasPhoto() {
+        return getPhoto().getTagName().equals("img");
     }
 
-    @JDIAction("Get {name} icon")
+    @JDIAction("'{name}' has icon")
     public boolean hasIcon() {
-        Timer.waitCondition(getIcon()::isDisplayed);
-        return getIcon().getAttribute("class").contains("v-icon");
+        return getIcon().hasClass("v-icon");
     }
 
-    @JDIAction("Get {name} size")
-    public String properSize() {
-        return this.core().getAttribute("style");
-    }
-
-    public void scrollIntoView() {
-        jsExecute("arguments[0].scrollIntoView(true);", this.core().getFast());
+    @JDIAction("Get '{name}' size")
+    public String hasSize() {
+        return core().getAttribute("style");
     }
 
     public AvatarAssert is() {

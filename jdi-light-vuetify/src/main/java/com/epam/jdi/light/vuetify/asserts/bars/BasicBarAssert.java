@@ -10,53 +10,60 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class BasicBarAssert<T extends BasicBar<?,?>, A extends BasicBarAssert<?,?>> extends UIAssert<A, T> {
 
-    @JDIAction("Assert that {name} is displayed")
+    @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {
         Timer.waitCondition(element()::isDisplayed);
-        element().scrollIntoView();
+        element().show();
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return (A)this;
     }
 
-    @JDIAction("Assert that {name} has proper text")
+    @JDIAction("Assert that '{name}' has expected text")
     public A text(String text) {
         jdiAssert(element().getText(), Matchers.containsString(text));
         return (A)this;
     }
 
-    @JDIAction("Assert that {name} has 'menu' button")
+    @JDIAction("Assert that '{name}' has 'menu' button")
     public A menuButton() {
-        jdiAssert(element().hasMenuButton(), Matchers.is(true));
+        jdiAssert(element().hasMenuButton() ? "'menu' button is displayed" : "'menu' button is not displayed",
+                Matchers.is("'menu' button is displayed"));
         return (A)this;
     }
 
-    @JDIAction("Assert that {name} has title")
+    @JDIAction("Assert that '{name}' has visible title")
     public A title() {
-        jdiAssert(element().hasTitle(), Matchers.is(true));
+        jdiAssert(element().hasTitle() ? "title is displayed" : "title is not displayed",
+                Matchers.is("title is displayed"));
         return (A)this;
     }
 
-    @JDIAction("Assert that {name} has proper text in title")
-    public A properTitleText(String text) {
+    @JDIAction("Assert that '{name}' has expected text in title")
+    public A textInTitle(String text) {
         jdiAssert(element().titleText(), Matchers.is(text));
         return (A)this;
     }
 
-    @JDIAction("Assert that {name} has 'search' button")
+    @JDIAction("Assert that '{name}' has 'search' button")
     public A searchButton() {
-        jdiAssert(element().hasSearchButton(), Matchers.is(true));
+        jdiAssert(element().hasSearchButton() ? "'search' button is displayed" : "'search' button is not displayed",
+                Matchers.is("'search' button is displayed"));
         return (A)this;
     }
 
-    @JDIAction("Assert that {name} has 'heart' button")
+    @JDIAction("Assert that '{name}' has 'heart' button")
     public A heartButton() {
-        jdiAssert(element().hasHeartButton(), Matchers.is(true));
+        jdiAssert(element().hasHeartButton()
+                        ? "'heart' button is displayed" : "'heart button' button is not displayed",
+                Matchers.is("'heart' button is displayed"));
         return (A)this;
     }
 
-    @JDIAction("Assert that {name} has 'vertical dots' button")
+    @JDIAction("Assert that '{name}' has 'vertical dots' button")
     public A verticalDotsButton() {
-        jdiAssert(element().hasVerticalDotsButton(), Matchers.is(true));
+        jdiAssert(element().hasVerticalDotsButton()
+                        ? "'vertical dots' button is displayed" : "'vertical dots' button is not displayed",
+                Matchers.is("'vertical dots' button is displayed"));
         return (A)this;
     }
 }
