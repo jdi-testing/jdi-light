@@ -5,7 +5,6 @@ import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.epam.jdi.light.vuetify.elements.composite.Forms;
-import com.epam.jdi.tools.Timer;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 
@@ -25,7 +24,6 @@ public class RuleForm extends Forms {
 
     @Override
     public boolean validate() {
-        Timer.sleep(1000);
         if (!mainTextField.getMessage().isEmpty()) {
             throw exception("Form validation failed: " + mainTextField.getMessage(), this);
         } else {
