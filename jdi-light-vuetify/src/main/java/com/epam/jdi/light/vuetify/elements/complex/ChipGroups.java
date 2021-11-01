@@ -12,7 +12,6 @@ public class ChipGroups extends UIBaseElement<ChipGroupAssert> {
     private static final String TEXT1 = ".v-chip__content";
     private static final String TEXT2 = "//span[@class='v-chip__content']/text()";
     private static final String FILTER = "span .v-chip__filter"; //галочка в filter results chip group
-    private static final String ICON = "span .v-icon";
 
     public ChipGroupAssert is() {
         return new ChipGroupAssert().set(this);
