@@ -24,7 +24,7 @@ public class RuleForm extends Forms {
 
     @Override
     public boolean validate() {
-        if (!mainTextField.getMessage().isEmpty()) {
+        if (mainTextField.message().isVisible()) {
             throw exception("Form validation failed: " + mainTextField.getMessage(), this);
         } else {
             return true;
