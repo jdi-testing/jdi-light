@@ -37,31 +37,38 @@ public class GridSystemsTests extends TestsInit {
     public void alignGridSystemTests() {
         List<String> alignments = Arrays.asList("start", "center", "end");
         alignGridSystem.is().displayed();
-        for(int i = 1; i < alignGridSystem.getRows().size(); i++) {
-            alignGridSystem.has().rowVerticalAlignment(i, alignments.get(i-1));
-            for(int j = 1; j <= alignGridSystem.getColumnsByRowIndex(i).size(); j++) {
-                alignGridSystem.has().columnText("One of three columns", i ,j);
-            }
+        for(int i = 1; i <= 3; i++) {
+            alignGridSystem.has().rowVerticalAlignment(i, alignments.get(i - 1));
+            alignGridSystem.has().columnVerticalAlignment(4, i, alignments.get(i - 1));
         }
-        for(int i = 1; i <= alignGridSystem.getColumnsByRowIndex(4).size(); i++) {
-            alignGridSystem.has().columnText("One of three columns", 4, i);
-            alignGridSystem.has().columnVerticalAlignment(4, i, alignments.get(i-1));
-        }
+        alignGridSystem.has().columnText("One of three columns", 1, 2);
     }
 
     @Test
     public void breakpointSizingGridSystemTests() {
         breakpointSizingGridSystem.is().displayed();
+        breakpointSizingGridSystem.has().columnText("1 of 2", 1, 1);
+        breakpointSizingGridSystem.has().columnText("2 of 2", 1, 2);
+        breakpointSizingGridSystem.has().columnText("1 of 3", 2, 1);
+        breakpointSizingGridSystem.has().columnText("2 of 3", 2, 2);
+        breakpointSizingGridSystem.has().columnText("3 of 3", 2, 3);
     }
 
     @Test
     public void justifyGridSystemTests() {
+        List<String> alignments = Arrays.asList("start", "center", "end", "space-around", "space-between");
         justifyGridSystem.is().displayed();
+        for(int i = 1; i <= 5; i++) {
+            justifyGridSystem.has().rowHorizontalAlignment(i, alignments.get(i - 1));
+        }
+        justifyGridSystem.has().columnText("One of two columns", 1, 2);
+        justifyGridSystem.has().columnText("One of two columns", 4, 1);
     }
 
     @Test
     public void noGuttersGridSystemTests() {
         noGuttersGridSystem.is().displayed();
+
     }
 
     @Test

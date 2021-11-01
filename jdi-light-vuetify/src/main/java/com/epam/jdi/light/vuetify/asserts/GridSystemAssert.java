@@ -29,6 +29,12 @@ public class GridSystemAssert extends UIAssert<GridSystemAssert, GridSystem> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' row {0} has expected alignment")
+    public GridSystemAssert rowHorizontalAlignment(int rowIndex, String alignment) {
+        jdiAssert(element().getRowHorizontalAlignment(rowIndex), Matchers.is(String.format("justify-%s", alignment)));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' column {1} has expected alignment")
     public GridSystemAssert columnVerticalAlignment(int rowIndex, int columnIndex, String alignment) {
         jdiAssert(element().getColumnVerticalAlignment(rowIndex, columnIndex), Matchers.is(String.format("align-self-%s", alignment)));

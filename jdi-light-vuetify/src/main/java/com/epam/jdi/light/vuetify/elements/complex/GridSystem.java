@@ -31,12 +31,21 @@ public class GridSystem extends UIBaseElement<GridSystemAssert> {
         return getColumnsByRowIndex(rowIndex).get(columnIndex);
     }
 
-    @JDIAction("Get '{name}'s row's alignment")
-    public String getRowVerticalAlignment(int rowIndex) {
+    @JDIAction("Get '{name}'s row's vertical alignment")
+    private String getRowAlignment(int rowIndex, String alignment) {
         return Arrays.stream(getRowByIndex(rowIndex).attr("class")
                 .split("\\s"))
-                .filter(s -> s.startsWith("align"))
+                .filter(s -> s.startsWith(alignment))
                 .collect(Collectors.joining());
+    }
+    @JDIAction("Get '{name}'s row's vertical alignment")
+    public String getRowVerticalAlignment(int rowIndex) {
+        return getRowAlignment(rowIndex, "align");
+    }
+
+    @JDIAction("Get '{name}'s row's horizontal alignment")
+    public String getRowHorizontalAlignment(int rowIndex) {
+        return getRowAlignment(rowIndex, "justify");
     }
 
     @JDIAction("Get '{name}'s column's alignment")
