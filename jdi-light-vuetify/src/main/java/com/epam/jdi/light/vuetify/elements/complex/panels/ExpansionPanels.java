@@ -12,7 +12,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 /**
@@ -30,7 +29,7 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
 
     @Override
     public WebList list() {
-        return $$(PANELS_LOCATOR, this).setName(getName() + " expansion panels");
+        return finds(PANELS_LOCATOR).setName(getName() + " expansion panels");
     }
 
     @JDIAction("Get Panels from '{name}'")
@@ -77,11 +76,12 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
     }
 
     private ExpansionPanel createPanel(UIElement panelCore) {
-        ExpansionPanel panel =  new ExpansionPanel().setCore(ExpansionPanel.class, panelCore);
+        ExpansionPanel panel = new ExpansionPanel().setCore(ExpansionPanel.class, panelCore);
         panel.HEADER_LOCATOR = HEADER_LOCATOR;
         panel.ICON_LOCATOR = ICON_LOCATOR;
         panel.CONTENT_LOCATOR = CONTENT_LOCATOR;
         panel.WRAPPER_LOCATOR = WRAPPER_LOCATOR;
+        panel.setName(String.format("Expansion panel %s", panel.header().text()));
         return panel;
     }
 }
