@@ -1,13 +1,13 @@
 package io.github.epam.html.tests.elements.complex;
 
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.checksGroup;
-import static io.github.com.pages.HtmlElementsPage.isWeather;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.complex.enums.Weather.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -60,6 +60,13 @@ public class IsChecklistTests implements TestsInit {
         isWeather.select("Cold");
         assertEquals(isWeather.checked(), asList("Hot option", "Cold"));
     }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSelect_ThrowsException() {
+        String optionName = null;
+        isWeather.select(optionName);
+    }
+
     @Test
     public void selectTwoTest() {
         isWeather.select("Cold", "Hot option");

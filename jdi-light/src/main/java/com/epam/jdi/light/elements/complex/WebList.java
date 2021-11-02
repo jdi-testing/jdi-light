@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.NullArgumentException;
+import com.epam.jdi.light.common.NullUserInputValueException;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.common.TextTypes;
@@ -204,7 +204,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
     @JDIAction(level = DEBUG) @Override
     public UIElement get(String value) {
         if(value==null) {
-            throw new NullArgumentException();
+            throw new NullUserInputValueException();
         }
         return hasKey(value)
             ? getByKey(value)
@@ -216,7 +216,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     public UIElement getUIElement(String value) {
         if(value==null) {
-            throw new NullArgumentException();
+            throw new NullUserInputValueException();
         }
         UIElement element = locator.isTemplate()
             ? new UIElement(base(), getLocator(value), nameFromValue(value))
@@ -343,8 +343,12 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction("Select ({0}) for '{name}'")
     public void select(String... values) {
-        for (String value : values)
+        for (String value : values) {
+            if(value==null){
+                throw new NullUserInputValueException();
+            }
             select(value);
+        }
     }
     @JDIAction("Check all '{name}' unchecked options")
     public void checkAll() {

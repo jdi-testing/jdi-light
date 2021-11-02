@@ -1,12 +1,13 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.disabledName;
-import static io.github.com.pages.HtmlElementsPage.yourName;
+import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.com.pages.HtmlElementsPage.textArea;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
@@ -43,10 +44,25 @@ public class TextFieldTests implements TestsInit {
         assertEquals(yourName.getValue(), text+"Test");
     }
 
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSendKeys_ThrowsException() {
+        yourName.sendKeys(null);
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_AsOneOfTheArguments_ToSendKeys_ThrowsException() {
+        yourName.sendKeys(null, "Test");
+    }
+
     @Test
     public void inputTest() {
         yourName.input("New text");
         assertEquals(yourName.getText(), "New text");
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToInput_ThrowsException() {
+        yourName.input(null);
     }
 
     @Test
@@ -106,6 +122,17 @@ public class TextFieldTests implements TestsInit {
         yourName.setText(symbols);
         assertEquals(yourName.getText(), symbols);
     }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSetText_ThrowsException() {
+        yourName.setText(null);
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSetValue_ThrowsException() {
+        yourName.setValue(null);
+    }
+
     @Test
     public void sendKeysSymbolsTest() {
         yourName.clear();

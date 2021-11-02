@@ -1,7 +1,7 @@
 package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.complex.ChecklistAssert;
-import com.epam.jdi.light.common.NullArgumentException;
+import com.epam.jdi.light.common.NullUserInputValueException;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -40,7 +40,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
         if(value==null) {
-            throw new NullArgumentException();
+            throw new NullUserInputValueException();
         }
         list().select(value);
     }
@@ -174,7 +174,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     @Override
     public void setValue(@NotNull String value) {
         if(value==null){
-            throw new NullArgumentException();
+            throw new NullUserInputValueException();
         }
         check(value.split(";"));
     }

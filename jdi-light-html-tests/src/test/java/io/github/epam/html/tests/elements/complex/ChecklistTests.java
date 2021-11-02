@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
-import com.epam.jdi.light.common.NullArgumentException;
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -201,18 +201,18 @@ public class ChecklistTests implements TestsInit {
         weather.is().checked(hasItems("Hot option", "Cold", "Rainy day", "Sunny"));
     }
 
-    @Test(expectedExceptions = {NullArgumentException.class})
+    @Test(expectedExceptions = {NullUserInputValueException.class})
     public void passingNull_ToSetValue_ThrowsException() {
         weather.setValue(null);
     }
 
-    @Test(expectedExceptions = {NullArgumentException.class})
+    @Test(expectedExceptions = {NullUserInputValueException.class})
     public void passingNull_ToSelect_ThrowsException() {
         String optionName = null;
         weather.select(optionName);
     }
 
-    @Test(expectedExceptions = {NullArgumentException.class})
+    @Test(expectedExceptions = {NullUserInputValueException.class})
     public void passingNull_ToGet_ThrowsException() {
         String value = null;
         weather.get(value);

@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
@@ -7,6 +8,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.metalAndColorsPage;
+import static io.github.com.pages.HtmlElementsPage.ages;
 import static io.github.com.pages.MetalAndColorsPage.odds;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -32,6 +34,12 @@ public class RadioLabelTests implements TestsInit {
     public void selectTest() {
         odds.select("3");
         assertEquals(odds.getValue(), "3");
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSelect_ThrowsException() {
+        String optionName = null;
+        odds.select(optionName);
     }
 
     @Test
