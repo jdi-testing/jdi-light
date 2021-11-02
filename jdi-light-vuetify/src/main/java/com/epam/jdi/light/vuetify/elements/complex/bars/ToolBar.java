@@ -3,157 +3,138 @@ package com.epam.jdi.light.vuetify.elements.complex.bars;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.bars.ToolBarAssert;
-import com.epam.jdi.tools.Timer;
-
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.DEEP_PURPLE_ACCENT_4;
+import com.epam.jdi.light.vuetify.elements.common.Button;
 
 /**
  * To see examples of Tool Bar web elements please visit https://vuetifyjs.com/en/components/toolbars
- *
- * The v-toolbar component is pivotal to any gui, as it generally is the primary source of site navigation.
- * The toolbar component works great in conjunction with v-navigation-drawer and v-card.
- *
  */
 
 public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
 
-    @JDIAction("Get '{name}' background image")
-    public UIElement getBackgroundImage() {
-        return this.find(".v-image__image");
+    @JDIAction("Get '{name}'s 'close' button")
+    private Button getCloseButton() {
+        return findIconButton("mdi-close");
     }
 
-    @JDIAction("Get '{name}' 'export' button")
-    public UIElement getExportButton() {
-        return this.find(".mdi-menu");
+    @JDIAction("Get '{name}'s 'delete' button")
+    private Button getDeleteButton() {
+        return findIconButton("mdi-delete");
     }
 
-    @JDIAction("Get '{name}' map image")
-    public UIElement getMapImage() {
-        return this.find(".v-card--flat");
+    @JDIAction("Get '{name}'s input field")
+    private UIElement getInput() {
+        return find("input");
     }
 
-    @JDIAction("Get '{name}' 'GPS' button")
-    public UIElement getGpsButton() {
-        return this.find(".mdi-crosshairs-gps");
+    @JDIAction("Get '{name}'s 'select options' field")
+    private UIElement getSelectOptionsField() {
+        return find(".v-select__selections");
     }
 
-    @JDIAction("Get '{name}' 'delete' button")
-    public UIElement getDeleteButton() {
-        return this.find(".mdi-delete");
+    @JDIAction("'{name}' has header height")
+    public boolean hasHeaderHeight(String height) {
+        return getHeader().getAttribute("style").equals(String.format("height: %spx;", height));
     }
 
-    @JDIAction("Get '{name}' 'close' button")
-    public UIElement getCloseButton() {
-        return this.find(".mdi-close");
-    }
-
-    @JDIAction("Get '{name}' 'apps' button")
-    public UIElement getAppsButton() {
-        return this.find(".mdi-apps");
-    }
-
-    @JDIAction("Get '{name}' input field")
-    public UIElement getInput() {
-        return this.find("input");
-    }
-
-    @JDIAction("Get '{name}' 'select options' field")
-    public UIElement getSelectOptionsField() {
-        return this.find(".v-select__selections");
-    }
-
-    @JDIAction("Get {name} header height")
-    public boolean getHeaderHeight(String height) {
-        return getHeader().getAttribute("style").equals(String.format("height: %spx;",height));
-    }
-
-    @JDIAction("Get {name} header color")
-    public String getHeaderColor() {
+    @JDIAction("'{name}'s header has color")
+    public String hasHeaderColor() {
         return getHeader().getCssValue("background-color");
     }
 
-    @JDIAction("Get {name} selected options")
-    public String getSelectedOptions() {
-        return this.find("input[type=hidden]").getAttribute("value");
+    @JDIAction("'{name}' has selected options")
+    public String hasSelectedOptions() {
+        return find("input[type=hidden]").getAttribute("value");
     }
 
-    @JDIAction("{name} has background image")
+    @JDIAction("'{name}' has background image")
     public boolean hasBackgroundImage() {
-        Timer.waitCondition(getBackgroundImage()::isDisplayed);
-        return getBackgroundImage().getAttribute("style").contains("url");
+        return find(".v-image__image").getAttribute("style").contains("url");
     }
 
-    @JDIAction("{name} has 'export' button")
+    @JDIAction("'{name}' has 'export' button")
     public boolean hasExportButton() {
-        Timer.waitCondition(getExportButton()::isDisplayed);
-        return getExportButton().isClickable();
+        Button exportButton = findIconButton("mdi-export");
+        return exportButton.isDisplayed();
     }
 
-    @JDIAction("{name} has 'GPS' button")
+    @JDIAction("'{name}' has 'search' icon")
+    public boolean hasSearchIcon() {
+        return castToIcon(find(".mdi-magnify")).isDisplayed();
+    }
+
+    @JDIAction("'{name}' has 'GPS' button")
     public boolean hasGpsButton() {
-        Timer.waitCondition(getGpsButton()::isClickable);
-        return getGpsButton().isClickable();
+        Button gpsButton = findIconButton("mdi-crosshairs-gps");
+        return gpsButton.isDisplayed();
     }
 
-    @JDIAction("{name} has 'delete' button")
+    @JDIAction("'{name}' has 'delete' button")
     public boolean hasDeleteButton() {
-        Timer.waitCondition(getDeleteButton()::isClickable);
-        return getDeleteButton().isClickable();
+        return getDeleteButton().isDisplayed();
     }
 
-    @JDIAction("{name} has 'close' button")
+    @JDIAction("'{name}' has 'close' button")
     public boolean hasCloseButton() {
-        Timer.waitCondition(getCloseButton()::isClickable);
-        return getCloseButton().isClickable();
+        return getCloseButton().isDisplayed();
     }
 
-    @JDIAction("{name} has 'apps' button")
+    @JDIAction("'{name}' has 'apps' button")
     public boolean hasAppsButton() {
-        Timer.waitCondition(getAppsButton()::isClickable);
-        return getAppsButton().isClickable();
+        Button appsButton = findIconButton("mdi-apps");
+        return appsButton.isDisplayed();
     }
 
-    @JDIAction("{name} has input field")
+    @JDIAction("'{name}' has input field")
     public boolean hasInput() {
-        Timer.waitCondition(getInput()::isDisplayed);
         return getInput().isVisible();
     }
 
-    @JDIAction("{name} has 'map' image")
+    @JDIAction("'{name}' has 'map' image")
     public boolean hasMapImage() {
-        Timer.waitCondition(getMapImage()::isDisplayed);
-        return getMapImage().getAttribute("style").contains("url");
+        return find(".v-card--flat").getAttribute("style").contains("url");
     }
 
-    @JDIAction("{name} has 'select options' field")
+    @JDIAction("'{name}' has 'select options' field")
     public boolean hasSelectOptionsField() {
-        Timer.waitCondition(getSelectOptionsField()::isDisplayed);
         return getSelectOptionsField().isDisplayed();
     }
 
-    @JDIAction("{name} header is collapsed")
-    public boolean isCollapsed() {
+    @JDIAction("'{name}'s 'delete' and 'close' buttons are hidden")
+    public boolean hasHiddenButtons() {
+        return getCloseButton().isNotExist() && getDeleteButton().isNotExist();
+    }
+
+    @JDIAction("'{name}'s header is collapsed")
+    public boolean headerIsCollapsed() {
         return getHeader().getAttribute("class").contains("collapsed");
     }
 
-    @JDIAction("{name} header is dense")
-    public boolean isDense() {
+    @JDIAction("'{name}'s header is dense")
+    public boolean headerIsDense() {
         return getHeader().getAttribute("class").contains("dense");
     }
 
-    @JDIAction("{name} header is extended")
-    public boolean isExtended() {
+    @JDIAction("'{name}'s header is extended")
+    public boolean headerIsExtended() {
         return getHeader().getAttribute("class").contains("extended");
     }
 
-    @JDIAction("{name} header is purple")
-    public boolean isPurple() {
-        return getHeaderColor().equals(DEEP_PURPLE_ACCENT_4.value());
+    @JDIAction("'{name}'s input field is focused")
+    public boolean inputFieldIsFocused() {
+        return find(".v-input").getAttribute("class").contains("is-focused");
     }
 
-    @JDIAction("{name} input field is focused")
-    public boolean isInputFocused() {
-        return this.find(".v-input").getAttribute("class").contains("is-focused");
+    public void sendTextToInputField(String text) {
+        getInput().select();
+        getInput().sendKeys(text);
+    }
+
+    public void clickOnSelectOptionsField() {
+        getSelectOptionsField().click();
+    }
+
+    public void clickOnCloseButton() {
+        getCloseButton().click();
     }
 
     public ToolBarAssert is() {
@@ -161,6 +142,6 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     }
 
     public ToolBarAssert has() {
-        return this.is();
+        return is();
     }
 }

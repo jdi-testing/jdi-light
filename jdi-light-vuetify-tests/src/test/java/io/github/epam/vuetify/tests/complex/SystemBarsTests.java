@@ -99,7 +99,7 @@ public class SystemBarsTests extends TestsInit {
         systemBarAbsolutePosition.has().menuButton();
         systemBarAbsolutePosition.has().verticalDotsButton();
         systemBarAbsolutePosition.has().title();
-        systemBarAbsolutePosition.has().properTitleText("System bar title");
+        systemBarAbsolutePosition.has().textInTitle("System bar title");
         systemBarAbsolutePosition.has().position("absolute");
     }
 
@@ -110,7 +110,7 @@ public class SystemBarsTests extends TestsInit {
         systemBarApp.has().verticalDotsButton();
         systemBarApp.has().heartButton();
         systemBarApp.has().title();
-        systemBarApp.has().properTitleText("App system bar title");
+        systemBarApp.has().textInTitle("App system bar title");
         systemBarApp.has().position("fixed");
     }
 
@@ -120,6 +120,6 @@ public class SystemBarsTests extends TestsInit {
         systemBarHigh.has().menuButton();
         systemBarHigh.has().verticalDotsButton();
         systemBarHigh.has().title();
-        systemBarHigh.has().properTitleText("System bar title");
+        systemBarHigh.has().textInTitle("System bar title");
     }
 }

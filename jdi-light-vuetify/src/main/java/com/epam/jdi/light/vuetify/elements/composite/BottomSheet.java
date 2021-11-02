@@ -1,8 +1,5 @@
 package com.epam.jdi.light.vuetify.elements.composite;
 
-import com.epam.jdi.light.elements.composite.Section;
-
-
 /**
  * To see an example of Bottom Sheet web element please visit https://vuetifyjs.com/en/components/bottom-sheets/
  *
@@ -15,7 +12,7 @@ import com.epam.jdi.light.elements.composite.Section;
  *
  * It is a type alias for a section
  */
-public class BottomSheet extends Section {
+public class BottomSheet extends Sheet {
 
     // Element could be presented on a page and isDisplayed would return true but all sheet content is hidden
     // with z-index tricks if the element does not have this css class

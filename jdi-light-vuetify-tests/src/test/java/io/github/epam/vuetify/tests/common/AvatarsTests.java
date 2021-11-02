@@ -14,7 +14,7 @@ import static io.github.com.pages.AvatarsPage.tileAvatar;
 public class AvatarsTests extends TestsInit {
 
     @BeforeClass
-    public void beforeTest() {
+    public void before() {
         avatarsPage.open();
     }
 
@@ -23,9 +23,9 @@ public class AvatarsTests extends TestsInit {
         for(Avatar avatar: avatarsWithSize) {
             avatar.is().displayed();
         }
-        avatarsWithSize.get(1).is().text("36");
-        avatarsWithSize.get(2).is().text("48");
-        avatarsWithSize.get(3).is().text("62");
+        avatarsWithSize.get(1).has().text("36");
+        avatarsWithSize.get(2).has().text("48");
+        avatarsWithSize.get(3).has().text("62");
         avatarsWithSize.get(1).has().size("36");
         avatarsWithSize.get(2).has().size("48");
         avatarsWithSize.get(3).has().size("62");
@@ -45,14 +45,14 @@ public class AvatarsTests extends TestsInit {
         }
         slotAvatars.get(1).has().icon();
         slotAvatars.get(2).has().photo();
-        slotAvatars.get(3).is().text("CJ");
+        slotAvatars.get(3).has().text("CJ");
     }
 
     @Test
     public void profileCardTests() {
         profileCard.is().displayed();
-        profileCard.has().properName("Marcus Obrien");
-        profileCard.has().properJobFunction("Network Engineer");
+        profileCard.has().name("Marcus Obrien");
+        profileCard.has().jobFunction("Network Engineer");
         profileCard.has().avatarImage();
         profileCard.has().backgroundImage();
     }
