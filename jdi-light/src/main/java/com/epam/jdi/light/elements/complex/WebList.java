@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
+import com.epam.jdi.light.common.NullArgumentException;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.common.TextTypes;
@@ -202,6 +203,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction(level = DEBUG) @Override
     public UIElement get(String value) {
+        if(value==null) {
+            throw new NullArgumentException();
+        }
         return hasKey(value)
             ? getByKey(value)
             : getUIElement(value);
@@ -212,7 +216,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
 
     public UIElement getUIElement(String value) {
         if(value==null) {
-            throw new IllegalArgumentException("Value should not be null");
+            throw new NullArgumentException();
         }
         UIElement element = locator.isTemplate()
             ? new UIElement(base(), getLocator(value), nameFromValue(value))
