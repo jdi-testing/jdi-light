@@ -1,12 +1,10 @@
-package com.epam.jdi.light.vuetify.elements.complex;
+package com.epam.jdi.light.vuetify.elements.complex.tables;
 
-import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import com.epam.jdi.light.vuetify.asserts.DataIteratorAssert;
+import com.epam.jdi.light.vuetify.asserts.tabs.DataIteratorAssert;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,25 +14,20 @@ import java.util.Map;
  * To see an example of Data Iterator web element please visit https://vuetifyjs.com/en/components/data-iterators/
  */
 
-public class DataIterator extends UIBaseElement<DataIteratorAssert> implements HasAssert<DataIteratorAssert> {
-    private final String title_path = "div[class*='title']";
-    private final String input_path = "div[class*='selection']";
-    private final String list_item_path = "div[role = 'listitem']";
+public class DataIterator extends DataTable {
+    private final String title_path = "[class*='title']";
+    private final String list_item_path = "[role = 'listitem']";
 
     private WebList dataIteratorElements() {
-        return this.finds("div[class^='col']");
+        return finds("[class^='col']");
     }
 
     private WebList options() {
-        return $$("div[role=option]");
+        return $$("[role=option]");
     }
 
     private WebList itemsPerPage() {
-        return $$("div[role=menuitem]");
-    }
-
-    private WebList pageButtons() {
-        return finds("button[type=button]");
+        return $$("[role=menuitem]");
     }
 
     private void expandOptionList() {
@@ -42,11 +35,11 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
     }
 
     private UIElement expander(int colNum) {
-        return dataIteratorElements().get(colNum).find(input_path);
+        return dataIteratorElements().get(colNum).find("[class*='selection']");
     }
 
-    private UIElement clearingButton() {
-        return this.find("button[aria-label='clear icon']");
+    public Integer getColumnsValue() {
+        return dataIteratorElements().size();
     }
 
     @JDIAction("Expand {name}")
@@ -57,7 +50,7 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
     }
 
     @JDIAction("Close {name}")
-    public void closeColumn(int colNum) {
+    public void collapseCollumn(int colNum) {
         if (columnIsExpanded(colNum) && expander(colNum).isExist()) {
             expander(colNum).click();
         }
@@ -69,20 +62,6 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
             return dataIteratorElements().get(colNum).find("input[role=switch]")
                     .attr("aria-checked").equalsIgnoreCase("true");
         } else return false;
-    }
-
-    @JDIAction("Get all {name} columns")
-    public Map<String, WebList> getAllColumns() {
-        Map<String, WebList> maps = new HashMap<>();
-        dataIteratorElements().forEach(el -> {
-            String name = el.find(title_path).getText();
-            if (el.find(input_path).isExist()) {
-                el.find(input_path).click();
-            }
-            WebList elems = el.finds(list_item_path);
-            maps.put(name, elems);
-        });
-        return maps;
     }
 
     @JDIAction("Get single {name} column")
@@ -116,67 +95,44 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
         return dataIteratorElements().get(colNum).find(title_path).getText();
     }
 
-    @JDIAction("Search {name} element")
-    public void search(String colName) {
-        if (clearingButton().isExist()) {
-            clear();
-        }
-        this.find("input[type=text]").sendKeys(colName);
-    }
-
-    @JDIAction("Clear {name} searching element")
-    public void clear() {
-        clearingButton().click();
-    }
-
     @JDIAction("Sorting {name} columns by option index by ascend")
     public void sortAscend(int optNum) {
         expandOptionList();
         options().select(optNum);
-        pageButtons().select(1);
+        find(".mdi-arrow-up").click();
     }
 
     @JDIAction("Sorting {name} columns by option name by ascend")
     public void sortAscend(String optName) {
         expandOptionList();
         options().select(optName);
-        pageButtons().select(1);
+        find(".mdi-arrow-up").click();
     }
 
     @JDIAction("Sorting {name} columns by option index by descend")
     public void sortDescend(int optNum) {
         expandOptionList();
         options().select(optNum);
-        pageButtons().select(2);
+        find(".mdi-arrow-down").click();
     }
 
     @JDIAction("Sorting {name} columns by option name by descend")
     public void sortDescend(String optName) {
         expandOptionList();
         options().select(optName);
-        pageButtons().select(2);
+        find(".mdi-arrow-down").click();
     }
 
     @JDIAction("Select {name} columns quantity on page")
     public void numberColumnsOnPage(int index) {
-        pageButtons().select(3);
+        find(".mdi-chevron-down").click();
         itemsPerPage().select(index);
     }
 
     @JDIAction("Select {name} columns quantity on page")
     public void numberColumnsOnPage(String value) {
-        pageButtons().select(3);
+        find(".mdi-chevron-down").click();
         itemsPerPage().select(value);
-    }
-
-    @JDIAction("Switch {name} page forward")
-    public void nextPage() {
-        pageButtons().select(5);
-    }
-
-    @JDIAction("Switch {name} page backward")
-    public void previousPage() {
-        pageButtons().select(4);
     }
 
     @JDIAction("Is {name} column empty")
@@ -185,17 +141,29 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
     }
 
     @JDIAction("Get {name} header")
-    public String getHeader() {
-        return this.find(".v-toolbar__title").getText();
+    public String getTableHeader() {
+        return find(".v-toolbar__title").getText();
     }
 
     @JDIAction("Get {name} footer")
-    public String getFooter() {
+    public String getTableFooter() {
         return this.find(".v-toolbar__title.subheading").getText();
     }
 
     @Override
+    public DataIteratorAssert is() {
+        DataIteratorAssert dataIteratorAssert = new DataIteratorAssert();
+        dataIteratorAssert.set(this);
+        return dataIteratorAssert;
+    }
+
+    @Override
+    public DataIteratorAssert assertThat() {
+        return is();
+    }
+
+    @Override
     public DataIteratorAssert has() {
-        return new DataIteratorAssert().set(this);
+        return is();
     }
 }

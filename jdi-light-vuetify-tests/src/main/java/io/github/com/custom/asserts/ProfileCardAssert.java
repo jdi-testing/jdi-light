@@ -10,34 +10,36 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ProfileCardAssert extends UIAssert<ProfileCardAssert, ProfileCard> {
 
-    @JDIAction("Assert that {name} is displayed")
+    @JDIAction("Assert that '{name}' is displayed")
     public ProfileCardAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that {name} text is '{0}'")
-    public ProfileCardAssert properName(String text) {
-        jdiAssert(element().hasProperName(), Matchers.is(text));
+    @JDIAction("Assert that '{name}' has expected text in 'name' text field")
+    public ProfileCardAssert name(String text) {
+        jdiAssert(element().hasName(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that {name} text is '{0}'")
-    public ProfileCardAssert properJobFunction(String text) {
-        jdiAssert(element().hasProperJobFunction(), Matchers.is(text));
+    @JDIAction("Assert that '{name}' has expected text in 'job function' text field")
+    public ProfileCardAssert jobFunction(String text) {
+        jdiAssert(element().hasJobFunction(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that {name} has a background image")
+    @JDIAction("Assert that '{name}' has a background image")
     public ProfileCardAssert backgroundImage() {
-        jdiAssert(element().hasBackgroundImage(), Matchers.is(true));
+        jdiAssert(element().hasBackgroundImage() ? "has background image" : "does not have background image",
+                Matchers.is("has background image"));
         return this;
     }
 
-    @JDIAction("Assert that {name} has an avatar image")
+    @JDIAction("Assert that '{name}' has an avatar image")
     public ProfileCardAssert avatarImage() {
-        jdiAssert(element().hasAvatarImage(), Matchers.is(true));
+        jdiAssert(element().hasAvatarImage() ? "has avatar image" : "does not have avatar image",
+                Matchers.is("has avatar image"));
         return this;
     }
 }

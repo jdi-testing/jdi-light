@@ -3,9 +3,14 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.asserts.CarouselAssert;
+import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.tools.Timer;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.ElementArea.TOP_LEFT;
 
@@ -15,126 +20,129 @@ import static com.epam.jdi.light.common.ElementArea.TOP_LEFT;
 
 public class Carousel extends UIBaseElement<CarouselAssert> {
 
-    @JDIAction("Get '{name}' delimiters")
-    private WebList getDelimiters() {
-        return this.finds("div.v-carousel__controls i");
+    @JDIAction("Get '{name}'s delimiters")
+    private List<Button> getDelimiters() {
+        return finds(".v-carousel__controls .v-btn").stream().map(this::castToButton).collect(Collectors.toList());
     }
 
-    @JDIAction("Get '{name}' 'next' button")
-    private UIElement getNextButton() {
-        return this.find(".v-window__next button");
+    @JDIAction("Get '{name}'s 'next' button")
+    private Button getNextButton() {
+        return castToButton(find(".v-window__next button"));
     }
 
-    @JDIAction("Get '{name}' 'previous'")
-    private UIElement getPreviousButton() {
-        return this.find(".v-window__prev button");
+    @JDIAction("Get '{name}'s 'previous' button")
+    public Button getPreviousButton() {
+        return castToButton(find(".v-window__prev button"));
     }
 
-    @JDIAction("Get '{name}' current slide")
+    @JDIAction("Get '{name}'s current slide")
     private UIElement getCurrentSlide() {
-        return this.find(".v-window-item");
+        return find(".v-window-item");
     }
 
-    @JDIAction("Get '{name}' toggle button")
-    private UIElement getToggle() {
-        return this.find(".v-input--selection-controls__input");
+    @JDIAction("Get '{name}'s switch")
+    private Switch getSwitch() {
+        return castToSwitch(find(".v-input--selection-controls__input"));
     }
 
     @JDIAction("'{name}' has delimiters icons")
     public boolean hasDelimitersIcons(String iconName) {
-        Timer.waitCondition(getDelimiters()::isDisplayed);
-        return getDelimiters().stream().allMatch(e -> e.getAttribute("class").contains(iconName));
+        return getDelimiters().stream().allMatch(e -> e.find("i").getAttribute("class").contains(iconName));
     }
 
     @JDIAction("'{name}' has 'next' button visible")
-    public boolean hasNextButtonVisible() {
+    public boolean hasVisibleNextButton() {
         return getNextButton().isDisplayed();
     }
 
     @JDIAction("'{name}' has 'previous' button visible")
-    public boolean hasPreviousButtonVisible() {
+    public boolean hasVisiblePreviousButton() {
         return getPreviousButton().isDisplayed();
     }
 
     @JDIAction("'{name}' has 'next' button hidden")
-    public boolean hasNextButtonHidden() {
-        return getNextButton().isHidden();
+    public boolean hasHiddenNextButton() {
+        return !getNextButton().core().isClickable();
     }
 
     @JDIAction("'{name}' has 'previous' button hidden")
-    public boolean hasPreviousButtonHidden() {
-        return getPreviousButton().isHidden();
+    public boolean hasHiddenPreviousButton() {
+        return !getPreviousButton().core().isClickable();
     }
 
-    @JDIAction("Get '{name}' 'next' button text")
+    @JDIAction("'{name}' has no control buttons")
+    public boolean hasNoControlButtons() {
+        return getNextButton().isNotExist() && getPreviousButton().isNotExist();
+    }
+
+    @JDIAction("Get '{name}'s 'next' button text")
     public String nextButtonText() {
-        return this.getNextButton().getText();
+        return getNextButton().core().getText();
     }
 
-    @JDIAction("Get '{name}' 'previous' button text")
+    @JDIAction("Get '{name}'s 'previous' button text")
     public String previousButtonText() {
-        return this.getPreviousButton().getText();
+        return getPreviousButton().core().getText();
     }
 
-    @JDIAction("Get '{name}' 'next' button color")
+    @JDIAction("Get '{name}'s 'next' button color")
     public String nextButtonColor() {
-        return this.getNextButton().getCssValue("background-color");
+        return getNextButton().core().getCssValue("background-color");
     }
 
-    @JDIAction("Get '{name}' 'previous' button color")
+    @JDIAction("Get '{name}'s 'previous' button color")
     public String previousButtonColor() {
-        return this.getPreviousButton().getCssValue("background-color");
+        return getPreviousButton().core().getCssValue("background-color");
     }
 
-    @JDIAction("Get '{name}' current slide color")
+    @JDIAction("Get '{name}'s current slide color")
     public String currentSlideColor() {
         return getCurrentSlide().find(".v-sheet").getCssValue("background-color");
     }
 
-    @JDIAction("Get '{name}' current slide text")
+    @JDIAction("Get '{name}'s current slide text")
     public String currentSlideText() {
         return getCurrentSlide().find(".text-h2").getText();
     }
 
-    @JDIAction("Get '{name}' current slide background image")
+    @JDIAction("Get '{name}'s current slide background image")
     public String currentSlideBackgroundImage() {
         return getCurrentSlide().find(".v-image__image").getCssValue("background-image");
     }
 
-    @JDIAction("Get '{name}' slide counter")
+    @JDIAction("Get '{name}'s slide counter")
     public String slideCounter() {
-        return this.find("div.justify-space-around").getText();
+        return find("div.justify-space-around").getText();
     }
 
-    @JDIAction("'{name}' has number of delimiters")
+    @JDIAction("'{name}'s has number of delimiters")
     public int hasNumberOfDelimiters() {
         return getDelimiters().size();
     }
 
     @JDIAction("'{name}' has delimiters hidden")
-    public boolean hasDelimitersHidden() {
-        return getDelimiters().isHidden();
+    public boolean hasHiddenDelimiters() {
+        return getDelimiters().stream().allMatch(ICoreElement::isHidden);
     }
 
-    @JDIAction("'{name}' has toggle button")
-    public boolean hasToggle() {
-        Timer.waitCondition(getToggle()::isDisplayed);
-        return getToggle().isDisplayed();
+    @JDIAction("'{name}' has switch")
+    public boolean hasSwitch() {
+        return getSwitch().isDisplayed();
     }
 
-    @JDIAction("'{name}' has toggle button checked")
-    public boolean hasToggleChecked() {
-        return getToggle().find("input").getAttribute("aria-checked").equals("true");
+    @JDIAction("'{name}' has checked switch")
+    public boolean hasCheckedSwitch() {
+        return getSwitch().isChecked();
     }
 
-    @JDIAction("'{name}' has toggle button unchecked")
-    public boolean hasToggleUnchecked() {
-        return getToggle().find("input").getAttribute("aria-checked").equals("false");
+    @JDIAction("'{name}' has unchecked switch")
+    public boolean hasUncheckedSwitch() {
+        return getSwitch().isNotChecked();
     }
 
     @JDIAction("Go to slide number {0}")
     public void goToSlide(int slideNumber) {
-        getDelimiters().get(slideNumber).click();
+        getDelimiters().get(slideNumber - 1).click();
     }
 
     @JDIAction("Click on 'next' button")
@@ -147,33 +155,37 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
         getPreviousButton().click();
     }
 
-    @JDIAction("Click on 'previous' button")
-    public void checkToggle() throws Exception {
-        if(hasToggleUnchecked()) {
-            getToggle().click();
-        } else throw new Exception("Toggle is already checked");
+    @JDIAction("Check switch")
+    public void checkSwitch() {
+        getSwitch().check();
     }
 
-    @JDIAction("Click on 'previous' button")
-    public void uncheckToggle() throws Exception {
-        if(hasToggleChecked()) {
-            getToggle().click();
-        } else throw new Exception("Toggle is already unchecked");
+    @JDIAction("Uncheck switch")
+    public void uncheckSwitch() {
+        getSwitch().uncheck();
     }
 
     @JDIAction("Click on 'plus' button")
     public void clickOnPlusButton() {
-        this.find("div.justify-space-around button.mdi-plus").click(TOP_LEFT);
+        castToButton(find("div.justify-space-around button.mdi-plus")).click(TOP_LEFT);
     }
 
     @JDIAction("Click on 'minus' button")
     public void clickOnMinusButton() {
-        this.find("div.justify-space-around button.mdi-minus").click(TOP_LEFT);
+        castToButton(find("div.justify-space-around button.mdi-minus")).click(TOP_LEFT);
     }
 
     public void waitUntilSlideAutomaticallyChangeTo(String text, String color) {
-        Timer.waitCondition(() -> this.currentSlideText().equals(text));
-        Timer.waitCondition(() -> this.currentSlideColor().equals(color));
+        Timer.waitCondition(() -> currentSlideText().equals(text));
+        Timer.waitCondition(() -> currentSlideColor().equals(color));
+    }
+
+    private Button castToButton(UIElement element) {
+        return new Button(element);
+    }
+
+    private Switch castToSwitch(UIElement element) {
+        return new Switch().setCore(Switch.class, element);
     }
 
     public CarouselAssert is() {
