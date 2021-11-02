@@ -9,6 +9,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import com.epam.jdi.light.vuetify.asserts.DialogAssert;
 
+/**
+ * To see example of Dialog web element please visit https://vuetifyjs.com/en/components/dialogs/
+ */
+
 public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<DialogAssert> {
 
     protected UIElement dialogWindow() {
@@ -139,8 +143,8 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
         }
     }
 
-    @JDIAction("Select {0} {name} element")
-    public void selectElement(int elNum) {
+    @JDIAction("Select {0} {name} radiobutton")
+    public void selectRadiobutton(int elNum) {
         radioButtons().get(elNum).click();
     }
 
@@ -166,6 +170,15 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
     @JDIAction("Show that {0} {name} element is selected")
     public boolean isSelected(int elNum) {
         return radioButtons().get(elNum).attr("class").contains("active");
+    }
+
+    @JDIAction("Show that {0} {name} element is selected")
+    public boolean isNotSelected(Integer elNum) {
+        if (elNum == null) {
+            return true;
+        } else {
+            return !isSelected(elNum);
+        }
     }
 
     @JDIAction("Close {name}")

@@ -91,4 +91,16 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
         jdiAssert(element().cardText(), Matchers.is(matcher));
         return this;
     }
+
+    @JDIAction("Assert that {name} has text")
+    public DialogAssert elementSelected(int elNum) {
+        jdiAssert(element().isSelected(elNum), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has text")
+    public DialogAssert elementNotSelected(Integer elNum) {
+        jdiAssert(element().isNotSelected(elNum), Matchers.is(true));
+        return this;
+    }
 }

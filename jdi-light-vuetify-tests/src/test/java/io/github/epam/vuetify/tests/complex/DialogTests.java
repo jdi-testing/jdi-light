@@ -73,14 +73,9 @@ public class DialogTests extends TestsInit {
         scrollableDialog.open();
         scrollableDialog.is().opened();
         scrollableDialog.has().title("Select Country");
-        scrollableDialog.selectElement(6);
-        jdiAssert(scrollableDialog.isSelected(6), Matchers.is(true));
-        scrollableDialog.selectElement(10);
-        jdiAssert(scrollableDialog.isSelected(6), Matchers.is(false));
-        jdiAssert(scrollableDialog.isSelected(10), Matchers.is(true));
-        scrollableDialog.selectElement(17);
-        jdiAssert(scrollableDialog.isSelected(10), Matchers.is(false));
-        jdiAssert(scrollableDialog.isSelected(17), Matchers.is(true));
+        verifyRadiobutton(6, null);
+        verifyRadiobutton(10, 6);
+        verifyRadiobutton(17, 7);
         scrollableDialog.cancel();
         scrollableDialog.open();
         jdiAssert(scrollableDialog.isSelected(17), Matchers.is(true));
@@ -163,5 +158,11 @@ public class DialogTests extends TestsInit {
                 .and().cardText(containsString("Let Google help apps determine location."));
         withoutActivatorDialog.cancel();
         withoutActivatorDialog.is().closed();
+    }
+
+    //selects required element and verifies, that current element selected and previous element not selected
+    public static void verifyRadiobutton(Integer selectedElNum, Integer notSelectedElNum) {
+        scrollableDialog.selectRadiobutton(selectedElNum);
+        scrollableDialog.assertThat().elementSelected(selectedElNum).and().elementNotSelected(notSelectedElNum);
     }
 }
