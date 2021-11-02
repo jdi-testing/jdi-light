@@ -160,7 +160,7 @@ public class DialogTests extends TestsInit {
         withoutActivatorDialog.is().closed();
     }
 
-    //selects required element and verifies, that current element selected and previous element not selected
+    //selects the required item and checks that the current item is selected and the previous item is not selected
     public static void verifyRadiobutton(Integer selectedElNum, Integer notSelectedElNum) {
         scrollableDialog.selectRadiobutton(selectedElNum);
         scrollableDialog.assertThat().elementSelected(selectedElNum).and().elementNotSelected(notSelectedElNum);

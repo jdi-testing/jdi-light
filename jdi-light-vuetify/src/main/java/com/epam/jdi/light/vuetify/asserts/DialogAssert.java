@@ -94,13 +94,13 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
 
     @JDIAction("Assert that {name} has text")
     public DialogAssert elementSelected(int elNum) {
-        jdiAssert(element().isSelected(elNum), Matchers.is(true));
+        jdiAssert(element().isSelected(elNum), Matchers.is(true), "Required element isn't selected");
         return this;
     }
 
     @JDIAction("Assert that {name} has text")
     public DialogAssert elementNotSelected(Integer elNum) {
-        jdiAssert(element().isNotSelected(elNum), Matchers.is(true));
+        jdiAssert(element().isNotSelected(elNum), Matchers.is(true), "Required element is selected");
         return this;
     }
 }
