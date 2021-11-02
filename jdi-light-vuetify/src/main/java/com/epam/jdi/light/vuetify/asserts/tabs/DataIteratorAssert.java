@@ -1,18 +1,22 @@
-package com.epam.jdi.light.vuetify.asserts;
+package com.epam.jdi.light.vuetify.asserts.tabs;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.complex.DataIterator;
+import com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator;
+import com.epam.jdi.light.vuetify.elements.enums.TableTestData;
 import org.hamcrest.Matchers;
 
-public class DataIteratorAssert extends UIAssert<DataIteratorAssert, DataIterator> {
+public class DataIteratorAssert extends DataTableAssert {
+
+    @Override
+    public DataIterator element() {
+        return (DataIterator) super.element();
+    }
 
     @Override
     public DataIteratorAssert and() {
-        return super.and();
+        return (DataIteratorAssert) super.and();
     }
-
 
     @JDIAction("Assert that {name} column is expanded")
     public DataIteratorAssert columnExpanded(int colNum) {
@@ -44,21 +48,27 @@ public class DataIteratorAssert extends UIAssert<DataIteratorAssert, DataIterato
         return this;
     }
 
+    @JDIAction("Assert that {name} column has title")
+    public DataIteratorAssert columnTitle(int colNum, TableTestData requiredTitle) {
+        jdiAssert(element().getColumnTitle(colNum), Matchers.is(requiredTitle.value()));
+        return this;
+    }
+
     @JDIAction("Assert that {name} has footer")
     public DataIteratorAssert footer(String requiredFooter) {
-        jdiAssert(element().getFooter(), Matchers.is(requiredFooter));
+        jdiAssert(element().getTableFooter(), Matchers.is(requiredFooter));
         return this;
     }
 
     @JDIAction("Assert that {name} has header")
     public DataIteratorAssert header(String requiredHeader) {
-        jdiAssert(element().getHeader(), Matchers.is(requiredHeader));
+        jdiAssert(element().getTableHeader(), Matchers.is(requiredHeader));
         return this;
     }
 
     @JDIAction("Assert that {name} has required number of columns per page")
-    public DataIteratorAssert number(int value){
-        jdiAssert(element().getAllColumns().size(), Matchers.is(value));
+    public DataIteratorAssert number(int value) {
+        jdiAssert(element().getColumnsValue(), Matchers.is(value));
         return this;
     }
 }

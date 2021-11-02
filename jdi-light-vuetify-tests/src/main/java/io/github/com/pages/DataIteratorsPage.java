@@ -2,19 +2,16 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.vuetify.elements.complex.DataIterator;
+import com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator;
 
 public class DataIteratorsPage extends VuetifyPage {
 
-    @UI("#DefaultTable .v-data-iterator")
+    @UI("#DefaultTable")
     public static DataIterator defaultDataIterator;
 
-    @UI("#DefaultTable .v-input--selection-controls__input")
-    public static Button defaultDataIteratorExpandSingleItemButton;
-
-    @UI("#HeaderFooterTable .v-data-iterator")
+    @UI("#HeaderFooterTable")
     public static DataIterator headerFooterDataIterator;
 
-    @UI("#FilterTable .v-data-iterator")
+    @UI("#FilterTable")
     public static DataIterator filterDataIterator;
 }

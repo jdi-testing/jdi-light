@@ -5,15 +5,20 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import com.epam.jdi.light.vuetify.asserts.tabs.DataTableAssert;
 import com.epam.jdi.light.vuetify.elements.enums.TableTestData;
 import java.util.LinkedList;
 import java.util.List;
 import org.openqa.selenium.Keys;
 
+/**
+ * To see an example of Data Table web element please visit https://vuetifyjs.com/en/components/data-tables/
+ **/
+
 public class DataTable extends SimpleTable {
 
     protected WebList menuContent() {
-        return $$(".menuable__content__active .v-list-item--link");
+        return $$("[class*='active'] [role='listbox'] [role='option']");
     }
 
     protected WebList newItemCard() {
@@ -29,7 +34,7 @@ public class DataTable extends SimpleTable {
     }
 
     protected UIElement input() {
-        return find("input");
+        return find("[type='text']");
     }
 
     protected UIElement singleSelect() {
@@ -67,9 +72,14 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Clear {name} input field")
     public void clear() {
-        do {
-            input().sendKeys(Keys.BACK_SPACE);
-        } while (!input().isEmpty());
+        UIElement clearingButton = find("[aria-label='clear icon']");
+        if (clearingButton.isExist()) {
+            clearingButton.click();
+        } else {
+            do {
+                input().sendKeys(Keys.BACK_SPACE);
+            } while (!input().isEmpty());
+        }
     }
 
     @JDIAction("Show required rows value in {name}")
@@ -80,10 +90,11 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Show required items value in {name}")
     public void itemsPerPage(String value) {
-        while (input().isNotEmpty()) {
-            input().sendKeys(Keys.BACK_SPACE);
+        UIElement input = find("input");
+        while (input.isNotEmpty()) {
+            input.sendKeys(Keys.BACK_SPACE);
         }
-        input().sendKeys(value);
+        input.sendKeys(value);
     }
 
     @JDIAction("Get {name} column size")
@@ -93,7 +104,7 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Switch {name} to the previous page")
     public void previousPage() {
-        UIElement prevButton = find("button[aria-label='Previous page']");
+        UIElement prevButton = find(".mdi-chevron-left");
         if (!prevButton.isDisabled()) {
             prevButton.click();
         }
@@ -111,7 +122,7 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Switch {name} to the next page")
     public void nextPage() {
-        UIElement nextButton = find("button[aria-label='Next page']");
+        UIElement nextButton = find(".mdi-chevron-right");
         if (!nextButton.isDisabled()) {
             nextButton.click();
         }
@@ -344,5 +355,22 @@ public class DataTable extends SimpleTable {
     public void selectOption(int numOpt) {
         WebList menu = $$("//div[@role='listbox']/child::div[@role='option']");
         menu.get(numOpt).click();
+    }
+
+    @Override
+    public DataTableAssert is() {
+        DataTableAssert dataTableAssert = new DataTableAssert();
+        dataTableAssert.set(this);
+        return dataTableAssert;
+    }
+
+    @Override
+    public DataTableAssert has() {
+        return is();
+    }
+
+    @Override
+    public DataTableAssert assertThat() {
+        return is();
     }
 }
