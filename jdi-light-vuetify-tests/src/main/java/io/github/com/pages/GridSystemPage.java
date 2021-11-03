@@ -1,62 +1,62 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.complex.GridSystem;
+import com.epam.jdi.light.vuetify.elements.complex.Grid;
 
 public class GridSystemPage extends VuetifyPage {
 
     @UI("#AlignGridSystem")
-    public static GridSystem alignGridSystem;
+    public static Grid alignGrid;
 
     @UI("#BreakpointSizingGridSystem")
-    public static GridSystem breakpointSizingGridSystem;
+    public static Grid breakpointSizingGrid;
 
     @UI("#JustifyGridSystem")
-    public static GridSystem justifyGridSystem;
+    public static Grid justifyGrid;
 
     @UI("#NoGuttersGridSystem")
-    public static GridSystem noGuttersGridSystem;
+    public static Grid noGuttersGrid;
 
     @UI("#OffsetGridSystem")
-    public static GridSystem offsetGridSystem;
+    public static Grid offsetGrid;
 
     @UI("#OffsetBreakpointGridSystem")
-    public static GridSystem offsetBreakpointGridSystem;
+    public static Grid offsetBreakpointGrid;
 
     @UI("#OrderGridSystem")
-    public static GridSystem orderGridSystem;
+    public static Grid orderGrid;
 
     @UI("#OrderFirstAndLastGridSystem")
-    public static GridSystem orderFirstAndLastGridSystem;
+    public static Grid orderFirstAndLastGrid;
 
     @UI("#ColumnWrappingGridSystem")
-    public static GridSystem columnWrappingGridSystem;
+    public static Grid columnWrappingGrid;
 
     @UI("#EqualWidthColumnsGridSystem")
-    public static GridSystem equalWidthColumnsGridSystem;
+    public static Grid equalWidthColumnsGrid;
 
     @UI("#GrowAndShrinkGridSystem")
-    public static GridSystem growAndShrinkGridSystem;
+    public static Grid growAndShrinkGrid;
 
     @UI("#MarginHelpersGridSystem")
-    public static GridSystem marginHelpersGridSystem;
+    public static Grid marginHelpersGrid;
 
     @UI("#NestedGridGridSystem")
-    public static GridSystem nestedGridGridSystem;
+    public static Grid nestedGridGrid;
 
     @UI("#OneColumnWidthGridSystem")
-    public static GridSystem oneColumnWidthGridSystem;
+    public static Grid oneColumnWidthGrid;
 
     @UI("#RowAndColumnBreakpointsGridSystem")
-    public static GridSystem rowAndColumnBreakpointsGridSystem;
+    public static Grid rowAndColumnBreakpointsGrid;
 
     @UI("#SpacersGridSystem")
-    public static GridSystem spacersGridSystem;
+    public static Grid spacersGrid;
 
     @UI("#UniqueLayoutsGridSystem")
-    public static GridSystem uniqueLayoutsGridSystem;
+    public static Grid uniqueLayoutsGrid;
 
     @UI("#VariableContentWidthGridSystem")
-    public static GridSystem variableContentWidthGridSystem;
+    public static Grid variableContentWidthGrid;
 
 }
