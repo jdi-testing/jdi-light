@@ -24,11 +24,14 @@ public class Exceptions {
         WebSettings.logger.debug("ERROR: " + message + ". Exception: " + exMsg);
         final Class<?> exceptionClass = ex.getClass();
         if (isClass(AssertionError.class, exceptionClass))
+            // should not it be the other way around?
+            // isClass(exceptionClass, AssertionError.class)
             throw new AssertionError(message, ex);
         else if (isClass(exceptionClass, UnsupportedOperationException.class)) {
             return new UnsupportedOperationException(message, ex);
-        } else if (isClass(IllegalArgumentException.class, exceptionClass)) {
-            return new IllegalArgumentException(message, ex);
+        } else if (isClass(exceptionClass, NullUserInputValueException.class)) {
+            // Not the best way to get rid of repeating the action after this exception occured
+            return new NullUserInputValueException();
         }
         return new RuntimeException(message, ex);
     }
