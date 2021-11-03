@@ -20,6 +20,9 @@ public class GridSystemPage extends VuetifyPage {
     @UI("#OffsetGridSystem")
     public static GridSystem offsetGridSystem;
 
+    @UI("#OffsetBreakpointGridSystem")
+    public static GridSystem offsetBreakpointGridSystem;
+
     @UI("#OrderGridSystem")
     public static GridSystem orderGridSystem;
 
