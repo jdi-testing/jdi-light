@@ -102,4 +102,5 @@ public class GridAssert extends UIAssert<GridAssert, Grid> {
                 Matchers.is("column has variable width"));
         return this;
     }
+
 }
