@@ -1,7 +1,6 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -16,11 +15,6 @@ import java.util.stream.Collectors;
  */
 
 public class Grid extends UIBaseElement<GridAssert> {
-
-    @Override
-    public JDIBase base() {
-        return super.base();
-    }
 
     @JDIAction("Get '{name}'s row by index")
     private UIElement getRowByIndex(int rowIndex) {
