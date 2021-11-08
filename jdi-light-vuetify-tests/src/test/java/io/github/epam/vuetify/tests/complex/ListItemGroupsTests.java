@@ -1,16 +1,16 @@
 package io.github.epam.vuetify.tests.complex;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.listItemGroupsPage;
 import static io.github.com.pages.ListItemGroupsPage.activeClassListItemGroup;
-import static io.github.com.pages.ListItemGroupsPage.flatListListItemGroup;
+import static io.github.com.pages.ListItemGroupsPage.flatListItemGroup;
 import static io.github.com.pages.ListItemGroupsPage.mandatoryListItemGroup;
 import static io.github.com.pages.ListItemGroupsPage.multipleListItemGroup;
 import static io.github.com.pages.ListItemGroupsPage.selectionControlsListItemGroup;
 import static io.github.com.pages.ListItemGroupsPage.selectionControlsListItemGroupCheckbox;
 
+import io.github.com.dataproviders.ListItemGroupDataProvider;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
+import java.util.List;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -20,94 +20,69 @@ public class ListItemGroupsTests extends TestsInit {
         listItemGroupsPage.open();
     }
 
-    @Test
-    public static void activeClassListItemGroupTest() {
-
-        int elemIndex = 1;
-        String[] expectedTitles = {"Wifi", "Bluetooth", "Data Usage"};
-
-        for (String expectedTitle : expectedTitles) {
-            activeClassListItemGroup.select(elemIndex);
-            jdiAssert(activeClassListItemGroup.isActive(elemIndex), Matchers.is(true));
-            jdiAssert(activeClassListItemGroup.hasIcon(elemIndex), Matchers.is(true));
-            jdiAssert(activeClassListItemGroup.hasTitle(elemIndex, expectedTitle), Matchers.is(true));
-            activeClassListItemGroup.select(elemIndex);
-            jdiAssert(activeClassListItemGroup.isInactivate(elemIndex), Matchers.is(true));
-
-            elemIndex++;
+    @Test(dataProvider = "listItemGroupsDataProvider", dataProviderClass = ListItemGroupDataProvider.class)
+    public void activeClassListItemGroupTest(List<String> expectedTitles) {
+        for (int element = 1; element <= expectedTitles.size(); element++) {
+            activeClassListItemGroup.get(element).click();
+            activeClassListItemGroup.get(element).is().active();
+            activeClassListItemGroup.get(element).has().icon();
+            activeClassListItemGroup.get(element).is().containsText(expectedTitles.get(element - 1));
+            activeClassListItemGroup.get(element).has().border();
+            activeClassListItemGroup.get(element).click();
+            activeClassListItemGroup.get(element).is().notActive();
+            activeClassListItemGroup.get(element).has().notBorder();
         }
     }
 
-    @Test
-    public static void mandatoryListItemGroupTest() {
-
-        for (int element = 1; element < 4; element++) {
-            mandatoryListItemGroup.select(element);
-            jdiAssert(mandatoryListItemGroup.isActive(element), Matchers.is(true));
-            mandatoryListItemGroup.select(element);
-            jdiAssert(mandatoryListItemGroup.isInactivate(element), Matchers.is(false));
+    @Test(dataProvider = "listItemGroupsDataProvider", dataProviderClass = ListItemGroupDataProvider.class)
+    public void mandatoryListItemGroupTest(List<String> expectedTitles) {
+        for (int element = 1; element <= expectedTitles.size(); element++) {
+            mandatoryListItemGroup.get(element).click();
+            mandatoryListItemGroup.get(element).is().active();
+            mandatoryListItemGroup.get(element).click();
+            mandatoryListItemGroup.get(element).is().active();
         }
-
-        for (int element = 1; element < 4; element++) {
-            mandatoryListItemGroup.select(element);
+        for (int element = 1; element <= expectedTitles.size(); element++) {
+            mandatoryListItemGroup.get(element).click();
         }
-
-        jdiAssert(mandatoryListItemGroup.isActive(3), Matchers.is(true));
-        jdiAssert(mandatoryListItemGroup.isInactivate(1), Matchers.is(true));
-        jdiAssert(mandatoryListItemGroup.isInactivate(2), Matchers.is(true));
     }
 
-    @Test
-    public static void multipleListItemGroupsTest() {
-        for (int element = 1; element < 4; element++) {
-            if (multipleListItemGroup.isInactivate(element)) {
-                multipleListItemGroup.select(element);
+    @Test(dataProvider = "listItemGroupsDataProvider", dataProviderClass = ListItemGroupDataProvider.class)
+    public void multipleListItemGroupsTest(List<String> expectedTitles) {
+        for (int element = 1; element <= expectedTitles.size(); element++) {
+            if (!multipleListItemGroup.get(element).isActive()) {
+                multipleListItemGroup.get(element).click();
             }
+            multipleListItemGroup.get(element).is().active();
         }
-
-        for (int element = 1; element < 4; element++) {
-            jdiAssert(multipleListItemGroup.isActive(element), Matchers.is(true));
-        }
-
-        for (int element = 1; element < 4; element++) {
-            multipleListItemGroup.select(element);
-            jdiAssert(multipleListItemGroup.isInactivate(element), Matchers.is(true));
+        for (int element = 1; element <= expectedTitles.size(); element++) {
+            multipleListItemGroup.get(element).click();
+            multipleListItemGroup.get(element).is().notActive();
         }
     }
 
-
-    @Test
-    public static void flatListListItemGroupTest() {
-
-        for (int element = 1; element < 4; element++) {
-            flatListListItemGroup.select(element);
-            jdiAssert(flatListListItemGroup.isActive(element), Matchers.is(true));
-            jdiAssert(flatListListItemGroup.hasIcon(element), Matchers.is(true));
-            flatListListItemGroup.select(element);
-            jdiAssert(flatListListItemGroup.isInactivate(element), Matchers.is(true));
+    @Test(dataProvider = "listItemGroupsDataProvider", dataProviderClass = ListItemGroupDataProvider.class)
+    public void flatListItemGroupTest(List<String> expectedTitles) {
+        for (int element = 1; element <= expectedTitles.size(); element++) {
+            flatListItemGroup.get(element).click();
+            flatListItemGroup.get(element).is().active();
+            flatListItemGroup.get(element).has().icon();
+            flatListItemGroup.get(element).click();
+            flatListItemGroup.get(element).is().notActive();
         }
     }
 
-    @Test
-    public static void selectionControlsListItemGroupTest() {
-        int elemIndex = 1;
-        String[] expectedTitles = {"Dog Photos", "Cat Photos", "Potatoes", "Carrots"};
-
-        for (String expectedTitle : expectedTitles) {
-
-            jdiAssert(selectionControlsListItemGroup.hasTitle(elemIndex, expectedTitle), Matchers.is(true));
-            selectionControlsListItemGroupCheckbox.get(elemIndex).check();
-            selectionControlsListItemGroupCheckbox.get(elemIndex).is().checked();
-            selectionControlsListItemGroupCheckbox.get(elemIndex).uncheck();
-            selectionControlsListItemGroupCheckbox.get(elemIndex).is().unchecked();
-
-            elemIndex++;
-        }
-
-        for (int element = 1; element < 5; element++) {
+    @Test(dataProvider = "selectionControlsListDataProvider", dataProviderClass = ListItemGroupDataProvider.class)
+    public void selectionControlsListItemGroupTest(List<String> titlesInCheckboxes) {
+        for (int element = 1; element <= titlesInCheckboxes.size(); element++) {
+            selectionControlsListItemGroup.get(element).is().containsText(titlesInCheckboxes.get(element - 1));
             selectionControlsListItemGroupCheckbox.get(element).check();
+            selectionControlsListItemGroupCheckbox.get(element).is().checked();
+            selectionControlsListItemGroupCheckbox.get(element).uncheck();
+            selectionControlsListItemGroupCheckbox.get(element).is().unchecked();
         }
-        for (int element = 1; element < 5; element++) {
+        for (int element = 1; element <= titlesInCheckboxes.size(); element++) {
+            selectionControlsListItemGroupCheckbox.get(element).check();
             selectionControlsListItemGroupCheckbox.get(element).is().checked();
         }
     }

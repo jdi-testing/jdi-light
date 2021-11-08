@@ -8,19 +8,19 @@ import java.util.List;
 public class ListItemGroupsPage extends VuetifyPage {
 
     @UI("#ActiveClassListItemGroup .v-list-item")
-    public static ListItemGroups activeClassListItemGroup;
+    public static List<ListItemGroups> activeClassListItemGroup;
 
     @UI("#MandatoryListItemGroup .v-list-item")
-    public static ListItemGroups mandatoryListItemGroup;
+    public static List<ListItemGroups> mandatoryListItemGroup;
 
     @UI("#MultipleListItemGroup .v-list-item")
-    public static ListItemGroups multipleListItemGroup;
+    public static List<ListItemGroups> multipleListItemGroup;
 
     @UI("#FlatListListItemGroup .v-list-item")
-    public static ListItemGroups flatListListItemGroup;
+    public static List<ListItemGroups> flatListItemGroup;
 
     @UI("#SelectionControlsListItemGroup .v-list-item")
-    public static ListItemGroups selectionControlsListItemGroup;
+    public static List<ListItemGroups> selectionControlsListItemGroup;
 
     @UI("#SelectionControlsListItemGroup div[role='option']")
     public static List<Checkbox> selectionControlsListItemGroupCheckbox;
