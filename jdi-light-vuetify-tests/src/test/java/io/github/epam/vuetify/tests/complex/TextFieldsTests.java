@@ -56,7 +56,7 @@ public class TextFieldsTests extends TestsInit {
     public void clearableTextFieldTest() {
         clearableTextField.forEach(textField -> {
             textField.getAppendInnerIcon().click();
-            textField.is().empty();
+            textField.has().text(Matchers.emptyString());
         });
     }
 
@@ -73,8 +73,8 @@ public class TextFieldsTests extends TestsInit {
                 {2, "rgba(0, 0, 0, 0.06)", 3, "filled"},
                 {3, "rgba(0, 0, 0, 0.06)", 3, "placeholder"}
         }).forEach(data -> {
-            denseTextField.get((int) data[0]).getSlot().is().css("background-color", (String) data[1]);
-            denseTextField.get((int) data[2]).is().peculiarity((String) data[3]);
+            denseTextField.get((int) data[0]).slot().is().css("background-color", (String) data[1]);
+            denseTextField.get((int) data[2]).is().classValue(Matchers.containsString((String) data[3]));
         });
 
         Stream.of(new Object[][]{
@@ -82,15 +82,15 @@ public class TextFieldsTests extends TestsInit {
                 {5, "outlined"},
                 {6, "outlined"},
                 {6, "placeholder"}
-        }).forEach(data -> denseTextField.get((int) data[0]).is().peculiarity((String) data[1]));
+        }).forEach(data -> denseTextField.get((int) data[0]).is().classValue(Matchers.containsString((String) data[1])));
 
         denseTextField.get(3).focus();
-        denseTextField.get(3).is().placeholder("Dense & Rounded");
+        denseTextField.get(3).has().placeholder("Dense & Rounded");
         denseTextField.get(6).focus();
-        denseTextField.get(6).is().placeholder("Placeholder");
+        denseTextField.get(6).has().placeholder("Placeholder");
 
         denseTextField.forEach(textField -> {
-            textField.clearAndSetText("text");
+            textField.setText("text");
             textField.is().text("text");
         });
     }
@@ -115,8 +115,8 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void filledTextFieldTest() {
-        filledTextField.get(1).is().peculiarity("filled");
-        filledTextField.get(2).is().peculiarity("filled");
+        filledTextField.get(1).is().filled();
+        filledTextField.get(2).is().filled();
     }
 
     @Test
@@ -124,15 +124,15 @@ public class TextFieldsTests extends TestsInit {
         hideDetailsTextField.get(1).is().noMessage();
         hideDetailsTextField.get(1).focus();
         hideDetailsTextField.get(2).focus();
-        hideDetailsTextField.get(1).is().message("Required.");
+        hideDetailsTextField.get(1).message().has().text("Required.");
         hideDetailsTextField.get(1).setText("a");
-        hideDetailsTextField.get(1).is().message("Min 3 characters");
-        hideDetailsTextField.get(1).clearAndSetText("aaa");
+        hideDetailsTextField.get(1).message().has().text("Min 3 characters");
+        hideDetailsTextField.get(1).setText("aaa");
         hideDetailsTextField.get(1).is().noMessage();
-
+        hideDetailsTextField.get(2).focus();
         hideDetailsTextField.get(2).is().noMessage();
-        hideDetailsTextField.get(1).setText("a");
-        hideDetailsTextField.get(1).is().noMessage();
+        hideDetailsTextField.get(2).setText("a");
+        hideDetailsTextField.get(2).is().noMessage();
     }
 
     @Test
@@ -144,14 +144,14 @@ public class TextFieldsTests extends TestsInit {
         });
 
         visibleHintTextField.forEach(textField -> {
-            textField.is().message("www.example.com/page");
+            textField.message().has().text("www.example.com/page");
             textField.focus();
-            textField.is().message("www.example.com/page");
+            textField.message().has().text("www.example.com/page");
         });
     }
 
     @Test
-    public void iconsTextFieldTest() throws Exception {
+    public void iconsTextFieldTest() {
         String mdiMapMarker = "mdi-map-marker";
         for (int index = 0; index <= 12; index += 4) {
             iconsTextField.get(1 + index).getPrependOuterIcon().is().type(mdiMapMarker);
@@ -163,22 +163,22 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void outlinedTextFieldTest() {
-        outlinedTextField.get(1).is().peculiarity("outlined");
-        outlinedTextField.get(2).is().peculiarity("outlined");
+        outlinedTextField.get(1).is().outlined();
+        outlinedTextField.get(2).is().outlined();
     }
 
     @Test
     public void prefixesAndSuffixesTextFieldTest() {
-        prefixesAndSuffixesTextField.get(1).is().prefix("$");
-        prefixesAndSuffixesTextField.get(2).is().suffix("lbs");
-        prefixesAndSuffixesTextField.get(3).is().suffix("@gmail.com");
-        prefixesAndSuffixesTextField.get(4).is().suffix("PST");
+        prefixesAndSuffixesTextField.get(1).prefix().has().text("$");
+        prefixesAndSuffixesTextField.get(2).suffix().has().text("lbs");
+        prefixesAndSuffixesTextField.get(3).suffix().has().text("@gmail.com");
+        prefixesAndSuffixesTextField.get(4).suffix().has().text("PST");
     }
 
     @Test
     public void shapedTextFieldTest() {
-        shapedTextField.get(1).is().peculiarity("shaped");
-        shapedTextField.get(2).is().peculiarity("shaped");
+        shapedTextField.get(1).is().shaped();
+        shapedTextField.get(2).is().shaped();
         shapedTextField.get(1).is().css("border-radius", "16px 16px 0px 0px");
         shapedTextField.get(2).is().css("border-radius", "16px 16px 0px 0px");
     }
@@ -187,29 +187,29 @@ public class TextFieldsTests extends TestsInit {
     public void singleLineTextFieldTest() {
         singleLineTextField.forEach(textField -> {
             textField.focus();
-            textField.is().label("");
+            jdiAssert(textField.label().isExist(), Matchers.is(false));
         });
     }
 
     @Test
     public void soloTextFieldTest() {
-        soloTextField.get(1).is().peculiarity("solo");
-        soloTextField.get(2).is().peculiarity("solo");
+        soloTextField.get(1).is().solo();
+        soloTextField.get(2).is().solo();
     }
 
     @Test
     public void validationTextFieldTest() {
         String maxLengthString = "abcdeabcdeabcdeabcde";
-        validationTextField.get(1).clearAndSetText(maxLengthString);
+        validationTextField.get(1).setText(maxLengthString);
         validationTextField.get(1).is().text(maxLengthString);
         validationTextField.get(1).is().counter(maxLengthString.length(), 20);
-        validationTextField.get(1).clearAndSetText(maxLengthString + "abcd");
+        validationTextField.get(1).setText(maxLengthString + "abcd");
         validationTextField.get(1).is().text(maxLengthString);
         validationTextField.get(1).is().counter(maxLengthString.length(), 20);
 
-        validationTextField.get(2).clearAndSetText("email");
-        validationTextField.get(2).is().message("Invalid e-mail.");
-        validationTextField.get(2).clearAndSetText("email@gmail.com");
+        validationTextField.get(2).setText("email");
+        validationTextField.get(2).message().has().text("Invalid e-mail.");
+        validationTextField.get(2).setText("email@gmail.com");
         validationTextField.get(2).is().noMessage();
     }
 
@@ -233,13 +233,13 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void labelTextFieldTest() {
-        labelTextField.is().label("What about icon here?");
+        labelTextField.label().has().text("What about icon here?");
     }
 
     @Test
     public void progressTextFieldTest() {
         for (int i = 1; i < 10; i++) {
-            progressTextField.setText("a");
+            progressTextField.sendKeys("a");
             progressTextFieldProgressbar.is().attr("aria-valuenow", Integer.toString(i * 10));
         }
     }
@@ -253,12 +253,12 @@ public class TextFieldsTests extends TestsInit {
             textField.setText("Russia");
         });
         customValidationTextField.get(6).textInputField().sendKeys(Keys.ENTER);
-        customValidationTextField.forEach(textField -> textField.is().noMessage());
+        customValidationTextField.forEach(textField -> textField.has().noMessage());
     }
 
     @Test
     public void fullWidthWithCounterTextFieldTest() {
-        fullWidthWithCounterTextField.forEach(textField -> textField.is().peculiarity("full-width"));
+        fullWidthWithCounterTextField.forEach(textField -> textField.is().fullWidth());
     }
 
     @Test
