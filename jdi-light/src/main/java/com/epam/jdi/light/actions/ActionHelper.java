@@ -572,7 +572,7 @@ public class ActionHelper {
         while (result.contains("\n\n"))
             result = result.replaceFirst("\\n\\n", LINE_BREAK);
         result = result.replace("java.lang.RuntimeException:", "").trim();
-        Object[] args = jInfo.jp().getArgs();
+        Object[] args = getArgs(jInfo.jp());
         if (result.contains("{{VALUE}}") && args.length > 0) {
             result = result.replace("{{VALUE}}", args[0].toString());
         }

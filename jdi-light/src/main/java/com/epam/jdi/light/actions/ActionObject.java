@@ -186,8 +186,9 @@ public class ActionObject {
         } catch (Throwable ignore) { }
         try {
             result += className() + "." + methodName() + "(";
-            if (jp().getArgs().length > 0) {
-                result += PrintUtils.print(map(jp().getArgs(), o -> o.getClass().getSimpleName()));
+            Object[] args = getArgs(jp());
+            if (args.length > 0) {
+                result += PrintUtils.print(map(args, o -> o.getClass().getSimpleName()));
             }
             result += "); ";
         } catch (Throwable ignore) { }
