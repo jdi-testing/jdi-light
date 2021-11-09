@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.complex.DataList;
 import io.github.com.custom.Result;
 import io.github.com.custom.SearchResult;
 import io.github.epam.TestsInit;
+import io.github.epam.testng.RetryFailedTestCases;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -127,7 +128,7 @@ public class ElementsGoogleTests implements TestsInit {
         jobs.assertThat().size(equalTo(8));
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryFailedTestCases.class)
     public void validateFilterTests() {
         DataList<SearchResult, Result> jobs = searchPage.search;
 
