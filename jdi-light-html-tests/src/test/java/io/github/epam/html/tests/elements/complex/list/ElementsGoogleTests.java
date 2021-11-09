@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.logger.AllureLogger.screenshotStep;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.PrintUtils.print;
 import static io.github.com.StaticSite.searchPage;
@@ -128,10 +129,11 @@ public class ElementsGoogleTests implements TestsInit {
         jobs.assertThat().size(equalTo(8));
     }
 
-    @Test(retryAnalyzer = RetryFailedTestCases.class)
+    @Test
     public void validateFilterTests() {
         DataList<SearchResult, Result> jobs = searchPage.search;
 
+        screenshotStep("Before assert");
         jobs.assertThat().value(containsString(
             "name:JDI FACEBOOK GROUP; description:English Community Facebook group"))
             .any(e -> e.description.toLowerCase().contains("jdi"))
