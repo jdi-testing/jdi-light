@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import static java.lang.Double.parseDouble;
 
 /**
- * To see an example of Sparkline web element please visit https://vuetifyjs.com/en/components/sparklines
+ * To see an example of Sparkline web element please visit https://vuetifyjs.com/en/components/sparklines/
  */
 
 public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAssert<SparklineAssert> {
