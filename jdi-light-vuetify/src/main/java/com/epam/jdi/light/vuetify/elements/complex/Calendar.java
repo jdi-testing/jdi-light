@@ -9,6 +9,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 import java.util.GregorianCalendar;
 
+/**
+ * To see an example of Calendars please visit https://vuetifyjs.com/en/components/calendars/
+ */
+
 public class Calendar extends UIBaseElement<CalendarAssert> {
 
     private final String MENU = ".menuable__content__active [role='menuitem']";
