@@ -133,7 +133,6 @@ public class ElementsGoogleTests implements TestsInit {
     public void validateFilterTests() {
         DataList<SearchResult, Result> jobs = searchPage.search;
 
-        screenshotStep("Before assert");
         jobs.assertThat().value(containsString(
             "name:JDI FACEBOOK GROUP; description:English Community Facebook group"))
             .any(e -> e.description.toLowerCase().contains("jdi"))

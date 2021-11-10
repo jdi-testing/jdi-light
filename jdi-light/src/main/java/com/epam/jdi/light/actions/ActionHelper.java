@@ -624,7 +624,6 @@ public class ActionHelper {
             do {
                 try {
                     logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
-                    attachText("stableAction exception", "text/plain",  "do-while: " + getClassMethodName(jInfo.jp()));
                     Object result = jInfo.overrideAction() != null
                             ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
                     if (!condition(jInfo.jp())) continue;
@@ -633,7 +632,6 @@ public class ActionHelper {
                     // Do not repeat in case method has invalid argument
                     throw ex;
                 } catch (Throwable ex) {
-                    attachText("stableAction exception", "text/plain", ex.getMessage());
                     exception = ex;
                     try {
                         exceptionMsg = safeException(ex);
