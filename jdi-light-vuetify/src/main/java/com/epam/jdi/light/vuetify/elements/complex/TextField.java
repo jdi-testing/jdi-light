@@ -2,10 +2,9 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.get.OsTypes;
-import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
@@ -13,50 +12,155 @@ import com.epam.jdi.light.vuetify.asserts.TextFieldAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import org.openqa.selenium.Keys;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 
 /**
- * To see an example of Text Fields web element please visit https://vuetifyjs.com/en/components/text-fields
-**/
-
+ * To see an example of Text Field web element please visit
+ * https://vuetifyjs.com/en/components/text-fields
+ **/
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasLabel, HasPlaceholder, IsInput {
 
-    private final String LABEL = "label";
-    private final String INPUT = "input";
-    private final String TEXTAREA = "textarea";
-    private final String SLOT = ".v-input__slot";
-    private final String MESSAGE = ".v-messages__message";
-    private final String COUNTER = ".v-counter";
-    private final String PREPEND_OUTER = ".v-input__prepend-outer";
-    private final String PREPEND_INNER = ".v-input__prepend-inner";
-    private final String APPEND_OUTER = ".v-input__append-outer";
-    private final String APPEND_INNER = ".v-input__append-inner";
-    private final String PREFIX = ".v-text-field__prefix";
-    private final String SUFFIX = ".v-text-field__suffix";
+    protected String INPUT = ".//input|.//textarea";
+    protected String SLOT = ".v-input__slot";
+    protected String MESSAGE = ".v-messages__message";
+    protected String COUNTER = ".v-counter";
+    protected String PREPEND_OUTER = ".v-input__prepend-outer";
+    protected String PREPEND_INNER = ".v-input__prepend-inner";
+    protected String APPEND_OUTER = ".v-input__append-outer";
+    protected String APPEND_INNER = ".v-input__append-inner";
+    protected String PREFIX = ".v-text-field__prefix";
+    protected String SUFFIX = ".v-text-field__suffix";
+
+    protected String DISABLED_CLASS = "v-input--is-disabled";
+    protected String READ_ONLY_CLASS = "v-input--is-readonly";
+    protected String FOCUSED_CLASS = "v-input--is-focused";
+    protected String FILLED_CLASS = "v-text-field--filled";
+    protected String OUTLINED_CLASS = "v-text-field--outlined";
+    protected String SHAPED_CLASS = "v-text-field--shaped";
+    protected String SOLO_CLASS = "v-text-field--solo";
+    protected String FULL_WIDTH_CLASS = "v-text-field--full-width";
 
     @Override
-    @JDIAction("Check if '{name}' disabled")
-    public boolean isDisabled() {
-        return core().hasClass("v-input--is-disabled");
+    @JDIAction("Check that '{name}' is enabled")
+    public boolean isEnabled() {
+        return !core().hasClass(DISABLED_CLASS);
     }
 
-    @JDIAction("Check if '{name}' readonly")
+    @JDIAction("Check that '{name}' is readonly")
     public boolean isReadonly() {
-        return core().hasClass("v-input--is-readonly");
+        return core().hasClass(READ_ONLY_CLASS);
     }
 
-    @JDIAction("Check if '{name}' focused")
+    @JDIAction("Check that '{name}' is focused")
     public boolean isFocused() {
-        return core().hasClass("v-input--is-focused");
+        return core().hasClass(FOCUSED_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is filled")
+    public boolean isFilled() {
+        return core().hasClass(FILLED_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is outlined")
+    public boolean isOutlined() {
+        return core().hasClass(OUTLINED_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is shaped")
+    public boolean isShaped() {
+        return core().hasClass(SHAPED_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is solo")
+    public boolean isSolo() {
+        return core().hasClass(SOLO_CLASS);
+    }
+
+    @JDIAction("Check if '{name}' is full width")
+    public boolean isFullWidth() {
+        return core().hasClass(FULL_WIDTH_CLASS);
     }
 
     @JDIAction("Get '{name}' text input field")
     public UIElement textInputField() {
-        UIElement textInputField = find(INPUT);
-        if (textInputField.isNotExist())
-            return find(TEXTAREA);
-        return textInputField;
+        return find(INPUT);
+    }
+
+    @JDIAction("Get '{name}' slot")
+    public UIElement slot() {
+        return find(SLOT);
+    }
+
+    @JDIAction("Get '{name}' message")
+    public UIElement message() {
+        return find(MESSAGE);
+    }
+
+    @JDIAction("Get '{name}' counter")
+    public UIElement counter() {
+        return find(COUNTER);
+    }
+
+    @JDIAction("Get '{name}' prefix")
+    public UIElement prefix() {
+        return find(PREFIX);
+    }
+
+    @JDIAction("Get '{name}' suffix")
+    public UIElement suffix() {
+        return find(SUFFIX);
+    }
+
+    protected List<Icon> getIconByLocator(String locator) {
+        return finds(locator)
+                .stream()
+                .map(icon -> icon.find(".v-icon"))
+                .map(icon -> new Icon().setCore(Icon.class, icon))
+                .collect(Collectors.toList());
+    }
+
+    @JDIAction("Get '{name}' prepend outer icons")
+    public List<Icon> prependOuterIcons() {
+        return getIconByLocator(PREPEND_OUTER);
+    }
+
+    @JDIAction("Get '{name}' prepend inner icons")
+    public List<Icon> prependInnerIcons() {
+        return getIconByLocator(PREPEND_INNER);
+    }
+
+    @JDIAction("Get '{name}' append inner icons")
+    public List<Icon> appendInnerIcons() {
+        return getIconByLocator(APPEND_INNER);
+    }
+
+    @JDIAction("Get '{name}' append outer icons")
+    public List<Icon> appendOuterIcons() {
+        return getIconByLocator(APPEND_OUTER);
+    }
+
+    @JDIAction("Get '{name}' prepend outer icon")
+    public Icon getPrependOuterIcon() {
+        return prependOuterIcons().get(0);
+    }
+
+    @JDIAction("Get '{name}' prepend inner icons")
+    public Icon getPrependInnerIcon() {
+        return prependInnerIcons().get(0);
+    }
+
+    @JDIAction("Get '{name}' append inner icons")
+    public Icon getAppendInnerIcon() {
+        return appendInnerIcons().get(0);
+    }
+
+    @JDIAction("Get '{name}' append outer icons")
+    public Icon getAppendOuterIcon() {
+        return appendOuterIcons().get(0);
     }
 
     @Override
@@ -65,32 +169,20 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return textInputField().getText();
     }
 
-    @Override
-    @JDIAction("Get '{name}' set text")
-    public void setText(String text) {
-        textInputField().input(text);
-    }
-
     @JDIAction("Get '{name}' text type")
     public String getTextType() {
         return textInputField().getAttribute("type");
     }
 
-    @JDIAction("Get '{name}' slot")
-    public UIElement getSlot() {
-        return find(SLOT);
+    @Override
+    public Label label() {
+        return textInputField().label();
     }
 
-    @JDIAction("Get '{name}' message")
-    public String getMessage() {
-        UIElement message = find(MESSAGE);
-        return message.isNotExist() ? "" : message.getText();
-    }
-
-    @JDIAction("Get '{name}' counter")
-    public String getCounter() {
-        UIElement counter = find(COUNTER);
-        return counter.isNotExist() ? "" : counter.getText();
+    @Override
+    @JDIAction("Get '{name}' label text")
+    public String labelText() {
+        return label().getText();
     }
 
     @Override
@@ -99,89 +191,39 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return textInputField().placeholder();
     }
 
-    @JDIAction("Get '{name}' icon by locator")
-    protected Icon getIconByLocator(String locator, int index) {
-        WebList iconArea = finds(locator);
-        if (iconArea.isEmpty())
-            return null;
-        JDIBase core = iconArea.get(index).find("button").isExist() ? iconArea.get(index).find("button") : iconArea.get(index).find("i");
-        return iconArea.isEmpty() ? null : new Icon().setCore(Icon.class, core);
-    }
-
-    @JDIAction("Get '{name}' prepend outer icon")
-    public Icon getPrependOuterIcon() {
-        return getPrependOuterIcon(1);
-    }
-
-    @JDIAction("Get '{name}' prepend outer [{0}] icon")
-    public Icon getPrependOuterIcon(int index) {
-        return getIconByLocator(PREPEND_OUTER, index);
-    }
-
-    @JDIAction("Get '{name}' prepend inner icon")
-    public Icon getPrependInnerIcon() {
-        return getPrependInnerIcon(1);
-    }
-
-    @JDIAction("Get '{name}' prepend inner [{0}] icon")
-    public Icon getPrependInnerIcon(int index) {
-        return getIconByLocator(PREPEND_INNER, index);
-    }
-
-    @JDIAction("Get '{name}' append inner icon")
-    public Icon getAppendInnerIcon() {
-        return getAppendInnerIcon(1);
-    }
-
-    @JDIAction("Get '{name}' append inner [{0}] icon")
-    public Icon getAppendInnerIcon(int index) {
-        return getIconByLocator(APPEND_INNER, index);
-    }
-
-    @JDIAction("Get '{name}' append outer icon")
-    public Icon getAppendOuterIcon() {
-        return getAppendOuterIcon(1);
-    }
-
-    @JDIAction("Get '{name}' append outer [{0}] icon")
-    public Icon getAppendOuterIcon(int index) {
-        return getIconByLocator(APPEND_OUTER, index);
-    }
-
-    @JDIAction("Get '{name}' prefix")
-    public String getPrefix() {
-        return find(PREFIX).getText();
-    }
-
-    @JDIAction("Get '{name}' suffix")
-    public String getSuffix() {
-        return find(SUFFIX).getText();
+    @Override
+    @JDIAction("Set '{0}' in '{name}'")
+    public void input(String value) {
+        clear();
+        textInputField().input(value);
     }
 
     @Override
-    public String labelText() {
-        UIElement label = find(LABEL);
-        return label.isNotExist() ? "" : label.getText();
+    @JDIAction("Set '{0}' in '{name}'")
+    public void setText(String value) {
+        input(value);
     }
 
     @Override
+    @JDIAction("Input '{0}' in '{name}'")
+    public void sendKeys(CharSequence... value) {
+        textInputField().sendKeys(value);
+    }
+
+    @Override
+    @JDIAction("Focus on '{name}'")
+    public void focus() {
+        sendKeys("");
+    }
+
+    @Override
+    @JDIAction("Clear '{name}' text field")
     public void clear() {
         if (getOs().equals(OsTypes.MAC)) {
             textInputField().sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
         } else {
             textInputField().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
         }
-    }
-
-    @JDIAction("Clear '{name}' text field and set text")
-    public void clearAndSetText(String text) {
-        this.clear();
-        setText(text);
-    }
-
-    @Override
-    public void focus() {
-        textInputField().click();
     }
 
     @Override
