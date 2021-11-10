@@ -618,13 +618,15 @@ public class ActionHelper {
         Throwable exception = null;
         isTop.set(false);
         int iteration=0;
+        long iterationStart=0;
         try {
             do {
                 try {
                     logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
                     attachText("execute method with repeat after error",
                             "text/plain",
-                            getClassMethodName(jInfo.jp())+", iteration: "+iteration+", currentTime: "+currentTimeMillis()+", start: "+start);
+                            getClassMethodName(jInfo.jp())+", iteration: "+iteration+", iterationStart: "+iterationStart+", currentTime: "+currentTimeMillis()+", start: "+start);
+                    iterationStart=currentTimeMillis();
                     Object result = jInfo.overrideAction() != null
                             ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
                     if (!condition(jInfo.jp())) continue;
@@ -638,13 +640,13 @@ public class ActionHelper {
                     }
                     attachText("exception occurred in stableAction",
                             "text/plain",
-                            ex.getMessage()+", iteration: "+iteration+", currentTime: "+currentTimeMillis()+", start: "+start);
+                            ex.getMessage()+", iteration: "+iteration+", iterationStart: "+iterationStart+", currentTime: "+currentTimeMillis()+", start: "+start);
                     iteration++;
                 }
-            } while (currentTimeMillis() - start < jInfo.timeout() * 1000L);
+            } while (iterationStart - start < jInfo.timeout() * 1000L);
             attachText("throw exception after unsuccessful repeat in stableAction",
                     "text/plain",
-                    exceptionMsg +", iteration: "+iteration+", currentTime: "+currentTimeMillis()+", start: "+start);
+                    exceptionMsg +", iteration: "+iteration+", iterationStart: "+iterationStart+", currentTime: "+currentTimeMillis()+", start: "+start);
             throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
         } finally {
             isTop.set(true);
