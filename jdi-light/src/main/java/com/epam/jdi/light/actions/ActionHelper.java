@@ -617,10 +617,12 @@ public class ActionHelper {
         long start = currentTimeMillis();
         Throwable exception = null;
         isTop.set(false);
+        long iterationStart=0;
         try {
             do {
                 try {
                     logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
+                    iterationStart = currentTimeMillis();
                     Object result = jInfo.overrideAction() != null
                             ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
                     if (!condition(jInfo.jp())) continue;
@@ -633,7 +635,7 @@ public class ActionHelper {
                     } catch (Throwable ignore) {
                     }
                 }
-            } while (currentTimeMillis() - start < jInfo.timeout() * 1000L);
+            } while (iterationStart - start < jInfo.timeout() * 1000L);
             throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
         } finally {
             isTop.set(true);
