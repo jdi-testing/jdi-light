@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.logger.AllureLogger.attachText;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.airClassOptions;
@@ -18,9 +19,14 @@ public class RadioTests implements TestsInit {
 
     @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
-        bsPage.shouldBeOpened();
-        airClassOptions.select("First class");
+        try {
+            attachText("Before shouldBeLoggedIn", "text/plain", "");
+            shouldBeLoggedIn();
+            bsPage.shouldBeOpened();
+            airClassOptions.select("First class");
+        } catch (Exception ex) {
+            attachText("Exception occurred in before method", "text/plain", ex.getStackTrace().toString());
+        }
     }
 
     @Test

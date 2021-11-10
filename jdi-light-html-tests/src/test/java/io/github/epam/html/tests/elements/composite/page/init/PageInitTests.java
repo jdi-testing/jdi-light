@@ -13,6 +13,7 @@ import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.elements.common.Cookies.clearAllCookies;
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.logger.AllureLogger.attachText;
 import static java.lang.Thread.currentThread;
 import static page.objects.selenium.PageBase.JDI_DOMAIN;
 
@@ -22,13 +23,19 @@ public class PageInitTests implements TestsInit {
     }
     @BeforeMethod
     public void before() {
-        clearAllCookies();
-        takeScreen("clearAllCookies" + currentThread().getId());
-        openUrl(JDI_DOMAIN);
-        takeScreen("openUrl" + currentThread().getId());
-        $("#user-icon").click();
-        takeScreen("userIconClick" + currentThread().getId());
+        try {
+            attachText("Before shouldBeLoggedIn", "text/plain", "");
+            clearAllCookies();
+            takeScreen("clearAllCookies" + currentThread().getId());
+            openUrl(JDI_DOMAIN);
+            takeScreen("openUrl" + currentThread().getId());
+            $("#user-icon").click();
+            takeScreen("userIconClick" + currentThread().getId());
+        } catch (Exception ex) {
+            attachText("Exception occurred in before method", "text/plain", ex.getStackTrace().toString());
+        }
     }
+    
     @Test
     public void loginPageExTest() {
         try {
