@@ -13,7 +13,7 @@ import java.util.Set;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
-import static com.epam.jdi.light.logger.AllureLogger.attachText;
+import static com.epam.jdi.light.logger.AllureLogger.*;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.LinqUtils.safeException;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
@@ -29,6 +29,7 @@ public class WindowsManager {
     private static Safe<Boolean> newWindow = new Safe<>(() -> false);
 
     public static Set<String> getWindows() {
+        String stepId = startStep("getWindows");
         WebDriver driver = getDriver();
         if(driver==null) {
             attachText("Was unable to get driver.",
@@ -39,12 +40,16 @@ public class WindowsManager {
             } catch (Throwable ignore) {
             }
             driver = getDriver();
+            if(driver==null) {
+                throw exception("Can't get WebDriver");
+            }
         }
         Set<String> wHandles = driver.getWindowHandles();
         if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size()) {
             newWindow.set(true);
         }
         windowHandles.set(wHandles);
+        passStep(stepId);
         return wHandles;
     }
 
