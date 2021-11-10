@@ -24,7 +24,6 @@ public class PageInitTests implements TestsInit {
     @BeforeMethod
     public void before() {
         try {
-            attachText("Before shouldBeLoggedIn", "text/plain", "");
             clearAllCookies();
             takeScreen("clearAllCookies" + currentThread().getId());
             openUrl(JDI_DOMAIN);
@@ -35,7 +34,7 @@ public class PageInitTests implements TestsInit {
             attachText("Exception occurred in before method", "text/plain", ex.getStackTrace().toString());
         }
     }
-    
+
     @Test
     public void loginPageExTest() {
         try {

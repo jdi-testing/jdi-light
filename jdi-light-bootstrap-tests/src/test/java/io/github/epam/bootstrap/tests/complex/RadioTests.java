@@ -20,7 +20,6 @@ public class RadioTests implements TestsInit {
     @BeforeMethod
     public void before() {
         try {
-            attachText("Before shouldBeLoggedIn", "text/plain", "");
             shouldBeLoggedIn();
             bsPage.shouldBeOpened();
             airClassOptions.select("First class");
