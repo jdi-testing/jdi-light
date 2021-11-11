@@ -18,6 +18,7 @@ import static io.github.com.pages.layout.HiddenPage.mdDown;
 import static io.github.com.pages.layout.HiddenPage.smDown;
 import static io.github.com.pages.layout.HiddenPage.xlDown;
 import static io.github.com.pages.layout.HiddenPage.xsDown;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * To see an example of Hidden web element please visit
@@ -30,18 +31,28 @@ public class HiddenTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
+        logger.info("Before Method");
         hiddenPage.open();
         hiddenPage.isOpened();
     }
 
     @AfterMethod
     public void after() {
+        logger.info("After Method");
         WebDriverFactory.getDriver().manage().window().maximize();
     }
 
     @Test(dataProvider = "Screen Width Dividers")
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int divider) {
+        logger.info("Test started");
         currentWidth.is().displayed();
+        logger.info("Verify xs displayed");
+        xsDown.is().displayed();
+        logger.info("Verify sm displayed");
+        smDown.is().displayed();
+        logger.info("Verify md displayed");
+        mdDown.is().displayed();
+        logger.info("Verify screen width size, divider: " + divider);
         divideScreenWidthSize(divider);
         String width = getWidth(currentWidth);
         checkWidth(width);
@@ -67,6 +78,7 @@ public class HiddenTests extends TestsInit {
 
     private void divideScreenWidthSize(int divider) {
         Dimension lastScreenSize = WebDriverFactory.getDriver().manage().window().getSize();
+        logger.info("Change screen size");
         try {
             Dimension currentScreenSize = new Dimension(lastScreenSize.width / divider,
                     lastScreenSize.height);
