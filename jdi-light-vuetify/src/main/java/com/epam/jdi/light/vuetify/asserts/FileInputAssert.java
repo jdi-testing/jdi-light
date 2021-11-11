@@ -22,12 +22,6 @@ public class FileInputAssert extends TextFieldAssert {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has chips")
-    public FileInputAssert chips() {
-        jdiAssert(element().hasChips() ? "has chips" : "has no chips", Matchers.is("has chips"));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' accept {0}")
     public FileInputAssert accept(Matcher<String> condition) {
         jdiAssert(element().accept(), condition);

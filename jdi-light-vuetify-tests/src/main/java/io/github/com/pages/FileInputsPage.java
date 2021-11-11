@@ -1,40 +1,44 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.annotations.JDIFileInput;
 import com.epam.jdi.light.vuetify.elements.complex.FileInput;
 
 public class FileInputsPage extends VuetifyPage {
 
-    @UI("#AcceptFileInput.v-file-input")
+    @JDIFileInput(root = "#AcceptFileInput.v-file-input")
     public static FileInput acceptFileInput;
 
-    @UI("#ChipsFileInput .v-file-input[1]")
+    @JDIFileInput(root = "#ChipsFileInput .v-file-input[1]")
     public static FileInput chipsFileInput;
 
-    @UI("#ChipsFileInput .v-file-input[2]")
+    @JDIFileInput(root = "#ChipsFileInput .v-file-input[2]")
     public static FileInput smallChipsFileInput;
 
-    @UI("#CounterFileInput.v-file-input")
+    @JDIFileInput(root = "#CounterFileInput.v-file-input")
     public static FileInput counterFileInput;
 
-    @UI("#DenseFileInput.v-file-input")
+    @JDIFileInput(root = "#DenseFileInput.v-file-input")
     public static FileInput denseFileInput;
 
-    @UI("#MultipleFileInput.v-file-input")
+    @JDIFileInput(root = "#MultipleFileInput.v-file-input")
     public static FileInput multiplyFileInput;
 
-    @UI("#PrependIconFileInput.v-file-input")
+    @JDIFileInput(root = "#PrependIconFileInput.v-file-input")
     public static FileInput prependIconFileInput;
 
-    @UI("#ShowSizeFileInput.v-file-input")
+    @JDIFileInput(root = "#ShowSizeFileInput.v-file-input")
     public static FileInput showSizeFileInput;
 
-    @UI("#ValidationFileInput.v-file-input")
+    @JDIFileInput(root = "#ValidationFileInput.v-file-input")
     public static FileInput validationFileInput;
 
-    @UI("#SelectionFileInput.v-file-input")
+    @JDIFileInput(root = "#SelectionFileInput.v-file-input")
     public static FileInput selectionFileInput;
 
-    @UI("#ComplexSelectionSlotFileInput.v-file-input")
+    @JDIFileInput(
+            root = "#ComplexSelectionSlotFileInput.v-file-input",
+            files = ".v-file-input__text > span"
+    )
     public static FileInput complexFileInput;
 }

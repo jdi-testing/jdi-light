@@ -2,16 +2,24 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.vuetify.annotations.JDIFileInput;
 import com.epam.jdi.light.vuetify.asserts.FileInputAssert;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
-public class FileInput extends TextField {
+public class FileInput extends TextField implements ISetup {
+
+    protected String ROOT_LOCATOR;
+    protected String FILES_LOCATOR = ".v-chip";
 
     @JDIAction("Check that '{name}' can accept multiply files")
     public boolean isMultiply() {
@@ -24,13 +32,9 @@ public class FileInput extends TextField {
         return !find(".v-input__control").attr("style").contains("display: none;");
     }
 
-    @JDIAction("Check that '{name}' has chips")
-    public boolean hasChips() {
-        return find(".v-file-input__text--chips").isExist();
-    }
-
-    public UIElement files() {
-        return find(".v-file-input__text");
+    @JDIAction("Get '{name}' files list")
+    public WebList files() {
+        return finds(FILES_LOCATOR);
     }
 
     @JDIAction("Get '{name}' accepted types")
@@ -41,14 +45,13 @@ public class FileInput extends TextField {
     @Override
     @JDIAction("Get '{name}' text")
     public String getText() {
-        return files().getText();
+        return find(".v-file-input__text").getText();
     }
 
     @JDIAction("Get '{name}' files list")
     public List<String> getFiles() {
-        WebList chips = files().finds(".v-chip");
-        if (chips.isNotEmpty()) {
-            return chips.map(UIElement::text);
+        if (files().isNotEmpty()) {
+            return files().map(UIElement::text);
         }
         return Collections.singletonList(getText());
     }
@@ -76,7 +79,7 @@ public class FileInput extends TextField {
     @Override
     @JDIAction("Focus on '{name}'")
     public void focus() {
-        sendKeys("");
+        core().click();
     }
 
     @Override
@@ -103,6 +106,25 @@ public class FileInput extends TextField {
 
     public void uploadFiles(List<String> paths) {
         uploadFiles(paths.toArray(new String[0]));
+    }
+
+    @Override
+    public void setup(Field field) {
+        if (fieldHasAnnotation(field, JDIFileInput.class, FileInput.class)) {
+            JDIFileInput annotation = field.getAnnotation(JDIFileInput.class);
+            initializeLocators(annotation);
+        }
+        this.setCore(FileInput.class, $(ROOT_LOCATOR));
+        this.setName(String.format("File input %s", field.getName()));
+    }
+
+    private void initializeLocators(JDIFileInput annotation) {
+        if (!annotation.root().isEmpty()) {
+            ROOT_LOCATOR = annotation.root();
+        }
+        if (!annotation.files().isEmpty()) {
+            FILES_LOCATOR = annotation.files();
+        }
     }
 
     @Override
