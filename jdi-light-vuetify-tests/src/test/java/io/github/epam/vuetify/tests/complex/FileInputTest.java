@@ -131,12 +131,30 @@ public class FileInputTest extends TestsInit {
 
     @Test
     public void selectionFileInputTest() {
-
+        selectionFileInput.uploadFile(pathTXT.toString());
+        selectionFileInput.uploadFile(pathPNG.toString());
+        selectionFileInput.uploadFile(pathTXT.toString());
+        selectionFileInput.has().files(asList(
+                pathTXT.getFileName().toString(),
+                pathPNG.getFileName().toString(),
+                pathTXT.getFileName().toString())
+        );
+        selectionFileInput.files().foreach(chip ->
+                chip.has().css("background-color", BLUE_DARKEN_2.toString())
+        );
     }
 
     @Test
     public void complexFileInputTest() {
-
+        complexFileInput.uploadFile(pathTXT.toString());
+        complexFileInput.uploadFile(pathPNG.toString());
+        complexFileInput.uploadFile(pathTXT.toString());
+        complexFileInput.has().files(asList(
+                "TextTestFile.txt (11 B)",
+                "ImageTestFile.png (51 B)",
+                "+1 FILE(S)")
+        );
+        complexFileInput.counter().has().text("3 files (73 B in total)");
     }
 
     @AfterClass
