@@ -32,17 +32,7 @@ public class WindowsManager {
         String stepId = startStep("getWindows");
         WebDriver driver = getDriver();
         if(driver==null) {
-            attachText("Was unable to get driver.",
-                    "text/plain",
-                    "Will retry one more time after 10 seconds");
-            try {
-                Thread.sleep(10000);
-            } catch (Throwable ignore) {
-            }
-            driver = getDriver();
-            if(driver==null) {
-                throw exception("Can't get WebDriver");
-            }
+            throw exception("Can't get WebDriver");
         }
         Set<String> wHandles = driver.getWindowHandles();
         if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size()) {
