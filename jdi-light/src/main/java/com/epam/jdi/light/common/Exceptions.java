@@ -23,9 +23,7 @@ public class Exceptions {
             exMsg = ex.getCause().getMessage();
         WebSettings.logger.debug("ERROR: " + message + ". Exception: " + exMsg);
         final Class<?> exceptionClass = ex.getClass();
-        if (isClass(AssertionError.class, exceptionClass))
-            // should not it be the other way around?
-            // isClass(exceptionClass, AssertionError.class)
+        if (isClass(exceptionClass, AssertionError.class))
             throw new AssertionError(message, ex);
         else if (isClass(exceptionClass, UnsupportedOperationException.class)) {
             return new UnsupportedOperationException(message, ex);
