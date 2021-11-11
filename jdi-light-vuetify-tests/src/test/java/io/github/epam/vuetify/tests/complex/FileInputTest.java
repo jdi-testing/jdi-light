@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.vuetify.elements.enums.Colors;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.AfterClass;
@@ -12,17 +11,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
+import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.fileInputsPage;
 import static io.github.com.pages.FileInputsPage.acceptFileInput;
 import static io.github.com.pages.FileInputsPage.chipsFileInput;
+import static io.github.com.pages.FileInputsPage.complexFileInput;
 import static io.github.com.pages.FileInputsPage.counterFileInput;
 import static io.github.com.pages.FileInputsPage.denseFileInput;
 import static io.github.com.pages.FileInputsPage.multiplyFileInput;
 import static io.github.com.pages.FileInputsPage.prependIconFileInput;
+import static io.github.com.pages.FileInputsPage.selectionFileInput;
 import static io.github.com.pages.FileInputsPage.showSizeFileInput;
 import static io.github.com.pages.FileInputsPage.smallChipsFileInput;
 import static io.github.com.pages.FileInputsPage.validationFileInput;
@@ -31,8 +32,8 @@ import static org.hamcrest.Matchers.containsString;
 
 public class FileInputTest extends TestsInit {
 
-    Path pathTXT;
-    Path pathPNG;
+    private Path pathTXT;
+    private Path pathPNG;
 
     @BeforeClass
     public void before() {
@@ -59,7 +60,6 @@ public class FileInputTest extends TestsInit {
     @Test
     public void chipsFileInputTest() {
         chipsFileInput.is().multiply();
-        chipsFileInput.has().chips();
         chipsFileInput.uploadFiles(asList(pathTXT.toString(), pathPNG.toString()));
         chipsFileInput.has().files(asList(pathTXT.getFileName().toString(), pathPNG.getFileName().toString()));
     }
@@ -67,7 +67,6 @@ public class FileInputTest extends TestsInit {
     @Test
     public void smallChipsFileInputTest() {
         smallChipsFileInput.is().multiply();
-        chipsFileInput.has().chips();
         smallChipsFileInput.uploadFile(pathTXT.toString());
         smallChipsFileInput.has().file(pathTXT.getFileName().toString());
         smallChipsFileInput.uploadFile(pathPNG.toString());
@@ -77,6 +76,7 @@ public class FileInputTest extends TestsInit {
     @Test
     public void counterFileInputTest() {
         counterFileInput.is().multiply();
+        counterFileInput.counter().has().text("0 files (0 B in total)");
 
         counterFileInput.uploadFile(pathTXT.toString());
         counterFileInput.has().file("TextTestFile.txt (11 B)");
@@ -97,7 +97,7 @@ public class FileInputTest extends TestsInit {
 
     @Test
     public void denseFileInputTest() {
-
+        denseFileInput.has().classValue(Matchers.containsString("v-input--dense"));
     }
 
     @Test
@@ -121,7 +121,6 @@ public class FileInputTest extends TestsInit {
     public void showSizeFileInputTest() {
         showSizeFileInput.uploadFile(pathTXT.toString());
         showSizeFileInput.has().text("TextTestFile.txt (11 B)");
-        showSizeFileInput.counter().has().text("1 files (11 B in total)");
     }
 
     @Test
