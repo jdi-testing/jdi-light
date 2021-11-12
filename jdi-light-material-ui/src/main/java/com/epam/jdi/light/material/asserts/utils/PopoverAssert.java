@@ -18,4 +18,10 @@ public class PopoverAssert extends UIAssert<PopoverAssert, Popover> {
         jdiAssert(isVisible, Matchers.is(true));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has text {0}")
+    public PopoverAssert text(String text) {
+        jdiAssert(element().text(), Matchers.is(text));
+        return this;
+    }
 }
