@@ -1,5 +1,10 @@
 package com.epam.jdi.light.material.elements.inputs.transferlist;
 
+/**
+ * To see an example of Simple Transfer List web element please visit
+ * https://mui.com/components/transfer-list/#enhanced-transfer-list
+ */
+
 public class EnhancedTransferList extends TransferList {
 
   @Override

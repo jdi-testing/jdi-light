@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.asserts.displaydata.TooltipAssert;
 import org.openqa.selenium.By;
 
-
 /**
  * To see an example of Tooltip web element please visit
  * https://material-ui.com/ru/components/tooltips/.
