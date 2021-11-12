@@ -6,11 +6,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * To see an example of Portal web element please visit
- * https://material-ui.com/components/portal/.
- */
-
 public class PortalTests extends TestsInit {
     private static final String FIRST_FIELD_TEXT = "It looks like I will render here.";
 

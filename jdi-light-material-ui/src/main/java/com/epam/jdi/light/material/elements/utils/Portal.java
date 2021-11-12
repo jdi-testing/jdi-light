@@ -5,6 +5,11 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.utils.PortalAssert;
 
+/**
+ * To see an example of Portal web element please visit
+ * https://material-ui.com/components/portal/.
+ */
+
 public class Portal extends UIBaseElement<PortalAssert> {
 
     @JDIAction("Get {name} {0} field")
