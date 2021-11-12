@@ -32,10 +32,8 @@ public class WindowsManager {
     private static Safe<Boolean> newWindow = new Safe<>(() -> false);
 
     public static Set<String> getWindows() {
-        String stepId = startStep("getWindows");
         WebDriver driver = getDriver();
         if(driver==null) {
-            failStep(stepId,logDataToAllure(FAIL, "Can't get WebDriver",false));
             throw exception("Can't get WebDriver");
         }
         Set<String> wHandles = driver.getWindowHandles();
@@ -43,7 +41,6 @@ public class WindowsManager {
             newWindow.set(true);
         }
         windowHandles.set(wHandles);
-        passStep(stepId);
         return wHandles;
     }
 
