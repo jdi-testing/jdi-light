@@ -1,13 +1,10 @@
 package io.github.epam.material.tests.utils;
 
+import static io.github.com.StaticSite.portalPage;
+import static io.github.com.pages.utils.PortalPage.portal;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static io.github.com.StaticSite.portalPage;
-import static io.github.com.pages.utils.PortalPage.button;
-import static io.github.com.pages.utils.PortalPage.field1;
-import static io.github.com.pages.utils.PortalPage.field2;
 
 /**
  * To see an example of Portal web element please visit
@@ -15,6 +12,7 @@ import static io.github.com.pages.utils.PortalPage.field2;
  */
 
 public class PortalTests extends TestsInit {
+    private static final String FIRST_FIELD_TEXT = "It looks like I will render here.";
 
     @BeforeMethod
     public void openSectionToTest() {
@@ -23,18 +21,18 @@ public class PortalTests extends TestsInit {
 
     @Test
     public void portalTest() {
-        button.has().text("Mount children");
-        field1.has().text("It looks like I will render here.");
-        field2.has().text("");
+        portal.button().has().text("Mount children");
+        portal.field(1).has().text(FIRST_FIELD_TEXT);
+        portal.field(2).has().text("");
 
-        button.click();
-        button.has().text("Unmount children");
-        field1.has().text("It looks like I will render here.");
-        field2.has().text("But I actually render here!");
+        portal.button().click();
+        portal.button().has().text("Unmount children");
+        portal.field(1).has().text(FIRST_FIELD_TEXT);
+        portal.field(2).has().text("But I actually render here!");
 
-        button.click();
-        button.has().text("Mount children");
-        field1.has().text("It looks like I will render here.");
-        field2.has().text("");
+        portal.button().click(0, 1);
+        portal.button().has().text("Mount children");
+        portal.field(1).has().text(FIRST_FIELD_TEXT);
+        portal.field(2).has().text("");
     }
 }
