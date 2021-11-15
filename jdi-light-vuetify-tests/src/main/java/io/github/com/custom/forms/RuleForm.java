@@ -5,10 +5,11 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
+import com.epam.jdi.light.vuetify.elements.composite.Form;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 
-public class RuleForm extends Section {
+public class RuleForm extends Form {
 
     @UI(".col-md-4 .v-text-field--is-booted")
     public TextField mainTextField;

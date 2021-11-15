@@ -4,12 +4,13 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
+import com.epam.jdi.light.vuetify.elements.composite.Form;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
 import io.github.com.custom.CustomCheckbox;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 
-public class VuelidateForm extends Section {
+public class VuelidateForm extends Form {
 
     @UI("//div[contains(@class, 'v-text-field--is-booted')][1]")
     public TextField nameField;
