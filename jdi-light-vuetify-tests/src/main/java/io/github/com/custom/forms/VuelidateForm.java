@@ -1,15 +1,15 @@
 package io.github.com.custom.forms;
 
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
-import com.epam.jdi.light.vuetify.elements.composite.Forms;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
 import io.github.com.custom.CustomCheckbox;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 
-public class VuelidateForm extends Forms {
+public class VuelidateForm extends Section {
 
     @UI("//div[contains(@class, 'v-text-field--is-booted')][1]")
     public TextField nameField;
@@ -29,23 +29,22 @@ public class VuelidateForm extends Forms {
     @UI("//button[2]")
     public Button clearButton;
 
-    @Override
-    public boolean validate() {
+    public void validate() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
 
         if (nameField.getText().isEmpty()) {
             exceptionMessage.append("Name can not be empty.  ");
         } else {
-            if (!nameField.getMessage().isEmpty()) {
-                exceptionMessage.append(nameField.getMessage()).append(". ");
+            if (nameField.message().isVisible()) {
+                exceptionMessage.append(nameField.message().getText()).append(". ");
             }
         }
         if (emailField.getText().isEmpty()) {
             exceptionMessage.append("email can not be empty.  ");
         } else {
-            if (!emailField.getMessage().isEmpty()) {
-                exceptionMessage.append(emailField.getMessage()).append(". ");
+            if (emailField.message().isVisible()) {
+                exceptionMessage.append(emailField.message().getText()).append(". ");
             }
         }
         if (itemField.selected().equals("Nothing selected")) {
@@ -58,15 +57,12 @@ public class VuelidateForm extends Forms {
         if (optionCheckBox.message().isVisible()) {
             exceptionMessage.append(optionCheckBox.message().getText()).append(" ");
         }
-        if (exceptionMessage.toString().equals("Form validation failed: ")) {
-            return true;
-        } else {
+        if (!exceptionMessage.toString().equals("Form validation failed: ")) {
             throw exception(exceptionMessage.toString(), this);
         }
     }
 
-    @Override
-    public boolean isClear() {
+    public void isClear() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
 
@@ -85,6 +81,5 @@ public class VuelidateForm extends Forms {
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
             throw exception(exceptionMessage.toString(), this);
         }
-        return true;
     }
 }

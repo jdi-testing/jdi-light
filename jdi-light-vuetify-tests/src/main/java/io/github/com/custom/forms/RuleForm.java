@@ -1,14 +1,14 @@
 package io.github.com.custom.forms;
 
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
-import com.epam.jdi.light.vuetify.elements.composite.Forms;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 
-public class RuleForm extends Forms {
+public class RuleForm extends Section {
 
     @UI(".col-md-4 .v-text-field--is-booted")
     public TextField mainTextField;
@@ -22,17 +22,13 @@ public class RuleForm extends Forms {
     @UI(".v-input--checkbox")
     public Checkbox checkbox;
 
-    @Override
-    public boolean validate() {
+    public void validate() {
         if (mainTextField.message().isVisible()) {
-            throw exception("Form validation failed: " + mainTextField.getMessage(), this);
-        } else {
-            return true;
+            throw exception("Form validation failed: " + mainTextField.message().getText(), this);
         }
     }
 
-    @Override
-    public boolean isClear() {
+    public void isClear() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
 
@@ -48,6 +44,5 @@ public class RuleForm extends Forms {
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
             throw exception(exceptionMessage.toString(), this);
         }
-        return true;
     }
 }

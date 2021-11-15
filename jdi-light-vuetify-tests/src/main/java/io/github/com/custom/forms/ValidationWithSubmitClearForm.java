@@ -1,15 +1,15 @@
 package io.github.com.custom.forms;
 
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
-import com.epam.jdi.light.vuetify.elements.composite.Forms;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
 import io.github.com.custom.CustomCheckbox;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 
-public class ValidationWithSubmitClearForm extends Forms {
+public class ValidationWithSubmitClearForm extends Section {
 
     @UI("//div[contains(@class, 'v-text-field--is-booted')][1]")
     public TextField nameField;
@@ -32,32 +32,28 @@ public class ValidationWithSubmitClearForm extends Forms {
     @UI("button.warning")
     public Button resetValidationButton;
 
-    @Override
-    public boolean validate() {
+    public void validate() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
 
         if (validateButton.isEnabled()) {
             validateButton.click();
         }
-        if (!nameField.getMessage().equals("")) {
-            exceptionMessage.append(nameField.getMessage()).append(". ");
+        if (nameField.message().isVisible()) {
+            exceptionMessage.append(nameField.message().getText()).append(". ");
         }
-        if (!emailField.getMessage().equals("")) {
-            exceptionMessage.append(emailField.getMessage()).append(". ");
+        if (emailField.message().isVisible()) {
+            exceptionMessage.append(emailField.message().getText()).append(". ");
         }
         if (confirmingCheckBox.message().isVisible()) {
             exceptionMessage.append(confirmingCheckBox.message().getText()).append(" ");
         }
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
             throw exception(exceptionMessage.toString(), this);
-        } else {
-            return true;
         }
     }
 
-    @Override
-    public boolean isClear() {
+    public void isClear() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
 
@@ -76,6 +72,5 @@ public class ValidationWithSubmitClearForm extends Forms {
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
             throw exception(exceptionMessage.toString(), this);
         }
-        return true;
     }
 }

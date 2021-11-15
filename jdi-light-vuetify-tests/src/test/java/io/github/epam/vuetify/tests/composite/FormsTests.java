@@ -21,50 +21,51 @@ public class FormsTests extends TestsInit {
 
         ruleForm.slider.slideHorizontalTo(characters);
         ruleForm.checkbox.check();
-        ruleForm.validationTextField.clearAndSetText(textValue);
-        ruleForm.mainTextField.clearAndSetText(textValue);
-        ruleForm.is().validate();
+        ruleForm.validationTextField.setText(textValue);
+        ruleForm.mainTextField.setText(textValue);
+        ruleForm.validate();
 
         ruleForm.mainTextField.clear();
         ruleForm.checkbox.uncheck();
         ruleForm.validationTextField.clear();
-        ruleForm.is().clear();
+        ruleForm.isClear();
+
     }
 
     @Test
     public void validationWithSubmitClearFormTest() {
-        validationWithSubmitClearForm.nameField.clearAndSetText("Batman");
-        validationWithSubmitClearForm.emailField.clearAndSetText("dark_knight@gotaham.com");
+        validationWithSubmitClearForm.nameField.setText("Batman");
+        validationWithSubmitClearForm.emailField.setText("dark_knight@gotaham.com");
         validationWithSubmitClearForm.itemField.select("Item 1");
         validationWithSubmitClearForm.confirmingCheckBox.check();
-        validationWithSubmitClearForm.is().validate();
+        validationWithSubmitClearForm.validate();
 
         validationWithSubmitClearForm.resetFormButton.click();
-        validationWithSubmitClearForm.is().clear();
+        validationWithSubmitClearForm.isClear();
     }
 
     @Test
     public void veeValidateForm() {
-        veeValidateForm.nameField.clearAndSetText("Batman");
-        veeValidateForm.phoneNumberField.clearAndSetText("7474747");
-        veeValidateForm.emailField.clearAndSetText("dark_knight@gotaham.com");
+        veeValidateForm.nameField.setText("Batman");
+        veeValidateForm.phoneNumberField.setText("7474747");
+        veeValidateForm.emailField.setText("dark_knight@gotaham.com");
         veeValidateForm.itemField.select("Item 1");
         veeValidateForm.optionCheckBox.check();
-        veeValidateForm.is().validate();
+        veeValidateForm.validate();
 
         veeValidateForm.clearButton.click();
-        veeValidateForm.is().clear();
+        veeValidateForm.isClear();
     }
 
     @Test
     public void vuelidateFormTest() {
-        vuelidateForm.nameField.clearAndSetText("Batman");
-        vuelidateForm.emailField.clearAndSetText("dark_knight@gotaham.com");
+        vuelidateForm.nameField.setText("Batman");
+        vuelidateForm.emailField.setText("dark_knight@gotaham.com");
         vuelidateForm.itemField.select("Item 1");
         vuelidateForm.optionCheckBox.check();
-        vuelidateForm.is().validate();
+        vuelidateForm.validate();
 
         vuelidateForm.clearButton.click();
-        vuelidateForm.is().clear();
+        vuelidateForm.isClear();
     }
 }
