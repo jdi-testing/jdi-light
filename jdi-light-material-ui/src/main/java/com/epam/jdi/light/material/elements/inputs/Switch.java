@@ -11,8 +11,6 @@ import com.epam.jdi.light.material.asserts.inputs.SwitchAssert;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-
 /**
  * To see an example of Checkbox group List web element please visit
  * https://mui.com/components/switches/
@@ -20,7 +18,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel {
 
-    @JDIAction("Assert that '{name}' is turned on")
+    @JDIAction("Is '{name}' turned on")
     public boolean isTurnedOn() {
         return buttonBase().hasClass("Mui-checked");
     }
@@ -43,6 +41,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
             click();
         }
     }
+
     @JDIAction("Does '{name}' have primary color")
     public boolean hasPrimaryColor() {
         return getColor().equals("colorPrimary");
@@ -58,35 +57,32 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
         return getColor().equals("");
     }
 
-    @JDIAction("Is '{name}' disabled")
     @Override
+    @JDIAction("Is '{name}' disabled")
     public boolean isDisabled() {
         return buttonBase().attr("aria-disabled").equals("true");
     }
 
-    @JDIAction("Is '{name}' enabled")
     @Override
+    @JDIAction("Is '{name}' enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
 
     @Override
+    @JDIAction("Get '{name}'s label")
     public Label label() {
-        return castToLabel(core().find("ancestor::label"));
+        return new Label().setCore(Label.class, core().findUp());
     }
 
     @Override
-    @JDIAction("Get '{name}' label text")
+    @JDIAction("Get '{name}'s label text")
     public String labelText() {
         return label().find(".MuiFormControlLabel-label").getText();
     }
 
-    private Label castToLabel(UIElement element) {
-        return new Label().setCore(Label.class, element);
-    }
-
     private UIElement buttonBase() {
-        return $(".MuiButtonBase-root", this);
+        return find(".MuiButtonBase-root");
     }
 
     private String getColor() {
@@ -105,4 +101,5 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     public SwitchAssert has() {
         return is();
     }
+
 }
