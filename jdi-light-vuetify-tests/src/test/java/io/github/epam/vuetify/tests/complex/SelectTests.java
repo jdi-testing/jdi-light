@@ -1,8 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
-import net.bytebuddy.implementation.bytecode.Throw;
-import org.openqa.selenium.Keys;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -17,44 +16,58 @@ public class SelectTests extends TestsInit {
     }
 
     @Test
-    public void demoTest() throws InterruptedException {
-
-//        outlinedStyleSelect.select("Bar");
-//        outlinedStyleSelect.label().getValue();
-
+    public void basicFunctionalityTest() {
         standardDenseSelect.is().collapsed();
         standardDenseSelect.expand();
         standardDenseSelect.is().expanded();
-//        standardDenseSelect.close();
-//        standardDenseSelect.is().collapsed();
         standardDenseSelect.select("Bar");
         standardDenseSelect.is().selected("Bar");
         standardDenseSelect.is().displayed();
     }
-//
-//    @Test
-//    public void leftTest() throws InterruptedException {
-//
-////        leftIconSelect.is().collapsed();
-////        leftIconSelect.expand();
-////        leftIconSelect.is().expanded();
-//        //standardDenseSelect.close();
-//        //standardDenseSelect.is().collapsed();
-//        leftIconSelect.select("Georgia");
-//        leftIconSelect.is().selected("Georgia");
-//        leftIconSelect.is().displayed();
-//    }
 
     @Test
-    public void labelTest() throws InterruptedException {
+    public void iconTest() {
+
+    }
+
+    @Test
+    public void labelTest() {
         menuPropsSelect.labelText();
-        //System.out.println(menuPropsSelect.base().locator.toString());
+        menuPropsSelect.label().has().text("Label");
     }
 
     @Test
-    public void multiTest() {
-        multipleSelect.select(1);
-        multipleSelect.messageText();
+    public void multiplySelect() {
+        multipleSelect.select("Alaska");
+        multipleSelect.select("American Samoa");
+        multipleSelect.is().selected(Matchers.containsString("Alaska"));
+        multipleSelect.is().selected("Alaska,American Samoa");
     }
 
+    @Test
+    public void messageTest() {
+        multipleSelect.messageText();
+        multipleSelect.message().has().text("Pick your favorite states");
+    }
+
+    @Test
+    public void disableTest() {
+        disabledSelect.is().disabled();
+    }
+
+    @Test
+    public void readOnlyTest() {
+        readonlySelect.is().classValue(Matchers.containsString("readonly"));
+    }
+
+    @Test
+    public void customSelectTest() {
+        customSelect.select("Georgia");
+        customSelect.is().selected("Georgia");
+    }
+
+    @Test
+    public void selectionSelectTest() {
+
+    }
 }
