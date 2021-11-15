@@ -31,6 +31,12 @@ public class DatePickersMonthPage extends VuetifyPage {
             list = "#ColorsMonthPicker table > tbody button")
     public static Dropdown colorsMonthPicker;
 
+    @UI("#ColorsMonthPicker > div:nth-child(1) > div.v-picker__title.green.lighten-1")
+    public static Button firstColorFieldMP;
+
+    @UI("#ColorsMonthPicker > div:nth-child(2) > div.v-picker__title.primary")
+    public static Button secondColorFieldMP;
+
     @JDropdown(
             value = "#ColorsMonthPicker > div:nth-child(1) div.v-date-picker-header.theme--light > div > div > button",
             list = "#ColorsMonthPicker > div:nth-child(1) > div.v-picker__body.theme--light li",
@@ -40,7 +46,11 @@ public class DatePickersMonthPage extends VuetifyPage {
     @UI("#ColorsMonthPicker > div:nth-child(1) > div.v-picker__title.green.lighten-1 > div > div.v-picker__title__btn.v-date-picker-title__year")
     public static Button yearSmallButton;
 
+    @UI("#ColorsMonthPicker button[aria-label='Next year']")
+    public static Button nextYearButtonColorsMP;
 
+    @UI("#ColorsMonthPicker button[aria-label='Previous year']")
+    public static Button previousYearButtonColorsMP;
 
     // LOCATORS FOR: Icons
     @UI("#IconsMonthPicker div.v-date-picker-header.theme--light > button:nth-child(1) i")

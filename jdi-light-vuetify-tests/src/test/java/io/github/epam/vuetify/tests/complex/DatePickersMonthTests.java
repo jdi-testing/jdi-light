@@ -2,6 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.support.Color;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -30,6 +31,7 @@ import static io.github.com.pages.DatePickersMonthPage.additionalYearIconIconsDP
 import static io.github.com.pages.DatePickersMonthPage.allowedMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.colorsMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.disabledMonths;
+import static io.github.com.pages.DatePickersMonthPage.firstColorFieldMP;
 import static io.github.com.pages.DatePickersMonthPage.firstSectionWidthMP;
 import static io.github.com.pages.DatePickersMonthPage.landscapeOrientedMonthSection;
 import static io.github.com.pages.DatePickersMonthPage.leftArrowIconsDP;
@@ -37,13 +39,16 @@ import static io.github.com.pages.DatePickersMonthPage.mainWindowMonthPickers;
 import static io.github.com.pages.DatePickersMonthPage.monthPickerInDialog;
 import static io.github.com.pages.DatePickersMonthPage.monthPickerInMenu;
 import static io.github.com.pages.DatePickersMonthPage.multipleMonthButtons;
+import static io.github.com.pages.DatePickersMonthPage.nextYearButtonColorsMP;
 import static io.github.com.pages.DatePickersMonthPage.orientationSwitcher;
 import static io.github.com.pages.DatePickersMonthPage.outlinedButtonShowCurrentPicker;
 import static io.github.com.pages.DatePickersMonthPage.pickerInDialogMonthField;
 import static io.github.com.pages.DatePickersMonthPage.pickerInDialogMonthOkButton;
 import static io.github.com.pages.DatePickersMonthPage.portraitOrientedMonthSection;
+import static io.github.com.pages.DatePickersMonthPage.previousYearButtonColorsMP;
 import static io.github.com.pages.DatePickersMonthPage.readonlyMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.rightArrowIconsDP;
+import static io.github.com.pages.DatePickersMonthPage.secondColorFieldMP;
 import static io.github.com.pages.DatePickersMonthPage.secondSectionWidthMP;
 import static io.github.com.pages.DatePickersMonthPage.secondShowCurrentMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.swedishMonthPicker;
@@ -64,6 +69,8 @@ public class DatePickersMonthTests extends TestsInit {
 
     public static final int WIDTH_OF_PREDEFINED_WIDTH_DP = 290;
 
+    public static final String GREEN_COLOR_HEX = "#66bb6a";
+    public static final String BLUE_COLOR_HEX = "#1976d2";
     public static final String CHOSEN_MONTH = "may";
     public static final String CHOSEN_MONTH_TWO = "oct";
     public static final String CHOSEN_MONTH_TWO_FULL = "October";
@@ -114,31 +121,45 @@ public class DatePickersMonthTests extends TestsInit {
 
     @Test
     public void testColorsMonthPicker() throws InterruptedException {
-        // ADD GLOBAL TEST....................................................
-
-        //colorsMonthPicker.expand();
+        timer = new Timer(5000L);
+        timer.wait(() -> colorsMonthPicker.isVisible());
         colorsMonthPicker.select(CHOSEN_MONTH);
-        colorsMonthPicker.hover();
+        colorsMonthPicker.select(CHOSEN_MONTH);
+        System.out.println("Shown month: " + colorsMonthPicker.getText());
+        jdiAssert(colorsMonthPicker.getText().toLowerCase(), is(CHOSEN_MONTH),
+                "After clicking the month in Colors month picker: shown month in the field is wrong");
+
+        jdiAssert(Color.fromString(firstColorFieldMP.css("background-color")).asHex(),
+                is(GREEN_COLOR_HEX), "Colors in Colors date picker are incorrect");
+        jdiAssert(Color.fromString(secondColorFieldMP.css("background-color")).asHex(),
+                is(BLUE_COLOR_HEX), "Colors in Colors date picker are incorrect");
+
 
         //System.out.println("Month: " + colorsMonthPicker.getText());
 
         yearColorMPDropdown.expand();
-        yearColorMPDropdown.select("2121");
-        jdiAssert(yearColorMPDropdown.getText(), is("2121"),
+        yearColorMPDropdown.select(Integer.toString(currentYear + 100));
+        jdiAssert(yearColorMPDropdown.getText(), is(Integer.toString(currentYear + 100)),
                 "After changing of year to latest accessible: shown year is wrong");
-
-
-//        yearColorDPDropdown.expand();
-//        yearColorDPDropdown.select(Integer.toString(currentYear));
-//        yearColorDPDropdown.expand();
-//        yearColorDPDropdown.select(Integer.toString(currentYear - 100));
-
-
+        yearColorMPDropdown.expand();
+        yearColorMPDropdown.select(Integer.toString(currentYear));
+        yearColorMPDropdown.expand();
+        yearColorMPDropdown.select(Integer.toString(currentYear - 100));
+        jdiAssert(yearColorMPDropdown.getText(), is(Integer.toString(currentYear - 100)),
+                "After changing of year to earliest accessible: shown year is wrong");
         yearSmallButton.click();
-        yearColorMPDropdown.select("2121");
-
-        // TEST arrows as well
-
+        yearColorMPDropdown.select(Integer.toString(currentYear));
+        jdiAssert(yearColorMPDropdown.getText(), is(Integer.toString(currentYear)),
+                "After changing of year using small year button: shown year is wrong");
+        nextYearButtonColorsMP.click();
+        yearColorMPDropdown.hover();
+        jdiAssert(yearColorMPDropdown.getText(), is(Integer.toString(currentYear + 1)),
+                "After changing of year using next year button: shown year is wrong");
+        previousYearButtonColorsMP.click();
+        previousYearButtonColorsMP.click();
+        yearColorMPDropdown.hover();
+        jdiAssert(yearColorMPDropdown.getText(), is(Integer.toString(currentYear - 1)),
+                "After changing of year using previous year button: shown year is wrong");
 
         Thread.sleep(3000);
     }
