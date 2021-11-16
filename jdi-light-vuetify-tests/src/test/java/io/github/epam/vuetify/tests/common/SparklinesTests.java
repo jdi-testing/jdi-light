@@ -1,4 +1,4 @@
-package io.github.epam.vuetify.tests.complex;
+package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
@@ -33,6 +33,7 @@ public class SparklinesTests extends TestsInit {
 
     @Test
     public void fillSparklineTests() {
+
         Map<String, String> expectedLinearGradientMap1 = Collections.singletonMap("0", "#222");
         Map<String, String> expectedLinearGradientMap2 = Collections.singletonMap("0", "#42b3f4");
         Map<String, String> expectedLinearGradientMap3 = Stream.of(new String[][] {

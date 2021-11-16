@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
-import com.epam.jdi.light.vuetify.elements.complex.Sparkline;
+import com.epam.jdi.light.vuetify.elements.common.Sparkline;
 
 public class SparklinesPage extends VuetifyPage {
 
