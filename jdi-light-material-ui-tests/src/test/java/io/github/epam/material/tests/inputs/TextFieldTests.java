@@ -1,14 +1,15 @@
 package io.github.epam.material.tests.inputs;
 
+import com.epam.jdi.light.material.elements.inputs.TextField;
 import com.epam.jdi.light.material.elements.utils.enums.CurrencyItems;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Random;
-
-import static io.github.epam.utils.StringUtils.generateRandomString;
 import static io.github.com.StaticSite.textFieldPage;
+import static io.github.com.pages.inputs.TextFieldPage.formPropsTextFields;
+import static io.github.com.pages.inputs.TextFieldPage.validationTextFields;
+import static io.github.epam.utils.StringUtils.generateRandomString;
 
 
 public class TextFieldTests extends TestsInit {
@@ -23,14 +24,43 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void formPropsTextFieldTest() {
+        System.out.println("Form");
+        for (TextField textField: formPropsTextFields) {
+            System.out.println(textField.getTextArea().attr("type"));
+        }
+        System.out.println("Valid");
+        for (TextField textField: validationTextFields) {
+            System.out.println(textField.getTextArea().attr("type"));
+        }
+//        System.out.println("mult");
+//        for (TextField textField: multilineTextFields) {
+//            System.out.println(textField.getTextArea().attr("type"));
+//        }
+//        System.out.println("Sele");
+//        for (TextField textField: selectTextFields) {
+//            System.out.println(textField.getTextArea().attr("type"));
+//        }
+//        System.out.println("Ador");
+//        for (TextField textField: inputAdornmentsTextFields) {
+//            System.out.println(textField.getTextArea().attr("type"));
+//        }
 
-        Random random = new Random();
-        int intNumber = random.nextInt();
-        double doubleNumber = random.nextDouble();
-        float floatNumber = random.nextFloat();
 
-        String randomString = generateRandomString();
+        formPropsTextFields.get(1).sendText("asdfsdf");
+        formPropsTextFields.get(1).has().text("asdfsdf");
+        formPropsTextFields.get(1).label().has().text("Required *");
+        formPropsTextFields.get(2).is().disabled();
+        formPropsTextFields.get(2).has().text("Hello World");
+        formPropsTextFields.get(7).has().helperTextField();
+        formPropsTextFields.get(7).has().helperText("Some important text");
 
+//        Random random = new Random();
+//        int intNumber = random.nextInt();
+//        double doubleNumber = random.nextDouble();
+//        float floatNumber = random.nextFloat();
+//
+//        String randomString = generateRandomString();
+//
 //        textFieldPage.textFieldRequired.is().enabled();
 //        textFieldPage.textFieldRequired.setValue(randomString);
 //        textFieldPage.textFieldRequired.has().text(randomString);

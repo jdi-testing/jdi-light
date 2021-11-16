@@ -23,8 +23,23 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
     }
 
     @JDIAction("Assert that '{name}'s label has expected text")
-    public TextFieldAssert labelText(String labelText) {
-        jdiAssert(element().labelText(), Matchers.is(labelText));
+    public TextFieldAssert text(String text) {
+        jdiAssert(element().hasText(), Matchers.is(text));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has helper text")
+    public TextFieldAssert helperTextField() {
+        jdiAssert(element().hasHelperText() ? "has helper text" : "does not have helper text",
+                Matchers.is("has helper text"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s label has expected text")
+    public TextFieldAssert helperText(String text) {
+        jdiAssert(element().getHelperText(), Matchers.is(text));
+        return this;
+    }
+
+
 }
