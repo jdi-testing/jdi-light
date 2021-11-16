@@ -3,6 +3,7 @@ package io.github.epam.material.tests.inputs;
 import com.epam.jdi.light.material.elements.inputs.Switch;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -20,22 +21,15 @@ public class SwitchTests extends TestsInit {
         switchPage.open();
     }
 
-    @Test
-    public void basicSwitchesTest() {
-        basicSwitchTestLogic(basicSwitches.get(1));
-        basicSwitchTestLogic(basicSwitches.get(2));
-        basicSwitchTestLogic(basicSwitches.get(3));
-        basicSwitchTestLogic(basicSwitches.get(4));
-        basicSwitchTestLogic(basicSwitches.get(5));
-        basicSwitchTestLogic(basicSwitches.get(6));
+    @Test(dataProvider = "basicSwitchesTestsDataProvider")
+    public void basicSwitchesTest(int index) {
+        basicSwitchTestLogic(basicSwitches.get(index));
     }
 
-    @Test
-    public void switchesWithFormGroupTest() {
+    @Test(dataProvider = "switchesWithFormGroupTestsDataProvider")
+    public void switchesWithFormGroupTest(int index, String fullName) {
         formGroupTextForm.is().text("Be careful");
-        switchWithLabelTestLogic(formGroupSwitches.get(1),"Gilad Gray");
-        switchWithLabelTestLogic(formGroupSwitches.get(2),"Jason Killian");
-        switchWithLabelTestLogic(formGroupSwitches.get(3),"Antoine Llorca");
+        switchWithLabelTestLogic(formGroupSwitches.get(index),fullName);
     }
 
     private void basicSwitchTestLogic(Switch muiSwitch) {
@@ -85,4 +79,24 @@ public class SwitchTests extends TestsInit {
         formGroupTextForm.is().text(String.format("Be careful with %s", firstName));
     }
 
+    @DataProvider(name = "basicSwitchesTestsDataProvider")
+    public static Object[][] basicSwitchesTestsData() {
+        return new Object[][] {
+                {1},
+                {2},
+                {3},
+                {4},
+                {5},
+                {6}
+        };
+    }
+
+    @DataProvider(name = "switchesWithFormGroupTestsDataProvider")
+    public static Object[][] switchesWithFormGroupTestsData() {
+        return new Object[][] {
+                {1, "Gilad Gray"},
+                {2, "Jason Killian"},
+                {3, "Antoine Llorca"}
+        };
+    }
 }
