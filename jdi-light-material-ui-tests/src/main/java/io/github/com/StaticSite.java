@@ -23,7 +23,7 @@ import io.github.com.pages.inputs.CheckboxPage;
 import io.github.com.pages.inputs.DateTimePickersPage;
 import io.github.com.pages.inputs.EnhancedTransferListPage;
 import io.github.com.pages.inputs.FloatingActionButtonPage;
-import io.github.com.pages.inputs.RadioButtonPage;
+import io.github.com.pages.inputs.RadioPage;
 import io.github.com.pages.inputs.SelectPage;
 import io.github.com.pages.inputs.SimpleTransferListPage;
 import io.github.com.pages.inputs.SlidersPage;
@@ -91,7 +91,7 @@ public class StaticSite {
 
     // radio
     @Url("/radio")
-    public static RadioButtonPage radioButtonPage;
+    public static RadioPage radioButtonPage;
 
     // floating action button
     @Url("/floating_action_button")

@@ -10,14 +10,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.radioButtonPage;
-import static io.github.com.pages.inputs.RadioButtonPage.checkAnswer;
-import static io.github.com.pages.inputs.RadioButtonPage.errorText;
-import static io.github.com.pages.inputs.RadioButtonPage.labelPlacementButtons;
-import static io.github.com.pages.inputs.RadioButtonPage.labelPlacementButtonsClass;
-import static io.github.com.pages.inputs.RadioButtonPage.lastRadioText;
-import static io.github.com.pages.inputs.RadioButtonPage.showErrorButtons;
-import static io.github.com.pages.inputs.RadioButtonPage.simpleRadioButtons;
-import static io.github.com.pages.inputs.RadioButtonPage.simpleRadioButtonsLabel;
+import static io.github.com.pages.inputs.RadioPage.checkAnswer;
+import static io.github.com.pages.inputs.RadioPage.errorText;
+import static io.github.com.pages.inputs.RadioPage.labelPlacementButtons;
+import static io.github.com.pages.inputs.RadioPage.labelPlacementButtonsClass;
+import static io.github.com.pages.inputs.RadioPage.lastRadioText;
+import static io.github.com.pages.inputs.RadioPage.showErrorButtons;
+import static io.github.com.pages.inputs.RadioPage.simpleRadioButtons;
+import static io.github.com.pages.inputs.RadioPage.simpleRadioButtonsLabel;
 import static org.hamcrest.Matchers.containsString;
 
 /**
@@ -25,7 +25,7 @@ import static org.hamcrest.Matchers.containsString;
  * https://material-ui.com/components/radio-buttons/
  */
 
-public class RadioButtonTests extends TestsInit {
+public class RadioGroupButtonTests extends TestsInit {
     static private final List<String> labels = Arrays.asList("First", "Second", "Third", "Disabled");
     static private final List<String> classes = Arrays.asList("Top", "Start", "Bottom");
     static private final List<String> messages = Arrays.asList("You got it!", "Sorry, wrong answer!");

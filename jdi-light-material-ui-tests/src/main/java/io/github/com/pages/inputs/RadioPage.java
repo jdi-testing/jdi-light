@@ -2,23 +2,21 @@ package io.github.com.pages.inputs;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.inputs.RadioGroup;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.util.List;
 
-public class RadioButtonPage extends WebPage {
+public class RadioPage extends WebPage {
 
-    @UI("//h2[text()='Label placement']/preceding::span[contains(@Class,'MuiRadio-root')]")
-    public static List<Button> simpleRadioButtons;
+    @UI("#simpleRadio .MuiRadio-root")
+    public static List<RadioGroup> simpleRadioButtons;
 
-    @UI("//h2[text()='Label placement']/preceding::span[contains(@Class,'MuiFormControlLabel-label')]")
-    public static List<Button> simpleRadioButtonsLabel;
-
-    @UI("//p[@id='lastClickContent']")
+    @UI("#lastClickContent")
     public static Text lastRadioText;
 
-    @UI("//h2[text()='Label placement']/following::label")
+    @UI("h2['Label placement']  //h2[text()='Label placement']/following::label")
     public static List<Button> labelPlacementButtons;
 
     @UI("//h2[text()='Label placement']/following::span[@id='MuiButtonBase-root']")
