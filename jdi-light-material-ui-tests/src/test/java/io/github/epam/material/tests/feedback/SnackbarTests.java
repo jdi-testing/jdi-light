@@ -1,37 +1,34 @@
 package io.github.epam.material.tests.feedback;
 
-import com.jdiai.tools.Timer;
+import static io.github.com.StaticSite.snackbarPage;
+import static io.github.com.pages.feedback.SnackbarPage.changeTransitionSnackbar;
+import static io.github.com.pages.feedback.SnackbarPage.complementaryProjectsSnackbar;
+import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbar;
+import static io.github.com.pages.feedback.SnackbarPage.controlSlideDirectionSnackbar;
+import static io.github.com.pages.feedback.SnackbarPage.customizedSnackbar;
+import static io.github.com.pages.feedback.SnackbarPage.directionButtons;
+import static io.github.com.pages.feedback.SnackbarPage.messageLength;
+import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbar;
+import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbarButtons;
+import static io.github.com.pages.feedback.SnackbarPage.showMessageButtons;
+import static io.github.com.pages.feedback.SnackbarPage.showSnackbarButtons;
+import static io.github.com.pages.feedback.SnackbarPage.simpleSnackbar;
+import static io.github.com.pages.feedback.SnackbarPage.simpleSnackbarButton;
+import static io.github.com.pages.feedback.SnackbarPage.successSnackbar;
+import static io.github.com.pages.feedback.SnackbarPage.successSnackbarButton;
+import static io.github.com.pages.feedback.SnackbarPage.transitionButtons;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.snackbarPage;
-import static io.github.com.pages.feedback.SnackbarPage.closePopUpSnackbarButton;
-import static io.github.com.pages.feedback.SnackbarPage.closePopUpSuccessButton;
-import static io.github.com.pages.feedback.SnackbarPage.customizedSnackbarPopUpStyles;
-import static io.github.com.pages.feedback.SnackbarPage.customizedSnackbarPopUpTitles;
-import static io.github.com.pages.feedback.SnackbarPage.messageLengthContent;
-import static io.github.com.pages.feedback.SnackbarPage.messageLengthContentButtons;
-import static io.github.com.pages.feedback.SnackbarPage.notisnackPopUpText;
-import static io.github.com.pages.feedback.SnackbarPage.otherButtons;
-import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbarButtons;
-import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbarPopUp;
-import static io.github.com.pages.feedback.SnackbarPage.simpleSnackbarButton;
-import static io.github.com.pages.feedback.SnackbarPage.simpleSnackbarPopUp;
-import static io.github.com.pages.feedback.SnackbarPage.snackbarPopUpText;
-import static io.github.com.pages.feedback.SnackbarPage.successSnackbarButton;
-import static io.github.com.pages.feedback.SnackbarPage.successSnackbarPopUp;
-import static io.github.com.pages.feedback.SnackbarPage.undoSnackbarButton;
-import static org.hamcrest.Matchers.containsString;
-
-/**
- * To see an example of Snackbar web element please visit
- * https://material-ui.com/components/snackbars/
- */
-
 public class SnackbarTests extends TestsInit {
-
-    private static Timer timer = new Timer(2000L);
+    private static final String[] POSITION = {"Top Center", "Top Right", "Bottom Right", "Bottom Center", "Bottom Left", "Top Left"};
+    private static final String[] MESSAGE = {"SHOW MESSAGE A", "SHOW MESSAGE B", "Message A", "Message B"};
+    private static final String LOVE_SNACKS = "I love snacks";
+    private static final String LOREM = "lorem ipsum dolorem";
+    private static final String LOVE_CANDY = "I love candy. I love cookies. I love cupcakes.";
+    private static final String LOVE_CHEESECAKE = "I love cheesecake. I love chocolate.";
+    private static final String UNDO = "UNDO";
 
     @BeforeMethod
     public void before() {
@@ -43,192 +40,111 @@ public class SnackbarTests extends TestsInit {
     @Test
     public void simpleSnackbarTest() {
 
-        simpleSnackbarPopUp.is().notVisible();
+        simpleSnackbar.is().notVisible();
         simpleSnackbarButton.click();
-        timer.wait(() -> simpleSnackbarPopUp.isDisplayed());
-        simpleSnackbarPopUp.is().text("Note archived");
-        undoSnackbarButton.is().text("UNDO");
-        undoSnackbarButton.click();
-        timer.wait(() -> simpleSnackbarPopUp.waitFor().hidden());
-        simpleSnackbarPopUp.is().notVisible();
+        simpleSnackbar.waitFor().displayed();
+        simpleSnackbar.has().text("Note archived");
+        simpleSnackbar.snackbarButton(UNDO).click();
+        simpleSnackbar.waitFor().hidden();
+        simpleSnackbar.is().notVisible();
         simpleSnackbarButton.click();
-        timer.wait(() -> simpleSnackbarPopUp.isDisplayed());
-        closePopUpSnackbarButton.click();
-        simpleSnackbarPopUp.is().notVisible();
+        simpleSnackbar.waitFor().displayed();
+        simpleSnackbar.close();
+        simpleSnackbar.is().notVisible();
     }
 
     @Test
     public void customizedSnackbarTest() {
 
-        customizedSnackbarPopUpTitles.get(1).is().text("This is an error message!");
-        customizedSnackbarPopUpStyles.get(1).has().classValue(containsString("MuiAlert-filledError"));
-        customizedSnackbarPopUpTitles.get(2).is().text("This is a warning message!");
-        customizedSnackbarPopUpStyles.get(2).has().classValue(containsString("MuiAlert-filledWarning"));
-        customizedSnackbarPopUpTitles.get(3).is().text("This is an information message!");
-        customizedSnackbarPopUpStyles.get(3).has().classValue(containsString("MuiAlert-filledInfo"));
-        customizedSnackbarPopUpTitles.get(4).is().text("This is a success message!");
-        customizedSnackbarPopUpStyles.get(4).has().classValue(containsString("MuiAlert-filledSuccess"));
-
-        successSnackbarPopUp.is().notVisible();
+        successSnackbar.is().notVisible();
         successSnackbarButton.click();
-        successSnackbarPopUp.is().displayed();
-        successSnackbarPopUp.is().text("This is a success message!");
-        closePopUpSuccessButton.click();
-        successSnackbarPopUp.is().notVisible();
+        successSnackbar.is().displayed();
+        successSnackbar.has().text("This is a success message!");
+        successSnackbar.close();
+        successSnackbar.is().notVisible();
+
+        customizedSnackbar.get(1).has().text("This is an error message!").and().messageType("error");
+        customizedSnackbar.get(2).has().text("This is a warning message!").and().messageType("warning");
+        customizedSnackbar.get(3).has().text("This is an information message!").and().messageType("info");
+        customizedSnackbar.get(4).has().text("This is a success message!").and().messageType("success");
     }
 
     @Test
     public void positionedSnackbarTest() {
 
-        positionedSnackbarButtons.get(1).click();
-        snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(containsString("TopCenter"));
-        positionedSnackbarButtons.get(1).click();
-        timer.wait(() -> snackbarPopUpText.waitFor().hidden());
-
-        positionedSnackbarButtons.get(2).click();
-        snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(containsString("TopRight"));
-        positionedSnackbarButtons.get(2).click();
-        timer.wait(() -> snackbarPopUpText.waitFor().hidden());
-
-        positionedSnackbarButtons.get(3).click();
-        snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(containsString("BottomRight"));
-        positionedSnackbarButtons.get(3).click();
-        timer.wait(() -> snackbarPopUpText.waitFor().hidden());
-
-        positionedSnackbarButtons.get(4).click();
-        snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(containsString("BottomCenter"));
-        positionedSnackbarButtons.get(4).click();
-        timer.wait(() -> snackbarPopUpText.waitFor().hidden());
-
-        positionedSnackbarButtons.get(5).click();
-        snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(containsString("BottomLeft"));
-        positionedSnackbarButtons.get(5).click();
-        timer.wait(() -> snackbarPopUpText.waitFor().hidden());
-
-        positionedSnackbarButtons.get(6).click();
-        snackbarPopUpText.is().text("I love snacks");
-        positionedSnackbarPopUp.has().classValue(containsString("TopLeft"));
-        positionedSnackbarButtons.get(6).click();
-        timer.wait(() -> snackbarPopUpText.waitFor().hidden());
+        for (int i = 1; i <= 6; i++) {
+            positionedSnackbarButtons.get(i).click();
+            positionedSnackbar.has().text(LOVE_SNACKS).and().position(POSITION[i - 1]);
+            positionedSnackbarButtons.get(i).click();
+            positionedSnackbar.waitFor().hidden();
+        }
     }
 
     @Test
     public void messageLengthTest() {
 
-        messageLengthContent.get(1).is().text("I love snacks.");
-        messageLengthContentButtons.get(1).click();
-        messageLengthContentButtons.get(1).is().text("LOREM IPSUM DOLOREM");
+        messageLength.get(1).has().text(LOVE_SNACKS + ".");
+        messageLength.get(1).snackbarButton(LOREM).click();
 
-        messageLengthContent.get(2).is().text("I love candy. I love cookies. I love cupcakes. I love cheesecake. I love chocolate.");
+        messageLength.get(2).has().text(LOVE_CANDY + " " + LOVE_CHEESECAKE);
 
-        messageLengthContent.get(3).is().text("I love candy. I love cookies. I love cupcakes.");
-        messageLengthContentButtons.get(2).click();
+        messageLength.get(3).has().text(LOVE_CANDY);
+        messageLength.get(3).snackbarButton(LOREM).click();
 
-        messageLengthContent.get(4).is().text("I love candy. I love cookies. I love cupcakes. I love cheesecake. I love chocolate.");
-        messageLengthContentButtons.get(3).click();
+        messageLength.get(4).has().text(LOVE_CANDY + " " + LOVE_CHEESECAKE);
+        messageLength.get(4).snackbarButton(LOREM).click();
     }
 
     @Test
     public void consecutiveSnackbarsTest() {
 
-        otherButtons.get(1).is().displayed();
-        otherButtons.get(1).has().text("SHOW MESSAGE A");
-        otherButtons.get(1).click();
+        for (int i = 1; i <= 2; i++) {
+            showMessageButtons.get(i).is().displayed().and().text(MESSAGE[i - 1]);
+            showMessageButtons.get(i).click();
+            consecutiveSnackbar.waitFor().displayed();
+            consecutiveSnackbar.has().text(MESSAGE[i + 1]);
+            consecutiveSnackbar.close();
+            consecutiveSnackbar.waitFor().notVisible();
 
-        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().displayed());
-        snackbarPopUpText.has().text("Message A");
-
-        undoSnackbarButton.is().displayed();
-        undoSnackbarButton.click();
-        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().notVisible());
-
-        otherButtons.get(1).click();
-        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().displayed());
-        snackbarPopUpText.has().text("Message A");
-
-        closePopUpSnackbarButton.base().timer().wait(() -> closePopUpSnackbarButton.is().displayed());
-        closePopUpSnackbarButton.click();
-        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().notVisible());
-
-        otherButtons.get(2).is().displayed();
-        otherButtons.get(2).has().text("SHOW MESSAGE B");
-        otherButtons.get(2).click();
-
-        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().displayed());
-        snackbarPopUpText.has().text("Message B");
-
-        undoSnackbarButton.is().displayed();
-        undoSnackbarButton.click();
-        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().notVisible());
-
-        otherButtons.get(2).click();
-        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().displayed());
-        snackbarPopUpText.has().text("Message B");
-
-        closePopUpSnackbarButton.base().timer().wait(() -> closePopUpSnackbarButton.is().displayed());
-        closePopUpSnackbarButton.click();
-        snackbarPopUpText.base().timer().wait(() -> snackbarPopUpText.is().notVisible());
+            showMessageButtons.get(i).click();
+            consecutiveSnackbar.waitFor().displayed();
+            consecutiveSnackbar.snackbarButton(UNDO).click();
+            consecutiveSnackbar.waitFor().notVisible();
+        }
     }
 
     @Test
     public void changeTransitionSnackbarTest() {
-
-        otherButtons.get(3).click();
-        timer.wait(() -> snackbarPopUpText.isVisible());
-        snackbarPopUpText.is().text("I love snacks");
-
-        otherButtons.get(4).click();
-        timer.wait(() -> snackbarPopUpText.isVisible());
-        snackbarPopUpText.is().text("I love snacks");
-
-        otherButtons.get(5).click();
-        timer.wait(() -> snackbarPopUpText.isVisible());
-        snackbarPopUpText.is().text("I love snacks");
+        for (int i = 1; i <= 3; i++) {
+            transitionButtons.get(i).click();
+            changeTransitionSnackbar.waitFor().displayed();
+            changeTransitionSnackbar.has().text(LOVE_SNACKS);
+        }
     }
 
     @Test
     public void controlSlideDirectionSnackbarTest() {
-
-        otherButtons.get(6).click();
-        snackbarPopUpText.is().text("I love snacks");
-        otherButtons.get(6).click();
-        timer.wait(() -> snackbarPopUpText.waitFor().hidden());
-
-        otherButtons.get(7).click();
-        snackbarPopUpText.is().text("I love snacks");
-        otherButtons.get(7).click();
-        timer.wait(() -> snackbarPopUpText.waitFor().hidden());
-
-        otherButtons.get(8).click();
-        snackbarPopUpText.is().text("I love snacks");
-        otherButtons.get(8).click();
-        timer.wait(() -> snackbarPopUpText.waitFor().hidden());
-
-        otherButtons.get(9).click();
-        snackbarPopUpText.is().text("I love snacks");
-        otherButtons.get(9).click();
-        timer.wait(() -> snackbarPopUpText.waitFor().hidden());
+        for (int i = 1; i <= 4; i++) {
+            directionButtons.get(i).click();
+            controlSlideDirectionSnackbar.has().text(LOVE_SNACKS);
+            directionButtons.get(i).click();
+            controlSlideDirectionSnackbar.waitFor().hidden();
+        }
     }
 
     @Test
     public void complementaryProjectsSnackbarTest() {
 
-        otherButtons.get(10).click();
-        timer.wait(() -> notisnackPopUpText.isVisible());
-        notisnackPopUpText.is().text("I love snacks.");
-        timer.wait(() -> notisnackPopUpText.is().disappear());
-        timer.wait(() -> notisnackPopUpText.waitFor().hidden());
-        notisnackPopUpText.is().notVisible();
+        showSnackbarButtons.get(1).click();
+        complementaryProjectsSnackbar.waitFor().displayed();
+        complementaryProjectsSnackbar.has().text(LOVE_SNACKS + ".");
+        complementaryProjectsSnackbar.waitFor().disappear();
+        complementaryProjectsSnackbar.is().notVisible();
 
-        otherButtons.get(11).click();
-        timer.wait(() -> notisnackPopUpText.isVisible());
-        notisnackPopUpText.is().text("This is a success message!");
-        timer.wait(() -> notisnackPopUpText.is().disappear());
-        notisnackPopUpText.is().notVisible();
+        showSnackbarButtons.get(2).click();
+        complementaryProjectsSnackbar.waitFor().displayed();
+        complementaryProjectsSnackbar.has().text("This is a success message!");
+        complementaryProjectsSnackbar.waitFor().disappear();
+        complementaryProjectsSnackbar.is().notVisible();
     }
 }
