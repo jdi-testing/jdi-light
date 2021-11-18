@@ -6,10 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.lazyPage;
-import static io.github.com.pages.LazyPage.ITEM_TEXT;
-import static io.github.com.pages.LazyPage.ITEM_TITLE;
-import static io.github.com.pages.LazyPage.lazy;
-
+import static io.github.com.pages.LazyPage.*;
 
 public class LazyTests extends TestsInit {
 
