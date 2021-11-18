@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
@@ -30,7 +31,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     public TextArea getTextArea() {
         if(find(".MuiInputBase-root").attr("class").contains("multiline")) {
-//            return new TextArea().setCore(TextArea.class, find("//textarea[contains(@id, 'multiline')]"));
             return new TextArea().setCore(TextArea.class, find("//textarea[1]"));
         } else return new TextArea().setCore(TextArea.class, find("//input"));
     }
@@ -55,12 +55,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         if(helperText().core().isDisplayed()) {
             return helperText().getText();
         } else throw exception("{name} does not have helper text");
-    }
-
-    @Override
-    @JDIAction("Get '{name}'s label")
-    public Label label() {
-        return new Label().setCore(Label.class, find("label"));
     }
 
     @Override
@@ -111,6 +105,16 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         getTextArea().sendKeys(Keys.BACK_SPACE);
     }
 
+    @JDIAction("Get '{name}'s adornment")
+    public String hasAdornmentPosition() {
+        return adornment().position().replace("position", "").toLowerCase();
+    }
+
+    @JDIAction("Get '{name}'s adornment")
+    public String hasAdornmentText() {
+        return adornment().text();
+    }
+
     @Override
     public String getValue() {
         return hasText();
@@ -125,19 +129,25 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         getTextArea().sendKeys(value.toString());
     }
 
+    @Override
+    @JDIAction("Get '{name}'s label")
+    public Label label() {
+        return new Label().setCore(Label.class, find("label"));
+    }
+
     @JDIAction("Get '{name}'s adornment")
     public Adornment adornment() {
         return new Adornment().setCore(Adornment.class, find(".MuiInputAdornment-root"));
     }
 
-    @JDIAction("Get '{name}'s adornment")
-    public String hasAdornmentPosition() {
-        return adornment().position().replace("position", "").toLowerCase();
+    @JDIAction("Get '{name}'s select")
+    public Select select() {
+        return new Select().setCore(Select.class, find(".MuiInputBase-root"));
     }
 
-    @JDIAction("Get '{name}'s adornment")
-    public String hasAdornmentText() {
-        return adornment().text();
+    @JDIAction("Get '{name}'s dropdown")
+    public Dropdown dropdown() {
+        return new Dropdown().setCore(Dropdown.class, find(".MuiInputBase-root"));
     }
 
     @Override

@@ -11,6 +11,7 @@ import static io.github.com.StaticSite.textFieldPage;
 import static io.github.com.pages.inputs.TextFieldPage.formPropsTextFields;
 import static io.github.com.pages.inputs.TextFieldPage.inputAdornmentsTextFields;
 import static io.github.com.pages.inputs.TextFieldPage.multilineTextFields;
+import static io.github.com.pages.inputs.TextFieldPage.selectTextFields;
 import static io.github.com.pages.inputs.TextFieldPage.validationTextFields;
 import static io.github.epam.utils.StringUtils.generateRandomString;
 
@@ -219,13 +220,24 @@ public class TextFieldTests extends TestsInit {
     }
 
     @Test
-    public void selectTest() {
+    public void selectTextFieldTest() {
+        selectTextFields.get(1).label().has().text("Select");
+        selectTextFields.get(1).has().helperText("Please select your currency");
         for (CurrencyItems currency : CurrencyItems.values()) {
-            textFieldPage.selectElement.select(currency.ordinal() + 1);
-            textFieldPage.selectElement.has().selected(currency);
-            textFieldPage.selectNativeSelect.select(currency);
-            textFieldPage.selectNativeSelect.has().selected(currency);
+            selectTextFields.get(1).click();
+            selectTextFields.get(1).select().select(currency.ordinal() + 1);
+            selectTextFields.get(1).select().has().selected(currency);
         }
     }
 
+    @Test
+    public void selectNativeTextFieldTest() {
+        selectTextFields.get(2).label().has().text("Native select");
+        selectTextFields.get(2).has().helperText("Please select your currency");
+        for (CurrencyItems currency : CurrencyItems.values()) {
+            selectTextFields.get(2).click();
+            selectTextFields.get(2).dropdown().select(currency.ordinal() + 1);
+            selectTextFields.get(2).dropdown().has().selected(currency);
+        }
+    }
 }

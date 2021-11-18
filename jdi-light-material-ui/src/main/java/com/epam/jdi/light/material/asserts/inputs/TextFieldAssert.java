@@ -34,59 +34,58 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected value")
+    @JDIAction("Assert that '{name}' is empty")
     public TextFieldAssert empty() {
         jdiAssert(element().hasText(), Matchers.is(""));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected text")
+    @JDIAction("Assert that '{name}'s label has expected helper text")
     public TextFieldAssert helperText(String text) {
         jdiAssert(element().getHelperText(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected text")
+    @JDIAction("Assert that '{name}'s has placeholder")
     public TextFieldAssert placeholder() {
         jdiAssert(element().hasPlaceholder(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected text")
+    @JDIAction("Assert that '{name}' is focused")
     public TextFieldAssert focused() {
-        jdiAssert(element().isFocused(), Matchers.is(true));
+        jdiAssert(element().isFocused() ? "is focused" : "is not focused", Matchers.is("is focused"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected text")
+    @JDIAction("Assert that '{name}' is readonly")
     public TextFieldAssert readonly() {
         jdiAssert(element().isReadonly(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected text")
+    @JDIAction("Assert that '{name}' has expected type")
     public TextFieldAssert type(String type) {
         jdiAssert(element().hasType(), Matchers.is(type));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected text")
+    @JDIAction("Assert that '{name}' has error notification")
     public TextFieldAssert error() {
         jdiAssert(element().isError(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected text")
+    @JDIAction("Assert that '{name}'s adornment has expected position")
     public TextFieldAssert adornmentPosition(String position) {
         jdiAssert(element().hasAdornmentPosition(), Matchers.is(position));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected text")
+    @JDIAction("Assert that '{name}'s adornment has expected text")
     public TextFieldAssert adornmentText(String text) {
         jdiAssert(element().hasAdornmentText(), Matchers.is(text));
         return this;
     }
-
 
 }

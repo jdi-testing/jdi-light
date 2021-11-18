@@ -34,5 +34,5 @@ public class TextFieldPage extends WebPage {
     public Select selectElement;
 
     @UI("//select[@id='outlined-select-currency-native']")
-    public Dropdown selectNativeSelect;
+    public static Dropdown selectNativeSelect;
 }
