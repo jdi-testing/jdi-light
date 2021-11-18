@@ -1,12 +1,12 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.disabledTextArea;
-import static io.github.com.pages.HtmlElementsPage.textArea;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -47,11 +47,37 @@ public class TextAreaTests implements TestsInit {
         textArea.sendKeys("Test");
         assertEquals(textArea.getValue(), text+"Test");
     }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSetText_ThrowsException() {
+        textArea.setText(null);
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSetValue_ThrowsException() {
+        textArea.setValue(null);
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSendKeys_ThrowsException() {
+        textArea.sendKeys(null);
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_AsOneOfTheArguments_ToSendKeys_ThrowsException() {
+        textArea.sendKeys(null, "Test");
+    }
+
     @Test
     public void inputTest() {
         textArea.setText(text);
         textArea.input("New text");
         assertEquals(textArea.getText(), "New text");
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToInput_ThrowsException() {
+        textArea.input(null);
     }
 
     @Test
@@ -90,12 +116,24 @@ public class TextAreaTests implements TestsInit {
         textArea.setLines("line1", "line2");
         assertEquals(textArea.getText(), "line1\nline2");
     }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSetLines_ThrowsException() {
+        textArea.setLines("Line", null);
+    }
+
     @Test
     public void addLinesTest() {
         textArea.addNewLine("line1");
         textArea.addNewLine("line2");
         assertEquals(textArea.getText(), "line1\nline2");
     }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_AddNewLine_ThrowsException() {
+        textArea.addNewLine(null);
+    }
+
     @Test
     public void addEmptyLineTest() {
         textArea.addNewLine("line1");

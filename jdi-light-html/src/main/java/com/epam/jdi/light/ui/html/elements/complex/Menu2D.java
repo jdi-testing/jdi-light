@@ -1,6 +1,7 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.NullUserInputValueException;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.Selector;
@@ -130,6 +131,9 @@ public class Menu2D extends Selector implements ISetup {
      */
     @JDIAction("Select '{0}' value in '{name}'") @Override
     public void select(String value) {
+        if(value==null) {
+            throw new NullUserInputValueException();
+        }
         lastAction.execute(get(value));
     }
 
