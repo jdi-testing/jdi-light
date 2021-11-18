@@ -28,16 +28,63 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has helper text")
-    public TextFieldAssert helperTextField() {
-        jdiAssert(element().hasHelperText() ? "has helper text" : "does not have helper text",
-                Matchers.is("has helper text"));
+    @JDIAction("Assert that '{name}'s label has expected value")
+    public TextFieldAssert value(Float value) {
+        jdiAssert(element().hasText(), Matchers.is(value.toString()));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s label has expected value")
+    public TextFieldAssert empty() {
+        jdiAssert(element().hasText(), Matchers.is(""));
         return this;
     }
 
     @JDIAction("Assert that '{name}'s label has expected text")
     public TextFieldAssert helperText(String text) {
         jdiAssert(element().getHelperText(), Matchers.is(text));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s label has expected text")
+    public TextFieldAssert placeholder() {
+        jdiAssert(element().hasPlaceholder(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s label has expected text")
+    public TextFieldAssert focused() {
+        jdiAssert(element().isFocused(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s label has expected text")
+    public TextFieldAssert readonly() {
+        jdiAssert(element().isReadonly(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s label has expected text")
+    public TextFieldAssert type(String type) {
+        jdiAssert(element().hasType(), Matchers.is(type));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s label has expected text")
+    public TextFieldAssert error() {
+        jdiAssert(element().isError(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s label has expected text")
+    public TextFieldAssert adornmentPosition(String position) {
+        jdiAssert(element().hasAdornmentPosition(), Matchers.is(position));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s label has expected text")
+    public TextFieldAssert adornmentText(String text) {
+        jdiAssert(element().hasAdornmentText(), Matchers.is(text));
         return this;
     }
 

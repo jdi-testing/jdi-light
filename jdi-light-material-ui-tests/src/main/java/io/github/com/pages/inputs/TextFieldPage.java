@@ -23,7 +23,7 @@ public class TextFieldPage extends WebPage {
     @UI("//form[@id='formProps']/div[4]/div[contains(@class, 'MuiTextField-root')]")
     public static List<TextField> selectTextFields;
 
-    @UI("//form[@id='formProps']/div[4]/div[contains(@class, 'MuiFormControl-root')]")
+    @UI("//form[@id='formProps']/div[5]/div[contains(@class, 'MuiFormControl-root')]")
     public static List<TextField> inputAdornmentsTextFields;
 
 
