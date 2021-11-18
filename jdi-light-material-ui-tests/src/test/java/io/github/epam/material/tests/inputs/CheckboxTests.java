@@ -10,11 +10,14 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.checkboxPage;
-
-/**
- * To see an example of Checkbox web element please visit
- * https://material-ui.com/ru/components/checkboxes/
- */
+import static io.github.com.pages.inputs.CheckboxPage.basicCheckbox;
+import static io.github.com.pages.inputs.CheckboxPage.errorMessage;
+import static io.github.com.pages.inputs.CheckboxPage.formControlLabelCheckbox;
+import static io.github.com.pages.inputs.CheckboxPage.formControlLabelText;
+import static io.github.com.pages.inputs.CheckboxPage.formGroupCheckbox;
+import static io.github.com.pages.inputs.CheckboxPage.formGroupText;
+import static io.github.com.pages.inputs.CheckboxPage.labelPlacementCheckbox;
+import static io.github.com.pages.inputs.CheckboxPage.labelPlacementText;
 
 public class CheckboxTests extends TestsInit {
 
@@ -27,12 +30,12 @@ public class CheckboxTests extends TestsInit {
     private void checkboxTestLogic(Checkbox checkbox, String className) {
         if (checkbox.isEnabled()) {
             checkbox.check();
-            checkbox.is().checked();
+            checkbox.is().selected();
             checkbox.uncheck();
-            checkbox.is().unChecked();
+            checkbox.is().deselected();
         } else
             checkbox.is().disabled();
-        checkbox.is().hasClass(className);
+        checkbox.hasClass(className);
     }
 
     private void textTestLogic(Text text, String expectedText) {
@@ -41,11 +44,11 @@ public class CheckboxTests extends TestsInit {
 
     private void groupTestLogic(Checkbox firstCheckbox, Checkbox secondCheckbox) {
         firstCheckbox.check();
-        firstCheckbox.is().checked();
-        secondCheckbox.is().checked();
+        firstCheckbox.is().selected();
+        secondCheckbox.is().selected();
         firstCheckbox.uncheck();
-        firstCheckbox.is().unChecked();
-        secondCheckbox.is().unChecked();
+        firstCheckbox.is().deselected();
+        secondCheckbox.is().deselected();
     }
 
     private void groupTestErrorLogic(Checkbox firstCheckbox, Checkbox secondCheckbox, Text errorMessage) {
@@ -72,9 +75,9 @@ public class CheckboxTests extends TestsInit {
     public void basicCheckboxTest() {
         for (int i = 1; i < 3; i++)
             checkboxTestLogic(
-                    checkboxPage.basicCheckbox.get(i),
-                    i != 2 && i != 7 ? "MuiCheckbox-colorSecondary" :
-                            i == 2 ? "MuiCheckbox-colorPrimary" : "jss3");
+                    basicCheckbox.get(i),
+                    i != 2 ? "MuiCheckbox-colorSecondary" :
+                            "MuiCheckbox-colorPrimary");
     }
 
     @Test
@@ -83,10 +86,10 @@ public class CheckboxTests extends TestsInit {
                 "Disabled", "Indeterminate", "Custom color", "Custom icon", "Custom size"};
         for (int i = 1; i < 3; i++) {
             checkboxTestLogic(
-                    checkboxPage.formControlLabelCheckbox.get(i),
-                    i != 2 && i != 7 ? "MuiCheckbox-colorSecondary" :
-                            i == 2 ? "MuiCheckbox-colorPrimary" : "jss3");
-            textTestLogic(checkboxPage.formControlLabelText.get(i), expectedTexts[i - 1]);
+                    formControlLabelCheckbox.get(i),
+                    i != 2 ? "MuiCheckbox-colorSecondary" :
+                            "MuiCheckbox-colorPrimary");
+            textTestLogic(formControlLabelText.get(i), expectedTexts[i - 1]);
         }
     }
 
@@ -95,24 +98,24 @@ public class CheckboxTests extends TestsInit {
         String[] expectedTexts = new String[]{"Gilad Gray", "Jason Killian", "Antoine Llorca",
                 "Gilad Gray", "Jason Killian", "Antoine Llorca"};
         for (int i = 1; i < 3; i++) {
-            int secondCheckboxIndex = (i + 3) / 7 > 0 ? (i + 3) % 7 + 1 : (i + 3) % 7;
+            int secondCheckboxIndex = (i + 3) % 7;
             groupTestLogic(
-                    checkboxPage.formGroupCheckbox.get(i),
-                    checkboxPage.formGroupCheckbox.get(secondCheckboxIndex));
-            textTestLogic(checkboxPage.formGroupText.get(i), expectedTexts[i - 1]);
+                    formGroupCheckbox.get(i),
+                    formGroupCheckbox.get(secondCheckboxIndex));
+            textTestLogic(formGroupText.get(i), expectedTexts[i - 1]);
         }
         groupTestErrorLogic(
-                checkboxPage.formGroupCheckbox.get(1),
-                checkboxPage.formGroupCheckbox.get(2),
-                checkboxPage.errorMessage.get(2));
+                formGroupCheckbox.get(1),
+                formGroupCheckbox.get(2),
+                errorMessage.get(2));
     }
 
     @Test
     public void labelPlacementTest() {
         String[] expectedText = new String[]{"Top", "Start", "Bottom", "End"};
         for (int i = 1; i < 2; i++) {
-            checkboxTestLogic(checkboxPage.labelPlacementCheckbox.get(i), "MuiCheckbox-colorPrimary");
-            textTestLogic(checkboxPage.labelPlacementText.get(i), expectedText[i - 1]);
+            checkboxTestLogic(labelPlacementCheckbox.get(i), "MuiCheckbox-colorPrimary");
+            textTestLogic(labelPlacementText.get(i), expectedText[i - 1]);
         }
     }
 }

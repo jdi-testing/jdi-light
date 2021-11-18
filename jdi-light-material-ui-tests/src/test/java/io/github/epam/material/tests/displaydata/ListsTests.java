@@ -55,9 +55,9 @@ public class ListsTests extends TestsInit {
 
     @Test
     public void secondaryTextList() {
-        ListPage.enableSecondaryTextCheckbox.get(2).is().unChecked();
+        ListPage.enableSecondaryTextCheckbox.get(2).is().deselected();
         ListPage.enableSecondaryTextCheckbox.get(2).check();
-        ListPage.enableSecondaryTextCheckbox.get(2).is().checked();
+        ListPage.enableSecondaryTextCheckbox.get(2).is().selected();
         ListPage.secondaryLineListItems.get(1).is().text(hasToString("Secondary text"));
         ListPage.enableSecondaryTextCheckbox.get(2).uncheck();
         ListPage.secondaryLineListItems.get(1).is().notVisible();
