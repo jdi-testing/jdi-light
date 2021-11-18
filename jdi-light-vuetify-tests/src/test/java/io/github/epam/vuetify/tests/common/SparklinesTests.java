@@ -71,8 +71,6 @@ public class SparklinesTests extends TestsInit {
 
         fillSparklineWidthSlider.slideHorizontalTo(1);
         fillSparkline.has().lineWidth(1.0);
-        fillSparklineWidthSlider.slideHorizontalTo(7);
-        fillSparkline.has().lineWidth(7.0);
 
         String pathShapeBeforeRadiusSliderInteraction = fillSparkline.getPathShape();
         fillSparklineRadiusSlider.slideHorizontalTo(1);
@@ -82,11 +80,9 @@ public class SparklinesTests extends TestsInit {
         fillSparklinePaddingSlider.slideHorizontalTo(13);
         fillSparkline.has().pathShapeNotEqualTo(pathShapeBeforePaddingSliderInteraction);
 
+        fillSparkline.is().filled();
         fillSparklineFilledSwitch.uncheck();
         fillSparkline.is().notFilled();
-
-        fillSparklineFilledSwitch.check();
-        fillSparkline.is().filled();
     }
 
     @Test
