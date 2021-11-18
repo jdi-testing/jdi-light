@@ -7,7 +7,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.bottomNavigationPage;
-import static io.github.com.pages.BottomNavigationPage.*;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationColor;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationHideOnScroll;
+import static io.github.com.pages.BottomNavigationPage.hideAndScrollPanel;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationShift;
+import static io.github.com.pages.BottomNavigationPage.bottomNavigationToggle;
+import static io.github.com.pages.BottomNavigationPage.toggleNavigationButton;
 
 public class BottomNavigationTests extends TestsInit {
 
