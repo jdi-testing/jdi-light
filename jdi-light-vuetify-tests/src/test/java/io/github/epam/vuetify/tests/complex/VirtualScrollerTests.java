@@ -8,14 +8,16 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.virtualScrollerPage;
-import static io.github.com.pages.VirtualScrollerPage.*;
+import static io.github.com.pages.VirtualScrollerPage.benchScroller;
+import static io.github.com.pages.VirtualScrollerPage.totalBenched;
+import static io.github.com.pages.VirtualScrollerPage.userScroller;
 import static org.openqa.selenium.Keys.BACK_SPACE;
 import static org.openqa.selenium.Keys.CONTROL;
 
 public class VirtualScrollerTests extends TestsInit {
-    private static final int defaultNumberBenchItems = 5;
-    private static final int defaultNumberUserItems = 6;
-    private static final int defaultBenchNumber = 0;
+    private static final int DEFAULT_NUMBER_BENCH_ITEMS = 5;
+    private static final int DEFAULT_NUMBER_USER_ITEMS = 6;
+    private static final int DEFAULT_BENCH_NUMBER = 0;
 
     @BeforeClass
     public static void before() {
@@ -32,9 +34,9 @@ public class VirtualScrollerTests extends TestsInit {
         while (!totalBenched.getText().equals("")) {
             totalBenched.sendKeys(BACK_SPACE);
         }
-        totalBenched.setValue(String.valueOf(defaultBenchNumber));
+        totalBenched.setValue(String.valueOf(DEFAULT_BENCH_NUMBER));
 
-        benchScroller.has().renderedItems(defaultNumberBenchItems);
+        benchScroller.has().renderedItems(DEFAULT_NUMBER_BENCH_ITEMS);
     }
 
     @Test(dataProvider = "bench number", dataProviderClass = VirtualScrollerDataProvider.class)
@@ -48,11 +50,11 @@ public class VirtualScrollerTests extends TestsInit {
 
         int newBenchNumber = benchNumber;
         totalBenched.sendKeys(String.valueOf(newBenchNumber));
-        benchScroller.has().renderedItems(defaultNumberBenchItems + newBenchNumber);
+        benchScroller.has().renderedItems(DEFAULT_NUMBER_BENCH_ITEMS + newBenchNumber);
     }
 
     @Test(dataProvider = "bench number with scroll", dataProviderClass = VirtualScrollerDataProvider.class)
-    public static void changeRenderedBenchItemsWithScrollTest( Integer benchNumber, String itemText) {
+    public static void changeRenderedBenchItemsWithScrollTest(Integer benchNumber, String itemText) {
         benchScroller.is().displayed();
         benchScroller.show();
         benchScroller.has().items();
@@ -63,11 +65,11 @@ public class VirtualScrollerTests extends TestsInit {
         totalBenched.sendKeys(String.valueOf(newItemsNumber));
 
         benchScroller.scrollToElementWithText(itemText);
-        benchScroller.has().renderedItems(defaultNumberBenchItems + 2 * newItemsNumber);
+        benchScroller.has().renderedItems(DEFAULT_NUMBER_BENCH_ITEMS + 2 * newItemsNumber);
     }
 
     @Test(dataProvider = "pixels to scroll down", dataProviderClass = VirtualScrollerDataProvider.class)
-    public static void benchScrollDownToPositionTest( Integer pixelsToScrollDown) {
+    public static void benchScrollDownToPositionTest(Integer pixelsToScrollDown) {
         benchScroller.is().displayed();
         benchScroller.show();
         benchScroller.has().items();
@@ -83,7 +85,7 @@ public class VirtualScrollerTests extends TestsInit {
     }
 
     @Test(dataProvider = "pixels to scroll down and up", dataProviderClass = VirtualScrollerDataProvider.class)
-    public static void benchScrollDownAndUpToPositionTest( Integer pixelsToScrollDown, Integer pixelsToScrollUp) {
+    public static void benchScrollDownAndUpToPositionTest(Integer pixelsToScrollDown, Integer pixelsToScrollUp) {
         benchScroller.is().displayed();
         benchScroller.show();
         benchScroller.has().items();
@@ -115,11 +117,11 @@ public class VirtualScrollerTests extends TestsInit {
         userScroller.is().displayed();
         userScroller.show();
         userScroller.has().items();
-        userScroller.has().renderedItems(defaultNumberUserItems);
+        userScroller.has().renderedItems(DEFAULT_NUMBER_USER_ITEMS);
     }
 
     @Test(dataProvider = "pixels to scroll down", dataProviderClass = VirtualScrollerDataProvider.class)
-    public static void userScrollDownToPositionTest( Integer pixelsToScrollDown) {
+    public static void userScrollDownToPositionTest(Integer pixelsToScrollDown) {
         userScroller.is().displayed();
         userScroller.has().items();
         userScroller.show();
@@ -132,13 +134,13 @@ public class VirtualScrollerTests extends TestsInit {
     }
 
     @Test(dataProvider = "pixels to scroll down and up", dataProviderClass = VirtualScrollerDataProvider.class)
-    public static void userScrollDownAndUpToPositionTest( Integer pixelsToScrollDown, Integer pixelsToScrollUp) {
+    public static void userScrollDownAndUpToPositionTest(Integer pixelsToScrollDown, Integer pixelsToScrollUp) {
         userScroller.is().displayed();
         userScroller.has().items();
         userScroller.show();
 
         int startPosition = userScroller.position();
-        userScroller.scrollToPosition(startPosition+pixelsToScrollDown);
+        userScroller.scrollToPosition(startPosition + pixelsToScrollDown);
         int endPosition = userScroller.position();
         jdiAssert(endPosition, Matchers.greaterThan(startPosition));
 

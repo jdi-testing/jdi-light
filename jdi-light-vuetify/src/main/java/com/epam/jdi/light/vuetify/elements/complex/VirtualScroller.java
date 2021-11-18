@@ -15,7 +15,7 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
  */
 public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> {
 
-    protected String ITEM_LOCATOR = ".v-virtual-scroll__item";
+    protected static final String ITEM_LOCATOR = ".v-virtual-scroll__item";
 
     @JDIAction("Scroll to position '{0}' in '{name}'")
     public void scrollToPosition(int y) {
