@@ -1,38 +1,31 @@
 package com.epam.jdi.light.material.elements.inputs;
 
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.material.asserts.inputs.RadioAssert;
 
-public class RadioGroup extends UIListBase<RadioAssert>
-        implements IClickable, HasLabel, CanBeSelected {
+//.MuiFormGroup-root
+public class RadioGroup extends UIListBase<UISelectAssert<?,?>> {
 
-    @JDIAction("Check that '{name}' is enabled")
-    @Override
-    public boolean isEnabled() {
-        "MuiFormGroup-root";
-        return !core().hasClass("Mui-disabled") && super.isEnabled();
+    public RadioGroup() {
+        base().setLocator(".MuiRadio-root");
     }
 
     @Override
-    public RadioAssert is() {
-        return new RadioAssert().set(this);
-    }
-
-    @Override
-    public Label label() {
-        Label l = new Label().setCore(Label.class, find("../*[contains(@class, 'MuiFormControlLabel-label')]"));
-        l.setName("aa");
-        return l;
-    }
-
-    @Override
-    public void click() {
-        core().click();
+    @JDIAction("aaaa")
+    public UIElement get(String d) {
+        return list()
+                .map(element -> element.find("../*[contains(@class,'MuiTypography-root')]"))
+                .stream()
+                .filter(element -> element.getText().equalsIgnoreCase(d))
+                .findFirst().get();
     }
 }
