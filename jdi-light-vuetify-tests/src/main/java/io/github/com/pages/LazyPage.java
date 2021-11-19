@@ -10,5 +10,6 @@ public class LazyPage extends VuetifyPage {
     public static Lazy lazy;
 
     public static final String ITEM_TITLE = ".v-card__title";
+
     public static final String ITEM_TEXT = ".v-card__text";
 }

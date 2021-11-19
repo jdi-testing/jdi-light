@@ -14,13 +14,13 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 public class Lazy extends UIBaseElement<LazyAssert> implements ISetup {
 
-    protected String ITEM_LOCATOR = ".mx-auto.v-card";
+    protected String itemLocator = ".mx-auto.v-card";
 
     public UIElement hiddenItem() {
-        if (ITEM_LOCATOR.isEmpty()) {
+        if (itemLocator.isEmpty()) {
             return core();
         }
-        return $(ITEM_LOCATOR);
+        return $(itemLocator);
     }
 
     @Override
@@ -49,6 +49,6 @@ public class Lazy extends UIBaseElement<LazyAssert> implements ISetup {
         if (!field.isAnnotationPresent(JDILazy.class)) {
             return;
         }
-        ITEM_LOCATOR = field.getAnnotation(JDILazy.class).item();
+        itemLocator = field.getAnnotation(JDILazy.class).item();
     }
 }
