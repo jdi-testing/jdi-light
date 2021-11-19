@@ -11,13 +11,13 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
 
     @JDIAction("Assert that '{name}'s label has expected text")
     public TextFieldAssert text(String text) {
-        jdiAssert(element().hasText(), Matchers.is(text));
+        jdiAssert(element().getText(), Matchers.is(text));
         return this;
     }
 
     @JDIAction("Assert that '{name}'s label has expected value")
     public TextFieldAssert value(Float value) {
-        jdiAssert(element().hasText(), Matchers.is(value.toString()));
+        jdiAssert(element().getText(), Matchers.is(value.toString()));
         return this;
     }
 
@@ -72,7 +72,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
 
     @JDIAction("Assert that '{name}' has error notification")
     public TextFieldAssert error() {
-        jdiAssert(element().hasError()  ? "has error notification" : "does not have error notification",
+        jdiAssert(element().hasErrorNotification()  ? "has error notification" : "does not have error notification",
                 Matchers.is("has error notification"));
         return this;
     }

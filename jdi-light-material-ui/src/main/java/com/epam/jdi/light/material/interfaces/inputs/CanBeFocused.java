@@ -9,4 +9,5 @@ public interface CanBeFocused extends HasLabel {
     default boolean isFocused() {
         return label().attr("class").contains("Mui-focused");
     }
+
 }

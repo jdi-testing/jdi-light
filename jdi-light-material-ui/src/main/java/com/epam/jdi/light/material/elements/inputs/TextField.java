@@ -10,7 +10,9 @@ import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
 import com.epam.jdi.light.material.interfaces.inputs.CanBeFocused;
 import com.epam.jdi.light.material.interfaces.inputs.HasAdornment;
-import com.epam.jdi.light.ui.html.elements.common.Text;
+import com.epam.jdi.light.material.interfaces.inputs.HasErrorNotification;
+import com.epam.jdi.light.material.interfaces.inputs.HasHelperText;
+import com.epam.jdi.light.material.interfaces.inputs.HasPlaceholder;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import org.openqa.selenium.Keys;
 
@@ -20,7 +22,8 @@ import org.openqa.selenium.Keys;
  */
 
 public class TextField extends UIBaseElement<TextFieldAssert>
-        implements IsInput, HasClick, SetValue, HasAdornment, CanBeFocused {
+        implements IsInput, HasClick, SetValue, HasAdornment, CanBeFocused,
+        HasHelperText, HasErrorNotification, HasPlaceholder {
 
     @Override
     @JDIAction("Send text to '{name}'s text area")
@@ -37,35 +40,19 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     @JDIAction("'{name}'s text area is empty")
     public boolean isEmpty() {
-        return hasText().isEmpty();
+        return getText().isEmpty();
     }
 
+    @Override
     @JDIAction("'{name}'s text area has text")
-    public String hasText() {
+    public String getText() {
         return getTextArea().getText();
-    }
-
-    @JDIAction("'{name}' has helper text")
-    public String getHelperText() {
-        if(helperText().core().isDisplayed()) {
-            return helperText().getText();
-        } else return null;
     }
 
     @Override
     @JDIAction("Is '{name}' disabled")
     public boolean isDisabled() {
         return label().attr("class").contains("Mui-disabled");
-    }
-
-    @JDIAction("Does '{name}' has placeholder")
-    public boolean hasPlaceholder() {
-        return label().attr("data-shrink").equals("false");
-    }
-
-    @JDIAction("Does '{name}' have error notification")
-    public boolean hasError() {
-        return label().attr("class").contains("Mui-error");
     }
 
     @Override
@@ -98,7 +85,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @Override
     public String getValue() {
-        return hasText();
+        return getText();
     }
 
     @Override
@@ -124,11 +111,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Get '{name}'s label")
     public Label label() {
         return new Label().setCore(Label.class, find("label"));
-    }
-
-    @JDIAction("'{name}' has helper text")
-    private Text helperText() {
-        return new Text().setCore(Text.class, find("p.MuiFormHelperText-root"));
     }
 
     @JDIAction("Get '{name}'s select")
