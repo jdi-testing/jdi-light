@@ -9,19 +9,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
 
-
-    @JDIAction("Assert that '{name}' is enabled")
-    public TextFieldAssert enabled() {
-        jdiAssert(element().isEnabled() ? "is enabled" : "is disabled", Matchers.is("is enabled"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is disabled")
-    public TextFieldAssert disabled() {
-        jdiAssert(element().isDisabled() ? "is disabled" : "is enabled", Matchers.is("is disabled"));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}'s label has expected text")
     public TextFieldAssert text(String text) {
         jdiAssert(element().hasText(), Matchers.is(text));
@@ -40,27 +27,40 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is enabled")
+    public TextFieldAssert enabled() {
+        jdiAssert(element().isEnabled() ? "is enabled" : "is disabled", Matchers.is("is enabled"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is disabled")
+    public TextFieldAssert disabled() {
+        jdiAssert(element().isDisabled() ? "is disabled" : "is enabled", Matchers.is("is disabled"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is readonly")
+    public TextFieldAssert readonly() {
+        jdiAssert(element().isReadonly() ? "is readonly" : "is not readonly", Matchers.is("is readonly"));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}'s label has expected helper text")
     public TextFieldAssert helperText(String text) {
-        jdiAssert(element().getHelperText(), Matchers.is(text));
+        jdiAssert(element().hasHelperText(), Matchers.is(text));
         return this;
     }
 
     @JDIAction("Assert that '{name}'s has placeholder")
     public TextFieldAssert placeholder() {
-        jdiAssert(element().hasPlaceholder(), Matchers.is(true));
+        jdiAssert(element().hasPlaceholder() ? "has placeholder" : "does not have placeholder",
+                Matchers.is("has placeholder"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is focused")
     public TextFieldAssert focused() {
         jdiAssert(element().isFocused() ? "is focused" : "is not focused", Matchers.is("is focused"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is readonly")
-    public TextFieldAssert readonly() {
-        jdiAssert(element().isReadonly(), Matchers.is(true));
         return this;
     }
 
@@ -72,19 +72,20 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
 
     @JDIAction("Assert that '{name}' has error notification")
     public TextFieldAssert error() {
-        jdiAssert(element().isError(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}'s adornment has expected position")
-    public TextFieldAssert adornmentPosition(String position) {
-        jdiAssert(element().hasAdornmentPosition(), Matchers.is(position));
+        jdiAssert(element().hasError()  ? "has error notification" : "does not have error notification",
+                Matchers.is("has error notification"));
         return this;
     }
 
     @JDIAction("Assert that '{name}'s adornment has expected text")
     public TextFieldAssert adornmentText(String text) {
         jdiAssert(element().hasAdornmentText(), Matchers.is(text));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s adornment has expected position")
+    public TextFieldAssert adornmentPosition(String position) {
+        jdiAssert(element().hasAdornmentPosition(), Matchers.is(position));
         return this;
     }
 

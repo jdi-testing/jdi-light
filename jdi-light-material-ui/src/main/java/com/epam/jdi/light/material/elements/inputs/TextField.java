@@ -22,18 +22,12 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.common.Exceptions.exception;
 
 /**
- * To see an example of Checkbox group List web element please visit
+ * To see examples of Text Field web elements please visit
  * https://mui.com/components/text-fields/
  */
 
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasClick, HasLabel, SetValue, HasPlaceholder {
-
-    public TextArea getTextArea() {
-        if(find(".MuiInputBase-root").attr("class").contains("multiline")) {
-            return new TextArea().setCore(TextArea.class, find("//textarea[1]"));
-        } else return new TextArea().setCore(TextArea.class, find("//input"));
-    }
 
     @JDIAction("Send text to '{name}'s text area")
     public void sendText(String text) {
@@ -46,15 +40,10 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @JDIAction("'{name}' has helper text")
-    private Text helperText() {
-        return new Text().setCore(Text.class, find("p.MuiFormHelperText-root"));
-    }
-
-    @JDIAction("'{name}' has helper text")
-    public String getHelperText() {
+    public String hasHelperText() {
         if(helperText().core().isDisplayed()) {
             return helperText().getText();
-        } else throw exception("{name} does not have helper text");
+        } else throw exception("Text Field does not have helper text");
     }
 
     @Override
@@ -73,8 +62,8 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return label().attr("class").contains("Mui-focused");
     }
 
-    @JDIAction("Is '{name}' marked as error")
-    public boolean isError() {
+    @JDIAction("Does '{name}' have error notification")
+    public boolean hasError() {
         return label().attr("class").contains("Mui-error");
     }
 
@@ -89,7 +78,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return getTextArea().hasAttribute("readonly");
     }
 
-    @JDIAction("'{name}' has type")
+    @JDIAction("Does '{name}' have expected type")
     public String hasType() {
         return getTextArea().attr("type");
     }
@@ -105,12 +94,12 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         getTextArea().sendKeys(Keys.BACK_SPACE);
     }
 
-    @JDIAction("Get '{name}'s adornment")
+    @JDIAction("'{name}'s adornment's position")
     public String hasAdornmentPosition() {
         return adornment().position().replace("position", "").toLowerCase();
     }
 
-    @JDIAction("Get '{name}'s adornment")
+    @JDIAction("'{name}'s adornment's text")
     public String hasAdornmentText() {
         return adornment().text();
     }
@@ -121,18 +110,33 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @Override
+    @JDIAction("Send text to '{name}'s text area")
     public void setValue(String value) {
         sendText(value);
     }
 
+    @JDIAction("Set value of '{name}'s text area")
     public void setValue(Float value) {
-        getTextArea().sendKeys(value.toString());
+        if(hasType().equals("number")) {
+            getTextArea().sendKeys(value.toString());
+        }
+    }
+
+    private TextArea getTextArea() {
+        if(find(".MuiInputBase-root").attr("class").contains("multiline")) {
+            return new TextArea().setCore(TextArea.class, find("//textarea[1]"));
+        } else return new TextArea().setCore(TextArea.class, find("//input"));
     }
 
     @Override
     @JDIAction("Get '{name}'s label")
     public Label label() {
         return new Label().setCore(Label.class, find("label"));
+    }
+
+    @JDIAction("'{name}' has helper text")
+    private Text helperText() {
+        return new Text().setCore(Text.class, find("p.MuiFormHelperText-root"));
     }
 
     @JDIAction("Get '{name}'s adornment")
@@ -160,6 +164,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return is();
     }
 
+
     public static class Adornment extends UIBaseElement<TextAssert>
         implements IsButton {
 
@@ -186,6 +191,5 @@ public class TextField extends UIBaseElement<TextFieldAssert>
                 getButton().click();
             } else throw exception("Adornment does not contain button");
         }
-
     }
 }
