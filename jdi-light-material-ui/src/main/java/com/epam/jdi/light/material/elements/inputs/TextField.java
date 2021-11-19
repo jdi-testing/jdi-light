@@ -74,13 +74,8 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     @JDIAction("Clear '{name}'s text field")
     public void clear() {
-        click();
-        getTextArea().clear();
-        while (!getTextArea().getText().equals("")) {
-            getTextArea().sendKeys(Keys.BACK_SPACE);
-        }
-        getTextArea().sendKeys(Keys.SPACE);
-        getTextArea().sendKeys(Keys.BACK_SPACE);
+        getTextArea().sendKeys(Keys.CONTROL + "a");
+        getTextArea().sendKeys(Keys.DELETE);
     }
 
     @Override
