@@ -7,7 +7,6 @@ import com.epam.jdi.light.material.asserts.inputs.AdornmentAssert;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 
@@ -20,12 +19,15 @@ public class Adornment extends UIBaseElement<AdornmentAssert>
         return find("p").getText();
     }
 
+    /**
+     * Method 'getPosition' will return one of two possible positions of the adornment: 'start' or 'end'.
+     */
     @JDIAction("Get '{name}'s position")
     public String getPosition() {
         return Arrays.stream(attr("class")
                         .split("[^a-zA-Z0-9]"))
                 .filter(s -> s.startsWith("position"))
-                .collect(Collectors.joining())
+                .findAny().orElse("could not find")
                 .replace("position", "")
                 .toLowerCase();
     }

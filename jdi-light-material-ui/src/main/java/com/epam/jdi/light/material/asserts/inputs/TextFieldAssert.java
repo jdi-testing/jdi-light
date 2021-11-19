@@ -53,9 +53,14 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
 
     @JDIAction("Assert that '{name}'s has placeholder")
     public TextFieldAssert placeholder() {
-        jdiAssert(element().
-                        hasPlaceholder() ? "has placeholder" : "does not have placeholder",
+        jdiAssert(element().hasPlaceholder() ? "has placeholder" : "does not have placeholder",
                 Matchers.is("has placeholder"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}'s has placeholder")
+    public TextFieldAssert placeholderText(String text) {
+        jdiAssert(element().getPlaceHolderText(), Matchers.is(text));
         return this;
     }
 
@@ -72,9 +77,9 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
     }
 
     @JDIAction("Assert that '{name}' has error notification")
-    public TextFieldAssert errorNotification() {
-        jdiAssert(element().hasErrorNotification()  ? "has error notification" : "does not have error notification",
-                Matchers.is("has error notification"));
+    public TextFieldAssert validationError() {
+        jdiAssert(element().hasValidationError()  ? "has validation error" : "does not have validation error",
+                Matchers.is("has validation error"));
         return this;
     }
 }

@@ -1,13 +1,13 @@
 package com.epam.jdi.light.material.interfaces.inputs;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
-public interface CanBeFocused extends HasLabel {
+public interface CanBeFocused extends ICoreElement {
 
     @JDIAction("Is '{name}' focused")
     default boolean isFocused() {
-        return label().attr("class").contains("Mui-focused");
+        return find(".Mui-focused").isDisplayed();
     }
 
 }

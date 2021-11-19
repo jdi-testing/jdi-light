@@ -84,6 +84,7 @@ public class TextFieldTests extends TestsInit {
     public void formPropsSearchTextFieldTests() {
         formPropsTextFields.get(6).has().type("search");
         formPropsTextFields.get(6).has().placeholder();
+        formPropsTextFields.get(6).has().placeholderText("Search field");
         formPropsTextFields.get(6).click();
         formPropsTextFields.get(6).is().focused();
         formPropsTextFields.get(6).sendKeys(randomString);
@@ -108,13 +109,14 @@ public class TextFieldTests extends TestsInit {
     @Test
     public void validateTextFieldTests() {
         validationTextFields.get(1).has().text(HELLO_WORLD);
-        validationTextFields.get(1).is().errorNotification();
+        validationTextFields.get(1).is().validationError();
         validationTextFields.get(1).click();
         validationTextFields.get(1).is().focused();
         validationTextFields.get(1).clear();
         validationTextFields.get(1).is().empty();
         validationTextFields.get(2).click();
         validationTextFields.get(1).has().placeholder();
+        validationTextFields.get(1).has().placeholderText("Error");
         validationTextFields.get(1).sendKeys(randomString);
         validationTextFields.get(1).has().text(randomString);
         validationTextFields.get(1).label().has().text("Error");
@@ -123,13 +125,14 @@ public class TextFieldTests extends TestsInit {
     @Test
     public void validateWitHelperTextFieldTests() {
         validationTextFields.get(2).has().text(HELLO_WORLD);
-        validationTextFields.get(2).is().errorNotification();
+        validationTextFields.get(2).is().validationError();
         validationTextFields.get(2).click();
         validationTextFields.get(2).is().focused();
         validationTextFields.get(2).clear();
         validationTextFields.get(2).is().empty();
         validationTextFields.get(1).click();
         validationTextFields.get(2).has().placeholder();
+        validationTextFields.get(2).has().placeholderText("Error");
         validationTextFields.get(2).sendKeys(randomString);
         validationTextFields.get(2).has().text(randomString);
         validationTextFields.get(2).label().has().text("Error");
@@ -151,7 +154,9 @@ public class TextFieldTests extends TestsInit {
     @Test
     public void outlinedTextareaMultilineTextFieldTests() {
         multilineTextFields.get(2).has().placeholder();
+        multilineTextFields.get(2).has().placeholderText("Multiline Placeholder");
         multilineTextFields.get(2).click();
+        multilineTextFields.get(2).has().placeholderText("Placeholder");
         multilineTextFields.get(2).is().focused();
         multilineTextFields.get(2).is().empty();
         multilineTextFields.get(2).sendKeys(randomString);

@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
 import com.epam.jdi.light.material.interfaces.inputs.CanBeFocused;
 import com.epam.jdi.light.material.interfaces.inputs.HasAdornment;
-import com.epam.jdi.light.material.interfaces.inputs.HasErrorNotification;
+import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
 import com.epam.jdi.light.material.interfaces.inputs.HasHelperText;
 import com.epam.jdi.light.material.interfaces.inputs.HasPlaceholder;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
@@ -23,7 +23,7 @@ import org.openqa.selenium.Keys;
 
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements IsInput, HasClick, SetValue, HasAdornment, CanBeFocused,
-        HasHelperText, HasErrorNotification, HasPlaceholder {
+        HasHelperText, HasValidationError, HasPlaceholder {
 
     @Override
     @JDIAction("Send text to '{name}'s text area")
@@ -119,6 +119,22 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @Override
+    public boolean hasPlaceholder() {
+        if (label().attr("data-shrink").equals("false")) {
+            return true;
+        } else return getTextArea().hasAttribute("placeholder");
+    }
+
+    @Override
+    public String getPlaceHolderText() {
+        if(hasPlaceholder()) {
+            if (label().attr("data-shrink").equals("false")) {
+                return label().getText();
+            } else return getTextArea().attr("placeholder");
+        } else return null;
+    }
+
+    @Override
     public TextFieldAssert is() {
         return new TextFieldAssert().set(this);
     }
@@ -127,4 +143,5 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     public TextFieldAssert has() {
         return is();
     }
+
 }
