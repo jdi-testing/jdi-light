@@ -1,13 +1,14 @@
 package io.github.epam.material.tests.navigation;
 
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.bottomNavigationPage;
-import static io.github.com.pages.navigation.BottomNavigationPage.currentPosition;
-import static io.github.com.pages.navigation.BottomNavigationPage.favorites;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static io.github.com.pages.navigation.BottomNavigationPage.*;
+
 
 /**
  * To see an example of Bottom Navigation web element please visit
@@ -17,21 +18,18 @@ import static org.testng.Assert.assertTrue;
 public class BottomNavigationTests extends TestsInit {
 
     @BeforeMethod
-    public void before(){
+    public void before() {
         bottomNavigationPage.open();
-        bottomNavigationPage.isOpened();
+        bottomNavigationPage.checkOpened();
     }
 
     @Test
-    public void defaultBottomNavigationTest(){
+    public void defaultBottomNavigationTest() {
+        bottomNavigationItems.get(1).click();
+        bottomNavigationItems.get(1).is().selected();
+        bottomNavigationItems.get(2).is().notSelected();
+        bottomNavigationItems.get(3).is().notSelected();
 
-        favorites.is().enabled();
-        assertTrue(favorites.core().text().contains("Favorites"));
-        assertFalse(favorites.isSelected());
-        favorites.core().click();
-        assertTrue(currentPosition.getText().contains("Favorites"));
-        favorites.is().selected();
-
+        jdiAssert(bottomNavigationItems.size(), Matchers.is(3));
     }
-
 }
