@@ -4,21 +4,23 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.RadioButtons;
 
-import java.util.List;
-
 public class RadioButtonsPage extends VuetifyPage {
 
-    @UI("#ColorsRadioButton div .v-radio")
-    public static RadioButtons colorRadioButtons;
 
-    @UI("#DirectionRadioButton div .v-radio")
-    public static List<RadioButtons> directionRadioButtons;
+    @UI("#ColorsRadioButton .col-12[1] [role=radio]")
+    public static RadioButtons colorLeftRadioButtons;
 
-    @UI("#MandatoryRadioButton div .v-radio")
-    public static List<RadioButtons> mandatoryRadioButtons;
+    @UI("#ColorsRadioButton .col-12[2] [role=radio]")
+    public static RadioButtons colorRightRadioButtons;
 
-    @UI("#LabelRadioButton div .v-radio")
-    public static List<RadioButtons> labelRadioButtons;
+    @UI("#DirectionRadioButton input[role = 'radio']")
+    public static RadioButtons directionRadioButtons;
+
+    @UI("#MandatoryRadioButton [role=radio]")
+    public static RadioButtons mandatoryRadioButtons;
+
+    @UI("#LabelRadioButton [role=radio]")
+    public static RadioButtons labelRadioButtons;
 
     @UI("#MandatoryRadioButton > p ")
     public static Label mandatoryText;

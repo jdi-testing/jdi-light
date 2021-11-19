@@ -1,64 +1,28 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.base.UIListBase;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.vuetify.asserts.RadioButtonAssert;
+import org.openqa.selenium.By;
 
 /**
  * To see example of Radio buttons web element please visit https://vuetifyjs.com/en/components/radio-buttons/
  */
 
-public class RadioButtons extends UIListBase<UISelectAssert<UISelectAssert<?,?>, RadioButtons>> { //UIBaseElement<RadioButtonAssert> implements HasLabel {
+public class RadioButtons extends com.epam.jdi.light.ui.html.elements.complex.RadioButtons implements HasLabel {
+
+    protected String labelLocator = "//ancestor::div[@class = 'v-input--selection-controls__input']//following-sibling::label";
+//    protected String colorLocator = "//following-sibling::div[contains(@class, 'v-input--selection-controls__ripple')]";
+
     @Override
-    public String selected() {
-        return super.selected();
+    public Label label() {
+        return new Label().setup(Label.class, j->j
+                .setLocator(By.xpath(labelLocator))
+                .setName(getName() + " label").setTypeName("Label"));
     }
 
-
-//    @JDIAction("Is '{name}' selected")
-//    public boolean isChecked() {
-//        return core().find("div input").attr("aria-checked").equalsIgnoreCase("true");
-//    }
-//
-//    @JDIAction("Is '{name}' not selected")
-//    public boolean isNotChecked() {
-//        return !isChecked();
-//    }
-//
-//    @JDIAction("Check '{name}'")
-//    public void check() {
-//        if (isNotChecked()) {
-//            this.core().click();
-//        }
-//    }
-//
-//    @Override
-//    public String labelText() {
-//        UIElement label = core().find("label");
-//        WebList list = label.finds("div");
-//        if (list.size() != 0) {
-//            return list.first().getText();
-//        }
-//        return label.getText();
-//    }
-//
-//    @JDIAction("Get '{name}' input color")
-//    public String inputColor() {
-//        return core().find("div .v-input--selection-controls__ripple").getCssValue("color");
-//    }
-//
-//    @JDIAction("Get '{name}' group direction")
-//    public String groupDirection() {
-//        return core().find("..").getCssValue("flex-direction");
-//    }
-//
-//    @Override
-//    public RadioButtonAssert is() {
-//        return new RadioButtonAssert().set(this);
+//    public String color() {
+//        find(labelLocator + "[text() = '"+selected()+"']")
+//        return core().find(colorLocator).getCssValue("color");
 //    }
 }
