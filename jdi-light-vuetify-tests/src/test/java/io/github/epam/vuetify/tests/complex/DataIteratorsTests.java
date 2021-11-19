@@ -1,6 +1,12 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.vuetify.elements.enums.TableTestData;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.CUPCAKE;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.DONUT;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.ECLAIR;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.FROZEN_YOGURT;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.ICE_CREAM_SANDWICH;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.JELLY_BEAN;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.LOLLIPOP;
 import static io.github.com.StaticSite.dataIteratorsPage;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
@@ -31,13 +37,13 @@ public class DataIteratorsTests extends TestsInit {
 
     @Test
     public static void headerFooterDataIteratorTest() {
-        headerFooterDataIterator.assertThat().columnTitle(1, TableTestData.FROZEN_YOGURT)
+        headerFooterDataIterator.assertThat().columnTitle(1, FROZEN_YOGURT.value())
                 .and().columnNotEmpty(1);
-        headerFooterDataIterator.assertThat().columnTitle(2, TableTestData.ICE_CREAM_SANDWICH)
+        headerFooterDataIterator.assertThat().columnTitle(2, ICE_CREAM_SANDWICH.value())
                 .and().columnNotEmpty(2);
-        headerFooterDataIterator.assertThat().columnTitle(3, TableTestData.ECLAIR)
+        headerFooterDataIterator.assertThat().columnTitle(3, ECLAIR.value())
                 .and().columnNotEmpty(3);
-        headerFooterDataIterator.assertThat().columnTitle(4, TableTestData.CUPCAKE)
+        headerFooterDataIterator.assertThat().columnTitle(4, CUPCAKE.value())
                 .and().columnNotEmpty(4);
 
         headerFooterDataIterator.assertThat().header("This is a header");
@@ -46,22 +52,22 @@ public class DataIteratorsTests extends TestsInit {
 
     @Test
     public static void filterDataIteratorTest() {
-        filterDataIterator.search(TableTestData.FROZEN_YOGURT);
-        filterDataIterator.has().columnTitle(1, TableTestData.FROZEN_YOGURT);
-        filterDataIterator.search(TableTestData.DONUT);
-        filterDataIterator.has().columnTitle(1, TableTestData.DONUT);
+        filterDataIterator.search(FROZEN_YOGURT.value());
+        filterDataIterator.has().columnTitle(1, FROZEN_YOGURT.value());
+        filterDataIterator.search(DONUT.value());
+        filterDataIterator.has().columnTitle(1, DONUT.value());
         filterDataIterator.clear();
 
-        filterDataIterator.assertThat().columnTitle(1, TableTestData.CUPCAKE)
-                .and().columnTitle(2, TableTestData.DONUT);
+        filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
+                .and().columnTitle(2, DONUT.value());
 
         filterDataIterator.sortAscend("Name");
-        filterDataIterator.assertThat().columnTitle(1, TableTestData.CUPCAKE)
-                .and().columnTitle(2, TableTestData.DONUT);
+        filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
+                .and().columnTitle(2, DONUT.value());
 
         filterDataIterator.sortDescend("Carbs");
-        filterDataIterator.assertThat().columnTitle(1, TableTestData.LOLLIPOP)
-                .and().columnTitle(2, TableTestData.JELLY_BEAN);
+        filterDataIterator.assertThat().columnTitle(1, LOLLIPOP.value())
+                .and().columnTitle(2, JELLY_BEAN.value());
 
         filterDataIterator.numberColumnsOnPage("8");
         filterDataIterator.has().number(8);

@@ -1,7 +1,16 @@
 package io.github.epam.vuetify.tests.complex;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import com.epam.jdi.light.vuetify.elements.enums.TableTestData;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.DONUT;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.ECLAIR;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.ECLAIR_CALORIES;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.FROZEN_YOGURT;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.HONEYCOMB;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.HONEYCOMB_CALORIES;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.ICE_CREAM_SANDWICH;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.JELLY_BEAN;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.KITKAT;
+import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.KITKAT_CALORIES;
 import static io.github.com.StaticSite.dataTablesPage;
 import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
 import static io.github.com.pages.DataTablesPage.customFilter;
@@ -56,18 +65,18 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void filterableTableTest() {
-        filterableTable.search(TableTestData.KITKAT_CALORIES);
-        filterableTable.assertThat().elementName(1, TableTestData.KITKAT);
+        filterableTable.search(KITKAT_CALORIES.value());
+        filterableTable.assertThat().elementName(1, KITKAT.value());
         filterableTable.clear();
         filterableTable.sortDescBy("Fat (g)");
     }
 
     @Test
     public static void footerPropsTableTest() {
-        footerPropsTable.assertThat().elementName(2, TableTestData.ICE_CREAM_SANDWICH)
+        footerPropsTable.assertThat().elementName(2, ICE_CREAM_SANDWICH.value())
                 .and().elementValue(2, "Ice cream");
         footerPropsTable.sortAscBy("Category");
-        footerPropsTable.assertThat().elementName(1, TableTestData.JELLY_BEAN)
+        footerPropsTable.assertThat().elementName(1, JELLY_BEAN.value())
                 .and().elementValue(2, "Candy");
     }
 
@@ -84,10 +93,10 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void hideHeaderFooterTableTest() {
-        hideHeaderFooterTable.assertThat().firstColumnHasElement(2, TableTestData.ICE_CREAM_SANDWICH);
+        hideHeaderFooterTable.assertThat().firstColumnHasElement(2, ICE_CREAM_SANDWICH.value());
         hideHeaderFooterTable.assertThat().elementValue(6, 3, "7%");
-        hideHeaderFooterTable.assertThat().firstColumnHasElement(8, TableTestData.HONEYCOMB);
-        hideHeaderFooterTable.assertThat().secondColumnHasElement(8, TableTestData.HONEYCOMB_CALORIES);
+        hideHeaderFooterTable.assertThat().firstColumnHasElement(8, HONEYCOMB.value());
+        hideHeaderFooterTable.assertThat().secondColumnHasElement(8, HONEYCOMB_CALORIES.value());
     }
 
     @Test
@@ -99,12 +108,12 @@ public class DataTablesTests extends TestsInit {
     public static void multiSortTableTest() {
         multiSortTable.sortOff("Calories");
         multiSortTable.sortDescBy("Protein");
-        multiSortTable.has().firstColumnHasElement(1, TableTestData.KITKAT);
+        multiSortTable.has().firstColumnHasElement(1, KITKAT.value());
         multiSortTable.is().sortedBy("Protein").and().sortedBy("Fat");
 
         multiSortTable.sortOff("Protein");
         multiSortTable.sortOff("Fat");
-        multiSortTable.has().firstColumnHasElement(1, TableTestData.FROZEN_YOGURT);
+        multiSortTable.has().firstColumnHasElement(1, FROZEN_YOGURT.value());
         multiSortTable.is().notSortedBy("Protein").and().notSortedBy("Fat");
     }
 
@@ -126,11 +135,11 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void searchTableTest() {
-        searchTable.search(TableTestData.DONUT);
-        searchTable.has().firstColumnHasElement(1, TableTestData.DONUT);
+        searchTable.search(DONUT.value());
+        searchTable.has().firstColumnHasElement(1, DONUT.value());
         searchTable.clear();
-        searchTable.search(TableTestData.ECLAIR_CALORIES);
-        searchTable.has().firstColumnHasElement(1, TableTestData.ECLAIR);
+        searchTable.search(ECLAIR_CALORIES.value());
+        searchTable.has().firstColumnHasElement(1, ECLAIR.value());
     }
 
     @Test
@@ -193,7 +202,7 @@ public class DataTablesTests extends TestsInit {
         editDialogTable.assertThat().elementName(3, "New Element");
         editDialogTable.editElement(6, "New Element2");
         editDialogTable.cancel();
-        editDialogTable.assertThat().firstColumnHasElement(6, TableTestData.JELLY_BEAN);
+        editDialogTable.assertThat().firstColumnHasElement(6, JELLY_BEAN.value());
     }
 
     @Test
@@ -220,15 +229,15 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void externalSortingTableTest() {
         externalSortingTable.sortWithButtonAsc(4);
-        externalSortingTable.has().firstColumnHasElement(TableTestData.ECLAIR);
+        externalSortingTable.has().firstColumnHasElement(ECLAIR.value());
         externalSortingTable.sortNextColumn();
-        externalSortingTable.has().firstColumnHasElement(TableTestData.JELLY_BEAN);
+        externalSortingTable.has().firstColumnHasElement(JELLY_BEAN.value());
     }
 
     @Test
     public static void serverSideTableTest() {
         serverSideTable.sortDescBy("Calories");
-        serverSideTable.waitFor().firstColumnHasElement(TableTestData.KITKAT);
+        serverSideTable.waitFor().firstColumnHasElement(KITKAT.value());
     }
 
     //selects required element and verifies, that current element selected and previous element not selected

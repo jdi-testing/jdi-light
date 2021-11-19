@@ -39,26 +39,26 @@ public class SimpleTableAssert extends BaseTableAssert<SimpleTable, SimpleTableA
     }
 
     @JDIAction("Assert that {name} first column has required element")
-    public SimpleTableAssert firstColumnHasElement(int elNum, TableTestData data) {
-        jdiAssert(element().firstColumnElement(elNum), Matchers.is(data.value()));
+    public SimpleTableAssert firstColumnHasElement(int elNum, String data) {
+        jdiAssert(element().firstColumnElement(elNum), Matchers.is(data));
         return this;
     }
 
     @JDIAction("Assert that {name} first column has required element")
-    public SimpleTableAssert firstColumnHasElement(TableTestData data) {
-        jdiAssert(element().firstColumnElement(data), Matchers.is(data.value()));
+    public SimpleTableAssert firstColumnHasElement(String data) {
+        jdiAssert(element().firstColumnElement(data), Matchers.is(data));
         return this;
     }
 
     @JDIAction("Assert that {name} second column has required element")
-    public SimpleTableAssert secondColumnHasElement(int elNum, TableTestData data) {
-        jdiAssert(element().secondColumnElement(elNum), Matchers.is(data.value()));
+    public SimpleTableAssert secondColumnHasElement(int elNum, String data) {
+        jdiAssert(element().secondColumnElement(elNum), Matchers.is(data));
         return this;
     }
 
     @JDIAction("Assert that {name} second column has required element")
-    public SimpleTableAssert secondColumnHasElement(TableTestData data) {
-        jdiAssert(element().secondColumnElement(data), Matchers.is(data.value()));
+    public SimpleTableAssert secondColumnHasElement(String data) {
+        jdiAssert(element().secondColumnElement(data), Matchers.is(data));
         return this;
     }
 

@@ -48,12 +48,6 @@ public class DataIteratorAssert extends DataTableAssert {
         return this;
     }
 
-    @JDIAction("Assert that {name} column has title")
-    public DataIteratorAssert columnTitle(int colNum, TableTestData requiredTitle) {
-        jdiAssert(element().getColumnTitle(colNum), Matchers.is(requiredTitle.value()));
-        return this;
-    }
-
     @JDIAction("Assert that {name} has footer")
     public DataIteratorAssert footer(String requiredFooter) {
         jdiAssert(element().getTableFooter(), Matchers.is(requiredFooter));

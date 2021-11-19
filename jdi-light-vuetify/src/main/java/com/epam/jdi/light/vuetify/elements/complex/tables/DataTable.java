@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import com.epam.jdi.light.vuetify.asserts.tabs.DataTableAssert;
-import com.epam.jdi.light.vuetify.elements.enums.TableTestData;
 import java.util.LinkedList;
 import java.util.List;
 import org.openqa.selenium.Keys;
@@ -65,9 +64,9 @@ public class DataTable extends SimpleTable {
     }
 
     @JDIAction("Search required element in {name}")
-    public void search(TableTestData tableTestData) {
+    public void search(String tableTestData) {
         clear();
-        input().sendKeys(tableTestData.value().toUpperCase());
+        input().sendKeys(tableTestData.toUpperCase());
     }
 
     @JDIAction("Clear {name} input field")
