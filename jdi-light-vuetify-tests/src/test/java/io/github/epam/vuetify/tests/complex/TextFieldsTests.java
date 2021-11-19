@@ -12,7 +12,31 @@ import java.util.stream.Stream;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.textFieldsPage;
-import static io.github.com.pages.TextFieldsPage.*;
+import static io.github.com.pages.TextFieldsPage.counterTextField;
+import static io.github.com.pages.TextFieldsPage.clearableTextField;
+import static io.github.com.pages.TextFieldsPage.customColorsTextField;
+import static io.github.com.pages.TextFieldsPage.denseTextField;
+import static io.github.com.pages.TextFieldsPage.disabledTextField;
+import static io.github.com.pages.TextFieldsPage.readonlyTextField;
+import static io.github.com.pages.TextFieldsPage.filledTextField;
+import static io.github.com.pages.TextFieldsPage.hideDetailsTextField;
+import static io.github.com.pages.TextFieldsPage.hintTextField;
+import static io.github.com.pages.TextFieldsPage.visibleHintTextField;
+import static io.github.com.pages.TextFieldsPage.iconsTextField;
+import static io.github.com.pages.TextFieldsPage.outlinedTextField;
+import static io.github.com.pages.TextFieldsPage.prefixesAndSuffixesTextField;
+import static io.github.com.pages.TextFieldsPage.shapedTextField;
+import static io.github.com.pages.TextFieldsPage.singleLineTextField;
+import static io.github.com.pages.TextFieldsPage.soloTextField;
+import static io.github.com.pages.TextFieldsPage.validationTextField;
+import static io.github.com.pages.TextFieldsPage.iconEventsTextField;
+import static io.github.com.pages.TextFieldsPage.iconSlotsTextField;
+import static io.github.com.pages.TextFieldsPage.progressTextField;
+import static io.github.com.pages.TextFieldsPage.labelTextField;
+import static io.github.com.pages.TextFieldsPage.progressTextFieldProgressbar;
+import static io.github.com.pages.TextFieldsPage.customValidationTextField;
+import static io.github.com.pages.TextFieldsPage.fullWidthWithCounterTextField;
+import static io.github.com.pages.TextFieldsPage.passwordInputTextField;
 
 public class TextFieldsTests extends TestsInit {
 

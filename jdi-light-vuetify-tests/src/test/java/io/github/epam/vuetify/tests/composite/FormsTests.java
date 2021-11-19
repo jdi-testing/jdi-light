@@ -5,7 +5,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.formsPage;
-import static io.github.com.pages.FormsPage.*;
+import static io.github.com.pages.FormsPage.ruleForm;
+import static io.github.com.pages.FormsPage.validationWithSubmitClearForm;
+import static io.github.com.pages.FormsPage.veeValidateForm;
+import static io.github.com.pages.FormsPage.vuelidateForm;
 
 public class FormsTests extends TestsInit {
 
