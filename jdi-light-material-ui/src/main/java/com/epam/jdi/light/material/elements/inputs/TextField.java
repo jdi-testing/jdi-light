@@ -1,6 +1,5 @@
 package com.epam.jdi.light.material.elements.inputs;
 
-import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
@@ -9,15 +8,11 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
-import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
-import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.material.interfaces.inputs.HasAdornment;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import org.openqa.selenium.Keys;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 
@@ -27,7 +22,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
  */
 
 public class TextField extends UIBaseElement<TextFieldAssert>
-        implements HasClick, HasLabel, SetValue, HasPlaceholder {
+        implements HasClick, HasLabel, SetValue, HasPlaceholder, HasAdornment {
 
     @JDIAction("Send text to '{name}'s text area")
     public void sendText(String text) {
@@ -139,11 +134,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return new Text().setCore(Text.class, find("p.MuiFormHelperText-root"));
     }
 
-    @JDIAction("Get '{name}'s adornment")
-    public Adornment adornment() {
-        return new Adornment().setCore(Adornment.class, find(".MuiInputAdornment-root"));
-    }
-
     @JDIAction("Get '{name}'s select")
     public Select select() {
         return new Select().setCore(Select.class, find(".MuiInputBase-root"));
@@ -162,34 +152,5 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     public TextFieldAssert has() {
         return is();
-    }
-
-
-    public static class Adornment extends UIBaseElement<TextAssert>
-        implements IsButton {
-
-        @JDIAction("Adornment has text")
-        public String text() {
-            return find("p").getText();
-        }
-
-        @JDIAction("Adornment has position")
-        public String position() {
-            return Arrays.stream(attr("class")
-                    .split("[^a-zA-Z0-9]"))
-                    .filter(s -> s.startsWith("position"))
-                    .collect(Collectors.joining());
-        }
-
-        private Button getButton() {
-            return new Button().setCore(Button.class, find("button"));
-        }
-
-        @JDIAction("Click on adornment")
-        public void clickOnAdornment() {
-            if (getButton().isDisplayed()) {
-                getButton().click();
-            } else throw exception("Adornment does not contain button");
-        }
     }
 }
