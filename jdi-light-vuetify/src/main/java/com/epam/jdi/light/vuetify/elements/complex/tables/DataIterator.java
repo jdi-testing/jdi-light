@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import com.epam.jdi.light.vuetify.asserts.tabs.DataIteratorAssert;
+import com.epam.jdi.light.vuetify.asserts.tables.DataIteratorAssert;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,8 +15,8 @@ import java.util.Map;
  */
 
 public class DataIterator extends DataTable {
-    private final String title_path = "[class*='title']";
-    private final String list_item_path = "[role = 'listitem']";
+    private final String TITLE_PATH = "[class*='title']";
+    private final String LIST_ITEM_PATH = "[role = 'listitem']";
 
     private WebList dataIteratorElements() {
         return finds("[class^='col']");
@@ -69,21 +69,21 @@ public class DataIterator extends DataTable {
         Map<String, WebList> singleColumn = new HashMap<>();
         UIElement singleElement = dataIteratorElements().get(colNum);
         expandColumn(colNum);
-        String columnTitle = singleElement.find(title_path).getText();
-        singleColumn.put(columnTitle, singleElement.finds(list_item_path));
+        String columnTitle = singleElement.find(TITLE_PATH).getText();
+        singleColumn.put(columnTitle, singleElement.finds(LIST_ITEM_PATH));
         return singleColumn;
     }
 
     @JDIAction("Get {name} column")
     public WebList getColumn(int colNum) {
-        return dataIteratorElements().get(colNum).finds(list_item_path);
+        return dataIteratorElements().get(colNum).finds(LIST_ITEM_PATH);
     }
 
     @JDIAction("Get {name} column items")
     public List<String> getColumnItems(int colNum) {
         List<String> columnItemList = new LinkedList<>();
         expandColumn(colNum);
-        dataIteratorElements().get(colNum).finds(list_item_path).values().forEach(item -> {
+        dataIteratorElements().get(colNum).finds(LIST_ITEM_PATH).values().forEach(item -> {
             String finalItem = item.replaceAll("[\\t\\n\\r]+", " ");
             columnItemList.add(finalItem);
         });
@@ -92,7 +92,7 @@ public class DataIterator extends DataTable {
 
     @JDIAction("Get {name} column title")
     public String getColumnTitle(int colNum) {
-        return dataIteratorElements().get(colNum).find(title_path).getText();
+        return dataIteratorElements().get(colNum).find(TITLE_PATH).getText();
     }
 
     @JDIAction("Sorting {name} columns by option index by ascend")

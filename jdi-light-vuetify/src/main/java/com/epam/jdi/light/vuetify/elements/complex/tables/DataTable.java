@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import com.epam.jdi.light.vuetify.asserts.tabs.DataTableAssert;
+import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
 import java.util.LinkedList;
 import java.util.List;
 import org.openqa.selenium.Keys;
