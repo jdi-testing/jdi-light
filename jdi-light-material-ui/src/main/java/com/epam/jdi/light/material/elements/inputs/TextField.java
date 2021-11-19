@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
@@ -23,7 +24,7 @@ import org.openqa.selenium.Keys;
 
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements IsInput, HasClick, SetValue, HasAdornment, CanBeFocused,
-        HasHelperText, HasValidationError, HasPlaceholder {
+        HasHelperText, HasValidationError, HasPlaceholder, HasLabel {
 
     @Override
     @JDIAction("Send text to '{name}'s text area")
