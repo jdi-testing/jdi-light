@@ -37,7 +37,7 @@ public class TextFieldTests extends TestsInit {
         formPropsTextFields.get(1).has().type("text");
         formPropsTextFields.get(1).clear();
         formPropsTextFields.get(1).is().empty();
-        formPropsTextFields.get(1).sendText(randomString);
+        formPropsTextFields.get(1).sendKeys(randomString);
         formPropsTextFields.get(1).has().text(randomString);
         formPropsTextFields.get(1).label().has().text("Required *");
     }
@@ -55,7 +55,7 @@ public class TextFieldTests extends TestsInit {
         formPropsTextFields.get(3).has().type("password");
         formPropsTextFields.get(3).click();
         formPropsTextFields.get(3).is().focused();
-        formPropsTextFields.get(3).sendText(randomString);
+        formPropsTextFields.get(3).sendKeys(randomString);
         formPropsTextFields.get(3).has().text(randomString);
     }
 
@@ -86,7 +86,7 @@ public class TextFieldTests extends TestsInit {
         formPropsTextFields.get(6).has().placeholder();
         formPropsTextFields.get(6).click();
         formPropsTextFields.get(6).is().focused();
-        formPropsTextFields.get(6).sendText(randomString);
+        formPropsTextFields.get(6).sendKeys(randomString);
         formPropsTextFields.get(6).has().text(randomString);
         formPropsTextFields.get(6).clear();
         formPropsTextFields.get(6).is().empty();
@@ -100,7 +100,7 @@ public class TextFieldTests extends TestsInit {
         formPropsTextFields.get(7).is().focused();
         formPropsTextFields.get(7).clear();
         formPropsTextFields.get(7).is().empty();
-        formPropsTextFields.get(7).sendText(randomString);
+        formPropsTextFields.get(7).sendKeys(randomString);
         formPropsTextFields.get(7).has().text(randomString);
         formPropsTextFields.get(7).has().helperText("Some important text");
     }
@@ -115,7 +115,7 @@ public class TextFieldTests extends TestsInit {
         validationTextFields.get(1).is().empty();
         validationTextFields.get(2).click();
         validationTextFields.get(1).has().placeholder();
-        validationTextFields.get(1).sendText(randomString);
+        validationTextFields.get(1).sendKeys(randomString);
         validationTextFields.get(1).has().text(randomString);
         validationTextFields.get(1).label().has().text("Error");
     }
@@ -130,7 +130,7 @@ public class TextFieldTests extends TestsInit {
         validationTextFields.get(2).is().empty();
         validationTextFields.get(1).click();
         validationTextFields.get(2).has().placeholder();
-        validationTextFields.get(2).sendText(randomString);
+        validationTextFields.get(2).sendKeys(randomString);
         validationTextFields.get(2).has().text(randomString);
         validationTextFields.get(2).label().has().text("Error");
         validationTextFields.get(2).has().helperText("Incorrect entry.");
@@ -143,7 +143,7 @@ public class TextFieldTests extends TestsInit {
         multilineTextFields.get(1).is().focused();
         multilineTextFields.get(1).clear();
         multilineTextFields.get(1).is().empty();
-        multilineTextFields.get(1).sendText(randomString);
+        multilineTextFields.get(1).sendKeys(randomString);
         multilineTextFields.get(1).has().text(randomString);
         multilineTextFields.get(1).label().has().text("Multiline");
     }
@@ -154,7 +154,7 @@ public class TextFieldTests extends TestsInit {
         multilineTextFields.get(2).click();
         multilineTextFields.get(2).is().focused();
         multilineTextFields.get(2).is().empty();
-        multilineTextFields.get(2).sendText(randomString);
+        multilineTextFields.get(2).sendKeys(randomString);
         multilineTextFields.get(2).has().text(randomString);
    }
 
@@ -165,57 +165,57 @@ public class TextFieldTests extends TestsInit {
         multilineTextFields.get(3).is().focused();
         multilineTextFields.get(3).clear();
         multilineTextFields.get(3).is().empty();
-        multilineTextFields.get(3).sendText(randomString);
+        multilineTextFields.get(3).sendKeys(randomString);
         multilineTextFields.get(3).has().text(randomString);
         multilineTextFields.get(3).label().has().text("Multiline");
     }
 
     @Test
     public void standardAdornmentTextFieldTests() {
-        inputAdornmentsTextFields.get(1).has().adornmentPosition("start");
-        inputAdornmentsTextFields.get(1).has().adornmentText("Kg");
+        inputAdornmentsTextFields.get(1).adornment().has().position("start");
+        inputAdornmentsTextFields.get(1).adornment().has().text("Kg");
         inputAdornmentsTextFields.get(1).click();
         inputAdornmentsTextFields.get(1).is().focused();
         inputAdornmentsTextFields.get(1).is().empty();
-        inputAdornmentsTextFields.get(1).sendText(randomString);
+        inputAdornmentsTextFields.get(1).sendKeys(randomString);
         inputAdornmentsTextFields.get(1).has().text(randomString);
         inputAdornmentsTextFields.get(1).label().has().text("With normal TextField");
     }
 
     @Test
     public void standardWithHelperAdornmentTextFieldTests() {
-        inputAdornmentsTextFields.get(2).has().adornmentPosition("end");
-        inputAdornmentsTextFields.get(2).has().adornmentText("Kg");
+        inputAdornmentsTextFields.get(2).adornment().has().position("end");
+        inputAdornmentsTextFields.get(2).adornment().has().text("Kg");
         inputAdornmentsTextFields.get(2).is().empty();
-        inputAdornmentsTextFields.get(2).sendText(randomString);
+        inputAdornmentsTextFields.get(2).sendKeys(randomString);
         inputAdornmentsTextFields.get(2).has().text(randomString);
         inputAdornmentsTextFields.get(2).has().helperText("Weight");
     }
 
     @Test
     public void standardPasswordAdornmentTextFieldTests() {
-        inputAdornmentsTextFields.get(3).has().adornmentPosition("end");
+        inputAdornmentsTextFields.get(3).adornment().has().position("end");
         inputAdornmentsTextFields.get(3).has().placeholder();
         inputAdornmentsTextFields.get(3).has().type("password");
         inputAdornmentsTextFields.get(3).click();
         inputAdornmentsTextFields.get(3).is().focused();
-        inputAdornmentsTextFields.get(3).adornment().clickOnAdornment();
+        inputAdornmentsTextFields.get(3).adornment().click();
         inputAdornmentsTextFields.get(3).is().empty();
-        inputAdornmentsTextFields.get(3).sendText(randomString);
+        inputAdornmentsTextFields.get(3).sendKeys(randomString);
         inputAdornmentsTextFields.get(3).has().text(randomString);
-        inputAdornmentsTextFields.get(3).adornment().clickOnAdornment();
+        inputAdornmentsTextFields.get(3).adornment().click();
     }
 
     @Test
     public void standardAmountAdornmentTextFieldTests() {
-        inputAdornmentsTextFields.get(4).has().adornmentPosition("start");
+        inputAdornmentsTextFields.get(4).adornment().has().position("start");
         inputAdornmentsTextFields.get(4).label().has().text("Amount");
         inputAdornmentsTextFields.get(4).has().type("text");
-        inputAdornmentsTextFields.get(4).has().adornmentText(CurrencyItems.USD.value);
+        inputAdornmentsTextFields.get(4).adornment().has().text(CurrencyItems.USD.value);
         inputAdornmentsTextFields.get(4).click();
         inputAdornmentsTextFields.get(4).is().focused();
         inputAdornmentsTextFields.get(4).is().empty();
-        inputAdornmentsTextFields.get(4).sendText(randomString);
+        inputAdornmentsTextFields.get(4).sendKeys(randomString);
         inputAdornmentsTextFields.get(4).has().text(randomString);
     }
 

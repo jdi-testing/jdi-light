@@ -23,7 +23,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
 
     @JDIAction("Assert that '{name}' is empty")
     public TextFieldAssert empty() {
-        jdiAssert(element().hasText(), Matchers.is(""));
+        jdiAssert(element().isEmpty() ? "is empty" : "is not empty", Matchers.is("is empty"));
         return this;
     }
 
@@ -47,7 +47,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
 
     @JDIAction("Assert that '{name}'s label has expected helper text")
     public TextFieldAssert helperText(String text) {
-        jdiAssert(element().hasHelperText(), Matchers.is(text));
+        jdiAssert(element().getHelperText(), Matchers.is(text));
         return this;
     }
 
@@ -76,17 +76,4 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
                 Matchers.is("has error notification"));
         return this;
     }
-
-    @JDIAction("Assert that '{name}'s adornment has expected text")
-    public TextFieldAssert adornmentText(String text) {
-        jdiAssert(element().hasAdornmentText(), Matchers.is(text));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}'s adornment has expected position")
-    public TextFieldAssert adornmentPosition(String position) {
-        jdiAssert(element().hasAdornmentPosition(), Matchers.is(position));
-        return this;
-    }
-
 }

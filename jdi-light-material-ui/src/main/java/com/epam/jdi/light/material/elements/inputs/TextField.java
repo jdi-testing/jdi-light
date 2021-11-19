@@ -5,16 +5,14 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
+import com.epam.jdi.light.material.interfaces.inputs.CanBeFocused;
 import com.epam.jdi.light.material.interfaces.inputs.HasAdornment;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import org.openqa.selenium.Keys;
-
-import static com.epam.jdi.light.common.Exceptions.exception;
 
 /**
  * To see examples of Text Field web elements please visit
@@ -22,11 +20,24 @@ import static com.epam.jdi.light.common.Exceptions.exception;
  */
 
 public class TextField extends UIBaseElement<TextFieldAssert>
-        implements HasClick, HasLabel, SetValue, HasPlaceholder, HasAdornment {
+        implements IsInput, HasClick, SetValue, HasAdornment, CanBeFocused {
 
+    @Override
     @JDIAction("Send text to '{name}'s text area")
-    public void sendText(String text) {
+    public void sendKeys(CharSequence... text) {
         getTextArea().sendKeys(text);
+    }
+
+    @Override
+    @JDIAction("Set text is '{name}'s text area")
+    public void setText(String value) {
+        getTextArea().setText(value);
+    }
+
+    @Override
+    @JDIAction("'{name}'s text area is empty")
+    public boolean isEmpty() {
+        return hasText().isEmpty();
     }
 
     @JDIAction("'{name}'s text area has text")
@@ -35,10 +46,10 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @JDIAction("'{name}' has helper text")
-    public String hasHelperText() {
+    public String getHelperText() {
         if(helperText().core().isDisplayed()) {
             return helperText().getText();
-        } else throw exception("Text Field does not have helper text");
+        } else return null;
     }
 
     @Override
@@ -50,11 +61,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Does '{name}' has placeholder")
     public boolean hasPlaceholder() {
         return label().attr("data-shrink").equals("false");
-    }
-
-    @JDIAction("Is '{name}' focused")
-    public boolean isFocused() {
-        return label().attr("class").contains("Mui-focused");
     }
 
     @JDIAction("Does '{name}' have error notification")
@@ -78,6 +84,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return getTextArea().attr("type");
     }
 
+    @Override
     @JDIAction("Clear '{name}'s text field")
     public void clear() {
         click();
@@ -89,16 +96,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         getTextArea().sendKeys(Keys.BACK_SPACE);
     }
 
-    @JDIAction("'{name}'s adornment's position")
-    public String hasAdornmentPosition() {
-        return adornment().position().replace("position", "").toLowerCase();
-    }
-
-    @JDIAction("'{name}'s adornment's text")
-    public String hasAdornmentText() {
-        return adornment().text();
-    }
-
     @Override
     public String getValue() {
         return hasText();
@@ -107,7 +104,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     @JDIAction("Send text to '{name}'s text area")
     public void setValue(String value) {
-        sendText(value);
+        sendKeys(value);
     }
 
     @JDIAction("Set value of '{name}'s text area")
@@ -118,7 +115,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     private TextArea getTextArea() {
-        if(find(".MuiInputBase-root").attr("class").contains("multiline")) {
+        if (find(".MuiInputBase-root").attr("class").contains("multiline")) {
             return new TextArea().setCore(TextArea.class, find("//textarea[1]"));
         } else return new TextArea().setCore(TextArea.class, find("//input"));
     }
