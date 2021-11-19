@@ -108,7 +108,7 @@ public class TextFieldTests extends TestsInit {
     @Test
     public void validateTextFieldTests() {
         validationTextFields.get(1).has().text(HELLO_WORLD);
-        validationTextFields.get(1).is().error();
+        validationTextFields.get(1).is().errorNotification();
         validationTextFields.get(1).click();
         validationTextFields.get(1).is().focused();
         validationTextFields.get(1).clear();
@@ -123,7 +123,7 @@ public class TextFieldTests extends TestsInit {
     @Test
     public void validateWitHelperTextFieldTests() {
         validationTextFields.get(2).has().text(HELLO_WORLD);
-        validationTextFields.get(2).is().error();
+        validationTextFields.get(2).is().errorNotification();
         validationTextFields.get(2).click();
         validationTextFields.get(2).is().focused();
         validationTextFields.get(2).clear();
