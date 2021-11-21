@@ -29,16 +29,16 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 public class FileInput extends UIBaseElement<FileInputAssert>
         implements HasLabel, HasPlaceholder, IsInput, ISetup {
 
-    protected String FILES_LOCATOR = ".v-chip";
-    protected String INPUT = ".//input|.//textarea";
-    protected String MESSAGE = ".v-messages__message";
-    protected String COUNTER = ".v-counter";
-    protected String PREPEND_OUTER = ".v-input__prepend-outer";
-    protected String PREPEND_INNER = ".v-input__prepend-inner";
-    protected String APPEND_OUTER = ".v-input__append-outer";
-    protected String APPEND_INNER = ".v-input__append-inner";
-    protected String PREFIX = ".v-text-field__prefix";
-    protected String SUFFIX = ".v-text-field__suffix";
+    protected String filesLocator = ".v-chip";
+    private final String INPUT = ".//input";
+    private final String MESSAGE = ".v-messages__message";
+    private final String COUNTER = ".v-counter";
+    private final String PREPEND_OUTER = ".v-input__prepend-outer";
+    private final String PREPEND_INNER = ".v-input__prepend-inner";
+    private final String APPEND_OUTER = ".v-input__append-outer";
+    private final String APPEND_INNER = ".v-input__append-inner";
+    private final String PREFIX = ".v-text-field__prefix";
+    private final String SUFFIX = ".v-text-field__suffix";
 
     @JDIAction("Check that '{name}' can accept multiply files")
     public boolean isMultiply() {
@@ -53,7 +53,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
 
     @JDIAction("Get '{name}' files list")
     public WebList files() {
-        return finds(FILES_LOCATOR);
+        return finds(filesLocator);
     }
 
     @JDIAction("Get '{name}' text input field")
@@ -231,7 +231,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
             this.setCore(FileInput.class, $(annotation.root()));
         }
         if (!annotation.files().isEmpty()) {
-            FILES_LOCATOR = annotation.files();
+            filesLocator = annotation.files();
         }
     }
 
