@@ -30,15 +30,6 @@ public class FileInput extends UIBaseElement<FileInputAssert>
         implements HasLabel, HasPlaceholder, IsInput, ISetup {
 
     protected String filesLocator = ".v-chip";
-    private final String INPUT = ".//input";
-    private final String MESSAGE = ".v-messages__message";
-    private final String COUNTER = ".v-counter";
-    private final String PREPEND_OUTER = ".v-input__prepend-outer";
-    private final String PREPEND_INNER = ".v-input__prepend-inner";
-    private final String APPEND_OUTER = ".v-input__append-outer";
-    private final String APPEND_INNER = ".v-input__append-inner";
-    private final String PREFIX = ".v-text-field__prefix";
-    private final String SUFFIX = ".v-text-field__suffix";
 
     @JDIAction("Check that '{name}' can accept multiply files")
     public boolean isMultiply() {
@@ -58,26 +49,31 @@ public class FileInput extends UIBaseElement<FileInputAssert>
 
     @JDIAction("Get '{name}' text input field")
     public UIElement textInputField() {
+        String INPUT = ".//input";
         return find(INPUT);
     }
 
     @JDIAction("Get '{name}' message")
     public UIElement message() {
+        String MESSAGE = ".v-messages__message";
         return find(MESSAGE);
     }
 
     @JDIAction("Get '{name}' counter")
     public UIElement counter() {
+        String COUNTER = ".v-counter";
         return find(COUNTER);
     }
 
     @JDIAction("Get '{name}' prefix")
     public UIElement prefix() {
+        String PREFIX = ".v-text-field__prefix";
         return find(PREFIX);
     }
 
     @JDIAction("Get '{name}' suffix")
     public UIElement suffix() {
+        String SUFFIX = ".v-text-field__suffix";
         return find(SUFFIX);
     }
 
@@ -91,21 +87,25 @@ public class FileInput extends UIBaseElement<FileInputAssert>
 
     @JDIAction("Get '{name}' prepend outer icons")
     public List<Icon> prependOuterIcons() {
+        String PREPEND_OUTER = ".v-input__prepend-outer";
         return getIconByLocator(PREPEND_OUTER);
     }
 
     @JDIAction("Get '{name}' prepend inner icons")
     public List<Icon> prependInnerIcons() {
+        String PREPEND_INNER = ".v-input__prepend-inner";
         return getIconByLocator(PREPEND_INNER);
     }
 
     @JDIAction("Get '{name}' append inner icons")
     public List<Icon> appendInnerIcons() {
+        String APPEND_INNER = ".v-input__append-inner";
         return getIconByLocator(APPEND_INNER);
     }
 
     @JDIAction("Get '{name}' append outer icons")
     public List<Icon> appendOuterIcons() {
+        String APPEND_OUTER = ".v-input__append-outer";
         return getIconByLocator(APPEND_OUTER);
     }
 
