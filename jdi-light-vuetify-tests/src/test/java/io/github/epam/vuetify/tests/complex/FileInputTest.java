@@ -91,7 +91,7 @@ public class FileInputTest extends TestsInit {
         counterFileInput.clear();
 
         counterFileInput.uploadFiles(asList(pathTXT.toString(), pathPNG.toString()));
-        counterFileInput.has().text("2 files");
+        counterFileInput.has().file("2 files");
         counterFileInput.counter().has().text("2 files (62 B in total)");
     }
 
@@ -103,10 +103,10 @@ public class FileInputTest extends TestsInit {
     @Test
     public void multiplyFileInputTest() {
         multiplyFileInput.uploadFile(pathTXT.toString());
-        multiplyFileInput.has().text(pathTXT.getFileName().toString());
+        multiplyFileInput.has().file(pathTXT.getFileName().toString());
         for (int i = 2; i <= 10; i++) {
             multiplyFileInput.uploadFile(pathTXT.toString());
-            multiplyFileInput.has().text(i + " files");
+            multiplyFileInput.has().file(i + " files");
         }
     }
 
@@ -114,13 +114,12 @@ public class FileInputTest extends TestsInit {
     public void prependIconFileInputTest() {
         prependIconFileInput.getPrependOuterIcon().has().type("mdi-camera");
         prependIconFileInput.label().has().text("File input");
-        prependIconFileInput.is().filled();
     }
 
     @Test
     public void showSizeFileInputTest() {
         showSizeFileInput.uploadFile(pathTXT.toString());
-        showSizeFileInput.has().text("TextTestFile.txt (11 B)");
+        showSizeFileInput.has().file("TextTestFile.txt (11 B)");
     }
 
     @Test

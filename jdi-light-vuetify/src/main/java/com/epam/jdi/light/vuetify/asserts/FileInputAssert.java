@@ -1,5 +1,6 @@
 package com.epam.jdi.light.vuetify.asserts;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.FileInput;
 import org.hamcrest.Matcher;
@@ -9,12 +10,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class FileInputAssert extends TextFieldAssert {
-
-    @Override
-    public FileInput element() {
-        return (FileInput) super.element();
-    }
+public class FileInputAssert extends UIAssert<FileInputAssert, FileInput> {
 
     @JDIAction("Assert that '{name}' can accept multiply files")
     public FileInputAssert multiply() {
@@ -36,8 +32,7 @@ public class FileInputAssert extends TextFieldAssert {
 
     @JDIAction("Assert that '{name}' has file {0}")
     public FileInputAssert file(String file) {
-        jdiAssert(element().getText(), Matchers.is(file));
-        return this;
+        return file(Matchers.is(file));
     }
 
     @JDIAction("Assert that '{name}' has files {0}")
@@ -48,7 +43,6 @@ public class FileInputAssert extends TextFieldAssert {
 
     @JDIAction("Assert that '{name}' has files {0}")
     public FileInputAssert files(List<String> files) {
-        jdiAssert(element().getFiles(), Matchers.is(files));
-        return this;
+        return files(Matchers.is(files));
     }
 }

@@ -1,17 +1,23 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
+import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.vuetify.annotations.JDIFileInput;
 import com.epam.jdi.light.vuetify.asserts.FileInputAssert;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -20,10 +26,19 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * To see an example of File input web element please visit
  * https://vuetifyjs.com/en/components/file-inputs/
  */
-public class FileInput extends TextField implements ISetup {
+public class FileInput extends UIBaseElement<FileInputAssert>
+        implements HasLabel, HasPlaceholder, IsInput, ISetup {
 
-    protected String ROOT_LOCATOR;
     protected String FILES_LOCATOR = ".v-chip";
+    protected String INPUT = ".//input|.//textarea";
+    protected String MESSAGE = ".v-messages__message";
+    protected String COUNTER = ".v-counter";
+    protected String PREPEND_OUTER = ".v-input__prepend-outer";
+    protected String PREPEND_INNER = ".v-input__prepend-inner";
+    protected String APPEND_OUTER = ".v-input__append-outer";
+    protected String APPEND_INNER = ".v-input__append-inner";
+    protected String PREFIX = ".v-text-field__prefix";
+    protected String SUFFIX = ".v-text-field__suffix";
 
     @JDIAction("Check that '{name}' can accept multiply files")
     public boolean isMultiply() {
@@ -39,6 +54,96 @@ public class FileInput extends TextField implements ISetup {
     @JDIAction("Get '{name}' files list")
     public WebList files() {
         return finds(FILES_LOCATOR);
+    }
+
+    @JDIAction("Get '{name}' text input field")
+    public UIElement textInputField() {
+        return find(INPUT);
+    }
+
+    @JDIAction("Get '{name}' message")
+    public UIElement message() {
+        return find(MESSAGE);
+    }
+
+    @JDIAction("Get '{name}' counter")
+    public UIElement counter() {
+        return find(COUNTER);
+    }
+
+    @JDIAction("Get '{name}' prefix")
+    public UIElement prefix() {
+        return find(PREFIX);
+    }
+
+    @JDIAction("Get '{name}' suffix")
+    public UIElement suffix() {
+        return find(SUFFIX);
+    }
+
+    protected List<Icon> getIconByLocator(String locator) {
+        return finds(locator)
+                .stream()
+                .map(icon -> icon.find(".v-icon"))
+                .map(icon -> new Icon().setCore(Icon.class, icon))
+                .collect(Collectors.toList());
+    }
+
+    @JDIAction("Get '{name}' prepend outer icons")
+    public List<Icon> prependOuterIcons() {
+        return getIconByLocator(PREPEND_OUTER);
+    }
+
+    @JDIAction("Get '{name}' prepend inner icons")
+    public List<Icon> prependInnerIcons() {
+        return getIconByLocator(PREPEND_INNER);
+    }
+
+    @JDIAction("Get '{name}' append inner icons")
+    public List<Icon> appendInnerIcons() {
+        return getIconByLocator(APPEND_INNER);
+    }
+
+    @JDIAction("Get '{name}' append outer icons")
+    public List<Icon> appendOuterIcons() {
+        return getIconByLocator(APPEND_OUTER);
+    }
+
+    @JDIAction("Get '{name}' prepend outer icon")
+    public Icon getPrependOuterIcon() {
+        return prependOuterIcons().get(0);
+    }
+
+    @JDIAction("Get '{name}' prepend inner icons")
+    public Icon getPrependInnerIcon() {
+        return prependInnerIcons().get(0);
+    }
+
+    @JDIAction("Get '{name}' append inner icons")
+    public Icon getAppendInnerIcon() {
+        return appendInnerIcons().get(0);
+    }
+
+    @JDIAction("Get '{name}' append outer icons")
+    public Icon getAppendOuterIcon() {
+        return appendOuterIcons().get(0);
+    }
+
+    @Override
+    public Label label() {
+        return textInputField().label();
+    }
+
+    @Override
+    @JDIAction("Get '{name}' label text")
+    public String labelText() {
+        return label().getText();
+    }
+
+    @Override
+    @JDIAction("Get '{name}' placeholder")
+    public String placeholder() {
+        return textInputField().placeholder();
     }
 
     @JDIAction("Get '{name}' accepted types")
@@ -118,13 +223,12 @@ public class FileInput extends TextField implements ISetup {
             JDIFileInput annotation = field.getAnnotation(JDIFileInput.class);
             initializeLocators(annotation);
         }
-        this.setCore(FileInput.class, $(ROOT_LOCATOR));
         this.setName(String.format("File input %s", field.getName()));
     }
 
     private void initializeLocators(JDIFileInput annotation) {
         if (!annotation.root().isEmpty()) {
-            ROOT_LOCATOR = annotation.root();
+            this.setCore(FileInput.class, $(annotation.root()));
         }
         if (!annotation.files().isEmpty()) {
             FILES_LOCATOR = annotation.files();
@@ -133,40 +237,6 @@ public class FileInput extends TextField implements ISetup {
 
     @Override
     public FileInputAssert is() {
-        FileInputAssert fileInputAssert = new FileInputAssert();
-        fileInputAssert.set(this);
-        return fileInputAssert;
-    }
-
-    @Override
-    public FileInputAssert assertThat() {
-        return is();
-    }
-
-    @Override
-    public FileInputAssert has() {
-        return is();
-    }
-
-    @Override
-    public FileInputAssert waitFor() {
-        return is();
-    }
-
-    @Override
-    public FileInputAssert waitFor(int sec) {
-        this.waitSec(sec);
-        return is();
-    }
-
-    @Override
-    public FileInputAssert shouldBe() {
-        return is();
-    }
-
-    @Override
-    public FileInputAssert verify() {
-        assertSoft();
-        return is();
+        return new FileInputAssert().set(this);
     }
 }
