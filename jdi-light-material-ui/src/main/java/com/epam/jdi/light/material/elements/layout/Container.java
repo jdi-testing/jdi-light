@@ -4,6 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 
+/**
+ * To see an example of Container web element please visit
+ * https://mui.com/components/container/
+ */
+
 public class Container extends UIBaseElement<ContainerAssert> {
 
     @JDIAction("Check if {name} width is fixed")
