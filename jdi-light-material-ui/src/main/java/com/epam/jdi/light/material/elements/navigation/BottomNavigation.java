@@ -13,17 +13,18 @@ import com.epam.jdi.light.material.asserts.navigation.BottomNavigationAssert;
 public class BottomNavigation extends UIListBase<BottomNavigationAssert> implements IsButton {
 
     @JDIAction("Is '{name} selected")
-    public boolean isSelected() {
-        return core().hasClass("Mui-selected");
+    public boolean isSelected(int index) {
+        return list().get(index).hasClass("Mui-selected");
     }
 
     @JDIAction("Check if '{name} is not selected")
-    public boolean isNotSelected() {
-        return !isSelected();
+    public boolean isNotSelected(int index) {
+        return !isSelected(index);
     }
 
     @Override
     public BottomNavigationAssert is() {
         return new BottomNavigationAssert().set(this);
     }
+
 }

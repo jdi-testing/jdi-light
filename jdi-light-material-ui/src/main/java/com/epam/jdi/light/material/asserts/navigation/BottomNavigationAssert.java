@@ -10,14 +10,15 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class BottomNavigationAssert extends UISelectAssert<BottomNavigationAssert, BottomNavigation> {
 
     @JDIAction("Assert that '{name}' is selected")
-    public BottomNavigationAssert selected() {
-        jdiAssert(element().isSelected(), Matchers.is(true));
+    public BottomNavigationAssert elementSelected(int index) {
+        jdiAssert(element().isSelected(index) ?
+                "element selected" : "element is not selected", Matchers.is("element selected"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not selected")
-    public BottomNavigationAssert notSelected() {
-        jdiAssert(element().isNotSelected(), Matchers.is(true));
+    public BottomNavigationAssert elementNotSelected(int index) {
+        jdiAssert(element().isNotSelected(index), Matchers.is(true));
         return this;
     }
 }
