@@ -3,8 +3,7 @@ package com.epam.jdi.light.vuetify.elements.complex.tables;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.BaseTable;
-import com.epam.jdi.light.vuetify.asserts.SimpleTableAssert;
-import com.epam.jdi.light.vuetify.elements.enums.TableTestData;
+import com.epam.jdi.light.vuetify.asserts.tables.SimpleTableAssert;
 
 /**
  * To see an example of Simple Table web element please visit https://vuetifyjs.com/en/components/simple-tables/
@@ -22,8 +21,8 @@ public class SimpleTable extends BaseTable<SimpleTable, SimpleTableAssert> {
     }
 
     @JDIAction("Get {name} first column required element")
-    public String firstColumnElement(TableTestData data) {
-        return this.getColumn(1).get(data.value()).text();
+    public String firstColumnElement(String data) {
+        return this.getColumn(1).get(data).text();
     }
 
     @JDIAction("Get {name} second column required element")
@@ -32,8 +31,8 @@ public class SimpleTable extends BaseTable<SimpleTable, SimpleTableAssert> {
     }
 
     @JDIAction("Get {name} second column required element")
-    public String secondColumnElement(TableTestData data) {
-        return this.getColumn(2).get(data.value()).text();
+    public String secondColumnElement(String data) {
+        return this.getColumn(2).get(data).text();
     }
 
     @JDIAction("Get {name} column title")
