@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.composite;
 
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.vuetify.elements.enums.Colors;
+import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

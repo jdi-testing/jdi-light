@@ -1,4 +1,4 @@
-package com.epam.jdi.light.vuetify.elements.enums;
+package io.github.com.enums;
 
 public enum Colors {
     RED("rgba(244, 67, 54, 1)"),

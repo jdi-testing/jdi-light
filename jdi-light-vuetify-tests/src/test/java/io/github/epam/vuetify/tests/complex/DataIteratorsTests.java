@@ -1,12 +1,12 @@
 package io.github.epam.vuetify.tests.complex;
 
-import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.CUPCAKE;
-import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.DONUT;
-import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.ECLAIR;
-import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.FROZEN_YOGURT;
-import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.ICE_CREAM_SANDWICH;
-import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.JELLY_BEAN;
-import static com.epam.jdi.light.vuetify.elements.enums.TableTestData.LOLLIPOP;
+import static io.github.com.enums.TableTestData.CUPCAKE;
+import static io.github.com.enums.TableTestData.DONUT;
+import static io.github.com.enums.TableTestData.ECLAIR;
+import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
+import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
+import static io.github.com.enums.TableTestData.JELLY_BEAN;
+import static io.github.com.enums.TableTestData.LOLLIPOP;
 import static io.github.com.StaticSite.dataIteratorsPage;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;

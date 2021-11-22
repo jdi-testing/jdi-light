@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.ElementArea.TOP_RIGHT;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.DEEP_PURPLE_ACCENT_4;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
+import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
 import static io.github.com.StaticSite.progressLinearPage;
 import static io.github.com.pages.ProgressLinearPage.bufferValueProgressBars;
 import static io.github.com.pages.ProgressLinearPage.colorsProgressBars;

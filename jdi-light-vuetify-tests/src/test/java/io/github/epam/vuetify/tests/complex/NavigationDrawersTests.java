@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.DEEP_PURPLE_ACCENT_4;
+import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
 import static io.github.com.StaticSite.navigationDrawersPage;
 import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationAppBar;
 import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationDrawer;
