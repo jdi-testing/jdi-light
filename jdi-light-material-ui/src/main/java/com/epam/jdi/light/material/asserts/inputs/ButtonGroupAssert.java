@@ -1,6 +1,6 @@
 package com.epam.jdi.light.material.asserts.inputs;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.MaterialButton;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class ButtonGroupAssert extends UIAssert<ButtonGroupAssert, ButtonGroup> {
+public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonGroup> {
 
     @JDIAction("Number of grouped buttons in '{name}' is '{0}'")
     public ButtonGroupAssert numberOfGroupedButtons(Integer number) {

@@ -15,8 +15,7 @@ import static io.github.com.pages.inputs.ButtonGroupPage.verticalButtonGroup;
 public class ButtonGroupTests extends TestsInit {
 
     @BeforeMethod
-    public void before(){
-
+    public void before() {
         buttonGroupPage.open();
         buttonGroupPage.isOpened();
     }
@@ -63,6 +62,8 @@ public class ButtonGroupTests extends TestsInit {
 
         splitButtonGroup.getButtonByIndex(2).click();
         splitButtonDropdown.get(3).has().cssClass("Mui-disabled");
+        splitButtonDropdown.get(3).has().text("Rebase and merge");
+
         splitButtonDropdown.get(2).click();
         splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
     }
