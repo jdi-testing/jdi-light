@@ -12,6 +12,11 @@ import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 
+/**
+ * To see an example of Lazy web element please visit
+ * https://vuetifyjs.com/en/components/lazy/
+ */
+
 public class Lazy extends UIBaseElement<LazyAssert> implements ISetup {
 
     protected String itemLocator = ".mx-auto.v-card";
