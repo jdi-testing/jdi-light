@@ -6,7 +6,6 @@ import com.epam.jdi.light.vuetify.elements.complex.RadioButtons;
 
 public class RadioButtonsPage extends VuetifyPage {
 
-
     @UI("#ColorsRadioButton .col-12[1] [role=radio]")
     public static RadioButtons colorLeftRadioButtons;
 

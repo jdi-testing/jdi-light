@@ -1,32 +1,24 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.vuetify.elements.enums.Colors;
 import com.epam.jdi.light.vuetify.elements.enums.RadioTestData;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.radioButtonsPage;
-import static io.github.com.pages.RadioButtonsPage.*;
-import static org.testng.Assert.assertEquals;
+import static io.github.com.pages.RadioButtonsPage.colorLeftRadioButtons;
+import static io.github.com.pages.RadioButtonsPage.colorRightRadioButtons;
+import static io.github.com.pages.RadioButtonsPage.directionRadioButtons;
+import static io.github.com.pages.RadioButtonsPage.mandatoryRadioButtons;
+import static io.github.com.pages.RadioButtonsPage.labelRadioButtons;
+import static io.github.com.pages.RadioButtonsPage.mandatoryText;
 
 public class RadioButtonsTests extends TestsInit {
-
 
     @BeforeClass
     public void before() {
         radioButtonsPage.open();
     }
-
-//    @Test
-//    public void colorTest() {
-//        jdiAssert(colorLeftRadioButtons.color(), Matchers.is(Colors.RED.value()));
-//        colorLeftRadioButtons.select("indigo");
-//        jdiAssert(colorLeftRadioButtons.color(), Matchers.is(Colors.INDIGO.value()));
-//
-//    }
 
     @Test
     public void selectTest() {
