@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.common.UIElement;
  * To see an example of Skeleton Loader web element please visit https://vuetifyjs.com/en/components/skeleton-loaders/
  */
 
-public class SkeletonLoader extends UIBaseElement<UIAssert<?,?>> {
+public class SkeletonLoader extends UIBaseElement<UIAssert<?, ?>> {
 
     @JDIAction("Get '{name}' avatar boilerplate")
     public UIElement avatarBoilerplate() {

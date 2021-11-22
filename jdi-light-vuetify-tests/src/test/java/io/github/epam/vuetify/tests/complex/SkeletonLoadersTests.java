@@ -3,6 +3,7 @@ package io.github.epam.vuetify.tests.complex;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.skeletonLoadersPage;
 import static io.github.com.pages.SkeletonLoadersPage.articleActionsSkeletonLoader;
 import static io.github.com.pages.SkeletonLoadersPage.avatarTextImageActionsSkeletonLoader;
@@ -69,11 +70,9 @@ public class SkeletonLoadersTests extends TestsInit {
         avatarTextImageActionsSkeletonLoader.textBoilerplate().is().displayed();
         avatarTextImageActionsSkeletonLoader.dividerBoilerplate().is().displayed();
         avatarTextImageActionsSkeletonLoader.paragraphBoilerplate().is().displayed();
-        avatarTextImageActionsSkeletonLoader.textBoilerplate().is().displayed();
         avatarTextImageActionsSkeletonLoader.headingBoilerplate().is().displayed();
         avatarTextImageActionsSkeletonLoader.imageBoilerplate().is().displayed();
         avatarTextImageActionsSkeletonLoader.actionsBoilerplate().is().displayed();
-        avatarTextImageActionsSkeletonLoader.buttonBoilerplate().is().displayed();
     }
 
     @Test
@@ -81,9 +80,7 @@ public class SkeletonLoadersTests extends TestsInit {
         avatarTextImageArticleSkeletonLoader.is().displayed();
         avatarTextImageArticleSkeletonLoader.avatarBoilerplate().is().displayed();
         avatarTextImageArticleSkeletonLoader.paragraphBoilerplate().is().displayed();
-        avatarTextImageArticleSkeletonLoader.textBoilerplate().is().displayed();
         avatarTextImageArticleSkeletonLoader.imageBoilerplate().is().displayed();
         avatarTextImageArticleSkeletonLoader.articleBoilerplate().is().displayed();
-        avatarTextImageArticleSkeletonLoader.headingBoilerplate().is().displayed();
     }
 }
