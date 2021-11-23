@@ -1,8 +1,7 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.BottomNavigationAssert;
 
@@ -10,12 +9,15 @@ import com.epam.jdi.light.vuetify.asserts.BottomNavigationAssert;
  * To see example of Bottom Navigation web element please visit https://vuetifyjs.com/en/components/bottom-navigation/
  */
 
-public class BottomNavigation extends UIBaseElement<BottomNavigationAssert> {
+public class BottomNavigation extends UIListBase<BottomNavigationAssert> { //UIBaseElement<BottomNavigationAssert> {
 
     protected String buttonListLocator = "//button";
 
-    public WebList buttonList() {
-        return finds(buttonListLocator);
+    @Override
+    public WebList list() {
+        WebList webList = finds(buttonListLocator);
+        webList.setStartIndex(getStartIndex());
+        return webList;
     }
 
     @JDIAction("Get '{name}' background color")
@@ -23,13 +25,9 @@ public class BottomNavigation extends UIBaseElement<BottomNavigationAssert> {
         return core().getCssValue("background-color");
     }
 
-    public UIElement button(int index) {
-        return buttonList().get(index);
-    }
-
     @JDIAction("Get '{name}' button color by index")
     public String buttonColor(int index) {
-        return buttonList().get(index).getCssValue("color");
+        return list().get(index).getCssValue("color");
     }
 
     @Override
