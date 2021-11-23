@@ -16,7 +16,7 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
  * To see an example of Radio web element please visit
  * https://mui.com/components/radio-buttons/
  */
-public class Radio extends UIListBase<RadioAssert> {
+public class RadioButtons extends UIListBase<RadioAssert> {
 
     protected UIElement getLabel(UIElement radio) {
         return radio.find("./..");
@@ -70,7 +70,7 @@ public class Radio extends UIListBase<RadioAssert> {
     @Override
     @JDIAction("Is '{0}' selected")
     public boolean selected(int index) {
-        return selected().equals(get(index).text());
+        return selected().equals(getLabel(get(index)).text());
     }
 
     @Override
