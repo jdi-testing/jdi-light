@@ -1,8 +1,10 @@
 package com.epam.jdi.light.material.elements.displaydata;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.TypographyAssert;
+import com.epam.jdi.light.material.elements.utils.enums.TypographyStyles;
 
 /**
  * To see an example of Typography web element please visit
@@ -12,8 +14,15 @@ public class Typography extends UIBaseElement<TypographyAssert> implements IsTex
 
     private static final String STYLE_CLASS_PATTERN = "MuiTypography-%s";
 
-    public boolean hasStyleClass(String style) {
-        return core().hasClass(String.format(STYLE_CLASS_PATTERN, style));
+    @JDIAction("Get '{name}' style")
+    public String getStyle() {
+        for (TypographyStyles style : TypographyStyles.values()) {
+            String styleClass = String.format(STYLE_CLASS_PATTERN, style.getStyle());
+            if (hasClass(styleClass)) {
+                return style.getStyle();
+            }
+        }
+        return "";
     }
 
     @Override
