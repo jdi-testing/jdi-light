@@ -9,7 +9,7 @@ import com.epam.jdi.light.vuetify.asserts.BottomNavigationAssert;
  * To see example of Bottom Navigation web element please visit https://vuetifyjs.com/en/components/bottom-navigation/
  */
 
-public class BottomNavigation extends UIListBase<BottomNavigationAssert> { //UIBaseElement<BottomNavigationAssert> {
+public class BottomNavigation extends UIListBase<BottomNavigationAssert> {
 
     protected String buttonListLocator = "//button";
 
