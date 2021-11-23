@@ -7,23 +7,26 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 import static io.github.com.StaticSite.stepperPage;
-import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperNextButton;
 import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperBackButton;
+import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperNextButton;
 import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperNextButton;
 import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperBackButton;
+import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperNextButton;
 import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.mobileTextStepperNextButton;
 import static io.github.com.pages.navigation.StepperPage.mobileTextStepperBackButton;
+import static io.github.com.pages.navigation.StepperPage.mobileTextStepperNextButton;
 import static io.github.com.pages.navigation.StepperPage.mobileTextStepperTitle;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepper;
+import static io.github.com.pages.navigation.StepperPage.nonlinearStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepperCompleteStepButton;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepperNextButton;
 import static io.github.com.pages.navigation.StepperPage.simpleLinearStepper;
 import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperNextButton;
 import static io.github.com.pages.navigation.StepperPage.verticalStepper;
+import static io.github.com.pages.navigation.StepperPage.verticalStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.verticalStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.verticalStepperResetButton;
 
 
 /**
@@ -41,97 +44,154 @@ public class StepperTests extends TestsInit {
     }
 
     @Test
-    public void simpleLinearStepperTest() {
+    public void simpleLinearStepperForwardTest() {
+        simpleLinearStepper.show();
         simpleLinearStepper.is().displayed().and().has().steps(Arrays.asList(steps));
 
-        simpleLinearStepper.steps().get(0).is().enabled().and().incomplete();
-        simpleLinearStepper.steps().get(1).is().disabled().and().incomplete();
-        simpleLinearStepper.steps().get(2).is().disabled().and().incomplete();
+        simpleLinearStepper.is().stepEnabled(1).and().stepIncomplete(1);
+        simpleLinearStepper.is().stepDisabled(2).and().stepIncomplete(2);
+        simpleLinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
 
         simpleLinearStepperNextButton.click();
-
-        simpleLinearStepper.steps().get(0).is().enabled().and().completed();
-        simpleLinearStepper.steps().get(1).is().enabled().and().incomplete();
-        simpleLinearStepper.steps().get(2).is().disabled().and().incomplete();
+        simpleLinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        simpleLinearStepper.is().stepEnabled(2).and().stepIncomplete(2);
+        simpleLinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
 
         simpleLinearStepperNextButton.click();
+        simpleLinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        simpleLinearStepper.is().stepEnabled(2).and().stepCompleted(2);
+        simpleLinearStepper.is().stepEnabled(3).and().stepIncomplete(3);
 
-        simpleLinearStepper.steps().get(0).is().enabled().and().completed();
-        simpleLinearStepper.steps().get(1).is().enabled().and().completed();
-        simpleLinearStepper.steps().get(2).is().enabled().and().incomplete();
+        simpleLinearStepperNextButton.click();
+        simpleLinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        simpleLinearStepper.is().stepEnabled(2).and().stepCompleted(2);
+        simpleLinearStepper.is().stepEnabled(3).and().stepCompleted(3);
+    }
+
+    @Test
+    public void simpleLinearStepperBackTest() {
+        simpleLinearStepper.show();
+        simpleLinearStepper.is().displayed().and().has().steps(Arrays.asList(steps));
+
+        simpleLinearStepperNextButton.click();
+        simpleLinearStepperNextButton.click();
+        simpleLinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        simpleLinearStepper.is().stepEnabled(2).and().stepCompleted(2);
+        simpleLinearStepper.is().stepEnabled(3).and().stepIncomplete(3);
 
         simpleLinearStepperBackButton.click();
+        simpleLinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        simpleLinearStepper.is().stepEnabled(2).and().stepIncomplete(2);
+        simpleLinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
 
-        simpleLinearStepper.steps().get(0).is().enabled().and().completed();
-        simpleLinearStepper.steps().get(1).is().enabled().and().incomplete();
-        simpleLinearStepper.steps().get(2).is().disabled().and().incomplete();
-
-        simpleLinearStepperNextButton.click();
-        simpleLinearStepperNextButton.click();
-
-        simpleLinearStepper.steps().get(0).is().enabled().and().completed();
-        simpleLinearStepper.steps().get(1).is().enabled().and().completed();
-        simpleLinearStepper.steps().get(2).is().enabled().and().completed();
+        simpleLinearStepperBackButton.click();
+        simpleLinearStepper.is().stepEnabled(1).and().stepIncomplete(1);
+        simpleLinearStepper.is().stepDisabled(2).and().stepIncomplete(2);
+        simpleLinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
     }
 
     @Test
-    public void nonlinearStepperTest() {
+    public void nonlinearStepperForwardTest() {
+        nonlinearStepper.show();
         nonlinearStepper.is().displayed().and().has().steps(Arrays.asList(steps));
-
-        nonlinearStepper.steps().get(0).is().enabled();
-        nonlinearStepper.steps().get(1).is().disabled();
-        nonlinearStepper.steps().get(2).is().disabled();
-
-        nonlinearStepperNextButton.click();
-        nonlinearStepper.steps().get(1).is().enabled();
-        nonlinearStepper.steps().get(2).is().disabled();
+        nonlinearStepper.is().stepEnabled(1).and().stepIncomplete(1);
+        nonlinearStepper.is().stepDisabled(2).and().stepIncomplete(2);
+        nonlinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
 
         nonlinearStepperNextButton.click();
-        nonlinearStepper.steps().get(2).is().enabled();
+        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        nonlinearStepper.is().stepEnabled(2).and().stepIncomplete(2);
+        nonlinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
 
-        nonlinearStepper.steps().get(1).click();
-        nonlinearStepper.steps().get(1).is().enabled();
+        nonlinearStepperNextButton.click();
+        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        nonlinearStepper.is().stepEnabled(2).and().stepCompleted(2);
+        nonlinearStepper.is().stepEnabled(3).and().stepIncomplete(3);
 
-        nonlinearStepper.steps().get(0).click();
-        nonlinearStepper.steps().get(0).is().enabled().and().incomplete();
-        nonlinearStepper.steps().get(1).is().disabled();
+        nonlinearStepper.list().get(2).click();
+        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        nonlinearStepper.is().stepEnabled(2).and().stepIncomplete(2);
+        nonlinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
 
         nonlinearStepperCompleteStepButton.click();
-        nonlinearStepper.steps().get(0).is().enabled().and().completed();
-        nonlinearStepper.steps().get(1).is().enabled().and().incomplete();
+        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        nonlinearStepper.is().stepEnabled(2).and().stepCompleted(2);
+        nonlinearStepper.is().stepEnabled(3).and().stepIncomplete(3);
     }
 
     @Test
-    public void verticalStepperTest() {
+    public void nonlinearStepperBackTest() {
+        nonlinearStepper.show();
+        nonlinearStepper.is().displayed().and().has().steps(Arrays.asList(steps));
+        nonlinearStepper.is().stepEnabled(1).and().stepDisabled(2).and().stepDisabled(3);
+
+        nonlinearStepperNextButton.click();
+        nonlinearStepperNextButton.click();
+        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        nonlinearStepper.is().stepEnabled(2).and().stepCompleted(2);
+        nonlinearStepper.is().stepEnabled(3).and().stepIncomplete(3);
+
+        nonlinearStepperBackButton.click();
+        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
+        nonlinearStepper.is().stepEnabled(2).and().stepIncomplete(2);
+        nonlinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
+    }
+
+    @Test
+    public void verticalStepperForwardTest() {
         String[] steps = {"Select campaign settings", "Create an ad group", "Create an ad"};
 
+        verticalStepper.show();
+        verticalStepper.is().displayed().and().has().steps(Arrays.asList(steps));
+        verticalStepper.is().stepEnabled(1).and().stepIncomplete(1);
+        verticalStepper.is().stepDisabled(2).and().stepIncomplete(2);
+        verticalStepper.is().stepDisabled(3).and().stepIncomplete(3);
+
+        verticalStepperNextButton.click();
+        verticalStepper.is().stepEnabled(1).and().stepCompleted(1);
+        verticalStepper.is().stepEnabled(2).and().stepIncomplete(2);
+        verticalStepper.is().stepDisabled(3).and().stepIncomplete(3);
+
+        verticalStepperNextButton.click();
+        verticalStepper.is().stepEnabled(1).and().stepCompleted(1);
+        verticalStepper.is().stepEnabled(2).and().stepCompleted(2);
+        verticalStepper.is().stepEnabled(3).and().stepIncomplete(3);
+
+        verticalStepperNextButton.click();
+        verticalStepper.is().stepEnabled(1).and().stepCompleted(1);
+        verticalStepper.is().stepEnabled(2).and().stepCompleted(2);
+        verticalStepper.is().stepEnabled(3).and().stepCompleted(3);
+
+        verticalStepperResetButton.click();
+    }
+
+    @Test
+    public void verticalStepperBackTest() {
+        String[] steps = {"Select campaign settings", "Create an ad group", "Create an ad"};
+
+        verticalStepper.show();
         verticalStepper.is().displayed().and().has().steps(Arrays.asList(steps));
 
-        verticalStepper.steps().get(0).is().enabled().and().incomplete();
-        verticalStepper.steps().get(1).is().disabled().and().incomplete();
-        verticalStepper.steps().get(2).is().disabled().and().incomplete();
-
         verticalStepperNextButton.click();
-
-        verticalStepper.steps().get(0).is().enabled().and().completed();
-        verticalStepper.steps().get(1).is().enabled().and().incomplete();
-        verticalStepper.steps().get(2).is().disabled().and().incomplete();
-
         verticalStepperNextButton.click();
+        verticalStepper.is().stepEnabled(1).and().stepCompleted(1);
+        verticalStepper.is().stepEnabled(2).and().stepCompleted(2);
+        verticalStepper.is().stepEnabled(3).and().stepIncomplete(3);
 
-        verticalStepper.steps().get(0).is().enabled().and().completed();
-        verticalStepper.steps().get(1).is().enabled().and().completed();
-        verticalStepper.steps().get(2).is().enabled().and().incomplete();
+        verticalStepperBackButton.click();
+        verticalStepper.is().stepEnabled(1).and().stepCompleted(1);
+        verticalStepper.is().stepEnabled(2).and().stepIncomplete(2);
+        verticalStepper.is().stepDisabled(3).and().stepIncomplete(3);
 
-        verticalStepperNextButton.click();
-
-        verticalStepper.steps().get(0).is().enabled().and().completed();
-        verticalStepper.steps().get(1).is().enabled().and().completed();
-        verticalStepper.steps().get(2).is().enabled().and().completed();
+        verticalStepperBackButton.click();
+        verticalStepper.is().stepEnabled(1).and().stepIncomplete(1);
+        verticalStepper.is().stepDisabled(2).and().stepIncomplete(2);
+        verticalStepper.is().stepDisabled(3).and().stepIncomplete(3);
     }
 
     @Test
     public void mobileTextStepperTest() {
+        mobileTextStepperTitle.show();
         mobileTextStepperTitle.is().text("BACK\n1 / 5\nNEXT");
         mobileTextStepperNextButton.click();
         mobileTextStepperTitle.is().text("BACK\n2 / 5\nNEXT");
@@ -149,6 +209,7 @@ public class StepperTests extends TestsInit {
 
     @Test
     public void mobileDotsTest() {
+        mobileDotsStepperTitle.show();
         mobileDotsStepperTitle.is().text("You are on Step 0");
         mobileDotsStepperNextButton.click();
         mobileDotsStepperTitle.is().text("You are on Step 1");
