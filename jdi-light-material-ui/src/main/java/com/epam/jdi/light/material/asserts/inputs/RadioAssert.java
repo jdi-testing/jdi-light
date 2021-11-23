@@ -9,13 +9,14 @@ public class RadioAssert extends UISelectAssert<RadioAssert, RadioButtons> {
 
     @JDIAction("Assert that radio '{0}' in '{name}' on '{1}' position")
     public RadioAssert labelPosition(int index, LabelPosition labelPosition) {
-        element().get(index).hasClass(labelPosition.getPosition());
+        element().labels().get(index).hasClass(labelPosition.getPosition());
         return this;
     }
 
     @JDIAction("Assert that radio '{0}' in '{name}' on '{1}' position")
     public RadioAssert labelPosition(String value, LabelPosition labelPosition) {
-        element().get(value).hasClass(labelPosition.getPosition());
+        int index = element().values().indexOf(value);
+        element().labels().get(index).hasClass(labelPosition.getPosition());
         return this;
     }
 }
