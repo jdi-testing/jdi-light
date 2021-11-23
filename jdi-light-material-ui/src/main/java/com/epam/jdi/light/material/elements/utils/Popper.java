@@ -2,6 +2,8 @@ package com.epam.jdi.light.material.elements.utils;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.utils.PopperAssert;
 
@@ -11,6 +13,10 @@ import com.epam.jdi.light.material.asserts.utils.PopperAssert;
  */
 
 public class Popper extends UIBaseElement<PopperAssert> implements IsText {
+
+    public UIElement popperButton(String name) {
+        return $("//span[contains(text(), '" + name + "')]");
+    }
 
     @JDIAction("Check {name} position")
     public String position() {

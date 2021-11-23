@@ -116,7 +116,7 @@ public class TableTests extends TestsInit {
         sortingSelectingTable.getCell(2, 10).has().text("392");
 
         densePaddingSwitch.check();
-        densePaddingSwitch.is().checked();
+        densePaddingSwitch.is().selected();
     }
 
     @Test

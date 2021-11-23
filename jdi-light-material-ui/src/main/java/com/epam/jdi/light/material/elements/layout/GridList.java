@@ -4,6 +4,12 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.material.asserts.layout.GridListAssert;
 
+/**
+ * To see an example of Grid List web element please visit
+ * https://mui.com/components/grid/
+ */
+
+
 public class GridList extends UIListBase<GridListAssert> {
 
     @Override

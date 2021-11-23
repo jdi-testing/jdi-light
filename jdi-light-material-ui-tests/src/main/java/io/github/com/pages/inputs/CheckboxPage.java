@@ -11,26 +11,26 @@ import java.util.List;
 public class CheckboxPage extends WebPage {
 
     @UI("//h2[text()='Basic checkboxes']/following-sibling::div/span[contains(@class,'MuiCheckbox-root')]")
-    public List<Checkbox> basicCheckbox;
+    public static List<Checkbox> basicCheckbox;
 
     @UI("//h2[text()='Checkboxes with FormGroup']/preceding::div/label/span[contains(@class,'MuiCheckbox-root')]")
-    public List<Checkbox> formControlLabelCheckbox;
+    public static List<Checkbox> formControlLabelCheckbox;
 
     @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//span[contains(@class,'MuiCheckbox-root')]")
-    public List<Checkbox> formGroupCheckbox;
+    public static List<Checkbox> formGroupCheckbox;
 
     @UI("//h2[text()='Label placement']/following::span[contains(@class,'MuiCheckbox-root')]")
-    public List<Checkbox> labelPlacementCheckbox;
+    public static List<Checkbox> labelPlacementCheckbox;
 
     @UI("//h2[text()='Checkboxes with FormGroup']/preceding::div/label/span[contains(@class,'MuiFormControlLabel-label')]")
-    public List<Text> formControlLabelText;
+    public static List<Text> formControlLabelText;
 
     @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//span[contains(@class,'MuiFormControlLabel-label')]")
-    public List<Text> formGroupText;
+    public static List<Text> formGroupText;
 
     @UI("//h2[text()='Label placement']/following::div//span[contains(@class,'MuiFormControlLabel-label')]")
-    public List<Text> labelPlacementText;
+    public static List<Text> labelPlacementText;
 
     @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//legend")
-    public List<Text> errorMessage;
+    public static List<Text> errorMessage;
 }
