@@ -10,22 +10,27 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class TabsAssert extends UISelectAssert<TabsAssert, Tabs> {
 
     @JDIAction("Assert that tab {name} root is disabled")
-    public TabsAssert disabled() {
-        boolean isDisabled = (element().hasClass("Mui-disabled"));
-        jdiAssert((isDisabled ? "disabled" : "not disabled"), Matchers.is("disabled"));
+    public TabsAssert elementDisabled(int index) {
+        jdiAssert(element().disabled(index) ?
+                "element selected" : "element is not selected", Matchers.is("element selected"));
         return this;
     }
 
-    @Override
     @JDIAction("Assert that {name} is enabled")
-    public TabsAssert enabled() {
-        jdiAssert(element().enabled() ? "enabled" : "not enabled", Matchers.is("enabled"));
+    public TabsAssert elementEnabled(int index) {
+        jdiAssert(element().enabled(index) ? "enabled" : "not enabled", Matchers.is("enabled"));
         return this;
     }
 
     @JDIAction("Assert that tab {name} root is selected")
-    public TabsAssert selected(int index) {
+    public TabsAssert elementSelected(int index) {
         jdiAssert((element().selected(index) ? "selected" : "not selected"), Matchers.is("selected"));
+        return this;
+    }
+
+    @JDIAction("Assert that tab {name} root is selected")
+    public TabsAssert elementNotSelected(int index) {
+        jdiAssert((element().notSelected(index) ? "not selected" : "selected"), Matchers.is("not selected"));
         return this;
     }
 }

@@ -26,57 +26,60 @@ public class TabTests extends TestsInit {
         tabPage.checkOpened();
     }
 
+
     @Test
     public void simpleTabTest() {
-        simpleTabs.get(1).click();
-        simpleTabs.get(1).is().enabled();
-        simpleTabs.get(1).is().selected(1);
-
-        simpleTabs.get(2).click();
-
-        simpleTabs.get(4).is().disabled();
+        simpleTabs.select(2);
+        simpleTabs.has().elementSelected(2);
+        simpleTabs.has().elementNotSelected(3);
+        simpleTabs.has().elementDisabled(4);
 
         jdiAssert(simpleTabs.size(), Matchers.is(5));
     }
 
     @Test
     public void scrollableTabTest() {
-        scrollableTabs.get(1).click();
-        scrollableTabs.get(1).is().enabled();
-        scrollableTabs.get(1).is().selected(1);
+        scrollableTabs.select(1);
+        scrollableTabs.has().elementSelected(1);
+        scrollableTabs.has().elementEnabled(1);
 
-        scrollableTabs.get(7).click();
-        scrollableTabs.get(7).is().enabled();
+        scrollableTabs.select(7);
+        scrollableTabs.has().elementSelected(7);
+        scrollableTabs.has().elementEnabled(7);
 
-        scrollableTabs.get(11).click();
-        scrollableTabs.get(11).is().enabled();
+        scrollableTabs.select(11);
+        scrollableTabs.has().elementSelected(11);
+        scrollableTabs.has().elementEnabled(11);
 
-        scrollableTabs.get(1).click();
-        scrollableTabs.get(1).is().enabled();
+        scrollableTabs.select(1);
+        scrollableTabs.has().elementSelected(1);
+        scrollableTabs.has().elementEnabled(1);
 
         jdiAssert(scrollableTabs.size(), Matchers.is(11));
     }
 
     @Test
     public void preventScrollTest() {
-        preventScrollTabs.get(1).click();
-        preventScrollTabs.get(1).is().enabled();
-        preventScrollTabs.get(1).is().selected(1);
+        preventScrollTabs.select(1);
+        preventScrollTabs.has().elementSelected(1);
+        preventScrollTabs.has().elementEnabled(1);
 
-        preventScrollTabs.get(7).click();
-        preventScrollTabs.get(7).is().enabled();
+        preventScrollTabs.select(7);
+        preventScrollTabs.has().elementSelected(7);
+        preventScrollTabs.has().elementEnabled(7);
 
         jdiAssert(preventScrollTabs.size(), Matchers.is(7));
     }
 
     @Test
     public void verticalTabTest() {
-        verticalTabs.get(1).click();
-        verticalTabs.get(1).is().enabled();
-        verticalTabs.get(1).is().selected(1);
+        verticalTabs.select(1);
+        verticalTabs.has().elementSelected(1);
+        verticalTabs.has().elementEnabled(1);
 
-        verticalTabs.get(7).click();
-        verticalTabs.get(7).is().enabled();
+        verticalTabs.select(7);
+        verticalTabs.has().elementSelected(7);
+        verticalTabs.has().elementEnabled(7);
 
         jdiAssert(verticalTabs.size(), Matchers.is(7));
     }
