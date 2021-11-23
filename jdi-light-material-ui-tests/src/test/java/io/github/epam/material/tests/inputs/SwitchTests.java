@@ -1,19 +1,18 @@
 package io.github.epam.material.tests.inputs;
 
+import com.epam.jdi.light.material.elements.inputs.Switch;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.switchPage;
-import static io.github.com.pages.inputs.SwitchPage.formGroupTextForm;
-import static io.github.com.pages.inputs.SwitchPage.switches;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
-/**
- * To see an example of Switch web element please visit
- * https://material-ui.com/components/switches/
- */
+import static io.github.com.StaticSite.switchPage;
+import static io.github.com.pages.inputs.SwitchPage.basicSwitches;
+import static io.github.com.pages.inputs.SwitchPage.formGroupSwitches;
+import static io.github.com.pages.inputs.SwitchPage.formGroupTextForm;
 
 public class SwitchTests extends TestsInit {
 
@@ -22,56 +21,82 @@ public class SwitchTests extends TestsInit {
         switchPage.open();
     }
 
-    @Test
-    public void basicSwitchesTest() {
-
-        switches.get(1).is().classValue(containsString("MuiSwitch-colorSecondary"));
-        switches.get(1).is().classValue(containsString("Mui-checked"));
-        switches.get(1).uncheck();
-        switches.get(1).is().classValue(not(containsString("Mui-checked")));
-
-        switches.get(2).is().classValue(containsString("MuiSwitch-colorPrimary"));
-        switches.get(2).is().classValue(containsString("Mui-checked"));
-        switches.get(2).uncheck();
-        switches.get(2).is().classValue(not(containsString("Mui-checked")));
-
-        switches.get(3).is().classValue(containsString("MuiSwitch-colorSecondary"));
-        switches.get(3).is().classValue(not(containsString("Mui-checked")));
-        switches.get(3).check();
-        switches.get(3).is().classValue(containsString("Mui-checked"));
-
-        switches.get(4).is().classValue(containsString("MuiSwitch-colorSecondary"));
-        switches.get(4).is().classValue(containsString("Mui-disabled"));
-
-        switches.get(5).is().classValue(containsString("MuiSwitch-colorSecondary"));
-        switches.get(5).is().classValue(containsString("Mui-disabled"));
-        switches.get(5).is().classValue(containsString("Mui-checked"));
-
-        switches.get(6).is().classValue(containsString("Mui-checked"));
-        switches.get(6).uncheck();
-        switches.get(6).is().classValue(not(containsString("Mui-checked")));
+    @Test(dataProvider = "basicSwitchesTestsDataProvider")
+    public void basicSwitchesTest(int index) {
+        basicSwitchTestLogic(basicSwitches.get(index));
     }
 
-    @Test
-    public void switchesWithFormGroupTest() {
-
+    @Test(dataProvider = "switchesWithFormGroupTestsDataProvider")
+    public void switchesWithFormGroupTest(int index, String fullName) {
         formGroupTextForm.is().text("Be careful");
+        switchWithLabelTestLogic(formGroupSwitches.get(index),fullName);
+    }
 
-        switches.get(7).is().classValue(containsString("Mui-checked"));
-        switches.get(7).uncheck();
-        switches.get(7).is().classValue(not(containsString("Mui-checked")));
-        switches.get(7).check();
-        formGroupTextForm.is().text("Be careful with gilad");
+    private void basicSwitchTestLogic(Switch muiSwitch) {
+        muiSwitch.is().displayed();
+        if (muiSwitch.isDisabled()) {
+            muiSwitch.is().disabled();
+            if (muiSwitch.isTurnedOff()) {
+                muiSwitch.is().turnedOff();
+                muiSwitch.turnOn();
+                muiSwitch.is().turnedOff();
+            } else {
+                muiSwitch.is().turnedOn();
+                muiSwitch.turnOff();
+                muiSwitch.is().turnedOn();
+            }
+        } else {
+            muiSwitch.is().enabled();
+            if (muiSwitch.isTurnedOff()) {
+                muiSwitch.is().turnedOff();
+                muiSwitch.turnOn();
+                muiSwitch.is().turnedOn();
+            } else {
+                muiSwitch.is().turnedOn();
+                muiSwitch.turnOff();
+                muiSwitch.is().turnedOff();
+            }
+        }
+        if(muiSwitch.hasPrimaryColor()) {
+            muiSwitch.has().primaryColor();
+        } else if(muiSwitch.hasSecondaryColor()) {
+            muiSwitch.has().secondaryColor();
+        } else muiSwitch.has().undefinedColor();
+    }
 
-        switches.get(8).is().classValue(not(containsString("Mui-checked")));
-        switches.get(8).check();
-        switches.get(8).is().classValue(containsString("Mui-checked"));
-        formGroupTextForm.is().text("Be careful with jason");
+    private void switchWithLabelTestLogic(Switch muiSwitch, String labelText){
+        String firstName = Arrays.stream(labelText.split(" "))
+                .collect(Collectors.toList())
+                .get(0)
+                .toLowerCase();
+        basicSwitchTestLogic(muiSwitch);
+        muiSwitch.has().label();
+        muiSwitch.has().labelText(labelText);
+        if(muiSwitch.isTurnedOn()) {
+            muiSwitch.turnOff();
+        }
+        muiSwitch.turnOn();
+        formGroupTextForm.is().text(String.format("Be careful with %s", firstName));
+    }
 
-        switches.get(9).is().classValue(containsString("Mui-checked"));
-        switches.get(9).uncheck();
-        switches.get(9).is().classValue(not(containsString("Mui-checked")));
-        switches.get(9).check();
-        formGroupTextForm.is().text("Be careful with antoine");
+    @DataProvider(name = "basicSwitchesTestsDataProvider")
+    public static Object[][] basicSwitchesTestsData() {
+        return new Object[][] {
+                {1},
+                {2},
+                {3},
+                {4},
+                {5},
+                {6}
+        };
+    }
+
+    @DataProvider(name = "switchesWithFormGroupTestsDataProvider")
+    public static Object[][] switchesWithFormGroupTestsData() {
+        return new Object[][] {
+                {1, "Gilad Gray"},
+                {2, "Jason Killian"},
+                {3, "Antoine Llorca"}
+        };
     }
 }
