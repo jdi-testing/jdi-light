@@ -1,14 +1,9 @@
 package io.github.epam.material.tests.inputs;
 
-import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
-import com.jdiai.tools.Timer;
+import com.epam.jdi.light.material.elements.utils.enums.LabelPosition;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static io.github.com.StaticSite.radioPage;
 import static io.github.com.pages.inputs.RadioPage.checkAnswer;
@@ -26,7 +21,6 @@ import static org.hamcrest.Matchers.containsString;
  */
 
 public class RadioTests extends TestsInit {
-    static private final List<String> classes = asList("Top", "Start", "Bottom");
 
     @BeforeMethod()
     public void beforeTest() {
@@ -36,9 +30,10 @@ public class RadioTests extends TestsInit {
 
     @Test
     public void simpleRadioTest() {
-//        simpleRadio.has().values("First", "Second", "Third", "Disabled");
-//        simpleRadio.has().enabled("First", "Second", "Third");
-//        simpleRadio.has().disabled("Disabled");
+        System.out.println(simpleRadio.values());
+        simpleRadio.has().values("First", "Second", "Third", "Disabled");
+        simpleRadio.has().enabled("First", "Second", "Third");
+        simpleRadio.has().disabled("Disabled");
         asList("First", "Second", "Third").forEach(label -> {
             simpleRadio.select(label);
             simpleRadio.has().selected(label);
@@ -48,7 +43,12 @@ public class RadioTests extends TestsInit {
 
     @Test
     public void labelPlacementTest() {
-
+        labelPlacementRadio.has().selected(1);
+        labelPlacementRadio.has().selected("Top");
+        labelPlacementRadio.has().labelPosition(1, LabelPosition.TOP);
+        labelPlacementRadio.has().labelPosition("Start", LabelPosition.START);
+        labelPlacementRadio.has().labelPosition(2, LabelPosition.BOTTOM);
+        labelPlacementRadio.has().labelPosition("End", LabelPosition.END);
     }
 
     @Test

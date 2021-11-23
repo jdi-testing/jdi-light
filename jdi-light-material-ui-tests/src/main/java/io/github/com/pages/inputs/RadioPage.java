@@ -21,7 +21,7 @@ public class RadioPage extends WebPage {
     public static Radio quizRadio;
 
     @UI(".MuiFormControl-root[3] .MuiFormHelperText-root")
-    public static Text errorText;
+    public static Text quizText;
 
     @UI(".MuiFormControl-root[3] button")
     public static Button checkAnswer;
