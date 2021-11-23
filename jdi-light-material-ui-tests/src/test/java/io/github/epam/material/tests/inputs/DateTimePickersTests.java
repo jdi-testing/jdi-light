@@ -32,9 +32,8 @@ public class DateTimePickersTests extends TestsInit {
         inlineDatePicker.has().text(containsString("/22/"));
     }
 
-    @Test(enabled = false)
+    @Test
     public void datePickerDialogTest() {
-        //TODO fix test
         dialogPicker.has().title("Date picker dialog");
         dialogPicker.expand();
         dialogPicker.selectDate("12");
@@ -50,9 +49,8 @@ public class DateTimePickersTests extends TestsInit {
         dialogPicker.has().text("10/10/2021");
     }
 
-  @Test(enabled = false)
+  @Test
     public void timePickerTest() {
-        //TODO fix test
         timePicker.has().title("Time picker");
 
         timePicker.expand();
