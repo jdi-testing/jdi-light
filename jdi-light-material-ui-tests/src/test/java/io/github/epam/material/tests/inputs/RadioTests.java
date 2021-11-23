@@ -11,8 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.github.com.StaticSite.radioPage;
+import static io.github.com.pages.inputs.RadioPage.checkAnswer;
 import static io.github.com.pages.inputs.RadioPage.labelPlacementRadio;
 import static io.github.com.pages.inputs.RadioPage.lastRadioText;
+import static io.github.com.pages.inputs.RadioPage.quizRadio;
+import static io.github.com.pages.inputs.RadioPage.quizText;
 import static io.github.com.pages.inputs.RadioPage.simpleRadio;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
@@ -23,21 +26,19 @@ import static org.hamcrest.Matchers.containsString;
  */
 
 public class RadioTests extends TestsInit {
-    static private final List<String> simpleLabels = asList("First", "Second", "Third", "Disabled");
     static private final List<String> classes = asList("Top", "Start", "Bottom");
-    static private final List<String> messages = asList("You got it!", "Sorry, wrong answer!");
 
     @BeforeMethod()
     public void beforeTest() {
         radioPage.open();
-        radioPage.isOpened();
+        radioPage.checkOpened();
     }
 
     @Test
     public void simpleRadioTest() {
-        simpleRadio.has().values("First", "Second", "Third", "Disabled");
-        simpleRadio.has().enabled("First", "Second", "Third");
-        simpleRadio.has().disabled("Disabled");
+//        simpleRadio.has().values("First", "Second", "Third", "Disabled");
+//        simpleRadio.has().enabled("First", "Second", "Third");
+//        simpleRadio.has().disabled("Disabled");
         asList("First", "Second", "Third").forEach(label -> {
             simpleRadio.select(label);
             simpleRadio.has().selected(label);
@@ -51,7 +52,15 @@ public class RadioTests extends TestsInit {
     }
 
     @Test
-    public void showErrorTest() {
+    public void quizTest() {
+        quizRadio.select("The worst.");
+        quizRadio.has().selected("The worst.");
+        checkAnswer.click();
+        quizText.has().text(containsString("Sorry, wrong answer!"));
 
+        quizRadio.select("The best!");
+        quizRadio.has().selected("The best!");
+        checkAnswer.click();
+        quizText.has().text(containsString("You got it!"));
     }
 }
