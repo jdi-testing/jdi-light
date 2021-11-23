@@ -12,7 +12,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.Color;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -279,13 +278,14 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
 
     @JDIAction("Get shown month based on locale")
     public String getMonth(Locale locale) {
-        if (locale == Locale.CHINESE) {
+        if (locale.equals(Locale.CHINESE)) {
             Pattern monthPattern = Pattern.compile("([\\d]+)([\\u4E00-\\u9FA5]+)([\\d]+)([\\u4E00-\\u9FA5]+)");
             Matcher matcher = monthPattern.matcher(getMonthAndYear());
+            String matcherResult = StringUtils.EMPTY;
             while (matcher.find()) {
-                return (matcher.group(3) + matcher.group(4));
+                matcherResult = (matcher.group(3) + matcher.group(4));
             }
-            return StringUtils.EMPTY;
+            return matcherResult;
         } else return getMonthAndYear().substring(0, getMonthAndYear().indexOf(" "));
     }
 
@@ -296,13 +296,14 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
 
     @JDIAction("Get shown year based on locale")
     public String getYear(Locale locale) {
-        if (locale == Locale.CHINESE) {
+        if (locale.equals(Locale.CHINESE)) {
             Pattern yearPattern = Pattern.compile("([\\d]{4})[\\u4E00-\\u9FA5]");
             Matcher matcher = yearPattern.matcher(getMonthAndYear());
+            String matcherResult = StringUtils.EMPTY;
             while (matcher.find()) {
-                return (matcher.group(0));
+                matcherResult = (matcher.group(0));
             }
-            return StringUtils.EMPTY;
+            return matcherResult;
         }
         return getMonthAndYear().substring(getMonthAndYear().indexOf(" ") + 1);
     }
@@ -316,28 +317,31 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     public String getDayOfMonth() {
         Pattern dayPattern = Pattern.compile("\\d+");
         Matcher matcher = dayPattern.matcher(getDate());
+        String matcherResult = StringUtils.EMPTY;
         while (matcher.find()) {
-            return matcher.group();
+            matcherResult = matcher.group();
         }
-        return StringUtils.EMPTY;
+        return matcherResult;
     }
 
     @JDIAction("Get shown day of month based on locale")
     public String getDayOfMonth(Locale locale) {
-        if (locale == Locale.CHINESE) {
+        if (locale.equals(Locale.CHINESE)) {
             Pattern dayPattern = Pattern.compile("([\\d]+)([\\u4E00-\\u9FA5])(\\d+)([\\u4E00-\\u9FA5])");
             Matcher matcher = dayPattern.matcher(getDate());
+            String matcherResult = StringUtils.EMPTY;
             while (matcher.find()) {
-                return matcher.group(3);
+                matcherResult = matcher.group(3);
             }
-            return StringUtils.EMPTY;
+            return matcherResult;
         } else {
             Pattern dayPattern = Pattern.compile("\\d+");
             Matcher matcher = dayPattern.matcher(getDate());
+            String matcherResult = StringUtils.EMPTY;
             while (matcher.find()) {
-                return matcher.group();
+                matcherResult = matcher.group();
             }
-            return StringUtils.EMPTY;
+            return matcherResult;
         }
     }
 

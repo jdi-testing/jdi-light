@@ -24,43 +24,43 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.datePickersPage;
-import static io.github.com.pages.DatePickersPage.activePickerNewDP;
-import static io.github.com.pages.DatePickersPage.allowedNewDP;
-import static io.github.com.pages.DatePickersPage.chineseNewDP;
+import static io.github.com.pages.DatePickersPage.activePickerDP;
+import static io.github.com.pages.DatePickersPage.allowedDP;
+import static io.github.com.pages.DatePickersPage.chineseDP;
 import static io.github.com.pages.DatePickersPage.clickYearCheckbox;
-import static io.github.com.pages.DatePickersPage.colorFirstNewDP;
-import static io.github.com.pages.DatePickersPage.colorSecondNewDP;
+import static io.github.com.pages.DatePickersPage.colorFirstDP;
+import static io.github.com.pages.DatePickersPage.colorSecondDP;
 import static io.github.com.pages.DatePickersPage.cursorOverMonthCheckbox;
-import static io.github.com.pages.DatePickersPage.dateButtonsNewDP;
+import static io.github.com.pages.DatePickersPage.dateButtonsDP;
 import static io.github.com.pages.DatePickersPage.doubleClickAnyDateCheckbox;
-import static io.github.com.pages.DatePickersPage.elevationWithElevationNewDP;
-import static io.github.com.pages.DatePickersPage.firstDateEventsNewDP;
-import static io.github.com.pages.DatePickersPage.firstShowCurrentNewDP;
-import static io.github.com.pages.DatePickersPage.firstWidthNewDP;
-import static io.github.com.pages.DatePickersPage.formattedDatefnsNewDP;
-import static io.github.com.pages.DatePickersPage.formattedMomentJsNewDP;
-import static io.github.com.pages.DatePickersPage.iconsNewDP;
+import static io.github.com.pages.DatePickersPage.elevationWithElevationDP;
+import static io.github.com.pages.DatePickersPage.firstDateEventsDP;
+import static io.github.com.pages.DatePickersPage.firstShowCurrentDP;
+import static io.github.com.pages.DatePickersPage.firstWidthDP;
+import static io.github.com.pages.DatePickersPage.formattedDatefnsDP;
+import static io.github.com.pages.DatePickersPage.formattedMomentJsDP;
+import static io.github.com.pages.DatePickersPage.iconsDP;
 import static io.github.com.pages.DatePickersPage.mainWindow;
 import static io.github.com.pages.DatePickersPage.modelDateRangeDP;
 import static io.github.com.pages.DatePickersPage.mousePointerMonthText;
-import static io.github.com.pages.DatePickersPage.multipleInMenuNewDP;
-import static io.github.com.pages.DatePickersPage.multipleNewDP;
+import static io.github.com.pages.DatePickersPage.multipleInMenuDP;
+import static io.github.com.pages.DatePickersPage.multipleDP;
 import static io.github.com.pages.DatePickersPage.newsPickerDateDP;
-import static io.github.com.pages.DatePickersPage.orientationNewDP;
-import static io.github.com.pages.DatePickersPage.pickerDateNewDP;
-import static io.github.com.pages.DatePickersPage.pickerInDialogNewDP;
-import static io.github.com.pages.DatePickersPage.pickerInMenuNewDP;
-import static io.github.com.pages.DatePickersPage.pickerWithoutButtonsNewDP;
-import static io.github.com.pages.DatePickersPage.rangeNewDP;
-import static io.github.com.pages.DatePickersPage.readOnlyNewDP;
-import static io.github.com.pages.DatePickersPage.readonlyFormattingNewDP;
-import static io.github.com.pages.DatePickersPage.secondDateEventsNewDP;
-import static io.github.com.pages.DatePickersPage.secondShowCurrentNewDP;
-import static io.github.com.pages.DatePickersPage.secondWidthNewDP;
-import static io.github.com.pages.DatePickersPage.showSiblingMonthsNewDP;
-import static io.github.com.pages.DatePickersPage.swedishNewDP;
+import static io.github.com.pages.DatePickersPage.orientationDP;
+import static io.github.com.pages.DatePickersPage.pickerDateDP;
+import static io.github.com.pages.DatePickersPage.pickerInDialogDP;
+import static io.github.com.pages.DatePickersPage.pickerInMenuDP;
+import static io.github.com.pages.DatePickersPage.pickerWithoutButtonsDP;
+import static io.github.com.pages.DatePickersPage.rangeDP;
+import static io.github.com.pages.DatePickersPage.readOnlyDP;
+import static io.github.com.pages.DatePickersPage.readonlyFormattingDP;
+import static io.github.com.pages.DatePickersPage.secondDateEventsDP;
+import static io.github.com.pages.DatePickersPage.secondShowCurrentDP;
+import static io.github.com.pages.DatePickersPage.secondWidthDP;
+import static io.github.com.pages.DatePickersPage.showSiblingMonthsDP;
+import static io.github.com.pages.DatePickersPage.swedishDP;
 import static io.github.com.pages.DatePickersPage.textWithChosenMonthPickerDateDP;
-import static io.github.com.pages.DatePickersPage.writableFormattingNewDP;
+import static io.github.com.pages.DatePickersPage.writableFormattingDP;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
@@ -121,107 +121,111 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testAllowedDatesPicker() {
-        allowedNewDP.has().disabledDatesNonEmptyList();
-        allowedNewDP.has().nonClickableDisabledDates();
-        allowedNewDP.has().clickableEnabledDates();
+        Timer.waitCondition(() -> allowedDP.isVisible());
+        allowedDP.has().disabledDatesNonEmptyList();
+        allowedDP.getEnabledDates();
+        allowedDP.has().clickableEnabledDates();
+        allowedDP.has().nonClickableDisabledDates();
     }
 
     @Test
     public void testColorDatePicker() {
+        Timer.waitCondition(() -> colorFirstDP.isVisible());
+        Timer.waitCondition(() -> colorSecondDP.isVisible());
         String nextMonth = date.plusMonths(1).getMonth().toString().substring(0, 1)
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
                 + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
-        colorFirstNewDP.has().date(date.format(formatterDow));
-        colorFirstNewDP.has().color(GREEN_COLOR_HEX);
-        colorSecondNewDP.has().color(BLUE_COLOR_HEX);
-        colorFirstNewDP.selectDay(Integer.toString(CHOSEN_DAY));
-        colorFirstNewDP.has().dayOfMonth(Integer.toString(CHOSEN_DAY));
-        colorFirstNewDP.selectDay(Integer.toString(CHOSEN_DAY_TWO));
-        colorFirstNewDP.has().dayOfMonth(Integer.toString(CHOSEN_DAY_TWO));
-        colorFirstNewDP.selectDay(Integer.toString(CHOSEN_DAY_THREE));
-        colorFirstNewDP.has().dayOfMonth(Integer.toString(CHOSEN_DAY_THREE));
-        colorFirstNewDP.nextMonth();
-        colorFirstNewDP.has().month(nextMonth);
-        colorFirstNewDP.previousMonth();
-        colorFirstNewDP.previousMonth();
-        colorFirstNewDP.has().month(previousMonth);
-        colorFirstNewDP.changeMonth();
-        colorFirstNewDP.selectMonth(CHOSEN_MONTH);
-        colorFirstNewDP.has().month(CHOSEN_MONTH);
-        colorFirstNewDP.changeMonth();
-        colorFirstNewDP.changeYear();
-        colorFirstNewDP.selectYear(Integer.toString(currentYear + 100));
-        colorFirstNewDP.has().year(Integer.toString(currentYear + 100));
-        colorFirstNewDP.changeYear();
-        colorFirstNewDP.selectYear(Integer.toString(currentYear));
-        colorFirstNewDP.changeYear();
-        colorFirstNewDP.selectYear(Integer.toString(currentYear - 100));
-        colorFirstNewDP.has().year(Integer.toString(currentYear - 100));
-        colorFirstNewDP.changeYearCornerButton();
-        colorFirstNewDP.selectYear(Integer.toString(currentYear));
-        colorFirstNewDP.has().year(Integer.toString(currentYear ));
+        colorFirstDP.has().date(date.format(formatterDow));
+        colorFirstDP.has().color(GREEN_COLOR_HEX);
+        colorSecondDP.has().color(BLUE_COLOR_HEX);
+        colorFirstDP.selectDay(Integer.toString(CHOSEN_DAY));
+        colorFirstDP.has().dayOfMonth(Integer.toString(CHOSEN_DAY));
+        colorFirstDP.selectDay(Integer.toString(CHOSEN_DAY_TWO));
+        colorFirstDP.has().dayOfMonth(Integer.toString(CHOSEN_DAY_TWO));
+        colorFirstDP.selectDay(Integer.toString(CHOSEN_DAY_THREE));
+        colorFirstDP.has().dayOfMonth(Integer.toString(CHOSEN_DAY_THREE));
+        colorFirstDP.nextMonth();
+        colorFirstDP.has().month(nextMonth);
+        colorFirstDP.previousMonth();
+        colorFirstDP.previousMonth();
+        colorFirstDP.has().month(previousMonth);
+        colorFirstDP.changeMonth();
+        colorFirstDP.selectMonth(CHOSEN_MONTH);
+        colorFirstDP.has().month(CHOSEN_MONTH);
+        colorFirstDP.changeMonth();
+        colorFirstDP.changeYear();
+        colorFirstDP.selectYear(Integer.toString(currentYear + 100));
+        colorFirstDP.has().year(Integer.toString(currentYear + 100));
+        colorFirstDP.changeYear();
+        colorFirstDP.selectYear(Integer.toString(currentYear));
+        colorFirstDP.changeYear();
+        colorFirstDP.selectYear(Integer.toString(currentYear - 100));
+        colorFirstDP.has().year(Integer.toString(currentYear - 100));
+        colorFirstDP.changeYearCornerButton();
+        colorFirstDP.selectYear(Integer.toString(currentYear));
+        colorFirstDP.has().year(Integer.toString(currentYear ));
     }
 
     @Test
     public void testElevationDatePicker() {
-        Timer.waitCondition(() -> elevationWithElevationNewDP.isVisible());
-        elevationWithElevationNewDP.has().elevation(ELEVATION);
+        Timer.waitCondition(() -> elevationWithElevationDP.isVisible());
+        elevationWithElevationDP.has().elevation(ELEVATION);
     }
 
     @Test
     public void testIconsDatePicker() {
-        Timer.waitCondition(() -> iconsNewDP.isVisible());
-        iconsNewDP.has().nextMonthIconClass(NEXT_MONTH_ICON_CLASS);
-        iconsNewDP.has().previousMonthIconClass(PREVIOUS_MONTH_ICON_CLASS);
-        iconsNewDP.has().additionalYearIcon();
+        Timer.waitCondition(() -> iconsDP.isVisible());
+        iconsDP.has().nextMonthIconClass(NEXT_MONTH_ICON_CLASS);
+        iconsDP.has().previousMonthIconClass(PREVIOUS_MONTH_ICON_CLASS);
+        iconsDP.has().additionalYearIcon();
     }
 
     @Test
     public void testMultipleDatePicker() {
-        Timer.waitCondition(() -> multipleNewDP.isVisible());
-        String monthMultipleDP = multipleNewDP.getMonth(Locale.ENGLISH);
-        List<String> firstlyActiveDaysOfMonth = multipleNewDP.getAllActiveDaysOfMonth();
+        Timer.waitCondition(() -> multipleDP.isVisible());
+        String monthMultipleDP = multipleDP.getMonth(Locale.ENGLISH);
+        List<String> firstlyActiveDaysOfMonth = multipleDP.getAllActiveDaysOfMonth();
         CHECKED_MULTIPLE_DATES.stream().forEach(elem -> {
             if (!firstlyActiveDaysOfMonth.contains(elem)) {
-                multipleNewDP.selectDay(elem);
+                multipleDP.selectDay(elem);
             }
         });
         firstlyActiveDaysOfMonth.addAll(CHECKED_MULTIPLE_DATES);
         Set<String> allExpectedChosenDays = new HashSet<>(firstlyActiveDaysOfMonth);
-        multipleNewDP.has().properSetOfActiveDays(allExpectedChosenDays);
-        multipleNewDP.has().date(allExpectedChosenDays.size() + SELECTION_TEXT);
-        allExpectedChosenDays.stream().forEach(elem -> multipleNewDP.selectDay(elem));
-        multipleNewDP.has().date(EMPTY_DATE_FIELD);
-        multipleNewDP.selectDay(Integer.toString(CHOSEN_DAY));
-        multipleNewDP.has().date(LocalDate.of(Integer.parseInt(multipleNewDP.getYear()),
+        multipleDP.has().properSetOfActiveDays(allExpectedChosenDays);
+        multipleDP.has().date(allExpectedChosenDays.size() + SELECTION_TEXT);
+        allExpectedChosenDays.stream().forEach(elem -> multipleDP.selectDay(elem));
+        multipleDP.has().date(EMPTY_DATE_FIELD);
+        multipleDP.selectDay(Integer.toString(CHOSEN_DAY));
+        multipleDP.has().date(LocalDate.of(Integer.parseInt(multipleDP.getYear()),
                 Month.valueOf(monthMultipleDP.toUpperCase(Locale.ROOT)), CHOSEN_DAY).format(formatterDow));
 
-        multipleInMenuNewDP.expand();
-        List<String> firstlyActiveDaysInMenu = multipleInMenuNewDP.getAllActiveDaysOfMonth();
+        multipleInMenuDP.expand();
+        List<String> firstlyActiveDaysInMenu = multipleInMenuDP.getAllActiveDaysOfMonth();
         CHECKED_MULTIPLE_DATES.stream().forEach(elem -> {
             if (!firstlyActiveDaysInMenu.contains(elem)) {
-                multipleInMenuNewDP.selectDay(elem);
+                multipleInMenuDP.selectDay(elem);
             }
         });
         firstlyActiveDaysInMenu.addAll(CHECKED_MULTIPLE_DATES);
         Set<String> allExpectedChosenDaysInMenu = new HashSet<>(firstlyActiveDaysInMenu);
-        multipleInMenuNewDP.has().properSetOfActiveDays(allExpectedChosenDaysInMenu);
-        multipleInMenuNewDP.has().properShownMultipleDates();
+        multipleInMenuDP.has().properSetOfActiveDays(allExpectedChosenDaysInMenu);
+        multipleInMenuDP.has().properShownMultipleDates();
     }
 
     @Test
     public void testPickerDateDatePicker() {
         List<String> currentMonthNews = newsPickerDateDP.stream().map(elem
                 -> elem.getText()).collect(Collectors.toList());
-        pickerDateNewDP.previousMonth();
+        pickerDateDP.previousMonth();
         List<String> previousMonthNews = newsPickerDateDP.stream().map(elem
                 -> elem.getText()).collect(Collectors.toList());
         jdiAssert(textWithChosenMonthPickerDateDP.getText(),
                 containsString(date.minusMonths(1).format(formatterYearHyphenMonth)),
                 "Month in news section does not correspond to chosen previous month");
-        pickerDateNewDP.nextMonth();
-        pickerDateNewDP.nextMonth();
+        pickerDateDP.nextMonth();
+        pickerDateDP.nextMonth();
         List<String> nextMonthNews = newsPickerDateDP.stream().map(elem
                 -> elem.getText()).collect(Collectors.toList());
         jdiAssert(textWithChosenMonthPickerDateDP.getText(),
@@ -235,16 +239,16 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testRangeDatePicker() {
-        Timer.waitCondition(() -> rangeNewDP.isVisible());
-        rangeNewDP.selectDay(Integer.toString(CHOSEN_DAY));
-        rangeNewDP.selectDay(Integer.toString(CHOSEN_DAY_THREE));
-        rangeNewDP.has().properRangeDates(CHOSEN_DAY, CHOSEN_DAY_THREE);
-        rangeNewDP.has().date(RANGE_SELECTION_TEXT);
-        String dateFirstFormattedRangeDP = LocalDate.of(Integer.parseInt(rangeNewDP.getYear()),
-                Month.valueOf(rangeNewDP.getMonth(Locale.ENGLISH).toUpperCase(Locale.ROOT)).getValue(),
+        Timer.waitCondition(() -> rangeDP.isVisible());
+        rangeDP.selectDay(Integer.toString(CHOSEN_DAY));
+        rangeDP.selectDay(Integer.toString(CHOSEN_DAY_THREE));
+        rangeDP.has().properRangeDates(CHOSEN_DAY, CHOSEN_DAY_THREE);
+        rangeDP.has().date(RANGE_SELECTION_TEXT);
+        String dateFirstFormattedRangeDP = LocalDate.of(Integer.parseInt(rangeDP.getYear()),
+                Month.valueOf(rangeDP.getMonth(Locale.ENGLISH).toUpperCase(Locale.ROOT)).getValue(),
                 CHOSEN_DAY).toString();
-        String dateSecondFormattedRangeDP = LocalDate.of(Integer.parseInt(rangeNewDP.getYear()),
-                Month.valueOf(rangeNewDP.getMonth(Locale.ENGLISH).toUpperCase(Locale.ROOT)).getValue(),
+        String dateSecondFormattedRangeDP = LocalDate.of(Integer.parseInt(rangeDP.getYear()),
+                Month.valueOf(rangeDP.getMonth(Locale.ENGLISH).toUpperCase(Locale.ROOT)).getValue(),
                 CHOSEN_DAY_THREE).toString();
         jdiAssert(modelDateRangeDP.getText(), allOf(containsString(dateFirstFormattedRangeDP),
                         containsString(dateSecondFormattedRangeDP)),
@@ -253,40 +257,40 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testReadOnlyDatePicker() {
-        String firstlyActiveDay = readOnlyNewDP.getActiveDayOfMonth();
+        String firstlyActiveDay = readOnlyDP.getActiveDayOfMonth();
         String checkedDay;
         if (Integer.parseInt(firstlyActiveDay) > 2 | Integer.parseInt(firstlyActiveDay) < 27) {
             checkedDay = firstlyActiveDay;
         } else checkedDay = "15";
-        readOnlyNewDP.selectDay(Integer.toString(Integer.parseInt(checkedDay) - 1));
-        readOnlyNewDP.has().dayOfMonth(firstlyActiveDay);
-        readOnlyNewDP.selectDay(Integer.toString(Integer.parseInt(checkedDay) + 1));
-        readOnlyNewDP.has().dayOfMonth(firstlyActiveDay);
+        readOnlyDP.selectDay(Integer.toString(Integer.parseInt(checkedDay) - 1));
+        readOnlyDP.has().dayOfMonth(firstlyActiveDay);
+        readOnlyDP.selectDay(Integer.toString(Integer.parseInt(checkedDay) + 1));
+        readOnlyDP.has().dayOfMonth(firstlyActiveDay);
     }
 
     @Test
     public void testShowCurrentDatePicker() {
-        firstShowCurrentNewDP.has().date(date.format(formatterDow));
-        secondShowCurrentNewDP.has().properOutlinedDateBorder(DATE_BORDER);
+        firstShowCurrentDP.has().date(date.format(formatterDow));
+        secondShowCurrentDP.has().properOutlinedDateBorder(DATE_BORDER);
     }
 
     @Test
     public void testShowSiblingMonthsDatePicker() {
-        showSiblingMonthsNewDP.has().disabledDatesNonEmptyList();
+        showSiblingMonthsDP.has().disabledDatesNonEmptyList();
     }
 
     @Test
     public void testWidthDatePicker() {
-        Timer.waitCondition(() -> firstWidthNewDP.isVisible());
-        firstWidthNewDP.has().pickerWidth(WIDTH_OF_PREDEFINED_WIDTH_DP);
-        secondWidthNewDP.has().pickerWidth(mainWindow.getSize().getWidth());
+        Timer.waitCondition(() -> firstWidthDP.isVisible());
+        firstWidthDP.has().pickerWidth(WIDTH_OF_PREDEFINED_WIDTH_DP);
+        secondWidthDP.has().pickerWidth(mainWindow.getSize().getWidth());
     }
 
     @Test
     public void testDateButtonsDatePicker() {
         jdiAssert(doubleClickAnyDateCheckbox.isExist(), is(false),
                 "Before clicking any date: Checkbox 'Double click on any date' is selected");
-        dateButtonsNewDP.doubleClickDay(Integer.toString(CHOSEN_DAY));
+        dateButtonsDP.doubleClickDay(Integer.toString(CHOSEN_DAY));
         Alert alert_window = WebDriverFactory.getDriver().switchTo().alert();
         alert_window.accept();
         jdiAssert(doubleClickAnyDateCheckbox.isExist(), is(true),
@@ -294,8 +298,8 @@ public class DatePickersTests extends TestsInit {
         jdiAssert(cursorOverMonthCheckbox.isExist(), is(false),
                 "Before moving the cursor to any month: " +
                         "Checkbox 'Move mouse cursor over any month button' is selected");
-        dateButtonsNewDP.changeMonth();
-        dateButtonsNewDP.hoverMonth(CHOSEN_MONTH);
+        dateButtonsDP.changeMonth();
+        dateButtonsDP.hoverMonth(CHOSEN_MONTH);
         jdiAssert(cursorOverMonthCheckbox.isExist(), is(true),
                 "After moving the cursor to the month: Checkbox 'Move mouse cursor " +
                         "over any month button' is not selected");
@@ -305,8 +309,8 @@ public class DatePickersTests extends TestsInit {
                 "After clicking the month: Mouse pointer date text is absent");
         jdiAssert(clickYearCheckbox.isExist(), is(false),
                 "Before clicking any year: Checkbox 'Right click on any year' is selected");
-        dateButtonsNewDP.changeYear();
-        dateButtonsNewDP.rightClickYear(CHOSEN_YEAR);
+        dateButtonsDP.changeYear();
+        dateButtonsDP.rightClickYear(CHOSEN_YEAR);
         alert_window.accept();
         jdiAssert(clickYearCheckbox.isExist(), is(true),
                 "Before clicking the year: Checkbox 'Right click on any year' is not selected");
@@ -314,167 +318,167 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testDateEventsDatePicker() {
-        firstDateEventsNewDP.has().eventColorCirclesNonEmptyList();
-        secondDateEventsNewDP.has().eventColorCirclesNonEmptyList();
+        firstDateEventsDP.has().eventColorCirclesNonEmptyList();
+        secondDateEventsDP.has().eventColorCirclesNonEmptyList();
         List<String> al = new ArrayList<>();
         al.add(GREEN_COLOR_HEX);
-        firstDateEventsNewDP.has().properColorsOfEventCircles(GREEN_COLOR_HEX);
-        secondDateEventsNewDP.has().properColorsOfEventCircles(
+        firstDateEventsDP.has().properColorsOfEventCircles(GREEN_COLOR_HEX);
+        secondDateEventsDP.has().properColorsOfEventCircles(
                 BLUE_CIRCLE_COLOR_HEX, RED_CIRCLE_COLOR_HEX, YELLOW_CIRCLE_COLOR_HEX);
     }
 
     @Test
     public void testActivePickerDatePicker() {
-        Timer.waitCondition(() -> activePickerNewDP.isVisible());
-        jdiAssert(activePickerNewDP.getCode(), is("null"), "Before any date in Active date picker " +
+        Timer.waitCondition(() -> activePickerDP.isVisible());
+        jdiAssert(activePickerDP.getCode(), is("null"), "Before any date in Active date picker " +
                 "is selected: active picker code is not null");
-        activePickerNewDP.expand();
-        activePickerNewDP.selectYear(CHOSEN_YEAR);
-        activePickerNewDP.selectMonth(CHOSEN_MONTH);
-        activePickerNewDP.selectDay(Integer.toString(CHOSEN_DAY));
-        activePickerNewDP.has().resultDate(LocalDate.of(Integer.parseInt(CHOSEN_YEAR),
+        activePickerDP.expand();
+        activePickerDP.selectYear(CHOSEN_YEAR);
+        activePickerDP.selectMonth(CHOSEN_MONTH);
+        activePickerDP.selectDay(Integer.toString(CHOSEN_DAY));
+        activePickerDP.has().resultDate(LocalDate.of(Integer.parseInt(CHOSEN_YEAR),
                 Month.valueOf(CHOSEN_MONTH.toUpperCase(Locale.ROOT)), CHOSEN_DAY).toString());
-        jdiAssert(activePickerNewDP.getCode(), is("DATE"), "After some date in Active date picker " +
+        jdiAssert(activePickerDP.getCode(), is("DATE"), "After some date in Active date picker " +
                 "was selected: active picker code is not correct");
     }
 
     @Test
     public void testDialogAndMenuDatePicker() {
-        Timer.waitCondition(() -> pickerInMenuNewDP.isVisible());
+        Timer.waitCondition(() -> pickerInMenuDP.isVisible());
         String nextMonth = date.plusMonths(1).getMonth().toString().substring(0, 1)
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
                 + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
-        pickerInMenuNewDP.expand();
-        pickerInMenuNewDP.has().resultDate(date.toString());
-        pickerInMenuNewDP.selectDay(Integer.toString(CHOSEN_DAY));
-        pickerInMenuNewDP.has().resultDate(LocalDate.of(currentYear, currentMonth, CHOSEN_DAY).toString());
-        pickerInMenuNewDP.selectDay(Integer.toString(CHOSEN_DAY_TWO));
-        pickerInMenuNewDP.has().resultDate(LocalDate.of(currentYear, currentMonth, CHOSEN_DAY_TWO).toString());
-        pickerInMenuNewDP.nextMonth();
-        pickerInMenuNewDP.has().month(nextMonth);
-        pickerInMenuNewDP.previousMonth();
-        pickerInMenuNewDP.previousMonth();
-        pickerInMenuNewDP.has().month(previousMonth);
-        pickerInMenuNewDP.changeMonth();
-        pickerInMenuNewDP.selectMonth(CHOSEN_MONTH);
-        pickerInMenuNewDP.has().month(CHOSEN_MONTH);
-        pickerInMenuNewDP.changeMonth();
-        pickerInMenuNewDP.has().visibleChangeYearButton();
-        pickerInMenuNewDP.changeYear();
-        pickerInMenuNewDP.selectYear(Integer.toString(currentYear + 99));
-        pickerInMenuNewDP.has().year(Integer.toString(currentYear + 99));
-        pickerInMenuNewDP.has().visibleChangeYearButton();
-        pickerInMenuNewDP.changeYear();
-        pickerInMenuNewDP.selectYear(Integer.toString(currentYear));
-        pickerInMenuNewDP.has().visibleChangeYearButton();
-        pickerInMenuNewDP.changeYear();
-        pickerInMenuNewDP.selectYear(Integer.toString(currentYear - 99));
-        pickerInMenuNewDP.has().year(Integer.toString(currentYear - 99));
-        pickerInMenuNewDP.clickOk();
-        pickerInMenuNewDP.expand();
-        pickerInMenuNewDP.has().mainDateFieldIsNotExist();
-        pickerInMenuNewDP.clickCancel();
-        pickerInDialogNewDP.expand();
-        pickerInDialogNewDP.has().mainDateField();
-        pickerInDialogNewDP.clickOk();
-        pickerWithoutButtonsNewDP.expand();
-        pickerWithoutButtonsNewDP.has().cancelButtonIsNotExist();
-        pickerWithoutButtonsNewDP.has().okButtonIsNotExist();
+        pickerInMenuDP.expand();
+        pickerInMenuDP.has().resultDate(date.toString());
+        pickerInMenuDP.selectDay(Integer.toString(CHOSEN_DAY));
+        pickerInMenuDP.has().resultDate(LocalDate.of(currentYear, currentMonth, CHOSEN_DAY).toString());
+        pickerInMenuDP.selectDay(Integer.toString(CHOSEN_DAY_TWO));
+        pickerInMenuDP.has().resultDate(LocalDate.of(currentYear, currentMonth, CHOSEN_DAY_TWO).toString());
+        pickerInMenuDP.nextMonth();
+        pickerInMenuDP.has().month(nextMonth);
+        pickerInMenuDP.previousMonth();
+        pickerInMenuDP.previousMonth();
+        pickerInMenuDP.has().month(previousMonth);
+        pickerInMenuDP.changeMonth();
+        pickerInMenuDP.selectMonth(CHOSEN_MONTH);
+        pickerInMenuDP.has().month(CHOSEN_MONTH);
+        pickerInMenuDP.changeMonth();
+        pickerInMenuDP.has().visibleChangeYearButton();
+        pickerInMenuDP.changeYear();
+        pickerInMenuDP.selectYear(Integer.toString(currentYear + 99));
+        pickerInMenuDP.has().year(Integer.toString(currentYear + 99));
+        pickerInMenuDP.has().visibleChangeYearButton();
+        pickerInMenuDP.changeYear();
+        pickerInMenuDP.selectYear(Integer.toString(currentYear));
+        pickerInMenuDP.has().visibleChangeYearButton();
+        pickerInMenuDP.changeYear();
+        pickerInMenuDP.selectYear(Integer.toString(currentYear - 99));
+        pickerInMenuDP.has().year(Integer.toString(currentYear - 99));
+        pickerInMenuDP.clickOk();
+        pickerInMenuDP.expand();
+        pickerInMenuDP.has().mainDateFieldIsNotExist();
+        pickerInMenuDP.clickCancel();
+        pickerInDialogDP.expand();
+        pickerInDialogDP.has().mainDateField();
+        pickerInDialogDP.clickOk();
+        pickerWithoutButtonsDP.expand();
+        pickerWithoutButtonsDP.has().cancelButtonIsNotExist();
+        pickerWithoutButtonsDP.has().okButtonIsNotExist();
     }
 
     @Test
     public void testFormattingDatePicker() {
-        Timer.waitCondition(() -> writableFormattingNewDP.isVisible());
-        writableFormattingNewDP.expand();
-        writableFormattingNewDP.selectDay(Integer.toString(CHOSEN_DAY));
-        writableFormattingNewDP.has().resultDate(LocalDate.of(
+        Timer.waitCondition(() -> writableFormattingDP.isVisible());
+        writableFormattingDP.expand();
+        writableFormattingDP.selectDay(Integer.toString(CHOSEN_DAY));
+        writableFormattingDP.has().resultDate(LocalDate.of(
                 currentYear, currentMonth, CHOSEN_DAY).format(formatterMMDDYYYY));
-        writableFormattingNewDP.clear();
-        writableFormattingNewDP.setDate(FORMATTING_DATE);
-        writableFormattingNewDP.has().resultDate(FORMATTING_DATE);
-        writableFormattingNewDP.has().formattedDate(FORMATTING_DATE_ISO);
-        readonlyFormattingNewDP.has().dateFieldReadonlyAttribute();
+        writableFormattingDP.clear();
+        writableFormattingDP.setDate(FORMATTING_DATE);
+        writableFormattingDP.has().resultDate(FORMATTING_DATE);
+        writableFormattingDP.has().formattedDate(FORMATTING_DATE_ISO);
+        readonlyFormattingDP.has().dateFieldReadonlyAttribute();
     }
 
     @Test
     public void testFormattingWithExternalLibrariesDatePicker() {
-        Timer.waitCondition(() -> formattedMomentJsNewDP.isVisible());
-        formattedMomentJsNewDP.expand();
-        formattedMomentJsNewDP.selectDay(Integer.toString(CHOSEN_DAY));
-        formattedMomentJsNewDP.has().properExternalLibFormattingDate(LocalDate.of(
+        Timer.waitCondition(() -> formattedMomentJsDP.isVisible());
+        formattedMomentJsDP.expand();
+        formattedMomentJsDP.selectDay(Integer.toString(CHOSEN_DAY));
+        formattedMomentJsDP.has().properExternalLibFormattingDate(LocalDate.of(
                 currentYear, currentMonth, CHOSEN_DAY));
-        formattedDatefnsNewDP.expand();
-        formattedDatefnsNewDP.selectDay(Integer.toString(CHOSEN_DAY_THREE));
-        formattedDatefnsNewDP.has().properExternalLibFormattingDate(LocalDate.of(
+        formattedDatefnsDP.expand();
+        formattedDatefnsDP.selectDay(Integer.toString(CHOSEN_DAY_THREE));
+        formattedDatefnsDP.has().properExternalLibFormattingDate(LocalDate.of(
                 currentYear, currentMonth, CHOSEN_DAY_THREE));
     }
 
     @Test
     public void testInternationalizationDatePicker() {
-        Timer.waitCondition(() -> swedishNewDP.isVisible());
-        swedishNewDP.changeMonth();
-        swedishNewDP.has().visibleChangeYearButton();
-        swedishNewDP.changeYear();
-        swedishNewDP.selectYear(CHOSEN_YEAR);
-        swedishNewDP.has().year(CHOSEN_YEAR);
-        swedishNewDP.selectMonth(CHOSEN_MONTH_SWEDISH);
+        Timer.waitCondition(() -> swedishDP.isVisible());
+        swedishDP.changeMonth();
+        swedishDP.has().visibleChangeYearButton();
+        swedishDP.changeYear();
+        swedishDP.selectYear(CHOSEN_YEAR);
+        swedishDP.has().year(CHOSEN_YEAR);
+        swedishDP.selectMonth(CHOSEN_MONTH_SWEDISH);
         List<String> shownSwedishDaysOfWeek = new ArrayList<>();
         for (int i = CHOSEN_DAY; i < (CHOSEN_DAY + 7); i++) {
-            swedishNewDP.selectDay(Integer.toString(i));
-            swedishNewDP.has().dayOfMonth(Integer.toString(i), new Locale("sv", "SE"));
+            swedishDP.selectDay(Integer.toString(i));
+            swedishDP.has().dayOfMonth(Integer.toString(i), new Locale("sv", "SE"));
             Pattern swedishDayOfWeekPattern = Pattern.compile("^[a-zwåäöÅÄÖ]+");
-            Matcher matcher = swedishDayOfWeekPattern.matcher(swedishNewDP.getDate());
+            Matcher matcher = swedishDayOfWeekPattern.matcher(swedishDP.getDate());
             while (matcher.find()) {
                 shownSwedishDaysOfWeek.add(matcher.group());
             }
         }
         jdiAssert(shownSwedishDaysOfWeek, containsInAnyOrder(SWEDISH_SHORT_DAYS_OF_WEEK.toArray()),
                 "For Swedish picker: shown and expected days of week are not the same");
-        swedishNewDP.changeMonth();
-        swedishNewDP.has().visibleChangeYearButton();
-        jdiAssert(swedishNewDP.getAllMonths(), is(SWEDISH_SHORT_MONTHS),
+        swedishDP.changeMonth();
+        swedishDP.has().visibleChangeYearButton();
+        jdiAssert(swedishDP.getAllMonths(), is(SWEDISH_SHORT_MONTHS),
                 "For Swedish picker: shown and expected days of week are not the same");
         List<String> shownSwedishMonths = new ArrayList<>();
         SWEDISH_SHORT_MONTHS.stream().forEach(elem -> {
-            swedishNewDP.selectMonth(elem.toLowerCase());
-            swedishNewDP.has().visibleChangeYearButton();
-            shownSwedishMonths.add(swedishNewDP.getMonth(new Locale("sv", "SE")));
-            swedishNewDP.changeMonth();
+            swedishDP.selectMonth(elem.toLowerCase());
+            swedishDP.has().visibleChangeYearButton();
+            shownSwedishMonths.add(swedishDP.getMonth(new Locale("sv", "SE")));
+            swedishDP.changeMonth();
         });
         jdiAssert(shownSwedishMonths, is(SWEDISH_FULL_MONTHS),
                 "For Swedish picker: shown and expected full month names are not the same");
 
-        chineseNewDP.changeMonth();
-        chineseNewDP.has().visibleChangeYearButton();
-        chineseNewDP.changeYear();
-        chineseNewDP.selectYear(CHOSEN_YEAR);
-        chineseNewDP.has().year(CHOSEN_YEAR, Locale.CHINESE);
-        chineseNewDP.selectMonth(CHOSEN_MONTH_CHINESE);
-        chineseNewDP.has().month(CHOSEN_MONTH_CHINESE, Locale.CHINESE);
+        chineseDP.changeMonth();
+        chineseDP.has().visibleChangeYearButton();
+        chineseDP.changeYear();
+        chineseDP.selectYear(CHOSEN_YEAR);
+        chineseDP.has().year(CHOSEN_YEAR, Locale.CHINESE);
+        chineseDP.selectMonth(CHOSEN_MONTH_CHINESE);
+        chineseDP.has().month(CHOSEN_MONTH_CHINESE, Locale.CHINESE);
         List<String> shownChineseDaysOfWeek = new ArrayList<>();
         for (int i = CHOSEN_DAY; i < (CHOSEN_DAY + 7); i++) {
-            chineseNewDP.selectDay(Integer.toString(i));
-            chineseNewDP.has().dayOfMonth(Integer.toString(i), Locale.CHINESE);
+            chineseDP.selectDay(Integer.toString(i));
+            chineseDP.has().dayOfMonth(Integer.toString(i), Locale.CHINESE);
             Pattern chineseDayOfWeekPattern = Pattern.compile(
                     "([\\d]+)([\\u4E00-\\u9FA5]+)(\\d+)([\\u4E00-\\u9FA5]+)");
-            Matcher matcher = chineseDayOfWeekPattern.matcher(chineseNewDP.getDate());
+            Matcher matcher = chineseDayOfWeekPattern.matcher(chineseDP.getDate());
             while (matcher.find()) {
                 shownChineseDaysOfWeek.add(matcher.group(4));
             }
         }
         jdiAssert(shownChineseDaysOfWeek, containsInAnyOrder(CHINESE_DAYS_OF_WEEK.toArray()),
                 "For Chinese picker: shown and expected days of week are not the same");
-        chineseNewDP.changeMonth();
-        chineseNewDP.has().visibleChangeYearButton();
-        jdiAssert(chineseNewDP.getAllMonths(), is(CHINESE_MONTHS),
+        chineseDP.changeMonth();
+        chineseDP.has().visibleChangeYearButton();
+        jdiAssert(chineseDP.getAllMonths(), is(CHINESE_MONTHS),
                 "For Chinese picker: shown and expected days of week are not the same");
         List<String> shownChineseMonths = new ArrayList<>();
         CHINESE_MONTHS.stream().forEach(elem -> {
-            chineseNewDP.selectMonth(elem);
-            chineseNewDP.has().visibleChangeYearButton();
-            shownChineseMonths.add(chineseNewDP.getMonth(Locale.CHINESE));
-            chineseNewDP.changeMonth();
+            chineseDP.selectMonth(elem);
+            chineseDP.has().visibleChangeYearButton();
+            shownChineseMonths.add(chineseDP.getMonth(Locale.CHINESE));
+            chineseDP.changeMonth();
         });
         jdiAssert(shownChineseMonths, is(CHINESE_MONTHS),
                 "For Chinese picker: shown and expected month names are not the same");
@@ -482,9 +486,9 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testOrientationDatePicker() {
-        Timer.waitCondition(() -> orientationNewDP.isVisible());
-        orientationNewDP.has().portraitOrientation();
-        orientationNewDP.switchOrientation();
-        orientationNewDP.has().landscapeOrientation();
+        Timer.waitCondition(() -> orientationDP.isVisible());
+        orientationDP.has().portraitOrientation();
+        orientationDP.switchOrientation();
+        orientationDP.has().landscapeOrientation();
     }
 }

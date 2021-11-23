@@ -56,12 +56,11 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> {
 
     @JDIAction("Assert that shown day of month is correct based on locale")
     public DatePickerAssert dayOfMonth(String expectedDayOfMonth, Locale locale) {
-        if(locale == Locale.CHINESE){
+        if (locale.equals(Locale.CHINESE)) {
             Timer.waitCondition(() -> element().getDayOfMonth(Locale.CHINESE).equals(expectedDayOfMonth));
             jdiAssert(element().getDayOfMonth(Locale.CHINESE), Matchers.containsString(expectedDayOfMonth));
             return this;
-        }
-        else {
+        } else {
             Timer.waitCondition(() -> element().getDayOfMonth(Locale.ENGLISH).equals(expectedDayOfMonth));
             jdiAssert(element().getDayOfMonth(Locale.ENGLISH), Matchers.is(expectedDayOfMonth));
             return this;
@@ -77,12 +76,11 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> {
 
     @JDIAction("Assert that shown month is correct based on locale")
     public DatePickerAssert month(String expectedMonth, Locale locale) {
-        if(locale == Locale.CHINESE){
+        if (locale.equals(Locale.CHINESE)) {
             Timer.waitCondition(() -> element().getMonth(Locale.CHINESE).equals(expectedMonth));
             jdiAssert(element().getMonth(Locale.CHINESE), Matchers.is(expectedMonth));
             return this;
-        }
-        else {
+        } else {
             Timer.waitCondition(() -> element().getMonth(Locale.ENGLISH).equals(expectedMonth));
             jdiAssert(element().getMonth(Locale.ENGLISH), Matchers.is(expectedMonth));
             return this;
@@ -98,7 +96,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> {
 
     @JDIAction("Assert that shown year is correct based on locale")
     public DatePickerAssert year(String expectedYear, Locale locale) {
-        if(locale == Locale.CHINESE){
+        if (locale.equals(Locale.CHINESE)) {
             Timer.waitCondition(() -> element().getYear(Locale.CHINESE).equals(expectedYear));
             jdiAssert(element().getYear(Locale.CHINESE), Matchers.containsString(expectedYear));
             return this;
@@ -116,8 +114,11 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> {
 
     @JDIAction("Assert that enable dates are clickable")
     public DatePickerAssert clickableEnabledDates() {
-        element().getEnabledDatesElements().stream().forEach(elem ->
-               jdiAssert(elem.isClickable(), Matchers.is(true))
+        element().getEnabledDatesElements().stream().forEach(elem -> {
+                    elem.hover();
+                    Timer.waitCondition(() -> elem.isClickable());
+                    jdiAssert(elem.isClickable(), Matchers.is(true));
+                }
         );
         return this;
     }
