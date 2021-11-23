@@ -15,11 +15,6 @@ import static io.github.com.pages.inputs.RadioButtonsPage.simpleRadioButtons;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 
-/**
- * To see an example of Radio Button web element please visit
- * https://material-ui.com/components/radio-buttons/
- */
-
 public class RadioButtonsTests extends TestsInit {
 
     @BeforeMethod()
