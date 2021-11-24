@@ -22,7 +22,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SnackbarTests extends TestsInit {
-    private static final String[] POSITION = {"Top Center", "Top Right", "Bottom Right", "Bottom Center", "Bottom Left", "Top Left"};
+
+    private static final String[] POSITION = {"Top Center", "Top Right", "Bottom Right", "Bottom Center",
+            "Bottom Left", "Top Left"};
     private static final String[] MESSAGE = {"SHOW MESSAGE A", "SHOW MESSAGE B", "Message A", "Message B"};
     private static final String LOVE_SNACKS = "I love snacks";
     private static final String LOREM = "lorem ipsum dolorem";
