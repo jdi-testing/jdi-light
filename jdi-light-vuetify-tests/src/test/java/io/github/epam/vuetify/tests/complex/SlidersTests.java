@@ -1,7 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.vuetify.elements.complex.Slider;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -10,7 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.ratingsPage;
 import static io.github.com.StaticSite.slidersPage;
+import static io.github.com.pages.RatingsPage.colorRatingGreen;
+import static io.github.com.pages.RatingsPage.colorRatingIndigo;
+import static io.github.com.pages.RatingsPage.colorRatingOrange;
+import static io.github.com.pages.RatingsPage.colorRatingPink;
+import static io.github.com.pages.RatingsPage.colorRatingPurple;
+import static io.github.com.pages.RatingsPage.colorRatingRed;
 import static io.github.com.pages.SlidersPage.appendAndPrependInputIcon;
 import static io.github.com.pages.SlidersPage.appendAndPrependSlider;
 import static io.github.com.pages.SlidersPage.appendAndPrependText;
@@ -36,7 +46,8 @@ public class SlidersTests extends TestsInit {
     @BeforeClass
     public void before() {
         slidersPage.open();
-        slidersPage.checkOpened();
+        //slidersPage.checkOpened();
+        // waitCondition(() -> ratingsPage.isOpened());
     }
 
     @Test
@@ -182,19 +193,23 @@ public class SlidersTests extends TestsInit {
         ticksSlider.get(4).is().trickLabel(4, "Apple");
     }
 
-    @Test
-    public void validationSliderTest() {
-        Map<Integer, String> data = new HashMap<Integer, String>() {{
-            put(50, "error");
-            put(20, "primary");
-        }};
-        validationSlider.forEach(slider -> data.forEach((value, color) -> {
-            slider.slideHorizontalTo(value);
-            slider.is().value(value);
-            slider.is().fillColor(color);
-            slider.is().backgroundColor(color);
-            slider.is().thumbColor(color);
-        }));
+    @DataProvider(name = "validationSliderTestData")
+    public Object[][] validationSliderTestData() {
+        return new Object[][] {
+                {50, "error"},
+                {20, "primary"},
+        };
+    }
+
+    @Test(dataProvider = "validationSliderTestData")
+    public void validationSliderTest(int value, String expectedColor) {
+        for (Slider s : validationSlider) {
+            s.slideHorizontalTo(value);
+            s.has().value(value);
+            s.has().fillColor(expectedColor);
+            s.has().backgroundColor(expectedColor);
+            s.has().thumbColor(expectedColor);
+        }
     }
 
     @Test
