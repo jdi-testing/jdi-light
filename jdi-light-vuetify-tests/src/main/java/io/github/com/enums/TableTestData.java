@@ -1,4 +1,4 @@
-package com.epam.jdi.light.vuetify.elements.enums;
+package io.github.com.enums;
 
 public enum TableTestData {
     FROZEN_YOGURT("Frozen Yogurt"),

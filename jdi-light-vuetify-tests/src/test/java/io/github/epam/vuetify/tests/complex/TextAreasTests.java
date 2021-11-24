@@ -7,8 +7,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLACK_TRANSPARENT_087;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_ACCENT_2;
+import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
+import static io.github.com.enums.Colors.RED_ACCENT_2;
 import static io.github.com.StaticSite.textareasPage;
 import static io.github.com.custom.forms.textareas.SignUpForm.submit;
 import static io.github.com.pages.TextareasPage.appendInnerTextArea;
@@ -130,7 +130,7 @@ public class TextAreasTests extends TestsInit {
     }
 
     @Test
-    public void appendOuterIconTextAreaTest() throws Exception {
+    public void appendOuterIconTextAreaTest() {
         appendOuterTextArea.label().has().text("append-outer-icon");
         appendOuterTextArea.appendOuter().is().displayed();
         appendOuterTextArea.appendOuter().has().type("mdi-comment");

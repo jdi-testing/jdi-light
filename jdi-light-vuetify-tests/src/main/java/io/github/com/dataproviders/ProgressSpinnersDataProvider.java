@@ -2,18 +2,18 @@ package io.github.com.dataproviders;
 
 import org.testng.annotations.DataProvider;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.AMBER;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_GREY;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BROWN;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.DEEP_ORANGE_LIGHTEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREEN;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.INDIGO_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.LIME;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PINK;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PURPLE;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.TEAL;
+import static io.github.com.enums.Colors.AMBER;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
+import static io.github.com.enums.Colors.BLUE_GREY;
+import static io.github.com.enums.Colors.BROWN;
+import static io.github.com.enums.Colors.DEEP_ORANGE_LIGHTEN_2;
+import static io.github.com.enums.Colors.GREEN;
+import static io.github.com.enums.Colors.INDIGO_DARKEN_2;
+import static io.github.com.enums.Colors.LIME;
+import static io.github.com.enums.Colors.PINK;
+import static io.github.com.enums.Colors.PURPLE;
+import static io.github.com.enums.Colors.RED;
+import static io.github.com.enums.Colors.TEAL;
 
 public class ProgressSpinnersDataProvider {
 

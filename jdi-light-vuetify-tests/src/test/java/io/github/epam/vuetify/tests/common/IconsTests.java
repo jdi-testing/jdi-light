@@ -5,7 +5,7 @@ import io.github.com.dataproviders.IconsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.WHITE;
+import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.StaticSite.iconsPage;
 import static io.github.com.pages.IconsPage.buttonsIcons;
 import static io.github.com.pages.IconsPage.clickIcon;
