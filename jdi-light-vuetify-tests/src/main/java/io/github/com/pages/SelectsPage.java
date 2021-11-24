@@ -3,6 +3,8 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.vuetify.elements.complex.Select;
+import io.github.com.custom.selects.IconSelect;
+import io.github.com.custom.selects.SelectionSelect;
 
 public class SelectsPage extends VuetifyPage {
 
@@ -32,11 +34,11 @@ public class SelectsPage extends VuetifyPage {
     public static Select readonlySelect;
 
 
-//    @JDropdown(root = "//div[@id = 'IconsSelect']//div[contains(@class, 'col-6')][2]//div[contains(@class, 'v-input--is-label-active')]",
-//            value = "//input[@type = 'hidden']",
-//            list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
-//            expand = "//div[@class = 'v-input__slot']//i[contains(@class, 'v-icon')]")
-//    public static Select leftIconSelect;
+    @JDropdown(root = "//div[@id = 'IconsSelect']//div[contains(@class, 'col-6')][2]//div[contains(@class, 'v-input--is-label-active')]",
+            value = "//input[@type = 'hidden']",
+            list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
+            expand = "//div[@class = 'v-input__slot']//i[contains(@class, 'v-icon')]")
+    public static IconSelect leftIconSelect;
 
     @JDropdown(root = "//div[@id = 'MenuPropsSelect']//div[contains(@class, 'v-text-field--is-booted')]",
             value = "//input[@type = 'hidden']",
@@ -49,5 +51,11 @@ public class SelectsPage extends VuetifyPage {
             list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
             expand = "//div[@class = 'v-input__slot']//i[contains(@class, 'v-icon')]")
     public static Select multipleSelect;
+
+    @JDropdown(root = "#SelectionSelect .v-select--is-multi",
+            value = "//input[@type = 'hidden']",
+            list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
+            expand = ".v-input__slot .v-icon")
+    public  static SelectionSelect selectionSelect;
 
 }

@@ -3,6 +3,7 @@ package io.github.epam.vuetify.tests.complex;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.selectsPage;
@@ -10,7 +11,7 @@ import static io.github.com.pages.SelectsPage.*;
 
 public class SelectTests extends TestsInit {
 
-    @BeforeClass
+    @BeforeMethod
     public void before() {
         selectsPage.open();
     }
@@ -27,7 +28,7 @@ public class SelectTests extends TestsInit {
 
     @Test
     public void iconTest() {
-
+        leftIconSelect.icon().is().displayed();
     }
 
     @Test
@@ -68,6 +69,7 @@ public class SelectTests extends TestsInit {
 
     @Test
     public void selectionSelectTest() {
-
+        selectionSelect.select("buzz");
+        selectionSelect.selection().is().text("(+3 others)");
     }
 }

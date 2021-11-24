@@ -36,12 +36,6 @@ public class Select extends Dropdown {
     }
 
     @Override
-    public void close() {
-
-        super.close();
-    }
-
-    @Override
     public String selected() {
         return setupDone ? value().getAttribute("value") : ds().selected();
     }
