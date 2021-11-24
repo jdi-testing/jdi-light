@@ -3,11 +3,12 @@ package io.github.epam.vuetify.tests.complex;
 import com.epam.jdi.light.vuetify.elements.complex.Rating;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
 import java.util.stream.IntStream;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.ratingsPage;
 import static io.github.com.pages.RatingsPage.advancedUsageRating;
 import static io.github.com.pages.RatingsPage.cardRatingsRating;
@@ -35,36 +36,35 @@ public class RatingTests extends TestsInit {
     @BeforeClass
     public void before() {
         ratingsPage.open();
-        ratingsPage.checkOpened();
+        waitCondition(() -> ratingsPage.isOpened());
     }
 
-    @Test
-    public void colorRatingTest() {
-        new HashMap<String, Rating>() {{
-            put("purple", colorRatingPurple);
-            put("pink", colorRatingPink);
-            put("orange", colorRatingOrange);
-            put("green", colorRatingGreen);
-            put("red", colorRatingRed);
-            put("indigo", colorRatingIndigo);
-        }}
-                .forEach((color, rating) -> {
-                    double i = rating.getValue();
-                    if (rating.getValue() > 1)
-                        i -= 1;
-                    else
-                        i = rating.length();
-                    rating.setValue(i);
-                    rating.is().value(i);
-                    rating.is().color(color);
-                });
+    @DataProvider(name = "colorRatingTestData")
+    public Object[][] colorRatingTestData() {
+        return new Object[][] {
+                {"purple", colorRatingPurple},
+                {"pink", colorRatingPink},
+                {"orange", colorRatingOrange},
+                {"green", colorRatingGreen},
+                {"red", colorRatingRed},
+                {"indigo", colorRatingIndigo},
+        };
+    }
+
+    @Test(dataProvider = "colorRatingTestData")
+    public void colorRatingTest(String expectedColor, Rating rating) {
+        for (int testedValue = 1; testedValue <= rating.length(); testedValue++) {
+            rating.setValue(testedValue);
+            rating.has().value(testedValue);
+            rating.has().color(expectedColor);
+        }
     }
 
     @Test
     public void lengthRatingTest() {
         IntStream.range(1, 15).forEach(index -> {
             lengthRatingSlider.slideHorizontalTo(index);
-            lengthRating.is().length(index);
+            lengthRating.has().length(index);
         });
     }
 
@@ -83,31 +83,37 @@ public class RatingTests extends TestsInit {
         incrementedRating.is().value(3.5);
     }
 
-    @Test
-    public void sizeRatingTest() {
-        new HashMap<Integer, Rating>() {{
-            put(16, sizeRatingPurple);
-            put(24, sizeRatingPink);
-            put(36, sizeRatingGreen);
-            put(40, sizeRatingRed);
-            put(64, sizeRatingIndigo);
-        }}
-                .forEach((size, rating) -> rating.is().size(size));
+    @DataProvider(name = "sizeRatingTestData")
+    public Object[][] sizeRatingTestTestData() {
+        return new Object[][] {
+                {16, sizeRatingPurple},
+                {24, sizeRatingPink},
+                {36, sizeRatingGreen},
+                {40, sizeRatingRed},
+                {64, sizeRatingIndigo},
+        };
     }
 
-    @Test
-    public void itemSlotRatingTest() {
-        new HashMap<Integer, String>() {{
-            put(1, "green");
-            put(2, "purple");
-            put(3, "orange");
-            put(4, "indigo");
-            put(5, "red");
-        }}
-                .forEach((index, color) -> {
-                    itemSlotRating.setValue(index);
-                    itemSlotRating.is().color(index, color);
-                });
+    @Test(dataProvider = "sizeRatingTestData")
+    public void sizeRatingTest(int expectedSize, Rating rating) {
+        rating.has().size(expectedSize);
+    }
+
+    @DataProvider(name = "itemSlotRatingTestData")
+    public Object[][] itemSlotRatingTestData() {
+        return new Object[][] {
+                {1, "green"},
+                {2, "purple"},
+                {3, "orange"},
+                {4, "indigo"},
+                {5, "red"},
+        };
+    }
+
+    @Test(dataProvider = "itemSlotRatingTestData")
+    public void itemSlotRatingTest(int index, String expectedColor) {
+        itemSlotRating.setValue(index);
+        itemSlotRating.has().color(index, expectedColor);
     }
 
     @Test
@@ -119,13 +125,13 @@ public class RatingTests extends TestsInit {
     public void cardRatingsRatingTest() {
         cardRatingsRatingSpan.click();
         cardRatingsRating.setValue(0.5);
-        cardRatingsRatingSpan.is().text("(0.5)");
+        cardRatingsRatingSpan.has().text("(0.5)");
 
         cardRatingsRating.hoverSetValue(2);
-        cardRatingsRating.is().value(2);
-        cardRatingsRatingSpan.is().text("(0.5)");
+        cardRatingsRating.has().value(2);
+        cardRatingsRatingSpan.has().text("(0.5)");
 
         cardRatingsRatingCard.hover();
-        cardRatingsRating.is().value(0.5);
+        cardRatingsRating.has().value(0.5);
     }
 }
