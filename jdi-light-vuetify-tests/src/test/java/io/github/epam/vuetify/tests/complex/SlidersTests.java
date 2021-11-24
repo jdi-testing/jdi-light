@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
@@ -8,19 +9,9 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.IntStream;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
-import static io.github.com.StaticSite.ratingsPage;
 import static io.github.com.StaticSite.slidersPage;
-import static io.github.com.pages.RatingsPage.colorRatingGreen;
-import static io.github.com.pages.RatingsPage.colorRatingIndigo;
-import static io.github.com.pages.RatingsPage.colorRatingOrange;
-import static io.github.com.pages.RatingsPage.colorRatingPink;
-import static io.github.com.pages.RatingsPage.colorRatingPurple;
-import static io.github.com.pages.RatingsPage.colorRatingRed;
 import static io.github.com.pages.SlidersPage.appendAndPrependInputIcon;
 import static io.github.com.pages.SlidersPage.appendAndPrependSlider;
 import static io.github.com.pages.SlidersPage.appendAndPrependText;
@@ -46,73 +37,72 @@ public class SlidersTests extends TestsInit {
     @BeforeClass
     public void before() {
         slidersPage.open();
-        //slidersPage.checkOpened();
-        // waitCondition(() -> ratingsPage.isOpened());
+        slidersPage.checkOpened();
     }
 
     @Test
     public void colorSliderTest() {
         Arrays.asList(85, 0, 100).forEach(value -> {
             colorsSlider.get(1).slideHorizontalTo(value);
-            colorsSlider.get(1).is().value(value);
+            colorsSlider.get(1).has().value(value);
         });
-        colorsSlider.get(1).is().fillColor("orange");
-        colorsSlider.get(1).is().backgroundColor("primary");
-        colorsSlider.get(1).is().thumbColor("orange");
+        colorsSlider.get(1).has().fillColor("orange");
+        colorsSlider.get(1).has().backgroundColor("primary");
+        colorsSlider.get(1).has().thumbColor("orange");
     }
 
     @Test
     public void trackColorSliderTest() {
         Arrays.asList(85, 0, 100).forEach(value -> {
             colorsSlider.get(2).slideHorizontalTo(value);
-            colorsSlider.get(2).is().value(value);
+            colorsSlider.get(2).has().value(value);
         });
-        colorsSlider.get(2).is().fillColor("primary");
-        colorsSlider.get(2).is().backgroundColor("green");
-        colorsSlider.get(2).is().thumbColor("primary");
+        colorsSlider.get(2).has().fillColor("primary");
+        colorsSlider.get(2).has().backgroundColor("green");
+        colorsSlider.get(2).has().thumbColor("primary");
     }
 
     @Test
     public void thumbColorSliderTest() {
         Arrays.asList(85, 0, 100).forEach(value -> {
             colorsSlider.get(3).slideHorizontalTo(value);
-            colorsSlider.get(3).is().value(value);
-            colorsSlider.get(3).is().thumbLabelValue(value);
+            colorsSlider.get(3).has().value(value);
+            colorsSlider.get(3).has().thumbLabelValue(value);
         });
-        colorsSlider.get(3).is().fillColor("primary");
-        colorsSlider.get(3).is().backgroundColor("primary");
-        colorsSlider.get(3).is().thumbColor("red");
-        colorsSlider.get(3).is().thumbLabelColor("red");
+        colorsSlider.get(3).has().fillColor("primary");
+        colorsSlider.get(3).has().backgroundColor("primary");
+        colorsSlider.get(3).has().thumbColor("red");
+        colorsSlider.get(3).has().thumbLabelColor("red");
     }
 
     @Test
     public void disabledSliderTest() {
         disabledSlider.is().disabled();
-        disabledSlider.is().value(30);
+        disabledSlider.has().value(30);
         disabledSlider.slideHorizontalTo(50);
-        disabledSlider.is().value(30);
+        disabledSlider.has().value(30);
     }
 
     @Test
     public void discreteSliderTest() {
-        discreteSlider.is().value(0);
+        discreteSlider.has().value(0);
         discreteSlider.slideHorizontalTo(10);
-        discreteSlider.is().value(10);
+        discreteSlider.has().value(10);
         discreteSlider.slideHorizontalTo(14);
-        discreteSlider.is().value(10);
+        discreteSlider.has().value(10);
         discreteSlider.slideHorizontalTo(16);
-        discreteSlider.is().value(20);
+        discreteSlider.has().value(20);
     }
 
     @Test
     public void iconsSliderTest() {
-        iconsSlider.get(3).is().value(0);
+        iconsSlider.get(3).has().value(0);
         iconsSliderInputIcon.get(4).click();
-        iconsSlider.get(3).is().value(10);
+        iconsSlider.get(3).has().value(10);
         iconsSlider.get(3).slideHorizontalTo(50);
-        iconsSlider.get(3).is().value(50);
+        iconsSlider.get(3).has().value(50);
         iconsSliderInputIcon.get(3).click();
-        iconsSlider.get(3).is().value(40);
+        iconsSlider.get(3).has().value(40);
     }
 
     @Test
@@ -124,9 +114,9 @@ public class SlidersTests extends TestsInit {
     @Test
     public void minAndMaxSliderTest() {
         minAndMaxSlider.slideHorizontalTo(90);
-        minAndMaxSlider.is().value(90);
+        minAndMaxSlider.has().value(90);
         minAndMaxSlider.slideHorizontalTo(-50);
-        minAndMaxSlider.is().value(-50);
+        minAndMaxSlider.has().value(-50);
     }
 
     @Test
@@ -134,17 +124,17 @@ public class SlidersTests extends TestsInit {
         readonlySlider.is().readonly();
         int currentValue = Integer.parseInt(readonlySlider.getValue());
         readonlySlider.slideHorizontalTo(currentValue + 1);
-        readonlySlider.is().value(currentValue);
+        readonlySlider.has().value(currentValue);
     }
 
     @Test
     public void stepSliderTest() {
         stepSlider.slideHorizontalTo(0);
-        stepSlider.is().value(0);
+        stepSlider.has().value(0);
         stepSlider.slideHorizontalTo(24);
-        stepSlider.is().value(20);
+        stepSlider.has().value(20);
         stepSlider.slideHorizontalTo(26);
-        stepSlider.is().value(30);
+        stepSlider.has().value(30);
     }
 
     @Test
@@ -203,12 +193,12 @@ public class SlidersTests extends TestsInit {
 
     @Test(dataProvider = "validationSliderTestData")
     public void validationSliderTest(int value, String expectedColor) {
-        for (Slider s : validationSlider) {
-            s.slideHorizontalTo(value);
-            s.has().value(value);
-            s.has().fillColor(expectedColor);
-            s.has().backgroundColor(expectedColor);
-            s.has().thumbColor(expectedColor);
+        for (Slider slider : validationSlider) {
+            slider.slideHorizontalTo(value);
+            slider.has().value(value);
+            slider.has().fillColor(expectedColor);
+            slider.has().backgroundColor(expectedColor);
+            slider.has().thumbColor(expectedColor);
         }
     }
 
@@ -217,51 +207,60 @@ public class SlidersTests extends TestsInit {
         verticalSlidersSlider.is().vertical();
         Arrays.asList(85, 0, 100).forEach(value -> {
             verticalSlidersSlider.slideVerticalTo(value);
-            verticalSlidersSlider.is().value(value);
+            verticalSlidersSlider.has().value(value);
         });
     }
 
     @Test
     public void appendAndPrependSliderTest() {
-        appendAndPrependText.is().value(appendAndPrependSlider.getValue());
+        appendAndPrependText.has().value(appendAndPrependSlider.getValue());
 
-        appendAndPrependSlider.is().value(40);
+        appendAndPrependSlider.has().value(40);
         appendAndPrependInputIcon.get(1).click();
-        appendAndPrependSlider.is().value(40);
-        appendAndPrependText.is().value(Integer.toString(40));
+        appendAndPrependSlider.has().value(40);
+        appendAndPrependText.has().value(Integer.toString(40));
 
         appendAndPrependSlider.slideHorizontalTo(60);
-        appendAndPrependText.is().value(Integer.toString(60));
+        appendAndPrependText.has().value(Integer.toString(60));
 
         appendAndPrependInputIcon.get(1).click();
-        appendAndPrependSlider.is().value(59);
-        appendAndPrependText.is().value(Integer.toString(59));
+        appendAndPrependSlider.has().value(59);
+        appendAndPrependText.has().value(Integer.toString(59));
 
         appendAndPrependSlider.slideHorizontalTo(217);
         appendAndPrependInputIcon.get(2).click();
-        appendAndPrependSlider.is().value(218);
-        appendAndPrependText.is().value(Integer.toString(218));
+        appendAndPrependSlider.has().value(218);
+        appendAndPrependText.has().value(Integer.toString(218));
 
         appendAndPrependInputIcon.get(2).click();
-        appendAndPrependSlider.is().value(218);
-        appendAndPrependText.is().value(Integer.toString(218));
+        appendAndPrependSlider.has().value(218);
+        appendAndPrependText.has().value(Integer.toString(218));
     }
 
     @Test
     public void appendTextFieldSliderTest() {
-        ArrayList<Integer> data = new ArrayList<>(Arrays.asList(150, 255));
-        IntStream.range(1, 4).forEach(index -> {
-            data.forEach(value -> {
-                appendTextFieldSlider.get(index).slideHorizontalTo(value);
-                appendTextFieldInput.get(index).is().value(Integer.toString(value));
-                IntStream.range(1, 4).forEach(i -> appendTextFieldInput.get(index).sendKeys(BACK_SPACE));
-                appendTextFieldInput.get(index).input(value.toString());
-                appendTextFieldSlider.get(index).is().value(value);
-            });
-            IntStream.range(1, 4).forEach(i -> appendTextFieldInput.get(index).sendKeys(BACK_SPACE));
-            appendTextFieldInput.get(index).input("256");
-            appendTextFieldSlider.get(index).is().value(255);
-            IntStream.range(1, 4).forEach(i -> appendTextFieldInput.get(index).sendKeys(BACK_SPACE));
-        });
+        ArrayList<Integer> inputValues = new ArrayList<>(Arrays.asList(150, 255));
+        for (int index = 1; index <= 3; index++) {
+            Slider currentSlider = appendTextFieldSlider.get(index);
+            UIElement currentAppendedInputField = appendTextFieldInput.get(index);
+
+            for (Integer value : inputValues) {
+                currentSlider.slideHorizontalTo(value);
+                currentAppendedInputField.has().text(value.toString());
+                clearInputField(currentAppendedInputField);
+
+                currentAppendedInputField.input(value.toString());
+                currentSlider.has().value(value);
+                clearInputField(currentAppendedInputField);
+            }
+
+            currentAppendedInputField.input("256"); // slider range upper boundary is 255
+            currentSlider.has().value(255);
+        }
+    }
+
+    // a bit of a hack to clear text fields used in a previous method
+    private void clearInputField(UIElement inputField) {
+        IntStream.range(1, 4).forEach(i -> inputField.sendKeys(BACK_SPACE));
     }
 }
