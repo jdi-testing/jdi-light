@@ -35,13 +35,6 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         return this;
     }
 
-//    @JDIAction("Assert that '{name}' has undefined color")
-//    public SwitchAssert undefinedColor() {
-//        jdiAssert(element().hasUndefinedColor() ? "has undefined color" : "does not have undefined color",
-//                Matchers.is("has undefined color"));
-//        return this;
-//    }
-
     @JDIAction("Assert that '{name}' is enabled")
     public SwitchAssert enabled() {
         jdiAssert(element().isEnabled() ? "is enabled" : "is disabled", Matchers.is("is enabled"));

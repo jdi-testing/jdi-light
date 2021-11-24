@@ -6,7 +6,6 @@ import com.epam.jdi.light.material.elements.displaydata.Chip;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.containsString;
 
 public class ChipAssert extends UIAssert<ChipAssert, Chip> {
 
@@ -30,7 +29,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
 
     @JDIAction("Assert that chip {name} root is disabled")
     public ChipAssert disabled(){
-        element().has().classValue(containsString("Mui-disabled"));
+        jdiAssert(element().isDisabled(), Matchers.is(true));
         return this;
     }
 
@@ -49,6 +48,16 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
     @JDIAction("Assert that chip {name} root is clickable")
     public ChipAssert clickable() {
         jdiAssert(element().getChipLabel().isClickable(), Matchers.is(true));
+        return this;
+    }
+    @JDIAction("Assert that chip {name} root is clickable")
+    public ChipAssert primaryColor() {
+        jdiAssert(element().hasPrimaryColor(), Matchers.is(true));
+        return this;
+    }
+    @JDIAction("Assert that chip {name} root is clickable")
+    public ChipAssert secondaryColor() {
+        jdiAssert(element().hasSecondaryColor(), Matchers.is(true));
         return this;
     }
 }

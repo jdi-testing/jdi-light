@@ -11,10 +11,7 @@ public class AvatarPage extends WebPage {
     @UI("//span[@class = 'MuiBadge-root']")
     public static List<Avatar> avatarsWithPhoto;
 
-    @UI("//div/div[contains(@class, 'MuiAvatar-root')]")
-    public static List<Avatar> avatarsWithoutPhoto;
-
-    @UI("//div/div[contains(@class, 'MuiAvatar-root') and not(*)] ")
+    @UI("//div/div[contains(@class, 'MuiAvatar-root') and not(*)]")
     public static List<Avatar> avatarsWithText;
 
     @UI("//div[contains(@class, 'MuiAvatar-root')]/*[contains(@class, 'MuiSvgIcon-root')]/parent::div")

@@ -5,11 +5,13 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 public interface HasColor extends ICoreElement {
 
     default boolean hasPrimaryColor() {
-        return core().find("//*[contains(@class, 'colorPrimary')]").isDisplayed();
+        return core().find("//*[contains(@class, 'colorPrimary')]").isDisplayed() ||
+                attr("class").contains("colorPrimary");
     }
 
     default boolean hasSecondaryColor() {
-        return core().find("//*[contains(@class, 'colorSecondary')]").isDisplayed();
+        return core().find("//*[contains(@class, 'colorSecondary')]").isDisplayed() ||
+                attr("class").contains("colorSecondary");
     }
 
     default boolean hasColor(String color) {

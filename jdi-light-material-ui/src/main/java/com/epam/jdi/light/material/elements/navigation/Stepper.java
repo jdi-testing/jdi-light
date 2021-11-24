@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.navigation.StepperAssert;
+import com.epam.jdi.light.material.interfaces.base.HasImage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  * https://mui.com/components/steppers/
  */
 
-public class Stepper extends UIBaseElement<StepperAssert> {
+public class Stepper extends UIBaseElement<StepperAssert> implements HasImage {
     private final String listLocator = ".MuiStep-root";
 
     public List<Step> steps() {
