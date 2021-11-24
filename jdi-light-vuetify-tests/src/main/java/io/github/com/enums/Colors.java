@@ -246,6 +246,7 @@ public enum Colors {
     BLUE_GREY_DARKEN_3("rgba(55, 71, 79, 1)"),
     BLUE_GREY_DARKEN_4("rgba(38, 50, 56, 1)"),
     GREY("rgba(158, 158, 158, 1)"),
+    GREY_LIGHTEN_6("rgba(211, 211, 211, 1)"),
     GREY_LIGHTEN_5("rgba(250, 250, 250, 1)"),
     GREY_LIGHTEN_4("rgba(245, 245, 245, 1)"),
     GREY_LIGHTEN_3("rgba(238, 238, 238, 1)"),
