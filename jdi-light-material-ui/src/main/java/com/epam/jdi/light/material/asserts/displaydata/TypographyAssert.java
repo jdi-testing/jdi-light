@@ -22,7 +22,7 @@ public class TypographyAssert extends UIAssert<TypographyAssert, Typography>
 
     @JDIAction("Assert that '{name}' has '{0}' style")
     public TypographyAssert style(TypographyStyles style) {
-        jdiAssert(element().getStyle(), Matchers.is(style.getStyle()));
+        jdiAssert(element().getStyle(), Matchers.is(style));
         return this;
     }
 }

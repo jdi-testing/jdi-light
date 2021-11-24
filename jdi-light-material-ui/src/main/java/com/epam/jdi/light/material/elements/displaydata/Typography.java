@@ -15,14 +15,14 @@ public class Typography extends UIBaseElement<TypographyAssert> implements IsTex
     private static final String STYLE_CLASS_PATTERN = "MuiTypography-%s";
 
     @JDIAction("Get '{name}' style")
-    public String getStyle() {
+    public TypographyStyles getStyle() {
         for (TypographyStyles style : TypographyStyles.values()) {
             String styleClass = String.format(STYLE_CLASS_PATTERN, style.getStyle());
             if (hasClass(styleClass)) {
-                return style.getStyle();
+                return style;
             }
         }
-        return "";
+        return null;
     }
 
     @Override
