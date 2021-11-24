@@ -59,7 +59,8 @@ public class SwitchTests extends TestsInit {
         }
         if(muiSwitch.hasPrimaryColor()) {
             muiSwitch.has().primaryColor();
-        } else if (muiSwitch.hasSecondaryColor()) {
+        }
+        if (muiSwitch.hasSecondaryColor()) {
             muiSwitch.has().secondaryColor();
         }
     }
