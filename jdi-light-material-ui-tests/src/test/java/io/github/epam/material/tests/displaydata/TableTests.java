@@ -42,7 +42,7 @@ public class TableTests extends TestsInit {
     private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList("Dessert (100g serving)",
             "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"));
 
-    private final Timer timer = new Timer(2000L);
+    private static final Timer TIMER = new Timer(2000L);
 
     @BeforeMethod
     public void beforeTest() {
@@ -129,9 +129,9 @@ public class TableTests extends TestsInit {
         showSubTable.is().displayed();
         showSubTable.hover();
         showSubTable.click();
-        timer.wait(() -> purchaseTables.get(1).getRow(1).get(1).has().text("2020-01-05"));
+        TIMER.wait(() -> purchaseTables.get(1).getRow(1).get(1).has().text("2020-01-05"));
         showSubTable.click();
-        timer.wait(() -> assertThat(purchaseTables.size(), equalTo(0)));
+        TIMER.wait(() -> assertThat(purchaseTables.size(), equalTo(0)));
     }
 
     @Test
