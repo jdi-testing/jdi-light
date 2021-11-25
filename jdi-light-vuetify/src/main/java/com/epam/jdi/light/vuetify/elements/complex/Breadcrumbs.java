@@ -21,16 +21,16 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, WebList>> implements ISetup {
 
-    // these locators are default and can be modified by JDIBreadcrumbs annotation
-    protected String ROOT_LOCATOR = ".v-breadcrumbs";
-    protected String ITEMS_LOCATOR = ".v-breadcrumbs__item";
-    protected String DIVIDERS_LOCATOR = ".v-breadcrumbs__divider";
+    protected static String DISABLED_LINK_CLASS = "v-breadcrumbs__item--disabled";
 
-    protected String DISABLED_LINK_CLASS = "v-breadcrumbs__item--disabled";
+    // these locators are default and can be modified by JDIBreadcrumbs annotation
+    protected String rootLocator = ".v-breadcrumbs";
+    protected String itemsLocator = ".v-breadcrumbs__item";
+    protected String dividersLocator = ".v-breadcrumbs__divider";
 
     @Override
     public WebList list() {
-        return $$(ITEMS_LOCATOR, this).setName(getName() + " breadcrumb");
+        return $$(itemsLocator, this).setName(getName() + " breadcrumb");
     }
 
     @JDIAction("Get selected element from '{name}'")
@@ -46,7 +46,7 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, 
 
     @JDIAction("Get dividers list from '{name}'")
     public WebList dividers() {
-        return $$(DIVIDERS_LOCATOR, this).setName(getName() + " dividers");
+        return $$(dividersLocator, this).setName(getName() + " dividers");
     }
 
     @JDIAction("Get items list from '{name}'")
@@ -60,19 +60,19 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, 
             JDIBreadcrumbs annotation = field.getAnnotation(JDIBreadcrumbs.class);
             initializeLocators(annotation);
         }
-        this.setCore(Breadcrumbs.class, $(ROOT_LOCATOR));
+        this.setCore(Breadcrumbs.class, $(rootLocator));
         this.setName(String.format("Breadcrumbs container %s", field.getName()));
     }
 
     private void initializeLocators(JDIBreadcrumbs annotation) {
         if (!annotation.root().isEmpty()) {
-            ROOT_LOCATOR = annotation.root();
+            rootLocator = annotation.root();
         }
         if (!annotation.items().isEmpty()) {
-            ITEMS_LOCATOR = annotation.items();
+            itemsLocator = annotation.items();
         }
         if (!annotation.dividers().isEmpty()) {
-            DIVIDERS_LOCATOR = annotation.dividers();
+            dividersLocator = annotation.dividers();
         }
     }
 

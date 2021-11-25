@@ -13,10 +13,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
  */
 public class Overlay extends UIBaseElement<OverlayAssert> {
 
-    protected String SCRIM_LOCATOR = ".v-overlay__scrim";
-    protected String CONTENT_LOCATOR = ".v-overlay__content";
-    protected double DEFAULT_OPACITY = 0.46;
-    protected int DEFAULT_Z_INDEX = 5;
+    protected static final double DEFAULT_OPACITY = 0.46;
+    protected static final int DEFAULT_Z_INDEX = 5;
+    protected String scrimLocator = ".v-overlay__scrim";
+    protected String contentLocator = ".v-overlay__content";
 
     Overlay() {
     }
@@ -27,7 +27,7 @@ public class Overlay extends UIBaseElement<OverlayAssert> {
 
     @JDIAction("Get content '{name}'")
     public UIElement content() {
-        return $$(CONTENT_LOCATOR, core()).stream().findFirst().orElse(null);
+        return $$(contentLocator, core()).stream().findFirst().orElse(null);
     }
 
     public boolean isActive() {
@@ -48,8 +48,8 @@ public class Overlay extends UIBaseElement<OverlayAssert> {
 
     @JDIAction("Get '{name}' opacity")
     public double opacity() {
-        if (!$(SCRIM_LOCATOR, core()).css("opacity").isEmpty())
-            return Double.parseDouble($(SCRIM_LOCATOR, core()).css("opacity"));
+        if (!$(scrimLocator, core()).css("opacity").isEmpty())
+            return Double.parseDouble($(scrimLocator, core()).css("opacity"));
         else
             return DEFAULT_OPACITY;
     }

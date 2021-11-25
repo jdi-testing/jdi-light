@@ -9,14 +9,14 @@ import static com.epam.jdi.light.common.UIUtils.initT;
 
 public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extends UIBaseElement<TimeLineItemAssert> {
 
-    protected String BODY_LOCATOR;
-    protected String DIVIDER_LOCATOR;
-    protected String OPPOSITE_LOCATOR;
-    protected String DOT_LOCATOR = ".v-timeline-item__dot";
-    protected String INNER_DOT_LOCATOR = ".v-timeline-item__inner-dot";
+    protected static String SMALL_CLASS = "v-timeline-item__dot--small";
+    protected static String LARGE_CLASS = "v-timeline-item__dot--large";
 
-    protected String SMALL_CLASS = "v-timeline-item__dot--small";
-    protected String LARGE_CLASS = "v-timeline-item__dot--large";
+    protected String bodyLocator;
+    protected String dividerLocator;
+    protected String oppositeLocator;
+    protected String dotLocator = ".v-timeline-item__dot";
+    protected String innerDotLocator = ".v-timeline-item__inner-dot";
 
     protected Class<T> bodyClass;
     protected Class<U> dividerClass;
@@ -24,27 +24,27 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
     TimeLineItem() {}
 
     public T body() {
-        return initT(find(BODY_LOCATOR), this, bodyClass);
+        return initT(find(bodyLocator), this, bodyClass);
     }
 
     public U divider() {
-        return initT(find(DIVIDER_LOCATOR), this, dividerClass);
+        return initT(find(dividerLocator), this, dividerClass);
     }
 
     public UIElement opposite() {
-        return find(OPPOSITE_LOCATOR);
+        return find(oppositeLocator);
     }
 
     public boolean isSmall() {
-        return find(DOT_LOCATOR).hasClass(SMALL_CLASS);
+        return find(dotLocator).hasClass(SMALL_CLASS);
     }
 
     public boolean isLarge() {
-        return find(DOT_LOCATOR).hasClass(LARGE_CLASS);
+        return find(dotLocator).hasClass(LARGE_CLASS);
     }
 
     public String dotColor() {
-        return find(INNER_DOT_LOCATOR).css("background-color");
+        return find(innerDotLocator).css("background-color");
     }
 
     @Override

@@ -33,29 +33,30 @@ import static com.epam.jdi.tools.PrintUtils.print;
 public class TreeView extends Dropdown
         implements IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeView> {
 
-    protected String NODES_IN_CORE_LOCATOR = "./*[contains(@class, 'v-treeview-node')]";
-    protected String NODES_IN_NODE_LOCATOR = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
-    protected String ROOT_IN_NODE_LOCATOR = "./*[contains(@class, 'v-treeview-node__root')]";
-    protected String TOGGLE_IN_ROOT_LOCATOR = ".v-treeview-node__toggle";
-    protected String CHECKBOX_IN_ROOT_LOCATOR = ".v-treeview-node__checkbox";
-    protected String CONTENT_IN_ROOT_LOCATOR = ".v-treeview-node__content";
-    protected String CORE_FROM_NODE_LOCATOR = "//ancestor::*[" +
+    protected static String CORE_CLASS = "v-treeview";
+    protected static String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
+    protected static String LEAF_NODE_CLASS = "v-treeview-node--leaf";
+    protected static String SELECTED_NODE_CLASS = "v-treeview-node--selected";
+    protected static String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
+    protected static String SHAPED_NODE_CLASS = "v-treeview-node--shaped";
+    protected static String ROUNDED_NODE_CLASS = "v-treeview-node--rounded";
+    protected static String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
+
+    protected String checkboxFullyMarkedClass = "mdi-checkbox-marked";
+    protected String checkboxPartlyMarkedClass = "mdi-minus-box";
+    protected String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
+
+    protected String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
+    protected String nodesInNodeLocator = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
+    protected String rootInNodeLocator = "./*[contains(@class, 'v-treeview-node__root')]";
+    protected String toggleInRootLocator = ".v-treeview-node__toggle";
+    protected String checkboxInRootLocator = ".v-treeview-node__checkbox";
+    protected String contentInRootLocator = ".v-treeview-node__content";
+    protected String coreFromNodeLocator = "//ancestor::*[" +
             "@class='v-treeview' or " +
             "starts-with(@class, 'v-treeview ') or " +
             "contains(@class, ' v-treeview ') or " +
             "substring(@class, string-length(@class) - string-length('v-treeview') + 1) = 'v-treeview']";
-
-    protected String CORE_CLASS = "v-treeview";
-    protected String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
-    protected String LEAF_NODE_CLASS = "v-treeview-node--leaf";
-    protected String SELECTED_NODE_CLASS = "v-treeview-node--selected";
-    protected String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
-    protected String SHAPED_NODE_CLASS = "v-treeview-node--shaped";
-    protected String ROUNDED_NODE_CLASS = "v-treeview-node--rounded";
-    protected String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
-    protected String CHECKBOX_FULLY_MARKED_CLASS = "mdi-checkbox-marked";
-    protected String CHECKBOX_PARTLY_MARKED_CLASS = "mdi-minus-box";
-    protected String CHECKBOX_NOT_MARKED_CLASS = "mdi-checkbox-blank-outline";
 
     protected String delimiter = "/";
 
@@ -94,17 +95,17 @@ public class TreeView extends Dropdown
 
     @JDIAction("Check if '{name}' is fully marked")
     public boolean isFullyMarked() {
-        return checkbox().hasClass(CHECKBOX_FULLY_MARKED_CLASS);
+        return checkbox().hasClass(checkboxFullyMarkedClass);
     }
 
     @JDIAction("Check if '{name}' is partly marked")
     public boolean isPartlyMarked() {
-        return checkbox().hasClass(CHECKBOX_PARTLY_MARKED_CLASS);
+        return checkbox().hasClass(checkboxPartlyMarkedClass);
     }
 
     @JDIAction("Check if '{name}' is not marked")
     public boolean isNotMarked() {
-        return checkbox().hasClass(CHECKBOX_NOT_MARKED_CLASS);
+        return checkbox().hasClass(checkboxNotMarkedClass);
     }
 
     @Override
@@ -130,7 +131,7 @@ public class TreeView extends Dropdown
 
     @JDIAction("Get main pseudo core TreeView from '{name}'")
     public TreeView pseudoCore() {
-        return create(core().find(CORE_FROM_NODE_LOCATOR));
+        return create(core().find(coreFromNodeLocator));
     }
 
     @JDIAction("Get root from '{name}'")
@@ -138,17 +139,17 @@ public class TreeView extends Dropdown
         if (isPseudoCore()) {
             return null;
         }
-        return core().find(ROOT_IN_NODE_LOCATOR).setName("root " + getName());
+        return core().find(rootInNodeLocator).setName("root " + getName());
     }
 
     @JDIAction("Get root expander from '{name}'")
     public UIElement expander() {
-        return root().find(TOGGLE_IN_ROOT_LOCATOR).setName("expander " + getName());
+        return root().find(toggleInRootLocator).setName("expander " + getName());
     }
 
     @JDIAction("Get root checkbox from '{name}'")
     public UIElement checkbox() {
-        return root().find(CHECKBOX_IN_ROOT_LOCATOR).setName("checkbox " + getName());
+        return root().find(checkboxInRootLocator).setName("checkbox " + getName());
     }
 
     @Override
@@ -160,7 +161,7 @@ public class TreeView extends Dropdown
     @Override
     @JDIAction("Get root value from '{name}'")
     public UIElement iCore() {
-        return core().find(ROOT_IN_NODE_LOCATOR).find(CONTENT_IN_ROOT_LOCATOR);
+        return core().find(rootInNodeLocator).find(contentInRootLocator);
     }
 
     @Override
@@ -188,13 +189,13 @@ public class TreeView extends Dropdown
     @JDIAction("Get list from '{name}'")
     public WebList list() {
         if (isPseudoCore()) {
-            return core().finds(NODES_IN_CORE_LOCATOR);
+            return core().finds(nodesInCoreLocator);
         }
         if (isLeaf()) {
             return new WebList();
         }
         expand();
-        return core().finds(NODES_IN_NODE_LOCATOR);
+        return core().finds(nodesInNodeLocator);
     }
 
     @JDIAction("Get list of nodes from '{name}'")
@@ -411,15 +412,15 @@ public class TreeView extends Dropdown
 
     protected TreeView create(UIElement base) {
         TreeView created = new TreeView().setCore(TreeView.class, base);
-        created.NODES_IN_CORE_LOCATOR = NODES_IN_CORE_LOCATOR;
-        created.NODES_IN_NODE_LOCATOR = NODES_IN_NODE_LOCATOR;
-        created.ROOT_IN_NODE_LOCATOR = ROOT_IN_NODE_LOCATOR;
-        created.TOGGLE_IN_ROOT_LOCATOR = TOGGLE_IN_ROOT_LOCATOR;
-        created.CHECKBOX_IN_ROOT_LOCATOR = CHECKBOX_IN_ROOT_LOCATOR;
-        created.CONTENT_IN_ROOT_LOCATOR = CONTENT_IN_ROOT_LOCATOR;
-        created.CHECKBOX_FULLY_MARKED_CLASS = CHECKBOX_FULLY_MARKED_CLASS;
-        created.CHECKBOX_PARTLY_MARKED_CLASS = CHECKBOX_PARTLY_MARKED_CLASS;
-        created.CHECKBOX_NOT_MARKED_CLASS = CHECKBOX_NOT_MARKED_CLASS;
+        created.nodesInCoreLocator = nodesInCoreLocator;
+        created.nodesInNodeLocator = nodesInNodeLocator;
+        created.rootInNodeLocator = rootInNodeLocator;
+        created.toggleInRootLocator = toggleInRootLocator;
+        created.checkboxInRootLocator = checkboxInRootLocator;
+        created.contentInRootLocator = contentInRootLocator;
+        created.checkboxFullyMarkedClass = checkboxFullyMarkedClass;
+        created.checkboxPartlyMarkedClass = checkboxPartlyMarkedClass;
+        created.checkboxNotMarkedClass = checkboxNotMarkedClass;
         created.setName(String.format("TreeView %s", created.getValue()));
         return created;
     }
@@ -441,31 +442,31 @@ public class TreeView extends Dropdown
             setCore(TreeView.class, $(annotation.core()));
         }
         if (!annotation.coreNodes().isEmpty()) {
-            NODES_IN_CORE_LOCATOR = annotation.coreNodes();
+            nodesInCoreLocator = annotation.coreNodes();
         }
         if (!annotation.nodeNodes().isEmpty()) {
-            NODES_IN_NODE_LOCATOR = annotation.nodeNodes();
+            nodesInNodeLocator = annotation.nodeNodes();
         }
         if (!annotation.root().isEmpty()) {
-            ROOT_IN_NODE_LOCATOR = annotation.root();
+            rootInNodeLocator = annotation.root();
         }
         if (!annotation.toggle().isEmpty()) {
-            TOGGLE_IN_ROOT_LOCATOR = annotation.toggle();
+            toggleInRootLocator = annotation.toggle();
         }
         if (!annotation.checkbox().isEmpty()) {
-            CHECKBOX_IN_ROOT_LOCATOR = annotation.checkbox();
+            checkboxInRootLocator = annotation.checkbox();
         }
         if (!annotation.content().isEmpty()) {
-            CONTENT_IN_ROOT_LOCATOR = annotation.content();
+            contentInRootLocator = annotation.content();
         }
         if (!annotation.full().isEmpty()) {
-            CHECKBOX_FULLY_MARKED_CLASS = annotation.full();
+            checkboxFullyMarkedClass = annotation.full();
         }
         if (!annotation.part().isEmpty()) {
-            CHECKBOX_PARTLY_MARKED_CLASS = annotation.part();
+            checkboxPartlyMarkedClass = annotation.part();
         }
         if (!annotation.not().isEmpty()) {
-            CHECKBOX_NOT_MARKED_CLASS = annotation.not();
+            checkboxNotMarkedClass = annotation.not();
         }
     }
 

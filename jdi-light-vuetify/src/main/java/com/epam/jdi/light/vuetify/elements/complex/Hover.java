@@ -21,7 +21,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
  */
 public class Hover extends UIBaseElement<TextAssert> implements ISetup, IsText {
 
-    protected String HOVER_TARGET_SELECTOR = "";
+    protected String hoverTargetSelector = "";
 
     @JDIAction("Move cursor inside '{name}' target element")
     public void show() {
@@ -39,10 +39,10 @@ public class Hover extends UIBaseElement<TextAssert> implements ISetup, IsText {
     }
 
     private UIElement getHoverTarget() {
-        if (HOVER_TARGET_SELECTOR.isEmpty()) {
+        if (hoverTargetSelector.isEmpty()) {
             return core();
         }
-        return $(HOVER_TARGET_SELECTOR);
+        return $(hoverTargetSelector);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Hover extends UIBaseElement<TextAssert> implements ISetup, IsText {
         if (!field.isAnnotationPresent(JDIHover.class)) {
             return;
         }
-        HOVER_TARGET_SELECTOR = field.getAnnotation(JDIHover.class).value();
+        hoverTargetSelector = field.getAnnotation(JDIHover.class).value();
     }
 
     @Override
