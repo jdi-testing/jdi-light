@@ -20,6 +20,7 @@ import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_ACCENT_1;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE_DARKEN_1;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.treeviewPage;
 import static io.github.com.pages.TreeviewPage.activatableTreeView;
 import static io.github.com.pages.TreeviewPage.appendLabelTreeView;
@@ -61,29 +62,28 @@ public class TreeViewTests extends TestsInit {
     public void before() {
         treeviewPage.open();
         treeviewPage.checkOpened();
+        initData();
     }
 
-    @BeforeClass
-    public void initData() {
-        expectedBaseTreeStructure = new LinkedHashMap<String, List<String>>() {{
-            put("/", asList("Applications :", "Documents :", "Downloads :", "Videos :"));
-            put("/Applications :", asList("Calendar : app", "Chrome : app", "Webstorm : app"));
-            put("/Documents :", asList("vuetify :", "material2 :"));
-            put("/Documents :/vuetify :", asList("src :"));
-            put("/Documents :/vuetify :/src :", asList("index : ts", "bootstrap : ts"));
-            put("/Documents :/material2 :", asList("src :"));
-            put("/Documents :/material2 :/src :", asList("v-btn : ts", "v-card : ts", "v-window : ts"));
-            put("/Downloads :", asList("October : pdf", "November : pdf", "Tutorial : html"));
-            put("/Videos :", asList("Tutorials :", "Intro : mov", "Conference introduction : avi"));
-            put("/Videos :/Tutorials :", asList("Basic layouts : mp4", "Advanced techniques : mp4", "All about app : dir"));
-        }};
+    private void initData() {
+        expectedBaseTreeStructure = new LinkedHashMap<>();
+        expectedBaseTreeStructure.put("/", asList("Applications :", "Documents :", "Downloads :", "Videos :"));
+        expectedBaseTreeStructure.put("/Applications :", asList("Calendar : app", "Chrome : app", "Webstorm : app"));
+        expectedBaseTreeStructure.put("/Documents :", asList("vuetify :", "material2 :"));
+        expectedBaseTreeStructure.put("/Documents :/vuetify :", asList("src :"));
+        expectedBaseTreeStructure.put("/Documents :/vuetify :/src :", asList("index : ts", "bootstrap : ts"));
+        expectedBaseTreeStructure.put("/Documents :/material2 :", asList("src :"));
+        expectedBaseTreeStructure.put("/Documents :/material2 :/src :", asList("v-btn : ts", "v-card : ts", "v-window : ts"));
+        expectedBaseTreeStructure.put("/Downloads :", asList("October : pdf", "November : pdf", "Tutorial : html"));
+        expectedBaseTreeStructure.put("/Videos :", asList("Tutorials :", "Intro : mov", "Conference introduction : avi"));
+        expectedBaseTreeStructure.put("/Videos :/Tutorials :",
+                asList("Basic layouts : mp4", "Advanced techniques : mp4", "All about app : dir"));
 
-        expectedFileTreeStructure = new LinkedHashMap<String, List<String>>() {{
-            put("/", asList(".git", "node_modules", "public", ".gitignore", "babel.config.js", "package.json",
-                    "README.md", "vue.config.js", "yarn.lock"));
-            put("/public", asList("static", "favicon.ico", "index.html"));
-            put("/public/static", asList("logo.png"));
-        }};
+        expectedFileTreeStructure = new LinkedHashMap<>();
+        expectedFileTreeStructure.put("/", asList(".git", "node_modules", "public", ".gitignore", "babel.config.js",
+                "package.json", "README.md", "vue.config.js", "yarn.lock"));
+        expectedFileTreeStructure.put("/public", asList("static", "favicon.ico", "index.html"));
+        expectedFileTreeStructure.put("/public/static", asList("logo.png"));
     }
 
     @Test
@@ -341,7 +341,6 @@ public class TreeViewTests extends TestsInit {
                 treeView.check();
                 List<String> checked = new ArrayList<>();
                 treeView.walk(childTree -> {
-                    childTree.is().fullyMarked();
                     if (childTree.isLeaf()) {
                         checked.add(childTree.getText());
                     }
