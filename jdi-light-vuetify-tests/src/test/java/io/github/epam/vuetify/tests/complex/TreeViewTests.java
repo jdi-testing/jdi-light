@@ -340,6 +340,7 @@ public class TreeViewTests extends TestsInit {
                 treeView.check();
                 List<String> checked = new ArrayList<>();
                 treeView.walk(childTree -> {
+                    childTree.is().fullyMarked();
                     if (childTree.isLeaf()) {
                         checked.add(childTree.getText());
                     }
