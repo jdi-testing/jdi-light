@@ -16,9 +16,9 @@ import static com.epam.jdi.light.material.elements.inputs.Slider.getInteger;
 
 public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
-  private final static String areaValueNow = "aria-valuenow";
-  private final static String style = "style";
-  private final static String ariaValueText = "aria-valuetext";
+  private final static String ARIA_VALUENOW = "aria-valuenow";
+  private final static String STYLE = "style";
+  private final static String ARIA_VALUETEXT = "aria-valuetext";
 
   public UIElement track() {
     return core().find(By.cssSelector(".MuiSlider-track"));
@@ -29,9 +29,9 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
   }
 
   private void setAttributes(int thumbIndex, int value, String newThumbStyle) {
-    thumb(thumbIndex).setAttribute(areaValueNow, String.valueOf(value));
-    thumb(thumbIndex).setAttribute(style, newThumbStyle);
-    thumb(thumbIndex).setAttribute(ariaValueText, value + "°C");
+    thumb(thumbIndex).setAttribute(ARIA_VALUENOW, String.valueOf(value));
+    thumb(thumbIndex).setAttribute(STYLE, newThumbStyle);
+    thumb(thumbIndex).setAttribute(ARIA_VALUETEXT, value + "°C");
   }
 
   private void reflectionSetValue(int thumbIndex, String newThumbStyle,
@@ -71,7 +71,7 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
     }
 
-    track().setAttribute(style, newStyle);
+    track().setAttribute(STYLE, newStyle);
     input().setAttribute("value",localLeft + "," + localWidth);
   }
 
@@ -79,11 +79,11 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
   @JDIAction(value = "Set value '{value}' for '{name}'")
   public void setValue(int thumbIndex, int value) {
-    String thumbStyle = thumb(thumbIndex).getAttribute(style);
+    String thumbStyle = thumb(thumbIndex).getAttribute(STYLE);
     int thumbStyleIndex = thumbStyle.lastIndexOf(" ");
     String newThumbStyle = thumbStyle.substring(0, thumbStyleIndex+ 1) + value + "%;";
 
-    String trackStyle = track().getAttribute(style);
+    String trackStyle = track().getAttribute(STYLE);
 
     String[] styles = trackStyle.replaceAll("[^-?0-9]+", " ").trim().split(" ");
 
@@ -164,7 +164,7 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
   @JDIAction(value = "Get '{name}' value")
   public int value(int index) {
-    return getInteger(areaValueNow, thumb(index).core(), 0);
+    return getInteger(ARIA_VALUENOW, thumb(index).core(), 0);
   }
   @JDIAction(value = "drag & drop to the value '{0}' of '{name}'")
   public void slideHorizontalTo(int thumbIndex,  int value) {
