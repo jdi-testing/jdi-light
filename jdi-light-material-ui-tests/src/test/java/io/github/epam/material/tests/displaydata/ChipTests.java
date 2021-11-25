@@ -51,7 +51,7 @@ public class ChipTests extends TestsInit {
     }
 
     @Test
-    public void basiChipsTest() {
+    public void basicChipsTest() {
         basicChip.is().displayed();
         basicChip.has().text("Basic");
 
