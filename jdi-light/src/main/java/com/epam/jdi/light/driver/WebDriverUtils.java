@@ -3,11 +3,18 @@ package com.epam.jdi.light.driver;
 import com.epam.jdi.light.common.LinuxProcessUtils;
 import com.epam.jdi.light.common.UnixProcessUtils;
 import com.jdiai.tools.func.JAction1;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.jdiai.tools.LinqUtils.safeException;
 import static com.jdiai.tools.StringUtils.format;
+import static java.awt.Toolkit.getDefaultToolkit;
 import static java.lang.Runtime.getRuntime;
 
 /**
@@ -97,6 +104,51 @@ public final class WebDriverUtils {
 
     private static void killAllLinuxOSDriverProcessesByName(String driverName) {
         LinuxProcessUtils.killProcessesTree(driverName);
+    }
+
+    /**
+     * Maximize browser window
+     * @param driver
+     * @return WebDriver
+     */
+    public static WebDriver maximizeWindow(WebDriver driver) {
+        try {
+            switch (getOs()) {
+                case WIN:
+                case LINUX:
+                    driver.manage().window().maximize();
+                    break;
+                case MAC:
+                    java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
+                    setBrowserPositionSize(driver,
+                            0, 0,
+                            (int) screenSize.getWidth(), (int) screenSize.getHeight());
+                    break;
+            }
+            return driver;
+        } catch (Exception ex) {
+            throw exception(ex, "Failed to maximize window");
+        }
+    }
+
+    /**
+     * Set browser window to specified position and change to specified size
+     * @param driver WebDriver
+     * @param x New x position for the upper left corner. Should be >= 0
+     * @param y New x position for the upper left corner. Should be >= 0
+     * @param width New window width
+     * @param height New window height
+     * @return WebDriver
+     */
+    public static WebDriver setBrowserPositionSize(WebDriver driver, int x, int y, int width, int height) {
+        try {
+            driver.manage().window().setPosition(new Point(x, y));
+            driver.manage().window().setSize(new Dimension(width, height));
+            return driver;
+        } catch (Exception ex) {
+            logger.error("Failed to Set resolution (%s, %s): %s", width, height, safeException(ex));
+            throw ex;
+        }
     }
 
 }
