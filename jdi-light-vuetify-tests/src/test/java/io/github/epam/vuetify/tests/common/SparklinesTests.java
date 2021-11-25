@@ -28,8 +28,7 @@ public class SparklinesTests extends TestsInit {
     @BeforeClass
     public void before() {
         sparklinesPage.open();
-        // open() can perform too fast, forcing subsequent checks to fail
-        waitCondition(() -> sparklinesPage.isOpened());
+        sparklinesPage.checkOpened();
     }
 
     @DataProvider(name = "fillSparklineLinearGradientTestsData")
