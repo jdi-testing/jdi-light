@@ -36,7 +36,7 @@ public class RatingTests extends TestsInit {
     @BeforeClass
     public void before() {
         ratingsPage.open();
-        waitCondition(() -> ratingsPage.isOpened());
+        ratingsPage.checkOpened();
     }
 
     @DataProvider(name = "colorRatingTestData")
