@@ -16,7 +16,7 @@ import static io.github.com.pages.feedback.BackdropPage.showBackdropButton;
 
 public class BackdropTests extends TestsInit {
 
-    private static final Timer timer = new Timer(1000L);
+    private static final Timer TIMER = new Timer(1000L);
 
     @BeforeMethod
     public void before() {
@@ -27,8 +27,8 @@ public class BackdropTests extends TestsInit {
     public void defaultBackdropTest() {
 
         showBackdropButton.click();
-        timer.wait(() -> backdrop.is().visible());
+        TIMER.wait(() -> backdrop.is().visible());
         backdrop.core().click();
-        timer.wait(() -> backdrop.is().hidden());
+        TIMER.wait(() -> backdrop.is().hidden());
     }
 }
