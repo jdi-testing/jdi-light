@@ -20,7 +20,6 @@ import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_ACCENT_1;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE_DARKEN_1;
 import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED;
-import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.treeviewPage;
 import static io.github.com.pages.TreeviewPage.activatableTreeView;
 import static io.github.com.pages.TreeviewPage.appendLabelTreeView;
