@@ -9,17 +9,17 @@ import static com.epam.jdi.light.common.UIUtils.initT;
 
 public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extends UIBaseElement<TimeLineItemAssert> {
 
-    protected static final String SMALL_CLASS = "v-timeline-item__dot--small";
-    protected static final String LARGE_CLASS = "v-timeline-item__dot--large";
+    private static final String SMALL_CLASS = "v-timeline-item__dot--small";
+    private static final String LARGE_CLASS = "v-timeline-item__dot--large";
 
-    protected String bodyLocator;
-    protected String dividerLocator;
+    private String bodyLocator;
+    private String dividerLocator;
     private String oppositeLocator;
-    protected String dotLocator = ".v-timeline-item__dot";
-    protected String innerDotLocator = ".v-timeline-item__inner-dot";
+    private String dotLocator = ".v-timeline-item__dot";
+    private String innerDotLocator = ".v-timeline-item__inner-dot";
 
-    protected Class<T> bodyClass;
-    protected Class<U> dividerClass;
+    private Class<T> bodyClass;
+    private Class<U> dividerClass;
 
     TimeLineItem() {}
 
@@ -54,5 +54,29 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
 
     public void setOppositeLocator(String oppositeLocator) {
         this.oppositeLocator = oppositeLocator;
+    }
+
+    public void setBodyLocator(String bodyLocator) {
+        this.bodyLocator = bodyLocator;
+    }
+
+    public void setDividerLocator(String dividerLocator) {
+        this.dividerLocator = dividerLocator;
+    }
+
+    public void setDotLocator(String dotLocator) {
+        this.dotLocator = dotLocator;
+    }
+
+    public void setInnerDotLocator(String innerDotLocator) {
+        this.innerDotLocator = innerDotLocator;
+    }
+
+    public void setBodyClass(Class<T> bodyClass) {
+        this.bodyClass = bodyClass;
+    }
+
+    public void setDividerClass(Class<U> dividerClass) {
+        this.dividerClass = dividerClass;
     }
 }

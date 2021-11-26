@@ -24,25 +24,25 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasLabel, HasPlaceholder, IsInput {
 
-    protected static final String DISABLED_CLASS = "v-input--is-disabled";
-    protected static final String READ_ONLY_CLASS = "v-input--is-readonly";
-    protected static final String FOCUSED_CLASS = "v-input--is-focused";
-    protected static final String FILLED_CLASS = "v-text-field--filled";
-    protected static final String OUTLINED_CLASS = "v-text-field--outlined";
-    protected static final String SHAPED_CLASS = "v-text-field--shaped";
-    protected static final String SOLO_CLASS = "v-text-field--solo";
-    protected static final String FULL_WIDTH_CLASS = "v-text-field--full-width";
+    private static final String DISABLED_CLASS = "v-input--is-disabled";
+    private static final String READ_ONLY_CLASS = "v-input--is-readonly";
+    private static final String FOCUSED_CLASS = "v-input--is-focused";
+    private static final String FILLED_CLASS = "v-text-field--filled";
+    private static final String OUTLINED_CLASS = "v-text-field--outlined";
+    private static final String SHAPED_CLASS = "v-text-field--shaped";
+    private static final String SOLO_CLASS = "v-text-field--solo";
+    private static final String FULL_WIDTH_CLASS = "v-text-field--full-width";
 
-    protected String input = ".//input|.//textarea";
+    private String input = ".//input|.//textarea";
     private String slot = ".v-input__slot";
-    protected String message = ".v-messages__message";
-    protected String counter = ".v-counter";
-    protected String prependOuter = ".v-input__prepend-outer";
-    protected String prependInner = ".v-input__prepend-inner";
-    protected String appendOuter = ".v-input__append-outer";
-    protected String appendInner = ".v-input__append-inner";
-    protected String prefix = ".v-text-field__prefix";
-    protected String suffix = ".v-text-field__suffix";
+    private String message = ".v-messages__message";
+    private String counter = ".v-counter";
+    private String prependOuter = ".v-input__prepend-outer";
+    private String prependInner = ".v-input__prepend-inner";
+    private String appendOuter = ".v-input__append-outer";
+    private String appendInner = ".v-input__append-inner";
+    private String prefix = ".v-text-field__prefix";
+    private String suffix = ".v-text-field__suffix";
 
     @Override
     @JDIAction("Check that '{name}' is enabled")

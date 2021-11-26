@@ -23,18 +23,18 @@ import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
  */
 public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UIListBase<TimeLineAssert> implements ISetup {
 
-    protected static final String ALIGN_TOP_CLASS = "v-timeline--align-top";
-    protected static final String DENSE_CLASS = "v-timeline--dense";
-    protected static final String REVERSE_CLASS = "v-timeline--reverse";
+    private static final String ALIGN_TOP_CLASS = "v-timeline--align-top";
+    private static final String DENSE_CLASS = "v-timeline--dense";
+    private static final String REVERSE_CLASS = "v-timeline--reverse";
 
-    protected String rootLocator = ".v-timeline";
+    private String rootLocator = ".v-timeline";
     private String itemsLocator = ".v-timeline-item";
-    protected String bodyLocator = ".v-timeline-item__body";
-    protected String dividerLocator = ".v-timeline-item__divider";
-    protected String oppositeLocator = ".v-timeline-item__opposite";
+    private String bodyLocator = ".v-timeline-item__body";
+    private String dividerLocator = ".v-timeline-item__divider";
+    private String oppositeLocator = ".v-timeline-item__opposite";
 
-    protected Class<T> bodyClass;
-    protected Class<U> dividerClass;
+    private Class<T> bodyClass;
+    private Class<U> dividerClass;
 
     @JDIAction("Check if '{name}' is align to top")
     public boolean isAlignTop() {
@@ -75,10 +75,10 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
     protected <C extends ICoreElement, D extends ICoreElement> TimeLineItem<C, D> createItem(UIElement root, Class<C> body, Class<D> divider) {
         TimeLineItem<C, D> timeLineItem = new TimeLineItem<>();
         timeLineItem.setCore(TimeLineItem.class, root);
-        timeLineItem.bodyClass = body;
-        timeLineItem.dividerClass = divider;
-        timeLineItem.bodyLocator = bodyLocator;
-        timeLineItem.dividerLocator = dividerLocator;
+        timeLineItem.setBodyClass(body);
+        timeLineItem.setDividerClass(divider);
+        timeLineItem.setBodyLocator(bodyLocator);
+        timeLineItem.setDividerLocator(dividerLocator);
         timeLineItem.setOppositeLocator(oppositeLocator);
         return timeLineItem;
     }

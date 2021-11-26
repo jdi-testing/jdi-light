@@ -23,14 +23,14 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBaseElement {
 
-    protected static final int DEFAULT_SIZE = 24;
+    private static final int DEFAULT_SIZE = 24;
 
-    protected String rootLocator = ".v-rating";
-    protected String emptyIconLocator = "";
-    protected String fullIconLocator = "";
-    protected String halfIconLocator = "";
-    protected String colorLocator = "";
-    protected String backgroundColorLocator = "";
+    private String rootLocator = ".v-rating";
+    private String emptyIconLocator = "";
+    private String fullIconLocator = "";
+    private String halfIconLocator = "";
+    private String colorLocator = "";
+    private String backgroundColorLocator = "";
     private String backgroundDarkenLocator = "";
 
     @JDIAction("Get {name} rating buttons")

@@ -33,32 +33,32 @@ import static com.epam.jdi.tools.PrintUtils.print;
 public class TreeView extends Dropdown
         implements IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeView> {
 
-    protected static final String CORE_CLASS = "v-treeview";
-    protected static final String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
-    protected static final String LEAF_NODE_CLASS = "v-treeview-node--leaf";
-    protected static final String SELECTED_NODE_CLASS = "v-treeview-node--selected";
-    protected static final String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
-    protected static final String SHAPED_NODE_CLASS = "v-treeview-node--shaped";
-    protected static final String ROUNDED_NODE_CLASS = "v-treeview-node--rounded";
-    protected static final String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
+    private static final String CORE_CLASS = "v-treeview";
+    private static final String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
+    private static final String LEAF_NODE_CLASS = "v-treeview-node--leaf";
+    private static final String SELECTED_NODE_CLASS = "v-treeview-node--selected";
+    private static final String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
+    private static final String SHAPED_NODE_CLASS = "v-treeview-node--shaped";
+    private static final String ROUNDED_NODE_CLASS = "v-treeview-node--rounded";
+    private static final String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
 
     private String checkboxFullyMarkedClass = "mdi-checkbox-marked";
     private String checkboxPartlyMarkedClass = "mdi-minus-box";
     private String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
 
-    protected String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
-    protected String nodesInNodeLocator = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
-    protected String rootInNodeLocator = "./*[contains(@class, 'v-treeview-node__root')]";
-    protected String toggleInRootLocator = ".v-treeview-node__toggle";
-    protected String checkboxInRootLocator = ".v-treeview-node__checkbox";
-    protected String contentInRootLocator = ".v-treeview-node__content";
-    protected String coreFromNodeLocator = "//ancestor::*[" +
+    private String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
+    private String nodesInNodeLocator = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
+    private String rootInNodeLocator = "./*[contains(@class, 'v-treeview-node__root')]";
+    private String toggleInRootLocator = ".v-treeview-node__toggle";
+    private String checkboxInRootLocator = ".v-treeview-node__checkbox";
+    private String contentInRootLocator = ".v-treeview-node__content";
+    private String coreFromNodeLocator = "//ancestor::*[" +
             "@class='v-treeview' or " +
             "starts-with(@class, 'v-treeview ') or " +
             "contains(@class, ' v-treeview ') or " +
             "substring(@class, string-length(@class) - string-length('v-treeview') + 1) = 'v-treeview']";
 
-    protected String delimiter = "/";
+    private String delimiter = "/";
 
     @JDIAction("Check if '{name}' is a pseudo core node")
     public boolean isPseudoCore() {

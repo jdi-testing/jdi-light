@@ -19,21 +19,21 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
  */
 public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
 
-    protected static final String DISABLED = "v-slider--disabled";
-    protected static final String VERTICAL = "v-slider--vertical";
+    private static final String DISABLED = "v-slider--disabled";
+    private static final String VERTICAL = "v-slider--vertical";
 
     private String thumbContainerLocator = ".v-slider__thumb-container";
-    protected String thumbLocator = ".v-slider__thumb";
-    protected String thumbLabelContainerLocator = ".v-slider__thumb-label-container";
-    protected String thumbLabelLocator = ".v-slider__thumb-label";
+    private String thumbLocator = ".v-slider__thumb";
+    private String thumbLabelContainerLocator = ".v-slider__thumb-label-container";
+    private String thumbLabelLocator = ".v-slider__thumb-label";
 
-    protected String trackContainerLocator = ".v-slider__track-container";
-    protected String trackBackgroundLocator = ".v-slider__track-background";
-    protected String trackFillLocator = ".v-slider__track-fill";
+    private String trackContainerLocator = ".v-slider__track-container";
+    private String trackBackgroundLocator = ".v-slider__track-background";
+    private String trackFillLocator = ".v-slider__track-fill";
 
     private String ticksContainerLocator = ".v-slider__ticks-container";
-    protected String tickLocator = ".v-slider__tick";
-    protected String alwaysShow = "v-slider__ticks-container--always-show";
+    private String tickLocator = ".v-slider__tick";
+    private String alwaysShow = "v-slider__ticks-container--always-show";
     private String tickLabelLocator = ".v-slider__tick-label";
 
     @JDIAction("Get track container from '{name}'")

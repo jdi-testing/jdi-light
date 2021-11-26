@@ -22,9 +22,9 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
     protected static final String CORE_CLASS_DISABLED = "v-pagination--disabled";
     protected static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
 
-    protected String rootLocator = ".v-pagination";
-    protected String itemsLocator = ".v-pagination__item";
-    protected String moreItemsLocator = ".v-pagination__more";
+    private String rootLocator = ".v-pagination";
+    private String itemsLocator = ".v-pagination__item";
+    private String moreItemsLocator = ".v-pagination__more";
     private String rightNavigationLocator = ".v-pagination__navigation[2]";
     private String leftNavigationLocator = ".v-pagination__navigation[1]";
 

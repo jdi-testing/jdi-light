@@ -20,12 +20,12 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?, ?>, WebList>> implements ISetup {
 
-    protected String rootLocator = ".v-expansion-panels";
-    protected String panelsLocator = ".v-expansion-panel";
+    private String rootLocator = ".v-expansion-panels";
+    private String panelsLocator = ".v-expansion-panel";
 
-    protected String headerLocator = ".v-expansion-panel-header";
-    protected String iconLocator = ".v-expansion-panel-header__icon .v-icon";
-    protected String contentLocator = ".v-expansion-panel-content";
+    private String headerLocator = ".v-expansion-panel-header";
+    private String iconLocator = ".v-expansion-panel-header__icon .v-icon";
+    private String contentLocator = ".v-expansion-panel-content";
 
     @Override
     public WebList list() {

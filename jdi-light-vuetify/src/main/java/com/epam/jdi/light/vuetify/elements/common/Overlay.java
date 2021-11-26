@@ -13,10 +13,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
  */
 public class Overlay extends UIBaseElement<OverlayAssert> {
 
-    protected static final double DEFAULT_OPACITY = 0.46;
-    protected static final int DEFAULT_Z_INDEX = 5;
-    protected String scrimLocator = ".v-overlay__scrim";
-    protected String contentLocator = ".v-overlay__content";
+    private static final double DEFAULT_OPACITY = 0.46;
+    private static final int DEFAULT_Z_INDEX = 5;
+    private String scrimLocator = ".v-overlay__scrim";
+    private String contentLocator = ".v-overlay__content";
 
     Overlay() {
     }

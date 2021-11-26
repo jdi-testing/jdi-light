@@ -24,8 +24,8 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, 
     protected static final String DISABLED_LINK_CLASS = "v-breadcrumbs__item--disabled";
 
     // these locators are default and can be modified by JDIBreadcrumbs annotation
-    protected String rootLocator = ".v-breadcrumbs";
-    protected String dividersLocator = ".v-breadcrumbs__divider";
+    private String rootLocator = ".v-breadcrumbs";
+    private String dividersLocator = ".v-breadcrumbs__divider";
     private String itemsLocator = ".v-breadcrumbs__item";
 
     @Override
