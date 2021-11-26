@@ -68,50 +68,50 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 public class DatePickersTests extends TestsInit {
-    LocalDate date = LocalDate.now();
-    DateTimeFormatter formatterDow = DateTimeFormatter.ofPattern("ccc, LLL d");
-    DateTimeFormatter formatterYearHyphenMonth = DateTimeFormatter.ofPattern("YYYY-MM");
-    DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu");
+    private LocalDate date = LocalDate.now();
+    private DateTimeFormatter formatterDow = DateTimeFormatter.ofPattern("ccc, LLL d");
+    private DateTimeFormatter formatterYearHyphenMonth = DateTimeFormatter.ofPattern("YYYY-MM");
+    private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu");
 
-    public static final int FIFTH_MONTH_OF_YEAR = 5;
-    public static final int FIRST_DAY_OF_MONTH = 1;
-    public static final int WIDTH_OF_PREDEFINED_WIDTH_DP = 290;
-    public static final int CHOSEN_DAY = 12;
-    public static final int CHOSEN_DAY_TWO = 20;
-    public static final int CHOSEN_DAY_THREE = 25;
-    public static final String CHOSEN_MONTH = "May";
-    public static final String CHOSEN_YEAR = "1980";
-    public static final String CHOSEN_MONTH_SWEDISH = "maj";
-    public static final String CHOSEN_MONTH_CHINESE = "5月";
-    public static final String GREEN_COLOR_HEX = "#66bb6a";
-    public static final String BLUE_COLOR_HEX = "#1976d2";
-    public static final String BLUE_CIRCLE_COLOR_HEX = "#0000ff";
-    public static final String RED_CIRCLE_COLOR_HEX = "#f44336";
-    public static final String YELLOW_CIRCLE_COLOR_HEX = "#ffeb3b";
-    public static final String FORMATTING_DATE = "02/05/2021";
-    public static final String FORMATTING_DATE_ISO = "2021-02-05";
-    public static final String NEXT_MONTH_ICON_CLASS = "mdi-skip-next";
-    public static final String PREVIOUS_MONTH_ICON_CLASS = "mdi-skip-previous";
-    public static final String ELEVATION = "15px";
-    public static final String EMPTY_DATE_FIELD = "-";
-    public static final String SELECTION_TEXT = " selected";
-    public static final String RANGE_SELECTION_TEXT = "2 selected";
-    public static final String DATE_BORDER = "1px";
+    private static final int FIFTH_MONTH_OF_YEAR = 5;
+    private static final int FIRST_DAY_OF_MONTH = 1;
+    private static final int WIDTH_OF_PREDEFINED_WIDTH_DP = 290;
+    private static final int CHOSEN_DAY = 12;
+    private static final int CHOSEN_DAY_TWO = 20;
+    private static final int CHOSEN_DAY_THREE = 25;
+    private static final String CHOSEN_MONTH = "May";
+    private static final String CHOSEN_YEAR = "1980";
+    private static final String CHOSEN_MONTH_SWEDISH = "maj";
+    private static final String CHOSEN_MONTH_CHINESE = "5月";
+    private static final String GREEN_COLOR_HEX = "#66bb6a";
+    private static final String BLUE_COLOR_HEX = "#1976d2";
+    private static final String BLUE_CIRCLE_COLOR_HEX = "#0000ff";
+    private static final String RED_CIRCLE_COLOR_HEX = "#f44336";
+    private static final String YELLOW_CIRCLE_COLOR_HEX = "#ffeb3b";
+    private static final String FORMATTING_DATE = "02/05/2021";
+    private static final String FORMATTING_DATE_ISO = "2021-02-05";
+    private static final String NEXT_MONTH_ICON_CLASS = "mdi-skip-next";
+    private static final String PREVIOUS_MONTH_ICON_CLASS = "mdi-skip-previous";
+    private static final String ELEVATION = "15px";
+    private static final String EMPTY_DATE_FIELD = "-";
+    private static final String SELECTION_TEXT = " selected";
+    private static final String RANGE_SELECTION_TEXT = "2 selected";
+    private static final String DATE_BORDER = "1px";
 
-    int currentYear = Year.now().getValue();
-    int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+    private int currentYear = Year.now().getValue();
+    private int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
 
-    public static final List<String> CHECKED_MULTIPLE_DATES = Arrays.asList("1", "10", "15", "16",
+    private static final List<String> CHECKED_MULTIPLE_DATES = Arrays.asList("1", "10", "15", "16",
             "20", "23", "29");
-    public static final List<String> SWEDISH_SHORT_DAYS_OF_WEEK = Arrays.asList("mån", "tis", "ons", "tors",
+    private static final List<String> SWEDISH_SHORT_DAYS_OF_WEEK = Arrays.asList("mån", "tis", "ons", "tors",
             "fre", "lör", "sön");
-    public static final List<String> SWEDISH_SHORT_MONTHS = Arrays.asList("JAN.", "FEB.", "MARS", "APR.",
+    private static final List<String> SWEDISH_SHORT_MONTHS = Arrays.asList("JAN.", "FEB.", "MARS", "APR.",
             "MAJ", "JUNI", "JULI", "AUG.", "SEP.", "OKT.", "NOV.", "DEC.");
-    public static final List<String> SWEDISH_FULL_MONTHS = Arrays.asList("januari", "februari", "mars",
+    private static final List<String> SWEDISH_FULL_MONTHS = Arrays.asList("januari", "februari", "mars",
             "april", "maj", "juni", "juli", "augusti", "september", "oktober", "november", "december");
-    public static final List<String> CHINESE_DAYS_OF_WEEK = Arrays.asList("日周一", "日周二", "日周三",
+    private static final List<String> CHINESE_DAYS_OF_WEEK = Arrays.asList("日周一", "日周二", "日周三",
             "日周四", "日周五", "日周六", "日周日");
-    public static final List<String> CHINESE_MONTHS = Arrays.asList("1月", "2月", "3月", "4月",
+    private static final List<String> CHINESE_MONTHS = Arrays.asList("1月", "2月", "3月", "4月",
             "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月");
 
     @BeforeClass
@@ -164,7 +164,7 @@ public class DatePickersTests extends TestsInit {
         colorFirstDatePicker.has().year(Integer.toString(currentYear - 100));
         colorFirstDatePicker.changeYearCornerButton();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear));
-        colorFirstDatePicker.has().year(Integer.toString(currentYear ));
+        colorFirstDatePicker.has().year(Integer.toString(currentYear));
     }
 
     @Test
@@ -261,7 +261,9 @@ public class DatePickersTests extends TestsInit {
         String checkedDay;
         if (Integer.parseInt(firstlyActiveDay) > 2 | Integer.parseInt(firstlyActiveDay) < 27) {
             checkedDay = firstlyActiveDay;
-        } else checkedDay = "15";
+        } else {
+            checkedDay = "15";
+        }
         readOnlyDatePicker.selectDay(Integer.toString(Integer.parseInt(checkedDay) - 1));
         readOnlyDatePicker.has().dayOfMonth(firstlyActiveDay);
         readOnlyDatePicker.selectDay(Integer.toString(Integer.parseInt(checkedDay) + 1));

@@ -67,7 +67,9 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDatePicker.class, DatePicker.class)) return;
+        if (!fieldHasAnnotation(field, JDatePicker.class, DatePicker.class)) {
+            return;
+        }
         JDatePicker j = field.getAnnotation(JDatePicker.class);
         setup(j.root(), j.expandedRoot());
     }
@@ -93,50 +95,66 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     private UIElement expander() {
         if (root().find(EXPANDER).isExist()) {
             return root().find(EXPANDER);
-        } else return root().find(EXPANDER_MULTIPLE);
+        } else {
+            return root().find(EXPANDER_MULTIPLE);
+        }
     }
 
     private UIElement nextMonthButton() {
         if (expander().isExist()) {
             return expandedRoot().find(NEXT_MONTH);
-        } else return root().find(NEXT_MONTH);
+        } else {
+            return root().find(NEXT_MONTH);
+        }
     }
 
     private UIElement previousMonthButton() {
         if (expander().isExist()) {
             return expandedRoot().find(PREVIOUS_MONTH);
-        } else return root().find(PREVIOUS_MONTH);
+        } else {
+            return root().find(PREVIOUS_MONTH);
+        }
     }
 
     protected UIElement getDay(final String day) {
         if (expander().isExist()) {
             return expandedRoot().find(By.xpath("//button/div[text()='" + day + "']"));
-        } else return root().find(By.xpath(DAY_LIST_WITHOUT_EXPANDER +
+        } else {
+            return root().find(By.xpath(DAY_LIST_WITHOUT_EXPANDER +
                     "//button/div[text()[contains(.,'" + day + "')]]"));
+        }
     }
 
     private UIElement mainDateField() {
         if (expander().isExist()) {
             return expandedRoot().find(MAIN_FIELD);
-        } else return root().find(MAIN_FIELD);
+        } else {
+            return root().find(MAIN_FIELD);
+        }
     }
 
     private UIElement monthYearField() {
         if (expander().isExist()) {
             return expandedRoot().find(MONTH_YEAR_FIELD);
-        } else return root().find(MONTH_YEAR_FIELD);
+        } else {
+            return root().find(MONTH_YEAR_FIELD);
+        }
     }
 
     private UIElement activeDayOfMonth() {
         if (expander().isExist()) {
             return expandedRoot().find(ACTIVE_DAY_OF_MONTH);
-        } else return root().find(ACTIVE_DAY_OF_MONTH);
+        } else {
+            return root().find(ACTIVE_DAY_OF_MONTH);
+        }
     }
 
     private UIElement changeMonthButton() {
         if (expander().isExist()) {
             return expandedRoot().find(MONTH_YEAR_FIELD);
-        } else return root().find(MONTH_YEAR_FIELD);
+        } else {
+            return root().find(MONTH_YEAR_FIELD);
+        }
     }
 
     protected UIElement getMonth(final String month) {
@@ -157,25 +175,33 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     private UIElement changeYearButton() {
         if (expander().isExist()) {
             return expandedRoot().find(YEAR);
-        } else return root().find(YEAR);
+        } else {
+            return root().find(YEAR);
+        }
     }
 
     protected UIElement getYear(final String year) {
         if (expander().isExist()) {
             return expandedRoot().find(By.xpath(YEAR_LIST + "/li[text()='" + year + "']"));
-        } else return root().find(By.xpath(YEAR_LIST + "/li[text()[contains(.,'" + year + "')]]"));
+        } else {
+            return root().find(By.xpath(YEAR_LIST + "/li[text()[contains(.,'" + year + "')]]"));
+        }
     }
 
     private UIElement resultDateField() {
         if (expander().isExist()) {
             return root().find(RESULT_DATE_WITH_EXPANDER);
-        } else return null;
+        } else {
+            return null;
+        }
     }
 
     private UIElement activePickerCode() {
         if (expander().isExist()) {
             return root().find(ACTIVE_PICKER_CODE);
-        } else return null;
+        } else {
+            return null;
+        }
     }
 
     private UIElement inputField() {
@@ -193,7 +219,9 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     private UIElement changeYearSmallButton() {
         if (expander().isExist()) {
             return expandedRoot().find(YEAR_SMALL);
-        } else return root().find(YEAR_SMALL);
+        } else {
+            return root().find(YEAR_SMALL);
+        }
     }
 
     private UIElement colorField() {
@@ -223,7 +251,9 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     private List<UIElement> allActiveDates() {
         if (expander().isExist()) {
             return expandedRoot().finds(ACTIVE_DAY_OF_MONTH);
-        } else return root().finds(ACTIVE_DAY_OF_MONTH);
+        } else {
+            return root().finds(ACTIVE_DAY_OF_MONTH);
+        }
     }
 
     private List<UIElement> shownMultipleDates() {
@@ -286,7 +316,9 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
                 matcherResult = (matcher.group(3) + matcher.group(4));
             }
             return matcherResult;
-        } else return getMonthAndYear().substring(0, getMonthAndYear().indexOf(" "));
+        } else {
+            return getMonthAndYear().substring(0, getMonthAndYear().indexOf(" "));
+        }
     }
 
     @JDIAction("Get shown year")
