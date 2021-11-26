@@ -1,13 +1,10 @@
 package io.github.epam.material.tests.utils;
 
+import static io.github.com.StaticSite.popoverPage;
+import static io.github.com.pages.utils.PopoverPage.popover;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static io.github.com.StaticSite.popoverPage;
-import static io.github.com.pages.utils.PopoverPage.buttonToClick;
-import static io.github.com.pages.utils.PopoverPage.popoverContent;
-import static io.github.com.pages.utils.PopoverPage.popoverHoverField;
 
 /**
  * To see an example of Modal web element please visit
@@ -16,6 +13,10 @@ import static io.github.com.pages.utils.PopoverPage.popoverHoverField;
 
 public class PopoverTests extends TestsInit {
 
+    private static final String CLICK_BUTTON = "Click to open Popover";
+    private static final String HOVER_BUTTON = "Hover to open Popover";
+    private static final String POPOVER_CONTENT = "Popover content";
+
     @BeforeMethod
     public void before() {
         popoverPage.open();
@@ -23,22 +24,18 @@ public class PopoverTests extends TestsInit {
 
     @Test
     public void clickPopoverTest() {
-
-        buttonToClick.is().text("CLICK TO OPEN POPOVER");
-        buttonToClick.click();
-        popoverContent.is().text("Popover content");
-        popoverHoverField.doubleClick();
-        popoverContent.is().notVisible();
+        popover.button(CLICK_BUTTON).click();
+        popover.is().text(POPOVER_CONTENT);
+        popover.button(CLICK_BUTTON).click(1, 0);
+        popover.is().notVisible();
     }
 
     @Test
     public void hoverPopoverTest() {
-
-        popoverHoverField.is().text("[Hover to open Popover]");
-        popoverHoverField.hover();
-        popoverHoverField.has().attr("aria-owns", "mouse-over-popover");
-        popoverContent.is().text("Popover content");
-        buttonToClick.hover();
-        popoverContent.is().notVisible();
+        popover.button(HOVER_BUTTON).hover();
+        popover.button(HOVER_BUTTON).has().attr("aria-owns", "mouse-over-popover");
+        popover.is().text(POPOVER_CONTENT);
+        popover.button(CLICK_BUTTON).hover();
+        popover.is().notVisible();
     }
 }
