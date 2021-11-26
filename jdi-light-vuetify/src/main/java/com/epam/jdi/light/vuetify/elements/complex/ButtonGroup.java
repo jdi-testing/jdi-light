@@ -30,7 +30,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
 
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
 
-    protected String buttonsFindStrategy = ".v-btn";
+    private String buttonsFindStrategy = ".v-btn";
 
     @JDIAction("Get Button with index '{0}'")
     public Button getButtonByIndex(int index) {

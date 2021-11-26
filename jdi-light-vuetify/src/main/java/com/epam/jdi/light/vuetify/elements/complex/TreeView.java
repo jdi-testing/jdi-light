@@ -42,9 +42,9 @@ public class TreeView extends Dropdown
     protected static final String ROUNDED_NODE_CLASS = "v-treeview-node--rounded";
     protected static final String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
 
-    protected String checkboxFullyMarkedClass = "mdi-checkbox-marked";
-    protected String checkboxPartlyMarkedClass = "mdi-minus-box";
-    protected String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
+    private String checkboxFullyMarkedClass = "mdi-checkbox-marked";
+    private String checkboxPartlyMarkedClass = "mdi-minus-box";
+    private String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
 
     protected String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
     protected String nodesInNodeLocator = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";

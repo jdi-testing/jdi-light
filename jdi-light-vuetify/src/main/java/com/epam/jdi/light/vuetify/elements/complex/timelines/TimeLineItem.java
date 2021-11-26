@@ -14,7 +14,7 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
 
     protected String bodyLocator;
     protected String dividerLocator;
-    protected String oppositeLocator;
+    private String oppositeLocator;
     protected String dotLocator = ".v-timeline-item__dot";
     protected String innerDotLocator = ".v-timeline-item__inner-dot";
 
@@ -50,5 +50,9 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
     @Override
     public TimeLineItemAssert is() {
         return new TimeLineItemAssert().set(this);
+    }
+
+    public void setOppositeLocator(String oppositeLocator) {
+        this.oppositeLocator = oppositeLocator;
     }
 }

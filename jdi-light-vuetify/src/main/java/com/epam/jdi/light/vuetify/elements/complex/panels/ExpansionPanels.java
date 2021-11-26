@@ -74,7 +74,7 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
 
     private ExpansionPanel createPanel(UIElement panelCore) {
         ExpansionPanel panel = new ExpansionPanel().setCore(ExpansionPanel.class, panelCore);
-        panel.headerLocator = headerLocator;
+        panel.setHeaderLocator(headerLocator);
         panel.iconLocator = iconLocator;
         panel.contentLocator = contentLocator;
         panel.setName(String.format("Expansion panel %s", panel.header().text()));

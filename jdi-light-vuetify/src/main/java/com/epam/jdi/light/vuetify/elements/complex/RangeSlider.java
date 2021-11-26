@@ -22,7 +22,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     protected static final String DISABLED = "v-slider--disabled";
     protected static final String VERTICAL = "v-slider--vertical";
 
-    protected String thumbContainerLocator = ".v-slider__thumb-container";
+    private String thumbContainerLocator = ".v-slider__thumb-container";
     protected String thumbLocator = ".v-slider__thumb";
     protected String thumbLabelContainerLocator = ".v-slider__thumb-label-container";
     protected String thumbLabelLocator = ".v-slider__thumb-label";
@@ -31,10 +31,10 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     protected String trackBackgroundLocator = ".v-slider__track-background";
     protected String trackFillLocator = ".v-slider__track-fill";
 
-    protected String ticksContainerLocator = ".v-slider__ticks-container";
+    private String ticksContainerLocator = ".v-slider__ticks-container";
     protected String tickLocator = ".v-slider__tick";
     protected String alwaysShow = "v-slider__ticks-container--always-show";
-    protected String tickLabelLocator = ".v-slider__tick-label";
+    private String tickLabelLocator = ".v-slider__tick-label";
 
     @JDIAction("Get track container from '{name}'")
     protected UIElement getTrackContainer() {

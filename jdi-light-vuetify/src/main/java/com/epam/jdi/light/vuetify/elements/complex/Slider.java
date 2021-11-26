@@ -22,7 +22,7 @@ public class Slider extends UIBaseElement<SliderAssert> {
     protected String thumbContainerLocator = ".v-slider__thumb-container";
     protected String thumbLocator = ".v-slider__thumb";
     protected String thumbLabelContainerLocator = ".v-slider__thumb-label-container";
-    protected String thumbLabelLocator = ".v-slider__thumb-label";
+    private String thumbLabelLocator = ".v-slider__thumb-label";
 
     protected String trackContainerLocator = ".v-slider__track-container";
     protected String trackBackgroundLocator = ".v-slider__track-background";

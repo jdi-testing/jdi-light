@@ -35,12 +35,12 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     protected String textArea = ".v-input__slot textarea";
     protected String details = ".v-text-field__details";
     protected String message = ".v-messages__message";
-    protected String counter = ".v-counter";
+    private String counter = ".v-counter";
 
     protected String prependOuterIcon = ".v-input__prepend-outer .v-icon";
     protected String prependInnerIcon = ".v-input__prepend-inner .v-icon";
     protected String appendOuterIcon = ".v-input__append-outer .v-icon";
-    protected String appendInnerIcon = ".v-input__append-inner .v-icon";
+    private String appendInnerIcon = ".v-input__append-inner .v-icon";
 
     @JDIAction("Check if '{name}' is filled")
     public boolean isFilled() {

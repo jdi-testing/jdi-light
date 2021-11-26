@@ -24,9 +24,9 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
 
     protected String rootLocator = ".v-pagination";
     protected String itemsLocator = ".v-pagination__item";
-    protected String leftNavigationLocator = ".v-pagination__navigation[1]";
-    protected String rightNavigationLocator = ".v-pagination__navigation[2]";
     protected String moreItemsLocator = ".v-pagination__more";
+    private String rightNavigationLocator = ".v-pagination__navigation[2]";
+    private String leftNavigationLocator = ".v-pagination__navigation[1]";
 
     @Override
     @JDIAction("Get '{name}' list of all buttons ")

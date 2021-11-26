@@ -34,7 +34,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     protected static final String FULL_WIDTH_CLASS = "v-text-field--full-width";
 
     protected String input = ".//input|.//textarea";
-    protected String slot = ".v-input__slot";
+    private String slot = ".v-input__slot";
     protected String message = ".v-messages__message";
     protected String counter = ".v-counter";
     protected String prependOuter = ".v-input__prepend-outer";

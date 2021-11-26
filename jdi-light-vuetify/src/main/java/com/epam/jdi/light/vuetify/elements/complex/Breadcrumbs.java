@@ -25,8 +25,8 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, 
 
     // these locators are default and can be modified by JDIBreadcrumbs annotation
     protected String rootLocator = ".v-breadcrumbs";
-    protected String itemsLocator = ".v-breadcrumbs__item";
     protected String dividersLocator = ".v-breadcrumbs__divider";
+    private String itemsLocator = ".v-breadcrumbs__item";
 
     @Override
     public WebList list() {

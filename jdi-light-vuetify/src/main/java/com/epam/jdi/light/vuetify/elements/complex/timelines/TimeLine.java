@@ -28,7 +28,7 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
     protected static final String REVERSE_CLASS = "v-timeline--reverse";
 
     protected String rootLocator = ".v-timeline";
-    protected String itemsLocator = ".v-timeline-item";
+    private String itemsLocator = ".v-timeline-item";
     protected String bodyLocator = ".v-timeline-item__body";
     protected String dividerLocator = ".v-timeline-item__divider";
     protected String oppositeLocator = ".v-timeline-item__opposite";
@@ -79,7 +79,7 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
         timeLineItem.dividerClass = divider;
         timeLineItem.bodyLocator = bodyLocator;
         timeLineItem.dividerLocator = dividerLocator;
-        timeLineItem.oppositeLocator = oppositeLocator;
+        timeLineItem.setOppositeLocator(oppositeLocator);
         return timeLineItem;
     }
 

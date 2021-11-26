@@ -31,7 +31,7 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
     protected String halfIconLocator = "";
     protected String colorLocator = "";
     protected String backgroundColorLocator = "";
-    protected String backgroundDarkenLocator = "";
+    private String backgroundDarkenLocator = "";
 
     @JDIAction("Get {name} rating buttons")
     public WebList getRatingButtons() {
