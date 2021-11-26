@@ -15,87 +15,87 @@ public class DatePickersPage extends VuetifyPage {
     // LOCATORS FOR: Allowed dates date picker
     @JDatePicker(
             root = "#AllowedDatesDatePicker > div")
-    public static DatePicker allowedDP;
+    public static DatePicker allowedDatePicker;
 
     // LOCATORS FOR: Colors date picker
     @JDatePicker(
             root = "#ColorsDatePicker > div:nth-child(1)")
-    public static DatePicker colorFirstDP;
+    public static DatePicker colorFirstDatePicker;
 
     @JDatePicker(
             root = "#ColorsDatePicker > div:nth-child(2)")
-    public static DatePicker colorSecondDP;
+    public static DatePicker colorSecondDatePicker;
 
     // LOCATORS FOR: Elevation date picker
     @JDatePicker(
             root = "#ElevationDatePicker > div.v-picker.v-card.v-picker--date.v-picker--flat.theme--light")
-    public static DatePicker elevationWithoutElevationDP;
+    public static DatePicker elevationWithoutElevationDatePicker;
 
     @JDatePicker(
             root = "#ElevationDatePicker > div.v-picker.v-card.v-picker--date.theme--light.elevation-15")
-    public static DatePicker elevationWithElevationDP;
+    public static DatePicker elevationWithElevationDatePicker;
 
     // LOCATORS FOR: Icons date picker
     @JDatePicker(
             root = "#IconsDatePicker > div")
-    public static DatePicker iconsDP;
+    public static DatePicker iconsDatePicker;
 
     // LOCATORS FOR: Multiple date picker
     @JDatePicker(
             root = "#MultipleDatePicker > div:nth-child(1)")
-    public static DatePicker multipleDP;
+    public static DatePicker multipleDatePicker;
 
     @JDatePicker(
             root = "#MultipleDatePicker > div:nth-child(2)",
             expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active")
-    public static DatePicker multipleInMenuDP;
+    public static DatePicker multipleInMenuDatePicker;
 
     // LOCATORS FOR: Picker date date picker
     @JDatePicker(
             root = "#PickerDateDatePicker > div:nth-child(1)")
-    public static DatePicker pickerDateDP;
+    public static DatePicker pickerDateDatePicker;
 
     @UI("#PickerDateDatePicker div.text-h6")
-    public static Text textWithChosenMonthPickerDateDP;
+    public static Text textWithChosenMonth;
 
     @UI("#PickerDateDatePicker ul.ma-4 > li")
-    public static List<Text> newsPickerDateDP;
+    public static List<Text> news;
 
     // LOCATORS FOR: Range date picker
     @JDatePicker(
             root = "#RangeDatePicker > div:nth-child(1)")
-    public static DatePicker rangeDP;
+    public static DatePicker rangeDatePicker;
 
     @UI("//div[@id='RangeDatePicker']//div[text()[contains(.,'model')]]")
-    public static Label modelDateRangeDP;
+    public static Label modelDateRange;
 
     // LOCATORS FOR: Read only date picker
     @JDatePicker(
             root = "#ReadonlyDatePicker > div")
-    public static DatePicker readOnlyDP;
+    public static DatePicker readOnlyDatePicker;
 
     // LOCATORS FOR: Show current date picker
     @JDatePicker(
             root = "#ShowCurrentDatePicker > div:nth-child(1)")
-    public static DatePicker firstShowCurrentDP;
+    public static DatePicker firstShowCurrentDatePicker;
 
     @JDatePicker(
             root = "#ShowCurrentDatePicker > div:nth-child(2)")
-    public static DatePicker secondShowCurrentDP;
+    public static DatePicker secondShowCurrentDatePicker;
 
     // LOCATORS FOR: Show sibling months date picker
     @JDatePicker(
             root = "#ShowSiblingMonthsDatePicker")
-    public static DatePicker showSiblingMonthsDP;
+    public static DatePicker showSiblingMonthsDatePicker;
 
     // LOCATORS FOR: Width date picker
     @JDatePicker(
             root = "#WidthDatePicker > div:nth-child(1)")
-    public static DatePicker firstWidthDP;
+    public static DatePicker firstWidthDatePicker;
 
     @JDatePicker(
             root = "#WidthDatePicker > div.v-picker.v-card.v-picker--date.mt-4.v-picker--full-width.theme--light")
-    public static DatePicker secondWidthDP;
+    public static DatePicker secondWidthDatePicker;
 
     @UI("div.v-main__wrap > div.container > div")
     public static Section mainWindow;
@@ -103,7 +103,7 @@ public class DatePickersPage extends VuetifyPage {
     // LOCATORS FOR: Date buttons date picker
     @JDatePicker(
             root = "#DateButtonsDatePicker > div:nth-child(1)")
-    public static DatePicker dateButtonsDP;
+    public static DatePicker dateButtonsDatePicker;
 
     @UI("#DateButtonsDatePicker div.text-body-1.mb-2 > i[class*='checkbox-marked']")
     public static Checkbox doubleClickAnyDateCheckbox;
@@ -120,67 +120,67 @@ public class DatePickersPage extends VuetifyPage {
     // LOCATORS FOR: Date events date picker
     @JDatePicker(
             root = "#DateEventsDatePicker > div:nth-child(1)")
-    public static DatePicker firstDateEventsDP;
+    public static DatePicker firstDateEventsDatePicker;
 
     @JDatePicker(
             root = "#DateEventsDatePicker > div:nth-child(2)")
-    public static DatePicker secondDateEventsDP;
+    public static DatePicker secondDateEventsDatePicker;
 
     // LOCATORS FOR: Active picker date picker
     @JDatePicker(
             root = "#ActivePickerDatePicker",
             expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active")
-    public static DatePicker activePickerDP;
+    public static DatePicker activePickerDatePicker;
 
     // LOCATORS FOR: Dialog and menu date picker
     @JDatePicker(
             root = "#DialogAndMenuDatePicker > div:nth-child(1)",
             expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active")
-    public static DatePicker pickerInMenuDP;
+    public static DatePicker pickerInMenuDatePicker;
 
     @JDatePicker(
             root = "#DialogAndMenuDatePicker > div:nth-child(3)",
             expandedRoot = "#app > div.v-dialog__content.v-dialog__content--active")
-    public static DatePicker pickerInDialogDP;
+    public static DatePicker pickerInDialogDatePicker;
 
     @JDatePicker(
             root = "#DialogAndMenuDatePicker > div:nth-child(4)",
             expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active")
-    public static DatePicker pickerWithoutButtonsDP;
+    public static DatePicker pickerWithoutButtonsDatePicker;
 
     // LOCATORS FOR: Formatting date picker
     @JDatePicker(
             root = "#FormattingDatePicker > div > div:nth-child(1)",
             expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active")
-    public static DatePicker writableFormattingDP;
+    public static DatePicker writableFormattingDatePicker;
 
     @JDatePicker(
             root = "#FormattingDatePicker > div > div:nth-child(2)",
             expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active")
-    public static DatePicker readonlyFormattingDP;
+    public static DatePicker readonlyFormattingDatePicker;
 
     // LOCATORS FOR: Formatting with external libraries date picker
     @JDatePicker(
             root = "#FormattingWithExternalLibrariesDatePicker > div > div:nth-child(1)",
             expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active")
-    public static DatePicker formattedMomentJsDP;
+    public static DatePicker formattedMomentJsDatePicker;
 
     @JDatePicker(
             root = "#FormattingWithExternalLibrariesDatePicker > div > div:nth-child(2)",
             expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active")
-    public static DatePicker formattedDatefnsDP;
+    public static DatePicker formattedDatefnsDatePicker;
 
     // LOCATORS FOR: Internationalization date picker
     @JDatePicker(
             root = "#InternationalizationDatePicker > div:nth-child(1)")
-    public static DatePicker chineseDP;
+    public static DatePicker chineseDatePicker;
 
     @JDatePicker(
             root = "#InternationalizationDatePicker > div:nth-child(2)")
-    public static DatePicker swedishDP;
+    public static DatePicker swedishDatePicker;
 
     // LOCATORS FOR: Orientation date picker
     @JDatePicker(
             root = "#OrientationDatePicker")
-    public static DatePicker orientationDP;
+    public static DatePicker orientationDatePicker;
 }
