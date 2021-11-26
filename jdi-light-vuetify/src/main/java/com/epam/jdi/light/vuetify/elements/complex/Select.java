@@ -5,6 +5,9 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import org.openqa.selenium.By;
 
+/**
+ * To see an example of Select web element please visit https://vuetifyjs.com/en/components/selects/
+ */
 
 public class Select extends Dropdown {
 
@@ -54,6 +57,4 @@ public class Select extends Dropdown {
     public boolean isEnabled() {
         return input().isEnabled();
     }
-
-
 }

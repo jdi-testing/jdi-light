@@ -2,12 +2,19 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.selectsPage;
-import static io.github.com.pages.SelectsPage.*;
+import static io.github.com.pages.SelectsPage.standardDenseSelect;
+import static io.github.com.pages.SelectsPage.leftIconSelect;
+import static io.github.com.pages.SelectsPage.menuPropsSelect;
+import static io.github.com.pages.SelectsPage.multipleSelect;
+import static io.github.com.pages.SelectsPage.disabledSelect;
+import static io.github.com.pages.SelectsPage.readonlySelect;
+import static io.github.com.pages.SelectsPage.customSelect;
+import static io.github.com.pages.SelectsPage.selectionSelect;
+
 
 public class SelectTests extends TestsInit {
 
