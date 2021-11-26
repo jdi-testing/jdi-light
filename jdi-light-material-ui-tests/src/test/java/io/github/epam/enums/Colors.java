@@ -1,7 +1,7 @@
 package io.github.epam.enums;
 
 /**
- * To see examples of Text Field web elements please visit
+ * To see examples of colors used in framework visit
  * https://mui.com/customization/color/#picking-colors
  */
 
