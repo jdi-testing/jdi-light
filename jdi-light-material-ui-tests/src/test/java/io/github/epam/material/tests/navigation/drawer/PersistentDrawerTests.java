@@ -17,7 +17,7 @@ public class PersistentDrawerTests extends TestsInit {
 
     private final List<String> actualDrawerTexts = new ArrayList<>();
     private final List<String> expectedDrawerTexts = Arrays.asList("Inbox", "Starred", "Send email", "Drafts", "All mail", "Trash", "Spam");
-    private final static String firstPartOfTextContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    private static final String LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
     @BeforeMethod
     public void before() {
@@ -42,7 +42,7 @@ public class PersistentDrawerTests extends TestsInit {
         }
 
         persistentDrawer.assertThat().containerHasTitle("Persistent drawer");
-        persistentDrawer.assertThat().paragraphHasText(1, containsString(firstPartOfTextContent));
+        persistentDrawer.assertThat().paragraphHasText(1, containsString(LOREM_IPSUM));
 
         persistentDrawer.close();
         persistentDrawer.is().notVisible();

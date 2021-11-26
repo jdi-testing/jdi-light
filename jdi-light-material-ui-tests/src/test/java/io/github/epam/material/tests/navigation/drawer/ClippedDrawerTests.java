@@ -17,7 +17,7 @@ public class ClippedDrawerTests extends TestsInit {
 
     private final List<String> actualDrawerTexts = new ArrayList<>();
     private final List<String> expectedDrawerTexts = Arrays.asList("Inbox", "Starred", "Send email", "Drafts", "All mail", "Trash", "Spam");
-    private final static String secondPartOfTextContent = "Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam.";
+    private static final String CONSEQUAT_MAURIS = "Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam.";
 
     @BeforeMethod
     public void before() {
@@ -43,6 +43,6 @@ public class ClippedDrawerTests extends TestsInit {
 
 
         clippedDrawer.assertThat().containerHasTitle("Clipped drawer");
-        clippedDrawer.assertThat().paragraphHasText(2, containsString(secondPartOfTextContent));
+        clippedDrawer.assertThat().paragraphHasText(2, containsString(CONSEQUAT_MAURIS));
     }
 }
