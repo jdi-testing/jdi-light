@@ -9,8 +9,8 @@ import static com.epam.jdi.light.common.UIUtils.initT;
 
 public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extends UIBaseElement<TimeLineItemAssert> {
 
-    protected static String SMALL_CLASS = "v-timeline-item__dot--small";
-    protected static String LARGE_CLASS = "v-timeline-item__dot--large";
+    protected static final String SMALL_CLASS = "v-timeline-item__dot--small";
+    protected static final String LARGE_CLASS = "v-timeline-item__dot--large";
 
     protected String bodyLocator;
     protected String dividerLocator;

@@ -8,8 +8,8 @@ import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
 
-    protected static String OPEN_PANEL_CLASS = "v-expansion-panel--active";
-    protected static String DISABLED_PANEL_CLASS = "v-expansion-panel--disabled";
+    protected static final String OPEN_PANEL_CLASS = "v-expansion-panel--active";
+    protected static final String DISABLED_PANEL_CLASS = "v-expansion-panel--disabled";
 
     protected String headerLocator = ".v-expansion-panel-header";
     protected String iconLocator = ".v-expansion-panel-header__icon .v-icon";

@@ -19,8 +19,8 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
  */
 public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
 
-    protected static String DISABLED = "v-slider--disabled";
-    protected static String VERTICAL = "v-slider--vertical";
+    protected static final String DISABLED = "v-slider--disabled";
+    protected static final String VERTICAL = "v-slider--vertical";
 
     protected String thumbContainerLocator = ".v-slider__thumb-container";
     protected String thumbLocator = ".v-slider__thumb";

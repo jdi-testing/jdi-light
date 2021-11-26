@@ -33,14 +33,14 @@ import static com.epam.jdi.tools.PrintUtils.print;
 public class TreeView extends Dropdown
         implements IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeView> {
 
-    protected static String CORE_CLASS = "v-treeview";
-    protected static String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
-    protected static String LEAF_NODE_CLASS = "v-treeview-node--leaf";
-    protected static String SELECTED_NODE_CLASS = "v-treeview-node--selected";
-    protected static String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
-    protected static String SHAPED_NODE_CLASS = "v-treeview-node--shaped";
-    protected static String ROUNDED_NODE_CLASS = "v-treeview-node--rounded";
-    protected static String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
+    protected static final String CORE_CLASS = "v-treeview";
+    protected static final String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
+    protected static final String LEAF_NODE_CLASS = "v-treeview-node--leaf";
+    protected static final String SELECTED_NODE_CLASS = "v-treeview-node--selected";
+    protected static final String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
+    protected static final String SHAPED_NODE_CLASS = "v-treeview-node--shaped";
+    protected static final String ROUNDED_NODE_CLASS = "v-treeview-node--rounded";
+    protected static final String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
 
     protected String checkboxFullyMarkedClass = "mdi-checkbox-marked";
     protected String checkboxPartlyMarkedClass = "mdi-minus-box";

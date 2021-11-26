@@ -23,9 +23,9 @@ import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
  */
 public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UIListBase<TimeLineAssert> implements ISetup {
 
-    protected static String ALIGN_TOP_CLASS = "v-timeline--align-top";
-    protected static String DENSE_CLASS = "v-timeline--dense";
-    protected static String REVERSE_CLASS = "v-timeline--reverse";
+    protected static final String ALIGN_TOP_CLASS = "v-timeline--align-top";
+    protected static final String DENSE_CLASS = "v-timeline--dense";
+    protected static final String REVERSE_CLASS = "v-timeline--reverse";
 
     protected String rootLocator = ".v-timeline";
     protected String itemsLocator = ".v-timeline-item";

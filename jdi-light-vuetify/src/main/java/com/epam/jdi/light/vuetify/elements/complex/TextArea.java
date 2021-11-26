@@ -26,10 +26,10 @@ import static java.util.Arrays.asList;
 public class TextArea extends UIBaseElement<TextAreaAssert>
         implements HasLabel, HasPlaceholder, IsInput {
 
-    protected static String FILLED_CLASS = "v-text-field--filled";
-    protected static String OUTLINED_CLASS = "v-text-field--outlined";
-    protected static String AUTO_GROW_CLASS = "v-textarea--auto-grow";
-    protected static String NO_RESIZE_CLASS = "v-textarea--no-resize";
+    protected static final String FILLED_CLASS = "v-text-field--filled";
+    protected static final String OUTLINED_CLASS = "v-text-field--outlined";
+    protected static final String AUTO_GROW_CLASS = "v-textarea--auto-grow";
+    protected static final String NO_RESIZE_CLASS = "v-textarea--no-resize";
 
     protected String slot = ".v-input__slot";
     protected String textArea = ".v-input__slot textarea";

@@ -24,14 +24,14 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasLabel, HasPlaceholder, IsInput {
 
-    protected static String DISABLED_CLASS = "v-input--is-disabled";
-    protected static String READ_ONLY_CLASS = "v-input--is-readonly";
-    protected static String FOCUSED_CLASS = "v-input--is-focused";
-    protected static String FILLED_CLASS = "v-text-field--filled";
-    protected static String OUTLINED_CLASS = "v-text-field--outlined";
-    protected static String SHAPED_CLASS = "v-text-field--shaped";
-    protected static String SOLO_CLASS = "v-text-field--solo";
-    protected static String FULL_WIDTH_CLASS = "v-text-field--full-width";
+    protected static final String DISABLED_CLASS = "v-input--is-disabled";
+    protected static final String READ_ONLY_CLASS = "v-input--is-readonly";
+    protected static final String FOCUSED_CLASS = "v-input--is-focused";
+    protected static final String FILLED_CLASS = "v-text-field--filled";
+    protected static final String OUTLINED_CLASS = "v-text-field--outlined";
+    protected static final String SHAPED_CLASS = "v-text-field--shaped";
+    protected static final String SOLO_CLASS = "v-text-field--solo";
+    protected static final String FULL_WIDTH_CLASS = "v-text-field--full-width";
 
     protected String input = ".//input|.//textarea";
     protected String slot = ".v-input__slot";

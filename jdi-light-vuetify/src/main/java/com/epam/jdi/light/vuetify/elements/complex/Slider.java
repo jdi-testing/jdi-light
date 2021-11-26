@@ -14,10 +14,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
  */
 public class Slider extends UIBaseElement<SliderAssert> {
 
-    protected static String DISABLED = "v-slider--disabled";
-    protected static String READONLY = "v-slider--readonly";
-    protected static String VERTICAL = "v-slider--vertical";
-    protected static String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
+    protected static final String DISABLED = "v-slider--disabled";
+    protected static final String READONLY = "v-slider--readonly";
+    protected static final String VERTICAL = "v-slider--vertical";
+    protected static final String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
 
     protected String thumbContainerLocator = ".v-slider__thumb-container";
     protected String thumbLocator = ".v-slider__thumb";

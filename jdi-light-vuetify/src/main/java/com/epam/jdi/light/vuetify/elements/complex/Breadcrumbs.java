@@ -21,7 +21,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, WebList>> implements ISetup {
 
-    protected static String DISABLED_LINK_CLASS = "v-breadcrumbs__item--disabled";
+    protected static final String DISABLED_LINK_CLASS = "v-breadcrumbs__item--disabled";
 
     // these locators are default and can be modified by JDIBreadcrumbs annotation
     protected String rootLocator = ".v-breadcrumbs";

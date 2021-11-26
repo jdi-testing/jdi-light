@@ -19,8 +19,8 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
 
-    protected static String CORE_CLASS_DISABLED = "v-pagination--disabled";
-    protected static String ITEM_CLASS_SELECTED = "v-pagination__item--active";
+    protected static final String CORE_CLASS_DISABLED = "v-pagination--disabled";
+    protected static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
 
     protected String rootLocator = ".v-pagination";
     protected String itemsLocator = ".v-pagination__item";

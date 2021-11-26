@@ -23,7 +23,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBaseElement {
 
-    protected static int DEFAULT_SIZE = 24;
+    protected static final int DEFAULT_SIZE = 24;
 
     protected String rootLocator = ".v-rating";
     protected String emptyIconLocator = "";
