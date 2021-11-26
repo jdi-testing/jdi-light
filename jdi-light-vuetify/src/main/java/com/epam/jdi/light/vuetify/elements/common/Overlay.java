@@ -15,8 +15,6 @@ public class Overlay extends UIBaseElement<OverlayAssert> {
 
     private static final double DEFAULT_OPACITY = 0.46;
     private static final int DEFAULT_Z_INDEX = 5;
-    private String scrimLocator = ".v-overlay__scrim";
-    private String contentLocator = ".v-overlay__content";
 
     Overlay() {
     }
@@ -27,6 +25,7 @@ public class Overlay extends UIBaseElement<OverlayAssert> {
 
     @JDIAction("Get content '{name}'")
     public UIElement content() {
+        String contentLocator = ".v-overlay__content";
         return $$(contentLocator, core()).stream().findFirst().orElse(null);
     }
 
@@ -48,6 +47,7 @@ public class Overlay extends UIBaseElement<OverlayAssert> {
 
     @JDIAction("Get '{name}' opacity")
     public double opacity() {
+        String scrimLocator = ".v-overlay__scrim";
         if (!$(scrimLocator, core()).css("opacity").isEmpty())
             return Double.parseDouble($(scrimLocator, core()).css("opacity"));
         else

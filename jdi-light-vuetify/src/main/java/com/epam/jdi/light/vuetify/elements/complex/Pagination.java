@@ -24,7 +24,6 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
 
     private String rootLocator = ".v-pagination";
     private String itemsLocator = ".v-pagination__item";
-    private String moreItemsLocator = ".v-pagination__more";
     private String rightNavigationLocator = ".v-pagination__navigation[2]";
     private String leftNavigationLocator = ".v-pagination__navigation[1]";
 
@@ -129,9 +128,6 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
         }
         if (!annotation.right().isEmpty()) {
             rightNavigationLocator = annotation.right();
-        }
-        if (!annotation.more().isEmpty()) {
-            moreItemsLocator = annotation.more();
         }
     }
 }

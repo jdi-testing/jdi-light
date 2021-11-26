@@ -29,10 +29,8 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
 
     private String trackContainerLocator = ".v-slider__track-container";
     private String trackBackgroundLocator = ".v-slider__track-background";
-    private String trackFillLocator = ".v-slider__track-fill";
 
     private String ticksContainerLocator = ".v-slider__ticks-container";
-    private String tickLocator = ".v-slider__tick";
     private String alwaysShow = "v-slider__ticks-container--always-show";
     private String tickLabelLocator = ".v-slider__tick-label";
 
