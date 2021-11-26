@@ -11,8 +11,8 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
     protected static final String OPEN_PANEL_CLASS = "v-expansion-panel--active";
     protected static final String DISABLED_PANEL_CLASS = "v-expansion-panel--disabled";
 
-    protected String iconLocator = ".v-expansion-panel-header__icon .v-icon";
-    protected String contentLocator = ".v-expansion-panel-content";
+    private String iconLocator = ".v-expansion-panel-header__icon .v-icon";
+    private String contentLocator = ".v-expansion-panel-content";
     private String headerLocator = ".v-expansion-panel-header";
 
     //Access only as part of ExpansionPanels or if you want to create yours custom panel
@@ -71,5 +71,13 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
 
     public void setHeaderLocator(String headerLocator) {
         this.headerLocator = headerLocator;
+    }
+
+    public void setIconLocator(String iconLocator) {
+        this.iconLocator = iconLocator;
+    }
+
+    public void setContentLocator(String contentLocator) {
+        this.contentLocator = contentLocator;
     }
 }
