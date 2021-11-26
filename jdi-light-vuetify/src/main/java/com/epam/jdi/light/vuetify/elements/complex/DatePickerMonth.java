@@ -89,31 +89,40 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private UIElement nextYearButton() {
         if (expander().isExist()) {
             return expandedRoot().find(NEXT_YEAR);
-        } else return root().find(NEXT_YEAR);
+        } else {return root().find(NEXT_YEAR);
+        }
     }
 
     private UIElement previousYearButton() {
         if (expander().isExist()) {
             return expandedRoot().find(PREVIOUS_YEAR);
-        } else return root().find(PREVIOUS_YEAR);
+        } else {
+            return root().find(PREVIOUS_YEAR);
+        }
     }
 
     private UIElement changeYearButton() {
         if (expander().isExist()) {
             return expandedRoot().find(YEAR);
-        } else return root().find(YEAR);
+        } else {
+            return root().find(YEAR);
+        }
     }
 
     private UIElement changeYearSmallButton() {
         if (expander().isExist()) {
             return expandedRoot().find(YEAR_SMALL);
-        } else return root().find(YEAR_SMALL);
+        } else {
+            return root().find(YEAR_SMALL);
+        }
     }
 
     protected UIElement getYear(final String year) {
         if (expander().isExist()) {
             return expandedRoot().find(By.xpath(YEAR_LIST + "/li[text()='" + year + "']"));
-        } else return root().find(By.xpath(YEAR_LIST + "/li[text()[contains(.,'" + year + "')]]"));
+        } else {
+            return root().find(By.xpath(YEAR_LIST + "/li[text()[contains(.,'" + year + "')]]"));
+        }
     }
 
     private UIElement nextYearIcon() {
@@ -135,13 +144,17 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private UIElement yearField() {
         if (expander().isExist()) {
             return expandedRoot().find(YEAR_FIELD);
-        } else return root().find(YEAR_FIELD);
+        } else {
+            return root().find(YEAR_FIELD);
+        }
     }
 
     private UIElement monthField() {
         if (expander().isExist()) {
             return expandedRoot().find(MONTH_FIELD);
-        } else return root().find(MONTH_FIELD);
+        } else {
+            return root().find(MONTH_FIELD);
+        }
     }
 
     private List<UIElement> disabledMonths() {
@@ -155,7 +168,9 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private List<UIElement> allActiveMonths() {
         if (expander().isExist()) {
             return expandedRoot().finds(ACTIVE_MONTH);
-        } else return root().finds(ACTIVE_MONTH);
+        } else {
+            return root().finds(ACTIVE_MONTH);
+        }
     }
 
     private UIElement outlinedMonth() {
@@ -165,7 +180,9 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private UIElement resultDateField() {
         if (expander().isExist()) {
             return root().find(RESULT_DATE_WITH_EXPANDER);
-        } else return null;
+        } else {
+            return null;
+        }
     }
 
     private UIElement cancelButton() {
