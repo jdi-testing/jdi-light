@@ -4,7 +4,6 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.composite.Sheet;
-import com.epam.jdi.light.vuetify.elements.enums.Colors;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -42,8 +41,8 @@ public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAs
         return this;
     }
 
-    public SheetAssert color(Colors color) {
-        return color(Matchers.is(color.value()));
+    public SheetAssert color(String color) {
+        return color(Matchers.is(color));
     }
 
     @JDIAction("Assert that '{name}' border radius is {0}")

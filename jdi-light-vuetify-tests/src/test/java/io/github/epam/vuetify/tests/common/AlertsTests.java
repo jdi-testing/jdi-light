@@ -3,7 +3,7 @@ package io.github.epam.vuetify.tests.common;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.vuetify.elements.common.Alert;
-import com.epam.jdi.light.vuetify.elements.enums.Colors;
+import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeClass;

@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.composite;
 
-import com.epam.jdi.light.vuetify.elements.enums.Colors;
+import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
@@ -44,22 +44,22 @@ public class SheetsTests extends TestsInit {
 
     @Test
     public void colorSheetsTest() {
-        firstColoredSheet.has().color(Colors.GREY_LIGHTEN_3);
+        firstColoredSheet.has().color(Colors.GREY_LIGHTEN_3.value());
         firstColoredSheet.has().cssClasses(Matchers.hasItems("grey", "lighten-3"));
 
-        secondColoredSheet.has().color(Colors.GREEN_LIGHTEN_3);
+        secondColoredSheet.has().color(Colors.GREEN_LIGHTEN_3.value());
         secondColoredSheet.has().cssClasses(Matchers.hasItems("green", "lighten-3"));
 
-        thirdColoredSheet.has().color(Colors.YELLOW_LIGHTEN_3);
+        thirdColoredSheet.has().color(Colors.YELLOW_LIGHTEN_3.value());
         thirdColoredSheet.has().cssClasses(Matchers.hasItems("yellow", "lighten-3"));
 
-        fourthColoredSheet.has().color(Colors.TEAL_LIGHTEN_3);
+        fourthColoredSheet.has().color(Colors.TEAL_LIGHTEN_3.value());
         fourthColoredSheet.has().cssClasses(Matchers.hasItems("teal", "lighten-3"));
 
-        fifthColoredSheet.has().color(Colors.RED_LIGHTEN_3);
+        fifthColoredSheet.has().color(Colors.RED_LIGHTEN_3.value());
         fifthColoredSheet.has().cssClasses(Matchers.hasItems("red", "lighten-3"));
 
-        sixthColoredSheet.has().color(Colors.PURPLE_LIGHTEN_3);
+        sixthColoredSheet.has().color(Colors.PURPLE_LIGHTEN_3.value());
         sixthColoredSheet.has().cssClasses(Matchers.hasItems("purple", "lighten-3"));
     }
 
