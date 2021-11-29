@@ -35,8 +35,8 @@ public class BottomNavigationTests extends TestsInit {
 
     @Test
     public void hideOnScrollTest() {
-        bottomNavigationHideOnScroll.is().visible();
         hideAndScrollPanel.hover();
+        bottomNavigationHideOnScroll.is().visible();
         hideAndScrollPanel.jsExecute("scroll(0,350)");
         bottomNavigationHideOnScroll.is().notVisible();
     }
