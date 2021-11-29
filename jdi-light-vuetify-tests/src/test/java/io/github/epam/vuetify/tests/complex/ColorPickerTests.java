@@ -16,8 +16,23 @@ public class ColorPickerTests extends TestsInit {
     }
 
     @Test
-    public void setColorTest() {
+    public void canvasTest() {
+        System.out.println(fullCanvasColorPicker.canvas().attr("style"));
+    }
 
+    @Test
+    public void canvasDotTest() {
+        System.out.println(fullCanvasColorPicker.canvasDot().attr("style"));
+    }
+
+    @Test
+    public void dotTest() {
+        System.out.println(fullCanvasColorPicker.colorDot().attr("style"));
+    }
+
+    @Test
+    public void hueSliderTest() {
+        System.out.println(fullCanvasColorPicker.hueSlider().attr("class"));
     }
 
     @Test
