@@ -97,7 +97,8 @@ public class FileInputTest extends TestsInit {
 
     @Test
     public void denseFileInputTest() {
-        denseFileInput.has().classValue(Matchers.containsString("v-input--dense"));
+        denseFileInput.uploadFile(pathTXT.toString());
+        denseFileInput.has().file(pathTXT.getFileName().toString());
     }
 
     @Test
