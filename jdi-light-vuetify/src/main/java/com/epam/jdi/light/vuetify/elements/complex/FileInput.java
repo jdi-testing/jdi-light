@@ -29,7 +29,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 public class FileInput extends UIBaseElement<FileInputAssert>
         implements HasLabel, HasPlaceholder, IsInput, ISetup {
 
-    protected String filesLocator = ".v-chip";
+    private String filesLocator = ".v-chip";
 
     @JDIAction("Check that '{name}' can accept multiply files")
     public boolean isMultiply() {
@@ -201,8 +201,9 @@ public class FileInput extends UIBaseElement<FileInputAssert>
 
     @JDIAction("Upload file '{0}' for '{name}'")
     public void uploadFile(String path) {
-        if (isDisabled())
+        if (isDisabled()) {
             throw exception("FileInput '%s' is disabled. Can't upload file", getName());
+        }
         sendKeys(path);
     }
 
