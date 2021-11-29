@@ -27,6 +27,7 @@ public class ResponsiveDrawerTests extends TestsInit {
 
     @Test
     public void responsiveDrawerTest() {
+
         responsiveDrawer.is().displayed();
         responsiveDrawer.has().position("left");
 
