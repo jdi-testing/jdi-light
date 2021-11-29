@@ -9,15 +9,15 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ExpansionPanelAssert extends UIAssert<ExpansionPanelAssert, ExpansionPanel> {
 
-    @JDIAction("Assert that {name} is expanded")
+    @JDIAction("Assert that '{name}' is expanded")
     public ExpansionPanelAssert expanded() {
-        jdiAssert(element().isExpanded(), Matchers.is(true));
+        jdiAssert(element().isExpanded() ? "expanded" : "closed", Matchers.is("expanded"));
         return this;
     }
 
-    @JDIAction("Assert that {name} is closed")
+    @JDIAction("Assert that '{name}' is closed")
     public ExpansionPanelAssert closed() {
-        jdiAssert(element().isExpanded(), Matchers.is(false));
+        jdiAssert(element().isExpanded() ? "expanded" : "closed", Matchers.is("closed"));
         return this;
     }
 }

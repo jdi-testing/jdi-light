@@ -12,7 +12,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 /**
@@ -23,14 +22,14 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
 
     protected String ROOT_LOCATOR = ".v-expansion-panels";
     protected String PANELS_LOCATOR = ".v-expansion-panel";
+
     protected String HEADER_LOCATOR = ".v-expansion-panel-header";
-    protected String ICON_LOCATOR = ".v-expansion-panel-header__icon";
+    protected String ICON_LOCATOR = ".v-expansion-panel-header__icon .v-icon";
     protected String CONTENT_LOCATOR = ".v-expansion-panel-content";
-    protected String WRAPPER_LOCATOR = ".v-expansion-panel-content__wrap";
 
     @Override
     public WebList list() {
-        return $$(PANELS_LOCATOR, this).setName(getName() + " expansion panels");
+        return finds(PANELS_LOCATOR).setName(getName() + " expansion panels");
     }
 
     @JDIAction("Get Panels from '{name}'")
@@ -71,17 +70,14 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
         if (!annotation.content().isEmpty()) {
             CONTENT_LOCATOR = annotation.content();
         }
-        if (!annotation.wrapper().isEmpty()) {
-            WRAPPER_LOCATOR = annotation.wrapper();
-        }
     }
 
     private ExpansionPanel createPanel(UIElement panelCore) {
-        ExpansionPanel panel =  new ExpansionPanel().setCore(ExpansionPanel.class, panelCore);
+        ExpansionPanel panel = new ExpansionPanel().setCore(ExpansionPanel.class, panelCore);
         panel.HEADER_LOCATOR = HEADER_LOCATOR;
         panel.ICON_LOCATOR = ICON_LOCATOR;
         panel.CONTENT_LOCATOR = CONTENT_LOCATOR;
-        panel.WRAPPER_LOCATOR = WRAPPER_LOCATOR;
+        panel.setName(String.format("Expansion panel %s", panel.header().text()));
         return panel;
     }
 }

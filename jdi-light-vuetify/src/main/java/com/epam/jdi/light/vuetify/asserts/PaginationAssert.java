@@ -9,22 +9,15 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class PaginationAssert extends UISelectAssert<PaginationAssert, Pagination> {
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' at the start")
     public PaginationAssert started() {
-        jdiAssert(element().isStart(), Matchers.is(true), "Selected page in list is not first");
+        jdiAssert(element().isStart() ? "start" : "end", Matchers.is("start"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction("Assert that '{name}' at the end")
     public PaginationAssert ended() {
-        jdiAssert(element().isEnd(), Matchers.is(true), "Selected page in list is not last");
+        jdiAssert(element().isStart() ? "start" : "end", Matchers.is("end"));
         return this;
     }
-
-    @JDIAction("Assert that '{name}' has {0} hidden buttons")
-    public PaginationAssert hiddenButtons(int size) {
-        jdiAssert(element().hiddenButtons(), Matchers.equalTo(size), "There are " + size + " hidden button on pagination element");
-        return this;
-    }
-
 }

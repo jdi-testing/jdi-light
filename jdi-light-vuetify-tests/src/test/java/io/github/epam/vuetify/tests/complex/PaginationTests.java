@@ -6,16 +6,16 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.paginationPage;
 import static io.github.com.pages.PaginationPage.circlePagination;
 import static io.github.com.pages.PaginationPage.disabledPagination;
 import static io.github.com.pages.PaginationPage.iconsPagination;
 import static io.github.com.pages.PaginationPage.lengthPagination;
 import static io.github.com.pages.PaginationPage.totalVisiblePagination;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.nullValue;
 
@@ -29,7 +29,7 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void circlePaginationTest() {
-        List<String> circlePages = Arrays.asList("1", "2", "3", "4");
+        List<String> circlePages = asList("1", "2", "3", "4");
         circlePagination.has().size(4);
         circlePagination.is().enabled();
         circlePagination.is().started();
@@ -46,11 +46,10 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void iconsPaginationTest() {
-        List<String> iconsPages = Arrays.asList("1", "2", "3", "4");
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
         iconsPagination.is().started();
-        iconsPagination.has().values(iconsPages);
+        iconsPagination.has().values(asList("1", "2", "3", "4"));
 
         for (UIElement button : iconsPagination.list()) {
             button.click();
@@ -63,10 +62,9 @@ public class PaginationTests extends TestsInit {
 
     @Test
     public void disabledPaginationTest() {
-        List<String> disabledPages = Arrays.asList("1", "2", "3");
         disabledPagination.has().size(3);
         disabledPagination.is().disabled();
-        disabledPagination.has().values(disabledPages);
+        disabledPagination.has().values(asList("1", "2", "3"));
         disabledPagination.has().selected(nullValue(String.class));
     }
 
@@ -76,10 +74,12 @@ public class PaginationTests extends TestsInit {
         lengthPagination.is().started();
 
         List<String> actualButtonsFromStartToEnd = new ArrayList<>();
+        actualButtonsFromStartToEnd.add(lengthPagination.selected());
         while (lengthPagination.hasNext()) {
-            actualButtonsFromStartToEnd.add(lengthPagination.next());
+            lengthPagination.next();
+            actualButtonsFromStartToEnd.add(lengthPagination.selected());
         }
-        assertThat(actualButtonsFromStartToEnd, equalTo(Arrays.asList(
+        jdiAssert(actualButtonsFromStartToEnd, equalTo(asList(
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"
         )));
         lengthPagination.is().ended();
@@ -95,13 +95,14 @@ public class PaginationTests extends TestsInit {
         totalVisiblePagination.is().ended();
 
         List<String> actualButtonsFromEndToStart = new ArrayList<>();
+        actualButtonsFromEndToStart.add(totalVisiblePagination.selected());
         while (totalVisiblePagination.hasPrevious()) {
-            actualButtonsFromEndToStart.add(totalVisiblePagination.previous());
+            totalVisiblePagination.back();
+            actualButtonsFromEndToStart.add(totalVisiblePagination.selected());
         }
-        assertThat(actualButtonsFromEndToStart, equalTo(Arrays.asList(
+        jdiAssert(actualButtonsFromEndToStart, equalTo(asList(
             "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
         )));
         totalVisiblePagination.is().started();
     }
-
 }

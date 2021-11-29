@@ -9,9 +9,9 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREY;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.TRANSPARENT;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.WHITE;
+import static io.github.com.enums.Colors.GREY;
+import static io.github.com.enums.Colors.TRANSPARENT;
+import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.StaticSite.windowsPage;
 import static io.github.com.pages.WindowsPage.accountBack;
 import static io.github.com.pages.WindowsPage.accountCreationWindows;

@@ -2,15 +2,15 @@ package io.github.com.dataproviders;
 
 import org.testng.annotations.DataProvider;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_GREY_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_LIGHTEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREEN_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PURPLE_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_LIGHTEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.TEAL_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.WHITE;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
+import static io.github.com.enums.Colors.BLUE_GREY_DARKEN_2;
+import static io.github.com.enums.Colors.BLUE_LIGHTEN_2;
+import static io.github.com.enums.Colors.GREEN_DARKEN_2;
+import static io.github.com.enums.Colors.ORANGE_DARKEN_2;
+import static io.github.com.enums.Colors.PURPLE_DARKEN_2;
+import static io.github.com.enums.Colors.RED_LIGHTEN_2;
+import static io.github.com.enums.Colors.TEAL_DARKEN_2;
+import static io.github.com.enums.Colors.WHITE;
 
 public class IconsDataProvider {
 
