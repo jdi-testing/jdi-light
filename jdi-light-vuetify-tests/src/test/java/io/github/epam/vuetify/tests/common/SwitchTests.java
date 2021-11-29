@@ -1,13 +1,18 @@
 package io.github.epam.vuetify.tests.common;
 
+import static io.github.com.StaticSite.switchesPage;
+import static io.github.com.pages.SwitchesPage.colorSwitches;
+import static io.github.com.pages.SwitchesPage.flatSwitches;
+import static io.github.com.pages.SwitchesPage.labelSwitches;
+import static io.github.com.pages.SwitchesPage.modelArray;
+import static io.github.com.pages.SwitchesPage.modelAsArraySwitches;
+import static io.github.com.pages.SwitchesPage.statesSwitches;
+
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import static io.github.com.StaticSite.switchesPage;
-import static io.github.com.pages.SwitchesPage.*;
 
 public class SwitchTests extends TestsInit {
 

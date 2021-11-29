@@ -1,14 +1,19 @@
 package io.github.epam.vuetify.tests.complex;
 
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import static io.github.com.StaticSite.comboboxPage;
+import static io.github.com.pages.ComboboxPage.advancedCustomOptionsCombobox;
+import static io.github.com.pages.ComboboxPage.denseCombobox;
+import static io.github.com.pages.ComboboxPage.multipleChipsCombobox;
+import static io.github.com.pages.ComboboxPage.multipleReadOnlyCombobox;
+import static io.github.com.pages.ComboboxPage.multipleScopedCombobox;
+import static io.github.com.pages.ComboboxPage.multipleStringCombobox;
+import static io.github.com.pages.ComboboxPage.noDataWithChipsCombobox;
 
+import io.github.epam.TestsInit;
 import java.util.Arrays;
 import java.util.List;
-
-import static io.github.com.StaticSite.comboboxPage;
-import static io.github.com.pages.ComboboxPage.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class ComboboxTest extends TestsInit {
 

@@ -1,12 +1,16 @@
 package io.github.epam.vuetify.tests.common;
 
+import static io.github.com.StaticSite.radioButtonsPage;
+import static io.github.com.pages.RadioButtonsPage.colorRadioButton;
+import static io.github.com.pages.RadioButtonsPage.directionRadioButton;
+import static io.github.com.pages.RadioButtonsPage.labelRadioButton;
+import static io.github.com.pages.RadioButtonsPage.mandatoryRadioButton;
+import static io.github.com.pages.RadioButtonsPage.mandatoryText;
+
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import static io.github.com.StaticSite.radioButtonsPage;
-import static io.github.com.pages.RadioButtonsPage.*;
 
 public class RadioButtonsTests extends TestsInit {
 
