@@ -14,6 +14,11 @@ public interface HasColor extends ICoreElement {
                 attr("class").contains("colorSecondary");
     }
 
+    default boolean hasErrorColor() {
+        return core().find("//*[contains(@class, 'colorError')]").isDisplayed() ||
+                attr("class").contains("colorError");
+    }
+
     default boolean hasColor(String color) {
         return core().getCssValue("background-color").equals(color);
     }
