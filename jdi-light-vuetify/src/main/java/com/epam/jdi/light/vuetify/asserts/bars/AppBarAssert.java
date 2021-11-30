@@ -9,7 +9,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class AppBarAssert  extends BasicBarAssert<AppBar, AppBarAssert> {
 
     @JDIAction("Assert that '{name}' has tabs")
-    public AppBarAssert clickableTabs() throws Exception {
+    public AppBarAssert clickableTabs() {
         jdiAssert(element().hasClickableTabs() ? "has tabs" : "does not have tabs", Matchers.is("has tabs"));
         return this;
     }
@@ -51,13 +51,13 @@ public class AppBarAssert  extends BasicBarAssert<AppBar, AppBarAssert> {
 
     @JDIAction("Assert that '{name}' header has expected height")
     public AppBarAssert headerHeight(String text) {
-        jdiAssert(element().hasHeaderHeight(), Matchers.equalTo(text));
+        jdiAssert(element().getHeaderHeight(), Matchers.equalTo(text));
         return this;
     }
 
     @JDIAction("Assert that '{name}' header has expected opacity")
     public AppBarAssert headerOpacity(Integer opacity) {
-        jdiAssert(element().hasHeaderOpacity(), Matchers.equalTo(opacity));
+        jdiAssert(element().getHeaderOpacity(), Matchers.equalTo(opacity));
         return this;
     }
 
@@ -68,24 +68,4 @@ public class AppBarAssert  extends BasicBarAssert<AppBar, AppBarAssert> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has checkbox")
-    public AppBarAssert checkbox() {
-        jdiAssert(element().hasCheckbox() ? "checkbox is displayed" : "checkbox is not displayed",
-                Matchers.is("checkbox is displayed"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' checkbox is checked")
-    public AppBarAssert checkboxChecked() {
-        jdiAssert(element().checkboxChecked() ? "checkbox is checked" : "checkbox is unchecked",
-                Matchers.is("checkbox is checked"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' checkbox is unchecked")
-    public AppBarAssert checkboxUnchecked() {
-        jdiAssert(element().checkboxUnchecked() ? "checkbox is unchecked" : "checkbox is checked",
-                Matchers.is("checkbox is unchecked"));
-        return this;
-    }
 }

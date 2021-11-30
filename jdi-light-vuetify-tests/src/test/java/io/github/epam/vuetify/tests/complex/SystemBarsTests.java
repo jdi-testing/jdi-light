@@ -96,8 +96,8 @@ public class SystemBarsTests extends TestsInit {
     @Test
     public void systemBarAbsolutePositionTests() {
         systemBarAbsolutePosition.is().displayed();
-        systemBarAbsolutePosition.has().menuButton();
-        systemBarAbsolutePosition.has().verticalDotsButton();
+        systemBarAbsolutePosition.menuButton().is().displayed();
+        systemBarAbsolutePosition.verticalDotsButton().is().displayed();
         systemBarAbsolutePosition.has().title();
         systemBarAbsolutePosition.has().textInTitle("System bar title");
         systemBarAbsolutePosition.has().position("absolute");
@@ -106,9 +106,9 @@ public class SystemBarsTests extends TestsInit {
     @Test
     public void systemBarAppTests() {
         systemBarApp.is().displayed();
-        systemBarApp.has().menuButton();
-        systemBarApp.has().verticalDotsButton();
-        systemBarApp.has().heartButton();
+        systemBarApp.menuButton().is().displayed();
+        systemBarApp.verticalDotsButton().is().displayed();
+        systemBarApp.heartButton().is().displayed();
         systemBarApp.has().title();
         systemBarApp.has().textInTitle("App system bar title");
         systemBarApp.has().position("fixed");
@@ -117,8 +117,8 @@ public class SystemBarsTests extends TestsInit {
     @Test
     public void systemBarHighTests() {
         systemBarHigh.is().displayed();
-        systemBarHigh.has().menuButton();
-        systemBarHigh.has().verticalDotsButton();
+        systemBarHigh.menuButton().is().displayed();
+        systemBarHigh.verticalDotsButton().is().displayed();
         systemBarHigh.has().title();
         systemBarHigh.has().textInTitle("System bar title");
     }

@@ -29,18 +29,18 @@ public class NavigationDrawersTests extends TestsInit {
     public void bottomDrawerNavigationDrawerTests() {
         bottomDrawerNavigationAppBar.has().textInTitle("My files");
         bottomDrawerNavigationDrawer.is().closed();
-        bottomDrawerNavigationAppBar.clickOnMenuButton();
+        bottomDrawerNavigationAppBar.menuButton().click();
         bottomDrawerNavigationDrawer.is().opened();
         bottomDrawerNavigationDrawer.has().numberOfOptions(4);
         bottomDrawerNavigationDrawer.selectOptionByIndex(1);
         bottomDrawerNavigationDrawer.is().closed();
-        bottomDrawerNavigationAppBar.clickOnMenuButton();
+        bottomDrawerNavigationAppBar.menuButton().click();
         bottomDrawerNavigationDrawer.has().optionSelected(1);
         bottomDrawerNavigationDrawer.has().optionNotSelected(2);
         bottomDrawerNavigationDrawer.has().optionNotSelected(3);
         bottomDrawerNavigationDrawer.has().optionNotSelected(4);
         bottomDrawerNavigationDrawer.selectOptionByIndex(2);
-        bottomDrawerNavigationAppBar.clickOnMenuButton();
+        bottomDrawerNavigationAppBar.menuButton().click();
         bottomDrawerNavigationDrawer.has().optionSelected(2);
         bottomDrawerNavigationDrawer.has().optionNotSelected(1);
         bottomDrawerNavigationDrawer.has().optionNotSelected(3);

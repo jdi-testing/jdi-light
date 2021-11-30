@@ -7,6 +7,7 @@ import com.epam.jdi.light.vuetify.asserts.bars.AppBarAssert;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import org.openqa.selenium.WebElement;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 /**
@@ -15,21 +16,16 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 public class AppBar extends BasicBar<AppBar, AppBarAssert> {
 
-    private Checkbox getCheckbox() {
-        return castToCheckbox(find(".v-input__control"));
-    }
-
-    @JDIAction("'{name}' has checkbox")
-    public boolean hasCheckbox() {
-        return getCheckbox().isDisplayed();
+    public Checkbox checkbox() {
+        return new Checkbox().setCore(Checkbox.class, find(".v-input__control"));
     }
 
     @JDIAction("'{name}' has clickable tabs")
-    public boolean hasClickableTabs() throws Exception {
+    public boolean hasClickableTabs() {
         WebList tabs = finds(".v-tab");
         if (tabs.size() > 0) {
             return tabs.stream().allMatch(UIElement::isClickable);
-        } else throw new Exception("Bar does not have tabs");
+        } else throw exception("Bar does not contain tabs");
     }
 
     @JDIAction("'{name}' has hidden header")
@@ -43,12 +39,12 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
     }
 
     @JDIAction("Get '{name}' header's style")
-    public String hasHeaderHeight() {
+    public String getHeaderHeight() {
         return getHeader().getCssValue("height");
     }
 
     @JDIAction("Get '{name}' header's opacity")
-    public Integer hasHeaderOpacity() {
+    public Integer getHeaderOpacity() {
         return Integer.valueOf(getHeader().firstChild().getCssValue("opacity"));
     }
 
@@ -66,28 +62,6 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
     public boolean hasNavigationMenu() {
         UIElement navigationMenu = find(".v-navigation-drawer__content");
         return navigationMenu.isDisplayed();
-    }
-
-    @JDIAction("'{name}' checkbox is checked")
-    public boolean checkboxChecked() {
-        return getCheckbox().isChecked();
-    }
-
-    @JDIAction("'{name}' checkbox is unchecked")
-    public boolean checkboxUnchecked() {
-        return getCheckbox().isNotChecked();
-    }
-
-    public void checkboxCheck() {
-        getCheckbox().check();
-    }
-
-    public void checkboxUncheck() {
-        getCheckbox().uncheck();
-    }
-
-    private Checkbox castToCheckbox(UIElement element) {
-        return new Checkbox().setCore(Checkbox.class, element);
     }
 
     private WebElement getScrollingContainer() {

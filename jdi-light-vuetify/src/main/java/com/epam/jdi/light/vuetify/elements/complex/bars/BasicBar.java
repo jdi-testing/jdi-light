@@ -11,7 +11,7 @@ import com.epam.jdi.light.vuetify.elements.common.Icon;
 public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert<?,?>> extends UIBaseElement<A> implements IsText {
 
     @JDIAction("Get '{name}' 'menu' button")
-    private Button getMenuButton() {
+    public Button menuButton() {
         return findIconButton("mdi-menu");
     }
 
@@ -21,18 +21,23 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
     }
 
     @JDIAction("Get '{name}' 'vertical dots' button")
-    private Button getVerticalDotsButton() {
+    public Button verticalDotsButton() {
         return findIconButton("mdi-dots-vertical");
+    }
+
+    @JDIAction("Get '{name}' 'vertical dots' button")
+    public Button searchButton() {
+        return findIconButton("mdi-magnify");
+    }
+
+    @JDIAction("Get '{name}' 'vertical dots' button")
+    public Button heartButton() {
+        return findIconButton("mdi-heart");
     }
 
     @JDIAction("Get '{name}' header")
     protected UIElement getHeader() {
         return find("header");
-    }
-
-    @JDIAction("'{name}' has 'menu' button")
-    public boolean hasMenuButton() {
-        return getMenuButton().isDisplayed();
     }
 
     @JDIAction("'{name}' has title")
@@ -45,36 +50,9 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
         return getTitle().isHidden();
     }
 
-    @JDIAction("'{name}' has 'search' button")
-    public boolean hasSearchButton() {
-        Button searchButton = findIconButton("mdi-magnify");
-        return searchButton.isDisplayed();
-    }
-
-    @JDIAction("'{name}' has 'heart' button")
-    public boolean hasHeartButton() {
-        Button heartButton = findIconButton("mdi-heart");
-        return heartButton.isDisplayed();
-    }
-
-    @JDIAction("'{name}' has 'vertical dots' button")
-    public boolean hasVerticalDotsButton() {
-        return getVerticalDotsButton().isDisplayed();
-    }
-
     @JDIAction("Get '{name}' title text")
     public String titleText() {
         return getTitle().getText();
-    }
-
-    @JDIAction("Click on 'menu' button")
-    public void clickOnMenuButton() {
-        getMenuButton().click();
-    }
-
-    @JDIAction("Click on 'vertical dots' button")
-    public void clickOnVerticalDotsButton() {
-        getVerticalDotsButton().click();
     }
 
     protected Button findIconButton(String buttonLocator) {

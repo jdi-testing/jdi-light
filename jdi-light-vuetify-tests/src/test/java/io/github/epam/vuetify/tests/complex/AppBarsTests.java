@@ -26,44 +26,44 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void collapsibleBarTests() {
             collapsibleBar.is().displayed();
-            collapsibleBar.has().menuButton();
+            collapsibleBar.menuButton().is().displayed();
             collapsibleBar.has().title();
             collapsibleBar.has().textInTitle("Collapsing Bar");
             collapsibleBar.scrollBarToBottom();
             collapsibleBar.has().hiddenTitle();
             collapsibleBar.scrollBarToTop();
             collapsibleBar.has().title();
-            collapsibleBar.has().checkbox();
-            collapsibleBar.has().checkboxChecked();
-            collapsibleBar.checkboxUncheck();
-            collapsibleBar.has().checkboxUnchecked();
+            collapsibleBar.checkbox().is().displayed();
+            collapsibleBar.checkbox().is().checked();
+            collapsibleBar.checkbox().uncheck();
+            collapsibleBar.checkbox().is().unchecked();
             collapsibleBar.has().hiddenTitle();
-            collapsibleBar.checkboxCheck();
+            collapsibleBar.checkbox().check();
             collapsibleBar.has().title();
         }
 
         @Test
         public void denseBarTests() {
             denseBar.is().displayed();
-            denseBar.has().menuButton();
+            denseBar.menuButton().is().displayed();
             denseBar.has().title();
             denseBar.has().textInTitle("Page title");
-            denseBar.has().searchButton();
-            denseBar.has().heartButton();
-            denseBar.has().verticalDotsButton();
-            denseBar.clickOnVerticalDotsButton();
+            denseBar.searchButton().is().displayed();
+            denseBar.heartButton().is().displayed();
+            denseBar.verticalDotsButton().is().displayed();
+            denseBar.verticalDotsButton().click();
             optionsMenu.is().displayed();
         }
 
         @Test
         public void elevateScrollBarTests() {
             elevateScrollBar.is().displayed();
-            elevateScrollBar.has().menuButton();
+            elevateScrollBar.menuButton().is().displayed();
             elevateScrollBar.has().title();
             elevateScrollBar.has().textInTitle("Title");
-            elevateScrollBar.has().searchButton();
-            elevateScrollBar.has().heartButton();
-            elevateScrollBar.has().verticalDotsButton();
+            elevateScrollBar.searchButton().is().displayed();
+            elevateScrollBar.heartButton().is().displayed();
+            elevateScrollBar.verticalDotsButton().is().displayed();
             elevateScrollBar.scrollBarToBottom();
             elevateScrollBar.has().visibleHeaderShadow();
             elevateScrollBar.scrollBarToTop();
@@ -73,12 +73,12 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void imageBarTests() {
             imageBar.is().displayed();
-            imageBar.has().menuButton();
+            imageBar.menuButton().is().displayed();
             imageBar.has().title();
             imageBar.has().textInTitle("Title");
-            imageBar.has().searchButton();
-            imageBar.has().heartButton();
-            imageBar.has().verticalDotsButton();
+            imageBar.searchButton().is().displayed();
+            imageBar.heartButton().is().displayed();
+            imageBar.verticalDotsButton().is().displayed();
             imageBar.scrollBarToBottom();
             imageBar.has().headerHeight("56px");
             imageBar.scrollBarToTop();
@@ -88,26 +88,26 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void hidingScrollBarTests() {
             hidingScrollBar.is().displayed();
-            hidingScrollBar.has().menuButton();
+            hidingScrollBar.menuButton().is().displayed();
             hidingScrollBar.has().title();
             hidingScrollBar.has().textInTitle("Title");
-            hidingScrollBar.has().searchButton();
-            hidingScrollBar.has().heartButton();
-            hidingScrollBar.has().verticalDotsButton();
+            hidingScrollBar.searchButton().is().displayed();
+            hidingScrollBar.heartButton().is().displayed();
+            hidingScrollBar.verticalDotsButton().is().displayed();
             hidingScrollBar.has().visibleHeader();
             hidingScrollBar.scrollBarToBottom();
             hidingScrollBar.has().hiddenHeader();
         }
 
         @Test
-        public void fadeImageBarTests() throws Exception {
+        public void fadeImageBarTests() {
             fadeImageBar.is().displayed();
-            fadeImageBar.has().menuButton();
+            fadeImageBar.menuButton().is().displayed();
             fadeImageBar.has().title();
             fadeImageBar.has().textInTitle("Title");
-            fadeImageBar.has().searchButton();
-            fadeImageBar.has().heartButton();
-            fadeImageBar.has().verticalDotsButton();
+            fadeImageBar.searchButton().is().displayed();
+            fadeImageBar.heartButton().is().displayed();
+            fadeImageBar.verticalDotsButton().is().displayed();
             fadeImageBar.has().clickableTabs();
             fadeImageBar.has().headerHeight("224px");
             fadeImageBar.has().headerOpacity(1);
@@ -119,12 +119,12 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void scrollThresholdBarTests() {
             scrollThresholdBar.is().displayed();
-            scrollThresholdBar.has().menuButton();
+            scrollThresholdBar.menuButton().is().displayed();
             scrollThresholdBar.has().title();
             scrollThresholdBar.has().textInTitle("Title");
-            scrollThresholdBar.has().searchButton();
-            scrollThresholdBar.has().heartButton();
-            scrollThresholdBar.has().verticalDotsButton();
+            scrollThresholdBar.searchButton().is().displayed();
+            scrollThresholdBar.heartButton().is().displayed();
+            scrollThresholdBar.verticalDotsButton().is().displayed();
             scrollThresholdBar.has().headerHeight("128px");
             scrollThresholdBar.has().headerOpacity(1);
             scrollThresholdBar.scrollBarToBottom();
@@ -135,10 +135,10 @@ public class AppBarsTests extends TestsInit {
         @Test
         public void toggleNavigationDrawersBarTests() {
             toggleNavigationDrawersBar.is().displayed();
-            toggleNavigationDrawersBar.has().menuButton();
+            toggleNavigationDrawersBar.menuButton().is().displayed();
             toggleNavigationDrawersBar.has().title();
             toggleNavigationDrawersBar.has().textInTitle("Title");
-            toggleNavigationDrawersBar.clickOnMenuButton();
+            toggleNavigationDrawersBar.menuButton().click();
             toggleNavigationDrawersBar.has().navigationMenu();
         }
 }
