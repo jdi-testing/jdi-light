@@ -1,30 +1,23 @@
 package com.epam.jdi.light.material.elements.navigation;
 
-import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.elements.base.UIListBase;
-import com.epam.jdi.light.elements.interfaces.common.IsButton;
-import com.epam.jdi.light.material.asserts.navigation.BottomNavigationAssert;
 
 /**
  * To see an example of Bottom Navigation web element please visit
  * https://material-ui.com/ru/components/bottom-navigation/
  */
 
-public class BottomNavigation extends UIListBase<BottomNavigationAssert> implements IsButton {
+public class BottomNavigation extends UIListBase<UISelectAssert<?, ?>> {
 
-    @JDIAction("Is '{name} selected")
-    public boolean isSelected(int index) {
+    @Override
+    public boolean selected(int index) {
         return list().get(index).hasClass("Mui-selected");
     }
 
-    @JDIAction("Check if '{name} is not selected")
-    public boolean isNotSelected(int index) {
-        return !isSelected(index);
-    }
-
     @Override
-    public BottomNavigationAssert is() {
-        return new BottomNavigationAssert().set(this);
+    public UISelectAssert<?, ?> is() {
+        return (UISelectAssert<?, ?>) new UISelectAssert().set(this);
     }
 
 }
