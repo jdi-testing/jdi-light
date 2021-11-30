@@ -7,7 +7,7 @@ import com.epam.jdi.light.material.elements.utils.Modal;
 
 public class ModalPage extends WebPage {
 
-    @UI("div.jss2")
+    @UI("//*[@role='presentation' and not(@aria-hidden='true')]")
     public static Modal modal;
 
     @UI("button")
