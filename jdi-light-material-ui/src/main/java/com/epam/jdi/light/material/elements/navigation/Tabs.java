@@ -6,9 +6,8 @@ import com.epam.jdi.light.material.asserts.navigation.TabsAssert;
 
 /**
  * To see an example of Tab please visit
- * https://material-ui.com/components/tabs/
+ * https://mui.com/components/tabs/
  */
-
 public class Tabs extends UIListBase<TabsAssert> {
 
     @JDIAction("Check that '{name}' is enabled")

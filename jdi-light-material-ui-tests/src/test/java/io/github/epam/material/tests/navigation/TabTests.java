@@ -10,11 +10,6 @@ import static io.github.com.pages.navigation.TabPage.scrollableTabs;
 import static io.github.com.pages.navigation.TabPage.simpleTabs;
 import static io.github.com.pages.navigation.TabPage.verticalTabs;
 
-
-/**
- * To see an example of Tab please visit
- * https://mui.com/components/tabs/
- */
 public class TabTests extends TestsInit {
 
     @BeforeClass
@@ -22,7 +17,6 @@ public class TabTests extends TestsInit {
         tabPage.open();
         tabPage.checkOpened();
     }
-
 
     @Test
     public void simpleTabTest() {
