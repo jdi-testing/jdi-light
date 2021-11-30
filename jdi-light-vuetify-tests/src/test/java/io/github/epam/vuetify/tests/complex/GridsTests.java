@@ -7,8 +7,9 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREY_LIGHTEN_6;
+import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
 import static io.github.com.StaticSite.gridSystemPage;
+import static io.github.com.enums.Colors.GREY_LIGHTEN_6;
 import static io.github.com.pages.GridSystemPage.alignGrid;
 import static io.github.com.pages.GridSystemPage.breakpointSizingGrid;
 import static io.github.com.pages.GridSystemPage.columnWrappingGrid;
@@ -33,6 +34,7 @@ public class GridsTests extends TestsInit {
     @BeforeClass
     public void before() {
         gridSystemPage.open();
+        resizeWindow(1280, 1057);
     }
 
     @Test
@@ -181,8 +183,8 @@ public class GridsTests extends TestsInit {
     public void rowAndColumnBreakpointsGridSystemTests() {
         rowAndColumnBreakpointsGrid.is().displayed();
         rowAndColumnBreakpointsGrid.show();
-        rowAndColumnBreakpointsGrid.has().columnText("col-6", 1, 1);
-        rowAndColumnBreakpointsGrid.has().columnText("col-6", 1, 2);
+        rowAndColumnBreakpointsGrid.has().columnText("col-3", 1, 1);
+        rowAndColumnBreakpointsGrid.has().columnText("col-9", 1, 2);
         rowAndColumnBreakpointsGrid.has().columnText("col", 2, 2);
     }
 
