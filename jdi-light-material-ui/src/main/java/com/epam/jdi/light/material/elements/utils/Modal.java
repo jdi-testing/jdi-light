@@ -8,6 +8,8 @@ import com.epam.jdi.light.material.asserts.utils.ModalAssert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+
 /**
  * To see an example of Modal web element please visit
  * https://material-ui.com/components/modal/
@@ -28,7 +30,7 @@ public class Modal extends UIBaseElement<ModalAssert> implements IsText {
 
     @JDIAction("Close {name}")
     public void close() {
-        new Actions(core().driver()).sendKeys(core().seleniumElement(), Keys.ESCAPE).perform();
+        $("//body").click();
     }
 
     @Override
