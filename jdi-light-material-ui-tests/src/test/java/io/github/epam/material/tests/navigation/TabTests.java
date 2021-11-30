@@ -20,6 +20,7 @@ public class TabTests extends TestsInit {
 
     @Test
     public void simpleTabTest() {
+        simpleTabs.has().values("ITEM ONE", "ITEM TWO", "ITEM THREE", "ITEM FOUR", "ITEM FIVE");
         simpleTabs.has().selected(1);
         simpleTabs.select(2);
         simpleTabs.has().selected(2);
