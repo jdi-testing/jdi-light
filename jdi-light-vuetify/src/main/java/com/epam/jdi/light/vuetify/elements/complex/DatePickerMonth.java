@@ -52,7 +52,9 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDatePickerMonth.class, DatePickerMonth.class)) return;
+        if (!fieldHasAnnotation(field, JDatePickerMonth.class, DatePickerMonth.class)) {
+            return;
+        }
         JDatePickerMonth j = field.getAnnotation(JDatePickerMonth.class);
         setup(j.root(), j.expandedRoot());
     }
@@ -89,7 +91,8 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private UIElement nextYearButton() {
         if (expander().isExist()) {
             return expandedRoot().find(NEXT_YEAR);
-        } else {return root().find(NEXT_YEAR);
+        } else {
+            return root().find(NEXT_YEAR);
         }
     }
 
