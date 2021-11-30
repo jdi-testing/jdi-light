@@ -15,16 +15,15 @@ import java.util.GregorianCalendar;
 
 public class Calendar extends UIBaseElement<CalendarAssert> {
 
-    private final String MENU = ".menuable__content__active [role='menuitem']";
-    private final String INTERVAL = ".v-calendar-daily__day-interval";
-    private final String WEEKLY = ".v-calendar-weekly__week";
-    private final String WEEKLY_DAY = ".v-calendar-weekly__day";
-
+    private static final String MENU = ".menuable__content__active [role='menuitem']";
+    private static final String INTERVAL = ".v-calendar-daily__day-interval";
+    private static final String WEEKLY = ".v-calendar-weekly__week";
+    private static final String WEEKLY_DAY = ".v-calendar-weekly__day";
 
     public WebList events() {
         try {
             return finds(".v-event-timed");
-        } catch (RuntimeException rex) {
+        } catch (Exception rex) {
             return finds(".v-event");
         }
     }
@@ -46,34 +45,28 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
         return weeks.get(week).finds(WEEKLY_DAY).get(day).finds(".v-sheet").get(slot);
     }
 
+    private int weekdaysNumber() {
+        return finds(".v-calendar-daily_head-weekday").size();
+    }
+
     @JDIAction("Check that {name} has daily type")
     public boolean isDailyType() {
-        return finds(".v-calendar-daily_head-day").size() == 1;
+        return weekdaysNumber() == 1;
     }
 
     @JDIAction("Check that {name} has weekly type")
     public boolean isWeeklyType() {
-        return finds(".v-calendar-daily__day").size() == 7;
+        return weekdaysNumber() == 7;
     }
 
     @JDIAction("Check that {name} has categories")
     public boolean hasCategories() {
-        try {
-            return categories().isNotEmpty();
-        } catch (RuntimeException rex) {
-            System.out.println("Categories not found");
-            return false;
-        }
+        return categories().isNotEmpty();
     }
 
     @JDIAction("Check that {name} has intervals")
     public boolean hasDayIntervals() {
-        try {
-            return finds(INTERVAL).isNotEmpty();
-        } catch (RuntimeException rex) {
-            System.out.println("Intervals not found");
-            return false;
-        }
+        return finds(INTERVAL).isNotEmpty();
     }
 
     @JDIAction("Get {name} {0} category name ")
@@ -103,12 +96,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
 
     @JDIAction("Check that {name} has the current day")
     public boolean isToday() {
-        try {
-            return find(".v-present button").text()
-                    .equalsIgnoreCase(String.valueOf(new GregorianCalendar().get(java.util.Calendar.DAY_OF_MONTH)));
-        } catch (RuntimeException ex) {
-            return false;
-        }
+        return find(".v-present button").text()
+                .equalsIgnoreCase(String.valueOf(new GregorianCalendar().get(java.util.Calendar.DAY_OF_MONTH)));
     }
 
     @JDIAction("Get {name} {0} event name")
@@ -122,12 +111,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
 
     @JDIAction("Change {name} to the {0} type")
     public void selectCalendarType(String type) {
-        openMenu();
-        $$(MENU).select(type);
-    }
-
-    @JDIAction("Change {name} to the {0} type")
-    public void selectCalendarType(int type) {
         openMenu();
         $$(MENU).select(type);
     }
@@ -154,12 +137,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
 
     @JDIAction("Check that {name} has current time line")
     public boolean hasCurrentTimeLine() {
-        try {
-            find(".v-current-time");
-            return true;
-        } catch (RuntimeException rex) {
-            return false;
-        }
+        return find(".v-current-time").isExist();
     }
 
     @Override

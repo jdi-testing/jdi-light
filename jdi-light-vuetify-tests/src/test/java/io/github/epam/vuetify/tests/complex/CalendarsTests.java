@@ -12,6 +12,7 @@ import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CalendarsTests extends TestsInit {
@@ -28,7 +29,7 @@ public class CalendarsTests extends TestsInit {
         typeCategoryCalendar.previousDay();
         typeCategoryCalendar.today();
         typeCategoryCalendar.is().today();
-        typeCategoryCalendar.assertThat().hasCategories();
+        typeCategoryCalendar.has().categories();
         typeCategoryCalendar.has().category(1, "John Smith")
                 .and().category(2, "Tori Walker");
     }
@@ -37,7 +38,7 @@ public class CalendarsTests extends TestsInit {
     public static void typeDayCalendarTest() {
         typeDayCalendar.is().daily();
         typeDayCalendar.is().today();
-        typeDayCalendar.assertThat().hasIntervals();
+        typeDayCalendar.has().intervals();
         typeDayCalendar.has().dayInterval(3, "2 o'clock").and().dayInterval(7, "6 o'clock");
     }
 
@@ -59,18 +60,16 @@ public class CalendarsTests extends TestsInit {
         eventsClickCalendar.closeEvent();
     }
 
-    @Test
-    public static void slotsDayCalendarTest() {
-        slotsDayCalendar.selectSlot(2, 2, 2);
-        slotsDayCalendar.assertThat().slotHasTitle(2, 2, 2, "Slacking");
-        slotsDayCalendar.selectSlot(1, 4, 1);
-        slotsDayCalendar.assertThat().slotHasTitle(1, 4, 1, "Development");
+    @Test(dataProvider = "slotsDayCalendarTestData")
+    public static void slotsDayCalendarTest(int week, int day, int slot, String title) {
+        slotsDayCalendar.selectSlot(week, day, slot);
+        slotsDayCalendar.assertThat().slotHasTitle(week, day, slot, title);
     }
 
     @Test
     public static void slotsDayBodyCalendarTest() {
         slotsDayBodyCalendar.is().weekly();
-        slotsDayBodyCalendar.assertThat().hasIntervals();
+        slotsDayBodyCalendar.has().intervals();
         slotsDayBodyCalendar.has().currentTimeLine();
     }
 
@@ -88,5 +87,13 @@ public class CalendarsTests extends TestsInit {
 
     private static int getEventLocation(int eventNum) {
         return miscDragAndDropCalendar.events().get(eventNum).getLocation().getY();
+    }
+
+    @DataProvider(name = "slotsDayCalendarTestData")
+    private static Object[][] slotsDayCalendarTestData() {
+        return new Object[][]{
+                {2, 2, 2, "Slacking"},
+                {1, 4, 1, "Development"}
+        };
     }
 }
