@@ -5,10 +5,6 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.utils.ModalAssert;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
-
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 /**
  * To see an example of Modal web element please visit
@@ -30,7 +26,7 @@ public class Modal extends UIBaseElement<ModalAssert> implements IsText {
 
     @JDIAction("Close {name}")
     public void close() {
-        $("//body").click();
+        core().click(0, 0);
     }
 
     @Override
