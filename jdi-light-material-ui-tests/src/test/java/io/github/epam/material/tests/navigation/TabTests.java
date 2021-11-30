@@ -9,6 +9,8 @@ import static io.github.com.pages.navigation.TabPage.preventScrollTabs;
 import static io.github.com.pages.navigation.TabPage.scrollableTabs;
 import static io.github.com.pages.navigation.TabPage.simpleTabs;
 import static io.github.com.pages.navigation.TabPage.verticalTabs;
+import static java.util.Arrays.asList;
+import static org.hamcrest.Matchers.equalTo;
 
 public class TabTests extends TestsInit {
 
@@ -20,7 +22,7 @@ public class TabTests extends TestsInit {
 
     @Test
     public void simpleTabTest() {
-        simpleTabs.has().values("ITEM ONE", "ITEM TWO", "ITEM THREE", "ITEM FOUR", "ITEM FIVE");
+        simpleTabs.has().values(equalTo(asList("ITEM ONE", "ITEM TWO", "ITEM THREE", "ITEM FOUR", "ITEM FIVE")));
         simpleTabs.has().selected(1);
         simpleTabs.select(2);
         simpleTabs.has().selected(2);
