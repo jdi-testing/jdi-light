@@ -52,7 +52,7 @@ public class DateTimePicker extends UIBaseElement<DateTimePickerAssert> {
 
     @JDIAction("Cancel changes in {name} and close")
     public void cancel() {
-        command("Esc");
+        $("//div[contains(@role,'dialog')]//*[contains(text(),'Cancel')]").click();
     }
 
     @JDIAction("Confirm changes in {name} and close")
