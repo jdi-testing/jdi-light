@@ -1,17 +1,12 @@
 package io.github.epam.material.tests.utils;
 
+import static io.github.com.StaticSite.modalPage;
+import static io.github.com.pages.utils.ModalPage.buttonModal;
+import static io.github.com.pages.utils.ModalPage.modal;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.modalPage;
-import static io.github.com.pages.utils.ModalPage.buttonModal;
-import static io.github.com.pages.utils.ModalPage.modalTexts;
-
-/**
- * To see an example of Modal web element please visit
- * https://material-ui.com/components/modal/
- */
 public class ModalTests extends TestsInit {
     private static final String EXPECTED_TEXT = "Duis mollis, est non commodo luctus, nisi erat porttitor ligula.";
 
@@ -22,12 +17,18 @@ public class ModalTests extends TestsInit {
 
     @Test
     public void modalTests() {
-        for (int modalCounter = 1; modalCounter < 3; modalCounter++) {
-            buttonModal.get(modalCounter).click();
-            modalTexts.get(modalCounter).has().text(EXPECTED_TEXT);
+
+        buttonModal.click();
+        for (int i = 0; i <= 3; i++) {
+            modal.is().visible();
+            modal.title().has().text("Text in a modal");
+            modal.has().text(EXPECTED_TEXT);
+            modal.find("button").click();
         }
-        for (int modalCounter = 3; modalCounter > 1; modalCounter--) {
-            buttonModal.get(modalCounter).core().click(-200, -100);
+
+        for (int i = 0; i <= 4; i++) {
+            modal.close();
         }
+        modal.is().notVisible();
     }
 }
