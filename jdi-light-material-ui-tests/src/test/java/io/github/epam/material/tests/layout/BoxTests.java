@@ -26,16 +26,16 @@ public class BoxTests extends TestsInit {
     @Test
     public void containedBoxTest() {
         containedBox.is().displayed();
+        containedBox.has().text("FIRST BUTTON");
         containedBox.click();
-        containedBox.is().text("FIRST BUTTON");
         lastClickContent.is().text("You clicked First button");
     }
 
     @Test
     public void outlinedBoxTest() {
         outlinedBox.is().displayed();
+        outlinedBox.has().text("SECOND BUTTON");
         outlinedBox.click();
-        outlinedBox.is().text("SECOND BUTTON");
         lastClickContent.is().text("You clicked Second button");
     }
 
