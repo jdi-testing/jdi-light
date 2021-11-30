@@ -29,14 +29,14 @@ public class HiddenTests extends TestsInit {
     @DataProvider(name = "Screen Width Dividers")
     public Object[][] screenWidthDividers() {
         return new Object[][]{
-                { 600 + 13, 0, "xs"},
-                { 600 + 14, 1, "sm"},
-                { 960 + 13, 1, "sm"},
-                { 960 + 14, 2, "md"},
-                {1280 + 13, 2, "md"},
-                {1280 + 14, 3, "lg"},
-                {1920 + 13, 3, "lg"},
-                {1920 + 14, 4, "xl"}};
+                { 599, 0, "xs"},
+                { 600, 1, "sm"},
+                { 959, 1, "sm"},
+                { 960, 2, "md"},
+                {1279, 2, "md"},
+                {1280, 3, "lg"},
+                {1919, 3, "lg"},
+                {1920, 4, "xl"}};
     }//600 960 1280 1920
 
     @Test(dataProvider = "Screen Width Dividers")
