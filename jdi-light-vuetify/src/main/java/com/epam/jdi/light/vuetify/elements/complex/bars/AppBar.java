@@ -16,11 +16,12 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 public class AppBar extends BasicBar<AppBar, AppBarAssert> {
 
+    @JDIAction("Get '{name}'s checkbox")
     public Checkbox checkbox() {
         return new Checkbox().setCore(Checkbox.class, find(".v-input__control"));
     }
 
-    @JDIAction("'{name}' has clickable tabs")
+    @JDIAction("Does '{name}' have clickable tabs")
     public boolean hasClickableTabs() {
         WebList tabs = finds(".v-tab");
         if (tabs.size() > 0) {
@@ -28,37 +29,38 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         } else throw exception("Bar does not contain tabs");
     }
 
-    @JDIAction("'{name}' has hidden header")
+    @JDIAction("Does '{name}' have hidden header")
     public boolean hasHiddenHeader() {
         return getHeader().getAttribute("style").contains("translateY(-128px)");
     }
 
-    @JDIAction("'{name}' has hidden header")
+    @JDIAction("Does '{name}' have visible header")
     public boolean hasVisibleHeader() {
         return getHeader().getAttribute("style").contains("translateY(0px)");
     }
 
-    @JDIAction("Get '{name}' header's style")
+    @JDIAction("Get '{name}'s header's height")
     public String getHeaderHeight() {
         return getHeader().getCssValue("height");
     }
 
-    @JDIAction("Get '{name}' header's opacity")
+    @JDIAction("Get '{name}'s header's opacity")
     public Integer getHeaderOpacity() {
         return Integer.valueOf(getHeader().firstChild().getCssValue("opacity"));
     }
 
-    @JDIAction("'{name}' header has hidden shadow")
+    @JDIAction("Does '{name}'s header have hidden shadow")
     public boolean hasHiddenHeaderShadow() {
-        return getHeader().getCssValue("box-shadow").contains("0px 0px 0px 0px");
+        return getHeader().attr("class").contains("hide-shadow");
     }
 
-    @JDIAction("'{name}' header has visible shadow")
+    @JDIAction("Does '{name}'s header have visible shadow")
     public boolean hasVisibleHeaderShadow() {
-        return getHeader().getCssValue("box-shadow").contains("0px 4px 5px 0px");
+        return getHeader().attr("class").contains("elevate-on-scroll") &&
+                getHeader().attr("class").contains("is-scrolled");
     }
 
-    @JDIAction("'{name}' has navigation menu")
+    @JDIAction("Does '{name}' have navigation menu")
     public boolean hasNavigationMenu() {
         UIElement navigationMenu = find(".v-navigation-drawer__content");
         return navigationMenu.isDisplayed();
@@ -68,10 +70,12 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         return find(".overflow-y-auto").core().getFast();
     }
 
+    @JDIAction("Scroll '{name}' to bottom")
     public void scrollBarToBottom() {
         jsExecute("arguments[0].scroll(0, document.body.scrollHeight)", getScrollingContainer());
     }
 
+    @JDIAction("Scroll '{name}' to top")
     public void scrollBarToTop() {
         jsExecute("arguments[0].scroll(document.body.scrollHeight, 0)", getScrollingContainer());
     }

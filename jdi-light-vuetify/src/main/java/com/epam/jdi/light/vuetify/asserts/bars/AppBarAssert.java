@@ -35,33 +35,33 @@ public class AppBarAssert  extends BasicBarAssert<AppBar, AppBarAssert> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' header's shadow is hidden")
+    @JDIAction("Assert that '{name}'s header's shadow is hidden")
     public AppBarAssert hiddenHeaderShadow() {
         jdiAssert(element().hasHiddenHeaderShadow() ? "header's shadow is hidden" : "header's shadow is visible",
                 Matchers.is("header's shadow is hidden"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' header's shadow is visible")
+    @JDIAction("Assert that '{name}'s header's shadow is visible")
     public AppBarAssert visibleHeaderShadow() {
         jdiAssert(element().hasVisibleHeaderShadow() ? "header's shadow is visible" : "header's shadow is hidden",
                 Matchers.is("header's shadow is visible"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' header has expected height")
+    @JDIAction("Assert that '{name}'s header has expected height")
     public AppBarAssert headerHeight(String text) {
         jdiAssert(element().getHeaderHeight(), Matchers.equalTo(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' header has expected opacity")
+    @JDIAction("Assert that '{name}'s header has expected opacity")
     public AppBarAssert headerOpacity(Integer opacity) {
         jdiAssert(element().getHeaderOpacity(), Matchers.equalTo(opacity));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' title is hidden")
+    @JDIAction("Assert that '{name}'s title is hidden")
     public AppBarAssert hiddenTitle() {
         jdiAssert(element().hasHiddenTitle() ? "has hidden title" : "has visible title",
                 Matchers.is("has hidden title"));
