@@ -38,6 +38,6 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
     }
 
     public ProfileCardAssert has() {
-        return this.is();
+        return is();
     }
 }
