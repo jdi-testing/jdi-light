@@ -22,21 +22,20 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> {
         core().jsExecute("scroll(0," + y + ");");
     }
 
-    @JDIAction("Scroll to '{0}' with text {1} in '{name}'")
+    @JDIAction("Scroll to item with text {0} in '{name}'")
     public void scrollToElementWithText(String text) {
         scrollToPosition(0);
         int startPosition;
         int currentPosition;
         do {
             startPosition = position();
-            List<UIElement> elementsFound = getItems().filter(item ->
+            List<UIElement> itemsFound = items().filter(item ->
                     item.text().contains(text));
-
-            if (elementsFound.size() == 0) {
-                show(getItems().last());
+            if (itemsFound.size() == 0) {
+                show(items().last());
                 currentPosition = position();
             } else {
-                show(elementsFound.get(0));
+                show(itemsFound.get(0));
                 break;
             }
         } while (currentPosition != startPosition);
@@ -48,16 +47,16 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> {
 
     @JDIAction(value = "Get '{name}' scrolled position", level = DEBUG)
     public int position() {
-        return Integer.parseInt(getItems().get(1).getCssValue("top").split("px")[0]);
+        return Integer.parseInt(items().get(1).getCssValue("top").split("px")[0]);
     }
 
     @JDIAction(value = "Get '{name}' items", level = DEBUG)
-    public WebList getItems() {
+    public WebList items() {
         return finds(ITEM_LOCATOR);
     }
 
-    @JDIAction("Focus on '{1}'")
+    @JDIAction("Focus on '{0}'")
     public void show(UIElement item) {
-        item.iCore().jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
+        item.core().jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
     }
 }

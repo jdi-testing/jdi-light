@@ -6,7 +6,6 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.virtualScrollerPage;
 import static io.github.com.pages.VirtualScrollerPage.benchScroller;
 import static io.github.com.pages.VirtualScrollerPage.totalBenched;
@@ -35,7 +34,6 @@ public class VirtualScrollerTests extends TestsInit {
             totalBenched.sendKeys(BACK_SPACE);
         }
         totalBenched.setValue(String.valueOf(DEFAULT_BENCH_NUMBER));
-
         benchScroller.has().renderedItems(DEFAULT_NUMBER_BENCH_ITEMS);
     }
 
@@ -77,11 +75,9 @@ public class VirtualScrollerTests extends TestsInit {
 
         int startPosition = benchScroller.position();
         benchScroller.scrollToPosition(startPosition + pixelsToScrollDown);
-        int endPosition = benchScroller.position();
 
-        jdiAssert(endPosition, Matchers.greaterThan(startPosition));
-        jdiAssert(endPosition, Matchers.lessThanOrEqualTo(startPosition + pixelsToScrollDown));
-
+        benchScroller.has().position(Matchers.greaterThan(startPosition));
+        benchScroller.has().position(Matchers.lessThanOrEqualTo(startPosition + pixelsToScrollDown));
     }
 
     @Test(dataProvider = "pixels to scroll down and up", dataProviderClass = VirtualScrollerDataProvider.class)
@@ -94,12 +90,11 @@ public class VirtualScrollerTests extends TestsInit {
         int startPosition = benchScroller.position();
         benchScroller.scrollToPosition(pixelsToScrollDown);
         int endPosition = benchScroller.position();
-        jdiAssert(endPosition, Matchers.greaterThan(startPosition));
+        benchScroller.has().position(Matchers.greaterThan(startPosition));
 
         startPosition = endPosition;
         benchScroller.scrollToPosition(startPosition - pixelsToScrollUp);
-        endPosition = benchScroller.position();
-        jdiAssert(endPosition, Matchers.lessThan(startPosition));
+        benchScroller.has().position(Matchers.lessThan(startPosition));
     }
 
     @Test(dataProvider = "bench items text", dataProviderClass = VirtualScrollerDataProvider.class)
@@ -108,8 +103,7 @@ public class VirtualScrollerTests extends TestsInit {
         benchScroller.show();
 
         benchScroller.scrollToElementWithText(itemText);
-        jdiAssert(benchScroller.getItems().get(3).find(".v-list-item__content").text(),
-                Matchers.equalTo(itemText));
+        benchScroller.items().get(3).find(".v-list-item__content").has().text(itemText);
     }
 
     @Test
@@ -128,9 +122,8 @@ public class VirtualScrollerTests extends TestsInit {
 
         int startPosition = userScroller.position();
         userScroller.scrollToPosition(startPosition + pixelsToScrollDown);
-        int endPosition = userScroller.position();
-        jdiAssert(endPosition, Matchers.greaterThan(startPosition));
-        jdiAssert(endPosition, Matchers.lessThanOrEqualTo(startPosition + pixelsToScrollDown));
+        userScroller.has().position(Matchers.greaterThan(startPosition));
+        userScroller.has().position(Matchers.lessThanOrEqualTo(startPosition + pixelsToScrollDown));
     }
 
     @Test(dataProvider = "pixels to scroll down and up", dataProviderClass = VirtualScrollerDataProvider.class)
@@ -142,11 +135,10 @@ public class VirtualScrollerTests extends TestsInit {
         int startPosition = userScroller.position();
         userScroller.scrollToPosition(startPosition + pixelsToScrollDown);
         int endPosition = userScroller.position();
-        jdiAssert(endPosition, Matchers.greaterThan(startPosition));
+        userScroller.has().position(Matchers.greaterThan(startPosition));
 
         startPosition = endPosition;
         userScroller.scrollToPosition(startPosition - pixelsToScrollUp);
-        endPosition = userScroller.position();
-        jdiAssert(endPosition, Matchers.lessThan(startPosition));
+        userScroller.has().position(Matchers.lessThan(startPosition));
     }
 }
