@@ -12,9 +12,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
 import static com.epam.jdi.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.fileInputsPage;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.pages.FileInputsPage.acceptFileInput;
 import static io.github.com.pages.FileInputsPage.chipsFileInput;
 import static io.github.com.pages.FileInputsPage.complexFileInput;
