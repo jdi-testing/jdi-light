@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.base.UIListBase;
 
 /**
  * To see an example of Bottom Navigation web element please visit
- * https://material-ui.com/ru/components/bottom-navigation/
+ * https://mui.com/components/bottom-navigation/
  */
 
 public class BottomNavigation extends UIListBase<UISelectAssert<?, ?>> {

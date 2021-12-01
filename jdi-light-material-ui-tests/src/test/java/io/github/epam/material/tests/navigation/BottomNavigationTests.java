@@ -7,12 +7,6 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.bottomNavigationPage;
 import static io.github.com.pages.navigation.BottomNavigationPage.bottomNavigationItems;
 
-
-/**
- * To see an example of Bottom Navigation web element please visit
- * https://material-ui.com/components/bottom-navigation/
- */
-
 public class BottomNavigationTests extends TestsInit {
 
     @BeforeMethod
