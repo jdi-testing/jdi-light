@@ -18,6 +18,7 @@ public class TabTests extends TestsInit {
     public void before() {
         tabPage.open();
         tabPage.checkOpened();
+        tabPage.driver().manage().window().maximize();
     }
 
     @Test
