@@ -9,7 +9,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class TabsAssert extends UISelectAssert<TabsAssert, Tabs> {
 
-    @JDIAction("Assert that tab {name} root is disabled")
+    @JDIAction("Assert that {0} tab in {name} is disabled")
     public TabsAssert disabled(int index) {
         jdiAssert(element().disabled(index) ? "disabled" : "not disabled", Matchers.is("disabled"));
         return this;
