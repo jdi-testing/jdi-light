@@ -1,14 +1,13 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static io.github.com.StaticSite.toolbarsPage;
 import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
 import static io.github.com.enums.Colors.GREY_DARKEN_4;
-import static io.github.com.StaticSite.toolbarsPage;
 import static io.github.com.pages.ToolBarsPage.backgroundToolbar;
 import static io.github.com.pages.ToolBarsPage.collapseToolbar;
 import static io.github.com.pages.ToolBarsPage.contextActionToolbar;
@@ -32,8 +31,8 @@ public class ToolBarsTests extends TestsInit {
         backgroundToolbar.menuButton().is().displayed();
         backgroundToolbar.has().textInTitle("Vuetify");
         backgroundToolbar.has().title();
-        backgroundToolbar.has().exportButton();
-        backgroundToolbar.has().backgroundImage();
+        backgroundToolbar.exportButton().is().displayed();
+        backgroundToolbar.backgroundImage().is().displayed();
     }
 
     @Test
@@ -54,7 +53,7 @@ public class ToolBarsTests extends TestsInit {
         denseToolbar.heartButton().is().displayed();
         denseToolbar.verticalDotsButton().is().displayed();
         denseToolbar.has().denseHeader();
-        denseToolbar.has().heightOfHeader("48");
+        denseToolbar.has().heightOfHeader(48);
     }
 
     @Test
@@ -67,22 +66,22 @@ public class ToolBarsTests extends TestsInit {
         extendedToolbar.heartButton().is().displayed();
         extendedToolbar.verticalDotsButton().is().displayed();
         extendedToolbar.has().extendedHeader();
-        extendedToolbar.has().heightOfHeader("112");
+        extendedToolbar.has().heightOfHeader(112);
     }
 
     @Test
     public void floatingWithSearchToolbarTests() {
         floatingWithSearchToolbar.is().displayed();
-        floatingWithSearchToolbar.has().searchIcon();
+        floatingWithSearchToolbar.searchIcon().is().displayed();
         floatingWithSearchToolbar.verticalDotsButton().is().displayed();
-        floatingWithSearchToolbar.has().gpsButton();
-        floatingWithSearchToolbar.has().mapImage();
-        floatingWithSearchToolbar.has().inputField();
-        floatingWithSearchToolbar.has().notFocusedInputField();
-        floatingWithSearchToolbar.sendTextToInputField("Find something");
-        floatingWithSearchToolbar.has().focusedInputField();
+        floatingWithSearchToolbar.gpsButton().is().displayed();
+        floatingWithSearchToolbar.backgroundImage().is().displayed();
+        floatingWithSearchToolbar.input().is().displayed();
+        floatingWithSearchToolbar.input().is().notFocused();
+        floatingWithSearchToolbar.input().clearAndTypeText("Find something");
+        floatingWithSearchToolbar.input().is().focused();
         floatingWithSearchToolbar.verticalDotsButton().click();
-        floatingWithSearchToolbar.has().notFocusedInputField();
+        floatingWithSearchToolbar.input().is().notFocused();
     }
 
     @Test
@@ -94,20 +93,20 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.verticalDotsButton().is().displayed();
         contextActionToolbar.has().selectOptionsField();
         contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
-        contextActionToolbar.clickOnSelectOptionsField();
+        contextActionToolbar.getSelectOptionsField().click();
+
         optionsMenu.is().displayed();
         for (UIElement element : options) {
             element.click();
         }
         contextActionToolbar.has().headerColor(GREY_DARKEN_4.value());
-        contextActionToolbar.has().deleteButton();
-        contextActionToolbar.has().closeButton();
+        contextActionToolbar.deleteButton().is().displayed();
+        contextActionToolbar.closeButton().is().displayed();
         contextActionToolbar.has().textInTitle("4 selected");
-        contextActionToolbar.verticalDotsButton().click();
+        contextActionToolbar.collapse();
         contextActionToolbar.has().selectedOptions("Foo,Bar,Fizz,Buzz");
-        Timer.waitCondition(optionsMenu::isHidden);
         optionsMenu.is().hidden();
-        contextActionToolbar.clickOnCloseButton();
+        contextActionToolbar.closeButton().click();
         contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
         contextActionToolbar.has().textInTitle("Photos");
         contextActionToolbar.has().selectedOptions("");
@@ -122,6 +121,6 @@ public class ToolBarsTests extends TestsInit {
         flexibleAndCardToolbar.has().textInTitle("Title");
         flexibleAndCardToolbar.searchButton().is().displayed();
         flexibleAndCardToolbar.verticalDotsButton().is().displayed();
-        flexibleAndCardToolbar.has().appsButton();
+        flexibleAndCardToolbar.appsButton().is().displayed();
     }
 }

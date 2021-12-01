@@ -143,6 +143,11 @@ public class Input extends UIBaseElement<InputAssert> {
         return this.hasClass("v-input--is-loading");
     }
 
+    @JDIAction("Check that '{name}' is loading")
+    public boolean isFocused() {
+        return attr("class").contains("is-focused");
+    }
+
     @JDIAction("Check that '{name}' has prepend outer")
     public boolean hasPrependOuter() {
         return new Timer(base().getTimeout() * 1000L)
