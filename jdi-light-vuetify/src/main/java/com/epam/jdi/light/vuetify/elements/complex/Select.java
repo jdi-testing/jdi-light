@@ -31,8 +31,9 @@ public class Select extends Dropdown {
 
     @Override
     public void close() {
-        if (isExpanded())
+        if (isExpanded()) {
             core().click(-1, -1);
+        }
     }
 
     @Override
