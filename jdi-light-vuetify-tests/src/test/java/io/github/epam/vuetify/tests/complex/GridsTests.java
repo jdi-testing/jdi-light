@@ -183,8 +183,8 @@ public class GridsTests extends TestsInit {
     public void rowAndColumnBreakpointsGridSystemTests() {
         rowAndColumnBreakpointsGrid.is().displayed();
         rowAndColumnBreakpointsGrid.show();
-        rowAndColumnBreakpointsGrid.has().columnText("col-6", 1, 1);
-        rowAndColumnBreakpointsGrid.has().columnText("col-6", 1, 2);
+        rowAndColumnBreakpointsGrid.has().columnText("col-3", 1, 1);
+        rowAndColumnBreakpointsGrid.has().columnText("col-9", 1, 2);
         rowAndColumnBreakpointsGrid.has().columnText("col", 2, 2);
     }
 
