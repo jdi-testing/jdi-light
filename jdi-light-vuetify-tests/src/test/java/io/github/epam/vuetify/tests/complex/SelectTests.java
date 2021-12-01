@@ -25,9 +25,10 @@ public class SelectTests extends TestsInit {
 
     @Test
     public void basicFunctionalityTest() {
-        standardDenseSelect.is().collapsed();
         standardDenseSelect.expand();
         standardDenseSelect.is().expanded();
+        standardDenseSelect.close();
+        standardDenseSelect.is().collapsed();
         standardDenseSelect.select("Bar");
         standardDenseSelect.is().selected("Bar");
         standardDenseSelect.is().displayed();

@@ -30,6 +30,12 @@ public class Select extends Dropdown {
     }
 
     @Override
+    public void close() {
+        if (isExpanded())
+            core().click(-1, -1);
+    }
+
+    @Override
     public String labelText() {
         return label().getText();
     }
