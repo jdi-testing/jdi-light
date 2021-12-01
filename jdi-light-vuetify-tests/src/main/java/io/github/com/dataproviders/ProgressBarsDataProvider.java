@@ -2,30 +2,30 @@ package io.github.com.dataproviders;
 
 import org.testng.annotations.DataProvider;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.AMBER;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLACK;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_GREY;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.CYAN;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.CYAN_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.DEEP_ORANGE;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.DEEP_PURPLE_ACCENT_4;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREEN;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.INDIGO;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.INDIGO_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.LIGHT_BLUE;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.LIGHT_GREEN_DARKEN_4;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.LIME;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PINK;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PINK_LIGHTEN_1;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PINK_LIGHTEN_3;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PURPLE;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_ACCENT_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_LIGHTEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.TEAL;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.YELLOW_DARKEN_2;
+import static io.github.com.enums.Colors.AMBER;
+import static io.github.com.enums.Colors.BLACK;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
+import static io.github.com.enums.Colors.BLUE_GREY;
+import static io.github.com.enums.Colors.CYAN;
+import static io.github.com.enums.Colors.CYAN_DARKEN_2;
+import static io.github.com.enums.Colors.DEEP_ORANGE;
+import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
+import static io.github.com.enums.Colors.GREEN;
+import static io.github.com.enums.Colors.INDIGO;
+import static io.github.com.enums.Colors.INDIGO_DARKEN_2;
+import static io.github.com.enums.Colors.LIGHT_BLUE;
+import static io.github.com.enums.Colors.LIGHT_GREEN_DARKEN_4;
+import static io.github.com.enums.Colors.LIME;
+import static io.github.com.enums.Colors.ORANGE;
+import static io.github.com.enums.Colors.PINK;
+import static io.github.com.enums.Colors.PINK_LIGHTEN_1;
+import static io.github.com.enums.Colors.PINK_LIGHTEN_3;
+import static io.github.com.enums.Colors.PURPLE;
+import static io.github.com.enums.Colors.RED_ACCENT_2;
+import static io.github.com.enums.Colors.RED_DARKEN_2;
+import static io.github.com.enums.Colors.RED_LIGHTEN_2;
+import static io.github.com.enums.Colors.TEAL;
+import static io.github.com.enums.Colors.YELLOW_DARKEN_2;
 
 public class ProgressBarsDataProvider {
 

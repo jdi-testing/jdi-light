@@ -2,20 +2,20 @@ package io.github.com.dataproviders;
 
 import org.testng.annotations.DataProvider;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.AMBER;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.AMBER_LIGHTEN_1;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.CYAN;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.CYAN_LIGHTEN_1;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREEN;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREEN_LIGHTEN_1;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.INDIGO;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PINK;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PURPLE_DARKEN_1;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PURPLE_LIGHTEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_LIGHTEN_1;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_LIGHTEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.TEAL_LIGHTEN_3;
+import static io.github.com.enums.Colors.AMBER;
+import static io.github.com.enums.Colors.AMBER_LIGHTEN_1;
+import static io.github.com.enums.Colors.CYAN;
+import static io.github.com.enums.Colors.CYAN_LIGHTEN_1;
+import static io.github.com.enums.Colors.GREEN;
+import static io.github.com.enums.Colors.GREEN_LIGHTEN_1;
+import static io.github.com.enums.Colors.INDIGO;
+import static io.github.com.enums.Colors.ORANGE;
+import static io.github.com.enums.Colors.PINK;
+import static io.github.com.enums.Colors.PURPLE_DARKEN_1;
+import static io.github.com.enums.Colors.PURPLE_LIGHTEN_2;
+import static io.github.com.enums.Colors.RED_LIGHTEN_1;
+import static io.github.com.enums.Colors.RED_LIGHTEN_2;
+import static io.github.com.enums.Colors.TEAL_LIGHTEN_3;
 
 public class TimeLineDataProviders {
 

@@ -4,12 +4,12 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLACK;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLACK_TRANSPARENT_02;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.INDIGO_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.RED_LIGHTEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.WHITE_TRANSPARENT_07;
+import static io.github.com.enums.Colors.BLACK;
+import static io.github.com.enums.Colors.BLACK_TRANSPARENT_02;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
+import static io.github.com.enums.Colors.INDIGO_DARKEN_2;
+import static io.github.com.enums.Colors.RED_LIGHTEN_2;
+import static io.github.com.enums.Colors.WHITE_TRANSPARENT_07;
 import static io.github.com.StaticSite.systemBarsPage;
 import static io.github.com.pages.SystemBarsPage.systemBarAbsolutePosition;
 import static io.github.com.pages.SystemBarsPage.systemBarApp;

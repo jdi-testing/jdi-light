@@ -2,9 +2,9 @@ package io.github.epam.vuetify.tests.data;
 
 import org.testng.annotations.DataProvider;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PURPLE_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.TEAL;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
+import static io.github.com.enums.Colors.PURPLE_DARKEN_2;
+import static io.github.com.enums.Colors.TEAL;
 
 public class TextFieldsTestsDataProvider {
 

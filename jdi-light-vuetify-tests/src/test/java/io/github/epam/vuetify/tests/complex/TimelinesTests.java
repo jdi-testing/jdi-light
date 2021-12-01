@@ -3,7 +3,7 @@ package io.github.epam.vuetify.tests.complex;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.complex.timelines.TimeLineItem;
-import com.epam.jdi.light.vuetify.elements.enums.Colors;
+import io.github.com.enums.Colors;
 import com.epam.jdi.tools.Timer;
 import io.github.com.custom.alerts.IconAlert;
 import io.github.com.custom.cards.ButtonCard;
@@ -15,10 +15,10 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.BLUE_DARKEN_2;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.ORANGE;
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.PINK;
+import static io.github.com.enums.Colors.BLUE;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
+import static io.github.com.enums.Colors.ORANGE;
+import static io.github.com.enums.Colors.PINK;
 import static io.github.com.StaticSite.timelinesPage;
 import static io.github.com.dataproviders.TimeLineDataProviders.LOREM_IPSUM_TEXT;
 import static io.github.com.pages.TimelinesPage.advancedTimeline;
@@ -33,7 +33,6 @@ import static io.github.com.pages.TimelinesPage.reverseDenseTimeLine;
 import static io.github.com.pages.TimelinesPage.reverseSwitch;
 import static io.github.com.pages.TimelinesPage.reverseTimeLine;
 import static io.github.com.pages.TimelinesPage.smallTimeLine;
-import static org.hamcrest.Matchers.containsString;
 
 public class TimelinesTests extends TestsInit {
 
