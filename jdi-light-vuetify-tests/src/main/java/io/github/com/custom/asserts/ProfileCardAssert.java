@@ -17,29 +17,16 @@ public class ProfileCardAssert extends UIAssert<ProfileCardAssert, ProfileCard> 
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected text in 'name' text field")
-    public ProfileCardAssert name(String text) {
-        jdiAssert(element().hasName(), Matchers.is(text));
+    @JDIAction("Assert that '{name}' has expected user's name")
+    public ProfileCardAssert userName(String text) {
+        jdiAssert(element().getUserName(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected text in 'job function' text field")
-    public ProfileCardAssert jobFunction(String text) {
-        jdiAssert(element().hasJobFunction(), Matchers.is(text));
+    @JDIAction("Assert that '{name}' has expected user's job function")
+    public ProfileCardAssert userJobFunction(String text) {
+        jdiAssert(element().getUserJobFunction(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has a background image")
-    public ProfileCardAssert backgroundImage() {
-        jdiAssert(element().hasBackgroundImage() ? "has background image" : "does not have background image",
-                Matchers.is("has background image"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has an avatar image")
-    public ProfileCardAssert avatarImage() {
-        jdiAssert(element().hasAvatarImage() ? "has avatar image" : "does not have avatar image",
-                Matchers.is("has avatar image"));
-        return this;
-    }
 }

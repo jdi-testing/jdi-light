@@ -26,16 +26,16 @@ public class AvatarsTests extends TestsInit {
         avatarsWithSize.get(1).has().text("36");
         avatarsWithSize.get(2).has().text("48");
         avatarsWithSize.get(3).has().text("62");
-        avatarsWithSize.get(1).has().size("36");
-        avatarsWithSize.get(2).has().size("48");
-        avatarsWithSize.get(3).has().size("62");
+        avatarsWithSize.get(1).has().size(36);
+        avatarsWithSize.get(2).has().size(48);
+        avatarsWithSize.get(3).has().size(62);
     }
 
     @Test
     public void tileAvatarTests() {
         tileAvatar.is().displayed();
-        tileAvatar.has().icon();
-        tileAvatar.has().size("48");
+        tileAvatar.icon().is().displayed();
+        tileAvatar.has().size(48);
     }
 
     @Test
@@ -43,17 +43,17 @@ public class AvatarsTests extends TestsInit {
         for(Avatar avatar: slotAvatars) {
             avatar.is().displayed();
         }
-        slotAvatars.get(1).has().icon();
-        slotAvatars.get(2).has().photo();
+        slotAvatars.get(1).icon().is().displayed();
+        slotAvatars.get(2).image().is().displayed();
         slotAvatars.get(3).has().text("CJ");
     }
 
     @Test
     public void profileCardTests() {
         profileCard.is().displayed();
-        profileCard.has().name("Marcus Obrien");
-        profileCard.has().jobFunction("Network Engineer");
-        profileCard.has().avatarImage();
-        profileCard.has().backgroundImage();
+        profileCard.has().userName("Marcus Obrien");
+        profileCard.has().userJobFunction("Network Engineer");
+        profileCard.avatarImage().is().displayed();
+        profileCard.backgroundImage().is().displayed();
     }
 }
