@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.annotations.JDIChip;
 import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
+import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.base.HasColor;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
@@ -20,7 +22,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * https://mui.com/components/chips/
  */
 
-public class Chip extends UIBaseElement<ChipAssert> implements ISetup, HasClick {
+public class Chip extends UIBaseElement<ChipAssert> implements ISetup, HasClick, CanBeDisabled, HasColor {
 
     protected By chipLabel;
     protected By chipIcon;

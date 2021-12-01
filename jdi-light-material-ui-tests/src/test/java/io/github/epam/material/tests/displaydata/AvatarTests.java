@@ -10,10 +10,6 @@ import static io.github.com.pages.displaydata.AvatarPage.avatarsWithIcon;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithPhoto;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithText;
 
-/**
- * To see an example of Avatar web element please visit https://material-ui.com/ru/components/avatars/
- */
-
 public class AvatarTests extends TestsInit {
 
     @BeforeMethod
@@ -34,7 +30,7 @@ public class AvatarTests extends TestsInit {
     public void avatarsWithPhotoTests() {
         for(Avatar avatar : avatarsWithPhoto) {
             avatar.is().displayed();
-            avatar.has().photo();
+            avatar.has().image();
             avatar.has().badge();
         }
     }
@@ -44,7 +40,7 @@ public class AvatarTests extends TestsInit {
         for(Avatar avatar : avatarsWithIcon) {
             avatar.is().displayed();
             avatar.has().icon();
-            avatar.has().noPhoto();
+            avatar.has().noImage();
         }
     }
 

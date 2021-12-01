@@ -41,11 +41,6 @@ import static io.github.com.pages.displaydata.ChipsPage.primaryClickableBasicChi
 import static io.github.com.pages.displaydata.ChipsPage.primaryClickableWithFaceBasicChip;
 import static org.hamcrest.Matchers.containsString;
 
-/**
- * To see an example of Chips web element please visit
- * https://material-ui.com/ru/components/chips/
- */
-
 public class ChipTests extends TestsInit {
 
     Timer timer = new Timer(2000L);
@@ -56,7 +51,7 @@ public class ChipTests extends TestsInit {
     }
 
     @Test
-    public void basiChipsTest() {
+    public void basicChipsTest() {
         basicChip.is().displayed();
         basicChip.has().text("Basic");
 
@@ -103,6 +98,7 @@ public class ChipTests extends TestsInit {
 
         scrollToTop();
         primaryClickableBasicChip.is().displayed();
+        primaryClickableBasicChip.has().primaryColor();
         primaryClickableBasicChip.has().text("Primary clickable");
         primaryClickableBasicChip.is().clickable();
         primaryClickableBasicChip.is().deletable();
@@ -111,6 +107,7 @@ public class ChipTests extends TestsInit {
         lastDeleteBasicInfo.has().text(containsString("Primary clickable"));
 
         primaryClickableWithFaceBasicChip.is().displayed();
+        primaryClickableWithFaceBasicChip.has().primaryColor();
         primaryClickableWithFaceBasicChip.has().text("Primary clickable with face");
         primaryClickableWithFaceBasicChip.is().clickable();
         primaryClickableWithFaceBasicChip.is().deletable();
@@ -121,6 +118,7 @@ public class ChipTests extends TestsInit {
         primaryClickableWithFaceBasicChip.delete();
 
         deletablePrimaryBasicChip.is().displayed();
+        deletablePrimaryBasicChip.has().primaryColor();
         deletablePrimaryBasicChip.has().text("Deletable primary");
         deletablePrimaryBasicChip.is().clickable();
         deletablePrimaryBasicChip.click();
@@ -129,6 +127,7 @@ public class ChipTests extends TestsInit {
         lastDeleteBasicInfo.has().text(containsString("Deletable primary"));
 
         deletableSecondaryBasicChip.is().displayed();
+        deletableSecondaryBasicChip.has().secondaryColor();
         deletableSecondaryBasicChip.has().text("Deletable secondary");
         deletableSecondaryBasicChip.is().clickable();
         deletableSecondaryBasicChip.click();
@@ -196,6 +195,7 @@ public class ChipTests extends TestsInit {
 
         scrollToTop();
         outlinedPrimaryClickableChip.is().displayed();
+        outlinedPrimaryClickableChip.has().primaryColor();
         outlinedPrimaryClickableChip.has().text("Primary clickable");
         outlinedPrimaryClickableChip.is().clickable();
         outlinedPrimaryClickableChip.click();
@@ -207,6 +207,7 @@ public class ChipTests extends TestsInit {
         lastDeleteOutlinedInfo.has().text(containsString("Primary clickable"));
 
         outlinedPrimaryClickableWithFaceChip.is().displayed();
+        outlinedPrimaryClickableWithFaceChip.has().primaryColor();
         outlinedPrimaryClickableWithFaceChip.has().text("Primary clickable with face");
         outlinedPrimaryClickableWithFaceChip.is().clickable();
         outlinedPrimaryClickableWithFaceChip.click();
@@ -218,6 +219,7 @@ public class ChipTests extends TestsInit {
         lastDeleteOutlinedInfo.has().text(containsString("Primary clickable with face"));
 
         outlinedPrimaryDeletableChip.is().displayed();
+        outlinedPrimaryDeletableChip.has().primaryColor();
         outlinedPrimaryDeletableChip.has().text("Deletable primary");
         outlinedPrimaryDeletableChip.is().clickable();
         outlinedPrimaryDeletableChip.click();
@@ -227,6 +229,7 @@ public class ChipTests extends TestsInit {
         lastDeleteOutlinedInfo.has().text(containsString("Deletable primary"));
 
         outlinedSecondaryDeletableChip.is().displayed();
+        outlinedSecondaryDeletableChip.has().secondaryColor();
         outlinedSecondaryDeletableChip.has().text("Deletable secondary");
         outlinedSecondaryDeletableChip.is().clickable();
         outlinedSecondaryDeletableChip.click();
