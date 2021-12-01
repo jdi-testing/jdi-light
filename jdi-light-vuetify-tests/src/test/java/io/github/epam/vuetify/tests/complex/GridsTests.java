@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
 import static io.github.com.StaticSite.gridSystemPage;
 import static io.github.com.enums.Colors.GREY_LIGHTEN_6;
 import static io.github.com.pages.GridSystemPage.alignGrid;
@@ -33,6 +34,7 @@ public class GridsTests extends TestsInit {
     @BeforeClass
     public void before() {
         gridSystemPage.open();
+        resizeWindow(1280, 1057);
     }
 
     @Test
