@@ -90,7 +90,7 @@ public class CalendarsTests extends TestsInit {
     }
 
     @DataProvider(name = "slotsDayCalendarTestData")
-    private static Object[][] slotsDayCalendarTestData() {
+    public static Object[][] slotsDayCalendarTestData() {
         return new Object[][]{
                 {2, 2, 2, "Slacking"},
                 {1, 4, 1, "Development"}

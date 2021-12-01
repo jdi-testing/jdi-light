@@ -21,9 +21,9 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
     private static final String WEEKLY_DAY = ".v-calendar-weekly__day";
 
     public WebList events() {
-        try {
+        if (finds(".v-event-timed").isExist()) {
             return finds(".v-event-timed");
-        } catch (Exception rex) {
+        } else {
             return finds(".v-event");
         }
     }
