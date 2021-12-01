@@ -17,29 +17,21 @@ public class ToolBarAssert extends BasicBarAssert<ToolBar, ToolBarAssert> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has 'select options' field")
-    public ToolBarAssert selectOptionsField() {
-        jdiAssert(element().hasSelectOptionsField() ?
-                        "has 'select options' field" : "does not have 'select options' field",
-                Matchers.is("has 'select options' field"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}'s header is collapsed")
+    @JDIAction("Assert that '{name}' has collapsed header")
     public ToolBarAssert collapsedHeader() {
         jdiAssert(element().hasCollapsedHeader() ? "header is collapsed" : "header is not collapsed",
                 Matchers.is("header is collapsed"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s header is dense")
+    @JDIAction("Assert that '{name}' has dense header")
     public ToolBarAssert denseHeader() {
         jdiAssert(element().hasDenseHeader() ? "header is dense" : "header is not dense",
                 Matchers.is("header is dense"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s header is extended")
+    @JDIAction("Assert that '{name}' has extended header")
     public ToolBarAssert extendedHeader() {
         jdiAssert(element().hasExtendedHeader() ? "header is extended" : "header is not extended",
                 Matchers.is("header is extended"));
@@ -61,7 +53,7 @@ public class ToolBarAssert extends BasicBarAssert<ToolBar, ToolBarAssert> {
 
     @JDIAction("Assert that '{name}' has expected options selected")
     public ToolBarAssert selectedOptions(String options) {
-        jdiAssert(element().hasSelectedOptions(), Matchers.is(options));
+        jdiAssert(element().getSelectedOptions(), Matchers.is(options));
         return this;
     }
 }

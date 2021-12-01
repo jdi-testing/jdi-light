@@ -23,26 +23,27 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     public Button deleteButton() {
         return findIconButton("mdi-delete");
     }
-    @JDIAction("'{name}' has 'export' button")
+    @JDIAction("Get '{name}'s 'export' button")
     public Button exportButton() {
         return findIconButton("mdi-export");
     }
 
-    @JDIAction("'{name}' has 'GPS' button")
+    @JDIAction("Get '{name}'s 'GPS' button")
     public Button gpsButton() {
         return findIconButton("mdi-crosshairs-gps");
     }
 
-    @JDIAction("'{name}' has 'apps' button")
+    @JDIAction("Get '{name}'s 'apps' button")
     public Button appsButton() {
         return findIconButton("mdi-apps");
     }
 
-    @JDIAction("'{name}' has 'search' icon")
+    @JDIAction("Get '{name}'s 'search' icon")
     public Icon searchIcon() {
         return castToIcon(find(".mdi-magnify"));
     }
 
+    @JDIAction("Get '{name}'s input field")
     public Input input() {
         return new Input().setCore(Input.class, find(".v-input"));
     }
@@ -52,53 +53,49 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
         return find(".v-select__selections");
     }
 
-    @JDIAction("'{name}' has header height")
+    @JDIAction("Get '{name}'s header's height")
     public String getHeaderHeight() {
         return getHeader().getAttribute("style");
     }
 
-    @JDIAction("'{name}'s header has color")
+    @JDIAction("Get '{name}'s header's color")
     public String getHeaderColor() {
         return getHeader().getCssValue("background-color");
     }
 
-    @JDIAction("'{name}' has selected options")
-    public String hasSelectedOptions() {
+    @JDIAction("Get '{name}'s selected options")
+    public String getSelectedOptions() {
         return find("input[type=hidden]").getAttribute("value");
     }
 
-    @JDIAction("'{name}' has background image")
+    @JDIAction("Get '{name}'s background image")
     public Image backgroundImage() {
         if(find(".v-image__image").isExist()) {
             return new Image().setCore(Image.class, find(".v-image__image"));
         } else return new Image().setCore(Image.class, find(".v-card--flat"));
     }
 
-    @JDIAction("'{name}' has 'select options' field")
-    public boolean hasSelectOptionsField() {
-        return getSelectOptionsField().isDisplayed();
-    }
-
-    @JDIAction("'{name}'s 'delete' and 'close' buttons are hidden")
+    @JDIAction("Does '{name}' have hidden 'delete' and 'close' buttons")
     public boolean hasHiddenButtons() {
         return closeButton().isNotExist() && deleteButton().isNotExist();
     }
 
-    @JDIAction("'{name}'s header is collapsed")
+    @JDIAction("Does '{name}' have collapsed header")
     public boolean hasCollapsedHeader() {
         return getHeader().getAttribute("class").contains("collapsed");
     }
 
-    @JDIAction("'{name}'s header is dense")
+    @JDIAction("Does '{name}' have dense header")
     public boolean hasDenseHeader() {
         return getHeader().getAttribute("class").contains("dense");
     }
 
-    @JDIAction("'{name}'s header is extended")
+    @JDIAction("Does '{name}' have extended header")
     public boolean hasExtendedHeader() {
         return getHeader().getAttribute("class").contains("extended");
     }
 
+    @JDIAction("Collapse options menu")
     public void collapse() {
         getSelectOptionsField().click(-1, -1);
     }
