@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.jdi.light.vuetify.elements.enums.Colors.GREY_LIGHTEN_6;
 import static io.github.com.StaticSite.gridSystemPage;
+import static io.github.com.enums.Colors.GREY_LIGHTEN_6;
 import static io.github.com.pages.GridSystemPage.alignGrid;
 import static io.github.com.pages.GridSystemPage.breakpointSizingGrid;
 import static io.github.com.pages.GridSystemPage.columnWrappingGrid;
