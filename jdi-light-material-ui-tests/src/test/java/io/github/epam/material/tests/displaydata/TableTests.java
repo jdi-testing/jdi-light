@@ -42,7 +42,7 @@ public class TableTests extends TestsInit {
     private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList("Dessert (100g serving)",
             "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"));
 
-    private static final Timer TIMER = new Timer(2000L);
+    private final Timer TIMER = new Timer(2000L);
 
     @BeforeMethod
     public void beforeTest() {
