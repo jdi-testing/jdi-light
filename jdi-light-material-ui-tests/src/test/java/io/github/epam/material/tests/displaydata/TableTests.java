@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.displaydata.TablePage.basicTable;
 import static io.github.com.pages.displaydata.TablePage.collapsibleTable;
@@ -88,7 +89,7 @@ public class TableTests extends TestsInit {
     }
 
     @Test
-    public void sortingAndSelectingTableTest() throws InterruptedException {
+    public void sortingAndSelectingTableTest() {
         //ПРОВЕРЯЕМ ЧТО ТЕКСТ Nutrition
         sortingSelectingTableTitle.is().displayed();
         sortingSelectingTableTitle.has().text("Nutrition");
@@ -111,9 +112,8 @@ public class TableTests extends TestsInit {
         scrollButtons.get(3).hover();
         scrollButtons.get(3).click();
 
-        //Кликаем на сортировку по калориям, таблица теперь убывает
-        sortingSelectingTable.headerUI().get(2).highlight();
-        sortingSelectingTable.headerUI().get(2).click();
+        //Кликаем на сортировку по имени
+        $$(".MuiTableSortLabel-root").get(1).click();
 
         //Выбираем 10 записей на странице
         rowsPerPageBtn.click();
@@ -125,8 +125,6 @@ public class TableTests extends TestsInit {
 
         densePaddingSwitch.check();
         densePaddingSwitch.is().selected();
-
-
     }
 
     @Test
