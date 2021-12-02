@@ -49,7 +49,7 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     }
 
     @JDIAction("Get '{name}'s 'select options' field")
-    public UIElement getSelectOptionsField() {
+    public UIElement getSelect() {
         return find(".v-select__selections");
     }
 
@@ -97,7 +97,7 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
 
     @JDIAction("Collapse options menu")
     public void collapse() {
-        getSelectOptionsField().click(-1, -1);
+        getSelect().click(-1, -1);
     }
 
     public ToolBarAssert is() {

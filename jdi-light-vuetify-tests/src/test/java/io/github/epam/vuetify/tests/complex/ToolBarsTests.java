@@ -92,7 +92,7 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.has().textInTitle("Photos");
         contextActionToolbar.verticalDotsButton().is().displayed();
         contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
-        contextActionToolbar.getSelectOptionsField().click();
+        contextActionToolbar.getSelect().click();
 
         optionsMenu.is().displayed();
         for (UIElement element : options) {
