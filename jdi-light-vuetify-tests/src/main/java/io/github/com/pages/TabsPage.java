@@ -1,93 +1,54 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Icon;
-import com.epam.jdi.light.ui.html.elements.complex.Tabs;
-import java.util.List;
+import com.epam.jdi.light.vuetify.elements.complex.VuetifyTabs;
 
-/**
- * To see an example of Tabs web element please visit https://vuetifyjs.com/en/components/tabs/
- */
 
 public class TabsPage extends VuetifyPage {
 
-    @UI("#AlignTitleTabs .v-tab")
-    public static Tabs alignWithTitleTabs;
+    @UI("#AlignTitleTabs")
+    public static VuetifyTabs alignWithTitleTabs;
 
-    @UI("//div[@id = 'CenterActiveTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::div")
-    public static Tabs centerActiveTabs;
+    @UI("#CenterActiveTabs")
+    public static VuetifyTabs centerActiveTabs;
 
-    @UI("//div[@id = 'CustomIconsTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::a")
-    public static Tabs customIconsTabs;
+    @UI("#CustomIconsTabs")
+    public static VuetifyTabs customIconsTabs;
 
-    @UI("#CustomIconsTabs .v-slide-group__next")
-    public static Tabs customIconsTabsButtonNext;
+    @UI("#FixedTabs")
+    public static VuetifyTabs fixedTabs;
 
-    @UI("#CustomIconsTabs .v-slide-group__prev")
-    public static Tabs customIconsTabsButtonBack;
+    @UI("#GrowTabs")
+    public static VuetifyTabs growTabs;
 
-    @UI("//div[@id = 'FixedTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::div")
-    public static Tabs fixedTabs;
+    @UI("#IconsTextTabs")
+    public static VuetifyTabs iconAndTextTabs;
 
-    @UI("//div[@id = 'GrowTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::div")
-    public static Tabs growTabs;
+    @UI("#PaginationTabs")
+    public static VuetifyTabs paginationTabs;
 
-    @UI("//div[@id = 'IconsTextTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::a")
-    public static Tabs iconAndTextTabs;
+    @UI("#RightTabs")
+    public static VuetifyTabs rightTabs;
 
-    @UI("#IconsTextTabs .v-icon")
-    public static List<Icon> iconAndTextTabsIcon;
+    @UI("#VerticalTabs")
+    public static VuetifyTabs verticalTabs;
 
-    @UI("//div[@id = 'PaginationTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::a")
-    public static Tabs paginationTabs;
+    @UI("#ContentTabs")
+    public static VuetifyTabs contentTabs;
 
-    @UI("#PaginationTabs .v-slide-group__next")
-    public static Tabs paginationTabsButtonNext;
+    @UI("#DesktopTabs")
+    public static VuetifyTabs desktopTabs;
 
-    @UI("#PaginationTabs .v-slide-group__prev")
-    public static Tabs paginationTabsButtonBack;
+    @UI("#DynamicHeightTabs")
+    public static VuetifyTabs dynamicHeightTabs;
 
-    @UI("//div[@id = 'RightTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::div")
-    public static Tabs rightTabs;
+    @UI("#DynamicTabs")
+    public static VuetifyTabs dynamicTabs;
 
-    @UI("//div[@id = 'VerticalTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::div")
-    public static Tabs verticalTabs;
+    @UI("#OverflowMenuTabs")
+    public static VuetifyTabs overflowToMenuTabs;
 
-    @UI("#VerticalTabs .v-icon")
-    public static List<Icon> verticalTabsIcon;
-
-    @UI("//div[@id = 'ContentTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::a")
-    public static Tabs contentTabs;
-
-    @UI("//div[@id = 'DesktopTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::a")
-    public static Tabs desktopTabs;
-
-    @UI("#DesktopTabs .v-icon")
-    public static List<Icon> desktopTabsIcon;
-
-    @UI("//div[@id = 'DynamicHeightTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::div")
-    public static Tabs dynamicHeightTabs;
-
-    @UI("//div[@id = 'DynamicTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::div")
-    public static Tabs dynamicTabs;
-
-    @UI("//div[@id = 'DynamicTabs']//*[@class = 'v-card__text text-center']/child::button[1]")
-    public static Button dynamicTabsRemoveButton;
-
-    @UI("//div[@id = 'DynamicTabs']//*[@class = 'v-card__text text-center']/child::button[2]")
-    public static Button dynamicTabsAddButton;
-
-    @UI("//div[@id = 'OverflowMenuTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::a")
-    public static Tabs overflowToMenuTabs;
-
-    @UI("//div[@id = 'OverflowMenuTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::button")
-    public static Button overflowToMenuTabsMenuButton;
-
-    @UI("//*[@class = 'v-list grey lighten-3 v-sheet theme--light']/child::div")
-    public static Tabs overflowToMenuTabsMenuElements;
-
-    @UI("//div[@id = 'TabItemsTabs']//*[@class = 'v-tabs-slider-wrapper']/following-sibling::div")
-    public static Tabs tabItemsTabs;
+    @UI("#TabItemsTabs")
+    public static VuetifyTabs tabItemsTabs;
 }
 
