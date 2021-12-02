@@ -72,7 +72,9 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     public Image backgroundImage() {
         if(find(".v-image__image").isExist()) {
             return new Image().setCore(Image.class, find(".v-image__image"));
-        } else return new Image().setCore(Image.class, find(".v-card--flat"));
+        } else {
+            return new Image().setCore(Image.class, find(".v-card--flat"));
+        }
     }
 
     @JDIAction("Does '{name}' have hidden 'delete' and 'close' buttons")
