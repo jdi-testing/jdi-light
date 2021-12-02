@@ -1,12 +1,13 @@
 package io.github.epam.html.tests.elements.complex.combobox;
 
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.iceCream;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Strawberry;
 import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Vanilla;
@@ -43,6 +44,12 @@ public class DataListTests implements TestsInit {
         assertEquals(iceCream.getText(), "New text");
     }
 
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToInput_ThrowsException() {
+        String optionName = null;
+        iceCream.input(optionName);
+    }
+
     @Test
     public void clearTest() {
         iceCream.clear();
@@ -64,10 +71,28 @@ public class DataListTests implements TestsInit {
         iceCream.sendKeys("Test");
         assertEquals(iceCream.getValue(), text+"Test");
     }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSendKeys_ThrowsException() {
+        String optionName = null;
+        iceCream.sendKeys(null);
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_AsOneOfTheArguments_ToSendKeys_ThrowsException() {
+        iceCream.sendKeys(null, "Test");
+    }
+
     @Test
     public void selectTest() {
         iceCream.select("Chocolate");
         assertEquals(iceCream.getValue(), "Chocolate");
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSelect_ThrowsException() {
+        String optionName = null;
+        iceCream.select(optionName);
     }
 
     @Test

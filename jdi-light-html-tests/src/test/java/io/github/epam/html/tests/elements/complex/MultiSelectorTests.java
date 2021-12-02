@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -36,6 +37,12 @@ public class MultiSelectorTests implements TestsInit {
     public void selectTest() {
         ages.check("Electro", "Metalic");
         assertEquals(ages.checked(), asList("Electro", "Metalic"));
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_AsOneOfTheArguments_ToCheck_ThrowsException() {
+        String optionName = null;
+        ages.check("Electro", optionName);
     }
 
     @Test

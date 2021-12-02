@@ -23,10 +23,13 @@ public class Exceptions {
             exMsg = ex.getCause().getMessage();
         WebSettings.logger.debug("ERROR: " + message + ". Exception: " + exMsg);
         final Class<?> exceptionClass = ex.getClass();
-        if (isClass(AssertionError.class, exceptionClass))
+        if (isClass(exceptionClass, AssertionError.class))
             throw new AssertionError(message, ex);
         else if (isClass(exceptionClass, UnsupportedOperationException.class)) {
             return new UnsupportedOperationException(message, ex);
+        } else if (isClass(exceptionClass, NullUserInputValueException.class)) {
+            // Not the best way to get rid of repeating the action after this exception occured
+            return new NullUserInputValueException();
         }
         return new RuntimeException(message, ex);
     }

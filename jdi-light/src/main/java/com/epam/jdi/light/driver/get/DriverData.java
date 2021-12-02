@@ -2,9 +2,7 @@ package com.epam.jdi.light.driver.get;
 
 import com.jdiai.tools.func.JAction;
 import com.jdiai.tools.func.JAction1;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -21,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.driver.WebDriverUtils.maximizeWindow;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
@@ -34,7 +32,6 @@ import static com.jdiai.tools.ReflectionUtils.stringToPrimitive;
 import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static com.jdiai.tools.StringUtils.format;
 import static com.jdiai.tools.switcher.SwitchActions.*;
-import static java.awt.Toolkit.getDefaultToolkit;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
@@ -89,25 +86,11 @@ public class DriverData {
     // GET DRIVER
     public static WebDriver driverSettings(WebDriver driver) {
         if (DRIVER.screenSize.maximize) {
-            if (getOs().equals(MAC))
-                maximizeScreen(driver);
-            else
-                driver.manage().window().maximize();
+            maximizeWindow(driver);
         } else {
             driver.manage().window().setSize(DRIVER.screenSize.asDimension());
         }
         return driver;
-    }
-    private static WebDriver setBrowserSizeForMac(WebDriver driver, int width, int height) {
-        try {
-            Point position = new Point(0, 0);
-            driver.manage().window().setPosition(position);
-            driver.manage().window().setSize(new Dimension(width, height));
-            return driver;
-        } catch (Exception ex) {
-            logger.error("Failed to Set resolution (%s, %s): %s", width, height, safeException(ex));
-            throw ex;
-        }
     }
 
     public static MutableCapabilities getCapabilities(
@@ -256,23 +239,4 @@ public class DriverData {
         DRIVER.capabilities.safari.forEach(cap::setCapability);
     }
     public static JAction1<SafariOptions> SAFARI_OPTIONS = DriverData::defaultSafariOptions;
-
-    private static WebDriver maximizeScreen(WebDriver driver) {
-        try {
-            switch (getOs()) {
-                case WIN:
-                case LINUX:
-                    driver.manage().window().maximize();
-                    break;
-                case MAC:
-                    java.awt.Dimension screenSize = getDefaultToolkit().getScreenSize();
-                    setBrowserSizeForMac(driver, (int) screenSize.getWidth(), (int) screenSize.getHeight());
-                    break;
-                default: break;
-            }
-            return driver;
-        } catch (Exception ex) {
-            throw exception(ex, "Failed to maximize window");
-        }
-    }
 }
