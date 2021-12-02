@@ -29,7 +29,9 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         WebList tabs = finds(".v-tab");
         if (tabs.size() > 0) {
             return tabs.stream().allMatch(UIElement::isClickable);
-        } else throw new Exception("Bar does not have tabs");
+        } else {
+            throw new Exception("Bar does not have tabs");
+        }
     }
 
     @JDIAction("'{name}' has hidden header")

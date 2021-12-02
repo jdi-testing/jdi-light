@@ -18,23 +18,25 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> implements Has
 
     @JDIAction("'{name}' has expected bar color")
     public String hasBarColor() {
-        if(isIndeterminate()) {
+        if (isIndeterminate()) {
             return find("div.short").getCssValue("background-color");
-        } else return find(".v-progress-linear__determinate").getCssValue("background-color");
+        } else {
+            return find(".v-progress-linear__determinate").getCssValue("background-color");
+        }
     }
 
     @JDIAction("'{name}' is determinate")
     public boolean isDeterminate() {
         return children().stream()
-                .anyMatch(element-> element.getAttribute("class")
-                .contains("_determinate"));
+                .anyMatch(element -> element.getAttribute("class")
+                        .contains("_determinate"));
     }
 
     @JDIAction("'{name}' is indeterminate")
     public boolean isIndeterminate() {
         return children().stream()
-                .anyMatch(element-> element.getAttribute("class")
-                .contains("indeterminate"));
+                .anyMatch(element -> element.getAttribute("class")
+                        .contains("indeterminate"));
     }
 
     @JDIAction("'{name}' is reactive")
@@ -60,7 +62,7 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> implements Has
     @JDIAction("'{name}' has stream")
     public boolean hasStream() {
         return children().stream()
-                .anyMatch(element-> element.getAttribute("class")
+                .anyMatch(element -> element.getAttribute("class")
                         .contains("stream"));
     }
 

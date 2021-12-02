@@ -50,13 +50,14 @@ public class RatingTests extends TestsInit {
         }}
                 .forEach((color, rating) -> {
                     double i = rating.getValue();
-                    if (rating.getValue() > 1)
+                    if (rating.getValue() > 1) {
                         i -= 1;
-                    else
+                    } else {
                         i = rating.length();
-                    rating.setValue(i);
-                    rating.is().value(i);
-                    rating.is().color(color);
+                        rating.setValue(i);
+                        rating.is().value(i);
+                        rating.is().color(color);
+                    }
                 });
     }
 

@@ -28,7 +28,9 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick  {
             return core().getText();
         } else if (iconClass.contains("v-icon notranslate")){
             return "svg icon";
-        } else return  null;
+        } else {
+            return null;
+        }
     }
 
     @JDIAction("'{name}' has color")

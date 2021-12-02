@@ -336,8 +336,9 @@ public class TreeView extends Dropdown
 
     @Override
     public List<TreeView> elements(int minAmount) {
-        if (minAmount > size())
+        if (minAmount > size()) {
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
+        }
         return nodes();
     }
 
@@ -402,7 +403,8 @@ public class TreeView extends Dropdown
     }
 
     @Override
-    public void refresh() {}
+    public void refresh() {
+    }
 
     @Override
     public void clear() {

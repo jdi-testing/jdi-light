@@ -20,19 +20,23 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> {
 
     @JDIAction("Assert that '{name}' has expected height")
     public ImageAssert height(double height) {
-        if(height % 1 == 0) {
+        if (height % 1 == 0) {
             int intHeight = (int) height;
             jdiAssert(element().hasHeight(), Matchers.is(String.format("%spx", intHeight)));
-        } else jdiAssert(element().hasHeight(), Matchers.is(String.format("%spx", height)));
+        } else {
+            jdiAssert(element().hasHeight(), Matchers.is(String.format("%spx", height)));
+        }
         return this;
     }
 
     @JDIAction("Assert that '{name}' has expected width")
     public ImageAssert width(double width) {
-        if(width % 1 == 0) {
+        if (width % 1 == 0) {
             int intWidth = (int) width;
             jdiAssert(element().hasWidth(), Matchers.is(String.format("%spx", intWidth)));
-        } else jdiAssert(element().hasWidth(), Matchers.is(String.format("%spx", width)));
+        } else {
+            jdiAssert(element().hasWidth(), Matchers.is(String.format("%spx", width)));
+        }
         return this;
     }
 
@@ -46,10 +50,12 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> {
     @JDIAction("Assert that '{name}' has expected 'primary' or 'lazy' source path")
     public ImageAssert sourcePath(String lazySrc, String primarySrc) {
         Timer.waitCondition(() -> element().hasSourcePath().contains("http"));
-        if(element().hasSourcePath().equals(lazySrc)) {
+        if (element().hasSourcePath().equals(lazySrc)) {
             jdiAssert(element().hasSourcePath(), Matchers.is(lazySrc));
             return this;
-        } else jdiAssert(element().hasSourcePath(), Matchers.is(primarySrc));
+        } else {
+            jdiAssert(element().hasSourcePath(), Matchers.is(primarySrc));
+        }
         return this;
     }
 

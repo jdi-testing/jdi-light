@@ -40,18 +40,20 @@ public class Overlay extends UIBaseElement<OverlayAssert> {
 
     @JDIAction("Get '{name}' z-index")
     public int zIndex() {
-        if (!core().getAttribute("style").replaceAll("^\\D*?(\\d+).*$", "$1").isEmpty())
+        if (!core().getAttribute("style").replaceAll("^\\D*?(\\d+).*$", "$1").isEmpty()) {
             return Integer.parseInt(core().getAttribute("style").replaceAll("^\\D*?(\\d+).*$", "$1"));
-        else
+        } else {
             return DEFAULT_Z_INDEX;
+        }
     }
 
     @JDIAction("Get '{name}' opacity")
     public double opacity() {
-        if (!$(SCRIM_LOCATOR, core()).css("opacity").isEmpty())
+        if (!$(SCRIM_LOCATOR, core()).css("opacity").isEmpty()) {
             return Double.parseDouble($(SCRIM_LOCATOR, core()).css("opacity"));
-        else
+        } else {
             return DEFAULT_OPACITY;
+        }
     }
 
     @Override

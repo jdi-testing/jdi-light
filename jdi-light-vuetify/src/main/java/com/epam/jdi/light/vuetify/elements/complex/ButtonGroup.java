@@ -17,16 +17,16 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 
 /**
  * To see an example of Breadcrumb web element please visit https://vuetifyjs.com/en/components/button-groups/
- *
+ * <p>
  * Created by Nikita Nechepurenko on 01.10.2021
- *
+ * <p>
  * This element describes <b>a container</b> with buttons in it.
  * You can specify a locator for inner buttons with the JDIButtonGroup annotation.
- *
+ * <p>
  * This container behaves like UIElement but all UIList methods operate with inner buttons due to list() method
  * redefinition.
  */
-public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISetup {
+public class ButtonGroup extends UIListBase<UISelectAssert<?, ?>> implements ISetup {
 
     protected String BUTTONS_FIND_STRATEGY = ".v-btn";
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
@@ -57,8 +57,9 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIButtonGroup.class, ButtonGroup.class))
+        if (!fieldHasAnnotation(field, JDIButtonGroup.class, ButtonGroup.class)) {
             return;
+        }
         JDIButtonGroup annotation = field.getAnnotation(JDIButtonGroup.class);
 
         if (!annotation.root().isEmpty()) {
