@@ -20,18 +20,18 @@ public class UseMediaQueryTests extends TestsInit {
         useMediaQueryPage.shouldBeOpened();
     }
 
-    @AfterMethod
-    public void after() {
-        WebDriverFactory.getDriver().manage().window().maximize();
-    }
-
-    @Test
+    @Test(enabled = false)
     public void useMediaQueryTestWithDifferentScreenWidth() {
         new Timer(2000L)
                 .wait(() -> useMediaQueryText.has().value(containsString("true")));
-        WebDriverFactory.getDriver().manage().window().setSize(new Dimension(500, 1000));
+        useMediaQueryPage.driver().manage().window().setSize(new Dimension(500, 1000));
         useMediaQueryText.has().value(containsString("false"));
-        WebDriverFactory.getDriver().manage().window().setSize(new Dimension(700, 1000));
+        useMediaQueryPage.driver().manage().window().setSize(new Dimension(700, 1000));
         useMediaQueryText.has().value(containsString("true"));
+    }
+
+    @AfterMethod
+    public void after() {
+        useMediaQueryPage.driver().manage().window().maximize();
     }
 }

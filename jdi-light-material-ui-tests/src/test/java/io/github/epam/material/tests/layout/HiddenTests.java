@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.layout;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Dimension;
@@ -39,7 +38,7 @@ public class HiddenTests extends TestsInit {
                 {1920, 4, "xl"}};
     }//600 960 1280 1920
 
-    @Test(dataProvider = "Screen Width")
+    @Test(dataProvider = "Screen Width", enabled = false)
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int width, int size, String expectedWidth) {
         setWidth(width);
         hiddenPage.windowScreenshotToAllure();
@@ -49,14 +48,13 @@ public class HiddenTests extends TestsInit {
     }
 
     private void setWidth(int width) {
-        Dimension currentScreenSize = WebDriverFactory.getDriver().manage().window().getSize();
+        Dimension currentScreenSize = hiddenPage.driver().manage().window().getSize();
         Dimension newScreenSize = new Dimension(width, currentScreenSize.getHeight());
-        WebDriverFactory.getDriver().manage().window().setSize(newScreenSize);
+        hiddenPage.driver().manage().window().setSize(newScreenSize);
     }
 
     @AfterMethod
     public void after() {
-        WebDriverFactory.getDriver().manage().window().maximize();
-        WebDriverFactory.getDriver().manage().window().fullscreen();
+        hiddenPage.driver().manage().window().maximize();
     }
 }
