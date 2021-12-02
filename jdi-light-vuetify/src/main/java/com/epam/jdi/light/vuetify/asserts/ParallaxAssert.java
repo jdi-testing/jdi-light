@@ -19,14 +19,12 @@ public class ParallaxAssert extends UIAssert<ParallaxAssert, Parallax> {
     @JDIAction("Assert that there are elements in '{name}' content section")
     public ParallaxAssert content() {
         jdiAssert(element().hasContent() ? "has content" : "has no content", Matchers.is("has content"));
-//        jdiAssert(element().hasContent(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that there are no elements in '{name}' content section")
     public ParallaxAssert noContent() {
         jdiAssert(element().hasContent() ? "has content" : "has no content", Matchers.is("has no content"));
-//        jdiAssert(element().hasContent(), Matchers.is(false));
         return this;
     }
 }

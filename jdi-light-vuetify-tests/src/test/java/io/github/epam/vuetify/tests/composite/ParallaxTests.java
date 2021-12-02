@@ -8,6 +8,7 @@ import static io.github.com.StaticSite.parallaxPage;
 import static io.github.com.pages.ParallaxPage.contentParallax;
 import static io.github.com.pages.ParallaxPage.customHeightParallax;
 
+
 public class ParallaxTests extends TestsInit {
 
     @BeforeClass
@@ -18,14 +19,17 @@ public class ParallaxTests extends TestsInit {
 
     @Test
     public void contentParallaxTests() {
-//        contentParallax.has().noContent();
         contentParallax.has().content();
+        String expectedHeader = "Vuetify";
+        String expectedSubheader = "Build your application today!";
+
+        contentParallax.getHeader().is().text(expectedHeader);
+        contentParallax.getSubheader().is().text(expectedSubheader);
     }
 
     @Test
     public void customHeightParallaxTests() {
         customHeightParallax.has().noContent();
-//        customHeightParallax.has().content();
 
         int expectedHeight = 300;
         customHeightParallax.has().height(expectedHeight);
