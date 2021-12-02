@@ -23,7 +23,7 @@ public class HiddenTests extends TestsInit {
     @BeforeMethod
     public void before() {
         hiddenPage.open();
-        hiddenPage.isOpened();
+        hiddenPage.checkOpened();
     }
 
     @DataProvider(name = "Screen Width Dividers")
