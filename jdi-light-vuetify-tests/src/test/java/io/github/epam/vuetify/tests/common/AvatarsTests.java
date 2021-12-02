@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.vuetify.elements.common.Avatar;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -20,9 +19,7 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void avatarsWithSizeTests() {
-        for(Avatar avatar: avatarsWithSize) {
-            avatar.is().displayed();
-        }
+        avatarsWithSize.forEach(avatar -> avatar.is().displayed());
         avatarsWithSize.get(1).has().text("36");
         avatarsWithSize.get(2).has().text("48");
         avatarsWithSize.get(3).has().text("62");
@@ -40,9 +37,7 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void slotAvatarsTests() {
-        for(Avatar avatar: slotAvatars) {
-            avatar.is().displayed();
-        }
+        slotAvatars.forEach(avatar -> avatar.is().displayed());
         slotAvatars.get(1).icon().is().displayed();
         slotAvatars.get(2).image().is().displayed();
         slotAvatars.get(3).has().text("CJ");
