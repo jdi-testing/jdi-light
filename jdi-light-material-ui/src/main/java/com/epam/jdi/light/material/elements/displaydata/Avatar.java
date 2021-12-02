@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.elements.displaydata;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.displaydata.AvatarAssert;
 import com.epam.jdi.light.material.interfaces.base.HasImage;
 
@@ -10,7 +11,7 @@ import com.epam.jdi.light.material.interfaces.base.HasImage;
  * https://mui.com/components/avatars/
  */
 
-public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage {
+public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, HasClick {
 
     @JDIAction("Get avatar '{name}' badge")
     public boolean hasBadge() {
