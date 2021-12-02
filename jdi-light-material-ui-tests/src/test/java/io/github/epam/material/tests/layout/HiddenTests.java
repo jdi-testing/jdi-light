@@ -29,10 +29,10 @@ public class HiddenTests extends TestsInit {
     @DataProvider(name = "Screen Width Dividers")
     public Object[][] screenWidthDividers() {
         return new Object[][]{
-                { 599, 0, "xs"},
-                { 600, 1, "sm"},
-                { 959, 1, "sm"},
-                { 960, 2, "md"},
+                {599, 0, "xs"},
+                {600, 1, "sm"},
+                {959, 1, "sm"},
+                {960, 2, "md"},
                 {1279, 2, "md"},
                 {1280, 3, "lg"},
                 {1919, 3, "lg"},
