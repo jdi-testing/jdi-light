@@ -38,7 +38,7 @@ public class HiddenTests extends TestsInit {
                 {1920, 4, "xl"}};
     }//600 960 1280 1920
 
-    @Test(dataProvider = "Screen Width", enabled = false)
+    @Test(dataProvider = "Screen Width")
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int width, int size, String expectedWidth) {
         setWidth(width);
         hiddenPage.windowScreenshotToAllure();
@@ -55,6 +55,6 @@ public class HiddenTests extends TestsInit {
 
     @AfterMethod
     public void after() {
-        hiddenPage.driver().manage().window().maximize();
+        hiddenPage.driver().manage().window().setSize(new Dimension(1024, 762));
     }
 }

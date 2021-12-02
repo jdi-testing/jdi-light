@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.utils;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
@@ -20,7 +19,7 @@ public class UseMediaQueryTests extends TestsInit {
         useMediaQueryPage.shouldBeOpened();
     }
 
-    @Test(enabled = false)
+    @Test
     public void useMediaQueryTestWithDifferentScreenWidth() {
         new Timer(2000L)
                 .wait(() -> useMediaQueryText.has().value(containsString("true")));
@@ -32,6 +31,6 @@ public class UseMediaQueryTests extends TestsInit {
 
     @AfterMethod
     public void after() {
-        useMediaQueryPage.driver().manage().window().maximize();
+        useMediaQueryPage.driver().manage().window().setSize(new Dimension(1024, 762));
     }
 }
