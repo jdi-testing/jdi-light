@@ -88,19 +88,22 @@ public class TableTests extends TestsInit {
     }
 
     @Test
-    public void sortingAndSelectingTableTest() {
-
+    public void sortingAndSelectingTableTest() throws InterruptedException {
+        //ПРОВЕРЯЕМ ЧТО ТЕКСТ Nutrition
         sortingSelectingTableTitle.is().displayed();
         sortingSelectingTableTitle.has().text("Nutrition");
 
+        //КЛИКАЕМ ЧЕКБОКС Dessert
         sortingSelectingTable.headerUI().get(1).click();
         sortingSelectingTableTitle.has().text(containsString("13"));
 
+        //Убираем из 1,5,3
         sortingSelectingTable.getRow(1).get(1).check();
         sortingSelectingTable.getRow(5).get(1).check();
         sortingSelectingTable.getRow(3).get(1).check();
         sortingSelectingTableTitle.has().text(containsString("10"));
 
+        //Листаем вправо, затем влево
         scrollButtons.get(4).is().displayed();
         scrollButtons.get(4).is().enabled();
         scrollButtons.get(4).hover();
@@ -108,15 +111,22 @@ public class TableTests extends TestsInit {
         scrollButtons.get(3).hover();
         scrollButtons.get(3).click();
 
-        sortingSelectingTable.headerUI().get(2).check();
+        //Кликаем на сортировку по калориям, таблица теперь убывает
+        sortingSelectingTable.headerUI().get(2).highlight();
+        sortingSelectingTable.headerUI().get(2).click();
+
+        //Выбираем 10 записей на странице
         rowsPerPageBtn.click();
         rowsPerPageValues.get(2).click();
         rowsPerPageBtn.has().text("10");
 
+        //Проверяем что 2 столбец, 10 строка имеет запись
         sortingSelectingTable.getCell(2, 10).has().text("392");
 
         densePaddingSwitch.check();
         densePaddingSwitch.is().selected();
+
+
     }
 
     @Test
