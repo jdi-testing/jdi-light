@@ -113,6 +113,7 @@ public class TableTests extends TestsInit {
         scrollButtons.get(3).click();
 
         //Кликаем на сортировку по имени
+        $$(".MuiTableSortLabel-root").get(1).show();
         $$(".MuiTableSortLabel-root").get(1).click();
 
         //Выбираем 10 записей на странице
