@@ -36,12 +36,11 @@ public class HiddenTests extends TestsInit {
                 {1280, 3, "lg"},
                 {1919, 3, "lg"},
                 {1920, 4, "xl"}};
-    }//600 960 1280 1920
+    }
 
     @Test(dataProvider = "Screen Width")
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int width, int size, String expectedWidth) {
         setWidth(width);
-        hiddenPage.windowScreenshotToAllure();
         jdiAssert(papers.size(), Matchers.equalTo(size));
         papers.forEach(element -> element.is().displayed());
         currentWidth.has().text("Current width: " + expectedWidth);
