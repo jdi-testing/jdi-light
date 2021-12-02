@@ -40,7 +40,11 @@ public class HiddenTests extends TestsInit {
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int width, int size, String expectedWidth) {
         setWidth(width);
         papers.has().size(size);
-        papers.is().displayed();
+        if (size > 0) {
+            papers.is().displayed();
+        } else {
+            papers.is().hidden();
+        }
         currentWidth.has().text("Current width: " + expectedWidth);
     }
 
