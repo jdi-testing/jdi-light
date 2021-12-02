@@ -1,5 +1,7 @@
 package io.github.epam.material.tests.layout;
 
+import com.epam.jdi.light.settings.Timeouts;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Dimension;
@@ -41,7 +43,7 @@ public class HiddenTests extends TestsInit {
     @Test(dataProvider = "Screen Width")
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int width, int size, String expectedWidth) {
         setWidth(width);
-        hiddenPage.windowScreenshotToAllure();
+        new Timer(currentWidth.core().getTimeout()).wait(() -> papers.size() == size);
         jdiAssert(papers.size(), Matchers.equalTo(size));
         papers.forEach(element -> element.is().displayed());
         currentWidth.has().text("Current width: " + expectedWidth);
