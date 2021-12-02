@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.displaydata.TablePage.basicTable;
 import static io.github.com.pages.displaydata.TablePage.collapsibleTable;
