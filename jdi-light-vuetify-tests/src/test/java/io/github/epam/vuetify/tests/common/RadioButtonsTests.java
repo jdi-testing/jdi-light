@@ -6,7 +6,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.radioButtonsPage;
-import static io.github.com.pages.RadioButtonsPage.*;
+import static io.github.com.pages.RadioButtonsPage.colorRadioButton;
+import static io.github.com.pages.RadioButtonsPage.directionRadioButton;
+import static io.github.com.pages.RadioButtonsPage.mandatoryRadioButton;
+import static io.github.com.pages.RadioButtonsPage.mandatoryText;
+import static io.github.com.pages.RadioButtonsPage.labelRadioButton;
 
 public class RadioButtonsTests extends TestsInit {
 
