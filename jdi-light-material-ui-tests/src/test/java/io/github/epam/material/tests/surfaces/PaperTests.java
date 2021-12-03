@@ -5,49 +5,65 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.paperPage;
-import static io.github.com.pages.surfaces.PaperPage.paper;
+import static io.github.com.pages.surfaces.PaperPage.defaultElevationPaper;
+import static io.github.com.pages.surfaces.PaperPage.elevationThreePaper;
+import static io.github.com.pages.surfaces.PaperPage.infoPaper;
+import static io.github.com.pages.surfaces.PaperPage.outlinedRoundedPaper;
+import static io.github.com.pages.surfaces.PaperPage.outlinedSquarePaper;
+import static io.github.com.pages.surfaces.PaperPage.zeroElevationPaper;
 
 /**
  * To see an example of Paper web element please visit
- * https://material-ui.com/components/paper
+ * https://mui.com/components/paper/
  */
 
 public class PaperTests extends TestsInit {
 
-    private final String WITH_ZERO_ELEVATION = "Paper with elevation = 0";
-    private final String WITH_DEFAULT_ELEVATION = "Paper with default elavation";
-    private final String WITH_ELEVATION_EQUALS_THREE = "Paper with elevation = 3";
-    private final String OUTLINED_PAPER = "Outlined paper";
-    private final String OUTLINED_SQUARE_PAPER = "Outlined square paper";
-    private final String YOU_CLICKED = "You clicked: %s";
+    private final String ZERO_ELEVATION = "Paper with elevation = 0";
+    private final String DEFAULT_ELEVATION = "Paper with default elavation";
+    private final String ELEVATION_EQUALS_THREE = "Paper with elevation = 3";
+    private final String OUTLINED_ROUNDED = "Outlined paper";
+    private final String OUTLINED_SQUARE = "Outlined square paper";
+    private final String YOU_CLICKED = "You clicked: ";
 
     @BeforeMethod
     public void beforeTest() {
         paperPage.open();
-        paperPage.isOpened();
+        paperPage.checkOpened();
     }
 
     @Test
-    public void defaultPaperTest() {
+    public void zeroElevationPaperTest() {
+        zeroElevationPaper.is().displayed();
+        zeroElevationPaper.click();
+        infoPaper.has().text(YOU_CLICKED + ZERO_ELEVATION);
+    }
 
-        paper.get(1).is().text(WITH_ZERO_ELEVATION);
-        paper.get(1).click();
-        paper.get(6).is().text(String.format(YOU_CLICKED, WITH_ZERO_ELEVATION));
+    @Test
+    public void defaultElevationPaperTest() {
+        defaultElevationPaper.is().displayed();
+        defaultElevationPaper.click();
+        infoPaper.has().text(YOU_CLICKED + DEFAULT_ELEVATION);
+    }
 
-        paper.get(2).is().text(WITH_DEFAULT_ELEVATION);
-        paper.get(2).click();
-        paper.get(6).is().text(String.format(YOU_CLICKED, WITH_DEFAULT_ELEVATION));
+    @Test
+    public void elevationThreePaperTest() {
+        elevationThreePaper.is().displayed();
+        elevationThreePaper.click();
+        infoPaper.has().text(YOU_CLICKED + ELEVATION_EQUALS_THREE);
+    }
 
-        paper.get(3).is().text(WITH_ELEVATION_EQUALS_THREE);
-        paper.get(3).click();
-        paper.get(6).is().text(String.format(YOU_CLICKED, WITH_ELEVATION_EQUALS_THREE));
+    @Test
+    public void outlinedRoundedPaperPaperTest() {
+        outlinedRoundedPaper.is().displayed();
+        outlinedRoundedPaper.click();
+        infoPaper.has().text(YOU_CLICKED + OUTLINED_ROUNDED);
+    }
 
-        paper.get(4).is().text(OUTLINED_PAPER);
-        paper.get(4).click();
-        paper.get(6).is().text(String.format(YOU_CLICKED, OUTLINED_PAPER));
-
-        paper.get(5).is().text(OUTLINED_SQUARE_PAPER);
-        paper.get(5).click();
-        paper.get(6).is().text(String.format(YOU_CLICKED, OUTLINED_SQUARE_PAPER));
+    @Test
+    public void outlinedSquarePaperTest() {
+        outlinedSquarePaper.is().displayed();
+        outlinedSquarePaper.click();
+        infoPaper.has().text(YOU_CLICKED + OUTLINED_SQUARE);
     }
 }
