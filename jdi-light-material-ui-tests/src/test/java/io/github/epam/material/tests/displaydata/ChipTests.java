@@ -1,287 +1,155 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.jdiai.tools.Timer;
+import com.epam.jdi.light.material.elements.displaydata.Chip;
 import io.github.epam.TestsInit;
+import io.github.epam.test.data.ChipDataProvider;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.composite.WebPage.scrollToTop;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.chipsPage;
-import static io.github.com.pages.displaydata.ChipsPage.basicChip;
-import static io.github.com.pages.displaydata.ChipsPage.basicClickableChip;
-import static io.github.com.pages.displaydata.ChipsPage.basicDisabledChip;
-import static io.github.com.pages.displaydata.ChipsPage.chipArrayAngular;
-import static io.github.com.pages.displaydata.ChipsPage.chipArrayJquery;
-import static io.github.com.pages.displaydata.ChipsPage.chipArrayPolymer;
-import static io.github.com.pages.displaydata.ChipsPage.chipArrayReact;
-import static io.github.com.pages.displaydata.ChipsPage.chipArrayVuejs;
-import static io.github.com.pages.displaydata.ChipsPage.clickableDeletableBasicChip;
-import static io.github.com.pages.displaydata.ChipsPage.clickableLinkBasicChip;
-import static io.github.com.pages.displaydata.ChipsPage.customDeleteIconBasicChip;
-import static io.github.com.pages.displaydata.ChipsPage.deletableBasicChip;
-import static io.github.com.pages.displaydata.ChipsPage.deletablePrimaryBasicChip;
-import static io.github.com.pages.displaydata.ChipsPage.deletableSecondaryBasicChip;
+import static io.github.com.pages.displaydata.ChipsPage.angularChip;
+import static io.github.com.pages.displaydata.ChipsPage.arrayChips;
+import static io.github.com.pages.displaydata.ChipsPage.basicChips;
+import static io.github.com.pages.displaydata.ChipsPage.jQueryChip;
 import static io.github.com.pages.displaydata.ChipsPage.lastClickArrayInfo;
 import static io.github.com.pages.displaydata.ChipsPage.lastClickBasicInfo;
 import static io.github.com.pages.displaydata.ChipsPage.lastClickOutlinedInfo;
 import static io.github.com.pages.displaydata.ChipsPage.lastDeleteBasicInfo;
 import static io.github.com.pages.displaydata.ChipsPage.lastDeleteOutlinedInfo;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedChip;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedClickableChip;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedClickableDeletableChip;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedClickableLinkChip;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedCustomDeleteIconChip;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedDeletableChip;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedDisabledChip;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedPrimaryClickableChip;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedPrimaryClickableWithFaceChip;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedPrimaryDeletableChip;
-import static io.github.com.pages.displaydata.ChipsPage.outlinedSecondaryDeletableChip;
-import static io.github.com.pages.displaydata.ChipsPage.primaryClickableBasicChip;
-import static io.github.com.pages.displaydata.ChipsPage.primaryClickableWithFaceBasicChip;
-import static org.hamcrest.Matchers.containsString;
+import static io.github.com.pages.displaydata.ChipsPage.linkChips;
+import static io.github.com.pages.displaydata.ChipsPage.outlinedChips;
+import static io.github.com.pages.displaydata.ChipsPage.polymerChip;
+import static io.github.com.pages.displaydata.ChipsPage.vueJSChip;
 
 public class ChipTests extends TestsInit {
 
-    Timer timer = new Timer(2000L);
+    static final String basicClickText = "You clicked on:";
 
     @BeforeMethod
     public void beforeTest() {
         chipsPage.open();
     }
 
-    @Test
-    public void basicChipsTest() {
-        basicChip.is().displayed();
-        basicChip.has().text("Basic");
+    @Test(dataProvider = "basicChipsTestsDataProvider", dataProviderClass = ChipDataProvider.class)
+    public void basicChipsTests(int index, String text) {
+        chipsCommonTestLogic(basicChips.get(index), text, false);
+    }
 
-        basicDisabledChip.is().displayed();
-        basicDisabledChip.is().disabled();
-        basicDisabledChip.has().text("Disabled");
+    @Test(dataProvider = "outlinedChipsTestsDataProvider", dataProviderClass = ChipDataProvider.class)
+    public void outlinedChipsTests(int index, String text) {
+        chipsCommonTestLogic(outlinedChips.get(index), text, true);
+    }
 
-        basicClickableChip.is().displayed();
-        basicClickableChip.has().text("Clickable");
-        basicClickableChip.click();
-        lastClickBasicInfo.has().text(containsString("Clickable"));
-        basicClickableChip.getChipIcon().click();
-        lastClickBasicInfo.has().text(containsString("M"));
+    @Test(dataProvider = "linkChipsTestsDataProvider", dataProviderClass = ChipDataProvider.class)
+    public void linkChipsTests(int index, String text, boolean isOutlined, String href) {
+        linkChips.get(index).is().displayed();
+        linkChips.get(index).label().has().text(text);
+        linkChips.get(index).is().link();
+        linkChips.get(index).has().href(href);
+        linkChips.get(index).is().clickable();
+        if (isOutlined) {
+            linkChips.get(index).is().outlined();
+        }
+        linkChips.get(index).click();
+        linkChips.get(index).is().notVisible();
+    }
 
-        deletableBasicChip.is().displayed();
-        deletableBasicChip.has().text("Deletable");
-        deletableBasicChip.is().deletable();
-        deletableBasicChip.delete();
-        lastDeleteBasicInfo.has().text(containsString("Deletable"));
-
-        clickableDeletableBasicChip.is().displayed();
-        clickableDeletableBasicChip.has().text("Clickable deletable");
-        clickableDeletableBasicChip.is().clickable();
-        clickableDeletableBasicChip.is().deletable();
-        clickableDeletableBasicChip.click();
-        lastClickBasicInfo.has().text(containsString("Clickable deletable"));
-        clickableDeletableBasicChip.delete();
-        lastDeleteBasicInfo.has().text(containsString("Clickable deletable"));
-
-        customDeleteIconBasicChip.is().displayed();
-        customDeleteIconBasicChip.has().text("Custom delete icon");
-        customDeleteIconBasicChip.is().clickable();
-        customDeleteIconBasicChip.is().deletable();
-        customDeleteIconBasicChip.click();
-        lastClickBasicInfo.has().text(containsString("Custom delete icon"));
-        customDeleteIconBasicChip.delete();
-        lastDeleteBasicInfo.has().text(containsString("Custom delete icon"));
-
-        clickableLinkBasicChip.is().displayed();
-        clickableLinkBasicChip.has().text("Clickable Link");
-        clickableLinkBasicChip.is().clickable();
-        clickableLinkBasicChip.click();
-        timer.wait(() -> clickableLinkBasicChip.is().notDisplayed());
-
-        scrollToTop();
-        primaryClickableBasicChip.is().displayed();
-        primaryClickableBasicChip.has().primaryColor();
-        primaryClickableBasicChip.has().text("Primary clickable");
-        primaryClickableBasicChip.is().clickable();
-        primaryClickableBasicChip.is().deletable();
-        primaryClickableBasicChip.click();
-        primaryClickableBasicChip.delete();
-        lastDeleteBasicInfo.has().text(containsString("Primary clickable"));
-
-        primaryClickableWithFaceBasicChip.is().displayed();
-        primaryClickableWithFaceBasicChip.has().primaryColor();
-        primaryClickableWithFaceBasicChip.has().text("Primary clickable with face");
-        primaryClickableWithFaceBasicChip.is().clickable();
-        primaryClickableWithFaceBasicChip.is().deletable();
-        primaryClickableWithFaceBasicChip.click();
-        lastClickBasicInfo.has().text(containsString("Primary clickable with face"));
-        primaryClickableWithFaceBasicChip.getChipIcon().click();
-        lastClickBasicInfo.has().text("You clicked on:");
-        primaryClickableWithFaceBasicChip.delete();
-
-        deletablePrimaryBasicChip.is().displayed();
-        deletablePrimaryBasicChip.has().primaryColor();
-        deletablePrimaryBasicChip.has().text("Deletable primary");
-        deletablePrimaryBasicChip.is().clickable();
-        deletablePrimaryBasicChip.click();
-        deletablePrimaryBasicChip.is().deletable();
-        deletablePrimaryBasicChip.delete();
-        lastDeleteBasicInfo.has().text(containsString("Deletable primary"));
-
-        deletableSecondaryBasicChip.is().displayed();
-        deletableSecondaryBasicChip.has().secondaryColor();
-        deletableSecondaryBasicChip.has().text("Deletable secondary");
-        deletableSecondaryBasicChip.is().clickable();
-        deletableSecondaryBasicChip.click();
-        deletableSecondaryBasicChip.is().deletable();
-        deletableSecondaryBasicChip.delete();
-        lastDeleteBasicInfo.has().text(containsString("Deletable secondary"));
+    @Test(dataProvider = "arrayChipsTestsDataProvider", dataProviderClass = ChipDataProvider.class)
+    public void arrayChipsTests(int index, String text) {
+        arrayChipsTestLogic(arrayChips.get(index), text);
     }
 
     @Test
-    public void outlinedChipsTest() {
-        outlinedChip.is().displayed();
-        outlinedChip.has().text("Basic");
-        outlinedChip.is().clickable();
-        outlinedChip.click();
-        lastClickOutlinedInfo.has().text(containsString("Basic"));
-
-        outlinedDisabledChip.is().displayed();
-        outlinedDisabledChip.is().disabled();
-        outlinedDisabledChip.has().text("Disabled");
-
-        outlinedClickableChip.is().displayed();
-        outlinedClickableChip.has().text("Clickable");
-        outlinedClickableChip.is().clickable();
-        outlinedClickableChip.click();
-        lastClickOutlinedInfo.has().text(containsString("Clickable"));
-        outlinedClickableChip.getChipIcon().click();
-        lastClickOutlinedInfo.has().text(containsString("M"));
-
-        outlinedDeletableChip.is().displayed();
-        outlinedDeletableChip.has().text("Deletable");
-        outlinedDeletableChip.is().clickable();
-        outlinedDeletableChip.click();
-        lastClickOutlinedInfo.has().text(containsString("Deletable"));
-        outlinedDeletableChip.is().deletable();
-        outlinedDeletableChip.delete();
-        lastDeleteOutlinedInfo.has().text(containsString("Deletable"));
-        outlinedDeletableChip.getChipIcon().click();
-        lastClickOutlinedInfo.has().text(containsString(""));
-
-        outlinedClickableDeletableChip.is().displayed();
-        outlinedClickableDeletableChip.has().text("Clickable deletable");
-        outlinedClickableDeletableChip.is().clickable();
-        outlinedClickableDeletableChip.click();
-        lastClickOutlinedInfo.has().text(containsString("Clickable deletable"));
-        outlinedClickableDeletableChip.is().deletable();
-        outlinedClickableDeletableChip.delete();
-        lastDeleteOutlinedInfo.has().text(containsString("Clickable deletable"));
-        outlinedClickableDeletableChip.getChipIcon().click();
-        lastClickOutlinedInfo.has().text(containsString(""));
-
-        outlinedCustomDeleteIconChip.is().displayed();
-        outlinedCustomDeleteIconChip.has().text("Custom delete icon");
-        outlinedCustomDeleteIconChip.is().clickable();
-        outlinedCustomDeleteIconChip.click();
-        lastClickOutlinedInfo.has().text(containsString("Custom delete icon"));
-        outlinedCustomDeleteIconChip.is().deletable();
-        outlinedCustomDeleteIconChip.delete();
-        lastDeleteOutlinedInfo.has().text(containsString("Custom delete icon"));
-
-        outlinedClickableLinkChip.is().displayed();
-        outlinedClickableLinkChip.has().text("Clickable link");
-        outlinedClickableLinkChip.is().clickable();
-        outlinedClickableLinkChip.click();
-        timer.wait(() -> outlinedClickableLinkChip.is().notDisplayed());
-
-        scrollToTop();
-        outlinedPrimaryClickableChip.is().displayed();
-        outlinedPrimaryClickableChip.has().primaryColor();
-        outlinedPrimaryClickableChip.has().text("Primary clickable");
-        outlinedPrimaryClickableChip.is().clickable();
-        outlinedPrimaryClickableChip.click();
-        lastClickOutlinedInfo.has().text(containsString("Primary clickable"));
-        outlinedPrimaryClickableChip.getChipIcon().click();
-        lastClickOutlinedInfo.has().text(containsString("M"));
-        outlinedPrimaryClickableChip.is().deletable();
-        outlinedPrimaryClickableChip.delete();
-        lastDeleteOutlinedInfo.has().text(containsString("Primary clickable"));
-
-        outlinedPrimaryClickableWithFaceChip.is().displayed();
-        outlinedPrimaryClickableWithFaceChip.has().primaryColor();
-        outlinedPrimaryClickableWithFaceChip.has().text("Primary clickable with face");
-        outlinedPrimaryClickableWithFaceChip.is().clickable();
-        outlinedPrimaryClickableWithFaceChip.click();
-        lastClickOutlinedInfo.has().text(containsString("Primary clickable with face"));
-        outlinedPrimaryClickableWithFaceChip.getChipIcon().click();
-        lastClickOutlinedInfo.has().text("You clicked on:");
-        outlinedPrimaryClickableWithFaceChip.is().deletable();
-        outlinedPrimaryClickableWithFaceChip.delete();
-        lastDeleteOutlinedInfo.has().text(containsString("Primary clickable with face"));
-
-        outlinedPrimaryDeletableChip.is().displayed();
-        outlinedPrimaryDeletableChip.has().primaryColor();
-        outlinedPrimaryDeletableChip.has().text("Deletable primary");
-        outlinedPrimaryDeletableChip.is().clickable();
-        outlinedPrimaryDeletableChip.click();
-        lastClickOutlinedInfo.has().text(containsString("Deletable primary"));
-        outlinedPrimaryDeletableChip.is().deletable();
-        outlinedPrimaryDeletableChip.delete();
-        lastDeleteOutlinedInfo.has().text(containsString("Deletable primary"));
-
-        outlinedSecondaryDeletableChip.is().displayed();
-        outlinedSecondaryDeletableChip.has().secondaryColor();
-        outlinedSecondaryDeletableChip.has().text("Deletable secondary");
-        outlinedSecondaryDeletableChip.is().clickable();
-        outlinedSecondaryDeletableChip.click();
-        lastClickOutlinedInfo.has().text(containsString("Deletable secondary"));
-        outlinedSecondaryDeletableChip.is().deletable();
-        outlinedSecondaryDeletableChip.delete();
-        lastDeleteOutlinedInfo.has().text(containsString("Deletable secondary"));
-        outlinedSecondaryDeletableChip.getChipIcon().click();
-        lastClickOutlinedInfo.has().text("You clicked on:");
+    public void chipDeleteTest() {
+        angularChip.delete();
+        angularChip.is().notVisible();
+        jQueryChip.delete();
+        jQueryChip.is().notVisible();
+        polymerChip.delete();
+        polymerChip.is().notVisible();
+        vueJSChip.delete();
+        vueJSChip.is().notVisible();
+        jdiAssert(arrayChips.size(), Matchers.is(1));
     }
 
-    @Test
-    public void chipArrayTest() {
-        chipArrayAngular.show();
-        chipArrayAngular.is().displayed();
-        chipArrayAngular.has().text("Angular");
-        chipArrayAngular.is().clickable();
-        chipArrayAngular.click();
-        lastClickArrayInfo.has().text(containsString("Angular"));
-        chipArrayAngular.is().deletable();
+    public void chipsCommonTestLogic(Chip chip, String text, boolean isOutlined) {
+        String clickInfoText = String.format(basicClickText + " %s", text).trim();
+        String deleteInfoText = String.format("You delete : %s", text);
+        chip.is().displayed();
+        chip.label().has().text(text);
+        if (isOutlined) {
+            chip.is().outlined();
+        }
+        if (chip.isDisabled()) {
+            chip.is().disabled();
+        } else {
+            chip.is().enabled();
+        }
+        if (chip.isClickable() && !chip.isDisabled()) {
+            chip.is().clickable();
+            chip.click();
+            if(isOutlined) {
+                lastClickOutlinedInfo.has().text(clickInfoText);
+            } else {
+                lastClickBasicInfo.has().text(clickInfoText);
+            }
+        }
+        if (!chip.isClickable()) {
+            chip.is().notClickable();
+        }
+        if (chip.avatar().isDisplayed() && chip.isClickable()) {
+            String clickOnAvatarInfoText = String.format(basicClickText + " %s", chip.avatar().core().getText()).trim();
+            chip.avatar().is().displayed();
+            chip.avatar().click();
+            if(isOutlined) {
+                lastClickOutlinedInfo.has().text(clickOnAvatarInfoText);
+            } else {
+                lastClickBasicInfo.has().text(clickOnAvatarInfoText);
+            }
+        }
+        if (chip.icon().isDisplayed() && chip.isClickable()) {
+            chip.icon().is().displayed();
+            chip.icon().click();
+            if(isOutlined) {
+                lastClickOutlinedInfo.has().text(basicClickText);
+            } else {
+                lastClickBasicInfo.has().text(basicClickText);
+            }
+        }
+        if (chip.isDeletable()) {
+            chip.is().deletable();
+            chip.delete();
+            if(isOutlined) {
+                    lastDeleteOutlinedInfo.has().text(deleteInfoText);
+            } else {
+                lastDeleteBasicInfo.has().text(deleteInfoText);
+            }
+        }
+        if (chip.hasPrimaryColor()) {
+            chip.has().primaryColor();
+        }
+        if (chip.hasSecondaryColor()) {
+            chip.has().secondaryColor();
+        }
+    }
 
-        chipArrayJquery.is().displayed();
-        chipArrayJquery.has().text("jQuery");
-        chipArrayJquery.is().clickable();
-        chipArrayJquery.click();
-        lastClickArrayInfo.has().text(containsString("jQuery"));
-        chipArrayJquery.is().deletable();
-
-        chipArrayPolymer.is().displayed();
-        chipArrayPolymer.has().text("Polymer");
-        chipArrayPolymer.is().clickable();
-        chipArrayPolymer.click();
-        lastClickArrayInfo.has().text(containsString("Polymer"));
-        chipArrayPolymer.is().deletable();
-
-        chipArrayReact.is().displayed();
-        chipArrayReact.has().text("React");
-        chipArrayReact.is().clickable();
-        chipArrayReact.click();
-        lastClickArrayInfo.has().text(containsString("React"));
-        chipArrayReact.is().notDeletable();
-
-        chipArrayVuejs.is().displayed();
-        chipArrayVuejs.has().text("Vue.js");
-        chipArrayVuejs.is().clickable();
-        chipArrayVuejs.click();
-        lastClickArrayInfo.has().text(containsString("Vue.js"));
-
-        chipArrayVuejs.delete();
-        chipArrayPolymer.delete();
-        chipArrayJquery.delete();
-        chipArrayAngular.delete();
-        chipArrayAngular.has().text("React");
+    public void arrayChipsTestLogic(Chip chip, String text) {
+        String clickInfoText = String.format(basicClickText + " %s", text).trim();
+        chip.is().displayed();
+        chip.label().has().text(text);
+        chip.is().enabled();
+        chip.is().clickable();
+        chip.click();
+        lastClickArrayInfo.has().text(clickInfoText);
+        if (chip.icon().isDisplayed()) {
+            chip.icon().is().displayed();
+            chip.icon().click();
+            lastClickArrayInfo.has().text(basicClickText);
+            }
+        if (chip.isDeletable()) {
+            chip.is().deletable();
+        }
     }
 }
