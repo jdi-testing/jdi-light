@@ -107,9 +107,7 @@ public class TableTests extends TestsInit {
         scrollButtons.get(3).hover();
         scrollButtons.get(3).click();
 
-        sortingSelectingTable.headerUI().get(2).find(".MuiTableSortLabel-root").show();
         sortingSelectingTable.headerUI().get(2).find(".MuiTableSortLabel-root").click();
-
         rowsPerPageBtn.click();
         rowsPerPageValues.get(2).click();
         rowsPerPageBtn.has().text("10");
