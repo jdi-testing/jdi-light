@@ -26,7 +26,7 @@ public class FloatingActionButtonPage extends WebPage {
     public static Button buttonLike;
 
     @UI("//button[contains(@id,'action-tab')]")
-    public static List<Tabs> tabSections;
+    public static Tabs tabSections;
 
     @UI("//button[@aria-label='Add']")
     public static Button buttonAnimatedAdd;

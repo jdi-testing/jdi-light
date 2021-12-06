@@ -26,16 +26,16 @@ public class BoxTests extends TestsInit {
     @Test
     public void containedBoxTest() {
         containedBox.is().displayed();
+        containedBox.has().text("FIRST BUTTON");
         containedBox.click();
-        containedBox.is().text("FIRST BUTTON");
         lastClickContent.is().text("You clicked First button");
     }
 
     @Test
     public void outlinedBoxTest() {
         outlinedBox.is().displayed();
+        outlinedBox.has().text("SECOND BUTTON");
         outlinedBox.click();
-        outlinedBox.is().text("SECOND BUTTON");
         lastClickContent.is().text("You clicked Second button");
     }
 
@@ -44,8 +44,7 @@ public class BoxTests extends TestsInit {
         disabledBox.is().displayed();
         disabledBox.is().text("THIRD BUTTON");
         disabledBox.is().disabled();
-        String lastClickContentText = lastClickContent.getText();
         disabledBox.core().click(0, 0);
-        lastClickContent.is().text(lastClickContentText);
+        lastClickContent.is().text("You clicked Third button");
     }
 }

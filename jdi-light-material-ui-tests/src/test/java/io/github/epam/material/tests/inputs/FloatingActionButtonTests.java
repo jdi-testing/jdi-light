@@ -35,15 +35,15 @@ public class FloatingActionButtonTests extends TestsInit {
     @Test
     public void basicButtonsTest() {
         buttonsBasic.forEach(el -> el.is().displayed());
-        labelLastClick.is().text("Last click:");
+        labelLastClick.has().text("Last click:");
 
         buttonAdd.is().enabled();
         buttonAdd.click();
-        labelLastClick.is().text("Last click: Add");
+        labelLastClick.has().text("Last click: Add");
 
         buttonEdit.is().enabled();
         buttonEdit.click();
-        labelLastClick.is().text("Last click: Edit");
+        labelLastClick.has().text("Last click: Edit");
 
         buttonNavigate.is().enabled();
         buttonNavigate.click();
@@ -54,26 +54,24 @@ public class FloatingActionButtonTests extends TestsInit {
 
     @Test
     public void animatedButtonsTest() {
-        Timer timer = new Timer(2000L);
+        tabSections.is().displayed();
+        labelAnimatedLastClick.has().text("Last click:");
 
-        tabSections.forEach(el -> el.is().displayed());
-        labelAnimatedLastClick.is().text("Last click:");
-
-        tabSections.get(1).click();
-        tabPanelContent.get(1).is().text("Item One");
+        tabSections.select(1);
+        tabPanelContent.get(1).has().text("Item One");
         buttonAnimatedAdd.click();
-        labelAnimatedLastClick.is().text("Last click: Add");
+        labelAnimatedLastClick.has().text("Last click: Add");
 
-        tabSections.get(2).click();
-        tabPanelContent.get(2).is().text("Item Two");
-        timer.wait(() -> buttonAnimatedEdit.isDisplayed());
+        tabSections.select(2);
+        tabPanelContent.get(2).has().text("Item Two");
+        buttonAnimatedEdit.is().displayed();
         buttonAnimatedEdit.click();
-        labelAnimatedLastClick.is().text("Last click: Edit");
+        labelAnimatedLastClick.has().text("Last click: Edit");
 
-        tabSections.get(3).click();
-        tabPanelContent.get(3).is().text("Item Three");
-        timer.wait(() -> buttonExpand.isDisplayed());
+        tabSections.select(3);
+        tabPanelContent.get(3).has().text("Item Three");
+        buttonExpand.is().displayed();
         buttonExpand.click();
-        labelAnimatedLastClick.is().text("Last click: Expand");
+        labelAnimatedLastClick.has().text("Last click: Expand");
     }
 }

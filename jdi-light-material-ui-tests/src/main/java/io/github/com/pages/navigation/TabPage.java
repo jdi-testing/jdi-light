@@ -5,15 +5,15 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.navigation.Tabs;
 
 public class TabPage extends WebPage {
-    @UI("//button[contains(@aria-controls,'simple-tabpanel')]")
+    @UI("h2+div[1] .MuiTab-root")
     public static Tabs simpleTabs;
 
-    @UI("//button[contains(@aria-controls,'scrollable-auto-tab')]")
+    @UI("h2+div[2] .MuiTab-root")
     public static Tabs scrollableTabs;
 
-    @UI("//button[contains(@aria-controls,'scrollable-prevent-tab')]")
+    @UI("h2+div[3] .MuiTab-root")
     public static Tabs preventScrollTabs;
 
-    @UI("//button[contains(@aria-controls,'vertical-tabpanel')]")
+    @UI("h2+div[4] .MuiTab-root")
     public static Tabs verticalTabs;
 }

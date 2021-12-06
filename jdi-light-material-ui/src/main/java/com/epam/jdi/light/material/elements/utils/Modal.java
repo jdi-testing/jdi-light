@@ -26,7 +26,7 @@ public class Modal extends UIBaseElement<ModalAssert> implements IsText {
 
     @JDIAction("Close {name}")
     public void close() {
-        command("Esc");
+        core().click(0, 0);
     }
 
     @Override

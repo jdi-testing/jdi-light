@@ -4,6 +4,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import com.epam.jdi.light.material.asserts.inputs.DateTimePickerAssert;
 
@@ -50,12 +52,12 @@ public class DateTimePicker extends UIBaseElement<DateTimePickerAssert> {
 
     @JDIAction("Cancel changes in {name} and close")
     public void cancel() {
-        command("Esc");
+        $("//div[contains(@role,'dialog')]//*[contains(text(),'Cancel')]").click();
     }
 
     @JDIAction("Confirm changes in {name} and close")
     public void confirm() {
-        command("Enter");
+        $("//div[contains(@role,'dialog')]//*[contains(text(),'OK')]").click();
     }
 
     @JDIAction("Set text in {name} input field")
