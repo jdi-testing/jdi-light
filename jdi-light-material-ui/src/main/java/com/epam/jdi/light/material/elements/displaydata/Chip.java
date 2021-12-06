@@ -2,47 +2,75 @@ package com.epam.jdi.light.material.elements.displaydata;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.material.annotations.JDIChip;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
-import org.openqa.selenium.By;
+import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.base.HasColor;
 
-import java.lang.reflect.Field;
-
-import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-
+import static com.epam.jdi.light.common.Exceptions.exception;
 
 /**
  * To see an example of Chip web element please visit
  * https://mui.com/components/chips/
  */
 
-public class Chip extends UIBaseElement<ChipAssert> implements ISetup, HasClick {
+public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDisabled, HasColor, HasLabel {
 
-    protected By chipLabel;
-    protected By chipIcon;
-    protected By chipDelete;
-
-    @JDIAction("Get chip {name} label")
-    public UIElement getChipLabel() {
-        return find(chipLabel);
+    @Override
+    @JDIAction("Get '{name}'s label")
+    public Label label() {
+        return new Label().setCore(Label.class, find(".MuiChip-label"));
     }
 
-    @JDIAction("Get chip {name} icon")
-    public UIElement getChipIcon() {
-        return find(chipIcon);
+    @JDIAction("Get '{name}'s delete icon")
+    public Icon deleteIcon() {
+        return new Icon().setCore(Icon.class, find(".MuiChip-deleteIcon"));
     }
 
-    @JDIAction("Click delete chip {name}")
-    public void delete() {
-        find(chipDelete).click();
+    @JDIAction("Get '{name}'s avatar")
+    public Avatar avatar() {
+        return new Avatar().setCore(Avatar.class, find(".MuiChip-avatar"));
     }
 
+    @JDIAction("Get '{name}'s icon")
+    public Icon icon() {
+        return new Icon().setCore(Icon.class, find(".MuiChip-icon"));
+    }
+
+    @JDIAction("Is '{name}' outlined")
+    public boolean isOutlined() {
+        return attr("class").contains("outlined");
+    }
+
+    @JDIAction("Is '{name}' clickable")
+    public boolean isClickable() {
+        return attr("class").contains("clickable");
+    }
+
+    @JDIAction("Is '{name}' deletable")
     public boolean isDeletable() {
-        return hasClass("MuiChip-deletable");
+        return hasClass("MuiChip-deletable") && deleteIcon().isDisplayed();
+    }
+
+    @JDIAction("Is '{name}' link")
+    public boolean isLink() {
+        return hasAttribute("href") && getTagName().equals("a");
+    }
+
+    @JDIAction("Get '{name}'s href")
+    public String getHref() {
+        if(isLink()) {
+            return attr("href");
+        } else throw exception("Element is not a link");
+    }
+
+    @JDIAction("Delete '{name}'")
+    public void delete() {
+        if(deleteIcon().isDisplayed()) {
+            deleteIcon().click();
+        } else throw exception("Chip does not have delete icon");
     }
 
     @Override
@@ -51,13 +79,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements ISetup, HasClick 
     }
 
     @Override
-    public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIChip.class, Chip.class))
-            return;
-        JDIChip j = field.getAnnotation(JDIChip.class);
-        core().setLocator(NAME_TO_LOCATOR.execute(j.root()));
-        chipLabel = NAME_TO_LOCATOR.execute(j.label());
-        chipIcon = NAME_TO_LOCATOR.execute(j.icon());
-        chipDelete = NAME_TO_LOCATOR.execute(j.delete());
+    public ChipAssert has() {
+        return is();
     }
 }

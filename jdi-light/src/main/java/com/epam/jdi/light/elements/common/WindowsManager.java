@@ -2,9 +2,11 @@ package com.epam.jdi.light.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
+import com.epam.jdi.light.logger.AllureLogData;
 import com.jdiai.tools.Safe;
 import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 import java.util.Set;
@@ -12,8 +14,12 @@ import java.util.Set;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.epam.jdi.light.logger.AllureLogger.*;
+import static com.epam.jdi.light.logger.Strategy.FAIL;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
+import static com.jdiai.tools.LinqUtils.safeException;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.capitalize;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
@@ -26,7 +32,11 @@ public class WindowsManager {
     private static Safe<Boolean> newWindow = new Safe<>(() -> false);
 
     public static Set<String> getWindows() {
-        Set<String> wHandles = getDriver().getWindowHandles();
+        WebDriver driver = getDriver();
+        if(driver==null) {
+            throw exception("Can't get WebDriver");
+        }
+        Set<String> wHandles = driver.getWindowHandles();
         if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size()) {
             newWindow.set(true);
         }

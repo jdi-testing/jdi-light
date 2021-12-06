@@ -2,8 +2,12 @@ package com.epam.jdi.light.material.elements.displaydata;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
+import com.epam.jdi.light.material.interfaces.base.HasColor;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 
 /**
@@ -11,26 +15,27 @@ import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
  * https://mui.com/components/badges/
  */
 
-public class Badge extends UIBaseElement<BadgeAssert> {
+public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsText {
 
-    @JDIAction("Get '{name}' icon")
-    public UIElement getIcon() {
-        return this.find(".MuiBadge-badge");
-    }
-
-    @JDIAction("Get '{name}' icon")
+    @JDIAction("Get '{name}'s value")
     public String getCounterValue() {
-        return this.getIcon().text();
+        return text();
     }
 
-    @JDIAction("Get '{name}' icon")
-    public boolean hasDot() {
-        return this.getIcon().getAttribute("class").contains("MuiBadge-dot");
+    @JDIAction("Is '{name}' a dot")
+    public boolean isDot() {
+        return attr("class").contains("MuiBadge-dot");
     }
 
-    @JDIAction("Get '{name}' icon color status")
-    public boolean hasIconStatus(String colorStatus) {
-        return this.getIcon().getAttribute("class").contains(colorStatus);
+    @JDIAction("Is '{name}' invisible")
+    public boolean isInvisible() {
+        return attr("class").contains("invisible");
+    }
+
+    @JDIAction("Get '{name}'s position")
+    public String getPosition() {
+        return Arrays.stream(attr("class").split("[^a-zA-Z0-9]"))
+                .filter(s -> s.startsWith("anchor")).collect(Collectors.joining());
     }
 
     @Override
@@ -40,6 +45,6 @@ public class Badge extends UIBaseElement<BadgeAssert> {
 
     @Override
     public BadgeAssert has() {
-        return this.is();
+        return is();
     }
 }

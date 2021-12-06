@@ -3,24 +3,22 @@ package com.epam.jdi.light.material.elements.inputs;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.inputs.SwitchAssert;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 /**
  * To see an example of Checkbox group List web element please visit
  * https://mui.com/components/switches/
  */
 
-public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel {
+public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, HasColor, CanBeDisabled {
 
     @JDIAction("Is '{name}' turned on")
     public boolean isTurnedOn() {
-        return buttonBase().hasClass("Mui-checked");
+        return firstChild().hasClass("Mui-checked");
     }
 
     @JDIAction("Is '{name}' turned off")
@@ -42,33 +40,6 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
         }
     }
 
-    @JDIAction("Does '{name}' have primary color")
-    public boolean hasPrimaryColor() {
-        return getColor().equals("colorPrimary");
-    }
-
-    @JDIAction("Does '{name}' have secondary color")
-    public boolean hasSecondaryColor() {
-        return getColor().equals("colorSecondary");
-    }
-
-    @JDIAction("Does '{name}' have secondary color")
-    public boolean hasUndefinedColor() {
-        return getColor().equals("");
-    }
-
-    @Override
-    @JDIAction("Is '{name}' disabled")
-    public boolean isDisabled() {
-        return buttonBase().attr("aria-disabled").equals("true");
-    }
-
-    @Override
-    @JDIAction("Is '{name}' enabled")
-    public boolean isEnabled() {
-        return !isDisabled();
-    }
-
     @Override
     @JDIAction("Get '{name}'s label")
     public Label label() {
@@ -79,17 +50,6 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     @JDIAction("Get '{name}'s label text")
     public String labelText() {
         return label().find(".MuiFormControlLabel-label").getText();
-    }
-
-    private UIElement buttonBase() {
-        return find(".MuiButtonBase-root");
-    }
-
-    private String getColor() {
-        return Arrays.stream(buttonBase().getAttribute("class")
-                        .split("[^a-zA-Z0-9]"))
-                .filter(s -> s.startsWith("color"))
-                .collect(Collectors.joining());
     }
 
     @Override

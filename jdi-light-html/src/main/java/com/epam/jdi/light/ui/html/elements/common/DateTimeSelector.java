@@ -1,6 +1,7 @@
 package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.NullUserInputValueException;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
@@ -23,6 +24,9 @@ public class DateTimeSelector extends UIBaseElement<DateTimeAssert>
     public String max() { return core().attr("max"); }
     @JDIAction("Set date '{0}' for '{name}'")
     public void setDateTime(String dateTime) {
+        if(dateTime==null) {
+            throw new NullUserInputValueException();
+        }
         core().setAttribute("value", dateTime);
     }
     // endregion

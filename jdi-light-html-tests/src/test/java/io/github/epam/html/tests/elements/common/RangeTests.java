@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -69,6 +70,11 @@ public class RangeTests implements TestsInit {
 
         fractionalRange.setupValue(3.5);
         assertEquals(fractionalRange.value(), 3.5);
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSetValue_ThrowsException() {
+        volume.setValue(null);
     }
 
     @Test

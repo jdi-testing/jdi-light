@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -36,6 +37,18 @@ public class MultiDropdownTests implements TestsInit {
         skipForFirefox();
         multiDropdown.check("Electro", "Metalic");
         assertEquals(multiDropdown.checked(), asList("Electro", "Metalic"));
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToCheck_ThrowsException() {
+        String optionName = null;
+        multiDropdown.check(optionName);
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSelect_ThrowsException() {
+        String optionName = null;
+        multiDropdown.select(optionName);
     }
 
     @Test

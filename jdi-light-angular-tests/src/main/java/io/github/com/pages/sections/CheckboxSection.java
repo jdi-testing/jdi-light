@@ -1,9 +1,10 @@
 package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.common.Checkbox;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
-public class CheckboxSection {
+public class CheckboxSection extends Section {
     public static Checkbox basicCheckbox;
     public static Checkbox checkedCheckbox;
     public static Checkbox indeterminateCheckbox;

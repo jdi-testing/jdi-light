@@ -1,15 +1,29 @@
 package com.epam.jdi.light.material.elements.navigation;
 
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.interfaces.common.IsButton;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.material.asserts.navigation.TabsAssert;
 
 /**
- * To see an example of Stepper web element please visit
- * https://mui.com/components/steppers/
+ * To see an example of Tab please visit
+ * https://mui.com/components/tabs/
  */
+public class Tabs extends UIListBase<TabsAssert> {
 
-public class Tabs extends UIBaseElement<TabsAssert> implements IsButton {
+    @JDIAction("Check that '{name}' is enabled")
+    public boolean enabled(int index) {
+        return !disabled(index);
+    }
+
+    @JDIAction("Check that '{name}' is disabled")
+    public boolean disabled(int index) {
+        return list().get(index).hasClass("Mui-disabled");
+    }
+
+    @JDIAction("Check that tab in '{name}' by index'{0}' is selected")
+    public boolean selected(int index) {
+        return list().get(index).hasClass("Mui-selected");
+    }
 
     @Override
     public TabsAssert is() {

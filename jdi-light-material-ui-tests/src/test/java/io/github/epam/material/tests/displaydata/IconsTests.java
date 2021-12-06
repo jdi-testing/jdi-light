@@ -1,35 +1,22 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.ui.html.elements.common.Icon;
+import com.epam.jdi.light.material.elements.displaydata.Icon;
 import io.github.epam.TestsInit;
+import io.github.epam.test.data.IconsDataProvider;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.iconsPage;
-import static io.github.com.pages.displaydata.IconsPage.color;
-import static io.github.com.pages.displaydata.IconsPage.colorLastClick;
-import static io.github.com.pages.displaydata.IconsPage.colorLastHover;
-import static io.github.com.pages.displaydata.IconsPage.edgeCase;
-import static io.github.com.pages.displaydata.IconsPage.filled;
-import static io.github.com.pages.displaydata.IconsPage.outlined;
-import static io.github.com.pages.displaydata.IconsPage.rounded;
-import static io.github.com.pages.displaydata.IconsPage.sharp;
+import static io.github.com.pages.displaydata.IconsPage.colorIcons;
+import static io.github.com.pages.displaydata.IconsPage.differentSizesIcons;
+import static io.github.com.pages.displaydata.IconsPage.simpleIcons;
 import static io.github.com.pages.displaydata.IconsPage.simpleLastClick;
 import static io.github.com.pages.displaydata.IconsPage.simpleLastHover;
-import static io.github.com.pages.displaydata.IconsPage.size;
-import static io.github.com.pages.displaydata.IconsPage.sizeLastClick;
-import static io.github.com.pages.displaydata.IconsPage.sizeLastHover;
-import static io.github.com.pages.displaydata.IconsPage.twoTone;
 
-/**
- * To see an example of Icons web element please visit
- * https://material-ui.com/components/icons/
- */
 
 public class IconsTests extends TestsInit {
 
@@ -38,91 +25,31 @@ public class IconsTests extends TestsInit {
         iconsPage.open();
     }
 
-    @Test
-    public void simpleIconsTest() {
-        filled.forEach(el -> el.is().displayed());
-        outlined.forEach(el -> el.is().displayed());
-        rounded.forEach(el -> el.is().displayed());
-        twoTone.forEach(el -> el.is().displayed());
-        sharp.forEach(el -> el.is().displayed());
-        edgeCase.forEach(el -> el.is().displayed());
-        simpleLastClick.is().text("Last click:");
-        simpleLastHover.is().text("Last hover:");
-
-        Map<Icon, List<List<String>>> allSimpleIcons = new LinkedHashMap<>();
-        allSimpleIcons.put(filled.get(1), Arrays.asList(Arrays.asList("", " DeleteIcon"), Arrays.asList(" DeleteIcon", " DeleteIcon")));
-        allSimpleIcons.put(filled.get(2), Arrays.asList(Arrays.asList(" DeleteIcon", " DeleteForeverIcon"), Arrays.asList(" DeleteForeverIcon", " DeleteForeverIcon")));
-        allSimpleIcons.put(outlined.get(1), Arrays.asList(Arrays.asList(" DeleteForeverIcon", " DeleteOutlinedIcon"), Arrays.asList(" DeleteOutlinedIcon", " DeleteOutlinedIcon")));
-        allSimpleIcons.put(outlined.get(2), Arrays.asList(Arrays.asList(" DeleteOutlinedIcon", " DeleteForeverOutlinedIcon"), Arrays.asList(" DeleteForeverOutlinedIcon", " DeleteForeverOutlinedIcon")));
-        allSimpleIcons.put(rounded.get(1), Arrays.asList(Arrays.asList(" DeleteForeverOutlinedIcon", " DeleteRoundedIcon"), Arrays.asList(" DeleteRoundedIcon", " DeleteRoundedIcon")));
-        allSimpleIcons.put(rounded.get(2), Arrays.asList(Arrays.asList(" DeleteRoundedIcon", " DeleteForeverRoundedIcon"), Arrays.asList(" DeleteForeverRoundedIcon", " DeleteForeverRoundedIcon")));
-        allSimpleIcons.put(twoTone.get(1), Arrays.asList(Arrays.asList(" DeleteForeverRoundedIcon", " DeleteTwoToneIcon"), Arrays.asList(" DeleteTwoToneIcon", " DeleteTwoToneIcon")));
-        allSimpleIcons.put(twoTone.get(2), Arrays.asList(Arrays.asList(" DeleteTwoToneIcon", " DeleteForeverTwoToneIcon"), Arrays.asList(" DeleteForeverTwoToneIcon", " DeleteForeverTwoToneIcon")));
-        allSimpleIcons.put(sharp.get(1), Arrays.asList(Arrays.asList(" DeleteForeverTwoToneIcon", " DeleteSharpIcon"), Arrays.asList(" DeleteSharpIcon", " DeleteSharpIcon")));
-        allSimpleIcons.put(sharp.get(2), Arrays.asList(Arrays.asList(" DeleteSharpIcon", " DeleteForeverSharpIcon"), Arrays.asList(" DeleteForeverSharpIcon", " DeleteForeverSharpIcon")));
-        allSimpleIcons.put(edgeCase.get(1), Arrays.asList(Arrays.asList(" DeleteForeverSharpIcon", " ThreeDRotationIcon"), Arrays.asList(" ThreeDRotationIcon", " ThreeDRotationIcon")));
-        allSimpleIcons.put(edgeCase.get(2), Arrays.asList(Arrays.asList(" ThreeDRotationIcon", " FourKIcon"), Arrays.asList(" FourKIcon", " FourKIcon")));
-        allSimpleIcons.put(edgeCase.get(3), Arrays.asList(Arrays.asList(" FourKIcon", " ThreeSixtyIcon"), Arrays.asList(" ThreeSixtyIcon", " ThreeSixtyIcon")));
-
-        allSimpleIcons.forEach(
-                (k, v) -> {
-                    k.hover();
-                    simpleLastClick.is().text(String.format("Last click:%s", v.get(0).get(0)));
-                    simpleLastHover.is().text(String.format("Last hover:%s", v.get(0).get(1)));
-                    k.click();
-                    simpleLastClick.is().text(String.format("Last click:%s", v.get(1).get(0)));
-                    simpleLastHover.is().text(String.format("Last hover:%s", v.get(1).get(1)));
-                }
-        );
+    @Test(dataProviderClass = IconsDataProvider.class, dataProvider = "validationTestDataProvider")
+    public void validationTest(List<Icon> iconsList, int iconsListSize) {
+        iconsList.forEach(el -> el.is().displayed());
+        iconsList.forEach(el -> el.is().enabled());
+        jdiAssert(iconsList.size(), Matchers.is(iconsListSize));
     }
 
-    @Test
-    public void colorIconsTest() {
-        color.forEach(el -> el.is().displayed());
-        colorLastClick.is().text("Last click:");
-        colorLastHover.is().text("Last hover:");
-
-        Map<Icon, List<List<String>>> allColorIcons = new LinkedHashMap<>();
-        allColorIcons.put(color.get(1), Arrays.asList(Arrays.asList("", " default"), Arrays.asList(" default", " default")));
-        allColorIcons.put(color.get(2), Arrays.asList(Arrays.asList(" default", " primary"), Arrays.asList(" primary", " primary")));
-        allColorIcons.put(color.get(3), Arrays.asList(Arrays.asList(" primary", " secondary"), Arrays.asList(" secondary", " secondary")));
-        allColorIcons.put(color.get(4), Arrays.asList(Arrays.asList(" secondary", " action"), Arrays.asList(" action", " action")));
-        allColorIcons.put(color.get(5), Arrays.asList(Arrays.asList(" action", " disabled"), Arrays.asList(" disabled", " disabled")));
-        allColorIcons.put(color.get(6), Arrays.asList(Arrays.asList(" disabled", " green[500]"), Arrays.asList(" green[500]", " green[500]")));
-
-        allColorIcons.forEach(
-                (k, v) -> {
-                    k.hover();
-                    colorLastClick.is().text(String.format("Last click:%s", v.get(0).get(0)));
-                    colorLastHover.is().text(String.format("Last hover:%s", v.get(0).get(1)));
-                    k.click();
-                    colorLastClick.is().text(String.format("Last click:%s", v.get(1).get(0)));
-                    colorLastHover.is().text(String.format("Last hover:%s", v.get(1).get(1)));
-                }
-        );
+    @Test(dataProviderClass = IconsDataProvider.class, dataProvider = "simpleIconsTestDataProvider")
+    public void simpleIconsTest(int elementIndexForHover, String resultHoverFieldText,
+                                int elementIndexForClick, String resultClickFieldText) {
+        simpleIcons.get(elementIndexForHover).hover();
+        simpleLastHover.has().text(resultHoverFieldText);
+        simpleIcons.get(elementIndexForClick).click();
+        simpleLastClick.has().text(resultClickFieldText);
     }
 
-    @Test
-    public void sizeIconsTest() {
-        size.forEach(el -> el.is().displayed());
-        sizeLastClick.is().text("Last click:");
-        sizeLastHover.is().text("Last hover:");
+    @Test(dataProviderClass = IconsDataProvider.class, dataProvider = "colorIconsTestDataProvider")
+    public void colorIconsTest(int notColoredElementIndex, int coloredElementIndex, String color) {
+        colorIcons.get(notColoredElementIndex).is().notColored();
+        colorIcons.get(coloredElementIndex).is().colored();
+        colorIcons.get(coloredElementIndex).has().color(color);
+    }
 
-        Map<Icon, List<List<String>>> allSizeIcons = new LinkedHashMap<>();
-        allSizeIcons.put(size.get(1), Arrays.asList(Arrays.asList("", " small size"), Arrays.asList(" small size", " small size")));
-        allSizeIcons.put(size.get(2), Arrays.asList(Arrays.asList(" small size", " default size"), Arrays.asList(" default size", " default size")));
-        allSizeIcons.put(size.get(3), Arrays.asList(Arrays.asList(" default size", " large size"), Arrays.asList(" large size", " large size")));
-        allSizeIcons.put(size.get(4), Arrays.asList(Arrays.asList(" large size", " 40 size"), Arrays.asList(" 40 size", " 40 size")));
-
-        allSizeIcons.forEach(
-                (k, v) -> {
-                    k.hover();
-                    sizeLastClick.is().text(String.format("Last click:%s", v.get(0).get(0)));
-                    sizeLastHover.is().text(String.format("Last hover:%s", v.get(0).get(1)));
-                    k.click();
-                    sizeLastClick.is().text(String.format("Last click:%s", v.get(1).get(0)));
-                    sizeLastHover.is().text(String.format("Last hover:%s", v.get(1).get(1)));
-                }
-        );
+    @Test(dataProviderClass = IconsDataProvider.class, dataProvider = "differentSizesIconsTestDataProvider")
+    public void differentSizesIconsTest(int elementIndex, int height, int width) {
+        differentSizesIcons.get(elementIndex).has().height(height).and().width(width);
     }
 }
