@@ -2,12 +2,9 @@ package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.material.elements.displaydata.Avatar;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
-import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.avatarPage;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithIcon;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithPhoto;
@@ -22,8 +19,6 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void avatarsWithTextTests() {
-        Dimension dimension = avatarPage.driver().manage().window().getSize();
-        jdiAssert(dimension.width, Matchers.equalTo(801));
         for(Avatar avatar : avatarsWithText) {
             avatar.is().displayed();
         }
@@ -33,8 +28,6 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void avatarsWithPhotoTests() {
-        Dimension dimension = avatarPage.driver().manage().window().getSize();
-        jdiAssert(dimension.height, Matchers.equalTo(601));
         for(Avatar avatar : avatarsWithPhoto) {
             avatar.is().displayed();
             avatar.has().image();

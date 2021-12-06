@@ -19,7 +19,7 @@ public class UseMediaQueryTests extends TestsInit {
         useMediaQueryPage.shouldBeOpened();
     }
 
-    @Test(enabled = false)
+    @Test
     public void useMediaQueryTestWithDifferentScreenWidth() {
         new Timer(2000L).wait(() -> useMediaQueryText.has().value(containsString("true")));
         useMediaQueryPage.driver().manage().window().setSize(new Dimension(500, 1000));

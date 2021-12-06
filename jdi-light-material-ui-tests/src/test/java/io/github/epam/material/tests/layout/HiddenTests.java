@@ -36,7 +36,7 @@ public class HiddenTests extends TestsInit {
                 {1920, 4, "xl"}};
     }
 
-    @Test(dataProvider = "Screen Width", enabled = false)
+    @Test(dataProvider = "Screen Width")
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int width, int size, String expectedWidth) {
         setWidth(width);
         papers.has().size(size);
