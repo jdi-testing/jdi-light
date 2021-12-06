@@ -22,13 +22,15 @@ public class States {
     }
     @Step
     public static void moveToHomePage() {
-        if (!verifyUrl("https://jdi-testing.github.io/jdi-light/") || epamLogo.isNotExist())
+        if (!verifyUrl("https://jdi-testing.github.io/jdi-light/") || epamLogo.isNotExist()) {
             homePage.open();
+        }
     }
     @Step
     public static void login() {
-        if (loginForm.isHidden())
+        if (loginForm.isHidden()) {
             userIcon.click();
+        }
         loginForm.is().displayed();
         loginForm.submit(DEFAULT_USER);
         userName.has().text("ROMAN IOVLEV");

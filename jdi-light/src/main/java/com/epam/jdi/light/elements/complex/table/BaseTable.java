@@ -205,7 +205,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (columns.get().any())
             return columns.get().get(0).value.size();
         int rowsCount = getColumn(getRowHeaderIndex()).size();
-        return headerSameAsFirstRow() ? rowsCount - getStartIndex() : rowsCount;
+        return headerIsRow() ? rowsCount - getStartIndex() : rowsCount;
     }
 
     /**
@@ -428,14 +428,9 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         List<String> firstRow = new ArrayList<>();
         try { firstRow = getRowByIndex(getRowHeaderIndex()).noWait(WebList::values, WebList.class); }
         catch (Exception ignore) { }
-        return firstRow.isEmpty() || any(header(), firstRow::contains);
+        return firstRow.isEmpty() || all(header(), firstRow::contains);
     }
-    protected boolean headerSameAsFirstRow() {
-        List<String> firstRow = new ArrayList<>();
-        try { firstRow = getRowByIndex(getRowHeaderIndex()).noWait(WebList::values, WebList.class); }
-        catch (Exception ignore) { }
-        return !firstRow.isEmpty() && any(header(), firstRow::contains);
-    }
+
     @JDebug
     public WebList filter() {
         return core().finds(filterLocator).setName(getName()+" filter");

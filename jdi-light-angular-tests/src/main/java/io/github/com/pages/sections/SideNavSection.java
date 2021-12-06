@@ -4,10 +4,11 @@ import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.angular.elements.complex.RadioButtons;
 import com.epam.jdi.light.angular.elements.complex.SideNav;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
-public class SideNavSection {
+public class SideNavSection extends Section {
 
     public static SideNav basicSideNav;
     public static SideNav basicDrawer;

@@ -1,10 +1,11 @@
 package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.complex.ButtonToggle;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
-public class ButtonToggleSection {
+public class ButtonToggleSection extends Section {
 
     @UI("#mat-button-toggle-group-font")
     public static ButtonToggle basicButtonToggle;

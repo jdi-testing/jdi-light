@@ -1,51 +1,71 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.ui.html.elements.common.Text;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.epam.jdi.light.material.elements.displaydata.Typography;
+import com.epam.jdi.light.material.elements.utils.enums.TypographyStyles;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.BODY_1;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.BODY_2;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.BUTTON;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.CAPTION;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_1;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_2;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_3;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_4;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_5;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_6;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.OVERLINE;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.SUBTITLE_1;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.SUBTITLE_2;
 import static io.github.com.StaticSite.typographyPage;
 import static io.github.com.pages.displaydata.TypographyPage.typographyTexts;
-import static org.hamcrest.Matchers.containsString;
-import static org.testng.Assert.assertEquals;
-
-/**
- * To see an example of Typography web element please visit
- * https://material-ui.com/components/typography/
- */
+import static org.hamcrest.Matchers.equalTo;
 
 public class TypographyTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
         typographyPage.open();
+        typographyPage.checkOpened();
     }
 
     @Test
-    public void typographyTextTest() {
+    public void typographyTextsTest() {
+        typographyTexts.get(1).has().text("Head 1");
 
-        List<String> expectedTextFields = Arrays.asList("Head 1", "Head 2", "Head 3", "Head 4", "Head 5", "Head 6",
-                "Subtitle 1", "Subtitle 2", "Body 1", "Body 2", "BUTTON TEXT", "Caption text", "OVERLINE TEXT");
+        List<String> expectedText = Arrays.asList(
+                "Head 1", "Head 2", "Head 3", "Head 4", "Head 5", "Head 6",
+                "Subtitle 1", "Subtitle 2", "Body 1", "Body 2",
+                "BUTTON TEXT", "Caption text", "OVERLINE TEXT");
 
-        List<String> expectedTypographyClasses = Arrays.asList("MuiTypography-h1", "MuiTypography-h2",
-                "MuiTypography-h3", "MuiTypography-h4", "MuiTypography-h5", "MuiTypography-h6",
-                "MuiTypography-subtitle1", "MuiTypography-subtitle2", "MuiTypography-body1", "MuiTypography-body2",
-                "MuiTypography-button", "MuiTypography-caption", "MuiTypography-overline");
+        List<String> actualTexts = typographyTexts.stream()
+                .map(IsText::getText)
+                .collect(Collectors.toList());
 
-        List<String> actualTextFields = new ArrayList<>();
+        jdiAssert(actualTexts, equalTo(expectedText));
+    }
 
-        for (Text typographyText : typographyTexts) {
-            actualTextFields.add(typographyText.getText());
-        }
+    @Test
+    public void typographyStylesTest() {
+        typographyTexts.get(1).has().style(HEAD_1);
 
-        for (int i = 0; i < typographyTexts.size(); i++) {
-            assertEquals(expectedTextFields.get(i), actualTextFields.get(i));
-            typographyTexts.get(i + 1).has().classValue(containsString(expectedTypographyClasses.get(i)));
-        }
+        List<TypographyStyles> expectedStyles = Arrays.asList(
+                HEAD_1, HEAD_2, HEAD_3, HEAD_4, HEAD_5, HEAD_6,
+                SUBTITLE_1, SUBTITLE_2, BODY_1, BODY_2,
+                BUTTON, CAPTION, OVERLINE);
+
+        List<TypographyStyles> actualStyles = typographyTexts.stream()
+                .map(Typography::getStyle)
+                .collect(Collectors.toList());
+
+        jdiAssert(actualStyles, equalTo(expectedStyles));
     }
 }

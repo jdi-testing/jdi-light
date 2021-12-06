@@ -3,6 +3,7 @@ package com.epam.jdi.light.material.elements.navigation;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.material.asserts.navigation.StepperAssert;
+import com.epam.jdi.light.material.interfaces.base.HasImage;
 
 /**
  * To see an example of Stepper web element please visit
