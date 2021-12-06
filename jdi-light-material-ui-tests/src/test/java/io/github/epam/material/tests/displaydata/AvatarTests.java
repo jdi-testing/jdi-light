@@ -24,7 +24,6 @@ public class AvatarTests extends TestsInit {
     public void avatarsWithTextTests() {
         Dimension dimension = avatarPage.driver().manage().window().getSize();
         jdiAssert(dimension.width, Matchers.equalTo(801));
-        jdiAssert(dimension.height, Matchers.equalTo(601));
         for(Avatar avatar : avatarsWithText) {
             avatar.is().displayed();
         }
@@ -34,6 +33,8 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void avatarsWithPhotoTests() {
+        Dimension dimension = avatarPage.driver().manage().window().getSize();
+        jdiAssert(dimension.height, Matchers.equalTo(601));
         for(Avatar avatar : avatarsWithPhoto) {
             avatar.is().displayed();
             avatar.has().image();

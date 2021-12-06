@@ -36,7 +36,7 @@ public class HiddenTests extends TestsInit {
                 {1920, 4, "xl"}};
     }
 
-    @Test(dataProvider = "Screen Width")
+    @Test(dataProvider = "Screen Width", enabled = false)
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int width, int size, String expectedWidth) {
         setWidth(width);
         papers.has().size(size);
@@ -56,6 +56,6 @@ public class HiddenTests extends TestsInit {
 
     @AfterMethod
     public void after() {
-        hiddenPage.driver().manage().window().setSize(new Dimension(1024, 762));
+        hiddenPage.driver().manage().window().setSize(new Dimension(1920, 1080));
     }
 }
