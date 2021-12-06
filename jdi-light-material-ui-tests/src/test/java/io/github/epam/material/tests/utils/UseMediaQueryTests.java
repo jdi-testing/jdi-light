@@ -24,7 +24,6 @@ public class UseMediaQueryTests extends TestsInit {
     @Test
     public void useMediaQueryTestWithDifferentScreenWidth() {
         Dimension dimension = useMediaQueryPage.driver().manage().window().getSize();
-        jdiAssert(dimension.width, Matchers.equalTo(801));
         jdiAssert(dimension.height, Matchers.equalTo(601));
         new Timer(2000L)
                 .wait(() -> useMediaQueryText.has().value(containsString("true")));
