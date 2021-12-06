@@ -14,12 +14,12 @@ import static io.github.com.pages.surfaces.PaperPage.paper;
 
 public class PaperTests extends TestsInit {
 
-    private final String WITH_ZERO_ELEVATION = "Paper with elevation = 0";
-    private final String WITH_DEFAULT_ELEVATION = "Paper with default elavation";
-    private final String WITH_ELEVATION_EQUALS_THREE = "Paper with elevation = 3";
-    private final String OUTLINED_PAPER = "Outlined paper";
-    private final String OUTLINED_SQUARE_PAPER = "Outlined square paper";
-    private final String YOU_CLICKED = "You clicked: %s";
+    private static final String WITH_ZERO_ELEVATION = "Paper with elevation = 0";
+    private static final String WITH_DEFAULT_ELEVATION = "Paper with default elavation";
+    private static final String WITH_ELEVATION_EQUALS_THREE = "Paper with elevation = 3";
+    private static final String OUTLINED_PAPER = "Outlined paper";
+    private static final String OUTLINED_SQUARE_PAPER = "Outlined square paper";
+    private static final String YOU_CLICKED = "You clicked: %s";
 
     @BeforeMethod
     public void beforeTest() {
