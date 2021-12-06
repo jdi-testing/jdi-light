@@ -35,4 +35,10 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
         jdiAssert(element().isHidden(), Matchers.is(true));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has expected text")
+    public ButtonAssert text(String text) {
+        jdiAssert(element().getText(), Matchers.is(text));
+        return this;
+    }
 }

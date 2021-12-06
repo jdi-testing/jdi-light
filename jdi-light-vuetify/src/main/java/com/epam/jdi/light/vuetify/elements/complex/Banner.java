@@ -2,9 +2,11 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.BannerAssert;
+import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.Checkbox;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 
 /**
@@ -14,93 +16,48 @@ import com.epam.jdi.light.vuetify.elements.common.Switch;
 public class Banner extends UIBaseElement<BannerAssert> {
 
     @JDIAction("Get '{name}'s 'switch' element")
-    private Switch getChecker() {
-        return castToSwitch(find(".v-input__control"));
+    public Switch getSwitch() {
+        return new Switch().setCore(Switch.class, find(".v-input--switch"));
     }
 
-    @JDIAction("Get '{name}'s buttons")
-    private WebList getButtons() {
-        return this.finds("button");
+    @JDIAction("Get '{name}'s 'checkbox' element")
+    public Checkbox checkbox() {
+        return new Checkbox().setCore(Checkbox.class, find(".v-input--checkbox"));
     }
+
+    @JDIAction("Get '{name}'s button")
+    public Button button() {
+        return new Button(find("button"));
+    }
+
+    @JDIAction("Get '{name}'s button group")
+    public ButtonGroup buttons() {
+        return new ButtonGroup(find(".v-banner__actions"));
+   }
 
     @JDIAction("Get '{name}'s icon")
-    private UIElement getIcon() {
-        return this.find("i");
+    public Icon icon() {
+        return new Icon().setCore(Icon.class, find("i"));
     }
 
-    @JDIAction("Get '{name}'s text field's state")
-    public boolean hasHiddenTextField() {
-        return find(".v-banner__text").isHidden();
+    @JDIAction("Get '{name}'s text content")
+    public Text textContent() {
+        return new Text().setCore(Text.class, find(".v-banner__text"));
     }
 
-    @JDIAction("'{name}' has text")
-    public String hasText() {
-        return find(".v-banner__text").getText();
-    }
-
-    @JDIAction("'{name}' has text in title")
-    public String hasTitle() {
+    @JDIAction("Get '{name}'s title")
+    public String getTitle() {
         return find(".v-toolbar__title").getText();
     }
 
-    @JDIAction("'{name}' has 'checker' element")
-    public boolean hasChecker() {
-        return getChecker().isDisplayed();
+    @JDIAction("Get '{name}'s alert's text")
+    public String getAlertText() {
+        return core().driver().switchTo().alert().getText();
     }
 
-    @JDIAction("'{name}' has icon")
-    public boolean hasIcon() {
-        return getIcon().isExist();
-    }
-
-    @JDIAction("'{name}' has alert after clicking on icon")
-    public String hasAlertOnIconClick() {
-        return this.core().driver().switchTo().alert().getText();
-    }
-
-    @JDIAction("'{name}' has buttons")
-    public int hasButtons() {
-        return getButtons().size();
-    }
-
-    @JDIAction("'{name}'s buttons are visible")
-    public boolean hasVisibleButtons() {
-        return getButtons().stream().allMatch(UIElement::isVisible);
-    }
-
-    @JDIAction("'{name}'s buttons are hidden")
-    public boolean hasHiddenButtons() {
-        return getButtons().stream().allMatch(UIElement::isHidden);
-    }
-
-    @JDIAction("'{name}' has checked checker")
-    public boolean hasCheckerChecked() {
-        return getChecker().isChecked();
-    }
-
-    @JDIAction("'{name}' has unchecked checker")
-    public boolean hasCheckerUnchecked() {
-        return getChecker().isNotChecked();
-    }
-
-    public void checkerCheck() {
-        getChecker().check();
-    }
-
-    public void checkerUnCheck() {
-        getChecker().uncheck();
-    }
-
-    public void handleAlert() {
+    @JDIAction("Dismiss alert")
+    public void dismissAlert() {
         core().driver().switchTo().alert().dismiss();
-    }
-
-    public void clickOnIcon() {
-        getIcon().click();
-    }
-
-    private Switch castToSwitch(UIElement element) {
-        return new Switch().setCore(Switch.class, element);
     }
 
     public BannerAssert is() {
@@ -108,6 +65,6 @@ public class Banner extends UIBaseElement<BannerAssert> {
     }
 
     public BannerAssert has() {
-        return this.is();
+        return is();
     }
 }

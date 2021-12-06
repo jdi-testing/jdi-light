@@ -4,13 +4,14 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.ButtonAssert;
 
 /**
  * To see the example of Buttons web element please visit https://vuetifyjs.com/en/components/buttons/
  */
 
-public class Button extends UIBaseElement<ButtonAssert> implements HasClick {
+public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsText {
 
     Button() {
     }
