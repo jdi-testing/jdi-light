@@ -10,13 +10,13 @@ import java.util.List;
 
 public class BadgePage extends WebPage {
 
-    @UI("#primaryColorBadge")
+    @UI("#primaryColorBadge .MuiBadge-badge")
     public static Badge primaryColorBadge;
 
-    @UI("#errorColorBadge")
+    @UI("#errorColorBadge .MuiBadge-badge")
     public static Badge errorColorBadge;
 
-    @UI("#secondaryColorBadge")
+    @UI("#secondaryColorBadge .MuiBadge-badge")
     public static Badge secondaryColorBadge;
 
     @UI(".MuiButtonGroup-root  button[aria-label='reduce']")
@@ -28,13 +28,13 @@ public class BadgePage extends WebPage {
     @UI("//span[text()='Show Zero']/preceding-sibling::span/span[contains(@class,'MuiSwitch-switchBase')]")
     public static Checkbox switchShowZero;
 
-    @UI("//span[@id='dotBadge']")
+    @UI("#dotBadge .MuiBadge-badge")
     public static Badge dotBadge;
 
     @UI("//span[text()='Show Badge']/preceding-sibling::span/span[contains(@class,'MuiSwitch-switchBase')]")
     public static Checkbox switchShowBadge;
 
-    @UI("//span[text()='Show Badge']/following::span[@class='MuiBadge-root']")
+    @UI("//span[text()='Show Badge']/following::span[@class='MuiBadge-root']/span[contains(@class,'MuiBadge-badge')]")
     public static List<Badge> badgeDifferentPosition;
 
 }

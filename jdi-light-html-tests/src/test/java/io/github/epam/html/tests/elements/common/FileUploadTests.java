@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -40,6 +41,16 @@ public class FileUploadTests implements TestsInit {
         avatar.is().text(containsString("functional.xml"));
         assertTrue(avatar.getText().contains("functional.xml"));
         assertTrue(avatar.getValue().contains("functional.xml"));
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSetDateTime_ThrowsException() {
+        avatar.uploadFile(null);
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSetValue_ThrowsException() {
+        avatar.setValue(null);
     }
 
     @Test

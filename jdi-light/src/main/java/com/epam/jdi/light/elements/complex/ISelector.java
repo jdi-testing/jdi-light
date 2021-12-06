@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.NullUserInputValueException;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -22,7 +23,12 @@ import static com.jdiai.tools.LinqUtils.map;
  */
 public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue, HasStartIndex {
     @JDIAction("Select '{0}' in '{name}'")
-    default void select(String value) { list().select(value); }
+    default void select(String value) {
+        if(value==null){
+            throw new NullUserInputValueException();
+        }
+        list().select(value);
+    }
     @JDIAction("Select '{0}' in '{name}'")
     default void select(int index) { list().select(index); }
     @JDIAction("Select '{0}' in '{name}'")

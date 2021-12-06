@@ -2,6 +2,7 @@ package com.epam.jdi.light.elements.complex.dropdown;
 
 import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.NullUserInputValueException;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.Selector;
@@ -37,6 +38,9 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
      */
     @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(String value) {
+        if(value==null){
+            throw new NullUserInputValueException();
+        }
         selector().select(value);
     }
 

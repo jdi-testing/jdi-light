@@ -15,11 +15,6 @@ import static io.github.com.pages.displaydata.BadgePage.secondaryColorBadge;
 import static io.github.com.pages.displaydata.BadgePage.switchShowBadge;
 import static io.github.com.pages.displaydata.BadgePage.switchShowZero;
 
-/**
- * To see an example of Chips web element please visit
- * https://material-ui.com/ru/components/badges/
- */
-
 public class BadgeTests extends TestsInit {
 
     @BeforeMethod
@@ -30,35 +25,32 @@ public class BadgeTests extends TestsInit {
     @Test
     public void simpleBadgeTest() {
         primaryColorBadge.is().displayed();
-        primaryColorBadge.is().displayedSvg();
         primaryColorBadge.has().counterValue("4");
-        primaryColorBadge.has().iconVisibilityStatus("colorPrimary");
-        primaryColorBadge.has().iconPosition("TopRightRectangle");
+        primaryColorBadge.has().primaryColor();
+        primaryColorBadge.has().position("TopRightRectangle");
 
         errorColorBadge.is().displayed();
-        errorColorBadge.is().displayedSvg();
         errorColorBadge.has().counterValue("4");
-        errorColorBadge.has().iconVisibilityStatus("colorError");
-        errorColorBadge.has().iconPosition("TopRightRectangle");
+        errorColorBadge.has().errorColor();
+        errorColorBadge.has().position("TopRightRectangle");
     }
 
     @Test
     public void variousBadgeTest() {
         secondaryColorBadge.is().displayed();
-        secondaryColorBadge.is().displayedSvg();
         secondaryColorBadge.has().counterValue("1");
-        secondaryColorBadge.has().iconVisibilityStatus("colorSecondary");
-        secondaryColorBadge.has().iconPosition("TopRightRectangle");
+        secondaryColorBadge.has().secondaryColor();
+        secondaryColorBadge.has().position("TopRightRectangle");
         buttonReduce.click();
         secondaryColorBadge.has().counterValue("0");
-        secondaryColorBadge.has().iconVisibilityStatus("invisible");
+        secondaryColorBadge.is().invisible();
         switchShowZero.uncheck();
-        secondaryColorBadge.has().iconVisibilityStatus("colorSecondary");
+        secondaryColorBadge.has().secondaryColor();
         switchShowZero.check();
-        secondaryColorBadge.has().iconVisibilityStatus("invisible");
+        secondaryColorBadge.is().invisible();
         buttonIncrease.click();
         secondaryColorBadge.has().counterValue("1");
-        secondaryColorBadge.has().iconVisibilityStatus("colorSecondary");
+        secondaryColorBadge.has().secondaryColor();
 
         int loop = 0;
         while (loop < 10) {
@@ -71,39 +63,34 @@ public class BadgeTests extends TestsInit {
     @Test
     public void dotBadgeTest() {
         dotBadge.is().displayed();
-        dotBadge.is().displayedSvg();
-        dotBadge.has().dot();
-        dotBadge.has().iconVisibilityStatus("colorSecondary");
-        dotBadge.has().iconPosition("TopRightRectangle");
+        dotBadge.is().dot();
+        dotBadge.has().secondaryColor();
+        dotBadge.has().position("TopRightRectangle");
         switchShowBadge.uncheck();
-        dotBadge.has().iconVisibilityStatus("invisible");
+        dotBadge.is().invisible();
     }
 
     @Test
     public void alignmentBadgeTest() {
 
         badgeDifferentPosition.get(1).is().displayed();
-        badgeDifferentPosition.get(1).is().displayedSvg();
         badgeDifferentPosition.get(1).has().counterValue("-1");
-        badgeDifferentPosition.get(1).has().iconVisibilityStatus("colorPrimary");
-        badgeDifferentPosition.get(1).has().iconPosition("TopRightRectangle");
+        badgeDifferentPosition.get(1).has().primaryColor();
+        badgeDifferentPosition.get(1).has().position("TopRightRectangle");
 
         badgeDifferentPosition.get(2).is().displayed();
-        badgeDifferentPosition.get(2).is().displayedSvg();
         badgeDifferentPosition.get(2).has().counterValue("5");
-        badgeDifferentPosition.get(2).has().iconVisibilityStatus("colorPrimary");
-        badgeDifferentPosition.get(2).has().iconPosition("BottomRightRectangle");
+        badgeDifferentPosition.get(2).has().primaryColor();
+        badgeDifferentPosition.get(2).has().position("BottomRightRectangle");
 
         badgeDifferentPosition.get(3).is().displayed();
-        badgeDifferentPosition.get(3).is().displayedSvg();
         badgeDifferentPosition.get(3).has().counterValue("6");
-        badgeDifferentPosition.get(3).has().iconVisibilityStatus("colorPrimary");
-        badgeDifferentPosition.get(3).has().iconPosition("BottomLeftRectangle");
+        badgeDifferentPosition.get(3).has().primaryColor();
+        badgeDifferentPosition.get(3).has().position("BottomLeftRectangle");
 
         badgeDifferentPosition.get(4).is().displayed();
-        badgeDifferentPosition.get(4).is().displayedSvg();
         badgeDifferentPosition.get(4).has().counterValue("7");
-        badgeDifferentPosition.get(4).has().iconVisibilityStatus("colorPrimary");
-        badgeDifferentPosition.get(4).has().iconPosition("TopLeftRectangle");
+        badgeDifferentPosition.get(4).has().primaryColor();
+        badgeDifferentPosition.get(4).has().position("TopLeftRectangle");
     }
 }

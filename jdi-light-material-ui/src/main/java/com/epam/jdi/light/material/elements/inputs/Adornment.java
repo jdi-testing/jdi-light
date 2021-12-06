@@ -41,7 +41,9 @@ public class Adornment extends UIBaseElement<AdornmentAssert>
     public void click() {
         if (getButton().isDisplayed()) {
             getButton().click();
-        } else throw exception("Adornment does not contain button");
+        } else {
+            throw exception("Adornment does not contain button");
+        }
     }
 
     @Override

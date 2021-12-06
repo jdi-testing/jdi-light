@@ -2,12 +2,14 @@ package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.NullUserInputValueException;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.jdiai.tools.HasStartIndex;
 import com.jdiai.tools.LinqUtils;
+import org.apache.commons.lang.NullArgumentException;
 
 import java.util.List;
 
@@ -46,6 +48,9 @@ public class DataListOptions extends UIListBase<DropdownAssert>
     **/
     @JDIAction("Select '{0}' for '{name}''") @Override
     public void select(String value) {
+        if(value==null){
+            throw new NullUserInputValueException();
+        }
         core().setText(value);
     }
 

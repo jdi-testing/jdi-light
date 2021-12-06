@@ -16,6 +16,8 @@ public interface HasHelperText extends ICoreElement, IsText {
     default String getHelperText() {
         if(helperText().isDisplayed()) {
             return helperText().getText();
-        } else return null;
+        } else {
+            return null;
+        }
     }
 }

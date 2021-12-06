@@ -471,12 +471,15 @@ public class ActionHelper {
     }
     static Object[] getArgs(JoinPoint jp) {
         Object[] args = jp.getArgs();
-        if (args.length == 1 && args[0] == null)
-            return new Object[] {};
+        // Commented this condition because it causes an error
+        // for the methods with single parameter having null value
+        // And it is unclear why this was required in the first place.
+//        if (args.length == 1 && args[0] == null)
+//            return new Object[] {};
         Object[] result = new Object[args.length];
         for (int i = 0; i< args.length; i++)
             result[i] = Switch(args[i]).get(
-                Case(Objects::isNull, null),
+                Case(Objects::isNull, "null"),
                 Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
                 Case(arg -> isInterface(arg.getClass(), IBaseElement.class),
                     arg -> ((IBaseElement)arg).base().toString()),
@@ -570,7 +573,7 @@ public class ActionHelper {
         while (result.contains("\n\n"))
             result = result.replaceFirst("\\n\\n", LINE_BREAK);
         result = result.replace("java.lang.RuntimeException:", "").trim();
-        Object[] args = jInfo.jp().getArgs();
+        Object[] args = getArgs(jInfo.jp());
         if (result.contains("{{VALUE}}") && args.length > 0) {
             result = result.replace("{{VALUE}}", args[0].toString());
         }
@@ -618,15 +621,21 @@ public class ActionHelper {
         long start = currentTimeMillis();
         Throwable exception = null;
         isTop.set(false);
+        long iterationStart = 0;
         try {
             do {
                 try {
                     logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
+                    iterationStart = currentTimeMillis();
                     Object result = jInfo.overrideAction() != null
                             ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
                     if (!condition(jInfo.jp())) continue;
                     return result;
-                } catch (Throwable ex) {
+                }
+                catch(IllegalArgumentException ex){
+                    throw ex;
+                }
+                catch (Throwable ex) {
                     exception = ex;
                     try {
                         exceptionMsg = safeException(ex);
@@ -634,12 +643,13 @@ public class ActionHelper {
                     } catch (Throwable ignore) {
                     }
                 }
-            } while (currentTimeMillis() - start < jInfo.timeout() * 1000L);
+            } while (iterationStart - start < jInfo.timeout() * 1000L);
             throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
         } finally {
             isTop.set(true);
         }
     }
+
     static String getFailedMessage(ActionObject jInfo, String exception) {
         MethodSignature method = getJpMethod(jInfo.jp());
         try {

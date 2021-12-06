@@ -1,12 +1,12 @@
 package io.github.epam.html.tests.elements.common;
 
+import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.colorPicker;
-import static io.github.com.pages.HtmlElementsPage.disabledPicker;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
@@ -42,6 +42,16 @@ public class ColorPickerTests implements TestsInit {
         assertEquals(colorPicker.color(), "#432376");
         disabledPicker.setColor("#432376");
         assertEquals(disabledPicker.color(), "#432376");
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSetColor_ThrowsException() {
+        colorPicker.setColor(null);
+    }
+
+    @Test(expectedExceptions = {NullUserInputValueException.class})
+    public void passingNull_ToSetValue_ThrowsException() {
+        colorPicker.setValue(null);
     }
 
     @Test

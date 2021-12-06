@@ -1,8 +1,9 @@
 package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.complex.Datepicker;
+import com.epam.jdi.light.elements.composite.Section;
 
-public class DatepickerSection {
+public class DatepickerSection extends Section {
     public static Datepicker basicDatepicker;
     public static Datepicker startDateDatepicker;
     public static Datepicker minMaxDatepicker;

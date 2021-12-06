@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.composite.page.init;
 
+import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,7 +16,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static java.lang.Thread.currentThread;
 import static page.objects.selenium.PageBase.JDI_DOMAIN;
 
-public class PageInitTests {
+public class PageInitTests implements TestsInit {
     static String expectedUrl(String url) {
         return JDI_DOMAIN + url;
     }
@@ -28,6 +29,7 @@ public class PageInitTests {
         $("#user-icon").click();
         takeScreen("userIconClick" + currentThread().getId());
     }
+
     @Test
     public void loginPageExTest() {
         try {
