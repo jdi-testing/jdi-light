@@ -63,8 +63,4 @@ public class Banner extends UIBaseElement<BannerAssert> {
     public BannerAssert is() {
         return new BannerAssert().set(this);
     }
-
-    public BannerAssert has() {
-        return is();
-    }
 }
