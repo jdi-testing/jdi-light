@@ -1,30 +1,27 @@
 package io.github.com.pages.surfaces;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.surfaces.Card;
+import com.epam.jdi.light.ui.html.elements.common.Image;
+import com.epam.jdi.light.ui.html.elements.common.Text;
+import io.github.com.custom.cards.ComplexInteractionCard;
+import io.github.com.custom.cards.SimpleCard;
 
 public class CardPage extends WebPage {
 
     @UI("#simpleCard")
-    public static Card simpleCard;
+    public static SimpleCard simpleCard;
 
     @UI("#outlinedCard")
-    public static Card outlinedCard;
+    public static SimpleCard outlinedCard;
 
     @UI("#complexInteraction")
-    public static Card complexCard;
+    public static ComplexInteractionCard complexCard;
 
-    public static UIElement complexCardImage() {
-        return complexCard.find(".MuiCardMedia-root");
-    }
+    @UI("#complexInteraction .MuiCardMedia-root")
+    public static Image complexCardImage;
 
-    public static UIElement complexCardHeartButtonIcon() {
-        return complexCard.getActionButtonByNumber(1).find(".MuiSvgIcon-root");
-    }
+    @UI("#complexInteraction .MuiCollapse-container")
+    public static Text complexCardDropdownText;
 
-    public static UIElement complexCardCollapsibleContent() {
-        return complexCard.find(".MuiCollapse-container");
-    }
 }
