@@ -22,11 +22,6 @@ public class Card extends UIBaseElement<CardAssert> {
         return core().find(".MuiCardHeader-subheader");
     }
 
-    @JDIAction("Get '{name}' content")
-    public UIElement content() {
-        return core().find(".MuiCardContent-root");
-    }
-
     @JDIAction("Get '{name}' actions")
     public UIElement actions() {
         return core().find(".MuiCardActions-root");
