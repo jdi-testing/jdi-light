@@ -24,9 +24,4 @@ public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, Has
     public AvatarAssert is() {
         return new AvatarAssert().set(this);
     }
-
-    @Override
-    public AvatarAssert has() {
-        return this.is();
-    }
 }

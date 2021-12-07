@@ -43,5 +43,4 @@ public class AvatarTests extends TestsInit {
             avatar.image().is().hidden();
         }
     }
-
 }
