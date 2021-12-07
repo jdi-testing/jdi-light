@@ -80,7 +80,9 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
                     break;
             }
             return labelPosition;
-        } else throw exception("Checkbox does not have label");
+        } else {
+            throw exception("Checkbox does not have label");
+        }
     }
 
     @Override
