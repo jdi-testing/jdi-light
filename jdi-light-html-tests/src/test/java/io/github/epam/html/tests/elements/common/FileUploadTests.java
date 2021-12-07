@@ -43,6 +43,18 @@ public class FileUploadTests implements TestsInit {
     }
 
     @Test
+    public void passingNull_ToSetDateTime_ThrowsException() {
+        avatar.uploadFile(null);
+        avatar.has().text("null");
+    }
+
+    @Test
+    public void passingNull_ToSetValue_ThrowsException() {
+        avatar.setValue(null);
+        avatar.has().text("null");
+    }
+
+    @Test
     public void disabledUploadTest() {
         try {
             disabledFileInput.uploadFile(mergePath(COMMON.projectPath, "/src/test/resources/functional.xml"));

@@ -22,9 +22,9 @@ public class NumberSelectorTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        height.setNumber(number);
+        height.setNumber(defaultNumber);
     }
-    String number = "2.1";
+    String defaultNumber = "2.1";
 
     @Test
     public void getLabelTextTest() {
@@ -33,7 +33,7 @@ public class NumberSelectorTests implements TestsInit {
 
     @Test
     public void getNumberTest() {
-        assertEquals(height.value(), number);
+        assertEquals(height.value(), defaultNumber);
     }
 
     @Test
@@ -56,6 +56,12 @@ public class NumberSelectorTests implements TestsInit {
     public void setNumberTest() {
         height.setNumber("1.4");
         assertEquals(height.value(), "1.4");
+    }
+
+    @Test
+    public void passingNull_ToSetNumber_ThrowsException() {
+        height.setNumber(null);
+        height.has().text(defaultNumber);
     }
 
     @Test

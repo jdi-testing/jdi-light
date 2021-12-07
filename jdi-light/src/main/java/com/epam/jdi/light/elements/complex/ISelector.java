@@ -22,7 +22,9 @@ import static com.jdiai.tools.LinqUtils.map;
  */
 public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue, HasStartIndex {
     @JDIAction("Select '{0}' in '{name}'")
-    default void select(String value) { list().select(value); }
+    default void select(String value) {
+        list().select(value);
+    }
     @JDIAction("Select '{0}' in '{name}'")
     default void select(int index) { list().select(index); }
     @JDIAction("Select '{0}' in '{name}'")

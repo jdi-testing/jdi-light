@@ -336,8 +336,9 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      */
     @JDIAction("Select ({0}) for '{name}'")
     public void select(String... values) {
-        for (String value : values)
+        for (String value : values) {
             select(value);
+        }
     }
     @JDIAction("Check all '{name}' unchecked options")
     public void checkAll() {

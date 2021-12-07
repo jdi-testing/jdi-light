@@ -16,9 +16,11 @@ import static java.lang.Thread.currentThread;
 import static page.objects.selenium.PageBase.JDI_DOMAIN;
 
 public class PageInitTests {
+
     static String expectedUrl(String url) {
         return JDI_DOMAIN + url;
     }
+
     @BeforeMethod
     public void before() {
         clearAllCookies();
@@ -28,6 +30,7 @@ public class PageInitTests {
         $("#user-icon").click();
         takeScreen("userIconClick" + currentThread().getId());
     }
+
     @Test
     public void loginPageExTest() {
         try {
@@ -55,6 +58,7 @@ public class PageInitTests {
             throw new RuntimeException("loginPageExTest: " + msg);
         }
     }
+
     @Test
     public void loginPageTest() {
         try {
@@ -79,6 +83,7 @@ public class PageInitTests {
             throw new RuntimeException("loginPageTest: " + msg);
         }
     }
+
     @Test
     public void loginPageUITest() {
         try {

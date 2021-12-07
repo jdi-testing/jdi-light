@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.jdiai.tools.Safe;
 import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,11 @@ public class WindowsManager {
     private static Safe<Boolean> newWindow = new Safe<>(() -> false);
 
     public static Set<String> getWindows() {
-        Set<String> wHandles = getDriver().getWindowHandles();
+        WebDriver driver = getDriver();
+        if(driver==null) {
+            throw exception("Can't get WebDriver");
+        }
+        Set<String> wHandles = driver.getWindowHandles();
         if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size()) {
             newWindow.set(true);
         }

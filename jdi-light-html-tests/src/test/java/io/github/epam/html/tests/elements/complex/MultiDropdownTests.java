@@ -21,14 +21,15 @@ public class MultiDropdownTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        if (!isFireFox())
-            multiDropdown.check(text);
+        if (!isFireFox()) {
+            multiDropdown.check(defaultText);
+        }
     }
-    String text = "Steam";
+    String defaultText = "Steam";
 
     @Test
     public void getValueTest() {
-        assertEquals(multiDropdown.getValue(), text);
+        assertEquals(multiDropdown.getValue(), defaultText);
     }
 
     @Test
@@ -36,6 +37,20 @@ public class MultiDropdownTests implements TestsInit {
         skipForFirefox();
         multiDropdown.check("Electro", "Metalic");
         assertEquals(multiDropdown.checked(), asList("Electro", "Metalic"));
+    }
+
+    @Test
+    public void passingNull_ToCheck_ThrowsException() {
+        String optionName = null;
+        multiDropdown.check(optionName);
+        multiDropdown.has().text("");
+    }
+
+    @Test
+    public void passingNull_ToSelect_ThrowsException() {
+        String optionName = null;
+        multiDropdown.select(optionName);
+        multiDropdown.has().text("");
     }
 
     @Test
@@ -52,7 +67,7 @@ public class MultiDropdownTests implements TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(multiDropdown.selected(), text);
+        assertEquals(multiDropdown.selected(), defaultText);
     }
 
     @Test

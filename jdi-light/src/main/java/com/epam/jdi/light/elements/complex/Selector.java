@@ -70,8 +70,9 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String... values) {
         unckeckAll();
-        for (String value : values)
+        for (String value : values) {
             asSelect().selectByVisibleText(value);
+        }
     }
 
     /**

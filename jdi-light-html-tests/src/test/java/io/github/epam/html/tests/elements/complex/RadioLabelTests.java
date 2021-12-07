@@ -19,13 +19,13 @@ public class RadioLabelTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         metalAndColorsPage.shouldBeOpened();
-        odds.select(text);
+        odds.select(defaultText);
     }
-    String text = "5";
+    String defaultText = "5";
 
     @Test
     public void getValueTest() {
-        assertEquals(odds.getValue(), text);
+        assertEquals(odds.getValue(), defaultText);
     }
 
     @Test
@@ -35,13 +35,20 @@ public class RadioLabelTests implements TestsInit {
     }
 
     @Test
+    public void passingNull_ToSelect_ThrowsException() {
+        String optionName = null;
+        odds.select(optionName);
+        odds.has().text(defaultText);
+    }
+
+    @Test
     public void selectNumTest() {
         odds.select(ELEMENT.startIndex);
         assertEquals(odds.getValue(), "1");
     }
     @Test
     public void selectedTest() {
-        assertEquals(odds.selected(), text);
+        assertEquals(odds.selected(), defaultText);
     }
     @Test
     public void valuesTest() {

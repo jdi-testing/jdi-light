@@ -31,14 +31,21 @@ public class DropdownSelectTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        dressCode.select(text);
+        dressCode.select(defaultText);
     }
-    String text = "Casual";
+    String defaultText = "Casual";
 
     @Test
     public void selectTest() {
         dressCode.select("Pirate");
         assertEquals(dressCode.getValue(), "Pirate");
+    }
+
+    @Test
+    public void passingNull_ToSelect_ThrowsException() {
+        String optionName = null;
+        dressCode.select(optionName);
+        dressCode.has().text(defaultText);
     }
 
     @Test

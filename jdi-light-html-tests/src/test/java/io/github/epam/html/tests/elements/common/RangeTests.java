@@ -22,8 +22,9 @@ public class RangeTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        volume.setupValue(90);
+        volume.setupValue(defaultVolume);
     }
+    double defaultVolume = 90;
 
     @Test
     public void getLabelTextTest() {
@@ -69,6 +70,12 @@ public class RangeTests implements TestsInit {
 
         fractionalRange.setupValue(3.5);
         assertEquals(fractionalRange.value(), 3.5);
+    }
+
+    @Test
+    public void passingNull_ToSetValue_ThrowsException() {
+        volume.setValue(null);
+        height.has().text(defaultVolume+"");
     }
 
     @Test

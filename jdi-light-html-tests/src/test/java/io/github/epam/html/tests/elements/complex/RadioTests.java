@@ -21,13 +21,13 @@ public class RadioTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        colors.select(text);
+        colors.select(defaultColor);
     }
-    String text = "Blue";
+    String defaultColor = "Blue";
 
     @Test
     public void getValueTest() {
-        assertEquals(colors.getValue(), text);
+        assertEquals(colors.getValue(), defaultColor);
     }
 
     @Test
@@ -36,6 +36,13 @@ public class RadioTests implements TestsInit {
         assertEquals(colors.getValue(), "Green");
         colorsNoLocator.select("Blue");
         colorsNoLocator.is().selected("Blue");
+    }
+
+    @Test
+    public void passingNull_ToSelect_ThrowsException() {
+        String optionName = null;
+        colors.select(optionName);
+        colors.is().selected(defaultColor);
     }
 
     @Test
@@ -52,7 +59,7 @@ public class RadioTests implements TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(colors.selected(), text);
+        assertEquals(colors.selected(), defaultColor);
     }
     @Test
     public void valuesTest() {

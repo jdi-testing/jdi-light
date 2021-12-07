@@ -14,7 +14,6 @@ import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.c
 import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.hasValue;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.usersPage;
-import static io.github.com.pages.UsersPage.emptyTable;
 import static io.github.com.pages.UsersPage.usersData;
 import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -37,7 +36,7 @@ public class DataSimpleTableTests implements TestsInit {
         }
     }
 
-    @Test
+    @Test(enabled = false)
     public void screenshotTest() {
         // TODO
         //usersData.core().makePhoto();
@@ -90,10 +89,6 @@ public class DataSimpleTableTests implements TestsInit {
         usersData.has().size(6);
         usersData.assertThat().size(greaterThan(3));
         usersData.is().notEmpty().size(lessThanOrEqualTo(6));
-    }
-    @Test
-    public void isEmptyTest() {
-        emptyTable.is().empty();
     }
     // Compare Matchers
     @Test

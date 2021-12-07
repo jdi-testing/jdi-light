@@ -1,11 +1,14 @@
 package io.github.epam.html.tests.elements.composite;
 
+import com.epam.jdi.light.elements.init.UIFactory;
+import io.github.com.entities.User;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.epam.jdi.light.elements.init.JDITalk.loginAs;
+import static com.epam.jdi.light.elements.init.UIFactory.*;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
@@ -59,5 +62,14 @@ public class FormLoginTests implements TestsInit {
         loginForm.fill(DEFAULT_USER);
         loginForm.login();
         homePage.checkOpened();
+    }
+
+    @Test
+    public void nullValueLoginTest() {
+        loginForm.shouldBeOpened();
+        User user = new User().set(u -> { u.name = "Roman"; u.password = null; });
+        loginForm.login(user);
+        loginForm.is().visible();
+        loginForm.errorMessage.has().text("* Login Faild");
     }
 }

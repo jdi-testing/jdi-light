@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.birthDate;
+import static io.github.com.pages.HtmlElementsPage.colorPicker;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
@@ -24,10 +25,11 @@ public class DateTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
+    String defaultDate = "1985-06-18";
 
     @Test
     public void getDateTest() {
-        assertEquals(birthDate.value(), "1985-06-18");
+        assertEquals(birthDate.value(), defaultDate);
     }
 
     @Test
@@ -52,8 +54,19 @@ public class DateTests implements TestsInit {
     }
 
     @Test
+    public void passingNull_ToSetDateTime_ThrowsException() {
+        birthDate.setDateTime(null);
+        colorPicker.has().color(defaultDate);
+    }
+
+    @Test
+    public void passingNull_ToSetValue_ThrowsException() {
+        birthDate.setValue(defaultDate);
+    }
+
+    @Test
     public void isValidationTest() {
-        birthDate.is().date(is("1985-06-18"));
+        birthDate.is().date(is(defaultDate));
         birthDate.is().enabled();
     }
 

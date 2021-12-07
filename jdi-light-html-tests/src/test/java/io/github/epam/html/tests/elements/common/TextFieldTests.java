@@ -23,30 +23,48 @@ public class TextFieldTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        yourName.setText(text);
+        yourName.setText(defaultText);
     }
-    String text = "TextField";
+    String defaultText = "TextField";
 
     @Test
     public void getTextTest() {
-        assertEquals(yourName.getText(), text);
+        assertEquals(yourName.getText(), defaultText);
     }
 
     @Test
     public void getValueTest() {
-        assertEquals(yourName.getValue(), text);
+        assertEquals(yourName.getValue(), defaultText);
     }
 
     @Test
     public void sendKeysTest() {
         yourName.sendKeys("Test");
-        assertEquals(yourName.getValue(), text+"Test");
+        assertEquals(yourName.getValue(), defaultText +"Test");
+    }
+
+    @Test
+    public void passingNull_ToSendKeys_ThrowsException() {
+        yourName.sendKeys(null);
+        yourName.has().text(defaultText);
+    }
+
+    @Test
+    public void passingNull_AsOneOfTheArguments_ToSendKeys_ThrowsException() {
+        yourName.sendKeys(null, "Test");
+        yourName.has().text(defaultText);
     }
 
     @Test
     public void inputTest() {
         yourName.input("New text");
         assertEquals(yourName.getText(), "New text");
+    }
+
+    @Test
+    public void passingNull_ToInput_ThrowsException() {
+        yourName.input(null);
+        yourName.has().text(defaultText);
     }
 
     @Test
@@ -64,7 +82,7 @@ public class TextFieldTests implements TestsInit {
     @Test
     public void disabledTest() {
         try {
-            disabledName.sendKeys(text);
+            disabledName.sendKeys(defaultText);
         } catch (Exception ignore) {}
         assertEquals(disabledName.getText(), "");
     }
@@ -77,7 +95,7 @@ public class TextFieldTests implements TestsInit {
     @Test
     public void isValidationTest() {
         yourName.is().enabled();
-        yourName.is().text(is(text));
+        yourName.is().text(is(defaultText));
         yourName.is().text(containsString("Field"));
         disabledName.is().disabled();
     }
@@ -91,7 +109,7 @@ public class TextFieldTests implements TestsInit {
 
     @Test
     public void assertValidationTest() {
-        yourName.assertThat().text(is(text));
+        yourName.assertThat().text(is(defaultText));
     }
 
     final String symbols = "`!@#//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
@@ -106,6 +124,19 @@ public class TextFieldTests implements TestsInit {
         yourName.setText(symbols);
         assertEquals(yourName.getText(), symbols);
     }
+
+    @Test
+    public void passingNull_ToSetText_ThrowsException() {
+        yourName.setText(null);
+        yourName.has().text(defaultText);
+    }
+
+    @Test
+    public void passingNull_ToSetValue_ThrowsException() {
+        yourName.setValue(null);
+        yourName.has().text(defaultText);
+    }
+
     @Test
     public void sendKeysSymbolsTest() {
         yourName.clear();
