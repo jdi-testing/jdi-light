@@ -77,9 +77,4 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
     public ChipAssert is() {
         return new ChipAssert().set(this);
     }
-
-    @Override
-    public ChipAssert has() {
-        return is();
-    }
 }

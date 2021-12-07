@@ -56,10 +56,4 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     public SwitchAssert is() {
         return new SwitchAssert().set(this);
     }
-
-    @Override
-    public SwitchAssert has() {
-        return is();
-    }
-
 }
