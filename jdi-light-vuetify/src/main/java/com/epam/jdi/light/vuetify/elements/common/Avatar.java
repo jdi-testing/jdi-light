@@ -15,8 +15,4 @@ public class Avatar extends UIBaseElement<AvatarAssert> implements HasIcon, HasI
     public AvatarAssert is() {
         return new AvatarAssert().set(this);
     }
-
-    public AvatarAssert has() {
-        return is();
-    }
 }
