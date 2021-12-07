@@ -64,8 +64,4 @@ public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> implements I
     public SystemBarAssert is() {
         return new SystemBarAssert().set(this);
     }
-
-    public SystemBarAssert has() {
-        return is();
-    }
 }

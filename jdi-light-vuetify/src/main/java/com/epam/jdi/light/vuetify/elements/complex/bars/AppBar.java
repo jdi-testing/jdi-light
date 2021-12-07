@@ -85,8 +85,4 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
     public AppBarAssert is() {
         return new AppBarAssert().set(this);
     }
-
-    public AppBarAssert has() {
-        return this.is();
-    }
 }

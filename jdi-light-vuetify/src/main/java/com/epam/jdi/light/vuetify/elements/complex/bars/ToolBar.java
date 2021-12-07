@@ -105,8 +105,4 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     public ToolBarAssert is() {
         return new ToolBarAssert().set(this);
     }
-
-    public ToolBarAssert has() {
-        return is();
-    }
 }
