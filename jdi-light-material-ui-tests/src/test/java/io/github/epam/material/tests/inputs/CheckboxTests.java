@@ -1,23 +1,20 @@
 package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
-import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
+import io.github.epam.test.data.CheckboxesDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.checkboxPage;
-import static io.github.com.pages.inputs.CheckboxPage.basicCheckbox;
-import static io.github.com.pages.inputs.CheckboxPage.errorMessage;
-import static io.github.com.pages.inputs.CheckboxPage.formControlLabelCheckbox;
-import static io.github.com.pages.inputs.CheckboxPage.formControlLabelText;
-import static io.github.com.pages.inputs.CheckboxPage.formGroupCheckbox;
-import static io.github.com.pages.inputs.CheckboxPage.formGroupText;
-import static io.github.com.pages.inputs.CheckboxPage.labelPlacementCheckbox;
-import static io.github.com.pages.inputs.CheckboxPage.labelPlacementText;
+import static io.github.com.pages.inputs.CheckboxPage.assignResponsibilityText;
+import static io.github.com.pages.inputs.CheckboxPage.basicCheckboxes;
+import static io.github.com.pages.inputs.CheckboxPage.displayErrorText;
+import static io.github.com.pages.inputs.CheckboxPage.formControlLabelCheckboxes;
+import static io.github.com.pages.inputs.CheckboxPage.formGroupCheckboxes;
+import static io.github.com.pages.inputs.CheckboxPage.labelPlacementCheckboxes;
+import static io.github.com.pages.inputs.CheckboxPage.pickTwoText;
+import static io.github.epam.enums.Colors.GREEN_600;
 
 public class CheckboxTests extends TestsInit {
 
@@ -27,95 +24,79 @@ public class CheckboxTests extends TestsInit {
         checkboxPage.shouldBeOpened();
     }
 
-    private void checkboxTestLogic(Checkbox checkbox, String className) {
-        if (checkbox.isEnabled()) {
-            checkbox.check();
-            checkbox.is().selected();
-            checkbox.uncheck();
-            checkbox.is().deselected();
-        } else
+    @Test
+    public void basicCheckboxTests() {
+        basicCheckboxes.forEach(this::basicCheckboxTestLogic);
+    }
+
+    @Test(dataProvider = "labelCheckboxesTestsDataProvider", dataProviderClass = CheckboxesDataProvider.class)
+    public void labelCheckboxesTests(int index, String labelText) {
+        formControlLabelCheckboxes.get(index).label().is().displayed();
+        formControlLabelCheckboxes.get(index).label().has().text(labelText);
+        basicCheckboxTestLogic(formControlLabelCheckboxes.get(index));
+    }
+
+    @Test
+    public void customColorCheckboxTest() {
+        formControlLabelCheckboxes.get(7).has().color(GREEN_600.rgba());
+    }
+
+    @Test(dataProvider = "labelPlacementCheckboxesTestsDataProvider", dataProviderClass = CheckboxesDataProvider.class)
+    public void labelPlacementCheckboxesTests(int index, String labelText, String labelPosition) {
+        labelPlacementCheckboxes.get(index).label().is().displayed();
+        labelPlacementCheckboxes.get(index).has().labelPosition(labelPosition);
+        labelPlacementCheckboxes.get(index).label().has().text(labelText);
+        basicCheckboxTestLogic(labelPlacementCheckboxes.get(index));
+    }
+
+    @Test(dataProvider = "formGroupCheckboxesTestsDataProvider", dataProviderClass = CheckboxesDataProvider.class)
+    public void formGroupCheckboxesTests(int index, String labelText) {
+        formGroupCheckboxes.get(index).label().is().displayed();
+        formGroupCheckboxes.get(index).label().has().text(labelText);
+        basicCheckboxTestLogic(formGroupCheckboxes.get(index));
+    }
+
+    @Test
+    public void formGroupErrorsTests() {
+        Object[][] errorTestData = CheckboxesDataProvider.formGroupErrorTestsData();
+        for (int i = 0; i <= 2; i++) {
+            formGroupCheckboxes.get((Integer) errorTestData[i][0]).check();
+            formGroupCheckboxes.get((Integer) errorTestData[i][0]).is().checked();
+            formGroupCheckboxes.get((Integer) errorTestData[i][0] + 3).is().checked();
+            assignResponsibilityText.has().css("color", (String) errorTestData[i][1]);
+            pickTwoText.has().css("color", (String) errorTestData[i][2]);
+            displayErrorText.has().css("color", (String) errorTestData[i][2]);
+        }
+    }
+
+    private void basicCheckboxTestLogic(Checkbox checkbox) {
+        if (checkbox.isDisabled()) {
             checkbox.is().disabled();
-        checkbox.hasClass(className);
-    }
-
-    private void textTestLogic(Text text, String expectedText) {
-        text.is().text(expectedText);
-    }
-
-    private void groupTestLogic(Checkbox firstCheckbox, Checkbox secondCheckbox) {
-        firstCheckbox.check();
-        firstCheckbox.is().selected();
-        secondCheckbox.is().selected();
-        firstCheckbox.uncheck();
-        firstCheckbox.is().deselected();
-        secondCheckbox.is().deselected();
-    }
-
-    private void groupTestErrorLogic(Checkbox firstCheckbox, Checkbox secondCheckbox, Text errorMessage) {
-        firstCheckbox.check();
-        hasError(errorMessage);
-        secondCheckbox.check();
-        hasNoError(errorMessage);
-    }
-
-    private void hasError(Text errorMessage) {
-        boolean isUnchecked = errorMessage.hasClass("Mui-error");
-        Timer.waitCondition(() -> isUnchecked);
-        jdiAssert(isUnchecked, Matchers.is(true));
-        jdiAssert(errorMessage.text().contains("Pick two"), Matchers.is(true));
-    }
-
-    private void hasNoError(Text errorMessage) {
-        boolean isUnchecked = errorMessage.hasClass("Mui-error");
-        Timer.waitCondition(() -> isUnchecked);
-        jdiAssert(isUnchecked, Matchers.is(false));
-    }
-
-    @Test
-    public void basicCheckboxTest() {
-        for (int i = 1; i < 3; i++)
-            checkboxTestLogic(
-                    basicCheckbox.get(i),
-                    i != 2 ? "MuiCheckbox-colorSecondary" :
-                            "MuiCheckbox-colorPrimary");
-    }
-
-    @Test
-    public void formControlLabelTest() {
-        String[] expectedTexts = new String[]{"Secondary", "Primary", "Uncontrolled", "Disabled",
-                "Disabled", "Indeterminate", "Custom color", "Custom icon", "Custom size"};
-        for (int i = 1; i < 3; i++) {
-            checkboxTestLogic(
-                    formControlLabelCheckbox.get(i),
-                    i != 2 ? "MuiCheckbox-colorSecondary" :
-                            "MuiCheckbox-colorPrimary");
-            textTestLogic(formControlLabelText.get(i), expectedTexts[i - 1]);
+            if (checkbox.isChecked()) {
+                checkbox.is().checked();
+            } else {
+                checkbox.is().unchecked();
+            }
+        } else {
+            checkbox.is().enabled();
+            if (checkbox.isUnchecked()) {
+                checkbox.is().unchecked();
+                checkbox.check();
+                checkbox.is().checked();
+            } else {
+                checkbox.is().checked();
+                checkbox.uncheck();
+                checkbox.is().unchecked();
+            }
         }
-    }
-
-    @Test
-    public void formGroupTest() {
-        String[] expectedTexts = new String[]{"Gilad Gray", "Jason Killian", "Antoine Llorca",
-                "Gilad Gray", "Jason Killian", "Antoine Llorca"};
-        for (int i = 1; i < 3; i++) {
-            int secondCheckboxIndex = (i + 3) % 7;
-            groupTestLogic(
-                    formGroupCheckbox.get(i),
-                    formGroupCheckbox.get(secondCheckboxIndex));
-            textTestLogic(formGroupText.get(i), expectedTexts[i - 1]);
+        if (checkbox.hasPrimaryColor()) {
+            checkbox.has().primaryColor();
         }
-        groupTestErrorLogic(
-                formGroupCheckbox.get(1),
-                formGroupCheckbox.get(2),
-                errorMessage.get(2));
-    }
-
-    @Test
-    public void labelPlacementTest() {
-        String[] expectedText = new String[]{"Top", "Start", "Bottom", "End"};
-        for (int i = 1; i < 2; i++) {
-            checkboxTestLogic(labelPlacementCheckbox.get(i), "MuiCheckbox-colorPrimary");
-            textTestLogic(labelPlacementText.get(i), expectedText[i - 1]);
+        if (checkbox.hasSecondaryColor()) {
+            checkbox.has().secondaryColor();
+        }
+        if (checkbox.isIndeterminate()) {
+            checkbox.is().indeterminate();
         }
     }
 }

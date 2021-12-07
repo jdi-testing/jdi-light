@@ -22,4 +22,8 @@ public interface HasColor extends ICoreElement {
     default boolean hasColor(String color) {
         return core().getCssValue("background-color").equals(color);
     }
+
+    default String getColor() {
+        return core().getCssValue("color");
+    }
 }
