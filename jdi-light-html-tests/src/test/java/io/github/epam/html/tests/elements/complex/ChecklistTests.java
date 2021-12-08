@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.checksGroup;
-import static io.github.com.pages.HtmlElementsPage.weather;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.complex.enums.Weather.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -202,8 +201,9 @@ public class ChecklistTests implements TestsInit {
 
     @Test
     public void setNullValueTest() {
+        String value = weather.getValue();
         weather.setValue(null);
-        weather.has().text(defaultText);
+        weather.has().text(value);
     }
 
     @Test

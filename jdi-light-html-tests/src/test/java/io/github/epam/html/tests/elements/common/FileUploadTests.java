@@ -44,14 +44,16 @@ public class FileUploadTests implements TestsInit {
 
     @Test
     public void setNullPathFileTest() {
+        String value = avatar.getValue();
         avatar.uploadFile(null);
-        avatar.has().text("");
+        avatar.has().text(value);
     }
 
     @Test
     public void setNullValueTest() {
+        String value = avatar.getValue();
         avatar.setValue(null);
-        avatar.has().text("");
+        avatar.has().text(value);
     }
 
     @Test

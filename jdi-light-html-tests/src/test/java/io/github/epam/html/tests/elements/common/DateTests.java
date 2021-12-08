@@ -54,10 +54,10 @@ public class DateTests implements TestsInit {
 
     @Test
     public void setNullValueTest() {
+        String value = birthDate.getValue();
         birthDate.setDateTime(null);
-        birthDate.has().text("");
+        birthDate.has().text(value);
     }
-
 
     @Test
     public void isValidationTest() {

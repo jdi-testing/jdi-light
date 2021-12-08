@@ -5,8 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.disabledName;
-import static io.github.com.pages.HtmlElementsPage.yourName;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
@@ -45,8 +44,9 @@ public class TextFieldTests implements TestsInit {
 
     @Test
     public void sendNullValueTest() {
+        String value = yourName.getValue();
         yourName.sendKeys(null);
-        yourName.has().text(defaultText);
+        yourName.has().text(value);
     }
 
     @Test
@@ -63,8 +63,9 @@ public class TextFieldTests implements TestsInit {
 
     @Test
     public void inputNullValueTest() {
+        String value = yourName.getValue();
         yourName.input(null);
-        yourName.has().text("");
+        yourName.has().text(value);
     }
 
     @Test
@@ -127,14 +128,16 @@ public class TextFieldTests implements TestsInit {
 
     @Test
     public void setTextAsNullTest() {
+        String value = yourName.getValue();
         yourName.setText(null);
-        yourName.has().text(defaultText);
+        yourName.has().text(value);
     }
 
     @Test
     public void setNullValueTest() {
+        String value = yourName.getValue();
         yourName.setValue(null);
-        yourName.has().text("");
+        yourName.has().text(value);
     }
 
     @Test

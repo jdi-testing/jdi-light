@@ -5,8 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.disabledTextArea;
-import static io.github.com.pages.HtmlElementsPage.textArea;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -50,20 +49,23 @@ public class TextAreaTests implements TestsInit {
 
     @Test
     public void setNullAsTextTest() {
+        String value = textArea.getValue();
         textArea.setText(null);
-        textArea.has().text("");
+        textArea.has().text(value);
     }
 
     @Test
     public void setNullValueTest() {
+        String value = textArea.getValue();
         textArea.setValue(null);
-        textArea.has().text("");
+        textArea.has().text(value);
     }
 
     @Test
     public void sendNullValueTest() {
+        String value = textArea.getValue();
         textArea.sendKeys(null);
-        textArea.has().text("");
+        textArea.has().text(value);
     }
 
     @Test
@@ -81,8 +83,9 @@ public class TextAreaTests implements TestsInit {
 
     @Test
     public void inputNullValueTest() {
+        String value = textArea.getValue();
         textArea.input(null);
-        textArea.has().text("");
+        textArea.has().text(value);
     }
 
     @Test
@@ -137,8 +140,9 @@ public class TextAreaTests implements TestsInit {
 
     @Test
     public void addNullAsNewLineTest() {
+        String value = textArea.getValue();
         textArea.addNewLine(null);
-        textArea.has().text("");
+        textArea.has().text(value);
     }
 
     @Test

@@ -5,8 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.colorPicker;
-import static io.github.com.pages.HtmlElementsPage.disabledPicker;
+import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
@@ -46,8 +45,9 @@ public class ColorPickerTests implements TestsInit {
 
     @Test
     public void setNullValueTest() {
+        String value = colorPicker.getValue();
         colorPicker.setValue(null);
-        colorPicker.has().color("#000000");
+        colorPicker.has().color(value);
     }
 
     @Test

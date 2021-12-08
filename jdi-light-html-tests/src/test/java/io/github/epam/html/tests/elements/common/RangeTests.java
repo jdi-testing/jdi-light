@@ -74,8 +74,9 @@ public class RangeTests implements TestsInit {
 
     @Test
     public void setNullValueTest() {
+        double value = volume.value();
         volume.setValue(null);
-        volume.has().value(55);
+        volume.has().value(value);
     }
 
     @Test
