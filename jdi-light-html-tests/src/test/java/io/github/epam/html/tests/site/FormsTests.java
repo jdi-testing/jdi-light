@@ -35,7 +35,7 @@ public class FormsTests implements TestsInit {
         main.contactForm.submit(DEFAULT_CONTACT);
         main.contactForm.check(DEFAULT_CONTACT);
     }
-    @Test
+    @Test(enabled = false)
     public void attrsTest() {
         shouldBeLoggedOut();
         MapArray<String, String> attrs = userIcon.attrs();
