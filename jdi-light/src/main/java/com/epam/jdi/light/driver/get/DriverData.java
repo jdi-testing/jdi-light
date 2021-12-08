@@ -64,7 +64,7 @@ public class DriverData {
         return driverPath("operadriver");
     }
     public static String safariDriverPath() {
-        return driverPath("safaridriver");
+        return "/usr/bin/safaridriver";
     }
     public static String firefoxDriverPath() {
         return driverPath("geckodriver");

@@ -11,6 +11,7 @@ import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
+import static org.apache.commons.lang.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -43,7 +44,9 @@ public class DownloadDriverManager {
                 case OPERA:
                     wdm = operadriver(); break;
                 case SAFARI:
-                    return SAFARI_INFO.path.execute();
+                    return isBlank(DRIVER.path)
+                        ? SAFARI_INFO.path.execute()
+                        : DRIVER.path;
                 default:
                     throw exception("%s driver not supported for download");
             }
