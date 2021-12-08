@@ -14,9 +14,10 @@ import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see an example of Breadcrumb web element please visit https://vuetifyjs.com/en/components/button-groups/
+ * To see an example of Button Group web element please visit https://vuetifyjs.com/en/components/button-groups/
  *
  * Created by Nikita Nechepurenko on 01.10.2021
  *
@@ -30,6 +31,12 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
 
     protected String BUTTONS_FIND_STRATEGY = ".v-btn";
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
+
+    protected ButtonGroup(){}
+
+    public ButtonGroup(UIElement element) {
+        core().setCore(element);
+    }
 
     @JDIAction("Get Button with index '{0}'")
     public Button getButtonByIndex(int index) {
@@ -55,6 +62,16 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
         return new Button().setCore(Button.class, element);
     }
 
+    public ButtonGroup setup(String root, String buttons) {
+        if (isNotBlank(root)) {
+            base().setLocator(root);
+        }
+        if(isNotBlank(buttons)) {
+            BUTTONS_FIND_STRATEGY = buttons;
+        }
+        return this;
+    }
+
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDIButtonGroup.class, ButtonGroup.class))
@@ -67,5 +84,13 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
         if (!annotation.buttons().isEmpty()) {
             BUTTONS_FIND_STRATEGY = annotation.buttons();
         }
+    }
+
+    public UISelectAssert<?, ?> have() {
+        return is();
+    }
+
+    public UISelectAssert<?, ?> are() {
+        return is();
     }
 }
