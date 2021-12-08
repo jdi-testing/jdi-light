@@ -19,42 +19,42 @@ public class FormLoginTests implements TestsInit {
         refresh();
     }
 
-    @Test
+    @Test(enabled = false)
     public void loginWithUserTest() {
         loginForm.shouldBeOpened();
         loginForm.login(DEFAULT_USER);
         homePage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void loginWithUserToSmartFormTest() {
         loginFormSmart.shouldBeOpened();
         loginFormSmart.login(DEFAULT_USER);
         homePage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void loginWithUserToLightFormTest() {
         userIcon.click();
         loginFormLight.login(DEFAULT_USER);
         homePage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void loginWithUserToLightLocatorFormTest() {
         userIcon.click();
         loginAs("#login-form", DEFAULT_USER);
         homePage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void loginAsUserTest() {
         loginForm.shouldBeOpened();
         loginForm.loginAs(DEFAULT_USER);
         homePage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void plainLoginTest() {
         loginForm.shouldBeOpened();
         loginForm.fill(DEFAULT_USER);
@@ -62,7 +62,7 @@ public class FormLoginTests implements TestsInit {
         homePage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void nullValueLoginTest() {
         loginForm.shouldBeOpened();
         User user = new User().set(u -> { u.name = "Roman"; u.password = null; });
