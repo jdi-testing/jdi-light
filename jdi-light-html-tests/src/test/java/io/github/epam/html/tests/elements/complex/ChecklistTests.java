@@ -201,7 +201,7 @@ public class ChecklistTests implements TestsInit {
 
     @Test
     public void setNullValueTest() {
-        String value = weather.getValue();
+        String value = weather.getText();
         weather.setValue(null);
         weather.has().text(value);
     }

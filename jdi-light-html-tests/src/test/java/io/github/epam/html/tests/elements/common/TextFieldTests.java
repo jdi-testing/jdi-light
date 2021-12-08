@@ -44,7 +44,7 @@ public class TextFieldTests implements TestsInit {
 
     @Test
     public void sendNullValueTest() {
-        String value = yourName.getValue();
+        String value = yourName.getText();
         yourName.sendKeys(null);
         yourName.has().text(value);
     }
@@ -63,7 +63,7 @@ public class TextFieldTests implements TestsInit {
 
     @Test
     public void inputNullValueTest() {
-        String value = yourName.getValue();
+        String value = yourName.getText();
         yourName.input(null);
         yourName.has().text(value);
     }
@@ -128,14 +128,14 @@ public class TextFieldTests implements TestsInit {
 
     @Test
     public void setTextAsNullTest() {
-        String value = yourName.getValue();
+        String value = yourName.getText();
         yourName.setText(null);
         yourName.has().text(value);
     }
 
     @Test
     public void setNullValueTest() {
-        String value = yourName.getValue();
+        String value = yourName.getText();
         yourName.setValue(null);
         yourName.has().text(value);
     }

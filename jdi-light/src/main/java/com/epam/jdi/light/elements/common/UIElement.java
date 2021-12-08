@@ -310,6 +310,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Input '{0}' in '{name}'")
     public void input(String value) {
+        if (value == null) return;
         setTextType.action.execute(this, value);
         waitAfterAction();
     }
