@@ -8,6 +8,7 @@
     <artifactId>jdi-bdd-no-po-tests</artifactId>
     <version>1.3.18</version>
     <name>Examples: JDI BDD no Page Objects</name>
+    <url>http://jdi.epam.com/</url>
 
     <properties>
         <driver>chrome</driver>

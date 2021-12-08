@@ -8,6 +8,7 @@
     <artifactId>jdi-light-testng-template</artifactId>
     <version>1.0.0</version>
     <name>Template: JDI Light TestNG</name>
+    <url>http://jdi.epam.com/</url>
 
     <properties>
         <driver>chrome</driver>

@@ -8,6 +8,7 @@
     <artifactId>jdi-light-junit-template</artifactId>
     <version>1.0</version>
     <name>Template: JDI Light JUnit</name>
+    <url>http://jdi.epam.com/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

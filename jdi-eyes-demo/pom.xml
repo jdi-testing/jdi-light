@@ -8,6 +8,7 @@
     <artifactId>jdi-eyes-demo</artifactId>
     <version>1.3.18</version>
     <name>Selenium to JDI Example with Eyes</name>
+    <url>http://jdi.epam.com/</url>
     <packaging>jar</packaging>
 
     <properties>

@@ -8,6 +8,7 @@
     <artifactId>jdi-bdd-tests</artifactId>
     <version>1.3.18</version>
     <name>Tests: JDI BDD</name>
+    <url>http://jdi.epam.com/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

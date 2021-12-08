@@ -8,6 +8,7 @@
     <artifactId>jdi-bdd</artifactId>
     <version>1.3.18</version>
     <name>JDI BDD</name>
+    <url>http://jdi.epam.com/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
