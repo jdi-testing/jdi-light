@@ -89,7 +89,7 @@ public class EntitiesCollection {
 
     public static <T extends UIListBase> WebList getList(String name, Class<T> type) {
         Object element = getElement(name);
-        if (element == null) {
+        if (element != null) {
             if (isClass(element.getClass(), type)) {
                 return ((T) element).list();
             }

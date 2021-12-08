@@ -104,4 +104,3 @@ public class DropdownRootTests implements TestsInit {
         baseValidation(colors5.value());
     }
 }
-
