@@ -45,9 +45,9 @@ public class DataListTests implements TestsInit {
 
     @Test
     public void inputNullValueTest() {
-        String optionName = null;
-        iceCream.input(optionName);
-        iceCream.has().text("");
+        String value = iceCream.getText();
+        iceCream.input(null);
+        iceCream.has().text(value);
     }
 
     @Test

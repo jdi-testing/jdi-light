@@ -17,8 +17,9 @@ public class States {
     @Step
     public static void shouldBeLoggedIn() {
         moveToHomePage();
-        if (hasNoCookie("authUser"))
+        if (hasNoCookie("authUser")) {
             login();
+        }
     }
     @Step
     public static void moveToHomePage() {

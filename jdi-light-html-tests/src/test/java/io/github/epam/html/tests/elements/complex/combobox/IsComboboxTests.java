@@ -43,9 +43,9 @@ public class IsComboboxTests implements TestsInit {
 
     @Test
     public void inputNullValueTest() {
-        String optionName = null;
-        iceCreamIs.input(optionName);
-        iceCreamIs.has().text("");
+        String value = iceCreamIs.getText();
+        iceCreamIs.input(null);
+        iceCreamIs.has().text(value);
     }
 
     @Test
